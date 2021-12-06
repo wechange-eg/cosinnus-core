@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 17:13+0100\n"
+"POT-Creation-Date: 2021-12-06 15:36+0100\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -902,16 +902,7 @@ msgstr "Serveur BBB"
 msgid "BBB Server for Premium Conferences"
 msgstr "Serveur BBB pour les conférences premium"
 
-msgid "Turn on microphone on entering"
-msgstr ""
-
-msgid "Whether the microphone is active when entering the BBB room"
-msgstr ""
-
-msgid "Turn on camera on entering"
-msgstr ""
-
-msgid "Whether the camera is active when entering the BBB room"
+msgid "BBB API Parameters"
 msgstr ""
 
 msgid "Cosinnus Conference Setting"
@@ -1427,18 +1418,6 @@ msgstr "ID du dossier du groupe Nextcloud"
 
 msgid "Is conference"
 msgstr "Est la conférence"
-
-msgid "Allow temporary users accounts for this conference."
-msgstr "Autoriser les comptes d’utilisateurs temporaires pour cette conférence."
-
-msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
-msgstr "S’ils sont activés, les administrateurs de conférence peuvent créer des comptes d’utilisateurs temporaires qui peuvent être activés et désactivés."
-
-msgid "Conference accounts active"
-msgstr "Comptes de conférence actifs"
-
-msgid "If enabled, temporary user accounts for this conference are active and can log in."
-msgstr "S’ils sont activés, les comptes d’utilisateurs temporaires de cette conférence sont actifs et peuvent se connecter."
 
 msgid "Conference is currrently premium"
 msgstr "La conférence est actuellement premium"
@@ -2475,35 +2454,6 @@ msgstr "Actuellement, les navigateurs supportant le téléchargement de dossiers
 msgid "File and Folder Upload"
 msgstr "Téléchargement de fichier et dossier"
 
-msgid "Please correct the error below."
-msgid_plural "Please correct the errors below."
-msgstr[0] "Veuillez corriger l'erreur ci-dessous."
-msgstr[1] "Veuillez corriger les erreurs ci-dessous."
-
-msgid "2-factor access only"
-msgstr "Accès à 2 facteurs seulement"
-
-msgid "OTP Device:"
-msgstr "Dispositif OTP :"
-
-msgid "Enter the generated number code from your authenticator app"
-msgstr "Saisissez le code numérique généré par votre application d'authentification"
-
-msgid "Forgotten your password or username?"
-msgstr "Vous avez oublié votre mot de passe ou nom d'utilisateur ?"
-
-msgid "Validate"
-msgstr "Valider"
-
-msgid "Log out"
-msgstr "Se déconnecter"
-
-msgid "You are logged in as"
-msgstr "Tu es connecté en tant que"
-
-msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
-msgstr "Il semble qu'aucun dispositif d'authentification ne soit associé à votre compte. Demandez à un autre administrateur d'en créer un et de vous envoyer le code QR !"
-
 msgid "Services"
 msgstr "Services"
 
@@ -2681,6 +2631,13 @@ msgstr "L'administration de groupes commence avec la gestion des membres. Tu peu
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_15_organization"
 msgstr "helptext_15_organization"
+
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_11_document"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_16_twofactorauth"
+msgstr "Tu peux modifier ton document en entrant de nouvelles choses dans le pad. Avec l'aide du Timeslider (symbole de l'horloge), tu peux regarder les versions précédents et avec le symbole flèche, tu peux changer le pad en PDF. Tu peux activer un lien sur le pad en cliquant sur </>."
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
@@ -3106,7 +3063,13 @@ msgstr "Tu peux créer directement des événements de conférence pour les sall
 msgid "There are no rooms yet."
 msgstr "Il n’y a pas encore de salles."
 
+msgid "Turn on microphone on entering"
+msgstr ""
+
 msgid "Default"
+msgstr ""
+
+msgid "Turn on camera on entering"
 msgstr ""
 
 #, fuzzy
@@ -6191,6 +6154,11 @@ msgstr "Déconnecter compte Facebook"
 msgid "Disconnect Facebook"
 msgstr "Déconnecter Facebook"
 
+#, fuzzy
+#| msgid "Settings"
+msgid "2FA Settings"
+msgstr "Paramètres"
+
 #, python-format
 msgid "%(provider)s-Account"
 msgstr "%(provider)s-Compte"
@@ -6324,6 +6292,159 @@ msgstr "Tu peux changer ou personnaliser ce paramètre plus tard dans tes param�
 
 msgid "Your privacy: You are in control!"
 msgstr "Confidentialité : tu as le contrôle !"
+
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] "Veuillez corriger l'erreur ci-dessous."
+msgstr[1] "Veuillez corriger les erreurs ci-dessous."
+
+msgid "2-factor access only"
+msgstr "Accès à 2 facteurs seulement"
+
+msgid "OTP Device:"
+msgstr "Dispositif OTP :"
+
+msgid "Enter the generated number code from your authenticator app"
+msgstr "Saisissez le code numérique généré par votre application d'authentification"
+
+msgid "Forgotten your password or username?"
+msgstr "Vous avez oublié votre mot de passe ou nom d'utilisateur ?"
+
+msgid "Validate"
+msgstr "Valider"
+
+msgid "Log out"
+msgstr "Se déconnecter"
+
+msgid "You are logged in as"
+msgstr "Tu es connecté en tant que"
+
+msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
+msgstr "Il semble qu'aucun dispositif d'authentification ne soit associé à votre compte. Demandez à un autre administrateur d'en créer un et de vous envoyer le code QR !"
+
+#, fuzzy
+#| msgid "Back to"
+msgid "Backup Tokens"
+msgstr "Retour à"
+
+msgid "Backup tokens can be used when your primary and backup phone numbers aren't available. The backup tokens below can be used for login verification. <br> If you've used up all your backup tokens, you can generate a new set of backup tokens. Only the backup tokens shown below will be valid."
+msgstr ""
+
+msgid "Print these tokens and keep them somewhere safe."
+msgstr ""
+
+#, fuzzy
+#| msgid "You don't have a %(portal_name)s account yet?"
+msgid "You don't have any backup codes yet."
+msgstr "Vous n'avez pas encore de compte %(portal_name)s ?"
+
+#, fuzzy
+#| msgid "Enter a token:"
+msgid "Generate Tokens"
+msgstr "Entrer un jeton :"
+
+msgid "Back to 2FA Settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Disable editor"
+msgid "Disable 2FA"
+msgstr "Désactiver l'éditeur"
+
+msgid "You are about to disable two-factor authentication. This weakens your account security, are you sure?"
+msgstr ""
+
+msgid "Yes, I am sure."
+msgstr ""
+
+#, fuzzy
+#| msgid "Disable editor"
+msgid "Disable"
+msgstr "Désactiver l'éditeur"
+
+msgid "Two-Factor Login (Backup-Token)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Last Login"
+msgid "Two-Factor Login"
+msgstr "Dernière connexion"
+
+msgid "Use this form for entering backup tokens for logging in. These tokens have been generated for you to print and keep safe. Please enter one of these backup tokens to login to your account."
+msgstr ""
+
+msgid "Please enter the token generated by your token generator."
+msgstr ""
+
+msgid "Backup-Token"
+msgstr ""
+
+msgid "Numeric Token (e.g. 123456)"
+msgstr ""
+
+msgid "If you do not have access to your OTP generator app, you may enter one of your generated backup tokens"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a token:"
+msgid "Enter backup token"
+msgstr "Entrer un jeton :"
+
+#, fuzzy
+#| msgid "User token"
+msgid "Use Backup Token"
+msgstr "Jeton utilisateur"
+
+msgid "If you don't have any device with you, you can access your account using backup tokens."
+msgstr ""
+
+#, python-format
+msgid "You have only one backup token remaining."
+msgid_plural "<br> You have %(counter)s backup tokens remaining."
+msgstr[0] ""
+msgstr[1] ""
+
+#, fuzzy
+#| msgid "Show more"
+msgid "Show Tokens"
+msgstr "Afficher plus"
+
+msgid "However we strongly discourage you to do so, you can also disable two-factor authentication for your account."
+msgstr ""
+
+msgid "Two-factor authentication is not enabled for your account. <br> Enable two-factor authentication for enhanced account security."
+msgstr ""
+
+msgid "Enable 2FA"
+msgstr ""
+
+msgid "2FA Setup"
+msgstr ""
+
+msgid "You are about to take your account security to the next level. <br> To use the 2FA-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. We do not have another 2FA option at the moment and will inform you if there are changes in this regard."
+msgstr ""
+
+msgid "Scan the QR code below."
+msgstr ""
+
+msgid "Now, enter the token generated by the app:"
+msgstr ""
+
+msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
+msgstr ""
+
+msgid "2FA Setup Complete"
+msgstr ""
+
+#, fuzzy
+#| msgid "The invitation was successfully deleted."
+msgid "Congratulations, you've successfully enabled 2FA."
+msgstr "L’invitation a été supprimée avec succès."
+
+#, fuzzy
+#| msgid "Your profile"
+msgid "Back to your profile"
+msgstr "Ton Profil"
 
 msgid "by"
 msgstr "par"
@@ -6799,6 +6920,98 @@ msgstr "Ravi de te voir ! Sur %(portal_name)s, tu peux collaborer avec d'autres 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "S'inscrire et co-administrer"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Mes projets et groupes"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Échec de l’importation"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Projet / groupe"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Téléverser un fichier CSV"
+
+#, fuzzy
+msgid "Options"
+msgstr "Proportions"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Télécharger une image."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Mes projets et groupes"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Importation réussie !"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Erreur !"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "État d’importation"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Erreur !"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Messages"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Afficher plus de projets"
 
@@ -7238,6 +7451,9 @@ msgstr "Le jeton de connexion a été envoyé."
 
 msgid "User successfully created!"
 msgstr "Utilisateur créé avec succès !"
+
+msgid "You do not have any backup tokens set up. Please log in using your OTP tokens."
+msgstr ""
 
 #, python-format
 msgid "The language \"%s\" is not supported"
@@ -7750,6 +7966,18 @@ msgstr "Tu n'es pas membre de %s ! Si tu souhaites, tu peux demander à le deven
 msgid "Your changes have been saved."
 msgstr "Tes changements ont été enregistrés."
 
+#~ msgid "Allow temporary users accounts for this conference."
+#~ msgstr "Autoriser les comptes d’utilisateurs temporaires pour cette conférence."
+
+#~ msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
+#~ msgstr "S’ils sont activés, les administrateurs de conférence peuvent créer des comptes d’utilisateurs temporaires qui peuvent être activés et désactivés."
+
+#~ msgid "Conference accounts active"
+#~ msgstr "Comptes de conférence actifs"
+
+#~ msgid "If enabled, temporary user accounts for this conference are active and can log in."
+#~ msgstr "S’ils sont activés, les comptes d’utilisateurs temporaires de cette conférence sont actifs et peuvent se connecter."
+
 #, fuzzy
 #~| msgid "options for the room, that are represented in the bigbluebutton API"
 #~ msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
@@ -7779,54 +8007,6 @@ msgstr "Tes changements ont été enregistrés."
 #~| msgid "View conference"
 #~ msgid "Leave video conference"
 #~ msgstr "Voir la conférence"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Mes projets et groupes"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Échec de l’importation"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Projet / groupe"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Téléverser un fichier CSV"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Proportions"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Télécharger une image."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Mes projets et groupes"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Importation réussie !"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Erreur !"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "État d’importation"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Erreur !"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Messages"
 
 #~ msgid "Conference successfully started and user accounts activated"
 #~ msgstr "La conférence a démarré avec succès et les comptes d'utilisateurs ont été activés"
