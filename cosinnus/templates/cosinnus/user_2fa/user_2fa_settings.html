@@ -4,14 +4,9 @@
 
 {% block page_title %}{% trans '2FA Settings' %}{% endblock %}
 
-{% block jshead %}
-    {% comment %} UPDATE HERE LATER {% endcomment %}
-{% endblock jshead %}
-
 {% block leftnav %}
     {% include "cosinnus/user/leftnav.html"  with view="two-factor-auth" %}
-
-    {% comment %} {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_5_password" %} >DO NOT FORGET TO ADD NEW HELP TEXT FOR THE POPUP< {% endcomment %}
+    {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_5_password" %} >DO NOT FORGET TO ADD NEW HELP TEXT FOR THE POPUP< 
 {% endblock leftnav %}
 
 {% block breadcrumb %}

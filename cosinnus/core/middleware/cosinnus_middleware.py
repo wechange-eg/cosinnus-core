@@ -18,6 +18,7 @@ from django.utils.translation import gettext, ugettext_lazy as _
 from cosinnus.conf import settings
 from cosinnus.core import signals as cosinnus_signals
 from django.contrib.auth import logout
+from django_otp import devices_for_user
 from django.shortcuts import redirect
 from django.utils.deprecation import MiddlewareMixin
 from django.utils.http import is_safe_url
@@ -160,6 +161,12 @@ class AdminOTPMiddleware(MiddlewareMixin):
 
     
 class UserOTPMiddleware(MiddlewareMixin):
+    """
+        If setting `COSINNUS_USER_2_FACTOR_AUTH_ENABLED` is True, this middleware
+        will restrict all access to the entire portal to accounts with the enabled 2fa-feature
+        for non-admin users, by redirecting the token validation view.
+        Set up at least one device at <host>/two_factor_auth/settings/setup/ before activating this! 
+    """
 
     def process_request(self, request):
         if not getattr(settings, 'COSINNUS_USER_2_FACTOR_AUTH_ENABLED', False):
@@ -171,7 +178,6 @@ class UserOTPMiddleware(MiddlewareMixin):
         # check if the user is authenticated and they attempted to access a covered url
         if user and user.is_authenticated and request.path.startswith(filter_path) and not request.path in EXEMPTED_URLS_FOR_2FA:
             # check if the user is not yet 2fa verified, if so send them to the verification view
-            from django_otp import devices_for_user
             devices = list(devices_for_user(user))
             has_verifiable_devices = False
             for device in devices:
