@@ -7,23 +7,39 @@
     {% trans "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves." %}
 </p>
 
-<h4>{% trans "Inherited BBB-Parameters" %}</h4>
-<p>
-    {% trans "These parameters are the ones this object inherits from higher up settings or the portal defaults. These are the ones that will be used if this object or deeper objects do not define any further parameters." %}
-    <br/>
-    {% with parent_obj=original.get_parent_bbb_chain_object %}
-        {% if parent_obj %}
-            {% trans "The next higher up object in the BBB hierarchy chain is" %}:
-            <a href="{{ parent_obj.get_admin_change_url }}">{{ parent_obj }}</a>
-        {% else %}
-            {% trans "This object has no higher up object in the BBB hierarchy chain." %}
-        {% endif %}
-    {% endwith %}
-</p>
-<p>
-    {% comment %} Every object displaying this inline should be inheriting `BBBRoomMixin` {% endcomment %}
-</p>
+{% with parent_obj=original.get_parent_bbb_chain_object %}
+	<h4>{% trans "Inherited BBB-Parameters" %}</h4>
+	<p>
+	    {% trans "These parameters are the ones this object inherits from higher up settings or the portal defaults. These are the ones that will be used if this object or deeper objects do not define any further parameters." %}
+	    <br/>
+	        {% if parent_obj %}
+	            {% trans "The next higher up object in the BBB hierarchy chain is" %}:
+	            <a href="{{ parent_obj.get_admin_change_url }}">{{ parent_obj }}</a>
+	        {% else %}
+	            {% trans "This object has no higher up object in the BBB hierarchy chain. The displayed values are the configured portal defaults." %}
+	        {% endif %}
+	</p>
+	<p>
+	    {% comment %} Every object displaying this inline should be inheriting `BBBRoomMixin` {% endcomment %}
+	    <pre>{{ original.get_inherited_bbb_params_from_parent | pretty_json }}</pre>
+	</p>
+	{% if parent_obj %}
+		<h4>{% trans "Effective BBB-Parameters" %}</h2>
+		<p>
+		    {% trans "These parameters will be the effective parameters used for BBB APP-calls for this source object." %}
+		</p>
+		<p>
+		    {% comment %} Every object displaying this inline should be inheriting `BBBRoomMixin` {% endcomment %}
+		    <pre>{{ original.get_finalized_bbb_params | pretty_json }}</pre>
+		</p>
+	{% endif %}
+{% endwith %}
 
-<pre>{{ original.get_finalized_bbb_params_for_parent | pretty_json }}</pre>
+{% if original.media_tag.bbb_room %}
+	<p>
+	    {% trans "You can find the BBBRoom object for this source object here" %}:
+	    <a href="{{ original.media_tag.bbb_room.get_admin_change_url }}">{% trans "BBB Room" %}</a>
+	</p>
+{% endif %}
 
 {% include 'admin/edit_inline/stacked.html' %}

@@ -110,10 +110,10 @@ class BBBRoom(models.Model):
                                        help_text="DEPRECATED! the welcome message, that is displayed to attendees")
     # deprecated in favor of deriving create options directly from the source event!
     # type of the room. this determines which extra join call parameters are given
-    # along for the user join link. see `settings.BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS`
+    # along for the user join link. see `settings.BBB_DEPRECATED__ROOM_TYPE_EXTRA_JOIN_PARAMETERS`
     room_type = models.PositiveSmallIntegerField(_('Room Type'), blank=False,
         editable=False,
-        default=settings.BBB_ROOM_TYPE_DEFAULT, choices=settings.BBB_ROOM_TYPE_CHOICES,
+        default=0, choices=((0, 'deprecated'),),
         help_text="DEPRECATED!")
     # deprecated in favor of deriving create options directly from the source event!
     max_participants = models.PositiveIntegerField(blank=True, null=True, default=None, verbose_name="maximum number of users",
@@ -400,7 +400,6 @@ class BBBRoom(models.Model):
     def build_extra_create_parameters_for_object(cls, source_object):
         params = {}
         params.update(settings.BBB_DEFAULT_CREATE_PARAMETERS)
-        params.update(settings.BBB_ROOM_TYPE_EXTRA_CREATE_PARAMETERS.get(source_object.get_bbb_room_type()))
         # add the source object's options from all inherited settings objects
         params.update(cls._get_bbb_extra_params_for_api_call('create', source_object))
         # special: the max_participants is currently finally derived from the source event
@@ -416,9 +415,6 @@ class BBBRoom(models.Model):
             link for the user, from the default room parameters and the
             given room type's extra parameters """
         params = {}
-        params.update(settings.BBB_DEFAULT_JOIN_PARAMETERS)
-        # TODO: replace BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS with the nature during the flatten
-        params.update(settings.BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS.get(self.source_object.get_bbb_room_type()))
         # add the source object's options from all inherited settings objects
         params.update(self._meta.model._get_bbb_extra_params_for_api_call('join', self.source_object))
         # add the user's avatar from their profile
@@ -441,8 +437,7 @@ class BBBRoom(models.Model):
         # add the source object's options from all inherited settings objects
         conference_settings = CosinnusConferenceSettings.get_for_object(source_object)
         # this is the merged params object containing the flattened hierarchy of inherited objects
-        # TODO: set nature of source object
-        bbb_params = conference_settings.get_finalized_bbb_params(nature=None)
+        bbb_params = conference_settings.get_finalized_bbb_params()
         call_params = bbb_params.get(api_call_method, {})
         return call_params
     
@@ -464,7 +459,11 @@ class BBBRoom(models.Model):
     def get_absolute_url(self):
         """ Returns an on-portal-server URL that returns a redirect to the BBB-server URL """
         return reverse('cosinnus:bbb-room', kwargs={'room_id': self.id})
-
+    
+    def get_admin_change_url(self):
+        """ Returns the django admin edit page for this object. """
+        return reverse('admin:cosinnus_bbbroom_change', kwargs={'object_id': self.id})
+    
     def get_direct_room_url_for_user(self, user):
         """ Returns the direct BBB-server URL. This logic is also used by the 
             proxy-view used by `get_absolute_url`.

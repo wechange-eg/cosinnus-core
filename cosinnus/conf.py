@@ -1144,48 +1144,6 @@ class CosinnusDefaultSettings(AppConf):
         "autoStartRecording": False,
         "allowStartStopRecording": True
     }
-    # the default BBB join-call parameters for all room types
-    # see https://docs.bigbluebutton.org/2.2/customize.html#passing-custom-parameters-to-the-client-on-join
-    BBB_DEFAULT_JOIN_PARAMETERS = {
-        'userdata-bbb_mirror_own_webcam': 'true',
-    }
-    
-    BBB_ROOM_TYPE_DEFAULT = 0
-    BBB_ROOM_TYPE_CHOICES = (
-        (0, _('General')),
-        (1, _('Active')),
-        (2, _('Restricted')),
-        (3, _('Premium')),
-    )
-    # a map for the JSON keys possible to prepend before 
-    # a JSON-setting key for BBB calls, e.g. "coffee__create",
-    # mapping to bbb room-types defined in `BBB_ROOM_TYPE_CHOICES`
-    BBB_ROOM_TYPE_JSON_PREFIXES = {
-        'coffee': 1,
-    }
-    # a map for the portal defaults for BBB create-call parameters that will be added to specific BBB room-types 
-    # (defined in `BBB_ROOM_TYPE_CHOICES`)
-    BBB_ROOM_TYPE_EXTRA_CREATE_PARAMETERS = {
-        0: {},
-        1: {},
-        2: {},
-        3: {},
-    }
-    # a map for the portal defaults for BBB join-call parameters that will be added to specific BBB room-types 
-    # (defined in `BBB_ROOM_TYPE_CHOICES`)
-    BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS = {
-        0: {},
-        1: {
-            'userdata-bbb_skip_check_audio': 'true',
-            'userdata-bbb_auto_join_audio': 'true',
-            'userdata-bbb_listen_only_mode': 'false',
-            'userdata-bbb_auto_share_webcam': 'true',
-            'userdata-bbb_skip_video_preview': 'true',
-            'userdata-bbb_auto_swap_layout': 'true', #  keine Präsentation zeigen
-        },
-        2: {},
-        3: {},
-    }
     
     """
     The configuration of BBB join/create params
@@ -1248,19 +1206,28 @@ class CosinnusDefaultSettings(AppConf):
     
     # the default baseline portal values for the BBB call params
     # these are also used to generate the portal preset defaults for inheritance
+    # Define nature-specific params by adding a '<call>__<nature>' key to the dict!
+    # see https://docs.bigbluebutton.org/2.2/customize.html#passing-custom-parameters-to-the-client-on-join
     BBB_PARAM_PORTAL_DEFAULTS = {
         'create': {
-            'muteOnStart': 'true',
+            'muteOnStart': 'true', # default preset for 'mic_starts_on': False
         },
         'join': {
-            'userdata-bbb_auto_share_webcam': 'false',
+            'userdata-bbb_auto_share_webcam': 'false', # default preset for 'cam_starts_on': False
+            'userdata-bbb_mirror_own_webcam': 'true', # mirror webcam makes seeing your picture less confusing
         },
+        'create__coffee': {
+            'muteOnStart': 'false', # coffee tables insta-join on microphone (overwritten by userdata-bbb_auto_join_audio 'true' anyways, so we show this to be clear)
+        },
+        'join__coffee': {
+            'userdata-bbb_skip_check_audio': 'true', # coffee table insta-join
+            'userdata-bbb_auto_join_audio': 'true', # coffee table insta-join
+            'userdata-bbb_listen_only_mode': 'false', # coffee table insta-join
+            'userdata-bbb_auto_share_webcam': 'true', # coffee table insta-join
+            'userdata-bbb_skip_video_preview': 'true', # coffee table insta-join
+            'userdata-bbb_auto_swap_layout': 'true', # coffee tables don't show presentations on start
+        }
     }
-    
-    # a list of field names from fields in `CosinnusConferenceSettings`
-    # that should NOT be shown in the BBB forms and admin as inheritable
-    # changable choices
-    BBB_PRESET_FORM_FIELDS_DISABLED = []
     
     # a list of field names from fields in fields in `CosinnusConferenceSettings`
     # that will be shown to the users in the frontend Event forms as choices

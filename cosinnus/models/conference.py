@@ -34,7 +34,7 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.views.mixins.group import ModelInheritsGroupReadWritePermissionsMixin
-from copy import copy
+from copy import copy, deepcopy
 from django.urls.base import reverse
 from _collections import defaultdict
 
@@ -125,22 +125,10 @@ class CosinnusConferenceSettings(models.Model):
             help_text='Custom parameters for API calls like join/create for all BBB rooms for this object and in its inherited objects.',
             encoder=DjangoJSONEncoder)
     
-    # for later:
-#     auto_mic = models.PositiveSmallIntegerField(_('TODO: Skip mic check'), 
-#         blank=False, default=SETTING_INHERIT, choices=PRESET_FIELD_CHOICES,
-#         editable=bool('auto_mic' not in settings.BBB_PRESET_FORM_FIELDS_DISABLED),
-#         help_text=_('TODO: whether to skip mic'))
-
-# TODO remove
-#     mic_starts_on = models.PositiveSmallIntegerField(_('Turn on microphone on entering'), 
-#         blank=False, default=SETTING_INHERIT, choices=PRESET_FIELD_CHOICES,
-#         editable=bool('mic_starts_on' not in settings.BBB_PRESET_FORM_FIELDS_DISABLED),
-#         help_text=_('Whether the microphone is active when entering the BBB room'))
-#      
-#     cam_starts_on = models.PositiveSmallIntegerField(_('Turn on camera on entering'), 
-#         blank=False, default=SETTING_INHERIT, choices=PRESET_FIELD_CHOICES,
-#         editable=bool('cam_starts_on' not in settings.BBB_PRESET_FORM_FIELDS_DISABLED),
-#         help_text=_('Whether the camera is active when entering the BBB room'))
+    # The nature (str or None) set through the source object for this config object. 
+    # Only set during retrieval by `get_for_object()`.
+    # See `BBBRoomMixin.get_bbb_room_nature()` for info on natures.
+    bbb_nature = None
     
     # list of field names that can be overwritten during higher-chain inheritance
     # these fields all need to be able to take on the value of `SETTING_INHERIT`
@@ -156,6 +144,10 @@ class CosinnusConferenceSettings(models.Model):
         verbose_name = _('Cosinnus Conference Setting')
         verbose_name_plural = _('Cosinnus Conference Settings')
         unique_together = (('content_type', 'object_id',),)
+        
+    def __init__(self, *args, **kwargs):
+        self.bbb_nature = None
+        super().__init__(*args, **kwargs)
     
     @classmethod
     def get_for_object(cls, source_object, no_traversal=False, agglomerated_setting_obj=None, recursed=False):
@@ -172,6 +164,11 @@ class CosinnusConferenceSettings(models.Model):
             Furthermore, this function will accept these models as source_object 
             and use the resolved cosinnus_event.ConferenceEvent as chain starting point, if there is one:
                 - cosinnus.BBBRoom 
+                
+            The nature of the source object will be taken on retrieval using this method and
+            saved in the returned config object. Once `get_finalized_bbb_params()` is called,
+            the nature will determine some of the applied BBB api call params.
+            See `BBBRoomMixin.get_bbb_room_nature()` for info on natures.
             
             @param source_object: Any object. If it matches a model valid for the chain, we check the chain.
             @param no_traversal: if True, will only attempt to find a setting object on the `source_object`
@@ -232,7 +229,11 @@ class CosinnusConferenceSettings(models.Model):
                 if parent_object:
                     setting_obj = cls.get_for_object(parent_object, agglomerated_setting_obj=agglomerated_setting_obj, recursed=True)
             
+            # final, outside iteration:
             if not recursed:
+                # set bbb room nature
+                if hasattr(source_object, 'get_bbb_room_nature'):
+                    setting_obj.bbb_nature = source_object.get_bbb_room_nature()
                 cache.set(cache_key, setting_obj, settings.COSINNUS_CONFERENCE_SETTING_MICRO_CACHE_TIMEOUT)
         
         return setting_obj
@@ -248,24 +249,50 @@ class CosinnusConferenceSettings(models.Model):
             if getattr(self, field_name, 'UNSET') == self.SETTING_INHERIT:
                 setattr(self, field_name, getattr(inherit_target, field_name))
         # for bbb_params, recursively update the lower dict with out
-        # TODO: check!
-        print(f'>>> Inherited dict [target:{inherit_target.bbb_params}], [self:{self.bbb_params}]')
         self.bbb_params = update_dict_recursive(inherit_target.bbb_params, self.bbb_params)
-        print(f' >>>> merged: {self.bbb_params}')
         return self
     
-    def get_finalized_bbb_params(self, no_defaults=False, nature=None):
-        """ Return a flattened copy of the `bbb_param` field of this config object.
-            This takes the portal default BBB params from
-             """
-        params = {} if no_defaults else copy(settings.BBB_PARAM_PORTAL_DEFAULTS)
-        params.update(self.bbb_params)
-        if nature:
-            # TODO: special merge for __coffee nature!
-            pass
+    def get_raw_bbb_params(self, no_defaults=False):
+        """ Return a copy of the `bbb_param` field of this config object,
+            which contains inherited values of higher-up-objects if
+            this instance was obtained with `CosinnusConferenceSettings.get_for_object`.
+            This takes the portal default BBB params from `BBB_PARAM_PORTAL_DEFAULTS`
+            as initial base params, unless `no_defaults=True` is supplied.
+         """
+        params = {} if no_defaults else deepcopy(settings.BBB_PARAM_PORTAL_DEFAULTS)
+        update_dict_recursive(params, self.bbb_params)
         return params
     
-    def get_bbb_preset_form_field_values(self, no_defaults=False, nature=None):
+    def get_finalized_bbb_params(self, no_defaults=False):
+        """ Return a flattened copy of the `bbb_param` field of this config object,
+            with all room-nature values of the params merged into the params or discarded,
+            depending on the nature supplied.
+            The returned params contain inherited values of higher-up-objects if
+            this instance was obtained with `CosinnusConferenceSettings.get_for_object`.
+            This takes the portal default BBB params from `BBB_PARAM_PORTAL_DEFAULTS`
+            as initial base params, unless `no_defaults=True` is supplied.
+            
+            Nature-specific settings are merged by copying each item-pair of a configured
+            nature-specific-api-call in the params over the corresponding base api-call
+            in the params. All nature-specific-api-calls of other natures are discarded.
+            Example: With nature 'coffee', 'join__coffee' items are copied over 'join'.
+         """
+        params = self.get_raw_bbb_params(no_defaults=no_defaults)
+        # merge all params if this object has a set nature
+        if self.bbb_nature:
+            for call_key in list(params.keys()):
+                if call_key.endswith(f'__{self.bbb_nature}'):
+                    base_key = call_key.split('__')[0]
+                    base_call_params = copy(params.get(base_key, {}))
+                    base_call_params.update(params[call_key])
+                    params[base_key] = base_call_params
+        # discard all nature-specific params
+        keys_to_delete = [call_key for call_key in params.keys() if '__' in call_key]
+        for key_to_delete in keys_to_delete:
+            del params[key_to_delete]
+        return params
+    
+    def get_bbb_preset_form_field_values(self, no_defaults=False):
         """ Get the chosen/inherited choice values for `BBB_PRESET_FORM_FIELD_PARAMS` this config object.
             @param no_inheritance: if True, will only return values for the current object,
                 and won't replace inherited values with default values configured in settings.
@@ -273,7 +300,7 @@ class CosinnusConferenceSettings(models.Model):
             @param nature: the nature of the source object (type of event) for replacing specific call params
             @return: a dict of {<field_name>: <choice_value>, ...} """
         value_choices_dict = {}  
-        bbb_params = self.get_finalized_bbb_params(no_defaults=no_defaults, nature=nature)
+        bbb_params = self.get_finalized_bbb_params(no_defaults=no_defaults)
         
         for field_name in settings.BBB_PRESET_USER_FORM_FIELDS:
             field_choice_dict = settings.BBB_PRESET_FORM_FIELD_PARAMS.get(field_name)
@@ -292,10 +319,8 @@ class CosinnusConferenceSettings(models.Model):
                                     for param_key, param_val in api_call_params.items()
                                 ]):
                             matching = False
-                            print(f'>>> broken match {field_name} --> {api_call_params}')
                             break
                     if matching:
-                        print(f' >> actual match {field_name}, {preset_value} --> {preset_call_config}')
                         matched_value = preset_value
                         break
             # if the settings object has no set value, the portal default value is used
@@ -305,7 +330,7 @@ class CosinnusConferenceSettings(models.Model):
             value_choices_dict[field_name] = matched_value
         return value_choices_dict
     
-    def set_bbb_preset_form_field_values(self, preset_choices_dict, nature=None):
+    def set_bbb_preset_form_field_values(self, preset_choices_dict):
         """ Generates from scratch and sets the `bbb_params` for this config object, given a list of
             user-chosen values and presets from presets from `BBB_PRESET_FORM_FIELD_PARAMS` """
         bbb_params = {}
@@ -314,22 +339,29 @@ class CosinnusConferenceSettings(models.Model):
         for field_name, choice_value in preset_choices_dict.items():
             if field_name in settings.BBB_PRESET_FORM_FIELD_PARAMS and \
                     choice_value is not None and choice_value != self.SETTING_INHERIT:
-                update_dict = settings.BBB_PRESET_FORM_FIELD_PARAMS.get(field_name).get(choice_value, {})
+                call_dict = settings.BBB_PRESET_FORM_FIELD_PARAMS.get(field_name).get(choice_value, {})
+                update_dict = {}
+                # add nature suffixes to the call keys if this config object has a nature
+                for call_key, call_param_dict in call_dict.items():
+                    if self.bbb_nature:
+                        call_key = f'{call_key}__{self.bbb_nature}'
+                    update_dict[call_key] = call_param_dict
                 bbb_params.update(update_dict)
-                # TODO: update the call values depending on the nature!
-                if nature:
-                    pass
                 
         # Step 2: we carry over any "unknown" values, that aren't defined in presets,
         #     so we don't clear the field when no preset is set, but an admin has
         #     manually entered new parameters
         #     collect for each API-call a list of names of keys we know
-        call_keys = defaultdict(list) # e.g. {'create': ['muteOnStart'], 'join': ['userdata-bbb_auto_share_webcam']}
-        for preset_field_name in [preset for preset in settings.BBB_PRESET_USER_FORM_FIELDS if not preset in settings.BBB_PRESET_FORM_FIELDS_DISABLED]:
+        call_keys = defaultdict(set) # e.g. {'create': ['muteOnStart'], 'join': ['userdata-bbb_auto_share_webcam']}
+        for preset_field_name in [preset for preset in settings.BBB_PRESET_USER_FORM_FIELDS]:
             call_dict = settings.BBB_PRESET_FORM_FIELD_PARAMS[preset_field_name]
             for _choice, api_call_param_dict in call_dict.items():
                 for api_name, param_dict in api_call_param_dict.items():
-                    call_keys[api_name] += param_dict.keys()
+                    call_keys[api_name].update(param_dict.keys())
+        # also add all portal default params to the non-whitelist
+        for api_name, param_dict in settings.BBB_PARAM_PORTAL_DEFAULTS.items():
+            call_keys[api_name].update(param_dict.keys())
+        
         # find any keys from our old about-to-be-overwritten params, that aren't in the known list for carrying over
         for api_name_key, api_name_val in self.bbb_params.items():
             # if the call key isn't even known, doesnt make sense, but we still keep the value
@@ -600,7 +632,7 @@ class CosinnusConferenceRoom(TranslateableFieldsModelMixin, BBBRoomMixin,
         if settings.COSINNUS_ROCKET_ENABLED and self.type in self.ROCKETCHAT_ROOM_TYPES \
                 and not settings.COSINNUS_CONFERENCES_USE_COMPACT_MODE:
             if not self.rocket_chat_room_id or force:
-                from cosinnus_message.rocket_chat import RocketChatConnection
+                from cosinnus_message.rocket_chat import RocketChatConnection # noqa
                 rocket = RocketChatConnection()
                 room_name = f'{self.slug}-{self.group.slug}-{get_random_string(7)}'
                 internal_room_id = rocket.create_private_room(room_name, self.creator, 
