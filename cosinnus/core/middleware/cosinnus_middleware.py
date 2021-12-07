@@ -18,7 +18,7 @@ from django.utils.translation import gettext, ugettext_lazy as _
 from cosinnus.conf import settings
 from cosinnus.core import signals as cosinnus_signals
 from django.contrib.auth import logout
-from django_otp import devices_for_user
+from django_otp import user_has_device
 from django.shortcuts import redirect
 from django.utils.deprecation import MiddlewareMixin
 from django.utils.http import is_safe_url
@@ -178,13 +178,7 @@ class UserOTPMiddleware(MiddlewareMixin):
         # check if the user is authenticated and they attempted to access a covered url
         if user and user.is_authenticated and request.path.startswith(filter_path) and not request.path in EXEMPTED_URLS_FOR_2FA:
             # check if the user is not yet 2fa verified, if so send them to the verification view
-            devices = list(devices_for_user(user))
-            has_verifiable_devices = False
-            for device in devices:
-                verify_is_allowed = device.verify_is_allowed()
-                if verify_is_allowed[0] == True:
-                    has_verifiable_devices = True
-            if has_verifiable_devices and not user.is_verified():
+            if user_has_device(user) and not user.is_verified():
                 next_url = request.path
                 return redirect(reverse('cosinnus:two-factor-auth-token') + (('?next=%s' % next_url) if is_safe_url(next_url, allowed_hosts=[request.get_host()]) else ''))
 

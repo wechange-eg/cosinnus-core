@@ -17,7 +17,7 @@
 
 {% block content %}
 
-        {% if default_device %}
+        {% if user|user_has_otp_device %}
             <div class="content-box">
                     <h4>{% trans "Backup Tokens" %}</h4>
                     <p class="textfield transparent">{% blocktrans trimmed %}If you don't have any device with you, you can access
