@@ -10,6 +10,8 @@ from copy import copy
 class TranslateableFieldsModelMixin(models.Model):
     
     translateable_fields = []
+    translatable_dynamic_fields = []
+    dynamic_fields_settings = {}
 
     class Meta(object):
         abstract = True
@@ -28,10 +30,19 @@ class TranslateableFieldsModelMixin(models.Model):
         if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED and key in self.get_translateable_fields():
             current_laguage = get_language()
             field = self.translations.get(key)
+
             if field:
                 value = field.get(current_laguage)
                 if value:
                     return value
+            elif key == 'dynamic_fields' and self.translatable_dynamic_fields:
+                dynamic_fields = copy(getattr(self, key))
+                translations = dynamic_fields.get('translations')
+                if translations:
+                    translation = translations.get(current_laguage)
+                    for key in translation.keys():
+                        dynamic_fields[key] = translation[key]
+                    return dynamic_fields
         return getattr(self, key)
 
     def get_translateable_fields(self):
