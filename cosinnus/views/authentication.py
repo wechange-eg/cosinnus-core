@@ -77,7 +77,8 @@ class UserOTPTokenValidationView(RequireLoggedInMixin, auth_views.LoginView):
         return partial(self.otp_token_form, self.request.user)
     
     def get_success_url(self):
-        return safe_redirect(self.request.GET.get('next', get_non_cms_root_url(self.request)), self.request)
+        next_param = self.request.GET.get('next', self.request.POST.get('next', get_non_cms_root_url(self.request)))
+        return safe_redirect(next_param, self.request)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
