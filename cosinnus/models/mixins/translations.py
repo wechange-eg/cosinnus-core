@@ -29,21 +29,22 @@ class TranslateableFieldsModelMixin(models.Model):
             will return the translated field for this instance """
         if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED and key in self.get_translateable_fields():
             current_laguage = get_language()
-            field = self.translations.get(key)
 
-            if field:
-                value = field.get(current_laguage)
-                if value:
-                    return value
-            elif key == 'dynamic_fields' and self.translatable_dynamic_fields:
-                dynamic_fields = copy(getattr(self, key))
-                translations = dynamic_fields.get('translations')
-                if translations:
-                    translation = translations.get(current_laguage)
-                    if translation:
-                        for key in translation.keys():
-                            dynamic_fields[key] = translation[key]
-                        return dynamic_fields
+            if not key == 'dynamic_fields':
+                field = self.translations.get(key)
+                if field:
+                    value = field.get(current_laguage)
+                    if value:
+                        return value
+            else:
+                if self.translatable_dynamic_fields:
+                    dynamic_fields = copy(getattr(self, key))
+                    dynamic_fields_translations = self.translations.get('dynamic_fields')
+                    if dynamic_fields_translations:
+                        translation = dynamic_fields_translations.get(current_laguage)
+                        if translation:
+                            dynamic_fields.update(translation)
+                            return dynamic_fields
         return getattr(self, key)
 
     def get_translateable_fields(self):

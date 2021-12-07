@@ -60,20 +60,21 @@ class TranslatedFieldsFormMixin(object):
 
     def prepare_data_for_form(self):
         for key in self.instance.translations.keys():
-            translations = self.instance.translations.get(key)
-            if translations:
-                for lang in translations.keys():
-                    self.initial['{}_translation_{}'.format(
-                        key,
-                        lang)] = translations.get(lang)
-
-            if self.instance.dynamic_fields and self.instance.dynamic_fields.get('translations'):
-                translations = self.instance.dynamic_fields.get('translations')
-                languages = translations.keys()
-                for lang in languages:
-                    translation_fields = translations.get(lang).keys()
-                    for field in translation_fields:
-                        self.initial['{}_translation_{}'.format(field, lang)] = translations.get(lang).get(field)
+            if not key == 'dynamic_fields':
+                translations = self.instance.translations.get(key)
+                if translations:
+                    for lang in translations.keys():
+                        self.initial['{}_translation_{}'.format(
+                            key,
+                            lang)] = translations.get(lang)
+            else:
+                if self.instance.dynamic_fields and self.instance.translations.get('dynamic_fields'):
+                    translations = self.instance.translations.get('dynamic_fields')
+                    languages = translations.keys()
+                    for lang in languages:
+                        translation_fields = translations.get(lang).keys()
+                        for field in translation_fields:
+                            self.initial['{}_translation_{}'.format(field, lang)] = translations.get(lang).get(field)
 
     def full_clean(self):
         super().full_clean()
@@ -91,17 +92,20 @@ class TranslatedFieldsFormMixin(object):
                         object_translations.get(
                             field)[lang[0]] = form_translations.get(
                             form_field_name)
-                
+
                 if self.instance.translatable_dynamic_fields:
-                    translatable_dynamic_fields = self.instance.translatable_dynamic_fields
-                    if self.instance.dynamic_fields:
-                        translations = defaultdict(dict)
-                        for lang in self.instance.languages:
-                            for dynamic_field in translatable_dynamic_fields:
+                    if not object_translations.get('dynamic_fields'):
+                        object_translations['dynamic_fields'] = {}
+
+                    for lang in self.instance.languages:
+                        for field in self.instance.translatable_dynamic_fields:
+                            for lang in self.instance.languages:
                                 form_field_name = '{}_translation_{}'.format(
-                                    dynamic_field, lang[0])
+                                    field, lang[0])
                                 if form_translations.get(form_field_name):
-                                    translations[lang[0]][dynamic_field] = form_translations.get(form_field_name)
-                        self.instance.dynamic_fields['translations'] = translations
+                                    if not lang[0] in object_translations['dynamic_fields']:
+                                        object_translations['dynamic_fields'][lang[0]] = {}
+                                    object_translations['dynamic_fields'][lang[0]][field] = form_translations.get(
+                                        form_field_name)
 
             self.instance.translations = object_translations
