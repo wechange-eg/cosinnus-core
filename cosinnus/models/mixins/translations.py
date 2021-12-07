@@ -40,9 +40,10 @@ class TranslateableFieldsModelMixin(models.Model):
                 translations = dynamic_fields.get('translations')
                 if translations:
                     translation = translations.get(current_laguage)
-                    for key in translation.keys():
-                        dynamic_fields[key] = translation[key]
-                    return dynamic_fields
+                    if translation:
+                        for key in translation.keys():
+                            dynamic_fields[key] = translation[key]
+                        return dynamic_fields
         return getattr(self, key)
 
     def get_translateable_fields(self):
