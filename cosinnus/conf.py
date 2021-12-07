@@ -871,6 +871,7 @@ class CosinnusConf(AppConf):
     # }
     # example: {'organization': {'type': 'text', 'required': True}}
     USERPROFILE_EXTRA_FIELDS = {}
+    USERPROFILE_EXTRA_FIELDS_TRANSLATED_FIELDS = []
     
     # a dict of <form-name> -> list of formfield names that will be disabled in the user profile forms 
     # for the current portal. can be dynamic and regular fields
