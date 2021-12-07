@@ -1,0 +1,42 @@
+{% extends "cosinnus/user_2fa/user_2fa_settings.html" %}
+{% load i18n  cosinnus_tags widget_tweaks %}
+
+{% block breadcrumb %}
+        <li class="active"><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Your Profile" %}</a></li>
+        <li class="active"><a href="{% url 'cosinnus:two-factor-auth-settings' %}">{% trans "2FA Settings" %}</a></li>
+        <li class="active">{% trans "Disable 2FA" %}</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="content-box">
+        <h4>{% block title %}{% trans "Disable 2FA" %}{% endblock %}</h4>
+        <p class="textfield transparent">{% blocktrans trimmed %}You are about to disable two-factor authentication. This
+        weakens your account security, are you sure?{% endblocktrans %}</p>
+        <form method="post" class="cosinnus-form">
+            <div class="cosinnus-field">{% csrf_token %}
+                <div class="cosinnus-field-input regular-field checkbox-field">
+                    {{ form }}
+                    {% comment %} We are using the jQuery attribute selector to hide the original form label since it is hardly removable from the source form. {% endcomment %}
+                    <script>
+                      $('label[for="id_understand"]').hide();
+                    </script>
+                    {% trans "Yes, I am sure." %}
+                </div>
+            </div>
+    </div>
+            <button type="submit" class="btn btn-emphasized btn-autosize">
+                <ul class="media-list">
+                    <li class="media">
+                        <span class="pull-left" tabindex="-1">
+                            <i class="fa fa-hand-o-right"></i>
+                        </span>
+                        <div class="media-body">
+                            {% trans "Disable" %}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+        </form>
+
+{% endblock %}

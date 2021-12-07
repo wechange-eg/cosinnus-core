@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 17:13+0100\n"
+"POT-Creation-Date: 2021-12-06 15:36+0100\n"
 "PO-Revision-Date: 2021-09-29 12:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -977,16 +977,7 @@ msgstr "الخادم BBB"
 msgid "BBB Server for Premium Conferences"
 msgstr "خادم BBB للمؤتمرات المتميزة"
 
-msgid "Turn on microphone on entering"
-msgstr ""
-
-msgid "Whether the microphone is active when entering the BBB room"
-msgstr ""
-
-msgid "Turn on camera on entering"
-msgstr ""
-
-msgid "Whether the camera is active when entering the BBB room"
+msgid "BBB API Parameters"
 msgstr ""
 
 #, fuzzy
@@ -1570,18 +1561,6 @@ msgstr "معرّف مجلد مجموعة Nextcloud"
 #, fuzzy
 msgid "Is conference"
 msgstr "هل المؤتمر"
-
-msgid "Allow temporary users accounts for this conference."
-msgstr "السماح لحسابات المستخدمين المؤقتة لهذا المؤتمر."
-
-msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
-msgstr "في حالة التمكين ، يمكن لمسؤولي المؤتمر إنشاء حسابات مستخدمين مؤقتة يمكن تنشيطها وإلغاء تنشيطها."
-
-msgid "Conference accounts active"
-msgstr "حسابات المؤتمر نشطة"
-
-msgid "If enabled, temporary user accounts for this conference are active and can log in."
-msgstr "في حالة التمكين ، تكون حسابات المستخدمين المؤقتة لهذا المؤتمر نشطة ويمكنها تسجيل الدخول."
 
 msgid "Conference is currrently premium"
 msgstr "المؤتمر مميز حاليا "
@@ -2704,44 +2683,6 @@ msgstr "حاليًا، المستعرضات التي تدعم تحميل الم�
 msgid "File and Folder Upload"
 msgstr "تحميل الملف والمجلد"
 
-msgid "Please correct the error below."
-msgid_plural "Please correct the errors below."
-msgstr[0] ""
-"الرجاء تصحيح الاخطاء الواردة أدناه.\n"
-"\n"
-"\n"
-"الرجاء تصحيح الاخطاء الواردة أدناه."
-msgstr[1] "الرجاء تصحيح الخطأ أدناه."
-msgstr[2] "الرجاء تصحيح الأخطاء أدناه."
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
-#, fuzzy
-msgid "2-factor access only"
-msgstr "2-عامل الوصول فقط"
-
-msgid "OTP Device:"
-msgstr "جهاز OTP:"
-
-msgid "Enter the generated number code from your authenticator app"
-msgstr "أدخل رمز الرقم الذي تم إنشاؤه من تطبيق المصادقة"
-
-msgid "Forgotten your password or username?"
-msgstr "هل نسيت كلمة المرور أو اسم المستخدم؟"
-
-msgid "Validate"
-msgstr "ثبت"
-
-msgid "Log out"
-msgstr "تسجيل خروج"
-
-msgid "You are logged in as"
-msgstr "أنت مسجل دخولك باسم"
-
-msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
-msgstr "يبدو أنه لا يوجد جهاز مصادقة متصل بحسابك. يرجى مطالبة مسؤول آخر بإعداد واحد وإرسال رمز الاستجابة السريعة إليك!"
-
 msgid "Services"
 msgstr "خدمات"
 
@@ -2927,6 +2868,13 @@ msgstr "نص المساعدة_13_إدارة المجموعة"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_15_organization"
 msgstr "نص المساعدة_13_إدارة المجموعة"
+
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_11_document"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_16_twofactorauth"
+msgstr "نص المساعدة_11_مستند"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
@@ -3397,7 +3345,13 @@ msgstr "يمكنك إنشاء أحداث مؤتمرات للغرف مباشرة�
 msgid "There are no rooms yet."
 msgstr "لا توجد عناصر حتى الآن"
 
+msgid "Turn on microphone on entering"
+msgstr ""
+
 msgid "Default"
+msgstr ""
+
+msgid "Turn on camera on entering"
 msgstr ""
 
 #, fuzzy
@@ -6584,6 +6538,11 @@ msgstr "افصل حساب الفيسبوك"
 msgid "Disconnect Facebook"
 msgstr "افصل فيسبوك"
 
+#, fuzzy
+#| msgid "Settings"
+msgid "2FA Settings"
+msgstr "إعدادات"
+
 #, python-format
 msgid "%(provider)s-Account"
 msgstr "%(provider)s-حساب"
@@ -6718,6 +6677,172 @@ msgstr "يمكنك تغيير هذا الإعداد أو تخصيصه لاحقً
 
 msgid "Your privacy: You are in control!"
 msgstr "خصوصيتك: أنت المتحكم!"
+
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+"الرجاء تصحيح الاخطاء الواردة أدناه.\n"
+"\n"
+"\n"
+"الرجاء تصحيح الاخطاء الواردة أدناه."
+msgstr[1] "الرجاء تصحيح الخطأ أدناه."
+msgstr[2] "الرجاء تصحيح الأخطاء أدناه."
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#, fuzzy
+msgid "2-factor access only"
+msgstr "2-عامل الوصول فقط"
+
+msgid "OTP Device:"
+msgstr "جهاز OTP:"
+
+msgid "Enter the generated number code from your authenticator app"
+msgstr "أدخل رمز الرقم الذي تم إنشاؤه من تطبيق المصادقة"
+
+msgid "Forgotten your password or username?"
+msgstr "هل نسيت كلمة المرور أو اسم المستخدم؟"
+
+msgid "Validate"
+msgstr "ثبت"
+
+msgid "Log out"
+msgstr "تسجيل خروج"
+
+msgid "You are logged in as"
+msgstr "أنت مسجل دخولك باسم"
+
+msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
+msgstr "يبدو أنه لا يوجد جهاز مصادقة متصل بحسابك. يرجى مطالبة مسؤول آخر بإعداد واحد وإرسال رمز الاستجابة السريعة إليك!"
+
+#, fuzzy
+#| msgid "Back to"
+msgid "Backup Tokens"
+msgstr "عودة الى"
+
+msgid "Backup tokens can be used when your primary and backup phone numbers aren't available. The backup tokens below can be used for login verification. <br> If you've used up all your backup tokens, you can generate a new set of backup tokens. Only the backup tokens shown below will be valid."
+msgstr ""
+
+msgid "Print these tokens and keep them somewhere safe."
+msgstr ""
+
+#, fuzzy
+#| msgid "You don't have a %(portal_name)s account yet?"
+msgid "You don't have any backup codes yet."
+msgstr "ليس لديك حساب %(portal_name)s؟"
+
+#, fuzzy
+#| msgid "Enter a token:"
+msgid "Generate Tokens"
+msgstr "إدخال رمز:"
+
+msgid "Back to 2FA Settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Disable editor"
+msgid "Disable 2FA"
+msgstr "تعطيل المحرر"
+
+msgid "You are about to disable two-factor authentication. This weakens your account security, are you sure?"
+msgstr ""
+
+msgid "Yes, I am sure."
+msgstr ""
+
+#, fuzzy
+#| msgid "Disable editor"
+msgid "Disable"
+msgstr "تعطيل المحرر"
+
+msgid "Two-Factor Login (Backup-Token)"
+msgstr ""
+
+#, fuzzy
+#| msgid "last login"
+msgid "Two-Factor Login"
+msgstr "آخر دخول"
+
+msgid "Use this form for entering backup tokens for logging in. These tokens have been generated for you to print and keep safe. Please enter one of these backup tokens to login to your account."
+msgstr ""
+
+msgid "Please enter the token generated by your token generator."
+msgstr ""
+
+msgid "Backup-Token"
+msgstr ""
+
+msgid "Numeric Token (e.g. 123456)"
+msgstr ""
+
+msgid "If you do not have access to your OTP generator app, you may enter one of your generated backup tokens"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a token:"
+msgid "Enter backup token"
+msgstr "إدخال رمز:"
+
+#, fuzzy
+#| msgid "Enter a token:"
+msgid "Use Backup Token"
+msgstr "إدخال رمز:"
+
+msgid "If you don't have any device with you, you can access your account using backup tokens."
+msgstr ""
+
+#, python-format
+msgid "You have only one backup token remaining."
+msgid_plural "<br> You have %(counter)s backup tokens remaining."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#, fuzzy
+#| msgid "Show more"
+msgid "Show Tokens"
+msgstr "اظهار المزيد"
+
+msgid "However we strongly discourage you to do so, you can also disable two-factor authentication for your account."
+msgstr ""
+
+msgid "Two-factor authentication is not enabled for your account. <br> Enable two-factor authentication for enhanced account security."
+msgstr ""
+
+msgid "Enable 2FA"
+msgstr ""
+
+msgid "2FA Setup"
+msgstr ""
+
+msgid "You are about to take your account security to the next level. <br> To use the 2FA-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. We do not have another 2FA option at the moment and will inform you if there are changes in this regard."
+msgstr ""
+
+msgid "Scan the QR code below."
+msgstr ""
+
+msgid "Now, enter the token generated by the app:"
+msgstr ""
+
+msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
+msgstr ""
+
+msgid "2FA Setup Complete"
+msgstr ""
+
+#, fuzzy
+#| msgid "The invitation was successfully deleted."
+msgid "Congratulations, you've successfully enabled 2FA."
+msgstr "تم حذف الدعوة بنجاح."
+
+#, fuzzy
+#| msgid "Your profile"
+msgid "Back to your profile"
+msgstr "صفحتك الشخصية"
 
 msgid "by"
 msgstr "بواسطة"
@@ -7211,6 +7336,110 @@ msgstr "تسرنا رؤيتك! في %(portal_name)s يمكنك التعاون م
 #, fuzzy
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "سجل الآن وساعد في التشكيل"
+
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Import Projects and Groups or Users"
+msgstr "مشاريعي ومجموعاتي"
+
+#, fuzzy
+#| msgid "Import failed"
+msgid "Import from a CSV File"
+msgstr "تعُذر الاستيراد"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Project/group"
+msgid "Project/group CSV File"
+msgstr "مشاريع/مجموعات"
+
+#, fuzzy
+#| msgid "Upload CSV File"
+msgid "User CSV File"
+msgstr "تحميل ملف CSV"
+
+#, fuzzy
+#| msgid "Proportions"
+msgid "Options"
+msgstr "النسب"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+#| msgid "Upload an image."
+msgid "Upload and Import..."
+msgstr "حمّل صورة."
+
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Import Projects and Groups"
+msgstr "مشاريعي ومجموعاتي"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Import successful!"
+msgid "CSV Import Results"
+msgstr "نجح الاستيراد!"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Error!"
+msgid "Read errors:"
+msgstr "خطأ!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Your name"
+msgid "Important messages:"
+msgstr "اسمك"
+
+#, fuzzy
+#| msgid "Error!"
+msgid "Errors:"
+msgstr "خطأ!"
+
+#, fuzzy
+#| msgid "Your name"
+msgid "Info messages:"
+msgstr "اسمك"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
 
 msgid "Show more Projects"
 msgstr "عرض المزيد من المشاريع"
@@ -7719,6 +7948,9 @@ msgstr "تم إرسال رمز تسجيل الدخول."
 
 msgid "User successfully created!"
 msgstr "تم إنشاء المستخدم بنجاح!"
+
+msgid "You do not have any backup tokens set up. Please log in using your OTP tokens."
+msgstr ""
 
 #, python-format
 msgid "The language \"%s\" is not supported"
@@ -8243,6 +8475,18 @@ msgstr "أنت لست عضوًا حاليًا في %s! إذا كنت ترغب ف
 msgid "Your changes have been saved."
 msgstr "تم حفظ التغييرات."
 
+#~ msgid "Allow temporary users accounts for this conference."
+#~ msgstr "السماح لحسابات المستخدمين المؤقتة لهذا المؤتمر."
+
+#~ msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
+#~ msgstr "في حالة التمكين ، يمكن لمسؤولي المؤتمر إنشاء حسابات مستخدمين مؤقتة يمكن تنشيطها وإلغاء تنشيطها."
+
+#~ msgid "Conference accounts active"
+#~ msgstr "حسابات المؤتمر نشطة"
+
+#~ msgid "If enabled, temporary user accounts for this conference are active and can log in."
+#~ msgstr "في حالة التمكين ، تكون حسابات المستخدمين المؤقتة لهذا المؤتمر نشطة ويمكنها تسجيل الدخول."
+
 #, fuzzy
 #~| msgid "options for the room, that are represented in the bigbluebutton API"
 #~ msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
@@ -8272,66 +8516,6 @@ msgstr "تم حفظ التغييرات."
 #~| msgid "View conference"
 #~ msgid "Leave video conference"
 #~ msgstr "عرض المؤتمر"
-
-#, fuzzy
-#~| msgid "My Projects and Groups"
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "مشاريعي ومجموعاتي"
-
-#, fuzzy
-#~| msgid "Import failed"
-#~ msgid "Import from a CSV File"
-#~ msgstr "تعُذر الاستيراد"
-
-#, fuzzy
-#~| msgid "Project/group"
-#~ msgid "Project/group CSV File"
-#~ msgstr "مشاريع/مجموعات"
-
-#, fuzzy
-#~| msgid "Upload CSV File"
-#~ msgid "User CSV File"
-#~ msgstr "تحميل ملف CSV"
-
-#, fuzzy
-#~| msgid "Proportions"
-#~ msgid "Options"
-#~ msgstr "النسب"
-
-#, fuzzy
-#~| msgid "Upload an image."
-#~ msgid "Upload and Import..."
-#~ msgstr "حمّل صورة."
-
-#, fuzzy
-#~| msgid "My Projects and Groups"
-#~ msgid "Import Projects and Groups"
-#~ msgstr "مشاريعي ومجموعاتي"
-
-#, fuzzy
-#~| msgid "Import successful!"
-#~ msgid "CSV Import Results"
-#~ msgstr "نجح الاستيراد!"
-
-#, fuzzy
-#~| msgid "Error!"
-#~ msgid "Read errors:"
-#~ msgstr "خطأ!"
-
-#, fuzzy
-#~| msgid "Your name"
-#~ msgid "Important messages:"
-#~ msgstr "اسمك"
-
-#, fuzzy
-#~| msgid "Error!"
-#~ msgid "Errors:"
-#~ msgstr "خطأ!"
-
-#, fuzzy
-#~| msgid "Your name"
-#~ msgid "Info messages:"
-#~ msgstr "اسمك"
 
 #~ msgid "Conference successfully started and user accounts activated"
 #~ msgstr "بدأ المؤتمر بنجاح وتم تنشيط حسابات المستخدمين"

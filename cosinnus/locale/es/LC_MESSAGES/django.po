@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 17:13+0100\n"
+"POT-Creation-Date: 2021-12-06 15:36+0100\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -914,16 +914,7 @@ msgstr ""
 msgid "BBB Server for Premium Conferences"
 msgstr ""
 
-msgid "Turn on microphone on entering"
-msgstr ""
-
-msgid "Whether the microphone is active when entering the BBB room"
-msgstr ""
-
-msgid "Turn on camera on entering"
-msgstr ""
-
-msgid "Whether the camera is active when entering the BBB room"
+msgid "BBB API Parameters"
 msgstr ""
 
 #, fuzzy
@@ -1469,19 +1460,6 @@ msgid "Nextcloud Groupfolder ID"
 msgstr "ID del grupo de Facebok"
 
 msgid "Is conference"
-msgstr ""
-
-msgid "Allow temporary users accounts for this conference."
-msgstr ""
-
-msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
-msgstr ""
-
-#, fuzzy
-msgid "Conference accounts active"
-msgstr "Esta cuenta esta inactiva."
-
-msgid "If enabled, temporary user accounts for this conference are active and can log in."
 msgstr ""
 
 msgid "Conference is currrently premium"
@@ -2559,39 +2537,6 @@ msgstr "Actualmente, las cargas de carpetas que apolla la navegadora están:"
 msgid "File and Folder Upload"
 msgstr "Carga de archivo y carpeta"
 
-msgid "Please correct the error below."
-msgid_plural "Please correct the errors below."
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "2-factor access only"
-msgstr ""
-
-msgid "OTP Device:"
-msgstr ""
-
-msgid "Enter the generated number code from your authenticator app"
-msgstr ""
-
-#, fuzzy
-msgid "Forgotten your password or username?"
-msgstr "Se te olvidó tu contraseña?"
-
-#, fuzzy
-msgid "Validate"
-msgstr "Válido hasta"
-
-#, fuzzy
-msgid "Log out"
-msgstr "Seción cerrada"
-
-#, fuzzy
-msgid "You are logged in as"
-msgstr "Ya has iniciado seción!"
-
-msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
-msgstr ""
-
 msgid "Services"
 msgstr "Servicios"
 
@@ -2772,6 +2717,13 @@ msgstr "texto de ayuda_6_administración de grupo"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_15_organization"
 msgstr "texto de ayuda_6_administración de grupo"
+
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_11_document"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_16_twofactorauth"
+msgstr "texto de ayuda_11_documento"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
@@ -3220,7 +3172,13 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr "No hay usuarios visibles."
 
+msgid "Turn on microphone on entering"
+msgstr ""
+
 msgid "Default"
+msgstr ""
+
+msgid "Turn on camera on entering"
 msgstr ""
 
 #, fuzzy
@@ -6387,6 +6345,11 @@ msgstr "Decontectar cuenta de Facebook"
 msgid "Disconnect Facebook"
 msgstr "Decontectar Facebook"
 
+#, fuzzy
+#| msgid "Settings"
+msgid "2FA Settings"
+msgstr "Ajustes"
+
 #, python-format
 msgid "%(provider)s-Account"
 msgstr ""
@@ -6521,6 +6484,159 @@ msgstr "Puede cambiar o personalizar esta configuración más adelante en la con
 
 msgid "Your privacy: You are in control!"
 msgstr "Tu privacidad: Estas en control!"
+
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "2-factor access only"
+msgstr ""
+
+msgid "OTP Device:"
+msgstr ""
+
+msgid "Enter the generated number code from your authenticator app"
+msgstr ""
+
+#, fuzzy
+msgid "Forgotten your password or username?"
+msgstr "Se te olvidó tu contraseña?"
+
+#, fuzzy
+msgid "Validate"
+msgstr "Válido hasta"
+
+#, fuzzy
+msgid "Log out"
+msgstr "Seción cerrada"
+
+#, fuzzy
+msgid "You are logged in as"
+msgstr "Ya has iniciado seción!"
+
+msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Back to"
+msgid "Backup Tokens"
+msgstr "Volver a"
+
+msgid "Backup tokens can be used when your primary and backup phone numbers aren't available. The backup tokens below can be used for login verification. <br> If you've used up all your backup tokens, you can generate a new set of backup tokens. Only the backup tokens shown below will be valid."
+msgstr ""
+
+msgid "Print these tokens and keep them somewhere safe."
+msgstr ""
+
+#, fuzzy
+#| msgid "You don't have permission to access this site."
+msgid "You don't have any backup codes yet."
+msgstr "No tienes permiso para el accesso de esta página."
+
+#, fuzzy
+#| msgid "Enter a token:"
+msgid "Generate Tokens"
+msgstr "Inserta un token:"
+
+msgid "Back to 2FA Settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Disable editor"
+msgid "Disable 2FA"
+msgstr "Deshabilitar el editor"
+
+msgid "You are about to disable two-factor authentication. This weakens your account security, are you sure?"
+msgstr ""
+
+msgid "Yes, I am sure."
+msgstr ""
+
+#, fuzzy
+#| msgid "Disable editor"
+msgid "Disable"
+msgstr "Deshabilitar el editor"
+
+msgid "Two-Factor Login (Backup-Token)"
+msgstr ""
+
+#, fuzzy
+msgid "Two-Factor Login"
+msgstr "Iniciar seción"
+
+msgid "Use this form for entering backup tokens for logging in. These tokens have been generated for you to print and keep safe. Please enter one of these backup tokens to login to your account."
+msgstr ""
+
+msgid "Please enter the token generated by your token generator."
+msgstr ""
+
+msgid "Backup-Token"
+msgstr ""
+
+msgid "Numeric Token (e.g. 123456)"
+msgstr ""
+
+msgid "If you do not have access to your OTP generator app, you may enter one of your generated backup tokens"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a token:"
+msgid "Enter backup token"
+msgstr "Inserta un token:"
+
+#, fuzzy
+msgid "Use Backup Token"
+msgstr "Inserta un token:"
+
+msgid "If you don't have any device with you, you can access your account using backup tokens."
+msgstr ""
+
+#, python-format
+msgid "You have only one backup token remaining."
+msgid_plural "<br> You have %(counter)s backup tokens remaining."
+msgstr[0] ""
+msgstr[1] ""
+
+#, fuzzy
+msgid "Show Tokens"
+msgstr "Mostrar más proyectos"
+
+msgid "However we strongly discourage you to do so, you can also disable two-factor authentication for your account."
+msgstr ""
+
+msgid "Two-factor authentication is not enabled for your account. <br> Enable two-factor authentication for enhanced account security."
+msgstr ""
+
+msgid "Enable 2FA"
+msgstr ""
+
+msgid "2FA Setup"
+msgstr ""
+
+msgid "You are about to take your account security to the next level. <br> To use the 2FA-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. We do not have another 2FA option at the moment and will inform you if there are changes in this regard."
+msgstr ""
+
+msgid "Scan the QR code below."
+msgstr ""
+
+msgid "Now, enter the token generated by the app:"
+msgstr ""
+
+msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
+msgstr ""
+
+msgid "2FA Setup Complete"
+msgstr ""
+
+#, fuzzy
+#| msgid "The invitation was successfully deleted."
+msgid "Congratulations, you've successfully enabled 2FA."
+msgstr "Tu inivtacuón fue eliminada con éxito."
+
+#, fuzzy
+msgid "Back to your profile"
+msgstr "Tu perfil"
 
 #, fuzzy
 msgid "by"
@@ -7027,6 +7143,98 @@ msgstr ""
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Regístrate ahora y participa"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Mis proyectos y grupos"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Ordenar casilla"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Proyectos/grupos"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Proyectos/grupos"
+
+#, fuzzy
+msgid "Options"
+msgstr "Proporciónes"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Sube una imagen."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Mis proyectos y grupos"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Reinicio de contraseña con éxito"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "¡Error!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Mensajes"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "¡Error!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Mensajes"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Mostrar más proyectos"
 
@@ -7520,6 +7728,9 @@ msgstr ""
 #, fuzzy
 msgid "User successfully created!"
 msgstr "¡Usario\"%(username)s\" ha sido invitado con éxito!"
+
+msgid "You do not have any backup tokens set up. Please log in using your OTP tokens."
+msgstr ""
 
 #, python-format
 msgid "The language \"%s\" is not supported"
@@ -8042,6 +8253,10 @@ msgid "Your changes have been saved."
 msgstr "Se han guardado los cambios."
 
 #, fuzzy
+#~ msgid "Conference accounts active"
+#~ msgstr "Esta cuenta esta inactiva."
+
+#, fuzzy
 #~| msgid "Participants"
 #~ msgid "participants"
 #~ msgstr "Participantes"
@@ -8059,54 +8274,6 @@ msgstr "Se han guardado los cambios."
 #, fuzzy
 #~ msgid "Leave video conference"
 #~ msgstr "Sobre el proyecto"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Mis proyectos y grupos"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Ordenar casilla"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Proyectos/grupos"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Proyectos/grupos"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Proporciónes"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Sube una imagen."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Mis proyectos y grupos"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Reinicio de contraseña con éxito"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "¡Error!"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Mensajes"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "¡Error!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Mensajes"
 
 #, fuzzy
 #~ msgid "Successfully deactivated user account"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 17:13+0100\n"
+"POT-Creation-Date: 2021-12-06 15:36+0100\n"
 "Language: hy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -906,16 +906,7 @@ msgstr ""
 msgid "BBB Server for Premium Conferences"
 msgstr ""
 
-msgid "Turn on microphone on entering"
-msgstr ""
-
-msgid "Whether the microphone is active when entering the BBB room"
-msgstr ""
-
-msgid "Turn on camera on entering"
-msgstr ""
-
-msgid "Whether the camera is active when entering the BBB room"
+msgid "BBB API Parameters"
 msgstr ""
 
 #, fuzzy
@@ -1463,19 +1454,6 @@ msgid "Nextcloud Groupfolder ID"
 msgstr "Nextcloud Խմբի ID- ն"
 
 msgid "Is conference"
-msgstr ""
-
-msgid "Allow temporary users accounts for this conference."
-msgstr ""
-
-msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
-msgstr ""
-
-#, fuzzy
-msgid "Conference accounts active"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-msgid "If enabled, temporary user accounts for this conference are active and can log in."
 msgstr ""
 
 #, fuzzy
@@ -2543,35 +2521,6 @@ msgstr "Ներկայումս թղթապանակի բեռնումը ապահով�
 msgid "File and Folder Upload"
 msgstr "Ֆայլի և Թղթապանակի Վերբեռնում"
 
-msgid "Please correct the error below."
-msgid_plural "Please correct the errors below."
-msgstr[0] "Խնդրում ենք ուղղել ստորև նշված սխալը."
-msgstr[1] "Խնդրում ենք ուղղել ստորև նշված սխալները."
-
-msgid "2-factor access only"
-msgstr "Մուտքը միայն 2-գործոնով"
-
-msgid "OTP Device:"
-msgstr "OTP Սարք:"
-
-msgid "Enter the generated number code from your authenticator app"
-msgstr "Մուտքագրեք գեներացված կոդը ձեր նույնականացման ծրագրից"
-
-msgid "Forgotten your password or username?"
-msgstr "Մոռացե՞լ եք ձեր գաղտնաբառը կամ օգտանունը?"
-
-msgid "Validate"
-msgstr "Վավերացնել"
-
-msgid "Log out"
-msgstr "Դուրս գալ"
-
-msgid "You are logged in as"
-msgstr "Դուք մուտք եք գործել որպես"
-
-msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
-msgstr "Ոչ մի նույնականացման սարք կցված չէ ձեր էջին: Խնդրում ենք հարցում ուղարկել մեկ այլ ադմինիստրատորի, որպեսզի նա տեղադրի և ուղարկի ձեզ QR կոդ!"
-
 msgid "Services"
 msgstr "Ծառայություններ"
 
@@ -2750,6 +2699,13 @@ msgstr "helptext_13_groupadministration"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_15_organization"
 msgstr "helptext_13_groupadministration"
+
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_11_document"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_16_twofactorauth"
+msgstr "helptext_11_document"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
@@ -3198,7 +3154,13 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr "Դեռ նյութեր չկան"
 
+msgid "Turn on microphone on entering"
+msgstr ""
+
 msgid "Default"
+msgstr ""
+
+msgid "Turn on camera on entering"
 msgstr ""
 
 #, fuzzy
@@ -6333,6 +6295,11 @@ msgstr "Անջատել Facebook- ի էջը"
 msgid "Disconnect Facebook"
 msgstr "Անջատել Facebook- ը"
 
+#, fuzzy
+#| msgid "Settings"
+msgid "2FA Settings"
+msgstr "Կարգավորումներ"
+
 #, python-format
 msgid "%(provider)s-Account"
 msgstr ""
@@ -6466,6 +6433,156 @@ msgstr "Դուք կարող եք փոխել կամ անհատականացնել 
 
 msgid "Your privacy: You are in control!"
 msgstr "Ձեր գաղտնիությունը- Դուք վերահսկում եք!"
+
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] "Խնդրում ենք ուղղել ստորև նշված սխալը."
+msgstr[1] "Խնդրում ենք ուղղել ստորև նշված սխալները."
+
+msgid "2-factor access only"
+msgstr "Մուտքը միայն 2-գործոնով"
+
+msgid "OTP Device:"
+msgstr "OTP Սարք:"
+
+msgid "Enter the generated number code from your authenticator app"
+msgstr "Մուտքագրեք գեներացված կոդը ձեր նույնականացման ծրագրից"
+
+msgid "Forgotten your password or username?"
+msgstr "Մոռացե՞լ եք ձեր գաղտնաբառը կամ օգտանունը?"
+
+msgid "Validate"
+msgstr "Վավերացնել"
+
+msgid "Log out"
+msgstr "Դուրս գալ"
+
+msgid "You are logged in as"
+msgstr "Դուք մուտք եք գործել որպես"
+
+msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
+msgstr "Ոչ մի նույնականացման սարք կցված չէ ձեր էջին: Խնդրում ենք հարցում ուղարկել մեկ այլ ադմինիստրատորի, որպեսզի նա տեղադրի և ուղարկի ձեզ QR կոդ!"
+
+#, fuzzy
+#| msgid "Back to"
+msgid "Backup Tokens"
+msgstr "Հետ դեպի"
+
+msgid "Backup tokens can be used when your primary and backup phone numbers aren't available. The backup tokens below can be used for login verification. <br> If you've used up all your backup tokens, you can generate a new set of backup tokens. Only the backup tokens shown below will be valid."
+msgstr ""
+
+msgid "Print these tokens and keep them somewhere safe."
+msgstr ""
+
+#, fuzzy
+#| msgid "You don't have permission to access this site."
+msgid "You don't have any backup codes yet."
+msgstr "Դուք թույլտվություն չունեք մուտք գործել այս կայք."
+
+#, fuzzy
+#| msgid "Enter a token:"
+msgid "Generate Tokens"
+msgstr "Մուտքագրեք թոքենը:"
+
+msgid "Back to 2FA Settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Disable editor"
+msgid "Disable 2FA"
+msgstr "անջատել խմբագրիչը"
+
+msgid "You are about to disable two-factor authentication. This weakens your account security, are you sure?"
+msgstr ""
+
+msgid "Yes, I am sure."
+msgstr ""
+
+#, fuzzy
+#| msgid "Disable editor"
+msgid "Disable"
+msgstr "անջատել խմբագրիչը"
+
+msgid "Two-Factor Login (Backup-Token)"
+msgstr ""
+
+#, fuzzy
+msgid "Two-Factor Login"
+msgstr "Մուտք"
+
+msgid "Use this form for entering backup tokens for logging in. These tokens have been generated for you to print and keep safe. Please enter one of these backup tokens to login to your account."
+msgstr ""
+
+msgid "Please enter the token generated by your token generator."
+msgstr ""
+
+msgid "Backup-Token"
+msgstr ""
+
+msgid "Numeric Token (e.g. 123456)"
+msgstr ""
+
+msgid "If you do not have access to your OTP generator app, you may enter one of your generated backup tokens"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a token:"
+msgid "Enter backup token"
+msgstr "Մուտքագրեք թոքենը:"
+
+#, fuzzy
+msgid "Use Backup Token"
+msgstr "Մուտքագրեք թոքենը:"
+
+msgid "If you don't have any device with you, you can access your account using backup tokens."
+msgstr ""
+
+#, python-format
+msgid "You have only one backup token remaining."
+msgid_plural "<br> You have %(counter)s backup tokens remaining."
+msgstr[0] ""
+msgstr[1] ""
+
+#, fuzzy
+#| msgid "Show more"
+msgid "Show Tokens"
+msgstr "Ցուցադրել ավելին"
+
+msgid "However we strongly discourage you to do so, you can also disable two-factor authentication for your account."
+msgstr ""
+
+msgid "Two-factor authentication is not enabled for your account. <br> Enable two-factor authentication for enhanced account security."
+msgstr ""
+
+msgid "Enable 2FA"
+msgstr ""
+
+msgid "2FA Setup"
+msgstr ""
+
+msgid "You are about to take your account security to the next level. <br> To use the 2FA-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. We do not have another 2FA option at the moment and will inform you if there are changes in this regard."
+msgstr ""
+
+msgid "Scan the QR code below."
+msgstr ""
+
+msgid "Now, enter the token generated by the app:"
+msgstr ""
+
+msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
+msgstr ""
+
+msgid "2FA Setup Complete"
+msgstr ""
+
+#, fuzzy
+#| msgid "The invitation was successfully deleted."
+msgid "Congratulations, you've successfully enabled 2FA."
+msgstr "Հրավերը հաջողությամբ ջնջվել է."
+
+#, fuzzy
+msgid "Back to your profile"
+msgstr "Քո պրոֆիլը"
 
 msgid "by"
 msgstr "կողմից"
@@ -6948,6 +7065,98 @@ msgstr "Ուրախ ենք ձեզ տեսնել! %(portal_name)s - ում դուք
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Jetzt anmelden und mitgestalten"
+
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Իմ Նախագծերը և Խմբերը"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Տեսակավորել դաշտը"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Նախագծեր / Խմբեր"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Նախագծեր / Խմբեր"
+
+#, fuzzy
+msgid "Options"
+msgstr "Համամասնություններ"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Վերբեռնել պատկեր."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Իմ Նախագծերը և Խմբերը"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Գաղտնաբառի վերաբեռնումը հաջողվեց"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Սխալ!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Նամակներ"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Սխալ!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Նամակներ"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
 
 msgid "Show more Projects"
 msgstr "Ցուցադրել ավելի շատ ծրագրեր"
@@ -7444,6 +7653,9 @@ msgstr ""
 #, fuzzy
 msgid "User successfully created!"
 msgstr "%(username)s օգտատերը հաջողությամբ հրավիրվել է!"
+
+msgid "You do not have any backup tokens set up. Please log in using your OTP tokens."
+msgstr ""
 
 #, python-format
 msgid "The language \"%s\" is not supported"
@@ -7959,6 +8171,10 @@ msgid "Your changes have been saved."
 msgstr "Ձեր փոփոխությունները պահպանվել են."
 
 #, fuzzy
+#~ msgid "Conference accounts active"
+#~ msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
 #~| msgid "Participants"
 #~ msgid "participants"
 #~ msgstr "Մասնակիցներ"
@@ -7976,54 +8192,6 @@ msgstr "Ձեր փոփոխությունները պահպանվել են."
 #, fuzzy
 #~ msgid "Leave video conference"
 #~ msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Իմ Նախագծերը և Խմբերը"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Տեսակավորել դաշտը"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Նախագծեր / Խմբեր"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Նախագծեր / Խմբեր"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Համամասնություններ"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Վերբեռնել պատկեր."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Իմ Նախագծերը և Խմբերը"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Գաղտնաբառի վերաբեռնումը հաջողվեց"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Սխալ!"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Նամակներ"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Սխալ!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Նամակներ"
 
 #, fuzzy
 #~ msgid "Successfully deactivated user account"

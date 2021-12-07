@@ -184,6 +184,10 @@ class CosinnusConf(AppConf):
     # if True while `ADMIN_2_FACTOR_AUTH_ENABLED` is enabled, will force 2-factor-authentication
     # for superusers and portal on the ENTIRE site, and not only on the /admin/ backend
     ADMIN_2_FACTOR_AUTH_STRICT_MODE = False
+
+    # if True, users may activate the 2-factor-authentication for
+    # their user profiles within the portal
+    USER_2_FACTOR_AUTH_ENABLED = False
     
     # enable this to sign up new members to a cleverreach newsletter group
     CLEVERREACH_AUTO_SIGNUP_ENABLED = False

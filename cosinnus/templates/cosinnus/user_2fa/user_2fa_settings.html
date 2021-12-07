@@ -1,0 +1,96 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags widget_tweaks %}
+
+
+{% block page_title %}{% trans '2FA Settings' %}{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus/user/leftnav.html"  with view="two-factor-auth" %}
+    {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_16_twofactorauth" %} 
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+        <li class="active"><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Your Profile" %}</a></li>
+        <li class="active">{% trans "2FA Settings" %}</li>
+{% endblock %}
+
+
+{% block content %}
+
+        {% if default_device %}
+            <div class="content-box">
+                    <h4>{% trans "Backup Tokens" %}</h4>
+                    <p class="textfield transparent">{% blocktrans trimmed %}If you don't have any device with you, you can access
+                        your account using backup tokens.{% endblocktrans %}
+                        {% blocktrans trimmed count counter=backup_tokens %}
+                        You have only one backup token remaining.
+                        {% plural %} <br>
+                        You have {{ counter }} backup tokens remaining.
+                        {% endblocktrans %}
+                    </p>
+            </div>
+                    <button type="submit" href="{% url 'cosinnus:two-factor-auth-backup-tokens' %}" class="btn btn-emphasized btn-autosize">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left" tabindex="-1">
+                                    <i class="fa fa-key"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans 'Show Tokens' %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+            
+            <hr class="invisible"/>
+            <hr class="invisible"/>
+            
+            {% comment %}
+            {% endcomment %}
+
+            <div class="content-box">
+                    <h4>{% trans "Disable 2FA" %}</h4>
+                    <p class="textfield transparent">{% blocktrans trimmed %}
+                        However we strongly discourage you to do so, you can
+                        also disable two-factor authentication for your account.
+                        {% endblocktrans %}
+                    </p>
+            </div>
+                    <button type="submit" href="{% url 'cosinnus:two-factor-auth-disable' %}" class="btn btn-emphasized btn-autosize">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left" tabindex="-1">
+                                    <i class="fa fa-hand-o-right"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans 'Disable 2FA' %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+
+        {% else %}
+
+            <div class="content-box">
+
+                    <h4>{% trans "2FA Settings" %}</h4>
+                    <p class="textfield transparent">{% blocktrans trimmed %}Two-factor authentication is not enabled for your
+                        account. <br> Enable two-factor authentication for enhanced account security.
+                        {% endblocktrans %}
+                    </p>
+            </div>
+                    <button type="submit" href="{% url 'cosinnus:two-factor-auth-setup' %}" class="btn btn-emphasized btn-autosize">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left" tabindex="-1">
+                                    <i class="fa fa-hand-o-right"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans 'Enable 2FA' %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+        {% endif %}
+{% endblock content %}
+        

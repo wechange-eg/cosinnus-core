@@ -146,6 +146,25 @@
 	{% endif %}
 {% endif %}
 
+{% if SETTINGS.COSINNUS_USER_2_FACTOR_AUTH_ENABLED %}
+<button type="button" class="btn w100 btn-{% if view == "two-factor-auth" %}extra-{% endif %}emphasized regular-space" href="{% url 'cosinnus:two-factor-auth-settings' %}">
+	<ul class="media-list">
+		<li class="media">
+			<span class="pull-left">
+					<i class="fa fa-qrcode"></i>
+			</span>
+            {% if view == "two-factor-auth" %}
+                <span class="pull-right">
+                    <i class="fa fa-caret-right"></i>
+                </span>
+            {% endif %}
+			<div class="media-body">
+				{% trans "2FA Settings" %}
+			</div>
+		</li>
+	</ul>
+</button>
+{% endif %}
 
 {% if SETTINGS.COSINNUS_IS_OAUTH_CLIENT %}
 {% get_providers as socialaccount_providers %}
