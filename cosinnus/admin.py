@@ -40,6 +40,8 @@ from cosinnus.models.user_import import CosinnusUserImport
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.utils.group import get_cosinnus_group_model
+from django.contrib.postgres.fields import JSONField as PostgresJSONField
+from cosinnus.forms.widgets import PrettyJSONWidget
 
 
 class SingleDeleteActionMixin(object):
@@ -159,6 +161,11 @@ class CosinnusConferenceSettingsInline(GenericStackedInline):
     template = 'cosinnus/admin/conference_setting_help_text_stacked_inline.html'
     extra = 0
     max_num = 1
+    
+    formfield_overrides = {
+        PostgresJSONField: {'widget': PrettyJSONWidget(attrs={'style': "width:initial;"})}
+    }
+    
 
 class PermanentRedirectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
     list_display = ('to_group', 'from_slug', 'from_type', 'from_portal',)
