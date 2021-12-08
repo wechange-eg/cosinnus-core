@@ -349,9 +349,6 @@ class CosinnusConferenceSettings(models.Model):
             for _choice, api_call_param_dict in call_dict.items():
                 for api_name, param_dict in api_call_param_dict.items():
                     call_keys[api_name].update(param_dict.keys())
-        # also add all portal default params to the non-whitelist
-        for api_name, param_dict in settings.BBB_PARAM_PORTAL_DEFAULTS.items():
-            call_keys[api_name].update(param_dict.keys())
         
         # find any keys from our old about-to-be-overwritten params, that aren't in the known list for carrying over
         for api_name_key, api_name_val in self.bbb_params.items():
