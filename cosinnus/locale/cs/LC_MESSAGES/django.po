@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 17:13+0100\n"
+"POT-Creation-Date: 2021-12-06 15:36+0100\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -914,16 +914,7 @@ msgstr "BBB server"
 msgid "BBB Server for Premium Conferences"
 msgstr "BBB server pro Premium konference"
 
-msgid "Turn on microphone on entering"
-msgstr ""
-
-msgid "Whether the microphone is active when entering the BBB room"
-msgstr ""
-
-msgid "Turn on camera on entering"
-msgstr ""
-
-msgid "Whether the camera is active when entering the BBB room"
+msgid "BBB API Parameters"
 msgstr ""
 
 msgid "Cosinnus Conference Setting"
@@ -1440,18 +1431,6 @@ msgstr "ID Nextcloud složky skupiny"
 
 msgid "Is conference"
 msgstr "Je konference"
-
-msgid "Allow temporary users accounts for this conference."
-msgstr "Povoluje účty dočasných uživatelů pro tuto konferenci."
-
-msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
-msgstr "Pokud je to povoleno, administrátoři konference mohou vytvořit uživatelské účty, které mohou být aktivovány a deaktivovány."
-
-msgid "Conference accounts active"
-msgstr "Konferenční účty aktivní"
-
-msgid "If enabled, temporary user accounts for this conference are active and can log in."
-msgstr "Pokud je to povoleno, účty dočasných uživatelů jsou pro tuto konferenci aktivní a oni se mohou přihlásit."
 
 msgid "Conference is currrently premium"
 msgstr "Konference je nyní v kategorii premium"
@@ -2522,37 +2501,6 @@ msgstr "V současné době jsou prohlížeče podporující nahrávání složek
 msgid "File and Folder Upload"
 msgstr "Nahrávání souborů a složek"
 
-msgid "Please correct the error below."
-msgid_plural "Please correct the errors below."
-msgstr[0] "Opravte prosím níže uvedenou chybu."
-msgstr[1] "Opravte prosím níže uvedené chyby."
-msgstr[2] "Opravte prosím níže uvedené chyby."
-msgstr[3] "Opravte prosím níže uvedené chyby."
-
-msgid "2-factor access only"
-msgstr "Pouze dvoufaktorový přístup"
-
-msgid "OTP Device:"
-msgstr "OTP zařízení:"
-
-msgid "Enter the generated number code from your authenticator app"
-msgstr "Zadejte vygenerovaný číselný kód z ověřovací aplikace"
-
-msgid "Forgotten your password or username?"
-msgstr "Zapomněli jste heslo nebo uživatelské jméno?"
-
-msgid "Validate"
-msgstr "Ověřit"
-
-msgid "Log out"
-msgstr "Odhlásit se"
-
-msgid "You are logged in as"
-msgstr "Jste přihlášeni jako"
-
-msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
-msgstr "Zdá se, že k vašemu účtu není připojeno žádné ověřovací zařízení. Požádejte jiného správce o nastavení zařízení a o zaslání QR kódu!"
-
 msgid "Services"
 msgstr "Služby"
 
@@ -2730,6 +2678,13 @@ msgstr "helptext_13_groupadministration"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_15_organization"
 msgstr "helptext_13_groupadministration"
+
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_11_document"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_16_twofactorauth"
+msgstr "helptext_11_document"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
@@ -3169,7 +3124,13 @@ msgstr "Můžete přímo vytvořit eventy konference z tohoto místa pomocí kon
 msgid "There are no rooms yet."
 msgstr "Zatím tu nejsou žádné místnosti."
 
+msgid "Turn on microphone on entering"
+msgstr ""
+
 msgid "Default"
+msgstr ""
+
+msgid "Turn on camera on entering"
 msgstr ""
 
 #, fuzzy
@@ -6253,6 +6214,11 @@ msgstr "Odpojit účet Facebook"
 msgid "Disconnect Facebook"
 msgstr "Odpojit Facebook"
 
+#, fuzzy
+#| msgid "Settings"
+msgid "2FA Settings"
+msgstr "Nastavení"
+
 #, python-format
 msgid "%(provider)s-Account"
 msgstr "%(provider)s účet"
@@ -6386,6 +6352,163 @@ msgstr "Toto nastavení můžete změnit nebo přizpůsobit později v nastaven�
 
 msgid "Your privacy: You are in control!"
 msgstr "Vaše soukromí: Máte vše pod kontrolou!"
+
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] "Opravte prosím níže uvedenou chybu."
+msgstr[1] "Opravte prosím níže uvedené chyby."
+msgstr[2] "Opravte prosím níže uvedené chyby."
+msgstr[3] "Opravte prosím níže uvedené chyby."
+
+msgid "2-factor access only"
+msgstr "Pouze dvoufaktorový přístup"
+
+msgid "OTP Device:"
+msgstr "OTP zařízení:"
+
+msgid "Enter the generated number code from your authenticator app"
+msgstr "Zadejte vygenerovaný číselný kód z ověřovací aplikace"
+
+msgid "Forgotten your password or username?"
+msgstr "Zapomněli jste heslo nebo uživatelské jméno?"
+
+msgid "Validate"
+msgstr "Ověřit"
+
+msgid "Log out"
+msgstr "Odhlásit se"
+
+msgid "You are logged in as"
+msgstr "Jste přihlášeni jako"
+
+msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
+msgstr "Zdá se, že k vašemu účtu není připojeno žádné ověřovací zařízení. Požádejte jiného správce o nastavení zařízení a o zaslání QR kódu!"
+
+#, fuzzy
+#| msgid "Back to"
+msgid "Backup Tokens"
+msgstr "Zpět k"
+
+msgid "Backup tokens can be used when your primary and backup phone numbers aren't available. The backup tokens below can be used for login verification. <br> If you've used up all your backup tokens, you can generate a new set of backup tokens. Only the backup tokens shown below will be valid."
+msgstr ""
+
+msgid "Print these tokens and keep them somewhere safe."
+msgstr ""
+
+#, fuzzy
+#| msgid "You don't have a %(portal_name)s account yet?"
+msgid "You don't have any backup codes yet."
+msgstr "Ještě nemáte účetn na %(portal_name)s?"
+
+#, fuzzy
+#| msgid "Enter a token:"
+msgid "Generate Tokens"
+msgstr "Zadejte token:"
+
+msgid "Back to 2FA Settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Disable editor"
+msgid "Disable 2FA"
+msgstr "Zakázat editor"
+
+msgid "You are about to disable two-factor authentication. This weakens your account security, are you sure?"
+msgstr ""
+
+msgid "Yes, I am sure."
+msgstr ""
+
+#, fuzzy
+#| msgid "Disable editor"
+msgid "Disable"
+msgstr "Zakázat editor"
+
+msgid "Two-Factor Login (Backup-Token)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Last Login"
+msgid "Two-Factor Login"
+msgstr "Poslední přihlášení"
+
+msgid "Use this form for entering backup tokens for logging in. These tokens have been generated for you to print and keep safe. Please enter one of these backup tokens to login to your account."
+msgstr ""
+
+msgid "Please enter the token generated by your token generator."
+msgstr ""
+
+msgid "Backup-Token"
+msgstr ""
+
+msgid "Numeric Token (e.g. 123456)"
+msgstr ""
+
+msgid "If you do not have access to your OTP generator app, you may enter one of your generated backup tokens"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a token:"
+msgid "Enter backup token"
+msgstr "Zadejte token:"
+
+#, fuzzy
+#| msgid "User token"
+msgid "Use Backup Token"
+msgstr "Uživatelský token"
+
+msgid "If you don't have any device with you, you can access your account using backup tokens."
+msgstr ""
+
+#, python-format
+msgid "You have only one backup token remaining."
+msgid_plural "<br> You have %(counter)s backup tokens remaining."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#, fuzzy
+#| msgid "Show more"
+msgid "Show Tokens"
+msgstr "Zobrazit více"
+
+msgid "However we strongly discourage you to do so, you can also disable two-factor authentication for your account."
+msgstr ""
+
+msgid "Two-factor authentication is not enabled for your account. <br> Enable two-factor authentication for enhanced account security."
+msgstr ""
+
+msgid "Enable 2FA"
+msgstr ""
+
+msgid "2FA Setup"
+msgstr ""
+
+msgid "You are about to take your account security to the next level. <br> To use the 2FA-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. We do not have another 2FA option at the moment and will inform you if there are changes in this regard."
+msgstr ""
+
+msgid "Scan the QR code below."
+msgstr ""
+
+msgid "Now, enter the token generated by the app:"
+msgstr ""
+
+msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
+msgstr ""
+
+msgid "2FA Setup Complete"
+msgstr ""
+
+#, fuzzy
+#| msgid "The invitation was successfully deleted."
+msgid "Congratulations, you've successfully enabled 2FA."
+msgstr "Pozvánka byla úspěšně smazána."
+
+#, fuzzy
+#| msgid "Your profile"
+msgid "Back to your profile"
+msgstr "Váš profil"
 
 msgid "by"
 msgstr "kým"
@@ -6861,6 +6984,108 @@ msgstr "Rádi vás vidíme! Na webu %(portal_name)s můžete spolupracovat s ost
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Přihlásit a podílet se teď"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Import Projects and Groups or Users"
+msgstr "Moje projekty a skupiny"
+
+#, fuzzy
+#| msgid "Import failed"
+msgid "Import from a CSV File"
+msgstr "Import se nezdařil"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Project/group"
+msgid "Project/group CSV File"
+msgstr "Projekt/skupina"
+
+#, fuzzy
+#| msgid "Upload CSV File"
+msgid "User CSV File"
+msgstr "Nahrát CSV soubor"
+
+#, fuzzy
+#| msgid "Proportions"
+msgid "Options"
+msgstr "Poměry"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+#| msgid "Upload an image."
+msgid "Upload and Import..."
+msgstr "Nahrát obrázek."
+
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Import Projects and Groups"
+msgstr "Moje projekty a skupiny"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Import successful!"
+msgid "CSV Import Results"
+msgstr "Import byl úspěšný!"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Error!"
+msgid "Read errors:"
+msgstr "Chyba!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Vaše jméno"
+
+#, fuzzy
+#| msgid "Error!"
+msgid "Errors:"
+msgstr "Chyba!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Vaše jméno"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Zobrazit více projektů"
 
@@ -7300,6 +7525,9 @@ msgstr "Přihlašovací token byl odeslán."
 
 msgid "User successfully created!"
 msgstr "Uživatel byl úspěšně vytvořen!"
+
+msgid "You do not have any backup tokens set up. Please log in using your OTP tokens."
+msgstr ""
 
 #, python-format
 msgid "The language \"%s\" is not supported"
@@ -7813,6 +8041,18 @@ msgstr "Momentálně nejste členem %s! Pokud si přejete, můžete požádat o 
 msgid "Your changes have been saved."
 msgstr "Vaše změny byly uloženy."
 
+#~ msgid "Allow temporary users accounts for this conference."
+#~ msgstr "Povoluje účty dočasných uživatelů pro tuto konferenci."
+
+#~ msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
+#~ msgstr "Pokud je to povoleno, administrátoři konference mohou vytvořit uživatelské účty, které mohou být aktivovány a deaktivovány."
+
+#~ msgid "Conference accounts active"
+#~ msgstr "Konferenční účty aktivní"
+
+#~ msgid "If enabled, temporary user accounts for this conference are active and can log in."
+#~ msgstr "Pokud je to povoleno, účty dočasných uživatelů jsou pro tuto konferenci aktivní a oni se mohou přihlásit."
+
 #, fuzzy
 #~| msgid "options for the room, that are represented in the bigbluebutton API"
 #~ msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
@@ -7842,64 +8082,6 @@ msgstr "Vaše změny byly uloženy."
 #~| msgid "View conference"
 #~ msgid "Leave video conference"
 #~ msgstr "Prohlédněte si konferenci"
-
-#, fuzzy
-#~| msgid "My Projects and Groups"
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Moje projekty a skupiny"
-
-#, fuzzy
-#~| msgid "Import failed"
-#~ msgid "Import from a CSV File"
-#~ msgstr "Import se nezdařil"
-
-#, fuzzy
-#~| msgid "Project/group"
-#~ msgid "Project/group CSV File"
-#~ msgstr "Projekt/skupina"
-
-#, fuzzy
-#~| msgid "Upload CSV File"
-#~ msgid "User CSV File"
-#~ msgstr "Nahrát CSV soubor"
-
-#, fuzzy
-#~| msgid "Proportions"
-#~ msgid "Options"
-#~ msgstr "Poměry"
-
-#, fuzzy
-#~| msgid "Upload an image."
-#~ msgid "Upload and Import..."
-#~ msgstr "Nahrát obrázek."
-
-#, fuzzy
-#~| msgid "My Projects and Groups"
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Moje projekty a skupiny"
-
-#, fuzzy
-#~| msgid "Import successful!"
-#~ msgid "CSV Import Results"
-#~ msgstr "Import byl úspěšný!"
-
-#, fuzzy
-#~| msgid "Error!"
-#~ msgid "Read errors:"
-#~ msgstr "Chyba!"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Vaše jméno"
-
-#, fuzzy
-#~| msgid "Error!"
-#~ msgid "Errors:"
-#~ msgstr "Chyba!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Vaše jméno"
 
 #~ msgid "Conference successfully started and user accounts activated"
 #~ msgstr "Konference byla úspěšně zahájena a uživatelské účty aktivovány"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 17:13+0100\n"
+"POT-Creation-Date: 2021-12-06 15:36+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -898,17 +898,8 @@ msgstr "BBB Server"
 msgid "BBB Server for Premium Conferences"
 msgstr "BBB-Server für Premium-Tagungen"
 
-msgid "Turn on microphone on entering"
-msgstr "Mikrofon beim Betreten aktivieren"
-
-msgid "Whether the microphone is active when entering the BBB room"
-msgstr "Ob das Mikrofon aktiviert ist, wenn man den BBB-Raum betritt"
-
-msgid "Turn on camera on entering"
-msgstr "Kamera beim Betreten aktivieren"
-
-msgid "Whether the camera is active when entering the BBB room"
-msgstr "Ob die Kamera aktiviert ist, wenn man den BBB-Raum betritt"
+msgid "BBB API Parameters"
+msgstr ""
 
 msgid "Cosinnus Conference Setting"
 msgstr "Cosinnus Tagungs-Einstellung"
@@ -1418,18 +1409,6 @@ msgstr "Nextcloud Gruppenordner-ID"
 
 msgid "Is conference"
 msgstr "Ist Tagung"
-
-msgid "Allow temporary users accounts for this conference."
-msgstr "Allow temporary users accounts for this conference."
-
-msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
-msgstr "Wenn aktiviert, können Tagungsveranstalter temporäre Benutzerkonten erstellen, die aktiviert und deaktiviert werden können."
-
-msgid "Conference accounts active"
-msgstr "Tagungs-Benutzerkonten aktiv"
-
-msgid "If enabled, temporary user accounts for this conference are active and can log in."
-msgstr "Wenn aktiv, sind temporäre Benutzerkonten für diese Tagung aktiv und können einloggen."
 
 msgid "Conference is currrently premium"
 msgstr "Tagung ist aktuell Premium"
@@ -2456,35 +2435,6 @@ msgstr "Aktuell unterstützen folgende Browser den Ordner-Upload:"
 msgid "File and Folder Upload"
 msgstr "Datei- und Ordner hochladen"
 
-msgid "Please correct the error below."
-msgid_plural "Please correct the errors below."
-msgstr[0] "Bitte korrigiere den Fehler unten."
-msgstr[1] "Bitte korrigiere die Fehler unten."
-
-msgid "2-factor access only"
-msgstr "Zugriff nur mit 2-Faktor"
-
-msgid "OTP Device:"
-msgstr "2-Faktor Authentifikator-Gerät:"
-
-msgid "Enter the generated number code from your authenticator app"
-msgstr "Gib den generierten Nummerncode deiner Authentikator-App ein"
-
-msgid "Forgotten your password or username?"
-msgstr "Benutzername oder Passwort vergessen?"
-
-msgid "Validate"
-msgstr "Authentifizieren"
-
-msgid "Log out"
-msgstr "Ausloggen"
-
-msgid "You are logged in as"
-msgstr "Du bist eingeloggt als"
-
-msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
-msgstr "Es scheint als ob kein Authentifikator-Gerät mit deinem Konto verbunden ist. Bitte bitte einen anderen Admin darum, dir ein Gerät einzurichten und dir den QR-code zu schicken!"
-
 msgid "Services"
 msgstr "Dienste"
 
@@ -2664,6 +2614,13 @@ msgstr "Die Administration von Gruppen beginnt mit der Mitgliederverwaltung. Hie
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_15_organization"
 msgstr "Die Administration von Gruppen beginnt mit der Mitgliederverwaltung. Hier kannst Du entscheiden, wer Deiner Gruppe beitreten darf und wer Administrator sein soll. Du kannst Mitglieder aus dem Portal einladen oder Menschen über die Eingabe ihrer E-Mail-Adressen einladen sich auf dem Portal und in Deiner Gruppe zu registrieren"
+
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_11_document"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_16_twofactorauth"
+msgstr "Hier kannst Du Dein Dokument bearbeiten, indem Du Dinge in das Pad einträgst. Mithilfe des Timesliders (Uhrsymbol) kannst Du Dir vergangene Versionen anschauen und mit den Pfeilsymbolen das Pad bequem in ein Pdf umwandeln. Einen Link zum Pad kannst Du freigeben, indem Du </> klickst"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
@@ -3105,8 +3062,14 @@ msgstr "Du kannst von hier aus direkt Tagungsveranstaltungen für Räume erstell
 msgid "There are no rooms yet."
 msgstr "Es sind noch keine Räume vorhanden."
 
+msgid "Turn on microphone on entering"
+msgstr "Mikrofon beim Betreten aktivieren"
+
 msgid "Default"
 msgstr "Standard"
+
+msgid "Turn on camera on entering"
+msgstr "Kamera beim Betreten aktivieren"
 
 msgid "Temporary Users"
 msgstr "Temporäre Benutzerkonten"
@@ -6111,6 +6074,11 @@ msgstr "Facebook-Konto trennen"
 msgid "Disconnect Facebook"
 msgstr "Facebook trennen"
 
+#, fuzzy
+#| msgid "Settings"
+msgid "2FA Settings"
+msgstr "Einstellungen"
+
 #, python-format
 msgid "%(provider)s-Account"
 msgstr "%(provider)s-Konto"
@@ -6243,6 +6211,159 @@ msgstr "Du kannst diese Einstellung später in deinen Benachrichtigunseinstellun
 
 msgid "Your privacy: You are in control!"
 msgstr "Deine Privatsphäre: Du hast die Kontrolle!"
+
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] "Bitte korrigiere den Fehler unten."
+msgstr[1] "Bitte korrigiere die Fehler unten."
+
+msgid "2-factor access only"
+msgstr "Zugriff nur mit 2-Faktor"
+
+msgid "OTP Device:"
+msgstr "2-Faktor Authentifikator-Gerät:"
+
+msgid "Enter the generated number code from your authenticator app"
+msgstr "Gib den generierten Nummerncode deiner Authentikator-App ein"
+
+msgid "Forgotten your password or username?"
+msgstr "Benutzername oder Passwort vergessen?"
+
+msgid "Validate"
+msgstr "Authentifizieren"
+
+msgid "Log out"
+msgstr "Ausloggen"
+
+msgid "You are logged in as"
+msgstr "Du bist eingeloggt als"
+
+msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
+msgstr "Es scheint als ob kein Authentifikator-Gerät mit deinem Konto verbunden ist. Bitte bitte einen anderen Admin darum, dir ein Gerät einzurichten und dir den QR-code zu schicken!"
+
+#, fuzzy
+#| msgid "Back to"
+msgid "Backup Tokens"
+msgstr "Zurück zu"
+
+msgid "Backup tokens can be used when your primary and backup phone numbers aren't available. The backup tokens below can be used for login verification. <br> If you've used up all your backup tokens, you can generate a new set of backup tokens. Only the backup tokens shown below will be valid."
+msgstr ""
+
+msgid "Print these tokens and keep them somewhere safe."
+msgstr ""
+
+#, fuzzy
+#| msgid "You don't have a %(portal_name)s account yet?"
+msgid "You don't have any backup codes yet."
+msgstr "Du hast noch kein %(portal_name)s-Konto?"
+
+#, fuzzy
+#| msgid "Enter a token:"
+msgid "Generate Tokens"
+msgstr "Gib ein Einladungs-Token ein:"
+
+msgid "Back to 2FA Settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Disable editor"
+msgid "Disable 2FA"
+msgstr "Editor deaktivieren"
+
+msgid "You are about to disable two-factor authentication. This weakens your account security, are you sure?"
+msgstr ""
+
+msgid "Yes, I am sure."
+msgstr ""
+
+#, fuzzy
+#| msgid "Disable editor"
+msgid "Disable"
+msgstr "Editor deaktivieren"
+
+msgid "Two-Factor Login (Backup-Token)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Last Login"
+msgid "Two-Factor Login"
+msgstr "Letzer Login"
+
+msgid "Use this form for entering backup tokens for logging in. These tokens have been generated for you to print and keep safe. Please enter one of these backup tokens to login to your account."
+msgstr ""
+
+msgid "Please enter the token generated by your token generator."
+msgstr ""
+
+msgid "Backup-Token"
+msgstr ""
+
+msgid "Numeric Token (e.g. 123456)"
+msgstr ""
+
+msgid "If you do not have access to your OTP generator app, you may enter one of your generated backup tokens"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a token:"
+msgid "Enter backup token"
+msgstr "Gib ein Einladungs-Token ein:"
+
+#, fuzzy
+#| msgid "User token"
+msgid "Use Backup Token"
+msgstr "Benutzer-Token"
+
+msgid "If you don't have any device with you, you can access your account using backup tokens."
+msgstr ""
+
+#, python-format
+msgid "You have only one backup token remaining."
+msgid_plural "<br> You have %(counter)s backup tokens remaining."
+msgstr[0] ""
+msgstr[1] ""
+
+#, fuzzy
+#| msgid "Show more"
+msgid "Show Tokens"
+msgstr "Weitere anzeigen"
+
+msgid "However we strongly discourage you to do so, you can also disable two-factor authentication for your account."
+msgstr ""
+
+msgid "Two-factor authentication is not enabled for your account. <br> Enable two-factor authentication for enhanced account security."
+msgstr ""
+
+msgid "Enable 2FA"
+msgstr ""
+
+msgid "2FA Setup"
+msgstr ""
+
+msgid "You are about to take your account security to the next level. <br> To use the 2FA-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. We do not have another 2FA option at the moment and will inform you if there are changes in this regard."
+msgstr ""
+
+msgid "Scan the QR code below."
+msgstr ""
+
+msgid "Now, enter the token generated by the app:"
+msgstr ""
+
+msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
+msgstr ""
+
+msgid "2FA Setup Complete"
+msgstr ""
+
+#, fuzzy
+#| msgid "The invitation was successfully deleted."
+msgid "Congratulations, you've successfully enabled 2FA."
+msgstr "Die Einladung wurde erfolgreich gelöscht."
+
+#, fuzzy
+#| msgid "Your profile"
+msgid "Back to your profile"
+msgstr "Dein Profil"
 
 msgid "by"
 msgstr "von"
@@ -6720,6 +6841,90 @@ msgstr "Schön, dass du da bist! Auf %(portal_name)s kannst du in Gruppen und Pr
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Jetzt anmelden und mitgestalten"
 
+msgid "Custom Wagtail Page"
+msgstr "Custom Wagtail Seite"
+
+msgid "Tools"
+msgstr "Werkzeuge"
+
+msgid "Import Projects and Groups or Users"
+msgstr "Projekte und Gruppen oder Benutzer importieren"
+
+msgid "Import from a CSV File"
+msgstr "Aus CSV-Datei importieren"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr "Laden Sie entweder eine CSV-Datei, um Ihre Projekte und Gruppen zu importieren, oder eine CSV-Datei, um die Benutzer zu importieren hoch. Bitte merken Sie, dass es gleichzeitig nur eine Datei importiert werden kann. Die Datei muss über ein entsprechendes Format verfügen. Wenn das Dateiformat geändert wird (mehr/weniger/unterschiedliche Spalten), bitte melden Sie sich bei den Entwicklern!"
+
+msgid "Project/group CSV File"
+msgstr "Projekte/Gruppen CSV-Datei"
+
+msgid "User CSV File"
+msgstr "Benutzer CSV-Datei"
+
+msgid "Options"
+msgstr "Optionen"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr "Die Standardeinstellungen der CSV-Datei. Bitte nur in dem Fall ändern, wenn Sie sich absolut sicher sind, was Sie tun!"
+
+msgid "Encoding of the CSV file"
+msgstr "Enkodierung der CSV-Datei"
+
+msgid "Delimiter of the CSV file"
+msgstr "Trennzeichen der CSV-Datei"
+
+msgid "Upload and Import..."
+msgstr "Hochladen und Import…"
+
+msgid "Import Projects and Groups"
+msgstr "Projekte und Gruppen importieren"
+
+msgid "Clear results and start a new import!"
+msgstr "Ergebnisse löschen und den Import neu starten!"
+
+msgid "CSV Import Results"
+msgstr "Ergebnisse des Imports"
+
+msgid "The import has finished. Here are the results:"
+msgstr "Der Importvorgang ist abgeschloßen. Hier sind die Ergebnisse:"
+
+msgid "Read errors:"
+msgstr "Lesefehler:"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr "Diese Zeilen in Ihrer CSV-Datei hatten Fehler oder eine inkorrekte Anzahl von Spalten und wurden daher IGNORIERT:"
+
+msgid "Saved items:"
+msgstr "Gespeicherte Daten:"
+
+msgid "Important messages:"
+msgstr "Wichtige Nachrichten:"
+
+msgid "Errors:"
+msgstr "Fehler:"
+
+msgid "Info messages:"
+msgstr "Info-Meldungen:"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr "Die CVS-Datei wurde erfolgreich bearbeitet und der Import läuft momentan auf dem Server!"
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+"Diese Seite wird die Ergebnisse anzeigen sobald der Import abgeschloßen ist.\n"
+"\t\t\n"
+"\t\t\t\tDie Bearbeitung kann je nach Anzahl der importierten Daten von wenigen Sekunden bis zu wenigen Minuten dauern. Sie können diese Seite schließen. Sobald der Import abgeschloßen ist, erhalten Sie von uns eine Email and die folgende Email-Adresse: <b>»%(email)s»</b> !\n"
+"\t\t\t"
+
+msgid "Progress:"
+msgstr "Verlauf:"
+
 msgid "Show more Projects"
 msgstr "Weitere Projekte anzeigen"
 
@@ -7162,6 +7367,9 @@ msgstr "Login-Token wurde gesendet."
 
 msgid "User successfully created!"
 msgstr "Benutzerkonto wurde erfolgreich erstellt!"
+
+msgid "You do not have any backup tokens set up. Please log in using your OTP tokens."
+msgstr ""
 
 #, python-format
 msgid "The language \"%s\" is not supported"
@@ -7668,6 +7876,24 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
+#~ msgid "Whether the microphone is active when entering the BBB room"
+#~ msgstr "Ob das Mikrofon aktiviert ist, wenn man den BBB-Raum betritt"
+
+#~ msgid "Whether the camera is active when entering the BBB room"
+#~ msgstr "Ob die Kamera aktiviert ist, wenn man den BBB-Raum betritt"
+
+#~ msgid "Allow temporary users accounts for this conference."
+#~ msgstr "Allow temporary users accounts for this conference."
+
+#~ msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
+#~ msgstr "Wenn aktiviert, können Tagungsveranstalter temporäre Benutzerkonten erstellen, die aktiviert und deaktiviert werden können."
+
+#~ msgid "Conference accounts active"
+#~ msgstr "Tagungs-Benutzerkonten aktiv"
+
+#~ msgid "If enabled, temporary user accounts for this conference are active and can log in."
+#~ msgstr "Wenn aktiv, sind temporäre Benutzerkonten für diese Tagung aktiv und können einloggen."
+
 #, fuzzy
 #~| msgid "options for the room, that are represented in the bigbluebutton API"
 #~ msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
@@ -7695,89 +7921,6 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "Leave video conference"
 #~ msgstr "Videokonferenz verlassen"
-
-#~ msgid "Custom Wagtail Page"
-#~ msgstr "Custom Wagtail Seite"
-
-#~ msgid "Tools"
-#~ msgstr "Werkzeuge"
-
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Projekte und Gruppen oder Benutzer importieren"
-
-#~ msgid "Import from a CSV File"
-#~ msgstr "Aus CSV-Datei importieren"
-
-#~ msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-#~ msgstr "Laden Sie entweder eine CSV-Datei, um Ihre Projekte und Gruppen zu importieren, oder eine CSV-Datei, um die Benutzer zu importieren hoch. Bitte merken Sie, dass es gleichzeitig nur eine Datei importiert werden kann. Die Datei muss über ein entsprechendes Format verfügen. Wenn das Dateiformat geändert wird (mehr/weniger/unterschiedliche Spalten), bitte melden Sie sich bei den Entwicklern!"
-
-#~ msgid "Project/group CSV File"
-#~ msgstr "Projekte/Gruppen CSV-Datei"
-
-#~ msgid "User CSV File"
-#~ msgstr "Benutzer CSV-Datei"
-
-#~ msgid "Options"
-#~ msgstr "Optionen"
-
-#~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-#~ msgstr "Die Standardeinstellungen der CSV-Datei. Bitte nur in dem Fall ändern, wenn Sie sich absolut sicher sind, was Sie tun!"
-
-#~ msgid "Encoding of the CSV file"
-#~ msgstr "Enkodierung der CSV-Datei"
-
-#~ msgid "Delimiter of the CSV file"
-#~ msgstr "Trennzeichen der CSV-Datei"
-
-#~ msgid "Upload and Import..."
-#~ msgstr "Hochladen und Import…"
-
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Projekte und Gruppen importieren"
-
-#~ msgid "Clear results and start a new import!"
-#~ msgstr "Ergebnisse löschen und den Import neu starten!"
-
-#~ msgid "CSV Import Results"
-#~ msgstr "Ergebnisse des Imports"
-
-#~ msgid "The import has finished. Here are the results:"
-#~ msgstr "Der Importvorgang ist abgeschloßen. Hier sind die Ergebnisse:"
-
-#~ msgid "Read errors:"
-#~ msgstr "Lesefehler:"
-
-#~ msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-#~ msgstr "Diese Zeilen in Ihrer CSV-Datei hatten Fehler oder eine inkorrekte Anzahl von Spalten und wurden daher IGNORIERT:"
-
-#~ msgid "Saved items:"
-#~ msgstr "Gespeicherte Daten:"
-
-#~ msgid "Important messages:"
-#~ msgstr "Wichtige Nachrichten:"
-
-#~ msgid "Errors:"
-#~ msgstr "Fehler:"
-
-#~ msgid "Info messages:"
-#~ msgstr "Info-Meldungen:"
-
-#~ msgid "The CSV file was read successfully and the import is currently running on the server!"
-#~ msgstr "Die CVS-Datei wurde erfolgreich bearbeitet und der Import läuft momentan auf dem Server!"
-
-#~ msgid ""
-#~ "This page will show the results when the import is finished.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-#~ "\t\t\t"
-#~ msgstr ""
-#~ "Diese Seite wird die Ergebnisse anzeigen sobald der Import abgeschloßen ist.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tDie Bearbeitung kann je nach Anzahl der importierten Daten von wenigen Sekunden bis zu wenigen Minuten dauern. Sie können diese Seite schließen. Sobald der Import abgeschloßen ist, erhalten Sie von uns eine Email and die folgende Email-Adresse: <b>»%(email)s»</b> !\n"
-#~ "\t\t\t"
-
-#~ msgid "Progress:"
-#~ msgstr "Verlauf:"
 
 #~ msgid "Conference successfully started and user accounts activated"
 #~ msgstr "Tagung erfolgreich gestartet und Nutzerkonten aktiviert"

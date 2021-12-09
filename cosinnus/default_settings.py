@@ -95,7 +95,8 @@ MIDDLEWARE = [
     
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django_otp.middleware.OTPMiddleware',
-    'cosinnus.core.middleware.cosinnus_middleware.OTPMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.AdminOTPMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.UserOTPMiddleware',
     
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -235,6 +236,8 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'widget_tweaks',
         'django_otp',
         'django_otp.plugins.otp_totp',
+        'django_otp.plugins.otp_static',
+        'two_factor',
         
         # External Apps
         'awesome_avatar',

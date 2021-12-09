@@ -1,0 +1,31 @@
+{% extends "cosinnus/user_2fa/user_2fa_settings.html" %}
+{% load i18n cosinnus_tags widget_tweaks %}
+
+{% block breadcrumb %}
+        <li class="active"><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Your Profile" %}</a></li>
+        <li class="active"><a href="{% url 'cosinnus:two-factor-auth-settings' %}">{% trans "2FA Settings" %}</a></li>
+        <li class="active"><a href="{% url 'cosinnus:two-factor-auth-setup' %}">{% trans "2FA Setup" %}</a></li>
+        <li class="active">{% trans "2FA Setup Complete" %}</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="content-box">
+        <h4>{% block title %}{% trans "2FA Setup Complete" %}{% endblock %}</h4>
+        <p class="textfield transparent">{% blocktrans trimmed %}Congratulations, you've successfully enabled 2FA.{% endblocktrans %}</p>
+    </div>
+
+        <button type="submit" href="{% url 'cosinnus:profile-detail' %}" class="btn btn-emphasized btn-autosize">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left" tabindex="-1">
+                        <i class="fa fa-arrow-left"></i>
+                    </span>
+                    <div class="media-body">
+                        {% trans "Back to your profile" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+
+{% endblock %}

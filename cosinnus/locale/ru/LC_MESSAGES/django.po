@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 17:13+0100\n"
+"POT-Creation-Date: 2021-12-06 15:36+0100\n"
 "PO-Revision-Date: 2021-10-01 19:04+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -912,16 +912,7 @@ msgstr "Сервер BBB"
 msgid "BBB Server for Premium Conferences"
 msgstr "Сервер BBB для премиум-конференций"
 
-msgid "Turn on microphone on entering"
-msgstr ""
-
-msgid "Whether the microphone is active when entering the BBB room"
-msgstr ""
-
-msgid "Turn on camera on entering"
-msgstr ""
-
-msgid "Whether the camera is active when entering the BBB room"
+msgid "BBB API Parameters"
 msgstr ""
 
 msgid "Cosinnus Conference Setting"
@@ -1436,18 +1427,6 @@ msgstr "ID папки группы Nextcloud"
 
 msgid "Is conference"
 msgstr "Конференция"
-
-msgid "Allow temporary users accounts for this conference."
-msgstr "Разрешить временным пользовательским аккаунтам доступ к этой конференции."
-
-msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
-msgstr "Если разрешено, администраторы конференции могут создавать временные пользовательские аккаунты, который можно активировать и деактивировать."
-
-msgid "Conference accounts active"
-msgstr "Управление конференцией"
-
-msgid "If enabled, temporary user accounts for this conference are active and can log in."
-msgstr "Если разрешено, временные пользовательские аккаунты для этой конференции активны, и пользователи могут войти в систему."
 
 msgid "Conference is currrently premium"
 msgstr "Проходит конференция"
@@ -2482,35 +2461,6 @@ msgstr "В настоящий момент, браузеры, поддержив
 msgid "File and Folder Upload"
 msgstr "Загрузить файл и папку"
 
-msgid "Please correct the error below."
-msgid_plural "Please correct the errors below."
-msgstr[0] "Пожалуйста, исправь ошибку ниже."
-msgstr[1] "Пожалуйста, исправь ошибки ниже."
-
-msgid "2-factor access only"
-msgstr "Только 2-факторный вход"
-
-msgid "OTP Device:"
-msgstr "OTP Устройство:"
-
-msgid "Enter the generated number code from your authenticator app"
-msgstr "Введите сгенерированный числовой код из вашего приложения-аутентификатора"
-
-msgid "Forgotten your password or username?"
-msgstr "Забыл(а) пароль или имя пользователя?"
-
-msgid "Validate"
-msgstr "Подтвердить"
-
-msgid "Log out"
-msgstr "Выйти"
-
-msgid "You are logged in as"
-msgstr "Ты вошел(а) в систему как"
-
-msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
-msgstr "Похоже, что к твоей учетной записи не подключено ни одно устройство аутентификации. Попроси администратора настроить его и отправить тебе QR-код!"
-
 msgid "Services"
 msgstr "Услуги"
 
@@ -2688,6 +2638,13 @@ msgstr "helptext_13_администрация группы"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_15_organization"
 msgstr "helptext_13_администрация группы"
+
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_11_document"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_16_twofactorauth"
+msgstr "helptext_11_документ"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
@@ -3118,7 +3075,13 @@ msgstr "Здесь Вы можете создавать события конф�
 msgid "There are no rooms yet."
 msgstr "Здесь пока нет комнат."
 
+msgid "Turn on microphone on entering"
+msgstr ""
+
 msgid "Default"
+msgstr ""
+
+msgid "Turn on camera on entering"
 msgstr ""
 
 #, fuzzy
@@ -6182,6 +6145,11 @@ msgstr "Отключить Фейсбук-аккаунт"
 msgid "Disconnect Facebook"
 msgstr "Отключить Фейсбук"
 
+#, fuzzy
+#| msgid "Settings"
+msgid "2FA Settings"
+msgstr "Настройки"
+
 #, python-format
 msgid "%(provider)s-Account"
 msgstr "%(provider)s-аккаунт"
@@ -6314,6 +6282,159 @@ msgstr "Вы можете изменить или настроить эти на
 
 msgid "Your privacy: You are in control!"
 msgstr "Ваша приватность: Вы управляете!"
+
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] "Пожалуйста, исправь ошибку ниже."
+msgstr[1] "Пожалуйста, исправь ошибки ниже."
+
+msgid "2-factor access only"
+msgstr "Только 2-факторный вход"
+
+msgid "OTP Device:"
+msgstr "OTP Устройство:"
+
+msgid "Enter the generated number code from your authenticator app"
+msgstr "Введите сгенерированный числовой код из вашего приложения-аутентификатора"
+
+msgid "Forgotten your password or username?"
+msgstr "Забыл(а) пароль или имя пользователя?"
+
+msgid "Validate"
+msgstr "Подтвердить"
+
+msgid "Log out"
+msgstr "Выйти"
+
+msgid "You are logged in as"
+msgstr "Ты вошел(а) в систему как"
+
+msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
+msgstr "Похоже, что к твоей учетной записи не подключено ни одно устройство аутентификации. Попроси администратора настроить его и отправить тебе QR-код!"
+
+#, fuzzy
+#| msgid "Back to"
+msgid "Backup Tokens"
+msgstr "Вернуться к"
+
+msgid "Backup tokens can be used when your primary and backup phone numbers aren't available. The backup tokens below can be used for login verification. <br> If you've used up all your backup tokens, you can generate a new set of backup tokens. Only the backup tokens shown below will be valid."
+msgstr ""
+
+msgid "Print these tokens and keep them somewhere safe."
+msgstr ""
+
+#, fuzzy
+#| msgid "You don't have a %(portal_name)s account yet?"
+msgid "You don't have any backup codes yet."
+msgstr "У Вас нет еще %(portal_name)s аккаунта?"
+
+#, fuzzy
+#| msgid "Enter a token:"
+msgid "Generate Tokens"
+msgstr "Введите описание:"
+
+msgid "Back to 2FA Settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Disable editor"
+msgid "Disable 2FA"
+msgstr "Отключить редактор"
+
+msgid "You are about to disable two-factor authentication. This weakens your account security, are you sure?"
+msgstr ""
+
+msgid "Yes, I am sure."
+msgstr ""
+
+#, fuzzy
+#| msgid "Disable editor"
+msgid "Disable"
+msgstr "Отключить редактор"
+
+msgid "Two-Factor Login (Backup-Token)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Last Login"
+msgid "Two-Factor Login"
+msgstr "Логин"
+
+msgid "Use this form for entering backup tokens for logging in. These tokens have been generated for you to print and keep safe. Please enter one of these backup tokens to login to your account."
+msgstr ""
+
+msgid "Please enter the token generated by your token generator."
+msgstr ""
+
+msgid "Backup-Token"
+msgstr ""
+
+msgid "Numeric Token (e.g. 123456)"
+msgstr ""
+
+msgid "If you do not have access to your OTP generator app, you may enter one of your generated backup tokens"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a token:"
+msgid "Enter backup token"
+msgstr "Введите описание:"
+
+#, fuzzy
+#| msgid "User token"
+msgid "Use Backup Token"
+msgstr "Токен пользователя"
+
+msgid "If you don't have any device with you, you can access your account using backup tokens."
+msgstr ""
+
+#, python-format
+msgid "You have only one backup token remaining."
+msgid_plural "<br> You have %(counter)s backup tokens remaining."
+msgstr[0] ""
+msgstr[1] ""
+
+#, fuzzy
+#| msgid "Show more"
+msgid "Show Tokens"
+msgstr "Показать больше"
+
+msgid "However we strongly discourage you to do so, you can also disable two-factor authentication for your account."
+msgstr ""
+
+msgid "Two-factor authentication is not enabled for your account. <br> Enable two-factor authentication for enhanced account security."
+msgstr ""
+
+msgid "Enable 2FA"
+msgstr ""
+
+msgid "2FA Setup"
+msgstr ""
+
+msgid "You are about to take your account security to the next level. <br> To use the 2FA-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. We do not have another 2FA option at the moment and will inform you if there are changes in this regard."
+msgstr ""
+
+msgid "Scan the QR code below."
+msgstr ""
+
+msgid "Now, enter the token generated by the app:"
+msgstr ""
+
+msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
+msgstr ""
+
+msgid "2FA Setup Complete"
+msgstr ""
+
+#, fuzzy
+#| msgid "The invitation was successfully deleted."
+msgid "Congratulations, you've successfully enabled 2FA."
+msgstr "Приглашение было успешно удалено."
+
+#, fuzzy
+#| msgid "Your profile"
+msgid "Back to your profile"
+msgstr "Ваш профиль"
 
 msgid "by"
 msgstr "от"
@@ -6787,6 +6908,92 @@ msgstr "Рады видеть тебя! На %(portal_name)s ты можешь �
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Зарегистрироваться"
 
+msgid "Custom Wagtail Page"
+msgstr "Индивидуальная страница Wagtail"
+
+msgid "Tools"
+msgstr "Инструменты"
+
+msgid "Import Projects and Groups or Users"
+msgstr "Импортировать Проекты и Группы или Пользователей"
+
+# ???
+msgid "Import from a CSV File"
+msgstr "Импортировать из CSV файла"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr "Загрузите либо один CSV файл, чтобы импортировать Проекты и Группы, либо другой, чтобы импортировать Пользователей. Обратите внимание, что быть импортированным может только один файл за раз. Файл должен установленного формата. Если формат будет изменен (количество столбцов станет больше/меньше/изменится иначе), пожалуйста, обратитесь к разработчикам!"
+
+msgid "Project/group CSV File"
+msgstr "CSV файл для импорта Проекта/Группы"
+
+msgid "User CSV File"
+msgstr "CSV файл для импорта Пользователей"
+
+msgid "Options"
+msgstr "Дополнительные опции"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr "Дополнительные настройки CSV файла. Изменяйте их только в случае абсолютной уверенности в том, что Вы делаете!"
+
+msgid "Encoding of the CSV file"
+msgstr "Шифрование файла CSV"
+
+msgid "Delimiter of the CSV file"
+msgstr "Определение CSV файла"
+
+msgid "Upload and Import..."
+msgstr "Загрузка и импорт…"
+
+msgid "Import Projects and Groups"
+msgstr "Импорт Проектов и Групп"
+
+msgid "Clear results and start a new import!"
+msgstr "Отчистить результаты и начать новый импорт!"
+
+msgid "CSV Import Results"
+msgstr "Результаты импорта CSV файла"
+
+msgid "The import has finished. Here are the results:"
+msgstr "Импорт был завершен. Получены следующие результаты:"
+
+msgid "Read errors:"
+msgstr "Ошибки чтения:"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr "Следующие ряды в Вашем CSV файле имели ошибки или некорректное количество столбцов, а потому были игнорированы:"
+
+msgid "Saved items:"
+msgstr "Сохраненные элементы:"
+
+msgid "Important messages:"
+msgstr "Важные сообщения:"
+
+msgid "Errors:"
+msgstr "Ошибки:"
+
+msgid "Info messages:"
+msgstr "Информационные сообщения:"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr "Файл CSV был прочтен успешно. В данный момент импорт работает на сервере!"
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+"По окончании импорта результаты отобразятся на этой странице.\n"
+"\t\t\n"
+"\t\t\t\tВ зависимости от количества импортированных элементов, процесс импорта может занять от нескольких секунд до нескольких минут. Вы можете закрыть страницу. \n"
+"Уведомление об окончании импорта будет выслано на адрес Вашей электронной почты <b>»%(email)s»</b> !\n"
+"\t\t\t"
+
+msgid "Progress:"
+msgstr "Прогресс:"
+
 msgid "Show more Projects"
 msgstr "Показать больше проектов"
 
@@ -7230,6 +7437,9 @@ msgstr "Приглашение было отправлено."
 
 msgid "User successfully created!"
 msgstr "Пользователь %(username)s успешно приглашен!"
+
+msgid "You do not have any backup tokens set up. Please log in using your OTP tokens."
+msgstr ""
 
 #, python-format
 msgid "The language \"%s\" is not supported"
@@ -7744,6 +7954,18 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
 
+#~ msgid "Allow temporary users accounts for this conference."
+#~ msgstr "Разрешить временным пользовательским аккаунтам доступ к этой конференции."
+
+#~ msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
+#~ msgstr "Если разрешено, администраторы конференции могут создавать временные пользовательские аккаунты, который можно активировать и деактивировать."
+
+#~ msgid "Conference accounts active"
+#~ msgstr "Управление конференцией"
+
+#~ msgid "If enabled, temporary user accounts for this conference are active and can log in."
+#~ msgstr "Если разрешено, временные пользовательские аккаунты для этой конференции активны, и пользователи могут войти в систему."
+
 #, fuzzy
 #~| msgid "options for the room, that are represented in the bigbluebutton API"
 #~ msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
@@ -7773,91 +7995,6 @@ msgstr "Ваши изменения были сохранены."
 #~| msgid "View conference"
 #~ msgid "Leave video conference"
 #~ msgstr "Конференция"
-
-#~ msgid "Custom Wagtail Page"
-#~ msgstr "Индивидуальная страница Wagtail"
-
-#~ msgid "Tools"
-#~ msgstr "Инструменты"
-
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Импортировать Проекты и Группы или Пользователей"
-
-# ???
-#~ msgid "Import from a CSV File"
-#~ msgstr "Импортировать из CSV файла"
-
-#~ msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-#~ msgstr "Загрузите либо один CSV файл, чтобы импортировать Проекты и Группы, либо другой, чтобы импортировать Пользователей. Обратите внимание, что быть импортированным может только один файл за раз. Файл должен установленного формата. Если формат будет изменен (количество столбцов станет больше/меньше/изменится иначе), пожалуйста, обратитесь к разработчикам!"
-
-#~ msgid "Project/group CSV File"
-#~ msgstr "CSV файл для импорта Проекта/Группы"
-
-#~ msgid "User CSV File"
-#~ msgstr "CSV файл для импорта Пользователей"
-
-#~ msgid "Options"
-#~ msgstr "Дополнительные опции"
-
-#~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-#~ msgstr "Дополнительные настройки CSV файла. Изменяйте их только в случае абсолютной уверенности в том, что Вы делаете!"
-
-#~ msgid "Encoding of the CSV file"
-#~ msgstr "Шифрование файла CSV"
-
-#~ msgid "Delimiter of the CSV file"
-#~ msgstr "Определение CSV файла"
-
-#~ msgid "Upload and Import..."
-#~ msgstr "Загрузка и импорт…"
-
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Импорт Проектов и Групп"
-
-#~ msgid "Clear results and start a new import!"
-#~ msgstr "Отчистить результаты и начать новый импорт!"
-
-#~ msgid "CSV Import Results"
-#~ msgstr "Результаты импорта CSV файла"
-
-#~ msgid "The import has finished. Here are the results:"
-#~ msgstr "Импорт был завершен. Получены следующие результаты:"
-
-#~ msgid "Read errors:"
-#~ msgstr "Ошибки чтения:"
-
-#~ msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-#~ msgstr "Следующие ряды в Вашем CSV файле имели ошибки или некорректное количество столбцов, а потому были игнорированы:"
-
-#~ msgid "Saved items:"
-#~ msgstr "Сохраненные элементы:"
-
-#~ msgid "Important messages:"
-#~ msgstr "Важные сообщения:"
-
-#~ msgid "Errors:"
-#~ msgstr "Ошибки:"
-
-#~ msgid "Info messages:"
-#~ msgstr "Информационные сообщения:"
-
-#~ msgid "The CSV file was read successfully and the import is currently running on the server!"
-#~ msgstr "Файл CSV был прочтен успешно. В данный момент импорт работает на сервере!"
-
-#~ msgid ""
-#~ "This page will show the results when the import is finished.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-#~ "\t\t\t"
-#~ msgstr ""
-#~ "По окончании импорта результаты отобразятся на этой странице.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tВ зависимости от количества импортированных элементов, процесс импорта может занять от нескольких секунд до нескольких минут. Вы можете закрыть страницу. \n"
-#~ "Уведомление об окончании импорта будет выслано на адрес Вашей электронной почты <b>»%(email)s»</b> !\n"
-#~ "\t\t\t"
-
-#~ msgid "Progress:"
-#~ msgstr "Прогресс:"
 
 #~ msgid "Conference successfully started and user accounts activated"
 #~ msgstr "Конференция успешно началась и пользовательсике аккаунты активированы"
