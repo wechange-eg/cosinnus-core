@@ -56,15 +56,9 @@
                 <div class="textfield">
 	                {% if group.from_date %}
 	                    <div class="large-space">
-	                       <b>
-	                           {{ group.from_date|date:"SHORT_DATE_FORMAT" }}, {{ group.from_date|date:"H:i" }} 
-	                           {% trans "o'clock" context "time" %}
-	                           {% if group.to_date %}
-	                               {% trans "until" context "time" %}
-	                               {{ group.to_date|date:"SHORT_DATE_FORMAT" }}, {{ group.to_date|date:"H:i" }}
-	                               {% trans "o'clock" context "time" %}
-	                           {% endif %}
-	                       </b>
+                            <b>
+                            {% include 'cosinnus_event/common/humanized_event_time.html' with event=group %}
+                            </b>
 	                    </div>
 	                {% endif %}
                     
