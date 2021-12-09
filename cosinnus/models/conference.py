@@ -150,7 +150,7 @@ class CosinnusConferenceSettings(models.Model):
         super().__init__(*args, **kwargs)
     
     @classmethod
-    def get_for_object(cls, source_object, no_traversal=False, agglomerated_setting_obj=None, recursed=False):
+    def get_for_object(cls, source_object, no_traversal=False, recursed=False):
         """ Given any object in the BBB settings hierarchy chain,
             this returns an agglomeration of all the settings objects attached to `source_object`
             and all inherited objects higher up in the object chain. 
@@ -173,9 +173,6 @@ class CosinnusConferenceSettings(models.Model):
             @param source_object: Any object. If it matches a model valid for the chain, we check the chain.
             @param no_traversal: if True, will only attempt to find a setting object on the `source_object`
                                     and not recursively check its parents
-            @param agglomerated_setting_obj: used to recursively collect params and options on a settings
-                                    object as we traverse higher up in the chain, to collect inherited values 
-                                    onto `SETTING_INHERIT` values
             @param recursed: True if we're in a recursed call. will not save caches here
             .
         """
@@ -201,25 +198,20 @@ class CosinnusConferenceSettings(models.Model):
                     logger.warn(f'DEBUG warning: {type(obj)} has no conference_settings_assignments. {e}')
             if conference_settings:
                 setting_obj = conference_settings
-                
-            if setting_obj and setting_obj != 'UNSET' and agglomerated_setting_obj is None and not no_traversal:
-                # found the first setting in the chain but we want to traverse higher, to collect
-                # inherited values
+            
+            if setting_obj and setting_obj != 'UNSET' and not no_traversal:
+                # we have a setting object for our current object, and it wasn't cached yet
+                # check if we have higher up parent *source* object
+                # if not, we're fine to let the recursion chain end
                 parent_object = get_parent_object_in_conference_setting_chain(obj)
                 if parent_object:
-                    new_agglom_obj = setting_obj.get_readonly_copy()
-                    setting_obj = cls.get_for_object(parent_object, agglomerated_setting_obj=new_agglom_obj, recursed=True)
-                else:
-                    setting_obj = setting_obj # remove!
-            elif setting_obj and setting_obj != 'UNSET' and agglomerated_setting_obj and not no_traversal:
-                # found another setting in the chain while we are already collecting 
-                # merge the lower values of the current object into the agglomerated object and continue the chain
-                agglomerated_setting_obj = agglomerated_setting_obj.merge_over_object_to_inherit(setting_obj)
-                parent_object = get_parent_object_in_conference_setting_chain(obj)
-                if parent_object:
-                    setting_obj = cls.get_for_object(parent_object, agglomerated_setting_obj=agglomerated_setting_obj, recursed=True)
-                else:
-                    setting_obj = agglomerated_setting_obj
+                    # if there is a higher up source object, check recursively if that object has a settings object
+                    parent_settings_object = cls.get_for_object(parent_object, recursed=True)
+                    if parent_settings_object:
+                        # if we have a higher parent settings object, merge it into ours to inherit the values
+                        # we make our settings object a readonly copy now, as it should never be saved in the merged state
+                        setting_obj = setting_obj.get_readonly_copy()
+                        setting_obj.merge_in_inherited_settings_object(parent_settings_object)
             elif setting_obj == 'UNSET' and (no_traversal or type(obj) is CosinnusPortal):
                 # CosinnusPortal --> (End of chain because the portal had no settings, and settings seem to be configured anywhere)
                 setting_obj = None
@@ -227,8 +219,7 @@ class CosinnusConferenceSettings(models.Model):
                 # no settings found; check next object in chain:
                 parent_object = get_parent_object_in_conference_setting_chain(obj)
                 if parent_object:
-                    setting_obj = cls.get_for_object(parent_object, agglomerated_setting_obj=agglomerated_setting_obj, recursed=True)
-            
+                    setting_obj = cls.get_for_object(parent_object, recursed=True)
             # final, outside iteration:
             if not recursed:
                 # set bbb room nature
@@ -238,13 +229,13 @@ class CosinnusConferenceSettings(models.Model):
         
         return setting_obj
     
-    def merge_over_object_to_inherit(self, inherit_target):
+    def merge_in_inherited_settings_object(self, inherit_target):
         """ Merges this object "on top" of the `inherit_target` CosinnusConferenceSettings object
             to inherit all values from the target, that aren't set in this object 
             @return: self, with missing values inherited from `inherit_target` """
         # safety type check
         if not (type(self) is CosinnusConferenceSettings and type(inherit_target) is CosinnusConferenceSettings):
-            raise ImproperlyConfigured(f'Programming Error: `merge_over_object_to_inherit()` got passed mismatching types {type(self)} and {type(inherit_target)}')
+            raise ImproperlyConfigured(f'Programming Error: `merge_in_inherited_settings_object()` got passed mismatching types {type(self)} and {type(inherit_target)}')
         for field_name in self.INHERITABLE_FIELDS:
             if getattr(self, field_name, 'UNSET') == self.SETTING_INHERIT:
                 setattr(self, field_name, getattr(inherit_target, field_name))
@@ -358,9 +349,6 @@ class CosinnusConferenceSettings(models.Model):
             for _choice, api_call_param_dict in call_dict.items():
                 for api_name, param_dict in api_call_param_dict.items():
                     call_keys[api_name].update(param_dict.keys())
-        # also add all portal default params to the non-whitelist
-        for api_name, param_dict in settings.BBB_PARAM_PORTAL_DEFAULTS.items():
-            call_keys[api_name].update(param_dict.keys())
         
         # find any keys from our old about-to-be-overwritten params, that aren't in the known list for carrying over
         for api_name_key, api_name_val in self.bbb_params.items():
