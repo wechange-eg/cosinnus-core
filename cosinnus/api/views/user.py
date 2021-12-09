@@ -14,15 +14,18 @@ from cosinnus.conf import settings
 from ..serializers.user import UserCreateUpdateSerializer, UserSerializer
 from ...models import get_user_profile_model, CosinnusGroup, CosinnusGroupMembership, MEMBERSHIP_MEMBER
 from cosinnus.models.membership import MEMBER_STATUS
+from cosinnus.api.views.mixins import CosinnusFilterQuerySetMixin
 
 User = get_user_model()
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(CosinnusFilterQuerySetMixin, viewsets.ModelViewSet):
     http_method_names = getattr(settings, 'COSINNUS_API_SETTINGS', {}).get('user', [])
     permission_classes = (permissions.IsAdminUser,)
     queryset = User.objects.all()
     serializer_class = UserCreateUpdateSerializer
+    
+    FILTER_DEFAULT_ORDER = ['-date_joined', ]
 
     def perform_create(self, serializer):
         self.create_or_update(serializer)
