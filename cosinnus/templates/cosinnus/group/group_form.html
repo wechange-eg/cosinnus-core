@@ -435,14 +435,14 @@
 						{# Dropdown field #}
 						{% block video_conference_type_dropdown %}
 						    {% if not group_model == "CosinnusConference" %}
-								{% if not SETTINGS.COSINNUS_BBB_SERVER_CHOICES and not COSINNUS_CURRENT_PORTAL.video_conference_server %}
+								{% if not SETTINGS.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and not COSINNUS_CURRENT_PORTAL.video_conference_server %}
 									<input type="hidden" name="video_conference_type" id="id_video_conference_type" value="0">
 								{% else %}
 									{% trans "Include a video conference" as video_conference_type_label %}
 									{% trans "Choose the type of the video conference you would like to include in the dashboard" as video_conference_type_legend %}
 									{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.video_conference_type label=video_conference_type_label legend=video_conference_type_legend %}
 									
-									{% if form.forms.conference_settings_assignments and SETTINGS.BBB_PRESET_USER_FORM_FIELDS %}
+									{% if form.forms.conference_settings_assignments and SETTINGS.BBB_PRESET_USER_FORM_FIELDS and SETTINGS.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS %}
 					                    <script type="text/javascript">
 					                        {# show or hide a visibility warning #}
 					                        $(function(){

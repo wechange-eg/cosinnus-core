@@ -1067,6 +1067,8 @@ class CosinnusConf(AppConf):
     # if False, it will be triggered on requesting of the queue-URL (should happen less often)
     TRIGGER_BBB_ROOM_CREATION_IN_QUEUE = True
     
+    # The BBB Server choice list for select fields,
+    # indices correspond to an auth pair in `BBB_SERVER_AUTH_AND_SECRET_PAIRS`
     BBB_SERVER_CHOICES = (
         (0, '(None)'),
     )
@@ -1079,6 +1081,8 @@ class CosinnusConf(AppConf):
     }
     
     BBB_RESOLVE_CLUSTER_REDIRECTS_IF_URL_MATCHES = lambda url: url.startswith('https://bbbatscale')
+    
+    BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS = False
     
     STARRED_STAR_LABEL = _('Bookmark')
     STARRED_STARRING_LABEL = _('Bookmarked')

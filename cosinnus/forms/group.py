@@ -191,19 +191,21 @@ class CosinnusBaseGroupForm(TranslatedFieldsFormMixin, FacebookIntegrationGroupF
                 field.widget = Select2MultipleWidget(choices=field.choices)
         
         if 'video_conference_type' in self.fields:
-            # dynamic dropdown for video conference types in groups / projects
-            self.fields['video_conference_type'].choices = CosinnusBaseGroup.VIDEO_CONFERENCE_TYPE_CHOICES
-            if not settings.COSINNUS_BBB_SERVER_CHOICES:
-                custom_choices = (
-                    (CosinnusBaseGroup.FAIRMEETING, _('Fairmeeting')),
-                    (CosinnusBaseGroup.NO_VIDEO_CONFERENCE, _('No video conference')),)
-                self.fields['video_conference_type'].choices = custom_choices
-            elif not CosinnusPortal.get_current().video_conference_server:
-                custom_choices = (
+            # dynamic dropdown for video conference types in events
+            custom_choices = [
+                (CosinnusBaseGroup.NO_VIDEO_CONFERENCE, _('No video conference')),
+            ]
+            if settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS:
+                custom_choices += [
                     (CosinnusBaseGroup.BBB_MEETING, _('BBB-Meeting')),
-                    (CosinnusBaseGroup.NO_VIDEO_CONFERENCE, _('No video conference')),)
-                self.fields['video_conference_type'].choices = custom_choices
-            
+                ]
+            if CosinnusPortal.get_current().video_conference_server:
+                custom_choices += [
+                    (CosinnusBaseGroup.FAIRMEETING, _('Fairmeeting')),
+                ]
+                self.fields['video_conference_type'].initial = CosinnusBaseGroup.FAIRMEETING
+            self.fields['video_conference_type'].choices = custom_choices
+        
     @property
     def group(self):
         """ This is for `FormAttachableMixin` to get passed the group as a target for
