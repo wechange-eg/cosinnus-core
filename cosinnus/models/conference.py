@@ -220,10 +220,11 @@ class CosinnusConferenceSettings(models.Model):
                 parent_object = get_parent_object_in_conference_setting_chain(obj)
                 if parent_object:
                     setting_obj = cls.get_for_object(parent_object, recursed=True)
+                    
             # final, outside iteration:
             if not recursed:
                 # set bbb room nature
-                if hasattr(source_object, 'get_bbb_room_nature'):
+                if setting_obj and setting_obj != 'UNSET' and hasattr(source_object, 'get_bbb_room_nature'):
                     setting_obj.bbb_nature = source_object.get_bbb_room_nature()
                 cache.set(cache_key, setting_obj, settings.COSINNUS_CONFERENCE_SETTING_MICRO_CACHE_TIMEOUT)
         
