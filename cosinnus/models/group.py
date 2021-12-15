@@ -917,6 +917,7 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
         self._portal_id = self.portal_id
         self._type = self.type
         self._slug = self.slug
+        self._is_active = self.is_active
 
     def __str__(self):
         # FIXME: better caching for .portal.name
@@ -984,6 +985,13 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
             CosinnusPermanentRedirect.create_for_pattern(old_portal, self._type, self._slug, self)
             display_redirect_created_message = True
             slugs.append(self._slug)
+        
+        # trigger activate/deactivate signals
+        if not created and self._is_active != self.is_active:
+            if self.is_active:
+                signals.group_reactivated.send(sender=self.__class__, group=self)
+            else:
+                signals.group_deactivated.send(sender=self.__class__, group=self)
 
         self._clear_cache(slugs=slugs, group=self)
         # force rebuild the pk --> slug cache. otherwise when we query that, this group might not be in it
@@ -992,6 +1000,7 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
         self._portal_id = self.portal_id
         self._type = self.type
         self._slug = self.slug
+        self._is_active = self.is_active
 
         if display_redirect_created_message and hasattr(self, 'request'):
             # possible because of AddRequestToModelSaveMiddleware

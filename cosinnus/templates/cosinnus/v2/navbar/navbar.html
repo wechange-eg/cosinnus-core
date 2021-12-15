@@ -423,16 +423,18 @@
 	                </ul>
                 {% endif %}
                 
-                {% if request.user|is_portal_manager or request.user|is_superuser %}
-	                <ul class="item-list">
-	                    <li>
-	                        <a href="{% url 'cosinnus:conference-administration' %}" class="list-item" role="button" titledby=".item-text">
-	                            <div class="item-text">
-	                                {% trans "Conference Administration" %}
-	                            </div>
-	                        </a>
-	                    </li>
-	                </ul>
+                {% if SETTINGS.COSINNUS_PREMIUM_CONFERENCES_ENABLED %}
+	                {% if request.user|is_portal_manager or request.user|is_superuser %}
+		                <ul class="item-list">
+		                    <li>
+		                        <a href="{% url 'cosinnus:conference-administration' %}" class="list-item" role="button" titledby=".item-text">
+		                            <div class="item-text">
+		                                {% trans "Conference Administration" %}
+		                            </div>
+		                        </a>
+		                    </li>
+		                </ul>
+			        {% endif %}
 		        {% endif %}
             </div>
         {% endif %}
