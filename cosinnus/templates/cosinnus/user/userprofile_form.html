@@ -103,7 +103,11 @@
 					{% trans "Website" as website_label %}
 					{% trans "Example: http://mywebsite.com" as  website_placeholder %}
 					{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.website label=website_label placeholder=website_placeholder %}
-
+                    
+                    {# Regular Field #}
+                    {% trans "Time zone" as timezone_label %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.timezone label=timezone_label %}
+                    
                {% endblock userprofile_about_fields %}
 
                {% block media_tags %}
