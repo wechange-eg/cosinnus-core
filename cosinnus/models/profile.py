@@ -196,6 +196,14 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
         """ Stub extended username, including possible titles, middle names, etc """
         return self.get_full_name()
     
+    def get_external_full_name(self):
+        """ Return the display name that external services like
+            nextcloud and rocketchat receive for this user """
+        display_name_func = settings.COSINNUS_EXTERNAL_USER_DISPLAY_NAME_FUNC
+        if display_name_func is not None and callable(display_name_func):
+            return display_name_func(self.user)
+        return self.get_full_name()
+    
     def save(self, *args, **kwargs):
         created = bool(self.pk is None)
         # sanity check for missing media_tag:
