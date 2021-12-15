@@ -248,6 +248,16 @@ class StarredObjectsWidgetView(BaseUserDashboardWidgetView):
         for like in liked:
             ct = ContentType.objects.get_for_id(like.content_type.id)
             obj = ct.get_object_for_this_type(pk=like.object_id)
+            
+            # filter inactive groups
+            if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
+                if not obj.is_active:
+                    continue
+            elif hasattr(obj, 'group'):
+                # also filter inactive parent groups
+                if not getattr(obj.group, 'is_active', False):
+                    continue
+            
             dashboard_item = DashboardItem(obj)
             dashboard_item['id'] = obj.id
             dashboard_item['ct'] = obj.get_content_type()
@@ -276,6 +286,11 @@ class FollowedObjectsWidgetView(BaseUserDashboardWidgetView):
             if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
                 if not obj.is_active:
                     continue
+            elif hasattr(obj, 'group'):
+                # also filter inactive parent groups
+                if not getattr(obj.group, 'is_active', False):
+                    continue
+                
             dashboard_item = DashboardItem(obj)
             dashboard_item['id'] = obj.id
             dashboard_item['ct'] = obj.get_content_type()

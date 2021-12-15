@@ -50,6 +50,7 @@ class ConferenceSettingsFormMixin(object):
             self.fields[field_name] = forms.ChoiceField(
                 choices=CosinnusConferenceSettings.PRESET_FIELD_CHOICES,
                 initial=initial.get(field_name, CosinnusConferenceSettings.SETTING_INHERIT),
+                required=False
             )
             
         # gather the inherited values for each field inherited from the parent/portal
