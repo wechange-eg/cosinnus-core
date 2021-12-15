@@ -113,6 +113,7 @@ MIDDLEWARE = [
     'cosinnus.core.middleware.cosinnus_middleware.GroupPermanentRedirectMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.ExternalEmailLinkRedirectNoticeMiddleware',
     'cosinnus.core.middleware.login_ratelimit_middleware.LoginRateLimitMiddleware',
+    'cosinnus.core.middleware.time_zone_middleware.TimezoneMiddleware',
 ]
 
 
