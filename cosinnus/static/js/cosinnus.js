@@ -782,6 +782,10 @@
 
 
         renderMomentDataDate : function() {
+
+            if (cosinnus_user_timezone){
+                moment.tz.setDefault(cosinnus_user_timezone);
+            }
             
             // when .moment-data-date elements have a data-date attribute, render date.
             $('.moment-data-date').on("renderMomentDataDate", function() {
@@ -799,15 +803,15 @@
                 if (data_date == 'today') {
                     // if attribute is 'today', fill with current date
                     // if it is not 'today', it is 2014-04-28.
-                    data_date = new Date();
-                    data_date = data_date.getFullYear() + "-"
-                        + ((data_date.getMonth()+1).toString().length === 2
-                            ? (data_date.getMonth()+1)
-                            : "0" + (data_date.getMonth()+1)) + "-"
-                        + (data_date.getDate().toString().length === 2
-                            ? data_date.getDate()
-                            : "0" + data_date.getDate());
-                    $(this).attr('data-date',data_date);
+                    var dateToday = new Date();
+                    data_date = dateToday.getFullYear() + "-"
+                        + ((dateToday.getMonth()+1).toString().length === 2
+                            ? (dateToday.getMonth()+1)
+                            : "0" + (dateToday.getMonth()+1)) + "-"
+                        + (dateToday.getDate().toString().length === 2
+                            ? dateToday.getDate()
+                            : "0" + dateToday.getDate());
+                    $(this).attr('data-date', data_date);
                 }
                 
                 /** No moment custom time format for now **/
@@ -851,7 +855,7 @@
         renderTimezoneAwareDates: function () {
 
             $('.moment-timezone-aware-date').each(function() {
-                var browserTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+                var browserTimezone = cosinnus_user_timezone || Intl.DateTimeFormat().resolvedOptions().timeZone
 
                 var fromDate = $(this).attr('data-from-date')
                 var toDate = $(this).attr('data-to-date')
