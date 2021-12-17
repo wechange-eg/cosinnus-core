@@ -1216,6 +1216,18 @@ class CosinnusDefaultSettings(AppConf):
                 },
             },
         },
+        'record_meeting': {
+            0: {
+                'create': {
+                    'record': 'false',
+                },
+            },
+            1: {
+                'create': {
+                    'record': 'true',
+                },
+            },
+        },
     }
     
     # the default baseline portal values for the BBB call params
@@ -1225,6 +1237,7 @@ class CosinnusDefaultSettings(AppConf):
     BBB_PARAM_PORTAL_DEFAULTS = {
         'create': {
             'muteOnStart': 'true', # default preset for 'mic_starts_on': False
+            'record': 'false', # default preset for 'record_meeting'
         },
         'join': {
             'userdata-bbb_auto_share_webcam': 'false', # default preset for 'cam_starts_on': False
@@ -1249,7 +1262,14 @@ class CosinnusDefaultSettings(AppConf):
     BBB_PRESET_USER_FORM_FIELDS = [
         'mic_starts_on',
         'cam_starts_on',
+        'record_meeting',
     ]
+    # a list of field names from `BBB_PRESET_USER_FORM_FIELDS` that can only
+    # be changed by users if a conference is premium at some point
+    BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY = [
+        'record_meeting',
+    ]
+    
     
     # limit visit creation for (user, bbb_room) pairs to a time window
     BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60*60

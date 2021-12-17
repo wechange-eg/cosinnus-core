@@ -213,6 +213,19 @@
             border-width: 1px;        
         }
     }
+    
+    .disabled-field-area {
+        opacity: 0.5;
+        pointer-events: none;
+        cursor: not-allowed;
+        
+        input,
+        textarea,
+        select,
+        .select2-container, .select2-container .select2-choice, .select2-container input {
+            background-color: @app-neutral-color-light !important;
+        }
+    }
 }
 
 /* Other cosinnus apps' field classes */

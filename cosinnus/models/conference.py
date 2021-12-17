@@ -130,6 +130,16 @@ class CosinnusConferenceSettings(models.Model):
     # See `BBBRoomMixin.get_bbb_room_nature()` for info on natures.
     bbb_nature = None
     
+    # Set during the traversal of the config chain. If one source objects has a 
+    # premium-now status, it will be recorded in the config object, signifying
+    # that the config belongs to a premium-level parent object or is itself one
+    is_premium = False
+    
+    # Set during the traversal of the config chain. If one source objects has a 
+    # premium-ever status, it will be recorded in the config object, signifying
+    # that the config belongs to a premium-level parent object or is itself one
+    is_premium_ever = False
+    
     # list of field names that can be overwritten during higher-chain inheritance
     # these fields all need to be able to take on the value of `SETTING_INHERIT`
     INHERITABLE_FIELDS = [
@@ -199,6 +209,13 @@ class CosinnusConferenceSettings(models.Model):
             if conference_settings:
                 setting_obj = conference_settings
             
+            # set the premium state
+            if setting_obj and setting_obj != 'UNSET':
+                if getattr(source_object, 'is_premium_ever', False):
+                    setting_obj.is_premium_ever = True
+                if getattr(source_object, 'is_premium', False):
+                    setting_obj.is_premium = True
+            
             if setting_obj and setting_obj != 'UNSET' and not no_traversal:
                 # we have a setting object for our current object, and it wasn't cached yet
                 # check if we have higher up parent *source* object
@@ -242,6 +259,10 @@ class CosinnusConferenceSettings(models.Model):
                 setattr(self, field_name, getattr(inherit_target, field_name))
         # for bbb_params, recursively update the lower dict with out
         self.bbb_params = update_dict_recursive(inherit_target.bbb_params, self.bbb_params)
+        # inherit premium state, any premium state in the chain makes all config objects premium
+        
+        self.is_premium_ever = self.is_premium_ever or inherit_target.is_premium_ever
+        self.is_premium = self.is_premium or inherit_target.is_premium
         return self
     
     def get_raw_bbb_params(self, no_defaults=False):
@@ -329,6 +350,10 @@ class CosinnusConferenceSettings(models.Model):
         # Step 1: we create a fresh set of BBB params 
         #     from only the chosen preset choices in the form
         for field_name, choice_value in preset_choices_dict.items():
+            # ignore any values set for premium-only presets if the config-object chain isn't premium
+            if field_name in settings.BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY and not self.is_premium_ever:
+                continue
+                    
             if field_name in settings.BBB_PRESET_FORM_FIELD_PARAMS and \
                     choice_value is not None and choice_value != self.SETTING_INHERIT:
                 call_dict = settings.BBB_PRESET_FORM_FIELD_PARAMS.get(field_name).get(choice_value, {})
@@ -346,6 +371,10 @@ class CosinnusConferenceSettings(models.Model):
         #     collect for each API-call a list of names of keys we know
         call_keys = defaultdict(set) # e.g. {'create': ['muteOnStart'], 'join': ['userdata-bbb_auto_share_webcam']}
         for preset_field_name in [preset for preset in settings.BBB_PRESET_USER_FORM_FIELDS]:
+            # premium-only presets count as "unknown" and will be carried over,
+            # if the config-object chain isn't premium, so don't collect them for the known names
+            if preset_field_name in settings.BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY and not self.is_premium_ever:
+                continue
             call_dict = settings.BBB_PRESET_FORM_FIELD_PARAMS[preset_field_name]
             for _choice, api_call_param_dict in call_dict.items():
                 for api_name, param_dict in api_call_param_dict.items():

@@ -63,25 +63,11 @@ class BigBlueButtonAPI(object):
         conference_settings = CosinnusConferenceSettings.get_for_object(source_object)
         if conference_settings:
             try:
-                # find if the srouce object belongs to or is a group with premium status active
-                bbb_server_choice = conference_settings.bbb_server_choice
-                # if no object or portal is given, we always use the non-premium choice
-                if not source_object is current_portal:
-                    # check if we can find a group in the source object's hierarchy chain
-                    checked_parent = source_object
-                    found_group = None
-                    for i in range(5): # max loop number
-                        if type(checked_parent) is get_cosinnus_group_model() or issubclass(checked_parent.__class__, get_cosinnus_group_model()):
-                            found_group = checked_parent
-                            break
-                        checked_parent = get_parent_object_in_conference_setting_chain(checked_parent)
-                        
-                        if checked_parent is None:
-                            break
-                    # if we have found a group, and that group has a premium status, we use 
-                    # the premium server choice of the bbb server settings object
-                    if found_group and found_group.is_premium:
-                        bbb_server_choice = conference_settings.bbb_server_choice_premium
+                # find if the source object belongs to or is a group with premium status active
+                if conference_settings.is_premium:
+                    bbb_server_choice = conference_settings.bbb_server_choice_premium
+                else:
+                    bbb_server_choice = conference_settings.bbb_server_choice
                 
                 auth_pair = dict(settings.COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS).get(bbb_server_choice)
                 return (auth_pair[0], auth_pair[1]) # force fail on improper tuple

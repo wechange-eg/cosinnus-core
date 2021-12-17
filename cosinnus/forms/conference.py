@@ -16,6 +16,7 @@ from django.contrib.contenttypes.models import ContentType
 from openid.message import no_default
 from multiform.forms import InvalidArgument
 from cosinnus.models.group import CosinnusPortal
+from django.core.exceptions import ImproperlyConfigured
 
 
 class DispatchConferenceSettingsMultiformMixin(object):
@@ -38,6 +39,11 @@ class ConferenceSettingsFormMixin(object):
     
     bbb_nature = None
     
+    def get_group_object(self):
+        """ Stub, implement this to return the group of the object that this 
+            conference settings object is be attached to """
+        return ImproperlyConfigured('ConferenceSettingsFormMixin.get_group_object() must be implemented for using this mixin!')
+    
     def add_preset_fields_to_form(self, conference_settings_instance=None):
         # initial values are the ones set directly on this config object, if it exists
         initial = {}
@@ -56,7 +62,7 @@ class ConferenceSettingsFormMixin(object):
         # gather the inherited values for each field inherited from the parent/portal
         # note: the values are retrieved for the *parent*-object, not the current object, so we get only the inherited values!
         choice_dict = dict(CosinnusConferenceSettings.PRESET_FIELD_CHOICES)
-        parent_object = self.get_parent_object() or CosinnusPortal.get_current()
+        parent_object = self.get_group_object() or CosinnusPortal.get_current()
         inherited_conf = CosinnusConferenceSettings.get_for_object(parent_object)
         # we add the bbb nature *to the parent* object, to get the params that would be applied to our
         # current object, because we don't always have a current object yet. this nature is set 
@@ -74,6 +80,10 @@ class ConferenceSettingsFormMixin(object):
             for field_name in settings.BBB_PRESET_USER_FORM_FIELDS
         ])
         setattr(self, 'inherited_field_value_labels', inherited_field_value_labels)
+        
+        # set the premium status on the form for the instance the conference settings object is attached to
+        setattr(self, 'event_is_premium', getattr(self.get_group_object(), 'is_premium_ever', False))
+        
     
     def commit_conference_settings_from_data(self, parent_object, instance=None, formfield_prefix='', commit=True):
         """ Prepare the conference settings object with data from the form """
@@ -93,6 +103,7 @@ class ConferenceSettingsFormMixin(object):
             instance = CosinnusConferenceSettings()
         # set bbb room nature
         instance.bbb_nature = parent_object.get_bbb_room_nature()
+        instance.is_premium_ever = getattr(self.get_group_object(), 'is_premium_ever', False)
         instance.set_bbb_preset_form_field_values(preset_choices)
         
         if commit:
@@ -118,7 +129,7 @@ class CosinnusConferenceSettingsMultiForm(ConferenceSettingsFormMixin, forms.Mod
         model = CosinnusConferenceSettings
         exclude = ('object_id', 'content_type', 'bbb_server_choice', 'bbb_server_choice_premium', 'bbb_params')
     
-    def get_parent_object(self):
+    def get_group_object(self):
         return self.multiform.forms['obj'].group
         
     def __init__(self, instance, *args, **kwargs):
@@ -178,7 +189,7 @@ class CosinnusConferenceRoomForm(ConferenceSettingsFormMixin,
         
         self.add_preset_fields_to_form(conference_settings_instance)
     
-    def get_parent_object(self):
+    def get_group_object(self):
         """ For `ConferenceSettingsFormMixin` """
         return self.group
     
