@@ -50,7 +50,7 @@
         <a class="anchor" id="invite"></a>
         
         
-        {% if group.group_is_conference and group.use_conference_applications %}
+        {% if user|has_write_access:object and group.group_is_conference and group.use_conference_applications %}
             <div class="panel panel-default large-space">
                 <div class="panel-heading">
                     <h4 class="panel-title" data-toggle="collapse" data-target="#collapseFive">
