@@ -1,0 +1,32 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
+
+{% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
+
+{% block leftnav %}
+    {% include "cosinnus/group/leftnav_group.html"  with current_page="recordedmeetings" %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="active">{% trans "Recorded Meetings" %}</li>
+{% endblock %}
+
+{% block content %}
+    <div class="content-box">
+		<h2 class="large-space">{% trans "Recorded Meetings" %}</h2>
+		
+        <p class="textfield transparent">
+            {% trans "This is a list of all recorded meetings for this conference. Recent recordings may take a few minutes to appear." %}
+        </p>
+        
+        <hr class="invisible"/>
+        
+        {% for meeting in object_list %}
+            {% include 'cosinnus/conference/recorded_meeting_list_object.html' with object=meeting %}
+        {% empty %}
+            {% trans "There are no recorded meetings yet." as empty_message %}
+            {% include 'cosinnus/common/empty_button.html' with message=empty_message %}
+        {% endfor %}
+    </div>
+{% endblock content %}

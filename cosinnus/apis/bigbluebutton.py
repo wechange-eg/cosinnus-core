@@ -8,10 +8,11 @@ import requests
 from cosinnus.conf import settings
 from cosinnus.models import CosinnusPortal, get_domain_for_portal
 from cosinnus.utils import bigbluebutton as bbb_utils
-from cosinnus.utils.functions import is_number
+from cosinnus.utils.functions import is_number, get_int_or_None
 from cosinnus.models.conference import CosinnusConferenceSettings,\
     get_parent_object_in_conference_setting_chain
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.dates import datetime_from_timestamp
 
 logger = logging.getLogger('cosinnus')
 
@@ -329,3 +330,72 @@ class BigBlueButtonAPI(object):
         hashed = self.api_call(query, call)
         url = self.api_auth_url + call + '?' + hashed
         return url
+    
+    def get_recorded_meetings(self, group_id=None):
+        """ This an implementation of the `getRecordings` API call for BBB.
+            Will only retrieve recorded meetings with the meta tag assigning it to the current portal.
+            
+            @param group_id: if supplied, will only return recorded meetings for the CosinnusGroup (conference)
+                with the given id.
+            :return: a list of JSON objects for the recorded meetings
+        """
+        
+        call = 'getRecordings'
+        query_params = [
+            ('meta_we-portal', CosinnusPortal.get_current().slug),
+        ]
+        if group_id is not None:
+            query_params += [
+                ('meta_we-group_id', group_id),
+            ]
+        query = urllib.parse.urlencode(query_params)
+        hashed = self.api_call(query, call)
+        url = self.api_auth_url + call + '?' + hashed
+        response = requests.get(url)
+        
+        if response.status_code == 200:
+            # parse the recordings and extract data for each
+            xml_content = bbb_utils.parse_xml(response.content)
+            def _findtext(element, key):
+                val = element.find(key)
+                return val.text if val is not None else None
+            try:
+                recording_list = []
+                # for a sample recording, see https://docs.bigbluebutton.org/dev/api.html#getrecordings
+                for recording in xml_content.find('recordings'):
+                    url = None
+                    for format_entry in recording.find('playback').findall('format'):
+                        if _findtext(format_entry, 'type') == 'presentation':
+                            url = _findtext(format_entry, 'url')
+                            break
+                    # convert timestamps from milliseconds to seconds and to datetimes
+                    start_time = get_int_or_None(_findtext(recording, 'startTime'))
+                    if start_time:
+                        start_time = datetime_from_timestamp(start_time // 1000)
+                    end_time = get_int_or_None(_findtext(recording, 'endTime'))
+                    if end_time:
+                        end_time = datetime_from_timestamp(end_time // 1000)
+                    json_recording = {
+                        'id': _findtext(recording, 'recordID'),
+                        'recordID': _findtext(recording, 'recordID'),
+                        'meetingID': _findtext(recording, 'meetingID'),
+                        'name': _findtext(recording, 'name'),
+                        'url': url,
+                        'participants': _findtext(recording, 'participants'),
+                        'startTime': start_time,
+                        'endTime': end_time,
+                        'duration': end_time - start_time,
+                    }
+                    recording_list.append(json_recording)
+                return recording_list
+                
+            except Exception as e:
+                if settings.DEBUG:
+                    raise
+                logger.error('BBB Room error: Server request `getRecordings` response could not be parsed.',
+                         extra={'response_status_code': response.status_code, 'result': response.text, 'exc': e})
+                return None
+        else:
+            logger.error('BBB Room error: Server request `getRecordings` was not successful.',
+                         extra={'response_status_code': response.status_code, 'result': response.text})
+        return None

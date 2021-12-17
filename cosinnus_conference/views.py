@@ -63,6 +63,8 @@ from django.utils.functional import cached_property
 import xlsxwriter
 from cosinnus.utils.http import make_xlsx_response
 from cosinnus.views.profile import deactivate_user_and_mark_for_deletion
+from cosinnus.core.decorators.views import redirect_to_error_page
+from cosinnus.apis.bigbluebutton import BigBlueButtonAPI
 
 logger = logging.getLogger('cosinnus')
 
@@ -578,6 +580,32 @@ class ConferenceRemindersView(SamePortalGroupMixin, RequireWriteMixin, GroupIsCo
 
     def get_success_url(self):
         return group_aware_reverse('cosinnus:conference:reminders', kwargs={'group': self.group})
+
+
+class ConferenceRecordedMeetingsView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, TemplateView):
+    """ A list view that retrieves the recorded BBB meetings for this conference """
+
+    template_name = 'cosinnus/conference/conference_recorded_meetings.html'
+    
+    def dispatch(self, request, *args, **kwargs):
+        ret = super().dispatch(request, *args, **kwargs)
+        if not self.group.is_premium_ever:
+            messages.error(self.request, _('This page is only available for premium conferences!'))
+            return redirect_to_error_page(self.request)
+        return ret
+    
+    def get_recorded_meetings(self):
+        self._bbb_api = BigBlueButtonAPI(source_object=self.group)
+        recording_list = self._bbb_api.get_recorded_meetings(group_id=self.group.id)
+        return recording_list
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'object_list': self.get_recorded_meetings(),
+            'object': self.group,
+        })
+        return context
 
 
 class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
@@ -1101,4 +1129,5 @@ conference_room_add = CosinnusConferenceRoomCreateView.as_view()
 conference_room_edit = CosinnusConferenceRoomEditView.as_view()
 conference_room_delete = CosinnusConferenceRoomDeleteView.as_view()
 conference_reminders = ConferenceRemindersView.as_view()
+conference_recorded_meetings = ConferenceRecordedMeetingsView.as_view()
 conference_confirm_send_reminder = ConferenceConfirmSendRemindersView.as_view()
