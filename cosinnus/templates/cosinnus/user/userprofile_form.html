@@ -106,7 +106,8 @@
                     
                     {# Regular Field #}
                     {% trans "Time zone" as timezone_label %}
-                    {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.timezone label=timezone_label %}
+                    {% trans "This will determine the time and date shown for events on the website and in your notification emails." as timezone_legend %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.timezone label=timezone_label legend=timezone_legend %}
                     
                {% endblock userprofile_about_fields %}
 
