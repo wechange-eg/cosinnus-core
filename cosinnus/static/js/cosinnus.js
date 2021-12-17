@@ -783,7 +783,9 @@
 
         renderMomentDataDate : function() {
 
-            var defaultTimeZone = moment.tz.setDefault(cosinnus_user_timezone);
+            if (cosinnus_user_timezone){
+                moment.tz.setDefault(cosinnus_user_timezone)
+            }
             
             // when .moment-data-date elements have a data-date attribute, render date.
             $('.moment-data-date').on("renderMomentDataDate", function() {
@@ -801,7 +803,6 @@
                 if (data_date == 'today') {
                     // if attribute is 'today', fill with current date
                     // if it is not 'today', it is 2014-04-28.
-                    data_date = defaultTimeZone;
                     data_date = data_date.getFullYear() + "-"
                         + ((data_date.getMonth()+1).toString().length === 2
                             ? (data_date.getMonth()+1)
@@ -853,7 +854,7 @@
         renderTimezoneAwareDates: function () {
 
             $('.moment-timezone-aware-date').each(function() {
-                var browserTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+                var browserTimezone = cosinnus_user_timezone || Intl.DateTimeFormat().resolvedOptions().timeZone
 
                 var fromDate = $(this).attr('data-from-date')
                 var toDate = $(this).attr('data-to-date')

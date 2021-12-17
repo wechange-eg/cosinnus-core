@@ -116,7 +116,7 @@
                 var cosinnus_group_url_path = "{% cosinnus_group_url_path %}";
                 var cosinnus_current_language = "{{ COSINNUS_CURRENT_LANGUAGE }}";
                 var cosinnus_report_object_url = "{% url 'cosinnus:report-object' %}";
-                var cosinnus_user_timezone = "{{ COSINNUS_USER_TIMEZONE }}";
+                var cosinnus_user_timezone = {% if COSINNUS_USER_TIMEZONE %}"{{ COSINNUS_USER_TIMEZONE }}"{% else %}null{% endif %};
             </script>
             <script src="{% static 'js/cosinnus.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
             <script src="{% localized_js 'cosinnus_formats.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
