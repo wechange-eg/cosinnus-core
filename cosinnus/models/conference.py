@@ -347,6 +347,7 @@ class CosinnusConferenceSettings(models.Model):
         """ Generates from scratch and sets the `bbb_params` for this config object, given a list of
             user-chosen values and presets from presets from `BBB_PRESET_FORM_FIELD_PARAMS` """
         bbb_params = {}
+        
         # Step 1: we create a fresh set of BBB params 
         #     from only the chosen preset choices in the form
         for field_name, choice_value in preset_choices_dict.items():
@@ -364,7 +365,7 @@ class CosinnusConferenceSettings(models.Model):
                         call_key = f'{call_key}__{self.bbb_nature}'
                     update_dict[call_key] = call_param_dict
                 bbb_params.update(update_dict)
-                
+        
         # Step 2: we carry over any "unknown" values, that aren't defined in presets,
         #     so we don't clear the field when no preset is set, but an admin has
         #     manually entered new parameters
@@ -378,6 +379,9 @@ class CosinnusConferenceSettings(models.Model):
             call_dict = settings.BBB_PRESET_FORM_FIELD_PARAMS[preset_field_name]
             for _choice, api_call_param_dict in call_dict.items():
                 for api_name, param_dict in api_call_param_dict.items():
+                    # prefix the known keys with the nature if the target has one
+                    if self.bbb_nature:
+                        api_name = f'{api_name}__{self.bbb_nature}'
                     call_keys[api_name].update(param_dict.keys())
         
         # find any keys from our old about-to-be-overwritten params, that aren't in the known list for carrying over
@@ -393,6 +397,7 @@ class CosinnusConferenceSettings(models.Model):
                         if api_name_key not in bbb_params:
                             bbb_params[api_name_key] = {}
                         bbb_params[api_name_key][param_key] = param_val
+        
         self.bbb_params = bbb_params
         
     def has_changed_inherited_fields(self):
