@@ -31,6 +31,7 @@ from django.template.defaultfilters import truncatechars
 from cosinnus.models.membership import MEMBERSHIP_MEMBER, MANAGER_STATUS
 from cosinnus.models.conference import CosinnusConferenceSettings
 from copy import copy
+from cosinnus.utils.group import get_cosinnus_group_model
 
 
 # from cosinnus.models import MEMBERSHIP_ADMIN
@@ -366,7 +367,7 @@ class BBBRoom(models.Model):
             attendee_password=attendee_password,
             moderator_password=moderator_password,
             voice_bridge=voice_bridge,
-            options=cls.build_extra_create_parameters_for_object(source_object),
+            options=cls.build_extra_create_parameters_for_object(source_object, meeting_id=meeting_id, meeting_name=name),
             presentation_url=presentation_url,
         )
 
@@ -394,10 +395,10 @@ class BBBRoom(models.Model):
     def build_extra_create_parameters(self):
         """ Builds a parameter set for the create API call. Will use the inferred source 
             object that this BBBRoom belongs to to generate options. """
-        return self._meta.model.build_extra_create_parameters_for_object(self.source_object)
+        return self._meta.model.build_extra_create_parameters_for_object(self.source_object,  meeting_id=self.meeting_id, meeting_name=self.name)
     
     @classmethod
-    def build_extra_create_parameters_for_object(cls, source_object):
+    def build_extra_create_parameters_for_object(cls, source_object, meeting_id=None, meeting_name=None):
         params = {}
         params.update(settings.BBB_DEFAULT_CREATE_PARAMETERS)
         # add the source object's options from all inherited settings objects
@@ -408,6 +409,26 @@ class BBBRoom(models.Model):
             params.update({
                 'maxParticipants': max_participants,
             })
+            
+        # collect meta-tags for the BBB create call. these free-form parameters
+        # can be used to save arbitrary information for a BBB-meeting and are 
+        # used to retrieve recorded meetings later on
+        group = None
+        if hasattr(source_object, 'group'):
+            group = source_object.group
+        elif type(source_object) is get_cosinnus_group_model() or issubclass(source_object.__class__, get_cosinnus_group_model()):
+            group = source_object
+        if group:
+            params.update({
+                'meta_we-group-id': group.id,
+                'meta_we-group-slug': group.slug,
+                'meta_we-group-name': group.name,
+            })
+        params.update({
+            'meta_we-portal': CosinnusPortal.get_current().slug,
+            'meta_we-meeting-id': meeting_id,
+            'meta_we-meeting-name': meeting_name,
+        })
         return params
     
     def build_extra_join_parameters(self, user):
