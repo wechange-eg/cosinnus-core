@@ -104,19 +104,21 @@ class ReadWriteSerializerMethodField(serializers.SerializerMethodField):
 
 class UserCreateUpdateSerializer(serializers.ModelSerializer):
     location = ReadWriteSerializerMethodField(required=False)
-    extra_fields = ReadWriteSerializerMethodField(required=False)
+    dynamic_fields = ReadWriteSerializerMethodField(required=False)
     groups = ReadWriteSerializerMethodField(required=False)
+
+    profile = _UserProfileSerializer(source='cosinnus_profile', many=False, read_only=True)
 
     class Meta(object):
         model = User
         fields = ('id', 'email', 'first_name', 'last_name', 'password',
-                  'location', 'extra_fields', 'groups')
+                  'location', 'dynamic_fields', 'groups')
 
     def get_location(self, obj):
         return obj.cosinnus_profile.media_tag.location or ""
 
-    def get_extra_fields(self, obj):
-        return obj.cosinnus_profile.extra_fields
+    def get_dynamic_fields(self, obj):
+        return obj.cosinnus_profile.dynamic_fields
 
     def get_groups(self, obj):
         queryset = obj.cosinnus_memberships.filter(status__in=MEMBER_STATUS)
