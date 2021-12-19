@@ -36,7 +36,7 @@ class UserViewSet(CosinnusFilterQuerySetMixin, viewsets.ModelViewSet):
     def create_or_update(self, serializer):
         email = serializer.validated_data.get('email')
         password = serializer.validated_data.pop('password', None)
-        extra_fields = serializer.validated_data.pop('extra_fields', None)
+        dynamic_fields = serializer.validated_data.pop('dynamic_fields', None)
         location = serializer.validated_data.pop('location', None)
         groups = serializer.validated_data.pop('groups', None)
         # Get user by email and update or create
@@ -57,10 +57,10 @@ class UserViewSet(CosinnusFilterQuerySetMixin, viewsets.ModelViewSet):
         if not user.cosinnus_profile:
             get_user_profile_model()._default_manager.get_for_user(user)
 
-        # Set extra_fields
-        if extra_fields is not None:
+        # Set dynamic_fields
+        if dynamic_fields is not None:
             profile = user.cosinnus_profile
-            profile.extra_fields = extra_fields
+            profile.dynamic_fields = dynamic_fields
             profile.save()
 
         # Set location
