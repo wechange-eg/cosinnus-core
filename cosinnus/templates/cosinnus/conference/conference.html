@@ -1,6 +1,6 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n bootstrap3 cosinnus_tags djajax_tags %}
-{% load static from staticfiles %}
+{% load static %}
 
 {% block page_title %}{% if room and room.title %}{{ room.title }} - {% endif %}{{ group.name }}{% endblock page_title %}
 

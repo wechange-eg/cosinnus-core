@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from builtins import object
+from functools import partial as curry
 import logging
 
 from django.contrib import messages
@@ -12,7 +13,6 @@ from django.apps import apps
 from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.utils.encoding import force_text
-from django.utils.functional import curry
 from django.utils.translation import gettext, ugettext_lazy as _
 
 from cosinnus.conf import settings

@@ -13,7 +13,7 @@ from django.http.response import JsonResponse, HttpResponseBadRequest, \
     HttpResponseNotFound, HttpResponseForbidden
 from django.utils.encoding import force_text
 from haystack.query import SearchQuerySet
-from haystack.utils.geo import Point
+from django.contrib.gis.geos import Point
 import six
 
 from cosinnus.conf import settings
