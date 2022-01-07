@@ -68,7 +68,9 @@ color: #38b6b7;
 <a href="{{portal_url}}" target="_blank" style="Margin: 0; color: #38b6b7; font-family: Helvetica, Arial, sans-serif; font-weight: bold; line-height: 1.4; margin: 0; padding: 0; text-align: left; text-decoration: none;">
 <!-- always include the width="nn" attribute in
 <img> for Outlook! -->
-<img class="logo-img" height="40" src="{{portal_image_url}}" alt style="-ms-interpolation-mode: bicubic; border: none; clear: both; display: block; height: 40px; max-width: 100%; outline: none; text-decoration: none; width: auto;">
+{% block email_logo %}
+    <img class="logo-img" height="40" src="{{portal_image_url}}" alt style="-ms-interpolation-mode: bicubic; border: none; clear: both; display: block; height: 40px; max-width: 100%; outline: none; text-decoration: none; width: auto;">
+{% endblock email_logo %}
 </a>
 </th>
 <th class="expander" style="Margin: 0; color: #0a0a0a; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 300; line-height: 1.4; margin: 0; padding: 0 !important; text-align: left; visibility: hidden; width: 0;"></th></tr></table></th>
