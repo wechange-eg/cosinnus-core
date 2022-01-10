@@ -593,7 +593,7 @@ module.exports = ContentControlView.extend({
 
     setLayer: function (layer) {
         this.state.currentLayer && this.leaflet.removeLayer(this.state.currentLayer);
-        if (cosinnus_map_use_modern_tileset == true){
+        if (COSINNUS_MAP_USE_MODERN_TILESET == true){
             var options = _(this.layersModernTileset[layer].options).extend({
                 maxZoom: 15,
                 minZoom:3
