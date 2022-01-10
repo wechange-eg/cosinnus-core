@@ -5547,7 +5547,7 @@ button.close {
   width: device-width;
 }
 .visible-xs, .visible-sm, .visible-md, .visible-lg {
-  display: block !important;
+  display: none !important;
 }
 
 .visible-xs-block,
