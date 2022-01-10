@@ -572,6 +572,9 @@ class CosinnusConf(AppConf):
     # display map in iframe in user dashboard
     USERDASHBOARD_USE_LIVE_MAP_WIDGET = False
     
+    # switch to the German version of OpenStreetMap tileset
+    MAP_USE_MODERN_TILESET = False
+
     # switch to set if Microsites should be enabled.
     # this can be override for each portal to either activate or deactivate them
     MICROSITES_ENABLED = False
