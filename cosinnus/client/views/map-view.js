@@ -30,7 +30,7 @@ module.exports = ContentControlView.extend({
     layersModernTileset: {
         street: {
             url: (util.protocol() === 'https:' ?
-                'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png' :
+                'http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png' :
                 'https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png'),
             options: {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
