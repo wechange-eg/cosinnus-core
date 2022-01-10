@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-16 12:48+0100\n"
-"PO-Revision-Date: 2021-09-30 15:38+0200\n"
+"PO-Revision-Date: 2022-01-10 15:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: admin.py:29
 msgid "Restart"
@@ -25,7 +25,7 @@ msgstr "Neu starten"
 #: api/serializers.py:174
 msgid ""
 "Your conference is currently using the high performance premium servers!"
-msgstr "Ihre Tagung benutzt momentan die leistungsstarke Premium-Server!"
+msgstr "Ihre Tagung benutzt momentan die leistungsstarken Premium-Server!"
 
 #: api/serializers.py:177
 msgid ""
