@@ -346,7 +346,7 @@ class BigBlueButtonAPI(object):
         ]
         if group_id is not None:
             query_params += [
-                ('meta_we-group_id', group_id),
+                ('meta_we-group-id', group_id),
             ]
         query = urllib.parse.urlencode(query_params)
         hashed = self.api_call(query, call)

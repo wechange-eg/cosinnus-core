@@ -119,14 +119,12 @@
 				</li>
 				{% endif%}
 				
-				{% if group.is_premium_ever %}
-					<li class="app-main appnavi-listelement fine-space">
-	                    <a href="{{ conference_recorded_meetings_page }}">
-	                        <i class="fas fa-video"></i>
-	                        {% trans "Recorded Meetings" %}
-	                    </a>
-	                </li>
-	            {% endif %}
+				<li class="app-main appnavi-listelement fine-space">
+                    <a href="{{ conference_recorded_meetings_page }}">
+                        <i class="fas fa-video"></i>
+                        {% trans "Recorded Meetings" %}
+                    </a>
+                </li>
 	        {% endif%}
 	        
 	        {% if request.user.pk in group.members or request.user.pk in group.admins or request.user|is_superuser or group.public and not group.group_is_conference %}

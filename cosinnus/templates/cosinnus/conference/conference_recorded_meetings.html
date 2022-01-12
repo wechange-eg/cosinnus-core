@@ -13,6 +13,17 @@
 {% endblock %}
 
 {% block content %}
+    {% if not group.is_premium_ever %}
+        <div class="alert alert-warning alert-dismissable">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+            <p>
+                {% trans "Recording of meetings is only available for premium conferences!" %}
+                {% trans "Make a premium booking here" %}:
+                <a href="{% include "cosinnus/v2/urls/conference_premium_booking_url.html" %}" target="_blank">{% trans "Conference Bookings" %}</a>
+            </p>
+        </div>
+    {% endif %}
+        
     <div class="content-box">
 		<h2 class="large-space">{% trans "Recorded Meetings" %}</h2>
 		

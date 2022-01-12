@@ -40,7 +40,7 @@
 		    
 		    {% if field_name == 'record_meeting' and form.record_meeting %}
 		        {% captureas record_meeting_label %}
-		            {% trans "Record Meeting" %}
+		            {% trans "Allow recording" %}
                     {% if premium_label %}{{ premium_label }}{% endif %}
 		            ({% trans "Default" %}: <b>{{ form.inherited_field_value_labels.record_meeting }})</b>
 		        {% endcaptureas %}

@@ -587,13 +587,6 @@ class ConferenceRecordedMeetingsView(SamePortalGroupMixin, RequireWriteMixin, Gr
 
     template_name = 'cosinnus/conference/conference_recorded_meetings.html'
     
-    def dispatch(self, request, *args, **kwargs):
-        ret = super().dispatch(request, *args, **kwargs)
-        if not self.group.is_premium_ever:
-            messages.error(self.request, _('This page is only available for premium conferences!'))
-            return redirect_to_error_page(self.request)
-        return ret
-    
     def get_recorded_meetings(self):
         self._bbb_api = BigBlueButtonAPI(source_object=self.group)
         recording_list = self._bbb_api.get_recorded_meetings(group_id=self.group.id)
