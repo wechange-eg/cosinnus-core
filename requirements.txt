@@ -21,7 +21,7 @@ django-cron==0.5.0
 django-embed-video==0.6
 django-el-pagination==2.1.2
 django-extra-views==0.14.0
-django-filter==2.0.0
+django-filter==21.1
 django-haystack==3.1.1
 django-honeypot==1.0.2
 django-jalali==4.0.0
@@ -80,13 +80,13 @@ clamd==1.0.2
 django-clamd==0.4.0
 
 
--e git+git://github.com/wechange-eg/django-awesome-avatar.git@django2#egg=django-awesome-avatar
--e git+git://github.com/wechange-eg/django-filer.git@django2#egg=django-filer
--e git+git://github.com/wechange-eg/django-multiform.git@master#egg=django-multiform
--e git+git://github.com/saschan/django-djajax.git@django2#egg=django-djajax
--e git+git://github.com/wechange-eg/django-select2.git@django2#egg=django-select2
--e git+git://github.com/wechange-eg/django-osm-field.git@django2#egg=django-osm-field
--e git+git://github.com/wechange-eg/python-markdown2.git@master#egg=markdown2
--e git+git://github.com/wechange-eg/pydkim.git@master#egg=pydkim
--e git+git://github.com/mhindery/django-suit.git@develop#egg=django-suit
+-e git+https://github.com/wechange-eg/django-awesome-avatar.git@django2#egg=django-awesome-avatar
+-e git+https://github.com/wechange-eg/django-filer.git@django-update-3-2#egg=django-filer
+-e git+https://github.com/wechange-eg/django-multiform.git@master#egg=django-multiform
+-e git+https://github.com/wechange-eg/django-djajax.git@django-update-3-2#egg=django-djajax
+-e git+https://github.com/wechange-eg/django-select2.git@django-update-3-2#egg=django-select2
+-e git+https://github.com/wechange-eg/django-osm-field.git@django-update-3-2#egg=django-osm-field
+-e git+https://github.com/wechange-eg/python-markdown2.git@master#egg=markdown2
+-e git+https://github.com/wechange-eg/pydkim.git@master#egg=pydkim
+-e git+https://github.com/mhindery/django-suit.git@develop#egg=django-suit
 
