@@ -47,6 +47,7 @@ user_conference_invited_to_apply = dispatch.Signal(providing_args=["user", "obj"
         :object_url The url of the object, if defined by get_absolute_url()
         :object_name The title of the object (only available if it is a BaseTaggableObject)
         :group_name The name of the group the object is housed in (only available if it is a BaseTaggableObject)
+        :team_name_short The same variable as `team_name` (`group_name`) but truncated to its first 10 characters
         :site_name Current django site's name
         :domain_url The complete base domain needed to prefix URLs. (eg: 'http://sinnwerkstatt.com')
         :notification_settings_url The URL to the cosinnus notification settings page.
@@ -71,7 +72,7 @@ notifications = {
         
         'is_html': True,
         'event_text': _('"%(sender_name)s" requested to become a member of %(team_name)s.'),
-        'subject_text': _('"%(sender_name)s" requested to become a member of %(team_name)s.'),
+        'subject_text': _('[%(team_name_short)s] - "%(sender_name)s" requested to become a member of %(team_name)s.'),
         'data_attributes': {
             'object_name': '_sender_name',
             'object_url': 'get_member_page_url', # the group members page
@@ -95,7 +96,7 @@ notifications = {
         'is_html': True,
         'event_text': _('Membership request accepted'),
         'topic': _('Your membership request for %(team_name)s was accepted!'),
-        'subject_text': _('Your membership request for %(team_name)s was accepted!'),
+        'subject_text': _('[%(team_name_short)s] - Your membership request for %(team_name)s was accepted!'),
         'data_attributes': {
             'object_name': 'name',
             'object_text': 'description',
@@ -116,7 +117,7 @@ notifications = {
         'is_html': True,
         'event_text': _('Membership request declined'),
         'topic': _("We're sorry, but your membership request for %(team_name)s was declined."),
-        'subject_text': _('Your membership request for %(team_name)s was declined.'),
+        'subject_text': _('[%(team_name_short)s] - Your membership request for %(team_name)s was declined.'),
         'data_attributes': {
             'object_name': 'name',
             'object_text': 'description',
@@ -139,7 +140,7 @@ notifications = {
         
         'is_html': True,
         'event_text': _('%(sender_name)s accepted the invitation'),
-        'subject_text': _('"%(sender_name)s" has accepted the invitation to %(team_name)s.'),
+        'subject_text': _('[%(team_name_short)s] - "%(sender_name)s" has accepted the invitation to %(team_name)s.'),
         'data_attributes': {
             'object_name': '_sender_name',
             'object_url': 'get_member_page_url', # the group members page
@@ -167,7 +168,7 @@ notifications = {
         
         'is_html': True,
         'event_text': _('%(sender_name)s declined the invitation'),
-        'subject_text': _('"%(sender_name)s" has declined the invitation to %(team_name)s.'),
+        'subject_text': _('[%(team_name_short)s] - "%(sender_name)s" has declined the invitation to %(team_name)s.'),
         'data_attributes': {
             'object_name': '_sender_name',
             'object_url': 'get_member_page_url', # the group members page
@@ -192,7 +193,7 @@ notifications = {
         'is_html': True,
         'event_text': _('Your participation application was accepted'),
         'topic': _('Your participation application for %(team_name)s was accepted!'),
-        'subject_text': _('Your participation application for %(team_name)s was accepted!'),
+        'subject_text': _('[%(team_name_short)s] - Your participation application for %(team_name)s was accepted!'),
         'data_attributes': {
             'object_name': 'conference.name',
             'object_url': 'conference.get_absolute_url',
@@ -213,7 +214,7 @@ notifications = {
         'is_html': True,
         'event_text': _('Your participation application was declined'),
         'topic': _('Your participation application for %(team_name)s was declined!'),
-        'subject_text': _('Your participation application for %(team_name)s was declined!'),
+        'subject_text': _('[%(team_name_short)s] - Your participation application for %(team_name)s was declined!'),
         'data_attributes': {
             'object_name': 'conference.name',
             'object_url': 'conference.get_absolute_url',
@@ -234,7 +235,7 @@ notifications = {
         'is_html': True,
         'event_text': _('Your participation application was waitlisted'),
         'topic': _('Your participation application for %(team_name)s was waitlisted!'),
-        'subject_text': _('Your participation application for %(team_name)s was waitlisted!'),
+        'subject_text': _('[%(team_name_short)s] - Your participation application for %(team_name)s was waitlisted!'),
         'data_attributes': {
             'object_name': 'conference.name',
             'object_url': 'conference.get_absolute_url',
@@ -256,7 +257,7 @@ notifications = {
         
         'is_html': True,
         'event_text': _('%(sender_name)s made you an admin of "%(team_name)s" on %(portal_name)s!'),
-        'subject_text': _('%(sender_name)s made you an admin of "%(team_name)s" on %(portal_name)s!'),
+        'subject_text': _('[%(team_name_short)s] - %(sender_name)s made you an admin of "%(team_name)s" on %(portal_name)s!'),
         'data_attributes': {
             'object_name': 'name',
             'object_text': 'description',
@@ -279,7 +280,7 @@ notifications = {
         
         'is_html': True,
         'event_text': _('%(sender_name)s revoked your admin status of "%(team_name)s" on %(portal_name)s!'),
-        'subject_text': _('%(sender_name)s revoked your admin status of "%(team_name)s" on %(portal_name)s!'),
+        'subject_text': _('[%(team_name_short)s] - %(sender_name)s revoked your admin status of "%(team_name)s" on %(portal_name)s!'),
         'data_attributes': {
             'object_name': 'name',
             'object_text': 'description',
@@ -324,7 +325,7 @@ notifications = {
         'event_text': _('%(sender_name)s invited you to join %(team_name)s'),
         'topic': _('%(sender_name)s invited you to join "%(team_name)s" on %(portal_name)s! <br/><br/>' 
                            ' To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation.'),
-        'subject_text': _('%(sender_name)s has invited you to join "%(team_name)s" on %(portal_name)s!'),
+        'subject_text': _('[%(team_name_short)s] - %(sender_name)s has invited you to join "%(team_name)s" on %(portal_name)s!'),
         'data_attributes': {
             'object_name': 'name',
             'object_text': 'description', 
@@ -351,7 +352,7 @@ notifications = {
         'is_html': True,
         'event_text': _('%(sender_name)s invited you'),
         'topic': settings.COSINNUS_RECRUIT_EMAIL_BODY_TEXT,
-        'subject_text': _('%(sender_name)s has invited you to join "%(team_name)s" on %(portal_name)s!'),
+        'subject_text': _('[%(team_name_short)s] - %(sender_name)s has invited you to join "%(team_name)s" on %(portal_name)s!'),
         'data_attributes': {
             'object_name': 'name',
             'object_text': 'description',
@@ -446,7 +447,7 @@ notifications = {
         'event_text': _('%(sender_name)s invited you to apply for the conference %(team_name)s'),
         'topic': _('%(sender_name)s invited you to apply for "%(team_name)s" on %(portal_name)s! <br/><br/>' 
                            ' To apply, please click on the link below.'),
-        'subject_text': _('%(sender_name)s invited you to apply for the conference %(team_name)s'),
+        'subject_text': _('[%(team_name_short)s] - %(sender_name)s invited you to apply for the conference %(team_name)s'),
         'data_attributes': {
             'object_name': 'name',
             'object_url': 'get_absolute_url',
@@ -470,7 +471,7 @@ notifications = {
         
         'is_html': True,
         'event_text': _('%(sender_name)s just created "%(team_name)s" on %(portal_name)s!'),
-        'subject_text': _('%(sender_name)s just created "%(team_name)s" on %(portal_name)s!'),
+        'subject_text': _('[%(team_name_short)s] - %(sender_name)s just created "%(team_name)s" on %(portal_name)s!'),
         'data_attributes': {
             'object_name': 'name',
             'object_text': 'description',
