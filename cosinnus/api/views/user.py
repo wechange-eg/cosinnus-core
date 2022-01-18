@@ -1,5 +1,7 @@
 import json
 
+import random
+
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 from oauth2_provider.decorators import protected_resource
@@ -10,17 +12,20 @@ from rest_framework.views import APIView
 
 from cosinnus.conf import settings
 from ..serializers.user import UserCreateUpdateSerializer, UserSerializer
-from ...models import get_user_profile_model, CosinnusGroup, CosinnusGroupMembership, MEMBERSHIP_MEMBER, \
-    MEMBERSHIP_ADMIN
+from ...models import get_user_profile_model, CosinnusGroup, CosinnusGroupMembership, MEMBERSHIP_MEMBER
+from cosinnus.models.membership import MEMBER_STATUS
+from cosinnus.api.views.mixins import CosinnusFilterQuerySetMixin
 
 User = get_user_model()
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(CosinnusFilterQuerySetMixin, viewsets.ModelViewSet):
     http_method_names = getattr(settings, 'COSINNUS_API_SETTINGS', {}).get('user', [])
     permission_classes = (permissions.IsAdminUser,)
     queryset = User.objects.all()
     serializer_class = UserCreateUpdateSerializer
+    
+    FILTER_DEFAULT_ORDER = ['-date_joined', ]
 
     def perform_create(self, serializer):
         self.create_or_update(serializer)
@@ -31,7 +36,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def create_or_update(self, serializer):
         email = serializer.validated_data.get('email')
         password = serializer.validated_data.pop('password', None)
-        extra_fields = serializer.validated_data.pop('extra_fields', None)
+        dynamic_fields = serializer.validated_data.pop('dynamic_fields', None)
         location = serializer.validated_data.pop('location', None)
         groups = serializer.validated_data.pop('groups', None)
         # Get user by email and update or create
@@ -41,7 +46,7 @@ class UserViewSet(viewsets.ModelViewSet):
             user = serializer.save()
         else:
             # Overwrite username with ID
-            user = serializer.save(username=email)
+            user = serializer.save(username=str(random.randint(100000000000, 999999999999)))
             user.username = user.id
             user.save(update_fields=['username'])
         if password is not None:
@@ -52,10 +57,10 @@ class UserViewSet(viewsets.ModelViewSet):
         if not user.cosinnus_profile:
             get_user_profile_model()._default_manager.get_for_user(user)
 
-        # Set extra_fields
-        if extra_fields is not None:
+        # Set dynamic_fields
+        if dynamic_fields is not None:
             profile = user.cosinnus_profile
-            profile.extra_fields = extra_fields
+            profile.dynamic_fields = dynamic_fields
             profile.save()
 
         # Set location
@@ -68,7 +73,7 @@ class UserViewSet(viewsets.ModelViewSet):
         if groups is not None:
             # Get existing memberships
             old_groups = CosinnusGroupMembership.objects.filter(user=user, group__slug__in=groups)
-            old_groups = old_groups.filter(status__in=(MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN))
+            old_groups = old_groups.filter(status__in=MEMBER_STATUS)
             old_groups = old_groups.values_list('group__slug', flat=True)
             # Delete all other memberships
             CosinnusGroupMembership.objects.filter(user=user).exclude(group__slug__in=old_groups).delete()
@@ -96,7 +101,7 @@ class OAuthUserView(APIView):
             return Response({
                 'success': True,
                 'id': user.username if user.username.isdigit() else str(user.id),
-                'email': user.email.lower(),
+                'email': user.cosinnus_profile.rocket_user_email, # use the rocket user email (may be a non-verified fake one)
                 'name': user.get_full_name(),
                 'avatar': avatar_url,
             })

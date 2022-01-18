@@ -1,0 +1,66 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block page_title %}
+        {% trans "Add Premium Block to Conferences" %}
+{% endblock %}
+
+{% block leftnav %}
+    {% include 'cosinnus/conference_administration/leftnav.html' %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+    <li><a href="{% url 'cosinnus:conference-administration' %}">{% trans "Conference Administration" %}</a></li>
+    <li class="active">
+        {{ title }}
+    </li>
+{% endblock %}
+
+{% block content %}
+<form action method="post" class="cosinnus-form form-horizontal">{% csrf_token %}
+    <div class="content-box">
+        <div class="tab-content">
+            <div class="tab-pane active">
+                <h2>{{ title }}</h2>
+                {% trans "Participants" as participants_label %}
+                {% trans "Participants" as lparticipants_placeholder %}
+                {% include 'cosinnus/fields/default_field.html' with field=form.participants label=participants_label placeholder=participants_placeholder large_field=True %}
+                {% include 'cosinnus/fields/from_to_date_field.html' with from_date_field=form.from_date to_date_field=form.to_date hide_time_field=True %}
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-emphasized btn-autosize">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left">
+                    <i class="fa fa-floppy-o"></i>
+                </span>
+                <div class="media-body">
+                    {% trans "Save" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    {% if form.instance.id %}
+    <button type="button" data-target="#delete_block" data-toggle="modal" class="btn btn-emphasized btn-autosize">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left">
+                    <i class="fa fa-minus-circle"></i>
+                </span>
+                <div class="media-body">
+                    {% trans "Delete" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    {% endif %}
+</form>
+
+{% if form.instance.id %}
+	{% captureas label %}{% blocktrans with name=conference.name %}Do you really want to delete this block from "{{ name }}"?{% endblocktrans %}{% endcaptureas %}
+	{% captureas title %}{% trans "Delete Premium Block" %}{% endcaptureas %}
+	{% captureas action %}{% url 'cosinnus:conference-administration-edit-premium-block' block_id=object.id %}{% endcaptureas %}
+	{% include "cosinnus/modal_box.html" with id='delete_block' label=label title=title form_action=action title_icon='fa-minus-circle' submit_name="delete" %}
+	{% endif %}
+{% endblock %}

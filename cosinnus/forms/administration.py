@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import random
+
 from django.core.validators import MaxLengthValidator
 from django.db.models.fields import BLANK_CHOICE_DASH
 from django import forms
@@ -75,7 +77,7 @@ class UserAdminForm(forms.ModelForm):
 
     def save(self, commit=True):
         if not self.instance.pk:
-            self.instance.username = self.cleaned_data.get('email')[:150]
+            self.instance.username = str(random.randint(100000000000, 999999999999))
             user = super().save()
             user.username = str(user.id)
             user.is_active = True

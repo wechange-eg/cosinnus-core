@@ -9,16 +9,18 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden, JsonResponse
 from django.shortcuts import redirect, get_object_or_404
+from django.utils.text import slugify
 from django.utils.crypto import get_random_string
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy
+from django.utils.translation import ugettext_lazy as _, pgettext_lazy, ngettext
 from django.views.generic import (DetailView,
     ListView, TemplateView)
 from django.views.generic.base import View
 from django.views.generic.edit import FormView, CreateView, UpdateView,\
     DeleteView
+from django.utils.dateparse import parse_datetime
 import six
 
 from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm
@@ -48,6 +50,7 @@ from django.http.response import Http404, HttpResponseForbidden,\
     HttpResponseNotFound
 
 from cosinnus_conference.forms import (ConferenceRemindersForm,
+                                       ConferenceConfirmSendRemindersForm,
                                        ConferenceParticipationManagement,
                                        ConferenceApplicationForm,
                                        PriorityFormSet,
@@ -58,37 +61,51 @@ from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus import cosinnus_notifications
 from django.utils.functional import cached_property
 import xlsxwriter
+from cosinnus.utils.http import make_xlsx_response
+from cosinnus.views.profile import deactivate_user_and_mark_for_deletion
 
 logger = logging.getLogger('cosinnus')
 
 
 class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin,
-                                     RequireExtraDispatchCheckMixin, DetailView):
+                                  RequireExtraDispatchCheckMixin, FormView):
 
     template_name = 'cosinnus/conference/conference_temporary_users.html'
-    
+    form_class = CosinusWorkshopParticipantCSVImportForm
+
     def extra_dispatch_check(self):
-        if not self.group.allow_conference_temporary_users:
+        if not self.group.temporary_users_allowed:
             messages.warning(self.request, _('This function is not enabled for this conference.'))
             return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
-    
+
     def get_object(self, queryset=None):
         return self.group
 
+    def get_temporary_users(self):
+        temporary_users = self.group.conference_members
+        return [user for user in temporary_users if user.cosinnus_profile
+                and not user.cosinnus_profile.scheduled_for_deletion_at]
+
     def post(self, request, *args, **kwargs):
-        if 'startConferenence' in request.POST:
-            self.group.conference_is_running = True
+
+        if 'upload_file' in request.POST:
+            form = self.get_form()
+            if form.is_valid():
+                return self.form_valid(form)
+            else:
+                return self.form_invalid(form)
+
+        if 'activateUsers' in request.POST:
             self.group.save()
             self.update_all_members_status(True)
             messages.add_message(request, messages.SUCCESS,
-                                 _('Conference successfully started and user accounts activated'))
+                                 _('successfully activated all user accounts.'))
 
-        elif 'finishConferenence' in request.POST:
-            self.group.conference_is_running = False
+        elif 'deactivateUsers' in request.POST:
             self.group.save()
             self.update_all_members_status(False)
             messages.add_message(request, messages.SUCCESS,
-                                 _('Conference successfully finished and user accounts deactivated'))
+                                 _('successfully deactivated all user accounts.'))
 
         elif 'deactivate_member' in request.POST:
             user_id = int(request.POST.get('deactivate_member'))
@@ -105,18 +122,64 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         elif 'remove_member' in request.POST:
             user_id = int(request.POST.get('remove_member'))
             user = get_user_model().objects.get(id=user_id)
-            delete_userprofile(user)
+            deactivate_user_and_mark_for_deletion(user)
             messages.add_message(request, messages.SUCCESS, _('Successfully removed user'))
 
-        return redirect(group_aware_reverse('cosinnus:conference:management',
-                                            kwargs={'group': self.group}))
+        elif 'remove_all_members' in request.POST:
+            for member in self.get_temporary_users():
+                deactivate_user_and_mark_for_deletion(member)
+            messages.add_message(request, messages.SUCCESS, _('Successfully removed all user'))
+
+        elif 'downloadPasswords' in request.POST:
+            filename = '{}_participants_passwords'.format(
+                self.group.slug)
+            header = [_('Username'), _('First Name'),
+                      _('Last Name'), _('Email'), _('Password')]
+            accounts = self.get_accounts_with_password()
+            return make_xlsx_response(accounts, row_names=header,
+                                      file_name=filename)
+
+        elif 'change_password' in request.POST:
+            user_id = int(request.POST.get('change_password'))
+            user = get_user_model().objects.get(id=user_id)
+            pwd = get_random_string()
+            user.set_password(pwd)
+            user.save()
+            return JsonResponse(
+                {
+                    'email': user.email,
+                    'id': user.id,
+                    'password': pwd
+                }
+            )
+
+        return redirect(group_aware_reverse(
+            'cosinnus:conference:temporary-users',
+            kwargs={'group': self.group}))
 
     def update_all_members_status(self, status):
-        for member in self.group.conference_members:
+        for member in self.get_temporary_users():
             member.is_active = status
             if status:
                 member.last_login = None
             member.save()
+
+    def get_accounts_with_password(self):
+        accounts = []
+        for member in self.get_temporary_users():
+            pwd = ''
+            if not member.password:
+                pwd = get_random_string()
+                member.set_password(pwd)
+                member.save()
+            accounts.append([
+                member.cosinnus_profile.readable_workshop_user_name,
+                member.first_name,
+                member.last_name,
+                member.email,
+                pwd
+            ])
+        return accounts
 
     def update_member_status(self, user_id, status):
         try:
@@ -127,96 +190,108 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         except ObjectDoesNotExist:
             pass
 
-    def get_member_workshops(self, member):
-        return CosinnusGroupMembership.objects.filter(user=member, group__parent=self.group)
-
-    def get_members_and_workshops(self):
-        members = []
-        for member in self.group.conference_members:
-            member_dict = {
-                'member': member,
-                'workshops': self.get_member_workshops(member)
-            }
-            members.append(member_dict)
-        return members
+    def get_blank_password_users_exist(self):
+        users = self.get_temporary_users()
+        for user in users:
+            if not user.password:
+                return True
+        return False
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['group'] = self.group
-        context['members'] = self.get_members_and_workshops()
-        context['group_admins'] = CosinnusGroupMembership.objects.get_admins(group=self.group)
-
+        context['members'] = self.get_temporary_users()
+        context['group_admins'] = CosinnusGroupMembership.objects.get_admins(
+            group=self.group)
+        context['download_passwords'] = self.get_blank_password_users_exist()
         return context
-
-
-class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, FormView):
-
-    template_name = 'cosinnus/conference/workshop_participants_upload.html'
-    form_class = CosinusWorkshopParticipantCSVImportForm
-
-    def get_object(self, queryset=None):
-        return self.group
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs['group'] = self.group
         return kwargs
 
+    def get_success_message(self, accounts_created, accounts_updated):
+        created_count = len(accounts_created)
+        updated_count = len(accounts_updated)
+        message = ''
+        if accounts_created:
+            message = ngettext(
+                'Successfully created %(created_count)d account. ',
+                'Successfully created  %(created_count)d accounts. ',
+                created_count,
+            ) % {
+                'created_count': created_count
+            }
+
+        if updated_count:
+            message = str(message) + str(_('Successfully updated accounts.'))
+        return message
+
     def form_valid(self, form):
         data = form.cleaned_data.get('participants')
-        header, accounts = self.process_data(data)
-
-        filename = '{}_participants_passwords.csv'.format(self.group.slug)
-
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
-
-        writer = csv.writer(response)
-        writer.writerow(header)
-        for account in accounts:
-            writer.writerow(account)
-        return response
+        accounts_created, accounts_updated = self.process_data(data)
+        success_message = self.get_success_message(accounts_created,
+                                                   accounts_updated)
+        messages.add_message(
+            self.request, messages.SUCCESS, success_message)
+        return redirect(group_aware_reverse(
+            'cosinnus:conference:temporary-users',
+            kwargs={'group': self.group}))
 
     def process_data(self, data):
-        groups_list = data.get('header')
-        header = data.get('header_original')
-        accounts_list = []
+        accounts_created_list = []
+        accounts_updated_list = []
         for row in data.get('data'):
-            account = self.create_account(row, groups_list)
-            accounts_list.append(account)
+            account, created = self.create_or_update_account(row)
+            if created:
+                accounts_created_list.append(account)
+            else:
+                accounts_updated_list.append(account)
 
-        return header + ['email', 'password'], accounts_list
+        return accounts_created_list, accounts_updated_list
 
     def get_unique_workshop_name(self, name):
         no_whitespace = name.replace(' ', '')
-        unique_name = '{}_{}__{}'.format(self.group.portal.id, self.group.id, no_whitespace)
+        unique_name = '{}_{}__{}'.format(
+            self.group.portal.id, self.group.id, no_whitespace)
         return unique_name
 
-    @transaction.atomic
-    def create_account(self, data, groups):
+    def get_email_domain(self):
+        if (settings.COSINNUS_TEMP_USER_EMAIL_DOMAIN and not
+                settings.COSINNUS_TEMP_USER_EMAIL_DOMAIN == ''):
+            return settings.COSINNUS_TEMP_USER_EMAIL_DOMAIN
+        return '{}.de'.format(slugify(settings.COSINNUS_PORTAL_NAME))
+
+    def create_or_update_account(self, data):
 
         username = self.get_unique_workshop_name(data[0])
         first_name = data[1]
         last_name = data[2]
+        email_domain = self.get_email_domain()
 
         try:
             name_string = '"{}":"{}"'.format(PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME, username)
-            profile = UserProfile.objects.get(settings__contains=name_string)
+            profile = UserProfile.objects.get(
+                settings__contains=name_string,
+                scheduled_for_deletion_at__isnull=True
+            )
             user = profile.user
             user.first_name = first_name
             user.last_name = last_name
             user.save()
-            self.create_or_update_memberships(user, data, groups)
-            return data + [user.email, '']
+            self.create_or_update_memberships(user)
+            return data + [user.email, ''], False
         except ObjectDoesNotExist:
-            random_email = '{}@wechange.de'.format(get_random_string())
-            pwd = get_random_string()
-            user = create_base_user(random_email, password=pwd, first_name=first_name, last_name=last_name)
+            random_email = '{}@{}'.format(get_random_string(), email_domain)
+            user = create_base_user(random_email, first_name=first_name, last_name=last_name, no_generated_password=True)
 
             if user:
                 profile = get_user_profile_model()._default_manager.get_for_user(user)
                 profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME] = username
                 profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT] = True
+                profile.email_verified = True
+
                 profile.add_redirect_on_next_page(
                     redirect_with_next(
                         group_aware_reverse(
@@ -225,17 +300,17 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
                         self.request), message=None, priority=True)
                 profile.save()
 
-                unique_email = 'User{}.C{}@wechange.de'.format(str(user.id), str(self.group.id))
+                unique_email = 'User{}.C{}@{}'.format(str(user.id), str(self.group.id), email_domain)
                 user.email = unique_email
                 user.is_active = False
                 user.save()
 
-                self.create_or_update_memberships(user, data, groups)
-                return data + [unique_email, pwd]
+                self.create_or_update_memberships(user)
+                return data + [unique_email], True
             else:
                 return data + [_('User was not created'), '']
 
-    def create_or_update_memberships(self, user, data, groups):
+    def create_or_update_memberships(self, user):
 
         # Add user to the parent group
         membership, created = CosinnusGroupMembership.objects.get_or_create(
@@ -246,91 +321,60 @@ class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, Gr
             membership.status = MEMBERSHIP_MEMBER
             membership.save()
 
-        # Add user to all child groups/projects that were marked with 1 or 2 in the csv or delete membership
-        for i, group in enumerate(groups):
-            if isinstance(group, CosinnusGroup):
-                if data[i] in [str(MEMBERSHIP_MEMBER), str(MEMBERSHIP_ADMIN)]:
-                    status = int(data[i])
-                    membership, created = CosinnusGroupMembership.objects.get_or_create(
-                        group=group,
-                        user=user
-                    )
-                    if created:
-                        membership.status = status
-                        membership.save()
-                    else:
-                        current_status = membership.status
-                        if current_status < status:
-                            membership.status = status
-                            membership.save()
-                else:
-                    try:
-                        membership = CosinnusGroupMembership.objects.get(
-                            group=group,
-                            user=user
-                        )
-                        membership.delete()
-                    except ObjectDoesNotExist:
-                        continue
-            else:
-                continue
 
-
-class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, View):
-
+class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin,
+                                       GroupIsConferenceMixin, View):
 
     def get(self, request, *args, **kwars):
         members = self.group.conference_members
 
-        filename = '{}_statistics.csv'.format(self.group.slug)
-
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
-
-        header = ['Workshop username', 'email', 'workshops count', 'has logged in', 'last login date', 'Terms of service accepted']
-
-        writer = csv.writer(response)
-        writer.writerow(header)
+        filename = '{}_statistics'.format(self.group.slug)
+        rows = []
+        header = ['username', 'email', 'has logged in',
+                  'last login date', 'Terms of service accepted']
 
         for member in members:
-            workshop_username = member.cosinnus_profile.readable_workshop_user_name
-            email = member.email
-            workshop_count = self.get_membership_count(member)
-            has_logged_in, logged_in_date = self.get_last_login(member)
-            tos_accepted = 1 if member.cosinnus_profile.settings.get('tos_accepted', False) else 0
-            row = [workshop_username, email, workshop_count, has_logged_in, logged_in_date, tos_accepted]
-            writer.writerow(row)
-        return response
-
-    def get_membership_count(self, member):
-        return member.cosinnus_groups.filter(parent=self.group).count()
+            if (member.cosinnus_profile and not member.cosinnus_profile.scheduled_for_deletion_at):
+                profile = member.cosinnus_profile
+                workshop_username = profile.readable_workshop_user_name
+                email = member.email
+                has_logged_in, logged_in_date = self.get_last_login(member)
+                tos_accepted = 1 if profile.settings.get(
+                    'tos_accepted', False) else 0
+                row = [workshop_username, email, has_logged_in,
+                       logged_in_date, tos_accepted]
+                rows.append(row)
+        return make_xlsx_response(rows, row_names=header, file_name=filename)
 
     def get_last_login(self, member):
         has_logged_in = 1 if member.last_login else 0
         last_login = timezone.localtime(member.last_login)
-        logged_in_date = last_login.strftime("%Y-%m-%d %H:%M") if member.last_login else ''
+        logged_in_date = ''
+        if member.last_login:
+            logged_in_date = last_login.strftime("%Y-%m-%d %H:%M")
 
         return [has_logged_in, logged_in_date]
 
 
-class WorkshopParticipantsUploadSkeletonView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, View):
+class WorkshopParticipantsUploadSkeletonView(SamePortalGroupMixin,
+                                             RequireWriteMixin,
+                                             GroupIsConferenceMixin, View):
 
     def get(self, request, *args, **kwars):
         filename = '{}_participants.csv'.format(self.group.slug)
         response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
+        response['Content-Disposition'] = 'attachment; filename="{}"'.format(
+            filename)
 
-        writer = csv.writer(response)
+        writer = csv.writer(response, delimiter=';')
 
-        header = [_('Workshop username'), _('First Name'), _('Last Name')]
-        workshop_slugs = [group.slug for group in self.group.groups.all()]
+        header = [_('Username'), _('First Name'), _('Last Name')]
 
-        full_header = header + workshop_slugs
-
-        writer.writerow(full_header)
+        writer.writerow(header)
 
         for i in range(5):
-            row = ['' for entry in full_header]
+            row = ['' if not entry == _('Username')
+                   else str(i + 1) for entry in header]
             writer.writerow(row)
         return response
 
@@ -454,6 +498,7 @@ class CosinnusConferenceRoomEditView(RequireWriteMixin, CosinnusConferenceRoomFo
     form_view = 'edit'
     message_success = _('The room was saved successfully.')
     
+
     def get_context_data(self, **kwargs):
         context = super(CosinnusConferenceRoomEditView, self).get_context_data(**kwargs)
         context.update({
@@ -501,7 +546,15 @@ class ConferenceRemindersView(SamePortalGroupMixin, RequireWriteMixin, GroupIsCo
     def get_object(self, queryset=None):
         return self.group
 
+    def get_last_sent(self):
+        extra_fields = self.group.extra_fields
+        if extra_fields:
+            last_sent = extra_fields.get('reminder_send_immediately_last_sent')
+            if last_sent:
+                return parse_datetime(last_sent)
+
     def get_context_data(self, **kwargs):
+        kwargs['immediately_message_last_sent'] = self.get_last_sent()
         kwargs['object'] = self.group
         return super(ConferenceRemindersView, self).get_context_data(**kwargs)
 
@@ -517,10 +570,56 @@ class ConferenceRemindersView(SamePortalGroupMixin, RequireWriteMixin, GroupIsCo
             send_conference_reminder(self.group, recipients=[self.request.user],
                                      field_name=form.data.get('test'), update_setting=False)
             messages.success(self.request, _('A test email has been sent to your email address.'))
+        if 'send' in form.data:
+            return HttpResponseRedirect(group_aware_reverse(
+                'cosinnus:conference:confirm_send_reminder',
+                kwargs={'group': self.group}))
         return super(ConferenceRemindersView, self).form_valid(form)
 
     def get_success_url(self):
         return group_aware_reverse('cosinnus:conference:reminders', kwargs={'group': self.group})
+
+
+class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
+                                         RequireWriteMixin,
+                                         GroupIsConferenceMixin,
+                                         FormView):
+    template_name = \
+        'cosinnus/conference/conference_confirm_send_reminders.html'
+    form_class = ConferenceConfirmSendRemindersForm
+    message_success = _('Conference reminder settings '
+                        'have been successfully updated.')
+
+    def get_members(self):
+        return self.group.actual_members
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        kwargs['instance'] = self.group
+        return kwargs
+
+    def get_object(self, queryset=None):
+        return self.group
+
+    def get_context_data(self, **kwargs):
+        kwargs['object'] = self.group
+        kwargs['members'] = self.get_members()
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        if 'send' in form.data:
+            send_conference_reminder(self.group, recipients=self.get_members(),
+                                     field_name='send_immediately',
+                                     update_setting=False)
+            messages.success(self.request,
+                             _('The message was sent to all participants.'))
+            form.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return group_aware_reverse('cosinnus:conference:reminders',
+                                   kwargs={'group': self.group})
 
 
 class ConferenceParticipationManagementView(SamePortalGroupMixin,
@@ -993,7 +1092,6 @@ conference_applications = ConferenceParticipationManagementApplicationsView.as_v
 conference_application = ConferenceApplicationView.as_view()
 conference_participation_management = ConferenceParticipationManagementView.as_view()
 conference_temporary_users = ConferenceTemporaryUserView.as_view()
-workshop_participants_upload = WorkshopParticipantsUploadView.as_view()
 workshop_participants_download = WorkshopParticipantsDownloadView.as_view()
 workshop_participants_upload_skeleton = WorkshopParticipantsUploadSkeletonView.as_view()
 conference_room_management = ConferenceRoomManagementView.as_view()
@@ -1003,3 +1101,4 @@ conference_room_add = CosinnusConferenceRoomCreateView.as_view()
 conference_room_edit = CosinnusConferenceRoomEditView.as_view()
 conference_room_delete = CosinnusConferenceRoomDeleteView.as_view()
 conference_reminders = ConferenceRemindersView.as_view()
+conference_confirm_send_reminder = ConferenceConfirmSendRemindersView.as_view()

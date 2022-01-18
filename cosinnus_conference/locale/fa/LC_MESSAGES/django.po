@@ -3,154 +3,301 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:23+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2021-11-16 12:48+0100\n"
+"PO-Revision-Date: 2021-05-21 21:59+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.2.1\n"
 
-msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
+#: admin.py:29
+msgid "Restart"
 msgstr ""
 
+#: api/serializers.py:174
+msgid ""
+"Your conference is currently using the high performance premium servers!"
+msgstr ""
+
+#: api/serializers.py:177
+msgid ""
+"Your conference is currently not using the high performance premium servers, "
+"but has been assigned premium slots at other times."
+msgstr ""
+
+#: api/serializers.py:189
+msgid "Your currently scheduled premium dates are:"
+msgstr ""
+
+#: api/serializers.py:191
+msgid ""
+"Your conference is still in trial mode. You have access to all features, but "
+"can only use them with a few people without restrictions. To ensure full "
+"performance for your conference with multiple users, book sufficient "
+"capacities here for free:"
+msgstr ""
+"کنفرانس شما هنوز در حالت آزمایشی‌ست. شما به همه‌ی قابلیت‌ها دسترسی دارید، اما "
+"تنها می‌توانید بدون محدودیت با تعداد کمی کاربر دیگر از این قابلیت‌ها بهره "
+"ببرید. برای این‌که از بهترین کارایی برای کنفرانس خود با چندین کاربر "
+"بهره‌ببرید، این‌جا به‌صورت رایگان برای آن ظرفیت کافی رزرو کنید:"
+
+#: api/serializers.py:196
 msgid "Conference Bookings"
-msgstr ""
+msgstr "رزرو کنفرانس"
 
+#: cosinnus_app.py:17
 msgid "Conferences"
-msgstr ""
+msgstr "کنفرانس‌ها"
 
+#: cosinnus_app.py:22
 msgctxt "the_app"
 msgid "conference"
-msgstr ""
+msgstr "کنفرانس"
 
+#: forms.py:228 views.py:1045
 msgid "First Choice"
-msgstr ""
+msgstr "گزینه‌ی نخست"
 
+#: forms.py:228 views.py:1046
 msgid "Second Choice"
+msgstr "گزینه‌ی دوم"
+
+#: templates/cosinnus/conference/error_page.html:5
+#: templates/cosinnus/conference/error_page.html:13
+msgid "Server Error"
 msgstr ""
 
-msgid "Conference Management"
+#: templates/cosinnus/conference/error_page.html:16
+msgid "Error message:"
 msgstr ""
 
-msgid "Workshop Participant File Upload"
+#: templates/cosinnus/conference/error_page.html:24
+msgid "No error message supplied."
 msgstr ""
 
-#, python-format
-msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-msgstr ""
-
-msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
-msgstr ""
-
-msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
-msgstr ""
-
-msgid "Upload File"
-msgstr ""
-
+#: utils.py:80
 msgid "Go to conference"
-msgstr ""
+msgstr "برو به کنفرانس"
 
+#: views.py:78 views.py:686
 msgid "This function is not enabled for this conference."
-msgstr ""
+msgstr "این کارایی برای کنفرانس فعال نشده است."
 
-msgid "Conference successfully started and user accounts activated"
-msgstr ""
+#: views.py:102
+#, fuzzy
+#| msgid "Successfully activated user account"
+msgid "successfully activated all user accounts."
+msgstr "حساب‌های کاربران با موفقیت فعال شدند"
 
-msgid "Conference successfully finished and user accounts deactivated"
-msgstr ""
+#: views.py:108
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "successfully deactivated all user accounts."
+msgstr "حساب‌های کاربران با موفقیت غیرفعال شدند"
 
+#: views.py:114
 msgid "Successfully deactivated user account"
-msgstr ""
+msgstr "حساب‌های کاربران با موفقیت غیرفعال شدند"
 
+#: views.py:120
 msgid "Successfully activated user account"
-msgstr ""
+msgstr "حساب‌های کاربران با موفقیت فعال شدند"
 
+#: views.py:126
 msgid "Successfully removed user"
+msgstr "کاربر با موفقیت حذف شد"
+
+#: views.py:131
+#, fuzzy
+#| msgid "Successfully removed user"
+msgid "Successfully removed all user"
+msgstr "کاربر با موفقیت حذف شد"
+
+#: views.py:136 views.py:371 views.py:376
+msgid "Username"
 msgstr ""
 
-msgid "User was not created"
-msgstr ""
-
-msgid "Workshop username"
-msgstr ""
-
+#: views.py:136 views.py:371 views.py:1030
 msgid "First Name"
-msgstr ""
+msgstr "نام"
 
+#: views.py:137 views.py:371 views.py:1031
 msgid "Last Name"
+msgstr "نام خانوادگی"
+
+#: views.py:137
+msgid "Email"
 msgstr ""
 
+#: views.py:137
+msgid "Password"
+msgstr ""
+
+#: views.py:220
+#, fuzzy, python-format
+#| msgid "Successfully deactivated user account"
+msgid "Successfully created %(created_count)d account. "
+msgid_plural "Successfully created  %(created_count)d accounts. "
+msgstr[0] "حساب‌های کاربران با موفقیت غیرفعال شدند"
+msgstr[1] "حساب‌های کاربران با موفقیت غیرفعال شدند"
+
+#: views.py:228
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully updated accounts."
+msgstr "حساب‌های کاربران با موفقیت غیرفعال شدند"
+
+#: views.py:311
+msgid "User was not created"
+msgstr "کار با موفقیت ساخته نشد"
+
+#: views.py:477
 msgid "The room was created successfully."
-msgstr ""
+msgstr "اتاق با موفقیت ساخته شد."
 
+#: views.py:499
 msgid "The room was saved successfully."
-msgstr ""
+msgstr "اتاق با موفقیت ذخیره شد."
 
+#: views.py:517
 msgid "The room was deleted successfully."
-msgstr ""
+msgstr "اتاق با موفقیت پاک شد."
 
+#: views.py:536
 msgid "The supplied Conference Room could not be found"
-msgstr ""
+msgstr "اتاق کنفرانسی که وارد کرده‌اید پیدا نشد"
 
+#: views.py:544 views.py:590
 msgid "Conference reminder settings have been successfully updated."
-msgstr ""
+msgstr "تنظیمات یادآور کنفرانس با موفقیت به‌روز شدند."
 
+#: views.py:572
 msgid "A test email has been sent to your email address."
+msgstr "یک ایمیل آزمایشی برای نشانی ایمیل شما فرستاده شد."
+
+#: views.py:616
+msgid "The message was sent to all participants."
 msgstr ""
 
+#: views.py:652
 msgid "Participation configurations have been updated."
-msgstr ""
+msgstr "تنظیمات شرکت‌کننده‌ها به‌روز شده‌اند."
 
+#: views.py:723
 msgid "Your application has been submitted."
-msgstr ""
+msgstr "درخواست شما فرستاده شد."
 
+#: views.py:728
 msgid "Your application has been updated."
-msgstr ""
+msgstr "درخواست شما به‌روز شد."
 
+#: views.py:742
 msgid "You cannot change your application anymore."
-msgstr ""
+msgstr "شما دیگر نمی‌توانید درخواست‌تان را تغییر دهید."
 
+#: views.py:750
 msgid "Application has been withdrawn."
-msgstr ""
+msgstr "درخواست بازپس گرفته‌شده است."
 
+#: views.py:892
 #, python-format
 msgid "The following users were accepted and added as members: %s"
-msgstr ""
+msgstr "کاربران روبرو پذیرفته و به عنوان عضو افزوده شده‌اند: %s"
 
+#: views.py:894
 #, python-format
 msgid "The following users were put on the wait list: %s"
-msgstr ""
+msgstr "کاربران روبرو در فهرست انتظار قرار داده شده‌اند: %s"
 
+#: views.py:896
 #, python-format
 msgid "The following users were declined: %s"
-msgstr ""
+msgstr "کاربران روبرو رد شده‌اند: %s"
 
+#: views.py:898
 msgid "Your changes were saved."
-msgstr ""
+msgstr "تغییرات‌تان ذخیره شده‌اند."
 
+#: views.py:1009
 msgid "Option"
-msgstr ""
+msgstr "گزینه"
 
+#: views.py:1032
 msgid "Motivation for applying"
-msgstr ""
+msgstr "انگیزه‌ی ارایه‌ی درخواست"
 
+#: views.py:1033
 msgid "Status"
-msgstr ""
+msgstr "وضعیت"
 
+#: views.py:1037
 msgid "Contact E-Mail Address"
-msgstr ""
+msgstr "نشانی تماس ایمیل"
 
+#: views.py:1041
 msgid "Contact Phone Number"
-msgstr ""
+msgstr "شماره‌ی تلفن تماس"
 
+#: views.py:1086
 msgid "List of Applicants"
-msgstr ""
+msgstr "فهرست درخواست‌دهنده‌ها"
+
+#~ msgid "Conference Management"
+#~ msgstr "مدیریت کنفرانس"
+
+#~ msgid "Workshop Participant File Upload"
+#~ msgstr "آپلود پوشه‌‌ی شرکت‌کنندگان کارگاه"
+
+#~ msgid ""
+#~ "Please upload a CSV with the following columns: unique user identifier, "
+#~ "first name, last name and one column for each workshop identified by the "
+#~ "workshop's slug. For Help you can download a template <a href="
+#~ "\"%(workshop_participants_upload_skeleton)s\">here</a>"
+#~ msgstr ""
+#~ "لطفن یک CSV با ستون‌های روبرو آپلود کنید: شناسه‌ی کاربری بی‌مانند، نام، نام "
+#~ "خانوادگی و یک ستون برای هر کارگاه که با نشانه‌ی کاربرپسند مشخص کنید. اگر "
+#~ "به کمک نیاز دارید می‌توانید یک قالب از <a href="
+#~ "\"%(workshop_participants_upload_skeleton)s\">این</a> نشانی دانلود کنید"
+
+#~ msgid ""
+#~ "Then add a row for each account that you want to add. You have to add a "
+#~ "unique user identifier but first and last name can be blank. Then add a 1 "
+#~ "to all workshop columns where the user should be a normal member or a 2 "
+#~ "if that user should be workshop admin."
+#~ msgstr ""
+#~ "سپس یک ردیف برای هر حساب کاربری که می‌خواهید داشته باشید بیافزایید. شما "
+#~ "باید یک شناسه‌ی کاربری بی‌مانند بیافزایید ولی می‌توانید نام و نام خانوادگی "
+#~ "را خالی بگذارید. سپس یک «۱» به همه‌ی ستون‌های کارگاه‌ها، آن‌جایی که کابران "
+#~ "قرار است کاربر معمولی باشند و یا «۲» برای کاربرانی که قرار است مدیر باشند "
+#~ "وارد کنید."
+
+#~ msgid ""
+#~ "The CSV upload will trigger the creation of the accounts and account "
+#~ "workshop memberships and results in a direct CSV download with the newly "
+#~ "created accounts and passwords. The passwords will only be included when "
+#~ "the account is created. Please refresh the page after the download."
+#~ msgstr ""
+#~ "آپلود کردن CSV باعث ایجاد حساب‌های کاربری،عضویت حساب‌ها در کارگاه‌ها و "
+#~ "دانلود مستقیم یک CSV جدید و دربرگیرنده‌ی حساب‌ها و گذرواژه‌های تازه‌ایجاد‌شده "
+#~ "خواهد شد. گذرواژه‌ها تنها زمانی گنجانیده خواهند شد که حساب‌ها ساخته‌شوند. "
+#~ "لطفن برگه را پس از دانلود دوباره بارگیری کنید."
+
+#~ msgid "Upload File"
+#~ msgstr "آپلود پوشه"
+
+#~ msgid "Conference successfully started and user accounts activated"
+#~ msgstr "کنفرانس با موفقیت آغاز شد و حساب‌های کاربران فعال شدند"
+
+#~ msgid "Conference successfully finished and user accounts deactivated"
+#~ msgstr "کنفرانس با موفقیت پایان یافت و حساب‌های کاربران غیرفعال شدند"
+
+#~ msgid "Workshop username"
+#~ msgstr "نام کاربری کارگاه"

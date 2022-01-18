@@ -7,23 +7,30 @@
 {% load wagtailcore_tags %}
 
 <!DOCTYPE html>
-<html lang="en" {% block html_attributes %}{% endblock html_attributes %}>
+<html lang="{{ request.LANGUAGE_CODE }}" {% block html_attributes %}{% endblock html_attributes %}>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="referrer" content="no-referrer-when-downgrade">
 
+        {% captureas page_title %}{% block page_title %}{% endblock page_title %}{% block base_page_title %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %} - {% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% endif %}{% endblock base_page_title %}{% endcaptureas %}
+        
         {% block og_meta_attributes %}
-        <meta property="og:url"           content="{% block og_url %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ request.path }}{% endblock og_url %}" />
-        <meta property="og:title"         content="{% block og_title %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% endif %}{% endblock og_title %}" />
-        <meta property="og:image"         content="{% block og_image %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ COSINNUS_CURRENT_PORTAL.get_logo_image_url }}{% endblock og_image %}" />
-        <meta property="og:site_name"     content="{% block og_site_name %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% else %}{{ COSINNUS_CURRENT_PORTAL.name }}{% endif %}{% endblock og_site_name %}" />
-        <meta property="og:description"   content="{% block og_description %}{% endblock og_description %}" />
+	        {% captureas page_description %}{% block og_description %}{% endblock og_description %}{% endcaptureas %}
+	        
+	        <meta name="title" content="{{ page_title }}">
+	        <meta name="description" content="{{ page_description }}">
+	        
+	        <meta property="og:url"           content="{% block og_url %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ request.path }}{% endblock og_url %}" />
+	        <meta property="og:title"         content="{% block og_title %}{{ page_title }}{% endblock og_title %}" />
+	        <meta property="og:image"         content="{% block og_image %}{{ COSINNUS_CURRENT_PORTAL.get_logo_image_url }}{% endblock og_image %}" />
+	        <meta property="og:site_name"     content="{% block og_site_name %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% else %}{{ COSINNUS_CURRENT_PORTAL.name }}{% endif %}{% endblock og_site_name %}" />
+	        <meta property="og:description"   content="{{ page_description }}" />
         {% endblock og_meta_attributes %}
 
         <!-- TODO: override main title that can be extended from (in main app!) -->
-        <title>{% block page_title %}{% endblock page_title %}{% block base_page_title %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %} - {% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% endif %}{% endblock base_page_title %}</title>
+        <title>{{ page_title }}</title>
         <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'images/apple-touch-icon-114x114-precomposed.png' %}" />
 
@@ -63,7 +70,8 @@
             <script src="{% static 'js/vendor/fullcalendar/lib/main.min.js' %}"></script>
 
 	        <script src="{% static 'js/vendor/jquery.sortElements.js' %}"></script>
-	        <script src="{% static 'js/vendor/moment-with-langs.min.js' %}"></script>
+	        <script src="{% static 'js/vendor/moment-with-locales.min.js' %}"></script>
+            <script src="{% static 'js/vendor/moment-timezone-with-data.min.js' %}"></script>
 	        <script src="{% static 'js/vendor/jquery.ui.widget.js' %}"></script>
             <script src="{% static 'js/vendor/jquery.fileupload.js' %}"></script>
             <script src="{% static 'js/vendor/simplebar.min.js' %}"></script>
@@ -150,6 +158,9 @@
 
 
 		{% include 'announcements/announcements.html' %}
+        {% if email_not_verified_announcement %}
+        {% include 'announcements/announcement.html' with announcement=email_not_verified_announcement %}
+        {% endif %}
 
         <div class="{% block container_classes %}container {{ cosinnus_css_class }}{% endblock container_classes %}" {% block container_attributes %}{% endblock container_attributes %}>
 
@@ -170,7 +181,7 @@
                         {% endblock override_breadcrumb %}
                     </div>
                     {# this fixes the breadcrumb being unclickable in mobile views #}
-                    <div class="visible-xs clearfix"></div>
+                    <div class="visible-xs visible-sm clearfix"></div>
 
                     {% block override_leftnav %}
                     <div class="col-lg-3 col-md-3"><!-- left column -->
@@ -198,24 +209,7 @@
         </div><!-- main container -->
 
         {% block footer %}
-            {% if SETTINGS.COSINNUS_V2_FORCE_SITE_FOOTER or not skip_page_footer and not SETTINGS.COSINNUS_USE_V2_NAVBAR and not SETTINGS.COSINNUS_USE_V2_DASHBOARD %}
-		        {% with portal_cms_roots=COSINNUS_CURRENT_PORTAL.wagtail_root_pages.all %}
-		        	{% if portal_cms_roots and portal_cms_roots.0.footer %}
-		        		<div class="footer-spacer"></div>
-				        <div class="widget-footer overlay-box overlay-box-gray cms-content cms-footer">
-				            <div class="container">
-				                <div class="row">
-				                    <div class="col-xs-12">
-			                    		{{ portal_cms_roots.0.footer|richtext }}
-				                    </div>
-				                </div><!-- row -->
-				            </div><!-- container -->
-				        </div><!-- footer -->
-				    {% else %}
-				    	<br/><br/><br/> <!-- replacement space for missing footer -->
-		        	{% endif %}
-		        {% endwith %}
-	        {% endif %}
+            {% include 'cosinnus/v2/footer.html' %}
         {% endblock footer %}
 
     {% block extrafooter %}

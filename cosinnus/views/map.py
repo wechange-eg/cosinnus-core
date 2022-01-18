@@ -11,7 +11,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.views.map_api import get_searchresult_by_itemid
-from cosinnus.utils.functions import is_number
+from cosinnus.utils.functions import is_number, get_int_or_None,\
+    get_float_or_None
 from cosinnus.models.managed_tags import CosinnusManagedTag
 from annoying.functions import get_object_or_None
 
@@ -100,11 +101,12 @@ class MapView(BaseMapView):
         # apply GET params that are settings parameters and are
         # set once and then discarded (unlike the map/search query parameters)
         map_settings.update({
-            'searchResultLimit': self.request.GET.get('search_result_limit', settings.COSINNUS_MAP_DEFAULT_RESULTS_PER_PAGE),
+            'searchResultLimit': get_int_or_None(self.request.GET.get('search_result_limit', settings.COSINNUS_MAP_DEFAULT_RESULTS_PER_PAGE)),
         })
-        if self.request.GET.get('filter_group', None):
+        filter_group = get_int_or_None(self.request.GET.get('filter_group', None))
+        if filter_group:
             map_settings.update({
-                'filterGroup': self.request.GET.get('filter_group'),
+                'filterGroup': filter_group,
             })
         options.update({
             'settings': map_settings,
@@ -194,14 +196,16 @@ class MapEmbedView(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        limit = self.request.GET.get('search_result_limit', settings.COSINNUS_MAP_DEFAULT_RESULTS_PER_PAGE)
+        
+        limit = get_int_or_None(self.request.GET.get('search_result_limit', settings.COSINNUS_MAP_DEFAULT_RESULTS_PER_PAGE))
         map_settings = {
             "searchResultLimit": limit and is_number(limit) and int(limit) or settings.COSINNUS_MAP_DEFAULT_RESULTS_PER_PAGE,
             "mobileSafeInteractions": True,
         }
-        if self.request.GET.get('filter_group', None):
+        filter_group = get_int_or_None(self.request.GET.get('filter_group', None))
+        if filter_group:
             map_settings.update({
-                "filterGroup": self.request.GET.get('filter_group', None)
+                'filterGroup': filter_group,
             })
         if self.request.GET.get('managed_tag', None):
             mtag = get_object_or_None(CosinnusManagedTag, slug=self.request.GET.get('managed_tag', None))
@@ -211,12 +215,13 @@ class MapEmbedView(TemplateView):
                 })
         
         zoom = self.request.GET.get('zoom', None)
-        if self.request.GET.get('location_lat', None) and self.request.GET.get('location_lon', None):
+        if get_float_or_None(self.request.GET.get('location_lat', None)) and \
+                get_float_or_None(self.request.GET.get('location_lon', None)):
             map_settings.update({
                 "map": {
                     "location": [
-                        self.request.GET.get('location_lat', None), 
-                        self.request.GET.get('location_lon', None)
+                        get_float_or_None(self.request.GET.get('location_lat', None)), 
+                        get_float_or_None(self.request.GET.get('location_lon', None))
                     ],
                     "zoom": zoom and is_number(zoom) and int(zoom) or 9
                 }
@@ -224,6 +229,7 @@ class MapEmbedView(TemplateView):
         context.update({
             'map_settings': map_settings
         })
+        print(map_settings)
         return context
 
 map_embed_view = MapEmbedView.as_view()

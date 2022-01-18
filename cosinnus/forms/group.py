@@ -15,8 +15,9 @@ from django.utils.translation import ugettext_lazy as _
 from awesome_avatar import forms as avatar_forms
 
 from cosinnus.forms.mixins import AdditionalFormsMixin
+from captcha.fields import CaptchaField
 from cosinnus_organization.models import CosinnusOrganization
-from cosinnus.models.group import (CosinnusGroupMembership,
+from cosinnus.models.group import (CosinnusBaseGroup, CosinnusGroupMembership,
                                    CosinnusPortal,
     CosinnusLocation, RelatedGroups, CosinnusGroupGalleryImage,
     CosinnusGroupCallToActionButton)
@@ -39,6 +40,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.group import SDG_CHOICES
 from cosinnus.forms.managed_tags import ManagedTagFormMixin
+from cosinnus.forms.translations import TranslatedFieldsFormMixin
 from cosinnus.utils.validators import validate_file_infection,\
     CleanFromToDateFieldsMixin
 from cosinnus.forms.widgets import SplitHiddenDateWidget
@@ -132,8 +134,8 @@ class GroupFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
                     self.instance.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
 
 
-class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin, 
-                GroupFormDynamicFieldsMixin, ManagedTagFormMixin, FormAttachableMixin, 
+class CosinnusBaseGroupForm(TranslatedFieldsFormMixin, FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin,
+                GroupFormDynamicFieldsMixin, ManagedTagFormMixin, FormAttachableMixin,
                 AdditionalFormsMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), 
@@ -158,8 +160,10 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
                         'avatar', 'wallpaper', 'website', 'video', 'twitter_username',
                          'twitter_widget_id', 'flickr_url', 'deactivated_apps', 'microsite_public_apps',
                          'call_to_action_active', 'call_to_action_title', 'call_to_action_description',
-                         'membership_mode'] \
+                         'membership_mode',] \
                         + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) \
+                        + (['show_contact_form'] if settings.COSINNUS_ALLOW_CONTACT_FORM_ON_MICROPAGE else []) \
+                        + (['publicly_visible'] if settings.COSINNUS_GROUP_PUBLICY_VISIBLE_OPTION_SHOWN else []) \
                         + (['facebook_group_id', 'facebook_page_id',] if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED else []) \
                         + (['embedded_dashboard_html',] if settings.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED else []) \
                         + (['managed_tag_field',] if (settings.COSINNUS_MANAGED_TAGS_ENABLED \
@@ -185,7 +189,23 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
         for field in list(self.fields.values()):
             if type(field.widget) is SelectMultiple:
                 field.widget = Select2MultipleWidget(choices=field.choices)
-    
+        
+        if 'video_conference_type' in self.fields:
+            # dynamic dropdown for video conference types in events
+            custom_choices = [
+                (CosinnusBaseGroup.NO_VIDEO_CONFERENCE, _('No video conference')),
+            ]
+            if settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS:
+                custom_choices += [
+                    (CosinnusBaseGroup.BBB_MEETING, _('BBB-Meeting')),
+                ]
+            if CosinnusPortal.get_current().video_conference_server:
+                custom_choices += [
+                    (CosinnusBaseGroup.FAIRMEETING, _('Fairmeeting')),
+                ]
+                self.fields['video_conference_type'].initial = CosinnusBaseGroup.FAIRMEETING
+            self.fields['video_conference_type'].choices = custom_choices
+        
     @property
     def group(self):
         """ This is for `FormAttachableMixin` to get passed the group as a target for
@@ -344,7 +364,7 @@ class _CosinnusProjectForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBa
     extra_forms_setting = 'COSINNUS_PROJECT_ADDITIONAL_FORMS'
 
     class Meta(object):
-        fields = CosinnusBaseGroupForm.Meta.fields + ['parent',]
+        fields = CosinnusBaseGroupForm.Meta.fields + ['parent', 'video_conference_type']
         model = CosinnusProject
     
     def __init__(self, instance, *args, **kwargs):    
@@ -375,7 +395,7 @@ class _CosinnusSocietyForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBa
     extra_forms_setting = 'COSINNUS_GROUP_ADDITIONAL_FORMS'
 
     class Meta(object):
-        fields = CosinnusBaseGroupForm.Meta.fields
+        fields = CosinnusBaseGroupForm.Meta.fields + ['video_conference_type',]
         model = CosinnusSociety
 
 
@@ -572,47 +592,35 @@ class CosinusWorkshopParticipantCSVImportForm(forms.Form):
         reader = self.process_csv(csv_file)
         header = next(reader, None)
         cleaned_header = self.clean_row_data(header)
-
-        group_header = self.process_and_validate_header(cleaned_header)
         data = self.process_and_validate_data(reader)
 
         return {
             'header_original': cleaned_header,
-            'header': group_header,
             'data': data
         }
 
     def process_and_validate_data(self, reader):
         data = []
-        workshop_usernames = []
+        usernames = []
 
         for row in reader:
             cleaned_row = self.clean_row_data(row)
-            workshop_username = cleaned_row[0]
-            if ' ' in workshop_username:
-                raise forms.ValidationError(_("Please remove the whitespace from '{}'").format(workshop_username))
-            if workshop_username not in workshop_usernames:
-                workshop_usernames.append(workshop_username)
+            username = cleaned_row[0]
+            first_name = cleaned_row[1]
+            if not username:
+                raise forms.ValidationError(_("Please always provide a username"))
+            if not first_name:
+                raise forms.ValidationError(_("Please always provide a first name"))
+            if ' ' in username:
+                raise forms.ValidationError(_("Please remove the whitespace from '{}'").format(username))
+            if username not in usernames:
+                usernames.append(username)
             else:
                 raise forms.ValidationError(_("Names must be unique. You added '{}' more"
-                                              " then once to your CSV. Please change the name.").format(workshop_username))
+                                              " then once to your CSV. Please change the name.").format(username))
             data.append(self.clean_row_data(cleaned_row))
 
         return data
-
-    def process_and_validate_header(self, header):
-        group_header = ['', '', '']
-
-        for slug in header[3:]:
-                try:
-                    group = CosinnusGroup.objects.get(parent=self.group,
-                                                      portal=self.group.portal,
-                                                      type=CosinnusGroup.TYPE_PROJECT,
-                                                      slug=slug.lower())
-                    group_header.append(group)
-                except ObjectDoesNotExist:
-                    raise forms.ValidationError(_("Can't find workshop with slug '{}'").format(slug))
-        return group_header
 
     def process_csv(self, csv_file):
         try:
@@ -633,3 +641,9 @@ class CosinusWorkshopParticipantCSVImportForm(forms.Form):
         for entry in row:
             cleaned_row.append(entry.strip())
         return cleaned_row
+
+
+class GroupContactForm(forms.Form):
+    email = forms.EmailField()
+    message = forms.CharField(widget=forms.Textarea)
+    captcha = CaptchaField()

@@ -34,6 +34,8 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
         list_filter = ('ended', 'portal')
         search_fields = ('meeting_id', 'internal_meeting_id', 'name')
         actions = (restart_bbb_rooms, )
+        change_form_template = 'admin/bbbroom/change_form.html'
+        
     admin.site.register(BBBRoom, CosinnusBBBRoomAdmin)
     
     
@@ -72,11 +74,12 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
         
     class CosinnusConferenceAdmin(CosinnusProjectAdmin):
         
-        actions = ['convert_to_project', 'convert_to_society',]
-        exclude = None
+        actions = CosinnusProjectAdmin.actions + ['convert_to_project']
         inlines = CosinnusProjectAdmin.inlines + [
             CosinnusConferencePremiumBlockInline
         ]
+        readonly_fields = ('created', 'last_modified', 'is_premium_currently',
+                           'attached_objects')
         
         def get_actions(self, request):
             actions = super(CosinnusConferenceAdmin, self).get_actions(request)

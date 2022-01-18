@@ -88,10 +88,10 @@ export function ManageRoomButtonsConnector(props: ManageRoomButtonsProps) {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={() => setDeleteOpen(false)} color="primary">
+              <Button onClick={() => setDeleteOpen(false)} color="secondary">
                 <FormattedMessage id="No" />
               </Button>
-              <Button onClick={deleteRoom} color="primary">
+              <Button onClick={deleteRoom} color="secondary">
                 <FormattedMessage id="Yes" />
               </Button>
             </DialogActions>

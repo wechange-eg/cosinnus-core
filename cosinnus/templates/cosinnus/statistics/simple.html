@@ -7,9 +7,9 @@
 	<div type="button" class="btn w100 btn-appnavi btn-no-interact regular-space">
 	    <ul class="media-list">
 	        <li class="media">
-	        	<a class="pull-left" href="#">
+	        	<span class="pull-left">
                 </a>
-                <a class="pull-left" href="#">
+                <span class="pull-left">
                     <i class="fa fa-table"></i>
                 </a>
 	            <div class="media-body">
@@ -19,12 +19,28 @@
 	    </ul>
 	</div>
 	
+	{% if SETTINGS.COSINNUS_CONFERENCES_ENABLED %}
+	    <button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:housekeeping-conference-storage-report' %}">
+	        <ul class="media-list">
+	            <li class="media">
+	               <span class="pull-left">
+	                    <i class="fa fa-download"></i>
+	                </span>
+	                <div class="media-body">
+	                    {% trans "HD space used by conferences" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+	
+	{% endif %}
+	
 	<button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:housekeeping-group-storage-report' %}">
 	    <ul class="media-list">
 	        <li class="media">
-	           <a class="pull-left">
+	           <span class="pull-left">
 	                <i class="fa fa-download"></i>
-	            </a>
+	            </span>
 	            <div class="media-body">
                     {% trans "HD space used by groups" %}
 	            </div>
@@ -35,9 +51,9 @@
 	<button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:housekeeping-project-storage-report' %}">
 	    <ul class="media-list">
 	        <li class="media">
-	           <a class="pull-left">
+	           <span class="pull-left">
 	                <i class="fa fa-download"></i>
-	            </a>
+	            </span>
 	            <div class="media-body">
                     {% trans "HD space used by projects" %}
 	            </div>
@@ -48,9 +64,9 @@
 	<button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:housekeeping-user-activity-info' %}">
         <ul class="media-list">
             <li class="media">
-               <a class="pull-left">
+               <span class="pull-left">
                     <i class="fa fa-download"></i>
-                </a>
+                </span>
                 <div class="media-body">
                     {% trans "User statistics (min 1x logged in)" %}
                 </div>
@@ -62,9 +78,9 @@
 	    <button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:simple-statistics-bbb-room-visits' %}">
 	        <ul class="media-list">
 	            <li class="media">
-	               <a class="pull-left">
+	               <span class="pull-left">
 	                    <i class="fa fa-download"></i>
-	                </a>
+	                </span>
 	                <div class="media-body">
 	                    {% trans "BBB Room Visits" %}
 	                </div>
@@ -77,9 +93,9 @@
 	    <button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:housekeeping-newsletter-user-emails' %}">
 	        <ul class="media-list">
 	            <li class="media">
-	               <a class="pull-left">
+	               <span class="pull-left">
 	                    <i class="fa fa-download"></i>
-	                </a>
+	                </span>
 	                <div class="media-body">
                         {% trans "E-Mails of all newsletter subcribers" %}
 	                </div>
@@ -90,9 +106,9 @@
 	    <button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:housekeeping-active-user-emails' %}">
 	        <ul class="media-list">
 	            <li class="media">
-	               <a class="pull-left">
+	               <span class="pull-left">
 	                    <i class="fa fa-download"></i>
-	                </a>
+	                </span>
 	                <div class="media-body">
 	                    {% trans "E-Mails of ALL active users" %}
 	                </div>
@@ -138,9 +154,9 @@
         <button type="submit" class="btn btn-emphasized">
 	        <ul class="media-list">
 	            <li class="media">
-	                <a class="pull-left" href="#">
+	                <span class="pull-left">
 	                    <i class="fa fa-pencil"></i>
-	                </a>
+	                </span>
 	                <div class="media-body">
 	                      {% trans "Ok" %}
 	                </div>

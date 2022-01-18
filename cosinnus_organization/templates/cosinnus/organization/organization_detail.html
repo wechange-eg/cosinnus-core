@@ -64,9 +64,9 @@
 				                <button type="submit" class="btn btn-emphasized btn-autosize large-space">
 				                    <ul class="media-list">
 				                        <li class="media">
-				                            <a class="pull-left" href="#">
+				                            <span class="pull-left">
 				                                <i class="fa fa-check"></i>
-				                            </a>
+				                            </span>
 				                            <div class="media-body">
 				                                {% trans "Invite users" %}
 				                            </div>
@@ -100,9 +100,9 @@
 			                                                         data-toggle="modal" data-target="#{{modal_revoke_id}}" title="{% trans "Revoke Invitation" %}">
 			                                                    <ul class="media-list">
 			                                                        <li class="media">
-			                                                            <a class="pull-left" href="#">
+			                                                            <span class="pull-left">
 			                                                                <i class="fa fa-close"></i>
-			                                                            </a>
+			                                                            </span>
 			                                                        </li>
 			                                                    </ul>
 			                                                </button>
@@ -115,9 +115,9 @@
 			                                                         data-toggle="modal" data-target="#{{modal_decline_invitation_id}}" title="{% trans "Decline Invitation" %}">
 			                                                    <ul class="media-list">
 			                                                        <li class="media">
-			                                                            <a class="pull-left" href="#">
+			                                                            <span class="pull-left">
 			                                                                <i class="fa fa-close"></i>
-			                                                            </a>
+			                                                            </span>
 			                                                        </li>
 			                                                    </ul>
 			                                                </button>
@@ -126,9 +126,9 @@
 			                                                    <button type="submit" class="btn btn-emphasized">
 			                                                        <ul class="media-list">
 			                                                            <li class="media">
-			                                                                <a class="pull-left" href="#">
+			                                                                <span class="pull-left">
 			                                                                    <i class="fa fa-sign-in"></i>
-			                                                                </a>
+			                                                                </span>
 			                                                                <div class="media-body">
 			                                                                    {% trans "Accept Invitation" %}
 			                                                                </div>
@@ -207,9 +207,9 @@
 				            <button type="submit" class="btn btn-emphasized btn-autosize btn-left" data-toggle="modal" data-target="#modal-recruit-users">
 				                <ul class="media-list">
 				                    <li class="media">
-				                        <a class="pull-left" href="#">
+				                        <span class="pull-left">
 				                            <i class="fa fa-user-plus"></i>
-				                        </a>
+				                        </span>
 				                        <div class="media-body">
 				                            {% trans "Invite people" %}
 				                        </div>
@@ -246,9 +246,9 @@
                                                              data-toggle="modal" data-target="#{{modal_id}}" title="{% trans "Delete invitation" %}">
                                                         <ul class="media-list">
                                                             <li class="media">
-                                                                <a class="pull-left" href="#">
+                                                                <span class="pull-left">
                                                                     <i class="fa fa-trash"></i>
-                                                                </a>
+                                                                </span>
                                                             </li>
                                                         </ul>
                                                     </button>
@@ -256,9 +256,9 @@
                                                     <button data-email="{{ recruitation.email }}" type="button" class="btn btn-emphasized btn-icon-only pull-right button-add-email" title="{% trans "Resend invitation" %}">
                                                         <ul class="media-list">
                                                             <li class="media">
-                                                                <a class="pull-left" href="#">
+                                                                <span class="pull-left">
                                                                     <i class="fa fa-refresh"></i>
-                                                                </a>
+                                                                </span>
                                                             </li>
                                                         </ul>
                                                     </button>
@@ -358,9 +358,9 @@
                                                              data-toggle="modal" data-target="#{{modal_kick_id}}" title="{% trans "Decline User" %}">
                                                         <ul class="media-list">
                                                             <li class="media">
-                                                                <a class="pull-left" href="#">
+                                                                <span class="pull-left">
                                                                     <i class="fa fa-close"></i>
-                                                                </a>
+                                                                </span>
                                                             </li>
                                                         </ul>
                                                     </button>
@@ -428,13 +428,13 @@
 			                <div class="btn btn-emphasized w100">
 			                    <ul class="media-list">
 			                        <li class="media">
-			                            <span class="pull-left" href="{{ member|profile_url }}">
+			                            <a class="pull-left" href="{{ member|profile_url }}">
 			                                {% include "cosinnus/user/user_avatar_image.html" with user=member %}
-			                            </span>
-			                            {% if user|has_write_access:object %}
-			                            <a class="pull-right fadedown-clickarea" href="#">
-			                                <i class="fa fa-chevron-down"></i>
 			                            </a>
+			                            {% if user|has_write_access:object %}
+			                            <span class="pull-right fadedown-clickarea">
+			                                <i class="fa fa-chevron-down"></i>
+			                            </span>
 			                            {% endif %}
 			                            {% if not member == user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
 					                    {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
@@ -458,9 +458,9 @@
 				                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_kick_id}}">
 				                        <ul class="media-list">
 				                            <li class="media">
-				                                <a class="pull-left" href="#">
+				                                <span class="pull-left">
 				                                    <i class="fa fa-eraser"></i>
-				                                </a>
+				                                </span>
 				                                <div class="media-body">
 				                                    {% trans "Kick" %}
 				                                </div>
@@ -488,9 +488,9 @@
 			            <div class="btn btn-default w100">
 			                <ul class="media-list">
 			                    <li class="media">
-			                        <a class="pull-left" href="#">
+			                        <span class="pull-left">
 			                            <img src="{% static 'images/jane-doe.png' %}" />
-			                        </a>
+			                        </span>
 			                        <div class="media-body">
 			                            {% blocktrans with hidden_count=hidden_user_count %}And {{ hidden_count }} private users...{% endblocktrans %}
 			                        </div>
@@ -504,13 +504,13 @@
 			            <div class="btn btn-default w100" href="?show=all">
 			                <ul class="media-list">
 			                    <li class="media">
-			                        <a class="pull-left">
+			                        <span class="pull-left">
 			                            <i class="fa fa-chevron-down"></i>
-			                        </a>
+			                        </span>
 			                        <div class="media-body">
-			                            <a href="?show=all">
+			                            <span href="?show=all">
 			                                {% blocktrans with more_count=more_user_count %}Show all of the other {{ more_count }} users...{% endblocktrans %}
-			                            </a>
+			                            </span>
 			                        </div>
 			                    </li>
 			                </ul>

@@ -174,7 +174,7 @@
 			&, i.fas, i.fa {
 				color: @text-color
 			}
-			a.pull-left {
+			a.pull-left, span.pull-left {
 				background-color: @background-color;
 				margin-left: 10px;
 			}
@@ -193,7 +193,9 @@
 				border-bottom: 1px solid @border-color;
 				margin: -1px 0 -1px 0;
 				padding: 4px 0px;
-				
+				.translations-link {
+					padding-left: 20px;
+				}
 				&.header-only {
 					display: none;
 				}
@@ -215,6 +217,15 @@
 					font-size: 14px;
 				}
 			}
+			.field-translations {
+				.cosinnus-field, .cosinnus-media-field {
+					&> label {
+						display: block;
+						padding-left: 20px;
+					}
+				}
+			}
+
 			.cosinnus-field-input input {
 				padding: 10px 20px 5px 20px;
 			}
@@ -265,7 +276,7 @@
 					text-align: right;
 					float: right;
 				}
-				a.pull-left {
+				a.pull-left, span.pull-left {
 					display: none;
 				}
 				.media-body {

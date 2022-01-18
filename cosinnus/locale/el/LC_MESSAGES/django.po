@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:22+0200\n"
+"POT-Creation-Date: 2021-11-18 17:13+0100\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,12 +32,10 @@ msgid "Rocket: Fix missing RocketChat room membership for users"
 msgstr "Rocket: Επιδιορθώστε τη συνδρομή χρηστών για δωμάτιο RocketChat που λείπει"
 
 #, fuzzy, python-format
-#| msgid "%d Users' rocketchat room memberships were re-done."
 msgid "%d Users' nextcloud folder memberships were re-done."
 msgstr "Έγινε αναδημιουργία %d συνδρομών χρηστών για δωμάτιο rocketchat."
 
 #, fuzzy
-#| msgid "Rocket: Fix missing RocketChat room membership for users"
 msgid "Nextcloud: Fix missing Nextcloud folder membership for users"
 msgstr "Rocket: Επιδιορθώστε τη συνδρομή χρηστών για δωμάτιο RocketChat που λείπει"
 
@@ -49,12 +47,10 @@ msgid "The following items were converted to %s:"
 msgstr "Τα παρακάτω στοιχεία μετατράπηκαν σε %s:"
 
 #, fuzzy
-#| msgid "The following items were converted to %s:"
 msgid "The following items were activated:"
 msgstr "Τα παρακάτω στοιχεία μετατράπηκαν σε %s:"
 
 #, fuzzy
-#| msgid "The following items were converted to %s:"
 msgid "The following items were deactivated:"
 msgstr "Τα παρακάτω στοιχεία μετατράπηκαν σε %s:"
 
@@ -88,6 +84,14 @@ msgstr "Το ToS Έγινε Δεκτό"
 msgid "ToS not Accepted"
 msgstr "Το ToS Δεν έγινε Δεκτό"
 
+msgid "Email verified"
+msgstr ""
+
+#, fuzzy
+#| msgid "not specified"
+msgid "Email not verified"
+msgstr "δεν καθορίζεται"
+
 msgid "User Logged In"
 msgstr "Συνδεδεμένος Χρήστης"
 
@@ -104,8 +108,6 @@ msgid "Yes"
 msgstr "Ναι"
 
 #, fuzzy
-#| msgctxt "join team button second item"
-#| msgid "Now"
 msgid "No"
 msgstr "Τώρα"
 
@@ -123,12 +125,10 @@ msgid "DEACTIVATE user accounts and DELETE them after 30 days"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "%d Users were deactivated successfully."
 msgid "%(count)d User account(s) were reactivated successfully."
 msgstr "%d Χρήστες απενεργοποιήθηκαν με επιτυχία."
 
 #, fuzzy
-#| msgid "Successfully activated user account"
 msgid "Reactivate user accounts"
 msgstr "Ο λογαριασμός χρήστη ενεργοποιήθηκε με επιτυχία"
 
@@ -155,9 +155,6 @@ msgstr "Rocket: Επιδιορθώστε/δημιουργήστε λογαρια
 
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Επιδιορθώστε τις συνδρομές χρηστών για δωμάτιο RocketChat"
-
-msgid "Restart"
-msgstr "Επανεκκίνηση"
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "Αυτή η διεύθυνση email για τον λογαριασμό που προσπαθείτε να χρησιμοποιήσετε χρειάζεται να ενεργοποιηθεί πριν να συνδεθείτε."
@@ -228,6 +225,18 @@ msgstr "Κουζίνα χωρίς λακτόζη"
 msgid "Gluten-free cuisine"
 msgstr "Κουζίνα χωρίς γλουτένη"
 
+msgid "Bookmark"
+msgstr "Σελιδοδείκτης"
+
+msgid "Bookmarked"
+msgstr "Με σελιδοδείκτη"
+
+msgid "Bookmark list"
+msgstr "Λίστα Σελιδοδεικτών"
+
+msgid "Bookmarked Users list"
+msgstr "Λίστα Χρηστών με Σελιδοδείκτη"
+
 msgid "General"
 msgstr "Γενικά"
 
@@ -240,17 +249,8 @@ msgstr "Περιορισμένος"
 msgid "Premium"
 msgstr "Premium"
 
-msgid "Bookmark"
-msgstr "Σελιδοδείκτης"
-
-msgid "Bookmarked"
-msgstr "Με σελιδοδείκτη"
-
-msgid "Bookmark list"
-msgstr "Λίστα Σελιδοδεικτών"
-
-msgid "Bookmarked Users list"
-msgstr "Λίστα Χρηστών με Σελιδοδείκτη"
+msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
+msgstr ""
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
 msgstr "Μόνο τα εγγεγραμμένα μέλη μπορούν να δουν το περιεχόμενου που ζητήσατε! Συνδεθείτε ή δημιουργήστε λογαριασμό τώρα!"
@@ -272,6 +272,9 @@ msgid "This account is no longer active. You have been logged out."
 msgstr "Αυτός ο λογαριασμός δεν είναι πλέον ενεργός. Έχετε αποσυνδεθεί."
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
+
+msgid "Sorry, only admin accounts may log in at this time."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -611,6 +614,11 @@ msgctxt "Multi-Address Field Subfield"
 msgid "Mobile Phone Number"
 msgstr "Κινητό"
 
+#, fuzzy
+#| msgid "(No choice)"
+msgid "No choice"
+msgstr "(καμία επιλογή)"
+
 msgid "(No choice)"
 msgstr "(καμία επιλογή)"
 
@@ -680,6 +688,17 @@ msgstr "Την επόμενη εβδομάδα"
 msgid "Next month"
 msgstr "Τον επόμενο μήνα"
 
+msgid "Fairmeeting"
+msgstr ""
+
+#, fuzzy
+#| msgid "View conference"
+msgid "No video conference"
+msgstr "Προβολή σύσκεψης"
+
+msgid "BBB-Meeting"
+msgstr ""
+
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
 msgstr "Αυτός δεν φαίνεται να είναι ένας έγκυρος σύνδεσμος YouTube ή Vimeo!"
 
@@ -699,14 +718,17 @@ msgstr "Χρήστες"
 msgid "Groups"
 msgstr "Ομάδες"
 
+msgid "Please always provide a username"
+msgstr ""
+
+msgid "Please always provide a first name"
+msgstr ""
+
 msgid "Please remove the whitespace from '{}'"
 msgstr "Παρακαλούμε αφαιρέστε τον κενό χώρο από '{}'"
 
 msgid "Names must be unique. You added '{}' more then once to your CSV. Please change the name."
 msgstr "Τα ονόματα πρέπει να είναι μοναδικά. Προσθέσατε '{}' περισσότερες από μία φορές στο CSV σας. Παρακαλούμε αλλάξτε το όνομα."
-
-msgid "Can't find workshop with slug '{}'"
-msgstr "Δεν μπορώ να βρω σεμινάριο με slug '{}'"
 
 msgid "This is not a valid CSV File"
 msgstr "Αυτό δεν είναι ένα έγκυρο Αρχείο CSV"
@@ -735,6 +757,15 @@ msgstr "Μου αρέσει"
 
 msgid "Persons"
 msgstr "Άτομα"
+
+msgid "Location"
+msgstr "Τοποθεσία"
+
+msgid "Latitude"
+msgstr "Γεωγραφικό Πλάτος"
+
+msgid "Longitude"
+msgstr "Γεωγραφικό Μήκος"
 
 msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
 msgstr "Παρακαλούμε εισάγετε ένα σωστό email και κωδικό πρόσβασης. Σημειώστε ότι και τα δύο πεδία μπορεί να είναι με διάκριση πεζών-κεφαλαίων."
@@ -821,20 +852,14 @@ msgstr "ο κωδικός πρόσβασης ορίστηκε για να εισ
 msgid "the password set to enter the room as a attendee"
 msgstr "ο κωδικός πρόσβασης ορίστηκε για να εισέλθετε στο δωμάτιο ως παρευρισκόμενος"
 
-msgid "the rooms welcome message"
-msgstr "το μήνυμα καλωσορίσματος των δωματίων"
-
-msgid "the welcome message, that is displayed to attendees"
-msgstr "το μήνυμα καλωσορίσματος που εμφανίζεται στους παρευρισκόμενους"
-
 msgid "number for dialing into the conference via telephone"
 msgstr "αριθμός για πληκτρολόγηση στη σύσκεψη μέσω τηλεφώνου"
 
 msgid "pin to enter for telephone participants"
 msgstr "κωδικός pin για να εισάγουν οι συμμετέχοντες μέσω τηλεφώνου"
 
-msgid "options for the room, that are represented in the bigbluebutton API"
-msgstr "επιλογές για το δωμάτιο που εκπροσωπούνται στο bigbluebutton API"
+msgid "the rooms welcome message"
+msgstr "το μήνυμα καλωσορίσματος των δωματίων"
 
 msgid "Room Type"
 msgstr "Είδος Δωματίου"
@@ -868,11 +893,26 @@ msgstr "Cosinnus CMS Micropage"
 msgid "Cosinnus Micropages"
 msgstr "Cosinnus Micropages"
 
+msgid "--- UNSET (Inherit) ---"
+msgstr ""
+
 msgid "BBB Server"
 msgstr "Εξυπηρετητής BBB"
 
 msgid "BBB Server for Premium Conferences"
 msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
+
+msgid "Turn on microphone on entering"
+msgstr ""
+
+msgid "Whether the microphone is active when entering the BBB room"
+msgstr ""
+
+msgid "Turn on camera on entering"
+msgstr ""
+
+msgid "Whether the camera is active when entering the BBB room"
+msgstr ""
 
 msgid "Cosinnus Conference Setting"
 msgstr "Ρύθμιση Σύσκεψης Cosinnus"
@@ -1050,6 +1090,49 @@ msgstr "Αιτήσεις Σύσκεψης Cosinnus"
 msgid "Note from the organizers"
 msgstr "Σημείωση από τους διοργανωτές"
 
+msgid "Conference"
+msgstr "Σύσκεψη"
+
+msgid "Start Datetime"
+msgstr "Έναρξη Datetime"
+
+msgid "During this time, the conference will be using the premium BBB server."
+msgstr ""
+
+msgid "End Datetime"
+msgstr "Λήξη Datetime"
+
+#, fuzzy
+msgid "Conference participants"
+msgstr "Εφαρμογές Σύσκεψης"
+
+msgid "The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins."
+msgstr ""
+
+#, fuzzy
+msgid "Cosinnus Conference Premium Block"
+msgstr "Ρύθμιση Σύσκεψης Cosinnus"
+
+#, fuzzy
+msgid "Cosinnus Conference Premium Blocks"
+msgstr "Ρυθμίσεις Σύσκεψης Cosinnus"
+
+msgid "The time frame while the selected capacity is available."
+msgstr ""
+
+#, fuzzy
+msgid "Maximum BBB participants"
+msgstr "Μέγιστος Αριθμός συμμετεχόντων"
+
+msgid "The maximum number of BBB participants that should be allowed for all premium conferences. This is only a guideline for portal admins."
+msgstr ""
+
+msgid "Conference Total Premium Capacity Info"
+msgstr ""
+
+msgid "Conference Total Premium Capacity Infos"
+msgstr ""
+
 msgid "Complaint Text"
 msgstr "Κείμενο Καταγγελίας"
 
@@ -1225,12 +1308,13 @@ msgstr "Για εκδηλώσεις παλιού τύπου μόνο αναδυ�
 msgid "Dynamic choice field choices"
 msgstr "Επιλογές πεδίου δυναμικής επιλογής"
 
+#, fuzzy
+msgid "Default userprofile description"
+msgstr "Λεπτομερής Περιγραφή"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "Έργο"
-
-msgid "Conference"
-msgstr "Σύσκεψη"
 
 msgid "Regular membership requests"
 msgstr "Αιτήματα κανονικής συνδρομής"
@@ -1268,8 +1352,19 @@ msgstr "Εικόνα Ταπετσαρίας"
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "Εμφανίζεται ως μεγάλη εικόνα πανό στον Μικρότοπο (1140 x 240 px)"
 
+#, fuzzy
+#| msgid "Is visible"
+msgid "Publicly visible"
+msgstr "Είναι ορατός"
+
+msgid "Checks if a group/project should be visible publicly"
+msgstr ""
+
 msgid "Application method"
 msgstr "Μέθοδος αίτησης"
+
+msgid "Type of video conference available for a group / a project"
+msgstr ""
 
 msgid "Microsite Video"
 msgstr "Βίντεο Μικρότοπου"
@@ -1334,12 +1429,6 @@ msgstr "Ταυτότητα Nextcloud Groupfolder"
 msgid "Is conference"
 msgstr "Είναι σύσκεψη"
 
-msgid "Start Datetime"
-msgstr "Έναρξη Datetime"
-
-msgid "End Datetime"
-msgstr "Λήξη Datetime"
-
 msgid "Allow temporary users accounts for this conference."
 msgstr "Επιτρέπονται προσωρινοί λογαριασμοί χρηστών για αυτή τη σύσκεψη."
 
@@ -1367,6 +1456,10 @@ msgstr "Σχετικές Ομάδες"
 msgid "Dynamic extra fields"
 msgstr "Δυναμικά πρόσθετα πεδία"
 
+#, fuzzy
+msgid "If set to true, a contact form will be displayed on the micropage."
+msgstr "Εάν αυτό είναι ενεργό, ένα πλαίσιο Έκκλησης για Δράση θα εμφανιστεί στον μικρότοπο."
+
 msgid "Cosinnus project"
 msgstr "Έργο Cosinnus"
 
@@ -1385,8 +1478,6 @@ msgid "Request about your group \"%(group_name)s\""
 msgstr "Αίτημα για την ομάδα σας \"%(group_name)s\""
 
 #, fuzzy
-#| msgctxt "join team button second item"
-#| msgid "Now"
 msgid "Now"
 msgstr "Τώρα"
 
@@ -1428,15 +1519,6 @@ msgstr "Σταθερές Ανακατευθύνσεις Ομάδας"
 
 msgid "Permanent Team Redirect"
 msgstr "Σταθερή Ανακατεύθυνση Ομάδας"
-
-msgid "Location"
-msgstr "Τοποθεσία"
-
-msgid "Latitude"
-msgstr "Γεωγραφικό Πλάτος"
-
-msgid "Longitude"
-msgstr "Γεωγραφικό Μήκος"
 
 msgid "CosinnusLocation"
 msgstr "Τοποθεσία Cosinnus"
@@ -1484,7 +1566,6 @@ msgid "Managed Tag"
 msgstr "Διαχειριζόμενη Ετικέτα"
 
 #, fuzzy
-#| msgid "Managed Tag"
 msgid "Managed Tags"
 msgstr "Διαχειριζόμενη Ετικέτα"
 
@@ -1980,6 +2061,42 @@ msgstr "Στοιχείο διάταξης Widget"
 msgid "Widget configuration items"
 msgstr "Στοιχεία διάταξης Widget"
 
+msgid "Advanced BBB-Room Tools"
+msgstr ""
+
+msgid "Directly enter the BBB meeting"
+msgstr ""
+
+msgid "Join meeting directly"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a name for the conference."
+msgid "Enter the BBB meeting in the conference frontend"
+msgstr "Εισάγετε όνομα για τη σύσκεψη."
+
+msgid "Join meeting in conference frontend"
+msgstr ""
+
+msgid "For options and parameters, go to the parent event's admin page"
+msgstr ""
+
+#, fuzzy
+#| msgid "edit this page"
+msgid "Event admin page"
+msgstr "επεξεργασία αυτής της σελίδας"
+
+msgid "Not implemented for this type of event"
+msgstr ""
+
+msgid "For further options and parameters, go to the parent conference's admin page"
+msgstr ""
+
+#, fuzzy
+#| msgid "Conference name"
+msgid "Conference admin page"
+msgstr "Όνομα σύσκεψης"
+
 msgid "select this page"
 msgstr "επιλογή αυτής της σελίδας"
 
@@ -2097,6 +2214,12 @@ msgstr "Δεν έχουν δοθεί πληροφορίες"
 msgid "Back to Project Overview"
 msgstr "Πίσω στην Επισκόπηση Έργου"
 
+msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
+msgstr ""
+
+msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
+msgstr ""
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr "Μπορείτε να ορίσετε τις ρυθμίσεις σύσκεψης σε αυτό το επίπεδο. Όλα τα αντικείμενα κάτω από αυτό το επίπεδο στην ιεραρχία θα έχουν αυτές τις ρυθμίσεις, εκτός εάν έχουν ορίσει τα ίδια ρυθμίσεις σύσκεψης."
 
@@ -2105,70 +2228,6 @@ msgstr "Διαχείριση"
 
 msgid "Select a page on the left side."
 msgstr "Επιλέξτε μια σελίδα στην αριστερή πλευρά."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια με προσαρμοσμένες ρυθμίσεις Εξυπηρετητή-BBB"
-
-msgid "Overview - All Conferences"
-msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια"
-
-msgid "Past"
-msgstr "Προηγούμενος"
-
-msgid "View Upcoming"
-msgstr "Προβολή Προσεχούς"
-
-msgid "Upcoming"
-msgstr "Προσεχής"
-
-msgid "View Past"
-msgstr "Προβολή Προηγούμενου"
-
-msgid "Portal Setting"
-msgstr "Ρύθμιση Πύλης"
-
-msgid "Conference Settings"
-msgstr "Ρυθμίσεις Σύσκεψης"
-
-msgid "Is premium"
-msgstr "Είναι premium"
-
-msgid "Not premium"
-msgstr "Όχι premium"
-
-msgid "Rooms"
-msgstr "Δωμάτια"
-
-msgid "Start"
-msgstr "Έναρξη"
-
-msgid "running now!"
-msgstr "εκτελείται τώρα!"
-
-msgid "Conference Setting"
-msgstr "Ρύθμιση Σύσκεψης"
-
-msgid "Room"
-msgstr "Δωμάτιο"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Εκδήλωση"
-
-msgid "There are no items to show."
-msgstr "Δεν υπάρχουν στοιχεία να προβληθούν."
-
-msgid "BBB"
-msgstr "BBB"
-
-msgid "BBB Premium"
-msgstr "BBB Premium"
-
-msgid "Not set"
-msgstr "Δεν έχει οριστεί"
 
 msgid "Newsletters"
 msgstr "Newsletter"
@@ -2218,12 +2277,6 @@ msgstr "Email Καλωσορίσματος Χρήστη"
 msgid "Simple Statistics"
 msgstr "Απλή Στατιστική"
 
-msgid "Conference Overview"
-msgstr "Επισκόπηση Σύσκεψης"
-
-msgid "Conferences with Custom Settings"
-msgstr "Συσκέψεις με Προσαρμοσμένες Ρυθμίσεις"
-
 msgid "Edit"
 msgstr "Επεξεργασία"
 
@@ -2241,7 +2294,6 @@ msgid "Currently set Email Text"
 msgstr "Τρέχον Κείμενο Email"
 
 #, fuzzy
-#| msgid "Show more options..."
 msgid "Show all recipients..."
 msgstr "Εμφάνιση περισσότερων επιλογών..."
 
@@ -2298,6 +2350,9 @@ msgstr "Αναζήτηση για email, όνομα και επίθετο"
 
 msgid "search"
 msgstr "αναζήτηση"
+
+msgid "Add user"
+msgstr "Προσθήκη χρήστη"
 
 #, python-format
 msgid ""
@@ -2358,9 +2413,6 @@ msgstr "προηγούμενη"
 msgid "next"
 msgstr "επόμενη"
 
-msgid "Add user"
-msgstr "Προσθήκη χρήστη"
-
 msgid "Update User"
 msgstr "Ενημέρωση Χρήστη"
 
@@ -2384,6 +2436,11 @@ msgstr "Επεξεργασία Όρων Συμμετοχής"
 
 msgid "Manage Participation Applications"
 msgstr "Διαχείριση Αιτήσεων Συμμετοχής"
+
+#, fuzzy
+#| msgid "Temporary User Accounts"
+msgid "Manage Temporary User Accounts"
+msgstr "Προσωρινοί Λογαριασμοί Χρήστη"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -2801,6 +2858,51 @@ msgstr "Επιλέξτε χρήστες για ανάθεση σε αυτό το
 msgid "List of Applicants"
 msgstr "Λίστα Υποψηφίων"
 
+#, fuzzy
+msgid "Emails to conference participants"
+msgstr "Εφαρμογές Σύσκεψης"
+
+#, fuzzy
+#| msgctxt "subject of an E-Mail"
+#| msgid "Subject"
+msgid "subject"
+msgstr "Θέμα"
+
+#, fuzzy
+#| msgid "Content"
+msgid "content"
+msgstr "Περιεχόμενο"
+
+#, python-format
+msgid ""
+"\n"
+"                    This message will be sent to one participant.\n"
+"                    "
+msgid_plural ""
+"\n"
+"                    This message will be sent to %(count)s participants.\n"
+"                    "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Are you sure? Please check your entries beforehand with the help of a test email."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                        Yes, send immediately to one user.\n"
+"                        "
+msgid_plural ""
+"\n"
+"                        Yes, send immediately to %(count)s users.\n"
+"                        "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "No, don\\"
+msgstr ""
+
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
 msgstr "Εδώ μπορείτε να διαμορφώσετε το έντυπο της αίτησης που οι συμμετέχοντες πρέπει να συμπληρώσουν προκειμένου να υποβάλλουν αίτηση."
 
@@ -2861,9 +2963,6 @@ msgstr "(δεν έχουν επιλεγεί όροι)"
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr "Εάν φορτωθεί ένα αρχείο, οι υποψήφιοι θα πρέπει να συμφωνήσουν με αυτούς τους όρους σε αυτό το αρχείο επιλέγοντας ένα πλαίσιο"
 
-msgid "Conference reminders"
-msgstr "Υπενθυμίσεις σύσκεψης"
-
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr "Εδώ έχετε τη δυνατότητα να προετοιμάσετε ένα κείμενο με πληροφορίες για όλα τα μέλη της σύσκεψης. Αυτό θα σταλεί αυτόματα 1 εβδομάδα, 1 ημέρα και/ή 1 ώρα πριν από την έναρξη της σύσκεψης. Το email ειδοποίησης πάντα περιέχει ένα σύνδεσμο για τη σύσκεψη"
 
@@ -2894,6 +2993,24 @@ msgstr "Αυτό το email θα σταλεί 24 ώρες πριν από την
 
 msgid "Send 1 hour before conference"
 msgstr "Αποστολή 1 ώρα πριν από τη σύσκεψη"
+
+msgid "send immediately"
+msgstr ""
+
+msgid "This email will be sent immediately."
+msgstr ""
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr ""
+
+#, fuzzy
+#| msgid "No contact data has been added yet."
+msgid "no instant email has been sent yet."
+msgstr "Δεν έχουν προστεθεί ακόμη στοιχεία επικοινωνίας."
+
+msgid "Send immediately"
+msgstr ""
 
 #, python-format
 msgid "Edit Room “%(title)s”"
@@ -2990,50 +3107,145 @@ msgstr "Μπορείτε άμεσα να δημιουργήσετε εκδηλώ
 msgid "There are no rooms yet."
 msgstr "Δεν υπάρχουν ακόμη δωμάτια."
 
-msgid "Conference Management"
-msgstr "Διαχείριση Συνδιάσκεψης"
+msgid "Default"
+msgstr ""
 
-msgid "Conference is running"
-msgstr "Η σύσκεψη είναι σε εξέλιξη"
+#, fuzzy
+#| msgid "Temporary User Accounts"
+msgid "Temporary Users"
+msgstr "Προσωρινοί Λογαριασμοί Χρήστη"
 
-msgid "Conference is not running"
-msgstr "Η σύσκεψη δεν είναι σε εξέλιξη"
+#, fuzzy
+#| msgid "Password change"
+msgid "Password changed"
+msgstr "Αλλαγή κωδικού πρόσβασης"
 
-msgid "Accounts from CSV Upload"
-msgstr "Λογαριασμοί από Φόρτωση CSV"
+#, fuzzy
+#| msgid "Change password"
+msgid "Changed password for User"
+msgstr "Αλλαγή κωδικού πρόσβασης"
 
-msgid "Upload Participants"
-msgstr "Φόρτωση Συμμετεχόντων"
+#, fuzzy
+#| msgid "Remove User"
+msgid "Remove all Users"
+msgstr "Αφαίρεση Χρήστη"
 
-msgid "last login"
-msgstr "τελευταία σύνδεση"
+#, fuzzy
+#| msgid "Do you really want to remove the user?"
+msgid "Do you really want to remove all users?"
+msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε τον χρήστη;"
 
-msgid "no login yet"
-msgstr "δεν έγινε σύνδεση ακόμη"
+#, fuzzy
+#| msgid "Download the conditions"
+msgid "Download all user credentials"
+msgstr "Λήψη των όρων"
 
-msgid "Admin"
-msgstr "Διαχειριστής"
+#, fuzzy
+#| msgid "Do you really want to remove the user?"
+msgid "Do you really want to download all user credentials?"
+msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε τον χρήστη;"
 
-msgid "Member"
-msgstr "Μέλος"
+#, fuzzy
+#| msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
+msgid "Here you can create temporary user accounts that are valid only for this conference and only when you activate them."
+msgstr "Σε περίπτωση ενεργοποίησης, οι διαχειριστές της σύσκεψης μπορούν να δημιουργήσουν προσωρινούς λογαριασμούς χρήστη μπορούν να ενεργοποιηθούν και να απενεργοποιηθούν."
+
+msgid "Upload spreadsheet"
+msgstr ""
+
+#, python-format
+msgid "Please upload a spreadsheet with the following columns: unique user identifier, first name and last name. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>."
+msgstr ""
+
+msgid "Then add a row for each account that you want to add. You have to add a unique user identifier and a first name. The last name can be blank."
+msgstr ""
+
+#, fuzzy
+#| msgid "Upload CSV File"
+msgid "Upload File"
+msgstr "Φόρτωση Αρχείου CSV"
+
+#, fuzzy
+#| msgid "Download the conditions"
+msgid "Download User credentials"
+msgstr "Λήψη των όρων"
+
+msgid "Once you uploaded all Temporary Users you can download all user credentials and send them to the participants. Passwords are not stored in the system and can be downloaded only once!"
+msgstr ""
+
+msgid "Download passwords and login info"
+msgstr ""
+
+#, fuzzy
+#| msgid "Deactivate Member"
+msgid "Activate/Deactivate Users"
+msgstr "Απενεργοποίηση Μέλους"
+
+msgid "Once you uploaded all Temporary Users and sent out the credentials you can activate all User accounts. That means the users can actually login in with their credentials."
+msgstr ""
+
+msgid "Once the conference is over you can deactivate all ausers. That means they can not login in with their credentials anymore. Users can be repeatedly activated and deactivated, also individually further down in the table."
+msgstr ""
+
+#, fuzzy
+msgid "activate user accounts"
+msgstr "Ο λογαριασμός χρήστη ενεργοποιήθηκε με επιτυχία"
+
+#, fuzzy
+msgid "deactivate user accounts"
+msgstr "Ο λογαριασμός χρήστη ενεργοποιήθηκε με επιτυχία"
+
+msgid "reset/delete all users"
+msgstr ""
+
+msgid "Once the conference is over you can remove all ausers. This cannot be reversed."
+msgstr ""
+
+#, fuzzy
+msgid "remove user accounts"
+msgstr "Ο λογαριασμός χρήστη ενεργοποιήθηκε με επιτυχία"
+
+#, fuzzy
+#| msgid "Lastname"
+msgid "name"
+msgstr "Επίθετο"
 
 msgid "active"
 msgstr "ενεργό"
 
-msgid "not active"
-msgstr "ανενεργό"
+#, fuzzy
+#| msgid "Password"
+msgid "password"
+msgstr "Κωδικός πρόσβασης"
 
-msgid "User participates in the following workshops:"
-msgstr "Ο χρήστης συμμετέχει στα παρακάτω σεμινάρια:"
-
-msgid "deactivate member"
-msgstr "απενεργοποίηση μέλους"
-
-msgid "activate member"
-msgstr "ενεργοποίηση μέλους"
+msgid "last login"
+msgstr "τελευταία σύνδεση"
 
 msgid "remove user"
 msgstr "αφαίρεση χρήστη"
+
+#, fuzzy
+#| msgid "Yes"
+msgid "yes"
+msgstr "Ναι"
+
+msgid "no"
+msgstr ""
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "deactivate"
+msgstr "Απενεργοποίηση"
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "activate"
+msgstr "Απενεργοποίηση"
+
+#, fuzzy
+#| msgid "Reset password"
+msgid "(re)set password"
+msgstr "Επαναφορά κωδικού πρόσβασης"
 
 msgid "Do you really want to deactivate the member's user account ?"
 msgstr "Είστε βέβαιοι ότι θέλετε να απενεργοποιήσετε τον λογαριασμό χρήστη του μέλους;"
@@ -3053,20 +3265,153 @@ msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε 
 msgid "Remove User"
 msgstr "Αφαίρεση Χρήστη"
 
-msgid "Finish conference and deactivate user accounts"
-msgstr "Ολοκλήρωση σύσκεψης και απενεργοποίηση λογαριασμών χρήστη"
-
-msgid "Start conference and activate user accounts"
-msgstr "Έναρξη σύσκεψης και ενεργοποίηση λογαριασμών χρήστη"
-
 msgid "Download Statistics"
 msgstr "Λήψη Στατιστικών"
+
+msgid "New password"
+msgstr "Νέος κωδικός πρόσβασης"
 
 msgid "Accept"
 msgstr "Αποδοχή"
 
 msgid "Decline"
 msgstr "Απόρριψη"
+
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια με προσαρμοσμένες ρυθμίσεις Εξυπηρετητή-BBB"
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
+
+msgid "Overview - All Conferences"
+msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
+
+#, fuzzy
+#| msgid "User Administration"
+msgid "Conference Administration"
+msgstr "Διαχείριση Χρήστη"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια"
+
+msgid "Past"
+msgstr "Προηγούμενος"
+
+msgid "View Upcoming"
+msgstr "Προβολή Προσεχούς"
+
+msgid "Upcoming"
+msgstr "Προσεχής"
+
+msgid "View Past"
+msgstr "Προβολή Προηγούμενου"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+msgid "Booked"
+msgstr "Με σελιδοδείκτη"
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Η σύσκεψη είναι μόνιμα premium"
+
+msgid "Portal Setting"
+msgstr "Ρύθμιση Πύλης"
+
+msgid "Conference Settings"
+msgstr "Ρυθμίσεις Σύσκεψης"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr "Όχι premium"
+
+msgid "Rooms"
+msgstr "Δωμάτια"
+
+msgid "Start"
+msgstr "Έναρξη"
+
+msgid "running now!"
+msgstr "εκτελείται τώρα!"
+
+msgid "Conference Setting"
+msgstr "Ρύθμιση Σύσκεψης"
+
+msgid "Room"
+msgstr "Δωμάτιο"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Εκδήλωση"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Η σύσκεψη είναι μόνιμα premium"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Η σύσκεψη είναι μόνιμα premium"
+
+#, fuzzy
+#| msgid "Do you really want to remove the user?"
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε τον χρήστη;"
+
+#, fuzzy
+#| msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε το μέλος \"%(name)s\" από την ομάδα;"
+
+msgid "There are no items to show."
+msgstr "Δεν υπάρχουν στοιχεία να προβληθούν."
+
+msgid "BBB"
+msgstr "BBB"
+
+msgid "BBB Premium"
+msgstr "BBB Premium"
+
+msgid "Not set"
+msgstr "Δεν έχει οριστεί"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to decline member „%(name)s“?"
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Είστε βέβαιοι ότι θέλετε να απορρίψετε το μέλος „%(name)s“;"
+
+#, fuzzy
+#| msgid "Delete Profile"
+msgid "Delete Premium Block"
+msgstr "Διαγραφή Προφίλ"
+
+msgid "Conference Overview"
+msgstr "Επισκόπηση Σύσκεψης"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
+
+msgid "Conferences with Custom Settings"
+msgstr "Συσκέψεις με Προσαρμοσμένες Ρυθμίσεις"
 
 msgid "Rearrange"
 msgstr "Αναδιάταξη"
@@ -3143,6 +3488,11 @@ msgstr "Εκδηλώσεις"
 msgid "News"
 msgstr "Ειδήσεις"
 
+#, fuzzy
+#| msgid "View conference"
+msgid "Video conference"
+msgstr "Προβολή σύσκεψης"
+
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
 msgstr "Αφαίρεση"
@@ -3176,9 +3526,6 @@ msgstr "Τώρα θα λαμβάνετε ειδοποιήσεις όταν δη�
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr "Τώρα θα λαμβάνετε ειδοποιήσεις όταν δημόσιο περιεχόμενο θα αναρτάται σε αυτή την ομάδα."
 
-msgid "Group:"
-msgstr "Ομάδα:"
-
 msgid "No Description set"
 msgstr "Δεν έχει οριστεί Περιγραφή"
 
@@ -3193,6 +3540,28 @@ msgstr "Εισάγετε τις επιλογές σας ως τιμές που �
 
 msgid "Enter your choices"
 msgstr "Εισάγετε τις επιλογές σας"
+
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address to continue using your account."
+msgstr "Παρακαλούμε επαληθεύστε τη διεύθυνση email για %(site_name)s!"
+
+msgid "You should already have received an email with a verification link we sent to your account's email address:"
+msgstr ""
+
+msgid "Click here to send the validation link again."
+msgstr ""
+
+msgid "If you have trouble verifying your email address are not receiving our verification email, please contact the support!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address!"
+msgstr "Παρακαλούμε επαληθεύστε τη διεύθυνση email για %(site_name)s!"
+
+msgid "Close"
+msgstr "Κλείσιμο"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
@@ -3213,15 +3582,22 @@ msgstr "Αποστολή"
 msgid "Submitting..."
 msgstr "Υποβολή..."
 
-msgid "Close"
-msgstr "Κλείσιμο"
-
 msgid "Avatar will be deleted once you save."
 msgstr "Το Avatar θα διαγραφεί μετά την αποθήκευση."
 
 msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "προαιρετικό"
+
+#, fuzzy
+msgid "Add/Edit translations"
+msgstr "Πρόσθετες επιλογές"
+
+msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr ""
 
 msgid "Date"
 msgstr "Ημερομηνία"
@@ -3290,6 +3666,9 @@ msgstr "έως"
 
 msgid "More infos..."
 msgstr "Περισσότερες πληροφορίες..."
+
+msgid "Please Login or Register to view the event's description."
+msgstr ""
 
 msgid "You will now receive notifications for content posted in this conference."
 msgstr "Αυτή τη στιγμή θα λάβετε ειδοποιήσεις για περιεχόμενο που αναρτήθηκε σε αυτή τη σύσκεψη."
@@ -3462,6 +3841,12 @@ msgstr "Αποστολή μηνύματος σε όλα τα μέλη"
 msgid "Send Message"
 msgstr "Αποστολή Μηνύματος"
 
+msgid "Admin"
+msgstr "Διαχειριστής"
+
+msgid "Member"
+msgstr "Μέλος"
+
 msgid "User account inactive"
 msgstr "Ανενεργός λογαριασμός χρήστη"
 
@@ -3622,7 +4007,6 @@ msgid "Reset"
 msgstr "Επαναφορά"
 
 #, fuzzy
-#| msgid "Uploaded files will be available for download and images will be shown in a gallery."
 msgid "Uploaded files are made available for download on the microsite and images are displayed there and at the top of the lobby room."
 msgstr "Τα ανεβασμένα αρχεία θα είναι διαθέσιμα για λήψη και οι εικόνες θα εμφανίζονται σε συλλογή."
 
@@ -3652,6 +4036,25 @@ msgstr "Υπάρχουν έργα/ομάδες που να σχετίζοντα�
 
 msgid "Select related Projects/Groups"
 msgstr "Επιλογή σχετικών Έργων/Ομάδων"
+
+#, fuzzy
+#| msgid "This project will be set to be publicly visible!"
+msgid "Group/Project is publicly visible"
+msgstr "Αυτό το έργο θα οριστεί να είναι δημόσια ορατό!"
+
+msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr ""
+
+msgid "Enable the public visibility of your group/project"
+msgstr ""
+
+#, fuzzy
+#| msgid "Send 1 day before conference"
+msgid "Include a video conference"
+msgstr "Αποστολή 1 ημέρα πριν από τη σύσκεψη"
+
+msgid "Choose the type of the video conference you would like to include in the dashboard"
+msgstr ""
 
 msgid "Privacy settings"
 msgstr "Ρυθμίσεις απορρήτου"
@@ -3688,6 +4091,22 @@ msgstr "Ποιες εφαρμογές πρέπει να ενεργοποιηθο
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Αυτή η Εφαρμογή μπορεί να ενεργοποιηθεί μόνο για Ομάδα αλλά όχι για Έργο!"
+
+#, fuzzy
+#| msgid "Contact organizers"
+msgid "Contact Form on microsite"
+msgstr "Επικοινωνία με διοργανωτές"
+
+#, fuzzy
+msgid "Display contact form."
+msgstr "Προαιρετικά στοιχεία επικοινωνίας"
+
+msgid "A public contact form, which non-registered users can use to contact group admins of this group."
+msgstr ""
+
+#, fuzzy
+msgid "Contact Form"
+msgstr "Πληροφορίες Επικοινωνίας"
 
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "Από ποιες εφαρμογές θα πρέπει να εμφανίζονται τα δημόσια στοιχεία στον μικρότοπο;"
@@ -3827,6 +4246,23 @@ msgstr "Δεν υπάρχουν προσκλήσεις."
 msgid "Map"
 msgstr "Χάρτης"
 
+#, fuzzy
+#| msgid "Deleting..."
+msgid "Meeting"
+msgstr "Διαγραφή..."
+
+msgid "Popout"
+msgstr ""
+
+msgid "Fullscreen"
+msgstr ""
+
+msgid "Leave Fullscreen"
+msgstr ""
+
+msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
+msgstr ""
+
 msgid "Not happy with how your Microsite looks?"
 msgstr "Δεν είστε ευχαριστημένος με την εμφάνιση του Μικρότοπού σας;"
 
@@ -3871,6 +4307,31 @@ msgstr "Κοινή χρήση στο Twitter"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr "Στόχοι Βιώσιμης Ανάπτυξης"
+
+#, fuzzy
+#| msgid "Group administrator"
+msgid "Email the group administrators"
+msgstr "Διαχειριστής ομάδας"
+
+#, fuzzy
+msgid "Your email address"
+msgstr "διεύθυνση email"
+
+msgid "Message"
+msgstr "Μήνυμα"
+
+#, fuzzy
+msgid "Your message"
+msgstr "Το όνομά σας"
+
+msgid "Captcha"
+msgstr "Captcha"
+
+msgid "We need to make sure you are a real person (sorry!)"
+msgstr "Χρειάζεται να διαπιστώσουμε ότι είστε πραγματικό πρόσωπο (λυπούμαστε!)"
+
+msgid "Generate a new captcha"
+msgstr "Δημιουργήστε νέο captcha"
 
 msgid "Tweets"
 msgstr "Tweets"
@@ -3962,9 +4423,6 @@ msgstr "Όλα τα Έργα"
 msgid "Temporary User Accounts"
 msgstr "Προσωρινοί Λογαριασμοί Χρήστη"
 
-msgid "Reminder emails"
-msgstr "Email υπενθύμισης"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Organizations"
 msgstr "Οργανισμοί"
@@ -4017,7 +4475,6 @@ msgid "Do you really want to decline the request?"
 msgstr "Είστε βέβαιοι ότι θέλετε να απορρίψετε το αίτημα;"
 
 #, fuzzy
-#| msgid "There are no pending invitations."
 msgid "There are no pending organization requests."
 msgstr "Δεν υπάρχουν προσκλήσεις σε εκκρεμότητα."
 
@@ -4031,7 +4488,6 @@ msgid "Invited"
 msgstr "Προσκλήθηκε"
 
 #, fuzzy
-#| msgid "There are no pending invitations."
 msgid "There are no organization invitations."
 msgstr "Δεν υπάρχουν προσκλήσεις σε εκκρεμότητα."
 
@@ -4043,7 +4499,6 @@ msgid "Remove organization"
 msgstr "Αφαίρεση οργανισμού"
 
 #, fuzzy
-#| msgid "There are no invitations."
 msgid "There are no assigned organizations."
 msgstr "Δεν υπάρχουν προσκλήσεις."
 
@@ -4196,6 +4651,10 @@ msgstr ""
 msgid "Conference starts soon: [[name]]"
 msgstr "Η σύσκεψη ξεκινάει σύντομα: [[name]]"
 
+#, fuzzy
+msgid "Message to conference participants"
+msgstr "Εφαρμογές Σύσκεψης"
+
 msgid ""
 "The conference [[name]] starts in a week.\n"
 "Start of the event is [[from_date]].\n"
@@ -4249,6 +4708,27 @@ msgstr ""
 #, python-format
 msgid "%(site_name)s CSV import was successful"
 msgstr "Η εισαγωγή CSV %(site_name)s ήταν επιτυχής"
+
+#, python-format
+msgid ""
+"You received a message via the contact form on the micropage of \"%(group_name)s\"!\n"
+"\n"
+"The message was sent from the micropage of [%(group_name)s](%(domain_url)s%(group_url)s):\n"
+"\"%(message)s\"\n"
+"\n"
+"\n"
+"Reply to the message by writing to that email:\n"
+"%(email)s\n"
+"\n"
+"(You're receiving this email because you are an administrator of a group.)\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "You received a message via the contact form on \"%(group_name)s\"!"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -4327,74 +4807,6 @@ msgstr ""
 #, python-format
 msgid "Please set yout initial password for %(site_name)s!"
 msgstr "Παρακαλούμε ορίστε τον αρχικό κωδικό πρόσβασής σας για %(site_name)s!"
-
-#, python-format
-msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just registered an account at %(site_name)s. We're happy to see you!\n"
-"\n"
-"You will need to verify your email %(user_email)s before you can log in. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Thank you and see you soon!\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"Γεια %(user_name)s,\n"
-"\n"
-"μόλις καταχωρήσατε ένα λογαριασμό σε %(site_name)s. Χαιρόμαστε που σας βλέπουμε!\n"
-"\n"
-"Θα χρειαστεί να επαληθεύσετε το email σας %(user_email)s για να μπορείτε να συνδεθείτε. \n"
-"\n"
-"\n"
-"Κάντε κλικ στον παρακάτω σύνδεσμο για να επαληθεύσετε τη διεύθυνση email (ή να αντιγράψετε και επικολλήσετε τον σύνδεσμο στον περιηγητή σας):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Σας ευχαριστούμε και θα τα πούμε σύντομα!\n"
-"\n"
-"Η Ομάδα %(site_name)s"
-
-#, python-format
-msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just changed your email address at %(site_name)s.\n"
-"\n"
-"You will need to verify your email %(user_email)s before the changes take effect. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"Γεια %(user_name)s,\n"
-"\n"
-"μόλις αλλάξατε τη διεύθυνση email σας σε %(site_name)s.\n"
-"\n"
-"Θα χρειαστεί να επαληθεύσετε το email σας %(user_email)s για να ενεργοποιηθούν οι αλλαγές. \n"
-"\n"
-"\n"
-"Κάντε κλικ στον παρακάτω σύνδεσμο για να επαληθεύσετε τη διεύθυνση email (ή να αντιγράψετε και επικολλήσετε τον σύνδεσμο στον περιηγητή σας:\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"Η ομάδα %(site_name)s"
-
-#, python-format
-msgid "Please verify your email address for %(site_name)s!"
-msgstr "Παρακαλούμε επαληθεύστε τη διεύθυνση email για %(site_name)s!"
 
 #, python-format
 msgid ""
@@ -4600,11 +5012,18 @@ msgstr ""
 msgid "Your request to join %(site_name)s was denied."
 msgstr "Το αίτημά σας να συμμετάσχετε σε %(site_name)s απορρίφθηκε."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+#| "\n"
+#| "Out administrators will review your request and approve your user account soon!\n"
+#| "\n"
+#| "Until then, with warm greetings, \n"
+#| "your %(site_name)s Team"
 msgid ""
 "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
 "\n"
-"Out administrators will review your request and approve your user account soon!\n"
+"Our administrators will review your request and approve your user account soon!\n"
 "\n"
 "Until then, with warm greetings, \n"
 "your %(site_name)s Team"
@@ -4875,12 +5294,6 @@ msgstr "Αποσυνδεδεμένος"
 msgid "In order to use your %(portal_name)s account to login to another platform you need to login on %(portal_name)s first."
 msgstr "Προκειμένου να χρησιμοποιήσετε τον λογαριασμό %(portal_name)s για να συνδεθείτε σε μια άλλη πλατφόρμα χρειάζεται να συνδεθείτε σε %(portal_name)s πρώτα."
 
-msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
-msgstr "Ο λογαριασμός σας καταχωρήθηκε με επιτυχία. Ο λογαριασμός θα πρέπει να εγκριθεί από ένα διαχειριστή προτού μπορέσετε να συνδεθείτε. Θα σας στείλουμε ένα email στη διεύθυνσή σας όταν αυτό συμβεί."
-
-msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "Ο λογαριασμός σας καταχωρήθηκε με επιτυχία. Θα λάβετε ένα email ενεργοποίησης από εμάς σε λίγα λεπτά. Πρέπει να επιβεβαιώστε τη διεύθυνση email προτού μπορέσετε να συνδεθείτε."
-
 msgid "Password"
 msgstr "Κωδικός πρόσβασης"
 
@@ -4910,6 +5323,11 @@ msgstr "Λυπούμαστε αλλά ο λογαριασμός σας συνδ�
 
 msgid "Please contact an administrator if this is an issue for you."
 msgstr "Παρακαλούμε επικοινωνήστε με ένα διαχειριστή εάν αυτό αποτελεί ζήτημα για εσάς."
+
+#, fuzzy
+#| msgid "Set your password"
+msgid "Sorry, we can't reset your password!"
+msgstr "Ορίστε τον κωδικό πρόσβασής σας"
 
 msgid "Password reset"
 msgstr "Επαναφορά κωδικού πρόσβασης"
@@ -4958,9 +5376,6 @@ msgstr "Εισαγωγή νέου κωδικού πρόσβασης"
 
 msgid "Please enter your new password twice so we can verify you typed it in correctly."
 msgstr "Παρακαλούμε εισάγετε τον νέο σας κωδικό πρόσβασης δύο φορές έτσι ώστε να επαληθεύσουμε ότι τον πληκτρολογήσατε σωστά."
-
-msgid "New password"
-msgstr "Νέος κωδικός πρόσβασης"
 
 msgid "New password confirmation"
 msgstr "Επιβεβαίωση νέου κωδικού πρόσβασης"
@@ -5080,15 +5495,6 @@ msgstr "Επώνυμο"
 msgid "You can supply your last name to be displayed as well"
 msgstr "Μπορείτε να εισάγετε το επώνυμό σας έτσι ώστε να εμφανίζεται επίσης"
 
-msgid "Captcha"
-msgstr "Captcha"
-
-msgid "We need to make sure you are a real person (sorry!)"
-msgstr "Χρειάζεται να διαπιστώσουμε ότι είστε πραγματικό πρόσωπο (λυπούμαστε!)"
-
-msgid "Generate a new captcha"
-msgstr "Δημιουργήστε νέο captcha"
-
 msgid "Search options..."
 msgstr "Αναζήτηση επιλογών..."
 
@@ -5133,13 +5539,11 @@ msgstr "Αναζήτηση για Χρήστες"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Create content"
 msgid "External contents"
 msgstr "Δημιουργία περιεχομένου"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Visibility on other platforms"
 msgid "Include contents from other platforms"
 msgstr "Ορατότητα σε άλλες πλατφόρμες"
 
@@ -5175,6 +5579,11 @@ msgstr "Εισάγετε ένα ή περισσότερους όρους ή επ
 
 msgid "CSV Downloads"
 msgstr "Λήψεις CSV"
+
+#, fuzzy
+#| msgid "HD space used by projects"
+msgid "HD space used by conferences"
+msgstr "Χώρος HD που χρησιμοποιείται από έργα"
 
 msgid "HD space used by groups"
 msgstr "Χώρος HD που χρησιμοποιείται από ομάδες"
@@ -5574,7 +5983,6 @@ msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr "Λυπούμαστε αλλά το περιεχόμενο που ζητήθηκε δεν ήταν δυνατό να ανακτηθεί από τον διακομιστή."
 
 #, fuzzy
-#| msgid "Done"
 msgid "on"
 msgstr "Ολοκληρώθηκε"
 
@@ -5652,7 +6060,6 @@ msgstr "ΔΕΝ επιθυμεί την επικοινωνία για πιθαν�
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Your Profile"
 msgid "To Profile"
 msgstr "Το Προφίλ Σας"
 
@@ -5714,25 +6121,21 @@ msgstr "Ανακαλύψτε"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Apply Filters"
 msgid "Filter"
 msgstr "Εφαρμογή Φίλτρων"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Note from the organizers"
 msgid "Content from the Forum"
 msgstr "Σημείωση από τους διοργανωτές"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Only content from my Groups and Projects"
 msgid "Content from my Groups and Projects"
 msgstr "Μόνο περιεχόμενο από τις Ομάδες και τα Έργα μου"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Public"
 msgid "Public content"
 msgstr "Δημόσιος"
 
@@ -5824,6 +6227,9 @@ msgstr ""
 msgid "Your profile will first be deactivated and removed completely from the platform. After 30 days and only then will it be permanently deleted from our database. In our backup systems the account may be stored for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion."
 msgstr ""
 
+msgid "During the 30-day period, your account's e-mail address will be reserved and can not be used to register a new account."
+msgstr ""
+
 msgid "Delete Account"
 msgstr "Διαγραφή Λογαριασμού"
 
@@ -5837,6 +6243,10 @@ msgstr "Διαγραφή λογαριασμού χρήστη"
 msgid "User profile: %(username)s"
 msgstr "Προφίλ χρήστη: %(username)s"
 
+#, fuzzy
+msgid "Profile"
+msgstr "Το Προφίλ Μου"
+
 msgid "Cooperation requests"
 msgstr "Αιτήματα συνεργασίας"
 
@@ -5849,6 +6259,9 @@ msgstr "ΔΕΝ επιθυμώ την επικοινωνία για πιθανή 
 msgid "My Website"
 msgstr "Η Ιστοσελίδα Μου"
 
+msgid "ended"
+msgstr ""
+
 msgid "Edit Your Profile"
 msgstr "Επεξεργασία του Προφίλ Σας"
 
@@ -5857,6 +6270,9 @@ msgstr "Βασικά δεδομένα"
 
 msgid "E-Mail"
 msgstr "E-Mail"
+
+msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
+msgstr ""
 
 msgid "Profile avatar"
 msgstr "Avatar του προφίλ"
@@ -5878,9 +6294,6 @@ msgstr "Σηματοδοτεί την επιθυμία σας να επικοι�
 
 msgid "I am open for cooperation requests"
 msgstr "Είναι διαθέσιμος για αιτήματα συνεργασίας"
-
-msgid "Message"
-msgstr "Μήνυμα"
 
 msgid "Welcome!"
 msgstr "Καλώς ήρθατε!"
@@ -6287,12 +6700,10 @@ msgid "Contents"
 msgstr "Περιεχόμενα"
 
 #, fuzzy
-#| msgid "My upcoming Projects"
 msgid "My upcoming Events"
 msgstr "Τα προσεχή μου Έργα"
 
 #, fuzzy
-#| msgid "You can change this setting later in your profile settings"
 msgid "The map is centrered on the address you added in your profile settings."
 msgstr "Μπορείτε να αλλάξετε αυτή τη ρύθμιση αργότερα στις ρυθμίσεις προφίλ σας"
 
@@ -6487,7 +6898,6 @@ msgid "Project Dashboard"
 msgstr "Πίνακας Έργου"
 
 #, fuzzy
-#| msgid "Project Dashboard"
 msgid "in the Project Dashboard"
 msgstr "Πίνακας Έργου"
 
@@ -6576,7 +6986,6 @@ msgid "Group Dashboard"
 msgstr "Πίνακας Ομάδας"
 
 #, fuzzy
-#| msgid "Group Dashboard"
 msgid "in the Group Dashboard"
 msgstr "Πίνακας Ομάδας"
 
@@ -6701,7 +7110,6 @@ msgid "Conference contact person"
 msgstr "Άτομο επικοινωνίας σύσκεψης"
 
 #, fuzzy, python-format
-#| msgid "Request about your project \"%(group_name)s\""
 msgid "Request about your conference \"%(group_name)s\""
 msgstr "Αίτημα για το έργο σας \"%(group_name)s\""
 
@@ -6746,6 +7154,19 @@ msgstr "Λυπούμαστε, μόνο οι διαχειριστές πύλης 
 
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "Μόνο τα μέλη της σύσκεψης μπορούν να δουν το περιεχόμενο που ζητήσατε. Κάντε αίτηση για να γίνετε μέλος τώρα!"
+
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address."
+msgstr "Παρακαλούμε επαληθεύστε τη διεύθυνση email για %(site_name)s!"
+
+#, fuzzy, python-format
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address by %(date_string)s."
+msgstr "Παρακαλούμε επαληθεύστε τη διεύθυνση email για %(site_name)s!"
+
+msgid "Click here to send the verification link again."
+msgstr ""
 
 msgid "Team Description"
 msgstr "Περιγραφή Ομάδας"
@@ -6815,6 +7236,35 @@ msgstr "Ο χρήστης δημιουργήθηκε με επιτυχία!"
 msgid "The language \"%s\" is not supported"
 msgstr "Η γλώσσα \"%s\" δεν υποστηρίζεται"
 
+#, fuzzy
+#| msgid "Conference is permanently premium"
+msgid "Successfully made conference permanent premium"
+msgstr "Η σύσκεψη είναι μόνιμα premium"
+
+#, fuzzy
+#| msgid "Successfully removed user"
+msgid "Successfully removed permanent premium from conference"
+msgstr "Ο χρήστης αφαιρέθηκε με επιτυχία"
+
+msgid "Successfully added premium block"
+msgstr ""
+
+msgid "Add Premium Block to \"{}\""
+msgstr ""
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully updated premium block."
+msgstr "Ο λογαριασμός χρήστη απενεργοποιήθηκε με επιτυχία"
+
+msgid "Edit Premium Block in conference \"{}\""
+msgstr ""
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully deleted premium block"
+msgstr "Ο λογαριασμός χρήστη απενεργοποιήθηκε με επιτυχία"
+
 msgid "Your data was saved successfully!"
 msgstr "Τα δεδομένα σας αποθηκεύτηκαν με επιτυχία!"
 
@@ -6872,33 +7322,6 @@ msgstr "%(team_type)s \"%(group)s\" δημιουργήθηκε με επιτυχ
 
 msgid "Create"
 msgstr "Δημιουργία"
-
-msgid "Conference successfully started and user accounts activated"
-msgstr "Η σύσκεψη ξεκίνησε με επιτυχία και οι λογαριασμοί του χρήστη ενεργοποιήθηκαν"
-
-msgid "Conference successfully finished and user accounts deactivated"
-msgstr "Η σύσκεψη ολοκληρώθηκε με επιτυχία και οι λογαριασμοί του χρήστη απενεργοποιήθηκαν"
-
-msgid "Successfully deactivated user account"
-msgstr "Ο λογαριασμός χρήστη απενεργοποιήθηκε με επιτυχία"
-
-msgid "Successfully activated user account"
-msgstr "Ο λογαριασμός χρήστη ενεργοποιήθηκε με επιτυχία"
-
-msgid "Successfully removed user"
-msgstr "Ο χρήστης αφαιρέθηκε με επιτυχία"
-
-msgid "User was not created"
-msgstr "Δεν δημιουργήθηκε χρήστης"
-
-msgid "Workshop username"
-msgstr "Όνομα χρήστη σεμιναρίου"
-
-msgid "First Name"
-msgstr "Όνομα"
-
-msgid "Last Name"
-msgstr "Επώνυμο"
 
 #, python-format
 msgid "The %(team_type)s was changed successfully."
@@ -7060,6 +7483,13 @@ msgstr "Δεν δόθηκε όνομα εφαρμογής για την προσ
 msgid "Your idea was deleted successfully."
 msgstr "Η ιδέα σας διαγράφηκε με επιτυχία."
 
+#, fuzzy
+msgid "Your message has been sent."
+msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
+
+msgid "Something went wrong. Your message was not sent."
+msgstr ""
+
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr "Υπήρξε ένα σφάλμα κατά την επεξεργασία του avatar σας. Παρακαλούμε βεβαιωθείτε ότι επιλέξατε ένα αρκετά μεγάλο μέρος της εικόνας!"
 
@@ -7117,12 +7547,10 @@ msgid "Sorry, something went wrong while saving your profile!"
 msgstr "Λυπούμαστε, παρουσιάστηκε ένα σφάλμα κατά την αποθήκευση του προφίλ σας!"
 
 #, fuzzy
-#| msgid "Your profile was deleted successfully. We're sorry you are no longer with us."
 msgid "Your user account has been deactivated and will be deleted in 30 days. We're sorry you are no longer with us."
 msgstr "Το προφίλ σας διαγράφηκε με επιτυχία. Λυπούμαστε που δεν είστε πλέον μαζί μας."
 
 #, fuzzy
-#| msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
 msgid "You are the only administrator left for these projects, groups or conferences. Please appoint a different administrator or delete them first:"
 msgstr "Είστε ο μόνος διαχειριστής που έμεινε για \"%s\". Παρακαλούμε ορίστε διαφορετικό διαχειριστή ή διαγράψετε τον πρώτα."
 
@@ -7133,7 +7561,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "You are about to delete your user account from the site!"
 msgid "Information about the deletion of your user account"
 msgstr "Πρόκειται να διαγράψετε τον λογαριασμό χρήστη σας από τον ιστότοπο!"
 
@@ -7161,8 +7588,8 @@ msgid "User \"%(user)s\" was registered successfully. The account will need to b
 msgstr "Ο χρήστης \"%(user)s\" καταχωρήθηκε με επιτυχία. Ο λογαριασμός θα χρειαστεί έγκριση για να μπορείτε να συνδεθείτε. Θα σας στείλουμε ένα email στην διεύθυνση \"%(email)s\" όταν αυτό συμβεί."
 
 #, python-format
-msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "Ο χρήστης \"%(email)s\" καταχωρήθηκε με επιτυχία. Θα λάβετε ένα email ενεργοποίησης από εμάς σε λίγα λεπτά. Χρειάζεται να επιβεβαιώσετε τη διεύθυνση email για να μπορείτε να συνδεθείτε."
+msgid "Thank you for signing up and welcome to the platform! We sent an email to your address \"%(email)s\" - please click the link contained in it to verify your email address!"
+msgstr ""
 
 msgid "The invite token you have used does not exist!"
 msgstr "Το διακριτικό πρόσκλησης που έχετε χρησιμοποιήσει δεν υπάρχει!"
@@ -7213,6 +7640,9 @@ msgstr "Έχετε απορρίψει το %(username)s (%(email)s)! Έχει σ
 msgid "The user account you were looking for does not exist! Your registration was probably already denied or the email token has expired."
 msgstr "Ο λογαριασμός χρήστη που αναζητάτε δεν υπάρχει! Η εγγραφή σας πιθανώς απορρίφθηκε ή το διακριτικό του email έληξε."
 
+msgid "The email you are trying to verify belongs to a different user account than the one you are logged in with! Please log out before clicking the verification link again!"
+msgstr ""
+
 msgid "The email for this account seems to already have been confirmed!"
 msgstr "Το email για αυτόν τον λογαριασμό φαίνεται να έχει ήδη επιβεβαιωθεί!"
 
@@ -7222,13 +7652,41 @@ msgstr "Ο σύνδεσμος που παρείχατε για την επιβε
 msgid "The email you are trying to confirm has already been confirmed or belongs to another user!"
 msgstr "Το email που προσπαθείτε να επιβεβαιώσετε έχει ήδη επιβεβαιωθεί ή ανήκει σε άλλο χρήστη!"
 
-#, python-format
-msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+#, fuzzy, python-format
+#| msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+msgid "Your email address %(email)s was successfully confirmed!"
 msgstr "Η διεύθυνση email %(email)s επιβεβαιώθηκε με επιτυχία! Καλώς ήρθατε στην κοινότητα!"
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
 msgstr "Η διεύθυνση email %(email)s επιβεβαιώθηκε με επιτυχία! Ωστόσο, ο λογαριασμός σας δεν είναι πλέον ενεργός και θα πρέπει να εγκριθεί από τον διαχειριστή για να μπορείτε να συνδεθείτε. Θα σας στείλουμε ένα email μόλις αυτό συμβεί!"
+
+#, python-format
+msgid "Please verify your email address for %(site_name)s!"
+msgstr "Παρακαλούμε επαληθεύστε τη διεύθυνση email για %(site_name)s!"
+
+#, python-format
+msgid "You have just registered an account at %(site_name)s. We're happy to see you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "You have just changed your email address at %(site_name)s."
+msgstr "Παρακαλούμε επαληθεύστε τη διεύθυνση email για %(site_name)s!"
+
+msgid "Please verify your email address by clicking on the following link (or copy and paste the link it in your browser):"
+msgstr ""
+
+msgid "Thank you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "The %(site_name)s team"
+msgid "Your %(site_name)s Team"
+msgstr "Η ομάδα %(site_name)s"
+
+msgid "If you did not sign up for an account you may ignore this email. You can also click the unsubscrible link on the bottom of this email to never receive mails from us again!"
+msgstr ""
 
 msgid "The unsubscribe link you have clicked does not seem to be valid!"
 msgstr "Ο σύνδεσμος διαγραφής που έχετε επιλέξει δεν φαίνεται να είναι έγκυρος!"
@@ -7236,6 +7694,9 @@ msgstr "Ο σύνδεσμος διαγραφής που έχετε επιλέξ�
 #, python-format
 msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You will not receive any more emails from us!"
 msgstr "Έχουμε διαγράψει το email \"%(email)s\" από τον κατάλογο αλληλογραφίας μας. Δε θα λαμβάνετε πλέον email από εμάς!"
+
+msgid "A new verification email has been sent."
+msgstr ""
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr "Καλώς ήρθατε! Λάβατε πρόσκληση για τα παρακάτω έργα και ομάδες. Παρακαλούμε κάντε κλικ στο πλήκτρο αναπτυσσόμενου μενού για να αποδεχτείτε ή να απορρίψετε την πρόσκληση για κάθε ένα από αυτά!"
@@ -7283,37 +7744,279 @@ msgstr "Δεν είστε μέλος του %s αυτή τη στιγμή! Εά�
 msgid "Your changes have been saved."
 msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
 
-#~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgstr "Πρόκειται να απενεργοποιήστε αυτό το έργο. Αυτό και όλο του το περιεχόμενο θα είναι κρυμμένο στην ιστοσελίδα και μη ορατό σε όλους, μαζί με εσάς."
+#, fuzzy
+#~| msgid "options for the room, that are represented in the bigbluebutton API"
+#~ msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
+#~ msgstr "επιλογές για το δωμάτιο που εκπροσωπούνται στο bigbluebutton API"
 
-#~ msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
-#~ msgstr "Η διαδικασία είναι αναστρέψιμη. Μπορείτε να ενεργοποιήσετε εκ νέου το έργο από τη σελίδα προφίλ χρήστη οποιαδήποτε στιγμή."
+#, fuzzy
+#~| msgid "the welcome message, that is displayed to attendees"
+#~ msgid "DEPRECATED! the welcome message, that is displayed to attendees"
+#~ msgstr "το μήνυμα καλωσορίσματος που εμφανίζεται στους παρευρισκόμενους"
 
-#~ msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgstr "Πρόκειται να απενεργοποιήσετε αυτή την ομάδα. Αυτή και το περιεχόμενο της θα είναι κρυμμένα στην ιστοσελίδα και μη ορατά σε όλους, μαζί με εσάς."
+#, fuzzy
+#~| msgid "Participants"
+#~ msgid "participants"
+#~ msgstr "Συμμετέχοντες"
 
-#~ msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
-#~ msgstr "Αυτή η διαδικασία είναι αναστρέψιμη. Μπορείτε να ενεργοποιήσετε εκ νέου την ομάδα από τη σελίδα προφίλ χρήστη οποιαδήποτε στιγμή."
+#, fuzzy
+#~| msgid "Temporary User Accounts"
+#~ msgid "Temporary restrictions"
+#~ msgstr "Προσωρινοί Λογαριασμοί Χρήστη"
 
-#~ msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgstr "Πρόκειται να απενεργοποιήσετε αυτή την σύσκεψη. Αυτή και το περιεχόμενο της θα είναι κρυμμένα στην ιστοσελίδα και μη ορατά σε όλους, μαζί με εσάς."
+#, fuzzy
+#~| msgid "Portal Administrators"
+#~ msgid "Portal administrators"
+#~ msgstr "Διαχειριστές Πύλης"
 
-#~ msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
-#~ msgstr "Αυτή η διαδικασία είναι αναστρέψιμη. Μπορείτε να ενεργοποιήσετε εκ νέου την σύσκεψη από τη σελίδα προφίλ χρήστη οποιαδήποτε στιγμή."
+#, fuzzy
+#~| msgid "View conference"
+#~ msgid "Leave video conference"
+#~ msgstr "Προβολή σύσκεψης"
+
+#, fuzzy
+#~| msgid "My Projects and Groups"
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "Τα Έργα και οι Ομάδες Μου"
+
+#, fuzzy
+#~| msgid "Import failed"
+#~ msgid "Import from a CSV File"
+#~ msgstr "Η εισαγωγή απέτυχε"
+
+#, fuzzy
+#~| msgid "Project/group"
+#~ msgid "Project/group CSV File"
+#~ msgstr "Έργο/ομάδα"
+
+#, fuzzy
+#~| msgid "Upload CSV File"
+#~ msgid "User CSV File"
+#~ msgstr "Φόρτωση Αρχείου CSV"
+
+#, fuzzy
+#~| msgid "Proportions"
+#~ msgid "Options"
+#~ msgstr "Αναλογίες"
+
+#, fuzzy
+#~| msgid "Upload an image."
+#~ msgid "Upload and Import..."
+#~ msgstr "Ανεβάστε μια εικόνα."
+
+#, fuzzy
+#~| msgid "My Projects and Groups"
+#~ msgid "Import Projects and Groups"
+#~ msgstr "Τα Έργα και οι Ομάδες Μου"
+
+#, fuzzy
+#~| msgid "Import successful!"
+#~ msgid "CSV Import Results"
+#~ msgstr "Επιτυχής εισαγωγή!"
+
+#, fuzzy
+#~| msgid "Error!"
+#~ msgid "Read errors:"
+#~ msgstr "Σφάλμα!"
+
+#, fuzzy
+#~ msgid "Important messages:"
+#~ msgstr "Το όνομά σας"
+
+#, fuzzy
+#~| msgid "Error!"
+#~ msgid "Errors:"
+#~ msgstr "Σφάλμα!"
+
+#, fuzzy
+#~ msgid "Info messages:"
+#~ msgstr "Το όνομά σας"
+
+#~ msgid "Conference successfully started and user accounts activated"
+#~ msgstr "Η σύσκεψη ξεκίνησε με επιτυχία και οι λογαριασμοί του χρήστη ενεργοποιήθηκαν"
+
+#~ msgid "Conference successfully finished and user accounts deactivated"
+#~ msgstr "Η σύσκεψη ολοκληρώθηκε με επιτυχία και οι λογαριασμοί του χρήστη απενεργοποιήθηκαν"
+
+#~ msgid "Successfully deactivated user account"
+#~ msgstr "Ο λογαριασμός χρήστη απενεργοποιήθηκε με επιτυχία"
+
+#~ msgid "Successfully activated user account"
+#~ msgstr "Ο λογαριασμός χρήστη ενεργοποιήθηκε με επιτυχία"
+
+#~ msgid "Successfully removed user"
+#~ msgstr "Ο χρήστης αφαιρέθηκε με επιτυχία"
+
+#, fuzzy
+#~| msgid "Workshop username"
+#~ msgid "name and email"
+#~ msgstr "Όνομα χρήστη σεμιναρίου"
+
+#, fuzzy
+#~| msgid "Password reset"
+#~ msgid "Password set"
+#~ msgstr "Επαναφορά κωδικού πρόσβασης"
+
+#, fuzzy
+#~| msgid "Password"
+#~ msgid "no Password"
+#~ msgstr "Κωδικός πρόσβασης"
+
+#, fuzzy
+#~| msgid "Set my password"
+#~ msgid "Set password"
+#~ msgstr "Ορισμός του κωδικού πρόσβασής μου"
+
+#~ msgid "Can't find workshop with slug '{}'"
+#~ msgstr "Δεν μπορώ να βρω σεμινάριο με slug '{}'"
+
+#~ msgid "Conference Management"
+#~ msgstr "Διαχείριση Συνδιάσκεψης"
+
+#~ msgid "Conference is running"
+#~ msgstr "Η σύσκεψη είναι σε εξέλιξη"
+
+#~ msgid "Conference is not running"
+#~ msgstr "Η σύσκεψη δεν είναι σε εξέλιξη"
+
+#~ msgid "Accounts from CSV Upload"
+#~ msgstr "Λογαριασμοί από Φόρτωση CSV"
+
+#~ msgid "Upload Participants"
+#~ msgstr "Φόρτωση Συμμετεχόντων"
+
+#~ msgid "no login yet"
+#~ msgstr "δεν έγινε σύνδεση ακόμη"
+
+#~ msgid "not active"
+#~ msgstr "ανενεργό"
+
+#~ msgid "User participates in the following workshops:"
+#~ msgstr "Ο χρήστης συμμετέχει στα παρακάτω σεμινάρια:"
+
+#~ msgid "deactivate member"
+#~ msgstr "απενεργοποίηση μέλους"
+
+#~ msgid "activate member"
+#~ msgstr "ενεργοποίηση μέλους"
+
+#~ msgid "Finish conference and deactivate user accounts"
+#~ msgstr "Ολοκλήρωση σύσκεψης και απενεργοποίηση λογαριασμών χρήστη"
+
+#~ msgid "Start conference and activate user accounts"
+#~ msgstr "Έναρξη σύσκεψης και ενεργοποίηση λογαριασμών χρήστη"
+
+#~ msgid "User was not created"
+#~ msgstr "Δεν δημιουργήθηκε χρήστης"
+
+#~ msgid "First Name"
+#~ msgstr "Όνομα"
+
+#~ msgid "Last Name"
+#~ msgstr "Επώνυμο"
+
+#~ msgid "Conference reminders"
+#~ msgstr "Υπενθυμίσεις σύσκεψης"
+
+#, fuzzy
+#~ msgid "Only conference members can see the event\\'s description."
+#~ msgstr "Μόνο τα μέλη της σύσκεψης μπορούν να δουν το περιεχόμενο που ζητήσατε. Κάντε αίτηση για να γίνετε μέλος τώρα!"
+
+#~ msgid "Reminder emails"
+#~ msgstr "Email υπενθύμισης"
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just registered an account at %(site_name)s. We're happy to see you!\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before you can log in. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Thank you and see you soon!\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Γεια %(user_name)s,\n"
+#~ "\n"
+#~ "μόλις καταχωρήσατε ένα λογαριασμό σε %(site_name)s. Χαιρόμαστε που σας βλέπουμε!\n"
+#~ "\n"
+#~ "Θα χρειαστεί να επαληθεύσετε το email σας %(user_email)s για να μπορείτε να συνδεθείτε. \n"
+#~ "\n"
+#~ "\n"
+#~ "Κάντε κλικ στον παρακάτω σύνδεσμο για να επαληθεύσετε τη διεύθυνση email (ή να αντιγράψετε και επικολλήσετε τον σύνδεσμο στον περιηγητή σας):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Σας ευχαριστούμε και θα τα πούμε σύντομα!\n"
+#~ "\n"
+#~ "Η Ομάδα %(site_name)s"
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just changed your email address at %(site_name)s.\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before the changes take effect. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Γεια %(user_name)s,\n"
+#~ "\n"
+#~ "μόλις αλλάξατε τη διεύθυνση email σας σε %(site_name)s.\n"
+#~ "\n"
+#~ "Θα χρειαστεί να επαληθεύσετε το email σας %(user_email)s για να ενεργοποιηθούν οι αλλαγές. \n"
+#~ "\n"
+#~ "\n"
+#~ "Κάντε κλικ στον παρακάτω σύνδεσμο για να επαληθεύσετε τη διεύθυνση email (ή να αντιγράψετε και επικολλήσετε τον σύνδεσμο στον περιηγητή σας:\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Η ομάδα %(site_name)s"
+
+#~ msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
+#~ msgstr "Ο λογαριασμός σας καταχωρήθηκε με επιτυχία. Ο λογαριασμός θα πρέπει να εγκριθεί από ένα διαχειριστή προτού μπορέσετε να συνδεθείτε. Θα σας στείλουμε ένα email στη διεύθυνσή σας όταν αυτό συμβεί."
+
+#~ msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "Ο λογαριασμός σας καταχωρήθηκε με επιτυχία. Θα λάβετε ένα email ενεργοποίησης από εμάς σε λίγα λεπτά. Πρέπει να επιβεβαιώστε τη διεύθυνση email προτού μπορέσετε να συνδεθείτε."
+
+#~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "Ο χρήστης \"%(email)s\" καταχωρήθηκε με επιτυχία. Θα λάβετε ένα email ενεργοποίησης από εμάς σε λίγα λεπτά. Χρειάζεται να επιβεβαιώσετε τη διεύθυνση email για να μπορείτε να συνδεθείτε."
+
+#, fuzzy
+#~| msgid "Cosinnus Micropages"
+#~ msgid "Contact Form on Micropage"
+#~ msgstr "Cosinnus Micropages"
+
+#, fuzzy
+#~| msgid "Group administrator"
+#~ msgid "Email to group administrator"
+#~ msgstr "Διαχειριστής ομάδας"
+
+#~ msgid "Group:"
+#~ msgstr "Ομάδα:"
+
+#~ msgid "Is premium"
+#~ msgstr "Είναι premium"
+
+#~ msgid "Restart"
+#~ msgstr "Επανεκκίνηση"
 
 #~ msgid "%(team_name)s was deactivated successfully!"
 #~ msgstr "Ο/η %(team_name)s απενεργοποιήθηκε με επιτυχία!"
-
-#, fuzzy
-#~| msgid "No Tag selected"
-#~ msgid "nothing selected"
-#~ msgstr "Δεν έχει επιλεγεί Ετικέτα"
-
-#~ msgid "Deactivate users (will keep all all items they created on the site)"
-#~ msgstr "Απενεργοποίηση χρηστών (θα κρατήσει όλα τα άλλα στοιχεία που δημιούργησαν στον ιστότοπο)"
-
-#~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
-#~ msgstr "Εάν επιθυμείτε να διαγράψετε κάποιο από το περιεχόμενό σας, επιστρέψτε πίσω για να το κάντε. Από τη στιγμή που θα διαγράψετε το προφίλ σας, δε θα έχετε πλέον πρόσβαση σε οτιδήποτε δημιουργήσατε με αυτόν τον λογαριασμό."
 
 #~ msgid "Arabic--NATIVE-LANGUAGE"
 #~ msgstr "Αραβικά--ΜΗΤΡΙΚΗ-ΓΛΩΣΣΑ"
@@ -7332,6 +8035,9 @@ msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
 
 #~ msgid "Czech--NATIVE-LANGUAGE"
 #~ msgstr "Τσεχικά--ΜΗΤΡΙΚΗ-ΓΛΩΣΣΑ"
+
+#~ msgid "Deactivate users (will keep all all items they created on the site)"
+#~ msgstr "Απενεργοποίηση χρηστών (θα κρατήσει όλα τα άλλα στοιχεία που δημιούργησαν στον ιστότοπο)"
 
 #~ msgid "Deutsch--NATIVE-LANGUAGE"
 #~ msgstr "Γερμανικά--ΜΗΤΡΙΚΗ-ΓΛΩΣΣΑ"
@@ -7360,6 +8066,9 @@ msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
 #~ msgid "Hebrew--NATIVE-LANGUAGE"
 #~ msgstr "Εβραϊκά--ΜΗΤΡΙΚΗ-ΓΛΩΣΣΑ"
 
+#~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
+#~ msgstr "Εάν επιθυμείτε να διαγράψετε κάποιο από το περιεχόμενό σας, επιστρέψτε πίσω για να το κάντε. Από τη στιγμή που θα διαγράψετε το προφίλ σας, δε θα έχετε πλέον πρόσβαση σε οτιδήποτε δημιουργήσατε με αυτόν τον λογαριασμό."
+
 #~ msgid "Kazakh--NATIVE-LANGUAGE"
 #~ msgstr "Καζακστανικά--ΜΗΤΡΙΚΗ-ΓΛΩΣΣΑ"
 
@@ -7375,8 +8084,30 @@ msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
 #~ msgid "Spanish--NATIVE-LANGUAGE"
 #~ msgstr "Ισπανικά--ΜΗΤΡΙΚΗ-ΓΛΩΣΣΑ"
 
+#~ msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
+#~ msgstr "Αυτή η διαδικασία είναι αναστρέψιμη. Μπορείτε να ενεργοποιήσετε εκ νέου την σύσκεψη από τη σελίδα προφίλ χρήστη οποιαδήποτε στιγμή."
+
+#~ msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
+#~ msgstr "Αυτή η διαδικασία είναι αναστρέψιμη. Μπορείτε να ενεργοποιήσετε εκ νέου την ομάδα από τη σελίδα προφίλ χρήστη οποιαδήποτε στιγμή."
+
+#~ msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
+#~ msgstr "Η διαδικασία είναι αναστρέψιμη. Μπορείτε να ενεργοποιήσετε εκ νέου το έργο από τη σελίδα προφίλ χρήστη οποιαδήποτε στιγμή."
+
 #~ msgid "Time"
 #~ msgstr "Ώρα"
 
 #~ msgid "Ukrainian--NATIVE-LANGUAGE"
 #~ msgstr "Ουκρανικά--ΜΗΤΡΙΚΗ ΓΛΩΣΣΑ"
+
+#~ msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Πρόκειται να απενεργοποιήσετε αυτή την σύσκεψη. Αυτή και το περιεχόμενο της θα είναι κρυμμένα στην ιστοσελίδα και μη ορατά σε όλους, μαζί με εσάς."
+
+#~ msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Πρόκειται να απενεργοποιήσετε αυτή την ομάδα. Αυτή και το περιεχόμενο της θα είναι κρυμμένα στην ιστοσελίδα και μη ορατά σε όλους, μαζί με εσάς."
+
+#~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Πρόκειται να απενεργοποιήστε αυτό το έργο. Αυτό και όλο του το περιεχόμενο θα είναι κρυμμένο στην ιστοσελίδα και μη ορατό σε όλους, μαζί με εσάς."
+
+#, fuzzy
+#~ msgid "nothing selected"
+#~ msgstr "Δεν έχει επιλεγεί Ετικέτα"

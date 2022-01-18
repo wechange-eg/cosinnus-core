@@ -31,9 +31,9 @@
 <button class="pull-right btn btn-emphasized btn-autosize" href="{% url 'login' %}?hidesso=True&next={% url 'socialaccount_connections' %}?provider={{ account.get_provider.id }}" >
     <ul class="media-list">
         <li class="media">
-            <a class="pull-left" href="#">
+            <span class="pull-left">
                 <i class="fa fa-user"></i>
-            </a>
+            </span>
             <div class="media-body">
                 {% trans 'Login and Connect' %}
             </div>

@@ -8,6 +8,7 @@ import {
   Badge,
   Divider,
   Link,
+  Hidden
 } from "@material-ui/core"
 import {connect} from "react-redux"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
@@ -81,11 +82,13 @@ function NavConnector(props: NavProps) {
     >
       <div className={classes.drawerHeader}>
         {conference.props.avatar && (
+          <Hidden smDown>
           <img
             src={conference.props.avatar}
             alt={conference.props.name}
             className={classes.logo}
           />
+          </Hidden>
         )}
         <Typography component="h3">{conference.props.name}</Typography>
         <Typography component="h4">{conference.props.description}</Typography>

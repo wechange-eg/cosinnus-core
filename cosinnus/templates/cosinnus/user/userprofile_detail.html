@@ -17,6 +17,20 @@
         <li class="active">{% trans "Your Profile" %}</li>
 {% endblock %}
 
+{% block og_url %}{{ block.super }}{% endblock og_url %}
+{% block og_title %}{{ this_user.get_full_name }} - {% trans 'Profile' %} - {{ block.super }}{% endblock og_title %}
+{% block og_image %}{% if profile.avatar %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ profile.avatar.url }}{% else %}{{ COSINNUS_CURRENT_PORTAL.get_logo_image_url }}{% endif %}{% endblock og_image %}
+{% block og_description %}{% if profile.description %}{{ profile.description|textfield|safe_text|linebreaksoneline }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+
+{% block og_meta_attributes %}
+	{{ block.super }}
+    {% if profile.avatar %}
+        <meta property="og:image:width"           content="1200" />
+        <meta property="og:image:height"          content="630" />
+		<meta property="og:image:secure_url"	  content="{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ profile.avatar.url }}" />
+    {% endif %}
+{% endblock %}
+
 {% block content %}
 
     {% if SETTINGS.DEBUG and not user|cosinnus_setting:"test_msg" %}
@@ -47,9 +61,9 @@
                     <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" href="{% url 'cosinnus:profile-delete' %}">
                         <ul class="media-list">
                             <li class="media">
-                                <a class="pull-left" href="#">
+                                <span class="pull-left">
                                     <i class="fa fa-times"></i>
-                                </a>
+                                </span>
                                 <div class="media-body">
                                     {% trans "Delete profile" %}
                                 </div>
@@ -65,9 +79,9 @@
 	            <button type="button" class="btn btn-default">
 	                <ul class="media-list">
 	                    <li class="media">
-	                        <a class="pull-left" href="#">
+	                        <span class="pull-left">
 	                            <i class="fa fa-hand-o-right "></i>
-	                        </a>
+	                        </span>
 	                        <div class="media-body">
 	                            <!-- <a href="#"> -->
 	                                {% trans "Abonnieren" %}
@@ -79,12 +93,15 @@
 	             {% endcomment %}
 	            {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
                 {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
-	            <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=this_user.username %}{% else %}{% url 'postman:write' recipients=this_user.username %}?next={% url 'postman:sent' %}{% endif %}">
+	            <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" 
+	                    {% if SETTINGS.COSINNUS_ROCKET_ENABLED and SETTINGS.COSINNUS_ROCKET_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}
+	                    href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=this_user.username %}{% else %}{% url 'postman:write' recipients=this_user.username %}?next={% url 'postman:sent' %}{% endif %}">
+	                    
 	                <ul class="media-list">
 	                    <li class="media">
-	                        <a class="pull-left" href="#">
+	                        <span class="pull-left">
 	                            <i class="fa fa-envelope"></i>
-	                        </a>
+	                        </span>
 	                        <div class="media-body">
 	                            {% trans "Send Message" %}
 	                        </div>
@@ -112,9 +129,9 @@
 	            <ul class="media-list">
 	                <li class="media">
 	                    <a class="pull-left btn-extra-emphasized" href="#"></a>
-	                    <a class="pull-left" href="#">
+	                    <span class="pull-left">
 	                        <i class="fa fa-user"></i>
-	                    </a>
+	                    </span>
 	                    <div class="media-body">
 	                        {% trans "About me" %}
 	                    </div>
@@ -174,8 +191,9 @@
 					        {% endwith %}
 			            {% endif %}
                     {% endblock %}
-		            
+
 		            {% include "cosinnus/media_tags_userprofile_readonly.html" with object=profile %}
+					{% block extra_fields %}{% endblock %}
 	            {% endblock userprofile_content %}
 			</div><!-- content-box -->
 			{% endblock %}
@@ -184,12 +202,21 @@
 	    <div class="col-md-6 col-lg-4 large-space">
 			{% block middle_column %}
 		        {% include 'cosinnus/user/userprofile_detail_groups_widget.html' %}
+		        
+		        {% if SETTINGS.COSINNUS_CONFERENCES_ENABLED %}
+                    {% include 'cosinnus/user/userprofile_detail_projects_widget.html' %}
+                {% endif %}
 			{% endblock %}
 	    </div><!-- column -->
 	    
 	    <div class="col-md-6 col-lg-4 large-space">
 			{% block right_column %}
-                {% include 'cosinnus/user/userprofile_detail_projects_widget.html' %}
+                {% if SETTINGS.COSINNUS_CONFERENCES_ENABLED %}
+                    {% include 'cosinnus/user/userprofile_detail_conferences_widget.html' with conferences=conferences %}
+                {% else %}
+	                {% include 'cosinnus/user/userprofile_detail_projects_widget.html' %}
+                {% endif %}
+    
 			{% endblock %}
         </div><!-- column -->
 	

@@ -53,12 +53,13 @@ from cosinnus.api.serializers.group import GroupSimpleSerializer
 from cosinnus.api.serializers.user import UserSerializer
 from cosinnus.core import signals
 from cosinnus.core.decorators.views import membership_required, redirect_to_403, \
-    dispatch_group_access, get_group_for_request
+    dispatch_group_access, get_group_for_request, redirect_to_not_logged_in
 from cosinnus.core.registries import app_registry
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm, MembershipForm, CosinnusLocationForm, \
     CosinnusGroupGalleryImageForm, CosinnusGroupCallToActionButtonForm, MultiUserSelectForm, MultiGroupSelectForm
-from cosinnus.forms.tagged import get_form  # circular import
+from cosinnus.forms.tagged import get_form
+from cosinnus.models import group  # circular import
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
                                    CosinnusPortal, CosinnusLocation,
                                    CosinnusGroupGalleryImage, CosinnusGroupCallToActionButton,
@@ -88,7 +89,8 @@ from cosinnus.views.microsite import GroupMicrositeView
 from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
                                         AjaxableFormMixin, ListAjaxableResponseMixin)
 from cosinnus.views.mixins.avatar import AvatarFormMixin
-from cosinnus.views.mixins.group import GroupIsConferenceMixin
+from cosinnus.views.mixins.group import GroupIsConferenceMixin,\
+    RequireVerifiedUserMixin
 from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin, \
     RequireLoggedInMixin, EndlessPaginationMixin, RequireWriteMixin
 from cosinnus.views.mixins.reflected_objects import ReflectedObjectSelectMixin
@@ -101,6 +103,8 @@ from cosinnus_organization.utils import get_organization_select2_pills
 from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.views.attached_object import AttachableViewMixin
 from cosinnus.core.middleware import inactive_logout_middleware
+from cosinnus.forms.conference import CosinnusConferenceSettingsMultiForm
+
 
 logger = logging.getLogger('cosinnus')
 
@@ -188,7 +192,8 @@ class CosinnusGroupFormMixin(object):
     
     def get_form_class(self):
         
-        class CosinnusGroupForm(get_form(self.group_form_class, attachable=False)):
+        class CosinnusGroupForm(get_form(self.group_form_class, attachable=False,
+                         extra_forms={'conference_settings_assignments': CosinnusConferenceSettingsMultiForm})):
             def dispatch_init_group(self, name, group):
                 if name == 'media_tag':
                     return group
@@ -312,7 +317,7 @@ class GroupMembershipMixin(MembershipClassMixin):
     invite_class = CosinnusUnregisterdUserGroupInvite
 
 
-class GroupCreateView(CosinnusGroupFormMixin, AttachableViewMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
+class GroupCreateView(CosinnusGroupFormMixin, RequireVerifiedUserMixin, AttachableViewMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
                       CreateWithInlinesView):
 
     #form_class = 
@@ -554,272 +559,12 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         })
         return context
 
+class GroupMeetingView(SamePortalGroupMixin, RequireReadMixin, DetailView):
 
-class ConferenceManagementView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, DetailView):
-
-    template_name = 'cosinnus/group/conference_management.html'
-
-    def get_object(self, queryset=None):
-        return self.group
-
-    def post(self, request, *args, **kwargs):
-        if 'startConferenence' in request.POST:
-            self.group.conference_is_running = True
-            self.group.save()
-            self.update_all_members_status(True)
-            messages.add_message(request, messages.SUCCESS,
-                                 _('Conference successfully started and user accounts activated'))
-
-        elif 'finishConferenence' in request.POST:
-            self.group.conference_is_running = False
-            self.group.save()
-            self.update_all_members_status(False)
-            messages.add_message(request, messages.SUCCESS,
-                                 _('Conference successfully finished and user accounts deactivated'))
-
-        elif 'deactivate_member' in request.POST:
-            user_id = int(request.POST.get('deactivate_member'))
-            user = self.update_member_status(user_id, False)
-            if user:
-                messages.add_message(request, messages.SUCCESS, _('Successfully deactivated user account'))
-
-        elif 'activate_member' in request.POST:
-            user_id = int(request.POST.get('activate_member'))
-            user = self.update_member_status(user_id, True)
-            if user:
-                messages.add_message(request, messages.SUCCESS, _('Successfully activated user account'))
-
-        elif 'remove_member' in request.POST:
-            user_id = int(request.POST.get('remove_member'))
-            user = get_user_model().objects.get(id=user_id)
-            user.is_active = False
-            delete_userprofile(user)
-            messages.add_message(request, messages.SUCCESS, _('Successfully removed user'))
-
-        return redirect(group_aware_reverse('cosinnus:conference-management',
-                                            kwargs={'group': self.group}))
-
-    def update_all_members_status(self, status):
-        for member in self.group.conference_members:
-            member.is_active = status
-            if status:
-                member.last_login = None
-            member.save()
-
-    def update_member_status(self, user_id, status):
-        try:
-            user = get_user_model().objects.get(id=user_id)
-            user.is_active = status
-            user.save()
-            return user
-        except ObjectDoesNotExist:
-            pass
-
-    def get_member_workshops(self, member):
-        return CosinnusGroupMembership.objects.filter(user=member, group__parent=self.group)
-
-    def get_members_and_workshops(self):
-        members = []
-        for member in self.group.conference_members:
-            member_dict = {
-                'member': member,
-                'workshops': self.get_member_workshops(member)
-            }
-            members.append(member_dict)
-        return members
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['group'] = self.group
-        context['members'] = self.get_members_and_workshops()
-        context['group_admins'] = CosinnusGroupMembership.objects.get_admins(group=self.group)
-
-        return context
-
-
-class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, FormView):
-
-    template_name = 'cosinnus/group/workshop_participants_upload.html'
-    form_class = CosinusWorkshopParticipantCSVImportForm
+    template_name = 'cosinnus/group/group_meeting.html'
 
     def get_object(self, queryset=None):
         return self.group
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['group'] = self.group
-        return kwargs
-
-    def form_valid(self, form):
-        data = form.cleaned_data.get('participants')
-        header, accounts = self.process_data(data)
-
-        filename = '{}_participants_passwords.csv'.format(self.group.slug)
-
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
-
-        writer = csv.writer(response)
-        writer.writerow(header)
-        for account in accounts:
-            writer.writerow(account)
-        return response
-
-    def process_data(self, data):
-        groups_list = data.get('header')
-        header = data.get('header_original')
-        accounts_list = []
-        for row in data.get('data'):
-            account = self.create_account(row, groups_list)
-            accounts_list.append(account)
-
-        return header + ['email', 'password'], accounts_list
-
-    def get_unique_workshop_name(self, name):
-        no_whitespace = name.replace(' ', '')
-        unique_name = '{}_{}__{}'.format(self.group.portal.id, self.group.id, no_whitespace)
-        return unique_name
-
-    @transaction.atomic
-    def create_account(self, data, groups):
-
-        username = self.get_unique_workshop_name(data[0])
-        first_name = data[1]
-        last_name = data[2]
-
-        try:
-            name_string = '"{}":"{}"'.format(PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME, username)
-            profile = UserProfile.objects.get(settings__contains=name_string)
-            user = profile.user
-            user.first_name = first_name
-            user.last_name = last_name
-            user.save()
-            self.create_or_update_memberships(user, data, groups)
-            return data + [user.email, '']
-        except ObjectDoesNotExist:
-            random_email = '{}@wechange.de'.format(get_random_string())
-            pwd = get_random_string()
-            user = create_base_user(random_email, password=pwd, first_name=first_name, last_name=last_name)
-
-            if user:
-                profile = get_user_profile_model()._default_manager.get_for_user(user)
-                profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME] = username
-                profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT] = True
-                profile.add_redirect_on_next_page(
-                    redirect_with_next(
-                        group_aware_reverse(
-                            'cosinnus:group-dashboard',
-                            kwargs={'group': self.group}),
-                        self.request), message=None, priority=True)
-                profile.save()
-
-                unique_email = 'User{}.C{}@wechange.de'.format(str(user.id), str(self.group.id))
-                user.email = unique_email
-                user.is_active = False
-                user.save()
-
-                self.create_or_update_memberships(user, data, groups)
-                return data + [unique_email, pwd]
-            else:
-                return data + [_('User was not created'), '']
-
-    def create_or_update_memberships(self, user, data, groups):
-
-        # Add user to the parent group
-        membership, created = CosinnusGroupMembership.objects.get_or_create(
-            group=self.group,
-            user=user
-        )
-        if created:
-            membership.status = MEMBERSHIP_MEMBER
-            membership.save()
-
-        # Add user to all child groups/projects that were marked with 1 or 2 in the csv or delete membership
-        for i, group in enumerate(groups):
-            if isinstance(group, CosinnusGroup):
-                if data[i] in [str(MEMBERSHIP_MEMBER), str(MEMBERSHIP_ADMIN)]:
-                    status = int(data[i])
-                    membership, created = CosinnusGroupMembership.objects.get_or_create(
-                        group=group,
-                        user=user
-                    )
-                    if created:
-                        membership.status = status
-                        membership.save()
-                    else:
-                        current_status = membership.status
-                        if current_status < status:
-                            membership.status = status
-                            membership.save()
-                else:
-                    try:
-                        membership = CosinnusGroupMembership.objects.get(
-                            group=group,
-                            user=user
-                        )
-                        membership.delete()
-                    except ObjectDoesNotExist:
-                        continue
-            else:
-                continue
-
-
-class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, View):
-
-    def get(self, request, *args, **kwars):
-        members = self.group.conference_members
-
-        filename = '{}_statistics.csv'.format(self.group.slug)
-
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
-
-        header = ['Workshop username', 'email', 'workshops count', 'has logged in', 'last login date', 'Terms of service accepted']
-
-        writer = csv.writer(response)
-        writer.writerow(header)
-
-        for member in members:
-            workshop_username = member.cosinnus_profile.readable_workshop_user_name
-            email = member.email
-            workshop_count = self.get_membership_count(member)
-            has_logged_in, logged_in_date = self.get_last_login(member)
-            tos_accepted = 1 if member.cosinnus_profile.settings.get('tos_accepted', False) else 0
-            row = [workshop_username, email, workshop_count, has_logged_in, logged_in_date, tos_accepted]
-            writer.writerow(row)
-        return response
-
-    def get_membership_count(self, member):
-        return member.cosinnus_groups.filter(parent=self.group).count()
-
-    def get_last_login(self, member):
-        has_logged_in = 1 if member.last_login else 0
-        last_login = timezone.localtime(member.last_login)
-        logged_in_date = last_login.strftime("%Y-%m-%d %H:%M") if member.last_login else ''
-
-        return [has_logged_in, logged_in_date]
-
-
-class WorkshopParticipantsUploadSkeletonView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, View):
-
-    def get(self, request, *args, **kwars):
-        filename = '{}_participants.csv'.format(self.group.slug)
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
-
-        writer = csv.writer(response)
-
-        header = [_('Workshop username'), _('First Name'), _('Last Name')]
-        workshop_slugs = [group.slug for group in self.group.groups.all()]
-
-        full_header = header + workshop_slugs
-
-        writer.writerow(full_header)
-
-        for i in range(5):
-            row = ['' for entry in full_header]
-            writer.writerow(row)
-        return response
 
 
 class GroupMembersMapListView(GroupDetailView):
@@ -1592,11 +1337,9 @@ class ActivateOrDeactivateGroupView(TemplateView):
             typed_group.update_index()
             typed_group.update_index_for_all_group_objects()
             messages.success(request, self.message_success_activate % {'team_name': self.group.name})
-            signals.group_reactivated.send(sender=typed_group.__class__, group=typed_group)
             return redirect(self.group.get_absolute_url())
         else:
             messages.success(request, self.message_success_deactivate % {'team_name': self.group.name})
-            signals.group_deactivated.send(sender=typed_group.__class__, group=typed_group)
             return redirect(reverse('cosinnus:profile-detail'))
     
     def get_context_data(self, **kwargs):
@@ -1632,11 +1375,12 @@ class GroupStartpage(View):
                     and not request.GET.get('invited', None) == '1':
                 return False
             else:
+                # if the group is not accessible, redirect to microsite 
+                #   in case if the group's microsite should not be closed for the non-authenticated users
+                if not check_object_read_access(self.group, request.user) and not self.group.is_publicly_visible:
+                    return False
                 return True
-        # if the group is not accessible, redirect to microsite
-        if not check_object_read_access(self.group, request.user):
-            return True
-        
+
         # check if this session user has clicked on "browse" for this group before
         # and if so, never let him see that groups microsite again
         group_session_browse_key = 'group__browse__%s' % self.group.slug
@@ -2049,7 +1793,7 @@ class GroupOrganizationsView(DetailView):
         context.update({
             'requested': queryset.filter(status=MEMBERSHIP_PENDING),
             'invited': queryset.filter(status=MEMBERSHIP_INVITED_PENDING),
-            'members': queryset.filter(status__in=(MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN)),
+            'members': queryset.filter(status__in=MEMBER_STATUS),
             'request_form': MultiOrganizationSelectForm(group=self.object),
             'group': self.object,
         })
@@ -2149,10 +1893,7 @@ group_delete = GroupDeleteView.as_view()
 group_delete_api = GroupDeleteView.as_view(is_ajax_request_url=True)
 group_detail = GroupDetailView.as_view()
 group_detail_api = GroupDetailView.as_view(is_ajax_request_url=True)
-conference_management = ConferenceManagementView.as_view()
-workshop_participants_upload = WorkshopParticipantsUploadView.as_view()
-workshop_participants_download = WorkshopParticipantsDownloadView.as_view()
-workshop_participants_upload_skeleton = WorkshopParticipantsUploadSkeletonView.as_view()
+group_meeting = GroupMeetingView.as_view()
 group_members_map = GroupMembersMapListView.as_view()
 group_list = GroupListView.as_view()
 group_list_api = GroupListView.as_view(is_ajax_request_url=True)

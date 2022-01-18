@@ -65,9 +65,9 @@
                             <div type="button" class="btn btn-default w100">
                                 <ul class="media-list">
                                     <li class="media">
-                                        <a class="pull-left" href="#">
+                                        <span class="pull-left">
                                             <i class="fa fa-search"></i>
-                                        </a>
+                                        </span>
                                         <div class="media-body media-body-form-control">
                                             <input class="form-control"
                                                 placeholder="{% trans 'Search for email, firstname or lastname' %}"
@@ -99,6 +99,9 @@
         <button type="submit" class="btn btn-emphasized large-space" title="{% trans 'search' %}">
             <ul class="media-list">
                 <li class="media">
+	                <span class="pull-left">
+	                    <i class="fa fa-search"></i>
+	                </span>
                     <div class="media-body">
                         {% trans 'search' %}
                     </div>
@@ -106,11 +109,24 @@
             </ul>
         </button>
     </form>
-
+    
+    <button class="btn btn-emphasized btn-autosize no-margin pull-left" href="{% url 'cosinnus:administration-user-create' %}">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left">
+                    <i class="fa fa-plus"></i>
+                </span>
+                <div class="media-body">
+                    {% trans 'Add user'%}
+                </div>
+            </li>
+        </ul>
+    </button>
 
     {% if object_list %}
 
     {% if request.GET.search %}
+        <div class="clearfix"></div>
         <div class="user-management-search-result large-space">
             <div>
                 {% blocktrans with search_string=request.GET.search count total=total %}
@@ -208,9 +224,9 @@
 		                        <button type="submit" class="btn btn-emphasized btn-autosize btn-small">
 		                            <ul class="media-list">
 		                                <li class="media">
-		                                    <a class="pull-left">
+		                                    <span class="pull-left">
 		                                        <i class="fa fa-envelope"></i>
-		                                    </a>
+		                                    </span>
 		                                    <div class="media-body">
 								                {% if user.cosinnus_profile.get_last_login_token_sent %}
 								                    {% trans 'Resend login token'%}
@@ -284,7 +300,7 @@
 
 
 
-<div class="fadedown pull-right">
+<div class="pull-right">
     <button class="btn btn-emphasized btn-autosize" href="{% url 'cosinnus:administration-user-create' %}">
         <ul class="media-list">
             <li class="media">

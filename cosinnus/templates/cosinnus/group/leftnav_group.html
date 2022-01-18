@@ -57,7 +57,7 @@
     
     <div class="small-space">&nbsp;</div>
     
-    {% if group.allow_conference_temporary_users and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+    {% if group.temporary_users_allowed and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
         {% captureas href %}{% group_url 'cosinnus:conference:temporary-users' group=group %}{% endcaptureas %}
         {% captureas label %}{% trans "Temporary User Accounts" %}{% endcaptureas %}
         {% include "cosinnus/leftnav_button.html" with active=is_temporaryusers extra_classes="fine-space" icon_full_class="fas fa-user-clock" label=label href=href  %}
@@ -73,7 +73,7 @@
 
 {% if group.group_is_conference and user|has_write_access:object %}
 	{% captureas href %}{% group_url 'cosinnus:conference:reminders' group=group %}{% endcaptureas %}
-	{% captureas label %}{% trans "Reminder emails" %}{% endcaptureas %}
+	{% captureas label %}{% trans "Emails to conference participants" %}{% endcaptureas %}
 	{% include "cosinnus/leftnav_button.html" with active=is_conferencereminders extra_classes="fine-space" icon="fa-envelope" label=label href=href  %}
 {% endif %}
 

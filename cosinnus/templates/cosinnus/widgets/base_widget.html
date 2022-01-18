@@ -26,13 +26,13 @@
                         <a class="pull-left btn-extra-emphasized" href="#"></a>
                         {% block widget_icon %}
 	                        {% if widget_icon or widget_icon_content %}
-		                        <a class="pull-left" href="#">
+		                        <span class="pull-left">
 		                            {% if widget_icon_content %}
 		                                {{ widget_icon_content }}
 		                            {% else %}
 		                                <i class="fa {% if widget_icon %}{{ widget_icon }}{% else %}fa-question{% endif %}"></i>
 		                            {% endif %}
-		                        </a>
+		                        </span>
 	                        {% endif %}
                         {% endblock widget_icon %}
                         {% if edit_mode and edit_mode != False and group and request.user|is_group_admin:group or edit_mode != False and request.user.is_authenticaed and not group %}
@@ -60,9 +60,9 @@
                 <button type="button" class="btn btn-emphasized dashboard-appwidget-morebutton" data-target="widget-reload-button">
                     <ul class="media-list">
                         <li class="media">
-                            <a class="pull-right btn-extra-emphasized" href="#">
+                            <span class="pull-right btn-extra-emphasized">
                                 <i class="fa {% if is_spare %}fa-floppy-o{% else %}fa-refresh{% endif %}"></i>
-                            </a>
+                            </span>
                             <div class="media-body">
                                 {% if link_label %}{{ link_label }}{% else %}{% trans "More" %}{% endif %}
                             </div>

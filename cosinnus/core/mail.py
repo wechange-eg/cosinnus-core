@@ -242,6 +242,7 @@ def get_common_mail_context(request, group=None, user=None):
         'site_name': portal.name,
         'protocol': protocol,
         'domain_url': portal.get_domain(),
+        'portal': portal,
     }
     if group:
         context.update({
@@ -249,8 +250,9 @@ def get_common_mail_context(request, group=None, user=None):
             'group': group,
         })
     if user:
+        from cosinnus.templatetags.cosinnus_tags import full_name_force
         context.update({
-            'user_name': user.get_full_name() or user.get_username(),
+            'user_name': full_name_force(user),
             'user': user,
         })
     return context

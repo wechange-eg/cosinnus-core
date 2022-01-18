@@ -22,20 +22,29 @@ MEMBERSHIP_ADMIN = 2
 #: Role defining a user was added to a group and must confirm this before becoming a member
 MEMBERSHIP_INVITED_PENDING = 3
 
+#: Role defining a manager of a group or portal, granting them more permissions than a member,
+#: but less permissions than an admin
+MEMBERSHIP_MANAGER = 4
+
+
 MEMBERSHIP_STATUSES = (
     (MEMBERSHIP_PENDING, p_('cosinnus membership status', 'pending')),
     (MEMBERSHIP_MEMBER, p_('cosinnus membership status', 'member')),
     (MEMBERSHIP_ADMIN, p_('cosinnus membership status', 'admin')),
     (MEMBERSHIP_INVITED_PENDING, p_('cosinnus membership status', 'pending-invited')),
+    (MEMBERSHIP_MANAGER, p_('cosinnus membership status', 'manager')),
 )
 
-#: A user is a member of a group if either is an explicit member or admin
-MEMBER_STATUS = (MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN,)
+#: A user is a member of a group if either is an explicit member or admin or manager
+MEMBER_STATUS = (MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN, MEMBERSHIP_MANAGER,)
+# A user is a manager of a group if they are a manager or an admin
+MANAGER_STATUS = (MEMBERSHIP_ADMIN, MEMBERSHIP_MANAGER)
 
 _MEMBERSHIP_ADMINS_KEY = 'cosinnus/core/membership/%s/admins/%d'
 _MEMBERSHIP_MEMBERS_KEY = 'cosinnus/core/membership/%s/members/%d'
 _MEMBERSHIP_PENDINGS_KEY = 'cosinnus/core/membership/%s/pendings/%d'
 _MEMBERSHIP_INVITED_PENDINGS_KEY = 'cosinnus/core/membership/%s/invited_pendings/%d'
+_MEMBERSHIP_MANAGERS_KEY = 'cosinnus/core/membership/%s/managers/%d'
 
 
 class CosinnusGroupMembershipQS(models.query.QuerySet):
@@ -141,6 +150,20 @@ class BaseMembershipManager(models.Manager):
             gids = [isinstance(g, int) and g or g.pk for g in groups]
             return self._get_users_for_multiple_groups(gids, _MEMBERSHIP_INVITED_PENDINGS_KEY,
                                                        MEMBERSHIP_INVITED_PENDING)
+    
+    def get_managers(self, group=None, groups=None):
+        """
+        Given either a group or a list of groups, this function returns all
+        members with the :data:`MEMBERSHIP_MANAGER` role.
+        """
+        assert (group is None) ^ (groups is None)
+        if group:
+            gid = isinstance(group, int) and group or group.pk
+            return self._get_users_for_single_group(gid, _MEMBERSHIP_MANAGERS_KEY, MEMBERSHIP_MANAGER)
+        else:
+            gids = [isinstance(g, int) and g or g.pk for g in groups]
+            return self._get_users_for_multiple_groups(gids, _MEMBERSHIP_MANAGERS_KEY,
+                                                       MEMBERSHIP_MANAGER)
 
 
 @python_2_unicode_compatible
@@ -186,7 +209,7 @@ class BaseMembership(models.Model):
         # Only update the date if the the state changes from pending to member
         # or admin
         if (self._old_current_status == MEMBERSHIP_PENDING or self._old_current_status == MEMBERSHIP_INVITED_PENDING) and \
-                (self.status == MEMBERSHIP_ADMIN or self.status == MEMBERSHIP_MEMBER):
+                (self.status in MEMBER_STATUS):
             self.date = now()
         super(BaseMembership, self).save(*args, **kwargs)
         # run an empty save on user so userprofile search indices get updated with new memberships through signals
@@ -204,6 +227,7 @@ class BaseMembership(models.Model):
             _MEMBERSHIP_MEMBERS_KEY % (cls.CACHE_KEY_MODEL, group.pk),
             _MEMBERSHIP_PENDINGS_KEY % (cls.CACHE_KEY_MODEL, group.pk),
             _MEMBERSHIP_INVITED_PENDINGS_KEY % (cls.CACHE_KEY_MODEL, group.pk),
+            _MEMBERSHIP_MANAGERS_KEY % (cls.CACHE_KEY_MODEL, group.pk),
         ]
         cache.delete_many(keys)
         group._clear_local_cache()
@@ -289,6 +313,22 @@ class MembersManagerMixin(object):
         qs = get_user_model().objects.filter(id__in=self.invited_pendings)
         qs = filter_active_users(qs)
         return qs
+    
+    @property
+    def managers(self):
+        return self.membership_class.objects.get_managers(self.pk)
+
+    @property
+    def actual_managers(self):
+        """ Returns a QS of users that are managers of this group and are actually active and visible on the site """
+        qs = get_user_model().objects.filter(id__in=self.managers)
+        qs = filter_active_users(qs)
+        return qs
+
+    def is_manager(self, user):
+        """Checks whether the given user is an admin of this group"""
+        uid = isinstance(user, int) and user or user.pk
+        return uid in self.managers
 
     def clear_member_cache(self):
         self.membership_class.clear_member_cache_for_group(self)

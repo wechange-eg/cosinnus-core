@@ -5,9 +5,9 @@
             href="{% url 'cosinnus:administration-managed-tags-newsletter' %}">
         <ul class="media-list">
             <li class="media">
-               <a class="pull-left">
+               <span class="pull-left">
                     <i class="fa fa-envelope"></i>
-                </a>
+               </span>
                 <div class="media-body">
                     {% trans "Send Newsletter" %}
                     {% if SETTINGS.COSINNUS_ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_ENABLED and SETTINGS.COSINNUS_ADMINISTRATION_GROUPS_NEWSLETTER_ENABLED %}
@@ -23,9 +23,9 @@
     <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:administration-groups-newsletter' %}">
         <ul class="media-list">
             <li class="media">
-               <a class="pull-left">
+               <span class="pull-left">
                     <i class="fa fa-envelope"></i>
-                </a>
+                </span>
                 <div class="media-body">
                     {% trans "Send Newsletter" %}
                     {% if SETTINGS.COSINNUS_ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_ENABLED and SETTINGS.COSINNUS_ADMINISTRATION_GROUPS_NEWSLETTER_ENABLED %}
@@ -41,9 +41,9 @@
 <div type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:administration-users' %}">
     <ul class="media-list">
         <li class="media">
-           <a class="pull-left">
+           <span class="pull-left">
                 <i class="fas fa-user"></i>
-            </a>
+            </span>
             <div class="media-body">
                 {% trans "User Management" %}
             </div>
@@ -56,9 +56,9 @@
     <div type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:administration-user-import' %}">
         <ul class="media-list">
             <li class="media">
-               <a class="pull-left">
+               <span class="pull-left">
                     <i class="fa fa-upload"></i>
-                </a>
+                </span>
                 <div class="media-body">
                     {% trans "User Import" %}
                 </div>
@@ -72,9 +72,9 @@
 <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:administration-dynamic-fields' %}">
     <ul class="media-list">
         <li class="media">
-           <a class="pull-left">
+           <span class="pull-left">
                 <i class="fas fa-list"></i>
-            </a>
+            </span>
             <div class="media-body">
                 {% trans "User Profile Field Choices" %}
             </div>
@@ -89,9 +89,9 @@
 <div type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:user-dashboard-announcement-list' %}">
     <ul class="media-list">
         <li class="media">
-           <a class="pull-left">
+           <span class="pull-left">
                 <i class="fa fa-comment"></i>
-            </a>
+            </span>
             <div class="media-body">
                 {% trans "User Dashboard Announcements" %}
             </div>
@@ -102,9 +102,9 @@
 <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:administration-welcome-email' %}">
     <ul class="media-list">
         <li class="media">
-           <a class="pull-left">
+           <span class="pull-left">
                 <i class="fa fa-envelope"></i>
-            </a>
+            </span>
             <div class="media-body">
                 {% trans "User Welcome Email" %}
             </div>
@@ -116,55 +116,13 @@
 <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url "cosinnus:simple-statistics" %}">
     <ul class="media-list">
         <li class="media">
-            <a class="pull-left" href="#">
+            <span class="pull-left">
                 <i class="fa fa-table"></i>
-            </a>
+            </span>
             <div class="media-body">
                 {% trans "Simple Statistics" %}
             </div>
         </li>
     </ul>
 </div>
-
-{% if SETTINGS.COSINNUS_CONFERENCES_ENABLED and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
-	<div type="button" class="btn w100 btn-emphasized fine-space" href="{% url "cosinnus:administration-conference-overview" %}">
-        <ul class="media-list">
-            <li class="media">
-                <a class="pull-left" href="#">
-                    <i class="fa fa-television"></i>
-                </a>
-                <div class="media-body">
-                    {% trans "Conference Overview" %}
-                </div>
-            </li>
-        </ul>
-    </div>
-    
-    <div type="button" class="btn w100 btn-emphasized fine-space" href="{% url "cosinnus:administration-conference-overview-premium" %}">
-        <ul class="media-list">
-            <li class="media">
-                <a class="pull-left" href="#">
-                    <i class="fa fa-television"></i>
-                </a>
-                <div class="media-body">
-                    {% trans "Premium Conferences Only" %}
-                </div>
-            </li>
-        </ul>
-    </div>
-    
-    <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url "cosinnus:administration-conference-overview-nonstandard" %}">
-        <ul class="media-list">
-            <li class="media">
-                <a class="pull-left" href="#">
-                    <i class="fa fa-television"></i>
-                </a>
-                <div class="media-body">
-                    {% trans "Conferences with Custom Settings" %}
-                </div>
-            </li>
-        </ul>
-    </div>
-    
-{% endif %}
 

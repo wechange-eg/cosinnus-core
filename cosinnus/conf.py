@@ -286,7 +286,7 @@ class CosinnusConf(AppConf):
     
     # very very small timeout for cached BBB server configs!
     # this should be in the seconds region
-    CONFERENCE_SETTING_MICRO_CACHE_TIMEOUT = 10 # 10 seconds
+    CONFERENCE_SETTING_MICRO_CACHE_TIMEOUT = 2 # 2 seconds
     
     # should CosinnusIdeas be enabled for this Portal?
     IDEAS_ENABLED = False
@@ -417,6 +417,14 @@ class CosinnusConf(AppConf):
     
     # should the group avatar image be a required field?
     GROUP_AVATAR_REQUIRED = False
+    
+    # whether to show the "publicly_visible" field in the group form options
+    GROUP_PUBLICY_VISIBLE_OPTION_SHOWN = True
+    
+    # sets the "publicly_visible" field value per portal
+    # Note! this is reflected in migration 0113! If the setting is changed afte the migration
+    # has been run, previous values of all existing groups will remain unchanged!
+    GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE = True
     
     # this is the thumbnail size for small image previews
     IMAGE_THUMBNAIL_SIZE_SCALE = (80, 80)
@@ -590,6 +598,8 @@ class CosinnusConf(AppConf):
     # should twitter and flickr embed fields and display be active for microsites?
     MICROSITE_SOCIAL_MEDIA_FIELDS_ACTIVE = False
     
+    
+    
     #: A list of app_names (``'cosinnus_note'`` rather than ``note``) that will
     #: e.g. not be displayed in the cosinnus menu
     HIDE_APPS = set(['cosinnus_organization', 'cosinnus_conference', 'cosinnus_message', 'cosinnus_notifications',
@@ -691,6 +701,12 @@ class CosinnusConf(AppConf):
     # when users newly register, are their profiles marked as visible rather than private on the site?
     USER_DEFAULT_VISIBLE_WHEN_CREATED = True
     
+    # for portals with `email_needs_verification` active, how many days after registration
+    # should the user get a full-screen popup to "please verify your email now" on every
+    # page access?
+    # value: days in int, 0 for popup will never show
+    USER_SHOW_EMAIL_VERIFIED_POPUP_AFTER_DAYS = 0
+    
     # should regular, non-admin users be allowed to create Groups (Societies) as well?
     # if False, users can only create Projects 
     USERS_CAN_CREATE_GROUPS = False
@@ -724,9 +740,30 @@ class CosinnusConf(AppConf):
     
     CONFERENCES_USE_APPLICATIONS_CHOICE_DEFAULT = False
     
+    # whether or not BBB-streaming is enabled for this portal
+    CONFERENCES_STREAMING_ENABLED = False
+    
+    # BBB Streaming base api url
+    CONFERENCES_STREAMING_API_URL = None
+    # BBB Streaming credentials username
+    CONFERENCES_STREAMING_API_AUTH_USER = None
+    # BBB Streaming credentials password
+    CONFERENCES_STREAMING_API_AUTH_PASSWORD = None
+    # how many minutes before the streamed event start time the streamer is created via API
+    CONFERENCES_STREAMING_API_CREATE_STREAMER_BEFORE_MINUTES = 120
+    # how many minutes before the streamed event start time the streamer is called to start streaming via API
+    CONFERENCES_STREAMING_API_START_STREAMER_BEFORE_MINUTES = 10
+    # how many minutes after the streamed event start time the streamer is stopped and deleted via API
+    CONFERENCES_STREAMING_API_STOP_DELETE_STREAMER_AFTER_MINUTES = 30
+    
     # if set to any value other than None, the conference public field will be disabled
     # and locked to the value set here
     CONFERENCES_PUBLIC_SETTING_LOCKED = None
+    
+    # can be set to a function receiving `user` as only argument, 
+    # to modify the user display name that BBB will use for a joining user
+    # default if None: `full_name`
+    CONFERENCES_USER_DISPLAY_NAME_FUNC = None
     
     # if set to True, regular non-portal admin users can not create projects and groups by themselves
     # and some elements like the "+" button in the navbar is hidden
@@ -787,6 +824,14 @@ class CosinnusConf(AppConf):
     
     # if true, an additional signup form field will be present
     SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK = False
+    
+    # whether the user signup form has the media-tag location field with a map
+    USER_SIGNUP_INCLUDES_LOCATION_FIELD = False
+    # if USER_SIGNUP_INCLUDES_LOCATION_FIELD==True, whether the field is required
+    USER_SIGNUP_LOCATION_FIELD_IS_REQUIRED = False
+    
+    # whether the user signup form has the media-tag topic field
+    USER_SIGNUP_INCLUDES_TOPIC_FIELD = False
     
     # if True, the modern user import views will be shown
     # they require a per-portal implementation of the importer class
@@ -938,7 +983,7 @@ class CosinnusConf(AppConf):
 
     # default value for form field for how many coffee table
     # participants should be allowed
-    CONFERENCE_COFFEETABLES_MAX_PARTICIPANTS_DEFAULT = 6
+    CONFERENCE_COFFEETABLES_MAX_PARTICIPANTS_DEFAULT = 500
 
     # default value for form field for if to allow user creation of coffee tables
     CONFERENCE_COFFEETABLES_ALLOW_USER_CREATION_DEFAULT = False
@@ -1022,6 +1067,8 @@ class CosinnusConf(AppConf):
     # if False, it will be triggered on requesting of the queue-URL (should happen less often)
     TRIGGER_BBB_ROOM_CREATION_IN_QUEUE = True
     
+    # The BBB Server choice list for select fields,
+    # indices correspond to an auth pair in `BBB_SERVER_AUTH_AND_SECRET_PAIRS`
     BBB_SERVER_CHOICES = (
         (0, '(None)'),
     )
@@ -1035,6 +1082,8 @@ class CosinnusConf(AppConf):
     
     BBB_RESOLVE_CLUSTER_REDIRECTS_IF_URL_MATCHES = lambda url: url.startswith('https://bbbatscale')
     
+    BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS = False
+    
     STARRED_STAR_LABEL = _('Bookmark')
     STARRED_STARRING_LABEL = _('Bookmarked')
     STARRED_OBJECTS_LIST = _('Bookmark list')
@@ -1047,6 +1096,18 @@ class CosinnusConf(AppConf):
     CALENDAR_WIDGET_DISPLAY_AS_LIST = False
     # should the group dashboard widget grid calendar allow drag & drop of events (only while CALENDAR_WIDGET_DISPLAY_AS_LIST == False)
     CALENDAR_WIDGET_ALLOW_EDIT_IN_GROUP_DASHBOARD = True
+    
+    # enables the translated fields on groups/events/conference rooms and more
+    # that show additional formfields and use model mixins to in-place replace translated field values
+    # see `TranslateableFieldsModelMixin`
+    TRANSLATED_FIELDS_ENABLED = False
+
+    # user gets notification if s/he was invited to a group even if his/er notification preferences 
+    # are tunrned on 'daily', 'weekly', or even on 'never'
+    NOTIFICATIONS_GROUP_INVITATIONS_IGNORE_USER_SETTING = False
+    
+    # if set to True group admins can decide if a contact form should be displayed on the groups micropage
+    ALLOW_CONTACT_FORM_ON_MICROPAGE = False
     
     # determines if the elasticsearch backend should use threading on update/remove/clear writing actions
     ELASTIC_BACKEND_RUN_THREADED = True
@@ -1075,44 +1136,114 @@ class CosinnusDefaultSettings(AppConf):
     BBB_API_URL = None
     BBB_HASH_ALGORITHM = "SHA1"
 
-    BBB_ROOM_DEFAULT_SETTINGS = {
-        "record": False,
-        "autoStartRecording": False,
-        "allowStartStopRecording": True
-    }
     # cache timeout for retrieval of participants
     BBB_ROOM_PARTICIPANTS_CACHE_TIMEOUT_SECONDS = 20
     # should we monkeypatch for BBB appearently allowing one less persons to enter a room
     # than provided in max_participants during room creation
-    BBB_ROOM_FIX_PARTICIPANT_COUNT_PLUS_ONE = True
-
-    # the default parameters added to every BBB room join
-    # see https://docs.bigbluebutton.org/2.2/customize.html#passing-custom-parameters-to-the-client-on-join
-    BBB_DEFAULT_EXTRA_JOIN_PARAMETER = {
-        'userdata-bbb_mirror_own_webcam': 'true',
-
+    BBB_ROOM_FIX_PARTICIPANT_COUNT_PLUS_ONE = False
+    
+    # the default BBB create-call parameters for all room types
+    BBB_DEFAULT_CREATE_PARAMETERS = {
+        "record": False,
+        "autoStartRecording": False,
+        "allowStartStopRecording": True
     }
-    BBB_ROOM_TYPE_DEFAULT = 0
-    BBB_ROOM_TYPE_CHOICES = (
-        (0, _('General')),
-        (1, _('Active')),
-        (2, _('Restricted')),
-        (3, _('Premium')),
-    )
-    # a map for variable room types
-    BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS = {
-        0: {},
-        1: {
-            'userdata-bbb_skip_check_audio': 'true',
-            'userdata-bbb_auto_join_audio': 'true',
-            'userdata-bbb_listen_only_mode': 'false',
-            'userdata-bbb_auto_share_webcam': 'true',
-            'userdata-bbb_skip_video_preview': 'true',
-            'userdata-bbb_auto_swap_layout': 'true', #  keine Präsentation zeigen
+    
+    """
+    The configuration of BBB join/create params
+    for the field presets in `CosinnusConferenceSettings`.
+    - dict keys for the fields correspond to 
+        0: `CosinnusConferenceSettings.SETTING_NO`
+        1: `CosinnusConferenceSettings.SETTING_YES`
+    - sub-dict keys for the dicts correspond to
+        'create' the BBB API create call
+        'join': the BBB join URL params
+    
+    Full example for a single field (value keys and create/join keys
+    may be empty or missing for non-options):
+    
+        'auto_mic': {
+            0: {
+                'create': {
+                    'param1': 'false',
+                },
+                'join': {
+                    'param2': 'false',
+                },
+            },
+            1: {
+                'create': {
+                    'param1': 'true',
+                },
+                'join': {
+                    'param2': 'true',
+                },
+            },
         },
-        2: {},
-        3: {},
+    """
+    BBB_PRESET_FORM_FIELD_PARAMS = {
+        'mic_starts_on': {
+            0: {
+                'create': {
+                    'muteOnStart': 'true',
+                },
+            },
+            1: {
+                'create': {
+                    'muteOnStart': 'false',
+                },
+            },
+        },
+        'cam_starts_on': {
+            0: {
+                'join': {
+                    'userdata-bbb_auto_share_webcam': 'false',
+                },
+            },
+            1: {
+                'join': {
+                    'userdata-bbb_auto_share_webcam': 'true',
+                },
+            },
+        },
     }
+    
+    # the default baseline portal values for the BBB call params
+    # these are also used to generate the portal preset defaults for inheritance
+    # Define nature-specific params by adding a '<call>__<nature>' key to the dict!
+    # see https://docs.bigbluebutton.org/2.2/customize.html#passing-custom-parameters-to-the-client-on-join
+    BBB_PARAM_PORTAL_DEFAULTS = {
+        'create': {
+            'muteOnStart': 'true', # default preset for 'mic_starts_on': False
+        },
+        'join': {
+            'userdata-bbb_auto_share_webcam': 'false', # default preset for 'cam_starts_on': False
+            'userdata-bbb_mirror_own_webcam': 'true', # mirror webcam makes seeing your picture less confusing
+        },
+        'create__coffee': {
+            'muteOnStart': 'false', # coffee tables insta-join on microphone (overwritten by userdata-bbb_auto_join_audio 'true' anyways, so we show this to be clear)
+        },
+        'join__coffee': {
+            'userdata-bbb_skip_check_audio': 'true', # coffee table insta-join
+            'userdata-bbb_auto_join_audio': 'true', # coffee table insta-join
+            'userdata-bbb_listen_only_mode': 'false', # coffee table insta-join
+            'userdata-bbb_auto_share_webcam': 'true', # coffee table insta-join
+            'userdata-bbb_skip_video_preview': 'true', # coffee table insta-join
+            'userdata-bbb_auto_swap_layout': 'true', # coffee tables don't show presentations on start
+        }
+    }
+    
+    # a list of field names from fields in fields in `CosinnusConferenceSettings`
+    # that will be shown to the users in the frontend Event forms as choices
+    # for presets for BBB rooms
+    BBB_PRESET_USER_FORM_FIELDS = [
+        'mic_starts_on',
+        'cam_starts_on',
+    ]
+    
     # limit visit creation for (user, bbb_room) pairs to a time window
     BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60*60
+    
+    
 
+    TEMP_USER_EMAIL_DOMAIN = ''

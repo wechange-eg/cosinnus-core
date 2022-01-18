@@ -17,7 +17,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _, LANGUAGE_SESSION_KEY
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import RedirectView
-from django.views.generic.base import View
+from django.views.generic.base import View, TemplateView
 import requests
 
 from cosinnus.conf import settings
@@ -74,6 +74,14 @@ def view_404(request, exception):
 def view_500(request):
     content = render_to_string('cosinnus/common/500.html')
     return HttpResponseServerError(content)
+
+
+class GenericErrorPageView(TemplateView):
+    """ Displays a simple error page, listing all attributed supplied as GET param. """
+    
+    template_name = 'cosinnus/conference/error_page.html'
+
+generic_error_page_view = GenericErrorPageView.as_view()
 
 
 class SwitchLanguageView(RedirectView):
@@ -220,6 +228,8 @@ def do_likefollowstar(request, **kwargs):
     like = PARAM_VALUE_MAP.get(request.POST.get('like', None), UNSPECIFIED)
     follow = PARAM_VALUE_MAP.get(request.POST.get('follow', None), UNSPECIFIED)
     star = PARAM_VALUE_MAP.get(request.POST.get('star', None), UNSPECIFIED)
+    # all_deselect indicates the user only wants to unfollow/unstar/unlike
+    all_deselect = all([param in (False, UNSPECIFIED,) for param in (like, follow, star,)])
     
     if ct is None or (id is None and slug is None) or (like is UNSPECIFIED and follow is UNSPECIFIED and star is UNSPECIFIED):
         return HttpResponseBadRequest('Incomplete data submitted.')
@@ -249,7 +259,8 @@ def do_likefollowstar(request, **kwargs):
     if obj is None:
         return HttpResponseNotFound('Target object not found on server.')
     
-    if not check_object_likefollowstar_access(obj, request.user):
+    # unfollow/unstar/unlike is always allowed, even if the user's permissions changed
+    if not all_deselect and not check_object_likefollowstar_access(obj, request.user):
         return HttpResponseForbidden('Your access to this object is forbidden.')
     
     was_liked, was_followed, was_starred = apply_likefollowstar_object(obj, request.user, like=like, follow=follow, star=star)

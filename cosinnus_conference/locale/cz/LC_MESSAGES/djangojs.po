@@ -258,8 +258,13 @@ msgstr ""
 #. [Organisation]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/Participants/list.json
 msgid "Organization"
+msgstr "منظمة"
+
+#. [City]
+#. defaultMessage is:
+#. undefined
+msgid "City"
 msgstr ""
 
 #. [Represented organizations]
@@ -363,10 +368,18 @@ msgid "Are you sure you want to leave this video conference?"
 msgstr "Opravdu chcete z této videokonference odejít?"
 
 msgid ""
-"If you click, you will leave the video conference. Are you sure "
-"you want to leave? Tip: Alternatively, you can open the link in a new "
-"tab or window and stay in the event."
+"If you click, you will leave the video conference. Are you sure you want to "
+"leave? Tip: Alternatively, you can open the link in a new tab or window and "
+"stay in the event."
 msgstr ""
 "Pokud kliknete, videokonferenci opustíte. Opravdu chcete odejít? Tip: "
-"Alternativně můžete otevřít odkaz na nové kartě nebo v okně a zůstat "
-"v události."
+"Alternativně můžete otevřít odkaz na nové kartě nebo v okně a zůstat v "
+"události."
+
+msgid ""
+"Your profile is not shown here or not displayed correctly? Add to your "
+"profile or make yourself visible to other conference participants."
+msgstr ""
+
+msgid "Edit Profile"
+msgstr ""

@@ -26,8 +26,6 @@ cosinnus_group_patterns = [
         name='participation-management'),
     url(r'^participation-manangement/applications/$', views.conference_applications,
         name='participation-management-applications'),
-    url(r'^workshop-participants-upload/$', views.workshop_participants_upload,
-        name='workshop-participants-upload'),
     url(r'^workshop-participants-upload-skeleton/$',
         views.workshop_participants_upload_skeleton, name='workshop-participants-upload-skeleton'),
     url(r'^workshop-participants-download/$', views.workshop_participants_download,
@@ -36,6 +34,8 @@ cosinnus_group_patterns = [
         name='applicants-details-download'),
     url(r'^reminders/$', views.conference_reminders,
         name='reminders'),
+    url(r'^confirm_send_reminder/$', views.conference_confirm_send_reminder,
+        name='confirm_send_reminder'),
     url(r'^apply/$', views.conference_application,
         name='application'),
 

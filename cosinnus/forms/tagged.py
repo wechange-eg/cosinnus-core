@@ -133,14 +133,14 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin, forms
         
         # save BBB room
         if self.instance.pk and self.instance.bbb_room:
-            self.initial['bbb_room'] = self.instance.bbb_room
+            setattr(self, '_saved_bbb_room', self.instance.bbb_room)
         
     def save(self, commit=True):
         self.instance = super(BaseTagObjectForm, self).save(commit=False)
         
         # restore BBB room
-        if 'bbb_room' in self.initial:
-            self.instance.bbb_room = self.initial['bbb_room']
+        if hasattr(self, '_saved_bbb_room'):
+            self.instance.bbb_room = getattr(self, '_saved_bbb_room', None)
         
         # the tag inherits the visibility default from the instance's group
         # if no or no valid visibility has been selected in the form, 
@@ -220,6 +220,14 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}, init_func
             # execute the on init function
             if init_func:
                 init_func(self)
+            
+            # give a back-reference to the multiform to each individual form
+            for _name, form in self.forms.items():
+                setattr(form, 'multiform', self)
+                # call the `post_init` funnction on the sub-form if it exists
+                post_init = getattr(form, 'post_init', None)
+                if callable(post_init):
+                    post_init()
             
         # attach any extra form classes
         for form_name, form_class in list(base_extra_forms.items()):

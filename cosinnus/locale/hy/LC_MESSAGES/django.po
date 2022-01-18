@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:22+0200\n"
+"POT-Creation-Date: 2021-11-18 17:13+0100\n"
 "Language: hy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,17 +42,14 @@ msgid "A token with the same code already exists! Please choose a different stri
 msgstr "Նույն կոդով թոքեն արդեն գոյություն ունի: Խնդրում ենք ընտրել այլ տող ձեր թոքենի համար."
 
 #, fuzzy, python-format
-#| msgid "The following Projects were converted to Groups:"
 msgid "The following items were converted to %s:"
 msgstr "Հետևյալ Ծրագրերը փոխակերպվել են Խմբերի:"
 
 #, fuzzy
-#| msgid "The following Projects were converted to Groups:"
 msgid "The following items were activated:"
 msgstr "Հետևյալ Ծրագրերը փոխակերպվել են Խմբերի:"
 
 #, fuzzy
-#| msgid "The following Projects were converted to Groups:"
 msgid "The following items were deactivated:"
 msgstr "Հետևյալ Ծրագրերը փոխակերպվել են Խմբերի:"
 
@@ -86,6 +83,13 @@ msgstr "ToS-ը ընդունված է"
 msgid "ToS not Accepted"
 msgstr "ToS-ը ընդունված չէ"
 
+msgid "Email verified"
+msgstr ""
+
+#, fuzzy
+msgid "Email not verified"
+msgstr "ոչ ակտիվ"
+
 msgid "User Logged In"
 msgstr "Օգտատերը մուտք գործեց"
 
@@ -102,8 +106,6 @@ msgid "Yes"
 msgstr "Այո"
 
 #, fuzzy
-#| msgctxt "join team button second item"
-#| msgid "Now"
 msgid "No"
 msgstr "Հիմա"
 
@@ -121,7 +123,6 @@ msgid "DEACTIVATE user accounts and DELETE them after 30 days"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "%d Users were deactivated successfully."
 msgid "%(count)d User account(s) were reactivated successfully."
 msgstr "%d Օգտատերերը հաջողությամբ ապաակտիվացվել են."
 
@@ -152,9 +153,6 @@ msgid "Rocket: Repair/create missing users' rocketchat accounts"
 msgstr ""
 
 msgid "Rocket: Fix missing RocketChat room memberships for users"
-msgstr ""
-
-msgid "Restart"
 msgstr ""
 
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
@@ -226,6 +224,18 @@ msgstr ""
 msgid "Gluten-free cuisine"
 msgstr ""
 
+msgid "Bookmark"
+msgstr ""
+
+msgid "Bookmarked"
+msgstr ""
+
+msgid "Bookmark list"
+msgstr ""
+
+msgid "Bookmarked Users list"
+msgstr ""
+
 msgid "General"
 msgstr "Ընդհանուր"
 
@@ -239,16 +249,7 @@ msgstr ""
 msgid "Premium"
 msgstr ""
 
-msgid "Bookmark"
-msgstr ""
-
-msgid "Bookmarked"
-msgstr ""
-
-msgid "Bookmark list"
-msgstr ""
-
-msgid "Bookmarked Users list"
+msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
 
 msgid "Only registered members can see the content you requested! Log in or create an account now!"
@@ -271,6 +272,9 @@ msgid "This account is no longer active. You have been logged out."
 msgstr "Այս անձնական էջյ այլևս ակտիվ չէ: Դուք դուրս եք եկել համակարգից."
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
+msgstr ""
+
+msgid "Sorry, only admin accounts may log in at this time."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -365,7 +369,6 @@ msgid "You submitted an application"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "Your membership request for %(team_name)s was accepted!"
 msgid "Your participation application for %(team_name)s was accepted!"
 msgstr "Ձեր անդամության հարցումն %(team_name)s ընդունվել Է!"
 
@@ -373,7 +376,6 @@ msgid "Your participation application was declined"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "Your membership request for %(team_name)s was declined."
 msgid "Your participation application for %(team_name)s was declined!"
 msgstr "Ձեր անդամության հարցումը %(team_name)s -ին մերժվել է."
 
@@ -381,7 +383,6 @@ msgid "Your participation application was waitlisted"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "Your membership request for %(team_name)s was accepted!"
 msgid "Your participation application for %(team_name)s was waitlisted!"
 msgstr "Ձեր անդամության հարցումն %(team_name)s ընդունվել Է!"
 
@@ -463,22 +464,18 @@ msgid "A user created a new conference"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
 msgid "%(sender_name)s created the conference %(object_name)s"
 msgstr "%(sender_name)s-ը ստեղծեց \"%(object_name)s\" գաղափար!"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s tagged you in %(count)d items"
 msgid "%(sender_name)s created %(count)d conferences"
 msgstr "%(sender_name)s-ը նշել է ձեզ %(count)d կետերում"
 
 #, fuzzy, python-format
-#| msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
 msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
 msgstr "Ձեզ նշել են \"%(object_name)s\" -ում %(team_name)s -ում."
 
 #, fuzzy
-#| msgid "Apply"
 msgctxt "email campaign button label to apply for a conference"
 msgid "Apply now!"
 msgstr "Դիմել"
@@ -488,17 +485,14 @@ msgid "View conference"
 msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s invited you to join %(team_name)s"
 msgid "%(sender_name)s invited you to apply for the conference %(team_name)s"
 msgstr "%(sender_name)s -ը հրավիրել է ձեզ միանալ %(team_name)s -ին"
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
 msgid "%(sender_name)s invited you to apply for \"%(team_name)s\" on %(portal_name)s! <br/><br/> To apply, please click on the link below."
 msgstr "%(sender_name)s -ը հրավիրել է ձեզ միանալ %(team_name)s -ին %(portal_name)s -ում! <br/><br/> Միանալու համար խնդրում ենք անցնել ստորև նշված հղումով: Դուք կուղղորդվեք պորտալ, որտեղ կարող եք տեսնել և ընդունել հրավերը."
 
 #, fuzzy, python-format
-#| msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
 msgid "%(sender_name)s just created \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s-ը ստեղծեց \"%(object_name)s\" գաղափար %(portal_name)s -ում!"
 
@@ -583,7 +577,6 @@ msgid "Belarus"
 msgstr ""
 
 #, fuzzy
-#| msgid "Header Title"
 msgctxt "Multi-Address Field Subfield"
 msgid "Address Title"
 msgstr "Վերնամասի վերնագիր"
@@ -617,13 +610,15 @@ msgid "Country"
 msgstr ""
 
 #, fuzzy
-#| msgid "Promote Member"
 msgctxt "Multi-Address Field Subfield"
 msgid "Phone Number"
 msgstr "Կոչում տալ Անդամին"
 
 msgctxt "Multi-Address Field Subfield"
 msgid "Mobile Phone Number"
+msgstr ""
+
+msgid "No choice"
 msgstr ""
 
 msgid "(No choice)"
@@ -695,6 +690,16 @@ msgstr "Հաջորդ շաբաթ"
 msgid "Next month"
 msgstr "Հաջորդ ամիս"
 
+msgid "Fairmeeting"
+msgstr ""
+
+#, fuzzy
+msgid "No video conference"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+msgid "BBB-Meeting"
+msgstr ""
+
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
 msgstr "Սա կարծես թե Youtube- ի կամ Vimeo- ի վավեր հղում չէ!"
 
@@ -714,13 +719,16 @@ msgstr "Օգտատերեր"
 msgid "Groups"
 msgstr "Խմբեր"
 
+msgid "Please always provide a username"
+msgstr ""
+
+msgid "Please always provide a first name"
+msgstr ""
+
 msgid "Please remove the whitespace from '{}'"
 msgstr ""
 
 msgid "Names must be unique. You added '{}' more then once to your CSV. Please change the name."
-msgstr ""
-
-msgid "Can't find workshop with slug '{}'"
 msgstr ""
 
 msgid "This is not a valid CSV File"
@@ -750,6 +758,15 @@ msgstr "Հավանել"
 
 msgid "Persons"
 msgstr "Անձինք"
+
+msgid "Location"
+msgstr "Տեղորոշում"
+
+msgid "Latitude"
+msgstr "Լայնություն"
+
+msgid "Longitude"
+msgstr "Երկայնություն"
 
 msgid "Please enter a correct email and password. Note that both fields may be case-sensitive."
 msgstr "Խնդրում ենք մուտքագրել ճիշտ էլ.փոստ և գաղտնաբառ: Նկատի ունեցեք, որ երկու դաշտերն էլ կարող են գրանցմանը զգայուն լինել."
@@ -837,19 +854,13 @@ msgstr ""
 msgid "the password set to enter the room as a attendee"
 msgstr ""
 
-msgid "the rooms welcome message"
-msgstr ""
-
-msgid "the welcome message, that is displayed to attendees"
-msgstr ""
-
 msgid "number for dialing into the conference via telephone"
 msgstr ""
 
 msgid "pin to enter for telephone participants"
 msgstr ""
 
-msgid "options for the room, that are represented in the bigbluebutton API"
+msgid "the rooms welcome message"
 msgstr ""
 
 #, fuzzy
@@ -860,7 +871,6 @@ msgid "BBB ROOM"
 msgstr ""
 
 #, fuzzy
-#| msgid "Visited"
 msgid "Visitor"
 msgstr "Այցելեց"
 
@@ -887,10 +897,25 @@ msgstr "Cosinnus CMS Միկրոէջ"
 msgid "Cosinnus Micropages"
 msgstr "Cosinnus Միկրոէջեր"
 
+msgid "--- UNSET (Inherit) ---"
+msgstr ""
+
 msgid "BBB Server"
 msgstr ""
 
 msgid "BBB Server for Premium Conferences"
+msgstr ""
+
+msgid "Turn on microphone on entering"
+msgstr ""
+
+msgid "Whether the microphone is active when entering the BBB room"
+msgstr ""
+
+msgid "Turn on camera on entering"
+msgstr ""
+
+msgid "Whether the camera is active when entering the BBB room"
 msgstr ""
 
 #, fuzzy
@@ -991,7 +1016,6 @@ msgid "Shown as a download link near the checkbox to accept the conditions."
 msgstr ""
 
 #, fuzzy
-#| msgid "Participants"
 msgid "Participation Management"
 msgstr "Մասնակիցներ"
 
@@ -1019,7 +1043,6 @@ msgid "Invalid"
 msgstr ""
 
 #, fuzzy
-#| msgid "Submitting..."
 msgctxt "a conference application status"
 msgid "Submitted"
 msgstr "Տեղադրվում է."
@@ -1029,13 +1052,11 @@ msgid "Waitlist"
 msgstr ""
 
 #, fuzzy
-#| msgid "ToS Accepted"
 msgctxt "a conference application status"
 msgid "Accepted"
 msgstr "ToS-ը ընդունված է"
 
 #, fuzzy
-#| msgid "Decline User"
 msgctxt "a conference application status"
 msgid "Declined"
 msgstr "Մերժել օգտատիրոջը"
@@ -1050,17 +1071,14 @@ msgid "Your application is currently on the waiting list."
 msgstr ""
 
 #, fuzzy
-#| msgid "Your changes have been saved."
 msgid "Your application has been accepted!"
 msgstr "Ձեր փոփոխությունները պահպանվել են."
 
 #, fuzzy
-#| msgid "We're sorry, but your membership request for %(team_name)s was declined."
 msgid "We are sorry, but your application has been declined."
 msgstr "Ներեցեք, բայց ձեր անդամության հարցումը %(team_name)s -ին մերժվեl է."
 
 #, fuzzy
-#| msgid "Decline User"
 msgid "Declined"
 msgstr "Մերժել օգտատիրոջը"
 
@@ -1068,7 +1086,6 @@ msgid "Waitlist"
 msgstr ""
 
 #, fuzzy
-#| msgid "ToS Accepted"
 msgid "Accepted"
 msgstr "ToS-ը ընդունված է"
 
@@ -1083,21 +1100,64 @@ msgid "Motivation for applying"
 msgstr ""
 
 #, fuzzy
-#| msgid "E-Mail Addresses"
 msgid "Contact E-Mail Address"
 msgstr "Էլ. Փոստի հասցեներ"
 
 #, fuzzy
-#| msgid "CosinnusLocation"
 msgid "Cosinnus conference application"
 msgstr "CosinnusՏեղորոշում"
 
 #, fuzzy
-#| msgid "CosinnusLocations"
 msgid "Cosinnus conference applications"
 msgstr "CosinnusՏեղորոշումներ"
 
 msgid "Note from the organizers"
+msgstr ""
+
+#, fuzzy
+msgid "Conference"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Start Datetime"
+msgstr "Մեկնարկի ամսաթիվ."
+
+msgid "During this time, the conference will be using the premium BBB server."
+msgstr ""
+
+#, fuzzy
+msgid "End Datetime"
+msgstr "Ավարտի ամսաթիվ."
+
+#, fuzzy
+msgid "Conference participants"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+msgid "The number of BBB participants that have been declared will take part in the conference during this time. This is only a guideline for portal admins."
+msgstr ""
+
+#, fuzzy
+msgid "Cosinnus Conference Premium Block"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Cosinnus Conference Premium Blocks"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+msgid "The time frame while the selected capacity is available."
+msgstr ""
+
+#, fuzzy
+msgid "Maximum BBB participants"
+msgstr "Մասնակիցներ"
+
+msgid "The maximum number of BBB participants that should be allowed for all premium conferences. This is only a guideline for portal admins."
+msgstr ""
+
+msgid "Conference Total Premium Capacity Info"
+msgstr ""
+
+msgid "Conference Total Premium Capacity Infos"
 msgstr ""
 
 msgid "Complaint Text"
@@ -1272,23 +1332,21 @@ msgid "Video Conference Server"
 msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
 #, fuzzy
-#| msgid "If entered, will enable video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
 msgid "For old-style events meeting popups only! If entered, will enable Jitsi-like video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended."
 msgstr "Մուտքագրված լինելու դեպքում, դա հնարավորություն կտա վիդեո-կոնֆերանսի ֆունկցիոնալությունը ամբողջ կայքում: Պետք է առկա լինի URL հասցե մինչև այնտեղ, որտեղ հնարավոր է ավելացնել ցանկացած պատահական սենյակի անվանում."
 
 msgid "Dynamic choice field choices"
 msgstr ""
 
+#, fuzzy
+msgid "Default userprofile description"
+msgstr "Մանրամասն նկարագրություն"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "Նախագիծ"
 
 #, fuzzy
-msgid "Conference"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-#| msgid "New membership request"
 msgid "Regular membership requests"
 msgstr "Անդամակցության նոր հայց"
 
@@ -1326,9 +1384,19 @@ msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "Ցուցադրվում է որպես մեծ բանների պատկեր ՝ Միկրոկայքի վրա (1140 x 240 px)"
 
 #, fuzzy
-#| msgid "Application name"
+#| msgid "Public (visible without login)"
+msgid "Publicly visible"
+msgstr "Հանրային (տեսանելի առանց մուտքագրվելու)"
+
+msgid "Checks if a group/project should be visible publicly"
+msgstr ""
+
+#, fuzzy
 msgid "Application method"
 msgstr "Հավելվածի անվանումը"
+
+msgid "Type of video conference available for a group / a project"
+msgstr ""
 
 msgid "Microsite Video"
 msgstr "Միկրոկայքի տեսանյութ"
@@ -1397,16 +1465,6 @@ msgstr "Nextcloud Խմբի ID- ն"
 msgid "Is conference"
 msgstr ""
 
-#, fuzzy
-#| msgid "Start date."
-msgid "Start Datetime"
-msgstr "Մեկնարկի ամսաթիվ."
-
-#, fuzzy
-#| msgid "End date."
-msgid "End Datetime"
-msgstr "Ավարտի ամսաթիվ."
-
 msgid "Allow temporary users accounts for this conference."
 msgstr ""
 
@@ -1437,6 +1495,10 @@ msgstr "Առնչվող թիմեր"
 msgid "Dynamic extra fields"
 msgstr ""
 
+#, fuzzy
+msgid "If set to true, a contact form will be displayed on the micropage."
+msgstr "Եթե այն ակտիվ է, միկրոկայքի վրա կցուցադրվի «Գործողության կոչ» վանդակը."
+
 msgid "Cosinnus project"
 msgstr "Cosinnus նախագիծ"
 
@@ -1455,8 +1517,6 @@ msgid "Request about your group \"%(group_name)s\""
 msgstr "Հայց ձեր խմբի վերաբերյալ \"%(group_name)s\""
 
 #, fuzzy
-#| msgctxt "join team button second item"
-#| msgid "Now"
 msgid "Now"
 msgstr "Հիմա"
 
@@ -1498,15 +1558,6 @@ msgstr "Մշտական Թիմի վերահղումներ"
 
 msgid "Permanent Team Redirect"
 msgstr "Մշտական Թիմի վերահղում"
-
-msgid "Location"
-msgstr "Տեղորոշում"
-
-msgid "Latitude"
-msgstr "Լայնություն"
-
-msgid "Longitude"
-msgstr "Երկայնություն"
 
 msgid "CosinnusLocation"
 msgstr "CosinnusՏեղորոշում"
@@ -1590,7 +1641,6 @@ msgid "Approved"
 msgstr "Մոտեցում"
 
 #, fuzzy
-#| msgid "Link label"
 msgid "Prefix label"
 msgstr "Հղման պիտակ"
 
@@ -1814,12 +1864,10 @@ msgid "Import running"
 msgstr ""
 
 #, fuzzy
-#| msgid "Sort field"
 msgid "Import finished"
 msgstr "Տեսակավորել դաշտը"
 
 #, fuzzy
-#| msgid "Sort field"
 msgid "Import failed"
 msgstr "Տեսակավորել դաշտը"
 
@@ -1838,12 +1886,10 @@ msgid "Import Report HTML"
 msgstr ""
 
 #, fuzzy
-#| msgid "Cosinnus project"
 msgid "Cosinnus User Import"
 msgstr "Cosinnus նախագիծ"
 
 #, fuzzy
-#| msgid "Cosinnus projects"
 msgid "Cosinnus User Imports"
 msgstr "Cosinnus նախագծեր"
 
@@ -1867,7 +1913,6 @@ msgid "An unexpected system error has occured while processing the data. This sh
 msgstr ""
 
 #, fuzzy
-#| msgid "This email address already has a registered user!"
 msgid "The email-address already has an existing user account in the system!"
 msgstr "Այս էլ.փոստի հասցեն արդեն ունի գրանցված օգտատեր!"
 
@@ -1878,7 +1923,6 @@ msgid "The email address was not a valid email address!"
 msgstr ""
 
 #, fuzzy
-#| msgid "Delete user account"
 msgid "New user account: "
 msgstr "Ջնջել օգտատիրոջ անձնական էջը"
 
@@ -2073,6 +2117,40 @@ msgstr "Վիդջեթի կազմաձևման տարրը"
 msgid "Widget configuration items"
 msgstr "Վիդջեթի կազմաձևման տարրերը"
 
+msgid "Advanced BBB-Room Tools"
+msgstr ""
+
+msgid "Directly enter the BBB meeting"
+msgstr ""
+
+msgid "Join meeting directly"
+msgstr ""
+
+#, fuzzy
+msgid "Enter the BBB meeting in the conference frontend"
+msgstr "Մուտքագրեք անուն նախագծի համար."
+
+msgid "Join meeting in conference frontend"
+msgstr ""
+
+msgid "For options and parameters, go to the parent event's admin page"
+msgstr ""
+
+#, fuzzy
+#| msgid "edit this page"
+msgid "Event admin page"
+msgstr "խմբագրել այս էջը"
+
+msgid "Not implemented for this type of event"
+msgstr ""
+
+msgid "For further options and parameters, go to the parent conference's admin page"
+msgstr ""
+
+#, fuzzy
+msgid "Conference admin page"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
 msgid "select this page"
 msgstr "ընտրել այս էջը"
 
@@ -2190,6 +2268,12 @@ msgstr "Ոչ մի տեղեկություն սահմանված չէ"
 msgid "Back to Project Overview"
 msgstr "Վերադառնալ Ծրագրի Դիտմանը"
 
+msgid "During the times of any of these blocks, the conference will be in premium mode. During premium mode, the premium BBB server setting is used for all BBB rooms inside this conference."
+msgstr ""
+
+msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
+msgstr ""
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr ""
 
@@ -2199,98 +2283,14 @@ msgstr "Ադմինիստրացիա"
 msgid "Select a page on the left side."
 msgstr "Ընտրեք էջը ձախ կողմում."
 
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - All Conferences"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-#| msgid "View on page"
-msgid "View Upcoming"
-msgstr "Դիտել էջում"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-#| msgid "View Project"
-msgid "View Past"
-msgstr "Դիտել նախագիծը"
-
-#, fuzzy
-#| msgid "Privacy settings"
-msgid "Portal Setting"
-msgstr "Գաղտնիության կարգավորումներ"
-
-#, fuzzy
-msgid "Conference Settings"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-msgid "Is premium"
-msgstr ""
-
-msgid "Not premium"
-msgstr ""
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-#| msgid "Start date."
-msgid "Start"
-msgstr "Մեկնարկի ամսաթիվ."
-
-#, fuzzy
-#| msgid "Join now!"
-msgid "running now!"
-msgstr "Միացիր հիմա!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Room"
-msgstr "Թիմի տեսակից"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Իրադարձություն"
-
-#, fuzzy
-#| msgid "There are no items yet"
-msgid "There are no items to show."
-msgstr "Դեռ նյութեր չկան"
-
-msgid "BBB"
-msgstr ""
-
-msgid "BBB Premium"
-msgstr ""
-
-#, fuzzy
-#| msgid "Not assigned"
-msgid "Not set"
-msgstr "Նշանակված չէ"
-
 msgid "Newsletters"
 msgstr ""
 
 #, fuzzy
-#| msgid "Create User"
 msgid "Update Newsletter"
 msgstr "Ստեղծել Օգտատեր"
 
 #, fuzzy
-#| msgid "Create User"
 msgid "Create Newsletter"
 msgstr "Ստեղծել Օգտատեր"
 
@@ -2307,7 +2307,6 @@ msgid "Only users who have the Newsletter opt-in enabled in their profile will r
 msgstr ""
 
 #, fuzzy
-#| msgid "Do you really want to leave „%(title)s“?"
 msgid "Do you really want to send the newsletter?"
 msgstr "Արդյո՞ք ցանկանում եք լքել „%(title)s“-ը?"
 
@@ -2315,7 +2314,6 @@ msgid "Send newsletter"
 msgstr ""
 
 #, fuzzy
-#| msgid "Add user"
 msgid "Send Newsletter"
 msgstr "Ավելացնել օգտատեր"
 
@@ -2337,14 +2335,6 @@ msgstr "Օգտատիրոջ Ողջույնի էլ․ նամակ"
 msgid "Simple Statistics"
 msgstr "Պարզ վիճակագրություն"
 
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
 msgid "Edit"
 msgstr "Խմբագրել"
 
@@ -2359,12 +2349,10 @@ msgid "Body"
 msgstr ""
 
 #, fuzzy
-#| msgid "Currently set Welcome-Email Text"
 msgid "Currently set Email Text"
 msgstr "Ներկայումս սահմանված Ողջույնի նամակի տեքստը"
 
 #, fuzzy
-#| msgid "Show more options..."
 msgid "Show all recipients..."
 msgstr "Ցուցադրել ավելի շատ տարբերակներ ..."
 
@@ -2390,27 +2378,22 @@ msgid "This newsletter has not been sent"
 msgstr ""
 
 #, fuzzy
-#| msgid "There are no items yet"
 msgid "There are no newsletters yet."
 msgstr "Դեռ նյութեր չկան"
 
 #, fuzzy
-#| msgid "Add user"
 msgid "Add newsletter"
 msgstr "Ավելացնել օգտատեր"
 
 #, fuzzy
-#| msgid "Create User"
 msgid "Create new User"
 msgstr "Ստեղծել Օգտատեր"
 
 #, fuzzy
-#| msgid "First name"
 msgid "Firstname"
 msgstr "Անուն"
 
 #, fuzzy
-#| msgid "Last name"
 msgid "Lastname"
 msgstr "Ազգանուն"
 
@@ -2418,7 +2401,6 @@ msgid "Save"
 msgstr "Պահպանել"
 
 #, fuzzy
-#| msgid "Administration"
 msgid "User Administration"
 msgstr "Ադմինիստրացիա"
 
@@ -2432,9 +2414,11 @@ msgid "Search for email, firstname or lastname"
 msgstr ""
 
 #, fuzzy
-#| msgid "Search"
 msgid "search"
 msgstr "Որոնում"
+
+msgid "Add user"
+msgstr "Ավելացնել օգտատեր"
 
 #, python-format
 msgid ""
@@ -2452,22 +2436,18 @@ msgid "clear search"
 msgstr ""
 
 #, fuzzy
-#| msgid "Login"
 msgid "Last Login"
 msgstr "Մուտք"
 
 #, fuzzy
-#| msgid "Enter a token:"
 msgid "User token"
 msgstr "Մուտքագրեք թոքենը:"
 
 #, fuzzy
-#| msgid "Deactivate"
 msgid "Account deactivated"
 msgstr "Ապաակտիվացնել"
 
 #, fuzzy
-#| msgid "Resend invitation"
 msgid "Resend login token"
 msgstr "Նորից ուղարկել հրավերը"
 
@@ -2486,12 +2466,10 @@ msgid "Could not find any users with an email that contains '%(search_string)s.'
 msgstr ""
 
 #, fuzzy
-#| msgid "There are no items yet"
 msgid "There are no users yet."
 msgstr "Դեռ նյութեր չկան"
 
 #, fuzzy
-#| msgid "first name"
 msgid "to first page"
 msgstr "անուն"
 
@@ -2501,11 +2479,7 @@ msgstr "նախկին"
 msgid "next"
 msgstr "հաջորդ"
 
-msgid "Add user"
-msgstr "Ավելացնել օգտատեր"
-
 #, fuzzy
-#| msgid "Create User"
 msgid "Update User"
 msgstr "Ստեղծել Օգտատեր"
 
@@ -2529,6 +2503,11 @@ msgstr ""
 
 msgid "Manage Participation Applications"
 msgstr ""
+
+#, fuzzy
+#| msgid "Team Description"
+msgid "Manage Temporary User Accounts"
+msgstr "Թիմի նկարագրություն"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -2819,17 +2798,14 @@ msgid "Disable editor"
 msgstr "անջատել խմբագրիչը"
 
 #, fuzzy
-#| msgid "Current Members"
 msgid "Current File"
 msgstr "Ներկայիս անդամները"
 
 #, fuzzy
-#| msgid "Application name"
 msgid "Application"
 msgstr "Հավելվածի անվանումը"
 
 #, fuzzy
-#| msgid "Application name"
 msgid "Apply for participation in"
 msgstr "Հավելվածի անվանումը"
 
@@ -2840,7 +2816,6 @@ msgid "Please fill out the fields below to submit your application. Be aware tha
 msgstr ""
 
 #, fuzzy
-#| msgid "Your Profile"
 msgid "Your profile"
 msgstr "Քո պրոֆիլը"
 
@@ -2854,7 +2829,6 @@ msgid "Describe why you wish to participate"
 msgstr ""
 
 #, fuzzy
-#| msgid "Contact Information"
 msgid "Optional contact information"
 msgstr "Կոնտակտային տվյալներ"
 
@@ -2874,7 +2848,6 @@ msgid "(no options chosen)"
 msgstr ""
 
 #, fuzzy
-#| msgid "Application name"
 msgid "Application conditions"
 msgstr "Հավելվածի անվանումը"
 
@@ -2902,7 +2875,6 @@ msgid "Manage participation applications"
 msgstr ""
 
 #, fuzzy
-#| msgid "There are no invitations."
 msgid "There are no participation applications yet."
 msgstr "Հրավերներ չկան."
 
@@ -2938,7 +2910,6 @@ msgid "not specified"
 msgstr "ոչ ակտիվ"
 
 #, fuzzy
-#| msgid "Show more options..."
 msgid "show more ..."
 msgstr "Ցուցադրել ավելի շատ տարբերակներ ..."
 
@@ -2946,13 +2917,10 @@ msgid "Reason for rejection"
 msgstr ""
 
 #, fuzzy
-#| msgctxt "written next to optional form fields"
-#| msgid "optional"
 msgid "optional"
 msgstr "ըստ ցանկության"
 
 #, fuzzy
-#| msgid "First name"
 msgid "First Choice"
 msgstr "Անուն"
 
@@ -2960,7 +2928,6 @@ msgid "Second Choice"
 msgstr ""
 
 #, fuzzy
-#| msgid "Application name"
 msgid "Application submitted"
 msgstr "Հավելվածի անվանումը"
 
@@ -2971,6 +2938,48 @@ msgid "Choose users to assign to this workshop"
 msgstr ""
 
 msgid "List of Applicants"
+msgstr ""
+
+#, fuzzy
+msgid "Emails to conference participants"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+msgid "subject"
+msgstr ""
+
+#, fuzzy
+#| msgid "Content"
+msgid "content"
+msgstr "Բովանդակություն"
+
+#, python-format
+msgid ""
+"\n"
+"                    This message will be sent to one participant.\n"
+"                    "
+msgid_plural ""
+"\n"
+"                    This message will be sent to %(count)s participants.\n"
+"                    "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Are you sure? Please check your entries beforehand with the help of a test email."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                        Yes, send immediately to one user.\n"
+"                        "
+msgid_plural ""
+"\n"
+"                        Yes, send immediately to %(count)s users.\n"
+"                        "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "No, don\\"
 msgstr ""
 
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
@@ -2985,7 +2994,6 @@ msgid " If you would prefer to use simple membership requests as they are used i
 msgstr ""
 
 #, fuzzy
-#| msgid "Application name"
 msgid "Application period"
 msgstr "Հավելվածի անվանումը"
 
@@ -3035,10 +3043,6 @@ msgstr ""
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr ""
 
-#, fuzzy
-msgid "Conference reminders"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr ""
 
@@ -3053,12 +3057,10 @@ msgid "This e-mail will be sent out 7 days before and at the same time of day as
 msgstr ""
 
 #, fuzzy
-#| msgid "Invitations"
 msgid "Invitation subject"
 msgstr "Հրավերներ"
 
 #, fuzzy
-#| msgid "Invitations"
 msgid "Invitation text"
 msgstr "Հրավերներ"
 
@@ -3074,18 +3076,33 @@ msgstr ""
 msgid "Send 1 hour before conference"
 msgstr ""
 
+msgid "send immediately"
+msgstr ""
+
+msgid "This email will be sent immediately."
+msgstr ""
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr ""
+
+#, fuzzy
+#| msgid "No contact data has been added yet."
+msgid "no instant email has been sent yet."
+msgstr "Կոնտակտային տվյալներ դեռ չեն ավելացվել."
+
+msgid "Send immediately"
+msgstr ""
+
 #, fuzzy, python-format
-#| msgid "Edit “%(team_name)s”"
 msgid "Edit Room “%(title)s”"
 msgstr "Խմբագրել “%(team_name)s”"
 
 #, fuzzy
-#| msgid "Create"
 msgid "Create Room"
 msgstr "Ստեղծել"
 
 #, fuzzy
-#| msgid "Edit Group"
 msgid "Edit Room"
 msgstr "Խմբագրել խումբը"
 
@@ -3134,7 +3151,6 @@ msgid "Number by which rooms are sorted in ascending order in the conference roo
 msgstr ""
 
 #, fuzzy
-#| msgid "Short Description (optional). Will be shown on the token page."
 msgid "A short description or topic for your room. Will be shown on top of the room page."
 msgstr "Կարճ նկարագրություն (ըստ ցանկության): Ցուցադրվելու է թոքենի էջում."
 
@@ -3154,17 +3170,14 @@ msgid "hidden"
 msgstr ""
 
 #, fuzzy
-#| msgid "Create Event"
 msgid "Create Conference Event"
 msgstr "Ստեղծել Իրադարձություն"
 
 #, fuzzy, python-format
-#| msgid "Do you really want to delete announcement \"%(title)s\"?"
 msgid "Do you really want to delete room \"%(title)s\"?"
 msgstr "Արդյո՞ք ցանկանում եք ջնջել \"%(title)s\" հայտարարությունը?"
 
 #, fuzzy
-#| msgid "Delete Profile"
 msgid "Delete room"
 msgstr "Ջնջել Պրոֆիլը"
 
@@ -3182,61 +3195,140 @@ msgid "You can directly create conference events for rooms from here by using th
 msgstr ""
 
 #, fuzzy
-#| msgid "There are no items yet"
 msgid "There are no rooms yet."
 msgstr "Դեռ նյութեր չկան"
 
-msgid "Conference Management"
-msgstr ""
-
-msgid "Conference is running"
+msgid "Default"
 msgstr ""
 
 #, fuzzy
-msgid "Conference is not running"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
+#| msgid "Team Description"
+msgid "Temporary Users"
+msgstr "Թիմի նկարագրություն"
 
-msgid "Accounts from CSV Upload"
+#, fuzzy
+#| msgid "Password change"
+msgid "Password changed"
+msgstr "Գաղտնաբառի փոփոխում"
+
+#, fuzzy
+#| msgid "Change password"
+msgid "Changed password for User"
+msgstr "Փոխել գաղտնաբառը"
+
+#, fuzzy
+msgid "Remove all Users"
+msgstr "Ջնջել Անդամին"
+
+#, fuzzy
+msgid "Do you really want to remove all users?"
+msgstr "Արդյո՞ք ցանկանում եք լքել „%(title)s“-ը?"
+
+#, fuzzy
+msgid "Download all user credentials"
+msgstr "Պարզ վիճակագրություն"
+
+#, fuzzy
+msgid "Do you really want to download all user credentials?"
+msgstr "Արդյո՞ք ցանկանում եք լքել „%(title)s“-ը?"
+
+msgid "Here you can create temporary user accounts that are valid only for this conference and only when you activate them."
+msgstr ""
+
+msgid "Upload spreadsheet"
+msgstr ""
+
+#, python-format
+msgid "Please upload a spreadsheet with the following columns: unique user identifier, first name and last name. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>."
+msgstr ""
+
+msgid "Then add a row for each account that you want to add. You have to add a unique user identifier and a first name. The last name can be blank."
 msgstr ""
 
 #, fuzzy
-msgid "Upload Participants"
-msgstr "Մասնակիցներ"
+msgid "Upload File"
+msgstr "Վերբեռնել պատկեր."
 
 #, fuzzy
-msgid "last login"
-msgstr "Վավերացնել"
+msgid "Download User credentials"
+msgstr "Պարզ վիճակագրություն"
 
-msgid "no login yet"
+msgid "Once you uploaded all Temporary Users you can download all user credentials and send them to the participants. Passwords are not stored in the system and can be downloaded only once!"
 msgstr ""
 
-msgid "Admin"
-msgstr "Ադմինիստրատոր"
+msgid "Download passwords and login info"
+msgstr ""
 
-msgid "Member"
-msgstr "Անդամ"
+#, fuzzy
+msgid "Activate/Deactivate Users"
+msgstr "Մերժել անդամին"
+
+msgid "Once you uploaded all Temporary Users and sent out the credentials you can activate all User accounts. That means the users can actually login in with their credentials."
+msgstr ""
+
+msgid "Once the conference is over you can deactivate all ausers. That means they can not login in with their credentials anymore. Users can be repeatedly activated and deactivated, also individually further down in the table."
+msgstr ""
+
+#, fuzzy
+msgid "activate user accounts"
+msgstr "Ջնջել օգտատիրոջ անձնական էջը"
+
+#, fuzzy
+msgid "deactivate user accounts"
+msgstr "Ջնջել օգտատիրոջ անձնական էջը"
+
+msgid "reset/delete all users"
+msgstr ""
+
+msgid "Once the conference is over you can remove all ausers. This cannot be reversed."
+msgstr ""
+
+#, fuzzy
+msgid "remove user accounts"
+msgstr "Ջնջել օգտատիրոջ անձնական էջը"
+
+#, fuzzy
+msgid "name"
+msgstr "Ազգանուն"
 
 msgid "active"
 msgstr "ակտիվ է"
 
 #, fuzzy
-msgid "not active"
-msgstr "ոչ ակտիվ"
-
-msgid "User participates in the following workshops:"
-msgstr ""
+#| msgid "Password"
+msgid "password"
+msgstr "Գաղտնաբառ"
 
 #, fuzzy
-msgid "deactivate member"
-msgstr "Ապաակտիվացնել Խումբը"
-
-#, fuzzy
-msgid "activate member"
-msgstr "Հրավիրել անդամ"
+msgid "last login"
+msgstr "Վավերացնել"
 
 #, fuzzy
 msgid "remove user"
 msgstr "Ջնջել Անդամին"
+
+#, fuzzy
+#| msgid "Yes"
+msgid "yes"
+msgstr "Այո"
+
+msgid "no"
+msgstr ""
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "deactivate"
+msgstr "Ապաակտիվացնել"
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "activate"
+msgstr "Ապաակտիվացնել"
+
+#, fuzzy
+#| msgid "Reset password"
+msgid "(re)set password"
+msgstr "Վերականգնել գաղտնաբառը"
 
 #, fuzzy
 msgid "Do you really want to deactivate the member's user account ?"
@@ -3263,26 +3355,165 @@ msgid "Remove User"
 msgstr "Ջնջել Անդամին"
 
 #, fuzzy
-msgid "Finish conference and deactivate user accounts"
-msgstr "Ջնջել օգտատիրոջ անձնական էջը"
-
-#, fuzzy
-msgid "Start conference and activate user accounts"
-msgstr "Ջնջել օգտատիրոջ անձնական էջը"
-
-#, fuzzy
 msgid "Download Statistics"
 msgstr "Պարզ վիճակագրություն"
 
+msgid "New password"
+msgstr "Նոր գաղտնաբառ"
+
 #, fuzzy
-#| msgid "Accept User"
 msgid "Accept"
 msgstr "Ընդունել օգտատիրոջը"
 
 #, fuzzy
-#| msgid "Decline User"
 msgid "Decline"
 msgstr "Մերժել օգտատիրոջը"
+
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Conference Administration"
+msgstr "Ադմինիստրացիա"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "Դիտել էջում"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Դիտել նախագիծը"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "Գաղտնիության կարգավորումներ"
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "ոչ ակտիվ"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Մեկնարկի ամսաթիվ."
+
+#, fuzzy
+msgid "running now!"
+msgstr "Միացիր հիմա!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Room"
+msgstr "Թիմի տեսակից"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Իրադարձություն"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Արդյո՞ք ցանկանում եք լքել „%(title)s“-ը?"
+
+#, fuzzy
+#| msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Ցանկանու՞մ եք արդյոք „%(name)s“ անդամին ջնջել թիմից?"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "Դեռ նյութեր չկան"
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "Նշանակված չէ"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Ստեղծել Իրադարձություն"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to decline member „%(name)s“?"
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Ցանկանու՞մ եք արդյոք մերժել անդամ „%(name)s“ -ին?"
+
+#, fuzzy
+#| msgid "Delete Profile"
+msgid "Delete Premium Block"
+msgstr "Ջնջել Պրոֆիլը"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Ստեղծել Իրադարձություն"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
 msgid "Rearrange"
 msgstr "Վերադասավորվել"
@@ -3360,6 +3591,10 @@ msgstr "Իրադարձություններ"
 msgid "News"
 msgstr "Նորություններ"
 
+#, fuzzy
+msgid "Video conference"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
 msgstr "Ետ քաշել"
@@ -3393,9 +3628,6 @@ msgstr "Այժմ դուք կստանաք ծանուցումներ, երբ այս
 msgid "You will now receive notifications whenever public content is posted in this group."
 msgstr "Այժմ դուք կստանաք ծանուցումներ, երբ այս խմբում հրապարակային բովանդակություն տեղադրվի."
 
-msgid "Group:"
-msgstr "Խումբ:"
-
 msgid "No Description set"
 msgstr "Նկարագրություն սահմանված չէ"
 
@@ -3410,6 +3642,28 @@ msgstr ""
 
 msgid "Enter your choices"
 msgstr ""
+
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address to continue using your account."
+msgstr "Խնդրում ենք հաստատել ձեր էլ. փոստի հասցեն %(site_name)s - ի համար!"
+
+msgid "You should already have received an email with a verification link we sent to your account's email address:"
+msgstr ""
+
+msgid "Click here to send the validation link again."
+msgstr ""
+
+msgid "If you have trouble verifying your email address are not receiving our verification email, please contact the support!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address!"
+msgstr "Խնդրում ենք հաստատել ձեր էլ. փոստի հասցեն %(site_name)s - ի համար!"
+
+msgid "Close"
+msgstr "Փակել"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
@@ -3430,15 +3684,22 @@ msgstr "Ուղարկել"
 msgid "Submitting..."
 msgstr "Տեղադրվում է."
 
-msgid "Close"
-msgstr "Փակել"
-
 msgid "Avatar will be deleted once you save."
 msgstr "Պահպանելուց հետո \"Ավատարը\" կջնջվի."
 
 msgctxt "written next to optional form fields"
 msgid "optional"
 msgstr "ըստ ցանկության"
+
+#, fuzzy
+msgid "Add/Edit translations"
+msgstr "Լրացուցիչ տարբերակներ"
+
+msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr ""
 
 msgid "Date"
 msgstr "Ամսաթիվ"
@@ -3488,12 +3749,10 @@ msgid "This is the current address"
 msgstr ""
 
 #, fuzzy
-#| msgid "email address"
 msgid "Remove this Address"
 msgstr "էլեկտրոնային հասցե"
 
 #, fuzzy
-#| msgid "E-Mail Addresses"
 msgid "Add an Address"
 msgstr "Էլ. Փոստի հասցեներ"
 
@@ -3501,7 +3760,6 @@ msgid "Maximum Number of Participants"
 msgstr ""
 
 #, fuzzy
-#| msgid "About the Project"
 msgid "About the conference"
 msgstr "Նախագծի մասին"
 
@@ -3510,18 +3768,18 @@ msgid "o'clock"
 msgstr ""
 
 #, fuzzy
-#| msgid "Until"
 msgctxt "time"
 msgid "until"
 msgstr "Մինչև"
 
 #, fuzzy
-#| msgid "No info."
 msgid "More infos..."
 msgstr "Տեղեկություն չկա."
 
+msgid "Please Login or Register to view the event's description."
+msgstr ""
+
 #, fuzzy
-#| msgid "You will now receive notifications for content posted in this project."
 msgid "You will now receive notifications for content posted in this conference."
 msgstr "Այժմ դուք կստանաք ծանուցումներ այս նախագծում տեղադրված բովանդակության համար."
 
@@ -3533,7 +3791,6 @@ msgid "No contact data has been added yet."
 msgstr "Կոնտակտային տվյալներ դեռ չեն ավելացվել."
 
 #, fuzzy
-#| msgid "Protected Content"
 msgid "Your Deactivated Content"
 msgstr "Պաշտպանված բովանդակություն"
 
@@ -3564,7 +3821,6 @@ msgid "Please manage participation applications via the applications page. You c
 msgstr ""
 
 #, fuzzy
-#| msgid "My location"
 msgid "Manage applications"
 msgstr "Իմ գտնվելու վայրը"
 
@@ -3572,22 +3828,18 @@ msgid "Invite members of groups/projects to apply..."
 msgstr ""
 
 #, fuzzy
-#| msgid "Shown in my projects..."
 msgid "Select one or more groups/projects..."
 msgstr "Ցուցադրվել է իմ նախագծերում ..."
 
 #, fuzzy
-#| msgid "Invited Groups"
 msgid "Invite groups"
 msgstr "Հրավիրված Խմբեր"
 
 #, fuzzy
-#| msgid "Invited to be a member"
 msgid "Invited group/project members"
 msgstr "Հրավիրված է անդամագրվելու"
 
 #, fuzzy
-#| msgid "Invite registered users..."
 msgid "Invite registered users to apply..."
 msgstr "Հրավիրել գրանցված օգտատերերի..."
 
@@ -3632,7 +3884,6 @@ msgid "There are no pending invitations."
 msgstr "Առկա հրավերներ չկան."
 
 #, fuzzy
-#| msgid "Invite unregistered users..."
 msgid "Invite unregistered users to apply..."
 msgstr "Հրավիրել չգրանցված օգտատերերի..."
 
@@ -3707,8 +3958,13 @@ msgstr "Հաղորդագրություն ուղարկել բոլոր անդամ�
 msgid "Send Message"
 msgstr "Ուղարկել հաղորդագրությունը"
 
+msgid "Admin"
+msgstr "Ադմինիստրատոր"
+
+msgid "Member"
+msgstr "Անդամ"
+
 #, fuzzy
-#| msgid "This account is inactive."
 msgid "User account inactive"
 msgstr "Այս անձնական էջն ակտիվ չէ."
 
@@ -3809,7 +4065,6 @@ msgid "In which projects' or groups' calendars should the conference be shown?"
 msgstr ""
 
 #, fuzzy
-#| msgid "Select related Projects/Groups"
 msgid "Select Projects/Groups"
 msgstr "Ընտրել նմանատիպ Ծրագրեր / Խմբեր"
 
@@ -3854,12 +4109,10 @@ msgid "Will be shown as a small logo."
 msgstr ""
 
 #, fuzzy
-#| msgid "This email address already has a registered user!"
 msgid "This content will be visible for all registered users!"
 msgstr "Այս էլ.փոստի հասցեն արդեն ունի գրանցված օգտատեր!"
 
 #, fuzzy
-#| msgid "Header image"
 msgid "Header Image"
 msgstr "Վերնամասի պատկեր"
 
@@ -3905,6 +4158,24 @@ msgstr "Կա՞ն նախագծեր/խմբեր, որոնք կապված են այ�
 msgid "Select related Projects/Groups"
 msgstr "Ընտրել նմանատիպ Ծրագրեր / Խմբեր"
 
+#, fuzzy
+#| msgid "This project will be set to be publicly visible!"
+msgid "Group/Project is publicly visible"
+msgstr "Այս նախագիծը հրապարակայնորեն տեսանելի կլինի!"
+
+msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
+msgstr ""
+
+msgid "Enable the public visibility of your group/project"
+msgstr ""
+
+#, fuzzy
+msgid "Include a video conference"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+msgid "Choose the type of the video conference you would like to include in the dashboard"
+msgstr ""
+
 msgid "Privacy settings"
 msgstr "Գաղտնիության կարգավորումներ"
 
@@ -3941,6 +4212,22 @@ msgstr "Ո՞ր հավելվածները պետք է ակտիվացվեն?"
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Այս Հավելվածը կարող է ակտիվացվել միայն Խմբի համար, բայց ոչ Նախագծի համար!"
+
+#, fuzzy
+#| msgid "Contact Information"
+msgid "Contact Form on microsite"
+msgstr "Կոնտակտային տվյալներ"
+
+#, fuzzy
+msgid "Display contact form."
+msgstr "Կոնտակտային տվյալներ"
+
+msgid "A public contact form, which non-registered users can use to contact group admins of this group."
+msgstr ""
+
+#, fuzzy
+msgid "Contact Form"
+msgstr "Կոնտակտային տվյալներ"
 
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "Ո՞ր հավելվածներից պետք է հանրային նյութերը ցուցադրվեն միկրոկայքում?"
@@ -4043,7 +4330,6 @@ msgid "To the Forum"
 msgstr "Ֆորումին"
 
 #, fuzzy
-#| msgid "Invite users"
 msgid "Invited to apply"
 msgstr "Հրավիրել օգտատերերի"
 
@@ -4082,6 +4368,23 @@ msgstr "Հրավերներ չկան."
 
 msgid "Map"
 msgstr "Քարտեզ"
+
+#, fuzzy
+#| msgid "Deleting..."
+msgid "Meeting"
+msgstr "Ջնջվում է ..."
+
+msgid "Popout"
+msgstr ""
+
+msgid "Fullscreen"
+msgstr ""
+
+msgid "Leave Fullscreen"
+msgstr ""
+
+msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
+msgstr ""
 
 msgid "Not happy with how your Microsite looks?"
 msgstr "Ձեզ դուր չի՞ գալիս թե ինչ տեսք ունի ձեր Միկրոկայքի էջը?"
@@ -4129,6 +4432,32 @@ msgstr "Կիսվել Facebook -ում"
 msgid "Sustainable Development Goals"
 msgstr ""
 
+#, fuzzy
+#| msgid "Group Administrator"
+msgid "Email the group administrators"
+msgstr "Խմբի ադմինիստրատոր"
+
+#, fuzzy
+msgid "Your email address"
+msgstr "էլեկտրոնային հասցե"
+
+#, fuzzy
+msgid "Message"
+msgstr "Նամակներ"
+
+#, fuzzy
+msgid "Your message"
+msgstr "Նամակներ"
+
+msgid "Captcha"
+msgstr "Captcha"
+
+msgid "We need to make sure you are a real person (sorry!)"
+msgstr "Մենք պետք է համոզվենք, որ դուք իրական մարդ եք (ներողուցյուն):"
+
+msgid "Generate a new captcha"
+msgstr "Ստեղծել նոր captcha"
+
 msgid "Tweets"
 msgstr "Tweets"
 
@@ -4174,12 +4503,10 @@ msgid "Join now!"
 msgstr "Միացիր հիմա!"
 
 #, fuzzy
-#| msgid "Team membership"
 msgid "Request membership"
 msgstr "Թիմային անդամակցություն"
 
 #, fuzzy, python-format
-#| msgid "Do you wish to request to join „%(title)s“?"
 msgid "Do you wish to join „%(title)s“ now?"
 msgstr "Ցանկանու՞մ եք „%(title)s“-ին միանալու հարցում ուղարկել?"
 
@@ -4187,17 +4514,14 @@ msgid "Browse"
 msgstr "Դիտել"
 
 #, fuzzy
-#| msgid "Register and join!"
 msgid "Register and apply!"
 msgstr "Գրանցվեք և միացեք!"
 
 #, fuzzy
-#| msgid "You have been invited to collaborate!"
 msgid "You have been invited to apply!"
 msgstr "Ձե՜զ հրավիրվել են համագործակցության!"
 
 #, fuzzy
-#| msgid "Application name"
 msgid "Edit Application"
 msgstr "Հավելվածի անվանումը"
 
@@ -4227,9 +4551,6 @@ msgid "All Projects"
 msgstr "Բոլոր Նախագծերը"
 
 msgid "Temporary User Accounts"
-msgstr ""
-
-msgid "Reminder emails"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -4297,7 +4618,6 @@ msgid "Do you really want to decline the request?"
 msgstr "Ցանկանու՞մ եք արդյոք մերժել հրավերը?"
 
 #, fuzzy
-#| msgid "There are no pending invitations."
 msgid "There are no pending organization requests."
 msgstr "Առկա հրավերներ չկան."
 
@@ -4314,7 +4634,6 @@ msgid "Invited"
 msgstr "Հրավիրել"
 
 #, fuzzy
-#| msgid "There are no pending invitations."
 msgid "There are no organization invitations."
 msgstr "Առկա հրավերներ չկան."
 
@@ -4327,7 +4646,6 @@ msgid "Remove organization"
 msgstr "Հեռացնել գտնվելու վայրը"
 
 #, fuzzy
-#| msgid "There are no invitations."
 msgid "There are no assigned organizations."
 msgstr "Հրավերներ չկան."
 
@@ -4466,6 +4784,10 @@ msgstr ""
 msgid "Conference starts soon: [[name]]"
 msgstr ""
 
+#, fuzzy
+msgid "Message to conference participants"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
 msgid ""
 "The conference [[name]] starts in a week.\n"
 "Start of the event is [[from_date]].\n"
@@ -4515,6 +4837,27 @@ msgstr "%(site_name)s CSV ներմուծումը հաջողվեց"
 
 #, python-format
 msgid ""
+"You received a message via the contact form on the micropage of \"%(group_name)s\"!\n"
+"\n"
+"The message was sent from the micropage of [%(group_name)s](%(domain_url)s%(group_url)s):\n"
+"\"%(message)s\"\n"
+"\n"
+"\n"
+"Reply to the message by writing to that email:\n"
+"%(email)s\n"
+"\n"
+"(You're receiving this email because you are an administrator of a group.)\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "You received a message via the contact form on \"%(group_name)s\"!"
+msgstr ""
+
+#, python-format
+msgid ""
 "User \"%(sender_name)s\" has reported the item \"%(object_name)s\" to be offensive.\n"
 "\n"
 "The reason, as written by the reporter:\n"
@@ -4556,22 +4899,6 @@ msgid "Offensive item reported: \"%(object_name)s\" on %(site_name)s!"
 msgstr "Հաղորդվել է վիրավորական նյութի մասին՝ \"%(object_name)s\" %(site_name)s -ում!"
 
 #, fuzzy, python-format
-#| msgid ""
-#| "Hi %(user_name)s,\n"
-#| "\n"
-#| "you have just registered an account at %(site_name)s. We're happy to see you!\n"
-#| "\n"
-#| "You will need to verify your email %(user_email)s before you can log in. \n"
-#| "\n"
-#| "\n"
-#| "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-#| "%(domain_url)s%(user_verification_url)s%(next)s\n"
-#| "\n"
-#| "\n"
-#| "\n"
-#| "Thank you and see you soon!\n"
-#| "\n"
-#| "Your %(site_name)s Team"
 msgid ""
 "Hi %(user_name)s,\n"
 "\n"
@@ -4605,76 +4932,7 @@ msgstr ""
 "Ձեր %(site_name)s թիմ"
 
 #, fuzzy, python-format
-#| msgid "Please verify your email address for %(site_name)s!"
 msgid "Please set yout initial password for %(site_name)s!"
-msgstr "Խնդրում ենք հաստատել ձեր էլ. փոստի հասցեն %(site_name)s - ի համար!"
-
-#, python-format
-msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just registered an account at %(site_name)s. We're happy to see you!\n"
-"\n"
-"You will need to verify your email %(user_email)s before you can log in. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Thank you and see you soon!\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"Ողջույն %(user_name)s,\n"
-"\n"
-"դուք գրանցվեցիք %(site_name)s -ում. Ուրախ ենք Ձեզ տեսնել!\n"
-"\n"
-"Դուք պետք է հաստատեք Ձեր էլ․հասցեն %(user_email)s նախքան կկարողանաք մուտք գործել։ \n"
-"\n"
-"\n"
-"Ձեր էլ.փոստի հասցեն հաստատելու համար անցեք հետևյալ հղումով (կամ բացեք այն ձեր բրաուզերում):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
-"\n"
-"\n"
-"\n"
-"Շնորհակալություն, մինչ հանդիպում։\n"
-"\n"
-"Ձեր %(site_name)s թիմ"
-
-#, python-format
-msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"you have just changed your email address at %(site_name)s.\n"
-"\n"
-"You will need to verify your email %(user_email)s before the changes take effect. \n"
-"\n"
-"\n"
-"Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-"Ողջույն %(user_name)s,\n"
-"\n"
-"Դուք փոխեցիք ձեր էլ․ հասցեն %(site_name)s -ում.\n"
-"\n"
-"Փոփոխությունները ուժի մեջ մտնելուց առաջ անհրաժեշտ կլինի հաստատել ձեր էլ. հասցեն %(user_email)s: \n"
-"\n"
-"\n"
-"Ձեր էլ.փոստի հասցեն հաստատելու համար անցեք հետևյալ հղումով (կամ բացեք այն ձեր բրաուզերում):\n"
-"%(domain_url)s%(user_verification_url)s\n"
-"\n"
-"\n"
-"\n"
-"Ձեր %(site_name)s թիմ"
-
-#, python-format
-msgid "Please verify your email address for %(site_name)s!"
 msgstr "Խնդրում ենք հաստատել ձեր էլ. փոստի հասցեն %(site_name)s - ի համար!"
 
 #, python-format
@@ -4871,11 +5129,18 @@ msgstr ""
 msgid "Your request to join %(site_name)s was denied."
 msgstr "%(site_name)s- ին միանալու ձեր հայցը մերժվել է."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+#| "\n"
+#| "Out administrators will review your request and approve your user account soon!\n"
+#| "\n"
+#| "Until then, with warm greetings, \n"
+#| "your %(site_name)s Team"
 msgid ""
 "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
 "\n"
-"Out administrators will review your request and approve your user account soon!\n"
+"Our administrators will review your request and approve your user account soon!\n"
 "\n"
 "Until then, with warm greetings, \n"
 "your %(site_name)s Team"
@@ -5146,14 +5411,6 @@ msgstr "Լքել է համակարգը"
 msgid "In order to use your %(portal_name)s account to login to another platform you need to login on %(portal_name)s first."
 msgstr ""
 
-#, fuzzy
-msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
-msgstr "\"%(user)s\" օգտատերը հաջողությամբ գրանցված է: Անձնական էջը պետք է հաստատվի նախքան մուտքագրվելը: Երբ դա տեղի ունենա, մենք էլ․նամակ կուղարկենք ձեր \"%(email)s\" հասցեին."
-
-#, fuzzy
-msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "\"%(user)s\" օգտատերը հաջողությամբ գրանցված է: Մենք շուտով կուղարկենք նամակ Ձեր նշված %(email)s\" էլ. հասցեյին: Մուտք գործելու համար անհրաժեշտ է հաստատել էլ. փոստի հասցեն."
-
 msgid "Password"
 msgstr "Գաղտնաբառ"
 
@@ -5183,6 +5440,10 @@ msgstr "Ներեցեք, բայց ձեր անձնական էջը կապված է 
 
 msgid "Please contact an administrator if this is an issue for you."
 msgstr "Խնդրում ենք կապվել ադմինիստրատորի հետ, եթե դա ձեզ համար խնդիր է ներկայացնում."
+
+#, fuzzy
+msgid "Sorry, we can't reset your password!"
+msgstr "Վերականգնել գաղտնաբառը"
 
 msgid "Password reset"
 msgstr "Գաղտնաբառը վերականգնվել է"
@@ -5232,9 +5493,6 @@ msgstr "Մուտքագրել նոր գաղտնաբառ"
 msgid "Please enter your new password twice so we can verify you typed it in correctly."
 msgstr "Խնդրում ենք երկու անգամ մուտքագրել ձեր նոր գաղտնաբառը, որպեսզի կարողանանք ստուգել, որ այն ճիշտ է մուտքագրվել."
 
-msgid "New password"
-msgstr "Նոր գաղտնաբառ"
-
 msgid "New password confirmation"
 msgstr "Նոր գաղտնաբառի հաստատում"
 
@@ -5248,7 +5506,6 @@ msgid "Password reset successful"
 msgstr "Գաղտնաբառի վերաբեռնումը հաջողվեց"
 
 #, fuzzy
-#| msgid "Password reset complete"
 msgid "Password reset request received."
 msgstr "Գաղտնաբառի վերականգնումը ավարտված է"
 
@@ -5256,7 +5513,6 @@ msgid "If there is an account registered with the email address you entered, we 
 msgstr ""
 
 #, fuzzy
-#| msgid "If you don't receive an email, please make sure you've entered the address you registered with, and check your spam folder."
 msgid "If you don't receive an email, please make sure you entered the correct email address associated with your account, and check your spam folder."
 msgstr "Եթե էլ-նամակ չեք ստանում, համոզվեք, որ մուտքագրել եք ձեր գրանցման էլ․հասցեն և ստուգեք ձեր սպամի թղթապանակը."
 
@@ -5274,12 +5530,10 @@ msgid "Thanks for using our site!"
 msgstr "Շնորհակալություն մեր կայքից օգտվելու համար!"
 
 #, fuzzy
-#| msgid "Forgotten your password? Enter your email address below, and we'll email instructions for setting a new one."
 msgid "Forgotten your password? Enter your account's email address below, and we'll email instructions for setting a new one."
 msgstr "Մոռացե՞լ եք ձեր գաղտնաբառը: Մուտքագրեք ձեր էլ. փոստի հասցեն ներքևում, և մենք կուղարկենք հրահանգներ `նորը ստեղծելու համար."
 
 #, fuzzy
-#| msgid "The email you used to register your account. This is the one you receive email notifications on"
 msgid "The email associated with your account. This should the email address you receive email notifications on."
 msgstr "Ձեր անձնական էջը գրանցելու համար օգտագործված էլ.հասցեն։ Սա այն հասցեն է, որին ուղարկվելու են ծանուցման նամակները"
 
@@ -5287,7 +5541,6 @@ msgid "Example: mymail@example.com"
 msgstr "Օրինակ- mymail@example.com"
 
 #, fuzzy
-#| msgid "Reset password"
 msgid "Set your password"
 msgstr "Վերականգնել գաղտնաբառը"
 
@@ -5298,22 +5551,18 @@ msgid "Before you begin using your account, you first need to set a password. Af
 msgstr ""
 
 #, fuzzy
-#| msgid "Enter new password"
 msgid "Enter a password"
 msgstr "Մուտքագրել նոր գաղտնաբառ"
 
 #, fuzzy
-#| msgid "Repeat your password just to make sure"
 msgid "Repeat the password just to make sure"
 msgstr "Կրկին մութքագրեք նոր գաղտնաբառը պարզապես համոզվելու համար"
 
 #, fuzzy
-#| msgid "Repeat new Password"
 msgid "Repeat the Password"
 msgstr "Կրկին մութքագրել նոր գաղտնաբառը"
 
 #, fuzzy
-#| msgid "Change my password"
 msgid "Set my password"
 msgstr "Փոխել իմ գաղտնաբառը"
 
@@ -5371,15 +5620,6 @@ msgstr "Ազգանուն"
 msgid "You can supply your last name to be displayed as well"
 msgstr "Դուք կարող եք տրամադրել ձեր ազգանունը, որը նույնպես կցուցադրվի"
 
-msgid "Captcha"
-msgstr "Captcha"
-
-msgid "We need to make sure you are a real person (sorry!)"
-msgstr "Մենք պետք է համոզվենք, որ դուք իրական մարդ եք (ներողուցյուն):"
-
-msgid "Generate a new captcha"
-msgstr "Ստեղծել նոր captcha"
-
 msgid "Search options..."
 msgstr "Որոնման տարբերակներ ..."
 
@@ -5426,7 +5666,6 @@ msgstr "Օգտատերերի որոնում"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Create content"
 msgid "External contents"
 msgstr "Ստեղծել բովանդակություն"
 
@@ -5467,6 +5706,9 @@ msgstr "Մուտքագրեք մեկ կամ մի քանի որոնման պայմ
 #, fuzzy
 msgid "CSV Downloads"
 msgstr "Ներբեռնել"
+
+msgid "HD space used by conferences"
+msgstr ""
 
 msgid "HD space used by groups"
 msgstr ""
@@ -5511,7 +5753,6 @@ msgid "Recommended minimum dimensions: 1140px x 240px (wide)."
 msgstr ""
 
 #, fuzzy
-#| msgid "Help about the microsite"
 msgid "View the microsite now"
 msgstr "Օգնություն միկրոկայքի մասին"
 
@@ -5525,7 +5766,6 @@ msgstr "Իմ Իրադարձությունները"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Upload an image."
 msgid "My Cloud Files"
 msgstr "Վերբեռնել պատկեր."
 
@@ -5539,7 +5779,6 @@ msgstr "Բոլոր Իրադարձությունները"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Upload an image."
 msgid "Cloud Files"
 msgstr "Վերբեռնել պատկեր."
 
@@ -5554,7 +5793,6 @@ msgstr "Հրավերներ"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Upload an image."
 msgid "Cloud File"
 msgstr "Վերբեռնել պատկեր."
 
@@ -5769,7 +6007,6 @@ msgstr "Իմ Նախագծերում / Խմբերում"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Search in teams"
 msgid "In my Cloud Files"
 msgstr "Որոնել թիմերում"
 
@@ -5829,19 +6066,16 @@ msgstr "Անդամակցության հարցումը սպասման մեջ է .
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Participants"
 msgid "Participate"
 msgstr "Մասնակիցներ"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Contact Information"
 msgid "Contact organizers"
 msgstr "Կոնտակտային տվյալներ"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "You will now receive notifications for content posted in this group."
 msgid "You will now receive notifications for content posted."
 msgstr "Այժմ դուք կստանաք ծանուցումներ այս խմբում տեղադրված բովանդակության համար."
 
@@ -5890,7 +6124,6 @@ msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr "Ներեցեք, բայց հայցվող բովանդակությունը հնարավոր չէ ստանալ սերվերից."
 
 #, fuzzy
-#| msgid "Done"
 msgid "on"
 msgstr "Կատարված է"
 
@@ -5972,7 +6205,6 @@ msgstr "ՉԻ ցանկանում կապվել հնարավոր համագործա
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Your Profile"
 msgid "To Profile"
 msgstr "Քո պրոֆիլը"
 
@@ -5998,7 +6230,6 @@ msgstr "Դեռ նյութեր չկան"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Ideas I am following"
 msgid "Items you follow"
 msgstr "Գաղափարներ, որոնց ես հետևում եմ"
 
@@ -6036,25 +6267,21 @@ msgstr "Բացահայտել"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Apply Filters"
 msgid "Filter"
 msgstr "Կիրառել Ֆիլտրեր"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Content (left column)"
 msgid "Content from the Forum"
 msgstr "Բովանդակություն (ձախ սյուն)"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Only content from my Groups and Projects"
 msgid "Content from my Groups and Projects"
 msgstr "Միայն իմ Խմբերի և նախագծերի բովանդակությունը"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Public Project"
 msgid "Public content"
 msgstr "Հասարակական Նախագիծ"
 
@@ -6146,6 +6373,9 @@ msgstr ""
 msgid "Your profile will first be deactivated and removed completely from the platform. After 30 days and only then will it be permanently deleted from our database. In our backup systems the account may be stored for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion."
 msgstr ""
 
+msgid "During the 30-day period, your account's e-mail address will be reserved and can not be used to register a new account."
+msgstr ""
+
 msgid "Delete Account"
 msgstr "Ջնջել Անձնական Էջը"
 
@@ -6159,6 +6389,10 @@ msgstr "Ջնջել օգտատիրոջ անձնական էջը"
 msgid "User profile: %(username)s"
 msgstr "Օգտատիրոջ անձնական էջ։ %(username)s"
 
+#, fuzzy
+msgid "Profile"
+msgstr "Իմ էջը"
+
 msgid "Cooperation requests"
 msgstr "Համագործակցության հայցեր"
 
@@ -6171,6 +6405,11 @@ msgstr "Ես չեմ ցանկանում ինձ հետ կապնվեն՝ հնարա
 msgid "My Website"
 msgstr "Իմ վեբ կայքը"
 
+#, fuzzy
+#| msgid "Gesendet"
+msgid "ended"
+msgstr "Gesendet"
+
 msgid "Edit Your Profile"
 msgstr "Խմբագրել ձեր էջը"
 
@@ -6179,6 +6418,9 @@ msgstr "Հիմնական տվյալները"
 
 msgid "E-Mail"
 msgstr "Էլ․ հասցե"
+
+msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
+msgstr ""
 
 msgid "Profile avatar"
 msgstr "Անձնական էջի ավատար"
@@ -6200,11 +6442,6 @@ msgstr "Ազդանշան է տալիս ձեր հետ կապնվելու պատր
 
 msgid "I am open for cooperation requests"
 msgstr "Ես պատրաստ եմ համագործակցության հարցումների"
-
-#, fuzzy
-#| msgid "Messages"
-msgid "Message"
-msgstr "Նամակներ"
 
 msgid "Welcome!"
 msgstr "Բարի Գալուստ!"
@@ -6329,7 +6566,6 @@ msgid "Delete Archived User Import Entry"
 msgstr ""
 
 #, fuzzy
-#| msgid "There are no items yet"
 msgid "There are no archived imports yet."
 msgstr "Դեռ նյութեր չկան"
 
@@ -6365,7 +6601,6 @@ msgid "This page will automatically refresh when the process is done."
 msgstr ""
 
 #, fuzzy
-#| msgid "No contact data has been added yet."
 msgid "No data has been imported yet. Ready to import!"
 msgstr "Կոնտակտային տվյալներ դեռ չեն ավելացվել."
 
@@ -6392,7 +6627,6 @@ msgid "Once you are ready to begin the import, please click \"%(submit_button_la
 msgstr ""
 
 #, fuzzy
-#| msgid "No contact data has been added yet."
 msgid "No data has been imported yet."
 msgstr "Կոնտակտային տվյալներ դեռ չեն ավելացվել."
 
@@ -6407,7 +6641,6 @@ msgid "Click \"%(reset_button_label)s\" at the top of the page to start another 
 msgstr ""
 
 #, fuzzy
-#| msgid "There was an error loading the widget"
 msgid "There was a critical unexpected error during the import"
 msgstr "Վիդջեթը բեռնելիս սխալ տեղի ունեցավ"
 
@@ -6421,7 +6654,6 @@ msgid "The uploaded data has been successfully imported!"
 msgstr ""
 
 #, fuzzy
-#| msgid "Password reset successful"
 msgid "Import successful!"
 msgstr "Գաղտնաբառի վերաբեռնումը հաջողվեց"
 
@@ -6624,12 +6856,10 @@ msgid "Contents"
 msgstr "Բովանդակություն"
 
 #, fuzzy
-#| msgid "My Groups and Projects"
 msgid "My upcoming Events"
 msgstr "Իմ Խմբերը և Նախագծերը"
 
 #, fuzzy
-#| msgid "You can change this setting later in your profile settings"
 msgid "The map is centrered on the address you added in your profile settings."
 msgstr "Դուք կարող եք փոխել այս կարգավորումը ավելի ուշ ձեր պրոֆիլի պարամետրերում"
 
@@ -6812,12 +7042,10 @@ msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i> Արտապատկերիչ %(model_name)s - ի համար չի գտնվել։</i>"
 
 #, fuzzy
-#| msgid "You are not in any groups or projects yet"
 msgid "You are not currently in any Projects"
 msgstr "Դուք որևէ խմբում կամ նախագծում դեռ կայացած չեք"
 
 #, fuzzy
-#| msgid "My Groups and Projects"
 msgid "My upcoming Projects"
 msgstr "Իմ Խմբերը և Նախագծերը"
 
@@ -6843,7 +7071,6 @@ msgid "Activate Project"
 msgstr "Ակտիվացնել նախագիծը"
 
 #, fuzzy
-#| msgid "Deactivate Project"
 msgid "Re-activate Project"
 msgstr "Ապաակտիվացնել նախագիծը"
 
@@ -6851,12 +7078,10 @@ msgid "Deactivate Project"
 msgstr "Ապաակտիվացնել նախագիծը"
 
 #, fuzzy
-#| msgid "You are about to deactivate this project/group!"
 msgid "You are about to deactivate this project!"
 msgstr "Դուք պատրաստվում եք ապաակտիվացնել այս նախագիծը/ խումբը!"
 
 #, fuzzy
-#| msgid "You are about to re-activate this project/group. It and all of its content will be visible on the website again."
 msgid "You are about to re-activate this project. It and all of its content will be visible on the website again."
 msgstr "Դուք պատրաստվում եք նորից ակտիվացնել այս նախագիծը / խումբը: Այն և դրա ամբողջ բովանդակությունը կրկին տեսանելի կլինեն կայքում."
 
@@ -6867,12 +7092,10 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "Convert selected Groups to Projects"
 msgid "Convert selected items to Projects"
 msgstr "Փոխակերպել ընտրված Խմբերը Ծրագրերի"
 
 #, fuzzy
-#| msgid "Project Administrator"
 msgid "Project administrator"
 msgstr "Նախագցի ադմինիստրատոր"
 
@@ -6886,12 +7109,10 @@ msgid "Enter a name for the project."
 msgstr "Մուտքագրեք անուն նախագծի համար."
 
 #, fuzzy
-#| msgid "Where are you active?"
 msgid "Where is the project active?"
 msgstr "Որտե՞ղ եք ակտիվ?"
 
 #, fuzzy
-#| msgid "Team members only"
 msgid "Project members only"
 msgstr "Միայն թիմի անդամները"
 
@@ -6911,27 +7132,22 @@ msgid "You have been invited to collaborate!"
 msgstr "Ձե՜զ հրավիրվել են համագործակցության!"
 
 #, fuzzy
-#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
 msgid "Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators."
 msgstr "Ներեցեք, միայն պորտալի ադմինիստրատորները կարող են ապաակտիվացնել խմբերը: Կարող եք հաղորդագրություն գրել ադմինիստրատորներից որևէ մեկին, որպեսզի նա անջատի այն ձեզ համար: Ստորև կարող եք գտնել բոլոր ադմինիստրատորների ցուցակը."
 
 #, fuzzy
-#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
 msgid "Sorry, only portal administrators can deactivate Projects! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
 msgstr "Ներեցեք, միայն պորտալի ադմինիստրատորները կարող են ապաակտիվացնել խմբերը: Կարող եք հաղորդագրություն գրել ադմինիստրատորներից որևէ մեկին, որպեսզի նա անջատի այն ձեզ համար: Ստորև կարող եք գտնել բոլոր ադմինիստրատորների ցուցակը."
 
 #, fuzzy
-#| msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgid "Only project members can see the content you requested. Apply to become a member now!"
 msgstr "Միայն թիմի անդամները կարող են տեսնել ձեր կողմից հայցվող բովանդակությունը. Դիմեք ՝ այժմ անդամագրվելու համար!"
 
 #, fuzzy
-#| msgid "You are not in any groups or projects yet"
 msgid "You are not currently in any Groups"
 msgstr "Դուք որևէ խմբում կամ նախագծում դեռ կայացած չեք"
 
 #, fuzzy
-#| msgid "My Groups"
 msgid "My upcoming Groups"
 msgstr "Իմ Խմբերը"
 
@@ -6948,7 +7164,6 @@ msgid "in the Group Dashboard"
 msgstr "Կառավարման վահանակ"
 
 #, fuzzy
-#| msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
 msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr "Խմբերն օգնում են բարելավել հաղորդակցությունը և համագործակցությունը խոշոր ցանցերում կամ կազմակերպություններում: Մի խմբի շրջանակներում կարող եք միաձուլել մի քանի փոքր նախագծեր կամ աշխատանքային խմբեր."
 
@@ -6956,7 +7171,6 @@ msgid "Edit Group"
 msgstr "Խմբագրել խումբը"
 
 #, fuzzy
-#| msgid "Deactivate Group"
 msgid "Activate Group"
 msgstr "Ապաակտիվացնել Խումբը"
 
@@ -6967,12 +7181,10 @@ msgid "Deactivate Group"
 msgstr "Ապաակտիվացնել Խումբը"
 
 #, fuzzy
-#| msgid "You are about to deactivate this project/group!"
 msgid "You are about to deactivate this group!"
 msgstr "Դուք պատրաստվում եք ապաակտիվացնել այս նախագիծը/ խումբը!"
 
 #, fuzzy
-#| msgid "You are about to re-activate this project/group. It and all of its content will be visible on the website again."
 msgid "You are about to re-activate this group. It and all of its content will be visible on the website again."
 msgstr "Դուք պատրաստվում եք նորից ակտիվացնել այս նախագիծը / խումբը: Այն և դրա ամբողջ բովանդակությունը կրկին տեսանելի կլինեն կայքում."
 
@@ -6983,12 +7195,10 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "Convert selected items to Groups"
 msgstr "Փոխակերպել ընտրված Ծրագրերը Խմբերի"
 
 #, fuzzy
-#| msgid "Group Administrator"
 msgid "Group administrator"
 msgstr "Խմբի ադմինիստրատոր"
 
@@ -7002,12 +7212,10 @@ msgid "Enter a name for the group."
 msgstr "Մուտքագրեք անուն խմբի համար."
 
 #, fuzzy
-#| msgid "Where are you active?"
 msgid "Where is the group active?"
 msgstr "Որտե՞ղ եք ակտիվ?"
 
 #, fuzzy
-#| msgid "Team members only"
 msgid "Group members only"
 msgstr "Միայն թիմի անդամները"
 
@@ -7018,7 +7226,6 @@ msgid "Type the names of files, events or pads from this group to attach..."
 msgstr ""
 
 #, fuzzy
-#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
 msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
 msgstr "Ներեցեք, միայն պորտալի ադմինիստրատորները կարող են ապաակտիվացնել խմբերը: Կարող եք հաղորդագրություն գրել ադմինիստրատորներից որևէ մեկին, որպեսզի նա անջատի այն ձեզ համար: Ստորև կարող եք գտնել բոլոր ադմինիստրատորների ցուցակը."
 
@@ -7026,7 +7233,6 @@ msgid "Sorry, only portal administrators can deactivate Groups! You can write a 
 msgstr "Ներեցեք, միայն պորտալի ադմինիստրատորները կարող են ապաակտիվացնել խմբերը: Կարող եք հաղորդագրություն գրել ադմինիստրատորներից որևէ մեկին, որպեսզի նա անջատի այն ձեզ համար: Ստորև կարող եք գտնել բոլոր ադմինիստրատորների ցուցակը."
 
 #, fuzzy
-#| msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "Միայն թիմի անդամները կարող են տեսնել ձեր կողմից հայցվող բովանդակությունը. Դիմեք ՝ այժմ անդամագրվելու համար!"
 
@@ -7051,17 +7257,14 @@ msgid "Conference Menu"
 msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
 #, fuzzy
-#| msgid "Browse all Projects"
 msgid "Browse all Conferences"
 msgstr "Դիտել բոլոր Նախագծերը"
 
 #, fuzzy
-#| msgid "Create Event"
 msgid "Create Conference"
 msgstr "Ստեղծել Իրադարձություն"
 
 #, fuzzy
-#| msgid "Create Event"
 msgid "Create new Conference"
 msgstr "Ստեղծել Իրադարձություն"
 
@@ -7073,27 +7276,22 @@ msgid "Edit Conference"
 msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
 #, fuzzy
-#| msgid "Activate Project"
 msgid "Activate Conference"
 msgstr "Ակտիվացնել նախագիծը"
 
 #, fuzzy
-#| msgid "Create Event"
 msgid "Re-activate Conference"
 msgstr "Ստեղծել Իրադարձություն"
 
 #, fuzzy
-#| msgid "Deactivate Project"
 msgid "Deactivate Conference"
 msgstr "Ապաակտիվացնել նախագիծը"
 
 #, fuzzy
-#| msgid "You are about to deactivate this project/group!"
 msgid "You are about to deactivate this conference!"
 msgstr "Դուք պատրաստվում եք ապաակտիվացնել այս նախագիծը/ խումբը!"
 
 #, fuzzy
-#| msgid "You are about to re-activate this project/group. It and all of its content will be visible on the website again."
 msgid "You are about to re-activate this conference. It and all of its content will be visible on the website again."
 msgstr "Դուք պատրաստվում եք նորից ակտիվացնել այս նախագիծը / խումբը: Այն և դրա ամբողջ բովանդակությունը կրկին տեսանելի կլինեն կայքում."
 
@@ -7104,7 +7302,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "Convert selected Groups to Projects"
 msgid "Convert selected items to Conferences"
 msgstr "Փոխակերպել ընտրված Խմբերը Ծրագրերի"
 
@@ -7113,7 +7310,6 @@ msgid "Conference contact person"
 msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
 #, fuzzy, python-format
-#| msgid "Request about your project \"%(group_name)s\""
 msgid "Request about your conference \"%(group_name)s\""
 msgstr "Հայց ձեր նախագծի վերաբերյալ \"%(group_name)s\""
 
@@ -7125,17 +7321,14 @@ msgid "Conference name"
 msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
 #, fuzzy
-#| msgid "Enter a name for the project."
 msgid "Enter a name for the conference."
 msgstr "Մուտքագրեք անուն նախագծի համար."
 
 #, fuzzy
-#| msgid "Describe the project in a few sentences."
 msgid "Describe the conference in a few sentences."
 msgstr "Նկարագրեք նախագիծը մի քանի նախադասությամբ."
 
 #, fuzzy
-#| msgid "Where are you active?"
 msgid "Where is the conference active?"
 msgstr "Որտե՞ղ եք ակտիվ?"
 
@@ -7150,34 +7343,41 @@ msgid "Type the names of files, events or pads from this conference to attach...
 msgstr ""
 
 #, fuzzy
-#| msgid "Participants"
 msgid "Participate!"
 msgstr "Մասնակիցներ"
 
 #, fuzzy
-#| msgid "Join now and collaborate!"
 msgid "Join now and participate!"
 msgstr "Միացեք հիմա և համագործակցեք!"
 
 #, fuzzy
-#| msgid "You have been invited to collaborate!"
 msgid "You have been invited to participate!"
 msgstr "Ձե՜զ հրավիրվել են համագործակցության!"
 
 #, fuzzy
-#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
 msgid "Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators."
 msgstr "Ներեցեք, միայն պորտալի ադմինիստրատորները կարող են ապաակտիվացնել խմբերը: Կարող եք հաղորդագրություն գրել ադմինիստրատորներից որևէ մեկին, որպեսզի նա անջատի այն ձեզ համար: Ստորև կարող եք գտնել բոլոր ադմինիստրատորների ցուցակը."
 
 #, fuzzy
-#| msgid "Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
 msgid "Sorry, only portal administrators can deactivate Conferences! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators."
 msgstr "Ներեցեք, միայն պորտալի ադմինիստրատորները կարող են ապաակտիվացնել խմբերը: Կարող եք հաղորդագրություն գրել ադմինիստրատորներից որևէ մեկին, որպեսզի նա անջատի այն ձեզ համար: Ստորև կարող եք գտնել բոլոր ադմինիստրատորների ցուցակը."
 
 #, fuzzy
-#| msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "Միայն թիմի անդամները կարող են տեսնել ձեր կողմից հայցվող բովանդակությունը. Դիմեք ՝ այժմ անդամագրվելու համար!"
+
+#, fuzzy
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address."
+msgstr "Խնդրում ենք հաստատել ձեր էլ. փոստի հասցեն %(site_name)s - ի համար!"
+
+#, fuzzy, python-format
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "Please verify your email address by %(date_string)s."
+msgstr "Խնդրում ենք հաստատել ձեր էլ. փոստի հասցեն %(site_name)s - ի համար!"
+
+msgid "Click here to send the verification link again."
+msgstr ""
 
 msgid "Team Description"
 msgstr "Թիմի նկարագրություն"
@@ -7226,7 +7426,6 @@ msgid "Newsletter has been copied."
 msgstr ""
 
 #, fuzzy
-#| msgid "(The reported item has been deleted.)"
 msgid "Newsletter has been updated."
 msgstr "(Հաղորդված տարրը ջնջվել է․)"
 
@@ -7243,7 +7442,6 @@ msgid "Login token was sent."
 msgstr ""
 
 #, fuzzy
-#| msgid "User %(username)s was successfully invited!"
 msgid "User successfully created!"
 msgstr "%(username)s օգտատերը հաջողությամբ հրավիրվել է!"
 
@@ -7252,7 +7450,31 @@ msgid "The language \"%s\" is not supported"
 msgstr "\"%s\" լեզուն չի մատուցվում"
 
 #, fuzzy
-#| msgid "Your idea was deleted successfully."
+msgid "Successfully made conference permanent premium"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Successfully removed permanent premium from conference"
+msgstr "Ջնջել օգտատիրոջ անձնական էջը"
+
+msgid "Successfully added premium block"
+msgstr ""
+
+msgid "Add Premium Block to \"{}\""
+msgstr ""
+
+#, fuzzy
+msgid "Successfully updated premium block."
+msgstr "Ջնջել օգտատիրոջ անձնական էջը"
+
+msgid "Edit Premium Block in conference \"{}\""
+msgstr ""
+
+#, fuzzy
+msgid "Successfully deleted premium block"
+msgstr "Ջնջել օգտատիրոջ անձնական էջը"
+
+#, fuzzy
 msgid "Your data was saved successfully!"
 msgstr "Ձեր գաղափարը հաջողությամբ ջնջվել է."
 
@@ -7311,39 +7533,6 @@ msgstr "%(team_type)s \"%(group)s\"-ը հաջողությամբ ստեղծվել
 msgid "Create"
 msgstr "Ստեղծել"
 
-msgid "Conference successfully started and user accounts activated"
-msgstr ""
-
-msgid "Conference successfully finished and user accounts deactivated"
-msgstr ""
-
-#, fuzzy
-msgid "Successfully deactivated user account"
-msgstr "Ջնջել օգտատիրոջ անձնական էջը"
-
-#, fuzzy
-msgid "Successfully activated user account"
-msgstr "Ջնջել օգտատիրոջ անձնական էջը"
-
-#, fuzzy
-msgid "Successfully removed user"
-msgstr "Ջնջել օգտատիրոջ անձնական էջը"
-
-#, fuzzy
-msgid "User was not created"
-msgstr "Ստեղշծեց"
-
-msgid "Workshop username"
-msgstr ""
-
-#, fuzzy
-msgid "First Name"
-msgstr "Անուն"
-
-#, fuzzy
-msgid "Last Name"
-msgstr "Ազգանուն"
-
 #, python-format
 msgid "The %(team_type)s was changed successfully."
 msgstr "%(team_type)s- ը հաջողությամբ փոխվել է."
@@ -7376,7 +7565,6 @@ msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” su
 msgstr "Ձեր միանալու հարցումը հաջողությամբ հեռացվել է %(team_type)s \"%(team_name)s\" -ից."
 
 #, fuzzy, python-format
-#| msgid "You are no longer a member of the %(team_type)s “%(team_name)s”."
 msgid "You have declined the invitation to %(team_type)s “%(team_name)s”."
 msgstr "Դուք այլևս %(team_type)s “%(team_name)s”- ի անդամ չեք."
 
@@ -7393,7 +7581,6 @@ msgid "User %(username)s was successfully invited!"
 msgstr "%(username)s օգտատերը հաջողությամբ հրավիրվել է!"
 
 #, fuzzy, python-format
-#| msgid "The following Users were added to this portal:"
 msgid "The following users were invited to apply: %s"
 msgstr "Հետևյալ Օգտատերերն ավելացվեցին այս պորտալ:"
 
@@ -7506,6 +7693,13 @@ msgstr "Արկղ ավելացնելու համար որևէ ծրագրի անո�
 msgid "Your idea was deleted successfully."
 msgstr "Ձեր գաղափարը հաջողությամբ ջնջվել է."
 
+#, fuzzy
+msgid "Your message has been sent."
+msgstr "Ձեր փոփոխությունները պահպանվել են."
+
+msgid "Something went wrong. Your message was not sent."
+msgstr ""
+
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr "Ձեր ավատարը մշակելիս տեղի է ունեցել սխալ: Համոզվեք, որ դուք ընտրել եք պատկերի բավականաչափ մեծ մասը!"
 
@@ -7563,12 +7757,10 @@ msgid "Sorry, something went wrong while saving your profile!"
 msgstr "Ներեցեք, ձեր անձնական էջն պահպանելիս ինչ-որ սխալ առաջացավ!"
 
 #, fuzzy
-#| msgid "Your profile was deleted successfully. We're sorry you are no longer with us."
 msgid "Your user account has been deactivated and will be deleted in 30 days. We're sorry you are no longer with us."
 msgstr "Ձեր էջն հաջողությամբ ջնջվել է: Ցավում ենք, որ դուք այլևս մեզ հետ չեք."
 
 #, fuzzy
-#| msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
 msgid "You are the only administrator left for these projects, groups or conferences. Please appoint a different administrator or delete them first:"
 msgstr "Դուք միակ ադմինիստրատորն եք, որը մնացել է \"%s\" - ի համար: Խնդրում ենք նշանակել այլ ադմինիստրատոր կամ նախ ջնջել այն."
 
@@ -7579,7 +7771,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#| msgid "You are about to delete your user account from the site!"
 msgid "Information about the deletion of your user account"
 msgstr "Դուք պատրաստվում եք ջնջել ձեր օգտատիրոջ անձնական էջը այս կայքից!"
 
@@ -7606,9 +7797,9 @@ msgstr "Ձեր հաշիվը \"%(user)s\" հաջողությամբ գրանցվե
 msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
 msgstr "\"%(user)s\" օգտատերը հաջողությամբ գրանցված է: Անձնական էջը պետք է հաստատվի նախքան մուտքագրվելը: Երբ դա տեղի ունենա, մենք էլ․նամակ կուղարկենք ձեր \"%(email)s\" հասցեին."
 
-#, fuzzy, python-format
-msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-msgstr "\"%(user)s\" օգտատերը հաջողությամբ գրանցված է: Մենք շուտով կուղարկենք նամակ Ձեր նշված %(email)s\" էլ. հասցեյին: Մուտք գործելու համար անհրաժեշտ է հաստատել էլ. փոստի հասցեն."
+#, python-format
+msgid "Thank you for signing up and welcome to the platform! We sent an email to your address \"%(email)s\" - please click the link contained in it to verify your email address!"
+msgstr ""
 
 msgid "The invite token you have used does not exist!"
 msgstr "Ձեր կողմից օգտագործված հրավերի թոքենը գոյություն չունի!"
@@ -7659,6 +7850,9 @@ msgstr "Դուք մերժել եք %(username)s -ի միանալու հարցո�
 msgid "The user account you were looking for does not exist! Your registration was probably already denied or the email token has expired."
 msgstr "Այն անձնական էջը, որը դուք փնտրում եք, գոյություն չունի: Ձեր գրանցումը հավանաբար արդեն մերժվել է կամ էլ․ հասցեի թոքենը լրացել է."
 
+msgid "The email you are trying to verify belongs to a different user account than the one you are logged in with! Please log out before clicking the verification link again!"
+msgstr ""
+
 msgid "The email for this account seems to already have been confirmed!"
 msgstr "Այս Էջի էլ․հասցեն, կարծես, արդեն հաստատված է!"
 
@@ -7668,13 +7862,41 @@ msgstr "Էլ.հասցեի հաստատման համար տրամադրած հղ�
 msgid "The email you are trying to confirm has already been confirmed or belongs to another user!"
 msgstr "Էլ․հասցեն, որը դուք փորձում եք հաստատել, արդեն հաստատվել է կամ պատկանում է մեկ այլ օգտատիրոջ!"
 
-#, python-format
-msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+#, fuzzy, python-format
+#| msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+msgid "Your email address %(email)s was successfully confirmed!"
 msgstr "Ձեր էլ. հասցեն %(email)s հաջողությամբ հաստատվեց։ Բարի գալուստ համայնք!"
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
 msgstr "Ձեր էլ. հասցեն %(email)s հաջողությամբ հաստատվեց: Այնուամենայնիվ, ձեր Էջը դեռևս ակտիվ չէ և հարկավոր է, որպեսզի այն հաստատվի ադմինիստրատորի կողմից նախքան մուտք գործելը: Ակտիվացնելուն պես մենք ձեզ համապատասխան նամակ կուղարկենք!"
+
+#, python-format
+msgid "Please verify your email address for %(site_name)s!"
+msgstr "Խնդրում ենք հաստատել ձեր էլ. փոստի հասցեն %(site_name)s - ի համար!"
+
+#, python-format
+msgid "You have just registered an account at %(site_name)s. We're happy to see you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Please verify your email address for %(site_name)s!"
+msgid "You have just changed your email address at %(site_name)s."
+msgstr "Խնդրում ենք հաստատել ձեր էլ. փոստի հասցեն %(site_name)s - ի համար!"
+
+msgid "Please verify your email address by clicking on the following link (or copy and paste the link it in your browser):"
+msgstr ""
+
+msgid "Thank you!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "The %(site_name)s team"
+msgid "Your %(site_name)s Team"
+msgstr "%(site_name)s թիմը"
+
+msgid "If you did not sign up for an account you may ignore this email. You can also click the unsubscrible link on the bottom of this email to never receive mails from us again!"
+msgstr ""
 
 msgid "The unsubscribe link you have clicked does not seem to be valid!"
 msgstr "Ձեր սեղմած բաժանորդագրման չեղարկման հղումը կարծես թե վավեր չէ!"
@@ -7682,6 +7904,9 @@ msgstr "Ձեր սեղմած բաժանորդագրման չեղարկման հղ
 #, python-format
 msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You will not receive any more emails from us!"
 msgstr "Մենք հանեցինք ձեր էլ. հասցեն \"%(email)s\" մեր փոստային ցուցակից: Դուք այլևս էլ-նամակներ չեք ստանա մեզանից!"
+
+msgid "A new verification email has been sent."
+msgstr ""
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr "Բարի գալուստ! Ձեզ հրավիրվել են հետևյալ նախագծեր և խմբեր: Խնդրում ենք սեղմել ներքևի կոճակը ՝ յուրաքանչյուրի հրավերը ընդունելու կամ մերժելու համար!"
@@ -7702,12 +7927,10 @@ msgid "Your Announcement was deactivated successfully."
 msgstr "Ձեր հայտարարությունը հաջողությամբ ապաակտիվացվել է."
 
 #, fuzzy
-#| msgid "Your Announcement was deleted successfully."
 msgid "The Archived User Import Entry was deleted successfully."
 msgstr "Ձեր հայտարարությունը հաջողությամբ ջնջվել է."
 
 #, fuzzy
-#| msgid "This action is not available directly!"
 msgid "This action is not allowed right now"
 msgstr "Այս գործողությունը ուղղակիորեն հասանելի չէ!"
 
@@ -7721,12 +7944,10 @@ msgid "Unknown POST action!"
 msgstr ""
 
 #, fuzzy
-#| msgid "The following Groups were converted to Projects:"
 msgid "The following columns were not recognized and were ignored"
 msgstr "Հետևյալ Խմբերը վերափոխվել են Ծրագրերի:"
 
 #, fuzzy
-#| msgid "The invitation was successfully deleted."
 msgid "The import was successfully archived."
 msgstr "Հրավերը հաջողությամբ ջնջվել է."
 
@@ -7738,157 +7959,300 @@ msgid "Your changes have been saved."
 msgstr "Ձեր փոփոխությունները պահպանվել են."
 
 #, fuzzy
-#~| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgstr "Դուք պատրաստվում եք ապաակտիվացնել այս նախագիծը / խումբը: Այն և դրա ամբողջ բովանդակությունը անտեսանելի կլինեն կայքում."
+#~| msgid "Participants"
+#~ msgid "participants"
+#~ msgstr "Մասնակիցներ"
 
 #, fuzzy
-#~| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
-#~ msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
-#~ msgstr "Այս գործընթացը փոխարկելի է: Կարող եք ցանկացած պահի ակտիվացնել նախագիծը / խումբը ձեր էջից."
+#~| msgid "Team Description"
+#~ msgid "Temporary restrictions"
+#~ msgstr "Թիմի նկարագրություն"
 
 #, fuzzy
-#~| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgstr "Դուք պատրաստվում եք ապաակտիվացնել այս նախագիծը / խումբը: Այն և դրա ամբողջ բովանդակությունը անտեսանելի կլինեն կայքում."
+#~| msgid "Portal Administrators"
+#~ msgid "Portal administrators"
+#~ msgstr "Պորտալի Ադմինիստրատորներ"
 
 #, fuzzy
-#~| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
-#~ msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
-#~ msgstr "Այս գործընթացը փոխարկելի է: Կարող եք ցանկացած պահի ակտիվացնել նախագիծը / խումբը ձեր էջից."
+#~ msgid "Leave video conference"
+#~ msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
 #, fuzzy
-#~| msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
-#~ msgstr "Դուք պատրաստվում եք ապաակտիվացնել այս նախագիծը / խումբը: Այն և դրա ամբողջ բովանդակությունը անտեսանելի կլինեն կայքում."
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "Իմ Նախագծերը և Խմբերը"
 
 #, fuzzy
-#~| msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
-#~ msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
-#~ msgstr "Այս գործընթացը փոխարկելի է: Կարող եք ցանկացած պահի ակտիվացնել նախագիծը / խումբը ձեր էջից."
-
-#~ msgid "%(team_name)s was deactivated successfully!"
-#~ msgstr "%(team_name)s- ն հաջողությամբ ապակտիվացվել է!"
-
-#~ msgid "Deactivate users (will keep all all items they created on the site)"
-#~ msgstr "Ապաակտիվացնել օգտատերերին (կպահպանվի նրանց կողմից կայքում ստեղծված բոլոր կետերը)"
-
-#~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
-#~ msgstr "Եթե ցանկանում եք ջնջել որևէ բովանդակություն, խնդրում ենք վերադառնալ և դա անել հիմա: Ձեր պրոֆիլը ջնջելուց հետո այլևս մուտք չեք ունենա ձեր էջում ստեղծած որևէ նյութի."
-
-#~ msgid "Deutsch--NATIVE-LANGUAGE"
-#~ msgstr "Deutsch"
-
-#~ msgid "English--NATIVE-LANGUAGE"
-#~ msgstr "English"
-
-#~ msgid "Russian--NATIVE-LANGUAGE"
-#~ msgstr "Русский"
-
-#~ msgid "Ukrainian--NATIVE-LANGUAGE"
-#~ msgstr "Українська"
-
-#~ msgid "French--NATIVE-LANGUAGE"
-#~ msgstr "Français"
-
-#~ msgid "Polish--NATIVE-LANGUAGE"
-#~ msgstr "Polski"
-
-#~ msgid "Spanish--NATIVE-LANGUAGE"
-#~ msgstr "Español"
-
-#~ msgid "Romanian--NATIVE-LANGUAGE"
-#~ msgstr "Română"
-
-#~ msgid "Belarussian--NATIVE-LANGUAGE"
-#~ msgstr "Беларуская"
-
-#~ msgid "Dutch--NATIVE-LANGUAGE"
-#~ msgstr "Nederlands"
-
-#~ msgid "Czech--NATIVE-LANGUAGE"
-#~ msgstr "Čeština"
-
-#~ msgid "Azerbaijani--NATIVE-LANGUAGE"
-#~ msgstr "Azerbaycan dili"
-
-#~ msgid "Armenian--NATIVE-LANGUAGE"
-#~ msgstr "Հայոց լեզու"
-
-#~ msgid "Georgian--NATIVE-LANGUAGE"
-#~ msgstr "ქართული ენა"
-
-#~ msgid "Kazakh--NATIVE-LANGUAGE"
-#~ msgstr "Қазақ тілі"
-
-#~ msgid "Arabic--NATIVE-LANGUAGE"
-#~ msgstr "العربية"
-
-#~ msgid "Hebrew--NATIVE-LANGUAGE"
-#~ msgstr "עברית"
-
-#~ msgid "Attach existing Files..."
-#~ msgstr "Կցել առկա ֆայլերը ..."
-
-#~ msgid "Time"
-#~ msgstr "Ժամանակ"
+#~ msgid "Import from a CSV File"
+#~ msgstr "Տեսակավորել դաշտը"
 
 #, fuzzy
-#~| msgid "Header image"
-#~ msgid "Banner Image"
-#~ msgstr "Վերնամասի պատկեր"
+#~ msgid "Project/group CSV File"
+#~ msgstr "Նախագծեր / Խմբեր"
+
+#, fuzzy
+#~ msgid "User CSV File"
+#~ msgstr "Նախագծեր / Խմբեր"
+
+#, fuzzy
+#~ msgid "Options"
+#~ msgstr "Համամասնություններ"
+
+#, fuzzy
+#~ msgid "Upload and Import..."
+#~ msgstr "Վերբեռնել պատկեր."
+
+#, fuzzy
+#~ msgid "Import Projects and Groups"
+#~ msgstr "Իմ Նախագծերը և Խմբերը"
+
+#, fuzzy
+#~ msgid "CSV Import Results"
+#~ msgstr "Գաղտնաբառի վերաբեռնումը հաջողվեց"
+
+#, fuzzy
+#~ msgid "Read errors:"
+#~ msgstr "Սխալ!"
+
+#, fuzzy
+#~ msgid "Important messages:"
+#~ msgstr "Նամակներ"
+
+#, fuzzy
+#~ msgid "Errors:"
+#~ msgstr "Սխալ!"
+
+#, fuzzy
+#~ msgid "Info messages:"
+#~ msgstr "Նամակներ"
+
+#, fuzzy
+#~ msgid "Successfully deactivated user account"
+#~ msgstr "Ջնջել օգտատիրոջ անձնական էջը"
+
+#, fuzzy
+#~ msgid "Successfully activated user account"
+#~ msgstr "Ջնջել օգտատիրոջ անձնական էջը"
+
+#, fuzzy
+#~ msgid "Successfully removed user"
+#~ msgstr "Ջնջել օգտատիրոջ անձնական էջը"
+
+#, fuzzy
+#~| msgid "Password reset"
+#~ msgid "Password set"
+#~ msgstr "Գաղտնաբառը վերականգնվել է"
+
+#, fuzzy
+#~| msgid "Password"
+#~ msgid "no Password"
+#~ msgstr "Գաղտնաբառ"
+
+#, fuzzy
+#~ msgid "Set password"
+#~ msgstr "Փոխել իմ գաղտնաբառը"
+
+#, fuzzy
+#~ msgid "Conference is not running"
+#~ msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+#~ msgid "Upload Participants"
+#~ msgstr "Մասնակիցներ"
+
+#, fuzzy
+#~ msgid "not active"
+#~ msgstr "ոչ ակտիվ"
+
+#, fuzzy
+#~ msgid "deactivate member"
+#~ msgstr "Ապաակտիվացնել Խումբը"
+
+#, fuzzy
+#~ msgid "activate member"
+#~ msgstr "Հրավիրել անդամ"
+
+#, fuzzy
+#~ msgid "Finish conference and deactivate user accounts"
+#~ msgstr "Ջնջել օգտատիրոջ անձնական էջը"
+
+#, fuzzy
+#~ msgid "Start conference and activate user accounts"
+#~ msgstr "Ջնջել օգտատիրոջ անձնական էջը"
+
+#, fuzzy
+#~ msgid "User was not created"
+#~ msgstr "Ստեղշծեց"
+
+#, fuzzy
+#~ msgid "First Name"
+#~ msgstr "Անուն"
+
+#, fuzzy
+#~ msgid "Last Name"
+#~ msgstr "Ազգանուն"
+
+#, fuzzy
+#~ msgid "Conference reminders"
+#~ msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+#~ msgid "Only conference members can see the event\\'s description."
+#~ msgstr "Միայն թիմի անդամները կարող են տեսնել ձեր կողմից հայցվող բովանդակությունը. Դիմեք ՝ այժմ անդամագրվելու համար!"
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just registered an account at %(site_name)s. We're happy to see you!\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before you can log in. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Thank you and see you soon!\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Ողջույն %(user_name)s,\n"
+#~ "\n"
+#~ "դուք գրանցվեցիք %(site_name)s -ում. Ուրախ ենք Ձեզ տեսնել!\n"
+#~ "\n"
+#~ "Դուք պետք է հաստատեք Ձեր էլ․հասցեն %(user_email)s նախքան կկարողանաք մուտք գործել։ \n"
+#~ "\n"
+#~ "\n"
+#~ "Ձեր էլ.փոստի հասցեն հաստատելու համար անցեք հետևյալ հղումով (կամ բացեք այն ձեր բրաուզերում):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Շնորհակալություն, մինչ հանդիպում։\n"
+#~ "\n"
+#~ "Ձեր %(site_name)s թիմ"
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just changed your email address at %(site_name)s.\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before the changes take effect. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Ողջույն %(user_name)s,\n"
+#~ "\n"
+#~ "Դուք փոխեցիք ձեր էլ․ հասցեն %(site_name)s -ում.\n"
+#~ "\n"
+#~ "Փոփոխությունները ուժի մեջ մտնելուց առաջ անհրաժեշտ կլինի հաստատել ձեր էլ. հասցեն %(user_email)s: \n"
+#~ "\n"
+#~ "\n"
+#~ "Ձեր էլ.փոստի հասցեն հաստատելու համար անցեք հետևյալ հղումով (կամ բացեք այն ձեր բրաուզերում):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Ձեր %(site_name)s թիմ"
+
+#, fuzzy
+#~ msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
+#~ msgstr "\"%(user)s\" օգտատերը հաջողությամբ գրանցված է: Անձնական էջը պետք է հաստատվի նախքան մուտքագրվելը: Երբ դա տեղի ունենա, մենք էլ․նամակ կուղարկենք ձեր \"%(email)s\" հասցեին."
+
+#, fuzzy
+#~ msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "\"%(user)s\" օգտատերը հաջողությամբ գրանցված է: Մենք շուտով կուղարկենք նամակ Ձեր նշված %(email)s\" էլ. հասցեյին: Մուտք գործելու համար անհրաժեշտ է հաստատել էլ. փոստի հասցեն."
+
+#, fuzzy
+#~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "\"%(user)s\" օգտատերը հաջողությամբ գրանցված է: Մենք շուտով կուղարկենք նամակ Ձեր նշված %(email)s\" էլ. հասցեյին: Մուտք գործելու համար անհրաժեշտ է հաստատել էլ. փոստի հասցեն."
+
+#, fuzzy
+#~| msgid "Cosinnus Micropages"
+#~ msgid "Contact Form on Micropage"
+#~ msgstr "Cosinnus Միկրոէջեր"
+
+#, fuzzy
+#~| msgid "Group Administrator"
+#~ msgid "Email to group administrator"
+#~ msgstr "Խմբի ադմինիստրատոր"
+
+#~ msgid "Group:"
+#~ msgstr "Խումբ:"
 
 #~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 #~ msgstr "%(sender_name)s -ը ստեղծեց \"%(team_name)s\" նախագիծը / խումբը %(portal_name)s - ում!"
 
-#~ msgid "All societies"
-#~ msgstr "Բոլոր հասարակությունները"
-
-#~ msgid "All projects"
-#~ msgstr "Բոլոր նախագծերը"
-
-#, fuzzy
-#~ msgid "Conference Dashboard"
-#~ msgstr "Կառավարման վահանակ"
-
-#~ msgid "The following Groups were converted to Projects:"
-#~ msgstr "Հետևյալ Խմբերը վերափոխվել են Ծրագրերի:"
-
-#, fuzzy
-#~| msgid "Search for Ideas"
-#~ msgid "Search for email"
-#~ msgstr "Փնտրել գաղափարներ"
-
-#~ msgid "Re-Activate Project/Group"
-#~ msgstr "Վերաակտիվացրել նախագիծը/ խումբը"
-
-#~ msgid "Deactivate Project/Group"
-#~ msgstr "Ապաակտիվացնել նախագիծը/ խումբը"
-
-#~ msgid "Deactivated Projects and Groups"
-#~ msgstr "Դեակտիվացված նախագծեր և խմբեր"
-
-#~ msgid "Public Group"
-#~ msgstr "Հասարակական Խումբ"
+#~ msgid "%(team_name)s was deactivated successfully!"
+#~ msgstr "%(team_name)s- ն հաջողությամբ ապակտիվացվել է!"
 
 #~ msgid "All groups"
 #~ msgstr "Բոլոր խմբերը"
 
-#~ msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
-#~ msgstr "Մենք ձեզ էլ. փոստով ուղարկել ենք համապատասխան հրահանգները գաղտնաբառ ստեղծելու համար: Դուք շուտով կստանաք դրանք."
+#~ msgid "All projects"
+#~ msgstr "Բոլոր նախագծերը"
 
-#~ msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
-#~ msgstr "Ներեցեք, միայն պորտալի ադմինիստրատորները կարող են ստեղծել Խմբեր: Կարող եք ստեղծել նախագիծ, կամ հաղորդագրություն գրել ադմինիստրատորներից մեկին `խումբ ստեղծելու համար: Ստորև կարող եք գտնել բոլոր ադմինիստրատորների ցուցակը."
+#~ msgid "All societies"
+#~ msgstr "Բոլոր հասարակությունները"
 
-#~ msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
-#~ msgstr "Ձեր հրավերը %(team_type)s “%(team_name)s”- ին հաջողությամբ մերժվել է."
+#~ msgid "Arabic--NATIVE-LANGUAGE"
+#~ msgstr "العربية"
+
+#~ msgid "Armenian--NATIVE-LANGUAGE"
+#~ msgstr "Հայոց լեզու"
+
+#~ msgid "Attach existing Files..."
+#~ msgstr "Կցել առկա ֆայլերը ..."
+
+#~ msgid "Azerbaijani--NATIVE-LANGUAGE"
+#~ msgstr "Azerbaycan dili"
+
+#, fuzzy
+#~ msgid "Banner Image"
+#~ msgstr "Վերնամասի պատկեր"
+
+#~ msgid "Belarussian--NATIVE-LANGUAGE"
+#~ msgstr "Беларуская"
 
 #~ msgid "Choose App"
 #~ msgstr "Ընտրել հավելվածը"
 
 #, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Սխալ!"
+#~ msgid "Conference Dashboard"
+#~ msgstr "Կառավարման վահանակ"
+
+#~ msgid "Czech--NATIVE-LANGUAGE"
+#~ msgstr "Čeština"
+
+#~ msgid "Deactivate Project/Group"
+#~ msgstr "Ապաակտիվացնել նախագիծը/ խումբը"
+
+#~ msgid "Deactivate users (will keep all all items they created on the site)"
+#~ msgstr "Ապաակտիվացնել օգտատերերին (կպահպանվի նրանց կողմից կայքում ստեղծված բոլոր կետերը)"
+
+#~ msgid "Deactivated Projects and Groups"
+#~ msgstr "Դեակտիվացված նախագծեր և խմբեր"
+
+#~ msgid "Deutsch--NATIVE-LANGUAGE"
+#~ msgstr "Deutsch"
+
+#~ msgid "Dutch--NATIVE-LANGUAGE"
+#~ msgstr "Nederlands"
+
+#~ msgid "English--NATIVE-LANGUAGE"
+#~ msgstr "English"
+
+#~ msgid "French--NATIVE-LANGUAGE"
+#~ msgstr "Français"
+
+#~ msgid "Georgian--NATIVE-LANGUAGE"
+#~ msgstr "ქართული ენა"
 
 #~ msgid ""
 #~ "Hallo, %(user_name)s! Herzlich willkommen bei %(site_name)s! \n"
@@ -7925,60 +8289,100 @@ msgstr "Ձեր փոփոխությունները պահպանվել են."
 #~ "Viele Grüße und viel Spaß hier,\n"
 #~ "das %(site_name)s Team"
 
+#~ msgid "Hebrew--NATIVE-LANGUAGE"
+#~ msgstr "עברית"
+
 #, fuzzy
-#~| msgid "Here you can find an overview of Ideas you have liked."
 #~ msgid "Here you can find an overview of items you follow."
 #~ msgstr "Այստեղ կարող եք գտնել ձեր հավանած գաղափարների ակնարկը."
 
 #~ msgid "Hi,"
 #~ msgstr "Ողջույն,"
 
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Իմ Նախագծերը և Խմբերը"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Իմ Նախագծերը և Խմբերը"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Նամակներ"
+#~ msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
+#~ msgstr "Եթե ցանկանում եք ջնջել որևէ բովանդակություն, խնդրում ենք վերադառնալ և դա անել հիմա: Ձեր պրոֆիլը ջնջելուց հետո այլևս մուտք չեք ունենա ձեր էջում ստեղծած որևէ նյութի."
 
 #~ msgid "Invited you"
 #~ msgstr "Հրավիրել է ձեզ"
 
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Համամասնություններ"
+#~ msgid "Kazakh--NATIVE-LANGUAGE"
+#~ msgstr "Қазақ тілі"
 
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Նախագծեր / Խմբեր"
+#~ msgid "Polish--NATIVE-LANGUAGE"
+#~ msgstr "Polski"
 
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Սխալ!"
+#~ msgid "Public Group"
+#~ msgstr "Հասարակական Խումբ"
+
+#~ msgid "Re-Activate Project/Group"
+#~ msgstr "Վերաակտիվացրել նախագիծը/ խումբը"
 
 #~ msgid "Revoked your admin status"
 #~ msgstr "Ձեր ադմինիստրատորի կարգավիճակը չեղարկված է"
 
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Վերբեռնել պատկեր."
+#~ msgid "Romanian--NATIVE-LANGUAGE"
+#~ msgstr "Română"
+
+#~ msgid "Russian--NATIVE-LANGUAGE"
+#~ msgstr "Русский"
 
 #, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Նախագծեր / Խմբեր"
+#~ msgid "Search for email"
+#~ msgstr "Փնտրել գաղափարներ"
+
+#~ msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
+#~ msgstr "Ներեցեք, միայն պորտալի ադմինիստրատորները կարող են ստեղծել Խմբեր: Կարող եք ստեղծել նախագիծ, կամ հաղորդագրություն գրել ադմինիստրատորներից մեկին `խումբ ստեղծելու համար: Ստորև կարող եք գտնել բոլոր ադմինիստրատորների ցուցակը."
+
+#~ msgid "Spanish--NATIVE-LANGUAGE"
+#~ msgstr "Español"
+
+#~ msgid "The following Groups were converted to Projects:"
+#~ msgstr "Հետևյալ Խմբերը վերափոխվել են Ծրագրերի:"
+
+#, fuzzy
+#~ msgid "This process is reversible. You can reactivate the conference from your user profile page at any time."
+#~ msgstr "Այս գործընթացը փոխարկելի է: Կարող եք ցանկացած պահի ակտիվացնել նախագիծը / խումբը ձեր էջից."
+
+#, fuzzy
+#~ msgid "This process is reversible. You can reactivate the group from your user profile page at any time."
+#~ msgstr "Այս գործընթացը փոխարկելի է: Կարող եք ցանկացած պահի ակտիվացնել նախագիծը / խումբը ձեր էջից."
+
+#, fuzzy
+#~ msgid "This process is reversible. You can reactivate the project from your user profile page at any time."
+#~ msgstr "Այս գործընթացը փոխարկելի է: Կարող եք ցանկացած պահի ակտիվացնել նախագիծը / խումբը ձեր էջից."
+
+#~ msgid "Time"
+#~ msgstr "Ժամանակ"
+
+#~ msgid "Ukrainian--NATIVE-LANGUAGE"
+#~ msgstr "Українська"
+
+#~ msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
+#~ msgstr "Մենք ձեզ էլ. փոստով ուղարկել ենք համապատասխան հրահանգները գաղտնաբառ ստեղծելու համար: Դուք շուտով կստանաք դրանք."
 
 #~ msgid "What's the latest news?"
 #~ msgstr "Ո՞րոնք են վերջին նորությունները?"
+
+#, fuzzy
+#~ msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Դուք պատրաստվում եք ապաակտիվացնել այս նախագիծը / խումբը: Այն և դրա ամբողջ բովանդակությունը անտեսանելի կլինեն կայքում."
+
+#, fuzzy
+#~ msgid "You are about to deactivate this group. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Դուք պատրաստվում եք ապաակտիվացնել այս նախագիծը / խումբը: Այն և դրա ամբողջ բովանդակությունը անտեսանելի կլինեն կայքում."
+
+#, fuzzy
+#~ msgid "You are about to deactivate this project. It and all of its content will be hidden on the website and invisible to everyone, including you."
+#~ msgstr "Դուք պատրաստվում եք ապաակտիվացնել այս նախագիծը / խումբը: Այն և դրա ամբողջ բովանդակությունը անտեսանելի կլինեն կայքում."
 
 #~ msgid "You cannot change your own admin status."
 #~ msgstr "Դուք չեք կարող փոխել ադմինիստրատորի ձեր սեփական կարգավիճակը."
 
 #~ msgid "You were tagged by %(sender_name)s"
 #~ msgstr "Ձեզ նշել է %(sender_name)s -ը"
+
+#~ msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
+#~ msgstr "Ձեր հրավերը %(team_type)s “%(team_name)s”- ին հաջողությամբ մերժվել է."
 
 #, fuzzy
 #~ msgid "email"

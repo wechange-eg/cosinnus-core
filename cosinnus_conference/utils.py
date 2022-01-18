@@ -35,9 +35,14 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
     """
     Send conference reminder email a week/day/hour before start
     """
+    # set these here, as they should always be in the translation of the sending user
+    # as they saw it before sending, and not in the language of the receiving user that we set later
+    initial_template_subject = get_initial_template(f'{field_name}_subject')
+    initial_template_content = get_initial_template(f'{field_name}_content')
+    
     def render_template(extra_fields, field_name, field_type, user, group):
         template = extra_fields.get(f'reminder_{field_name}_{field_type}')
-        template = template or get_initial_template(f'{field_name}_{field_type}')
+        template = template or (initial_template_subject if field_type == 'subject' else initial_template_content)
         variables = {
             'name': group['name'],
             'from_date': date(timezone.localtime(group.from_date), 'SHORT_DATETIME_FORMAT'),

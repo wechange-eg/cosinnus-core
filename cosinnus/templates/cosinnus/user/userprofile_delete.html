@@ -33,15 +33,16 @@
             <!-- explanation text -->
             <div class="col-md-12">
                 <div class="textfield transparent">
-                    <p>{% trans "By clicking the button below, you will irrevocably delete your user account, profile and personal information from this site." %}</p><!-- Text here if neccessary -->
+                    <p>{% trans "By clicking the button below, you will irrevocably delete your user account, profile and personal information from this site." %}</p>
                     <br/>
                     <p>
                         {% trans "Your created documents, news posts, uploaded files, and other content will be retained on the site. However this content will no longer bear your name or be connected to you." %}
                         {% trans "On Rocket Chat, your profile direct messages will be deleted, but within discussions and channels, the content will remain." %}
                         {% trans "If you still want to delete content, please do so now by deleting the content on the corresponding pages." %}
-                    </p><!-- Text here if neccessary -->
+                    </p>
                     <br/>
-                    <p>{% trans "Your profile will first be deactivated and removed completely from the platform. After 30 days and only then will it be permanently deleted from our database. In our backup systems the account may be stored for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion." %}</p><!-- Text here if neccessary -->
+                    <p>{% trans "Your profile will first be deactivated and removed completely from the platform. After 30 days and only then will it be permanently deleted from our database. In our backup systems the account may be stored for up to 6 months. If this is too long for you, please contact the support of this platform for immediate deletion." %}</p>
+                    <p>{% trans "During the 30-day period, your account's e-mail address will be reserved and can not be used to register a new account." %}</p>
                 </div>
             </div>
         </div><!-- row -->
@@ -50,9 +51,9 @@
     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#delete_confirm_modal">
         <ul class="media-list">
             <li class="media">
-                <a class="pull-left" href="#">
+                <span class="pull-left">
                     <i class="fa fa-check"></i>
-                </a>
+                </span>
                 <div class="media-body">
                     {% trans "Delete Account" %}
                 </div>

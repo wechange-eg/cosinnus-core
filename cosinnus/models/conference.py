@@ -10,8 +10,9 @@ from django.contrib.contenttypes.fields import GenericForeignKey, \
     GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.fields import JSONField as PostgresJSONField
+from django.core.serializers.json import DjangoJSONEncoder
 from django.core.cache import cache
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, ImproperlyConfigured
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
@@ -24,13 +25,18 @@ import six
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import get_tag_object_model
+from cosinnus_event.mixins import BBBRoomMixin # noqa
+from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
 from cosinnus.utils.files import get_conference_conditions_filename
 from cosinnus.utils.functions import clean_single_line_text, \
-    unique_aware_slugify
+    unique_aware_slugify, update_dict_recursive
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.views.mixins.group import ModelInheritsGroupReadWritePermissionsMixin
+from copy import copy, deepcopy
+from django.urls.base import reverse
+from _collections import defaultdict
 
 
 logger = logging.getLogger('cosinnus')
@@ -41,29 +47,37 @@ def get_parent_object_in_conference_setting_chain(source_object):
         and return that higher-level object. 
     
         The hierarchy chain is:
-        - cosinnus.BBBRoom
-        - cosinnus_event.ConferenceEvent 
-        - cosinnus.CosinnusConferenceRoom
-        - cosinnus.CosinnusGroup
-        - cosinnus.CosinnusPortal 
+        - cosinnus.BBBRoom --> (cosinnus_event.ConferenceEvent, cosinnus_event.Event, cosinnus.CosinnusGroup)
+        - cosinnus_event.ConferenceEvent --> cosinnus.CosinnusConferenceRoom
+        - cosinnus.CosinnusConferenceRoom --> cosinnus.CosinnusGroup
+        - cosinnus.CosinnusGroup --> cosinnus.CosinnusPortal 
+        - cosinnus.CosinnusPortal --> None (means the parameters configured in settings.py are used)
         
         @param return: None if it arrived at CosinnusPortal or was given None. Else, the higher object in the chain. """ 
-        
+    
     if source_object is None:
         return None
     try:
         from cosinnus_event.models import ConferenceEvent # noqa
     except ImportError:
         ConferenceEvent = None
+    try:
+        from cosinnus_event.models import Event # noqa
+    except ImportError:
+        Event = None
     from cosinnus.models.bbb_room import BBBRoom
                     
-    # BBBRoom --> tagged object for this room if there is one
-    if type(source_object) is BBBRoom and ConferenceEvent is not None:
-        conference_event = get_object_or_None(ConferenceEvent, media_tag__bbb_room=source_object)
-        return conference_event
+    # BBBRoom --> source object that has the `media_tag` this room is attached to
+    if type(source_object) is BBBRoom:
+        room_source = source_object.source_object
+        if room_source is not None:
+            return room_source
     # ConferenceEvent --> CosinnusConferenceRoom
     if ConferenceEvent is not None and type(source_object) is ConferenceEvent:
         return source_object.room
+    # regular Event --> CosinnusGroup
+    if Event is not None and type(source_object) is Event:
+        return source_object.group
     # ConferenceRoom --> CosinnusGroup
     if type(source_object) is CosinnusConferenceRoom:
         return source_object.group
@@ -81,16 +95,47 @@ class CosinnusConferenceSettings(models.Model):
         checked for this settings object, and if not found, the next higher level
         settings will be inherited. """
     
+    SETTING_NO = 0
+    SETTING_YES = 1
+    SETTING_INHERIT = 9999
+    CHOICE_INHERIT = (SETTING_INHERIT, _('--- UNSET (Inherit) ---'))
+    
+    BBB_SERVER_CHOICES_WITH_INHERIT = tuple(
+        list(settings.COSINNUS_BBB_SERVER_CHOICES) +\
+        [CHOICE_INHERIT]
+    )
+    PRESET_FIELD_CHOICES = (
+        CHOICE_INHERIT,
+        (SETTING_NO, _('No')),
+        (SETTING_YES, _('Yes')),
+    )
+    
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey("content_type", "object_id")
     
     bbb_server_choice = models.PositiveSmallIntegerField(_('BBB Server'), blank=False,
-        default=0, choices=settings.COSINNUS_BBB_SERVER_CHOICES,
+        default=SETTING_INHERIT, choices=BBB_SERVER_CHOICES_WITH_INHERIT,
         help_text='The default chosen BBB-Server/Cluster setting for the generic object. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!')
     bbb_server_choice_premium = models.PositiveSmallIntegerField(_('BBB Server for Premium Conferences'), blank=False,
-        default=0, choices=settings.COSINNUS_BBB_SERVER_CHOICES,
+        default=SETTING_INHERIT, choices=BBB_SERVER_CHOICES_WITH_INHERIT,
         help_text='The chosen BBB-Server/Cluster setting for the generic object, that will be used when the group of that object is currently in its premium state. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!')
+    
+    bbb_params = PostgresJSONField(default=dict, blank=True, verbose_name=_('BBB API Parameters'),
+            help_text='Custom parameters for API calls like join/create for all BBB rooms for this object and in its inherited objects.',
+            encoder=DjangoJSONEncoder)
+    
+    # The nature (str or None) set through the source object for this config object. 
+    # Only set during retrieval by `get_for_object()`.
+    # See `BBBRoomMixin.get_bbb_room_nature()` for info on natures.
+    bbb_nature = None
+    
+    # list of field names that can be overwritten during higher-chain inheritance
+    # these fields all need to be able to take on the value of `SETTING_INHERIT`
+    INHERITABLE_FIELDS = [
+        'bbb_server_choice',
+        'bbb_server_choice_premium',
+    ]
     
     CACHE_KEY = 'cosinnus/core/conferencesetting/class/%s/id/%d'
     
@@ -99,28 +144,42 @@ class CosinnusConferenceSettings(models.Model):
         verbose_name = _('Cosinnus Conference Setting')
         verbose_name_plural = _('Cosinnus Conference Settings')
         unique_together = (('content_type', 'object_id',),)
+        
+    def __init__(self, *args, **kwargs):
+        self.bbb_nature = None
+        super().__init__(*args, **kwargs)
     
     @classmethod
-    def get_for_object(cls, source_object=None, no_traversal=False):
+    def get_for_object(cls, source_object, no_traversal=False, recursed=False):
         """ Given any object in the BBB settings hierarchy chain,
-            checks if there is a settings object attached and returns it,
-            or checks the next higher object in the chain.
+            this returns an agglomeration of all the settings objects attached to `source_object`
+            and all inherited objects higher up in the object chain. 
+            
             If arrived at CosinnusPortal, and no setings object is found,
             None is returned.
             
             The currently supported source_object attachment points for CosinnusConferenceSettings are, 
-            in order of the hierarchy chain (see ``).
+            in order of the hierarchy chain: see `get_parent_object_in_conference_setting_chain`.
             
             Furthermore, this function will accept these models as source_object 
             and use the resolved cosinnus_event.ConferenceEvent as chain starting point, if there is one:
                 - cosinnus.BBBRoom 
+                
+            The nature of the source object will be taken on retrieval using this method and
+            saved in the returned config object. Once `get_finalized_bbb_params()` is called,
+            the nature will determine some of the applied BBB api call params.
+            See `BBBRoomMixin.get_bbb_room_nature()` for info on natures.
             
             @param source_object: Any object. If it matches a model valid for the chain, we check the chain.
-                                    If None is supplied, the portal default settings will be returned.
             @param no_traversal: if True, will only attempt to find a setting object on the `source_object`
                                     and not recursively check its parents
+            @param recursed: True if we're in a recursed call. will not save caches here
             .
         """
+        if source_object is None:
+            logger.warn('`CosinnusConferenceSettings.get_for_object` called with None as `source_object`! This should not happen!')
+            return None
+        
         # if no object is given, use the portal as default
         obj = source_object or CosinnusPortal.get_current()
         
@@ -134,32 +193,230 @@ class CosinnusConferenceSettings(models.Model):
             conference_settings = None
             try:
                 conference_settings = obj.conference_settings_assignments.all()[0]
-            except:
-                pass
+            except Exception as e:
+                if settings.DEBUG:
+                    logger.warn(f'DEBUG warning: {type(obj)} has no conference_settings_assignments. {e}')
             if conference_settings:
                 setting_obj = conference_settings
             
-            # CosinnusPortal --> (End of chain because the portal had no settings, and settings seem to be configured anywhere)
-            if setting_obj == 'UNSET' and (no_traversal or source_object is None or type(obj) is CosinnusPortal):
+            if setting_obj and setting_obj != 'UNSET' and not no_traversal:
+                # we have a setting object for our current object, and it wasn't cached yet
+                # check if we have higher up parent *source* object
+                # if not, we're fine to let the recursion chain end
+                parent_object = get_parent_object_in_conference_setting_chain(obj)
+                if parent_object:
+                    # if there is a higher up source object, check recursively if that object has a settings object
+                    parent_settings_object = cls.get_for_object(parent_object, recursed=True)
+                    if parent_settings_object:
+                        # if we have a higher parent settings object, merge it into ours to inherit the values
+                        # we make our settings object a readonly copy now, as it should never be saved in the merged state
+                        setting_obj = setting_obj.get_readonly_copy()
+                        setting_obj.merge_in_inherited_settings_object(parent_settings_object)
+            elif setting_obj == 'UNSET' and (no_traversal or type(obj) is CosinnusPortal):
+                # CosinnusPortal --> (End of chain because the portal had no settings, and settings seem to be configured anywhere)
                 setting_obj = None
-            
-            if setting_obj == 'UNSET':
+            elif setting_obj == 'UNSET':
                 # no settings found; check next object in chain:
                 parent_object = get_parent_object_in_conference_setting_chain(obj)
-                setting_obj = cls.get_for_object(parent_object)
-                
-            cache.set(cache_key, setting_obj, settings.COSINNUS_CONFERENCE_SETTING_MICRO_CACHE_TIMEOUT)
+                if parent_object:
+                    setting_obj = cls.get_for_object(parent_object, recursed=True)
+                    
+            # final, outside iteration:
+            if not recursed:
+                # set bbb room nature
+                if setting_obj and setting_obj != 'UNSET' and hasattr(source_object, 'get_bbb_room_nature'):
+                    setting_obj.bbb_nature = source_object.get_bbb_room_nature()
+                cache.set(cache_key, setting_obj, settings.COSINNUS_CONFERENCE_SETTING_MICRO_CACHE_TIMEOUT)
         
         return setting_obj
+    
+    def merge_in_inherited_settings_object(self, inherit_target):
+        """ Merges this object "on top" of the `inherit_target` CosinnusConferenceSettings object
+            to inherit all values from the target, that aren't set in this object 
+            @return: self, with missing values inherited from `inherit_target` """
+        # safety type check
+        if not (type(self) is CosinnusConferenceSettings and type(inherit_target) is CosinnusConferenceSettings):
+            raise ImproperlyConfigured(f'Programming Error: `merge_in_inherited_settings_object()` got passed mismatching types {type(self)} and {type(inherit_target)}')
+        for field_name in self.INHERITABLE_FIELDS:
+            if getattr(self, field_name, 'UNSET') == self.SETTING_INHERIT:
+                setattr(self, field_name, getattr(inherit_target, field_name))
+        # for bbb_params, recursively update the lower dict with out
+        self.bbb_params = update_dict_recursive(inherit_target.bbb_params, self.bbb_params)
+        return self
+    
+    def get_raw_bbb_params(self, no_defaults=False):
+        """ Return a copy of the `bbb_param` field of this config object,
+            which contains inherited values of higher-up-objects if
+            this instance was obtained with `CosinnusConferenceSettings.get_for_object`.
+            This takes the portal default BBB params from `BBB_PARAM_PORTAL_DEFAULTS`
+            as initial base params, unless `no_defaults=True` is supplied.
+         """
+        params = {} if no_defaults else deepcopy(settings.BBB_PARAM_PORTAL_DEFAULTS)
+        update_dict_recursive(params, self.bbb_params)
+        return params
+    
+    def get_finalized_bbb_params(self, no_defaults=False):
+        """ Return a flattened copy of the `bbb_param` field of this config object,
+            with all room-nature values of the params merged into the params or discarded,
+            depending on the nature supplied.
+            The returned params contain inherited values of higher-up-objects if
+            this instance was obtained with `CosinnusConferenceSettings.get_for_object`.
+            This takes the portal default BBB params from `BBB_PARAM_PORTAL_DEFAULTS`
+            as initial base params, unless `no_defaults=True` is supplied.
+            
+            Nature-specific settings are merged by copying each item-pair of a configured
+            nature-specific-api-call in the params over the corresponding base api-call
+            in the params. All nature-specific-api-calls of other natures are discarded.
+            Example: With nature 'coffee', 'join__coffee' items are copied over 'join'.
+         """
+        params = self.get_raw_bbb_params(no_defaults=no_defaults)
+        # merge all params if this object has a set nature
+        if self.bbb_nature:
+            for call_key in list(params.keys()):
+                if call_key.endswith(f'__{self.bbb_nature}'):
+                    base_key = call_key.split('__')[0]
+                    base_call_params = copy(params.get(base_key, {}))
+                    base_call_params.update(params[call_key])
+                    params[base_key] = base_call_params
+        # discard all nature-specific params
+        keys_to_delete = [call_key for call_key in params.keys() if '__' in call_key]
+        for key_to_delete in keys_to_delete:
+            del params[key_to_delete]
+        return params
+    
+    def get_bbb_preset_form_field_values(self, no_defaults=False):
+        """ Get the chosen/inherited choice values for `BBB_PRESET_FORM_FIELD_PARAMS` this config object.
+            @param no_inheritance: if True, will only return values for the current object,
+                and won't replace inherited values with default values configured in settings.
+                If this is set to True, the choice_values returned may equal `SETTING_INHERIT` too.
+            @param nature: the nature of the source object (type of event) for replacing specific call params
+            @return: a dict of {<field_name>: <choice_value>, ...} """
+        value_choices_dict = {}  
+        bbb_params = self.get_finalized_bbb_params(no_defaults=no_defaults)
         
+        for field_name in settings.BBB_PRESET_USER_FORM_FIELDS:
+            field_choice_dict = settings.BBB_PRESET_FORM_FIELD_PARAMS.get(field_name)
+            # match the first preset_value that exists and isn't empty 
+            # and fulfills all conditions in the current settings object
+            matched_value = self.SETTING_INHERIT
+            for preset_value, preset_call_config in field_choice_dict.items():
+                # match first occurence in this loop and break if found
+                if preset_call_config:
+                    matching = True
+                    for api_call_name, api_call_params in preset_call_config.items():
+                        # check if all params that occur in `BBB_PRESET_FORM_FIELD_PARAMS`
+                        # occur in each corresponding value -> call -> param-list in the current settings object
+                        if not api_call_params or not all([
+                                    bbb_params.get(api_call_name, {}).get(param_key, None) == param_val 
+                                    for param_key, param_val in api_call_params.items()
+                                ]):
+                            matching = False
+                            break
+                    if matching:
+                        matched_value = preset_value
+                        break
+            # if the settings object has no set value, the portal default value is used
+            if matched_value == self.SETTING_INHERIT and not no_defaults:
+                logger.warning(f'BBB option parameter building: A portal default value for "{field_name}" was not set in `BBB_PARAM_PORTAL_DEFAULTS`! Assuming "no" for this value.')
+                matched_value = self.SETTING_NO
+            value_choices_dict[field_name] = matched_value
+        return value_choices_dict
+    
+    def set_bbb_preset_form_field_values(self, preset_choices_dict):
+        """ Generates from scratch and sets the `bbb_params` for this config object, given a list of
+            user-chosen values and presets from presets from `BBB_PRESET_FORM_FIELD_PARAMS` """
+        bbb_params = {}
+        # Step 1: we create a fresh set of BBB params 
+        #     from only the chosen preset choices in the form
+        for field_name, choice_value in preset_choices_dict.items():
+            if field_name in settings.BBB_PRESET_FORM_FIELD_PARAMS and \
+                    choice_value is not None and choice_value != self.SETTING_INHERIT:
+                call_dict = settings.BBB_PRESET_FORM_FIELD_PARAMS.get(field_name).get(choice_value, {})
+                update_dict = {}
+                # add nature suffixes to the call keys if this config object has a nature
+                for call_key, call_param_dict in call_dict.items():
+                    if self.bbb_nature:
+                        call_key = f'{call_key}__{self.bbb_nature}'
+                    update_dict[call_key] = call_param_dict
+                bbb_params.update(update_dict)
+                
+        # Step 2: we carry over any "unknown" values, that aren't defined in presets,
+        #     so we don't clear the field when no preset is set, but an admin has
+        #     manually entered new parameters
+        #     collect for each API-call a list of names of keys we know
+        call_keys = defaultdict(set) # e.g. {'create': ['muteOnStart'], 'join': ['userdata-bbb_auto_share_webcam']}
+        for preset_field_name in [preset for preset in settings.BBB_PRESET_USER_FORM_FIELDS]:
+            call_dict = settings.BBB_PRESET_FORM_FIELD_PARAMS[preset_field_name]
+            for _choice, api_call_param_dict in call_dict.items():
+                for api_name, param_dict in api_call_param_dict.items():
+                    call_keys[api_name].update(param_dict.keys())
+        
+        # find any keys from our old about-to-be-overwritten params, that aren't in the known list for carrying over
+        for api_name_key, api_name_val in self.bbb_params.items():
+            # if the call key isn't even known, doesnt make sense, but we still keep the value
+            if api_name_key not in call_keys:
+                bbb_params[api_name_key] = api_name_val
+                continue
+            if type(api_name_val) is dict:
+                for param_key, param_val in api_name_val.items():
+                    if param_key not in call_keys[api_name_key]:
+                        # we do not know this key in the second level of params, so save them
+                        if api_name_key not in bbb_params:
+                            bbb_params[api_name_key] = {}
+                        bbb_params[api_name_key][param_key] = param_val
+        self.bbb_params = bbb_params
+        
+    def has_changed_inherited_fields(self):
+        """ Returns True if any of the inheritable fields as a value other than the default inherit marker,
+            or if the `bbb_params` field is set, False else. 
+            If this returns False, it means that this settings instance carries no extra information and could be 
+            deleted without losing anything. """
+        return bool(
+            any([getattr(self, field_name) != self.SETTING_INHERIT for field_name in self.INHERITABLE_FIELDS]) \
+            or self.bbb_params
+        )
+    
+    def get_readonly_copy(self):    
+        """ Return a readonly copy of this instance, so that it can be passed around in the 
+            inheritance chain to collect unset values off of settings objects higher up in the chain.
+            The save() and delete() functions are blocked to prevent accidental persisting of the fields. """
+        readonly_copy = copy(self)
+        setattr(readonly_copy, 'save', self._protected_func)
+        setattr(readonly_copy, 'delete', self._protected_func)
+        return readonly_copy
+    
+    def _protected_func(self, *args, **kwargs):
+        raise ImproperlyConfigured('This function cannot be used on an instance converted with `get_readonly_copy()`')
+    
+    
+    def save(self, ignore_inherit_condition=False, *args, **kwargs):
+        """ If the instance has no actual overwritten settings (all are set to inherited), 
+            discard it if it hasn't been created yet, and delete it if it already existed """
+        if not self.has_changed_inherited_fields() and not ignore_inherit_condition:
+            if self.pk:
+                self.delete()
+                self.pk = None
+            return
+        super().save(*args, **kwargs)
+    
+    def _text_for_server_choice(self, choice_id):
+        choice_dict = dict(settings.COSINNUS_BBB_SERVER_CHOICES)
+        if choice_id not in choice_dict:
+            auth_dict = dict(settings.COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS)
+            if choice_id in auth_dict:
+                # if the BBB choice was removed and is still in auth servers, return the URL
+                return f'(Deprecated Server Choice): {auth_dict[choice_id][0]}'
+            else:
+                return '(Invalid BBB server, possibly removed)'
+        return choice_dict[choice_id]
     
     @property
     def bbb_server_choice_text(self):
-        return settings.COSINNUS_BBB_SERVER_CHOICES[self.bbb_server_choice][1]
+        return self._text_for_server_choice(self.bbb_server_choice)
     
     @property
     def bbb_server_choice_premium_text(self):
-        return settings.COSINNUS_BBB_SERVER_CHOICES[self.bbb_server_choice_premium][1]
+        return self._text_for_server_choice(self.bbb_server_choice_premium)
     
 
 class CosinnusConferenceRoomQS(models.query.QuerySet):
@@ -186,7 +443,9 @@ class CosinnusConferenceRoomManager(models.Manager):
     
 
 @python_2_unicode_compatible
-class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models.Model):
+class CosinnusConferenceRoom(TranslateableFieldsModelMixin, BBBRoomMixin,
+                             ModelInheritsGroupReadWritePermissionsMixin,
+                             models.Model):
     """ A model for rooms inside a conference group object.
         Each room will be displayed as a list in the conference main page
         and can be displayed in different ways, depending on its type """
@@ -217,7 +476,17 @@ class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models
         TYPE_DISCUSSIONS,
         TYPE_COFFEE_TABLES,
     )
+
+    ROOM_TYPES_WITH_EVENT_FORM = (
+        TYPE_LOBBY,
+        TYPE_STAGE,
+        TYPE_WORKSHOPS,
+        TYPE_DISCUSSIONS,
+        TYPE_COFFEE_TABLES,
+    )
     
+    if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
+        translateable_fields = ['title', 'description']
     group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, verbose_name=_('Team'),
         related_name='rooms', on_delete=models.CASCADE)
 
@@ -279,7 +548,6 @@ class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models
     
     objects = CosinnusConferenceRoomManager()
     
-    
     class Meta(object):
         ordering = ('sort_index', 'title')
         verbose_name = _('Conference Room')
@@ -307,6 +575,14 @@ class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models
         
         # initialize/sync room-type-specific extras
         self.ensure_room_type_dependencies()
+    
+    def get_admin_change_url(self):
+        """ Returns the django admin edit page for this object. """
+        return reverse('admin:cosinnus_cosinnusconferenceroom_change', kwargs={'object_id': self.id})
+    
+    def get_group_for_bbb_room(self):
+        """ For BBBRoomMixin, overridable function to the group for this BBB room. Can be None. """
+        return self.group
         
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:conference:room', kwargs={'group': self.group, 'slug': self.slug})
@@ -345,7 +621,7 @@ class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models
         if settings.COSINNUS_ROCKET_ENABLED and self.type in self.ROCKETCHAT_ROOM_TYPES \
                 and not settings.COSINNUS_CONFERENCES_USE_COMPACT_MODE:
             if not self.rocket_chat_room_id or force:
-                from cosinnus_message.rocket_chat import RocketChatConnection
+                from cosinnus_message.rocket_chat import RocketChatConnection # noqa
                 rocket = RocketChatConnection()
                 room_name = f'{self.slug}-{self.group.slug}-{get_random_string(7)}'
                 internal_room_id = rocket.create_private_room(room_name, self.creator, 
@@ -363,6 +639,10 @@ class CosinnusConferenceRoom(ModelInheritsGroupReadWritePermissionsMixin, models
         return self.events.filter(is_break=False)\
                 .exclude(type=ConferenceEvent.TYPE_COFFEE_TABLE)\
                 .order_by('from_date')
+
+    @property
+    def has_event_form(self):
+        return self.type in self.ROOM_TYPES_WITH_EVENT_FORM
 
 
 class ParticipationManagement(models.Model):

@@ -42,7 +42,7 @@ class SplitMultiLangTabsMixin(object):
         super(self).__init__(*args, **kwargs)
         if self.__class__ in PAGE_EDIT_HANDLERS and not getattr(PAGE_EDIT_HANDLERS[self.__class__], '_MULTILANG_TABS_PATCHED', False):
             handler = PAGE_EDIT_HANDLERS[self.__class__]
-            tabs = [tab_handler.bind_to_model(self.__class__) for tab_handler in self._split_i18n_wagtail_translated_panels(self.content_panels)]
+            tabs = [tab_handler.bind_to(model=self.__class__) for tab_handler in self._split_i18n_wagtail_translated_panels(self.content_panels)]
             handler.children = tabs + handler.children[1:]
             handler._MULTILANG_TABS_PATCHED = True
 

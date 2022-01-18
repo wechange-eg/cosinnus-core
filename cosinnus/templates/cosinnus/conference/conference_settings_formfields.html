@@ -1,0 +1,22 @@
+{% load i18n  cosinnus_tags  %}
+
+<p class="transparent">
+    {% trans "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!" %}
+</p>
+{% for field_name in SETTINGS.BBB_PRESET_USER_FORM_FIELDS %}
+    {% if field_name == 'mic_starts_on' and form.mic_starts_on %}
+        {% captureas mic_starts_on_label %}
+            {% trans "Turn on microphone on entering" %}
+            ({% trans "Default" %}: <b>{{ form.inherited_field_value_labels.mic_starts_on }})</b>
+        {% endcaptureas %}
+        {% include 'cosinnus/fields/condensed_radio_field.html' with field=form.mic_starts_on label=mic_starts_on_label %}
+    {% endif %}
+    
+    {% if field_name == 'cam_starts_on' and form.cam_starts_on %}
+        {% captureas cam_starts_on_label %}
+            {% trans "Turn on camera on entering" %}
+            ({% trans "Default" %}: <b>{{ form.inherited_field_value_labels.cam_starts_on }})</b>
+        {% endcaptureas %}
+        {% include 'cosinnus/fields/condensed_radio_field.html' with field=form.cam_starts_on label=cam_starts_on_label %}
+    {% endif %}
+{% endfor %}

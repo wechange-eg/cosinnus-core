@@ -89,6 +89,7 @@ module.exports = BaseView.extend({
     	var self = this;
 		return new Promise(function(resolve, reject) {
 			self.state['hadErrors'] = false;
+			self.state['errorResponseText'] = null;
 			
 			// build URL
 			var params = self.getParamsForFetchRequest(loadOptions);
@@ -110,6 +111,7 @@ module.exports = BaseView.extend({
                 },
                 error: function (xhr, textStatus) {
                     self.state['hadErrors'] = true;
+                    self.state['errorResponseText'] = xhr.responseText;
                 },
                 complete: function (xhr, textStatus) {
                 	resolve();

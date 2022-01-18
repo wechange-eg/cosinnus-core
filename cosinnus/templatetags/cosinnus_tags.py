@@ -29,7 +29,8 @@ from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_group_create_objects_access, check_object_read_access, get_user_token,
     check_user_portal_admin, check_user_superuser,
     check_object_likefollowstar_access, filter_tagged_object_queryset_for_user,
-    check_user_can_create_conferences, check_user_can_create_groups)
+    check_user_can_create_conferences, check_user_can_create_groups,
+    check_user_portal_manager)
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,  CommaSeparatedSelect2MultipleWidget
 from cosinnus.models.tagged import get_tag_object_model, BaseTagObject,\
     LikeObject, CosinnusTopicCategory
@@ -46,7 +47,7 @@ from django.utils.encoding import force_text
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.template.defaultfilters import linebreaksbr
+from django.template.defaultfilters import linebreaksbr, pprint
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
     CosinnusConference
 from cosinnus.models.conference import CosinnusConferenceApplication
@@ -54,7 +55,7 @@ from wagtail.core.templatetags.wagtailcore_tags import richtext
 from uuid import uuid1
 from annoying.functions import get_object_or_None
 from django.utils.text import normalize_newlines
-from cosinnus.utils.functions import ensure_list_of_ints
+from cosinnus.utils.functions import ensure_list_of_ints, convert_html_to_string
 from django.db.models.query import QuerySet
 from django.core.serializers import serialize
 from cosinnus.models.idea import CosinnusIdea
@@ -70,6 +71,7 @@ from cosinnus.utils.html import render_html_with_variables
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignment
 from cosinnus.views.ui_prefs import get_ui_prefs_for_user
 from datetime import timedelta
+from django.utils.timezone import now
 
 logger = logging.getLogger('cosinnus')
 
@@ -153,6 +155,13 @@ def is_superuser(user):
     Template filter to check if a user has admin priviledges or is a portal admin.
     """
     return check_user_superuser(user)
+
+@register.filter
+def is_portal_manager(user):
+    """
+    Template filter to check if a user has manager priviledges on this portal.
+    """
+    return check_user_portal_manager(user)
 
 @register.filter
 def is_portal_admin(user):
@@ -433,6 +442,11 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
         
         # TODO cache the dumped JSON strings?
         
+    return render_to_string(template, context.flatten(), request=request)
+
+
+@register.simple_tag(takes_context=True)
+def cosinnus_footer_v2(context, template="cosinnus/v2/footer.html", request=None):
     return render_to_string(template, context.flatten(), request=request)
 
 
@@ -1033,6 +1047,11 @@ def json(obj):
     return _json.dumps(obj)
 
 @register.filter
+def pretty_json(obj):
+    """ Prints nicely readable JSON. Recommended to use a <pre> tag with this. """
+    return _json.dumps(obj, indent=4)
+
+@register.filter
 def get_membership_portals(user):
     """ Returns all portals a user is a member of """
     return CosinnusPortal.objects.filter(id__in=user.cosinnus_portal_memberships.values_list('group_id', flat=True))
@@ -1154,23 +1173,24 @@ def render_managed_tags_json():
 
 @register.simple_tag()
 def managed_tags_for_user(user):
-    profile_type = ContentType.objects.get(
-                    app_label='cosinnus', model='userprofile')
-    profile = user.cosinnus_profile
-    assignments = CosinnusManagedTagAssignment.objects.filter(
-                    content_type=profile_type.id,
-                    object_id=profile.id).values_list(
-                        'managed_tag__slug', flat=True)
+    if hasattr(user, 'cosinnus_profile'):
+        profile_type = ContentType.objects.get(
+                        app_label='cosinnus', model='userprofile')
+        profile = user.cosinnus_profile
+        assignments = CosinnusManagedTagAssignment.objects.filter(
+                        content_type=profile_type.id,
+                        object_id=profile.id).values_list(
+                            'managed_tag__slug', flat=True)
 
-    if settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS:
-        predefined_slugs = \
-            settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS
-        assignments = assignments.filter(
-            managed_tag__slug__in=predefined_slugs)
+        if settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS:
+            predefined_slugs = \
+                settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS
+            assignments = assignments.filter(
+                managed_tag__slug__in=predefined_slugs)
 
-    managed_tags = CosinnusManagedTag.objects.filter(
-        slug__in=assignments).distinct()
-    return managed_tags
+        managed_tags = CosinnusManagedTag.objects.filter(
+            slug__in=assignments).distinct()
+        return managed_tags
 
 
 @register.simple_tag()
@@ -1276,7 +1296,7 @@ def get_user_from_id(id):
 def get_attr(obj, attr_name):
     """ Returns the given attribute object instead of trying to resolve
         it in the template using __getitem__ """
-    return getattr(obj, attr_name)
+    return getattr(obj, attr_name, None)
 
 @register.filter
 def get_item(obj, attr_name):
@@ -1299,6 +1319,19 @@ def get_country_name(country_code):
     """ Returns the verbose country name for a ISO 3166-1 country code """
     from django_countries import countries
     return dict(countries).get(country_code, '(unknown)')
+
+@register.filter
+def get_language_name(language_code):
+    """ Returns the verbose language for a ISO 639-1 language code """
+    import pycountry
+    return _(pycountry.languages.get(alpha_2=language_code).name)
+
+@register.filter
+def get_dynamic_field_value(dynamic_field_key, dynamic_field_name):
+    choices = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.get(dynamic_field_name).choices
+    for choice in choices:
+        if choice[0] == dynamic_field_key:
+            return choice[1]
 
 @register.simple_tag
 def get_setting(name):
@@ -1379,4 +1412,21 @@ def next_day(datetime_obj):
     """ Adds a timedelta day=1 to a date/datetime. Usefull for fullcalendars way
         of considering a full-day event with the end-date on a day to span only to the end of the previous day. """
     return datetime_obj + timedelta(days=1)
+
+@register.filter
+def older_than_days(datetime_obj, num_days):
+    """ Checks if a given datetime is older than `num_days` than today's date. """
+    return (datetime_obj + timedelta(days=num_days)) <= now()
+
+@register.simple_tag()
+def get_admin_data():
+    """ Returns the portal administrators on the signup page """
+    admins = get_user_model().objects.filter(id__in=CosinnusPortal.get_current().admins)
+    return admins
+
+@register.filter
+def safe_text(text):
+    """ Returns JS-safe text, for use in form-elements that might get re-used in JS. """
+    return convert_html_to_string(text)
+
 

@@ -1,66 +1,67 @@
 {% load i18n static cosinnus_tags djajax_tags %}
 
-<div type="button" class="btn btn-emphasized btn-headline btn-no-interact fine-space section-header">
-    <ul class="media-list">
-        <li class="media">
-            <a class="pull-left btn-extra-emphasized" href="#"></a>
-            <a class="pull-left" href="#">
-                <i class="fa fa-users"></i>
-            </a>
-            <div class="media-body">
-                {% if request.user.is_authenticated and request.user == this_user %}
-                    {{ COSINNUS_CONFERENCE_TRANS.MY_LIST }}
-                {% else %}
-                    {{ COSINNUS_CONFERENCE_TRANS.VERBOSE_NAME_PLURAL }}
-                {% endif %}
-            </div>
-        </li>
-    </ul>
-</div>
-
-<div class="custom-profile-content">
-
-    
-    <div class="big-calendar calendar-dashboard w100 regular-space"></div>
-    {% comment %} <div class="small-calendar w100 regular-space"></div> {% endcomment %}
-    
-    <script type="text/javascript">
-        var cosinnus_calendarEvents = [
-            {% for application in this_user.user_applications.order_by_conference_startdate %}
-                {% with group=application.conference %}
-                    {% if group.from_date %}
-                    {
-                        title: "{{ group.name|truncatechars:25 }}",
-                        start: "{{ group.from_date|date:'c'}}",
-                        {% if group.to_date %}
-                        end: "{{ group.to_date|date:'c'}}",
-                        {% endif %}
-                        url: "{{ group.get_absolute_url }}"
-                    },
-                    {% endif %}
-                {% endwith %}
-            {% endfor %}
-        ];
-        $.cosinnus.fullcalendar();
-    </script>
-    
-    {% for application in this_user.user_applications.order_by_conference_startdate %}
-        <button type="button" class="btn btn-{% if application.status == 4 %}emphasized{% else %}default{% endif %} w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ application.conference.get_absolute_url }}">
-            <ul class="media-list">
-                <li class="media">
-                    <div class="media-body">
-                        <i class="fas fa-fw {{ application.get_icon }}"></i>
-                        &nbsp;&nbsp;
-                        {{ application.conference.from_date|date:"SHORT_DATE_FORMAT" }}
-                        &nbsp;
-                        <b>{{ application.conference.name }}</b>
-                        | 
-                        {{ application.get_status_display }}
-                    </div>
-                </li>
-            </ul>
-        </button>
-    {% endfor %}
-</div>
-
+{% if conferences %}
+	<div type="button" class="btn btn-emphasized btn-headline btn-no-interact fine-space section-header">
+	    <ul class="media-list">
+	        <li class="media">
+	            <span class="pull-left btn-extra-emphasized" href="#"></span>
+	            <span class="pull-left" href="#">
+	                <i class="fa fa-users"></i>
+	            </span>
+	            <div class="media-body">
+	                {% if request.user.is_authenticated and request.user == this_user %}
+	                    {{ COSINNUS_CONFERENCE_TRANS.MY_LIST }}
+	                {% else %}
+	                    {{ COSINNUS_CONFERENCE_TRANS.VERBOSE_NAME_PLURAL }}
+	                {% endif %}
+	            </div>
+	        </li>
+	    </ul>
+	</div>
+	
+	<div class="custom-profile-content">
+	
+	    
+	    <div class="big-calendar calendar-profile w100 regular-space"></div>
+	    {% comment %} <div class="small-calendar w100 regular-space"></div> {% endcomment %}
+	    
+	    <script type="text/javascript">
+	        var cosinnus_calendarEvents = [
+	            {% for conference in conferences %}
+	                {% if conference.from_date %}
+	                {
+	                        title: "{{ conference.name|truncatechars:25 }}",
+	                        start: "{{ conference.from_date|date:'c'}}",
+	                        {% if conference.to_date %}
+	                        end: "{{ conference.to_date|date:'c'}}",
+	                        {% endif %}
+	                        url: "{{ conference.get_absolute_url }}"
+	                    },
+	                {% endif %}
+	            {% endfor %}
+	        ];
+	        $.cosinnus.fullcalendar();
+	    </script>
+	    
+	    <hr/>
+	    
+        {% for conference in conferences %}
+	        {% if not SETTINGS.COSINNUS_USE_V2_DASHBOARD or not group.slug in SETTINGS.NEWW_DEFAULT_USER_GROUPS %}
+	            <button type="button" class="btn {% if conference.has_ended %} btn-disabled {% else %} btn-default {% endif %} w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ conference.get_absolute_url }}">
+	                <ul class="media-list">
+	                    <li class="media">
+	                        <a class="pull-left">
+	                            {% include "cosinnus/group/group_avatar_image.html" with group=conference %}
+	                        </a>
+	                        <div class="media-body" title="{{ conference.from_date }} - {{ conference.to_date }}">
+	                            {{ conference.name }} {% if conference.has_ended %} ({% trans 'ended' %}) {% endif %}</br>
+	                            {{ conference.from_date }} - {{ conference.to_date }}
+	                        </div>
+	                    </li>
+	                </ul>
+	            </button>
+	        {% endif %}
+	    {% endfor %}
+	</div>
+{% endif %}
 

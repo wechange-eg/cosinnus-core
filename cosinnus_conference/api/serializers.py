@@ -30,10 +30,32 @@ from cosinnus.utils.files import image_thumbnail_url
 from cosinnus.utils.permissions import check_ug_admin, check_user_superuser,\
     check_ug_membership
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus_event.models import ConferenceEvent
+from cosinnus_event.models import ConferenceEvent # noqa
 
 
-class ConferenceRoomSerializer(serializers.ModelSerializer):
+class _TranslatedInstanceMixin():
+    
+    def to_representation(self, instance):
+        """ Support for `TranslateableFieldsModelMixin` """
+        self.untranslated_instance = instance
+        if hasattr(instance, 'get_translated_readonly_instance'):
+            instance = instance.get_translated_readonly_instance()
+        return super().to_representation(instance)
+
+
+class TranslateableModelSerializer(_TranslatedInstanceMixin, serializers.ModelSerializer):
+    """ A model serializer that works well with returning translated fields
+        for any models inheriting `TranslateableFieldsModelMixin` """
+    pass
+
+
+class TranslateableHyperlinkedModelSerializer(_TranslatedInstanceMixin, serializers.HyperlinkedModelSerializer):
+    """ A model serializer that works well with returning translated fields
+        for any models inheriting `TranslateableFieldsModelMixin` """
+    pass
+    
+class ConferenceRoomSerializer(TranslateableModelSerializer):
+    
     TYPE_MAP = {
         CosinnusConferenceRoom.TYPE_LOBBY: 'lobby',
         CosinnusConferenceRoom.TYPE_STAGE: 'stage',
@@ -80,7 +102,8 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
             result_group = obj.target_result_group
             return result_group.get_absolute_url() + result_group.settings.get('conference_result_group_iframe_url', '')
         else:
-            return obj.get_rocketchat_room_url()
+            # we need to use the untranslated instance, because this function might save the instance
+            return self.untranslated_instance.get_rocketchat_room_url()
 
     def get_management_urls(self, obj):
         user = self.context['request'].user
@@ -96,12 +119,12 @@ class ConferenceRoomSerializer(serializers.ModelSerializer):
                 })
             return management_urls
         return {}
-
+    
     def get_description_html(self, obj):
         return textfield(obj.description)
 
 
-class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
+class ConferenceSerializer(TranslateableHyperlinkedModelSerializer):
     rooms = serializers.SerializerMethodField()
     management_urls = serializers.SerializerMethodField()
     theme_color = serializers.CharField(source='conference_theme_color')
@@ -117,7 +140,7 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
         model = CosinnusGroup
         fields = ('id', 'name', 'description', 'rooms', 'management_urls', 'theme_color', 'dates', 'avatar',
                   'wallpaper', 'images', 'header_notification', 'managed_tags', 'url', 'from_date', 'to_date')
-
+    
     def get_rooms(self, obj):
         rooms = obj.rooms.all()
         request = self.context['request']
@@ -146,22 +169,24 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
         user = self.context['request'].user
         # show a premium notification for admins
         if settings.COSINNUS_PREMIUM_CONFERENCES_ENABLED and (check_ug_admin(user, obj) or check_user_superuser(user)):
-            if obj.has_premium_blocks:
+            if obj.has_premium_blocks or obj.is_premium:
                 if obj.is_premium:
                     notification_text = _('Your conference is currently using the high performance premium servers!')
                     notification_severity = 'success'
                 else:
                     notification_text = _('Your conference is currently not using the high performance premium servers, but has been assigned premium slots at other times.')
                     notification_severity = 'info'
-                
-                premium_block_dates = []
-                for premium_block in obj.conference_premium_blocks.all():
-                    str_date = date_format(premium_block.from_date, 'SHORT_DATE_FORMAT')
-                    if premium_block.from_date != premium_block.to_date:
-                        str_date += ' - ' + date_format(premium_block.to_date, 'SHORT_DATE_FORMAT')
-                    premium_block_dates.append(str_date)
-                notification_text = str(notification_text) + '<br/>' + \
-                        str(_('Your currently scheduled premium dates are:')) + ' ' + ', '.join(premium_block_dates)
+                    
+                if obj.has_premium_blocks:
+                    premium_block_dates = []
+                    for premium_block in obj.conference_premium_blocks.all():
+                        str_date = date_format(premium_block.from_date, 'SHORT_DATE_FORMAT')
+                        if premium_block.from_date != premium_block.to_date:
+                            str_date += ' - ' + date_format(premium_block.to_date, 'SHORT_DATE_FORMAT')
+                        premium_block_dates.append(str_date)
+                    if premium_block_dates:
+                        notification_text = str(notification_text) + '<br/>' + \
+                                str(_('Your currently scheduled premium dates are:')) + ' ' + ', '.join(premium_block_dates)
             else:
                 notification_text = _('Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:')
                 notification_severity = 'warning'
@@ -205,7 +230,7 @@ class ConferenceSerializer(serializers.HyperlinkedModelSerializer):
         return obj.get_absolute_url()
     
 
-class ConferenceParticipant(serializers.ModelSerializer):
+class ConferenceParticipant(TranslateableModelSerializer):
     organization = serializers.SerializerMethodField()
     location = serializers.SerializerMethodField()
 
@@ -220,7 +245,7 @@ class ConferenceParticipant(serializers.ModelSerializer):
         return obj.cosinnus_profile.media_tag.location
 
 
-class ConferenceEventRoomSerializer(serializers.ModelSerializer):
+class ConferenceEventRoomSerializer(TranslateableModelSerializer):
     type = serializers.SerializerMethodField()
 
     class Meta(object):
@@ -231,14 +256,18 @@ class ConferenceEventRoomSerializer(serializers.ModelSerializer):
         return ConferenceRoomSerializer.TYPE_MAP.get(obj.type)
 
 
-class ConferenceParticipantSerializer(serializers.ModelSerializer):
+class ConferenceParticipantSerializer(TranslateableModelSerializer):
     organization = serializers.SerializerMethodField()
     country = serializers.SerializerMethodField()
     chat_url = serializers.SerializerMethodField()
+    avatar_url = serializers.SerializerMethodField()
+    profile_url = serializers.SerializerMethodField()
+    location = serializers.SerializerMethodField()
 
     class Meta(object):
         model = get_user_model()
-        fields = ('id', 'first_name', 'last_name', 'organization', 'country', 'chat_url')
+        fields = ('id', 'first_name', 'last_name', 'organization',
+                  'country', 'chat_url', 'avatar_url', 'profile_url', 'location')
         order_by = ('first_name', 'last_name')
 
     def get_organization(self, obj):
@@ -261,21 +290,37 @@ class ConferenceParticipantSerializer(serializers.ModelSerializer):
         else:
             return settings.COSINNUS_CHAT_BASE_URL
 
+    def get_avatar_url(self, obj):
+        if hasattr(obj, 'cosinnus_profile'):
+            return obj.cosinnus_profile.get_avatar_thumbnail_url()
+        return ''
 
-class ConferenceEventParticipantSerializer(serializers.ModelSerializer):
+    def get_profile_url(self, obj):
+        if hasattr(obj, 'cosinnus_profile'):
+            return obj.cosinnus_profile.get_absolute_url()
+        return ''
+
+    def get_location(self, obj):
+        if hasattr(obj, 'cosinnus_profile'):
+            if obj.cosinnus_profile.media_tag.location:
+                return obj.cosinnus_profile.media_tag.location
+        return ''
+
+
+class ConferenceEventParticipantSerializer(TranslateableModelSerializer):
 
     class Meta(object):
         model = get_user_model()
         fields = ('first_name', 'last_name')
 
 
-class ConferenceEventSerializer(serializers.ModelSerializer):
+class ConferenceEventSerializer(TranslateableModelSerializer):
     room = ConferenceEventRoomSerializer()
     url = serializers.SerializerMethodField()
     is_queue_url = serializers.SerializerMethodField() 
     image_url = serializers.SerializerMethodField()
     presenters = ConferenceEventParticipantSerializer(many=True)
-    participants_limit = serializers.IntegerField(source='max_participants')
+    participants_limit = serializers.SerializerMethodField()
     management_urls = serializers.SerializerMethodField()
     note_html = serializers.SerializerMethodField()
     feed_url = serializers.SerializerMethodField()
@@ -319,6 +364,9 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
     def get_note_html(self, obj):
         return textfield(obj.note)
     
+    def get_participants_limit(self, obj):
+        return obj.get_max_participants()
+    
     def get_show_chat(self, obj):
         """ Returns true if the show chat checkboxes on the event and its room are set
             and the room as a rocketchat url """
@@ -330,7 +378,7 @@ class ConferenceEventSerializer(serializers.ModelSerializer):
         return obj.show_chat and obj.room.show_chat and obj.room.get_rocketchat_room_url()
 
 
-class ConferenceEventParticipantsSerializer(serializers.ModelSerializer):
+class ConferenceEventParticipantsSerializer(TranslateableModelSerializer):
     participants_count = serializers.SerializerMethodField()
 
     class Meta(object):

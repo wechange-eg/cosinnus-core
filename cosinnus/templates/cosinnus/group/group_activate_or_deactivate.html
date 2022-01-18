@@ -68,9 +68,9 @@
 	    <button type="submit" class="btn btn-{% if activate %}emphasized{% else %}default{% endif %}">
 	        <ul class="media-list">
 	            <li class="media">
-	                <a class="pull-left" href="#">
+	                <span class="pull-left">
 	                    <i class="fa {% if activate %}fa-check{% else %}fa-times{% endif %}"></i>
-	                </a>
+	                </span>
 	                <div class="media-body">
                         {% if activate %}{% trans "Re-Activate" %}{% else %}{% trans "Deactivate" %}{% endif %}
 	                </div>

@@ -21,6 +21,7 @@
         - extra_html: extra HTML that will be placed after the field
         - help_popup: if supplied, add a Help-Button next to the label which will popup a help field using the supplied id string
         - hide_optional: forces hiding the "(Optional)" label for non-required fields
+        - translation_form: the form that uses `TranslateableFieldsModelMixin` if translations need to be enabled for this field
 {% endcomment %}
 
 {% if field or field_id %}{% captureas for_id %}{% if field %}{{ field.id_for_label }}{% else %}{{ field_id }}{% endif %}{% endcaptureas %}{% endif %}
@@ -46,6 +47,15 @@
 	    <div class="field-description {% if not legend_selectable %}no-select {% endif %}{{ legend_class }}">{{ legend|safe }}</div>
 	{% endif %}
 	
+    {% if SETTINGS.COSINNUS_TRANSLATED_FIELDS_ENABLED and translation_form and translation_form|get_attr:'translatable_base_fields' and field.html_name in translation_form|get_attr:'translatable_base_fields' %}
+        <div class="translations-link">
+			<a href="#" onclick="$('#{{ field.name }}_translations').slideToggle(); $(window.simplemdes).each(function(index){window.simplemdes[index].codemirror.refresh();})">
+	            <i class="fas fa-fw fa-language"></i>
+	            {% trans 'Add/Edit translations' %}
+	        </a>
+        </div>
+    {% endif %}
+	
 	{% if field and field.errors %}
 	   {{ field.errors }}
 	{% endif %}
@@ -60,12 +70,38 @@
 	            {% else %}
 	                {% render_field field placeholder=placeholder autocomplete="off" %}
 	            {% endif %}
-	            
 	        {% endif %}
 	    </div>
     {% endif %}
-    
     {% if extra_html %}
        {{ extra_html|safe }}
     {% endif %}
 </div>
+
+{% comment %} translation_fields=form.forms.obj|get_attr:'translatable_field_items'  {% endcomment %}
+{% if SETTINGS.COSINNUS_TRANSLATED_FIELDS_ENABLED and translation_form and field.html_name in translation_form|get_attr:'translatable_base_fields' %}
+	<div id="{{ field.name }}_translations" class="field-translations" style="display: none;">
+	    <div class="cosinnus-field">
+	        <div class="field-description no-select">
+	            {% trans "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)." %}
+	        </div>
+            <div class="field-description no-select">
+	            {% trans "If present, the translations below will be shown according to the users' local language settings. They are not searchable." %}
+	        </div>
+	    </div>
+	    
+	    {% comment %} Since we do not always have a placeholder set (it's in the default field's attributed, we generate one {% endcomment %}
+	    {% captureas fallback_placeholder %}{% if placeholder %}{{ placeholder }}{% else %}{{ label }}{% endif %}{% endcaptureas %}
+	    {% for trans_field_name, trans_field in translation_form|get_attr:'translatable_field_items' %}
+	        {% if field.name|add:'_translation' in trans_field_name %}
+	            <div class="cosinnus-field">
+	                <label>{{ trans_field.label }}</label>
+	                <div class="{% if not unstyled %}cosinnus-field-input{% endif %} {% if major_field %}major-field{% elif large_field %}large-field{% else %}regular-field{% endif %} {% if field_classes %}{{ field_classes }}{% endif %}">
+	                    {% render_field translation_form|get_item:trans_field_name placeholder=fallback_placeholder autocomplete="off" %}
+	                </div>
+	            </div>
+	        {% endif %}
+	    {% endfor %}
+	</div>
+{% endif %}
+

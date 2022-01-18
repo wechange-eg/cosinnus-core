@@ -1,0 +1,28 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n bootstrap3 cosinnus_tags %}
+{% load static from staticfiles %}
+
+{% block page_title %}{% trans "Server Error" %}{% endblock page_title %}
+
+{% block cosinnus_navbar %}
+{% endblock cosinnus_navbar %}
+
+{% block main_page %}
+    <div class="alert alert-danger alert-dismissable">
+        <i class="fa fa-exclamation-triangle fa-3x"></i>
+        <h4>{% trans "Server Error" %}</h4>
+        
+        {% if request.GET %}
+            <p>{% trans "Error message:" %}</p>
+            {% for attr in request.GET %}
+                <p>
+                    <b>{{ attr }}</b>:
+                    {{ request.GET|get_item:attr }}
+                </p>
+            {% endfor %}
+        {% else %}
+	        <p>{% trans "No error message supplied." %}</p>
+        {% endif %}
+        
+    </div>
+{% endblock main_page %}

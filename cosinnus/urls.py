@@ -11,7 +11,7 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 from cosinnus.api.views.group import CosinnusSocietyViewSet, CosinnusProjectViewSet
 from cosinnus.api.views.user import oauth_user, oauth_profile, current_user, oauth_current_user, UserViewSet
-from cosinnus.api.views.portal import statistics as api_statistics, navbar, settings as api_settings
+from cosinnus.api.views.portal import statistics as api_statistics, header, footer, settings as api_settings
 from cosinnus.api.views.i18n import translations
 from cosinnus.conf import settings
 from cosinnus.core.registries import url_registry
@@ -20,7 +20,8 @@ from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_por
 from cosinnus.views import bbb_room, user_import
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group, \
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication, \
-    user_dashboard, ui_prefs, administration, user_dashboard_announcement, dynamic_fields
+    user_dashboard, ui_prefs, administration, user_dashboard_announcement, dynamic_fields, \
+    conference_administration
 from cosinnus_conference.api.views import ConferenceViewSet,\
     PublicConferenceViewSet
 from cosinnus_event.api.views import EventViewSet
@@ -77,6 +78,7 @@ urlpatterns = [
     
     url(r'^account/report/$', feedback.report_object, name='report-object'),
     url(r'^account/accept_tos/$', user.accept_tos, name='accept-tos'),
+    url(r'^account/resend_email_validation/$', user.resend_email_validation, name='resend-email-validation'),
     url(r'^account/accept_updated_tos/$', user.accept_updated_tos, name='accept-updated-tos'),
     url(r'^account/list-unsubscribe/(?P<email>[^/]+)/(?P<token>[^/]+)/$', user.add_email_to_blacklist, name='user-add-email-blacklist'),
     url(r'^account/list-unsubscribe-result/$', user.add_email_to_blacklist_result, name='user-add-email-blacklist-result'),
@@ -120,9 +122,12 @@ urlpatterns = [
     url(r'^administration/announcement/(?P<slug>[^/]+)/delete/$', user_dashboard_announcement.user_dashboard_announcement_delete, name='user-dashboard-announcement-delete'),
     url(r'^administration/announcement/(?P<slug>[^/]+)/activate-toggle/$', user_dashboard_announcement.user_dashboard_announcement_activate, name='user-dashboard-announcement-activate'),
     
-    url(r'^administration/conference_overview/$', administration.conference_overview, name='administration-conference-overview'),
-    url(r'^administration/conference_overview/nonstandard/$', administration.conference_overview, name='administration-conference-overview-nonstandard', kwargs={'only_nonstandard': True}),
-    url(r'^administration/conference_overview/premium/$', administration.conference_overview, name='administration-conference-overview-premium', kwargs={'only_premium': True}),
+    url(r'^conference_administration/$', conference_administration.conference_administration, name='conference-administration'),
+    url(r'^conference_administration/conference_overview/$', conference_administration.conference_overview, name='conference-administration-overview'),
+    url(r'^conference_administration/conference_overview/nonstandard/$', conference_administration.conference_overview, name='conference-administration-overview-nonstandard', kwargs={'only_nonstandard': True}),
+    url(r'^conference_administration/conference_overview/premium/$', conference_administration.conference_overview, name='conference-administration-overview-premium', kwargs={'only_premium': True}),
+    url(r'^conference_administration/conference/(?P<slug>[^/]+)/blocks/add/$', conference_administration.conference_add_premium_block, name='conference-administration-add-premium-block'),
+    url(r'^conference_administration/conference/block/(?P<block_id>\d+)/edit/$', conference_administration.conference_edit_premium_block, name='conference-administration-edit-premium-block'),
     
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
     url(r'^statistics/simple/bbb_room_visits/$', statistics.bbb_room_visit_statistics_download, name='simple-statistics-bbb-room-visits'),
@@ -138,20 +143,27 @@ urlpatterns = [
     url(r'^housekeeping/fillcache/(?P<number>[^/]+)/$', housekeeping.fillcache, name='housekeeping-fillcache'),
     url(r'^housekeeping/getcache$', housekeeping.getcache, name='housekeeping-getcache'),
     url(r'^housekeeping/deletecache$', housekeeping.deletecache, name='housekeeping-deletecache'),
-    url(r'^housekeeping/validate_redirects', housekeeping.check_and_delete_loop_redirects, name='housekeeping-validate-redirects'),
-    url(r'^housekeeping/add_members_to_forum', housekeeping.add_members_to_forum, name='housekeeping-add-members-to-forum'),
-    url(r'^housekeeping/user_statistics', housekeeping.user_statistics, name='housekeeping-user-statistics'),
+    url(r'^housekeeping/test_logging/$', housekeeping.test_logging, name='housekeeping-test-logging'),
+    url(r'^housekeeping/test_logging/info/$', housekeeping.test_logging, name='housekeeping-test-logging', kwargs={'level': 'info'}),
+    url(r'^housekeeping/test_logging/warning/$', housekeeping.test_logging, name='housekeeping-test-logging', kwargs={'level': 'warning'}),
+    url(r'^housekeeping/test_logging/error/$', housekeeping.test_logging, name='housekeeping-test-logging', kwargs={'level': 'error'}),
+    url(r'^housekeeping/test_logging/exception/$', housekeeping.test_logging, name='housekeeping-test-logging', kwargs={'level': 'exception'}),
+    url(r'^housekeeping/validate_redirects/', housekeeping.check_and_delete_loop_redirects, name='housekeeping-validate-redirects'),
+    url(r'^housekeeping/add_members_to_forum/', housekeeping.add_members_to_forum, name='housekeeping-add-members-to-forum'),
+    url(r'^housekeeping/user_statistics/', housekeeping.user_statistics, name='housekeeping-user-statistics'),
     url(r'^housekeeping/create_map_test_entities/(?P<count>\d+)/', housekeeping.create_map_test_entities, name='housekeeping-create-map-test-entities'),
     url(r'^housekeeping/reset_user_tos_flags/', housekeeping.reset_user_tos_flags, name='housekeeping-reset-user-tos-flags'),
     url(r'^housekeeping/send_testmail/', housekeeping.send_testmail, name='housekeeping-send-testmail'),
     url(r'^housekeeping/print_testmail/', housekeeping.print_testmail, name='housekeeping-print-testmail'),
     url(r'^housekeeping/print_settings/', housekeeping.print_settings, name='housekeeping-print-settings'),
     url(r'^housekeeping/group_storage_info/', housekeeping.group_storage_info, name='housekeeping-group-storage-info'),
+    url(r'^housekeeping/conference_storage_report/', housekeeping.conference_storage_report_csv, name='housekeeping-conference-storage-report'),
     url(r'^housekeeping/group_storage_report/', housekeeping.group_storage_report_csv, name='housekeeping-group-storage-report'),
     url(r'^housekeeping/project_storage_report/', housekeeping.project_storage_report_csv, name='housekeeping-project-storage-report'),
     url(r'^housekeeping/user_activity_info/', housekeeping.user_activity_info, name='housekeeping-user-activity-info'),
     url(r'^housekeeping/group_admin_emails/(?P<slugs>[^/]+)/', housekeeping.group_admin_emails, name='housekeeping-group-admin-emails'),
-
+    
+    url(r'^error/$', common.generic_error_page_view, name='generic-error-page'),
 
     url(r'^select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
 ]
@@ -259,6 +271,7 @@ for url_key in group_model_registry:
         url(r'^%s/(?P<group>[^/]+)/microsite/$' % url_key, microsite.group_microsite_view, name=prefix+'group-microsite'),
         #url(r'^%s/(?P<group>[^/]+)/_microsite__old_/$' % url_key, 'cms.group_microsite', name=prefix+'group-microsite'),
         #url(r'^%s/(?P<group>[^/]+)/_microsite__old_/edit/$' % url_key, 'cms.group_microsite_edit', name=prefix+'group-microsite-edit'),
+        url(r'^%s/(?P<group>[^/]+)/meeting/$' % url_key, group.group_meeting, name=prefix+'group-meeting'),
         url(r'^%s/(?P<group>[^/]+)/members/$' % url_key, group.group_detail, name=prefix+'group-detail'),
         url(r'^%s/(?P<group>[^/]+)/members/recruit/$' % url_key, group.group_user_recruit, name=prefix+'group-user-recruit'),
         url(r'^%s/(?P<group>[^/]+)/members/recruitdelete/(?P<id>\d+)/$' % url_key, group.group_user_recruit_delete, name=prefix+'group-user-recruit-delete'),
@@ -353,7 +366,8 @@ schema_view = get_schema_view(
 )
 
 urlpatterns += [
-    url(r'^api/v2/navbar/$', navbar, name='api-navbar'),
+    url(r'^api/v2/(?:header|navbar)/$', header, name='api-header'),
+    url(r'^api/v2/footer/$', footer, name='api-footer'),
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),

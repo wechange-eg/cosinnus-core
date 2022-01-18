@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 15:23+0200\n"
+"POT-Creation-Date: 2021-11-16 12:48+0100\n"
 "PO-Revision-Date: 2021-04-07 13:20+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,142 +18,296 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.4.2\n"
 
-msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
-msgstr "Votre conférence est toujours en mode d’essai. Vous avez accès à toutes les fonctionnalités, mais ne pouvez les utiliser qu’avec quelques personnes sans restrictions. Pour assurer la pleine performance de votre conférence avec plusieurs utilisateurs, réservez gratuitement des capacités suffisantes :"
+#: admin.py:29
+msgid "Restart"
+msgstr ""
 
+#: api/serializers.py:174
+msgid ""
+"Your conference is currently using the high performance premium servers!"
+msgstr ""
+
+#: api/serializers.py:177
+msgid ""
+"Your conference is currently not using the high performance premium servers, "
+"but has been assigned premium slots at other times."
+msgstr ""
+
+#: api/serializers.py:189
+msgid "Your currently scheduled premium dates are:"
+msgstr ""
+
+#: api/serializers.py:191
+msgid ""
+"Your conference is still in trial mode. You have access to all features, but "
+"can only use them with a few people without restrictions. To ensure full "
+"performance for your conference with multiple users, book sufficient "
+"capacities here for free:"
+msgstr ""
+"Votre conférence est toujours en mode d’essai. Vous avez accès à toutes les "
+"fonctionnalités, mais ne pouvez les utiliser qu’avec quelques personnes sans "
+"restrictions. Pour assurer la pleine performance de votre conférence avec "
+"plusieurs utilisateurs, réservez gratuitement des capacités suffisantes :"
+
+#: api/serializers.py:196
 msgid "Conference Bookings"
 msgstr "Réservations de conférences"
 
+#: cosinnus_app.py:17
 msgid "Conferences"
 msgstr "Conférences"
 
+#: cosinnus_app.py:22
 msgctxt "the_app"
 msgid "conference"
 msgstr "Conférence"
 
+#: forms.py:228 views.py:1045
 msgid "First Choice"
 msgstr "Premier choix"
 
+#: forms.py:228 views.py:1046
 msgid "Second Choice"
 msgstr "Deuxième choix"
 
-msgid "Conference Management"
-msgstr "Gestion des conférences"
+#: templates/cosinnus/conference/error_page.html:5
+#: templates/cosinnus/conference/error_page.html:13
+msgid "Server Error"
+msgstr ""
 
-msgid "Workshop Participant File Upload"
-msgstr "Téléchargement du fichier participant à l’atelier"
+#: templates/cosinnus/conference/error_page.html:16
+msgid "Error message:"
+msgstr ""
 
-#, python-format
-msgid "Please upload a CSV with the following columns: unique user identifier, first name, last name and one column for each workshop identified by the workshop's slug. For Help you can download a template <a href=\"%(workshop_participants_upload_skeleton)s\">here</a>"
-msgstr "Veuillez télécharger un CSV avec les colonnes suivantes : identifiant utilisateur unique, prénom, nom de famille et une colonne pour chaque atelier identifié par le slug de l’atelier. Pour obtenir de l’aide, vous pouvez télécharger un modèle <a href=\"%(workshop_participants_upload_skeleton)s\">ici</a>"
+#: templates/cosinnus/conference/error_page.html:24
+msgid "No error message supplied."
+msgstr ""
 
-msgid "Then add a row for each account that you want to add. You have to add a unique user identifier but first and last name can be blank. Then add a 1 to all workshop columns where the user should be a normal member or a 2 if that user should be workshop admin."
-msgstr "Ajoutez ensuite une ligne pour chaque compte que vous souhaitez ajouter. Vous devez ajouter un identifiant utilisateur unique, mais le prénom et le nom de famille peuvent être vierges. Ajoutez ensuite 1 à toutes les colonnes d’atelier où l’utilisateur doit être un membre normal ou 2 si cet utilisateur doit être administrateur de l’atelier."
-
-msgid "The CSV upload will trigger the creation of the accounts and account workshop memberships and results in a direct CSV download with the newly created accounts and passwords. The passwords will only be included when the account is created. Please refresh the page after the download."
-msgstr "Le téléchargement du CSV déclenchera la création des comptes et des abonnements à l’atelier de compte et se traduit par un téléchargement direct de CSV avec les comptes et mots de passe nouvellement créés. Les mots de passe ne seront inclus que lorsque le compte sera créé. Veuillez rafraîchir la page après le téléchargement."
-
-msgid "Upload File"
-msgstr "Télécharger un fichier"
-
+#: utils.py:80
 msgid "Go to conference"
 msgstr "Aller à la conférence"
 
+#: views.py:78 views.py:686
 msgid "This function is not enabled for this conference."
 msgstr "Cette fonction n’est pas activée pour cette conférence."
 
-msgid "Conference successfully started and user accounts activated"
-msgstr "La conférence a démarré avec succès et les comptes d'utilisateurs ont été activés"
+#: views.py:102
+#, fuzzy
+#| msgid "Successfully activated user account"
+msgid "successfully activated all user accounts."
+msgstr "Le compte utilisateur a été activé. "
 
-msgid "Conference successfully finished and user accounts deactivated"
-msgstr "Conférence terminée avec succès et comptes d'utilisateurs désactivés"
+#: views.py:108
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "successfully deactivated all user accounts."
+msgstr "Le compte utilisateur a été déactivé. "
 
+#: views.py:114
 msgid "Successfully deactivated user account"
 msgstr "Le compte utilisateur a été déactivé. "
 
+#: views.py:120
 msgid "Successfully activated user account"
 msgstr "Le compte utilisateur a été activé. "
 
+#: views.py:126
 msgid "Successfully removed user"
 msgstr "L'utilisateur a été supprimé."
 
-msgid "User was not created"
-msgstr "L'utilisateur n'a pas été créé."
+#: views.py:131
+#, fuzzy
+#| msgid "Successfully removed user"
+msgid "Successfully removed all user"
+msgstr "L'utilisateur a été supprimé."
 
-msgid "Workshop username"
-msgstr "Nom d'utilisateur de l'atelier"
+#: views.py:136 views.py:371 views.py:376
+msgid "Username"
+msgstr ""
 
+#: views.py:136 views.py:371 views.py:1030
 msgid "First Name"
 msgstr "Prénom"
 
+#: views.py:137 views.py:371 views.py:1031
 msgid "Last Name"
 msgstr "Nom de famille"
 
+#: views.py:137
+msgid "Email"
+msgstr ""
+
+#: views.py:137
+msgid "Password"
+msgstr ""
+
+#: views.py:220
+#, fuzzy, python-format
+#| msgid "Successfully deactivated user account"
+msgid "Successfully created %(created_count)d account. "
+msgid_plural "Successfully created  %(created_count)d accounts. "
+msgstr[0] "Le compte utilisateur a été déactivé. "
+msgstr[1] "Le compte utilisateur a été déactivé. "
+
+#: views.py:228
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully updated accounts."
+msgstr "Le compte utilisateur a été déactivé. "
+
+#: views.py:311
+msgid "User was not created"
+msgstr "L'utilisateur n'a pas été créé."
+
+#: views.py:477
 msgid "The room was created successfully."
 msgstr "L'espace a été créé."
 
+#: views.py:499
 msgid "The room was saved successfully."
 msgstr "L'espace a été enregistré."
 
+#: views.py:517
 msgid "The room was deleted successfully."
 msgstr "L'espace a été supprimé."
 
+#: views.py:536
 msgid "The supplied Conference Room could not be found"
 msgstr "L'espace souhaité n'a pas pu être trouvée"
 
+#: views.py:544 views.py:590
 msgid "Conference reminder settings have been successfully updated."
 msgstr "Les paramètres de rappel de conférence ont été mis à jour avec succès."
 
+#: views.py:572
 msgid "A test email has been sent to your email address."
 msgstr "Un e-mail de test a été envoyé à votre adresse e-mail."
 
+#: views.py:616
+msgid "The message was sent to all participants."
+msgstr ""
+
+#: views.py:652
 msgid "Participation configurations have been updated."
 msgstr "Les configurations de participation ont été mises à jour."
 
+#: views.py:723
 msgid "Your application has been submitted."
 msgstr "Votre demande a été soumise."
 
+#: views.py:728
 msgid "Your application has been updated."
 msgstr "Votre application a été mise à jour."
 
+#: views.py:742
 msgid "You cannot change your application anymore."
 msgstr "Vous ne pouvez plus modifier votre application."
 
+#: views.py:750
 msgid "Application has been withdrawn."
 msgstr "La demande a été retirée."
 
+#: views.py:892
 #, python-format
 msgid "The following users were accepted and added as members: %s"
-msgstr "Les utilisateurs suivants ont été acceptés et ajoutés en tant que membres : %s"
+msgstr ""
+"Les utilisateurs suivants ont été acceptés et ajoutés en tant que membres : "
+"%s"
 
+#: views.py:894
 #, python-format
 msgid "The following users were put on the wait list: %s"
 msgstr "Les utilisateurs suivants ont été inscrits sur la liste d’attente : %s"
 
+#: views.py:896
 #, python-format
 msgid "The following users were declined: %s"
 msgstr "Les utilisateurs suivants ont été refusés : %s"
 
+#: views.py:898
 msgid "Your changes were saved."
 msgstr "Vos dernières modifications ont été enregistrées."
 
+#: views.py:1009
 msgid "Option"
 msgstr "Option"
 
+#: views.py:1032
 msgid "Motivation for applying"
 msgstr "Motivation de la candidature"
 
+#: views.py:1033
 msgid "Status"
 msgstr "Statut"
 
+#: views.py:1037
 msgid "Contact E-Mail Address"
 msgstr "Adresse E-Mail de contact"
 
+#: views.py:1041
 msgid "Contact Phone Number"
 msgstr "Numéro de téléphone de contact"
 
+#: views.py:1086
 msgid "List of Applicants"
 msgstr "Liste des candidats"
+
+#~ msgid "Conference Management"
+#~ msgstr "Gestion des conférences"
+
+#~ msgid "Workshop Participant File Upload"
+#~ msgstr "Téléchargement du fichier participant à l’atelier"
+
+#~ msgid ""
+#~ "Please upload a CSV with the following columns: unique user identifier, "
+#~ "first name, last name and one column for each workshop identified by the "
+#~ "workshop's slug. For Help you can download a template <a href="
+#~ "\"%(workshop_participants_upload_skeleton)s\">here</a>"
+#~ msgstr ""
+#~ "Veuillez télécharger un CSV avec les colonnes suivantes : identifiant "
+#~ "utilisateur unique, prénom, nom de famille et une colonne pour chaque "
+#~ "atelier identifié par le slug de l’atelier. Pour obtenir de l’aide, vous "
+#~ "pouvez télécharger un modèle <a href="
+#~ "\"%(workshop_participants_upload_skeleton)s\">ici</a>"
+
+#~ msgid ""
+#~ "Then add a row for each account that you want to add. You have to add a "
+#~ "unique user identifier but first and last name can be blank. Then add a 1 "
+#~ "to all workshop columns where the user should be a normal member or a 2 "
+#~ "if that user should be workshop admin."
+#~ msgstr ""
+#~ "Ajoutez ensuite une ligne pour chaque compte que vous souhaitez ajouter. "
+#~ "Vous devez ajouter un identifiant utilisateur unique, mais le prénom et "
+#~ "le nom de famille peuvent être vierges. Ajoutez ensuite 1 à toutes les "
+#~ "colonnes d’atelier où l’utilisateur doit être un membre normal ou 2 si "
+#~ "cet utilisateur doit être administrateur de l’atelier."
+
+#~ msgid ""
+#~ "The CSV upload will trigger the creation of the accounts and account "
+#~ "workshop memberships and results in a direct CSV download with the newly "
+#~ "created accounts and passwords. The passwords will only be included when "
+#~ "the account is created. Please refresh the page after the download."
+#~ msgstr ""
+#~ "Le téléchargement du CSV déclenchera la création des comptes et des "
+#~ "abonnements à l’atelier de compte et se traduit par un téléchargement "
+#~ "direct de CSV avec les comptes et mots de passe nouvellement créés. Les "
+#~ "mots de passe ne seront inclus que lorsque le compte sera créé. Veuillez "
+#~ "rafraîchir la page après le téléchargement."
+
+#~ msgid "Upload File"
+#~ msgstr "Télécharger un fichier"
+
+#~ msgid "Conference successfully started and user accounts activated"
+#~ msgstr ""
+#~ "La conférence a démarré avec succès et les comptes d'utilisateurs ont été "
+#~ "activés"
+
+#~ msgid "Conference successfully finished and user accounts deactivated"
+#~ msgstr ""
+#~ "Conférence terminée avec succès et comptes d'utilisateurs désactivés"
+
+#~ msgid "Workshop username"
+#~ msgstr "Nom d'utilisateur de l'atelier"
 
 #, fuzzy
 #~| msgid "End date must be before start date"
@@ -255,26 +409,43 @@ msgstr "Liste des candidats"
 #~ msgid "Edit Room"
 #~ msgstr "Editer l'espace"
 
-#~ msgid "There was an error in one of the fields you entered. Please correct it before saving!"
-#~ msgstr "Il y a une erreur dans l'un des champs que tu as saisis. Corrige-la avant d'enregistrer !"
+#~ msgid ""
+#~ "There was an error in one of the fields you entered. Please correct it "
+#~ "before saving!"
+#~ msgstr ""
+#~ "Il y a une erreur dans l'un des champs que tu as saisis. Corrige-la avant "
+#~ "d'enregistrer !"
 
 #~ msgid "Room type"
 #~ msgstr "Type de pièce"
 
 #~ msgid "TODO: Room Type Lobby description text"
-#~ msgstr "Le hall est l'entrée principale pour les participants. Vous y trouverez l'ordre du jour de la conférence."
+#~ msgstr ""
+#~ "Le hall est l'entrée principale pour les participants. Vous y trouverez "
+#~ "l'ordre du jour de la conférence."
 
 #~ msgid "TODO: Room Type Stage description text"
-#~ msgstr "La scène est utilisée pour afficher des flux, par exemple de YouTube ou de Vimeo. Un chat est affiché à côté."
+#~ msgstr ""
+#~ "La scène est utilisée pour afficher des flux, par exemple de YouTube ou "
+#~ "de Vimeo. Un chat est affiché à côté."
 
 #~ msgid "TODO: Room Type Workshops description text"
-#~ msgstr "Dans les salles d'ateliers, chaque événement dispose d'un système de vidéoconférence. Les présentateurs sont autorisés à les modérer."
+#~ msgstr ""
+#~ "Dans les salles d'ateliers, chaque événement dispose d'un système de "
+#~ "vidéoconférence. Les présentateurs sont autorisés à les modérer."
 
 #~ msgid "TODO: Room Type Discussions description text"
-#~ msgstr "Dans les salles d'ateliers, chaque événement dispose d'un système de vidéoconférence. Les présentateurs sont autorisés à les modérer. Se distingue des \"salles d'atelier\" uniquement par la conception de l'ordre du jour. Atelier : tuiles, discussion : liste"
+#~ msgstr ""
+#~ "Dans les salles d'ateliers, chaque événement dispose d'un système de "
+#~ "vidéoconférence. Les présentateurs sont autorisés à les modérer. Se "
+#~ "distingue des \"salles d'atelier\" uniquement par la conception de "
+#~ "l'ordre du jour. Atelier : tuiles, discussion : liste"
 
 #~ msgid "TODO: Room Type Coffee Tables description text"
-#~ msgstr "Dans le café, vous pouvez créer autant de tables que vous le souhaitez. Là, les participants peuvent se rencontrer et démarrer une vidéoconférence directement avec une webcam et un microphone."
+#~ msgstr ""
+#~ "Dans le café, vous pouvez créer autant de tables que vous le souhaitez. "
+#~ "Là, les participants peuvent se rencontrer et démarrer une "
+#~ "vidéoconférence directement avec une webcam et un microphone."
 
 #~ msgid "TODO: Room Type Results description text"
 #~ msgstr "Ajoutez-y un projet que vous utiliserez à des fins documentaires."
@@ -288,8 +459,11 @@ msgstr "Liste des candidats"
 #~ msgid "Maximum Coffee Table Participants"
 #~ msgstr "Nombre maximum de participants à la table basse"
 
-#~ msgid "How many participants should can join one coffee table before it is full"
-#~ msgstr "Combien de participants peuvent rejoindre une table à café avant qu'elle ne soit pleine"
+#~ msgid ""
+#~ "How many participants should can join one coffee table before it is full"
+#~ msgstr ""
+#~ "Combien de participants peuvent rejoindre une table à café avant qu'elle "
+#~ "ne soit pleine"
 
 #~ msgid "Allow users to create new coffee tables"
 #~ msgstr "Permettre aux utilisateurs de créer de nouvelles tables basses"
@@ -300,8 +474,12 @@ msgstr "Liste des candidats"
 #~ msgid "Result Project"
 #~ msgstr "Projet pour les résultats"
 
-#~ msgid "Choose one of the sub-projects of this group to display as nested results-project for participants"
-#~ msgstr "Choisissez l'un des sous-projets de ce groupe pour l'afficher en tant que projet à résultats imbriqués pour les participants"
+#~ msgid ""
+#~ "Choose one of the sub-projects of this group to display as nested results-"
+#~ "project for participants"
+#~ msgstr ""
+#~ "Choisissez l'un des sous-projets de ce groupe pour l'afficher en tant que "
+#~ "projet à résultats imbriqués pour les participants"
 
 #~ msgid "Title"
 #~ msgstr "Titre"
@@ -309,20 +487,31 @@ msgstr "Liste des candidats"
 #~ msgid "Sort index"
 #~ msgstr "Numéro de tri"
 
-#~ msgid "Number by which rooms are sorted in ascending order in the conference room navigation list"
-#~ msgstr "Les pièces sont affichées dans la navigation des pièces par ordre croissant à partir de ce numéro."
+#~ msgid ""
+#~ "Number by which rooms are sorted in ascending order in the conference "
+#~ "room navigation list"
+#~ msgstr ""
+#~ "Les pièces sont affichées dans la navigation des pièces par ordre "
+#~ "croissant à partir de ce numéro."
 
 #~ msgid "Description"
 #~ msgstr "Description"
 
-#~ msgid "A short description or topic for your room. Will be shown on top of the room page."
-#~ msgstr "Brève description ou thème de la salle, apparaissant au haut de sa page."
+#~ msgid ""
+#~ "A short description or topic for your room. Will be shown on top of the "
+#~ "room page."
+#~ msgstr ""
+#~ "Brève description ou thème de la salle, apparaissant au haut de sa page."
 
 #~ msgid "Room is visible"
 #~ msgstr "La pièce est visible"
 
-#~ msgid "Uncheck this to hide the room for participants (you will still be able to see it)"
-#~ msgstr "Décochez cette case pour dissimuler la salle à la vue des participants (vous-même pourrez toujours la voir)"
+#~ msgid ""
+#~ "Uncheck this to hide the room for participants (you will still be able to "
+#~ "see it)"
+#~ msgstr ""
+#~ "Décochez cette case pour dissimuler la salle à la vue des participants "
+#~ "(vous-même pourrez toujours la voir)"
 
 #~ msgid "Save"
 #~ msgstr "Enregistrer"

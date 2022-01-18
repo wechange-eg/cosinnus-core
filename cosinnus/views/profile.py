@@ -8,7 +8,7 @@ from uuid import uuid1
 
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import logout
+from django.contrib.auth import logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist, ValidationError, \
     PermissionDenied
@@ -35,7 +35,7 @@ from cosinnus.utils.permissions import check_user_integrated_portal_member, \
     check_user_can_see_user, check_user_superuser
 from cosinnus.utils.urls import safe_redirect
 from cosinnus.views.mixins.avatar import AvatarFormMixin
-from cosinnus.views.user import set_user_email_to_verify
+from cosinnus.views.user import send_user_email_to_verify
 from django.utils.crypto import get_random_string
 from oauth2_provider import models as oauth2_provider_models
 from cosinnus.core.mail import send_html_mail
@@ -226,6 +226,28 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
                         filter(settings__contains='tos_accepted')
             self.qs = qs
         return self.qs
+
+    def get_conferences_for_user(self, profile):
+        if not settings.COSINNUS_CONFERENCES_ENABLED:
+            return []
+        
+        from cosinnus.models.group_extra import CosinnusConference
+        applications = profile.user.user_applications.all()
+        conferences_application_ids = list(
+            applications.values_list('conference__id', flat=True))
+        conferences_membership_ids = [conference.id
+                                      for conference
+                                      in profile.cosinnus_conferences]
+        unique_ids = set(conferences_application_ids +
+                         conferences_membership_ids)
+
+        current_conferences = CosinnusConference.objects.filter(
+            id__in=list(unique_ids)).filter(to_date__gte=now()).order_by('from_date')
+        ended_conferences = CosinnusConference.objects.filter(
+            id__in=list(unique_ids)).exclude(to_date__gte=now()).order_by('-from_date')
+
+        conferences = list(current_conferences) + list(ended_conferences)
+        return conferences
     
     def get_context_data(self, **kwargs):
         context = super(UserProfileDetailView, self).get_context_data(**kwargs)
@@ -234,6 +256,7 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
             'optional_fields': profile.get_optional_fields(),
             'profile': profile,
             'this_user': profile.user,
+            'conferences': self.get_conferences_for_user(profile)
         })
         return context
 
@@ -276,28 +299,32 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
             set a new email-to-be-verified and send user a confirmation email. """
         self.object = self.get_object()
         user = self.object.user
+        self.target_email_to_confirm = None
         if request.POST.get('user-email', user.email) != user.email and check_user_integrated_portal_member(user):
             messages.warning(request, _('Your user account is associated with an integrated Portal. This account\'s email address is fixed and therefore was left unchanged.'))
             request.POST._mutable = True
             request.POST['user-email'] = user.email
         elif not self.is_admin_elevated_view and request.POST.get('user-email', user.email) != user.email and CosinnusPortal.get_current().email_needs_verification:
-            # set flags to be changed if form submit is successful
-            self.target_email_to_confirm = request.POST['user-email']
-            self.user = user
-            request.POST._mutable = True
-            request.POST['user-email'] = user.email
+            email = request.POST['user-email'].strip().lower()
+            # email is supposed to be changed. if the email is a duplicate, let form validation (in clean_email) take its course
+            if not get_user_model().objects.filter(email__iexact=email).exclude(username=user.username).count():
+                # otherwise set flags for an email-change-verification mail to be sent if form submit is successful
+                self.target_email_to_confirm = request.POST['user-email']
+                self.user = user
+                request.POST._mutable = True
+                request.POST['user-email'] = user.email
         return super(UserProfileUpdateView, self).post(request, *args, **kwargs)
     
     def form_valid(self, form):
         try:
             ret = super(UserProfileUpdateView, self).form_valid(form)
-            messages.success(self.request, self.message_success)
             
             # send out email confirmation email
             if getattr(self, 'target_email_to_confirm', None):
-                set_user_email_to_verify(self.user, self.target_email_to_confirm, self.request, user_has_just_registered=False)
+                send_user_email_to_verify(self.user, self.target_email_to_confirm, self.request, user_has_just_registered=False)
                 messages.warning(self.request, _('You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!'))
-            
+            else:
+                messages.success(self.request, self.message_success)
         except AttributeError as e:
             if str(e) == "'dict' object has no attribute '_committed'":
                 # here we couldn't save the avatar

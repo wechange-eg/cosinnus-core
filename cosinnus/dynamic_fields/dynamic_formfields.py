@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import importlib
+import pycountry
+
 from django_select2.fields import Select2MultipleChoiceField, Select2ChoiceField
 from django_select2.widgets import Select2Widget, HeavySelect2MultipleWidget
 
@@ -17,6 +20,8 @@ from cosinnus.dynamic_fields import dynamic_fields
 from cosinnus.forms.select2 import HeavySelect2MultipleFreeTextChoiceWidget, \
     HeavySelect2FreeTextChoiceWidget
 from cosinnus.utils.user import get_user_select2_pills
+from cosinnus.utils.functions import is_number
+from django.core.validators import MaxLengthValidator
 
 
 class DynamicFieldFormFieldGenerator(object):
@@ -79,9 +84,14 @@ class DynamicFieldFormFieldGenerator(object):
 
 class TextDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
     formfield_class = forms.CharField
+    
+    def get_formfield_kwargs(self):
+        kwargs = {}
+        if self._dynamic_field_options.max_length and is_number(self._dynamic_field_options.max_length):
+            kwargs['validators'] = [MaxLengthValidator(self._dynamic_field_options.max_length)]
+        return kwargs
 
-class TextAreaDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
-    formfield_class = forms.CharField
+class TextAreaDynamicFieldFormFieldGenerator(TextDynamicFieldFormFieldGenerator):
     widget_class = forms.Textarea
 
 class IntDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
@@ -104,6 +114,9 @@ class CountryDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
 
 class PhoneDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
     formfield_class = PhoneNumberField
+
+class EmailDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
+    formfield_class = forms.EmailField
 
 class URLDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
     formfield_class = forms.URLField
@@ -209,7 +222,26 @@ class PredefinedChoicesTextDynamicFieldFormFieldGenerator(_BaseSelect2DynamicFie
     
     def get_formfield_kwargs(self):
         return {'choices': self._dynamic_field_options.choices}
-    
+
+class DynamicChoicesFieldFormFieldGenerator(_BaseSelect2DynamicFieldFormFieldGenerator):
+
+    def get_formfield_kwargs(self):
+        function_string = self._dynamic_field_options.function_string
+        mod_name, func_name = function_string.rsplit('.', 1)
+        mod = importlib.import_module(mod_name)
+        func = getattr(mod, func_name)
+        choices = func()
+        return {'choices': choices}
+
+class LanguageDynamicFieldFormFieldGenerator(_BaseSelect2DynamicFieldFormFieldGenerator):
+
+    def get_formfield_kwargs(self):
+        all_languages = [(lang.alpha_2, _(lang.name))
+                         for lang in pycountry.languages
+                         if hasattr(lang, 'alpha_2')]
+        choices = [('', _('No choice'))] + all_languages
+        return {'choices': choices}
+
     
 class AdminDefinedChoicesTextDynamicFieldFormFieldGenerator(_BaseSelect2DynamicFieldFormFieldGenerator):
     
@@ -299,7 +331,9 @@ EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS = {
     dynamic_fields.DYNAMIC_FIELD_TYPE_BOOLEAN: BooleanDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_DATE: DateDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_COUNTRY: CountryDynamicFieldFormFieldGenerator,
+    dynamic_fields.DYNAMIC_FIELD_TYPE_LANGUAGE: LanguageDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_PHONE: PhoneDynamicFieldFormFieldGenerator,
+    dynamic_fields.DYNAMIC_FIELD_TYPE_EMAIL: EmailDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_URL: URLDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_PREDEFINED_CHOICES_TEXT: PredefinedChoicesTextDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT: AdminDefinedChoicesTextDynamicFieldFormFieldGenerator,
@@ -308,4 +342,5 @@ EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS = {
     dynamic_fields.DYNAMIC_FIELD_TYPE_FREE_CHOICES_TEXT: FreeChoicesTextDynamicFieldFormFieldGenerator, 
     # TODO: make this a custom field with value parsing and template
     dynamic_fields.DYNAMIC_FIELD_TYPE_MULTI_ADDRESS: MultiAddressDynamicFieldFormFieldGenerator,
+    dynamic_fields.DYNAMIC_FIELD_TYPE_DYNAMIC_CHOICES: DynamicChoicesFieldFormFieldGenerator
 }

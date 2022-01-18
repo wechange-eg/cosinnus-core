@@ -227,6 +227,14 @@ def check_user_portal_admin(user, portal=None):
     return user.id in portal.admins
 
 
+def check_user_portal_manager(user, portal=None):
+    """ Checks permissions if a user is a portal manager in the given or current portal.
+            returns ``True`` if the user is a portal manager
+    """
+    portal = portal or CosinnusPortal.get_current()
+    return user.id in portal.managers
+
+
 def check_user_portal_moderator(user, portal=None):
     """ Checks if a user is a portal moderator (must also be portal admin) in the given or current portal.
             returns ``True`` if the user is a portal moderator
@@ -250,7 +258,13 @@ def check_user_can_receive_emails(user):
     if not user.is_authenticated:
         return not GlobalBlacklistedEmail.is_email_blacklisted(user.email)
     else:
-        return user.is_active and GlobalUserNotificationSetting.objects.get_for_user(user) > GlobalUserNotificationSetting.SETTING_NEVER
+        verified_check = (CosinnusPortal.get_current().email_needs_verification == False) or check_user_verified(user)
+        return (user.is_active and verified_check and
+                GlobalUserNotificationSetting.objects.get_for_user(user) > GlobalUserNotificationSetting.SETTING_NEVER)
+
+def check_user_verified(user):
+    """ Checks if the user is logged in and has a verified email address """
+    return user.is_authenticated and user.is_active and user.cosinnus_profile.email_verified
 
 
 def filter_tagged_object_queryset_for_user(qs, user):

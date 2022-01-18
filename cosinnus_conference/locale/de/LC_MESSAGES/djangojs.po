@@ -262,6 +262,12 @@ msgstr "Jetzt"
 msgid "Organization"
 msgstr "Institution"
 
+#. [City]
+#. defaultMessage is:
+#. undefined
+msgid "City"
+msgstr "Stadt"
+
 #. [Represented organizations]
 #. defaultMessage is:
 #. undefined
@@ -363,11 +369,20 @@ msgid "Are you sure you want to leave this video conference?"
 msgstr "Sind Sie sicher, dass Sie diese Videokonferenz verlassen wollen?"
 
 msgid ""
-"If you click, you will leave the video conference. Are you sure "
-"you want to leave? Tip: Alternatively, you can open the link in a new "
-"tab or window and stay in the event."
+"If you click, you will leave the video conference. Are you sure you want to leave? "
+"Tip: Alternatively, you can open the link in a new tab or window and stay in the "
+"event."
 msgstr ""
-"Wenn Sie Ihren Klick ausführen, würden Sie die Videkonferenz verlassen. "
-"Sind Sie sicher, dass Sie gehen möchten? Tipp: Alternativ können Sie "
-"den Link in einer neuen Registerkarte oder in einem neuen Fenster "
-"öffnen und in der Veranstaltung bleiben."
+"Wenn Sie Ihren Klick ausführen, würden Sie die Videkonferenz verlassen. Sind Sie "
+"sicher, dass Sie gehen möchten? Tipp: Alternativ können Sie den Link in einer neuen "
+"Registerkarte oder in einem neuen Fenster öffnen und in der Veranstaltung bleiben."
+
+msgid ""
+"Your profile is not shown here or not displayed correctly? Add to your profile or "
+"make yourself visible to other conference participants."
+msgstr ""
+"Dein Profil wird hier nicht oder nicht richtig angezeigt? Ergänze dein Profil bzw. "
+"mache dich sichtbar für andere Tagungsteilehmende."
+
+msgid "Edit Profile"
+msgstr "Profil bearbeiten"

@@ -53,7 +53,7 @@
             if (typeof target === "undefined") {
                 target = 'body';
             }
-            $(target).on('click','.fadedown .btn:first-child .fadedown-clickarea, .fadedown .btn:first-child.fadedown-clickarea, .fadedown a.fadedown-clickarea',function(e) {
+            $(target).on('click','.fadedown .btn:first-child .fadedown-clickarea, .fadedown .btn:first-child.fadedown-clickarea, .fadedown .fadedown-clickarea',function(e) {
                 if (!$(this).closest('.fadedown').hasClass('open')) {
                     // closed
                     $(this)
@@ -238,6 +238,7 @@
                         contentHeight: 'auto',
                         displayEventTime: false,
                         eventDisplay: 'block',
+                        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
                     }, dateFormat))
                     calendarList.setOption('locale', cosinnus_current_language);
                     calendarList.render();
@@ -278,6 +279,8 @@
                         fixedWeekCount: false,
                         editable: editable,
                         events: cosinnus_calendarEvents,
+                        selectLongPressDelay: 300,
+                        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
                         eventDrop: function(date) {
                             $(calendarEl)
                                 .closest('.big-calendar')
@@ -323,6 +326,8 @@
                         contentHeight: 'auto',
                         eventDisplay: 'background',
                         selectable: true,
+                        selectLongPressDelay: 300,
+                        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
                         dateClick: function(date) {
                             $(calenderEl).trigger('fullCalendarDayClick',[date]);
                         },
@@ -332,6 +337,10 @@
                         }
                     }, dateFormat));
                     calendar.setOption('locale', cosinnus_current_language);
+                    if (calenderEl.hasAttribute('data-initial-date')) {
+                        var initialDate = calenderEl.getAttribute('data-initial-date').replace(/\s/g, '');
+                        calendar.gotoDate(initialDate);
+                    }
                     calendar.render();
                     $.cosinnus.initializedFullcalendars.push(calendar);
                 });
@@ -381,7 +390,9 @@
                             ? date.start.getDate()
                             : "0" + date.start.getDate());
 
-                    date.end.setDate(date.end.getDate()-1)
+                    if (date.allDay) {
+                        date.end.setDate(date.end.getDate()-1)
+                    }
 
                     var endDateDataAttr = date.end.getFullYear() + "-"
                         + ((date.end.getMonth()+1).toString().length === 2
@@ -811,6 +822,7 @@
                 var mom = moment(data_date);
                 var diff_days = mom.diff(moment(), 'days');
                 
+
                 if ($(this).attr('data-date-style') == 'short') {
                     // render the date without time
                     moment.lang(moment.lang(),$.cosinnus.momentShort);
@@ -824,6 +836,7 @@
                         $(this).text(mom.calendar());
                     }
                 }
+
                 // add the absolute date as tooltip
                 if ($(this).attr('data-date-notooltip') != 'true') {
                     $(this).attr('title', mom.format('LLLL'));
@@ -832,6 +845,27 @@
 
             $('.moment-data-date').each(function() {
                 $(this).trigger('renderMomentDataDate');
+            });
+        },
+
+        renderTimezoneAwareDates: function () {
+
+            $('.moment-timezone-aware-date').each(function() {
+                var browserTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+
+                var fromDate = $(this).attr('data-from-date')
+                var toDate = $(this).attr('data-to-date')
+
+                var browserTimezoneFromDate = moment.tz(fromDate, browserTimezone)
+                var browserTimezoneToDate = moment.tz(toDate, browserTimezone)
+
+                var utcServerOffset = moment.parseZone(fromDate).utcOffset()
+                var utcBrowserOffset = browserTimezoneToDate.utcOffset()
+                if (utcBrowserOffset !== utcServerOffset) {
+                    var fromDateFormated = browserTimezoneFromDate.format('LLLL')
+                    var toDateFormated = browserTimezoneToDate.format('LLLL')
+                    $(this).text(fromDateFormated + ' - ' + toDateFormated  + ' (' + browserTimezone + ')')
+                }
             });
         },
 
@@ -1768,6 +1802,7 @@ $(function() {
     $.cosinnus.searchbar();
     $.cosinnus.datePicker();
     $.cosinnus.renderMomentDataDate();
+    $.cosinnus.renderTimezoneAwareDates();
     $.cosinnus.etherpadEditMeta();
     $.cosinnus.etherpadList();
     $.cosinnus.inputDynamicSendButton();

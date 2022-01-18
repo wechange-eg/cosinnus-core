@@ -44,6 +44,8 @@ from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.utils.user import get_newly_registered_user_email, is_user_active
 from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
 
+from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
+
 
 logger = logging.getLogger('cosinnus')
 
@@ -93,7 +95,7 @@ class BaseUserProfileManager(models.Manager):
 
 @python_2_unicode_compatible
 class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
-                      LikeableObjectMixin, CosinnusManagedTagAssignmentModelMixin,
+                      TranslateableFieldsModelMixin, LikeableObjectMixin, CosinnusManagedTagAssignmentModelMixin,
                       models.Model):
     """
     This is a base user profile used within cosinnus. To use it, create your
@@ -126,8 +128,13 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     # such as middle name, list the field names here
     ADDITIONAL_USERNAME_FIELDS = []
     
+    if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
+        translateable_fields = ['description']
+    
     user = models.OneToOneField(settings.AUTH_USER_MODEL, editable=False,
         related_name='cosinnus_profile', on_delete=models.CASCADE)
+    # whether this user's email address has been verified. non-verified users do not receive emails
+    email_verified = models.BooleanField(_('Email verified'), default=False)
     
     avatar = models.ImageField(_("Avatar"), null=True, blank=True,
         upload_to=get_avatar_filename)
@@ -266,7 +273,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     def cosinnus_groups(self):
         """ Returns all groups this user is a member or admin of """
         return get_cosinnus_group_model().objects.get_for_user(self.user)
-    
+
     @property
     def cosinnus_groups_pks(self):
         """ Returns all group ids this user is a member or admin of """
@@ -283,6 +290,12 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
         """ Returns all societies this user is a member or admin of """
         from cosinnus.models.group_extra import CosinnusSociety
         return CosinnusSociety.objects.get_for_user(self.user)
+
+    @property
+    def cosinnus_conferences(self):
+        """ Returns all conferences this user is a member or admin of """
+        from cosinnus.models.group_extra import CosinnusConference
+        return CosinnusConference.objects.get_for_user(self.user)
     
     def get_deactivated_groups(self):
         """ Returns a QS of all (untyped) deactivated groups for this user """
@@ -344,7 +357,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
             else:
                 redirects.append((resolved_url, message))
             self.settings[PROFILE_SETTING_REDIRECT_NEXT_VISIT] = redirects
-            self.save(update_fields=['settings'])
+            self.save()
     
     def pop_next_redirect(self):
         """ Tries to remove the first redirect URL in the user's setting's redirect list, and return it.
@@ -400,6 +413,19 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     def rocket_username(self, username):
         """ Sets new username for Rocket.Chat """
         self.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME] = username
+        
+    @property
+    def rocket_user_email(self):
+        """ Returns the email that rocketchat should use for this user.
+            Rocket should only ever be given the user's email through this getter.
+            Depending on the verification status of the user account,
+            this email might be a fake @wechange email instead of the real account's email
+            because rocketchat can just not behave and never send emails, and the "mail is verified"
+            feature is broken and still sends out emails. We have to prevent that for unverified mails. """
+        portal = CosinnusPortal.get_current()
+        if portal.email_needs_verification and not self.email_verified:
+            return f'unverified_rocketchat_{portal.slug}_{portal.id}_{self.user.id}@wechange.de'
+        return self.user.email.lower()
 
     @property
     def workshop_user_name(self):
