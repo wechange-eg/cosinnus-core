@@ -1,6 +1,5 @@
 from django.core.exceptions import ImproperlyConfigured
 from django.db import models
-from django.contrib.postgres.fields.jsonb import JSONField as PostgresJSONField
 from django.utils.translation import get_language
 
 from cosinnus.conf import settings
@@ -30,7 +29,7 @@ class TranslateableFieldsModelMixin(models.Model):
     class Meta(object):
         abstract = True
 
-    translations = PostgresJSONField(default=dict, blank=True)
+    translations = models.JSONField(default=dict, blank=True)
 
     @property
     def languages(self):

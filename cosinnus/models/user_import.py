@@ -6,7 +6,6 @@ import locale
 import six
 from threading import Thread
 
-from django.contrib.postgres.fields.jsonb import JSONField as PostgresJSONField
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models, transaction
 from django.urls.base import reverse
@@ -103,9 +102,8 @@ class CosinnusUserImport(models.Model):
     state = models.PositiveSmallIntegerField(_('Import state'), blank=False,
         default=STATE_DRY_RUN_RUNNING, choices=STATE_CHOICES, editable=False)
     
-    import_data = PostgresJSONField(default=dict, verbose_name=_('Import Data'), blank=True,
-        help_text='Stores the uploaded CSV data',
-        encoder=DjangoJSONEncoder, editable=False)
+    import_data = models.JSONField(default=dict, verbose_name=_('Import Data'), blank=True,
+        help_text='Stores the uploaded CSV data', editable=False)
     import_report_html = models.TextField(verbose_name=_('Import Report HTML'),
        help_text='Stores the generated report for what the import will do / has done.', blank=True)
     

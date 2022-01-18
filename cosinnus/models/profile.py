@@ -10,11 +10,10 @@ from annoying.functions import get_object_or_None
 import django
 from django.apps import apps
 from django.contrib.contenttypes.fields import GenericRelation
-from django.contrib.postgres.fields import JSONField as PostgresJSONField
+from django.db.models import JSONField
 from django.templatetags.static import static
 from django.core.cache import cache
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
-from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models, transaction
 from django.db.models.signals import post_save, class_prepared
 from django.template.loader import render_to_string
@@ -24,7 +23,6 @@ from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 from django_countries.fields import CountryField
-from jsonfield import JSONField
 import six
 
 from cosinnus.conf import settings
@@ -153,13 +151,11 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     may_be_contacted = models.BooleanField(_('May be contacted'), default=False)
     
     # UI and other preferences and extra settings for the user account
-    settings = JSONField(default={}, blank=True)
-    extra_fields = JSONField(default={}, blank=True,
+    settings = JSONField(default=dict, blank=True)
+    extra_fields = JSONField(default=dict, blank=True,
                 help_text='NO LONGER USED! Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`')
-    dynamic_fields = PostgresJSONField(default=dict, blank=True, verbose_name=_('Dynamic extra fields'),
-                help_text='Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`',
-                encoder=DjangoJSONEncoder)                       
-    
+    dynamic_fields = JSONField(default=dict, blank=True, verbose_name=_('Dynamic extra fields'),
+                help_text='Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`')
     scheduled_for_deletion_at = models.DateTimeField(_('Scheduled for Deletion at'), default=None, blank=True, null=True,
                                                help_text=_('The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)'))
     deletion_triggered_by_self = models.BooleanField(_('Deletion triggered by self'), default=False, editable=False)

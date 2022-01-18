@@ -36,7 +36,6 @@ from django.core.cache import cache
 from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
 from django.utils.http import urlencode
 from django.core.validators import validate_comma_separated_integer_list
-from django.contrib.postgres.fields.jsonb import JSONField
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 
@@ -313,7 +312,7 @@ class LastVisitedObject(models.Model):
         verbose_name=_('Visited'),
         auto_now_add=True)
     
-    item_data = JSONField(
+    item_data = models.JSONField(
         'Data',
         help_text='Stores a JSON representation of the target object, as converted by a `DashboardItem`.')
 
@@ -410,7 +409,7 @@ class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableOb
         related_name='+',
         help_text='The user which caused the last significant action to update the `last_action` datetime.')
 
-    settings = JSONField(default=dict, blank=True, null=True)
+    settings = models.JSONField(default=dict, blank=True, null=True)
 
     class Meta(object):
         abstract = True
