@@ -594,9 +594,17 @@ class ConferenceRecordedMeetingsView(SamePortalGroupMixin, RequireWriteMixin, Gr
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        recorded_meetings = []
+        recorded_meetings_not_set_up = False
+        try:
+            recorded_meetings = self.get_recorded_meetings()
+        except BigBlueButtonAPI.RecordingAPIServerNotSetUp:
+            recorded_meetings_not_set_up = True
+            
         context.update({
-            'object_list': self.get_recorded_meetings(),
+            'object_list': recorded_meetings,
             'object': self.group,
+            'recorded_meetings_not_set_up': recorded_meetings_not_set_up,
         })
         return context
 

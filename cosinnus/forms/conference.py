@@ -127,7 +127,8 @@ class CosinnusConferenceSettingsMultiForm(ConferenceSettingsFormMixin, forms.Mod
     class Meta(object):
         # note: all real fields are excluded, as we generate virtual fields that determine the value of `bbb_params`
         model = CosinnusConferenceSettings
-        exclude = ('object_id', 'content_type', 'bbb_server_choice', 'bbb_server_choice_premium', 'bbb_params')
+        exclude = ('object_id', 'content_type', 'bbb_server_choice', 'bbb_server_choice_premium',
+                   'bbb_server_choice_recording_api', 'bbb_params')
     
     def get_group_object(self):
         return self.multiform.forms['obj'].group

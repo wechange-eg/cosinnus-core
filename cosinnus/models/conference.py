@@ -120,6 +120,9 @@ class CosinnusConferenceSettings(models.Model):
     bbb_server_choice_premium = models.PositiveSmallIntegerField(_('BBB Server for Premium Conferences'), blank=False,
         default=SETTING_INHERIT, choices=BBB_SERVER_CHOICES_WITH_INHERIT,
         help_text='The chosen BBB-Server/Cluster setting for the generic object, that will be used when the group of that object is currently in its premium state. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!')
+    bbb_server_choice_recording_api = models.PositiveSmallIntegerField(_('BBB Recording API server'), blank=False,
+        default=SETTING_INHERIT, choices=BBB_SERVER_CHOICES_WITH_INHERIT,
+        help_text='The chosen BBB-Server/Cluster setting for connections to the recording API server. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!')
     
     bbb_params = PostgresJSONField(default=dict, blank=True, verbose_name=_('BBB API Parameters'),
             help_text='Custom parameters for API calls like join/create for all BBB rooms for this object and in its inherited objects.',
@@ -145,6 +148,7 @@ class CosinnusConferenceSettings(models.Model):
     INHERITABLE_FIELDS = [
         'bbb_server_choice',
         'bbb_server_choice_premium',
+        'bbb_server_choice_recording_api',
     ]
     
     CACHE_KEY = 'cosinnus/core/conferencesetting/class/%s/id/%d'
@@ -451,6 +455,10 @@ class CosinnusConferenceSettings(models.Model):
     @property
     def bbb_server_choice_premium_text(self):
         return self._text_for_server_choice(self.bbb_server_choice_premium)
+    
+    @property
+    def bbb_server_choice_recording_api_text(self):
+        return self._text_for_server_choice(self.bbb_server_choice_recording_api)
     
 
 class CosinnusConferenceRoomQS(models.query.QuerySet):

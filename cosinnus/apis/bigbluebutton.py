@@ -35,6 +35,11 @@ class BigBlueButtonAPI(object):
     
     api_auth_url = None
     api_auth_secret = None
+    recording_api_auth_url = None
+    recording_api_auth_secret = None
+    
+    class RecordingAPIServerNotSetUp(Exception):
+        pass
     
     def __init__(self, source_object=None):
         """ Important: Which API target this object uses is determined
@@ -44,22 +49,29 @@ class BigBlueButtonAPI(object):
             :param source_object: The object the room is attached to. Can be a media_tag (BaseTagObject), ConferenceRoom,
                          ConferenceEvent, CosinnusGroup.
                          Default: current CosinnusPortal, if None is given. """
-        api_auth_url, api_auth_secret = self._get_current_bbb_server_auth_pair(source_object=source_object)
-        if not api_auth_url or not api_auth_secret:
+        self._set_current_bbb_server_auth(source_object=source_object)
+        if not self.api_auth_url or not self.api_auth_secret:
             raise ImproperlyConfigured("No valid BBB server auth is currently configured or selected as active for this portal!")
-        self.api_auth_url = api_auth_url
-        self.api_auth_secret = api_auth_secret
-    
-    def _get_current_bbb_server_auth_pair(self, source_object=None):
-        """ Central helper function to retrieve the currently
+        
+    def _set_current_bbb_server_auth(self, source_object=None):
+        """ Central helper function to retrieve and set the currently
             selected BBB-server API URL and Secret.
             
-            @return: tuple of (str: BBB_API_URL, str: BBB_SECRET_KEY) if a server is set, 
-                        or (None, None) if no server is set """
+            Sets:
+                - self.api_auth_url
+                - self.api_auth_secret
+                - self.recording_api_auth_url
+                - self.recording_api_auth_secret
+        """
                         
         current_portal = CosinnusPortal.get_current()
         if source_object is None:
             source_object = current_portal
+        
+        self.api_auth_url = None
+        self.api_auth_secret = None
+        self.recording_api_auth_url = None
+        self.recording_api_auth_secret = None
         
         conference_settings = CosinnusConferenceSettings.get_for_object(source_object)
         if conference_settings:
@@ -71,23 +83,27 @@ class BigBlueButtonAPI(object):
                     bbb_server_choice = conference_settings.bbb_server_choice
                 
                 auth_pair = dict(settings.COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS).get(bbb_server_choice)
-                return (auth_pair[0], auth_pair[1]) # force fail on improper tuple
+                self.api_auth_url = auth_pair[0]
+                self.api_auth_secret = auth_pair[1]
+                
+                recording_api_auth_pair = dict(settings.COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS).get(conference_settings.bbb_server_choice_recording_api)
+                if recording_api_auth_pair is not None:
+                    self.recording_api_auth_url = recording_api_auth_pair[0]
+                    self.recording_api_auth_secret = recording_api_auth_pair[1]
             except Exception as e:
                 logger.error('Misconfigured: Either COSINNUS_BBB_SERVER_CHOICES or COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS are not properly set up!',
                              extra={'exception': e})
                 if settings.DEBUG:
                     raise
         
-        return (None, None)
-    
-    
     def join_url_tokenized(self, meeting_id, name, password):
         url = self.join_url(meeting_id, name, password)
         return requests.get(url).url
     
-    
-    def api_call(self, query, call):
-        prepared = '{}{}{}'.format(call, query, self.api_auth_secret)
+    def api_call(self, query, call, secret=None):
+        if secret is None:
+            secret = self.api_auth_secret
+        prepared = '{}{}{}'.format(call, query, secret)
     
         if settings.BBB_HASH_ALGORITHM == "SHA1":
             checksum = sha1(str(prepared).encode('utf-8')).hexdigest()
@@ -334,11 +350,15 @@ class BigBlueButtonAPI(object):
     def get_recorded_meetings(self, group_id=None):
         """ This an implementation of the `getRecordings` API call for BBB.
             Will only retrieve recorded meetings with the meta tag assigning it to the current portal.
+            Note: this uses a seperate API url and auth from the regular BBB servers!
             
             @param group_id: if supplied, will only return recorded meetings for the CosinnusGroup (conference)
                 with the given id.
             :return: a list of JSON objects for the recorded meetings
         """
+        
+        if not self.recording_api_auth_secret or not self.recording_api_auth_url:
+            raise self.RecordingAPIServerNotSetUp()
         
         call = 'getRecordings'
         portal_slug = CosinnusPortal.get_current().slug
@@ -354,8 +374,9 @@ class BigBlueButtonAPI(object):
                 ('meta_we-portal', portal_slug),
             ]
         query = urllib.parse.urlencode(query_params)
-        hashed = self.api_call(query, call)
-        url = self.api_auth_url + call + '?' + hashed
+        # Note: using different api urls for recording API calls
+        hashed = self.api_call(query, call, secret=self.recording_api_auth_secret)
+        url = self.recording_api_auth_url + call + '?' + hashed
         response = requests.get(url)
         
         if response.status_code == 200:

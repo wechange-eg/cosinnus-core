@@ -13,7 +13,14 @@
 {% endblock %}
 
 {% block content %}
-    {% if not group.is_premium_ever %}
+    {% if recorded_meetings_not_set_up %}
+        <div class="alert alert-warning alert-dismissable">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+            <p>
+                {% trans "Unfortunately recorded meetings are currently not yet available for this server!" %}
+            </p>
+        </div>
+    {% elif not group.is_premium_ever %}
         <div class="alert alert-warning alert-dismissable">
             <i class="fa fa-exclamation-triangle fa-3x"></i>
             <p>
