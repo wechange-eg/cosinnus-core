@@ -46,8 +46,9 @@ cosinnus_group_patterns = [
         name='index'),
     url(r'^(?P<slug>[^/]+)/$', views.conference_page,
         name='room'),
-    url(r'^(?P<slug>[^/]+)/#/(?P<event_id>[^/]+)$', views.conference_page,
-        name='room-event'),
+    # this does not work, as the # fragment is never given to the server as per URI spec, so we cannot match it
+    #url(r'^(?P<slug>[^/]+)/#/(?P<event_id>[^/]+)$', views.conference_page,
+    #    name='room-event'),
 
 ]
 
