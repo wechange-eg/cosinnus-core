@@ -25,7 +25,6 @@ from django.http.response import HttpResponseForbidden
 from django.utils.crypto import get_random_string
 from cosinnus.models.group import CosinnusPortal
 from django.core.exceptions import ImproperlyConfigured
-from pip._internal.cli.cmdoptions import editable
 from cosinnus.utils.functions import clean_single_line_text
 from django.template.defaultfilters import truncatechars
 from cosinnus.models.membership import MEMBERSHIP_MEMBER, MANAGER_STATUS
