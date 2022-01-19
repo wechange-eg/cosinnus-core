@@ -418,16 +418,19 @@ class BBBRoom(models.Model):
             group = source_object.group
         elif type(source_object) is get_cosinnus_group_model() or issubclass(source_object.__class__, get_cosinnus_group_model()):
             group = source_object
+        portal_slug = CosinnusPortal.get_current().slug
         if group:
             params.update({
+                'meta_we-portal-group-id': f'{portal_slug}-{group.id}',
                 'meta_we-group-id': group.id,
                 'meta_we-group-slug': group.slug,
                 'meta_we-group-name': group.name,
             })
         params.update({
-            'meta_we-portal': CosinnusPortal.get_current().slug,
+            'meta_we-portal': portal_slug,
             'meta_we-meeting-id': meeting_id,
             'meta_we-meeting-name': meeting_name,
+            'meta_we-portal-source-object': f'{portal_slug}-{source_object._meta.model_name}-{source_object.id}'
         })
         return params
     

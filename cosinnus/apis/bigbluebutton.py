@@ -341,12 +341,17 @@ class BigBlueButtonAPI(object):
         """
         
         call = 'getRecordings'
-        query_params = [
-            ('meta_we-portal', CosinnusPortal.get_current().slug),
-        ]
+        portal_slug = CosinnusPortal.get_current().slug
         if group_id is not None:
-            query_params += [
-                ('meta_we-group-id', group_id),
+            # NOTE: currently, ScaleLite can only OR query terms, not AND them, so we cannot filter for recordings
+            # by querying for the meta tags for portal and group.
+            # that's why we use this combined portal+group-id metatag "meta_we-portal-group-id" to filter with only one query
+            query_params = [
+                ('meta_we-portal-group-id', f'{portal_slug}-{group_id}'),
+            ]
+        else:
+            query_params = [
+                ('meta_we-portal', portal_slug),
             ]
         query = urllib.parse.urlencode(query_params)
         hashed = self.api_call(query, call)
