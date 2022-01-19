@@ -112,11 +112,18 @@ class UserCreateUpdateSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'email', 'first_name', 'last_name', 'password',
                   'location', 'dynamic_fields', 'groups', 'avatar')
-
+    
+    def _sanity_check_userprofile(self, user):
+        # sanity check, retrieve the user's profile (will create it if it doesnt exist)
+        if not user.cosinnus_profile:
+            get_user_profile_model()._default_manager.get_for_user(user)
+    
     def get_location(self, obj):
+        self._sanity_check_userprofile(obj)
         return obj.cosinnus_profile.media_tag.location or ""
 
     def get_dynamic_fields(self, obj):
+        self._sanity_check_userprofile(obj)
         return obj.cosinnus_profile.dynamic_fields
 
     def get_groups(self, obj):
@@ -124,4 +131,5 @@ class UserCreateUpdateSerializer(serializers.ModelSerializer):
         return list(queryset.values_list('group__slug', flat=True))
 
     def get_avatar(self, obj):
+        self._sanity_check_userprofile(obj)
         return obj.cosinnus_profile.avatar_url
