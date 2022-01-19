@@ -463,6 +463,15 @@ class BBBRoom(models.Model):
         # this is the merged params object containing the flattened hierarchy of inherited objects
         bbb_params = conference_settings.get_finalized_bbb_params()
         call_params = bbb_params.get(api_call_method, {})
+        # block "premium only" params for non-premium source obejcts 
+        # by resetting their call values to the portal default ones
+        source_group = source_object.get_group_for_bbb_room()
+        if not source_group.is_premium_ever:
+            for premium_preset_name in settings.BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY:
+                preset_call_param_dict = list(settings.BBB_PRESET_FORM_FIELD_PARAMS.get(premium_preset_name, {}).values())[0].get(api_call_method, {})
+                for blocked_param_name in preset_call_param_dict.keys():
+                    portal_default_value = settings.BBB_PARAM_PORTAL_DEFAULTS.get(api_call_method, {}).get(blocked_param_name)
+                    call_params[blocked_param_name] = portal_default_value
         return call_params
     
     def get_join_url(self, user):
