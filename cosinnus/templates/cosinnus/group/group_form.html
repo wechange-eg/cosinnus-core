@@ -455,8 +455,10 @@
 					                            });
 					                        });
 					                    </script>
-					                    <div id="bbb-settings-advanced" style="margin-top: 20px; {% if form.forms.obj.initial.video_conference_type != 1 %}display: none;{% endif %}">
-					                        {% include 'cosinnus/conference/conference_settings_formfields.html' with form=form.forms.conference_settings_assignments %}
+					                    <div class="cosinnus-field ">
+						                    <div id="bbb-settings-advanced" style="margin-top: 20px; {% if form.forms.obj.initial.video_conference_type != 1 %}display: none;{% endif %}">
+						                        {% include 'cosinnus/conference/conference_settings_formfields.html' with form=form.forms.conference_settings_assignments %}
+						                    </div>
 					                    </div>
 					                {% endif %}
 								{% endif %}

@@ -99,26 +99,9 @@ class BBBRoom(models.Model):
     parent_meeting_id = models.CharField(max_length=100, blank=True, null=True)
     ended = models.BooleanField(default=False)
     
-    
-    # deprecated in favor of deriving create options directly from the source event!
-    options = JSONField(blank=True, null=True, default=dict, verbose_name="room options",
-                        editable=False,
-                        help_text="DEPRECATED! options for the room, that are represented in the bigbluebutton API")
-    # deprecated in favor of deriving create options directly from the source event!
-    welcome_message = models.CharField(max_length=300, null=True, blank=True, verbose_name=_("the rooms welcome message"),
-                                       editable=False,
-                                       help_text="DEPRECATED! the welcome message, that is displayed to attendees")
-    # deprecated in favor of deriving create options directly from the source event!
-    # type of the room. this determines which extra join call parameters are given
-    # along for the user join link. see `settings.BBB_DEPRECATED__ROOM_TYPE_EXTRA_JOIN_PARAMETERS`
-    room_type = models.PositiveSmallIntegerField(_('Room Type'), blank=False,
-        editable=False,
-        default=0, choices=((0, 'deprecated'),),
-        help_text="DEPRECATED!")
-    # deprecated in favor of deriving create options directly from the source event!
-    max_participants = models.PositiveIntegerField(blank=True, null=True, default=None, verbose_name="maximum number of users",
-                                                   editable=False,
-                                                   help_text="DEPRECATED! Maximum number in the conference at the same time. NOTE: Seems this needs to be +1 more the number that you actually want for BBB to allow!")
+    last_create_params = JSONField( verbose_name=_('Last create-call parameters'),
+        blank=True, null=True, default=dict, editable=False,
+        help_text="The parameters used for the last create call. Serves as a record only, new create params are derived from the source object's options!")
     
     
     objects = models.Manager()
@@ -251,6 +234,12 @@ class BBBRoom(models.Model):
             except Exception as e:
                 logger.exception(e)
         return False
+    
+    @property
+    def is_recorded_meeting(self):
+        """ Returns true if the options used for this meeting mean that the 
+            video conference will be recorded in BBB """
+        return self.last_create_params.get('record', None) == 'true'
 
     @property
     def source_object(self):
@@ -290,13 +279,15 @@ class BBBRoom(models.Model):
         source_obj = self.source_object
         if source_obj:
             presentation_url = source_obj.get_presentation_url()
+        
+        create_params = self.build_extra_create_parameters()
         m_xml = self.bbb_api.start(
             name=self.name,
             meeting_id=self.meeting_id,
             attendee_password=self.attendee_password,
             moderator_password=self.moderator_password,
             voice_bridge=self.voice_bridge,
-            options=self.build_extra_create_parameters(),
+            options=create_params,
             presentation_url=presentation_url,
         )
 
@@ -304,12 +295,10 @@ class BBBRoom(models.Model):
 
         if not meeting_json:
             raise ValueError('Unable to restart meeting %s!' % self.meeting_id)
-
-        if self.ended:
-            self.ended = False
-            self.save(update_fields=['ended'])
-
-        return None
+        
+        self.last_create_params = create_params
+        self.ended = False
+        self.save()
 
     @classmethod
     def create(cls, name, meeting_id, attendee_password=None,
@@ -360,13 +349,14 @@ class BBBRoom(models.Model):
             moderator_password = bbb_utils.random_password()
 
         bbb_api = BigBlueButtonAPI(source_object=source_object)
+        create_params = cls.build_extra_create_parameters_for_object(source_object, meeting_id=meeting_id, meeting_name=name)
         m_xml = bbb_api.start(
             name=name,
             meeting_id=meeting_id,
             attendee_password=attendee_password,
             moderator_password=moderator_password,
             voice_bridge=voice_bridge,
-            options=cls.build_extra_create_parameters_for_object(source_object, meeting_id=meeting_id, meeting_name=name),
+            options=create_params,
             presentation_url=presentation_url,
         )
 
@@ -382,6 +372,7 @@ class BBBRoom(models.Model):
         meeting.parent_meeting_id = meeting_json['parentMeetingID']
         meeting.voice_bridge = meeting_json['voiceBridge']
         meeting.dial_number = meeting_json['dialNumber']
+        meeting.last_create_params = create_params
 
         if not meeting_json:
             meeting.ended = True

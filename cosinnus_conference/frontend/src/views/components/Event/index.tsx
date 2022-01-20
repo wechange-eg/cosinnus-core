@@ -36,7 +36,12 @@ export function Event(props: EventProps) {
           if (response.status === 200) {
             response.json().then((data: EventResponse) => {
               if (data.status === 'DONE') {
+                if (data.recorded_meeting && !window.confirm("This session is being recorded. By continuing, you consent to be recorded.")) {
+                  setUrl('USERDECLINED');
+                  return;
+                } 
                 setUrl(data.url);
+                
               } else if (data.status === 'ERROR') {
                 setUrl('ERROR');
               } else {
@@ -62,6 +67,11 @@ export function Event(props: EventProps) {
       {(event && (url && url === 'ERROR') && (
         <Content className="fullheight">
           <Typography><FormattedMessage id="Event could not be loaded because of a server error."/></Typography>
+        </Content>
+      ))
+      || (event && (url && url === 'USERDECLINED') && (
+        <Content className="fullheight">
+          <Typography><FormattedMessage id="You have declined to be recorded and cannot join this meeting."/></Typography>
         </Content>
       ))
       || (event && (url || event.props.rawHtml) && (
