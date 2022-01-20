@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseForbidden, HttpResponseNotFound
 from django.utils.decorators import available_attrs
 from django.utils.translation import ugettext_lazy as _
+from cosinnus.utils.group import get_cosinnus_group_model
 
 from cosinnus_organization.models import CosinnusOrganization
 from cosinnus.utils.permissions import check_object_write_access,\
@@ -513,7 +514,7 @@ def require_write_access_groupless():
 
 
 
-def require_user_token_access(token_name, group_url_kwarg='group', group_attr='group'):
+def require_user_token_access(token_name, group_url_kwarg='group', group_attr='group', id_url_kwarg=None):
     """ A method decorator that allows access only if the URL params
     `user=999&token=1234567` are supplied, and if the token supplied matches
     the specific token (determined by :param ``token_name``) in the supplied 
@@ -552,10 +553,14 @@ def require_user_token_access(token_name, group_url_kwarg='group', group_attr='g
             self.user = user
             
             group_name = kwargs.get(group_url_kwarg, None)
-            if not group_name:
+            if id_url_kwarg is not None:
+                team_id = kwargs.get(id_url_kwarg)
+                group = get_cosinnus_group_model().objects.get_by_id(id=team_id, portal_id=CosinnusPortal.get_current().id)
+            elif not group_name:
                 return HttpResponseNotFound(_("No team provided"))
+            else:
+                group = get_group_for_request(group_name, request)
 
-            group = get_group_for_request(group_name, request)
             
             # set the group attribute
             setattr(self, group_attr, group)
