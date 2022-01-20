@@ -34,6 +34,8 @@ cosinnus_group_patterns = [
         name='applicants-details-download'),
     url(r'^recorded_meetings/$', views.conference_recorded_meetings,
         name='recorded-meetings'),
+    url(r'^recorded_meetings/delete/(?P<recording_id>[^/]+)/$', views.conference_recorded_meeting_delete,
+        name='delete-recorded-meeting'),
     url(r'^reminders/$', views.conference_reminders,
         name='reminders'),
     url(r'^confirm_send_reminder/$', views.conference_confirm_send_reminder,

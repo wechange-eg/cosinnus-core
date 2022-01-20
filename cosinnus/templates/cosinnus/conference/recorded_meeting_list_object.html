@@ -28,14 +28,14 @@
     </div>
 
     {% captureas modal_id %}deleteModal_{{ object.id }}{% endcaptureas %}
-    <button type="button" class="btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#{{ modal_id____TODO_remove_this_ }}">
+    <button type="button" class="btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#{{ modal_id }}">
         <ul class="media-list">
             <li class="media">
                 <span class="pull-left">
                     <i class="fa fa-eraser"></i>
                 </span>
                 <div class="media-body">
-                    {% trans "Delete (not yet implemented)" %}
+                    {% trans "Delete Recording" %}
                 </div>
             </li>
         </ul>
@@ -43,6 +43,7 @@
       
 </div><!-- fadedown -->
 
-{% captureas label %}{% blocktrans with title=object.title %}Do you really want to delete recorded meeting "{{ object.name }}"?{% endblocktrans %}{% endcaptureas %}
+{% captureas label %}{% blocktrans with title=object.name %}Do you really want to delete recorded meeting "{{ title }}"?{% endblocktrans %}{% endcaptureas %}
 {% captureas title %}{% trans "Delete recorded meeting" %}{% endcaptureas %}
-{% include "cosinnus/modal_box.html" with id=modal_id label=label title=title form_action="." %}
+{% group_url 'cosinnus:conference:delete-recorded-meeting' group=group recording_id=object.id as delete_url %}
+{% include "cosinnus/modal_box.html" with id=modal_id label=label title=title form_action=delete_url %}

@@ -13,6 +13,7 @@ from cosinnus.models.conference import CosinnusConferenceSettings,\
     get_parent_object_in_conference_setting_chain
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.dates import datetime_from_timestamp
+import xml.etree.ElementTree as ET
 
 logger = logging.getLogger('cosinnus')
 
@@ -425,3 +426,39 @@ class BigBlueButtonAPI(object):
             logger.error('BBB Room error: Server request `getRecordings` was not successful.',
                          extra={'response_status_code': response.status_code, 'result': response.text})
         return None
+    
+    def delete_recorded_meetings(self, record_id):
+        """ This an implementation of the `deleteRecordingsAnchor` API call for BBB.
+            Will delete a recording with the given id, if found.
+            Note: this uses a seperate API url and auth from the regular BBB servers!
+            
+            See https://docs.bigbluebutton.org/dev/api.html#deleterecordings
+            
+            @param record_id: the str recordID of the BBB recording to delete.
+            :return: True if the deletion was successful, False if not.
+        """
+        
+        if not self.recording_api_auth_secret or not self.recording_api_auth_url:
+            raise self.RecordingAPIServerNotSetUp()
+        
+        call = 'deleteRecordings'
+        query_params = [
+            ('recordID', record_id),
+        ]
+        query = urllib.parse.urlencode(query_params)
+        # Note: using different api urls for recording API calls
+        hashed = self.api_call(query, call, secret=self.recording_api_auth_secret)
+        url = self.recording_api_auth_url + call + '?' + hashed
+        response = requests.get(url)
+        
+        if response.status_code == 200:
+            xml_content = bbb_utils.parse_xml(response.content)
+            xml_content = ET.XML(response.content)
+            success = xml_content.find('returncode').text == 'SUCCESS'
+            if not success:
+                logger.error('BBB Room error: Server request `deleteRecordings` returned status 200, but the request was not successful.',
+                     extra={'response_status_code': response.status_code, 'result': response.text, 'recordID': record_id})
+            return success
+        logger.error('BBB Room error: Server request `deleteRecordings` was not successful.',
+                     extra={'response_status_code': response.status_code, 'result': response.text, 'recordID': record_id})
+        return False
