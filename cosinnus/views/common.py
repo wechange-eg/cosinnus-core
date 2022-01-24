@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from annoying.functions import get_object_or_None
 from bs4 import BeautifulSoup
 from django.apps import apps
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, logout
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.contenttypes.models import ContentType
@@ -29,6 +29,8 @@ from cosinnus.utils.permissions import check_object_write_access, \
     check_object_likefollowstar_access
 from cosinnus.utils.urls import safe_redirect
 from cosinnus.views.mixins.group import RequireCreateObjectsInMixin
+from django.shortcuts import redirect
+from cosinnus.views.user import send_user_email_to_verify
 
 
 class IndexView(RedirectView):
@@ -117,7 +119,17 @@ def cosinnus_login(request, **kwargs):
         kwargs['template_name'] = 'cosinnus/registration/login_sso_provider.html'
     
     response = LoginView.as_view(**kwargs)(request)  #login(request, **kwargs)
+    
     if request.method == 'POST' and request.user.is_authenticated:
+        # for email-verified-locked portals, "belatedly" refuse the login for users who haven't got their email verified
+        if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN \
+                and CosinnusPortal.get_current().email_needs_verification and not request.user.cosinnus_profile.email_verified:
+            # send user another verification email
+            send_user_email_to_verify(request.user, request.user.email, request)
+            messages.warning(request, _('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.'))
+            logout(request)
+            return redirect('login')
+        
         response.set_cookie('wp_user_logged_in', 1, 60*60*24*30) # 30 day expiry
     return response
 

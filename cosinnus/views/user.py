@@ -291,9 +291,14 @@ class UserCreateView(CreateView):
         else:
             # if registrations are open, the user may log in immediately. set the email_verified flag depending
             # on portal settings
+            do_login = True
             if CosinnusPortal.get_current().email_needs_verification:
                 send_user_email_to_verify(user, user.email, self.request)
                 messages.success(self.request, self.message_success_email_verification % {'email': user.email})
+                if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
+                    # show message to tell the user they need to register on this portal
+                    messages.warning(self.request, _('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.'))
+                    do_login = False
             else:
                 user_profile = user.cosinnus_profile
                 user_profile.email_verified = True
@@ -301,9 +306,10 @@ class UserCreateView(CreateView):
                 _send_user_welcome_email_if_enabled(user)
                 messages.success(self.request, self.message_success % {'user': user.email})
             
-            # log the user in
-            user.backend = 'cosinnus.backends.EmailAuthBackend'
-            login(self.request, user)
+            if do_login:
+                # log the user in
+                user.backend = 'cosinnus.backends.EmailAuthBackend'
+                login(self.request, user)
             
             # send user account creation signal, the audience is empty because this is a moderator-only notification
             user_profile = user.cosinnus_profile
@@ -675,6 +681,10 @@ def verifiy_user_email(request, email_verification_param):
         messages.success(request, _('Your email address %(email)s was successfully confirmed!') % {'email': user.email})
         if not user_was_verified_before:
             _send_user_welcome_email_if_enabled(user)
+        if not request.user.is_authenticated and settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
+            # log the user in for portals that require a verification first 
+            user.backend = 'cosinnus.backends.EmailAuthBackend'
+            login(request, user)
         return redirect(redirect_url)
     else:
         messages.success(request, _('Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!') % {'email': user.email})
