@@ -23,7 +23,7 @@ django-el-pagination==2.1.2
 django-extra-views==0.14.0
 django-filter==21.1
 django-haystack==3.1.1
-django-honeypot==1.0.2
+django-honeypot==0.9.0
 django-jalali==4.0.0
 django-mailbox==4.8.2
 django-modelcluster==5.2
@@ -36,7 +36,7 @@ django-polymorphic==0.7.2
 django-reverse-admin==2.9.4
 django-sekizai==2.0.0
 django-simple-captcha==0.5.14
-django-taggit==2.0.0
+django-taggit==1.5.1
 django-two-factor-auth==1.13.1
 django-widget-tweaks==1.4.9
 djangorestframework==3.12.4
@@ -88,5 +88,5 @@ django-clamd==0.4.0
 -e git+https://github.com/wechange-eg/django-osm-field.git@django-update-3-2#egg=django-osm-field
 -e git+https://github.com/wechange-eg/python-markdown2.git@master#egg=markdown2
 -e git+https://github.com/wechange-eg/pydkim.git@master#egg=pydkim
--e git+https://github.com/mhindery/django-suit.git@develop#egg=django-suit
+-e git+https://github.com/wechange-eg/django-suit.git@main#egg=django-suit
 
