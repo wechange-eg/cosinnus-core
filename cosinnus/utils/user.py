@@ -206,10 +206,10 @@ def create_base_user(email, username=None, password=None, first_name=None, last_
             logger.error('Manual user creation failed. A user with tha username already exists!')
 
     else:
-        password = get_random_string()
+        password = get_random_string(length=12)
 
         user_data = {
-            'username': username or get_random_string(),
+            'username': username or get_random_string(length=12),
             'password1': password,
             'password2': password
         }
@@ -251,9 +251,9 @@ def create_user(email, username=None, first_name=None, last_name=None, tos_check
     from cosinnus.forms.user import UserCreationForm
     from cosinnus.models.profile import get_user_profile_model # leave here because of cyclic imports
     
-    pwd = get_random_string()
+    pwd = get_random_string(length=12)
     data = {
-        'username': username or get_random_string(),
+        'username': username or get_random_string(length=12),
         'email': email,
         'password1': pwd,
         'password2': pwd,
