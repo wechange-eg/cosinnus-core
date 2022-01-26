@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-06 15:36+0100\n"
+"POT-Creation-Date: 2022-01-25 14:30+0100\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -240,18 +240,6 @@ msgstr "Seznam záložek"
 msgid "Bookmarked Users list"
 msgstr "Seznam uživatelů se záložkou"
 
-msgid "General"
-msgstr "Obecné"
-
-msgid "Active"
-msgstr "Aktivovat"
-
-msgid "Restricted"
-msgstr "S omezením"
-
-msgid "Premium"
-msgstr "Premium"
-
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
 
@@ -273,6 +261,9 @@ msgstr "Tento tým již nemá zadanou URL adresu. Byli jste automaticky přesmě
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "Tento účet již není aktivní. Byli jste odhlášeni."
+
+msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
@@ -700,15 +691,15 @@ msgstr "Příští týden"
 msgid "Next month"
 msgstr "Příští měsíc"
 
-msgid "Fairmeeting"
-msgstr ""
-
 #, fuzzy
 #| msgid "View conference"
 msgid "No video conference"
 msgstr "Prohlédněte si konferenci"
 
 msgid "BBB-Meeting"
+msgstr ""
+
+msgid "Fairmeeting"
 msgstr ""
 
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
@@ -870,11 +861,8 @@ msgstr "číslo pro zavolání na konferenci přes telefon"
 msgid "pin to enter for telephone participants"
 msgstr "pin pro vstup pro účastníky přes telefon"
 
-msgid "the rooms welcome message"
-msgstr "uvítací zpráva do místností"
-
-msgid "Room Type"
-msgstr "Typ místnosti"
+msgid "Last create-call parameters"
+msgstr ""
 
 msgid "BBB ROOM"
 msgstr "BBB ROOM"
@@ -913,6 +901,9 @@ msgstr "BBB server"
 
 msgid "BBB Server for Premium Conferences"
 msgstr "BBB server pro Premium konference"
+
+msgid "BBB Recording API server"
+msgstr ""
 
 msgid "BBB API Parameters"
 msgstr ""
@@ -2088,6 +2079,12 @@ msgstr ""
 msgid "Conference admin page"
 msgstr "Název konference"
 
+msgid "Effective BBB-Parameters"
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this BBB Room."
+msgstr ""
+
 msgid "select this page"
 msgstr "vybrat tuto stránku"
 
@@ -2211,8 +2208,38 @@ msgstr ""
 msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
 msgstr ""
 
+#, fuzzy
+#| msgid "Settings"
+msgid "BBB-Room Settings"
+msgstr "Nastavení"
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr "Můžete nastavit nastavení konference na této úrovni. Všechny předměty pod touto úrovní hierarchie budou obsahovat tato nastavení, pokud nemají nastavená vlastní nastavení konference."
+
+#, fuzzy
+#| msgid "Invited Projects"
+msgid "Inherited BBB-Parameters"
+msgstr "Pozvané projekty"
+
+msgid "These parameters are the ones this object inherits from higher up settings or the portal defaults. These are the ones that will be used if this object or deeper objects do not define any further parameters."
+msgstr ""
+
+msgid "The next higher up object in the BBB hierarchy chain is"
+msgstr ""
+
+msgid "This object has no higher up object in the BBB hierarchy chain. The displayed values are the configured portal defaults."
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this source object."
+msgstr ""
+
+msgid "You can find the BBBRoom object for this source object here"
+msgstr ""
+
+#, fuzzy
+#| msgid "BBB Room Visits"
+msgid "BBB Room"
+msgstr "Návštěvy BBB místnosti"
 
 msgid "Administration"
 msgstr "Správa"
@@ -2466,6 +2493,9 @@ msgstr "Řiďte žádosti o účast"
 #| msgid "Temporary User Accounts"
 msgid "Manage Temporary User Accounts"
 msgstr "Dočasné uživatelské účty"
+
+msgid "Recorded Meetings"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -2980,6 +3010,26 @@ msgstr "(nevybrány žádné podmínky)"
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr "Pokud je soubor nahrán, žadatelé musí s těmito podmínkami v tomto souboru souhlasit zaškrtnutím checkboxu"
 
+msgid "Unfortunately recorded meetings are currently not yet available for this server!"
+msgstr ""
+
+msgid "Recording of meetings is only available for premium conferences!"
+msgstr ""
+
+msgid "Make a premium booking here"
+msgstr ""
+
+msgid "Conference Bookings"
+msgstr "Rezervace pro konferenci"
+
+msgid "This is a list of all recorded meetings for this conference. Recent recordings may take a few minutes to appear."
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no rooms yet."
+msgid "There are no recorded meetings yet."
+msgstr "Zatím tu nejsou žádné místnosti."
+
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr "Zde máte možnost připravit informační text pro všechny účastníky konference. Bude odeslán automaticky 1 týden, 1 den a / nebo 1 hodinu před zahájením konference. E-maily s upozorněním vždy obsahují link na konferenci"
 
@@ -3093,6 +3143,19 @@ msgstr "Odškrtněte, abyste mohli skrýt místnost pro účastníky (vy ji ale 
 msgid "Check this to show rocket chat in the sidebar."
 msgstr "Zaškrtněte, abyste zobrazili rocket chat na sidebaru."
 
+#, fuzzy
+#| msgid "View conference"
+msgid "BBB video conference options"
+msgstr "Prohlédněte si konferenci"
+
+#, fuzzy
+#| msgid "This will be the default setting for all content created by members."
+msgid "These settings will be the default for all conference events in this room."
+msgstr "Toto bude výchozí nastavení pro veškerý obsah vytvořený členy."
+
+msgid "You may still override these options in each individual event."
+msgstr ""
+
 msgid "Go to Room"
 msgstr "Přejděte do místnosti"
 
@@ -3112,9 +3175,6 @@ msgstr "Smazat místnost"
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
 msgstr "Vaše konference je stále ve zkušebním režimu. Máte přístup ke všech features, můžete je ale používat pouze s malým počtem osob bez omezení. Abyste pro vaši konferenci zajistili plný výkon s mnoha uživateli, zarezervujte si zdarma dostatek kapacit zde:"
 
-msgid "Conference Bookings"
-msgstr "Rezervace pro konferenci"
-
 msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
 msgstr "Existuje několik typů konferenčních místností, každá s vlastním odlišným rozhraním a funkčností. Vytvořením různým místností a jejich uspořádáním můžete customizovat vzhled vaší konference."
 
@@ -3124,6 +3184,14 @@ msgstr "Můžete přímo vytvořit eventy konference z tohoto místa pomocí kon
 msgid "There are no rooms yet."
 msgstr "Zatím tu nejsou žádné místnosti."
 
+msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Premium"
+msgid "Premium only"
+msgstr "Premium"
+
 msgid "Turn on microphone on entering"
 msgstr ""
 
@@ -3131,6 +3199,9 @@ msgid "Default"
 msgstr ""
 
 msgid "Turn on camera on entering"
+msgstr ""
+
+msgid "Allow recording"
 msgstr ""
 
 #, fuzzy
@@ -3303,6 +3374,29 @@ msgstr "Přijmout"
 msgid "Decline"
 msgstr "Zamítnout"
 
+#, fuzzy
+#| msgid "Starred"
+msgid "Started"
+msgstr "Označené hvězdičkou"
+
+msgid "Length"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete Account"
+msgid "Delete Recording"
+msgstr "Smazat účet"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to delete room \"%(title)s\"?"
+msgid "Do you really want to delete recorded meeting \"%(title)s\"?"
+msgstr "Opravdu chcete smazat \"%(title)s\" místnosti?"
+
+#, fuzzy
+#| msgid "Delete reported item..."
+msgid "Delete recorded meeting"
+msgstr "Smazat nahlášenou položku..."
+
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr "Přehled - konference, místnosti a workshopy s customizovanými nastaveními BBB serveru"
 
@@ -3411,6 +3505,9 @@ msgstr "BBB"
 
 msgid "BBB Premium"
 msgstr "BBB Premium"
+
+msgid "BBB Recording API"
+msgstr ""
 
 msgid "Not set"
 msgstr "Nenastavený"
@@ -3682,14 +3779,6 @@ msgstr "Maximální počet účastníků"
 msgid "About the conference"
 msgstr "O konferenci"
 
-msgctxt "time"
-msgid "o'clock"
-msgstr "hodin(y)"
-
-msgctxt "time"
-msgid "until"
-msgstr "až do"
-
 msgid "More infos..."
 msgstr "Více informací..."
 
@@ -3951,6 +4040,9 @@ msgstr "Váš nový projekt se také zobrazí na samotném nápadu, aby jej kaž
 msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
 msgstr "Samozřejmě můžete také vytvořit projekt bez připojení k nápadu - stačí kliknout na \"Vytvořit projekt\" na levé straně a provést to."
 
+msgid "General"
+msgstr "Obecné"
+
 msgid "Facebook-Integration"
 msgstr "Integrace Facebooku"
 
@@ -4062,6 +4154,14 @@ msgstr "Existují nějaké související projekty/skupiny?"
 
 msgid "Select related Projects/Groups"
 msgstr "Vybrat související projekty/skupiny"
+
+#, fuzzy
+#| msgid "This will be the default setting for all content created by members."
+msgid "These settings will be the default for all conference events."
+msgstr "Toto bude výchozí nastavení pro veškerý obsah vytvořený členy."
+
+msgid "You may still override these options in each conference room and in individual events."
+msgstr ""
 
 #, fuzzy
 #| msgid "This project will be set to be publicly visible!"
@@ -4276,6 +4376,20 @@ msgstr "Mapa"
 #| msgid "Deleting..."
 msgid "Meeting"
 msgstr "Mazání..."
+
+msgid "By clicking \"Continue\" you are consenting to be recorded in this video conference."
+msgstr ""
+
+msgid "This session is being recorded"
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue reading"
+msgid "Continue"
+msgstr "Pokračovat ve čtení"
+
+msgid "You have to consent to being recorded to join this meeting."
+msgstr ""
 
 msgid "Popout"
 msgstr ""
@@ -7620,6 +7734,9 @@ msgstr "%(team_type)s \"%(group)s\" byl/a úspěšně vytvořen/a."
 msgid "Create"
 msgstr "Vytvořit"
 
+msgid "This team does not have a video conference configured."
+msgstr ""
+
 #, python-format
 msgid "The %(team_type)s was changed successfully."
 msgstr "%(team_type)s byl úspěšně změněn."
@@ -8040,6 +8157,26 @@ msgstr "Momentálně nejste členem %s! Pokud si přejete, můžete požádat o 
 
 msgid "Your changes have been saved."
 msgstr "Vaše změny byly uloženy."
+
+#~ msgid "Active"
+#~ msgstr "Aktivovat"
+
+#~ msgid "Restricted"
+#~ msgstr "S omezením"
+
+#~ msgid "the rooms welcome message"
+#~ msgstr "uvítací zpráva do místností"
+
+#~ msgid "Room Type"
+#~ msgstr "Typ místnosti"
+
+#~ msgctxt "time"
+#~ msgid "o'clock"
+#~ msgstr "hodin(y)"
+
+#~ msgctxt "time"
+#~ msgid "until"
+#~ msgstr "až do"
 
 #~ msgid "Allow temporary users accounts for this conference."
 #~ msgstr "Povoluje účty dočasných uživatelů pro tuto konferenci."

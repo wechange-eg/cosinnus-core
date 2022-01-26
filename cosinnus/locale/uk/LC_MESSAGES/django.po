@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-06 15:36+0100\n"
+"POT-Creation-Date: 2022-01-25 14:30+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -238,18 +238,6 @@ msgstr "Список закладок"
 msgid "Bookmarked Users list"
 msgstr "Список користувачів із закладками"
 
-msgid "General"
-msgstr "Загальна інформація"
-
-msgid "Active"
-msgstr "Активний"
-
-msgid "Restricted"
-msgstr "Обмежений"
-
-msgid "Premium"
-msgstr "Преміум"
-
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
 
@@ -271,6 +259,9 @@ msgstr "Ця команда більше не існує за вказаною �
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "Цей обліковий запис більше не активний. Ви вийшли з системи"
+
+msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr "Вас було перенаправлено сюди, тому що Ви натиснули посилання в одному з наших листів. З міркувань безпеки ми не посилаємось безпосередньо на зовнішні веб-сайти зі своєї пошти. Будь ласка, перейдіть за посиланням нижче, якщо хочете його відвідати."
@@ -692,15 +683,15 @@ msgstr "Наступного тижня"
 msgid "Next month"
 msgstr "Наступного місяця"
 
-msgid "Fairmeeting"
-msgstr ""
-
 #, fuzzy
 #| msgid "View conference"
 msgid "No video conference"
 msgstr "Переглянути конференцію"
 
 msgid "BBB-Meeting"
+msgstr ""
+
+msgid "Fairmeeting"
 msgstr ""
 
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
@@ -866,11 +857,8 @@ msgstr "номер для приєднання до конференції по 
 msgid "pin to enter for telephone participants"
 msgstr "pin-код для учасників, що підключаються по телефону"
 
-msgid "the rooms welcome message"
-msgstr "привітальне повідомлення в кімнатах"
-
-msgid "Room Type"
-msgstr "Тип кімнати"
+msgid "Last create-call parameters"
+msgstr ""
 
 msgid "BBB ROOM"
 msgstr "BBB ROOM"
@@ -909,6 +897,9 @@ msgstr "BBB Server"
 
 msgid "BBB Server for Premium Conferences"
 msgstr "BBB Server для Преміум Конференції"
+
+msgid "BBB Recording API server"
+msgstr ""
 
 msgid "BBB API Parameters"
 msgstr ""
@@ -2078,6 +2069,12 @@ msgstr ""
 msgid "Conference admin page"
 msgstr "Назва Конференції"
 
+msgid "Effective BBB-Parameters"
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this BBB Room."
+msgstr ""
+
 msgid "select this page"
 msgstr "обрати цю сторінку"
 
@@ -2201,8 +2198,38 @@ msgstr "Під час дії будь-якого з цих блоків конф
 msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
 msgstr "Тут можна визначити межі кількості учасників сервера BBB для певних часових інтервалів для преміум-сервера BBB. Ці обмеження є лише орієнтиром для адміністраторів порталу, які допомагають вирішити, чи слід додати додаткову потужність сервера BBB."
 
+#, fuzzy
+#| msgid "Settings"
+msgid "BBB-Room Settings"
+msgstr "Налаштування"
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr "На цьому рівні можна встановити параметри конференції. Усі об’єкти на цьому рівні в ієрархії успадкують ці параметри, якщо вони не встановили для себе параметри конференції."
+
+#, fuzzy
+#| msgid "Invited Projects"
+msgid "Inherited BBB-Parameters"
+msgstr "Проєкти, до яких мене запросили"
+
+msgid "These parameters are the ones this object inherits from higher up settings or the portal defaults. These are the ones that will be used if this object or deeper objects do not define any further parameters."
+msgstr ""
+
+msgid "The next higher up object in the BBB hierarchy chain is"
+msgstr ""
+
+msgid "This object has no higher up object in the BBB hierarchy chain. The displayed values are the configured portal defaults."
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this source object."
+msgstr ""
+
+msgid "You can find the BBBRoom object for this source object here"
+msgstr ""
+
+#, fuzzy
+#| msgid "BBB Room Visits"
+msgid "BBB Room"
+msgstr "Відвідування кімнати BBB"
 
 msgid "Administration"
 msgstr "Адміністрація"
@@ -2417,6 +2444,9 @@ msgstr "Керувати заявками на участь"
 #| msgid "Temporary User Accounts"
 msgid "Manage Temporary User Accounts"
 msgstr "Тимчасовий обліковий запис користувача"
+
+msgid "Recorded Meetings"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -2921,6 +2951,26 @@ msgstr "(не вибрано жодних умов)"
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr "Якщо файл завантажено, заявники повинні погодитися з цими умовами у цьому файлі, зазначивши відповідне поле"
 
+msgid "Unfortunately recorded meetings are currently not yet available for this server!"
+msgstr ""
+
+msgid "Recording of meetings is only available for premium conferences!"
+msgstr ""
+
+msgid "Make a premium booking here"
+msgstr ""
+
+msgid "Conference Bookings"
+msgstr "Зарезервувати конференцію"
+
+msgid "This is a list of all recorded meetings for this conference. Recent recordings may take a few minutes to appear."
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no rooms yet."
+msgid "There are no recorded meetings yet."
+msgstr "Поки що немає жодного кімнати"
+
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr "Тут у Вас є можливість підготувати інформаційний текст для всіх учасників конференції. Це повідомлення буде надіслано автоматично за 1 тиждень, 1 день та/або 1 годину до початку конференції. Електронний лист-сповіщення завжди містить посилання на конференцію"
 
@@ -3034,6 +3084,19 @@ msgstr "Зняти це позначення, щоб приховати кімн
 msgid "Check this to show rocket chat in the sidebar."
 msgstr "Поставити галочку, щоб показати rocket чат на бічній панелі."
 
+#, fuzzy
+#| msgid "View conference"
+msgid "BBB video conference options"
+msgstr "Переглянути конференцію"
+
+#, fuzzy
+#| msgid "This will be the default setting for all content created by members."
+msgid "These settings will be the default for all conference events in this room."
+msgstr "Це буде налаштування за замовчуванням для всього контенту, створеного учасниками."
+
+msgid "You may still override these options in each individual event."
+msgstr ""
+
 msgid "Go to Room"
 msgstr "Перейти до кімнати"
 
@@ -3053,9 +3116,6 @@ msgstr "Видалити кімнату"
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
 msgstr "Ваша конференція все ще відбувається у тестовому режимі. Ви маєте доступ до всіх функцій, але можете користуватися ними без обмежень лише з кількома особами. Щоб забезпечити повну продуктивність вашої конференції з багатьма користувачами, безкоштовно забронюйте тут достатню кількість можливостей:"
 
-msgid "Conference Bookings"
-msgstr "Зарезервувати конференцію"
-
 msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
 msgstr "Існує кілька типів конференц-кімнат, кожен зі своїм власним різним інтерфейсом та функціональними можливостями. Створюючи різні кімнати та упорядковуючи їх, ви можете налаштувати зовнішній вигляд своєї конференції."
 
@@ -3065,6 +3125,14 @@ msgstr "Тут ви можете безпосередньо створювати
 msgid "There are no rooms yet."
 msgstr "Поки що немає жодного кімнати"
 
+msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Premium"
+msgid "Premium only"
+msgstr "Преміум"
+
 msgid "Turn on microphone on entering"
 msgstr ""
 
@@ -3072,6 +3140,9 @@ msgid "Default"
 msgstr ""
 
 msgid "Turn on camera on entering"
+msgstr ""
+
+msgid "Allow recording"
 msgstr ""
 
 #, fuzzy
@@ -3247,6 +3318,29 @@ msgstr "Прийняти "
 msgid "Decline"
 msgstr "Відхилити "
 
+#, fuzzy
+#| msgid "Starred"
+msgid "Started"
+msgstr "Позначено зірочкою"
+
+msgid "Length"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete Account"
+msgid "Delete Recording"
+msgstr "Видалити обліковий запис"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to delete room \"%(title)s\"?"
+msgid "Do you really want to delete recorded meeting \"%(title)s\"?"
+msgstr "Ви дійсно хочете видалити кімнату \"%(title)s\"?"
+
+#, fuzzy
+#| msgid "Delete reported item..."
+msgid "Delete recorded meeting"
+msgstr "Видалити елемент, про який повідомлено..."
+
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr "Огляд - Конференції, кабінети та воркшопи із власними налаштуваннями BBB-сервера"
 
@@ -3353,6 +3447,9 @@ msgstr "ВВВ"
 
 msgid "BBB Premium"
 msgstr "ВВВ Преміум"
+
+msgid "BBB Recording API"
+msgstr ""
 
 msgid "Not set"
 msgstr "Не встановлено"
@@ -3623,14 +3720,6 @@ msgstr "Максимальна кількість учасників "
 msgid "About the conference"
 msgstr "Про конференцію"
 
-msgctxt "time"
-msgid "o'clock"
-msgstr "о годині"
-
-msgctxt "time"
-msgid "until"
-msgstr "до"
-
 msgid "More infos..."
 msgstr "Більше інформації."
 
@@ -3892,6 +3981,9 @@ msgstr "Ваш новий проєкт також буде відображен�
 msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
 msgstr "Звісно, Ви також можете створити проєкт без прив'язки до ідеї - щоб зробити це просто натисніть зліва «Створити проект»."
 
+msgid "General"
+msgstr "Загальна інформація"
+
 msgid "Facebook-Integration"
 msgstr "Інтеграція з Facebook"
 
@@ -4002,6 +4094,14 @@ msgstr "Чи є якісь проєкти/групи, пов’язані з ц�
 
 msgid "Select related Projects/Groups"
 msgstr "Обрати пов'язані Проєкти/Групи"
+
+#, fuzzy
+#| msgid "This will be the default setting for all content created by members."
+msgid "These settings will be the default for all conference events."
+msgstr "Це буде налаштування за замовчуванням для всього контенту, створеного учасниками."
+
+msgid "You may still override these options in each conference room and in individual events."
+msgstr ""
 
 #, fuzzy
 #| msgid "This project will be set to be publicly visible!"
@@ -4218,6 +4318,20 @@ msgstr "Карта"
 #| msgid "Deleting..."
 msgid "Meeting"
 msgstr "Видалення…"
+
+msgid "By clicking \"Continue\" you are consenting to be recorded in this video conference."
+msgstr ""
+
+msgid "This session is being recorded"
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue reading"
+msgid "Continue"
+msgstr "Продовжити читати"
+
+msgid "You have to consent to being recorded to join this meeting."
+msgstr ""
 
 msgid "Popout"
 msgstr ""
@@ -7541,6 +7655,9 @@ msgstr "%(team_type)s «%(group)s» було успішно створено."
 msgid "Create"
 msgstr "Створити"
 
+msgid "This team does not have a video conference configured."
+msgstr ""
+
 #, python-format
 msgid "The %(team_type)s was changed successfully."
 msgstr "%(team_type)s було успішно змінено."
@@ -7965,6 +8082,26 @@ msgstr "Наразі Ви не є членом %s! Якщо ви бажаєте 
 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
+
+#~ msgid "Active"
+#~ msgstr "Активний"
+
+#~ msgid "Restricted"
+#~ msgstr "Обмежений"
+
+#~ msgid "the rooms welcome message"
+#~ msgstr "привітальне повідомлення в кімнатах"
+
+#~ msgid "Room Type"
+#~ msgstr "Тип кімнати"
+
+#~ msgctxt "time"
+#~ msgid "o'clock"
+#~ msgstr "о годині"
+
+#~ msgctxt "time"
+#~ msgid "until"
+#~ msgstr "до"
 
 #~ msgid "Allow temporary users accounts for this conference."
 #~ msgstr "Дозволити облікові записи тимчасових користувачів для цієї конференції."

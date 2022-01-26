@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-06 15:36+0100\n"
+"POT-Creation-Date: 2022-01-25 14:30+0100\n"
 "Language: kk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -236,19 +236,6 @@ msgstr ""
 msgid "Bookmarked Users list"
 msgstr ""
 
-msgid "General"
-msgstr "Жалпы"
-
-#, fuzzy
-msgid "Active"
-msgstr "Іске қосыңыз"
-
-msgid "Restricted"
-msgstr ""
-
-msgid "Premium"
-msgstr ""
-
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
 
@@ -270,6 +257,9 @@ msgstr "Бұл команда енді сіз енгізген URL мекен-ж
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "Бұл есептік жазба енді белсенді емес. Сіз жүйеден шықтыңыз."
+
+msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
@@ -690,14 +680,14 @@ msgstr "Келесі аптада"
 msgid "Next month"
 msgstr "Келесі айда"
 
-msgid "Fairmeeting"
-msgstr ""
-
 #, fuzzy
 msgid "No video conference"
 msgstr "Бейне конференциялар сервері"
 
 msgid "BBB-Meeting"
+msgstr ""
+
+msgid "Fairmeeting"
 msgstr ""
 
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
@@ -860,12 +850,8 @@ msgstr ""
 msgid "pin to enter for telephone participants"
 msgstr ""
 
-msgid "the rooms welcome message"
+msgid "Last create-call parameters"
 msgstr ""
-
-#, fuzzy
-msgid "Room Type"
-msgstr "Команда түрінен"
 
 msgid "BBB ROOM"
 msgstr ""
@@ -904,6 +890,9 @@ msgid "BBB Server"
 msgstr ""
 
 msgid "BBB Server for Premium Conferences"
+msgstr ""
+
+msgid "BBB Recording API server"
 msgstr ""
 
 msgid "BBB API Parameters"
@@ -2129,6 +2118,12 @@ msgstr ""
 msgid "Conference admin page"
 msgstr "Бейне конференциялар сервері"
 
+msgid "Effective BBB-Parameters"
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this BBB Room."
+msgstr ""
+
 msgid "select this page"
 msgstr "осы бетті таңдаңыз"
 
@@ -2252,8 +2247,37 @@ msgstr ""
 msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
 msgstr ""
 
+#, fuzzy
+#| msgid "Settings"
+msgid "BBB-Room Settings"
+msgstr "Параметрлер"
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr ""
+
+#, fuzzy
+#| msgid "Invited Projects"
+msgid "Inherited BBB-Parameters"
+msgstr "Шақырылған Жобалар"
+
+msgid "These parameters are the ones this object inherits from higher up settings or the portal defaults. These are the ones that will be used if this object or deeper objects do not define any further parameters."
+msgstr ""
+
+msgid "The next higher up object in the BBB hierarchy chain is"
+msgstr ""
+
+msgid "This object has no higher up object in the BBB hierarchy chain. The displayed values are the configured portal defaults."
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this source object."
+msgstr ""
+
+msgid "You can find the BBBRoom object for this source object here"
+msgstr ""
+
+#, fuzzy
+msgid "BBB Room"
+msgstr "Команда түрінен"
 
 msgid "Administration"
 msgstr "Әкімшілік"
@@ -2486,6 +2510,9 @@ msgstr ""
 #| msgid "Team Description"
 msgid "Manage Temporary User Accounts"
 msgstr "Топ сипаттамасы"
+
+msgid "Recorded Meetings"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -2999,6 +3026,26 @@ msgstr ""
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr ""
 
+msgid "Unfortunately recorded meetings are currently not yet available for this server!"
+msgstr ""
+
+msgid "Recording of meetings is only available for premium conferences!"
+msgstr ""
+
+msgid "Make a premium booking here"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Bookings"
+msgstr "Бейне конференциялар сервері"
+
+msgid "This is a list of all recorded meetings for this conference. Recent recordings may take a few minutes to appear."
+msgstr ""
+
+#, fuzzy
+msgid "There are no recorded meetings yet."
+msgstr "Әзірге бұл жерде ештеңе жоқ"
+
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr ""
 
@@ -3119,6 +3166,18 @@ msgstr ""
 msgid "Check this to show rocket chat in the sidebar."
 msgstr ""
 
+#, fuzzy
+msgid "BBB video conference options"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+#| msgid "This will be the default setting for all content created by members."
+msgid "These settings will be the default for all conference events in this room."
+msgstr "Бұл барлық пайдаланушы жасаған мазмұн үшін әдепкі параметр болады."
+
+msgid "You may still override these options in each individual event."
+msgstr ""
+
 msgid "Go to Room"
 msgstr ""
 
@@ -3140,10 +3199,6 @@ msgstr "Профильді жою"
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
 msgstr ""
 
-#, fuzzy
-msgid "Conference Bookings"
-msgstr "Бейне конференциялар сервері"
-
 msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
 msgstr ""
 
@@ -3154,6 +3209,13 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr "Әзірге бұл жерде ештеңе жоқ"
 
+msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
+msgstr ""
+
+#, fuzzy
+msgid "Premium only"
+msgstr "Шара құру"
+
 msgid "Turn on microphone on entering"
 msgstr ""
 
@@ -3161,6 +3223,9 @@ msgid "Default"
 msgstr ""
 
 msgid "Turn on camera on entering"
+msgstr ""
+
+msgid "Allow recording"
 msgstr ""
 
 #, fuzzy
@@ -3331,6 +3396,27 @@ msgstr "Пайдаланушыны қабылдау"
 msgid "Decline"
 msgstr "Пайдаланушыдан бас тарту"
 
+#, fuzzy
+msgid "Started"
+msgstr "Басталу күні."
+
+msgid "Length"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete Account"
+msgid "Delete Recording"
+msgstr "Аккаунтты Жою"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete recorded meeting \"%(title)s\"?"
+msgstr "„%(title)s“ шақыруын шынымен жойғыңыз келе ме?"
+
+#, fuzzy
+#| msgid "Delete reported item..."
+msgid "Delete recorded meeting"
+msgstr "Хабарланған бұйымды өшіру."
+
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr ""
 
@@ -3445,6 +3531,9 @@ msgid "BBB"
 msgstr ""
 
 msgid "BBB Premium"
+msgstr ""
+
+msgid "BBB Recording API"
 msgstr ""
 
 #, fuzzy
@@ -3725,15 +3814,6 @@ msgstr ""
 msgid "About the conference"
 msgstr "Жоба жайлы"
 
-msgctxt "time"
-msgid "o'clock"
-msgstr ""
-
-#, fuzzy
-msgctxt "time"
-msgid "until"
-msgstr "Дейін"
-
 #, fuzzy
 msgid "More infos..."
 msgstr "Ақпарат жоқ."
@@ -4005,6 +4085,9 @@ msgstr "Сіздің жаңа жобаңыз да идеяның өзінде к
 msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
 msgstr "Әрине, сіз идеямен ешқандай байланыссыз жоба жасай аласыз - мұны істеу үшін экранның сол жағындағы «Жобаны құру» батырмасын басыңыз."
 
+msgid "General"
+msgstr "Жалпы"
+
 msgid "Facebook-Integration"
 msgstr "Facebook интеграциясы"
 
@@ -4119,6 +4202,14 @@ msgstr "Осы жобамен / топпен байланысты жобалар
 
 msgid "Select related Projects/Groups"
 msgstr "Тиісті жобаларды / топтарды таңдау"
+
+#, fuzzy
+#| msgid "This will be the default setting for all content created by members."
+msgid "These settings will be the default for all conference events."
+msgstr "Бұл барлық пайдаланушы жасаған мазмұн үшін әдепкі параметр болады."
+
+msgid "You may still override these options in each conference room and in individual events."
+msgstr ""
 
 #, fuzzy
 #| msgid "This project will be set to be publicly visible!"
@@ -4335,6 +4426,20 @@ msgstr "Карта"
 #| msgid "Deleting..."
 msgid "Meeting"
 msgstr "Өшіріліп жатыр."
+
+msgid "By clicking \"Continue\" you are consenting to be recorded in this video conference."
+msgstr ""
+
+msgid "This session is being recorded"
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue reading"
+msgid "Continue"
+msgstr "Оқуды жалғастыру"
+
+msgid "You have to consent to being recorded to join this meeting."
+msgstr ""
 
 msgid "Popout"
 msgstr ""
@@ -7745,6 +7850,9 @@ msgstr "%(team_type)s “%(group)s” сәтті жасалды."
 msgid "Create"
 msgstr "Жасау"
 
+msgid "This team does not have a video conference configured."
+msgstr ""
+
 #, python-format
 msgid "The %(team_type)s was changed successfully."
 msgstr "%(team_type)s сәтті өзгертілді."
@@ -8169,6 +8277,19 @@ msgstr "Сіз қазір %s мүшесі емессіз! Егер қаласа�
 
 msgid "Your changes have been saved."
 msgstr "Сіздің өзгертулеріңіз сақталды."
+
+#, fuzzy
+#~ msgid "Active"
+#~ msgstr "Іске қосыңыз"
+
+#, fuzzy
+#~ msgid "Room Type"
+#~ msgstr "Команда түрінен"
+
+#, fuzzy
+#~ msgctxt "time"
+#~ msgid "until"
+#~ msgstr "Дейін"
 
 #, fuzzy
 #~ msgid "Conference accounts active"

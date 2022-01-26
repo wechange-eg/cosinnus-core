@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-06 15:36+0100\n"
+"POT-Creation-Date: 2022-01-25 14:30+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -237,18 +237,6 @@ msgstr "Merkliste"
 msgid "Bookmarked Users list"
 msgstr "Gemerkte Personen"
 
-msgid "General"
-msgstr "Allgemein"
-
-msgid "Active"
-msgstr "Aktiv"
-
-msgid "Restricted"
-msgstr "Eingeschränkt"
-
-msgid "Premium"
-msgstr "Premium"
-
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr "Um diesen Teil der Webseite zu benutzen, muss deine E-Mail-Adresse erst verifiziert werden! Bitte prüfen deine eingehenden E-Mails und klicke dann auf den Link in der Verifikations-E-Mail, die du von uns erhalten hast. Alternativ kannst du eine neue Verifikations-E-Mail anfordern, indem du den Link unten klickst."
 
@@ -270,6 +258,9 @@ msgstr "Die Gruppe oder das Projekt liegt nicht länger unter der URL die du ein
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "Sie wurden ausgeloggt, weil dieses Benutzerkonto nicht mehr aktiv ist."
+
+msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+msgstr "Du musst deine Email-Adresse verifizieren bevor du dich einloggen kannst. Eine Email mit dem Verifizierungslink wurde dir gerade geschickt. Überprüfe bitte deinen Posteingang: wenn da keine Email von uns gibt, überprüfe bitte deinen Spamordner."
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr "Du wurdest hierhin weitergeleitet, weil du einen Link in einer unserer E-Mails geklickt hast. Als Vorsichtsmaßnahme verlinken wir nicht direkt auf externe Webseiten aus unseren E-Mails. Bitte klicke den Link unten erneut wenn du die Seite besuchen möchtest."
@@ -686,14 +677,14 @@ msgstr "Nächste Woche"
 msgid "Next month"
 msgstr "Nächsten Monat"
 
-msgid "Fairmeeting"
-msgstr "Fairmeeting"
-
 msgid "No video conference"
-msgstr "Keine Videokonferenz"
+msgstr "Keine Video- Tagung"
 
 msgid "BBB-Meeting"
 msgstr "BBB-Meeting"
+
+msgid "Fairmeeting"
+msgstr "Fairmeeting"
 
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
 msgstr "Dies scheint keine gültige Youtube oder Vimeo URL zu sein!"
@@ -854,11 +845,8 @@ msgstr "Nummer zur Einwahl in die Tagung per Telefon"
 msgid "pin to enter for telephone participants"
 msgstr "Pin zur Eingabe für Telefonteilnehmende"
 
-msgid "the rooms welcome message"
-msgstr "Die Begrüßungsnachricht der Räume"
-
-msgid "Room Type"
-msgstr "Raumtyp"
+msgid "Last create-call parameters"
+msgstr "Letzte Create-Call Parameter"
 
 msgid "BBB ROOM"
 msgstr "BBB Raum"
@@ -898,8 +886,11 @@ msgstr "BBB Server"
 msgid "BBB Server for Premium Conferences"
 msgstr "BBB-Server für Premium-Tagungen"
 
+msgid "BBB Recording API server"
+msgstr "BBB API Aufnahmeserver"
+
 msgid "BBB API Parameters"
-msgstr ""
+msgstr "BBB API Parameter"
 
 msgid "Cosinnus Conference Setting"
 msgstr "Cosinnus Tagungs-Einstellung"
@@ -2059,6 +2050,12 @@ msgstr "Für weitere Optionen und Parameter, gehe bitte auf die Adminseite der T
 msgid "Conference admin page"
 msgstr "Tagungsadminseite"
 
+msgid "Effective BBB-Parameters"
+msgstr "Effektive BBB-Parameter"
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this BBB Room."
+msgstr "Diese Parameter werden für die BBB APP-Anrufe für diesen BBB- Raum als wirksame Parameter benutzt."
+
 msgid "select this page"
 msgstr "select this page"
 
@@ -2182,8 +2179,32 @@ msgstr "Im angegebenen Zeitraum von einem dieser Blöcke, wird die Tagung im Pre
 msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
 msgstr "Hier können Sie die Teilnehmer-Kapazitätenlimits des BBB-Servers für die bestimmte Zeitintervallen auf dem BBB-Premium-Server festlegen. Diese Limits dienen nur als eine Richtlinie für die Portaladministratoren, um festzustellen, ob die Kapazität des BBB-Servers erweitern werden muss."
 
+msgid "BBB-Room Settings"
+msgstr "BBB-Raumeinstellungen"
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr "Du kannst Tagungseinstellungen auf dieser Ebene festlegen. Alle Inhalte in der Hierarchie unter dieser Ebene werden die Einstellungen erben, falls für sie keine eigenen Einstellungen festgelegt sind."
+
+msgid "Inherited BBB-Parameters"
+msgstr "Übernommene BBB-Parameter"
+
+msgid "These parameters are the ones this object inherits from higher up settings or the portal defaults. These are the ones that will be used if this object or deeper objects do not define any further parameters."
+msgstr "Dieses Objekt übernimmt die Parameter aus den obigen Einstellungen oder von den Standardwerten des Portals. Diese werden benutzt wenn dieses Objekt oder die tiefer liegende Objekte keine weitere Parameter definieren."
+
+msgid "The next higher up object in the BBB hierarchy chain is"
+msgstr "Das nächste Objekt oberhalb der BBB-Hierarchiekette ist"
+
+msgid "This object has no higher up object in the BBB hierarchy chain. The displayed values are the configured portal defaults."
+msgstr "Dieses Objekt hat kein weiteres Objekt oberhalb der BBB-Hierarchiekette. Die angezeigte Werte sind die konfigurierte Standardwerte des Portals."
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this source object."
+msgstr "Diese Parameter werden für die BBB APP-Anrufe für dieses Quellobjekt als wirksame Parameter benutzt."
+
+msgid "You can find the BBBRoom object for this source object here"
+msgstr "Du kannst das BBB-Raum Objekt für dieses Quellobjekt hier finden"
+
+msgid "BBB Room"
+msgstr "BBB Raum"
 
 msgid "Administration"
 msgstr "Administration"
@@ -2400,6 +2421,9 @@ msgstr "Teilnahmeanträge bearbeiten"
 msgid "Manage Temporary User Accounts"
 msgstr "Temporäre Benutzerkonten verwalten"
 
+msgid "Recorded Meetings"
+msgstr "Aufgezeichnete Meetings"
+
 #
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -2615,9 +2639,6 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_15_organization"
 msgstr "Die Administration von Gruppen beginnt mit der Mitgliederverwaltung. Hier kannst Du entscheiden, wer Deiner Gruppe beitreten darf und wer Administrator sein soll. Du kannst Mitglieder aus dem Portal einladen oder Menschen über die Eingabe ihrer E-Mail-Adressen einladen sich auf dem Portal und in Deiner Gruppe zu registrieren"
 
-#, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_11_document"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_16_twofactorauth"
 msgstr "Hier kannst Du Dein Dokument bearbeiten, indem Du Dinge in das Pad einträgst. Mithilfe des Timesliders (Uhrsymbol) kannst Du Dir vergangene Versionen anschauen und mit den Pfeilsymbolen das Pad bequem in ein Pdf umwandeln. Einen Link zum Pad kannst Du freigeben, indem Du </> klickst"
@@ -2920,6 +2941,24 @@ msgstr "(keine Bedingungen ausgewählt)"
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr "Wenn eine Datei mit Bedingungen hochgeladen wird, müssen diese von allen Benutzern bei der Antragsstellung per Häkchen akzeptiert werden"
 
+msgid "Unfortunately recorded meetings are currently not yet available for this server!"
+msgstr "Die Meetings- Aufzeichnungen sind für diesen Server momentan leider nicht verfügbar!"
+
+msgid "Recording of meetings is only available for premium conferences!"
+msgstr "Aufzeichnung von Meetings ist nur für Premium- Tagungen verfügbar!"
+
+msgid "Make a premium booking here"
+msgstr "Hier deine Premium-Buchung machen"
+
+msgid "Conference Bookings"
+msgstr "Tagungsbuchungen"
+
+msgid "This is a list of all recorded meetings for this conference. Recent recordings may take a few minutes to appear."
+msgstr "Das ist die Liste aller aufgezeichneten Meetings für diese Tagung. Neue Aufzeichnungen können erst in wenigen Minuten erscheinen."
+
+msgid "There are no recorded meetings yet."
+msgstr "Es sind noch keine aufgezeichnete Meetings vorhanden."
+
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr "Hier gibt es die Möglichkeit, einen Informationstext für alle Mitglieder der Tagung vorzubereiten. Dieser wird automatisch 1 Woche, 1 Tag und / oder 1 Stunde vor Tagungsbeginn automatisch versendet. Die Benachrichtigungsmail enthält immer einen Link auf die Tagung"
 
@@ -3031,6 +3070,15 @@ msgstr "Deaktiviere dieses Kontrollkästchen, um den Raum für Teilnehmende ausz
 msgid "Check this to show rocket chat in the sidebar."
 msgstr "Rocket.Chat in der Seitenleiste anzeigen."
 
+msgid "BBB video conference options"
+msgstr "BBB Video-Tagungsoptionen"
+
+msgid "These settings will be the default for all conference events in this room."
+msgstr "Dies wird die Standardeinstellungen für alle Tagungsveranstaltungen in diesem Raum."
+
+msgid "You may still override these options in each individual event."
+msgstr "Du kannst immer noch diese Optionen in jeder einzelnen Veranstaltung überschreiben."
+
 msgid "Go to Room"
 msgstr "Gehe zu Raum"
 
@@ -3050,9 +3098,6 @@ msgstr "Raum löschen"
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
 msgstr "Deine Tagung befindet sich gerade noch im Probe-Modus. Du hast Zugriff auf alle Features, aber kannst diese nur mit wenigen Leuten uneingeschränkt nutzen. Um dir bei deiner Umsetzung mit mehreren Nutzer*innen die volle Leistung zu sichern, buche hier kostenlos ausreichend Kapazitäten:"
 
-msgid "Conference Bookings"
-msgstr "Tagungsbuchungen"
-
 msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
 msgstr "Es gibt verschiedene Arten von Tagungsräumen, jeder mit einem anderen Design und Funktionalität. Indem du verschiedene Räume erstellst und in der gewünschten Reihenfolge anordnest, kannst du das Aussehen und die Atmosphäre deiner Tagung individuell gestalten."
 
@@ -3062,6 +3107,12 @@ msgstr "Du kannst von hier aus direkt Tagungsveranstaltungen für Räume erstell
 msgid "There are no rooms yet."
 msgstr "Es sind noch keine Räume vorhanden."
 
+msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
+msgstr "Beachte: Änderung an einigen dieser Einstellungen kann den Neustart des Meetings fordern bevor die Änderung wirksam wird!"
+
+msgid "Premium only"
+msgstr "Nur Premium"
+
 msgid "Turn on microphone on entering"
 msgstr "Mikrofon beim Betreten aktivieren"
 
@@ -3070,6 +3121,9 @@ msgstr "Standard"
 
 msgid "Turn on camera on entering"
 msgstr "Kamera beim Betreten aktivieren"
+
+msgid "Allow recording"
+msgstr "Aufnahme erlauben"
 
 msgid "Temporary Users"
 msgstr "Temporäre Benutzerkonten"
@@ -3204,6 +3258,23 @@ msgstr "Akzeptieren"
 msgid "Decline"
 msgstr "Ablehnen"
 
+msgid "Started"
+msgstr "Gestartet"
+
+msgid "Length"
+msgstr "Länge"
+
+#
+msgid "Delete Recording"
+msgstr "Aufnahme löschen"
+
+#, python-format
+msgid "Do you really want to delete recorded meeting \"%(title)s\"?"
+msgstr "Möchtest du das aufgezeichnete Meeting \"%(title)s\" wirklich löschen?"
+
+msgid "Delete recorded meeting"
+msgstr "Das aufgezeichnete Meeting löschen"
+
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr "Überblick - Tagungen, Räume und Workshops mit eigenen BBB-Server-Einstellungen"
 
@@ -3300,6 +3371,9 @@ msgstr "BBB"
 
 msgid "BBB Premium"
 msgstr "BBB-Premium"
+
+msgid "BBB Recording API"
+msgstr "BBB Aufnahme- API"
 
 msgid "Not set"
 msgstr "Nicht eingestellt"
@@ -3558,14 +3632,6 @@ msgstr "Maximale Anzahl von Teilnehmenden"
 
 msgid "About the conference"
 msgstr "Über die Tagung"
-
-msgctxt "time"
-msgid "o'clock"
-msgstr "Uhr"
-
-msgctxt "time"
-msgid "until"
-msgstr "bis"
 
 msgid "More infos..."
 msgstr "Mehr Informationen..."
@@ -3828,6 +3894,9 @@ msgstr "Dein neues Projekt wird auch auf der Idee selbst angezeigt, so dass Leut
 msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
 msgstr "Natürlich kannst du auch ein Projekt ohne diese Verbindung zur Idee erstellen - klicke dazu einfach links \"Projekt erstellen\"."
 
+msgid "General"
+msgstr "Allgemein"
+
 msgid "Facebook-Integration"
 msgstr "Facebook-Integration"
 
@@ -3938,6 +4007,12 @@ msgstr "Gibt es verwandte Projekte/Gruppen?"
 
 msgid "Select related Projects/Groups"
 msgstr "Verwandte Projekte/Gruppen auswählen"
+
+msgid "These settings will be the default for all conference events."
+msgstr "Dies wird die Standardeinstellungen für alle Tagungseinstellungen."
+
+msgid "You may still override these options in each conference room and in individual events."
+msgstr "Du kannst immer noch diese Optionen in jedem Tagungsraum und einzelner Veranstaltung überschreiben."
 
 msgid "Group/Project is publicly visible"
 msgstr "Gruppe/Projekt öffentlich sichtbar"
@@ -4143,6 +4218,18 @@ msgstr "Karte"
 
 msgid "Meeting"
 msgstr "Meeting"
+
+msgid "By clicking \"Continue\" you are consenting to be recorded in this video conference."
+msgstr "Indem du auf “Fortsetzen” klickst, stimmst du zu, in dieser Video-Tagung aufgezeichnet werden."
+
+msgid "This session is being recorded"
+msgstr "Diese Sitzung wird aufgezeichnet"
+
+msgid "Continue"
+msgstr "Fortsetzen"
+
+msgid "You have to consent to being recorded to join this meeting."
+msgstr "Du musst zustimmen, aufgezeichnet zu werden, um am Meeting teilzunehmen."
 
 msgid "Popout"
 msgstr "Popout"
@@ -6074,10 +6161,8 @@ msgstr "Facebook-Konto trennen"
 msgid "Disconnect Facebook"
 msgstr "Facebook trennen"
 
-#, fuzzy
-#| msgid "Settings"
 msgid "2FA Settings"
-msgstr "Einstellungen"
+msgstr "2FA- Einstellungen"
 
 #, python-format
 msgid "%(provider)s-Account"
@@ -6241,129 +6326,107 @@ msgstr "Du bist eingeloggt als"
 msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
 msgstr "Es scheint als ob kein Authentifikator-Gerät mit deinem Konto verbunden ist. Bitte bitte einen anderen Admin darum, dir ein Gerät einzurichten und dir den QR-code zu schicken!"
 
-#, fuzzy
-#| msgid "Back to"
 msgid "Backup Tokens"
-msgstr "Zurück zu"
+msgstr "Sicherungstoken"
 
 msgid "Backup tokens can be used when your primary and backup phone numbers aren't available. The backup tokens below can be used for login verification. <br> If you've used up all your backup tokens, you can generate a new set of backup tokens. Only the backup tokens shown below will be valid."
-msgstr ""
+msgstr "Die Sicherungstoken können dann verwendet werden, wenn deine Haupt- und Ersatzrufnummer momentan nicht zur Hand sind. Die unten gelisteten Sicherungstoken können für die Anmeldebestätigung benutzt werden. <br> Wenn die Sicherungstoken alle sind, du kannst dir einen neuen Tokenset generieren. Nur die unten gelisteten Sicherungstoken werden gültig."
 
 msgid "Print these tokens and keep them somewhere safe."
-msgstr ""
+msgstr "Drucke die Token und bewahre diese an einem sicheren Ort auf."
 
-#, fuzzy
-#| msgid "You don't have a %(portal_name)s account yet?"
 msgid "You don't have any backup codes yet."
-msgstr "Du hast noch kein %(portal_name)s-Konto?"
+msgstr "Du hast noch keine Sicherungstoken."
 
-#, fuzzy
-#| msgid "Enter a token:"
 msgid "Generate Tokens"
-msgstr "Gib ein Einladungs-Token ein:"
+msgstr "Tokens generieren"
 
 msgid "Back to 2FA Settings"
-msgstr ""
+msgstr "Zurück zur 2FA- Einrichtung"
 
-#, fuzzy
-#| msgid "Disable editor"
 msgid "Disable 2FA"
-msgstr "Editor deaktivieren"
+msgstr "2FA deaktivieren"
 
 msgid "You are about to disable two-factor authentication. This weakens your account security, are you sure?"
-msgstr ""
+msgstr "Du bist im Begriff, die Zwei-Faktor-Authentifizierung zu deaktivieren. Dies schwächt die Sicherheit deines Kontos, bist du sicher?"
 
 msgid "Yes, I am sure."
-msgstr ""
+msgstr "Ja, ich bin sicher."
 
-#, fuzzy
-#| msgid "Disable editor"
 msgid "Disable"
-msgstr "Editor deaktivieren"
+msgstr "Deaktivieren"
 
 msgid "Two-Factor Login (Backup-Token)"
-msgstr ""
+msgstr "Zwei-Faktor Login (Sicherungstoken)"
 
-#, fuzzy
-#| msgid "Last Login"
 msgid "Two-Factor Login"
-msgstr "Letzer Login"
+msgstr "Zwei-Faktor Login"
 
 msgid "Use this form for entering backup tokens for logging in. These tokens have been generated for you to print and keep safe. Please enter one of these backup tokens to login to your account."
-msgstr ""
+msgstr "Fülle diese Form, um die Sicherungstoken einzugeben und sich einzuloggen. Die Tokens wurden generiert, um sie auszudrucken und sicher aufzubewahren. Gib bitte ein Sicherungstoken aus der Liste ein, um dich einloggen zu können."
 
 msgid "Please enter the token generated by your token generator."
-msgstr ""
+msgstr "Gib dein Token, das von deiner Codegenerator App generiert wurde, hier ein."
 
 msgid "Backup-Token"
-msgstr ""
+msgstr "Sicherungstoken"
 
 msgid "Numeric Token (e.g. 123456)"
-msgstr ""
+msgstr "numerisches Token (z.B. 123456)"
 
 msgid "If you do not have access to your OTP generator app, you may enter one of your generated backup tokens"
-msgstr ""
+msgstr "Wenn du keinen Zugang zu deiner OTP- Codegenerator App hast, dann kannst du ein der generierten Sicherungstoken benutzen, um sich einzuloggen"
 
-#, fuzzy
-#| msgid "Enter a token:"
 msgid "Enter backup token"
-msgstr "Gib ein Einladungs-Token ein:"
+msgstr "Gib das Sicherungstoken ein"
 
-#, fuzzy
-#| msgid "User token"
 msgid "Use Backup Token"
-msgstr "Benutzer-Token"
+msgstr "Sicherungstoken benutzen"
 
 msgid "If you don't have any device with you, you can access your account using backup tokens."
-msgstr ""
+msgstr "Wenn du kein Gerät zur Hand hast, dann kannst du dich anhand von einem Sicherungstoken einloggen."
 
 #, python-format
 msgid "You have only one backup token remaining."
 msgid_plural "<br> You have %(counter)s backup tokens remaining."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Du hast nur ein Sicherungstoken übrig."
+msgstr[1] "<br> Du hast %(counter)s Sicherungstoken übrig."
 
-#, fuzzy
-#| msgid "Show more"
 msgid "Show Tokens"
-msgstr "Weitere anzeigen"
+msgstr "Tokens anzeigen"
 
 msgid "However we strongly discourage you to do so, you can also disable two-factor authentication for your account."
-msgstr ""
+msgstr "Wir raten davor dringend ab, aber du kannst die Zwei-Faktor-Authentifizierung für dein Benutzerprofil auch deaktivieren."
 
 msgid "Two-factor authentication is not enabled for your account. <br> Enable two-factor authentication for enhanced account security."
-msgstr ""
+msgstr "Die Zwei-Faktor Authentifizierung ist für deinen Benutzerprofil noch nicht aktiviert. <br> Aktiviere die Zwei-Faktor Authentifizierung, um die Sicherheit des Benutzerkontos zu erhöhen."
 
 msgid "Enable 2FA"
-msgstr ""
+msgstr "2FA aktivieren"
 
 msgid "2FA Setup"
-msgstr ""
+msgstr "2FA- Einrichtung"
 
 msgid "You are about to take your account security to the next level. <br> To use the 2FA-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. We do not have another 2FA option at the moment and will inform you if there are changes in this regard."
-msgstr ""
+msgstr "Du bist im Begriff, dein Sicherheitsniveau auf die nächste Ebene zu bringen. <br> Um die 2FA- Einstellung zu benutzen, brauchst du die ´free otp´ App auf dein Handy zu installieren und danach den QR- Code einzuscannen. Wir haben momentan keine weitere 2FA- Optionen, aber werden dich über eventuelle Änderungen informieren."
 
 msgid "Scan the QR code below."
-msgstr ""
+msgstr "Scanne die QR-Code."
 
 msgid "Now, enter the token generated by the app:"
-msgstr ""
+msgstr "Gib den von der App generierten Code ein:"
 
 msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
-msgstr ""
+msgstr "Bei der Auswahl der Authentifizierungsmethode ist ein Problem aufgetreten. Gehe bitte zurück und überprüfe, ob die eingegebene Daten korrekt sind. Versuche dann bitte erneut oder benutze eine andere Authentifizierungsmethode. Wenn das Problem weiterhin besteht, kontaktiere die Portaladministratoren."
 
 msgid "2FA Setup Complete"
-msgstr ""
+msgstr "2FA- Einrichtung abgeschlossen"
 
-#, fuzzy
-#| msgid "The invitation was successfully deleted."
 msgid "Congratulations, you've successfully enabled 2FA."
-msgstr "Die Einladung wurde erfolgreich gelöscht."
+msgstr "Glückwunsch, du hast die 2FA- Einstellung erfolgreich aktiviert."
 
-#, fuzzy
-#| msgid "Your profile"
 msgid "Back to your profile"
-msgstr "Dein Profil"
+msgstr "Zurück zu deinem Profil"
 
 msgid "by"
 msgstr "von"
@@ -7369,7 +7432,7 @@ msgid "User successfully created!"
 msgstr "Benutzerkonto wurde erfolgreich erstellt!"
 
 msgid "You do not have any backup tokens set up. Please log in using your OTP tokens."
-msgstr ""
+msgstr "Du hast noch keine Sicherungstoken erstellt. Logge die bitte anhand von deinen OTP Tokens ein."
 
 #, python-format
 msgid "The language \"%s\" is not supported"
@@ -7455,6 +7518,9 @@ msgstr "%(team_type)s \"%(group)s\" wurde erfolgreich erstellt."
 
 msgid "Create"
 msgstr "Erstellen"
+
+msgid "This team does not have a video conference configured."
+msgstr "Dieses Team hast keine konfigurierte Video- Tagung."
 
 #, python-format
 msgid "The %(team_type)s was changed successfully."
@@ -7875,6 +7941,26 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "Active"
+#~ msgstr "Aktiv"
+
+#~ msgid "Restricted"
+#~ msgstr "Eingeschränkt"
+
+#~ msgid "the rooms welcome message"
+#~ msgstr "Die Begrüßungsnachricht der Räume"
+
+#~ msgid "Room Type"
+#~ msgstr "Raumtyp"
+
+#~ msgctxt "time"
+#~ msgid "o'clock"
+#~ msgstr "Uhr"
+
+#~ msgctxt "time"
+#~ msgid "until"
+#~ msgstr "bis"
 
 #~ msgid "Whether the microphone is active when entering the BBB room"
 #~ msgstr "Ob das Mikrofon aktiviert ist, wenn man den BBB-Raum betritt"

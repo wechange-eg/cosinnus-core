@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-06 15:36+0100\n"
+"POT-Creation-Date: 2022-01-25 14:30+0100\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -237,18 +237,6 @@ msgstr "רשימת מסומנים"
 msgid "Bookmarked Users list"
 msgstr "רשימת משתמשים מסומנים"
 
-msgid "General"
-msgstr "כללי"
-
-msgid "Active"
-msgstr "פעיל"
-
-msgid "Restricted"
-msgstr "מוגבל"
-
-msgid "Premium"
-msgstr "פרמיום"
-
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
 
@@ -270,6 +258,9 @@ msgstr "צוות זה אינו פועל יותר תחת כתובת ה-URL שהז
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "חשבון זה אינו פעיל יותר. נותקת מהמערכת."
+
+msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
@@ -690,15 +681,15 @@ msgstr "שבוע הבא"
 msgid "Next month"
 msgstr "בחודש הבא"
 
-msgid "Fairmeeting"
-msgstr ""
-
 #, fuzzy
 #| msgid "View conference"
 msgid "No video conference"
 msgstr "הצג ועידה"
 
 msgid "BBB-Meeting"
+msgstr ""
+
+msgid "Fairmeeting"
 msgstr ""
 
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
@@ -860,11 +851,8 @@ msgstr "מספר להתקשרות אל תוך הוועידה דרך הטלפון
 msgid "pin to enter for telephone participants"
 msgstr "מספר פין לכניסה עבור משתתפי טלפון"
 
-msgid "the rooms welcome message"
-msgstr "הודעת ברוכים הבאים של החדרים"
-
-msgid "Room Type"
-msgstr "סוג חדר"
+msgid "Last create-call parameters"
+msgstr ""
 
 msgid "BBB ROOM"
 msgstr "חדר BBB"
@@ -903,6 +891,9 @@ msgstr "שרת BBB"
 
 msgid "BBB Server for Premium Conferences"
 msgstr "שרת BBB לועידות פרימיום"
+
+msgid "BBB Recording API server"
+msgstr ""
 
 msgid "BBB API Parameters"
 msgstr ""
@@ -2080,6 +2071,12 @@ msgstr ""
 msgid "Conference admin page"
 msgstr "שם ועידה"
 
+msgid "Effective BBB-Parameters"
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this BBB Room."
+msgstr ""
+
 msgid "select this page"
 msgstr "בחר דף זה"
 
@@ -2203,8 +2200,38 @@ msgstr ""
 msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
 msgstr ""
 
+#, fuzzy
+#| msgid "Settings"
+msgid "BBB-Room Settings"
+msgstr "הגדרות"
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr "ניתן להגדיר הגדרות ועידה ברמה זו. כל האובייקטים מתחת לרמה זו בהיררכיה יירשו את ההגדרות הללו, אלא אם כן הגדירו את הגדרות הוועידה לעצמם."
+
+#, fuzzy
+#| msgid "Invited Projects"
+msgid "Inherited BBB-Parameters"
+msgstr "פרויקטים מוזמנים"
+
+msgid "These parameters are the ones this object inherits from higher up settings or the portal defaults. These are the ones that will be used if this object or deeper objects do not define any further parameters."
+msgstr ""
+
+msgid "The next higher up object in the BBB hierarchy chain is"
+msgstr ""
+
+msgid "This object has no higher up object in the BBB hierarchy chain. The displayed values are the configured portal defaults."
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this source object."
+msgstr ""
+
+msgid "You can find the BBBRoom object for this source object here"
+msgstr ""
+
+#, fuzzy
+#| msgid "BBB Room Visits"
+msgid "BBB Room"
+msgstr "ביקורים בחדר BBB"
 
 msgid "Administration"
 msgstr "ניהול מערכת"
@@ -2422,6 +2449,9 @@ msgstr "נהל בקשות השתתפות"
 #| msgid "Temporary User Accounts"
 msgid "Manage Temporary User Accounts"
 msgstr "חשבונות משתמשים זמניים"
+
+msgid "Recorded Meetings"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -2922,6 +2952,26 @@ msgstr "(לא נבחרו תנאים)"
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr "אם קובץ מועלה, המועמדים יצטרכו להסכים לתנאים אלה בתיק זה על ידי סימון תיבת הסימון"
 
+msgid "Unfortunately recorded meetings are currently not yet available for this server!"
+msgstr ""
+
+msgid "Recording of meetings is only available for premium conferences!"
+msgstr ""
+
+msgid "Make a premium booking here"
+msgstr ""
+
+msgid "Conference Bookings"
+msgstr "רשימת מקומות מוזמנים בועידה"
+
+msgid "This is a list of all recorded meetings for this conference. Recent recordings may take a few minutes to appear."
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no rooms yet."
+msgid "There are no recorded meetings yet."
+msgstr "אין עדיין חדרים."
+
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr "כאן יש לך אפשרות להכין טקסט מידע לכל חברי הועידה. זה יישלח אוטומטית שבוע, יום אחד ו / או שעה לפני תחילת הכנס. דואר ההודעות מכיל תמיד קישור לועידה"
 
@@ -3035,6 +3085,19 @@ msgstr "בטל את הסימון הזה כדי להסתיר את החדר למש
 msgid "Check this to show rocket chat in the sidebar."
 msgstr "סמן זאת כדי להציג את רוקט-צ'אט בסרגל הצד."
 
+#, fuzzy
+#| msgid "View conference"
+msgid "BBB video conference options"
+msgstr "הצג ועידה"
+
+#, fuzzy
+#| msgid "This will be the default setting for all content created by members."
+msgid "These settings will be the default for all conference events in this room."
+msgstr "זו תהיה הגדרת ברירת המחדל עבור כל התוכן שנוצר על-ידי חברים."
+
+msgid "You may still override these options in each individual event."
+msgstr ""
+
 msgid "Go to Room"
 msgstr "עבור לחדר"
 
@@ -3054,9 +3117,6 @@ msgstr "מחק חדר"
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
 msgstr "הועידה שלך עדיין במצב ניסיון. יש לך גישה לכל התכונות, אך תוכל להשתמש בהן רק עם כמה אנשים ללא הגבלות. כדי להבטיח ביצועים מלאים בועידה שלך עם מספר משתמשים, הזמינו כאן מספיק יכולות בחינם:"
 
-msgid "Conference Bookings"
-msgstr "רשימת מקומות מוזמנים בועידה"
-
 msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
 msgstr "ישנם מספר סוגים של חדרי ישיבות, שלכל אחד מהם ממשק ופונקציונליות שונים משלהם. על ידי יצירת חדרים שונים והצבתם לפי הסדר שאתה אוהב, תוכל להתאים אישית את המראה והתחושה של הועידה שלך."
 
@@ -3066,6 +3126,14 @@ msgstr "תוכלו ליצור ישירות אירועי ועידה לחדרים 
 msgid "There are no rooms yet."
 msgstr "אין עדיין חדרים."
 
+msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Premium"
+msgid "Premium only"
+msgstr "פרמיום"
+
 msgid "Turn on microphone on entering"
 msgstr ""
 
@@ -3073,6 +3141,9 @@ msgid "Default"
 msgstr ""
 
 msgid "Turn on camera on entering"
+msgstr ""
+
+msgid "Allow recording"
 msgstr ""
 
 #, fuzzy
@@ -3249,6 +3320,29 @@ msgstr "אשר משתמש"
 msgid "Decline"
 msgstr "דחה משתמש"
 
+#, fuzzy
+#| msgid "Starred"
+msgid "Started"
+msgstr "מסומן בכוכב"
+
+msgid "Length"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete Account"
+msgid "Delete Recording"
+msgstr "מחיקת חשבון"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to delete room \"%(title)s\"?"
+msgid "Do you really want to delete recorded meeting \"%(title)s\"?"
+msgstr "האם את/ה בטוח שברצונך למחוק את הקובץ \"%(title)s\"?"
+
+#, fuzzy
+#| msgid "Delete reported item..."
+msgid "Delete recorded meeting"
+msgstr "מחיקת פריט שדווח..."
+
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr "סקירה כללית - ועידות, חדרים וסדנאות עם הגדרות שרת BBB מותאמות אישית"
 
@@ -3357,6 +3451,9 @@ msgstr "BBB"
 
 msgid "BBB Premium"
 msgstr "BBB פרימיום"
+
+msgid "BBB Recording API"
+msgstr ""
 
 msgid "Not set"
 msgstr "לא נקבע"
@@ -3628,14 +3725,6 @@ msgstr "מספר משתתפים מרבי"
 msgid "About the conference"
 msgstr "אודות הועידה"
 
-msgctxt "time"
-msgid "o'clock"
-msgstr "שעה"
-
-msgctxt "time"
-msgid "until"
-msgstr "עד"
-
 msgid "More infos..."
 msgstr "מידע נוסף..."
 
@@ -3897,6 +3986,9 @@ msgstr "הפרויקט החדש יוצג על הרעיון עצמו, כך שכו
 msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
 msgstr "כמובן שניתן גם ליצור פרוייקט ללא חיבור לרעיון - פשוט לחץ על \"צור פרויקט\" בצד שמאל כדי לעשות זאת."
 
+msgid "General"
+msgstr "כללי"
+
 msgid "Facebook-Integration"
 msgstr "אינטגרציית פייסבוק"
 
@@ -4008,6 +4100,14 @@ msgstr "האם יש פרויקטים/קבוצות הקשורים לקבוצה ז
 
 msgid "Select related Projects/Groups"
 msgstr "בחירת פרויקטים/קבוצות קשורים"
+
+#, fuzzy
+#| msgid "This will be the default setting for all content created by members."
+msgid "These settings will be the default for all conference events."
+msgstr "זו תהיה הגדרת ברירת המחדל עבור כל התוכן שנוצר על-ידי חברים."
+
+msgid "You may still override these options in each conference room and in individual events."
+msgstr ""
 
 #, fuzzy
 #| msgid "This project will be set to be publicly visible!"
@@ -4222,6 +4322,20 @@ msgstr "מפה"
 #| msgid "Deleting..."
 msgid "Meeting"
 msgstr "מוחק..."
+
+msgid "By clicking \"Continue\" you are consenting to be recorded in this video conference."
+msgstr ""
+
+msgid "This session is being recorded"
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue reading"
+msgid "Continue"
+msgstr "המשך לקרוא"
+
+msgid "You have to consent to being recorded to join this meeting."
+msgstr ""
 
 msgid "Popout"
 msgstr ""
@@ -7561,6 +7675,9 @@ msgstr "%(team_type)s  \"%(group)s\" נוצר בהצלחה."
 msgid "Create"
 msgstr "צור"
 
+msgid "This team does not have a video conference configured."
+msgstr ""
+
 #, python-format
 msgid "The %(team_type)s was changed successfully."
 msgstr "ה-%(team_type)s השתנה בהצלחה."
@@ -7981,6 +8098,26 @@ msgstr "כרגע אינך חבר ב-%s! אם תרצה, אתה יכול לבקש 
 
 msgid "Your changes have been saved."
 msgstr "השינויים שביצעת נשמרו בהצלחה."
+
+#~ msgid "Active"
+#~ msgstr "פעיל"
+
+#~ msgid "Restricted"
+#~ msgstr "מוגבל"
+
+#~ msgid "the rooms welcome message"
+#~ msgstr "הודעת ברוכים הבאים של החדרים"
+
+#~ msgid "Room Type"
+#~ msgstr "סוג חדר"
+
+#~ msgctxt "time"
+#~ msgid "o'clock"
+#~ msgstr "שעה"
+
+#~ msgctxt "time"
+#~ msgid "until"
+#~ msgstr "עד"
 
 #~ msgid "Allow temporary users accounts for this conference."
 #~ msgstr "אפשר למשתמשים זמניים חשבונות עבור ועידה זו."

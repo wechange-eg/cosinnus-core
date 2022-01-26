@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-06 15:36+0100\n"
+"POT-Creation-Date: 2022-01-25 14:30+0100\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -237,18 +237,6 @@ msgstr "Lista zakładek"
 msgid "Bookmarked Users list"
 msgstr "Lista użytkowników oznaczonych zakładkami"
 
-msgid "General"
-msgstr "Ogólne"
-
-msgid "Active"
-msgstr "Aktywny/-a"
-
-msgid "Restricted"
-msgstr "Ograniczony"
-
-msgid "Premium"
-msgstr "Premium"
-
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
 
@@ -270,6 +258,9 @@ msgstr "Ten zespół nie istnieje już pod wpisanym przez Ciebie URL. Zostałeś
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "To konto nie jest już aktywne. Zostałeś/-aś wylogowany/-a."
+
+msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
@@ -691,15 +682,15 @@ msgstr "W przyszłym tygodniu"
 msgid "Next month"
 msgstr "W przyszłym miesiącu"
 
-msgid "Fairmeeting"
-msgstr ""
-
 #, fuzzy
 #| msgid "View conference"
 msgid "No video conference"
 msgstr "Widok konferencji"
 
 msgid "BBB-Meeting"
+msgstr ""
+
+msgid "Fairmeeting"
 msgstr ""
 
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
@@ -862,11 +853,8 @@ msgstr "numer telefonu do wybrania, aby być w konferencji"
 msgid "pin to enter for telephone participants"
 msgstr "pin dla uczestników telefonicznych"
 
-msgid "the rooms welcome message"
-msgstr "wiadomość powitalna dla pokojów"
-
-msgid "Room Type"
-msgstr "Typ pokoju"
+msgid "Last create-call parameters"
+msgstr ""
 
 msgid "BBB ROOM"
 msgstr "POKÓJ BBB"
@@ -905,6 +893,9 @@ msgstr "Serwer BBB"
 
 msgid "BBB Server for Premium Conferences"
 msgstr "Serwer BBB dla Konferencji Premium"
+
+msgid "BBB Recording API server"
+msgstr ""
 
 msgid "BBB API Parameters"
 msgstr ""
@@ -2079,6 +2070,12 @@ msgstr ""
 msgid "Conference admin page"
 msgstr "Nazwa konferencji"
 
+msgid "Effective BBB-Parameters"
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this BBB Room."
+msgstr ""
+
 msgid "select this page"
 msgstr "wybierz tę stronę"
 
@@ -2202,8 +2199,38 @@ msgstr ""
 msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
 msgstr ""
 
+#, fuzzy
+#| msgid "Settings"
+msgid "BBB-Room Settings"
+msgstr "Ustawienia"
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr "Możesz ustawić ustawienia konferencji na tym poziomie. Wszystkie obiekty pod tym poziomem hierarchii odziedziczą te ustawienia, chyba że same wprowadziły ustawienia konferencji."
+
+#, fuzzy
+#| msgid "Invited Projects"
+msgid "Inherited BBB-Parameters"
+msgstr "Zaproszone Projekty"
+
+msgid "These parameters are the ones this object inherits from higher up settings or the portal defaults. These are the ones that will be used if this object or deeper objects do not define any further parameters."
+msgstr ""
+
+msgid "The next higher up object in the BBB hierarchy chain is"
+msgstr ""
+
+msgid "This object has no higher up object in the BBB hierarchy chain. The displayed values are the configured portal defaults."
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this source object."
+msgstr ""
+
+msgid "You can find the BBBRoom object for this source object here"
+msgstr ""
+
+#, fuzzy
+#| msgid "BBB Room Visits"
+msgid "BBB Room"
+msgstr "Wizyty w Pokoju BBB"
 
 msgid "Administration"
 msgstr "Administracja"
@@ -2425,6 +2452,9 @@ msgstr "Zarządzaj Aplikacjami Uczestnictwa"
 #| msgid "Temporary User Accounts"
 msgid "Manage Temporary User Accounts"
 msgstr "Tymczasowe Konto Użytkownika"
+
+msgid "Recorded Meetings"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -2929,6 +2959,26 @@ msgstr "(nie wybrano żadnych warunków)"
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr "Jeśli plik został przesłany, wtedy osoby składające aplikację będą zobowiązani w tym pliku wyrazić zgodę na te warunki, zaznaczając odpowiednie pole wyboru"
 
+msgid "Unfortunately recorded meetings are currently not yet available for this server!"
+msgstr ""
+
+msgid "Recording of meetings is only available for premium conferences!"
+msgstr ""
+
+msgid "Make a premium booking here"
+msgstr ""
+
+msgid "Conference Bookings"
+msgstr "Rezerwacje konferencyjne"
+
+msgid "This is a list of all recorded meetings for this conference. Recent recordings may take a few minutes to appear."
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no rooms yet."
+msgid "There are no recorded meetings yet."
+msgstr "Nie ma jeszcze żadnych pokoi."
+
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr "Tutaj masz możliwość przygotowania tekstu informacyjnego dla wszystkich członków konferencji. Zostanie on wysłany automatycznie na 1 tydzień, 1 dzień i/lub 1 godzinę przed jej rozpoczęciem. Mail z powiadomieniem zawsze zawiera link do konferencji"
 
@@ -3042,6 +3092,19 @@ msgstr "Usuń zaznaczenie, aby ukryć pokój dla uczestników (nadal będziesz m
 msgid "Check this to show rocket chat in the sidebar."
 msgstr "Zaznacz, aby pokazać Rocket.Chat na pasku bocznym."
 
+#, fuzzy
+#| msgid "View conference"
+msgid "BBB video conference options"
+msgstr "Widok konferencji"
+
+#, fuzzy
+#| msgid "This will be the default setting for all content created by members."
+msgid "These settings will be the default for all conference events in this room."
+msgstr "Będzie to domyślne ustawienie dla wszystkich treści utworzonych przez użytkowników."
+
+msgid "You may still override these options in each individual event."
+msgstr ""
+
 msgid "Go to Room"
 msgstr "Przejdź do pokoju"
 
@@ -3061,9 +3124,6 @@ msgstr "Usuń pokój"
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
 msgstr "Twoja konferencja jest nadal w trybie przedprocesowym. Masz dostęp do wszystkich funkcji, ale możesz z nich korzystać bez ograniczeń tylko z kilkoma osobami. Aby zapewnić pełną wydajność Twojej konferencji z wieloma użytkownikami, zarezerwuj tutaj bezpłatnie wystarczającą ilość miejsc:"
 
-msgid "Conference Bookings"
-msgstr "Rezerwacje konferencyjne"
-
 msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
 msgstr "Istnieje kilka rodzajów pokoi konferencyjnych, z których każda ma inny interfejs i funkcjonalność. Tworząc różne sale i ustawiając je w wybranej przez siebie kolejności, możesz dostosować wygląd i klimat swojej konferencji."
 
@@ -3073,6 +3133,14 @@ msgstr "Możesz bezpośrednio tworzyć wydarzenia konferencyjne dla pokoi, używ
 msgid "There are no rooms yet."
 msgstr "Nie ma jeszcze żadnych pokoi."
 
+msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Premium"
+msgid "Premium only"
+msgstr "Premium"
+
 msgid "Turn on microphone on entering"
 msgstr ""
 
@@ -3080,6 +3148,9 @@ msgid "Default"
 msgstr ""
 
 msgid "Turn on camera on entering"
+msgstr ""
+
+msgid "Allow recording"
 msgstr ""
 
 #, fuzzy
@@ -3252,6 +3323,29 @@ msgstr "Zaakceptuj"
 msgid "Decline"
 msgstr "Odrzuć"
 
+#, fuzzy
+#| msgid "Starred"
+msgid "Started"
+msgstr "Gwiaździste"
+
+msgid "Length"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete Account"
+msgid "Delete Recording"
+msgstr "Usuń Konto"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to delete room \"%(title)s\"?"
+msgid "Do you really want to delete recorded meeting \"%(title)s\"?"
+msgstr "Czy na pewno chcesz usunąć pokój \"%(title)s\"?"
+
+#, fuzzy
+#| msgid "Delete reported item..."
+msgid "Delete recorded meeting"
+msgstr "Usuń zgłoszony element..."
+
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr "Przegląd - Konferencje, pokoje i warsztaty z własnymi ustawieniami Serwera BBB"
 
@@ -3360,6 +3454,9 @@ msgstr "BBB"
 
 msgid "BBB Premium"
 msgstr "BBB Premium"
+
+msgid "BBB Recording API"
+msgstr ""
 
 msgid "Not set"
 msgstr "Nie ustawiono"
@@ -3631,14 +3728,6 @@ msgstr "Maksymalna ilość uczestników"
 msgid "About the conference"
 msgstr "O tej konferencji"
 
-msgctxt "time"
-msgid "o'clock"
-msgstr "o godzinie"
-
-msgctxt "time"
-msgid "until"
-msgstr "do"
-
 msgid "More infos..."
 msgstr "Więcej informacji..."
 
@@ -3901,6 +3990,9 @@ msgstr "Twój nowy projekt zostanie także wyświetlony w kategorii idei aby ka�
 msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
 msgstr "Możesz też oczywiście utworzyć projekt bez łączenia go z ideą - aby to zrobić, po prostu kliknij na \"Utwórz Projekt\" po lewej stronie."
 
+msgid "General"
+msgstr "Ogólne"
+
 msgid "Facebook-Integration"
 msgstr "Integracja z Facebookiem"
 
@@ -4012,6 +4104,14 @@ msgstr "Czy są jakieś projekty/grupy związane z tą grupą?"
 
 msgid "Select related Projects/Groups"
 msgstr "Wybierz powiązane Projekty/Grupy"
+
+#, fuzzy
+#| msgid "This will be the default setting for all content created by members."
+msgid "These settings will be the default for all conference events."
+msgstr "Będzie to domyślne ustawienie dla wszystkich treści utworzonych przez użytkowników."
+
+msgid "You may still override these options in each conference room and in individual events."
+msgstr ""
 
 msgid "Group/Project is publicly visible"
 msgstr "Grupa/projekt jest widoczny publicznie"
@@ -4221,6 +4321,20 @@ msgstr "Mapa"
 #| msgid "Deleting..."
 msgid "Meeting"
 msgstr "Usuwanie..."
+
+msgid "By clicking \"Continue\" you are consenting to be recorded in this video conference."
+msgstr ""
+
+msgid "This session is being recorded"
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue reading"
+msgid "Continue"
+msgstr "Kontynuuj czytanie"
+
+msgid "You have to consent to being recorded to join this meeting."
+msgstr ""
 
 msgid "Popout"
 msgstr ""
@@ -7568,6 +7682,9 @@ msgstr "Grupa %(team_type)s \"%(group)s\" została utworzona pomyślnie."
 msgid "Create"
 msgstr "Utwórz"
 
+msgid "This team does not have a video conference configured."
+msgstr ""
+
 #, python-format
 msgid "The %(team_type)s was changed successfully."
 msgstr "%(team_type)s został zmieniony pomyślnie."
@@ -7989,6 +8106,26 @@ msgstr "Obecnie nie jesteś członkiem %s! Jeśli chcesz nim zostać, możesz wy
 
 msgid "Your changes have been saved."
 msgstr "Twoje zmiany zostały zapisane."
+
+#~ msgid "Active"
+#~ msgstr "Aktywny/-a"
+
+#~ msgid "Restricted"
+#~ msgstr "Ograniczony"
+
+#~ msgid "the rooms welcome message"
+#~ msgstr "wiadomość powitalna dla pokojów"
+
+#~ msgid "Room Type"
+#~ msgstr "Typ pokoju"
+
+#~ msgctxt "time"
+#~ msgid "o'clock"
+#~ msgstr "o godzinie"
+
+#~ msgctxt "time"
+#~ msgid "until"
+#~ msgstr "do"
 
 #~ msgid "Allow temporary users accounts for this conference."
 #~ msgstr "Zezwalaj na tymczasowe konta użytkowników dla tej konferencji."

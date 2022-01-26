@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-06 15:36+0100\n"
+"POT-Creation-Date: 2022-01-25 14:30+0100\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -236,18 +236,6 @@ msgstr ""
 msgid "Bookmarked Users list"
 msgstr ""
 
-msgid "General"
-msgstr "General"
-
-msgid "Active"
-msgstr "Activ"
-
-msgid "Restricted"
-msgstr "Restrâns"
-
-msgid "Premium"
-msgstr "Premium"
-
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
 
@@ -269,6 +257,9 @@ msgstr "Această echipă nu mai locuiește sub URL-ul pe care l-ați introdus. A
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "Acest cont nu mai este activ. Ai fost deconectat."
+
+msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
@@ -693,14 +684,14 @@ msgstr "Săptămâna viitoare"
 msgid "Next month"
 msgstr "Luna viitoare"
 
-msgid "Fairmeeting"
-msgstr ""
-
 #, fuzzy
 msgid "No video conference"
 msgstr "Este conferință"
 
 msgid "BBB-Meeting"
+msgstr ""
+
+msgid "Fairmeeting"
 msgstr ""
 
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
@@ -862,11 +853,8 @@ msgstr "numărul pentru apelarea la conferință prin telefon"
 msgid "pin to enter for telephone participants"
 msgstr "pin pentru a intra pentru participanții la telefon"
 
-msgid "the rooms welcome message"
-msgstr "mesajul de întâmpinare a camerelor"
-
-msgid "Room Type"
-msgstr "Tipul Camerei"
+msgid "Last create-call parameters"
+msgstr ""
 
 msgid "BBB ROOM"
 msgstr ""
@@ -905,6 +893,9 @@ msgid "BBB Server"
 msgstr ""
 
 msgid "BBB Server for Premium Conferences"
+msgstr ""
+
+msgid "BBB Recording API server"
 msgstr ""
 
 msgid "BBB API Parameters"
@@ -2119,6 +2110,12 @@ msgstr ""
 msgid "Conference admin page"
 msgstr "Pagina Conferinței"
 
+msgid "Effective BBB-Parameters"
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this BBB Room."
+msgstr ""
+
 msgid "select this page"
 msgstr "selectați această pagină"
 
@@ -2242,8 +2239,37 @@ msgstr ""
 msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
 msgstr ""
 
+#, fuzzy
+#| msgid "Settings"
+msgid "BBB-Room Settings"
+msgstr "Setări"
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr ""
+
+#, fuzzy
+#| msgid "Invited Projects"
+msgid "Inherited BBB-Parameters"
+msgstr "Proiecte Invitate"
+
+msgid "These parameters are the ones this object inherits from higher up settings or the portal defaults. These are the ones that will be used if this object or deeper objects do not define any further parameters."
+msgstr ""
+
+msgid "The next higher up object in the BBB hierarchy chain is"
+msgstr ""
+
+msgid "This object has no higher up object in the BBB hierarchy chain. The displayed values are the configured portal defaults."
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this source object."
+msgstr ""
+
+msgid "You can find the BBBRoom object for this source object here"
+msgstr ""
+
+#, fuzzy
+msgid "BBB Room"
+msgstr "Tipul Camerei"
 
 msgid "Administration"
 msgstr "Administrare"
@@ -2477,6 +2503,9 @@ msgstr ""
 #| msgid "Team Description"
 msgid "Manage Temporary User Accounts"
 msgstr "Descrierea Echipei"
+
+msgid "Recorded Meetings"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -2993,6 +3022,26 @@ msgstr ""
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr ""
 
+msgid "Unfortunately recorded meetings are currently not yet available for this server!"
+msgstr ""
+
+msgid "Recording of meetings is only available for premium conferences!"
+msgstr ""
+
+msgid "Make a premium booking here"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Bookings"
+msgstr "Camerele de conferințe"
+
+msgid "This is a list of all recorded meetings for this conference. Recent recordings may take a few minutes to appear."
+msgstr ""
+
+#, fuzzy
+msgid "There are no recorded meetings yet."
+msgstr "Nu există articole încă"
+
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr ""
 
@@ -3115,6 +3164,18 @@ msgstr ""
 msgid "Check this to show rocket chat in the sidebar."
 msgstr ""
 
+#, fuzzy
+msgid "BBB video conference options"
+msgstr "Este conferință"
+
+#, fuzzy
+#| msgid "This will be the default setting for all content created by members."
+msgid "These settings will be the default for all conference events in this room."
+msgstr "Aceasta va fi setarea implicită pentru tot conținutul creat de membrii."
+
+msgid "You may still override these options in each individual event."
+msgstr ""
+
 msgid "Go to Room"
 msgstr ""
 
@@ -3136,10 +3197,6 @@ msgstr "Ștergeți Profilul"
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
 msgstr ""
 
-#, fuzzy
-msgid "Conference Bookings"
-msgstr "Camerele de conferințe"
-
 msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
 msgstr ""
 
@@ -3150,6 +3207,14 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr "Nu există articole încă"
 
+msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Premium"
+msgid "Premium only"
+msgstr "Premium"
+
 msgid "Turn on microphone on entering"
 msgstr ""
 
@@ -3157,6 +3222,9 @@ msgid "Default"
 msgstr ""
 
 msgid "Turn on camera on entering"
+msgstr ""
+
+msgid "Allow recording"
 msgstr ""
 
 #, fuzzy
@@ -3330,6 +3398,27 @@ msgstr "Accept utilizatorul"
 msgid "Decline"
 msgstr "Refuz utilizator"
 
+#, fuzzy
+msgid "Started"
+msgstr "Restrâns"
+
+msgid "Length"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete Account"
+msgid "Delete Recording"
+msgstr "Șterge Contul"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete recorded meeting \"%(title)s\"?"
+msgstr "Doriți cu adevărat să ștergeți anunțul ”%(title)s”?"
+
+#, fuzzy
+#| msgid "Delete reported item..."
+msgid "Delete recorded meeting"
+msgstr "Ștergeți articolul raportat..."
+
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr ""
 
@@ -3447,6 +3536,9 @@ msgstr ""
 #, fuzzy
 msgid "BBB Premium"
 msgstr "Premium"
+
+msgid "BBB Recording API"
+msgstr ""
 
 #, fuzzy
 msgid "Not set"
@@ -3725,15 +3817,6 @@ msgstr "Participanți Maximum la Masa de Cafea"
 msgid "About the conference"
 msgstr "Despre Proiect"
 
-msgctxt "time"
-msgid "o'clock"
-msgstr ""
-
-#, fuzzy
-msgctxt "time"
-msgid "until"
-msgstr "Până când"
-
 #, fuzzy
 msgid "More infos..."
 msgstr "Fără informații."
@@ -4005,6 +4088,9 @@ msgstr "Noul dvs. proiect va fi afișat și pe ideea în sine, astfel încât to
 msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
 msgstr "Desigur, puteți crea, de asemenea, un proiect fără o conexiune la idee - trebuie doar să faceți clic pe ”Creați Proiect” în partea stângă pentru a face acest lucru."
 
+msgid "General"
+msgstr "General"
+
 msgid "Facebook-Integration"
 msgstr "Facebook-Integrare"
 
@@ -4119,6 +4205,14 @@ msgstr "Există proiecte/grupuri legate de acesta?"
 
 msgid "Select related Projects/Groups"
 msgstr "Selectați Proiecte/grupuri conexă"
+
+#, fuzzy
+#| msgid "This will be the default setting for all content created by members."
+msgid "These settings will be the default for all conference events."
+msgstr "Aceasta va fi setarea implicită pentru tot conținutul creat de membrii."
+
+msgid "You may still override these options in each conference room and in individual events."
+msgstr ""
 
 #, fuzzy
 #| msgid "This project will be set to be publicly visible!"
@@ -4334,6 +4428,20 @@ msgstr "Hartă"
 #| msgid "Deleting..."
 msgid "Meeting"
 msgstr "Ștergerea..."
+
+msgid "By clicking \"Continue\" you are consenting to be recorded in this video conference."
+msgstr ""
+
+msgid "This session is being recorded"
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue reading"
+msgid "Continue"
+msgstr "Continuați lectura"
+
+msgid "You have to consent to being recorded to join this meeting."
+msgstr ""
 
 msgid "Popout"
 msgstr ""
@@ -7746,6 +7854,9 @@ msgstr "%(team_type)s ”%(group)s” a fost creat cu succes."
 msgid "Create"
 msgstr "Crea"
 
+msgid "This team does not have a video conference configured."
+msgstr ""
+
 #, python-format
 msgid "The %(team_type)s was changed successfully."
 msgstr "%(team_type)s a fost modificată cu succes."
@@ -8170,6 +8281,23 @@ msgstr "În prezent nu sunteți membru %s! Dacă doriți, puteți solicita să d
 
 msgid "Your changes have been saved."
 msgstr "Schimbările tale au fost salvate."
+
+#~ msgid "Active"
+#~ msgstr "Activ"
+
+#~ msgid "Restricted"
+#~ msgstr "Restrâns"
+
+#~ msgid "the rooms welcome message"
+#~ msgstr "mesajul de întâmpinare a camerelor"
+
+#~ msgid "Room Type"
+#~ msgstr "Tipul Camerei"
+
+#, fuzzy
+#~ msgctxt "time"
+#~ msgid "until"
+#~ msgstr "Până când"
 
 #, fuzzy
 #~ msgid "Conference accounts active"
