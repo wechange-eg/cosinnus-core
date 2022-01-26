@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -1643,7 +1643,7 @@ msgid "Only me"
 msgstr "Nur ich"
 
 msgid "Team members only"
-msgstr "Nur Gruppen/Projekt-Mitglieder"
+msgstr "Nur Gruppen-/Projekt-Mitglieder"
 
 msgid "Platform-wide (visible for all portal members)"
 msgstr "Portalweit (sichtbar für alle Mitglieder des Portales)"
@@ -5134,7 +5134,7 @@ msgid "Visibility"
 msgstr "Sichtbarkeit"
 
 msgid "This item will be visible on the entire portal. This means that any portal member will be able to see it."
-msgstr ""
+msgstr "Dieser Inhalt wird auf dem gesamten Portal sichtbar sein. Das heißt, dass jedes Portal-Mitglied ihn sehen können wird."
 
 msgid "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
 msgstr "Dieser Inhalt wird als öffentlich sichtbar erstellt! Das bedeutet, dass jeder im Internet darauf Zugriff hat und ihn lesen kann, und er möglicherweise in Suchmaschinenergebnissen erscheint."
@@ -6151,7 +6151,7 @@ msgstr "Inhalte aus meinen Gruppen und Projekten"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Platform content"
-msgstr "Portal Inhalte"
+msgstr "Portalweite Inhalte"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Public content"
@@ -7299,7 +7299,7 @@ msgid "Where is the group active?"
 msgstr "Wo ist die Gruppe aktiv?"
 
 msgid "Group members only"
-msgstr "Nur GruppenMitglieder"
+msgstr "Nur Gruppen-Mitglieder"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
 msgstr "Benutzer können beitreten, indem sie einen Antrag auf Mitgliedschaft einreichen, der von einem der Administratoren der Gruppe angenommen oder abgelehnt werden kann."
