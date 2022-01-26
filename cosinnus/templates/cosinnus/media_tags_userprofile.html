@@ -3,17 +3,19 @@
 {{ form.forms.media_tag.media }}
 
 
-{# Regular field with custom HTML #}
-{% trans "Where do you live?" as location_label %}
-{% trans "Set your location to let other users find your profile on the map (as long as your privacy setting permits it). You will also start out there when you open the map." as location_legend %} 
-{% captureas location_html %}
-    {% trans "Enter a place or address and then choose a point on the map." as location_placeholder %}
-    {% render_field form.forms.media_tag.location placeholder=location_placeholder %}
-    {{ form.forms.media_tag.location_lat }}
-    {{ form.forms.media_tag.location_lon }}
-    <div id="id_media_tag-location-map"></div>
-{% endcaptureas %}
-{% include 'cosinnus/fields/default_field.html' with field=form.forms.media_tag.location field_html=location_html label=location_label legend=location_legend placeholder=location_placeholder large_field=True %}
+{% block location_field %}
+	{# Regular field with custom HTML #}
+	{% trans "Where do you live?" as location_label %}
+	{% trans "Set your location to let other users find your profile on the map (as long as your privacy setting permits it). You will also start out there when you open the map." as location_legend %} 
+	{% captureas location_html %}
+		{% trans "Enter a place or address and then choose a point on the map." as location_placeholder %}
+		{% render_field form.forms.media_tag.location placeholder=location_placeholder %}
+		{{ form.forms.media_tag.location_lat }}
+		{{ form.forms.media_tag.location_lon }}
+		<div id="id_media_tag-location-map"></div>
+	{% endcaptureas %}
+	{% include 'cosinnus/fields/default_field.html' with field=form.forms.media_tag.location field_html=location_html label=location_label legend=location_legend placeholder=location_placeholder large_field=True %}
+{% endblock location_field %}
 
 
 {# Large Field #}

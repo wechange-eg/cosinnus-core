@@ -184,6 +184,10 @@ class CosinnusConf(AppConf):
     # if True while `ADMIN_2_FACTOR_AUTH_ENABLED` is enabled, will force 2-factor-authentication
     # for superusers and portal on the ENTIRE site, and not only on the /admin/ backend
     ADMIN_2_FACTOR_AUTH_STRICT_MODE = False
+
+    # if True, users may activate the 2-factor-authentication for
+    # their user profiles within the portal
+    USER_2_FACTOR_AUTH_ENABLED = False
     
     # enable this to sign up new members to a cleverreach newsletter group
     CLEVERREACH_AUTO_SIGNUP_ENABLED = False
@@ -568,6 +572,9 @@ class CosinnusConf(AppConf):
     # display map in iframe in user dashboard
     USERDASHBOARD_USE_LIVE_MAP_WIDGET = False
     
+    # switch to the German version of OpenStreetMap tileset
+    MAP_USE_MODERN_TILESET = False
+
     # switch to set if Microsites should be enabled.
     # this can be override for each portal to either activate or deactivate them
     MICROSITES_ENABLED = False
@@ -765,6 +772,11 @@ class CosinnusConf(AppConf):
     # default if None: `full_name`
     CONFERENCES_USER_DISPLAY_NAME_FUNC = None
     
+    # can be set to a function receiving `user` as only argument, 
+    # to modify the user display name that external services like
+    # nextcloud and rocketchat receive for that user
+    EXTERNAL_USER_DISPLAY_NAME_FUNC = None
+    
     # if set to True, regular non-portal admin users can not create projects and groups by themselves
     # and some elements like the "+" button in the navbar is hidden
     LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS = False
@@ -817,6 +829,9 @@ class CosinnusConf(AppConf):
     # whether the regular user signup method is enabled for this portal
     USER_SIGNUP_ENABLED = True
     
+    # if True, won't let any user log in before verifying their e-mail 
+    USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN = False
+    
     USER_EXTERNAL_USERS_FORBIDDEN = False
     
     # whether the "last name" user form field is also required, just like "first name"
@@ -867,6 +882,7 @@ class CosinnusConf(AppConf):
     # }
     # example: {'organization': {'type': 'text', 'required': True}}
     USERPROFILE_EXTRA_FIELDS = {}
+    USERPROFILE_EXTRA_FIELDS_TRANSLATED_FIELDS = []
     
     # a dict of <form-name> -> list of formfield names that will be disabled in the user profile forms 
     # for the current portal. can be dynamic and regular fields
@@ -1206,6 +1222,18 @@ class CosinnusDefaultSettings(AppConf):
                 },
             },
         },
+        'record_meeting': {
+            0: {
+                'create': {
+                    'record': 'false',
+                },
+            },
+            1: {
+                'create': {
+                    'record': 'true',
+                },
+            },
+        },
     }
     
     # the default baseline portal values for the BBB call params
@@ -1215,6 +1243,7 @@ class CosinnusDefaultSettings(AppConf):
     BBB_PARAM_PORTAL_DEFAULTS = {
         'create': {
             'muteOnStart': 'true', # default preset for 'mic_starts_on': False
+            'record': 'false', # default preset for 'record_meeting'
         },
         'join': {
             'userdata-bbb_auto_share_webcam': 'false', # default preset for 'cam_starts_on': False
@@ -1239,7 +1268,14 @@ class CosinnusDefaultSettings(AppConf):
     BBB_PRESET_USER_FORM_FIELDS = [
         'mic_starts_on',
         'cam_starts_on',
+        'record_meeting',
     ]
+    # a list of field names from `BBB_PRESET_USER_FORM_FIELDS` that can only
+    # be changed by users if a conference is premium at some point
+    BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY = [
+        'record_meeting',
+    ]
+    
     
     # limit visit creation for (user, bbb_room) pairs to a time window
     BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60*60

@@ -6,7 +6,9 @@
 	    <b>{% trans "BBB" %}:</b>
 	    <span>{{ setting.bbb_server_choice_text }}</span>,
 	    <b>{% trans "BBB Premium" %}:</b>
-	    <span>{{ setting.bbb_server_choice_premium_text }}</span>
+        <span>{{ setting.bbb_server_choice_premium_text }}</span>
+        <b>{% trans "BBB Recording API" %}:</b>
+        <span>{{ setting.bbb_server_choice_recording_api_text }}</span>
 	{% else %}
 	    <i>{% trans "Not set" %}</i>
 	{% endif %}

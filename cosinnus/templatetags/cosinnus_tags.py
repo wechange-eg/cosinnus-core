@@ -72,6 +72,7 @@ from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagA
 from cosinnus.views.ui_prefs import get_ui_prefs_for_user
 from datetime import timedelta
 from django.utils.timezone import now
+from django_otp import user_has_device
 
 logger = logging.getLogger('cosinnus')
 
@@ -1429,4 +1430,8 @@ def safe_text(text):
     """ Returns JS-safe text, for use in form-elements that might get re-used in JS. """
     return convert_html_to_string(text)
 
+@register.filter
+def user_has_otp_device(user):
+    """ Templatefilter to check if the user has an OTP device """
+    return user_has_device(user)
 

@@ -2,17 +2,18 @@
 from __future__ import unicode_literals
 
 from django.conf.urls import include, url
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, re_path
 from django.views.generic.base import RedirectView, TemplateView
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import routers, permissions
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
+import two_factor.views as two_factor_views
 
 from cosinnus.api.views.group import CosinnusSocietyViewSet, CosinnusProjectViewSet
-from cosinnus.api.views.user import oauth_user, oauth_profile, current_user, oauth_current_user, UserViewSet
-from cosinnus.api.views.portal import statistics as api_statistics, header, footer, settings as api_settings
 from cosinnus.api.views.i18n import translations
+from cosinnus.api.views.portal import statistics as api_statistics, header, footer, settings as api_settings
+from cosinnus.api.views.user import oauth_user, oauth_profile, current_user, oauth_current_user, UserViewSet
 from cosinnus.conf import settings
 from cosinnus.core.registries import url_registry
 from cosinnus.core.registries.group_models import group_model_registry
@@ -22,9 +23,10 @@ from cosinnus.views import map, map_api, user, profile, common, widget, search, 
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication, \
     user_dashboard, ui_prefs, administration, user_dashboard_announcement, dynamic_fields, \
     conference_administration
-from cosinnus_conference.api.views import ConferenceViewSet,\
+from cosinnus_conference.api.views import ConferenceViewSet, \
     PublicConferenceViewSet
 from cosinnus_organization.api.views import OrganizationViewSet
+
 
 app_name = 'cosinnus'
 
@@ -213,7 +215,17 @@ if getattr(settings, 'COSINNUS_USE_V2_NAVBAR', False) or getattr(settings, 'COSI
         url(r'^search/api/quicksearch/$', search.api_quicksearch, name='quicksearch-api'),
     ]
 
-
+if settings.COSINNUS_USER_2_FACTOR_AUTH_ENABLED:
+    urlpatterns += [
+        url(r'^two_factor_auth/token_login/$', authentication.user_otp_token_validation, name='two-factor-auth-token'),
+        url(r'^two_factor_auth/token_login/backup/$', authentication.user_otp_token_validation, name='two-factor-auth-token-backup', kwargs={'two_factor_method': 'backup'}),
+        url(r'^two_factor_auth/qrcode/$', authentication.two_factor_auth_qr, name='two-factor-auth-qr'),
+        url(r'^two_factor_auth/settings/$', authentication.two_factor_user_hub, name='two-factor-auth-settings'),
+        url(r'^two_factor_auth/settings/setup/$', authentication.two_factor_auth_setup, name='two-factor-auth-setup'),
+        url(r'^two_factor_auth/settings/setup/complete/$', authentication.two_factor_auth_setup_complete, name='two-factor-auth-setup-complete'),
+        url(r'^two_factor_auth/settings/disable/$', authentication.two_factor_auth_disable, name='two-factor-auth-disable'),
+        url(r'^two_factor_auth/settings/backup_tokens/$', authentication.two_factor_auth_back_tokens, name='two-factor-auth-backup-tokens'),
+    ]
 
 # some user management not allowed in integrated mode and sso-mode
 if not is_integrated_portal() and not is_sso_portal():

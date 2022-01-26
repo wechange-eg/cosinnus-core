@@ -1,17 +1,11 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 17:13+0100\n"
+"POT-Creation-Date: 2022-01-26 17:15+0100\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Project-Id-Version: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -240,19 +234,6 @@ msgstr ""
 msgid "Bookmarked Users list"
 msgstr ""
 
-msgid "General"
-msgstr ""
-
-#, fuzzy
-msgid "Active"
-msgstr "Create Project"
-
-msgid "Restricted"
-msgstr ""
-
-msgid "Premium"
-msgstr ""
-
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
 
@@ -273,6 +254,9 @@ msgid "This team no longer resides under the URL you entered. You have been redi
 msgstr ""
 
 msgid "This account is no longer active. You have been logged out."
+msgstr ""
+
+msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
 msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
@@ -717,14 +701,14 @@ msgstr ""
 msgid "Next month"
 msgstr ""
 
-msgid "Fairmeeting"
-msgstr ""
-
 #, fuzzy
 msgid "No video conference"
 msgstr "About the project"
 
 msgid "BBB-Meeting"
+msgstr ""
+
+msgid "Fairmeeting"
 msgstr ""
 
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
@@ -887,12 +871,8 @@ msgstr ""
 msgid "pin to enter for telephone participants"
 msgstr ""
 
-msgid "the rooms welcome message"
+msgid "Last create-call parameters"
 msgstr ""
-
-#, fuzzy
-msgid "Room Type"
-msgstr "Project Type"
 
 msgid "BBB ROOM"
 msgstr ""
@@ -932,16 +912,10 @@ msgstr ""
 msgid "BBB Server for Premium Conferences"
 msgstr ""
 
-msgid "Turn on microphone on entering"
+msgid "BBB Recording API server"
 msgstr ""
 
-msgid "Whether the microphone is active when entering the BBB room"
-msgstr ""
-
-msgid "Turn on camera on entering"
-msgstr ""
-
-msgid "Whether the camera is active when entering the BBB room"
+msgid "BBB API Parameters"
 msgstr ""
 
 #, fuzzy
@@ -1463,18 +1437,6 @@ msgstr ""
 msgid "Is conference"
 msgstr ""
 
-msgid "Allow temporary users accounts for this conference."
-msgstr ""
-
-msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
-msgstr ""
-
-msgid "Conference accounts active"
-msgstr ""
-
-msgid "If enabled, temporary user accounts for this conference are active and can log in."
-msgstr ""
-
 msgid "Conference is currrently premium"
 msgstr ""
 
@@ -1735,6 +1697,9 @@ msgid "Only me"
 msgstr ""
 
 msgid "Team members only"
+msgstr ""
+
+msgid "Platform-wide (visible for all portal members)"
 msgstr ""
 
 msgid "Public (visible without login)"
@@ -2147,6 +2112,12 @@ msgstr ""
 msgid "Conference admin page"
 msgstr "Create Project"
 
+msgid "Effective BBB-Parameters"
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this BBB Room."
+msgstr ""
+
 msgid "select this page"
 msgstr ""
 
@@ -2270,8 +2241,34 @@ msgstr ""
 msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
 msgstr ""
 
+msgid "BBB-Room Settings"
+msgstr ""
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr ""
+
+#, fuzzy
+msgid "Inherited BBB-Parameters"
+msgstr "Edit Project"
+
+msgid "These parameters are the ones this object inherits from higher up settings or the portal defaults. These are the ones that will be used if this object or deeper objects do not define any further parameters."
+msgstr ""
+
+msgid "The next higher up object in the BBB hierarchy chain is"
+msgstr ""
+
+msgid "This object has no higher up object in the BBB hierarchy chain. The displayed values are the configured portal defaults."
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this source object."
+msgstr ""
+
+msgid "You can find the BBBRoom object for this source object here"
+msgstr ""
+
+#, fuzzy
+msgid "BBB Room"
+msgstr "Project Type"
 
 #, fuzzy
 msgid "Administration"
@@ -2495,6 +2492,9 @@ msgstr ""
 msgid "Manage Temporary User Accounts"
 msgstr ""
 
+msgid "Recorded Meetings"
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
 msgstr ""
@@ -2527,35 +2527,6 @@ msgid "Currently, the Browsers supporting folder upload are:"
 msgstr ""
 
 msgid "File and Folder Upload"
-msgstr ""
-
-msgid "Please correct the error below."
-msgid_plural "Please correct the errors below."
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "2-factor access only"
-msgstr ""
-
-msgid "OTP Device:"
-msgstr ""
-
-msgid "Enter the generated number code from your authenticator app"
-msgstr ""
-
-msgid "Forgotten your password or username?"
-msgstr ""
-
-msgid "Validate"
-msgstr ""
-
-msgid "Log out"
-msgstr ""
-
-msgid "You are logged in as"
-msgstr ""
-
-msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
 msgstr ""
 
 msgid "Services"
@@ -2738,6 +2709,10 @@ msgstr "The administration of Groups begins with managing its membership. Here y
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_15_organization"
 msgstr "The administration of Groups begins with managing its membership. Here you can decide who can join your Group and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal. "
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_16_twofactorauth"
+msgstr "Here you can activate the Two-Factor-Authentication for your user profile. To do so, prepare your smartphone by installing the ‘free otp’ app on your phone and then scan the QR-code. Additionally, you can generate 10 backup tokens to be able to log in even without having your phone at hand. You can always deactivate the 2FA for your account, though we recommend having it enabled."
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
@@ -3034,6 +3009,26 @@ msgstr ""
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr ""
 
+msgid "Unfortunately recorded meetings are currently not yet available for this server!"
+msgstr ""
+
+msgid "Recording of meetings is only available for premium conferences!"
+msgstr ""
+
+msgid "Make a premium booking here"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Bookings"
+msgstr "Create Project"
+
+msgid "This is a list of all recorded meetings for this conference. Recent recordings may take a few minutes to appear."
+msgstr ""
+
+#, fuzzy
+msgid "There are no recorded meetings yet."
+msgstr "There are no groups."
+
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr ""
 
@@ -3149,6 +3144,16 @@ msgstr ""
 msgid "Check this to show rocket chat in the sidebar."
 msgstr ""
 
+#, fuzzy
+msgid "BBB video conference options"
+msgstr "About the project"
+
+msgid "These settings will be the default for all conference events in this room."
+msgstr ""
+
+msgid "You may still override these options in each individual event."
+msgstr ""
+
 msgid "Go to Room"
 msgstr ""
 
@@ -3169,10 +3174,6 @@ msgstr ""
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
 msgstr ""
 
-#, fuzzy
-msgid "Conference Bookings"
-msgstr "Create Project"
-
 msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
 msgstr ""
 
@@ -3183,7 +3184,26 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr "There are no groups."
 
+msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
+msgstr ""
+
+#, fuzzy
+msgid "Premium only"
+msgstr "Create Project"
+
+msgid "Turn on microphone on entering"
+msgstr ""
+
 msgid "Default"
+msgstr ""
+
+msgid "Turn on camera on entering"
+msgstr ""
+
+msgid "Allow recording"
+msgstr ""
+
+msgid "Note: New recordings can only be made if you have booked premium features for this conference."
 msgstr ""
 
 #, fuzzy
@@ -3296,8 +3316,6 @@ msgid "activate"
 msgstr "Create Project"
 
 #, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_5_password"
 msgid "(re)set password"
 msgstr "You can change your password in the fields below. When doing so, it is especially important that you try to make your password as long as possible (at least 10 characters). The longer it is, the better. In addition, a special character, a capital letter and a small letter are recommended."
 
@@ -3335,6 +3353,22 @@ msgid "Accept"
 msgstr ""
 
 msgid "Decline"
+msgstr ""
+
+msgid "Started"
+msgstr ""
+
+msgid "Length"
+msgstr ""
+
+msgid "Delete Recording"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Do you really want to delete recorded meeting \"%(title)s\"?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+msgid "Delete recorded meeting"
 msgstr ""
 
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
@@ -3443,6 +3477,9 @@ msgid "BBB"
 msgstr ""
 
 msgid "BBB Premium"
+msgstr ""
+
+msgid "BBB Recording API"
 msgstr ""
 
 msgid "Not set"
@@ -3711,14 +3748,6 @@ msgstr ""
 #, fuzzy
 msgid "About the conference"
 msgstr "About the project"
-
-msgctxt "time"
-msgid "o'clock"
-msgstr ""
-
-msgctxt "time"
-msgid "until"
-msgstr ""
 
 #, fuzzy
 msgid "More infos..."
@@ -3995,6 +4024,9 @@ msgstr ""
 msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
 msgstr ""
 
+msgid "General"
+msgstr ""
+
 msgid "Facebook-Integration"
 msgstr ""
 
@@ -4023,6 +4055,9 @@ msgstr "Convert selected Projects to Groups"
 msgid "Description and Infos"
 msgstr ""
 
+msgid "This is a platform-wide description that can be seen by any portal member and will be shown on the microsite."
+msgstr ""
+
 msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
 msgstr ""
 
@@ -4040,6 +4075,9 @@ msgstr "Describe the project in a few sentences."
 
 msgid "Describe the project in a few sentences."
 msgstr "Describe the project in a few sentences."
+
+msgid "This description will be visible on the entire portal."
+msgstr ""
 
 msgid "This description will be publicly visible."
 msgstr ""
@@ -4109,6 +4147,12 @@ msgstr ""
 msgid "Select related Projects/Groups"
 msgstr "Convert selected Projects to Groups"
 
+msgid "These settings will be the default for all conference events."
+msgstr ""
+
+msgid "You may still override these options in each conference room and in individual events."
+msgstr ""
+
 msgid "Group/Project is publicly visible"
 msgstr ""
 
@@ -4131,10 +4175,22 @@ msgstr ""
 msgid "This will be the default setting for all content created by members."
 msgstr ""
 
+msgid "This group will be set to be visible on the entire portal!"
+msgstr ""
+
 msgid "This group will be set to be publicly visible!"
 msgstr ""
 
+msgid "This project will be set to be visible on the entire portal!"
+msgstr ""
+
 msgid "This project will be set to be publicly visible!"
+msgstr ""
+
+msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be platform-wide open by default (this can be changed for each item on creation)."
+msgstr ""
+
+msgid "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the 'platform-wide' setting!"
 msgstr ""
 
 msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be publicly visible by default (this can be changed for each item on creation). Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
@@ -4144,6 +4200,9 @@ msgid "As administrator of a group or project, it is your responsibility to ensu
 msgstr ""
 
 msgid "If you do not wish this, you can change the visibility setting above."
+msgstr ""
+
+msgid "Platform-wide (visible for all members of the platform)"
 msgstr ""
 
 msgid "Visibility on other platforms"
@@ -4171,6 +4230,9 @@ msgid "A public contact form, which non-registered users can use to contact grou
 msgstr ""
 
 msgid "Contact Form"
+msgstr ""
+
+msgid "From which apps should platform-wide items be shown on the microsite?"
 msgstr ""
 
 msgid "From which apps should public items be shown on the microsite?"
@@ -4314,6 +4376,18 @@ msgid "Map"
 msgstr ""
 
 msgid "Meeting"
+msgstr ""
+
+msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
+msgstr ""
+
+msgid "This session is being recorded"
+msgstr ""
+
+msgid "Continue"
+msgstr ""
+
+msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
 msgstr ""
 
 msgid "Popout"
@@ -5042,6 +5116,9 @@ msgid "Select topic"
 msgstr ""
 
 msgid "Visibility"
+msgstr ""
+
+msgid "This item will be visible on the entire portal. This means that any portal member will be able to see it."
 msgstr ""
 
 msgid "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
@@ -6096,6 +6173,11 @@ msgstr "My Projects"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+msgid "Platform content"
+msgstr "All Projects"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 msgid "Public content"
 msgstr "All Projects"
 
@@ -6147,6 +6229,9 @@ msgid "Disconnect Facebook Account"
 msgstr ""
 
 msgid "Disconnect Facebook"
+msgstr ""
+
+msgid "2FA Settings"
 msgstr ""
 
 #, python-format
@@ -6280,6 +6365,138 @@ msgid "You can change or customize this setting later in your notification setti
 msgstr ""
 
 msgid "Your privacy: You are in control!"
+msgstr ""
+
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "2-factor access only"
+msgstr ""
+
+msgid "OTP Device:"
+msgstr ""
+
+msgid "Enter the generated number code from your authenticator app"
+msgstr ""
+
+msgid "Forgotten your password or username?"
+msgstr ""
+
+msgid "Validate"
+msgstr ""
+
+msgid "Log out"
+msgstr ""
+
+msgid "You are logged in as"
+msgstr ""
+
+msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
+msgstr ""
+
+msgid "Backup Tokens"
+msgstr ""
+
+msgid "Backup tokens can be used when your primary and backup phone numbers aren't available. The backup tokens below can be used for login verification. <br> If you've used up all your backup tokens, you can generate a new set of backup tokens. Only the backup tokens shown below will be valid."
+msgstr ""
+
+msgid "Print these tokens and keep them somewhere safe."
+msgstr ""
+
+msgid "You don't have any backup codes yet."
+msgstr ""
+
+msgid "Generate Tokens"
+msgstr ""
+
+msgid "Back to 2FA Settings"
+msgstr ""
+
+msgid "Disable 2FA"
+msgstr ""
+
+msgid "You are about to disable two-factor authentication. This weakens your account security, are you sure?"
+msgstr ""
+
+msgid "Yes, I am sure."
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Two-Factor Login (Backup-Token)"
+msgstr ""
+
+msgid "Two-Factor Login"
+msgstr ""
+
+msgid "Use this form for entering backup tokens for logging in. These tokens have been generated for you to print and keep safe. Please enter one of these backup tokens to login to your account."
+msgstr ""
+
+msgid "Please enter the token generated by your token generator."
+msgstr ""
+
+msgid "Backup-Token"
+msgstr ""
+
+msgid "Numeric Token (e.g. 123456)"
+msgstr ""
+
+msgid "If you do not have access to your OTP generator app, you may enter one of your generated backup tokens"
+msgstr ""
+
+msgid "Enter backup token"
+msgstr ""
+
+msgid "Use Backup Token"
+msgstr ""
+
+msgid "If you don't have any device with you, you can access your account using backup tokens."
+msgstr ""
+
+#, python-format
+msgid "You have only one backup token remaining."
+msgid_plural "<br> You have %(counter)s backup tokens remaining."
+msgstr[0] ""
+msgstr[1] ""
+
+#, fuzzy
+msgid "Show Tokens"
+msgstr "Other Projects"
+
+msgid "However we strongly discourage you to do so, you can also disable two-factor authentication for your account."
+msgstr ""
+
+msgid "Two-factor authentication is not enabled for your account. <br> Enable two-factor authentication for enhanced account security."
+msgstr ""
+
+msgid "Enable 2FA"
+msgstr ""
+
+msgid "2FA Setup"
+msgstr ""
+
+msgid "You are about to take your account security to the next level. <br> To use the 2FA-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. We do not have another 2FA option at the moment and will inform you if there are changes in this regard."
+msgstr ""
+
+msgid "Scan the QR code below."
+msgstr ""
+
+msgid "Now, enter the token generated by the app:"
+msgstr ""
+
+msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
+msgstr ""
+
+msgid "2FA Setup Complete"
+msgstr ""
+
+msgid "Congratulations, you've successfully enabled 2FA."
+msgstr ""
+
+msgid "Back to your profile"
 msgstr ""
 
 msgid "by"
@@ -7246,6 +7463,9 @@ msgstr ""
 msgid "User successfully created!"
 msgstr ""
 
+msgid "You do not have any backup tokens set up. Please log in using your OTP tokens."
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr ""
@@ -7327,6 +7547,9 @@ msgid "%(team_type)s \"%(group)s\" was created successfully."
 msgstr ""
 
 msgid "Create"
+msgstr ""
+
+msgid "This team does not have a video conference configured."
 msgstr ""
 
 #, python-format
@@ -7683,7 +7906,6 @@ msgid "Thank you!"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "%(team_name)s - Members"
 msgid "Your %(site_name)s Team"
 msgstr "%(team_name)s - Members"
 
@@ -7748,16 +7970,16 @@ msgid "Your changes have been saved."
 msgstr ""
 
 #, fuzzy
-#~ msgid "participants"
-#~ msgstr "Projects"
+#~ msgid "Active"
+#~ msgstr "Create Project"
 
 #, fuzzy
-#~ msgid "Portal administrators"
-#~ msgstr "The administration of Projects begins with managing its membership. Here you can decide who can join your project and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal."
+#~ msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
+#~ msgstr "Do you really want to leave project „%(title)s“?"
 
 #, fuzzy
-#~ msgid "Leave video conference"
-#~ msgstr "About the project"
+#~ msgid "Import Projects and Groups"
+#~ msgstr "Convert selected Projects to Groups"
 
 #, fuzzy
 #~ msgid "Import Projects and Groups or Users"
@@ -7765,18 +7987,6 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "Import from a CSV File"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
 #~ msgstr "Convert selected Projects to Groups"
 
 #, fuzzy
@@ -7788,23 +7998,16 @@ msgstr ""
 #~ msgstr "Create Group"
 
 #, fuzzy
-#~ msgid "not active"
-#~ msgstr "Create Project"
+#~ msgid "Project/group CSV File"
+#~ msgstr "Convert selected Projects to Groups"
 
 #, fuzzy
-#~ msgid "deactivate member"
-#~ msgstr "Create Project"
+#~ msgid "Room Type"
+#~ msgstr "Project Type"
 
 #, fuzzy
-#~ msgid "activate member"
-#~ msgstr "Create Project"
-
-#, fuzzy
-#~ msgid "Email to group administrator"
-#~ msgstr "There are no groups."
-
-#~ msgid "Group:"
-#~ msgstr "Group:"
+#~ msgid "User CSV File"
+#~ msgstr "Convert selected Projects to Groups"
 
 #~ msgid "All groups"
 #~ msgstr "All projects"
@@ -7834,6 +8037,10 @@ msgstr ""
 #~ msgid "Do you really want to leave group „%(title)s“?"
 #~ msgstr "Do you really want to leave „%(title)s“?"
 
+#, fuzzy
+#~ msgid "Email to group administrator"
+#~ msgstr "There are no groups."
+
 #~ msgid "English"
 #~ msgstr "English"
 
@@ -7846,14 +8053,25 @@ msgstr ""
 #~ msgid "Group overview"
 #~ msgstr "Group overview"
 
+#~ msgid "Group:"
+#~ msgstr "Group:"
+
 #~ msgid "Gruppen"
 #~ msgstr "Group"
+
+#, fuzzy
+#~ msgid "Leave video conference"
+#~ msgstr "About the project"
 
 #~ msgid "No group found with this name"
 #~ msgstr "No project found with this name"
 
 #~ msgid "Polish"
 #~ msgstr "Polski"
+
+#, fuzzy
+#~ msgid "Portal administrators"
+#~ msgstr "The administration of Projects begins with managing its membership. Here you can decide who can join your project and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal."
 
 #, fuzzy
 #~ msgid "Public Group"
@@ -7899,5 +8117,21 @@ msgstr ""
 #~ msgid "Ukrainian"
 #~ msgstr "Українська"
 
+#, fuzzy
+#~ msgid "activate member"
+#~ msgstr "Create Project"
+
+#, fuzzy
+#~ msgid "deactivate member"
+#~ msgstr "Create Project"
+
 #~ msgid "join team"
 #~ msgstr "Join Project"
+
+#, fuzzy
+#~ msgid "not active"
+#~ msgstr "Create Project"
+
+#, fuzzy
+#~ msgid "participants"
+#~ msgstr "Projects"

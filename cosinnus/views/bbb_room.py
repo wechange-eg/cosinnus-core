@@ -126,6 +126,7 @@ class BBBRoomMeetingQueueAPIView(RequireLoggedInMixin, View):
             data = {
                 'status': "DONE", 
                 'url': room_url,
+                'recorded_meeting': room.is_recorded_meeting,
             }
         elif media_tag.bbb_room is None and settings.COSINNUS_TRIGGER_BBB_ROOM_CREATION_IN_QUEUE:
             # if the media_tag is attached to a conference event, but no room has been created yet,

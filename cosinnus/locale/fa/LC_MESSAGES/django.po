@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-18 17:13+0100\n"
+"POT-Creation-Date: 2022-01-26 17:15+0100\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -232,18 +232,6 @@ msgstr ""
 msgid "Bookmarked Users list"
 msgstr ""
 
-msgid "General"
-msgstr "همگانی"
-
-msgid "Active"
-msgstr "فعال"
-
-msgid "Restricted"
-msgstr "محدودشده"
-
-msgid "Premium"
-msgstr "اعلاء"
-
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
 
@@ -267,6 +255,9 @@ msgstr "این گروه دیگر در این نشانی که وارد کرده�
 #, fuzzy
 msgid "This account is no longer active. You have been logged out."
 msgstr "این حساب دیگر فعال نیست. شما از سامانه خارج شده‌اید."
+
+msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr "از آن‌جا که روی لینکی که در یکی از ایمیل‌های ما بوده کلیک کرده‌اید به این‌جا فرستاده‌شده‌اید. به دلیل مسائل امنیتی ما نشانی وب‌سایت‌های بیرونی را در ایمیل‌هایم قرار نمی‌دهیم. اگر مایلید به این نشانی بروید پیوند آن در زیر آمده است."
@@ -612,7 +603,6 @@ msgid "Mobile Phone Number"
 msgstr "شماره‌ی تلفن همراه"
 
 #, fuzzy
-#| msgid "(No choice)"
 msgid "No choice"
 msgstr "(هیچ گزینه‌ای)"
 
@@ -685,15 +675,14 @@ msgstr "هفته‌ی بعد"
 msgid "Next month"
 msgstr "ماه بعد"
 
-msgid "Fairmeeting"
-msgstr ""
-
 #, fuzzy
-#| msgid "View conference"
 msgid "No video conference"
 msgstr "کنفرانس را ببینید"
 
 msgid "BBB-Meeting"
+msgstr ""
+
+msgid "Fairmeeting"
 msgstr ""
 
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
@@ -856,11 +845,8 @@ msgstr "شماره‌ای که می‌شود با آن با تلفن تماس گ
 msgid "pin to enter for telephone participants"
 msgstr "گذرواژه برای شرکت‌کننده‌هایی که با تلفن وارد می‌شوند"
 
-msgid "the rooms welcome message"
-msgstr "پیام خوش‌آمدگویی در اتاق‌ها"
-
-msgid "Room Type"
-msgstr "نوع اتاق"
+msgid "Last create-call parameters"
+msgstr ""
 
 msgid "BBB ROOM"
 msgstr "اتاق BBB"
@@ -900,16 +886,10 @@ msgstr "سرور BBB"
 msgid "BBB Server for Premium Conferences"
 msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
 
-msgid "Turn on microphone on entering"
+msgid "BBB Recording API server"
 msgstr ""
 
-msgid "Whether the microphone is active when entering the BBB room"
-msgstr ""
-
-msgid "Turn on camera on entering"
-msgstr ""
-
-msgid "Whether the camera is active when entering the BBB room"
+msgid "BBB API Parameters"
 msgstr ""
 
 msgid "Cosinnus Conference Setting"
@@ -1352,7 +1332,6 @@ msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr ""
 
 #, fuzzy
-#| msgid "Is visible"
 msgid "Publicly visible"
 msgstr "آشکار است"
 
@@ -1426,18 +1405,6 @@ msgid "Nextcloud Groupfolder ID"
 msgstr ""
 
 msgid "Is conference"
-msgstr ""
-
-msgid "Allow temporary users accounts for this conference."
-msgstr ""
-
-msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
-msgstr ""
-
-msgid "Conference accounts active"
-msgstr ""
-
-msgid "If enabled, temporary user accounts for this conference are active and can log in."
 msgstr ""
 
 msgid "Conference is currrently premium"
@@ -1681,6 +1648,9 @@ msgid "Only me"
 msgstr ""
 
 msgid "Team members only"
+msgstr ""
+
+msgid "Platform-wide (visible for all portal members)"
 msgstr ""
 
 msgid "Public (visible without login)"
@@ -2067,7 +2037,6 @@ msgid "Join meeting directly"
 msgstr ""
 
 #, fuzzy
-#| msgid "number for dialing into the conference via telephone"
 msgid "Enter the BBB meeting in the conference frontend"
 msgstr "شماره‌ای که می‌شود با آن با تلفن تماس گرفت و وارد کنفرانس شد"
 
@@ -2078,7 +2047,6 @@ msgid "For options and parameters, go to the parent event's admin page"
 msgstr ""
 
 #, fuzzy
-#| msgid "edit this page"
 msgid "Event admin page"
 msgstr "این برگه را ویرایش کن"
 
@@ -2089,9 +2057,14 @@ msgid "For further options and parameters, go to the parent conference's admin p
 msgstr ""
 
 #, fuzzy
-#| msgid "Conference Room Type"
 msgid "Conference admin page"
 msgstr "نوع اتاق کنفرانس"
+
+msgid "Effective BBB-Parameters"
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this BBB Room."
+msgstr ""
 
 msgid "select this page"
 msgstr "این برگه را انتخاب کن"
@@ -2216,8 +2189,33 @@ msgstr ""
 msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
 msgstr ""
 
+msgid "BBB-Room Settings"
+msgstr ""
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr ""
+
+msgid "Inherited BBB-Parameters"
+msgstr ""
+
+msgid "These parameters are the ones this object inherits from higher up settings or the portal defaults. These are the ones that will be used if this object or deeper objects do not define any further parameters."
+msgstr ""
+
+msgid "The next higher up object in the BBB hierarchy chain is"
+msgstr ""
+
+msgid "This object has no higher up object in the BBB hierarchy chain. The displayed values are the configured portal defaults."
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this source object."
+msgstr ""
+
+msgid "You can find the BBBRoom object for this source object here"
+msgstr ""
+
+#, fuzzy
+msgid "BBB Room"
+msgstr "اتاق BBB"
 
 msgid "Administration"
 msgstr ""
@@ -2429,6 +2427,9 @@ msgstr ""
 msgid "Manage Temporary User Accounts"
 msgstr ""
 
+msgid "Recorded Meetings"
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
 msgstr ""
@@ -2461,35 +2462,6 @@ msgid "Currently, the Browsers supporting folder upload are:"
 msgstr ""
 
 msgid "File and Folder Upload"
-msgstr ""
-
-msgid "Please correct the error below."
-msgid_plural "Please correct the errors below."
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "2-factor access only"
-msgstr ""
-
-msgid "OTP Device:"
-msgstr ""
-
-msgid "Enter the generated number code from your authenticator app"
-msgstr ""
-
-msgid "Forgotten your password or username?"
-msgstr ""
-
-msgid "Validate"
-msgstr ""
-
-msgid "Log out"
-msgstr ""
-
-msgid "You are logged in as"
-msgstr ""
-
-msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
 msgstr ""
 
 msgid "Services"
@@ -2668,6 +2640,10 @@ msgstr ""
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_15_organization"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_16_twofactorauth"
 msgstr ""
 
 msgctxt "Look up this ID in the help text register for the translation text!"
@@ -2945,6 +2921,25 @@ msgstr ""
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr ""
 
+msgid "Unfortunately recorded meetings are currently not yet available for this server!"
+msgstr ""
+
+msgid "Recording of meetings is only available for premium conferences!"
+msgstr ""
+
+msgid "Make a premium booking here"
+msgstr ""
+
+msgid "Conference Bookings"
+msgstr ""
+
+msgid "This is a list of all recorded meetings for this conference. Recent recordings may take a few minutes to appear."
+msgstr ""
+
+#, fuzzy
+msgid "There are no recorded meetings yet."
+msgstr "هیچ دعوت‌نامه‌ی معوقی وجود ندارد."
+
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr ""
 
@@ -3057,6 +3052,16 @@ msgstr ""
 msgid "Check this to show rocket chat in the sidebar."
 msgstr ""
 
+#, fuzzy
+msgid "BBB video conference options"
+msgstr "کنفرانس را ببینید"
+
+msgid "These settings will be the default for all conference events in this room."
+msgstr ""
+
+msgid "You may still override these options in each individual event."
+msgstr ""
+
 msgid "Go to Room"
 msgstr ""
 
@@ -3076,9 +3081,6 @@ msgstr ""
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
 msgstr ""
 
-msgid "Conference Bookings"
-msgstr ""
-
 msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
 msgstr ""
 
@@ -3088,7 +3090,26 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr ""
 
+msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
+msgstr ""
+
+#, fuzzy
+msgid "Premium only"
+msgstr "اعلاء"
+
+msgid "Turn on microphone on entering"
+msgstr ""
+
 msgid "Default"
+msgstr ""
+
+msgid "Turn on camera on entering"
+msgstr ""
+
+msgid "Allow recording"
+msgstr ""
+
+msgid "Note: New recordings can only be made if you have booked premium features for this conference."
 msgstr ""
 
 msgid "Temporary Users"
@@ -3104,7 +3125,6 @@ msgid "Remove all Users"
 msgstr ""
 
 #, fuzzy
-#| msgid "Do you really want to decline the invitation?"
 msgid "Do you really want to remove all users?"
 msgstr "آیا واقعن می‌خواهید دعوت را رد کنید؟"
 
@@ -3112,7 +3132,6 @@ msgid "Download all user credentials"
 msgstr ""
 
 #, fuzzy
-#| msgid "Do you really want to decline the invitation?"
 msgid "Do you really want to download all user credentials?"
 msgstr "آیا واقعن می‌خواهید دعوت را رد کنید؟"
 
@@ -3151,12 +3170,10 @@ msgid "Once the conference is over you can deactivate all ausers. That means the
 msgstr ""
 
 #, fuzzy
-#| msgid "Reactivate user accounts"
 msgid "activate user accounts"
 msgstr "حساب‌های کاربری را دوباره فعال کن"
 
 #, fuzzy
-#| msgid "Reactivate user accounts"
 msgid "deactivate user accounts"
 msgstr "حساب‌های کاربری را دوباره فعال کن"
 
@@ -3167,7 +3184,6 @@ msgid "Once the conference is over you can remove all ausers. This cannot be rev
 msgstr ""
 
 #, fuzzy
-#| msgid "Reactivate user accounts"
 msgid "remove user accounts"
 msgstr "حساب‌های کاربری را دوباره فعال کن"
 
@@ -3187,7 +3203,6 @@ msgid "remove user"
 msgstr ""
 
 #, fuzzy
-#| msgid "Yes"
 msgid "yes"
 msgstr "بله"
 
@@ -3195,12 +3210,10 @@ msgid "no"
 msgstr ""
 
 #, fuzzy
-#| msgid "Active"
 msgid "deactivate"
 msgstr "فعال"
 
 #, fuzzy
-#| msgid "Active"
 msgid "activate"
 msgstr "فعال"
 
@@ -3237,6 +3250,26 @@ msgstr ""
 msgid "Decline"
 msgstr ""
 
+msgid "Started"
+msgstr ""
+
+msgid "Length"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete reported item..."
+msgid "Delete Recording"
+msgstr "مورد گزارش‌شده را پاک کن..."
+
+#, fuzzy, python-format
+#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgid "Do you really want to delete recorded meeting \"%(title)s\"?"
+msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
+
+#, fuzzy
+msgid "Delete recorded meeting"
+msgstr "مورد گزارش‌شده را پاک کن..."
+
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr ""
 
@@ -3248,7 +3281,6 @@ msgid "Overview - All Conferences"
 msgstr ""
 
 #, fuzzy
-#| msgid "Conference Rooms"
 msgid "Conference Administration"
 msgstr "اتاق‌های کنفرانس"
 
@@ -3324,12 +3356,10 @@ msgid "Remove Permanent Premium"
 msgstr ""
 
 #, fuzzy
-#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
 msgid "Do you really want to make this conference premium permanent?"
 msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
 
 #, fuzzy
-#| msgid "Do you really want to decline the invitation?"
 msgid "Do you really want to remove premium permanent from this conference?"
 msgstr "آیا واقعن می‌خواهید دعوت را رد کنید؟"
 
@@ -3342,6 +3372,9 @@ msgstr ""
 msgid "BBB Premium"
 msgstr ""
 
+msgid "BBB Recording API"
+msgstr ""
+
 msgid "Not set"
 msgstr ""
 
@@ -3350,7 +3383,6 @@ msgid "Add Premium Block to Conferences"
 msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
 
 #, fuzzy, python-format
-#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
 msgid "Do you really want to delete this block from \"%(name)s\"?"
 msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
 
@@ -3444,7 +3476,6 @@ msgid "News"
 msgstr ""
 
 #, fuzzy
-#| msgid "View conference"
 msgid "Video conference"
 msgstr "کنفرانس را ببینید"
 
@@ -3605,14 +3636,6 @@ msgid "Maximum Number of Participants"
 msgstr ""
 
 msgid "About the conference"
-msgstr ""
-
-msgctxt "time"
-msgid "o'clock"
-msgstr ""
-
-msgctxt "time"
-msgid "until"
 msgstr ""
 
 msgid "More infos..."
@@ -3876,6 +3899,9 @@ msgstr ""
 msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
 msgstr ""
 
+msgid "General"
+msgstr "همگانی"
+
 msgid "Facebook-Integration"
 msgstr ""
 
@@ -3903,6 +3929,9 @@ msgstr ""
 msgid "Description and Infos"
 msgstr ""
 
+msgid "This is a platform-wide description that can be seen by any portal member and will be shown on the microsite."
+msgstr ""
+
 msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
 msgstr ""
 
@@ -3919,6 +3948,9 @@ msgid "Describe the group in a few sentences."
 msgstr ""
 
 msgid "Describe the project in a few sentences."
+msgstr ""
+
+msgid "This description will be visible on the entire portal."
 msgstr ""
 
 msgid "This description will be publicly visible."
@@ -3987,6 +4019,12 @@ msgstr ""
 msgid "Select related Projects/Groups"
 msgstr ""
 
+msgid "These settings will be the default for all conference events."
+msgstr ""
+
+msgid "You may still override these options in each conference room and in individual events."
+msgstr ""
+
 msgid "Group/Project is publicly visible"
 msgstr ""
 
@@ -3997,7 +4035,6 @@ msgid "Enable the public visibility of your group/project"
 msgstr ""
 
 #, fuzzy
-#| msgid "View conference"
 msgid "Include a video conference"
 msgstr "کنفرانس را ببینید"
 
@@ -4010,10 +4047,22 @@ msgstr ""
 msgid "This will be the default setting for all content created by members."
 msgstr ""
 
+msgid "This group will be set to be visible on the entire portal!"
+msgstr ""
+
 msgid "This group will be set to be publicly visible!"
 msgstr ""
 
+msgid "This project will be set to be visible on the entire portal!"
+msgstr ""
+
 msgid "This project will be set to be publicly visible!"
+msgstr ""
+
+msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be platform-wide open by default (this can be changed for each item on creation)."
+msgstr ""
+
+msgid "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the 'platform-wide' setting!"
 msgstr ""
 
 msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be publicly visible by default (this can be changed for each item on creation). Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
@@ -4023,6 +4072,9 @@ msgid "As administrator of a group or project, it is your responsibility to ensu
 msgstr ""
 
 msgid "If you do not wish this, you can change the visibility setting above."
+msgstr ""
+
+msgid "Platform-wide (visible for all members of the platform)"
 msgstr ""
 
 msgid "Visibility on other platforms"
@@ -4050,6 +4102,9 @@ msgid "A public contact form, which non-registered users can use to contact grou
 msgstr ""
 
 msgid "Contact Form"
+msgstr ""
+
+msgid "From which apps should platform-wide items be shown on the microsite?"
 msgstr ""
 
 msgid "From which apps should public items be shown on the microsite?"
@@ -4191,6 +4246,18 @@ msgid "Map"
 msgstr ""
 
 msgid "Meeting"
+msgstr ""
+
+msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
+msgstr ""
+
+msgid "This session is being recorded"
+msgstr ""
+
+msgid "Continue"
+msgstr ""
+
+msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
 msgstr ""
 
 msgid "Popout"
@@ -4892,6 +4959,9 @@ msgstr ""
 msgid "Visibility"
 msgstr ""
 
+msgid "This item will be visible on the entire portal. This means that any portal member will be able to see it."
+msgstr ""
+
 msgid "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
 msgstr ""
 
@@ -5350,7 +5420,6 @@ msgid "CSV Downloads"
 msgstr ""
 
 #, fuzzy
-#| msgid "A user created a new conference"
 msgid "HD space used by conferences"
 msgstr "یک کاربر یک کنفرانس نو ساخته"
 
@@ -5899,6 +5968,10 @@ msgid "Content from my Groups and Projects"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Platform content"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Public content"
 msgstr ""
 
@@ -5948,6 +6021,9 @@ msgid "Disconnect Facebook Account"
 msgstr ""
 
 msgid "Disconnect Facebook"
+msgstr ""
+
+msgid "2FA Settings"
 msgstr ""
 
 #, python-format
@@ -6079,6 +6155,140 @@ msgid "You can change or customize this setting later in your notification setti
 msgstr ""
 
 msgid "Your privacy: You are in control!"
+msgstr ""
+
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "2-factor access only"
+msgstr ""
+
+msgid "OTP Device:"
+msgstr ""
+
+msgid "Enter the generated number code from your authenticator app"
+msgstr ""
+
+msgid "Forgotten your password or username?"
+msgstr ""
+
+msgid "Validate"
+msgstr ""
+
+msgid "Log out"
+msgstr ""
+
+msgid "You are logged in as"
+msgstr ""
+
+msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
+msgstr ""
+
+msgid "Backup Tokens"
+msgstr ""
+
+msgid "Backup tokens can be used when your primary and backup phone numbers aren't available. The backup tokens below can be used for login verification. <br> If you've used up all your backup tokens, you can generate a new set of backup tokens. Only the backup tokens shown below will be valid."
+msgstr ""
+
+msgid "Print these tokens and keep them somewhere safe."
+msgstr ""
+
+msgid "You don't have any backup codes yet."
+msgstr ""
+
+msgid "Generate Tokens"
+msgstr ""
+
+msgid "Back to 2FA Settings"
+msgstr ""
+
+#, fuzzy
+msgid "Disable 2FA"
+msgstr "ویرایش‌گر را غیرفعال کن"
+
+msgid "You are about to disable two-factor authentication. This weakens your account security, are you sure?"
+msgstr ""
+
+msgid "Yes, I am sure."
+msgstr ""
+
+#, fuzzy
+msgid "Disable"
+msgstr "ویرایش‌گر را غیرفعال کن"
+
+msgid "Two-Factor Login (Backup-Token)"
+msgstr ""
+
+msgid "Two-Factor Login"
+msgstr ""
+
+msgid "Use this form for entering backup tokens for logging in. These tokens have been generated for you to print and keep safe. Please enter one of these backup tokens to login to your account."
+msgstr ""
+
+msgid "Please enter the token generated by your token generator."
+msgstr ""
+
+msgid "Backup-Token"
+msgstr ""
+
+msgid "Numeric Token (e.g. 123456)"
+msgstr ""
+
+msgid "If you do not have access to your OTP generator app, you may enter one of your generated backup tokens"
+msgstr ""
+
+#, fuzzy
+msgid "Enter backup token"
+msgstr "یک تعریف وارد کنید"
+
+msgid "Use Backup Token"
+msgstr ""
+
+msgid "If you don't have any device with you, you can access your account using backup tokens."
+msgstr ""
+
+#, python-format
+msgid "You have only one backup token remaining."
+msgid_plural "<br> You have %(counter)s backup tokens remaining."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Show Tokens"
+msgstr ""
+
+msgid "However we strongly discourage you to do so, you can also disable two-factor authentication for your account."
+msgstr ""
+
+msgid "Two-factor authentication is not enabled for your account. <br> Enable two-factor authentication for enhanced account security."
+msgstr ""
+
+msgid "Enable 2FA"
+msgstr ""
+
+msgid "2FA Setup"
+msgstr ""
+
+msgid "You are about to take your account security to the next level. <br> To use the 2FA-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. We do not have another 2FA option at the moment and will inform you if there are changes in this regard."
+msgstr ""
+
+msgid "Scan the QR code below."
+msgstr ""
+
+msgid "Now, enter the token generated by the app:"
+msgstr ""
+
+msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
+msgstr ""
+
+msgid "2FA Setup Complete"
+msgstr ""
+
+msgid "Congratulations, you've successfully enabled 2FA."
+msgstr ""
+
+msgid "Back to your profile"
 msgstr ""
 
 msgid "by"
@@ -6985,6 +7195,9 @@ msgstr ""
 msgid "User successfully created!"
 msgstr ""
 
+msgid "You do not have any backup tokens set up. Please log in using your OTP tokens."
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr ""
@@ -7066,6 +7279,9 @@ msgid "%(team_type)s \"%(group)s\" was created successfully."
 msgstr ""
 
 msgid "Create"
+msgstr ""
+
+msgid "This team does not have a video conference configured."
 msgstr ""
 
 #, python-format
@@ -7483,28 +7699,44 @@ msgstr "در حال حاضر شما عضو %s نیستید! اگر مایلید 
 msgid "Your changes have been saved."
 msgstr "تغییرات‌تان ذخیره شده‌اند."
 
-#, fuzzy
-#~| msgid "options for the room, that are represented in the bigbluebutton API"
-#~ msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
-#~ msgstr "گزینه‌ها برای اتاقی که در واسط برنامه‌نویسی bigbluebutton نمایش داده می‌شود"
+#~ msgid "Active"
+#~ msgstr "فعال"
 
 #, fuzzy
-#~| msgid "the welcome message, that is displayed to attendees"
-#~ msgid "DEPRECATED! the welcome message, that is displayed to attendees"
-#~ msgstr "پیام خوش‌آمدگویی که به شرکت‌کننده‌ها نشان‌داده‌می‌شود"
+#~| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+#~ msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
+#~ msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
 
-#, fuzzy
-#~| msgid "Participants"
-#~ msgid "participants"
-#~ msgstr "شرکت‌کنندگان"
+#~ msgid "Premium"
+#~ msgstr "اعلاء"
 
-#, fuzzy
-#~| msgid "View conference"
-#~ msgid "Leave video conference"
-#~ msgstr "کنفرانس را ببینید"
+#~ msgid "Restricted"
+#~ msgstr "محدودشده"
+
+#~ msgid "Room Type"
+#~ msgstr "نوع اتاق"
+
+#~ msgid "the rooms welcome message"
+#~ msgstr "پیام خوش‌آمدگویی در اتاق‌ها"
 
 #~ msgid "Can't find workshop with slug '{}'"
 #~ msgstr "کارگروهی با آدرس کاربرپسند '{}' یافت نمی‌شود"
 
+#, fuzzy
+#~ msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
+#~ msgstr "گزینه‌ها برای اتاقی که در واسط برنامه‌نویسی bigbluebutton نمایش داده می‌شود"
+
+#, fuzzy
+#~ msgid "DEPRECATED! the welcome message, that is displayed to attendees"
+#~ msgstr "پیام خوش‌آمدگویی که به شرکت‌کننده‌ها نشان‌داده‌می‌شود"
+
+#, fuzzy
+#~ msgid "Leave video conference"
+#~ msgstr "کنفرانس را ببینید"
+
 #~ msgid "Restart"
 #~ msgstr "بازراه‌اندازی"
+
+#, fuzzy
+#~ msgid "participants"
+#~ msgstr "شرکت‌کنندگان"

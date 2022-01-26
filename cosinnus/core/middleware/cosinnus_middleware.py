@@ -13,11 +13,12 @@ from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.utils.encoding import force_text
 from django.utils.functional import curry
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext, ugettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.core import signals as cosinnus_signals
 from django.contrib.auth import logout
+from django_otp import user_has_device
 from django.shortcuts import redirect
 from django.utils.deprecation import MiddlewareMixin
 from django.utils.http import is_safe_url
@@ -29,6 +30,7 @@ from cosinnus.utils.permissions import check_user_superuser, check_ug_membership
 from annoying.functions import get_object_or_None
 from cosinnus.core.decorators.views import redirect_to_not_logged_in,\
     get_group_for_request
+from cosinnus.views.user import send_user_email_to_verify
 
 
 logger = logging.getLogger('cosinnus')
@@ -89,6 +91,9 @@ LOGIN_URLS = NEVER_REDIRECT_URLS + [
     '/password_reset/',
     '/reset/',
     '/password_set_initial/',
+    '/two_factor_auth/token_login/',
+    '/two_factor_auth/token_login/backup/',
+    '/two_factor_auth/qrcode/',
 ]
 
 EXEMPTED_URLS_FOR_2FA = [url for url in LOGIN_URLS if url != '/admin/']
@@ -123,7 +128,7 @@ class StartupMiddleware(MiddlewareMixin):
         raise MiddlewareNotUsed
 
 
-class OTPMiddleware(MiddlewareMixin):
+class AdminOTPMiddleware(MiddlewareMixin):
     """
         If setting `COSINNUS_ADMIN_2_FACTOR_AUTH_ENABLED` is True, this middleware 
         will restrict all access to the django admin area to accounts with a django-otp
@@ -145,6 +150,7 @@ class OTPMiddleware(MiddlewareMixin):
             filter_path = '/'
         
         user = getattr(request, 'user', None)
+
         # check if the user is a superuser and they attempted to access a covered url
         if user and check_user_superuser(user) and request.path.startswith(filter_path) and not request.path in EXEMPTED_URLS_FOR_2FA:
             # check if the user is not yet 2fa verified, if so send them to the verification view
@@ -154,6 +160,30 @@ class OTPMiddleware(MiddlewareMixin):
 
         return None
 
+    
+class UserOTPMiddleware(MiddlewareMixin):
+    """
+        If setting `COSINNUS_USER_2_FACTOR_AUTH_ENABLED` is True, this middleware
+        will restrict all access to the entire portal to accounts with the enabled 2fa-feature
+        for non-admin users, by redirecting the token validation view.
+        Set up at least one device at <host>/two_factor_auth/settings/setup/ before activating this! 
+    """
+
+    def process_request(self, request):
+        if not getattr(settings, 'COSINNUS_USER_2_FACTOR_AUTH_ENABLED', False):
+            return None
+        
+        filter_path = '/'
+        user = getattr(request, 'user', None)
+
+        # check if the user is authenticated and they attempted to access a covered url
+        if user and user.is_authenticated and request.path.startswith(filter_path) and not request.path in EXEMPTED_URLS_FOR_2FA:
+            # check if the user is not yet 2fa verified, if so send them to the verification view
+            if user_has_device(user) and not user.is_verified():
+                next_url = request.path
+                return redirect(reverse('cosinnus:two-factor-auth-token') + (('?next=%s' % next_url) if is_safe_url(next_url, allowed_hosts=[request.get_host()]) else ''))
+
+        return None
 
 """Adds the request to the instance of a Model that is being saved (created or modified)
    Taken from https://github.com/Atomidata/django-audit-log/blob/master/audit_log/middleware.py  and modified """
@@ -247,6 +277,11 @@ class ForceInactiveUserLogoutMiddleware(MiddlewareMixin):
             do_logout = False
             if not request.user.is_active:
                 messages.error(request, _('This account is no longer active. You have been logged out.'))
+                do_logout = True
+            elif settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN \
+                    and CosinnusPortal().get_current().email_needs_verification and not request.user.cosinnus_profile.email_verified:
+                send_user_email_to_verify(request.user, request.user.email, request)
+                messages.warning(request, _('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.'))
                 do_logout = True
             elif hasattr(request.user, 'cosinnus_profile') and request.user.cosinnus_profile.settings.get('force_logout_next_request', False):
                 # if the user has a force-logout flag set, remove the flag and log him out,

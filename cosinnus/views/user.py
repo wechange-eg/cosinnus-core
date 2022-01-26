@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from builtins import str
 from django.contrib.auth import get_user_model, login as auth_login, logout as auth_logout,\
     login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, SetPasswordForm
 from django.urls import reverse, reverse_lazy
 from django.db import transaction
@@ -14,6 +15,7 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.http import Http404
+from django.views.generic.edit import FormView
 from cosinnus.core.decorators.views import staff_required, superuser_required,\
     redirect_to_not_logged_in, redirect_to_403
 from cosinnus.forms.user import UserCreationForm, UserChangeForm,\
@@ -79,6 +81,9 @@ from django.core.exceptions import PermissionDenied
 from cosinnus import cosinnus_notifications
 from cosinnus.utils.html import render_html_with_variables
 from django.utils import timezone
+from two_factor.views.core import QRGeneratorView
+from two_factor.views.utils import class_view_decorator
+from two_factor.utils import default_device
 logger = logging.getLogger('cosinnus')
 
 USER_MODEL = get_user_model()
@@ -291,9 +296,14 @@ class UserCreateView(CreateView):
         else:
             # if registrations are open, the user may log in immediately. set the email_verified flag depending
             # on portal settings
+            do_login = True
             if CosinnusPortal.get_current().email_needs_verification:
                 send_user_email_to_verify(user, user.email, self.request)
                 messages.success(self.request, self.message_success_email_verification % {'email': user.email})
+                if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
+                    # show message to tell the user they need to register on this portal
+                    messages.warning(self.request, _('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.'))
+                    do_login = False
             else:
                 user_profile = user.cosinnus_profile
                 user_profile.email_verified = True
@@ -301,9 +311,10 @@ class UserCreateView(CreateView):
                 _send_user_welcome_email_if_enabled(user)
                 messages.success(self.request, self.message_success % {'user': user.email})
             
-            # log the user in
-            user.backend = 'cosinnus.backends.EmailAuthBackend'
-            login(self.request, user)
+            if do_login:
+                # log the user in
+                user.backend = 'cosinnus.backends.EmailAuthBackend'
+                login(self.request, user)
             
             # send user account creation signal, the audience is empty because this is a moderator-only notification
             user_profile = user.cosinnus_profile
@@ -675,6 +686,10 @@ def verifiy_user_email(request, email_verification_param):
         messages.success(request, _('Your email address %(email)s was successfully confirmed!') % {'email': user.email})
         if not user_was_verified_before:
             _send_user_welcome_email_if_enabled(user)
+        if not request.user.is_authenticated and settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
+            # log the user in for portals that require a verification first 
+            user.backend = 'cosinnus.backends.EmailAuthBackend'
+            login(request, user)
         return redirect(redirect_url)
     else:
         messages.success(request, _('Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!') % {'email': user.email})
@@ -1164,5 +1179,3 @@ def cleanup_user_after_first_login(sender, user, request, **kwargs):
     """ Cleans up pre-registration objects and settings """
     CosinnusUnregisterdUserGroupInvite.objects.filter(email=user.email).delete()
 
-
-    
