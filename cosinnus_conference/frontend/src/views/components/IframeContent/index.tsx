@@ -100,7 +100,7 @@ export function IframeContent(props: IframeProps) {
         <DialogTitle id="leave-dialog-title"><FormattedMessage id="Are you sure you want to leave this video conference?" /></DialogTitle>
         <DialogContent>
           <DialogContentText
-            id="alert-dialog-description"
+            id="leave-dialog-description"
             classes={{
               root: classes.dialogText,
             }}>

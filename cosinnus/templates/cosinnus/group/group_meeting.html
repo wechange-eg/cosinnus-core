@@ -31,7 +31,7 @@
 	                
 	                {% captureas label %}
 			            <p>
-			                {% trans 'By clicking "Continue" you are consenting to be recorded in this video conference.' %}
+			                {% trans "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers." %}
 			            </p>
 			        {% endcaptureas %}
 			        {% captureas title %}{% trans "This session is being recorded" %}{% endcaptureas %}
@@ -45,7 +45,7 @@
 	                </script>
 	                
 	                <div class="textfield transparent">
-	                    <p>{% trans "You have to consent to being recorded to join this meeting." %}</p>
+	                    <p>{% trans "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again." %}</p>
 	                </div>
 	                
 	            {% else %}
