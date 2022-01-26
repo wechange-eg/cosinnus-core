@@ -1,17 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-21 09:41+0100\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"POT-Creation-Date: 2022-01-26 17:15+0100\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -260,6 +254,9 @@ msgid "This team no longer resides under the URL you entered. You have been redi
 msgstr ""
 
 msgid "This account is no longer active. You have been logged out."
+msgstr ""
+
+msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
 msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
@@ -874,12 +871,8 @@ msgstr ""
 msgid "pin to enter for telephone participants"
 msgstr ""
 
-msgid "the rooms welcome message"
+msgid "Last create-call parameters"
 msgstr ""
-
-#, fuzzy
-msgid "Room Type"
-msgstr "Project Type"
 
 msgid "BBB ROOM"
 msgstr ""
@@ -3210,6 +3203,9 @@ msgstr ""
 msgid "Allow recording"
 msgstr ""
 
+msgid "Note: New recordings can only be made if you have booked premium features for this conference."
+msgstr ""
+
 #, fuzzy
 msgid "Temporary Users"
 msgstr "Create Project"
@@ -3320,8 +3316,6 @@ msgid "activate"
 msgstr "Create Project"
 
 #, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_5_password"
 msgid "(re)set password"
 msgstr "You can change your password in the fields below. When doing so, it is especially important that you try to make your password as long as possible (at least 10 characters). The longer it is, the better. In addition, a special character, a capital letter and a small letter are recommended."
 
@@ -3367,11 +3361,11 @@ msgstr ""
 msgid "Length"
 msgstr ""
 
-msgid "Delete (not yet implemented)"
+msgid "Delete Recording"
 msgstr ""
 
 #, fuzzy, python-format
-msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
+msgid "Do you really want to delete recorded meeting \"%(title)s\"?"
 msgstr "Do you really want to leave project „%(title)s“?"
 
 msgid "Delete recorded meeting"
@@ -4382,6 +4376,18 @@ msgid "Map"
 msgstr ""
 
 msgid "Meeting"
+msgstr ""
+
+msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
+msgstr ""
+
+msgid "This session is being recorded"
+msgstr ""
+
+msgid "Continue"
+msgstr ""
+
+msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
 msgstr ""
 
 msgid "Popout"
@@ -6982,93 +6988,6 @@ msgstr ""
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Join now and collaborate"
 
-msgid "Custom Wagtail Page"
-msgstr ""
-
-msgid "Tools"
-msgstr ""
-
-#, fuzzy
-msgid "Import Projects and Groups or Users"
-msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-msgid "Import from a CSV File"
-msgstr "Convert selected Projects to Groups"
-
-msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-msgstr ""
-
-#, fuzzy
-msgid "Project/group CSV File"
-msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-msgid "User CSV File"
-msgstr "Convert selected Projects to Groups"
-
-msgid "Options"
-msgstr ""
-
-msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-msgstr ""
-
-msgid "Encoding of the CSV file"
-msgstr ""
-
-msgid "Delimiter of the CSV file"
-msgstr ""
-
-msgid "Upload and Import..."
-msgstr ""
-
-#, fuzzy
-msgid "Import Projects and Groups"
-msgstr "Convert selected Projects to Groups"
-
-msgid "Clear results and start a new import!"
-msgstr ""
-
-msgid "CSV Import Results"
-msgstr ""
-
-msgid "The import has finished. Here are the results:"
-msgstr ""
-
-msgid "Read errors:"
-msgstr ""
-
-msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-msgstr ""
-
-msgid "Saved items:"
-msgstr ""
-
-#, fuzzy
-msgid "Important messages:"
-msgstr "Create Group"
-
-msgid "Errors:"
-msgstr ""
-
-#, fuzzy
-msgid "Info messages:"
-msgstr "Create Group"
-
-msgid "The CSV file was read successfully and the import is currently running on the server!"
-msgstr ""
-
-#, python-format
-msgid ""
-"This page will show the results when the import is finished.\n"
-"\t\t\n"
-"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-"\t\t\t"
-msgstr ""
-
-msgid "Progress:"
-msgstr ""
-
 #, fuzzy
 msgid "Show more Projects"
 msgstr "Other Projects"
@@ -7630,6 +7549,9 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
+msgid "This team does not have a video conference configured."
+msgstr ""
+
 #, python-format
 msgid "The %(team_type)s was changed successfully."
 msgstr ""
@@ -7984,7 +7906,6 @@ msgid "Thank you!"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "%(team_name)s - Members"
 msgid "Your %(site_name)s Team"
 msgstr "%(team_name)s - Members"
 
@@ -8053,35 +7974,40 @@ msgstr ""
 #~ msgstr "Create Project"
 
 #, fuzzy
-#~ msgid "participants"
-#~ msgstr "Projects"
+#~ msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
+#~ msgstr "Do you really want to leave project „%(title)s“?"
 
 #, fuzzy
-#~ msgid "Portal administrators"
-#~ msgstr "The administration of Projects begins with managing its membership. Here you can decide who can join your project and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal."
+#~ msgid "Import Projects and Groups"
+#~ msgstr "Convert selected Projects to Groups"
 
 #, fuzzy
-#~ msgid "Leave video conference"
-#~ msgstr "About the project"
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "Convert selected Projects to Groups"
 
 #, fuzzy
-#~ msgid "not active"
-#~ msgstr "Create Project"
+#~ msgid "Import from a CSV File"
+#~ msgstr "Convert selected Projects to Groups"
 
 #, fuzzy
-#~ msgid "deactivate member"
-#~ msgstr "Create Project"
+#~ msgid "Important messages:"
+#~ msgstr "Create Group"
 
 #, fuzzy
-#~ msgid "activate member"
-#~ msgstr "Create Project"
+#~ msgid "Info messages:"
+#~ msgstr "Create Group"
 
 #, fuzzy
-#~ msgid "Email to group administrator"
-#~ msgstr "There are no groups."
+#~ msgid "Project/group CSV File"
+#~ msgstr "Convert selected Projects to Groups"
 
-#~ msgid "Group:"
-#~ msgstr "Group:"
+#, fuzzy
+#~ msgid "Room Type"
+#~ msgstr "Project Type"
+
+#, fuzzy
+#~ msgid "User CSV File"
+#~ msgstr "Convert selected Projects to Groups"
 
 #~ msgid "All groups"
 #~ msgstr "All projects"
@@ -8111,6 +8037,10 @@ msgstr ""
 #~ msgid "Do you really want to leave group „%(title)s“?"
 #~ msgstr "Do you really want to leave „%(title)s“?"
 
+#, fuzzy
+#~ msgid "Email to group administrator"
+#~ msgstr "There are no groups."
+
 #~ msgid "English"
 #~ msgstr "English"
 
@@ -8123,14 +8053,25 @@ msgstr ""
 #~ msgid "Group overview"
 #~ msgstr "Group overview"
 
+#~ msgid "Group:"
+#~ msgstr "Group:"
+
 #~ msgid "Gruppen"
 #~ msgstr "Group"
+
+#, fuzzy
+#~ msgid "Leave video conference"
+#~ msgstr "About the project"
 
 #~ msgid "No group found with this name"
 #~ msgstr "No project found with this name"
 
 #~ msgid "Polish"
 #~ msgstr "Polski"
+
+#, fuzzy
+#~ msgid "Portal administrators"
+#~ msgstr "The administration of Projects begins with managing its membership. Here you can decide who can join your project and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal."
 
 #, fuzzy
 #~ msgid "Public Group"
@@ -8176,5 +8117,21 @@ msgstr ""
 #~ msgid "Ukrainian"
 #~ msgstr "Українська"
 
+#, fuzzy
+#~ msgid "activate member"
+#~ msgstr "Create Project"
+
+#, fuzzy
+#~ msgid "deactivate member"
+#~ msgstr "Create Project"
+
 #~ msgid "join team"
 #~ msgstr "Join Project"
+
+#, fuzzy
+#~ msgid "not active"
+#~ msgstr "Create Project"
+
+#, fuzzy
+#~ msgid "participants"
+#~ msgstr "Projects"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-21 09:41+0100\n"
+"POT-Creation-Date: 2022-01-26 17:15+0100\n"
 "Language: az\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -257,6 +257,9 @@ msgstr "Bu komanda artıq daxil etdiyiniz URL altında mövcud deyil. Siz avtoma
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "Bu hesab artıq aktiv deyil. Siz sistemdən çıxmısınız."
+
+msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
@@ -847,12 +850,8 @@ msgstr ""
 msgid "pin to enter for telephone participants"
 msgstr ""
 
-msgid "the rooms welcome message"
+msgid "Last create-call parameters"
 msgstr ""
-
-#, fuzzy
-msgid "Room Type"
-msgstr "Komanda Tipindən"
 
 msgid "BBB ROOM"
 msgstr ""
@@ -1365,7 +1364,6 @@ msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "Mikrosaytda banner şəkli olaraq göstərilir (1140 x 240 px)"
 
 #, fuzzy
-#| msgid "Public (visible without login)"
 msgid "Publicly visible"
 msgstr "İctimaiyyətə açıq (giriş olmadan görünür)"
 
@@ -2108,7 +2106,6 @@ msgid "For options and parameters, go to the parent event's admin page"
 msgstr ""
 
 #, fuzzy
-#| msgid "edit this page"
 msgid "Event admin page"
 msgstr "bu səhifəni redaktə et"
 
@@ -2252,7 +2249,6 @@ msgid "You can define BBB server participant capacity limits here for specific t
 msgstr ""
 
 #, fuzzy
-#| msgid "Settings"
 msgid "BBB-Room Settings"
 msgstr "Parametrlər"
 
@@ -2260,7 +2256,6 @@ msgid "You can set conference settings on this level. All objects under this lev
 msgstr ""
 
 #, fuzzy
-#| msgid "Invited Projects"
 msgid "Inherited BBB-Parameters"
 msgstr "Dəvət olunmuş Layihələr"
 
@@ -2511,7 +2506,6 @@ msgid "Manage Participation Applications"
 msgstr ""
 
 #, fuzzy
-#| msgid "Team Description"
 msgid "Manage Temporary User Accounts"
 msgstr "Komandanın Təsviri"
 
@@ -2732,8 +2726,6 @@ msgid "helptext_15_organization"
 msgstr "helptext_13_groupadministration"
 
 #, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_11_document"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_16_twofactorauth"
 msgstr "helptext_11_document"
@@ -2935,7 +2927,6 @@ msgid "subject"
 msgstr ""
 
 #, fuzzy
-#| msgid "Content"
 msgid "content"
 msgstr "Məzmun"
 
@@ -3094,7 +3085,6 @@ msgid "last instant email was sent on %(date)s "
 msgstr ""
 
 #, fuzzy
-#| msgid "No contact data has been added yet."
 msgid "no instant email has been sent yet."
 msgstr "Hələ heç bir əlaqə məlumatı əlavə edilməyib."
 
@@ -3175,7 +3165,6 @@ msgid "BBB video conference options"
 msgstr "Video konfrans Serveri"
 
 #, fuzzy
-#| msgid "This will be the default setting for all content created by members."
 msgid "These settings will be the default for all conference events in this room."
 msgstr "Bu üzvlər tərəfindən yaradılan bütün məzmun üçün standart parametr olacaq."
 
@@ -3232,18 +3221,18 @@ msgstr ""
 msgid "Allow recording"
 msgstr ""
 
+msgid "Note: New recordings can only be made if you have booked premium features for this conference."
+msgstr ""
+
 #, fuzzy
-#| msgid "Team Description"
 msgid "Temporary Users"
 msgstr "Komandanın Təsviri"
 
 #, fuzzy
-#| msgid "Password change"
 msgid "Password changed"
 msgstr "Şifrə dəyişikliyi"
 
 #, fuzzy
-#| msgid "Change password"
 msgid "Changed password for User"
 msgstr "Şifrəni dəyişdirin"
 
@@ -3326,7 +3315,6 @@ msgid "active"
 msgstr "fəal"
 
 #, fuzzy
-#| msgid "Password"
 msgid "password"
 msgstr "Şifrə"
 
@@ -3339,7 +3327,6 @@ msgid "remove user"
 msgstr "Üzvü çıxarın"
 
 #, fuzzy
-#| msgid "Yes"
 msgid "yes"
 msgstr "Bəli"
 
@@ -3347,17 +3334,14 @@ msgid "no"
 msgstr ""
 
 #, fuzzy
-#| msgid "Deactivate"
 msgid "deactivate"
 msgstr "Deaktiv edin"
 
 #, fuzzy
-#| msgid "Deactivate"
 msgid "activate"
 msgstr "Deaktiv edin"
 
 #, fuzzy
-#| msgid "Reset password"
 msgid "(re)set password"
 msgstr "Şifrə sıfırlama"
 
@@ -3408,16 +3392,15 @@ msgid "Length"
 msgstr ""
 
 #, fuzzy
-#| msgid "Delete elements"
-msgid "Delete (not yet implemented)"
-msgstr "Elementləri silin"
+#| msgid "Delete Account"
+msgid "Delete Recording"
+msgstr "Hesabı silin"
 
 #, fuzzy, python-format
-msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
+msgid "Do you really want to delete recorded meeting \"%(title)s\"?"
 msgstr "Siz həqiqətən \"%(title)s\" elanını silmək istəyirsiniz?"
 
 #, fuzzy
-#| msgid "Delete reported item..."
 msgid "Delete recorded meeting"
 msgstr "Məruzə olunan elementi sil..."
 
@@ -3523,7 +3506,6 @@ msgid "Do you really want to make this conference premium permanent?"
 msgstr "Siz həqiqətən \"%(title)s\"-u tərk etmək istəyirsiniz?"
 
 #, fuzzy
-#| msgid "Do you really want to remove member „%(name)s“ from the team?"
 msgid "Do you really want to remove premium permanent from this conference?"
 msgstr "Siz həqiqətən „%(name)s“ adlı üzvü komandadan çıxarmaq istəyirsiniz?"
 
@@ -3549,12 +3531,10 @@ msgid "Add Premium Block to Conferences"
 msgstr "Tədbir Yaradın"
 
 #, fuzzy, python-format
-#| msgid "Do you really want to decline member „%(name)s“?"
 msgid "Do you really want to delete this block from \"%(name)s\"?"
 msgstr "Siz həqiqətən „%(name)s“ üzvü üçün dəvətdən imtina etmək istəyirsiniz?"
 
 #, fuzzy
-#| msgid "Delete Profile"
 msgid "Delete Premium Block"
 msgstr "Profili ləğv edin"
 
@@ -3699,7 +3679,6 @@ msgid "Enter your choices"
 msgstr ""
 
 #, fuzzy
-#| msgid "Please verify your email address for %(site_name)s!"
 msgid "Please verify your email address to continue using your account."
 msgstr "Zəhmət olmasa %(site_name)s üçün e-poçt adresinizi təsdiqləyəsiniz!"
 
@@ -3713,7 +3692,6 @@ msgid "If you have trouble verifying your email address are not receiving our ve
 msgstr ""
 
 #, fuzzy
-#| msgid "Please verify your email address for %(site_name)s!"
 msgid "Please verify your email address!"
 msgstr "Zəhmət olmasa %(site_name)s üçün e-poçt adresinizi təsdiqləyəsiniz!"
 
@@ -4218,7 +4196,6 @@ msgid "Select related Projects/Groups"
 msgstr "Müvafiq Layihələr/Qruplar seçin"
 
 #, fuzzy
-#| msgid "This will be the default setting for all content created by members."
 msgid "These settings will be the default for all conference events."
 msgstr "Bu üzvlər tərəfindən yaradılan bütün məzmun üçün standart parametr olacaq."
 
@@ -4226,7 +4203,6 @@ msgid "You may still override these options in each conference room and in indiv
 msgstr ""
 
 #, fuzzy
-#| msgid "This project will be set to be publicly visible!"
 msgid "Group/Project is publicly visible"
 msgstr "Bu layihə ictimaiyyətə görünəcək şəkildə tənzimlənəcək!"
 
@@ -4304,7 +4280,6 @@ msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Bu Tətbiq bir Layihə üçün deyil, yalnız bir qrup üçün aktivləşdirilə bilər!"
 
 #, fuzzy
-#| msgid "Contact Information"
 msgid "Contact Form on microsite"
 msgstr "Əlaqə məlumatı"
 
@@ -4465,9 +4440,22 @@ msgid "Map"
 msgstr "Xəritə"
 
 #, fuzzy
-#| msgid "Deleting..."
 msgid "Meeting"
 msgstr "Silinir..."
+
+msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
+msgstr ""
+
+msgid "This session is being recorded"
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue reading"
+msgid "Continue"
+msgstr "Oxumağa davam edin"
+
+msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
+msgstr ""
 
 msgid "Popout"
 msgstr ""
@@ -4528,7 +4516,6 @@ msgid "Sustainable Development Goals"
 msgstr ""
 
 #, fuzzy
-#| msgid "Group Administrator"
 msgid "Email the group administrators"
 msgstr "Qrup Administratoru"
 
@@ -5227,13 +5214,6 @@ msgid "Your request to join %(site_name)s was denied."
 msgstr "%(site_name)s saytına qoşulmaq istəyiniz rədd edildi."
 
 #, fuzzy, python-format
-#| msgid ""
-#| "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
-#| "\n"
-#| "Out administrators will review your request and approve your user account soon!\n"
-#| "\n"
-#| "Until then, with warm greetings, \n"
-#| "your %(site_name)s Team"
 msgid ""
 "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
 "\n"
@@ -6439,7 +6419,6 @@ msgid "Disconnect Facebook"
 msgstr "Facebook-u ayırın"
 
 #, fuzzy
-#| msgid "Settings"
 msgid "2FA Settings"
 msgstr "Parametrlər"
 
@@ -6516,7 +6495,6 @@ msgid "My Website"
 msgstr "Vebsaytım"
 
 #, fuzzy
-#| msgid "Gesendet"
 msgid "ended"
 msgstr "Göndərilib"
 
@@ -6607,7 +6585,6 @@ msgid "It appears that no authentication device is attached to your account. Ple
 msgstr "Hesabınıza heç bir təsdiqləmə cihazı qoşulmadığı görünür. Xahiş edirəm başqa bir admindən xahiş edin, birini quraşdırıb və  QR kodunu sizə göndərsin!"
 
 #, fuzzy
-#| msgid "Back to"
 msgid "Backup Tokens"
 msgstr "Geriyə"
 
@@ -6618,12 +6595,10 @@ msgid "Print these tokens and keep them somewhere safe."
 msgstr ""
 
 #, fuzzy
-#| msgid "You don't have permission to access this site."
 msgid "You don't have any backup codes yet."
 msgstr "Sizin bu sayta giriş icazəniz yoxdur."
 
 #, fuzzy
-#| msgid "Enter a token:"
 msgid "Generate Tokens"
 msgstr "Markeri daxil edin:"
 
@@ -6665,7 +6640,6 @@ msgid "If you do not have access to your OTP generator app, you may enter one of
 msgstr ""
 
 #, fuzzy
-#| msgid "Enter a token:"
 msgid "Enter backup token"
 msgstr "Markeri daxil edin:"
 
@@ -6683,7 +6657,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 #, fuzzy
-#| msgid "Show more"
 msgid "Show Tokens"
 msgstr "Daha çox göstər"
 
@@ -6715,7 +6688,6 @@ msgid "2FA Setup Complete"
 msgstr ""
 
 #, fuzzy
-#| msgid "The invitation was successfully deleted."
 msgid "Congratulations, you've successfully enabled 2FA."
 msgstr "Dəvət uğurla silindi."
 
@@ -7205,98 +7177,6 @@ msgstr "Sizi görməyimə şadam! Siz %(portal_name)s portalında Layihələr v�
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "İndi qeydiyyatdan keçin və onu formalaşdırmağa kömək edin"
 
-msgid "Custom Wagtail Page"
-msgstr ""
-
-msgid "Tools"
-msgstr ""
-
-#, fuzzy
-msgid "Import Projects and Groups or Users"
-msgstr "Layihələrim və qruplarım"
-
-#, fuzzy
-msgid "Import from a CSV File"
-msgstr "Çeşidləmə sahəsi"
-
-msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-msgstr ""
-
-#, fuzzy
-msgid "Project/group CSV File"
-msgstr "Layihələr/Qruplar"
-
-#, fuzzy
-msgid "User CSV File"
-msgstr "Layihələr/Qruplar"
-
-#, fuzzy
-msgid "Options"
-msgstr "Nisbətlər"
-
-msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-msgstr ""
-
-msgid "Encoding of the CSV file"
-msgstr ""
-
-msgid "Delimiter of the CSV file"
-msgstr ""
-
-#, fuzzy
-msgid "Upload and Import..."
-msgstr "Şəkil yükləyin."
-
-#, fuzzy
-msgid "Import Projects and Groups"
-msgstr "Layihələrim və qruplarım"
-
-msgid "Clear results and start a new import!"
-msgstr ""
-
-#, fuzzy
-msgid "CSV Import Results"
-msgstr "Şifrə sıfırlanması uğurlu oldu"
-
-msgid "The import has finished. Here are the results:"
-msgstr ""
-
-#, fuzzy
-msgid "Read errors:"
-msgstr "Xəta!"
-
-msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-msgstr ""
-
-msgid "Saved items:"
-msgstr ""
-
-#, fuzzy
-msgid "Important messages:"
-msgstr "Mesajlar"
-
-#, fuzzy
-msgid "Errors:"
-msgstr "Xəta!"
-
-#, fuzzy
-msgid "Info messages:"
-msgstr "Mesajlar"
-
-msgid "The CSV file was read successfully and the import is currently running on the server!"
-msgstr ""
-
-#, python-format
-msgid ""
-"This page will show the results when the import is finished.\n"
-"\t\t\n"
-"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-"\t\t\t"
-msgstr ""
-
-msgid "Progress:"
-msgstr ""
-
 msgid "Show more Projects"
 msgstr "Daha çox Layihə göstərin"
 
@@ -7715,12 +7595,10 @@ msgid "Only conference members can see the content you requested. Apply to becom
 msgstr "Tələb etdiyiniz məzmunu yalnız komanda üzvləri görə bilər. İndi üzv olmaq üçün müraciət edin!"
 
 #, fuzzy
-#| msgid "Please verify your email address for %(site_name)s!"
 msgid "Please verify your email address."
 msgstr "Zəhmət olmasa %(site_name)s üçün e-poçt adresinizi təsdiqləyəsiniz!"
 
 #, fuzzy, python-format
-#| msgid "Please verify your email address for %(site_name)s!"
 msgid "Please verify your email address by %(date_string)s."
 msgstr "Zəhmət olmasa %(site_name)s üçün e-poçt adresinizi təsdiqləyəsiniz!"
 
@@ -7883,6 +7761,9 @@ msgstr "%(team_type)s \"%(group)s\" uğurla yaradıldı."
 
 msgid "Create"
 msgstr "Yaradın"
+
+msgid "This team does not have a video conference configured."
+msgstr ""
 
 #, python-format
 msgid "The %(team_type)s was changed successfully."
@@ -8214,7 +8095,6 @@ msgid "The email you are trying to confirm has already been confirmed or belongs
 msgstr "Təsdiqləməyə çalışdığınız e-poçt artıq təsdiqlənib və ya başqa bir istifadəçiyə məxsusdur!"
 
 #, fuzzy, python-format
-#| msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
 msgid "Your email address %(email)s was successfully confirmed!"
 msgstr "%(email)s e-poçt adresiniz uğurla təsdiqləndi! İcmaya xoş gəldiniz!"
 
@@ -8231,7 +8111,6 @@ msgid "You have just registered an account at %(site_name)s. We're happy to see 
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "Please verify your email address for %(site_name)s!"
 msgid "You have just changed your email address at %(site_name)s."
 msgstr "Zəhmət olmasa %(site_name)s üçün e-poçt adresinizi təsdiqləyəsiniz!"
 
@@ -8242,7 +8121,6 @@ msgid "Thank you!"
 msgstr ""
 
 #, fuzzy, python-format
-#| msgid "The %(site_name)s team"
 msgid "Your %(site_name)s Team"
 msgstr "%(site_name)s komandası"
 
@@ -8314,193 +8192,70 @@ msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
 #~ msgstr "Aktivləşdirin"
 
 #, fuzzy
+#~ msgid "CSV Import Results"
+#~ msgstr "Şifrə sıfırlanması uğurlu oldu"
+
+#, fuzzy
+#~| msgid "Delete elements"
+#~ msgid "Delete (not yet implemented)"
+#~ msgstr "Elementləri silin"
+
+#, fuzzy
+#~ msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
+#~ msgstr "Siz həqiqətən \"%(title)s\" elanını silmək istəyirsiniz?"
+
+#, fuzzy
+#~ msgid "Errors:"
+#~ msgstr "Xəta!"
+
+#, fuzzy
+#~ msgid "Import Projects and Groups"
+#~ msgstr "Layihələrim və qruplarım"
+
+#, fuzzy
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "Layihələrim və qruplarım"
+
+#, fuzzy
+#~ msgid "Import from a CSV File"
+#~ msgstr "Çeşidləmə sahəsi"
+
+#, fuzzy
+#~ msgid "Important messages:"
+#~ msgstr "Mesajlar"
+
+#, fuzzy
+#~ msgid "Info messages:"
+#~ msgstr "Mesajlar"
+
+#, fuzzy
+#~ msgid "Options"
+#~ msgstr "Nisbətlər"
+
+#, fuzzy
+#~ msgid "Project/group CSV File"
+#~ msgstr "Layihələr/Qruplar"
+
+#, fuzzy
+#~ msgid "Read errors:"
+#~ msgstr "Xəta!"
+
+#, fuzzy
+#~ msgid "Room Type"
+#~ msgstr "Komanda Tipindən"
+
+#, fuzzy
+#~ msgid "Upload and Import..."
+#~ msgstr "Şəkil yükləyin."
+
+#, fuzzy
+#~ msgid "User CSV File"
+#~ msgstr "Layihələr/Qruplar"
+
+#, fuzzy
 #~ msgctxt "time"
 #~ msgid "until"
 #~ msgstr "Qədər"
-
-#, fuzzy
-#~ msgid "Conference accounts active"
-#~ msgstr "Video konfrans Serveri"
-
-#, fuzzy
-#~| msgid "Participants"
-#~ msgid "participants"
-#~ msgstr "İştirakçılar"
-
-#, fuzzy
-#~| msgid "Team Description"
-#~ msgid "Temporary restrictions"
-#~ msgstr "Komandanın Təsviri"
-
-#, fuzzy
-#~| msgid "Portal Administrators"
-#~ msgid "Portal administrators"
-#~ msgstr "Portal Adminləri"
-
-#, fuzzy
-#~ msgid "Leave video conference"
-#~ msgstr "Video konfrans Serveri"
-
-#, fuzzy
-#~ msgid "Successfully deactivated user account"
-#~ msgstr "İstifadəçi hesabını silin"
-
-#, fuzzy
-#~ msgid "Successfully activated user account"
-#~ msgstr "İstifadəçi hesabını silin"
-
-#, fuzzy
-#~ msgid "Successfully removed user"
-#~ msgstr "İstifadəçi hesabını silin"
-
-#, fuzzy
-#~| msgid "Password reset"
-#~ msgid "Password set"
-#~ msgstr "Şifrə sıfırlama"
-
-#, fuzzy
-#~| msgid "Password"
-#~ msgid "no Password"
-#~ msgstr "Şifrə"
-
-#, fuzzy
-#~ msgid "Set password"
-#~ msgstr "Şifrəni dəyişdirin"
-
-#, fuzzy
-#~ msgid "Conference is not running"
-#~ msgstr "Video konfrans Serveri"
-
-#, fuzzy
-#~ msgid "Upload Participants"
-#~ msgstr "İştirakçılar"
-
-#, fuzzy
-#~ msgid "not active"
-#~ msgstr "fəaliyyətsiz"
-
-#, fuzzy
-#~ msgid "deactivate member"
-#~ msgstr "Qrupu de-aktiv edin"
-
-#, fuzzy
-#~ msgid "activate member"
-#~ msgstr "Üzv dəvət edin"
-
-#, fuzzy
-#~ msgid "Finish conference and deactivate user accounts"
-#~ msgstr "İstifadəçi hesabını silin"
-
-#, fuzzy
-#~ msgid "Start conference and activate user accounts"
-#~ msgstr "İstifadəçi hesabını silin"
-
-#, fuzzy
-#~ msgid "User was not created"
-#~ msgstr "Yaratdı"
-
-#, fuzzy
-#~ msgid "First Name"
-#~ msgstr "Ad"
-
-#, fuzzy
-#~ msgid "Last Name"
-#~ msgstr "Soyad"
-
-#, fuzzy
-#~ msgid "Conference reminders"
-#~ msgstr "Video konfrans Serveri"
-
-#, fuzzy
-#~ msgid "Only conference members can see the event\\'s description."
-#~ msgstr "Tələb etdiyiniz məzmunu yalnız komanda üzvləri görə bilər. İndi üzv olmaq üçün müraciət edin!"
-
-#~ msgid ""
-#~ "Hi %(user_name)s,\n"
-#~ "\n"
-#~ "you have just registered an account at %(site_name)s. We're happy to see you!\n"
-#~ "\n"
-#~ "You will need to verify your email %(user_email)s before you can log in. \n"
-#~ "\n"
-#~ "\n"
-#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
-#~ "\n"
-#~ "\n"
-#~ "\n"
-#~ "Thank you and see you soon!\n"
-#~ "\n"
-#~ "Your %(site_name)s Team"
-#~ msgstr ""
-#~ "Salam %(user_name)s,\n"
-#~ "\n"
-#~ "Siz %(site_name)s saytında indicə bir hesab qeydiyyatdan keçirmisiniz. Siz görməyimizi şadıq!\n"
-#~ "\n"
-#~ "Daxili olmazdan əvvəl siz %(user_email)s e-poçtunuzu təsdiqləməli olacaqsınız. \n"
-#~ "\n"
-#~ "\n"
-#~ "Zəhmət olmasa, e-poçt adresinizi təsdiqləmək üçün aşağıdakı linkə klikləyin (ya da linki brauzerinizə kopyalayın və yapışdırın):\n"
-#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
-#~ "\n"
-#~ "\n"
-#~ "\n"
-#~ "Təşəkkür edirəm və tezliklə görüşmək üzrə!\n"
-#~ "\n"
-#~ "Sizin %(site_name)s Komandınız"
-
-#~ msgid ""
-#~ "Hi %(user_name)s,\n"
-#~ "\n"
-#~ "you have just changed your email address at %(site_name)s.\n"
-#~ "\n"
-#~ "You will need to verify your email %(user_email)s before the changes take effect. \n"
-#~ "\n"
-#~ "\n"
-#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-#~ "%(domain_url)s%(user_verification_url)s\n"
-#~ "\n"
-#~ "\n"
-#~ "\n"
-#~ "Your %(site_name)s Team"
-#~ msgstr ""
-#~ "Salam %(user_name)s,\n"
-#~ "\n"
-#~ "e-poçt adresinizi %(site_name)s saytında dəyişdirmisiniz .\n"
-#~ "\n"
-#~ "Dəyişikliklərin qüvvəyə minməzdən əvvəl %(user_email)s elektron poçtunuzu təsdiqləməlisiniz. \n"
-#~ "\n"
-#~ "\n"
-#~ "Lütfən, e-poçt adresinizi təsdiqləmək üçün aşağıdakı linki vurun (və ya bağlantını brauzerinizə kopyalayın və yapışdırın):\n"
-#~ "%(domain_url)s%(user_verification_url)s\n"
-#~ "\n"
-#~ "\n"
-#~ "\n"
-#~ "Sizin %(site_name)s Komandınız"
-
-#, fuzzy
-#~ msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
-#~ msgstr "İstifadəçi \"%(user)s\" uğurla qeydiyyata alındı. Giriş etməzdən əvvəl hesab təsdiqlənməlidir. Bu baş verdikdə \"%(email)s\" ünvanınıza bir e-poçt göndərəcəyik."
-
-#, fuzzy
-#~ msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-#~ msgstr "İstifadəçi \"%(user)s\" uğurla qeydiyyata alındı. Biz tezliklə \"%(email)s\" ünvanınıza bir e-poçt göndərəcəyik. Girişdən əvvəl e-poçt adresinizi təsdiqləməlisiniz."
-
-#, fuzzy
-#~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-#~ msgstr "İstifadəçi \"%(user)s\" uğurla qeydiyyata alındı. Biz tezliklə \"%(email)s\" ünvanınıza bir e-poçt göndərəcəyik. Girişdən əvvəl e-poçt adresinizi təsdiqləməlisiniz."
-
-#, fuzzy
-#~| msgid "Cosinnus Micropages"
-#~ msgid "Contact Form on Micropage"
-#~ msgstr "Cosinnus Mikro səhifələri"
-
-#, fuzzy
-#~| msgid "Group Administrator"
-#~ msgid "Email to group administrator"
-#~ msgstr "Qrup Administratoru"
-
-#~ msgid "Group:"
-#~ msgstr "Qrup:"
 
 #~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 #~ msgstr "%(sender_name)s yalnız %(portal_name)s-də \"%(team_name)s\" layihə/qrupunu yaratdı!"
@@ -8543,6 +8298,22 @@ msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
 #~ msgid "Conference Dashboard"
 #~ msgstr "İdarə paneli"
 
+#, fuzzy
+#~ msgid "Conference accounts active"
+#~ msgstr "Video konfrans Serveri"
+
+#, fuzzy
+#~ msgid "Conference is not running"
+#~ msgstr "Video konfrans Serveri"
+
+#, fuzzy
+#~ msgid "Conference reminders"
+#~ msgstr "Video konfrans Serveri"
+
+#, fuzzy
+#~ msgid "Contact Form on Micropage"
+#~ msgstr "Cosinnus Mikro səhifələri"
+
 #~ msgid "Czech--NATIVE-LANGUAGE"
 #~ msgstr "Čeština"
 
@@ -8561,14 +8332,29 @@ msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
 #~ msgid "Dutch--NATIVE-LANGUAGE"
 #~ msgstr "Nederlands"
 
+#, fuzzy
+#~ msgid "Email to group administrator"
+#~ msgstr "Qrup Administratoru"
+
 #~ msgid "English--NATIVE-LANGUAGE"
 #~ msgstr "English"
+
+#, fuzzy
+#~ msgid "Finish conference and deactivate user accounts"
+#~ msgstr "İstifadəçi hesabını silin"
+
+#, fuzzy
+#~ msgid "First Name"
+#~ msgstr "Ad"
 
 #~ msgid "French--NATIVE-LANGUAGE"
 #~ msgstr "Français"
 
 #~ msgid "Georgian--NATIVE-LANGUAGE"
 #~ msgstr "ქართული ენა"
+
+#~ msgid "Group:"
+#~ msgstr "Qrup:"
 
 #~ msgid ""
 #~ "Hallo, %(user_name)s! Herzlich willkommen bei %(site_name)s! \n"
@@ -8612,6 +8398,68 @@ msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
 #~ msgid "Here you can find an overview of items you follow."
 #~ msgstr "Burada bəyəndiyiniz ideyaların ümumi icmalını tapa bilərsiniz."
 
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just changed your email address at %(site_name)s.\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before the changes take effect. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Salam %(user_name)s,\n"
+#~ "\n"
+#~ "e-poçt adresinizi %(site_name)s saytında dəyişdirmisiniz .\n"
+#~ "\n"
+#~ "Dəyişikliklərin qüvvəyə minməzdən əvvəl %(user_email)s elektron poçtunuzu təsdiqləməlisiniz. \n"
+#~ "\n"
+#~ "\n"
+#~ "Lütfən, e-poçt adresinizi təsdiqləmək üçün aşağıdakı linki vurun (və ya bağlantını brauzerinizə kopyalayın və yapışdırın):\n"
+#~ "%(domain_url)s%(user_verification_url)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Sizin %(site_name)s Komandınız"
+
+#~ msgid ""
+#~ "Hi %(user_name)s,\n"
+#~ "\n"
+#~ "you have just registered an account at %(site_name)s. We're happy to see you!\n"
+#~ "\n"
+#~ "You will need to verify your email %(user_email)s before you can log in. \n"
+#~ "\n"
+#~ "\n"
+#~ "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Thank you and see you soon!\n"
+#~ "\n"
+#~ "Your %(site_name)s Team"
+#~ msgstr ""
+#~ "Salam %(user_name)s,\n"
+#~ "\n"
+#~ "Siz %(site_name)s saytında indicə bir hesab qeydiyyatdan keçirmisiniz. Siz görməyimizi şadıq!\n"
+#~ "\n"
+#~ "Daxili olmazdan əvvəl siz %(user_email)s e-poçtunuzu təsdiqləməli olacaqsınız. \n"
+#~ "\n"
+#~ "\n"
+#~ "Zəhmət olmasa, e-poçt adresinizi təsdiqləmək üçün aşağıdakı linkə klikləyin (ya da linki brauzerinizə kopyalayın və yapışdırın):\n"
+#~ "%(domain_url)s%(user_verification_url)s%(next)s\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Təşəkkür edirəm və tezliklə görüşmək üzrə!\n"
+#~ "\n"
+#~ "Sizin %(site_name)s Komandınız"
+
 #~ msgid "Hi,"
 #~ msgstr "Salam,"
 
@@ -8624,8 +8472,28 @@ msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
 #~ msgid "Kazakh--NATIVE-LANGUAGE"
 #~ msgstr "Қазақ тілі"
 
+#, fuzzy
+#~ msgid "Last Name"
+#~ msgstr "Soyad"
+
+#, fuzzy
+#~ msgid "Leave video conference"
+#~ msgstr "Video konfrans Serveri"
+
+#, fuzzy
+#~ msgid "Only conference members can see the event\\'s description."
+#~ msgstr "Tələb etdiyiniz məzmunu yalnız komanda üzvləri görə bilər. İndi üzv olmaq üçün müraciət edin!"
+
+#, fuzzy
+#~ msgid "Password set"
+#~ msgstr "Şifrə sıfırlama"
+
 #~ msgid "Polish--NATIVE-LANGUAGE"
 #~ msgstr "Polski"
+
+#, fuzzy
+#~ msgid "Portal administrators"
+#~ msgstr "Portal Adminləri"
 
 #~ msgid "Public Group"
 #~ msgstr "İctimai Qrup"
@@ -8646,11 +8514,35 @@ msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
 #~ msgid "Search for email"
 #~ msgstr "İdeyalar üçün Axtarış"
 
+#, fuzzy
+#~ msgid "Set password"
+#~ msgstr "Şifrəni dəyişdirin"
+
 #~ msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
 #~ msgstr "Bağışlayın, yalnız portal rəhbərləri Qruplar yarada bilərlər! Ya Layihə yarada, ya da sizin üçün Qrup yaratmaq üçün adminlərdən birinə mesaj yaza bilərsiniz. Aşağıda bütün idarəçilərin siyahısını tapa bilərsiniz."
 
 #~ msgid "Spanish--NATIVE-LANGUAGE"
 #~ msgstr "Español"
+
+#, fuzzy
+#~ msgid "Start conference and activate user accounts"
+#~ msgstr "İstifadəçi hesabını silin"
+
+#, fuzzy
+#~ msgid "Successfully activated user account"
+#~ msgstr "İstifadəçi hesabını silin"
+
+#, fuzzy
+#~ msgid "Successfully deactivated user account"
+#~ msgstr "İstifadəçi hesabını silin"
+
+#, fuzzy
+#~ msgid "Successfully removed user"
+#~ msgstr "İstifadəçi hesabını silin"
+
+#, fuzzy
+#~ msgid "Temporary restrictions"
+#~ msgstr "Komandanın Təsviri"
 
 #~ msgid "The following Groups were converted to Projects:"
 #~ msgstr "Aşağıdakı Qruplar Layihələrə çevrildi:"
@@ -8672,6 +8564,18 @@ msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
 
 #~ msgid "Ukrainian--NATIVE-LANGUAGE"
 #~ msgstr "Українська"
+
+#, fuzzy
+#~ msgid "Upload Participants"
+#~ msgstr "İştirakçılar"
+
+#, fuzzy
+#~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "İstifadəçi \"%(user)s\" uğurla qeydiyyata alındı. Biz tezliklə \"%(email)s\" ünvanınıza bir e-poçt göndərəcəyik. Girişdən əvvəl e-poçt adresinizi təsdiqləməlisiniz."
+
+#, fuzzy
+#~ msgid "User was not created"
+#~ msgstr "Yaratdı"
 
 #~ msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
 #~ msgstr "Şifrənizi təyin etmək üçün təlimatları sizə göndərdik. Onları qısa müddətdə alacaqsınız."
@@ -8697,8 +8601,24 @@ msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
 #~ msgid "You were tagged by %(sender_name)s"
 #~ msgstr "Siz %(sender_name)s tərəfindən etiketləndiniz"
 
+#, fuzzy
+#~ msgid "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens."
+#~ msgstr "İstifadəçi \"%(user)s\" uğurla qeydiyyata alındı. Giriş etməzdən əvvəl hesab təsdiqlənməlidir. Bu baş verdikdə \"%(email)s\" ünvanınıza bir e-poçt göndərəcəyik."
+
+#, fuzzy
+#~ msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
+#~ msgstr "İstifadəçi \"%(user)s\" uğurla qeydiyyata alındı. Biz tezliklə \"%(email)s\" ünvanınıza bir e-poçt göndərəcəyik. Girişdən əvvəl e-poçt adresinizi təsdiqləməlisiniz."
+
 #~ msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
 #~ msgstr "%(team_type)s “%(team_name)s” komandasına dəvətiniz uğurla rədd edildi."
+
+#, fuzzy
+#~ msgid "activate member"
+#~ msgstr "Üzv dəvət edin"
+
+#, fuzzy
+#~ msgid "deactivate member"
+#~ msgstr "Qrupu de-aktiv edin"
 
 #, fuzzy
 #~ msgid "email"
@@ -8707,3 +8627,15 @@ msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
 #, fuzzy
 #~ msgid "has logged in"
 #~ msgstr "Daxil olub"
+
+#, fuzzy
+#~ msgid "no Password"
+#~ msgstr "Şifrə"
+
+#, fuzzy
+#~ msgid "not active"
+#~ msgstr "fəaliyyətsiz"
+
+#, fuzzy
+#~ msgid "participants"
+#~ msgstr "İştirakçılar"

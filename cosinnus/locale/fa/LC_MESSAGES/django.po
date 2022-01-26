@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-21 09:41+0100\n"
+"POT-Creation-Date: 2022-01-26 17:15+0100\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -255,6 +255,9 @@ msgstr "این گروه دیگر در این نشانی که وارد کرده�
 #, fuzzy
 msgid "This account is no longer active. You have been logged out."
 msgstr "این حساب دیگر فعال نیست. شما از سامانه خارج شده‌اید."
+
+msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr "از آن‌جا که روی لینکی که در یکی از ایمیل‌های ما بوده کلیک کرده‌اید به این‌جا فرستاده‌شده‌اید. به دلیل مسائل امنیتی ما نشانی وب‌سایت‌های بیرونی را در ایمیل‌هایم قرار نمی‌دهیم. اگر مایلید به این نشانی بروید پیوند آن در زیر آمده است."
@@ -600,7 +603,6 @@ msgid "Mobile Phone Number"
 msgstr "شماره‌ی تلفن همراه"
 
 #, fuzzy
-#| msgid "(No choice)"
 msgid "No choice"
 msgstr "(هیچ گزینه‌ای)"
 
@@ -674,7 +676,6 @@ msgid "Next month"
 msgstr "ماه بعد"
 
 #, fuzzy
-#| msgid "View conference"
 msgid "No video conference"
 msgstr "کنفرانس را ببینید"
 
@@ -844,11 +845,8 @@ msgstr "شماره‌ای که می‌شود با آن با تلفن تماس گ
 msgid "pin to enter for telephone participants"
 msgstr "گذرواژه برای شرکت‌کننده‌هایی که با تلفن وارد می‌شوند"
 
-msgid "the rooms welcome message"
-msgstr "پیام خوش‌آمدگویی در اتاق‌ها"
-
-msgid "Room Type"
-msgstr "نوع اتاق"
+msgid "Last create-call parameters"
+msgstr ""
 
 msgid "BBB ROOM"
 msgstr "اتاق BBB"
@@ -1334,7 +1332,6 @@ msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr ""
 
 #, fuzzy
-#| msgid "Is visible"
 msgid "Publicly visible"
 msgstr "آشکار است"
 
@@ -2040,7 +2037,6 @@ msgid "Join meeting directly"
 msgstr ""
 
 #, fuzzy
-#| msgid "number for dialing into the conference via telephone"
 msgid "Enter the BBB meeting in the conference frontend"
 msgstr "شماره‌ای که می‌شود با آن با تلفن تماس گرفت و وارد کنفرانس شد"
 
@@ -2051,7 +2047,6 @@ msgid "For options and parameters, go to the parent event's admin page"
 msgstr ""
 
 #, fuzzy
-#| msgid "edit this page"
 msgid "Event admin page"
 msgstr "این برگه را ویرایش کن"
 
@@ -2062,7 +2057,6 @@ msgid "For further options and parameters, go to the parent conference's admin p
 msgstr ""
 
 #, fuzzy
-#| msgid "Conference Room Type"
 msgid "Conference admin page"
 msgstr "نوع اتاق کنفرانس"
 
@@ -2220,7 +2214,6 @@ msgid "You can find the BBBRoom object for this source object here"
 msgstr ""
 
 #, fuzzy
-#| msgid "BBB ROOM"
 msgid "BBB Room"
 msgstr "اتاق BBB"
 
@@ -2944,7 +2937,6 @@ msgid "This is a list of all recorded meetings for this conference. Recent recor
 msgstr ""
 
 #, fuzzy
-#| msgid "There are no pending invitations."
 msgid "There are no recorded meetings yet."
 msgstr "هیچ دعوت‌نامه‌ی معوقی وجود ندارد."
 
@@ -3061,7 +3053,6 @@ msgid "Check this to show rocket chat in the sidebar."
 msgstr ""
 
 #, fuzzy
-#| msgid "View conference"
 msgid "BBB video conference options"
 msgstr "کنفرانس را ببینید"
 
@@ -3103,7 +3094,6 @@ msgid "Note: Changing some of these settings may require to restart a meeting th
 msgstr ""
 
 #, fuzzy
-#| msgid "Premium"
 msgid "Premium only"
 msgstr "اعلاء"
 
@@ -3119,6 +3109,9 @@ msgstr ""
 msgid "Allow recording"
 msgstr ""
 
+msgid "Note: New recordings can only be made if you have booked premium features for this conference."
+msgstr ""
+
 msgid "Temporary Users"
 msgstr ""
 
@@ -3132,7 +3125,6 @@ msgid "Remove all Users"
 msgstr ""
 
 #, fuzzy
-#| msgid "Do you really want to decline the invitation?"
 msgid "Do you really want to remove all users?"
 msgstr "آیا واقعن می‌خواهید دعوت را رد کنید؟"
 
@@ -3140,7 +3132,6 @@ msgid "Download all user credentials"
 msgstr ""
 
 #, fuzzy
-#| msgid "Do you really want to decline the invitation?"
 msgid "Do you really want to download all user credentials?"
 msgstr "آیا واقعن می‌خواهید دعوت را رد کنید؟"
 
@@ -3179,12 +3170,10 @@ msgid "Once the conference is over you can deactivate all ausers. That means the
 msgstr ""
 
 #, fuzzy
-#| msgid "Reactivate user accounts"
 msgid "activate user accounts"
 msgstr "حساب‌های کاربری را دوباره فعال کن"
 
 #, fuzzy
-#| msgid "Reactivate user accounts"
 msgid "deactivate user accounts"
 msgstr "حساب‌های کاربری را دوباره فعال کن"
 
@@ -3195,7 +3184,6 @@ msgid "Once the conference is over you can remove all ausers. This cannot be rev
 msgstr ""
 
 #, fuzzy
-#| msgid "Reactivate user accounts"
 msgid "remove user accounts"
 msgstr "حساب‌های کاربری را دوباره فعال کن"
 
@@ -3215,7 +3203,6 @@ msgid "remove user"
 msgstr ""
 
 #, fuzzy
-#| msgid "Yes"
 msgid "yes"
 msgstr "بله"
 
@@ -3223,12 +3210,10 @@ msgid "no"
 msgstr ""
 
 #, fuzzy
-#| msgid "Active"
 msgid "deactivate"
 msgstr "فعال"
 
 #, fuzzy
-#| msgid "Active"
 msgid "activate"
 msgstr "فعال"
 
@@ -3271,16 +3256,17 @@ msgstr ""
 msgid "Length"
 msgstr ""
 
-msgid "Delete (not yet implemented)"
-msgstr ""
+#, fuzzy
+#| msgid "Delete reported item..."
+msgid "Delete Recording"
+msgstr "مورد گزارش‌شده را پاک کن..."
 
 #, fuzzy, python-format
 #| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
-msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
+msgid "Do you really want to delete recorded meeting \"%(title)s\"?"
 msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
 
 #, fuzzy
-#| msgid "Delete reported item..."
 msgid "Delete recorded meeting"
 msgstr "مورد گزارش‌شده را پاک کن..."
 
@@ -3295,7 +3281,6 @@ msgid "Overview - All Conferences"
 msgstr ""
 
 #, fuzzy
-#| msgid "Conference Rooms"
 msgid "Conference Administration"
 msgstr "اتاق‌های کنفرانس"
 
@@ -3371,12 +3356,10 @@ msgid "Remove Permanent Premium"
 msgstr ""
 
 #, fuzzy
-#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
 msgid "Do you really want to make this conference premium permanent?"
 msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
 
 #, fuzzy
-#| msgid "Do you really want to decline the invitation?"
 msgid "Do you really want to remove premium permanent from this conference?"
 msgstr "آیا واقعن می‌خواهید دعوت را رد کنید؟"
 
@@ -3400,7 +3383,6 @@ msgid "Add Premium Block to Conferences"
 msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
 
 #, fuzzy, python-format
-#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
 msgid "Do you really want to delete this block from \"%(name)s\"?"
 msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
 
@@ -3494,7 +3476,6 @@ msgid "News"
 msgstr ""
 
 #, fuzzy
-#| msgid "View conference"
 msgid "Video conference"
 msgstr "کنفرانس را ببینید"
 
@@ -4054,7 +4035,6 @@ msgid "Enable the public visibility of your group/project"
 msgstr ""
 
 #, fuzzy
-#| msgid "View conference"
 msgid "Include a video conference"
 msgstr "کنفرانس را ببینید"
 
@@ -4266,6 +4246,18 @@ msgid "Map"
 msgstr ""
 
 msgid "Meeting"
+msgstr ""
+
+msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
+msgstr ""
+
+msgid "This session is being recorded"
+msgstr ""
+
+msgid "Continue"
+msgstr ""
+
+msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
 msgstr ""
 
 msgid "Popout"
@@ -5428,7 +5420,6 @@ msgid "CSV Downloads"
 msgstr ""
 
 #, fuzzy
-#| msgid "A user created a new conference"
 msgid "HD space used by conferences"
 msgstr "یک کاربر یک کنفرانس نو ساخته"
 
@@ -6214,7 +6205,6 @@ msgid "Back to 2FA Settings"
 msgstr ""
 
 #, fuzzy
-#| msgid "Disable editor"
 msgid "Disable 2FA"
 msgstr "ویرایش‌گر را غیرفعال کن"
 
@@ -6225,7 +6215,6 @@ msgid "Yes, I am sure."
 msgstr ""
 
 #, fuzzy
-#| msgid "Disable editor"
 msgid "Disable"
 msgstr "ویرایش‌گر را غیرفعال کن"
 
@@ -6251,7 +6240,6 @@ msgid "If you do not have access to your OTP generator app, you may enter one of
 msgstr ""
 
 #, fuzzy
-#| msgid "Enter a description"
 msgid "Enter backup token"
 msgstr "یک تعریف وارد کنید"
 
@@ -6775,86 +6763,6 @@ msgstr ""
 msgid "Jetzt anmelden und mitgestalten"
 msgstr ""
 
-msgid "Custom Wagtail Page"
-msgstr ""
-
-msgid "Tools"
-msgstr ""
-
-msgid "Import Projects and Groups or Users"
-msgstr ""
-
-msgid "Import from a CSV File"
-msgstr ""
-
-msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-msgstr ""
-
-msgid "Project/group CSV File"
-msgstr ""
-
-msgid "User CSV File"
-msgstr ""
-
-msgid "Options"
-msgstr ""
-
-msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-msgstr ""
-
-msgid "Encoding of the CSV file"
-msgstr ""
-
-msgid "Delimiter of the CSV file"
-msgstr ""
-
-msgid "Upload and Import..."
-msgstr ""
-
-msgid "Import Projects and Groups"
-msgstr ""
-
-msgid "Clear results and start a new import!"
-msgstr ""
-
-msgid "CSV Import Results"
-msgstr ""
-
-msgid "The import has finished. Here are the results:"
-msgstr ""
-
-msgid "Read errors:"
-msgstr ""
-
-msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-msgstr ""
-
-msgid "Saved items:"
-msgstr ""
-
-msgid "Important messages:"
-msgstr ""
-
-msgid "Errors:"
-msgstr ""
-
-msgid "Info messages:"
-msgstr ""
-
-msgid "The CSV file was read successfully and the import is currently running on the server!"
-msgstr ""
-
-#, python-format
-msgid ""
-"This page will show the results when the import is finished.\n"
-"\t\t\n"
-"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-"\t\t\t"
-msgstr ""
-
-msgid "Progress:"
-msgstr ""
-
 msgid "Show more Projects"
 msgstr ""
 
@@ -7373,6 +7281,9 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
+msgid "This team does not have a video conference configured."
+msgstr ""
+
 #, python-format
 msgid "The %(team_type)s was changed successfully."
 msgstr ""
@@ -7791,31 +7702,41 @@ msgstr "تغییرات‌تان ذخیره شده‌اند."
 #~ msgid "Active"
 #~ msgstr "فعال"
 
+#, fuzzy
+#~| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+#~ msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
+#~ msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
+
+#~ msgid "Premium"
+#~ msgstr "اعلاء"
+
 #~ msgid "Restricted"
 #~ msgstr "محدودشده"
 
-#, fuzzy
-#~| msgid "options for the room, that are represented in the bigbluebutton API"
-#~ msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
-#~ msgstr "گزینه‌ها برای اتاقی که در واسط برنامه‌نویسی bigbluebutton نمایش داده می‌شود"
+#~ msgid "Room Type"
+#~ msgstr "نوع اتاق"
 
-#, fuzzy
-#~| msgid "the welcome message, that is displayed to attendees"
-#~ msgid "DEPRECATED! the welcome message, that is displayed to attendees"
-#~ msgstr "پیام خوش‌آمدگویی که به شرکت‌کننده‌ها نشان‌داده‌می‌شود"
-
-#, fuzzy
-#~| msgid "Participants"
-#~ msgid "participants"
-#~ msgstr "شرکت‌کنندگان"
-
-#, fuzzy
-#~| msgid "View conference"
-#~ msgid "Leave video conference"
-#~ msgstr "کنفرانس را ببینید"
+#~ msgid "the rooms welcome message"
+#~ msgstr "پیام خوش‌آمدگویی در اتاق‌ها"
 
 #~ msgid "Can't find workshop with slug '{}'"
 #~ msgstr "کارگروهی با آدرس کاربرپسند '{}' یافت نمی‌شود"
 
+#, fuzzy
+#~ msgid "DEPRECATED! options for the room, that are represented in the bigbluebutton API"
+#~ msgstr "گزینه‌ها برای اتاقی که در واسط برنامه‌نویسی bigbluebutton نمایش داده می‌شود"
+
+#, fuzzy
+#~ msgid "DEPRECATED! the welcome message, that is displayed to attendees"
+#~ msgstr "پیام خوش‌آمدگویی که به شرکت‌کننده‌ها نشان‌داده‌می‌شود"
+
+#, fuzzy
+#~ msgid "Leave video conference"
+#~ msgstr "کنفرانس را ببینید"
+
 #~ msgid "Restart"
 #~ msgstr "بازراه‌اندازی"
+
+#, fuzzy
+#~ msgid "participants"
+#~ msgstr "شرکت‌کنندگان"
