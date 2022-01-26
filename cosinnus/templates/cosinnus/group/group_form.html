@@ -242,7 +242,11 @@
                             {% trans "Description and Infos" as description_long_label %}
                             {% captureas description_long_legend %}
                                 {{ group_model_class.get_trans.FORMFIELD_DESCRIPTION_LEGEND }}
-                                {% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+								{% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+									{% trans "This is a platform-wide description that can be seen by any portal member and will be shown on the microsite." %}
+								{% else %}
+									{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+								{% endif %}
                                 {% include 'cosinnus/texts/view_microsite_link.html' with group=group %}
                                 {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
                             {% endcaptureas %}
@@ -253,7 +257,11 @@
                             {% trans "Contact info" as contact_info_label %}
                             {% captureas contact_info_legend %}
                                 {% trans "How you can be reached, addresses, social media, etc..." %}
-                                {% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+								{% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+									{% trans "This is a platform-wide description that can be seen by any portal member and will be shown on the microsite." %}
+								{% else %}
+									{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+								{% endif %}
                                 {% include 'cosinnus/texts/view_microsite_link.html' with group=group %}
                                 {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
                             {% endcaptureas %}
@@ -268,7 +276,11 @@
 		                        {% else %}
 		                            {% trans "Describe the project in a few sentences." %}
 		                        {% endif %}
-		                        {% trans "This description will be publicly visible." %}
+								{% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+									{% trans "This description will be visible on the entire portal." %}
+								{% else %}
+		                        	{% trans "This description will be publicly visible." %}
+								{% endif %}
 		                        {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="group" %}
 		                    {% endcaptureas %}
 	                        {% include 'cosinnus/fields/default_field.html' with label=desc_label legend=group_legend field_id=form.forms.obj.description.id_for_label %}
@@ -474,16 +486,23 @@
 				                    <div class="group-public-warning-area" {% if not object or not object.public %}style="display: none;"{% endif %} id="group-visibility-warning">
 		                                <i class="fa fa-fw fa-globe"></i>
 		                                {% if group_model == "CosinnusSociety" %}
-		                                    {% trans "This group will be set to be publicly visible!" %}
+		                                    {% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}{% trans "This group will be set to be visible on the entire portal!" %}{% else %}{% trans "This group will be set to be publicly visible!" %}{% endif %}
 		                                {% else %}
-		                                    {% trans "This project will be set to be publicly visible!" %}
+											{% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}{% trans "This project will be set to be visible on the entire portal!" %}{% else %}{% trans "This project will be set to be publicly visible!" %}{% endif %}
 		                                {% endif %}
-		                                <br/><br/>
-		                                {% trans "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be publicly visible by default (this can be changed for each item on creation). Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!" %}
-		                                <br/><br/>
-		                                {% trans "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the public visibility setting!" %}
-		                                <br/><br/>
-		                                {% trans "If you do not wish this, you can change the visibility setting above." %}
+										{% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+											<br/><br/>
+											{% trans "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be platform-wide open by default (this can be changed for each item on creation)." %}
+											<br/><br/>
+											{% trans "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the 'platform-wide' setting!" %}
+										{% else %}		                                
+											<br/><br/>
+		                                	{% trans "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be publicly visible by default (this can be changed for each item on creation). Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!" %}
+		                                	<br/><br/>
+		                                	{% trans "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the public visibility setting!" %}
+										{% endif %}
+		                                	<br/><br/>
+		                                	{% trans "If you do not wish this, you can change the visibility setting above." %}
 		                            </div>
 		                            <script type="text/javascript">
 		                                {# show or hide a visibility warning #}
@@ -501,7 +520,7 @@
 				                {% captureas visibility_field_html %}
 				                    <select name="public" id="group-public-field">
 		                                <option default value="false">{{ group_model_class.get_trans.FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY }}</option>
-		                                <option {% if object and object.public %}selected{% endif %} value="true">{% trans "Public (visible without login)" %}</option>
+		                                <option {% if object and object.public %}selected{% endif %} value="true">{% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}{% trans "Platform-wide (visible for all members of the platform)" %}{% else %}{% trans "Public (visible without login)" %}{% endif %}</option>
 		                            </select>
 				                {% endcaptureas %}
 				                {% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html field=form.forms.media_tag.visibility field_id="group-public-field" label=visibility_label legend=visibility_legend extra_html=visibility_warning_html %}
@@ -557,7 +576,11 @@
 		                            {% trans "Description and Infos" as description_long_label %}
 		                            {% captureas description_long_legend %}
 		                                {% if group_model == "CosinnusSociety" %}{% trans "Describe the group in a few sentences." %}{% else %}{% trans "Describe the project in a few sentences." %}{% endif %}
-		                                {% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+										{% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+											{% trans "This is a platform-wide description that can be seen by any portal member and will be shown on the microsite." %}
+										{% else %}
+											{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+										{% endif %}
 		                                {% include 'cosinnus/texts/view_microsite_link.html' with group=group %}
 		                                {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
 		                            {% endcaptureas %}
@@ -572,7 +595,11 @@
 			                        {% trans "Contact info" as contact_info_label %}
 				                    {% captureas contact_info_legend %}
 				                    	{% trans "How you can be reached, addresses, social media, etc..." %}
-				                    	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+										{% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+											{% trans "This is a platform-wide description that can be seen by any portal member and will be shown on the microsite." %}
+										{% else %}
+											{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+										{% endif %}
 				                    	{% include 'cosinnus/texts/view_microsite_link.html' with group=group %}
 				                    	{% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
 				                    {% endcaptureas %}
@@ -594,7 +621,11 @@
 		                        {% endif %}
 	
 			                    {# Microsite Public Apps Field #}
-				                {% trans "From which apps should public items be shown on the microsite?" as microsite_apps_label %}
+								{% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+									{% trans "From which apps should platform-wide items be shown on the microsite?" as microsite_apps_label %}
+								{% else %}
+				                	{% trans "From which apps should public items be shown on the microsite?" as microsite_apps_label %}
+								{% endif %}
 				                {% captureas microsite_apps_html %}
 				                    <div class="input-area" style="padding: 5px;">
 		                                {% for app_option in microsite_public_apps_selection %}

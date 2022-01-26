@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-06 15:36+0100\n"
+"POT-Creation-Date: 2022-01-21 09:41+0100\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -231,18 +231,6 @@ msgstr ""
 
 msgid "Bookmarked Users list"
 msgstr ""
-
-msgid "General"
-msgstr "همگانی"
-
-msgid "Active"
-msgstr "فعال"
-
-msgid "Restricted"
-msgstr "محدودشده"
-
-msgid "Premium"
-msgstr "اعلاء"
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
@@ -685,15 +673,15 @@ msgstr "هفته‌ی بعد"
 msgid "Next month"
 msgstr "ماه بعد"
 
-msgid "Fairmeeting"
-msgstr ""
-
 #, fuzzy
 #| msgid "View conference"
 msgid "No video conference"
 msgstr "کنفرانس را ببینید"
 
 msgid "BBB-Meeting"
+msgstr ""
+
+msgid "Fairmeeting"
 msgstr ""
 
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
@@ -899,6 +887,9 @@ msgstr "سرور BBB"
 
 msgid "BBB Server for Premium Conferences"
 msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
+
+msgid "BBB Recording API server"
+msgstr ""
 
 msgid "BBB API Parameters"
 msgstr ""
@@ -1662,6 +1653,9 @@ msgstr ""
 msgid "Team members only"
 msgstr ""
 
+msgid "Platform-wide (visible for all portal members)"
+msgstr ""
+
 msgid "Public (visible without login)"
 msgstr ""
 
@@ -2072,6 +2066,12 @@ msgstr ""
 msgid "Conference admin page"
 msgstr "نوع اتاق کنفرانس"
 
+msgid "Effective BBB-Parameters"
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this BBB Room."
+msgstr ""
+
 msgid "select this page"
 msgstr "این برگه را انتخاب کن"
 
@@ -2195,8 +2195,34 @@ msgstr ""
 msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
 msgstr ""
 
+msgid "BBB-Room Settings"
+msgstr ""
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr ""
+
+msgid "Inherited BBB-Parameters"
+msgstr ""
+
+msgid "These parameters are the ones this object inherits from higher up settings or the portal defaults. These are the ones that will be used if this object or deeper objects do not define any further parameters."
+msgstr ""
+
+msgid "The next higher up object in the BBB hierarchy chain is"
+msgstr ""
+
+msgid "This object has no higher up object in the BBB hierarchy chain. The displayed values are the configured portal defaults."
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this source object."
+msgstr ""
+
+msgid "You can find the BBBRoom object for this source object here"
+msgstr ""
+
+#, fuzzy
+#| msgid "BBB ROOM"
+msgid "BBB Room"
+msgstr "اتاق BBB"
 
 msgid "Administration"
 msgstr ""
@@ -2406,6 +2432,9 @@ msgid "Manage Participation Applications"
 msgstr ""
 
 msgid "Manage Temporary User Accounts"
+msgstr ""
+
+msgid "Recorded Meetings"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -2899,6 +2928,26 @@ msgstr ""
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr ""
 
+msgid "Unfortunately recorded meetings are currently not yet available for this server!"
+msgstr ""
+
+msgid "Recording of meetings is only available for premium conferences!"
+msgstr ""
+
+msgid "Make a premium booking here"
+msgstr ""
+
+msgid "Conference Bookings"
+msgstr ""
+
+msgid "This is a list of all recorded meetings for this conference. Recent recordings may take a few minutes to appear."
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no pending invitations."
+msgid "There are no recorded meetings yet."
+msgstr "هیچ دعوت‌نامه‌ی معوقی وجود ندارد."
+
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr ""
 
@@ -3011,6 +3060,17 @@ msgstr ""
 msgid "Check this to show rocket chat in the sidebar."
 msgstr ""
 
+#, fuzzy
+#| msgid "View conference"
+msgid "BBB video conference options"
+msgstr "کنفرانس را ببینید"
+
+msgid "These settings will be the default for all conference events in this room."
+msgstr ""
+
+msgid "You may still override these options in each individual event."
+msgstr ""
+
 msgid "Go to Room"
 msgstr ""
 
@@ -3030,9 +3090,6 @@ msgstr ""
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
 msgstr ""
 
-msgid "Conference Bookings"
-msgstr ""
-
 msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
 msgstr ""
 
@@ -3042,6 +3099,14 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr ""
 
+msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Premium"
+msgid "Premium only"
+msgstr "اعلاء"
+
 msgid "Turn on microphone on entering"
 msgstr ""
 
@@ -3049,6 +3114,9 @@ msgid "Default"
 msgstr ""
 
 msgid "Turn on camera on entering"
+msgstr ""
+
+msgid "Allow recording"
 msgstr ""
 
 msgid "Temporary Users"
@@ -3197,6 +3265,25 @@ msgstr ""
 msgid "Decline"
 msgstr ""
 
+msgid "Started"
+msgstr ""
+
+msgid "Length"
+msgstr ""
+
+msgid "Delete (not yet implemented)"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
+msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
+
+#, fuzzy
+#| msgid "Delete reported item..."
+msgid "Delete recorded meeting"
+msgstr "مورد گزارش‌شده را پاک کن..."
+
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr ""
 
@@ -3300,6 +3387,9 @@ msgid "BBB"
 msgstr ""
 
 msgid "BBB Premium"
+msgstr ""
+
+msgid "BBB Recording API"
 msgstr ""
 
 msgid "Not set"
@@ -3567,14 +3657,6 @@ msgstr ""
 msgid "About the conference"
 msgstr ""
 
-msgctxt "time"
-msgid "o'clock"
-msgstr ""
-
-msgctxt "time"
-msgid "until"
-msgstr ""
-
 msgid "More infos..."
 msgstr ""
 
@@ -3836,6 +3918,9 @@ msgstr ""
 msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
 msgstr ""
 
+msgid "General"
+msgstr "همگانی"
+
 msgid "Facebook-Integration"
 msgstr ""
 
@@ -3863,6 +3948,9 @@ msgstr ""
 msgid "Description and Infos"
 msgstr ""
 
+msgid "This is a platform-wide description that can be seen by any portal member and will be shown on the microsite."
+msgstr ""
+
 msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
 msgstr ""
 
@@ -3879,6 +3967,9 @@ msgid "Describe the group in a few sentences."
 msgstr ""
 
 msgid "Describe the project in a few sentences."
+msgstr ""
+
+msgid "This description will be visible on the entire portal."
 msgstr ""
 
 msgid "This description will be publicly visible."
@@ -3947,6 +4038,12 @@ msgstr ""
 msgid "Select related Projects/Groups"
 msgstr ""
 
+msgid "These settings will be the default for all conference events."
+msgstr ""
+
+msgid "You may still override these options in each conference room and in individual events."
+msgstr ""
+
 msgid "Group/Project is publicly visible"
 msgstr ""
 
@@ -3970,10 +4067,22 @@ msgstr ""
 msgid "This will be the default setting for all content created by members."
 msgstr ""
 
+msgid "This group will be set to be visible on the entire portal!"
+msgstr ""
+
 msgid "This group will be set to be publicly visible!"
 msgstr ""
 
+msgid "This project will be set to be visible on the entire portal!"
+msgstr ""
+
 msgid "This project will be set to be publicly visible!"
+msgstr ""
+
+msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be platform-wide open by default (this can be changed for each item on creation)."
+msgstr ""
+
+msgid "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the 'platform-wide' setting!"
 msgstr ""
 
 msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be publicly visible by default (this can be changed for each item on creation). Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
@@ -3983,6 +4092,9 @@ msgid "As administrator of a group or project, it is your responsibility to ensu
 msgstr ""
 
 msgid "If you do not wish this, you can change the visibility setting above."
+msgstr ""
+
+msgid "Platform-wide (visible for all members of the platform)"
 msgstr ""
 
 msgid "Visibility on other platforms"
@@ -4010,6 +4122,9 @@ msgid "A public contact form, which non-registered users can use to contact grou
 msgstr ""
 
 msgid "Contact Form"
+msgstr ""
+
+msgid "From which apps should platform-wide items be shown on the microsite?"
 msgstr ""
 
 msgid "From which apps should public items be shown on the microsite?"
@@ -4850,6 +4965,9 @@ msgid "Select topic"
 msgstr ""
 
 msgid "Visibility"
+msgstr ""
+
+msgid "This item will be visible on the entire portal. This means that any portal member will be able to see it."
 msgstr ""
 
 msgid "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
@@ -5856,6 +5974,10 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Content from my Groups and Projects"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Platform content"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -7665,6 +7787,12 @@ msgstr "در حال حاضر شما عضو %s نیستید! اگر مایلید 
 
 msgid "Your changes have been saved."
 msgstr "تغییرات‌تان ذخیره شده‌اند."
+
+#~ msgid "Active"
+#~ msgstr "فعال"
+
+#~ msgid "Restricted"
+#~ msgstr "محدودشده"
 
 #, fuzzy
 #~| msgid "options for the room, that are represented in the bigbluebutton API"

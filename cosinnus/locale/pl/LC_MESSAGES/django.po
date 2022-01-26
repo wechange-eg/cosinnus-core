@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-06 15:36+0100\n"
+"POT-Creation-Date: 2022-01-21 09:41+0100\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -236,18 +236,6 @@ msgstr "Lista zakładek"
 
 msgid "Bookmarked Users list"
 msgstr "Lista użytkowników oznaczonych zakładkami"
-
-msgid "General"
-msgstr "Ogólne"
-
-msgid "Active"
-msgstr "Aktywny/-a"
-
-msgid "Restricted"
-msgstr "Ograniczony"
-
-msgid "Premium"
-msgstr "Premium"
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
@@ -691,15 +679,15 @@ msgstr "W przyszłym tygodniu"
 msgid "Next month"
 msgstr "W przyszłym miesiącu"
 
-msgid "Fairmeeting"
-msgstr ""
-
 #, fuzzy
 #| msgid "View conference"
 msgid "No video conference"
 msgstr "Widok konferencji"
 
 msgid "BBB-Meeting"
+msgstr ""
+
+msgid "Fairmeeting"
 msgstr ""
 
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
@@ -905,6 +893,9 @@ msgstr "Serwer BBB"
 
 msgid "BBB Server for Premium Conferences"
 msgstr "Serwer BBB dla Konferencji Premium"
+
+msgid "BBB Recording API server"
+msgstr ""
 
 msgid "BBB API Parameters"
 msgstr ""
@@ -1669,6 +1660,9 @@ msgstr "Tylko ja"
 msgid "Team members only"
 msgstr "Tylko członkowie zespołu"
 
+msgid "Platform-wide (visible for all portal members)"
+msgstr ""
+
 msgid "Public (visible without login)"
 msgstr "Publiczne (widoczne bez logowania)"
 
@@ -2079,6 +2073,12 @@ msgstr ""
 msgid "Conference admin page"
 msgstr "Nazwa konferencji"
 
+msgid "Effective BBB-Parameters"
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this BBB Room."
+msgstr ""
+
 msgid "select this page"
 msgstr "wybierz tę stronę"
 
@@ -2202,8 +2202,38 @@ msgstr ""
 msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
 msgstr ""
 
+#, fuzzy
+#| msgid "Settings"
+msgid "BBB-Room Settings"
+msgstr "Ustawienia"
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr "Możesz ustawić ustawienia konferencji na tym poziomie. Wszystkie obiekty pod tym poziomem hierarchii odziedziczą te ustawienia, chyba że same wprowadziły ustawienia konferencji."
+
+#, fuzzy
+#| msgid "Invited Projects"
+msgid "Inherited BBB-Parameters"
+msgstr "Zaproszone Projekty"
+
+msgid "These parameters are the ones this object inherits from higher up settings or the portal defaults. These are the ones that will be used if this object or deeper objects do not define any further parameters."
+msgstr ""
+
+msgid "The next higher up object in the BBB hierarchy chain is"
+msgstr ""
+
+msgid "This object has no higher up object in the BBB hierarchy chain. The displayed values are the configured portal defaults."
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this source object."
+msgstr ""
+
+msgid "You can find the BBBRoom object for this source object here"
+msgstr ""
+
+#, fuzzy
+#| msgid "BBB Room Visits"
+msgid "BBB Room"
+msgstr "Wizyty w Pokoju BBB"
 
 msgid "Administration"
 msgstr "Administracja"
@@ -2425,6 +2455,9 @@ msgstr "Zarządzaj Aplikacjami Uczestnictwa"
 #| msgid "Temporary User Accounts"
 msgid "Manage Temporary User Accounts"
 msgstr "Tymczasowe Konto Użytkownika"
+
+msgid "Recorded Meetings"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -2929,6 +2962,26 @@ msgstr "(nie wybrano żadnych warunków)"
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr "Jeśli plik został przesłany, wtedy osoby składające aplikację będą zobowiązani w tym pliku wyrazić zgodę na te warunki, zaznaczając odpowiednie pole wyboru"
 
+msgid "Unfortunately recorded meetings are currently not yet available for this server!"
+msgstr ""
+
+msgid "Recording of meetings is only available for premium conferences!"
+msgstr ""
+
+msgid "Make a premium booking here"
+msgstr ""
+
+msgid "Conference Bookings"
+msgstr "Rezerwacje konferencyjne"
+
+msgid "This is a list of all recorded meetings for this conference. Recent recordings may take a few minutes to appear."
+msgstr ""
+
+#, fuzzy
+#| msgid "There are no rooms yet."
+msgid "There are no recorded meetings yet."
+msgstr "Nie ma jeszcze żadnych pokoi."
+
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr "Tutaj masz możliwość przygotowania tekstu informacyjnego dla wszystkich członków konferencji. Zostanie on wysłany automatycznie na 1 tydzień, 1 dzień i/lub 1 godzinę przed jej rozpoczęciem. Mail z powiadomieniem zawsze zawiera link do konferencji"
 
@@ -3042,6 +3095,19 @@ msgstr "Usuń zaznaczenie, aby ukryć pokój dla uczestników (nadal będziesz m
 msgid "Check this to show rocket chat in the sidebar."
 msgstr "Zaznacz, aby pokazać Rocket.Chat na pasku bocznym."
 
+#, fuzzy
+#| msgid "View conference"
+msgid "BBB video conference options"
+msgstr "Widok konferencji"
+
+#, fuzzy
+#| msgid "This will be the default setting for all content created by members."
+msgid "These settings will be the default for all conference events in this room."
+msgstr "Będzie to domyślne ustawienie dla wszystkich treści utworzonych przez użytkowników."
+
+msgid "You may still override these options in each individual event."
+msgstr ""
+
 msgid "Go to Room"
 msgstr "Przejdź do pokoju"
 
@@ -3061,9 +3127,6 @@ msgstr "Usuń pokój"
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
 msgstr "Twoja konferencja jest nadal w trybie przedprocesowym. Masz dostęp do wszystkich funkcji, ale możesz z nich korzystać bez ograniczeń tylko z kilkoma osobami. Aby zapewnić pełną wydajność Twojej konferencji z wieloma użytkownikami, zarezerwuj tutaj bezpłatnie wystarczającą ilość miejsc:"
 
-msgid "Conference Bookings"
-msgstr "Rezerwacje konferencyjne"
-
 msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
 msgstr "Istnieje kilka rodzajów pokoi konferencyjnych, z których każda ma inny interfejs i funkcjonalność. Tworząc różne sale i ustawiając je w wybranej przez siebie kolejności, możesz dostosować wygląd i klimat swojej konferencji."
 
@@ -3073,6 +3136,14 @@ msgstr "Możesz bezpośrednio tworzyć wydarzenia konferencyjne dla pokoi, używ
 msgid "There are no rooms yet."
 msgstr "Nie ma jeszcze żadnych pokoi."
 
+msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Premium"
+msgid "Premium only"
+msgstr "Premium"
+
 msgid "Turn on microphone on entering"
 msgstr ""
 
@@ -3080,6 +3151,9 @@ msgid "Default"
 msgstr ""
 
 msgid "Turn on camera on entering"
+msgstr ""
+
+msgid "Allow recording"
 msgstr ""
 
 #, fuzzy
@@ -3252,6 +3326,29 @@ msgstr "Zaakceptuj"
 msgid "Decline"
 msgstr "Odrzuć"
 
+#, fuzzy
+#| msgid "Starred"
+msgid "Started"
+msgstr "Gwiaździste"
+
+msgid "Length"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete elements"
+msgid "Delete (not yet implemented)"
+msgstr "Usuń elementy"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to delete room \"%(title)s\"?"
+msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
+msgstr "Czy na pewno chcesz usunąć pokój \"%(title)s\"?"
+
+#, fuzzy
+#| msgid "Delete reported item..."
+msgid "Delete recorded meeting"
+msgstr "Usuń zgłoszony element..."
+
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr "Przegląd - Konferencje, pokoje i warsztaty z własnymi ustawieniami Serwera BBB"
 
@@ -3360,6 +3457,9 @@ msgstr "BBB"
 
 msgid "BBB Premium"
 msgstr "BBB Premium"
+
+msgid "BBB Recording API"
+msgstr ""
 
 msgid "Not set"
 msgstr "Nie ustawiono"
@@ -3631,14 +3731,6 @@ msgstr "Maksymalna ilość uczestników"
 msgid "About the conference"
 msgstr "O tej konferencji"
 
-msgctxt "time"
-msgid "o'clock"
-msgstr "o godzinie"
-
-msgctxt "time"
-msgid "until"
-msgstr "do"
-
 msgid "More infos..."
 msgstr "Więcej informacji..."
 
@@ -3901,6 +3993,9 @@ msgstr "Twój nowy projekt zostanie także wyświetlony w kategorii idei aby ka�
 msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
 msgstr "Możesz też oczywiście utworzyć projekt bez łączenia go z ideą - aby to zrobić, po prostu kliknij na \"Utwórz Projekt\" po lewej stronie."
 
+msgid "General"
+msgstr "Ogólne"
+
 msgid "Facebook-Integration"
 msgstr "Integracja z Facebookiem"
 
@@ -3928,6 +4023,11 @@ msgstr "Wybierz Projekty/Grupy"
 msgid "Description and Infos"
 msgstr "Opis i informacje"
 
+#, fuzzy
+#| msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
+msgid "This is a platform-wide description that can be seen by any portal member and will be shown on the microsite."
+msgstr "Jest to publiczny opis i może być widoczny dla każdego na mikrostronie."
+
 msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
 msgstr "Jest to publiczny opis i może być widoczny dla każdego na mikrostronie."
 
@@ -3945,6 +4045,11 @@ msgstr "Opisz swoją grupę w kilku zdaniach."
 
 msgid "Describe the project in a few sentences."
 msgstr "Opisz projekt w kilku zdaniach."
+
+#, fuzzy
+#| msgid "This description will be publicly visible."
+msgid "This description will be visible on the entire portal."
+msgstr "Opis będzie widoczny publicznie."
 
 msgid "This description will be publicly visible."
 msgstr "Opis będzie widoczny publicznie."
@@ -4013,6 +4118,14 @@ msgstr "Czy są jakieś projekty/grupy związane z tą grupą?"
 msgid "Select related Projects/Groups"
 msgstr "Wybierz powiązane Projekty/Grupy"
 
+#, fuzzy
+#| msgid "This will be the default setting for all content created by members."
+msgid "These settings will be the default for all conference events."
+msgstr "Będzie to domyślne ustawienie dla wszystkich treści utworzonych przez użytkowników."
+
+msgid "You may still override these options in each conference room and in individual events."
+msgstr ""
+
 msgid "Group/Project is publicly visible"
 msgstr "Grupa/projekt jest widoczny publicznie"
 
@@ -4036,11 +4149,31 @@ msgstr "Ustawienia prywatności"
 msgid "This will be the default setting for all content created by members."
 msgstr "Będzie to domyślne ustawienie dla wszystkich treści utworzonych przez użytkowników."
 
+#, fuzzy
+#| msgid "This group will be set to be publicly visible!"
+msgid "This group will be set to be visible on the entire portal!"
+msgstr "Ta grupa będzie widoczna publicznie!"
+
 msgid "This group will be set to be publicly visible!"
 msgstr "Ta grupa będzie widoczna publicznie!"
 
+#, fuzzy
+#| msgid "This project will be set to be publicly visible!"
+msgid "This project will be set to be visible on the entire portal!"
+msgstr "Ten projekt będzie widoczny publicznie!"
+
 msgid "This project will be set to be publicly visible!"
 msgstr "Ten projekt będzie widoczny publicznie!"
+
+#, fuzzy
+#| msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be publicly visible by default (this can be changed for each item on creation). Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
+msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be platform-wide open by default (this can be changed for each item on creation)."
+msgstr "Oznacza to, że każdy zarejestrowany użytkownik może mieć dostęp do tego projektu/grupy, ale tylko członkowie mogą tworzyć treści. Dodatkowo, wszystkie treści będą domyślnie widoczne publicznie (można to zmienić dla każdego stworzonego elementu). Treści widoczne publicznie są widoczne dla KAŻDEGO w Internecie i mogą być zawarte w wynikach wyszukiwania!"
+
+#, fuzzy
+#| msgid "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the public visibility setting!"
+msgid "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the 'platform-wide' setting!"
+msgstr "Twoją odpowiedzialnością jako administratora grupy lub projektu jest zapewnienie, że treści umieszczone przez członków nie naruszają praw autorskich lub innych praw. Prosimy o uważną kontrolę, w szczególności ustawiając widoczność publiczną!"
 
 msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be publicly visible by default (this can be changed for each item on creation). Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
 msgstr "Oznacza to, że każdy zarejestrowany użytkownik może mieć dostęp do tego projektu/grupy, ale tylko członkowie mogą tworzyć treści. Dodatkowo, wszystkie treści będą domyślnie widoczne publicznie (można to zmienić dla każdego stworzonego elementu). Treści widoczne publicznie są widoczne dla KAŻDEGO w Internecie i mogą być zawarte w wynikach wyszukiwania!"
@@ -4050,6 +4183,9 @@ msgstr "Twoją odpowiedzialnością jako administratora grupy lub projektu jest 
 
 msgid "If you do not wish this, you can change the visibility setting above."
 msgstr "Ustawienie widoczności można zmienić powyżej."
+
+msgid "Platform-wide (visible for all members of the platform)"
+msgstr ""
 
 msgid "Visibility on other platforms"
 msgstr "Widoczność na innych platformach"
@@ -4078,6 +4214,11 @@ msgstr "Publiczny formularz kontaktowy, za pomocą którego niezarejestrowani u�
 #, fuzzy
 msgid "Contact Form"
 msgstr "Inform. kontaktowe"
+
+#, fuzzy
+#| msgid "From which apps should public items be shown on the microsite?"
+msgid "From which apps should platform-wide items be shown on the microsite?"
+msgstr "Z jakich aplikacji mogą być widoczne elementy na mikrostronie?"
 
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "Z jakich aplikacji mogą być widoczne elementy na mikrostronie?"
@@ -5101,6 +5242,9 @@ msgstr "Wybierz temat"
 msgid "Visibility"
 msgstr "Widoczność"
 
+msgid "This item will be visible on the entire portal. This means that any portal member will be able to see it."
+msgstr ""
+
 msgid "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
 msgstr "Ten element po zapisaniu będzie widoczny publicznie! Oznacza to, że każdy w Internecie będzie miał do niego dostęp i może on być wyświetlany w wynikach wyszukiwania."
 
@@ -6120,6 +6264,11 @@ msgstr "Uwaga od organizatorów"
 #, fuzzy
 msgid "Content from my Groups and Projects"
 msgstr "Treść tylko z moich Grup i Projektów"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Platform content"
+msgstr "Projekt Publiczny"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -7989,6 +8138,20 @@ msgstr "Obecnie nie jesteś członkiem %s! Jeśli chcesz nim zostać, możesz wy
 
 msgid "Your changes have been saved."
 msgstr "Twoje zmiany zostały zapisane."
+
+#~ msgid "Active"
+#~ msgstr "Aktywny/-a"
+
+#~ msgid "Restricted"
+#~ msgstr "Ograniczony"
+
+#~ msgctxt "time"
+#~ msgid "o'clock"
+#~ msgstr "o godzinie"
+
+#~ msgctxt "time"
+#~ msgid "until"
+#~ msgstr "do"
 
 #~ msgid "Allow temporary users accounts for this conference."
 #~ msgstr "Zezwalaj na tymczasowe konta użytkowników dla tej konferencji."

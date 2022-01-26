@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-06 15:36+0100\n"
+"POT-Creation-Date: 2022-01-21 09:41+0100\n"
 "Language: az\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -234,19 +234,6 @@ msgid "Bookmark list"
 msgstr ""
 
 msgid "Bookmarked Users list"
-msgstr ""
-
-msgid "General"
-msgstr "Ümumi"
-
-#, fuzzy
-msgid "Active"
-msgstr "Aktivləşdirin"
-
-msgid "Restricted"
-msgstr ""
-
-msgid "Premium"
 msgstr ""
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
@@ -690,14 +677,14 @@ msgstr "Növbəti həftə"
 msgid "Next month"
 msgstr "Növbəti ay"
 
-msgid "Fairmeeting"
-msgstr ""
-
 #, fuzzy
 msgid "No video conference"
 msgstr "Video konfrans Serveri"
 
 msgid "BBB-Meeting"
+msgstr ""
+
+msgid "Fairmeeting"
 msgstr ""
 
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
@@ -904,6 +891,9 @@ msgid "BBB Server"
 msgstr ""
 
 msgid "BBB Server for Premium Conferences"
+msgstr ""
+
+msgid "BBB Recording API server"
 msgstr ""
 
 msgid "BBB API Parameters"
@@ -1713,6 +1703,9 @@ msgstr "Yalnız mən"
 msgid "Team members only"
 msgstr "Yalnız komanda üzvləri"
 
+msgid "Platform-wide (visible for all portal members)"
+msgstr ""
+
 msgid "Public (visible without login)"
 msgstr "İctimaiyyətə açıq (giriş olmadan görünür)"
 
@@ -2129,6 +2122,12 @@ msgstr ""
 msgid "Conference admin page"
 msgstr "Video konfrans Serveri"
 
+msgid "Effective BBB-Parameters"
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this BBB Room."
+msgstr ""
+
 msgid "select this page"
 msgstr "bu səhifəni seç"
 
@@ -2252,8 +2251,37 @@ msgstr ""
 msgid "You can define BBB server participant capacity limits here for specific time intervals for the premium BBB server. These limits only act as a guideline for portal administrators to help decide if additional BBB server capacity should be added."
 msgstr ""
 
+#, fuzzy
+#| msgid "Settings"
+msgid "BBB-Room Settings"
+msgstr "Parametrlər"
+
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr ""
+
+#, fuzzy
+#| msgid "Invited Projects"
+msgid "Inherited BBB-Parameters"
+msgstr "Dəvət olunmuş Layihələr"
+
+msgid "These parameters are the ones this object inherits from higher up settings or the portal defaults. These are the ones that will be used if this object or deeper objects do not define any further parameters."
+msgstr ""
+
+msgid "The next higher up object in the BBB hierarchy chain is"
+msgstr ""
+
+msgid "This object has no higher up object in the BBB hierarchy chain. The displayed values are the configured portal defaults."
+msgstr ""
+
+msgid "These parameters will be the effective parameters used for BBB APP-calls for this source object."
+msgstr ""
+
+msgid "You can find the BBBRoom object for this source object here"
+msgstr ""
+
+#, fuzzy
+msgid "BBB Room"
+msgstr "Komanda Tipindən"
 
 msgid "Administration"
 msgstr "İdarəetmə"
@@ -2486,6 +2514,9 @@ msgstr ""
 #| msgid "Team Description"
 msgid "Manage Temporary User Accounts"
 msgstr "Komandanın Təsviri"
+
+msgid "Recorded Meetings"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -2999,6 +3030,26 @@ msgstr ""
 msgid "If a file is uploaded, applicants will have to agree to these conditions in that file by checking a checkbox"
 msgstr ""
 
+msgid "Unfortunately recorded meetings are currently not yet available for this server!"
+msgstr ""
+
+msgid "Recording of meetings is only available for premium conferences!"
+msgstr ""
+
+msgid "Make a premium booking here"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Bookings"
+msgstr "Video konfrans Serveri"
+
+msgid "This is a list of all recorded meetings for this conference. Recent recordings may take a few minutes to appear."
+msgstr ""
+
+#, fuzzy
+msgid "There are no recorded meetings yet."
+msgstr "Hələlik əşyalar yoxdur"
+
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr ""
 
@@ -3119,6 +3170,18 @@ msgstr ""
 msgid "Check this to show rocket chat in the sidebar."
 msgstr ""
 
+#, fuzzy
+msgid "BBB video conference options"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+#| msgid "This will be the default setting for all content created by members."
+msgid "These settings will be the default for all conference events in this room."
+msgstr "Bu üzvlər tərəfindən yaradılan bütün məzmun üçün standart parametr olacaq."
+
+msgid "You may still override these options in each individual event."
+msgstr ""
+
 msgid "Go to Room"
 msgstr ""
 
@@ -3140,10 +3203,6 @@ msgstr "Profili ləğv edin"
 msgid "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:"
 msgstr ""
 
-#, fuzzy
-msgid "Conference Bookings"
-msgstr "Video konfrans Serveri"
-
 msgid "There are several types of conference rooms, each with their own different interface and functionality. By creating different rooms and putting them in the order you like, you can customise the look and feel of your conference."
 msgstr ""
 
@@ -3154,6 +3213,13 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr "Hələlik əşyalar yoxdur"
 
+msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
+msgstr ""
+
+#, fuzzy
+msgid "Premium only"
+msgstr "Tədbir Yaradın"
+
 msgid "Turn on microphone on entering"
 msgstr ""
 
@@ -3161,6 +3227,9 @@ msgid "Default"
 msgstr ""
 
 msgid "Turn on camera on entering"
+msgstr ""
+
+msgid "Allow recording"
 msgstr ""
 
 #, fuzzy
@@ -3331,6 +3400,27 @@ msgstr "İstifadəçini qəbul edin"
 msgid "Decline"
 msgstr "İstifadəçiyə imtina edin"
 
+#, fuzzy
+msgid "Started"
+msgstr "Başlanğıc tarixi."
+
+msgid "Length"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete elements"
+msgid "Delete (not yet implemented)"
+msgstr "Elementləri silin"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
+msgstr "Siz həqiqətən \"%(title)s\" elanını silmək istəyirsiniz?"
+
+#, fuzzy
+#| msgid "Delete reported item..."
+msgid "Delete recorded meeting"
+msgstr "Məruzə olunan elementi sil..."
+
 msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
 msgstr ""
 
@@ -3445,6 +3535,9 @@ msgid "BBB"
 msgstr ""
 
 msgid "BBB Premium"
+msgstr ""
+
+msgid "BBB Recording API"
 msgstr ""
 
 #, fuzzy
@@ -3725,15 +3818,6 @@ msgstr ""
 msgid "About the conference"
 msgstr "Layihə haqqında"
 
-msgctxt "time"
-msgid "o'clock"
-msgstr ""
-
-#, fuzzy
-msgctxt "time"
-msgid "until"
-msgstr "Qədər"
-
 #, fuzzy
 msgid "More infos..."
 msgstr "Məlumat yoxdur."
@@ -4005,6 +4089,9 @@ msgstr "Yeni layihəniz də ideyanın özündə nümayiş etdiriləcək ki, ham�
 msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
 msgstr "Əlbəttə ki, fikrə qoşulmadan bir layihə də yarada bilərsiniz - bunu etmək üçün sol tərəfdəki \"Layihə Yarat\" düyməsini basın."
 
+msgid "General"
+msgstr "Ümumi"
+
 msgid "Facebook-Integration"
 msgstr "Facebook-inteqrasiya"
 
@@ -4033,6 +4120,11 @@ msgstr "Müvafiq Layihələr/Qruplar seçin"
 msgid "Description and Infos"
 msgstr "Təsvir və Məlumatlar"
 
+#, fuzzy
+#| msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
+msgid "This is a platform-wide description that can be seen by any portal member and will be shown on the microsite."
+msgstr "Bu, hər kəsin görə biləcəyi və mikrosaytda göstərilən açıq bir təsvirdir."
+
 msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
 msgstr "Bu, hər kəsin görə biləcəyi və mikrosaytda göstərilən açıq bir təsvirdir."
 
@@ -4050,6 +4142,11 @@ msgstr "Qrupu bir neçə cümlə ilə təsvir edin."
 
 msgid "Describe the project in a few sentences."
 msgstr "Layihəni bir neçə cümlə ilə təsvir edin."
+
+#, fuzzy
+#| msgid "This description will be publicly visible."
+msgid "This description will be visible on the entire portal."
+msgstr "Bu təsvir ictimaiyyətə görünəcəkdir."
 
 msgid "This description will be publicly visible."
 msgstr "Bu təsvir ictimaiyyətə görünəcəkdir."
@@ -4121,6 +4218,14 @@ msgid "Select related Projects/Groups"
 msgstr "Müvafiq Layihələr/Qruplar seçin"
 
 #, fuzzy
+#| msgid "This will be the default setting for all content created by members."
+msgid "These settings will be the default for all conference events."
+msgstr "Bu üzvlər tərəfindən yaradılan bütün məzmun üçün standart parametr olacaq."
+
+msgid "You may still override these options in each conference room and in individual events."
+msgstr ""
+
+#, fuzzy
 #| msgid "This project will be set to be publicly visible!"
 msgid "Group/Project is publicly visible"
 msgstr "Bu layihə ictimaiyyətə görünəcək şəkildə tənzimlənəcək!"
@@ -4144,11 +4249,31 @@ msgstr "Məxfilik parametrləri"
 msgid "This will be the default setting for all content created by members."
 msgstr "Bu üzvlər tərəfindən yaradılan bütün məzmun üçün standart parametr olacaq."
 
+#, fuzzy
+#| msgid "This group will be set to be publicly visible!"
+msgid "This group will be set to be visible on the entire portal!"
+msgstr "Bu qrup ictimaiyyətə görünəcək şəkildə tənzimlənəcək!"
+
 msgid "This group will be set to be publicly visible!"
 msgstr "Bu qrup ictimaiyyətə görünəcək şəkildə tənzimlənəcək!"
 
+#, fuzzy
+#| msgid "This project will be set to be publicly visible!"
+msgid "This project will be set to be visible on the entire portal!"
+msgstr "Bu layihə ictimaiyyətə görünəcək şəkildə tənzimlənəcək!"
+
 msgid "This project will be set to be publicly visible!"
 msgstr "Bu layihə ictimaiyyətə görünəcək şəkildə tənzimlənəcək!"
+
+#, fuzzy
+#| msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be publicly visible by default (this can be changed for each item on creation). Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
+msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be platform-wide open by default (this can be changed for each item on creation)."
+msgstr "Bu o deməkdir ki, hər hansı bir qeydiyyatdan keçmiş istifadəçi əldə edə və görə bilər, baxmayaraq ki, yalnız üzvlər məzmun yarada bilər. Bundan əlavə, bütün məzmunun standart olaraq ictimaiyyətə görünə biləcəyi şəkildə qurulacaq (yaradılan hər bir element üçün bu dəyişdirilə bilər). İctimaiyyətə görünən məzmunu hər kəs internetdə görə bilər və axtarış motorunun nəticələrinə daxil ola bilər!"
+
+#, fuzzy
+#| msgid "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the public visibility setting!"
+msgid "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the 'platform-wide' setting!"
+msgstr "Bir qrupun və ya layihənin admini olaraq, üzvlərinin yerləşdirdiyi məzmunun hər hansı bir müəllif hüquqları və ya digər qanunları pozmamasını təmin etmək məsuliyyətiniz var. Zəhmət olmasa, xüsusən ictimai görünmə parametirlərini aktivləşdirərkən bunu unutmayın!"
 
 msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be publicly visible by default (this can be changed for each item on creation). Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
 msgstr "Bu o deməkdir ki, hər hansı bir qeydiyyatdan keçmiş istifadəçi əldə edə və görə bilər, baxmayaraq ki, yalnız üzvlər məzmun yarada bilər. Bundan əlavə, bütün məzmunun standart olaraq ictimaiyyətə görünə biləcəyi şəkildə qurulacaq (yaradılan hər bir element üçün bu dəyişdirilə bilər). İctimaiyyətə görünən məzmunu hər kəs internetdə görə bilər və axtarış motorunun nəticələrinə daxil ola bilər!"
@@ -4158,6 +4283,9 @@ msgstr "Bir qrupun və ya layihənin admini olaraq, üzvlərinin yerləşdirdiyi
 
 msgid "If you do not wish this, you can change the visibility setting above."
 msgstr "Bunu istəmirsinizsə, yuxarıdakı görünmə parametlərini dəyişə bilərsiniz."
+
+msgid "Platform-wide (visible for all members of the platform)"
+msgstr ""
 
 msgid "Visibility on other platforms"
 msgstr ""
@@ -4190,6 +4318,11 @@ msgstr ""
 #, fuzzy
 msgid "Contact Form"
 msgstr "Əlaqə məlumatı"
+
+#, fuzzy
+#| msgid "From which apps should public items be shown on the microsite?"
+msgid "From which apps should platform-wide items be shown on the microsite?"
+msgstr "Mikrosaytda ictimai elementlər hansı tətbiqlərdən göstərilməlidir?"
 
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "Mikrosaytda ictimai elementlər hansı tətbiqlərdən göstərilməlidir?"
@@ -5199,6 +5332,9 @@ msgstr "Mövzunu seçin"
 
 msgid "Visibility"
 msgstr "Görünmə sahəsi"
+
+msgid "This item will be visible on the entire portal. This means that any portal member will be able to see it."
+msgstr ""
 
 msgid "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
 msgstr "Bu maddə ictimaiyyətə görünən kimi yerləşdiriləcəkdir! Bu o deməkdir ki, internetdə olan hər kəs onu əldə edib baxa bilər və potensial olaraq axtarış sisteminin nəticələrinə daxil ola bilər."
@@ -6243,6 +6379,11 @@ msgstr "Məzmun (sol sütun)"
 #, fuzzy
 msgid "Content from my Groups and Projects"
 msgstr "Qruplarım və Layihələrimdən tək məzmun"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Platform content"
+msgstr "İctimai Layihə"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -8167,6 +8308,15 @@ msgstr "Hal-hazırda %s üzvü deyilsiniz! Əgər arzu edirsinizsə, Siz aşağ�
 
 msgid "Your changes have been saved."
 msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
+
+#, fuzzy
+#~ msgid "Active"
+#~ msgstr "Aktivləşdirin"
+
+#, fuzzy
+#~ msgctxt "time"
+#~ msgid "until"
+#~ msgstr "Qədər"
 
 #, fuzzy
 #~ msgid "Conference accounts active"

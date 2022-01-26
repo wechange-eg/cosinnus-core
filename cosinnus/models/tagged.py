@@ -95,7 +95,7 @@ class BaseTagObject(models.Model):
         ('', ''),
         (VISIBILITY_USER, _('Only me')),  
         (VISIBILITY_GROUP, _('Team members only')), 
-        (VISIBILITY_ALL, _('Public (visible without login)')), 
+        (VISIBILITY_ALL, (_('Platform-wide (visible for all portal members)') if settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN == True else _('Public (visible without login)'))), 
     )
     VISIBILITY_VALID_VALUES = (
         VISIBILITY_USER,
