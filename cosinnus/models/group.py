@@ -12,6 +12,7 @@ from django.db.models.fields.json import KeyTextTransform
 from django.contrib.sites.models import Site
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
+from django.core.serializers.json import DjangoJSONEncoder
 from django.core.validators import RegexValidator, MaxLengthValidator
 from django.db import models
 from django.db.models import Q, Max, Min, F
@@ -406,10 +407,10 @@ class CosinnusGroupManager(models.Manager):
         # Prepare query: Mark due conferences
         key = f'reminder_{field_name}'
         queryset = CosinnusConference.objects.annotate(extra_fields_json=Cast(F('extra_fields'),
-                                                                                      models.JSONField(default={})))
+                                                                                      models.JSONField(default={}, encoder=DjangoJSONEncoder)))
         queryset = queryset.annotate(to_be_reminded=KeyTextTransform(key, 'extra_fields_json'))
         # Prepare query: Mark conferences already notified
-        queryset = queryset.annotate(settings_json=Cast(F('settings'), models.JSONField(default={})))
+        queryset = queryset.annotate(settings_json=Cast(F('settings'), models.JSONField(default={}, encoder=DjangoJSONEncoder)))
         queryset = queryset.annotate(already_reminded=KeyTextTransform(f'{key}_sent', 'settings_json'))
         # Prepare query: Start date
         queryset = queryset.prefetch_related('rooms__events')
@@ -564,7 +565,7 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
                                                    default=False)
 
     # The different keys used for this are static variables in CosinnusPortal!
-    saved_infos = models.JSONField(default=dict)
+    saved_infos = models.JSONField(default=dict, encoder=DjangoJSONEncoder)
 
     tos_date = models.DateTimeField(_('ToS Version'), default=datetime.datetime(1999, 1, 1, 13, 37, 0),
                                     help_text='This is used to determine the date the newest ToS have been released, that users have acceppted. When a portal`s ToS update, set this to a newer date to have a popup come up for all users whose `settings.tos_accepted_date` is not after this date.')
@@ -598,7 +599,7 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
     video_conference_server = models.URLField(_('Video Conference Server'), max_length=250, blank=True, null=True,
         help_text=_('For old-style events meeting popups only! If entered, will enable Jitsi-like video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended.'))
 
-    dynamic_field_choices = models.JSONField(default=dict, verbose_name=_('Dynamic choice field choices'), blank=True,
+    dynamic_field_choices = models.JSONField(default=dict, verbose_name=_('Dynamic choice field choices'), blank=True, encoder=DjangoJSONEncoder,
         help_text='A dict storage for all choice lists for the dynamic fields of type `DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT`')
 
     userprofile_default_description = models.TextField(verbose_name=_('Default userprofile description'), blank=True, null=True)
@@ -883,12 +884,12 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
     # NOTE: this is the deprecated old extra_field jsonfield, 
     # but it is still in use for some custom portal code, so cannot yet be removed.
     # DO NOT USE THIS IN NEW CODE ANYMORE. USE `group.dynamic_fields` or `group.settings` instead!
-    extra_fields = models.JSONField(default=dict, blank=True)
-    settings = models.JSONField(default=dict, blank=True, null=True)
+    extra_fields = models.JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder)
+    settings = models.JSONField(default=dict, blank=True, null=True, encoder=DjangoJSONEncoder)
     
     dynamic_fields = models.JSONField(default=dict, blank=True, verbose_name=_('Dynamic extra fields'),
-            help_text='Extra group fields for each portal, as defined in `settings.COSINNUS_GROUP_EXTRA_FIELDS`')
-    sdgs = models.JSONField(default=list, blank=True, null=True)
+            help_text='Extra group fields for each portal, as defined in `settings.COSINNUS_GROUP_EXTRA_FIELDS`', encoder=DjangoJSONEncoder)
+    sdgs = models.JSONField(default=list, blank=True, null=True, encoder=DjangoJSONEncoder)
     
     show_contact_form = models.BooleanField(default=False, help_text=_('If set to true, a contact form will be displayed on the micropage.'))
     

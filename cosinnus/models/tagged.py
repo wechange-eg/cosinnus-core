@@ -5,6 +5,7 @@ import six
 
 from builtins import object
 from django.contrib.contenttypes.models import ContentType
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.db.models import Q
 from django.utils.encoding import force_text
@@ -314,6 +315,7 @@ class LastVisitedObject(models.Model):
     
     item_data = models.JSONField(
         'Data',
+        encoder=DjangoJSONEncoder,
         help_text='Stores a JSON representation of the target object, as converted by a `DashboardItem`.')
 
     class Meta(object):
@@ -409,7 +411,7 @@ class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableOb
         related_name='+',
         help_text='The user which caused the last significant action to update the `last_action` datetime.')
 
-    settings = models.JSONField(default=dict, blank=True, null=True)
+    settings = models.JSONField(default=dict, blank=True, null=True, encoder=DjangoJSONEncoder)
 
     class Meta(object):
         abstract = True

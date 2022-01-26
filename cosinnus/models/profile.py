@@ -10,6 +10,7 @@ from annoying.functions import get_object_or_None
 import django
 from django.apps import apps
 from django.contrib.contenttypes.fields import GenericRelation
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models import JSONField
 from django.templatetags.static import static
 from django.core.cache import cache
@@ -151,10 +152,10 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     may_be_contacted = models.BooleanField(_('May be contacted'), default=False)
     
     # UI and other preferences and extra settings for the user account
-    settings = JSONField(default=dict, blank=True)
-    extra_fields = JSONField(default=dict, blank=True,
+    settings = JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder)
+    extra_fields = JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder,
                 help_text='NO LONGER USED! Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`')
-    dynamic_fields = JSONField(default=dict, blank=True, verbose_name=_('Dynamic extra fields'),
+    dynamic_fields = JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder, verbose_name=_('Dynamic extra fields'),
                 help_text='Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`')
     scheduled_for_deletion_at = models.DateTimeField(_('Scheduled for Deletion at'), default=None, blank=True, null=True,
                                                help_text=_('The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)'))

@@ -6,6 +6,7 @@ from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
+from django.core.serializers.json import DjangoJSONEncoder
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import Q
@@ -528,7 +529,7 @@ class BBBRoomVisitStatistics(models.Model):
     # this field contains additional infos and backups of the stats that might be lost because
     # the related objects were deleted, EXCEPT any user info that has to honor the deletion!
     # attribute names are listed in `ALL_DATA_SETTINGS`
-    data = models.JSONField(default=dict, blank=True, null=True)
+    data = models.JSONField(default=dict, encoder=DjangoJSONEncoder, blank=True, null=True)
     
     DATA_DATA_SETTING_ROOM_NAME = 'room_name'
     DATA_DATA_SETTING_GROUP_NAME = 'group_name'

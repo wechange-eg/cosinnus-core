@@ -103,7 +103,7 @@ class CosinnusUserImport(models.Model):
         default=STATE_DRY_RUN_RUNNING, choices=STATE_CHOICES, editable=False)
     
     import_data = models.JSONField(default=dict, verbose_name=_('Import Data'), blank=True,
-        help_text='Stores the uploaded CSV data', editable=False)
+        help_text='Stores the uploaded CSV data', editable=False, encoder=DjangoJSONEncoder)
     import_report_html = models.TextField(verbose_name=_('Import Report HTML'),
        help_text='Stores the generated report for what the import will do / has done.', blank=True)
     

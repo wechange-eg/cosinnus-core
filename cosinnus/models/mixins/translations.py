@@ -1,4 +1,5 @@
 from django.core.exceptions import ImproperlyConfigured
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.utils.translation import get_language
 
@@ -29,7 +30,7 @@ class TranslateableFieldsModelMixin(models.Model):
     class Meta(object):
         abstract = True
 
-    translations = models.JSONField(default=dict, blank=True)
+    translations = models.JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder)
 
     @property
     def languages(self):

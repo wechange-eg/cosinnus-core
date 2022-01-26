@@ -123,7 +123,7 @@ class CosinnusConferenceSettings(models.Model):
         default=SETTING_INHERIT, choices=BBB_SERVER_CHOICES_WITH_INHERIT,
         help_text='The chosen BBB-Server/Cluster setting for connections to the recording API server. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!')
     
-    bbb_params = models.JSONField(default=dict, blank=True, verbose_name=_('BBB API Parameters'),
+    bbb_params = models.JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder, verbose_name=_('BBB API Parameters'),
             help_text='Custom parameters for API calls like join/create for all BBB rooms for this object and in its inherited objects.')
     
     # The nature (str or None) set through the source object for this config object. 
@@ -699,7 +699,7 @@ class ParticipationManagement(models.Model):
                                   null=True, blank=True,
                                   upload_to=get_conference_conditions_filename,
                                   max_length=250)
-    application_options = models.JSONField(default=list, blank=True, null=True)
+    application_options = models.JSONField(default=list, encoder=DjangoJSONEncoder, blank=True, null=True)
     conference = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
                                            verbose_name=_('Participation Management'),
                                            related_name='participation_management',
@@ -831,8 +831,8 @@ class CosinnusConferenceApplication(models.Model):
         related_name='user_applications', on_delete=models.CASCADE)
     status = models.PositiveSmallIntegerField(choices=APPLICATION_STATES,
                                               default=APPLICATION_SUBMITTED)
-    options = models.JSONField(default=list, blank=True, null=True)
-    priorities = models.JSONField(_('Priorities'), default=dict, blank=True, null=True)
+    options = models.JSONField(default=list, blank=True, null=True, encoder=DjangoJSONEncoder)
+    priorities = models.JSONField(_('Priorities'), default=dict, blank=True, null=True, encoder=DjangoJSONEncoder)
     information = models.TextField(_('Motivation for applying'), blank=True)
     contact_email = models.EmailField(_('Contact E-Mail Address'), blank=True, null=True)
     contact_phone = PhoneNumberField(('Contact Phone Number'), blank=True, null=True)
