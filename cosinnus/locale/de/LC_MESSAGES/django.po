@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -260,7 +260,7 @@ msgid "This account is no longer active. You have been logged out."
 msgstr "Sie wurden ausgeloggt, weil dieses Benutzerkonto nicht mehr aktiv ist."
 
 msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
-msgstr "Du musst deine Email-Adresse verifizieren bevor du dich einloggen kannst. Eine Email mit dem Verifizierungslink wurde dir gerade geschickt. Überprüfe bitte deinen Posteingang: wenn da keine Email von uns gibt, überprüfe bitte deinen Spamordner."
+msgstr "Du musst deine Email-Adresse verifizieren bevor du dich einloggen kannst. Eine Email mit dem Verifizierungslink wurde dir gerade geschickt. Überprüfe bitte deinen Posteingang: wenn du keine Email von uns erhalten hast, überprüfe bitte deinen Spamordner."
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr "Du wurdest hierhin weitergeleitet, weil du einen Link in einer unserer E-Mails geklickt hast. Als Vorsichtsmaßnahme verlinken wir nicht direkt auf externe Webseiten aus unseren E-Mails. Bitte klicke den Link unten erneut wenn du die Seite besuchen möchtest."
@@ -678,7 +678,7 @@ msgid "Next month"
 msgstr "Nächsten Monat"
 
 msgid "No video conference"
-msgstr "Keine Video- Tagung"
+msgstr "Keine Videokonferenz"
 
 msgid "BBB-Meeting"
 msgstr "BBB-Meeting"
@@ -2945,7 +2945,7 @@ msgid "Unfortunately recorded meetings are currently not yet available for this 
 msgstr "Die Meetings- Aufzeichnungen sind für diesen Server momentan leider nicht verfügbar!"
 
 msgid "Recording of meetings is only available for premium conferences!"
-msgstr "Aufzeichnung von Meetings ist nur für Premium- Tagungen verfügbar!"
+msgstr "Aufzeichnung von Meetings ist nur für Premium-Tagungen verfügbar!"
 
 msgid "Make a premium booking here"
 msgstr "Hier deine Premium-Buchung machen"
@@ -3071,7 +3071,7 @@ msgid "Check this to show rocket chat in the sidebar."
 msgstr "Rocket.Chat in der Seitenleiste anzeigen."
 
 msgid "BBB video conference options"
-msgstr "BBB Video-Tagungsoptionen"
+msgstr "BBB Videokonferenzoptionen"
 
 msgid "These settings will be the default for all conference events in this room."
 msgstr "Dies wird die Standardeinstellungen für alle Tagungsveranstaltungen in diesem Raum."
@@ -3373,7 +3373,7 @@ msgid "BBB Premium"
 msgstr "BBB-Premium"
 
 msgid "BBB Recording API"
-msgstr "BBB Aufnahme- API"
+msgstr "BBB Aufnahme-API"
 
 msgid "Not set"
 msgstr "Nicht eingestellt"
@@ -4220,7 +4220,7 @@ msgid "Meeting"
 msgstr "Meeting"
 
 msgid "By clicking \"Continue\" you are consenting to be recorded in this video conference."
-msgstr "Indem du auf “Fortsetzen” klickst, stimmst du zu, in dieser Video-Tagung aufgezeichnet werden."
+msgstr "Indem du auf “Fortsetzen” klickst, stimmst du zu, in dieser Videokonferenz aufgezeichnet werden."
 
 msgid "This session is being recorded"
 msgstr "Diese Sitzung wird aufgezeichnet"
@@ -6162,7 +6162,7 @@ msgid "Disconnect Facebook"
 msgstr "Facebook trennen"
 
 msgid "2FA Settings"
-msgstr "2FA- Einstellungen"
+msgstr "2FA-Einstellungen"
 
 #, python-format
 msgid "%(provider)s-Account"
@@ -6342,7 +6342,7 @@ msgid "Generate Tokens"
 msgstr "Tokens generieren"
 
 msgid "Back to 2FA Settings"
-msgstr "Zurück zur 2FA- Einrichtung"
+msgstr "Zurück zur 2FA-Einrichtung"
 
 msgid "Disable 2FA"
 msgstr "2FA deaktivieren"
@@ -6405,13 +6405,13 @@ msgid "Enable 2FA"
 msgstr "2FA aktivieren"
 
 msgid "2FA Setup"
-msgstr "2FA- Einrichtung"
+msgstr "2FA-Einrichtung"
 
 msgid "You are about to take your account security to the next level. <br> To use the 2FA-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. We do not have another 2FA option at the moment and will inform you if there are changes in this regard."
-msgstr "Du bist im Begriff, dein Sicherheitsniveau auf die nächste Ebene zu bringen. <br> Um die 2FA- Einstellung zu benutzen, brauchst du die ´free otp´ App auf dein Handy zu installieren und danach den QR- Code einzuscannen. Wir haben momentan keine weitere 2FA- Optionen, aber werden dich über eventuelle Änderungen informieren."
+msgstr "Du bist im Begriff, dein Sicherheitsniveau auf die nächste Ebene zu bringen. <br> Um die 2FA-Einstellung zu benutzen, brauchst du die ´free otp´ App auf dein Handy zu installieren und danach den QR- Code einzuscannen. Wir haben momentan keine weitere 2FA-Optionen, aber werden dich über eventuelle Änderungen informieren."
 
 msgid "Scan the QR code below."
-msgstr "Scanne die QR-Code."
+msgstr "Scanne den unten stehenden QR-Code."
 
 msgid "Now, enter the token generated by the app:"
 msgstr "Gib den von der App generierten Code ein:"
@@ -6420,10 +6420,10 @@ msgid "We've encountered an issue with the selected authentication method. Pleas
 msgstr "Bei der Auswahl der Authentifizierungsmethode ist ein Problem aufgetreten. Gehe bitte zurück und überprüfe, ob die eingegebene Daten korrekt sind. Versuche dann bitte erneut oder benutze eine andere Authentifizierungsmethode. Wenn das Problem weiterhin besteht, kontaktiere die Portaladministratoren."
 
 msgid "2FA Setup Complete"
-msgstr "2FA- Einrichtung abgeschlossen"
+msgstr "2FA-Einrichtung abgeschlossen"
 
 msgid "Congratulations, you've successfully enabled 2FA."
-msgstr "Glückwunsch, du hast die 2FA- Einstellung erfolgreich aktiviert."
+msgstr "Glückwunsch, du hast die 2FA-Einstellung erfolgreich aktiviert."
 
 msgid "Back to your profile"
 msgstr "Zurück zu deinem Profil"
@@ -7520,7 +7520,7 @@ msgid "Create"
 msgstr "Erstellen"
 
 msgid "This team does not have a video conference configured."
-msgstr "Dieses Team hast keine konfigurierte Video- Tagung."
+msgstr "Dieses Team hast keine konfigurierte Videokonferenz."
 
 #, python-format
 msgid "The %(team_type)s was changed successfully."
