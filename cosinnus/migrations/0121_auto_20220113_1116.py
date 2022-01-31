@@ -42,11 +42,6 @@ class Migration(migrations.Migration):
             field=models.JSONField(blank=True, default=dict, encoder=django.core.serializers.json.DjangoJSONEncoder),
         ),
         migrations.AlterField(
-            model_name='bbbroom',
-            name='options',
-            field=models.JSONField(blank=True, default=dict, encoder=django.core.serializers.json.DjangoJSONEncoder, editable=False, help_text='DEPRECATED! options for the room, that are represented in the bigbluebutton API', null=True, verbose_name='room options'),
-        ),
-        migrations.AlterField(
             model_name='bbbroomvisitstatistics',
             name='data',
             field=models.JSONField(blank=True, default=dict, encoder=django.core.serializers.json.DjangoJSONEncoder, null=True),

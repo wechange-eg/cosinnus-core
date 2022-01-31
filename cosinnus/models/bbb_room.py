@@ -98,8 +98,8 @@ class BBBRoom(models.Model):
     parent_meeting_id = models.CharField(max_length=100, blank=True, null=True)
     ended = models.BooleanField(default=False)
     
-    last_create_params = JSONField( verbose_name=_('Last create-call parameters'),
-        blank=True, null=True, default=dict, editable=False,
+    last_create_params = models.JSONField( verbose_name=_('Last create-call parameters'),
+        blank=True, null=True, default=dict, editable=False, encoder=DjangoJSONEncoder,
         help_text="The parameters used for the last create call. Serves as a record only, new create params are derived from the source object's options!")
     
     
