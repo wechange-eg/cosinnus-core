@@ -126,7 +126,7 @@ setup(
 
         # wagtail
         'wagtail==2.15.1',
-        'django-compressor',
+        'django-compressor==3.1',
         
         # virus file scan validator
         'clamd==1.0.2',
