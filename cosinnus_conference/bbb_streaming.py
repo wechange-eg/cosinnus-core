@@ -1,6 +1,5 @@
 import logging
 import functools
-from django.utils.decorators import available_attrs
 from cosinnus.conf import settings
 import requests
 from django.core.cache import cache
@@ -26,7 +25,7 @@ def _logged_in_stream_request(function):
         if the cached access token is no longer valid, gets a fresh access token,
         caches it, and retries the call.
         Use `_stream_api_request()` in the wrapped function to make calls to the streaming API! """
-    @functools.wraps(function, assigned=available_attrs(function))
+    @functools.wraps(function)
     def wrapper(*args, **kwargs):
         # check if streaming is enabled and all settings are set
         if not settings.COSINNUS_CONFERENCES_STREAMING_ENABLED:

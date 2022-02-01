@@ -27,7 +27,7 @@ it, only a few things have to be done:
    .. sourcecode:: html+django
 
       {% load cosinnus_tags %}
-      {% load static from staticfiles %}
+      {% load static %}
 
 3. Next, include the typeahead JS:
 

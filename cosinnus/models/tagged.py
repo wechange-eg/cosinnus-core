@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import six
+
 from builtins import object
 from django.contrib.contenttypes.models import ContentType
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.db.models import Q
-from django.utils.encoding import python_2_unicode_compatible, force_text
+from django.utils.encoding import force_text
 from django.utils.timezone import now
 from django.apps import apps
 from django.utils.translation import ugettext_lazy as _
@@ -34,7 +37,6 @@ from django.core.cache import cache
 from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
 from django.utils.http import urlencode
 from django.core.validators import validate_comma_separated_integer_list
-from django.contrib.postgres.fields.jsonb import JSONField
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 
@@ -59,7 +61,7 @@ class PublicModelMixin(models.Model):
         abstract = True
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusBaseCategory(models.Model):
     
     class Meta(object):
@@ -82,7 +84,7 @@ class CosinnusTopicCategory(MultiLanguageFieldMagicMixin, CosinnusBaseCategory):
     pass
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class BaseTagObject(models.Model):
 
     VISIBILITY_USER = 0 # for Users, this setting means: "Only Group Members can see me"
@@ -215,7 +217,7 @@ class TagObject(BaseTagObject):
         swappable = 'COSINNUS_TAG_OBJECT_MODEL'
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class AttachedObject(models.Model):
     """
     A generic object to serve as attachable object connector for all cosinnus
@@ -289,7 +291,7 @@ class AttachableObjectModel(models.Model):
         return tuple(sorted(list(self.attached_objects.all().values_list('id', flat=True))))
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class LastVisitedObject(models.Model):
     """
     A generic object to serve as a datastore for an object a user has visited recently.
@@ -311,8 +313,9 @@ class LastVisitedObject(models.Model):
         verbose_name=_('Visited'),
         auto_now_add=True)
     
-    item_data = JSONField(
+    item_data = models.JSONField(
         'Data',
+        encoder=DjangoJSONEncoder,
         help_text='Stores a JSON representation of the target object, as converted by a `DashboardItem`.')
 
     class Meta(object):
@@ -364,7 +367,7 @@ class LastVisitedMixin(object):
         return ContentType.objects.get_for_model(self)
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableObjectModel):
     """
     Represents the base for all cosinnus main models. Each inheriting model
@@ -408,7 +411,7 @@ class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableOb
         related_name='+',
         help_text='The user which caused the last significant action to update the `last_action` datetime.')
 
-    settings = JSONField(default=dict, blank=True, null=True)
+    settings = models.JSONField(default=dict, blank=True, null=True, encoder=DjangoJSONEncoder)
 
     class Meta(object):
         abstract = True
@@ -579,7 +582,7 @@ class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
         return None
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class BaseTaggableObjectReflection(models.Model):
     """ Used as an additional link of a BaseTaggableObject into other Groups than its parent group.
         Can be used to "symbolically link" an object into another group, to display it there as well,
@@ -650,7 +653,7 @@ class BaseTaggableObjectReflection(models.Model):
             self.delete()
         return ret
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class LikeObject(models.Model):
     """
     A generic object to serve as a "Like", as well as a "Following" indicator for any object.

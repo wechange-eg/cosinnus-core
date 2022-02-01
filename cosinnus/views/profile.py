@@ -143,7 +143,7 @@ def delete_userprofile(user):
     user.last_name = "user"
     user.username = user.id
     # replace e-mail with random address
-    user.email = '__deleted_user__%s@deleted.com' % get_random_string()
+    user.email = '__deleted_user__%s@deleted.com' % get_random_string(length=12)
     
     # we no longer retain a padded version of the user's email
     #scramble_cutoff = user._meta.get_field('email').max_length - len(scrambled_email_prefix) - 2

@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import six
+
 from django.db import models
-from django.utils.encoding import force_text, python_2_unicode_compatible
+from django.utils.encoding import force_text
 
 from cosinnus.models.profile import BaseUserProfile
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CustomUserProfile(BaseUserProfile):
     dob = models.DateField('Date of birth', null=True)
 

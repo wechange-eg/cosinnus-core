@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import six
+
 from builtins import object
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
@@ -16,7 +17,7 @@ from cosinnus.utils.urls import get_domain_for_portal
 from django.contrib.contenttypes.fields import GenericForeignKey
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusReportedObject(models.Model):
     """
     A complaint report pointing to a generic object.

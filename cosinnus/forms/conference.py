@@ -105,7 +105,7 @@ class ConferenceSettingsFormMixin(object):
         instance.bbb_nature = parent_object.get_bbb_room_nature()
         instance.is_premium_ever = getattr(self.get_group_object(), 'is_premium_ever', False)
         instance.set_bbb_preset_form_field_values(preset_choices)
-        
+
         if commit:
             # on first save, set the generic relation to the attached event/group for the CosinnusConferenceSettings instance
             # this is a bit hacky, but for the MultiForm, we have no other way of getting the id of the freshly-saved

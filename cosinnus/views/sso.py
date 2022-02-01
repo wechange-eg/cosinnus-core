@@ -90,7 +90,7 @@ def callback(request):
         # we create the user with a random email to get around cosinnus' unique-email validation,
         # because we cannot be sure if the SSO server has unique emails we will replace the email here later on
         user = create_user(
-            '%s@none.com' % get_random_string(),
+            '%s@none.com' % get_random_string(length=12),
             first_name=user_info.get('first_name', user_info.get('username')),
             last_name=user_info.get('last_name', None)
         )

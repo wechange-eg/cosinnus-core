@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from builtins import object
 
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.templatetags.static import static
 from rest_framework import serializers
 from cosinnus.models import CosinnusPortal
 

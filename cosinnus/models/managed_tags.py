@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import six
 from builtins import object
 from collections import OrderedDict
 import logging
@@ -14,7 +15,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
 from django.db import models
 from django.urls.base import reverse
-from django.utils.encoding import python_2_unicode_compatible, force_text
+from django.utils.encoding import force_text
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 import six
@@ -236,7 +237,7 @@ class CosinnusManagedTagAssignment(models.Model):
                 cls.objects.create(content_type=content_type, object_id=obj.id, managed_tag=managed_tag, approved=approve)
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusManagedTagType(models.Model):
     
     # don't worry, the default Portal with id 1 is created in a datamigration
@@ -264,7 +265,7 @@ class CosinnusManagedTagType(models.Model):
         return f'Type: %s (Portal %d)' % (self.name, self.portal_id)
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusManagedTag(models.Model):
     
     # don't worry, the default Portal with id 1 is created in a datamigration

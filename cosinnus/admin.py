@@ -11,6 +11,7 @@ from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.contrib.contenttypes.admin import GenericStackedInline
 from django.core.exceptions import ValidationError
 from django.db.models import Q
+from django.db.models import JSONField
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 from django_reverse_admin import ReverseModelAdmin
@@ -40,7 +41,6 @@ from cosinnus.models.user_import import CosinnusUserImport
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.utils.group import get_cosinnus_group_model
-from django.contrib.postgres.fields import JSONField as PostgresJSONField
 from cosinnus.forms.widgets import PrettyJSONWidget
 
 
@@ -163,7 +163,7 @@ class CosinnusConferenceSettingsInline(GenericStackedInline):
     max_num = 1
     
     formfield_overrides = {
-        PostgresJSONField: {'widget': PrettyJSONWidget(attrs={'style': "width:initial;"})}
+        JSONField: {'widget': PrettyJSONWidget(attrs={'style': "width:initial;"})}
     }
     
 

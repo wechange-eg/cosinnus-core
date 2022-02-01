@@ -9,8 +9,7 @@ from django.utils.html import format_html
 from wagtail.core import hooks
 from wagtail.core.whitelist import attribute_rule
 from django.conf import settings
-from django.contrib.staticfiles.templatetags.staticfiles import static
-
+from django.templatetags.static import static
 
 from wagtail.admin.rich_text.converters.editor_html import WhitelistRule
 from wagtail.core.whitelist import allow_without_attributes

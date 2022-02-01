@@ -5,9 +5,8 @@ import string
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.contrib.postgres.fields import JSONField
-from django.contrib.postgres.fields.jsonb import JSONField as PostgresJSONField
 from django.core.cache import cache
+from django.core.serializers.json import DjangoJSONEncoder
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import Q
@@ -99,8 +98,8 @@ class BBBRoom(models.Model):
     parent_meeting_id = models.CharField(max_length=100, blank=True, null=True)
     ended = models.BooleanField(default=False)
     
-    last_create_params = JSONField( verbose_name=_('Last create-call parameters'),
-        blank=True, null=True, default=dict, editable=False,
+    last_create_params = models.JSONField( verbose_name=_('Last create-call parameters'),
+        blank=True, null=True, default=dict, editable=False, encoder=DjangoJSONEncoder,
         help_text="The parameters used for the last create call. Serves as a record only, new create params are derived from the source object's options!")
     
     
@@ -530,7 +529,7 @@ class BBBRoomVisitStatistics(models.Model):
     # this field contains additional infos and backups of the stats that might be lost because
     # the related objects were deleted, EXCEPT any user info that has to honor the deletion!
     # attribute names are listed in `ALL_DATA_SETTINGS`
-    data = PostgresJSONField(default=dict, blank=True, null=True)
+    data = models.JSONField(default=dict, encoder=DjangoJSONEncoder, blank=True, null=True)
     
     DATA_DATA_SETTING_ROOM_NAME = 'room_name'
     DATA_DATA_SETTING_GROUP_NAME = 'group_name'

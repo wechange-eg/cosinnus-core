@@ -1,1 +1,0 @@
-default_app_config = 'cosinnus_oauth_client.apps.CosinnusOauthClientAppConfig'

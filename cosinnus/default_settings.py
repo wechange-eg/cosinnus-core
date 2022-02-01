@@ -35,6 +35,10 @@ ALLOWED_HOSTS = ()
 
 DATABASES = {}
 
+# Default primary key field type to use for models that don’t have a field with primary_key=True.
+# New in Django 3.2.
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -46,8 +50,6 @@ TIME_ZONE = 'Europe/Berlin'
 LANGUAGE_CODE = 'de'
 
 SITE_ID = 1
-
-FILE_CHARSET = 'utf-8'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -103,7 +105,6 @@ MIDDLEWARE = [
     
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     
     'cosinnus.core.middleware.cosinnus_middleware.StartupMiddleware',
@@ -171,7 +172,6 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'suit',
         'django.contrib.admin',
         'sekizai',
-        
     ]
     
     # Internal Apps (as defined in external project)
@@ -338,6 +338,7 @@ LOGGING = {
 
 # allow a lot of POST parameters (notification settings will have many fields)
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # Required for cmsplugin_filer_image
 THUMBNAIL_PROCESSORS = (

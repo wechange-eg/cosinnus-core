@@ -7,9 +7,10 @@ from cosinnus.core import signals
 import logging
 import json
 import requests
+from urllib.parse import quote as urlquote
 from django.utils.encoding import force_text
 from cosinnus.utils.user import get_newly_registered_user_email
-from django.utils.http import urlquote
+
 from threading import Thread
 
 logger = logging.getLogger('cosinnus')
