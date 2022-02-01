@@ -7,7 +7,7 @@ import {TabContext, TabList} from "@material-ui/lab"
 import moment from "moment"
 
 import {Event, EventDay} from "../../../stores/events/models"
-import {formatTime, getCurrentDay, groupByDaysAndSlots} from "../../../utils/events"
+import {formatTime, getCurrentDay, groupByDaysAndSlots, getTimezoneForUser} from "../../../utils/events"
 import {EventIcons} from "../EventIcons"
 import {useStyles} from "./style"
 import {EventParticipants} from "../../../stores/eventParticipants/reducer"
@@ -59,11 +59,11 @@ export function EventGrid(props: EventGridProps) {
               {isNow && (
                 <Typography component="span">
                   <FormattedMessage id="Now" />
-                  {"-" + formatTime(event.props.toDate)}
+                  {"-" + formatTimeZoneAwareTime(event.props.toDate)} ({getTimezoneForUser(event.props.fromDate)})
                 </Typography>
               ) || (
                 <Typography component="span">
-                  {formatTime(event.props.fromDate) + "-" + formatTime(event.props.toDate)}
+                  {formatTime(event.props.fromDate) + "-" + formatTime(event.props.toDate)} ({getTimezoneForUser(event.props.fromDate)})
                 </Typography>
               )}
               <Typography component="span">

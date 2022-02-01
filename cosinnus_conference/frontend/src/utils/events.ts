@@ -65,7 +65,23 @@ export const filterCurrentAndRoom = (slots: EventSlot[], room: string) => {
  * @returns string
  */
 export const formatTime = (datetime: Date) => {
-  return moment(datetime).format("HH:mm")
+  if (window.hasOwnProperty('cosinnus_user_timezone') && window.cosinnus_user_timezone) {
+    return moment(datetime).tz(window.cosinnus_user_timezone).format('HH:mm')
+  }
+  return moment(datetime).format('HH:mm')
+}
+
+/**
+ * Get timezone from date
+ *
+ * @returns string
+ */
+export const getTimezoneForUser = (datetime: Date): string => {
+  if (window.hasOwnProperty('cosinnus_user_timezone') && window.cosinnus_user_timezone) {
+    return window.cosinnus_user_timezone
+  }
+  return Intl.DateTimeFormat().resolvedOptions().timeZone
+  // return (moment(datetime).tz())
 }
 
 /**
