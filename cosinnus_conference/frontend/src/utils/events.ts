@@ -81,7 +81,6 @@ export const getTimezoneForUser = (datetime: Date): string => {
     return window.cosinnus_user_timezone
   }
   return Intl.DateTimeFormat().resolvedOptions().timeZone
-  // return (moment(datetime).tz())
 }
 
 /**
