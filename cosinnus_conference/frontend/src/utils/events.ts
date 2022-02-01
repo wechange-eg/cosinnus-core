@@ -1,4 +1,5 @@
 import moment from "moment"
+import "moment-timezone"
 
 import {Event, EventDay, EventDayProps, EventSlot, EventSlotProps} from "../stores/events/models"
 
