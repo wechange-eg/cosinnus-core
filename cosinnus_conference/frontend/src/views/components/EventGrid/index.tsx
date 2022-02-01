@@ -59,7 +59,7 @@ export function EventGrid(props: EventGridProps) {
               {isNow && (
                 <Typography component="span">
                   <FormattedMessage id="Now" />
-                  {"-" + formatTimeZoneAwareTime(event.props.toDate)} ({getTimezoneForUser(event.props.fromDate)})
+                  {"-" + formatTime(event.props.toDate)} ({getTimezoneForUser(event.props.fromDate)})
                 </Typography>
               ) || (
                 <Typography component="span">
