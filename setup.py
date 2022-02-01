@@ -125,7 +125,7 @@ setup(
         'XlsxWriter==1.3.7',
 
         # wagtail
-        'wagtail==2.5',
+        'wagtail==2.15.1',
         'django-compressor',
         
         # virus file scan validator
