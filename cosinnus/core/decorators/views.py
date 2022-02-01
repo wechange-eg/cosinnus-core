@@ -25,7 +25,7 @@ from cosinnus.utils.exceptions import CosinnusPermissionDeniedException
 
 import logging
 from cosinnus.models.group import CosinnusPortal
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from cosinnus.utils.urls import group_aware_reverse
 from django.template.defaultfilters import urlencode
 logger = logging.getLogger('cosinnus')
@@ -528,6 +528,9 @@ def require_user_token_access(token_name, group_url_kwarg='group', group_attr='g
     :param str group_attr: The attribute name which can later be used to access
         the group from within an view instance (e.g. `self.group`). Defaults to
         `'group'`.
+    :param str id_url_kwarg: The attribut id which can later be used to access
+        the group or a project from within an view instance (e.g. `team_id`). Defaults to
+        `None`.
     """
 
     def decorator(function):
@@ -555,7 +558,7 @@ def require_user_token_access(token_name, group_url_kwarg='group', group_attr='g
             group_name = kwargs.get(group_url_kwarg, None)
             if id_url_kwarg is not None:
                 team_id = kwargs.get(id_url_kwarg)
-                group = get_cosinnus_group_model().objects.get_by_id(id=team_id, portal_id=CosinnusPortal.get_current().id)
+                group = get_object_or_404(get_cosinnus_group_model(), id=team_id, portal_id=CosinnusPortal.get_current().id)
             elif not group_name:
                 return HttpResponseNotFound(_("No team provided"))
             else:
