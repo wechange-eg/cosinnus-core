@@ -1265,11 +1265,20 @@ class CosinnusDefaultSettings(AppConf):
     # a list of field names from fields in fields in `CosinnusConferenceSettings`
     # that will be shown to the users in the frontend Event forms as choices
     # for presets for BBB rooms
+    # note that 'record_meeting' is disabled by default, as it
+    # requires setting up the BBB servers correctly for it, and should
+    # only be enabled for a portal specifically after that has been done
     BBB_PRESET_USER_FORM_FIELDS = [
         'mic_starts_on',
         'cam_starts_on',
-        'record_meeting',
     ]
+    # a complete list of all choices that could be made for BBB_PRESET_USER_FORM_FIELDS
+    #__all_choices__BBB_PRESET_USER_FORM_FIELDS = [
+    #    'mic_starts_on',
+    #    'cam_starts_on',
+    #    'record_meeting',
+    #]
+    
     # a list of field names from `BBB_PRESET_USER_FORM_FIELDS` that can only
     # be changed by users if a conference is premium at some point
     BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY = [
