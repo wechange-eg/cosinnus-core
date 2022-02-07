@@ -348,7 +348,7 @@ class ConferenceEventSerializer(TranslateableModelSerializer):
         return static('images/conference-event-placeholder.png')
 
     def get_feed_url(self, obj):
-        return group_aware_reverse('cosinnus:event:conference-event-entry', kwargs={'group': obj.group.slug,
+        return group_aware_reverse('cosinnus:team-conference-event-entry', kwargs={'team_id': obj.group.id,
                                                                                     'slug': obj.slug})
 
     def get_management_urls(self, obj):
