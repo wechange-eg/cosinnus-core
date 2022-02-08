@@ -5,7 +5,7 @@ from haystack import indexes
 
 from cosinnus.conf import settings
 from cosinnus.utils.search import CommaSeperatedIntegerMultiValueField, TemplateResolveNgramField, \
-    TemplateResolveCharField
+    TemplateResolveCharField, TimezoneAwareHaystackDateTimeField
 from .models import ExchangeProject, ExchangeSociety, ExchangeEvent, ExchangeOrganization
 
 
@@ -85,8 +85,8 @@ class ExchangeOrganizationIndex(ExchangeIndexMixin, ExchangeFilterIndex, indexes
 
 
 class ExchangeEventIndex(ExchangeIndexMixin, ExchangeFilterIndex, indexes.Indexable):
-    from_date = indexes.DateTimeField(model_attr='from_date', null=True)
-    to_date = indexes.DateTimeField(model_attr='to_date', null=True)
+    from_date = TimezoneAwareHaystackDateTimeField(model_attr='from_date', null=True)
+    to_date = TimezoneAwareHaystackDateTimeField(model_attr='to_date', null=True)
 
     def get_model(self):
         return ExchangeEvent
