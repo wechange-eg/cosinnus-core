@@ -30,6 +30,7 @@ from cosinnus.utils.permissions import check_user_superuser, check_ug_membership
 from annoying.functions import get_object_or_None
 from cosinnus.core.decorators.views import redirect_to_not_logged_in,\
     get_group_for_request
+from cosinnus.views.user import send_user_email_to_verify
 
 
 logger = logging.getLogger('cosinnus')
@@ -276,6 +277,11 @@ class ForceInactiveUserLogoutMiddleware(MiddlewareMixin):
             do_logout = False
             if not request.user.is_active:
                 messages.error(request, _('This account is no longer active. You have been logged out.'))
+                do_logout = True
+            elif settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN \
+                    and CosinnusPortal().get_current().email_needs_verification and not request.user.cosinnus_profile.email_verified:
+                send_user_email_to_verify(request.user, request.user.email, request)
+                messages.warning(request, _('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.'))
                 do_logout = True
             elif hasattr(request.user, 'cosinnus_profile') and request.user.cosinnus_profile.settings.get('force_logout_next_request', False):
                 # if the user has a force-logout flag set, remove the flag and log him out,
