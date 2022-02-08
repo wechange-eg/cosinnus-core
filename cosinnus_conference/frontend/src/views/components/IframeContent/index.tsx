@@ -50,13 +50,16 @@ export function IframeContent(props: IframeProps) {
     var href_target = e.currentTarget.getAttribute("href");
     // Don't prompt on
     if (!href_target || href_target === "#") return;
-    setLeaveUrl(href_target)
-    setLeaveOpen(true)
-    return false
+    setLeaveUrl(href_target);
+    setLeaveOpen(true);
+    return false;
   }
   const links = document.getElementsByTagName('a');
   for (let i = 0; i < links.length; i++) {
-    links[i].onclick = confirmLeave;
+    var href_target = links[i].getAttribute("href");
+    if (href_target && href_target !== "#") {
+      links[i].onclick = confirmLeave;
+    }
   }
 
   return (
