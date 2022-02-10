@@ -374,9 +374,9 @@ class WorkshopParticipantsUploadSkeletonView(SamePortalGroupMixin,
 
         writer.writerow(header)
 
-        for i in range(5):
-            row = ['' if not entry == _('Username')
-                   else str(i + 1) for entry in header]
+        for i in range(1, 4):
+            id = str(i)
+            row = [id, 'First Name {}'.format(id), 'Last Name {}'.format(id)]
             writer.writerow(row)
         return response
 
