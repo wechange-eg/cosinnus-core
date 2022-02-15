@@ -98,7 +98,7 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.light,
     marginTop: "1rem",
     display: "block",
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       display: "none"
     },
   },

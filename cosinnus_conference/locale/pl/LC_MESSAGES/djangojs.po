@@ -1,8 +1,9 @@
+#
 msgid ""
 msgstr ""
-"Content-Type: text/plain; charset=UTF-8\n"
-"MIME-Version: 1.0\n"
 "Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 
 #. [Agenda]
 #. defaultMessage is:
@@ -17,7 +18,7 @@ msgstr ""
 #. defaultMessage is:
 #. undefined
 msgid "Agenda"
-msgstr "Agenda"
+msgstr "Program"
 
 #. [Are you sure you want to delete this event?]
 #. defaultMessage is:
@@ -26,19 +27,19 @@ msgstr "Agenda"
 #. defaultMessage is:
 #. undefined
 msgid "Are you sure you want to delete this event?"
-msgstr "Czy na pewno chcesz usunąć to wydarzenie?"
+msgstr "Jesteś pewna/y, że chcesz usunąć to wydarzenie?"
 
 #. [Are you sure you want to delete this room?]
 #. defaultMessage is:
 #. undefined
 msgid "Are you sure you want to delete this room?"
-msgstr "Czy na pewno chcesz usunąć ten pokój?"
+msgstr "Jesteś pewna/y, że chcesz usunąć ten pokój?"
 
 msgid "Are you sure you want to leave this event?"
 msgstr "Czy na pewno chcesz opuścić to wydarzenie?"
 
 msgid "Are you sure you want to leave this video conference?"
-msgstr "Czy na pewno chcesz opuścić tę wideokonferencję?"
+msgstr "Jesteś pewna/y, że chcesz opóścić tę wideokonferencję?"
 
 #. [Chats]
 #. defaultMessage is:
@@ -50,13 +51,13 @@ msgstr "Czaty"
 #. defaultMessage is:
 #. undefined
 msgid "Conference is being prepared"
-msgstr "Konferencja w trakcie przygotowywania"
+msgstr "Konferencja jest w trakcie przygotowywania."
 
 #. [Connect with someone via videochat for 5 minutes]
 #. defaultMessage is:
 #. undefined
 msgid "Connect with someone via videochat for 5 minutes"
-msgstr "Skontaktuj się z kimś za pośrednictwem wideoczatu na 5 minut"
+msgstr "Połącz się z kimś na 5 minut przez wideoczat."
 
 #. [Contact]
 #. defaultMessage is:
@@ -119,16 +120,16 @@ msgstr "Filtruj według kraju"
 #. defaultMessage is:
 #. undefined
 msgid "Happening now"
-msgstr "Happening teraz"
+msgstr "W trakcie"
 
 msgid ""
 "If you click, you will leave the video conference. Are you sure you want to "
 "leave? Tip: Alternatively, you can open the link in a new tab or window and "
 "stay in the event."
 msgstr ""
-"Jeśli klikniesz, opuścisz wideokonferencję. Jesteś pewny, że chcesz wyjść? "
-"Wskazówka: możesz też otworzyć łącze w nowej karcie lub oknie i pozostać w "
-"wydarzeniu."
+"Jeśli klikniesz na „Tak”, to opuścisz wideokonferencję. Jesteś pewna/y, że "
+"chcesz opuścić tę wideokonferencję? Wskazówka: alternatywnie możesz otworzyć"
+" link w nowej zakładce lub w nowym oknie i dalej uczestniczyć w wydarzeniu."
 
 #. [Manage conference]
 #. defaultMessage is:
@@ -140,7 +141,7 @@ msgstr "Zarządzaj konferencją"
 #. defaultMessage is:
 #. undefined
 msgid "Manage events"
-msgstr "Zarządzaj wydarzeniami"
+msgstr "Zarządzaj wydarzeniem"
 
 #. [Manage rooms]
 #. defaultMessage is:
@@ -158,7 +159,7 @@ msgstr "Członkostwo"
 #. defaultMessage is:
 #. undefined
 msgid "Name"
-msgstr "Nazwa"
+msgstr "Imię"
 
 #. [No]
 #. defaultMessage is:
@@ -176,37 +177,37 @@ msgstr "Nie"
 #. defaultMessage is:
 #. undefined
 msgid "No coffee tables."
-msgstr "Brak stolików do kawy."
+msgstr "Brak stolików"
 
 #. [No discussions.]
 #. defaultMessage is:
 #. undefined
 msgid "No discussions."
-msgstr "Brak dyskusji."
+msgstr "Brak dyskusji"
 
 #. [No events.]
 #. defaultMessage is:
 #. undefined
 msgid "No events."
-msgstr "Brak wydarzeń."
+msgstr "Brak wydarzeń"
 
 #. [No networking channels.]
 #. defaultMessage is:
 #. undefined
 msgid "No networking channels."
-msgstr "Brak kanałów sieciowych."
+msgstr "Brak kanałów networkingowych"
 
 #. [No participants.]
 #. defaultMessage is:
 #. undefined
 msgid "No participants."
-msgstr "Brak uczestników."
+msgstr "Brak uczestniczek/ków"
 
 #. [No represented organisations.]
 #. defaultMessage is:
 #. undefined
 msgid "No represented organisations."
-msgstr "Brak reprezentowanych organizacji."
+msgstr "Brak organizacji"
 
 #. [No represented organizations.]
 #. defaultMessage is:
@@ -218,13 +219,13 @@ msgstr "Brak reprezentowanych organizacji."
 #. defaultMessage is:
 #. undefined
 msgid "No stage events."
-msgstr "Brak wydarzeń scenicznych."
+msgstr "Brak wydarzeń na scenie"
 
 #. [No workshops.]
 #. defaultMessage is:
 #. undefined
 msgid "No workshops."
-msgstr "Brak warsztatów."
+msgstr "Brak warsztatów"
 
 #. [Now]
 #. defaultMessage is:
@@ -266,9 +267,7 @@ msgstr "Reprezentowane organizacje"
 #. defaultMessage is:
 #. undefined
 msgid "The conference is being prepared, please try again at a later date."
-msgstr ""
-"Konferencja jest w trakcie przygotowania, proszę spróbować ponownie w "
-"późniejszym terminie."
+msgstr "Konferencja jest w trakcie przygotowywania. Spróbuj ponownie później."
 
 #. [Today]
 #. defaultMessage is:
@@ -277,7 +276,7 @@ msgstr ""
 #. defaultMessage is:
 #. undefined
 msgid "Today"
-msgstr "Dzisiaj"
+msgstr "Dziś"
 
 #. [Tomorrow]
 #. defaultMessage is:
@@ -292,7 +291,7 @@ msgstr "Jutro"
 #. defaultMessage is:
 #. undefined
 msgid "Upcoming"
-msgstr "Nadchodząca"
+msgstr "Nadchodzące wydarzenie"
 
 #. [Yes]
 #. defaultMessage is:
@@ -307,8 +306,8 @@ msgid "Yes"
 msgstr "Tak"
 
 msgid ""
-"You're currently attending an event. Are you sure you want to leave? Tip: You "
-"can open a new tab or window instead."
+"You're currently attending an event. Are you sure you want to leave? Tip: "
+"You can open a new tab or window instead."
 msgstr ""
 "Właśnie uczestniczysz w wydarzeniu. Czy na pewno chcesz opuścić to "
 "wydarzenie? Wskazówka: Zamiast tego możesz otworzyć nową kartę lub okno."
@@ -323,13 +322,13 @@ msgstr "ukryte"
 #. defaultMessage is:
 #. undefined
 msgid "minutes left"
-msgstr "pozostałe minuty"
+msgstr "minut/y do wydarzenia"
 
 #. [parallel events]
 #. defaultMessage is:
 #. undefined
 msgid "parallel events"
-msgstr "wydarzenia równoległe"
+msgstr "równoczesne wydarzenia/równoczesnych wydarzeń"
 
 #. [participants]
 #. defaultMessage is:
@@ -338,18 +337,33 @@ msgstr "wydarzenia równoległe"
 #. defaultMessage is:
 #. undefined
 msgid "participants"
-msgstr "uczestnicy"
+msgstr "uczestniczki/ek i uczestnicy/ków"
 
 #. [places left]
 #. defaultMessage is:
 #. undefined
 msgid "places left"
-msgstr "pozostało miejsc"
+msgstr "wolne miejsce/wolne miejsca/wolnych miejsc"
 
 msgid ""
-"Your profile is not shown here or not displayed correctly? "
-"Add to your profile or make yourself visible to other conference participants."
+"Your profile is not shown here or not displayed correctly? Add to your "
+"profile or make yourself visible to other conference participants."
 msgstr ""
 
 msgid "Edit Profile"
+msgstr ""
+
+msgid ""
+"You can only join this meeting if you accept being recorded. To join this "
+"meeting please reload this page to try again."
+msgstr ""
+
+msgid "Do you consent to be recorded?"
+msgstr ""
+
+msgid ""
+"This session may be recorded by the organizers. By continuing, you consent "
+"to be recorded. This includes audio, video, chat, shared notes and "
+"whiteboard activities. The recording may be shared according to the "
+"organizers."
 msgstr ""

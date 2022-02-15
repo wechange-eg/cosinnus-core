@@ -1,0 +1,50 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
+
+{% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
+
+{% block leftnav %}
+    {% include "cosinnus/group/leftnav_group.html"  with current_page="recordedmeetings" %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="active">{% trans "Recorded Meetings" %}</li>
+{% endblock %}
+
+{% block content %}
+    {% if recorded_meetings_not_set_up %}
+        <div class="alert alert-warning alert-dismissable">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+            <p>
+                {% trans "Unfortunately recorded meetings are currently not yet available for this server!" %}
+            </p>
+        </div>
+    {% elif not group.is_premium_ever %}
+        <div class="alert alert-warning alert-dismissable">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+            <p>
+                {% trans "Recording of meetings is only available for premium conferences!" %}
+                {% trans "Make a premium booking here" %}:
+                <a href="{% include "cosinnus/v2/urls/conference_premium_booking_url.html" %}" target="_blank">{% trans "Conference Bookings" %}</a>
+            </p>
+        </div>
+    {% endif %}
+        
+    <div class="content-box">
+		<h2 class="large-space">{% trans "Recorded Meetings" %}</h2>
+		
+        <p class="textfield transparent">
+            {% trans "This is a list of all recorded meetings for this conference. Recent recordings may take a few minutes to appear." %}
+        </p>
+        
+        <hr class="invisible"/>
+        
+        {% for meeting in object_list %}
+            {% include 'cosinnus/conference/recorded_meeting_list_object.html' with object=meeting %}
+        {% empty %}
+            {% trans "There are no recorded meetings yet." as empty_message %}
+            {% include 'cosinnus/common/empty_button.html' with message=empty_message %}
+        {% endfor %}
+    </div>
+{% endblock content %}

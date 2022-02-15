@@ -130,8 +130,13 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     ADDITIONAL_USERNAME_FIELDS = []
     
     if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
-        translateable_fields = ['description']
-    
+        translateable_fields = ['description', 'dynamic_fields']
+        try:
+            translatable_dynamic_fields = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS_TRANSLATED_FIELDS
+            dynamic_fields_settings = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
+        except AttributeError:
+            pass
+
     user = models.OneToOneField(settings.AUTH_USER_MODEL, editable=False,
         related_name='cosinnus_profile', on_delete=models.CASCADE)
     # whether this user's email address has been verified. non-verified users do not receive emails

@@ -6,6 +6,7 @@ from builtins import object
 import re
 import csv
 import io
+import chardet
 
 from django import forms
 from django.forms.widgets import SelectMultiple
@@ -624,15 +625,17 @@ class CosinusWorkshopParticipantCSVImportForm(forms.Form):
 
     def process_csv(self, csv_file):
         try:
-            file = csv_file.read().decode('utf-8')
+            raw_file = csv_file.read()
+            encoding = chardet.detect(raw_file)['encoding']
+            file = raw_file.decode(encoding)
             io_string = io.StringIO(file)
-            dialect = csv.Sniffer().sniff(io_string.read(1024), delimiters=";,")
+            dialect = csv.Sniffer().sniff(io_string.read(102400000), delimiters=";,")
             io_string.seek(0)
             reader = csv.reader(io_string, dialect)
             return reader
         except UnicodeDecodeError:
             raise forms.ValidationError(_("This is not a valid CSV File"))
-        except csv.Error:
+        except csv.Error as e:
             raise forms.ValidationError(_("CSV could not be parsed. Please use ',' or ';' as delimiter."))
 
 

@@ -14,6 +14,8 @@
     {% captureas is_deactivategroup %}True{% endcaptureas %}
 {% elif current_page == "temporaryusers" %}
     {% captureas is_temporaryusers %}True{% endcaptureas %}
+{% elif current_page == "recordedmeetings" %}
+    {% captureas is_recordedmeetings %}True{% endcaptureas %}
 {% elif current_page == "conferenceroommanagement" %}
     {% captureas is_conferenceroommanagement %}True{% endcaptureas %}
 {% elif current_page == "conference_participation_manangement" %}
@@ -49,13 +51,17 @@
     {% captureas label %}{% trans "Conference Event Management" %}{% endcaptureas %}
     {% include "cosinnus/leftnav_button.html" with active=is_conferenceeventmanagement extra_classes="fine-space" icon_full_class="fas fa-calendar" label=label href=href  %}
     
+    {% captureas href %}{% group_url 'cosinnus:conference:recorded-meetings' group=group %}{% endcaptureas %}
+    {% captureas label %}{% trans "Recorded Meetings" %}{% endcaptureas %}
+    {% include "cosinnus/leftnav_button.html" with active=is_recordedmeetings extra_classes="fine-space" icon_full_class="fas fa-video" label=label href=href  %}
+    
+    <div class="small-space">&nbsp;</div>
+    
     {% if group.use_conference_applications %}
         {% captureas href %}{% group_url 'cosinnus:conference:participation-management-applications' group=group %}{% endcaptureas %}
         {% captureas label %}{% trans "Manage Participation Applications" %}{% endcaptureas %}
         {% include "cosinnus/leftnav_button.html" with active=is_conference_applications extra_classes="fine-space" icon_full_class="fas fa-user-plus" label=label href=href  %}
     {% endif %}
-    
-    <div class="small-space">&nbsp;</div>
     
     {% if group.temporary_users_allowed and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
         {% captureas href %}{% group_url 'cosinnus:conference:temporary-users' group=group %}{% endcaptureas %}

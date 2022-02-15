@@ -572,6 +572,9 @@ class CosinnusConf(AppConf):
     # display map in iframe in user dashboard
     USERDASHBOARD_USE_LIVE_MAP_WIDGET = False
     
+    # switch to the German version of OpenStreetMap tileset
+    MAP_USE_MODERN_TILESET = False
+
     # switch to set if Microsites should be enabled.
     # this can be override for each portal to either activate or deactivate them
     MICROSITES_ENABLED = False
@@ -879,6 +882,7 @@ class CosinnusConf(AppConf):
     # }
     # example: {'organization': {'type': 'text', 'required': True}}
     USERPROFILE_EXTRA_FIELDS = {}
+    USERPROFILE_EXTRA_FIELDS_TRANSLATED_FIELDS = []
     
     # a dict of <form-name> -> list of formfield names that will be disabled in the user profile forms 
     # for the current portal. can be dynamic and regular fields
@@ -1221,6 +1225,18 @@ class CosinnusDefaultSettings(AppConf):
                 },
             },
         },
+        'record_meeting': {
+            0: {
+                'create': {
+                    'record': 'false',
+                },
+            },
+            1: {
+                'create': {
+                    'record': 'true',
+                },
+            },
+        },
     }
     
     # the default baseline portal values for the BBB call params
@@ -1230,6 +1246,7 @@ class CosinnusDefaultSettings(AppConf):
     BBB_PARAM_PORTAL_DEFAULTS = {
         'create': {
             'muteOnStart': 'true', # default preset for 'mic_starts_on': False
+            'record': 'false', # default preset for 'record_meeting'
         },
         'join': {
             'userdata-bbb_auto_share_webcam': 'false', # default preset for 'cam_starts_on': False
@@ -1251,10 +1268,26 @@ class CosinnusDefaultSettings(AppConf):
     # a list of field names from fields in fields in `CosinnusConferenceSettings`
     # that will be shown to the users in the frontend Event forms as choices
     # for presets for BBB rooms
+    # note that 'record_meeting' is disabled by default, as it
+    # requires setting up the BBB servers correctly for it, and should
+    # only be enabled for a portal specifically after that has been done
     BBB_PRESET_USER_FORM_FIELDS = [
         'mic_starts_on',
         'cam_starts_on',
     ]
+    # a complete list of all choices that could be made for BBB_PRESET_USER_FORM_FIELDS
+    #__all_choices__BBB_PRESET_USER_FORM_FIELDS = [
+    #    'mic_starts_on',
+    #    'cam_starts_on',
+    #    'record_meeting',
+    #]
+    
+    # a list of field names from `BBB_PRESET_USER_FORM_FIELDS` that can only
+    # be changed by users if a conference is premium at some point
+    BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY = [
+        'record_meeting',
+    ]
+    
     
     # limit visit creation for (user, bbb_room) pairs to a time window
     BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60*60

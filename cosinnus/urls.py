@@ -25,8 +25,6 @@ from cosinnus.views import map, map_api, user, profile, common, widget, search, 
     conference_administration
 from cosinnus_conference.api.views import ConferenceViewSet, \
     PublicConferenceViewSet
-from cosinnus_event.api.views import EventViewSet
-from cosinnus_note.api.views import NoteViewSet
 from cosinnus_organization.api.views import OrganizationViewSet
 
 
@@ -329,17 +327,33 @@ router.register(r'conferences', ConferenceViewSet, basename='conference')
 router.register(r'groups', CosinnusSocietyViewSet, basename='group')
 router.register(r'projects', CosinnusProjectViewSet, basename='project')
 router.register(r'organizations', OrganizationViewSet, basename='organization')
-router.register(r'events', EventViewSet, basename='event')
-router.register(r'notes', NoteViewSet, basename='note')
+
+# imports from external projects at this time may fail in certain test environments
+try:
+    from cosinnus_event.api.views import EventViewSet
+    router.register(r'events', EventViewSet, basename='event')
+except:
+    pass
+# imports from external projects at this time may fail in certain test environments
+try:
+    from cosinnus_note.api.views import NoteViewSet
+    router.register(r'notes', NoteViewSet, basename='note')
+except:
+    pass
+    
 if getattr(settings, 'COSINNUS_API_SETTINGS', {}).get('user'):
     router.register(r'users', UserViewSet, basename='user')
 
 if settings.COSINNUS_ROCKET_EXPORT_ENABLED:
-    from cosinnus_message.api.views import MessageExportView
-    urlpatterns += [
-        url(r'api/v2/rocket-export/', MessageExportView.as_view()),
-    ]
-
+    # imports from external projects at this time may fail in certain test environments
+    try:
+        from cosinnus_message.api.views import MessageExportView
+        urlpatterns += [
+            url(r'api/v2/rocket-export/', MessageExportView.as_view()),
+        ]
+    except:
+        pass
+    
 if getattr(settings, 'COSINNUS_EMPTY_FILE_DOWNLOAD_NAME', None):
     urlpatterns += [
         url(f'{settings.COSINNUS_EMPTY_FILE_DOWNLOAD_NAME}', common.empty_file_download),

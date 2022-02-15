@@ -30,6 +30,7 @@ from django.template.defaultfilters import truncatechars
 from cosinnus.models.membership import MEMBERSHIP_MEMBER, MANAGER_STATUS
 from cosinnus.models.conference import CosinnusConferenceSettings
 from copy import copy
+from cosinnus.utils.group import get_cosinnus_group_model
 
 
 # from cosinnus.models import MEMBERSHIP_ADMIN
@@ -98,26 +99,9 @@ class BBBRoom(models.Model):
     parent_meeting_id = models.CharField(max_length=100, blank=True, null=True)
     ended = models.BooleanField(default=False)
     
-    
-    # deprecated in favor of deriving create options directly from the source event!
-    options = JSONField(blank=True, null=True, default=dict, verbose_name="room options",
-                        editable=False,
-                        help_text="DEPRECATED! options for the room, that are represented in the bigbluebutton API")
-    # deprecated in favor of deriving create options directly from the source event!
-    welcome_message = models.CharField(max_length=300, null=True, blank=True, verbose_name=_("the rooms welcome message"),
-                                       editable=False,
-                                       help_text="DEPRECATED! the welcome message, that is displayed to attendees")
-    # deprecated in favor of deriving create options directly from the source event!
-    # type of the room. this determines which extra join call parameters are given
-    # along for the user join link. see `settings.BBB_DEPRECATED__ROOM_TYPE_EXTRA_JOIN_PARAMETERS`
-    room_type = models.PositiveSmallIntegerField(_('Room Type'), blank=False,
-        editable=False,
-        default=0, choices=((0, 'deprecated'),),
-        help_text="DEPRECATED!")
-    # deprecated in favor of deriving create options directly from the source event!
-    max_participants = models.PositiveIntegerField(blank=True, null=True, default=None, verbose_name="maximum number of users",
-                                                   editable=False,
-                                                   help_text="DEPRECATED! Maximum number in the conference at the same time. NOTE: Seems this needs to be +1 more the number that you actually want for BBB to allow!")
+    last_create_params = JSONField( verbose_name=_('Last create-call parameters'),
+        blank=True, null=True, default=dict, editable=False,
+        help_text="The parameters used for the last create call. Serves as a record only, new create params are derived from the source object's options!")
     
     
     objects = models.Manager()
@@ -250,6 +234,12 @@ class BBBRoom(models.Model):
             except Exception as e:
                 logger.exception(e)
         return False
+    
+    @property
+    def is_recorded_meeting(self):
+        """ Returns true if the options used for this meeting mean that the 
+            video conference will be recorded in BBB """
+        return self.last_create_params.get('record', None) == 'true'
 
     @property
     def source_object(self):
@@ -289,13 +279,15 @@ class BBBRoom(models.Model):
         source_obj = self.source_object
         if source_obj:
             presentation_url = source_obj.get_presentation_url()
+        
+        create_params = self.build_extra_create_parameters()
         m_xml = self.bbb_api.start(
             name=self.name,
             meeting_id=self.meeting_id,
             attendee_password=self.attendee_password,
             moderator_password=self.moderator_password,
             voice_bridge=self.voice_bridge,
-            options=self.build_extra_create_parameters(),
+            options=create_params,
             presentation_url=presentation_url,
         )
 
@@ -303,12 +295,10 @@ class BBBRoom(models.Model):
 
         if not meeting_json:
             raise ValueError('Unable to restart meeting %s!' % self.meeting_id)
-
-        if self.ended:
-            self.ended = False
-            self.save(update_fields=['ended'])
-
-        return None
+        
+        self.last_create_params = create_params
+        self.ended = False
+        self.save()
 
     @classmethod
     def create(cls, name, meeting_id, attendee_password=None,
@@ -359,13 +349,14 @@ class BBBRoom(models.Model):
             moderator_password = bbb_utils.random_password()
 
         bbb_api = BigBlueButtonAPI(source_object=source_object)
+        create_params = cls.build_extra_create_parameters_for_object(source_object, meeting_id=meeting_id, meeting_name=name)
         m_xml = bbb_api.start(
             name=name,
             meeting_id=meeting_id,
             attendee_password=attendee_password,
             moderator_password=moderator_password,
             voice_bridge=voice_bridge,
-            options=cls.build_extra_create_parameters_for_object(source_object),
+            options=create_params,
             presentation_url=presentation_url,
         )
 
@@ -381,6 +372,7 @@ class BBBRoom(models.Model):
         meeting.parent_meeting_id = meeting_json['parentMeetingID']
         meeting.voice_bridge = meeting_json['voiceBridge']
         meeting.dial_number = meeting_json['dialNumber']
+        meeting.last_create_params = create_params
 
         if not meeting_json:
             meeting.ended = True
@@ -393,10 +385,10 @@ class BBBRoom(models.Model):
     def build_extra_create_parameters(self):
         """ Builds a parameter set for the create API call. Will use the inferred source 
             object that this BBBRoom belongs to to generate options. """
-        return self._meta.model.build_extra_create_parameters_for_object(self.source_object)
+        return self._meta.model.build_extra_create_parameters_for_object(self.source_object,  meeting_id=self.meeting_id, meeting_name=self.name)
     
     @classmethod
-    def build_extra_create_parameters_for_object(cls, source_object):
+    def build_extra_create_parameters_for_object(cls, source_object, meeting_id=None, meeting_name=None):
         params = {}
         params.update(settings.BBB_DEFAULT_CREATE_PARAMETERS)
         # add the source object's options from all inherited settings objects
@@ -407,6 +399,29 @@ class BBBRoom(models.Model):
             params.update({
                 'maxParticipants': max_participants,
             })
+            
+        # collect meta-tags for the BBB create call. these free-form parameters
+        # can be used to save arbitrary information for a BBB-meeting and are 
+        # used to retrieve recorded meetings later on
+        group = None
+        if hasattr(source_object, 'group'):
+            group = source_object.group
+        elif type(source_object) is get_cosinnus_group_model() or issubclass(source_object.__class__, get_cosinnus_group_model()):
+            group = source_object
+        portal_slug = CosinnusPortal.get_current().slug
+        if group:
+            params.update({
+                'meta_we-portal-group-id': f'{portal_slug}-{group.id}',
+                'meta_we-group-id': group.id,
+                'meta_we-group-slug': group.slug,
+                'meta_we-group-name': group.name,
+            })
+        params.update({
+            'meta_we-portal': portal_slug,
+            'meta_we-meeting-id': meeting_id,
+            'meta_we-meeting-name': meeting_name,
+            'meta_we-portal-source-object': f'{portal_slug}-{source_object._meta.model_name}-{source_object.id}'
+        })
         return params
     
     def build_extra_join_parameters(self, user):
@@ -438,6 +453,15 @@ class BBBRoom(models.Model):
         # this is the merged params object containing the flattened hierarchy of inherited objects
         bbb_params = conference_settings.get_finalized_bbb_params()
         call_params = bbb_params.get(api_call_method, {})
+        # block "premium only" params for non-premium source obejcts 
+        # by resetting their call values to the portal default ones
+        source_group = source_object.get_group_for_bbb_room()
+        if not source_group.is_premium_ever:
+            for premium_preset_name in settings.BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY:
+                preset_call_param_dict = list(settings.BBB_PRESET_FORM_FIELD_PARAMS.get(premium_preset_name, {}).values())[0].get(api_call_method, {})
+                for blocked_param_name in preset_call_param_dict.keys():
+                    portal_default_value = settings.BBB_PARAM_PORTAL_DEFAULTS.get(api_call_method, {}).get(blocked_param_name)
+                    call_params[blocked_param_name] = portal_default_value
         return call_params
     
     def get_join_url(self, user):

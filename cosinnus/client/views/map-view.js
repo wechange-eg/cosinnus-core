@@ -14,6 +14,7 @@ module.exports = ContentControlView.extend({
         'click .map-expand-button': 'onExpandButtonClicked',
     },
     
+    // English / International version of the OpenStreetMap tileset based on CartoDB
     layers: {
         street: {
             url: (util.protocol() === 'http:' ?
@@ -21,6 +22,18 @@ module.exports = ContentControlView.extend({
                 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'),
             options: {
                 attribution: '<a href="https://carto.com" target="_blank">CartoDB</a> | <a href="https://www.openstreetmap.org" target="_blank">&copy; OpenStreetMap contributors</a>'
+            }
+        },
+    },
+
+    // German version of the OpenStreetMap tileset
+    layersModernTileset: {
+        street: {
+            url: (util.protocol() === 'https:' ?
+                'http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png' :
+                'https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png'),
+            options: {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }
         },
     },
@@ -580,12 +593,21 @@ module.exports = ContentControlView.extend({
 
     setLayer: function (layer) {
         this.state.currentLayer && this.leaflet.removeLayer(this.state.currentLayer);
-        var options = _(this.layers[layer].options).extend({
-            maxZoom: 15,
-            minZoom:3
-        });
-        this.state.currentLayer = L.tileLayer(this.layers[layer].url, options)
-            .addTo(this.leaflet);
+        if (COSINNUS_MAP_USE_MODERN_TILESET == true){
+            var options = _(this.layersModernTileset[layer].options).extend({
+                maxZoom: 15,
+                minZoom:3
+            });
+            this.state.currentLayer = L.tileLayer(this.layersModernTileset[layer].url, options)
+                .addTo(this.leaflet);
+        } else {
+            var options = _(this.layers[layer].options).extend({
+                maxZoom: 15,
+                minZoom:3
+            });
+            this.state.currentLayer = L.tileLayer(this.layers[layer].url, options)
+                .addTo(this.leaflet);
+        }
     },
 
     updateBounds: function () {

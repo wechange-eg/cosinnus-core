@@ -60,8 +60,13 @@
                     </div>
                 </td>
                 <td class="onoffswitch-text-label text-bold text-small">
-                    {# Translators: __INCLUDE_JS_PO__ #}
-                    {% trans "Public content" %}
+                    {% if COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Platform content" %}
+                    {% else %}
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Public content" %}
+                    {% endif %}
                 </td>
             </tr>
         </table>

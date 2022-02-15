@@ -1106,7 +1106,14 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
     
     @property
     def has_premium_blocks(self):
+        """ Shortcut to determine if a group has any premium blocks assigned """
         return bool(self.conference_premium_blocks.count() > 0)
+    
+    @property
+    def is_premium_ever(self):
+        """ Shortcut to determine if a group is currently or will at some point
+            ever be premium due to premium blocks """
+        return self.is_premium or self.has_premium_blocks
 
     @property
     def temporary_users_allowed(self):

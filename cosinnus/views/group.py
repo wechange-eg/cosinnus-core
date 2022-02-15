@@ -53,7 +53,8 @@ from cosinnus.api.serializers.group import GroupSimpleSerializer
 from cosinnus.api.serializers.user import UserSerializer
 from cosinnus.core import signals
 from cosinnus.core.decorators.views import membership_required, redirect_to_403, \
-    dispatch_group_access, get_group_for_request, redirect_to_not_logged_in
+    dispatch_group_access, get_group_for_request, redirect_to_not_logged_in,\
+    require_read_access
 from cosinnus.core.registries import app_registry
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm, MembershipForm, CosinnusLocationForm, \
@@ -562,9 +563,33 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
 class GroupMeetingView(SamePortalGroupMixin, RequireReadMixin, DetailView):
 
     template_name = 'cosinnus/group/group_meeting.html'
+    
+    def dispatch(self, request, *args, **kwargs):
+        """ Make sure the group has an active video conference configured. """
+        ret = super().dispatch(request, *args, **kwargs)
+        has_bbb_video = settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and \
+            self.group.video_conference_type == self.group.BBB_MEETING
+        has_fairmeeting_video = CosinnusPortal.get_current().video_conference_server and \
+            self.group.video_conference_type == self.group.FAIRMEETING
+        if not has_bbb_video and not has_fairmeeting_video:
+            messages.error(request, _('This team does not have a video conference configured.'))
+            return redirect_to_403(request, view=self, group=self.group)
+        return ret
 
     def get_object(self, queryset=None):
         return self.group
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        has_bbb_video = settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and \
+            self.group.video_conference_type == self.group.BBB_MEETING
+        if has_bbb_video:
+            bbb_room = getattr(self.group.media_tag, 'bbb_room')
+            context.update({
+                'bbb_room': bbb_room,
+                'recording_prompt_required': bbb_room and bbb_room.is_recorded_meeting or False,
+            })
+        return context
 
 
 class GroupMembersMapListView(GroupDetailView):

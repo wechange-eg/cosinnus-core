@@ -63,6 +63,8 @@ from django.utils.functional import cached_property
 import xlsxwriter
 from cosinnus.utils.http import make_xlsx_response
 from cosinnus.views.profile import deactivate_user_and_mark_for_deletion
+from cosinnus.core.decorators.views import redirect_to_error_page
+from cosinnus.apis.bigbluebutton import BigBlueButtonAPI
 
 logger = logging.getLogger('cosinnus')
 
@@ -372,9 +374,9 @@ class WorkshopParticipantsUploadSkeletonView(SamePortalGroupMixin,
 
         writer.writerow(header)
 
-        for i in range(5):
-            row = ['' if not entry == _('Username')
-                   else str(i + 1) for entry in header]
+        for i in range(1, 4):
+            id = str(i)
+            row = [id, 'First Name {}'.format(id), 'Last Name {}'.format(id)]
             writer.writerow(row)
         return response
 
@@ -578,6 +580,59 @@ class ConferenceRemindersView(SamePortalGroupMixin, RequireWriteMixin, GroupIsCo
 
     def get_success_url(self):
         return group_aware_reverse('cosinnus:conference:reminders', kwargs={'group': self.group})
+
+
+class ConferenceRecordedMeetingsView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, TemplateView):
+    """ A list view that retrieves the recorded BBB meetings for this conference """
+
+    template_name = 'cosinnus/conference/conference_recorded_meetings.html'
+    
+    def get_recorded_meetings(self):
+        self._bbb_api = BigBlueButtonAPI(source_object=self.group)
+        recording_list = self._bbb_api.get_recorded_meetings(group_id=self.group.id)
+        return recording_list
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        recorded_meetings = []
+        recorded_meetings_not_set_up = False
+        try:
+            recorded_meetings = self.get_recorded_meetings()
+        except BigBlueButtonAPI.RecordingAPIServerNotSetUp:
+            recorded_meetings_not_set_up = True
+            
+        context.update({
+            'object_list': recorded_meetings,
+            'object': self.group,
+            'recorded_meetings_not_set_up': recorded_meetings_not_set_up,
+        })
+        return context
+
+
+class ConferenceRecordedMeetingDeleteView(ConferenceRecordedMeetingsView):
+    
+    def post(self, request, *args, **kwargs):
+        redirect_url = group_aware_reverse('cosinnus:conference:recorded-meetings', kwargs={'group': self.group})
+        recording_id = kwargs.get('recording_id')
+        try:
+            recorded_meetings = self.get_recorded_meetings()
+        except BigBlueButtonAPI.RecordingAPIServerNotSetUp:
+            return redirect(redirect_url)
+        # find the recording we want to delete in the list of recordings for this group
+        # this acts as a permission check to see if the user actually should be allowed to delete it
+        matching_recordings = [rec for rec in recorded_meetings if rec['id'] == recording_id]
+        
+        if len(matching_recordings) == 0:
+            messages.error(request, _('Recording %s was not found, has already been deleted, or you do not have permission to delete it.') % recording_id)
+        else:
+            recording = matching_recordings[0]
+            recording_name = recording['name']
+            success = self._bbb_api.delete_recorded_meetings(recording_id)
+            if success:
+                messages.success(request, _('Recording %s was successfully deleted.') % recording_name)
+            else:
+                messages.error(request, _('Recording %s could not be deleted because of a server error.') % recording_name)
+        return redirect(redirect_url)
 
 
 class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
@@ -1101,4 +1156,6 @@ conference_room_add = CosinnusConferenceRoomCreateView.as_view()
 conference_room_edit = CosinnusConferenceRoomEditView.as_view()
 conference_room_delete = CosinnusConferenceRoomDeleteView.as_view()
 conference_reminders = ConferenceRemindersView.as_view()
+conference_recorded_meetings = ConferenceRecordedMeetingsView.as_view()
+conference_recorded_meeting_delete = ConferenceRecordedMeetingDeleteView.as_view()
 conference_confirm_send_reminder = ConferenceConfirmSendRemindersView.as_view()
