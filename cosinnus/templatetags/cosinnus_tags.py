@@ -429,6 +429,23 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
                 membership_requests_count += len(pending_ids)
         context['group_requests_json_encoded'] = _escape_quotes(_json.dumps(membership_requests))
         context['group_requests_count'] = membership_requests_count
+
+        conference_application_requests = []
+        conference_application_requests_count = 0
+        admined_group_ids = get_cosinnus_group_model().objects.get_for_user_group_admin_pks(request.user)
+        admined_groups = get_cosinnus_group_model().objects.get_cached(pks=admined_group_ids)
+        for admined_group in admined_groups:
+            pending_ids = CosinnusConferenceApplication.objects.applied().filter(conference=admined_group)
+            if len(pending_ids) > 0:
+                conference_application_request_item = DashboardItem()
+                conference_application_request_item['icon'] = 'fa-sitemap' if admined_group.type == get_cosinnus_group_model().TYPE_CONFERENCE else 'fa-group'
+                conference_application_request_item['text'] = escape('%s (%d)' % (admined_group.name, len(pending_ids)))
+                conference_application_request_item['url'] = group_aware_reverse('cosinnus:group-detail', kwargs={'group': admined_group}) + '?requests=1#requests'
+                conference_application_requests.append(conference_application_request_item)
+                conference_application_requests += len(pending_ids)
+                print(f'{conference_application_requests}PPP')
+        context['conference_requests_json_encoded'] = _escape_quotes(_json.dumps(conference_application_requests))
+        context['conference_requests_count'] = conference_application_requests_count
         
         attending_events = []
         try:
