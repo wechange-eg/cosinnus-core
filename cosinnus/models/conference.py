@@ -213,13 +213,6 @@ class CosinnusConferenceSettings(models.Model):
             if conference_settings:
                 setting_obj = conference_settings
             
-            # set the premium state
-            if setting_obj and setting_obj != 'UNSET':
-                if getattr(source_object, 'is_premium_ever', False):
-                    setting_obj.is_premium_ever = True
-                if getattr(source_object, 'is_premium', False):
-                    setting_obj.is_premium = True
-            
             if setting_obj and setting_obj != 'UNSET' and not no_traversal:
                 # we have a setting object for our current object, and it wasn't cached yet
                 # check if we have higher up parent *source* object
@@ -241,7 +234,16 @@ class CosinnusConferenceSettings(models.Model):
                 parent_object = get_parent_object_in_conference_setting_chain(obj)
                 if parent_object:
                     setting_obj = cls.get_for_object(parent_object, recursed=True)
-                    
+            
+            # at this point, the recursion has completed and is only on its way outside.
+            # while going up, we collect the premium state (if one part of the hierarchy is premium, all are)
+            # set the premium state on this object if the current source object is premium
+            if setting_obj and setting_obj != 'UNSET':
+                if getattr(source_object, 'is_premium_ever', False):
+                    setting_obj.is_premium_ever = True
+                if getattr(source_object, 'is_premium', False):
+                    setting_obj.is_premium = True
+            
             # final, outside iteration:
             if not recursed:
                 # set bbb room nature
