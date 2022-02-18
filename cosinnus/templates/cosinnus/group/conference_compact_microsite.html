@@ -88,7 +88,7 @@
 					                    <div class="microsite-conference-workshop-list large-space">
 					                        {% for event in room_events %}
 					                            {% if not event.is_break %}
-                                                    {% if event.is_visible %}
+                                                    {% if event.is_visible_on_microsite %}
                                                         <div class="fadedown regular-space">
                                                         <div class="small-space">
                                                                 <a href="{{ event.get_absolute_url }}">
@@ -99,7 +99,7 @@
                                                                         <div class="div">
                                                                             {% include 'cosinnus_event/common/humanized_event_time.html' with event=event %}
                                                                             
-                                                                            {% if event.note and event.is_public %}
+                                                                            {% if event.note and event.is_description_visible_on_microsite %}
                                                                                 &nbsp;
                                                                                 <a href="#" class="fadedown-clickarea">
                                                                                     {% trans "More infos..." %}
@@ -107,7 +107,7 @@
                                                                                 </a>
                                                                             {% endif %}
                                                                         </div>
-                                                                        {% if event.note and event.is_public %}
+                                                                        {% if event.note and event.is_description_visible_on_microsite %}
                                                                             {% comment %} This is being fade-downed {% endcomment %}
                                                                             <div class="textfield transparent">
                                                                                 {% if user.is_authenticated %}
