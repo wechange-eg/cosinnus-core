@@ -287,7 +287,9 @@
 	                    {% include 'cosinnus/v2/texts/create_events_description.html' %}
 					</div>
 					<div class="action text-bold">
-						{% trans "Add Event" %}
+						{% trans "Add Event to "%}
+						{% get_forum_name as forum %}
+						{{ forum.name }}
 					</div>
 				</a>
 			{% endif %}
@@ -299,7 +301,9 @@
 	                    {% include 'cosinnus/v2/texts/create_offers_description.html' %}
 					</div>
 					<div class="action text-bold">
-						{% trans "Post new Offer" %}
+						{% trans "Post new Offer in " %}
+						{% get_forum_name as forum %}
+						{{ forum.name }}
 					</div>
 				</a>
 			{% endif %}
