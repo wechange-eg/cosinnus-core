@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-26 17:15+0100\n"
+"POT-Creation-Date: 2022-02-18 09:18+0100\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2481,6 +2481,10 @@ msgstr "Je kunt de volgende variabelen gebruiken:"
 msgid "Currently set Welcome-Email Text"
 msgstr "Momenteel ingestelde welkomstmailtekst"
 
+#, fuzzy
+msgid "Video conference"
+msgstr "Is conferentie"
+
 msgid "Conference Room Management"
 msgstr "Conferentieruimte management"
 
@@ -3616,10 +3620,6 @@ msgstr "Evenementen"
 
 msgid "News"
 msgstr "Nieuws"
-
-#, fuzzy
-msgid "Video conference"
-msgstr "Is conferentie"
 
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
@@ -7136,10 +7136,17 @@ msgstr "Taal wijzigen"
 msgid "Register a new account"
 msgstr "Registreer een nieuw account"
 
+#, fuzzy
+#| msgid "Add Event"
+msgid "Add Event to "
+msgstr "Evenement toevoegen"
+
 msgid "Offer"
 msgstr "Bied aan"
 
-msgid "Post new Offer"
+#, fuzzy
+#| msgid "Post new Offer"
+msgid "Post new Offer in "
 msgstr "Plaats een nieuwe aanbieding"
 
 msgid "Edit My Profile"
@@ -7169,6 +7176,98 @@ msgstr "Goed om je te zien! Bij %(portal_name)s kun je samenwerken met anderen i
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Nu registreren en help mee vorm te geven"
+
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Mijn Projecten en Groepen"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Soorteerveld"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Projecten/Groepen"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Projecten/Groepen"
+
+#, fuzzy
+msgid "Options"
+msgstr "Proporties"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Upload een afbeelding."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Mijn Projecten en Groepen"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Wachtwoord reset succesvol"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Foutmelding!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Berichten"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Foutmelding!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Berichten"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
 
 msgid "Show more Projects"
 msgstr "Toon meerdere projecten"
@@ -8181,10 +8280,6 @@ msgstr "Je wijzigingen zijn opgeslagen."
 #~ msgstr "Actief"
 
 #, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Wachtwoord reset succesvol"
-
-#, fuzzy
 #~| msgid "Delete elements"
 #~ msgid "Delete (not yet implemented)"
 #~ msgstr "Elementen verwijderen"
@@ -8193,58 +8288,14 @@ msgstr "Je wijzigingen zijn opgeslagen."
 #~ msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
 #~ msgstr "Weet je zeker dat je aankondiging “%(title)s” wilt verwijderen?"
 
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Foutmelding!"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Mijn Projecten en Groepen"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Mijn Projecten en Groepen"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Soorteerveld"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Berichten"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Berichten"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Proporties"
-
 #~ msgid "Premium"
 #~ msgstr "Premium"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Projecten/Groepen"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Foutmelding!"
 
 #~ msgid "Restricted"
 #~ msgstr "Beperkt"
 
 #~ msgid "Room Type"
 #~ msgstr "Ruimte type"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Upload een afbeelding."
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Projecten/Groepen"
 
 #~ msgid "the rooms welcome message"
 #~ msgstr "welkomstboodschap van de ruimte"
