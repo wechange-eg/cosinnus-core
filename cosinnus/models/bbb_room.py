@@ -1,6 +1,7 @@
 import logging
 import random
 import string
+from urllib import request
 
 from annoying.functions import get_object_or_None
 from django.conf import settings
@@ -11,8 +12,9 @@ from django.core.cache import cache
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import Q
+from django.test import RequestFactory
 from django.urls.base import reverse
-from django.utils import timezone
+from django.utils import translation
 from django.utils.translation import ugettext as _
 
 from cosinnus.apis.bigbluebutton import BigBlueButtonAPI
@@ -436,6 +438,11 @@ class BBBRoom(models.Model):
             domain = CosinnusPortal.get_current().get_domain()
             params.update({
                 'avatarURL': domain + user.cosinnus_profile.get_avatar_thumbnail_url(size=(800,800))
+            })
+        if user.cosinnus_profile.language:
+            cur_language = translation.get_language()
+            params.update({
+                'userdata-bbb_override_default_locale': cur_language
             })
         return params
     
