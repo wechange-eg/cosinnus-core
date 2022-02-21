@@ -103,6 +103,7 @@ module.exports = BaseView.extend({
     afterRender: function () {
     	// render moment dates
     	$.cosinnus.renderMomentDataDate();
+        $.cosinnus.renderTimezoneAwareDates();
     },
     
     /** Called when a topic link is clicked to filter for that topic only */

@@ -827,9 +827,7 @@
                 
 
                 if ($(this).attr('data-date-style') == 'short') {
-                    // render the date without time
-                    moment.lang(moment.lang(),$.cosinnus.momentShort);
-                    $(this).text(mom.calendar());
+                    $(this).text(mom.calendar($.cosinnus.momentShort.calendar));
                 } else {
                     if ((diff_days > -1 && diff_days < 1) || diff_days < -4 ) {
                         // render the date difference for today, tomorrow, and longer than 4 days ago
