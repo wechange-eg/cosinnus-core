@@ -68,6 +68,7 @@ NEVER_REDIRECT_URLS = [
     '/api/v2/navbar/',
     '/api/v2/header/',
     '/api/v2/footer/',
+    '/api/v2/statistics/',
     '/o/',
     '/group/forum/cloud/oauth2/',
     '/account/verify_email/',
