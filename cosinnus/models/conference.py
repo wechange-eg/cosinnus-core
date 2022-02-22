@@ -442,12 +442,14 @@ class CosinnusConferenceSettings(models.Model):
     def _text_for_server_choice(self, choice_id):
         choice_dict = dict(settings.COSINNUS_BBB_SERVER_CHOICES)
         if choice_id not in choice_dict:
+            if choice_id == CosinnusConferenceSettings.SETTING_INHERIT:
+                return None
             auth_dict = dict(settings.COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS)
             if choice_id in auth_dict:
                 # if the BBB choice was removed and is still in auth servers, return the URL
                 return f'(Deprecated Server Choice): {auth_dict[choice_id][0]}'
             else:
-                return '(Invalid BBB server, possibly removed)'
+                return f'(Invalid BBB server, possibly removed)'
         return choice_dict[choice_id]
     
     @property
