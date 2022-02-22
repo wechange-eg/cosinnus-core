@@ -216,8 +216,8 @@
 		</script>
 	{% endif %}
 
+    {% get_forum_group as forum_group %}
 	<div class="collapse nav-flyout create-menu" id="create-menu-collapse">
-
 		<div class="nav-flyout-section flex-row mobile-flex-column">
 			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url 'cosinnus:group-add' %}"
 					class="create-menu-link flex-grow">
@@ -288,8 +288,7 @@
 					</div>
 					<div class="action text-bold">
 						{% trans "Add Event to "%}
-						{% get_forum_name as forum %}
-						{{ forum.name }}
+						{{ forum_group.name }}
 					</div>
 				</a>
 			{% endif %}
@@ -302,8 +301,7 @@
 					</div>
 					<div class="action text-bold">
 						{% trans "Post new Offer in " %}
-						{% get_forum_name as forum %}
-						{{ forum.name }}
+						{{ forum_group.name }}
 					</div>
 				</a>
 			{% endif %}

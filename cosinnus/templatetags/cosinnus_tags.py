@@ -1436,7 +1436,7 @@ def user_has_otp_device(user):
     return user_has_device(user)
 
 @register.simple_tag()
-def get_forum_name():
+def get_forum_group():
     """ Returns the forum object """
     forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
     forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
