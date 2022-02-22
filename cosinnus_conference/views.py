@@ -260,8 +260,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         return unique_name
 
     def get_email_domain(self):
-        if (settings.COSINNUS_TEMP_USER_EMAIL_DOMAIN and not
-                settings.COSINNUS_TEMP_USER_EMAIL_DOMAIN == ''):
+        if settings.COSINNUS_TEMP_USER_EMAIL_DOMAIN:
             return settings.COSINNUS_TEMP_USER_EMAIL_DOMAIN
         return '{}.de'.format(slugify(settings.COSINNUS_PORTAL_NAME))
 
