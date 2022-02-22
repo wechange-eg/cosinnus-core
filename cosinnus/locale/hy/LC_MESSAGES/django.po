@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-26 17:15+0100\n"
+"POT-Creation-Date: 2022-02-18 09:18+0100\n"
 "Language: hy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2493,6 +2493,10 @@ msgstr "Կարող եք օգտագործել հետևյալ փոփոխականն
 msgid "Currently set Welcome-Email Text"
 msgstr "Ներկայումս սահմանված Ողջույնի նամակի տեքստը"
 
+#, fuzzy
+msgid "Video conference"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
 msgid "Conference Room Management"
 msgstr ""
 
@@ -3625,10 +3629,6 @@ msgstr "Իրադարձություններ"
 
 msgid "News"
 msgstr "Նորություններ"
-
-#, fuzzy
-msgid "Video conference"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
@@ -7143,10 +7143,17 @@ msgstr "Փոխել լեզուն"
 msgid "Register a new account"
 msgstr "Գրանցել նոր անձնական էջ"
 
+#, fuzzy
+#| msgid "Add Event"
+msgid "Add Event to "
+msgstr "Ավելացնել Իրադարձություն"
+
 msgid "Offer"
 msgstr "Առաջարկ"
 
-msgid "Post new Offer"
+#, fuzzy
+#| msgid "Post new Offer"
+msgid "Post new Offer in "
 msgstr "Հրապարակել նոր Առաջարկ"
 
 msgid "Edit My Profile"
@@ -7176,6 +7183,98 @@ msgstr "Ուրախ ենք ձեզ տեսնել! %(portal_name)s - ում դուք
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Jetzt anmelden und mitgestalten"
+
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Իմ Նախագծերը և Խմբերը"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Տեսակավորել դաշտը"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Նախագծեր / Խմբեր"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Նախագծեր / Խմբեր"
+
+#, fuzzy
+msgid "Options"
+msgstr "Համամասնություններ"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Վերբեռնել պատկեր."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Իմ Նախագծերը և Խմբերը"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Գաղտնաբառի վերաբեռնումը հաջողվեց"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Սխալ!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Նամակներ"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Սխալ!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Նամակներ"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
 
 msgid "Show more Projects"
 msgstr "Ցուցադրել ավելի շատ ծրագրեր"
@@ -8192,10 +8291,6 @@ msgstr "Ձեր փոփոխությունները պահպանվել են."
 #~ msgstr "Ակտիվացնել"
 
 #, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Գաղտնաբառի վերաբեռնումը հաջողվեց"
-
-#, fuzzy
 #~| msgid "Delete elements"
 #~ msgid "Delete (not yet implemented)"
 #~ msgstr "Ջնջել էլեմենտները"
@@ -8205,52 +8300,8 @@ msgstr "Ձեր փոփոխությունները պահպանվել են."
 #~ msgstr "Արդյո՞ք ցանկանում եք ջնջել \"%(title)s\" հայտարարությունը?"
 
 #, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Սխալ!"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Իմ Նախագծերը և Խմբերը"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Իմ Նախագծերը և Խմբերը"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Տեսակավորել դաշտը"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Նամակներ"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Նամակներ"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Համամասնություններ"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Նախագծեր / Խմբեր"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Սխալ!"
-
-#, fuzzy
 #~ msgid "Room Type"
 #~ msgstr "Թիմի տեսակից"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Վերբեռնել պատկեր."
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Նախագծեր / Խմբեր"
 
 #, fuzzy
 #~ msgctxt "time"
