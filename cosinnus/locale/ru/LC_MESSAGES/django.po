@@ -2766,6 +2766,7 @@ msgstr "Подать заявку на участие в конференции"
 msgid "Withdraw"
 msgstr "Отозвать"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Conference Applications"
 msgstr "Заявки на участие в конференции"
 
