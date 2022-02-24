@@ -22,6 +22,7 @@ from django.views.generic.edit import FormView, CreateView, UpdateView,\
     DeleteView
 from django.utils.dateparse import parse_datetime
 import six
+from cosinnus.core import signals
 
 from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm
 from cosinnus.models.conference import CosinnusConferenceRoom,\
@@ -260,8 +261,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         return unique_name
 
     def get_email_domain(self):
-        if (settings.COSINNUS_TEMP_USER_EMAIL_DOMAIN and not
-                settings.COSINNUS_TEMP_USER_EMAIL_DOMAIN == ''):
+        if settings.COSINNUS_TEMP_USER_EMAIL_DOMAIN:
             return settings.COSINNUS_TEMP_USER_EMAIL_DOMAIN
         return '{}.de'.format(slugify(settings.COSINNUS_PORTAL_NAME))
 
@@ -775,6 +775,9 @@ class ConferenceApplicationView(SamePortalGroupMixin,
                 application.user = self.request.user
                 application.priorities = priorities
                 application.save()
+
+                signals.user_group_join_requested.send(sender=self, obj=self.group, user=self.request.user, 
+                    audience=list(get_user_model()._default_manager.filter(id__in=self.group.admins)))
                 messages.success(self.request, _('Your application has been submitted.'))
             else:
                 application = form.save()

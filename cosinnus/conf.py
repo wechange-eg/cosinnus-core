@@ -211,6 +211,9 @@ class CosinnusConf(AppConf):
     # the class with the implementation for importing CosinnusGroups used for the CSV import
     CSV_IMPORT_GROUP_IMPORTER = 'cosinnus.utils.import_utils.GroupCSVImporter'
     
+    # the email domain for "fake" addresses for temporary CSV users for conferences
+    TEMP_USER_EMAIL_DOMAIN = None
+    
     # should a custom premoum page be shown for actions that require a paid subscription,
     # like creating groups. template for this is `premium_info_page.html`
     CUSTOM_PREMIUM_PAGE_ENABLED = False
@@ -1292,6 +1295,3 @@ class CosinnusDefaultSettings(AppConf):
     # limit visit creation for (user, bbb_room) pairs to a time window
     BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60*60
     
-    
-
-    TEMP_USER_EMAIL_DOMAIN = ''

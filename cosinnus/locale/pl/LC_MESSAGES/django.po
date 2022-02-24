@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-07 15:17+0100\n"
+"POT-Creation-Date: 2022-02-18 09:18+0100\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2429,6 +2429,10 @@ msgstr "Możesz użyć następujących zmiennych:"
 msgid "Currently set Welcome-Email Text"
 msgstr "Aktualne ustawienia tekstu powitalnego e-mail"
 
+#, fuzzy
+msgid "Video conference"
+msgstr "Widok konferencji"
+
 msgid "Conference Room Management"
 msgstr "Zarządzanie pokojem konferencyjnym"
 
@@ -3518,10 +3522,6 @@ msgstr "Wydarzenia"
 
 msgid "News"
 msgstr "Aktualności"
-
-#, fuzzy
-msgid "Video conference"
-msgstr "Widok konferencji"
 
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
@@ -6999,10 +6999,17 @@ msgstr "Zmień język"
 msgid "Register a new account"
 msgstr "Zarejestruj nowe konto"
 
+#, fuzzy
+#| msgid "Add Event"
+msgid "Add Event to "
+msgstr "Dodaj Wydarzenie"
+
 msgid "Offer"
 msgstr "Oferta"
 
-msgid "Post new Offer"
+#, fuzzy
+#| msgid "Post new Offer"
+msgid "Post new Offer in "
 msgstr "Opublikuj nową ofertę"
 
 msgid "Edit My Profile"

@@ -10,7 +10,7 @@
 								aria-expanded="false" aria-controls="main-collapse"
 								data-toggle="collapse" data-target="#main-collapse">
 							<i class="fas fa-fw fa-bars"></i>
-							{% with total_counter=groups_invited_count|add_num:group_requests_count %}
+							{% with total_counter=groups_invited_count|add_num:group_requests_count|add_num:conference_requests_count %}
 								{% if total_counter > 0 %}
 									<span class="message-counter"> {{ total_counter }}</span>
 								{% endif %}
@@ -188,6 +188,8 @@
 	            		'groups_invited': "{{ groups_invited_json_encoded }}",
 	            		'group_requests': "{{ group_requests_json_encoded }}",
 	            		'group_requests_count': {{ group_requests_count }},
+						'conference_requests': "{{ conference_requests_json_encoded }}",
+						'conference_requests_count': {{ conference_requests_count }},
 	            		{% if SETTINGS.COSINNUS_IDEAS_ENABLED %}
 	            		'followed_ideas': "{{ followed_ideas_json_encoded }}",
 	            		'my_ideas': "{{ my_ideas_json_encoded }}",
@@ -216,8 +218,8 @@
 		</script>
 	{% endif %}
 
+    {% get_forum_group as forum_group %}
 	<div class="collapse nav-flyout create-menu" id="create-menu-collapse">
-
 		<div class="nav-flyout-section flex-row mobile-flex-column">
 			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url 'cosinnus:group-add' %}"
 					class="create-menu-link flex-grow">
@@ -287,7 +289,8 @@
 	                    {% include 'cosinnus/v2/texts/create_events_description.html' %}
 					</div>
 					<div class="action text-bold">
-						{% trans "Add Event" %}
+						{% trans "Add Event to "%}
+						{{ forum_group.name }}
 					</div>
 				</a>
 			{% endif %}
@@ -299,7 +302,8 @@
 	                    {% include 'cosinnus/v2/texts/create_offers_description.html' %}
 					</div>
 					<div class="action text-bold">
-						{% trans "Post new Offer" %}
+						{% trans "Post new Offer in " %}
+						{{ forum_group.name }}
 					</div>
 				</a>
 			{% endif %}

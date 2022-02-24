@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-26 17:15+0100\n"
+"POT-Creation-Date: 2022-02-18 09:18+0100\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2426,6 +2426,10 @@ msgstr "באפשרותך להשתמש במשתנים הבאים:"
 msgid "Currently set Welcome-Email Text"
 msgstr "טקסט ברכת הצטרפות שמוגדר כרגע"
 
+#, fuzzy
+msgid "Video conference"
+msgstr "הצג ועידה"
+
 msgid "Conference Room Management"
 msgstr "ניהול חדר ועידה"
 
@@ -3515,10 +3519,6 @@ msgstr "אירועים"
 
 msgid "News"
 msgstr "חדשות"
-
-#, fuzzy
-msgid "Video conference"
-msgstr "הצג ועידה"
 
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
@@ -6979,10 +6979,17 @@ msgstr "שנה שפה"
 msgid "Register a new account"
 msgstr "רישום חשבון חדש"
 
+#, fuzzy
+#| msgid "Add Event"
+msgid "Add Event to "
+msgstr "הוסף אירוע"
+
 msgid "Offer"
 msgstr "הצעה"
 
-msgid "Post new Offer"
+#, fuzzy
+#| msgid "Post new Offer"
+msgid "Post new Offer in "
 msgstr "פרסם הצעה חדשה"
 
 msgid "Edit My Profile"
@@ -7012,6 +7019,98 @@ msgstr "טוב לראותך! ב-%(portal_name)s אתה יכול ליצור שי�
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "הירשמו עכשיו ועזרו לעצב אותו"
+
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "הפרויקטים והקבוצות שלי"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "הייבוא נכשל"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "פרוייקט/קבוצה"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "העלאת קובץ CSV"
+
+#, fuzzy
+msgid "Options"
+msgstr "פרופורציות"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "העלה תמונה."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "הפרויקטים והקבוצות שלי"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "הייבוא הצליח!"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "שגיאה!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "השם שלך"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "שגיאה!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "השם שלך"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
 
 msgid "Show more Projects"
 msgstr "הצג פרוייקטים נוספים"
@@ -7966,10 +8065,6 @@ msgstr "השינויים שביצעת נשמרו בהצלחה."
 #~ msgstr "פעיל"
 
 #, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "הייבוא הצליח!"
-
-#, fuzzy
 #~| msgid "Delete elements"
 #~ msgid "Delete (not yet implemented)"
 #~ msgstr "מחיקת רכיבים"
@@ -7979,58 +8074,14 @@ msgstr "השינויים שביצעת נשמרו בהצלחה."
 #~ msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
 #~ msgstr "האם את/ה בטוח שברצונך למחוק את הקובץ \"%(title)s\"?"
 
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "שגיאה!"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "הפרויקטים והקבוצות שלי"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "הפרויקטים והקבוצות שלי"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "הייבוא נכשל"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "השם שלך"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "השם שלך"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "פרופורציות"
-
 #~ msgid "Premium"
 #~ msgstr "פרמיום"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "פרוייקט/קבוצה"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "שגיאה!"
 
 #~ msgid "Restricted"
 #~ msgstr "מוגבל"
 
 #~ msgid "Room Type"
 #~ msgstr "סוג חדר"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "העלה תמונה."
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "העלאת קובץ CSV"
 
 #~ msgctxt "time"
 #~ msgid "o'clock"
