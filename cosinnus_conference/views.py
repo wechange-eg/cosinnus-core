@@ -76,7 +76,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
     form_class = CosinusWorkshopParticipantCSVImportForm
 
     def extra_dispatch_check(self):
-        if not self.group.temporary_users_allowed:
+        if not self.group.has_premium_rights:
             messages.warning(self.request, _('This function is not enabled for this conference.'))
             return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
 
