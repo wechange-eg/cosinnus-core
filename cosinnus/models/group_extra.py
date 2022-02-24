@@ -9,6 +9,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
+from cosinnus_event.utils.bbb_streaming import trigger_streamer_status_changes
 from cosinnus.models.group import CosinnusGroupManager, CosinnusGroup, \
     get_cosinnus_group_model
 from cosinnus.trans.group import get_group_trans_by_type
@@ -124,7 +125,9 @@ class CosinnusConference(get_cosinnus_group_model()):
         super(CosinnusConference, self).save(*args, **kwargs)
         from cosinnus_conference.utils import update_conference_premium_status
         update_conference_premium_status(conferences=[self])
-    
+        if not self.has_premium_rights:
+            trigger_streamer_status_changes()
+
     def __str__(self):
         # FIXME: better caching for .portal.name
         return '%s (%s)' % (self.name, self.portal.name)
