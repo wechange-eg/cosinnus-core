@@ -109,6 +109,8 @@
             var startTime = $(this).val();
             var endHours = parseInt(startTime) + 1;
             $('#id_{{ to_date_field.html_name }}_1').val(endHours);
+        } else if ($(this).val().trim() == '') {
+            $('#id_{{ to_date_field.html_name }}_1').val('');
         }
     });
 
