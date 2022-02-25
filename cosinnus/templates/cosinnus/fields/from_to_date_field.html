@@ -38,7 +38,7 @@
                     value="{% now "Y-m-d" %}" 
                 {% endif %}
             >
-            <input {% if hide_time_field %}type="hidden"{% endif%} class="calendar-date-time-chooser-time" id="id_{{ from_date_field.html_name }}_1" name="{{ from_date_field.html_name }}_1" 
+            <input {% if hide_time_field %}type="hidden"{% endif%} class="calendar-date-time-chooser-time" id="id_{{ from_date_field.html_name }}_1" name="{{ from_date_field.html_name }}_1" autocomplete="off"
                 placeholder="00:00" type="text"
                 {% if from_date_field.value and from_date_field.value|date:'H:i' %}
                     value="{{ from_date_field.value|date:'H:i' }}"
@@ -68,7 +68,7 @@
                    value="{% now "Y-m-d" %}" 
                 {% endif %}
             >
-            <input {% if hide_time_field %}type="hidden"{% endif%} class="calendar-date-time-chooser-time" id="id_{{ to_date_field.html_name }}_1" name="{{ to_date_field.html_name }}_1"
+            <input {% if hide_time_field %}type="hidden"{% endif%} class="calendar-date-time-chooser-time" id="id_{{ to_date_field.html_name }}_1" name="{{ to_date_field.html_name }}_1" autocomplete="off"
                 placeholder="23:59" type="text" 
                 {% if to_date_field.value and to_date_field.value|date:'H:i' %}
                     value="{{ to_date_field.value|date:'H:i' }}"
