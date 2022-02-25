@@ -95,5 +95,21 @@
 	    $.cosinnus.fullcalendar();
 	    $.cosinnus.calendarDayTimeChooser();
     });
-</script>
 
+    $('#id_{{ from_date_field.html_name }}_1').keyup(function(){
+        if(/[0-9]{1,2}\:[0-9]{2}/.test($(this).val())) {
+            var startTime = $(this).val().split(':');
+            var endHours = parseInt(startTime) + 1;
+            $('#id_{{ to_date_field.html_name }}_1').val(endHours +':'+ startTime[1]);
+        } else if (/[0-9]{4}/.test($(this).val())) {
+            var startTime = $(this).val();
+            var endHours = parseInt(startTime) + 100;
+            $('#id_{{ to_date_field.html_name }}_1').val(endHours);
+        } else if (/[0-9]{1,2}/.test($(this).val())) {
+            var startTime = $(this).val();
+            var endHours = parseInt(startTime) + 1;
+            $('#id_{{ to_date_field.html_name }}_1').val(endHours);
+        }
+    });
+
+</script>
