@@ -43,7 +43,7 @@
 		            {% trans "Allow recording" %}
                     {% if premium_label %}{{ premium_label }}{% endif %}
 		            ({% trans "Default" %}: <b>{{ form.inherited_field_value_labels.record_meeting }})</b>
-		            <br/>
+					<br/>
 		            {% trans "Note: New recordings can only be made if you have booked premium features for this conference." %}
 		        {% endcaptureas %}
 		        {% include 'cosinnus/fields/condensed_radio_field.html' with field=form.record_meeting label=record_meeting_label %}
