@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-18 09:18+0100\n"
+"POT-Creation-Date: 2022-03-01 13:03+0100\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2848,6 +2848,7 @@ msgstr ""
 msgid "Withdraw"
 msgstr "გამოთხოვა"
 
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 msgid "Conference Applications"
 msgstr "ვიდეო კონფერენციის სერვერი"
