@@ -1,13 +1,15 @@
 from rest_framework import viewsets
 
 from cosinnus.api.serializers.group import CosinnusSocietySerializer, CosinnusProjectSerializer
-from cosinnus.api.views.mixins import PublicCosinnusGroupFilterMixin, CosinnusFilterQuerySetMixin, ReadOnlyOrIsAdminUser
+from cosinnus.api.views.mixins import PublicCosinnusGroupFilterMixin, CosinnusFilterQuerySetMixin, \
+    ReadOnlyOrIsAdminUser
 from cosinnus.conf import settings
 from cosinnus.models import RelatedGroups
 from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
 from cosinnus.utils.group import get_cosinnus_group_model
 
 CosinnusGroup = get_cosinnus_group_model()
+
 
 class CosinnusSocietyViewSet(CosinnusFilterQuerySetMixin,
                              PublicCosinnusGroupFilterMixin,
@@ -16,6 +18,7 @@ class CosinnusSocietyViewSet(CosinnusFilterQuerySetMixin,
     permission_classes = (ReadOnlyOrIsAdminUser,)
     queryset = CosinnusSociety.objects.all()
     serializer_class = CosinnusSocietySerializer
+    lookup_field = "slug"
 
     def perform_create(self, serializer):
         super().perform_create(serializer)
