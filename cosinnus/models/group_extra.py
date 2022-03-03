@@ -125,8 +125,6 @@ class CosinnusConference(get_cosinnus_group_model()):
         super(CosinnusConference, self).save(*args, **kwargs)
         from cosinnus_conference.utils import update_conference_premium_status
         update_conference_premium_status(conferences=[self])
-        if not self.has_premium_rights:
-            trigger_streamer_status_changes()
 
     def __str__(self):
         # FIXME: better caching for .portal.name

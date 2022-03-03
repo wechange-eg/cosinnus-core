@@ -23,7 +23,6 @@ from phonenumber_field.modelfields import PhoneNumberField
 import six
 
 from cosinnus.conf import settings
-from cosinnus_event.utils.bbb_streaming import trigger_streamer_status_changes
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import get_tag_object_model
 from cosinnus_event.mixins import BBBRoomMixin # noqa
@@ -947,16 +946,6 @@ class CosinnusConferencePremiumBlock(models.Model):
         ordering = ('from_date',)
         verbose_name = _('Cosinnus Conference Premium Block')
         verbose_name_plural = _('Cosinnus Conference Premium Blocks')
-
-    def delete(self, *args, **kwargs):
-        conference = self.conference
-        super().delete(*args, **kwargs)
-        if not conference.has_premium_rights:
-            trigger_streamer_status_changes()
-
-
-
-
 
 
 class CosinnusConferencePremiumCapacityInfo(models.Model):

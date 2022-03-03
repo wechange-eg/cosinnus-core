@@ -17,7 +17,6 @@ from django_reverse_admin import ReverseModelAdmin
 
 from cosinnus.conf import settings
 from cosinnus.core import signals
-from cosinnus_event.utils.bbb_streaming import trigger_streamer_status_changes
 from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.models.conference import CosinnusConferenceSettings, \
     CosinnusConferencePremiumCapacityInfo
@@ -235,13 +234,6 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     inlines = [CosinnusConferenceSettingsInline]
     
     ALL_TYPES_CLASSES = [CosinnusProject, CosinnusSociety, CosinnusConference]
-
-    def save_model(self, request, obj, form, change):
-        super().save_model(request, obj, form, change)
-        is_conference = obj.__class__.__name__ == 'CosinnusConference'
-        # stop all streamers if streamer rights have chnaged during streaming
-        if is_conference and not obj.has_premium_rights:
-            trigger_streamer_status_changes()
 
 
     def _convert_to_type(self, request, queryset, to_group_type, to_group_klass):
