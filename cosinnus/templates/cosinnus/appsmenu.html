@@ -120,7 +120,7 @@
 		            </li>
 	            {% endif %}
 	            
-				{% if group.temporary_users_allowed and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+				{% if group.has_premium_rights and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
 				<li class="app-main appnavi-listelement fine-space">
 					<a href="{{ group_temporary_users }}">
 						<i class="fas fa-user-clock"></i>
