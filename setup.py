@@ -1,7 +1,9 @@
 #!/usr/bin/env python
+
 import os
 import codecs
 from setuptools import setup, find_packages
+
 from cosinnus import VERSION as COSINNUS_VERSION
 
 

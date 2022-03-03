@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 
+# The cosinnus version
 VERSION = '1.0.0'
-
 
 celery_app = None
 
@@ -15,5 +15,5 @@ def init_celery_app():
     except ImportError:
         pass
 
-__all__ = ('celery_app',)
+__all__ = ('celery_app', 'VERSION')
 
