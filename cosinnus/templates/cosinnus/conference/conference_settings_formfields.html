@@ -47,6 +47,13 @@
 		            {% trans "Note: New recordings can only be made if you have booked premium features for this conference." %}
 		        {% endcaptureas %}
 		        {% include 'cosinnus/fields/condensed_radio_field.html' with field=form.record_meeting label=record_meeting_label %}
+		        
+		        {% comment %} 
+			        This <hr> is a workaround-fix because this field with a longer
+			        label with breaklines will simply not let itself be clearfixed 
+			        and always overlaps the next area.
+		        {% endcomment %}
+		        <hr class="invisible"></hr>
 		    {% endif %}
 	    
 	    </div>
