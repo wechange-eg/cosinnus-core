@@ -692,7 +692,7 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
         return None
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, LastVisitedMixin,
                           LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin,
                           CosinnusManagedTagAssignmentModelMixin, VideoEmbedFieldMixin, MembersManagerMixin, BBBRoomMixin,
