@@ -1,0 +1,149 @@
+{% extends "cosinnus_marketplace/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks sekizai_tags %}
+
+{% block page_title %}
+{% if offer.type == 1 %}
+	{% trans "Looking for" %}:
+{% elif offer.type == 2 %}
+	{% trans "Offering" %}:
+{% endif %}
+{{ offer.title }}
+{{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+  {{ block.super }}
+  <li class="active">
+    {% if offer.type == 1 %}
+		{% trans "Looking for" %}:
+	{% elif offer.type == 2 %}
+		{% trans "Offering" %}:
+	{% endif %}
+	{{ offer.title }}
+  </li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus_marketplace/leftnav.html" with return_to="offers" %}
+{% endblock leftnav %}
+
+{% block og_image %}{% if object.attached_images %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ object.attached_images.0.static_image_url }}{% else %}{{ block.super }}{% endif %}{% endblock og_image %}
+{% block og_title %}{% if object.title %}{{ object.title }}{% else %}{{ object.description|truncatewords:8 }}{% endif %} - {{ group.name }} - {{ block.super }}{% endblock og_title %}
+{% block og_description %}{{ object.description|truncatewords:30 }}{% endblock og_description %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% addtoblock "js" %}
+        <script src="{% static 'js/cosinnus_marketplace/cosinnus_marketplace.js' %}"></script>
+    {% endaddtoblock %}
+{% endblock extrahead %}
+
+{% block content %}
+	{{ block.super }}
+    
+    <div class="clearfix large-space"> 
+        <!-- a box with semi transparent background -->
+        
+        <div>  {# Infobox for inactive offers. #}
+            {% if not offer.is_active %}
+                <!--{% trans "This offer is inactive. It is only visible to you and not listed in the marketplace. You can reactivate it below." %}-->
+                {% include 'cosinnus/common/empty_button.html' with message="This offer is inactive. It is only visible to you and not listed in the marketplace. You can reactivate it below." %}
+            {% endif %}
+        </div>
+        
+        {% include "cosinnus_marketplace/single_offer_detailed.html" with offer=offer %}
+    
+    
+        {% if user|has_write_access:offer %}
+            <div class="large-space"> <!-- first button row -->
+            
+				{% captureas delete_modal_id %}deleteModal_{{offer.slug}}{% endcaptureas %}
+				<button type="button" class="btn btn-emphasized pull-left" data-toggle="modal" data-target="#{{delete_modal_id}}" style="margin: 0;">
+					<ul class="media-list">
+					  <li class="media">
+					    <span class="pull-left">
+					      <i class="fa fa-eraser"></i>
+					    </span>
+					    <div class="media-body">
+					      {% trans "Delete" %}
+					    </div>
+					  </li>
+					</ul>
+				</button>
+				
+				{% captureas label %}{% blocktrans with title=offer.title %}Do you really want to delete offer „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+				{% captureas title %}{% trans "Delete offer" %}{% endcaptureas %}
+				{% captureas action %}{% group_url 'cosinnus:marketplace:delete' group=group slug=offer.slug%}{% endcaptureas %}
+				
+				{% include "cosinnus/modal_box.html" with id=delete_modal_id label=label title=title form_action=action %}
+
+
+				{% if offer.is_active %}
+		            {% captureas deactivate_modal_id %}deactivateModal_{{offer.slug}}{% endcaptureas %}
+		            <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{deactivate_modal_id}}">
+						<ul class="media-list">
+						  <li class="media">
+						    <span class="pull-left">
+						      <i class="fa fa-eraser"></i>
+						    </span>
+						    <div class="media-body">
+						      {% trans "Deactivate" %}
+						    </div>
+						  </li>
+						</ul>
+					</button>
+		            
+		            {% captureas label %}{% blocktrans with title=offer.title %}Do you really want to deactivate offer „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+			        {% captureas title %}{% trans "Deactivate offer" %}{% endcaptureas %}
+			        {% captureas action %}{% group_url 'cosinnus:marketplace:deactivate' group=group slug=offer.slug %}{% endcaptureas %}
+			        {% include "cosinnus/modal_box.html" with id=deactivate_modal_id label=label title=title form_action=action %}
+		        {% else %}
+		            {% captureas activate_modal_id %}activateModal_{{offer.slug}}{% endcaptureas %}
+		            <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{activate_modal_id}}">
+						<ul class="media-list">
+						  <li class="media">
+						    <span class="pull-left">
+						      <i class="fa fa-eraser"></i>
+						    </span>
+						    <div class="media-body">
+	                          {% if offer.has_expired %}{% trans "Reactivate" %}{% else %}{% trans "Activate" %}{% endif %}
+						    </div>
+						  </li>
+						</ul>
+					</button>
+		             
+		            {% captureas label %}{% if offer.has_expired %}{% blocktrans with title=offer.title %}Do you really want to reactivate offer „{{ title }}“?{% endblocktrans %}{% else %}{% blocktrans with title=offer.title %}Do you really want to activate offer „{{ title }}“?{% endblocktrans %}{% endif %}{% endcaptureas %}
+			        {% captureas title %}{% if offer.has_expired %}{% trans "Reactivate offer" %}{% else %}{% trans "Activate offer" %}{% endif %}{% endcaptureas %}
+			        {% captureas action %}{% group_url 'cosinnus:marketplace:activate' group=group slug=offer.slug %}{% endcaptureas %}
+			        {% include "cosinnus/modal_box.html" with id=activate_modal_id label=label title=title form_action=action %}
+		        {% endif %}         
+		        
+		        <button type="button" class="btn btn-emphasized" href="{% group_url "cosinnus:marketplace:edit" group=group slug=offer.slug %}">
+					<ul class="media-list">
+					  <li class="media">
+					    <span class="pull-left">
+					      <i class="fa fa-pencil"></i>
+					    </span>
+					    <div class="media-body">
+                          {% trans "Edit" %}
+					    </div>
+					  </li>
+					</ul>
+				</button>     
+              
+                <div class="clearfix"></div>
+            </div> <!-- first button row -->
+        {% endif %}
+        
+    </div> <!-- buttons and content box -->
+    
+    <div class="white-content">
+		{% include 'cosinnus/common/likefollowstar/star_button.html' with object=offer %}
+        {% include 'cosinnus/common/likefollowstar/follow_button.html' with object=offer %}
+        {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=offer %}
+    </div>
+    
+    {% include 'cosinnus_marketplace/offer_comments.html' with offer=offer full_view="True" no_indent="True" comments_expanded="True" %}
+    
+        
+{% endblock content %}

@@ -1,0 +1,13 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        <li><a class="active" href="{% group_url 'cosinnus:event:index' group=group %}">{% trans "Events" %}</a></li>
+{% endblock %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/cosinnus_event/base.css' %}">
+{% endblock %}
+
+{% block page_title %} - {{ group.name }}{% endblock page_title %}

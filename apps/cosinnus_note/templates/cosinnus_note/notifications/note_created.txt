@@ -1,0 +1,18 @@
+{% load i18n cosinnus_tags %}{% blocktrans %}Hi {{ receiver_name }},
+
+{{ sender_name }} just posted an update in {{ team_name }}:
+{% endblocktrans %}
+{% if object.title and not object.title == '---' %}
+"{{ object.title }}"
+{% endif %}
+{% blocktrans with note_text=object.text|safe %}{{ note_text }}
+
+
+
+You can find it by following this link: {{ object_url }}
+
+
+
+(Follow this link to edit your notification preferences: {{ notification_settings_url }} )
+
+Your {{ site_name }} Team.{% endblocktrans %}

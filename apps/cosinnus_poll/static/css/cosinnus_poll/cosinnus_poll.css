@@ -1,0 +1,124 @@
+
+.poll-option.poll-option-yes,
+.poll-option.poll-option-yes .media,
+.poll-option.poll-option-yes .media-body,
+.poll-option.poll-option-maybe,
+.poll-option.poll-option-maybe .media,
+.poll-option.poll-option-maybe .media-body,
+.poll-option.poll-option-no,
+.poll-option.poll-option-no .media,
+.poll-option.poll-option-no .media-body
+{
+    cursor: pointer !important;    
+}
+
+.poll-option .poll-option-display-yes.poll-option-display-color {
+    background-color: #779b48 !important;
+}
+
+.poll-option .poll-option-display-maybe.poll-option-display-color {
+    background-color: #efa02d !important;
+}
+
+.poll-option .poll-option-display-no.poll-option-display-color {
+    background-color: #e55c55 !important;
+}
+
+.poll-option-display {
+    display: none;
+}
+.poll-option-display:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+.poll-option.poll-option-yes .poll-option-display-yes {
+    display: inherit;
+}
+.poll-option.poll-option-maybe .poll-option-display-maybe {
+    display: inherit;
+}
+.poll-option.poll-option-no .poll-option-display-no {
+    display: inline;
+}
+
+.vote-control {
+    display: inline-block;
+    width: auto;
+    height: 18px;
+    width: 18px;
+    margin: 6px 2px 0 2px !important;
+    top: 4px;
+    position: relative;
+    cursor: pointer;
+}
+.vote-count {
+    width: auto !important;
+    min-width: 60px !important;
+    padding: 0 6px;
+    font-size: 12px !important;
+    line-height: 20px;
+}
+.vote-count-divider {
+    display: inline-block;
+    position: relative;
+    border-left: 1px solid #CCC;
+    width: 0;
+    height: 24px;
+}
+.divided-vote-count {
+    border-left: 1px solid #CCC;
+}
+
+.app-poll .btn-emphasized:hover .media > .pull-right {
+    background-color: #009EE3 !important;
+}
+
+.app-poll .btn-emphasized:hover .media > .pull-right.vote-trophy {
+    background-color: #009EE3 !important;
+}
+.app-poll .btn-emphasized:hover .media > a.pull-right.vote-trophy:hover {
+    background-color: #007999 !important;
+}
+.vote-trophy {
+    border-left: 1px solid #DDD;
+}
+
+
+.poll-voters-list {
+    display: inline-block;
+    white-space: normal;
+    margin-top: 2px;
+    float: right;
+    clear: both;
+}
+
+.vote-controls-wrapper {
+    color: #FFF;    
+	padding: 0px 5px;
+	float: right;
+	clear: both;
+	
+    border-top: 1px solid #CCC;
+}
+
+
+.voter-avatar-box {
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    margin: 0 2px 5px 0;
+}
+.voter-avatar, .voter-avatar-vote {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+.voter-avatar-vote {
+    color: #FFF;    
+    font-size: 10px;
+    float: right;
+    text-align: center;
+    padding-top: 4px;
+    opacity: 0.85;
+}
+

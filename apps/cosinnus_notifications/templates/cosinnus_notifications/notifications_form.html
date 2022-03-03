@@ -1,0 +1,329 @@
+{% extends "cosinnus_notifications/base.html" %}
+{% load i18n static cosinnus_tags djajax_tags widget_tweaks %}
+
+{% block page_title %}
+    {% trans "Notification Preferences" %}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="active">{% trans "Notification Preferences" %}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include 'cosinnus/user/leftnav.html' with view="edit_notifications" %}
+{% endblock leftnav %}
+
+{% block content %}
+    
+    {% if not request.user|cosinnus_setting:"notifications_help_text" %}
+        <div class="alert alert-success alert-dismissable" style="height: 125px; overflow-y: hidden;">
+            <i class="fa fa-info-circle fa-3x"></i>
+             <div class="multiline-ellipsis" style="line-height: inherit;">
+                <div class="multiline-ellipsis-prop"></div>
+                <div class="multiline-ellipsis-main">
+                <p>{% trans "Select which notifications you would like to receive for each group or project you are involved in." %}</p>
+                <p>{% trans "These notifications will be sent to your configured email address:" %} <em>{{ request.user.email }}</em></p>
+                <p>{% trans 'You can choose to receive notifications as soon as they happen, or you can receive a daily (or weekly) e-mail digest.' %}</p>
+                <p>{% trans 'The digest will aggregate all notifications with the "Daily" (or "Weekly") setting from all groups and projects. So you will receive only a single e-mail per day (or week) containing everything interesting that happend.' %}</p>
+                <p>{% trans 'Notifications you set to "Immediately" will be e-mailed to you as soon as they happen, with one e-mail per notification.' %}</p>
+                <p>{% trans "Don't forget to save your settings once you are done editing them!" %}</p>
+                </div>
+                <div class="multiline-ellipsis-realend" style="top: -17px;">
+                    <a href="#">
+                        ...{% trans "more" %}
+                        <span class="fa fa-chevron-down"></span>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    {% endif %}
+
+    <form method="POST" action="">{% csrf_token %}
+        
+        <div class="content-box large-space">
+            <div class="row">
+                <div class="col-md-12"><!-- right column -->
+                    <div class="row"> 
+                    
+                        <div class="col-md-4">
+                            <legend style="margin: 0;">{% trans "I wish to receive notification emails" %}:</legend>
+                        </div>
+
+                        <div class="col-md-8">
+                            <p class="no-horizontal-padding no-vertical-padding">
+                                <select id="id_global_setting" name="global_setting" class="form-control" onchange="toggleGlobalSettingsFrame();">
+                                    {% for choice, label in global_setting_choices %}
+                                        <option {% if global_setting_selected == choice %}selected{% endif %} value="{{ choice }}">{{ label }}</option>
+                                    {% endfor %}
+                                </select>
+                            </p>
+                        </div>
+
+                        {% if SETTINGS.COSINNUS_NOTIFICATIONS_GROUP_INVITATIONS_IGNORE_USER_SETTING %}
+                            <p class="col-xs-12 textfield transparent" style="text-align: left; margin: 5px 0 0 14px">{% trans "Note that you will receive an email notification if someone has invited you to a group/ project in any case." %}</p>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div id="normal_settings_frame">
+            {% if SETTINGS.COSINNUS_ROCKET_ENABLED %}
+	            <div class="content-box large-space">
+		            <div class="row">
+		                <div class="col-md-12"><!-- right column -->
+		                    <div class="row"> 
+		                    
+		                        <div class="col-md-4">
+		                            <legend style="margin: 0;">{% trans "I would like to receive instant messages by email for RocketChat mentions and direct messages to me" %}:</legend>
+		                        </div>
+		                        <div class="col-md-8">
+		                            <p class="no-horizontal-padding no-vertical-padding">
+		                                <select id="id_rocketchat_setting" name="rocketchat_setting" class="form-control">
+		                                    {% for choice, label in rocketchat_setting_choices %}
+		                                        <option {% if rocketchat_setting_selected == choice %}selected{% endif %} value="{{ choice }}">{{ label }}</option>
+		                                    {% endfor %}
+		                                </select>
+		                            </p>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+	        {% endif %}
+        
+            <div class="content-box large-space">
+                {% for multi_notification_preference in multi_notification_preferences %}
+                    <div class="row">
+                        <div class="col-md-12"><!-- right column -->
+                            <div class="row"> 
+                            
+                                <div class="col-md-4">
+                                    <legend style="margin: 0;">{{ multi_notification_preference.multi_notification_label }}:</legend>
+                                </div>
+                                <div class="col-md-8">
+                                    <p class="no-horizontal-padding no-vertical-padding">
+                                        <select id="id_multi_pref__{{ multi_notification_preference.multi_notification_id }}" name="multi_pref__{{ multi_notification_preference.multi_notification_id }}" class="form-control">
+                                            {% for choice, label in multi_notification_preference.multi_preference_choices %}
+                                                <option {% if multi_notification_preference.multi_preference_setting == choice %}selected{% endif %} value="{{ choice }}">{{ label }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+	        <div class="content-box large-space">
+	            <div class="row">
+	                <div class="col-md-12"><!-- right column -->
+	                    <div class="row"> 
+	                    
+	                        <div class="col-md-4">
+	                            <legend style="margin: 0;">{% trans "Receive notification emails in this language" %}:</legend>
+	                        </div>
+	                        <div class="col-md-8">
+	                            <p class="no-horizontal-padding no-vertical-padding">
+	                                <select id="id-language" name="language" class="form-control">
+	                                    {% for choice, label in language_choices %}
+	                                        <option {% if language_selected == choice %}selected{% endif %} value="{{ choice }}">{{ label }}</option>
+	                                    {% endfor %}
+	                                </select>
+	                            </p>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+        </div>
+        
+        
+        {% if user|is_portal_admin %}
+            <div class="content-box large-space">
+                <div class="row">
+                    <div class="col-md-12"><!-- right column -->
+                        <div class="row"> 
+                            <div class="col-md-4">
+                                <legend style="margin: 0;">{% trans "Moderator Status (Portal-Admins only)" %}:</legend>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="cosinnus-field">
+                                    <div class="cosinnus-field-input regular-field checkbox-field">
+                                        <input id="moderator_check" name="is_moderator" type="checkbox" {% if is_moderator %}checked{% endif %}>
+                                        <label for="moderator_check">{% trans "I wish to be a Moderator for this portal" %}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class=" alert alert-warning">
+                           <i class="fa fa-info-circle fa-3x"></i>
+                           {% trans "As a Moderator, you will receive an instant notification whenever ANY publicly visible content is posted on this portal. Since you are a portal administrator you can then also delete the content if it is offensive or critical. To delete it, visit the content page on the website while logged into this account." %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    
+		<!-- a box with semi transparent background -->
+	    <div id="custom_settings_frame" class="content-box" style="display: none;"> {# toggled visible on load by JS, depending on global setting #}
+            {% for group, notifications, choice in grouped_notifications %}
+                <div class="row large-space">
+	                <div class="col-md-12"><!-- right column -->
+	                    {% if not notifications and not choice %}
+	                        <a href="{% group_url 'cosinnus:group-dashboard' group=group %}" target="_blank"> 
+                                <legend>{{ group.name }}</legend>
+                            </a>
+	                    {% else %}
+		                    <div class="row">
+		                        {% if group.parent %}
+		                        <div class="col-md-1">
+		                            <legend>&nbsp;</legend>
+		                        </div>
+		                        {% endif %}
+		                        <div class="{% if group.parent %}col-md-3{% else %}col-md-4{% endif %} {% if request.GET.highlight_choice|intify == group.pk %}notification-choice-highlighted{% endif %}">
+		                            <a href="{% group_url 'cosinnus:group-dashboard' group=group %}" target="_blank"> 
+		                                <legend>{{ group.name }}</legend>
+		                            </a>
+		                        </div>
+		                        <div class="col-md-8">
+		                            <p class="no-horizontal-padding no-vertical-padding">
+		                            <select id="notif_choice_{{group.pk}}" name="notif_choice:{{group.pk}}" class="form-control" onchange="toggleCustomNotificationPreferences({{group.pk}});" onmousedown="return toggleCustomNotificationHeader(event, {{group.pk}});">
+		                                <option {% if choice == "none" %}selected{% endif %} value="none">{% trans "No notifications" %}</option>
+		                                <option {% if choice == "all_1" %}selected{% endif %} value="all_1">{% trans "All notifications" %} ({% trans "Immediately" %})</option>
+		                                {% if not SETTINGS.COSINNUS_DIGEST_ONLY_FOR_ADMINS or user.is_superuser %}
+		                                <option {% if choice == "all_2" %}selected{% endif %} value="all_2">{% trans "All notifications" %} ({% trans "Daily" %})</option>
+		                                <option {% if choice == "all_3" %}selected{% endif %} value="all_3">{% trans "All notifications" %} ({% trans "Weekly" %})</option>
+		                                {% endif %}
+		                                <option default {% if choice == "custom" %}selected{% endif %} value="custom">{% trans "Custom" %}</option>
+		                            </select>
+		                            </p>
+		                        </div>
+		                    </div>
+		                    <div id="div_notif_choices_{{group.pk}}" {% if not request.GET.highlight_pref or not request.GET.highlight_choice|intify == group.pk %}style="display: none;"{% endif %}>
+	                            {% for id, label, value, app_name, app_label in notifications %}
+		                            <div class="row"> 
+		                                <div class="col-md-3 col-md-offset-1">
+                                            {% ifchanged app_label %}
+                                                <label>{{ app_label }}</label>
+                                            {% endifchanged %}&nbsp;
+                                        </div>
+		                                <div class="col-md-8">
+			                                <div class="notification-options {% if id == request.GET.highlight_pref %}highlighted{% endif %} {% ifchanged app_name %}notification-options-seperated{% endifchanged %}">
+			                                		<div class="">
+					                                	<label>{{ label }}:</label>
+			                                		</div>
+			                                		<div class="pull-right">
+			                                			<div class="condensed-radio-input">
+			                                				{# please keep this linebreak formatting so that no spaces exit between the <label> elements! #}
+							                                {% for choice_value, choice_label in notification_choices %}{% if not SETTINGS.COSINNUS_DIGEST_ONLY_FOR_ADMINS or user.is_superuser or choice_value <= 1 %}<label class="notification-options-label">
+								                                	<input type="radio" name="notif_option:{{id}}" value="{{ choice_value }}" {% if value == choice_value %}checked="checked"{% endif %}>
+																	<span class="noselect">{{ choice_label }}</span>
+																</label>{% endif %}{% endfor %}
+						                                </div>
+			                                		</div>
+			                                		<div class="clearfix"></div>
+			                                </div>
+		                                </div>
+		                            </div>    
+	                            {% endfor %}
+		                    </div>
+		                {% endif %}
+	                </div>
+                </div>
+            {% endfor %}
+        </div><!-- content-box -->
+        
+        <div class="snap-to-bottom">
+	        <button type="button" class="btn btn-default pull-left btn-autosize" data-toggle="modal" data-target="#reset_notifications_modal" style="margin-left: 0px;">
+		        <ul class="media-list">
+		            <li class="media">
+		                <span class="pull-left">
+		                    <i class="fa fa-times"></i>
+		                </span>
+		                <div class="media-body">
+	                        {% trans "Reset to default" %}
+		                </div>
+		            </li>
+		        </ul>
+		    </button>
+	        
+	        <button type="submit" class="btn btn-emphasized btn-autosize">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <span class="pull-left">
+	                        <i class="fa fa-check"></i>
+	                    </span>
+	                    <div class="media-body">
+	                        {% trans "Save" %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </button>
+	        
+        	<div class="clearfix"></div>
+        </div>
+    
+    </form>
+    
+    
+    {% captureas label %}{% trans "This will reset all of your notification preferences to their default setting. Are you sure you wish to do that?" %}{% endcaptureas %}
+    {% captureas title %}{% trans "Reset to default" %}{% endcaptureas %}
+    {% url 'cosinnus:reset-notifications' as reset_url %}
+    {% include "cosinnus/modal_box.html" with id="reset_notifications_modal" label=label title=title form_action=reset_url %}
+    
+    
+{% endblock content %}
+
+
+{% block extrafooter %}
+    {{ block.super }}
+    <script type="text/javascript">
+        var toggleGlobalSettingsFrame = function() {
+            var $custom_frame = $('#custom_settings_frame');
+            if ($('#id_global_setting').val() == 4) {
+                $custom_frame.fadeIn();
+            } else {
+                $custom_frame.hide();
+            }
+            
+            var $normal_frame = $('#normal_settings_frame');
+            if ($('#id_global_setting').val() > 0) {
+                $normal_frame.fadeIn();
+            } else {
+                $normal_frame.hide();
+            }
+            $.cosinnus.snapToBottom();
+        };
+        var toggleCustomNotificationPreferences = function(id) {
+            var pref_box = $('#notif_choice_' + id);
+            var pref_area = $('#div_notif_choices_' + id);
+            if (pref_box.val() == 'custom') {
+                pref_area.slideDown({'complete': $.cosinnus.snapToBottom});
+            } else {
+                pref_area.hide();
+                $.cosinnus.snapToBottom();
+            }
+        };
+        var toggleCustomNotificationHeader = function(e, id) {
+            var pref_box = $('#notif_choice_' + id);
+            var pref_area = $('#div_notif_choices_' + id);
+            if (pref_box.val() == 'custom' && !pref_area.is(':visible')) {
+                pref_area.slideDown({'complete': $.cosinnus.snapToBottom});
+                // activate this to prevent opening the dropdown menu on a click on "custom"
+                // e.preventDefault();
+                // return false;
+                return true;
+            }
+            return true;
+        };
+        $(function(){
+            toggleGlobalSettingsFrame();
+        });
+    </script>
+{% endblock extrafooter %}

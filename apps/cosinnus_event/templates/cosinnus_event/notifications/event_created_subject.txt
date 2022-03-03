@@ -1,0 +1,1 @@
+{% load i18n cosinnus_tags %}{% blocktrans %}A new event: "{{ object_name }}" was announced in {{ team_name }}.{% endblocktrans %}

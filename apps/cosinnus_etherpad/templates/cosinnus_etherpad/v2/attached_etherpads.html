@@ -1,0 +1,8 @@
+{% load cosinnus_tags %}
+
+{% for item in etherpads %}
+	{% group_url "cosinnus:etherpad:pad-write" group=item.group slug=item.slug  as item_url %}
+	{% captureas item_icon %}{% if item.type == 1 %}fa-table{% else %}fa-file-text{% endif %}{% endcaptureas %}
+	
+	{% include 'cosinnus/v2/dashboard/timeline_attached_item.html' with text=item.title subtext=item.creator|full_name icon=item_icon url=item_url %}
+{% endfor %}

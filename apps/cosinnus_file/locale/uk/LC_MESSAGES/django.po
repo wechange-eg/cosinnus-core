@@ -1,0 +1,363 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:20+0200\n"
+"PO-Revision-Date: 2020-10-13 18:31+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.4.1\n"
+
+msgid "Files"
+msgstr "Файли"
+
+msgctxt "the_app"
+msgid "file"
+msgstr "файл"
+
+msgid "A user uploaded a new file"
+msgstr "Користувач завантажив(-ла) новий файл"
+
+#, python-format
+msgid "%(sender_name)s uploaded the file %(object_name)s"
+msgstr "%(sender_name)s завантажив файл %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s uploaded %(count)d files"
+msgstr "%(sender_name)s завантажив %(count)d файлів"
+
+#, python-format
+msgid "%(sender_name)s created a new file"
+msgstr "%(sender_name)s створив новий файл"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Новий файл: \"%(object_name)s\" був створений в %(team_name)s."
+
+msgid "A user uploaded a new file in a team you are following"
+msgstr "Користувач завантажив(-ла) новий файл у команді, яку Ви відстежуєте"
+
+#, python-format
+msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s створив новий файл в %(team_name)s (яку Ви відстежуєте)"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Новий файл: \"%(object_name)s\" був створений в %(team_name)s (яку Ви відстежуєте)."
+
+msgid "Latest Files"
+msgstr "Останні файли"
+
+msgid "No files"
+msgstr "Жодних файлів"
+
+msgid "Pictures"
+msgstr "Зображення"
+
+msgid "Documents"
+msgstr "Документи"
+
+msgid "Audio Files"
+msgstr "Аудіофайли"
+
+msgid "Videos"
+msgstr "Відео"
+
+msgid "Created By"
+msgstr "Автор"
+
+msgid "File Type"
+msgstr "Тип файлу"
+
+msgid "File Name"
+msgstr "Назва файлу"
+
+msgid "File Name (descending)"
+msgstr "Назва файлу (за спаданням)"
+
+msgid "Newest Created"
+msgstr "Найновіші створені"
+
+msgid "Smallest Files"
+msgstr "Найменші"
+
+msgid "Largest Files"
+msgstr "Найбільші"
+
+msgid "The given URL does not seem to be valid."
+msgstr "Здається, що вказана URL-адреса недійсна."
+
+msgid "Must supply either a URL or File"
+msgstr "Потрібно вказати або URL-адресу, або файл"
+
+msgid "Note"
+msgstr "Примітка"
+
+msgid "File"
+msgstr "Файл"
+
+msgid "Is URL Link"
+msgstr "Є посилання URL"
+
+msgid "URL"
+msgstr "URL-адреса"
+
+msgid "Path"
+msgstr "Шлях"
+
+msgid "Uploaded by"
+msgstr "Хто завантажив"
+
+msgid "Uploaded on"
+msgstr "Дата завантаження"
+
+msgid "No files selected."
+msgstr "Не обрано жодних файлів."
+
+msgctxt "special_folder_type"
+msgid "Attachments"
+msgstr "Додатки"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "В одному із заповнюваних Вами полів сталася помилка. Будь ласка, виправте це перед збереженням!"
+
+msgid "The URL you have entered does not seem to be valid!"
+msgstr "Здається, URL -адреса, яку ви ввели, недійсна!"
+
+msgid "URL Link"
+msgstr "URL-посилання"
+
+msgid "Paste or type the link's URL here"
+msgstr "Вставте або введіть тут URL-адресу посилання"
+
+msgid "Title"
+msgstr "Назва"
+
+msgid "Description"
+msgstr "Опис"
+
+msgid "Preview"
+msgstr "Попередній перегляд"
+
+msgid "Original filename"
+msgstr "Початкова назва файлу"
+
+msgid "Save"
+msgstr "Зберегти"
+
+msgid "Cancel"
+msgstr "Скасувати"
+
+msgid "Show detailed steps"
+msgstr "Показати детальні кроки"
+
+msgid "Move your files to the Cloud"
+msgstr "Перемістіть свої файли в хмару"
+
+msgid "Delete"
+msgstr "Видалити"
+
+msgid "Move"
+msgstr "Перемістити"
+
+msgid "Download"
+msgstr "Завантажити"
+
+msgid "Download this folder"
+msgstr "Завантажити цю папку"
+
+msgid "Add URL link"
+msgstr "Додати посилання URL-адреси"
+
+msgid "No files have been uploaded yet."
+msgstr "Ще не завантажено жодного файлу."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new file \"%(object_name)s\" in %(team_name)s was uploaded by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Вітаємо, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s завантажив/-ла новий файл «%(object_name)s» у %(team_name)s.\n"
+"\n"
+"Ви можете переглянути його за наступним посиланням: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Перейдіть за цим посиланням, щоб редагувати ваші налаштування сповіщення: %(notification_settings_url)s )\n"
+"\n"
+"З повагою, команда %(site_name)s."
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was uploaded in %(team_name)s."
+msgstr "Новий файл: «%(object_name)s» було завантажено у %(team_name)s."
+
+msgid "Move to another Folder"
+msgstr "Перемістити в іншу папку"
+
+msgid "Link to this Image"
+msgstr "Посилання на це зображення"
+
+msgid "by"
+msgstr "здійснено <username>"
+
+msgid "Created"
+msgstr "Створено автором"
+
+msgid "Edit"
+msgstr "Редагувати"
+
+#, python-format
+msgid "Do you really want to delete file „%(title)s“?"
+msgstr "Ви дійсно бажаєте видалити файл «%(title)s»?"
+
+msgid "Delete file"
+msgstr "Видалити файл"
+
+msgid "Close"
+msgstr "Закрити"
+
+msgid "To move your files to the Cloud, follow these steps:"
+msgstr "Щоб перемістити свої файли в хмару, виконайте наступні дії:"
+
+msgid "Navigate to the folder you wish to move to the Cloud, or to the root folder of the Files app if you wish to move all of the files"
+msgstr "Перейдіть до папки, яку Ви хочете перемістити до Хмари, або до основної папки програми застосунку Файли, якщо Ви хочете перемістити всі файли"
+
+msgid "Root folder"
+msgstr "Кореневий каталог"
+
+#, python-format
+msgid "Click \"%(download_label)s\" to download the file archive"
+msgstr "Клікність\"%(download_label)s\", щоб завантажити архів файлів"
+
+msgid "Unzip the file archive to a local folder on your hard drive"
+msgstr "Розпакуйте архів файлів у локальну папку на Вашому жорсткому диску"
+
+#, python-format
+msgid "Open the Cloud folder for \"%(group_name)s\":"
+msgstr "Відкрийте папку на Хмарі для \"%(group_name)s\":"
+
+msgid "Cloud app"
+msgstr "Застосунок Хмара"
+
+msgid "Drag & drop the entire content of the unzipped folder from your local hard drive to the Cloud folder"
+msgstr "Перетягніть увесь вміст розпакованої папки з локального жорсткого диску в папку на Хмарі"
+
+#, python-format
+msgid "Your files will now upload to the Cloud and can be accessed by all members of \"%(group_name)s\". Your files will remain here in the Files app as well. If you are satisfied with how they look in the Cloud, you may delete them here."
+msgstr "Тепер ваші файли завантажуватимуться у Хмару та будуть доступними всім учасникам групи \"%(group_name)s\". Ваші файли також залишаться тут у застосунку Файли. Якщо ви задоволені тим, який вигляд вони мають у Хмарі, ви можете видалити їх тут."
+
+msgid "If you wish to access your files from multiple devices, you may want to consider moving them to the Cloud. The process is easy, and you can still keep your files here until you are satisfied with the Cloud."
+msgstr "Якщо ви хочете отримати доступ до своїх файлів із декількох пристроїв, ви можете розглянути можливість їхнього переміщення до Хмари. Цей процес є простим, і ви все ще можете зберігати свої файли тут, доки Вас не почне влаштовувати Хмара."
+
+msgid "You uploaded a file"
+msgstr "Ви завантажили файл"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "uploaded a file"
+msgstr "завантажено файл"
+
+msgid "More"
+msgstr "Більше"
+
+msgid "Latest files"
+msgstr "Останні файли"
+
+msgid "There are no files  yet"
+msgstr "Ще немає жодного файлу"
+
+#, python-format
+msgid "Folder \"%(title)s\" was created successfully."
+msgstr "Папку «%(title)s» успішно створено."
+
+msgid "File does not exist or you are not allowed to delete it."
+msgstr "Файл не існує, або у вас немає прав для його редагування."
+
+#, python-format
+msgid "A problem occurred during export. The following file is missing: %(filename)s."
+msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
+msgstr[0] "Під час експортування виникла проблема. Наступного файлу не існує: %(filename)s."
+msgstr[1] "Під час експортування виникла проблема. Наступних файлів не існує: %(filename)s."
+msgstr[2] "Під час експортування виникла проблема. Наступних файлів не існує: %(filename)s."
+msgstr[3] ""
+
+msgid "Invalid request."
+msgstr "Недійсний запит."
+
+#, python-format
+msgid "File \"%(title)s\" was updated successfully."
+msgstr "Файл «%(title)s» успішно оновленено."
+
+#, python-format
+msgid "File \"%(title)s\" could not be updated."
+msgstr "Не вдалося змінити файл «%(title)s»."
+
+msgid "Downloading failed, the target object was not a folder!"
+msgstr "Завантаження не відбулося, обраний об’єкт не був папкою!"
+
+msgid "Canceled the download because there seem to be no files in this folder."
+msgstr "Завантаження відмінено, тому що в папці немає файлів."
+
+msgid "Internal Error: Group not Found"
+msgstr "Внутрішня помилка: групу не знайдено"
+
+msgid "Permission for upload denied"
+msgstr "Дозвіл на завантаження відхилено"
+
+msgid "The uploaded file was invalid."
+msgstr "Завантажений файл недійсний."
+
+#, python-format
+msgid "%(count)d File was added successfully."
+msgid_plural "%(count)d Files were added successfully."
+msgstr[0] "%(count)d файл було успішно додано."
+msgstr[1] "%(count)d файли було успішно додано."
+msgstr[2] "%(count)d файлів було успішно додано."
+msgstr[3] ""
+
+msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
+msgstr "Файл, який ви завантажили, був занадто великим або тип файлу заборонено завантажувати!"
+
+#~ msgid "New file by %(sender_name)s"
+#~ msgstr "Новий файл від %(sender_name)s"
+
+#~ msgid "New file by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Новий файл від %(sender_name)s в %(team_name)s (яку Ви відстежуєте)"
+
+#~ msgid "File title"
+#~ msgstr "Назва файлу"
+
+#~ msgid "File description"
+#~ msgstr "Опис файлу"
+
+#~ msgid "File \"%(title)s\" was uploaded successfully."
+#~ msgstr "Файл «%(title)s» успішно завантажено."
+
+#~ msgid "File \"%(title)s\" could not be uploaded."
+#~ msgstr "Неможливо завантажити файл «%(title)s»."
+
+#~ msgid "File \"%(title)s\" could not be added."
+#~ msgstr "Неможливо додати файл «%(title)s»."
+
+#~ msgid "Enter the title for the file."
+#~ msgstr "Уведіть назву для файлу."

@@ -1,0 +1,14 @@
+{% load i18n cosinnus_tags %}{% blocktrans %}Hi {{ receiver_name }},
+
+the task "{{ object_name }}" you created in {{ team_name }} was completed by {{ sender_name }}. 
+{% endblocktrans %}{% if object.note %}
+"{{ object.note }}"
+{% endif %}{% blocktrans %}
+
+You can find it by following this link: {{ object_url }}
+
+
+
+(Follow this link to edit your notification preferences: {{ notification_settings_url }} )
+
+Your {{ site_name }} Team.{% endblocktrans %}

@@ -1,0 +1,49 @@
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-12 13:19+0200\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+msgid "Cloud"
+msgstr "كلاود"
+
+msgctxt "the_app"
+msgid "cloud"
+msgstr "تطبيق _ كلاود"
+
+msgid "Latest Cloud files"
+msgstr "جديد ملفات (كلاود)"
+
+msgid "No cloud files yet"
+msgstr "لا يوجد ملفات كلاود بعد"
+
+msgid "Path"
+msgstr ""
+
+msgid "URL"
+msgstr ""
+
+#, fuzzy
+#| msgid "Cloud Files"
+msgid "Linked Cloud File"
+msgstr "ملفات كلاود"
+
+#, fuzzy
+#| msgid "Cloud Files"
+msgid "Linked Cloud Files"
+msgstr "ملفات كلاود"
+
+msgid "Cloud Stub"
+msgstr "ملفات كلاود"
+
+msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
+msgstr ""
+
+msgid "There are no cloud files yet"
+msgstr "لا يوجد أية ملفات كلاود حتى الأن"
+
+msgid "Cloud Files"
+msgstr "ملفات كلاود"

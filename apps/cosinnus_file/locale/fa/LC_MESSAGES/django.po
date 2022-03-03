@@ -1,0 +1,324 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:20+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Files"
+msgstr ""
+
+msgctxt "the_app"
+msgid "file"
+msgstr ""
+
+msgid "A user uploaded a new file"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s uploaded the file %(object_name)s"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s uploaded %(count)d files"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s created a new file"
+msgstr ""
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
+msgstr ""
+
+msgid "A user uploaded a new file in a team you are following"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
+msgstr ""
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr ""
+
+msgid "Latest Files"
+msgstr ""
+
+msgid "No files"
+msgstr ""
+
+msgid "Pictures"
+msgstr ""
+
+msgid "Documents"
+msgstr ""
+
+msgid "Audio Files"
+msgstr ""
+
+msgid "Videos"
+msgstr ""
+
+msgid "Created By"
+msgstr ""
+
+msgid "File Type"
+msgstr ""
+
+msgid "File Name"
+msgstr ""
+
+msgid "File Name (descending)"
+msgstr ""
+
+msgid "Newest Created"
+msgstr ""
+
+msgid "Smallest Files"
+msgstr ""
+
+msgid "Largest Files"
+msgstr ""
+
+msgid "The given URL does not seem to be valid."
+msgstr ""
+
+msgid "Must supply either a URL or File"
+msgstr ""
+
+msgid "Note"
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "Is URL Link"
+msgstr ""
+
+msgid "URL"
+msgstr ""
+
+msgid "Path"
+msgstr ""
+
+msgid "Uploaded by"
+msgstr ""
+
+msgid "Uploaded on"
+msgstr ""
+
+msgid "No files selected."
+msgstr ""
+
+msgctxt "special_folder_type"
+msgid "Attachments"
+msgstr ""
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr ""
+
+msgid "The URL you have entered does not seem to be valid!"
+msgstr ""
+
+msgid "URL Link"
+msgstr ""
+
+msgid "Paste or type the link's URL here"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Preview"
+msgstr ""
+
+msgid "Original filename"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Show detailed steps"
+msgstr ""
+
+msgid "Move your files to the Cloud"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Move"
+msgstr ""
+
+msgid "Download"
+msgstr ""
+
+msgid "Download this folder"
+msgstr ""
+
+msgid "Add URL link"
+msgstr ""
+
+msgid "No files have been uploaded yet."
+msgstr ""
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new file \"%(object_name)s\" in %(team_name)s was uploaded by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was uploaded in %(team_name)s."
+msgstr ""
+
+msgid "Move to another Folder"
+msgstr ""
+
+msgid "Link to this Image"
+msgstr ""
+
+msgid "by"
+msgstr ""
+
+msgid "Created"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+#, python-format
+msgid "Do you really want to delete file „%(title)s“?"
+msgstr ""
+
+msgid "Delete file"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "To move your files to the Cloud, follow these steps:"
+msgstr ""
+
+msgid "Navigate to the folder you wish to move to the Cloud, or to the root folder of the Files app if you wish to move all of the files"
+msgstr ""
+
+msgid "Root folder"
+msgstr ""
+
+#, python-format
+msgid "Click \"%(download_label)s\" to download the file archive"
+msgstr ""
+
+msgid "Unzip the file archive to a local folder on your hard drive"
+msgstr ""
+
+#, python-format
+msgid "Open the Cloud folder for \"%(group_name)s\":"
+msgstr ""
+
+msgid "Cloud app"
+msgstr ""
+
+msgid "Drag & drop the entire content of the unzipped folder from your local hard drive to the Cloud folder"
+msgstr ""
+
+#, python-format
+msgid "Your files will now upload to the Cloud and can be accessed by all members of \"%(group_name)s\". Your files will remain here in the Files app as well. If you are satisfied with how they look in the Cloud, you may delete them here."
+msgstr ""
+
+msgid "If you wish to access your files from multiple devices, you may want to consider moving them to the Cloud. The process is easy, and you can still keep your files here until you are satisfied with the Cloud."
+msgstr ""
+
+msgid "You uploaded a file"
+msgstr ""
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "uploaded a file"
+msgstr ""
+
+msgid "More"
+msgstr ""
+
+msgid "Latest files"
+msgstr ""
+
+msgid "There are no files  yet"
+msgstr ""
+
+#, python-format
+msgid "Folder \"%(title)s\" was created successfully."
+msgstr ""
+
+msgid "File does not exist or you are not allowed to delete it."
+msgstr ""
+
+#, python-format
+msgid "A problem occurred during export. The following file is missing: %(filename)s."
+msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Invalid request."
+msgstr ""
+
+#, python-format
+msgid "File \"%(title)s\" was updated successfully."
+msgstr ""
+
+#, python-format
+msgid "File \"%(title)s\" could not be updated."
+msgstr ""
+
+msgid "Downloading failed, the target object was not a folder!"
+msgstr ""
+
+msgid "Canceled the download because there seem to be no files in this folder."
+msgstr ""
+
+msgid "Internal Error: Group not Found"
+msgstr ""
+
+msgid "Permission for upload denied"
+msgstr ""
+
+msgid "The uploaded file was invalid."
+msgstr ""
+
+#, python-format
+msgid "%(count)d File was added successfully."
+msgid_plural "%(count)d Files were added successfully."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
+msgstr ""

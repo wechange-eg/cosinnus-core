@@ -1,0 +1,37 @@
+{% load cosinnus_tags %}
+
+{% for file in all_files %}
+    <div class="app-files">
+        {% captureas file_url %}{{ file.get_absolute_url }}{% endcaptureas %}
+        <div target="_blank" class="btn btn-emphasized w100 {% if not no_indent %}indented{% endif %}" {% if file.is_image %}href="{{ file.static_image_url }}" data-lightbox-download="{{ file.static_image_original_url }}" data-lightbox="image-{% if lightbox_context %}{{ lightbox_context }}{% else %}{{ object.id }}{% endif %}" data-title="{{ file.title }}"{% else %}href="{{ file_url }}" {% if file.is_url %}target="_blank"{% endif %}{% endif %}>
+            <ul class="media-list fine-space">
+                <li class="media">
+                    <a class="pull-left">
+                        {% if file.is_image %}
+                            <img src='{{ file.static_image_url_thumbnail }}' title='{{ file.title }}'></img>
+                        {% else %}
+                            <i class="fa {{ file.get_icon }}"></i>
+                        {% endif %}
+                    </a>
+                    {% if not file.is_url %}
+	                    <a class="pull-right" target="_blank" href="{{ file.get_download_url }}">
+	                        <i class="fa fa-download"></i>
+	                    </a>
+                    {% endif %}
+                    <div class="media-body no-vertical-padding ">
+                        {% comment %} No href here because this would cause a double download (since the div reacts to the clicked href too) {% endcomment %}
+                        <strong><a target="_blank">{{ file.title }}</a></strong>
+                        {% with creator=file.creator %}
+                            <div class="group-annotation">
+                                <a href="{{ creator|profile_url }}">
+                                    <i class="fa fa-user"></i>
+                                    {{ creator|full_name }}
+                                </a> 
+                            </div>
+                         {% endwith %}
+                    </div>
+                </li>
+            </ul>
+        </div><!-- btn -->
+    </div>
+{% endfor %}

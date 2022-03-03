@@ -1,0 +1,134 @@
+{% extends "cosinnus_event/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block page_title %}
+{% trans "Events" %} {{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="active">{% trans "Calendar" %}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus_event/leftnav.html" %}
+{% endblock leftnav %}
+
+{% block content %}
+    {% if not request.user or not request.user.is_authenticated %} 
+        {% include "cosinnus/not_logged_in_alert.html" %}
+    {% endif %}
+    
+    
+	<!-- a box with semi transparent background -->
+	<div class="content-box">
+	    {% captureas feed_url %}{{ COSINNUS_BASE_URL|slice:":-1" }}{% url 'cosinnus:team-feed' team_id=group.id %}{% if user.is_authenticated %}?{% cosinnus_user_token SETTINGS.COSINNUS_EVENT_TOKEN_EVENT_FEED %}{% endif %}{% endcaptureas %}
+        {% captureas feed_url_group %}{{ feed_url }}{% if user.is_authenticated %}&{% else %}?{% endif %}include_sub_projects=1{% endcaptureas %}
+        
+	    {% captureas content %}
+	        <div type="button" class="btn btn-default w100 regular-space">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <div class="media-body">
+				            <span>{% trans "Copy this iCal-link into your calendar application to import current events:" %}</span>
+				        </div>
+	                    <div class="media-body media-body-form-control large-space">
+	                        <input id="feedInputBox" class="form-control" onclick="this.focus();this.select()" readonly="readonly" 
+	                           value="{{ feed_url }}" data-feed-url="{{ feed_url }}" {% if group.type == 1 %}data-feed-url-group="{{ feed_url_group }}"{% endif %}>
+	                    </div>
+	                    {% if group.type == 1 %}
+		                    <div class="">
+		                        <input type="checkbox" id="check-group-feed" onclick="$('#feedInputBox').val($('#feedInputBox').data(this.checked ? 'feed-url-group' : 'feed-url'));">
+	                            <label style="white-space: normal; vertical-align: middle;" for="check-group-feed">{% trans "Also include all events from projects within this group in feed" %}</label>
+	                        </div>
+                        {% endif %}
+	                </li>
+	            </ul>
+	        </div>
+	        <div class="clearfix large-space"></div>
+	    {% endcaptureas %}
+	    {% captureas title %}{% trans "iCal Feed" %}{% endcaptureas %}
+	    {% include "cosinnus/modal_box.html" with id="feedModal" label=content title=title title_icon="fa-calendar" %}
+	    
+        <div class="big-calendar large-space" {% if user|can_create_objects_in:group %}data-calendar-edit-allowed="true"{% endif %}></div>
+        
+        <script type="application/javascript">
+	        var cosinnus_calendarEvents = [
+		        {% for event in object_list %}
+		            {% if event.from_date %}
+	                {
+						id: {{ event.id }},
+	                    title: $.cosinnus.decodeEntities('{{ event.title|truncatechars:35 }}{% if event.video_conference_type == 1 %} ({% trans "BBB-Meeting" %}){% elif event.video_conference_type == 2 %} ({% trans "Fairmeeting" %}){% endif %}{% if not event.is_hidden_group_proxy and group != event.group %} (&#8599; {{ event.group.name|truncatechars:14 }}){% endif %}'),
+	                    start: "{{ event.from_date|date:"c"}}",
+	                    {% if event.to_date %}
+	                    end: "{{ event.to_date|date:"c"}}",
+	                    {% endif %}
+	                    {% if event.is_hidden_group_proxy %}
+	                    className: 'event-special',
+	                    {% endif %}
+	                    {% if not user|has_write_access:event or event.is_hidden_group_proxy %}
+	                    editable: false,
+	                    {% endif %}
+	                    url: '{{ event.get_absolute_url }}{% if not event.is_hidden_group_proxy and group != event.group %}?reflected_item_redirect=1{% endif %}'
+	                },
+	                {% endif %}
+	            
+	            {% endfor %}
+            ];
+            $.cosinnus.fullcalendar();
+        </script>
+        
+        {% if request.user and request.user.is_authenticated %} 
+	        {% if user|can_create_objects_in:group and not group.group_is_conference %}
+		        <form method="GET" action="{% group_url 'cosinnus:event:event-add' group=group %}">
+			        <div type="button" class="btn btn-default w100 large-space">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left" href="#">
+			                        <i class="fa fa-plus"></i>
+			                    </a>
+			                    <div class="media-body media-body-form-control">
+			                        {% captureas placeholder %}{% trans "Enter the title for a new event or select a day in the Calendar." %}{% endcaptureas %}
+			                        <input class="form-control next-button-is-for-sending"
+			                            placeholder="{{ placeholder }}" autocomplete="off"
+			                            name="title"
+			                            value="" />
+			                    </div>
+			                </li>
+			            </ul>
+			        </div>
+			        <button type="submit" class="btn btn-emphasized" style="display: none;">
+		                <ul class="media-list">
+		                    <li class="media">
+		                        <span class="pull-left">
+		                            <i class="fa fa-pencil"></i>
+		                        </span>
+		                        <div class="media-body">
+		                            {% trans "Create" %}
+		                        </div>
+		                    </li>
+		                </ul>
+		            </button>
+		        </form>
+	        {% endif %}
+        
+        <button href="#" data-toggle="modal" data-target="#feedModal" class="btn btn-autosize btn-emphasized">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                    <div class="media-body">
+                        {% trans "Export event feed" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+	    <div class="clearfix"></div>
+        {% endif %}
+	
+	</div><!-- content-box -->
+	
+	{% include 'cosinnus_event/common/confirm_event_modal.html' with group=group %}
+	    
+{% endblock content %}

@@ -1,0 +1,69 @@
+{% extends 'cosinnus/v2/dashboard/timeline_item_base.html' %}
+{% load i18n cosinnus_tags %}
+
+{% block container_class %}timeline-item-offer{% endblock %}
+
+{% block creation_label %}
+	{% if item.creator == user %}
+		{% trans "You created an offer" %}
+	{% else %}
+		{% trans "created an offer" context "This appears next to new items in the timeline, as in '<Jane> created a new item'" %}
+	{% endif %}
+	
+	{% if item.type == 1 %}
+		({% trans "Looking for" %})
+	{% elif item.type == 2 %}
+		({% trans "Offering" %})
+	{% endif %}
+{% endblock %}
+
+{% block icon %}fa-exchange-alt{% endblock %}
+
+{% block title %}{{ item.title }}{% endblock %}
+
+{% block body %}
+	{{ item.description|textfield }}
+{% endblock %}
+
+{% block additional_content %}
+	<hr class="seperator" />
+				
+	<div class="timeline-item-row text-small flex-row">
+		<div class="timeline-tags flex-grow">
+			<span>
+				<i class="fas fa-fw fa-comment"></i>
+				{% trans "Contact" %}:
+			</span>
+			{% if item.phone_number %}
+				<span class="">
+					<i class="fas fa-fw fa-phone"></i>
+					{{ item.phone_number.as_international }}
+				</span>
+			{% endif %}
+            {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
+			<span class="">
+				<a {% if not item.creator == user %}href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=item.creator.username %}{% else %}{% url 'postman:write' recipients=item.creator.username %}{% endif %}"{% else %}disabled="true" class="pale-color no-select"{% endif %}>
+					<i class="fas fa-fw fa-envelope"></i>
+		            {% trans "Send Message" %}
+				</a>
+			</span>
+            {% endif %}
+		</div>
+	</div>
+{% endblock %}
+
+{% block action_buttons %}
+{% endblock %}
+
+{% block topics_content %}
+	{% with categories=item.categories.all %}
+		{% if categories %}
+			<span>
+				<i class="fas fa-fw fa-tags" title="{% trans "offered in" %}"></i>
+				{% for category in categories %}
+					<a href="{% group_url "cosinnus:marketplace:list" group=item.group %}?categories={{ category.id }}">{{ category.name }}</a>{% if not forloop.last %}, {% endif %}
+				{% endfor %}
+			</span>
+		{% endif %}
+	{% endwith %}
+{% endblock %}

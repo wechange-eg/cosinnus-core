@@ -1,0 +1,128 @@
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% group_url 'cosinnus:marketplace:list' group=group as marketplace_list_page %}
+{% group_url 'cosinnus:marketplace:list_mine' group=group as marketplace_list_mine_page %}
+{% group_url 'cosinnus:marketplace:add' group=group as marketplace_add_page %}
+
+
+{% if return_to == "offers" %}
+
+    <button type="button" class="btn w100 btn-emphasized" href="{% group_url 'cosinnus:marketplace:list' group=group %}">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left">
+                    <i class="fa fa-reply"></i>
+                </span>
+                <span class="pull-right"></span><!-- only block width -->
+                <div class="media-body">
+                    {% trans "Back to Offers" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    
+{% else %} {# Offer list view #}
+    
+    <button type="button" class="btn w100 btn-{% if request.path == marketplace_list_page %}extra-{% endif %}emphasized fine-space" href="{{ marketplace_list_page }}">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left">
+                    <i class="fa fa-exchange"></i>
+                </span>
+                {% if request.path == marketplace_list_page %}
+                    <span class="pull-right">
+                        <i class="fa fa-caret-right"></i>
+                    </span>
+                {% endif %}
+                <div class="media-body">
+                    {% trans "Offers" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    
+    <button type="button" class="btn w100 btn-{% if request.path == marketplace_list_mine_page %}extra-{% endif %}emphasized large-space" href="{{ marketplace_list_mine_page }}">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left">
+                    {% if my_offer_count or my_offer_count == 0 %}
+                        {{ my_offer_count }}
+                    {% else %}
+                        <i class="fa fa-exchange"></i>
+                    {% endif %}
+                </span>
+                <span class="pull-right">
+                    {% if request.path == marketplace_list_mine_page %}
+                        <i class="fa fa-caret-right"></i>
+                    {% endif %}
+                </span>
+                <div class="media-body">
+                    {% trans "My Offers" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    
+    <button type="button" class="btn w100 btn-emphasized large-space" href="{{ marketplace_add_page }}">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left">
+                    <i class="fa fa-plus"></i>
+                </span>
+                <div class="media-body">
+                    {% trans "Add Offer" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    
+    
+    {% if filter.get_categories_grouped %}
+		<form action="." method="GET" class="regular-space clearfix" >
+		
+		    <!-- a box with semi transparent background -->
+		    <div class="content-box">
+		    	<input type="hidden" id="input_tab_param" name="tab" value="{{ request.GET.tab }}" />
+		    
+				{# set all existing filters as inputs for the GET request #}        
+		        {% for filter_key in 'o,creator'|makelist %}
+		        	{% for filter_value in filter.data|querydictlist:filter_key %}
+		        		<input type="hidden" name="{{ filter_key }}" value="{{ filter_value }}" />
+		        	{% endfor %}
+		        {% endfor %}
+		        
+	    		<div class="row large-space">
+	    			{% for group, categories in filter.get_categories_grouped %}
+			            <div class="col-xs-12 large-space">
+		    				<b>{% if group == 'zzz_misc' %}{% trans "Misc" %}{% else %}{{ group }}{% endif %}</b>
+				        	{% for category in categories %}
+				        		<br/>
+					            <label for="id_categories_{{ category.id }}">
+					            	<input id="id_categories_{{ category.id }}" name="categories" 
+					            			type="checkbox" value="{{ category.id }}"{% if category.id in filter.data|querydictlist:'categories' or category.id|stringify in filter.data|querydictlist:'categories' %}checked="checked"{% endif %}>
+					            	<span>{{ category.name }}</span>
+					        	</label>
+				        	{% endfor %}
+			        	</div>
+			        {% endfor %}
+		        </div>
+	    	</div>
+			<button type="submit" class="btn btn-emphasized large-space">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <span class="pull-left">
+	                        <i class="fa fa-filter"></i>
+	                    </span>
+	                    <div class="media-body">
+	                        {% trans "Filter" %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </button>        
+	        
+	    </form>
+    {% endif %}
+    
+{% endif %}
+
+{% block leftnav_extra %}{% endblock leftnav_extra %}

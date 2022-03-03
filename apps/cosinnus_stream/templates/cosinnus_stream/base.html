@@ -1,0 +1,12 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static %}
+
+{% block breadcrumb %}
+    <li><a class="active" href="{% url 'cosinnus:my_stream' %}">{% trans "Streams" %}</a></li>
+{% endblock breadcrumb %}
+
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/cosinnus_stream.css' %}">
+{% endblock %}
+
+{% block page_title %}{% trans "Streams" %}{% endblock page_title %}

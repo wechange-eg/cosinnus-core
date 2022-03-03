@@ -1,0 +1,358 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:20+0200\n"
+"PO-Revision-Date: 2020-10-11 19:24+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+"X-Generator: Poedit 2.2.4\n"
+
+msgid "Files"
+msgstr "Fișiere"
+
+msgctxt "the_app"
+msgid "file"
+msgstr "fișier"
+
+msgid "A user uploaded a new file"
+msgstr "Un utilizator a încărcat un nou fișier"
+
+#, python-format
+msgid "%(sender_name)s uploaded the file %(object_name)s"
+msgstr "%(sender_name)s a încărcat fișierul %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s uploaded %(count)d files"
+msgstr "%(sender_name)s încărcat %(count)d fișierele"
+
+#, python-format
+msgid "%(sender_name)s created a new file"
+msgstr "%(sender_name)s a creat un nou fișier"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Un nou fișier: ”%(object_name)s” a fost creat în %(team_name)s."
+
+msgid "A user uploaded a new file in a team you are following"
+msgstr "Un utilizator a încărcat un nou fișier într-o echipă pe care o urmărești"
+
+#, python-format
+msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s a creat un nou fișier în %(team_name)s (pe care le urmezi)"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Un nou fișier: ”%(object_name)s” a fost creat în %(team_name)s (pe care le urmezi)."
+
+msgid "Latest Files"
+msgstr "Cele mai recente fișiere"
+
+msgid "No files"
+msgstr "Fără fișiere"
+
+msgid "Pictures"
+msgstr "Poze"
+
+msgid "Documents"
+msgstr "Documente"
+
+msgid "Audio Files"
+msgstr "Fișiere Audio"
+
+msgid "Videos"
+msgstr "Videoclipuri"
+
+msgid "Created By"
+msgstr "Creat de"
+
+msgid "File Type"
+msgstr "Tip Fișier"
+
+msgid "File Name"
+msgstr "Nume de Fișier"
+
+msgid "File Name (descending)"
+msgstr "Nume de Fișier (descendentă)"
+
+msgid "Newest Created"
+msgstr "Cel mai nou creat"
+
+msgid "Smallest Files"
+msgstr "Cele mai mici fișiere"
+
+msgid "Largest Files"
+msgstr "Cele mai mari fișiere"
+
+msgid "The given URL does not seem to be valid."
+msgstr "URL-ul dat nu pare a fi valid."
+
+msgid "Must supply either a URL or File"
+msgstr "Trebuie să furnizeze fie un URL sau un Fișier"
+
+msgid "Note"
+msgstr "Notă"
+
+msgid "File"
+msgstr "Fișier"
+
+msgid "Is URL Link"
+msgstr "Este Link URL"
+
+msgid "URL"
+msgstr "URL-ul"
+
+msgid "Path"
+msgstr "Calea"
+
+msgid "Uploaded by"
+msgstr "Încărcat de"
+
+msgid "Uploaded on"
+msgstr "Încărcat pe"
+
+msgid "No files selected."
+msgstr "Nu au fost selectate fișiere."
+
+msgctxt "special_folder_type"
+msgid "Attachments"
+msgstr "Atașamente"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "A existat o eroare într-unul din câmpurile pe care le-ați introdus. Vă rugăm să îl corectați înainte de a salva!"
+
+msgid "The URL you have entered does not seem to be valid!"
+msgstr "URL-ul pe care l-ați introdus nu pare să fie valid!"
+
+msgid "URL Link"
+msgstr "Link URL"
+
+msgid "Paste or type the link's URL here"
+msgstr "Inserați sau introduceți adresa URL a linkului aici"
+
+msgid "Title"
+msgstr "Titlu"
+
+msgid "Description"
+msgstr "Descriere"
+
+msgid "Preview"
+msgstr "Previzualizare"
+
+msgid "Original filename"
+msgstr "Nume de fișier original"
+
+msgid "Save"
+msgstr "Salvați"
+
+msgid "Cancel"
+msgstr "Anulare"
+
+msgid "Show detailed steps"
+msgstr "Afișați pașii detaliați"
+
+msgid "Move your files to the Cloud"
+msgstr "Mutați fișierele în Cloud"
+
+msgid "Delete"
+msgstr "Șterge"
+
+msgid "Move"
+msgstr "Mișcare"
+
+msgid "Download"
+msgstr "Descarcă"
+
+msgid "Download this folder"
+msgstr "Descărcați acest dosar"
+
+msgid "Add URL link"
+msgstr "Adăugați un link URL"
+
+msgid "No files have been uploaded yet."
+msgstr "Încă nu au fost încărcate fișiere."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new file \"%(object_name)s\" in %(team_name)s was uploaded by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Salut %(receiver_name)s,\n"
+"\n"
+"Un nou fișier ”%(object_name)s” în %(team_name)s a fost încărcat de %(sender_name)s. \n"
+"\n"
+"Îl puteți găsi urmărind această legătură: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Urmați această legătură pentru a modifica preferințele de notificare: %(notification_settings_url)s )\n"
+"\n"
+"A ta %(site_name)s Echipă."
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was uploaded in %(team_name)s."
+msgstr "Un nou fișier: ”%(object_name)s” a fost încărcat în %(team_name)s."
+
+msgid "Move to another Folder"
+msgstr "Treceți la alt Dosar"
+
+msgid "Link to this Image"
+msgstr "Link către această Imagine"
+
+msgid "by"
+msgstr "de"
+
+msgid "Created"
+msgstr "Creată"
+
+msgid "Edit"
+msgstr "Editați"
+
+#, python-format
+msgid "Do you really want to delete file „%(title)s“?"
+msgstr "Vrei cu adevărat să ștergi fișierul „%(title)s”?"
+
+msgid "Delete file"
+msgstr "Șterge fișierul"
+
+msgid "Close"
+msgstr "Închide"
+
+msgid "To move your files to the Cloud, follow these steps:"
+msgstr "Pentru a muta fișierele în Cloud, urmați acești pași:"
+
+msgid "Navigate to the folder you wish to move to the Cloud, or to the root folder of the Files app if you wish to move all of the files"
+msgstr "Navigați la folderul pe care doriți să îl mutați în Cloud, sau la folderul rădăcină al aplicației Fișiere dacă doriți să mutați toate fișierele"
+
+msgid "Root folder"
+msgstr "Rădăcina folderului"
+
+#, python-format
+msgid "Click \"%(download_label)s\" to download the file archive"
+msgstr "Clic \"%(download_label)s\" pentru a descărca arhiva de fișiere"
+
+msgid "Unzip the file archive to a local folder on your hard drive"
+msgstr "Dezarhivați arhiva de fișiere într-un folder local de pe hard disc"
+
+#, python-format
+msgid "Open the Cloud folder for \"%(group_name)s\":"
+msgstr "Deschideți folderul Cloud pentru \"%(group_name)s\":"
+
+msgid "Cloud app"
+msgstr "Cloud aplicația"
+
+msgid "Drag & drop the entire content of the unzipped folder from your local hard drive to the Cloud folder"
+msgstr "Glisați & fixați întregul conținut al folderului dezarhivat de pe hard diskul local în folderul Cloud"
+
+#, python-format
+msgid "Your files will now upload to the Cloud and can be accessed by all members of \"%(group_name)s\". Your files will remain here in the Files app as well. If you are satisfied with how they look in the Cloud, you may delete them here."
+msgstr "Fișierele dvs., se vor încărca acum în Cloud și pot fi accesate de toți membrii \"%(group_name)s\". Fișierele dvs., vor rămâne aici și în aplicația Fișiere. Dacă sunteți mulțumit de modul în care arată în Cloud, le puteți șterge aici."
+
+msgid "If you wish to access your files from multiple devices, you may want to consider moving them to the Cloud. The process is easy, and you can still keep your files here until you are satisfied with the Cloud."
+msgstr "Dacă doriți să accesați fișierele dvs., de pe mai multe dispozitive, vă recomandăm să le mutați în Cloud. Procesul este ușor și vă puteți păstra fișierele aici până când sunteți mulțumit de Cloud."
+
+msgid "You uploaded a file"
+msgstr "Ai încărcat un fișier"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "uploaded a file"
+msgstr "a încărcat un fișier"
+
+msgid "More"
+msgstr "Mai mult"
+
+msgid "Latest files"
+msgstr "Cele mai recente fișiere"
+
+msgid "There are no files  yet"
+msgstr "Încă nu există  fișiere"
+
+#, python-format
+msgid "Folder \"%(title)s\" was created successfully."
+msgstr "Dosar ”%(title)s” a fost creat cu succes."
+
+msgid "File does not exist or you are not allowed to delete it."
+msgstr "Fișierul nu există sau nu aveți voie să îl ștergeți."
+
+#, python-format
+msgid "A problem occurred during export. The following file is missing: %(filename)s."
+msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
+msgstr[0] "O problemă a apărut în timpul exportului. Fișierul următor lipsește: %(filename)s."
+msgstr[1] "O problemă a apărut în timpul exportului. Fișierul următor lipsește: %(filename)s."
+msgstr[2] "O problemă a apărut în timpul exportului. Fișierele următoare lipsesc: %(filename)s."
+
+msgid "Invalid request."
+msgstr "Cerere invalidă."
+
+#, python-format
+msgid "File \"%(title)s\" was updated successfully."
+msgstr "Fișier ”%(title)s” a fost actualizat cu succes."
+
+#, python-format
+msgid "File \"%(title)s\" could not be updated."
+msgstr "Fișier ”%(title)s” nu a putut fi actualizat."
+
+msgid "Downloading failed, the target object was not a folder!"
+msgstr "Descărcarea a eșuat, obiectul țintă nu era un dosar!"
+
+msgid "Canceled the download because there seem to be no files in this folder."
+msgstr "A anulat descărcarea, deoarece se pare că nu există fișiere în acest dosar."
+
+msgid "Internal Error: Group not Found"
+msgstr ""
+
+msgid "Permission for upload denied"
+msgstr ""
+
+msgid "The uploaded file was invalid."
+msgstr ""
+
+#, python-format
+msgid "%(count)d File was added successfully."
+msgid_plural "%(count)d Files were added successfully."
+msgstr[0] "%(count)d Fișierul a fost adăugat cu succes."
+msgstr[1] "%(count)d Fișierul a fost adăugat cu succes."
+msgstr[2] "%(count)d Fișierele au fost adăugate cu succes."
+
+msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
+msgstr ""
+
+#~ msgid "New file by %(sender_name)s"
+#~ msgstr "Nou fișier de %(sender_name)s"
+
+#~ msgid "New file by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Nou fișier de %(sender_name)s în %(team_name)s (pe care le urmezi)"
+
+#~ msgid "File title"
+#~ msgstr "Titlul fișierului"
+
+#~ msgid "File description"
+#~ msgstr "Descrierea fișierului"
+
+#~ msgid "File \"%(title)s\" was uploaded successfully."
+#~ msgstr "Fișier ”%(title)s” a fost încărcat cu succes."
+
+#~ msgid "File \"%(title)s\" could not be uploaded."
+#~ msgstr "Fișier ”%(title)s” nu a putut fi încărcat."
+
+#~ msgid "File \"%(title)s\" could not be added."
+#~ msgstr "Fișier ”%(title)s” nu a putut fi adăugat."

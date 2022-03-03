@@ -1,0 +1,25 @@
+OC.L10N.register(
+    "firstrunwizard",
+    {
+    "Copied!" : "Скопійовано!",
+    "Not supported!" : "Не підтримується!",
+    "Press ⌘-C to copy." : "Натисніть ⌘-C щоб скопіювати.",
+    "Press Ctrl-C to copy." : "Натисніть Ctrl-C щоб скопіювати.",
+    "First run wizard" : "Майстер першого запуску",
+    "Add your profile information! Set a profile picture and full name for easier recognition across all features." : "Додайте інформацію в свій профіль! Встановіть зображення профілю та повне ім'я для полегшення розпізнавання у всіх функціях.",
+    "Schedule work & meetings, synced with all your devices." : "Планування роботи та зустрічей із синхронізацією зі всіма вашими пристроями",
+    "Keep your colleagues and friends in one place without leaking their private info." : "Створіть спільний безпечний простір для співпраці та обміну даними з вашими колегами та друзями.",
+    "Simple email app nicely integrated with Files, Contacts and Calendar." : "Простий застосунок електронної пошти, добре інтегрований з Файлами, Контактами та Календарем.",
+    "About" : "Про програму",
+    "A welcome and introduction wizard for Nextcloud" : "Ласкаво просимо в майстер знайомства з Nextcloud",
+    "Get the apps to sync your files" : "Отримати додатки для синхронізації ваших файлів",
+    "Desktop client" : "Клієнт для ПК",
+    "iOS app" : "iOS застосунок",
+    "Connect your desktop apps to %s" : "Під'єднати ваші застосуноки до %s",
+    "Access files via WebDAV" : "Доступ до файлів за допомогою WebDAV",
+    "A safe home for all your data" : "Безпечний дім для Ваших даних",
+    "Server address" : "Адреса сервера",
+    "Copy link" : "Скопіювати посилання",
+    "Android app" : "Android-застосунок"
+},
+"nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);");

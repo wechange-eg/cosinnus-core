@@ -1,0 +1,93 @@
+{% extends "cosinnus_stream/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+{% block page_title %}{{ block.super }}{% endblock %}
+
+
+
+{% block main_page %}
+    <div class="row">
+        <!-- start with left navigation -->
+        
+        <!-- now the content -->
+        <div class="col-lg-8 col-md-8 pull-right"><!-- right column -->
+            {% block override_breadcrumb %}
+                <ol class="breadcrumb">
+                    <li><a class="active" href="{% url 'cosinnus:my_stream' %}">{% trans "Streams" %}</a></li>
+					{% if stream.is_my_stream %}
+					    <li class="active">{% if user.is_authenticated %}{% trans "My Stream" %}{% else %}{% trans "Public Stream" %}{% endif %}</li>
+					{% elif stream %}
+					    <li class="active">{{ stream.title }}</li>
+					{% endif %}
+                </ol>
+            {% endblock override_breadcrumb %}
+        </div>
+        
+        
+	    <div id="stream-dashboard">
+        
+	        {% block override_leftnav %}
+	        <div class="col-lg-4 col-md-4"><!-- left column -->
+	            {% include 'cosinnus_stream/leftnav.html' with streams=streams stream=stream %}
+	            <div class="clearfix regular-space"></div>
+	        </div><!-- left column -->
+	        {% endblock override_leftnav %}
+	        
+	        
+	        <div class="col-lg-8 col-md-8 pull-right col-xs-12 large-space"><!-- right column -->
+	            <div class="row">
+	                <div class="col-xs-12">
+	                    {% include 'cosinnus/messages.html' %}
+	                    
+					    <!-- a box with semi transparent background -->
+					    <div class="content-box">
+					    	
+					    	{% if user.is_authenticated %}
+					    	<div>
+								<a href=".?show_public={% if request.GET.show_public == "1" %}0{% else %}1{% endif %}" class="pull-right" style="padding-bottom: 10px;">{% if request.GET.show_public == "1" %}{% trans "Hide public items outside of your groups" %}{% else %}{% trans "Show public items outside of your groups" %}{% endif %}</a>
+					    	</div>
+					    	<div class="clearfix"></div>
+					    	{% endif %}
+					        
+					        {% for obj in stream_objects %}
+					            {% if user.is_authenticated and not obj.creator == user and obj.created.date > last_seen.date or not obj.creator == user and obj.created.date == last_seen.date and obj.created.time > last_seen.time %}
+					                <div class="indented">
+					            {% endif %}
+					            {% cosinnus_render_single_object obj %}
+					            {% if user.is_authenticated and not obj.creator == user and obj.created.date > last_seen.date or not obj.creator == user and obj.created.date == last_seen.date and obj.created.time > last_seen.time %}
+					                </div>
+					            {% endif %}
+					        {% empty %}
+					        	<p>{% trans "There are no news posts yet" %}</p>
+					        {% endfor %}
+					    
+					    </div><!-- content-box -->
+					    
+					    {% if has_more == True %}
+					        <div class="content-box">
+					            Und {{ has_more_count }} weitere...
+					        </div>
+					    {% endif %}
+	                </div><!-- col -->
+	            </div><!-- row -->
+	        </div><!-- right column -->
+	        
+	        {% for widget in widgets %}
+	            {% cosinnus_render_widget widget %}
+	        {% endfor %}
+	        
+	    </div> <!-- dashboard -->
+    
+    </div><!-- row -->
+{% endblock main_page %}
+
+
+{% block extrafooter %}
+  {{ block.super }}
+
+  <script src="{% static "js/cosinnus.dashboard.js" %}?v0.1"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var dashboard = window.Cosinnus.dashboard.init("#dashboard", {% if group.slug %}"{{ group.slug }}"{% else %}null{% endif %});
+    });
+  </script>
+{% endblock %}

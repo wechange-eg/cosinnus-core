@@ -1,0 +1,226 @@
+{% extends "cosinnus_event/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.form.obj.note.id_for_label %}
+{% endblock %}
+
+{% block page_title %}
+	{% if form_view == "add" %}
+	  {% trans "Add unscheduled event" %}
+	{% elif form_view == "edit" %}
+	  {% trans "Edit" %} {{ event.title }}
+	{% endif %}
+{{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        
+  		<li><a href="{% group_url 'cosinnus:event:doodle-list' group=group %}">{% trans "Event Polls" %}</a></li>
+        <li class="active">
+	        {% if form_view == "add" %}
+			  {% trans "Add unscheduled event" %}
+			{% elif form_view == "edit" %}
+			  {% trans "Edit" %} {{ event.title }}
+			{% endif %}
+        </li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus_event/leftnav.html" with return_to="doodle" %}
+{% endblock leftnav %}
+
+{% block content %}
+
+    {% if form.forms.obj.errors or form.forms.media_tag.errors %}
+        <div class="alert alert-danger alert-dismissable">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+            <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+        </div>
+    {% endif %}
+    
+    {{ form.forms.obj.non_field_errors }}
+    {{ form.forms.media_tag.non_field_errors }}
+
+    <form method="POST" action="" id="form-event" class="cosinnus-form form-horizontal">{% csrf_token %}
+	    <div class="content-box">
+	        {% for formset in inlines %}
+	            {{ formset.management_form }}
+	        {% endfor %}
+		                    
+           
+			{% trans "Title" as title_label %}
+			{% trans "Enter a title for the new event to be scheduled." as title_legend %}
+			{% captureas title_html %}
+			        {% if request.GET.title %}
+			            {% render_field form.forms.obj.title class+="form-control" placeholder=title_label value=request.GET.title %}
+			        {% else %}
+			            {% render_field form.forms.obj.title class+="form-control" placeholder=title_label %}
+			        {% endif %}
+			{% endcaptureas %}
+			{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.title legend=title_legend label=title_label field_html=title_html first=True %}
+
+           
+			{# Regular field with custom HTML #}
+			{% trans "Dates" as dates_label %}
+			{% captureas dates_legend %}
+                {% trans "Please select the available days in the calendar." %} {% trans "You can select the same day more than once." %} {% trans "Time: e.g. 10 or 10:30." %}
+            {% endcaptureas %}
+            {% captureas dates_html %}
+				<div {% if has_active_votes %}style="display: none;"{% endif %}> {# Voting panel wrapper #}
+					<input type="hidden" id="id_from_date_1" name="from_date_1" />
+					<input type="hidden" id="id_to_date_1" name="to_date_1" />
+					<ol class="input-area">
+						<li id="calendar-doodle-days-selector">
+							<div class="small-calendar"></div>
+							<div id="calendar-doodle-days-selector-list">
+								<table>
+									<thead>
+										<tr>
+											<th></th>
+											<th></th>
+											<th>{% trans "Time" %}</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="doodle-selected-date-input proto" style="display:none;">
+											<td class="doodle-delete-button">
+												<i class="fa fa-trash-o"></i>
+											</td>
+											<td class="doodle-date-input" data-date-style="short"></td>
+											<td><input class="doodle-time-input" type="text" /></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</li>
+					</ol><!-- input-area -->
+				</div>
+			{% endcaptureas %}
+			{% include 'cosinnus/fields/default_field.html' with field_html=dates_html legend=dates_legend label=dates_label large_field=True field_classes="doodle-select-dates-field" %}
+            {% if has_active_votes %}
+                <p class="white-content"><i class="fa fa-warning"></i> {% trans "Note: You cannot edit the dates for this event poll because someone has already cast their vote!" %}</p>
+            {% endif %}
+						
+            {# SimpleMDE Description Field (gets initialized in extrahead) #}                                   
+	        {% trans "Description and Infos" as description_label %}
+	        {% trans "Description" as description_placeholder %}
+	        {% trans "Enter a description for the event" as description_legend %}
+	        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.note legend=description_legend label=description_label placeholder=description_placeholder large_field=True %}
+	         
+                    
+		    {% trans "Example: http://mywebsite.com" as url_placeholder %}
+		    {% trans "External Link for the event" as url_label %}
+		    {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.url label=url_label placeholder=url_placeholder %}
+		                  
+            
+            {% include 'cosinnus/media_tags.html' with show_location=True %}
+	                        
+	
+	    </div><!-- content-box -->
+	    
+	    <button type="submit" class="btn btn-emphasized" id="createDoodleButton">
+	        <ul class="media-list">
+	            <li class="media">
+	                <span class="pull-left">
+	                    <i class="fa fa-pencil"></i>
+	                </span>
+	                <div class="media-body">
+	                    {% if form_view == "add" %}
+			              {% trans "Create" %}
+			            {% elif form_view == "edit" %}
+			              {% trans "Save" %}
+			            {% endif %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+	    
+    </form>
+    
+{% endblock content %}
+
+{% block extrafooter %}
+{{ block.super }}
+
+<script src="{% static 'js/cosinnus_event/cosinnus_event.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
+
+<script type="text/javascript">
+$(function() {
+  var formEvent = $('#form-event');
+  var hasDates = false;
+  var dateDataAttr = '';
+  var name = '';
+  var formIdx = null;
+
+{% for formset in inlines %}
+  {% for form in formset %}
+  {% if form.from_date and form.from_date.value and not form.errors %}
+  hasDates = true;
+  formIdx = {{ forloop.counter0 }};
+  
+  
+  
+  dateDataAttr = '{{ form.from_date.value|date:"Y-m-d" }}';
+  time1= '{{ form.from_date.value|date:"H:i" }}';
+  time2= '';
+  var $dateInput = $('#calendar-doodle-days-selector-list table tr.proto')
+    .clone()
+    .removeClass('proto')
+    .show()
+    .attr('data-date', dateDataAttr)
+    .appendTo($('#calendar-doodle-days-selector-list table tbody'));
+    
+  $dateInput.find('.doodle-delete-button').click(function() {
+	// add a DELETE input to the form so that the existing date will be deleted on submit
+    var $parent = $(this).parent();
+    var formIdx = $parent.find('.doodle-time-input').attr('data-form-idx');
+	var name = 'suggestions-' + formIdx + '-DELETE';
+	$('<input />')
+        .attr('type', 'hidden')
+        .attr('id', 'id_' + name)
+        .attr('name', name)
+        .attr('value', 'true')
+        .appendTo(formEvent);
+  	$parent.hide();
+	$.cosinnus.initializedFullcalendars[0].destroy();
+	$.cosinnus.fullcalendar();
+  });
+  $dateInput.find('.doodle-date-input')
+    .attr('data-date', dateDataAttr)
+    .addClass('moment-data-date');
+  $dateInput.find('.doodle-time-input')
+    .attr('data-form-idx', formIdx)
+    .val(time1);
+    
+    {% if form.id and form.id.value %}
+      name = 'suggestions-' + formIdx + '-id';
+      $('<input />')
+        .attr('type', 'hidden')
+        .attr('id', 'id_' + name)
+        .attr('name', name)
+        .attr('value', {{ form.id.value }})
+        .appendTo(formEvent);
+    {% endif %}
+  {% endif %}
+  {% endfor %}
+{% endfor %}
+
+
+  $.cosinnus.renderMomentDataDate();
+
+  if (hasDates) {
+    $('#calendar-doodle-days-selector-list table thead').show();
+  }
+
+  $.cosinnus.fullcalendar();
+
+  // from cosinnus_event.js
+  calendarCreateDoodle();
+
+});
+
+</script>
+{% endblock %}

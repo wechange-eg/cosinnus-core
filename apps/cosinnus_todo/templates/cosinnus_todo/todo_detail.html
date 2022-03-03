@@ -1,0 +1,78 @@
+{% extends "cosinnus_todo/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+
+{% block page_title %}{% trans "Todos" %}: {{group.name}} {% endblock %}
+{% block breadcrumb %}
+    {{ block.super }}
+    
+    <li><a href="{% group_url 'cosinnus:todo:list' group=group %}">{% trans "Todos" %}</a></li>
+    <li><a href="{% group_url 'cosinnus:todo:list-list' group=group listslug=active_todolist.slug %}">{{ active_todolist.title }}</a></li>
+    <li class="active">{{ object.title }}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include 'cosinnus_todo/leftnav_todoentry.html' with active_todolist=active_todolist %}
+{% endblock leftnav %}
+
+{% block og_image %}{% if object.attached_images %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ object.attached_images.0.static_image_url }}{% else %}{{ block.super }}{% endif %}{% endblock og_image %}
+{% block og_title %}{% if object.title %}{{ object.title }}{% else %}{{ object.note|truncatewords:8 }}{% endif %} - {{ group.name }} - {{ block.super }}{% endblock og_title %}
+{% block og_description %}{{ object.note|truncatewords:30 }}{% endblock og_description %}
+
+{% block content %}
+    
+    {% if object.is_completed %}
+	    <div class="alert alert-info alert-dismissable">
+	        <i class="fa fa-check fa-3x"></i>
+	        <p>
+	            {% trans "This todo was completed:" %}
+		        <span class="moment-data-date" data-date="{{ object.completed_date|date:"Y-m-d" }}" data-date-style="short" data-date-notooltip="true"></span>
+		        {% trans "by" %}&nbsp;
+	            {% include 'cosinnus/user/user_label.html' with user=object.completed_by %}
+	        </p>
+	    </div>
+	{% endif %}
+    
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+    
+	        <div class="app-todos">
+                
+                {% include 'cosinnus_todo/single_todo_detailed.html' with object=object %}
+                	        
+	        </div>
+    
+    
+    </div><!-- content-box -->
+{% endblock %}
+
+
+
+{% block extrafooter %}
+{{ block.super }}
+
+<script type="text/javascript">
+    
+    var select2Format = function(state) {
+        var $originalOption = $(state.element);
+    
+        if (!state.id) {
+            return state.text;
+        } else {
+            var avatarUrl = $originalOption.data('avatar-url');
+            return "<img class='avatar-img' src='"+window.location.origin+avatarUrl+"'/>" + state.text;
+        }
+    };
+    
+    var select2Options = {
+        formatResult: select2Format,
+        formatSelection: select2Format,
+        escapeMarkup: function(m) { return m; }
+    };
+    
+    $(".select2-avatar-item").select2(select2Options);
+    
+</script>
+
+
+{% endblock extrafooter %}

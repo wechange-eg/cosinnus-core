@@ -1,0 +1,66 @@
+{% extends "cosinnus_note/base.html" %}
+{% load i18n cosinnus_tags widget_tweaks %}
+{% block page_title %}{% trans "Notes" %}: {{group.name}} {% endblock %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+{% endblock %}
+
+{% block leftnav %}
+{% endblock leftnav %}
+
+{% block extrahead %}
+    {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+    
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+    
+        {% include 'cosinnus/common/filter_controls.html' %}        
+        
+        {% if user|can_create_objects_in:group %}
+	        <div class="app-main large-space">
+	            
+			        <div class="btn btn-white btn-headline cursor-text" data-toggle="modal" data-target="#write-news-modal">
+			            <ul class="media-list">
+			                <li class="media cursor-text">
+			                    <a class="pull-left" href="{% url 'cosinnus:profile-detail' username=user.username %}">
+			                        {% include "cosinnus/user/user_avatar_image.html" with user=user %}
+			                    </a>
+			                    <a class="pull-right" href="#">
+			                        <i class="fa fa-pencil"></i>
+			                    </a>
+			                    <div class="media-body">
+			                        {% trans "Write a news post" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </div>
+	                
+                    {% include 'cosinnus_note/note_form_modal.html' %}
+	                
+	            </div>
+	            
+        {% endif %}
+        
+        
+        {% if not pagination.number == 1 %}
+        	{% include "cosinnus/utils/pagination.html" with widget=pagination %}
+        {% endif %}
+    
+        {% for note in object_list %}
+            
+            {% include 'cosinnus_note/single_note_detailed.html' with object=note %}
+            
+        {% empty %}
+            <!-- {% trans "There are no news posts yet" %} -->
+            {% include 'cosinnus/common/empty_button.html' with message="There are no news posts yet" %}
+        {% endfor %}
+        
+        {% include "cosinnus/utils/pagination.html" with widget=pagination %}
+    
+    </div><!-- content-box -->
+{% endblock %}

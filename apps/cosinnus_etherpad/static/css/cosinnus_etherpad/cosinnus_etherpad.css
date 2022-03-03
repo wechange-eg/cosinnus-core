@@ -1,0 +1,63 @@
+.etherpad-iframe {
+    clear: both; 
+    margin-top: 10px;
+    height: 600px;
+    background-color: #FFF;
+}
+.fullscreen-leave-button {
+    display: none;
+}
+
+.etherpad-iframe.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 24px;
+    height: calc(100% - 24px);
+    width: 100%;
+    z-index: 10000000000; /* had to do that, thanks to the user-report button */
+    margin: 0;
+}
+.etherpad-iframe.fullscreen + .fullscreen-leave-button {
+    display: inherit;
+}
+/** Always show fullscreen on mobile! */
+@media (max-width: 767px) {
+    .etherpad-iframe {
+        position: fixed; 
+		right: 0; 
+		left: 0;
+		top: 0;
+        bottom: 24px;
+        height: calc(100% - 24px);
+		width: 100%;
+        z-index: 10000000000; /* had to do that, thanks to the user-report button */
+        margin: 0;
+    }
+    .fullscreen-leave-button {
+        display: inherit;
+    }
+}
+
+
+.fullscreen-button {
+    margin-left: 25px;
+    cursor: pointer;
+}
+.fullscreen-button i {
+    font-size: 18px;
+    vertical-align: middle;
+    padding-left: 3px;
+}
+a.fullscreen-button:hover {
+    text-decoration: none;
+    color: #DDD;
+}
+
+.fullscreen-leave-button {
+    z-index: 10000000001; /* had to do that, thanks to the user-report button */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100% !important;
+}

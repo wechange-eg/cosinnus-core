@@ -1,0 +1,82 @@
+{% extends "cosinnus_event/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block page_title %}
+{% trans "Events" %} {{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+            <li class="active">{% trans "Event Polls" %}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus_event/leftnav.html" %}
+{% endblock leftnav %}
+
+{% block content %}
+    {% if not request.user or not request.user.is_authenticated %} 
+        {% include "cosinnus/not_logged_in_alert.html" %}
+    {% endif %}
+
+    {% trans "Delete" as btn_label %}
+    {% captureas btn_action %}$.cosinnus.Feedback.cosinnus_delete_element($.cosinnus.getListOfCheckedItems());{% endcaptureas %}
+    {% include 'cosinnus/common/checkbox/checkbox_action_button.html' with label=btn_label icon="fa-eraser" action=btn_action %}
+
+    {% include 'cosinnus/common/checkbox/checkbox_mark_all_buttons.html' %}
+    <div class="clearfix"></div>
+    
+
+	<!-- a box with semi transparent background -->
+	<div class="content-box">
+	
+    {% include 'cosinnus/common/filter_controls.html' %}        
+	
+  {% if request.user and request.user.is_authenticated %} 
+  <form method="GET" action="{% group_url 'cosinnus:event:doodle-add' group=group %}">
+    <div type="button" class="btn btn-default w100 large-space">
+      <ul class="media-list">
+        <li class="media">
+          <a class="pull-left" href="#">
+            <i class="fa fa-plus"></i>
+          </a>
+          <div class="media-body media-body-form-control">
+            <input class="form-control next-button-is-for-sending"
+              placeholder="{% trans "Enter a title for the new event to be scheduled." %}"
+              name="title"
+              autocomplete="off"
+              value="" />
+          </div>
+        </li>
+      </ul>
+    </div>
+    <button type="submit" class="btn btn-emphasized large-space" style="display: none;">
+      <ul class="media-list">
+        <li class="media">
+          <span class="pull-left">
+            <i class="fa fa-pencil"></i>
+          </span>
+          <div class="media-body">
+            {% trans "Create" %}
+          </div>
+        </li>
+      </ul>
+    </button>
+  </form>
+  {% endif %}
+
+  {% for event in object_list %}
+      {% include "cosinnus_event/list_object.html" %}
+  {% empty %}
+      <!-- {% trans "There are no open event polls." %} -->
+      {% include 'cosinnus/common/empty_button.html' with message="There are no open event polls." %}
+  {% endfor %}
+
+	</div><!-- content-box -->
+	
+	<script type="text/javascript">
+        var cosinnus_delete_element_object_url = "{% group_url 'cosinnus:event:delete-element' group=group %}";
+    </script>
+    {% include 'cosinnus/common/delete_element_modal.html' %}
+    
+{% endblock content %}

@@ -1,0 +1,115 @@
+{% load i18n static cosinnus_tags %}
+
+{% captureas button_classes %}{% if full_view %}btn btn-default w100 {% if not no_indent %}indented{% endif %}{% else %}btn btn-default dashboard-appwidget-contentline-indented{% endif %}{% endcaptureas %}
+
+<div class="{% if not comments_expanded == "True" %}fadedown {% endif %}large-space"  >
+    {% with comments=event.comments.all %}
+            <div type="button" class="{{ button_classes }}">
+                <ul class="media-list fine-space">
+                    <li class="media">
+                        <div class="media-body comment-background  no-vertical-padding">
+
+                            <ol class="input-area comment-background">
+                                <li class="w100 font11px no-vertical-padding no-horizontal-padding fadedown-clickarea">
+                                        {% comment %} Like count
+                                        <span class="pull-right nounderline">
+                                            <i class="fa fa-heart"></i>
+                                            3
+                                        </span>
+                                        {% endcomment %}
+                                        <span class="pull-right nounderline">
+                                            <i class="fa fa-comments"></i>
+                                            {% if comments|length == "0" %}
+                                                0
+                                            {% else %}
+                                                <b>{{ comments|length }}</b>
+                                            {% endif %}
+                                        </span>
+                                        {% comment %} Like button
+                                        <span>Empfehlen</span>
+                                        {% endcomment %}
+                                        {% if comments or user|can_create_objects_in:event.group %}
+                                            <span>{% trans "Comments" %}</span>
+                                        {% endif %}
+
+                                </li>
+                            </ol>
+                            {% comment %} Likes display 
+                            <ol class="input-area comment-background">
+                                <li class="w100 font11px no-vertical-padding no-horizontal-padding">
+                                        <i class="fa fa-heart"></i>
+                                        <a href="#">Simon Liedtke</a>
+                                        empfiehlt das
+                                </li>
+                            </ol>
+                            {% endcomment %}
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- btn -->
+            
+            <div {% if not comments_expanded == "True" %}style="display:none;"{% endif %}>
+            {% for comment in comments %}
+                
+                <a name="comment-{{ comment.id }}" ></a>
+                <div type="button" class="{{ button_classes }}">
+                    <ul class="media-list {% if not forloop.last %}fine-space{% endif %}">
+                        <li class="media">
+                            <a class="pull-left" href="{{ comment.creator|profile_url }}">
+                                {% include 'cosinnus/user/user_avatar_image.html' with user=comment.creator %}
+                            </a>
+                            <div class="media-body comment-background">
+                                <strong><a href="{{ comment.creator|profile_url }}">{{ comment.creator|full_name }}</a></strong>
+                                <a href="{{ comment.get_absolute_url }}"><span class="annotation moment-data-date" data-date="{{ comment.created_on|date:'c' }}" ></span></a>
+                                <div class="font11px regular-space">
+                                    {% if user|has_write_access:comment %}
+                                        <form id="delete_comment_form_{{ comment.pk }}" action="{% group_url 'cosinnus:event:comment-delete' group=comment.event.group pk=comment.pk %}" method="post" class="form-horizontal">
+                                            {% csrf_token %}
+                                            <a class="pull-right" onclick="$('#delete_comment_form_{{ comment.pk }}').submit(); return false;" title="{% trans "Delete" %}"><i class="fa fa-times"></i></a>
+                                        </form>
+                                    {% endif %}
+                                </div>
+                                <div class="comment-background textfield">{{ comment.text|textfield }}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div><!-- btn -->
+            
+            {% endfor %}
+            
+            {% if user|can_create_objects_in:event.group %}
+                <form action="{% group_url 'cosinnus:event:comment' group=event.group event_slug=event.slug %}" method="post" class="form-horizontal">
+                    {% csrf_token %}
+            
+                    <div type="button" class="{{ button_classes }}">
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left" href="{% url 'cosinnus:profile-detail' username=user.username %}">
+                                    {% include 'cosinnus/user/user_avatar_image.html' with user=user %}
+                                </a>
+                                <div class="media-body media-body-form-control">
+                                    {% if form and form.text and form.text.errors %}{{ form.text.errors }}{% endif %}
+                                    <textarea id="id_text" name="text" class="form-control next-button-is-for-sending autogrow oneline" placeholder="{% trans "Write comment..." %}"></textarea>
+                                </div>
+                            </li>
+                        </ul>
+                    </div><!-- btn -->
+
+                    <button type="submit" class="btn btn-emphasized {% if comments_expanded == "True" %}large-space{% endif %}" {% if comments_expanded == "True" %}style=""{% endif %}>
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left">
+                                    <i class="fa fa-save"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans "Post" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button><!-- btn -->
+                    
+                </form>
+            {% endif %}
+            </div>
+    {% endwith %}
+</div><!-- fadedown -->

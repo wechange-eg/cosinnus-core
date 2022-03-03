@@ -1,0 +1,237 @@
+{% extends "cosinnus_todo/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks thumbnail %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.note.id_for_label %}
+{% endblock %}
+
+{% block page_title %}{% trans "Todos" %}: {{group.name}} {% endblock %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    
+    <li><a href="{% group_url 'cosinnus:todo:list' group=group %}">{% trans "Todos" %}</a></li>
+    <li><a href="{% group_url 'cosinnus:todo:list-list' group=group listslug=active_todolist.slug %}">{{ active_todolist.title }}</a></li>
+    {% if form_view == "add" %}
+        <li class="active">{% trans "Add Todo" %}</li>
+    {% elif form_view == "edit" %}
+        <li><a href="{% group_url 'cosinnus:todo:entry-detail' group=group slug=object.slug %}">{{ object.title }}</a></li>
+        <li class="active">{% trans "Edit" %}</li>
+    {% endif %}
+{% endblock %}
+
+{% block leftnav %}
+    {% include 'cosinnus_todo/leftnav_todoentry.html' with active_todolist=active_todolist %}
+    
+    {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_9_todo" %}
+{% endblock leftnav %}
+
+
+{% block content %}
+
+{% if form.forms.obj.errors or form.forms.media_tag.errors %}
+    <div class="alert alert-danger alert-dismissable">
+        <i class="fa fa-exclamation-triangle fa-3x"></i>
+        <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+    </div>
+{% endif %}
+    
+<form method="POST" action="{% if form_view == 'add' %}{% group_url 'cosinnus:todo:entry-add' listslug=active_todolist.slug group=group.slug %}{% else %}{% group_url 'cosinnus:todo:entry-edit' group=object.group slug=object.slug %}{% endif %}" class="cosinnus-form form-horizontal" id="todo_edit_form">{% csrf_token %}
+    {{ form.forms.obj.non_field_errors }}
+    {{ form.forms.media_tag.non_field_errors }}
+    <input id="id_todolist" name="todolist" type="hidden" value="{{ active_todolist.pk }}"/>
+                                
+    
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+    
+        {% trans "Title" as title_label %}
+        {% trans "Enter a title for the todo." as title_legend %}
+        {% captureas title_html %}
+                {% if request.GET.title %}
+                    {% render_field form.forms.obj.title class+="form-control" placeholder=title_label value=request.GET.title %}
+                {% else %}
+                    {% render_field form.forms.obj.title class+="form-control" placeholder=title_label %}
+                {% endif %}
+        {% endcaptureas %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.title legend=title_legend label=title_label field_html=title_html first=True %}
+        
+        {# SimpleMDE Description Field (gets initialized in extrahead) #}                                   
+        {% trans "Description" as description_placeholder %}
+        {% trans "Enter a description for the todo" as description_label %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.note legend=description_legend label=description_label placeholder=description_placeholder large_field=True %}
+              
+          
+        {% trans "Assigned To" as assigned_to_label %}
+        {% captureas assigned_to_html %}
+            {{ form.forms.obj.assigned_to.errors }}
+            <a class="pull-left select2-avatar select2-avatar-wide">
+                <select class="select2-avatar-item" name="assigned_to" id="id_assigned_to">
+                    <option value="-1" default selected data-avatar-url="{% static 'images/fragezeichen.png' %}" title="ss"> {% trans "Not assigned" %}</option>
+                    {% for user in group_users %}
+                        <option {% if form.forms.obj.assigned_to.value == user.pk %}selected {% endif %} value="{{ user.pk }}" data-avatar-url="{% if user.cosinnus_profile.avatar %}{% thumbnail user.cosinnus_profile.avatar 40x40 crop=1 upscale=1 %}{% else %}{% static 'images/jane-doe.png' %}{% endif %}">
+                            {{ user|full_name|safe_text }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </a>
+        {% endcaptureas %}
+        {% include 'cosinnus/fields/default_field.html' with field_html=assigned_to_html label=assigned_to_label %} 
+        
+        
+        {% trans "Priority" as priority_label %}
+        {% captureas priority_html %}
+            {{ form.forms.obj.priority.errors }}
+	        <select id="{{ form.forms.obj.priority.id_for_label }}" name="{{ form.forms.obj.priority.html_name }}" 
+	            value="{{ form.forms.obj.priority.value }}" style='font-family:Verdana, FontAwesome;'>
+                
+                {% comment %}  
+	                from: http://fontawesome.io/cheatsheet/#social-buttons
+	                fa-exclamation-circle [&#xf06a;]
+	                fa-exclamation [&#xf12a;]
+	                fa-minus [&#xf068;]
+                {% endcomment %}
+	            {% for value, label in form.forms.obj.priority.field.choices %}        
+	                <option value="{{ value }}" {% if  form.forms.obj.priority.value == value %}selected="selected"{% endif %}>
+	                    {% if value == 1 %}
+	                        &#xf068;
+	                    {% elif value == 2 %}
+	                        &#xf12a;
+	                    {% elif value == 3 %}
+	                        &#xf06a;
+	                    {% endif %}    
+	                    &nbsp; {{ label }}
+	                </option>
+	            {% endfor %}
+	        </select>
+        {% endcaptureas %}
+        {% include 'cosinnus/fields/default_field.html' with field_html=priority_html label=priority_label %} 
+        
+        
+        {# Regular field with custom HTML #}
+		{% trans "Due date" as due_label %}
+		{% captureas due_html %}
+            {{ form.forms.obj.due_date.errors }}
+            {% with formatted_date=form.forms.obj.due_date.value|date:"Y-m-d" %}
+                <a id="todoDate"class="moment-data-date" style="display: inline-block; padding: 10px; cursor: pointer;" data-toggle="modal" data-target="#datePickerModal"
+		                    onchange="$('#id_due_date').val($('#todo_due_date_select .moment-data-date').attr('data-date'));" data-date-style="short" 
+		                    data-date="{% if form.forms.obj.due_date.value %}{% if formatted_date %}{{ formatted_date }}{% else %}{{ form.forms.obj.due_date.value }}{% endif %}{% endif %}" >
+                    {% if not form.forms.obj.due_date.value %}{% trans "No date chosen" %}{% endif %}
+                </a>
+            {% endwith %}
+		    <input id="id_due_date" name="due_date" type="hidden" value="{% if form.forms.obj.due_date.value %}{{ form.forms.obj.due_date.value|date:"Y-m-d" }}{% endif %}"/>
+            
+            <button class="btn btn-emphasized btn-autosize" id="todo_due_date_select" data-dateelement="#todoDate" data-toggle="modal" data-target="#datePickerModal">
+		        <ul class="media-list">
+		            <li class="media">
+		                <span class="pull-left">
+		                    <i class="fa fa-clock-o"></i>
+		                </span>
+		                <div class="media-body">
+		                    {% trans "Choose due date" %}...
+		                </div>
+		            </li>
+		        </ul>
+		    </button>
+		{% endcaptureas %}
+		{% include 'cosinnus/fields/default_field.html' with field=fffffffffffffffffffffff field_html=due_html label=due_label %}
+		        
+	                            
+        {% include 'cosinnus/media_tags.html' with show_persons=True %}
+	                            
+    </div><!-- content-box -->
+    
+    
+    <button type="submit" class="btn btn-emphasized" id="createDoodleButton">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left">
+                    <i class="fa fa-pencil"></i>
+                </span>
+                <div class="media-body">
+                    {% if form_view == "add" %}
+                      {% trans "Create" %}
+                    {% elif form_view == "edit" %}
+                      {% trans "Save" %}
+                    {% endif %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    
+</form>
+        
+        
+        
+<!-- Pick Date Modal -->
+<div class="modal fade" id="datePickerModal" tabindex="1" role="dialog" aria-labelledby="datePickerLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="fa fa-times"></i>
+                </button>
+                <h4 class="modal-title" id="datePickerLabel">
+                    <i class="fa fa-calendar"></i>
+                    {% trans "Choose day" %}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <p>{% trans "Until when should the task be completed?" %}</p>
+                <div class="small-calendar" data-dateelement=""></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="datePickerModal_submit" class="btn btn-emphasized"  data-dismiss="modal">
+                    <ul class="media-list">
+                        <li class="media">
+                            <span class="pull-left">
+                                <i class="fa fa-check"></i>
+                            </span>
+                            <div class="media-body">
+                                {% trans "OK" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+            </div>
+        </div>
+    </div>
+</div><!-- modal -->
+        
+    
+    
+{% endblock %}
+
+
+
+{% block extrafooter %}
+{{ block.super }}
+
+<script type="text/javascript">
+    
+    var select2Format = function(state) {
+        var $originalOption = $(state.element);
+    
+        if (!state.id) {
+            return state.text;
+        } else {
+            var avatarUrl = $originalOption.data('avatar-url');
+            return "<img class='avatar-img' src='"+window.location.origin+avatarUrl+"'/>" + state.text;
+        }
+    };
+    
+    var select2Options = {
+        formatResult: select2Format,
+        formatSelection: select2Format,
+        escapeMarkup: function(m) { return m; }
+    };
+    
+    $(".select2-avatar-item").select2(select2Options);
+    
+</script>
+
+
+{% endblock extrafooter %}
+
+

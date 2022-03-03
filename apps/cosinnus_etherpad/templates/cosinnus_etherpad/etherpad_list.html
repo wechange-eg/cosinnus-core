@@ -1,0 +1,214 @@
+{% extends "cosinnus_etherpad/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script src="{% static 'js/vendor/jstree.min.js' %}"></script>
+    <link href="{% static 'css/vendor/jstree/themes/default/style.min.css' %}" rel="stylesheet">
+{% endblock extrahead %}
+
+{% block page_title %}
+{% trans "Pads" %} {{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        {% if current_folder and current_folder.path != '/' %}
+            <li class="active">{{ current_folder.title }}</li>
+        {% endif %}
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus/leftnav_hierarchic_listview.html" %}
+{% endblock leftnav %}
+
+{% block content %}
+
+    {% trans "Delete" as btn_label %}
+    {% captureas btn_action %}$.cosinnus.Feedback.cosinnus_delete_element($.cosinnus.getListOfCheckedItems());{% endcaptureas %}
+    {% include 'cosinnus/common/checkbox/checkbox_action_button.html' with label=btn_label icon="fa-eraser" action=btn_action %}
+
+    {% trans "Move" as btn_label %}
+    {% captureas btn_action %}$.cosinnus.Feedback.cosinnus_move_element($.cosinnus.getListOfCheckedItems(), {{ current_folder.id }});{% endcaptureas %}
+    {% include 'cosinnus/common/checkbox/checkbox_action_button.html' with label=btn_label icon="fa-arrows" action=btn_action %}
+    
+    {% include 'cosinnus/common/checkbox/checkbox_mark_all_buttons.html' %}
+    <div class="clearfix"></div>
+
+
+	<!-- a box with semi transparent background -->
+	<div class="content-box">
+	
+        {% include 'cosinnus/common/filter_controls.html' %}        
+        
+        {% if user|can_create_objects_in:group %}
+		    {% with obj_form=form.forms.obj %}
+		    <form action="" method="post" class="form-horizontal" autocomplete="off">{% csrf_token %}
+			    {{ obj_form.non_field_errors }}
+				<div type="button" class="btn btn-default w100 large-space">
+				    <ul class="media-list">
+				        <li class="media">
+				            <span class="pull-left">
+				                <i class="fa fa-plus"></i>
+				            </span>
+				            <div class="media-body media-body-form-control">
+				                {{ obj_form.title.errors }}
+				                {% if SETTINGS.COSINNUS_ETHERPAD_ENABLE_ETHERCALC %}
+				                	{% captureas placeholder %}{% trans "Enter the title for a new Document or Table." %}{% endcaptureas %}
+				                {% else %}
+				                	{% captureas placeholder %}{% trans "Enter the title for a new Document." %}{% endcaptureas %}
+				                {% endif %}
+				                
+				                {% render_field obj_form.title class+="form-control next-button-is-for-sending" placeholder=placeholder id="etherpadCreateInput" %}
+				            </div>
+				        </li>
+				    </ul>
+				</div>
+				<div class="sendbutton" style="display: none;">
+					<input id="input-etherpad-type" type="hidden" name="etherpad_type" value="0" />
+			            <button type="submit" class="btn btn-emphasized large-space" title="{% trans "Create Etherpad" %}">
+			                <ul class="media-list">
+			                    <li class="media">
+			                        <span class="pull-left">
+			                            <i class="fa fa-file-text"></i>
+			                        </span>
+			                        <div class="media-body">
+			                            {% trans "Create Etherpad" %}
+			                        </div>
+			                    </li>
+			                </ul>
+			            </button>
+			            {% if SETTINGS.COSINNUS_ETHERPAD_ENABLE_ETHERCALC %}
+			            <button type="submit" class="btn btn-emphasized large-space" title="{% trans "Create Ethercalc" %}" onclick="$('#input-etherpad-type').val('1');">
+			                <ul class="media-list">
+			                    <li class="media">
+			                        <span class="pull-left">
+			                            <i class="fa fa-table"></i>
+			                        </span>
+			                        <div class="media-body">
+			                            {% trans "Create Ethercalc" %}
+			                        </div>
+			                    </li>
+			                </ul>
+			            </button>
+			            {% endif %}
+	            </div>
+		    </form>
+		    {% endwith %}
+	    {% endif %}
+	    
+	    {% for object in objects %}
+		    <div id="cosinnus_list_element_{{ object.id }}" class="fadedown {% if not forloop.last %}regular-space{% endif %}">
+		        <div class="item_checkbox_element btn btn-emphasized w100" href="{{ object.get_absolute_url }}">
+		            <ul class="media-list">
+		                <li class="media">
+		                    {% if user|has_write_access:object %}
+			                    {% captureas input_name %}{{ object.id }}{% endcaptureas %}
+			                    {% include 'cosinnus/common/checkbox/checkbox_overlay_box.html' with input_name=input_name %}
+			                {% endif %}
+		                
+		                    <a class="pull-left">
+		                        <i class="fa {% if object.type == 1 %}fa-table{% else %}fa-file-text{% endif %}"></i>
+							</a>
+		                    <a class="pull-right fadedown-clickarea">
+		                        <i class="fa fa-chevron-down"></i>
+		                    </a>
+                            {% if user|has_write_access:object %}
+	                            <a class="pull-right" href="#" title="{% trans "Move to another Folder" %}" onclick="$.cosinnus.Feedback.cosinnus_move_element(['{{ object.id }}'], {{ current_folder.id }});">
+	                                <i class="fa fa-arrows"></i>
+	                            </a>
+                            {% endif %}
+		                    <div class="media-body">
+		                        {% with creator=object.creator %}
+    	                            <span class="annotation mobile-hidden">
+    	                                <!--{% trans "by" %}-->
+                                        {% trans "Created By" %}
+    	                                <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>
+    	                                {% if object.last_accessed and object.last_accessed|date:'Y'|intify > 2000 %}
+	    	                                &nbsp;&nbsp;
+	    	                                <span title="{% trans "Last accessed" %}">
+		    	                                <i class="fa fa-pencil"></i>
+		    	                                <span class="moment-data-date" data-date="{{ object.last_accessed|date:'c' }}"></span>
+											</span>
+    	                                {% endif %}
+									</span>
+		                        {% endwith %}
+		                        <a href="{{ object.get_absolute_url }}">
+		                            {{ object.title }}
+		                        </a>
+		                    </div>
+		                </li>
+		            </ul>
+		        </div>
+		        
+		        {% include 'cosinnus/media_tags_readonly.html' %}
+			    
+			    {% if user|has_read_access:object or object.media_tag.visibility == 2 %} 
+			        <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:etherpad:pad-write' group=group slug=object.slug %}">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <span class="pull-left">
+			                        <i class="fa fa-pencil"></i>
+			                    </span>
+			                    <div class="media-body">
+			                        {% trans "Edit" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </button> 
+			    {% endif %}
+			    {% if user|has_write_access:object %}
+				    <button type="button" class="btn btn-emphasized pull" href="{% group_url "cosinnus:etherpad:pad-edit" group=group slug=object.slug %}">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <span class="pull-left">
+			                        <i class="fa fa-cog"></i>
+			                    </span>
+			                    <div class="media-body">
+			                        {% trans "Settings" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </button> 
+			    {% endif %}
+		        {% if user|has_write_access:object %}
+			        {% captureas modal_id %}deleteModal_{{object.slug}}{% endcaptureas %}
+			        <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_id}}">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <span class="pull-left">
+			                        <i class="fa fa-eraser"></i>
+			                    </span>
+			                    <div class="media-body">
+			                        {% trans "Delete" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </button>
+			    {% endif %}
+			    
+			    {% include 'cosinnus/feedback/report_button_btn.html' with object=object %}
+			    
+			</div><!-- fadedown -->
+			{% if user|has_write_access:object %}    
+			    {% captureas label %}{% blocktrans with title=object.title %}Do you really want to delete etherpad „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+	            {% captureas title %}{% trans "Delete Etherpad" %}{% endcaptureas %}
+	            {% captureas action %}{% group_url 'cosinnus:etherpad:pad-delete' group=group slug=object.slug %}{% endcaptureas %}
+	            {% include "cosinnus/modal_box.html" with id=modal_id label=label title=title form_action=action %}
+            {% endif %}
+        {% empty %}
+            <!-- {% trans "No etherpads have been created yet." %} -->
+            {% include 'cosinnus/common/empty_button.html' with message="No etherpads have been created yet." %}
+	    {% endfor %}
+	
+	</div><!-- content-box -->
+	
+	<script type="text/javascript">
+        var cosinnus_move_element_object_url = "{% group_url 'cosinnus:etherpad:move-element' group=group %}";
+        var cosinnus_delete_element_object_url = "{% group_url 'cosinnus:etherpad:delete-element' group=group %}";
+    </script>
+	{% include 'cosinnus/hierarchy/move_element_modal.html' %}
+    {% include 'cosinnus/common/delete_element_modal.html' %}
+	
+	
+{% endblock content %}

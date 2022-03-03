@@ -1,0 +1,140 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:39+0200\n"
+"PO-Revision-Date: 2020-04-01 11:40+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+
+msgid "Stream"
+msgstr "Հոսք"
+
+msgctxt "the_app"
+msgid "stream"
+msgstr "հոսք"
+
+msgid "My Streams"
+msgstr "Իմ Հոսքերը"
+
+msgid "Streams"
+msgstr "Հոսքեր"
+
+msgid "Models"
+msgstr "Մոդելներ"
+
+msgid "Portal IDs"
+msgstr "Պորտալի ID- ներ"
+
+msgid "Last seen"
+msgstr "Վերջին անգամ երեվացել է"
+
+msgid "Special Stream"
+msgstr "Հատուկ Հոսք"
+
+msgid "Special Group IDs"
+msgstr "Հատուկ Խմբի ID- ներ"
+
+msgid "My Stream"
+msgstr "Իմ Հոսքը"
+
+msgid "Public Stream"
+msgstr "Հասարակական Հոսք"
+
+msgid "My Stream in all Portals"
+msgstr "Իմ հոսքը բոլոր պորտալներում"
+
+msgid "Public Stream in all Portals"
+msgstr "Հանրային հոսքը բոլոր պորտալներում"
+
+msgid "Edit this Stream"
+msgstr "Խմբագրել այս հոսքը"
+
+msgid "Delete this Stream"
+msgstr "Ջնջել այս հոսքը"
+
+msgid "Do you really want to delete this stream?"
+msgstr "Իսկապե՞ս ցանկանում եք ջնջել այս հոսքը?"
+
+msgid "Delete Stream"
+msgstr "Ջնջել հոսքը"
+
+msgid "Create Stream"
+msgstr "Ստեղծել հոսք"
+
+msgid "Hide public items outside of your groups"
+msgstr "Թաքցրեք հանրային նյութերը ձեր խմբերից դուրս"
+
+msgid "Show public items outside of your groups"
+msgstr "Ցույց տալ հանրային նյութերը ձեր խմբերից դուրս"
+
+msgid "There are no news posts yet"
+msgstr "Դեռևս լրատվական հաղորդագրություններ չկան"
+
+#, python-format
+msgid "Edit stream \"%(stream_name)s\""
+msgstr "Խմբագրել \"%(stream_name)s\" հոսքը"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "Ձեր մուտքագրած դաշտերից մեկում առկա է սխալ: Խնդրում ենք ուղղել այն նախքան պահպանելը!"
+
+msgid "Title"
+msgstr "Վերնագիր"
+
+msgid "Enter a title for the stream."
+msgstr "Մուտքագրել վերնագիր հոսքի համար."
+
+msgid "Apply filters for the stream"
+msgstr "Կիրառել ֆիլտրերը հոսքի համար"
+
+msgid "Filter by Team?"
+msgstr "Ֆիլտրել ըստ թիմի՞?"
+
+msgid "Select Team"
+msgstr "Ընտրել թիմ"
+
+msgid "Public"
+msgstr "Հանրային"
+
+msgid "Additional filters"
+msgstr "Լրացուցիչ ֆիլտրեր"
+
+msgid "Filter by authors, tags or other tagged properties?"
+msgstr "Ֆիլտրել ըստ հեղինակների, նշումների կամ այլ նշված հատկությունների?"
+
+msgid "Filter by item types?"
+msgstr "Ֆիլտրել ըստ նյութի տեսակների՞?"
+
+msgid "Create"
+msgstr "Ստեղծել"
+
+msgid "Edit"
+msgstr "Խմբագրել"
+
+msgid "You do not have permission to access this stream."
+msgstr "Դուք չունեք թույլտվություն այս հոսք մուտք գործելու."
+
+msgid "Your stream was added successfully."
+msgstr "Ձեր հոսքը հաջողությամբ ավելացվել է."
+
+msgid "Please log in to access this page."
+msgstr "Խնդրում ենք մուտք գործել այս էջը տեսնելու համար."
+
+msgid "Your stream was updated successfully."
+msgstr "Ձեր հոսքը հաջողությամբ թարմացվել է."
+
+msgid "Your stream was deleted successfully."
+msgstr "Ձեր հոսքը հաջողությամբ ջնջվել է."
+
+msgid "You cannot delete the default stream!"
+msgstr "Դուք չեք կարող ջնջել դեֆոլթ հոսքը!"

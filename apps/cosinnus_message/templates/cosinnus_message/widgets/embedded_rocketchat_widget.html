@@ -1,0 +1,19 @@
+{% load i18n cosinnus_tags %}
+
+{% if rocketchat_room_embed_url %}
+	<iframe src="{{ rocketchat_room_embed_url }}" 
+		allow="display-capture *; geolocation *; microphone *; camera *; fullscreen *;" 
+		width="100%" height="500px" 
+		style="display: block;">
+	</iframe>
+{% else %}
+    <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline">
+        <ul class="media-list">
+            <li class="media">
+                <div class="media-body">
+                    <div style="white-space: normal;">{% trans "Only group members can see the content you requested. Apply to become a member now!" %}</div>
+                </div>
+            </li>
+        </ul>
+    </div><!-- btn -->
+{% endif %}

@@ -1,0 +1,17 @@
+.notification-options {
+}
+.notification-options.notification-options-seperated {
+    border-top: solid 1px gray;
+}
+.notification-options.highlighted,  .notification-choice-highlighted {
+    background-color: #efa02d;
+}
+.notification-options label {
+    font-size: 12px;
+}
+.notification-options .notification-options-label {
+    font-size: 11px;
+}
+.notification-options .condensed-radio-input {
+    margin-bottom: 10px;
+}

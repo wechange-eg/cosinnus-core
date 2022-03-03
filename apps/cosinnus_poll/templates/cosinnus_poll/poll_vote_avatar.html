@@ -1,0 +1,26 @@
+{% load static thumbnail cosinnus_tags %}
+
+{% with user=vote.voter extra_title=vote.get_label %}
+	
+	<div class="voter-avatar-box poll-option" title="{{ user|full_name }} - {{ vote.get_label }}">
+		<div class="voter-avatar {% if maybe_going %}faded{% endif %}">
+			<a href="{{ user.cosinnus_profile.get_absolute_url }}">
+				{% include 'cosinnus/user/user_avatar_image.html' with user=user extra_title=extra_title extra_classes="image" %}
+			</a>
+		</div>
+		{% if vote.choice == 2 %}
+			<div class="voter-avatar-vote poll-option-display-yes poll-option-display-color">
+				<i class="fa fa-check"></i>
+			</div>
+		{% elif vote.choice == 1 %}
+			<div class="voter-avatar-vote poll-option-display-maybe poll-option-display-color">
+				(<i class="fa fa-check"></i>)
+			</div>
+		{% else %}
+			<div class="voter-avatar-vote poll-option-display-no poll-option-display-color">
+				<i class="fa fa-close"></i>
+			</div>
+		{% endif %}
+	</div>
+{% endwith %}
+

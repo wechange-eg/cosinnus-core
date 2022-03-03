@@ -1,0 +1,138 @@
+{% load i18n static cosinnus_tags widget_tweaks thumbnail %}
+
+
+{% with is_video=file.is_video %}
+	<div id="cosinnus_list_element_{{ file.id }}" class="fadedown {% if not forloop.last and not file.note %}regular-space{% endif %}">
+	    <div class="item_checkbox_element btn btn-{% if do_highlight or created_with_ajax_forms %}extra-{% endif %}emphasized w100" 
+	            {% if file.is_image %}
+	                href="{{ file.static_image_url }}" data-lightbox-download="{{ file.static_image_original_url }}" 
+	                data-lightbox="image-list" data-title="{{ file.title }}"
+	            {% elif is_video %}
+	               data-toggle="modal" data-target="#video-popup-{{ file.id }}"
+	            {% else %}
+	                href="{{ file.get_absolute_url }}" {% if file.is_url %}target="_blank"{% endif %}
+	            {% endif %}>
+	            
+	        <ul class="media-list">
+	            <li class="media">
+	                
+	                {% comment %} File-objects only: we do NOT check for write access here, as we want to enable downloads for all users {% endcomment %}
+	                {% captureas input_name %}{{ file.id }}{% endcaptureas %}
+	                {% include 'cosinnus/common/checkbox/checkbox_overlay_box.html' with input_name=input_name %}
+	                
+	                <span class="pull-left">
+	                    {% if file.is_image %}
+	                        <a class="pull-left" ><img src='{{ file.static_image_url_thumbnail }}' title='{{ file.title }}'></img></a>
+	                    {% elif is_video %}
+	                       <i class="fa fa-video"></i>
+	                    {% else %}
+	                    	<i class="fa {{ file.get_icon }}"></i>
+	                    {% endif %}
+	                </span>
+	                <a class="pull-right fadedown-clickarea">
+	                    <i class="fa fa-chevron-down"></i>
+	                </a>
+	                
+	                {% if not file.is_url %}
+		                <a class="pull-right" href="{{ file.get_download_url }}">
+		                    <i class="fa fa-download"></i>
+		                </a>
+	                {% endif %}
+	                
+	                {% if user|has_write_access:file %}
+	                    <a class="pull-right" href="#" title="{% trans "Move to another Folder" %}" onclick="$.cosinnus.Feedback.cosinnus_move_element(['{{ file.id }}'], {{ current_folder.id }});">
+	                        <i class="fa fa-arrows"></i>
+	                    </a>
+	                {% endif %}
+	                
+	                {% if file.is_image %}
+	                    <a class="pull-right" href="{{ file.get_absolute_url }}" title="{% trans "Link to this Image" %}" >
+	                        <i class="fa fa-link"></i>
+	                    </a>
+	                {% endif %}
+	                
+	                <div class="media-body">
+	                    {% with creator=file.creator %}
+	                        <span class="annotation mobile-hidden">{% trans "by" %} 
+	                            <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>
+	                            {% if file.created %}
+	                                &nbsp;&nbsp;
+	                                <span title="{% trans "Created" %}">
+	                                    <i class="fa fa-pencil"></i>
+	                                    <span class="moment-data-date" data-date="{{ file.created|date:'c' }}"></span>
+	                                </span>
+	                            {% endif %}   
+	                        </span>
+	                    {% endwith %}
+	                    <a {% if not file.is_image %}href="{{ file.get_absolute_url }}" {% if file.is_url %}target="_blank"{% endif %}{% endif %}> {# leave empty for images, will open the lightbox defined above #}
+	                        {{ file.title }}
+	                        {% if file.is_url and not file.title == file.url %}
+	                            <i>({{ file.url }})</i>
+	                        {% endif %}
+	                    </a>
+	                </div>
+	            </li>
+	        </ul>
+	    </div>
+	    
+	    <div style="display: none;"> <!-- fadedown wrapper -->
+		    {% include 'cosinnus/media_tags_readonly.html' with object=file %}
+		    
+		    {% if user|has_write_access:file %}   
+		        {% captureas modal_id %}deleteModal_{{file.slug}}{% endcaptureas %}
+		        <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_id}}">
+		            <ul class="media-list">
+		                <li class="media">
+		                    <span class="pull-left">
+		                        <i class="fa fa-eraser"></i>
+		                    </span>
+		                    <div class="media-body">
+		                        {% trans "Delete" %}
+		                    </div>
+		                </li>
+		            </ul>
+		        </button>
+		        <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:file:edit' group=file.group slug=file.slug %}">
+		            <ul class="media-list">
+		                <li class="media">
+		                    <span class="pull-left">
+		                        <i class="fa fa-pencil"></i>
+		                    </span>
+		                    <div class="media-body">
+		                        {% trans "Edit" %}
+		                    </div>
+		                </li>
+		            </ul>
+		        </button> 
+		    {% endif %}
+	    
+			{% include 'cosinnus/common/likefollowstar/star_button_btn.html' with user=request.user object=file no_margin=True %}
+			{% include 'cosinnus/feedback/report_button_btn.html' with object=file %}
+		    
+			{% if user|has_write_access:file %}
+			    {% captureas label %}{% blocktrans with title=file.title %}Do you really want to delete file „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+			    {% captureas title %}{% trans "Delete file" %}{% endcaptureas %}
+			    {% captureas action %}{% group_url 'cosinnus:file:delete' group=file.group slug=file.slug%}{% add_current_params %}{% endcaptureas %}
+			    {% include "cosinnus/modal_box.html" with id=modal_id label=label title=title form_action=action %}
+			{% endif %}
+	    </div> <!-- end fadedown wrapper -->
+	               
+	    
+	</div><!-- fadedown -->
+    {% if file.note %}
+    <div class="white-content w100 regular-space">
+        {{ file.note }} 
+    </div>
+    {% endif %}
+	
+	{% if is_video %}
+		{% captureas label %}
+	        {{ file.render_video_embed }}     
+	    {% endcaptureas %}
+	    {% captureas popup_id %}video-popup-{{ file.id }}{% endcaptureas %}
+	    {% captureas title %}{{ file.title }}{% endcaptureas %}
+	    {% captureas submit_button_label_v %}{% trans "Close" %}{% endcaptureas %}
+	    {% include "cosinnus/modal_box.html" with id=popup_id label=label title=title title_icon="fa-video" extra_modal_classes="modal-lg" submit_button_label=submit_button_label_v %}
+    {% endif %}
+	
+{% endwith %}

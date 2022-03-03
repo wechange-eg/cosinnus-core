@@ -1,0 +1,50 @@
+{% load i18n cosinnus_tags widget_tweaks %}
+
+<form id="{{ form_id }}" action="{{ action_url }}" method="post" 
+		class="form-horizontal" data-target="ajax-form" data-ajax-oncomplete="$('#write-news-modal').modal('hide');init_simplemde();$.cosinnus.truncatedTextfield();">
+	{% csrf_token %}
+
+    <div class="modal-body">
+		{{ form.forms.obj.non_field_errors }}
+		        
+		{# Regular Field #}
+		{% trans "Title (optional)" as title_placeholder %}
+		{% trans "Title" as title_label %}
+		{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.title label=title_label placeholder=title_placeholder first=True translation_fields=translatable_field_items translation_form=form.forms.obj %}
+		
+		{# Large Field #}
+		{% trans "News text" context "label for the form text input" as text_label %}
+		{% trans "Please enter a message..." as text_placeholder %}
+		{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.text label=text_label placeholder=text_placeholder large_field=True translation_fields=translatable_field_items translation_form=form.forms.obj %}
+		
+		{% include 'cosinnus/media_tags.html' with do_include_facebook_button=1 show_files=True %}
+    </div>
+    
+    <div class="modal-footer">
+        <button type="submit" class="submit-btn-x btn btn-emphasized {% if large_buttons %}btn-autosize{% endif %}">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left">
+                        <i class="fa fa-check"></i>
+                    </span>
+                    <div class="media-body">
+                        {% trans "Post" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+        <button type="button" class="btn btn-emphasized {% if large_buttons %}btn-autosize{% endif %}" data-dismiss="modal">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left">
+                        <i class="fa fa-times"></i>
+                    </span>
+                    <div class="media-body">
+                        {% trans "Cancel" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+        
+    </div>
+</form>

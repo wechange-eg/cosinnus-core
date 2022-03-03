@@ -1,0 +1,16 @@
+{% load i18n cosinnus_tags %}{% autoescape off %}{% blocktrans %}Your direct reply could not be processed!
+
+The reason was: {{ reason }}
+
+
+Your message text was: 
+--------------------------------
+{{ text }}
+--------------------------------
+
+
+If this keeps happening, consider logging in and sending the reply directly on the site.
+{% endblocktrans %}
+{% blocktrans %}Note: This message is issued by an automated system.
+Do not reply, this would not be taken into account.{% endblocktrans %}
+{% endautoescape %}

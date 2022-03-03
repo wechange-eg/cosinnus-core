@@ -1,0 +1,3 @@
+{% include 'search/indexes/cosinnus/base_taggable_text.txt' %}
+{% if object.note %}{{ object.note }}{% endif %}
+{{ object.todolist.title }}

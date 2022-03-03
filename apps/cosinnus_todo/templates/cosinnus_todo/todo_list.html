@@ -1,0 +1,243 @@
+{% extends "cosinnus_todo/base.html" %}
+{% load i18n humanize todo_tags cosinnus_tags djajax_tags thumbnail %}
+{% load static %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script src="{% static 'js/vendor/jstree.min.js' %}"></script>
+    <link href="{% static 'css/vendor/jstree/themes/default/style.min.css' %}" rel="stylesheet">
+{% endblock extrahead %}
+
+{% block page_title %}
+    {% if active_todolist %}{{ active_todolist.title }} - {% endif %}{% trans "TodoEntries" %} {{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    {% if active_todolist %}
+        <li><a href="{% group_url 'cosinnus:todo:list' group=group %}">{% trans "Todos" %}</a></li>
+        <li class="active">{{ active_todolist.title }}</li>
+    {% else %}
+        <li class="active">{% trans "Todos" %}</li>
+    {% endif %}
+{% endblock %}
+
+
+{% block leftnav %}
+    
+    {% for todolist in todolists %}
+        {% captureas href %}{{ todolist.get_absolute_url }}{% add_current_params %}{% endcaptureas %}
+	    {% captureas label %}{{ todolist.title }}{% endcaptureas %}
+	    {% captureas button_class %}{% if forloop.last %}regular-space{% else %}fine-space{% endif %}{% endcaptureas %}
+	    {% captureas folder_size %}{{ todolist.filtered_item_count }}{% endcaptureas %}
+	    {% captureas active %}{% if todolist == active_todolist %}True{% endif %}{% endcaptureas %}
+	    {% captureas button_template %}{% if user|can_create_objects_in:todolist.group %}cosinnus/leftnav_button_editable_folder.html{% else %}cosinnus/leftnav_button.html{% endif %}{% endcaptureas %}
+	    
+	    {% include button_template with active=active extra_classes=button_class icon_content=folder_size label=label href=href folder=todolist %}
+    {% empty %}
+       <!-- {% trans "There are no todolists yet." %} -->
+       {% include 'cosinnus/common/empty_button.html' with message="There are no todolists yet." %}
+    {% endfor %}
+    
+    {% if user|can_create_objects_in:group %}
+        <form action="{% group_url 'cosinnus:todo:todolist-add' group=group %}" method="POST" class="form-horizontal">
+            {% csrf_token %}
+            <div type="button" class="btn btn-default w100">
+                <ul class="media-list">
+                    <li class="media">
+                        <span class="pull-left">
+                            <i class="fa fa-plus"></i>
+                        </span>
+                        <div class="media-body media-body-form-control">
+                            <input name="title" class="form-control next-button-is-for-sending"
+                            autocomplete="off" placeholder="{% trans 'New List Name' %}" value="" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        
+            <button type="submit" name="create_todolist" class="btn btn-emphasized large-space" style="display: none;">
+                <ul class="media-list">
+                    <li class="media">
+                        <span class="pull-left">
+                            <i class="fa fa-pencil"></i>
+                        </span>
+                        <div class="media-body">
+                            {% trans "Create" %}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+        </form>
+    {% endif %}
+    
+{% endblock leftnav %}
+
+{% block content %}
+        
+<div class="row">
+    <div class="col-xs-12">
+        <!-- a box with semi transparent background -->
+        <div class="content-box">
+        
+            {% include 'cosinnus/common/filter_controls.html' %}  
+            
+            
+            {% if active_todolist and user|can_create_objects_in:group %}
+                <form id="create_todo_form" action="{% group_url 'cosinnus:todo:entry-add' listslug=active_todolist.slug group=group %}" method="GET" class="form-horizontal clearfix">
+            
+                    <div type="submit" class="btn btn-default w100 large-space">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left">
+                                    <i class="fa fa-pencil"></i>
+                                </span>
+                                <div class="media-body media-body-form-control">
+                                    <input id="new_todo_input" name="title" class="form-control next-button-is-for-sending"
+                                        placeholder="{% trans 'Create a new Todo' %}" autocomplete="off"
+                                        value="" />
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    
+                    <button type="submit" id="create_todo_button" class="btn btn-emphasized large-space" style="display:none;">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left">
+                                    <i class="fa fa-pencil"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans "Create" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                </form>
+            {% endif %}
+            
+            {% for todo in todos.all %}
+                <div id="cosinnus_list_element_{{ todo.id }}" class="btn btn{% if todo == active_todo %}-extra{% endif %}-emphasized w100 regular-space">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#" {% if not user|has_write_access:todo %}disabled="disabled" title="{% trans "Only the owner and assignee of a todo can finish it!" %}"{% else %}title="{% trans "Mark as finished" %}"{% endif %}>
+                                <i class="fa fa-{% if todo.is_completed %}check-{% endif %}square-o"></i>
+                                {% captureas post_url %}/api/v1/{% cosinnus_group_url_path todo.group %}/{{todo.group.slug}}/todo/todos/{{todo.pk}}/toggle_complete/me/{% endcaptureas %}
+                                <input type="hidden" value="{% if todo.is_completed %}true{% else %}false{% endif %}" {% if user|has_write_access:todo %}{% djajax_connect todo.is_completed trigger_on="value_changed" post_to=post_url %}{% endif %} />
+                            </a>
+                            <a class="pull-left select2-avatar" title="{{ todo.assigned_to|full_name }}">
+                                <select {% if not user|can_create_objects_in:todo.group %}disabled="disabled"{% endif %} class="select2-avatar-item" {% if user|can_create_objects_in:todo.group %}{% djajax_connect todo.assigned_to %}{% endif %}>
+                                    <option value="-1" data-avatar-url="{% static 'images/fragezeichen.png' %}" title="ss"> {% trans "Not assigned" %}</option>
+                                    
+                                    {% for user in group_users %}
+                                        <option {% if todo.assigned_to and todo.assigned_to == user %}selected {% endif %} value="{{ user.pk }}" data-avatar-url="{% if user.cosinnus_profile.avatar %}{% thumbnail user.cosinnus_profile.avatar 40x40 crop=1 upscale=1 %}{% else %}{% static 'images/jane-doe.png' %}{% endif %}">
+                                            {{ user|full_name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </a>
+                            
+                            {% if user|has_write_access:todo %}
+                                <a class="pull-right" href="{% group_url 'cosinnus:todo:entry-edit' group=todo.group slug=todo.slug %}" title="{% trans "Edit" %}">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                               {% if todolists|length > 1 %}
+                                    <a class="pull-right" href="#" title="{% trans "Move to another Folder" %}" onclick="$.cosinnus.Feedback.cosinnus_move_element(['{{ todo.id }}'], {{ current_folder.id }});">
+                                        <i class="fa fa-arrows"></i>
+                                    </a>
+                               {% endif %}
+                            {% endif %}
+                            
+                            <div class="media-body" href="{{ todo.get_absolute_url }}">
+                                {% with creator=todo.creator %}
+                                    <span class="annotation mobile-hidden">
+                                        {% trans "by" %} 
+                                        <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>
+                                        &nbsp;&nbsp;
+		                                {% if todo.due_date %}
+	                                        {% trans "Due date" %}:
+	                                        <span class=" moment-data-date" data-date-style="short" data-date="{{ todo.due_date|date:"Y-m-d" }}" ></span>
+			                            {% endif %}
+                                    </span>
+                                {% endwith %}
+                                
+                                {% if todo.priority == 3 %}
+                                	<span class=""><i class="fa fa-exclamation-circle" title="{% trans "Important" %}"></i></span> 
+                                {% elif todo.priority == 1 %}
+                                	<span class=""><i class="fa fa-minus" title="{% trans "Later" %}"></i></span>
+                                {% endif %}
+                                <a href="{{ todo.get_absolute_url }}">
+                                    {% if todo.is_completed %}<s>{% endif %}
+                                    {% include 'cosinnus/common/likefollowstar/following_title_indicator.html' with object=todo %}
+                                    {{ todo.title }}
+                                    {% if todo.is_completed %}</s>{% endif %}
+                                </a>
+                            </div>
+                            {% if user|has_write_access:todo %}
+	                            <div id="todo_edit_body_{{ todo.pk }}" class="media-body no-vertical-padding no-horizontal-padding" style="display:none">
+	                                <div class="media-body media-body-form-control">
+	                                    <input id="todo_input_{{ todo.pk }}" class="form-control" style="background-color:white; color:rgb(51,51,51);"
+	                                        placeholder="{% trans 'Enter the title for this todo' %}"
+	                                        {% with todo_id=todo.pk %}
+	                                            {% if user|has_write_access:todo %}{% djajax_connect todo.title trigger_on="lose_focus,enter_key" empty="false" on_success="hideEditTodo" on_success_args=todo_id on_error="hideEditTodo" on_error_args=todo_id %}{% endif %}
+	                                        {% endwith %}
+	                                        value="{{ todo.title }}" />
+	                                </div>
+	                            </div>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            {% empty %}
+                {% if todolists.count > 0 %}
+                    <!-- {% trans "There are no todos in this list." %} -->
+                    {% include 'cosinnus/common/empty_button.html' with message="There are no todos in this list." %}
+                {% else %}
+                    <!-- {% trans "Please select or create a todo list." %} -->
+                    {% include 'cosinnus/common/empty_button.html' with message="Please select or create a todo list." %}
+                {% endif %}
+            {% endfor %}
+            
+        </div><!-- content-box -->
+        
+        <script type="text/javascript">
+		    var cosinnus_move_element_object_url = "{% group_url 'cosinnus:todo:move-element' group=group %}";
+		</script>
+        {% include 'cosinnus/hierarchy/move_element_modal.html' %}
+        
+    </div><!-- col -->
+</div><!-- row -->
+                        
+
+{% endblock content %}
+
+
+{% block extrafooter %}
+{{ block.super }}
+
+<script type="text/javascript">
+    
+    var select2Format = function(state) {
+        var $originalOption = $(state.element);
+    
+        if (!state.id) {
+            return state.text;
+        } else {
+            var avatarUrl = $originalOption.data('avatar-url');
+            return "<img class='avatar-img' src='"+window.location.origin+avatarUrl+"'/>" + state.text;
+        }
+    };
+    
+    var select2Options = {
+        formatResult: select2Format,
+        formatSelection: select2Format,
+        escapeMarkup: function(m) { return m; }
+    };
+    
+    $(".select2-avatar-item").select2(select2Options);
+    
+</script>
+
+
+{% endblock extrafooter %}

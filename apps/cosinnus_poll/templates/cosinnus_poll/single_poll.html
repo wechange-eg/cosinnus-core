@@ -1,0 +1,35 @@
+{% load i18n cosinnus_tags %}
+
+{% with poll=object %}
+    <div class="app-poll">
+        <div class="btn btn-emphasized w100" href="{{ poll.get_absolute_url }}">
+            <ul class="media-list {% if no_space %}fine-space{% else %}large-space{% endif %}">
+                <li class="media">
+                    <span class="pull-left square-date-icon">
+                        {% if poll.state == 1 %} {# voting open #}
+                            <i class="fa fa-question-circle"></i>
+                          {% elif poll.state == 2 %} {# voting closed #}
+                              <i class="fa fa-bar-chart"></i>
+                          {% else %} {# archived #}
+                              <i class="fa fa-bar-chart"></i>
+                          {% endif %}
+                    </span>
+                    <div class="media-body {% if not hide_group_name %}no-vertical-padding{% endif %} ">
+                        <span class="annotation mobile-hidden">
+                            {% with creator=poll.creator %}
+                                {# {% trans "by" %} #} <strong><a href="{{ creator|profile_url }}">{{ creator|full_name }}</a></strong>
+                            {% endwith %}
+                            <span class="moment-data-date" data-date="{{ poll.created|date:'c' }}"></span>
+                        </span>
+                        <strong>{{ poll.title }}</strong>
+                        {% if not hide_group_name %}
+		                	<div class="group-annotation">
+	                            {% include 'cosinnus/group/group_label.html' with group=poll.group %}
+	                        </div>
+	                    {% endif %}
+                    </div>
+                </li>
+            </ul>
+        </div><!-- btn -->
+    </div>
+{% endwith %}

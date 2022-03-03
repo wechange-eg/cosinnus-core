@@ -1,0 +1,28 @@
+{% load i18n cosinnus_tags widget_tweaks %}
+    
+<div class="row">
+    <div class="col-md-3">
+
+        <div type="button" class="btn btn-emphasized btn-headline regular-space">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+                    <div class="media-body">
+                        {% trans "event" context "the_app" %}
+                    </div>
+                </li>
+            </ul>
+        </div><!-- btn -->
+    </div><!-- left column -->
+
+    <div class="col-md-9">
+        <div class="content-box">
+            {% for event in object_list %}
+                {% include 'cosinnus_event/single_event.html' with object=event %}
+            {% empty %}
+                <!-- {% trans "There are no upcoming events" %} -->
+                {% include 'cosinnus/common/empty_button.html' with message="There are no upcoming events" %}
+            {% endfor %}
+         </div>
+    </div><!-- right column -->
+</div><!-- row -->

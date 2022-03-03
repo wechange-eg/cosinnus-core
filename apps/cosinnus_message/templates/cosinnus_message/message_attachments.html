@@ -1,0 +1,9 @@
+{% load i18n cosinnus_tags %}
+
+{% if message.attached_objects.exists %}
+    {% cosinnus_render_attached_objects message %}
+{% endif %}
+
+{% if message.attached_images %}
+    {% include 'cosinnus/common/attached_images_gallery.html' with object=message %}
+{% endif %}

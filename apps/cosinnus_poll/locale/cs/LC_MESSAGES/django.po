@@ -1,0 +1,756 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:06+0200\n"
+"PO-Revision-Date: 2020-09-23 21:02+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+"X-Generator: Poedit 2.4.1\n"
+
+msgid "Polls"
+msgstr "Hlasování"
+
+msgctxt "the_app"
+msgid "poll"
+msgstr "hlasování"
+
+msgid "A user created a new poll"
+msgstr "Uživatel vytvořil nové hlasování"
+
+#, python-format
+msgid "%(sender_name)s created the poll %(object_name)s"
+msgstr "%(sender_name)s vytvořil/a hlasování %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d polls"
+msgstr "%(sender_name)s vytvořil/a %(count)d hlasování"
+
+#, python-format
+msgid "%(sender_name)s created a new poll"
+msgstr "%(sender_name)s vytvořil/a nové hlasování"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "V %(team_name)s bylo vytvořeno nové hlasování: \"%(object_name)s\"."
+
+msgid "A poll you voted on was completed"
+msgstr "Hlasování, ve kterém jste hlasovali, bylo dokončeno"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
+msgstr "%(sender_name)s dokončil/a hlasování %(object_name)s, ve kterém jste hlasovali"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls you voted on"
+msgstr "%(sender_name)s dokončil/a %(count)d hlasování, ve kterých jste hlasovali"
+
+#, python-format
+msgid "%(sender_name)s completed the poll"
+msgstr "%(sender_name)s dokončil/a hlasování"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Hlasování \"%(object_name)s\" v týmu %(team_name)s bylo dokončeno."
+
+msgid "A user commented on one of your polls"
+msgstr "Uživatel okomentoval jedno z vašich hlasování"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll %(object_name)s"
+msgstr "%(sender_name)s okomentoval/a vaše hlasování %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
+msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval vaše hlasování %(object_name)s"
+msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali vaše hlasování %(object_name)s"
+msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali vaše hlasování %(object_name)s"
+msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo vaše hlasování %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll"
+msgstr "%(sender_name)s okomentoval/a vaše hlasování"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls"
+msgstr "%(sender_name)s okomentoval/a jedno z vašich hlasování"
+
+msgid "A user commented on a poll you were tagged in"
+msgstr "Uživatel okomentoval hlasování, na kterém jste byli označeni"
+
+#, python-format
+msgid "%(sender_name)s commented on the poll %(object_name)s"
+msgstr "%(sender_name)s okomentoval/a hlasování %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
+msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval hlasování %(object_name)s"
+msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali hlasování %(object_name)s"
+msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali hlasování %(object_name)s"
+msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo hlasování %(object_name)s"
+
+msgid "You were tagged in this poll"
+msgstr "Byli jste označeni v tomto hlasování"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in"
+msgstr "%(sender_name)s okomentoval/a hlasování, na kterém jste byli označeni"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s okomentoval/a hlasování, na kterém jste byli označeni, v %(team_name)s"
+
+msgid "A user commented on an poll you voted in"
+msgstr "Uživatel okomentoval hlasování, ve kterém jste hlasovali"
+
+msgid "You voted on this poll"
+msgstr "V tomto hlasování jste hlasovali"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in"
+msgstr "%(sender_name)s okomentoval/a hlasování, ve kterém jste hlasovali"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
+msgstr "%(sender_name)s okomentoval/a hlasování, ve kterém jste hlasovali, v %(team_name)s"
+
+msgid "A user created a new poll in a team you are following"
+msgstr "Uživatel vytvořil nové hlasování v týmu, který sledujete"
+
+#, python-format
+msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s vytvořil/a nové hlasování v týmu %(team_name)s (který sledujete)"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Nové hlasování: \"%(object_name)s\" bylo vytvořeno v týmu %(team_name)s (který sledujete)."
+
+msgid "A user updated a poll you are following"
+msgstr "Uživatel aktualizoval hlasování, které sledujete"
+
+#, python-format
+msgid "%(sender_name)s updated the poll %(object_name)s"
+msgstr "%(sender_name)s aktualizoval/a hlasování %(object_name)s"
+
+msgid "You are following this poll"
+msgstr "Sledujete toto hlasování"
+
+#, python-format
+msgid "%(sender_name)s updated a poll you are following"
+msgstr "%(sender_name)s aktualizoval/a hlasování, které sledujete"
+
+#, python-format
+msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Hlasování, které sledujete: \"%(object_name)s\", bylo aktualizováno v týmu %(team_name)s."
+
+msgid "A poll you are following was completed"
+msgstr "Hlasování, které sledujete, bylo dokončeno"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s"
+msgstr "%(sender_name)s dokončil/a hlasování %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls"
+msgstr "%(sender_name)s dokončil/a %(count)d hlasování"
+
+#, python-format
+msgid "%(sender_name)s completed the poll you are following"
+msgstr "%(sender_name)s dokončil/a hlasování, které sledujete"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
+msgstr "Hlasování \"%(object_name)s\", které sledujete, bylo dokončeno v týmu %(team_name)s."
+
+msgid "A user commented on one a poll you are following"
+msgstr "Uživatel okomentoval hlasování, které sledujete"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you are following"
+msgstr "%(sender_name)s okomentoval/a hlasování, které sledujete"
+
+msgid "Current Polls"
+msgstr "Aktuální hlasování"
+
+msgid "No current polls"
+msgstr "Žádná aktuální hlasování"
+
+msgid "Created By"
+msgstr "Vytvořil/a"
+
+msgid "Newest Created"
+msgstr "Nejnovější vytvořené"
+
+msgid "Title"
+msgstr "Název"
+
+msgid "You must write a description for this poll option!"
+msgstr "K této možnosti hlasování musíte napsat popis!"
+
+msgid "Voting open"
+msgstr "Hlasování je otevřené"
+
+msgid "Voting closed"
+msgstr "Hlasování uzavřeno"
+
+msgid "Poll archived"
+msgstr "Hlasování bylo archivováno"
+
+msgid "State"
+msgstr "Stav"
+
+msgid "Description"
+msgstr "Popis"
+
+msgid "Multiple options votable"
+msgstr "Je možno zvolit více možností"
+
+msgid "Does this poll allow users to vote on multiple options or just decide for one?"
+msgstr "Umožňuje toto hlasování uživatelům hlasovat pro více možností nebo se jen rozhodnout pro jednu?"
+
+msgid "\"Maybe\" option enabled"
+msgstr "Možnost „Možná“ povolena"
+
+msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
+msgstr "Je možnost možná povolena? Ignorováno a výchozí hodnota je False, pokud je ``multiple_votes==False``"
+
+msgid "Anyone can vote"
+msgstr "Hlasovat může kdokoli"
+
+msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
+msgstr "Je-li nastavena hodnota true, může hlasovat kdokoli, kdo vidí toto hlasování. Pokud je hodnota false, mohou pouze členové skupiny."
+
+msgid "Show voters"
+msgstr "Zobrazit hlasující"
+
+msgid "If true, display a list of which user voted for each option."
+msgstr "Pokud má hodnotu true, zobrazí se seznam uživatelů, kteří hlasovali pro jednotlivé možnosti."
+
+msgid "Start"
+msgstr "Start"
+
+msgid "Winning Option"
+msgstr "Vítězná možnost"
+
+msgid "Poll"
+msgstr "Hlasování"
+
+#, python-format
+msgid "Poll: %(poll)s (%(state)s)"
+msgstr "Hlasování: %(poll)s (%(state)s)"
+
+msgid "Image"
+msgstr "Obrázek"
+
+msgctxt "the subject"
+msgid "Votes"
+msgstr "Hlasy"
+
+msgid "Poll Option"
+msgstr "Možnost hlasování"
+
+msgid "Poll Options"
+msgstr "Možnosti hlasování"
+
+msgid "Yes"
+msgstr "Ano"
+
+msgid "Maybe"
+msgstr "Možná"
+
+msgid "No"
+msgstr "Ne"
+
+msgid "Option"
+msgstr "Možnost"
+
+msgid "Voter"
+msgstr "Hlasující"
+
+msgid "Vote"
+msgstr "Hlasovat"
+
+msgctxt "the subject"
+msgid "Vote"
+msgstr "Hlas"
+
+msgid "Creator"
+msgstr "Tvůrce"
+
+msgid "Created"
+msgstr "Vytvořeno"
+
+msgid "Last modified"
+msgstr "Naposledy upraveno"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Comment"
+msgstr "Komentář"
+
+msgid "Comments"
+msgstr "Komentáře"
+
+msgid "Poll choice"
+msgstr "Volba hlasování"
+
+msgid "Back to Polls"
+msgstr "Zpět na hlasování"
+
+msgid "Past Polls"
+msgstr "Minulá hlasování"
+
+msgid "by"
+msgstr "podle"
+
+msgid "Delete"
+msgstr "Smazat"
+
+msgid "Edit"
+msgstr "Upravit"
+
+msgid "Re-open"
+msgstr "Znovu otevřít"
+
+msgid "Archive"
+msgstr "Archivovat"
+
+#, python-format
+msgid "Do you really want to delete poll „%(title)s“?"
+msgstr "Opravdu chcete smazat hlasování \"%(title)s\"?"
+
+msgid "Delete poll"
+msgstr "Smazat hlasování"
+
+#, python-format
+msgid "Do you really want to re-open poll „%(title)s“?"
+msgstr "Opravdu chcete znovu otevřít hlasování \"%(title)s\"?"
+
+msgid "Re-open poll"
+msgstr "Znovu otevřít hlasování"
+
+#, python-format
+msgid "Do you really want to archive poll „%(title)s“?"
+msgstr "Opravdu chcete archivovat hlasování \"%(title)s\"?"
+
+msgid "Archive poll"
+msgstr "Archivovat hlasování"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you created in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Ahoj, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s zveřejnil komentář k hlasování, které jste vytvořili v %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"na vaše hlasování:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Kliknutím na tento odkaz zobrazíte komentář: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Chcete-li upravit předvolby oznámení, použijte tento odkaz: %(notification_settings_url)s )\n"
+"\n"
+"Váš tým %(site_name)s.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls in %(team_name)s."
+msgstr "%(sender_name)s okomentoval/a jedno z vašich hlasování v %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the poll \"%(object_name)s\", was completed in %(team_name)s by %(sender_name)s!\n"
+msgstr ""
+"Ahoj %(receiver_name)s,\n"
+"\n"
+"hlasování \"%(object_name)s\", bylo dokočeno v %(team_name)s užívatelem %(sender_name)s!\n"
+
+msgid "The winning option was:"
+msgstr "Vítězná možnost byla:"
+
+msgid "There was no winning option."
+msgstr "Nebyla žádná vítězná možnost."
+
+#, python-format
+msgid ""
+"\n"
+"You can find the poll by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"\n"
+"Kliknutím na tento odkaz zobrazíte hlasování: %(object_url)s\n"
+"\n"
+"\n"
+"(Chcete-li upravit předvolby oznámení, použijte tento odkaz: %(notification_settings_url)s )\n"
+"\n"
+"Váš tým %(site_name)s."
+
+#, python-format
+msgid "Poll: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Hlasování: \"%(object_name)s\" v týmu %(team_name)s bylo dokončeno."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new poll \"%(object_name)s\", was created in %(team_name)s by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Ahoj, %(receiver_name)s!\n"
+"\n"
+"nové hlasování \"%(object_name)s\", bylo vytvořeno v %(team_name)s uživatelem %(sender_name)s.\n"
+"\n"
+"Naleznete jej kliknutím na tento odkaz: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Chcete-li upravit předvolby oznámení, použijte tento odkaz: %(notification_settings_url)s )\n"
+"\n"
+"Váš tým %(site_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you were tagged in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Ahoj, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s zveřejnil komentář k hlasování, na kterém jste označeni, v %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"na hlasování:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Kliknutím na tento odkaz zobrazíte komentář: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Chcete-li upravit předvolby oznámení, použijte tento odkaz: %(notification_settings_url)s )\n"
+"\n"
+"Váš tým %(site_name)s.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in %(team_name)s."
+msgstr "%(sender_name)s okomentoval/a hlasování, na kterém jste byli označeni, v %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you voted in in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Ahoj, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s zveřejnil komentář k hlasování, ve kterém jste hlasovali, v %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"na hlasování:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Kliknutím na tento odkaz zobrazíte komentář: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Chcete-li upravit předvolby oznámení, použijte tento odkaz: %(notification_settings_url)s )\n"
+"\n"
+"Váš tým %(site_name)s.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s."
+msgstr "%(sender_name)s okomentoval/a hlasování, ve kterém jste hlasovali, v %(team_name)s."
+
+msgid "Write comment..."
+msgstr "Napsat komentář..."
+
+msgid "Post"
+msgstr "Publikovat příspěvek"
+
+msgid "Add poll"
+msgstr "Přidat hlasování"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "V jednom z polí, která jste zadali, došlo k chybě. Před uložením to prosím opravte!"
+
+msgid "Enter a title for the new poll."
+msgstr "Zadejte název nového hlasování."
+
+msgid "Description and Infos"
+msgstr "Popis a informace"
+
+msgid "Enter a description for the poll"
+msgstr "Zadejte popis hlasování"
+
+msgid "Note: You cannot edit the options for this poll because someone has already cast their vote or the poll has been completed!"
+msgstr "Poznámka: Možnosti pro toto hlasování nelze upravit, protože někdo již hlasoval nebo bylo hlasování dokončeno!"
+
+msgid "Poll Choices"
+msgstr "Možnosti hlasování"
+
+msgid "Remove choice"
+msgstr "Odstranit možnost"
+
+msgid "Add choice"
+msgstr "Přidat možnost"
+
+msgid "Multiple Votes"
+msgstr "Více možností"
+
+msgid "If disabled, users can only vote for one option"
+msgstr "Je-li zakázáno, uživatelé mohou hlasovat pouze pro jednu možnost"
+
+msgid "In addition to \"Yes\" and \"No\""
+msgstr "Kromě \"Ano\" a \"Ne\""
+
+msgid "Lists how every voter voted for each option."
+msgstr "Uvádí, jak každý hlasující hlasoval pro každou možnost."
+
+msgid "Public voting"
+msgstr "Veřejné hlasování"
+
+msgid "Any logged in user who can see this poll can vote on it. If disabled, only group/project members can vote on it."
+msgstr "Hlasovat může každý přihlášený uživatel, který vidí toto hlasování. Je-li deaktivováno, mohou v něm hlasovat pouze členové skupiny/projektu."
+
+msgid "Create"
+msgstr "Vytvořit"
+
+msgid "Save"
+msgstr "Uložit"
+
+msgid "Archived Polls"
+msgstr "Archivovaná hlasování"
+
+msgid "Enter the title to create a new poll."
+msgstr "Zadejte název pro vytvoření nového hlasování."
+
+msgid "There are no archived polls."
+msgstr "Nejsou žádná archivovaná hlasování."
+
+msgid "There are no running polls."
+msgstr "Nejsou žádná probíhající hlasování."
+
+msgid "There are no upcoming polls"
+msgstr "Nejsou žádná nadcházející hlasování"
+
+msgctxt "the_verb"
+msgid "Vote"
+msgstr "Hlasovat"
+
+#, python-format
+msgid "Vote for %(title)s"
+msgstr "Hlasovat o %(title)s"
+
+msgid "This poll has been completed. Voting is closed."
+msgstr "Toto hlasování bylo dokončeno. Hlasování je uzavřeno."
+
+msgid "This is an archived poll."
+msgstr "Toto je archivované hlasování."
+
+msgid "Complete without winner"
+msgstr "Dokončit bez vítězné možnosti"
+
+#, python-format
+msgid "Do you really want to complete poll \"%(title)s\" with no winning option?"
+msgstr "Opravdu chcete dokončit hlasování \"%(title)s\" bez vítězné možnosti?"
+
+msgid "Complete poll without winner"
+msgstr "Dokončit hlasování bez vítězné možnosti"
+
+msgid "(No description set)"
+msgstr "(Není nastaven žádný popis)"
+
+msgid "The Winner is"
+msgstr "Vítěznou možností je"
+
+msgid "Available options were"
+msgstr "Dostupné možnosti byly"
+
+msgid "There are no options for this poll yet!"
+msgstr "Pro toto hlasování zatím nejsou k dispozici žádné možnosti!"
+
+msgid "Make winner and complete poll"
+msgstr "Dokončit hlasování s vítěznou možností"
+
+msgid "Votes"
+msgstr "Hlasy"
+
+#, python-format
+msgid "Do you really want to complete the poll and select \"%(description)s\" as winner?"
+msgstr "Opravdu chcete dokončit hlasování a vybrat \"%(description)s\" jako vítěznou možnost?"
+
+msgid "Complete poll"
+msgstr "Dokončit hlasování"
+
+msgid "You created a poll"
+msgstr "Vytvořili jste hlasování"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a poll"
+msgstr "vytvořil/a hlasování"
+
+msgid "There are no polls yet"
+msgstr "Zatím nejsou žádná hlasování"
+
+#, python-format
+msgid "Poll \"%(title)s\" was edited successfully."
+msgstr "Hlasování \"%(title)s\" bylo úspěšně upraveno."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be edited."
+msgstr "Hlasování \"%(title)s\" nelze upravit."
+
+#, python-format
+msgid "Poll \"%(title)s\" was added successfully."
+msgstr "Hlasování \"%(title)s\" bylo úspěšně přidáno."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be added."
+msgstr "Hlasování \"%(title)s\" nelze přidat."
+
+msgid "You should define at least one poll option!"
+msgstr "Měli byste definovat alespoň jednu možnost hlasování!"
+
+msgid "This poll is archived and cannot be edited anymore!"
+msgstr "Toto hlasování je archivováno a již jej nelze upravovat!"
+
+#, python-format
+msgid "Poll \"%(title)s\" was deleted successfully."
+msgstr "Hlasování \"%(title)s\" bylo úspěšně smazáno."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be deleted."
+msgstr "Hlasování \"%(title)s\" nelze smazat."
+
+msgid "Your votes were saved successfully."
+msgstr "Vaše hlasy byly úspěšně uloženy."
+
+msgid "Your votes could not be saved."
+msgstr "Vaše hlasy se nepodařilo uložit."
+
+msgid "The voting phase for this poll is over. You cannot vote for it any more."
+msgstr "Fáze hlasování pro toto hlasování skončila. Už v něm nemůžete hlasovat."
+
+msgid "In this poll you must vote for exactly one item!"
+msgstr "V tomto hlasování musíte hlasovat přesně pro jednu položku!"
+
+msgid "The complete request can only be sent via POST!"
+msgstr "Požadavek na dokončení lze zaslat pouze jako PŘÍSPĚVEK!"
+
+msgid "Invalid action for this poll. The request could not be completed!"
+msgstr "Neplatná akce pro toto hlasování . Požadavek nelze dokončit!"
+
+msgid "This action is not permitted for this poll at this stage!"
+msgstr "V této fázi není tato akce pro toto hlasování povolena!"
+
+msgid "The poll was closed successfully."
+msgstr "Hlasování bylo úspěšně uzavřeno."
+
+msgid "The poll was re-opened successfully."
+msgstr "Hlasování bylo úspěšně znovu otevřeno."
+
+msgid "The poll was archived successfully."
+msgstr "Hlasování bylo úspěšně archivováno."
+
+msgid "Your comment was added successfully."
+msgstr "Váš komentář byl úspěšně přidán."
+
+msgid "Your comment was deleted successfully."
+msgstr "Váš komentář byl úspěšně smazán."

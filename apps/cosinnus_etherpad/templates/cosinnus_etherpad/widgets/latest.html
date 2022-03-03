@@ -1,0 +1,19 @@
+{% load i18n %}
+
+{% if rows %}
+    {% include 'cosinnus_etherpad/attached_etherpads.html' with etherpads=rows no_indent=1 %}
+{% else %}
+	<div type="button" class="btn btn-emphasized dashboard-appwidget-contentline fine-space">
+	    <ul class="media-list">
+	        <li class="media">
+	            <span class="pull-left">
+	                <i class="fa fa-tasks"></i>
+	            </span>
+	            <div class="media-body">
+	                {% trans "There are no etherpads yet" %}
+	            </div>
+	        </li>
+	    </ul>
+	</div><!-- btn -->
+{% endif %}
+

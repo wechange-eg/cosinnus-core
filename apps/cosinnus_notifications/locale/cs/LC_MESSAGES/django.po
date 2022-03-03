@@ -1,0 +1,230 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:43+0200\n"
+"PO-Revision-Date: 2020-09-23 18:41+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+"X-Generator: Poedit 2.4.1\n"
+
+msgid "You are seeing this alert because you created this content."
+msgstr "Toto upozornění se vám zobrazuje, protože jste vytvořili tento obsah."
+
+msgid "You are seeing this alert because you are following the item's project or group."
+msgstr "Toto upozornění se vám zobrazuje, protože sledujete projekt nebo skupinu položky."
+
+msgid "You are seeing this alert because you are following this item."
+msgstr "Toto upozornění se vám zobrazuje, protože sledujete tuto položku."
+
+msgid "Notifications"
+msgstr "Oznámení"
+
+msgctxt "the_app"
+msgid "notifications"
+msgstr "oznámení"
+
+#, python-format
+msgid "Your daily digest for %(portal_name)s"
+msgstr "Váš denní přehled pro %(portal_name)s"
+
+msgid "This is what happened during the last day!"
+msgstr "To se stalo během posledního dne!"
+
+#, python-format
+msgid "Your weekly digest for %(portal_name)s"
+msgstr "Váš týdenní souhrn pro %(portal_name)s"
+
+msgid "This is what happened during the last week!"
+msgstr "To se stalo během minulého týdne!"
+
+msgctxt "notification frequency"
+msgid "Never"
+msgstr "Nikdy"
+
+msgctxt "notification frequency"
+msgid "Immediately"
+msgstr "Okamžitě"
+
+msgctxt "notification frequency"
+msgid "Daily"
+msgstr "Denně"
+
+msgctxt "notification frequency"
+msgid "Weekly"
+msgstr "Týdně"
+
+msgid "Notification Preference for User"
+msgstr "Předvolby oznámení pro uživatele"
+
+msgid "Notification ID"
+msgstr "ID oznámení"
+
+msgid "Notification Preference"
+msgstr "Předvolba oznámení"
+
+msgid "Notification Preferences"
+msgstr "Předvolby oznámení"
+
+msgid "Portal"
+msgstr "Portál"
+
+msgid "Multi Notification ID"
+msgstr "ID multi oznámení"
+
+msgid "Multi Notification Preference"
+msgstr "Předvolba multi oznámení"
+
+msgid "Multi Notification Preferences"
+msgstr "Předvolby multi oznámení"
+
+msgid "User who caused this notification event"
+msgstr "Uživatel, který způsobil tuto událost oznámení"
+
+msgid "Audience"
+msgstr "Publikum"
+
+msgid "Owner of the alert"
+msgstr "Vlastník výstrahy"
+
+msgid "Alert Reason key"
+msgstr "Klíč důvodu výstrahy"
+
+msgid "Last user who caused this notification event"
+msgstr "Poslední uživatel, který způsobil tuto událost oznámení"
+
+msgid "Alert State"
+msgstr "Stav výstrahy"
+
+msgid "You are following this content or its Project or Group"
+msgstr "Sledujete tento obsah nebo jeho projekt nebo skupinu"
+
+msgid "All notifications"
+msgstr "Všechna oznámení"
+
+msgid "No notifications"
+msgstr "Žádná oznámení"
+
+msgid "For content that I am following, I wish to receive notification emails"
+msgstr "U obsahu, který sleduji, si přeji dostávat e-maily s oznámeními"
+
+msgid "You are getting this notification because you are subscribed to these kinds of events in your project or group."
+msgstr "Toto oznámení dostáváte, protože jste přihlášeni k odběru těchto druhů událostí ve vašem projektu nebo skupině."
+
+msgid "You are getting this notification because you are an administrator of this project or group."
+msgstr "Toto oznámení dostáváte, protože jste správcem tohoto projektu nebo skupiny."
+
+msgid "You are getting this notification because you are an administrator of this portal."
+msgstr "Toto oznámení dostáváte, protože jste správcem tohoto portálu."
+
+msgid "You are getting this email because you are subscribed to one or more daily notifications."
+msgstr "Tento e-mail jste obdrželi, protože jste přihlášeni k odběru jednoho nebo více denních oznámení."
+
+msgid "You are getting this email because you are subscribed to one or more weekly notifications."
+msgstr "Tento e-mail jste obdrželi, protože jste přihlášeni k odběru jednoho nebo více týdenních oznámení."
+
+msgid "New item"
+msgstr "Nová položka"
+
+msgid "Like"
+msgstr "Like"
+
+msgid "Follow"
+msgstr "Sledovat"
+
+#, python-format
+msgid "View on %(portal_name)s"
+msgstr "Zobrazit na %(portal_name)s"
+
+msgid "Untitled"
+msgstr "Nepojmenované"
+
+msgid "Your Profile"
+msgstr "Váš profil"
+
+msgid "Select which notifications you would like to receive for each group or project you are involved in."
+msgstr "Vyberte oznámení, která chcete dostávat pro každou skupinu nebo projekt, do kterého jste zapojeni."
+
+msgid "These notifications will be sent to your configured email address:"
+msgstr "Tato oznámení budou zaslána na vaši nakonfigurovanou e-mailovou adresu:"
+
+msgid "You can choose to receive notifications as soon as they happen, or you can receive a daily (or weekly) e-mail digest."
+msgstr "Můžete se rozhodnout pro příjem oznámení hned, jakmile k nim dojde, nebo můžete dostávat denní (nebo týdenní) e-mailový souhrn."
+
+msgid "The digest will aggregate all notifications with the \"Daily\" (or \"Weekly\") setting from all groups and projects. So you will receive only a single e-mail per day (or week) containing everything interesting that happend."
+msgstr "Souhrn agreguje všechna oznámení s nastavením \"Denně\" (nebo \"Týdně\") ze všech skupin a projektů. Za den (nebo týden) tedy obdržíte pouze jeden e-mail obsahující vše zajímavé, co se stalo."
+
+msgid "Notifications you set to \"Immediately\" will be e-mailed to you as soon as they happen, with one e-mail per notification."
+msgstr "Oznámení, která nastavíte na \"Okamžitě\", vám budou zaslána e-mailem hned, jakmile k nim dojde, v jednom e-mailu na každé oznámení."
+
+msgid "Don't forget to save your settings once you are done editing them!"
+msgstr "Po dokončení úprav nezapomeňte uložit svá nastavení!"
+
+msgid "more"
+msgstr "další"
+
+msgid "I wish to receive notification emails"
+msgstr "Chci dostávat e-maily s oznámeními"
+
+msgid "Note that you will receive an email notification if someone has invited you to a group/ project in any case."
+msgstr ""
+
+msgid "I would like to receive instant messages by email for RocketChat mentions and direct messages to me"
+msgstr ""
+
+msgid "Receive notification emails in this language"
+msgstr "Dostávat e-maily s oznámeními v tomto jazyce"
+
+msgid "Moderator Status (Portal-Admins only)"
+msgstr "Stav moderátora (pouze správci portálu)"
+
+msgid "I wish to be a Moderator for this portal"
+msgstr "Chtěl bych být moderátorem tohoto portálu"
+
+msgid "As a Moderator, you will receive an instant notification whenever ANY publicly visible content is posted on this portal. Since you are a portal administrator you can then also delete the content if it is offensive or critical. To delete it, visit the content page on the website while logged into this account."
+msgstr "Jako moderátor obdržíte okamžité oznámení, kdykoli se na tomto portálu zveřejní JAKÝKOLI veřejně viditelný obsah. Jelikož jste správcem portálu, můžete také odstranit obsah, pokud je urážlivý nebo kritický. Chcete-li jej smazat, přihlaste se k tomuto účtu na stránce s obsahem na webu."
+
+msgid "Immediately"
+msgstr "Okamžitě"
+
+msgid "Daily"
+msgstr "Denně"
+
+msgid "Weekly"
+msgstr "Týdně"
+
+msgid "Custom"
+msgstr "Vlastní"
+
+msgid "Reset to default"
+msgstr "Obnovit do základního nastavení"
+
+msgid "Save"
+msgstr "Uložit"
+
+msgid "This will reset all of your notification preferences to their default setting. Are you sure you wish to do that?"
+msgstr "Tím se obnoví výchozí nastavení všech vašich předvoleb oznámení. Opravdu to chcete udělat?"
+
+msgid "Your notification preferences were updated successfully."
+msgstr "Vaše předvolby oznámení byly úspěšně aktualizovány."
+
+msgid "Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!"
+msgstr ""
+
+msgid "Your notifications preferences were reset to default!"
+msgstr "Vaše předvolby oznámení byly obnoveny na výchozí nastavení!"
+
+#, fuzzy
+#~| msgid "I wish to receive notification emails"
+#~ msgid "I wish to receive RocketChat notification emails"
+#~ msgstr "Chci dostávat e-maily s oznámeními"

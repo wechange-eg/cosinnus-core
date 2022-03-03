@@ -1,0 +1,295 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 11:18+0200\n"
+"PO-Revision-Date: 2020-10-13 18:38+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.4.1\n"
+
+msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
+msgstr "Будь ласка, опублікуйте свій запит або запитання тут. Ви можете побачити учасників каналу, натиснувши значок групи у верхній частині каналу."
+
+msgctxt "the_app"
+msgid "Chat"
+msgstr "Чат"
+
+msgid "Message"
+msgstr "Повідомлення"
+
+msgctxt "the_app"
+msgid "message"
+msgstr "повідомлення"
+
+msgid "Chat"
+msgstr "Чат"
+
+msgid "Recipients"
+msgstr "Адресати"
+
+msgid "Only Administrators may send a message to this project/group!"
+msgstr "Тільки адміністратори можуть відправляти повідомлення до цих проєктів/груп!"
+
+msgid "Additional Recipients"
+msgstr "Додаткові адресати"
+
+msgid "Undefined recipient."
+msgstr "Не вказано адресата."
+
+msgid "Portal"
+msgstr "Портал"
+
+msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
+msgstr "Ви можете додавати файли та зображення до повідомлень, якщо Ви член форуму. Ви можете приєднатися тут:"
+
+msgid "Forum"
+msgstr "Форум"
+
+msgid "Messages"
+msgstr "Повідомлення"
+
+msgid "Legacy Messages Archive"
+msgstr "Архів попередніх повідомлень"
+
+msgid "The legacy messaging app is no longer in use. You can view all of your old messages, but you cannot write new ones. Please use the new messaging app in the navigation from now on!"
+msgstr "Застаріла програма обміну повідомленнями більше не використовується. Ви можете переглядати всі свої старі повідомлення, але не можете писати нові. Відтепер використовуйте новий застосунок для обміну повідомленнями в навігації!"
+
+#, python-format
+msgid ""
+"Your direct reply could not be processed!\n"
+"\n"
+"The reason was: %(reason)s\n"
+"\n"
+"\n"
+"Your message text was: \n"
+"--------------------------------\n"
+"%(text)s\n"
+"--------------------------------\n"
+"\n"
+"\n"
+"If this keeps happening, consider logging in and sending the reply directly on the site.\n"
+msgstr ""
+"Ваша пряма відповідь не може бути доставлена!%(reason)s\n"
+"\n"
+"\n"
+"Текст Вашого повідомлення:\n"
+"--------------------------------\n"
+"%(text)s\n"
+"--------------------------------\n"
+"\n"
+"\n"
+"Якщо це продовжиться, вийдіть із акаунта і відправте відповідь прямо на сайт.\n"
+
+msgid ""
+"Note: This message is issued by an automated system.\n"
+"Do not reply, this would not be taken into account."
+msgstr ""
+"Примітка: це повідомлення надсилається системою автоматично.\n"
+"Будь ласка, не відповідайте на нього."
+
+msgid "Only group members can see the content you requested. Apply to become a member now!"
+msgstr "Тільки учасники групи можуть бачити контент, про який Ви просили. Подайте заявку, щоб стати учасником зараз!"
+
+msgid "Go to chat"
+msgstr "Перейти до чату"
+
+msgid "Archived Messages"
+msgstr "Заархівовані повідомлення"
+
+msgid "Delete"
+msgstr "Видалити"
+
+msgid "Archive"
+msgstr "Архів"
+
+msgid "Undelete"
+msgstr "Скасувати видалення"
+
+msgid "Mark as Read"
+msgstr "Позначити як прочитані"
+
+msgid "No messages"
+msgstr "Повідомлень немає"
+
+msgid "Please enter message..."
+msgstr "Уведіть, будь ласка, повідомлення..."
+
+msgid "Send"
+msgstr "Надіслати"
+
+msgid "Dear user,"
+msgstr "Шановний/-на користувачу/-ко,"
+
+#, python-format
+msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgstr "%(date)s ви хотіли надіслати повідомлення до користувача/-ки '%(recipient)s'."
+
+msgid "Your message has been rejected by the moderator"
+msgstr "Ваше повідомлення заблокував модератор"
+
+msgid ", for the following reason:"
+msgstr ", з наступної причини:"
+
+#, python-format
+msgid "'%(sender_first)s %(sender_last)s' has replied to your message from %(date)s:"
+msgstr "'%(sender_first)s %(sender_last)s' відповів(ла) на ваше повідомлення від %(date)s:"
+
+#, python-format
+msgid "'%(sender_first)s %(sender_last)s' has posted a message in one of your conversations."
+msgstr "’%(sender_first)s %(sender_last)s' надіслав(ла) повідомлення в один із Ваших діалогів."
+
+#, python-format
+msgid "You have received a message from the user '%(sender_first)s %(sender_last)s'."
+msgstr "Ви отримали повідомлення від користувача/-ки '%(sender_first)s %(sender_last)s'."
+
+msgid "This message was sent in a conversation with: "
+msgstr "Повідомлення було надіслано в діалог з: "
+
+msgid "Project/Group"
+msgstr "Проєкт/Група"
+
+msgid "Follow this link to view the message on the site"
+msgstr "Перейдіть за цим посиланням, щоб переглянути повідомлення на веб-сайті"
+
+msgid "If you do not wish to receive any more emails from us, click here to unsubscribe:"
+msgstr "Якщо Ви більше не бажаєте отримувати від нас електронні листи, натисніть тут, щоб відписатися:"
+
+msgid "You can also reply to this message directly by replying to this email. When you do, please leave the subject and addressee as it is. The email you reply from *must* be the one you are registered with on the site."
+msgstr "Ви також можете напряму відповісти на повідомлення, відповівши на цей лист. Якщо Ви так робитимете, будь ласка, залиште тему та адресатів у вихідному вигляді. Поштова скринька, з якої Ви відповідаєте, повинна бути зареєстрована на сайті."
+
+msgid "WARNING: Your reply will be sent to all participants of this conversation!"
+msgstr "ПОПЕРЕДЖЕННЯ: Ваша відповідь буде надіслана усім учасникам цього діалогу!"
+
+#, python-format
+msgid "Message \"%(subject)s\" on the site %(sitename)s"
+msgstr "Повідомлення «%(subject)s» на веб-сайті %(sitename)s"
+
+msgid "Dear visitor,"
+msgstr "Шановний/-на відвідувачу/-ко,"
+
+msgid "As a reminder, please find below the content of your message."
+msgstr "У якості нагадування, нижче наведено зміст вашого повідомлення."
+
+#, python-format
+msgid "On %(date)s, you sent a message to the user '%(sender_first)s %(sender_last)s'."
+msgstr "%(date)s ви надіслали повідомлення користувачу/-ці '%(sender_first)s %(sender_last)s'."
+
+msgid "Please find below the answer from your correspondent."
+msgstr "Нижче знаходиться відповідь від вашого/-ї кореспондента/-ки."
+
+msgid "Thank you again for your interest in our services."
+msgstr "Ще раз дякуємо, що користуєтеся нашими сервісами."
+
+msgid "For more comfort, we encourage you to open an account on the site."
+msgstr "Для більшої зручності ми радимо зареєструватися на веб-сайті."
+
+msgid "The site administrator"
+msgstr "Адміністратор/-ка веб-сайту"
+
+msgid "Inbox"
+msgstr "Вхідні"
+
+msgid "Sent"
+msgstr "Надіслані"
+
+msgctxt "the noun for an Archive"
+msgid "Archive"
+msgstr "Архів"
+
+msgid "Trash"
+msgstr "Кошик"
+
+msgid "Write"
+msgstr "Написати"
+
+msgid "Reply"
+msgstr "Відповісти"
+
+msgid "Recipient"
+msgstr "Адресат"
+
+msgid "Conversation"
+msgstr "Розмова"
+
+msgid "Conversation with members from"
+msgstr "Діалог з членами із"
+
+msgid "Conversation with"
+msgstr "Розмова з"
+
+#, python-format
+msgid "Show all %(count)s participants"
+msgstr "Показати всіх %(count)s участників"
+
+msgid "Me"
+msgstr "Я"
+
+msgid "Answer"
+msgstr "Відповісти"
+
+msgid "Reply..."
+msgstr "Відповісти..."
+
+#, python-format
+msgid "Reply to %(sender_name)s"
+msgstr "Відповісти %(sender_name)s"
+
+#, python-format
+msgid "Reply to all %(adressee_count)s"
+msgstr "Відповісти всім %(adressee_count)s"
+
+msgid "Your reply could not be matched to an existing message."
+msgstr "Ваша відповідь не може бути поєднана з існуючим повідомленням."
+
+msgid "An internal error occured."
+msgstr "Сталася внутрішня помилка."
+
+msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
+msgstr "Електронна адреса, з якої Ви надіслали відповідь, не зв’язана з Вашим акаунтом. Будь ласка, надсилайте відповіді тільки з тих електронних адрес, які Ви зареєстрували на сайті!"
+
+msgid "There was an error when processing your message text!"
+msgstr "Сталася помилка при обробці тексту Вашого повідомлення!"
+
+msgid "Your direct reply failed!"
+msgstr "Ваша пряма відповідь не доставлена!"
+
+msgid "Select at least one object."
+msgstr "Виберіть щонайменше одного отримувача."
+
+msgid "Messages or conversations successfully archived."
+msgstr "Повідомлення успішно заархівовані."
+
+msgid "Messages or conversations successfully deleted."
+msgstr "Повідомлення успішно видалені."
+
+msgid "Messages were marked as read."
+msgstr "Повідомлення позначені як прочитані."
+
+msgid "Messages or conversations successfully recovered."
+msgstr "Повідомлення успішно відновлені."
+
+#~ msgid "Request about your project \"%(group_name)s\""
+#~ msgstr "Запит щодо Вашого проєкту \"%(group_name)s\""
+
+#~ msgid "Request about your group \"%(group_name)s\""
+#~ msgstr "Запит щодо Вашої групи \"%(group_name)s\""
+
+#~ msgid "Mark All"
+#~ msgstr "Позначити всі"
+
+#~ msgid "Deselect All"
+#~ msgstr "Прибрати всі позначення"
+
+#~ msgid "You have received a copy of a response from the user '%(sender_first)s %(sender_last)s'."
+#~ msgstr "Ви отримали копію відповіді від користувача/-ки '%(sender_first)s %(sender_last)s'."

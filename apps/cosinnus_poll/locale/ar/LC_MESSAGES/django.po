@@ -1,0 +1,740 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:06+0200\n"
+"PO-Revision-Date: 2021-03-08 11:32+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Poedit 2.4.1\n"
+
+msgid "Polls"
+msgstr "استطلاعات رأي"
+
+msgctxt "the_app"
+msgid "poll"
+msgstr "استطلاع رأي"
+
+msgid "A user created a new poll"
+msgstr "مستخدم أعد استطلاع رأي جديد"
+
+#, python-format
+msgid "%(sender_name)s created the poll %(object_name)s"
+msgstr "%(sender_name)s أعد استطلاع رأي%(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d polls"
+msgstr "%(sender_name)sأعد %(count)d استطلاع رأي"
+
+#, python-format
+msgid "%(sender_name)s created a new poll"
+msgstr "%(sender_name)sأعد استطلاع رأي"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "استطلاع رأي جديد: \"%(object_name)s\" أعد في %(team_name)s."
+
+msgid "A poll you voted on was completed"
+msgstr "تم انجاز التصويت لاستطلاع الرأي"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
+msgstr "%(sender_name)s أنجز استطلاع الرأي %(object_name)s الذي قمت بالتصويت عليه"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls you voted on"
+msgstr "%(sender_name)s أنجز %(count)d التصويت على استطلاع الرأي"
+
+#, python-format
+msgid "%(sender_name)s completed the poll"
+msgstr "%(sender_name)s استطلاع الرأي منجز"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "استطلاع الرأي \"%(object_name)s\" منجز في %(team_name)s."
+
+msgid "A user commented on one of your polls"
+msgstr "علق أحد المستخدمين على أحد استطلاعات الرأي الخاصة بك"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll %(object_name)s"
+msgstr "%(sender_name)s تم التعليق على استطلاع الرأي الخاص بك %(object_name)s"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
+msgstr[0] ""
+"% (sender_name)s و% (count_minus_one)d آخر علق على استطلاعك% (object_name)s\n"
+"\n"
+"\n"
+"\n"
+"% (sender_name)s و% (count_minus_one)d آخرون علقوا على استطلاعك% (object_name)s"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#, python-format
+msgid "%(sender_name)s commented on your poll"
+msgstr "%(sender_name)sتم التعليق على استطلاع الرأي الخاص بك"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls"
+msgstr "%(sender_name)s تم التعليق على واحدة من استطلاعات الرأي الخاصة بك"
+
+msgid "A user commented on a poll you were tagged in"
+msgstr "علق أحد المستخدمين على استطلاع رأي أشير اليك به"
+
+#, python-format
+msgid "%(sender_name)s commented on the poll %(object_name)s"
+msgstr "%(sender_name)s تم التعليق على استطلاع الرأي%(object_name)s"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
+msgstr[0] ""
+"% (sender_name)s و% (count_minus_one)d آخر علق على الاستطلاع% (object_name)s\n"
+"\n"
+"\n"
+"% (sender_name)s و% (count_minus_one)d آخرون علقوا على الاستطلاع% (object_name)s"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+msgid "You were tagged in this poll"
+msgstr "تم الإشارة اليك في استطلاع الرأي"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in"
+msgstr "%(sender_name)s تم التعليق على استطلاع رأي أشير اليك به"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s تم التعليق على استطلاع رأي أشير اليك به في %(team_name)s"
+
+msgid "A user commented on an poll you voted in"
+msgstr "علق مستخدم على استطلاع رأي قد قمت بالتصويت عليه"
+
+msgid "You voted on this poll"
+msgstr "لقد قمت بالتصويت على استطلاع الرأي"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in"
+msgstr "%(sender_name)s تم التعليق على استطلاع رأي قمت بالتصويت عليه"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
+msgstr "%(sender_name)s تم التعليق على استطلاع رأي قمت بالتصويت عليه في %(team_name)s"
+
+msgid "A user created a new poll in a team you are following"
+msgstr "أعد مستخدم استطلاع رأي جديد في فريق أنت تتابعه"
+
+#, python-format
+msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s تم إعداد استطلاع رأي جديد في %(team_name)s (which you follow)"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "استطلاع رأي جديد: \"%(object_name)s\" تم إعداد في %(team_name)s (الذي تتبعه)."
+
+msgid "A user updated a poll you are following"
+msgstr "قام مستخدم بتحديث استطلاع رأي أنت تتابعه"
+
+#, python-format
+msgid "%(sender_name)s updated the poll %(object_name)s"
+msgstr "%(sender_name)s تم تحديث استطلاع الرأي %(object_name)s"
+
+msgid "You are following this poll"
+msgstr "أنت تتابع هذا الاستطلاع"
+
+#, python-format
+msgid "%(sender_name)s updated a poll you are following"
+msgstr "%(sender_name)s تم تحديث استطلاع رأي أنت تتابعه"
+
+#, python-format
+msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "استطلاع رأي أنت تتابعه: \"%(object_name)s\" تم تحديثه في %(team_name)s."
+
+msgid "A poll you are following was completed"
+msgstr "لقد تم انجاز استطلاع الرأي الذي تتابعه"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s"
+msgstr "%(sender_name)s تم انجاز استطلاع الرأي %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls"
+msgstr "%(sender_name)s منجز %(count)d polls"
+
+#, python-format
+msgid "%(sender_name)s completed the poll you are following"
+msgstr "%(sender_name)s أنجز استطلاع الرأي الذي تتابعه"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
+msgstr "استطلاع رأي \"%(object_name)s\"الذي تتابعه أنجز في %(team_name)s."
+
+msgid "A user commented on one a poll you are following"
+msgstr "علق مستخدم على واحدة من استطلاعات الرأي الذي تتابعه"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you are following"
+msgstr "%(sender_name)s تم التعليق على استطلاع رأي أنت تتابعه"
+
+msgid "Current Polls"
+msgstr "الاستطلاعات الحالية"
+
+msgid "No current polls"
+msgstr "لا يوجد استطلاعات حالية"
+
+msgid "Created By"
+msgstr "تم إعداد من قبل"
+
+msgid "Newest Created"
+msgstr "حديث الإنشاء"
+
+msgid "Title"
+msgstr "عنوان"
+
+msgid "You must write a description for this poll option!"
+msgstr "يجب عليك كتابة وصف لخيار الاستطلاع هذا!"
+
+msgid "Voting open"
+msgstr "التصويت مفتوح"
+
+msgid "Voting closed"
+msgstr "أغلق التصويت"
+
+msgid "Poll archived"
+msgstr "تمت أرشفة الاستطلاع"
+
+msgid "State"
+msgstr "حالة"
+
+msgid "Description"
+msgstr "وصف"
+
+msgid "Multiple options votable"
+msgstr "خيارات متعددة قابلة للتصويت"
+
+msgid "Does this poll allow users to vote on multiple options or just decide for one?"
+msgstr "هل يسمح هذا الاستطلاع للمستخدمين بالتصويت على خيارات متعددة أم فقط يقرر خيارا واحدا؟"
+
+msgid "\"Maybe\" option enabled"
+msgstr "\"ربما\""
+
+msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
+msgstr "هل الخيار ربما ممكن؟ تجاهل وفم بالتعيين الافتراضي إلى خطأ إذا كان ``multiple_votes==False``"
+
+msgid "Anyone can vote"
+msgstr "يمكن لأي شخص أن يصوت"
+
+msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
+msgstr "إذا كان هذا صحيحًا ، فيمكن لأي شخص رؤية هذا الاستطلاع التصويت عليه. إذا كان خطأ ، يمكن فقط لأعضاء المجموعة."
+
+msgid "Show voters"
+msgstr "عرض المنتخبين/المصوتين"
+
+msgid "If true, display a list of which user voted for each option."
+msgstr "إذا كان هذا صحيحًا ، اعرض قائمة المستخدمين الذين صوتوا لكل خيار."
+
+msgid "Start"
+msgstr "ابدأ"
+
+msgid "Winning Option"
+msgstr "خيار الربح"
+
+msgid "Poll"
+msgstr "استطلاع رأي"
+
+#, python-format
+msgid "Poll: %(poll)s (%(state)s)"
+msgstr "استطلاع: %(poll)s (%(state)s)"
+
+msgid "Image"
+msgstr "صورة"
+
+msgctxt "the subject"
+msgid "Votes"
+msgstr "تصويتات"
+
+msgid "Poll Option"
+msgstr "خيار الاستطلاع"
+
+msgid "Poll Options"
+msgstr "خيارات الاستطلاع"
+
+msgid "Yes"
+msgstr "نعم"
+
+msgid "Maybe"
+msgstr "ربما"
+
+msgid "No"
+msgstr "لا"
+
+msgid "Option"
+msgstr "خيار"
+
+msgid "Voter"
+msgstr "مصوت"
+
+msgid "Vote"
+msgstr "تصويت"
+
+msgctxt "the subject"
+msgid "Vote"
+msgstr "تصويت"
+
+msgid "Creator"
+msgstr "مُنشئ"
+
+msgid "Created"
+msgstr "مُنشئ"
+
+msgid "Last modified"
+msgstr "اخر تعديل"
+
+msgid "Text"
+msgstr "نص"
+
+msgid "Comment"
+msgstr "تعليق"
+
+msgid "Comments"
+msgstr "تعليقات"
+
+msgid "Poll choice"
+msgstr "خيار الاستطلاع"
+
+msgid "Back to Polls"
+msgstr "العودة إلى استطلاعات الرأي"
+
+msgid "Past Polls"
+msgstr "الاستطلاعات السابقة"
+
+msgid "by"
+msgstr "من قبل"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Edit"
+msgstr "تعديل"
+
+msgid "Re-open"
+msgstr "إعادة فتح"
+
+msgid "Archive"
+msgstr "أرشيف"
+
+#, python-format
+msgid "Do you really want to delete poll „%(title)s“?"
+msgstr "هل تريد حقا حذف الاستطلاع „%(title)s“?"
+
+msgid "Delete poll"
+msgstr "حذف الاستطلاع"
+
+#, python-format
+msgid "Do you really want to re-open poll „%(title)s“?"
+msgstr "هل تريد حقا إعادة فتح الاستطلاع „%(title)s“?"
+
+msgid "Re-open poll"
+msgstr "إعادة فتح الاستطلاع"
+
+#, python-format
+msgid "Do you really want to archive poll „%(title)s“?"
+msgstr "هل تريد حقا أرشفة الاستطلاع „%(title)s“?"
+
+msgid "Archive poll"
+msgstr "أرشيف الاستطلاع"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you created in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"مرحبا, %(receiver_name)s!\n"
+"%(sender_name)s قام بنشر تعليق على استطلاع رأي قد قمت بإعداده %(team_name)s:\n"
+"\"%(comment_text)s\"\n"
+"على استطلاع الرأي الخاص بك:\n"
+"\"%(poll_title)s\"\n"
+"اتبع هذا الرابط لمشاهدة التعليق: \n"
+"%(object_url)s\n"
+"(اتبع الرابط التالي لتحرير اشعاراتك المفضلة: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls in %(team_name)s."
+msgstr "%(sender_name)s تم التعليق على واحد من استطلاعات الرأي الخاص بك في %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the poll \"%(object_name)s\", was completed in %(team_name)s by %(sender_name)s!\n"
+msgstr ""
+"مرحبا %(receiver_name)s,\n"
+"استطلاع الرأي \"%(object_name)s\", تم إنجازه في %(team_name)s من قبل %(sender_name)s!\n"
+
+msgid "The winning option was:"
+msgstr "الخيار الرابح هو:"
+
+msgid "There was no winning option."
+msgstr "لا يوجد أي خيار رابح."
+
+#, python-format
+msgid ""
+"\n"
+"You can find the poll by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"\n"
+"يمكنك العثور على استطلاع الرأي من خلال متابعة الرابط التالي: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(اتبع الرابط التالي لتحرير اشعاراتك المفضلة: %(notification_settings_url)s )\n"
+"\n"
+" %(site_name)s فريقك."
+
+#, python-format
+msgid "Poll: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "استطلاع رأي: \"%(object_name)s\" تم إنجازه في %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new poll \"%(object_name)s\", was created in %(team_name)s by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"مرحبا %(receiver_name)s,\n"
+"\n"
+"استطلاع رأي جديد \"%(object_name)s\", تم اعداد في %(team_name)s من قبل %(sender_name)s. \n"
+"\n"
+"يمكنك العثور عليه من خلال الرابط التالي %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(اتبع الرابط التالي لتحرير اشعاراتك المفضلة: %(notification_settings_url)s )\n"
+"\n"
+"فريقك %(site_name)s ."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you were tagged in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in %(team_name)s."
+msgstr "%(sender_name)s تم التعليق على استطلاع رأي أشير اليك به %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you voted in in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"مرحبا %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s قام بنشر تعليق على استطلاع رأي قد قمت بالتصويت عليه في %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"في الاستطلاع:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"اتبع الرابط التالي لمشاهدة الرابط: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"اتبع الرابط التالي لتحرير اشعاراتك المفضلة: %(notification_settings_url)s )\n"
+"\n"
+" %(site_name)s فريقك.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s."
+msgstr "%(sender_name)s تم التعليق على استطلاع رأي قمت بالتصويت عليه في%(team_name)s."
+
+msgid "Write comment..."
+msgstr "أكتب تعليق..."
+
+msgid "Post"
+msgstr "منشور"
+
+msgid "Add poll"
+msgstr "اضف استطلاع"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "حدث خطأ في احدى الحقول التي أدخلتها,يُرجى تصحيحها قبل الحفظ!"
+
+msgid "Enter a title for the new poll."
+msgstr "أدخل عنوانا للاستطلاع الجديد."
+
+msgid "Description and Infos"
+msgstr "وصف و معلومات"
+
+msgid "Enter a description for the poll"
+msgstr "اضف وصفا لهذا الاستطلاع"
+
+msgid "Note: You cannot edit the options for this poll because someone has already cast their vote or the poll has been completed!"
+msgstr "ملاحظة: لا يمكنك تعديل الخيارات لهذا الاستطلاع لأن شخصًا ما قد أدلى بصوته بالفعل أو أن الاستطلاع قد اكتمل!"
+
+msgid "Poll Choices"
+msgstr "خيارات الاستطلاع"
+
+msgid "Remove choice"
+msgstr "حذف خيار"
+
+msgid "Add choice"
+msgstr "إضافة خيار"
+
+msgid "Multiple Votes"
+msgstr "أصوات متعددة"
+
+msgid "If disabled, users can only vote for one option"
+msgstr "إذا تم تعطيله ، يمكن للمستخدمين التصويت لخيار واحد فقط"
+
+msgid "In addition to \"Yes\" and \"No\""
+msgstr "بالإضافة إلى \"نعم\" و \"لا\""
+
+msgid "Lists how every voter voted for each option."
+msgstr "قوائم كيف لكل مصوت التصويت لكل خيار."
+
+msgid "Public voting"
+msgstr "تصويت علني"
+
+msgid "Any logged in user who can see this poll can vote on it. If disabled, only group/project members can vote on it."
+msgstr "يمكن لأي مستخدم قام بتسجيل الدخول وشاهد هذا الاستطلاع التصويت عليه. إذا تم تعطيله ، يمكن فقط لأعضاء المجموعة / المشروع التصويت عليه."
+
+msgid "Create"
+msgstr "اعداد/انشاء"
+
+msgid "Save"
+msgstr "حفظ"
+
+msgid "Archived Polls"
+msgstr "استطلاعات مؤرشفة"
+
+msgid "Enter the title to create a new poll."
+msgstr "أدخل العنوان لإنشاء تصويت جديد."
+
+msgid "There are no archived polls."
+msgstr "لا توجد استطلاعات مؤرشفة."
+
+msgid "There are no running polls."
+msgstr "لا توجد استطلاعات جارية."
+
+msgid "There are no upcoming polls"
+msgstr "لا توجد استطلاعات قادمة"
+
+msgctxt "the_verb"
+msgid "Vote"
+msgstr "تصويت"
+
+#, python-format
+msgid "Vote for %(title)s"
+msgstr "صوت لـ %(title)s"
+
+msgid "This poll has been completed. Voting is closed."
+msgstr "تم انهاء/انجاز هذا الاستطلاع. التصويت مغلق."
+
+msgid "This is an archived poll."
+msgstr "هذا استطلاع مؤرشف."
+
+msgid "Complete without winner"
+msgstr "مُنجز بدون رابح"
+
+#, python-format
+msgid "Do you really want to complete poll \"%(title)s\" with no winning option?"
+msgstr "هل تريد حقًا إكمال الاستطلاع \"%(title)s\"بدون خيار الربح؟"
+
+msgid "Complete poll without winner"
+msgstr "استطلاع كامل بدون رابح"
+
+msgid "(No description set)"
+msgstr "(لم يتم تعيين وصف)"
+
+msgid "The Winner is"
+msgstr "الرابح هو/هي"
+
+msgid "Available options were"
+msgstr "الخيارات المتاحة كانت"
+
+msgid "There are no options for this poll yet!"
+msgstr "لا توجد خيارات لهذا الاستطلاع بعد!"
+
+msgid "Make winner and complete poll"
+msgstr "اخلق رابحا و انجز الاستطلاع"
+
+msgid "Votes"
+msgstr "تصويت"
+
+#, python-format
+msgid "Do you really want to complete the poll and select \"%(description)s\" as winner?"
+msgstr "هل تريد حقا انجاز الاستطلاع و الاختيار \"%(description)s\" as winner?"
+
+msgid "Complete poll"
+msgstr "انجز استطلاع الرأي"
+
+msgid "You created a poll"
+msgstr "اعد استطلاع رأي"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a poll"
+msgstr "أعد استطلاع رأي"
+
+msgid "There are no polls yet"
+msgstr "لا يوجد أي تعليقات بعد"
+
+#, python-format
+msgid "Poll \"%(title)s\" was edited successfully."
+msgstr "استطلاع رأي \"%(title)s\" تم تعديله بنجاخ."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be edited."
+msgstr "استطلاع رأي \"%(title)s\" لا يمكن تعديله."
+
+#, python-format
+msgid "Poll \"%(title)s\" was added successfully."
+msgstr "استطلاع رأي \"%(title)s\" تمت اضافته بنجاح."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be added."
+msgstr "استطلاع رأي \"%(title)s\" لا يمكن تعديله."
+
+msgid "You should define at least one poll option!"
+msgstr "يجب عليك تحديد خيار استطلاع رأي واحد على الأقل!"
+
+msgid "This poll is archived and cannot be edited anymore!"
+msgstr "تمت أرشفة هذا الاستطلاع ولا يمكن تعديله بعد الآن!"
+
+#, python-format
+msgid "Poll \"%(title)s\" was deleted successfully."
+msgstr "استطلاع رأي \"%(title)s\" تم حذفه بنجاخ."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be deleted."
+msgstr "استطلاع رأي \"%(title)s\" لا يمكن حذفه."
+
+msgid "Your votes were saved successfully."
+msgstr "تم حفظ تصويتك بنجاح."
+
+msgid "Your votes could not be saved."
+msgstr "لا يمكن حفظ تصويتاتك."
+
+msgid "The voting phase for this poll is over. You cannot vote for it any more."
+msgstr "انتهت مرحلة التصويت لهذا الاستطلاع. لا يمكنك التصويت بعد الآن."
+
+msgid "In this poll you must vote for exactly one item!"
+msgstr "في هذا الاستطلاع يجب أن تصوت لعنصر واحد محدد!"
+
+msgid "The complete request can only be sent via POST!"
+msgstr "لا يمكن إرسال الطلب الكامل إلا من خلال البريد!"
+
+msgid "Invalid action for this poll. The request could not be completed!"
+msgstr "إجراء غير صالح لهذا الاستطلاع. لا يمكن استكمال الطلب!"
+
+msgid "This action is not permitted for this poll at this stage!"
+msgstr "هذا الإجراء لهذا الاستطلاع غير مسموح به في هذه المرحلة !"
+
+msgid "The poll was closed successfully."
+msgstr "تم إغلاق الاستطلاع بنجاح."
+
+msgid "The poll was re-opened successfully."
+msgstr "تم إعادة فتح الاستطلاع بنجاح."
+
+msgid "The poll was archived successfully."
+msgstr "تم أرشفة الاستطلاع بنجاح."
+
+msgid "Your comment was added successfully."
+msgstr "تم إضافة تعليقك بنجاح."
+
+msgid "Your comment was deleted successfully."
+msgstr "تم حذف تعليقك بنجاح."

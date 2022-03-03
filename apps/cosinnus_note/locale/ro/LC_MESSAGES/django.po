@@ -1,0 +1,415 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-01 16:06+0100\n"
+"PO-Revision-Date: 2020-10-12 00:04+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+"X-Generator: Poedit 2.2.4\n"
+
+msgid "Notes"
+msgstr "Noate"
+
+msgctxt "the_app"
+msgid "note"
+msgstr "notă"
+
+msgid "A user commented on a news post"
+msgstr "Un utilizator a comentat o postare de știri"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post"
+msgstr "%(sender_name)s a comentat o postare de știri"
+
+msgid "A user commented on one of your news posts"
+msgstr "Un utilizator a comentat una dintre mesajele tale de știri"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post %(object_name)s"
+msgstr "%(sender_name)s a comentat postarea dvs., de știri %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d și altul a comentat postarea dvs., %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d altele a comentat postarea dvs., %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d altele a comentat postarea dvs., %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post"
+msgstr "%(sender_name)s a comentat postările tale de știri"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts"
+msgstr "%(sender_name)s a comentat una dintre mesajele tale de știri"
+
+msgid "A user commented on a news posts you commented in"
+msgstr "Un utilizator a comentat postările de știri pe care le-ați comentat"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
+msgstr "%(sender_name)s ai comentat o postare de știri %(object_name)s în care ai comentat"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d și altul a comentat postarea dvs., %(object_name)s a comentat în"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d și altele a comentat postarea dvs., %(object_name)s au comentat în"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d și altul a comentat postarea dvs., %(object_name)s ai comentat în"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in"
+msgstr "%(sender_name)s ai comentat o postare de știri în care ai comentat"
+
+msgid "A user created a news post"
+msgstr "Un utilizator a creat o nouă postare"
+
+#, python-format
+msgid "%(sender_name)s created the news post %(object_name)s"
+msgstr "%(sender_name)s a creat o postarea de știri %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d news posts"
+msgstr "%(sender_name)s a creat %(count)d postare de știri"
+
+#, python-format
+msgid "%(sender_name)s created a new news post"
+msgstr "%(sender_name)s a creat o nouă postare de știri"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s:"
+msgstr "%(sender_name)s postat în %(team_name)s:"
+
+msgid "A user created a news post in a team you are following"
+msgstr "Un utilizator a creat o nouă postare într-o echipă pe care o urmărești"
+
+#, python-format
+msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s a creat o nouă postare de știri în %(team_name)s (pe care le urmezi)"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
+msgstr "%(sender_name)s a postat în %(team_name)s: (pe care le urmezi)"
+
+msgid "A user updated a news post"
+msgstr "Un utilizator a actualizat o nouă postare"
+
+#, python-format
+msgid "%(sender_name)s updated the news post %(object_name)s"
+msgstr "%(sender_name)s a actualizat postare de știri %(object_name)s"
+
+msgid "You are following this news post"
+msgstr "Urmăriți această postare de știri"
+
+#, python-format
+msgid "%(sender_name)s updated a news post you are following"
+msgstr "%(sender_name)s a actualizat o nouă postare pe care o urmărești"
+
+#, python-format
+msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
+msgstr "O nouă postare pe care o urmărești %(sender_name)s a fost actualizat %(team_name)s:"
+
+msgid "A user commented on a news post you are following"
+msgstr "Un utilizator a comentat o postare de știri pe care o urmărești"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s"
+msgstr "%(sender_name)s a comentat postarea de știri %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d și altul a comentat postarea de știri %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d și altele au comentat postarea de știri %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d și altele au comentat postarea de știri %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on a news posts you are following"
+msgstr "%(sender_name)s a comentat o postare de știri pe care o urmărești"
+
+msgid "No news"
+msgstr "Nici o știre"
+
+msgid "Write a news post"
+msgstr "Scrie o postare de știri"
+
+msgid "News stream"
+msgstr "Flux de știri"
+
+msgid "Created By"
+msgstr "Creat de"
+
+msgid "Newest Created"
+msgstr "Cel mai nou creat"
+
+msgid "Popularity"
+msgstr "Popularitate"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Facebook Share"
+msgstr "A împărtăși pe Facebook"
+
+msgid "Note Item"
+msgstr "Element de notă"
+
+msgid "Note Items"
+msgstr "Elemente de notare"
+
+msgid "Author"
+msgstr "Autor"
+
+msgid "Creator"
+msgstr "Creator"
+
+msgid "Created"
+msgstr "Creată"
+
+msgid "Comment"
+msgstr "Comentariu"
+
+msgid "Comments"
+msgstr "Comentarii"
+
+msgid "News"
+msgstr "Știri"
+
+msgctxt "the_verb"
+msgid "Comment"
+msgstr "Comentariu"
+
+msgid "Delete"
+msgstr "Șterge"
+
+msgid "Write comment..."
+msgstr "Scrie comentariu..."
+
+msgid "Post"
+msgstr "Post"
+
+msgid "There are no public news posts"
+msgstr "Nu există postări de știri"
+
+msgid "There are no news posts yet"
+msgstr "Încă nu există postări de știri"
+
+msgid "Edit news post"
+msgstr "Editați postarea de știri"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "A existat o eroare într-unul din câmpurile pe care le-ați introdus. Corectați-o înainte de a salva!"
+
+msgid "Save changes"
+msgstr "Salvează modificările"
+
+msgid "Title (optional)"
+msgstr "Titlu (facultativ)"
+
+msgid "Title"
+msgstr "Titlu"
+
+msgctxt "label for the form text input"
+msgid "News text"
+msgstr "Text de știri"
+
+msgid "Please enter a message..."
+msgstr "Vă rugăm să introduceți un mesaj..."
+
+msgid "To post in this team you need to"
+msgstr "Pentru a posta în această echipă trebuie să"
+
+msgid "request to join"
+msgstr "cerere de aderare"
+
+msgid "Cancel"
+msgstr "Anulare"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a news post you wrote in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your post:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Salut, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s a postat un comentariu la o postare de știri în care ai scris %(team_name)s:\n"
+"\n"
+"”%(comment_text)s”\n"
+"\n"
+"\n"
+"pe postarea ta:\n"
+"\n"
+"”%(note_text)s”\n"
+"\n"
+"\n"
+"Urmați acest link pentru a vedea comentariul:\n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Urmați această legătură pentru a modifica preferințele de notificare: %(notification_settings_url)s )\n"
+"\n"
+"A ta %(site_name)s echipă. \n"
+"\n"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a news post you a commented in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the post:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Salut, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s a postat un comentariu la o postare de știri în care ați comentat în %(team_name)s:\n"
+"\n"
+"”%(comment_text)s”\n"
+"\n"
+"\n"
+"pe post:\n"
+"\n"
+"”%(note_text)s”\n"
+"\n"
+"\n"
+"Urmați această legătură pentru a vedea comentariul: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(urmați această legătură pentru a modifica preferințele de notificare: %(notification_settings_url)s )\n"
+"\n"
+"A ta %(site_name)s echipă.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in, in %(team_name)s."
+msgstr "%(sender_name)s ai comentat o postare de știri în care ai comentat în %(team_name)s."
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
+msgstr "%(sender_name)s a comentat una dintre mesajele tale de știri în %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s just posted an update in %(team_name)s:\n"
+msgstr ""
+"Salut %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s tocmai a postat o actualizare în %(team_name)s:\n"
+
+#, python-format
+msgid ""
+"%(note_text)s\n"
+"\n"
+"\n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"%(note_text)s\n"
+"\n"
+"\n"
+"\n"
+"Îl puteți găsi urmărind acest link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Urmați acest link pentru a modifica preferințele de notificare: %(notification_settings_url)s )\n"
+"\n"
+"A ta %(site_name)s Echipă."
+
+msgid "Show in my projects..."
+msgstr "Arată în proiectele mele..."
+
+msgid "Edit"
+msgstr "Editați"
+
+msgid "Delete note"
+msgstr "Ștergeți nota"
+
+msgid "View on Facebook"
+msgstr "Vedere pe Facebook"
+
+msgid "Do you really want to delete this note?"
+msgstr "Doriți cu adevărat să ștergeți această notă?"
+
+msgid "You added a post"
+msgstr "Ai adăugat o postare"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "added a post"
+msgstr "a adăugat o postare"
+
+msgid "Your news post was added successfully."
+msgstr "Postarea dvs. de știri a fost adăugată cu succes."
+
+msgid "Your news post was deleted successfully."
+msgstr "Postarea dvs. de știri a fost ștearsă cu succes."
+
+msgid "Your news post was edited successfully."
+msgstr "Postarea dvs. de știri a fost modificată cu succes."
+
+msgid "Your comment was added successfully."
+msgstr "Comentariu dvs. a fost adăugat cu succes."
+
+msgid "Your comment was deleted successfully."
+msgstr "Comentariul dvs. a fost șters cu succes."
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
+
+#~ msgid "New news post by %(sender_name)s"
+#~ msgstr "Noutăți postate de %(sender_name)s"
+
+#~ msgid "New news post by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Noutăți postate de %(sender_name)s în %(team_name)s (pe care le urmezi)"

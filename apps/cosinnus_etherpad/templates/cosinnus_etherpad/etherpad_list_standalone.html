@@ -1,0 +1,20 @@
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+<div class="row">
+    <div class="col-md-3">
+
+        {% include "cosinnus/leftnav_hierarchic_listview_standalone.html" %}
+    </div><!-- left column -->
+
+    <div class="col-md-9">
+        <div class="content-box">
+	
+	    {% for object in object_list %}
+		    {% include 'cosinnus_etherpad/single_etherpad.html' with object=object %}
+        {% empty %}
+            <!-- {% trans "No etherpads have been created yet." %} -->
+            {% include 'cosinnus/common/empty_button.html' with message="No etherpads have been created yet." %}
+	    {% endfor %}
+        </div>
+    </div><!-- right column -->
+</div><!-- row -->

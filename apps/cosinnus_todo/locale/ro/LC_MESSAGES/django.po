@@ -1,0 +1,766 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 14:56+0200\n"
+"PO-Revision-Date: 2020-10-12 00:03+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+"X-Generator: Poedit 2.2.4\n"
+
+msgid "Todos"
+msgstr "Toate"
+
+msgctxt "the_app"
+msgid "todo"
+msgstr "tot"
+
+msgid "A user created a new todo"
+msgstr "Utilizatorul a creat totul nou"
+
+#, python-format
+msgid "%(sender_name)s created the todo %(object_name)s"
+msgstr "%(sender_name)s a creat totul %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d todos"
+msgstr "%(sender_name)s a creat totul %(count)d"
+
+#, python-format
+msgid "%(sender_name)s created a new todo"
+msgstr "%(sender_name)s a creat tot nou"
+
+#, python-format
+msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Facem totul nou: \"%(object_name)s\" a fost creat in %(team_name)s."
+
+msgid "A todo was assigned to me"
+msgstr "S-a atribuit totul"
+
+#, python-format
+msgid "%(sender_name)s assigned the todo %(object_name)s to you"
+msgstr "%(sender_name)s care a atribuit totul %(object_name)s pentru tine"
+
+#, python-format
+msgid "%(sender_name)s assigned %(count)d todos to you"
+msgstr "%(sender_name)s care a atribuit %(count)d totul"
+
+#, python-format
+msgid "%(sender_name)s assigned a todo to you"
+msgstr "%(sender_name)s care a atribuit totul"
+
+msgid "A todo I created was completed"
+msgstr "Totul ce creat a fost finalizat"
+
+#, python-format
+msgid "%(sender_name)s completed the todo %(object_name)s"
+msgstr "%(sender_name)s e completat totul %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d todos"
+msgstr "%(sender_name)s e completat totul %(count)d"
+
+msgid "You created this todo"
+msgstr "Ai creat acest lucru"
+
+#, python-format
+msgid "%(sender_name)s completed your todo"
+msgstr "%(sender_name)s e completat totul"
+
+#, python-format
+msgid "%(sender_name)s completed one of your todos"
+msgstr "%(sender_name)s a completat unul dintre toți"
+
+msgid "A user commented on one of your todos"
+msgstr "Unul dintre toți utilizatori a comentat"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo %(object_name)s"
+msgstr "%(sender_name)s a comentat totul %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d altul a comentat cu privire la tot %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au comentat cu privire la totul %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au comentat cu privire la totul %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo"
+msgstr "%(sender_name)s a comentat totul"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your todos"
+msgstr "%(sender_name)s a comentat unul dintre toți"
+
+msgid "A user commented on a todo you were tagged in"
+msgstr "Un utilizator a comentat tot ce a fost etichetat"
+
+#, python-format
+msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgstr "%(sender_name)s a comentat totul %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d altul a comentat totul %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au comentat totul %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au comentat totul %(object_name)s"
+
+msgid "You were tagged in this todo"
+msgstr "Ai fost etichetat în acest lucru"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in"
+msgstr "%(sender_name)s a comentat totul ce a fost etichetat"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s a comentat totul ce a fost etichetat în %(team_name)s"
+
+msgid "A user commented on a todo you were assigned to"
+msgstr "Un utilizator a comentat tot ce ți-a fost atribuit"
+
+#, python-format
+msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
+msgstr "%(sender_name)s a comentat despre atribuirea ta %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d și altul a comentat lucrurile pe care le-ați atribuit %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d și alții au comentat lucrurile pe care le-ați atribuit %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d și alții au comentat lucrurile pe care le-ați atribuit %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos"
+msgstr "%(sender_name)s mi-a comentat unul dintre toți"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgstr "%(sender_name)s a comentat unul dintre toți în %(team_name)s"
+
+msgid "A user updated a todo you are following"
+msgstr "Un utilizator a actualizat tot ceea ce urmărești"
+
+#, python-format
+msgid "%(sender_name)s updated the todo %(object_name)s"
+msgstr "%(sender_name)s a actualizat totul %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d altele au actualizat totul %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au actualizat totul %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au actualizat totul %(object_name)s"
+
+msgid "You are following this todo"
+msgstr "Urmărești acest lucru"
+
+#, python-format
+msgid "%(sender_name)s updated a todo you are following"
+msgstr "%(sender_name)s a actualizat totul ce urmărești"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Tot ce urmărești:\"%(object_name)s\" a fost actualizat în %(team_name)s."
+
+msgid "A user reassigned a todo you are following"
+msgstr "Un utilizator a reasignat totul aceea ce urmarești"
+
+#, python-format
+msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgstr "%(sender_name)s care a atribuit totul %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s reassigned %(count)d todos"
+msgstr "%(sender_name)s care a atribuit %(count)d totul"
+
+#, python-format
+msgid "%(sender_name)s reassigned a todo you are following"
+msgstr "%(sender_name)s a reasignat tot ceea ce urmărești"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
+msgstr "Tot ce urmărești: \"%(object_name)s\" a fost realocat în %(team_name)s."
+
+msgid "A user completed a todo you are following"
+msgstr "Un utilizator a completat tot ceea ce urmați"
+
+#, python-format
+msgid "%(sender_name)s completed a todo you are following"
+msgstr "%(sender_name)s a completat tot ceea ce urmați"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Tot ce urmărești: \"%(object_name)s\" a fost completat în %(team_name)s."
+
+msgid "A user commented on a todo you are following"
+msgstr "Un utilizator a comentat un articol pe are îl urmărești"
+
+#, python-format
+msgid "%(sender_name)s commented on on a todo you are following"
+msgstr "%(sender_name)s mi-a comentat un articol pe care  îl urmărești"
+
+msgid "My Todos"
+msgstr "Toate a mele"
+
+msgid "No todos"
+msgstr "Nu toate"
+
+msgid "Open"
+msgstr "Deschis"
+
+msgid "Completed"
+msgstr "Terminat"
+
+msgid "All"
+msgstr "Toate"
+
+msgid "Created By"
+msgstr "Creat De"
+
+msgid "Assigned To"
+msgstr "Atribuit la"
+
+msgid "Priority"
+msgstr "Prioritate"
+
+msgid "Due date"
+msgstr "Data scadentă"
+
+msgid "Status"
+msgstr "Starea"
+
+msgid "Newest Created"
+msgstr "Cel nou creat"
+
+msgid "Title"
+msgstr "Titlu"
+
+msgid "Soonest Due"
+msgstr "Mai curând datorat"
+
+msgid "You are not allowed to assign this Todo entry."
+msgstr "Nu aveți voie să atribuiți această intrare."
+
+msgid "Later"
+msgstr "Târziu"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Important"
+msgstr "Important"
+
+msgid "Due by"
+msgstr "Datorat de"
+
+msgid "Completed on"
+msgstr "Completat în"
+
+msgid "Completed by"
+msgstr "Completat de"
+
+msgid "Assigned to"
+msgstr "Atribuit"
+
+msgid "Note"
+msgstr "Notă"
+
+msgid "List"
+msgstr "Listă"
+
+msgid "Todo"
+msgstr "A face"
+
+msgid "Group"
+msgstr "Grup"
+
+msgid "Creator"
+msgstr "Creator"
+
+msgid "Created"
+msgstr "Creată"
+
+msgid "Last modified"
+msgstr "Modificat ultima dată"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Comment"
+msgstr "Comentariu"
+
+msgid "Comments"
+msgstr "Comentarii"
+
+#, python-format
+msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
+msgstr "A face \"%(todo_name)s\" a fost repartizat la %(assignee_name)s"
+
+msgid "Back to"
+msgstr "Înapoi la"
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the task \"%(object_name)s\" in %(team_name)s was assigned to you by %(sender_name)s. \n"
+msgstr ""
+"Salut %(receiver_name)s,\n"
+"\n"
+" sarcina \"%(object_name)s” în %(team_name)s a fost atribuit de %(sender_name)s. \n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"\n"
+"\n"
+"Îl puteți găsi urmărind această legătură:  %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Urmați această legătură pentru a modifica preferințele de notificare: %(notification_settings_url)s )\n"
+"\n"
+"A tău %(site_name)s Echipa."
+
+#, python-format
+msgid "Task: \"%(object_name)s\" in %(team_name)s was assigned to you."
+msgstr "Sarcina: \"%(object_name)s\" în %(team_name)s  v-a fost atribuit."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a todo assigned to you in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the todo:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Salut,%(receiver_name)s!\n"
+"\n"
+"%(sender_name)s  v-a postat un comentariu despre tot ce v-a fost atribuit în %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"face totul:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Urmați această legătură pentru a vedea comentariul:\n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Urmați această legătură pentru a modifica preferințele de notificare: %(notification_settings_url)s)\n"
+"\n"
+"A ta %(site_name)s echipă.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo assigned to you in %(team_name)s."
+msgstr "%(sender_name)s mi-a comentat tot ce ți-a fost atribuit în %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a todo you were tagged in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the todo:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Salut, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s a postat un comentariu la tot ce ai fost etichetat in, %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"face tot:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Urmați această legătură pentru a vedea comentariul: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Urmați această legătură pentru a modifica preferințele de notificare: %(notification_settings_url)s )\n"
+"\n"
+"A ta %(site_name)s echipă.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in %(team_name)s."
+msgstr "%(sender_name)s a comentat tot ce ai fost etichetat în %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a todo you created in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your todo:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Salut,  %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s a postat un comentariu la tot ce ai creat %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"pentru tot:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Urmați această legătură pentru a vedea comentariul: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Urmați această legătură pentru a modifica preferințele de notificare: %(notification_settings_url)s )\n"
+"\n"
+"A tău %(site_name)s echipă.\n"
+"\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgstr "%(sender_name)s a comentat unul dintre toți în %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new task \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+msgstr ""
+"Salut %(receiver_name)s,\n"
+"\n"
+"o nouă sarcină \"%(object_name)s\" în %(team_name)s a fost creat de %(sender_name)s. \n"
+
+#, python-format
+msgid "A new task: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "O nouă sarcină: \"%(object_name)s\" a fost creat în %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the task \"%(object_name)s\" you created in %(team_name)s was completed by %(sender_name)s. \n"
+msgstr ""
+"Salut %(receiver_name)s,\n"
+"\n"
+"sarcina \"%(object_name)s\" a creat în %(team_name)s a fost completat de %(sender_name)s. \n"
+
+#, python-format
+msgid "Task completed: \"%(object_name)s\" in %(team_name)s."
+msgstr "Sarcina finalizată: \"%(object_name)s\" în %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"you were tagged in the task \"%(object_name)s\" in %(team_name)s by %(sender_name)s. \n"
+msgstr ""
+"Salut %(receiver_name)s,\n"
+"\n"
+"ai fost etichetat în sarcină \"%(object_name)s\" în %(team_name)s de %(sender_name)s. \n"
+
+#, python-format
+msgid "You were tagged in the task \"%(object_name)s\" in %(team_name)s"
+msgstr "Ai fost etichetat în sarcină \"%(object_name)s\" în %(team_name)s"
+
+msgid "Not important"
+msgstr "Nu e important"
+
+msgid "Delete todo"
+msgstr "Ștergeți totul"
+
+msgid "Do you really want to delete this todo?"
+msgstr "Ești încrezut că vrei să ștergi totul?"
+
+msgid "Not assigned"
+msgstr "Nu e alocat"
+
+msgid "Following"
+msgstr "Ca urmare"
+
+msgid "Reopen todo"
+msgstr "Redeschide totul"
+
+msgid "Close todo"
+msgstr "Închide totul"
+
+msgid "Delete"
+msgstr "Ștergeți"
+
+msgid "Edit"
+msgstr "Editați"
+
+msgid "Write comment..."
+msgstr "Scrie comentariu..."
+
+msgid "Post"
+msgstr "Post"
+
+msgid "This todo was completed:"
+msgstr "Totul a fost finalizat:"
+
+msgid "by"
+msgstr "de"
+
+msgid "TodoEntries"
+msgstr "Intrări de tot"
+
+msgid "There are no todolists yet."
+msgstr "Încă nu există liste cu de toate."
+
+msgid "New List Name"
+msgstr "Nume nou in listă"
+
+msgid "Create"
+msgstr "Crea"
+
+msgid "Create a new Todo"
+msgstr "Creați totul nou"
+
+msgid "Only the owner and assignee of a todo can finish it!"
+msgstr "Numai proprietarul și cesionarul acestei lucrări o pot termina!"
+
+msgid "Mark as finished"
+msgstr "Marcați ca terminat"
+
+msgid "Move to another Folder"
+msgstr "Treceți la alt Dosar"
+
+msgid "Enter the title for this todo"
+msgstr "Introduceți pentru acest titlu"
+
+msgid "There are no todos in this list."
+msgstr "Nu există tot în această listă."
+
+msgid "Please select or create a todo list."
+msgstr "Vă rugăm să selectați sau să creați o listă."
+
+msgid "Add Todo"
+msgstr "Adaugă totul"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "A existat o eroare într-unul din câmpurile pe are le-ați introdus. Corectați înainte de a salva!"
+
+msgid "Enter a title for the todo."
+msgstr "Introduceți pentru tot un titlu."
+
+msgid "Description"
+msgstr "Descriere"
+
+msgid "Enter a description for the todo"
+msgstr "Introduceți pentru tot o descriere"
+
+msgid "No date chosen"
+msgstr "Nici  o dată aleasă"
+
+msgid "Choose due date"
+msgstr "Alege potrivit datei"
+
+msgid "Save"
+msgstr "Salvați"
+
+msgid "Choose day"
+msgstr "Alegeți ziua"
+
+msgid "Until when should the task be completed?"
+msgstr "Până când ar trebui finalizată sarcina?"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Todo lists"
+msgstr "Face lista"
+
+msgid "Cancel"
+msgstr "Anulare"
+
+msgid "You created a todo"
+msgstr "Ai creat totul"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a todo"
+msgstr "a creat un element nou"
+
+msgid "You have no assigned tasks"
+msgstr "Nu aveți sarcini alocate"
+
+msgid "Tasks are shown only for logged in users"
+msgstr "Sarcinile sunt afișate numai pentru utilizatorii autentificați"
+
+#, python-format
+msgid "Todo \"%(title)s\" was added successfully."
+msgstr "Face ”%(title)s” a fost adăugat cu succes."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be added."
+msgstr "Face ”%(title)s” nu a fost adăugat."
+
+msgid "You were trying to add a todo to a todolist that does not exist!"
+msgstr "Încercați să adăugați totul la o listă care încă nu există!"
+
+#, python-format
+msgid "Todo \"%(title)s\" was edited successfully."
+msgstr "Face ”%(title)s” a fost editat cu succes."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be edited."
+msgstr "Face ”%(title)s” nu a fost editat."
+
+#, python-format
+msgid "Todo \"%(title)s\" was deleted successfully."
+msgstr "Face ”%(title)s” a fost șters cu succes."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be deleted."
+msgstr "Face ”%(title)s” nu a fost șters."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned successfully."
+msgstr "Face ”%(title)s” a fost repartizat cu succes."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned."
+msgstr "Face ”%(title)s” nu a fost atribuit."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned to You successfully."
+msgstr "Face ”%(title)s” a fost atribuit  cu succes."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned to You."
+msgstr "Face ”%(title)s” nu ați putut atribui."
+
+#, python-format
+msgid "Todo \"%(title)s\" was unassigned successfully."
+msgstr "Face ”%(title)s” a fost neasociat  cu succes."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be unassigned."
+msgstr "Face ”%(title)s” nu poate fi semnat ."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed successfully."
+msgstr "Face ”%(title)s” a fost completat cu succes."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed."
+msgstr "Face ”%(title)s” nu poate  fi completat."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed by You successfully."
+msgstr "Face ”%(title)s” a fost finalizată cu succes."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed by You."
+msgstr "Face ”%(title)s” nu a putut fi completată de Dvs."
+
+#, python-format
+msgid "Todo \"%(title)s\" was set to incomplete successfully."
+msgstr "Face ”%(title)s” a fost setat incomplet cu succes."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be set to incomplete."
+msgstr "Face ”%(title)s”  nu a putut fi setat incomplet."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was edited successfully."
+msgstr "Lista tuturor ”%(title)s” a fost editată cu succes."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be edited."
+msgstr "Lista tuturor ”%(title)s” nu a putut fi editată."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was added successfully."
+msgstr "Lista tuturor ”%(title)s” a fost adăugată cu succes."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be added."
+msgstr "Lista tuturor ”%(title)s” nu a putut fi adăugată."
+
+msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
+msgstr "Nu puteți șterge acest dosar, deoarece nu aveți permisiunea da a șterge unul sau ma multe elemente pe are le conține!"
+
+msgid "Your comment was added successfully."
+msgstr "Comentariul Dvs. a fost adăugat cu succes."
+
+msgid "Your comment was deleted successfully."
+msgstr "Comentariul Dvs. a fost șters cu succes."
+
+#~ msgid "New todo by %(sender_name)s"
+#~ msgstr "Totul este nou %(sender_name)s"
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"

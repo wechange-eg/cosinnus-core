@@ -1,0 +1,335 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:20+0200\n"
+"PO-Revision-Date: 2021-04-26 13:24+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.2\n"
+
+msgid "Files"
+msgstr "Αρχεία"
+
+msgctxt "the_app"
+msgid "file"
+msgstr "αρχείο"
+
+msgid "A user uploaded a new file"
+msgstr "Ένας χρήστης ανέβασε ένα νέο αρχείο"
+
+#, python-format
+msgid "%(sender_name)s uploaded the file %(object_name)s"
+msgstr "Ο/η %(sender_name)s ανέβασε το αρχείο %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s uploaded %(count)d files"
+msgstr "Ο/η %(sender_name)s ανέβασε %(count)d αρχεία"
+
+#, python-format
+msgid "%(sender_name)s created a new file"
+msgstr "Ο/η %(sender_name)s δημιούργησε ένα νέο αρχείο"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Ένα νέο αρχείο: \"%(object_name)s\" δημιουργήθηκε σε %(team_name)s."
+
+msgid "A user uploaded a new file in a team you are following"
+msgstr "Ένας χρήστης ανέβασε ένα νέο αρχείο σε μια ομάδα που ακολουθείτε"
+
+#, python-format
+msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
+msgstr "Ο/η %(sender_name)s δημιούργησε ένα νέο αρχείο σε %(team_name)s (που ακολουθείτε)"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Ένα νέο αρχείο: \"%(object_name)s\" δημιουργήθηκε σε %(team_name)s (που ακολουθείτε)."
+
+msgid "Latest Files"
+msgstr "Τελευταία Αρχεία"
+
+msgid "No files"
+msgstr "Δεν υπάρχουν αρχεία"
+
+msgid "Pictures"
+msgstr "Εικόνες"
+
+msgid "Documents"
+msgstr "Έγγραφα"
+
+msgid "Audio Files"
+msgstr "Ηχητικά Αρχεία"
+
+msgid "Videos"
+msgstr "Βίντεο"
+
+msgid "Created By"
+msgstr "Δημιουργήθηκε Από"
+
+msgid "File Type"
+msgstr "Είδος Αρχείου"
+
+msgid "File Name"
+msgstr "Όνομα Αρχείου"
+
+msgid "File Name (descending)"
+msgstr "Όνομα Αρχείου (φθίνουσα σειρά)"
+
+msgid "Newest Created"
+msgstr "Πιο Πρόσφατη Δημιουργία"
+
+msgid "Smallest Files"
+msgstr "Μικρότερα Αρχεία"
+
+msgid "Largest Files"
+msgstr "Μεγαλύτερα Αρχεία"
+
+msgid "The given URL does not seem to be valid."
+msgstr "Το URL που έχει δοθεί δεν φαίνεται να είναι έγκυρο."
+
+msgid "Must supply either a URL or File"
+msgstr "Πρέπει να δοθεί URL ή Αρχείο"
+
+msgid "Note"
+msgstr "Σημείωση"
+
+msgid "File"
+msgstr "Αρχείο"
+
+msgid "Is URL Link"
+msgstr "Είναι Σύνδεσμος URL"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Path"
+msgstr "Διαδρομή"
+
+msgid "Uploaded by"
+msgstr "Ανέβηκε από"
+
+msgid "Uploaded on"
+msgstr "Ανέβηκε στις"
+
+msgid "No files selected."
+msgstr "Δεν έχουν επιλεγεί αρχεία."
+
+msgctxt "special_folder_type"
+msgid "Attachments"
+msgstr "Επισυνάψεις"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "Υπήρξε σφάλμα σε ένα από τα πεδία που εισήλθατε. Παρακαλούμε διορθώστε το πριν από την αποθήκευση!"
+
+msgid "The URL you have entered does not seem to be valid!"
+msgstr "Το URL που έχετε εισάγει δεν φαίνεται να είναι έγκυρο!"
+
+msgid "URL Link"
+msgstr "Σύνδεσμος URL"
+
+msgid "Paste or type the link's URL here"
+msgstr "Επικολλήστε ή πληκτρολογήστε το URL του συνδέσμου εδώ"
+
+msgid "Title"
+msgstr "Τίτλος"
+
+msgid "Description"
+msgstr "Περιγραφή"
+
+msgid "Preview"
+msgstr "Προεπισκόπηση"
+
+msgid "Original filename"
+msgstr "Αρχικό όνομα αρχείου"
+
+msgid "Save"
+msgstr "Αποθήκευση"
+
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+msgid "Show detailed steps"
+msgstr "Λεπτομερής εμφάνιση βημάτων"
+
+msgid "Move your files to the Cloud"
+msgstr "Μεταφέρετε τα αρχεία σας στο Cloud"
+
+msgid "Delete"
+msgstr "Διαγραφή"
+
+msgid "Move"
+msgstr "Μεταφορά"
+
+msgid "Download"
+msgstr "Λήψη"
+
+msgid "Download this folder"
+msgstr "Λήψη αυτού του φακέλου"
+
+msgid "Add URL link"
+msgstr "Προσθέστε σύνδεσμο URL"
+
+msgid "No files have been uploaded yet."
+msgstr "Δεν έχουν ανέβει ακόμη αρχεία."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new file \"%(object_name)s\" in %(team_name)s was uploaded by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Γεια %(receiver_name)s,\n"
+"\n"
+"ένα νέο αρχείο\"%(object_name)s\" σε %(team_name)s ανέβηκε από %(sender_name)s. \n"
+"\n"
+"Μπορείτε να το βρείτε ακολουθώντας τον συγκεκριμένο σύνδεσμο: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Ακολουθείστε τον σύνδεσμο αυτό για να επεξεργαστείτε τις προτιμήσεις ειδοποίησης: %(notification_settings_url)s )\n"
+"\n"
+"Η Ομάδα %(site_name)s."
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was uploaded in %(team_name)s."
+msgstr "Ένα νέο αρχείο: \"%(object_name)s\" ανέβηκε σε %(team_name)s."
+
+msgid "Move to another Folder"
+msgstr "Μεταβείτε σε ένα άλλο Φάκελο"
+
+msgid "Link to this Image"
+msgstr "Σύνδεσμος για αυτή την Εικόνα"
+
+msgid "by"
+msgstr "από"
+
+msgid "Created"
+msgstr "Δημιουργήθηκε"
+
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+#, python-format
+msgid "Do you really want to delete file „%(title)s“?"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε το αρχείο \"%(title)s\";"
+
+msgid "Delete file"
+msgstr "Διαγραφή αρχείου"
+
+msgid "Close"
+msgstr "Κλείσιμο"
+
+msgid "To move your files to the Cloud, follow these steps:"
+msgstr "Για να μεταφέρετε τα αρχεία σας στο Cloud, ακολουθήστε αυτά τα βήματα:"
+
+msgid "Navigate to the folder you wish to move to the Cloud, or to the root folder of the Files app if you wish to move all of the files"
+msgstr "Πλοηγηθείτε στο φάκελο που επιθυμείτε για να μεταφερθείτε στο Cloud ή στον βασικό φάκελο της εφαρμογής Αρχεία εάν επιθυμείτε να μετακινήσετε όλα τα αρχεία"
+
+msgid "Root folder"
+msgstr "Βασικός φάκελος"
+
+#, python-format
+msgid "Click \"%(download_label)s\" to download the file archive"
+msgstr "Επιλέξτε \"%(download_label)s\" για να κατεβάσετε το αρχείο αρχειοθέτησης"
+
+msgid "Unzip the file archive to a local folder on your hard drive"
+msgstr "Ανοίξτε το αρχείο αρχειοθέτησης σε ένα τοπικό φάκελο στον σκληρό σας δίσκο"
+
+#, python-format
+msgid "Open the Cloud folder for \"%(group_name)s\":"
+msgstr "Ανοίξτε τον φάκελο του Cloud για \"%(group_name)s\":"
+
+msgid "Cloud app"
+msgstr "Εφαρμογή Cloud"
+
+msgid "Drag & drop the entire content of the unzipped folder from your local hard drive to the Cloud folder"
+msgstr "Συρετε και αφήστε το περιεχόμενο του φακέλου που έχει ανοιχτεί από τον τοπικό σκληρό σας δίσκο στον φάκελο του Cloud"
+
+#, python-format
+msgid "Your files will now upload to the Cloud and can be accessed by all members of \"%(group_name)s\". Your files will remain here in the Files app as well. If you are satisfied with how they look in the Cloud, you may delete them here."
+msgstr "Τα αρχεία σας θα ανεβούν τώρα στο Cloud και είναι δυνατή η πρόσβαση σε αυτά από όλα τα μέλη της \"%(group_name)s\". Τα αρχεία σας θα παραμείνουν επίσης εδώ στην εφαρμογή Αρχεία. Εάν είστε ικανοποιημένοι με τον τρόπο που εμφανίζονται στο Cloud, μπορείτε να τα διαγράψετε από εδώ."
+
+msgid "If you wish to access your files from multiple devices, you may want to consider moving them to the Cloud. The process is easy, and you can still keep your files here until you are satisfied with the Cloud."
+msgstr "Εάν επιθυμείτε να έχετε πρόσβαση στα αρχεία σας από πολλές συσκευές, θα μπορούσατε να τα μεταφέρετε στο Cloud. Η διαδικασία είναι εύκολη και ακόμη μπορείτε να διατηρήσετε τα αρχεία σας εδώ μέχρι να σας μείνετε ικανοποιημένοι με το Cloud."
+
+msgid "You uploaded a file"
+msgstr "Ανεβάσατε ένα αρχείο"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "uploaded a file"
+msgstr "ανέβασε ένα αρχείο"
+
+msgid "More"
+msgstr "Περισσότερα"
+
+msgid "Latest files"
+msgstr "Τελευταία αρχεία"
+
+msgid "There are no files  yet"
+msgstr "Δεν υπάρχουν ακόμη αρχεία"
+
+#, python-format
+msgid "Folder \"%(title)s\" was created successfully."
+msgstr "Ο φάκελος \"%(title)s\" δημιουργήθηκε με επιτυχία."
+
+msgid "File does not exist or you are not allowed to delete it."
+msgstr "Το αρχείο δεν υπάρχει ή δεν επιτρέπεται να το διαγράψετε."
+
+#, python-format
+msgid "A problem occurred during export. The following file is missing: %(filename)s."
+msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
+msgstr[0] "Προέκυψε πρόβλημα κατά την εξαγωγή. Λείπει το παρακάτω αρχείο: %(filename)s."
+msgstr[1] "Προέκυψε πρόβλημα κατά την εξαγωγή. Λείπουν τα παρακάτω αρχεία: %(filename)s."
+
+msgid "Invalid request."
+msgstr "Μη έγκυρο αίτημα."
+
+#, python-format
+msgid "File \"%(title)s\" was updated successfully."
+msgstr "Το αρχείο \"%(title)s\" ενημερώθηκε με επιτυχία."
+
+#, python-format
+msgid "File \"%(title)s\" could not be updated."
+msgstr "Δεν ήταν δυνατή η ενημέρωση του αρχείου \"%(title)s\"."
+
+msgid "Downloading failed, the target object was not a folder!"
+msgstr "Η λήψη απέτυχε, το τελικό αντικείμενο δεν ήταν φάκελος!"
+
+msgid "Canceled the download because there seem to be no files in this folder."
+msgstr "Η λήψη ακυρώθηκε καθώς φαίνεται να μην υπάρχουν αρχεία σε αυτό τον φάκελο."
+
+msgid "Internal Error: Group not Found"
+msgstr "Εσωτερικό Σφάλμα: Δεν Βρέθηκε Ομάδα"
+
+msgid "Permission for upload denied"
+msgstr "Απορρίφθηκε το αίτημα άδειας για φόρτωση"
+
+msgid "The uploaded file was invalid."
+msgstr "Το αρχείο που ανέβηκε δεν ήταν έγκυρο."
+
+#, python-format
+msgid "%(count)d File was added successfully."
+msgid_plural "%(count)d Files were added successfully."
+msgstr[0] "%(count)d Aρχείο προστέθηκε με επιτυχία."
+msgstr[1] "%(count)d Αρχεία προστέθηκαν με επιτυχία."
+
+msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
+msgstr "Το αρχείο που ανεβάσατε ήταν πολύ μεγάλο ή δεν επιτρεπόταν να ανεβεί αυτό το είδος αρχείου!"

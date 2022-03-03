@@ -1,0 +1,36 @@
+{% extends "cosinnus_event/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block page_title %}
+{% trans "Event" %} {{ object.title }}{{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+            <li class="active">{% trans "Event" %} {{ object.title }}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% if object.state == 2 %}
+        {% include "cosinnus_event/leftnav.html" with return_to="doodle" %}
+    {% else %}
+        {% include "cosinnus_event/leftnav.html" with return_to="events" %}
+    {% endif %}
+{% endblock leftnav %}
+
+{% block og_image %}{% if object.attached_images %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ object.attached_images.0.static_image_url }}{% else %}{{ block.super }}{% endif %}{% endblock og_image %}
+{% block og_title %}{% if object.title %}{{ object.title }}{% else %}{{ object.note|truncatewords:8 }}{% endif %} - {{ group.name }} - {{ block.super }}{% endblock og_title %}
+{% block og_description %}{{ object.note|truncatewords:30 }}{% endblock og_description %}
+
+{% block content %}
+
+	<!-- a box with semi transparent background -->
+	<div class="content-box large-space">
+	   
+	   {% include "cosinnus_event/single_event_detailed.html" with event=object %}
+	   
+	   {% include 'cosinnus_event/event_comments.html' with event=event full_view="True" no_indent="True" comments_expanded="True" %}
+	
+	</div><!-- content-box -->
+	    
+{% endblock content %}

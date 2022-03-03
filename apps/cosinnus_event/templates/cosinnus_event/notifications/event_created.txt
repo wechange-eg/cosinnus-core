@@ -1,0 +1,11 @@
+{% load i18n cosinnus_tags %}{% blocktrans with event_date=object.from_date|date:COSINNUS_DJANGO_DATE_FORMAT %}Hi {{ receiver_name }},
+
+a new event "{{ object_name }}", on {{ event_date }}, was announced in {{ team_name }} by {{ sender_name }}. 
+
+You can find it by following this link: {{ object_url }}
+
+
+
+(Follow this link to edit your notification preferences: {{ notification_settings_url }} )
+
+Your {{ site_name }} Team.{% endblocktrans %}

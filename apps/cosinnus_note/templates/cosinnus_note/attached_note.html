@@ -1,0 +1,19 @@
+{% for note in noted %}
+	<div class="app-main">
+	    <div class="btn btn-emphasized w100 indented" href="{{ note.get_absolute_url }}">
+            <ul class="media-list fine-space">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                    <div class="media-body no-vertical-padding ">
+                        <strong><a href="{{ note.get_absolute_url }}" target="_blank">{{ note.title }}</a></strong>
+                        <div class="group-annotation">
+                            {% include 'cosinnus/group/group_label.html' with group=note.group %}
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div><!-- btn -->
+	</div>
+{% endfor %}

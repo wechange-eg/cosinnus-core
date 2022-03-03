@@ -1,0 +1,1 @@
+{% load i18n cosinnus_tags %}{% blocktrans %}{{ sender_name }} commented on one of your todos in {{ team_name }}.{% endblocktrans %}

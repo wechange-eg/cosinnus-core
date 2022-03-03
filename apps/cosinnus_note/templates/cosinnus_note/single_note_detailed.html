@@ -1,0 +1,131 @@
+{% load i18n cosinnus_tags %}
+
+{% with note=object %}
+	<div class="{% if no_space %}fine-space{% else %}large-space{% endif %}"> <!-- note-wrapper -->
+	
+	    <div class="app-main">
+	        <div type="button" class="btn btn-emphasized w100">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <a class="pull-left" href="{{ note.creator|profile_url }}">
+	                        {% include "cosinnus/user/user_avatar_image.html" with user=note.creator %}
+						</a>
+	                    <div class="media-body media-body-normalwrap">
+	                        {% if not hide_group_name %}
+			                	<span class="annotation">
+			                	    {% if group != note.group %}
+	                                    {% include 'cosinnus/common/reflect/reflected_group_display_link.html' %}
+	                                {% else %}
+	                                    {% include 'cosinnus/group/group_label.html' with group=note.group %}
+	                                {% endif %}
+	                            </span>
+                            {% endif %}
+                            
+                            <span class="annotation">
+                                {% if may_reflect and reflectable_groups %}
+                                    {# ***********  Reflect event in projects *************** #}
+                                    {% include 'cosinnus/common/reflect/reflected_object_select_link.html' with only_link=True select_icon="fa-calendar-plus-o" unique_id=note.id %}
+                                {% endif %}
+                                {% if may_reflect and not reflectable_groups %}
+                                    {# Simplification so we don't overload the page with modals: For reflecting in lists we link to the detail page and open the modal #}
+                                    <a href="{{ note.get_absolute_url }}?select_reflect=1">
+							            <i class="fa fa-fw fa-share"></i>
+						                {% trans "Show in my projects..." %}
+					                <a>
+                                {% endif %}
+                                
+                                {% include 'cosinnus/feedback/report_button_a.html' with object=note %}
+                                
+                                {% if note.creator == user %}
+	                                <a href="{% group_url 'cosinnus:note:update' group=note.group slug=note.slug %}">
+	                                    <i class="fa fa-pencil"></i>
+	                                    {% trans "Edit" %}
+									</a>
+								{% endif %}
+								{% if note.creator == user or user|is_superuser %}
+                                    <a data-toggle="modal" data-target="#deleteNote_{{note.pk}}" href="#" title="{% trans "Delete note" %}">
+                                        <i class="fa fa-times"></i>
+                                        {% trans "Delete" %}
+									</a> &nbsp;
+		                        {% endif %}
+                            </span>
+	                        <strong><a href="{{ note.creator|profile_url }}">{{ note.creator|full_name }}</a></strong> 
+	                        <a class="light-link" target="_blank" href="{{ note.get_absolute_url }}"
+                            ><span class="moment-data-date" data-date="{{ note.created|date:'c' }}" title="{{ note.created|date:'r' }}"></span> <i class="fa fa-external-link"></i>
+							</a>
+                            {% if note.get_facebook_post_url %}
+	                            <a target="_blank" href="{{ note.get_facebook_post_url }}"
+	                            ><i class="fa fa-facebook-square"></i> 
+	                            <span>{% trans "View on Facebook" %}</span>
+								</a>
+                            {% endif %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
+	    
+	    {% if may_reflect and reflectable_groups %}
+            {# ***********  Reflect event in projects *************** #}
+            {% include 'cosinnus/common/reflect/reflected_object_select_link.html' with only_modal=True select_icon="fa-calendar-plus-o" unique_id=note.id %}
+        {% endif %}
+	    
+	    {% if user|has_write_access:note %}
+            {% captureas modal_id %}deleteNote_{{note.pk}}{% endcaptureas %}
+            {% captureas title %}{% trans "Delete note" %}{% endcaptureas %}
+            {% captureas label %}{% trans "Do you really want to delete this note?" %}{% endcaptureas %}
+            {% captureas action %}{% group_url 'cosinnus:note:delete' group=note.group slug=note.slug%}{% endcaptureas %}
+            {% include "cosinnus/modal_box.html" with id=modal_id label=label title=title form_action=action %}
+        {% endif %}
+	    
+	    <div class="indented">
+	        {% if note.title and not note.title == '---' %}
+                <p><b>{{ note.title|urlizetrunc:25|url_target_blank }}</b></p>
+            {% endif %}
+	        <div class="textfield">{{ note.text|textfield }}</div>
+	        {% if note.video %}
+	            {% include 'cosinnus/common/embed_video.html' with video_id=note.video_id %}
+	        {% endif %}
+	    </div>
+	    
+	    {% if note.attached_images %}
+	        {% include 'cosinnus/common/attached_images_gallery.html' with object=note max_images=3 %}
+        {% endif %}
+	    
+	    {% include 'cosinnus/media_tags_readonly.html' with object=note list_view="True" %}
+	    
+	    {% comment %} This is how the proper attachment should be styled 
+	    <div class="app-calendar indented">
+	        <button type="button" class="btn btn-emphasized w100">
+	            <ul class="media-list fine-space">
+	                <li class="media">
+	                    <span class="pull-left">
+	                        <i class="fa fa-calendar"></i>
+	                    </span>
+	                    <span class="pull-right square-date-icon btn-extra-emphasized">
+	                        <div>19</div>
+	                        <div>Dez</div>
+	                    </span>
+	                    <div class="media-body">
+	                                <strong><a>de:groth Call for Papers</a></strong>
+	                    </div>
+	                </li>
+	            </ul>
+	        </button><!-- btn -->
+	    </div>
+	    {% endcomment %}
+	    
+	    <div class=" indented">
+		    <div class="white-content">
+				{% include 'cosinnus/common/likefollowstar/like_button.html' with object=note %}
+				{% include 'cosinnus/common/likefollowstar/star_button.html' with object=note %}
+		        {% include 'cosinnus/common/likefollowstar/follow_button.html' with object=note %}
+		        {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=note %}
+		    </div>
+	    </div>
+	    
+	    {% include 'cosinnus_note/note_comments.html' with note=note full_view="True" comments_expanded="True" %}
+	    
+	</div> <!-- note-wrapper -->
+	
+{% endwith %}

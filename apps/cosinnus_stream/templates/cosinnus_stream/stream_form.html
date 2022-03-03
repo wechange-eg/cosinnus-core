@@ -1,0 +1,113 @@
+{% extends "cosinnus_stream/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block page_title %}
+    {% if form_view == "add" %}
+      {% trans "Create Stream" %}
+    {% elif form_view == "edit" %}
+      {% blocktrans with stream_name=stream.title %}Edit stream "{{ stream_name }}"{% endblocktrans %}
+    {% endif %}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="active"
+	    >{% if form_view == "add" %}{% trans "Create Stream" %}{% elif form_view == "edit" %}{% blocktrans with stream_name=stream.title %}Edit stream "{{ stream_name }}"{% endblocktrans %}{% endif %}
+    </li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include 'cosinnus_stream/leftnav.html' with streams=streams %}
+{% endblock leftnav %}
+
+{% block content %}
+
+{% if form.forms.obj.errors or form.forms.media_tag.errors %}
+    <div class="alert alert-danger alert-dismissable">
+        <i class="fa fa-exclamation-triangle fa-3x"></i>
+        <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+    </div>
+{% endif %}
+
+<form method="POST" action="" class="cosinnus-form form-horizontal">{% csrf_token %}
+    {{ form.forms.obj.non_field_errors }}
+    {{ form.forms.media_tag.non_field_errors }}
+    
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+    
+          
+        {% trans "Title" as title_label %}
+        {% trans "Enter a title for the stream." as title_legend %}
+        {% captureas title_html %}
+                {% if request.GET.title %}
+                    {% render_field form.forms.obj.title class+="form-control" placeholder=title_label value=request.GET.title %}
+                {% else %}
+                    {% render_field form.forms.obj.title class+="form-control" placeholder=title_label %}
+                {% endif %}
+        {% endcaptureas %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.title legend=title_legend label=title_label field_html=title_html first=True %}
+        
+		<h3>{% trans "Apply filters for the stream" %}</h3>
+            
+        {# Regular field with custom HTML #}
+		{% trans "Filter by Team?" as groupsel_label %}
+		{% captureas groupsel_html %}
+		    <div style="padding: 8px 0 0 5px;">
+			    <select id="id_group" name="group" class="w100 user-selector" data-placeholder="{% trans "Select Team" %}">
+	                <option value="" default>-------</option>
+	                {% for group in form.forms.obj.group.field.choices.queryset %}
+	                   <option {% if form.forms.obj.group.value == group.pk %}selected{% endif %} value="{{ group.pk }}">{{ group.name }}{% if group.is_foreign_portal %} ({{ group.portal.name }}){% endif %} {% if group.public %} ({% trans "Public" %}){% endif %}</option>
+	                {% endfor %}
+	            </select>
+            </div>
+		{% endcaptureas %}
+		{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.group field_html=groupsel_html label=groupsel_label %}
+		            
+            
+        
+        {% trans "Additional filters" as media_tags_label %}
+        {% trans "Filter by authors, tags or other tagged properties?" as media_tags_legend %}
+        {% include 'cosinnus/media_tags.html' with media_tags_legend=media_tags_legend media_tags_label=media_tags_label %}
+        
+        
+        {# Item types selector fields #}                          
+        {% trans "Filter by item types?" as types_label %}
+        {% captureas types_html %}
+            <div class="input-area" style="padding: 5px;">
+		        {% for model_option in stream_model_selection %}
+		            {% captureas cosinnus_css_class %}{% if model_option.app == 'todo' %}app-todos{% elif model_option.app == 'note' %}app-main{% elif model_option.app == 'file' %}app-files{% elif model_option.app == 'event' %}app-calendar{% elif model_option.app %}app-{{ model_option.app }}{% else %}app-main{% endif %}{% endcaptureas %}
+		            <span class="pull-left inline-list nowrap {{ cosinnus_css_class }}">
+				        <a class="app-background small-padding"><input id="checkbox_{{ model_option.app }}_{{ forloop.counter }}" type="checkbox" name="models" {% if model_option.checked == True %}checked="true"{% endif %} value="{{ model_option.model_name }}" /></a
+				        ><span class="app-background-light dark-color small-padding" onclick="$('#checkbox_{{ model_option.app }}_{{ forloop.counter }}').prop('checked', !($('#checkbox_{{ model_option.app }}_{{ forloop.counter }}').prop('checked')));">
+				            {{ model_option.label }}
+				        </span>
+				    </span>
+		        {% endfor %}
+            </div>
+        {% endcaptureas %}
+        {% include 'cosinnus/fields/default_field.html' with extra_html=types_html label=types_label large_field=True %}
+            
+    </div><!-- content-box -->
+            
+    <button type="submit" class="btn btn-emphasized" id="createDoodleButton">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left">
+                    <i class="fa fa-pencil"></i>
+                </span>
+                <div class="media-body">
+                    {% if form_view == "add" %}
+                      {% trans "Create" %}
+                    {% elif form_view == "edit" %}
+                      {% trans "Edit" %}
+                    {% endif %}
+                </div>
+            </li>
+        </ul>
+    </button>
+	            
+</form>
+    
+    
+{% endblock content %}

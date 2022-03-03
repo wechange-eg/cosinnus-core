@@ -1,0 +1,46 @@
+{% extends "cosinnus/widgets/base_widget.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block widget_icon %}
+    <a class="pull-left" href="#">
+        {% if widget_icon_content %}
+            {{ widget_icon_content }}
+        {% else %}
+            <i class="fa {% if widget_icon %}{{ widget_icon }}{% else %}fa-calendar{% endif %}"></i>
+        {% endif %}
+    </a>
+{% endblock widget_icon %}
+
+{% block override_widget_content %}
+    <div class="content-box">
+        {% if group %}
+            {% if SETTINGS.COSINNUS_CALENDAR_WIDGET_DISPLAY_AS_LIST %}
+            <div class="event-list calendar-dashboard w100 regular-space"></div>
+            {% else %}
+            <div class="big-calendar calendar-dashboard w100 regular-space" {% if request.user|can_create_objects_in:group and SETTINGS.COSINNUS_CALENDAR_WIDGET_ALLOW_EDIT_IN_GROUP_DASHBOARD %}data-calendar-edit-allowed="true"{% endif %}></div>
+		    {% include 'cosinnus_event/common/confirm_event_modal.html' with group=group %}
+            {% endif %}
+		{% else %}
+            <div class="small-calendar w100 regular-space"></div>
+		{% endif %}
+    </div><!-- content-box -->
+    {{ block.super }}
+{% endblock override_widget_content %}
+
+
+{% block widget_button %}
+    {% if group %}
+	    <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:event:list' group=group %}">
+	        <ul class="media-list">
+	            <li class="media">
+	                <span class="pull-right btn-extra-emphasized">
+	                    <i class="fa fa-calendar"></i>
+	                </span>
+	                <div class="media-body">
+	                    {% if link_label %}{{ link_label }}{% else %}{% trans "Show all" %}...{% endif %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button><!-- btn -->
+    {% endif %}
+{% endblock widget_button %}

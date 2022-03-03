@@ -1,0 +1,7 @@
+{% load cosinnus_tags %}
+
+{% for item in polls %}
+	{% captureas item_icon %}{% if item.state == 1 %}fa-question-circle{% else %}fa-bar-chart{% endif %}{% endcaptureas %}
+	
+	{% include 'cosinnus/v2/dashboard/timeline_attached_item.html' with text=item.title subtext=item.creator|full_name icon=item_icon url=item.get_absolute_url %}
+{% endfor %}

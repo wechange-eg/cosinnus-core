@@ -1,0 +1,1377 @@
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-24 11:06+0100\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+msgid "Restart BBB rooms"
+msgstr "أعد تشغيل غرف BBB"
+
+msgid "Events"
+msgstr "مناسبات"
+
+msgctxt "the_app"
+msgid "event"
+msgstr "مناسبة"
+
+msgid "A user created a new event"
+msgstr "مستخدم قام بإنشاء مناسبة جديد"
+
+#, python-format
+msgid "%(sender_name)s created the event %(object_name)s"
+msgstr "%(sender_name)s تم انشاء المناسبة %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d events"
+msgstr "%(sender_name)s أنشئ %(count)d مناسبات"
+
+#, python-format
+msgid "%(sender_name)s created a new event"
+msgstr "%(sender_name)s تم انشاء مناسبة جديدة"
+
+#, python-format
+msgid "A new event: \"%(object_name)s\" was announced in %(team_name)s."
+msgstr "مناسبة جديدة: \"%(object_name)s\" تم الإعلان عنها في %(team_name)s."
+
+msgid "A user created a new event poll"
+msgstr "قام مستخدم بإنشاء استطلاع للمناسبة"
+
+#, python-format
+msgid "%(sender_name)s created the event poll %(object_name)s"
+msgstr "%(sender_name)s تم انشاء استطلاع للمناسبة %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d event polls"
+msgstr "%(sender_name)s تم انشاء %(count)d استطلاع للمناسبة"
+
+#, python-format
+msgid "%(sender_name)s created a new event poll"
+msgstr "%(sender_name)s تم انشاء استطلاع رأي جديد"
+
+#, python-format
+msgid "A new event poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "استطلاع رأي جديد: \"%(object_name)s\" تم انشائه في %(team_name)s."
+
+msgid "A user commented on one of your events"
+msgstr "علق مستخدم على أحد المناسبات الخاصة بك"
+
+#, python-format
+msgid "%(sender_name)s commented on your event %(object_name)s"
+msgstr "%(sender_name)s تم انشاء المناسبة %(object_name)s"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your event %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your event %(object_name)s"
+msgstr[0] ""
+"% (sender_name)s و% (count_minus_one)d آخرون علقوا على الحدث الخاص بك% (object_name)s\n"
+"\n"
+"\n"
+"% (sender_name)s و% (count_minus_one)d آخرون علقوا على الحدث الخاص بك% (object_name)s"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#, python-format
+msgid "%(sender_name)s commented on your event"
+msgstr "%(sender_name)sتم التعليق على المناسبة الخاص بك"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your events"
+msgstr "%(sender_name)s تم التعليق على أحد المناسبات الخاصة بك"
+
+msgid "A user commented on a event you were tagged in"
+msgstr "علق أحد المستخدمين على مناسبة أشير اليك بها"
+
+#, python-format
+msgid "%(sender_name)s commented on the event %(object_name)s"
+msgstr "%(sender_name)s تم التعليق على المناسبة %(object_name)s"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the event %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the event %(object_name)s"
+msgstr[0] ""
+"% (sender_name)s و% (count_minus_one)d آخر علق على الحدث% (object_name)s\n"
+"\n"
+"% (sender_name)s و% (count_minus_one)d آخرون علقوا على الحدث% (object_name)s"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+msgid "You were tagged in this event"
+msgstr "تم الإشارة إليك في هذه المناسبة"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you were tagged in"
+msgstr "تم التعليق على مناسبة أشير إليك بها%(sender_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you were tagged in in %(team_name)s"
+msgstr "%(sender_name)sتم التعليق على مناسبة اشير اليك به في%(team_name)s"
+
+msgid "A user commented on an event you voted in"
+msgstr "علق مستخدم على مناسبة قمت بالتصويت عليها"
+
+msgid "You voted on this event"
+msgstr "نم التصويت على المناسبة"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you voted in"
+msgstr "%(sender_name)sم التعليق على مناسبة قمت بالتصويت عليها"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you voted in in %(team_name)s"
+msgstr "%(sender_name)sتم التعليق على مناسبة قمت بالتصويت عليها في %(team_name)s"
+
+msgid "A user commented on an event you are attending"
+msgstr "علق مستخدم على مناسبة ستحضرها"
+
+msgid "You are attending this event"
+msgstr "أنت ستحضر هذه المناسبة"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending"
+msgstr "%(sender_name)s تم التعليق على مناسبة ستحضرها"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending in %(team_name)s"
+msgstr "%(sender_name)s تم التعليق على مناسبة ستحضرها في %(team_name)s"
+
+msgid "A user created a new event in a team you are following"
+msgstr "أنشأ مستخدم مناسبة جديدًة في فريق أنت تتابعه"
+
+#, python-format
+msgid "%(sender_name)s created a new event in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s تم انشاء مناسبة %(team_name)s ( تتبعها)"
+
+#, python-format
+msgid "A new event: \"%(object_name)s\" was announced in %(team_name)s (which you follow)."
+msgstr "مناسبة جديدة: تم الإعلان عن \"%(object_name)s\" في%(team_name)s (التي تتابعها)."
+
+msgid "A user created a new event poll in a team you are following"
+msgstr "أنشأ مستخدم استطلاعًا لمناسبة جديدة في فريق تتابعه"
+
+#, python-format
+msgid "%(sender_name)s created a new event pollin %(team_name)s (which you follow)"
+msgstr "قام%(sender_name)s بإنشاء مناسبة جديدة في استطلاع%(team_name)s ( تتابعه)"
+
+#, python-format
+msgid "A new event poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "تم إنشاء استطلاع مناسبة جديدة: \"%(object_name)s\" في%(team_name)s  ( تتابعه)."
+
+msgid "A user commented on an event you are following"
+msgstr "علق مستخدم على مناسبة أنت تتابعها"
+
+msgid "You are following this event"
+msgstr "أنت تتابع هذه المناسبة"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are following"
+msgstr "%(sender_name)s علق على مناسبة تتابعها"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are following in %(team_name)s"
+msgstr "%(sender_name)s علق على مناسبة تتابعها في%(team_name)s"
+
+msgid "A user updated an event"
+msgstr "قام مستخدم بتحديث المناسبة"
+
+#, python-format
+msgid "%(sender_name)s updated the event %(object_name)s"
+msgstr "قام%(sender_name)s بتحديث المناسبة%(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s updated an event you are following"
+msgstr "قام%(sender_name)s بتحديث مناسبة تتابعها"
+
+#, python-format
+msgid "The event \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "تم تحديث المناسبة \"%(object_name)s\" في%(team_name)s."
+
+msgid "A user updated an event you are attending"
+msgstr "قام مستخدم بتحديث مناسبة ستحضرها"
+
+#, python-format
+msgid "%(sender_name)s updated an event you are attending"
+msgstr "قام%(sender_name)s  بتحديث مناسبة ستحضرها"
+
+msgid "A user updated an event poll"
+msgstr "قام مستخدم بتحديث مناسبة استطلاع"
+
+#, python-format
+msgid "%(sender_name)s changed the event poll %(object_name)s"
+msgstr "قام%(sender_name)s بتغيير مناسبة الاستطلاع%(object_name)s"
+
+msgid "You are following this event poll"
+msgstr "أنت تتابع مناسبة هذا الاستطلاع"
+
+#, python-format
+msgid "%(sender_name)s updated an event poll you are following"
+msgstr "قام%(sender_name)s بتحديث مناسبة استطلاع تتابعها"
+
+#, python-format
+msgid "The event poll \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "تم تحديث مناسبة الاستطلاع \"%(object_name)s\" في %(team_name)s."
+
+msgid "A user voted in an event poll"
+msgstr "صوت مستخدم في مناسبة الاستطلاع"
+
+#, python-format
+msgid "%(sender_name)s voted in the event poll %(object_name)s"
+msgstr "%(sender_name)s تم التصويت في مناسبة الاستطلاع %(object_name)s"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other voted in the event poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others voted in the event poll %(object_name)s"
+msgstr[0] ""
+"% (sender_name)s و% (count_minus_one)d آخر صوت في استطلاع الحدث% (object_name)s\n"
+"% (sender_name)s و% (count_minus_one)d آخرون صوتوا في استطلاع الحدث% (object_name)s"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#, python-format
+msgid "%(sender_name)s voted in an event poll you are following"
+msgstr "%(sender_name)sتم التصويت على حدث الاستطلاع الذي انت تتابعه"
+
+#, python-format
+msgid "%(sender_name)s voted in the event poll \"%(object_name)s\" in %(team_name)s."
+msgstr "%(sender_name)s تم التصويت على الاستطلاع \"%(object_name)s\"في %(team_name)s."
+
+msgid "Upcoming Events"
+msgstr "المناسبات القادمة"
+
+msgid "No upcoming events"
+msgstr "لا يوجد أي مناسبات قادمة"
+
+msgid "Created By"
+msgstr "تم الانشاء من قبل"
+
+msgid "Soonest Upcoming"
+msgstr "قريبا جدا"
+
+msgid "Newest Created"
+msgstr "حديث الانشاء"
+
+msgid "Title"
+msgstr "عنوان"
+
+msgid "No video conference"
+msgstr ""
+
+msgid "BBB-Meeting"
+msgstr ""
+
+msgid "Fairmeeting"
+msgstr ""
+
+msgid "Presenters"
+msgstr "المقدمون"
+
+msgid "Scheduled"
+msgstr "مجدول"
+
+msgid "Voting open"
+msgstr "التصويت مفتوح"
+
+#, fuzzy
+msgid "Canceled"
+msgstr "تم الغاء"
+
+msgid "Archived Event Poll"
+msgstr "استطلاع مؤرشف"
+
+msgid "Start"
+msgstr "بدء"
+
+msgid "End"
+msgstr "نهاية"
+
+msgid "State"
+msgstr "حالة"
+
+msgid "Is hidden proxy"
+msgstr "هو وكيل مخفي"
+
+msgid "Note"
+msgstr "ملاحظة"
+
+msgid "Event date"
+msgstr "تاريخ مناسبة"
+
+msgid "Type of video conference available for the event"
+msgstr ""
+
+msgid "Location"
+msgstr "موقع/ مكان"
+
+msgid "Latitude"
+msgstr "خط العرض"
+
+msgid "Longitude"
+msgstr "خط الطول"
+
+msgid "Street"
+msgstr "شارع"
+
+msgid "ZIP code"
+msgstr "الرمز البريدي"
+
+msgid "City"
+msgstr "مدينة"
+
+msgid "Is public (on website)"
+msgstr "عام (على الموقع)"
+
+msgid "Image"
+msgstr "صورة"
+
+msgid "URL"
+msgstr "رابط"
+
+#, fuzzy
+msgid "Original Event Poll"
+msgstr "مناسبة استطلاع اصلية"
+
+msgid "Event"
+msgstr "مناسبة"
+
+#, fuzzy, python-format
+msgid "%(event)s (hidden proxy)"
+msgstr "%(event)s (تمت أرشفة)"
+
+#, python-format
+msgid "%(event)s (%(date)s - %(end)s)"
+msgstr "%(event)s (%(date)s - %(end)s)"
+
+#, python-format
+msgid "%(event)s (%(from)s - %(to)s)"
+msgstr "%(event)s (%(from)s - %(to)s)"
+
+#, python-format
+msgid "%(event)s (canceled)"
+msgstr "%(event)s (تم الغاء)"
+
+#, python-format
+msgid "%(event)s (pending)"
+msgstr "%(event)s (معلقة)"
+
+#, python-format
+msgid "%(event)s (archived)"
+msgstr "%(event)s (تمت أرشفة)"
+
+#, fuzzy, python-format
+msgid "%(event)s (state unknown)"
+msgstr "%(event)s (معلقة)"
+
+#, fuzzy
+msgid "Now"
+msgstr "لا"
+
+msgctxt "the subject"
+msgid "Votes"
+msgstr "تصويتات"
+
+msgid "Suggestion"
+msgstr "اقتراح"
+
+msgid "Suggestions"
+msgstr "اقتراحات"
+
+msgid "Yes"
+msgstr "نعم"
+
+msgid "Maybe"
+msgstr "ربما"
+
+msgid "No"
+msgstr "لا"
+
+msgid "Voter"
+msgstr "مُصوت"
+
+msgid "Vote"
+msgstr "صوت"
+
+msgctxt "the subject"
+msgid "Vote"
+msgstr "تصويت"
+
+msgid "Creator"
+msgstr "المنشئ"
+
+msgid "Created"
+msgstr "المُنشئ"
+
+msgid "Last modified"
+msgstr "اخر تعديل"
+
+msgid "Text"
+msgstr "نص"
+
+msgid "Comment"
+msgstr "تعليق"
+
+msgid "Comments"
+msgstr "تعليقات"
+
+msgid "Lobby Check-in Event"
+msgstr "حدث تسجيل الوصول في Lobby"
+
+msgid "Stage Stream"
+msgstr "منصة العرض"
+
+msgid "Workshop"
+msgstr "ورشة عمل"
+
+msgid "Discussion"
+msgstr "نقاش"
+
+msgid "Coffee Table"
+msgstr "طاولة قهوة"
+
+msgid "Room"
+msgstr "غرفة"
+
+#, fuzzy
+msgid "Conference Event Type"
+msgstr "انشاء مناسبة"
+
+msgid "Is a Break"
+msgstr "استراحة"
+
+#, fuzzy
+#| msgid "Enter a title for the new event."
+msgid "Event is visible on the conference microsite"
+msgstr "ادخل عنوانا لمناسبة جديدة."
+
+msgid "Event's description is visible on the conference microsite"
+msgstr ""
+
+msgid "Maximum Event Participants"
+msgstr "أقصى عدد من المشاركين في الحدث"
+
+msgid "Embed code (HTML)"
+msgstr "كود التضمين (HTML)"
+
+msgid "Presentation file"
+msgstr "ملف العرض التقديمي"
+
+#, fuzzy
+msgid "Show chat"
+msgstr "عرض الكل"
+
+#, fuzzy
+msgid "Enable Streaming"
+msgstr "منصة العرض"
+
+msgid "Stream URL"
+msgstr ""
+
+msgid "The URL of your streaming provider to receive the incoming stream"
+msgstr ""
+
+#, fuzzy
+msgid "Stream Key"
+msgstr "شارع"
+
+msgid "The key for this specific stream session you created at your streaming provider"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Event"
+msgstr "انشاء مناسبة"
+
+#, fuzzy
+msgid "Conference Events"
+msgstr "انشاء مناسبة"
+
+#, fuzzy, python-format
+msgid "%(event)s %(type)s"
+msgstr "%(event)s (معلقة)"
+
+msgid "Create Event"
+msgstr "انشاء مناسبة"
+
+msgid "Would you like to create an event"
+msgstr "هل تود انشاء مناسبة"
+
+msgid "on"
+msgstr "في"
+
+msgid "from"
+msgstr "من"
+
+msgid "until"
+msgstr "لـ"
+
+msgid "Cancel"
+msgstr "الغاء"
+
+msgid "OK"
+msgstr "نعم"
+
+msgctxt "time"
+msgid "all day"
+msgstr "كل يوم"
+
+msgctxt "time"
+msgid "at"
+msgstr "على"
+
+msgctxt "time"
+msgid "o'clock"
+msgstr "الساعة"
+
+msgctxt "time"
+msgid "from"
+msgstr "من"
+
+msgctxt "time"
+msgid "until"
+msgstr "لـ"
+
+#, fuzzy, python-format
+msgid "Add %(event_type_verbose)s in Room %(room_name)s"
+msgstr "أضف% (event_type_verbose)s في الغرفة %(room_name)s"
+
+#, fuzzy, python-format
+msgid "Edit %(event_type_verbose)s \"%(event_title)s\" in Room %(room_name)s"
+msgstr "تعديل% (event_type_verbose)s \"% (event_title)s\" في الغرفة% (room_name)s"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "حدث خطأ في أحد الحقول التي أدخلتها. يرجى تصحيحها قبل الحفظ!"
+
+#, fuzzy
+msgid "Enter a title for the conference event."
+msgstr "ادخل عنوانا لمناسبة جديدة."
+
+#, fuzzy
+msgid "Event is a break"
+msgstr "تاريخ مناسبة"
+
+msgid "Check this to create an empty break event that shows up in the agenda and timeline"
+msgstr "حدد هذا لإنشاء حدث فاصل فارغ يظهر في جدول الأعمال والمخطط الزمني"
+
+msgid "Description and Infos"
+msgstr "وصف و معلومات"
+
+msgid "Description"
+msgstr "وصف"
+
+msgid "Enter a description for the event"
+msgstr "ادخل وصفا لهذه المناسبة"
+
+msgid "Show this event on microsite"
+msgstr ""
+
+msgid "Uncheck this to hide the event on microsite"
+msgstr ""
+
+msgid "Show the event's description on microsite"
+msgstr ""
+
+msgid "Uncheck this to disable platform-wide viewing of the event's description"
+msgstr ""
+
+msgid "Uncheck this to disable public viewing of the event's description"
+msgstr ""
+
+msgid "Example:"
+msgstr ""
+
+#, fuzzy
+msgid "Stream URL for the Event"
+msgstr "رابط خارجي للمناسبة"
+
+msgid "Custom embed code (HTML)"
+msgstr "كود التضمين المخصص (HTML)"
+
+#, fuzzy
+msgid "How many participants can join the video call before it is full."
+msgstr "كم عدد المشاركين الذين يمكنهم الانضمام إلى طاولة القهوة قبل أن تمتلئ"
+
+msgid "Note that changing this setting will have no effect while an event is running."
+msgstr ""
+
+#, fuzzy
+msgid "BBB video conference options"
+msgstr "انشاء مناسبة"
+
+msgid "Upload a preview image for the Conference Event"
+msgstr "قم بتحميل صورة معاينة لحدث المؤتمر"
+
+msgid "Will be shown on the event card in the conference room."
+msgstr ""
+
+msgid "The presenters will be shown in order in the event and will receive Moderator permissions for the BBB-Room"
+msgstr "سيتم عرض مقدمي العروض بالترتيب في الحدث وسيحصلون على أذونات المنسق لغرفة BBB"
+
+msgid "The presentation file (e.g. PDF) will be pre-uploaded to the BBB room."
+msgstr "سيتم تحميل ملف العرض التقديمي (مثل PDF) مسبقًا إلى غرفة BBB."
+
+msgid "Note: If a slide is subsequently added to an existing event, it does not automatically appear in the event if this event was recently attended and is therefore active. This requires an active ending of the event or a 5-minute idle time without participants until the event is automatically ended. "
+msgstr ""
+
+msgid "You can actively end an existing event room by clicking on \"End Meeting\" in the top right-hand corner of the room in the \"Three-Dot Menu\"."
+msgstr ""
+
+#, fuzzy
+msgid "Show room chat in the event"
+msgstr "أنت ستحضر هذه المناسبة"
+
+msgid "Check this to show rocket chat in the sidebar."
+msgstr ""
+
+#, fuzzy
+msgid "Stream this event"
+msgstr "رابط خارجي للمناسبة"
+
+msgid "Please note: Streaming is only available for premium conferences. If you would like to use streaming, please request it explicitly when booking. Otherwise, these settings have no function."
+msgstr ""
+
+msgid "You can set up the BBB event to be streamed to a streaming provider (e.g. YouTube)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Once set up and activated, a streaming-bot will enter the event and stream all video and audio to the selected stream endpoint.\n"
+"The bot will enter and start streaming %(start_minutes)s minutes before the event start time and stop streaming and leave %(end_minutes)s minutes after the event end time.\n"
+"You can adjust the meeting times on-the-fly to allow for longer streaming if the event runs longer than expected."
+msgstr ""
+
+msgid "If you are using the maximum participant limit, please allow for the streaming bot's additional participant spot."
+msgstr ""
+
+msgid "Enable Streaming this BBB meeting"
+msgstr ""
+
+msgid "Create"
+msgstr "انشاء"
+
+msgid "Save"
+msgstr "حفظ"
+
+#, fuzzy
+msgid "Create and create another"
+msgstr "انشاء مناسبة"
+
+#, fuzzy
+msgid "Save and create another"
+msgstr "انشاء مناسبة"
+
+msgid "Add unscheduled event"
+msgstr "أضف مناسبة غير مجدولة"
+
+msgid "Edit"
+msgstr "تعديل"
+
+msgid "Event Polls"
+msgstr "مناسبة الاستطلاعات"
+
+msgid "Enter a title for the new event to be scheduled."
+msgstr "أدخل عنوانًا للمناسبة الجديدة المراد جدولتها."
+
+msgid "Dates"
+msgstr "تورايخ"
+
+msgid "Please select the available days in the calendar."
+msgstr "يرجى تحديد الأيام المتاحة في التقويم."
+
+msgid "You can select the same day more than once."
+msgstr "يمكنك تحديد نفس اليوم أكثر من مرة."
+
+msgid "Time: e.g. 10 or 10:30."
+msgstr "الوقت: على سبيل المثال 10 أو 10:30."
+
+msgid "Time"
+msgstr "وقت"
+
+msgid "Note: You cannot edit the dates for this event poll because someone has already cast their vote!"
+msgstr "ملاحظة: لا يمكنك تعديل تواريخ مناسبة الاستطلاع هذه لأن شخصًا ما قد أدلى بصوته بالفعل!"
+
+msgid "Example: http://mywebsite.com"
+msgstr "مثال: http://mywebsite.com"
+
+msgid "External Link for the event"
+msgstr "رابط خارجي للمناسبة"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "There are no open event polls."
+msgstr "لا توجد مناسبة استطلاعات مفتوحة."
+
+msgid "Planned Events"
+msgstr "المناسبات المخطط لها"
+
+msgid "Past Events"
+msgstr "المناسبات السابقة"
+
+msgid "Archived Event Polls"
+msgstr "مناسبة استطلاعات مؤرشفة"
+
+msgid "There are no archived event polls."
+msgstr "لا يوجد مناسبة استطلاعات مؤرشفة."
+
+#, python-format
+msgid "Vote for %(title)s"
+msgstr "صوت لـ %(title)s"
+
+#, python-format
+msgid "Archived: %(title)s"
+msgstr "مؤرشف: %(title)s"
+
+msgid "This event has already been scheduled. Voting is closed."
+msgstr "تم جدولة هذه المناسبة.التصويت مغلق."
+
+msgid "This event has been canceled. Voting is closed."
+msgstr "تم الغاء هذه المناسبة.التصويت مغلق."
+
+msgid "Nobody has voted for this event poll yet."
+msgstr "لا احد قام بالتصويت على هذا الاستطلاع بعد."
+
+msgid "Create an event from one of the suggestions"
+msgstr "أنشئ مناسبة من أحد الاقتراحات"
+
+#, python-format
+msgid "Set the date to %(suggestion)s."
+msgstr "اضبط التاريخ على%(suggestion)s."
+
+msgid "When do you have time?"
+msgstr "متى لديك الوقت؟"
+
+msgid "There are no date suggestions for this event poll yet!"
+msgstr "لا يوجد أي تواريخ مقترحة لمناسبة الاستطلاع حتى الآن!"
+
+#, python-format
+msgid "Do you really want to delete unscheduled event „%(title)s“?"
+msgstr "هل تريد حقًا حذف مناسبة غير مجدولة„%(title)s“?"
+
+msgid "Delete unscheduled event"
+msgstr "حذف مناسبة غير مجدولة"
+
+msgid "You will now receive notifications for comments or when this event poll is changed and whenever somebody casts their vote."
+msgstr "ستتلقى الآن إشعارات للتعليقات أو عندما يتم تغيير مناسبة الاستطلاع هذا وعندما يدلي شخص ما بصوته."
+
+msgid "Write comment..."
+msgstr "كتابة تعليق..."
+
+msgid "Post"
+msgstr "نشر"
+
+msgid "Add event"
+msgstr "إضافة مناسبة"
+
+#, python-format
+msgid ""
+"\n"
+"                            Note: After this event will be posted, each user of %(forum_name)s may be able to see it.<br>\n"
+"                            If you do not want this, please, use another group or project of your choice.\n"
+"                            "
+msgstr ""
+
+msgid "Enter a title for the new event."
+msgstr "ادخل عنوانا لمناسبة جديدة."
+
+#, fuzzy
+msgid "Include a video conference"
+msgstr "انشاء مناسبة"
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
+
+msgid "The first uploaded image will be displayed as a wallpaper."
+msgstr "سيتم عرض أول صورة تم تحميلها كخلفية."
+
+msgid "If you set this, your event will be shown on the map! (if permitted by its visibility settings)"
+msgstr "إذا قمت بتعيين هذا ، سيتم عرض المناسبة الخاصة بك على الخريطة! (إذا سمحت بذلك إعدادات الرؤية الخاصة به)"
+
+msgid "Calendar"
+msgstr "التقويم"
+
+msgid "Copy this iCal-link into your calendar application to import current events:"
+msgstr "انسخ رابط iCal هذا في تطبيق التقويم الخاص بك لادخال المناسبات الحالية:"
+
+msgid "Also include all events from projects within this group in feed"
+msgstr "قم أيضًا بتضمين جميع المناسبات من المشاريع داخل هذه المجموعة في الخلاصة"
+
+#, fuzzy
+msgid "iCal Feed"
+msgstr "خلاصة iCal"
+
+msgid "Enter the title for a new event or select a day in the Calendar."
+msgstr "أدخل عنوان مناسبة جديد أو حدد يومًا في التقويم."
+
+msgid "Export event feed"
+msgstr "تقديم مناسبة موجزة"
+
+#, fuzzy
+msgid "Create Conference Event"
+msgstr "انشاء مناسبة"
+
+msgid "Conference events can be created directly from the rooms themselves of the conference interface or in a central place here"
+msgstr "يمكن إنشاء أحداث المؤتمر مباشرة من الغرف نفسها في واجهة المؤتمر أو في مكان مركزي هنا"
+
+msgid "Conference Room Management"
+msgstr "إدارة غرفة الاجتماعات"
+
+#, fuzzy
+msgid "There are no conference events."
+msgstr "لا توجد مناسبة استطلاعات مفتوحة."
+
+msgid "There are no current or future events."
+msgstr "لا توجد مناسبات حالية أو مستقبلية."
+
+msgid "There are no past events."
+msgstr "لا توجد أي مناسبات سابقة."
+
+msgid "There are no upcoming events"
+msgstr "لا توجد أي مناسبات قادمة"
+
+msgid "Back to Events"
+msgstr "العودة إلى المناسبات"
+
+msgid "Return to Event Polls"
+msgstr "العودة إلى مناسبة استطلاع"
+
+msgid "Return to Archived Event Polls"
+msgstr "العودة إلى مناسبة استطلاع مؤرشفة"
+
+msgid "List"
+msgstr "قائمة"
+
+msgid "by"
+msgstr "من قبل"
+
+msgid "View"
+msgstr "عرض"
+
+msgid "Created Event"
+msgstr "تم انشاء مناسبة"
+
+#, python-format
+msgid "Do you really want to delete event „%(title)s“?"
+msgstr "هل تريد حقا حذف مناسبة„%(title)s“?"
+
+msgid "Delete event"
+msgstr "حذف المناسبة"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you are attending in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"مرحبا, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s نشر تعليقًا على حدث ستحضره %(team_name)s:\n"
+"\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"في الحدث:\n"
+"\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"اتبع الرابط التالي لمشاهدة التعليق: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(اتبع الرابط التالي لتعديل اشعاراتك المفضلة: %(notification_settings_url)s )\n"
+"\n"
+"فريقك %(site_name)s \n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending in %(team_name)s."
+msgstr "%(sender_name)s علق على مناسبة ستحضرها في%(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new event \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"مرحبا %(receiver_name)s,\n"
+"\n"
+"مناسبة جديدة \"%(object_name)s\" في %(team_name)s تم انشائها بواسطة %(sender_name)s. \n"
+"\n"
+"يمكنك العثور عليها باتباع هذا الرابط : %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(اتبع الرابط التالي لتعديل اشعاراتك المفضلة: %(notification_settings_url)s )\n"
+"\n"
+"فريقك %(site_name)s ."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you created in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"مرحبا, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s نشر تعليقًا على مناسبة أنشأتها في %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"في المناسبة الخاصة بك:\n"
+"\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"اتبع الرابط التالي لمشاهدة التعليق: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(اتبع الرابط التالي لتعديل اشعاراتك المفضلة: %(notification_settings_url)s )\n"
+"\n"
+"فريقك %(site_name)s \n"
+"\n"
+"\n"
+"\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your events in %(team_name)s."
+msgstr "%(sender_name)s علق على أحد المناسبات الخاصة بك في%(team_name)s."
+
+#, fuzzy, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new event \"%(object_name)s\", on %(event_date)s, was announced in %(team_name)s by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"مرحبًا% (receiver_name)s ،\n"
+"\n"
+"تم الإعلان عن حدث جديد \"% (object_name)s\" ، في% (event_date)s ، في% (team_name)s بواسطة% (sender_name)s.\n"
+"\n"
+"يمكنك العثور عليه باتباع هذا الرابط:% (object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(اتبع هذا الرابط لتعديل تفضيلات الإعلام:% (notifications_settings_url)s)\n"
+"\n"
+"فريق% (site_name)s الخاص بك."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you were tagged in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"مرحبا, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)sقام بنشر تعليق على مناسبة قد اشير إليك بها في %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"في المناسبة:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"اتبع الرابط التالي لمشاهدة التعليق: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(اتبع الرابط التالي لتعديل اشعاراتك المفضلة: %(notification_settings_url)s )\n"
+"\n"
+"فريقك %(site_name)s \n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a event you were tagged in %(team_name)s."
+msgstr "علق%(sender_name)s  على مناسبة اشير إليك بها في%(team_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event poll you voted in in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event poll:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"مرحبا, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)sنشر تعليقًا على مناسبة استطلاع قمت بالتصويت فيها %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"في مناسبة الاستطلاع:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"اتبع الرابط التالي لمشاهدة التعليق: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(اتبع الرابط التالي لتعديل اشعاراتك المفضلة: %(notification_settings_url)s )\n"
+"\n"
+"فريقك%(site_name)s \n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on an event poll you voted in in %(team_name)s."
+msgstr "%(sender_name)sعلق على مناسبة استطلاع قمت بالتصويت فيه في%(team_name)s."
+
+msgid "Delete Event"
+msgstr "حذف مناسبة"
+
+msgid "(Canceled!)"
+msgstr "(تم إلغاء!)"
+
+msgid "This is an archived event poll."
+msgstr "هذه مناسبة استطلاع مؤرشفة."
+
+msgid "The event that was created after the poll can be viewed here:"
+msgstr "المناسبة التي قد أُنشئت بعد الاستطلاع يمكن مشاهدتها هنا:"
+
+msgid "(No description set)"
+msgstr "(لم يتم تعيين وصف)"
+
+msgctxt "someone else is going"
+msgid "Going"
+msgstr "سيذهب"
+
+msgctxt "someone else is maybe going"
+msgid "Maybe going"
+msgstr "ربما سيذهب"
+
+msgctxt "someone else can't go"
+msgid "Can't go"
+msgstr "لا استطيع الذهاب"
+
+msgctxt "one or many people are going"
+msgid "Going"
+msgid_plural "Going"
+msgstr[0] "ذهاب"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+msgctxt "one or many people are maybe going"
+msgid "Maybe going"
+msgid_plural "Maybe going"
+msgstr[0] ""
+"ربما سأذهب\n"
+"\n"
+"ربما سنذهب"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+msgctxt "one or many people are not going"
+msgid "Can't go"
+msgid_plural "Can't go"
+msgstr[0] ""
+"لن أذهب\n"
+"\n"
+"لن نذهب"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+msgid "Going"
+msgstr "ذهاب"
+
+msgid "Maybe going"
+msgstr "ربما سأتي"
+
+msgid "Can't go"
+msgstr "لا استطيع الذهاب"
+
+msgid "Are you going?"
+msgstr "هل ستذهب؟"
+
+msgid "No Choice"
+msgstr "لا يوجد خيار"
+
+msgid "Add event to your calendar"
+msgstr ""
+
+#, fuzzy
+msgid "Copy this iCal-link into your calendar application to import this event:"
+msgstr "انسخ رابط iCal هذا في تطبيق التقويم الخاص بك لادخال المناسبات الحالية:"
+
+#, fuzzy
+msgid "Start/join video conference for this event"
+msgstr "بدء / الانضمام إلى محادثة الفيديو لهذه المناسبة"
+
+msgid "Popout"
+msgstr ""
+
+msgid "Fullscreen"
+msgstr "ملئ الشاشة"
+
+#, fuzzy
+msgid "Video conference"
+msgstr "انشاء مناسبة"
+
+msgid "Leave Fullscreen"
+msgstr "الخروج من ملئ الشاشة"
+
+msgid "Back"
+msgstr "رجوع"
+
+#, fuzzy
+msgid "Leave video conference"
+msgstr "انشاء مناسبة"
+
+msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
+msgstr ""
+
+msgid "You will now receive notifications for comments or when this event is updated or its details change."
+msgstr "ستتلقى الآن إشعارات للتعليقات أو عندما يتم تحديث هذه المناسبة أو تغيير تفاصيلها."
+
+msgid "You created an event"
+msgstr "تم انشاء مناسبة"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created an event"
+msgstr "انشاء مناسبة"
+
+msgid "Show all"
+msgstr "عرض الكل"
+
+msgid "Upcoming events"
+msgstr "المناسبات القادمة"
+
+#, python-format
+msgid "Event \"%(title)s\" was edited successfully."
+msgstr "Event \"%(title)s\" تم التعديل بنجاح."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be edited."
+msgstr "مناسبة \"%(title)s\"تعذر تعديلها."
+
+msgid "Please use the conference management area to add new workshops!"
+msgstr "الرجاء استخدام منطقة إدارة المؤتمرات لإضافة ورش عمل جديدة!"
+
+msgid "The page you requested is not available for this event at this time."
+msgstr "الصفحة التي طلبتها غير متاحة لهذه الماسبة في الوقت الحالي."
+
+msgid "One of the event suggestions times could not be understood!"
+msgstr "واحدة من أوقات الاقتراحات لمناسبة قد تكون غير مفهومة!"
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was edited successfully."
+msgstr "تم تعديل مناسبة غير مجدولة\"%(title)s\" بنجاح."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be edited."
+msgstr "تعذر عن تعديل المناسبة الغير مجدولة \"%(title)s\"."
+
+#, python-format
+msgid "Event \"%(title)s\" was added successfully."
+msgstr "تمت إضافة مناسبة \"%(title)s\" بنجاح."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be added."
+msgstr "تعذر إضافة المناسبة \"%(title)s\"."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was added successfully."
+msgstr "تمت إضافة مناسبة غير مجدولة\"%(title)s\"بنجاح."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be added."
+msgstr "تعذر إضافة المناسبة الغير مجدولة \"%(title)s\"."
+
+msgid "You should define at least one date suggestion."
+msgstr "يجب عليك تحديد اقتراح لتاريخ واحد على الأقل."
+
+#, python-format
+msgid "Event \"%(title)s\" was deleted successfully."
+msgstr "تم حذف مناسبة \"%(title)s\" بنجاح."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be deleted."
+msgstr "تعذر حذف المناسبة \"%(title)s\"."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was deleted successfully."
+msgstr "تم حذف مناسبة غير مجدولة\"%(title)s\" بنجاح."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be deleted."
+msgstr "تعذر حذف المناسبة الغير مجدولة \"%(title)s\"."
+
+msgid "Your votes were saved successfully."
+msgstr "تم حفظ تصويتاتك بنجاح."
+
+msgid "Your votes could not be saved."
+msgstr "لا يمكن حفظ تصويتاتك."
+
+msgid "This is event is already scheduled. You cannot vote for it any more."
+msgstr "هذiه المناسبة تمت جدولتها بالفعل. لا يمكنك التصويت عليها بعد الآن."
+
+msgid "The complete request can only be sent via POST!"
+msgstr "لا يمكن إرسال الطلب كاملا إلا عبر البريد!"
+
+msgid "Event cannot be completed: No date was supplied."
+msgstr "لا يمكن إكمال المناسبة: لم يتم تقديم أي تاريخ."
+
+msgid "The event was created successfully at the specified date."
+msgstr "تم إنشاء المناسبة بنجاح في التاريخ المحدد."
+
+#, fuzzy
+msgid "Upcoming event"
+msgstr "المناسبات القادمة"
+
+msgid "Your comment was added successfully."
+msgstr "تم إضافة تعليقك بنجاح."
+
+msgid "Your comment was deleted successfully."
+msgstr "تم حذف تعليقك بنجاح."
+
+#~ msgid "Date"
+#~ msgstr "تاريخ"
+
+#~ msgid "End date."
+#~ msgstr "تاريخ الانتهاء."
+
+#, fuzzy
+#~ msgid "Example: https://www.youtube.com/watch?v=12345"
+#~ msgstr "مثال: http://mywebsite.com"
+
+#~ msgid "From"
+#~ msgstr "من"
+
+#~ msgid "Kalender"
+#~ msgstr "تقويم"
+
+#~ msgid "Maximum Coffee Table Participants"
+#~ msgstr "الحد الأقصى من المشاركين في طاولة القهوة"
+
+#~ msgid "Start date."
+#~ msgstr "تاريخ البدء."
+
+#, fuzzy
+#~ msgid "Start/join BBB video conference for this event"
+#~ msgstr "بدء / الانضمام إلى محادثة الفيديو لهذه المناسبة"
+
+#~ msgid "Start/join video chat for this event"
+#~ msgstr "بدء / الانضمام إلى محادثة الفيديو لهذه المناسبة"
+
+#~ msgid "Stop Video Chat"
+#~ msgstr "إيقاف محادثة فيديو"
+
+#~ msgid "Until"
+#~ msgstr "ل"
+
+#~ msgid "Video Chat"
+#~ msgstr "محادثة فيديو"

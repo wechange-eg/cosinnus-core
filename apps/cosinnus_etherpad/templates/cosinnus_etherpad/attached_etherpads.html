@@ -1,0 +1,26 @@
+{% load cosinnus_tags %}
+
+{% for etherpad in etherpads %}
+	<div class="app-etherpad">
+        <div class="btn btn-emphasized w100 {% if not no_indent %}indented"{% endif %} href="{% group_url "cosinnus:etherpad:pad-write" group=etherpad.group slug=etherpad.slug %}">
+            <ul class="media-list fine-space">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                        <i class="fa {% if etherpad.type == 1 %}fa-table{% else %}fa-file-text{% endif %}"></i>
+                    </a>
+                    <div class="media-body no-vertical-padding ">
+                        <strong><a href="{% group_url "cosinnus:etherpad:pad-write" group=etherpad.group slug=etherpad.slug %}" target="_blank">{{ etherpad.title }}</a></strong>
+                        {% with creator=etherpad.creator %}
+                            <div class="group-annotation">
+                                <a href="{{ creator|profile_url }}">
+                                    <i class="fa fa-user"></i>
+                                    {{ creator|full_name }}
+                                </a> 
+                            </div>
+                        {% endwith %}
+                    </div>
+                </li>
+            </ul>
+        </div><!-- btn -->
+	</div>
+{% endfor %}

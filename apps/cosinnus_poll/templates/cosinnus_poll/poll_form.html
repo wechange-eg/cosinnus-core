@@ -1,0 +1,146 @@
+{% extends "cosinnus_poll/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks thumbnail %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label %}
+{% endblock %}
+
+{% block page_title %}
+    {% if form_view == "add" %}
+      {% trans "Add poll" %}
+    {% elif form_view == "edit" %}
+      {% trans "Edit" %} {{ poll.title }}
+    {% endif %}
+{{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        <li class="active">
+            {% if form_view == "add" %}
+              {% trans "Add poll" %}
+            {% elif form_view == "edit" %}
+              {% trans "Edit" %} {{ poll.title }}
+            {% endif %}
+        </li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus_poll/leftnav.html" with return_to="polls"%}
+    
+    {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_8_poll" %}
+{% endblock leftnav %}
+
+{% block content %}
+
+{% if form.forms.obj.errors or form.forms.media_tag.errors or inlines.0.errors %}
+    <div class="alert alert-danger alert-dismissable">
+        <i class="fa fa-exclamation-triangle fa-3x"></i>
+        <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+    </div>
+{% endif %}
+
+<form method="POST" action="" class="cosinnus-form form-horizontal" enctype="multipart/form-data">{% csrf_token %}
+	{{ form.forms.obj.non_field_errors }}
+	{{ form.forms.media_tag.non_field_errors }}
+    {% for formset in inlines %}
+        {{ formset.management_form }}
+    {% endfor %}
+
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+            
+        {% trans "Title" as title_label %}
+        {% trans "Enter a title for the new poll." as title_legend %}
+        {% captureas title_html %}
+                {% if request.GET.title %}
+                    {% render_field form.forms.obj.title class+="form-control" placeholder=title_label value=request.GET.title %}
+                {% else %}
+                    {% render_field form.forms.obj.title class+="form-control" placeholder=title_label %}
+                {% endif %}
+        {% endcaptureas %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.title legend=title_legend label=title_label field_html=title_html first=True %}
+        
+        
+        {# SimpleMDE Description Field (gets initialized in extrahead) #}                                   
+        {% trans "Description and Infos" as description_label %}
+        {% trans "Description" as description_placeholder %}
+        {% trans "Enter a description for the poll" as description_legend %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description legend=description_legend label=description_label placeholder=description_placeholder large_field=True %}
+        
+        
+        {% if not pre_voting_editing_enabled %}
+            <ol class="input-area large-space">
+                <li class="w100">
+                    <p style="padding: 5px;">
+                        <i class="fa fa-warning"></i> 
+                        {% trans "Note: You cannot edit the options for this poll because someone has already cast their vote or the poll has been completed!" %}
+                    </p>
+                </li>
+            </ol>
+        {% endif %}
+        
+        
+        {% if inlines.0 and pre_voting_editing_enabled %}
+            {# Poll options Inlineform #}
+            {% trans "Poll Choices" as choice_label %}
+            {% trans "Remove choice" as  choice_rm_label %}
+            {% trans "Add choice" as choice_ab_label %}                
+            {% include 'cosinnus/fields/inlineform_field.html' with   inline_form=inlines.0 label=choice_label   content_template='cosinnus_poll/inlineform_poll_choices_content.html'    unique_id='choice'   add_button_label=choice_ab_label   remove_button_label=choice_rm_label %}
+        {% endif %}
+        
+
+        {% if form.forms.obj.multiple_votes %}
+	        {# Checkbox Field Field #}
+	        {% trans "Multiple Votes" as multivote_label %}
+			{% trans "If disabled, users can only vote for one option" as multivote_legend %}
+			{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.multiple_votes label=multivote_label legend=multivote_legend checkbox_label=multivote_label %}
+		{% endif %}
+                            
+        {% if form.forms.obj.can_vote_maybe %}
+            {# Checkbox Field #}
+            {% trans '"Maybe" option enabled' as votemaybe_label %}
+            {% trans 'In addition to "Yes" and "No"' as votemaybe_legend %}
+            {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.can_vote_maybe label=votemaybe_label legend=votemaybe_legend checkbox_label=votemaybe_label %}
+        {% endif %}
+        
+	    {% if form.forms.obj.show_voters %}
+	        {# Checkbox Field #}
+			{% trans "Show voters" as showvoters_label %}
+			{% trans "Lists how every voter voted for each option." as showvoters_legend %}
+			{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.show_voters label=showvoters_label legend=showvoters_legend checkbox_label=showvoters_label %}
+	    {% endif %}
+                            
+        {% if form.forms.obj.anyone_can_vote %}
+            {# Checkbox Field #}
+            {% trans "Public voting" as anyonevote_label %}
+            {% trans "Any logged in user who can see this poll can vote on it. If disabled, only group/project members can vote on it." as anyonevote_legend %}
+            {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.anyone_can_vote label=anyonevote_label legend=anyonevote_legend checkbox_label=anyonevote_label %}
+        {% endif %}
+        
+            
+        {% include 'cosinnus/media_tags.html' %}
+        
+    </div><!-- content-box -->
+    
+    <button type="submit" class="btn btn-emphasized" id="createPollButton">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left" href="#">
+                    <i class="fa fa-pencil"></i>
+                </span>
+                <div class="media-body">
+                    {% if form_view == "add" %}
+                      {% trans "Create" %}
+                    {% elif form_view == "edit" %}
+                      {% trans "Save" %}
+                    {% endif %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    
+</form>
+    
+{% endblock content %}

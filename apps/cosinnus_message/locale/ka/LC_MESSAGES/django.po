@@ -1,0 +1,288 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 11:18+0200\n"
+"PO-Revision-Date: 2020-04-07 13:06+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 2.3\n"
+
+msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
+msgstr ""
+
+msgctxt "the_app"
+msgid "Chat"
+msgstr ""
+
+msgid "Message"
+msgstr "შეტყობინება"
+
+msgctxt "the_app"
+msgid "message"
+msgstr "შეტყობინება"
+
+msgid "Chat"
+msgstr ""
+
+msgid "Recipients"
+msgstr "მიმღებები"
+
+msgid "Only Administrators may send a message to this project/group!"
+msgstr "მხოლოდ ადმინისტრატორებს შეუძლიათ გაგზავნონ შეტყობინება ამ პროექტში/ჯგუფში!"
+
+msgid "Additional Recipients"
+msgstr "დამატებითი მიმღებები"
+
+msgid "Undefined recipient."
+msgstr "არაიდენტიფიცირებული მიმღები."
+
+msgid "Portal"
+msgstr "პორტალი"
+
+msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
+msgstr "თქვენ შეგიძლიათ ტვირთოთ ფაილები ან სურათები შეტყობინებებზე, იმ შემთხვევაში თუ ხარ ფორუმის წევრი. თქვენ შეგიძლიათ ჩაერთოთ აქ:"
+
+msgid "Forum"
+msgstr "ფორუმი"
+
+msgid "Messages"
+msgstr "შეტყობინებები"
+
+msgid "Legacy Messages Archive"
+msgstr ""
+
+msgid "The legacy messaging app is no longer in use. You can view all of your old messages, but you cannot write new ones. Please use the new messaging app in the navigation from now on!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Your direct reply could not be processed!\n"
+"\n"
+"The reason was: %(reason)s\n"
+"\n"
+"\n"
+"Your message text was: \n"
+"--------------------------------\n"
+"%(text)s\n"
+"--------------------------------\n"
+"\n"
+"\n"
+"If this keeps happening, consider logging in and sending the reply directly on the site.\n"
+msgstr ""
+"თქვენი პირდაპირი პასუხის განხორციელება შეუძლებელია!\n"
+"\n"
+"მიზეზი არის: %(reason)s\n"
+"\n"
+"\n"
+"თქვენი შეტყობინების ტექსტი იყო: \n"
+"--------------------------------\n"
+"%(text)s\n"
+"--------------------------------\n"
+"\n"
+"\n"
+"თუ ეს კვლავ გრძელდება, გაითვალისწინეთ, რომ შეხვიდეთ და პირდაპირ საიტზე გააგზავნოთ პასუხი.\n"
+
+msgid ""
+"Note: This message is issued by an automated system.\n"
+"Do not reply, this would not be taken into account."
+msgstr ""
+"შენიშვნა: შეტყობინების გამოგზავნა ავტომატურად მოხდა.\n"
+"არ უპასუხოთ, რადგან პასუხი არ იქნება გათვალისწინებული."
+
+msgid "Only group members can see the content you requested. Apply to become a member now!"
+msgstr ""
+
+msgid "Go to chat"
+msgstr ""
+
+msgid "Archived Messages"
+msgstr "დაარქივებული შეტყობინებები"
+
+msgid "Delete"
+msgstr "წაშლა"
+
+msgid "Archive"
+msgstr "არქივი"
+
+msgid "Undelete"
+msgstr "წაუშლელი"
+
+msgid "Mark as Read"
+msgstr "წაკითხულად მონიშვნა"
+
+msgid "No messages"
+msgstr "შეტყობინებები არ არის"
+
+msgid "Please enter message..."
+msgstr "გთხოვთ შეიყვანოთ შეტყობინება..."
+
+msgid "Send"
+msgstr "გაგზავნა"
+
+msgid "Dear user,"
+msgstr "ძვირფასო მომხმარებელი,"
+
+#, python-format
+msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgstr "%(date)s თქვენ მოითხოვეთ შეტყობინების გაგზავნა მომხმარებლისთვის '%(recipient)s'."
+
+msgid "Your message has been rejected by the moderator"
+msgstr "თქვენი შეტყობინება უარყოფილ იქნა მოდერატორის მიერ"
+
+msgid ", for the following reason:"
+msgstr "შემდეგი მიზეზის გამო:"
+
+#, python-format
+msgid "'%(sender_first)s %(sender_last)s' has replied to your message from %(date)s:"
+msgstr "'%(sender_first)s %(sender_last)s' უპასუხა თქვენს შეტყობინებას თარიღი: %(date)s:"
+
+#, python-format
+msgid "'%(sender_first)s %(sender_last)s' has posted a message in one of your conversations."
+msgstr "'%(sender_first)s %(sender_last)s'  დაპოსტა შეტყობინება თქვენს ერთ-ერთ დიალოგში."
+
+#, python-format
+msgid "You have received a message from the user '%(sender_first)s %(sender_last)s'."
+msgstr "თქვენ მიიღეთ შეტყობინება მომხმარებლისგან '%(sender_first)s %(sender_last)s'."
+
+msgid "This message was sent in a conversation with: "
+msgstr "მესიჯი გაიგზავნა დიალოგში: "
+
+msgid "Project/Group"
+msgstr "პროექტი/ჯგუფი"
+
+msgid "Follow this link to view the message on the site"
+msgstr "გაყევით ამ ბმულს იმისათვის, რომ იხილოთ საიტზე არსებული შეტყობინება"
+
+msgid "If you do not wish to receive any more emails from us, click here to unsubscribe:"
+msgstr "თუ გსურთ, რომ არ მიიღოთ ჩვენგან შეტყობინებები, გთხოვთ დააკლიკეთ გამოწერის გაუქმებას:"
+
+msgid "You can also reply to this message directly by replying to this email. When you do, please leave the subject and addressee as it is. The email you reply from *must* be the one you are registered with on the site."
+msgstr "თქვენ, ასევე, შეგიძლიათ უპასუხოთ ამ შეტყობინებას პირდაპირ შეტყობინებაზე პასუხის საშუალებით. თუ ამას განახორციელებთ, გთხოვთ უცვლელად დატოვოთ თემა და მისამართი. ელ-ფოსტა, რომლითაც ახორციელებთ პასუხის დაბრუნებას, *უნდა* იყოს სწორედ, ის, რომლითაც საიტზე ხართ დარეგისტრირებული."
+
+msgid "WARNING: Your reply will be sent to all participants of this conversation!"
+msgstr "გაფრთხილება: თქვენი პასუხის გადაგზავნილ იქნება დიალოგის ყველა მონაწილესთან!"
+
+#, python-format
+msgid "Message \"%(subject)s\" on the site %(sitename)s"
+msgstr "შეტყობინების \"%(subject)s\" საიტზე %(sitename)s"
+
+msgid "Dear visitor,"
+msgstr "ძვირფასო ვიზიტორო,"
+
+msgid "As a reminder, please find below the content of your message."
+msgstr "ქვემოთ შეგახსენებთ, თქვენი შეტყობინების შინაარს."
+
+#, python-format
+msgid "On %(date)s, you sent a message to the user '%(sender_first)s %(sender_last)s'."
+msgstr "%(date)s თქვენ გაგზავნეთ შეტყობინება მომხმარებლთან '%(sender_first)s %(sender_last)s'."
+
+msgid "Please find below the answer from your correspondent."
+msgstr "იხილეთ თქვენი კორესპონდენციის პასუხი ქვემოთ."
+
+msgid "Thank you again for your interest in our services."
+msgstr "კიდევ ერთხელ გიხდით მადლობას ჩვენი სერვისებით დაინტერესებისათვის."
+
+msgid "For more comfort, we encourage you to open an account on the site."
+msgstr "მეტი კომფორტისთვის, გთავაზობთ, რომ საიტზე გახსნათ ანგარიში."
+
+msgid "The site administrator"
+msgstr "საიტის ადმინისტრატორი"
+
+msgid "Inbox"
+msgstr "შემომავალი"
+
+msgid "Sent"
+msgstr "გაგზავნილი"
+
+msgctxt "the noun for an Archive"
+msgid "Archive"
+msgstr "არქივი"
+
+msgid "Trash"
+msgstr "ნაგავი"
+
+msgid "Write"
+msgstr "დაწერა"
+
+msgid "Reply"
+msgstr "პასუხი"
+
+msgid "Recipient"
+msgstr "მიმღები"
+
+msgid "Conversation"
+msgstr "დიალოგი"
+
+msgid "Conversation with members from"
+msgstr "დიალოგი წევრებით"
+
+msgid "Conversation with"
+msgstr "დიალოგი"
+
+#, python-format
+msgid "Show all %(count)s participants"
+msgstr "ყველა %(count)s მონაწილის ჩვენება"
+
+msgid "Me"
+msgstr "მე"
+
+msgid "Answer"
+msgstr "პასუხი"
+
+msgid "Reply..."
+msgstr "პასუხი..."
+
+#, python-format
+msgid "Reply to %(sender_name)s"
+msgstr "პასუხი %(sender_name)s-თვის"
+
+#, python-format
+msgid "Reply to all %(adressee_count)s"
+msgstr "პასუხი ყველას %(adressee_count)s"
+
+msgid "Your reply could not be matched to an existing message."
+msgstr "თქვენი პასუხი არსებულ შეტყობინებას არ შეესაბამება."
+
+msgid "An internal error occured."
+msgstr "დაფიქსირდა შიდა შეცდომა."
+
+msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
+msgstr "თქვენი ელ-ფოსტის მისამართი, საიდანაც გააგზავნეთ პასუხი არ უკავშირდება თქვენი მომხმარებლის ანგარიშს. გთხოვთ გააგზავნოთ პირდაპირი პასუხები მხოლოდ იმ ელ-ფოსტის მისამართიდან, რომლითაც საიტზე ხართ დარეგისტრირებული!"
+
+msgid "There was an error when processing your message text!"
+msgstr "შეტყობინების ტექსტზე მუშაობისას დაფიქსირდა შეცდომა!"
+
+msgid "Your direct reply failed!"
+msgstr "თქვენი პირდაპირი პასუხი ვერ მოხერხდა!"
+
+msgid "Select at least one object."
+msgstr "აირჩიეთ სულ ცოტა ერთი ობიექტი."
+
+msgid "Messages or conversations successfully archived."
+msgstr "შეტყობინებები და დიალოგები წარმატებით დაარქივდა."
+
+msgid "Messages or conversations successfully deleted."
+msgstr "შეტყობინებები და დიალოგები წარმატებით წაიშალა."
+
+msgid "Messages were marked as read."
+msgstr "შეტყობინებები წაკითხულად მოინიშნა."
+
+msgid "Messages or conversations successfully recovered."
+msgstr "შეტყობინებები და დიალოგები წარმატებით აღდგა."
+
+#~ msgid "Request about your project \"%(group_name)s\""
+#~ msgstr "თხოვნა თქვენს პროექტთან \"%(group_name)s\" დაკავშირებით"
+
+#~ msgid "Request about your group \"%(group_name)s\""
+#~ msgstr "თხოვნა თქვენს ჯგუფთან \"%(group_name)s\" დაკავშირებით"

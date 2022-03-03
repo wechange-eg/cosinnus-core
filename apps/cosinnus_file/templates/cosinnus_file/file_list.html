@@ -1,0 +1,188 @@
+{% extends "cosinnus_file/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks thumbnail djajax_tags %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script src="{% static 'js/vendor/jstree.min.js' %}"></script>
+    <script src="{% static 'js/ajax_forms.js' %}"></script>
+    <script src="{% static 'js/cosinnus_file.js' %}"></script>
+    <link href="{% static 'css/vendor/jstree/themes/default/style.min.css' %}" rel="stylesheet">
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.note.id_for_label %}
+{% endblock extrahead %}
+
+
+{% block page_title %}
+{% trans "Files" %} {{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        {% include "cosinnus_file/breadcrumb_file.html" with folder=current_folder breadcrumb_template="cosinnus_file/breadcrumb_file.html" %}
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus/leftnav_hierarchic_listview.html" with downloadable=True %}
+{% endblock leftnav %}
+
+{% block content %}
+    
+    {% captureas cloud_hide_pref %}cloud_file_teaser_{{ group.id }}{% endcaptureas %}
+    {% captureas cloud_hide_value %}cloud_file_teaser_{{ group.id }}:true{% endcaptureas %}
+    {% if SETTINGS.COSINNUS_CLOUD_ENABLED and user.pk in group.admins and not 'cosinnus_cloud' in group.get_deactivated_apps and not user|cosinnus_setting:cloud_hide_pref %}
+       <div class="large-space cloud-file-teaser-frame">
+            <div class="alert alert-black-white no-margin alert-dismissable">
+                <i class="fa fa-cloud fa-3x"></i>
+                <button id="close_button" type="button" class="close" onclick="$('.cloud-file-teaser-frame').hide();" aria-hidden="true" {% djajax_connect user.cosinnus_profile.settings trigger_on="click" fixed_value=cloud_hide_value %}>&#215;</button>
+                {% include 'cosinnus_file/texts/file_cloud_teaser_text.html' %}
+            </div>
+            
+            <button class="btn btn-emphasized btn-autosize" href="#" data-toggle="modal" data-target="#cloud-file-modal">
+                <ul class="media-list">
+                    <li class="media">
+                        <span class="pull-left">
+                            <i class="fa fa-cloud"></i>
+                        </span>
+                        <div class="media-body">
+                              {% trans "Show detailed steps" %}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+            
+			{% captureas label %}
+			    {% include 'cosinnus_file/texts/file_cloud_teaser_popup_text.html' %}
+			{% endcaptureas %}
+			{% captureas title %}{% trans "Move your files to the Cloud" %}{% endcaptureas %}
+			{% include "cosinnus/modal_box.html" with id="cloud-file-modal" label=label title=title title_icon="fa-cloud" %}
+            <div class="clearfix"></div>
+        </div>
+    {% endif %}
+    <div class="clearfix"></div>
+    
+	{% trans "Delete" as btn_label %}
+    {% captureas btn_action %}$.cosinnus.Feedback.cosinnus_delete_element($.cosinnus.getListOfCheckedItems());{% endcaptureas %}
+    {% include 'cosinnus/common/checkbox/checkbox_action_button.html' with label=btn_label icon="fa-eraser" action=btn_action %}
+	
+	{% trans "Move" as btn_label %}
+    {% captureas btn_action %}$.cosinnus.Feedback.cosinnus_move_element($.cosinnus.getListOfCheckedItems(), {{ current_folder.id }});{% endcaptureas %}
+    {% include 'cosinnus/common/checkbox/checkbox_action_button.html' with label=btn_label icon="fa-arrows" action=btn_action %}
+    
+    {% trans "Download" as btn_label %}
+    {% captureas btn_action %}window.location.href = 'download/?files=' + $.cosinnus.getListOfCheckedItems().join('&files=');{% endcaptureas %}
+    {% include 'cosinnus/common/checkbox/checkbox_action_button.html' with label=btn_label icon="fa-download" action=btn_action %}
+    
+    
+    {% include 'cosinnus/common/checkbox/checkbox_mark_all_buttons.html' %}
+    <div class="clearfix"></div>
+    
+
+	<!-- a box with semi transparent background -->
+	<div class="content-box">
+	
+	    <div class="list-link-panel">
+	       <a href="download/">
+	           <i class="fa fa-download"></i>
+	           {% trans "Download this folder" %}
+	       </a>
+	    </div>
+	
+	    {% include 'cosinnus/common/filter_controls.html' %}
+	    <div class="clearfix"></div>
+		
+		{% if user|can_create_objects_in:group %}
+			{% comment %} Removed old upload button for now  
+			
+		    {% with obj_form=form.forms.obj %}
+		    <form action="" enctype="multipart/form-data" method="post" class="form-horizontal">{% csrf_token %}
+			    {{ obj_form.non_field_errors }}
+				<div type="button" class="btn btn-default w100 large-space">
+	                 <ul class="media-list">
+	                     <li class="media">
+	                         <span class="pull-left">
+	                             <i class="fa fa-plus"></i>
+	                         </span>
+	                         <div class="media-body media-body-form-control">
+	                             {{ obj_form.file.errors }}
+	                             {% captureas placeholder %}{% trans "Upload a file or document." %}{% endcaptureas %}
+	                             {% render_field obj_form.file class+="form-control next-button-is-for-sending" placeholder=placeholder id="fileToUpload" %}
+	                         </div>
+	                     </li>
+	                 </ul>
+	            </div>
+	            <button type="submit" class="btn btn-emphasized large-space" style="display: none;">
+	                <ul class="media-list">
+	                    <li class="media">
+	                        <span class="pull-left">
+	                            <i class="fa fa-floppy-o"></i>
+	                        </span>
+	                        <div class="media-body">
+	                            {% trans "Save" %}
+	                        </div>
+	                    </li>
+	                </ul>
+	            </button>
+		    </form>
+		    {% endwith %}
+			{% endcomment %}
+		    
+		    <div>
+			    <form action="" enctype="multipart/form-data" method="post" class="form-horizontal">{% csrf_token %}
+			    	{% with cur_folder=current_folder.id %}
+			    	{% with '{"on_success": "render_object", "direct_upload": "1", "target_folder": "'|addstr:cur_folder|addstr:'"}' as file_form_data %}
+			    		{% include 'cosinnus/attached/file_upload_button.html' with form_data=file_form_data style="large" %}
+			    	{% endwith %}
+			    	{% endwith %}
+			    </form>
+			</div>
+			<div class="large-space">
+			     <button type="button" class="btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#add-url-modal">
+		            <ul class="media-list">
+		                <li class="media">
+		                    <span class="pull-left">
+		                        <i class="fa fa-link"></i>
+		                    </span>
+		                    <div class="media-body">
+		                        {% trans "Add URL link" %}
+		                    </div>
+		                </li>
+		            </ul>
+		        </button>
+		        
+				{% captureas label %}
+                    {% include 'cosinnus_file/file_form_core.html' %}     
+				{% endcaptureas %}
+				{% captureas title %}{% trans "Add URL link" %}{% endcaptureas %}
+				{% trans "Cancel" as cancel_button_label %}
+				{% captureas submit_button_label_f %}{% trans "Save" %}{% endcaptureas %}
+				{% include "cosinnus/modal_box.html" with id="add-url-modal" label=label title=title title_icon="fa-link" extra_modal_classes="modal-lg" hide_footer=True cancel_button_label=cancel_button_label submit_button_label=submit_button_label_f %}
+				
+				<div class="clearfix"></div>
+			</div>
+		{% endif %}
+		
+		<div id="object_list_anchor" data-target="ajax-form-result-anchor" data-ajax-form-id="file_url_upload_form"></div>
+	    
+	    {% for file in objects %}
+			{% include 'cosinnus_file/single_file_detailed.html' with file=file %}
+	    {% empty %}
+	        <div data-target="ajax-form-delete-element" data-ajax-form-id="file_url_upload_form">
+		        <!-- {% trans "No files have been uploaded yet." %} -->
+	            {% include 'cosinnus/common/empty_button.html' with message="No files have been uploaded yet." %}
+            </div>
+	    {% endfor %}
+	
+	</div><!-- content-box -->
+	
+    <script type="text/javascript">
+        var cosinnus_move_element_object_url = "{% group_url 'cosinnus:file:move-element' group=group %}";
+        var cosinnus_delete_element_object_url = "{% group_url 'cosinnus:file:delete-element' group=group %}";
+        {% if request.GET.id %}
+        $(function(){
+            $('#cosinnus_list_element_{{ request.GET.id }} [data-lightbox]').click();
+        });
+        {% endif %}
+    </script>
+    {% include 'cosinnus/hierarchy/move_element_modal.html' %}
+    {% include 'cosinnus/common/delete_element_modal.html' %}
+    
+{% endblock content %}

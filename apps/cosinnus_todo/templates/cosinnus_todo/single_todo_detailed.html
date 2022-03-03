@@ -1,0 +1,188 @@
+{% load i18n static cosinnus_tags djajax_tags thumbnail %}
+
+{% with todo=object %}
+    <div class="large-space"> <!-- todo-wrapper -->
+    
+            <div type="button" class="btn btn-{% if todo.is_completed %}default{% else %}emphasized{% endif %} w100">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left" href="{{ todo.creator|profile_url }}">
+                            {% include "cosinnus/user/user_avatar_image.html" with user=todo.creator %}
+                        </a>
+                        <div class="media-body">
+                        
+                        
+                            <strong><a href="{{ todo.creator|profile_url }}">{{ todo.creator|full_name }}</a></strong> 
+                            <span>
+                                <span class="moment-data-date" data-date="{{ todo.created|date:'c' }}" title="{{ todo.created|date:'r' }}"></span>
+                                &nbsp;
+                            </span>
+                            
+                            {% if todo.due_date or todo.priority != 2 %}
+                                <span class="annotation">
+                                    {% if todo.due_date %}
+                                        {% trans "Due date" %}:
+                                            <span class=" moment-data-date" data-date-style="short" data-date="{{ todo.due_date|date:"Y-m-d" }}" ></span>
+                                    {% endif %} &nbsp;
+                                    {% if todo.priority == 3 %}
+                                        <span title="{% trans "Important" %}"><i class="fa fa-exclamation-circle"></i><span>
+                                    {% elif todo.priority == 1 %}
+                                        <span title="{% trans "Not important" %}"><i class="fa fa-minus"></i></span>
+                                    {% endif %} &nbsp;
+                                </span>
+                            {% endif %}
+	                        
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        
+        {% if user|has_write_access:todo %}
+            {% captureas modal_id %}deleteTodo_{{todo.pk}}{% endcaptureas %}
+            {% captureas title %}{% trans "Delete todo" %}{% endcaptureas %}
+            {% captureas label %}{% trans "Do you really want to delete this todo?" %}{% endcaptureas %}
+            {% captureas action %}{% group_url 'cosinnus:todo:entry-delete' group=todo.group slug=todo.slug%}{% endcaptureas %}
+            {% include "cosinnus/modal_box.html" with id=modal_id label=label title=title form_action=action %}
+        {% endif %}
+        
+        <div class="indented">
+            {% if todo.title %}
+                <p class="item-header"><b>
+                    {% if todo.is_completed %}<s>{% endif %}
+                    {{ todo.title }}
+                    {% if todo.is_completed %}</s>{% endif %}
+                </b></p>
+            {% endif %}
+            
+            {% if todo.note %}
+                <div class="textfield">
+                    {{ todo.note|textfield }}
+                </div>
+            {% endif %}
+            
+            <div class="white-content">
+                <hr/>
+                
+                {% with followers=todo.get_followed_users %}
+	                <div class="media">
+	                    <div class="regular-space">
+	                    	{% trans "Assigned To" %}:
+	                    </div>
+	                    <div class="">
+		                    <a class="pull-left select2-avatar select2-avatar-wide" title="{{ todo.assigned_to|full_name }}">
+		                        <select {% if not user|can_create_objects_in:todo.group %}disabled="disabled"{% endif %} class="select2-avatar-item" {% if user|can_create_objects_in:todo.group %}{% djajax_connect todo.assigned_to %}{% endif %}>
+		                            <option value="-1" data-avatar-url="{% static 'images/fragezeichen.png' %}" title="ss"> {% trans "Not assigned" %}</option>
+		                            
+		                            {% for user in group_users %}
+		                                <option {% if todo.assigned_to and todo.assigned_to == user %}selected {% endif %} value="{{ user.pk }}" data-avatar-url="{% if user.cosinnus_profile.avatar %}{% thumbnail user.cosinnus_profile.avatar 40x40 crop=1 upscale=1 %}{% else %}{% static 'images/jane-doe.png' %}{% endif %}">
+		                                    {{ user|full_name|safe_text }}
+		                                </option>
+		                            {% endfor %}
+		                        </select>
+		                    </a>
+	                    </div>
+	                    <div class="clearfix {% if followers %}large-space{% endif %}"></div>
+	                    {% if followers %}
+	                    	<div class="regular-space">
+	                    		{% trans "Following" %}:
+		                    </div>
+		                    <div class="followers-avatar-list">
+		                    	{% for follower in followers %}
+				                    <a href="{{ user.cosinnus_profile.get_absolute_url }}" class="" title="{{ follower|full_name }}">
+				                        {% include 'cosinnus/user/user_avatar_image.html' with user=follower extra_classes="followers-avatar" %}
+				                    </a>
+			                    {% endfor %}
+		                    </div>
+	                    {% endif %}
+	                </div>
+                {% endwith %}
+            </div>
+        </div>
+        
+        <div class="indented">
+		    <div class="white-content">
+                {% include 'cosinnus/common/likefollowstar/star_button.html' with object=todo %}
+                {% include 'cosinnus/common/likefollowstar/follow_button.html' with object=todo %}
+		        {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=todo %}
+		    </div>
+	    </div>
+        
+        {% include 'cosinnus/media_tags_readonly.html' with object=todo list_view="True" %}
+            
+        {% if user|has_write_access:todo %}
+            {% if todo.is_completed %}
+                <form action="{% group_url 'cosinnus:todo:entry-incomplete' group=object.group slug=object.slug %}" method="POST">{% csrf_token %}
+                    <button type="submit" class="btn btn-emphasized regular-space">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left">
+                                    <i class="fa fa-reply"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans "Reopen todo" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                </form>
+            {% else %}
+		        <form action="{% group_url 'cosinnus:todo:entry-complete-me' group=object.group slug=object.slug %}" method="POST">{% csrf_token %}
+			        <button type="submit" class="btn btn-emphasized regular-space">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <span class="pull-left">
+			                        <i class="fa fa-check"></i>
+			                    </span>
+			                    <div class="media-body">
+			                        {% trans "Close todo" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </button>
+			    </form>
+			{% endif %}
+			
+			{% if user|has_write_access:todo %}
+                <button class="btn btn-emphasized regular-space" data-toggle="modal" data-target="#deleteTodo_{{todo.pk}}" href="#" title="{% trans "Delete todo" %}">
+                    <ul class="media-list">
+                        <li class="media">
+                            <span class="pull-left">
+                                <i class="fa fa-times"></i>
+                            </span>
+                            <div class="media-body">
+                                {% trans "Delete" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+				<button class="btn btn-emphasized regular-space" href="{% group_url 'cosinnus:todo:entry-edit' group=todo.group slug=todo.slug %}">
+                    <ul class="media-list">
+                        <li class="media">
+                            <span class="pull-left">
+                                <i class="fa fa-pencil"></i>
+                            </span>
+                            <div class="media-body">
+                                {% trans "Edit" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+            {% endif %}
+            
+        {% endif %}
+        
+        {% include 'cosinnus/feedback/report_button_btn.html' with object=todo %}
+        
+        <div class="clearfix">
+        </div>
+        
+        {% if todo.attached_images %}
+            {% include 'cosinnus/common/attached_images_gallery.html' with object=todo max_images=3 %}
+        {% endif %}
+        
+        {% include 'cosinnus_todo/todo_comments.html' with todo=todo full_view="True" comments_expanded="True" %}
+        
+    </div> <!-- todo-wrapper -->
+    
+{% endwith %}
+

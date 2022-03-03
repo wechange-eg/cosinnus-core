@@ -1,0 +1,423 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-01 16:06+0100\n"
+"PO-Revision-Date: 2020-04-22 12:36+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+
+msgid "Notes"
+msgstr "Apuntes"
+
+msgctxt "the_app"
+msgid "note"
+msgstr "apunta"
+
+msgid "A user commented on a news post"
+msgstr "Un usuario comentó en una publicación de novedades"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post"
+msgstr "%(sender_name)s comentó en una publicación de novedades"
+
+msgid "A user commented on one of your news posts"
+msgstr "Un usario comentó en una de tus publicaciónes de novedades"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
+msgid "%(sender_name)s commented on your news post %(object_name)s"
+msgstr "%(sender_name)s comentó en una publicación de novedades en %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
+msgstr[0] "%(sender_name)s comentó en una publicación de novedades en %(team_name)s."
+msgstr[1] "%(sender_name)s comentó en una publicación de novedades en %(team_name)s."
+
+#, python-format
+msgid "%(sender_name)s commented on your news post"
+msgstr "%(sender_name)s comentó en tu publicación de novedades"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts"
+msgstr "%(sender_name)s comentó en una de tus publicaciónes de novedades"
+
+msgid "A user commented on a news posts you commented in"
+msgstr "Un usuario comentó en una publicación de novedades en la que has comentado"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on a news post you commented in"
+msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
+msgstr "%(sender_name)s comentó en una publicación de novedades en la que has comentado"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on a news post you commented in"
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
+msgstr[0] "%(sender_name)s comentó en una publicación de novedades en la que has comentado"
+msgstr[1] "%(sender_name)s comentó en una publicación de novedades en la que has comentado"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in"
+msgstr "%(sender_name)s comentó en una publicación de novedades en la que has comentado"
+
+msgid "A user created a news post"
+msgstr "Un usuario creó una publiación de novedades"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new news post"
+msgid "%(sender_name)s created the news post %(object_name)s"
+msgstr "%(sender_name)s creó una nueva publicación de novedades"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new news post"
+msgid "%(sender_name)s created %(count)d news posts"
+msgstr "%(sender_name)s creó una nueva publicación de novedades"
+
+#, python-format
+msgid "%(sender_name)s created a new news post"
+msgstr "%(sender_name)s creó una nueva publicación de novedades"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s:"
+msgstr "%(sender_name)s publicó en %(team_name)s:"
+
+msgid "A user created a news post in a team you are following"
+msgstr "Un usario creó una publicación de novedades en un equipo que estas siguiendo"
+
+#, python-format
+msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s creó una nueva publicación de novedades en %(team_name)s (que estas siguiendo)"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
+msgstr "%(sender_name)s publicó en %(team_name)s (que estas siguiendo)"
+
+msgid "A user updated a news post"
+msgstr "Un usuario actualizó una publiación de novedades"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s updated a news post you are following"
+msgid "%(sender_name)s updated the news post %(object_name)s"
+msgstr "%(sender_name)s actualizó una publiación de novedades que Estas siguiendo"
+
+msgid "You are following this news post"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s updated a news post you are following"
+msgstr "%(sender_name)s actualizó una publiación de novedades que Estas siguiendo"
+
+#, python-format
+msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
+msgstr "Una publicación de novedades que estas siguiendo por %(sender_name)s fue actualizada %(team_name)s:"
+
+#, fuzzy
+#| msgid "A user commented on a news posts you are following"
+msgid "A user commented on a news post you are following"
+msgstr "Un usuario comentó en una publicación de novedades que estas siguiendo"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
+msgid "%(sender_name)s commented on the news post %(object_name)s"
+msgstr "%(sender_name)s comentó en una publicación de novedades en %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
+msgstr[0] "%(sender_name)s comentó en una publicación de novedades en %(team_name)s."
+msgstr[1] "%(sender_name)s comentó en una publicación de novedades en %(team_name)s."
+
+#, python-format
+msgid "%(sender_name)s commented on a news posts you are following"
+msgstr "%(sender_name)s comentado una publicación de novedades que está siguiendo"
+
+msgid "No news"
+msgstr "Ningunas novedades"
+
+msgid "Write a news post"
+msgstr "Escribe una publicación de novedades"
+
+msgid "News stream"
+msgstr "Transmición de novedades"
+
+msgid "Created By"
+msgstr "Creado por"
+
+msgid "Newest Created"
+msgstr "Creados más nuevos"
+
+msgid "Popularity"
+msgstr "Popularidad"
+
+msgid "Text"
+msgstr "Texto"
+
+msgid "Facebook Share"
+msgstr "Comparte en Facebook"
+
+msgid "Note Item"
+msgstr "Ten encuenta el item"
+
+msgid "Note Items"
+msgstr "Ten encuenta los items"
+
+msgid "Author"
+msgstr "Autor"
+
+msgid "Creator"
+msgstr "Creador"
+
+msgid "Created"
+msgstr "Creado"
+
+msgid "Comment"
+msgstr "Comentario"
+
+msgid "Comments"
+msgstr "Comentarios"
+
+msgid "News"
+msgstr "Novedades"
+
+msgctxt "the_verb"
+msgid "Comment"
+msgstr "Comentar"
+
+msgid "Delete"
+msgstr "Eliminar"
+
+msgid "Write comment..."
+msgstr "Escribir comentario..."
+
+msgid "Post"
+msgstr "Publicar"
+
+msgid "There are no public news posts"
+msgstr "No hay publicaciónes de novedades"
+
+msgid "There are no news posts yet"
+msgstr "Aún no hay publicaciónes de novedades"
+
+msgid "Edit news post"
+msgstr "Editar publicación de novedades"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "Se ha producido un error en uno de las casillas introducidos. Por favor, corríjelo antes de guardar!"
+
+msgid "Save changes"
+msgstr "Guardar cambios"
+
+msgid "Title (optional)"
+msgstr "Título (opcional)"
+
+msgid "Title"
+msgstr "Título"
+
+msgctxt "label for the form text input"
+msgid "News text"
+msgstr "Texto de novedades"
+
+msgid "Please enter a message..."
+msgstr "Por favor inserta un mensaje..."
+
+msgid "To post in this team you need to"
+msgstr "Para publicar en este equipo necesitas"
+
+msgid "request to join"
+msgstr "solicita oara participar"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a news post you wrote in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your post:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"¡Hola, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s ha publicado un comentario en una publicación de novedades que escribiste en %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"en tu publicación:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"Sigue este enlace para ver el comentario: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Sigue este enlace para editar tus preferencias de notificación: %(notification_settings_url)s )\n"
+"\n"
+"Tu equipo de %(site_name)s .\n"
+"\n"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a news post you a commented in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the post:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"¡Hola, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s ha publicado un comentario en una publicación de novedades en la que has comentado, en %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"en la publicación:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"Sigue este enlace para ver el comentario: \n"
+"%(object_url)s\n"
+"\n"
+"(Sigue este enlace para editar tus preferencias de notificación: %(notification_settings_url)s )\n"
+"\n"
+"Tu equipo de %(site_name)s.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in, in %(team_name)s."
+msgstr "%(sender_name)s comentó en una publicación de novedades en la que has comentado, en %(team_name)s."
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
+msgstr "%(sender_name)s comentó en una publicación de novedades en %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s just posted an update in %(team_name)s:\n"
+msgstr ""
+"Hola %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s acaba de publicar una actualización en %(team_name)s:\n"
+
+#, python-format
+msgid ""
+"%(note_text)s\n"
+"\n"
+"\n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"%(note_text)s\n"
+"\n"
+"\n"
+"\n"
+"Puedes encontrarlo siguiendo este enlace: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Sigue este enlace para editar tus preferencias de notificación: %(notification_settings_url)s )\n"
+"\n"
+"Tu equipo de %(site_name)s."
+
+msgid "Show in my projects..."
+msgstr "Mostrar en mis proyectos..."
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Delete note"
+msgstr "Eliminar apunte"
+
+msgid "View on Facebook"
+msgstr "Ver en Facebook"
+
+msgid "Do you really want to delete this note?"
+msgstr "Estas seguro de que quieres eliminar este apunte?"
+
+msgid "You added a post"
+msgstr ""
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "added a post"
+msgstr ""
+
+msgid "Your news post was added successfully."
+msgstr "Tu publicación de novedades fue añadido con éxito."
+
+msgid "Your news post was deleted successfully."
+msgstr "Tu publicación de novedades fue eliminada con éxito."
+
+msgid "Your news post was edited successfully."
+msgstr "Tu publicación de novedades fue editada con éxito."
+
+msgid "Your comment was added successfully."
+msgstr "Tu comentario fue añadido con éxito."
+
+msgid "Your comment was deleted successfully."
+msgstr "Tu comentario fue eliminado con éxito."
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
+
+#~ msgid "New news post by %(sender_name)s"
+#~ msgstr "Nueva publicación de novedades de %(sender_name)s"
+
+#~ msgid "New news post by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Nueva publicación de novedades por %(sender_name)s en %(team_name)s (que sigues)"
+
+#~ msgid "Read more..."
+#~ msgstr "Leer más..."

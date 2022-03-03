@@ -1,0 +1,14 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static %}
+
+{% block breadcrumb %}
+	{% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+    	<li><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Your Profile" %}</a></li>
+    {% endif %}
+{% endblock breadcrumb %}
+
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/cosinnus_notifications.css' %}">
+{% endblock %}
+
+{% block page_title %}{% trans "Notification Preferences" %}{% endblock page_title %}

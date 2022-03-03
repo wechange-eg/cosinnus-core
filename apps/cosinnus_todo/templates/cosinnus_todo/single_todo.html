@@ -1,0 +1,30 @@
+{% load i18n cosinnus_tags %}
+
+{% with todo=object %}
+	<div class="app-todos">
+	    <div class="btn btn-emphasized w100" href="{{ todo.get_absolute_url }}">
+	        <ul class="media-list {% if no_space %}fine-space{% else %}large-space{% endif %}">
+	            <li class="media">
+	                <span class="pull-left">
+	                    <i class="fa fa-tasks"></i>
+	                </span>
+	                <div class="media-body {% if not hide_group_name %}no-vertical-padding{% endif %} ">
+                        <span class="annotation mobile-hidden">
+	                        {% with creator=todo.creator %}
+                                {# {% trans "by" %} #} <strong><a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a></strong> 
+	                        {% endwith %}
+	                        <span class="moment-data-date" data-date="{{ todo.created|date:'c' }}"></span>
+                        </span>
+	                    {% if todo.is_completed %}<del>{% endif %}<strong>{{ todo.title }}</strong>{% if todo.is_completed %}</del>{% endif %}
+	                    {% if not hide_group_name %}
+		                    <div class="group-annotation">
+	                            {% include 'cosinnus/group/group_label.html' with group=todo.group %}
+	                            <a href="{{ todo.todolist.get_absolute_url }}">- {{ todo.todolist.title}}</a>
+		                    </div>
+	                    {% endif %}
+	                </div>
+	            </li>
+	        </ul>
+	    </div><!-- btn -->
+	</div>
+{% endwith %}

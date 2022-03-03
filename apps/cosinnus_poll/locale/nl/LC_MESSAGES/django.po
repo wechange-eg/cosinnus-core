@@ -1,0 +1,769 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:06+0200\n"
+"PO-Revision-Date: 2021-02-18 21:27+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.1\n"
+
+# Or: enquête
+msgid "Polls"
+msgstr "Polls"
+
+msgctxt "the_app"
+msgid "poll"
+msgstr "poll"
+
+msgid "A user created a new poll"
+msgstr "Een gebruiker heeft een nieuwe poll aangemaakt"
+
+#, python-format
+msgid "%(sender_name)s created the poll %(object_name)s"
+msgstr "%(sender_name)s heeft de poll %(object_name)s aangemaakt"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d polls"
+msgstr "%(sender_name)s heeft %(count)d polls aangemaakt"
+
+#, python-format
+msgid "%(sender_name)s created a new poll"
+msgstr "%(sender_name)s heeft een nieuwe poll aangemaakt"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Er is een nieuwe poll: “%(object_name)s” aangemaakt in %(team_name)s."
+
+msgid "A poll you voted on was completed"
+msgstr "Een poll waarop je hebt gestemd is voltooid"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
+msgstr "%(sender_name)s heeft de poll %(object_name)s waarop je hebt gestemd voltooid"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls you voted on"
+msgstr "%(sender_name)s heeft %(count)d polls waarop je hebt gestemd voltooid"
+
+#, python-format
+msgid "%(sender_name)s completed the poll"
+msgstr "%(sender_name)s heeft de poll voltooid"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Poll “%(object_name)s” is voltooid in %(team_name)s."
+
+msgid "A user commented on one of your polls"
+msgstr "Een gebruiker heeft op één van je polls gereageerd"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll %(object_name)s"
+msgstr "%(sender_name)s heeft gereageerd op jouw poll %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
+msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben gereageerd op jouw poll %(object_name)s"
+msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben gereageerd op jouw poll %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll"
+msgstr "%(sender_name)s heeft op je poll gereageerd"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls"
+msgstr "%(sender_name)s heeft op één van je polls gereageerd"
+
+msgid "A user commented on a poll you were tagged in"
+msgstr "Een gebruiker heeft gereageerd op een poll waarin je bent getagd"
+
+#, python-format
+msgid "%(sender_name)s commented on the poll %(object_name)s"
+msgstr "%(sender_name)s heeft gereageerd op de poll %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
+msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben gereageerd op de poll %(object_name)s"
+msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben gereageerd op de poll %(object_name)s"
+
+msgid "You were tagged in this poll"
+msgstr "Je bent getagd in deze poll"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in"
+msgstr "%(sender_name)s heeft gereageerd op een poll waarin je bent getagd"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s heeft gereageerd op een poll waarin je bent getagd in %(team_name)s"
+
+msgid "A user commented on an poll you voted in"
+msgstr "Een gebruiker heeft gereageerd op een poll waarop je hebt gestemd"
+
+msgid "You voted on this poll"
+msgstr "Je hebt op deze poll gestemd"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in"
+msgstr "%(sender_name)s heeft gereageerd op een poll waarop je hebt gestemd"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
+msgstr "%(sender_name)s heeft gereageerd op een poll waarop je hebt gestemd in %(team_name)s"
+
+msgid "A user created a new poll in a team you are following"
+msgstr "Een gebruiker heeft een nieuwe poll aangemaakt in een team dat je volgt"
+
+#, python-format
+msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s heeft een nieuwe poll aangemaakt in %(team_name)s (dat je volgt)"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Een nieuwe poll: “%(object_name)s” is aangemaakt in %(team_name)s (dat je volgt)."
+
+msgid "A user updated a poll you are following"
+msgstr "Een gebruiker heeft een poll die je volgt bijgewerkt"
+
+#, python-format
+msgid "%(sender_name)s updated the poll %(object_name)s"
+msgstr "%(sender_name)s heeft de poll %(object_name)s bijgewerkt"
+
+msgid "You are following this poll"
+msgstr "Je volgt deze poll"
+
+#, python-format
+msgid "%(sender_name)s updated a poll you are following"
+msgstr "%(sender_name)s heeft een poll die je volgt bijgewerkt"
+
+#, python-format
+msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Een poll die je volgt: ”%(object_name)s” is bijgewerkt in %(team_name)s."
+
+msgid "A poll you are following was completed"
+msgstr "Een poll die je volgt is voltooid"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s"
+msgstr "%(sender_name)s heeft de poll %(object_name)s voltooid"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls"
+msgstr "%(sender_name)s heeft %(count)d polls voltooid"
+
+#, python-format
+msgid "%(sender_name)s completed the poll you are following"
+msgstr "%(sender_name)s heeft de poll die je volgt voltooid"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
+msgstr "Poll “%(object_name)s” die je volgt in %(team_name)s is voltooid."
+
+msgid "A user commented on one a poll you are following"
+msgstr "Een gebruiker heeft gereageerd op een poll die je volgt"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you are following"
+msgstr "%(sender_name)s heeft gereageerd op een poll die je volgt"
+
+msgid "Current Polls"
+msgstr "Actuele polls"
+
+msgid "No current polls"
+msgstr "Geen actuele polls"
+
+msgid "Created By"
+msgstr "Aangemaakt door"
+
+msgid "Newest Created"
+msgstr "Laatst aangemaakt"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "You must write a description for this poll option!"
+msgstr "Geef een beschrijving voor deze optie!"
+
+msgid "Voting open"
+msgstr "Stemming open"
+
+msgid "Voting closed"
+msgstr "Stemming gesloten"
+
+msgid "Poll archived"
+msgstr "Poll gearchiveerd"
+
+msgid "State"
+msgstr "Status"
+
+msgid "Description"
+msgstr "Beschrijving"
+
+msgid "Multiple options votable"
+msgstr "Meerdere opties stembaar"
+
+msgid "Does this poll allow users to vote on multiple options or just decide for one?"
+msgstr "Is het mogelijk om op meerdere opties te stemmen of moet er één gekozen worden?"
+
+msgid "\"Maybe\" option enabled"
+msgstr "Optie “misschien” ingeschakeld"
+
+msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
+msgstr "Is de optie misschien ingeschakeld? Wordt genegeerd en behandeld als False if ``multiple_votes==False``"
+
+msgid "Anyone can vote"
+msgstr "Iedereen kan stemmen"
+
+msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
+msgstr "Indien ja, kan iedereen die deze poll kan zien ook stemmen. Indien nee, alleen groepsleden kunnen stemmen."
+
+msgid "Show voters"
+msgstr "Toon stemmers"
+
+msgid "If true, display a list of which user voted for each option."
+msgstr "Indien gekozen, wordt getoond welke gebruikers voor elke optie hebben gestemd."
+
+msgid "Start"
+msgstr "Start"
+
+msgid "Winning Option"
+msgstr "Winnende optie"
+
+msgid "Poll"
+msgstr "Poll"
+
+#, python-format
+msgid "Poll: %(poll)s (%(state)s)"
+msgstr "Poll: %(poll)s (%(state)s)"
+
+msgid "Image"
+msgstr "Afbeelding"
+
+msgctxt "the subject"
+msgid "Votes"
+msgstr "Stemmen"
+
+msgid "Poll Option"
+msgstr "Poll optie"
+
+msgid "Poll Options"
+msgstr "Poll opties"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "Maybe"
+msgstr "Misschien"
+
+msgid "No"
+msgstr "Nee"
+
+msgid "Option"
+msgstr "Optie"
+
+msgid "Voter"
+msgstr "Stemmer"
+
+msgid "Vote"
+msgstr "Stem"
+
+msgctxt "the subject"
+msgid "Vote"
+msgstr "Stem"
+
+msgid "Creator"
+msgstr "Maker"
+
+msgid "Created"
+msgstr "Aangemaakt"
+
+msgid "Last modified"
+msgstr "Laatst aangepast"
+
+msgid "Text"
+msgstr "Tekst"
+
+msgid "Comment"
+msgstr "Reactie"
+
+msgid "Comments"
+msgstr "Reacties"
+
+msgid "Poll choice"
+msgstr "Poll keuze"
+
+msgid "Back to Polls"
+msgstr "Terug naar polls"
+
+msgid "Past Polls"
+msgstr "Verlopen polls"
+
+msgid "by"
+msgstr "door"
+
+msgid "Delete"
+msgstr "Verwijderen"
+
+msgid "Edit"
+msgstr "Wijzigen"
+
+msgid "Re-open"
+msgstr "Opnieuw openen"
+
+msgid "Archive"
+msgstr "Archiveren"
+
+#, python-format
+msgid "Do you really want to delete poll „%(title)s“?"
+msgstr "Weet je zeker dat je poll „%(title)s“ wilt verwijderen?"
+
+msgid "Delete poll"
+msgstr "Poll verwijderen"
+
+#, python-format
+msgid "Do you really want to re-open poll „%(title)s“?"
+msgstr "Weet je zeker dat je poll „%(title)s“ opnieuw wilt openen?"
+
+msgid "Re-open poll"
+msgstr "Poll heropenen"
+
+#, python-format
+msgid "Do you really want to archive poll „%(title)s“?"
+msgstr "Weet je zeker dat je poll „%(title)s“ wilt archiveren?"
+
+msgid "Archive poll"
+msgstr "Poll archiveren"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you created in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Hallo, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s heeft gereageerd op een poll die je hebt aangemaakt in %(team_name)s:\n"
+"\n"
+"“%(comment_text)s”\n"
+"\n"
+"\n"
+"op je poll\n"
+"\n"
+"“%(poll_title)s”\n"
+"\n"
+"\n"
+"Volg deze link om de reactie te bekijken: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Volg deze link om je meldingsvoorkeuren te wijzigen: %(notification_settings_url)s )\n"
+"\n"
+"Je %(site_name)s team.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls in %(team_name)s."
+msgstr "%(sender_name)s heeft gereageerd op één van je polls in %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the poll \"%(object_name)s\", was completed in %(team_name)s by %(sender_name)s!\n"
+msgstr ""
+"Hallo %(receiver_name)s,\n"
+"\n"
+"de poll “%(object_name)s” is voltooid in %(team_name)s door %(sender_name)s!\n"
+
+msgid "The winning option was:"
+msgstr "De winnende optie is:"
+
+msgid "There was no winning option."
+msgstr "Er is geen winnende optie."
+
+#, python-format
+msgid ""
+"\n"
+"You can find the poll by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"\n"
+"Je kunt de poll vinden door deze link te volgen: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Volg deze link om je meldingsvoorkeuren te wijzigen: %(notification_settings_url)s )\n"
+"\n"
+"Je %(site_name)s team."
+
+#, python-format
+msgid "Poll: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Poll: “%(object_name)s” is voltooid in %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new poll \"%(object_name)s\", was created in %(team_name)s by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Hallo %(receiver_name)s,\n"
+"\n"
+"een nieuwe poll “%(object_name)s”, is aangemaakt in %(team_name)s door %(sender_name)s. \n"
+"\n"
+"Je kunt hem vinden door deze link te volgen: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Volg deze link om je meldingsvoorkeuren te wijzigen: %(notification_settings_url)s )\n"
+"\n"
+"Je %(site_name)s team."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you were tagged in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Hallo, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s heeft gereageerd op een poll waarin je bent getagd, in %(team_name)s:\n"
+"\n"
+"“%(comment_text)s”\n"
+"\n"
+"\n"
+"in de poll:\n"
+"\n"
+"“%(poll_title)s”\n"
+"\n"
+"\n"
+"Volg deze link om de reactie te bekijken: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Volg deze link om je meldingsvoorkeuren te wijzigen: %(notification_settings_url)s )\n"
+"\n"
+"Je %(site_name)s team.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in %(team_name)s."
+msgstr "%(sender_name)s heeft gereageerd op een poll waarin je bent getagd in %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you voted in in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Hallo, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s heeft gereageerd op een poll waarop je heeft gestemd in %(team_name)s:\n"
+"\n"
+"“%(comment_text)s”\n"
+"\n"
+"\n"
+"in de poll:\n"
+"\n"
+"“%(poll_title)s”\n"
+"\n"
+"\n"
+"Volg deze link om de reactie te bekijken: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Volg deze link om je meldingsvoorkeuren te wijzigen: %(notification_settings_url)s )\n"
+"\n"
+"Je %(site_name)s team.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s."
+msgstr "%(sender_name)s heeft gereageerd op een poll waarop je hebt gestemd in %(team_name)s."
+
+msgid "Write comment..."
+msgstr "Reactie schrijven…"
+
+msgid "Post"
+msgstr "Plaatsen"
+
+msgid "Add poll"
+msgstr "Poll toevoegen"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "Er is een fout opgetreden in een van de velden die je hebt ingevoerd. Corrigeer dit voordat je opslaat!"
+
+msgid "Enter a title for the new poll."
+msgstr "Voer een titel in voor de nieuwe poll."
+
+msgid "Description and Infos"
+msgstr "Beschrijving en info"
+
+msgid "Enter a description for the poll"
+msgstr "Voeg een beschrijving toe voor de poll"
+
+msgid "Note: You cannot edit the options for this poll because someone has already cast their vote or the poll has been completed!"
+msgstr "Opmerking: je kunt de opties voor deze poll niet bewerken omdat er al iemand heeft gestemd of de poll is voltooid!"
+
+msgid "Poll Choices"
+msgstr "Poll opties"
+
+msgid "Remove choice"
+msgstr "Keuze verwijderen"
+
+msgid "Add choice"
+msgstr "Keuze toevoegen"
+
+msgid "Multiple Votes"
+msgstr "Meerdere stemmen"
+
+msgid "If disabled, users can only vote for one option"
+msgstr "Indien uitgeschakeld, kunnen gebruikers slechts op één optie stemmen"
+
+msgid "In addition to \"Yes\" and \"No\""
+msgstr "Naast \"Ja\" en \"Nee\""
+
+msgid "Lists how every voter voted for each option."
+msgstr "Geeft weer hoe elke kiezer voor elke optie heeft gestemd."
+
+msgid "Public voting"
+msgstr "Openbare stemming"
+
+msgid "Any logged in user who can see this poll can vote on it. If disabled, only group/project members can vote on it."
+msgstr "Elke ingelogde gebruiker die deze poll kan zien, kan erop stemmen. Indien uitgeschakeld, kunnen alleen leden van een groep/project stemmen."
+
+msgid "Create"
+msgstr "Aanmaken"
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "Archived Polls"
+msgstr "Gearchiveerde polls"
+
+msgid "Enter the title to create a new poll."
+msgstr "Voer de titel in om een nieuwe poll te maken."
+
+msgid "There are no archived polls."
+msgstr "Er zijn geen gearchiveerde polls."
+
+msgid "There are no running polls."
+msgstr "Er zijn geen lopende polls."
+
+msgid "There are no upcoming polls"
+msgstr "Er zijn geen aankomende polls"
+
+msgctxt "the_verb"
+msgid "Vote"
+msgstr "Stem"
+
+#, python-format
+msgid "Vote for %(title)s"
+msgstr "Stem voor %(title)s"
+
+msgid "This poll has been completed. Voting is closed."
+msgstr "Deze poll is voltooid. Stemmen is niet mogelijk."
+
+msgid "This is an archived poll."
+msgstr "Dit is een gearchiveerde poll."
+
+msgid "Complete without winner"
+msgstr "Voltooid zonder winnaar"
+
+#, python-format
+msgid "Do you really want to complete poll \"%(title)s\" with no winning option?"
+msgstr "Weet je zeker dat je poll “%(title)s” wilt afsluiten zonder winnende optie?"
+
+msgid "Complete poll without winner"
+msgstr "Poll afsluiten zonder winnaar"
+
+msgid "(No description set)"
+msgstr "(Geen beschrijving ingesteld)"
+
+msgid "The Winner is"
+msgstr "De winnaar is"
+
+msgid "Available options were"
+msgstr "Beschikbare opties waren"
+
+msgid "There are no options for this poll yet!"
+msgstr "Deze poll heeft nog geen opties!"
+
+msgid "Make winner and complete poll"
+msgstr "Kies winnaar en voltooi poll"
+
+msgid "Votes"
+msgstr "Stemmen"
+
+#, python-format
+msgid "Do you really want to complete the poll and select \"%(description)s\" as winner?"
+msgstr "Weet je zeker dat je de poll wilt voltooien en “%(description)s” als winnaar wilt kiezen?"
+
+msgid "Complete poll"
+msgstr "Poll voltooien"
+
+msgid "You created a poll"
+msgstr "Je hebt een poll aangemaakt"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a poll"
+msgstr "heeft een poll aangemaakt"
+
+msgid "There are no polls yet"
+msgstr "Er zijn nog geen polls"
+
+#, python-format
+msgid "Poll \"%(title)s\" was edited successfully."
+msgstr "Poll “%(title)s” is succesvol gewijzigd."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be edited."
+msgstr "Poll “%(title)s” kon niet worden gewijzigd."
+
+#, python-format
+msgid "Poll \"%(title)s\" was added successfully."
+msgstr "Poll “%(title)s” is succesvol toegevoegd."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be added."
+msgstr "Poll “%(title)s” kon niet worden toegevoegd."
+
+msgid "You should define at least one poll option!"
+msgstr "Je moet minstens één optie definiëren!"
+
+msgid "This poll is archived and cannot be edited anymore!"
+msgstr "Deze poll is gearchiveerd en kan niet meer worden bewerkt!"
+
+#, python-format
+msgid "Poll \"%(title)s\" was deleted successfully."
+msgstr "Poll “%(title)s” is succesvol verwijderd."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be deleted."
+msgstr "Poll “%(title)s” kon niet verwijderd worden."
+
+msgid "Your votes were saved successfully."
+msgstr "Je stemmen zijn succesvol opgeslagen."
+
+msgid "Your votes could not be saved."
+msgstr "Je stemmen konden niet worden opgeslagen."
+
+msgid "The voting phase for this poll is over. You cannot vote for it any more."
+msgstr "De stemfase voor deze poll is voorbij. Je kunt niet meer stemmen."
+
+msgid "In this poll you must vote for exactly one item!"
+msgstr "In deze poll kun je maar op één optie stemmen!"
+
+msgid "The complete request can only be sent via POST!"
+msgstr "De voltooide aanvraag kan alleen worden verzonden via POST!"
+
+msgid "Invalid action for this poll. The request could not be completed!"
+msgstr "Ongeldige actie voor deze poll. Het verzoek kon niet worden voltooid!"
+
+msgid "This action is not permitted for this poll at this stage!"
+msgstr "Deze actie is in deze fase niet toegestaan voor deze poll!"
+
+msgid "The poll was closed successfully."
+msgstr "De poll is succesvol afgesloten."
+
+msgid "The poll was re-opened successfully."
+msgstr "De poll is succesvol heropend."
+
+msgid "The poll was archived successfully."
+msgstr "De poll is succesvol gearchiveerd."
+
+msgid "Your comment was added successfully."
+msgstr "Je reactie is succesvol toegevoegd."
+
+msgid "Your comment was deleted successfully."
+msgstr "Je reactie is succesvol verwijderd."
+
+#~ msgid "New poll by %(sender_name)s"
+#~ msgstr "Nieuwe poll door %(sender_name)s"
+
+#~ msgid "%(sender_name)s completed a poll"
+#~ msgstr "%(sender_name)s heeft de poll voltooid"
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
+
+#~ msgid "New poll by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Nieuwe poll door %(sender_name)s in %(team_name)s (die u volgt)"
+
+#~ msgid "%(sender_name)s completed a poll you are following"
+#~ msgstr "%(sender_name)s heeft een poll die u volgt voltooid"

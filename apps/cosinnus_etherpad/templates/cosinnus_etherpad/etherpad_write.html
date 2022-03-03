@@ -1,0 +1,219 @@
+{% extends "cosinnus_etherpad/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks sekizai_tags %}
+
+{% block html_attributes %}class="mobile-noscroll"{% endblock html_attributes %}
+
+{% block page_title %}
+{% trans "Pad" %} {{ object.title }}{{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        {% if object.path != '/' %}
+            <li><a href="{% group_url 'cosinnus:etherpad:list' group=group slug=object.container.slug %}">{{ object.container.title }}</a></li>
+        {% endif %}
+        <li><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></li>
+        <li class="active">{% trans "Edit" %}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus/leftnav_hierarchic_itemview.html" %}
+{% endblock leftnav %}
+
+{% block og_image %}{% if object.attached_images %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ object.attached_images.0.static_image_url }}{% else %}{{ block.super }}{% endif %}{% endblock og_image %}
+{% block og_title %}{% if object.title %}{{ object.title }}{% else %}{{ object.description|truncatewords:8 }}{% endif %} - {{ group.name }} - {{ block.super }}{% endblock og_title %}
+{% block og_description %}{{ object.description|truncatewords:30 }}{% endblock og_description %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% addtoblock "js" %}
+        <script src="{% static 'js/cosinnus_etherpad/cosinnus_etherpad.js' %}"></script>
+    {% endaddtoblock %}
+{% endblock extrahead %}
+
+
+{% block content %}
+{% endblock content %}
+
+{% block main_page %}
+	{{ block.super }}
+	
+	
+	
+	<div class="row">
+	    <div class="col-lg-12 col-md-12">    
+	    
+	        <div class="content-box"> <!-- a box with semi transparent background -->
+	
+	            <div class="regular-space">
+	                <div class="btn btn-extra-emphasized w100">
+	                    <ul class="media-list">
+	                        <li class="media">
+	                            <a class="pull-left" href="#">
+	                                <i class="fa {% if object.type == 1 %}fa-table{% else %}fa-file-text{% endif %}"></i>
+	                            </a>
+	                            
+	                            <div class="media-body">
+	                                {% with creator=object.creator %}
+	                                    <span class="annotation">
+	                                        <a class="fullscreen-button fullscreen-toggle" href="#" title="{% trans "Fullscreen" %}">
+	                                            <span>{% trans "Fullscreen" %}</span>
+	                                            <i class="fa fa-expand"></i>
+	                                        </a>
+	                                    </span>
+	                                    <span class="annotation">{% trans "by" %} <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a></span>
+	                                {% endwith %}
+	                                <span>{{ object.title }}</span>
+	                            </div>
+	                        </li>
+	                    </ul>
+	                </div>
+	                
+	                {% include 'cosinnus/media_tags_readonly.html' with object=object list_view="noindent" %}
+	                
+	                <div class="white-content">
+			            {% include 'cosinnus/common/likefollowstar/star_button.html' with object=object %}
+			        </div>
+	            </div> 
+	            
+	            
+		        {% if object.attached_images %}
+		            {% include 'cosinnus/common/attached_images_gallery.html' with object=object max_images=3 %}
+		        {% endif %}
+	           
+	
+	        <div class="etherpad-iframe">
+	            <iframe src="{{ etherpad.get_pad_url }}" width="100%" height="100%"></iframe>
+	        </div>
+	
+            <button type="button" class="btn btn-small w100 btn-emphasized btn-autosize fullscreen-leave-button fullscreen-toggle mobile-hidden">
+                <ul class="media-list">
+                    <li class="media">
+                        <span class="pull-left">
+                            <i class="fa fa-compress"></i>
+                        </span>
+                        <div class="media-body">
+                            {% trans "Leave Fullscreen" %}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+            <button type="button" class="btn w100 btn-small btn-emphasized btn-autosize fullscreen-leave-button mobile-only" href="{{ object.get_absolute_url }}">
+                <ul class="media-list">
+                    <li class="media">
+                        <span class="pull-left">
+                            <i class="fa fa-reply"></i>
+                        </span>
+                        <div class="media-body">
+                            {% trans "Back" %}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+            
+            <!-- Safari can only scroll with the extra CSS, but non-safari browser can't scroll with it, so add it dynamically. -->
+            <script type="text/javascript">
+            	var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+				var is_safari = navigator.userAgent.indexOf("Safari") > -1;
+				function isSafariBrowser(){
+				    if (is_safari){
+				        if (is_chrome)  // Chrome seems to have both Chrome and Safari userAgents
+				            return false;
+				        else
+				            return true;
+				    }
+				    return false;
+				}
+				if (isSafariBrowser()){
+				    $('.etherpad-iframe').css('overflow-y', 'scroll').css('-webkit-overflow-scrolling', 'touch');
+				}
+            </script>
+	    
+	    </div><!-- content-box -->
+	    
+	    <div class="mobile-hidden">
+		    {% captureas help_text_id %}helptext_11_document{% endcaptureas %}
+		    {% captureas help_modal_id %}modal-{{ help_text_id }}{% endcaptureas %}
+			{% include 'cosinnus/common/modal_box_help_popup.html' with help_text_id=help_text_id help_title=help_title help_modal_id=help_modal_id %}
+			<button type="button" class="btn btn-emphasized pull-left" style="margin: 0px;" data-toggle="modal" data-target="#{{ help_modal_id }}" title="{% trans "Help and Assistance for this page" %}">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <span class="pull-left">
+	                        <i class="fa fa-question-circle-o"></i>
+	                    </span>
+	                    <div class="media-body">
+	                        {% trans "Help" %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </button>
+		    
+		    
+		    {% if user|has_write_access:object %}   
+			    <button type="button" class="btn btn-emphasized pull-left" data-toggle="modal" data-target="#deleteModal">
+		            <ul class="media-list">
+		                <li class="media">
+		                    <span class="pull-left">
+		                        <i class="fa fa-eraser"></i>
+		                    </span>
+		                    <div class="media-body">
+		                        {% trans "Delete" %}
+		                    </div>
+		                </li>
+		            </ul>
+		        </button>
+			    {% captureas label %}{% blocktrans with pad=object.title %}Do you really want to delete etherpad „{{ pad }}“?{% endblocktrans %}{% endcaptureas %}
+			    {% captureas title %}{% trans "Delete Etherpad" %}{% endcaptureas %}
+			    {% group_url "cosinnus:etherpad:pad-delete" group=group slug=etherpad.slug as delete_url %}
+			    {% include "cosinnus/modal_box.html" with id="deleteModal" label=label title=title form_action=delete_url %}
+		    {% endif %}
+		    
+		    
+		    {% if user|has_write_access:object %}
+		    	<button type="button" class="btn btn-emphasized" href="{% group_url "cosinnus:etherpad:pad-edit" group=group slug=etherpad.slug %}">
+		            <ul class="media-list">
+		                <li class="media">
+		                    <span class="pull-left">
+		                        <i class="fa fa-cog"></i>
+		                    </span>
+		                    <div class="media-body">
+		                        {% trans "Settings" %}
+		                    </div>
+		                </li>
+		            </ul>
+		        </button> 
+		    {% endif %}
+		    
+		    {# Ethercalc needs external CSV export #}
+		    {% if object.type == 1 %}
+		    	<button type="button" class="btn btn-emphasized" href="{% group_url "cosinnus:etherpad:calc-csv" group=group slug=etherpad.slug %}">
+		            <ul class="media-list">
+		                <li class="media">
+		                    <span class="pull-left">
+		                        <i class="fa fa-download"></i>
+		                    </span>
+		                    <div class="media-body">
+		                        {% trans "Download CSV" %}
+		                    </div>
+		                </li>
+		            </ul>
+		        </button> 
+		        
+		        <button type="button" class="btn btn-emphasized" href="{% group_url "cosinnus:etherpad:calc-xlsx" group=group slug=etherpad.slug %}">
+		            <ul class="media-list">
+		                <li class="media">
+		                    <span class="pull-left">
+		                        <i class="fa fa-download"></i>
+		                    </span>
+		                    <div class="media-body">
+		                        {% trans "Download Excel" %}
+		                    </div>
+		                </li>
+		            </ul>
+		        </button> 
+		    {% endif %}
+	    </div>
+
+	</div> <!-- row -->
+    
+{% endblock main_page %}

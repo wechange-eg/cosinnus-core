@@ -1,0 +1,5 @@
+{% load i18n cosinnus_tags %}
+
+{% captureas href %}{% group_url 'cosinnus:todo:list-list' group=group listslug=active_todolist.slug %}{% endcaptureas %}
+{% captureas label %}{% trans "Back to" %} „{{ active_todolist.title }}“ {% endcaptureas %}
+{% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-reply" label=label href=href  %}

@@ -1,0 +1,13 @@
+{% extends "postman/base_folder.html" %}
+{% load i18n %}
+
+{% block page_title %}{% trans "Archived Messages" %}{{ block.super }}{% endblock %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="active">{% trans "Archived Messages" %}</li>
+{% endblock %}
+
+{% block pm_markasread_button %}{% endblock %}
+{% block pm_archive_button %}{% endblock %}
+{% block pm_undelete_button %}{% endblock %}

@@ -1,0 +1,28 @@
+{% load i18n cosinnus_tags widget_tweaks %}
+    
+<div class="row">
+    <div class="col-md-3">
+
+        <div type="button" class="btn btn-emphasized btn-headline regular-space">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left btn-extra-emphasized"></span>
+                    <div class="media-body">
+                        {% trans "marketplace" context "the_app" %}
+                    </div>
+                </li>
+            </ul>
+        </div><!-- btn -->
+    </div><!-- left column -->
+
+    <div class="col-md-9">
+        <div class="content-box">
+            {% for offer in object_list %}
+                {% include 'cosinnus_marketplace/single_marketplace.html' with object=offer %}
+            {% empty %}
+                <!-- {% trans "There are no offers" %} -->
+                {% include 'cosinnus/common/empty_button.html' with message="There are no offers" %}
+            {% endfor %}
+         </div>
+    </div><!-- right column -->
+</div><!-- row -->

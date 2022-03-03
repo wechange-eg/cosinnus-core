@@ -1,0 +1,13 @@
+#nextcloud-navbar {
+    /* our overwrites */
+    background-color: #34b4b5;
+}
+#nextcloud-navbar:hover {
+    background-color: #68c9ca; 
+}
+#body-user #header,
+#body-settings #header,
+#body-public #header {
+    background-image:linear-gradient(to right, #34b4b5 0%, #7bd1d2 50%);
+}
+

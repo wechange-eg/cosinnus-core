@@ -1,0 +1,30 @@
+{% extends "cosinnus_file/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block page_title %}
+{{object.title}} {% trans "Files" %} {{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        {% include "cosinnus_file/breadcrumb_file.html" with folder=object.container breadcrumb_template="cosinnus_file/breadcrumb_file.html" %}
+        <li class="active">{{ object.title }}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus/leftnav_hierarchic_itemview.html" %}
+{% endblock leftnav %}
+
+
+{% block content %}
+
+{% if form.forms.obj.errors or form.forms.media_tag.errors %}
+    <div class="alert alert-danger alert-dismissable">
+        <i class="fa fa-exclamation-triangle fa-3x"></i>
+        <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+    </div>
+{% endif %}
+
+{% include 'cosinnus_file/file_form_core.html' with form_edit=True hide_cancel_button=True %}
+    
+{% endblock content %}

@@ -1,0 +1,106 @@
+{% extends "postman/base.html" %}
+{% load i18n cosinnus_tags postman_tags thumbnail %}{% load pagination_tags %}
+
+
+{% block postman_content %}
+
+
+
+
+<form action="{% block pm_form_action %}{% endblock %}" method="post" class="messages_form">{% csrf_token %}
+
+
+{% block pm_delete_button %}
+    {% trans "Delete" as btn_label %}
+    {% captureas btn_action %}this.form.action='{% url 'postman:delete' %}'{% endcaptureas %}
+    {% include 'cosinnus/common/checkbox/checkbox_action_button.html' with label=btn_label icon="fa-eraser" action=btn_action %}
+{% endblock %}
+{% block pm_archive_button %}
+    {% trans "Archive" as btn_label %}
+    {% captureas btn_action %}this.form.action='{% url 'postman:archive' %}'{% endcaptureas %}
+    {% include 'cosinnus/common/checkbox/checkbox_action_button.html' with label=btn_label icon="fa-book" action=btn_action %}
+{% endblock %}
+{% block pm_undelete_button %}
+    {% trans "Undelete" as btn_label %}
+    {% captureas btn_action %}this.form.action='{% url 'postman:undelete' %}'{% endcaptureas %}
+    {% include 'cosinnus/common/checkbox/checkbox_action_button.html' with label=btn_label icon="fa-eraser" action=btn_action %}
+{% endblock %}
+{% block pm_markasread_button %}
+    {% trans "Mark as Read" as btn_label %}
+    {% captureas btn_action %}this.form.action='{% url 'postman:markasread' %}'{% endcaptureas %}
+    {% include 'cosinnus/common/checkbox/checkbox_action_button.html' with label=btn_label icon="fa-eye" action=btn_action %}
+{% endblock %}
+{% block pm_mark_messages_buttons %}
+    {% include 'cosinnus/common/checkbox/checkbox_mark_all_buttons.html' %}
+{% endblock %}
+
+<div class="clearfix"></div>
+
+<!-- a box with semi transparent background -->
+<div class="content-box">
+    
+    {% if pm_messages %}
+        
+        {% for message in pm_messages %}
+            <div class="item_checkbox_element btn btn{% if message.is_new %}-extra{% endif %}-emphasized w100 {% if not forloop.last %}regular-space{% endif %}" href="{% if by_conversation and message.thread_id %}{% url 'postman:view_conversation' message.thread_id %}{% else %}{{message.get_absolute_url }}{% endif %}?next={{ current_url|urlencode }}">
+		        <ul class="media-list">
+		            <li class="media">
+		                {% captureas input_name %}{% if by_conversation and message.thread_id %}delete_tpk__{{message.thread_id}}{% else %}delete_pk__{{ message.pk }}{% endif %}{% endcaptureas %}
+		                {% include 'cosinnus/common/checkbox/checkbox_overlay_box.html' with input_name=input_name %}
+		                <a class="pull-left">
+		                    {% include "cosinnus/user/user_avatar_image.html" with user=message.sender %}
+		                </a>
+                        <div class="media-body">
+                            <a href="{% block pm_link %}{% if by_conversation and message.thread_id %}{% url 'postman:view_conversation' message.thread_id %}{% else %}{{message.get_absolute_url }}{% endif %}?next={{ current_url|urlencode }}{% endblock %}">
+                                <span class="annotation moment-data-date" data-date="{{ message.sent_at|date:"c" }}"></span>
+                                <span class="annotation">
+                                {% if message.count %}
+                                    ({{ message.better_count }})&nbsp;
+                                {% endif %}
+                                </span>
+                            <strong>
+                                {% with participants=message|get_other_participants:request.user %}
+		                            {% block pm_sender_cell %}
+		                            {% endblock %}
+		                            {% block pm_recipient_cell %}
+	                                {% endblock %}
+		                            
+		                            {% if participants|length > 1 and message.multi_conversation and message.multi_conversation.targetted_groups.all %}
+	                                    <i class="fa fa-users"></i>
+                                        {{ message.multi_conversation.targetted_groups.all.0.name }}
+		                            {% else %}
+		                                {% for participant in participants|slice:"2" %}
+		                                    <span class="comma">{{ participant|full_name }}</span>
+		                                {% endfor %}
+			                            {% with rest=participants|length|subtract:2 %}
+				                            {% if rest > 0 %}
+				                                <span class="comma">+{{ rest }}</span>
+				                            {% endif %}
+			                            {% endwith %}
+			                        {% endif %}
+                                {% endwith %}
+                                
+                            </strong>
+                            {% block pm_subject %}
+                                &nbsp;{{ message.subject }}
+                            {% endblock %}
+                            </a>
+                        </div>
+                    </li>
+		        </ul>
+		    </div>
+        {% endfor %}
+        
+    {% else %}
+        <!-- {% trans "No messages" %} -->
+	    {% include 'cosinnus/common/empty_button.html' with message="No messages." %}
+	{% endif %}
+
+</div><!-- content-box -->
+
+<!-- TODO: add values from checkboxes -->
+
+
+</form>
+
+{% endblock postman_content %}

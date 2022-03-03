@@ -1,0 +1,47 @@
+{% load i18n tz %}
+{% get_current_timezone as TIME_ZONE %}
+
+<span title="{{ event.from_date }} {% if event.to_date and not event.from_date == event.to_date %}- {{ event.to_date }}{% endif %}">
+	{% if event.is_same_day %}
+	    <span class="moment-data-date"  data-date="{{ event.from_date|date:"Y-m-d" }}" data-date-style="short" data-date-notooltip="true"></span>
+	    {% if event.is_same_time or event.from_date|date:"H:i" == "00:00" and event.to_date|date:"H:i" == "23:59" %}
+	    	{% if event.from_date|date:"H:i" == "00:00" %}
+	    		<em>({% trans "all day" context "time" %})</em>
+	    	{% else %}
+	    		<em>{% trans "at" context "time" %}</em>
+		        {{ event.from_date|date:"H:i" }}
+		        {% trans "o'clock" context "time" %}
+		    {% endif %}
+		{% else %}
+			<em>{% trans "from" context "time" %}</em>
+	        {{ event.from_date|date:"H:i" }}
+	        {% if not from_date_only %}
+		        <em>{% trans "until" context "time" %}</em>
+		        {{ event.to_date|date:"H:i" }}
+		        {% trans "o'clock" context "time" %}
+		    {% endif %}
+		{% endif %}
+	{% else %}
+	    <span class="moment-data-date" data-date="{{ event.from_date|date:"Y-m-d" }}" data-date-style="short" data-date-notooltip="true"></span>
+	    {% if not event.is_same_time %}
+	    	{% if not event.from_date|date:"H:i" == "00:00" %}
+		        {{ event.from_date|date:"H:i" }}
+		        {% trans "o'clock" context "time" %}
+	        {% endif %}
+	    {% endif %}
+	    {% if not from_date_only %}
+		    <em>{% trans "until" context "time" %}</em>
+	        <span class="moment-data-date" data-date="{{ event.to_date|date:"Y-m-d" }}" data-date-style="short" data-date-notooltip="true"></span>
+		    {% if event.is_same_time and event.from_date|date:"H:i" == "00:00" or event.from_date|date:"H:i" == "00:00" and event.to_date|date:"H:i" == "23:59" %}
+		        <em>({% trans "all day" context "time" %})</em>
+		    {% else %}
+		        {{ event.to_date|date:"H:i" }}
+		        {% trans "o'clock" context "time" %}
+		    {% endif %}
+		{% endif %}
+	{% endif %}
+	({{ TIME_ZONE }})
+</span>
+<p>
+	<small class="moment-timezone-aware-date" data-timezone="{{ TIME_ZONE }}" data-from-date="{{ event.from_date|date:'c' }}" data-to-date="{{ event.to_date|date:'c' }}"></small>
+</p>

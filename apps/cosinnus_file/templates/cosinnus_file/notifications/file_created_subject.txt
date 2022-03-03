@@ -1,0 +1,1 @@
+{% load i18n cosinnus_tags %}{% blocktrans %}A new file: "{{ object_name }}" was uploaded in {{ team_name }}.{% endblocktrans %}

@@ -1,0 +1,17 @@
+{% extends "postman/base_folder.html" %}
+{% load i18n %}
+
+{% block page_title %}{% trans "Trash" %}{{ block.super }}{% endblock %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="active">{% trans "Trash" %}</li>
+{% endblock %}
+
+{% block pm_markasread_button %}{% endblock %}
+{% block pm_delete_button %}{% endblock %}
+{% block pm_archive_button %}{% endblock %}
+
+{% block pm_link %}
+{# no link #}
+{% endblock %}

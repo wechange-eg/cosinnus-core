@@ -1,0 +1,5 @@
+{% load cosinnus_tags %}
+
+{% for item in all_cloud_files %}
+	{% include 'cosinnus/v2/dashboard/timeline_attached_item.html' with text=item.title subtext=item.folder icon=item.get_icon url=item.url download_url=item.download_url %}
+{% endfor %}

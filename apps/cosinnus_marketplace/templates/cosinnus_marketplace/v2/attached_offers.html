@@ -1,0 +1,7 @@
+{% load cosinnus_tags %}
+
+{% for item in offers %}
+	{% group_url "cosinnus:marketplace:detail" group=item.group slug=item.slug  as item_url %}
+	
+	{% include 'cosinnus/v2/dashboard/timeline_attached_item.html' with text=item.title subtext=item.creator|full_name icon=item.get_icon url=item_url %}
+{% endfor %}

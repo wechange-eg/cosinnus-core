@@ -1,0 +1,455 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-18 09:12+0100\n"
+"PO-Revision-Date: 2020-10-11 19:55+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+"X-Generator: Poedit 2.2.4\n"
+
+msgid "Marketplace"
+msgstr "Piața de desfacere"
+
+msgctxt "the_app"
+msgid "marketplace"
+msgstr "piața de desfacere"
+
+msgid "A user created a new offer"
+msgstr "Un utilizator a creat o nouă ofertă"
+
+#, python-format
+msgid "%(sender_name)s created the offer %(object_name)s"
+msgstr "%(sender_name)s a creat oferta %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d offers"
+msgstr "%(sender_name)s a creat %(count)d promoții"
+
+#, python-format
+msgid "%(sender_name)s created a new offer"
+msgstr "%(sender_name)s  a creat o nouă ofertă"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "O nouă ofertă: ”%(object_name)s” a fost creat în %(team_name)s."
+
+msgid "One of your offers expired"
+msgstr "Una dintre ofertele tale a expirat"
+
+#, python-format
+msgid "Your offer %(object_name)s expired"
+msgstr "Oferi %(object_name)s a expirat"
+
+#, python-format
+msgid "%(count)d of your offers expired"
+msgstr "%(count)d dintre ofertele dvs., a expirat"
+
+msgid "Your offer has expired"
+msgstr "Oferta ta a expirat"
+
+#, python-format
+msgid "Offer \"%(object_name)s\" has expired."
+msgstr "Oferi ”%(object_name)s” a expirat."
+
+msgid "A user commented on one of your offers"
+msgstr "Un utilizator a comentat una dintre ofertele dvs"
+
+#, python-format
+msgid "%(sender_name)s commented on your offer %(object_name)s"
+msgstr "%(sender_name)s a comentat ofertele tale %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d altele au comentat oferta ta %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au comentat oferta dvs., %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au comentat oferta dvs., %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your offer"
+msgstr "%(sender_name)s a comentat ofertele tale"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your offers"
+msgstr "%(sender_name)s a comentat una dintre ofertele tale"
+
+msgid "A user commented on an offer you were tagged in"
+msgstr "Un utilizator a comentat o ofertă la care ați fost etichetat"
+
+#, python-format
+msgid "%(sender_name)s commented on the offer %(object_name)s"
+msgstr "%(sender_name)s a comentat oferta ta %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d altele au comentat oferta %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au comentat oferta %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au comentat oferta %(object_name)s"
+
+msgid "You were tagged in this offer"
+msgstr "Ai fost etichetat în această ofertă"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in"
+msgstr "%(sender_name)s a comentat o ofertă în care ați fost etichetat"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s a comentat o ofertă în care ați fost etichetat în %(team_name)s"
+
+msgid "A user created a new offer in a team you are following"
+msgstr "Un utilizator a creat o nouă ofertă într-o echipă pe care o urmărești"
+
+#, python-format
+msgid "%(sender_name)s created a new offer in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s a creat o nouă ofertă în %(team_name)s (care urmează)"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "O nouă ofertă: ”%(object_name)s” a fost creat în %(team_name)s (care urmează)."
+
+msgid "A user updated an offer you are following"
+msgstr "Un utilizator a actualizat o ofertă pe care o urmărești"
+
+#, python-format
+msgid "%(sender_name)s updated the offer %(object_name)s"
+msgstr "%(sender_name)s a actualizat oferta %(object_name)s"
+
+msgid "You are following this offer"
+msgstr "Urmăriți această ofertă"
+
+#, python-format
+msgid "%(sender_name)s updated an offer you are following"
+msgstr "%(sender_name)s a actualizat o ofertă pe care o urmărești"
+
+#, python-format
+msgid "An offer you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "O ofertă pe care o urmărești: ”%(object_name)s” a fost actualizat în %(team_name)s."
+
+msgid "A user commented on an offer you are following"
+msgstr "Un utilizator a comentat o ofertă pe care o urmărești"
+
+#, python-format
+msgid "%(sender_name)s commented on on an offer you are following"
+msgstr "%(sender_name)s a comentat o ofertă pe care o urmărești"
+
+msgid "Current Offers"
+msgstr "Oferte Curente"
+
+msgid "No current offers"
+msgstr "Nu există oferte curente"
+
+msgid "Created By"
+msgstr "Creat de"
+
+msgid "Type"
+msgstr "Tip"
+
+msgid "Newest Created"
+msgstr "Cel mai nou creat"
+
+msgid "Title"
+msgstr "Titlu"
+
+msgid "Order Key"
+msgstr "Cheie de Comandă"
+
+msgid "Looking for"
+msgstr "Căutări"
+
+msgid "Offering"
+msgstr "Ofertă"
+
+msgid "Offer currently active?"
+msgstr "Ofertă  în prezent activă?"
+
+msgid "Description"
+msgstr "Descriere"
+
+msgid "Offer Category"
+msgstr "Categoria ofertei"
+
+msgid "Offer"
+msgstr "Oferi"
+
+msgid "Offers"
+msgstr "Promoții"
+
+#, python-format
+msgid "Offer: %(offer)s (%(type)s)"
+msgstr "Oferi: %(offer)s (%(type)s)"
+
+msgid "Creator"
+msgstr "Creator"
+
+msgid "Created"
+msgstr "Creată"
+
+msgid "Last modified"
+msgstr "Modificat ultima dată"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Comment"
+msgstr "Comentariu"
+
+msgid "Comments"
+msgstr "Comentarii"
+
+msgid "Back to Offers"
+msgstr "Înapoi la Oferte"
+
+msgid "My Offers"
+msgstr "Ofertele Mele"
+
+msgid "Add Offer"
+msgstr "Adaugă Ofertă"
+
+msgid "Misc"
+msgstr "Misc"
+
+msgid "Filter"
+msgstr "Filtru"
+
+#, python-format
+msgid "%(link_start)s%(username)s%(link_end)s is looking for"
+msgstr "%(link_start)s%(username)s%(link_end)s caută"
+
+#, python-format
+msgid "%(link_start)s%(username)s%(link_end)s is offering"
+msgstr "%(link_start)s%(username)s%(link_end)s oferă"
+
+msgid "Inactive"
+msgstr "Inactiv"
+
+msgid "Delete"
+msgstr "Șterge"
+
+msgid "Edit"
+msgstr "Editați"
+
+msgid "Deactivate"
+msgstr "Deactivă"
+
+msgid "Reactivate"
+msgstr "Reactivă"
+
+msgid "Activate"
+msgstr "Activați"
+
+#, python-format
+msgid "Do you really want to delete offer „%(title)s“?"
+msgstr "Doriți cu adevărat să ștergeți oferta „%(title)s”?"
+
+msgid "Delete offer"
+msgstr "Șterge oferta"
+
+#, python-format
+msgid "Do you really want to deactivate offer „%(title)s“?"
+msgstr "Doriți cu adevărat să dezactivați oferta „%(title)s”?"
+
+msgid "Deactivate offer"
+msgstr "Dezactivează oferta"
+
+#, python-format
+msgid "Do you really want to reactivate offer „%(title)s“?"
+msgstr "Vrei într-adevăr să reactivezi oferta „%(title)s”?"
+
+#, python-format
+msgid "Do you really want to activate offer „%(title)s“?"
+msgstr "Chiar vrei să activezi oferta „%(title)s”?"
+
+msgid "Reactivate offer"
+msgstr "Reactivarea ofertei"
+
+msgid "Activate offer"
+msgstr "Activarea ofertei"
+
+msgid "Write comment..."
+msgstr "Scrie comentariu..."
+
+msgid "Post"
+msgstr "Post"
+
+msgid "This offer is inactive. It is only visible to you and not listed in the marketplace. You can reactivate it below."
+msgstr "Această ofertă este inactivă. Este doar vizibil pentru dvs. și nu este listat pe piață. Puteți să îl reactivați mai jos."
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "A existat o eroare într-unul din câmpurile pe care le-ați introdus. Vă rugăm să îl corectați înainte de a salva!"
+
+#, python-format
+msgid ""
+"\n"
+"                        Note: after this offer will be posted, each user of %(forum_name)s may be able to see it.<br>\n"
+"                        If you do not want this, please, use another group or project of your choice.\n"
+"                        "
+msgstr ""
+
+msgid "Offer type"
+msgstr "Tipul ofertei"
+
+msgid "Offer Title"
+msgstr "Titlul Ofertei"
+
+msgid "Enter a description for your offer."
+msgstr "Introduceți o descriere pentru oferta dvs."
+
+msgid "Phone number"
+msgstr "Număr de telefon"
+
+msgid "Your phone number is only visible for registered users"
+msgstr "Numărul dvs.de telefon este vizibil numai pentru utilizatorii înregistrați"
+
+msgid "Categories"
+msgstr "Categorii"
+
+msgid "Check all categories that fit your offer"
+msgstr "Verificați toate categoriile care se potrivesc ofertei dvs"
+
+msgid "Upload a file or image or attach an existing one"
+msgstr "Încărcați un fișier sau o imagine sau atașați una existentă"
+
+msgid "The first uploaded image will be displayed as a wallpaper"
+msgstr "Prima imagine încărcată va fi afișată ca tapet"
+
+msgid "Offer is active"
+msgstr "Oferta este activă"
+
+msgid "Only active offers will be listed in the Marketplace."
+msgstr ""
+
+msgid "Only active offers will be listed in the Marketplace. Your offer will stay active for 4 weeks. After that, you can reactivate it at any time."
+msgstr "Numai ofertele active vor fi listate pe Marketplace. Oferta dvs. va rămâne activă timp de 4 săptămâni. După aceea, o puteți reactiva oricând."
+
+msgid "Create"
+msgstr "Crea"
+
+msgid "Save"
+msgstr "Salvați"
+
+msgid "All"
+msgstr "Toate"
+
+msgid "Wanted"
+msgstr "Dorit"
+
+msgid "No offers"
+msgstr "Fără oferte"
+
+msgid "There are no offers"
+msgstr "Nu există oferte"
+
+msgid "(No description set)"
+msgstr "(Fără set de descriere)"
+
+msgid "offered in"
+msgstr "oferit în"
+
+#, python-format
+msgid "Contact %(username)s directly"
+msgstr "Contact %(username)s direct"
+
+msgid "Only shown for registered users"
+msgstr "Afișați numai pentru utilizatorii înregistrați"
+
+msgid "Send Message"
+msgstr "Trimite mesaj"
+
+msgid "expires on"
+msgstr "expiră la"
+
+msgid "expired on"
+msgstr "expirat la"
+
+msgid "You created an offer"
+msgstr "Ai creat o ofertă"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created an offer"
+msgstr "a creat o ofertă"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "There are no current offers"
+msgstr "Nu există oferte curente"
+
+#, python-format
+msgid "Offer \"%(title)s\" was edited successfully."
+msgstr "Oferi ”%(title)s” a fost editat cu succes."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be edited."
+msgstr "Oferi ”%(title)s” cloud să nu fi editat."
+
+#, python-format
+msgid "Offer \"%(title)s\" was added successfully."
+msgstr "Oferi ”%(title)s” a fost adăugat cu succes."
+
+#, python-format
+msgid "Offer \"%(title)s\" was saved successfully, but is not active yet."
+msgstr "Oferi ”%(title)s” a fost salvat cu succes, dar încă nu este activ."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be added."
+msgstr "Oferi ”%(title)s” nu a putut fi adăugat."
+
+#, python-format
+msgid "Offer \"%(title)s\" was deleted successfully."
+msgstr "Oferi ”%(title)s” a fost șters cu succes."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be deleted."
+msgstr "Oferi ”%(title)s” nu a putut fi șters."
+
+msgid "The offer you requested is no longer active. Sorry!"
+msgstr "Oferta pe care ai solicitat-o nu mai este activă. Scuză!"
+
+msgid "The complete request can only be sent via POST!"
+msgstr "Cererea completă poate fi trimisă doar prin POȘTĂ!"
+
+msgid "Invalid action for this offer. The request could not be completed!"
+msgstr "Acțiune nevalidă pentru această ofertă. Cererea nu a putut fi finalizată!"
+
+msgid "The offer is already active"
+msgstr "Oferta este deja activă"
+
+msgid "The offer is already deactivated"
+msgstr "Oferta este deja dezactivată"
+
+msgid "The offer was deactivated successfully."
+msgstr "Oferta a fost dezactivată cu succes."
+
+msgid "The offer was reactivated successfully."
+msgstr "Oferta a fost reactivată cu succes."
+
+msgid "The offer was activated successfully."
+msgstr "Oferta a fost activată cu succes."
+
+msgid "Your comment was added successfully."
+msgstr "Comentariul dvs. a fost adăugat cu succes."
+
+msgid "Your comment was deleted successfully."
+msgstr "Comentariul dvs. a fost șters cu succes."
+
+#~ msgid "New offer by %(sender_name)s"
+#~ msgstr "Ofertă nouă de %(sender_name)s"
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
+
+#~ msgid "New offer by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Ofertă nouă de %(sender_name)s în %(team_name)s (care urmează)"

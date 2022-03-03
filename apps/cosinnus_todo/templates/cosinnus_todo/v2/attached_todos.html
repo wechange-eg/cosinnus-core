@@ -1,0 +1,5 @@
+{% load cosinnus_tags %}
+
+{% for item in todos %}
+	{% include 'cosinnus/v2/dashboard/timeline_attached_item.html' with text=item.title subtext=item.creator|full_name icon="fa-tasks" url=item.get_absolute_url %}
+{% endfor %}

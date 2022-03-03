@@ -1,0 +1,44 @@
+{% load i18n static thumbnail cosinnus_tags %}
+
+
+<button type="button" class="btn btn-emphasized w100" href="{% url 'cosinnus:my_stream' %}">
+    <ul class="media-list {% if streams and not forloop.last %}fine-space{% else %}regular-space{% endif %}">
+        <li class="media">
+            <a class="pull-left" href="#">
+                {{ my_stream_unread }}
+            </a>
+            <div class="media-body">
+                {% trans "My Stream" %}
+            </div>
+        </li>
+    </ul>
+</button><!-- btn -->
+
+{% for stream in streams %}
+    <button type="button" class="btn btn-emphasized w100" href="{{ stream.get_absolute_url }}">
+        <ul class="media-list {% if forloop.last %}regular-space{% else %}fine-space{% endif %}">
+            <li class="media">
+                <span class="pull-left">
+                    {{ stream.unread_count }}
+                </span>
+                <div class="media-body">
+                    {{ stream.title }}
+                </div>
+            </li>
+        </ul>
+    </button><!-- btn -->
+
+{% endfor %}
+
+<button type="button" class="btn btn-emphasized w100" href="{% url 'cosinnus:create_stream' %}">
+    <ul class="media-list">
+        <li class="media">
+            <span class="pull-left">
+                <i class="fa fa-plus"></i>
+            </span>
+            <div class="media-body">
+                {% trans "Create Stream" %}
+            </div>
+        </li>
+    </ul>
+</button><!-- btn -->

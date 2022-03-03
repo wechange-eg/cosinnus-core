@@ -1,0 +1,8 @@
+{% load cosinnus_tags %}
+
+{% for item in events %}
+	{% captureas item_icon %}{% if item.state == 2 or item.state == 4 %}fa-calendar-check-o{% else %}fa-calendar{% endif %}{% endcaptureas %}
+	{% captureas subtext %}{% if item.state == 2 or item.state == 4 %}{{ item.creator|full_name }}{% else %}{% include 'cosinnus_event/common/humanized_event_time.html' with event=item %}{% endif %}{% endcaptureas %}
+
+	{% include 'cosinnus/v2/dashboard/timeline_attached_item.html' with text=item.title subtext=subtext icon=item_icon url=item.get_absolute_url %}
+{% endfor %}

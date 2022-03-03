@@ -1,0 +1,39 @@
+{% load i18n cosinnus_tags %}
+
+{% if user|is_member_in_forum %} 
+	<div class="btn btn-default w100 regular-space">
+	    <ul class="media-list">
+	        <li class="media">
+	            <a class="pull-left" href="#">
+	                <i class="fa fa-paperclip"></i>
+	            </a>
+	            <div class="media-body media-body-form-control" id="attachments-selector">
+	                {% include 'cosinnus/attached/attached_objects_widget.html' with form=form form_data='{"private_upload": "1"}' hide_existing_file_field=True %}
+	            </div>
+	        </li>
+	    </ul>
+	</div>
+{% else %}
+    {% comment %} Users can only attach files if they are members of the forum {% endcomment %}
+    {% group_url 'cosinnus:group-dashboard' group=SETTINGS.NEWW_FORUM_GROUP_SLUG ignoreErrors=True as blog_url %}
+	{% if blog_url %}
+	    <div class="btn btn-default w100 regular-space">
+	        <ul class="media-list">
+	            <li class="media">
+	                <a class="pull-left" href="#">
+	                    <i class="fa fa-paperclip"></i>
+	                </a>
+	                <div class="media-body media-body-form-control" id="attachments-selector">
+	                    <p style="padding: 12px;">
+	                       {% trans "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:" %} 
+	                       <a href="{{ blog_url }}" target="_blank">
+	                           {% trans "Forum" %}
+	                           <i class="fa fa-external-link"></i>
+	                       </a>
+	                    </p>
+	                </div>
+	            </li>
+	        </ul>
+	    </div>
+	{% endif %}
+{% endif %}

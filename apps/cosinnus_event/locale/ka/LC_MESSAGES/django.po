@@ -1,0 +1,1333 @@
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-24 11:06+0100\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Restart BBB rooms"
+msgstr ""
+
+msgid "Events"
+msgstr "ღონისძიებები"
+
+msgctxt "the_app"
+msgid "event"
+msgstr "ღონისძიება"
+
+msgid "A user created a new event"
+msgstr "მომხმარებელმა ახალი ღონისძიება შექმნა"
+
+#, python-format
+msgid "%(sender_name)s created the event %(object_name)s"
+msgstr "%(sender_name)s -მა შექმნა ღონისძიება %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d events"
+msgstr "%(sender_name)s -მა შექმნა %(count)d ღონისძიება"
+
+#, python-format
+msgid "%(sender_name)s created a new event"
+msgstr "%(sender_name)s -მა შექმნა ახალი ღონისძიება"
+
+#, python-format
+msgid "A new event: \"%(object_name)s\" was announced in %(team_name)s."
+msgstr "ახალი ღონისძიება: \"%(object_name)s\" გამოქვეყნდა %(team_name)s -ში."
+
+msgid "A user created a new event poll"
+msgstr "მომხმარებელმა შექმნა ღონისძიების ახალი გამოკითხვა"
+
+#, python-format
+msgid "%(sender_name)s created the event poll %(object_name)s"
+msgstr "%(sender_name)s -მა შექმნა ღონისძიების გამოკითხვა %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d event polls"
+msgstr "%(sender_name)s შექმნა %(count)d ღონისძიების გამოკითხვა"
+
+#, python-format
+msgid "%(sender_name)s created a new event poll"
+msgstr "%(sender_name)s -მა შექმნა ახალი ღონისძიების გამოკითხვა"
+
+#, python-format
+msgid "A new event poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "ღონისძიების ახალი გამოკითხვა: \"%(object_name)s\" შექმნილია %(team_name)s -ში."
+
+msgid "A user commented on one of your events"
+msgstr "მომხმარებელმა კომენტარი გააკეთა თქვენს ერთ-ერთ ღონისძიებაზე"
+
+#, python-format
+msgid "%(sender_name)s commented on your event %(object_name)s"
+msgstr "%(sender_name)s -მა კომენტარი გააკეთა თქვენს ღონისძიებაზე %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your event %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your event %(object_name)s"
+msgstr[0] "%(sender_name)s-მა და%(count_minus_one)d სხვამ კომენტარი გააკეთეს თქვენს ღონისძიებაზე %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your event"
+msgstr "%(sender_name)s კომენტარი გააკეთა თქვენს ღონისძებაზე"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your events"
+msgstr "%(sender_name)s კომენტარი გააკეთა ერთ-ერთ თქვენს ღონისძიებაზე"
+
+msgid "A user commented on a event you were tagged in"
+msgstr "მომხმარებელმა კომენტარი გააკეთა ღონისძიებაზე, სადაც თქვენ ხართ მონიშნული"
+
+#, python-format
+msgid "%(sender_name)s commented on the event %(object_name)s"
+msgstr "%(sender_name)s კომენტარი გააკეთა ღონისძიებაზე %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the event %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the event %(object_name)s"
+msgstr[0] "%(sender_name)s -მა და %(count_minus_one)d სხვამ კომენტარი გააკეთეს თქვენს ღონისძიებაზე %(object_name)s"
+
+msgid "You were tagged in this event"
+msgstr "თქვენ მონიშნული ხართ ამ ღონისძიებაზე"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you were tagged in"
+msgstr "%(sender_name)s -მა კომენტარი გააკეთა ღონისძიებაზე, სადაც თქვენ ხართ მონიშნული"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s -მა კომენტარი გააკეთა ღონისძიებაზე, სადაც თქვენ ხართ მონიშნული %(team_name)s-ში"
+
+msgid "A user commented on an event you voted in"
+msgstr "მომხმარებელმა კომენტარი გააკეთა ღონისძიებაზე, რომელსაც ხმა მიეცით"
+
+msgid "You voted on this event"
+msgstr "თქვენ ხმა მიეცით ამ ღონისძიებას"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you voted in"
+msgstr "%(sender_name)s-მა კომენტარი გააკეთა იმ ღონისძიებაზე, რომელსაც ხმა მიეცით"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you voted in in %(team_name)s"
+msgstr "%(sender_name)s -მა კომენტარი გააკეთა ღონისძიებაზე, რომელსაც ხმა მისცა %(team_name)s -ში"
+
+msgid "A user commented on an event you are attending"
+msgstr "მომხმარებელემა კომენტარი გააკეთა ღონისძიებაზე, რომელსაც თქვენ ესწრებით"
+
+msgid "You are attending this event"
+msgstr "თქვენ ესწრებით ამ ღონისძიებას"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending"
+msgstr "%(sender_name)s -მა კომენტარი გააკეთა ღონისძიებაზე, რომელსაც თქვენ ესწრებით"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending in %(team_name)s"
+msgstr "%(sender_name)s -მა კომენტარი გააკეთა ღონისძიებაზე, რომელსაც თქვენ ესწრებით %(team_name)s -ში"
+
+msgid "A user created a new event in a team you are following"
+msgstr "მომხმარებელმა შექმნა ახალი ღონისძიება გუნდისთვის, რომელსაც თქვენ გაყევით"
+
+#, python-format
+msgid "%(sender_name)s created a new event in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s შექმნა ახალი ღონისძიება %(team_name)s-ში (რომელსაც თქვენ მიყვებით)"
+
+#, python-format
+msgid "A new event: \"%(object_name)s\" was announced in %(team_name)s (which you follow)."
+msgstr "ახალი ღონისძიება: \"%(object_name)s\" გამოცხადდა %(team_name)s-ში (რომელსაც მიყვებით)"
+
+msgid "A user created a new event poll in a team you are following"
+msgstr "მომხმარებელმა შექმნა ღონისძიების ახალი გამოკითხვა, იმ გუნდში, რომელსაც თქვენ გაყევით"
+
+#, python-format
+msgid "%(sender_name)s created a new event pollin %(team_name)s (which you follow)"
+msgstr "%(sender_name)s შექმნა ღონისძიების ახალი გამოკითხვა %(team_name)s-ში (რომელსაც თქვენ მიყვებით)"
+
+#, python-format
+msgid "A new event poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "ღონისძიების ახალი გამოკითხვა: \"%(object_name)s\" შექიმნა %(team_name)s -ში (რომელსაც თქვენ გაყევით)."
+
+msgid "A user commented on an event you are following"
+msgstr "მომხმარებელმა კომენტარი გააკეთა ღონისძიებაზე, რომელსაც თქვენ გაყევით"
+
+msgid "You are following this event"
+msgstr "თქვენ გაყევით ამ ღონისძიებას"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are following"
+msgstr "%(sender_name)s -მა კომენტარი გააკეთა ღონისძიებაზე, რომელსაც თქვენ გაყევით"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are following in %(team_name)s"
+msgstr "%(sender_name)s კომენტარი გააკეთა ღონისძიება, რომელსაც თქვენ გაყევით %(team_name)s -ში"
+
+msgid "A user updated an event"
+msgstr "მომხმარებელმა განაახლა ღონისძიება"
+
+#, python-format
+msgid "%(sender_name)s updated the event %(object_name)s"
+msgstr "%(sender_name)s -მა განაახლა ღონისძიება %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s updated an event you are following"
+msgstr "%(sender_name)s -მა განაახლა ღონისძიება, რომელსაც თქვენ გაყევით"
+
+#, python-format
+msgid "The event \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "ღონისძიება\"%(object_name)s\"   %(team_name)s-ში განახლებულ იქნა."
+
+msgid "A user updated an event you are attending"
+msgstr "მომხმარებელმა განაახლა ღონისძიება, რომელსაც თქვენ ესწრებით"
+
+#, python-format
+msgid "%(sender_name)s updated an event you are attending"
+msgstr "%(sender_name)s -მა განაახლა ღონისძიება, რომელსაც თქვენ ესწრებით"
+
+msgid "A user updated an event poll"
+msgstr "მომხმარებელმა განაახლა ღონისძიების გამოკითხვა"
+
+#, python-format
+msgid "%(sender_name)s changed the event poll %(object_name)s"
+msgstr "%(sender_name)s შეცვალა ღონისძიების გამოკითხვა %(object_name)s"
+
+msgid "You are following this event poll"
+msgstr "თქვენ გაყევით ამ ღონისძიების გამოკითხვას"
+
+#, python-format
+msgid "%(sender_name)s updated an event poll you are following"
+msgstr "%(sender_name)s განაახლა ღონისძიების გამოკითხვა, რომელსაც თქვენ მიყვებით"
+
+#, python-format
+msgid "The event poll \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "ღონისძიების გამოკითხვა \"%(object_name)s\" განახლებულ იქნა %(team_name)s-ში."
+
+msgid "A user voted in an event poll"
+msgstr "მომხმარებელმა ხმა მისცა ღონისძიების გამოკითხვაში"
+
+#, python-format
+msgid "%(sender_name)s voted in the event poll %(object_name)s"
+msgstr "%(sender_name)s-მა ხმა მისცა ღონისძიების გამოკითხვაში %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other voted in the event poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others voted in the event poll %(object_name)s"
+msgstr[0] "%(sender_name)s -მა და %(count_minus_one)d სხვებმა ხმა მისცეს ღონისძიების გამოკითხვაში %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s voted in an event poll you are following"
+msgstr "%(sender_name)s ხმა მისცა ღონისძიების გამოკითხვაში, რომელსაც თქვენ მიყვებით"
+
+#, python-format
+msgid "%(sender_name)s voted in the event poll \"%(object_name)s\" in %(team_name)s."
+msgstr "%(sender_name)s ხმა მისცა ღონისძიების გამოკითხვაში \"%(object_name)s\" %(team_name)s-ში."
+
+msgid "Upcoming Events"
+msgstr "უახლოესი ღონისძიებები"
+
+msgid "No upcoming events"
+msgstr "უახლოესი ღონისძიებები არ არსებობს"
+
+msgid "Created By"
+msgstr "შექმნილია"
+
+msgid "Soonest Upcoming"
+msgstr "უახლოეს მომავალში"
+
+msgid "Newest Created"
+msgstr "უახლესი შექმნილი"
+
+msgid "Title"
+msgstr "სათაური"
+
+msgid "No video conference"
+msgstr ""
+
+msgid "BBB-Meeting"
+msgstr ""
+
+msgid "Fairmeeting"
+msgstr ""
+
+msgid "Presenters"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "დაგეგმილი"
+
+msgid "Voting open"
+msgstr "ხმის მიცემის გახსნა"
+
+msgid "Canceled"
+msgstr "გაუქმება"
+
+msgid "Archived Event Poll"
+msgstr "ღონისძიების გამოკითხვის დაარქივება"
+
+msgid "Start"
+msgstr "დასაწყისი"
+
+msgid "End"
+msgstr "დასასრული"
+
+msgid "State"
+msgstr "გაფრთხილების მდგომარეობა"
+
+msgid "Is hidden proxy"
+msgstr ""
+
+msgid "Note"
+msgstr "შენიშვნა"
+
+msgid "Event date"
+msgstr "ღონისძიების თარიღი"
+
+msgid "Type of video conference available for the event"
+msgstr ""
+
+msgid "Location"
+msgstr "ლოკაცია"
+
+msgid "Latitude"
+msgstr "გრძედი"
+
+msgid "Longitude"
+msgstr "განედი"
+
+msgid "Street"
+msgstr "ქუჩა"
+
+msgid "ZIP code"
+msgstr "საფოსტო ინდექსი"
+
+msgid "City"
+msgstr "ქალაქი"
+
+msgid "Is public (on website)"
+msgstr "საჯარო (ვებ-საიტზე)"
+
+msgid "Image"
+msgstr "გამოსახულება"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Original Event Poll"
+msgstr "პირვანდელი ღონისძიების გამოკითხვა"
+
+msgid "Event"
+msgstr "ღონისძიება"
+
+#, fuzzy, python-format
+msgid "%(event)s (hidden proxy)"
+msgstr "%(event)s (დაარქივებულია)"
+
+#, python-format
+msgid "%(event)s (%(date)s - %(end)s)"
+msgstr "%(event)s (%(date)s - %(end)s)"
+
+#, python-format
+msgid "%(event)s (%(from)s - %(to)s)"
+msgstr "%(event)s (%(from)s - %(to)s)"
+
+#, python-format
+msgid "%(event)s (canceled)"
+msgstr "%(event)s (გაუქმებულია)"
+
+#, python-format
+msgid "%(event)s (pending)"
+msgstr "%(event)s (პროცესშია)"
+
+#, python-format
+msgid "%(event)s (archived)"
+msgstr "%(event)s (დაარქივებულია)"
+
+#, fuzzy, python-format
+msgid "%(event)s (state unknown)"
+msgstr "%(event)s (პროცესშია)"
+
+#, fuzzy
+msgid "Now"
+msgstr "არა"
+
+msgctxt "the subject"
+msgid "Votes"
+msgstr "ხმები"
+
+msgid "Suggestion"
+msgstr "წინადადება"
+
+msgid "Suggestions"
+msgstr "წინადადებები"
+
+msgid "Yes"
+msgstr "დიახ"
+
+msgid "Maybe"
+msgstr "შესაძლოა"
+
+msgid "No"
+msgstr "არა"
+
+msgid "Voter"
+msgstr "ხმის მიმცემი"
+
+msgid "Vote"
+msgstr "ხმის მიცემა"
+
+msgctxt "the subject"
+msgid "Vote"
+msgstr "ხმა"
+
+msgid "Creator"
+msgstr "შემქმნელი"
+
+msgid "Created"
+msgstr "შექმნილი"
+
+msgid "Last modified"
+msgstr "უკანასკნელი განახლება"
+
+msgid "Text"
+msgstr "ტექსტი"
+
+msgid "Comment"
+msgstr "კომენტარი"
+
+msgid "Comments"
+msgstr "კომენტარები"
+
+msgid "Lobby Check-in Event"
+msgstr ""
+
+msgid "Stage Stream"
+msgstr ""
+
+msgid "Workshop"
+msgstr ""
+
+msgid "Discussion"
+msgstr ""
+
+msgid "Coffee Table"
+msgstr ""
+
+msgid "Room"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Event Type"
+msgstr "ღონისძიების შექმნა"
+
+msgid "Is a Break"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a title for the new event."
+msgid "Event is visible on the conference microsite"
+msgstr "შეიყვანეთ სათაური ახალი ღონისძიებისათვის."
+
+msgid "Event's description is visible on the conference microsite"
+msgstr ""
+
+msgid "Maximum Event Participants"
+msgstr ""
+
+msgid "Embed code (HTML)"
+msgstr ""
+
+msgid "Presentation file"
+msgstr ""
+
+#, fuzzy
+msgid "Show chat"
+msgstr "ყველას ჩვენება"
+
+msgid "Enable Streaming"
+msgstr ""
+
+msgid "Stream URL"
+msgstr ""
+
+msgid "The URL of your streaming provider to receive the incoming stream"
+msgstr ""
+
+#, fuzzy
+msgid "Stream Key"
+msgstr "ქუჩა"
+
+msgid "The key for this specific stream session you created at your streaming provider"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Event"
+msgstr "ღონისძიების შექმნა"
+
+#, fuzzy
+msgid "Conference Events"
+msgstr "ღონისძიების შექმნა"
+
+#, fuzzy, python-format
+msgid "%(event)s %(type)s"
+msgstr "%(event)s (პროცესშია)"
+
+msgid "Create Event"
+msgstr "ღონისძიების შექმნა"
+
+msgid "Would you like to create an event"
+msgstr "გსურთ ღონისძიების შექმნა"
+
+msgid "on"
+msgstr "- ზე"
+
+msgid "from"
+msgstr "- დან"
+
+msgid "until"
+msgstr "- მდე"
+
+msgid "Cancel"
+msgstr "გაუქმება"
+
+msgid "OK"
+msgstr "კარგი"
+
+msgctxt "time"
+msgid "all day"
+msgstr "მთელი დღე"
+
+msgctxt "time"
+msgid "at"
+msgstr "- სთან"
+
+msgctxt "time"
+msgid "o'clock"
+msgstr "საათზე"
+
+msgctxt "time"
+msgid "from"
+msgstr "- დან"
+
+msgctxt "time"
+msgid "until"
+msgstr "- მდე"
+
+#, python-format
+msgid "Add %(event_type_verbose)s in Room %(room_name)s"
+msgstr ""
+
+#, python-format
+msgid "Edit %(event_type_verbose)s \"%(event_title)s\" in Room %(room_name)s"
+msgstr ""
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "შეცდომა დაფიქსირდა ერთ-ერთ გრაფაში, რომელშიც ინფორმაცია შეიყვანეთ. გთხოვთ შეასწოროთ შენახვამდე!"
+
+#, fuzzy
+msgid "Enter a title for the conference event."
+msgstr "შეიყვანეთ სათაური ახალი ღონისძიებისათვის."
+
+#, fuzzy
+msgid "Event is a break"
+msgstr "ღონისძიების თარიღი"
+
+msgid "Check this to create an empty break event that shows up in the agenda and timeline"
+msgstr ""
+
+msgid "Description and Infos"
+msgstr "აღწერა და ინფორმაცია"
+
+msgid "Description"
+msgstr "აღწერა"
+
+msgid "Enter a description for the event"
+msgstr "აღწერის შეყვანა ღონისძიებისთვის"
+
+msgid "Show this event on microsite"
+msgstr ""
+
+msgid "Uncheck this to hide the event on microsite"
+msgstr ""
+
+msgid "Show the event's description on microsite"
+msgstr ""
+
+msgid "Uncheck this to disable platform-wide viewing of the event's description"
+msgstr ""
+
+msgid "Uncheck this to disable public viewing of the event's description"
+msgstr ""
+
+msgid "Example:"
+msgstr ""
+
+#, fuzzy
+msgid "Stream URL for the Event"
+msgstr "გარე ბმული ღონისძიებისათვის"
+
+msgid "Custom embed code (HTML)"
+msgstr ""
+
+msgid "How many participants can join the video call before it is full."
+msgstr ""
+
+msgid "Note that changing this setting will have no effect while an event is running."
+msgstr ""
+
+#, fuzzy
+msgid "BBB video conference options"
+msgstr "ღონისძიების შექმნა"
+
+msgid "Upload a preview image for the Conference Event"
+msgstr ""
+
+msgid "Will be shown on the event card in the conference room."
+msgstr ""
+
+msgid "The presenters will be shown in order in the event and will receive Moderator permissions for the BBB-Room"
+msgstr ""
+
+msgid "The presentation file (e.g. PDF) will be pre-uploaded to the BBB room."
+msgstr ""
+
+msgid "Note: If a slide is subsequently added to an existing event, it does not automatically appear in the event if this event was recently attended and is therefore active. This requires an active ending of the event or a 5-minute idle time without participants until the event is automatically ended. "
+msgstr ""
+
+msgid "You can actively end an existing event room by clicking on \"End Meeting\" in the top right-hand corner of the room in the \"Three-Dot Menu\"."
+msgstr ""
+
+#, fuzzy
+msgid "Show room chat in the event"
+msgstr "თქვენ ესწრებით ამ ღონისძიებას"
+
+msgid "Check this to show rocket chat in the sidebar."
+msgstr ""
+
+#, fuzzy
+msgid "Stream this event"
+msgstr "გარე ბმული ღონისძიებისათვის"
+
+msgid "Please note: Streaming is only available for premium conferences. If you would like to use streaming, please request it explicitly when booking. Otherwise, these settings have no function."
+msgstr ""
+
+msgid "You can set up the BBB event to be streamed to a streaming provider (e.g. YouTube)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Once set up and activated, a streaming-bot will enter the event and stream all video and audio to the selected stream endpoint.\n"
+"The bot will enter and start streaming %(start_minutes)s minutes before the event start time and stop streaming and leave %(end_minutes)s minutes after the event end time.\n"
+"You can adjust the meeting times on-the-fly to allow for longer streaming if the event runs longer than expected."
+msgstr ""
+
+msgid "If you are using the maximum participant limit, please allow for the streaming bot's additional participant spot."
+msgstr ""
+
+msgid "Enable Streaming this BBB meeting"
+msgstr ""
+
+msgid "Create"
+msgstr "შექმნა"
+
+msgid "Save"
+msgstr "შენახვა"
+
+#, fuzzy
+msgid "Create and create another"
+msgstr "შექმნა ღონისძიება"
+
+#, fuzzy
+msgid "Save and create another"
+msgstr "შექმნა ღონისძიება"
+
+msgid "Add unscheduled event"
+msgstr "გეგმის გარეშე ღონისძიების დამატება"
+
+msgid "Edit"
+msgstr "რედაქტირება"
+
+msgid "Event Polls"
+msgstr "ღონისძიების გამოკითხვები"
+
+msgid "Enter a title for the new event to be scheduled."
+msgstr "შეიყვანეთ სათაური ახალი ღონისძიებისათვის, რომ დაიგეგმოს."
+
+msgid "Dates"
+msgstr "თარიღები"
+
+msgid "Please select the available days in the calendar."
+msgstr "გთხოვთ აირჩიოთ კალენდარში მოცემული თავისუფალი დღეები."
+
+msgid "You can select the same day more than once."
+msgstr "თქვენ შეგიძლიათ ერთზე მეტჯერ აირჩიოთ ერთი და იმავე დღე."
+
+msgid "Time: e.g. 10 or 10:30."
+msgstr "დრო: მაგ. 10 ან 10:30."
+
+msgid "Time"
+msgstr "დრო"
+
+msgid "Note: You cannot edit the dates for this event poll because someone has already cast their vote!"
+msgstr "შენიშვნა: თქვენ არ შეგიძლიათ ამ ღონისძიების გამოკითხვის თარიღის რედაქტირება, რადგან ვიღაცამ უკვე აირჩია ხმა!"
+
+msgid "Example: http://mywebsite.com"
+msgstr "მაგალითი: http://mywebsite.com"
+
+msgid "External Link for the event"
+msgstr "გარე ბმული ღონისძიებისათვის"
+
+msgid "Delete"
+msgstr "წაშლა"
+
+msgid "There are no open event polls."
+msgstr "ღია ღონისძიების გამოკითხვები არ არის."
+
+msgid "Planned Events"
+msgstr "დაგეგმილი ღონისძიებები"
+
+msgid "Past Events"
+msgstr "ჩატარებული ღონისძიებები"
+
+msgid "Archived Event Polls"
+msgstr "ღონისძიების გამოკითხვები არ არის დაარქივებული"
+
+msgid "There are no archived event polls."
+msgstr "ღონისძიების გამოკითხვათა არქივი არ არის."
+
+#, python-format
+msgid "Vote for %(title)s"
+msgstr "ხმის მიცემა %(title)s-თვის"
+
+#, python-format
+msgid "Archived: %(title)s"
+msgstr "დაარქივებულია: %(title)s"
+
+msgid "This event has already been scheduled. Voting is closed."
+msgstr "ეს ღონისძიება უკვე დაიგემა. ხმის მიცემა შეწყვეტილია."
+
+msgid "This event has been canceled. Voting is closed."
+msgstr "ეს ღონისძიება გაუქმდა. ხმის მიცემა შეწყვეტილია."
+
+msgid "Nobody has voted for this event poll yet."
+msgstr "ჯერ არავის მიუცია ხმა ამ ღონისძიების გამოკითხვაზე."
+
+msgid "Create an event from one of the suggestions"
+msgstr "ღონისძიების შექმნა მოცემული წინადადებების დახმარებით"
+
+#, python-format
+msgid "Set the date to %(suggestion)s."
+msgstr "%(suggestion)s -ის დათარიღება."
+
+msgid "When do you have time?"
+msgstr "როდის გაქვთ დრო?"
+
+msgid "There are no date suggestions for this event poll yet!"
+msgstr "ღონისძიების ამ გამოკითხვისთვის თარიღის შესახებ წინადადებები ჯერ არ არის!"
+
+#, python-format
+msgid "Do you really want to delete unscheduled event „%(title)s“?"
+msgstr "ნამდვილად გსურთ გეგმის გარეშე ღონისძიების „%(title)s“ წაშლა?"
+
+msgid "Delete unscheduled event"
+msgstr "გეგმის გარეშე ღონისძიების წაშლა"
+
+msgid "You will now receive notifications for comments or when this event poll is changed and whenever somebody casts their vote."
+msgstr "თქვენ მიიღებთ შეტყობინებებს კომენტარებზე ან ღონისძიების გამოკითხვის ცვლილებასა და ხმის მიცემის შეცვლასთან დაკავშირებით."
+
+msgid "Write comment..."
+msgstr "კომენტარის დაწერა..."
+
+msgid "Post"
+msgstr "პოსტი"
+
+msgid "Add event"
+msgstr "ღონისძიების დამატება"
+
+#, python-format
+msgid ""
+"\n"
+"                            Note: After this event will be posted, each user of %(forum_name)s may be able to see it.<br>\n"
+"                            If you do not want this, please, use another group or project of your choice.\n"
+"                            "
+msgstr ""
+
+msgid "Enter a title for the new event."
+msgstr "შეიყვანეთ სათაური ახალი ღონისძიებისათვის."
+
+#, fuzzy
+msgid "Include a video conference"
+msgstr "ღონისძიების შექმნა"
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
+
+msgid "The first uploaded image will be displayed as a wallpaper."
+msgstr "პირველი ატვირთული გამოსახულება ნაჩვენები იქნება, როგორც კედლის ფონი."
+
+msgid "If you set this, your event will be shown on the map! (if permitted by its visibility settings)"
+msgstr "თუ თქვენ ეს დააყენეთ, ღონისძიება ნაჩვენები იქნება რუკაზე! ( ხილვადობის პარამეტრების შესაბამისად)"
+
+msgid "Calendar"
+msgstr "კალენდარი"
+
+msgid "Copy this iCal-link into your calendar application to import current events:"
+msgstr "გდააკოპირეთ ეს iCal ბმული თქვენი კალენდარის აპლიკაციაში, რომ გადმოიტანოთ მიმდინარე ღონისძიებები:"
+
+msgid "Also include all events from projects within this group in feed"
+msgstr "ასევე შეიყვანეთ პროექტის ყველა ღონისძიება ამ ჯგუფის feed-ში"
+
+msgid "iCal Feed"
+msgstr "iCal Feed"
+
+msgid "Enter the title for a new event or select a day in the Calendar."
+msgstr "შეიყვანეთ სათაური ახალი ღონისძიებისათვის ან აირჩიეთ დღე კალენდარში."
+
+msgid "Export event feed"
+msgstr "ღონისძიების feed-ის ექსპორტი"
+
+#, fuzzy
+msgid "Create Conference Event"
+msgstr "ღონისძიების შექმნა"
+
+msgid "Conference events can be created directly from the rooms themselves of the conference interface or in a central place here"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Room Management"
+msgstr "ღონისძიების შექმნა"
+
+#, fuzzy
+msgid "There are no conference events."
+msgstr "ღია ღონისძიების გამოკითხვები არ არის."
+
+msgid "There are no current or future events."
+msgstr "მიმდინარე ან მომავალი ღონისძიებები არ არის."
+
+msgid "There are no past events."
+msgstr "ჩატარებული ღონისძიებები არ არის."
+
+msgid "There are no upcoming events"
+msgstr "უახლოესი ღონისძიებები არ არის"
+
+msgid "Back to Events"
+msgstr "უკან ღონისძიებებზე"
+
+msgid "Return to Event Polls"
+msgstr "ღონისძიებების გამოკითხვაზე დაბრუნება"
+
+msgid "Return to Archived Event Polls"
+msgstr "დაარქივებულ ღონისძიების გამოკითხვებზე დაბრუნება"
+
+msgid "List"
+msgstr "სია"
+
+msgid "by"
+msgstr "მიერ"
+
+msgid "View"
+msgstr ""
+
+msgid "Created Event"
+msgstr "შექმნილი ღონისძიება"
+
+#, python-format
+msgid "Do you really want to delete event „%(title)s“?"
+msgstr "ნამდვილად გსურთ წაშალოთ ღონისძიება„%(title)s“?"
+
+msgid "Delete event"
+msgstr "ღონისძიების წაშლა"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you are attending in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"გამარჯობა, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s-მა დაწერა კომენტარი ღონისძიებაზე, რომელსაც თქვენ ესწრებით %(team_name)s-ში:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"ღონისძიებაზე:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(გაყევით ბმულს უპირატესი შეტყობინებების რედაქტირებისათვის: %(notification_settings_url)s )\n"
+"\n"
+"თქვენი  %(site_name)s-ის გუნდი.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending in %(team_name)s."
+msgstr "%(sender_name)s -მა კომენტარი გააკეთა ღონისძიებაზე, რომელსაც თქვენ ესწრებით %(team_name)s -ში."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new event \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"გამარჯობა %(receiver_name)s,\n"
+"\n"
+"ახალი ღონისძიება \"%(object_name)s\" შექმნილ იქნა %(team_name)s-ში %(sender_name)s-ის მიერ.\n"
+"\n"
+"იგი შეგიძლიათ იხილოთ მოცემული ბმულის საშუალებით:%(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(გაყევით მოცემულ ბმულს უპირატესი შეტყობინებების რედაქტირებისათვის:%(notification_settings_url)s )\n"
+"\n"
+"თქვენი %(site_name)s-ის გუნდი."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you created in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"გამარჯობა, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s გააკეთა კომენტარი თქვენ მიერ შექმნილ ღონისძიებაზე %(team_name)s-ში:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"თქვენს ღონისძიებაზე:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(გაყევით ბმულს უპირატესი შეტყობინებების რედაქტირებისათვის :%(notification_settings_url)s )\n"
+"\n"
+"თქვენი%(site_name)s-ის გუნდი\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your events in %(team_name)s."
+msgstr "%(sender_name)s-მა კომენტარი გააკეთა თქვენ ღონისძიებაზე %(team_name)s-ში."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new event \"%(object_name)s\", on %(event_date)s, was announced in %(team_name)s by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"გამარჯობა, %(receiver_name)s,\n"
+"\n"
+"ახალი ღონისძიება \"%(object_name)s\", თარიღით %(event_date)s გამოცხადებულ იქნა%(team_name)s -ში %(sender_name)s-ის მიერ.\n"
+"\n"
+"თქვენ შეგიძლიათ მოძებნოთ ამ ბმულის საშუალებით:%(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(გაყევით ბმულს უპირატესი შეტყობინებების რედაქტირებისათვის:%(notification_settings_url)s )\n"
+"\n"
+"თქვენი%(site_name)s-ის გუნდი."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you were tagged in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"გამარჯობა, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s-მა დატოვა კომენტარი ღონისძიებაზე %(team_name)s-ში, სადაც თქვენ ხართ მონიშნული:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"ღონისძიებაზე: n\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(გაყევით ბმულს უპირატესი ღონისძიებების რედაქტირებისათვის: %(notification_settings_url)s )\n"
+"\n"
+"თქვენი %(site_name)s -ის გუნდი..\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a event you were tagged in %(team_name)s."
+msgstr "%(sender_name)s-მა დააკომენტარა ღონისძიებაზე %(team_name)s-ში, სადაც თქვენ ხართ მონიშნული."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event poll you voted in in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event poll:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"გამარჯობა, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s-მა დატოვა კომენტარი ღონისძიების გამოკითხვაზე %(team_name)s-ში, სადაც თქვენ ხმა მიეცით \n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event poll:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(გაყევით ბმულს უპირატესი შეტყობინებების რედაქტირებისთვის: %(notification_settings_url)s )\n"
+"\n"
+"თქვენი %(site_name)s-ის გუნდი.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on an event poll you voted in in %(team_name)s."
+msgstr "%(sender_name)s-მა დააკომენტარა ღონისძიების გამოკითხვაზე %(team_name)s-ში, სადაც თქვენ ხმა მიეცით."
+
+msgid "Delete Event"
+msgstr "ღონისძიების წაშლა"
+
+msgid "(Canceled!)"
+msgstr "(გაუქმებულია!)"
+
+msgid "This is an archived event poll."
+msgstr "ეს არის დაარქივებული ღონისძიების გამოკითხვა."
+
+msgid "The event that was created after the poll can be viewed here:"
+msgstr "ღონისძიება, რომელიც გამოკითხვის შემდეგ შეიქმნა, შესაძლებელია ნახოთ აქ:"
+
+msgid "(No description set)"
+msgstr "(აღწერა არ არის დამატებული)"
+
+msgctxt "someone else is going"
+msgid "Going"
+msgstr "მიდის"
+
+msgctxt "someone else is maybe going"
+msgid "Maybe going"
+msgstr "შეიძლება მიდიოდეს"
+
+msgctxt "someone else can't go"
+msgid "Can't go"
+msgstr "არ შეუძლია წასვლა"
+
+msgctxt "one or many people are going"
+msgid "Going"
+msgid_plural "Going"
+msgstr[0] "მიდიან"
+
+msgctxt "one or many people are maybe going"
+msgid "Maybe going"
+msgid_plural "Maybe going"
+msgstr[0] "შეიძლება მიდიან"
+
+msgctxt "one or many people are not going"
+msgid "Can't go"
+msgid_plural "Can't go"
+msgstr[0] "არ შეუძლიათ წასვლა"
+
+msgid "Going"
+msgstr "მიდიხართ"
+
+msgid "Maybe going"
+msgstr "შეიძლება მიდიხართ"
+
+msgid "Can't go"
+msgstr "ვერ მიდიხართ"
+
+msgid "Are you going?"
+msgstr "მიდიხართ?"
+
+msgid "No Choice"
+msgstr "არ არის არჩცევანი"
+
+msgid "Add event to your calendar"
+msgstr ""
+
+#, fuzzy
+msgid "Copy this iCal-link into your calendar application to import this event:"
+msgstr "გდააკოპირეთ ეს iCal ბმული თქვენი კალენდარის აპლიკაციაში, რომ გადმოიტანოთ მიმდინარე ღონისძიებები:"
+
+#, fuzzy
+msgid "Start/join video conference for this event"
+msgstr "დაწყება/ჩართვა ვიდეო ჩატში ამ ღონისძიებებისთვის"
+
+msgid "Popout"
+msgstr ""
+
+msgid "Fullscreen"
+msgstr "სრული ეკრანი"
+
+#, fuzzy
+msgid "Video conference"
+msgstr "ღონისძიების შექმნა"
+
+msgid "Leave Fullscreen"
+msgstr "სრული ეკრანის დატოვება"
+
+msgid "Back"
+msgstr "უკან"
+
+#, fuzzy
+msgid "Leave video conference"
+msgstr "ღონისძიების შექმნა"
+
+msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
+msgstr ""
+
+msgid "You will now receive notifications for comments or when this event is updated or its details change."
+msgstr "თქვენ ახლა მიიღებთ შეტყობინებებს კომენტარებისგან. ასევე, როდესაც ეს ღონისძიება განახლდება ან მისი დეტალები შეიცვლება."
+
+msgid "You created an event"
+msgstr "თქვენ შექმენით ღონისძიება"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created an event"
+msgstr "შექმნა ღონისძიება"
+
+msgid "Show all"
+msgstr "ყველას ჩვენება"
+
+msgid "Upcoming events"
+msgstr "მომავალი ღონისძიებები"
+
+#, python-format
+msgid "Event \"%(title)s\" was edited successfully."
+msgstr "ღონისძიება\"%(title)s\" წარმატებით დარედაქტირდა."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be edited."
+msgstr "ღონისძიების \"%(title)s\" დარედაქტირება ვერ მოხერხდა."
+
+msgid "Please use the conference management area to add new workshops!"
+msgstr ""
+
+msgid "The page you requested is not available for this event at this time."
+msgstr "თქვენ მიერ მოთხოვნილი გვერდი არ არის ამ დროისთვის არ არის ამ ღონისძიებისთვის დაშვებული."
+
+msgid "One of the event suggestions times could not be understood!"
+msgstr "ღონისძიების წინადადების დროის ამოცნობა ვერ მოხერხდა!"
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was edited successfully."
+msgstr "გეგმის გარეშე ღონისძიება\"%(title)s\" წარმატებით დარედაქტირდა."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be edited."
+msgstr "გეგმის გარეშე ღონისძიების \"%(title)s\" დარედაქტირება ვერ მოხერხდა."
+
+#, python-format
+msgid "Event \"%(title)s\" was added successfully."
+msgstr "ღონისძიება\"%(title)s\" წარმატებით დაემატა."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be added."
+msgstr "ღონისძიების \"%(title)s\" დამატება ვერ მოხერხდა."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was added successfully."
+msgstr "დაუგეგმავი ღონისძიება\"%(title)s\" წარმატებით დარედაქტირდა."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be added."
+msgstr "დაუგეგმავი \"%(title)s\" დარედაქტირება ვერ მოხერხდა."
+
+msgid "You should define at least one date suggestion."
+msgstr "თქვენ უნდა განსაზღვროთ სულ ცოტა ერთი თარიღის წინადადება."
+
+#, python-format
+msgid "Event \"%(title)s\" was deleted successfully."
+msgstr "ღონისძიება\"%(title)s\" წარმატებით წაიშალა."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be deleted."
+msgstr "ღონისძიების\"%(title)s\" წაშლა ვერ მოხერხდა."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was deleted successfully."
+msgstr "დაუგეგმავი ღონისძიება\"%(title)s\" წარმატებით წაიშალა."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be deleted."
+msgstr "დაუგეგმავი ღონისძიების \"%(title)s\" წაშლა ვერ მოხერხდა."
+
+msgid "Your votes were saved successfully."
+msgstr "თქვენი ხმების შენახვა წარმატებით განხორციელდა."
+
+msgid "Your votes could not be saved."
+msgstr "თქვენი ხმების შენახვა ვერ მოხერხდა."
+
+msgid "This is event is already scheduled. You cannot vote for it any more."
+msgstr "ეს ღონისძიება უკვე დაგეგმილია. თქვენ ვეღარ მისცემს ხმას."
+
+msgid "The complete request can only be sent via POST!"
+msgstr "სრული მოთხოვნის გაგზავნა მხოლოდ ფოსტით არის შესაძლებელი!"
+
+msgid "Event cannot be completed: No date was supplied."
+msgstr "ღონისძიების დასრულება ვერ მოხერხდა: თარიღი არ იქნა შეყვანილი."
+
+msgid "The event was created successfully at the specified date."
+msgstr "ღონისძიება კონკრეტულ თარიღზე წარმატებით შეიქმნა."
+
+#, fuzzy
+msgid "Upcoming event"
+msgstr "მომავალი ღონისძიებები"
+
+msgid "Your comment was added successfully."
+msgstr "თქვენი კომენტარი წარმატებით დაემატა."
+
+msgid "Your comment was deleted successfully."
+msgstr "თქვენი კომენტარი წარმატებით წაიშალა."
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
+
+#~ msgid "%(sender_name)s voted in"
+#~ msgstr "%(sender_name)s-(ებ)მა ხმა მისცა"
+
+#~ msgid "Date"
+#~ msgstr "თარიღი"
+
+#~ msgid "End date."
+#~ msgstr "დასასრულის თარიღი."
+
+#~ msgid "Event poll updated by %(sender_name)s"
+#~ msgstr "ღონისძიების გამოკითხვა განახლდა %(sender_name)s-ის მიერ"
+
+#, fuzzy
+#~ msgid "Example: https://www.youtube.com/watch?v=12345"
+#~ msgstr "მაგალითი: http://mywebsite.com"
+
+#~ msgid "From"
+#~ msgstr "- დან"
+
+#~ msgid "Kalender"
+#~ msgstr "კალენდარი"
+
+#~ msgid "New event by %(sender_name)s"
+#~ msgstr "ახალი ღონისძიება %(sender_name)s -ის მიერ"
+
+#~ msgid "New event by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "ახალი ღონისძიება %(sender_name)s -ის მიერ %(team_name)s -ში (რომელსაც თქვენ გაყევით)"
+
+#~ msgid "New event poll by %(sender_name)s"
+#~ msgstr "ახალი ღონისძიების გამოკითხვა %(sender_name)s -ის მიერ"
+
+#~ msgid "New event poll by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "ახალი ღონისძიება %(sender_name)s -ის მიერ %(team_name)s -ში (რომელსაც თქვენ გაყევით)"
+
+#~ msgid "Start date."
+#~ msgstr "საწყისი თარიღი."
+
+#, fuzzy
+#~ msgid "Start/join BBB video conference for this event"
+#~ msgstr "დაწყება/ჩართვა ვიდეო ჩატში ამ ღონისძიებებისთვის"
+
+#~ msgid "Start/join video chat for this event"
+#~ msgstr "დაწყება/ჩართვა ვიდეო ჩატში ამ ღონისძიებებისთვის"
+
+#~ msgid "Stop Video Chat"
+#~ msgstr "ვიდეო ჩატის გამორთვა"
+
+#~ msgid "Until"
+#~ msgstr "- მდე"
+
+#~ msgid "Video Chat"
+#~ msgstr "ვიდეო ჩატი"

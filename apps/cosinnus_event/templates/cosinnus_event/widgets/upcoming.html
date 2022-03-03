@@ -1,0 +1,51 @@
+{% load i18n cosinnus_tags %}
+
+{% if event_display == 'calendar' %}
+    {% if events %}
+        {% include 'cosinnus_event/attached_events.html' with events=events no_indent=1 %}
+    {% else %}
+        <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                        <i class="fa fa-tasks"></i>
+                    </a>
+                    <div class="media-body">
+                        {% trans "There are no upcoming events" %}
+                    </div>
+                </li>
+            </ul>
+        </div><!-- btn -->
+    {% endif %}
+{% endif %}
+
+
+
+<script type="text/javascript">
+    var cosinnus_calendarEvents = [
+        {% for event in calendar_events %}
+            {% if event.from_date %}
+            {
+                id: {{ event.id }},
+                title: $.cosinnus.decodeEntities('{{ event.title|truncatechars:25 }}{% if event.video_conference_type == 1 %} ({% trans "BBB-Meeting" %}){% elif event.video_conference_type == 2 %} ({% trans "Fairmeeting" %}){% endif %}{% if not event.is_hidden_group_proxy and group != event.group %} (&#8599; {{ event.group.name|truncatechars:14 }}){% endif %}'),
+                start: "{{ event.from_date|date:"c"}}",
+                {% if event.to_date %}
+                end: "{{ event.to_date|date:"c"}}",
+                {% endif %}
+                {% if event.is_hidden_group_proxy %}
+                className: 'event-special',
+                {% endif %}
+                {% if not user|has_write_access:event or event.is_hidden_group_proxy %}
+                editable: false,
+                {% endif %}
+                url: '{{ event.get_absolute_url }}{% if not event.is_hidden_group_proxy and group != event.group %}?reflected_item_redirect=1{% endif %}'
+            },
+            {% endif %}
+        
+        {% endfor %}
+    
+    ];
+
+    $.cosinnus.fullcalendar();
+</script>
+

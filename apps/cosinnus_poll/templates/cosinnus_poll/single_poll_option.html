@@ -1,0 +1,124 @@
+{% load i18n static cosinnus_tags thumbnail %}
+
+{# this expects {{ option }} in its context as parameter #}
+{# If we are in vote mode, we expect a ``option_formsets_dict`` context variable, which has a mapping of { option_id --> VoteForm } #}
+{% with form=option_formsets_dict|dict_lookup:option.id vote_counts=options_votes_dict|dict_lookup:option.id %}
+    <div class="btn btn-emphasized w100 poll-option {% if mode == 'vote' %}{% if form.choice.value == 2 %}poll-option-yes{% elif form.choice.value == 1 %}poll-option-maybe{% else %}poll-option-no{% endif %}{% endif %}"
+        {% if mode == 'vote' and form %}
+            data-poll-option-vote-id="id_{{ form.choice.html_name }}" 
+            data-poll-can-vote-maybe="{% if poll.can_vote_maybe %}1{% else %}0{% endif %}"
+            data-poll-multiple-votes="{% if poll.multiple_votes %}1{% else %}0{% endif %}"
+        {% endif %}>
+        <ul class="media-list">
+            <li class="media">
+                {# The inputs here are only for display; they don't carry data in the form. All data handling is done in the JS script #}
+                <a class="pull-left poll-option-display poll-option-display-yes poll-option-display-color" href="#">
+                	{% if poll.multiple_votes %}
+                    	<input type="checkbox" class="noselect vote-control" checked="true">
+                    {% else %}
+                    	<input type="radio" class="noselect vote-control" checked="true">
+                    {% endif %}
+                </a>
+                <a class="pull-left poll-option-display poll-option-display-maybe poll-option-display-color" href="#">
+                	(<input type="checkbox" class="noselect vote-control" checked="true">) 	
+                </a>
+                <a class="pull-left poll-option-display poll-option-display-no poll-option-display-color" href="#">
+                	{% if poll.multiple_votes %}
+	                	<input type="checkbox"class="noselect vote-control"> 	
+                    {% else %}
+                    	<input type="radio" class="noselect vote-control">
+                	{% endif %}
+                </a>
+                
+                
+            	{% if user|has_write_access:poll and mode == 'vote' %}
+                    {% captureas close_poll_modal %}close_poll_modal_option_{{ option.pk }}{% endcaptureas %}
+                    <a class="pull-right vote-trophy" data-toggle="modal" data-target="#{{ close_poll_modal }}" title="{% trans "Make winner and complete poll" %}">
+                        {# Complete dialog is outside of element #}
+                        <i class="fa fa-trophy"></i>
+                    </a>
+                {% endif %}
+                
+                
+                <div class="media-body">
+                
+                	
+                    <span>
+	                    <span class="pull-right poll-option-display poll-option-display-yes" style="margin-left: 10px;">
+				              <b><em>{% trans "Yes" %}</em></b>
+				        </span>
+				        <span class="pull-right poll-option-display poll-option-display-maybe" style="margin-left: 10px;">
+				              <b><em>{% trans "Maybe" %}</em></b>
+				        </span>
+				        <span class="pull-right poll-option-display poll-option-display-no" style="margin-left: 10px;">
+				              <b><em>{% trans "No" %}</em></b>
+				        </span>
+                    	{{ option.description }}
+                    </span>
+                 
+                    
+                   
+	                
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="app-poll app-background vote-controls-wrapper {% if not poll.show_voters %}large-space{% endif %} ">
+        <span class="vote-count" title="{% trans "Votes" %}: {% trans "Yes" %}: {{ vote_counts.2 }} {% if poll.can_vote_maybe %} {% trans "Maybe" %}: {{ vote_counts.1 }} {% endif %} {% trans "No" %}: {{ vote_counts.0 }}">
+            <span class="vote-count-yes">
+                {% trans "Yes" %}: <b>{{ vote_counts.2 }}</b>
+            </span>
+        </span>
+        
+        {% if poll.can_vote_maybe and poll.multiple_votes %}
+            <span class="vote-count divided-vote-count " title="{% trans "Votes" %}: {% trans "Yes" %}: {{ vote_counts.2 }} {% if poll.can_vote_maybe %} {% trans "Maybe" %}: {{ vote_counts.1 }} {% endif %} {% trans "No" %}: {{ vote_counts.0 }}">
+				<span class="vote-count-maybe">
+					{% trans "Maybe" %}: <b>{{ vote_counts.1 }}</b>
+				</span>
+            </span>
+        {% endif %}
+        
+        <span class="vote-count divided-vote-count" title="{% trans "Votes" %}: {% trans "Yes" %}: {{ vote_counts.2 }} {% if poll.can_vote_maybe %} {% trans "Maybe" %}: {{ vote_counts.1 }} {% endif %} {% trans "No" %}: {{ vote_counts.0 }}">
+			<span class="vote-count-no">
+				{% trans "No" %}: <b>{{ vote_counts.0 }}</b>
+			</span>
+    	</span>
+    </div>
+    
+    {% if poll.show_voters %}
+        <div class="poll-voters-list regular-space">
+            {% for vote in option.sorted_votes_by_choice %}
+                {% include 'cosinnus_poll/poll_vote_avatar.html' with vote=vote %}
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+    {% if mode == 'vote' and user|has_write_access:poll %}
+        {% captureas label %}{% blocktrans with description=option.description %}Do you really want to complete the poll and select "{{ description }}" as winner?{% endblocktrans %}{% endcaptureas %}
+        {% captureas title %}{% trans "Complete poll" %}{% endcaptureas %}
+        {% captureas action %}{% group_url "cosinnus:poll:complete" group=group slug=poll.slug option_id=option.pk %}{% endcaptureas %}
+        {% include "cosinnus/modal_box.html" with id=close_poll_modal label=label title=title form_action=action %}
+    {% endif %}
+
+{% endwith %}
+
+<div class="clearfix"></div>
+
+            
+{% comment %}  
+Disabled items
+
+{% if option_counter %}
+    <label>{% trans "Option" %}&nbsp;{{ option_counter }}</label>
+{% endif %}
+
+{% if option.image %}
+    <div class="regular-space">
+        <a href="{{ option.image.static_image_url }}" data-lightbox="poll-option-gallery" data-title="{% if option.description %}{{ option.description }}{% endif %}">
+            <img class="image" src="{% thumbnail option.image 300x300 crop=1 upscale=1 %}" title='{% if option.description %}{{ option.description }}{% endif %}'/>
+        </a>
+    </div>
+{% endif %}
+{% endcomment %}
+    

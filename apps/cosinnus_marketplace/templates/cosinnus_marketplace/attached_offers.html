@@ -1,0 +1,26 @@
+{% load cosinnus_tags %}
+
+{% for offer in offers %}
+    <div class="app-marketplace">
+        <div class="btn btn-emphasized w100 {% if not no_indent %}indented{% endif %}" href="{{ offer.get_absolute_url }}">
+            <ul class="media-list fine-space">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                        {% include 'cosinnus_marketplace/offer_icon.html' %}
+                    </a>
+                    <div class="media-body no-vertical-padding ">
+                        <strong><a href="{{ offer.get_absolute_url }}">{{ offer.title }}</a></strong>
+                        {% with creator=offer.creator %}
+                            <div class="group-annotation">
+                                <a href="{{ creator|profile_url }}">
+                                    <i class="fa fa-user"></i>
+                                    {{ creator|full_name }}
+                                </a> 
+                            </div>
+                        {% endwith %}
+                    </div>
+                </li>
+            </ul>
+        </div><!-- btn -->
+    </div>
+{% endfor %}

@@ -1,0 +1,82 @@
+{% extends "cosinnus_etherpad/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block page_title %}
+{% trans "Pads" %} {{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        {% if object.path != '/' %}
+            <li><a href="{% group_url 'cosinnus:etherpad:list' group=group slug=object.container.slug %}">{{ object.container.title }}</a></li>
+        {% endif %}
+        <li><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></li>
+        <li class="active">{% trans "Settings" %}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus/leftnav_hierarchic_itemview.html" %}
+    
+    {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_10_documentsetting" %}
+{% endblock leftnav %}
+
+
+{% block content %}
+
+    {% if form.forms.obj.errors or form.forms.media_tag.errors %}
+        <div class="alert alert-danger alert-dismissable">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+            <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+        </div>
+    {% endif %}
+
+    <form method="POST" action="" class="cosinnus-form form-horizontal">{% csrf_token %}
+        {{ form.forms.obj.non_field_errors }}
+        {{ form.forms.media_tag.non_field_errors }}
+        
+    	<!-- a box with semi transparent background -->
+    	<div class="content-box">
+    	
+		    {% trans "Title" as title_label %}
+		    {% trans "Enter a title for the Pad." as title_legend %}
+		    {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.title legend=title_legend label=title_label placeholder=title_label first=True %}
+		    
+            {% include 'cosinnus/media_tags.html' with show_all=True %}
+    
+    	</div><!-- content-box -->
+    
+    
+		<button type="button" class="btn btn-emphasized pull-left" style="margin: 0px;" data-toggle="modal" data-target="#deleteModal">
+	        <ul class="media-list">
+	            <li class="media">
+	                <span class="pull-left">
+	                    <i class="fa fa-eraser"></i>
+	                </span>
+	                <div class="media-body">
+	                    {% trans "Delete" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+	    
+	    <button type="submit" class="btn btn-emphasized">
+	        <ul class="media-list">
+	            <li class="media">
+	                <span class="pull-left">
+	                    <i class="fa fa-floppy-o "></i>
+	                </span>
+	                <div class="media-body">
+	                    {% trans "Save" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+	    {% captureas label %}{% blocktrans with pad=object.title %}Do you really want to delete etherpad „{{ pad }}“?{% endblocktrans %}{% endcaptureas %}
+	    {% captureas title %}{% trans "Delete Etherpad" %}{% endcaptureas %}
+	    {% include "cosinnus/modal_box.html" with id="deleteModal" label=label title=title form_action="./delete/" %}
+
+    
+    </form>
+
+    
+{% endblock content %}

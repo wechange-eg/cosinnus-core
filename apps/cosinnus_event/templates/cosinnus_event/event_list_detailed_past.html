@@ -1,0 +1,59 @@
+{% extends "cosinnus_event/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block page_title %}
+{% trans "Events" %} {{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="active">
+        {% if SETTINGS.COSINNUS_EVENT_CALENDAR_ALSO_SHOWS_PAST_EVENTS %}
+            {% trans "Events" %}
+        {% elif event_view == "upcoming" %}
+            {% trans "Planned Events" %}
+        {% elif event_view == "past" %}
+            {% trans "Past Events" %}
+        {% else %}
+            {% trans "Events" %}
+        {% endif %}
+    </li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus_event/leftnav.html" %}
+{% endblock leftnav %}
+
+{% block content %}
+    {% if not request.user or not request.user.is_authenticated %} 
+        {% include "cosinnus/not_logged_in_alert.html" %}
+    {% endif %}
+    
+    
+    {% trans "Delete" as btn_label %}
+    {% captureas btn_action %}$.cosinnus.Feedback.cosinnus_delete_element($.cosinnus.getListOfCheckedItems());{% endcaptureas %}
+    {% include 'cosinnus/common/checkbox/checkbox_action_button.html' with label=btn_label icon="fa-eraser" action=btn_action %}
+
+    {% include 'cosinnus/common/checkbox/checkbox_mark_all_buttons.html' %}
+    <div class="clearfix"></div>
+    
+	<!-- a box with semi transparent background -->
+	<div class="content-box large-space">
+	    
+        {% include 'cosinnus/common/filter_controls.html' %}        
+	    
+	    {% for event in past_events %}
+        	{% include 'cosinnus_event/list_object.html' %}
+	    {% empty %}
+	        <!-- {% trans "There are no past events." %} -->
+	        {% include 'cosinnus/common/empty_button.html' with message="There are no past events." %}
+	    {% endfor %}
+	   
+	</div><!-- content-box -->
+	
+	<script type="text/javascript">
+        var cosinnus_delete_element_object_url = "{% group_url 'cosinnus:event:delete-element' group=group %}";
+    </script>
+    {% include 'cosinnus/common/delete_element_modal.html' %}
+	
+{% endblock content %}

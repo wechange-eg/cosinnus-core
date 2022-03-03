@@ -1,0 +1,294 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 11:18+0200\n"
+"PO-Revision-Date: 2021-03-16 06:28+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.4.2\n"
+
+msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
+msgstr ""
+
+msgctxt "the_app"
+msgid "Chat"
+msgstr ""
+
+msgid "Message"
+msgstr "Message"
+
+msgctxt "the_app"
+msgid "message"
+msgstr "message"
+
+msgid "Chat"
+msgstr ""
+
+msgid "Recipients"
+msgstr "Destinataires"
+
+msgid "Only Administrators may send a message to this project/group!"
+msgstr "Les admins seulement peuvent envoyer un message à ce projet / groupe !"
+
+msgid "Additional Recipients"
+msgstr "Destinataires supplémentaires"
+
+msgid "Undefined recipient."
+msgstr "Destinataire non défini."
+
+msgid "Portal"
+msgstr "Portail"
+
+msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
+msgstr "Tu peux joindre des fichiers et des images aux messages uniquement si tu es membre du forum. Tu peux le rejoindre ici :"
+
+msgid "Forum"
+msgstr "Forum"
+
+msgid "Messages"
+msgstr "Messages"
+
+msgid "Legacy Messages Archive"
+msgstr "Archive des messages hérités"
+
+msgid "The legacy messaging app is no longer in use. You can view all of your old messages, but you cannot write new ones. Please use the new messaging app in the navigation from now on!"
+msgstr "L’application de messagerie héritée n’est plus en service. Tu peux afficher tous tes anciens messages, mais tu ne peux pas en écrire de nouveaux. Utilise la nouvelle application de messagerie dans la navigation à partir de maintenant !"
+
+#, python-format
+msgid ""
+"Your direct reply could not be processed!\n"
+"\n"
+"The reason was: %(reason)s\n"
+"\n"
+"\n"
+"Your message text was: \n"
+"--------------------------------\n"
+"%(text)s\n"
+"--------------------------------\n"
+"\n"
+"\n"
+"If this keeps happening, consider logging in and sending the reply directly on the site.\n"
+msgstr ""
+"Votre réponse directe n’a pas pu être traitée !\n"
+"\n"
+"La raison était : %(reason)s\n"
+"\n"
+"\n"
+"Ton message texte était :\n"
+"--------------------------------\n"
+"%(text)s\n"
+"--------------------------------\n"
+"\n"
+"\n"
+"Si cela continue à se produire, connecte-toi et envoie la réponse directement sur le site.\n"
+
+msgid ""
+"Note: This message is issued by an automated system.\n"
+"Do not reply, this would not be taken into account."
+msgstr ""
+"Note : ce message est généré par un système automatique.\n"
+"Ne réponds pas, cela ne serait pas pris en compte."
+
+msgid "Only group members can see the content you requested. Apply to become a member now!"
+msgstr ""
+
+msgid "Go to chat"
+msgstr ""
+
+msgid "Archived Messages"
+msgstr "Messages archivés"
+
+msgid "Delete"
+msgstr "Supprimer"
+
+msgid "Archive"
+msgstr "Archiver"
+
+msgid "Undelete"
+msgstr "Annuler la suppression"
+
+msgid "Mark as Read"
+msgstr "Marquer comme lu"
+
+msgid "No messages"
+msgstr "Pas de messages"
+
+msgid "Please enter message..."
+msgstr "Saisir un message..."
+
+msgid "Send"
+msgstr "Envoyer"
+
+msgid "Dear user,"
+msgstr "Cher utilisateur,"
+
+#, python-format
+msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgstr "Le %(date)s, tu as demandé à envoyer un message à '%(recipient)s'."
+
+msgid "Your message has been rejected by the moderator"
+msgstr "Ton message a été rejeté par le modérateur"
+
+msgid ", for the following reason:"
+msgstr ", pour la raison suivante :"
+
+#, python-format
+msgid "'%(sender_first)s %(sender_last)s' has replied to your message from %(date)s:"
+msgstr "'%(sender_first)s %(sender_last)s' a répondu à ton message du %(date)s:"
+
+#, python-format
+msgid "'%(sender_first)s %(sender_last)s' has posted a message in one of your conversations."
+msgstr "'%(sender_first)s %(sender_last)s' a posté un message dans une de tes conversations."
+
+#, python-format
+msgid "You have received a message from the user '%(sender_first)s %(sender_last)s'."
+msgstr "Tu as reçu un message de l'utilisateur '%(sender_first)s %(sender_last)s'."
+
+msgid "This message was sent in a conversation with: "
+msgstr "Ce message a été envoyé dans une conversation avec : "
+
+msgid "Project/Group"
+msgstr "Projet / groupe"
+
+msgid "Follow this link to view the message on the site"
+msgstr "Suis ce lien pour voir le message sur le site"
+
+msgid "If you do not wish to receive any more emails from us, click here to unsubscribe:"
+msgstr "Si tu ne souhaites plus recevoir d'e-mails de notre part, clique ici pour te désabonner :"
+
+msgid "You can also reply to this message directly by replying to this email. When you do, please leave the subject and addressee as it is. The email you reply from *must* be the one you are registered with on the site."
+msgstr "Tu peux aussi répondre directement à ce message en répondant à cet e-mail. Quand tu le feras, laisse le sujet et l'adresses tels quels. L'e-mail depuis lequel tu réponds doit être celui avec lequel tu es inscrit sur le site."
+
+msgid "WARNING: Your reply will be sent to all participants of this conversation!"
+msgstr "ATTENTION : ta réponse sera envoyée à tous les participants de cette conversation !"
+
+#, python-format
+msgid "Message \"%(subject)s\" on the site %(sitename)s"
+msgstr "Message \"%(subject)s\" sur le site %(sitename)s"
+
+msgid "Dear visitor,"
+msgstr "Cher visiteur,"
+
+msgid "As a reminder, please find below the content of your message."
+msgstr "En rappel, voici le contenu de ton message ci-dessous."
+
+#, python-format
+msgid "On %(date)s, you sent a message to the user '%(sender_first)s %(sender_last)s'."
+msgstr "Le %(date)s, tu as envoyé un message à '%(sender_first)s %(sender_last)s'."
+
+msgid "Please find below the answer from your correspondent."
+msgstr "Trouve ci-dessous la réponse de ton correspondant."
+
+msgid "Thank you again for your interest in our services."
+msgstr "Merci encore pour l'intérêt que tu portes à nos services."
+
+msgid "For more comfort, we encourage you to open an account on the site."
+msgstr "Pour plus de confort, nous t'encourageons à ouvrir un compte sur le site."
+
+msgid "The site administrator"
+msgstr "L'admin du site"
+
+msgid "Inbox"
+msgstr "Boîte de réception"
+
+msgid "Sent"
+msgstr "Envoyés"
+
+msgctxt "the noun for an Archive"
+msgid "Archive"
+msgstr "Archives"
+
+msgid "Trash"
+msgstr "Corbeille"
+
+msgid "Write"
+msgstr "Ecrire"
+
+msgid "Reply"
+msgstr "Répondre"
+
+msgid "Recipient"
+msgstr "Destinataire"
+
+msgid "Conversation"
+msgstr "Conversation"
+
+msgid "Conversation with members from"
+msgstr "Conversation avec des membres de"
+
+msgid "Conversation with"
+msgstr "Conversation avec"
+
+#, python-format
+msgid "Show all %(count)s participants"
+msgstr "Afficher tous les %(count)s participants"
+
+msgid "Me"
+msgstr "Moi"
+
+msgid "Answer"
+msgstr "Réponse"
+
+msgid "Reply..."
+msgstr "Répondre..."
+
+#, python-format
+msgid "Reply to %(sender_name)s"
+msgstr "Répondre à %(sender_name)s"
+
+#, python-format
+msgid "Reply to all %(adressee_count)s"
+msgstr "Répondre à tous les %(adressee_count)s"
+
+msgid "Your reply could not be matched to an existing message."
+msgstr "Ta réponse n'a pas pu être assortie à un message existant."
+
+msgid "An internal error occured."
+msgstr "Une erreur interne s'est produite."
+
+msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
+msgstr "L'adresse e-mail depuis laquelle tu as envoyé la réponse n'est pas celle associée à ton compte. Envoie les réponses directes depuis l'adresse avec laquelle tu t'es inscrit sur le site !"
+
+msgid "There was an error when processing your message text!"
+msgstr "Il y a eu une erreur lors du traitement du texte de ton message !"
+
+msgid "Your direct reply failed!"
+msgstr "Ta réponse directe a échoué !"
+
+msgid "Select at least one object."
+msgstr "Sélectionne au moins un objet."
+
+msgid "Messages or conversations successfully archived."
+msgstr "Messages ou conversations archivés."
+
+msgid "Messages or conversations successfully deleted."
+msgstr "Messages ou conversations supprimés."
+
+msgid "Messages were marked as read."
+msgstr "Les messages ont été marqués comme lus."
+
+msgid "Messages or conversations successfully recovered."
+msgstr "Messages ou conversations récupérés."
+
+#~ msgid "Request about your project \"%(group_name)s\""
+#~ msgstr "Demande à propos de ton projet \"%(group_name)s\""
+
+#~ msgid "Request about your group \"%(group_name)s\""
+#~ msgstr "Demande à propos de ton groupe \"%(group_name)s\""
+
+#~ msgid "Mark All"
+#~ msgstr "Tout marquer"
+
+#~ msgid "Deselect All"
+#~ msgstr "Tout désélectionner"

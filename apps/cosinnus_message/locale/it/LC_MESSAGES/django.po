@@ -1,0 +1,268 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 11:18+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
+msgstr ""
+
+msgctxt "the_app"
+msgid "Chat"
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgctxt "the_app"
+msgid "message"
+msgstr ""
+
+msgid "Chat"
+msgstr ""
+
+msgid "Recipients"
+msgstr ""
+
+msgid "Only Administrators may send a message to this project/group!"
+msgstr ""
+
+msgid "Additional Recipients"
+msgstr ""
+
+msgid "Undefined recipient."
+msgstr ""
+
+msgid "Portal"
+msgstr ""
+
+msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
+msgstr ""
+
+msgid "Forum"
+msgstr ""
+
+msgid "Messages"
+msgstr ""
+
+msgid "Legacy Messages Archive"
+msgstr ""
+
+msgid "The legacy messaging app is no longer in use. You can view all of your old messages, but you cannot write new ones. Please use the new messaging app in the navigation from now on!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Your direct reply could not be processed!\n"
+"\n"
+"The reason was: %(reason)s\n"
+"\n"
+"\n"
+"Your message text was: \n"
+"--------------------------------\n"
+"%(text)s\n"
+"--------------------------------\n"
+"\n"
+"\n"
+"If this keeps happening, consider logging in and sending the reply directly on the site.\n"
+msgstr ""
+
+msgid ""
+"Note: This message is issued by an automated system.\n"
+"Do not reply, this would not be taken into account."
+msgstr ""
+
+msgid "Only group members can see the content you requested. Apply to become a member now!"
+msgstr ""
+
+msgid "Go to chat"
+msgstr ""
+
+msgid "Archived Messages"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Archive"
+msgstr ""
+
+msgid "Undelete"
+msgstr ""
+
+msgid "Mark as Read"
+msgstr ""
+
+msgid "No messages"
+msgstr ""
+
+msgid "Please enter message..."
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "Dear user,"
+msgstr ""
+
+#, python-format
+msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgstr ""
+
+msgid "Your message has been rejected by the moderator"
+msgstr ""
+
+msgid ", for the following reason:"
+msgstr ""
+
+#, python-format
+msgid "'%(sender_first)s %(sender_last)s' has replied to your message from %(date)s:"
+msgstr ""
+
+#, python-format
+msgid "'%(sender_first)s %(sender_last)s' has posted a message in one of your conversations."
+msgstr ""
+
+#, python-format
+msgid "You have received a message from the user '%(sender_first)s %(sender_last)s'."
+msgstr ""
+
+msgid "This message was sent in a conversation with: "
+msgstr ""
+
+msgid "Project/Group"
+msgstr ""
+
+msgid "Follow this link to view the message on the site"
+msgstr ""
+
+msgid "If you do not wish to receive any more emails from us, click here to unsubscribe:"
+msgstr ""
+
+msgid "You can also reply to this message directly by replying to this email. When you do, please leave the subject and addressee as it is. The email you reply from *must* be the one you are registered with on the site."
+msgstr ""
+
+msgid "WARNING: Your reply will be sent to all participants of this conversation!"
+msgstr ""
+
+#, python-format
+msgid "Message \"%(subject)s\" on the site %(sitename)s"
+msgstr ""
+
+msgid "Dear visitor,"
+msgstr ""
+
+msgid "As a reminder, please find below the content of your message."
+msgstr ""
+
+#, python-format
+msgid "On %(date)s, you sent a message to the user '%(sender_first)s %(sender_last)s'."
+msgstr ""
+
+msgid "Please find below the answer from your correspondent."
+msgstr ""
+
+msgid "Thank you again for your interest in our services."
+msgstr ""
+
+msgid "For more comfort, we encourage you to open an account on the site."
+msgstr ""
+
+msgid "The site administrator"
+msgstr ""
+
+msgid "Inbox"
+msgstr ""
+
+msgid "Sent"
+msgstr ""
+
+msgctxt "the noun for an Archive"
+msgid "Archive"
+msgstr ""
+
+msgid "Trash"
+msgstr ""
+
+msgid "Write"
+msgstr ""
+
+msgid "Reply"
+msgstr ""
+
+msgid "Recipient"
+msgstr ""
+
+msgid "Conversation"
+msgstr ""
+
+msgid "Conversation with members from"
+msgstr ""
+
+msgid "Conversation with"
+msgstr ""
+
+#, python-format
+msgid "Show all %(count)s participants"
+msgstr ""
+
+msgid "Me"
+msgstr ""
+
+msgid "Answer"
+msgstr ""
+
+msgid "Reply..."
+msgstr ""
+
+#, python-format
+msgid "Reply to %(sender_name)s"
+msgstr ""
+
+#, python-format
+msgid "Reply to all %(adressee_count)s"
+msgstr ""
+
+msgid "Your reply could not be matched to an existing message."
+msgstr ""
+
+msgid "An internal error occured."
+msgstr ""
+
+msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
+msgstr ""
+
+msgid "There was an error when processing your message text!"
+msgstr ""
+
+msgid "Your direct reply failed!"
+msgstr ""
+
+msgid "Select at least one object."
+msgstr ""
+
+msgid "Messages or conversations successfully archived."
+msgstr ""
+
+msgid "Messages or conversations successfully deleted."
+msgstr ""
+
+msgid "Messages were marked as read."
+msgstr ""
+
+msgid "Messages or conversations successfully recovered."
+msgstr ""

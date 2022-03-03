@@ -1,0 +1,1 @@
+{% load i18n cosinnus_tags %}{% blocktrans with note_text=object.text %}{{ sender_name }} posted in {{ team_name }}:{% endblocktrans %} "{% if object.title and not object.title == '---' %}{{ object.title|truncatechars:50 }}{% else %}{{ object.text|truncatechars:50 }}{% endif %}"

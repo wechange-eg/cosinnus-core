@@ -1,0 +1,1349 @@
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-24 11:06+0100\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Restart BBB rooms"
+msgstr "Uruchom ponownie pokoje na BBB"
+
+msgid "Events"
+msgstr "Wydarzenia"
+
+msgctxt "the_app"
+msgid "event"
+msgstr "Wydarzenie"
+
+msgid "A user created a new event"
+msgstr "Użytkowni(cz)k(a) utworzył(a) nowe wydarzenie."
+
+#, python-format
+msgid "%(sender_name)s created the event %(object_name)s"
+msgstr "%(sender_name)s utworzył(a) wydarzenie %(object_name)s."
+
+#, python-format
+msgid "%(sender_name)s created %(count)d events"
+msgstr "%(sender_name)s utworzył(a) %(count)d nowe wydarzenia/nowe wydarzenia/nowych wydarzeń."
+
+#, python-format
+msgid "%(sender_name)s created a new event"
+msgstr "%(sender_name)s utworzył(a) nowe wydarzenie."
+
+#, python-format
+msgid "A new event: \"%(object_name)s\" was announced in %(team_name)s."
+msgstr "Nowe wydarzenie: \"%(object_name)s\" zostało ogłoszone w %(team_name)s."
+
+msgid "A user created a new event poll"
+msgstr "Użytkowni(cz)k(a) utworzył(a) nową ankietę uzgadniania terminu."
+
+#, python-format
+msgid "%(sender_name)s created the event poll %(object_name)s"
+msgstr "%(sender_name)s utworzył(a) ankietę uzgadniania terminu %(object_name)s."
+
+#, python-format
+msgid "%(sender_name)s created %(count)d event polls"
+msgstr "%(sender_name)s utworzył(a) %(count)d nową ankietę/nowe ankiety/nowych ankiet uzgadniania terminu."
+
+#, python-format
+msgid "%(sender_name)s created a new event poll"
+msgstr "%(sender_name)s utworzył(a) nową ankietę uzgadniania terminu."
+
+#, python-format
+msgid "A new event poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Nowa ankieta uzgadniania terminu: \"%(object_name)s\" została utworzona w %(team_name)s."
+
+msgid "A user commented on one of your events"
+msgstr "Użytkowni(cz)k(a) skomentował(a) jedno z Twoich wydarzeń."
+
+#, python-format
+msgid "%(sender_name)s commented on your event %(object_name)s"
+msgstr "%(sender_name)s skomentował(a) Twoje wydarzenie %(object_name)s."
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your event %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your event %(object_name)s"
+msgstr[0] "%(sender_name)s i inny/-a %(count_minus_one)d skomentował/-a jedno z Twoich wydarzeń %(object_name)s"
+msgstr[1] "%(sender_name)s i inni/-e%(count_minus_one)d skomentowali/-ły Twoje wydarzenie %(object_name)s"
+msgstr[2] "%(sender_name)s i inni/-e%(count_minus_one)d skomentowali/-ły Twoje wydarzenie %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your event"
+msgstr "%(sender_name)s skomentował(a) Twoje wydarzenie."
+
+#, python-format
+msgid "%(sender_name)s commented on one of your events"
+msgstr "%(sender_name)s skomentował(a) jedno z Twoich wydarzeń."
+
+msgid "A user commented on a event you were tagged in"
+msgstr "Użytkowni(cz)k(a) skomentował(a) wydarzenie, w którym zostałaś/eś oznaczona/y."
+
+#, python-format
+msgid "%(sender_name)s commented on the event %(object_name)s"
+msgstr "%(sender_name)s skomentował(a) wydarzenie %(object_name)s."
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the event %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the event %(object_name)s"
+msgstr[0] "%(sender_name)s i inny/-a %(count_minus_one)d skomentował/-a jedno z wydarzeń %(object_name)s"
+msgstr[1] "%(sender_name)s i inni/-e %(count_minus_one)d skomentowali/-ly jedno z wydarzeń %(object_name)s"
+msgstr[2] "%(sender_name)s i inni/-e %(count_minus_one)d skomentowali/-ly jedno z wydarzeń %(object_name)s"
+
+msgid "You were tagged in this event"
+msgstr "Zostałaś/eś oznaczona/y w tym wydarzeniu."
+
+#, python-format
+msgid "%(sender_name)s commented on an event you were tagged in"
+msgstr "%(sender_name)s skomentował(a) wydarzenie, w którym zostałaś/eś oznaczona/y."
+
+#, python-format
+msgid "%(sender_name)s commented on an event you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s skomentował(a) wydarzenie, w którym zostałaś/eś oznaczona/y w %(team_name)s."
+
+msgid "A user commented on an event you voted in"
+msgstr "Użytkowni(cz)k(a) skomentował(a) ankietę uzgadniania terminu, w której głosowałaś/eś."
+
+msgid "You voted on this event"
+msgstr "Głosowałaś/eś w tej ankiecie uzgadniania terminu."
+
+#, python-format
+msgid "%(sender_name)s commented on an event you voted in"
+msgstr "%(sender_name)s skomentował(a) wydarzenie, w którym głosowałaś/eś."
+
+#, python-format
+msgid "%(sender_name)s commented on an event you voted in in %(team_name)s"
+msgstr "%(sender_name)s skomentował(a) ankietę uzgadniania terminu, w której głosowałaś/eś w %(team_name)s."
+
+msgid "A user commented on an event you are attending"
+msgstr "Użytkowni(cz)k(a) skomentował(a) wydarzenie, w którym bierzesz udział."
+
+msgid "You are attending this event"
+msgstr "Podałaś/eś, że weźmiesz udział w tym wydarzeniu."
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending"
+msgstr "%(sender_name)s skomentował(a) wydarzenie, w którym bierzesz udział."
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending in %(team_name)s"
+msgstr "%(sender_name)s skomentował(a) wydarzenie, w którym bierzesz udział w %(team_name)s"
+
+msgid "A user created a new event in a team you are following"
+msgstr "Użytkowni(cz)k(a) utworzył(a) nowe wydarzenie w projekcie lub grupie, który/ą obserwujesz."
+
+#, python-format
+msgid "%(sender_name)s created a new event in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s utworzył(a) nowe wydarzenie w %(team_name)s, którą obserwujesz."
+
+#, python-format
+msgid "A new event: \"%(object_name)s\" was announced in %(team_name)s (which you follow)."
+msgstr "Nowe wydarzenie: \"%(object_name)s\" zostało dodane do %(team_name)s, którą obserwujesz."
+
+msgid "A user created a new event poll in a team you are following"
+msgstr "W projekcie lub grupie, który/ą obserwujesz dodano nową ankietę uzgadniania terminu."
+
+#, python-format
+msgid "%(sender_name)s created a new event pollin %(team_name)s (which you follow)"
+msgstr "%(sender_name)s utworzył(a) nową ankietę uzgadniania terminu w %(team_name)s, którą obserwujesz."
+
+#, python-format
+msgid "A new event poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Nowa ankieta uzgadniania terminu: \"%(object_name)s\" została dodana w %(team_name)s, którą obserwujesz."
+
+msgid "A user commented on an event you are following"
+msgstr "Użytkowni(cz)k(a) skomentował(a) wydarzenie, które obserwujesz."
+
+msgid "You are following this event"
+msgstr "Obserwujesz to wydarzenie."
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are following"
+msgstr "%(sender_name)s skomentował(a) wydarzenie, które obserwujesz."
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are following in %(team_name)s"
+msgstr "%(sender_name)s skomentował(a) wydarzenie, które obserwujesz w %(team_name)s."
+
+msgid "A user updated an event"
+msgstr "Użytkowni(cz)k(a) dokonał(a) zmian w wydarzeniu."
+
+#, python-format
+msgid "%(sender_name)s updated the event %(object_name)s"
+msgstr "%(sender_name)s dokonał(a) zmian w wydarzeniu %(object_name)s."
+
+#, python-format
+msgid "%(sender_name)s updated an event you are following"
+msgstr "%(sender_name)s dokonał(a) zmian w wydarzeniu, które obserwujesz."
+
+#, python-format
+msgid "The event \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Wydarzenie: \"%(object_name)s\" zostało zmienione w %(team_name)s."
+
+msgid "A user updated an event you are attending"
+msgstr "Użytkowni(cz)k(a) dokonał(a) zmian w wydarzeniu, w którym bierzesz udział."
+
+#, python-format
+msgid "%(sender_name)s updated an event you are attending"
+msgstr "%(sender_name)s dokonał(a) zmian w wydarzeniu, w którym bierzesz udział."
+
+msgid "A user updated an event poll"
+msgstr "Użytkowni(cz)k(a) dokonał(a) zmian w ankiecie uzgadniania terminu."
+
+#, python-format
+msgid "%(sender_name)s changed the event poll %(object_name)s"
+msgstr "%(sender_name)s dokonał(a) zmian w ankiecie uzgadniania terminu %(object_name)s."
+
+msgid "You are following this event poll"
+msgstr "Obserwujesz tę ankietę uzgadniania terminu."
+
+#, python-format
+msgid "%(sender_name)s updated an event poll you are following"
+msgstr "%(sender_name)s dokonał(a) zmian w ankiecie uzgadniania terminu, którą obserwujesz."
+
+#, python-format
+msgid "The event poll \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Ankieta uzgadniania terminu: \"%(object_name)s\" została zmieniona w %(team_name)s."
+
+msgid "A user voted in an event poll"
+msgstr "Użytkowni(cz)k(a) zagłosował(a) w ankiecie uzgadniania terminu."
+
+#, python-format
+msgid "%(sender_name)s voted in the event poll %(object_name)s"
+msgstr "%(sender_name)s zagłosował(a) w ankiecie uzgadniania terminu %(object_name)s."
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other voted in the event poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others voted in the event poll %(object_name)s"
+msgstr[0] "%(sender_name)s i inny/-a %(count_minus_one)d zagłosował/-a w ankiecie wydarzenia %(object_name)s"
+msgstr[1] "%(sender_name)s i inni/-e %(count_minus_one)d zagłosowali/-ły w ankiecie wydarzenia %(object_name)s"
+msgstr[2] "%(sender_name)s i inni/-e %(count_minus_one)d zagłosowali/-ły w ankiecie wydarzenia %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s voted in an event poll you are following"
+msgstr "%(sender_name)s zagłosował(a) w ankiecie uzgadniania terminu, którą obserwujesz."
+
+#, python-format
+msgid "%(sender_name)s voted in the event poll \"%(object_name)s\" in %(team_name)s."
+msgstr "%(sender_name)s zagłosował(a) w ankiecie uzgadniania terminu \"%(object_name)s\" w %(team_name)s."
+
+msgid "Upcoming Events"
+msgstr "Aktualne wydarzenia"
+
+msgid "No upcoming events"
+msgstr "Brak aktualnych wydarzeń"
+
+msgid "Created By"
+msgstr "Utworzono przez"
+
+msgid "Soonest Upcoming"
+msgstr "Rozpoczyna się wkrótce"
+
+msgid "Newest Created"
+msgstr "Ostatnio otworzone"
+
+msgid "Title"
+msgstr "Tytuł"
+
+msgid "No video conference"
+msgstr ""
+
+msgid "BBB-Meeting"
+msgstr ""
+
+msgid "Fairmeeting"
+msgstr ""
+
+msgid "Presenters"
+msgstr "Osoba prezentująca"
+
+msgid "Scheduled"
+msgstr "Zaplanowano"
+
+msgid "Voting open"
+msgstr "Ankieta"
+
+msgid "Canceled"
+msgstr "Odwołano"
+
+msgid "Archived Event Poll"
+msgstr "Zakończone uzgadnianie terminu"
+
+msgid "Start"
+msgstr "Start"
+
+msgid "End"
+msgstr "Koniec"
+
+msgid "State"
+msgstr "Status"
+
+msgid "Is hidden proxy"
+msgstr "Ukryte proxy"
+
+msgid "Note"
+msgstr "Opis"
+
+msgid "Event date"
+msgstr "Data wydarzenia"
+
+msgid "Type of video conference available for the event"
+msgstr ""
+
+msgid "Location"
+msgstr "Miejsce"
+
+msgid "Latitude"
+msgstr "Szerokość geograficzna"
+
+msgid "Longitude"
+msgstr "Długość geograficzna"
+
+msgid "Street"
+msgstr "Ulica"
+
+msgid "ZIP code"
+msgstr "Kod pocztowy"
+
+msgid "City"
+msgstr "Miasto"
+
+msgid "Is public (on website)"
+msgstr "Ustaw jako publiczne"
+
+msgid "Image"
+msgstr "Zdjęcie (grafika)"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Original Event Poll"
+msgstr "Początkowe uzgodnienie terminu"
+
+msgid "Event"
+msgstr "Wydarzenie"
+
+#, python-format
+msgid "%(event)s (hidden proxy)"
+msgstr "%(event)s (ukryte proxy)"
+
+#, python-format
+msgid "%(event)s (%(date)s - %(end)s)"
+msgstr "%(event)s (%(date)s - %(end)s)"
+
+#, python-format
+msgid "%(event)s (%(from)s - %(to)s)"
+msgstr "%(event)s (%(from)s - %(to)s)"
+
+#, python-format
+msgid "%(event)s (canceled)"
+msgstr "%(event)s (odwołano)"
+
+#, python-format
+msgid "%(event)s (pending)"
+msgstr "%(event)s (termin otwarty)"
+
+#, python-format
+msgid "%(event)s (archived)"
+msgstr "%(event)s (zakończono)"
+
+#, python-format
+msgid "%(event)s (state unknown)"
+msgstr "%(event)s (nieznany status)"
+
+#, fuzzy
+msgid "Now"
+msgstr "Nie"
+
+msgctxt "the subject"
+msgid "Votes"
+msgstr "głosy/ów"
+
+msgid "Suggestion"
+msgstr "Propozycja terminu"
+
+msgid "Suggestions"
+msgstr "Propozycje terminów"
+
+msgid "Yes"
+msgstr "Tak"
+
+msgid "Maybe"
+msgstr "Ewentualnie"
+
+msgid "No"
+msgstr "Nie"
+
+msgid "Voter"
+msgstr "Osoba głosująca"
+
+msgid "Vote"
+msgstr "Głos"
+
+msgctxt "the subject"
+msgid "Vote"
+msgstr "Głos"
+
+msgid "Creator"
+msgstr "Osoba tworząca"
+
+msgid "Created"
+msgstr "Utworzono"
+
+msgid "Last modified"
+msgstr "Ostatnio edytowano"
+
+msgid "Text"
+msgstr "Tekst"
+
+msgid "Comment"
+msgstr "Komentarz"
+
+msgid "Comments"
+msgstr "Komentarze"
+
+msgid "Lobby Check-in Event"
+msgstr "Wydarzenie w lobby"
+
+msgid "Stage Stream"
+msgstr "Wydarzenie na scenie"
+
+msgid "Workshop"
+msgstr "Warsztaty"
+
+msgid "Discussion"
+msgstr "Dyskusja"
+
+msgid "Coffee Table"
+msgstr "Kawiarnia"
+
+msgid "Room"
+msgstr "Pokój"
+
+msgid "Conference Event Type"
+msgstr "Rodzaj wydarzenia/konferencji"
+
+msgid "Is a Break"
+msgstr "Jest przerwą"
+
+#, fuzzy
+#| msgid "Enter a title for the conference event."
+msgid "Event is visible on the conference microsite"
+msgstr "Podaj tytuł (nazwę) wydarzenia/konferencji."
+
+msgid "Event's description is visible on the conference microsite"
+msgstr ""
+
+msgid "Maximum Event Participants"
+msgstr "Maksymalna liczba uczestniczek/ków"
+
+msgid "Embed code (HTML)"
+msgstr "Kod osadzania (HTML)"
+
+msgid "Presentation file"
+msgstr "Prezentacja"
+
+#, fuzzy
+msgid "Show chat"
+msgstr "Pokaż wszystko"
+
+#, fuzzy
+msgid "Enable Streaming"
+msgstr "Stream ze sceny"
+
+msgid "Stream URL"
+msgstr ""
+
+msgid "The URL of your streaming provider to receive the incoming stream"
+msgstr ""
+
+#, fuzzy
+msgid "Stream Key"
+msgstr "Ulica"
+
+msgid "The key for this specific stream session you created at your streaming provider"
+msgstr ""
+
+msgid "Conference Event"
+msgstr "Wydarzenie/konferencja"
+
+msgid "Conference Events"
+msgstr "Wydarzenia/konferencje"
+
+#, python-format
+msgid "%(event)s %(type)s"
+msgstr "%(event)s %(type)s"
+
+msgid "Create Event"
+msgstr "Utwórz wydarzenie"
+
+msgid "Would you like to create an event"
+msgstr "Chcesz utworzyć wydarzenie?"
+
+msgid "on"
+msgstr "dnia"
+
+msgid "from"
+msgstr "od"
+
+msgid "until"
+msgstr "do"
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "OK"
+msgstr "OK"
+
+msgctxt "time"
+msgid "all day"
+msgstr "całodniowe"
+
+msgctxt "time"
+msgid "at"
+msgstr "o"
+
+# Leave this field empty
+msgctxt "time"
+msgid "o'clock"
+msgstr "godz."
+
+msgctxt "time"
+msgid "from"
+msgstr "od"
+
+msgctxt "time"
+msgid "until"
+msgstr "do"
+
+#, python-format
+msgid "Add %(event_type_verbose)s in Room %(room_name)s"
+msgstr "Dodaj %(event_type_verbose)s w pokoju %(room_name)s."
+
+#, python-format
+msgid "Edit %(event_type_verbose)s \"%(event_title)s\" in Room %(room_name)s"
+msgstr "Edytuj %(event_type_verbose)s \"%(event_title)s\" w pokoju %(room_name)s"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "W jednym z wypełnionych pół pojawił się błąd. Popraw go zanim klikniesz na \"Zapisz\"!"
+
+msgid "Enter a title for the conference event."
+msgstr "Podaj tytuł (nazwę) wydarzenia/konferencji."
+
+msgid "Event is a break"
+msgstr "To wydarzenie jest przerwą."
+
+msgid "Check this to create an empty break event that shows up in the agenda and timeline"
+msgstr "Wybierz to, by w programie pojawiło się puste wydarzenie."
+
+msgid "Description and Infos"
+msgstr "Opis i informacje"
+
+msgid "Description"
+msgstr "Opis"
+
+msgid "Enter a description for the event"
+msgstr "Uzupełnij opis wydarzenia"
+
+msgid "Show this event on microsite"
+msgstr ""
+
+msgid "Uncheck this to hide the event on microsite"
+msgstr ""
+
+msgid "Show the event's description on microsite"
+msgstr ""
+
+msgid "Uncheck this to disable platform-wide viewing of the event's description"
+msgstr ""
+
+msgid "Uncheck this to disable public viewing of the event's description"
+msgstr ""
+
+msgid "Example:"
+msgstr ""
+
+msgid "Stream URL for the Event"
+msgstr "URL transmisji podczas tego wydarzenia"
+
+msgid "Custom embed code (HTML)"
+msgstr "Kod osadzania (HTML)"
+
+#, fuzzy
+msgid "How many participants can join the video call before it is full."
+msgstr "Jak dużo uczestników powinno może przyłączyć się do jednego coffee table zanim będzie pełny"
+
+msgid "Note that changing this setting will have no effect while an event is running."
+msgstr ""
+
+#, fuzzy
+msgid "BBB video conference options"
+msgstr "Rodzaj wydarzenia konferencyjnego"
+
+msgid "Upload a preview image for the Conference Event"
+msgstr "Załaduj zdjęcie (grafikę) do zapowiedzi wydarzenia/konferencji."
+
+msgid "Will be shown on the event card in the conference room."
+msgstr "Będzie to widoczne na karcie wydarzenia w pokoju konferencyjnym."
+
+msgid "The presenters will be shown in order in the event and will receive Moderator permissions for the BBB-Room"
+msgstr "Prezenterki/rzy będą widoczne/i w widoku konferencji i otrzymają uprawnienia moderatorki/a w wideokonferencji."
+
+msgid "The presentation file (e.g. PDF) will be pre-uploaded to the BBB room."
+msgstr "Prezentacja (np. PDF) zostanie uprzednio zaimportowana do BBB."
+
+msgid "Note: If a slide is subsequently added to an existing event, it does not automatically appear in the event if this event was recently attended and is therefore active. This requires an active ending of the event or a 5-minute idle time without participants until the event is automatically ended. "
+msgstr "Wskazówka! Jeśli w późniejszym terminie zostanie dodany jakiś slajd do istniejącego już wydarzenia, to nie ukaże się on automatycznie w wydarzeniu, o ile ktoś dopiero co wziął w nim udział i tym samym jest ono aktywne. W tym celu należy zakończyć wydarzenie lub przeprowadzić je przez 5 minut bez uczestniczek/ków, by zostało ono automatycznie zakończone."
+
+msgid "You can actively end an existing event room by clicking on \"End Meeting\" in the top right-hand corner of the room in the \"Three-Dot Menu\"."
+msgstr "Możesz zakończyć istniejące wydarzenie, klikając jako moderator(ka) w prawym górnym roku w menu („...”) na „Zakończ spotkanie”."
+
+#, fuzzy
+msgid "Show room chat in the event"
+msgstr "Bierzesz udział w tym wydarzeniu"
+
+msgid "Check this to show rocket chat in the sidebar."
+msgstr ""
+
+#, fuzzy
+msgid "Stream this event"
+msgstr "Stream URL do wydarzenia"
+
+msgid "Please note: Streaming is only available for premium conferences. If you would like to use streaming, please request it explicitly when booking. Otherwise, these settings have no function."
+msgstr ""
+
+msgid "You can set up the BBB event to be streamed to a streaming provider (e.g. YouTube)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Once set up and activated, a streaming-bot will enter the event and stream all video and audio to the selected stream endpoint.\n"
+"The bot will enter and start streaming %(start_minutes)s minutes before the event start time and stop streaming and leave %(end_minutes)s minutes after the event end time.\n"
+"You can adjust the meeting times on-the-fly to allow for longer streaming if the event runs longer than expected."
+msgstr ""
+
+msgid "If you are using the maximum participant limit, please allow for the streaming bot's additional participant spot."
+msgstr ""
+
+msgid "Enable Streaming this BBB meeting"
+msgstr ""
+
+msgid "Create"
+msgstr "Utwórz"
+
+msgid "Save"
+msgstr "Zapisz"
+
+#, fuzzy
+msgid "Create and create another"
+msgstr "utworzono wydarzenie"
+
+#, fuzzy
+msgid "Save and create another"
+msgstr "utworzono wydarzenie"
+
+msgid "Add unscheduled event"
+msgstr "Dodaj ankietę uzgadniania terminu."
+
+msgid "Edit"
+msgstr "Edytuj"
+
+msgid "Event Polls"
+msgstr "Uzgadnianie terminu"
+
+msgid "Enter a title for the new event to be scheduled."
+msgstr "Dodaj tytuł (nazwę) ankiety uzgadniania terminu."
+
+msgid "Dates"
+msgstr "Daty"
+
+msgid "Please select the available days in the calendar."
+msgstr "Wybierz w kalendarzu dostępne dni."
+
+msgid "You can select the same day more than once."
+msgstr "Dany dzień możesz wybrać wielokrotnie."
+
+msgid "Time: e.g. 10 or 10:30."
+msgstr "Godzina: np. 10:00 lub 10:30"
+
+msgid "Time"
+msgstr "Godzina"
+
+msgid "Note: You cannot edit the dates for this event poll because someone has already cast their vote!"
+msgstr "Wskazówka! Nie możesz już zmienić danych w tej ankiecie uzgadniania terminu, gdyż ktoś już w niej zagłosował."
+
+msgid "Example: http://mywebsite.com"
+msgstr "Przykałd: http://meinewebseite.de"
+
+msgid "External Link for the event"
+msgstr "Zewnętrzny link wydarzenia"
+
+msgid "Delete"
+msgstr "Usuń"
+
+msgid "There are no open event polls."
+msgstr "Brak aktualnych ankiet uzgadniania terminu"
+
+msgid "Planned Events"
+msgstr "Zaplanowane wydarzenia"
+
+msgid "Past Events"
+msgstr "Zakończone wydarzenia"
+
+msgid "Archived Event Polls"
+msgstr "Zakończone ankiety uzgadniania terminu"
+
+msgid "There are no archived event polls."
+msgstr "Brak zakończonych ankiet uzgadniania terminu"
+
+#, python-format
+msgid "Vote for %(title)s"
+msgstr "Zagłosuj na %(title)s"
+
+#, python-format
+msgid "Archived: %(title)s"
+msgstr "Zakończone: %(title)s"
+
+msgid "This event has already been scheduled. Voting is closed."
+msgstr "Ustalono już termin tego wydarzenia. Głosowanie zostało zakończone."
+
+msgid "This event has been canceled. Voting is closed."
+msgstr "Wydarzenie zostało odwołane. Głosowanie zostało zakończone."
+
+msgid "Nobody has voted for this event poll yet."
+msgstr "Nikt jeszcze nie oddał głosu w tej ankiecie uzgadniania terminu."
+
+msgid "Create an event from one of the suggestions"
+msgstr "Utwórz wydarzenie dla jednego z terminów."
+
+#, python-format
+msgid "Set the date to %(suggestion)s."
+msgstr "Ustal termin na %(suggestion)s."
+
+msgid "When do you have time?"
+msgstr "Kiedy masz czas?"
+
+msgid "There are no date suggestions for this event poll yet!"
+msgstr "Nie podano żadnych proponowanych dat dla tej ankiety uzgadniania terminu!"
+
+#, python-format
+msgid "Do you really want to delete unscheduled event „%(title)s“?"
+msgstr "Na pewno chcesz usunąć ankietę uzgadniania terminu „%(title)s“?"
+
+msgid "Delete unscheduled event"
+msgstr "Usuń ankietę uzgadniania terminu."
+
+msgid "You will now receive notifications for comments or when this event poll is changed and whenever somebody casts their vote."
+msgstr "Będziesz teraz otrzymywać powiadomienia o komentarzach oraz o zmianach w niniejszej ankiecie uzgadniania terminu i o oddanych głosach."
+
+msgid "Write comment..."
+msgstr "Napisz komentarz..."
+
+msgid "Post"
+msgstr "Opublikuj"
+
+msgid "Add event"
+msgstr "Dodaj wydarzenie"
+
+#, python-format
+msgid ""
+"\n"
+"                            Note: After this event will be posted, each user of %(forum_name)s may be able to see it.<br>\n"
+"                            If you do not want this, please, use another group or project of your choice.\n"
+"                            "
+msgstr ""
+
+msgid "Enter a title for the new event."
+msgstr "Wpisz tytuł (nazwę) wydarzenia."
+
+#, fuzzy
+msgid "Include a video conference"
+msgstr "Rodzaj wydarzenia konferencyjnego"
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
+
+msgid "The first uploaded image will be displayed as a wallpaper."
+msgstr "Pierwsze załadowane zdjęcie (grafika) ukaże się jako zdjęcie w tle."
+
+msgid "If you set this, your event will be shown on the map! (if permitted by its visibility settings)"
+msgstr "Takie ustawienie spowoduje, że Twoje wydarzenie będzie widoczne na mapie! (Jeśli nie narusza to ustawień prywatności.)"
+
+msgid "Calendar"
+msgstr "Kalendarz"
+
+msgid "Copy this iCal-link into your calendar application to import current events:"
+msgstr "Niniejszy link iCal może być wykorzystywany w kalendarzach w celu zaimportowania i wyświetlenia aktualnych wydarzeń:"
+
+msgid "Also include all events from projects within this group in feed"
+msgstr "Wyświetl również wszystkie wydarzenia projektów w ramach tej grupy na tym kanale."
+
+msgid "iCal Feed"
+msgstr "kanał iCal"
+
+msgid "Enter the title for a new event or select a day in the Calendar."
+msgstr "Wpisz tytuł (nazwę) nowego wydarzenia lub kliknij na jakiś dzień w kalendarzu."
+
+msgid "Export event feed"
+msgstr "Kanał wydarzeń"
+
+msgid "Create Conference Event"
+msgstr "Utwórz wydarzenie/konferencję"
+
+msgid "Conference events can be created directly from the rooms themselves of the conference interface or in a central place here"
+msgstr "Wydarzenia/konferencje można zakładać bezpośrednio w pokojach w widoku konferencji lub w środkowej części tutaj."
+
+msgid "Conference Room Management"
+msgstr "Zarządzanie pokojem konferencyjnym"
+
+msgid "There are no conference events."
+msgstr "Brak wydarzeń/konferencji"
+
+msgid "There are no current or future events."
+msgstr "Brak aktualnych lub zaplanowanych wydarzeń"
+
+msgid "There are no past events."
+msgstr "Brak minionych wydarzeń"
+
+msgid "There are no upcoming events"
+msgstr "Brak aktualnych wydarzeń"
+
+msgid "Back to Events"
+msgstr "Powrót do wydarzeń"
+
+msgid "Return to Event Polls"
+msgstr "Wróć do ankiet uzgadniania terminów"
+
+msgid "Return to Archived Event Polls"
+msgstr "Wróć do zakończonych ankiet uzgadniania terminów"
+
+msgid "List"
+msgstr "Lista"
+
+msgid "by"
+msgstr "przez"
+
+msgid "View"
+msgstr "Widok"
+
+msgid "Created Event"
+msgstr "Utworzone wydarzenie"
+
+#, python-format
+msgid "Do you really want to delete event „%(title)s“?"
+msgstr "Na pewno chcesz usunąć wydarzenie „%(title)s“?"
+
+msgid "Delete event"
+msgstr "Usuń wydarzenie"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you are attending in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Witaj %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s opublikował(a) komentarz do wydarzenia, w którym bierzesz udział w grupie %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"do wydarzenia:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Użyj tego linku, by zobaczyć komentarz: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Użyj tego linku, by zmienić swoje ustawienia powiadomień: %(notification_settings_url)s )\n"
+"\n"
+"Twój zespół %(site_name)s \n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending in %(team_name)s."
+msgstr "%(sender_name)s skomentował(a) wydarzenie, w którym bierzesz udział w %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new event \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Witaj %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s utworzył(a) nowe wydarzenie \"%(object_name)s\" w %(team_name)s. \n"
+"\n"
+"Możesz je znaleźć korzystając z następującego linku: %(object_url)s\n"
+"\n"
+"\n"
+"(Użyj tego linku, by zmienić swoje ustawienia powiadomień: %(notification_settings_url)s )\n"
+"\n"
+"Twój zespół %(site_name)s"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you created in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Witaj %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s opublikował(a) komentarz do jednego z Twoich wydarzeń w grupie %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"do Twojego wydarzenia:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Użyj tego linku, by zobaczyć komentarz: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Użyj tego linku, by zmienić swoje ustawienia powiadomień: %(notification_settings_url)s )\n"
+"\n"
+"Twój zespół %(site_name)s \n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your events in %(team_name)s."
+msgstr "%(sender_name)s skomentował(a) jedno z Twoich wydarzeń w %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new event \"%(object_name)s\", on %(event_date)s, was announced in %(team_name)s by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Witaj %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s dodał(a) nowe wydarzenie \"%(object_name)s\" w dniu %(event_date)s opublikowane w %(team_name)s.\n"
+"\n"
+"Możesz je znaleźć korzystając z następującego linku: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Użyj tego linku, by zmienić swoje ustawienia powiadomień: %(notification_settings_url)s )\n"
+"\n"
+"Twój zespół %(site_name)s"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you were tagged in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Witaj, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s opublikował(a) komentarz do wydarzenia, w którym zostałaś/eś oznaczona/y w grupie %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"do wydarzenia:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Skorzystaj z następującego linku, by zobaczyć komentarz: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Użyj tego linku, by zmienić swoje ustawienia powiadomień: %(notification_settings_url)s )\n"
+"\n"
+"Twój zespół %(site_name)s\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a event you were tagged in %(team_name)s."
+msgstr "%(sender_name)s skomentował(a) wydarzenie, w którym zostałaś/eś oznaczona/y w %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event poll you voted in in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event poll:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Witaj, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s opublikował(a) komentarz do ankiety uzgadniania terminu, w której zagłosowałaś/eś w grupie %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"do ankiety uzgadniania terminu:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Skorzystaj z następującego linku, by zobaczyć komentarz: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Użyj tego linku, by zmienić swoje ustawienia powiadomień: %(notification_settings_url)s )\n"
+"\n"
+"Twój zespół %(site_name)s\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on an event poll you voted in in %(team_name)s."
+msgstr "%(sender_name)s skomentował(a) ankietę uzgadniania terminu, w którym zagłosowałaś/eś w %(team_name)s."
+
+msgid "Delete Event"
+msgstr "Usuń wydarzenie"
+
+msgid "(Canceled!)"
+msgstr "(Odwołano!)"
+
+msgid "This is an archived event poll."
+msgstr "To zakończona ankieta uzgadniania terminu."
+
+msgid "The event that was created after the poll can be viewed here:"
+msgstr "Wydarzenie, które zostało utworzone w ramach tej ankiety uzgadniania terminów, może zobaczyć tutaj:"
+
+msgid "(No description set)"
+msgstr "(Nie dodano opisu.)"
+
+msgctxt "someone else is going"
+msgid "Going"
+msgstr "Wezmę udział."
+
+msgctxt "someone else is maybe going"
+msgid "Maybe going"
+msgstr "Może wezmę udział."
+
+msgctxt "someone else can't go"
+msgid "Can't go"
+msgstr "Nie mogę wziąć udziału"
+
+msgctxt "one or many people are going"
+msgid "Going"
+msgid_plural "Going"
+msgstr[0] "Wezmę udział"
+msgstr[1] "Wezmę udział"
+msgstr[2] "Wezmę udział"
+
+msgctxt "one or many people are maybe going"
+msgid "Maybe going"
+msgid_plural "Maybe going"
+msgstr[0] "Może wezmę udział"
+msgstr[1] "Może wezmę udział"
+msgstr[2] "Może wezmę udział"
+
+msgctxt "one or many people are not going"
+msgid "Can't go"
+msgid_plural "Can't go"
+msgstr[0] "Nie mogę wziąć udziału"
+msgstr[1] "Nie mogę wziąć udziału"
+msgstr[2] "Nie mogę wziąć udziału"
+
+msgid "Going"
+msgstr "Wezmę udział."
+
+msgid "Maybe going"
+msgstr "Może wezmę udział."
+
+msgid "Can't go"
+msgstr "Nie mogę wziąć udziału"
+
+msgid "Are you going?"
+msgstr "Weźmiesz udział?"
+
+msgid "No Choice"
+msgstr "Brak wyboru"
+
+msgid "Add event to your calendar"
+msgstr ""
+
+#, fuzzy
+msgid "Copy this iCal-link into your calendar application to import this event:"
+msgstr "Skopiuj ten link iCal do aplikacji kalendarza w celu zaimportowania aktywnych wydarzeń:"
+
+#, fuzzy
+msgid "Start/join video conference for this event"
+msgstr "Zacznij/dołącz do video czata tego wydarzenia"
+
+msgid "Popout"
+msgstr ""
+
+msgid "Fullscreen"
+msgstr "Pełen ekran"
+
+#, fuzzy
+msgid "Video conference"
+msgstr "Rodzaj wydarzenia konferencyjnego"
+
+msgid "Leave Fullscreen"
+msgstr "Opuść pełen ekran"
+
+msgid "Back"
+msgstr "Powrót"
+
+#, fuzzy
+msgid "Leave video conference"
+msgstr "Rodzaj wydarzenia konferencyjnego"
+
+msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
+msgstr ""
+
+msgid "You will now receive notifications for comments or when this event is updated or its details change."
+msgstr "Będziesz teraz otrzymywać powiadomienia o komentarzach oraz o aktualizacji i zmianach wprowadzonych do tego wydarzenia."
+
+msgid "You created an event"
+msgstr "Utworzyłaś/eś wydarzenie."
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created an event"
+msgstr "utworzył(a) wydarzenie."
+
+msgid "Show all"
+msgstr "Pokaż wszystkie"
+
+msgid "Upcoming events"
+msgstr "Nadchodzące wydarzenia"
+
+#, python-format
+msgid "Event \"%(title)s\" was edited successfully."
+msgstr "Wydarzenie \"%(title)s\" zostało pomyślnie edytowane."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be edited."
+msgstr "Nie udało się edytować wydarzenia \"%(title)s\"."
+
+msgid "Please use the conference management area to add new workshops!"
+msgstr "Skorzystaj z opcji „Zarządzaj konferencją”, by dodać nowe warsztaty!"
+
+msgid "The page you requested is not available for this event at this time."
+msgstr "Strona, którą chcesz otworzyć, jest aktualnie niedostępna."
+
+msgid "One of the event suggestions times could not be understood!"
+msgstr "Nie rozpoznano jednej z godzin podanej w ankiecie uzgadniania terminu!"
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was edited successfully."
+msgstr "Ankieta uzgadniania terminu \"%(title)s\" została pomyślnie edytowana."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be edited."
+msgstr "Nie udało się edytować ankiety uzgadniania terminu \"%(title)s\"."
+
+#, python-format
+msgid "Event \"%(title)s\" was added successfully."
+msgstr "Wydarzenie \"%(title)s\" zostało pomyślnie dodane."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be added."
+msgstr "Nie udało się dodać wydarzenia \"%(title)s\"."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was added successfully."
+msgstr "Ankieta uzgadniania terminu \"%(title)s\" została pomyślnie dodana."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be added."
+msgstr "Nie udało się dodać ankiety uzgadniania terminu \"%(title)s\"."
+
+msgid "You should define at least one date suggestion."
+msgstr "Należy wpisać przynajmniej jedną propozycję terminu."
+
+#, python-format
+msgid "Event \"%(title)s\" was deleted successfully."
+msgstr "Wydarzenie \"%(title)s\" zostało pomyślnie usunięte."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be deleted."
+msgstr "Nie udało się usunąć wydarzenia \"%(title)s\"."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was deleted successfully."
+msgstr "Ankieta uzgadniania terminu \"%(title)s\" została pomyślnie usunięta."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be deleted."
+msgstr "Nie udało się usunąć ankiety uzgadniania terminu \"%(title)s\"."
+
+msgid "Your votes were saved successfully."
+msgstr "Twoje głosy zostały pomyślnie zapisane."
+
+msgid "Your votes could not be saved."
+msgstr "Nie udało się zapisać Twoich głosów."
+
+msgid "This is event is already scheduled. You cannot vote for it any more."
+msgstr "Ankieta uzgadniania terminu dla tego zadania została już zakończona. Nie możesz już oddać w niej głosu."
+
+msgid "The complete request can only be sent via POST!"
+msgstr "Pełną treść tej prośby można wysłać jedynie POCZTĄ!"
+
+msgid "Event cannot be completed: No date was supplied."
+msgstr "Nie udało się zakończyć wydarzenia: nie ustalono żadnej daty."
+
+msgid "The event was created successfully at the specified date."
+msgstr "Wydarzenie zostało pomyślnie utworzone w podanym terminie."
+
+#, fuzzy
+msgid "Upcoming event"
+msgstr "Nadchodzące wydarzenia"
+
+msgid "Your comment was added successfully."
+msgstr "Twój komentarz został pomyślnie dodany."
+
+msgid "Your comment was deleted successfully."
+msgstr "Twój komentarz został pomyślnie usunięty."
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
+
+#~ msgid "%(sender_name)s voted in"
+#~ msgstr "%(sender_name)s zagłosował/a w"
+
+#~ msgid "Date"
+#~ msgstr "Data"
+
+#~ msgid "End date."
+#~ msgstr "Data końcowa."
+
+#~ msgid "Event poll updated by %(sender_name)s"
+#~ msgstr "Ankieta wydarzenia uaktualniona przez %(sender_name)s"
+
+#~ msgid "Example: https://www.youtube.com/watch?v=12345"
+#~ msgstr "Przykład: https://www.youtube.com/watch?v=12345"
+
+#~ msgid "From"
+#~ msgstr "Od"
+
+#~ msgid "Kalender"
+#~ msgstr "Kalendarz"
+
+#~ msgid "Maximum Coffee Table Participants"
+#~ msgstr "Maksymalna liczba uczestniczek/ków przy stoliku/ach w kawiarni"
+
+#~ msgid "More"
+#~ msgstr "Więcej"
+
+#~ msgid "New event by %(sender_name)s"
+#~ msgstr "Nowe wydarzenie utworzone przez %(sender_name)s"
+
+#~ msgid "New event by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Nowe wydarzenie utworzone przez %(sender_name)s w zespole %(team_name)s (który śledzisz)"
+
+#~ msgid "New event poll by %(sender_name)s"
+#~ msgstr "Nowa ankieta wydarzenia utworzona przez %(sender_name)s"
+
+#~ msgid "New event poll by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Nowa ankieta wydarzenia utworzona przez %(sender_name)s w zespole %(team_name)s (który śledzisz)"
+
+#~ msgid "Schedule an event"
+#~ msgstr "Zaplanuj wydarzenie"
+
+#~ msgid "Start date."
+#~ msgstr "Data początkowa."
+
+#, fuzzy
+#~ msgid "Start/join BBB video conference for this event"
+#~ msgstr "Zacznij/dołącz do video czata tego wydarzenia"
+
+#~ msgid "Start/join video chat for this event"
+#~ msgstr "Rozpocznij/dołącz do wideo czatu"
+
+#~ msgid "Stop Video Chat"
+#~ msgstr "Zakończ wideo czat"
+
+#~ msgid "Until"
+#~ msgstr "Do"
+
+#~ msgid "Upcoming events in"
+#~ msgstr "Nadchodzące wydarzenia"
+
+#~ msgid "Video Chat"
+#~ msgstr "Wideo czat"

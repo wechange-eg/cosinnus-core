@@ -1,0 +1,415 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-01 16:06+0100\n"
+"PO-Revision-Date: 2020-04-05 21:13+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 2.3\n"
+
+msgid "Notes"
+msgstr "შენიშვნები"
+
+msgctxt "the_app"
+msgid "note"
+msgstr "შენიშვნა"
+
+msgid "A user commented on a news post"
+msgstr "მომხმარებელმა კომენტარი გააკეთა სიახლეების პოსტზე"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post"
+msgstr "%(sender_name)s კომენტარი გააკეთა სიახლეებისპოსტზე"
+
+msgid "A user commented on one of your news posts"
+msgstr "მომხმარებელმა კომენტარი გააკეთა თქვენი სიახლეების პოსტზე"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post %(object_name)s"
+msgstr "%(sender_name)s -მა თქვენი სიახლეების პოსტზე %(object_name)s კომენტარი გააკეთა"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
+msgstr[0] "%(sender_name)s-მა და%(count_minus_one)d სხვამ კომენტარი გააკეთეს თქვენი სიახლეების პოსტზე %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post"
+msgstr "%(sender_name)s -მა თქვენს სიახლეების პოსტზე კომენტარი გააკეთა"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts"
+msgstr "%(sender_name)s -მა თქვენს ერთ-ერთ სიახლეების პოსტზე კომენტარი გააკეთა"
+
+msgid "A user commented on a news posts you commented in"
+msgstr "მომხმარებელმა კომენტარი გააკეთა იმ სიახლეების პოსტებზე, სადაც თქვენც გაქვთ კომენტარი გაკეთებული"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
+msgstr "%(sender_name)s კომენტარი გააკეთა იმ სიახლეების პოსტზე %(object_name)s , სადაც თქვენც გაქვთ კომენტარი გაკეთებული"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
+msgstr[0] "%(sender_name)s-მა და%(count_minus_one)d სხვამ კომენტარი გააკეთეს სიახლეების პოსტზე %(object_name)s, რომელზეც თქვენც გაქვთ კომენტარი გაკეთებული"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in"
+msgstr "%(sender_name)s კომენტარი გააკეთა სიახლეების პოსტზე, რომელზეც თქვენც გაქვთ კომენტარი გაკეთებული"
+
+msgid "A user created a news post"
+msgstr "მომხმარებელმა შექმნა სიახლეები პოსტი"
+
+#, python-format
+msgid "%(sender_name)s created the news post %(object_name)s"
+msgstr "%(sender_name)s შექმნა სიახლეების პოსტი %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d news posts"
+msgstr "%(sender_name)s შექმნა %(count)d სიახლეების პოსტი"
+
+#, python-format
+msgid "%(sender_name)s created a new news post"
+msgstr "%(sender_name)s შექმნა ახალი სიახლეების პოსტი"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s:"
+msgstr "%(sender_name)s-მა დაპოსტა %(team_name)s-ში:"
+
+msgid "A user created a news post in a team you are following"
+msgstr "მომხმარებელმა შექმნა სიახლეების პოსტი იმ გუნდში, რომელსაც თქვენ მიყვებით"
+
+#, python-format
+msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s შექმნა ახალი სიახლეების პოსტი %(team_name)s-ში (რომელსაც თქვენ მიყვებით)"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
+msgstr "%(sender_name)s დაწერა პოსტი %(team_name)s-ში: (რომელსაც თქვენ მიყვებით)"
+
+msgid "A user updated a news post"
+msgstr "მომხმარებელმა განაახლა სიახლეების პოსტი"
+
+#, python-format
+msgid "%(sender_name)s updated the news post %(object_name)s"
+msgstr "%(sender_name)s -მა განაახლა სიახლეების პოსტი %(object_name)s"
+
+msgid "You are following this news post"
+msgstr "თქვენ გაყევით სიახლეების ამ პოსტს"
+
+#, python-format
+msgid "%(sender_name)s updated a news post you are following"
+msgstr "%(sender_name)s განაახლა სიახლეების პოსტი, რომელსაც თქვენ მიყვებით"
+
+#, python-format
+msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
+msgstr "სიახლეების პოსტი %(sender_name)s-ის მიერ, რომელსაც თქვენ მიყვებით განახლდა %(team_name)s-ში:"
+
+msgid "A user commented on a news post you are following"
+msgstr "მომხმარებელმა კომენტარი გააკეთა სიახლეების პოსტზე, რომელსაც თქვენ მიყვებით"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s"
+msgstr "%(sender_name)s -მა  სიახლეების პოსტზე %(object_name)s კომენტარი გააკეთა"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
+msgstr[0] "%(sender_name)s-მა და%(count_minus_one)d სხვამ კომენტარი გააკეთეს  სიახლეების პოსტზე %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on a news posts you are following"
+msgstr "%(sender_name)s -მა კომენტარი გააკეთა სიახლეების პოსტზე, რომელსაც თქვენ მიყვებით"
+
+msgid "No news"
+msgstr "სიახლეები არ არის"
+
+msgid "Write a news post"
+msgstr "სიახლეების პოსტის დაწერა"
+
+msgid "News stream"
+msgstr "სიახლეების ეთერი"
+
+msgid "Created By"
+msgstr "შექმნილია"
+
+msgid "Newest Created"
+msgstr "უახლესი შექმნილი"
+
+msgid "Popularity"
+msgstr "პოპულარობა"
+
+msgid "Text"
+msgstr "ტექსტი"
+
+msgid "Facebook Share"
+msgstr "Facebook-ზე გაზიარება"
+
+msgid "Note Item"
+msgstr "საგნის შენიშვნა"
+
+msgid "Note Items"
+msgstr "საგნის შენიშვნები"
+
+msgid "Author"
+msgstr "ავტორი"
+
+msgid "Creator"
+msgstr "შემქმნელი"
+
+msgid "Created"
+msgstr "შექმნილი"
+
+msgid "Comment"
+msgstr "კომენტარი"
+
+msgid "Comments"
+msgstr "კომენტარები"
+
+msgid "News"
+msgstr "სიახლეები"
+
+msgctxt "the_verb"
+msgid "Comment"
+msgstr "კომენტარის გაკეთება"
+
+msgid "Delete"
+msgstr "წაშლა"
+
+msgid "Write comment..."
+msgstr "კომენტარის დაწერა..."
+
+msgid "Post"
+msgstr "პოსტი"
+
+msgid "There are no public news posts"
+msgstr "სიახლეების პოსტები ჯერ არ არის"
+
+msgid "There are no news posts yet"
+msgstr "სიახლეების პოსტები ჯერ არ არის"
+
+msgid "Edit news post"
+msgstr "სიახლეების პოსტის რედაქტირება"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "შეცდომა დაფიქსირდა ერთ-ერთ გრაფაში, რომელშიც ინფორმაცია შეიყვანეთ. გთხოვთ შეასწოროთ შენახვამდე!"
+
+msgid "Save changes"
+msgstr "ცვლილებების შენახვა"
+
+msgid "Title (optional)"
+msgstr "ნებაყოფლობითი (ნებაყოფლობითი)"
+
+msgid "Title"
+msgstr "სათაური"
+
+msgctxt "label for the form text input"
+msgid "News text"
+msgstr "სიახლეების ტექსტი"
+
+msgid "Please enter a message..."
+msgstr "გთხოვთ შეიყვანოთ შეტყობინება..."
+
+msgid "To post in this team you need to"
+msgstr "პოსტის დაწერა თქვენთვის საჭირო გუნდში"
+
+msgid "request to join"
+msgstr "მოთხოვნა შეერთებაზე"
+
+msgid "Cancel"
+msgstr "გაუქმება"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a news post you wrote in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your post:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"გამარჯობა,%(receiver_name)s!\n"
+"\n"
+"%(sender_name)s -მა გააკეთა კომენტარი სიახლეების პოსტზე %(team_name)s-ში, სადაც თქვენც დაწერეთ კომენტარი:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"თქვენს პოსტზე:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"გამოყევით ბმულს კომენტარის სანახავად:\n"
+"\n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(გამოყევით ბმულს უპირატესი შეტყობინებების რედაქტირებისთვის:%(notification_settings_url)s )\n"
+"\n"
+"თქვენი %(site_name)s-ის გუნდი.\n"
+"\n"
+"\n"
+"\n"
+"\n"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a news post you a commented in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the post:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"გამარჯობა,%(receiver_name)s!\n"
+"\n"
+"%(sender_name)s -მა გააკეთა კომენტარი სიახლეების პოსტზე %(team_name)s-ში, სადაც თქვენც დაწერეთ კომენტარი:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"თქვენს პოსტზე:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"გამოყევით ბმულს კომენტარის სანახავად:\n"
+"\n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(გამოყევით ბმულს უპირატესი შეტყობინებების რედაქტირებისთვის:%(notification_settings_url)s )\n"
+"\n"
+"თქვენი %(site_name)s-ის გუნდი.\n"
+"\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in, in %(team_name)s."
+msgstr "%(sender_name)s კომენტარი გააკეთა იმ სიახლეების პოსტზე %(team_name)s -ში , სადაც თქვენც გაქვთ კომენტარი გაკეთებული."
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
+msgstr "%(sender_name)s-მა კომენტარი გააკეთა თქვენს ერთ-ერთ სიახლეების პოსტზე %(team_name)s-ში."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s just posted an update in %(team_name)s:\n"
+msgstr ""
+"გამარჯობა %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s-მა ახლახან გააკეთა განახლება %(team_name)s-ში:\n"
+
+#, python-format
+msgid ""
+"%(note_text)s\n"
+"\n"
+"\n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"%(note_text)s\n"
+"\n"
+"\n"
+"\n"
+"იხილეთ მოცემულ ბმულზე:%(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(გაყევით მოცემულ ბმულს უპირატესი შეტყობინებების რედაქტირებისათვის: %(notification_settings_url)s )\n"
+"\n"
+"თქვენი %(site_name)s-ის გუნდი."
+
+msgid "Show in my projects..."
+msgstr "ჩემს პროექტებში ჩვენება..."
+
+msgid "Edit"
+msgstr "რედაქტირება"
+
+msgid "Delete note"
+msgstr "შენიშვნის წაშლა"
+
+msgid "View on Facebook"
+msgstr "Facebook-ით ნახვა"
+
+msgid "Do you really want to delete this note?"
+msgstr "ნამდვილად გსურთ შენიშვნის წაშლა?"
+
+msgid "You added a post"
+msgstr "თქვენ დაამატეთ პოსტი"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "added a post"
+msgstr "დაამატა პოსტი"
+
+msgid "Your news post was added successfully."
+msgstr "თქვენი სიახლეების პოსტი წარმატებით დაემატა."
+
+msgid "Your news post was deleted successfully."
+msgstr "თქვენი სიახლეების პოსტი წარმატებით წაიშალა."
+
+msgid "Your news post was edited successfully."
+msgstr "თქვენი სიახლეების პოსტი წარმატებით დარედაქტირდა."
+
+msgid "Your comment was added successfully."
+msgstr "თქვენი სიახლეების პოსტი წარმატებით დაემატა."
+
+msgid "Your comment was deleted successfully."
+msgstr "თქვენი სიახლეების პოსტი წარმატებით წაიშალა."
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
+
+#~ msgid "New news post by %(sender_name)s"
+#~ msgstr "ახალი სიახლეების პოსტი %(sender_name)s-ის მიერ"
+
+#~ msgid "New news post by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "ახალი სიახლეების პოსტი %(sender_name)s -ის მიერ %(team_name)s-ში (რომელსაც თქვენ მიყვებით)"

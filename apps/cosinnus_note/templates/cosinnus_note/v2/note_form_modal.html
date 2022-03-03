@@ -1,0 +1,31 @@
+{% load i18n cosinnus_tags widget_tweaks %}
+
+{# sadly we have no practical way of a block to extend for this #}
+{% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.text.id_for_label translation_form=form.forms.obj translated_field_name=form.forms.obj.text.html_name %}
+
+
+{% with id="write-news-modal" form_id="note-create-form" %}
+	{% group_url 'cosinnus:note:add' group=group as action_url %}
+	
+	<!-- Modal -->
+	<div class="modal fade" id="{{ id }}" tabindex="1" role="dialog" aria-labelledby="{{ form_id }}Label" aria-hidden="true">
+	    <div class="modal-dialog modal-lg">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+	                    <i class="fas fa-fw fa-times"></i>
+	                </button>
+	                <h4 class="modal-title no-select" id="{{ id }}Label">
+	                    <i class="fas fa-fw fa-write"></i>
+	                    {% trans "Write a news post" %}
+	                </h4>
+	            </div>
+	            
+		        {% include 'cosinnus_note/v2/note_form_core.html' with form_id=form_id action_url=action_url %}
+	            
+	        </div>
+	    </div>
+	   
+	</div><!-- modal -->
+{% endwith %}

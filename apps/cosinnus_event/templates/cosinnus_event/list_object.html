@@ -1,0 +1,195 @@
+{% load i18n cosinnus_tags %}
+{% captureas detail_url %}{% if event.conferenceevent %}{{ event.get_edit_url }}{% else %}{{ event.get_absolute_url }}{% if not event.is_hidden_group_proxy and group != event.group %}?reflected_item_redirect=1{% endif %}{% endif %}{% endcaptureas %}
+<div id="cosinnus_list_element_{{ event.id }}" class="fadedown {% if not forloop.last %}regular-space{% endif %}">
+    <div class="item_checkbox_element btn btn-{% if event.is_hidden_group_proxy %}extra-{% endif %}emphasized w100" href="{{ detail_url }}">
+        <ul class="media-list">
+            <li class="media">
+                {% if user|has_write_access:event %}
+                    {% captureas input_name %}{{ event.id }}{% endcaptureas %}
+                    {% include 'cosinnus/common/checkbox/checkbox_overlay_box.html' with input_name=input_name %}
+                {% endif %}
+            
+                <a class="pull-left square-date-icon" href="{{ event.get_absolute_url }}">
+                  {% if event.state == 2 or event.state == 4 or not event.from_date %}
+                    <i class="fa fa-calendar-check-o"></i>
+                  {% else %}
+                    <div>{{ event.from_date|date:"d" }}</div>
+                    <div>{{ event.from_date|date:"M" }}</div>
+                  {% endif %}
+                </a>
+                <a class="pull-right fadedown-clickarea">
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+                <div class="media-body">
+                    {% with creator=event.creator %}
+                        <span class="annotation mobile-hidden">
+                            {% trans "by" %} 
+                            <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a>
+                            {% if event.created %}
+                                &nbsp;&nbsp;
+                                <span title="{% trans "Created" %}">
+                                    <i class="fa fa-pencil"></i>
+                                    <span class="moment-data-date" data-date="{{ event.created|date:'c' }}"></span>
+                                </span>
+                            {% endif %}
+	                        {% if event.conferenceevent %}
+	                            &nbsp;&nbsp;
+				                <a class="pull-right" href="{{ event.get_absolute_url|safe }}" target="_blank">
+				                    <i class="fa fa-eye"></i>
+				                    {% trans "View" %}
+				                </a>
+			                {% endif %}
+                        </span>
+                        {% if event.video_conference_type == 2 %}
+	                        <span class="annotation">
+	                            <i class="fa fa-fw fa-eye"></i>
+	                            {% trans "Fairmeeting" %}
+	                            &nbsp;
+	                        </span>
+	                    {% elif event.video_conference_type == 1 %}
+	                        <span class="annotation">
+	                            <i class="fa fa-fw fa-eye"></i>
+	                            {% trans "BBB-Meeting" %}
+	                            &nbsp;
+	                        </span>
+	                    {% endif %}
+                    {% endwith %}
+                    <a href="{{ detail_url }}">
+                        {% include 'cosinnus/common/likefollowstar/following_title_indicator.html' with object=event %}
+                        {% if event.conferenceevent %}
+                            {% if not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+                                <i>({{ event.get_type_verbose }}: {{ event.room.title }})&nbsp;&nbsp;</i>
+                            {% endif %}
+                            <i>{{ event.from_date|date:"H:i" }} - {{ event.to_date|date:"H:i" }}&nbsp;&nbsp;&nbsp;</i>
+                        {% endif %}                        
+                        {{ event.title }}{% if not event.is_hidden_group_proxy and group != event.group %} (&#8599; {{ event.group.name }}){% endif %}
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="btn btn-white w100">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                	{% if event.state == 4 and event.scheduled_event %}
+                		<i class="fa fa-calendar"></i>
+                	{% else %}
+                    	<i class="fa fa-clock-o"></i>
+                    {% endif %}
+                </a>
+                <div class="media-body">
+                	{% if event.state == 1 %}
+	                    <span class="moment-data-date" data-date="{{ event.from_date|date:"c" }}" title="{{ event.from_date }}"></span>
+	                    –
+	                    <span class="moment-data-date" data-date="{{ event.to_date|date:"c" }}" title="{{ event.to_date }}"></span>
+                    {% elif event.state == 4 and event.scheduled_event %}
+                    	{% trans "Created Event" %}: <a href="{{ event.scheduled_event.get_absolute_url }}" target="_blank">{{ event.scheduled_event.title }} <i class="fa fa-external-link"></i></a>
+                    {% else %}
+                    	–
+                    {% endif %}
+                </div>
+            </li>
+        </ul>
+    </div>
+    {% if event.media_tag_object.location %}
+    <div class="btn btn-white w100">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-map-marker"></i>
+                </a>
+                <div class="media-body">
+    			      <a href="{{ event.media_tag_object.location_url }}" target="_blank">{{ event.media_tag_object.location }}</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    {% endif %}
+    {% if event.note and event.note|length > 0 %}
+    <div class="btn btn-white w100 {% if not event.url %}large-space{% endif %}">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-pencil"></i>
+                </a>
+                <div class="media-body">
+                    <div class="textfield">
+                        {{ event.note|textfield }}
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    {% endif %}
+    {% if event.url %}
+    <div class="btn btn-white w100 large-space">
+        <ul class="media-list">
+            <li class="media">
+                <div class="media-body">
+                    <a href="{{ event.url }}">{{ event.url }}</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    {% endif %}
+
+
+    {% include 'cosinnus/media_tags_readonly.html' with object=event %}
+    
+    {% if user|has_write_access:event %}
+        {% captureas modal_id %}deleteModal_{{event.slug}}{% endcaptureas %}
+        <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_id}}">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left">
+                        <i class="fa fa-eraser"></i>
+                    </span>
+                    <div class="media-body">
+                        {% trans "Delete" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+      
+      {% if event.state != 4 %} {# archived doodles cannot be edited #}
+          {% if event.conferenceevent %}
+             {% captureas edit_url %}{{ event.get_edit_url }}{% endcaptureas %}
+	      {% elif event.state == 2 %}
+	        {% captureas edit_url %}{% group_url "cosinnus:event:doodle-edit" group=group slug=event.slug %}{% endcaptureas %}
+	      {% else %}
+	        {% captureas edit_url %}{% group_url "cosinnus:event:event-edit" group=group slug=event.slug %}{% endcaptureas %}
+	      {% endif %}
+	        <button type="button" class="btn btn-emphasized" href="{{ edit_url }}">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <span class="pull-left">
+	                        <i class="fa fa-pencil"></i>
+	                    </span>
+	                    <div class="media-body">
+	                        {% trans "Edit" %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </button> 
+	  {% endif %}
+    {% endif %}
+    
+    {% include 'cosinnus/feedback/report_button_btn.html' with object=event %}
+    
+</div><!-- fadedown -->
+
+{% if user|has_write_access:event %}    
+      {% if event.state == 2 %}
+        {% captureas label %}{% blocktrans with title=event.title %}Do you really want to delete unscheduled event „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+        {% captureas title %}{% trans "Delete unscheduled event" %}{% endcaptureas %}
+        {% captureas action %}{% group_url 'cosinnus:event:doodle-delete' group=group slug=event.slug%}{% endcaptureas %}
+      {% else %}
+        {% captureas label %}{% blocktrans with title=event.title %}Do you really want to delete event „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+        {% captureas title %}{% trans "Delete event" %}{% endcaptureas %}
+        {% captureas action %}{{ event.get_delete_url }}{% if event.conferenceevent %}?next={% group_url 'cosinnus:event:conference-event-list' group=group %}{% endif %}{% endcaptureas %}
+      {% endif %}
+
+    {% include "cosinnus/modal_box.html" with id=modal_id label=label title=title form_action=action %}
+{% endif %}

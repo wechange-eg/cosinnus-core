@@ -1,0 +1,141 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:39+0200\n"
+"PO-Revision-Date: 2021-05-24 19:39+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.2.1\n"
+
+msgid "Stream"
+msgstr "جویبار داده"
+
+msgctxt "the_app"
+msgid "stream"
+msgstr "جویبار داده"
+
+msgid "My Streams"
+msgstr "جویبارهای داده‌ی من"
+
+msgid "Streams"
+msgstr "جویبارهای داده"
+
+msgid "Models"
+msgstr "الگوها"
+
+msgid "Portal IDs"
+msgstr "شناسه‌ی درگاه"
+
+msgid "Last seen"
+msgstr "آخرین بار دیده شده"
+
+msgid "Special Stream"
+msgstr "جویبار داده ویژه"
+
+msgid "Special Group IDs"
+msgstr "شناسه‌های گروه ویژه"
+
+msgid "My Stream"
+msgstr "جویبار داده‌ی من"
+
+msgid "Public Stream"
+msgstr "جویبار داده‌ی همگانی"
+
+msgid "My Stream in all Portals"
+msgstr "جویبار داده‌ی من در همه‌ی درگاه‌ها"
+
+msgid "Public Stream in all Portals"
+msgstr "جویبار داده‌ی همگانی در همه‌ی درگاه‌ها"
+
+msgid "Edit this Stream"
+msgstr "این جویبار داده را ویرایش کن"
+
+msgid "Delete this Stream"
+msgstr "این جویبار داده را پاک کن"
+
+msgid "Do you really want to delete this stream?"
+msgstr "آیا واقعن می‌خواهید این جویبار داده را پاک کنید؟"
+
+msgid "Delete Stream"
+msgstr "جویبار داده را پاک کن"
+
+msgid "Create Stream"
+msgstr "جویبار داده بساز"
+
+msgid "Hide public items outside of your groups"
+msgstr "موردهای همگانی خارج از گروه‌تان را مخفی کنید"
+
+msgid "Show public items outside of your groups"
+msgstr "موردهای همگانی خارج از گروه‌تان را نمایش دهید"
+
+msgid "There are no news posts yet"
+msgstr "هیچ مطلب خبری‌ای نیست"
+
+#, python-format
+msgid "Edit stream \"%(stream_name)s\""
+msgstr "این جویبار داده‌ی \"%(stream_name)s\" را ویرایش کن"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "یک خطا در یکی از زمینه‌هایی که وارد کرده‌اید هست. لطفن پیش از ذخیره کردن آن را برطرف کنید!"
+
+msgid "Title"
+msgstr "عنوان"
+
+msgid "Enter a title for the stream."
+msgstr "یک عنوان برای این جویبار داده وارد کنید."
+
+msgid "Apply filters for the stream"
+msgstr "جویبار داده را بپالای"
+
+msgid "Filter by Team?"
+msgstr "براساس گروه بپالاییم؟"
+
+msgid "Select Team"
+msgstr "گروه را انتخاب کن"
+
+msgid "Public"
+msgstr "همگانی"
+
+msgid "Additional filters"
+msgstr "پالایه‌های افزوده"
+
+msgid "Filter by authors, tags or other tagged properties?"
+msgstr "بر اساس نویسنده، برچسب یا دیگر ویژگی‌های برچسب‌شده پالایش کنیم؟"
+
+msgid "Filter by item types?"
+msgstr "براساس نوع مورد پالایش کنیم؟"
+
+msgid "Create"
+msgstr "بساز"
+
+msgid "Edit"
+msgstr "ویرایش کن"
+
+msgid "You do not have permission to access this stream."
+msgstr "شما اجازه‌ی دسترسی به این جویبار داده ندارید."
+
+msgid "Your stream was added successfully."
+msgstr "جویبار داده‌ی شما با موفقیت افزوده شد."
+
+msgid "Please log in to access this page."
+msgstr "لطفن به سامانه متصل شوید تا بتوانید به این برگه دسترسی داشته باشید."
+
+msgid "Your stream was updated successfully."
+msgstr "جویبار داده‌ی شما با موفقیت به‌روز شد."
+
+msgid "Your stream was deleted successfully."
+msgstr "جویبار داده‌ی شما با موفقیت پاک شد."
+
+msgid "You cannot delete the default stream!"
+msgstr "شما نمی‌توانید جویبار داده‌ی پیش‌فرض را پاک کنید!"

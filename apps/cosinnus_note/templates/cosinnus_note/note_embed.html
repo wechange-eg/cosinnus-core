@@ -1,0 +1,64 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags widget_tweaks %}
+{% block page_title %}EMBED {% trans "Notes" %}: {{group.name}} {% endblock %}
+
+{% block cosinnus_navbar %}
+{% endblock cosinnus_navbar %}
+
+{% block extrahead %}
+	{{ block.super }}
+	<script type="text/javascript">$(function(){$.cosinnus.embeddifyURLs();});</script>
+{% endblock extrahead %}
+
+{% block extrafooter %}
+{% endblock extrafooter %}
+
+{% block html_attributes %}style="overflow: auto;"{% endblock html_attributes %}
+{% block body_attributes %}style="padding-top: 10px!important;background: transparent !important;"{% endblock body_attributes %}
+
+{% block announcements %}
+{% endblock announcements %}
+
+{% block main_page %}
+    <div class="row">
+        <div class="col-xs-12">
+        	{% comment %}  
+        	We use pagination, but we do not show the elements here
+	        {% if not pagination.number == 1 %}
+	        	{% include "cosinnus/utils/pagination.html" with widget=pagination %}
+	        {% endif %}
+        	{% endcomment %}
+        
+	        {% for note in object_list %}
+	            {% include 'cosinnus_note/single_note_embeddable.html' with object=note %}
+	        {% empty %}
+	            <!-- {% trans "There are no public news posts" %} -->
+	            {# {% include 'cosinnus/common/empty_button.html' with message="There are no public news posts" %} #}
+				{% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+					<p><i>{% trans "There are no news posts yet" %}</i><p>
+				{% else %}
+	            	<p><i>{% trans "There are no public news posts" %}</i><p>
+				{% endif %}
+	        {% endfor %}
+	        
+	        {% comment %}  
+	        A nice "check out more" backlink to the embedded's group dashboard
+	        <nav class="widget-pagination v-offset-l v-spacer-s">
+				<ul class="pagination center-block text-center">
+					<li><a href="{{ group.get_absolute_url }}" target="_blank">{% trans "Check out more at" %} {{ COSINNUS_CURRENT_PORTAL.name }}! <i class="fa fa-external-link"></i></a></li>
+				</ul>
+	        </nav>
+	        {% endcomment %}
+	        
+	        {% comment %}  
+        	We use pagination, but we do not show the elements here
+            {% include "cosinnus/utils/pagination.html" with widget=pagination %}
+        	{% endcomment %}
+            
+        </div>
+    </div>
+{% endblock main_page %}                 
+
+{% block footer %}
+{% endblock footer %}
+

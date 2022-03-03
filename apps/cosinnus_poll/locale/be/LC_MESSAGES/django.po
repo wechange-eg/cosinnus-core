@@ -1,0 +1,790 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:06+0200\n"
+"PO-Revision-Date: 2019-05-08 01:09+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: be\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.2.1\n"
+
+msgid "Polls"
+msgstr "Апытанні"
+
+msgctxt "the_app"
+msgid "poll"
+msgstr "апытанне"
+
+msgid "A user created a new poll"
+msgstr "Карыстальнік(-ца) стварыў(-ла) новае апытанне"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new poll"
+msgid "%(sender_name)s created the poll %(object_name)s"
+msgstr "%(sender_name)s стварыў(-ла) новае апытанне"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new poll"
+msgid "%(sender_name)s created %(count)d polls"
+msgstr "%(sender_name)s стварыў(-ла) новае апытанне"
+
+#, python-format
+msgid "%(sender_name)s created a new poll"
+msgstr "%(sender_name)s стварыў(-ла) новае апытанне"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Новае апытанне: \"%(object_name)s\" створана ў %(team_name)s."
+
+msgid "A poll you voted on was completed"
+msgstr "Апытанне, у якім Вы ўдзельнічалі, завяршылася"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed the poll you are following"
+msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
+msgstr "%(sender_name)s завяршыў(-ла) апытанне, за якім Вы сочыце"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on a poll you voted in"
+msgid "%(sender_name)s completed %(count)d polls you voted on"
+msgstr "%(sender_name)s пракаментаваў(-ла) апытанне, у якім Вы ўдзельнічалі"
+
+#, python-format
+msgid "%(sender_name)s completed the poll"
+msgstr "%(sender_name)s завяршыў(-ла) гэта апытанне"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Апытанне \"%(object_name)s\" было завершана ў %(team_name)s."
+
+msgid "A user commented on one of your polls"
+msgstr "Карыстальнік(-ца) пракаментаваў(-ла) адно з Вашых апытанняў"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your polls in %(team_name)s."
+msgid "%(sender_name)s commented on your poll %(object_name)s"
+msgstr "%(sender_name)s пракаментаваў(-ла) адно з Вашых апытанняў у %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your polls in %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
+msgstr[0] "%(sender_name)s пракаментаваў(-ла) адно з Вашых апытанняў у %(team_name)s."
+msgstr[1] "%(sender_name)s пракаментаваў(-ла) адно з Вашых апытанняў у %(team_name)s."
+msgstr[2] "%(sender_name)s пракаментаваў(-ла) адно з Вашых апытанняў у %(team_name)s."
+msgstr[3] "%(sender_name)s пракаментаваў(-ла) адно з Вашых апытанняў у %(team_name)s."
+
+#, python-format
+msgid "%(sender_name)s commented on your poll"
+msgstr "%(sender_name)s пракаментаваў(-ла) Ваша апытанне"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls"
+msgstr "%(sender_name)s пракаментаваў(-ла) адно з Вашых апытанняў"
+
+msgid "A user commented on a poll you were tagged in"
+msgstr "Карыстальнік(-ца) пракаментаваў(-ла) апытанне, у якім Вы былі пазначаны"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your polls in %(team_name)s."
+msgid "%(sender_name)s commented on the poll %(object_name)s"
+msgstr "%(sender_name)s пракаментаваў(-ла) адно з Вашых апытанняў у %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your polls in %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
+msgstr[0] "%(sender_name)s пракаментаваў(-ла) адно з Вашых апытанняў у %(team_name)s."
+msgstr[1] "%(sender_name)s пракаментаваў(-ла) адно з Вашых апытанняў у %(team_name)s."
+msgstr[2] "%(sender_name)s пракаментаваў(-ла) адно з Вашых апытанняў у %(team_name)s."
+msgstr[3] "%(sender_name)s пракаментаваў(-ла) адно з Вашых апытанняў у %(team_name)s."
+
+#, fuzzy
+#| msgid "A user created a new poll"
+msgid "You were tagged in this poll"
+msgstr "Карыстальнік(-ца) стварыў(-ла) новае апытанне"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in"
+msgstr "%(sender_name)s пракаментаваў(-ла) апытанне, у якім Вы былі пазначаны"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s пракаментаваў(-ла) апытанне, у якім Вы былі пазначаны, у %(team_name)s"
+
+msgid "A user commented on an poll you voted in"
+msgstr "Карыстальнік(-ца) пракаментаваў(-ла) апытанне, у якім Вы ўдзельнічалі"
+
+#, fuzzy
+#| msgid "A user created a new poll"
+msgid "You voted on this poll"
+msgstr "Карыстальнік(-ца) стварыў(-ла) новае апытанне"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in"
+msgstr "%(sender_name)s пракаментаваў(-ла) апытанне, у якім Вы ўдзельнічалі"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
+msgstr "%(sender_name)s пракаментаваў(-ла) апытанне, у якім Вы ўдзельнічалі, у %(team_name)s"
+
+msgid "A user created a new poll in a team you are following"
+msgstr "Карыстальнік(-ца) стварыў(-ла) новае апытанне ў камандзе, за якой вы сочыце"
+
+#, python-format
+msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s стварыў(-ла) новае апытанне ў %(team_name)s (за якой вы сочыце)"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Новае апытанне: \"%(object_name)s\" створана ў %(team_name)s (за якой вы сочыце)."
+
+msgid "A user updated a poll you are following"
+msgstr "Карыстальнік(-ца) абнавіў(-ла) апытанне, за якім Вы сочыце"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed the poll"
+msgid "%(sender_name)s updated the poll %(object_name)s"
+msgstr "%(sender_name)s завяршыў(-ла) гэта апытанне"
+
+#, fuzzy
+#| msgid "A poll you are following was completed"
+msgid "You are following this poll"
+msgstr "Апытанне, за якім Вы сочыце, завяршылася"
+
+#, python-format
+msgid "%(sender_name)s updated a poll you are following"
+msgstr "%(sender_name)s абнавіў(-ла) апытанне, за якім Вы сочыце"
+
+#, python-format
+msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Апытанне, за якім Вы сочыце: \"%(object_name)s\" абноўлена ў %(team_name)s."
+
+msgid "A poll you are following was completed"
+msgstr "Апытанне, за якім Вы сочыце, завяршылася"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed the poll"
+msgid "%(sender_name)s completed the poll %(object_name)s"
+msgstr "%(sender_name)s завяршыў(-ла) гэта апытанне"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed the poll"
+msgid "%(sender_name)s completed %(count)d polls"
+msgstr "%(sender_name)s завяршыў(-ла) гэта апытанне"
+
+#, python-format
+msgid "%(sender_name)s completed the poll you are following"
+msgstr "%(sender_name)s завяршыў(-ла) апытанне, за якім Вы сочыце"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
+msgstr "Апытанне \"%(object_name)s\", за якім Вы сочыце, завяршылася ў %(team_name)s."
+
+msgid "A user commented on one a poll you are following"
+msgstr "Карыстальнік(-ца) пракаментаваў(-ла) апытанне, за якім Вы сочыце"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you are following"
+msgstr "%(sender_name)s пракаментаваў(-ла) апытанне, за якім Вы сочыце"
+
+msgid "Current Polls"
+msgstr "Бягучыя апытанні"
+
+msgid "No current polls"
+msgstr "Няма бягучых апытанняў"
+
+msgid "Created By"
+msgstr "Створаныя карыстальнікам(-цай)"
+
+msgid "Newest Created"
+msgstr "Найноўшыя створаныя"
+
+msgid "Title"
+msgstr "Назва"
+
+msgid "You must write a description for this poll option!"
+msgstr "Вы мусіце дадаць апісанне да гэтага варыянта выбару!"
+
+msgid "Voting open"
+msgstr "Галасаванне адкрытае"
+
+msgid "Voting closed"
+msgstr "Галасаванне закрытае"
+
+msgid "Poll archived"
+msgstr "Апытанне адпраўлена ў архіў"
+
+msgid "State"
+msgstr "Стан"
+
+msgid "Description"
+msgstr "Апісанне"
+
+msgid "Multiple options votable"
+msgstr "Магчыма галасаванне за некалькі варыянтаў"
+
+msgid "Does this poll allow users to vote on multiple options or just decide for one?"
+msgstr "Ці дазваляе гэта апытанне карыстальнікам(-цам) галасаваць за некалькі варыянтаў, або трэба выбраць толькі адзін?"
+
+msgid "\"Maybe\" option enabled"
+msgstr "Варыянт \"Магчыма\" уключаны"
+
+msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
+msgstr "Ці ўключаны варыянт \"Магчыма\"? Ігнаруецца і вяртаецца да змоўчнага \"Няпраўда\", калі ``multiple_votes==False``"
+
+msgid "Anyone can vote"
+msgstr "Галасаваць можа кожны(-ая)"
+
+msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
+msgstr "Калі актыўна, кожны(-ая), хто бачыць гэтае апытанне, можа ў ім паўдзельнічаць. Калі не вылучана, удзельнічаць могуць толькі чальцы групы."
+
+msgid "Show voters"
+msgstr "Паказаць удзельнікаў(-ц)"
+
+msgid "If true, display a list of which user voted for each option."
+msgstr "Калі актыўна, паказвае, за які варыянт прагаласаваў(-ла) кожны(-ая) удзельнік(-ца)."
+
+msgid "Start"
+msgstr "Пачаць"
+
+msgid "Winning Option"
+msgstr "Пераможны варыянт"
+
+msgid "Poll"
+msgstr "Апытанне"
+
+#, python-format
+msgid "Poll: %(poll)s (%(state)s)"
+msgstr "Апытанне: %(poll)s (%(state)s)"
+
+msgid "Image"
+msgstr "Выява"
+
+msgctxt "the subject"
+msgid "Votes"
+msgstr "Галасы"
+
+msgid "Poll Option"
+msgstr "Варыянт выбару"
+
+msgid "Poll Options"
+msgstr "Варыянты выбару"
+
+msgid "Yes"
+msgstr "Так"
+
+msgid "Maybe"
+msgstr "Магчыма"
+
+msgid "No"
+msgstr "Не"
+
+msgid "Option"
+msgstr "Варыянт"
+
+msgid "Voter"
+msgstr "Удзельнік галасавання"
+
+msgid "Vote"
+msgstr "Галасаваць"
+
+msgctxt "the subject"
+msgid "Vote"
+msgstr "Галасаванне"
+
+msgid "Creator"
+msgstr "Стваральнік(-ца)"
+
+msgid "Created"
+msgstr "Створана"
+
+msgid "Last modified"
+msgstr "Апошняя змена"
+
+msgid "Text"
+msgstr "Тэкст"
+
+msgid "Comment"
+msgstr "Каментар"
+
+msgid "Comments"
+msgstr "Каментары"
+
+msgid "Poll choice"
+msgstr "Альтэрнатыва ў апытанні"
+
+msgid "Back to Polls"
+msgstr "Вярнуцца да апытанняў"
+
+msgid "Past Polls"
+msgstr "Мінулыя апытанні"
+
+msgid "by"
+msgstr "Стваральнік(-ца):"
+
+msgid "Delete"
+msgstr "Выдаліць"
+
+msgid "Edit"
+msgstr "Рэдагаваць"
+
+msgid "Re-open"
+msgstr "Зноў адкрыць галасаванне"
+
+msgid "Archive"
+msgstr "Адправіць у архіў"
+
+#, python-format
+msgid "Do you really want to delete poll „%(title)s“?"
+msgstr "Вы сапраўды хочаце выдаліць апытанне \"%(title)s\"?"
+
+msgid "Delete poll"
+msgstr "Выдаліць апытанне"
+
+#, python-format
+msgid "Do you really want to re-open poll „%(title)s“?"
+msgstr "Вы сапраўды хочаце зноў адкрыць апытанне \"%(title)s\"?"
+
+msgid "Re-open poll"
+msgstr "Зноў адкрыць апытанне"
+
+#, python-format
+msgid "Do you really want to archive poll „%(title)s“?"
+msgstr "Вы сапраўды хочаце адправіць у архіў апытанне \"%(title)s\"?"
+
+msgid "Archive poll"
+msgstr "Адправіць апытанне ў архіў"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you created in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Вітаем, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s дадаў(-ла) каментар да створанага Вамі апытання ў %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"да вашага апытання:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"Перайдзіце па гэтай спасылцы, каб прагледзець каментар:\n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Перайдзіце па гэтай спасылцы, каб змяніць свае налады апавяшчэнняў: %(notification_settings_url)s )\n"
+"\n"
+"Ваша каманда %(site_name)s.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls in %(team_name)s."
+msgstr "%(sender_name)s пракаментаваў(-ла) адно з Вашых апытанняў у %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the poll \"%(object_name)s\", was completed in %(team_name)s by %(sender_name)s!\n"
+msgstr ""
+"Вітаем, %(receiver_name)s,\n"
+"\n"
+"апытанне \"%(object_name)s\" у %(team_name)s завершанае карыстальнікам(-цай) %(sender_name)s.\n"
+
+msgid "The winning option was:"
+msgstr "Перамог варыянт:"
+
+msgid "There was no winning option."
+msgstr "Ніводны варыянт не перамог."
+
+#, python-format
+msgid ""
+"\n"
+"You can find the poll by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"\n"
+"Апытанне можна знайсці па спасылцы: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Перайдзіце па гэтай спасылцы, каб змяніць свае налады апавяшчэнняў: %(notification_settings_url)s )\n"
+"\n"
+"Ваша каманда %(site_name)s."
+
+#, python-format
+msgid "Poll: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Апытанне \"%(object_name)s\" завершанае ў %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new poll \"%(object_name)s\", was created in %(team_name)s by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Вітаем, %(receiver_name)s,\n"
+"\n"
+"новае апытанне \"%(object_name)s\" створана ў %(team_name)s карыстальнікам(-цай) %(sender_name)s.\n"
+"\n"
+"Вы можаце яго знайсці па наступнай спасылцы: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"Перайдзіце па гэтай спасылцы, каб змяніць свае налады апавяшчэнняў: %(notification_settings_url)s )\n"
+"\n"
+"Ваша каманда %(site_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you were tagged in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Вітаем, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s дадаў(-ла) каментар да апытання, у якім Вас пазначылі ў %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"да апытання:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"Перайдзіце па гэтай спасылцы, каб прагледзець каментар:\n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Перайдзіце па гэтай спасылцы, каб змяніць свае налады апавяшчэнняў: %(notification_settings_url)s )\n"
+"\n"
+"Ваша каманда %(site_name)s.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in %(team_name)s."
+msgstr "%(sender_name)s пракаментаваў(-ла) апытанне, у якім Вы былі пазначаны, у %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you voted in in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Вітаем, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s дадаў(-ла) каментар да апытання, у якім Вы паўдзельнічалі ў %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"да апытання:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"Перайдзіце па гэтай спасылцы, каб прагледзець каментар:\n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Перайдзіце па гэтай спасылцы, каб змяніць свае налады апавяшчэнняў: %(notification_settings_url)s )\n"
+"\n"
+"Ваша каманда %(site_name)s.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s."
+msgstr "%(sender_name)s пракаментаваў(-ла) апытанне, у якім Вы ўдзельнічалі, у %(team_name)s."
+
+msgid "Write comment..."
+msgstr "Напішыце каментар..."
+
+msgid "Post"
+msgstr "Апублікаваць"
+
+msgid "Add poll"
+msgstr "Дадаць апытанне"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "У адным з палёў, якія вы запоўнілі, ёсць памылка. Калі ласка, выпраўце яе перш чым захаваць старонку!"
+
+msgid "Enter a title for the new poll."
+msgstr "Увядзіце назву новага апытання."
+
+msgid "Description and Infos"
+msgstr "Апісанне і інфармацыя"
+
+msgid "Enter a description for the poll"
+msgstr "Дадайце апісанне гэтага апытання"
+
+msgid "Note: You cannot edit the options for this poll because someone has already cast their vote or the poll has been completed!"
+msgstr "Увага: Вы не можаце рэдагаваць варыянты выбару ў гэтам апытанні, паколькі нехта ўжо прагаласаваў або апытанне завяршылася!"
+
+msgid "Poll Choices"
+msgstr "Альтэрнатывы ў апытанні"
+
+msgid "Remove choice"
+msgstr "Выдаліць альтэрнатыву"
+
+msgid "Add choice"
+msgstr "Дадаць альтэрнатыву"
+
+msgid "Multiple Votes"
+msgstr "Можна выбраць некалькі варыянтаў"
+
+msgid "If disabled, users can only vote for one option"
+msgstr "Калі неактыўна, карыстальнікі(-цы) могуць галасаваць толькі за адзін варыянт"
+
+msgid "In addition to \"Yes\" and \"No\""
+msgstr "У дадатак да \"Так\" і \"Не\""
+
+msgid "Lists how every voter voted for each option."
+msgstr "Паказвае, як кожны(-ая) ўдзельнік(-ца) прагаласаваў(-ла) за кожны варыянт."
+
+msgid "Public voting"
+msgstr "Публічнае галасаванне"
+
+msgid "Any logged in user who can see this poll can vote on it. If disabled, only group/project members can vote on it."
+msgstr "Любы(-ая) карыстальнік(-ца), які(-ая) ўвайшоў(-ла) на сайт і можа бачыць гэтае апытанне, зможа ў ім паўдзельнічаць. Калі неактыўна, прагаласаваць змогуць толькі чальцы групы/праекта."
+
+msgid "Create"
+msgstr "Стварыць"
+
+msgid "Save"
+msgstr "Захаваць"
+
+msgid "Archived Polls"
+msgstr "Архіваваныя апытанні"
+
+msgid "Enter the title to create a new poll."
+msgstr "Увядзіце назву для стварэння новага апытання."
+
+msgid "There are no archived polls."
+msgstr "Архіваваных апытанняў няма."
+
+msgid "There are no running polls."
+msgstr "Бягучых апытанняў няма."
+
+msgid "There are no upcoming polls"
+msgstr "Апытанняў, якія маюць адбыцца, няма"
+
+msgctxt "the_verb"
+msgid "Vote"
+msgstr "Галасаваць"
+
+#, python-format
+msgid "Vote for %(title)s"
+msgstr "Галасаванне за %(title)s"
+
+msgid "This poll has been completed. Voting is closed."
+msgstr "Гэта апытанне завяршылася. Галасаванне закрыта."
+
+msgid "This is an archived poll."
+msgstr "Гэта апытанне адпраўленае ў архіў."
+
+msgid "Complete without winner"
+msgstr "Завяршыць без пераможнага варыянта"
+
+#, python-format
+msgid "Do you really want to complete poll \"%(title)s\" with no winning option?"
+msgstr "Вы сапраўды хочаце завяршыць апытанне \"%(title)s\" без пераможнага варыянту?"
+
+msgid "Complete poll without winner"
+msgstr "Завяршыць апытанне без пераможнага варыянта"
+
+msgid "(No description set)"
+msgstr "(Апісанне не прызначана)"
+
+msgid "The Winner is"
+msgstr "Перамог варыянт"
+
+msgid "Available options were"
+msgstr "Сярод магчымых варыянтаў былі"
+
+msgid "There are no options for this poll yet!"
+msgstr "У гэтым апытанні пакуль няма варыянтаў выбару!"
+
+msgid "Make winner and complete poll"
+msgstr "Пазначыць пераможным і завяршыць апытанне"
+
+msgid "Votes"
+msgstr "Галасы"
+
+#, python-format
+msgid "Do you really want to complete the poll and select \"%(description)s\" as winner?"
+msgstr "Вы сапраўды хочаце завяршыць апытанне і пазначыць \"%(description)s\" пераможцам?"
+
+msgid "Complete poll"
+msgstr "Завяршыць апытанне"
+
+#, fuzzy
+#| msgid "A user created a new poll"
+msgid "You created a poll"
+msgstr "Карыстальнік(-ца) стварыў(-ла) новае апытанне"
+
+#, fuzzy
+#| msgid "A user created a new poll"
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a poll"
+msgstr "Карыстальнік(-ца) стварыў(-ла) новае апытанне"
+
+msgid "There are no polls yet"
+msgstr "Апытанняў пакуль няма"
+
+#, python-format
+msgid "Poll \"%(title)s\" was edited successfully."
+msgstr "Апытанне \"%(title)s\" паспяхова адрэдагаванае."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be edited."
+msgstr "Апытанне \"%(title)s\" не атрымалася адрэдагаваць."
+
+#, python-format
+msgid "Poll \"%(title)s\" was added successfully."
+msgstr "Апытанне \"%(title)s\" паспяхова дададзенае."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be added."
+msgstr "Апытанне \"%(title)s\" не атрымалася дадаць."
+
+msgid "You should define at least one poll option!"
+msgstr "Трэба вызначыць хаця б адзін варыянт выбару!"
+
+msgid "This poll is archived and cannot be edited anymore!"
+msgstr "Гэта апытанне было адпраўлена ў архіў, і яго немагчыма адрэдагаваць!"
+
+#, python-format
+msgid "Poll \"%(title)s\" was deleted successfully."
+msgstr "Апытанне \"%(title)s\" паспяхова выдаленае."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be deleted."
+msgstr "Апытанне \"%(title)s\" не атрымалася выдаліць."
+
+msgid "Your votes were saved successfully."
+msgstr "Ваш выбар паспяхова захаваны."
+
+msgid "Your votes could not be saved."
+msgstr "Ваш выбар не захаваўся."
+
+msgid "The voting phase for this poll is over. You cannot vote for it any more."
+msgstr "Тэрмін галасавання па гэтым апытанні скончыўся. Вы больш не можаце ў ім паўдзельнічаць."
+
+msgid "In this poll you must vote for exactly one item!"
+msgstr "У гэтым апытанні Вы павінны прагаласаваць толькі за адзін варыянт!"
+
+msgid "The complete request can only be sent via POST!"
+msgstr "Поўны запыт можа быць адпраўлены толькі ПОШТАЙ!"
+
+msgid "Invalid action for this poll. The request could not be completed!"
+msgstr "Недапушчальнае дзеянне для гэтага апытання. Запыт не атрымалася апрацаваць!"
+
+msgid "This action is not permitted for this poll at this stage!"
+msgstr "Гэтае дзеянне не дазволена ў гэтым апытанні на дадзеным этапе!"
+
+msgid "The poll was closed successfully."
+msgstr "Апытанне паспяхова закрытае."
+
+msgid "The poll was re-opened successfully."
+msgstr "Апытанне зноў адкрытае."
+
+msgid "The poll was archived successfully."
+msgstr "Апытанне паспяхова адпраўленае ў архіў."
+
+msgid "Your comment was added successfully."
+msgstr "Ваш каментар паспяхова дададзены."
+
+msgid "Your comment was deleted successfully."
+msgstr "Ваш каментар паспяхова выдалены."
+
+#~ msgid "New poll by %(sender_name)s"
+#~ msgstr "Новае апытанне ад %(sender_name)s"
+
+#~ msgid "%(sender_name)s completed a poll"
+#~ msgstr "%(sender_name)s завяршыў(-ла) апытанне"
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
+
+#~ msgid "New poll by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Новае апытанне ад %(sender_name)s у %(team_name)s (за якой вы сочыце)"
+
+#~ msgid "%(sender_name)s completed a poll you are following"
+#~ msgstr "%(sender_name)s завяршыў(-ла) апытанне, за якім Вы сочыце"

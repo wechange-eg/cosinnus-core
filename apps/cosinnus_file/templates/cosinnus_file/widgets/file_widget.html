@@ -1,0 +1,27 @@
+{% extends "cosinnus/widgets/base_widget.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block widget_icon %}
+    <a class="pull-left" href="#">
+        {% if widget_icon_content %}
+            {{ widget_icon_content }}
+        {% else %}
+            <i class="fa {% if widget_icon %}{{ widget_icon }}{% else %}fa-download{% endif %}"></i>
+        {% endif %}
+    </a>
+{% endblock widget_icon %}
+
+{% block widget_button %}
+    <button type="button" class="btn btn-emphasized" href="#micro_file">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-right btn-extra-emphasized">
+                    <i class="fa fa-chevron-down"></i>
+                </span>
+                <div class="media-body">
+                    {% if link_label %}{{ link_label }}{% else %}{% trans "More" %}{% endif %}
+                </div>
+            </li>
+        </ul>
+    </button><!-- btn -->
+{% endblock widget_button %}

@@ -1,0 +1,47 @@
+{% extends 'cosinnus/v2/dashboard/timeline_item_base.html' %}
+{% load i18n cosinnus_tags %}
+
+{% block container_class %}timeline-item-event{% endblock %}
+
+{% block creation_label %}
+	{% if item.creator == user %}
+		{% trans "You created an event" %}
+	{% else %}
+		{% trans "created an event" context "This appears next to new items in the timeline, as in '<Jane> created a new item'" %}
+	{% endif %}
+{% endblock %}
+
+{% block icon %}{% if item.state == 2 %}fa-calendar-check-o{% else %}fa-calendar{% endif %}{% endblock %}
+{% block icon_class %}icon-padded{% endblock %} {% comment %} Set if there is a subtitle row! {% endcomment %}
+
+{% block title %}{{ item.title }}{% endblock %}
+
+{% block subtitle %}
+	{% include 'cosinnus_event/common/humanized_event_time.html' with event=item %}
+	{{ block.super }}	
+	{% with location=item.media_tag.location %}
+		{% if location %}
+			<a href="{{ item.media_tag.location_url }}" target="_blank">{{ location }}</a>
+		{% endif %}
+	{% endwith %}
+{% endblock %}
+
+{% block body %}
+	{{ item.note|textfield }}
+{% endblock %}
+
+{% block action_buttons %}
+	{% include 'cosinnus/v2/dashboard/timeline_button_like.html' with item=item %}
+	{% include 'cosinnus/v2/dashboard/timeline_button_star.html' with item=item %}
+	{% include 'cosinnus/v2/dashboard/timeline_button_follow.html' with item=item %}
+	{% with attendants_count=item.get_attendants_count %}
+		{% if attendants_count > 0 %}
+			<a href="{{ item.get_absolute_url }}" class="action-button action-button-non-interactive" 
+					title="{{ attendants_count }} {% blocktrans context "one or many people are going" count counter=attendants_count %}Going{% plural %}Going{% endblocktrans %}">
+				<i class="fas fa-fw fa-user"></i>
+				{{ attendants_count }}
+			</a>
+		{% endif %}
+	{% endwith %}
+{% endblock %}
+{% block delete_button_frame %}{% endblock %}

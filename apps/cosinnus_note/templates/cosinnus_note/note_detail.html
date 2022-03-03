@@ -1,0 +1,32 @@
+{% extends "cosinnus_note/base.html" %}
+{% load i18n cosinnus_tags widget_tweaks %}
+{% block page_title %}{% trans "Notes" %}: {{group.name}} {% endblock %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+{% endblock %}
+
+{% block leftnav %}
+{% endblock leftnav %}
+
+
+{% block og_image %}{% if note.attached_images %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ note.attached_images.0.static_image_url }}{% else %}{{ block.super }}{% endif %}{% endblock og_image %}
+{% block og_title %}{% if note.title and not note.title == '---' %}{{ note.title }}{% else %}{{ note.text|truncatewords:8 }}{% endif %} - {{ group.name }} - {{ block.super }}{% endblock og_title %}
+{% block og_description %}{{ note.text|truncatewords:30 }}{% endblock og_description %}
+
+{% block content %}
+    
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+    
+        
+	        <div class="app-main">
+                
+                {% include 'cosinnus_note/single_note_detailed.html' with object=object %}
+                	        
+	        </div>
+        
+    
+    
+    </div><!-- content-box -->
+{% endblock %}

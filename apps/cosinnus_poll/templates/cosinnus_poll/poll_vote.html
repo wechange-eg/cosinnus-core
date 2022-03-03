@@ -1,0 +1,197 @@
+{% extends "cosinnus_poll/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks sekizai_tags %}
+
+{% block page_title %}
+{% trans "Vote" context "the_verb" %}
+{{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+  {{ block.super }}
+  <li class="active">
+    {% blocktrans with title=poll.title %}Vote for {{ title }}{% endblocktrans %}
+  </li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus_poll/leftnav.html" with return_to="poll" %}
+{% endblock leftnav %}
+
+{% block og_image %}{% if object.attached_images %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ object.attached_images.0.static_image_url }}{% else %}{{ block.super }}{% endif %}{% endblock og_image %}
+{% block og_title %}{% if object.title %}{{ object.title }}{% else %}{{ object.description|truncatewords:8 }}{% endif %} - {{ group.name }} - {{ block.super }}{% endblock og_title %}
+{% block og_description %}{{ object.description|truncatewords:30 }}{% endblock og_description %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% addtoblock "js" %}
+        <script src="{% static 'js/cosinnus_poll/cosinnus_poll.js' %}"></script>
+    {% endaddtoblock %}
+{% endblock extrahead %}
+
+{% block content %}
+    
+    <div class="clearfix large-space"> 
+        <!-- a box with semi transparent background -->
+        <div class="content-box">
+        
+            <div>  {# Infobox for completed or archived polls. #}
+                {% if poll.state == 2 %}
+                    <!--{% trans "This poll has been completed. Voting is closed." %}-->
+                    {% include 'cosinnus/common/empty_button.html' with message="This poll has been completed. Voting is closed." %}
+                {% elif poll.state == 3 %}
+                    <!--{% trans "This is an archived poll." %}-->
+                    {% include 'cosinnus/common/empty_button.html' with message="This is an archived poll." %}
+                {% endif %}
+                
+            </div>
+            
+            {% include "cosinnus_poll/single_poll_detailed.html" with poll=poll hide_control_buttons="True" %}
+    
+        </div><!-- content-box -->
+    
+        {% if user|has_write_access:poll %}
+            <div class="large-space"> <!-- first button row -->
+            
+              {% captureas delete_modal_id %}deleteModal_{{poll.slug}}{% endcaptureas %}
+              <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{delete_modal_id}}">
+                <ul class="media-list">
+                  <li class="media">
+                    <span class="pull-left">
+                      <i class="fa fa-eraser"></i>
+                    </span>
+                    <div class="media-body">
+                      {% trans "Delete" %}
+                    </div>
+                  </li>
+                </ul>
+              </button>
+              
+              {% captureas label %}{% blocktrans with title=poll.title %}Do you really want to delete poll „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+              {% captureas title %}{% trans "Delete poll" %}{% endcaptureas %}
+              {% captureas action %}{% group_url 'cosinnus:poll:delete' group=group slug=poll.slug%}{% endcaptureas %}
+            
+              {% include "cosinnus/modal_box.html" with id=delete_modal_id label=label title=title form_action=action %}
+              
+              {% if not poll.state == 3 %}
+                  <button type="button" class="btn btn-emphasized" href="{% group_url "cosinnus:poll:edit" group=group slug=poll.slug %}">
+                    <ul class="media-list">
+                      <li class="media">
+                        <span class="pull-left">
+                          <i class="fa fa-pencil"></i>
+                        </span>
+                        <div class="media-body">
+                          {% trans "Edit" %}
+                        </div>
+                      </li>
+                    </ul>
+                  </button>
+              {% endif %}
+              
+              {% if poll.state == 1 %}
+                  <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#close_poll_no_winner_modal" title="{% trans "Complete without winner" %}">
+                    <ul class="media-list">
+                      <li class="media">
+                        <span class="pull-left">
+                          <i class="fa fa-check"></i>
+                        </span>
+                        <div class="media-body">
+                          {% trans "Complete without winner" %}
+                        </div>
+                      </li>
+                    </ul>
+                  </button>
+                  {% captureas label %}{% blocktrans with title=poll.title %}Do you really want to complete poll "{{ title }}" with no winning option?{% endblocktrans %}{% endcaptureas %}
+                  {% captureas title %}{% trans "Complete poll without winner" %}{% endcaptureas %}
+                  {% captureas action %}{% group_url "cosinnus:poll:complete" group=group slug=poll.slug %}{% endcaptureas %}
+                  {% include "cosinnus/modal_box.html" with id="close_poll_no_winner_modal" label=label title=title form_action=action %}
+                
+              {% elif poll.state == 2 %}
+                {% captureas reopen_modal_id %}reopenModal_{{poll.slug}}{% endcaptureas %}
+                <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{reopen_modal_id}}">
+                    <ul class="media-list">
+                        <li class="media">
+                            <span class="pull-left">
+                                <i class="fa fa-eraser"></i>
+                            </span>
+                            <div class="media-body">
+                                {% trans "Re-open" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button> 
+                {% captureas archive_modal_id %}archiveModal_{{poll.slug}}{% endcaptureas %}
+                <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{archive_modal_id}}">
+                    <ul class="media-list">
+                        <li class="media">
+                            <span class="pull-left">
+                                <i class="fa fa-eraser"></i>
+                            </span>
+                            <div class="media-body">
+                                {% trans "Archive" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+                
+                {% captureas label %}{% blocktrans with title=poll.title %}Do you really want to re-open poll „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+                {% captureas title %}{% trans "Re-open poll" %}{% endcaptureas %}
+                {% captureas action %}{% group_url 'cosinnus:poll:reopen' group=group slug=poll.slug %}{% endcaptureas %}
+                {% include "cosinnus/modal_box.html" with id=reopen_modal_id label=label title=title form_action=action %}
+                
+                {% captureas label %}{% blocktrans with title=poll.title %}Do you really want to archive poll „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+                {% captureas title %}{% trans "Archive poll" %}{% endcaptureas %}
+                {% captureas action %}{% group_url 'cosinnus:poll:archive' group=group slug=poll.slug %}{% endcaptureas %}
+                {% include "cosinnus/modal_box.html" with id=archive_modal_id label=label title=title form_action=action %}
+              {% endif %}
+              
+              {% include 'cosinnus/feedback/report_button_btn.html' with object=poll %}
+        
+              <div class="clearfix"></div>
+            </div> <!-- first button row -->
+        {% endif %}
+        
+        
+        <div class="large-space"> <!-- second button row -->
+            {% if mode == 'vote' %}
+                <form id="poll_vote_form" action="." method="post" class="form-horizontal">
+                    {% csrf_token %}
+                    {{ formset.management_form }}
+                    {% for form in formset %}
+                        {{ form.option.as_widget }}
+                        <input type="hidden" id="id_{{ form.choice.html_name }}" name="{{ form.choice.html_name }}" value="{{ form.choice.value }}" />
+                    {% endfor %}
+                    
+                    <button type="submit" class="btn btn-emphasized">
+                        <ul class="media-list">
+                          <li class="media">
+                            <span class="pull-left">
+                              <i class="fa fa-floppy-o"></i>
+                            </span>
+                            <div class="media-body">
+                              {% trans "Vote" context "the_verb" %}!
+                            </div>
+                          </li>
+                        </ul>
+                    </button>
+                </form>
+            {% endif %}
+            
+            {% if not user|has_write_access:poll %}            
+                {% include 'cosinnus/feedback/report_button_btn.html' with object=poll %}
+            {% endif %}
+            
+            <div class="clearfix"></div>
+        </div> <!-- second button row -->
+        
+    </div> <!-- buttons and content box -->
+    
+    <div class="white-content">
+        {% include 'cosinnus/common/likefollowstar/star_button.html' with object=poll %}
+        {% include 'cosinnus/common/likefollowstar/follow_button.html' with object=poll %}        
+        {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=poll %}
+    </div>
+    
+    {% include 'cosinnus_poll/poll_comments.html' with poll=poll full_view="True" no_indent="True" comments_expanded="True" %}
+    
+        
+{% endblock content %}

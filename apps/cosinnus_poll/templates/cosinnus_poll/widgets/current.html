@@ -1,0 +1,19 @@
+{% load i18n %}
+
+{% if polls %}
+    {% include 'cosinnus_poll/attached_polls.html' with polls=polls no_indent=1 %}
+{% else %}
+    <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline fine-space">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-bar-chart"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "There are no polls yet" %}
+                </div>
+            </li>
+        </ul>
+    </div><!-- btn -->
+{% endif %}
+

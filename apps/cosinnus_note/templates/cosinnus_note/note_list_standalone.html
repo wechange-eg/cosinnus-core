@@ -1,0 +1,28 @@
+{% load i18n cosinnus_tags widget_tweaks %}
+    
+<div class="row">
+    <div class="col-md-3">
+
+        <div type="button" class="btn btn-emphasized btn-headline regular-space">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left btn-extra-emphasized"></span>
+                    <div class="media-body">
+                        {% trans "note" context "the_app" %}
+                    </div>
+                </li>
+            </ul>
+        </div><!-- btn -->
+    </div><!-- left column -->
+
+    <div class="col-md-9">
+        <div class="content-box">
+			{% for note in object_list %}
+			    {% include 'cosinnus_note/single_note_detailed.html' with object=note %}
+			{% empty %}
+			    <!-- {% trans "There are no news posts yet" %} -->
+			    {% include 'cosinnus/common/empty_button.html' with message="There are no news posts yet" %}
+			{% endfor %}
+         </div>
+    </div><!-- right column -->
+</div><!-- row -->

@@ -1,0 +1,26 @@
+{% extends 'cosinnus/v2/dashboard/timeline_item_base.html' %}
+{% load i18n cosinnus_tags %}
+
+{% block container_class %}timeline-item-poll{% endblock %}
+
+{% block creation_label %}
+	{% if item.creator == user %}
+		{% trans "You created a poll" %}
+	{% else %}
+		{% trans "created a poll" context "This appears next to new items in the timeline, as in '<Jane> created a new item'" %}
+	{% endif %}
+{% endblock %}
+
+{% block icon %}fa-bar-chart{% endblock %}
+
+{% block title %}{{ item.title }}{% endblock %}
+
+{% block body %}
+	{{ item.description|textfield }}
+{% endblock %}
+
+{% block action_buttons %}
+	{% include 'cosinnus/v2/dashboard/timeline_button_star.html' with item=item %}
+	{% include 'cosinnus/v2/dashboard/timeline_button_follow.html' with item=item %}
+{% endblock %}
+{% block delete_button_frame %}{% endblock %}

@@ -1,0 +1,141 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:39+0200\n"
+"PO-Revision-Date: 2021-03-09 00:32+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.2\n"
+
+msgid "Stream"
+msgstr "שידור"
+
+msgctxt "the_app"
+msgid "stream"
+msgstr "סטרים"
+
+msgid "My Streams"
+msgstr "השידורים שלי"
+
+msgid "Streams"
+msgstr "שידורים"
+
+msgid "Models"
+msgstr "דגמים"
+
+msgid "Portal IDs"
+msgstr "מזהי פורטל"
+
+msgid "Last seen"
+msgstr "נראה לאחרונה"
+
+msgid "Special Stream"
+msgstr "שידור מיוחד"
+
+msgid "Special Group IDs"
+msgstr "תעודות זהות קבוצתיות מיוחדות"
+
+msgid "My Stream"
+msgstr "השידור שלי"
+
+msgid "Public Stream"
+msgstr "שידור"
+
+msgid "My Stream in all Portals"
+msgstr "השידור שלי בכל הפורטלים"
+
+msgid "Public Stream in all Portals"
+msgstr "שידור ציבורי בכל הפורטלים"
+
+msgid "Edit this Stream"
+msgstr "ערוך שידור זה"
+
+msgid "Delete this Stream"
+msgstr "מחק שידור זה"
+
+msgid "Do you really want to delete this stream?"
+msgstr "האם אתה באמת רוצה למחוק את השידור הזה?"
+
+msgid "Delete Stream"
+msgstr "מחק שידור"
+
+msgid "Create Stream"
+msgstr "צור שידור"
+
+msgid "Hide public items outside of your groups"
+msgstr "הסתר פריטים ציבוריים מחוץ לקבוצות שלי"
+
+msgid "Show public items outside of your groups"
+msgstr "הראה פריטים ציבוריים מחוץ לקבוצות שלי"
+
+msgid "There are no news posts yet"
+msgstr "אין עדיין פוסטים"
+
+#, python-format
+msgid "Edit stream \"%(stream_name)s\""
+msgstr "ערוך את השידור \"%(stream_name)s\""
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "אירעה שגיאה באחד השדות שהזנת. אנא תקן אותו לפני השמירה!"
+
+msgid "Title"
+msgstr "כותרת"
+
+msgid "Enter a title for the stream."
+msgstr "הזן כותרת לשידור."
+
+msgid "Apply filters for the stream"
+msgstr "החל סננים עבור השידור"
+
+msgid "Filter by Team?"
+msgstr "לסנן לפי קבוצה?"
+
+msgid "Select Team"
+msgstr "בחר קבוצה"
+
+msgid "Public"
+msgstr "ציבורי"
+
+msgid "Additional filters"
+msgstr "פילטרים נוספים"
+
+msgid "Filter by authors, tags or other tagged properties?"
+msgstr "לסנן לפי מחברים, תגים או מאפיינים מתויגים אחרים?"
+
+msgid "Filter by item types?"
+msgstr "לסנן לפי סוגי פריטים?"
+
+msgid "Create"
+msgstr "צור"
+
+msgid "Edit"
+msgstr "ערוך"
+
+msgid "You do not have permission to access this stream."
+msgstr "אין לך הרשאה לגשת לשידור זה."
+
+msgid "Your stream was added successfully."
+msgstr "השידור שלך נוסף בהצלחה."
+
+msgid "Please log in to access this page."
+msgstr "התחברו על מנת לעבור לדף המבוקש."
+
+msgid "Your stream was updated successfully."
+msgstr "השידור שלך עודכן בהצלחה."
+
+msgid "Your stream was deleted successfully."
+msgstr "השידור שלך נמחק בהצלחה."
+
+msgid "You cannot delete the default stream!"
+msgstr "אינך יכול למחוק את שידור ברירת המחדל!"

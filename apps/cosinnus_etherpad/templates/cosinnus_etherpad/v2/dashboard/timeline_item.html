@@ -1,0 +1,27 @@
+{% extends 'cosinnus/v2/dashboard/timeline_item_base.html' %}
+{% load i18n cosinnus_tags %}
+
+{% block container_class %}timeline-item-pad{% endblock %}
+
+{% block creation_label %}
+	{% if item.creator == user %}
+		{% trans "You created a pad" %}
+	{% else %}
+		{% trans "created a Pad" context "This appears next to new items in the timeline, as in '<Jane> created a new item'" %}
+	{% endif %}
+{% endblock %}
+
+{% block icon %}{% if item.type == 1 %}fa-table{% else %}fa-file-text{% endif %}{% endblock %}
+{% block icon_class %}icon-padded{% endblock %} {% comment %} Set if there is a subtitle row! {% endcomment %}
+
+
+{% block title %}{{ item.title }}{% endblock %}
+
+{% block subtitle %}{{ item.creator|full_name }}{% endblock %}
+{% block body_frame %}{% endblock %}
+{% block delete_button_frame %}{% endblock %}
+
+{% block action_buttons %}
+	{% include 'cosinnus/v2/dashboard/timeline_button_star.html' with item=item %}
+{% endblock %}
+

@@ -1,0 +1,171 @@
+{% extends "cosinnus_marketplace/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks thumbnail %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.form.obj.description.id_for_label %}
+{% endblock %}
+
+{% block page_title %}
+	{% if form_view == "add" %}
+      {% trans "Add Offer" %}
+    {% elif form_view == "edit" %}
+      {% trans "Edit" %}: {{ offer.title }}
+    {% endif %}
+{{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        <li class="active">
+            {% if form_view == "add" %}
+              {% trans "Add Offer" %}
+            {% elif form_view == "edit" %}
+              {% trans "Edit" %}: {{ offer.title }}
+            {% endif %}
+        </li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus_marketplace/leftnav.html" with return_to="offers"%}
+    
+    {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_3_marketplace" %}
+{% endblock leftnav %}
+
+{% block content %}
+
+{% if form.forms.obj.errors or form.forms.media_tag.errors %}
+    <div class="alert alert-danger alert-dismissable">
+        <i class="fa fa-exclamation-triangle fa-3x"></i>
+        <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+    </div>
+{% endif %}
+    
+<form method="POST" action="" class="cosinnus-form form-horizontal" enctype="multipart/form-data">{% csrf_token %}
+    
+    {{ form.forms.obj.media }}
+    {{ form.forms.obj.non_field_errors }}
+    {{ form.forms.media_tag.non_field_errors }}
+    
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+
+        {% get_forum_group as forum %}
+        {% if group.name == forum.name %}
+            <div class="alert alert-warning alert-dismissable">
+                <i class="fa fa-exclamation-circle fa-3x"></i>
+                <div class="v-offset-s">
+                    <p>
+                        {% blocktrans with forum_name=forum.name %}
+                        Note: after this offer will be posted, each user of {{ forum_name }} may be able to see it.<br>
+                        If you do not want this, please, use another group or project of your choice.
+                        {% endblocktrans %}
+                    </p>
+                </div>
+            </div>
+        {% endif %}
+    
+        {# Regular field with custom HTML #}
+		{% trans "Offer type" as type_label %}
+		{% captureas type_html %}
+		    {{ form.forms.obj.type.errors }}
+            <div class="condensed-radio-input" style="line-height: 25px;">
+                {# please keep this linebreak formatting so that no spaces exit between the <label> elements! #}
+                {% for value, label in form.forms.obj.type.field.choices %}<label class="notification-options-label">
+                        <input type="radio" name="{{ form.forms.obj.type.html_name }}" value="{{ value }}"
+                                 {% if form.forms.obj.type.value == value or value|stringify == form.forms.obj.type.value %}checked="checked"{% endif %}>
+                        <span class="">
+                            {% if value == 1 %}
+                                <i class="fa fa-question"></i> 
+                            {% elif value == 2 %}
+                                <i class="fa fa-exclamation"></i> 
+                            {% endif %}
+                            {{ label }}
+                        </span>
+                                
+                    </label>{% endfor %}
+            </div>
+		{% endcaptureas %}
+		{% include 'cosinnus/fields/default_field.html' with field_html=type_html label=type_label large_field=True first=True unstyled=True %}
+    
+    
+        {% trans "Offer Title" as title_label %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.title label=title_label placeholder=title_label %}
+        
+        
+        {# SimpleMDE Description Field (gets initialized in extrahead) #}                                   
+        {% trans "Description" as description_placeholder %}
+        {% trans "Enter a description for your offer." as description_label %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description legend=description_legend label=description_label placeholder=description_placeholder large_field=True %}
+              
+        {# Regular Field #}
+		{% trans "Phone number" as phone_label %}
+		{% trans "Your phone number is only visible for registered users" as phone_legend %}
+		{% trans "Phone number" as phone_placeholder %}
+		{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.phone_number label=phone_label legend=phone_legend placeholder=phone_placeholder %}
+		        
+                            
+        {% if form.forms.obj.get_categories_grouped %}
+            {# Regular field with custom HTML #}
+			{% trans "Categories" as categories_label %}
+			{% trans "Check all categories that fit your offer" as categories_legend %}
+			{% captureas categories_html %}
+			    {{ form.forms.obj.categories.errors }}
+                <div class="white-content clearfix">
+                    <div class="row large-space">
+                    {% for group, categories in form.forms.obj.get_categories_grouped %}
+                        <div class="col-sm-4 col-xs-6 large-space">
+                            <b>{% if group == 'zzz_misc' %}{% trans "Misc" %}{% else %}{{ group }}{% endif %}</b>
+                            {% for category in categories %}
+                                <br/>
+                                <label for="id_{{ form.forms.obj.categories.html_name }}_{{ category.id }}">
+                                    <input id="id_{{ form.forms.obj.categories.html_name }}_{{ category.id }}" name="{{ form.forms.obj.categories.html_name }}" 
+                                            type="checkbox" value="{{ category.id }}"{% if category.id in form.forms.obj.categories.value or category.id|stringify in form.forms.obj.categories.value %}checked="checked"{% endif %}>
+                                    <span>{{ category.name }}</span>
+                                </label>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+			{% endcaptureas %}
+			{% include 'cosinnus/fields/default_field.html' with field_html=categories_html label=categories_label legend=categories_legend large_field=True unstyled=True %}
+        {% endif %}
+                        
+                            
+        {% captureas files_label %}
+            {% trans "Upload a file or image or attach an existing one" %}. {% trans "The first uploaded image will be displayed as a wallpaper" %}{% endcaptureas %}
+        {% include 'cosinnus/media_tags.html' with show_files=True disable_tags=True files_label=files_label %}
+        
+        
+        {# Checkbox Field #}
+		{% trans "Offer is active" as active_label %}
+		{% if SETTINGS.COSINNUS_MARKETPLACE_OFFER_EXPIRY_DISABLED %}
+		    {% trans "Only active offers will be listed in the Marketplace." as active_legend %}
+	    {% else %}
+		    {% trans "Only active offers will be listed in the Marketplace. Your offer will stay active for 4 weeks. After that, you can reactivate it at any time." as active_legend %}
+		{% endif %}
+		{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.is_active label=active_label legend=active_legend checkbox_label=active_label %}
+					                    
+    </div><!-- content-box -->
+    
+    <button type="submit" class="btn btn-emphasized">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-pencil"></i>
+                </a>
+                <div class="media-body">
+                    {% if form_view == "add" %}
+                      {% trans "Create" %}
+                    {% elif form_view == "edit" %}
+                      {% trans "Save" %}
+                    {% endif %}
+                </div>
+            </li>
+        </ul>
+    </button>
+   
+</form>
+    
+{% endblock content %}

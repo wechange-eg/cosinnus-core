@@ -1,0 +1,15 @@
+{% load i18n cosinnus_tags widget_tweaks %}
+
+{{ form.forms.obj.non_field_errors }}
+
+{# Regular Field #}
+{% trans "Title (optional)" as title_placeholder %}
+{% trans "Title" as title_label %}
+{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.title label=title_label placeholder=title_placeholder first=True translation_fields=translatable_field_items translation_form=form.forms.obj %}
+
+{# Large Field #}
+{% trans "News text" context "label for the form text input" as text_label %}
+{% trans "Please enter a message..." as text_placeholder %}
+{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.text label=text_label placeholder=text_placeholder large_field=True translation_fields=translatable_field_items translation_form=form.forms.obj %}
+
+{% include 'cosinnus/media_tags.html' with do_include_facebook_button=1 show_files=True %}

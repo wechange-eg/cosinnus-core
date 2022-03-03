@@ -1,0 +1,21 @@
+{% load i18n cosinnus_tags %}{% autoescape off %}{% blocktrans with comment_text=object.text|safe note_text=object.note.text|safe %}Hi, {{ receiver_name }}!
+
+{{ sender_name }} has posted a comment on a news post you a commented in, in {{ team_name }}:
+
+"{{ comment_text }}"
+
+
+on the post:
+
+"{{ note_text }}"
+
+
+Follow this link to see the comment: 
+{{ object_url }}
+
+
+(Follow this link to edit your notification preferences: {{ notification_settings_url }} )
+
+Your {{ site_name }} team.
+
+{% endblocktrans %}{% endautoescape %}

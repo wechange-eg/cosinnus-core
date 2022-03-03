@@ -1,0 +1,31 @@
+{% extends 'cosinnus/v2/dashboard/timeline_item_base.html' %}
+{% load i18n cosinnus_tags %}
+
+{% block container_class %}timeline-item-note{% endblock %}
+
+{% block creation_label %}
+	{% if item.creator == user %}
+		{% trans "You added a post" %}
+	{% else %}
+		{% trans "added a post" context "This appears next to new items in the timeline, as in '<Jane> created a new item'" %}
+	{% endif %}
+{% endblock %}
+
+
+{% block icon %}fa-quote-right{% endblock %}
+
+{% block title_frame %}{% if item.title != item.EMPTY_TITLE_PLACEHOLDER %}{{ block.super }}{% endif %}{% endblock %} 
+{% block title %}{{ item.title }}{% endblock %}
+
+{% block body %}
+	{{ item.text|textfield }}
+{% endblock %}
+
+{% block action_buttons %}
+	{% include 'cosinnus/v2/dashboard/timeline_button_like.html' with item=item %}
+	{% include 'cosinnus/v2/dashboard/timeline_button_star.html' with item=item %}
+	{% include 'cosinnus/v2/dashboard/timeline_button_follow.html' with item=item %}
+{% endblock %}
+
+
+

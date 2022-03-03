@@ -1,0 +1,70 @@
+{% extends "cosinnus_note/base.html" %}
+{% load i18n cosinnus_tags widget_tweaks static %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.text.id_for_label translation_form=form.forms.obj translated_field_name=form.forms.obj.text.html_name %}
+{% endblock %}
+
+
+{% block page_title %}{% trans "Notes" %}: {{group.name}} {% endblock %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="active">
+        {% if form_view == "add" %}
+            {% trans "Write a news post" %}
+        {% elif form_view == "edit" %}
+            {% trans "Edit news post" %}
+        {% endif %}
+    </li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_7_notes" %}
+{% endblock leftnav %}
+
+
+{% block content %}
+
+    {% if form.forms.obj.errors or form.forms.media_tag.errors %}
+        <div class="alert alert-danger alert-dismissable">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+            <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+        </div>
+    {% endif %}
+    
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+        
+        <form action="{% if form_view == 'add' %}{% group_url 'cosinnus:note:add' group=group.slug %}?next={% group_url 'cosinnus:note:list' group=group.slug %}{% else %}{% group_url 'cosinnus:note:update' group=object.group slug=object.slug %}{% endif %}" method="POST" id="note_edit_form" class="cosinnus-form form-horizontal">{% csrf_token %}
+	        <div class="app-main">
+	            <div class="large-space">
+	            
+		            <div>
+                        {% include 'cosinnus_note/note_form_core.html' %}
+		            </div>
+		
+		            <button type="submit" class="btn btn-emphasized">
+		                <ul class="media-list">
+		                    <li class="media">
+		                        <span class="pull-left">
+		                            <i class="fa fa-pencil"></i>
+		                        </span>
+		                        <div class="media-body">
+		                            {% if form_view == 'add' %}{% trans "Post" %}{% else %}{% trans "Save changes" %}{% endif %}
+		                        </div>
+		                    </li>
+		                </ul>
+		            </button>
+	            </div>
+	            
+	            <!-- xxxxxx -->
+	        
+	        </div>
+        </form>
+        
+    
+    
+    </div><!-- content-box -->
+{% endblock %}

@@ -1,0 +1,140 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:39+0200\n"
+"PO-Revision-Date: 2021-04-01 14:51+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+
+msgid "Stream"
+msgstr "Stream"
+
+msgctxt "the_app"
+msgid "stream"
+msgstr "stream"
+
+msgid "My Streams"
+msgstr "Moje streamy"
+
+msgid "Streams"
+msgstr "Streamy"
+
+msgid "Models"
+msgstr "Modele"
+
+msgid "Portal IDs"
+msgstr "ID Portali"
+
+msgid "Last seen"
+msgstr "Ostatnio widziany"
+
+msgid "Special Stream"
+msgstr "Streamy Specjalne"
+
+msgid "Special Group IDs"
+msgstr "ID Grup Specjalnych"
+
+msgid "My Stream"
+msgstr "Mój Stream"
+
+msgid "Public Stream"
+msgstr "Stream Publiczny"
+
+msgid "My Stream in all Portals"
+msgstr "Moje Streamy we wszystkich Portalach"
+
+msgid "Public Stream in all Portals"
+msgstr "Streamy Publiczne we wszystkich Portalach"
+
+msgid "Edit this Stream"
+msgstr "Edytuj ten Stream"
+
+msgid "Delete this Stream"
+msgstr "Usuń ten Stream"
+
+msgid "Do you really want to delete this stream?"
+msgstr "Czy na pewno chcesz usunąć ten stream?"
+
+msgid "Delete Stream"
+msgstr "Usuń Stream"
+
+msgid "Create Stream"
+msgstr "Utwórz Stream"
+
+msgid "Hide public items outside of your groups"
+msgstr "Ukryj elementy publiczne spoza Twoich grup"
+
+msgid "Show public items outside of your groups"
+msgstr "Pokaż elementy publiczne spoza Twoich grup"
+
+msgid "There are no news posts yet"
+msgstr "Nie ma jeszcze nowych wpisów"
+
+#, python-format
+msgid "Edit stream \"%(stream_name)s\""
+msgstr "Edytuj stream \"%(stream_name)s\""
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "W jednym z wypełnionych pól jest błąd. Popraw go przed zapisaniem!"
+
+msgid "Title"
+msgstr "Tytuł"
+
+msgid "Enter a title for the stream."
+msgstr "Wpisz tytuł streamu."
+
+msgid "Apply filters for the stream"
+msgstr "Dodaj filtry do streamu"
+
+msgid "Filter by Team?"
+msgstr "Filtruj według Zespołu?"
+
+msgid "Select Team"
+msgstr "Wybierz Zespół"
+
+msgid "Public"
+msgstr "Publiczny/-a"
+
+msgid "Additional filters"
+msgstr "Filtry dodatkowe"
+
+msgid "Filter by authors, tags or other tagged properties?"
+msgstr "Filtruj według autorów, tagów lub innych oznaczonych właściwości?"
+
+msgid "Filter by item types?"
+msgstr "Filtruj według typów elementów?"
+
+msgid "Create"
+msgstr "Utwórz"
+
+msgid "Edit"
+msgstr "Edytuj"
+
+msgid "You do not have permission to access this stream."
+msgstr "Nie masz uprawnień do dostępu do tego streamu."
+
+msgid "Your stream was added successfully."
+msgstr "Twój stream dodano pomyślnie."
+
+msgid "Please log in to access this page."
+msgstr "Zaloguj się, aby uzyskać dostęp do tej strony."
+
+msgid "Your stream was updated successfully."
+msgstr "Twój stream został zaktualizowany pomyślnie."
+
+msgid "Your stream was deleted successfully."
+msgstr "Twój stream został usunięty pomyślnie."
+
+msgid "You cannot delete the default stream!"
+msgstr "Nie możesz usunąć domyślnego streamu!"

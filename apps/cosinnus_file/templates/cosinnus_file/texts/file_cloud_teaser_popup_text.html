@@ -1,0 +1,30 @@
+{% load i18n cosinnus_tags %}
+
+<div class="v-offset-s textfield">
+    <p>
+        {% trans "To move your files to the Cloud, follow these steps:" %}
+    </p>
+    <ol>
+        <li>
+            {% trans "Navigate to the folder you wish to move to the Cloud, or to the root folder of the Files app if you wish to move all of the files" %}: 
+            <a href="{% group_url 'cosinnus:file:list' group=group %}" target="_blank">{% trans "Root folder" %}</a>
+        </li>
+        <li>
+            {% trans "Download this folder" as download_label %}
+            {% blocktrans with download_label=download_label %}Click "{{ download_label }}" to download the file archive{% endblocktrans %}
+        </li>
+        <li>
+            {% trans "Unzip the file archive to a local folder on your hard drive" %}
+        </li>
+        <li>
+            {% blocktrans with group_name=group.name %}Open the Cloud folder for "{{ group_name }}":{% endblocktrans %}
+            <a href="{% group_url 'cosinnus:cloud:index' group=group %}" target="_blank">{% trans "Cloud app" %}</a>
+        </li>
+        <li>
+            {% trans "Drag & drop the entire content of the unzipped folder from your local hard drive to the Cloud folder" %}
+        </li>
+        <li>
+            {% blocktrans with group_name=group.name %}Your files will now upload to the Cloud and can be accessed by all members of "{{ group_name }}". Your files will remain here in the Files app as well. If you are satisfied with how they look in the Cloud, you may delete them here.{% endblocktrans %}
+        </li>
+    </ol>
+</div>

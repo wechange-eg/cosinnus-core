@@ -1,0 +1,357 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:20+0200\n"
+"PO-Revision-Date: 2021-02-18 18:58+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.1\n"
+
+msgid "Files"
+msgstr "Bestanden"
+
+msgctxt "the_app"
+msgid "file"
+msgstr "bestand"
+
+msgid "A user uploaded a new file"
+msgstr "Een gebruiker heeft een nieuw bestand geüpload"
+
+#, python-format
+msgid "%(sender_name)s uploaded the file %(object_name)s"
+msgstr "%(sender_name)s heeft het bestand %(object_name)s geüpload"
+
+#, python-format
+msgid "%(sender_name)s uploaded %(count)d files"
+msgstr "%(sender_name)s heeft %(count)d bestand(en) geüpload"
+
+#, python-format
+msgid "%(sender_name)s created a new file"
+msgstr "%(sender_name)s heeft een nieuw bestand aangemaakt"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Een nieuw bestand: “%(object_name)s” is aangemaakt in %(team_name)s."
+
+msgid "A user uploaded a new file in a team you are following"
+msgstr "Een gebruiker heeft een nieuw bestand geüpload in een team dat je volgt"
+
+#, python-format
+msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s heeft een nieuw bestand aangemaakt in %(team_name)s (dat je volgt)"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Een nieuw bestand: “%(object_name)s” is aangemaakt in %(team_name)s (dat je volgt)."
+
+msgid "Latest Files"
+msgstr "Nieuwste bestanden"
+
+msgid "No files"
+msgstr "Geen bestanden"
+
+msgid "Pictures"
+msgstr "Foto’s"
+
+msgid "Documents"
+msgstr "Documenten"
+
+msgid "Audio Files"
+msgstr "Audiobestanden"
+
+msgid "Videos"
+msgstr "Video’s"
+
+msgid "Created By"
+msgstr "Aangemaakt door"
+
+msgid "File Type"
+msgstr "Bestandstype"
+
+msgid "File Name"
+msgstr "Bestandsnaam"
+
+msgid "File Name (descending)"
+msgstr "Bestandsnaam (aflopend)"
+
+msgid "Newest Created"
+msgstr "Laatst aangemaakt"
+
+msgid "Smallest Files"
+msgstr "Kleinste bestanden"
+
+msgid "Largest Files"
+msgstr "Grootste bestanden"
+
+msgid "The given URL does not seem to be valid."
+msgstr "De opgegeven URL is niet geldig."
+
+msgid "Must supply either a URL or File"
+msgstr "URL of bestand opgeven is verplicht"
+
+msgid "Note"
+msgstr "Opmerking"
+
+msgid "File"
+msgstr "Bestand"
+
+msgid "Is URL Link"
+msgstr "Is URL link"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Path"
+msgstr "Pad"
+
+msgid "Uploaded by"
+msgstr "Geüpload door"
+
+msgid "Uploaded on"
+msgstr "Geüpload op"
+
+msgid "No files selected."
+msgstr "Geen bestanden geselecteerd."
+
+msgctxt "special_folder_type"
+msgid "Attachments"
+msgstr "Bijlagen"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "Er is een fout opgetreden in een van de velden die je hebt ingevoerd. Corrigeer dit voordat je opslaat!"
+
+msgid "The URL you have entered does not seem to be valid!"
+msgstr "De opgegeven URL is niet geldig!"
+
+msgid "URL Link"
+msgstr "URL link"
+
+msgid "Paste or type the link's URL here"
+msgstr "Plak of typ hier de URL van de link"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Description"
+msgstr "Beschrijving"
+
+msgid "Preview"
+msgstr "Preview"
+
+msgid "Original filename"
+msgstr "Originele bestandsnaam"
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Show detailed steps"
+msgstr "Gedetailleerde stappen tonen"
+
+msgid "Move your files to the Cloud"
+msgstr "Je bestanden naar de cloud verplaatsen"
+
+msgid "Delete"
+msgstr "Verwijderen"
+
+msgid "Move"
+msgstr "Verplaatsen"
+
+msgid "Download"
+msgstr "Downloaden"
+
+# map/folder
+msgid "Download this folder"
+msgstr "Deze map downloaden"
+
+msgid "Add URL link"
+msgstr "URL link toevoegen"
+
+msgid "No files have been uploaded yet."
+msgstr "Er zijn nog geen bestanden geüpload."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new file \"%(object_name)s\" in %(team_name)s was uploaded by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Hallo %(receiver_name)s,\n"
+"\n"
+"een nieuw bestand “%(object_name)s” in %(team_name)s is geüpload door %(sender_name)s. \n"
+"\n"
+"Bekijk het door de volgende link te volgen: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Volg deze link om je meldingsvoorkeuren te wijzigen: %(notification_settings_url)s )\n"
+"\n"
+"Jouw %(site_name)s team."
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was uploaded in %(team_name)s."
+msgstr "Een nieuw bestand: “%(object_name)s” is geüpload in %(team_name)s."
+
+msgid "Move to another Folder"
+msgstr "Naar andere map verplaatsen"
+
+msgid "Link to this Image"
+msgstr "Naar deze afbeelding linken"
+
+msgid "by"
+msgstr "door"
+
+msgid "Created"
+msgstr "Aangemaakt"
+
+msgid "Edit"
+msgstr "Wijzigen"
+
+#, python-format
+msgid "Do you really want to delete file „%(title)s“?"
+msgstr "Weet je zeker dat je bestand „%(title)s“ wilt verwijderen?"
+
+msgid "Delete file"
+msgstr "Bestand verwijderen"
+
+msgid "Close"
+msgstr "Afsluiten"
+
+msgid "To move your files to the Cloud, follow these steps:"
+msgstr "Om je bestanden naar de cloud te verplaatsen, volg je deze stappen:"
+
+msgid "Navigate to the folder you wish to move to the Cloud, or to the root folder of the Files app if you wish to move all of the files"
+msgstr "Ga naar de map die je naar de cloud wilt verplaatsen, of naar de hoofdmap in de bestandsapp indien je alle bestanden wilt verplaatsen"
+
+msgid "Root folder"
+msgstr "Hoofdmap"
+
+#, python-format
+msgid "Click \"%(download_label)s\" to download the file archive"
+msgstr "Klik \"%(download_label)s\" om het bestandsarchief te downloaden"
+
+msgid "Unzip the file archive to a local folder on your hard drive"
+msgstr "Pak het bestandsarchief uit in een lokale map op je harde schijf"
+
+#, python-format
+msgid "Open the Cloud folder for \"%(group_name)s\":"
+msgstr "Open de cloud map voor \"%(group_name)s\":"
+
+msgid "Cloud app"
+msgstr "Cloud app"
+
+msgid "Drag & drop the entire content of the unzipped folder from your local hard drive to the Cloud folder"
+msgstr "Sleep de volledige inhoud van de uitgepakte map van je lokale harde schijf naar de cloud map"
+
+#, python-format
+msgid "Your files will now upload to the Cloud and can be accessed by all members of \"%(group_name)s\". Your files will remain here in the Files app as well. If you are satisfied with how they look in the Cloud, you may delete them here."
+msgstr "Je bestanden worden nu geüpload naar de cloud en zijn toegankelijk voor alle leden van \"%(group_name)s\". Je bestanden blijven ook in de bestandapp staan. Als je tevreden bent met hoe ze er in de cloud uitzien, kun je ze hier verwijderen."
+
+msgid "If you wish to access your files from multiple devices, you may want to consider moving them to the Cloud. The process is easy, and you can still keep your files here until you are satisfied with the Cloud."
+msgstr "Als je vanaf meerdere apparaten toegang tot je bestanden wilt hebben, dan kun je overwegen om ze naar de cloud te verplaatsen. Het proces is eenvoudig en je kunt je bestanden hier nog steeds bewaren totdat je tevreden bent met de cloud."
+
+msgid "You uploaded a file"
+msgstr "Je hebt een bestand geüpload"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "uploaded a file"
+msgstr "heeft een bestand geüpload"
+
+msgid "More"
+msgstr "Meer"
+
+msgid "Latest files"
+msgstr "Nieuwste bestanden"
+
+msgid "There are no files  yet"
+msgstr "Er zijn nog geen bestanden"
+
+#, python-format
+msgid "Folder \"%(title)s\" was created successfully."
+msgstr "Map “%(title)s” is succesvol aangemaakt."
+
+msgid "File does not exist or you are not allowed to delete it."
+msgstr "Bestand bestaat niet of je mag het niet verwijderen."
+
+#, python-format
+msgid "A problem occurred during export. The following file is missing: %(filename)s."
+msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
+msgstr[0] "Er is een probleem opgetreden tijdens het exporteren. Het volgende bestand ontbreekt: %(filename)s."
+msgstr[1] "Er is een probleem opgetreden tijdens het exporteren. De volgende bestanden ontbreken: %(filename)s."
+
+msgid "Invalid request."
+msgstr "Ongeldige aanvraag."
+
+#, python-format
+msgid "File \"%(title)s\" was updated successfully."
+msgstr "Bestand “%(title)s” is succesvol geüpload."
+
+#, python-format
+msgid "File \"%(title)s\" could not be updated."
+msgstr "Bestand “%(title)s” kon niet worden bijgewerkt."
+
+msgid "Downloading failed, the target object was not a folder!"
+msgstr "Downloaden niet gelukt, het object was geen map!"
+
+msgid "Canceled the download because there seem to be no files in this folder."
+msgstr "Download is geannuleerd omdat er zich geen bestanden in deze map bevinden."
+
+msgid "Internal Error: Group not Found"
+msgstr ""
+
+msgid "Permission for upload denied"
+msgstr ""
+
+msgid "The uploaded file was invalid."
+msgstr ""
+
+#, python-format
+msgid "%(count)d File was added successfully."
+msgid_plural "%(count)d Files were added successfully."
+msgstr[0] "%(count)d bestand is succesvol toegevoegd."
+msgstr[1] "%(count)d bestanden zijn succesvol toegevoegd."
+
+msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
+msgstr ""
+
+#~ msgid "New file by %(sender_name)s"
+#~ msgstr "Nieuw bestand door %(sender_name)s"
+
+#~ msgid "New file by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Nieuw bestand door %(sender_name)s in %(team_name)s (die u volgt)"
+
+#~ msgid "File title"
+#~ msgstr "Bestandstitel"
+
+#~ msgid "File description"
+#~ msgstr "Bestandsbeschrijving"
+
+#~ msgid "File \"%(title)s\" was uploaded successfully."
+#~ msgstr "Bestand “%(title)s” is succesvol geüpload."
+
+#~ msgid "File \"%(title)s\" could not be uploaded."
+#~ msgstr "Bestand “%(title)s” kon niet worden geüpload."
+
+#~ msgid "File \"%(title)s\" could not be added."
+#~ msgstr "Bestand “%(title)s” kon niet worden toegevoegd."

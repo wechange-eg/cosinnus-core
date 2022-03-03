@@ -1,0 +1,144 @@
+{% extends "cosinnus_event/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.note.id_for_label translation_form=form.forms.obj translated_field_name=form.forms.obj.note.html_name %}
+{% endblock %}
+
+{% block page_title %}
+	{% if form_view == "add" %}
+	  {% trans "Add event" %}
+	{% elif form_view == "edit" %}
+	  {% trans "Edit" %} {{ event.title }}
+	{% endif %}
+{{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        <li class="active">
+	        {% if form_view == "add" %}
+			  {% trans "Add event" %}
+			{% elif form_view == "edit" %}
+			  {% trans "Edit" %} {{ event.title }}
+			{% endif %}
+        </li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus_event/leftnav.html" with return_to="events"%}
+{% endblock leftnav %}
+
+{% block content %}
+
+    {% if form.forms.obj.errors or form.forms.media_tag.errors %}
+        <div class="alert alert-danger alert-dismissable">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+            <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+        </div>
+    {% endif %}
+    
+    <form method="POST" action="" class="cosinnus-form form-horizontal">{% csrf_token %}
+	    {{ form.forms.obj.non_field_errors }}
+	    {{ form.forms.media_tag.non_field_errors }}
+	    
+	    <!-- a box with semi transparent background -->
+		<div class="content-box">
+
+            {% get_forum_group as forum %}
+            {% if group.name == forum.name %}
+                <div class="alert alert-warning alert-dismissable">
+                    <i class="fa fa-exclamation-circle fa-3x"></i>
+                    <div class="v-offset-s">
+                        <p>
+                            {% blocktrans with forum_name=forum.name %}
+                            Note: After this event will be posted, each user of {{ forum_name }} may be able to see it.<br>
+                            If you do not want this, please, use another group or project of your choice.
+                            {% endblocktrans %}
+                        </p>
+                    </div>
+                </div>
+            {% endif %}
+        
+        {% block event_form_name_field %}
+	        {% trans "Title" as title_label %}
+	        {% trans "Enter a title for the new event." as title_legend %}
+	        {% captureas title_html %}
+	                {% if request.GET.title %}
+	                    {% render_field form.forms.obj.title class+="form-control" placeholder=title_label value=request.GET.title %}
+	                {% else %}
+	                    {% render_field form.forms.obj.title class+="form-control" placeholder=title_label %}
+	                {% endif %}
+	        {% endcaptureas %}
+	        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.title legend=title_legend label=title_label field_html=title_html first=True translation_form=form.forms.obj %}
+        {% endblock event_form_name_field %}
+        
+        {% comment %} Date picker for from_date - to_date {% endcomment %}
+        {% include 'cosinnus/fields/from_to_date_field.html' with from_date_field=form.forms.obj.from_date to_date_field=form.forms.obj.to_date %}
+        
+        {# SimpleMDE Description Field (gets initialized in extrahead) #}
+        {% trans "Description and Infos" as description_label %}
+        {% trans "Description" as description_placeholder %}
+        {% trans "Enter a description for the event" as description_legend %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.note legend=description_legend label=description_label placeholder=description_placeholder large_field=True translation_form=form.forms.obj %}
+	    
+        {% block video_conference_type_dropdown %}
+            {% if not SETTINGS.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and not COSINNUS_CURRENT_PORTAL.video_conference_server %}
+                <input type="hidden" name="video_conference_type" id="id_video_conference_type" value="0">
+            {% else %}
+                {% trans "Include a video conference" as video_conference_type_label %}
+                {% trans "Choose the type of the video conference you would like for the event" as video_conference_type_legend %}
+                {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.video_conference_type label=video_conference_type_label legend=video_conference_type_legend %}
+                
+                {% if form.forms.conference_settings_assignments and SETTINGS.BBB_PRESET_USER_FORM_FIELDS and SETTINGS.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS %}
+	                <script type="text/javascript">
+	                    {# show or hide a visibility warning #}
+	                    $(function(){
+	                        $('#id_video_conference_type').on('change', function(){
+	                            if ($(this).val() == "1") {
+	                                $('#bbb-settings-advanced').show();
+	                            } else {
+	                                $('#bbb-settings-advanced').hide();
+	                            } 
+	                        });
+	                    });
+	                </script>
+	                <div id="bbb-settings-advanced" style="margin-top: 20px; {% if form.forms.obj.initial.video_conference_type != 1 %}display: none;{% endif %}">
+	                    {% include 'cosinnus/conference/conference_settings_formfields.html' with form=form.forms.conference_settings_assignments %}
+	                </div>
+                {% endif %}
+            {% endif %}
+        {% endblock video_conference_type_dropdown %}
+	                    
+        {% trans "Example: http://mywebsite.com" as url_placeholder %}
+        {% trans "External Link for the event" as url_label %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.url label=url_label placeholder=url_placeholder %}
+                      
+	    {% trans "The first uploaded image will be displayed as a wallpaper." as files_legend %}
+        {% trans "If you set this, your event will be shown on the map! (if permitted by its visibility settings)" as loc_legend %}
+        {% include 'cosinnus/media_tags.html' with show_files=True show_location=True show_topics=True files_label=files_label loc_label=loc_label files_legend=files_legend loc_legend=loc_legend show_visibility=True show_partner_portal_content_type="event" %}
+                        
+	</div><!-- content-box -->
+	
+	       
+    <button type="submit" class="btn btn-emphasized" id="createDoodleButton">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left">
+                    <i class="fa fa-pencil"></i>
+                </span>
+                <div class="media-body">
+                    {% if form_view == "add" %}
+                      {% trans "Create" %}
+                    {% elif form_view == "edit" %}
+                      {% trans "Save" %}
+                    {% endif %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    
+</form>
+    
+{% endblock content %}

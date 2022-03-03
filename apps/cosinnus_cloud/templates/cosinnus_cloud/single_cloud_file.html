@@ -1,0 +1,33 @@
+{% load i18n cosinnus_tags thumbnail %}
+
+{% comment %}  
+    Excepts variable: 'cloud_file': `cosinnus_cloud.models.CloudFile`
+{% endcomment %}
+
+<div class="app-cloud">
+    <div class="btn btn-emphasized w100 {% if not no_indent %}indented"{% endif %}" href="{{ cloud_file.url }}" target="_blank">
+        <ul class="media-list fine-space">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-cloud"></i>
+                </a>
+                {% if cloud_file.download_url %}
+                    <a class="pull-right" target="_blank" href="{{ cloud_file.download_url }}">
+                        <i class="fa fa-download"></i>
+                    </a>
+                {% endif %}
+                <div class="media-body no-vertical-padding ">
+                    <strong>
+                        <a href="{{ cloud_file.url }}" target="_blank">
+                            {{ cloud_file.title }}
+                        </a>
+                    </strong>
+                    <div class="group-annotation">
+                        <i class="fa fa-folder"></i>
+                        {{ cloud_file.folder }}
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div><!-- btn -->
+</div>

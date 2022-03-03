@@ -1,0 +1,289 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 11:18+0200\n"
+"PO-Revision-Date: 2021-03-08 23:48+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.2\n"
+
+msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
+msgstr ""
+
+msgctxt "the_app"
+msgid "Chat"
+msgstr ""
+
+msgid "Message"
+msgstr "הודעה"
+
+msgctxt "the_app"
+msgid "message"
+msgstr "הודעה"
+
+msgid "Chat"
+msgstr ""
+
+msgid "Recipients"
+msgstr "נמענים"
+
+msgid "Only Administrators may send a message to this project/group!"
+msgstr "רק מנהלי מערכת רשאים לשלוח הודעה לפרוייקט/קבוצה זו!"
+
+msgid "Additional Recipients"
+msgstr "נמענים נוספים"
+
+msgid "Undefined recipient."
+msgstr "נמען לא מוגדר."
+
+msgid "Portal"
+msgstr "פורטל"
+
+msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
+msgstr "באפשרותכם לצרף קבצים ותמונות להודעות רק אם אתם חברים בפורום. באפשרותכם להצטרך אליו כאן:"
+
+msgid "Forum"
+msgstr "פורום"
+
+msgid "Messages"
+msgstr "הודעות"
+
+msgid "Legacy Messages Archive"
+msgstr "ארכיון הודעות Legacy"
+
+msgid "The legacy messaging app is no longer in use. You can view all of your old messages, but you cannot write new ones. Please use the new messaging app in the navigation from now on!"
+msgstr "אפליקציית ממסר ההודעות Lgacy איננה בשימוש יותר. אתם יכולים לצפות בהודעותיכם הישנות אך אין באפשרותכם לכתוב חדשות. אנא השתמשו באפליקציית הממסר החדשה בניווט מעתה והלאה!"
+
+#, python-format
+msgid ""
+"Your direct reply could not be processed!\n"
+"\n"
+"The reason was: %(reason)s\n"
+"\n"
+"\n"
+"Your message text was: \n"
+"--------------------------------\n"
+"%(text)s\n"
+"--------------------------------\n"
+"\n"
+"\n"
+"If this keeps happening, consider logging in and sending the reply directly on the site.\n"
+msgstr ""
+"לא ניתן היה לעבד את תשובתך הישירה! \n"
+"\n"
+"הסיבה הייתה: %(reason)s \n"
+"\n"
+"\n"
+"טקטסט ההודעה שלך היה: \n"
+"------------------------------\n"
+"%(text)s \n"
+"------------------------------\n"
+"\n"
+"\n"
+"אם זה ממשיך לקרות, שקלו להתחבר ולשלוח את המענה ישירות מן האתר. \n"
+"\n"
+
+msgid ""
+"Note: This message is issued by an automated system.\n"
+"Do not reply, this would not be taken into account."
+msgstr ""
+"הערה: הודעה זו מונפקת על-ידי מערכת אוטומטית.\n"
+"אל תענו, זה לא ילקח בחשבון."
+
+msgid "Only group members can see the content you requested. Apply to become a member now!"
+msgstr ""
+
+msgid "Go to chat"
+msgstr ""
+
+msgid "Archived Messages"
+msgstr "הודעות המאוחסנות בארכיון"
+
+msgid "Delete"
+msgstr "מחק"
+
+msgid "Archive"
+msgstr "העבר לארכיון"
+
+msgid "Undelete"
+msgstr "בטל מחיקה"
+
+msgid "Mark as Read"
+msgstr "סמן כנקרא"
+
+msgid "No messages"
+msgstr "אין הודעות"
+
+msgid "Please enter message..."
+msgstr "נא הזן הודעה..."
+
+msgid "Send"
+msgstr "שלח"
+
+msgid "Dear user,"
+msgstr "משתמש יקר,"
+
+#, python-format
+msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgstr "בתאריך %(date)s, ביקשת לשלוח הודעה למשתמש '%(recipient)s'."
+
+msgid "Your message has been rejected by the moderator"
+msgstr "ההודעה שלך נדחתה על-ידי המנחה"
+
+msgid ", for the following reason:"
+msgstr ", מהסיבה הבאה:"
+
+#, python-format
+msgid "'%(sender_first)s %(sender_last)s' has replied to your message from %(date)s:"
+msgstr "'%(sender_first)s %(sender_last)s' הגיבו להודעתך מהתאריך %(date)s:"
+
+#, python-format
+msgid "'%(sender_first)s %(sender_last)s' has posted a message in one of your conversations."
+msgstr "'%(sender_first)s %(sender_last)s' שלחו הודעה באחת מהשיחות שלך."
+
+#, python-format
+msgid "You have received a message from the user '%(sender_first)s %(sender_last)s'."
+msgstr "קיבלת הודעה מהמשתמש '%(sender_first)s %(sender_last)s'."
+
+msgid "This message was sent in a conversation with: "
+msgstr "הודעה זו נשלחה בשיחה עם: "
+
+msgid "Project/Group"
+msgstr "פרוייקט/קבוצה"
+
+msgid "Follow this link to view the message on the site"
+msgstr "עקבו אחר קישור זה כדי לצפות בהודעה שבאתר"
+
+msgid "If you do not wish to receive any more emails from us, click here to unsubscribe:"
+msgstr "אם אין ברצונכם לקבל מאיתנו הודעות דוא\"ל נוספות, לחצו כאן כדי לבטל את המנוי:"
+
+msgid "You can also reply to this message directly by replying to this email. When you do, please leave the subject and addressee as it is. The email you reply from *must* be the one you are registered with on the site."
+msgstr "באפשרותכם גם להשיב להודעה זו ישירות על ידי מענה לדוא\"ל זה. כאשר תעשו כן, נא לשאיר את הנושא והכתובות כפי שהן. הדוא\"ל ממנו תשיבו חייב להיות האחד שנרשמתם עימו באתר."
+
+msgid "WARNING: Your reply will be sent to all participants of this conversation!"
+msgstr "אזהרה: תשובתך תישלח לכל משתתפי השיחה!"
+
+#, python-format
+msgid "Message \"%(subject)s\" on the site %(sitename)s"
+msgstr "הודעה \"%(subject)s\" באתר %(sitename)s"
+
+msgid "Dear visitor,"
+msgstr "אורח/ת יקר,"
+
+msgid "As a reminder, please find below the content of your message."
+msgstr "כתזכורת, נא מצאו להלן את תוכן הודעתכם."
+
+#, python-format
+msgid "On %(date)s, you sent a message to the user '%(sender_first)s %(sender_last)s'."
+msgstr "בתאריך %(date)s, שלחת הודעה למשתמש '%(sender_first)s %(sender_last)s'."
+
+msgid "Please find below the answer from your correspondent."
+msgstr "נא מצא להלן תשובה מההתכתבות שלך."
+
+msgid "Thank you again for your interest in our services."
+msgstr "שוב תודה על התעניינותך בשירותים שלנו."
+
+msgid "For more comfort, we encourage you to open an account on the site."
+msgstr "לנוחיותך, אנו ממליצים לך לפתוח חשבון באתר."
+
+msgid "The site administrator"
+msgstr "מנהל מערכת האתר"
+
+msgid "Inbox"
+msgstr "תיבת דואר נכנס"
+
+msgid "Sent"
+msgstr "נשלח"
+
+msgctxt "the noun for an Archive"
+msgid "Archive"
+msgstr "ארכיון"
+
+msgid "Trash"
+msgstr "פח"
+
+msgid "Write"
+msgstr "כתוב"
+
+msgid "Reply"
+msgstr "השב"
+
+msgid "Recipient"
+msgstr "נמען"
+
+msgid "Conversation"
+msgstr "שיחה"
+
+msgid "Conversation with members from"
+msgstr "שיחה עם חברים מ"
+
+msgid "Conversation with"
+msgstr "שיחה עם"
+
+#, python-format
+msgid "Show all %(count)s participants"
+msgstr "הצג את כל %(count)s המשתתפים"
+
+msgid "Me"
+msgstr "אני"
+
+msgid "Answer"
+msgstr "תשובה"
+
+msgid "Reply..."
+msgstr "השב..."
+
+#, python-format
+msgid "Reply to %(sender_name)s"
+msgstr "השב ל- %(sender_name)s"
+
+#, python-format
+msgid "Reply to all %(adressee_count)s"
+msgstr "השב לכל %(adressee_count)s"
+
+msgid "Your reply could not be matched to an existing message."
+msgstr "לא היתה דרך להתאים את תשובתך להודעה קיימת."
+
+msgid "An internal error occured."
+msgstr "אירעה שגיאה פנימית."
+
+msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
+msgstr "כתובת הדואר האלקטרוני ממנה שלחתם את התשובה אינה זו המשויכת לחשבון המשתמש שלכם. אנא שלחו תגובות ישירות רק מכתובת הדוא\"ל איתה נרשמתם באתר!"
+
+msgid "There was an error when processing your message text!"
+msgstr "אירעה שגיאה בעת עיבוד טקסט ההודעה שלך!"
+
+msgid "Your direct reply failed!"
+msgstr "תשובתך הישירה נכשלה!"
+
+msgid "Select at least one object."
+msgstr "בחרו אובייקט אחד לפחות."
+
+msgid "Messages or conversations successfully archived."
+msgstr "הודעות או שיחות אוחסנו בארכיון בהצלחה."
+
+msgid "Messages or conversations successfully deleted."
+msgstr "הודעות או שיחות נמחקו בהצלחה."
+
+msgid "Messages were marked as read."
+msgstr "ההודעות סומנו כנקראו."
+
+msgid "Messages or conversations successfully recovered."
+msgstr "הודעות או שיחות אוחזרו בהצלחה."
+
+#~ msgid "Request about your project \"%(group_name)s\""
+#~ msgstr "בקשה אודות הפרויקט שלך \"%(group_name)s\""
+
+#~ msgid "Request about your group \"%(group_name)s\""
+#~ msgstr "בקשה אודות הקבוצה שלך \"%(group_name)s\""

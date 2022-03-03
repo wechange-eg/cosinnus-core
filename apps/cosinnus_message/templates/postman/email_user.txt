@@ -1,0 +1,37 @@
+{% load i18n cosinnus_tags postman_tags %}{% autoescape off %}{% trans "Dear user," %}
+{% if action == 'rejection' %}
+{% blocktrans with object.sent_at|date:"DATETIME_FORMAT" as date and object.obfuscated_recipient as recipient %}On {{ date }}, you asked to send a message to the user '{{ recipient }}'.{% endblocktrans %}
+
+{% trans "Your message has been rejected by the moderator" %}{% if object.moderation_reason %}{% trans ", for the following reason:" %}
+    {{ object.moderation_reason }}{% else %}.{% endif %}
+
+{% else %}{# 'acceptance' #}
+{% if object.parent_id %}{% if object.parent.sender_id == object.recipient_id %}{% blocktrans with object.parent.sent_at|date:"DATETIME_FORMAT" as date and object.sender.first_name as sender_first and object.sender.last_name as sender_last %}'{{ sender_first }} {{ sender_last }}' has replied to your message from {{ date }}:{% endblocktrans %}
+{% else %}{% blocktrans with object.sender.first_name as sender_first and object.sender.last_name as sender_last %}'{{ sender_first }} {{ sender_last }}' has posted a message in one of your conversations.{% endblocktrans %}
+{% endif %}{% else %}{% blocktrans with object.sender.first_name as sender_first and object.sender.last_name as sender_last %}You have received a message from the user '{{ sender_first }} {{ sender_last }}'.{% endblocktrans %}
+{% endif %}
+{% if object.multi_conversation %}{% with participants=object|get_other_participants:object.recipient %}{% trans "This message was sent in a conversation with: " %} {% if object.multi_conversation.targetted_groups.all %}{% trans "Project/Group" %} "{{ object.multi_conversation.targetted_groups.all.0.name}}"{% else %}{% for p in participants|slice:"5" %}{{p|full_name}}{% if not forloop.last %}, {% endif %}{% endfor %}{% with rest=participants|length|subtract:5 %}{% if rest > 0 %}, +{{ rest }}{% endif %}{% endwith %}{% endif %}
+
+{% endwith %}{% endif %}
+{{ object.body }}
+
+
+
+{% trans "Follow this link to view the message on the site" %}: http{% if request.is_secure %}s{% endif %}://{{ site.domain }}{% if object.thread_id %}{% url 'postman:view_conversation' object.thread_id %}{% else %}{{object.get_absolute_url }}{% endif %}
+{% endif %}
+{% if unsubscribe_url %}
+{% trans "If you do not wish to receive any more emails from us, click here to unsubscribe:" %} {{ unsubscribe_url }} 
+{% endif %}
+{% if direct_reply_enabled %}
+{% blocktrans %}You can also reply to this message directly by replying to this email. When you do, please leave the subject and addressee as it is. The email you reply from *must* be the one you are registered with on the site.{% endblocktrans %}
+{% if object.multi_conversation %}
+{% blocktrans %}WARNING: Your reply will be sent to all participants of this conversation!{% endblocktrans %}
+{% endif %}
+
+> --------------------------------------------------------------------
+> DIRECT-REPLY CODE: 
+> {{ hash_code }} 
+{% else %}
+{% blocktrans %}Note: This message is issued by an automated system.
+Do not reply, this would not be taken into account.{% endblocktrans %}
+{% endif %}{% endautoescape %}

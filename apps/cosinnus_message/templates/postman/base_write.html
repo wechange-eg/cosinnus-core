@@ -1,0 +1,77 @@
+{% extends "postman/base.html" %}
+{% load i18n bootstrap3 widget_tweaks cosinnus_tags %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.body.id_for_label %}
+{% endblock %}
+
+{% block postman_content %}
+<!-- a box with semi transparent background -->
+<div class="content-box">
+    <form action="{% if next_url %}?next={{ next_url|urlencode }}{% endif %}" class="form-horizontal" method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    
+	    <div class="btn btn-default w100 regular-space">
+	        <ul class="media-list">
+	            <li class="media">
+	                <span class="pull-left">
+	                    <i class="fa fa-user"></i>
+	                </span>
+	                <div class="media-body">
+	                	{{ form.recipients.errors }}
+	                    {% render_field form.recipients class+="w100" placeholder=form.recipients.label id="id_recipients"%}
+	                </div>
+	            </li>
+	        </ul>
+	    </div>
+	
+	    <div class="btn btn-default w100 regular-space">
+	        <ul class="media-list">
+	            <li class="media">
+	                <span class="pull-left">
+	                    <i class="fa fa-pencil"></i>
+	                </span>
+	                <div class="media-body media-body-form-control">
+	                	{{ form.subject.errors }}
+	                    {% render_field form.subject class+="form-control" placeholder=form.subject.label value=request.GET.subject %}
+	                </div>
+	            </li>
+	        </ul>
+	    </div>
+        
+        <div class="btn btn-default w100 regular-space">
+            <ul class="media-list">
+                <li class="media">
+                    <div class="media-body media-body-form-control">
+				        {{ form.body.errors }}
+				        {% captureas label %}{% trans "Please enter message..." %}{% endcaptureas %}
+				        {% render_field form.body class+="app-message-text" placeholder=label %}
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+        {% include 'cosinnus_message/attachments_form.html' with form=form %}
+        
+        <div class="clearfix"></div>
+        
+        
+        <button type="submit" class="btn btn-emphasized" >
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left">
+                        <i class="fa fa-pencil"></i>
+                    </span>
+                    <div class="media-body">
+                        {% trans "Send" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+	    
+    </form>
+
+</div><!-- content-box -->
+{% endblock %}

@@ -1,0 +1,105 @@
+
+.avatar-img {
+  width: 40px;
+  height: 40px;
+}
+
+
+.select2-avatar select {
+  width: 40px !important;
+}
+
+.select2-avatar .select2-choice {
+  width: 40px !important;
+  height: 40px !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.select2-avatar .select2-search-choice-close,
+.select2-avatar .select2-arrow {
+  display: none !important;
+}
+
+.select2-avatar .select2-choice > .select2-chosen {
+  margin-right: 0 !important;
+}
+
+.select2-search {
+  padding: 0;
+}
+
+.select2-search input {
+  padding: 0 0 0 5px !important;
+  border: 0;
+  background: none;
+}
+
+.select2-drop {
+  min-width: 240px;
+}
+
+/**
+** These settings will remove the border of ~all!~ the select2 dropdown fields, not only the avatar! **
+
+.select2-drop {
+  border: 0 !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+
+.select2-drop-active {
+  border: 0;
+}
+
+.select2-results {
+  padding: 0;
+  margin: 0;
+}
+
+.select2-results .select2-result-label {
+  padding: 0 !important;
+}
+
+*/
+
+/* Dirty fix for the slipping away user avatar icon */
+.select2-avatar > .select2-container,
+.select2-avatar > .select2-container > .select2-choice >  .select2-chosen,
+.select2-avatar > .select2-choice {
+  width: 40px !important;	
+}
+
+.select2-avatar-wide,
+.select2-avatar-wide > .select2-container,
+.select2-avatar-wide > .select2-container > .select2-choice,
+.select2-avatar-wide > .select2-container > .select2-choice >  .select2-chosen,
+.select2-avatar-wide > .select2-choice {
+  width: 100% !important;   
+}
+
+.select2-avatar-wide > .select2-container > .select2-choice >  .select2-chosen {
+    background-color: #FFFFFF;
+}
+.select2-avatar-wide > .select2-container > .select2-choice:hover > .select2-chosen {
+    background-color: #F5F5F5;
+}
+.select2-avatar-wide > .select2-container > .select2-choice:hover {
+    text-decoration: none;
+}
+.select2-avatar-wide > .select2-container > .select2-choice >  .select2-chosen img {
+    margin-right: 10px;
+}
+
+.followers-avatar-list {
+    display: inline-block;
+    white-space: normal;
+}
+.followers-avatar {
+    display: inline-block;
+    width: 20px;
+    margin: 0 2px 5px 0;
+}
+

@@ -1,0 +1,34 @@
+{% load i18n widget_tweaks thumbnail %}
+
+<p>{% trans "Poll choice" %} #{{ forloop.counter }}</p>
+
+<div class="small-padding">
+    {{ inlineform.description.errors }}
+    {% trans "Description" as placeholder %}
+    {% render_field inlineform.description class+="form-control textarea-small" placeholder=placeholder %}
+</div>
+
+{{ inlineform.poll }}
+{{ inlineform.id }}
+
+
+{% comment %}
+
+    Images in choices are now disabled. Re-enable this to have images in options.
+
+<a class="pull-left">
+    {% if inlineform.image.value %}
+        <img class="image" src="{% thumbnail inlineform.image.value 40x40 crop=1 upscale=1 %}"></img>
+    {% else %}
+         <i class="fa fa-image"></i>
+    {% endif %}
+</a>
+<div style="padding: 0px 10px; display: inline-block;">
+    {% captureas placeholder %}{% trans "Choose and upload an image" %}{% endcaptureas %}
+    {{ inlineform.image.errors }}
+    {% render_field inlineform.image class+="form-control" placeholder=placeholder %}
+    <i>{% trans "File Size" %}: {% trans "max. 10 MB" %}</i>
+</div>
+{% endcomment %}
+    
+    

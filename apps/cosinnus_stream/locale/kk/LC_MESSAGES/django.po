@@ -1,0 +1,141 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:39+0200\n"
+"PO-Revision-Date: 2020-04-06 09:25+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: kk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 2.3\n"
+
+msgid "Stream"
+msgstr "Ағынды жою"
+
+msgctxt "the_app"
+msgid "stream"
+msgstr "менің ағындарым"
+
+msgid "My Streams"
+msgstr "Менің ағындарым"
+
+msgid "Streams"
+msgstr "Ағындар"
+
+msgid "Models"
+msgstr "Модельдер"
+
+msgid "Portal IDs"
+msgstr "Портал идентификаторлары"
+
+msgid "Last seen"
+msgstr "Соңғы қаралған"
+
+msgid "Special Stream"
+msgstr "Арнайы ағым"
+
+msgid "Special Group IDs"
+msgstr "Арнайы топ идентификаторлары"
+
+msgid "My Stream"
+msgstr "Менің ағыным"
+
+msgid "Public Stream"
+msgstr "Менің ағындарым"
+
+msgid "My Stream in all Portals"
+msgstr "Менің барлық порталдардағы ағыным"
+
+msgid "Public Stream in all Portals"
+msgstr "Барлық порталдардағы қоғамдық ағым"
+
+msgid "Edit this Stream"
+msgstr "Осы ағымды өңдеңіз"
+
+msgid "Delete this Stream"
+msgstr "Осы ағынды жойыңыз"
+
+msgid "Do you really want to delete this stream?"
+msgstr "Бұл ағынды шынымен жойғыңыз келе ме?"
+
+msgid "Delete Stream"
+msgstr "Ағынды жою"
+
+msgid "Create Stream"
+msgstr "Ағын жасау"
+
+msgid "Hide public items outside of your groups"
+msgstr "Сіздің тобыңыздан тыс қоғамдық нысандарды жасырыңыз"
+
+msgid "Show public items outside of your groups"
+msgstr "Сіздің тобыңыздан тыс қоғамдық заттарды көрсетіңіз"
+
+msgid "There are no news posts yet"
+msgstr "Әзірге жаңалықтар жоқ"
+
+#, python-format
+msgid "Edit stream \"%(stream_name)s\""
+msgstr "Ағынын өңдеңіз %(stream_name)s"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "Өрістердің бірінде қате пайда болды. Мұны сақтамас бұрын жөндеңіз!"
+
+msgid "Title"
+msgstr "Атауы"
+
+msgid "Enter a title for the stream."
+msgstr "Ағынның атауын енгізіңіз."
+
+msgid "Apply filters for the stream"
+msgstr "Ағын үшін сүзгілерді қолданыңыз"
+
+msgid "Filter by Team?"
+msgstr "Пәрмендегі сүзгілер?"
+
+msgid "Select Team"
+msgstr "Команда таңдаңыз"
+
+msgid "Public"
+msgstr "Жұртшылық"
+
+msgid "Additional filters"
+msgstr "Қосымша сүзгілер"
+
+msgid "Filter by authors, tags or other tagged properties?"
+msgstr "Авторлар, тегтер немесе басқа белгілер сипаттары бойынша сүзу керек пе?"
+
+msgid "Filter by item types?"
+msgstr "Түрі бойынша сүзу керек пе?"
+
+msgid "Create"
+msgstr "Жасау"
+
+msgid "Edit"
+msgstr "Өңдеу"
+
+msgid "You do not have permission to access this stream."
+msgstr "Бұл ағынға кіруге рұқсатыңыз жоқ."
+
+msgid "Your stream was added successfully."
+msgstr "Ағын сәтті қосылды."
+
+msgid "Please log in to access this page."
+msgstr "Бұл параққа кіру үшін жүйеге кіріңіз."
+
+msgid "Your stream was updated successfully."
+msgstr "Бұл параққа кіру үшін жүйеге кіріңіз."
+
+msgid "Your stream was deleted successfully."
+msgstr "Ағын сәтті жойылды."
+
+msgid "You cannot delete the default stream!"
+msgstr "Әдепкі ағынды жою мүмкін емес!"

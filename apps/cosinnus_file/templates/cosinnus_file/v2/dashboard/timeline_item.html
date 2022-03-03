@@ -1,0 +1,40 @@
+{% extends 'cosinnus/v2/dashboard/timeline_item_base.html' %}
+{% load i18n cosinnus_tags %}
+
+{% block container_class %}timeline-item-file{% endblock %}
+
+{% block creation_label %}
+	{% if item.creator == user %}
+		{% trans "You uploaded a file" %}
+	{% else %}
+		{% trans "uploaded a file" context "This appears next to new items in the timeline, as in '<Jane> created a new item'" %}
+	{% endif %}
+{% endblock %}
+
+
+{% block icon_class %}icon-extra-padded{% endblock %} {% comment %} Set if there is a subtitle row! {% endcomment %}
+
+{% block icon %}{{ item.get_icon }}{% endblock %}
+
+{% block title_frame %}{% endblock %}
+{% block subtitle %}{% endblock %}
+
+{% block body_frame %}
+	{% if item.is_image %}
+		<div class="attachments attached-images">
+			{% include 'cosinnus/v2/dashboard/timeline_attached_image_gallery.html' with object=item.wrap_self_attached_images max_images=3 %}
+		</div>
+	{% endif %}
+
+    {% captureas item_url %}{{ item.get_absolute_url }}{% endcaptureas %}
+	{% captureas download_url %}{{ item.get_download_url }}{% endcaptureas %}
+	{% include 'cosinnus/v2/dashboard/timeline_attached_item.html' with text=item.title subtext=item.creator|full_name icon=item.get_icon url=item_url download_url=download_url %}
+{% endblock %}
+
+{% block delete_button_frame %}{% endblock %}
+{% block edit_button_frame %}{% endblock %}
+
+{% block action_buttons %}
+	{% include 'cosinnus/v2/dashboard/timeline_button_star.html' with item=item %}
+{% endblock %}
+

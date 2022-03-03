@@ -1,0 +1,1 @@
+{% include 'cosinnus_file/single_file.html' with object=object %}

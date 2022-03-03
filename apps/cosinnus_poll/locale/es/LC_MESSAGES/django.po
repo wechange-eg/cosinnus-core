@@ -1,0 +1,785 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:06+0200\n"
+"PO-Revision-Date: 2020-04-22 12:36+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+
+msgid "Polls"
+msgstr "Encuestas"
+
+msgctxt "the_app"
+msgid "poll"
+msgstr "encuesta"
+
+msgid "A user created a new poll"
+msgstr "Un usuario creó una nueva encuesta"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new poll"
+msgid "%(sender_name)s created the poll %(object_name)s"
+msgstr "%(sender_name)s creó una nueva encuesta"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new poll"
+msgid "%(sender_name)s created %(count)d polls"
+msgstr "%(sender_name)s creó una nueva encuesta"
+
+#, python-format
+msgid "%(sender_name)s created a new poll"
+msgstr "%(sender_name)s creó una nueva encuesta"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Nueva encuesta: \"%(object_name)s\" fue creada en %(team_name)s."
+
+msgid "A poll you voted on was completed"
+msgstr "Una encuesta que elegiste fue completada"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed the poll you are following"
+msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
+msgstr "%(sender_name)s completó la encuesta que estas siguiendo"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on a poll you voted in"
+msgid "%(sender_name)s completed %(count)d polls you voted on"
+msgstr "%(sender_name)s comentó en una encuesta que elegiste"
+
+#, python-format
+msgid "%(sender_name)s completed the poll"
+msgstr "%(sender_name)s completó la encuesta"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "La encuesta \"%(object_name)s\" fue completada en %(team_name)s."
+
+msgid "A user commented on one of your polls"
+msgstr "Un usario comentó en una de tus encuestas"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your polls in %(team_name)s."
+msgid "%(sender_name)s commented on your poll %(object_name)s"
+msgstr "%(sender_name)s comentó en una de tus encuestas en %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your polls in %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
+msgstr[0] "%(sender_name)s comentó en una de tus encuestas en %(team_name)s."
+msgstr[1] "%(sender_name)s comentó en una de tus encuestas en %(team_name)s."
+
+#, python-format
+msgid "%(sender_name)s commented on your poll"
+msgstr "%(sender_name)s comentó en tu encuesta"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls"
+msgstr "%(sender_name)s comentó en uns de tus encuestas"
+
+msgid "A user commented on a poll you were tagged in"
+msgstr "Un usario comentó en una encuesta en la que has sido marcado"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your polls in %(team_name)s."
+msgid "%(sender_name)s commented on the poll %(object_name)s"
+msgstr "%(sender_name)s comentó en una de tus encuestas en %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your polls in %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
+msgstr[0] "%(sender_name)s comentó en una de tus encuestas en %(team_name)s."
+msgstr[1] "%(sender_name)s comentó en una de tus encuestas en %(team_name)s."
+
+msgid "You were tagged in this poll"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in"
+msgstr "%(sender_name)s comentó en una encuesta en la que has sido marcado"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s comentó en una encuesta en la que has sido marcado en %(team_name)s"
+
+msgid "A user commented on an poll you voted in"
+msgstr "Un usario comentó en una encuesta que elegiste"
+
+msgid "You voted on this poll"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in"
+msgstr "%(sender_name)s comentó en una encuesta que elegiste"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
+msgstr "%(sender_name)s comentó en una encuesta que elegiste en %(team_name)s"
+
+msgid "A user created a new poll in a team you are following"
+msgstr "Un usuario creó una nueva encuesta en un equipo que estas siguiendo"
+
+#, python-format
+msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s creó una nueva encuesta en %(team_name)s (que estas siguiendo)"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Nueva encuesta: \"%(object_name)s\" fue creada en %(team_name)s (que estas siguiendo)."
+
+msgid "A user updated a poll you are following"
+msgstr "Un usario actualizó un encuesta que estas siguiendo"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed the poll"
+msgid "%(sender_name)s updated the poll %(object_name)s"
+msgstr "%(sender_name)s completó la encuesta"
+
+#, fuzzy
+#| msgid "A poll you are following was completed"
+msgid "You are following this poll"
+msgstr "Una encuesta que estas siguiendo fue completada"
+
+#, python-format
+msgid "%(sender_name)s updated a poll you are following"
+msgstr "%(sender_name)s actualizó una encuesta que estas siguiendo"
+
+#, python-format
+msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Una encuesta que estas siguiendo \"%(object_name)s\" fue acualizada en%(team_name)s."
+
+msgid "A poll you are following was completed"
+msgstr "Una encuesta que estas siguiendo fue completada"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed the poll"
+msgid "%(sender_name)s completed the poll %(object_name)s"
+msgstr "%(sender_name)s completó la encuesta"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed the poll"
+msgid "%(sender_name)s completed %(count)d polls"
+msgstr "%(sender_name)s completó la encuesta"
+
+#, python-format
+msgid "%(sender_name)s completed the poll you are following"
+msgstr "%(sender_name)s completó la encuesta que estas siguiendo"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
+msgstr "Encuesta \"%(object_name)s\" que estas siguiendo fue completada en%(team_name)s."
+
+msgid "A user commented on one a poll you are following"
+msgstr "Un usario comentó en una encuesta que estas siguiendo"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you are following"
+msgstr "%(sender_name)s comentó en una encuesta que estas siguiendo"
+
+msgid "Current Polls"
+msgstr "Encuestas actuales"
+
+msgid "No current polls"
+msgstr "No hay encuestas actuales"
+
+msgid "Created By"
+msgstr "Creado por"
+
+msgid "Newest Created"
+msgstr "Creados más nuevos"
+
+msgid "Title"
+msgstr "Título"
+
+msgid "You must write a description for this poll option!"
+msgstr "¡Debes escribir una descripción para esta opción de encuesta!"
+
+msgid "Voting open"
+msgstr "Votación abierta"
+
+msgid "Voting closed"
+msgstr "Votación cerrada"
+
+msgid "Poll archived"
+msgstr "Encuesta archivada"
+
+msgid "State"
+msgstr "Estado"
+
+msgid "Description"
+msgstr "Descripción"
+
+msgid "Multiple options votable"
+msgstr "Múltiples opciones votables"
+
+msgid "Does this poll allow users to vote on multiple options or just decide for one?"
+msgstr "¿Permite esta encuesta a los usuarios votar sobre múltiples opciones o simplemente decidir por una?"
+
+msgid "\"Maybe\" option enabled"
+msgstr "Opción \"Quizás\" habilitada"
+
+msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
+msgstr "¿Está habilitada la opción 'quizás'? Ignorado y predeterminado a Falso si `` multiple_votes == Falso``"
+
+msgid "Anyone can vote"
+msgstr "Cualquiera puede votar"
+
+msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
+msgstr "Si es cierto, cualquiera que pueda ver esta encuesta puede votarla. Si es falso, solo los miembros del grupo pueden hacerlo."
+
+msgid "Show voters"
+msgstr "Mostrar votadores"
+
+msgid "If true, display a list of which user voted for each option."
+msgstr "Si es cierto, muestra una lista de qué usuario votó por cada opción."
+
+msgid "Start"
+msgstr "Comienzo"
+
+msgid "Winning Option"
+msgstr "Opción ganadora"
+
+msgid "Poll"
+msgstr "Encuesta"
+
+#, python-format
+msgid "Poll: %(poll)s (%(state)s)"
+msgstr "Encuesta: %(poll)s (%(state)s)"
+
+msgid "Image"
+msgstr "Imagen"
+
+msgctxt "the subject"
+msgid "Votes"
+msgstr "Votos"
+
+msgid "Poll Option"
+msgstr "Opción de encuesta"
+
+msgid "Poll Options"
+msgstr "Opciónes de encuesta"
+
+msgid "Yes"
+msgstr "Si"
+
+msgid "Maybe"
+msgstr "Quizas"
+
+msgid "No"
+msgstr "No"
+
+msgid "Option"
+msgstr "Opción"
+
+msgid "Voter"
+msgstr "Votante"
+
+msgid "Vote"
+msgstr "Voto"
+
+msgctxt "the subject"
+msgid "Vote"
+msgstr "Voto"
+
+msgid "Creator"
+msgstr "Creador"
+
+msgid "Created"
+msgstr "Creado"
+
+msgid "Last modified"
+msgstr "Ùltimo modificado"
+
+msgid "Text"
+msgstr "Texto"
+
+msgid "Comment"
+msgstr "Comentario"
+
+msgid "Comments"
+msgstr "Comentarios"
+
+msgid "Poll choice"
+msgstr "Posibilidad de encuesta"
+
+msgid "Back to Polls"
+msgstr "Volver a encuestas"
+
+msgid "Past Polls"
+msgstr "Encuestas pasados"
+
+msgid "by"
+msgstr "por"
+
+msgid "Delete"
+msgstr "Eliminar"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Re-open"
+msgstr "Reabrir"
+
+msgid "Archive"
+msgstr "Archivar"
+
+#, python-format
+msgid "Do you really want to delete poll „%(title)s“?"
+msgstr "¿Estas seguro de que quieres eliminar la encuesta „%(title)s“?"
+
+msgid "Delete poll"
+msgstr "Eliminar encuesta"
+
+#, python-format
+msgid "Do you really want to re-open poll „%(title)s“?"
+msgstr "¿Estas seguro de que quieres reabrir la encuesta „%(title)s“?"
+
+msgid "Re-open poll"
+msgstr "Reabrir encuesta"
+
+#, python-format
+msgid "Do you really want to archive poll „%(title)s“?"
+msgstr "¿Estas seguro de que quieres archivar la encuesta „%(title)s“?"
+
+msgid "Archive poll"
+msgstr "Archivar encuesta"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you created in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Hola, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s ha publicado un comentario en una encuesta que creaste en %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"en tu encuesta:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Sigue este enlace para ver el comentario:\n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Sigue este enlace para editar tus preferencias de notificación: %(notification_settings_url)s )\n"
+"\n"
+"Tu equipo de %(site_name)s.\n"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls in %(team_name)s."
+msgstr "%(sender_name)s comentó en una de tus encuestas en %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the poll \"%(object_name)s\", was completed in %(team_name)s by %(sender_name)s!\n"
+msgstr ""
+"Hola %(receiver_name)s,\n"
+"\n"
+"la encuesta \"%(object_name)s\", se completó en %(team_name)s por %(sender_name)s!\n"
+
+msgid "The winning option was:"
+msgstr "La opción ganadora fue:"
+
+msgid "There was no winning option."
+msgstr "No había opción ganadora."
+
+#, python-format
+msgid ""
+"\n"
+"You can find the poll by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"\n"
+"\n"
+"\n"
+"Puedes encontrar la encuesta siguiendo este enlace: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Sigue este enlace para editar tus preferencias de notificación: %(notification_settings_url)s )\n"
+"\n"
+"Tu equipo de %(site_name)s."
+
+#, python-format
+msgid "Poll: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "La encuesta: \"%(object_name)s\" fue completada en %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new poll \"%(object_name)s\", was created in %(team_name)s by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Hola %(receiver_name)s,\n"
+"\n"
+"una nuevo encuesta \"%(object_name)s\" fue creada en %(team_name)s por %(sender_name)s. \n"
+"\n"
+"Puedes encontrarlo siguiendo este enlace: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Sigue este enlace para editar tus preferencias de notificación: %(notification_settings_url)s )\n"
+"\n"
+"Tu equipo de %(site_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you were tagged in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Hola, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s ha publicado un comentario en una encuesta en la que te etiquetaron, en %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"en la encuesta:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Sigue este enlace para ver el comentario:\n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Sigue este enlace para editar tus preferencias de notificación: %(notification_settings_url)s )\n"
+"\n"
+"Tu quipo de %(site_name)s.\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in %(team_name)s."
+msgstr "%(sender_name)s comentó en una encuesta en la que has sido marcado en %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you voted in in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Hola, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s ha publicado un comentario en una encuesta que elegiste en %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"en la encuesta:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Sigue este enlace para ver el comentario:\n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Sigue este enlace para editar tus preferencias de notificación: %(notification_settings_url)s )\n"
+"\n"
+"Tu quipo de %(site_name)s.\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s."
+msgstr "%(sender_name)s comentó en una encuesta que elegiste en %(team_name)s."
+
+msgid "Write comment..."
+msgstr "Escribir comentario..."
+
+msgid "Post"
+msgstr "Publicar"
+
+msgid "Add poll"
+msgstr "Añadir encuesta"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "Se ha producido un error en uno de las casillas introducidas. ¡Por favor, corríjelo antes de guardar!"
+
+msgid "Enter a title for the new poll."
+msgstr "Inserta un título para la encuesta nueva."
+
+msgid "Description and Infos"
+msgstr "Descripción e información"
+
+msgid "Enter a description for the poll"
+msgstr "Pon una decripción para la encuesta"
+
+msgid "Note: You cannot edit the options for this poll because someone has already cast their vote or the poll has been completed!"
+msgstr "Nota: ¡No puedes editar las opciones para esta encuesta porque alguien ya ha emitido su voto o la encuesta se ha completado!"
+
+msgid "Poll Choices"
+msgstr "Posibilidades de encuesta"
+
+msgid "Remove choice"
+msgstr "Eliminar posibilidad"
+
+msgid "Add choice"
+msgstr "Añadir posibilidad"
+
+msgid "Multiple Votes"
+msgstr "Múltiples votos"
+
+msgid "If disabled, users can only vote for one option"
+msgstr "Si está deshabilitado, los usuarios solo pueden votar por una opción"
+
+msgid "In addition to \"Yes\" and \"No\""
+msgstr "Además de \"Sí\" y \"No\""
+
+msgid "Lists how every voter voted for each option."
+msgstr "Enumera cómo cada votante votó por cada opción."
+
+msgid "Public voting"
+msgstr "Votación pública"
+
+msgid "Any logged in user who can see this poll can vote on it. If disabled, only group/project members can vote on it."
+msgstr "Cualquier usuario conectado que pueda ver esta encuesta puede votarla. Si está deshabilitado, solo los miembros del grupo / proyecto pueden votarlo."
+
+msgid "Create"
+msgstr "Crear"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Archived Polls"
+msgstr "Encuestas archivadas"
+
+msgid "Enter the title to create a new poll."
+msgstr "Inserta un título para la encuesta nueva."
+
+msgid "There are no archived polls."
+msgstr "No hay encuestas archivadas."
+
+msgid "There are no running polls."
+msgstr "No hay encuestas en curso."
+
+msgid "There are no upcoming polls"
+msgstr "No hay próximas encuestas"
+
+msgctxt "the_verb"
+msgid "Vote"
+msgstr "Voto"
+
+#, python-format
+msgid "Vote for %(title)s"
+msgstr "Vota para %(title)s"
+
+msgid "This poll has been completed. Voting is closed."
+msgstr "Esta encuesta ha sido completada. La votación está cerrada."
+
+msgid "This is an archived poll."
+msgstr "Esto es una encuesta archivada."
+
+msgid "Complete without winner"
+msgstr "Completar sin ganador"
+
+#, python-format
+msgid "Do you really want to complete poll \"%(title)s\" with no winning option?"
+msgstr "¿Estas seguro de que quieres completar la encuesta \"%(title)s\" sin opción ganadora?"
+
+msgid "Complete poll without winner"
+msgstr "Completar encuesta sin ganador"
+
+msgid "(No description set)"
+msgstr "(Ningún conjunto de descripción)"
+
+msgid "The Winner is"
+msgstr "El ganador es"
+
+#, fuzzy
+msgid "Available options were"
+msgstr "Opciones adicionales"
+
+msgid "There are no options for this poll yet!"
+msgstr "¡No hay opciones para esta encuesta hasta ahora!"
+
+msgid "Make winner and complete poll"
+msgstr "Hacer ganador y completar encuesta"
+
+msgid "Votes"
+msgstr "Votos"
+
+#, python-format
+msgid "Do you really want to complete the poll and select \"%(description)s\" as winner?"
+msgstr "¿Estas seguro de que quieres completar la encuesta y seleccionar \"%(description)s\" como ganador?"
+
+msgid "Complete poll"
+msgstr "Completar encuesta"
+
+#, fuzzy
+#| msgid "A user created a new poll"
+msgid "You created a poll"
+msgstr "Un usuario creó una nueva encuesta"
+
+#, fuzzy
+#| msgid "A user created a new poll"
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a poll"
+msgstr "Un usuario creó una nueva encuesta"
+
+msgid "There are no polls yet"
+msgstr "No hay encuestas hasta ahora"
+
+#, python-format
+msgid "Poll \"%(title)s\" was edited successfully."
+msgstr "Encuesta \"%(title)s\" fue editada con éxito."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be edited."
+msgstr "Encuesta \"%(title)s\" no pudo ser editada."
+
+#, python-format
+msgid "Poll \"%(title)s\" was added successfully."
+msgstr "Encuesta \"%(title)s\" fue añadida con éxito."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be added."
+msgstr "Encuesta \"%(title)s\" no pudo ser añadido."
+
+msgid "You should define at least one poll option!"
+msgstr "¡Debes determinar por lo menos una opción de encuesta!"
+
+msgid "This poll is archived and cannot be edited anymore!"
+msgstr "¡Esta encuesta está archivada y ya no se puede editar!"
+
+#, python-format
+msgid "Poll \"%(title)s\" was deleted successfully."
+msgstr "Encuesta \"%(title)s\" fue eliminada con éxito."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be deleted."
+msgstr "Encuesta \"%(title)s\" no pudo ser eliminada."
+
+msgid "Your votes were saved successfully."
+msgstr "Tus votos fueron guardados con éxito."
+
+msgid "Your votes could not be saved."
+msgstr "Tus votos no pudieron ser guardados."
+
+msgid "The voting phase for this poll is over. You cannot vote for it any more."
+msgstr "La fase de votación para esta encuesta ha terminado. Ya no puedes votar."
+
+msgid "In this poll you must vote for exactly one item!"
+msgstr "¡En esta encuesta debes votar por exactamente un artículo!"
+
+msgid "The complete request can only be sent via POST!"
+msgstr "La solicitud completa solo puede ser enviada por POST!"
+
+msgid "Invalid action for this poll. The request could not be completed!"
+msgstr "Acción inválida para esta encuesta. ¡La solicitud no se pudo completar!"
+
+msgid "This action is not permitted for this poll at this stage!"
+msgstr "¡Esta acción no está permitida para esta encuesta en esta etapa!"
+
+msgid "The poll was closed successfully."
+msgstr "La encuesta fue cerrada con éxito."
+
+msgid "The poll was re-opened successfully."
+msgstr "La encuesta fue reabierta con éxito."
+
+msgid "The poll was archived successfully."
+msgstr "La encuesta fue archivada con éxito."
+
+msgid "Your comment was added successfully."
+msgstr "Tu comentario fue añadido con éxito."
+
+msgid "Your comment was deleted successfully."
+msgstr "Tu comentario fue eliminado con éxito."
+
+#~ msgid "New poll by %(sender_name)s"
+#~ msgstr "Nueva encuesta por %(sender_name)s"
+
+#~ msgid "%(sender_name)s completed a poll"
+#~ msgstr "%(sender_name)s completó la encuesta"
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
+
+#~ msgid "New poll by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Nueva encuesta por %(sender_name)s en %(team_name)s (que estas siguiendo)"
+
+#~ msgid "%(sender_name)s completed a poll you are following"
+#~ msgstr "%(sender_name)s completó una encuesta que estas siguiendo"

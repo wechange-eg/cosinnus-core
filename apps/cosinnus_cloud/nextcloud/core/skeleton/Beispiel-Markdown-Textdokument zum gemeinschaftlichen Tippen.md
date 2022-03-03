@@ -1,0 +1,3 @@
+Hier könnt ihr gemeinschaftlich z.B. Protokolle mittippen. Markdown-Textdokumente könnt ihr einfach über das Plus-Symbol und "Neues Textdokument" anlegen.
+
+Falls ihr gemeinsam einen größeren Text mit umfänglicher Formatierung verfassen wollt, dann erstellt euch mit dem Plus-Symbol ein OnlyOffice-Dokument ("Dokument") oder eine OnlyOffice-Tabelle ("Tabelle") - ebenso sind PowerPoint-Datei anzulegen ("Präsentation").

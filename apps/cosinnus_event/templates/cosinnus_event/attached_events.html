@@ -1,0 +1,40 @@
+{% load cosinnus_tags %}
+
+{% for event in events %}
+    <div class="app-calendar">
+        <div class="btn btn-emphasized w100 {% if not no_indent %}indented{% endif %}" href="{{ event.get_absolute_url }}">
+            <ul class="media-list fine-space">
+                <li class="media">
+                    <a class="pull-left square-date-icon" href="{{ event.get_absolute_url }}">
+                        {% if event.state == 2 or event.state == 4 %}
+		                    <i class="fa fa-calendar-check-o"></i>
+		                {% else %}
+		                    <div>{{ event.from_date|date:"d" }}</div>
+		                    <div>{{ event.from_date|date:"M" }}</div>
+		                {% endif %}
+                    </a>
+                    <div class="media-body no-vertical-padding ">
+                        <strong><a href="{{ event.get_absolute_url }}" target="_blank">{{ event.title }}</a></strong>
+                        {% with creator=event.creator %}
+                            <div class="group-annotation">
+                                <a href="{{ creator|profile_url }}">
+                                    <i class="fa fa-user"></i>
+                                    {{ creator|full_name }}
+                                </a>
+                                <span class="pull-right">
+                                    {% if event.video_conference_type == 2 %}
+                                        <i class="fa fa-fw fa-eye"></i>
+                                        {% trans "Fairmeeting" %}
+                                    {% elif event.video_conference_type == 1 %}
+                                        <i class="fa fa-fw fa-eye"></i>
+                                        {% trans "BBB-Meeting" %}
+                                    {% endif %}
+                                </span>
+                            </div>
+                        {% endwith %}
+                    </div>
+                </li>
+            </ul>
+        </div><!-- btn -->
+    </div>
+{% endfor %}

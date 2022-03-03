@@ -1,0 +1,7 @@
+{% load cosinnus_tags %}
+
+{% for item in all_files %}
+    {% captureas item_url %}{{ item.get_absolute_url }}{% endcaptureas %}
+    {% captureas download_url %}{{ item.get_download_url }}{% endcaptureas %}
+	{% include 'cosinnus/v2/dashboard/timeline_attached_item.html' with text=item.title subtext=item.creator|full_name icon=item.get_icon url=item_url download_url=download_url %}
+{% endfor %}

@@ -1,0 +1,12 @@
+{% extends "cosinnus/widgets/base_widget.html" %}
+{% load i18n cosinnus_tags %}
+
+
+{% block override_widget_content %}
+    <div class="content-box">
+        <div class="small-calendar w100 regular-space"></div>
+    </div><!-- content-box -->
+    
+    {{ block.super }}
+{% endblock override_widget_content %}
+            

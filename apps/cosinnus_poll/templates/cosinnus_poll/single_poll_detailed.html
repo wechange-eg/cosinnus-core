@@ -1,0 +1,77 @@
+{% load i18n static cosinnus_tags widget_tweaks thumbnail %}
+
+<div class="btn btn-emphasized w100 {% if poll.attached_image %}button-with-title-image{% endif %}">
+    {% if poll.attached_image %}
+        <img src="{% thumbnail poll.attached_image.file SETTINGS.COSINNUS_GROUP_WALLPAPER_MAXIMUM_SIZE_SCALE crop='smart' upscale='smart' %}" />
+        <div></div> <!-- Gradient overlay -->
+    {% endif %}
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left square-date-icon" href="#">
+                <i class="fa fa-bar-chart"></i>
+            </a>
+            <div class="media-body">
+                {% with creator=poll.creator %}
+                    <span class="annotation">{% trans "by" %} <a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a></span>
+                {% endwith %}
+                <a href="{{ poll.get_absolute_url }}">
+                    {{ poll.title }}
+                </a>
+            </div>
+        </li>
+    </ul>
+</div>
+
+    {% include 'cosinnus/media_tags_readonly.html' with object=poll hide_attached=True list_view="noindent" %}
+    
+<div class="btn btn-white w100 {% if not poll.url %}{% if not poll.attached_objects.exists %}large-space{% endif %}{% endif %}">
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#">
+                <i class="fa fa-pencil"></i>
+            </a>
+            <div class="media-body">
+                <div class="textfield">
+                {% if poll.description and poll.description|length > 0 %}
+                    {{ poll.description|textfield }}
+                {% else %}
+                    {% trans "(No description set)" %}
+                {% endif %}
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+{% if poll.attached_objects.exists %}
+    {% cosinnus_render_attached_objects poll %}
+{% endif %}
+
+{# announce winning option #}
+{% if poll.state != 1 %}
+    {% if poll.winning_option %}
+        <legend>{% trans "The Winner is" %}:</legend>
+        {% include 'cosinnus_poll/single_poll_option.html' with option=poll.winning_option %}
+        <legend>{% trans "Available options were" %}:</legend>
+    {% else %}
+        <legend>{% trans "There was no winning option." %}</legend>
+    {% endif %}
+{% endif %}
+
+{% if options %}
+    
+    <div class="large-space"> <!-- options panel -->
+        {% for option in options %}
+            {% include 'cosinnus_poll/single_poll_option.html' with option=option option_counter=forloop.counter %}
+        {% endfor %}
+    </div>
+
+
+{% else %}
+    {% comment %} No options were added {% endcomment %}
+    <!-- {% trans "There are no options for this poll yet!" %} -->
+    {% include 'cosinnus/common/empty_button.html' with message="There are no options for this poll yet!" %}
+{% endif %}
+
+
+

@@ -1,0 +1,52 @@
+{% load i18n cosinnus_tags %}
+
+{% with note=object %}
+	<div class="large-space"> <!-- note-wrapper -->
+	
+	    <div class="app-main">
+	        <div type="button" class="btn btn-emphasized w100">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <a class="pull-left" href="{{ note.creator|profile_url }}">
+	                        {% include "cosinnus/user/user_avatar_image.html" with user=note.creator %}
+						</a>
+	                    <div class="media-body media-body-normalwrap">
+	                        <span class="annotation">
+                                {% include 'cosinnus/group/group_label.html' with group=note.group %}
+                            </span>
+                            
+	                        <strong><a href="{{ note.creator|profile_url }}">{{ note.creator|full_name }}</a></strong> 
+	                        <a class="light-link" target="_blank" href="{{ note.get_absolute_url }}"
+                            ><span class="moment-data-date" data-date="{{ note.created|date:'c' }}" title="{{ note.created|date:'r' }}"></span> <i class="fa fa-external-link"></i>
+                            </a>
+                            {% if note.get_facebook_post_url %}
+	                            <a target="_blank" href="{{ note.get_facebook_post_url }}"
+	                            ><i class="fa fa-facebook-square"></i> 
+	                            <span>{% trans "View on Facebook" %}</span>
+	                            </a>
+                            {% endif %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
+	    
+	    <div class="indented">
+	        {% if note.title and not note.title == '---' %}
+                <p><b>{{ note.title|urlizetrunc:25|url_target_blank }}</b></p>
+            {% endif %}
+	        <div class="textfield">{{ note.text|textfield }}</div>
+	        {% if note.video %}
+	            {% include 'cosinnus/common/embed_video.html' with video_id=note.video_id %}
+	        {% endif %}
+	    </div>
+	    
+	    {% if note.attached_images %}
+	        {% include 'cosinnus/common/attached_images_gallery.html' with object=note max_images=3 %}
+        {% endif %}
+	    
+	    {% include 'cosinnus/media_tags_readonly.html' with object=note list_view="True" hide_visibility_tag="True" %}
+	    
+	</div> <!-- note-wrapper -->
+	
+{% endwith %}

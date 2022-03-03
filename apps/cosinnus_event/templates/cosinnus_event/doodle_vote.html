@@ -1,0 +1,270 @@
+{% extends "cosinnus_event/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block page_title %}
+{% if event.state == 2 %}
+	{% blocktrans with title=event.title %}Vote for {{ title }}{% endblocktrans %}
+{% else %}
+	{% blocktrans with title=event.title %}Archived: {{ title }}{% endblocktrans %}
+{% endif %}
+{{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+  {{ block.super }}
+  <li><a class="active" href="{% group_url 'cosinnus:event:doodle-list' group=group %}">{% trans "Event Polls" %}</a></li>
+  <li class="active">
+    {% if event.state == 2 %}
+		{% blocktrans with title=event.title %}Vote for {{ title }}{% endblocktrans %}
+	{% else %}
+		{% blocktrans with title=event.title %}Archived: {{ title }}{% endblocktrans %}
+	{% endif %}
+  </li>
+{% endblock %}
+
+{% block leftnav %}
+    {% if event.state == 2 %}
+		{% include "cosinnus_event/leftnav.html" with return_to="doodle" %}
+	{% else %}
+		{% include "cosinnus_event/leftnav.html" with return_to="archived_doodle" %}
+	{% endif %}
+{% endblock leftnav %}
+
+{% block content %}
+    
+    <div class="clearfix large-space"> 
+	    <!-- a box with semi transparent background -->
+		<div class="content-box">
+	       
+	        {% include "cosinnus_event/single_event_detailed.html" with event=event hide_control_buttons="True" hide_follow_button=True %}
+	        <div class="regular-space"></div> 
+	          
+            {% if event.state == 1 %}
+                <div class="w100">
+                    <p>{% trans "This event has already been scheduled. Voting is closed." %}</p>
+                </div>
+            {% elif event.state == 3 %}
+                <div class="w100">
+                    <p>{% trans "This event has been canceled. Voting is closed." %}</p>
+                </div>
+            {% elif suggestions_grouped %}
+	            {% if not votes_user_grouped %}
+                    <div class="w100 large-space">
+                        <p>{% trans "Nobody has voted for this event poll yet." %}</p>
+                    </div>
+	            {% endif %}
+	            
+		        <div class="doodle-vote-table">
+		            <!-- width = n*54-4 -->
+		            
+		            <div>
+		                <div></div>
+		                {% for suggestions in suggestions_grouped %}
+				            <div class="doodle-vote-date" style="min-width: {{suggestions|length|multiply:54|subtract:4}}px;" title="{{ suggestions.0.from_date|date:COSINNUS_DJANGO_DATETIME_FORMAT }}">
+			                    &nbsp;{{ suggestions.0.from_date|date:"D" }}<br/>&nbsp;{{ suggestions.0.from_date|date:COSINNUS_DJANGO_DATE_SHORT_CLEAR_FORMAT }}
+			                </div>
+				        {% endfor %}
+		            </div>
+		
+		            <div>
+		                <div></div>
+		                {% for suggestions in suggestions_grouped %}
+		                    {% for suggestion in suggestions %} 
+			                    <div class="doodle-vote-time">
+				                    &nbsp;{{ suggestion.from_date|date:COSINNUS_DJANGO_TIME_FORMAT }}
+				                </div>
+			                {% endfor %}
+		                {% endfor %}
+		            </div>
+		
+		            {% for user, votes in votes_user_grouped.items %}
+		                <div>
+			                <div>
+			                    {% include "cosinnus/user/user_avatar_image.html" with user=votes.0.voter %}
+			                </div>
+			                {% for vote in votes %}
+			                    {% if vote.choice == 2 %}
+			                        <div class="doodle-vote-yes" title="{% trans 'Yes' %}">
+					                    <i class="fa fa-check"></i>
+					                </div>
+			                    {% elif vote.choice == 1 %}
+		                            <div class="doodle-vote-maybe" title="{% trans 'Maybe' %}">
+					                    (<i class="fa fa-check"></i>)
+					                </div>
+		                        {% else %}
+		                            <div class="doodle-vote-no" title="{% trans 'No' %}">
+					                    <i class="fa fa-times"></i>
+					                </div>
+		                        {% endif %}
+			                {% endfor %}
+		                </div>
+		            {% endfor %}
+		
+		            <div>
+		                <div>
+		                    <i class="fa fa-check" title="{% trans 'Yes' %}"></i><br />
+		                    (<i class="fa fa-check" title="{% trans 'Maybe' %}"></i>)<br />
+		                    <i class="fa fa-times" title="{% trans 'No' %}"></i>
+		                </div>
+		                {% for vote_counts in vote_counts_grouped %}
+		                    {% for count in vote_counts %} 
+				                <div>
+				                    {% if count.3 %}<strong>{% endif %}{{ count.2 }}{% if count.3 %}</strong>{% endif %}<br />
+				                    {{ count.1 }}<br />
+				                    {{ count.0 }}
+				                </div>
+				            {% endfor %}
+				        {% endfor %}
+		            </div>
+		            
+		            {% if user|has_write_access:event and event.state == 2 %}
+			            <h2>{% trans "Create an event from one of the suggestions" %}</h2>
+			            <div>
+			                <div></div>
+			                {% for suggestions in suggestions_grouped %}
+		                        {% for suggestion in suggestions %} 
+			                        <div>
+							            <form action="{% group_url 'cosinnus:event:doodle-complete' group=group slug=event.slug suggestion_id=suggestion.pk %}" method="post" class="form-horizontal">
+				                        {% csrf_token %}
+				                        {{ formset.management_form }}
+						                    <button type="submit" class="doodle-vote-eventbutton" title="{% blocktrans %}Set the date to {{ suggestion }}.{% endblocktrans %}">
+	                                            <i class="fa fa-calendar"></i>
+	                                        </button>
+			                            </form>
+                                    </div>
+		                        {% endfor %}
+		                    {% endfor %}
+			            </div>
+		            {% endif %}
+		            
+		            {% if user.is_authenticated and event.state == 2 %}
+			            <h2>{% trans "When do you have time?" %}</h2>
+			            
+			            <!-- width = n*54-4 -->
+			            <div>
+			                <div></div>
+			                {% for suggestions in suggestions_grouped %}
+			                    <div class="doodle-vote-date" style="min-width: {{suggestions|length|multiply:54|subtract:4}}px;" title="{{ suggestions.0.from_date|date:COSINNUS_DJANGO_DATETIME_FORMAT }}">
+			                        &nbsp;{{ suggestions.0.from_date|date:"D" }}<br/>&nbsp;{{ suggestions.0.from_date|date:COSINNUS_DJANGO_DATE_SHORT_CLEAR_FORMAT }}
+			                    </div>
+			                {% endfor %}
+			            </div>
+			
+			            <div>
+			                <div></div>
+			                {% for suggestions in suggestions_grouped %}
+			                    {% for suggestion in suggestions %} 
+			                        <div class="doodle-vote-time">
+			                            &nbsp;{{ suggestion.from_date|date:COSINNUS_DJANGO_TIME_FORMAT }}
+			                        </div>
+			                    {% endfor %}
+			                {% endfor %}
+			            </div>
+			            
+					    <form id="cosinnus_vote_form" action="" method="post" class="form-horizontal">
+					    {% csrf_token %}
+					    {{ formset.management_form }}
+		            
+				            <div class="doodle-vote-inputarea">
+				                
+				                <div>
+				                    {% include "cosinnus/user/user_avatar_image.html" with user=request.user %}
+				                </div>
+				                {% for forms in formset_forms_grouped %}
+				                    {% for form in forms %}
+				                        {% captureas choice_word %}{% if form.choice.value == 2 %}yes{% elif form.choice.value == 1 %}maybe{% else %}no{% endif %}{% endcaptureas %}
+				                        {{ form.suggestion.as_widget }}
+				                        <div class="doodle-vote-{{choice_word}}">
+							                <a href="#" data-doodle-option="yes">{% if form.choice.value == 2 %}<strong>{% endif %}{% trans "Yes" %}{% if form.choice.value == 2 %}</strong>{% endif %}</a>
+							                <a href="#" data-doodle-option="maybe">{% if form.choice.value == 1 %}<strong>{% endif %}{% trans "Maybe" %}{% if form.choice.value == 1 %}</strong>{% endif %}</a>
+							                <a href="#" data-doodle-option="no">{% if form.choice.value == 0 %}<strong>{% endif %}{% trans "No" %}{% if form.choice.value == 0 %}</strong>{% endif %}</a>
+							                <input type="hidden" id="id_{{ form.choice.html_name }}" name="{{ form.choice.html_name }}" value="{{ form.choice.value }}" />
+							            </div>
+			                            
+				                    {% endfor %}
+				                {% endfor %}
+				            </div>
+		                </form>
+	                {% endif %}
+		            
+		        </div><!-- table -->
+		        
+            {% else %}
+                {% comment %} No suggestions were added {% endcomment %}
+                <div class="w100">
+                    <p>{% trans "There are no date suggestions for this event poll yet!" %}</p>
+                </div>
+            {% endif %}
+	            
+	            
+	            
+	
+	    </div><!-- content-box -->
+	
+	    {% if user.is_authenticated and user|has_read_access:event and suggestions_grouped and event.state == 2 %}
+	      <button type="submit" class="btn btn-emphasized" onclick="$('#cosinnus_vote_form').submit(); return false;">
+	        <ul class="media-list">
+	          <li class="media">
+	            <span class="pull-left">
+	              <i class="fa fa-floppy-o"></i>
+	            </span>
+	            <div class="media-body">
+	              {% trans "Vote" %}
+	            </div>
+	          </li>
+	        </ul>
+	      </button>
+	    {% endif %}
+	    
+			
+		{% if user|has_write_access:event %}
+		  {% captureas modal_id %}deleteModal_{{event.slug}}{% endcaptureas %}
+		  <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_id}}">
+		    <ul class="media-list">
+		      <li class="media">
+		        <span class="pull-left">
+		          <i class="fa fa-eraser"></i>
+		        </span>
+		        <div class="media-body">
+		          {% trans "Delete" %}
+		        </div>
+		      </li>
+		    </ul>
+		  </button>
+		  
+		  {% captureas label %}{% blocktrans with title=event.title %}Do you really want to delete unscheduled event „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+		  {% captureas title %}{% trans "Delete unscheduled event" %}{% endcaptureas %}
+		  {% captureas action %}{% group_url 'cosinnus:event:doodle-delete' group=group slug=event.slug%}{% endcaptureas %}
+		
+		  {% include "cosinnus/modal_box.html" with id=modal_id label=label title=title form_action=action %}
+		  
+		  {% if event.state != 4 %}
+			  <button type="button" class="btn btn-emphasized" href="{% group_url "cosinnus:event:doodle-edit" group=group slug=event.slug %}">
+			    <ul class="media-list">
+			      <li class="media">
+			        <span class="pull-left">
+			          <i class="fa fa-pencil"></i>
+			        </span>
+			        <div class="media-body">
+			          {% trans "Edit" %}
+			        </div>
+			      </li>
+			    </ul>
+			  </button>
+		  {% endif %}
+		{% endif %}
+		
+	</div> <!-- buttons and content box -->
+	
+	
+    <div class="white-content">
+        {% trans "You will now receive notifications for comments or when this event poll is changed and whenever somebody casts their vote." as follow_success_message %}
+		{% include 'cosinnus/common/likefollowstar/star_button.html' with object=event %}
+		{% include 'cosinnus/common/likefollowstar/follow_button.html' with object=event success_message=follow_success_message %}
+        {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=event %}
+    </div>
+	
+	{% include 'cosinnus_event/event_comments.html' with event=event full_view="True" no_indent="True" comments_expanded="True" %}
+	
+		
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% load i18n cosinnus_tags %}
+
+
+{% if rows %}
+    {% include 'cosinnus_file/attached_files.html' with all_files=rows no_indent=1 lightbox_context="file_widget" %}
+{% else %}
+    <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline fine-space">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-file"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "There are no files  yet" %}
+                </div>
+            </li>
+        </ul>
+    </div><!-- btn -->
+{% endif %}
+

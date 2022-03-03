@@ -1,0 +1,5 @@
+{% load cosinnus_tags %}
+
+{% for cloud_file in objects %}
+    {% include 'cosinnus_cloud/single_cloud_file.html' with cloud_file=cloud_file %}
+{% endfor %}

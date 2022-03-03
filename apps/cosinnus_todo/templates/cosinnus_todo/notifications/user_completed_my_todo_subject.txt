@@ -1,0 +1,1 @@
+{% load i18n cosinnus_tags %}{% blocktrans %}Task completed: "{{ object_name }}" in {{ team_name }}.{% endblocktrans %}

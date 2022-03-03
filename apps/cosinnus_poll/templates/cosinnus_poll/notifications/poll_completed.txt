@@ -1,0 +1,19 @@
+{% load i18n cosinnus_tags %}{% blocktrans %}Hi {{ receiver_name }},
+
+the poll "{{ object_name }}", was completed in {{ team_name }} by {{ sender_name }}!
+{% endblocktrans %}
+{% if object.winning_option %}
+{% trans "The winning option was:" %}
+
+"{{ object.winning_option.description }}"
+{% else %}
+{% trans "There was no winning option." %}
+{% endif %}
+{% blocktrans with event_date=object.from_date|date:COSINNUS_DJANGO_DATE_FORMAT %}
+You can find the poll by following this link: {{ object_url }}
+
+
+
+(Follow this link to edit your notification preferences: {{ notification_settings_url }} )
+
+Your {{ site_name }} Team.{% endblocktrans %}

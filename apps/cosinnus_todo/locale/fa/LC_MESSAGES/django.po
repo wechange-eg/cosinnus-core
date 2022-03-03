@@ -1,0 +1,755 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 14:56+0200\n"
+"PO-Revision-Date: 2021-05-25 15:32+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+
+msgid "Todos"
+msgstr "کارهای‌برای‌انجام"
+
+msgctxt "the_app"
+msgid "todo"
+msgstr "کارِبرای‌انجام"
+
+msgid "A user created a new todo"
+msgstr "یک کاربر یک کارِبرای‌انجام ساخته است"
+
+#, python-format
+msgid "%(sender_name)s created the todo %(object_name)s"
+msgstr "%(sender_name)sکارِبرای‌انجام %(object_name)s را ساخته"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d todos"
+msgstr "%(sender_name)s %(count)d کارِبرای‌انجام ساخته"
+
+#, python-format
+msgid "%(sender_name)s created a new todo"
+msgstr "%(sender_name)s یک کارِبرای‌انجام تازه ساخته"
+
+#, python-format
+msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "یک کارِبرای‌انجام تازه‌: \"%(object_name)s\" در %(team_name)s ساخته شد."
+
+msgid "A todo was assigned to me"
+msgstr "بک کارِبرای‌انجام به من واگذار شد"
+
+#, python-format
+msgid "%(sender_name)s assigned the todo %(object_name)s to you"
+msgstr "%(sender_name)s کارِبرای‌انجام %(object_name)s را به شما واگذار کرده"
+
+#, python-format
+msgid "%(sender_name)s assigned %(count)d todos to you"
+msgstr "%(sender_name)s %(count)d کارِبرای‌انجام را به شما واگذار کرده"
+
+#, python-format
+msgid "%(sender_name)s assigned a todo to you"
+msgstr "%(sender_name)s یک کارِبرای‌انجام را به شما واگذار کرده"
+
+msgid "A todo I created was completed"
+msgstr "کارِبرای‌انجامی که من ساخته بودم انجام شده"
+
+#, python-format
+msgid "%(sender_name)s completed the todo %(object_name)s"
+msgstr "%(sender_name)s کارِبرای‌انجام %(object_name)s را انجام داده"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d todos"
+msgstr "%(sender_name)s %(count)d کارِبرای‌انجام را انجام داده"
+
+msgid "You created this todo"
+msgstr "شما این کارِبرای‌انجام را ساخته‌اید"
+
+#, python-format
+msgid "%(sender_name)s completed your todo"
+msgstr "%(sender_name)s کارِبرای‌انجام خودتان را انجام داده‌اید"
+
+#, python-format
+msgid "%(sender_name)s completed one of your todos"
+msgstr "%(sender_name)s کارِبرای‌انجام شما را انجام داده‌"
+
+msgid "A user commented on one of your todos"
+msgstr "یک کاربر در مورد یکی از کارهای‌برای‌انجام شما نظری نوشته است"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo %(object_name)s"
+msgstr "%(sender_name)s در مورد این کارِبرای‌انجام شما نظری نوشته است: %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
+msgstr[0] "%(sender_name)s و %(count_minus_one)d نفر دیگر نظراتی در مورد این کارِبرای‌انجام شما نوشته‌اند: %(object_name)s"
+msgstr[1] "%(sender_name)s و %(count_minus_one)d نفر دیگر نظراتی در مورد این کارِبرای‌انجام شما نوشته‌اند: %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo"
+msgstr "%(sender_name)s در مورد کارِبرای‌انجام شما نظری نوشته است"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your todos"
+msgstr "%(sender_name)s در مورد یکی از کارهای‌برای‌انجام شما نظری نوشته است"
+
+msgid "A user commented on a todo you were tagged in"
+msgstr "یک کاربر در مورد یکی از کارهای‌برای‌انجامی که شما در عنوان شده‌اید نظری نوشته است"
+
+#, python-format
+msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgstr "%(sender_name)s در مورد کارِبرای‌انجام %(object_name)s نظری نوشته است"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
+msgstr[0] "%(sender_name)s و %(count_minus_one)d نفر دیگر نظراتی در مورد این کارِبرای‌انجام نوشته‌اند: %(object_name)s"
+msgstr[1] "%(sender_name)s و %(count_minus_one)d نفر دیگر نظراتی در مورد این کارِبرای‌انجام نوشته‌اند: %(object_name)s"
+
+msgid "You were tagged in this todo"
+msgstr "نام شما در این کارِبرای‌انجام عنوان شده"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in"
+msgstr "%(sender_name)s نظری در مورد کارِبرای‌انجامی که شما در آن عنوان شده‌اید نوشته"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s نظری در مورد کارِبرای‌انجامی که شما در گروه %(team_name)s در آن عنوان شده‌اید نوشته"
+
+msgid "A user commented on a todo you were assigned to"
+msgstr "یک کاربر در مورد یکی از کارهای‌برای‌انجامی که به شما واگذارشده نظری نوشته است"
+
+#, python-format
+msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
+msgstr "%(sender_name)s در مورد این کارِبرای‌انجامی که به شما واگذارشده نظری نوشته است: %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
+msgstr[0] "%(sender_name)s و %(count_minus_one)d نفر دیگر در مورد این کارِبرای‌انجامی که به شما واگذارشده نظری نوشته‌اند: %(object_name)s"
+msgstr[1] "%(sender_name)s و %(count_minus_one)d نفر دیگر در مورد این کارِبرای‌انجامی که به شما واگذارشده نظری نوشته‌اند: %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos"
+msgstr "%(sender_name)s در مورد یکی از کارهای‌برای‌انجامی که شما واگذارکرده‌اید نظری نوشته است"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgstr "%(sender_name)s در مورد یکی از کارهای‌برای‌انجامی که شما در گروه %(team_name)s واگذارکرده‌اید نظری نوشته است"
+
+msgid "A user updated a todo you are following"
+msgstr "یک کاربر یک کارِبرای‌انجامی که شما دنبال می‌کنید را به‌روز کرده"
+
+#, python-format
+msgid "%(sender_name)s updated the todo %(object_name)s"
+msgstr "%(sender_name)s کارِبرای‌انجام روبرو را به‌روز کرده: %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
+msgstr[0] "%(sender_name)s و %(count_minus_one)d نفر دیگر کارِبرای‌انجام روبرو را به‌روز کرده‌اند: %(object_name)s"
+msgstr[1] "%(sender_name)s و %(count_minus_one)d نفر دیگر کارِبرای‌انجام روبرو را به‌روز کرده‌اند: %(object_name)s"
+
+msgid "You are following this todo"
+msgstr "شما این کارِبرای‌انجام را دنبال می‌کنید"
+
+#, python-format
+msgid "%(sender_name)s updated a todo you are following"
+msgstr "%(sender_name)s یک کارِبرای‌انجام که شما دنبال می‌کنید را به‌روز کرده"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "کار‌برای‌انجام \"%(object_name)s\" که شما دنبال می‌کنید در گروه %(team_name)s به‌روز شده."
+
+msgid "A user reassigned a todo you are following"
+msgstr "یک کاربر کارِبرای‌انجامی که دنبال می‌کنید را دوباره واگذار کرده"
+
+#, python-format
+msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgstr "%(sender_name)s کارِبرای‌انجام روبرو را دوباره واگذار کرده: %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s reassigned %(count)d todos"
+msgstr "%(sender_name)s %(count)d کارِبرای‌انجام را واگذارکرده"
+
+#, python-format
+msgid "%(sender_name)s reassigned a todo you are following"
+msgstr "%(sender_name)s یک کارِبرای‌انجام که شما دنبال می‌کنید را دوباره واگذار کرده"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
+msgstr "کار‌برای‌انجام \"%(object_name)s\" که شما دنبال می‌کنید در گروه %(team_name)s دوباره واگذارشده."
+
+msgid "A user completed a todo you are following"
+msgstr "یک کاربر کارِبرای‌انجامی که دنبال می‌کنید را انجام داده"
+
+#, python-format
+msgid "%(sender_name)s completed a todo you are following"
+msgstr "%(sender_name)s یک کارِبرای‌انجام که شما دنبال می‌کنید را انجام داده"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "کار‌برای‌انجام \"%(object_name)s\" که شما دنبال می‌کنید در گروه %(team_name)s انجام شده."
+
+msgid "A user commented on a todo you are following"
+msgstr "یک کاربر در مورد یکی از کارهای‌برای‌انجامی که دنبال می‌کنید نظری نوشته است"
+
+#, python-format
+msgid "%(sender_name)s commented on on a todo you are following"
+msgstr "%(sender_name)s نظری در مورد کارِبرای‌انجامی که شما دنبال می‌کنید نوشته"
+
+msgid "My Todos"
+msgstr "کارهای‌برای‌انجام من"
+
+msgid "No todos"
+msgstr "کارِبرای‌انجامی نیست"
+
+msgid "Open"
+msgstr "باز"
+
+msgid "Completed"
+msgstr "انجام‌شده"
+
+msgid "All"
+msgstr "همه"
+
+msgid "Created By"
+msgstr "ساخته‌شده به دست"
+
+msgid "Assigned To"
+msgstr "واگذار شده به"
+
+msgid "Priority"
+msgstr "اولویت"
+
+msgid "Due date"
+msgstr "مهلت انجام"
+
+msgid "Status"
+msgstr "وضعیت"
+
+msgid "Newest Created"
+msgstr "آخرین مورد ساخته‌شده"
+
+msgid "Title"
+msgstr "عنوان"
+
+msgid "Soonest Due"
+msgstr "نزدیک‌ترین مهلت انجام"
+
+msgid "You are not allowed to assign this Todo entry."
+msgstr "شما اجازه ندارید این کارِبرای‌انجام را به کسی واگذار کنید."
+
+msgid "Later"
+msgstr "بعدن"
+
+msgid "Normal"
+msgstr "ساده"
+
+msgid "Important"
+msgstr "ویژه"
+
+msgid "Due by"
+msgstr "مهلت تا"
+
+msgid "Completed on"
+msgstr "انجام‌شده در تاریخ"
+
+msgid "Completed by"
+msgstr "انجام‌شده به‌دست"
+
+msgid "Assigned to"
+msgstr "واگذار شده به"
+
+msgid "Note"
+msgstr ""
+
+msgid "List"
+msgstr "فهرست"
+
+msgid "Todo"
+msgstr "کارِبرای‌انجام"
+
+msgid "Group"
+msgstr "گروه"
+
+msgid "Creator"
+msgstr "سازنده"
+
+msgid "Created"
+msgstr "ساخته‌شده"
+
+msgid "Last modified"
+msgstr "آخرین بار ویرایش شده"
+
+msgid "Text"
+msgstr "نوشته"
+
+msgid "Comment"
+msgstr "نظر"
+
+msgid "Comments"
+msgstr "نظرات"
+
+#, python-format
+msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
+msgstr "کارِبرای‌انجام \"%(todo_name)s\" به %(assignee_name)s واگذارشده"
+
+msgid "Back to"
+msgstr "برگشت به"
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the task \"%(object_name)s\" in %(team_name)s was assigned to you by %(sender_name)s. \n"
+msgstr ""
+"درود %(receiver_name)s\n"
+"\n"
+"مسئولیت \"%(object_name)s\" در گروه %(team_name)s از سوی %(sender_name)s به شما واگذار شده.\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"\n"
+"\n"
+"با دنبال کردن این پیوند می‌توانید آن‌را بیابید: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(این پیوند را دنبال کنید تا اولویت آگاه‌سازی را ویرایش کنید: %(notification_settings_url)s )\n"
+"\n"
+"گروه %(site_name)s شما."
+
+#, python-format
+msgid "Task: \"%(object_name)s\" in %(team_name)s was assigned to you."
+msgstr "مسئولیت: \"%(object_name)s\" در گروه %(team_name)s به شما واگذار شده."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a todo assigned to you in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the todo:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"درود %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s نظری در مورد یک کارِبرای‌انجام که به شما در %(team_name)s واگذار شده نظری نوشته :\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"در مورد کارِبرای‌انجام:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"پیوند را دنبال کنید تا نظر را بخوانید: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(پیوند را دنبال کنید تا اولویت آگاه‌سازی را ویرایش کنید: %(notification_settings_url)s )\n"
+"\n"
+"گروه %(site_name)s شما.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo assigned to you in %(team_name)s."
+msgstr "%(sender_name)s در مورد کارِبرای‌انجامی که به شما در گروه %(team_name)s واگذار شده نظری نوشته."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a todo you were tagged in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the todo:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"درود %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s در مورد یک کارِبرای‌انجام در گروه %(team_name)s که شما در آن عنوان شده‌اید نظری نوشته :\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"در مورد کارِبرای‌انجام:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"پیوند را دنبال کنید تا نظر را بخوانید: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(پیوند را دنبال کنید تا اولویت آگاه‌سازی را ویرایش کنید: %(notification_settings_url)s )\n"
+"\n"
+"گروه %(site_name)s شما.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in %(team_name)s."
+msgstr "%(sender_name)s نظری در مورد کارِبرای‌انجامی که شما در گروه %(team_name)s در آن عنوان شده‌اید نوشته."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a todo you created in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your todo:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"درود %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s نظری در مورد یک کارِبرای‌انجام که شما در %(team_name)s ساخته‌اید نظری نوشته :\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"در مورد کارِبرای‌انجام:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"پیوند را دنبال کنید تا نظر را بخوانید: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(پیوند را دنبال کنید تا اولویت آگاه‌سازی را ویرایش کنید: %(notification_settings_url)s )\n"
+"\n"
+"گروه %(site_name)s شما.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgstr "%(sender_name)s در مورد یکی از کارهای‌برای‌انجام شما در گروه %(team_name)s نظری نوشته است."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new task \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+msgstr ""
+"درود %(receiver_name)s\n"
+"\n"
+"مسئولیت \"%(object_name)s\" در گروه %(team_name)s از سوی %(sender_name)s ساخته شده.\n"
+
+#, python-format
+msgid "A new task: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "یک مسئولیت تازه: \"%(object_name)s\" در گروه %(team_name)s ساخته شده است."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the task \"%(object_name)s\" you created in %(team_name)s was completed by %(sender_name)s. \n"
+msgstr ""
+"درود %(receiver_name)s\n"
+"\n"
+"مسئولیت \"%(object_name)s\" که در گروه %(team_name)s ساخته‌اید از سوی %(sender_name)s انجام شده.\n"
+
+#, python-format
+msgid "Task completed: \"%(object_name)s\" in %(team_name)s."
+msgstr "مسئولیت انجام شده: \"%(object_name)s\" در گروه %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"you were tagged in the task \"%(object_name)s\" in %(team_name)s by %(sender_name)s. \n"
+msgstr ""
+"درود %(receiver_name)s\n"
+"\n"
+"شما در مسئولیت \"%(object_name)s\" در گروه %(team_name)s از سوی %(sender_name)s عنوان شده‌اید.\n"
+
+#, python-format
+msgid "You were tagged in the task \"%(object_name)s\" in %(team_name)s"
+msgstr "شما در مسئولیت \"%(object_name)s\" در گروه %(team_name)s عنوان شده‌اید"
+
+msgid "Not important"
+msgstr "مهم نیست"
+
+msgid "Delete todo"
+msgstr "پاک کردن کارِبرای‌انجام"
+
+msgid "Do you really want to delete this todo?"
+msgstr "آیا واقعن می‌خواهید این کارِبرای‌انجام را پاک کنید؟"
+
+msgid "Not assigned"
+msgstr "به کسی واگذار نشده"
+
+msgid "Following"
+msgstr "دنبال می‌شود"
+
+msgid "Reopen todo"
+msgstr "کارِبرای‌انجام را دوباره باز کنید"
+
+msgid "Close todo"
+msgstr "کارِبرای‌انجام را ببندید"
+
+msgid "Delete"
+msgstr "پاک کن"
+
+msgid "Edit"
+msgstr "ویرایش کن"
+
+msgid "Write comment..."
+msgstr "نظر بنویسید..."
+
+msgid "Post"
+msgstr "بفرست"
+
+msgid "This todo was completed:"
+msgstr "این کارِبرای‌انجام انجام شده:"
+
+msgid "by"
+msgstr "از سوی"
+
+msgid "TodoEntries"
+msgstr ""
+
+msgid "There are no todolists yet."
+msgstr "هیچ فهرست کارِبرای‌انجامی نیست."
+
+msgid "New List Name"
+msgstr "نام فهرست تازه"
+
+msgid "Create"
+msgstr "بساز"
+
+msgid "Create a new Todo"
+msgstr "یک کارِبرای‌انجام تازه بساز"
+
+msgid "Only the owner and assignee of a todo can finish it!"
+msgstr "تنها دارنده و کسی که کار به او واگذار شده می‌توانند آن کارِبرای‌انجام را پایان دهند!"
+
+msgid "Mark as finished"
+msgstr "نشانه‌ی پایان‌یافته بگذارید"
+
+msgid "Move to another Folder"
+msgstr "به یک پوشه‌ی دیگر جابجا کنید"
+
+msgid "Enter the title for this todo"
+msgstr "یک عنوان برای کارِبرای‌انجام وارد کنید"
+
+msgid "There are no todos in this list."
+msgstr "کارِبرای‌انجامی در این فهرست نیست."
+
+msgid "Please select or create a todo list."
+msgstr "لطفن یک فهرست کارهای‌برای‌انجام ایجاد کنید یا برگزینید."
+
+msgid "Add Todo"
+msgstr "افزودن کارِبرای‌انجام"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "یک خطا در یکی از زمینه‌هایی که وارد کرده‌اید هست. لطفن پیش از ذخیره کردن آن را برطرف کنید!"
+
+msgid "Enter a title for the todo."
+msgstr "یک عنوان برای کارِبرای‌انجام وارد کنید."
+
+msgid "Description"
+msgstr "تعریف"
+
+msgid "Enter a description for the todo"
+msgstr "یک تعریف برای کارِبرای‌انجام وارد کنید"
+
+msgid "No date chosen"
+msgstr "هیچ تاریخی گزیده نشده است"
+
+msgid "Choose due date"
+msgstr "یک مهلت انجام بگزینید"
+
+msgid "Save"
+msgstr "ذخیره کن"
+
+msgid "Choose day"
+msgstr "یک روز بگزینید"
+
+msgid "Until when should the task be completed?"
+msgstr "تا چه زمانی این مسئولیت باید انجام شده باشد؟"
+
+msgid "OK"
+msgstr "باشه"
+
+msgid "Todo lists"
+msgstr "فهرست‌های کارهای‌برای‌انجام"
+
+msgid "Cancel"
+msgstr "لغو کن"
+
+msgid "You created a todo"
+msgstr "شما یک کارِبرای‌انجام ساخته‌اید"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a todo"
+msgstr "کارِبرای‌انجام ساخته"
+
+msgid "You have no assigned tasks"
+msgstr "کارِبرای‌انجامی یه شما واگذار نشده"
+
+msgid "Tasks are shown only for logged in users"
+msgstr "مسئولیت‌ها تنها به کاربرانی نمایش‌ داده می‌شوند که به سامانه متصل‌اند"
+
+#, python-format
+msgid "Todo \"%(title)s\" was added successfully."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت افزوده شد."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be added."
+msgstr "کارِبرای‌انجام \"%(title)s\" افزوده نشد."
+
+msgid "You were trying to add a todo to a todolist that does not exist!"
+msgstr "شما کوشیدید یک کارِبرای‌انجام به فهرستی بیافزایید که وجود ندارد!"
+
+#, python-format
+msgid "Todo \"%(title)s\" was edited successfully."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت ویرایش شد."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be edited."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت ویرایش نشد."
+
+#, python-format
+msgid "Todo \"%(title)s\" was deleted successfully."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت پاک شد."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be deleted."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت پاک نشد."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned successfully."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت واگذار شد."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت واگذار نشد."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned to You successfully."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت به شما واگذار شد."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned to You."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت به شما واگذار نشد."
+
+#, python-format
+msgid "Todo \"%(title)s\" was unassigned successfully."
+msgstr "مسئولیت کارِبرای‌انجام \"%(title)s\" با موفقیت بازپس‌گرفته شد."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be unassigned."
+msgstr "مسئولیت کارِبرای‌انجام \"%(title)s\" با موفقیت بازپس‌گرفته نشد."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed successfully."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت انجام شد."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت انجام نشد."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed by You successfully."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت از سوی شما انجام شد."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed by You."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت از سوی شما پایان نیافت."
+
+#, python-format
+msgid "Todo \"%(title)s\" was set to incomplete successfully."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت به عنوان پایان‌نیافته نشانه‌گذاری شد."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be set to incomplete."
+msgstr "کارِبرای‌انجام \"%(title)s\" به عنوان پایان‌نیافته نشانه‌گذاری نشد."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was edited successfully."
+msgstr "فهرست کارهای‌برای‌انجام \"%(title)s\" با موفقیت ویرایش شد."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be edited."
+msgstr "فهرست کارهای‌برای‌انجام \"%(title)s\" ویرایش نشد."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was added successfully."
+msgstr "فهرست کارهای‌برای‌انجام \"%(title)s\" با موفقیت افزوده شد."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be added."
+msgstr "فهرست کارهای‌برای‌انجام \"%(title)s\" افزوده نشد."
+
+msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
+msgstr "شما نمی‌توانید این پوشه را پاک کنید چراکه شما مجوز پاک کردن یک یا چند مورد در آن را ندارید!"
+
+msgid "Your comment was added successfully."
+msgstr "نظر شما با موفقیت افزوده شد."
+
+msgid "Your comment was deleted successfully."
+msgstr "نظر شما با موفقیت پاک شد."

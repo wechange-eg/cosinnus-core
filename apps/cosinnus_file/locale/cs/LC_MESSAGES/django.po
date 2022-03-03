@@ -1,0 +1,339 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:20+0200\n"
+"PO-Revision-Date: 2021-03-11 13:02+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+"X-Generator: Poedit 2.4.2\n"
+
+msgid "Files"
+msgstr "Soubory"
+
+msgctxt "the_app"
+msgid "file"
+msgstr "soubor"
+
+msgid "A user uploaded a new file"
+msgstr "Uživatel nahrál nový soubor"
+
+#, python-format
+msgid "%(sender_name)s uploaded the file %(object_name)s"
+msgstr "%(sender_name)s nahrál/a soubor %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s uploaded %(count)d files"
+msgstr "%(sender_name)s nahrál/a %(count)d souborů"
+
+#, python-format
+msgid "%(sender_name)s created a new file"
+msgstr "%(sender_name)s vytvořil/a nový soubor"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "V %(team_name)s byl vytvořen nový soubor: \"%(object_name)s\"."
+
+msgid "A user uploaded a new file in a team you are following"
+msgstr "Uživatel vytvořil nový soubor v týmu, který sledujete"
+
+#, python-format
+msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s vytvořil/a nový soubor v %(team_name)s (který sledujete)"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Nový soubor: \"%(object_name)s\" byl vytvořen v %(team_name)s (který sledujete)."
+
+msgid "Latest Files"
+msgstr "Nejnovější soubory"
+
+msgid "No files"
+msgstr "Žádné soubory"
+
+msgid "Pictures"
+msgstr "Obrázky"
+
+msgid "Documents"
+msgstr "Dokumenty"
+
+msgid "Audio Files"
+msgstr "Audio soubory"
+
+msgid "Videos"
+msgstr "Videa"
+
+msgid "Created By"
+msgstr "Vytvořil/a"
+
+msgid "File Type"
+msgstr "Typ souboru"
+
+msgid "File Name"
+msgstr "Název souboru"
+
+msgid "File Name (descending)"
+msgstr "Název souboru (klesající řazení)"
+
+msgid "Newest Created"
+msgstr "Nejnovější vytvořené"
+
+msgid "Smallest Files"
+msgstr "Nejmenší soubory"
+
+msgid "Largest Files"
+msgstr "Největší soubory"
+
+msgid "The given URL does not seem to be valid."
+msgstr "Zdá se, že zadaná adresa URL není platná."
+
+msgid "Must supply either a URL or File"
+msgstr "Musí se zadat adresa URL nebo soubor"
+
+msgid "Note"
+msgstr "Poznámka"
+
+msgid "File"
+msgstr "Soubor"
+
+msgid "Is URL Link"
+msgstr "Je odkaz URL"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Path"
+msgstr "Cesta"
+
+msgid "Uploaded by"
+msgstr "Nahrál/a"
+
+msgid "Uploaded on"
+msgstr "Nahráno"
+
+msgid "No files selected."
+msgstr "Nejsou vybrány žádné soubory."
+
+msgctxt "special_folder_type"
+msgid "Attachments"
+msgstr "Přílohy"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "V jednom z polí, která jste zadali, došlo k chybě. Před uložením to prosím opravte!"
+
+msgid "The URL you have entered does not seem to be valid!"
+msgstr "Zdá se, že URL, které jste zadali, není platné!"
+
+msgid "URL Link"
+msgstr "Odkaz URL"
+
+msgid "Paste or type the link's URL here"
+msgstr "Sem vložte nebo zadejte adresu URL odkazu"
+
+msgid "Title"
+msgstr "Název"
+
+msgid "Description"
+msgstr "Popis"
+
+msgid "Preview"
+msgstr "Náhled"
+
+msgid "Original filename"
+msgstr "Původní název souboru"
+
+msgid "Save"
+msgstr "Uložit"
+
+msgid "Cancel"
+msgstr "Zrušit"
+
+msgid "Show detailed steps"
+msgstr "Zobrazit podrobné kroky"
+
+msgid "Move your files to the Cloud"
+msgstr "Přesunout soubory do cloudu"
+
+msgid "Delete"
+msgstr "Smazat"
+
+msgid "Move"
+msgstr "Přesunout"
+
+msgid "Download"
+msgstr "Stáhnout"
+
+msgid "Download this folder"
+msgstr "Stáhnout tuto složku"
+
+msgid "Add URL link"
+msgstr "Přidat odkaz URL"
+
+msgid "No files have been uploaded yet."
+msgstr "Zatím nebyly nahrány žádné soubory."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new file \"%(object_name)s\" in %(team_name)s was uploaded by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Ahoj %(receiver_name)s,\n"
+"\n"
+"nový soubor \"%(object_name)s\" v %(team_name)s byl nahrán uživatelem %(sender_name)s.\n"
+"\n"
+"Najdete jej kliknutím na tento odkaz: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Chcete-li upravit předvolby oznámení, použijte tento odkaz: %(notification_settings_url)s )\n"
+"\n"
+"Váš tým %(site_name)s."
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was uploaded in %(team_name)s."
+msgstr "Do %(team_name)s byl nahrán nový soubor: \"%(object_name)s\"."
+
+msgid "Move to another Folder"
+msgstr "Přesunout do jiné složky"
+
+msgid "Link to this Image"
+msgstr "Odkaz na tento obrázek"
+
+msgid "by"
+msgstr "podle"
+
+msgid "Created"
+msgstr "Vytvořeno"
+
+msgid "Edit"
+msgstr "Upravit"
+
+#, python-format
+msgid "Do you really want to delete file „%(title)s“?"
+msgstr "Opravdu chcete smazat soubor \"%(title)s\"?"
+
+msgid "Delete file"
+msgstr "Smazat soubor"
+
+msgid "Close"
+msgstr "Zavřít"
+
+msgid "To move your files to the Cloud, follow these steps:"
+msgstr "Chcete-li přesunout soubory do cloudu, postupujte takto:"
+
+msgid "Navigate to the folder you wish to move to the Cloud, or to the root folder of the Files app if you wish to move all of the files"
+msgstr "Přejděte do složky, kterou chcete přesunout do cloudu, nebo do kořenové složky aplikace Soubory, pokud chcete přesunout všechny soubory"
+
+msgid "Root folder"
+msgstr "Kořenová složka"
+
+#, python-format
+msgid "Click \"%(download_label)s\" to download the file archive"
+msgstr "Kliknutím na \"%(download_label)s\" stáhnete archiv souborů"
+
+msgid "Unzip the file archive to a local folder on your hard drive"
+msgstr "Rozbalte archiv souborů do místní složky na pevném disku"
+
+#, python-format
+msgid "Open the Cloud folder for \"%(group_name)s\":"
+msgstr "Otevřete cloudovou složku pro \"%(group_name)s\":"
+
+msgid "Cloud app"
+msgstr "Cloudová aplikace"
+
+msgid "Drag & drop the entire content of the unzipped folder from your local hard drive to the Cloud folder"
+msgstr "Přetáhněte celý obsah rozbalené složky z místního pevného disku do složky Cloud"
+
+#, python-format
+msgid "Your files will now upload to the Cloud and can be accessed by all members of \"%(group_name)s\". Your files will remain here in the Files app as well. If you are satisfied with how they look in the Cloud, you may delete them here."
+msgstr "Vaše soubory se nyní nahrají do cloudu a mají k nim přístup všichni členové skupiny \"%(group_name)s\". Vaše soubory zde zůstanou také v aplikaci Soubory. Pokud jste spokojeni s tím, jak vypadají v cloudu, můžete je zde smazat."
+
+msgid "If you wish to access your files from multiple devices, you may want to consider moving them to the Cloud. The process is easy, and you can still keep your files here until you are satisfied with the Cloud."
+msgstr "Pokud si přejete přistupovat ke svým souborům z více zařízení, můžete zvážit jejich přesun do cloudu. Proces je snadný a své soubory si zde můžete ponechat, dokud budete spokojeni s cloudem."
+
+msgid "You uploaded a file"
+msgstr "Nahráli jste soubor"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "uploaded a file"
+msgstr "nahrál/a soubor"
+
+msgid "More"
+msgstr "Další"
+
+msgid "Latest files"
+msgstr "Nejnovější soubory"
+
+msgid "There are no files  yet"
+msgstr "Zatím nejsou žádné soubory"
+
+#, python-format
+msgid "Folder \"%(title)s\" was created successfully."
+msgstr "Složka \"%(title)s\" byla úspěšně vytvořena."
+
+msgid "File does not exist or you are not allowed to delete it."
+msgstr "Soubor neexistuje nebo jej nesmíte smazat."
+
+#, python-format
+msgid "A problem occurred during export. The following file is missing: %(filename)s."
+msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
+msgstr[0] "Během exportu došlo k problému. Chybí následující soubor: %(filename)s."
+msgstr[1] "Během exportu došlo k problému. Chybí následující soubory: %(filename)s."
+msgstr[2] "Během exportu došlo k problému. Chybí následující soubory: %(filename)s."
+msgstr[3] "Během exportu došlo k problému. Chybí následující soubory: %(filename)s."
+
+msgid "Invalid request."
+msgstr "Neplatný požadavek."
+
+#, python-format
+msgid "File \"%(title)s\" was updated successfully."
+msgstr "Soubor \"%(title)s\" byl úspěšně aktualizován."
+
+#, python-format
+msgid "File \"%(title)s\" could not be updated."
+msgstr "Soubor \"%(title)s\" nelze aktualizovat."
+
+msgid "Downloading failed, the target object was not a folder!"
+msgstr "Stahování se nezdařilo, cílovým objektem nebyla složka!"
+
+msgid "Canceled the download because there seem to be no files in this folder."
+msgstr "Stahování bylo zrušeno, protože se zdá, že v této složce nejsou žádné soubory."
+
+msgid "Internal Error: Group not Found"
+msgstr "Interní chyba: Skupina nenalezena"
+
+msgid "Permission for upload denied"
+msgstr "Povolení pro nahrání odmítnuto"
+
+msgid "The uploaded file was invalid."
+msgstr "Nahraný soubor byl neplatný."
+
+#, python-format
+msgid "%(count)d File was added successfully."
+msgid_plural "%(count)d Files were added successfully."
+msgstr[0] "%(count)d soubor byl úspěšně přidán."
+msgstr[1] "%(count)d soubory byly úspěšně přidány."
+msgstr[2] "%(count)d soubory byly úspěšně přidány."
+msgstr[3] "%(count)d souborů byly úspěšně přidáno."
+
+msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
+msgstr "Soubor, který jste nahrál, byl příliš velký nebo pro tento typ souboru nebylo povoleno nahrání!"

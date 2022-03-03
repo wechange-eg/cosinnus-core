@@ -1,0 +1,56 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-12 13:19+0200\n"
+"PO-Revision-Date: 2021-05-24 17:02+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.2.1\n"
+
+msgid "Cloud"
+msgstr "اَبر"
+
+msgctxt "the_app"
+msgid "cloud"
+msgstr "اَبر"
+
+msgid "Latest Cloud files"
+msgstr "آخرین پوشه‌های اَبری"
+
+msgid "No cloud files yet"
+msgstr "هنوز پوشه‌ای توی اَبر نیست"
+
+msgid "Path"
+msgstr "مسیر"
+
+msgid "URL"
+msgstr ""
+
+msgid "Linked Cloud File"
+msgstr "پرونده‌ی ابری پیوندداده‌شده"
+
+msgid "Linked Cloud Files"
+msgstr "پرونده‌های ابری پیوندداده‌شده"
+
+msgid "Cloud Stub"
+msgstr ""
+
+msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
+msgstr ""
+
+msgid "There are no cloud files yet"
+msgstr "هنوز پوشه‌ای توی اَبر نیست"
+
+msgid "Cloud Files"
+msgstr "پرونده‌های اَبری"

@@ -1,0 +1,27 @@
+{% extends "cosinnus_cloud/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks thumbnail %}
+
+{% block page_title %}
+    {% trans "Cloud" %} {{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li><a class="active" href="{% group_url 'cosinnus:cloud:stub' group=group %}">{% trans "Cloud Stub" %}</a></li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus_cloud/leftnav.html" %}
+{% endblock leftnav %}
+
+{% block content %}
+
+	<!-- a box with semi transparent background -->
+	<div class="content-box">
+	
+        <iframe src="{{ iframe_url }}" width="100%" height="800px" />
+	
+	</div><!-- content-box -->
+	
+    
+{% endblock content %}

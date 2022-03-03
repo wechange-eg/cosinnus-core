@@ -1,0 +1,268 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 14:51+0200\n"
+"PO-Revision-Date: 2020-04-01 12:39+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+
+msgid "The following Pads were re-initialized:"
+msgstr "Վերահաստատվել են հետևյալ Պահոցները:"
+
+msgid "Reinit Pads (do not use if you don't know what this is!)"
+msgstr "Reinit Pads (մի օգտագործեք, եթե չգիտեք, թե սա ինչ է):"
+
+msgid "Etherpads"
+msgstr "Etherpads"
+
+msgctxt "the_app"
+msgid "etherpad"
+msgstr "etherpad"
+
+msgid "A user created a new etherpad"
+msgstr "Օգտատերը ստեղծեց նոր etherpad \"բաց կոդով առցանց խմբագիր\""
+
+#, python-format
+msgid "%(sender_name)s created the pad %(object_name)s"
+msgstr "%(sender_name)s-ը ստեղծել է %(object_name)s պահոց"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d pads"
+msgstr "%(sender_name)s-ը ստեղծել է %(count)d պահոց"
+
+#, python-format
+msgid "%(sender_name)s created a new etherpad"
+msgstr "%(sender_name)s-ը ստեղծել է նոր etherpad"
+
+#, python-format
+msgid "A new etherpad: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Նոր etherpad: \"%(object_name)s\"-ը ստեղծվել է %(team_name)s -ում."
+
+msgid "A user created a new etherpad in a team you are following"
+msgstr "Օգտատերը ստեղծել է նոր etherpad այն թիմում, որին հետևում եք"
+
+#, python-format
+msgid "%(sender_name)s created a new etherpad in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s ստեղծել է նոր etherpad %(team_name)s -ում (որին դուք հետևում եք)"
+
+#, python-format
+msgid "A new etherpad: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Նոր etherpad: \"%(object_name)s\" ստեղծվել է %(team_name)s-ում (որին դուք հետևում եք)"
+
+msgid "Last accessed Etherpads"
+msgstr "Վերջին մուտք արված Etherpads-երը"
+
+msgid "No etherpads"
+msgstr "Ոչ մի etherpads-եր"
+
+msgid "Created By"
+msgstr "Ստեղծվել է ․․ կողմից"
+
+msgid "Type"
+msgstr "Տիպ"
+
+msgid "Etherpad"
+msgstr "Etherpad \"բաց կոդով առցանց խմբագիր\""
+
+msgid "Ethercalc"
+msgstr "Ethercalc"
+
+msgid "Last accessed"
+msgstr "Վերջին անգամ մուտք արված"
+
+msgid "Newest Pads"
+msgstr "Նորագույն Պահոցերը"
+
+msgid "Title"
+msgstr "Վերնագիր"
+
+msgid "Description"
+msgstr "Նկարագրություն"
+
+msgid "Pad Type"
+msgstr "Պահոցի Տեսակը"
+
+msgid "Ethercalcs"
+msgstr "Ethercalcs"
+
+#, fuzzy
+#| msgid "Pads"
+msgid "Pad"
+msgstr "Պահոցներ"
+
+msgid "This pad can no longer be edited because its creator has deleted their account."
+msgstr "Այս պահոցը այլևս հնարավոր չէ խմբագրել, քանի որ դրա ստեղծողը ջնջել է իր անձնական էջը."
+
+msgid "by"
+msgstr "․․․կողմից"
+
+msgid "Edit"
+msgstr "Խմբագրել"
+
+msgid "Settings"
+msgstr "Կարգավորումներ"
+
+msgid "Delete"
+msgstr "Ջնջել"
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(pad)s“?"
+msgstr "Ցանկանու՞մ եք արդյոք ջնջել „%(pad)s“ etherpad- ը?"
+
+msgid "Delete Etherpad"
+msgstr "Ջնջել Etherpad- ը"
+
+msgid "The document can not be accessed because the etherpad server could not be reached. Please contact an administrator!"
+msgstr "Փաստաթուղթը հասանելի չէ, քանի որ հնարավոր չէր կապվե Etherpad-ի սերվերին: Խնդրում ենք դիմել ադմինիստրատորին!"
+
+msgid "This document is empty"
+msgstr "Այս փաստաթուղթը դատարկ է"
+
+msgid "Pads"
+msgstr "Պահոցներ"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "Ձեր մուտքագրած դաշտերից մեկում առկա է սխալ: Խնդրում ենք ուղղել այն նախքան պահպանելը!"
+
+msgid "Enter a title for the Pad."
+msgstr "Մուտքագրեք վերնագիր Պահոցի համար."
+
+msgid "Save"
+msgstr "Պահպանել"
+
+msgid "Move"
+msgstr "Տեղափոխել"
+
+msgid "Enter the title for a new Document or Table."
+msgstr "Մուտքագրեք վերնագիր նոր փաստաթղթի կամ աղյուսակի համար."
+
+msgid "Enter the title for a new Document."
+msgstr "Մուտքագրեք վերնագիր նոր փաստաթղթի համար."
+
+msgid "Create Etherpad"
+msgstr "Ստեղծել Etherpad"
+
+msgid "Create Ethercalc"
+msgstr "Ստեղծել Ethercalc"
+
+msgid "Move to another Folder"
+msgstr "Տեղափոխել ուրիշ թղթապանակ"
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(title)s“?"
+msgstr "Ցանկանու՞մ եք արդյոք ջնջել „%(title)s“ Etherpad- ը?"
+
+msgid "No etherpads have been created yet."
+msgstr "Դեռևս ոչ մի etherpad չի ստեղծվել."
+
+msgid "Fullscreen"
+msgstr "Ամբողջ էկրանով"
+
+msgid "Leave Fullscreen"
+msgstr "Փոքրացնել էկրանը"
+
+msgid "Back"
+msgstr "Հետ"
+
+msgid "Help and Assistance for this page"
+msgstr "Օգնություն և Աջակցություն այս էջի համար"
+
+msgid "Help"
+msgstr "Օգնություն"
+
+msgid "Download CSV"
+msgstr "Ներբեռնել CSV"
+
+msgid "Download Excel"
+msgstr "Ներբեռնել Excel"
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Ողջեւյն %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s -ը ստեղծել է \"%(object_name)s\" նոր etherpad  %(team_name)s-ում։ \n"
+"\n"
+"Դուք կարող եք տեսնել այն ՝ անցնելով այս հղումով: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Անցեք այս հղումով ՝ ձեր ծանուցման նախասիրությունները խմբագրելու համար. %(notification_settings_url)s )\n"
+"\n"
+"Ձեր %(site_name)s թիմ."
+
+msgid "You created a pad"
+msgstr "Դուք ստեղծել եք պահոց"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a Pad"
+msgstr "ստեղցել է պահոց"
+
+msgid "There are no etherpads yet"
+msgstr "Դեռևս Etherpads-եր չկան"
+
+#, python-format
+msgid "Etherpad \"%(title)s\" was edited successfully."
+msgstr "\"%(title)s\" Etherpad-ը հաջողությամբ խմբագրվել է."
+
+#, python-format
+msgid "Etherpad \"%(title)s\" could not be edited."
+msgstr "\"%(title)s\" Etherpad-ը հնարավոր չէ խմբագրել."
+
+#, python-format
+msgid "Etherpad \"%(title)s\" was added successfully."
+msgstr "\"%(title)s\" Etherpad-ը հաջողությամբ ավելացվել է."
+
+#, python-format
+msgid "Etherpad \"%(title)s\" could not be added."
+msgstr "\"%(title)s\" Etherpad-ը հնարավոր չէ ավելացնել."
+
+#, python-format
+msgid "Folder \"%(title)s\" was created successfully."
+msgstr "\"%(title)s\" Etherpad-ը հաջողությամբ ստեղծվել է."
+
+#, python-format
+msgid "Etherpad with name \"%(name)s\" already exists on pad server. Please use another name."
+msgstr "\"%(name)s\" անունով Etherpad արդեն գոյություն ունի պահոցի սերվերում: Խնդրում ենք օգտագործել մեկ այլ անուն."
+
+msgid "The document could not be created because the etherpad service is misconfigured. Please contact an administrator!"
+msgstr "Փաստաթուղթը չի կարող ստեղծվել, քանի որ etherpad-ի ծառայությունը սխալմամբ ձևափոխվել է: Խնդրում ենք դիմել ադմինիստրատորին!"
+
+msgid "The document could not be created because the etherpad server could not be reached. Please contact an administrator!"
+msgstr "Փաստաթուղթը չի ստեղծվել, քանի որ հնարավոր չէ միանալ Etherpad-ի սերվերին: Խնդրում ենք դիմել ադմինիստրատորին!"
+
+#, python-format
+msgid "Pad has been archived as Document: <a class=\"alert-link\" href=\"%(href)s\">%(title)s</a>"
+msgstr "Պահոցըը արխիվացվել է որպես Փաստաթուղթ: <a class=\"alert-link\" href=\"%(href)s\">%(title)s</a>"
+
+#, python-format
+msgid "Pad has been archived as File entry: <a class=\"alert-link\" href=\"%(href)s\">%(title)s</a>"
+msgstr "Պահոցը արխիվացվել է որպես ֆայլի մուտքագրում: <a class=\"alert-link\" href=\"%(href)s\">%(title)s</a>"
+
+#~ msgid "New etherpad by %(sender_name)s"
+#~ msgstr "Նոր etherpad %(sender_name)s -ի կողմից"
+
+#~ msgid "New etherpad by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Նոր etherpad %(sender_name)s -ից %(team_name)s -ում (որին դուք հետևում եք)"

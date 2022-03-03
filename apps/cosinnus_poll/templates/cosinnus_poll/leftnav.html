@@ -1,0 +1,72 @@
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% group_url 'cosinnus:poll:list' group=group as poll_list_page %}
+{% group_url 'cosinnus:poll:list_past' group=group as poll_list_past_page %}
+
+
+{% if return_to == "polls" %}
+
+    <button type="button" class="btn w100 btn-emphasized" href="{% group_url 'cosinnus:poll:list' group=group %}{% add_current_params %}">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left">
+                    <i class="fa fa-reply"></i>
+                </span>
+                <span class="pull-right"></span><!-- only block width -->
+                <div class="media-body">
+                    {% trans "Back to Polls" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    
+{% else %} {# Poll list view #}
+    
+    <button type="button" class="btn w100 btn-{% if request.path == poll_list_page or poll and poll.state < 3 %}extra-{% endif %}emphasized fine-space" href="{{ poll_list_page }}{% add_current_params %}">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left">
+                    {% if running_polls_count %}
+                        {{ running_polls_count }}
+                    {% else %}
+                        <i class="fa fa-bar-chart"></i>
+                    {% endif %}
+                </span>
+                {% if request.path == poll_list_page or poll and poll.state < 3 %}
+                    <span class="pull-right">
+                        <i class="fa fa-caret-right"></i>
+                    </span>
+                {% endif %}
+                <div class="media-body">
+                    {% trans "Polls" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    
+    <button type="button" class="btn w100 btn-{% if request.path == poll_list_past_page or poll and poll.state == 3 %}extra-{% endif %}emphasized" href="{{ poll_list_past_page }}{% add_current_params %}">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left">
+                    {% comment %}  
+                        {% if past_polls_count or past_polls_count%}
+                            {{ past_polls_count }}
+                        {% else %}
+                            <i class="fa fa-bar-chart"></i>
+                        {% endif %}
+                    {% endcomment %}
+                    <i class="fa fa-bar-chart"></i>
+                </span>
+                <span class="pull-right">
+                    {% if request.path == poll_list_past_page or poll and poll.state == 3 %}
+                        <i class="fa fa-caret-right"></i>
+                    {% endif %}
+                </span>
+                <div class="media-body">
+                    {% trans "Past Polls" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    
+{% endif %}

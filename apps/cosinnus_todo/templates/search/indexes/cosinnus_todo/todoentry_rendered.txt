@@ -1,0 +1,1 @@
+{% include 'cosinnus_todo/single_todo.html' with object=object %}

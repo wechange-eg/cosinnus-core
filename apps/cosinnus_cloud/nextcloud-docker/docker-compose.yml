@@ -1,0 +1,79 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:12-alpine
+    restart: always
+    volumes:
+      - db:/var/lib/postgresql/data
+    env_file:
+      - db.env
+
+  app:
+    image: nextcloud:18-fpm-alpine
+    restart: always
+    volumes:
+      - nextcloud:/var/www/html
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_DB=nextcloud
+      - NEXTCLOUD_ADMIN_USER=admin
+      - NEXTCLOUD_ADMIN_PASSWORD=admin
+      - NEXTCLOUD_TRUSTED_DOMAINS=wechange-dev
+      - NEXTCLOUD_TABLE_PREFIX=
+    env_file:
+      - db.env
+    depends_on:
+      - db
+    networks:
+      - default
+    extra_hosts:
+      - "wechange-dev:192.168.123.1"
+
+  web:
+    build: 
+      context: ./web
+    restart: always
+    volumes:
+      - nextcloud:/var/www/html:ro
+    depends_on:
+      - app
+    environment:
+      - VIRTUAL_HOST=wechange-dev
+    networks:
+      default:
+
+  onlyoffice:
+    image: onlyoffice/documentserver
+    stdin_open: true
+    tty: true
+    restart: always
+    volumes:
+      - oo_data:/var/www/onlyoffice/Data
+    extra_hosts:
+      - "wechange-dev:192.168.123.1"
+    
+  proxy:
+    build: ./proxy
+    restart: always
+    volumes:
+      - vhost.d:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    ports:
+      - "8080:80"
+      - "8443:443"
+
+volumes:
+  db:
+  nextcloud:
+  html:
+  vhost.d:
+  oo_data:
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.123.0/24

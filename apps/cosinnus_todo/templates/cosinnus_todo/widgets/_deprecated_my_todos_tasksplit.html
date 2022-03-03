@@ -1,0 +1,80 @@
+{% load i18n static %}
+{% if grouped_tasks %}
+    {% for task, subtasks in grouped_tasks.items %}
+        {% with group=subtasks.0.group todolist=subtasks.0.todolist %}
+            <div type="button" href="{{ todolist.get_absolute_url }}" class="btn btn-emphasized dashboard-appwidget-contentline">
+                <ul class="media-list">
+                    <li class="media">
+                        <span class="pull-left square-date-icon" href="{{ todolist.get_absolute_url }}">
+                            {% with subtasks|last as last_task %}
+                                <div>{% if last_task.more_field %}{{ last_task.count_total }}{% else %}{{ subtasks|length }}{% endif %}</div>
+                                <div>{% trans "Tasks" %}</div>
+                            {% endwith %}
+                        </span>
+                        <span class="pull-right fine-space" href="{{ todolist.get_absolute_url }}">
+                            <i class="fa fa-tasks"></i>
+                        </span>
+                        <div class="media-body fine-space">
+                            <span href="{{ todolist.get_absolute_url }}">{{ todolist.title }}</span>
+                            <div class="group-annotation">
+                                <span href="{{ group.get_absolute_url }}">
+                                    <i class="fa fa-users"></i>
+                                    {{ group }}
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- btn -->
+            
+            {% for subtask in subtasks %}
+                {% if subtask.more_field %}
+                    <div type="button" href="{{ todolist.get_absolute_url }}" class="btn btn-emphasized dashboard-appwidget-contentline-indented ">
+                        <ul class="media-list fine-space">
+                            <li class="media">
+                                <span class="pull-left" href="{{ todolist.get_absolute_url }}">
+                                    …
+                                </span>
+    
+                                <div class="media-body">
+                                    <span href="{{ todolist.get_absolute_url }}">{{ subtask.count }} {% trans "more Tasks" %}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div><!-- btn -->
+                {% else %}
+                    <div type="button" href="{{ subtask.get_absolute_url }}" class="btn btn-emphasized dashboard-appwidget-contentline-indented ">
+                        <ul class="media-list fine-space">
+                            <li class="media">
+                                <a class="pull-left" href="{{ subtask.get_absolute_url }}">
+                                   {% include "cosinnus/user/user_avatar_image.html" with user=subtask.assigned_to %}
+                                </a>
+                                <div class="media-body">
+                                    <a href="{{ subtask.get_absolute_url }}">{{ subtask.title }}</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div><!-- btn -->
+                {% endif %}
+            {% endfor %}
+        
+        {% endwith %}
+    {% endfor %}
+{% else %}
+    <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline fine-space">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left">
+                    <i class="fa fa-tasks"></i>
+                </span>
+                <div class="media-body">
+                    {% if user.is_authenticated %}
+                        {% trans "You have no assigned tasks" %}
+                    {% else %}
+                        {% trans "Tasks are shown only for logged in users" %}
+                    {% endif %}
+                </div>
+            </li>
+        </ul>
+    </div><!-- btn -->
+{% endif %}

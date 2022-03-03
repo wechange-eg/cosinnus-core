@@ -1,0 +1,1295 @@
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-24 11:06+0100\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Restart BBB rooms"
+msgstr "Επανεκκίνηση δωματίων BBB"
+
+msgid "Events"
+msgstr "Εκδηλώσεις"
+
+msgctxt "the_app"
+msgid "event"
+msgstr "εκδήλωση"
+
+msgid "A user created a new event"
+msgstr "Ένας χρήστης δημιούργησε μια νέα εκδήλωση"
+
+#, python-format
+msgid "%(sender_name)s created the event %(object_name)s"
+msgstr "Ο/η %(sender_name)s δημιούργησε την εκδήλωση %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d events"
+msgstr "Ο/η %(sender_name)s δημιούργησε %(count)d εκδηλώσεις"
+
+#, python-format
+msgid "%(sender_name)s created a new event"
+msgstr "Ο/η %(sender_name)s δημιούργησε μια νέα εκδήλωση"
+
+#, python-format
+msgid "A new event: \"%(object_name)s\" was announced in %(team_name)s."
+msgstr "Μια νέα εκδήλωση \"%(object_name)s\" ανακοινώθηκε σε %(team_name)s."
+
+msgid "A user created a new event poll"
+msgstr "Ένας χρήστης δημιούργησε μια νέα δημοσκόπηση για εκδήλωση"
+
+#, python-format
+msgid "%(sender_name)s created the event poll %(object_name)s"
+msgstr "Ο/η %(sender_name)s δημιούργησε τη δημοσκόπηση για εκδήλωση %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d event polls"
+msgstr "Ο/η %(sender_name)s δημιούργησε %(count)d δημοσκοπήσεις για εκδήλωση"
+
+#, python-format
+msgid "%(sender_name)s created a new event poll"
+msgstr "Ο/η %(sender_name)s δημιούργησε μια νέα δημοσκόπηση για εκδήλωση"
+
+#, python-format
+msgid "A new event poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Μια νέα δημοσκόπηση για εκδήλωση: \"%(object_name)s\" δημιουργήθηκε σε %(team_name)s."
+
+msgid "A user commented on one of your events"
+msgstr "Ένας χρήστης σχολίασε μία από τις εκδηλώσεις σας"
+
+#, python-format
+msgid "%(sender_name)s commented on your event %(object_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε την εκδήλωση %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your event %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your event %(object_name)s"
+msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε την εκδήλωση %(object_name)s"
+msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν την εκδήλωση %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your event"
+msgstr "Ο/η %(sender_name)s σχολίασε την εκδήλωσή σας"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your events"
+msgstr "Ο/η %(sender_name)s σχολίασε μία από τις εκδηλώσεις σας"
+
+msgid "A user commented on a event you were tagged in"
+msgstr "Ένας χρήστης σχολίασε μια εκδήλωση στην οποία προστεθήκατε με ετικέτα"
+
+#, python-format
+msgid "%(sender_name)s commented on the event %(object_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε την εκδήλωση %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the event %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the event %(object_name)s"
+msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε την εκδήλωση %(object_name)s"
+msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν την εκδήλωση %(object_name)s"
+
+msgid "You were tagged in this event"
+msgstr "Προστεθήκατε με ετικέτα σε αυτή την εκδήλωση"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you were tagged in"
+msgstr "Ο/η %(sender_name)s σχολίασε την εκδήλωση στην οποία προστεθήκατε με ετικέτα"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you were tagged in in %(team_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε την εκδήλωση στην οποία προστεθήκατε με ετικέτα σε %(team_name)s"
+
+msgid "A user commented on an event you voted in"
+msgstr "Ένας χρήστης σχολίασε την εκδήλωση στην οποία ψηφίσατε"
+
+msgid "You voted on this event"
+msgstr "Ψηφίσατε για αυτή την εκδήλωση"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you voted in"
+msgstr "Ο/η %(sender_name)s σχολίασε μια εκδήλωση στην οποία ψηφίσατε"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you voted in in %(team_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε την εκδήλωση στην οποία ψηφίσατε σε %(team_name)s"
+
+msgid "A user commented on an event you are attending"
+msgstr "Ένας χρήστης σχολίασε την εκδήλωση που παρακολουθείτε"
+
+msgid "You are attending this event"
+msgstr "Παρακολουθείτε αυτή την εκδήλωση"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending"
+msgstr "Ο/η %(sender_name)s σχολίασε μια εκδήλωση που παρακολουθείτε"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending in %(team_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε μια εκδήλωση που παρακολουθείτε σε %(team_name)s"
+
+msgid "A user created a new event in a team you are following"
+msgstr "Ένας χρήστης δημιούργησε μια νέα εκδήλωση σε μια ομάδα που ακολουθείτε"
+
+#, python-format
+msgid "%(sender_name)s created a new event in %(team_name)s (which you follow)"
+msgstr "Ο/η %(sender_name)s δημιούργησε μια νέα εκδήλωση σε %(team_name)s (που ακολουθείτε)"
+
+#, python-format
+msgid "A new event: \"%(object_name)s\" was announced in %(team_name)s (which you follow)."
+msgstr "Μια νέα εκδήλωση: \"%(object_name)s\" ανακοινώθηκε σε %(team_name)s (που ακολουθείτε)."
+
+msgid "A user created a new event poll in a team you are following"
+msgstr "Ένας χρήστης δημιούργησε μια νέα δημοσκόπηση για εκδήλωση σε μια ομάδα που ακολουθείτε"
+
+#, python-format
+msgid "%(sender_name)s created a new event pollin %(team_name)s (which you follow)"
+msgstr "Ο/η %(sender_name)s δημιούργησε μια νέα δημοσκόπηση για εκδήλωση σε %(team_name)s (που ακολουθείτε)"
+
+#, python-format
+msgid "A new event poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Μια νέα δημοσκόπηση για εκδήλωση: \"%(object_name)s\" δημιουργήθηκε σε %(team_name)s (που ακολουθείτε)."
+
+msgid "A user commented on an event you are following"
+msgstr "Ένας χρήστης σχολίασε μια εκδήλωση που ακολουθείτε"
+
+msgid "You are following this event"
+msgstr "Ακολουθείτε αυτή την εκδήλωση"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are following"
+msgstr "Ο/η %(sender_name)s σχολίασε μια εκδήλωση που ακολουθείτε"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are following in %(team_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε μια εκδήλωση που ακολουθείτε σε %(team_name)s"
+
+msgid "A user updated an event"
+msgstr "Ο χρήστης ενημέρωσε μια εκδήλωση"
+
+#, python-format
+msgid "%(sender_name)s updated the event %(object_name)s"
+msgstr "Ο/η %(sender_name)s ενημέρωσε μια εκδήλωση %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s updated an event you are following"
+msgstr "Ο/η %(sender_name)s ενημέρωσε μια εκδήλωση που ακολουθείτε"
+
+#, python-format
+msgid "The event \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Η εκδήλωση \"%(object_name)s\" ενημερώθηκε σε %(team_name)s."
+
+msgid "A user updated an event you are attending"
+msgstr "Ένας χρήστης ενημέρωσε μια εκδήλωση που παρακολουθείτε"
+
+#, python-format
+msgid "%(sender_name)s updated an event you are attending"
+msgstr "Ο/η %(sender_name)s ενημέρωσε μια εκδήλωση που παρακολουθείτε"
+
+msgid "A user updated an event poll"
+msgstr "Ένας χρήστης ενημέρωσε μια δημοσκόπηση για εκδήλωση"
+
+#, python-format
+msgid "%(sender_name)s changed the event poll %(object_name)s"
+msgstr "Ο/η %(sender_name)s άλλαξαν την δημοσκόπηση για εκδήλωση %(object_name)s"
+
+msgid "You are following this event poll"
+msgstr "Ακολουθείτε αυτή τη δημοσκόπηση για εκδήλωση"
+
+#, python-format
+msgid "%(sender_name)s updated an event poll you are following"
+msgstr "Ο/η %(sender_name)s ενημέρωσε μια δημοσκόπηση για εκδήλωση που ακολουθείτε"
+
+#, python-format
+msgid "The event poll \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Η δημοσκόπηση για εκδήλωση \"%(object_name)s\" ενημερώθηκε σε %(team_name)s."
+
+msgid "A user voted in an event poll"
+msgstr "Ένας χρήστης ψήφισε σε μια δημοσκόπηση για εκδήλωση"
+
+#, python-format
+msgid "%(sender_name)s voted in the event poll %(object_name)s"
+msgstr "Ο/η %(sender_name)s ψήφισε στη δημοσκόπηση για εκδήλωση %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other voted in the event poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others voted in the event poll %(object_name)s"
+msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος ψήφισε στη δημοσκόπηση για εκδήλωση %(object_name)s"
+msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι ψήφισαν στη δημοσκόπηση για εκδήλωση %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s voted in an event poll you are following"
+msgstr "Ο/η %(sender_name)s ψήφισαν σε μια δημοσκόπηση για εκδήλωση που ακολουθείτε"
+
+#, python-format
+msgid "%(sender_name)s voted in the event poll \"%(object_name)s\" in %(team_name)s."
+msgstr "Ο/η %(sender_name)s ψήφισε στη δημοσκόπηση για εκδήλωση \"%(object_name)s\" σε %(team_name)s."
+
+msgid "Upcoming Events"
+msgstr "Προσεχείς Εκδηλώσεις"
+
+msgid "No upcoming events"
+msgstr "Δεν υπάρχουν προσεχείς εκδηλώσεις"
+
+msgid "Created By"
+msgstr "Δημιουργήθηκε Από"
+
+msgid "Soonest Upcoming"
+msgstr "Πλησιάζουν Σύντομα"
+
+msgid "Newest Created"
+msgstr "Πιο Πρόσφατη Δημιουργία"
+
+msgid "Title"
+msgstr "Τίτλος"
+
+msgid "No video conference"
+msgstr ""
+
+msgid "BBB-Meeting"
+msgstr ""
+
+msgid "Fairmeeting"
+msgstr ""
+
+msgid "Presenters"
+msgstr "Παρουσιαστές"
+
+msgid "Scheduled"
+msgstr "Έχει προγραμματιστεί"
+
+msgid "Voting open"
+msgstr "Η ψηφοφορία είναι ανοιχτή"
+
+msgid "Canceled"
+msgstr "Ακυρώθηκε"
+
+msgid "Archived Event Poll"
+msgstr "Αρχειοθετημένη Δημοσκόπηση για Εκδήλωση"
+
+msgid "Start"
+msgstr "Έναρξη"
+
+msgid "End"
+msgstr "Λήξη"
+
+msgid "State"
+msgstr "Κατάσταση"
+
+msgid "Is hidden proxy"
+msgstr "Είναι κρυμμένος διακομιστής μεσολάβησης"
+
+msgid "Note"
+msgstr "Σημείωση"
+
+msgid "Event date"
+msgstr "Ημερομηνία εκδήλωσης"
+
+msgid "Type of video conference available for the event"
+msgstr ""
+
+msgid "Location"
+msgstr "Τοποθεσία"
+
+msgid "Latitude"
+msgstr "Γεωγραφικό Πλάτος"
+
+msgid "Longitude"
+msgstr "Γεωγραφικό Μήκος"
+
+msgid "Street"
+msgstr "Οδός"
+
+msgid "ZIP code"
+msgstr "ΤΚ"
+
+msgid "City"
+msgstr "Πόλη"
+
+msgid "Is public (on website)"
+msgstr "Είναι δημόσιος (στην ιστοσελίδα)"
+
+msgid "Image"
+msgstr "Εικόνα"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Original Event Poll"
+msgstr "Αρχική Δημοσκόπηση για Εκδήλωση"
+
+msgid "Event"
+msgstr "Εκδήλωση"
+
+#, python-format
+msgid "%(event)s (hidden proxy)"
+msgstr "%(event)s (κρυμμένος διακομιστής μεσολάβησης)"
+
+#, python-format
+msgid "%(event)s (%(date)s - %(end)s)"
+msgstr "%(event)s (%(date)s - %(end)s)"
+
+#, python-format
+msgid "%(event)s (%(from)s - %(to)s)"
+msgstr "%(event)s (%(from)s - %(to)s)"
+
+#, python-format
+msgid "%(event)s (canceled)"
+msgstr "%(event)s (ακυρώθηκε)"
+
+#, python-format
+msgid "%(event)s (pending)"
+msgstr "%(event)s (εκκρεμεί)"
+
+#, python-format
+msgid "%(event)s (archived)"
+msgstr "%(event)s (αρχειοθετήθηκε)"
+
+#, python-format
+msgid "%(event)s (state unknown)"
+msgstr "%(event)s (άγνωστη κατάσταση)"
+
+#, fuzzy
+msgid "Now"
+msgstr "Όχι"
+
+msgctxt "the subject"
+msgid "Votes"
+msgstr "Ψήφοι"
+
+msgid "Suggestion"
+msgstr "Πρόταση"
+
+msgid "Suggestions"
+msgstr "Προτάσεις"
+
+msgid "Yes"
+msgstr "Ναι"
+
+msgid "Maybe"
+msgstr "Ίσως"
+
+msgid "No"
+msgstr "Όχι"
+
+msgid "Voter"
+msgstr "Ψηφοφόρος"
+
+msgid "Vote"
+msgstr "Ψήφος"
+
+msgctxt "the subject"
+msgid "Vote"
+msgstr "Ψήφος"
+
+msgid "Creator"
+msgstr "Δημιουργός"
+
+msgid "Created"
+msgstr "Δημιουργήθηκε"
+
+msgid "Last modified"
+msgstr "Τελευταία τροποποίηση"
+
+msgid "Text"
+msgstr "Κείμενο"
+
+msgid "Comment"
+msgstr "Σχόλιο"
+
+msgid "Comments"
+msgstr "Σχόλια"
+
+msgid "Lobby Check-in Event"
+msgstr "Εκδήλωση Εγγραφής στο Λόμπι"
+
+msgid "Stage Stream"
+msgstr "Ζωντανή Μετάδοση σε Σκηνή"
+
+msgid "Workshop"
+msgstr "Σεμινάριο"
+
+msgid "Discussion"
+msgstr "Συζήτηση"
+
+msgid "Coffee Table"
+msgstr "Τραπέζι Μέσης"
+
+msgid "Room"
+msgstr "Δωμάτιο"
+
+msgid "Conference Event Type"
+msgstr "Είδος Εκδήλωσης Σύσκεψης"
+
+msgid "Is a Break"
+msgstr "Είναι Διάλειμμα"
+
+#, fuzzy
+#| msgid "Enter a title for the conference event."
+msgid "Event is visible on the conference microsite"
+msgstr "Εισάγετε τίτλο για την εκδήλωση σύσκεψης."
+
+msgid "Event's description is visible on the conference microsite"
+msgstr ""
+
+msgid "Maximum Event Participants"
+msgstr "Μέγιστος Αριθμός Συμμετεχόντων στην Εκδήλωση"
+
+msgid "Embed code (HTML)"
+msgstr "Ενσωματωμένος Κώδικας (HTML)"
+
+msgid "Presentation file"
+msgstr "Αρχείο Παρουσίασης"
+
+#, fuzzy
+msgid "Show chat"
+msgstr "Εμφάνιση όλων"
+
+#, fuzzy
+msgid "Enable Streaming"
+msgstr "Ζωντανή Μετάδοση σε Σκηνή"
+
+msgid "Stream URL"
+msgstr ""
+
+msgid "The URL of your streaming provider to receive the incoming stream"
+msgstr ""
+
+#, fuzzy
+msgid "Stream Key"
+msgstr "Οδός"
+
+msgid "The key for this specific stream session you created at your streaming provider"
+msgstr ""
+
+msgid "Conference Event"
+msgstr "Εκδήλωση Σύσκεψης"
+
+msgid "Conference Events"
+msgstr "Εκδηλώσεις Σύσκεψης"
+
+#, python-format
+msgid "%(event)s %(type)s"
+msgstr "%(event)s %(type)s"
+
+msgid "Create Event"
+msgstr "Δημιουργία Εκδήλωσης"
+
+msgid "Would you like to create an event"
+msgstr "Θα θέλατε να δημιουργήσετε μια εκδήλωση"
+
+msgid "on"
+msgstr "στις"
+
+msgid "from"
+msgstr "από"
+
+msgid "until"
+msgstr "έως"
+
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+msgid "OK"
+msgstr "Εντάξει"
+
+msgctxt "time"
+msgid "all day"
+msgstr "όλη μέρα"
+
+msgctxt "time"
+msgid "at"
+msgstr "στις"
+
+msgctxt "time"
+msgid "o'clock"
+msgstr "ακριβώς"
+
+msgctxt "time"
+msgid "from"
+msgstr "από"
+
+msgctxt "time"
+msgid "until"
+msgstr "έως"
+
+#, python-format
+msgid "Add %(event_type_verbose)s in Room %(room_name)s"
+msgstr "Προσθήκη %(event_type_verbose)s στο Δωμάτιο %(room_name)s"
+
+#, python-format
+msgid "Edit %(event_type_verbose)s \"%(event_title)s\" in Room %(room_name)s"
+msgstr "Επεξεργασία %(event_type_verbose)s \"%(event_title)s\" στο Δωμάτιο %(room_name)s"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "Υπήρξε σφάλμα σε ένα από τα πεδία που εισήλθατε. Παρακαλούμε διορθώστε το πριν από την αποθήκευση!"
+
+msgid "Enter a title for the conference event."
+msgstr "Εισάγετε τίτλο για την εκδήλωση σύσκεψης."
+
+msgid "Event is a break"
+msgstr "Η εκδήλωση είναι ένα διάλειμμα"
+
+msgid "Check this to create an empty break event that shows up in the agenda and timeline"
+msgstr "Ελέγξτε αυτό για να δημιουργήσετε μια κενή εκδήλωση διαλείμματος που εμφανίζεται στην ατζέντα και το χρονολόγιο"
+
+msgid "Description and Infos"
+msgstr "Περιγραφή και Πληροφορίες"
+
+msgid "Description"
+msgstr "Περιγραφή"
+
+msgid "Enter a description for the event"
+msgstr "Εισάγετε περιγραφή για την εκδήλωση"
+
+msgid "Show this event on microsite"
+msgstr ""
+
+msgid "Uncheck this to hide the event on microsite"
+msgstr ""
+
+msgid "Show the event's description on microsite"
+msgstr ""
+
+msgid "Uncheck this to disable platform-wide viewing of the event's description"
+msgstr ""
+
+msgid "Uncheck this to disable public viewing of the event's description"
+msgstr ""
+
+msgid "Example:"
+msgstr ""
+
+msgid "Stream URL for the Event"
+msgstr "Ροή URL για την Εκδήλωση"
+
+msgid "Custom embed code (HTML)"
+msgstr "Προσαρμοσμένος ενσωματωμένος κώδικας (HTML)"
+
+#, fuzzy
+msgid "How many participants can join the video call before it is full."
+msgstr "Πόσοι συμμετέχοντες μπορούν να καθίσουν σε ένα τραπέζι μέσης πριν γεμίσει"
+
+msgid "Note that changing this setting will have no effect while an event is running."
+msgstr ""
+
+#, fuzzy
+msgid "BBB video conference options"
+msgstr "Είδος Εκδήλωσης Σύσκεψης"
+
+msgid "Upload a preview image for the Conference Event"
+msgstr "Ανεβάστε μια εικόνα προεπισκόπησης για την Εκδήλωση Σύσκεψης"
+
+msgid "Will be shown on the event card in the conference room."
+msgstr "Θα εμφανιστεί στην κάρτα εκδήλωσης στην αίθουσα σύσκεψης."
+
+msgid "The presenters will be shown in order in the event and will receive Moderator permissions for the BBB-Room"
+msgstr "Οι παρουσιαστές θα εμφανίζονται με τη σειρά στην εκδήλωση και θα λαμβάνουν την άδεια του Συντονιστή για το Δωμάτιο-BBB"
+
+msgid "The presentation file (e.g. PDF) will be pre-uploaded to the BBB room."
+msgstr "Το αρχείο παρουσίασης (π.χ. PDF) θα φορτώνεται εκ των προτέρων στο δωμάτιο BBB."
+
+msgid "Note: If a slide is subsequently added to an existing event, it does not automatically appear in the event if this event was recently attended and is therefore active. This requires an active ending of the event or a 5-minute idle time without participants until the event is automatically ended. "
+msgstr "Σημείωση: Εάν μια διαφάνεια προστίθεται μετά στην υπάρχουσα εκδήλωση, δεν εμφανίζεται αυτόματα στην εκδήλωση εάν σε αυτήν την εκδήλωση παρευρέθηκε πρόσφατα κάποιος και είναι επομένως ενεργή. Αυτό απαιτεί ενεργό τερματισμό της εκδήλωσης ή χρόνο αδράνειας 5 λεπτών χωρίς συμμετέχοντες έως ότου η εκδήλωση αυτομάτως τερματιστεί.  "
+
+msgid "You can actively end an existing event room by clicking on \"End Meeting\" in the top right-hand corner of the room in the \"Three-Dot Menu\"."
+msgstr "Μπορείτε να τερματίσετε ενεργά ένα δωμάτιο υπάρχουσας εκδήλωσης επιλέγοντας \"Τερματισμός Συνάντησης\" στην επάνω δεξιά γωνία του δωματίου στο \"Μενού Τριών Κουκίδων\"."
+
+#, fuzzy
+msgid "Show room chat in the event"
+msgstr "Παρακολουθείτε αυτή την εκδήλωση"
+
+msgid "Check this to show rocket chat in the sidebar."
+msgstr ""
+
+#, fuzzy
+msgid "Stream this event"
+msgstr "Ροή URL για την Εκδήλωση"
+
+msgid "Please note: Streaming is only available for premium conferences. If you would like to use streaming, please request it explicitly when booking. Otherwise, these settings have no function."
+msgstr ""
+
+msgid "You can set up the BBB event to be streamed to a streaming provider (e.g. YouTube)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Once set up and activated, a streaming-bot will enter the event and stream all video and audio to the selected stream endpoint.\n"
+"The bot will enter and start streaming %(start_minutes)s minutes before the event start time and stop streaming and leave %(end_minutes)s minutes after the event end time.\n"
+"You can adjust the meeting times on-the-fly to allow for longer streaming if the event runs longer than expected."
+msgstr ""
+
+msgid "If you are using the maximum participant limit, please allow for the streaming bot's additional participant spot."
+msgstr ""
+
+msgid "Enable Streaming this BBB meeting"
+msgstr ""
+
+msgid "Create"
+msgstr "Δημιουργία"
+
+msgid "Save"
+msgstr "Αποθήκευση"
+
+#, fuzzy
+msgid "Create and create another"
+msgstr "δημιούργησε μια εκδήλωση"
+
+#, fuzzy
+msgid "Save and create another"
+msgstr "δημιούργησε μια εκδήλωση"
+
+msgid "Add unscheduled event"
+msgstr "Προσθήκη μη προγραμματισμένης εκδήλωσης"
+
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+msgid "Event Polls"
+msgstr "Δημοσκοπήσεις για Εκδήλωση"
+
+msgid "Enter a title for the new event to be scheduled."
+msgstr "Εισάγετε τίτλο για τη νέα εκδήλωση που πρόκειται να προγραμματιστεί."
+
+msgid "Dates"
+msgstr "Ημερομηνίες"
+
+msgid "Please select the available days in the calendar."
+msgstr "Παρακαλούμε επιλέξτε τις διαθέσιμες ημέρες στο ημερολόγιο."
+
+msgid "You can select the same day more than once."
+msgstr "Μπορείτε να επιλέξετε την ίδια ημέρα περισσότερες από μία φορές."
+
+msgid "Time: e.g. 10 or 10:30."
+msgstr "Ώρα: π.χ. 10 ή 10.30."
+
+msgid "Time"
+msgstr "Ώρα"
+
+msgid "Note: You cannot edit the dates for this event poll because someone has already cast their vote!"
+msgstr "Σημείωση: Δεν μπορείτε να επεξεργαστείτε τις ημερομηνίες για αυτή τη δημοσκόπηση για εκδήλωση επειδή κάποιος έχει ήδη ψηφίσει!"
+
+msgid "Example: http://mywebsite.com"
+msgstr "Παράδειγμα: http://mywebsite.com"
+
+msgid "External Link for the event"
+msgstr "Εξωτερικός Σύνδεσμος για την εκδήλωση"
+
+msgid "Delete"
+msgstr "Διαγραφή"
+
+msgid "There are no open event polls."
+msgstr "Δεν υπάρχουν ανοιχτές δημοσκοπήσεις για εκδήλωση."
+
+msgid "Planned Events"
+msgstr "Προγραμματισμένες Εκδηλώσεις"
+
+msgid "Past Events"
+msgstr "Προηγούμενες Εκδηλώσεις"
+
+msgid "Archived Event Polls"
+msgstr "Αρχειοθετημένες Δημοσκοπήσεις για Εκδήλωση"
+
+msgid "There are no archived event polls."
+msgstr "Δεν υπάρχουν αρχειοθετημένες δημοσκοπήσεις για εκδήλωση."
+
+#, python-format
+msgid "Vote for %(title)s"
+msgstr "Ψηφίστε για %(title)s"
+
+#, python-format
+msgid "Archived: %(title)s"
+msgstr "Αρχειοθετημένoς: %(title)s"
+
+msgid "This event has already been scheduled. Voting is closed."
+msgstr "Αυτή η εκδήλωση έχει ήδη προγραμματιστεί. Η ψηφοφορία είναι κλειστή."
+
+msgid "This event has been canceled. Voting is closed."
+msgstr "Αυτή η εκδήλωση έχει ακυρωθεί. Η ψηφοφορία είναι κλειστή."
+
+msgid "Nobody has voted for this event poll yet."
+msgstr "Κανείς δεν ψήφισε για αυτή τη δημοσκόπηση για εκδήλωση ακόμη."
+
+msgid "Create an event from one of the suggestions"
+msgstr "Δημιουργήστε μία εκδήλωση βάσει μίας πρότασης"
+
+#, python-format
+msgid "Set the date to %(suggestion)s."
+msgstr "Ορίστε την ημερομηνία για %(suggestion)s."
+
+msgid "When do you have time?"
+msgstr "Πότε έχετε χρόνο;"
+
+msgid "There are no date suggestions for this event poll yet!"
+msgstr "Δεν υπάρχουν ακόμη προτάσεις ημερομηνίας για αυτή τη δημοσκόπηση για εκδήλωση!"
+
+#, python-format
+msgid "Do you really want to delete unscheduled event „%(title)s“?"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε την μη προγραμματισμένη εκδήλωση \"%(title)s\";"
+
+msgid "Delete unscheduled event"
+msgstr "Διαγραφή μη προγραμματισμένης εκδήλωσης"
+
+msgid "You will now receive notifications for comments or when this event poll is changed and whenever somebody casts their vote."
+msgstr "Θα λαμβάνετε τώρα ειδοποιήσεις για σχόλια ή όταν η δημοσκόπηση για εκδήλωση αλλάζει και όταν κάποιος ψηφίζει."
+
+msgid "Write comment..."
+msgstr "Σύνταξη σχολίου..."
+
+msgid "Post"
+msgstr "Ανάρτηση"
+
+msgid "Add event"
+msgstr "Προσθήκη εκδήλωσης"
+
+#, python-format
+msgid ""
+"\n"
+"                            Note: After this event will be posted, each user of %(forum_name)s may be able to see it.<br>\n"
+"                            If you do not want this, please, use another group or project of your choice.\n"
+"                            "
+msgstr ""
+
+msgid "Enter a title for the new event."
+msgstr "Εισάγετε τίτλο για τη νέα εκδήλωση."
+
+#, fuzzy
+msgid "Include a video conference"
+msgstr "Είδος Εκδήλωσης Σύσκεψης"
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
+
+msgid "The first uploaded image will be displayed as a wallpaper."
+msgstr "Η εικόνα που ανέβηκε πρώτη θα εμφανιστεί ως ταπετσαρία."
+
+msgid "If you set this, your event will be shown on the map! (if permitted by its visibility settings)"
+msgstr "Εάν επιλέξτε αυτή την ρύθμιση, η εκδήλωσή σας θα εμφανίζεται στον χάρτη! (εάν επιτρέπεται από τις ρυθμίσεις ορατότητας)"
+
+msgid "Calendar"
+msgstr "Ημερολόγιο"
+
+msgid "Copy this iCal-link into your calendar application to import current events:"
+msgstr "Αντιγράψτε αυτό τον σύνδεσμο iCal στην εφαρμογή ημερολογίου για να εισάγετε τις τρέχουσες εκδηλώσεις:"
+
+msgid "Also include all events from projects within this group in feed"
+msgstr "Επίσης συμπεριλάβετε όλες τις εκδηλώσεις από έργα εντός αυτής της ομάδας σε αυτή τη ροή"
+
+msgid "iCal Feed"
+msgstr "ροή iCal"
+
+msgid "Enter the title for a new event or select a day in the Calendar."
+msgstr "Εισάγετε τίτλο για μια νέα εκδήλωση ή επιλέξτε ημέρα στο Ημερολόγιο."
+
+msgid "Export event feed"
+msgstr "Εξαγωγή ροής εκδήλωσης"
+
+msgid "Create Conference Event"
+msgstr "Δημιουργία Εκδήλωσης Σύσκεψης"
+
+msgid "Conference events can be created directly from the rooms themselves of the conference interface or in a central place here"
+msgstr "Οι εκδηλώσεις σύσκεψης μπορούν να δημιουργηθούν απευθείας από τα ίδια τα δωμάτια της διεπιφάνειας σύσκεψης ή σε μια κεντρική τοποθεσία εδώ"
+
+msgid "Conference Room Management"
+msgstr "Διαχείριση Αίθουσας Σύσκεψης"
+
+msgid "There are no conference events."
+msgstr "Δεν υπάρχουν εκδηλώσεις σύσκεψης."
+
+msgid "There are no current or future events."
+msgstr "Δεν υπάρχουν τρέχουσες ή μελλοντικές εκδηλώσεις."
+
+msgid "There are no past events."
+msgstr "Δεν υπάρχουν προηγούμενες εκδηλώσεις."
+
+msgid "There are no upcoming events"
+msgstr "Δεν υπάρχουν προσεχείς εκδηλώσεις"
+
+msgid "Back to Events"
+msgstr "Πίσω στις Εκδηλώσεις"
+
+msgid "Return to Event Polls"
+msgstr "Επιστροφή στις Δημοσκοπήσεις για Εκδήλωση"
+
+msgid "Return to Archived Event Polls"
+msgstr "Επιστροφή στις Αρχειοθετημένες Δημοσκοπήσεις για Εκδήλωση"
+
+msgid "List"
+msgstr "Κατάλογος"
+
+msgid "by"
+msgstr "από"
+
+msgid "View"
+msgstr "Προβολή"
+
+msgid "Created Event"
+msgstr "Εκδήλωση που Δημιουργήθηκε"
+
+#, python-format
+msgid "Do you really want to delete event „%(title)s“?"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε την εκδήλωση \"%(title)s\";"
+
+msgid "Delete event"
+msgstr "Διαγραφή εκδήλωσης"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you are attending in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Γεια, %(receiver_name)s!\n"
+"\n"
+"ο/η %(sender_name)s ανάρτησε ένα σχόλιο για την εκδήλωση που παρακολουθείτε σε %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"για την εκδήλωση:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Ακολουθείστε αυτό τον σύνδεσμό για να δείτε το σχόλιο: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Ακολουθήστε αυτό τον σύνδεσμο για να επεξεργαστείτε τις προτιμήσεις ειδοποίησης: %(notification_settings_url)s )\n"
+"\n"
+"Η ομάδα %(site_name)s.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending in %(team_name)s."
+msgstr "Ο/η %(sender_name)s σχολίασε μια εκδήλωση που παρακολουθείτε σε %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new event \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Γεια %(receiver_name)s,\n"
+"\n"
+"μια νέα εκδήλωση \"%(object_name)s\" σε %(team_name)s δημιουργήθηκε από %(sender_name)s. \n"
+"\n"
+"Μπορείτε να την βρείτε ακολουθώντας τον συγκεκριμένο σύνδεσμο: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Ακολουθείστε τον σύνδεσμο αυτό για να επεξεργαστείτε τις προτιμήσεις ειδοποίησης: %(notification_settings_url)s )\n"
+"\n"
+"Η Ομάδα %(site_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you created in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Γεια, %(receiver_name)s!\n"
+"\n"
+"ο/η %(sender_name)s ανάρτησε ένα σχόλιο για μια εκδήλωση που δημιουργήσατε σε %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"στην εκδήλωσή σας:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Ακολουθήστε αυτό τον σύνδεσμο για να δείτε το σχόλιο: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Ακολουθήστε αυτό τον σύνδεσμο για να επεξεργαστείτε τις προτιμήσεις ειδοποίησης: %(notification_settings_url)s )\n"
+"\n"
+"Η ομάδα %(site_name)s.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your events in %(team_name)s."
+msgstr "Ο/η %(sender_name)s σχολίασε μία από τις εκδηλώσεις σας σε %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new event \"%(object_name)s\", on %(event_date)s, was announced in %(team_name)s by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Γεια %(receiver_name)s,\n"
+"\n"
+"μια νέα εκδήλωση \"%(object_name)s\", στις %(event_date)s, ανακοινώθηκε σε %(team_name)s από %(sender_name)s. \n"
+"\n"
+"Μπορείτε να την βρείτε ακολουθώντας αυτό τον σύνδεσμο: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Ακολουθήστε αυτό τον σύνδεσμο για να επεξεργαστείτε τις προτιμήσεις ειδοποίησης: %(notification_settings_url)s )\n"
+"\n"
+"Η Ομάδα %(site_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you were tagged in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Γεια, %(receiver_name)s!\n"
+"\n"
+"ο/η %(sender_name)s έχει αναρτήσει ένα σχόλιο για μια εκδήλωση στην οποία προστεθήκατε με ετικέτα, σε %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"στην εκδήλωση:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Ακολουθήστε αυτό τον σύνδεσμο για να δείτε το σχόλιο: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Ακολουθήστε αυτό τον σύνδεσμο για να επεξεργαστείτε τις προτιμήσεις ειδοποίησης: %(notification_settings_url)s )\n"
+"\n"
+"Η ομάδα %(site_name)s.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a event you were tagged in %(team_name)s."
+msgstr "Ο/η %(sender_name)s σχολίασε μια εκδήλωση στην οποία προστεθήκατε με ετικέτα σε %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event poll you voted in in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event poll:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Γεια, %(receiver_name)s!\n"
+"\n"
+"ο/η %(sender_name)s έχει αναρτήσει ένα σχόλιο σε μια δημοσκόπηση για εκδήλωση που ψηφίσατε σε %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"στη δημοσκόπηση για εκδήλωση:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Ακολουθήστε αυτό το σύνδεσμο για να δείτε το σχόλιο: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Ακολουθήστε αυτό το σύνδεσμο για να επεξεργαστείτε τις προτιμήσεις ειδοποίησης: %(notification_settings_url)s )\n"
+"\n"
+"Η ομάδα %(site_name)s.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on an event poll you voted in in %(team_name)s."
+msgstr "Ο/η %(sender_name)s σχολίασε μια δημοσκόπηση για εκδήλωση στην οποία ψηφίσατε σε %(team_name)s."
+
+msgid "Delete Event"
+msgstr "Διαγραφή Εκδήλωσης"
+
+msgid "(Canceled!)"
+msgstr "(Ακυρώθηκε!)"
+
+msgid "This is an archived event poll."
+msgstr "Αυτή είναι μια αρχειοθετημένη δημοσκόπηση για εκδήλωση."
+
+msgid "The event that was created after the poll can be viewed here:"
+msgstr "Η εκδήλωση που δημιουργήθηκε μετά τη δημοσκόπηση μπορεί να προβληθεί εδώ:"
+
+msgid "(No description set)"
+msgstr "(Δεν έχει οριστεί περιγραφή)"
+
+msgctxt "someone else is going"
+msgid "Going"
+msgstr "Πηγαίνει"
+
+msgctxt "someone else is maybe going"
+msgid "Maybe going"
+msgstr "Μπορεί να πηγαίνει"
+
+msgctxt "someone else can't go"
+msgid "Can't go"
+msgstr "Δεν μπορεί να πάει"
+
+msgctxt "one or many people are going"
+msgid "Going"
+msgid_plural "Going"
+msgstr[0] "Πηγαίνει"
+msgstr[1] "Πηγαίνουν"
+
+msgctxt "one or many people are maybe going"
+msgid "Maybe going"
+msgid_plural "Maybe going"
+msgstr[0] "Μπορεί να πηγαίνει"
+msgstr[1] "Μπορεί να πηγαίνουν"
+
+msgctxt "one or many people are not going"
+msgid "Can't go"
+msgid_plural "Can't go"
+msgstr[0] "Δεν μπορεί να πάει"
+msgstr[1] "Δεν μπορούν να πάνε"
+
+msgid "Going"
+msgstr "Πηγαίνει"
+
+msgid "Maybe going"
+msgstr "Μπορεί να πηγαίνει"
+
+msgid "Can't go"
+msgstr "Δεν μπορεί να πάει"
+
+msgid "Are you going?"
+msgstr "Πηγαίνεις;"
+
+msgid "No Choice"
+msgstr "Καμία Επιλογή"
+
+msgid "Add event to your calendar"
+msgstr ""
+
+#, fuzzy
+msgid "Copy this iCal-link into your calendar application to import this event:"
+msgstr "Αντιγράψτε αυτό τον σύνδεσμο iCal στην εφαρμογή ημερολογίου για να εισάγετε τις τρέχουσες εκδηλώσεις:"
+
+#, fuzzy
+msgid "Start/join video conference for this event"
+msgstr "Έναρξη/συμμετοχή σε συνομιλία με βίντεο για αυτή την εκδήλωση"
+
+msgid "Popout"
+msgstr ""
+
+msgid "Fullscreen"
+msgstr "Πλήρης Οθόνη"
+
+#, fuzzy
+msgid "Video conference"
+msgstr "Είδος Εκδήλωσης Σύσκεψης"
+
+msgid "Leave Fullscreen"
+msgstr "Να παραμείνει η Πλήρης Οθόνη"
+
+msgid "Back"
+msgstr "Πίσω"
+
+#, fuzzy
+msgid "Leave video conference"
+msgstr "Είδος Εκδήλωσης Σύσκεψης"
+
+msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
+msgstr ""
+
+msgid "You will now receive notifications for comments or when this event is updated or its details change."
+msgstr "Θα λαμβάνετε τώρα ειδοποιήσεις για σχόλια ή όταν αυτή η εκδήλωση ενημερώνεται ή αλλάζουν οι λεπτομέρειές της."
+
+msgid "You created an event"
+msgstr "Δημιουργήσατε μια εκδήλωση"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created an event"
+msgstr "δημιούργησε μια εκδήλωση"
+
+msgid "Show all"
+msgstr "Εμφάνιση όλων"
+
+msgid "Upcoming events"
+msgstr "Προσεχείς εκδηλώσεις"
+
+#, python-format
+msgid "Event \"%(title)s\" was edited successfully."
+msgstr "Η εκδήλωση \"%(title)s\" υποβλήθηκε σε επεξεργασία με επιτυχία."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be edited."
+msgstr "Δεν ήταν δυνατή η επεξεργασία της εκδήλωσης \"%(title)s\"."
+
+msgid "Please use the conference management area to add new workshops!"
+msgstr "Παρακαλούμε χρησιμοποιήστε την περιοχή διαχείρισης σύσκεψης για να προσθέσετε νέα σεμινάρια!"
+
+msgid "The page you requested is not available for this event at this time."
+msgstr "Η σελίδα που ζητήσατε δεν είναι διαθέσιμη για αυτή την εκδήλωση τη συγκεκριμένη ώρα."
+
+msgid "One of the event suggestions times could not be understood!"
+msgstr "Μία από τις ώρες των προτάσεων εκδήλωσης δεν ήταν δυνατό να γίνει κατανοητή!"
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was edited successfully."
+msgstr "Η μη προγραμματισμένη εκδήλωση \"%(title)s\" υποβλήθηκε σε επεξεργασία με επιτυχία."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be edited."
+msgstr "Δεν ήταν δυνατή η επεξεργασία της μη προγραμματισμένης εκδήλωσης \"%(title)s\"."
+
+#, python-format
+msgid "Event \"%(title)s\" was added successfully."
+msgstr "Η εκδήλωση \"%(title)s\" προστέθηκε με επιτυχία."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be added."
+msgstr "Δεν ήταν δυνατή η προσθήκη της εκδήλωσης \"%(title)s\"."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was added successfully."
+msgstr "Η μη προγραμματισμένη εκδήλωση %(title)s\" προστέθηκε με επιτυχία."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be added."
+msgstr "Δεν ήταν δυνατή η προσθήκη της μη προγραμματισμένης εκδήλωσης \"%(title)s\"."
+
+msgid "You should define at least one date suggestion."
+msgstr "Θα πρέπει να δώσετε τουλάχιστον μια πρόταση για ημερομηνία."
+
+#, python-format
+msgid "Event \"%(title)s\" was deleted successfully."
+msgstr "Η εκδήλωση \"%(title)s\" διαγράφηκε με επιτυχία."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be deleted."
+msgstr "Δεν ήταν δυνατή η διαγραφή της εκδήλωσης \"%(title)s\"."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was deleted successfully."
+msgstr "Η μη προγραμματισμένη εκδήλωση \"%(title)s\" διαγράφηκε με επιτυχία."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be deleted."
+msgstr "Δεν ήταν δυνατή η διαγραφή της μη προγραμματισμένης εκδήλωσης \"%(title)s\"."
+
+msgid "Your votes were saved successfully."
+msgstr "Οι ψήφοι σας αποθηκεύτηκαν με επιτυχία."
+
+msgid "Your votes could not be saved."
+msgstr "Δεν ήταν δυνατή η αποθήκευση των ψήφων σας."
+
+msgid "This is event is already scheduled. You cannot vote for it any more."
+msgstr "Αυτή η εκδήλωση έχει ήδη προγραμματιστεί. Δεν μπορείτε πλέον να ψηφίσετε για αυτή."
+
+msgid "The complete request can only be sent via POST!"
+msgstr "Το πλήρες αίτημα μπορεί να σταλεί μόνο μέσω ΑΝΑΡΤΗΣΗΣ!"
+
+msgid "Event cannot be completed: No date was supplied."
+msgstr "Δεν είναι δυνατή η ολοκλήρωση της εκδήλωσης: Δεν δόθηκε ημερομηνία."
+
+msgid "The event was created successfully at the specified date."
+msgstr "Η εκδήλωση δημιουργήθηκε με επιτυχία τη συγκεκριμένη ημερομηνία."
+
+#, fuzzy
+msgid "Upcoming event"
+msgstr "Προσεχείς εκδηλώσεις"
+
+msgid "Your comment was added successfully."
+msgstr "Το σχόλιό σας προστέθηκε με επιτυχία."
+
+msgid "Your comment was deleted successfully."
+msgstr "Το σχόλιό σας διαγράφηκε με επιτυχία."
+
+#~ msgid "Example: https://www.youtube.com/watch?v=12345"
+#~ msgstr "Παράδειγμα: https://www.youtube.com/watch?v=12345"
+
+#~ msgid "Maximum Coffee Table Participants"
+#~ msgstr "Μέγιστος Αριθμός Συμμετεχόντων σε Τραπέζι Μέσης"
+
+#, fuzzy
+#~ msgid "Start/join BBB video conference for this event"
+#~ msgstr "Έναρξη/συμμετοχή σε συνομιλία με βίντεο για αυτή την εκδήλωση"
+
+#~ msgid "Start/join video chat for this event"
+#~ msgstr "Έναρξη/συμμετοχή σε συνομιλία με βίντεο για αυτή την εκδήλωση"
+
+#~ msgid "Stop Video Chat"
+#~ msgstr "Διακοπή Συνομιλίας με Βίντεο"
+
+#~ msgid "Video Chat"
+#~ msgstr "Συνομιλία με Βίντεο"

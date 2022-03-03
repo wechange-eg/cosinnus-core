@@ -1,0 +1,39 @@
+{% extends "cosinnus_event/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block page_title %}
+{% trans "Events" %} {{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="active">{{ COSINNUS_CONFERENCE_TRANS.VERBOSE_NAME_PLURAL }}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus_event/leftnav.html" %}
+{% endblock leftnav %}
+
+{% block content %}
+    {% if not request.user or not request.user.is_authenticated %} 
+        {% include "cosinnus/not_logged_in_alert.html" %}
+    {% endif %}
+    
+    <div class="clearfix"></div>
+    
+	<!-- a box with semi transparent background -->
+	<div class="content-box large-space">
+	    
+        {% include 'cosinnus/common/filter_controls.html' %}    
+            
+	    {% for event in proxy_events %}
+        	{% include 'cosinnus_event/list_object.html' %}
+	    {% empty %}
+	        <!-- {% trans "There are no current or future events." %} -->
+	        {% include 'cosinnus/common/empty_button.html' with message="There are no current or future events." %}
+	    {% endfor %}
+	   
+	</div><!-- content-box -->
+	
+	
+{% endblock content %}

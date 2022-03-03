@@ -1,0 +1,1 @@
+{% include 'cosinnus_poll/single_poll.html' with object=object %}

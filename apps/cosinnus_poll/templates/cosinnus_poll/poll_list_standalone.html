@@ -1,0 +1,28 @@
+{% load i18n cosinnus_tags widget_tweaks %}
+    
+<div class="row">
+    <div class="col-md-3">
+
+        <div type="button" class="btn btn-emphasized btn-headline regular-space">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+                    <div class="media-body">
+                        {% trans "poll" context "the_app" %}
+                    </div>
+                </li>
+            </ul>
+        </div><!-- btn -->
+    </div><!-- left column -->
+
+    <div class="col-md-9">
+        <div class="content-box">
+            {% for poll in object_list %}
+                {% include 'cosinnus_poll/single_poll.html' with object=poll %}
+            {% empty %}
+                <!-- {% trans "There are no upcoming polls" %} -->
+                {% include 'cosinnus/common/empty_button.html' with message="There are no upcoming polls" %}
+            {% endfor %}
+         </div>
+    </div><!-- right column -->
+</div><!-- row -->

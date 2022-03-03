@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<info>
+  <id>wechangecsp</id>
+  <name>Add WECHANGE to CSP</name>
+  <description>Add WECHANGE urls to Content-Security-Policy header</description>
+  <version>0.1.0</version>
+  <license>AGPL</license>
+  <default_enable/>
+  <dependencies>
+    <nextcloud min-version="18" max-version="18" />
+  </dependencies>
+</info>

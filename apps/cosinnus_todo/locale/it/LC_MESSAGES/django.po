@@ -1,0 +1,674 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 14:56+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Todos"
+msgstr ""
+
+msgctxt "the_app"
+msgid "todo"
+msgstr ""
+
+msgid "A user created a new todo"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s created the todo %(object_name)s"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s created %(count)d todos"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s created a new todo"
+msgstr ""
+
+#, python-format
+msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
+msgstr ""
+
+msgid "A todo was assigned to me"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s assigned the todo %(object_name)s to you"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s assigned %(count)d todos to you"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s assigned a todo to you"
+msgstr ""
+
+msgid "A todo I created was completed"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s completed the todo %(object_name)s"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d todos"
+msgstr ""
+
+msgid "You created this todo"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s completed your todo"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s completed one of your todos"
+msgstr ""
+
+msgid "A user commented on one of your todos"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on your todo %(object_name)s"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(sender_name)s commented on your todo"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on one of your todos"
+msgstr ""
+
+msgid "A user commented on a todo you were tagged in"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "You were tagged in this todo"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
+msgstr ""
+
+msgid "A user commented on a todo you were assigned to"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgstr ""
+
+msgid "A user updated a todo you are following"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s updated the todo %(object_name)s"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "You are following this todo"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s updated a todo you are following"
+msgstr ""
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr ""
+
+msgid "A user reassigned a todo you are following"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s reassigned %(count)d todos"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s reassigned a todo you are following"
+msgstr ""
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
+msgstr ""
+
+msgid "A user completed a todo you are following"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s completed a todo you are following"
+msgstr ""
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr ""
+
+msgid "A user commented on a todo you are following"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on on a todo you are following"
+msgstr ""
+
+msgid "My Todos"
+msgstr ""
+
+msgid "No todos"
+msgstr ""
+
+msgid "Open"
+msgstr ""
+
+msgid "Completed"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "Created By"
+msgstr ""
+
+msgid "Assigned To"
+msgstr ""
+
+msgid "Priority"
+msgstr ""
+
+msgid "Due date"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Newest Created"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Soonest Due"
+msgstr ""
+
+msgid "You are not allowed to assign this Todo entry."
+msgstr ""
+
+msgid "Later"
+msgstr ""
+
+msgid "Normal"
+msgstr ""
+
+msgid "Important"
+msgstr ""
+
+msgid "Due by"
+msgstr ""
+
+msgid "Completed on"
+msgstr ""
+
+msgid "Completed by"
+msgstr ""
+
+msgid "Assigned to"
+msgstr ""
+
+msgid "Note"
+msgstr ""
+
+msgid "List"
+msgstr ""
+
+msgid "Todo"
+msgstr ""
+
+msgid "Group"
+msgstr ""
+
+msgid "Creator"
+msgstr ""
+
+msgid "Created"
+msgstr ""
+
+msgid "Last modified"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "Comment"
+msgstr ""
+
+msgid "Comments"
+msgstr ""
+
+#, python-format
+msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
+msgstr ""
+
+msgid "Back to"
+msgstr ""
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the task \"%(object_name)s\" in %(team_name)s was assigned to you by %(sender_name)s. \n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+
+#, python-format
+msgid "Task: \"%(object_name)s\" in %(team_name)s was assigned to you."
+msgstr ""
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a todo assigned to you in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the todo:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on a todo assigned to you in %(team_name)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a todo you were tagged in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the todo:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in %(team_name)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a todo you created in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your todo:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new task \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+msgstr ""
+
+#, python-format
+msgid "A new task: \"%(object_name)s\" was created in %(team_name)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the task \"%(object_name)s\" you created in %(team_name)s was completed by %(sender_name)s. \n"
+msgstr ""
+
+#, python-format
+msgid "Task completed: \"%(object_name)s\" in %(team_name)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"you were tagged in the task \"%(object_name)s\" in %(team_name)s by %(sender_name)s. \n"
+msgstr ""
+
+#, python-format
+msgid "You were tagged in the task \"%(object_name)s\" in %(team_name)s"
+msgstr ""
+
+msgid "Not important"
+msgstr ""
+
+msgid "Delete todo"
+msgstr ""
+
+msgid "Do you really want to delete this todo?"
+msgstr ""
+
+msgid "Not assigned"
+msgstr ""
+
+msgid "Following"
+msgstr ""
+
+msgid "Reopen todo"
+msgstr ""
+
+msgid "Close todo"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Write comment..."
+msgstr ""
+
+msgid "Post"
+msgstr ""
+
+msgid "This todo was completed:"
+msgstr ""
+
+msgid "by"
+msgstr ""
+
+msgid "TodoEntries"
+msgstr ""
+
+msgid "There are no todolists yet."
+msgstr ""
+
+msgid "New List Name"
+msgstr ""
+
+msgid "Create"
+msgstr ""
+
+msgid "Create a new Todo"
+msgstr ""
+
+msgid "Only the owner and assignee of a todo can finish it!"
+msgstr ""
+
+msgid "Mark as finished"
+msgstr ""
+
+msgid "Move to another Folder"
+msgstr ""
+
+msgid "Enter the title for this todo"
+msgstr ""
+
+msgid "There are no todos in this list."
+msgstr ""
+
+msgid "Please select or create a todo list."
+msgstr ""
+
+msgid "Add Todo"
+msgstr ""
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr ""
+
+msgid "Enter a title for the todo."
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Enter a description for the todo"
+msgstr ""
+
+msgid "No date chosen"
+msgstr ""
+
+msgid "Choose due date"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Choose day"
+msgstr ""
+
+msgid "Until when should the task be completed?"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Todo lists"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "You created a todo"
+msgstr ""
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a todo"
+msgstr ""
+
+msgid "You have no assigned tasks"
+msgstr ""
+
+msgid "Tasks are shown only for logged in users"
+msgstr ""
+
+#, python-format
+msgid "Todo \"%(title)s\" was added successfully."
+msgstr ""
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be added."
+msgstr ""
+
+msgid "You were trying to add a todo to a todolist that does not exist!"
+msgstr ""
+
+#, python-format
+msgid "Todo \"%(title)s\" was edited successfully."
+msgstr ""
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be edited."
+msgstr ""
+
+#, python-format
+msgid "Todo \"%(title)s\" was deleted successfully."
+msgstr ""
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be deleted."
+msgstr ""
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned successfully."
+msgstr ""
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned."
+msgstr ""
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned to You successfully."
+msgstr ""
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned to You."
+msgstr ""
+
+#, python-format
+msgid "Todo \"%(title)s\" was unassigned successfully."
+msgstr ""
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be unassigned."
+msgstr ""
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed successfully."
+msgstr ""
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed."
+msgstr ""
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed by You successfully."
+msgstr ""
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed by You."
+msgstr ""
+
+#, python-format
+msgid "Todo \"%(title)s\" was set to incomplete successfully."
+msgstr ""
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be set to incomplete."
+msgstr ""
+
+#, python-format
+msgid "Todolist \"%(title)s\" was edited successfully."
+msgstr ""
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be edited."
+msgstr ""
+
+#, python-format
+msgid "Todolist \"%(title)s\" was added successfully."
+msgstr ""
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be added."
+msgstr ""
+
+msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
+msgstr ""
+
+msgid "Your comment was added successfully."
+msgstr ""
+
+msgid "Your comment was deleted successfully."
+msgstr ""

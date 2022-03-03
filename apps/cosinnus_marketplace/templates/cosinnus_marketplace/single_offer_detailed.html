@@ -1,0 +1,116 @@
+{% load i18n static cosinnus_tags widget_tweaks thumbnail %}
+
+<div class="btn btn-emphasized w100 noselect {% if offer.attached_image %}button-with-title-image{% endif %}">
+    {% if offer.attached_image %}
+        <img src="{% thumbnail offer.attached_image.file SETTINGS.COSINNUS_GROUP_WALLPAPER_MAXIMUM_SIZE_SCALE crop='smart' upscale='smart' %}" />
+        <div></div> <!-- Gradient overlay -->
+    {% endif %}
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left square-date-icon" href="#">
+				{% include 'cosinnus/user/user_avatar_image.html' with user=offer.creator %}                
+            </a>
+            <div class="media-body">
+            
+        		{% captureas link_start %}<a href="{{ offer.creator|profile_url }}">{% endcaptureas %}
+        		{% captureas link_end %}</a>{% endcaptureas %}
+            	{% if offer.type == 1 %}
+            		{% blocktrans with username=offer.creator|full_name %}{{ link_start }}{{ username }}{{ link_end }} is looking for{% endblocktrans %}
+            	{% elif offer.type == 2 %}
+            		{% blocktrans with username=offer.creator|full_name %}{{ link_start }}{{ username }}{{ link_end }} is offering{% endblocktrans %}
+            	{% endif %}
+            	
+                <span class="annotation">
+                	<span class="moment-data-date" data-date="{{ offer.created|date:'c' }}"></span>
+                	{% include 'cosinnus/feedback/report_button_a.html' with object=offer %}
+            	</span>
+                   
+            </div>
+        </li>
+    </ul>
+</div>
+
+    
+<div class="content-box white-content">
+	<h4><b>{{ offer.title }}</b></h4>
+    <div class="textfield no-padding">
+        {% if offer.description and offer.description|length > 0 %}
+            {{ offer.description|textfield }}
+        {% else %}
+            {% trans "(No description set)" %}
+        {% endif %}
+    </div>
+    
+    <br/>
+    
+    <p>
+    	{% with categories=offer.categories.all %}
+    		{% if categories %}
+    			<span>
+    				{% trans "offered in" %}:
+    				{% for category in categories %}
+    					<a href="{% group_url "cosinnus:marketplace:list" group=group %}?categories={{ category.id }}">{{ category.name }}</a>{% if not forloop.last %}, {% endif %}
+    				{% endfor %}
+    			</span>
+    		{% endif %}
+    	{% endwith %}
+    </p>
+    
+    <br/>
+    <div class="content-box">
+    	<p class="transparent large-space"><b>{% blocktrans with username=offer.creator.first_name %}Contact {{ username }} directly{% endblocktrans %}:</b></p>
+    	
+    	{% if offer.phone_number %}
+    	<p class="transparent">
+    		{% trans "Phone number" %}: 
+    		{% if user.is_authenticated %}
+    			{{ offer.phone_number.as_international }}
+    		{% else %}
+    			<i>({% trans "Only shown for registered users" %})</i>
+    		{% endif %}
+    	</p>
+    	{% endif %}
+    	
+    	{% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+        {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
+	        <button type="button" class="btn btn-emphasized" style="float: none; margin: 0;" {% if not offer.creator == user %}href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=offer.creator.username %}{% else %}{% url 'postman:write' recipients=offer.creator.username %}{% endif %}"{% else %}disabled="true"{% endif %}>
+	            <ul class="media-list">
+	                <li class="media">
+	                    <span class="pull-left">
+	                        <i class="fa fa-envelope"></i>
+	                    </span>
+	                    <div class="media-body">
+	                        {% trans "Send Message" %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </button>
+        {% endif %}
+        {% endif %}
+    </div>
+    
+    <br/>
+	{% if offer.attached_images %}
+	    {% include 'cosinnus/common/attached_images_gallery.html' with object=offer %}
+	{% endif %}
+	
+	{% if offer.creator == user %}
+    	<br/>
+    	<span>
+    		{% if offer.is_active %}
+	    		{% trans "expires on" %}: 
+    		{% else %}
+    			{% trans "expired on" %}:
+    		{% endif %}
+    		<span class="moment-data-date" data-date="{{ offer.expires_on|date:'c' }}"></span>
+    	</span>
+	{% endif %}
+    
+</div>
+
+{% if offer.attached_objects.exists %}
+    {% cosinnus_render_attached_objects offer skipImages=True %}
+{% endif %}
+
+{% include 'cosinnus/media_tags_readonly.html' with object=offer hide_attached=True list_view="noindent" %}
+

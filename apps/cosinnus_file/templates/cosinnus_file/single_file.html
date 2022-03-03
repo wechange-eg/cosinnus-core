@@ -1,0 +1,34 @@
+{% load i18n cosinnus_tags thumbnail %}
+
+{% with file=object %}
+    <div class="app-files">
+        <div class="btn btn-emphasized w100" {% if file.is_image %}href="{{ file.static_image_url }}" data-lightbox-download="{{ file.static_image_original_url }}" data-lightbox="image-{{ file.id }}" data-title="{{ file.title }}"{% else %}href="{{ file.get_absolute_url }}" {% if file.is_url %}target="_blank"{% endif %}{% endif %}>
+            <ul class="media-list {% if no_space %}fine-space{% else %}large-space{% endif %}">
+                <li class="media">
+                    <span class="pull-left">
+                        {% if file.is_image %}
+                            <img src='{{ file.static_image_url_thumbnail }}' title='{{ file.title }}'></img>
+                        {% else %}
+                        	<i class="fa {{ file.get_icon }}"></i>
+                        {% endif %}
+                    </span>
+                    <div class="media-body {% if not hide_group_name %}no-vertical-padding{% endif %}">
+                         <span class="annotation mobile-hidden">
+                             {% with creator=file.creator %}
+                                 {# {% trans "by" %} #} <strong><a href="{{ creator|profile_url }}" >{{ creator|full_name }}</a></strong> 
+                             {% endwith %}
+                             <span class="moment-data-date" data-date="{{ file.created|date:'c' }}"></span>
+                         </span>
+                         <strong>{{ file.title }}</strong>
+                         {% if not hide_group_name %}
+			                 <div class="group-annotation">
+	                             {% include 'cosinnus/group/group_label.html' with group=file.group %}
+	                             {% include 'cosinnus/common/hierarchical_object_folder_label.html' with object=file %}
+	                         </div>
+	                     {% endif %}
+                    </div>
+                </li>
+            </ul>
+        </div><!-- btn -->
+    </div>
+{% endwith %}

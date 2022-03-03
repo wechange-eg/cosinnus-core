@@ -1,0 +1,406 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-01 16:06+0100\n"
+"PO-Revision-Date: 2021-05-24 17:51+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.2.1\n"
+
+msgid "Notes"
+msgstr "نوشته‌ها"
+
+msgctxt "the_app"
+msgid "note"
+msgstr "نوشته"
+
+msgid "A user commented on a news post"
+msgstr "یک کاربر در مورد یک مطلب خبری نظری نوشته است"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post"
+msgstr "%(sender_name)s در مورد یک مطلب خبری نظری نوشته است"
+
+msgid "A user commented on one of your news posts"
+msgstr "یک کاربر در مورد یکی از مطالب خبری شما نظری نوشته است"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post %(object_name)s"
+msgstr "%(sender_name)s در مورد این مطلب خبری شما نظری نوشته است: %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
+msgstr[0] "%(sender_name)s و %(count_minus_one)d نفر دیگر در مورد این مطلب خبری شما نظر نوشته‌اند: %(object_name)s"
+msgstr[1] "%(sender_name)s و %(count_minus_one)d نفر دیگر در مورد این مطلب خبری شما نظر نوشته‌اند: %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post"
+msgstr "%(sender_name)s در مورد مطلب خبری شما نظر نوشته است"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts"
+msgstr "%(sender_name)s در مورد یکی از مطالب خبری شما نظری نوشته است"
+
+msgid "A user commented on a news posts you commented in"
+msgstr "یک کاربر در مورد یکی از مطالب خبری که شما درباره‌ش نظری نوشته‌اید نظر داده"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
+msgstr "%(sender_name)s در مورد این مطلب خبری که شما درموردش نظر داده‌اید نظری نوشته است: %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
+msgstr[0] "%(sender_name)s و %(count_minus_one)d نفر دیگر در مورد این مطلب خبری که شما درموردش نظر داده بودید نظر نوشته‌اند: %(object_name)s"
+msgstr[1] "%(sender_name)s و %(count_minus_one)d نفر دیگر در مورد این مطلب خبری که شما درموردش نظر داده بودید نظر نوشته‌اند: %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in"
+msgstr "%(sender_name)s در مورد مطلب خبری که شما در موردش نظر داده‌اید نظر نوشته است"
+
+msgid "A user created a news post"
+msgstr "یک کاربر یک مطلب خبری نوشته است"
+
+#, python-format
+msgid "%(sender_name)s created the news post %(object_name)s"
+msgstr "%(sender_name)s این مطلب خبری را نوشته است: %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d news posts"
+msgstr "%(sender_name)s %(count)d مطلب خبری نوشته"
+
+#, python-format
+msgid "%(sender_name)s created a new news post"
+msgstr "%(sender_name)s یک مطلب خبری را نوشته است"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s:"
+msgstr "\"%(sender_name)s\" یک مطلب به %(team_name)s فرستاده:"
+
+msgid "A user created a news post in a team you are following"
+msgstr "یک کاربر یک مطلب تازه به گروهی که شما دنبال می‌کنید فرستاده"
+
+#, python-format
+msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
+msgstr "\"%(sender_name)s\" یک مطلب تازه به گروه %(team_name)s که شما دنبال می‌کنید فرستاده:"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
+msgstr "\"%(sender_name)s\" مطلبی به گروه %(team_name)s که شما دنبال می‌کنید:"
+
+msgid "A user updated a news post"
+msgstr "یک کاربر یک مطلب خبری را به‌روز کرد"
+
+#, python-format
+msgid "%(sender_name)s updated the news post %(object_name)s"
+msgstr "%(sender_name)s  این مطلب خبری تازه را به‌روز کرده: %(object_name)s"
+
+msgid "You are following this news post"
+msgstr "شما این مطلب خبری تازه را دنبال می‌کنید"
+
+#, python-format
+msgid "%(sender_name)s updated a news post you are following"
+msgstr "%(sender_name)s یک مطلب خبری که شما دنبال می‌کنید را به‌روز کرده"
+
+#, fuzzy, python-format
+msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
+msgstr "یک مطلب خبری از سوی %(sender_name)s که شما دنبال می‌کنید در گروه %(team_name)s به‌روز شده:"
+
+msgid "A user commented on a news post you are following"
+msgstr "یک کاربر در مورد یک مطلب خبری که شما دنبال می‌کنید نظری نوشته است"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s"
+msgstr "%(sender_name)s در مورد این مطلب خبری نظری نوشته است: %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
+msgstr[0] "%(sender_name)s و %(count_minus_one)d نفر دیگر در مورد این مطلب خبری نظر نوشته‌اند: %(object_name)s"
+msgstr[1] "%(sender_name)s و %(count_minus_one)d نفر دیگر در مورد این مطلب خبری نظر نوشته‌اند: %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on a news posts you are following"
+msgstr "%(sender_name)s نظری در مورد مطلب خبری که شما دنبال می‌کنید نوشته"
+
+msgid "No news"
+msgstr "خبری نیست"
+
+msgid "Write a news post"
+msgstr "یک مطلب خبری تازه بنویس"
+
+msgid "News stream"
+msgstr "جریان خبر"
+
+msgid "Created By"
+msgstr "ساخته‌شده به دست"
+
+msgid "Newest Created"
+msgstr "تازه‌ترین ساخته شده"
+
+msgid "Popularity"
+msgstr "محبوبیت"
+
+msgid "Text"
+msgstr "نوشته"
+
+msgid "Facebook Share"
+msgstr "اشتراک روی فیس‌بوک"
+
+#, fuzzy
+msgid "Note Item"
+msgstr "مورد نوشتاری"
+
+msgid "Note Items"
+msgstr "موارد نوشتاری"
+
+msgid "Author"
+msgstr "نویسنده"
+
+msgid "Creator"
+msgstr "سازنده"
+
+msgid "Created"
+msgstr "ساخته شده"
+
+msgid "Comment"
+msgstr "نظر"
+
+msgid "Comments"
+msgstr "نظرها"
+
+msgid "News"
+msgstr "خبرها"
+
+msgctxt "the_verb"
+msgid "Comment"
+msgstr "نظردادن"
+
+msgid "Delete"
+msgstr "پاک کن"
+
+msgid "Write comment..."
+msgstr "نظر بنویس..."
+
+msgid "Post"
+msgstr "بفرست"
+
+msgid "There are no public news posts"
+msgstr "هیچ مطلب خبری همگانی‌ای نیست"
+
+msgid "There are no news posts yet"
+msgstr "هیچ مطلب خبری‌ای نیست"
+
+msgid "Edit news post"
+msgstr "مطلب خبری را ویرایش کن"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "یک خطا در یکی از زمینه‌هایی که وارد کرده‌اید هست. لطفن پیش از ذخیره کردن آن را برطرف کنید!"
+
+msgid "Save changes"
+msgstr "تغییرات را ذخیره کن"
+
+msgid "Title (optional)"
+msgstr "عنوان"
+
+msgid "Title"
+msgstr "عنوان"
+
+msgctxt "label for the form text input"
+msgid "News text"
+msgstr "نوشته‌ی خبر"
+
+msgid "Please enter a message..."
+msgstr "لطفن یک پیام وارد کنید..."
+
+msgid "To post in this team you need to"
+msgstr "برای فرستادن به این گروه لازم است"
+
+msgid "request to join"
+msgstr "درخواست عضویت بدهید"
+
+msgid "Cancel"
+msgstr "لغو کن"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a news post you wrote in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your post:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"درود %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s در مورد مطلب خبری‌ای که شما در گروه %(team_name)s نوشته‌اید نظری نوشته :\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"روی مطلب شما:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"این پیوند را دنبال کنید تا نظر را ببینید: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(این پیوند را برای ویرایش اولویت‌های آگاه‌سازی دنبال کنید: %(notification_settings_url)s )\n"
+"\n"
+"\n"
+"گروه %(site_name)s شما.\n"
+"\n"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a news post you a commented in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the post:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"درود %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s در مورد مطلب خبری‌ای که شما در گروه %(team_name)s در موردش نظری نوشته‌اید، نظری نوشته :\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"روی این مطلب:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"این پیوند را دنبال کنید تا نظر را ببینید: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(این پیوند را برای ویرایش اولویت‌های آگاه‌سازی دنبال کنید: %(notification_settings_url)s )\n"
+"\n"
+"گروه %(site_name)s شما.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in, in %(team_name)s."
+msgstr "%(sender_name)s در مورد یک مطلب خبری در گروه %(team_name)s که شما درموردش نظر داده‌اید نظری نوشته است."
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
+msgstr "%(sender_name)s در مورد یکی از مطالب خبری که شما در گروه %(team_name)s نوشته‌اید نظری نوشته است."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s just posted an update in %(team_name)s:\n"
+msgstr ""
+"درود %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s همین الان در گروه %(team_name)s یک به‌روزرسانی داشته:\n"
+
+#, python-format
+msgid ""
+"%(note_text)s\n"
+"\n"
+"\n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"%(note_text)s\n"
+"\n"
+"\n"
+"\n"
+"برای پیداکردن آن پیوند روبرو را دنبال کنید: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(این پیوند را برای ویرایش اولویت‌های آگاه‌سازی دنبال کنید: %(notification_settings_url)s )\n"
+"\n"
+"\n"
+"گروه %(site_name)s شما."
+
+msgid "Show in my projects..."
+msgstr "در پروژه‌های من نشان بده..."
+
+msgid "Edit"
+msgstr "ویرایش کن"
+
+msgid "Delete note"
+msgstr "نوشته را پاک کن"
+
+msgid "View on Facebook"
+msgstr "روی فیس‌بوک نشان بده"
+
+msgid "Do you really want to delete this note?"
+msgstr "آیا واقعن می‌خواهید این نوشته را پاک کنید؟"
+
+msgid "You added a post"
+msgstr "شما یک مطلب افزودید"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "added a post"
+msgstr "یک مطلب افزود"
+
+msgid "Your news post was added successfully."
+msgstr "مطلب خبری شما با موفقیت افزوده شد."
+
+msgid "Your news post was deleted successfully."
+msgstr "مطلب خبری شما با موفقیت پاک شد."
+
+msgid "Your news post was edited successfully."
+msgstr "مطلب خبری شما با موفقیت ویرایش شد."
+
+msgid "Your comment was added successfully."
+msgstr "نظر شما با موفقیت افزوده شد."
+
+msgid "Your comment was deleted successfully."
+msgstr "نظر شما با موفقیت پاک شد."

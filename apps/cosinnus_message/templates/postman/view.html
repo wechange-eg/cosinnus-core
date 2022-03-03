@@ -1,0 +1,221 @@
+{% extends "postman/base.html" %}
+{% load i18n postman_tags widget_tweaks cosinnus_tags thumbnail %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.body.id_for_label %}
+{% endblock %}
+
+{% block page_title %}{% trans "Message" %}{{ block.super }}{% endblock %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    
+    {% with pm_messages.all|first as message %}
+	    {% if message.sender == user %}
+	       {% if message.sender_deleted_at %}
+               <li class="active"><a href="{% url 'postman:trash' %}">{% trans "Trash" %}</a></li>	       
+	       {% elif message.sender_archived %}
+               <li class="active"><a href="{% url 'postman:archives' %}">{% trans "Archive" %}</a></li>         
+           {% else %}
+	           <li class="active"><a href="{% url 'postman:sent' %}">{% trans "Sent" %}</a></li>
+	       {% endif %}
+	    {% else %}
+	       {% if message.recipient_deleted_at %}
+               <li class="active"><a href="{% url 'postman:trash' %}">{% trans "Trash" %}</a></li>         
+           {% elif message.recipient_archived %}
+               <li class="active"><a href="{% url 'postman:archives' %}">{% trans "Archive" %}</a></li>         
+           {% else %}
+               <li class="active"><a href="{% url 'postman:inbox' %}">{% trans "Inbox" %}</a></li>
+           {% endif %}
+	    {% endif %}
+        <li class="active">{% if pm_messages|length > 1 %}{% trans "Conversation" %}{% else %}{% trans "Message" %}{% endif %}: {{ message.subject }}</li>
+    {% endwith %}
+{% endblock %}
+
+{% block postman_content %}
+
+{% with participants=pm_messages.0|get_other_participants:request.user %}
+<div class="btn btn-{% if message.sender == user %}extra-{% endif %}emphasized w100 ">
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left">
+                <i class="fa {% if participants|length == 1 %}fa-user{% else %}fa-group{% endif %}"></i>
+            </a>
+            <div class="media-body">
+                {% if participants|length > 1 %}
+                    {% with groups=pm_messages.0.multi_conversation.targetted_groups.all %}
+                        {% if groups %}
+                            {% trans "Conversation with members from" %}:
+                            <span>
+                                {% for group in groups %}
+                                    <span class="comma">{% include 'cosinnus/group/group_label.html' with group=group %}</span>
+                                {% endfor %}
+                            </span>
+                            <br/>
+                        {% endif %}
+                    {% endwith %}
+                {% else %}
+                   {% trans "Conversation with" %}:
+	            {% endif %}
+	            <span>
+	                {% for participant in participants|slice:"10" %}
+                        <span class="comma"><a href="{{ participant|profile_url }}" >{{ participant|full_name }}</a></span>
+                    {% endfor %}
+                    {% if participants|length > 10 %}
+                        <span class="comma participants-hide">
+                            <a onclick="$('.participants-show').show();$('.participants-hide').hide();" >
+                                <i>{% blocktrans with count=participants|length %}Show all {{count}} participants{% endblocktrans %}...</i> 
+                            </a>
+                        </span>
+                        {% for participant in participants|slice:"10:" %}
+                            <span class="comma participants-show" style="display: none;"><a href="{{ participant|profile_url }}" >{{ participant|full_name }}</a></span>
+                        {% endfor %}
+                    {% endif %}
+	            </span>
+            </div>
+            
+        </li>
+    </ul>
+</div>
+    
+<!-- a box with semi transparent background -->
+<div class="content-box">
+    
+    {% for message in pm_messages %}
+        
+        <div class="regular-space">
+            <div class="btn btn-{% if message.sender == user %}extra-{% endif %}emphasized w100">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left" href="{{ message.sender|profile_url }}">
+                            {% include "cosinnus/user/user_avatar_image.html" with user=message.sender %}
+                        </a>
+                        <div class="media-body">
+                            <a href="{{ message.sender|profile_url }}">
+                                <span class="annotation moment-data-date" data-date="{{ message.sent_at|date:"c" }}"></span>
+                                <strong>{% if message.sender == user %}<i>{% trans "Me" %}</i>{% else %}{{ message.sender|full_name }}{% endif %}</strong>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="textfield">
+               {{ message.body|textfield }}
+            </div>
+            
+            {% include 'cosinnus_message/message_attachments.html' with message=message %}
+        </div>
+        
+    
+    {% endfor %}
+
+    {% if reply_to_pk and not SETTINGS.COSINNUS_POSTMAN_ARCHIVE_MODE %}
+    <form action="{% url 'postman:reply' reply_to_pk %}?next={{ next_url|urlencode }}" method="post">{% csrf_token %}
+	    
+	    <div class="btn btn-emphasized w100">
+	        <ul class="media-list">
+	            <li class="media">
+	                <a class="pull-left" href="#">
+	                    <i class="fa fa-pencil"></i>
+	                </a>
+	                <div class="media-body">
+                        {% trans "Answer" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </div>
+	    
+	    <div class="btn btn-default w100 fine-space">
+            <ul class="media-list">
+                <li class="media">
+                    <div class="media-body">
+                        {% captureas label %}{% trans "Reply..." %}{% endcaptureas %}
+                        {% render_field form.body class+="app-message-text" placeholder=label %}
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+        {% include 'cosinnus_message/attachments_form.html' with form=form %}
+        
+        <input type="hidden" name="reply_all" value="0">
+        
+        {% if participants|length < 2 or pm_messages.0.sender != request.user %}
+	        <button type="submit" class="btn btn-emphasized" style="width:200px;">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <span class="pull-left">
+	                        <i class="fa fa-pencil"></i>
+	                    </span>
+	                    <div class="media-body">
+	                        {% if participants|length < 2 %}
+	                            {% trans "Reply" %}
+	                        {% else %}
+	                            {% blocktrans with sender_name=pm_messages.0.sender|full_name %}Reply to {{sender_name}}{% endblocktrans %}
+	                        {% endif %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </button>
+        {% endif %}
+        
+        {% if participants|length > 1 and not disable_reply_all %}
+		    <button type="submit" onclick="this.form.reply_all.value='1';" class="btn btn-emphasized" style="width:200px;">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <span class="pull-left">
+	                        <i class="fa fa-group"></i>
+	                    </span>
+	                    <div class="media-body">
+	                        {% blocktrans with adressee_count=participants|length %}Reply to all {{adressee_count}}{% endblocktrans %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </button>
+        {% endif %}
+	</form>
+    {% endif %}
+
+</div><!-- content-box -->
+{% endwith %}
+
+{% with pm_messages.all|first as message %}
+
+	<form action="" method="post">{% csrf_token %}
+		<input type="hidden" {% if pm_messages|length > 1 and message.thread_id %}name="delete_tpk__{{message.thread_id}}" value="true"{% else %}name="delete_pk__{{ message.pk }}" value="true"{% endif %} />
+		
+		<button type="submit"  onclick="this.form.action='{% url 'postman:delete' %}?next={{ next_url|urlencode }}'" class="btn btn-emphasized pull-left">
+		    <ul class="media-list">
+		        <li class="media">
+		            <span class="pull-left">
+		                <i class="fa fa-eraser"></i>
+		            </span>
+		            <div class="media-body">
+		                {% trans "Delete" %}
+		            </div>
+		        </li>
+		    </ul>
+		</button>
+		
+		{% if not archived %}
+		<button type="submit" onclick="this.form.action='{% url 'postman:archive' %}?next={{ next_url|urlencode }}'" class="btn btn-emphasized pull-left">
+		    <ul class="media-list">
+		        <li class="media">
+		            <span class="pull-left">
+		                <i class="fa fa-folder"></i>
+		            </span>
+		            <div class="media-body">
+		                {% trans "Archive" %}
+		            </div>
+		        </li>
+		    </ul>
+		</button>
+		{% endif %}
+		
+	</form>
+
+{% endwith %}
+
+{% endblock %}

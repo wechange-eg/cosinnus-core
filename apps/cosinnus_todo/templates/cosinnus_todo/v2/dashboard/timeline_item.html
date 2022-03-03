@@ -1,0 +1,35 @@
+{% extends 'cosinnus/v2/dashboard/timeline_item_base.html' %}
+{% load i18n cosinnus_tags %}
+
+{% block container_class %}timeline-item-todo{% endblock %}
+
+{% block creation_label %}
+	{% if item.creator == user %}
+		{% trans "You created a todo" %}
+	{% else %}
+		{% trans "created a todo" context "This appears next to new items in the timeline, as in '<Jane> created a new item'" %}
+	{% endif %}
+{% endblock %}
+
+
+{% block icon %}fa-tasks{% endblock %}
+{% block icon_class %}{% if item.assigned_to %}icon-padded{% endif %}{% endblock %} {% comment %} Set if there is a subtitle row! {% endcomment %}
+
+{% block title %}{{ item.title }}{% endblock %}
+
+{% block subtitle %}
+	{% if item.assigned_to %}
+		{% trans "Assigned To" %}
+		<a href="{{ item.assigned_to.cosinnus_profile.get_absolute_url }}">
+			{{ item.assigned_to|full_name }}
+		</a>
+	{% endif %}
+	{{ block.super }}	
+{% endblock %}
+
+{% block body %}
+	{{ item.note|textfield }}
+{% endblock %}
+
+{% block edit_button_url %}{% group_url "cosinnus:todo:entry-edit" group=item.group slug=item.slug %}{% endblock %}
+{% block delete_button_frame %}{% endblock %}

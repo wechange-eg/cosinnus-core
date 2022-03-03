@@ -1,0 +1,56 @@
+{% load i18n static cosinnus_tags %}
+
+{% if request.user and request.user.is_authenticated %} 
+    <!-- Modal: Really sure you want to add the event? -->
+    <div class="modal fade" id="confirmEventModal" tabindex="1" role="dialog" aria-labelledby="confirmEventModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times"></i>
+                    </button>
+                    <h4 class="modal-title" id="confirmEventModalLabel">
+                        <i class="fa fa-calendar"></i>
+                        {% trans "Create Event" %}
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <span id="calendarConfirmEventOneday">{% trans "Would you like to create an event" %} {% trans "on" %}: <strong id="calendarConfirmEventDate" /></strong>?</span>
+                    <span id="calendarConfirmEventMultiday">{% trans "Would you like to create an event" %} {% trans "from" %} <strong id="calendarConfirmEventStart" /></strong> {% trans "until" %} <strong id="calendarConfirmEventEnd" /></strong>?</span>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-emphasized" data-dismiss="modal">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left">
+                                    <i class="fa fa-times"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans "Cancel" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                    
+                    <form method="GET" action="{% group_url 'cosinnus:event:event-add' group=group %}">
+                    <input type="hidden" name="start" id="calendarConfirmStartDate" />
+                    <input type="hidden" name="end" id="calendarConfirmEndDate" />
+                    <button type="submit" class="btn btn-emphasized" id="calendarConfirmEventButton">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left">
+                                    <i class="fa fa-check"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans "OK" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div><!-- modal -->
+{% endif %}

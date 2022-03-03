@@ -1,0 +1,9 @@
+{% load static thumbnail cosinnus_tags %}
+
+{% with user=attendance.user %}
+	<div class="attendance-avatar {% if maybe_going %}faded{% endif %}">
+		<a href="{{ user.cosinnus_profile.get_absolute_url }}">
+			{% include 'cosinnus/user/user_avatar_image.html' with user=user extra_title=extra_title extra_classes="image" %}
+		</a>
+	</div>
+{% endwith %}

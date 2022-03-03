@@ -1,0 +1,8 @@
+{% load i18n %}
+{% if offer and offer.type == 1 %} 
+	<i class="fa fa-question" title="{% trans "Looking for" %}"></i>
+{% elif offer and offer.type == 2 %}
+	<i class="fa fa-exclamation" title="{% trans "Offering" %}"></i>
+{% else %}
+	<i class="fa fa-exchange"></i>                    	
+{% endif %}

@@ -1,0 +1,230 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:43+0200\n"
+"PO-Revision-Date: 2021-03-09 00:26+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.2\n"
+
+msgid "You are seeing this alert because you created this content."
+msgstr "אתם רואים התראה זו מכיוון שיצרתם תוכן זה."
+
+msgid "You are seeing this alert because you are following the item's project or group."
+msgstr "אתם רואים התראה זו מכיוון שאתם עוקבים אחר הפרויקט או הקבוצה של הפריט."
+
+msgid "You are seeing this alert because you are following this item."
+msgstr "אתם רואים התראה זו מכיוון שאתם עוקבים אחר פריט זה."
+
+msgid "Notifications"
+msgstr "התראות"
+
+msgctxt "the_app"
+msgid "notifications"
+msgstr "התראות"
+
+#, python-format
+msgid "Your daily digest for %(portal_name)s"
+msgstr "התמצית היומית שלך עבור %(portal_name)s"
+
+msgid "This is what happened during the last day!"
+msgstr "זה מה שקרה במהלך היום האחרון!"
+
+#, python-format
+msgid "Your weekly digest for %(portal_name)s"
+msgstr "התמצית השבועית שלך עבור %(portal_name)s"
+
+msgid "This is what happened during the last week!"
+msgstr "זה מה שקרה בשבוע האחרון!"
+
+msgctxt "notification frequency"
+msgid "Never"
+msgstr "אף פעם"
+
+msgctxt "notification frequency"
+msgid "Immediately"
+msgstr "מיידית"
+
+msgctxt "notification frequency"
+msgid "Daily"
+msgstr "יומית"
+
+msgctxt "notification frequency"
+msgid "Weekly"
+msgstr "שבועית"
+
+msgid "Notification Preference for User"
+msgstr "העדפות התראה למשתמש"
+
+msgid "Notification ID"
+msgstr "פרטי זיהוי ההתראה"
+
+msgid "Notification Preference"
+msgstr "העדפת התראה"
+
+msgid "Notification Preferences"
+msgstr "העדפות התראה"
+
+msgid "Portal"
+msgstr "פורטל"
+
+msgid "Multi Notification ID"
+msgstr "פרטי זיהוי התראות מרובות"
+
+msgid "Multi Notification Preference"
+msgstr "העדפות התראה מרובות"
+
+msgid "Multi Notification Preferences"
+msgstr "העדפות התראה מרובות"
+
+msgid "User who caused this notification event"
+msgstr "משתמש שגרם לאירוע התראות זה"
+
+msgid "Audience"
+msgstr "קהל יעד"
+
+msgid "Owner of the alert"
+msgstr "בעל ההתראה"
+
+msgid "Alert Reason key"
+msgstr "מפתח 'סיבה להתראה'"
+
+msgid "Last user who caused this notification event"
+msgstr "משתמש אחרון שגרם לאירוע התראות זה"
+
+msgid "Alert State"
+msgstr "מצב התראה"
+
+msgid "You are following this content or its Project or Group"
+msgstr "אתם עוקבים אחר תוכן זה או הפרויקט או הקבוצה שלו"
+
+msgid "All notifications"
+msgstr "כל ההתראות"
+
+msgid "No notifications"
+msgstr "אין התראות"
+
+msgid "For content that I am following, I wish to receive notification emails"
+msgstr "עבור תוכן שאני עוקב/ת, ברצוני לקבל הודעות דוא\"ל"
+
+msgid "You are getting this notification because you are subscribed to these kinds of events in your project or group."
+msgstr "אתם מקבלים התראה זו מכיוון שאתם מנויים לאירועים מסוג זה בפרויקט/קבוצה שלכם."
+
+msgid "You are getting this notification because you are an administrator of this project or group."
+msgstr "אתם מקבלים התראה זו מכיוון שאתם מנהלי מערכת של פרויקט או קבוצה זו."
+
+msgid "You are getting this notification because you are an administrator of this portal."
+msgstr "אתם מקבלים התראה זו מכיוון שאתם מנהלי מערכת של פורטל זה."
+
+msgid "You are getting this email because you are subscribed to one or more daily notifications."
+msgstr "אתם מקבלים את הדוא\"ל מכיוון שאתם מנויים להתראה יומית אחת או יותר."
+
+msgid "You are getting this email because you are subscribed to one or more weekly notifications."
+msgstr "אתם מקבלים דוא\"ל זו מכיוון שאתם מנויים להתראה שבועית אחת או יותר."
+
+msgid "New item"
+msgstr "פריט חדש"
+
+msgid "Like"
+msgstr "אהבתי"
+
+msgid "Follow"
+msgstr "עקוב/י"
+
+#, python-format
+msgid "View on %(portal_name)s"
+msgstr "הצג על %(portal_name)s"
+
+msgid "Untitled"
+msgstr "ללא כותרת"
+
+msgid "Your Profile"
+msgstr "הפרופיל שלך"
+
+msgid "Select which notifications you would like to receive for each group or project you are involved in."
+msgstr "בחרו איזה התראות תרצו לקבל עבור כל פרויקט/קבוצה שאתם מעורבים בה."
+
+msgid "These notifications will be sent to your configured email address:"
+msgstr "התראות אלה ישלחו אליך לכתובת הדוא\"ל המאומתת:"
+
+msgid "You can choose to receive notifications as soon as they happen, or you can receive a daily (or weekly) e-mail digest."
+msgstr "אתם יכולים לבחור לקבל התראות ברגע שהן מתרחשות, או שאתם יכולים לבחור לקבל תקציר יומי (או שבועי) בדוא\"ל."
+
+msgid "The digest will aggregate all notifications with the \"Daily\" (or \"Weekly\") setting from all groups and projects. So you will receive only a single e-mail per day (or week) containing everything interesting that happend."
+msgstr "התקציר יצבור את כל ההודעות עם ההגדרה \"יומי\" (או \"שבועי\") מכל הקבוצות והפרויקטים. כך שתקבלו דוא\"ל יחיד ליום (או שבוע) המכיל את כל מה שמעניין שקרה."
+
+msgid "Notifications you set to \"Immediately\" will be e-mailed to you as soon as they happen, with one e-mail per notification."
+msgstr "התראות שהגדרת כ\"מיידיות\" ישלחו בדוא\"ל ברגע שהן מתרחשות, עם הודעת דוא\"ל לכל התראה."
+
+msgid "Don't forget to save your settings once you are done editing them!"
+msgstr "אל תשכחו לבצע שמירה לאחר שסיימתם לערוך את ההגדרות שלכם!"
+
+msgid "more"
+msgstr "עוד"
+
+msgid "I wish to receive notification emails"
+msgstr "ברצוני לקבל התראות דרך הדוא\"ל"
+
+msgid "Note that you will receive an email notification if someone has invited you to a group/ project in any case."
+msgstr ""
+
+msgid "I would like to receive instant messages by email for RocketChat mentions and direct messages to me"
+msgstr ""
+
+msgid "Receive notification emails in this language"
+msgstr "קבלו התראות תיבת דואר נכנס בשפה זו"
+
+msgid "Moderator Status (Portal-Admins only)"
+msgstr "מצב מנחה (מנהלי פורטל בלבד)"
+
+msgid "I wish to be a Moderator for this portal"
+msgstr "אני רוצה להיות מנחה של פורטל זה"
+
+msgid "As a Moderator, you will receive an instant notification whenever ANY publicly visible content is posted on this portal. Since you are a portal administrator you can then also delete the content if it is offensive or critical. To delete it, visit the content page on the website while logged into this account."
+msgstr "כמנחה, תקבלו הודעה מיידית בכל פעם שתוכן גלוי לציבור יפורסם בפורטל. מכיוון שאתם מנהלי מערכת באפשרותכם למחוק את התוכן אם הוא מזוהה כפוגעני או קריטי. על מנת למחוק, בקרו בדף התוכן באתר כאשר אתם מחוברים לחשבון זה."
+
+msgid "Immediately"
+msgstr "מיידית"
+
+msgid "Daily"
+msgstr "יומית"
+
+msgid "Weekly"
+msgstr "שבועית"
+
+msgid "Custom"
+msgstr "מותאם אישית"
+
+msgid "Reset to default"
+msgstr "אתחל לברירת מחדל"
+
+msgid "Save"
+msgstr "שמור"
+
+msgid "This will reset all of your notification preferences to their default setting. Are you sure you wish to do that?"
+msgstr "פעולה זו תאתחל את כל ההתראות שלכם להגדרות ברירות מחדל. האם אתם בטוחים שברצונכם לעשות זאת?"
+
+msgid "Your notification preferences were updated successfully."
+msgstr "העדפות ההתראה שלך עודכנו בהצלחה."
+
+msgid "Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!"
+msgstr ""
+
+msgid "Your notifications preferences were reset to default!"
+msgstr "העדפות ההתראה שלך אותחלו לברירת מחדל!"
+
+#, fuzzy
+#~| msgid "I wish to receive notification emails"
+#~ msgid "I wish to receive RocketChat notification emails"
+#~ msgstr "ברצוני לקבל התראות דרך הדוא\"ל"

@@ -1,0 +1,43 @@
+{% load i18n cosinnus_tags %}
+
+{% with event=object %}
+    <div class="app-calendar">
+        <div class="btn btn-emphasized w100" href="{{ event.get_absolute_url }}{% if group and group != event.group %}?reflected_item_redirect=1{% endif %}">
+            <ul class="media-list {% if no_space %}fine-space{% else %}large-space{% endif %}">
+                <li class="media">
+                    <span class="pull-left square-date-icon">
+                        {% if event.state == 2 %}
+                            <i class="fa fa-calendar-check-o"></i>
+                        {% else %}
+                            <div>{{ event.from_date|date:"d" }}</div>
+                            <div>{{ event.from_date|date:"M" }}</div>
+                        {% endif %}
+                    </span>
+                    <div class="media-body {% if not hide_group_name %}no-vertical-padding{% endif %} ">
+                        <span class="annotation mobile-hidden">
+                            {% with creator=event.creator %}
+                                {# {% trans "by" %} #} <strong>{{ creator|full_name }}</strong>
+                            {% endwith %}
+                            {% comment %}  
+                                creation date annotation removed for events to avoid confusion                          
+	                            <span class="moment-data-date" data-date="{{ event.created|date:'c' }}"></span>
+                            {% endcomment %}
+                        </span>
+                        <strong>
+                            {% comment %} {{ group }} is not present when this event is rendered as a search result, so we never use reflected logic {% endcomment %}
+                            <a href="{{ event.get_absolute_url }}{% if group and group != event.group %}?reflected_item_redirect=1{% endif %}">
+                                {% include 'cosinnus/common/likefollowstar/following_title_indicator.html' with object=event %}
+	                            {{ event.title }}{% if group and group != event.group %} (&#8599; {{ event.group.name|truncatechars:14 }}){% endif %}
+	                        </a>
+                        </strong>
+                        {% if not hide_group_name %}
+			                <div class="group-annotation">
+	                            {% include 'cosinnus/group/group_label.html' with group=event.group %}
+	                        </div>
+	                    {% endif %}
+                    </div>
+                </li>
+            </ul>
+        </div><!-- btn -->
+    </div>
+{% endwith %}

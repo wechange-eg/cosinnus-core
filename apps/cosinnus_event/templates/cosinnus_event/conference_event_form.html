@@ -1,0 +1,275 @@
+{% extends "cosinnus_event/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.note.id_for_label translation_form=form.forms.obj translated_field_name=form.forms.obj.note.html_name %}
+{% endblock %}
+
+{% block page_title %}
+	{% if form_view == "add" %}
+	    {% blocktrans with room_name=room.title asvar page_title %}Add {{ event_type_verbose }} in Room {{ room_name }}{% endblocktrans %}
+	{% elif form_view == "edit" %}
+	    {% blocktrans with room_name=room.title event_title=object.title asvar page_title %}Edit {{ event_type_verbose }} "{{ event_title }}" in Room {{ room_name }}{% endblocktrans %}
+	{% endif %}
+	{{ page_title }}{{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+    {% if form_view == "add" %}
+	    {% blocktrans with room_name=room.title asvar page_title %}Add {{ event_type_verbose }} in Room {{ room_name }}{% endblocktrans %}
+	{% elif form_view == "edit" %}
+	    {% blocktrans with room_name=room.title event_title=object.title asvar page_title %}Edit {{ event_type_verbose }} "{{ event_title }}" in Room {{ room_name }}{% endblocktrans %}
+	{% endif %}
+	{% include 'cosinnus/breadcrumb.html' %}
+    <li><a class="active" href="{% group_url 'cosinnus:event:conference-event-list' group=group %}">{% trans "Conference Events" %}</a></li>
+    <li class="active">{{ page_title }}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% comment %}  
+    {% include "cosinnus_event/leftnav.html" with return_to="events"%}
+    {% endcomment %}
+{% endblock leftnav %}
+
+{% block content %}
+
+    {% if form.forms.obj.errors or form.forms.media_tag.errors %}
+        <div class="alert alert-danger alert-dismissable">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+            <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+        </div>
+    {% endif %}
+    
+    <form method="POST" action="" class="cosinnus-form form-horizontal" enctype="multipart/form-data">{% csrf_token %}
+	    {{ form.forms.obj.non_field_errors }}
+	    {{ form.forms.media_tag.non_field_errors }}
+	    
+	    <!-- a box with semi transparent background -->
+		<div class="content-box">
+		      
+		    {% if form_view == "add" %}
+			    {% blocktrans with room_name=room.title asvar page_title %}Add {{ event_type_verbose }} in Room {{ room_name }}{% endblocktrans %}
+			{% elif form_view == "edit" %}
+			    {% blocktrans with room_name=room.title event_title=object.title asvar page_title %}Edit {{ event_type_verbose }} "{{ event_title }}" in Room {{ room_name }}{% endblocktrans %}
+			{% endif %}
+			<h2>{{ page_title }}</h2>
+	        
+	        {% if form.forms.obj.fields.title %}
+		        {% trans "Title" as title_label %}
+		        {% trans "Enter a title for the conference event." as title_legend %}
+		        {% captureas title_html %}
+		            {% if request.GET.title %}
+		                {% render_field form.forms.obj.title class+="form-control" placeholder=title_label value=request.GET.title %}
+		            {% else %}
+		                {% render_field form.forms.obj.title class+="form-control" placeholder=title_label %}
+		            {% endif %}
+		        {% endcaptureas %}
+		        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.title legend=title_legend label=title_label field_html=title_html first=True translation_form=form.forms.obj %}
+			{% endif %}
+			
+			{% if not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+				{% if form.forms.obj.fields.is_break %}
+		            {% comment %} Visibility Field {% endcomment %}
+		            {% trans "Event is a break" as break_label %}
+		            {% trans "Check this to create an empty break event that shows up in the agenda and timeline" as break_legend %}
+		            {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.is_break label=break_label legend=break_legend checkbox_label=break_label %}
+				{% endif %}
+			{% endif %}
+			
+			{% comment %} Date picker for from_date - to_date {% endcomment %}
+			{% if form.forms.obj.fields.from_date and form.forms.obj.fields.to_date %} 
+			    {% include 'cosinnus/fields/from_to_date_field.html' with from_date_field=form.forms.obj.from_date to_date_field=form.forms.obj.to_date %}
+	        {% endif %}
+	        
+	        {% if form.forms.obj.fields.note %}
+		        {# SimpleMDE Description Field (gets initialized in extrahead) #}                                   
+		        {% trans "Description and Infos" as description_label %}
+		        {% trans "Description" as description_placeholder %}
+		        {% trans "Enter a description for the event" as description_legend %}
+		        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.note legend=description_legend label=description_label placeholder=description_placeholder large_field=True translation_form=form.forms.obj %}
+	        {% endif %}
+			<hr class="invisible"/>
+
+			{% if form.forms.obj.fields.is_visible_on_microsite %}
+					{% trans "Show this event on microsite" as event_visibility_label %}
+					{% trans "Uncheck this to hide the event on microsite" as event_visibility_legend %}
+					{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.is_visible_on_microsite label=event_visibility_label legend=event_visibility_legend checkbox_label=event_visibility_label %}
+			{% endif %}
+	        
+            {% if form.forms.obj.fields.is_description_visible_on_microsite %}
+				<div id="is_description_visible_on_microsite" {% if object and not object.is_visible_on_microsite %}style="display: none"{% endif %}>
+                	{% trans "Show the event's description on microsite" as events_confidentiality_label %}
+						{% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+							{% trans "Uncheck this to disable platform-wide viewing of the event's description" as events_confidentiality_legend %}
+						{% else %}
+							{% trans "Uncheck this to disable public viewing of the event's description" as events_confidentiality_legend %}
+						{% endif %}
+                	{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.is_description_visible_on_microsite label=events_confidentiality_label legend=events_confidentiality_legend checkbox_label=events_confidentiality_label %}
+				</div>
+			{% endif %}
+
+			<script type="text/javascript">
+				{# show or hide `event.is_description_visible_on_microsite` option based on `event.is_visible_on_microsite` checkbox #}
+				$("#id_is_visible_on_microsite").on("click", function(){
+					if($("#id_is_visible_on_microsite").is(':checked'))
+						$("#is_description_visible_on_microsite").show('slow');
+					else
+						$("#is_description_visible_on_microsite").hide('slow');
+				});
+			</script>
+	        
+	        {% if form.forms.obj.fields.url %}
+                {% captureas url_placeholder %}{% trans "Example:" %} https://www.youtube.com/watch?v=12345{% endcaptureas %}
+                {% trans "Stream URL for the Event" as url_label %}
+                {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.url label=url_label placeholder=url_placeholder %}
+            {% endif %}
+
+	        {% if form.forms.obj.fields.raw_html %}
+                {% trans "Custom embed code (HTML)" as raw_html_label %}
+                {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.raw_html label=raw_html_label large_field=True %}
+            {% endif %}
+
+            {% if form.forms.obj.fields.max_participants %}
+                {% trans "Maximum Event Participants" as max_label %}
+                {% captureas max_legend %}
+                    {% trans "How many participants can join the video call before it is full." %}
+                    {% trans "Note that changing this setting will have no effect while an event is running." %}
+                {% endcaptureas %}
+                {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.max_participants label=max_label legend=max_legend %}
+            {% endif %}
+            
+            {% if form.forms.conference_settings_assignments and SETTINGS.BBB_PRESET_USER_FORM_FIELDS %}
+                <div class="cosinnus-field ">
+                    <label>{% trans "BBB video conference options" %}</label>
+                    {% include 'cosinnus/conference/conference_settings_formfields.html' with form=form.forms.conference_settings_assignments %}
+                </div>
+            {% endif %}
+            
+            {% if form.forms.obj.fields.image %}    
+                {% trans "Upload a preview image for the Conference Event" as files_label %}
+                {% captureas files_legend %}
+                    {% trans "Will be shown on the event card in the conference room." %}
+                    <br/>
+                    {% include 'cosinnus/texts/image_upload_legend_conference_event.html' %}
+                {% endcaptureas %}
+                {% include 'cosinnus/media_tags.html' with show_files=True files_label=files_label files_legend=files_legend disable_more_button=True disable_visibility=True disable_topics=True disable_location=True disable_tags=True disable_persons=True %}
+            {% endif %}
+		    
+		    {% if not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+			    {% if form.forms.obj.fields.presenters %}
+				    {% if not persons_label %}{% trans "Presenters" as persons_label %}{% endif %}
+			        {% trans "Presenters" as persons_placeholder %}
+		            {% trans "The presenters will be shown in order in the event and will receive Moderator permissions for the BBB-Room" as persons_legend %}
+			        {% include 'cosinnus/fields/media_tag_field.html' with field=form.forms.obj.presenters label=persons_label icon="fa-user" placeholder=persons_placeholder legend=persons_legend %}
+		        {% endif %}
+	
+		        {% if form.forms.obj.fields.presentation_file %}
+	                {% captureas presentation_file_label %}
+	                    {% trans "Presentation file" %} (PDF)
+	                {% endcaptureas %}
+	                {% captureas presentation_file_legend %}
+			            {% trans "The presentation file (e.g. PDF) will be pre-uploaded to the BBB room." %}
+			            <br/>
+			            {% trans "Note: If a slide is subsequently added to an existing event, it does not automatically appear in the event if this event was recently attended and is therefore active. This requires an active ending of the event or a 5-minute idle time without participants until the event is automatically ended. " %}
+			            <br/>
+			            {% trans 'You can actively end an existing event room by clicking on "End Meeting" in the top right-hand corner of the room in the "Three-Dot Menu".' %}
+	                {% endcaptureas %}
+	                {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.presentation_file label=presentation_file_label legend=presentation_file_legend large_field=True field_classes="file-field" %}
+	            {% endif %}
+            {% endif %}
+            
+            {% if SETTINGS.COSINNUS_ROCKET_ENABLED and room.type in room.ROCKETCHAT_ROOM_TYPES %}
+                {% comment %} Show chat {% endcomment %}
+                {% trans "Show room chat in the event" as show_chat_label %}
+                {% trans "Check this to show rocket chat in the sidebar." as show_chat_legend %}
+                {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.show_chat label=show_chat_label legend=show_chat_legend checkbox_label=show_chat_label %}
+            {% endif %}
+            
+            {% if form.forms.obj.instance.streaming_allowed %}
+                <div class="panel panel-default large-space">
+                    <div class="panel-heading">
+                        <h4 class="panel-title {% if not form.forms.obj.instance.enable_streaming %}collapsed{% endif %}" data-toggle="collapse" data-target="#collapseStreamingOptions">
+                            <i class="fa fa-chevron-down panel-collapsed"></i>
+                            <i class="fa fa-chevron-up panel-open"></i>
+                            {% trans "Stream this event" %}
+                        </h4>
+                    </div>
+                    <div id="collapseStreamingOptions" class="panel-collapse {% if not form.forms.obj.instance.enable_streaming %}collapse{% else %}in{% endif %}">
+                        <div class="panel-body">
+                            <div class="textfield transparent">
+                                <p>
+                                    {% trans "Please note: Streaming is only available for premium conferences. If you would like to use streaming, please request it explicitly when booking. Otherwise, these settings have no function." %}
+                                </p>
+                                <p>
+                                    {% trans "You can set up the BBB event to be streamed to a streaming provider (e.g. YouTube)." %}
+                                </p>
+                                <p>
+{% blocktrans with start_minutes=SETTINGS.COSINNUS_CONFERENCES_STREAMING_API_START_STREAMER_BEFORE_MINUTES end_minutes=SETTINGS.COSINNUS_CONFERENCES_STREAMING_API_STOP_DELETE_STREAMER_AFTER_MINUTES %}Once set up and activated, a streaming-bot will enter the event and stream all video and audio to the selected stream endpoint.
+The bot will enter and start streaming {{ start_minutes }} minutes before the event start time and stop streaming and leave {{ end_minutes }} minutes after the event end time.
+You can adjust the meeting times on-the-fly to allow for longer streaming if the event runs longer than expected.{% endblocktrans %}
+                                </p>
+                                <p>
+                                    {% trans "If you are using the maximum participant limit, please allow for the streaming bot's additional participant spot." %}
+                                </p>
+                            </div>
+                            
+			                {% trans "Enable Streaming this BBB meeting" as enable_streaming_label %}
+                            {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.enable_streaming label=enable_streaming_label checkbox_label=enable_streaming_label %}
+			            
+			                {% trans "Stream URL" as stream_url_label %}
+			                {% trans "The URL of your streaming provider to receive the incoming stream" as stream_url_legend %}
+                            {% captureas stream_url_placeholder %}{% trans "Example:" %} rtmp://a.rtmp.youtube.com/live2{% endcaptureas %}
+			                {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.stream_url label=stream_url_label legend=stream_url_legend placeholder=stream_url_placeholder %}
+                            
+                            {% trans "Stream Key" as stream_key_label %}
+                            {% trans "The key for this specific stream session you created at your streaming provider" as stream_key_legend %}
+                            {% captureas stream_key_placeholder %}{% trans "Example:" %} 4bx1-jedp-7suk-a16e-3gk5{% endcaptureas %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.stream_key label=stream_key_label legend=stream_key_legend placeholder=stream_key_placeholder %}
+                            
+                        </div>
+                    </div>
+                </div>
+            
+            {% endif %}
+	        
+		</div><!-- content-box -->
+		
+		       
+	    <button type="submit" class="btn btn-emphasized" id="createDoodleButton">
+	        <ul class="media-list">
+	            <li class="media">
+	                <span class="pull-left">
+	                    <i class="fa fa-pencil"></i>
+	                </span>
+	                <div class="media-body">
+	                    {% if form_view == "add" %}
+	                      {% trans "Create" %}
+	                    {% elif form_view == "edit" %}
+	                      {% trans "Save" %}
+	                    {% endif %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+
+		<button type="submit" name="create_another" class="btn btn-autosize btn-emphasized" >
+	        <ul class="media-list">
+	            <li class="media">
+	                <span class="pull-left">
+	                    <i class="fa fa-pencil"></i>
+	                </span>
+	                <div class="media-body">
+						{% if form_view == 'add' %}
+	                      {% trans "Create and create another" %}
+						{% elif form_view == 'edit' %}
+							{% trans "Save and create another" %}
+						{% endif %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+
+	</form>
+
+{% endblock content %}

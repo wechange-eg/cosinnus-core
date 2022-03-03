@@ -1,0 +1,269 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: wechange RU\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 14:51+0200\n"
+"PO-Revision-Date: 2020-10-12 20:28+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.4.1\n"
+
+msgid "The following Pads were re-initialized:"
+msgstr "Проведена реинициализация следующих документов:"
+
+msgid "Reinit Pads (do not use if you don't know what this is!)"
+msgstr "Провести реинициализацию документов (не применяйте эту команду, если вы не знаете, что это такое!)"
+
+msgid "Etherpads"
+msgstr "Документы"
+
+msgctxt "the_app"
+msgid "etherpad"
+msgstr "документ"
+
+msgid "A user created a new etherpad"
+msgstr "Пользователь создал новый документ"
+
+#, python-format
+msgid "%(sender_name)s created the pad %(object_name)s"
+msgstr "%(sender_name)s создал новый документ %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d pads"
+msgstr "%(sender_name)s создал %(count)d документов"
+
+#, python-format
+msgid "%(sender_name)s created a new etherpad"
+msgstr "%(sender_name)s создал новый документ"
+
+#, python-format
+msgid "A new etherpad: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Новый документ: \"%(object_name)s\" был создан в %(team_name)s."
+
+msgid "A user created a new etherpad in a team you are following"
+msgstr "Пользователь создал новый документ в команде, за которой вы следите"
+
+#, python-format
+msgid "%(sender_name)s created a new etherpad in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s создал новый документ в %(team_name)s (за которой Вы следите)"
+
+#, python-format
+msgid "A new etherpad: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Новый документ: \"%(object_name)s\" был создан в %(team_name)s (за которым Вы следите)."
+
+msgid "Last accessed Etherpads"
+msgstr "Последние открытые документы"
+
+msgid "No etherpads"
+msgstr "Документов нет"
+
+msgid "Created By"
+msgstr "Создатель"
+
+msgid "Type"
+msgstr "Тип"
+
+msgid "Etherpad"
+msgstr "Документ"
+
+msgid "Ethercalc"
+msgstr "Таблица"
+
+msgid "Last accessed"
+msgstr "Последние открытые"
+
+msgid "Newest Pads"
+msgstr "Последние документы"
+
+msgid "Title"
+msgstr "Заголовок"
+
+msgid "Description"
+msgstr "Описание"
+
+msgid "Pad Type"
+msgstr "Тип документа"
+
+msgid "Ethercalcs"
+msgstr "Таблицы"
+
+msgid "Pad"
+msgstr "Документ"
+
+msgid "This pad can no longer be edited because its creator has deleted their account."
+msgstr "Этот документ уже нельзя редактировать, потому что создатель удалил аккаунт."
+
+msgid "by"
+msgstr "создатель"
+
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Delete"
+msgstr "Удалить"
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(pad)s“?"
+msgstr "Вы действительно хотите удалить документ „%(pad)s“?"
+
+msgid "Delete Etherpad"
+msgstr "Удалить документ"
+
+msgid "The document can not be accessed because the etherpad server could not be reached. Please contact an administrator!"
+msgstr "Доступ к документу невозможен, так как сервер не отвечает. Пожалуйста, обратитесь к администратору!"
+
+msgid "This document is empty"
+msgstr "Этот документ пустой"
+
+msgid "Pads"
+msgstr "Документы"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "В одном из полей произошла ошибка. Пожалуйста, исправьте ее перед сохранением!"
+
+msgid "Enter a title for the Pad."
+msgstr "Введите название."
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Move"
+msgstr "Передвинуть"
+
+msgid "Enter the title for a new Document or Table."
+msgstr "Введите название нового документа или таблицы."
+
+msgid "Enter the title for a new Document."
+msgstr "Введите название нового документа."
+
+msgid "Create Etherpad"
+msgstr "Создать документ"
+
+msgid "Create Ethercalc"
+msgstr "Создать таблицу"
+
+msgid "Move to another Folder"
+msgstr "Переместить в другую папку"
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(title)s“?"
+msgstr "Вы действительно хотите удалить документ „%(title)s“?"
+
+msgid "No etherpads have been created yet."
+msgstr "Документы пока не созданы."
+
+msgid "Fullscreen"
+msgstr "Полноэкранный режим"
+
+msgid "Leave Fullscreen"
+msgstr "Выйти из полноэкранного режима"
+
+msgid "Back"
+msgstr "Назад"
+
+msgid "Help and Assistance for this page"
+msgstr "Справка и помощь для этой страницы"
+
+msgid "Help"
+msgstr "Справка"
+
+msgid "Download CSV"
+msgstr "Загрузить CSV"
+
+msgid "Download Excel"
+msgstr "Загрузить Excel"
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Здравствуйте, %(receiver_name)s,\n"
+"\n"
+"пользователь %(sender_name)s создал новый документ \"%(object_name)s\" в группе %(team_name)s. \n"
+"\n"
+"Его можно найти его по этой ссылке: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Перейдите по этой ссылке, чтобы изменить Ваши настройки уведомлений: %(notification_settings_url)s )\n"
+"\n"
+"Ваша команда %(site_name)s."
+
+msgid "You created a pad"
+msgstr "Ты создал(а) документ"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a Pad"
+msgstr "созданный документ"
+
+msgid "There are no etherpads yet"
+msgstr "Документов ещё нет"
+
+#, python-format
+msgid "Etherpad \"%(title)s\" was edited successfully."
+msgstr "Документ \"%(title)s\" успешно отредактирован."
+
+#, python-format
+msgid "Etherpad \"%(title)s\" could not be edited."
+msgstr "Документ \"%(title)s\" не может быть отредактирован."
+
+#, python-format
+msgid "Etherpad \"%(title)s\" was added successfully."
+msgstr "Документ \"%(title)s\" успешно добавлен."
+
+#, python-format
+msgid "Etherpad \"%(title)s\" could not be added."
+msgstr "Документ \"%(title)s\" не может быть добавлен."
+
+#, python-format
+msgid "Folder \"%(title)s\" was created successfully."
+msgstr "Папка \"%(title)s\" создана."
+
+#, python-format
+msgid "Etherpad with name \"%(name)s\" already exists on pad server. Please use another name."
+msgstr "Документ под именем \"%(name)s\" уже существует на сервере. Пожалуйста, используйте другое название."
+
+msgid "The document could not be created because the etherpad service is misconfigured. Please contact an administrator!"
+msgstr "Невозможно создать документ из-за неверной конфигурации сервиса. Пожалуйста, обратитесь к администратору!"
+
+msgid "The document could not be created because the etherpad server could not be reached. Please contact an administrator!"
+msgstr "Невозможно создать документ, так как сервер не отвечает. Пожалуйста, обратитесь к администратору!"
+
+#, python-format
+msgid "Pad has been archived as Document: <a class=\"alert-link\" href=\"%(href)s\">%(title)s</a>"
+msgstr "Архивировано как документ: <a class=\"alert-link\" href=\"%(href)s\">%(title)s</a>"
+
+#, python-format
+msgid "Pad has been archived as File entry: <a class=\"alert-link\" href=\"%(href)s\">%(title)s</a>"
+msgstr "Архивировано как запись файла: <a class=\"alert-link\" href=\"%(href)s\">%(title)s</a>"
+
+#~ msgid "New etherpad by %(sender_name)s"
+#~ msgstr "Новый документ создан %(sender_name)s"
+
+#~ msgid "New etherpad by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Новый документ создан %(sender_name)s в команде %(team_name)s (за которой вы следите)"
+
+#~ msgid "Create"
+#~ msgstr "Создать"

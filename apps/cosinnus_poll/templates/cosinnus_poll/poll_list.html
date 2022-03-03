@@ -1,0 +1,82 @@
+{% extends "cosinnus_poll/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block page_title %}
+{% trans "Polls" %} {{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="active">{% if poll_view == "past" %}{% trans "Archived Polls" %}{% else %}{% trans "Polls" %}{% endif %}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus_poll/leftnav.html" %}
+{% endblock leftnav %}
+
+{% block content %}
+    
+    {% trans "Delete" as btn_label %}
+    {% captureas btn_action %}$.cosinnus.Feedback.cosinnus_delete_element($.cosinnus.getListOfCheckedItems());{% endcaptureas %}
+    {% include 'cosinnus/common/checkbox/checkbox_action_button.html' with label=btn_label icon="fa-eraser" action=btn_action %}
+
+    {% include 'cosinnus/common/checkbox/checkbox_mark_all_buttons.html' %}
+    <div class="clearfix"></div>
+    
+    <!-- a box with semi transparent background -->
+    <div class="content-box large-space">
+        {% include 'cosinnus/common/filter_controls.html' %}        
+        
+        {% if user|can_create_objects_in:group %} 
+        <form method="GET" action="{% group_url 'cosinnus:poll:add' group=group %}">
+            <div type="button" class="btn btn-default w100 large-space">
+                <ul class="media-list">
+                    <li class="media">
+                        <span class="pull-left">
+                            <i class="fa fa-plus"></i>
+                        </span>
+                        <div class="media-body media-body-form-control">
+                            {% captureas placeholder %}{% trans "Enter the title to create a new poll." %}{% endcaptureas %}
+                            <input class="form-control next-button-is-for-sending"
+                                placeholder="{{ placeholder }}" autocomplete="off"
+                                name="title"
+                                value="" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <button type="submit" class="btn btn-emphasized large-space" style="display: none;">
+                <ul class="media-list">
+                    <li class="media">
+                        <span class="pull-left">
+                            <i class="fa fa-pencil"></i>
+                        </span>
+                        <div class="media-body">
+                            {% trans "Create" %}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+        </form>
+        {% endif %}
+        
+        {% for poll in polls %}
+            {% include 'cosinnus_poll/list_object.html' %}
+        {% empty %}
+            {% if poll_view == 'past' %}
+                {% captureas empty_message %}{% trans "There are no archived polls." %}{% endcaptureas %}
+            {% else %}
+                {% captureas empty_message %}{% trans "There are no running polls." %}{% endcaptureas %}
+            {% endif %}
+            {% include 'cosinnus/common/empty_button.html' with message=empty_message %}
+        {% endfor %}
+       
+    </div><!-- content-box -->
+    
+    
+    <script type="text/javascript">
+        var cosinnus_delete_element_object_url = "{% group_url 'cosinnus:poll:delete-element' group=group %}";
+    </script>
+    {% include 'cosinnus/common/delete_element_modal.html' %}
+    
+{% endblock content %}

@@ -1,0 +1,5 @@
+{% load i18n cosinnus_tags %}
+
+{% url 'cosinnus-cloud:index' as index_url %}
+{% trans "Cloud" as label %}
+{% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-cloud" label=label href=index_url  %}

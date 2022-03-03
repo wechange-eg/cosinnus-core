@@ -1,0 +1,1 @@
+{% include 'cosinnus_etherpad/single_etherpad.html' with object=object %}

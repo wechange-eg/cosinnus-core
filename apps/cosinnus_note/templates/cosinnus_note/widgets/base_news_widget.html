@@ -1,0 +1,12 @@
+{% extends "cosinnus/widgets/fadedown_base_widget.html" %}
+{% load i18n cosinnus_tags widget_tweaks %}
+
+{% block fadedown_class %}{% endblock %}
+{% block headline_properties %}data-toggle="modal" data-target="#write-news-modal"{% endblock %}
+
+
+{% block fadedown_content %}
+
+    {% include 'cosinnus_note/note_form_modal.html' %}
+        
+{% endblock fadedown_content %}
