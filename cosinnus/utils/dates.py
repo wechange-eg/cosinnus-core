@@ -2,15 +2,15 @@
 from __future__ import unicode_literals
 
 from datetime import datetime
-from django.utils.timezone import localtime, now, is_naive
-from django.utils.formats import date_format
-from django.utils import dateformat, timezone
-from django.template.defaultfilters import date as django_date_filter
 
-import pytz
-from django.utils.safestring import mark_safe
+from django.template.defaultfilters import date as django_date_filter
 from django.template.loader import render_to_string
-from celery.utils.time import is_naive
+from django.utils import dateformat
+from django.utils.formats import date_format
+from django.utils.safestring import mark_safe
+from django.utils.timezone import localtime, now
+from django.utils.translation import ugettext_lazy as _
+import pytz
 
 
 # http://momentjs.com/docs/#/parsing/string-format/
