@@ -22,7 +22,7 @@ COSINNUS_PORTAL_NAME = None
 # the suffix of every often-changing JS/CSS staticfile
 # increase this to make sure browsers reload a cached version 
 # after making non-compatible changes to scripts or styles!
-COSINNUS_STATICFILES_VERSION = '1.13'
+COSINNUS_STATICFILES_VERSION = '1.15'
 
 DEBUG = False
 
@@ -114,6 +114,7 @@ MIDDLEWARE = [
     'cosinnus.core.middleware.cosinnus_middleware.GroupPermanentRedirectMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.ExternalEmailLinkRedirectNoticeMiddleware',
     'cosinnus.core.middleware.login_ratelimit_middleware.LoginRateLimitMiddleware',
+    'cosinnus.core.middleware.time_zone_middleware.TimezoneMiddleware',
 ]
 
 
@@ -238,6 +239,7 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'django_otp.plugins.otp_totp',
         'django_otp.plugins.otp_static',
         'two_factor',
+        'timezone_field',
         
         # External Apps
         'awesome_avatar',

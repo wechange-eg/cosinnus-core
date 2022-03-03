@@ -3,12 +3,18 @@
 <div class="textfield transparent regular-space">
     {% if setting %}
         <i class="fas fa-fw"></i> {% comment %} Blank space for indentation {% endcomment %}
-	    <b>{% trans "BBB" %}:</b>
-	    <span>{{ setting.bbb_server_choice_text }}</span>,
-	    <b>{% trans "BBB Premium" %}:</b>
-        <span>{{ setting.bbb_server_choice_premium_text }}</span>
-        <b>{% trans "BBB Recording API" %}:</b>
-        <span>{{ setting.bbb_server_choice_recording_api_text }}</span>
+        {% if setting.bbb_server_choice_text %}
+		    <b>{% trans "BBB" %}:</b>
+		    <span>{{ setting.bbb_server_choice_text }}</span>
+		{% endif %}
+        {% if setting.bbb_server_choice_premium_text %}
+		    <b>{% trans "BBB Premium" %}:</b>
+	        <span>{{ setting.bbb_server_choice_premium_text }}</span>
+        {% endif %}
+        {% if setting.bbb_server_choice_recording_api_text %}
+	        <b>{% trans "BBB Recording API" %}:</b>
+	        <span>{{ setting.bbb_server_choice_recording_api_text }}</span>
+        {% endif %}
 	{% else %}
 	    <i>{% trans "Not set" %}</i>
 	{% endif %}

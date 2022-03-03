@@ -24,6 +24,7 @@ from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 from django_countries.fields import CountryField
+from timezone_field import TimeZoneField
 import six
 
 from cosinnus.conf import settings
@@ -473,6 +474,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
 
 
 class UserProfile(BaseUserProfile):
+    timezone = TimeZoneField(default='Europe/Berlin')
     
     class Meta(object):
         app_label = 'cosinnus'

@@ -211,6 +211,9 @@ class CosinnusConf(AppConf):
     # the class with the implementation for importing CosinnusGroups used for the CSV import
     CSV_IMPORT_GROUP_IMPORTER = 'cosinnus.utils.import_utils.GroupCSVImporter'
     
+    # the email domain for "fake" addresses for temporary CSV users for conferences
+    TEMP_USER_EMAIL_DOMAIN = None
+    
     # should a custom premoum page be shown for actions that require a paid subscription,
     # like creating groups. template for this is `premium_info_page.html`
     CUSTOM_PREMIUM_PAGE_ENABLED = False
@@ -1074,6 +1077,9 @@ class CosinnusConf(AppConf):
     # map content types (and if any text topics even exist)
     TEXT_TOPICS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = []
     
+    # if True, will show the user's selected timezone on the userprofile detail page
+    TIMEZONE_SHOW_IN_USERPROFILE = False
+    
     # set to True to enable virusscan. the clamd daeomon needs to be running!
     # see https://pypi.org/project/django-clamd/
     VIRUS_SCAN_UPLOADED_FILES = False
@@ -1265,11 +1271,20 @@ class CosinnusDefaultSettings(AppConf):
     # a list of field names from fields in fields in `CosinnusConferenceSettings`
     # that will be shown to the users in the frontend Event forms as choices
     # for presets for BBB rooms
+    # note that 'record_meeting' is disabled by default, as it
+    # requires setting up the BBB servers correctly for it, and should
+    # only be enabled for a portal specifically after that has been done
     BBB_PRESET_USER_FORM_FIELDS = [
         'mic_starts_on',
         'cam_starts_on',
-        'record_meeting',
     ]
+    # a complete list of all choices that could be made for BBB_PRESET_USER_FORM_FIELDS
+    #__all_choices__BBB_PRESET_USER_FORM_FIELDS = [
+    #    'mic_starts_on',
+    #    'cam_starts_on',
+    #    'record_meeting',
+    #]
+    
     # a list of field names from `BBB_PRESET_USER_FORM_FIELDS` that can only
     # be changed by users if a conference is premium at some point
     BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY = [
@@ -1280,6 +1295,3 @@ class CosinnusDefaultSettings(AppConf):
     # limit visit creation for (user, bbb_room) pairs to a time window
     BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60*60
     
-    
-
-    TEMP_USER_EMAIL_DOMAIN = ''

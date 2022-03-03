@@ -11,7 +11,8 @@ from cosinnus.conf import settings
 from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveNgramField,\
     TagObjectSearchIndex, BOOSTED_FIELD_BOOST, StoredDataIndexMixin,\
     DocumentBoostMixin, CommaSeperatedIntegerMultiValueField,\
-    LocalCachedIndexMixin, DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE
+    LocalCachedIndexMixin, DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE,\
+    TimezoneAwareHaystackDateTimeField
 from cosinnus.utils.user import filter_active_users, filter_portal_users,\
     is_user_active
 from cosinnus.models.profile import get_user_profile_model
@@ -36,11 +37,10 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     public = indexes.BooleanField()
     always_visible = indexes.BooleanField()
     visible_for_all_authenticated_users = indexes.BooleanField()
-    created = indexes.DateTimeField(model_attr='created')
+    created = TimezoneAwareHaystackDateTimeField(model_attr='created')
     group = indexes.IntegerField(model_attr='id')
-    from_date = indexes.DateTimeField(model_attr='from_date', null=True)
-    to_date = indexes.DateTimeField(model_attr='to_date', null=True)
-    humanized_event_time_html = indexes.CharField(stored=True, indexed=False)
+    from_date = TimezoneAwareHaystackDateTimeField(model_attr='from_date', null=True)
+    to_date = TimezoneAwareHaystackDateTimeField(model_attr='to_date', null=True)
     
     # for filtering on this model
     is_group_model = indexes.BooleanField(default=True)
@@ -118,10 +118,6 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     def prepare_member_count(self, obj):
         """ Member count for projects/groups """
         return len(self.prepare_group_members(obj))
-    
-    def prepare_humanized_event_time_html(self, obj):
-        ret = obj.get_humanized_event_time_html()
-        return ret
     
     def prepare_content_count(self, obj):
         """ Upcoming events for this project/group """
@@ -215,8 +211,8 @@ class CosinnusConferenceIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, ind
     text = TemplateResolveNgramField(document=True, use_template=True, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
     rendered = TemplateResolveCharField(use_template=True, indexed=False, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
     
-    from_date = indexes.DateTimeField(model_attr='from_date', null=True)
-    to_date = indexes.DateTimeField(model_attr='to_date', null=True)
+    from_date = TimezoneAwareHaystackDateTimeField(model_attr='from_date', null=True)
+    to_date = TimezoneAwareHaystackDateTimeField(model_attr='to_date', null=True)
     participants_limit_count = indexes.IntegerField(stored=True, indexed=False)
     
     def get_model(self):
@@ -273,7 +269,7 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
     location = indexes.LocationField(null=True)
     managed_tags = indexes.MultiValueField()
     user_id = indexes.IntegerField(model_attr='user__id')
-    created = indexes.DateTimeField(model_attr='user__date_joined')
+    created = TimezoneAwareHaystackDateTimeField(model_attr='user__date_joined')
 
     local_cached_attrs = ['_memberships_count']
     

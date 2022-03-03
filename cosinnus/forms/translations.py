@@ -110,7 +110,7 @@ class TranslatedFieldsFormMixin(object):
                     field_map[field_name] = self.fields[field_name]
 
     def add_initial_data_for_model_fields(self):
-        for key in self.instance.translateable_fields:
+        for key in self.instance.get_translateable_fields():
             if not key == 'dynamic_fields':
                 translations = self.instance.translations.get(key)
                 if translations:
@@ -141,20 +141,20 @@ class TranslatedFieldsFormMixin(object):
             for lang in self.instance.languages:
                 form_field_name = '{}_translation_{}'.format(
                     field, lang[0])
-                if form_data.get(form_field_name):
+                if form_field_name in form_data:
                     object_translations.get(
                         field)[lang[0]] = form_data.get(
                         form_field_name)
 
     def add_dynamic_fields_translations_to_object(self, object_translations, form_data):
-        if self.instance.translatable_dynamic_fields:
+        if self.instance.get_translateable_fields():
             df_translations = object_translations.get('dynamic_fields', {})
             for lang in self.instance.languages:
                 for field in self.instance.translatable_dynamic_fields:
                     for lang in self.instance.languages:
                         form_field_name = '{}_translation_{}'.format(
                             field, lang[0])
-                        if form_data.get(form_field_name):
+                        if form_field_name in form_data:
                             if not lang[0] in df_translations:
                                 df_translations[lang[0]] = {}
                             df_translations[lang[0]][field] = form_data.get(

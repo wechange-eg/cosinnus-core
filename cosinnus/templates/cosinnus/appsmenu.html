@@ -7,6 +7,7 @@
 {% group_url 'cosinnus:conference:participation-management' group=group as conference_participation_management_page %}
 {% group_url 'cosinnus:conference:participation-management-applications' group=group as conference_applications_page %}
 {% group_url 'cosinnus:conference:recorded-meetings' group=group as conference_recorded_meetings_page %}
+{% group_url 'cosinnus:group-meeting' group=group as group_video_meeting %}
 {% group_url 'cosinnus:group-edit' group=group as group_edit_page %}
 {% group_url 'cosinnus:group-dashboard' group=group as group_dashboard_page %}
 {% group_url 'cosinnus:group-microsite' group=group as group_microsite_page %}
@@ -50,6 +51,15 @@
 		            </a>
 		        </li>
 	        {% endif %}
+        {% endif %}
+        
+        {% if not group.group_is_conference and group.video_conference_type %}
+            <li class="app-main appnavi-listelement fine-space">
+                <a href="{{ group_video_meeting }}">
+                    <i class="fa fa-fw fa-eye"></i>
+                    {% trans "Video conference" %}
+                </a>
+            </li>
         {% endif %}
 	        
 	    {% if user|has_read_access:group %}
@@ -110,7 +120,7 @@
 		            </li>
 	            {% endif %}
 	            
-				{% if group.temporary_users_allowed and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+				{% if group.has_premium_rights and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
 				<li class="app-main appnavi-listelement fine-space">
 					<a href="{{ group_temporary_users }}">
 						<i class="fas fa-user-clock"></i>

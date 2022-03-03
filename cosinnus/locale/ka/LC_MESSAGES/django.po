@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-26 17:15+0100\n"
+"POT-Creation-Date: 2022-03-01 13:03+0100\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2491,6 +2491,10 @@ msgstr "თქვენ შეგიძლიათ გამოიყენო�
 msgid "Currently set Welcome-Email Text"
 msgstr "ამჟამად დაყენებული მისასალმებელი ელ-ფოსტის ტექსტი"
 
+#, fuzzy
+msgid "Video conference"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
 msgid "Conference Room Management"
 msgstr ""
 
@@ -2844,6 +2848,7 @@ msgstr ""
 msgid "Withdraw"
 msgstr "გამოთხოვა"
 
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 msgid "Conference Applications"
 msgstr "ვიდეო კონფერენციის სერვერი"
@@ -3620,10 +3625,6 @@ msgstr "ღონისძიებები"
 
 msgid "News"
 msgstr "ახალი ამბები"
-
-#, fuzzy
-msgid "Video conference"
-msgstr "ვიდეო კონფერენციის სერვერი"
 
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
@@ -7138,10 +7139,17 @@ msgstr "ენის შეცვლა"
 msgid "Register a new account"
 msgstr "ახალი ანგარიშის რეგისტრაცია"
 
+#, fuzzy
+#| msgid "Add Event"
+msgid "Add Event to "
+msgstr "ღონისძიების დამატება"
+
 msgid "Offer"
 msgstr "შემოთავაზება"
 
-msgid "Post new Offer"
+#, fuzzy
+#| msgid "Post new Offer"
+msgid "Post new Offer in "
 msgstr "ახალი შემოთავაზების დადება"
 
 msgid "Edit My Profile"
@@ -7171,6 +7179,98 @@ msgstr "გვიხარია თქვენი დანახვა! %(por
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Jetzt anmelden und mitgestalten"
+
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "ჩემი პროექტები და ჯგუფები"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "დახარისხების ველი"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "პროექტები/ჯგუფები"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "პროექტები/ჯგუფები"
+
+#, fuzzy
+msgid "Options"
+msgstr "პროპორციები"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "გამოსახულების ატვირთვა."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "ჩემი პროექტები და ჯგუფები"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "პაროლის გადაყენება წარმატებით განხორციელდა"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "შეცდომა!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "შეტყობინებები"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "შეცდომა!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "შეტყობინებები"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
 
 msgid "Show more Projects"
 msgstr "სხვა პროექტების ჩვენება"
@@ -8187,10 +8287,6 @@ msgstr "თქვენი ცვლილებები შენახულ�
 #~ msgstr "აქტივაცია"
 
 #, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "პაროლის გადაყენება წარმატებით განხორციელდა"
-
-#, fuzzy
 #~| msgid "Delete elements"
 #~ msgid "Delete (not yet implemented)"
 #~ msgstr "ელემენტების წაშლა"
@@ -8200,52 +8296,8 @@ msgstr "თქვენი ცვლილებები შენახულ�
 #~ msgstr "ნამდვილად გსურთ წაშალოთ განცხადება „%(title)s“?"
 
 #, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "შეცდომა!"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "ჩემი პროექტები და ჯგუფები"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "ჩემი პროექტები და ჯგუფები"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "დახარისხების ველი"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "შეტყობინებები"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "შეტყობინებები"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "პროპორციები"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "პროექტები/ჯგუფები"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "შეცდომა!"
-
-#, fuzzy
 #~ msgid "Room Type"
 #~ msgstr "გუნდის ტიპიდან"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "გამოსახულების ატვირთვა."
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "პროექტები/ჯგუფები"
 
 #, fuzzy
 #~ msgctxt "time"

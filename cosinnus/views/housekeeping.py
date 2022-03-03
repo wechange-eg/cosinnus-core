@@ -607,7 +607,15 @@ def newsletter_users(request, includeOptedOut=False, never_logged_in_only=False,
     if not getattr(settings, 'COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS', False):
         return HttpResponseForbidden('This Feature is currently not enabled!')
     
-    result_columns = [['email', 'firstname', 'lastname', 'registration_timestamp', 'language'],]
+    headers = [
+        'email',
+        'firstname',
+        'lastname',
+        'registration_timestamp',
+        'language',
+        'visitor_mtag_slugs',
+    ]
+    result_columns = [headers,]
     portal = CosinnusPortal.get_current()
     
     if all_portal_users:
@@ -629,7 +637,14 @@ def newsletter_users(request, includeOptedOut=False, never_logged_in_only=False,
     for user in users:
         if includeOptedOut or (check_user_can_receive_emails(user) and user.cosinnus_profile.settings.get('newsletter_opt_in', False) == True):
             if never_logged_in_only or is_user_active(user):
-                row = [user.email, user.first_name, user.last_name, user.date_joined, user.cosinnus_profile.language]
+                row = [
+                    user.email,
+                    user.first_name,
+                    user.last_name,
+                    user.date_joined,
+                    user.cosinnus_profile.language,
+                    ','.join([tag.slug for tag in user.cosinnus_profile.get_managed_tags()]), #'visitor_mtag_slugs',
+                ]
                 result_columns.append(row)
     return make_xlsx_response(result_columns, file_name=file_name)
 

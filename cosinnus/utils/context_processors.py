@@ -122,6 +122,7 @@ def cosinnus(request):
         'COSINNUS_PROJECT_TRANS': get_group_trans_by_type(0),
         'COSINNUS_SOCIETY_TRANS': get_group_trans_by_type(1),
         'COSINNUS_CONFERENCE_TRANS': get_group_trans_by_type(2),
+        'COSINNUS_USER_TIMEZONE': user.is_authenticated and user.cosinnus_profile.timezone.zone or None,
     }
 
 

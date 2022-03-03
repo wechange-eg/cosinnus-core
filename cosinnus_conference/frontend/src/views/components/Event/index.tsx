@@ -33,23 +33,30 @@ interface EventProps {
 export function Event(props: EventProps) {
   const {events, event} = props
   const [url, setUrl] = useState('')
+  const [loadFinished, setLoadFinished] = useState(false)
+  const [fetching, setFetching] = useState(false)
   const [consentOpen, setConsentOpen] = useState(false)
-  const [consentUrl, setConsentUrl] = useState("")
+  const [consentGiven, setConsentGiven] = useState(false)
   const classes = useStyles()
 
-  function fetchEventUrl() {
+  function fetchEventUrl(skipConsentPopup) {
     if (!url) {
       if (!event.props.isQueueUrl) {
         setUrl(event.props.url);
-      } else {
+      } else if (!url && !fetching) {
+        setFetching(true);
+        
         fetch(event.props.url, {
           method: "GET"
         }).then(response => {
+          setFetching(false);
           if (response.status === 200) {
             response.json().then((data: EventResponse) => {
               if (data.status === 'DONE') {
-                if (data.recorded_meeting) {
-                  setConsentUrl(data.url);
+                if (data.recorded_meeting && !consentGiven && !skipConsentPopup) {
+                  // show a popup asking the user for recording consent.
+                  // we discard data.url here and re-fetch the join url later if consentGiven==true.
+                  // otherwise the join url might be stale if a user takes a long time to answer the popup
                   setConsentOpen(true);
                   return;
                 } 
@@ -65,13 +72,15 @@ export function Event(props: EventProps) {
             setUrl('ERROR');
           }
         }).catch(response => {
+          setFetching(false);
           setTimeout(fetchEventUrl, 5000);
         })
       }
     }
   }
   // Not loading events anymore and events URL given (instead of HTML)?
-  if (events && !events.loading && events.events && event && event.props.url) {
+  if (events && !events.loading && events.events && event && event.props.url && !url && !fetching && !consentOpen && !loadFinished) {
+    setLoadFinished(true);
     fetchEventUrl();
   }
 
@@ -125,7 +134,7 @@ export function Event(props: EventProps) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={function(){setUrl(consentUrl);setConsentOpen(false)}} autoFocus>
+          <Button onClick={function(){setConsentGiven(true);setConsentOpen(false);fetchEventUrl(true)}} autoFocus>
             <FormattedMessage id="Yes" />
           </Button>
           <Button onClick={function(){setUrl('USERDECLINED');setConsentOpen(false)}}>

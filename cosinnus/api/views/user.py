@@ -13,7 +13,8 @@ from rest_framework.views import APIView
 from cosinnus.conf import settings
 from ..serializers.user import UserCreateUpdateSerializer, UserSerializer
 from ...models import get_user_profile_model, CosinnusGroup, CosinnusGroupMembership, MEMBERSHIP_MEMBER
-from cosinnus.models.membership import MEMBER_STATUS
+from cosinnus.models.membership import MEMBER_STATUS, MEMBERSHIP_MANAGER,\
+    MEMBERSHIP_ADMIN
 from cosinnus.api.views.mixins import CosinnusFilterQuerySetMixin
 
 User = get_user_model()
@@ -98,12 +99,36 @@ class OAuthUserView(APIView):
             avatar_url = user.cosinnus_profile.avatar.url if user.cosinnus_profile.avatar else ""
             if avatar_url:
                 avatar_url = request.build_absolute_uri(avatar_url)
+            # collect user groups
+            
+            membership_type_map = {
+                MEMBERSHIP_ADMIN: 'admins',
+                MEMBERSHIP_MANAGER: 'managers',
+                MEMBERSHIP_MEMBER: 'users',
+            }
+            group_dict = {}
+            group_url_dict = {}
+            for group in user.cosinnus_profile.cosinnus_groups:
+                # add a {group_id --> membership type} entry for each group the user is a member of
+                membership = group.memberships.filter(user=user)[0]
+                membership_type = membership_type_map.get(membership.status, None)
+                if membership_type:
+                    group_dict.update({
+                        str(group.id): membership_type,
+                    })
+                # add a {group_id --> group_url} entry for each group the user is a member of
+                group_url_dict.update({
+                    str(group.id): group.get_absolute_url(),
+                })
+            
             return Response({
                 'success': True,
                 'id': user.username if user.username.isdigit() else str(user.id),
                 'email': user.cosinnus_profile.rocket_user_email, # use the rocket user email (may be a non-verified fake one)
                 'name': user.get_full_name(),
                 'avatar': avatar_url,
+                'group': group_dict,
+                'group_urls': group_url_dict,
             })
         else:
             return Response({

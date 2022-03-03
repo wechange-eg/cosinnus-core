@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-26 17:15+0100\n"
+"POT-Creation-Date: 2022-03-01 13:03+0100\n"
 "Language: kk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2493,6 +2493,10 @@ msgstr "Сіз келесі айнымалыларды пайдалана ала
 msgid "Currently set Welcome-Email Text"
 msgstr "Электрондық пошта мәтіні қазір орнатылды"
 
+#, fuzzy
+msgid "Video conference"
+msgstr "Бейне конференциялар сервері"
+
 msgid "Conference Room Management"
 msgstr ""
 
@@ -2846,6 +2850,7 @@ msgstr ""
 msgid "Withdraw"
 msgstr "Қаражатты шығару"
 
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 msgid "Conference Applications"
 msgstr "Бейне конференциялар сервері"
@@ -3625,10 +3630,6 @@ msgstr "Оқиғалар"
 
 msgid "News"
 msgstr "Жаңалықтар"
-
-#, fuzzy
-msgid "Video conference"
-msgstr "Бейне конференциялар сервері"
 
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
@@ -7143,10 +7144,17 @@ msgstr "Тілді өзгерту"
 msgid "Register a new account"
 msgstr "Жаңа аккаунт ашу"
 
+#, fuzzy
+#| msgid "Add Event"
+msgid "Add Event to "
+msgstr "Шара Қосу"
+
 msgid "Offer"
 msgstr "Ұсыныс"
 
-msgid "Post new Offer"
+#, fuzzy
+#| msgid "Post new Offer"
+msgid "Post new Offer in "
 msgstr "Жаңа ұсыныс жариялау"
 
 msgid "Edit My Profile"
@@ -7176,6 +7184,98 @@ msgstr "Сені көруге қуаныштымыз! %(portal_name)s-те сі�
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Қазір тіркеліп, оны қалыптастыруға көмектесіңіз"
+
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Менің Жобаларым мен Топтары"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Cұрыптау өрісі"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Жобалар/Топтар"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Жобалар/Топтар"
+
+#, fuzzy
+msgid "Options"
+msgstr "Пропорциялар"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Суретті жүктеу."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Менің Жобаларым мен Топтары"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Парольді қалпына келтіру сәтті өтті"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Қате!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Хабарламалар"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Қате!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Хабарламалар"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
 
 msgid "Show more Projects"
 msgstr "Басқа Жобаларды көрсету"
@@ -8192,10 +8292,6 @@ msgstr "Сіздің өзгертулеріңіз сақталды."
 #~ msgstr "Іске қосыңыз"
 
 #, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Парольді қалпына келтіру сәтті өтті"
-
-#, fuzzy
 #~| msgid "Delete elements"
 #~ msgid "Delete (not yet implemented)"
 #~ msgstr "Элементтерді жою"
@@ -8205,52 +8301,8 @@ msgstr "Сіздің өзгертулеріңіз сақталды."
 #~ msgstr "„%(title)s“ шақыруын шынымен жойғыңыз келе ме?"
 
 #, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Қате!"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Менің Жобаларым мен Топтары"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Менің Жобаларым мен Топтары"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Cұрыптау өрісі"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Хабарламалар"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Хабарламалар"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Пропорциялар"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Жобалар/Топтар"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Қате!"
-
-#, fuzzy
 #~ msgid "Room Type"
 #~ msgstr "Команда түрінен"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Суретті жүктеу."
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Жобалар/Топтар"
 
 #, fuzzy
 #~ msgctxt "time"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-26 17:15+0100\n"
-"PO-Revision-Date: 2022-01-26 17:19+0100\n"
+"POT-Creation-Date: 2022-03-01 13:03+0100\n"
+"PO-Revision-Date: 2022-03-01 16:03+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -1611,19 +1611,19 @@ msgstr "Условия пользования"
 
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Never (we will not send you any emails)"
-msgstr "Ответ на \"я хотел бы получать письма-уведомления:\" Никогда (мы не будем отправлять Вам никаких писем)"
+msgstr "Никогда (мы не будем отправлять вам никаких писем)"
 
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Immediately (an individual email per event)"
-msgstr "Ответ на \"я хотел бы получать письма-уведомления:\" Сразу (отдельное письмо на каждое событие)"
+msgstr "Уведомления о новых событиях (одно электронное письмо для каждого события)"
 
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "In a Daily Report"
-msgstr "Ответ на \"я хотел бы получать письма-уведомления:\" Отчет за день"
+msgstr "Ежедневная рассылка"
 
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "In a Weekly Report"
-msgstr "Ответ на \"я хотел бы получать письма-уведомления:\" отчет за неделю"
+msgstr "Еженедельная рассылка"
 
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Individual settings for each Project/Group..."
@@ -2420,6 +2420,9 @@ msgstr "Вы можете использовать следующие перем
 msgid "Currently set Welcome-Email Text"
 msgstr "Текущая настройка текста приветственного емейла"
 
+msgid "Video conference"
+msgstr "Видео-конференция"
+
 msgid "Conference Room Management"
 msgstr "Управление комнатой конференции"
 
@@ -2763,6 +2766,7 @@ msgstr "Подать заявку на участие в конференции"
 msgid "Withdraw"
 msgstr "Отозвать"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Conference Applications"
 msgstr "Заявки на участие в конференции"
 
@@ -2812,7 +2816,7 @@ msgid "optional"
 msgstr "дополнительно"
 
 msgid "First Choice"
-msgstr "Имя"
+msgstr "Первый вариант"
 
 msgid "Second Choice"
 msgstr "Второй выбор"
@@ -3472,9 +3476,6 @@ msgstr "События"
 msgid "News"
 msgstr "Новости"
 
-msgid "Video conference"
-msgstr "Видео-конференция"
-
 # 7
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
@@ -3569,7 +3570,7 @@ msgid "optional"
 msgstr "дополнительно"
 
 msgid "Add/Edit translations"
-msgstr "Добавить / изменить переводы"
+msgstr "Добавить / изменить перевод"
 
 msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
 msgstr "Содержимое поля выше будет доступно в выдаче внутреннего поиска платформы. Оно будет показано, если только не будет переписано переводом (ниже)."
@@ -5128,7 +5129,7 @@ msgid "This item will be visible on the entire portal. This means that any porta
 msgstr "Этот контент будет размещен в публичном доступе в рамках всего портала. Это значит, каждый зарегистрированный пользователь сможет его увидеть."
 
 msgid "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
-msgstr "Это сообщение будет размещено в открытом доступе!  Это означает, что любой пользователь может его увидеть и, потенциально, оно может быть найдено поисковыми машинами в сети интернет."
+msgstr "Данное сообщение будет отображаться в публичном доступе! Это означает, что любой пользователь сети интернет может получить к нему доступ и прочитать, кроме того, сообщение может появиться в результатах поисковых систем. Однако, если Вы хотите, то можете изменить настройки видимости сообщения ниже."
 
 msgid "If you do not wish this, you can change this item's visibility setting below."
 msgstr "Если Вы этого не хотите, то ниже Вы можете изменить настройки видимости."
@@ -5179,7 +5180,7 @@ msgid "Who may see your plattform profile?"
 msgstr "Кто может видеть Ваш профиль на платформе?"
 
 msgid "Your profile will be set to be publicly visible!"
-msgstr "Ваш профиль будет установлен как общевидимый!"
+msgstr "Ваш профиль станет общедоступным!"
 
 msgid "This means that your name, avatar and user profile can be seen by ANYONE on the internet and may potentially be included in search engine results!"
 msgstr "Это означает, что Ваше имя, фото профиля и профиль пользователя может видеть любой пользователь в Интернете и, потенциально, они могут быть обнаружены поисковыми машинами!"
@@ -5439,7 +5440,7 @@ msgid "Enter a password"
 msgstr "Введите новый пароль"
 
 msgid "Repeat the password just to make sure"
-msgstr "Повторите Ваш пароль, чтобы убедиться"
+msgstr "Повторите Ваш пароль"
 
 msgid "Repeat the Password"
 msgstr "Повторите новый пароль"
@@ -5481,7 +5482,7 @@ msgid "Email address"
 msgstr "Адрес электронной почты"
 
 msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
-msgstr "Это будет использовано как Ваш логин. Уведомления будут отправляться по этому адресу (если Вы хотите их получать)."
+msgstr "Этот адрес будет использован как Ваш логин. Уведомления будут отправляться по этому адресу (если Вы хотите их получать)."
 
 msgid "Repeat Password"
 msgstr "Повторите пароль"
@@ -5651,7 +5652,7 @@ msgstr "Все пользователи"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "All Events"
-msgstr "Все мероприятия"
+msgstr "Все события"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Cloud Files"
@@ -5791,7 +5792,7 @@ msgstr "Просмотреть все группы"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Browse all Projects"
-msgstr "Просмотреть все проекти"
+msgstr "Просмотреть все проекты"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You have not created any organizations yet."
@@ -5815,7 +5816,7 @@ msgstr "Идеи, которые меня интересуют"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are not following any ideas yet."
-msgstr "Ты не следишь за идеями пока что."
+msgstr "Ты пока не следишь ни за какими идеями."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Post new Idea"
@@ -5831,7 +5832,7 @@ msgstr "Поиск идей"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You have not RSVPed to any Events."
-msgstr "Ты не участвуешь ни в одном событие."
+msgstr "Ты не участвуешь ни в одном событии."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Add Event"
@@ -6098,7 +6099,7 @@ msgstr "Группы и проекты"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Here you can find an overview of your Groups and Projects once you become active in one or more of them."
-msgstr "Здесь ты найдешь обзор выбранных тобою групп и проектов, сразу после твоих первых активных шагов в нескольких из них."
+msgstr "Здесь ты найдешь обзор выбранных тобой групп и проектов, сразу после твоих первых активных шагов в нескольких из них."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You can create Groups or Projects via the '+' button in the header."
@@ -6118,7 +6119,7 @@ msgstr "Ты можешь создать свои собственные иде�
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Discover"
-msgstr "Узнай"
+msgstr "Узнай больше"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Filter"
@@ -6302,7 +6303,7 @@ msgid "Welcome!"
 msgstr "Добро пожаловать!"
 
 msgid "We give you full control over what people can see of you on the platform and what you hear from us!"
-msgstr "Вы полностью контролируете, что пользователи могут узнать о Вас на платформе и что Вы услышите от нас!"
+msgstr "Мы предоставляем тебе полный контроль над тем, кто может видеть твой профиль на платформе и какие уведомления ты получаешь."
 
 msgid "Who is allowed to see you on the platform?"
 msgstr "Кто может видеть Вас на платформе?"
@@ -6320,7 +6321,7 @@ msgid "You can change or customize this setting later in your notification setti
 msgstr "Вы можете изменить или настроить эти настройки позднее в ваших настройках уведомлений"
 
 msgid "Your privacy: You are in control!"
-msgstr "Ваша приватность: Вы управляете!"
+msgstr "Ваши настройки приватности:"
 
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
@@ -6858,10 +6859,10 @@ msgid "Continue reading"
 msgstr "Продолжить чтение"
 
 msgid "What's the latest news that you would like to share with all users of the platform?"
-msgstr "Какими посленими новостями Вы хотели бы поделиться со всеми пользователями платформы?"
+msgstr "Какими последними новостями Вы хотели бы поделиться со всеми пользователями платформы?"
 
 msgid "Your recently visited Pads, Files, Events, Todos and other content will be shown here."
-msgstr "Посещенные недавно тобой Документы, Файлы, События, Списки Задач и Новости будут показаны здесь."
+msgstr "Недавно открытые и посещенные тобой документы, файлы, события, списки задач и новости будут показаны здесь."
 
 msgid "You created an idea"
 msgstr "Ты создал(а) идею"
@@ -6891,11 +6892,14 @@ msgstr "Изменить язык"
 msgid "Register a new account"
 msgstr "Зарегистрируй новый аккаунт"
 
+msgid "Add Event to "
+msgstr "Добавить событие в "
+
 msgid "Offer"
 msgstr "Предложение"
 
-msgid "Post new Offer"
-msgstr "Опубликовать новое предложение"
+msgid "Post new Offer in "
+msgstr "Опубликовать новое предложение в "
 
 msgid "Edit My Profile"
 msgstr "Редактировать мой профиль"
@@ -6920,10 +6924,96 @@ msgstr "на %(portal_name)s"
 
 #, python-format
 msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organization, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
-msgstr "Рады видеть тебя! На %(portal_name)s ты можешь сотрудничать з другими в группах и на проектах. Инициатива, организация, сеть - %(portal_name)s предлагает все необходимые инструменты для твоего виртуального сотрудничества."
+msgstr "Рады видеть тебя! На %(portal_name)s ты можешь сотрудничать с другими пользователями в группах и проектах. Инициатива, организация, сеть - %(portal_name)s предлагает все необходимые инструменты для вашего виртуального сотрудничества."
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Зарегистрироваться"
+
+msgid "Custom Wagtail Page"
+msgstr "Индивидуальная страница Wagtail"
+
+msgid "Tools"
+msgstr "Инструменты"
+
+msgid "Import Projects and Groups or Users"
+msgstr "Импортировать Проекты и Группы или Пользователей"
+
+# ???
+msgid "Import from a CSV File"
+msgstr "Импортировать из CSV файла"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr "Загрузите либо один CSV файл, чтобы импортировать Проекты и Группы, либо другой, чтобы импортировать Пользователей. Обратите внимание, что быть импортированным может только один файл за раз. Файл должен установленного формата. Если формат будет изменен (количество столбцов станет больше/меньше/изменится иначе), пожалуйста, обратитесь к разработчикам!"
+
+msgid "Project/group CSV File"
+msgstr "CSV файл для импорта Проекта/Группы"
+
+msgid "User CSV File"
+msgstr "CSV файл для импорта Пользователей"
+
+msgid "Options"
+msgstr "Дополнительные опции"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr "Дополнительные настройки CSV файла. Изменяйте их только в случае абсолютной уверенности в том, что Вы делаете!"
+
+msgid "Encoding of the CSV file"
+msgstr "Шифрование файла CSV"
+
+msgid "Delimiter of the CSV file"
+msgstr "Определение CSV файла"
+
+msgid "Upload and Import..."
+msgstr "Загрузка и импорт…"
+
+msgid "Import Projects and Groups"
+msgstr "Импорт Проектов и Групп"
+
+msgid "Clear results and start a new import!"
+msgstr "Отчистить результаты и начать новый импорт!"
+
+msgid "CSV Import Results"
+msgstr "Результаты импорта CSV файла"
+
+msgid "The import has finished. Here are the results:"
+msgstr "Импорт был завершен. Получены следующие результаты:"
+
+msgid "Read errors:"
+msgstr "Ошибки чтения:"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr "Следующие ряды в Вашем CSV файле имели ошибки или некорректное количество столбцов, а потому были игнорированы:"
+
+msgid "Saved items:"
+msgstr "Сохраненные элементы:"
+
+msgid "Important messages:"
+msgstr "Важные сообщения:"
+
+msgid "Errors:"
+msgstr "Ошибки:"
+
+msgid "Info messages:"
+msgstr "Информационные сообщения:"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr "Файл CSV был прочтен успешно. В данный момент импорт работает на сервере!"
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+"По окончании импорта результаты отобразятся на этой странице.\n"
+"\t\t\n"
+"\t\t\t\tВ зависимости от количества импортированных элементов, процесс импорта может занять от нескольких секунд до нескольких минут. Вы можете закрыть страницу. \n"
+"Уведомление об окончании импорта будет выслано на адрес Вашей электронной почты <b>»%(email)s»</b> !\n"
+"\t\t\t"
+
+msgid "Progress:"
+msgstr "Прогресс:"
 
 msgid "Show more Projects"
 msgstr "Показать больше проектов"
@@ -7019,7 +7109,7 @@ msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>Невозможно провести рендеринг для %(model_name)s!</i>"
 
 msgid "You are not currently in any Projects"
-msgstr "Тебя пока нет ни в одной группе либо проекте"
+msgstr "Тебя пока нет ни в одном проекте"
 
 msgid "My upcoming Projects"
 msgstr "Мои группы и проекты"
@@ -7109,7 +7199,7 @@ msgid "Only project members can see the content you requested. Apply to become a
 msgstr "Данный контент доступен только для членов группы. Подайте заявку на вступление прямо сейчас!"
 
 msgid "You are not currently in any Groups"
-msgstr "Тебя пока нет ни в одной группе либо проекте"
+msgstr "Тебя пока нет ни в одной группе"
 
 msgid "My upcoming Groups"
 msgstr "Мои группы"
@@ -7205,7 +7295,7 @@ msgid "Conference Menu"
 msgstr "Страница конференции"
 
 msgid "Browse all Conferences"
-msgstr "Просмотреть все проекти"
+msgstr "Просмотреть все конференции"
 
 msgid "Create Conference"
 msgstr "Создать событие"
@@ -7300,10 +7390,10 @@ msgstr "Пожалуйста, подтвердите Вашу электронн
 
 #, python-format
 msgid "Please verify your email address by %(date_string)s."
-msgstr "Пожалуйста, подтвердите Ваш электронный почты до %(date_string)s."
+msgstr "Пожалуйста, подтвердите Ваш адрес электронный почты до %(date_string)s."
 
 msgid "Click here to send the verification link again."
-msgstr "Нажмите, чтобы отправить ссылку на верификацию снова."
+msgstr "Нажмите, чтобы снова отправить ссылку для подтверждения."
 
 msgid "Team Description"
 msgstr "Описание проекта"
@@ -7885,91 +7975,6 @@ msgstr "Ваши изменения были сохранены."
 
 #~ msgid "You have to consent to being recorded to join this meeting."
 #~ msgstr "Вы должны подтвердить, разрешаете ли вы запись, чтобы присоединиться к сессии."
-
-#~ msgid "Custom Wagtail Page"
-#~ msgstr "Индивидуальная страница Wagtail"
-
-#~ msgid "Tools"
-#~ msgstr "Инструменты"
-
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Импортировать Проекты и Группы или Пользователей"
-
-# ???
-#~ msgid "Import from a CSV File"
-#~ msgstr "Импортировать из CSV файла"
-
-#~ msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-#~ msgstr "Загрузите либо один CSV файл, чтобы импортировать Проекты и Группы, либо другой, чтобы импортировать Пользователей. Обратите внимание, что быть импортированным может только один файл за раз. Файл должен установленного формата. Если формат будет изменен (количество столбцов станет больше/меньше/изменится иначе), пожалуйста, обратитесь к разработчикам!"
-
-#~ msgid "Project/group CSV File"
-#~ msgstr "CSV файл для импорта Проекта/Группы"
-
-#~ msgid "User CSV File"
-#~ msgstr "CSV файл для импорта Пользователей"
-
-#~ msgid "Options"
-#~ msgstr "Дополнительные опции"
-
-#~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-#~ msgstr "Дополнительные настройки CSV файла. Изменяйте их только в случае абсолютной уверенности в том, что Вы делаете!"
-
-#~ msgid "Encoding of the CSV file"
-#~ msgstr "Шифрование файла CSV"
-
-#~ msgid "Delimiter of the CSV file"
-#~ msgstr "Определение CSV файла"
-
-#~ msgid "Upload and Import..."
-#~ msgstr "Загрузка и импорт…"
-
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Импорт Проектов и Групп"
-
-#~ msgid "Clear results and start a new import!"
-#~ msgstr "Отчистить результаты и начать новый импорт!"
-
-#~ msgid "CSV Import Results"
-#~ msgstr "Результаты импорта CSV файла"
-
-#~ msgid "The import has finished. Here are the results:"
-#~ msgstr "Импорт был завершен. Получены следующие результаты:"
-
-#~ msgid "Read errors:"
-#~ msgstr "Ошибки чтения:"
-
-#~ msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-#~ msgstr "Следующие ряды в Вашем CSV файле имели ошибки или некорректное количество столбцов, а потому были игнорированы:"
-
-#~ msgid "Saved items:"
-#~ msgstr "Сохраненные элементы:"
-
-#~ msgid "Important messages:"
-#~ msgstr "Важные сообщения:"
-
-#~ msgid "Errors:"
-#~ msgstr "Ошибки:"
-
-#~ msgid "Info messages:"
-#~ msgstr "Информационные сообщения:"
-
-#~ msgid "The CSV file was read successfully and the import is currently running on the server!"
-#~ msgstr "Файл CSV был прочтен успешно. В данный момент импорт работает на сервере!"
-
-#~ msgid ""
-#~ "This page will show the results when the import is finished.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-#~ "\t\t\t"
-#~ msgstr ""
-#~ "По окончании импорта результаты отобразятся на этой странице.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tВ зависимости от количества импортированных элементов, процесс импорта может занять от нескольких секунд до нескольких минут. Вы можете закрыть страницу. \n"
-#~ "Уведомление об окончании импорта будет выслано на адрес Вашей электронной почты <b>»%(email)s»</b> !\n"
-#~ "\t\t\t"
-
-#~ msgid "Progress:"
-#~ msgstr "Прогресс:"
 
 #~ msgid "Active"
 #~ msgstr "Активный"

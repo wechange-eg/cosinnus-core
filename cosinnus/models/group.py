@@ -68,7 +68,8 @@ from django.template.defaultfilters import date as django_date_filter
 
 from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
 from cosinnus_event.mixins import BBBRoomMixin # noqa
-from cosinnus.utils.dates import timestamp_from_datetime
+from cosinnus.utils.dates import timestamp_from_datetime,\
+    HumanizedEventTimeMixin
 
 logger = logging.getLogger('cosinnus')
 
@@ -691,10 +692,12 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
         return None
 
 
-@six.python_2_unicode_compatible
-class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin,
-                        CosinnusManagedTagAssignmentModelMixin, VideoEmbedFieldMixin, MembersManagerMixin, BBBRoomMixin,
-                        AttachableObjectModel):
+@python_2_unicode_compatible
+class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, LastVisitedMixin,
+                          LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin,
+                          CosinnusManagedTagAssignmentModelMixin, VideoEmbedFieldMixin, MembersManagerMixin, BBBRoomMixin,
+                          AttachableObjectModel):
+    
     TYPE_PROJECT = 0
     TYPE_SOCIETY = 1
     TYPE_CONFERENCE = 2
@@ -1109,7 +1112,7 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
         return self.is_premium or self.has_premium_blocks
 
     @property
-    def temporary_users_allowed(self):
+    def has_premium_rights(self):
         return self.has_premium_blocks or self.is_premium_permanently
     
     def add_member_to_group(self, user, membership_status):
@@ -1199,11 +1202,6 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
             self.TYPE_CONFERENCE: 'cosinnusconference',
         }
         return reverse(f'admin:cosinnus_{type_map[self.type]}_change', kwargs={'object_id': self.id})
-    
-    def get_humanized_event_time_html(self):
-        if not self.from_date:
-            return ''
-        return mark_safe(render_to_string('cosinnus_event/common/humanized_event_time.html', {'event': self})).strip()
     
     @property
     def description_long_or_short(self):
@@ -1496,26 +1494,6 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
         if queryset.count() > 0:
             return queryset.aggregate(Max('to_date'))['to_date__max']
         return None
-    
-    def get_date_or_now_starting_time(self):
-        """ Returns a dict like {'is_date': True, 'date': <date>}
-            with is_date=False date as string "Now" if the event is running, 
-            else is_date=True and date as the moment-usable datetime of the from_date. """
-        _now = now()
-        if self.from_date and self.from_date < _now and self.to_date > _now:
-            return {'is_date': False, 'date': str(_("Now"))}
-        return {'is_date': True, 'date': django_date_filter(self.from_date, 'c')}
-    
-    @property
-    def is_running(self):
-        has_time = self.from_date and self.to_date
-        running = has_time and self.from_date <= now() <= self.to_date
-        return has_time and running
-
-    @property
-    def has_ended(self):
-        if self.to_date:
-            return self.to_date <= now()
 
     @property
     def conference_events(self):
