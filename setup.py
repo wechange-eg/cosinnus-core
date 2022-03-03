@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 import os
 import codecs
-import sys
 from setuptools import setup, find_packages
+from cosinnus import VERSION as COSINNUS_VERSION
 
 
 def read(*parts):
@@ -41,12 +41,9 @@ for dirpath, dirnames, filenames in os.walk(pkgdir):
     elif filenames:
         data_files.append([dirpath, [os.path.join(dirpath, f) for f in filenames]])
 
-from cosinnus import get_version
-
-
 setup(
     name='cosinnus',
-    version=get_version(),
+    version=COSINNUS_VERSION,
     description='cosinnus core application',
     long_description=read('README'),
     author='wechange eG',
@@ -78,6 +75,7 @@ setup(
         'django-filter==21.1',
         'django-haystack==3.1.1',
         'django-honeypot==0.9.0',
+        'django-ical==1.7.1',
         'django-mailbox==4.8.2',
         'django-modelcluster==5.2',
         'django-model-utils==1.5.0',
@@ -89,7 +87,6 @@ setup(
         'django-reverse-admin==2.9.4',
         'django-sekizai==2.0.0',
         'django-simple-captcha==0.5.14',
-        'django-suit==0.2.29',
         'django-taggit==1.5.1',
         'django-timezone-field==4.2.1',
         'django-two-factor-auth==1.13.1',
@@ -104,6 +101,7 @@ setup(
         'jsonfield==3.1.0',
         'html5lib',
         'html2text==2016.9.19',
+        'lxml==4.5.0',
         'numpy==1.14.5',
         'oauthlib==3.0.1',
         'paramiko==2.4.2',
@@ -142,20 +140,23 @@ setup(
         'django-osm-field',
         'markdown2',
         'pydkim',
+        'django-suit==0.2.29',
 
         # requirements for BigBlueButton integration
         'django-jalali==4.0.0',
         'django-bigbluebutton==0.1.0',
     ],
     dependency_links=[
-        'git+git://github.com/wechange-eg/django-awesome-avatar.git@django2#egg=django-awesome-avatar',
-        'git+git://github.com/wechange-eg/django-filer.git@django2#egg=django-filer',
-        'git+git://github.com/wechange-eg/django-multiform.git@master#egg=django-multiform',
-        'git+git://github.com/saschan/django-djajax.git@django2#egg=django-djajax',
-        'git+git://github.com/wechange-eg/django-select2.git@django2#egg=django-select2',
-        'git+git://github.com/wechange-eg/django-osm-field.git@django2#egg=django-osm-field',
-        'git+git://github.com/wechange-eg/python-markdown2.git@master#egg=markdown2',
-        'git+git://github.com/wechange-eg/pydkim.git@master#egg=pydkim',
+        'git+https://github.com/wechange-eg/django-awesome-avatar.git@django2#egg=django-awesome-avatar',
+        'git+https://github.com/wechange-eg/django-djajax.git@django-update-3-2#egg=django-djajax',
+        'git+https://github.com/wechange-eg/django-filer.git@django-update-3-2#egg=django-filer',
+        'git+https://github.com/wechange-eg/django-multiform.git@master#egg=django-multiform',
+        'git+https://github.com/wechange-eg/django-select2.git@django-update-3-2#egg=django-select2',
+        'git+https://github.com/wechange-eg/django-suit.git@main#egg=django-suit',
+        'git+https://github.com/wechange-eg/django-osm-field.git@django-update-3-2#egg=django-osm-field',
+        'git+https://github.com/wechange-eg/pydkim.git@master#egg=pydkim',
+        'git+https://github.com/wechange-eg/python-markdown2.git@master#egg=markdown2',
+        'git+https://github.com/wechange-eg/wechange-payments.git@django-update-3-2#egg=wechange-payments'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -163,11 +164,9 @@ setup(
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.2',
-        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
         'Framework :: Django',
     ],
     zip_safe=False,
