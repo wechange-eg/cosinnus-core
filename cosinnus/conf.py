@@ -1077,6 +1077,9 @@ class CosinnusConf(AppConf):
     # map content types (and if any text topics even exist)
     TEXT_TOPICS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = []
     
+    # if True, will show the user's selected timezone on the userprofile detail page
+    TIMEZONE_SHOW_IN_USERPROFILE = False
+    
     # set to True to enable virusscan. the clamd daeomon needs to be running!
     # see https://pypi.org/project/django-clamd/
     VIRUS_SCAN_UPLOADED_FILES = False

@@ -90,6 +90,7 @@ setup(
         'django-simple-captcha==0.5.7',
         'django-suit==0.2.26',
         'django-taggit==0.23.0',
+        'django-timezone-field==4.2.1',
         'django-two-factor-auth==1.13.1',
         'django-widget-tweaks==1.3',
         'djangorestframework==3.9.1',

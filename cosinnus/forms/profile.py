@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from awesome_avatar import forms as avatar_forms
 from builtins import object
 from multiform.forms import InvalidArgument
+from timezone_field import TimeZoneFormField
 
 from django import forms
 
@@ -52,6 +53,7 @@ class _UserProfileForm(TranslatedFieldsFormMixin, UserProfileFormDynamicFieldsMi
     website = forms.URLField(widget=forms.TextInput, required=False)
     language = forms.CharField(required=False)
     email_verified = forms.BooleanField(disabled=True, required=False)
+    timezone = TimeZoneFormField(required=False)
     
     if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
         newsletter_opt_in = forms.BooleanField(label='newsletter_opt_in', required=False)
