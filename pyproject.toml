@@ -1,0 +1,51 @@
+[tool.poetry]
+name = "cosinnus-core"
+version = "1.0.0"
+description = "todo: description"
+authors = ["Sascha Narr <saschanarr@gmail.com>"]
+license = "AGPL 3.0"
+
+[tool.poetry.dependencies]
+
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py36']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | migrations
+  | static-collected
+  | node_modules
+)/
+'''
+force-exclude = '''
+/(
+    \.eggs
+  | \.git
+  | migrations
+  | static-collected
+  | node_modules
+)/
+'''
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = false
+line_length = 88
+known_first_party = 'apps'
+skip='migrations'
+known_django = 'celery,django'
+default_section = 'THIRDPARTY'
+sections = 'FUTURE,STDLIB,THIRDPARTY,DJANGO,FIRSTPARTY,LOCALFOLDER'
+no_lines_before = 'LOCALFOLDER,DJANGO'
