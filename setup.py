@@ -31,11 +31,8 @@ def fullsplit(path, result=None):
 # an easy way to do this. Taken from Django.
 packages, data_files = [], []
 root_dir = os.path.dirname(__file__)
-if root_dir != '':
-    os.chdir(root_dir)
-pkgdir = 'cosinnus'
 
-for dirpath, dirnames, filenames in os.walk(pkgdir):
+for dirpath, dirnames, filenames in os.walk(root_dir):
     # Ignore PEP 3147 cache dirs and those whose names start with '.'
     dirnames[:] = [d for d in dirnames if not d.startswith('.') and d != '__pycache__']
     if '__init__.py' in filenames:
@@ -51,7 +48,7 @@ setup(
     author='wechange eG',
     author_email='support@wechange.de',
     packages=find_packages(exclude=["tests"]),
-    data_files=data_files,
+    # data_files=data_files,
     install_requires=[
         # please mirror all changes in the requirements.txt for local installs!
         'Django>=3.2,<3.3',
@@ -68,7 +65,6 @@ setup(
         'django-bootstrap3-datetimepicker-3==2.6.0',
         'django-bootstrap3==21.1',
         'django-classy-tags==2.0.0',
-        'django-cors-middleware==1.3.1',
         'django-countries==7.2.1',
         'django-cron==0.5.0',
         'django-embed-video==0.6',
@@ -124,6 +120,7 @@ setup(
         'qrcode==6.1',
         'Unidecode==0.4.21',
         'XlsxWriter==1.3.7',
+        'django-cors-headers<3.11.0',
 
         # wagtail
         'wagtail==2.15.1',
@@ -133,32 +130,20 @@ setup(
         'clamd==1.0.2',
         'django-clamd==0.4.0',
 
-        # requirements loaded in from github
-        'django-awesome-avatar',
-        'django-filer',
-        'django-multiform',
-        'django-djajax',
-        'django_select2',
-        'django-osm-field',
-        'markdown2',
-        'pydkim',
-        'django-suit==0.2.29',
-
         # requirements for BigBlueButton integration
         'django-jalali==4.0.0',
         'django-bigbluebutton==0.1.0',
-    ],
-    dependency_links=[
-        'git+https://github.com/wechange-eg/django-awesome-avatar.git@django2#egg=django-awesome-avatar',
-        'git+https://github.com/wechange-eg/django-djajax.git@django-update-3-2#egg=django-djajax',
-        'git+https://github.com/wechange-eg/django-filer.git@django-update-3-2#egg=django-filer',
-        'git+https://github.com/wechange-eg/django-multiform.git@master#egg=django-multiform',
-        'git+https://github.com/wechange-eg/django-select2.git@django-update-3-2#egg=django-select2',
-        'git+https://github.com/wechange-eg/django-suit.git@main#egg=django-suit',
-        'git+https://github.com/wechange-eg/django-osm-field.git@django-update-3-2#egg=django-osm-field',
-        'git+https://github.com/wechange-eg/pydkim.git@master#egg=pydkim',
-        'git+https://github.com/wechange-eg/python-markdown2.git@master#egg=markdown2',
-        'git+https://github.com/wechange-eg/wechange-payments.git@django-update-3-2#egg=wechange-payments'
+
+        # requirements loaded in from github
+        'django-awesome-avatar @ git+https://github.com/wechange-eg/django-awesome-avatar.git@django2#egg=django-awesome-avatar',
+        'django-filer @ git+https://github.com/wechange-eg/django-filer.git@django-update-3-2#egg=django-filer',
+        'django-multiform @ git+https://github.com/wechange-eg/django-multiform.git@master#egg=django-multiform',
+        'django-djajax @ git+https://github.com/wechange-eg/django-djajax.git@django-update-3-2#egg=django-djajax',
+        'django_select2 @ git+https://github.com/wechange-eg/django-select2.git@django-update-3-2#egg=django-select2',
+        'django-osm-field @ git+https://github.com/wechange-eg/django-osm-field.git@django-update-3-2#egg=django-osm-field',
+        'markdown2 @ git+https://github.com/wechange-eg/python-markdown2.git@master#egg=markdown2',
+        'pydkim @ git+https://github.com/wechange-eg/pydkim.git@master#egg=pydkim',
+        'django-suit @ git+https://github.com/wechange-eg/django-suit.git@main#egg=django-suit',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
