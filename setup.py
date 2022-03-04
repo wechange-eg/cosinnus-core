@@ -27,18 +27,47 @@ def fullsplit(path, result=None):
         return result
     return fullsplit(head, [tail] + result)
 
+
+
 # Compile the list of packages available, because setuptools doesn't have
 # an easy way to do this. Taken from Django.
-packages, data_files = [], []
+data_files = []
 root_dir = os.path.dirname(__file__)
+if root_dir != '':
+    os.chdir(root_dir)
 
-for dirpath, dirnames, filenames in os.walk(root_dir):
-    # Ignore PEP 3147 cache dirs and those whose names start with '.'
-    dirnames[:] = [d for d in dirnames if not d.startswith('.') and d != '__pycache__']
-    if '__init__.py' in filenames:
-        packages.append('.'.join(fullsplit(dirpath)))
-    elif filenames:
-        data_files.append([dirpath, [os.path.join(dirpath, f) for f in filenames]])
+packages = [
+    "ajax_forms",
+    "announcements",
+    "cosinnus",
+    "cosinnus_cloud",
+    "cosinnus_conference",
+    "cosinnus_etherpad",
+    "cosinnus_event",
+    "cosinnus_exchange",
+    "cosinnus_file",
+    "cosinnus_marketplace",
+    "cosinnus_message",
+    "cosinnus_note",
+    "cosinnus_notifications",
+    "cosinnus_oauth_client",
+    "cosinnus_organization",
+    "cosinnus_poll",
+    "cosinnus_stream",
+    "cosinnus_todo",
+    "frontend",
+    "postman",
+    "rest_framework_rdf",
+    "suit_overextends",
+    "wagtail_overextends",
+]
+
+for package in packages:
+    for dirpath, dirnames, filenames in os.walk(package):
+        # Ignore PEP 3147 cache dirs and those whose names start with '.'
+        dirnames[:] = [d for d in dirnames if not d.startswith('.') and d != '__pycache__']
+        if '__init__.py' not in filenames:
+            data_files.append([dirpath, [os.path.join(dirpath, f) for f in filenames]])
 
 setup(
     name='cosinnus',
@@ -48,7 +77,7 @@ setup(
     author='wechange eG',
     author_email='support@wechange.de',
     packages=find_packages(exclude=["tests"]),
-    # data_files=data_files,
+    data_files=data_files,
     install_requires=[
         # please mirror all changes in the requirements.txt for local installs!
         'Django>=3.2,<3.3',
