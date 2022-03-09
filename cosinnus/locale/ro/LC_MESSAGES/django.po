@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-01 13:03+0100\n"
+"POT-Creation-Date: 2022-03-09 16:39+0100\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1473,10 +1473,6 @@ msgstr "Cerere despre proiectul dvs. ”%(group_name)s”"
 #, python-format
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Cerere despre grupul dvs. ”%(group_name)s”"
-
-#, fuzzy
-msgid "Now"
-msgstr "Acum"
 
 msgid "Token"
 msgstr "Jeton"
@@ -3204,6 +3200,9 @@ msgstr ""
 #, fuzzy
 msgid "There are no rooms yet."
 msgstr "Nu există articole încă"
+
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
@@ -6492,6 +6491,9 @@ msgstr "NU doresc să fiu contactat pentru o colaborare potențială!"
 msgid "My Website"
 msgstr "Site-ul Meu"
 
+msgid "My time zone"
+msgstr ""
+
 #, fuzzy
 msgid "ended"
 msgstr "Dent s-a înălțat mult"
@@ -6519,6 +6521,14 @@ msgstr "Cine ești tu și ce te motivează?"
 
 msgid "Tell others something about you!"
 msgstr "Spune altora ceva despre tine!"
+
+#, fuzzy
+#| msgid "Timeline"
+msgid "Time zone"
+msgstr "Cronologie"
+
+msgid "This will determine the time and date shown for events on the website and in your notification emails."
+msgstr ""
 
 msgid "Cooperation requests for you"
 msgstr "Cereri de cooperare pentru dumneavoastră"
@@ -7706,6 +7716,10 @@ msgstr "Descrierea Echipei"
 
 msgid "About Us"
 msgstr "Despre Noi"
+
+#, fuzzy
+msgid "Now"
+msgstr "Acum"
 
 msgid "Question about"
 msgstr "Întrebare despre"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-01 13:03+0100\n"
+"POT-Creation-Date: 2022-03-09 16:39+0100\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1445,10 +1445,6 @@ msgstr "Żądanie dotyczące Twojego projektu \"%(group_name)s\""
 #, python-format
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Żądanie dotyczące Twojej grupy \"%(group_name)s\""
-
-#, fuzzy
-msgid "Now"
-msgstr "Teraz"
 
 msgid "Token"
 msgstr "Token"
@@ -3120,6 +3116,9 @@ msgstr "Możesz bezpośrednio tworzyć wydarzenia konferencyjne dla pokoi, używ
 
 msgid "There are no rooms yet."
 msgstr "Nie ma jeszcze żadnych pokoi."
+
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
@@ -6355,6 +6354,9 @@ msgstr "Nie jestem zainteresowany/-a nawiązaniem współpracy!"
 msgid "My Website"
 msgstr "Moja strona internetowa"
 
+msgid "My time zone"
+msgstr ""
+
 #, fuzzy
 msgid "ended"
 msgstr "Wysłano"
@@ -6382,6 +6384,14 @@ msgstr "Kim jesteś i co Cię motywuje?"
 
 msgid "Tell others something about you!"
 msgstr "Powiedz innym coś o sobie!"
+
+#, fuzzy
+#| msgid "Timeline"
+msgid "Time zone"
+msgstr "Oś czasu"
+
+msgid "This will determine the time and date shown for events on the website and in your notification emails."
+msgstr ""
 
 msgid "Cooperation requests for you"
 msgstr "Zapytanie o współpracę"
@@ -7512,6 +7522,10 @@ msgstr "Opis Zespołu"
 
 msgid "About Us"
 msgstr "O nas"
+
+#, fuzzy
+msgid "Now"
+msgstr "Teraz"
 
 msgid "Question about"
 msgstr "Pytania"

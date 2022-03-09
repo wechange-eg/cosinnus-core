@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-01 13:03+0100\n"
+"POT-Creation-Date: 2022-03-09 16:39+0100\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1481,10 +1481,6 @@ msgstr "თხოვნა თქვენს პროექტთან \"%(gr
 #, python-format
 msgid "Request about your group \"%(group_name)s\""
 msgstr "თხოვნა თქვენ ჯგუფთან \"%(group_name)s\" დაკავშირებით"
-
-#, fuzzy
-msgid "Now"
-msgstr "ახლა"
 
 msgid "Token"
 msgstr "ტოკენი"
@@ -3201,6 +3197,9 @@ msgstr ""
 #, fuzzy
 msgid "There are no rooms yet."
 msgstr "საგნები ჯერ არ არის"
+
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
@@ -6490,6 +6489,9 @@ msgstr "არ მსურს პოტენციურ კოლაბორ
 msgid "My Website"
 msgstr "ჩემი ვებ-საიტი"
 
+msgid "My time zone"
+msgstr ""
+
 #, fuzzy
 msgid "ended"
 msgstr "გაგზავნილია"
@@ -6517,6 +6519,14 @@ msgstr "ვინ ხართ და რა გაძლევთ მოტი�
 
 msgid "Tell others something about you!"
 msgstr "მოუყევით სხვებს თქვენ შესახებ!"
+
+#, fuzzy
+#| msgid "Timeline"
+msgid "Time zone"
+msgstr "Timeline"
+
+msgid "This will determine the time and date shown for events on the website and in your notification emails."
+msgstr ""
 
 msgid "Cooperation requests for you"
 msgstr "მოთხოვნები თანამშრომლობაზე"
@@ -7705,6 +7715,10 @@ msgstr "გუნდის აღწერა"
 
 msgid "About Us"
 msgstr "ჩვენ შესახებ"
+
+#, fuzzy
+msgid "Now"
+msgstr "ახლა"
 
 msgid "Question about"
 msgstr "კითხვა"

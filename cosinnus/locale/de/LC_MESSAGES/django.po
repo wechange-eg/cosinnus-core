@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-01 13:03+0100\n"
+"POT-Creation-Date: 2022-03-09 16:39+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1435,9 +1435,6 @@ msgstr "Frage zu deinem Projekt \"%(group_name)s\""
 #, python-format
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Frage zu deiner Gruppe \"%(group_name)s\""
-
-msgid "Now"
-msgstr "Jetzt"
 
 msgid "Token"
 msgstr "Token"
@@ -3113,6 +3110,9 @@ msgstr "Du kannst von hier aus direkt Tagungsveranstaltungen für Räume erstell
 
 msgid "There are no rooms yet."
 msgstr "Es sind noch keine Räume vorhanden."
+
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr "BBB-Meetings können von den nicht authentifizierten Benutzern nicht benutzt werden. Registrierung oder Anmeldung sind erforderlich um das Meeting beizutreten."
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr "Beachte: Änderung an einigen dieser Einstellungen kann den Neustart des Meetings fordern bevor die Änderung wirksam wird!"
@@ -6275,6 +6275,9 @@ msgstr "Ich möchte KEINE Anfragen für potentielle Zusammenarbeit erhalten!"
 msgid "My Website"
 msgstr "Meine Webseite"
 
+msgid "My time zone"
+msgstr ""
+
 msgid "ended"
 msgstr "beendet"
 
@@ -6301,6 +6304,14 @@ msgstr "Wer bist du und was motiviert dich?"
 
 msgid "Tell others something about you!"
 msgstr "Erzähle anderen etwas über dich!"
+
+#, fuzzy
+#| msgid "Timeline"
+msgid "Time zone"
+msgstr "Aktivitäten"
+
+msgid "This will determine the time and date shown for events on the website and in your notification emails."
+msgstr ""
 
 msgid "Cooperation requests for you"
 msgstr "Kooperationsanfragen an dich"
@@ -7413,6 +7424,9 @@ msgstr "Projektbeschreibung"
 
 msgid "About Us"
 msgstr "Über uns"
+
+msgid "Now"
+msgstr "Jetzt"
 
 msgid "Question about"
 msgstr "Frage zu"
