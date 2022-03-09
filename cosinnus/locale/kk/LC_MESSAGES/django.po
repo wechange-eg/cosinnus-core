@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-01 13:03+0100\n"
+"POT-Creation-Date: 2022-03-09 16:39+0100\n"
 "Language: kk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1481,10 +1481,6 @@ msgstr "Сіздің „%(group_name)s“ жобаңыз туралы сұрат
 #, python-format
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Сіздің тобыңыз „%(group_name)s“ туралы сұрату"
-
-#, fuzzy
-msgid "Now"
-msgstr "Енді"
 
 msgid "Token"
 msgstr "Белгі"
@@ -3206,6 +3202,9 @@ msgstr ""
 #, fuzzy
 msgid "There are no rooms yet."
 msgstr "Әзірге бұл жерде ештеңе жоқ"
+
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
@@ -6493,6 +6492,9 @@ msgstr "Мүмкін ынтымақтастық үшін маған хабарл
 msgid "My Website"
 msgstr "Менің веб сайттарым"
 
+msgid "My time zone"
+msgstr ""
+
 #, fuzzy
 msgid "ended"
 msgstr "Жіберілген"
@@ -6520,6 +6522,14 @@ msgstr "Сіз кімсіз және сізді қандай нәрселер а
 
 msgid "Tell others something about you!"
 msgstr "Басқалар сіз туралы бір нәрсе айтыңыз!"
+
+#, fuzzy
+#| msgid "Timeline"
+msgid "Time zone"
+msgstr "Таймлайн"
+
+msgid "This will determine the time and date shown for events on the website and in your notification emails."
+msgstr ""
 
 msgid "Cooperation requests for you"
 msgstr "Сізге ынтымақтастық туралы өтініштер"
@@ -7710,6 +7720,10 @@ msgstr "Топ сипаттамасы"
 
 msgid "About Us"
 msgstr "Біз туралы"
+
+#, fuzzy
+msgid "Now"
+msgstr "Енді"
 
 msgid "Question about"
 msgstr "Туралы сұрақтар"

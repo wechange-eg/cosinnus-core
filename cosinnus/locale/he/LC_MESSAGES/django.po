@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-01 13:03+0100\n"
+"POT-Creation-Date: 2022-03-09 16:39+0100\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1444,10 +1444,6 @@ msgstr "בקשה אודות הפרויקט שלך \"%(group_name)s\""
 #, python-format
 msgid "Request about your group \"%(group_name)s\""
 msgstr "בקשה אודות הקבוצה שלך \"%(group_name)s\""
-
-#, fuzzy
-msgid "Now"
-msgstr "כעת"
 
 msgid "Token"
 msgstr "אסימון גישה"
@@ -3113,6 +3109,9 @@ msgstr "תוכלו ליצור ישירות אירועי ועידה לחדרים 
 
 msgid "There are no rooms yet."
 msgstr "אין עדיין חדרים."
+
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
@@ -6337,6 +6336,9 @@ msgstr "אני לא מעוניין שיצרו איתי קשר לגבי שיתו�
 msgid "My Website"
 msgstr "האתר שלי"
 
+msgid "My time zone"
+msgstr ""
+
 #, fuzzy
 msgid "ended"
 msgstr "פורסם"
@@ -6364,6 +6366,14 @@ msgstr "מי אתה ומה מניע אותך?"
 
 msgid "Tell others something about you!"
 msgstr "ספר לאחרים משהו עליך!"
+
+#, fuzzy
+#| msgid "Timeline"
+msgid "Time zone"
+msgstr "ציר זמן"
+
+msgid "This will determine the time and date shown for events on the website and in your notification emails."
+msgstr ""
 
 msgid "Cooperation requests for you"
 msgstr "בקשות לשיתוף פעולה עבורך"
@@ -7492,6 +7502,10 @@ msgstr "תיאור צוות"
 
 msgid "About Us"
 msgstr "אודותנו"
+
+#, fuzzy
+msgid "Now"
+msgstr "כעת"
 
 msgid "Question about"
 msgstr "שאלה על"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-01 13:03+0100\n"
-"PO-Revision-Date: 2022-03-01 16:03+0100\n"
+"POT-Creation-Date: 2022-03-09 16:39+0100\n"
+"PO-Revision-Date: 2022-03-09 16:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -1445,9 +1445,6 @@ msgstr "Запрос о Вашем проекте \"%(group_name)s\""
 #, python-format
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Запрос о Вашей группе \"%(group_name)s\""
-
-msgid "Now"
-msgstr "Сейчас"
 
 msgid "Token"
 msgstr "Токен"
@@ -3110,6 +3107,9 @@ msgstr "Здесь Вы можете создавать события конф�
 
 msgid "There are no rooms yet."
 msgstr "Здесь пока нет комнат."
+
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr "BBB-видеоконференции не могут быть использованы незарегистрированными пользователями. Для участия необходима регистрация или вход под своей учетной записью."
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr "Важно: Изменение некоторых из этих настроек может повлечь за собой принудительную перезагрузку текущей сессии, чтобы имплементировать изменения!"
@@ -6263,6 +6263,9 @@ msgstr "Я НЕ желаю контакта насчет возможного с
 msgid "My Website"
 msgstr "Мой сайт"
 
+msgid "My time zone"
+msgstr ""
+
 msgid "ended"
 msgstr "окончено"
 
@@ -6289,6 +6292,14 @@ msgstr "Кто Вы и что Вами движет?"
 
 msgid "Tell others something about you!"
 msgstr "Расскажите немного о себе!"
+
+#, fuzzy
+#| msgid "Timeline"
+msgid "Time zone"
+msgstr "Хронология"
+
+msgid "This will determine the time and date shown for events on the website and in your notification emails."
+msgstr ""
 
 msgid "Cooperation requests for you"
 msgstr "Заявки насчет сотрудничества для тебя"
@@ -7400,6 +7411,9 @@ msgstr "Описание проекта"
 
 msgid "About Us"
 msgstr "О нас"
+
+msgid "Now"
+msgstr "Сейчас"
 
 msgid "Question about"
 msgstr "Вопрос о"
