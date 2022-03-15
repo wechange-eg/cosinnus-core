@@ -782,6 +782,13 @@ class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin,
         return kwargs
     
     def forms_valid(self, form, inlines):
+        if self.group.__class__.__name__ == 'CosinnusConference':
+            obj = self.group
+            cosinnus_notifications.attending_conference_changed.send(
+                sender=self.group, user=self.request.user, obj=obj,
+                audience=get_user_model().objects.filter(
+                    id__in=self.group.members)
+            )
         messages.success(self.request, self.message_success % {'team_type':self.object._meta.verbose_name})
         return super(GroupUpdateView, self).forms_valid(form, inlines)
 
