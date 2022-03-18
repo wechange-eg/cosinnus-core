@@ -16,7 +16,7 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject, \
     CosinnusConference
 from cosinnus.utils.http import make_csv_response
-from cosinnus.utils.permissions import check_user_superuser
+from cosinnus.utils.permissions import check_user_superuser, check_user_portal_manager
 from cosinnus.utils.user import filter_active_users
 
 
@@ -28,7 +28,7 @@ class SimpleStatisticsView(FormView):
     template_name = 'cosinnus/statistics/simple.html'
     
     def dispatch(self, request, *args, **kwargs):
-        if not check_user_superuser(request.user):
+        if not check_user_superuser(request.user) and not check_user_portal_manager(request.user):
             raise PermissionDenied('You do not have permission to access this page.')
         return super(SimpleStatisticsView, self).dispatch(request, *args, **kwargs)
     
