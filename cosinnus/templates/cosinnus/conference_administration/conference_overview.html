@@ -16,7 +16,7 @@
 {% endblock leftnav %}
 
 {% block breadcrumb %}
-    <li><a href="{% url 'cosinnus:conference-administration-overview' %}">{% trans "Conference Administration" %}</a></li>
+    <li><a href="{% url 'cosinnus:conference-management-overview' %}">{% trans "Management" %}</a></li>
     <li class="active">
         {% if only_nonstandard %}
             {% trans "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings" %}
@@ -117,7 +117,7 @@
                             start: "{{ conference_block.from_date|date:"c"}}",
                             end: "{{ conference_block.to_date|next_day|date:"c"}}",
                             className: 'conference-calendar-conference-block',
-                            url: '{% url 'cosinnus:conference-administration-edit-premium-block' block_id=conference_block.id %}',
+                            url: '{% url 'cosinnus:conference-management-edit-premium-block' block_id=conference_block.id %}',
                             allDay: true
                         },
                     {% endif %}
@@ -265,7 +265,7 @@
                 </div>
                 <div class="col-md-2">
                     {% if not item.conference.is_premium_permanently %}
-	                    <a href="{% url 'cosinnus:conference-administration-add-premium-block' slug=item.conference.slug %}">
+	                    <a href="{% url 'cosinnus:conference-management-add-premium-block' slug=item.conference.slug %}">
 	                        <i class="fa fa-plus"></i> {% trans 'Add new premium block' %}
 	                    </a>
                     {% endif %}
@@ -295,7 +295,7 @@
                         {% trans 'Remove Permanent Premium' %}
                     {% endif %}
                 {% endcaptureas %}
-	            {% captureas action %}{% url 'cosinnus:conference-administration-overview' %}{% endcaptureas %}
+	            {% captureas action %}{% url 'cosinnus:conference-management-overview' %}{% endcaptureas %}
                 {% captureas conference_id %}{{ item.conference.id }}{% endcaptureas %}
 	            {% include "cosinnus/modal_box.html" with id=modal_toggle_premium_id label=label title=title form_action=action submit_name="toggle_permanent_premium" submit_value=conference_id title_icon_full_class='fa fa-check-circle' %}
             </div>

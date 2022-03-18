@@ -122,12 +122,12 @@ urlpatterns = [
     url(r'^administration/announcement/(?P<slug>[^/]+)/delete/$', user_dashboard_announcement.user_dashboard_announcement_delete, name='user-dashboard-announcement-delete'),
     url(r'^administration/announcement/(?P<slug>[^/]+)/activate-toggle/$', user_dashboard_announcement.user_dashboard_announcement_activate, name='user-dashboard-announcement-activate'),
     
-    url(r'^conference_administration/$', conference_administration.conference_administration, name='conference-administration'),
-    url(r'^conference_administration/conference_overview/$', conference_administration.conference_overview, name='conference-administration-overview'),
-    url(r'^conference_administration/conference_overview/nonstandard/$', conference_administration.conference_overview, name='conference-administration-overview-nonstandard', kwargs={'only_nonstandard': True}),
-    url(r'^conference_administration/conference_overview/premium/$', conference_administration.conference_overview, name='conference-administration-overview-premium', kwargs={'only_premium': True}),
-    url(r'^conference_administration/conference/(?P<slug>[^/]+)/blocks/add/$', conference_administration.conference_add_premium_block, name='conference-administration-add-premium-block'),
-    url(r'^conference_administration/conference/block/(?P<block_id>\d+)/edit/$', conference_administration.conference_edit_premium_block, name='conference-administration-edit-premium-block'),
+    url(r'^management/$', conference_administration.conference_management, name='management'),
+    url(r'^management/conference_overview/$', conference_administration.conference_overview, name='conference-management-overview'),
+    url(r'^management/conference_overview/nonstandard/$', conference_administration.conference_overview, name='conference-management-overview-nonstandard', kwargs={'only_nonstandard': True}),
+    url(r'^management/conference_overview/premium/$', conference_administration.conference_overview, name='conference-management-overview-premium', kwargs={'only_premium': True}),
+    url(r'^management/conference/(?P<slug>[^/]+)/blocks/add/$', conference_administration.conference_add_premium_block, name='conference-management-add-premium-block'),
+    url(r'^management/conference/block/(?P<block_id>\d+)/edit/$', conference_administration.conference_edit_premium_block, name='conference-management-edit-premium-block'),
     
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
     url(r'^statistics/simple/bbb_room_visits/$', statistics.bbb_room_visit_statistics_download, name='simple-statistics-bbb-room-visits'),

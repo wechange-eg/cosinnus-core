@@ -31,9 +31,9 @@ from django.contrib.auth import get_user_model
 
 class ConferenceAdministrationView(RedirectView):
     permanent = False
-    url = reverse_lazy('cosinnus:conference-administration-overview')
+    url = reverse_lazy('cosinnus:conference-management-overview')
 
-conference_administration = ConferenceAdministrationView.as_view()
+conference_management = ConferenceAdministrationView.as_view()
 
 
 class ConferenceOverviewView(RequirePortalManagerMixin, TemplateView):
@@ -235,7 +235,7 @@ class ConferenceAddPremiumBlockView(RequirePortalManagerMixin, FormView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('cosinnus:conference-administration-overview')
+        return reverse_lazy('cosinnus:conference-management-overview')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -258,7 +258,7 @@ class ConferenceEditPremiumBlockView(SuccessMessageMixin, RequirePortalManagerMi
         return self.object.conference
 
     def get_success_url(self):
-        return reverse_lazy('cosinnus:conference-administration-overview')
+        return reverse_lazy('cosinnus:conference-management-overview')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

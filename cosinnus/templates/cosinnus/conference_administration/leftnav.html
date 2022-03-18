@@ -1,7 +1,7 @@
 {% load i18n cosinnus_tags %}
 
 {% if SETTINGS.COSINNUS_CONFERENCES_ENABLED and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
-	<div type="button" class="btn w100 btn-emphasized fine-space" href="{% url "cosinnus:conference-administration-overview" %}">
+	<div type="button" class="btn w100 btn-emphasized fine-space" href="{% url "cosinnus:conference-management-overview" %}">
         <ul class="media-list">
             <li class="media">
                 <span class="pull-left">
@@ -14,7 +14,7 @@
         </ul>
     </div>
     
-    <div type="button" class="btn w100 btn-emphasized fine-space" href="{% url "cosinnus:conference-administration-overview-premium" %}">
+    <div type="button" class="btn w100 btn-emphasized fine-space" href="{% url "cosinnus:conference-management-overview-premium" %}">
         <ul class="media-list">
             <li class="media">
                 <span class="pull-left">
@@ -27,7 +27,7 @@
         </ul>
     </div>
     
-    <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url "cosinnus:conference-administration-overview-nonstandard" %}">
+    <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url "cosinnus:conference-management-overview-nonstandard" %}">
         <ul class="media-list">
             <li class="media">
                 <span class="pull-left">

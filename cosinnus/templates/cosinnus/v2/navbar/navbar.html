@@ -431,9 +431,9 @@
 	                {% if request.user|is_portal_manager or request.user|is_superuser %}
 		                <ul class="item-list">
 		                    <li>
-		                        <a href="{% url 'cosinnus:conference-administration' %}" class="list-item" role="button" titledby=".item-text">
+		                        <a href="{% url 'cosinnus:management' %}" class="list-item" role="button" titledby=".item-text">
 		                            <div class="item-text">
-		                                {% trans "Conference Administration" %}
+		                                {% trans "Management" %}
 		                            </div>
 		                        </a>
 		                    </li>
