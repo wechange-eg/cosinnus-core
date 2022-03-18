@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-09 16:39+0100\n"
+"POT-Creation-Date: 2022-03-18 15:08+0100\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2317,9 +2317,6 @@ msgstr "Gebruikersdashboard mededelingen"
 msgid "User Welcome Email"
 msgstr "Welkomstmail voor gebruikers"
 
-msgid "Simple Statistics"
-msgstr "Simpele statistieken"
-
 msgid "Edit"
 msgstr "Wijzigen"
 
@@ -3411,8 +3408,8 @@ msgid "Overview - All Conferences"
 msgstr ""
 
 #, fuzzy
-msgid "Conference Administration"
-msgstr "Administratie"
+msgid "Management"
+msgstr "Conferentiebeheer"
 
 msgid "Overview - Conferences, Rooms and Workshops"
 msgstr ""
@@ -3545,6 +3542,9 @@ msgstr "Evenement aanmaken"
 #, fuzzy
 msgid "Conferences with Custom Settings"
 msgstr "Conferentie instellingen"
+
+msgid "Simple Statistics"
+msgstr "Simpele statistieken"
 
 msgid "Rearrange"
 msgstr "Herschikken"
@@ -5806,6 +5806,9 @@ msgstr "E-mailadressen van alle nieuwsbriefabonnees"
 
 msgid "E-Mails of ALL active users"
 msgstr "E-mailadressen van ALLE actieve gebruikers"
+
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "Ok"
 msgstr "Oké"
@@ -8290,6 +8293,10 @@ msgstr "Je bent momenteel geen lid van %s! Als je wilt, kun je hieronder het lid
 
 msgid "Your changes have been saved."
 msgstr "Je wijzigingen zijn opgeslagen."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "Administratie"
 
 #~ msgid "Active"
 #~ msgstr "Actief"

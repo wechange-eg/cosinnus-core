@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-09 16:39+0100\n"
-"PO-Revision-Date: 2022-03-09 16:46+0100\n"
+"POT-Creation-Date: 2022-03-18 15:08+0100\n"
+"PO-Revision-Date: 2022-03-18 15:14+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -2269,9 +2269,6 @@ msgstr "Пользовательская панель управления об�
 msgid "User Welcome Email"
 msgstr "Приветственный емейл пользователям"
 
-msgid "Simple Statistics"
-msgstr "Простая статистика"
-
 msgid "Edit"
 msgstr "Редактировать"
 
@@ -3287,8 +3284,8 @@ msgstr "Обзор - Только премиальные конференции"
 msgid "Overview - All Conferences"
 msgstr "Конференция"
 
-msgid "Conference Administration"
-msgstr "Администрирование конференции"
+msgid "Management"
+msgstr "Управление"
 
 msgid "Overview - Conferences, Rooms and Workshops"
 msgstr "Обзор — конференции, комнаты и воркшопы"
@@ -3400,6 +3397,9 @@ msgstr "Только премиальные конференции"
 
 msgid "Conferences with Custom Settings"
 msgstr "Проходит конференция"
+
+msgid "Simple Statistics"
+msgstr "Простая статистика"
 
 msgid "Rearrange"
 msgstr "Перегруппировать"
@@ -5607,8 +5607,11 @@ msgstr "Емейлы всех подписчиков новостей"
 msgid "E-Mails of ALL active users"
 msgstr "Емейлы ВСЕХ активных пользователей"
 
+msgid "Select the date range for which you would like statistics"
+msgstr "Выбери временной промежуток для получения статистики"
+
 msgid "Ok"
-msgstr "Ок"
+msgstr "ОК"
 
 msgid "The WE-Cloud is here!"
 msgstr "WE-облако здесь!"
@@ -6264,7 +6267,7 @@ msgid "My Website"
 msgstr "Мой сайт"
 
 msgid "My time zone"
-msgstr ""
+msgstr "Мой часовой пояс"
 
 msgid "ended"
 msgstr "окончено"
@@ -6293,10 +6296,8 @@ msgstr "Кто Вы и что Вами движет?"
 msgid "Tell others something about you!"
 msgstr "Расскажите немного о себе!"
 
-#, fuzzy
-#| msgid "Timeline"
 msgid "Time zone"
-msgstr "Хронология"
+msgstr "Часовой пояс"
 
 msgid "This will determine the time and date shown for events on the website and in your notification emails."
 msgstr ""
@@ -7983,6 +7984,9 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
+
+#~ msgid "Conference Administration"
+#~ msgstr "Администрирование конференции"
 
 #~ msgid "By clicking \"Continue\" you are consenting to be recorded in this video conference."
 #~ msgstr "При нажатии кнопки “Продолжить”, вы подтверждаете свое согласие на то, что эта видео-конференция будет записана."

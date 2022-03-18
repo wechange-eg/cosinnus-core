@@ -142,9 +142,9 @@
         <!-- a box with semi transparent background -->
         <div class="content-box">
         
-	        <h1>Simple Statistics</h1>
+			<h1>{% trans "Simple Statistics" %}</h1>
 	        
-	        <div>Select the date range for which you would like statistics</div>
+	        <div>{% trans "Select the date range for which you would like statistics" %}</div>
 	        
 	        {% trans "Date" as date_label %}
 	        {% include 'cosinnus/fields/from_to_date_field.html' with from_date_field=form.from_date to_date_field=form.to_date label=date_label%} 

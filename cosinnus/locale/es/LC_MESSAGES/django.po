@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-09 16:39+0100\n"
+"POT-Creation-Date: 2022-03-18 15:08+0100\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2343,9 +2343,6 @@ msgstr "Página del panel del usario"
 msgid "User Welcome Email"
 msgstr "Texto de bienvenida-email"
 
-msgid "Simple Statistics"
-msgstr "Estadísticas simples"
-
 msgid "Edit"
 msgstr "Editar"
 
@@ -3438,9 +3435,8 @@ msgstr "Todos los proyectos"
 msgid "Overview - All Conferences"
 msgstr "Todos los proyectos"
 
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Administrador"
+msgid "Management"
+msgstr ""
 
 msgid "Overview - Conferences, Rooms and Workshops"
 msgstr ""
@@ -3572,6 +3568,9 @@ msgstr "Crear evento"
 #, fuzzy
 msgid "Conferences with Custom Settings"
 msgstr "Proyectos Cosinnus"
+
+msgid "Simple Statistics"
+msgstr "Estadísticas simples"
 
 msgid "Rearrange"
 msgstr "Reorganizar"
@@ -5835,6 +5834,9 @@ msgid "E-Mails of all newsletter subcribers"
 msgstr ""
 
 msgid "E-Mails of ALL active users"
+msgstr ""
+
+msgid "Select the date range for which you would like statistics"
 msgstr ""
 
 msgid "Ok"
@@ -8383,6 +8385,10 @@ msgstr "Actualmente no eres miembro de %s! Si lo deseas, puedes solicitar para s
 
 msgid "Your changes have been saved."
 msgstr "Se han guardado los cambios."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "Administrador"
 
 #, fuzzy
 #~ msgid "Active"

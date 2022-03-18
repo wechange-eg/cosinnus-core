@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-09 16:39+0100\n"
+"POT-Creation-Date: 2022-03-18 15:08+0100\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2273,9 +2273,6 @@ msgstr "הודעות לוח של כלים של המשתמש"
 msgid "User Welcome Email"
 msgstr "דוא\"ל ברכת הצטרפות"
 
-msgid "Simple Statistics"
-msgstr "סטטיסטיקה פשוטה"
-
 msgid "Edit"
 msgstr "ערוך"
 
@@ -3322,8 +3319,9 @@ msgid "Overview - All Conferences"
 msgstr "סקירה כללית - כל הועידות"
 
 #, fuzzy
-msgid "Conference Administration"
-msgstr "ניהול משתמש"
+#| msgid "User Management"
+msgid "Management"
+msgstr "ניהול משתמשים"
 
 msgid "Overview - Conferences, Rooms and Workshops"
 msgstr "סקירה כללית- ועידות, חדרים וסדנאות"
@@ -3444,6 +3442,9 @@ msgstr "שרת BBB לועידות פרימיום"
 
 msgid "Conferences with Custom Settings"
 msgstr "ועידות עם הגדרות מותאמות אישית"
+
+msgid "Simple Statistics"
+msgstr "סטטיסטיקה פשוטה"
 
 msgid "Rearrange"
 msgstr "סידור מחדש"
@@ -5670,6 +5671,9 @@ msgstr "דוא\"ל של כל מנויי הניוזלטר"
 
 msgid "E-Mails of ALL active users"
 msgstr "דוא\"ל של כל המשתמשים הפעילים"
+
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "Ok"
 msgstr "אישור"
@@ -8075,6 +8079,10 @@ msgstr "כרגע אינך חבר ב-%s! אם תרצה, אתה יכול לבקש 
 
 msgid "Your changes have been saved."
 msgstr "השינויים שביצעת נשמרו בהצלחה."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "ניהול משתמש"
 
 #~ msgid "Active"
 #~ msgstr "פעיל"

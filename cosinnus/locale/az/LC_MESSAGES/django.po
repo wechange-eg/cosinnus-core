@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-09 16:39+0100\n"
+"POT-Creation-Date: 2022-03-18 15:08+0100\n"
 "Language: az\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2329,9 +2329,6 @@ msgstr "İstifadəçinin İdarə Paneli Elanları"
 msgid "User Welcome Email"
 msgstr "İstifadəçinin Salamlama E-poçtu"
 
-msgid "Simple Statistics"
-msgstr "Sadə Statistika"
-
 msgid "Edit"
 msgstr "Redaktə edin"
 
@@ -3419,9 +3416,8 @@ msgstr "Video konfrans Serveri"
 msgid "Overview - All Conferences"
 msgstr "Video konfrans Serveri"
 
-#, fuzzy
-msgid "Conference Administration"
-msgstr "İdarəetmə"
+msgid "Management"
+msgstr ""
 
 msgid "Overview - Conferences, Rooms and Workshops"
 msgstr ""
@@ -3553,6 +3549,9 @@ msgstr "Tədbir Yaradın"
 #, fuzzy
 msgid "Conferences with Custom Settings"
 msgstr "Video konfrans Serveri"
+
+msgid "Simple Statistics"
+msgstr "Sadə Statistika"
 
 msgid "Rearrange"
 msgstr "Yenidən qruplaşdırın"
@@ -5806,6 +5805,9 @@ msgid "E-Mails of all newsletter subcribers"
 msgstr ""
 
 msgid "E-Mails of ALL active users"
+msgstr ""
+
+msgid "Select the date range for which you would like statistics"
 msgstr ""
 
 msgid "Ok"
@@ -8300,6 +8302,10 @@ msgstr "Hal-hazırda %s üzvü deyilsiniz! Əgər arzu edirsinizsə, Siz aşağ�
 
 msgid "Your changes have been saved."
 msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "İdarəetmə"
 
 #, fuzzy
 #~ msgid "Active"

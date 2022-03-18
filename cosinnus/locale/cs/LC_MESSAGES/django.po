@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-09 16:39+0100\n"
+"POT-Creation-Date: 2022-03-18 15:08+0100\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2299,9 +2299,6 @@ msgstr "Oznámení panelu uživatele"
 msgid "User Welcome Email"
 msgstr "Uvítací e-mail uživatele"
 
-msgid "Simple Statistics"
-msgstr "Jednoduchá statistika"
-
 msgid "Edit"
 msgstr "Upravit"
 
@@ -3376,8 +3373,9 @@ msgid "Overview - All Conferences"
 msgstr "Přehled - Všechny konference"
 
 #, fuzzy
-msgid "Conference Administration"
-msgstr "Administrace uživatele"
+#| msgid "User Management"
+msgid "Management"
+msgstr "Řízení uživatele"
 
 msgid "Overview - Conferences, Rooms and Workshops"
 msgstr "Přehled - konference, místnosti a workshopy"
@@ -3498,6 +3496,9 @@ msgstr "BBB server pro Premium konference"
 
 msgid "Conferences with Custom Settings"
 msgstr "Konference s customizovanými nastaveními"
+
+msgid "Simple Statistics"
+msgstr "Jednoduchá statistika"
 
 msgid "Rearrange"
 msgstr "Uspořádat"
@@ -5725,6 +5726,9 @@ msgstr "E-maily všech odběratelů newsletterů"
 
 msgid "E-Mails of ALL active users"
 msgstr "E-maily VŠECH aktivních uživatelů"
+
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "Ok"
 msgstr "OK"
@@ -8134,6 +8138,10 @@ msgstr "Momentálně nejste členem %s! Pokud si přejete, můžete požádat o 
 
 msgid "Your changes have been saved."
 msgstr "Vaše změny byly uloženy."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "Administrace uživatele"
 
 #~ msgid "Active"
 #~ msgstr "Aktivovat"

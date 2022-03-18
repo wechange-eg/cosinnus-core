@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-09 16:39+0100\n"
+"POT-Creation-Date: 2022-03-18 15:08+0100\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2328,9 +2328,6 @@ msgstr "მომხმარებლის ხელსაწყოთა პ�
 msgid "User Welcome Email"
 msgstr "მომხმარებლის მისასალმებელი ელ-ფოსტა"
 
-msgid "Simple Statistics"
-msgstr "უბრალო სტატისტიკა"
-
 msgid "Edit"
 msgstr "რედაქტირება"
 
@@ -3414,9 +3411,8 @@ msgstr "ვიდეო კონფერენციის სერვერ�
 msgid "Overview - All Conferences"
 msgstr "ვიდეო კონფერენციის სერვერი"
 
-#, fuzzy
-msgid "Conference Administration"
-msgstr "ადმინისტრაცია"
+msgid "Management"
+msgstr ""
 
 msgid "Overview - Conferences, Rooms and Workshops"
 msgstr ""
@@ -3548,6 +3544,9 @@ msgstr "ღონისძიების შექმნა"
 #, fuzzy
 msgid "Conferences with Custom Settings"
 msgstr "ვიდეო კონფერენციის სერვერი"
+
+msgid "Simple Statistics"
+msgstr "უბრალო სტატისტიკა"
 
 msgid "Rearrange"
 msgstr "გადაწყობა"
@@ -5800,6 +5799,9 @@ msgid "E-Mails of all newsletter subcribers"
 msgstr ""
 
 msgid "E-Mails of ALL active users"
+msgstr ""
+
+msgid "Select the date range for which you would like statistics"
 msgstr ""
 
 msgid "Ok"
@@ -8295,6 +8297,10 @@ msgstr "თქვენ არ ხართ %s-ის წევრი! თუ �
 
 msgid "Your changes have been saved."
 msgstr "თქვენი ცვლილებები შენახულია."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "ადმინისტრაცია"
 
 #, fuzzy
 #~ msgid "Active"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-09 16:39+0100\n"
+"POT-Creation-Date: 2022-03-18 15:08+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2257,9 +2257,6 @@ msgstr "Benutzerdashboard-Ankündigungen"
 msgid "User Welcome Email"
 msgstr "Willkommens-E-Mail für neue Benutzer"
 
-msgid "Simple Statistics"
-msgstr "Simple Statistiken"
-
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -3294,8 +3291,8 @@ msgstr "Überblick - Premium-Tagungen"
 msgid "Overview - All Conferences"
 msgstr "Überblick - Alle Tagungen"
 
-msgid "Conference Administration"
-msgstr "Tagungsverwaltung"
+msgid "Management"
+msgstr "Verwaltung"
 
 msgid "Overview - Conferences, Rooms and Workshops"
 msgstr "Überblick - Tagungen, Räume und Workshops"
@@ -3406,6 +3403,9 @@ msgstr "Nur Premium-Tagungen"
 
 msgid "Conferences with Custom Settings"
 msgstr "Tagungen mit eigenen Einstellungen"
+
+msgid "Simple Statistics"
+msgstr "Simple Statistiken"
 
 msgid "Rearrange"
 msgstr "Umsortieren"
@@ -5609,6 +5609,9 @@ msgstr "E-Mails aller Newsletter-Abonnenten"
 msgid "E-Mails of ALL active users"
 msgstr "E-Mails ALLER aktiven Benutzer"
 
+msgid "Select the date range for which you would like statistics"
+msgstr "Wähle einen Zeitraum, für den du den Überblick bekommen möchtest"
+
 msgid "Ok"
 msgstr "Ok"
 
@@ -6276,7 +6279,7 @@ msgid "My Website"
 msgstr "Meine Webseite"
 
 msgid "My time zone"
-msgstr ""
+msgstr "Meine Zeitzone"
 
 msgid "ended"
 msgstr "beendet"
@@ -6305,10 +6308,8 @@ msgstr "Wer bist du und was motiviert dich?"
 msgid "Tell others something about you!"
 msgstr "Erzähle anderen etwas über dich!"
 
-#, fuzzy
-#| msgid "Timeline"
 msgid "Time zone"
-msgstr "Aktivitäten"
+msgstr "Zeitzone"
 
 msgid "This will determine the time and date shown for events on the website and in your notification emails."
 msgstr ""
@@ -7996,6 +7997,9 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "Conference Administration"
+#~ msgstr "Tagungsverwaltung"
 
 #~ msgid "By clicking \"Continue\" you are consenting to be recorded in this video conference."
 #~ msgstr "Indem du auf “Fortsetzen” klickst, stimmst du zu, in dieser Videokonferenz aufgezeichnet werden."

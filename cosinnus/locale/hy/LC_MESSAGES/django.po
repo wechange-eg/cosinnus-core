@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-09 16:39+0100\n"
+"POT-Creation-Date: 2022-03-18 15:08+0100\n"
 "Language: hy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2329,9 +2329,6 @@ msgstr "Օգտատիրոջ կառավարման վահանակի հայտարա�
 msgid "User Welcome Email"
 msgstr "Օգտատիրոջ Ողջույնի էլ․ նամակ"
 
-msgid "Simple Statistics"
-msgstr "Պարզ վիճակագրություն"
-
 msgid "Edit"
 msgstr "Խմբագրել"
 
@@ -3419,9 +3416,8 @@ msgstr "Վիդեո-կոնֆերանսի սերվեր"
 msgid "Overview - All Conferences"
 msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Ադմինիստրացիա"
+msgid "Management"
+msgstr ""
 
 msgid "Overview - Conferences, Rooms and Workshops"
 msgstr ""
@@ -3553,6 +3549,9 @@ msgstr "Ստեղծել Իրադարձություն"
 #, fuzzy
 msgid "Conferences with Custom Settings"
 msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+msgid "Simple Statistics"
+msgstr "Պարզ վիճակագրություն"
 
 msgid "Rearrange"
 msgstr "Վերադասավորվել"
@@ -5804,6 +5803,9 @@ msgid "E-Mails of all newsletter subcribers"
 msgstr ""
 
 msgid "E-Mails of ALL active users"
+msgstr ""
+
+msgid "Select the date range for which you would like statistics"
 msgstr ""
 
 msgid "Ok"
@@ -8300,6 +8302,10 @@ msgstr "Դուք ներկայումս %s- ի անդամ չեք: Եթե ցանկ�
 
 msgid "Your changes have been saved."
 msgstr "Ձեր փոփոխությունները պահպանվել են."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "Ադմինիստրացիա"
 
 #, fuzzy
 #~ msgid "Active"

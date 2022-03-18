@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-09 16:39+0100\n"
+"POT-Creation-Date: 2022-03-18 15:08+0100\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2265,9 +2265,6 @@ msgstr ""
 msgid "User Welcome Email"
 msgstr ""
 
-msgid "Simple Statistics"
-msgstr ""
-
 msgid "Edit"
 msgstr ""
 
@@ -3285,9 +3282,8 @@ msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
 msgid "Overview - All Conferences"
 msgstr ""
 
-#, fuzzy
-msgid "Conference Administration"
-msgstr "اتاق‌های کنفرانس"
+msgid "Management"
+msgstr ""
 
 msgid "Overview - Conferences, Rooms and Workshops"
 msgstr ""
@@ -3403,6 +3399,9 @@ msgid "Premium Conferences Only"
 msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
 
 msgid "Conferences with Custom Settings"
+msgstr ""
+
+msgid "Simple Statistics"
 msgstr ""
 
 msgid "Rearrange"
@@ -5440,6 +5439,9 @@ msgid "E-Mails of all newsletter subcribers"
 msgstr ""
 
 msgid "E-Mails of ALL active users"
+msgstr ""
+
+msgid "Select the date range for which you would like statistics"
 msgstr ""
 
 msgid "Ok"
@@ -7794,6 +7796,10 @@ msgstr "در حال حاضر شما عضو %s نیستید! اگر مایلید 
 
 msgid "Your changes have been saved."
 msgstr "تغییرات‌تان ذخیره شده‌اند."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "اتاق‌های کنفرانس"
 
 #~ msgid "Active"
 #~ msgstr "فعال"

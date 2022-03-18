@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-09 16:39+0100\n"
+"POT-Creation-Date: 2022-03-18 15:08+0100\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2322,9 +2322,6 @@ msgstr "Anunțuri pentru Tabloul de Bord al Utilizatorului"
 msgid "User Welcome Email"
 msgstr "Utilizator Bun Venit pe E-mail"
 
-msgid "Simple Statistics"
-msgstr "Statistici Simple"
-
 msgid "Edit"
 msgstr "Editați"
 
@@ -3419,8 +3416,8 @@ msgid "Overview - All Conferences"
 msgstr "Este conferință"
 
 #, fuzzy
-msgid "Conference Administration"
-msgstr "Administrare"
+msgid "Management"
+msgstr "Managementul Conferinței"
 
 msgid "Overview - Conferences, Rooms and Workshops"
 msgstr ""
@@ -3554,6 +3551,9 @@ msgstr "Creează Eveniment"
 #, fuzzy
 msgid "Conferences with Custom Settings"
 msgstr "Conferința se desfășoară"
+
+msgid "Simple Statistics"
+msgstr "Statistici Simple"
 
 msgid "Rearrange"
 msgstr "Rearanja"
@@ -5811,6 +5811,9 @@ msgstr "E-mailuri ale tuturor abonaților la buletin informativ"
 
 msgid "E-Mails of ALL active users"
 msgstr "E-mailurile Tuturor utilizatorilor activi"
+
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "Ok"
 msgstr "OK"
@@ -8297,6 +8300,10 @@ msgstr "În prezent nu sunteți membru %s! Dacă doriți, puteți solicita să d
 
 msgid "Your changes have been saved."
 msgstr "Schimbările tale au fost salvate."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "Administrare"
 
 #~ msgid "Active"
 #~ msgstr "Activ"

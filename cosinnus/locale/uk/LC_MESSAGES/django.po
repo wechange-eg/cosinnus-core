@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-09 16:39+0100\n"
+"POT-Creation-Date: 2022-03-18 15:08+0100\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2264,9 +2264,6 @@ msgstr "Інформаційна панель оголошення корист�
 msgid "User Welcome Email"
 msgstr "Вітальний текст листа користувача"
 
-msgid "Simple Statistics"
-msgstr "Проста Статистика"
-
 msgid "Edit"
 msgstr "Редагувати"
 
@@ -3307,8 +3304,9 @@ msgid "Overview - All Conferences"
 msgstr "Огляд - усі конференції"
 
 #, fuzzy
-msgid "Conference Administration"
-msgstr "Адміністрація Користувача"
+#| msgid "User Management"
+msgid "Management"
+msgstr "Надіслати Інформаційний бюлетень"
 
 msgid "Overview - Conferences, Rooms and Workshops"
 msgstr "Огляд - конференції, кімнати та воркшопи"
@@ -3425,6 +3423,9 @@ msgstr "Створити Захід"
 
 msgid "Conferences with Custom Settings"
 msgstr "Конференція триває"
+
+msgid "Simple Statistics"
+msgstr "Проста Статистика"
 
 msgid "Rearrange"
 msgstr "Переставити"
@@ -5645,6 +5646,9 @@ msgstr "Електронні адреси всіх підписників на �
 
 msgid "E-Mails of ALL active users"
 msgstr "Електронні адреси ВСІХ активних користувачів"
+
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "Ok"
 msgstr "Ok"
@@ -8046,6 +8050,10 @@ msgstr "Наразі Ви не є членом %s! Якщо ви бажаєте 
 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "Адміністрація Користувача"
 
 #~ msgid "Active"
 #~ msgstr "Активний"

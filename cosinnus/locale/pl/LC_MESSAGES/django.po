@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-09 16:39+0100\n"
+"POT-Creation-Date: 2022-03-18 15:08+0100\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2273,9 +2273,6 @@ msgstr "Panel Ogłoszenia Użytkownika"
 msgid "User Welcome Email"
 msgstr "Tekst powitalny e-mail użytkownika"
 
-msgid "Simple Statistics"
-msgstr "Proste Statystyki"
-
 msgid "Edit"
 msgstr "Edytuj"
 
@@ -3325,8 +3322,9 @@ msgid "Overview - All Conferences"
 msgstr "Przegląd - Wszystkie konferencje"
 
 #, fuzzy
-msgid "Conference Administration"
-msgstr "Administracja Użytkownika"
+#| msgid "User Management"
+msgid "Management"
+msgstr "Zarządzanie użytkownikami"
 
 msgid "Overview - Conferences, Rooms and Workshops"
 msgstr "Przegląd - Konferencje, pokoje i warsztaty"
@@ -3447,6 +3445,9 @@ msgstr "Serwer BBB dla Konferencji Premium"
 
 msgid "Conferences with Custom Settings"
 msgstr "Konferencje z Ustawieniami Niestandardowymi"
+
+msgid "Simple Statistics"
+msgstr "Proste Statystyki"
 
 msgid "Rearrange"
 msgstr "Ułóż"
@@ -5684,6 +5685,9 @@ msgstr "Adresy E-Mail wszystkich subskrybentów newslettera"
 
 msgid "E-Mails of ALL active users"
 msgstr "Adresy E-Mail WSZYSTKICH aktywnych użytkowników"
+
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "Ok"
 msgstr "Ok"
@@ -8096,6 +8100,10 @@ msgstr "Obecnie nie jesteś członkiem %s! Jeśli chcesz nim zostać, możesz wy
 
 msgid "Your changes have been saved."
 msgstr "Twoje zmiany zostały zapisane."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "Administracja Użytkownika"
 
 #~ msgid "Active"
 #~ msgstr "Aktywny/-a"
