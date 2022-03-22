@@ -6,7 +6,7 @@
     margin-top: 85px;
 }
 .announcement ~ .container {
-    .app-root, .app-fullscreen, .map-fullscreen, .tile-list-fullscreen {
+    .app-root:not(.app-embed), .app-fullscreen, .map-fullscreen, .tile-list-fullscreen {
         top: 85px; /** Navbar compensation with announcement */
         height: ~"calc(100% - 50px - 35px)"; /** Navbar compensation with announcement */
     }    
