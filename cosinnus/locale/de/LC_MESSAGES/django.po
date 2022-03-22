@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -6282,7 +6282,7 @@ msgid "My Website"
 msgstr "Meine Webseite"
 
 msgid "My time zone"
-msgstr ""
+msgstr "Meine Zeitzone"
 
 msgid "ended"
 msgstr "beendet"
@@ -6311,13 +6311,11 @@ msgstr "Wer bist du und was motiviert dich?"
 msgid "Tell others something about you!"
 msgstr "Erzähle anderen etwas über dich!"
 
-#, fuzzy
-#| msgid "Timeline"
 msgid "Time zone"
-msgstr "Aktivitäten"
+msgstr "Zeitzone"
 
 msgid "This will determine the time and date shown for events on the website and in your notification emails."
-msgstr ""
+msgstr "Dies bestimmt die Uhrzeit und das Datum, die für Veranstaltungen auf der Website und in Benachrichtigungs-E-Mails angezeigt werden."
 
 msgid "Cooperation requests for you"
 msgstr "Kooperationsanfragen an dich"
