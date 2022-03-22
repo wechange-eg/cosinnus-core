@@ -3112,7 +3112,7 @@ msgid "There are no rooms yet."
 msgstr "Es sind noch keine Räume vorhanden."
 
 msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
-msgstr "BBB-Meetings können von den nicht authentifizierten Benutzern nicht benutzt werden. Registrierung oder Anmeldung sind erforderlich um das Meeting beizutreten."
+msgstr "BBB-Meetings können von den nicht authentifizierten Benutzern nicht benutzt werden. Registrierung oder Anmeldung sind erforderlich um dem Meeting beizutreten."
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr "Beachte: Änderung an einigen dieser Einstellungen kann den Neustart des Meetings fordern bevor die Änderung wirksam wird!"
