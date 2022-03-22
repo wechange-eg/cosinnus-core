@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-22 12:39+0100\n"
-"PO-Revision-Date: 2022-03-22 12:41+0100\n"
+"POT-Creation-Date: 2022-03-09 16:39+0100\n"
+"PO-Revision-Date: 2022-03-17 14:37+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -1301,7 +1301,7 @@ msgid "Project"
 msgstr "Проект"
 
 msgid "Regular membership requests"
-msgstr "Заявки на обычное членство"
+msgstr "Сбор заявок на присоединение к проекту"
 
 msgid "Require participation applications for this conference"
 msgstr "Требовать подать заявку на участие для этой конференции"
@@ -3958,7 +3958,7 @@ msgid "This description will be visible on the entire portal."
 msgstr "Это описание будет видимо всем зарегистрированным пользователям."
 
 msgid "This description will be publicly visible."
-msgstr "Это описание будет видимо всем."
+msgstr "Это описание будет видно всем."
 
 msgid "Conference Theme Color"
 msgstr "Тема цветов конференции"
@@ -3976,7 +3976,7 @@ msgid "Will be shown as a small logo."
 msgstr "Будет отображаться как маленький логотип."
 
 msgid "This content will be visible for all registered users!"
-msgstr "Этот контент будут видеть все зарегистрированные пользователи!"
+msgstr "Эту информацию будут видеть все зарегистрированные пользователи!"
 
 msgid "Header Image"
 msgstr "Изображение в верхнем колонтитуле"
@@ -4033,7 +4033,7 @@ msgid "Group/Project is publicly visible"
 msgstr "Общедоступность группы/проекта"
 
 msgid "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search."
-msgstr "Должны ли Ваша группа / Ваш проект быть доступны для анонимных пользователей? Майкросайт может быть найден через поиск Интернета и внутренний поиск портала."
+msgstr "Должны ли Ваша группа / Ваш проект быть доступны для анонимных пользователей? Микросайт может быть найден через поиск Интернета и внутренний поиск портала."
 
 msgid "Enable the public visibility of your group/project"
 msgstr "Сделать группу/проект общедоступным"
@@ -4559,22 +4559,22 @@ msgid "You and anyone who like (and follow) your idea will be notified when a ne
 msgstr "Вы и любой, кому нравится (и кто следит) за Вашей идеей, будут уведомлены, когда из него будет создан новый проект. Таким образом, каждый, кто заинтересован, может перейти прямо в него и стать активным в новом проекте (им еще нужно попросить разрешения стать участником)."
 
 msgid "Enter a descriptive title for your idea"
-msgstr "Введите описательное название для своей идеи"
+msgstr "Введите описание идеи"
 
 msgid "The description for your idea. Explain your vision and your goals."
-msgstr "Описание Вашей идеи. Объясните свое видение и ваши цели."
+msgstr "Опишите Вашу идею и ее цели."
 
 msgid "We could not find an address for your location. Please enter an address manually!"
 msgstr "Мы не смогли найти адрес вашего местоположения. Введите адрес вручную!"
 
 msgid "This will determine who can see your idea."
-msgstr "Это определит, кто может видеть вашу идею."
+msgstr "Выберите, кто сможет видеть Вашу идею."
 
 msgid "This idea will be set to be publicly visible!"
 msgstr "Эта идея будет общедоступной!"
 
 msgid "Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
-msgstr "Публично видимый контент может увидеть ЛЮБОЙ в Интернете, и он потенциально может быть включен в результаты поисковой системы!"
+msgstr "Общедоступный контент может увидеть любой человек в Интернете, и он потенциально может быть включен в результаты поисковой системы!"
 
 msgid "Registered users only"
 msgstr "Только зарегистрированные пользователи"
@@ -5162,7 +5162,7 @@ msgid "Activities and interests"
 msgstr "Деятельность и сфера интересов"
 
 msgid "Where would your idea be realized?"
-msgstr "Где бы Ваша идея была реализована?"
+msgstr "Где бы Вы хотели реализовать Вашу идею?"
 
 msgid "Enter a place or address and then choose a point on the map."
 msgstr "Укажите место или адрес, а затем выберите место на карте."
@@ -6922,10 +6922,10 @@ msgid "Edit My Profile"
 msgstr "Редактировать мой профиль"
 
 msgid "What's happening where and when? What's to discover? Where to meet?"
-msgstr "Что, где и когда? На что стоит обратить внимание? Где следующее место встречи?"
+msgstr "Создавайте собственные мероприятия, организуйте встречи и приглашайте коллег."
 
 msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
-msgstr "Как будет выглядеть наш регион в ближайшем будущем? Как поспособствовать его развитию в экологическом русле? А может у тебя есть идея как построить прочное гражданское общество в родном городе? Найди единомышленников для твоего следующего проекта."
+msgstr "Как будет выглядеть наш регион в ближайшем будущем? Как поспособствовать его развитию в экологическом русле? А может у Вас есть идея как построить прочное гражданское общество в родном городе? Найдите единомышленников для Вашего следующего проекта"
 
 msgid "Do you have something to share, sell or give away? Are you searching for something?"
 msgstr "Ты хочешь чем-то поделиться, что-то продать либо отдать в хорошие руки? Ты что-то ищешь? (... Задания)"
@@ -7141,7 +7141,7 @@ msgid "in the Project Dashboard"
 msgstr "в панели управления проектом"
 
 msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
-msgstr "Реализовывай проекты и инициативы эффективно вместе с единомышленниками. Все важные инструменты для этого сотрудничества вы найдете в одном месте: Новости, Документы, События, Задания и много другого."
+msgstr "Реализовывайте проекты и инициативы эффективно вместе с единомышленниками. Все важные инструменты для этого сотрудничества Вы найдете в одном месте: Новости, Документы, События, Задания и многоe другоe."
 
 msgid "Edit Project"
 msgstr "Редактировать проект"
@@ -7192,7 +7192,7 @@ msgid "Project members only"
 msgstr "Только для членов проекта или группы"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
-msgstr "Пользователи могут присоединиться путем отправки заявки на членство, которую может принять или отклонить администратор проекта."
+msgstr "Пользователи могут присоединиться к проекту, отправив заявку на участие в нем. Администратор проекта может принять или отклонить поступившую заявку."
 
 msgid "Type the names of files, events or pads from this project to attach..."
 msgstr "Напишите название файла, события или пада проекта, чтобы приложить…"
