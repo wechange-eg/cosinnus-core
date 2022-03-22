@@ -14,7 +14,8 @@
 	                <span class="annotation">
 	                    {% trans "Started" %}: <span class="moment-data-date" data-date="{{ object.startTime|date:'c' }}"></span>
 	                    &nbsp;&nbsp;&nbsp;
-	                    {% trans "Length" %}: {{ object.duration }}
+	                    {% trans "Length" %}: {{ object.duration }} 
+                        {% if object.duration == '1' %}{% trans "minute" %}{% else %}{% trans "minutes" %}{% endif %}
 	                    &nbsp;&nbsp;&nbsp;
 	                    {% trans "Participants" %}: {{ object.participants}}
 	                </span>
