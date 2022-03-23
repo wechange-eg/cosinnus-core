@@ -1156,7 +1156,7 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         """ Returns a User QS of *AUTO-INVITED* (!) conference member accounts of this group if it is a conference, an empty QS else """
         from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
         if self.group_is_conference:
-            return self.users.filter(cosinnus_profile__settings__contains=PROFILE_SETTING_WORKSHOP_PARTICIPANT).order_by('id')
+            return self.users.filter(cosinnus_profile__settings__has_key=PROFILE_SETTING_WORKSHOP_PARTICIPANT).order_by('id')
         return get_user_model().objects.none()
 
     @property
