@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-22 12:39+0100\n"
+"POT-Creation-Date: 2022-03-23 10:06+0100\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -499,6 +499,32 @@ msgstr "%(sender_name)s právě vytvořil(a) \"%(team_name)s\" na %(portal_name)
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s právě vytvořil/a nový uživatelský účet na %(portal_name)s!"
+
+msgid "A conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference %(object_name)s has been updated"
+msgstr "Nová konference: \"%(object_name)s\" byla oznámena v %(team_name)s."
+
+#, fuzzy
+#| msgid "You are about to deactivate this conference!"
+msgid "You are attending this conference"
+msgstr "Chystáte se deaktivovat tuto konferenci!"
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr "Nová konference: \"%(object_name)s\" byla oznámena v %(team_name)s."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The time of conference %(object_name)s has been updated"
+msgstr "Nová konference: \"%(object_name)s\" byla oznámena v %(team_name)s."
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -7096,98 +7122,6 @@ msgstr "Rádi vás vidíme! Na webu %(portal_name)s můžete spolupracovat s ost
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Přihlásit a podílet se teď"
 
-msgid "Custom Wagtail Page"
-msgstr ""
-
-msgid "Tools"
-msgstr ""
-
-#, fuzzy
-msgid "Import Projects and Groups or Users"
-msgstr "Moje projekty a skupiny"
-
-#, fuzzy
-msgid "Import from a CSV File"
-msgstr "Import se nezdařil"
-
-msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-msgstr ""
-
-#, fuzzy
-msgid "Project/group CSV File"
-msgstr "Projekt/skupina"
-
-#, fuzzy
-msgid "User CSV File"
-msgstr "Nahrát CSV soubor"
-
-#, fuzzy
-msgid "Options"
-msgstr "Poměry"
-
-msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-msgstr ""
-
-msgid "Encoding of the CSV file"
-msgstr ""
-
-msgid "Delimiter of the CSV file"
-msgstr ""
-
-#, fuzzy
-msgid "Upload and Import..."
-msgstr "Nahrát obrázek."
-
-#, fuzzy
-msgid "Import Projects and Groups"
-msgstr "Moje projekty a skupiny"
-
-msgid "Clear results and start a new import!"
-msgstr ""
-
-#, fuzzy
-msgid "CSV Import Results"
-msgstr "Import byl úspěšný!"
-
-msgid "The import has finished. Here are the results:"
-msgstr ""
-
-#, fuzzy
-msgid "Read errors:"
-msgstr "Chyba!"
-
-msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-msgstr ""
-
-msgid "Saved items:"
-msgstr ""
-
-#, fuzzy
-msgid "Important messages:"
-msgstr "Vaše jméno"
-
-#, fuzzy
-msgid "Errors:"
-msgstr "Chyba!"
-
-#, fuzzy
-msgid "Info messages:"
-msgstr "Vaše jméno"
-
-msgid "The CSV file was read successfully and the import is currently running on the server!"
-msgstr ""
-
-#, python-format
-msgid ""
-"This page will show the results when the import is finished.\n"
-"\t\t\n"
-"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-"\t\t\t"
-msgstr ""
-
-msgid "Progress:"
-msgstr ""
-
 msgid "Show more Projects"
 msgstr "Zobrazit více projektů"
 
@@ -8140,6 +8074,54 @@ msgstr "Momentálně nejste členem %s! Pokud si přejete, můžete požádat o 
 
 msgid "Your changes have been saved."
 msgstr "Vaše změny byly uloženy."
+
+#, fuzzy
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "Moje projekty a skupiny"
+
+#, fuzzy
+#~ msgid "Import from a CSV File"
+#~ msgstr "Import se nezdařil"
+
+#, fuzzy
+#~ msgid "Project/group CSV File"
+#~ msgstr "Projekt/skupina"
+
+#, fuzzy
+#~ msgid "User CSV File"
+#~ msgstr "Nahrát CSV soubor"
+
+#, fuzzy
+#~ msgid "Options"
+#~ msgstr "Poměry"
+
+#, fuzzy
+#~ msgid "Upload and Import..."
+#~ msgstr "Nahrát obrázek."
+
+#, fuzzy
+#~ msgid "Import Projects and Groups"
+#~ msgstr "Moje projekty a skupiny"
+
+#, fuzzy
+#~ msgid "CSV Import Results"
+#~ msgstr "Import byl úspěšný!"
+
+#, fuzzy
+#~ msgid "Read errors:"
+#~ msgstr "Chyba!"
+
+#, fuzzy
+#~ msgid "Important messages:"
+#~ msgstr "Vaše jméno"
+
+#, fuzzy
+#~ msgid "Errors:"
+#~ msgstr "Chyba!"
+
+#, fuzzy
+#~ msgid "Info messages:"
+#~ msgstr "Vaše jméno"
 
 #~ msgid "Active"
 #~ msgstr "Aktivovat"
