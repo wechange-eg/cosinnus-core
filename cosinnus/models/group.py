@@ -1434,7 +1434,12 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
 
     def get_member_page_url(self):
         return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self})
-
+    
+    def get_apply_url(self):
+        if self.group_is_conference and self.membership_mode == self.MEMBERSHIP_MODE_APPLICATION:
+            return group_aware_reverse('cosinnus:conference:application', kwargs={'group': self})
+        return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self}) + '?apply=1'
+    
     @cached_property
     def get_parent_typed(self):
         """ This is the only way to make sure to get the real object of a group's parent

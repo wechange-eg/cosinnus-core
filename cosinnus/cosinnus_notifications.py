@@ -338,7 +338,6 @@ notifications = {
         },
         'origin_url_suffix': '?join=1',
         'action_button_text': _('Accept invitation'),
-        'action_button_alternate_text': _('View invitation'),
         'notification_reason': 'none',
     }, 
     'user_group_recruited': {
@@ -411,6 +410,8 @@ notifications = {
             'object_text': 'description_long_or_short',
             'image_url': 'get_avatar_thumbnail_url',
             'event_meta': 'from_date',
+            'action_button_url': 'get_apply_url',
+            'action_button_alternate_url': 'get_absolute_url',
         },
         'action_button_text': pgettext_lazy('email campaign button label to apply for a conference', 'Apply now!'),
         'action_button_alternate_text': _('View conference'),
