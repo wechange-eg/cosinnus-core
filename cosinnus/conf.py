@@ -1134,6 +1134,9 @@ class CosinnusConf(AppConf):
     # determines if the elasticsearch backend should use threading on update/remove/clear writing actions
     ELASTIC_BACKEND_RUN_THREADED = True
 
+    # all groups will be shown alphabetically by names under '<domain>/groups/'
+    ALPHABETICAL_ORDER_FOR_GROUPS = False
+
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.

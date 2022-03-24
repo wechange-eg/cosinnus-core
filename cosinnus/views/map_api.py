@@ -20,6 +20,7 @@ from cosinnus.conf import settings
 from cosinnus.forms.search import filter_searchqueryset_for_read_access, \
     filter_searchqueryset_for_portal
 from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.models.map import CloudfileMapCard, HaystackMapResult, \
     SEARCH_MODEL_NAMES, SEARCH_MODEL_NAMES_REVERSE, \
     SEARCH_RESULT_DETAIL_TYPE_MAP, \
@@ -241,7 +242,11 @@ def map_search_endpoint(request, filter_group_id=None):
     skip_score_sorting = False
     # if we hae no query-boosted results, use *only* our custom sorting (haystack's is very random)
     if not query:
-        sort_args = ['-local_boost']
+        # orderings works for projects as well: just remove the 'and CosinnusSociety in model_list' part from condition!
+        if getattr(settings, 'COSINNUS_ALPHABETICAL_ORDER_FOR_GROUPS', True) and CosinnusSociety in model_list:
+            sort_args = ['title']
+        else:
+            sort_args = ['-local_boost']
         # if we only look at conferences, order them by their from_date, future first!
         if prefer_own_portal:
             sort_args = ['-portal'] + sort_args
