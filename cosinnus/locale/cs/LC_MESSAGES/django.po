@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-23 10:06+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -450,12 +450,12 @@ msgstr "%(sender_name)s vás zve, abyste se připojili k \"%(team_name)s\" na %(
 msgid "Accept invitation"
 msgstr "Přijmout pozvánku"
 
-msgid "View invitation"
-msgstr "Zobrazit pozvánku"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s vás pozval/a"
+
+msgid "View invitation"
+msgstr "Zobrazit pozvánku"
 
 msgid "New link to the moved project/group"
 msgstr "Nový odkaz na přesunutý projekt/skupinu"
@@ -2268,6 +2268,129 @@ msgstr "Správa"
 msgid "Select a page on the left side."
 msgstr "Vyberte stránku na levé straně."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "Přehled - konference, místnosti a workshopy s customizovanými nastaveními BBB serveru"
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Přehled - Všechny konference"
+
+msgid "Overview - All Conferences"
+msgstr "Přehled - Všechny konference"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "Přehled - konference, místnosti a workshopy"
+
+msgid "Past"
+msgstr "Dřívější"
+
+msgid "View Upcoming"
+msgstr "Zobrazit nastávající"
+
+msgid "Upcoming"
+msgstr "Nastávající"
+
+msgid "View Past"
+msgstr "Zobrazit minulý"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+msgid "Booked"
+msgstr "Se záložkou"
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Konference je trvale v kategorii premium"
+
+msgid "Portal Setting"
+msgstr "Nastavení portálu"
+
+msgid "Conference Settings"
+msgstr "Nastavení konference"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr "Není premium"
+
+msgid "Rooms"
+msgstr "Místnosti"
+
+msgid "Start"
+msgstr "Zahájení"
+
+msgid "running now!"
+msgstr "probíhá nyní!"
+
+msgid "Conference Setting"
+msgstr "Nastavení konference"
+
+msgid "Room"
+msgstr "Místnost"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Událost"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Konference je trvale v kategorii premium"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Konference je trvale v kategorii premium"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Opravdu chcete uživatele odebrat?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Opravdu chcete odebrat člena „%(name)s“ z týmu?"
+
+msgid "There are no items to show."
+msgstr "Nejsou žádné položky pro zobrazení."
+
+msgid "BBB"
+msgstr "BBB"
+
+msgid "BBB Premium"
+msgstr "BBB Premium"
+
+msgid "BBB Recording API"
+msgstr ""
+
+msgid "Not set"
+msgstr "Nenastavený"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "BBB server pro Premium konference"
+
+msgid "Save"
+msgstr "Uložit"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Opravdu chcete odmítnout člena „%(name)s“?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Smazat profil"
+
 msgid "Newsletters"
 msgstr "Bulletiny"
 
@@ -2331,6 +2454,16 @@ msgstr "Oznámení panelu uživatele"
 msgid "User Welcome Email"
 msgstr "Uvítací e-mail uživatele"
 
+msgid "Conference Overview"
+msgstr "Konferenční přehled"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "BBB server pro Premium konference"
+
+msgid "Conferences with Custom Settings"
+msgstr "Konference s customizovanými nastaveními"
+
 msgid "Simple Statistics"
 msgstr "Jednoduchá statistika"
 
@@ -2389,9 +2522,6 @@ msgstr "Jméno"
 
 msgid "Lastname"
 msgstr "Příjmení"
-
-msgid "Save"
-msgstr "Uložit"
 
 msgid "User Administration"
 msgstr "Administrace uživatele"
@@ -3402,140 +3532,6 @@ msgstr "Opravdu chcete smazat \"%(title)s\" místnosti?"
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Smazat nahlášenou položku..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "Přehled - konference, místnosti a workshopy s customizovanými nastaveními BBB serveru"
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Přehled - Všechny konference"
-
-msgid "Overview - All Conferences"
-msgstr "Přehled - Všechny konference"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Administrace uživatele"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "Přehled - konference, místnosti a workshopy"
-
-msgid "Past"
-msgstr "Dřívější"
-
-msgid "View Upcoming"
-msgstr "Zobrazit nastávající"
-
-msgid "Upcoming"
-msgstr "Nastávající"
-
-msgid "View Past"
-msgstr "Zobrazit minulý"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-#, fuzzy
-msgid "Booked"
-msgstr "Se záložkou"
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Konference je trvale v kategorii premium"
-
-msgid "Portal Setting"
-msgstr "Nastavení portálu"
-
-msgid "Conference Settings"
-msgstr "Nastavení konference"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "Premium"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr "Není premium"
-
-msgid "Rooms"
-msgstr "Místnosti"
-
-msgid "Start"
-msgstr "Zahájení"
-
-msgid "running now!"
-msgstr "probíhá nyní!"
-
-msgid "Conference Setting"
-msgstr "Nastavení konference"
-
-msgid "Room"
-msgstr "Místnost"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Událost"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Konference je trvale v kategorii premium"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Konference je trvale v kategorii premium"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Opravdu chcete uživatele odebrat?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Opravdu chcete odebrat člena „%(name)s“ z týmu?"
-
-msgid "There are no items to show."
-msgstr "Nejsou žádné položky pro zobrazení."
-
-msgid "BBB"
-msgstr "BBB"
-
-msgid "BBB Premium"
-msgstr "BBB Premium"
-
-msgid "BBB Recording API"
-msgstr ""
-
-msgid "Not set"
-msgstr "Nenastavený"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "BBB server pro Premium konference"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Opravdu chcete odmítnout člena „%(name)s“?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Smazat profil"
-
-msgid "Conference Overview"
-msgstr "Konferenční přehled"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "BBB server pro Premium konference"
-
-msgid "Conferences with Custom Settings"
-msgstr "Konference s customizovanými nastaveními"
 
 msgid "Rearrange"
 msgstr "Uspořádat"
@@ -5764,8 +5760,8 @@ msgstr "E-maily všech odběratelů newsletterů"
 msgid "E-Mails of ALL active users"
 msgstr "E-maily VŠECH aktivních uživatelů"
 
-msgid "Ok"
-msgstr "OK"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr "WE-Cloud je tady!"
@@ -7128,6 +7124,98 @@ msgstr "Rádi vás vidíme! Na webu %(portal_name)s můžete spolupracovat s ost
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Přihlásit a podílet se teď"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Moje projekty a skupiny"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Import se nezdařil"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Projekt/skupina"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Nahrát CSV soubor"
+
+#, fuzzy
+msgid "Options"
+msgstr "Poměry"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Nahrát obrázek."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Moje projekty a skupiny"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Import byl úspěšný!"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Chyba!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Vaše jméno"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Chyba!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Vaše jméno"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Zobrazit více projektů"
 
@@ -8082,52 +8170,11 @@ msgid "Your changes have been saved."
 msgstr "Vaše změny byly uloženy."
 
 #, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Moje projekty a skupiny"
+#~ msgid "Conference Administration"
+#~ msgstr "Administrace uživatele"
 
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Import se nezdařil"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Projekt/skupina"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Nahrát CSV soubor"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Poměry"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Nahrát obrázek."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Moje projekty a skupiny"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Import byl úspěšný!"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Chyba!"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Vaše jméno"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Chyba!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Vaše jméno"
+#~ msgid "Ok"
+#~ msgstr "OK"
 
 #~ msgid "Active"
 #~ msgstr "Aktivovat"

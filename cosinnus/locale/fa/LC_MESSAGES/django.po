@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-23 10:06+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -430,12 +430,12 @@ msgstr "%(sender_name)s شما را برای عضویت در \"%(team_name)s\" �
 msgid "Accept invitation"
 msgstr "پذیرفتن دعوت‌نامه"
 
-msgid "View invitation"
-msgstr "دیدن دعوت‌نامه"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s شما را دعوت کرده"
+
+msgid "View invitation"
+msgstr "دیدن دعوت‌نامه"
 
 msgid "New link to the moved project/group"
 msgstr "پیوند نو به گروه/پروژه‌ی جابجا شده"
@@ -2246,6 +2246,125 @@ msgstr ""
 msgid "Select a page on the left side."
 msgstr ""
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
+
+msgid "Overview - All Conferences"
+msgstr ""
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+msgid "View Upcoming"
+msgstr ""
+
+msgid "Upcoming"
+msgstr ""
+
+msgid "View Past"
+msgstr ""
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+msgid "Permanently Premium"
+msgstr ""
+
+msgid "Portal Setting"
+msgstr ""
+
+msgid "Conference Settings"
+msgstr ""
+
+#, fuzzy
+msgid "Premium active"
+msgstr "اعلاء"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+msgid "Start"
+msgstr ""
+
+msgid "running now!"
+msgstr ""
+
+msgid "Conference Setting"
+msgstr ""
+
+msgid "Room"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr ""
+
+msgid "Add new premium block"
+msgstr ""
+
+msgid "Make Permanent Premium"
+msgstr ""
+
+msgid "Remove Permanent Premium"
+msgstr ""
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "آیا واقعن می‌خواهید دعوت را رد کنید؟"
+
+msgid "There are no items to show."
+msgstr ""
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+msgid "BBB Recording API"
+msgstr ""
+
+msgid "Not set"
+msgstr ""
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
+
+msgid "Save"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "تنظیم کنفرانس Cosinnus"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2289,6 +2408,16 @@ msgid "User Dashboard Announcements"
 msgstr ""
 
 msgid "User Welcome Email"
+msgstr ""
+
+msgid "Conference Overview"
+msgstr ""
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
+
+msgid "Conferences with Custom Settings"
 msgstr ""
 
 msgid "Simple Statistics"
@@ -2347,9 +2476,6 @@ msgid "Firstname"
 msgstr ""
 
 msgid "Lastname"
-msgstr ""
-
-msgid "Save"
 msgstr ""
 
 msgid "User Administration"
@@ -3306,136 +3432,6 @@ msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر 
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "مورد گزارش‌شده را پاک کن..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
-
-msgid "Overview - All Conferences"
-msgstr ""
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "اتاق‌های کنفرانس"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-msgid "View Upcoming"
-msgstr ""
-
-msgid "Upcoming"
-msgstr ""
-
-msgid "View Past"
-msgstr ""
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-msgid "Permanently Premium"
-msgstr ""
-
-msgid "Portal Setting"
-msgstr ""
-
-msgid "Conference Settings"
-msgstr ""
-
-#, fuzzy
-msgid "Premium active"
-msgstr "اعلاء"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr ""
-
-msgid "Rooms"
-msgstr ""
-
-msgid "Start"
-msgstr ""
-
-msgid "running now!"
-msgstr ""
-
-msgid "Conference Setting"
-msgstr ""
-
-msgid "Room"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr ""
-
-msgid "Add new premium block"
-msgstr ""
-
-msgid "Make Permanent Premium"
-msgstr ""
-
-msgid "Remove Permanent Premium"
-msgstr ""
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "آیا واقعن می‌خواهید دعوت را رد کنید؟"
-
-msgid "There are no items to show."
-msgstr ""
-
-msgid "BBB"
-msgstr ""
-
-msgid "BBB Premium"
-msgstr ""
-
-msgid "BBB Recording API"
-msgstr ""
-
-msgid "Not set"
-msgstr ""
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "تنظیم کنفرانس Cosinnus"
-
-msgid "Conference Overview"
-msgstr ""
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
-
-msgid "Conferences with Custom Settings"
-msgstr ""
 
 msgid "Rearrange"
 msgstr ""
@@ -5474,7 +5470,7 @@ msgstr ""
 msgid "E-Mails of ALL active users"
 msgstr ""
 
-msgid "Ok"
+msgid "Select the date range for which you would like statistics"
 msgstr ""
 
 msgid "The WE-Cloud is here!"
@@ -6808,6 +6804,86 @@ msgstr ""
 msgid "Jetzt anmelden und mitgestalten"
 msgstr ""
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+msgid "Import Projects and Groups or Users"
+msgstr ""
+
+msgid "Import from a CSV File"
+msgstr ""
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+msgid "Project/group CSV File"
+msgstr ""
+
+msgid "User CSV File"
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+msgid "Upload and Import..."
+msgstr ""
+
+msgid "Import Projects and Groups"
+msgstr ""
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+msgid "CSV Import Results"
+msgstr ""
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+msgid "Read errors:"
+msgstr ""
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+msgid "Important messages:"
+msgstr ""
+
+msgid "Errors:"
+msgstr ""
+
+msgid "Info messages:"
+msgstr ""
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr ""
 
@@ -7746,6 +7822,10 @@ msgstr "در حال حاضر شما عضو %s نیستید! اگر مایلید 
 
 msgid "Your changes have been saved."
 msgstr "تغییرات‌تان ذخیره شده‌اند."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "اتاق‌های کنفرانس"
 
 #~ msgid "Active"
 #~ msgstr "فعال"

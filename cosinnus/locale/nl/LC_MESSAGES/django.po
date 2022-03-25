@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-23 10:06+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -439,12 +439,12 @@ msgstr "%(sender_name)s heeft je uitgenodigd deel te nemen aan “%(team_name)s�
 msgid "Accept invitation"
 msgstr "Uitnodiging accepteren"
 
-msgid "View invitation"
-msgstr "Uitnodiging bekijken"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s heeft je uitgenodigd"
+
+msgid "View invitation"
+msgstr "Uitnodiging bekijken"
 
 msgid "New link to the moved project/group"
 msgstr "Nieuwe link naar verplaatst(e) project/groep"
@@ -2297,6 +2297,138 @@ msgstr "Administratie"
 msgid "Select a page on the left side."
 msgstr "Selecteer een pagina aan de linker kant."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+msgid "Overview - Premium Conferences Only"
+msgstr ""
+
+msgid "Overview - All Conferences"
+msgstr ""
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "Op pagina bekijken"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Toon project"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Conferentie is bezig"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "Privacy instellingen"
+
+msgid "Conference Settings"
+msgstr "Conferentie instellingen"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+#, fuzzy
+msgid "Not premium"
+msgstr "Premium"
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Startdatum."
+
+#, fuzzy
+msgid "running now!"
+msgstr "Doe mee!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Conferentie instellingen"
+
+#, fuzzy
+msgid "Room"
+msgstr "Ruimte type"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Evenement"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Conferentie is bezig"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Conferentie is bezig"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Weet u zeker dat je „%(title)s“ wilt verlaten?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Weet je zeker dat je lid “%(name)s” uit het team wilt verwijderen?"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "Er zijn nog geen items"
+
+msgid "BBB"
+msgstr ""
+
+#, fuzzy
+msgid "BBB Premium"
+msgstr "Premium"
+
+msgid "BBB Recording API"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "Niet toegewezen"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Evenement aanmaken"
+
+msgid "Save"
+msgstr "Opslaan"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Weet je zeker dat je lid “%(name)s” wilt weigeren?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Profiel verwijderen"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2344,6 +2476,18 @@ msgstr "Gebruikersdashboard mededelingen"
 
 msgid "User Welcome Email"
 msgstr "Welkomstmail voor gebruikers"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Videoconferentie server"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Evenement aanmaken"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Conferentie instellingen"
 
 msgid "Simple Statistics"
 msgstr "Simpele statistieken"
@@ -2409,9 +2553,6 @@ msgstr "Voornaam"
 #, fuzzy
 msgid "Lastname"
 msgstr "Achternaam"
-
-msgid "Save"
-msgstr "Opslaan"
 
 #, fuzzy
 msgid "User Administration"
@@ -3434,151 +3575,6 @@ msgstr "Weet je zeker dat je aankondiging “%(title)s” wilt verwijderen?"
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Gerapporteerd item verwijderen…"
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-msgid "Overview - Premium Conferences Only"
-msgstr ""
-
-msgid "Overview - All Conferences"
-msgstr ""
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Administratie"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "Op pagina bekijken"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Toon project"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Conferentie is bezig"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "Privacy instellingen"
-
-msgid "Conference Settings"
-msgstr "Conferentie instellingen"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "Premium"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-#, fuzzy
-msgid "Not premium"
-msgstr "Premium"
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-msgid "Start"
-msgstr "Startdatum."
-
-#, fuzzy
-msgid "running now!"
-msgstr "Doe mee!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Conferentie instellingen"
-
-#, fuzzy
-msgid "Room"
-msgstr "Ruimte type"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Evenement"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Conferentie is bezig"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Conferentie is bezig"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Weet u zeker dat je „%(title)s“ wilt verlaten?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Weet je zeker dat je lid “%(name)s” uit het team wilt verwijderen?"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "Er zijn nog geen items"
-
-msgid "BBB"
-msgstr ""
-
-#, fuzzy
-msgid "BBB Premium"
-msgstr "Premium"
-
-msgid "BBB Recording API"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "Niet toegewezen"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Evenement aanmaken"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Weet je zeker dat je lid “%(name)s” wilt weigeren?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Profiel verwijderen"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Videoconferentie server"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Evenement aanmaken"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Conferentie instellingen"
 
 msgid "Rearrange"
 msgstr "Herschikken"
@@ -5841,8 +5837,8 @@ msgstr "E-mailadressen van alle nieuwsbriefabonnees"
 msgid "E-Mails of ALL active users"
 msgstr "E-mailadressen van ALLE actieve gebruikers"
 
-msgid "Ok"
-msgstr "Oké"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr "De WE-cloud is hier!"
@@ -7222,6 +7218,98 @@ msgstr "Goed om je te zien! Bij %(portal_name)s kun je samenwerken met anderen i
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Nu registreren en help mee vorm te geven"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Mijn Projecten en Groepen"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Soorteerveld"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Projecten/Groepen"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Projecten/Groepen"
+
+#, fuzzy
+msgid "Options"
+msgstr "Proporties"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Upload een afbeelding."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Mijn Projecten en Groepen"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Wachtwoord reset succesvol"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Foutmelding!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Berichten"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Foutmelding!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Berichten"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Toon meerdere projecten"
 
@@ -8234,52 +8322,11 @@ msgid "Your changes have been saved."
 msgstr "Je wijzigingen zijn opgeslagen."
 
 #, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Mijn Projecten en Groepen"
+#~ msgid "Conference Administration"
+#~ msgstr "Administratie"
 
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Soorteerveld"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Projecten/Groepen"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Projecten/Groepen"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Proporties"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Upload een afbeelding."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Mijn Projecten en Groepen"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Wachtwoord reset succesvol"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Foutmelding!"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Berichten"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Foutmelding!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Berichten"
+#~ msgid "Ok"
+#~ msgstr "Oké"
 
 #~ msgid "Active"
 #~ msgstr "Actief"

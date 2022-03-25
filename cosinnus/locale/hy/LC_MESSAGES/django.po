@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-23 10:06+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -438,12 +438,12 @@ msgstr "%(sender_name)s-ը հրավիրել է ձեզ միանալ %(team_name)s
 msgid "Accept invitation"
 msgstr "Ընդունել հրավերը"
 
-msgid "View invitation"
-msgstr "Տեսնել հրավերը"
-
 #, fuzzy, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s-ը նշել է ձեզ"
+
+msgid "View invitation"
+msgstr "Տեսնել հրավերը"
 
 msgid "New link to the moved project/group"
 msgstr "Տեղափոխված նախագծի/ խմբի նոր հղում"
@@ -2308,6 +2308,139 @@ msgstr "Ադմինիստրացիա"
 msgid "Select a page on the left side."
 msgstr "Ընտրեք էջը ձախ կողմում."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "Դիտել էջում"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Դիտել նախագիծը"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "Գաղտնիության կարգավորումներ"
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "ոչ ակտիվ"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Մեկնարկի ամսաթիվ."
+
+#, fuzzy
+msgid "running now!"
+msgstr "Միացիր հիմա!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Room"
+msgstr "Թիմի տեսակից"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Իրադարձություն"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Արդյո՞ք ցանկանում եք լքել „%(title)s“-ը?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Ցանկանու՞մ եք արդյոք „%(name)s“ անդամին ջնջել թիմից?"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "Դեռ նյութեր չկան"
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+msgid "BBB Recording API"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "Նշանակված չէ"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Ստեղծել Իրադարձություն"
+
+msgid "Save"
+msgstr "Պահպանել"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Ցանկանու՞մ եք արդյոք մերժել անդամ „%(name)s“ -ին?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Ջնջել Պրոֆիլը"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2356,6 +2489,18 @@ msgstr "Օգտատիրոջ կառավարման վահանակի հայտարա�
 
 msgid "User Welcome Email"
 msgstr "Օգտատիրոջ Ողջույնի էլ․ նամակ"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Ստեղծել Իրադարձություն"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
 msgid "Simple Statistics"
 msgstr "Պարզ վիճակագրություն"
@@ -2421,9 +2566,6 @@ msgstr "Անուն"
 #, fuzzy
 msgid "Lastname"
 msgstr "Ազգանուն"
-
-msgid "Save"
-msgstr "Պահպանել"
 
 #, fuzzy
 msgid "User Administration"
@@ -3441,152 +3583,6 @@ msgstr "Արդյո՞ք ցանկանում եք ջնջել \"%(title)s\" հայտ
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Ջնջել հաղորդված նյութը ..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Overview - All Conferences"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Ադմինիստրացիա"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "Դիտել էջում"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Դիտել նախագիծը"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "Գաղտնիության կարգավորումներ"
-
-#, fuzzy
-msgid "Conference Settings"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "ոչ ակտիվ"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr ""
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-msgid "Start"
-msgstr "Մեկնարկի ամսաթիվ."
-
-#, fuzzy
-msgid "running now!"
-msgstr "Միացիր հիմա!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Room"
-msgstr "Թիմի տեսակից"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Իրադարձություն"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Արդյո՞ք ցանկանում եք լքել „%(title)s“-ը?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Ցանկանու՞մ եք արդյոք „%(name)s“ անդամին ջնջել թիմից?"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "Դեռ նյութեր չկան"
-
-msgid "BBB"
-msgstr ""
-
-msgid "BBB Premium"
-msgstr ""
-
-msgid "BBB Recording API"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "Նշանակված չէ"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Ստեղծել Իրադարձություն"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Ցանկանու՞մ եք արդյոք մերժել անդամ „%(name)s“ -ին?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Ջնջել Պրոֆիլը"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Ստեղծել Իրադարձություն"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
 msgid "Rearrange"
 msgstr "Վերադասավորվել"
@@ -5840,8 +5836,8 @@ msgstr ""
 msgid "E-Mails of ALL active users"
 msgstr ""
 
-msgid "Ok"
-msgstr "Ok"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr ""
@@ -7229,6 +7225,98 @@ msgstr "Ուրախ ենք ձեզ տեսնել! %(portal_name)s - ում դուք
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Jetzt anmelden und mitgestalten"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Իմ Նախագծերը և Խմբերը"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Տեսակավորել դաշտը"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Նախագծեր / Խմբեր"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Նախագծեր / Խմբեր"
+
+#, fuzzy
+msgid "Options"
+msgstr "Համամասնություններ"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Վերբեռնել պատկեր."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Իմ Նախագծերը և Խմբերը"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Գաղտնաբառի վերաբեռնումը հաջողվեց"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Սխալ!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Նամակներ"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Սխալ!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Նամակներ"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Ցուցադրել ավելի շատ ծրագրեր"
 
@@ -8244,52 +8332,11 @@ msgid "Your changes have been saved."
 msgstr "Ձեր փոփոխությունները պահպանվել են."
 
 #, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Իմ Նախագծերը և Խմբերը"
+#~ msgid "Conference Administration"
+#~ msgstr "Ադմինիստրացիա"
 
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Տեսակավորել դաշտը"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Նախագծեր / Խմբեր"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Նախագծեր / Խմբեր"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Համամասնություններ"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Վերբեռնել պատկեր."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Իմ Նախագծերը և Խմբերը"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Գաղտնաբառի վերաբեռնումը հաջողվեց"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Սխալ!"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Նամակներ"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Սխալ!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Նամակներ"
+#~ msgid "Ok"
+#~ msgstr "Ok"
 
 #, fuzzy
 #~ msgid "Active"
@@ -8419,13 +8466,11 @@ msgstr "Ձեր փոփոխությունները պահպանվել են."
 #~ "\n"
 #~ "Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das Portallogo links oben.\n"
 #~ "\n"
-#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails "
-#~ "bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
+#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
 #~ "\n"
 #~ "Für alle Gruppen und Projekte, denen du selbstständig beitrittst, ist die Standardeinstellung bei dieser Option \"alle Benachrichtigungen\". Das kannst du dann natürlich ebenso anpassen.\n"
 #~ "\n"
-#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen "
-#~ "wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
+#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
 #~ "\n"
 #~ "Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, melde dich gern den Portaladministrator_innen. \n"
 #~ "\n"
@@ -8438,13 +8483,11 @@ msgstr "Ձեր փոփոխությունները պահպանվել են."
 #~ "\n"
 #~ "Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das Portallogo links oben.\n"
 #~ "\n"
-#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails "
-#~ "bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
+#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
 #~ "\n"
 #~ "Für alle Gruppen und Projekte, denen du selbstständig beitrittst, ist die Standardeinstellung bei dieser Option \"alle Benachrichtigungen\". Das kannst du dann natürlich ebenso anpassen.\n"
 #~ "\n"
-#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen "
-#~ "wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
+#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
 #~ "\n"
 #~ "Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, melde dich gern den Portaladministrator_innen. \n"
 #~ "\n"

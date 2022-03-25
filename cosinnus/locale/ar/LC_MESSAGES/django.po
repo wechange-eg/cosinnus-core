@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-23 10:06+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -460,12 +460,12 @@ msgstr "لقد دعتك %(sender_name)s للانضمام إلى \"%(team_name)s\
 msgid "Accept invitation"
 msgstr "قبول دعوة"
 
-msgid "View invitation"
-msgstr "عرض الدعوة"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s قام بدعوتك"
+
+msgid "View invitation"
+msgstr "عرض الدعوة"
 
 msgid "New link to the moved project/group"
 msgstr "ارتباط جديد بالمشروع / المجموعة المنقولة"
@@ -2368,6 +2368,134 @@ msgstr "الإدارة"
 msgid "Select a page on the left side."
 msgstr "حدد صفحة على الجانب الأيسر."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "نظرة عامة - المؤتمرات والغرف وورش العمل مع إعدادات خادم BBB المخصصة"
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "نظرة عامة - جميع المؤتمرات"
+
+msgid "Overview - All Conferences"
+msgstr "نظرة عامة - جميع المؤتمرات"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "نظرة عامة - المؤتمرات والغرف وورش العمل"
+
+msgid "Past"
+msgstr "ماضي"
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "عرض على الصفحة"
+
+msgid "Upcoming"
+msgstr "القادمة"
+
+#, fuzzy
+msgid "View Past"
+msgstr "عرض المشروع"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+msgid "Booked"
+msgstr "مرجعية"
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "المؤتمر هو مميز و دائم"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "إعدادات الخصوصية"
+
+msgid "Conference Settings"
+msgstr "إعدادات المؤتمر"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "مميز"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr "غير مميز"
+
+msgid "Rooms"
+msgstr "غرف"
+
+msgid "Start"
+msgstr "ابدأ"
+
+msgid "running now!"
+msgstr "قيد الشتغيل"
+
+msgid "Conference Setting"
+msgstr "إعداد المؤتمر"
+
+msgid "Room"
+msgstr "غرفة"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "مناسبة"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "المؤتمر هو مميز و دائم"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "المؤتمر هو مميز و دائم"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "هل تريد حقًا رفض الدعوة؟"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "هل تريد حقًا إزالة العضو „%(name)s“من الفريق؟"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "لا توجد عناصر حتى الآن"
+
+msgid "BBB"
+msgstr "BBB"
+
+msgid "BBB Premium"
+msgstr "BBB مميز"
+
+msgid "BBB Recording API"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "غير معتمد"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "خادم BBB للمؤتمرات المتميزة"
+
+msgid "Save"
+msgstr "حفظ"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "هل تريد حقًا رفض العضو „%(name)s“؟"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "حذف الملف الشخصي"
+
 msgid "Newsletters"
 msgstr "النشرات الإخبارية"
 
@@ -2421,6 +2549,18 @@ msgstr "إعلانات لوحة تحكم المستخدم"
 
 msgid "User Welcome Email"
 msgstr "البريد الإلكتروني الترحيبي للمستخدم"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "المؤتمر قيد التشغيل"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "خادم BBB للمؤتمرات المتميزة"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "المؤتمر قيد التشغيل"
 
 msgid "Simple Statistics"
 msgstr "إحصائيات بسيطة"
@@ -2482,9 +2622,6 @@ msgstr "الاسم الأول"
 
 msgid "Lastname"
 msgstr "اسم العائلة"
-
-msgid "Save"
-msgstr "حفظ"
 
 msgid "User Administration"
 msgstr "إدارة المستخدم"
@@ -3515,147 +3652,6 @@ msgstr "هل تريد حقًا حذف الإعلان \"%(title)s\"؟"
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "حذف العنصر المبلغ عنه..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "نظرة عامة - المؤتمرات والغرف وورش العمل مع إعدادات خادم BBB المخصصة"
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "نظرة عامة - جميع المؤتمرات"
-
-msgid "Overview - All Conferences"
-msgstr "نظرة عامة - جميع المؤتمرات"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "إدارة المستخدم"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "نظرة عامة - المؤتمرات والغرف وورش العمل"
-
-msgid "Past"
-msgstr "ماضي"
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "عرض على الصفحة"
-
-msgid "Upcoming"
-msgstr "القادمة"
-
-#, fuzzy
-msgid "View Past"
-msgstr "عرض المشروع"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-#, fuzzy
-msgid "Booked"
-msgstr "مرجعية"
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "المؤتمر هو مميز و دائم"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "إعدادات الخصوصية"
-
-msgid "Conference Settings"
-msgstr "إعدادات المؤتمر"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "مميز"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr "غير مميز"
-
-msgid "Rooms"
-msgstr "غرف"
-
-msgid "Start"
-msgstr "ابدأ"
-
-msgid "running now!"
-msgstr "قيد الشتغيل"
-
-msgid "Conference Setting"
-msgstr "إعداد المؤتمر"
-
-msgid "Room"
-msgstr "غرفة"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "مناسبة"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "المؤتمر هو مميز و دائم"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "المؤتمر هو مميز و دائم"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "هل تريد حقًا رفض الدعوة؟"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "هل تريد حقًا إزالة العضو „%(name)s“من الفريق؟"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "لا توجد عناصر حتى الآن"
-
-msgid "BBB"
-msgstr "BBB"
-
-msgid "BBB Premium"
-msgstr "BBB مميز"
-
-msgid "BBB Recording API"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "غير معتمد"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "خادم BBB للمؤتمرات المتميزة"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "هل تريد حقًا رفض العضو „%(name)s“؟"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "حذف الملف الشخصي"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "المؤتمر قيد التشغيل"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "خادم BBB للمؤتمرات المتميزة"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "المؤتمر قيد التشغيل"
 
 msgid "Rearrange"
 msgstr "إعادة الترتيب"
@@ -5896,8 +5892,8 @@ msgstr "رسائل البريد الإلكتروني لجميع مشتركي ا�
 msgid "E-Mails of ALL active users"
 msgstr "رسائل البريد الإلكتروني لجميع المستخدمين النشطين"
 
-msgid "Ok"
-msgstr "حسناً"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr "هنا سحابة-WE!"
@@ -7282,6 +7278,98 @@ msgstr "تسرنا رؤيتك! في %(portal_name)s يمكنك التعاون م
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "سجل الآن وساعد في التشكيل"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "مشاريعي ومجموعاتي"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "تعُذر الاستيراد"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "مشاريع/مجموعات"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "تحميل ملف CSV"
+
+#, fuzzy
+msgid "Options"
+msgstr "النسب"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "حمّل صورة."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "مشاريعي ومجموعاتي"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "نجح الاستيراد!"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "خطأ!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "اسمك"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "خطأ!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "اسمك"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "عرض المزيد من المشاريع"
 
@@ -8272,52 +8360,11 @@ msgid "Your changes have been saved."
 msgstr "تم حفظ التغييرات."
 
 #, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "مشاريعي ومجموعاتي"
+#~ msgid "Conference Administration"
+#~ msgstr "إدارة المستخدم"
 
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "تعُذر الاستيراد"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "مشاريع/مجموعات"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "تحميل ملف CSV"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "النسب"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "حمّل صورة."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "مشاريعي ومجموعاتي"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "نجح الاستيراد!"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "خطأ!"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "اسمك"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "خطأ!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "اسمك"
+#~ msgid "Ok"
+#~ msgstr "حسناً"
 
 #~ msgid "Active"
 #~ msgstr "تفعيل"

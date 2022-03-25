@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-23 10:06+0100\n"
-"PO-Revision-Date: 2022-03-23 16:08+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
+"PO-Revision-Date: 2022-03-25 14:15+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -437,12 +437,12 @@ msgstr "%(sender_name)s  пригласил(а) Вас присоединить�
 msgid "Accept invitation"
 msgstr "Принять приглашение"
 
-msgid "View invitation"
-msgstr "Просмотреть приглашение"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s пригласил вас"
+
+msgid "View invitation"
+msgstr "Просмотреть приглашение"
 
 msgid "New link to the moved project/group"
 msgstr "Новая ссылка на перемещаемый проект/группу"
@@ -2250,6 +2250,120 @@ msgstr "Администрирование"
 msgid "Select a page on the left side."
 msgstr "Выбрать страницу слева."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "Обзор — конференции, комнаты и воркшопы с пользовательскими настройками сервера BBB"
+
+msgid "Overview - Premium Conferences Only"
+msgstr "Обзор - Только премиальные конференции"
+
+msgid "Overview - All Conferences"
+msgstr "Конференция"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "Обзор — конференции, комнаты и воркшопы"
+
+msgid "Past"
+msgstr "Прошедшие"
+
+msgid "View Upcoming"
+msgstr "Посмотреть на странице"
+
+msgid "Upcoming"
+msgstr "Будущие"
+
+msgid "View Past"
+msgstr "Посмотреть проект"
+
+msgid "Premium capacity occupancy overview"
+msgstr "Обзор использования премиальной мощности серверов"
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr "Этот календарь отражает все конференции в реальном режиме, все премиальные блоки, забронированные для конференции, а также доступную совокупную мощность премиальных серверов."
+
+msgid "Booked"
+msgstr "Добавлено в закладки"
+
+msgid "Permanently Premium"
+msgstr "Всегда премиум"
+
+msgid "Portal Setting"
+msgstr "Настройки приватности"
+
+msgid "Conference Settings"
+msgstr "Настройки конференции"
+
+msgid "Premium active"
+msgstr "Премиум активен"
+
+msgid "Premium inactive, but scheduled"
+msgstr "Премиальный режим не активирован, но запланирован"
+
+msgid "Not premium"
+msgstr "Премиум"
+
+msgid "Rooms"
+msgstr "Комнаты"
+
+msgid "Start"
+msgstr "Ограниченный"
+
+msgid "running now!"
+msgstr "запущен!"
+
+msgid "Conference Setting"
+msgstr "Настройки конференции"
+
+msgid "Room"
+msgstr "Тип комнаты"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Мероприятия"
+
+msgid "Add new premium block"
+msgstr "Добавить новый премиум-блок"
+
+msgid "Make Permanent Premium"
+msgstr "Всегда премиум"
+
+msgid "Remove Permanent Premium"
+msgstr "Удалить перманентный премиум"
+
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Вы действительно хотите сделать эту конференцию премиальной навсегда?"
+
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Вы действительно хотите, чтобы эта конференция перестала быть премиальной?"
+
+msgid "There are no items to show."
+msgstr "Здесь пока пусто."
+
+msgid "BBB"
+msgstr "BBB"
+
+msgid "BBB Premium"
+msgstr "Премиум"
+
+msgid "BBB Recording API"
+msgstr "Записывающие API BBB"
+
+# ???
+msgid "Not set"
+msgstr "Не определено"
+
+msgid "Add Premium Block to Conferences"
+msgstr "Добавить премиум-блоки к конференциям"
+
+msgid "Save"
+msgstr "Сохранить"
+
+#, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Вы действительно хотите удалить блок “%(name)s“?"
+
+msgid "Delete Premium Block"
+msgstr "Удалить премиум-блок"
+
 msgid "Newsletters"
 msgstr "Информационная рассылка"
 
@@ -2294,6 +2408,15 @@ msgstr "Пользовательская панель управления об�
 
 msgid "User Welcome Email"
 msgstr "Приветственный емейл пользователям"
+
+msgid "Conference Overview"
+msgstr "Настройки конференции"
+
+msgid "Premium Conferences Only"
+msgstr "Только премиальные конференции"
+
+msgid "Conferences with Custom Settings"
+msgstr "Проходит конференция"
 
 msgid "Simple Statistics"
 msgstr "Простая статистика"
@@ -2352,9 +2475,6 @@ msgstr "Имя"
 
 msgid "Lastname"
 msgstr "Фамилия"
-
-msgid "Save"
-msgstr "Сохранить"
 
 msgid "User Administration"
 msgstr "Администрирование"
@@ -3309,129 +3429,6 @@ msgstr "Вы действительно хотите удалить запись
 
 msgid "Delete recorded meeting"
 msgstr "Удалить записанную сесссию"
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "Обзор — конференции, комнаты и воркшопы с пользовательскими настройками сервера BBB"
-
-msgid "Overview - Premium Conferences Only"
-msgstr "Обзор - Только премиальные конференции"
-
-msgid "Overview - All Conferences"
-msgstr "Конференция"
-
-msgid "Conference Administration"
-msgstr "Администрирование конференции"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "Обзор — конференции, комнаты и воркшопы"
-
-msgid "Past"
-msgstr "Прошедшие"
-
-msgid "View Upcoming"
-msgstr "Посмотреть на странице"
-
-msgid "Upcoming"
-msgstr "Будущие"
-
-msgid "View Past"
-msgstr "Посмотреть проект"
-
-msgid "Premium capacity occupancy overview"
-msgstr "Обзор использования премиальной мощности серверов"
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr "Этот календарь отражает все конференции в реальном режиме, все премиальные блоки, забронированные для конференции, а также доступную совокупную мощность премиальных серверов."
-
-msgid "Booked"
-msgstr "Добавлено в закладки"
-
-msgid "Permanently Premium"
-msgstr "Всегда премиум"
-
-msgid "Portal Setting"
-msgstr "Настройки приватности"
-
-msgid "Conference Settings"
-msgstr "Настройки конференции"
-
-msgid "Premium active"
-msgstr "Премиум активен"
-
-msgid "Premium inactive, but scheduled"
-msgstr "Премиальный режим не активирован, но запланирован"
-
-msgid "Not premium"
-msgstr "Премиум"
-
-msgid "Rooms"
-msgstr "Комнаты"
-
-msgid "Start"
-msgstr "Ограниченный"
-
-msgid "running now!"
-msgstr "запущен!"
-
-msgid "Conference Setting"
-msgstr "Настройки конференции"
-
-msgid "Room"
-msgstr "Тип комнаты"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Мероприятия"
-
-msgid "Add new premium block"
-msgstr "Добавить новый премиум-блок"
-
-msgid "Make Permanent Premium"
-msgstr "Всегда премиум"
-
-msgid "Remove Permanent Premium"
-msgstr "Удалить перманентный премиум"
-
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Вы действительно хотите сделать эту конференцию премиальной навсегда?"
-
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Вы действительно хотите, чтобы эта конференция перестала быть премиальной?"
-
-msgid "There are no items to show."
-msgstr "Здесь пока пусто."
-
-msgid "BBB"
-msgstr "BBB"
-
-msgid "BBB Premium"
-msgstr "Премиум"
-
-msgid "BBB Recording API"
-msgstr "Записывающие API BBB"
-
-# ???
-msgid "Not set"
-msgstr "Не определено"
-
-msgid "Add Premium Block to Conferences"
-msgstr "Добавить премиум-блоки к конференциям"
-
-#, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Вы действительно хотите удалить блок “%(name)s“?"
-
-msgid "Delete Premium Block"
-msgstr "Удалить премиум-блок"
-
-msgid "Conference Overview"
-msgstr "Настройки конференции"
-
-msgid "Premium Conferences Only"
-msgstr "Только премиальные конференции"
-
-msgid "Conferences with Custom Settings"
-msgstr "Проходит конференция"
 
 msgid "Rearrange"
 msgstr "Перегруппировать"
@@ -5639,8 +5636,8 @@ msgstr "Емейлы всех подписчиков новостей"
 msgid "E-Mails of ALL active users"
 msgstr "Емейлы ВСЕХ активных пользователей"
 
-msgid "Ok"
-msgstr "Ок"
+msgid "Select the date range for which you would like statistics"
+msgstr "Выбери временной промежуток для получения статистики"
 
 msgid "The WE-Cloud is here!"
 msgstr "WE-облако здесь!"
@@ -6972,6 +6969,92 @@ msgstr "Рады видеть тебя! На %(portal_name)s ты можешь �
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Зарегистрироваться"
 
+msgid "Custom Wagtail Page"
+msgstr "Индивидуальная страница Wagtail"
+
+msgid "Tools"
+msgstr "Инструменты"
+
+msgid "Import Projects and Groups or Users"
+msgstr "Импортировать Проекты и Группы или Пользователей"
+
+# ???
+msgid "Import from a CSV File"
+msgstr "Импортировать из CSV файла"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr "Загрузите либо один CSV файл, чтобы импортировать Проекты и Группы, либо другой, чтобы импортировать Пользователей. Обратите внимание, что быть импортированным может только один файл за раз. Файл должен установленного формата. Если формат будет изменен (количество столбцов станет больше/меньше/изменится иначе), пожалуйста, обратитесь к разработчикам!"
+
+msgid "Project/group CSV File"
+msgstr "CSV файл для импорта Проекта/Группы"
+
+msgid "User CSV File"
+msgstr "CSV файл для импорта Пользователей"
+
+msgid "Options"
+msgstr "Дополнительные опции"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr "Дополнительные настройки CSV файла. Изменяйте их только в случае абсолютной уверенности в том, что Вы делаете!"
+
+msgid "Encoding of the CSV file"
+msgstr "Шифрование файла CSV"
+
+msgid "Delimiter of the CSV file"
+msgstr "Определение CSV файла"
+
+msgid "Upload and Import..."
+msgstr "Загрузка и импорт…"
+
+msgid "Import Projects and Groups"
+msgstr "Импорт Проектов и Групп"
+
+msgid "Clear results and start a new import!"
+msgstr "Отчистить результаты и начать новый импорт!"
+
+msgid "CSV Import Results"
+msgstr "Результаты импорта CSV файла"
+
+msgid "The import has finished. Here are the results:"
+msgstr "Импорт был завершен. Получены следующие результаты:"
+
+msgid "Read errors:"
+msgstr "Ошибки чтения:"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr "Следующие ряды в Вашем CSV файле имели ошибки или некорректное количество столбцов, а потому были игнорированы:"
+
+msgid "Saved items:"
+msgstr "Сохраненные элементы:"
+
+msgid "Important messages:"
+msgstr "Важные сообщения:"
+
+msgid "Errors:"
+msgstr "Ошибки:"
+
+msgid "Info messages:"
+msgstr "Информационные сообщения:"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr "Файл CSV был прочтен успешно. В данный момент импорт работает на сервере!"
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+"По окончании импорта результаты отобразятся на этой странице.\n"
+"\t\t\n"
+"\t\t\t\tВ зависимости от количества импортированных элементов, процесс импорта может занять от нескольких секунд до нескольких минут. Вы можете закрыть страницу. \n"
+"Уведомление об окончании импорта будет выслано на адрес Вашей электронной почты <b>»%(email)s»</b> !\n"
+"\t\t\t"
+
+msgid "Progress:"
+msgstr "Прогресс:"
+
 msgid "Show more Projects"
 msgstr "Показать больше проектов"
 
@@ -7930,90 +8013,11 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
 
-#~ msgid "Custom Wagtail Page"
-#~ msgstr "Индивидуальная страница Wagtail"
+#~ msgid "Conference Administration"
+#~ msgstr "Администрирование конференции"
 
-#~ msgid "Tools"
-#~ msgstr "Инструменты"
-
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Импортировать Проекты и Группы или Пользователей"
-
-# ???
-#~ msgid "Import from a CSV File"
-#~ msgstr "Импортировать из CSV файла"
-
-#~ msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-#~ msgstr "Загрузите либо один CSV файл, чтобы импортировать Проекты и Группы, либо другой, чтобы импортировать Пользователей. Обратите внимание, что быть импортированным может только один файл за раз. Файл должен установленного формата. Если формат будет изменен (количество столбцов станет больше/меньше/изменится иначе), пожалуйста, обратитесь к разработчикам!"
-
-#~ msgid "Project/group CSV File"
-#~ msgstr "CSV файл для импорта Проекта/Группы"
-
-#~ msgid "User CSV File"
-#~ msgstr "CSV файл для импорта Пользователей"
-
-#~ msgid "Options"
-#~ msgstr "Дополнительные опции"
-
-#~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-#~ msgstr "Дополнительные настройки CSV файла. Изменяйте их только в случае абсолютной уверенности в том, что Вы делаете!"
-
-#~ msgid "Encoding of the CSV file"
-#~ msgstr "Шифрование файла CSV"
-
-#~ msgid "Delimiter of the CSV file"
-#~ msgstr "Определение CSV файла"
-
-#~ msgid "Upload and Import..."
-#~ msgstr "Загрузка и импорт…"
-
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Импорт Проектов и Групп"
-
-#~ msgid "Clear results and start a new import!"
-#~ msgstr "Отчистить результаты и начать новый импорт!"
-
-#~ msgid "CSV Import Results"
-#~ msgstr "Результаты импорта CSV файла"
-
-#~ msgid "The import has finished. Here are the results:"
-#~ msgstr "Импорт был завершен. Получены следующие результаты:"
-
-#~ msgid "Read errors:"
-#~ msgstr "Ошибки чтения:"
-
-#~ msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-#~ msgstr "Следующие ряды в Вашем CSV файле имели ошибки или некорректное количество столбцов, а потому были игнорированы:"
-
-#~ msgid "Saved items:"
-#~ msgstr "Сохраненные элементы:"
-
-#~ msgid "Important messages:"
-#~ msgstr "Важные сообщения:"
-
-#~ msgid "Errors:"
-#~ msgstr "Ошибки:"
-
-#~ msgid "Info messages:"
-#~ msgstr "Информационные сообщения:"
-
-#~ msgid "The CSV file was read successfully and the import is currently running on the server!"
-#~ msgstr "Файл CSV был прочтен успешно. В данный момент импорт работает на сервере!"
-
-#~ msgid ""
-#~ "This page will show the results when the import is finished.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-#~ "\t\t\t"
-#~ msgstr ""
-#~ "По окончании импорта результаты отобразятся на этой странице.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tВ зависимости от количества импортированных элементов, процесс импорта может занять от нескольких секунд до нескольких минут. Вы можете закрыть страницу. \n"
-#~ "Уведомление об окончании импорта будет выслано на адрес Вашей электронной почты <b>»%(email)s»</b> !\n"
-#~ "\t\t\t"
-
-#~ msgid "Progress:"
-#~ msgstr "Прогресс:"
+#~ msgid "Ok"
+#~ msgstr "Ок"
 
 #~ msgid "By clicking \"Continue\" you are consenting to be recorded in this video conference."
 #~ msgstr "При нажатии кнопки “Продолжить”, вы подтверждаете свое согласие на то, что эта видео-конференция будет записана."
