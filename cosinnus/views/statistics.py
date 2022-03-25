@@ -16,21 +16,17 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject, \
     CosinnusConference
 from cosinnus.utils.http import make_csv_response
-from cosinnus.utils.permissions import check_user_superuser
+from cosinnus.utils.permissions import check_user_portal_manager, check_user_superuser
 from cosinnus.utils.user import filter_active_users
+from cosinnus.views.mixins.group import RequirePortalManagerMixin
 
 
-class SimpleStatisticsView(FormView):
+class SimpleStatisticsView(RequirePortalManagerMixin, FormView):
     
     DATE_FORMAT = '%Y-%m-%d-%H:%M'
     
     form_class = SimpleStatisticsForm
     template_name = 'cosinnus/statistics/simple.html'
-    
-    def dispatch(self, request, *args, **kwargs):
-        if not check_user_superuser(request.user):
-            raise PermissionDenied('You do not have permission to access this page.')
-        return super(SimpleStatisticsView, self).dispatch(request, *args, **kwargs)
     
     def get_initial(self, *args, **kwargs):
         initial = super(SimpleStatisticsView, self).get_initial(*args, **kwargs)
@@ -122,7 +118,7 @@ def bbb_room_visit_statistics_download(request):
     """
         Will return a CSV containing infos about all BBB Room visits
     """
-    if request and not check_user_superuser(request.user):
+    if request and not check_user_superuser(request.user) and not check_user_portal_manager(request.user):
         return HttpResponseForbidden('Not authenticated')
     
     rows = []
