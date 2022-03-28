@@ -87,7 +87,7 @@
 	    </button>
     {% endif %}
     
-    {% if SETTINGS.COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS %}
+    {% if SETTINGS.COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS and request.user|is_superuser %}
 	    <button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:housekeeping-newsletter-user-emails' %}">
 	        <ul class="media-list">
 	            <li class="media">
