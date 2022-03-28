@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-23 10:06+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -433,12 +433,12 @@ msgstr "%(sender_name)s hat dich eingeladen, %(team_name)s beizutreten auf %(por
 msgid "Accept invitation"
 msgstr "Einladung annehmen"
 
-msgid "View invitation"
-msgstr "Einladung ansehen"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s hat dich eingeladen"
+
+msgid "View invitation"
+msgstr "Einladung ansehen"
 
 msgid "New link to the moved project/group"
 msgstr "Neue Adresse des Projekts/Gruppe"
@@ -492,18 +492,21 @@ msgstr "%(sender_name)s hat gerade einen neuen Benutzeraccount auf %(portal_name
 msgid "A conference you are attending has been updated"
 msgstr "Eine Tagung, an der Sie teilnehmen, wurde aktualisiert."
 
+#, python-format
 msgid "The conference %(object_name)s has been updated"
-msgstr "Die Tagung "%(object_name)s\" wurde aktualisiert."
+msgstr "Die Tagung “%(object_name)s” wurde aktualisiert."
 
 msgid "You are attending this conference"
 msgstr "Sie nehmen an dieser Tagung teil"
 
+#, python-format
 msgid "The conference \"%(object_name)s\" was updated."
 msgstr "Die Tagung \"%(object_name)s\" wurde aktualisiert."
 
 msgid "The time of a conference you are attending has been updated"
 msgstr "Die Uhrzeit einer Tagung, an der Sie teilnehmen, wurde aktualisiert"
 
+#, python-format
 msgid "The time of conference %(object_name)s has been updated"
 msgstr "Die Uhrzeit der Tagung \"%(object_name)s\" wurde aktualisiert."
 
@@ -2230,6 +2233,119 @@ msgstr "Administration"
 msgid "Select a page on the left side."
 msgstr "Wähle links eine Seite aus."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "Überblick - Tagungen, Räume und Workshops mit eigenen BBB-Server-Einstellungen"
+
+msgid "Overview - Premium Conferences Only"
+msgstr "Überblick - Premium-Tagungen"
+
+msgid "Overview - All Conferences"
+msgstr "Überblick - Alle Tagungen"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "Überblick - Tagungen, Räume und Workshops"
+
+msgid "Past"
+msgstr "Vergangenheit"
+
+msgid "View Upcoming"
+msgstr "Aktuelle ansehen"
+
+msgid "Upcoming"
+msgstr "Aktuelle"
+
+msgid "View Past"
+msgstr "Vergangene ansehen"
+
+msgid "Premium capacity occupancy overview"
+msgstr "Überblick über die Belegung von Premium-Kapazität"
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr "Dieser Kalendar zeigt all die Tagungen in der aktuellen Ansicht, alle Premium-Blöcke, die momentan für die Tagungen gebucht sind, sowie die gesamte Kapazität der bestimmten Premium-Servers."
+
+msgid "Booked"
+msgstr "Gebucht"
+
+msgid "Permanently Premium"
+msgstr "Tagung ist durchgehend Premium"
+
+msgid "Portal Setting"
+msgstr "Portal-Einstellung"
+
+msgid "Conference Settings"
+msgstr "Tagungs-Einstellungen"
+
+msgid "Premium active"
+msgstr "Premium ist aktiv"
+
+msgid "Premium inactive, but scheduled"
+msgstr "Premium ist inaktiv, aber geplant"
+
+msgid "Not premium"
+msgstr "Nicht Premium"
+
+msgid "Rooms"
+msgstr "Räume"
+
+msgid "Start"
+msgstr "Beginnt"
+
+msgid "running now!"
+msgstr "läuft gerade!"
+
+msgid "Conference Setting"
+msgstr "Tagungs-Einstellungen"
+
+msgid "Room"
+msgstr "Raum"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Veranstaltung"
+
+msgid "Add new premium block"
+msgstr "Neuen Premiumblock hinzufügen"
+
+msgid "Make Permanent Premium"
+msgstr "Tagung zu durchgehend Premium ändern"
+
+msgid "Remove Permanent Premium"
+msgstr "Tagung zu nicht mehr durchgehend Premium ändern"
+
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Möchtest du diese Tagung wirklich als durchgehend Premium markieren?"
+
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Möchtest du diese Tagung wirklich zu nicht mehr durchgehend Premium ändern?"
+
+msgid "There are no items to show."
+msgstr "Keine Inhalte vorhanden."
+
+msgid "BBB"
+msgstr "BBB"
+
+msgid "BBB Premium"
+msgstr "BBB-Premium"
+
+msgid "BBB Recording API"
+msgstr "BBB Aufnahme-API"
+
+msgid "Not set"
+msgstr "Nicht eingestellt"
+
+msgid "Add Premium Block to Conferences"
+msgstr "Premiumblock zu Tagung hinzufügen"
+
+msgid "Save"
+msgstr "Speichern"
+
+#, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Möchtest du diesen Block wirklich von \"%(name)s\" entfernen?"
+
+msgid "Delete Premium Block"
+msgstr "Premiumblock löschen"
+
 msgid "Newsletters"
 msgstr "Newsletter"
 
@@ -2274,6 +2390,15 @@ msgstr "Benutzerdashboard-Ankündigungen"
 
 msgid "User Welcome Email"
 msgstr "Willkommens-E-Mail für neue Benutzer"
+
+msgid "Conference Overview"
+msgstr "Tagungs-Überblick"
+
+msgid "Premium Conferences Only"
+msgstr "Nur Premium-Tagungen"
+
+msgid "Conferences with Custom Settings"
+msgstr "Tagungen mit eigenen Einstellungen"
 
 msgid "Simple Statistics"
 msgstr "Simple Statistiken"
@@ -2332,9 +2457,6 @@ msgstr "Vorname"
 
 msgid "Lastname"
 msgstr "Nachname"
-
-msgid "Save"
-msgstr "Speichern"
 
 msgid "User Administration"
 msgstr "Benutzerverwaltung"
@@ -3308,128 +3430,6 @@ msgstr "Möchtest du das aufgezeichnete Meeting \"%(title)s\" wirklich löschen?
 
 msgid "Delete recorded meeting"
 msgstr "Das aufgezeichnete Meeting löschen"
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "Überblick - Tagungen, Räume und Workshops mit eigenen BBB-Server-Einstellungen"
-
-msgid "Overview - Premium Conferences Only"
-msgstr "Überblick - Premium-Tagungen"
-
-msgid "Overview - All Conferences"
-msgstr "Überblick - Alle Tagungen"
-
-msgid "Conference Administration"
-msgstr "Tagungsverwaltung"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "Überblick - Tagungen, Räume und Workshops"
-
-msgid "Past"
-msgstr "Vergangenheit"
-
-msgid "View Upcoming"
-msgstr "Aktuelle ansehen"
-
-msgid "Upcoming"
-msgstr "Aktuelle"
-
-msgid "View Past"
-msgstr "Vergangene ansehen"
-
-msgid "Premium capacity occupancy overview"
-msgstr "Überblick über die Belegung von Premium-Kapazität"
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr "Dieser Kalendar zeigt all die Tagungen in der aktuellen Ansicht, alle Premium-Blöcke, die momentan für die Tagungen gebucht sind, sowie die gesamte Kapazität der bestimmten Premium-Servers."
-
-msgid "Booked"
-msgstr "Gebucht"
-
-msgid "Permanently Premium"
-msgstr "Tagung ist durchgehend Premium"
-
-msgid "Portal Setting"
-msgstr "Portal-Einstellung"
-
-msgid "Conference Settings"
-msgstr "Tagungs-Einstellungen"
-
-msgid "Premium active"
-msgstr "Premium ist aktiv"
-
-msgid "Premium inactive, but scheduled"
-msgstr "Premium ist inaktiv, aber geplant"
-
-msgid "Not premium"
-msgstr "Nicht Premium"
-
-msgid "Rooms"
-msgstr "Räume"
-
-msgid "Start"
-msgstr "Beginnt"
-
-msgid "running now!"
-msgstr "läuft gerade!"
-
-msgid "Conference Setting"
-msgstr "Tagungs-Einstellungen"
-
-msgid "Room"
-msgstr "Raum"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Veranstaltung"
-
-msgid "Add new premium block"
-msgstr "Neuen Premiumblock hinzufügen"
-
-msgid "Make Permanent Premium"
-msgstr "Tagung zu durchgehend Premium ändern"
-
-msgid "Remove Permanent Premium"
-msgstr "Tagung zu nicht mehr durchgehend Premium ändern"
-
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Möchtest du diese Tagung wirklich als durchgehend Premium markieren?"
-
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Möchtest du diese Tagung wirklich zu nicht mehr durchgehend Premium ändern?"
-
-msgid "There are no items to show."
-msgstr "Keine Inhalte vorhanden."
-
-msgid "BBB"
-msgstr "BBB"
-
-msgid "BBB Premium"
-msgstr "BBB-Premium"
-
-msgid "BBB Recording API"
-msgstr "BBB Aufnahme-API"
-
-msgid "Not set"
-msgstr "Nicht eingestellt"
-
-msgid "Add Premium Block to Conferences"
-msgstr "Premiumblock zu Tagung hinzufügen"
-
-#, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Möchtest du diesen Block wirklich von \"%(name)s\" entfernen?"
-
-msgid "Delete Premium Block"
-msgstr "Premiumblock löschen"
-
-msgid "Conference Overview"
-msgstr "Tagungs-Überblick"
-
-msgid "Premium Conferences Only"
-msgstr "Nur Premium-Tagungen"
-
-msgid "Conferences with Custom Settings"
-msgstr "Tagungen mit eigenen Einstellungen"
 
 msgid "Rearrange"
 msgstr "Umsortieren"
@@ -5633,8 +5633,8 @@ msgstr "E-Mails aller Newsletter-Abonnenten"
 msgid "E-Mails of ALL active users"
 msgstr "E-Mails ALLER aktiven Benutzer"
 
-msgid "Ok"
-msgstr "Ok"
+msgid "Select the date range for which you would like statistics"
+msgstr "Wähle einen Zeitraum, für den du den Überblick bekommen möchtest"
 
 msgid "The WE-Cloud is here!"
 msgstr "Die WE-Cloud ist da!"
@@ -6978,6 +6978,90 @@ msgstr "Schön, dass du da bist! Auf %(portal_name)s kannst du in Gruppen und Pr
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Jetzt anmelden und mitgestalten"
 
+msgid "Custom Wagtail Page"
+msgstr "Custom Wagtail Seite"
+
+msgid "Tools"
+msgstr "Werkzeuge"
+
+msgid "Import Projects and Groups or Users"
+msgstr "Projekte und Gruppen oder Benutzer importieren"
+
+msgid "Import from a CSV File"
+msgstr "Aus CSV-Datei importieren"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr "Laden Sie entweder eine CSV-Datei, um Ihre Projekte und Gruppen zu importieren, oder eine CSV-Datei, um die Benutzer zu importieren hoch. Bitte merken Sie, dass es gleichzeitig nur eine Datei importiert werden kann. Die Datei muss über ein entsprechendes Format verfügen. Wenn das Dateiformat geändert wird (mehr/weniger/unterschiedliche Spalten), bitte melden Sie sich bei den Entwicklern!"
+
+msgid "Project/group CSV File"
+msgstr "Projekte/Gruppen CSV-Datei"
+
+msgid "User CSV File"
+msgstr "Benutzer CSV-Datei"
+
+msgid "Options"
+msgstr "Optionen"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr "Die Standardeinstellungen der CSV-Datei. Bitte nur in dem Fall ändern, wenn Sie sich absolut sicher sind, was Sie tun!"
+
+msgid "Encoding of the CSV file"
+msgstr "Enkodierung der CSV-Datei"
+
+msgid "Delimiter of the CSV file"
+msgstr "Trennzeichen der CSV-Datei"
+
+msgid "Upload and Import..."
+msgstr "Hochladen und Import…"
+
+msgid "Import Projects and Groups"
+msgstr "Projekte und Gruppen importieren"
+
+msgid "Clear results and start a new import!"
+msgstr "Ergebnisse löschen und den Import neu starten!"
+
+msgid "CSV Import Results"
+msgstr "Ergebnisse des Imports"
+
+msgid "The import has finished. Here are the results:"
+msgstr "Der Importvorgang ist abgeschloßen. Hier sind die Ergebnisse:"
+
+msgid "Read errors:"
+msgstr "Lesefehler:"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr "Diese Zeilen in Ihrer CSV-Datei hatten Fehler oder eine inkorrekte Anzahl von Spalten und wurden daher IGNORIERT:"
+
+msgid "Saved items:"
+msgstr "Gespeicherte Daten:"
+
+msgid "Important messages:"
+msgstr "Wichtige Nachrichten:"
+
+msgid "Errors:"
+msgstr "Fehler:"
+
+msgid "Info messages:"
+msgstr "Info-Meldungen:"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr "Die CVS-Datei wurde erfolgreich bearbeitet und der Import läuft momentan auf dem Server!"
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+"Diese Seite wird die Ergebnisse anzeigen sobald der Import abgeschloßen ist.\n"
+"\t\t\n"
+"\t\t\t\tDie Bearbeitung kann je nach Anzahl der importierten Daten von wenigen Sekunden bis zu wenigen Minuten dauern. Sie können diese Seite schließen. Sobald der Import abgeschloßen ist, erhalten Sie von uns eine Email and die folgende Email-Adresse: <b>»%(email)s»</b> !\n"
+"\t\t\t"
+
+msgid "Progress:"
+msgstr "Verlauf:"
+
 msgid "Show more Projects"
 msgstr "Weitere Projekte anzeigen"
 
@@ -7935,88 +8019,11 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
-#~ msgid "Custom Wagtail Page"
-#~ msgstr "Custom Wagtail Seite"
+#~ msgid "Conference Administration"
+#~ msgstr "Tagungsverwaltung"
 
-#~ msgid "Tools"
-#~ msgstr "Werkzeuge"
-
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Projekte und Gruppen oder Benutzer importieren"
-
-#~ msgid "Import from a CSV File"
-#~ msgstr "Aus CSV-Datei importieren"
-
-#~ msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-#~ msgstr "Laden Sie entweder eine CSV-Datei, um Ihre Projekte und Gruppen zu importieren, oder eine CSV-Datei, um die Benutzer zu importieren hoch. Bitte merken Sie, dass es gleichzeitig nur eine Datei importiert werden kann. Die Datei muss über ein entsprechendes Format verfügen. Wenn das Dateiformat geändert wird (mehr/weniger/unterschiedliche Spalten), bitte melden Sie sich bei den Entwicklern!"
-
-#~ msgid "Project/group CSV File"
-#~ msgstr "Projekte/Gruppen CSV-Datei"
-
-#~ msgid "User CSV File"
-#~ msgstr "Benutzer CSV-Datei"
-
-#~ msgid "Options"
-#~ msgstr "Optionen"
-
-#~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-#~ msgstr "Die Standardeinstellungen der CSV-Datei. Bitte nur in dem Fall ändern, wenn Sie sich absolut sicher sind, was Sie tun!"
-
-#~ msgid "Encoding of the CSV file"
-#~ msgstr "Enkodierung der CSV-Datei"
-
-#~ msgid "Delimiter of the CSV file"
-#~ msgstr "Trennzeichen der CSV-Datei"
-
-#~ msgid "Upload and Import..."
-#~ msgstr "Hochladen und Import…"
-
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Projekte und Gruppen importieren"
-
-#~ msgid "Clear results and start a new import!"
-#~ msgstr "Ergebnisse löschen und den Import neu starten!"
-
-#~ msgid "CSV Import Results"
-#~ msgstr "Ergebnisse des Imports"
-
-#~ msgid "The import has finished. Here are the results:"
-#~ msgstr "Der Importvorgang ist abgeschloßen. Hier sind die Ergebnisse:"
-
-#~ msgid "Read errors:"
-#~ msgstr "Lesefehler:"
-
-#~ msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-#~ msgstr "Diese Zeilen in Ihrer CSV-Datei hatten Fehler oder eine inkorrekte Anzahl von Spalten und wurden daher IGNORIERT:"
-
-#~ msgid "Saved items:"
-#~ msgstr "Gespeicherte Daten:"
-
-#~ msgid "Important messages:"
-#~ msgstr "Wichtige Nachrichten:"
-
-#~ msgid "Errors:"
-#~ msgstr "Fehler:"
-
-#~ msgid "Info messages:"
-#~ msgstr "Info-Meldungen:"
-
-#~ msgid "The CSV file was read successfully and the import is currently running on the server!"
-#~ msgstr "Die CVS-Datei wurde erfolgreich bearbeitet und der Import läuft momentan auf dem Server!"
-
-#~ msgid ""
-#~ "This page will show the results when the import is finished.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-#~ "\t\t\t"
-#~ msgstr ""
-#~ "Diese Seite wird die Ergebnisse anzeigen sobald der Import abgeschloßen ist.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tDie Bearbeitung kann je nach Anzahl der importierten Daten von wenigen Sekunden bis zu wenigen Minuten dauern. Sie können diese Seite schließen. Sobald der Import abgeschloßen ist, erhalten Sie von uns eine Email and die folgende Email-Adresse: <b>»%(email)s»</b> !\n"
-#~ "\t\t\t"
-
-#~ msgid "Progress:"
-#~ msgstr "Verlauf:"
+#~ msgid "Ok"
+#~ msgstr "Ok"
 
 #~ msgid "By clicking \"Continue\" you are consenting to be recorded in this video conference."
 #~ msgstr "Indem du auf “Fortsetzen” klickst, stimmst du zu, in dieser Videokonferenz aufgezeichnet werden."

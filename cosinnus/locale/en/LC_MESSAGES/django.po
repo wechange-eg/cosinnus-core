@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-23 10:06+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -434,16 +434,16 @@ msgstr ""
 msgid "Accept invitation"
 msgstr "There are no groups."
 
-#, fuzzy
-msgid "View invitation"
-msgstr "There are no groups."
-
 #, fuzzy, python-format
 msgid "%(sender_name)s invited you"
 msgstr ""
 "Hi %(admin_name)s,\n"
 "\n"
 "The user %(user_name)s wants to join project %(team_name)s."
+
+#, fuzzy
+msgid "View invitation"
+msgstr "There are no groups."
 
 #, fuzzy
 msgid "New link to the moved project/group"
@@ -2305,6 +2305,131 @@ msgstr "There are no groups."
 msgid "Select a page on the left side."
 msgstr ""
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "My Projects"
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "My Projects"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+msgid "View Upcoming"
+msgstr ""
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Edit Project"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+msgid "Permanently Premium"
+msgstr ""
+
+msgid "Portal Setting"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "Projects"
+
+msgid "Premium active"
+msgstr ""
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+msgid "Start"
+msgstr ""
+
+#, fuzzy
+msgid "running now!"
+msgstr "Join Project"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Project"
+
+#, fuzzy
+msgid "Room"
+msgstr "Project Type"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr ""
+
+msgid "Add new premium block"
+msgstr ""
+
+msgid "Make Permanent Premium"
+msgstr ""
+
+msgid "Remove Permanent Premium"
+msgstr ""
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "There are no groups."
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+msgid "BBB Recording API"
+msgstr ""
+
+msgid "Not set"
+msgstr ""
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Create Project"
+
+msgid "Save"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Project"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2353,6 +2478,18 @@ msgstr ""
 
 msgid "User Welcome Email"
 msgstr ""
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Projects"
 
 msgid "Simple Statistics"
 msgstr ""
@@ -2413,9 +2550,6 @@ msgid "Firstname"
 msgstr ""
 
 msgid "Lastname"
-msgstr ""
-
-msgid "Save"
 msgstr ""
 
 #, fuzzy
@@ -3412,144 +3546,6 @@ msgstr "Do you really want to leave project „%(title)s“?"
 
 msgid "Delete recorded meeting"
 msgstr ""
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "My Projects"
-
-#, fuzzy
-msgid "Overview - All Conferences"
-msgstr "My Projects"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "There are no groups."
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-msgid "View Upcoming"
-msgstr ""
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Edit Project"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-msgid "Permanently Premium"
-msgstr ""
-
-msgid "Portal Setting"
-msgstr ""
-
-#, fuzzy
-msgid "Conference Settings"
-msgstr "Projects"
-
-msgid "Premium active"
-msgstr ""
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr ""
-
-msgid "Rooms"
-msgstr ""
-
-msgid "Start"
-msgstr ""
-
-#, fuzzy
-msgid "running now!"
-msgstr "Join Project"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Project"
-
-#, fuzzy
-msgid "Room"
-msgstr "Project Type"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr ""
-
-msgid "Add new premium block"
-msgstr ""
-
-msgid "Make Permanent Premium"
-msgstr ""
-
-msgid "Remove Permanent Premium"
-msgstr ""
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Do you really want to leave project „%(title)s“?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Do you really want to leave project „%(title)s“?"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "There are no groups."
-
-msgid "BBB"
-msgstr ""
-
-msgid "BBB Premium"
-msgstr ""
-
-msgid "BBB Recording API"
-msgstr ""
-
-msgid "Not set"
-msgstr ""
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Create Project"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Do you really want to leave project „%(title)s“?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Project"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Create Project"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Create Project"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Projects"
 
 msgid "Rearrange"
 msgstr ""
@@ -5646,7 +5642,7 @@ msgstr ""
 msgid "E-Mails of ALL active users"
 msgstr ""
 
-msgid "Ok"
+msgid "Select the date range for which you would like statistics"
 msgstr ""
 
 msgid "The WE-Cloud is here!"
@@ -7039,6 +7035,93 @@ msgstr ""
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Join now and collaborate"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Convert selected Projects to Groups"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Convert selected Projects to Groups"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Convert selected Projects to Groups"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Convert selected Projects to Groups"
+
+msgid "Options"
+msgstr ""
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+msgid "Upload and Import..."
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Convert selected Projects to Groups"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+msgid "CSV Import Results"
+msgstr ""
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+msgid "Read errors:"
+msgstr ""
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Create Group"
+
+msgid "Errors:"
+msgstr ""
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Create Group"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 #, fuzzy
 msgid "Show more Projects"
 msgstr "Other Projects"
@@ -8024,32 +8107,8 @@ msgid "Your changes have been saved."
 msgstr ""
 
 #, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Create Group"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Create Group"
+#~ msgid "Conference Administration"
+#~ msgstr "There are no groups."
 
 #, fuzzy
 #~ msgid "Active"
