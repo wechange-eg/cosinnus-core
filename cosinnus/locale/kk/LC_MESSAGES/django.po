@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-23 10:06+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -438,12 +438,12 @@ msgstr "%(sender_name)s сізді %(portal_name)s „%(team_name)s“ тобы�
 msgid "Accept invitation"
 msgstr "Шақыруды қабылдау"
 
-msgid "View invitation"
-msgstr "Шақыруды қарау"
-
 #, fuzzy, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s сізді белгіледі"
+
+msgid "View invitation"
+msgstr "Шақыруды қарау"
 
 msgid "New link to the moved project/group"
 msgstr "Көшірілген жоба / топқа жаңа сілтеме"
@@ -2308,6 +2308,139 @@ msgstr "Әкімшілік"
 msgid "Select a page on the left side."
 msgstr "Сол жақтағы бетті таңдаңыз."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "Бейне конференциялар сервері"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "Бетте қарау"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Жобаны қарау"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "Құпиялылық параметрлері"
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "белсенді емес"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Басталу күні."
+
+#, fuzzy
+msgid "running now!"
+msgstr "Қазір қосылыңыз!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Room"
+msgstr "Команда түрінен"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Шара"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Шынымен %(title)s“ қалдырғыңыз келе ме?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Шынымен „%(name)s“ мүшелер командасынан жойғыңыз келе ме?"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "Әзірге бұл жерде ештеңе жоқ"
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+msgid "BBB Recording API"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "Тағайындалмаған"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Шара құру"
+
+msgid "Save"
+msgstr "Сақтау"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "„%(name)s“-дан бас тартқыңыз келе ме?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Профильді жою"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2356,6 +2489,18 @@ msgstr "Пайдаланушы бақылау тақтасындағы хаба�
 
 msgid "User Welcome Email"
 msgstr "Пайдаланушының электрондық поштасына қош келдіңіз"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Шара құру"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Бейне конференциялар сервері"
 
 msgid "Simple Statistics"
 msgstr "Қарапайым статистика"
@@ -2421,9 +2566,6 @@ msgstr "Аты"
 #, fuzzy
 msgid "Lastname"
 msgstr "Тегі"
-
-msgid "Save"
-msgstr "Сақтау"
 
 #, fuzzy
 msgid "User Administration"
@@ -3441,152 +3583,6 @@ msgstr "„%(title)s“ шақыруын шынымен жойғыңыз кел�
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Хабарланған бұйымды өшіру."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Бейне конференциялар сервері"
-
-#, fuzzy
-msgid "Overview - All Conferences"
-msgstr "Бейне конференциялар сервері"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Әкімшілік"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "Бетте қарау"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Жобаны қарау"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Бейне конференциялар сервері"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "Құпиялылық параметрлері"
-
-#, fuzzy
-msgid "Conference Settings"
-msgstr "Бейне конференциялар сервері"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "белсенді емес"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr ""
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-msgid "Start"
-msgstr "Басталу күні."
-
-#, fuzzy
-msgid "running now!"
-msgstr "Қазір қосылыңыз!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Бейне конференциялар сервері"
-
-#, fuzzy
-msgid "Room"
-msgstr "Команда түрінен"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Шара"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Бейне конференциялар сервері"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Бейне конференциялар сервері"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Шынымен %(title)s“ қалдырғыңыз келе ме?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Шынымен „%(name)s“ мүшелер командасынан жойғыңыз келе ме?"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "Әзірге бұл жерде ештеңе жоқ"
-
-msgid "BBB"
-msgstr ""
-
-msgid "BBB Premium"
-msgstr ""
-
-msgid "BBB Recording API"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "Тағайындалмаған"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Шара құру"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "„%(name)s“-дан бас тартқыңыз келе ме?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Профильді жою"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Бейне конференциялар сервері"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Шара құру"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Бейне конференциялар сервері"
 
 msgid "Rearrange"
 msgstr "Қайта құру"
@@ -5840,8 +5836,8 @@ msgstr ""
 msgid "E-Mails of ALL active users"
 msgstr ""
 
-msgid "Ok"
-msgstr "ОК"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr ""
@@ -7229,6 +7225,98 @@ msgstr "Сені көруге қуаныштымыз! %(portal_name)s-те сі�
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Қазір тіркеліп, оны қалыптастыруға көмектесіңіз"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Менің Жобаларым мен Топтары"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Cұрыптау өрісі"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Жобалар/Топтар"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Жобалар/Топтар"
+
+#, fuzzy
+msgid "Options"
+msgstr "Пропорциялар"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Суретті жүктеу."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Менің Жобаларым мен Топтары"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Парольді қалпына келтіру сәтті өтті"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Қате!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Хабарламалар"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Қате!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Хабарламалар"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Басқа Жобаларды көрсету"
 
@@ -8244,52 +8332,11 @@ msgid "Your changes have been saved."
 msgstr "Сіздің өзгертулеріңіз сақталды."
 
 #, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Менің Жобаларым мен Топтары"
+#~ msgid "Conference Administration"
+#~ msgstr "Әкімшілік"
 
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Cұрыптау өрісі"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Жобалар/Топтар"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Жобалар/Топтар"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Пропорциялар"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Суретті жүктеу."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Менің Жобаларым мен Топтары"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Парольді қалпына келтіру сәтті өтті"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Қате!"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Хабарламалар"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Қате!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Хабарламалар"
+#~ msgid "Ok"
+#~ msgstr "ОК"
 
 #, fuzzy
 #~ msgid "Active"
@@ -8419,13 +8466,11 @@ msgstr "Сіздің өзгертулеріңіз сақталды."
 #~ "\n"
 #~ "Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das Portallogo links oben.\n"
 #~ "\n"
-#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele "
-#~ "ungewünschte Emails bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
+#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
 #~ "\n"
 #~ "Für alle Gruppen und Projekte, denen du selbstständig beitrittst, ist die Standardeinstellung bei dieser Option \"alle Benachrichtigungen\". Das kannst du dann natürlich ebenso anpassen.\n"
 #~ "\n"
-#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst "
-#~ "du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
+#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
 #~ "\n"
 #~ "Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, melde dich gern den Portaladministrator_innen. \n"
 #~ "\n"
@@ -8438,13 +8483,11 @@ msgstr "Сіздің өзгертулеріңіз сақталды."
 #~ "\n"
 #~ "Сіз платформаны пайдаланғыңыз келетініне қуаныштымыз. Ең маңызды функциялар туралы білу үшін, басты парақшадағы видеоны қараңыз. Оны сол жақ жоғарғы бұрыштағы порталдың логотипін басу арқылы ашуға болады.\n"
 #~ "\n"
-#~ "Тағы бір нәрсе: тіркелу арқылы сіз автоматты түрде порталдың барлық мәліметтері жиналатын «Блог» тобының мүшесі боласыз. Мұнда не болып жатқанына шолу жасау үшін сіз өзіңіздің ақпараттық қажеттіліктеріңізге сәйкес «Хабарлама параметрлері» бөлімін жеке орната аласыз, сіз қандай әрекеттерді электрондық пошта арқылы хабарлағыңыз келеді (жоғарғы оң жақ бұрыштағы атыңызды басыңыз) . Қажет емес электрондық пошталардың тым көп болуын болдырмас үшін «хабарламалар жоқ» "
-#~ "опциясы үшін әдепкі параметр орнатылды.\n"
+#~ "Тағы бір нәрсе: тіркелу арқылы сіз автоматты түрде порталдың барлық мәліметтері жиналатын «Блог» тобының мүшесі боласыз. Мұнда не болып жатқанына шолу жасау үшін сіз өзіңіздің ақпараттық қажеттіліктеріңізге сәйкес «Хабарлама параметрлері» бөлімін жеке орната аласыз, сіз қандай әрекеттерді электрондық пошта арқылы хабарлағыңыз келеді (жоғарғы оң жақ бұрыштағы атыңызды басыңыз) . Қажет емес электрондық пошталардың тым көп болуын болдырмас үшін «хабарламалар жоқ» опциясы үшін әдепкі параметр орнатылды.\n"
 #~ "\n"
 #~ "Өзіңіз қосылатын барлық топтар мен жобалар үшін бұл опция үшін әдепкі параметр - «барлық хабарландырулар». Мұны, әрине, өзгерте аласыз.\n"
 #~ "\n"
-#~ "Тағы бір білетін нәрсе: портал - бұл wechange.de сайтындағы көп порталдың бірі. Егер сіз басқа порталдарды қарағыңыз келсе, осы жерден өз логиніңізбен кіре аласыз. Егер сіз бірнеше порталдарда тіркелген болсаңыз, сіз өзіңіз қатысатын топтар мен жобалар туралы барлық жаңалықтарды «Әрекеттер» айдарында таба аласыз (мәзірдің сол жақ жоғарғы жағы). Түрлі логотиптерді басу арқылы сіз порталдар арасында ауыса аласыз. Егер сіз басқа порталдардағы блогтар тобының "
-#~ "мүшесі болғыңыз келсе, мүшелікке өтініш беруіңіз керек.\n"
+#~ "Тағы бір білетін нәрсе: портал - бұл wechange.de сайтындағы көп порталдың бірі. Егер сіз басқа порталдарды қарағыңыз келсе, осы жерден өз логиніңізбен кіре аласыз. Егер сіз бірнеше порталдарда тіркелген болсаңыз, сіз өзіңіз қатысатын топтар мен жобалар туралы барлық жаңалықтарды «Әрекеттер» айдарында таба аласыз (мәзірдің сол жақ жоғарғы жағы). Түрлі логотиптерді басу арқылы сіз порталдар арасында ауыса аласыз. Егер сіз басқа порталдардағы блогтар тобының мүшесі болғыңыз келсе, мүшелікке өтініш беруіңіз керек.\n"
 #~ "\n"
 #~ "Егер сізде сұрақтар, техникалық ұсыныстар, қате туралы хабарламалар немесе тілектер болса, портал әкімшісіне хабарласыңыз.\n"
 #~ "\n"

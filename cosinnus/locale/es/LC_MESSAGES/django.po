@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-23 10:06+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -442,12 +442,12 @@ msgstr "%(sender_name)s te ha invitado a participar en \"%(team_name)s\" en %(po
 msgid "Accept invitation"
 msgstr "Aceptar invitación"
 
-msgid "View invitation"
-msgstr "Ver invitación"
-
 #, fuzzy, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s te etiquetó en"
+
+msgid "View invitation"
+msgstr "Ver invitación"
 
 msgid "New link to the moved project/group"
 msgstr "Enlace nuevo al"
@@ -2320,6 +2320,139 @@ msgstr "Administrador"
 msgid "Select a page on the left side."
 msgstr ""
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Todos los proyectos"
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "Todos los proyectos"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "Ver en página"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Ver proyecto"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Solo miembros del grupo"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "Configuración de la privacidad"
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "Proyectos Cosinnus"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "(Inactivo)"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Fecha de comienzo."
+
+#, fuzzy
+msgid "running now!"
+msgstr "Participa ahora!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Proyecto Cosinnus"
+
+#, fuzzy
+msgid "Room"
+msgstr "Del tipo de equipo"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Evento"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Solo miembros del grupo"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Solo miembros del grupo"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Estas seguro de que quieres dejar „%(title)s“?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Estas seguro de que quieres eliminar al miembro „%(name)s“ del equipo?"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "No hay usuarios visibles."
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+msgid "BBB Recording API"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "No asignado"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Crear evento"
+
+msgid "Save"
+msgstr "Guardar"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Estas seguro de que quieres rechazar al miembro „%(name)s“?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Eliminar perfil"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2370,6 +2503,18 @@ msgstr "Página del panel del usario"
 #, fuzzy
 msgid "User Welcome Email"
 msgstr "Texto de bienvenida-email"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Crear evento"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Crear evento"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Proyectos Cosinnus"
 
 msgid "Simple Statistics"
 msgstr "Estadísticas simples"
@@ -2435,9 +2580,6 @@ msgstr "Nombre"
 #, fuzzy
 msgid "Lastname"
 msgstr "Apellido"
-
-msgid "Save"
-msgstr "Guardar"
 
 #, fuzzy
 msgid "User Administration"
@@ -3460,152 +3602,6 @@ msgstr "Estas seguro de que quieres eliminar la invitación para \"%(title)s\"?"
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Eliminar el item reportado..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Todos los proyectos"
-
-#, fuzzy
-msgid "Overview - All Conferences"
-msgstr "Todos los proyectos"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Administrador"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "Ver en página"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Ver proyecto"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Solo miembros del grupo"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "Configuración de la privacidad"
-
-#, fuzzy
-msgid "Conference Settings"
-msgstr "Proyectos Cosinnus"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "(Inactivo)"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr ""
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-msgid "Start"
-msgstr "Fecha de comienzo."
-
-#, fuzzy
-msgid "running now!"
-msgstr "Participa ahora!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Proyecto Cosinnus"
-
-#, fuzzy
-msgid "Room"
-msgstr "Del tipo de equipo"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Evento"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Solo miembros del grupo"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Solo miembros del grupo"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Estas seguro de que quieres dejar „%(title)s“?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Estas seguro de que quieres eliminar al miembro „%(name)s“ del equipo?"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "No hay usuarios visibles."
-
-msgid "BBB"
-msgstr ""
-
-msgid "BBB Premium"
-msgstr ""
-
-msgid "BBB Recording API"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "No asignado"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Crear evento"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Estas seguro de que quieres rechazar al miembro „%(name)s“?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Eliminar perfil"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Crear evento"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Crear evento"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Proyectos Cosinnus"
 
 msgid "Rearrange"
 msgstr "Reorganizar"
@@ -5871,8 +5867,8 @@ msgstr ""
 msgid "E-Mails of ALL active users"
 msgstr ""
 
-msgid "Ok"
-msgstr "Ok"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr ""
@@ -7307,6 +7303,98 @@ msgstr ""
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Regístrate ahora y participa"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Mis proyectos y grupos"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Ordenar casilla"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Proyectos/grupos"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Proyectos/grupos"
+
+#, fuzzy
+msgid "Options"
+msgstr "Proporciónes"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Sube una imagen."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Mis proyectos y grupos"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Reinicio de contraseña con éxito"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "¡Error!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Mensajes"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "¡Error!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Mensajes"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Mostrar más proyectos"
 
@@ -8327,52 +8415,11 @@ msgid "Your changes have been saved."
 msgstr "Se han guardado los cambios."
 
 #, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Mis proyectos y grupos"
+#~ msgid "Conference Administration"
+#~ msgstr "Administrador"
 
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Ordenar casilla"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Proyectos/grupos"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Proyectos/grupos"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Proporciónes"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Sube una imagen."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Mis proyectos y grupos"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Reinicio de contraseña con éxito"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "¡Error!"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Mensajes"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "¡Error!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Mensajes"
+#~ msgid "Ok"
+#~ msgstr "Ok"
 
 #, fuzzy
 #~ msgid "Active"
@@ -8495,13 +8542,11 @@ msgstr "Se han guardado los cambios."
 #~ "\n"
 #~ "Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das Portallogo links oben.\n"
 #~ "\n"
-#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist "
-#~ "die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
+#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
 #~ "\n"
 #~ "Für alle Gruppen und Projekte, denen du selbstständig beitrittst, ist die Standardeinstellung bei dieser Option \"alle Benachrichtigungen\". Das kannst du dann natürlich ebenso anpassen.\n"
 #~ "\n"
-#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. "
-#~ "Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
+#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
 #~ "\n"
 #~ "Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, melde dich gern den Portaladministrator_innen. \n"
 #~ "\n"
@@ -8514,13 +8559,11 @@ msgstr "Se han guardado los cambios."
 #~ "\n"
 #~ "No alegramos, que quieras utilizar esta pataforma. Para conocer las funciones más importantes, miírate, por si aún no lo has visto, el video en Nuestra página frontera. Ahí llegas haciendo clic en el logo del Portal arriba en la izquierda.\n"
 #~ "\n"
-#~ "Una información por adelantado: al registrarse, eres automáticamente miembro del grupo \"Blog\", donde converge toda la información del portal. Para obtener una visión general de lo que está sucediendo aquí, en \"Configuración de notificaciones\", puede establecer individualmente, según tu necesidad de información, qué actividades deseas recibir por correo electrónico (haz clic en tu nombre en la esquina superior derecha). Para evitar demasiados correos electrónicos no deseados, la configuración "
-#~ "predeterminada para la opción está establecida en \"sin notificaciones\".\n"
+#~ "Una información por adelantado: al registrarse, eres automáticamente miembro del grupo \"Blog\", donde converge toda la información del portal. Para obtener una visión general de lo que está sucediendo aquí, en \"Configuración de notificaciones\", puede establecer individualmente, según tu necesidad de información, qué actividades deseas recibir por correo electrónico (haz clic en tu nombre en la esquina superior derecha). Para evitar demasiados correos electrónicos no deseados, la configuración predeterminada para la opción está establecida en \"sin notificaciones\".\n"
 #~ "\n"
 #~ "Para todos los grupos y proyectos a los que te unes independientemente, la configuración predeterminada para esta opción es \"todas las notificaciones\". Por supuesto, puedes ajustar eso también.\n"
 #~ "\n"
-#~ "Y algo que vale la pena saber: el portal aquí es solo uno de muchos en wechange.de. Si también deseas mirar en los otros portales, simplemente puedes iniciar sesión con tu inicio de sesión desde aquí. Si estás registrado en varios portales, bajo el título \"Actividades\" (arriba a la izquierda en el menú) verás todas las noticias de los grupos y proyectos en los que eres miembro. Al hacer clic en los diferentes logotipos, puedes cambiar entre los portales. Si deseas ser miembro del grupo de "
-#~ "blogs en otros portales, simplemente tienes que solicitar la participación.\n"
+#~ "Y algo que vale la pena saber: el portal aquí es solo uno de muchos en wechange.de. Si también deseas mirar en los otros portales, simplemente puedes iniciar sesión con tu inicio de sesión desde aquí. Si estás registrado en varios portales, bajo el título \"Actividades\" (arriba a la izquierda en el menú) verás todas las noticias de los grupos y proyectos en los que eres miembro. Al hacer clic en los diferentes logotipos, puedes cambiar entre los portales. Si deseas ser miembro del grupo de blogs en otros portales, simplemente tienes que solicitar la participación.\n"
 #~ "\n"
 #~ "Si tienes preguntas, sugerencias técnicas, mensajes de error o deseos, no dudes en ponerte en contacto con los administradores del portal.\n"
 #~ "\n"

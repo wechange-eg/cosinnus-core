@@ -45,7 +45,7 @@ class ConferenceOverviewView(RequirePortalManagerMixin, TemplateView):
                 will be listed
     """
     
-    template_name = 'cosinnus/conference_administration/conference_overview.html'
+    template_name = 'cosinnus/administration/conference_overview.html'
     only_nonstandard = False
     only_premium = False
     past = False
@@ -219,7 +219,7 @@ class ConferenceOverviewView(RequirePortalManagerMixin, TemplateView):
 
 
 class ConferenceAddPremiumBlockView(RequirePortalManagerMixin, FormView):
-    template_name = 'cosinnus/conference_administration/conference_premium_block_form.html'
+    template_name = 'cosinnus/administration/conference_premium_block_form.html'
     form_class = ConferencePremiumBlockForm
 
     def get_conference(self):
@@ -248,7 +248,7 @@ class ConferenceAddPremiumBlockView(RequirePortalManagerMixin, FormView):
 
 
 class ConferenceEditPremiumBlockView(SuccessMessageMixin, RequirePortalManagerMixin, UpdateView):
-    template_name = 'cosinnus/conference_administration/conference_premium_block_form.html'
+    template_name = 'cosinnus/administration/conference_premium_block_form.html'
     model = CosinnusConferencePremiumBlock
     form_class = ConferencePremiumBlockForm
     success_message = _('Successfully updated premium block.')

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-23 10:06+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -442,12 +442,12 @@ msgstr "%(sender_name)s v-a invitat să vă alăturați ”%(team_name)s” pe %
 msgid "Accept invitation"
 msgstr "Invitația acceptată"
 
-msgid "View invitation"
-msgstr "Vizualizați invitația"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s te-a invitat"
+
+msgid "View invitation"
+msgstr "Vizualizați invitația"
 
 msgid "New link to the moved project/group"
 msgstr "Nou link către proiectul/grupul mutat"
@@ -2301,6 +2301,141 @@ msgstr "Administrare"
 msgid "Select a page on the left side."
 msgstr "Selectați o pagină din partea stângă."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Este conferință"
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "Este conferință"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "Vizualizarea pe pagină"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Vezi Proiect"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Conferința se desfășoară"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "Setările de confidențialitate"
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "Setările Conferinței"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+#, fuzzy
+msgid "Not premium"
+msgstr "Premium"
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Restrâns"
+
+#, fuzzy
+msgid "running now!"
+msgstr "Alătură-te acum!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Setările Conferinței"
+
+#, fuzzy
+msgid "Room"
+msgstr "Tipul Camerei"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Eveniment"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Conferința se desfășoară"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Conferința se desfășoară"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Chiar vrei să lași „%(title)s”?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Vrei cu adevărat să eliminați membru „%(name)s” din echipă?"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "Nu există articole încă"
+
+msgid "BBB"
+msgstr ""
+
+#, fuzzy
+msgid "BBB Premium"
+msgstr "Premium"
+
+msgid "BBB Recording API"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "Nealocat"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Creează Eveniment"
+
+msgid "Save"
+msgstr "Salvați"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Vrei într-adevăr să refuzi membru „%(name)s”?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Ștergeți Profilul"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2351,6 +2486,18 @@ msgstr "Anunțuri pentru Tabloul de Bord al Utilizatorului"
 
 msgid "User Welcome Email"
 msgstr "Utilizator Bun Venit pe E-mail"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Setările Conferinței"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Creează Eveniment"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Conferința se desfășoară"
 
 msgid "Simple Statistics"
 msgstr "Statistici Simple"
@@ -2416,9 +2563,6 @@ msgstr "Nume"
 #, fuzzy
 msgid "Lastname"
 msgstr "Numele de familie"
-
-msgid "Save"
-msgstr "Salvați"
 
 #, fuzzy
 msgid "User Administration"
@@ -3446,154 +3590,6 @@ msgstr "Doriți cu adevărat să ștergeți anunțul ”%(title)s”?"
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Ștergeți articolul raportat..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Este conferință"
-
-#, fuzzy
-msgid "Overview - All Conferences"
-msgstr "Este conferință"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Administrare"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "Vizualizarea pe pagină"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Vezi Proiect"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Conferința se desfășoară"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "Setările de confidențialitate"
-
-#, fuzzy
-msgid "Conference Settings"
-msgstr "Setările Conferinței"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "Premium"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-#, fuzzy
-msgid "Not premium"
-msgstr "Premium"
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-msgid "Start"
-msgstr "Restrâns"
-
-#, fuzzy
-msgid "running now!"
-msgstr "Alătură-te acum!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Setările Conferinței"
-
-#, fuzzy
-msgid "Room"
-msgstr "Tipul Camerei"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Eveniment"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Conferința se desfășoară"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Conferința se desfășoară"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Chiar vrei să lași „%(title)s”?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Vrei cu adevărat să eliminați membru „%(name)s” din echipă?"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "Nu există articole încă"
-
-msgid "BBB"
-msgstr ""
-
-#, fuzzy
-msgid "BBB Premium"
-msgstr "Premium"
-
-msgid "BBB Recording API"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "Nealocat"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Creează Eveniment"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Vrei într-adevăr să refuzi membru „%(name)s”?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Ștergeți Profilul"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Setările Conferinței"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Creează Eveniment"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Conferința se desfășoară"
 
 msgid "Rearrange"
 msgstr "Rearanja"
@@ -5852,8 +5848,8 @@ msgstr "E-mailuri ale tuturor abonaților la buletin informativ"
 msgid "E-Mails of ALL active users"
 msgstr "E-mailurile Tuturor utilizatorilor activi"
 
-msgid "Ok"
-msgstr "OK"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr "WE-Cloud este aici!"
@@ -7236,6 +7232,98 @@ msgstr "Mă bucur să te văd! La %(portal_name)s puteți colabora cu alții în
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Înregistrați-vă acum și ajutați la modelarea acestuia"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Proiectele și Grupurile mele"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Câmp de sortare"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Proiecte/Grupuri"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Proiecte/Grupuri"
+
+#, fuzzy
+msgid "Options"
+msgstr "Proporții"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Încărcați o imagine."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Proiectele și Grupurile mele"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Resetarea parolei a reușit"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Eroare!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Mesaje"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Eroare!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Mesaje"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Afișează mai multe Proiecte"
 
@@ -8248,52 +8336,11 @@ msgid "Your changes have been saved."
 msgstr "Schimbările tale au fost salvate."
 
 #, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Proiectele și Grupurile mele"
+#~ msgid "Conference Administration"
+#~ msgstr "Administrare"
 
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Câmp de sortare"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Proiecte/Grupuri"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Proiecte/Grupuri"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Proporții"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Încărcați o imagine."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Proiectele și Grupurile mele"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Resetarea parolei a reușit"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Eroare!"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Mesaje"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Eroare!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Mesaje"
+#~ msgid "Ok"
+#~ msgstr "OK"
 
 #~ msgid "Active"
 #~ msgstr "Activ"

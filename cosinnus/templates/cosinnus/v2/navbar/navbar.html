@@ -413,34 +413,20 @@
 			</ul>
 		</div>
 
-		{% if request.user|is_portal_manager or request.user|is_superuser %}
-            <div class="nav-flyout-section padded">
-                {% if request.user|is_superuser  %}
-	                <ul class="item-list">
-	                    <li>
-	                        <a href="{% url 'cosinnus:administration' %}" class="list-item" role="button" titledby=".item-text">
-	                            <div class="item-text">
-	                                {% trans "Administration" %}
-	                            </div>
-	                        </a>
-	                    </li>
-	                </ul>
-                {% endif %}
-                
-                {% if SETTINGS.COSINNUS_PREMIUM_CONFERENCES_ENABLED %}
-	                {% if request.user|is_portal_manager or request.user|is_superuser %}
-		                <ul class="item-list">
-		                    <li>
-		                        <a href="{% url 'cosinnus:conference-administration' %}" class="list-item" role="button" titledby=".item-text">
-		                            <div class="item-text">
-		                                {% trans "Conference Administration" %}
-		                            </div>
-		                        </a>
-		                    </li>
-		                </ul>
-			        {% endif %}
-		        {% endif %}
-            </div>
+		{% if SETTINGS.COSINNUS_PREMIUM_CONFERENCES_ENABLED %}
+			{% if request.user|is_portal_manager or request.user|is_superuser  %}
+				<div class="nav-flyout-section padded">
+						<ul class="item-list">
+							<li>
+								<a href="{% url 'cosinnus:administration' %}" class="list-item" role="button" titledby=".item-text">
+									<div class="item-text">
+										{% trans "Administration" %}
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+			{% endif %}
         {% endif %}
         
 

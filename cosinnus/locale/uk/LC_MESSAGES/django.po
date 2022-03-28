@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-23 10:06+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -436,12 +436,12 @@ msgstr "%(sender_name)s запросив Вас долучитися до ком
 msgid "Accept invitation"
 msgstr "Прийняти запрошення"
 
-msgid "View invitation"
-msgstr "Переглянути запрошення"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s запросив Вас"
+
+msgid "View invitation"
+msgstr "Переглянути запрошення"
 
 msgid "New link to the moved project/group"
 msgstr "Нове посилання до проєкту/групи, які було переміщено"
@@ -2250,6 +2250,125 @@ msgstr "Адміністрація"
 msgid "Select a page on the left side."
 msgstr "Виберіть сторінку зліва."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "Огляд - Конференції, кабінети та воркшопи із власними налаштуваннями BBB-сервера"
+
+msgid "Overview - Premium Conferences Only"
+msgstr "Огляд - тільки преміум -конференції"
+
+msgid "Overview - All Conferences"
+msgstr "Огляд - усі конференції"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "Огляд - конференції, кімнати та воркшопи"
+
+msgid "Past"
+msgstr "Минуле"
+
+msgid "View Upcoming"
+msgstr "Переглянути майбутні"
+
+msgid "Upcoming"
+msgstr "Майбутні"
+
+msgid "View Past"
+msgstr "Переглянути минуле"
+
+msgid "Premium capacity occupancy overview"
+msgstr "Огляд завантаженості преміум-класу"
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr "У цьому календарі відображаються всі конференції для поточного представлення, усі блоки преміум-класу, які наразі заброньовані для конференцій, та загальна визначена ємність сервера преміум-класу."
+
+msgid "Booked"
+msgstr "Заброньовано"
+
+msgid "Permanently Premium"
+msgstr "Постійно преміум-класу"
+
+msgid "Portal Setting"
+msgstr "Налаштування порталу"
+
+msgid "Conference Settings"
+msgstr "Налаштування конференції"
+
+msgid "Premium active"
+msgstr "Преміум активний"
+
+msgid "Premium inactive, but scheduled"
+msgstr "Преміум неактивний, але за розкладом"
+
+msgid "Not premium"
+msgstr "Не є преміум"
+
+msgid "Rooms"
+msgstr "Кімнати"
+
+msgid "Start"
+msgstr "Початок"
+
+msgid "running now!"
+msgstr "Долучитися зараз!"
+
+msgid "Conference Setting"
+msgstr "Налаштування конференції"
+
+msgid "Room"
+msgstr "Кімната"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Подія"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Постійно преміум-класу"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Постійно преміум-класу"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Ви дійсно хочете видалити користувача?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Ви справді бажаєте видалити члена %(name)s з цієї команди?"
+
+msgid "There are no items to show."
+msgstr "Немає жодного елементу для показу"
+
+msgid "BBB"
+msgstr "ВВВ"
+
+msgid "BBB Premium"
+msgstr "ВВВ Преміум"
+
+msgid "BBB Recording API"
+msgstr ""
+
+msgid "Not set"
+msgstr "Не встановлено"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Створити Захід"
+
+msgid "Save"
+msgstr "Зберегти"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Ви справді бажаєте відхилити члена %(name)s?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Видалити Профіль"
+
 msgid "Newsletters"
 msgstr "Інформаційні бюлетені"
 
@@ -2295,6 +2414,15 @@ msgstr "Інформаційна панель оголошення корист�
 
 msgid "User Welcome Email"
 msgstr "Вітальний текст листа користувача"
+
+msgid "Conference Overview"
+msgstr "Налаштування конференції"
+
+msgid "Premium Conferences Only"
+msgstr "Створити Захід"
+
+msgid "Conferences with Custom Settings"
+msgstr "Конференція триває"
 
 msgid "Simple Statistics"
 msgstr "Проста Статистика"
@@ -2353,9 +2481,6 @@ msgstr "Ім'я"
 
 msgid "Lastname"
 msgstr "Прізвище"
-
-msgid "Save"
-msgstr "Зберегти"
 
 msgid "User Administration"
 msgstr "Адміністрація Користувача"
@@ -3334,135 +3459,6 @@ msgstr "Ви дійсно хочете видалити кімнату \"%(title
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Видалити елемент, про який повідомлено..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "Огляд - Конференції, кабінети та воркшопи із власними налаштуваннями BBB-сервера"
-
-msgid "Overview - Premium Conferences Only"
-msgstr "Огляд - тільки преміум -конференції"
-
-msgid "Overview - All Conferences"
-msgstr "Огляд - усі конференції"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Адміністрація Користувача"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "Огляд - конференції, кімнати та воркшопи"
-
-msgid "Past"
-msgstr "Минуле"
-
-msgid "View Upcoming"
-msgstr "Переглянути майбутні"
-
-msgid "Upcoming"
-msgstr "Майбутні"
-
-msgid "View Past"
-msgstr "Переглянути минуле"
-
-msgid "Premium capacity occupancy overview"
-msgstr "Огляд завантаженості преміум-класу"
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr "У цьому календарі відображаються всі конференції для поточного представлення, усі блоки преміум-класу, які наразі заброньовані для конференцій, та загальна визначена ємність сервера преміум-класу."
-
-msgid "Booked"
-msgstr "Заброньовано"
-
-msgid "Permanently Premium"
-msgstr "Постійно преміум-класу"
-
-msgid "Portal Setting"
-msgstr "Налаштування порталу"
-
-msgid "Conference Settings"
-msgstr "Налаштування конференції"
-
-msgid "Premium active"
-msgstr "Преміум активний"
-
-msgid "Premium inactive, but scheduled"
-msgstr "Преміум неактивний, але за розкладом"
-
-msgid "Not premium"
-msgstr "Не є преміум"
-
-msgid "Rooms"
-msgstr "Кімнати"
-
-msgid "Start"
-msgstr "Початок"
-
-msgid "running now!"
-msgstr "Долучитися зараз!"
-
-msgid "Conference Setting"
-msgstr "Налаштування конференції"
-
-msgid "Room"
-msgstr "Кімната"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Подія"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Постійно преміум-класу"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Постійно преміум-класу"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Ви дійсно хочете видалити користувача?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Ви справді бажаєте видалити члена %(name)s з цієї команди?"
-
-msgid "There are no items to show."
-msgstr "Немає жодного елементу для показу"
-
-msgid "BBB"
-msgstr "ВВВ"
-
-msgid "BBB Premium"
-msgstr "ВВВ Преміум"
-
-msgid "BBB Recording API"
-msgstr ""
-
-msgid "Not set"
-msgstr "Не встановлено"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Створити Захід"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Ви справді бажаєте відхилити члена %(name)s?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Видалити Профіль"
-
-msgid "Conference Overview"
-msgstr "Налаштування конференції"
-
-msgid "Premium Conferences Only"
-msgstr "Створити Захід"
-
-msgid "Conferences with Custom Settings"
-msgstr "Конференція триває"
 
 msgid "Rearrange"
 msgstr "Переставити"
@@ -5684,8 +5680,8 @@ msgstr "Електронні адреси всіх підписників на �
 msgid "E-Mails of ALL active users"
 msgstr "Електронні адреси ВСІХ активних користувачів"
 
-msgid "Ok"
-msgstr "Ok"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr "WE-Хмара тут!"
@@ -7039,6 +7035,91 @@ msgstr "Раді бачити Вас На %(portal_name)s Ви можете сп
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Зареєструватися та долучитися"
 
+msgid "Custom Wagtail Page"
+msgstr "Custom Wagtail Page"
+
+msgid "Tools"
+msgstr "Інструменти "
+
+msgid "Import Projects and Groups or Users"
+msgstr "Імпортувати проєкти та групи або користувачів"
+
+msgid "Import from a CSV File"
+msgstr "Імпорт із файлу CSV"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr "Завантажте або CSV-файл для імпортування проектів та груп, або CSV-файл для імпорту користувачів. Одночасно може відбуватися лише один імпорт. Формат повинен бути таким, який був узгоджений. Якщо формат зміниться (більше/менше/різні колонки), зверніться до розробників!"
+
+msgid "Project/group CSV File"
+msgstr "CSV файл проєкту/групи"
+
+msgid "User CSV File"
+msgstr "CSV файл користувача"
+
+msgid "Options"
+msgstr "Варіанти"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr "Налаштування за замовчуванням для файлу CSV. Змініть їх, тільки якщо ви абсолютно знаєте, що робите!"
+
+msgid "Encoding of the CSV file"
+msgstr "Кодування файлу CSV"
+
+msgid "Delimiter of the CSV file"
+msgstr "Розділювач файлу CSV"
+
+msgid "Upload and Import..."
+msgstr "Завантажити та імпортувати ..."
+
+msgid "Import Projects and Groups"
+msgstr "Імпортувати проєкти та групи"
+
+msgid "Clear results and start a new import!"
+msgstr "Очистіть результати та почніть новий імпорт!"
+
+msgid "CSV Import Results"
+msgstr "Результати імпорту CSV"
+
+msgid "The import has finished. Here are the results:"
+msgstr "Імпорт завершено. Ось результати:"
+
+msgid "Read errors:"
+msgstr "Помилка!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr "Ці рядки у вашому файлі CSV мали помилки або неправильну кількість колонок і були ПРОІГНОРОВАНІ:"
+
+msgid "Saved items:"
+msgstr "Збережені елементи:"
+
+msgid "Important messages:"
+msgstr "Важливі повідомлення:"
+
+msgid "Errors:"
+msgstr "Помилка!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Важливі повідомлення:"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr "Файл CSV було успішно прочитано, і зараз імпорт виконується на сервері!"
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+"На цій сторінці відображатимуться результати після завершення імпорту.\n"
+"\t\t\n"
+"\t\t\t\t Залежно від кількості імпортованих елементів цей процес може зайняти від кількох секунд до кількох хвилин. Вам не потрібно тримати цю сторінку відкритою. Ми надішлемо вам електронного листа на вашу адресу   <b>\"%(email) s\" </b>, як тільки імпорт завершиться!\n"
+"\t\t\t"
+
+msgid "Progress:"
+msgstr "Прогрес:"
+
 msgid "Show more Projects"
 msgstr "Показати більше Проєктів"
 
@@ -8000,89 +8081,12 @@ msgstr "Наразі Ви не є членом %s! Якщо ви бажаєте 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
 
-#~ msgid "Custom Wagtail Page"
-#~ msgstr "Custom Wagtail Page"
-
-#~ msgid "Tools"
-#~ msgstr "Інструменти "
-
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Імпортувати проєкти та групи або користувачів"
-
-#~ msgid "Import from a CSV File"
-#~ msgstr "Імпорт із файлу CSV"
-
-#~ msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-#~ msgstr "Завантажте або CSV-файл для імпортування проектів та груп, або CSV-файл для імпорту користувачів. Одночасно може відбуватися лише один імпорт. Формат повинен бути таким, який був узгоджений. Якщо формат зміниться (більше/менше/різні колонки), зверніться до розробників!"
-
-#~ msgid "Project/group CSV File"
-#~ msgstr "CSV файл проєкту/групи"
-
-#~ msgid "User CSV File"
-#~ msgstr "CSV файл користувача"
-
-#~ msgid "Options"
-#~ msgstr "Варіанти"
-
-#~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-#~ msgstr "Налаштування за замовчуванням для файлу CSV. Змініть їх, тільки якщо ви абсолютно знаєте, що робите!"
-
-#~ msgid "Encoding of the CSV file"
-#~ msgstr "Кодування файлу CSV"
-
-#~ msgid "Delimiter of the CSV file"
-#~ msgstr "Розділювач файлу CSV"
-
-#~ msgid "Upload and Import..."
-#~ msgstr "Завантажити та імпортувати ..."
-
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Імпортувати проєкти та групи"
-
-#~ msgid "Clear results and start a new import!"
-#~ msgstr "Очистіть результати та почніть новий імпорт!"
-
-#~ msgid "CSV Import Results"
-#~ msgstr "Результати імпорту CSV"
-
-#~ msgid "The import has finished. Here are the results:"
-#~ msgstr "Імпорт завершено. Ось результати:"
-
-#~ msgid "Read errors:"
-#~ msgstr "Помилка!"
-
-#~ msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-#~ msgstr "Ці рядки у вашому файлі CSV мали помилки або неправильну кількість колонок і були ПРОІГНОРОВАНІ:"
-
-#~ msgid "Saved items:"
-#~ msgstr "Збережені елементи:"
-
-#~ msgid "Important messages:"
-#~ msgstr "Важливі повідомлення:"
-
-#~ msgid "Errors:"
-#~ msgstr "Помилка!"
-
 #, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Важливі повідомлення:"
+#~ msgid "Conference Administration"
+#~ msgstr "Адміністрація Користувача"
 
-#~ msgid "The CSV file was read successfully and the import is currently running on the server!"
-#~ msgstr "Файл CSV було успішно прочитано, і зараз імпорт виконується на сервері!"
-
-#~ msgid ""
-#~ "This page will show the results when the import is finished.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-#~ "\t\t\t"
-#~ msgstr ""
-#~ "На цій сторінці відображатимуться результати після завершення імпорту.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\t Залежно від кількості імпортованих елементів цей процес може зайняти від кількох секунд до кількох хвилин. Вам не потрібно тримати цю сторінку відкритою. Ми надішлемо вам електронного листа на вашу адресу   <b>\"%(email) s\" </b>, як тільки імпорт завершиться!\n"
-#~ "\t\t\t"
-
-#~ msgid "Progress:"
-#~ msgstr "Прогрес:"
+#~ msgid "Ok"
+#~ msgstr "Ok"
 
 #~ msgid "Active"
 #~ msgstr "Активний"
@@ -8253,13 +8257,11 @@ msgstr "Ваші зміни були збережені."
 #~ "\n"
 #~ "Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das Portallogo links oben.\n"
 #~ "\n"
-#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die "
-#~ "Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
+#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
 #~ "\n"
 #~ "Für alle Gruppen und Projekte, denen du selbstständig beitrittst, ist die Standardeinstellung bei dieser Option \"alle Benachrichtigungen\". Das kannst du dann natürlich ebenso anpassen.\n"
 #~ "\n"
-#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren "
-#~ "Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
+#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
 #~ "\n"
 #~ "Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, melde dich gern den Portaladministrator_innen. \n"
 #~ "\n"
@@ -8272,8 +8274,7 @@ msgstr "Ваші зміни були збережені."
 #~ "\n"
 #~ "Ми раді тому, що ви бажаєте користуватися платформою. Щоб ознайомитися з найважливішими функціями, перегляньте відео (якщо ще не переглядали) на нашій головній сторінці. Щоб перейти на головну сторінку натисніть на логотип порталу зверху зліва.\n"
 #~ "\n"
-#~ "Спершу деяка інформація: зареєструвавшись, ви автоматично стаєте членом спільноти «Форум» де міститься уся інформація порталу. Щоб мати уявлення про те, що тут відбувається, у стандартних налаштуваннях функції «Налаштування сповіщення» у цій спільноті вибрано «Усі сповіщення». Цю функцію ви можете легко налаштувати відповідно до ваших особистих потреб (натисніть у правому верхньому кутку на ваше ім'я). Для того, щоб Ви не отримувати надто багато небажаних сповіщень, стандартні налаштування передбачають \"Жодних "
-#~ "сповіщень\".\n"
+#~ "Спершу деяка інформація: зареєструвавшись, ви автоматично стаєте членом спільноти «Форум» де міститься уся інформація порталу. Щоб мати уявлення про те, що тут відбувається, у стандартних налаштуваннях функції «Налаштування сповіщення» у цій спільноті вибрано «Усі сповіщення». Цю функцію ви можете легко налаштувати відповідно до ваших особистих потреб (натисніть у правому верхньому кутку на ваше ім'я). Для того, щоб Ви не отримувати надто багато небажаних сповіщень, стандартні налаштування передбачають \"Жодних сповіщень\".\n"
 #~ "\n"
 #~ "Для всіх спільнот та проектів, до яких Ви бажаєте долучитися, стандартні налаштування передбачають \"всі сповіщення\". Це Ви також можете змінити потім.\n"
 #~ "\n"

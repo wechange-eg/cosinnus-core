@@ -10,6 +10,7 @@ from django.utils import timezone
 from django.views.generic.edit import CreateView, FormView, UpdateView
 from django.views.generic.list import ListView
 from cosinnus.utils.permissions import check_user_superuser
+from cosinnus.views.mixins.group import RequirePortalManagerMixin
 from django.core.exceptions import PermissionDenied
 from django.views.generic.base import TemplateView
 from cosinnus.forms.administration import (UserWelcomeEmailForm,
@@ -41,14 +42,9 @@ from django.http.response import JsonResponse
 from django.db.models import F
 
 
-class AdministrationView(TemplateView):
+class AdministrationView(RequirePortalManagerMixin, TemplateView):
     
     template_name = 'cosinnus/administration/administration.html'
-    
-    def dispatch(self, request, *args, **kwargs):
-        if not check_user_superuser(request.user):
-            raise PermissionDenied('You do not have permission to access this page.')
-        return super(AdministrationView, self).dispatch(request, *args, **kwargs)
 
 administration = AdministrationView.as_view()
 

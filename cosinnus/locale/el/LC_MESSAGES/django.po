@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-23 10:06+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -438,12 +438,12 @@ msgstr "Ο/η %(sender_name)s σας έχει προσκαλέσει να εγγ
 msgid "Accept invitation"
 msgstr "Αποδοχή πρόσκλησης"
 
-msgid "View invitation"
-msgstr "Προβολή πρόσκλησης"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "Ο/η %(sender_name)s σας προσκάλεσε"
+
+msgid "View invitation"
+msgstr "Προβολή πρόσκλησης"
 
 msgid "New link to the moved project/group"
 msgstr "Νέος σύνδεσμος για το έργο/την ομάδα που μεταφέρθηκε"
@@ -2256,6 +2256,129 @@ msgstr "Διαχείριση"
 msgid "Select a page on the left side."
 msgstr "Επιλέξτε μια σελίδα στην αριστερή πλευρά."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια με προσαρμοσμένες ρυθμίσεις Εξυπηρετητή-BBB"
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
+
+msgid "Overview - All Conferences"
+msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια"
+
+msgid "Past"
+msgstr "Προηγούμενος"
+
+msgid "View Upcoming"
+msgstr "Προβολή Προσεχούς"
+
+msgid "Upcoming"
+msgstr "Προσεχής"
+
+msgid "View Past"
+msgstr "Προβολή Προηγούμενου"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+msgid "Booked"
+msgstr "Με σελιδοδείκτη"
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Η σύσκεψη είναι μόνιμα premium"
+
+msgid "Portal Setting"
+msgstr "Ρύθμιση Πύλης"
+
+msgid "Conference Settings"
+msgstr "Ρυθμίσεις Σύσκεψης"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr "Όχι premium"
+
+msgid "Rooms"
+msgstr "Δωμάτια"
+
+msgid "Start"
+msgstr "Έναρξη"
+
+msgid "running now!"
+msgstr "εκτελείται τώρα!"
+
+msgid "Conference Setting"
+msgstr "Ρύθμιση Σύσκεψης"
+
+msgid "Room"
+msgstr "Δωμάτιο"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Εκδήλωση"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Η σύσκεψη είναι μόνιμα premium"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Η σύσκεψη είναι μόνιμα premium"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε τον χρήστη;"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε το μέλος \"%(name)s\" από την ομάδα;"
+
+msgid "There are no items to show."
+msgstr "Δεν υπάρχουν στοιχεία να προβληθούν."
+
+msgid "BBB"
+msgstr "BBB"
+
+msgid "BBB Premium"
+msgstr "BBB Premium"
+
+msgid "BBB Recording API"
+msgstr ""
+
+msgid "Not set"
+msgstr "Δεν έχει οριστεί"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
+
+msgid "Save"
+msgstr "Αποθήκευση"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Είστε βέβαιοι ότι θέλετε να απορρίψετε το μέλος „%(name)s“;"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Διαγραφή Προφίλ"
+
 msgid "Newsletters"
 msgstr "Newsletter"
 
@@ -2300,6 +2423,16 @@ msgstr "Ανακοινώσεις Πίνακα Χρήστη"
 
 msgid "User Welcome Email"
 msgstr "Email Καλωσορίσματος Χρήστη"
+
+msgid "Conference Overview"
+msgstr "Επισκόπηση Σύσκεψης"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
+
+msgid "Conferences with Custom Settings"
+msgstr "Συσκέψεις με Προσαρμοσμένες Ρυθμίσεις"
 
 msgid "Simple Statistics"
 msgstr "Απλή Στατιστική"
@@ -2359,9 +2492,6 @@ msgstr "Όνομα"
 
 msgid "Lastname"
 msgstr "Επίθετο"
-
-msgid "Save"
-msgstr "Αποθήκευση"
 
 msgid "User Administration"
 msgstr "Διαχείριση Χρήστη"
@@ -3341,140 +3471,6 @@ msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε 
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Διαγραφή αναφερόμενου στοιχείου..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια με προσαρμοσμένες ρυθμίσεις Εξυπηρετητή-BBB"
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
-
-msgid "Overview - All Conferences"
-msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Διαχείριση Χρήστη"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια"
-
-msgid "Past"
-msgstr "Προηγούμενος"
-
-msgid "View Upcoming"
-msgstr "Προβολή Προσεχούς"
-
-msgid "Upcoming"
-msgstr "Προσεχής"
-
-msgid "View Past"
-msgstr "Προβολή Προηγούμενου"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-#, fuzzy
-msgid "Booked"
-msgstr "Με σελιδοδείκτη"
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Η σύσκεψη είναι μόνιμα premium"
-
-msgid "Portal Setting"
-msgstr "Ρύθμιση Πύλης"
-
-msgid "Conference Settings"
-msgstr "Ρυθμίσεις Σύσκεψης"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "Premium"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr "Όχι premium"
-
-msgid "Rooms"
-msgstr "Δωμάτια"
-
-msgid "Start"
-msgstr "Έναρξη"
-
-msgid "running now!"
-msgstr "εκτελείται τώρα!"
-
-msgid "Conference Setting"
-msgstr "Ρύθμιση Σύσκεψης"
-
-msgid "Room"
-msgstr "Δωμάτιο"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Εκδήλωση"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Η σύσκεψη είναι μόνιμα premium"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Η σύσκεψη είναι μόνιμα premium"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε τον χρήστη;"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε το μέλος \"%(name)s\" από την ομάδα;"
-
-msgid "There are no items to show."
-msgstr "Δεν υπάρχουν στοιχεία να προβληθούν."
-
-msgid "BBB"
-msgstr "BBB"
-
-msgid "BBB Premium"
-msgstr "BBB Premium"
-
-msgid "BBB Recording API"
-msgstr ""
-
-msgid "Not set"
-msgstr "Δεν έχει οριστεί"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Είστε βέβαιοι ότι θέλετε να απορρίψετε το μέλος „%(name)s“;"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Διαγραφή Προφίλ"
-
-msgid "Conference Overview"
-msgstr "Επισκόπηση Σύσκεψης"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
-
-msgid "Conferences with Custom Settings"
-msgstr "Συσκέψεις με Προσαρμοσμένες Ρυθμίσεις"
 
 msgid "Rearrange"
 msgstr "Αναδιάταξη"
@@ -5702,8 +5698,8 @@ msgstr "E-Mail από όλους τους συνδρομητές του newslett
 msgid "E-Mails of ALL active users"
 msgstr "E-Mail από ΟΛΟΥΣ τους ενεργούς χρήστες"
 
-msgid "Ok"
-msgstr "Εντάξει"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr "Το WE-Cloud είναι εδώ!"
@@ -7061,6 +7057,98 @@ msgstr ""
 msgid "Jetzt anmelden und mitgestalten"
 msgstr ""
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Τα Έργα και οι Ομάδες Μου"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Η εισαγωγή απέτυχε"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Έργο/ομάδα"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Φόρτωση Αρχείου CSV"
+
+#, fuzzy
+msgid "Options"
+msgstr "Αναλογίες"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Ανεβάστε μια εικόνα."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Τα Έργα και οι Ομάδες Μου"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Επιτυχής εισαγωγή!"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Σφάλμα!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Το όνομά σας"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Σφάλμα!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Το όνομά σας"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Εμφάνιση περισσότερων Έργων"
 
@@ -8014,52 +8102,11 @@ msgid "Your changes have been saved."
 msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
 
 #, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Τα Έργα και οι Ομάδες Μου"
+#~ msgid "Conference Administration"
+#~ msgstr "Διαχείριση Χρήστη"
 
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Η εισαγωγή απέτυχε"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Έργο/ομάδα"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Φόρτωση Αρχείου CSV"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Αναλογίες"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Ανεβάστε μια εικόνα."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Τα Έργα και οι Ομάδες Μου"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Επιτυχής εισαγωγή!"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Σφάλμα!"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Το όνομά σας"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Σφάλμα!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Το όνομά σας"
+#~ msgid "Ok"
+#~ msgstr "Εντάξει"
 
 #~ msgid "Active"
 #~ msgstr "Ενεργός"

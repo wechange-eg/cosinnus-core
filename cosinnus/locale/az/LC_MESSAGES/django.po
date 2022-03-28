@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-23 10:06+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -438,12 +438,12 @@ msgstr "%(sender_name)s sizi %(portal_name)s-də \"%(team_name)s\" -ə qoşulma�
 msgid "Accept invitation"
 msgstr "Dəvəti qəbul edin"
 
-msgid "View invitation"
-msgstr "Dəvətə nəzər salın"
-
 #, fuzzy, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s sizi etiketlədi"
+
+msgid "View invitation"
+msgstr "Dəvətə nəzər salın"
 
 msgid "New link to the moved project/group"
 msgstr "Daşınan layihə/qrupa yeni link"
@@ -2308,6 +2308,139 @@ msgstr "İdarəetmə"
 msgid "Select a page on the left side."
 msgstr "Sol tərəfdə bir səhifə seçin."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "Video konfrans Serveri"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "Səhifədə bax"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Layihəyə baxın"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "Məxfilik parametrləri"
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "fəaliyyətsiz"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Başlanğıc tarixi."
+
+#, fuzzy
+msgid "running now!"
+msgstr "İndi qoşulun!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Room"
+msgstr "Komanda Tipindən"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Tədbir"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Siz həqiqətən \"%(title)s\"-u tərk etmək istəyirsiniz?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Siz həqiqətən „%(name)s“ adlı üzvü komandadan çıxarmaq istəyirsiniz?"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "Hələlik əşyalar yoxdur"
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+msgid "BBB Recording API"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "Təyin edilməyib"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Tədbir Yaradın"
+
+msgid "Save"
+msgstr "Yadda saxla"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Siz həqiqətən „%(name)s“ üzvü üçün dəvətdən imtina etmək istəyirsiniz?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Profili ləğv edin"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2356,6 +2489,18 @@ msgstr "İstifadəçinin İdarə Paneli Elanları"
 
 msgid "User Welcome Email"
 msgstr "İstifadəçinin Salamlama E-poçtu"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Tədbir Yaradın"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Video konfrans Serveri"
 
 msgid "Simple Statistics"
 msgstr "Sadə Statistika"
@@ -2421,9 +2566,6 @@ msgstr "Ad"
 #, fuzzy
 msgid "Lastname"
 msgstr "Soyad"
-
-msgid "Save"
-msgstr "Yadda saxla"
 
 #, fuzzy
 msgid "User Administration"
@@ -3441,152 +3583,6 @@ msgstr "Siz həqiqətən \"%(title)s\" elanını silmək istəyirsiniz?"
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Məruzə olunan elementi sil..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Overview - All Conferences"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "İdarəetmə"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "Səhifədə bax"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Layihəyə baxın"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "Məxfilik parametrləri"
-
-#, fuzzy
-msgid "Conference Settings"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "fəaliyyətsiz"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr ""
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-msgid "Start"
-msgstr "Başlanğıc tarixi."
-
-#, fuzzy
-msgid "running now!"
-msgstr "İndi qoşulun!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Room"
-msgstr "Komanda Tipindən"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Tədbir"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Siz həqiqətən \"%(title)s\"-u tərk etmək istəyirsiniz?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Siz həqiqətən „%(name)s“ adlı üzvü komandadan çıxarmaq istəyirsiniz?"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "Hələlik əşyalar yoxdur"
-
-msgid "BBB"
-msgstr ""
-
-msgid "BBB Premium"
-msgstr ""
-
-msgid "BBB Recording API"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "Təyin edilməyib"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Tədbir Yaradın"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Siz həqiqətən „%(name)s“ üzvü üçün dəvətdən imtina etmək istəyirsiniz?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Profili ləğv edin"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Tədbir Yaradın"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Video konfrans Serveri"
 
 msgid "Rearrange"
 msgstr "Yenidən qruplaşdırın"
@@ -5842,8 +5838,8 @@ msgstr ""
 msgid "E-Mails of ALL active users"
 msgstr ""
 
-msgid "Ok"
-msgstr "Tamam"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr ""
@@ -7229,6 +7225,98 @@ msgstr "Sizi görməyimə şadam! Siz %(portal_name)s portalında Layihələr v�
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "İndi qeydiyyatdan keçin və onu formalaşdırmağa kömək edin"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Layihələrim və qruplarım"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Çeşidləmə sahəsi"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Layihələr/Qruplar"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Layihələr/Qruplar"
+
+#, fuzzy
+msgid "Options"
+msgstr "Nisbətlər"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Şəkil yükləyin."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Layihələrim və qruplarım"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Şifrə sıfırlanması uğurlu oldu"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Xəta!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Mesajlar"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Xəta!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Mesajlar"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Daha çox Layihə göstərin"
 
@@ -8244,52 +8332,11 @@ msgid "Your changes have been saved."
 msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
 
 #, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Layihələrim və qruplarım"
+#~ msgid "Conference Administration"
+#~ msgstr "İdarəetmə"
 
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Çeşidləmə sahəsi"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Layihələr/Qruplar"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Layihələr/Qruplar"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Nisbətlər"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Şəkil yükləyin."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Layihələrim və qruplarım"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Şifrə sıfırlanması uğurlu oldu"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Xəta!"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Mesajlar"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Xəta!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Mesajlar"
+#~ msgid "Ok"
+#~ msgstr "Tamam"
 
 #, fuzzy
 #~ msgid "Active"
@@ -8419,13 +8466,11 @@ msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
 #~ "\n"
 #~ "Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das Portallogo links oben.\n"
 #~ "\n"
-#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte "
-#~ "Emails bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
+#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
 #~ "\n"
 #~ "Für alle Gruppen und Projekte, denen du selbstständig beitrittst, ist die Standardeinstellung bei dieser Option \"alle Benachrichtigungen\". Das kannst du dann natürlich ebenso anpassen.\n"
 #~ "\n"
-#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den "
-#~ "Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
+#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
 #~ "\n"
 #~ "Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, melde dich gern den Portaladministrator_innen. \n"
 #~ "\n"
@@ -8438,13 +8483,11 @@ msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
 #~ "\n"
 #~ "Platformadan istifadə etmək istədiyinizdən məmnunuq. Əgər əvvəllər etməmisinizsə, ən vacib funksiyaları öyrənmək üçün, ön səhifəmizdəki videoyaya baxın. Oraya yuxarı sol küncdəki portal loqotipini klikləyərək daxil ola bilərsiniz.\n"
 #~ "\n"
-#~ "Əvvəlcədən bir məqam diqqətinizə çatdırım: qeydiyyatdan keçməklə avtomatik olaraq portalın bütün məlumatlarının bir araya gəldiyi \"Blog\" qrupunun üzvü olursunuz. Burada baş verənlərin ümumi görünüşünü əldə etmək üçün, məlumat ehtiyaclarınıza görə fərdi olaraq \"Bildiriş parametrləri\" altına qoya bilərsiniz, hansı fəaliyyətlərinizi elektron poçtla bildirmək istərdiniz (sağ üst küncdəki adınızı vurun). Çox sayda istənməyən elektron poçtu almamaq üçün \"bildiriş yoxdur\" "
-#~ "seçimi üçün standart parametr təyin edilmişdir.\n"
+#~ "Əvvəlcədən bir məqam diqqətinizə çatdırım: qeydiyyatdan keçməklə avtomatik olaraq portalın bütün məlumatlarının bir araya gəldiyi \"Blog\" qrupunun üzvü olursunuz. Burada baş verənlərin ümumi görünüşünü əldə etmək üçün, məlumat ehtiyaclarınıza görə fərdi olaraq \"Bildiriş parametrləri\" altına qoya bilərsiniz, hansı fəaliyyətlərinizi elektron poçtla bildirmək istərdiniz (sağ üst küncdəki adınızı vurun). Çox sayda istənməyən elektron poçtu almamaq üçün \"bildiriş yoxdur\" seçimi üçün standart parametr təyin edilmişdir.\n"
 #~ "\n"
 #~ "Özünüz qoşulduğunuz bütün qruplar və layihələr üçün bu seçim üçün standart parametr \"bütün bildirişlər\"dir. Əlbətdə bunu da dəyişə bilərsiniz.\n"
 #~ "\n"
-#~ "Və başqa bir məqamı da bilmək lazımdı: Buradakı portal wechange.de-də çoxun yalnız bir qismidir. Digər portallara baxmaq istəyirsinizsə, sadəcə  buradan girişinizlə daxil ola bilərsiniz. Bir neçə portalda qeydiyyatdan keçdiyiniz təqdirdə üzv olduğunuz qruplar və layihələrdən bütün xəbərləri \"Fəaliyyətlər\" başlığı altında (menyuda solda) tapa bilərsiniz. Müxtəlif loqotipləri klikləyərək portallar arasında keçid edə bilərsiniz. Digər portallarındakı blog qrupunun üzvü olmaq "
-#~ "istəyirsinizsə, sadəcə üzv olmaq üçün müraciət etməlisiniz.\n"
+#~ "Və başqa bir məqamı da bilmək lazımdı: Buradakı portal wechange.de-də çoxun yalnız bir qismidir. Digər portallara baxmaq istəyirsinizsə, sadəcə  buradan girişinizlə daxil ola bilərsiniz. Bir neçə portalda qeydiyyatdan keçdiyiniz təqdirdə üzv olduğunuz qruplar və layihələrdən bütün xəbərləri \"Fəaliyyətlər\" başlığı altında (menyuda solda) tapa bilərsiniz. Müxtəlif loqotipləri klikləyərək portallar arasında keçid edə bilərsiniz. Digər portallarındakı blog qrupunun üzvü olmaq istəyirsinizsə, sadəcə üzv olmaq üçün müraciət etməlisiniz.\n"
 #~ "\n"
 #~ "Suallarınız, texniki təklifləriniz, xətalı mesajlarınız və ya istəkləriniz varsa portal admininə müraciət edin.\n"
 #~ "\n"
