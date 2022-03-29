@@ -242,8 +242,8 @@ def map_search_endpoint(request, filter_group_id=None):
     skip_score_sorting = False
     # if we hae no query-boosted results, use *only* our custom sorting (haystack's is very random)
     if not query:
-        # orderings works for projects as well: just remove the 'and CosinnusSociety in model_list' part from condition!
-        if getattr(settings, 'COSINNUS_ALPHABETICAL_ORDER_FOR_GROUPS', True) and CosinnusSociety in model_list:
+        # order groups, projects and conferences alphabetically
+        if any([params.get(checktype, None) for checktype in settings.COSINNUS_ALPHABETICAL_ORDER_FOR_SEARCH_MODELS_WHEN_SINGLE]) and len(model_list) == 1:
             sort_args = ['title']
         else:
             sort_args = ['-local_boost']

@@ -825,7 +825,8 @@ EXCHANGE_SEARCH_MODEL_NAMES = {
     ExchangeOrganization: 'organizations',
     ExchangeEvent: 'events'
 }
-SEARCH_MODEL_NAMES.update(EXCHANGE_SEARCH_MODEL_NAMES)
+if settings.COSINNUS_EXCHANGE_ENABLED:
+    SEARCH_MODEL_NAMES.update(EXCHANGE_SEARCH_MODEL_NAMES)
 EXCHANGE_SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(EXCHANGE_SEARCH_MODEL_NAMES.items())])
 
 
