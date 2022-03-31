@@ -97,7 +97,6 @@
                                                                 {% if event.from_date or event.note %}
                                                                     <div class="fadedown">
                                                                         <div class="div">
-                                                                            <!-- {% include 'cosinnus_event/common/humanized_event_time.html' with event=event %} -->
                                                                                 {% include 'cosinnus_event/common/humanized_event_time_no_timezone.html' with event=event %}
                                                                             
                                                                             {% if event.note and event.is_description_visible_on_microsite %}
