@@ -130,12 +130,12 @@ def filter_active_users(user_model_qs, filter_on_user_profile_model=False):
         return user_model_qs.exclude(user__is_active=False).\
             exclude(user__last_login__exact=None).\
             exclude(user__email__icontains='__unverified__').\
-            filter(settings__contains='tos_accepted')
+            filter(settings__tos_accepted=True)
     else:
         return user_model_qs.exclude(is_active=False).\
             exclude(last_login__exact=None).\
             exclude(email__icontains='__unverified__').\
-            filter(cosinnus_profile__settings__contains='tos_accepted')
+            filter(cosinnus_profile__settings__tos_accepted=True)
             
 def filter_portal_users(user_model_qs, portal=None):
     """ Filters a QS of ``get_user_model()`` so that only users of this portal remain. """
@@ -412,7 +412,7 @@ def get_user_from_set_password_token(token):
     USER_MODEL = get_user_model()
 
     # TODO this query could be simplified, if json field is imported by postgress library instead of django-jsonfield
-    token_users = USER_MODEL.objects.filter(cosinnus_profile__settings__contains='password_not_set')
+    token_users = USER_MODEL.objects.filter(cosinnus_profile__settings__has_key='password_not_set')
 
     for user in token_users:
         if user.cosinnus_profile.settings.get(PROFILE_SETTING_PASSWORD_NOT_SET, "") == token:

@@ -275,7 +275,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         try:
             name_string = '"{}":"{}"'.format(PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME, username)
             profile = UserProfile.objects.get(
-                settings__contains=name_string,
+                settings__has_key=name_string,
                 scheduled_for_deletion_at__isnull=True
             )
             user = profile.user

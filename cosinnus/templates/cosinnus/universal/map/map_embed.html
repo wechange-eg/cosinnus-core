@@ -58,7 +58,11 @@
 	    <script src="{% static 'js/vendor/moment-timezone-with-data.min.js' %}"></script>
         <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
         <script src="{% static 'js/cosinnus.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
+        {% if request.LANGUAGE_CODE in 'de,en,ru,uk' %}
         <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
+        {% else %}
+        <script src="{% static 'js/locale/en/cosinnus_formats.js' %}?lang=en&v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
+        {% endif %}
         <script src="{% static 'js/client.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
         <link href="{% static 'css/bootstrap3-cosinnus.css' %}" rel="stylesheet">
         <link href="{% static 'css/vendor/font-awesome.min.css' %}" rel="stylesheet">

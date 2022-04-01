@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-01 13:03+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -434,16 +434,16 @@ msgstr ""
 msgid "Accept invitation"
 msgstr "There are no groups."
 
-#, fuzzy
-msgid "View invitation"
-msgstr "There are no groups."
-
 #, fuzzy, python-format
 msgid "%(sender_name)s invited you"
 msgstr ""
 "Hi %(admin_name)s,\n"
 "\n"
 "The user %(user_name)s wants to join project %(team_name)s."
+
+#, fuzzy
+msgid "View invitation"
+msgstr "There are no groups."
 
 #, fuzzy
 msgid "New link to the moved project/group"
@@ -508,6 +508,37 @@ msgstr ""
 
 #, fuzzy, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
+msgstr ""
+"Hi %(admin_name)s,\n"
+"\n"
+"The user %(user_name)s wants to join project %(team_name)s."
+
+msgid "A conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The conference %(object_name)s has been updated"
+msgstr ""
+"Hi %(admin_name)s,\n"
+"\n"
+"The user %(user_name)s wants to join project %(team_name)s."
+
+#, fuzzy
+msgid "You are attending this conference"
+msgstr "Are you sure you want to delete this prject?"
+
+#, fuzzy, python-format
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr ""
+"Hi %(admin_name)s,\n"
+"\n"
+"The user %(user_name)s wants to join project %(team_name)s."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The time of conference %(object_name)s has been updated"
 msgstr ""
 "Hi %(admin_name)s,\n"
 "\n"
@@ -1472,9 +1503,6 @@ msgstr ""
 msgid "Request about your group \"%(group_name)s\""
 msgstr ""
 
-msgid "Now"
-msgstr ""
-
 msgid "Token"
 msgstr ""
 
@@ -2277,6 +2305,131 @@ msgstr "There are no groups."
 msgid "Select a page on the left side."
 msgstr ""
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "My Projects"
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "My Projects"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+msgid "View Upcoming"
+msgstr ""
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Edit Project"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+msgid "Permanently Premium"
+msgstr ""
+
+msgid "Portal Setting"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "Projects"
+
+msgid "Premium active"
+msgstr ""
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+msgid "Start"
+msgstr ""
+
+#, fuzzy
+msgid "running now!"
+msgstr "Join Project"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Project"
+
+#, fuzzy
+msgid "Room"
+msgstr "Project Type"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr ""
+
+msgid "Add new premium block"
+msgstr ""
+
+msgid "Make Permanent Premium"
+msgstr ""
+
+msgid "Remove Permanent Premium"
+msgstr ""
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "There are no groups."
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+msgid "BBB Recording API"
+msgstr ""
+
+msgid "Not set"
+msgstr ""
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Create Project"
+
+msgid "Save"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Do you really want to leave project „%(title)s“?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Project"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2325,6 +2478,18 @@ msgstr ""
 
 msgid "User Welcome Email"
 msgstr ""
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Projects"
 
 msgid "Simple Statistics"
 msgstr ""
@@ -2385,9 +2550,6 @@ msgid "Firstname"
 msgstr ""
 
 msgid "Lastname"
-msgstr ""
-
-msgid "Save"
 msgstr ""
 
 #, fuzzy
@@ -3189,6 +3351,9 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr "There are no groups."
 
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
+
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
 
@@ -3366,6 +3531,12 @@ msgstr ""
 msgid "Length"
 msgstr ""
 
+msgid "minute"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
 msgid "Delete Recording"
 msgstr ""
 
@@ -3375,144 +3546,6 @@ msgstr "Do you really want to leave project „%(title)s“?"
 
 msgid "Delete recorded meeting"
 msgstr ""
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "My Projects"
-
-#, fuzzy
-msgid "Overview - All Conferences"
-msgstr "My Projects"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "There are no groups."
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-msgid "View Upcoming"
-msgstr ""
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Edit Project"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-msgid "Permanently Premium"
-msgstr ""
-
-msgid "Portal Setting"
-msgstr ""
-
-#, fuzzy
-msgid "Conference Settings"
-msgstr "Projects"
-
-msgid "Premium active"
-msgstr ""
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr ""
-
-msgid "Rooms"
-msgstr ""
-
-msgid "Start"
-msgstr ""
-
-#, fuzzy
-msgid "running now!"
-msgstr "Join Project"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Project"
-
-#, fuzzy
-msgid "Room"
-msgstr "Project Type"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr ""
-
-msgid "Add new premium block"
-msgstr ""
-
-msgid "Make Permanent Premium"
-msgstr ""
-
-msgid "Remove Permanent Premium"
-msgstr ""
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Do you really want to leave project „%(title)s“?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Do you really want to leave project „%(title)s“?"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "There are no groups."
-
-msgid "BBB"
-msgstr ""
-
-msgid "BBB Premium"
-msgstr ""
-
-msgid "BBB Recording API"
-msgstr ""
-
-msgid "Not set"
-msgstr ""
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Create Project"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Do you really want to leave project „%(title)s“?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Project"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Create Project"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Create Project"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Projects"
 
 msgid "Rearrange"
 msgstr ""
@@ -5609,7 +5642,7 @@ msgstr ""
 msgid "E-Mails of ALL active users"
 msgstr ""
 
-msgid "Ok"
+msgid "Select the date range for which you would like statistics"
 msgstr ""
 
 msgid "The WE-Cloud is here!"
@@ -6308,6 +6341,9 @@ msgstr ""
 msgid "My Website"
 msgstr ""
 
+msgid "My time zone"
+msgstr ""
+
 msgid "ended"
 msgstr ""
 
@@ -6333,6 +6369,12 @@ msgid "Who are you and what motivates you?"
 msgstr ""
 
 msgid "Tell others something about you!"
+msgstr ""
+
+msgid "Time zone"
+msgstr ""
+
+msgid "This will determine the time and date shown for events on the website and in your notification emails."
 msgstr ""
 
 msgid "Cooperation requests for you"
@@ -7497,6 +7539,9 @@ msgstr ""
 msgid "About Us"
 msgstr ""
 
+msgid "Now"
+msgstr ""
+
 msgid "Question about"
 msgstr ""
 
@@ -8060,6 +8105,10 @@ msgstr ""
 
 msgid "Your changes have been saved."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "There are no groups."
 
 #, fuzzy
 #~ msgid "Active"

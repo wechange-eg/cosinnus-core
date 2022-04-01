@@ -391,9 +391,11 @@ class BigBlueButtonAPI(object):
                 # for a sample recording, see https://docs.bigbluebutton.org/dev/api.html#getrecordings
                 for recording in xml_content.find('recordings'):
                     url = None
+                    duration = None
                     for format_entry in recording.find('playback').findall('format'):
                         if _findtext(format_entry, 'type') == 'presentation':
                             url = _findtext(format_entry, 'url')
+                            duration = _findtext(format_entry, 'length')
                             break
                     # convert timestamps from milliseconds to seconds and to datetimes
                     start_time = get_int_or_None(_findtext(recording, 'startTime'))
@@ -411,7 +413,7 @@ class BigBlueButtonAPI(object):
                         'participants': _findtext(recording, 'participants'),
                         'startTime': start_time,
                         'endTime': end_time,
-                        'duration': end_time - start_time,
+                        'duration': duration,
                     }
                     recording_list.append(json_recording)
                 return recording_list

@@ -1,11 +1,17 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-01 13:03+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -433,12 +439,12 @@ msgstr "%(sender_name)s heeft je uitgenodigd deel te nemen aan “%(team_name)s�
 msgid "Accept invitation"
 msgstr "Uitnodiging accepteren"
 
-msgid "View invitation"
-msgstr "Uitnodiging bekijken"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s heeft je uitgenodigd"
+
+msgid "View invitation"
+msgstr "Uitnodiging bekijken"
 
 msgid "New link to the moved project/group"
 msgstr "Nieuwe link naar verplaatst(e) project/groep"
@@ -491,6 +497,28 @@ msgstr "%(sender_name)s heeft zojuist het idee “%(object_name)s” aangemaakt 
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s heeft zojuist een nieuwe gebruikersaccount aangemaakt op %(portal_name)s!"
+
+msgid "A conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The conference %(object_name)s has been updated"
+msgstr "Je bent getagd in “%(object_name)s” in %(team_name)s."
+
+#, fuzzy
+msgid "You are attending this conference"
+msgstr "Je staat op het punt dit project/deze groep te deactiveren!"
+
+#, fuzzy, python-format
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr "Je bent getagd in “%(object_name)s” in %(team_name)s."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The time of conference %(object_name)s has been updated"
+msgstr "Je bent getagd in “%(object_name)s” in %(team_name)s."
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -1473,10 +1501,6 @@ msgstr "Verzoek voor je project “%(group_name)s”"
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Verzoek voor je groep “%(group_name)s”"
 
-#, fuzzy
-msgid "Now"
-msgstr "Nu"
-
 msgid "Token"
 msgstr "Token"
 
@@ -2273,6 +2297,138 @@ msgstr "Administratie"
 msgid "Select a page on the left side."
 msgstr "Selecteer een pagina aan de linker kant."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+msgid "Overview - Premium Conferences Only"
+msgstr ""
+
+msgid "Overview - All Conferences"
+msgstr ""
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "Op pagina bekijken"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Toon project"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Conferentie is bezig"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "Privacy instellingen"
+
+msgid "Conference Settings"
+msgstr "Conferentie instellingen"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+#, fuzzy
+msgid "Not premium"
+msgstr "Premium"
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Startdatum."
+
+#, fuzzy
+msgid "running now!"
+msgstr "Doe mee!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Conferentie instellingen"
+
+#, fuzzy
+msgid "Room"
+msgstr "Ruimte type"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Evenement"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Conferentie is bezig"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Conferentie is bezig"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Weet u zeker dat je „%(title)s“ wilt verlaten?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Weet je zeker dat je lid “%(name)s” uit het team wilt verwijderen?"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "Er zijn nog geen items"
+
+msgid "BBB"
+msgstr ""
+
+#, fuzzy
+msgid "BBB Premium"
+msgstr "Premium"
+
+msgid "BBB Recording API"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "Niet toegewezen"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Evenement aanmaken"
+
+msgid "Save"
+msgstr "Opslaan"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Weet je zeker dat je lid “%(name)s” wilt weigeren?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Profiel verwijderen"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2320,6 +2476,18 @@ msgstr "Gebruikersdashboard mededelingen"
 
 msgid "User Welcome Email"
 msgstr "Welkomstmail voor gebruikers"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Videoconferentie server"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Evenement aanmaken"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Conferentie instellingen"
 
 msgid "Simple Statistics"
 msgstr "Simpele statistieken"
@@ -2385,9 +2553,6 @@ msgstr "Voornaam"
 #, fuzzy
 msgid "Lastname"
 msgstr "Achternaam"
-
-msgid "Save"
-msgstr "Opslaan"
 
 #, fuzzy
 msgid "User Administration"
@@ -2674,7 +2839,7 @@ msgstr "helptext_3_marketplace"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_4_profile"
-msgstr "helptext_4_profile"
+msgstr "Here you can edit your profile. Upload an avatar, enter your location or a topic you are interested in and confirm the changes by clicking on “Save” on the bottom right-hand side."
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_5_password"
@@ -3200,6 +3365,9 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr "Er zijn nog geen items"
 
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
+
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
 
@@ -3389,6 +3557,12 @@ msgstr "Startdatum."
 msgid "Length"
 msgstr ""
 
+msgid "minute"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
 #, fuzzy
 #| msgid "Delete Account"
 msgid "Delete Recording"
@@ -3401,151 +3575,6 @@ msgstr "Weet je zeker dat je aankondiging “%(title)s” wilt verwijderen?"
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Gerapporteerd item verwijderen…"
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-msgid "Overview - Premium Conferences Only"
-msgstr ""
-
-msgid "Overview - All Conferences"
-msgstr ""
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Administratie"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "Op pagina bekijken"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Toon project"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Conferentie is bezig"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "Privacy instellingen"
-
-msgid "Conference Settings"
-msgstr "Conferentie instellingen"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "Premium"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-#, fuzzy
-msgid "Not premium"
-msgstr "Premium"
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-msgid "Start"
-msgstr "Startdatum."
-
-#, fuzzy
-msgid "running now!"
-msgstr "Doe mee!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Conferentie instellingen"
-
-#, fuzzy
-msgid "Room"
-msgstr "Ruimte type"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Evenement"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Conferentie is bezig"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Conferentie is bezig"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Weet u zeker dat je „%(title)s“ wilt verlaten?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Weet je zeker dat je lid “%(name)s” uit het team wilt verwijderen?"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "Er zijn nog geen items"
-
-msgid "BBB"
-msgstr ""
-
-#, fuzzy
-msgid "BBB Premium"
-msgstr "Premium"
-
-msgid "BBB Recording API"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "Niet toegewezen"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Evenement aanmaken"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Weet je zeker dat je lid “%(name)s” wilt weigeren?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Profiel verwijderen"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Videoconferentie server"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Evenement aanmaken"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Conferentie instellingen"
 
 msgid "Rearrange"
 msgstr "Herschikken"
@@ -5808,8 +5837,8 @@ msgstr "E-mailadressen van alle nieuwsbriefabonnees"
 msgid "E-Mails of ALL active users"
 msgstr "E-mailadressen van ALLE actieve gebruikers"
 
-msgid "Ok"
-msgstr "Oké"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr "De WE-cloud is hier!"
@@ -6487,6 +6516,9 @@ msgstr "Ik wens NIET gecontacteerd te worden voor mogelijke samenwerking!"
 msgid "My Website"
 msgstr "Mijn website"
 
+msgid "My time zone"
+msgstr ""
+
 #, fuzzy
 msgid "ended"
 msgstr "Verzonden"
@@ -6514,6 +6546,14 @@ msgstr "Wie ben je en wat motiveert je?"
 
 msgid "Tell others something about you!"
 msgstr "Vertel anderen iets over jou!"
+
+#, fuzzy
+#| msgid "Timeline"
+msgid "Time zone"
+msgstr "Tijdlijn"
+
+msgid "This will determine the time and date shown for events on the website and in your notification emails."
+msgstr ""
 
 msgid "Cooperation requests for you"
 msgstr "Samenwerkingsverzoeken voor jou"
@@ -7700,6 +7740,10 @@ msgstr "Team beschrijving"
 msgid "About Us"
 msgstr "Over ons"
 
+#, fuzzy
+msgid "Now"
+msgstr "Nu"
+
 msgid "Question about"
 msgstr "Vragen over"
 
@@ -8276,6 +8320,13 @@ msgstr "Je bent momenteel geen lid van %s! Als je wilt, kun je hieronder het lid
 
 msgid "Your changes have been saved."
 msgstr "Je wijzigingen zijn opgeslagen."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "Administratie"
+
+#~ msgid "Ok"
+#~ msgstr "Oké"
 
 #~ msgid "Active"
 #~ msgstr "Actief"

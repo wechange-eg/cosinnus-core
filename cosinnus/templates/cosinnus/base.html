@@ -119,7 +119,11 @@
                 var cosinnus_user_timezone = {% if COSINNUS_USER_TIMEZONE %}"{{ COSINNUS_USER_TIMEZONE }}"{% else %}null{% endif %};
             </script>
             <script src="{% static 'js/cosinnus.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
-            <script src="{% localized_js 'cosinnus_formats.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
+            {% if request.LANGUAGE_CODE in 'de,en,ru,uk' %}
+	        <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
+	        {% else %}
+	        <script src="{% static 'js/locale/en/cosinnus_formats.js' %}?lang=en&v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
+	        {% endif %}
             <script src="{% static 'js/cosinnus.feedback.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
             
             {% include 'cosinnus/common/simplemde_dependencies.html' with lazy=True %}

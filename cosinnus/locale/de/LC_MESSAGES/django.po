@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-01 13:03+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -433,12 +433,12 @@ msgstr "%(sender_name)s hat dich eingeladen, %(team_name)s beizutreten auf %(por
 msgid "Accept invitation"
 msgstr "Einladung annehmen"
 
-msgid "View invitation"
-msgstr "Einladung ansehen"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s hat dich eingeladen"
+
+msgid "View invitation"
+msgstr "Einladung ansehen"
 
 msgid "New link to the moved project/group"
 msgstr "Neue Adresse des Projekts/Gruppe"
@@ -488,6 +488,27 @@ msgstr "%(sender_name)s hat gerade \"%(team_name)s\" erstellt auf %(portal_name)
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s hat gerade einen neuen Benutzeraccount auf %(portal_name)s erstellt!"
+
+msgid "A conference you are attending has been updated"
+msgstr "Eine Tagung, an der Sie teilnehmen, wurde aktualisiert."
+
+#, python-format
+msgid "The conference %(object_name)s has been updated"
+msgstr "Die Tagung “%(object_name)s” wurde aktualisiert."
+
+msgid "You are attending this conference"
+msgstr "Sie nehmen an dieser Tagung teil"
+
+#, python-format
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr "Die Tagung \"%(object_name)s\" wurde aktualisiert."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr "Die Uhrzeit einer Tagung, an der Sie teilnehmen, wurde aktualisiert"
+
+#, python-format
+msgid "The time of conference %(object_name)s has been updated"
+msgstr "Die Uhrzeit der Tagung \"%(object_name)s\" wurde aktualisiert."
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -1436,9 +1457,6 @@ msgstr "Frage zu deinem Projekt \"%(group_name)s\""
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Frage zu deiner Gruppe \"%(group_name)s\""
 
-msgid "Now"
-msgstr "Jetzt"
-
 msgid "Token"
 msgstr "Token"
 
@@ -2215,6 +2233,119 @@ msgstr "Administration"
 msgid "Select a page on the left side."
 msgstr "Wähle links eine Seite aus."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "Überblick - Tagungen, Räume und Workshops mit eigenen BBB-Server-Einstellungen"
+
+msgid "Overview - Premium Conferences Only"
+msgstr "Überblick - Premium-Tagungen"
+
+msgid "Overview - All Conferences"
+msgstr "Überblick - Alle Tagungen"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "Überblick - Tagungen, Räume und Workshops"
+
+msgid "Past"
+msgstr "Vergangenheit"
+
+msgid "View Upcoming"
+msgstr "Aktuelle ansehen"
+
+msgid "Upcoming"
+msgstr "Aktuelle"
+
+msgid "View Past"
+msgstr "Vergangene ansehen"
+
+msgid "Premium capacity occupancy overview"
+msgstr "Überblick über die Belegung von Premium-Kapazität"
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr "Dieser Kalendar zeigt all die Tagungen in der aktuellen Ansicht, alle Premium-Blöcke, die momentan für die Tagungen gebucht sind, sowie die gesamte Kapazität der bestimmten Premium-Servers."
+
+msgid "Booked"
+msgstr "Gebucht"
+
+msgid "Permanently Premium"
+msgstr "Tagung ist durchgehend Premium"
+
+msgid "Portal Setting"
+msgstr "Portal-Einstellung"
+
+msgid "Conference Settings"
+msgstr "Tagungs-Einstellungen"
+
+msgid "Premium active"
+msgstr "Premium ist aktiv"
+
+msgid "Premium inactive, but scheduled"
+msgstr "Premium ist inaktiv, aber geplant"
+
+msgid "Not premium"
+msgstr "Nicht Premium"
+
+msgid "Rooms"
+msgstr "Räume"
+
+msgid "Start"
+msgstr "Beginnt"
+
+msgid "running now!"
+msgstr "läuft gerade!"
+
+msgid "Conference Setting"
+msgstr "Tagungs-Einstellungen"
+
+msgid "Room"
+msgstr "Raum"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Veranstaltung"
+
+msgid "Add new premium block"
+msgstr "Neuen Premiumblock hinzufügen"
+
+msgid "Make Permanent Premium"
+msgstr "Tagung zu durchgehend Premium ändern"
+
+msgid "Remove Permanent Premium"
+msgstr "Tagung zu nicht mehr durchgehend Premium ändern"
+
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Möchtest du diese Tagung wirklich als durchgehend Premium markieren?"
+
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Möchtest du diese Tagung wirklich zu nicht mehr durchgehend Premium ändern?"
+
+msgid "There are no items to show."
+msgstr "Keine Inhalte vorhanden."
+
+msgid "BBB"
+msgstr "BBB"
+
+msgid "BBB Premium"
+msgstr "BBB-Premium"
+
+msgid "BBB Recording API"
+msgstr "BBB Aufnahme-API"
+
+msgid "Not set"
+msgstr "Nicht eingestellt"
+
+msgid "Add Premium Block to Conferences"
+msgstr "Premiumblock zu Tagung hinzufügen"
+
+msgid "Save"
+msgstr "Speichern"
+
+#, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Möchtest du diesen Block wirklich von \"%(name)s\" entfernen?"
+
+msgid "Delete Premium Block"
+msgstr "Premiumblock löschen"
+
 msgid "Newsletters"
 msgstr "Newsletter"
 
@@ -2259,6 +2390,15 @@ msgstr "Benutzerdashboard-Ankündigungen"
 
 msgid "User Welcome Email"
 msgstr "Willkommens-E-Mail für neue Benutzer"
+
+msgid "Conference Overview"
+msgstr "Tagungs-Überblick"
+
+msgid "Premium Conferences Only"
+msgstr "Nur Premium-Tagungen"
+
+msgid "Conferences with Custom Settings"
+msgstr "Tagungen mit eigenen Einstellungen"
 
 msgid "Simple Statistics"
 msgstr "Simple Statistiken"
@@ -2317,9 +2457,6 @@ msgstr "Vorname"
 
 msgid "Lastname"
 msgstr "Nachname"
-
-msgid "Save"
-msgstr "Speichern"
 
 msgid "User Administration"
 msgstr "Benutzerverwaltung"
@@ -3114,6 +3251,9 @@ msgstr "Du kannst von hier aus direkt Tagungsveranstaltungen für Räume erstell
 msgid "There are no rooms yet."
 msgstr "Es sind noch keine Räume vorhanden."
 
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr "BBB-Meetings können von den nicht authentifizierten Benutzern nicht benutzt werden. Registrierung oder Anmeldung sind erforderlich um dem Meeting beizutreten."
+
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr "Beachte: Änderung an einigen dieser Einstellungen kann den Neustart des Meetings fordern bevor die Änderung wirksam wird!"
 
@@ -3274,6 +3414,12 @@ msgstr "Gestartet"
 msgid "Length"
 msgstr "Länge"
 
+msgid "minute"
+msgstr "Minute"
+
+msgid "minutes"
+msgstr "Minuten"
+
 #
 msgid "Delete Recording"
 msgstr "Aufnahme löschen"
@@ -3284,128 +3430,6 @@ msgstr "Möchtest du das aufgezeichnete Meeting \"%(title)s\" wirklich löschen?
 
 msgid "Delete recorded meeting"
 msgstr "Das aufgezeichnete Meeting löschen"
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "Überblick - Tagungen, Räume und Workshops mit eigenen BBB-Server-Einstellungen"
-
-msgid "Overview - Premium Conferences Only"
-msgstr "Überblick - Premium-Tagungen"
-
-msgid "Overview - All Conferences"
-msgstr "Überblick - Alle Tagungen"
-
-msgid "Conference Administration"
-msgstr "Tagungsverwaltung"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "Überblick - Tagungen, Räume und Workshops"
-
-msgid "Past"
-msgstr "Vergangenheit"
-
-msgid "View Upcoming"
-msgstr "Aktuelle ansehen"
-
-msgid "Upcoming"
-msgstr "Aktuelle"
-
-msgid "View Past"
-msgstr "Vergangene ansehen"
-
-msgid "Premium capacity occupancy overview"
-msgstr "Überblick über die Belegung von Premium-Kapazität"
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr "Dieser Kalendar zeigt all die Tagungen in der aktuellen Ansicht, alle Premium-Blöcke, die momentan für die Tagungen gebucht sind, sowie die gesamte Kapazität der bestimmten Premium-Servers."
-
-msgid "Booked"
-msgstr "Gebucht"
-
-msgid "Permanently Premium"
-msgstr "Tagung ist durchgehend Premium"
-
-msgid "Portal Setting"
-msgstr "Portal-Einstellung"
-
-msgid "Conference Settings"
-msgstr "Tagungs-Einstellungen"
-
-msgid "Premium active"
-msgstr "Premium ist aktiv"
-
-msgid "Premium inactive, but scheduled"
-msgstr "Premium ist inaktiv, aber geplant"
-
-msgid "Not premium"
-msgstr "Nicht Premium"
-
-msgid "Rooms"
-msgstr "Räume"
-
-msgid "Start"
-msgstr "Beginnt"
-
-msgid "running now!"
-msgstr "läuft gerade!"
-
-msgid "Conference Setting"
-msgstr "Tagungs-Einstellungen"
-
-msgid "Room"
-msgstr "Raum"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Veranstaltung"
-
-msgid "Add new premium block"
-msgstr "Neuen Premiumblock hinzufügen"
-
-msgid "Make Permanent Premium"
-msgstr "Tagung zu durchgehend Premium ändern"
-
-msgid "Remove Permanent Premium"
-msgstr "Tagung zu nicht mehr durchgehend Premium ändern"
-
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Möchtest du diese Tagung wirklich als durchgehend Premium markieren?"
-
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Möchtest du diese Tagung wirklich zu nicht mehr durchgehend Premium ändern?"
-
-msgid "There are no items to show."
-msgstr "Keine Inhalte vorhanden."
-
-msgid "BBB"
-msgstr "BBB"
-
-msgid "BBB Premium"
-msgstr "BBB-Premium"
-
-msgid "BBB Recording API"
-msgstr "BBB Aufnahme-API"
-
-msgid "Not set"
-msgstr "Nicht eingestellt"
-
-msgid "Add Premium Block to Conferences"
-msgstr "Premiumblock zu Tagung hinzufügen"
-
-#, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Möchtest du diesen Block wirklich von \"%(name)s\" entfernen?"
-
-msgid "Delete Premium Block"
-msgstr "Premiumblock löschen"
-
-msgid "Conference Overview"
-msgstr "Tagungs-Überblick"
-
-msgid "Premium Conferences Only"
-msgstr "Nur Premium-Tagungen"
-
-msgid "Conferences with Custom Settings"
-msgstr "Tagungen mit eigenen Einstellungen"
 
 msgid "Rearrange"
 msgstr "Umsortieren"
@@ -5609,8 +5633,8 @@ msgstr "E-Mails aller Newsletter-Abonnenten"
 msgid "E-Mails of ALL active users"
 msgstr "E-Mails ALLER aktiven Benutzer"
 
-msgid "Ok"
-msgstr "Ok"
+msgid "Select the date range for which you would like statistics"
+msgstr "Wähle einen Zeitraum, für den du den Überblick bekommen möchtest"
 
 msgid "The WE-Cloud is here!"
 msgstr "Die WE-Cloud ist da!"
@@ -6275,6 +6299,9 @@ msgstr "Ich möchte KEINE Anfragen für potentielle Zusammenarbeit erhalten!"
 msgid "My Website"
 msgstr "Meine Webseite"
 
+msgid "My time zone"
+msgstr "Meine Zeitzone"
+
 msgid "ended"
 msgstr "beendet"
 
@@ -6301,6 +6328,12 @@ msgstr "Wer bist du und was motiviert dich?"
 
 msgid "Tell others something about you!"
 msgstr "Erzähle anderen etwas über dich!"
+
+msgid "Time zone"
+msgstr "Zeitzone"
+
+msgid "This will determine the time and date shown for events on the website and in your notification emails."
+msgstr "Dies bestimmt die Uhrzeit und das Datum, die für Veranstaltungen auf der Website und in Benachrichtigungs-E-Mails angezeigt werden."
 
 msgid "Cooperation requests for you"
 msgstr "Kooperationsanfragen an dich"
@@ -7414,6 +7447,9 @@ msgstr "Projektbeschreibung"
 msgid "About Us"
 msgstr "Über uns"
 
+msgid "Now"
+msgstr "Jetzt"
+
 msgid "Question about"
 msgstr "Frage zu"
 
@@ -7982,6 +8018,12 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "Conference Administration"
+#~ msgstr "Tagungsverwaltung"
+
+#~ msgid "Ok"
+#~ msgstr "Ok"
 
 #~ msgid "By clicking \"Continue\" you are consenting to be recorded in this video conference."
 #~ msgstr "Indem du auf “Fortsetzen” klickst, stimmst du zu, in dieser Videokonferenz aufgezeichnet werden."

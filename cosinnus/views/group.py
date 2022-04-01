@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 import csv
 import datetime
+import pytz
 import logging
 from builtins import object
 from builtins import zip
@@ -780,8 +781,39 @@ class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin,
         kwargs = super(GroupUpdateView, self).get_form_kwargs()
         kwargs['group'] = self.group
         return kwargs
-    
+
+    def check_fields_changed(self, field_names, form):
+        if self.group.id:
+            form_data = form.cleaned_data.get('obj')
+            obj = CosinnusConference.objects.get(id=self.group.id)
+            for field_name in field_names:
+                form_field_value = form_data.get(field_name)
+                if isinstance(form_field_value, datetime.datetime):
+                    form_field_value = form_field_value.astimezone(pytz.utc)
+                instance_field_value = getattr(obj, field_name)
+                if not form_field_value == instance_field_value:
+                    return True
+        return False
+
     def forms_valid(self, form, inlines):
+        if self.group.__class__.__name__ == 'CosinnusConference':
+            obj = self.group
+            times_changed = self.check_fields_changed(
+                ['from_date', 'to_date'], form)
+            details_changed = self.check_fields_changed(
+                ['name', 'description'], form)
+            if details_changed or (times_changed and details_changed):
+                cosinnus_notifications.attending_conference_changed.send(
+                    sender=self.group, user=self.request.user, obj=obj,
+                    audience=get_user_model().objects.filter(
+                        id__in=self.group.members)
+                )
+            elif times_changed:
+                cosinnus_notifications.attending_conference_time_changed.send(
+                    sender=self.group, user=self.request.user, obj=obj,
+                    audience=get_user_model().objects.filter(
+                        id__in=self.group.members)
+                )
         messages.success(self.request, self.message_success % {'team_type':self.object._meta.verbose_name})
         return super(GroupUpdateView, self).forms_valid(form, inlines)
 

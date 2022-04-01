@@ -40,7 +40,7 @@ from django.db.models.aggregates import Count
 from cosinnus.utils.http import make_csv_response, make_xlsx_response
 from operator import itemgetter
 from cosinnus.utils.permissions import check_user_can_receive_emails,\
-    check_user_superuser
+    check_user_superuser, check_user_portal_manager
 import logging
 from cosinnus.templatetags.cosinnus_tags import textfield
 from annoying.functions import get_object_or_None
@@ -469,7 +469,7 @@ def group_storage_report_csv(request, group_model=None, filename='group-storage-
         Will return a CSV containing infos about all Groups:
             URL, Member-count, Number-of-Projects, Storage-Size-in-MB, Storage-Size-of-Group-and-all-Child-Projects-in-MB
     """
-    if request and not check_user_superuser(request.user):
+    if request and not check_user_superuser(request.user) and not check_user_portal_manager(request.user):
         return HttpResponseForbidden('Not authenticated')
     
     rows = []
@@ -492,7 +492,7 @@ def project_storage_report_csv(request):
         Will return a CSV containing infos about all Projects:
             URL, Member-count, Storage-Size-in-MB
     """
-    if request and not check_user_superuser(request.user):
+    if request and not check_user_superuser(request.user) and not check_user_portal_manager(request.user):
         return HttpResponseForbidden('Not authenticated')
     
     rows = []
@@ -506,7 +506,7 @@ def project_storage_report_csv(request):
 
     
 def user_activity_info(request):
-    if request and not check_user_superuser(request.user):
+    if request and not check_user_superuser(request.user) and not check_user_portal_manager(request.user):
         return HttpResponseForbidden('Not authenticated')
     
     prints = '<h1>User activity of users who logged in at least once, in terms of memberships in projects+groups, sorted by highest, one user per row:</h1><br/></br>'

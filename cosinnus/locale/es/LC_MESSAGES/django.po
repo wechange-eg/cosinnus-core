@@ -1,11 +1,17 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-01 13:03+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -436,12 +442,12 @@ msgstr "%(sender_name)s te ha invitado a participar en \"%(team_name)s\" en %(po
 msgid "Accept invitation"
 msgstr "Aceptar invitación"
 
-msgid "View invitation"
-msgstr "Ver invitación"
-
 #, fuzzy, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s te etiquetó en"
+
+msgid "View invitation"
+msgstr "Ver invitación"
 
 msgid "New link to the moved project/group"
 msgstr "Enlace nuevo al"
@@ -492,6 +498,28 @@ msgstr "%(sender_name)s creó la idea \"%(object_name)s\" en %(portal_name)s!"
 #, fuzzy, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s creó la idea \"%(object_name)s\" en %(portal_name)s!"
+
+msgid "A conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The conference %(object_name)s has been updated"
+msgstr "Has sido etiquetado en \"%(object_name)s\" en %(team_name)s."
+
+#, fuzzy
+msgid "You are attending this conference"
+msgstr "Estas deactivando este proyecto/grupo!"
+
+#, fuzzy, python-format
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr "Has sido etiquetado en \"%(object_name)s\" en %(team_name)s."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The time of conference %(object_name)s has been updated"
+msgstr "Has sido etiquetado en \"%(object_name)s\" en %(team_name)s."
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -1487,10 +1515,6 @@ msgstr "Solicitud sobre tu proyecto \"%(group_name)s\""
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Solicitud sobre tu grupo \"%(group_name)s\""
 
-#, fuzzy
-msgid "Now"
-msgstr "Ahora"
-
 msgid "Token"
 msgstr "Token"
 
@@ -2296,6 +2320,139 @@ msgstr "Administrador"
 msgid "Select a page on the left side."
 msgstr ""
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Todos los proyectos"
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "Todos los proyectos"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "Ver en página"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Ver proyecto"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Solo miembros del grupo"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "Configuración de la privacidad"
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "Proyectos Cosinnus"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "(Inactivo)"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Fecha de comienzo."
+
+#, fuzzy
+msgid "running now!"
+msgstr "Participa ahora!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Proyecto Cosinnus"
+
+#, fuzzy
+msgid "Room"
+msgstr "Del tipo de equipo"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Evento"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Solo miembros del grupo"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Solo miembros del grupo"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Estas seguro de que quieres dejar „%(title)s“?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Estas seguro de que quieres eliminar al miembro „%(name)s“ del equipo?"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "No hay usuarios visibles."
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+msgid "BBB Recording API"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "No asignado"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Crear evento"
+
+msgid "Save"
+msgstr "Guardar"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Estas seguro de que quieres rechazar al miembro „%(name)s“?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Eliminar perfil"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2346,6 +2503,18 @@ msgstr "Página del panel del usario"
 #, fuzzy
 msgid "User Welcome Email"
 msgstr "Texto de bienvenida-email"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Crear evento"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Crear evento"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Proyectos Cosinnus"
 
 msgid "Simple Statistics"
 msgstr "Estadísticas simples"
@@ -2411,9 +2580,6 @@ msgstr "Nombre"
 #, fuzzy
 msgid "Lastname"
 msgstr "Apellido"
-
-msgid "Save"
-msgstr "Guardar"
 
 #, fuzzy
 msgid "User Administration"
@@ -2704,7 +2870,7 @@ msgstr "texto de ayuda_3_mercado"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_4_profile"
-msgstr "texto de ayuda_4_perfil"
+msgstr "Here you can edit your profile. Upload an avatar, enter your location or a topic you are interested in and confirm the changes by clicking on “Save” on the bottom right-hand side."
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_5_password"
@@ -3225,6 +3391,9 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr "No hay usuarios visibles."
 
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
+
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
 
@@ -3415,6 +3584,12 @@ msgstr "Fecha de comienzo."
 msgid "Length"
 msgstr ""
 
+msgid "minute"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
 #, fuzzy
 #| msgid "Delete Account"
 msgid "Delete Recording"
@@ -3427,152 +3602,6 @@ msgstr "Estas seguro de que quieres eliminar la invitación para \"%(title)s\"?"
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Eliminar el item reportado..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Todos los proyectos"
-
-#, fuzzy
-msgid "Overview - All Conferences"
-msgstr "Todos los proyectos"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Administrador"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "Ver en página"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Ver proyecto"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Solo miembros del grupo"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "Configuración de la privacidad"
-
-#, fuzzy
-msgid "Conference Settings"
-msgstr "Proyectos Cosinnus"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "(Inactivo)"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr ""
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-msgid "Start"
-msgstr "Fecha de comienzo."
-
-#, fuzzy
-msgid "running now!"
-msgstr "Participa ahora!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Proyecto Cosinnus"
-
-#, fuzzy
-msgid "Room"
-msgstr "Del tipo de equipo"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Evento"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Solo miembros del grupo"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Solo miembros del grupo"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Estas seguro de que quieres dejar „%(title)s“?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Estas seguro de que quieres eliminar al miembro „%(name)s“ del equipo?"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "No hay usuarios visibles."
-
-msgid "BBB"
-msgstr ""
-
-msgid "BBB Premium"
-msgstr ""
-
-msgid "BBB Recording API"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "No asignado"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Crear evento"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Estas seguro de que quieres rechazar al miembro „%(name)s“?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Eliminar perfil"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Crear evento"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Crear evento"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Proyectos Cosinnus"
 
 msgid "Rearrange"
 msgstr "Reorganizar"
@@ -5838,8 +5867,8 @@ msgstr ""
 msgid "E-Mails of ALL active users"
 msgstr ""
 
-msgid "Ok"
-msgstr "Ok"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr ""
@@ -6547,6 +6576,9 @@ msgstr ""
 msgid "My Website"
 msgstr "Mi página web"
 
+msgid "My time zone"
+msgstr ""
+
 #, fuzzy
 msgid "ended"
 msgstr "Enviado"
@@ -6573,6 +6605,13 @@ msgid "Who are you and what motivates you?"
 msgstr "¿Quién eres y que te motiva?"
 
 msgid "Tell others something about you!"
+msgstr ""
+
+#, fuzzy
+msgid "Time zone"
+msgstr "Hora"
+
+msgid "This will determine the time and date shown for events on the website and in your notification emails."
 msgstr ""
 
 msgid "Cooperation requests for you"
@@ -7788,6 +7827,10 @@ msgstr "Descripción del equipo"
 msgid "About Us"
 msgstr "Sobre nosotros"
 
+#, fuzzy
+msgid "Now"
+msgstr "Ahora"
+
 msgid "Question about"
 msgstr "Pregunta sobre"
 
@@ -8370,6 +8413,13 @@ msgstr "Actualmente no eres miembro de %s! Si lo deseas, puedes solicitar para s
 
 msgid "Your changes have been saved."
 msgstr "Se han guardado los cambios."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "Administrador"
+
+#~ msgid "Ok"
+#~ msgstr "Ok"
 
 #, fuzzy
 #~ msgid "Active"

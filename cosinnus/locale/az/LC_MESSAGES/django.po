@@ -1,11 +1,17 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-01 13:03+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: az\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -432,12 +438,12 @@ msgstr "%(sender_name)s sizi %(portal_name)s-də \"%(team_name)s\" -ə qoşulma�
 msgid "Accept invitation"
 msgstr "Dəvəti qəbul edin"
 
-msgid "View invitation"
-msgstr "Dəvətə nəzər salın"
-
 #, fuzzy, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s sizi etiketlədi"
+
+msgid "View invitation"
+msgstr "Dəvətə nəzər salın"
 
 msgid "New link to the moved project/group"
 msgstr "Daşınan layihə/qrupa yeni link"
@@ -489,6 +495,28 @@ msgstr "%(sender_name)s %(portal_name)s portalında hazırda \"%(object_name)s\"
 #, fuzzy, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s %(portal_name)s portalında hazırda \"%(object_name)s\" ideayasını yaratdı!"
+
+msgid "A conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The conference %(object_name)s has been updated"
+msgstr "Siz %(object_name)s\"da/də %(team_name)s komandasında etiketləndiniz."
+
+#, fuzzy
+msgid "You are attending this conference"
+msgstr "Bu layihəni/qrupu ləğv etmək üzrəsiniz!"
+
+#, fuzzy, python-format
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr "Siz %(object_name)s\"da/də %(team_name)s komandasında etiketləndiniz."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The time of conference %(object_name)s has been updated"
+msgstr "Siz %(object_name)s\"da/də %(team_name)s komandasında etiketləndiniz."
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -1482,10 +1510,6 @@ msgstr "Sizin \"%(group_name)s\" layihəniz haqqında sorğu"
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Sizin \"%(group_name)s\" qrupunuz haqqında sorğu"
 
-#, fuzzy
-msgid "Now"
-msgstr "İndi"
-
 msgid "Token"
 msgstr "Marker"
 
@@ -2284,6 +2308,139 @@ msgstr "İdarəetmə"
 msgid "Select a page on the left side."
 msgstr "Sol tərəfdə bir səhifə seçin."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "Video konfrans Serveri"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "Səhifədə bax"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Layihəyə baxın"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "Məxfilik parametrləri"
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "fəaliyyətsiz"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Başlanğıc tarixi."
+
+#, fuzzy
+msgid "running now!"
+msgstr "İndi qoşulun!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Room"
+msgstr "Komanda Tipindən"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Tədbir"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Siz həqiqətən \"%(title)s\"-u tərk etmək istəyirsiniz?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Siz həqiqətən „%(name)s“ adlı üzvü komandadan çıxarmaq istəyirsiniz?"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "Hələlik əşyalar yoxdur"
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+msgid "BBB Recording API"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "Təyin edilməyib"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Tədbir Yaradın"
+
+msgid "Save"
+msgstr "Yadda saxla"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Siz həqiqətən „%(name)s“ üzvü üçün dəvətdən imtina etmək istəyirsiniz?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Profili ləğv edin"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2332,6 +2489,18 @@ msgstr "İstifadəçinin İdarə Paneli Elanları"
 
 msgid "User Welcome Email"
 msgstr "İstifadəçinin Salamlama E-poçtu"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Tədbir Yaradın"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Video konfrans Serveri"
 
 msgid "Simple Statistics"
 msgstr "Sadə Statistika"
@@ -2397,9 +2566,6 @@ msgstr "Ad"
 #, fuzzy
 msgid "Lastname"
 msgstr "Soyad"
-
-msgid "Save"
-msgstr "Yadda saxla"
 
 #, fuzzy
 msgid "User Administration"
@@ -2686,7 +2852,7 @@ msgstr "helptext_3_marketplace"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_4_profile"
-msgstr "helptext_4_profile"
+msgstr "Here you can edit your profile. Upload an avatar, enter your location or a topic you are interested in and confirm the changes by clicking on “Save” on the bottom right-hand side."
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_5_password"
@@ -3207,6 +3373,9 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr "Hələlik əşyalar yoxdur"
 
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
+
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
 
@@ -3396,6 +3565,12 @@ msgstr "Başlanğıc tarixi."
 msgid "Length"
 msgstr ""
 
+msgid "minute"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
 #, fuzzy
 #| msgid "Delete Account"
 msgid "Delete Recording"
@@ -3408,152 +3583,6 @@ msgstr "Siz həqiqətən \"%(title)s\" elanını silmək istəyirsiniz?"
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Məruzə olunan elementi sil..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Overview - All Conferences"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "İdarəetmə"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "Səhifədə bax"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Layihəyə baxın"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "Məxfilik parametrləri"
-
-#, fuzzy
-msgid "Conference Settings"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "fəaliyyətsiz"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr ""
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-msgid "Start"
-msgstr "Başlanğıc tarixi."
-
-#, fuzzy
-msgid "running now!"
-msgstr "İndi qoşulun!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Room"
-msgstr "Komanda Tipindən"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Tədbir"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Siz həqiqətən \"%(title)s\"-u tərk etmək istəyirsiniz?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Siz həqiqətən „%(name)s“ adlı üzvü komandadan çıxarmaq istəyirsiniz?"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "Hələlik əşyalar yoxdur"
-
-msgid "BBB"
-msgstr ""
-
-msgid "BBB Premium"
-msgstr ""
-
-msgid "BBB Recording API"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "Təyin edilməyib"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Tədbir Yaradın"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Siz həqiqətən „%(name)s“ üzvü üçün dəvətdən imtina etmək istəyirsiniz?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Profili ləğv edin"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Video konfrans Serveri"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Tədbir Yaradın"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Video konfrans Serveri"
 
 msgid "Rearrange"
 msgstr "Yenidən qruplaşdırın"
@@ -5809,8 +5838,8 @@ msgstr ""
 msgid "E-Mails of ALL active users"
 msgstr ""
 
-msgid "Ok"
-msgstr "Tamam"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr ""
@@ -6495,6 +6524,9 @@ msgstr "Potensial əməkdaşlıq üçün əlaqə qurmaq İSTƏMİRƏM!"
 msgid "My Website"
 msgstr "Vebsaytım"
 
+msgid "My time zone"
+msgstr ""
+
 #, fuzzy
 msgid "ended"
 msgstr "Göndərilib"
@@ -6522,6 +6554,14 @@ msgstr "Sən kimsən və səni nə motivasiya edir?"
 
 msgid "Tell others something about you!"
 msgstr "Başqalarına sizin haqqınızda bir şey söyləyin!"
+
+#, fuzzy
+#| msgid "Timeline"
+msgid "Time zone"
+msgstr "İş qrafiki"
+
+msgid "This will determine the time and date shown for events on the website and in your notification emails."
+msgstr ""
 
 msgid "Cooperation requests for you"
 msgstr "Sizin üçün əməkdaşlıq istəkləri"
@@ -7711,6 +7751,10 @@ msgstr "Komandanın Təsviri"
 msgid "About Us"
 msgstr "Haqqımızda"
 
+#, fuzzy
+msgid "Now"
+msgstr "İndi"
+
 msgid "Question about"
 msgstr "Haqqında sual"
 
@@ -8286,6 +8330,13 @@ msgstr "Hal-hazırda %s üzvü deyilsiniz! Əgər arzu edirsinizsə, Siz aşağ�
 
 msgid "Your changes have been saved."
 msgstr "Sizin dəyişikliklər yaddaşda saxlanıldı."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "İdarəetmə"
+
+#~ msgid "Ok"
+#~ msgstr "Tamam"
 
 #, fuzzy
 #~ msgid "Active"

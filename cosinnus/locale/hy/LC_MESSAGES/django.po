@@ -1,11 +1,17 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-01 13:03+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: hy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -432,12 +438,12 @@ msgstr "%(sender_name)s-ը հրավիրել է ձեզ միանալ %(team_name)s
 msgid "Accept invitation"
 msgstr "Ընդունել հրավերը"
 
-msgid "View invitation"
-msgstr "Տեսնել հրավերը"
-
 #, fuzzy, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s-ը նշել է ձեզ"
+
+msgid "View invitation"
+msgstr "Տեսնել հրավերը"
 
 msgid "New link to the moved project/group"
 msgstr "Տեղափոխված նախագծի/ խմբի նոր հղում"
@@ -489,6 +495,28 @@ msgstr "%(sender_name)s-ը ստեղծեց \"%(object_name)s\" գաղափար %(p
 #, fuzzy, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s-ը ստեղծեց \"%(object_name)s\" գաղափար %(portal_name)s -ում!"
+
+msgid "A conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The conference %(object_name)s has been updated"
+msgstr "Ձեզ նշել են \"%(object_name)s\" -ում %(team_name)s -ում."
+
+#, fuzzy
+msgid "You are attending this conference"
+msgstr "Դուք պատրաստվում եք ապաակտիվացնել այս նախագիծը/ խումբը!"
+
+#, fuzzy, python-format
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr "Ձեզ նշել են \"%(object_name)s\" -ում %(team_name)s -ում."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The time of conference %(object_name)s has been updated"
+msgstr "Ձեզ նշել են \"%(object_name)s\" -ում %(team_name)s -ում."
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -1482,10 +1510,6 @@ msgstr "Հայց ձեր նախագծի վերաբերյալ \"%(group_name)s\""
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Հայց ձեր խմբի վերաբերյալ \"%(group_name)s\""
 
-#, fuzzy
-msgid "Now"
-msgstr "Հիմա"
-
 msgid "Token"
 msgstr "Թոքեն"
 
@@ -2284,6 +2308,139 @@ msgstr "Ադմինիստրացիա"
 msgid "Select a page on the left side."
 msgstr "Ընտրեք էջը ձախ կողմում."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "Դիտել էջում"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Դիտել նախագիծը"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "Գաղտնիության կարգավորումներ"
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "ոչ ակտիվ"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Մեկնարկի ամսաթիվ."
+
+#, fuzzy
+msgid "running now!"
+msgstr "Միացիր հիմա!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Room"
+msgstr "Թիմի տեսակից"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Իրադարձություն"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Արդյո՞ք ցանկանում եք լքել „%(title)s“-ը?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Ցանկանու՞մ եք արդյոք „%(name)s“ անդամին ջնջել թիմից?"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "Դեռ նյութեր չկան"
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+msgid "BBB Recording API"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "Նշանակված չէ"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Ստեղծել Իրադարձություն"
+
+msgid "Save"
+msgstr "Պահպանել"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Ցանկանու՞մ եք արդյոք մերժել անդամ „%(name)s“ -ին?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Ջնջել Պրոֆիլը"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2332,6 +2489,18 @@ msgstr "Օգտատիրոջ կառավարման վահանակի հայտարա�
 
 msgid "User Welcome Email"
 msgstr "Օգտատիրոջ Ողջույնի էլ․ նամակ"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Ստեղծել Իրադարձություն"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
 msgid "Simple Statistics"
 msgstr "Պարզ վիճակագրություն"
@@ -2397,9 +2566,6 @@ msgstr "Անուն"
 #, fuzzy
 msgid "Lastname"
 msgstr "Ազգանուն"
-
-msgid "Save"
-msgstr "Պահպանել"
 
 #, fuzzy
 msgid "User Administration"
@@ -2686,7 +2852,7 @@ msgstr "helptext_3_marketplace"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_4_profile"
-msgstr "helptext_4_profile"
+msgstr "Here you can edit your profile. Upload an avatar, enter your location or a topic you are interested in and confirm the changes by clicking on “Save” on the bottom right-hand side."
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_5_password"
@@ -3207,6 +3373,9 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr "Դեռ նյութեր չկան"
 
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
+
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
 
@@ -3396,6 +3565,12 @@ msgstr "Մեկնարկի ամսաթիվ."
 msgid "Length"
 msgstr ""
 
+msgid "minute"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
 #, fuzzy
 #| msgid "Delete Account"
 msgid "Delete Recording"
@@ -3408,152 +3583,6 @@ msgstr "Արդյո՞ք ցանկանում եք ջնջել \"%(title)s\" հայտ
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Ջնջել հաղորդված նյութը ..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Overview - All Conferences"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Ադմինիստրացիա"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "Դիտել էջում"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Դիտել նախագիծը"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "Գաղտնիության կարգավորումներ"
-
-#, fuzzy
-msgid "Conference Settings"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "ոչ ակտիվ"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr ""
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-msgid "Start"
-msgstr "Մեկնարկի ամսաթիվ."
-
-#, fuzzy
-msgid "running now!"
-msgstr "Միացիր հիմա!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Room"
-msgstr "Թիմի տեսակից"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Իրադարձություն"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Արդյո՞ք ցանկանում եք լքել „%(title)s“-ը?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Ցանկանու՞մ եք արդյոք „%(name)s“ անդամին ջնջել թիմից?"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "Դեռ նյութեր չկան"
-
-msgid "BBB"
-msgstr ""
-
-msgid "BBB Premium"
-msgstr ""
-
-msgid "BBB Recording API"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "Նշանակված չէ"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Ստեղծել Իրադարձություն"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Ցանկանու՞մ եք արդյոք մերժել անդամ „%(name)s“ -ին?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Ջնջել Պրոֆիլը"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Ստեղծել Իրադարձություն"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
 msgid "Rearrange"
 msgstr "Վերադասավորվել"
@@ -5807,8 +5836,8 @@ msgstr ""
 msgid "E-Mails of ALL active users"
 msgstr ""
 
-msgid "Ok"
-msgstr "Ok"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr ""
@@ -6493,6 +6522,9 @@ msgstr "Ես չեմ ցանկանում ինձ հետ կապնվեն՝ հնարա
 msgid "My Website"
 msgstr "Իմ վեբ կայքը"
 
+msgid "My time zone"
+msgstr ""
+
 #, fuzzy
 msgid "ended"
 msgstr "Gesendet"
@@ -6520,6 +6552,14 @@ msgstr "Ո՞վ եք դուք և ի՞նչն է ձեզ ոգեշնչում?"
 
 msgid "Tell others something about you!"
 msgstr "Պատմեք մյուսներին որևէ բան ձեր մասին!"
+
+#, fuzzy
+#| msgid "Timeline"
+msgid "Time zone"
+msgstr "Նորությունների էջ"
+
+msgid "This will determine the time and date shown for events on the website and in your notification emails."
+msgstr ""
 
 msgid "Cooperation requests for you"
 msgstr "Համագործակցության հայցեր ձեզ համար"
@@ -7711,6 +7751,10 @@ msgstr "Թիմի նկարագրություն"
 msgid "About Us"
 msgstr "Մեր մասին"
 
+#, fuzzy
+msgid "Now"
+msgstr "Հիմա"
+
 msgid "Question about"
 msgstr "Հարց"
 
@@ -8286,6 +8330,13 @@ msgstr "Դուք ներկայումս %s- ի անդամ չեք: Եթե ցանկ�
 
 msgid "Your changes have been saved."
 msgstr "Ձեր փոփոխությունները պահպանվել են."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "Ադմինիստրացիա"
+
+#~ msgid "Ok"
+#~ msgstr "Ok"
 
 #, fuzzy
 #~ msgid "Active"
