@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-24 11:06+0100\n"
+"POT-Creation-Date: 2022-03-09 16:30+0100\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -347,9 +347,6 @@ msgstr ""
 
 #, python-format
 msgid "%(event)s (state unknown)"
-msgstr ""
-
-msgid "Now"
 msgstr ""
 
 msgctxt "the subject"
@@ -1026,6 +1023,9 @@ msgid "Add event to your calendar"
 msgstr ""
 
 msgid "Copy this iCal-link into your calendar application to import this event:"
+msgstr ""
+
+msgid "Please register or login to join the video conference for this event"
 msgstr ""
 
 msgid "Start/join video conference for this event"

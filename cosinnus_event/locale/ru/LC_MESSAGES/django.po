@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-24 11:06+0100\n"
-"PO-Revision-Date: 2022-02-24 11:10+0100\n"
+"POT-Creation-Date: 2022-03-09 16:30+0100\n"
+"PO-Revision-Date: 2022-03-09 16:37+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -363,9 +363,6 @@ msgstr "%(event)s (завершено)"
 #, python-format
 msgid "%(event)s (state unknown)"
 msgstr "%(event)s (неизвестный статус)"
-
-msgid "Now"
-msgstr "Сейчас"
 
 msgctxt "the subject"
 msgid "Votes"
@@ -1159,6 +1156,9 @@ msgstr "Добавить мероприятие в Ваш календарь"
 msgid "Copy this iCal-link into your calendar application to import this event:"
 msgstr "Скопируйте эту ссылку iCal в Ваш календарь, чтобы импортировать это событие:"
 
+msgid "Please register or login to join the video conference for this event"
+msgstr "Пожалуйста, зарегистрируйтесь или войдите, чтобы присоединиться к видеоконференции этого мероприятия"
+
 msgid "Start/join video conference for this event"
 msgstr "Начать/присоединиться к BBB-видеоконференции этого события"
 
@@ -1285,6 +1285,9 @@ msgstr "Ваш комментарий добавлен."
 
 msgid "Your comment was deleted successfully."
 msgstr "Ваш комментарий удален."
+
+#~ msgid "Now"
+#~ msgstr "Сейчас"
 
 #~ msgid "Event is confidential"
 #~ msgstr "Событие конфиденциально"

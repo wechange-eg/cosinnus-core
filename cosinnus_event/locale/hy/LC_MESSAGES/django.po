@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-24 11:06+0100\n"
+"POT-Creation-Date: 2022-03-09 16:30+0100\n"
 "Language: hy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -348,10 +348,6 @@ msgstr "%(event)s (արխիվացված)"
 #, fuzzy, python-format
 msgid "%(event)s (state unknown)"
 msgstr "%(event)s (սպասվող)"
-
-#, fuzzy
-msgid "Now"
-msgstr "Ոչ"
 
 msgctxt "the subject"
 msgid "Votes"
@@ -1152,6 +1148,10 @@ msgid "Copy this iCal-link into your calendar application to import this event:"
 msgstr "Պատճենեք այս iCal- ի հղումը ձեր օրացուցի ծրագրում ընթացիկ իրադարձությունները ներմուծելու համար:"
 
 #, fuzzy
+msgid "Please register or login to join the video conference for this event"
+msgstr "Սկսել/միանալ վիդեո զրույցին այս իրադարձության համար"
+
+#, fuzzy
 msgid "Start/join video conference for this event"
 msgstr "Սկսել/միանալ վիդեո զրույցին այս իրադարձության համար"
 
@@ -1281,6 +1281,10 @@ msgstr "Ձեր մեկնաբանությունը հաջողությամբ ավե�
 
 msgid "Your comment was deleted successfully."
 msgstr "Ձեր մեկնաբանությունը հաջողությամբ ջնջվել է."
+
+#, fuzzy
+#~ msgid "Now"
+#~ msgstr "Ոչ"
 
 #~ msgid "%(sender_name)s"
 #~ msgstr "%(sender_name)s"

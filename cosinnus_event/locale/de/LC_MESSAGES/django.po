@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-24 11:06+0100\n"
+"POT-Creation-Date: 2022-03-09 16:30+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -355,9 +355,6 @@ msgstr "%(event)s (Abgeschlossen)"
 #, python-format
 msgid "%(event)s (state unknown)"
 msgstr "%(event)s (Status unbekannt)"
-
-msgid "Now"
-msgstr "Jetzt"
 
 msgctxt "the subject"
 msgid "Votes"
@@ -1144,6 +1141,9 @@ msgstr "Veranstaltung in meinen Kalender einfügen"
 msgid "Copy this iCal-link into your calendar application to import this event:"
 msgstr "Kopiere diesen iCal-Link in deinen Terminkalender, um die Veranstaltung zu importieren und anzuzeigen:"
 
+msgid "Please register or login to join the video conference for this event"
+msgstr "Bitte registriere dich oder logge dich ein, um dem BBB-Meeting dieser Veranstaltung beizutreten"
+
 msgid "Start/join video conference for this event"
 msgstr "Videokonferenz starten/beitreten"
 
@@ -1270,6 +1270,9 @@ msgstr "Dein Kommentar wurde erfolgreich hinzugefügt."
 
 msgid "Your comment was deleted successfully."
 msgstr "Dein Kommentar wurde erfolgreich gelöscht."
+
+#~ msgid "Now"
+#~ msgstr "Jetzt"
 
 #~ msgid "Check this to prevent public viewing of the event's description"
 #~ msgstr "Wähle dies aus, um die öffentliche Anzeige der Veranstaltungsbeschreibung zu verhindern"

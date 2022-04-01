@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-24 11:06+0100\n"
+"POT-Creation-Date: 2022-03-09 16:30+0100\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -354,10 +354,6 @@ msgstr "%(event)s (archived)"
 #, fuzzy, python-format
 msgid "%(event)s (state unknown)"
 msgstr "%(event)s (pending)"
-
-#, fuzzy
-msgid "Now"
-msgstr "No"
 
 msgctxt "the subject"
 msgid "Votes"
@@ -1149,6 +1145,9 @@ msgstr ""
 msgid "Copy this iCal-link into your calendar application to import this event:"
 msgstr "Copia este enlace-iCal a tu aplicación de calendariopara importar eventos actuales:"
 
+msgid "Please register or login to join the video conference for this event"
+msgstr ""
+
 msgid "Start/join video conference for this event"
 msgstr ""
 
@@ -1278,6 +1277,10 @@ msgstr "Tu comentario ha sido añadido exitosamente."
 
 msgid "Your comment was deleted successfully."
 msgstr "Tu comentario ha sido eliminado exitosamente."
+
+#, fuzzy
+#~ msgid "Now"
+#~ msgstr "No"
 
 #~ msgid "%(sender_name)s"
 #~ msgstr "%(sender_name)s"

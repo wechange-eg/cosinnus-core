@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-24 11:06+0100\n"
+"POT-Creation-Date: 2022-03-09 16:30+0100\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -348,10 +348,6 @@ msgstr "%(event)s (αρχειοθετήθηκε)"
 #, python-format
 msgid "%(event)s (state unknown)"
 msgstr "%(event)s (άγνωστη κατάσταση)"
-
-#, fuzzy
-msgid "Now"
-msgstr "Όχι"
 
 msgctxt "the subject"
 msgid "Votes"
@@ -1145,6 +1141,10 @@ msgid "Copy this iCal-link into your calendar application to import this event:"
 msgstr "Αντιγράψτε αυτό τον σύνδεσμο iCal στην εφαρμογή ημερολογίου για να εισάγετε τις τρέχουσες εκδηλώσεις:"
 
 #, fuzzy
+msgid "Please register or login to join the video conference for this event"
+msgstr "Έναρξη/συμμετοχή σε συνομιλία με βίντεο για αυτή την εκδήλωση"
+
+#, fuzzy
 msgid "Start/join video conference for this event"
 msgstr "Έναρξη/συμμετοχή σε συνομιλία με βίντεο για αυτή την εκδήλωση"
 
@@ -1274,6 +1274,10 @@ msgstr "Το σχόλιό σας προστέθηκε με επιτυχία."
 
 msgid "Your comment was deleted successfully."
 msgstr "Το σχόλιό σας διαγράφηκε με επιτυχία."
+
+#, fuzzy
+#~ msgid "Now"
+#~ msgstr "Όχι"
 
 #~ msgid "Example: https://www.youtube.com/watch?v=12345"
 #~ msgstr "Παράδειγμα: https://www.youtube.com/watch?v=12345"

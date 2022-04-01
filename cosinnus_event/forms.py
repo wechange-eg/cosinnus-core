@@ -65,7 +65,6 @@ class _EventForm(TranslatedFieldsFormMixin, GroupKwargModelFormMixin, UserKwargM
                 custom_choices += [
                     (Event.FAIRMEETING, _('Fairmeeting')),
                 ]
-                self.fields['video_conference_type'].initial = Event.FAIRMEETING
             self.fields['video_conference_type'].choices = custom_choices
     
 class EventForm(DispatchConferenceSettingsMultiformMixin, 

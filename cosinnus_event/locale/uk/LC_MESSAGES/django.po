@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-24 11:06+0100\n"
+"POT-Creation-Date: 2022-03-09 16:30+0100\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -354,9 +354,6 @@ msgstr "%(event)s (заархівовано)"
 #, python-format
 msgid "%(event)s (state unknown)"
 msgstr "%(event)s (стан невідомий)"
-
-msgid "Now"
-msgstr "Зараз"
 
 msgctxt "the subject"
 msgid "Votes"
@@ -1158,6 +1155,10 @@ msgid "Copy this iCal-link into your calendar application to import this event:"
 msgstr "Скопіюйте це посилання iCal у ваш календар, щоб імпортувати поточні заходи:"
 
 #, fuzzy
+msgid "Please register or login to join the video conference for this event"
+msgstr "Почати/приєднатися до відеочату цієї події"
+
+#, fuzzy
 msgid "Start/join video conference for this event"
 msgstr "Почати/приєднатися до відеочату цієї події"
 
@@ -1287,6 +1288,9 @@ msgstr "Ваш коментар успішно додано."
 
 msgid "Your comment was deleted successfully."
 msgstr "Ваш коментар успішно видалено."
+
+#~ msgid "Now"
+#~ msgstr "Зараз"
 
 #, fuzzy
 #~ msgid "Check this to prevent public viewing of the event's description"

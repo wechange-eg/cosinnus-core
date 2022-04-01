@@ -408,14 +408,18 @@
 
 {% if SETTINGS.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and event.video_conference_type == 1 or COSINNUS_CURRENT_PORTAL.video_conference_server and event.video_conference_type == 2 %}
     <div class="white-content">
-        <button type="button" class="btn btn-emphasized w100 pull-left start-video-conference">
+        <button type="button" {% if not user.is_authenticated and event.video_conference_type == 1 %}disabled{% endif %} class="btn btn-emphasized w100 pull-left start-video-conference">
             <ul class="media-list">
                 <li class="media">
                     <span class="pull-left">
                         <i class="fa fa-fw fa-eye"></i>
                     </span>
                     <div class="media-body">
-						{% trans "Start/join video conference for this event" %}
+						{% if not user.is_authenticated and event.video_conference_type == 1 %}
+							{% trans "Please register or login to join the video conference for this event" %}
+						{% else %}
+							{% trans "Start/join video conference for this event" %}
+						{% endif %}
                     </div>
                 </li>
             </ul>
