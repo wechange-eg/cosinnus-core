@@ -76,6 +76,11 @@ LOGIN_URL = '/login/'
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
+# PATH SETTINGS
+BASE_PATH = realpath(join(dirname(__file__), '..'))
+LOCALE_PATHS = [
+    join(BASE_PATH, 'locale'),
+]
 
 # List of finder classes that know how to find static files in
 # various locations
