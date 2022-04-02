@@ -69,6 +69,11 @@ for package in packages:
         if '__init__.py' not in filenames:
             data_files.append([dirpath, [os.path.join(dirpath, f) for f in filenames]])
 
+data_files.extend([
+    "nunjucks.config.js",
+    "package.json",
+])
+
 setup(
     name='cosinnus',
     version=COSINNUS_VERSION,
