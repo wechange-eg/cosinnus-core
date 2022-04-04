@@ -77,8 +77,8 @@ def register_and_limit_failed_login_attempt(sender, credentials, **kwargs):
     """ On each failed login attempt, increase the atetmpt counter on the attempted user credential.
         If it is greater than LOGIN_RATELIMIT_TRIGGER_ON_ATTEMPT, set an expiry time, before which 
         all further login attempts on that credential will be prevented entirely. """
-    username = credentials['username']
-    username = get_valid_filename(username)
+    login_username = credentials['username']
+    username = get_valid_filename(login_username)
     
     # increase and save the current number of attempts
     num_tries = cache.get(_get_setting('LOGIN_RATELIMIT_NUM_TRIES_CACHE_KEY') % username, 0) + 1
@@ -93,10 +93,10 @@ def register_and_limit_failed_login_attempt(sender, credentials, **kwargs):
             # We have reached the first rate limit attempt, send signal and maybe do logging
             if _get_setting('LOGIN_RATELIMIT_LOG_ON_LIMIT'):
                 logger.warning('LoginRateLimitMiddleware: Failed Login Attempt Limit reached targetting an email. Details in extra.', extra={
-                    'username': 'username',
+                    'username': login_username,
                     'ip': None,
                 })
-            login_ratelimit_triggered.send(sender=None, username=username, ip=None)
+            login_ratelimit_triggered.send(sender=None, username=login_username, ip=None)
         
         # calculate the rate limit duration, increased per already failed attempt, but no larger than the maximum duration 
         tries_threshold = _get_setting('LOGIN_RATELIMIT_TRIGGER_ON_ATTEMPT')
