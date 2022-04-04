@@ -249,6 +249,10 @@ class CosinnusConf(AppConf):
     # when etherpad objects are deleted, should the etherpads on the server be deleted as well?
     DELETE_ETHERPADS_ON_SERVER_ON_DELETE = False
     
+    # if True, will forbid anyone to edit an etherpad created by a user
+    # whose account is inactive or deleted. view-only is still possible.
+    LOCK_ETHERPAD_WRITE_MODE_ON_CREATOR_DELETE = False
+    
     # a list of cosinnus apps that are installed but are disabled for the users, e.g. ['cosinnus_marketplace', ]
     # (they are still admin accessible)
     DISABLED_COSINNUS_APPS = []
