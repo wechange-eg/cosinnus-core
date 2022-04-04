@@ -1,4 +1,5 @@
-{% load i18n cosinnus_tags %}
+{% load i18n cosinnus_tags tz %}
+{% get_current_timezone as TIME_ZONE %}
 
 {% comment %} 
     A formfield date-picker for a form containing `from_date`, `to_date` DateTimeFields.  
@@ -10,12 +11,13 @@
     Optional parameters:
         - date_label: Label for the formfield
         - date_legend: Legend for the formfield
-        
+
 {% endcomment %}
 
 {% if not date_label %}
     {% trans "Date" as date_label %}
 {% endif %}
+{% captureas date_legend %}{% blocktrans %}Time zone: {{ TIME_ZONE }}{% endblocktrans %}{% endcaptureas %}
 {% captureas date_html %}
     {{ from_date_field.errors }}
     {{ to_date_field.errors }}
@@ -88,7 +90,7 @@
 	    {% endif %}
     </ol>
 {% endcaptureas %}
-{% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label large_field=True date_legend=date_legend %}
+{% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label large_field=True legend=date_legend %}
 
 <script type="text/javascript">
     $(function(){
