@@ -132,7 +132,10 @@ def cosinnus_login(request, **kwargs):
                 and CosinnusPortal.get_current().email_needs_verification and not request.user.cosinnus_profile.email_verified:
             # send user another verification email
             send_user_email_to_verify(request.user, request.user.email, request)
-            messages.warning(request, _('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.'))
+            msg = _('New verification email sent!')
+            msg += '\n\n' + _('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.')
+            msg += '\n\n' + _('We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email.')
+            messages.warning(request, msg)
             logout(request)
             return redirect('login')
         
