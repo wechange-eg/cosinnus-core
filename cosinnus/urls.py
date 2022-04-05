@@ -161,6 +161,7 @@ urlpatterns = [
     url(r'^housekeeping/group_storage_report/', housekeeping.group_storage_report_csv, name='housekeeping-group-storage-report'),
     url(r'^housekeeping/project_storage_report/', housekeeping.project_storage_report_csv, name='housekeeping-project-storage-report'),
     url(r'^housekeeping/user_activity_info/', housekeeping.user_activity_info, name='housekeeping-user-activity-info'),
+    url(r'^housekeeping/conf_settings_info/', housekeeping.portal_switches_and_settings, name='housekeeping-portal-switches-and-settings'),
     url(r'^housekeeping/group_admin_emails/(?P<slugs>[^/]+)/', housekeeping.group_admin_emails, name='housekeeping-group-admin-emails'),
     
     url(r'^error/$', common.generic_error_page_view, name='generic-error-page'),
