@@ -685,3 +685,55 @@ def group_admin_emails(request, slugs):
     user_mails = [[user_mail] for user_mail in user_mails]
     
     return make_csv_response(user_mails, file_name=file_name)
+
+def portal_switches_and_settings(request, file_name='portal-switches-and-settings'):
+    if request and not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    
+    headers = [
+        'Switch names',
+        'Default values',
+        'Commentary',
+    ]
+
+    import inspect
+    import cosinnus.conf as cosconf
+
+    data = inspect.getsourcelines(cosconf)[0]
+
+    switch_names = []
+    default_values = {}
+    collected_comment = ''
+    comments = {}
+
+    for line in data:
+        line = line.strip()
+        # getting comments
+        if line.startswith('#'):
+            comment = line.split('#', 1)[1].strip()
+            if comment:
+                collected_comment += comment
+        # getting switches
+        if not line.startswith('#') and '=' in line:
+            switch_name = line.split('=', 1)[0].strip()
+            if switch_name and switch_name.isupper():
+                switch_names.append(switch_name)
+                # putting comments to dict to bound each comment with its switch
+                if collected_comment:
+                    comments[switch_name] = collected_comment
+                    collected_comment = ''
+
+    # getting values for each switch in both classes given in settings
+    for switch_name in switch_names:
+        if switch_name and hasattr(cosconf.CosinnusConf, switch_name):
+            default_values[switch_name] = getattr(cosconf.CosinnusConf, switch_name)
+        elif switch_name and hasattr(cosconf.CosinnusDefaultSettings, switch_name):
+            default_values[switch_name] = getattr(cosconf.CosinnusDefaultSettings, switch_name)
+
+    # 'COSINNUS_' prefix  should be applied only to switches bounded with the `CosinnusConf` class
+    rows = [[f'COSINNUS_{switch_name}', default_values.get(switch_name), comments.get(switch_name, '')]
+            if hasattr(cosconf.CosinnusConf, switch_name) 
+            else [switch_name, default_values.get(switch_name), comments.get(switch_name, '')] 
+            for switch_name in switch_names]
+    
+    return make_xlsx_response(rows=rows, row_names=headers, file_name=file_name)
