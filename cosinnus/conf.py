@@ -1,4 +1,4 @@
-"""-*- coding: utf-8 -*-""" 
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
 from builtins import object
@@ -947,6 +947,7 @@ class CosinnusConf(AppConf):
     # timeout for nextcloud webdav requests in seconds
     CLOUD_NEXTCLOUD_REQUEST_TIMEOUT = 15
     
+    # disable: ["spreed", "calendar", "mail"], these seem not necessary as they are disabled by default
     CLOUD_NEXTCLOUD_SETTINGS = {
         'DEFAULT_USER_QUOTA': '100 MB', # in human readable nextcloud format
         'ALLOW_PUBLIC_UPLOADS': 'no', # "yes" or "no"
@@ -954,7 +955,6 @@ class CosinnusConf(AppConf):
         'SEND_EMAIL_TO_NEW_USERS': 'no', # "yes" or "no"
         'ENABLE_APP_IDS': ["groupfolders", "onlyoffice", "sociallogin", "wechangecsp"], # list of string app ids
         'DISABLE_APP_IDS': ["theming", "photos", "activity", "systemtags"], # list of string app ids
-        # disable: ["spreed", "calendar", "mail"], these seem not necessary as they are disabled by default
     }
     
     # if set to a hex color string,

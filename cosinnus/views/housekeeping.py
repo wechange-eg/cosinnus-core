@@ -715,21 +715,20 @@ def portal_switches_and_settings(request, file_name='portal-switches-and-setting
                 collected_comment += comment
         # getting switches
         if not line.startswith('#') and '=' in line:
-            switch_name = line.split('=', 1)[0].strip()
+            switch_name, switch_value = line.split('=', 1)
+            switch_name = switch_name.strip()
+            switch_value = switch_value.strip()
             if switch_name and switch_name.isupper():
                 switch_names.append(switch_name)
+                if switch_value in ('[', '(', '{'):
+                    switch_value = '(object)'
+                default_values[switch_name] = switch_value
                 # putting comments to dict to bound each comment with its switch
                 if collected_comment:
                     comments[switch_name] = collected_comment
                     collected_comment = ''
-
-    # getting values for each switch in both classes given in settings
-    for switch_name in switch_names:
-        if switch_name and hasattr(cosconf.CosinnusConf, switch_name):
-            default_values[switch_name] = getattr(cosconf.CosinnusConf, switch_name)
-        elif switch_name and hasattr(cosconf.CosinnusDefaultSettings, switch_name):
-            default_values[switch_name] = getattr(cosconf.CosinnusDefaultSettings, switch_name)
-
+                    
+    
     # 'COSINNUS_' prefix  should be applied only to switches bounded with the `CosinnusConf` class
     rows = [[f'COSINNUS_{switch_name}', default_values.get(switch_name), comments.get(switch_name, '')]
             if hasattr(cosconf.CosinnusConf, switch_name) 
