@@ -1188,7 +1188,7 @@
                     // clone and show progress bar
                     var proto_bar = $('#' + $(this).data('cosinnus-upload-select2-target-field') + '_progressbar');
                     data.context = proto_bar.clone().removeAttr('id').insertAfter(proto_bar).show();
-                    
+ 
                     data.submit();
                 },
                 progress: function (e, data) {
@@ -1761,6 +1761,24 @@
 	    },
 	    
 
+        disableSubmitButton: function() {
+            /* disables submit button after click */
+
+            // after click 
+            $("button[type='submit']").on(function() {
+                var $self = $(this);
+
+                //disable button
+                $self.attr("disabled","true");
+
+                // after 10 sec
+                setTimeout(function() {
+                    
+                    // enable button 
+                    $self.removeAttr("disabled");
+                }, 10000);
+            });
+        },
     };
 })( jQuery );
 
@@ -1821,6 +1839,7 @@ $(function() {
     $.cosinnus.dashboardArrange();
     $.cosinnus.dashboardArrangeInput();
     $.cosinnus.popover();
+    $.cosinnus.disableSubmitButton();
     $.cosinnus.toggleGroup();
     $.cosinnus.toggleSwitch();
     $.cosinnus.snapToBottom();
