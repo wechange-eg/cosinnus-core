@@ -1760,23 +1760,19 @@
 	    	});
 	    },
 	    
-
+        /* Disables any submit button briefly after click to prevent double-submits on hasty clicks */
         disableSubmitButton: function() {
-            /* disables submit button after click */
-
             // after click 
-            $("button[type='submit']").on(function() {
+            $("button[type='submit']").on('click', function() {
                 var $self = $(this);
-
-                //disable button
-                $self.attr("disabled","true");
-
-                // after 10 sec
+                // disable button after micropause, else it would prevent its own submit
                 setTimeout(function() {
-                    
-                    // enable button 
-                    $self.removeAttr("disabled");
-                }, 10000);
+                    $self.attr("disabled","true").addClass("disabled");
+                    // re-enable button after 5 sec
+                    setTimeout(function() {
+                        $self.removeAttr("disabled").removeClass("disabled");
+                    }, 5000);
+                }, 10);
             });
         },
     };
