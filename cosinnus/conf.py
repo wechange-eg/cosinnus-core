@@ -341,6 +341,11 @@ class CosinnusConf(AppConf):
     # sets if live notification alerts are enabled
     NOTIFICATION_ALERTS_ENABLED = False
     
+    # sets how often actual data should be retrieved for user alerts,
+    # independent of how often it is polled, in seconds
+    # (affects how fresh data is on reloads and multiple tabs)
+    NOTIFICATION_ALERTS_CACHE_TIMEOUT = 30 # 30 seconds
+    
     # how long like and follow counts should be retained in cache
     LIKEFOLLOW_COUNT_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
     
