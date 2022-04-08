@@ -245,6 +245,7 @@ def map_search_endpoint(request, filter_group_id=None):
         # order groups, projects and conferences alphabetically
         if any([params.get(checktype, None) for checktype in settings.COSINNUS_ALPHABETICAL_ORDER_FOR_SEARCH_MODELS_WHEN_SINGLE]) and len(model_list) == 1:
             sort_args = ['title']
+            skip_score_sorting = True
         else:
             sort_args = ['-local_boost']
         # if we only look at conferences, order them by their from_date, future first!
