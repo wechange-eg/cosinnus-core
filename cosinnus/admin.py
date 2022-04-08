@@ -660,6 +660,11 @@ class UserAdmin(DjangoUserAdmin):
     list_filter = list(DjangoUserAdmin.list_filter) + [UserHasLoggedInFilter, UserToSAcceptedFilter,
                        UserScheduledForDeletionAtFilter, EmailVerifiedFilter]
     
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        qs = qs.exclude(email__startswith='__deleted_user__')
+        return qs
+    
     def has_logged_in(self, obj):
         return bool(obj.last_login is not None)
     has_logged_in.short_description = _('Has Logged In')
