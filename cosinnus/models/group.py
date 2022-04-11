@@ -563,7 +563,7 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
     email_needs_verification = models.BooleanField(_('Emails Need Verification'),
                                                    help_text=_(
                                                        'If activated, newly registered users and users who change their email address will need to confirm their email by clicking a link in a mail sent to them.'),
-                                                   default=False)
+                                                   default=True)
 
     # The different keys used for this are static variables in CosinnusPortal!
     saved_infos = models.JSONField(default=dict, encoder=DjangoJSONEncoder)
