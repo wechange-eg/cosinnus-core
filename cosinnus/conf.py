@@ -1147,6 +1147,12 @@ class CosinnusConf(AppConf):
     # e.g.: ['projects', 'groups', 'conferences']
     ALPHABETICAL_ORDER_FOR_SEARCH_MODELS_WHEN_SINGLE = []
     
+    # Matching
+    MATCHING_ENABLED = False
+    # Fields that will be used for matching ranking, should be present in projects, groups and organizations
+    MATCHING_FIELDS = ()
+    MATCHING_DYNAMIC_FIELDS = ()
+    
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.
@@ -1308,9 +1314,5 @@ class CosinnusDefaultSettings(AppConf):
     # limit visit creation for (user, bbb_room) pairs to a time window
     BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60*60
     
-
-    # Matching
-    MATCHING_ENABLED = False
-    # Fields that will be used for matching ranking, should be present in projects, groups and organizations
-    MATCHING_FIELDS = ()
-    MATCHING_DYNAMIC_FIELDS = ()
+    
+    

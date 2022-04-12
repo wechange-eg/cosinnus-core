@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cosinnus_organization', '0005_cosinnusorganization_is_open_for_cooperation'),
+        ('cosinnus_organization', '0006_cosinnusorganization_is_open_for_cooperation'),
     ]
 
     operations = [
