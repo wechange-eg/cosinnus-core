@@ -1,13 +1,14 @@
 from django.utils.timezone import now
 from haystack import indexes
 
+from cosinnus.search_indexes import NestedField
 from cosinnus.utils.search import DocumentBoostMixin, TagObjectSearchIndex, StoredDataIndexMixin, \
     TemplateResolveNgramField, BOOSTED_FIELD_BOOST, DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE, TemplateResolveCharField
 from cosinnus_organization.models import CosinnusOrganization
 
 
 class OrganizationSearchIndex(DocumentBoostMixin, TagObjectSearchIndex,
-          StoredDataIndexMixin, indexes.Indexable):
+                              StoredDataIndexMixin, indexes.Indexable):
 
     text = TemplateResolveNgramField(document=True, model_attr='name')
     rendered = TemplateResolveCharField(use_template=True, indexed=False)
@@ -25,6 +26,8 @@ class OrganizationSearchIndex(DocumentBoostMixin, TagObjectSearchIndex,
     group_members = indexes.MultiValueField()
     groups = indexes.MultiValueField()
     always_visible = indexes.BooleanField(default=True)
+    dynamic_fields = NestedField(model_attr='dynamic_fields', stored=True, indexed=False)
+    is_open_for_cooperation = indexes.BooleanField(model_attr='is_open_for_cooperation')
 
     def get_model(self):
         return CosinnusOrganization

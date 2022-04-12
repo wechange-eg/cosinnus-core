@@ -2,9 +2,9 @@
 {% import "include/macros.html" as macros %}
 
 <div class="map-controls mobile-view mobile-view-search-visible-block">
-     <div class="map-controls-search">
+     <div class="map-controls-search"{% if matching %} style="display:none"{% endif %}>
          <div class="search-box">
-            <input type="text" class="q" name="q" 
+            <input type="text" class="q" name="q"
 
 {% if splitscreen %}
 placeholder="{# Translators: __INCLUDE_JS_PO__ #}
@@ -26,9 +26,9 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
          <div class="icon-box filter-button-box">
          </div>
      </div>
-     
+
      <div class="map-controls-active-filters"></div>
-     
+
      <div class="map-controls-filters mobile-always-visible" {% if not filterPanelVisible %}style="display: none;"{% endif %}>
         <div class="map-controls-filter-fields">
 			{% if availableFilterList|length > 1 %}
@@ -77,7 +77,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 					{# Translators: __INCLUDE_JS_PO__ #}
 					{% trans "Sustainable Development Goals" %}
 				</h1>
-		
+
 				<div class="button-list">
 					{% for sdg in allSDGS %}
 						{% if sdg.id != "" and sdg %}
@@ -121,7 +121,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 						{# Translators: __INCLUDE_JS_PO__ #}
 						{% trans "Categories" %}
 					</h1>
-	
+
 					<div class="button-list">
 						{% for textTopic_id, textTopic in allTextTopics %}
 							{% if textTopic_id != "" and textTopic %}
@@ -141,7 +141,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 					{# Translators: __INCLUDE_JS_PO__ #}
 					{% trans "Topics" %}
 				</h1>
-			
+
 				<div class="button-list">
 					{% for topic_id, topic in allTopics %}
 						{% if topic_id != "" and topic %}
@@ -154,13 +154,13 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 					{% endfor %}
 				</div>
 			{% endif %}
-			
+
 			{% if COSINNUS_EXCHANGE_ENABLED %}
 	            <h1>
 	                {# Translators: __INCLUDE_JS_PO__ #}
 	                {% trans "External contents" %}
 	            </h1>
-	
+
 	            <table class="onoffswitch-frame small-space">
 	                <tr>
 	                    <td class="onoffswitch-text-label">
@@ -185,7 +185,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 					{# Translators: __INCLUDE_JS_PO__ #}
 					{% trans "Where" %}
 				</h1>
-				
+
 				<table class="onoffswitch-frame small-space">
 					<tr>
 						<td class="onoffswitch-text-label">
@@ -209,9 +209,9 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 				</div>
 			{% endif %}
 		</div>
-        
+
         <div class="spacer"></div>
-		
+
 		<div class="apply-buttons">
 			<div class="button-list">
 				<a class="rounded-button button-color-action button-search query-search-button disabled">
@@ -220,7 +220,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 						{% trans "Apply Filters" %}
 					</span>
 				</a>
-				
+
 				<a class="rounded-button button-color-action reset-type-and-topic-filters">
 					<span class="rounded-button-inner">
 						{# Translators: __INCLUDE_JS_PO__ #}
@@ -228,14 +228,74 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 					</span>
 				</a>
 			</div>
-			
+
 			{# some more space to scroll over the floating search-buttons on mobile #}
 			<div class="spacer mobile-only">&nbsp;</div>
 			<div class="spacer mobile-only">&nbsp;</div>
 		</div>
-    
-    </div>
-    
-        
-</div>
 
+    </div>
+
+	{% if matching %}
+	<div class="map-controls-matching">
+		<h1>
+			<i class="fa fa-puzzle-piece"></i>
+			{# Translators: __INCLUDE_JS_PO__ #}
+			{% trans "Show potential partners" %}
+		</h1>
+		<p>
+			{# Translators: __INCLUDE_JS_PO__ #}
+			{% trans "Here you can search for partner organisations and projects that are open for further partners. The results are sorted so that partners with a lot of overlap in the funding objectives, eligible areas and SDGs you are active on are listed first." %}
+		</p>
+		{% if myProjects or myGroups or myOrganizations %}
+		<h1>
+			{# Translators: __INCLUDE_JS_PO__ #}
+			{% trans "Show potential partners for ..." %}
+		</h1>
+		<div class="apply-buttons">
+			<div class="button-list">
+				{% for project in myProjects %}
+				<a class="rounded-button button-color-projects match-button{% if project.selected %} selected{% endif %}" data-match="projects.{{ project.slug }}">
+					<span class="rounded-button-inner">
+						<i class="fa fa-group"></i>
+						{{ project.name }}
+					</span>
+				</a>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="apply-buttons">
+			<div class="button-list">
+				{% for group in myGroups %}
+				<a class="rounded-button button-color-groups match-button{% if group.selected %} selected{% endif %}" data-match="groups.{{ group.slug }}">
+					<span class="rounded-button-inner">
+						<i class="fa fa-sitemap"></i>
+						{{ group.name }}
+					</span>
+				</a>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="apply-buttons">
+			<div class="button-list">
+				{% for org in myOrganizations %}
+				<a class="rounded-button button-color-organizations match-button{% if org.selected %} selected{% endif %}" data-match="organizations.{{ org.slug }}">
+					<span class="rounded-button-inner">
+						<i class="fa fa-building"></i>
+						{{ org.name }}
+					</span>
+				</a>
+				{% endfor %}
+			</div>
+		</div>
+		{% else %}
+		<span class="inline-spacer"></span>
+		<p>
+			{# Translators: __INCLUDE_JS_PO__ #}
+			{% trans "You're currently not member of any project, group or organization." %}
+		</p>
+		{% endif %}
+	</div>
+	{% endif %}
+
+</div>

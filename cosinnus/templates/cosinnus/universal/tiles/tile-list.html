@@ -29,6 +29,8 @@
         </div>
     {% endif %}
     <div class="controls {% if controlView.state.filterPanelVisible %}open{% endif %}"></div>
+
+    {% if not controlView.matching or controlView.matching != "true" %}
     <div class="tile-contents mobile-view mobile-view-list-visible-block">
         <div id="tile-container-proto" class="grid" style="display: none;">
             <!-- width of .grid-sizer used for columnWidth -->
@@ -36,4 +38,5 @@
         </div>
     </div>
     <div class="pagination-controls"></div>
+    {% endif %}
 </div>

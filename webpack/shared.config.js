@@ -19,6 +19,7 @@ module.exports = {
                 test: /\.html$/,
                 loader: 'nunjucks-loader',
                 include: [
+                    path.join(base, 'cosinnus/templates_extra/universal'),
                     path.join(base, 'cosinnus/templates/cosinnus/universal')
                 ],
                 query: {
@@ -29,6 +30,7 @@ module.exports = {
     },
     resolve: {
         root: [
+            path.join(base, 'cosinnus/templates_extra/universal'),
             path.join(base, 'cosinnus/templates/cosinnus/universal'),
             path.join(base, 'cosinnus/client')
         ],

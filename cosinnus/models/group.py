@@ -407,9 +407,9 @@ class CosinnusGroupManager(models.Manager):
         from cosinnus.models.group_extra import CosinnusConference # noqa
         # Prepare query: Mark due conferences
         key = f'reminder_{field_name}'
-        queryset = CosinnusConference.objects.annotate(extra_fields_json=Cast(F('extra_fields'),
-                                                                                      models.JSONField(default={}, encoder=DjangoJSONEncoder)))
-        queryset = queryset.annotate(to_be_reminded=KeyTextTransform(key, 'extra_fields_json'))
+        queryset = CosinnusConference.objects.annotate(dynamic_fields_json=Cast(F('dynamic_fields'),
+                                                                              PostgresJSONField(default={})))
+        queryset = queryset.annotate(to_be_reminded=KeyTextTransform(key, 'dynamic_fields_json'))
         # Prepare query: Mark conferences already notified
         queryset = queryset.annotate(settings_json=Cast(F('settings'), models.JSONField(default={}, encoder=DjangoJSONEncoder)))
         queryset = queryset.annotate(already_reminded=KeyTextTransform(f'{key}_sent', 'settings_json'))
@@ -884,7 +884,9 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
     # on the platform, no matter their visibility settings, and thus subject to moderation
     cosinnus_always_visible_by_users_moderator_flag = True
 
-    # NOTE: this is the deprecated old extra_field jsonfield, 
+    is_open_for_cooperation = models.BooleanField(_('Open for cooperation'), default=False)
+
+    # NOTE: this is the deprecated old extra_field jsonfield,
     # but it is still in use for some custom portal code, so cannot yet be removed.
     # DO NOT USE THIS IN NEW CODE ANYMORE. USE `group.dynamic_fields` or `group.settings` instead!
     extra_fields = models.JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder)
@@ -896,6 +898,7 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
     
     show_contact_form = models.BooleanField(default=False, help_text=_('If set to true, a contact form will be displayed on the micropage.'))
     
+    conference_settings_assignments = GenericRelation('cosinnus.CosinnusConferenceSettings')
     managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
     
     objects = CosinnusGroupManager()

@@ -25,6 +25,7 @@
             var COSINNUS_CLOUD_ENABLED = {% if SETTINGS.COSINNUS_CLOUD_ENABLED %}true{% else %}false{% endif %};
             var COSINNUS_EXCHANGE_ENABLED = {% if SETTINGS.COSINNUS_EXCHANGE_ENABLED %}true{% else %}false{% endif %};
             var COSINNUS_EXCHANGE_PORTAL_ID = {{ SETTINGS.COSINNUS_EXCHANGE_PORTAL_ID }};
+            var COSINNUS_MATCHING_ENABLED = {% if SETTINGS.COSINNUS_MATCHING_ENABLED %}true{% else %}false{% endif %};
             var COSINNUS_CLOUD_DASHBOARD_WIDGET_ENABLED = {% if SETTINGS.COSINNUS_CLOUD_ENABLED and SETTINGS.COSINNUS_CLOUD_DASHBOARD_WIDGET_ENABLED %}true{% else %}false{% endif %};
             var cosinnus_current_language = "{{ COSINNUS_CURRENT_LANGUAGE }}";
             var cosinnus_user_timezone = {% if COSINNUS_USER_TIMEZONE %}"{{ COSINNUS_USER_TIMEZONE }}"{% else %}null{% endif %};
@@ -43,6 +44,7 @@
 		    var COSINNUS_TRANS_CREATE_CONFERENCE = "{{ COSINNUS_CONFERENCE_TRANS.CREATE_NEW }}";
 		    var COSINNUS_USER_CAN_CREATE_CONFERENCE = {% if user|user_can_create_conferences %}true{% else %}false{% endif %};
 		    var COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN = {% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}true{% else %}false{% endif %};
+		    var COSINNUS_FORUM_GROUP_SLUG = "{% get_setting 'NEWW_FORUM_GROUP_SLUG' %}";
         </script>
 		{% include 'cosinnus/map/extra_head_map.html' %}
         
