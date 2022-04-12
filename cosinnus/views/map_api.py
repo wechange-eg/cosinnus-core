@@ -126,6 +126,7 @@ class SearchQuerySetMixin:
 
     def dispatch(self, request, *args, **kwargs):
         self.params = self._collect_parameters(request.GET, self.search_parameters)
+        self.skip_score_sorting = False
         if 'q' in self.params:
             self.params['q'] = force_text(self.params['q'])
         if 'limit' in self.params:
@@ -248,7 +249,12 @@ class SearchQuerySetMixin:
         prefer_own_portal = getattr(settings, 'MAP_API_HACKS_PREFER_OWN_PORTAL', False)
         # if we have no query-boosted results, use *only* our custom sorting (haystack's is very random)
         if not query:
-            sort_args = ['-local_boost']
+            # order groups, projects and conferences alphabetically
+            if any([self.params.get(checktype, None) for checktype in settings.COSINNUS_ALPHABETICAL_ORDER_FOR_SEARCH_MODELS_WHEN_SINGLE]) and len(model_list) == 1:
+                sort_args = ['title']
+                self.skip_score_sorting = True
+            else:
+                sort_args = ['-local_boost']
             # if we only look at conferences, order them by their from_date, future first!
             if prefer_own_portal:
                 sort_args = ['-portal'] + sort_args
@@ -275,7 +281,10 @@ class SearchQuerySetMixin:
         sqs = sqs[limit * page:limit * (page + 1)]
         results = []
         for i, result in enumerate(sqs):
-            if not query:
+            if self.skip_score_sorting:
+                # if we skip score sorting and only rely on the natural ordering, we make up fake high scores
+                result.score = 100000 - (limit*page) - i
+            elif not query:
                 # if we hae no query-boosted results, use *only* our custom sorting (haystack's is very random)
                 result.score = result.local_boost
                 if prefer_own_portal and is_number(result.portal) and int(result.portal) == CosinnusPortal.get_current().id:

@@ -898,7 +898,6 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
     
     show_contact_form = models.BooleanField(default=False, help_text=_('If set to true, a contact form will be displayed on the micropage.'))
     
-    conference_settings_assignments = GenericRelation('cosinnus.CosinnusConferenceSettings')
     managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
     
     objects = CosinnusGroupManager()
