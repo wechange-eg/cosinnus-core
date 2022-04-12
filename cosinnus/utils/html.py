@@ -13,12 +13,14 @@ def replace_non_portal_urls(html_text, replacement_url=None, portal_url=None):
     
     if portal_url is None:
         portal_url = CosinnusPortal.get_current().get_domain()
+    if replacement_url is None:
+        # do no replacements unless we have a proper target to point to
+        # this will only affect admin-user-generated content
+        return html_text
     whitelisted_urls = [
         'https://openstreetmap.org', # we whitelist OSm as it is used in location links in emails
         portal_url,
     ]
-    if replacement_url is None:
-        replacement_url = portal_url
     # add a GET param to show a redirect warning to the user 
     # (handled by `ExternalEmailLinkRedirectNoticeMiddleware`)
     append_param_arg = '?' if not '?' in replacement_url else '&'
