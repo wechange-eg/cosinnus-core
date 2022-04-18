@@ -102,6 +102,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'cosinnus.core.middleware.frontend_middleware.FrontendMiddleware',
     'django_otp.middleware.OTPMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.AdminOTPMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.UserOTPMiddleware',
@@ -642,4 +643,13 @@ COSINNUS_EXCHANGE_RUN_EVERY_MINS = 60 * 24
 #   model: None (required, e.g. 'cosinnus_exchange.Event')
 #   serializer: None (required, e.g. 'cosinnus_exchange.serializers.ExchangeEventSerializer')
 COSINNUS_EXCHANGE_BACKENDS = []
+
+# Frontend
+COSINNUS_FRONTEND_ENABLED = False
+with open(join(BASE_PATH, 'cosinnus_frontend', 'urls')) as f:
+    COSINNUS_FRONTEND_URL_PATTERNS = [f.strip() for f in f]
+with open(join(BASE_PATH, 'cosinnus_frontend', 'assets')) as f:
+    COSINNUS_FRONTEND_ASSET_PATTERNS = [f.strip() for f in f]
+COSINNUS_FRONTEND_ROOT = join(BASE_PATH, 'cosinnus_frontend', 'dist')
+COSINNUS_FRONTEND_PATH = 'index.html'
 
