@@ -15,6 +15,12 @@ class CosinnusConf(AppConf):
      
      If you are looking for third-party default settings needed by cosinnus, 
      check cosinnus/default_settings.py!
+     
+     Supported tags in comments of settings attributes,
+     for the conf.py parser that prints all contained settings
+     as an excel sheet download:
+         - #internal if this appears in any setting comment, the setting 
+             will be excluded from the excel list
     """
     
     class Meta(object):
@@ -895,15 +901,22 @@ class CosinnusConf(AppConf):
     #     ), ...
     # }
     # example: {'organization': {'type': 'text', 'required': True}}
+    # #internal 
     USERPROFILE_EXTRA_FIELDS = {}
+    
+    # which of the fields inUSERPROFILE_EXTRA_FIELDS are translated fields
+    # #internal 
     USERPROFILE_EXTRA_FIELDS_TRANSLATED_FIELDS = []
     
     # a dict of <form-name> -> list of formfield names that will be disabled in the user profile forms 
     # for the current portal. can be dynamic and regular fields
     # multiforms choosable are 'obj' (CosinnusProfile), 'user', 'media_tag'
+    # #internal 
     USERPROFILE_DISABLED_FIELDS = {}
     
     # should the 'user_profile_dynamic_fields.html' be shown as extra_html in the profile map detail page?
+    # meaning, should the full profile of the user be visible on their map detail page
+    # warning: handle this with care if the profile extra fields contain fields with sensitive data
     USERPROFILE_EXTRA_FIELDS_SHOW_ON_MAP = False
     
     # should the form view for admin-defined dynamic fields be shown
@@ -912,6 +925,7 @@ class CosinnusConf(AppConf):
     
     # a list of tuples of a <LIST of managed tag slugs> and <LIST of profile extra field names>
     # that become disabled unless the user has the managed tag
+    # #internal 
     USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS = []
     
     # extra fields for CosinnusBaseGroup derived models.

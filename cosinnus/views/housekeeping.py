@@ -686,7 +686,12 @@ def group_admin_emails(request, slugs):
     
     return make_csv_response(user_mails, file_name=file_name)
 
+
 def portal_switches_and_settings(request, file_name='portal-switches-and-settings'):
+    """ Returns a downloadable excel spreadsheet of all the settings in conf.py, 
+        including their comments and default values.
+        Will ignore any setting with the tag #internal in its comments. """
+        
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
     
@@ -705,12 +710,15 @@ def portal_switches_and_settings(request, file_name='portal-switches-and-setting
     default_values = {}
     collected_comment = ''
     comments = {}
-
+    
+    skip_next = False
     for line in data:
         line = line.strip()
         # getting comments
         if line.startswith('#'):
             comment = line.split('#', 1)[1].strip()
+            if '#internal' in comment:
+                skip_next = True
             if comment:
                 collected_comment += comment
         # getting switches
@@ -719,6 +727,12 @@ def portal_switches_and_settings(request, file_name='portal-switches-and-setting
             switch_name = switch_name.strip()
             switch_value = switch_value.strip()
             if switch_name and switch_name.isupper():
+                # if this is an internal switch we skip it
+                if skip_next:
+                    skip_next = False
+                    collected_comment = ''
+                    continue
+                
                 switch_names.append(switch_name)
                 if switch_value in ('[', '(', '{'):
                     switch_value = '(object)'
