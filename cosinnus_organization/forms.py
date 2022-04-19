@@ -6,7 +6,7 @@ from builtins import object
 from awesome_avatar import forms as avatar_forms
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from extra_views import InlineFormSet
+from extra_views import InlineFormSetFactory
 from multiform import InvalidArgument
 
 from cosinnus.conf import settings
@@ -28,7 +28,7 @@ class CosinnusOrganizationSocialMediaForm(forms.ModelForm):
         fields = ('organization', 'url')
 
 
-class CosinnusOrganizationSocialMediaInlineFormset(InlineFormSet):
+class CosinnusOrganizationSocialMediaInlineFormset(InlineFormSetFactory):
     extra = 5
     max_num = 5
     form_class = CosinnusOrganizationSocialMediaForm
@@ -45,7 +45,7 @@ class CosinnusOrganizationLocationForm(forms.ModelForm):
         }
 
 
-class CosinnusOrganizationLocationInlineFormset(InlineFormSet):
+class CosinnusOrganizationLocationInlineFormset(InlineFormSetFactory):
     extra = 5
     max_num = 5
     form_class = CosinnusOrganizationLocationForm

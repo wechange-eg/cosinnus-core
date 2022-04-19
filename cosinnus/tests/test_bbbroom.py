@@ -61,7 +61,6 @@ class BBBRoomTest(TestCase):
         room = BBBRoom.create(
             name="TestName",
             meeting_id="MeetingID",
-            meeting_welcome="Welcome Test",
         )
 
         self.assertEqual(room.name, "TestName")
@@ -87,11 +86,10 @@ class BBBRoomTest(TestCase):
         room = BBBRoom.create(
             name="OptionTest",
             meeting_id="OptionMeetingID",
-            meeting_welcome="Option Test",
             options=room_options
         )
 
-        expected_options = settings.BBB_ROOM_DEFAULT_SETTINGS
+        expected_options = settings.BBB_DEFAULT_CREATE_PARAMETERS
         expected_options.update(room_options)
 
         self.assertEqual(room.name, "OptionTest")
@@ -110,7 +108,6 @@ class BBBRoomTest(TestCase):
         room = BBBRoom.create(
             name="JOIN TEST",
             meeting_id="join-test",
-            meeting_welcome="join the meeting",
         )
 
         time.sleep(2)
@@ -146,7 +143,6 @@ class BBBRoomTest(TestCase):
         room = BBBRoom.create(
             name="RESTART TEST",
             meeting_id="restart-test",
-            meeting_welcome="restart the meeting",
         )
 
         time.sleep(2)
@@ -205,7 +201,6 @@ class BBBRoomTest(TestCase):
         room = BBBRoom.create(
             name="SIGNAL TEST",
             meeting_id="signal-test",
-            meeting_welcome="meant to be end",
         )
 
         time.sleep(2)
@@ -227,7 +222,6 @@ class BBBRoomTest(TestCase):
         room = BBBRoom.create(
             name="END TEST",
             meeting_id="end-test",
-            meeting_welcome="meant to be end",
         )
 
         time.sleep(2)
@@ -244,7 +238,6 @@ class BBBRoomTest(TestCase):
     #     room = BBBRoom.create(
     #         name="REMOTE TEST",
     #         meeting_id="remote-test",
-    #         meeting_welcome="meant to be run remote",
     #     )
     #
     #     time.sleep(2)
@@ -252,7 +245,6 @@ class BBBRoomTest(TestCase):
     #     room2 = BBBRoom.create(
     #         name="RUNNING TEST",
     #         meeting_id="running-test",
-    #         meeting_welcome="meant to be run remote",
     #     )
     #     time.sleep(2)
     #
@@ -270,7 +262,6 @@ class BBBRoomTest(TestCase):
         room = BBBRoom.create(
             name="VIEW TEST",
             meeting_id="view-test",
-            meeting_welcome="join via url",
         )
 
         time.sleep(2)

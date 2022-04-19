@@ -45,7 +45,7 @@
 	    	{% include 'cosinnus/common/internet_explorer_not_supported.html' %}
 	    
 			{% captureas map_settings %}{"activeFilters": {"groups": {% if group_type == 1 %}true{% else %}false{% endif %}, "events": false, "projects": {% if group_type == 1 %}false{% else %}true{% endif %}, "people": false}, "availableFilters": {"groups": true, "events": true, "projects": true, "people": true}}{% endcaptureas %}
-			{% include 'cosinnus/common/init_client_module.html' with module='module-embed' id=""|add_uuid height=400 settings=map_settings %}
+			{% include 'cosinnus/common/init_client_module.html' with module='module-embed' id=""|add_uuid embed=True height=400 settings=map_settings %}
 	        <div class="clearfix"></div>
 	    </div>
     {% endif %}
@@ -58,9 +58,9 @@
 	        <div type="button" class="btn btn-default w100 large-space">
                 <ul class="media-list">
                     <li class="media">
-                        <a class="pull-left" href="#">
+                        <span class="pull-left">
                             <i class="fa fa-plus"></i>
-                        </a>
+                        </span>
                         <div class="media-body media-body-form-control">
                             <input class="form-control next-button-is-for-sending"
                                 placeholder="Gib den Titel für eine neue Gruppe ein."
@@ -72,9 +72,9 @@
             <button type="button" class="btn btn-emphasized large-space" style="display: none;">
                 <ul class="media-list">
                     <li class="media">
-                        <a class="pull-left" href="#">
+                        <span class="pull-left">
                             <i class="fa fa-pencil"></i>
-                        </a>
+                        </span>
                         <div class="media-body">
                             Erstellen
                         </div>
@@ -94,9 +94,9 @@
 		    <button type="button" class="btn btn-emphasized" href="{{ blog_url }}">
                 <ul class="media-list">
                     <li class="media">
-                        <a class="pull-left" href="#">
+                        <span class="pull-left">
                             <i class="fa fa-arrow-right"></i>
-                        </a>
+                        </span>
                         <div class="media-body">
                             {% trans "To the Forum" %}
                         </div>

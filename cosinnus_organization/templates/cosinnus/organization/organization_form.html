@@ -26,9 +26,9 @@
         <div type="button" class="btn w100 btn-default" data-toggle="modal" data-target="#deleteModal">
             <ul class="media-list">
                 <li class="media">
-                    <a class="pull-left" href="#">
+                    <span class="pull-left">
                         <i class="fa fa-eraser"></i>
-                    </a>
+                    </span>
                     <div class="media-body">
                         {% trans "Delete this Organization" %}
                     </div>
@@ -153,14 +153,14 @@
                     {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.phone_number label=phone_label placeholder=phone_placeholder %}
 
                     {# locations Inlineform #}
-                    {% trans "Address(es) of your organisation" as locations_label %}
+                    {% trans "Address(es) of your organization" as locations_label %}
                     {% trans "Remove location" as loc_rm_label %}
                     {% captureas loc_ab_label %}{% trans "Add location" %}{% endcaptureas %}
                     {% include 'cosinnus/fields/inlineform_field.html' with inline_form=inlines.0 label=locations_label content_template='cosinnus/fields/inlineform_organization_locations_content.html'    unique_id='locations'   add_button_label=loc_ab_label   remove_button_label=loc_rm_label extra_id_div="location-map" %}
 
                     {% include "cosinnus/media_tags_group.html"%}
 
-                    {% if SETTINGS.COSINNUS_DATA_EXCHANGE_ENABLED %}
+                    {% if SETTINGS.COSINNUS_EXCHANGE_ENABLED %}
                     {# public Field #}
                     {% trans "Visibility on other platforms" as public_label %}
                     {% blocktrans asvar public_legend with url="/cms/partner-platforms/" %}Projects are always transferred to <a href="{{ url }}" target="_blank">partner platforms</a> of WECHANGE. These are only organizational data and not personal data.{% endblocktrans %}
@@ -184,9 +184,9 @@
 	    <button type="submit" class="btn btn-emphasized">
 	        <ul class="media-list">
 	            <li class="media">
-	                <a class="pull-left" href="#">
+	                <span class="pull-left">
 	                    <i class="fa fa-check"></i>
-	                </a>
+	                </span>
 	                <div class="media-body" id="submit">
                         {% if not request.GET.tab %}{% trans "Continue" %}{% else %}{% trans "Save" %}{% endif %}
 	                </div>

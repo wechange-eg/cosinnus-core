@@ -7,11 +7,14 @@ from django.urls import reverse
 from django.contrib.auth.models import AnonymousUser
 from django.utils.timezone import now
 
+from cosinnus.conf import settings
 from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveNgramField,\
     TagObjectSearchIndex, BOOSTED_FIELD_BOOST, StoredDataIndexMixin,\
     DocumentBoostMixin, CommaSeperatedIntegerMultiValueField,\
-    LocalCachedIndexMixin, DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE
-from cosinnus.utils.user import filter_active_users, filter_portal_users
+    LocalCachedIndexMixin, DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE,\
+    TimezoneAwareHaystackDateTimeField
+from cosinnus.utils.user import filter_active_users, filter_portal_users,\
+    is_user_active
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
     CosinnusConference
@@ -31,10 +34,14 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     group_members = indexes.MultiValueField(indexed=False)
     sdgs = indexes.MultiValueField(model_attr='sdgs', null=True)
     managed_tags = indexes.MultiValueField()
-    public = indexes.BooleanField(model_attr='public')
-    always_visible = indexes.BooleanField(default=True)
-    created = indexes.DateTimeField(model_attr='created')
+    public = indexes.BooleanField()
+    always_visible = indexes.BooleanField()
+    visible_for_all_authenticated_users = indexes.BooleanField()
+    created = TimezoneAwareHaystackDateTimeField(model_attr='created')
     group = indexes.IntegerField(model_attr='id')
+    from_date = TimezoneAwareHaystackDateTimeField(model_attr='from_date', null=True)
+    to_date = TimezoneAwareHaystackDateTimeField(model_attr='to_date', null=True)
+    
     # for filtering on this model
     is_group_model = indexes.BooleanField(default=True)
     
@@ -89,6 +96,20 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     def prepare_managed_tags(self, obj):
         return obj.get_managed_tag_ids()
     
+    def prepare_public(self, obj):
+        if not obj.is_publicly_visible:
+            return False
+        return obj.public
+
+    def prepare_always_visible(self, obj):
+        return obj.is_publicly_visible
+    
+    def prepare_visible_for_all_authenticated_users(self, obj):
+        """ This is hacky, but Haystack provides no method to filter
+            for models in subqueries, so we set this indexed flag to be
+            able to filter on for permissions """
+        return True
+    
     def prepare_group_members(self, obj):
         if not hasattr(obj, '_group_members'):
             obj._group_members = obj.members
@@ -111,6 +132,11 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
         qs = qs.filter(is_active=True)
         qs = qs.select_related('media_tag').all()
         return qs
+    
+    def should_update(self, instance, **kwargs):
+        """ Only update active groups """
+        should = super(CosinnusGroupIndexMixin, self).should_update(instance, **kwargs)
+        return should and instance.is_active
     
     def boost_model(self, obj, indexed_data):
         """ We boost a combined measure of 2 added factors: newness (50%) and group member rank (50%).
@@ -185,9 +211,8 @@ class CosinnusConferenceIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, ind
     text = TemplateResolveNgramField(document=True, use_template=True, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
     rendered = TemplateResolveCharField(use_template=True, indexed=False, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
     
-    from_date = indexes.DateTimeField(model_attr='from_date', null=True)
-    to_date = indexes.DateTimeField(model_attr='to_date', null=True)
-    humanized_event_time_html = indexes.CharField(stored=True, indexed=False)
+    from_date = TimezoneAwareHaystackDateTimeField(model_attr='from_date', null=True)
+    to_date = TimezoneAwareHaystackDateTimeField(model_attr='to_date', null=True)
     participants_limit_count = indexes.IntegerField(stored=True, indexed=False)
     
     def get_model(self):
@@ -203,9 +228,6 @@ class CosinnusConferenceIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, ind
         if len(participation_managements) > 0:
             return participation_managements[0].participants_limit
         return 0
-    
-    def prepare_humanized_event_time_html(self, obj):
-        return obj.get_humanized_event_time_html()
     
     def boost_model(self, obj, indexed_data):
         """ We boost a combined measure of 2 added factors: soonishnes (50%) and participant count (50%).
@@ -247,7 +269,7 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
     location = indexes.LocationField(null=True)
     managed_tags = indexes.MultiValueField()
     user_id = indexes.IntegerField(model_attr='user__id')
-    created = indexes.DateTimeField(model_attr='user__date_joined')
+    created = TimezoneAwareHaystackDateTimeField(model_attr='user__date_joined')
 
     local_cached_attrs = ['_memberships_count']
     
@@ -271,7 +293,7 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
     
     def prepare_managed_tags(self, obj):
         return obj.get_managed_tag_ids()
-    
+
     def prepare_url(self, obj):
         """ NOTE: UserProfiles always contain a relative URL! """
         return reverse('cosinnus:profile-detail', kwargs={'username': obj.user.username})
@@ -301,6 +323,11 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
         qs = filter_active_users(qs, filter_on_user_profile_model=True)
         qs = qs.select_related('user').all()
         return qs
+    
+    def should_update(self, instance, **kwargs):
+        """ Only update active users """
+        should = super(UserProfileIndex, self).should_update(instance, **kwargs)
+        return should and is_user_active(instance.user)
     
     def _get_memberships_count(self, obj):
         if not hasattr(obj, '_memberships_count'):
@@ -416,4 +443,3 @@ class IdeaSearchIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObjectSearch
 
 
 # also import all external search indexes
-from cosinnus.external.search_indexes import * #noqa

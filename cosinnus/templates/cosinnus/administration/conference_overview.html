@@ -1,0 +1,307 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block page_title %}
+    {% if only_nonstandard %}
+        {% trans "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings" %}
+    {% elif only_premium %}
+            {% trans "Overview - Premium Conferences Only" %}
+    {% else %}
+        {% trans "Overview - All Conferences" %}
+    {% endif %}
+{% endblock %}
+
+{% block leftnav %}
+    {% include 'cosinnus/administration/leftnav.html' %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+    <li class="active">
+        {% if only_nonstandard %}
+            {% trans "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings" %}
+        {% elif only_premium %}
+            {% trans "Overview - Premium Conferences Only" %}
+        {% else %}
+            {% trans "Overview - All Conferences" %}
+        {% endif %}
+    </li>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="content-box textfield">
+        <h2>
+            {% if only_nonstandard %}
+	            {% trans "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings" %}
+	        {% elif only_premium %}
+	            {% trans "Overview - Premium Conferences Only" %}
+	        {% else %}
+	            {% trans "Overview - Conferences, Rooms and Workshops" %}
+	        {% endif %}
+            -
+	        {% if past %}
+	            {% trans "Past" %}
+                <a href="{{ request.path }}">
+                   [{% trans "View Upcoming" %}]
+                </a>
+	        {% else %}
+	            {% trans "Upcoming" %}
+	            <a href="{{ request.path }}?past=True">
+	               [{% trans "View Past" %}]
+	            </a>
+	        {% endif %}
+        </h2>
+        
+        
+        <h4>{% trans "Premium capacity occupancy overview" %}</h4>
+        <div class="textfield transparent">
+            <p>
+                {% trans "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity." %}
+            </p>
+        </div>
+        
+        <div class="big-calendar conference-premium-calendar large-space"></div>
+        
+        <script type="application/javascript">
+            var cosinnus_calendarEvents = [
+	            {% comment %}
+	                This if the version to take full capacity blocks without total premium capacity infos each day
+	                
+                    {% for portal_block in portal_capacity_blocks %}
+                        {% if portal_block.from_date and portal_block.to_date %}
+                            {
+                                id: 1000{{ portal_block.id }},
+                                title: '{{ i18n_portal_capacity|upper }}: 👥 {{ portal_block.max_participants }}',
+                                start: "{{ portal_block.from_date|date:"c"}}",
+                                end: "{{ portal_block.to_date|date:"c"}}",
+                                className: 'conference-calendar-portal-block',
+                                url: '{% url 'admin:cosinnus_cosinnusportal_change' object_id=portal.id %}#conference_settings',
+                                allDay: true
+                            },
+                        {% endif %}
+                    {% endfor %}
+	            {% endcomment %}
+	            
+	            {% for capacity_block in generated_capacity_blocks %}
+                    {
+                        title: '👥 {{ capacity_block.premium }}/{{ capacity_block.total }} {% trans "Booked" %}' ,
+                        start: "{{ capacity_block.date|date:"c"}}",
+                        end: "{{ capacity_block.date|next_day|date:"c"}}",
+                        className: 'conference-calendar-portal-block',
+                        url: '{% url 'admin:cosinnus_cosinnusportal_change' object_id=portal.id %}#conference_settings',
+                        allDay: true
+                    },
+                {% endfor %}
+	            
+                
+                {% for conference in conferences %}
+                    {% if conference.from_date and conference.to_date %}
+                        {
+                            id: 2000{{ conference.id }},
+                            title: '{% trans "Conference" %}{% if conference.is_premium_permanently %} ({% trans "Permanently Premium" %}){% endif %}: ' + $.cosinnus.decodeEntities('{{ conference.name|truncatechars:35 }}'),
+                            start: "{{ conference.from_date|date:"c"}}",
+                            end: "{{ conference.to_date|date:"c"}}",
+                            className: 'conference-calendar-conference',
+                            url: '{{ conference.get_absolute_url }}'
+                        },
+                    {% endif %}
+                {% endfor %}
+                
+                {% for conference_block in conference_premium_blocks %}
+                    {% if conference_block.from_date and conference_block.to_date %}
+                        {
+                            id: 3000{{ conference_block.id }},
+                            title: '👥 {{ conference_block.participants }}: ' + $.cosinnus.decodeEntities('{{ conference_block.conference.name|truncatechars:35 }}'),
+                            start: "{{ conference_block.from_date|date:"c"}}",
+                            end: "{{ conference_block.to_date|next_day|date:"c"}}",
+                            className: 'conference-calendar-conference-block',
+                            url: '{% url 'cosinnus:conference-administration-edit-premium-block' block_id=conference_block.id %}',
+                            allDay: true
+                        },
+                    {% endif %}
+                {% endfor %}
+            ];
+            $.cosinnus.fullcalendar();
+        </script>
+        
+        <hr/>
+        
+        <h4>
+            {% trans "Portal Setting" %}
+            {% if request.user|is_superuser %}
+	            <a href="{% url 'admin:cosinnus_cosinnusportal_change' object_id=portal.id %}#conference_settings" target="_blank">
+	                <i class="fa fa-cog"></i>
+	            </a>
+            {% endif %}
+        </h4>
+        {% include 'cosinnus/administration/conference_overview_setting_snippet.html' with setting=portal_setting %}
+        
+        <hr/>
+        
+        <h4>{% trans "Conference Settings" %}</h4>
+        {% if conference_report_list %}
+            {% for item in conference_report_list %}
+                <div class="row">
+                    <div class="col-md-8">
+                {% captureas uuid %}{{ "accordion-"|add_uuid }}{% endcaptureas %}
+                <div class="panel panel-default import-report-container-item">
+				    <div class="panel-heading">
+				        <h4 class="panel-title {% if not only_nonstandard %}collapsed{% endif %}" data-toggle="collapse" data-target="#{{ uuid}}">
+				            {% if item.conference.resolved_conference_setting or item.rooms_and_events %}
+					            <i class="fa fa-chevron-down panel-collapsed pull-right"></i>
+					            <i class="fa fa-chevron-up panel-open pull-right"></i>
+				            {% endif %}
+				            
+				            <a href="{{ item.conference.get_absolute_url }}" target="_blank">
+    				            {{ item.conference.name }}
+				            </a>
+				            {% if request.user|is_superuser %}
+					            <a href="{% url 'admin:cosinnus_cosinnusconference_change' object_id=item.conference.id %}#conference_settings" target="_blank">
+					                <i class="fa fa-cog"></i>
+					            </a>
+				            {% endif %}
+				            -
+					        <span>
+					           {% if item.conference.is_premium_permanently %}
+                                    <i class="fa fa-star"></i>
+                                    {% trans "Permanently Premium" %}
+					            {% elif item.conference.is_premium %}
+					                <i class="fa fa-star"></i>
+					                {% trans "Premium active" %}
+					            {% elif item.conference.has_premium_blocks %}
+                                    <i class="fa fa-star-o"></i>
+					                {% trans "Premium inactive, but scheduled" %}
+					            {% else %}
+					                {% trans "Not premium" %}
+					            {% endif %}
+					        </span>
+					        -
+					        <span>
+					            {% trans "Rooms" %}: {{ item.room_count }},
+                                {% trans "Workshops" %}: {{ item.event_count }}
+					        </span>
+					        -
+					        <span>
+                                {% trans "Start" %}: {{ item.conference.from_date|date:"SHORT_DATE_FORMAT" }}
+                                {% if item.conference.is_running %}
+                                    <i>
+                                        ({% trans "running now!" %})
+                                    </i>
+                                {% endif %}
+					        </span>
+				        </h4>
+				    </div>
+			        {% if item.conference.resolved_conference_setting or item.rooms_and_events %}
+					    <div id="{{ uuid}}" class="panel-collapse {% if only_nonstandard %}in{% else %}collapse{% endif %}">
+					        <div class="panel-body">
+					            <div class="textfield transparent">
+					                {% if item.conference.resolved_conference_setting %}
+					                    <i class="fas fa-fw {{ COSINNUS_CONFERENCE_TRANS.ICON }}"></i>
+					                    {% trans "Conference Setting" %}:
+					                    {% if request.user|is_superuser %}
+						                    <a href="{% url 'admin:cosinnus_cosinnusconference_change' object_id=item.conference.id %}#conference_settings" target="_blank">
+				                                <i class="fa fa-cog"></i>
+				                            </a>
+							            {% endif %}
+					                    {% include 'cosinnus/administration/conference_overview_setting_snippet.html' with setting=item.conference.resolved_conference_setting %}
+					                {% endif %}
+					                
+					                {% if item.rooms_and_events %}
+					                    <ul class="blank-list">
+							                {% for room, events in item.rooms_and_events %}
+							                    {% if room or events %}
+								                    <li>
+			    								        {% if room %}
+			    								            <i class="fas fa-fw fa-door-open"></i>
+										                    {% trans "Room" %}:
+										                    <a href="{{ room.get_absolute_url }}" target="_blank">
+			                                                    {{ room.title }}    								        
+			                                                </a>
+			                                                {% if request.user|is_superuser %}
+				                                                <a href="{% url 'admin:cosinnus_cosinnusconferenceroom_change' object_id=room.id %}#conference_settings" target="_blank">
+									                                <i class="fa fa-cog"></i>
+									                            </a>
+												            {% endif %}
+								                            <br/>
+			                                                {% if room.resolved_conference_setting %}
+			                                                    {% include 'cosinnus/administration/conference_overview_setting_snippet.html' with setting=room.resolved_conference_setting %}
+			                                                {% endif %}
+			    								        {% endif %}
+			    								        
+			    								        {% if events %}
+			    								            <ul class="blank-list">
+					    								        {% for event in events %}
+					    								            <li>
+						    								            <i class="fas fa-fw fa-calendar"></i>
+						    								            {% trans "Event" %}:
+						                                                <a href="{{ event.get_absolute_url }}" target="_blank">
+						                                                    {{ event.title }}                                         
+						                                                </a>
+						                                                {% if request.user|is_superuser %}
+							                                                <a href="{% url 'admin:cosinnus_event_conferenceevent_change' object_id=event.id %}#conference_settings" target="_blank">
+							                                                    <i class="fa fa-cog"></i>
+							                                                </a>
+															            {% endif %}
+						                                                <br/>
+						                                                {% if event.resolved_conference_setting %}
+						                                                    {% include 'cosinnus/administration/conference_overview_setting_snippet.html' with setting=event.resolved_conference_setting %}
+						                                                {% endif %}
+					                                                </li>
+					    								        {% endfor %}
+				    								        </ul>
+			    								        {% endif %}
+		    								        </li>
+	    								        {% endif %}
+								            {% endfor %}
+							            </ul>
+						            {% endif %}
+	                            </div>
+					        </div>
+					    </div>
+				    {% endif %}
+				</div>
+                </div>
+                <div class="col-md-2">
+                    {% if not item.conference.is_premium_permanently %}
+	                    <a href="{% url 'cosinnus:conference-administration-add-premium-block' slug=item.conference.slug %}">
+	                        <i class="fa fa-plus"></i> {% trans 'Add new premium block' %}
+	                    </a>
+                    {% endif %}
+                </div>
+                {% captureas modal_toggle_premium_id %}modal_toggle_premium_{{ item.conference.id }}{% endcaptureas %}
+                <div class="col-md-2">
+                    <a href="" data-target="#{{ modal_toggle_premium_id }}" data-toggle="modal">
+                        <i class="fa fa-check-circle"></i>
+                        {% if not item.conference.is_premium_permanently %}
+                            {% trans 'Make Permanent Premium' %}
+                        {% else %}
+                            {% trans 'Remove Permanent Premium' %}
+                        {% endif %}
+                    </a>
+                </div>
+                {% captureas label %}
+                    {% if not item.conference.is_premium_permanently %}
+                        {% trans "Do you really want to make this conference premium permanent?" %}
+                    {% else %}
+                        {% trans 'Do you really want to remove premium permanent from this conference?' %}
+                    {% endif %}
+                {% endcaptureas %}
+	            {% captureas title %}
+                    {% if not item.conference.is_premium_permanently %}
+                        {% trans 'Make Permanent Premium' %}
+                    {% else %}
+                        {% trans 'Remove Permanent Premium' %}
+                    {% endif %}
+                {% endcaptureas %}
+	            {% captureas action %}{% url 'cosinnus:conference-administration-overview' %}{% endcaptureas %}
+                {% captureas conference_id %}{{ item.conference.id }}{% endcaptureas %}
+	            {% include "cosinnus/modal_box.html" with id=modal_toggle_premium_id label=label title=title form_action=action submit_name="toggle_permanent_premium" submit_value=conference_id title_icon_full_class='fa fa-check-circle' %}
+            </div>
+            {% endfor %}
+        {% else %}
+            {% trans "There are no items to show." %}
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% load i18n static cosinnus_tags djajax_tags %}
+
+<div type="button" class="btn btn-emphasized btn-headline btn-no-interact fine-space">
+    <ul class="media-list">
+        <li class="media">
+            <span class="pull-left btn-extra-emphasized"></span>
+            <span class="pull-left">
+                <i class="fa fa-sitemap"></i>
+            </span>
+            <div class="media-body">
+                {% if request.user.is_authenticated and request.user == this_user %}
+                    {{ COSINNUS_PROJECT_TRANS.MY_LIST }}
+                {% else %}
+                    {{ COSINNUS_PROJECT_TRANS.VERBOSE_NAME_PLURAL }}
+                {% endif %}
+            </div>
+        </li>
+    </ul>
+</div><!-- btn -->
+
+{% with projects=profile.cosinnus_projects %}
+    {% for group in projects %}
+        {% if not SETTINGS.COSINNUS_USE_V2_DASHBOARD or not group.slug in SETTINGS.NEWW_DEFAULT_USER_GROUPS %}
+            <button type="button" class="btn btn-default w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ group.get_absolute_url }}">
+                <ul class="media-list">
+                    <li class="media">
+                        <span class="pull-left">
+                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
+                        </span>
+                        <div class="media-body">
+                            {{ group.name }}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+        {% endif %}
+    {% endfor %}
+{% endwith %}

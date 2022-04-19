@@ -63,7 +63,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   button: {
     background: theme.palette.primary.main,
-    color: "#ffffff",
+    color: theme.palette.text.secondary,
     fontWeight: "bold",
     position: "absolute",
     top: "60px",

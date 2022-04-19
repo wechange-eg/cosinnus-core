@@ -38,7 +38,16 @@
 
 {% block modal_send_newsletter %}
     {% if form.instance.id %}
-        {% captureas label %}{% trans "Do you really want to send the newsletter?" %}{% endcaptureas %}
+        {% captureas label %}
+            <p>
+                {% trans "Do you really want to send the newsletter?" %}
+            </p>
+            <p>
+                <b>
+                    {% blocktrans count counter=receipients|length %}With the current selection the newsletter will be sent to {{ counter }} recipients.{% plural %}With the current selection the newsletter will be sent to {{ counter }} recipients.{% endblocktrans %}
+                </b>
+            </p>
+        {% endcaptureas %}
         {% captureas title %}{% trans "Send newsletter" %}{% endcaptureas %}
         {% captureas action %}{% url 'cosinnus:administration-groups-newsletter-update' newsletter_id=form.instance.id %}{% endcaptureas %}
         {% include "cosinnus/modal_box.html" with id=modal_send_newsletter label=label title=title form_action=action submit_name="send_newsletter" title_icon='fa fa-envelope' %}

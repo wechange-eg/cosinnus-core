@@ -10,6 +10,7 @@ from django.utils import timezone
 from django.views.generic.edit import CreateView, FormView, UpdateView
 from django.views.generic.list import ListView
 from cosinnus.utils.permissions import check_user_superuser
+from cosinnus.views.mixins.group import RequirePortalManagerMixin
 from django.core.exceptions import PermissionDenied
 from django.views.generic.base import TemplateView
 from cosinnus.forms.administration import (UserWelcomeEmailForm,
@@ -28,23 +29,22 @@ from cosinnus.views.profile import UserProfileUpdateView
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.permissions import check_user_can_receive_emails
 from cosinnus.utils.html import render_html_with_variables
-from cosinnus.core.mail import send_html_mail_threaded
-from cosinnus.models.group import CosinnusGroup
-from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
+from cosinnus.core.mail import send_html_mail
+from cosinnus.models.profile import get_user_profile_model
+from cosinnus.models.managed_tags import (CosinnusManagedTag,
+                                          CosinnusManagedTagAssignment)
 from cosinnus.views.user import email_first_login_token_to_user
 from cosinnus.conf import settings
 from cosinnus.models.profile import PROFILE_SETTING_LOGIN_TOKEN_SENT
 from threading import Thread
+from cosinnus.utils.user import check_user_has_accepted_any_tos
+from django.http.response import JsonResponse
+from django.db.models import F
 
 
-class AdministrationView(TemplateView):
+class AdministrationView(RequirePortalManagerMixin, TemplateView):
     
     template_name = 'cosinnus/administration/administration.html'
-    
-    def dispatch(self, request, *args, **kwargs):
-        if not check_user_superuser(request.user):
-            raise PermissionDenied('You do not have permission to access this page.')
-        return super(AdministrationView, self).dispatch(request, *args, **kwargs)
 
 administration = AdministrationView.as_view()
 
@@ -134,9 +134,10 @@ class BaseNewsletterUpdateView(UpdateView):
     def _filter_valid_recipients(self, users):
         filtered_users = []
         for user in users:
-            if settings.COSINNUS_NEWSLETTER_SENDING_IGNORES_NOTIFICATION_SETTINGS and user.is_active:
+            if settings.COSINNUS_NEWSLETTER_SENDING_IGNORES_NOTIFICATION_SETTINGS and user.last_login \
+                    and user.is_active and user.cosinnus_profile and check_user_has_accepted_any_tos(user):
                 filtered_users.append(user)
-            elif (check_user_can_receive_emails(user)):
+            elif (check_user_can_receive_emails(user) and user.last_login):
                 # if the newsletter opt-in is enabled, only send the newsletter to users
                 # who have the option enabled in their profiles
                 if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN and not \
@@ -145,20 +146,26 @@ class BaseNewsletterUpdateView(UpdateView):
                 filtered_users.append(user)
         return filtered_users
     
-    def _send_newsletter(self, recipients):
+    def _send_newsletter(self, recipients, threaded=True):
         subject = self.object.subject
         text = self.object.body
         for recipient in recipients:
             user_text = textfield(render_html_with_variables(recipient, text))
             # omitt the topic line after "Hello user," by passing topic_instead_of_subject=' '
-            send_html_mail_threaded(recipient, subject, user_text, topic_instead_of_subject=' ')
+            send_html_mail(recipient, subject, user_text, topic_instead_of_subject=' ', threaded=threaded)
 
     def form_valid(self, form):
         self.object = form.save()
         if 'send_newsletter' in self.request.POST:
             recipients = self._get_recipients_from_choices()
             recipients = self._filter_valid_recipients(recipients)
-            self._send_newsletter(recipients)
+            # send mails threaded
+            my_self = self
+            class CosinnusSendNewsletterThread(Thread):
+                def run(self):
+                    my_self._send_newsletter(recipients, threaded=False)
+            CosinnusSendNewsletterThread().start()
+            
             self.object.sent = timezone.now()
             self.object.save()
             messages.add_message(self.request, messages.SUCCESS, _('Newsletter sent.'))
@@ -279,7 +286,7 @@ groups_newsletter_update = GroupsNewsletterUpdateView.as_view()
 class UserListView(ListView):
     model = get_user_model()
     template_name = 'cosinnus/administration/user_list.html'
-    ordering = '-date_joined'
+    ordering = '-last_login'
     paginate_by = 50
 
     def dispatch(self, request, *args, **kwargs):
@@ -287,8 +294,8 @@ class UserListView(ListView):
             raise PermissionDenied('You do not have permission to access this page.')
         return super().dispatch(request, *args, **kwargs)
 
-    def send_login_token(self, user):
-        email_first_login_token_to_user(user)
+    def send_login_token(self, user, threaded=True):
+        email_first_login_token_to_user(user, threaded=threaded)
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -297,18 +304,65 @@ class UserListView(ListView):
             qs = qs.filter(Q(email__icontains=search_string) |
                            Q(first_name__icontains=search_string) |
                            Q(last_name__icontains=search_string) )
+        if self.request.GET.get('order_by'):
+            order = self.request.GET.get('order_by')
+            if order:
+                if order.startswith('-'):
+                    order_func = F(order.replace('-', '')).desc(nulls_last=True)
+                else:
+                    order_func = F(order).asc(nulls_first=True)
+                qs = qs.order_by(order_func, 'id')
+        if self.request.GET.get('managed_tag'):
+            managed_tag_id = self.request.GET.get('managed_tag')
+            if managed_tag_id:
+                managed_tag = CosinnusManagedTag.objects.filter(
+                    id=managed_tag_id).first()
+                profile_type = ContentType.objects.get(
+                    app_label='cosinnus', model='userprofile')
+                assignments = CosinnusManagedTagAssignment.objects.filter(
+                    content_type=profile_type.id,
+                    managed_tag=managed_tag).values_list(
+                        'object_id', flat=True)
+                user = get_user_profile_model().objects.filter(
+                    id__in=assignments).values_list('user__id', flat=True)
+                qs = qs.filter(id__in=user)
         return qs
+
+    def get_managed_tag_as_options(self):
+        if settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS:
+            predefined_slugs = settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS
+            managed_tags = CosinnusManagedTag.objects.filter(slug__in=predefined_slugs)
+            return [(str(tag.id), tag.name) for tag in managed_tags]
+        managed_tags = CosinnusManagedTag.objects.all()
+        return [(str(tag.id), tag.name) for tag in managed_tags]
+
+    def get_options_label(self):
+        return CosinnusManagedTag.labels.MANAGED_TAG_NAME
+
+    def get_table_column_header(self):
+        return CosinnusManagedTag.labels.MANAGED_TAG_NAME_PLURAL
 
     def get_context_data(self):
         context = super().get_context_data()
-        context['total'] = self.get_queryset().count()
+        context.update({
+            'total': self.get_queryset().count(),
+            'options': self.get_managed_tag_as_options(),
+            'options_label': self.get_options_label(),
+            'column_header': self.get_table_column_header()
+        })
         return context
 
 
     def post(self, request, *args, **kwargs):
         search_string = ''
+        order_by = ''
+        managed_tag = ''
         if 'search' in self.request.POST and request.POST.get('search'):
             search_string = '?search={}'.format(request.POST.get('search'))
+        if 'order_by' in self.request.POST and request.POST.get('order_by'):
+            order_by = '&order_by={}'.format(request.POST.get('order_by'))
+        if 'managed_tag' in self.request.POST and request.POST.get('managed_tag'):
+            managed_tag = '&managed_tag={}'.format(request.POST.get('managed_tag'))
         if 'send_login_token' in self.request.POST:
             if self.request.POST.get('send_login_token') == '__all__':
                 non_tokened_users = get_user_model().objects.\
@@ -322,16 +376,22 @@ class UserListView(ListView):
                             profile = user.cosinnus_profile
                             profile.refresh_from_db()
                             if not PROFILE_SETTING_LOGIN_TOKEN_SENT in profile.settings:
-                                view.send_login_token(user)
+                                view.send_login_token(user, threaded=False)
                 UserLoginTokenThread().start()
-                    
-                messages.add_message(self.request, messages.SUCCESS, _('Login tokens to all previously uninvited users are now being sent.'))
+
+                msg = _('Login tokens to all previously uninvited users are now being sent in the background. You can refresh this page to update the status display of invitations.')
+                messages.add_message(self.request, messages.SUCCESS, msg)
             else:
                 user_id = self.request.POST.get('send_login_token')
                 user = get_user_model().objects.get(id=user_id)
                 self.send_login_token(user)
+                if self.request.is_ajax():
+                    data = {
+                        'ajax_form_id': self.request.POST.get('ajax_form_id'),
+                    }
+                    return JsonResponse(data)
                 messages.add_message(self.request, messages.SUCCESS, _('Login token was sent to %(email)s.') % {'email': user.email})
-        redirect_path = '{}{}'.format(request.path_info, search_string)
+        redirect_path = '{}{}{}{}'.format(request.path_info, search_string, order_by, managed_tag)
         return HttpResponseRedirect(redirect_path)
 
 user_list = UserListView.as_view()
@@ -393,3 +453,4 @@ class UserCreateView(SuccessMessageMixin, CreateView):
         return super().dispatch(request, *args, **kwargs)
 
 user_add = UserCreateView.as_view()
+

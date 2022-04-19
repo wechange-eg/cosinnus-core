@@ -1,20 +1,26 @@
 from django import forms
+from django.utils import timezone
 
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus_conference.utils import get_initial_template
 from cosinnus.models.conference import ParticipationManagement
 from cosinnus.models.conference import CosinnusConferenceApplication
 from cosinnus.models.conference import APPLICATION_STATES_VISIBLE
+from cosinnus.models.conference import CosinnusConferencePremiumBlock
+from cosinnus.utils.html import render_html_with_variables
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from django.forms.widgets import SelectMultiple
 from django.forms import formset_factory, modelformset_factory
 from django.forms import BaseFormSet
+from django.template.defaultfilters import date
 from django_select2.widgets import Select2MultipleWidget
 from cosinnus.forms.widgets import SplitHiddenDateWidget
 
-from cosinnus.utils.validators import validate_file_infection
+from cosinnus.utils.validators import validate_file_infection,\
+    CleanFromToDateFieldsMixin
+from uritemplate.api import variables
 
 
 class ConferenceRemindersForm(forms.ModelForm):
@@ -30,6 +36,9 @@ class ConferenceRemindersForm(forms.ModelForm):
     hour_before = forms.BooleanField(widget=forms.CheckboxInput, required=False)
     hour_before_subject = forms.CharField(required=False)
     hour_before_content = forms.CharField(widget=forms.Textarea, required=False)
+
+    send_immediately_subject = forms.CharField(required=False)
+    send_immediately_content = forms.CharField(widget=forms.Textarea, required=False)
 
     class Meta:
         model = get_cosinnus_group_model()
@@ -58,6 +67,50 @@ class ConferenceRemindersForm(forms.ModelForm):
             elif self.instance.extra_fields and key in self.instance.extra_fields:
                 del self.instance.extra_fields[key]
         return super(ConferenceRemindersForm, self).save(commit)
+
+
+class ConferenceConfirmSendRemindersForm(forms.ModelForm):
+    subject = forms.CharField()
+    content = forms.CharField(widget=forms.Textarea)
+
+    class Meta:
+        model = get_cosinnus_group_model()
+        fields = ('extra_fields', )
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        super().__init__(*args, **kwargs)
+        self.fields['subject'].widget.attrs['readonly'] = True
+        self.fields['content'].widget.attrs['readonly'] = True
+
+    def get_variables(self):
+        return {
+            'name': self.instance.name,
+            'from_date': date(
+                timezone.localtime(self.instance.from_date),
+                'SHORT_DATETIME_FORMAT'),
+            'to_date': date(
+                timezone.localtime(self.instance.to_date),
+                'SHORT_DATETIME_FORMAT'),
+        }
+
+    def get_initial_for_field(self, field, field_name):
+        extra_fields = {}
+        if self.instance.extra_fields:
+            extra_fields = self.instance.extra_fields
+        if field_name == 'subject' or field_name == 'content':
+            field_name = 'send_immediately_{}'.format(field_name)
+            field_value = extra_fields.get('reminder_{}'.format(field_name),
+                                           get_initial_template(field_name))
+            return render_html_with_variables(
+                self.user, field_value, self.get_variables())
+
+    def save(self, commit=True):
+        now = timezone.now()
+        if not self.instance.extra_fields:
+            self.instance.extra_fields = {}
+        self.instance.extra_fields['reminder_send_immediately_last_sent'] = now
+        return super().save(commit)
 
 
 class ConferenceFileUploadWidget(forms.ClearableFileInput):
@@ -96,29 +149,13 @@ class ConferenceParticipationManagement(forms.ModelForm):
         if self.cleaned_data['application_options'] and len(self.cleaned_data) > 0:
             return [int(option) for option in self.cleaned_data['application_options']]
 
-    def clean(self):
-        cleaned_data = super().clean()
-        application_start = cleaned_data.get('application_start')
-        application_end = cleaned_data.get('application_end')
-
-        if application_end and application_end:
-            if application_end <= application_start:
-                msg = _('End date must be before start date')
-                self.add_error('application_end', msg)
-
-        elif application_end and not application_start:
-            msg = _('Please also provide a start date')
-            self.add_error('application_start', msg)
-
-        elif application_start and not application_end:
-            msg = _('Please also provide a end date')
-            self.add_error('application_end', msg)
-
-        return cleaned_data
 
 
-class ConferenceApplicationForm(forms.ModelForm):
+class ConferenceApplicationForm(CleanFromToDateFieldsMixin, forms.ModelForm):
     conditions_accepted = forms.BooleanField(required=True)
+    
+    from_date_field_name = 'application_start'
+    to_date_field_name = 'application_end'
     
     class Meta:
         model = CosinnusConferenceApplication
@@ -229,3 +266,12 @@ class AsignUserToEventForm(forms.Form):
         super().__init__(*args, **kwargs)
 
 AsignUserToEventForm = formset_factory(AsignUserToEventForm, extra=0)
+
+
+class ConferencePremiumBlockForm(CleanFromToDateFieldsMixin, forms.ModelForm):
+    from_date = forms.SplitDateTimeField(widget=SplitHiddenDateWidget(default_time='00:00'))
+    to_date = forms.SplitDateTimeField(widget=SplitHiddenDateWidget(default_time='23:59'))
+
+    class Meta:
+        model = CosinnusConferencePremiumBlock
+        fields = ['from_date', 'to_date', 'participants']

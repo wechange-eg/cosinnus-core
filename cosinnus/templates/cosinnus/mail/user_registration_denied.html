@@ -2,8 +2,8 @@
 
 If you have any questions, please contact one of your site administrators, as listed below.
 
-Your {{ site_name }} Team:{% endblocktrans %}{% endautoescape %}
+Your {{ site_name }} Team:{% endblocktrans %}{% endautoescape %} {% if portal.support_email %}{{ portal.support_email }}{% endif %}
 
 {% for admin in admins %}
-{{ admin|full_name_force }}: {{ admin.email }}
+    {{ admin|full_name_force }}
 {% endfor %}

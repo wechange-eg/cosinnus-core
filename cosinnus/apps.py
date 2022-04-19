@@ -17,3 +17,5 @@ class CosinnusAppConfig(AppConfig):
         if settings.COSINNUS_USE_CELERY:
             from cosinnus import init_celery_app
             init_celery_app()
+
+        from cosinnus.api import hooks

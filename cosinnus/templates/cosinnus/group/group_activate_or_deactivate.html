@@ -26,45 +26,51 @@
 
 
 {% block content %}
-    
-    {% if not activate %}
-	    <div class="alert alert-danger alert-dismissable">
-		    <i class="fa fa-exclamation-triangle fa-3x"></i>
-		    <p>{% trans 'Warning!' %}</p>
-		    <p>{{ target_group.trans.DEACTIVATE_WARNING }}</p>
-		</div>
-	{% endif %}
 
     <!-- a box with semi transparent background -->
     <div class="content-box">
-	    
-            <legend>
-                {% if activate %}{{ target_group.trans.REACTIVATE }}{% else %}{{ target_group.trans.DEACTIVATE }}{% endif %}:
-                {{ target_group.name }}
-            </legend>
+        
+	    {% if not activate %}
+	        <div class="alert alert-danger alert-dismissable">
+	            <i class="fa fa-exclamation-triangle fa-3x"></i>
+	            <p>{% trans 'Warning!' %}</p>
+	            <p>{{ target_group.trans.DEACTIVATE_WARNING }}</p>
+	        </div>
+	    {% endif %}
+    
+        <h2> 
+            {% if activate %}
+                {{ target_group.trans.REACTIVATE }}:
+            {% else %}
+                {{ target_group.trans.DEACTIVATE }}:
+            {% endif %}
+            {{ target_group.name }}
+        </h2>
 
-            <!-- On large screens the long explanation texts are on the right side next to the input elements -->
-            <div class="row">
-                <!-- explanation text -->
-                <div class="col-md-12">
-                		<p class="transparent"></p>
-                	{% if activate %}
-						<p class="transparent">{{ target_group.trans.DEACTIVATE_EXPLANATION }}</p><!-- Text here if neccessary -->
-					{% else %}
-	                    <p class="transparent">{{ target_group.trans.REACTIVATE_EXPLANATION_1 }}</p><!-- Text here if neccessary -->
-	                    <p class="transparent">{{ target_group.trans.REACTIVATE_EXPLANATION_2 }}</p><!-- Text here if neccessary -->
-					{% endif %}
-                </div>
-            </div><!-- row -->
+        <!-- On large screens the long explanation texts are on the right side next to the input elements -->
+        <div class="row">
+            <!-- explanation text -->
+            <div class="col-md-12">
+            	{% if activate %}
+					<div class="textfield transparent">
+					    {{ target_group.trans.REACTIVATE_EXPLANATION|textfield }}
+					</div>
+				{% else %}
+                    <div class="textfield transparent">
+                        {{ target_group.trans.DEACTIVATE_EXPLANATION|textfield }}
+                    </div>
+				{% endif %}
+            </div>
+        </div><!-- row -->
     </div>
     
     <form method="POST" action=".">{% csrf_token %}
 	    <button type="submit" class="btn btn-{% if activate %}emphasized{% else %}default{% endif %}">
 	        <ul class="media-list">
 	            <li class="media">
-	                <a class="pull-left" href="#">
+	                <span class="pull-left">
 	                    <i class="fa {% if activate %}fa-check{% else %}fa-times{% endif %}"></i>
-	                </a>
+	                </span>
 	                <div class="media-body">
                         {% if activate %}{% trans "Re-Activate" %}{% else %}{% trans "Deactivate" %}{% endif %}
 	                </div>

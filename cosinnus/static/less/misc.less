@@ -208,8 +208,8 @@
     cursor: default !important;
 }
 
-.app-main .btn-headline:hover .media, .app-main .btn-headline:hover .media > .media-body,
-.app-main .btn-headline:hover .media, .app-main .btn-headline:hover .media > .media-body {
+.app-main .btn-headline:not(.btn-white):hover .media, .app-main .btn-headline:not(.btn-white):hover .media > .media-body,
+.app-main .btn-headline:not(.btn-white):hover .media, .app-main .btn-headline:not(.btn-white):hover .media > .media-body {
     background-color: @app-main-color;
 }
 
@@ -455,6 +455,12 @@ a.anchor {
         2px -2px 0 #000,
         -2px 2px 0 #000,
         2px 2px 0 #000;
+}
+
+ul.blank-list, ul.blank-list li,
+ol.blank-list, ol.blank-list li {
+    list-style: none;
+    
 }
 
 @media (max-width: 767px) {

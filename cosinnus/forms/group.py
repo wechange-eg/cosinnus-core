@@ -6,6 +6,7 @@ from builtins import object
 import re
 import csv
 import io
+import chardet
 
 from django import forms
 from django.forms.widgets import SelectMultiple
@@ -15,8 +16,9 @@ from django.utils.translation import ugettext_lazy as _
 from awesome_avatar import forms as avatar_forms
 
 from cosinnus.forms.mixins import AdditionalFormsMixin
+from captcha.fields import CaptchaField
 from cosinnus_organization.models import CosinnusOrganization
-from cosinnus.models.group import (CosinnusGroupMembership,
+from cosinnus.models.group import (CosinnusBaseGroup, CosinnusGroupMembership,
                                    CosinnusPortal,
     CosinnusLocation, RelatedGroups, CosinnusGroupGalleryImage,
     CosinnusGroupCallToActionButton)
@@ -39,13 +41,16 @@ from django.core.exceptions import ObjectDoesNotExist
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.group import SDG_CHOICES
 from cosinnus.forms.managed_tags import ManagedTagFormMixin
-from cosinnus.utils.validators import validate_file_infection
+from cosinnus.forms.translations import TranslatedFieldsFormMixin
+from cosinnus.utils.validators import validate_file_infection,\
+    CleanFromToDateFieldsMixin
 from cosinnus.forms.widgets import SplitHiddenDateWidget
 from cosinnus.forms.attached_object import FormAttachableMixin
 from annoying.functions import get_object_or_None
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus import cosinnus_notifications
 from uuid import uuid1
+from cosinnus.forms.dynamic_fields import _DynamicFieldsBaseFormMixin
 
 # matches a twitter username
 TWITTER_USERNAME_VALID_RE = re.compile(r'^@?[A-Za-z0-9_]+$')
@@ -108,8 +113,31 @@ class AsssignPortalMixin(object):
         return super(AsssignPortalMixin, self).save(**kwargs)
 
 
-class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin, 
-                ManagedTagFormMixin, FormAttachableMixin, AdditionalFormsMixin, forms.ModelForm):
+class GroupFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
+    """ Mixin for the CosinnusBaseGroupForm modelform that
+        adds functionality for by-portal configured extra group form fields """
+        
+    DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_GROUP_EXTRA_FIELDS
+    
+    def full_clean(self):
+        """ Assign the extra fields to the `extra_fields` the userprofile JSON field
+            instead of model fields, during regular form saving """
+        super().full_clean()
+        if hasattr(self, 'cleaned_data'):
+            for field_name in self.DYNAMIC_FIELD_SETTINGS.keys():
+                # skip saving fields that weren't included in the POST
+                # this is important, do not add exceptions here.
+                # if you need an exception, add a hidden field with the field name and any value!
+                if not field_name in self.data.keys():
+                    continue
+                # skip saving disabled fields
+                if field_name in self.fields and not self.fields[field_name].disabled:
+                    self.instance.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
+
+
+class CosinnusBaseGroupForm(TranslatedFieldsFormMixin, FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin,
+                GroupFormDynamicFieldsMixin, ManagedTagFormMixin, FormAttachableMixin,
+                AdditionalFormsMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), 
                   disable_preview=True, validators=[validate_file_infection])
@@ -123,12 +151,20 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
     if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS:
         managed_tag_field = forms.CharField(required=settings.COSINNUS_MANAGED_TAGS_GROUP_FORMFIELD_REQUIRED)
     
+    # This is for `FormAttachableMixin` to set all uploaded files to public (otherwise they couldn't be downloaded
+    # from the microsite)
+    # TODO: if groups ever become non-publicly visible, change this setting!
+    FORCE_ATTACHED_OBJECTS_VISIBILITY_ALL = True
+    
     class Meta(object):
         fields = ['name', 'public', 'description', 'description_long', 'contact_info', 'sdgs',
                         'avatar', 'wallpaper', 'website', 'video', 'twitter_username',
                          'twitter_widget_id', 'flickr_url', 'deactivated_apps', 'microsite_public_apps',
-                         'call_to_action_active', 'call_to_action_title', 'call_to_action_description',] \
+                         'call_to_action_active', 'call_to_action_title', 'call_to_action_description',
+                         'membership_mode',] \
                         + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) \
+                        + (['show_contact_form'] if settings.COSINNUS_ALLOW_CONTACT_FORM_ON_MICROPAGE else []) \
+                        + (['publicly_visible'] if settings.COSINNUS_GROUP_PUBLICY_VISIBLE_OPTION_SHOWN else []) \
                         + (['facebook_group_id', 'facebook_page_id',] if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED else []) \
                         + (['embedded_dashboard_html',] if settings.COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED else []) \
                         + (['managed_tag_field',] if (settings.COSINNUS_MANAGED_TAGS_ENABLED \
@@ -154,7 +190,29 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
         for field in list(self.fields.values()):
             if type(field.widget) is SelectMultiple:
                 field.widget = Select2MultipleWidget(choices=field.choices)
-                
+        
+        if 'video_conference_type' in self.fields:
+            # dynamic dropdown for video conference types in events
+            custom_choices = [
+                (CosinnusBaseGroup.NO_VIDEO_CONFERENCE, _('No video conference')),
+            ]
+            if settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS:
+                custom_choices += [
+                    (CosinnusBaseGroup.BBB_MEETING, _('BBB-Meeting')),
+                ]
+            if CosinnusPortal.get_current().video_conference_server:
+                custom_choices += [
+                    (CosinnusBaseGroup.FAIRMEETING, _('Fairmeeting')),
+                ]
+                self.fields['video_conference_type'].initial = CosinnusBaseGroup.FAIRMEETING
+            self.fields['video_conference_type'].choices = custom_choices
+        
+    @property
+    def group(self):
+        """ This is for `FormAttachableMixin` to get passed the group as a target for
+            uploading files. Only works after the group has been created however. """
+        return self.instance if self.instance.pk else None
+    
     def clean(self):
         if not self.cleaned_data.get('name', None):
             name = self.get_cleaned_name_from_other_languages()
@@ -230,7 +288,13 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
             user_superuser = check_user_superuser(self.request.user)
             
             
-            conference_notification_pairs = []
+            # we need to split email and alert here, because
+            # emails should check the notification settings normally,
+            # but for alerts, we need to check if the user is following the *target group*!
+            # (the notification logic for user_wants_alert would always return true on a group object)
+            conference_notification_email_pairs = []
+            conference_notification_alert_pairs = []
+            
             for related_group in self.cleaned_data['related_groups']:
                 # non-superuser users can only tag groups they are in
                 if not user_superuser and related_group.id not in user_group_ids:
@@ -244,21 +308,38 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
                     # the conference will be reflected into the group, so we send a notification
                     non_conference_group_types = [get_cosinnus_group_model().TYPE_PROJECT, get_cosinnus_group_model().TYPE_SOCIETY]
                     if self.instance.group_is_conference and related_group.type in non_conference_group_types:
-                        audience_except_creator = [member for member in related_group.actual_members if member.id != self.request.user.id]
+                        audience_group_members_except_creator = [member for member in related_group.actual_members if member.id != self.request.user.id]
+                        audience_group_followers_except_creator_ids = [pk for pk in related_group.get_followed_user_ids() if not pk in [self.request.user.id]]
+                        audience_group_followers_except_creator = get_user_model().objects.filter(id__in=audience_group_followers_except_creator_ids)
+                        # HERE: we should send alerts only for followers of the target group,
+                        #    but send the email notification for members, independent of following
                         # set the target group for the notification onto the group instance
                         setattr(self.instance, 'notification_target_group', related_group)
-                        conference_notification_pairs.append((self.instance, audience_except_creator))
+                        conference_notification_email_pairs.append((self.instance, audience_group_members_except_creator))
+                        conference_notification_alert_pairs.append((self.instance, audience_group_followers_except_creator))
+                        
             
             # send notifications in a session to avoid duplicate messages to any user
             session_id = uuid1().int     
-            for i, pair in enumerate(conference_notification_pairs):
+            for i, pair in enumerate(conference_notification_email_pairs):
                 cosinnus_notifications.conference_created_in_group.send(
                     sender=self,
                     user=self.request.user,
                     obj=pair[0],
                     audience=pair[1],
                     session_id=session_id,
-                    end_session=bool(i == len(conference_notification_pairs)-1)
+                    end_session=bool(i == len(conference_notification_email_pairs)-1)
+                )
+            # send email/alert in a different session each
+            session_id = uuid1().int     
+            for i, pair in enumerate(conference_notification_alert_pairs):
+                cosinnus_notifications.conference_created_in_group_alert.send(
+                    sender=self,
+                    user=self.request.user,
+                    obj=pair[0],
+                    audience=pair[1],
+                    session_id=session_id,
+                    end_session=bool(i == len(conference_notification_alert_pairs)-1)
                 )
         
         self.save_m2m = save_m2m
@@ -276,10 +357,15 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
 class _CosinnusProjectForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
     """ Specific form implementation for CosinnusProject objects (used through `registration.group_models`)  """
     
+    membership_mode = forms.ChoiceField(
+        choices=CosinnusProject.MEMBERSHIP_MODE_CHOICES,
+        required=False
+    )
+    
     extra_forms_setting = 'COSINNUS_PROJECT_ADDITIONAL_FORMS'
 
     class Meta(object):
-        fields = CosinnusBaseGroupForm.Meta.fields + ['parent',]
+        fields = CosinnusBaseGroupForm.Meta.fields + ['parent', 'video_conference_type']
         model = CosinnusProject
     
     def __init__(self, instance, *args, **kwargs):    
@@ -302,25 +388,33 @@ class _CosinnusProjectForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBa
 class _CosinnusSocietyForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
     """ Specific form implementation for CosinnusSociety objects (used through `registration.group_models`)  """
     
+    membership_mode = forms.ChoiceField(
+        choices=CosinnusSociety.MEMBERSHIP_MODE_CHOICES,
+        required=False
+    )
+    
     extra_forms_setting = 'COSINNUS_GROUP_ADDITIONAL_FORMS'
 
     class Meta(object):
-        fields = CosinnusBaseGroupForm.Meta.fields
+        fields = CosinnusBaseGroupForm.Meta.fields + ['video_conference_type',]
         model = CosinnusSociety
 
 
-class _CosinnusConferenceForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
+class _CosinnusConferenceForm(CleanAppSettingsMixin, CleanFromToDateFieldsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
     """ Specific form implementation for CosinnusConference objects (used through `registration.group_models`)  """
     
     from_date = forms.SplitDateTimeField(widget=SplitHiddenDateWidget(default_time='00:00'))
     to_date = forms.SplitDateTimeField(widget=SplitHiddenDateWidget(default_time='23:59'))
-    use_conference_applications = forms.BooleanField(initial=settings.COSINNUS_CONFERENCES_USE_APPLICATIONS_CHOICE_DEFAULT, required=False)
+    membership_mode = forms.ChoiceField(
+        initial=(CosinnusConference.MEMBERSHIP_MODE_APPLICATION if settings.COSINNUS_CONFERENCES_USE_APPLICATIONS_CHOICE_DEFAULT else CosinnusConference.MEMBERSHIP_MODE_REQUEST),
+        choices=CosinnusConference.MEMBERSHIP_MODE_CHOICES,
+        required=False
+    )
     
     extra_forms_setting = 'COSINNUS_CONFERENCE_ADDITIONAL_FORMS'
     
     class Meta(object):
         fields = CosinnusBaseGroupForm.Meta.fields + [
-                    'use_conference_applications', 
                     'conference_theme_color',
                     'from_date',
                     'to_date',
@@ -436,16 +530,13 @@ class MultiGroupSelectForm(MultiSelectForm):
         fields = ('groups',)
 
     def __init__(self, *args, **kwargs):
-        if 'organization' in kwargs:
-            self.organization = kwargs.pop('organization')
-        if 'group' in kwargs:
-            self.group = kwargs.pop('group')
+        self.group = kwargs.pop('group', None)
         super().__init__(*args, **kwargs)
 
     def get_queryset(self):
         include_uids = CosinnusPortal.get_current().groups.values_list('id', flat=True)
         queryset = get_cosinnus_group_model().objects.filter(id__in=include_uids)
-        if hasattr(self, 'organization') and self.organization:
+        if self.group and isinstance(self.group, CosinnusOrganization):
             exclude_uids = self.organization.groups.values_list('id', flat=True)
             queryset = queryset.exclude(id__in=exclude_uids)
         return queryset
@@ -454,10 +545,12 @@ class MultiGroupSelectForm(MultiSelectForm):
         return get_group_select2_pills(items, text_only=text_only)
 
     def get_ajax_url(self):
-        if hasattr(self, 'organization') and self.organization:
-            return reverse('cosinnus:organization-group-invite-select2', kwargs={'organization': self.organization.slug})
-        if hasattr(self, 'group') and self.group:
-            return group_aware_reverse('cosinnus:group-invite-select2', kwargs={'group': self.group.slug})
+        if self.group:
+            if isinstance(self.group, CosinnusOrganization):
+                return reverse('cosinnus:organization-group-invite-select2', kwargs={'organization': self.group.slug})
+            else:
+                return group_aware_reverse('cosinnus:group-invite-select2', kwargs={'group': self.group.slug})
+        return ''
 
 
 class CosinnusLocationForm(forms.ModelForm):
@@ -500,59 +593,49 @@ class CosinusWorkshopParticipantCSVImportForm(forms.Form):
         reader = self.process_csv(csv_file)
         header = next(reader, None)
         cleaned_header = self.clean_row_data(header)
-
-        group_header = self.process_and_validate_header(cleaned_header)
         data = self.process_and_validate_data(reader)
 
         return {
             'header_original': cleaned_header,
-            'header': group_header,
             'data': data
         }
 
     def process_and_validate_data(self, reader):
         data = []
-        workshop_usernames = []
+        usernames = []
 
         for row in reader:
             cleaned_row = self.clean_row_data(row)
-            workshop_username = cleaned_row[0]
-            if ' ' in workshop_username:
-                raise forms.ValidationError(_("Please remove the whitespace from '{}'").format(workshop_username))
-            if workshop_username not in workshop_usernames:
-                workshop_usernames.append(workshop_username)
+            username = cleaned_row[0]
+            first_name = cleaned_row[1]
+            if not username:
+                raise forms.ValidationError(_("Please always provide a username"))
+            if not first_name:
+                raise forms.ValidationError(_("Please always provide a first name"))
+            if ' ' in username:
+                raise forms.ValidationError(_("Please remove the whitespace from '{}'").format(username))
+            if username not in usernames:
+                usernames.append(username)
             else:
                 raise forms.ValidationError(_("Names must be unique. You added '{}' more"
-                                              " then once to your CSV. Please change the name.").format(workshop_username))
+                                              " then once to your CSV. Please change the name.").format(username))
             data.append(self.clean_row_data(cleaned_row))
 
         return data
 
-    def process_and_validate_header(self, header):
-        group_header = ['', '', '']
-
-        for slug in header[3:]:
-                try:
-                    group = CosinnusGroup.objects.get(parent=self.group,
-                                                      portal=self.group.portal,
-                                                      type=CosinnusGroup.TYPE_PROJECT,
-                                                      slug=slug.lower())
-                    group_header.append(group)
-                except ObjectDoesNotExist:
-                    raise forms.ValidationError(_("Can't find workshop with slug '{}'").format(slug))
-        return group_header
-
     def process_csv(self, csv_file):
         try:
-            file = csv_file.read().decode('utf-8')
+            raw_file = csv_file.read()
+            encoding = chardet.detect(raw_file)['encoding']
+            file = raw_file.decode(encoding)
             io_string = io.StringIO(file)
-            dialect = csv.Sniffer().sniff(io_string.read(1024), delimiters=";,")
+            dialect = csv.Sniffer().sniff(io_string.read(102400000), delimiters=";,")
             io_string.seek(0)
             reader = csv.reader(io_string, dialect)
             return reader
         except UnicodeDecodeError:
             raise forms.ValidationError(_("This is not a valid CSV File"))
-        except csv.Error:
+        except csv.Error as e:
             raise forms.ValidationError(_("CSV could not be parsed. Please use ',' or ';' as delimiter."))
 
 
@@ -561,3 +644,9 @@ class CosinusWorkshopParticipantCSVImportForm(forms.Form):
         for entry in row:
             cleaned_row.append(entry.strip())
         return cleaned_row
+
+
+class GroupContactForm(forms.Form):
+    email = forms.EmailField()
+    message = forms.CharField(widget=forms.Textarea)
+    captcha = CaptchaField()

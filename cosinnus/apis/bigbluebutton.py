@@ -8,11 +8,15 @@ import requests
 from cosinnus.conf import settings
 from cosinnus.models import CosinnusPortal, get_domain_for_portal
 from cosinnus.utils import bigbluebutton as bbb_utils
-from cosinnus.utils.functions import is_number
-from cosinnus.models.conference import CosinnusConferenceSettings
-
+from cosinnus.utils.functions import is_number, get_int_or_None
+from cosinnus.models.conference import CosinnusConferenceSettings,\
+    get_parent_object_in_conference_setting_chain
+from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.dates import datetime_from_timestamp
+import xml.etree.ElementTree as ET
 
 logger = logging.getLogger('cosinnus')
+
 
 class BigBlueButtonAPI(object):
     """ 
@@ -32,6 +36,11 @@ class BigBlueButtonAPI(object):
     
     api_auth_url = None
     api_auth_secret = None
+    recording_api_auth_url = None
+    recording_api_auth_secret = None
+    
+    class RecordingAPIServerNotSetUp(Exception):
+        pass
     
     def __init__(self, source_object=None):
         """ Important: Which API target this object uses is determined
@@ -41,41 +50,61 @@ class BigBlueButtonAPI(object):
             :param source_object: The object the room is attached to. Can be a media_tag (BaseTagObject), ConferenceRoom,
                          ConferenceEvent, CosinnusGroup.
                          Default: current CosinnusPortal, if None is given. """
-        api_auth_url, api_auth_secret = self._get_current_bbb_server_auth_pair(source_object=source_object)
-        if not api_auth_url or not api_auth_secret:
+        self._set_current_bbb_server_auth(source_object=source_object)
+        if not self.api_auth_url or not self.api_auth_secret:
             raise ImproperlyConfigured("No valid BBB server auth is currently configured or selected as active for this portal!")
-        self.api_auth_url = api_auth_url
-        self.api_auth_secret = api_auth_secret
-    
-    def _get_current_bbb_server_auth_pair(self, source_object=None):
-        """ Central helper function to retrieve the currently
+        
+    def _set_current_bbb_server_auth(self, source_object=None):
+        """ Central helper function to retrieve and set the currently
             selected BBB-server API URL and Secret.
             
-            @return: tuple of (str: BBB_API_URL, str: BBB_SECRET_KEY) if a server is set, 
-                        or (None, None) if no server is set """
+            Sets:
+                - self.api_auth_url
+                - self.api_auth_secret
+                - self.recording_api_auth_url
+                - self.recording_api_auth_secret
+        """
                         
+        current_portal = CosinnusPortal.get_current()
         if source_object is None:
-            source_object = CosinnusPortal.get_current()
-        conference_settings = CosinnusConferenceSettings.get_for_object(source_object)
+            source_object = current_portal
         
+        self.api_auth_url = None
+        self.api_auth_secret = None
+        self.recording_api_auth_url = None
+        self.recording_api_auth_secret = None
+        
+        conference_settings = CosinnusConferenceSettings.get_for_object(source_object)
         if conference_settings:
             try:
-                auth_pair = dict(settings.COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS).get(conference_settings.bbb_server_choice)
-                return (auth_pair[0], auth_pair[1]) # force fail on improper tuple
+                # find if the source object belongs to or is a group with premium status active
+                if conference_settings.is_premium:
+                    bbb_server_choice = conference_settings.bbb_server_choice_premium
+                else:
+                    bbb_server_choice = conference_settings.bbb_server_choice
+                
+                auth_pair = dict(settings.COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS).get(bbb_server_choice)
+                self.api_auth_url = auth_pair[0]
+                self.api_auth_secret = auth_pair[1]
+                
+                recording_api_auth_pair = dict(settings.COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS).get(conference_settings.bbb_server_choice_recording_api)
+                if recording_api_auth_pair is not None:
+                    self.recording_api_auth_url = recording_api_auth_pair[0]
+                    self.recording_api_auth_secret = recording_api_auth_pair[1]
             except Exception as e:
                 logger.error('Misconfigured: Either COSINNUS_BBB_SERVER_CHOICES or COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS are not properly set up!',
                              extra={'exception': e})
+                if settings.DEBUG:
+                    raise
         
-        return (None, None)
-    
-    
     def join_url_tokenized(self, meeting_id, name, password):
         url = self.join_url(meeting_id, name, password)
         return requests.get(url).url
     
-    
-    def api_call(self, query, call):
-        prepared = '{}{}{}'.format(call, query, self.api_auth_secret)
+    def api_call(self, query, call, secret=None):
+        if secret is None:
+            secret = self.api_auth_secret
+        prepared = '{}{}{}'.format(call, query, secret)
     
         if settings.BBB_HASH_ALGORITHM == "SHA1":
             checksum = sha1(str(prepared).encode('utf-8')).hexdigest()
@@ -89,8 +118,8 @@ class BigBlueButtonAPI(object):
     
     
     def start(self, 
-            name, meeting_id, welcome="Welcome to the conversation",
-            moderator_password="", attendee_password="", max_participants=None, voice_bridge=None,
+            name, meeting_id,
+            moderator_password="", attendee_password="", voice_bridge=None,
             parent_meeting_id=None, options=None, presentation_url=""):
         """ This function calls the BigBlueButton API directly to create a meeting with all available parameters available
             in the cosinnus-core.BBBRoom model.
@@ -101,17 +130,11 @@ class BigBlueButtonAPI(object):
         :param meeting_id: Human readable ID for the meeting
         :type: str
     
-        :param welcome: Welcome message when joining the meeting
-        :type: str
-    
         :param moderator_password: Password for users to join with moderator privileges
         :type: str
     
         :param attendee_password: Password for users to join with default attendee privileges
         :type: str
-    
-        :param max_participants: Number of users allowed in the conference
-        :type: int
     
         :param voice_bridge: Dial in PIN for telephone users
         :type: int
@@ -135,27 +158,24 @@ class BigBlueButtonAPI(object):
         voice_bridge = voice_bridge if voice_bridge and is_number(voice_bridge) else bbb_utils.random_voice_bridge()
         attendee_password = attendee_password if attendee_password else bbb_utils.random_password()
         moderator_password = moderator_password if moderator_password else bbb_utils.random_password()
-    
-        query = (
-            ("name", name),
-            ('meetingID', meeting_id),
-            ("welcome", welcome),
-            ("voiceBridge", voice_bridge),
-            ("attendeePW", attendee_password),
-            ("moderatorPW", moderator_password),
-        )
-    
-        if max_participants and is_number(max_participants):
-            query += (("maxParticipants", int(max_participants)),)
-    
-        if parent_meeting_id:
-            query += (("parentMeetingID", parent_meeting_id),)
-    
+        
+        params = {}
         if options:
-            for key, value in options.items():
-                query += ((key, value),)
-    
-        query = urllib.parse.urlencode(query)
+            params.update(options)
+        # these are the options that aren't overwritable by JSON options
+        params.update({
+            "name": name,
+            'meetingID': meeting_id,
+            "voiceBridge": voice_bridge,
+            "attendeePW": attendee_password,
+            "moderatorPW": moderator_password,
+        })
+        if parent_meeting_id:
+            params.update({
+                "parentMeetingID": parent_meeting_id,
+            })
+        
+        query = urllib.parse.urlencode(list(params.items()))
     
         hashed = self.api_call(query, call)
         url = self.api_auth_url + call + '?' + hashed
@@ -175,7 +195,8 @@ class BigBlueButtonAPI(object):
             return result
         else:
             logger.error('BBB Room error: Server request `start` was not successful.',
-                         extra={'response_status_code': response.status_code, 'result': response.text})
+                         extra={'response_status_code': response.status_code, 'result': response.text,
+                                'meeting_id': meeting_id, 'server_url': self.api_auth_url})
             raise Exception('BBB Room exception: Server request was not successful: ' + str(response.text))
     
     
@@ -326,3 +347,120 @@ class BigBlueButtonAPI(object):
         hashed = self.api_call(query, call)
         url = self.api_auth_url + call + '?' + hashed
         return url
+    
+    def get_recorded_meetings(self, group_id=None):
+        """ This an implementation of the `getRecordings` API call for BBB.
+            Will only retrieve recorded meetings with the meta tag assigning it to the current portal.
+            Note: this uses a seperate API url and auth from the regular BBB servers!
+            
+            @param group_id: if supplied, will only return recorded meetings for the CosinnusGroup (conference)
+                with the given id.
+            :return: a list of JSON objects for the recorded meetings
+        """
+        
+        if not self.recording_api_auth_secret or not self.recording_api_auth_url:
+            raise self.RecordingAPIServerNotSetUp()
+        
+        call = 'getRecordings'
+        portal_slug = CosinnusPortal.get_current().slug
+        if group_id is not None:
+            # NOTE: currently, ScaleLite can only OR query terms, not AND them, so we cannot filter for recordings
+            # by querying for the meta tags for portal and group.
+            # that's why we use this combined portal+group-id metatag "meta_we-portal-group-id" to filter with only one query
+            query_params = [
+                ('meta_we-portal-group-id', f'{portal_slug}-{group_id}'),
+            ]
+        else:
+            query_params = [
+                ('meta_we-portal', portal_slug),
+            ]
+        query = urllib.parse.urlencode(query_params)
+        # Note: using different api urls for recording API calls
+        hashed = self.api_call(query, call, secret=self.recording_api_auth_secret)
+        url = self.recording_api_auth_url + call + '?' + hashed
+        response = requests.get(url)
+        
+        if response.status_code == 200:
+            # parse the recordings and extract data for each
+            xml_content = bbb_utils.parse_xml(response.content)
+            def _findtext(element, key):
+                val = element.find(key)
+                return val.text if val is not None else None
+            try:
+                recording_list = []
+                # for a sample recording, see https://docs.bigbluebutton.org/dev/api.html#getrecordings
+                for recording in xml_content.find('recordings'):
+                    url = None
+                    duration = None
+                    for format_entry in recording.find('playback').findall('format'):
+                        if _findtext(format_entry, 'type') == 'presentation':
+                            url = _findtext(format_entry, 'url')
+                            duration = _findtext(format_entry, 'length')
+                            break
+                    # convert timestamps from milliseconds to seconds and to datetimes
+                    start_time = get_int_or_None(_findtext(recording, 'startTime'))
+                    if start_time:
+                        start_time = datetime_from_timestamp(start_time // 1000)
+                    end_time = get_int_or_None(_findtext(recording, 'endTime'))
+                    if end_time:
+                        end_time = datetime_from_timestamp(end_time // 1000)
+                    json_recording = {
+                        'id': _findtext(recording, 'recordID'),
+                        'recordID': _findtext(recording, 'recordID'),
+                        'meetingID': _findtext(recording, 'meetingID'),
+                        'name': _findtext(recording, 'name'),
+                        'url': url,
+                        'participants': _findtext(recording, 'participants'),
+                        'startTime': start_time,
+                        'endTime': end_time,
+                        'duration': duration,
+                    }
+                    recording_list.append(json_recording)
+                return recording_list
+                
+            except Exception as e:
+                if settings.DEBUG:
+                    raise
+                logger.error('BBB Room error: Server request `getRecordings` response could not be parsed.',
+                         extra={'response_status_code': response.status_code, 'result': response.text, 'exc': e})
+                return None
+        else:
+            logger.error('BBB Room error: Server request `getRecordings` was not successful.',
+                         extra={'response_status_code': response.status_code, 'result': response.text})
+        return None
+    
+    def delete_recorded_meetings(self, record_id):
+        """ This an implementation of the `deleteRecordingsAnchor` API call for BBB.
+            Will delete a recording with the given id, if found.
+            Note: this uses a seperate API url and auth from the regular BBB servers!
+            
+            See https://docs.bigbluebutton.org/dev/api.html#deleterecordings
+            
+            @param record_id: the str recordID of the BBB recording to delete.
+            :return: True if the deletion was successful, False if not.
+        """
+        
+        if not self.recording_api_auth_secret or not self.recording_api_auth_url:
+            raise self.RecordingAPIServerNotSetUp()
+        
+        call = 'deleteRecordings'
+        query_params = [
+            ('recordID', record_id),
+        ]
+        query = urllib.parse.urlencode(query_params)
+        # Note: using different api urls for recording API calls
+        hashed = self.api_call(query, call, secret=self.recording_api_auth_secret)
+        url = self.recording_api_auth_url + call + '?' + hashed
+        response = requests.get(url)
+        
+        if response.status_code == 200:
+            xml_content = bbb_utils.parse_xml(response.content)
+            xml_content = ET.XML(response.content)
+            success = xml_content.find('returncode').text == 'SUCCESS'
+            if not success:
+                logger.error('BBB Room error: Server request `deleteRecordings` returned status 200, but the request was not successful.',
+                     extra={'response_status_code': response.status_code, 'result': response.text, 'recordID': record_id})
+            return success
+        logger.error('BBB Room error: Server request `deleteRecordings` was not successful.',
+                     extra={'response_status_code': response.status_code, 'result': response.text, 'recordID': record_id})
+        return False

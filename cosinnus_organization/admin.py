@@ -21,7 +21,7 @@ if settings.COSINNUS_ORGANIZATIONS_ENABLED:
         raw_id_fields = ('group', )
 
     class CosinnusOrganizationAdmin(admin.ModelAdmin):
-        list_display = ('name', 'created', 'creator', 'portal')
+        list_display = ('name', 'created', 'creator', 'portal', 'last_modified')
         list_filter = ('created', 'portal')
         search_fields = ('slug', 'name', 'creator__first_name', 'creator__last_name', 'creator__email')
         readonly_fields = ('created',)

@@ -74,9 +74,9 @@
             <div class="btn btn-emphasized btn-small pull-right regular-space" onclick="loadFacebookPageChooser();">
                 <ul class="media-list">
                     <li class="media">
-                        <a class="pull-left" href="#">
+                        <span class="pull-left">
                             <i class="fa fa-plus"></i>
-                        </a>
+                        </span>
                         <div class="media-body">
                             {% trans "Choose from your Pages..." %}
                         </div>
@@ -107,9 +107,9 @@
 	        <button href="{% url 'cosinnus:facebook-confirm-page-admin' group_id=group.id %}" type="button" class="btn btn-emphasized">
 		        <ul class="media-list">
 		            <li class="media">
-		                <a class="pull-left" href="#">
+		                <span class="pull-left">
 		                    <i class="fa fa-sign-in"></i>
-		                </a>
+		                </span>
 		                <div class="media-body">
 	                        {% trans "Confirm now!" %}
 		                </div>
@@ -139,9 +139,9 @@
 		                <button type="button" class="btn btn-emphasized" data-dismiss="modal">
 		                    <ul class="media-list">
 		                        <li class="media">
-		                            <a class="pull-left" href="#">
+		                            <span class="pull-left">
 		                                <i class="fa fa-times"></i>
-		                            </a>
+		                            </span>
 		                            <div class="media-body">
 		                                {% trans "Cancel" %}
 		                            </div>

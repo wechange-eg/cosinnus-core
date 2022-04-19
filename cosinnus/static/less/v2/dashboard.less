@@ -43,6 +43,13 @@
 			}
 		}
 	}
+	/* Imitating the leaflet box attribution font style */
+	.map-widget-info-box {
+	    padding: 0 5px;
+	    font-size: 11px;
+	    font-weight: 400;
+	    color: #333;
+	}
 	
 	.square-widget {
 		position: relative;
@@ -60,6 +67,26 @@
 		display: block;
 		padding-top: 100%;
 	}
+
+	.map-widget-iframe {
+
+		iframe {
+			width: 100%;
+			height: 100%;
+			border-style: none;
+		}
+
+		.map-widget-link {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+
+			img {
+				margin: 10px;
+			}
+		}
+	}
+
 	.map-widget {
 		background-image: url("/static/img/map-widget-background.png");
 		background-repeat: no-repeat; 
@@ -147,7 +174,7 @@
 			&, i.fas, i.fa {
 				color: @text-color
 			}
-			a.pull-left {
+			a.pull-left, span.pull-left {
 				background-color: @background-color;
 				margin-left: 10px;
 			}
@@ -166,7 +193,9 @@
 				border-bottom: 1px solid @border-color;
 				margin: -1px 0 -1px 0;
 				padding: 4px 0px;
-				
+				.translations-link {
+					padding-left: 20px;
+				}
 				&.header-only {
 					display: none;
 				}
@@ -188,6 +217,15 @@
 					font-size: 14px;
 				}
 			}
+			.field-translations {
+				.cosinnus-field, .cosinnus-media-field {
+					&> label {
+						display: block;
+						padding-left: 20px;
+					}
+				}
+			}
+
 			.cosinnus-field-input input {
 				padding: 10px 20px 5px 20px;
 			}
@@ -238,7 +276,7 @@
 					text-align: right;
 					float: right;
 				}
-				a.pull-left {
+				a.pull-left, span.pull-left {
 					display: none;
 				}
 				.media-body {
@@ -818,7 +856,11 @@
 			
 		} 
 		
-		
+		/* Ugly border so that mobile view can still scroll away from the map
+		 * as leaflet can't properly deactivate scroll listeners on mobile */
+        .map-widget-iframe iframe, .map-widget-info-box {
+            padding: 0 10%;
+        }
 		
 	}
 	

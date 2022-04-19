@@ -1,0 +1,50 @@
+{% load i18n cosinnus_tags %}
+
+<div id="cosinnus_list_element_{{ object.id }}" class="fadedown {% if not forloop.last %}regular-space{% endif %}">
+    <div class="btn {% if object.url %}btn-emphasized{% else %}btn-default{% endif %} w100" {% if object.url %}href="{{ object.url }}" target="_blank"{% endif %}>
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left square-date-icon" href="{{ event.get_absolute_url }}">
+                    <i class="fa fa-video"></i>
+                </a>
+                <span class="pull-right fadedown-clickarea">
+                    <i class="fa fa-chevron-down"></i>
+                </span>
+                <div class="media-body">
+	                <span class="annotation">
+	                    {% trans "Started" %}: <span class="moment-data-date" data-date="{{ object.startTime|date:'c' }}"></span>
+	                    &nbsp;&nbsp;&nbsp;
+	                    {% trans "Length" %}: {{ object.duration }} 
+                        {% if object.duration == '1' %}{% trans "minute" %}{% else %}{% trans "minutes" %}{% endif %}
+	                    &nbsp;&nbsp;&nbsp;
+	                    {% trans "Participants" %}: {{ object.participants}}
+	                </span>
+                    <a href="{{ object.url }}" target="_blank">
+                        {{ object.name }}
+                        <i>({{ object.meetingID }})</i>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    {% captureas modal_id %}deleteModal_{{ object.id }}{% endcaptureas %}
+    <button type="button" class="btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#{{ modal_id }}">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left">
+                    <i class="fa fa-eraser"></i>
+                </span>
+                <div class="media-body">
+                    {% trans "Delete Recording" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+      
+</div><!-- fadedown -->
+
+{% captureas label %}{% blocktrans with title=object.name %}Do you really want to delete recorded meeting "{{ title }}"?{% endblocktrans %}{% endcaptureas %}
+{% captureas title %}{% trans "Delete recorded meeting" %}{% endcaptureas %}
+{% group_url 'cosinnus:conference:delete-recorded-meeting' group=group recording_id=object.id as delete_url %}
+{% include "cosinnus/modal_box.html" with id=modal_id label=label title=title form_action=delete_url %}

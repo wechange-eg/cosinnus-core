@@ -4,14 +4,14 @@ from django.utils.translation import ugettext as _
 from django.contrib import messages
 
 from cosinnus.models import CosinnusPortal
-from cosinnus.forms.dynamic_fields import DynamicFieldFormGenerator
+from cosinnus.forms.dynamic_fields import DynamicFieldAdminChoicesFormGenerator
 from cosinnus.views.mixins.group import RequireSuperuserMixin
 
 
-class DynamicFieldFormView(RequireSuperuserMixin, TemplateView):
+class DynamicFieldAdminChoicesFormView(RequireSuperuserMixin, TemplateView):
     
     template_name = 'cosinnus/dynamic_fields/dynamic_field_form.html'
-    form_generator_class = DynamicFieldFormGenerator
+    form_generator_class = DynamicFieldAdminChoicesFormGenerator
     
     def get(self, request, *args, **kwargs):
         generator = self.form_generator_class(cosinnus_portal=CosinnusPortal.get_current())
@@ -30,10 +30,10 @@ class DynamicFieldFormView(RequireSuperuserMixin, TemplateView):
         return self.render_to_response(self.get_context_data())
     
     def get_context_data(self, **kwargs):
-        context = super(DynamicFieldFormView, self).get_context_data(**kwargs)
+        context = super(DynamicFieldAdminChoicesFormView, self).get_context_data(**kwargs)
         context.update({
             'forms': self.forms,
         })
         return context
 
-dynamic_field_form_view = DynamicFieldFormView.as_view()
+dynamic_field_admin_choices_form_view = DynamicFieldAdminChoicesFormView.as_view()

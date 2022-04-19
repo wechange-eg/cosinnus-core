@@ -19,7 +19,7 @@ from cosinnus.forms.group import MultiGroupSelectForm
 from cosinnus.models import CosinnusPortal, force_text, group_aware_reverse
 from cosinnus.models.group_extra import ensure_group_type
 from cosinnus.models.membership import MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, \
-    MEMBERSHIP_INVITED_PENDING
+    MEMBERSHIP_INVITED_PENDING, MEMBER_STATUS
 from cosinnus.utils.group import get_group_query_filter_for_search_terms, get_cosinnus_group_model
 from cosinnus.utils.permissions import check_object_read_access, check_user_superuser
 from cosinnus.utils.user import get_group_select2_pills
@@ -43,7 +43,7 @@ class OrganizationGroupsView(DetailView):
         context.update({
             'invited': queryset.filter(status=MEMBERSHIP_INVITED_PENDING),
             'pendings': queryset.filter(status=MEMBERSHIP_PENDING),
-            'members': queryset.filter(status__in=(MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN)),
+            'members': queryset.filter(status__in=MEMBER_STATUS),
             'invite_form': MultiGroupSelectForm(organization=self.object),
         })
         return context

@@ -1,0 +1,353 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: wechange FA\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-01 19:32+0200\n"
+"PO-Revision-Date: 2021-05-21 21:50+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.2.1\n"
+
+#. [conference.events.agenda]
+#. defaultMessage is:
+#. Agenda
+#. [conference.events.agenda]
+#. defaultMessage is:
+#. Agenda
+#. [conference.events.agenda]
+#. defaultMessage is:
+#. Agenda
+#: locale/src/views/Discussions/list.json locale/src/views/Lobby/index.json
+#: locale/src/views/Stage/list.json
+msgid "Agenda"
+msgstr "دستور کار"
+
+#. [conference.events.deleteEventConfirm]
+#. defaultMessage is:
+#. Are you sure you want to delete this event?
+#. [conference.events.deleteEventConfirm]
+#. defaultMessage is:
+#. Are you sure you want to delete this event?
+#: locale/src/views/components/ManageEventButtons/index.json
+#: locale/src/views/components/ManageEventIcons/index.json
+msgid "Are you sure you want to delete this event?"
+msgstr "آیا مطمئنید می‌خواهید این رویداد را پاک کنید؟"
+
+#. [conference.rooms.deleteRoomConfirm]
+#. defaultMessage is:
+#. Are you sure you want to delete this room?
+#: locale/src/views/components/ManageRoomButtons/index.json
+msgid "Are you sure you want to delete this room?"
+msgstr "آیا مطمئنید می‌خواهید این اتاق را پاک کنید؟"
+
+#. [conference.rooms.chats]
+#. defaultMessage is:
+#. Chats
+#: locale/src/views/components/Sidebar/index.json
+msgid "Chats"
+msgstr "گفتگوها"
+
+#. [conference.rooms.noRoomsTitle]
+#. defaultMessage is:
+#. Conference is being prepared
+#: locale/src/views/App.json
+msgid "Conference is being prepared"
+msgstr "کنفرانس در حال آماده‌شدن است"
+
+#. [conference.channels.channelTitle]
+#. defaultMessage is:
+#. Connect with someone via videochat for 5 minutes
+#: locale/src/views/Channels/list.json
+msgid "Connect with someone via videochat for 5 minutes"
+msgstr "برای مدت ۵ دقیقه با کسی از راه گفتگوی تصویری متصل شوید"
+
+#. [conference.participants.contact]
+#. defaultMessage is:
+#. Contact
+#: locale/src/views/Participants/list.json
+msgid "Contact"
+msgstr "اطلاعات تماس"
+
+#. [conference.organizations.country]
+#. defaultMessage is:
+#. Country
+#: locale/src/views/Participants/list.json
+msgid "Country"
+msgstr "کشور"
+
+#. [conference.events.createEvent]
+#. defaultMessage is:
+#. Create event
+#: locale/src/views/components/ManageRoomButtons/index.json
+msgid "Create event"
+msgstr "رویداد بسازید"
+
+#. [conference.events.deleteEvent]
+#. defaultMessage is:
+#. Delete event
+#. [conference.events.deleteEvent]
+#. defaultMessage is:
+#. Delete event
+#: locale/src/views/components/ManageEventButtons/index.json
+#: locale/src/views/components/ManageEventIcons/index.json
+msgid "Delete event"
+msgstr "رویداد را پاک کنید"
+
+#. [conference.rooms.deleteRoom]
+#. defaultMessage is:
+#. Delete room
+#: locale/src/views/components/ManageRoomButtons/index.json
+msgid "Delete room"
+msgstr "اتاق را پاک کنید"
+
+#. [conference.events.editEvent]
+#. defaultMessage is:
+#. Edit event
+#: locale/src/views/components/ManageEventButtons/index.json
+msgid "Edit event"
+msgstr "رویداد را ویرایش کنید"
+
+#. [conference.rooms.editRoom]
+#. defaultMessage is:
+#. Edit room
+#: locale/src/views/components/ManageRoomButtons/index.json
+msgid "Edit room"
+msgstr "اتاق را ویرایش کنید"
+
+#. [conference.participants.filterByCountry]
+#. defaultMessage is:
+#. Filter by country
+#: locale/src/views/Participants/list.json
+msgid "Filter by country"
+msgstr "براساس کشور دسته‌بندی کنید"
+
+#. [conference.events.currentEvents]
+#. defaultMessage is:
+#. Happening now
+#. [conference.events.currentEvents]
+#. defaultMessage is:
+#. Happening now
+#: locale/src/views/CoffeeTables/list.json
+#: locale/src/views/Workshops/list.json
+msgid "Happening now"
+msgstr "همین الان در حال روی‌دادن"
+
+#. [conference.general.loading]
+#. defaultMessage is:
+#. Loading
+#: locale/src/views/components/Loading/index.json
+msgid "Loading"
+msgstr "بارگذاری می‌شود"
+
+#. [conference.rooms.manageConference]
+#. defaultMessage is:
+#. Manage Conference
+#: locale/src/views/components/Nav/index.json
+msgid "Manage conference"
+msgstr "کنفرانس را مدیریت کنید"
+
+#. [conference.rooms.manageEvents]
+#. defaultMessage is:
+#. Manage Events
+#: locale/src/views/components/Nav/index.json
+msgid "Manage events"
+msgstr "رویدادها را مدیریت کنید"
+
+#. [conference.rooms.manageRooms]
+#. defaultMessage is:
+#. Manage Rooms
+#: locale/src/views/components/Nav/index.json
+msgid "Manage rooms"
+msgstr "اتاق‌ها را مدیریت کنید"
+
+#. [conference.organizations.name]
+#. defaultMessage is:
+#. Name
+#: locale/src/views/Participants/list.json
+msgid "Name"
+msgstr "نام"
+
+#. [conference.general.no]
+#. defaultMessage is:
+#. No
+#. [conference.general.no]
+#. defaultMessage is:
+#. No
+#. [conference.general.yes]
+#. defaultMessage is:
+#. No
+#: locale/src/views/components/ManageEventButtons/index.json
+#: locale/src/views/components/ManageEventIcons/index.json
+#: locale/src/views/components/ManageRoomButtons/index.json
+msgid "No"
+msgstr "نه"
+
+#. [conference.coffeeTables.noResults]
+#. defaultMessage is:
+#. No current coffee tables.
+#: locale/src/views/CoffeeTables/list.json
+msgid "No current coffee tables."
+msgstr "هیچ میز قهوه‌ای در جریان نیست."
+
+#. [conference.workshops.noCurrentResults]
+#. defaultMessage is:
+#. No current workshops.
+#: locale/src/views/Workshops/list.json
+msgid "No current workshops."
+msgstr "هیچ کارگاهی در جریان نیست."
+
+#. [conference.events.noResults]
+#. defaultMessage is:
+#. No events planned.
+#: locale/src/views/components/EventList/index.json
+msgid "No events planned."
+msgstr "هیچ رویدادی برنامه‌ریزی نشده‌است."
+
+#. [conference.channels.noResults]
+#. defaultMessage is:
+#. No networking channels.
+#: locale/src/views/Channels/list.json
+msgid "No networking channels."
+msgstr "هیچ کانال شبکه‌سازی‌ای وجود ندارد."
+
+#. [conference.participants.noResults]
+#. defaultMessage is:
+#. No participants.
+#: locale/src/views/Participants/list.json
+msgid "No participants."
+msgstr "هیچ مشارکت‌کننده‌ای نیست."
+
+#. [conference.organizations.noResults]
+#. defaultMessage is:
+#. No represented organizations.
+#: locale/src/views/Organisations/index.json
+msgid "No represented organizations."
+msgstr "هیچ سازمانی معرفی نمی‌شود."
+
+#. [conference.workshops.noUpcomingResults]
+#. defaultMessage is:
+#. No upcoming workshops.
+#: locale/src/views/Workshops/list.json
+msgid "No upcoming workshops."
+msgstr "هیچ کارگاهی در آینده برگزار نخواهد شد."
+
+#. [conference.events.now]
+#. defaultMessage is:
+#. Now
+#. [conference.events.now]
+#. defaultMessage is:
+#. Now
+#: locale/src/views/components/EventCard/index.json
+#: locale/src/views/components/EventList/index.json
+msgid "Now"
+msgstr "حالا"
+
+#. [conference.organizations.organization]
+#. defaultMessage is:
+#. Organisation
+#: locale/src/views/Participants/list.json
+msgid "Organization"
+msgstr "سازمان"
+
+#. [conference.organizations.representedOrganisations]
+#. defaultMessage is:
+#. Represented organizations
+#: locale/src/views/Organisations/index.json
+#, fuzzy
+msgid "Represented organizations"
+msgstr "سازمان‌های نمایندگی‌شده"
+
+#. [conference.rooms.noRoomsText]
+#. defaultMessage is:
+#. The conference is being prepared, please try again at a later date.
+#: locale/src/views/App.json
+msgid "The conference is being prepared, please try again at a later date."
+msgstr ""
+"کنفرانس در حال آماده‌شدن است، لطفن در یک تاریخ دیگر دوباره تلاش کنید."
+
+#. [conference.workshops.upcomingWorkshops]
+#. defaultMessage is:
+#. Upcoming workshops
+#: locale/src/views/Workshops/list.json
+msgid "Upcoming workshops"
+msgstr "کنفرانس‌های آینده"
+
+#. [conference.general.yes]
+#. defaultMessage is:
+#. Yes
+#. [conference.general.yes]
+#. defaultMessage is:
+#. Yes
+#. [conference.general.no]
+#. defaultMessage is:
+#. Yes
+#: locale/src/views/components/ManageEventButtons/index.json
+#: locale/src/views/components/ManageEventIcons/index.json
+#: locale/src/views/components/ManageRoomButtons/index.json
+msgid "Yes"
+msgstr "بله"
+
+#. [conference.general.hidden]
+#. defaultMessage is:
+#. hidden
+#: locale/src/views/components/Nav/index.json
+msgid "hidden"
+msgstr "مخفی شده"
+
+#. [conference.events.minutesLeft]
+#. defaultMessage is:
+#. minutes left
+#: locale/src/views/components/EventCard/index.json
+msgid "minutes left"
+msgstr "دقیقه باقی‌مانده"
+
+#. [conference.events.parallelEvents]
+#. defaultMessage is:
+#. parallel events
+#: locale/src/views/components/EventList/index.json
+msgid "parallel events"
+msgstr "رویدادهای موازی"
+
+#. [conference.events.participants]
+#. defaultMessage is:
+#. participants
+#. [conference.events.participants]
+#. defaultMessage is:
+#. participants
+#: locale/src/views/components/CoffeeTable/index.json
+#: locale/src/views/components/EventCard/index.json
+msgid "participants"
+msgstr "شرکت‌کنندگان"
+
+#. [conference.events.availablePlaces]
+#. defaultMessage is:
+#. places left
+#: locale/src/views/components/CoffeeTable/index.json
+msgid "places left"
+msgstr "مکان‌های باقی‌مانده"
+
+msgid ""
+"Your profile is not shown here or not displayed correctly? "
+"Add to your profile or make yourself visible to other conference participants."
+msgstr ""
+
+msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
+msgstr ""
+
+msgid "Do you consent to be recorded?"
+msgstr ""
+
+msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
+msgstr ""
+
+

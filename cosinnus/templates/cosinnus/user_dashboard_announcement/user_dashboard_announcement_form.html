@@ -56,57 +56,7 @@
             {% include 'cosinnus/fields/default_field.html' with field=form.category label=category_label placeholder=category_placeholder %}
                                         
 	        {% trans "Timeframe to display announcement" as date_label %}
-	        {% captureas date_html %}
-	            {{ form.valid_from.errors }}
-	            {{ form.valid_till.errors }}
-	            <ol class="input-area">
-	                <li class="calendar-date-time-chooser">
-	                    {% trans "From" %} <i class="fa fa-calendar"></i>
-	                    <input
-	                        placeholder="{% trans "Date" %}"
-	                        readonly ="readonly"
-	                        class="calendar-date-time-chooser-date" />
-	                    <input class="calendar-date-time-chooser-hiddendate" id="id_valid_from_0" name="valid_from_0" 
-	                        placeholder="{% trans "Start date." %}" type="hidden" 
-	                        {% if form_view == "add" and request.GET.start %}
-	                        value="{{ request.GET.start }}" 
-	                        {% elif form_view == "edit" %}
-	                        value="{{ form.valid_from.value|date:"Y-m-d" }}" 
-	                        {% else %}
-	                        value="{% now "Y-m-d" %}" 
-	                        {% endif %}
-	                    >
-	                    <input class="calendar-date-time-chooser-time" id="id_valid_from_1" name="valid_from_1" 
-	                        placeholder="00:00" type="text" 
-	                        value="{{ form.valid_from.value|date:"H:i" }}" 
-	                    >                                           
-	                    <div class="small-calendar"></div>
-	                </li>
-	                <li class="calendar-date-time-chooser">
-	                    {% trans "Until" %} <i class="fa fa-calendar"></i>
-	                    <input
-	                        placeholder="{% trans "Date" %}"
-	                        readonly ="readonly"
-	                        class="calendar-date-time-chooser-date" />
-	                    <input class="calendar-date-time-chooser-hiddendate" id="id_valid_till_0" name="valid_till_0" 
-	                        placeholder="{% trans "End date." %}" type="hidden" 
-	                        {% if form_view == "add" and request.GET.end %}
-	                        value="{{ request.GET.end }}" 
-	                        {% elif form_view == "edit" %}
-	                        value="{{ form.valid_till.value|date:"Y-m-d" }}" 
-	                        {% else %}
-	                        value="{% now "Y-m-d" %}" 
-	                        {% endif %}
-	                    >
-	                    <input class="calendar-date-time-chooser-time" id="id_valid_till_1" name="valid_till_1" 
-	                        placeholder="23:59" type="text" 
-	                        value="{{ form.valid_till.value|date:"H:i" }}" 
-	                    >    
-	                    <div class="small-calendar"></div>
-	                </li>
-	            </ol>
-	        {% endcaptureas %}
-	        {% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label label=date_label large_field=True %} 
+	        {% include 'cosinnus/fields/from_to_date_field.html' with from_date_field=form.valid_from to_date_field=form.valid_till label=date_label %} 
 	        
             {# Announcement Type Field #}
             {% trans "Display type" as type_label %}
@@ -173,10 +123,10 @@
                     <div class="btn btn-emphasized btn-small btn-no-float regular-space">
                         <ul class="media-list">
                             <li class="media">
-                                <a class="pull-left" href="#">
+                                <span class="pull-left">
                                     <i class="fa fa-square-o"></i>
                                     <input type="hidden" id="image-clear_id" name="image-clear"> 
-                                </a>
+                                </span>
                                 <div class="media-body click-previous-a">
                                     {% trans "Reset" %}
                                 </div>
@@ -199,9 +149,9 @@
                 {% if object %}href="{{ object.get_preview_url }}" target="_blank"{% endif %}>
             <ul class="media-list">
                 <li class="media">
-                    <a class="pull-left">
+                    <span class="pull-left">
                         <i class="fa fa-eye"></i>
-                    </a>
+                    </span>
                     <div class="media-body">
                         {% trans "Open Preview" %} ({% trans "requires a Save before" %})
                     </div>
@@ -212,9 +162,9 @@
         <button type="submit" class="btn btn-emphasized">
             <ul class="media-list">
                 <li class="media">
-                    <a class="pull-left" href="#">
+                    <span class="pull-left">
                         <i class="fa fa-check"></i>
-                    </a>
+                    </span>
                     <div class="media-body">
                         {% trans "Save" %}
                     </div>

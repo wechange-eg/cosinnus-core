@@ -46,48 +46,8 @@
             <div class="ultra-space"></div>
             
             {% trans "Application period" as date_label %}
-            {% captureas date_html %}
-                {{ form.application_start.errors }}
-                {{ form.application_end.errors }}
-                <ol class="input-area">
-
-                    <!-- application start date -->
-                    <li class="calendar-date-time-chooser">
-                        {% trans "From" %} <i class="fa fa-calendar"></i>
-                        <input
-                            placeholder="{% trans "Date" %}"
-                            readonly ="readonly"
-                            class="calendar-date-time-chooser-date" />
-                        <input class="calendar-date-time-chooser-hiddendate" id="id_application_start_0" name="application_start_0"
-                            placeholder="{% trans "Start date." %}" type="hidden" value="{{ form.application_start.value|date:"Y-m-d" }}" "
-                        >
-                        <input class="calendar-date-time-chooser-time" id="id_application_start_1" name="application_start_1"
-                            placeholder="00:00" type="text"
-                            value="{{ form.application_start.value|date:"H:i" }}"
-                        >
-                        <div class="small-calendar"></div>
-                    </li>
-
-                    <!-- application end date -->
-                    <li class="calendar-date-time-chooser">
-                        {% trans "Until" %} <i class="fa fa-calendar"></i>
-                        <input
-                            placeholder="{% trans "Date" %}"
-                            readonly ="readonly"
-                            class="calendar-date-time-chooser-date" />
-                        <input class="calendar-date-time-chooser-hiddendate" id="id_application_end_0" name="application_end_0"
-                            placeholder="{% trans "End date." %}" type="hidden" value="{{ form.application_end.value|date:"Y-m-d" }}"
-                        >
-                        <input class="calendar-date-time-chooser-time" id="id_application_end_1" name="application_end_1"
-                            placeholder="00:00" type="text"
-                            value="{{ form.application_end.value|date:"H:i" }}"
-                        >
-                        <div class="small-calendar"></div>
-                    </li>
-                </ol>
-            {% endcaptureas %}
             {% trans "If set, applications can only be submitted and edited during this time frame. You may change this at any time to close or re-enable applications." as date_legend %}
-            {% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label legend=date_legend large_field=True %}
+            {% include 'cosinnus/fields/from_to_date_field.html' with from_date_field=form.application_start to_date_field=form.application_end label=date_label legend=date_legend date_nullable=True %}
             
             {% trans "Maximal Number of participants" as limits_label %}
             {% trans "This is not an enforced limit and serves only as a display for guests." as limits_legend %}
@@ -141,9 +101,9 @@
         <button type="submit" class="btn btn-emphasized">
 	        <ul class="media-list">
 	            <li class="media">
-	                <a class="pull-left" href="#">
+	                <span class="pull-left">
 	                    <i class="fa fa-check"></i>
-	                </a>
+	                </span>
 	                <div class="media-body">
                         {% trans "Save" %}
 	                </div>

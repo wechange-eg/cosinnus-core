@@ -1,12 +1,22 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from cosinnus.gooddb import GoodDBConnection
+import logging
+
+from django.core.exceptions import ImproperlyConfigured
+from django.utils.encoding import force_text
+from django.utils.timezone import now
 from django_cron import CronJobBase, Schedule
 
-from cosinnus.models.group import CosinnusPortal
+from cosinnus.conf import settings
 from cosinnus.core.middleware.cosinnus_middleware import initialize_cosinnus_after_startup
-from django.core.exceptions import ImproperlyConfigured
+from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.profile import get_user_profile_model
+from cosinnus.views.profile import delete_userprofile
+from cosinnus_conference.utils import update_conference_premium_status
+
+
+logger = logging.getLogger('cosinnus')
 
 
 class CosinnusCronJobBase(CronJobBase):
@@ -28,31 +38,40 @@ class CosinnusCronJobBase(CronJobBase):
         raise ImproperlyConfigured('``do()`` must be overridden in your cron object!')
 
 
-class PushToGoodDB(CosinnusCronJobBase):
-    """
-    Pushes public data from e. g. events and initiatives to GoodDB microservice
-    """
-
-    RUN_EVERY_MINS = 1
+class DeleteScheduledUserProfiles(CosinnusCronJobBase):
+    """ Triggers a profile delete on all user profiles whose `scheduled_for_deletion_at`
+        datetime is in the past. """
+    
+    RUN_EVERY_MINS = 60 # every 1 hour
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
-
-    cosinnus_code = 'cosinnus.gooddb_push'
-
+    
+    cosinnus_code = 'cosinnus.delete_scheduled_user_profiles'
+    
     def do(self):
-        gdb_connection = GoodDBConnection()
-        gdb_connection.push()
+        profiles_to_delete = get_user_profile_model().objects\
+            .exclude(scheduled_for_deletion_at__exact=None)\
+            .filter(scheduled_for_deletion_at__lte=now())
+        
+        for profile in profiles_to_delete:
+            try:
+                # sanity checks are done within this function, no need to do any here
+                user_id = profile.user.id
+                delete_userprofile(profile.user)
+                logger.info('delete_userprofile() cronjob: profile was deleted completely after 30 days', extra={'user_id': user_id})
+            except Exception as e:
+                logger.error('delete_userprofile() cronjob: threw an exception during the DeleteScheduledUserProfiles cronjob! (in extra)', extra={'exception': force_text(e)})
+            
 
-
-class PullFromGoodDB(CosinnusCronJobBase):
-    """
-    Pulls public data from e. g. events and initiatives to GoodDB microservice
-    """
-
-    RUN_EVERY_MINS = 1
+class UpdateConferencePremiumStatus(CosinnusCronJobBase):
+    """ Updates the premium status for all conferences. """
+    
+    RUN_EVERY_MINS = 1 # every 1 min (or every time the cron runs at least)
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
-
-    cosinnus_code = 'cosinnus.gooddb_pull'
-
+    
+    cosinnus_code = 'cosinnus.update_conference_premium_status'
+    
     def do(self):
-        gdb_connection = GoodDBConnection()
-        gdb_connection.pull()
+        if settings.COSINNUS_CONFERENCES_ENABLED:
+            update_conference_premium_status()
+
+

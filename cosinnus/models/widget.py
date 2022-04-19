@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import six
+
 from builtins import object
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class WidgetConfig(models.Model):
 
     TYPE_DASHBOARD = 1
@@ -89,7 +90,7 @@ class WidgetConfig(models.Model):
             yield item
     
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class WidgetConfigItem(models.Model):
 
     config = models.ForeignKey(WidgetConfig, on_delete=models.CASCADE, related_name='items')

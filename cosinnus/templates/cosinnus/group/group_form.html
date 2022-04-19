@@ -7,16 +7,16 @@
 	    {% captureas description_value %}{{ request.GET.description }}{% endcaptureas %}
 	{% endif %}
     {% if not group_model == "CosinnusConference" %}
-        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label %}
-    {% endif %}
+        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label translation_form=form.forms.obj translated_field_name=form.forms.obj.description.html_name %}
+	{% endif %}
     {% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}
-       {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description_long.id_for_label noinclude=1 %}
+       {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description_long.id_for_label noinclude=1 translation_form=form.forms.obj translated_field_name=form.forms.obj.description_long.html_name %}
     {% endif %}
 {% endblock %}
 
 {% block page_title %}
 	{% if object %}
-	   {% blocktrans with team_name=object.name %}Edit “{{ team_name }}”{% endblocktrans %}
+	   {{ group_model_class.get_trans.EDIT }}: {{ object.name }}
 	{% else %}
 	   {{ group_model_class.get_trans.CREATE }}
     {% endif %}
@@ -185,24 +185,45 @@
 	                        {% if request.GET.name %}
 	                            {% captureas name_val %}{{ request.GET.name }}{% endcaptureas %}
 	                        {% endif %}
-                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=group_model_class.get_trans.FORMFIELD_NAME_PLACEHOLDER field_value=name_val %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=group_model_class.get_trans.FORMFIELD_NAME_PLACEHOLDER field_value=name_val translation_form=form.forms.obj %}
 						{% endblock group_form_name_field %}
-				        
+
+
 				        {% block from_to_date_fields %}
 	                        {% comment %} Date picker for from_date - to_date {% endcomment %}
 	                        {% if form.forms.obj.fields.from_date and form.forms.obj.fields.to_date %}
 	                             {% captureas date_label %}{% trans "Conference start and end date and time" %}{% endcaptureas %}
-	                             {% captureas date_legend %}{% trans "The start date and time are used for reminder notification emails (if set up). Can span mutltiple days." %}{% endcaptureas %}
+	                             {% captureas date_legend %}{% trans "The start date and time are used for reminder notification emails (if set up). Can span multiple days." %}{% endcaptureas %}
 	                             {% include 'cosinnus/fields/from_to_date_field.html' with from_date_field=form.forms.obj.from_date to_date_field=form.forms.obj.to_date date_label=date_label legend=date_legend %}
 	                        {% endif %}
                         {% endblock %}
                         
-                        {% block use_conference_applications_field %}
-	                        {% if form.forms.obj.use_conference_applications %}
-	                            {% captureas use_conference_applications_label %}{% trans 'Application method' %}{% endcaptureas %}
-	                            {% captureas use_conference_applications_checkbox_label %}{% trans 'Require participation applications for this conference' %}{% endcaptureas %}
-	                            {% captureas use_conference_applications_legend %}{% trans "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area." %}{% endcaptureas %}
-	                            {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.use_conference_applications label=use_conference_applications_label checkbox_label=use_conference_applications_checkbox_label legend=use_conference_applications_legend %}
+                        {% block membership_mode_field %}
+	                        {% if form.forms.obj.membership_mode %}
+	                            {% captureas membership_mode_label %}{% trans 'Application method' %}{% endcaptureas %}
+	                            {% captureas membership_mode_legend %}
+                                    <div class="group-membership-mode-legend value-0" style="display: none;">
+                                        {{ group_model_class.get_trans.FORMFIELD_MEMBERSHIP_MODE_TYPE_0_LEGEND }}
+                                    </div>
+                                    <div class="group-membership-mode-legend value-1" style="display: none;">
+                                        {% trans "Instead of regular membership requests, require users to request participation by filling out an application form. The conference administrators can see all applications, and approve/decline them in the participation management area." %}
+                                    </div>
+                                    <div class="group-membership-mode-legend value-2" style="display: none;">
+                                        {% trans "Every registered member may instantly join without any prior approval. Keep in mind that each member may create and post content. Members may however only delete their own items." %}
+                                    </div>
+                                {% endcaptureas %}
+	                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.membership_mode label=membership_mode_label legend=membership_mode_legend %}
+                                {% comment %} Change the membership mode field legend depending on the selection {% endcomment %}
+                                <script type="text/javascript">
+                                    var change_membership_mode_legend = function(){
+                                        $('.group-membership-mode-legend').hide();
+                                        $('.group-membership-mode-legend.value-' + $('#id_membership_mode').val()).show();
+                                    };
+                                    change_membership_mode_legend();
+                                    $(function(){
+                                        $('#id_membership_mode').on('change', change_membership_mode_legend);
+                                    });
+                                </script>
 	                        {% endif %}
                         {% endblock %}
 				        
@@ -221,17 +242,27 @@
                             {% trans "Description and Infos" as description_long_label %}
                             {% captureas description_long_legend %}
                                 {{ group_model_class.get_trans.FORMFIELD_DESCRIPTION_LEGEND }}
-                                {% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+								{% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+									{% trans "This is a platform-wide description that can be seen by any portal member and will be shown on the microsite." %}
+								{% else %}
+									{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+								{% endif %}
+                                {% include 'cosinnus/texts/view_microsite_link.html' with group=group %}
                                 {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
                             {% endcaptureas %}
                             {% include 'cosinnus/fields/default_field.html' with label=description_long_label legend=description_long_legend %}
-                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True translation_form=form.forms.obj %}
                             
                             {# Contact Info Field #}
                             {% trans "Contact info" as contact_info_label %}
                             {% captureas contact_info_legend %}
                                 {% trans "How you can be reached, addresses, social media, etc..." %}
-                                {% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+								{% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+									{% trans "This is a platform-wide description that can be seen by any portal member and will be shown on the microsite." %}
+								{% else %}
+									{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+								{% endif %}
+                                {% include 'cosinnus/texts/view_microsite_link.html' with group=group %}
                                 {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
                             {% endcaptureas %}
                             {% trans "Contact Information" as contact_info_placeholder %}
@@ -245,12 +276,16 @@
 		                        {% else %}
 		                            {% trans "Describe the project in a few sentences." %}
 		                        {% endif %}
-		                        {% trans "This description will be publicly visible." %}
+								{% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+									{% trans "This description will be visible on the entire portal." %}
+								{% else %}
+		                        	{% trans "This description will be publicly visible." %}
+								{% endif %}
 		                        {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="group" %}
 		                    {% endcaptureas %}
 	                        {% include 'cosinnus/fields/default_field.html' with label=desc_label legend=group_legend field_id=form.forms.obj.description.id_for_label %}
 			                {% block group_form_description_field %}
-						        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description large_field=True placeholder=desc_label %}
+						        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description large_field=True placeholder=desc_label translation_form=form.forms.obj %}
 							{% endblock group_form_description_field %}
                         {% endif %}
 						
@@ -266,7 +301,12 @@
                         
                         {# Avatar Field #}
                         {% trans "Icon" as avatar_label %}
-                        {% captureas avatar_legend %}{% trans "A picture for better recognition." %} {% trans "File Size" %}: {% trans "max. 10 MB" %}{% endcaptureas %}
+                        {% captureas avatar_legend %}
+                            {% trans "Will be shown as a small logo." %} 
+                            {% trans "This content will be visible for all registered users!" %}
+                            <br/>
+                            {% include 'cosinnus/texts/image_upload_legend_avatar.html' %}
+                        {% endcaptureas %}
                         {% captureas preview_html %}
                             {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.select_area_width}}px;height:{{SETTINGS.AWESOME_AVATAR.select_area_height}}px{% endcaptureas %}
                             {% captureas group_avatar_type %}{% if group_model == "CosinnusSociety" %}group{% else %}project{% endif %}{% endcaptureas %}
@@ -277,11 +317,18 @@
                         {% include 'cosinnus/fields/avatar_field.html' with avatar_field=form.forms.obj.avatar label=avatar_label legend=avatar_legend preview_html=preview_html %}
                         
 					    {# Microsite Wallpaper Field #}
-                        {% if group_model == "CosinnusConference" %}
-                            {% captureas wallpaper_label %}{% trans "Banner Image" %} (1140px x 240px, {% trans "max. 10 MB" %}){% endcaptureas %}
-                        {% else %}
-                            {% captureas wallpaper_label %}{% trans "Background Image" %} (1140px x 240px, {% trans "max. 10 MB" %}){% endcaptureas %}
-                        {% endif %}
+                        {% trans "Header Image" as wallpaper_label %}
+                        {% captureas wallpaper_legend %}
+                            {% if group_model == "CosinnusConference" %}
+                                {% trans "Will be shown as a header in the conference lobby and on the conference microsite." %}
+                            {% else %}
+                                {% trans "Will be shown as a header on the microsite." %}
+                            {% endif %}
+                            {% trans "This content will be visible for all registered users!" %}
+                            {% include 'cosinnus/texts/view_microsite_link.html' with group=group %}
+                            <br/>
+                            {% include 'cosinnus/texts/image_upload_legend_wallpaper.html' %}
+                        {% endcaptureas %}
 	                    {% captureas wallpaper_html %}
 							{{ form.forms.obj.wallpaper.errors }}
 							{% if object.wallpaper %}
@@ -304,10 +351,10 @@
 				                    <div class="btn btn-emphasized btn-small btn-no-float regular-space">
 				                        <ul class="media-list">
 				                            <li class="media">
-				                                <a class="pull-left" href="#">
+				                                <span class="pull-left">
 				                                    <i class="fa fa-square-o"></i>
                                                     <input type="hidden" id="wallpaper-clear_id" name="wallpaper-clear"> 
-				                                </a>
+				                                </span>
 				                                <div class="media-body click-previous-a">
 				                                    {% trans "Reset" %}
 				                                </div>
@@ -316,13 +363,19 @@
 				                    </div>
                                 {% endif %}
 	                    {% endcaptureas %}
-						{% include 'cosinnus/fields/default_field.html' with label=wallpaper_label field_html=wallpaper_html extra_html=wallpaper_extra_html first=True large_field=True %}
+						{% include 'cosinnus/fields/default_field.html' with label=wallpaper_label legend=wallpaper_legend field_html=wallpaper_html extra_html=wallpaper_extra_html first=True large_field=True %}
                         
+                        {% block attachable_files %}
                         {% if group_model == "CosinnusConference" %}
 	                        {# Attachable File upload Field #}
-	                        {% trans "Uploaded files will be available for download and images will be shown in a gallery." as files_legend %}
+	                        {% captureas files_legend %}
+		                        {% trans "Uploaded files are made available for download on the microsite and images are displayed there and at the top of the lobby room." %}
+		                        {% trans "This content will be visible for all registered users!" %}
+		                        {% include 'cosinnus/texts/view_microsite_link.html' with group=group %}
+	                        {% endcaptureas %}
 					        {% include 'cosinnus/media_tags.html' with show_all=True files_label=files_label files_legend=files_legend disable_persons=True disable_tags=True disable_location=True disable_topics=True disable_visibility=True hide_intro=True no_imports=True %}
 				        {% endif %}
+				        {% endblock %}
                         
                         {# Website Field #}
                         {% trans "Website" as website_label %}
@@ -359,11 +412,70 @@
 	                        {% endif %}
                         {% endif %}
                         
+                        {% if group_model == "CosinnusConference" and SETTINGS.BBB_PRESET_USER_FORM_FIELDS %}
+	                        {% if form.forms.conference_settings_assignments %}
+				                <div class="cosinnus-field ">
+				                    <label>{% trans "BBB video conference options" %}</label>
+				                    <div class="field-description no-select">
+				                        {% trans "These settings will be the default for all conference events." %}
+				                        {% trans "You may still override these options in each conference room and in individual events." %}
+				                    </div>
+				                    {% include 'cosinnus/conference/conference_settings_formfields.html' with form=form.forms.conference_settings_assignments %}
+				                </div>
+				            {% endif %}
+			            {% endif %}
+                        
 		                {% block managed_tag_field %}
 		                    {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED and SETTINGS.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS %}
-		                        {% include 'cosinnus/fields/managed_tag_formfield.html' with form=form.forms.obj legend=COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_LEGEND_CONTENT type="group" %}
+		                        {% include 'cosinnus/fields/managed_tag_formfield.html' with form=form.forms.obj type="group" %}
 		                    {% endif %}
 		                {% endblock managed_tag_field %}
+		                
+		                {% comment %} The fields in this block are generated from `settings.COSINNUS_GROUP_EXTRA_FIELDS` {% endcomment %}
+		                {% block portal_specific_group_extra_fields %}
+		                    {% include 'cosinnus/fields/userprofile_extra_formfields.html' with form=form.forms.obj %}
+		                {% endblock %}
+
+						{# Checkbox field #}
+						{% if form.forms.obj.fields.publicly_visible %}
+							{% trans "Group/Project is publicly visible" as groups_projects_public_visibility_label %}
+							{% trans "Should your group/project be visible for the anonymous users? The microsite may be found via the Internet and the portal search." as groups_projects_public_visibility_legend %}
+							{% trans "Enable the public visibility of your group/project" as groups_projects_public_visibility_box_label %}
+							{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.publicly_visible label=groups_projects_public_visibility_label legend=groups_projects_public_visibility_legend checkbox_label=groups_projects_public_visibility_box_label %}
+						{% endif %}
+
+						{# Dropdown field #}
+						{% block video_conference_type_dropdown %}
+						    {% if not group_model == "CosinnusConference" %}
+								{% if not SETTINGS.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and not COSINNUS_CURRENT_PORTAL.video_conference_server %}
+									<input type="hidden" name="video_conference_type" id="id_video_conference_type" value="0">
+								{% else %}
+									{% trans "Include a video conference" as video_conference_type_label %}
+									{% trans "Choose the type of the video conference you would like to include in the dashboard" as video_conference_type_legend %}
+									{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.video_conference_type label=video_conference_type_label legend=video_conference_type_legend %}
+									
+									{% if form.forms.conference_settings_assignments and SETTINGS.BBB_PRESET_USER_FORM_FIELDS and SETTINGS.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS %}
+					                    <script type="text/javascript">
+					                        {# show or hide a visibility warning #}
+					                        $(function(){
+					                            $('#id_video_conference_type').on('change', function(){
+					                                if ($(this).val() == "1") {
+					                                    $('#bbb-settings-advanced').show();
+					                                } else {
+					                                    $('#bbb-settings-advanced').hide();
+					                                } 
+					                            });
+					                        });
+					                    </script>
+					                    <div class="cosinnus-field ">
+						                    <div id="bbb-settings-advanced" style="margin-top: 20px; {% if form.forms.obj.initial.video_conference_type != 1 %}display: none;{% endif %}">
+						                        {% include 'cosinnus/conference/conference_settings_formfields.html' with form=form.forms.conference_settings_assignments %}
+						                    </div>
+					                    </div>
+					                {% endif %}
+								{% endif %}
+							{% endif %}
+						{% endblock %}
                         
                         {% block visibility_field %}
                             {% if not group_model == "CosinnusConference" %}
@@ -374,16 +486,23 @@
 				                    <div class="group-public-warning-area" {% if not object or not object.public %}style="display: none;"{% endif %} id="group-visibility-warning">
 		                                <i class="fa fa-fw fa-globe"></i>
 		                                {% if group_model == "CosinnusSociety" %}
-		                                    {% trans "This group will be set to be publicly visible!" %}
+		                                    {% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}{% trans "This group will be set to be visible on the entire portal!" %}{% else %}{% trans "This group will be set to be publicly visible!" %}{% endif %}
 		                                {% else %}
-		                                    {% trans "This project will be set to be publicly visible!" %}
+											{% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}{% trans "This project will be set to be visible on the entire portal!" %}{% else %}{% trans "This project will be set to be publicly visible!" %}{% endif %}
 		                                {% endif %}
-		                                <br/><br/>
-		                                {% trans "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be publicly visible by default (this can be changed for each item on creation). Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!" %}
-		                                <br/><br/>
-		                                {% trans "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the public visibility setting!" %}
-		                                <br/><br/>
-		                                {% trans "If you do not wish this, you can change the visibility setting above." %}
+										{% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+											<br/><br/>
+											{% trans "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be platform-wide open by default (this can be changed for each item on creation)." %}
+											<br/><br/>
+											{% trans "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the 'platform-wide' setting!" %}
+										{% else %}		                                
+											<br/><br/>
+		                                	{% trans "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be publicly visible by default (this can be changed for each item on creation). Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!" %}
+		                                	<br/><br/>
+		                                	{% trans "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the public visibility setting!" %}
+										{% endif %}
+		                                	<br/><br/>
+		                                	{% trans "If you do not wish this, you can change the visibility setting above." %}
 		                            </div>
 		                            <script type="text/javascript">
 		                                {# show or hide a visibility warning #}
@@ -401,14 +520,14 @@
 				                {% captureas visibility_field_html %}
 				                    <select name="public" id="group-public-field">
 		                                <option default value="false">{{ group_model_class.get_trans.FORMFIELD_VISIBILITY_CHOICE_MEMBERS_ONLY }}</option>
-		                                <option {% if object and object.public %}selected{% endif %} value="true">{% trans "Public (visible without login)" %}</option>
+		                                <option {% if object and object.public %}selected{% endif %} value="true">{% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}{% trans "Platform-wide (visible for all members of the platform)" %}{% else %}{% trans "Public (visible without login)" %}{% endif %}</option>
 		                            </select>
 				                {% endcaptureas %}
 				                {% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html field=form.forms.media_tag.visibility field_id="group-public-field" label=visibility_label legend=visibility_legend extra_html=visibility_warning_html %}
 				            {% endif %}
                         {% endblock visibility_field %}
                         
-						{% if SETTINGS.COSINNUS_DATA_EXCHANGE_ENABLED %}
+						{% if SETTINGS.COSINNUS_EXCHANGE_ENABLED %}
 						{# public Field #}
 						{% trans "Visibility on other platforms" as public_label %}
 						{% blocktrans asvar public_legend with url="/cms/partner-platforms/" %}Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href="#" target="_blank">partner platforms</a> by WECHANGE.{% endblocktrans %}
@@ -457,13 +576,18 @@
 		                            {% trans "Description and Infos" as description_long_label %}
 		                            {% captureas description_long_legend %}
 		                                {% if group_model == "CosinnusSociety" %}{% trans "Describe the group in a few sentences." %}{% else %}{% trans "Describe the project in a few sentences." %}{% endif %}
-		                                {% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+										{% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+											{% trans "This is a platform-wide description that can be seen by any portal member and will be shown on the microsite." %}
+										{% else %}
+											{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+										{% endif %}
+		                                {% include 'cosinnus/texts/view_microsite_link.html' with group=group %}
 		                                {% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
 		                            {% endcaptureas %}
 		                            {% include 'cosinnus/fields/default_field.html' with label=description_long_label legend=description_long_legend %}
 		                            
 									{% block group_form_microsite_description_field %}
-			                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True %}
+			                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True translation_form=form.forms.obj %}
 				                    {% endblock group_form_microsite_description_field %}
 				                    
 				                    
@@ -471,15 +595,37 @@
 			                        {% trans "Contact info" as contact_info_label %}
 				                    {% captureas contact_info_legend %}
 				                    	{% trans "How you can be reached, addresses, social media, etc..." %}
-				                    	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+										{% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+											{% trans "This is a platform-wide description that can be seen by any portal member and will be shown on the microsite." %}
+										{% else %}
+											{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+										{% endif %}
+				                    	{% include 'cosinnus/texts/view_microsite_link.html' with group=group %}
 				                    	{% include 'cosinnus/common/partner_portal_formfield_legend.html' with content_type="microsite" %}
 				                    {% endcaptureas %}
 		                        	{% trans "Contact Information" as contact_info_placeholder %}
 			                        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.contact_info label=contact_info_label legend=contact_info_legend placeholder=contact_info_placeholder large_field=True %}
+
+									{# Contact Form Field #}
+									{% if form.forms.obj.show_contact_form %}
+										{% trans "Contact Form on microsite" as contact_form_label %}
+										{% captureas contact_form_checkboxlabel %}
+											{% trans "Display contact form." %}
+										{% endcaptureas %}
+										{% captureas contact_form_legend %}
+											{% trans "A public contact form, which non-registered users can use to contact group admins of this group." %}
+										{% endcaptureas %}
+										{% trans "Contact Form" as contact_form_placeholder %}
+										{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.show_contact_form legend=contact_form_legend label=contact_form_label checkbox_label=contact_form_checkboxlabel %}
+									{% endif %}
 		                        {% endif %}
 	
 			                    {# Microsite Public Apps Field #}
-				                {% trans "From which apps should public items be shown on the microsite?" as microsite_apps_label %}
+								{% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+									{% trans "From which apps should platform-wide items be shown on the microsite?" as microsite_apps_label %}
+								{% else %}
+				                	{% trans "From which apps should public items be shown on the microsite?" as microsite_apps_label %}
+								{% endif %}
 				                {% captureas microsite_apps_html %}
 				                    <div class="input-area" style="padding: 5px;">
 		                                {% for app_option in microsite_public_apps_selection %}
@@ -637,9 +783,9 @@
 	    <button type="submit" class="btn btn-emphasized">
 	        <ul class="media-list">
 	            <li class="media">
-	                <a class="pull-left" href="#">
+	                <span class="pull-left">
 	                    <i class="fa fa-check"></i>
-	                </a>
+	                </span>
 	                <div class="media-body">
                         {% trans "Save" %}
 	                </div>

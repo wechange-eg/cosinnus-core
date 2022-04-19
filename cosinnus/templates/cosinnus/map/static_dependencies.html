@@ -7,7 +7,7 @@
 <script src="{% static 'js/vendor/leaflet.markercluster-0.7.js' %}"></script>
 <script src="{% static 'js/vendor/masonry.pkgd.min.js' %}"></script>
 <script src="{% static 'js/vendor/imagesloaded.pkgd.min.js' %}"></script>
-<script src="{% static 'js/client.js' %}?v=0.36"></script>
+<script src="{% static 'js/client.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
 
 {% comment %} Internet Explorer only: Bluebird Promise library implementation for compatibility {% endcomment %}
 <script type="text/javascript"> 
@@ -29,7 +29,8 @@
 
     
 <script type="text/javascript">
-    var COSINNUS_MAP_TOPICS_JSON = {% render_cosinnus_topics_json %};
+    var COSINNUS_MAP_TOPICS_JSON = {% if SETTINGS.COSINNUS_TOPICS_SHOW_AS_MAP_FILTERS %}{% render_cosinnus_topics_json %}{% else %}{}{% endif %};
+    var COSINNUS_MAP_TEXT_TOPICS_JSON = {% render_cosinnus_text_topics_json %}
     {% if SETTINGS.COSINNUS_ENABLE_SDGS %}
     var COSINNUS_MAP_SDGS_JSON = {% render_sdg_json %};
     {% endif %}
@@ -37,7 +38,14 @@
     var COSINNUS_MANAGED_TAGS_JSON = {% render_managed_tags_json %};
     var COSINNUS_MANAGED_TAGS_LABELS_JSON = {{ COSINNUS_MANAGED_TAG_LABELS.get_labels_dict|json|safe }};
     {% endif %}
+    {% if SETTINGS.COSINNUS_MANAGED_TAGS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED and SETTINGS.COSINNUS_MANAGED_TAGS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED %}
+	var COSINNUS_MANAGED_TAGS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = [{% for type in SETTINGS.COSINNUS_MANAGED_TAGS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED %}"{{type}}"{% if not forloop.last %}, {% endif %}{% endfor %}]
+	{% endif %}
+    {% if SETTINGS.COSINNUS_TEXT_TOPICS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED and SETTINGS.COSINNUS_TEXT_TOPICS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED %}
+	var COSINNUS_TEXT_TOPICS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = [{% for type in SETTINGS.COSINNUS_TEXT_TOPICS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED %}"{{type}}"{% if not forloop.last %}, {% endif %}{% endfor %}]
+	{% endif %}
 	var COSINNUS_MAP_OPTIONS = {{ SETTINGS.COSINNUS_MAP_OPTIONS|json|safe }};
+	var COSINNUS_MAP_USE_MODERN_TILESET = {% if SETTINGS.COSINNUS_MAP_USE_MODERN_TILESET %}true{% else %}false{% endif %};
     var COSINNUS_PORTAL_INFOS = {% render_cosinnus_portal_info_json %};
     var COSINNUS_IDEAS_ENABLED = {% if SETTINGS.COSINNUS_IDEAS_ENABLED %}true{% else %}false{% endif %};
     var COSINNUS_ORGANIZATIONS_ENABLED = {% if SETTINGS.COSINNUS_ORGANIZATIONS_ENABLED %}true{% else %}false{% endif %};
@@ -47,6 +55,8 @@
     var COSINNUS_ROCKET_ENABLED = {% if SETTINGS.COSINNUS_ROCKET_ENABLED %}true{% else %}false{% endif %};
     var COSINNUS_MESSAGES_ENABLED = {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}true{% else %}false{% endif %};
     var COSINNUS_CLOUD_ENABLED = {% if SETTINGS.COSINNUS_CLOUD_ENABLED %}true{% else %}false{% endif %};
+    var COSINNUS_EXCHANGE_ENABLED = {% if SETTINGS.COSINNUS_EXCHANGE_ENABLED %}true{% else %}false{% endif %};
+    var COSINNUS_EXCHANGE_PORTAL_ID = {{ SETTINGS.COSINNUS_EXCHANGE_PORTAL_ID }};
     var COSINNUS_CLOUD_DASHBOARD_WIDGET_ENABLED = {% if SETTINGS.COSINNUS_CLOUD_ENABLED and SETTINGS.COSINNUS_CLOUD_DASHBOARD_WIDGET_ENABLED %}true{% else %}false{% endif %};
     var COSINNUS_SHOW_SUPERUSER_CONTROLS = {% if user|is_superuser %}true{% else %}false{% endif %};
     var COSINNUS_STARRED_STAR_LABEL = "{% get_setting 'COSINNUS_STARRED_STAR_LABEL' %}";
@@ -61,6 +71,7 @@
     var COSINNUS_TRANS_BROWSE_ALL_CONFERENCES = "{{ COSINNUS_CONFERENCE_TRANS.BROWSE_ALL }}";
     var COSINNUS_TRANS_CREATE_CONFERENCE = "{{ COSINNUS_CONFERENCE_TRANS.CREATE_NEW }}";
     var COSINNUS_USER_CAN_CREATE_CONFERENCE = {% if user|user_can_create_conferences %}true{% else %}false{% endif %};
+    var COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN = {% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}true{% else %}false{% endif %};
 </script>
 
 {% include 'cosinnus/map/extra_head_map.html' %}

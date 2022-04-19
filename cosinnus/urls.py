@@ -2,18 +2,18 @@
 from __future__ import unicode_literals
 
 from django.conf.urls import include, url
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, re_path
 from django.views.generic.base import RedirectView, TemplateView
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import routers, permissions
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
+import two_factor.views as two_factor_views
 
-from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
-    oauth_user, oauth_profile
-from cosinnus.api.views import oauth_current_user, statistics as api_statistics, current_user, \
-    navbar, settings as api_settings
+from cosinnus.api.views.group import CosinnusSocietyViewSet, CosinnusProjectViewSet
 from cosinnus.api.views.i18n import translations
+from cosinnus.api.views.portal import statistics as api_statistics, header, footer, settings as api_settings
+from cosinnus.api.views.user import oauth_user, oauth_profile, current_user, oauth_current_user, UserViewSet
 from cosinnus.conf import settings
 from cosinnus.core.registries import url_registry
 from cosinnus.core.registries.group_models import group_model_registry
@@ -21,11 +21,12 @@ from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_por
 from cosinnus.views import bbb_room, user_import
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group, \
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication, \
-    user_dashboard, ui_prefs, administration, user_dashboard_announcement, dynamic_fields
-from cosinnus_conference.api.views import ConferenceViewSet
-from cosinnus_event.api.views import EventViewSet
-from cosinnus_note.api.views import NoteViewSet
+    user_dashboard, ui_prefs, administration, user_dashboard_announcement, dynamic_fields, \
+    conference_administration
+from cosinnus_conference.api.views import ConferenceViewSet, \
+    PublicConferenceViewSet
 from cosinnus_organization.api.views import OrganizationViewSet
+
 
 app_name = 'cosinnus'
 
@@ -77,6 +78,7 @@ urlpatterns = [
     
     url(r'^account/report/$', feedback.report_object, name='report-object'),
     url(r'^account/accept_tos/$', user.accept_tos, name='accept-tos'),
+    url(r'^account/resend_email_validation/$', user.resend_email_validation, name='resend-email-validation'),
     url(r'^account/accept_updated_tos/$', user.accept_updated_tos, name='accept-updated-tos'),
     url(r'^account/list-unsubscribe/(?P<email>[^/]+)/(?P<token>[^/]+)/$', user.add_email_to_blacklist, name='user-add-email-blacklist'),
     url(r'^account/list-unsubscribe-result/$', user.add_email_to_blacklist_result, name='user-add-email-blacklist-result'),
@@ -120,13 +122,20 @@ urlpatterns = [
     url(r'^administration/announcement/(?P<slug>[^/]+)/delete/$', user_dashboard_announcement.user_dashboard_announcement_delete, name='user-dashboard-announcement-delete'),
     url(r'^administration/announcement/(?P<slug>[^/]+)/activate-toggle/$', user_dashboard_announcement.user_dashboard_announcement_activate, name='user-dashboard-announcement-activate'),
     
+    url(r'^conference_administration/$', conference_administration.conference_administration, name='conference-administration'),
+    url(r'^administration/conference_overview/$', conference_administration.conference_overview, name='conference-administration-overview'),
+    url(r'^administration/conference_overview/nonstandard/$', conference_administration.conference_overview, name='conference-administration-overview-nonstandard', kwargs={'only_nonstandard': True}),
+    url(r'^administration/conference_overview/premium/$', conference_administration.conference_overview, name='conference-administration-overview-premium', kwargs={'only_premium': True}),
+    url(r'^administration/conference/(?P<slug>[^/]+)/blocks/add/$', conference_administration.conference_add_premium_block, name='conference-administration-add-premium-block'),
+    url(r'^administration/conference/block/(?P<block_id>\d+)/edit/$', conference_administration.conference_edit_premium_block, name='conference-administration-edit-premium-block'),
+    
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
     url(r'^statistics/simple/bbb_room_visits/$', statistics.bbb_room_visit_statistics_download, name='simple-statistics-bbb-room-visits'),
     
     url(r'^housekeeping/ensure_group_widgets/$', housekeeping.ensure_group_widgets, name='housekeeping-ensure-group-widgets'),
-    url(r'^housekeeping/fillexternaldata/$', housekeeping.fill_external_data, name='housekeeping-fill-external-data'),
     url(r'^housekeeping/newsletterusers/$', housekeeping.newsletter_users, name='housekeeping-newsletter-user-emails'),
     url(r'^housekeeping/activeuseremails/$', housekeeping.active_user_emails, name='housekeeping-active-user-emails'),
+    url(r'^housekeeping/neverloggedinuseremails/$', housekeeping.never_logged_in_user_emails, name='housekeeping-never-logged-in-user-emails'),
     url(r'^housekeeping/deletespamusers/$', housekeeping.delete_spam_users, name='housekeeping_delete_spam_users'),
     url(r'^housekeeping/movegroupcontent/(?P<fromgroup>[^/]+)/(?P<togroup>[^/]+)/$', housekeeping.move_group_content, name='housekeeping_move_group_content'),
     url(r'^housekeeping/recreategroupwidgets/$', housekeeping.recreate_all_group_widgets, name='housekeeping_recreate_all_group_widgets'),
@@ -134,20 +143,28 @@ urlpatterns = [
     url(r'^housekeeping/fillcache/(?P<number>[^/]+)/$', housekeeping.fillcache, name='housekeeping-fillcache'),
     url(r'^housekeeping/getcache$', housekeeping.getcache, name='housekeeping-getcache'),
     url(r'^housekeeping/deletecache$', housekeeping.deletecache, name='housekeeping-deletecache'),
-    url(r'^housekeeping/validate_redirects', housekeeping.check_and_delete_loop_redirects, name='housekeeping-validate-redirects'),
-    url(r'^housekeeping/add_members_to_forum', housekeeping.add_members_to_forum, name='housekeeping-add-members-to-forum'),
-    url(r'^housekeeping/user_statistics', housekeeping.user_statistics, name='housekeeping-user-statistics'),
+    url(r'^housekeeping/test_logging/$', housekeeping.test_logging, name='housekeeping-test-logging'),
+    url(r'^housekeeping/test_logging/info/$', housekeeping.test_logging, name='housekeeping-test-logging', kwargs={'level': 'info'}),
+    url(r'^housekeeping/test_logging/warning/$', housekeeping.test_logging, name='housekeeping-test-logging', kwargs={'level': 'warning'}),
+    url(r'^housekeeping/test_logging/error/$', housekeeping.test_logging, name='housekeeping-test-logging', kwargs={'level': 'error'}),
+    url(r'^housekeeping/test_logging/exception/$', housekeeping.test_logging, name='housekeeping-test-logging', kwargs={'level': 'exception'}),
+    url(r'^housekeeping/validate_redirects/', housekeeping.check_and_delete_loop_redirects, name='housekeeping-validate-redirects'),
+    url(r'^housekeeping/add_members_to_forum/', housekeeping.add_members_to_forum, name='housekeeping-add-members-to-forum'),
+    url(r'^housekeeping/user_statistics/', housekeeping.user_statistics, name='housekeeping-user-statistics'),
     url(r'^housekeeping/create_map_test_entities/(?P<count>\d+)/', housekeeping.create_map_test_entities, name='housekeeping-create-map-test-entities'),
     url(r'^housekeeping/reset_user_tos_flags/', housekeeping.reset_user_tos_flags, name='housekeeping-reset-user-tos-flags'),
     url(r'^housekeeping/send_testmail/', housekeeping.send_testmail, name='housekeeping-send-testmail'),
     url(r'^housekeeping/print_testmail/', housekeeping.print_testmail, name='housekeeping-print-testmail'),
     url(r'^housekeeping/print_settings/', housekeeping.print_settings, name='housekeeping-print-settings'),
     url(r'^housekeeping/group_storage_info/', housekeeping.group_storage_info, name='housekeeping-group-storage-info'),
+    url(r'^housekeeping/conference_storage_report/', housekeeping.conference_storage_report_csv, name='housekeeping-conference-storage-report'),
     url(r'^housekeeping/group_storage_report/', housekeeping.group_storage_report_csv, name='housekeeping-group-storage-report'),
     url(r'^housekeeping/project_storage_report/', housekeeping.project_storage_report_csv, name='housekeeping-project-storage-report'),
     url(r'^housekeeping/user_activity_info/', housekeeping.user_activity_info, name='housekeeping-user-activity-info'),
+    url(r'^housekeeping/conf_settings_info/', housekeeping.portal_switches_and_settings, name='housekeeping-portal-switches-and-settings'),
     url(r'^housekeeping/group_admin_emails/(?P<slugs>[^/]+)/', housekeeping.group_admin_emails, name='housekeeping-group-admin-emails'),
-
+    
+    url(r'^error/$', common.generic_error_page_view, name='generic-error-page'),
 
     url(r'^select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
 ]
@@ -163,7 +180,7 @@ if getattr(settings, 'COSINNUS_USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED', False)
 
 if getattr(settings, 'COSINNUS_DYNAMIC_FIELD_ADMINISTRATION_VIEWS_ENABLED', False): 
     urlpatterns += [
-        url(r'^administration/admin_dynamic_fields/edit/$', dynamic_fields.dynamic_field_form_view, name='administration-dynamic-fields'),
+        url(r'^administration/admin_dynamic_fields/edit/$', dynamic_fields.dynamic_field_admin_choices_form_view, name='administration-dynamic-fields'),
     ]
 
 if getattr(settings, 'COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES', False):
@@ -199,7 +216,17 @@ if getattr(settings, 'COSINNUS_USE_V2_NAVBAR', False) or getattr(settings, 'COSI
         url(r'^search/api/quicksearch/$', search.api_quicksearch, name='quicksearch-api'),
     ]
 
-
+if settings.COSINNUS_USER_2_FACTOR_AUTH_ENABLED:
+    urlpatterns += [
+        url(r'^two_factor_auth/token_login/$', authentication.user_otp_token_validation, name='two-factor-auth-token'),
+        url(r'^two_factor_auth/token_login/backup/$', authentication.user_otp_token_validation, name='two-factor-auth-token-backup', kwargs={'two_factor_method': 'backup'}),
+        url(r'^two_factor_auth/qrcode/$', authentication.two_factor_auth_qr, name='two-factor-auth-qr'),
+        url(r'^two_factor_auth/settings/$', authentication.two_factor_user_hub, name='two-factor-auth-settings'),
+        url(r'^two_factor_auth/settings/setup/$', authentication.two_factor_auth_setup, name='two-factor-auth-setup'),
+        url(r'^two_factor_auth/settings/setup/complete/$', authentication.two_factor_auth_setup_complete, name='two-factor-auth-setup-complete'),
+        url(r'^two_factor_auth/settings/disable/$', authentication.two_factor_auth_disable, name='two-factor-auth-disable'),
+        url(r'^two_factor_auth/settings/backup_tokens/$', authentication.two_factor_auth_back_tokens, name='two-factor-auth-backup-tokens'),
+    ]
 
 # some user management not allowed in integrated mode and sso-mode
 if not is_integrated_portal() and not is_sso_portal():
@@ -255,6 +282,7 @@ for url_key in group_model_registry:
         url(r'^%s/(?P<group>[^/]+)/microsite/$' % url_key, microsite.group_microsite_view, name=prefix+'group-microsite'),
         #url(r'^%s/(?P<group>[^/]+)/_microsite__old_/$' % url_key, 'cms.group_microsite', name=prefix+'group-microsite'),
         #url(r'^%s/(?P<group>[^/]+)/_microsite__old_/edit/$' % url_key, 'cms.group_microsite_edit', name=prefix+'group-microsite-edit'),
+        url(r'^%s/(?P<group>[^/]+)/meeting/$' % url_key, group.group_meeting, name=prefix+'group-meeting'),
         url(r'^%s/(?P<group>[^/]+)/members/$' % url_key, group.group_detail, name=prefix+'group-detail'),
         url(r'^%s/(?P<group>[^/]+)/members/recruit/$' % url_key, group.group_user_recruit, name=prefix+'group-user-recruit'),
         url(r'^%s/(?P<group>[^/]+)/members/recruitdelete/(?P<id>\d+)/$' % url_key, group.group_user_recruit_delete, name=prefix+'group-user-recruit-delete'),
@@ -295,19 +323,38 @@ urlpatterns += url_registry.urlpatterns
 
 # URLs for API version 2
 router = routers.SimpleRouter()
-router.register(r'conferences', ConferenceViewSet)
-router.register(r'groups', CosinnusSocietyViewSet)
-router.register(r'projects', CosinnusProjectViewSet)
-router.register(r'organizations', OrganizationViewSet)
-router.register(r'events', EventViewSet)
-router.register(r'notes', NoteViewSet)
+router.register(r'public_conferences', PublicConferenceViewSet, basename='public_conference')
+router.register(r'conferences', ConferenceViewSet, basename='conference')
+router.register(r'groups', CosinnusSocietyViewSet, basename='group')
+router.register(r'projects', CosinnusProjectViewSet, basename='project')
+router.register(r'organizations', OrganizationViewSet, basename='organization')
+
+# imports from external projects at this time may fail in certain test environments
+try:
+    from cosinnus_event.api.views import EventViewSet
+    router.register(r'events', EventViewSet, basename='event')
+except:
+    pass
+# imports from external projects at this time may fail in certain test environments
+try:
+    from cosinnus_note.api.views import NoteViewSet
+    router.register(r'notes', NoteViewSet, basename='note')
+except:
+    pass
+    
+if getattr(settings, 'COSINNUS_API_SETTINGS', {}).get('user'):
+    router.register(r'users', UserViewSet, basename='user')
 
 if settings.COSINNUS_ROCKET_EXPORT_ENABLED:
-    from cosinnus_message.api.views import MessageExportView
-    urlpatterns += [
-        url(r'api/v2/rocket-export/', MessageExportView.as_view()),
-    ]
-
+    # imports from external projects at this time may fail in certain test environments
+    try:
+        from cosinnus_message.api.views import MessageExportView
+        urlpatterns += [
+            url(r'api/v2/rocket-export/', MessageExportView.as_view()),
+        ]
+    except:
+        pass
+    
 if getattr(settings, 'COSINNUS_EMPTY_FILE_DOWNLOAD_NAME', None):
     urlpatterns += [
         url(f'{settings.COSINNUS_EMPTY_FILE_DOWNLOAD_NAME}', common.empty_file_download),
@@ -326,7 +373,7 @@ schema_url_patterns = [
     url(r'^api/v2/settings/$', api_settings, name='api-settings'),
     url(r'^api/v2/statistics/', api_statistics, name='api-statistics'),
     url(r'^api/v2/jsi18n/$', translations, name='api-jsi18n'),
-    url(r'^api/v2/', include(router.urls)),
+    url(r'^api/v2/', include((router.urls, 'api'), namespace='api')),
 ]
 
 urlpatterns += schema_url_patterns
@@ -346,7 +393,8 @@ schema_view = get_schema_view(
 )
 
 urlpatterns += [
-    url(r'^api/v2/navbar/$', navbar, name='api-navbar'),
+    url(r'^api/v2/(?:header|navbar)/$', header, name='api-header'),
+    url(r'^api/v2/footer/$', footer, name='api-footer'),
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),

@@ -3,40 +3,34 @@ from __future__ import unicode_literals
 
 from builtins import object
 from collections import OrderedDict
-from copy import copy
-
-from django import forms
+from django_select2.fields import Select2ChoiceField
+from django_select2.widgets import Select2MultipleWidget, Select2Widget
 from multiform import MultiModelForm, InvalidArgument
 
-from cosinnus.forms.group import GroupKwargModelFormMixin
-from cosinnus.forms.user import UserKwargModelFormMixin
-from cosinnus.models.tagged import get_tag_object_model, BaseTagObject
-from cosinnus.utils.import_utils import import_from_settings
-from cosinnus.forms.select2 import TagSelect2Field
-from django.urls import reverse_lazy
+from django import forms
+from django.forms.widgets import SelectMultiple
 from django.http.request import QueryDict
-
 from django.urls import reverse
+from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
-from django_select2.fields import Select2ChoiceField
-
-from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField
-
-from cosinnus.utils.urls import group_aware_reverse
-from django.forms.widgets import SelectMultiple
-from django_select2.widgets import Select2MultipleWidget, Select2Widget
-from cosinnus.utils.user import get_user_select2_pills
 from cosinnus.fields import UserSelect2MultipleChoiceField
-from cosinnus.utils.permissions import get_inherited_visibility_from_group
+from cosinnus.forms.group import GroupKwargModelFormMixin
+from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField
+from cosinnus.forms.select2 import TagSelect2Field
+from cosinnus.forms.user import UserKwargModelFormMixin
+from cosinnus.models.tagged import get_tag_object_model, BaseTagObject
 from cosinnus.utils.functions import get_int_or_None
+from cosinnus.utils.import_utils import import_from_settings
+from cosinnus.utils.permissions import get_inherited_visibility_from_group
+from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.utils.user import get_user_select2_pills
 
 
 TagObject = get_tag_object_model()
 
 
-class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
-                        forms.ModelForm):
+class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin, forms.ModelForm):
     
     like = forms.BooleanField(label=_('Like'), required=False)
     approach = Select2ChoiceField(choices=TagObject.APPROACH_CHOICES, required=False)
@@ -139,14 +133,14 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
         
         # save BBB room
         if self.instance.pk and self.instance.bbb_room:
-            self.initial['bbb_room'] = self.instance.bbb_room
+            setattr(self, '_saved_bbb_room', self.instance.bbb_room)
         
     def save(self, commit=True):
         self.instance = super(BaseTagObjectForm, self).save(commit=False)
         
         # restore BBB room
-        if 'bbb_room' in self.initial:
-            self.instance.bbb_room = self.initial['bbb_room']
+        if hasattr(self, '_saved_bbb_room'):
+            self.instance.bbb_room = getattr(self, '_saved_bbb_room', None)
         
         # the tag inherits the visibility default from the instance's group
         # if no or no valid visibility has been selected in the form, 
@@ -226,6 +220,14 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}, init_func
             # execute the on init function
             if init_func:
                 init_func(self)
+            
+            # give a back-reference to the multiform to each individual form
+            for _name, form in self.forms.items():
+                setattr(form, 'multiform', self)
+                # call the `post_init` funnction on the sub-form if it exists
+                post_init = getattr(form, 'post_init', None)
+                if callable(post_init):
+                    post_init()
             
         # attach any extra form classes
         for form_name, form_class in list(base_extra_forms.items()):

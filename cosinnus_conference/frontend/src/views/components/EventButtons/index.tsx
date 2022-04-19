@@ -77,11 +77,11 @@ export function EventButtons(props: EventButtonsProps) {
                   e.stopPropagation()
                   setDeleteOpen(false)
                 }}
-                color="primary"
+                color="secondary"
               >
                 <FormattedMessage id="No" />
               </Button>
-              <Button onClick={deleteEvent} color="primary">
+              <Button onClick={deleteEvent} color="secondary">
                 <FormattedMessage id="Yes" />
               </Button>
             </DialogActions>

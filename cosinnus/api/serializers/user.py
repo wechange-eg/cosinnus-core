@@ -12,7 +12,7 @@ from rest_framework_jwt.settings import api_settings
 from cosinnus.conf import settings
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.import_utils import import_from_settings
-from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
+from cosinnus.models.membership import MEMBER_STATUS
 
 User = get_user_model()
 
@@ -90,3 +90,46 @@ class UserSerializerWithToken(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('token', 'username', 'password')
+
+
+class ReadWriteSerializerMethodField(serializers.SerializerMethodField):
+    def __init__(self, method_name=None, **kwargs):
+        self.method_name = method_name
+        kwargs['source'] = '*'
+        super(serializers.SerializerMethodField, self).__init__(**kwargs)
+
+    def to_internal_value(self, data):
+        return {self.field_name: data}
+
+
+class UserCreateUpdateSerializer(serializers.ModelSerializer):
+    location = ReadWriteSerializerMethodField(required=False)
+    dynamic_fields = ReadWriteSerializerMethodField(required=False)
+    groups = ReadWriteSerializerMethodField(required=False)
+    avatar = ReadWriteSerializerMethodField(required=False)
+
+    class Meta(object):
+        model = User
+        fields = ('id', 'email', 'first_name', 'last_name', 'password',
+                  'location', 'dynamic_fields', 'groups', 'avatar')
+    
+    def _sanity_check_userprofile(self, user):
+        # sanity check, retrieve the user's profile (will create it if it doesnt exist)
+        if not user.cosinnus_profile:
+            get_user_profile_model()._default_manager.get_for_user(user)
+    
+    def get_location(self, obj):
+        self._sanity_check_userprofile(obj)
+        return obj.cosinnus_profile.media_tag.location or ""
+
+    def get_dynamic_fields(self, obj):
+        self._sanity_check_userprofile(obj)
+        return obj.cosinnus_profile.dynamic_fields
+
+    def get_groups(self, obj):
+        queryset = obj.cosinnus_memberships.filter(status__in=MEMBER_STATUS)
+        return list(queryset.values_list('group__slug', flat=True))
+
+    def get_avatar(self, obj):
+        self._sanity_check_userprofile(obj)
+        return obj.cosinnus_profile.avatar_url

@@ -1,3 +1,5 @@
 {% load cosinnus_tags %}
 {{ object.user|full_name }}
+{{ object.description }}
+{{ object.get_dynamic_fields_rendered_plaintext }}
 {% include "search/indexes/cosinnus/_media_tag_text.txt" %}

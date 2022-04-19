@@ -1,0 +1,82 @@
+/* The .announcement is 35px high, so we adjust all our custom-topped containers downwards */
+.announcement ~ .container {
+    margin-top: 105px;
+}
+.announcement ~.v2-dashboard {
+    margin-top: 85px;
+}
+.announcement ~ .container {
+    .app-root:not(.app-embed), .app-fullscreen, .map-fullscreen, .tile-list-fullscreen {
+        top: 85px; /** Navbar compensation with announcement */
+        height: ~"calc(100% - 50px - 35px)"; /** Navbar compensation with announcement */
+    }    
+}
+.announcement + .conference {
+    margin-top: 35px;
+    
+    .MuiDrawer-paper.MuiDrawer-paperAnchorDockedLeft {
+        height: ~"calc(100% - 50px - 35px)";
+        margin-top: 85px;
+    }
+    .MuiDrawer-paper.MuiDrawer-paperAnchorDockedRight {
+        height: ~"calc(100% - 35px)";
+        margin-top: 35px;
+    }
+}
+
+.announcement {
+    
+    border-width: 0;
+    padding: 5px 5px 5px 44px;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    min-height: 35px;
+    z-index: 2;
+    
+    button.close {
+        position: absolute;
+        right: 10px;
+        top: 11px;
+    }
+    
+    i {
+        position: absolute;
+        top: 6px;
+        left: 12px;
+    }
+    
+    p {
+        margin: 5px 0;
+    }
+    
+    a {
+        font-weight: bold;
+    }
+    
+}
+.alert, .announcement {
+    &.alert-success {
+        color: @app-neutral-color-white;
+        background-color: @app-main-color-yes;
+    }
+    &.alert-info {
+        color: @app-neutral-color-dark;
+        background-color:fadeout(@app-neutral-color-light, 70);
+    }
+    &.alert-warning {
+        color: @app-neutral-color-white;
+        background-color: @app-main-color-maybe;
+    }
+    &.alert-danger {
+        color: @app-neutral-color-white;
+        background-color: @app-main-color-no;
+    }
+    
+    p {
+        background-color: transparent;
+        padding: 0;
+        color: inherit;
+    }
+}

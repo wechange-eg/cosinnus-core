@@ -28,7 +28,7 @@ export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
               {participants[i].props.firstName} {participants[i].props.lastName},
             </Typography>
             <Typography component="span">
-              {participants[i].props.organisation}, {participants[i].props.location}
+              {participants[i].props.organization}, {participants[i].props.location}
             </Typography>
           </span>
         ) || <span /> }
@@ -60,6 +60,9 @@ export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
           ))}
           </Grid>
           */}
+          {/*
+          Put this back in to show "8 places left" for coffee tables.
+          For now, we only show the active participants, like in workshops
           {participantsCount !== undefined && (
             (availablePlaces === null && (
               <Typography component="p">
@@ -72,6 +75,10 @@ export function CoffeeTable(props: CoffeeTableProps & RouteComponentProps) {
               </Typography>
             )
           )}
+          */}
+          <Typography component="p">
+            {participantsCount} <FormattedMessage id="participants" />
+          </Typography>
           <EventIcons event={event} />
         </CardContent>
       </CardActionArea>

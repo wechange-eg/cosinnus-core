@@ -11,6 +11,10 @@ from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.views.map_api import get_searchresult_by_itemid
+from cosinnus.utils.functions import is_number, get_int_or_None,\
+    get_float_or_None
+from cosinnus.models.managed_tags import CosinnusManagedTag
+from annoying.functions import get_object_or_None
 
 
 USER_MODEL = get_user_model()
@@ -96,13 +100,13 @@ class MapView(BaseMapView):
                 })
         # apply GET params that are settings parameters and are
         # set once and then discarded (unlike the map/search query parameters)
-        if self.request.GET.get('search_result_limit', None):
+        map_settings.update({
+            'searchResultLimit': get_int_or_None(self.request.GET.get('search_result_limit', settings.COSINNUS_MAP_DEFAULT_RESULTS_PER_PAGE)),
+        })
+        filter_group = get_int_or_None(self.request.GET.get('filter_group', None))
+        if filter_group:
             map_settings.update({
-                'searchResultLimit': self.request.GET.get('search_result_limit'),
-            })
-        if self.request.GET.get('filter_group', None):
-            map_settings.update({
-                'filterGroup': self.request.GET.get('filter_group'),
+                'filterGroup': filter_group,
             })
         options.update({
             'settings': map_settings,
@@ -179,13 +183,54 @@ tile_view = TileView.as_view()
 
 
 class MapEmbedView(TemplateView):
-    """ An embeddable, resizable Map view without any other elements than the map """
+    """ An embeddable, resizable Map view without any other elements than the map.
+        
+        Example param usage: /map/embed/?search_result_limit=50&location_lat=48.574790&location_lon=-4.326955&zoom=5
+    """
     
     template_name = 'cosinnus/universal/map/map_embed.html'
     
     @method_decorator(xframe_options_exempt)
     def dispatch(self, *args, **kwargs):
         return super(MapEmbedView, self).dispatch(*args, **kwargs)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        limit = get_int_or_None(self.request.GET.get('search_result_limit', settings.COSINNUS_MAP_DEFAULT_RESULTS_PER_PAGE))
+        map_settings = {
+            "searchResultLimit": limit and is_number(limit) and int(limit) or settings.COSINNUS_MAP_DEFAULT_RESULTS_PER_PAGE,
+            "mobileSafeInteractions": True,
+        }
+        filter_group = get_int_or_None(self.request.GET.get('filter_group', None))
+        if filter_group:
+            map_settings.update({
+                'filterGroup': filter_group,
+            })
+        if self.request.GET.get('managed_tag', None):
+            mtag = get_object_or_None(CosinnusManagedTag, slug=self.request.GET.get('managed_tag', None))
+            if mtag:
+                map_settings.update({
+                    "filterManagedTag": mtag.id
+                })
+        
+        zoom = self.request.GET.get('zoom', None)
+        if get_float_or_None(self.request.GET.get('location_lat', None)) and \
+                get_float_or_None(self.request.GET.get('location_lon', None)):
+            map_settings.update({
+                "map": {
+                    "location": [
+                        get_float_or_None(self.request.GET.get('location_lat', None)), 
+                        get_float_or_None(self.request.GET.get('location_lon', None))
+                    ],
+                    "zoom": zoom and is_number(zoom) and int(zoom) or 9
+                }
+            })
+        context.update({
+            'map_settings': map_settings
+        })
+        print(map_settings)
+        return context
 
 map_embed_view = MapEmbedView.as_view()
 

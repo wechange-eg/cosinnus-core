@@ -15,6 +15,8 @@ export interface EventJson {
   from_date: string
   to_date: string
   note_html: string
+  show_chat: boolean
+  chat_url: string
   is_break: boolean
   image_url?: string
   room: Room
@@ -37,6 +39,8 @@ export interface EventProps {
   fromDate: Date
   toDate: Date
   noteHtml: string
+  showChat: boolean
+  chatUrl: string
   isBreak: boolean
   imageUrl?: string
   room: Room
@@ -75,6 +79,8 @@ export class Event {
       fromDate: new Date(json.from_date),
       toDate: new Date(json.to_date),
       noteHtml: json.note_html,
+      showChat: json.show_chat,
+      chatUrl: json.chat_url,
       isBreak: json.is_break,
       imageUrl: json.image_url,
       room: json.room,
@@ -109,6 +115,8 @@ export class Event {
       from_date: props.fromDate.toUTCString(),
       to_date: props.toDate.toUTCString(),
       note_html: props.noteHtml,
+      show_chat: props.showChat,
+      chat_url: props.chatUrl,
       is_break: props.isBreak,
       image_url: props.imageUrl,
       room: props.room,

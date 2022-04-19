@@ -4,7 +4,7 @@
 {% block extrahead %}
     {{ block.super }}
     {% if not "description" in SETTINGS.COSINNUS_USERPROFILE_HIDDEN_FIELDS %}
-        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label %}
+        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label translation_form=form.forms.obj translated_field_name=form.forms.obj.description.html_name %}
     {% endif %}
 {% endblock %}
 
@@ -60,7 +60,11 @@
                             {# Regular Field #}
 							{% trans "Last name" as last_name_label %}
 							{% trans "Last name" as  last_name_placeholder %}
-							{% include 'cosinnus/fields/default_field.html' with field=form.forms.user.last_name label=last_name_label placeholder=last_name_placeholder help_popup="helptext_52_profilelastname" %}
+                            {% if SETTINGS.COSINNUS_USER_FORM_LAST_NAME_REQUIRED %}
+                                {% include 'cosinnus/fields/default_field.html' with field=form.forms.user.last_name label=last_name_label placeholder=last_name_placeholder %}
+                            {% else %}
+                                {% include 'cosinnus/fields/default_field.html' with field=form.forms.user.last_name label=last_name_label placeholder=last_name_placeholder help_popup="helptext_52_profilelastname" %}
+                            {% endif %}
                         </div>
                     </div><!-- row -->
                 {% endblock user_info %}
@@ -69,7 +73,8 @@
                 {# email Field #}
 				{% trans "E-Mail" as email_label %}
 				{% trans "E-Mail" as  email_placeholder %}
-				{% include 'cosinnus/fields/default_field.html' with field=form.forms.user.email label=email_label placeholder=email_placeholder %}
+				{% captureas email_legend %}{% if COSINNUS_CURRENT_PORTAL.email_needs_verification %}{% trans "Changes to your email address need to be verified by clicking a link in an email we send to the new address." %}{% endif %}{% endcaptureas %}
+				{% include 'cosinnus/fields/default_field.html' with field=form.forms.user.email label=email_label placeholder=email_placeholder legend=email_legend %}
                 {% endblock %}
 
                 {% block avatar %}
@@ -91,14 +96,19 @@
 	                    {# Large Field #}
 						{% trans "Who are you and what motivates you?" as description_label %}
 						{% trans "Tell others something about you!" as  description_placeholder %}
-						{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description label=description_label placeholder=description_placeholder large_field=True %}
+						{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description label=description_label placeholder=description_placeholder large_field=True translation_fields=translatable_field_items translation_form=form.forms.obj %}
 					{% endif %}
 
                     {# Regular Field #}
 					{% trans "Website" as website_label %}
 					{% trans "Example: http://mywebsite.com" as  website_placeholder %}
 					{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.website label=website_label placeholder=website_placeholder %}
-
+                    
+                    {# Regular Field #}
+                    {% trans "Time zone" as timezone_label %}
+                    {% trans "This will determine the time and date shown for events on the website and in your notification emails." as timezone_legend %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.timezone label=timezone_label legend=timezone_legend %}
+                    
                {% endblock userprofile_about_fields %}
 
                {% block media_tags %}
@@ -129,15 +139,17 @@
                         {% endif %}
                     {% endblock managed_tag_field %}
                 {% endblock %}
+
+                {% block extra_fields %}{% endblock%}
                 
 	    </div>
 	    
 	    <button type="submit" class="btn btn-emphasized">
 	        <ul class="media-list">
 	            <li class="media">
-	                <a class="pull-left" href="#">
+	                <span class="pull-left">
 	                    <i class="fa fa-check"></i>
-	                </a>
+	                </span>
 	                <div class="media-body">
                         {% trans "Save" %}
 	                </div>
@@ -148,6 +160,12 @@
     
     </form>
     
+    <div class="clearfix"></div>
+    
+    {% comment %} Add some space as convenience for formfield dropdowns {% endcomment %}
+    <hr class="invisible" />
+    <hr class="invisible" />
+    <hr class="invisible" />
 
 {% endblock %}
 

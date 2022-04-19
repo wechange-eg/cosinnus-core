@@ -56,7 +56,6 @@
     </div>
 {% endif %}
 
-
 {% if form.forms.obj.attached_objects and not disable_files %}
     <div class="media_tag_initial_hidden" {% if not show_files == True and not show_all == True and not form.forms.obj.attached_objects.errors %}style="display: none;"{% endif %}>
         {% if not files_label %}{% trans "Upload a file or image or attach an existing one" as files_label %}{% endif %}
@@ -66,7 +65,6 @@
         {% include 'cosinnus/fields/media_tag_field.html' with field_html=files_html label=files_label legend=files_legend icon="fa-paperclip" %}
     </div>
 {% endif %}
-
 
 {% if not disable_topics %}
     <div class="media_tag_initial_hidden" {% if not show_topics == True and not show_all == True and not form.forms.media_tag.topics.errors %}style="display: none;"{% endif %}>
@@ -87,8 +85,12 @@
 	<ol class="group-public-warning-area" {% if form.forms.media_tag.initial.visibility != 2 %}style="display: none;"{% endif %} id="visibility-warning">
 	    <li class="w100">
 	        <i class="fa fa-fw fa-globe"></i>
-	        {% trans "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results." %}
-	        {% trans "If you do not wish this, you can change this item's visibility setting below." %}
+            {% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+                {% trans "This item will be visible on the entire portal. This means that any portal member will be able to see it." %}
+            {% else %}
+	            {% trans "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results." %}
+            {% endif %}
+	            {% trans "If you do not wish this, you can change this item's visibility setting below." %}
 	    </li>
 	</ol>
 
@@ -121,9 +123,9 @@
 	    <div class="btn btn-emphasized btn-small btn-no-float regular-space w100" onclick="display_media_tags();">
 	        <ul class="media-list">
 	            <li class="media">
-	                <a class="pull-left" href="#">
+	                <span class="pull-left">
 	                    <i class="fa fa-caret-down"></i>
-	                </a>
+                    </span>
 	                <div class="media-body">
 	                    {% trans "Show more options..." %}
 	                </div>

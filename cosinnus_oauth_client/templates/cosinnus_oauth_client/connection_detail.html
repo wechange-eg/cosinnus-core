@@ -13,9 +13,9 @@
             <button class="pull-right btn btn-emphasized btn-autosize" target="_blank" href="{{ SETTINGS.COSINNUS_OAUTH_SERVER_BASEURL }}/profile/edit/" >
                 <ul class="media-list">
                     <li class="media">
-                        <a class="pull-left" href="#">
+                        <span class="pull-left">
                             <i class="fa fa-pencil"></i>
-                        </a>
+                        </span>
                         <div class="media-body">
                             {% blocktrans with provider=provider|upper %}Go to {{ provider }} account settings{% endblocktrans %}
                         </div>
@@ -36,9 +36,9 @@
                 <button type="button" class="pull-right btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#{{modal_disconnect_provider}}">
                     <ul class="media-list">
                         <li class="media">
-                            <a class="pull-left" href="#">
+                            <span class="pull-left">
                                     <i class="fas fa-unlink"></i>
-                                </a>
+                                </span>
                             <div class="media-body">
                                 {% trans "Disconnect Accounts" %}
                             </div>
@@ -62,9 +62,9 @@
                 <button class="pull-right btn btn-emphasized btn-autosize" href="{% url 'account_set_password' %}?provider={{ provider }}" >
                     <ul class="media-list">
                         <li class="media">
-                            <a class="pull-left" href="#">
+                            <span class="pull-left">
                                 <i class="fas fa-key"></i>
-                            </a>
+                            </span>
                             <div class="media-body">
                                 {% trans 'Set Password' %}
                             </div>
@@ -86,9 +86,9 @@
         <button type="button" class="pull-right btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#{{modal_connect_provider}}">
             <ul class="media-list">
                 <li class="media">
-                    <a class="pull-left" href="#">
+                    <span class="pull-left">
                             <i class="fas fa-link"></i>
-                        </a>
+                        </span>
                     <div class="media-body">
                         {% trans "Connect Accounts" %}
                     </div>
@@ -106,9 +106,9 @@
     <button type="button" class="btn btn-emphasized" data-dismiss="modal" href="{% provider_login_url provider process="connect" %}&next={{request.path}}?provider={{ provider }}">
         <ul class="media-list">
             <li class="media">
-                <a class="pull-left" href="#">
+                <span class="pull-left">
                     <i class="fas fa-link"></i>
-                </a>
+                </span>
                 <div class="media-body">
                     {% trans 'Connect Accounts' %}
                 </div>

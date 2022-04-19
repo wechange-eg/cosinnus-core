@@ -1,8 +1,8 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n bootstrap3 cosinnus_tags djajax_tags %}
-{% load static from staticfiles %}
+{% load static %}
 
-{% block page_title %}{{ group.name }}{% endblock page_title %}
+{% block page_title %}{% if room and room.title %}{{ room.title }} - {% endif %}{{ group.name }}{% endblock page_title %}
 
 {% block extrahead %}
   <link href="{% static "css/cosinnus.dashboard.css" %}" rel="stylesheet">
@@ -26,5 +26,5 @@
 	    window.conferenceId = {{ group.id }};
 	    window.conferenceRoomId = {% if room %}{{ room.id }}{% else %}null{% endif %};
     </script>
-    <script src="{% static "conference/main.js" %}?v=3"></script>
+    <script src="{% static "conference/main.js" %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
 {% endblock %}

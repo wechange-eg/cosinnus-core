@@ -27,18 +27,6 @@
 	
 	{% if not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
 	
-		{% if request.GET.validate_msg %}
-		    <div class="alert alert-success alert-dismissable">
-		        <i class="fa fa-check fa-3x"></i>
-		        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&#215;</button>
-		        {% if request.GET.validate_msg == "admin" %}
-		            {% trans "Your account was registered successfully. The account will need to be approved by an administrator before you can log in. We will send an email to your address when this happens." %}
-		        {% elif request.GET.validate_msg == "email" %}
-		            {% trans "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in." %}
-		        {% endif %}
-		    </div>
-		{% endif %}
-		
 		<div class="ultra-space clearfix">
 		    <form action="" method="post" class="cosinnus-form form-horizontal " role="form">
 		        {% csrf_token %}
@@ -67,7 +55,7 @@
 		        <button type="submit" class="btn btn-emphasized">
 		            <ul class="media-list">
 		                <li class="media">
-		                    <span class="pull-left" href="#" tabindex="-1">
+		                    <span class="pull-left" tabindex="-1">
 		                        <i class="fa fa-hand-o-right"></i>
 		                    </span>
 		                    <div class="media-body">

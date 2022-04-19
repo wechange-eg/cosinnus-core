@@ -1,4 +1,5 @@
-{% load i18n cosinnus_tags %}
+{% load i18n cosinnus_tags tz %}
+{% get_current_timezone as TIME_ZONE %}
 
 {% comment %} 
     A formfield date-picker for a form containing `from_date`, `to_date` DateTimeFields.  
@@ -10,12 +11,13 @@
     Optional parameters:
         - date_label: Label for the formfield
         - date_legend: Legend for the formfield
-        
+
 {% endcomment %}
 
 {% if not date_label %}
     {% trans "Date" as date_label %}
 {% endif %}
+{% captureas date_legend %}{% blocktrans %}Time zone: {{ TIME_ZONE }}{% endblocktrans %}{% endcaptureas %}
 {% captureas date_html %}
     {{ from_date_field.errors }}
     {{ to_date_field.errors }}
@@ -26,21 +28,29 @@
                 placeholder="{% trans "Date" %}"
                 readonly ="readonly"
                 class="calendar-date-time-chooser-date" />
-            <input class="calendar-date-time-chooser-hiddendate" id="id_from_date_0" name="from_date_0" 
+            <input class="calendar-date-time-chooser-hiddendate" id="id_{{ from_date_field.html_name }}_0" name="{{ from_date_field.html_name }}_0" 
                 placeholder="{% trans "Start date." %}" type="hidden" 
-                {% if from_date_field.value %}
-                value="{{ from_date_field.value|date:"Y-m-d" }}" 
+                {% if from_date_field.value and from_date_field.value|date:"Y-m-d" %}
+                    value="{{ from_date_field.value|date:"Y-m-d" }}" 
+                {% elif from_date_field.value and from_date_field.value|length == 2 %}
+                    value="{{ from_date_field.value.0 }}"
                 {% elif form_view == "add" and request.GET.start %}
-                value="{{ request.GET.start }}" 
-                {% else %}
-                value="{% now "Y-m-d" %}" 
+                    value="{{ request.GET.start }}" 
+                {% elif not date_nullable %}
+                    value="{% now "Y-m-d" %}" 
                 {% endif %}
             >
-            <input class="calendar-date-time-chooser-time" id="id_from_date_1" name="from_date_1" 
-                placeholder="00:00" type="text" 
-                value="{{ from_date_field.value|date:"H:i" }}" 
-            >                                           
-            <div class="small-calendar"></div>
+            <input {% if hide_time_field %}type="hidden"{% endif%} class="calendar-date-time-chooser-time" id="id_{{ from_date_field.html_name }}_1" name="{{ from_date_field.html_name }}_1" autocomplete="off"
+                placeholder="00:00" type="text"
+                {% if from_date_field.value and from_date_field.value|date:'H:i' %}
+                    value="{{ from_date_field.value|date:'H:i' }}"
+                {% elif from_date_field.value and to_date_field.value|length == 2 %}
+                    value="{{ from_date_field.value.1 }}"
+                {% elif form_view == "add" and request.GET.starttime %}
+                    value="{{ request.GET.starttime }}"
+                {% endif %}
+            >
+            <div class="small-calendar" data-initial-date="{% if from_date_field.value and from_date_field.value|date:'Y-m-d' %}{{ from_date_field.value|date:'Y-m-d' }}{% elif from_date_field.value and from_date_field.value|length == 2 %}{{ from_date_field.value.0 }}{% elif form_view == 'add' and request.GET.start %} {{ request.GET.start }} {% else %} {% now 'Y-m-d' %} {% endif %}"></div>
         </li>
         <li class="calendar-date-time-chooser">
             {% trans "Until" %} <i class="fa fa-calendar"></i>
@@ -48,22 +58,62 @@
                 placeholder="{% trans "Date" %}"
                 readonly ="readonly"
                 class="calendar-date-time-chooser-date" />
-            <input class="calendar-date-time-chooser-hiddendate" id="id_to_date_0" name="to_date_0" 
+            <input class="calendar-date-time-chooser-hiddendate" id="id_{{ to_field.html_name }}_0" name="{{ to_date_field.html_name }}_0"
                 placeholder="{% trans "End date." %}" type="hidden" 
-                {% if to_date_field.value %}
-                value="{{ to_date_field.value|date:"Y-m-d" }}" 
+                {% if to_date_field.value and to_date_field.value|date:"Y-m-d" %}
+                    value="{{ to_date_field.value|date:"Y-m-d" }}" 
+                {% elif to_date_field.value and to_date_field.value|length == 2 %}
+                    value="{{ to_date_field.value.0 }}"
                 {% elif form_view == "add" and request.GET.end %}
-                value="{{ request.GET.end }}" 
-                {% else %}
-                value="{% now "Y-m-d" %}" 
+                   value="{{ request.GET.end }}" 
+                {% elif not date_nullable %}
+                   value="{% now "Y-m-d" %}" 
                 {% endif %}
             >
-            <input class="calendar-date-time-chooser-time" id="id_to_date_1" name="to_date_1" 
+            <input {% if hide_time_field %}type="hidden"{% endif%} class="calendar-date-time-chooser-time" id="id_{{ to_date_field.html_name }}_1" name="{{ to_date_field.html_name }}_1" autocomplete="off"
                 placeholder="23:59" type="text" 
-                value="{{ to_date_field.value|date:"H:i" }}" 
+                {% if to_date_field.value and to_date_field.value|date:'H:i' %}
+                    value="{{ to_date_field.value|date:'H:i' }}"
+                {% elif to_date_field.value and to_date_field.value|length == 2 %}
+                    value="{{ to_date_field.value.1 }}"
+                {% elif form_view == "add" and request.GET.endtime %}
+                    value="{{ request.GET.endtime  }}"
+                {% endif %}
             >    
-            <div class="small-calendar"></div>
+            <div class="small-calendar" data-initial-date="{% if to_date_field.value and to_date_field.value|date:'Y-m-d' %}{{ to_date_field.value|date:'Y-m-d' }}{% elif to_date_field.value and to_date_field.value|length == 2 %}{{ to_date_field.value.0 }}{% elif form_view == 'add' and request.GET.start %} {{ request.GET.start }} {% else %} {% now 'Y-m-d' %} {% endif %}"></div>
         </li>
+        
+	    {% if date_nullable %}
+	        <a class="clear-small-calendar">
+                <i class="fas fa-close"></i>
+            </a>
+	    {% endif %}
     </ol>
 {% endcaptureas %}
-{% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label large_field=True date_legend=date_legend %}
+{% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label large_field=True legend=date_legend %}
+
+<script type="text/javascript">
+    $(function(){
+	    $.cosinnus.fullcalendar();
+	    $.cosinnus.calendarDayTimeChooser();
+    });
+
+    $('#id_{{ from_date_field.html_name }}_1').keyup(function(){
+        if(/[0-9]{1,2}\:[0-9]{2}/.test($(this).val())) {
+            var startTime = $(this).val().split(':');
+            var endHours = parseInt(startTime) + 1;
+            $('#id_{{ to_date_field.html_name }}_1').val(endHours +':'+ startTime[1]);
+        } else if (/[0-9]{4}/.test($(this).val())) {
+            var startTime = $(this).val();
+            var endHours = parseInt(startTime) + 100;
+            $('#id_{{ to_date_field.html_name }}_1').val(endHours);
+        } else if (/[0-9]{1,2}/.test($(this).val())) {
+            var startTime = $(this).val();
+            var endHours = parseInt(startTime) + 1;
+            $('#id_{{ to_date_field.html_name }}_1').val(endHours);
+        } else if ($(this).val().trim() == '') {
+            $('#id_{{ to_date_field.html_name }}_1').val('');
+        }
+    });
+
+</script>

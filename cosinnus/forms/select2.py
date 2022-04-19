@@ -7,8 +7,7 @@ from django.core.exceptions import ValidationError
 
 from taggit.models import Tag
 
-from django_select2.fields import (HeavySelect2FieldBaseMixin,
-    ModelMultipleChoiceField)
+from django_select2.fields import HeavySelect2FieldBaseMixin, ModelMultipleChoiceField
 from django_select2.widgets import Select2MultipleWidget, HeavySelect2TagWidget,\
     HeavySelect2MultipleWidget, HeavySelect2Widget
 from django_select2.util import JSFunctionInContext

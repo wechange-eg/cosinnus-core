@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 import csv
 import datetime
+import pytz
 import logging
 from builtins import object
 from builtins import zip
@@ -44,7 +45,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView,
 from django.views.generic.base import View
 from django.views.generic.edit import FormView
 from django_select2.views import NO_ERR_RESP, Select2View
-from extra_views import (CreateWithInlinesView, InlineFormSet,
+from extra_views import (CreateWithInlinesView, InlineFormSetFactory,
                          UpdateWithInlinesView)
 from multiform.forms import InvalidArgument
 
@@ -53,12 +54,14 @@ from cosinnus.api.serializers.group import GroupSimpleSerializer
 from cosinnus.api.serializers.user import UserSerializer
 from cosinnus.core import signals
 from cosinnus.core.decorators.views import membership_required, redirect_to_403, \
-    dispatch_group_access, get_group_for_request
+    dispatch_group_access, get_group_for_request, redirect_to_not_logged_in,\
+    require_read_access
 from cosinnus.core.registries import app_registry
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm, MembershipForm, CosinnusLocationForm, \
     CosinnusGroupGalleryImageForm, CosinnusGroupCallToActionButtonForm, MultiUserSelectForm, MultiGroupSelectForm
-from cosinnus.forms.tagged import get_form  # circular import
+from cosinnus.forms.tagged import get_form
+from cosinnus.models import group  # circular import
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
                                    CosinnusPortal, CosinnusLocation,
                                    CosinnusGroupGalleryImage, CosinnusGroupCallToActionButton,
@@ -88,7 +91,8 @@ from cosinnus.views.microsite import GroupMicrositeView
 from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
                                         AjaxableFormMixin, ListAjaxableResponseMixin)
 from cosinnus.views.mixins.avatar import AvatarFormMixin
-from cosinnus.views.mixins.group import GroupIsConferenceMixin
+from cosinnus.views.mixins.group import GroupIsConferenceMixin,\
+    RequireVerifiedUserMixin
 from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin, \
     RequireLoggedInMixin, EndlessPaginationMixin, RequireWriteMixin
 from cosinnus.views.mixins.reflected_objects import ReflectedObjectSelectMixin
@@ -100,6 +104,9 @@ from cosinnus_organization.models import CosinnusOrganization, CosinnusOrganizat
 from cosinnus_organization.utils import get_organization_select2_pills
 from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.views.attached_object import AttachableViewMixin
+from cosinnus.core.middleware import inactive_logout_middleware
+from cosinnus.forms.conference import CosinnusConferenceSettingsMultiForm
+
 
 logger = logging.getLogger('cosinnus')
 
@@ -113,21 +120,21 @@ class SamePortalGroupMixin(object):
         return super(SamePortalGroupMixin, self).get_queryset().filter(portal=CosinnusPortal.get_current())
 
 
-class CosinnusLocationInlineFormset(InlineFormSet):
+class CosinnusLocationInlineFormset(InlineFormSetFactory):
     extra = 5
     max_num = 5
     form_class = CosinnusLocationForm
     model = CosinnusLocation
 
 
-class CosinnusGroupGalleryImageInlineFormset(InlineFormSet):
+class CosinnusGroupGalleryImageInlineFormset(InlineFormSetFactory):
     extra = 6
     max_num = 6
     form_class = CosinnusGroupGalleryImageForm
     model = CosinnusGroupGalleryImage
 
 
-class CosinnusGroupCallToActionButtonInlineFormset(InlineFormSet):
+class CosinnusGroupCallToActionButtonInlineFormset(InlineFormSetFactory):
     extra = 10
     max_num = 10
     form_class = CosinnusGroupCallToActionButtonForm
@@ -187,7 +194,8 @@ class CosinnusGroupFormMixin(object):
     
     def get_form_class(self):
         
-        class CosinnusGroupForm(get_form(self.group_form_class, attachable=False)):
+        class CosinnusGroupForm(get_form(self.group_form_class, attachable=False,
+                         extra_forms={'conference_settings_assignments': CosinnusConferenceSettingsMultiForm})):
             def dispatch_init_group(self, name, group):
                 if name == 'media_tag':
                     return group
@@ -237,18 +245,22 @@ class CosinnusGroupFormMixin(object):
                     app_is_active = not self.object.deactivated_apps or app_name not in deactivated_apps
                     
                 app_not_activatable = (self.group_model_class.GROUP_MODEL_TYPE != CosinnusGroup.TYPE_SOCIETY and app_registry.is_activatable_for_groups_only(app_name))
+                group_label = app_registry.get_label(app_name)
+                if app_name in settings.COSINNUS_GROUP_APPS_WIDGET_SETTING_ONLY:
+                    group_label = f'{group_label} ({self.group_model_class.get_trans().DASHBOARD_LABEL})'
                 deactivated_app_selection.append({
                     'app_name': app_name,
                     'app': app,
-                    'label': pgettext_lazy('the_app', app),
+                    'label': group_label,
                     'checked': app_is_active,
                     'app_not_activatable': app_not_activatable,
                 })
-                if app_is_active and not app_not_activatable:
+                app_disabled_for_microsite = app_name in settings.COSINNUS_GROUP_APPS_WIDGETS_MICROSITE_DISABLED
+                if app_is_active and not app_not_activatable and not app_disabled_for_microsite:
                     microsite_public_apps_selection.append({
                         'app_name': app_name,
                         'app': app,
-                        'label': pgettext_lazy('the_app', app),
+                        'label': app_registry.get_label(app_name),
                         'checked': app_name in microsite_public_apps,
                     })
             
@@ -307,7 +319,7 @@ class GroupMembershipMixin(MembershipClassMixin):
     invite_class = CosinnusUnregisterdUserGroupInvite
 
 
-class GroupCreateView(CosinnusGroupFormMixin, AttachableViewMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
+class GroupCreateView(CosinnusGroupFormMixin, RequireVerifiedUserMixin, AttachableViewMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
                       CreateWithInlinesView):
 
     #form_class = 
@@ -437,6 +449,8 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
 
     def get_context_data(self, **kwargs):
         context = super(GroupDetailView, self).get_context_data(**kwargs)
+        user_is_superuser = check_user_superuser(self.request.user)
+        
         admin_ids = self.membership_class.objects.get_admins(group=self.group)
         all_member_ids = self.membership_class.objects.get_members(group=self.group)
         pending_ids = self.membership_class.objects.get_pendings(group=self.group)
@@ -448,7 +462,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         # users in other portals
         # we also exclude users who have never logged in
         _q = get_user_model().objects.all()
-        if not check_user_superuser(self.request.user):
+        if not user_is_superuser:
             _q = filter_active_users(_q)
         _q = _q.order_by('first_name', 'last_name').select_related('cosinnus_profile')
         
@@ -462,8 +476,12 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             exclude(id__in=invited_pending_ids). \
             filter(id__in=CosinnusPortal.get_current().members)
         
-        hidden_members = 0
-        user_count = members.count()
+        hidden_member_count = 0
+        user_count = filter_active_users(members).count()
+        # for admins: count the inactive users
+        inactive_member_count = 0
+        if user_is_superuser:
+            inactive_member_count = members.count() - user_count
         is_member_of_this_group = self.request.user.pk in admin_ids or self.request.user.pk in member_ids or \
                  check_user_superuser(self.request.user)
                  
@@ -483,7 +501,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             # concatenate admins into members, because we might have sorted out a private admin, 
             # and the template iterates only over members to display people
             # members = list(set(chain(members, admins)))
-            hidden_members = user_count - members.count()
+            hidden_member_count = user_count - members.count()
         
         # add admins to user count now, because they are shown even if hidden visibility
         user_count += admins.count()
@@ -533,279 +551,46 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             'recruited': recruited,
             'non_members': non_members,
             'member_count': user_count,
-            'hidden_user_count': hidden_members,
+            'inactive_member_count': inactive_member_count,
+            'hidden_user_count': hidden_member_count,
             'more_user_count': more_user_count,
             'member_invite_form': MultiUserSelectForm(group=self.group),
             'group_invite_form': MultiGroupSelectForm(group=self.group),
-            'invited_groups': invited_groups
+            'invited_groups': invited_groups,
+            'user_is_superuser': user_is_superuser,
         })
         return context
 
+class GroupMeetingView(SamePortalGroupMixin, RequireReadMixin, DetailView):
 
-class ConferenceManagementView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, DetailView):
-
-    template_name = 'cosinnus/group/conference_management.html'
+    template_name = 'cosinnus/group/group_meeting.html'
+    
+    def dispatch(self, request, *args, **kwargs):
+        """ Make sure the group has an active video conference configured. """
+        ret = super().dispatch(request, *args, **kwargs)
+        has_bbb_video = settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and \
+            self.group.video_conference_type == self.group.BBB_MEETING
+        has_fairmeeting_video = CosinnusPortal.get_current().video_conference_server and \
+            self.group.video_conference_type == self.group.FAIRMEETING
+        if not has_bbb_video and not has_fairmeeting_video:
+            messages.error(request, _('This team does not have a video conference configured.'))
+            return redirect_to_403(request, view=self, group=self.group)
+        return ret
 
     def get_object(self, queryset=None):
         return self.group
-
-    def post(self, request, *args, **kwargs):
-        if 'startConferenence' in request.POST:
-            self.group.conference_is_running = True
-            self.group.save()
-            self.update_all_members_status(True)
-            messages.add_message(request, messages.SUCCESS,
-                                 _('Conference successfully started and user accounts activated'))
-
-        elif 'finishConferenence' in request.POST:
-            self.group.conference_is_running = False
-            self.group.save()
-            self.update_all_members_status(False)
-            messages.add_message(request, messages.SUCCESS,
-                                 _('Conference successfully finished and user accounts deactivated'))
-
-        elif 'deactivate_member' in request.POST:
-            user_id = int(request.POST.get('deactivate_member'))
-            user = self.update_member_status(user_id, False)
-            if user:
-                messages.add_message(request, messages.SUCCESS, _('Successfully deactivated user account'))
-
-        elif 'activate_member' in request.POST:
-            user_id = int(request.POST.get('activate_member'))
-            user = self.update_member_status(user_id, True)
-            if user:
-                messages.add_message(request, messages.SUCCESS, _('Successfully activated user account'))
-
-        elif 'remove_member' in request.POST:
-            user_id = int(request.POST.get('remove_member'))
-            user = get_user_model().objects.get(id=user_id)
-            delete_userprofile(user)
-            messages.add_message(request, messages.SUCCESS, _('Successfully removed user'))
-
-        return redirect(group_aware_reverse('cosinnus:conference-management',
-                                            kwargs={'group': self.group}))
-
-    def update_all_members_status(self, status):
-        for member in self.group.conference_members:
-            member.is_active = status
-            if status:
-                member.last_login = None
-            member.save()
-
-    def update_member_status(self, user_id, status):
-        try:
-            user = get_user_model().objects.get(id=user_id)
-            user.is_active = status
-            user.save()
-            return user
-        except ObjectDoesNotExist:
-            pass
-
-    def get_member_workshops(self, member):
-        return CosinnusGroupMembership.objects.filter(user=member, group__parent=self.group)
-
-    def get_members_and_workshops(self):
-        members = []
-        for member in self.group.conference_members:
-            member_dict = {
-                'member': member,
-                'workshops': self.get_member_workshops(member)
-            }
-            members.append(member_dict)
-        return members
-
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['group'] = self.group
-        context['members'] = self.get_members_and_workshops()
-        context['group_admins'] = CosinnusGroupMembership.objects.get_admins(group=self.group)
-
+        has_bbb_video = settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and \
+            self.group.video_conference_type == self.group.BBB_MEETING
+        if has_bbb_video:
+            bbb_room = getattr(self.group.media_tag, 'bbb_room')
+            context.update({
+                'bbb_room': bbb_room,
+                'recording_prompt_required': bbb_room and bbb_room.is_recorded_meeting or False,
+            })
         return context
-
-
-class WorkshopParticipantsUploadView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, FormView):
-
-    template_name = 'cosinnus/group/workshop_participants_upload.html'
-    form_class = CosinusWorkshopParticipantCSVImportForm
-
-    def get_object(self, queryset=None):
-        return self.group
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['group'] = self.group
-        return kwargs
-
-    def form_valid(self, form):
-        data = form.cleaned_data.get('participants')
-        header, accounts = self.process_data(data)
-
-        filename = '{}_participants_passwords.csv'.format(self.group.slug)
-
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
-
-        writer = csv.writer(response)
-        writer.writerow(header)
-        for account in accounts:
-            writer.writerow(account)
-        return response
-
-    def process_data(self, data):
-        groups_list = data.get('header')
-        header = data.get('header_original')
-        accounts_list = []
-        for row in data.get('data'):
-            account = self.create_account(row, groups_list)
-            accounts_list.append(account)
-
-        return header + ['email', 'password'], accounts_list
-
-    def get_unique_workshop_name(self, name):
-        no_whitespace = name.replace(' ', '')
-        unique_name = '{}_{}__{}'.format(self.group.portal.id, self.group.id, no_whitespace)
-        return unique_name
-
-    @transaction.atomic
-    def create_account(self, data, groups):
-
-        username = self.get_unique_workshop_name(data[0])
-        first_name = data[1]
-        last_name = data[2]
-
-        try:
-            name_string = '"{}":"{}"'.format(PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME, username)
-            profile = UserProfile.objects.get(settings__contains=name_string)
-            user = profile.user
-            user.first_name = first_name
-            user.last_name = last_name
-            user.save()
-            self.create_or_update_memberships(user, data, groups)
-            return data + [user.email, '']
-        except ObjectDoesNotExist:
-            random_email = '{}@wechange.de'.format(get_random_string())
-            pwd = get_random_string()
-            user = create_base_user(random_email, password=pwd, first_name=first_name, last_name=last_name)
-
-            if user:
-                profile = get_user_profile_model()._default_manager.get_for_user(user)
-                profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME] = username
-                profile.settings[PROFILE_SETTING_WORKSHOP_PARTICIPANT] = True
-                profile.add_redirect_on_next_page(
-                    redirect_with_next(
-                        group_aware_reverse(
-                            'cosinnus:group-dashboard',
-                            kwargs={'group': self.group}),
-                        self.request), message=None, priority=True)
-                profile.save()
-
-                unique_email = 'User{}.C{}@wechange.de'.format(str(user.id), str(self.group.id))
-                user.email = unique_email
-                user.is_active = False
-                user.save()
-
-                self.create_or_update_memberships(user, data, groups)
-                return data + [unique_email, pwd]
-            else:
-                return data + [_('User was not created'), '']
-
-    def create_or_update_memberships(self, user, data, groups):
-
-        # Add user to the parent group
-        membership, created = CosinnusGroupMembership.objects.get_or_create(
-            group=self.group,
-            user=user
-        )
-        if created:
-            membership.status = MEMBERSHIP_MEMBER
-            membership.save()
-
-        # Add user to all child groups/projects that were marked with 1 or 2 in the csv or delete membership
-        for i, group in enumerate(groups):
-            if isinstance(group, CosinnusGroup):
-                if data[i] in [str(MEMBERSHIP_MEMBER), str(MEMBERSHIP_ADMIN)]:
-                    status = int(data[i])
-                    membership, created = CosinnusGroupMembership.objects.get_or_create(
-                        group=group,
-                        user=user
-                    )
-                    if created:
-                        membership.status = status
-                        membership.save()
-                    else:
-                        current_status = membership.status
-                        if current_status < status:
-                            membership.status = status
-                            membership.save()
-                else:
-                    try:
-                        membership = CosinnusGroupMembership.objects.get(
-                            group=group,
-                            user=user
-                        )
-                        membership.delete()
-                    except ObjectDoesNotExist:
-                        continue
-            else:
-                continue
-
-
-class WorkshopParticipantsDownloadView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, View):
-
-    def get(self, request, *args, **kwars):
-        members = self.group.conference_members
-
-        filename = '{}_statistics.csv'.format(self.group.slug)
-
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
-
-        header = ['Workshop username', 'email', 'workshops count', 'has logged in', 'last login date', 'Terms of service accepted']
-
-        writer = csv.writer(response)
-        writer.writerow(header)
-
-        for member in members:
-            workshop_username = member.cosinnus_profile.readable_workshop_user_name
-            email = member.email
-            workshop_count = self.get_membership_count(member)
-            has_logged_in, logged_in_date = self.get_last_login(member)
-            tos_accepted = 1 if member.cosinnus_profile.settings.get('tos_accepted', False) else 0
-            row = [workshop_username, email, workshop_count, has_logged_in, logged_in_date, tos_accepted]
-            writer.writerow(row)
-        return response
-
-    def get_membership_count(self, member):
-        return member.cosinnus_groups.filter(parent=self.group).count()
-
-    def get_last_login(self, member):
-        has_logged_in = 1 if member.last_login else 0
-        last_login = timezone.localtime(member.last_login)
-        logged_in_date = last_login.strftime("%Y-%m-%d %H:%M") if member.last_login else ''
-
-        return [has_logged_in, logged_in_date]
-
-
-class WorkshopParticipantsUploadSkeletonView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, View):
-
-    def get(self, request, *args, **kwars):
-        filename = '{}_participants.csv'.format(self.group.slug)
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
-
-        writer = csv.writer(response)
-
-        header = [_('Workshop username'), _('First Name'), _('Last Name')]
-        workshop_slugs = [group.slug for group in self.group.groups.all()]
-
-        full_header = header + workshop_slugs
-
-        writer.writerow(full_header)
-
-        for i in range(5):
-            row = ['' for entry in full_header]
-            writer.writerow(row)
-        return response
 
 
 class GroupMembersMapListView(GroupDetailView):
@@ -996,8 +781,39 @@ class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin,
         kwargs = super(GroupUpdateView, self).get_form_kwargs()
         kwargs['group'] = self.group
         return kwargs
-    
+
+    def check_fields_changed(self, field_names, form):
+        if self.group.id:
+            form_data = form.cleaned_data.get('obj')
+            obj = CosinnusConference.objects.get(id=self.group.id)
+            for field_name in field_names:
+                form_field_value = form_data.get(field_name)
+                if isinstance(form_field_value, datetime.datetime):
+                    form_field_value = form_field_value.astimezone(pytz.utc)
+                instance_field_value = getattr(obj, field_name)
+                if not form_field_value == instance_field_value:
+                    return True
+        return False
+
     def forms_valid(self, form, inlines):
+        if self.group.__class__.__name__ == 'CosinnusConference':
+            obj = self.group
+            times_changed = self.check_fields_changed(
+                ['from_date', 'to_date'], form)
+            details_changed = self.check_fields_changed(
+                ['name', 'description'], form)
+            if details_changed or (times_changed and details_changed):
+                cosinnus_notifications.attending_conference_changed.send(
+                    sender=self.group, user=self.request.user, obj=obj,
+                    audience=get_user_model().objects.filter(
+                        id__in=self.group.members)
+                )
+            elif times_changed:
+                cosinnus_notifications.attending_conference_time_changed.send(
+                    sender=self.group, user=self.request.user, obj=obj,
+                    audience=get_user_model().objects.filter(
+                        id__in=self.group.members)
+                )
         messages.success(self.request, self.message_success % {'team_type':self.object._meta.verbose_name})
         return super(GroupUpdateView, self).forms_valid(form, inlines)
 
@@ -1055,7 +871,6 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembership
 
     message_success = _('You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request.')
     referer_url = reverse_lazy('cosinnus:group-list')
-    auto_accept_slugs = getattr(settings, 'COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS', [])
     membership_status = MEMBERSHIP_MEMBER
 
     @method_decorator(login_required)
@@ -1090,8 +905,8 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembership
                 messages.success(self.request, _('You had already been invited to "%(team_name)s" and have now been made a member immediately!') % {'team_name': self.object.name})
                 signals.user_group_invitation_accepted.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
         except self.membership_class.DoesNotExist:
-            # default user-auto-join groups will accept immediately
-            if self.object.slug in self.auto_accept_slugs:
+            # auto-join groups will accept immediately
+            if self.object.is_autojoin_group:
                 self.membership_class.objects.create(
                     user=self.request.user,
                     group=self.object,
@@ -1110,8 +925,7 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, GroupMembership
 
 
 class CSRFExemptGroupJoinView(GroupUserJoinView):
-    """ A CSRF-exempt group user join view that only works on groups/projects with slugs
-        in settings.COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS in this portal.
+    """ A CSRF-exempt group user join view that only works on autojoin groups.
     """
     
     @csrf_exempt
@@ -1120,7 +934,7 @@ class CSRFExemptGroupJoinView(GroupUserJoinView):
     
     def get_object(self, *args, **kwargs): 
         group = super(CSRFExemptGroupJoinView, self).get_object(*args, **kwargs)
-        if group and group.slug not in self.auto_accept_slugs:
+        if group and not group.is_autojoin_group:
             raise PermissionDenied('The group/project requested for the join is not marked as auto-join!')
         return group
 
@@ -1541,7 +1355,7 @@ class ActivateOrDeactivateGroupView(TemplateView):
     template_name = 'cosinnus/group/group_activate_or_deactivate.html'
     
     message_success_activate = _('%(team_name)s was re-activated successfully!')
-    message_success_deactivate = _('%(team_name)s was deactivated successfully!')
+    message_success_deactivate = _('%(team_name)s was deactivated successfully!\n\nShould you wish to delete it permanently, please send an email to the administrators of the portal. Please send the email from the email account with which you are registered at this platform and add the exact name to the email, so that the administrators can verify your request.')
     
     def dispatch(self, request, *args, **kwargs):
         group_id = int(kwargs.pop('group_id'))
@@ -1580,11 +1394,9 @@ class ActivateOrDeactivateGroupView(TemplateView):
             typed_group.update_index()
             typed_group.update_index_for_all_group_objects()
             messages.success(request, self.message_success_activate % {'team_name': self.group.name})
-            signals.group_reactivated.send(sender=typed_group.__class__, group=typed_group)
             return redirect(self.group.get_absolute_url())
         else:
             messages.success(request, self.message_success_deactivate % {'team_name': self.group.name})
-            signals.group_deactivated.send(sender=typed_group.__class__, group=typed_group)
             return redirect(reverse('cosinnus:profile-detail'))
     
     def get_context_data(self, **kwargs):
@@ -1620,11 +1432,12 @@ class GroupStartpage(View):
                     and not request.GET.get('invited', None) == '1':
                 return False
             else:
+                # if the group is not accessible, redirect to microsite 
+                #   in case if the group's microsite should not be closed for the non-authenticated users
+                if not check_object_read_access(self.group, request.user) and not self.group.is_publicly_visible:
+                    return False
                 return True
-        # if the group is not accessible, redirect to microsite
-        if not check_object_read_access(self.group, request.user):
-            return True
-        
+
         # check if this session user has clicked on "browse" for this group before
         # and if so, never let him see that groups microsite again
         group_session_browse_key = 'group__browse__%s' % self.group.slug
@@ -2037,7 +1850,7 @@ class GroupOrganizationsView(DetailView):
         context.update({
             'requested': queryset.filter(status=MEMBERSHIP_PENDING),
             'invited': queryset.filter(status=MEMBERSHIP_INVITED_PENDING),
-            'members': queryset.filter(status__in=(MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN)),
+            'members': queryset.filter(status__in=MEMBER_STATUS),
             'request_form': MultiOrganizationSelectForm(group=self.object),
             'group': self.object,
         })
@@ -2137,10 +1950,7 @@ group_delete = GroupDeleteView.as_view()
 group_delete_api = GroupDeleteView.as_view(is_ajax_request_url=True)
 group_detail = GroupDetailView.as_view()
 group_detail_api = GroupDetailView.as_view(is_ajax_request_url=True)
-conference_management = ConferenceManagementView.as_view()
-workshop_participants_upload = WorkshopParticipantsUploadView.as_view()
-workshop_participants_download = WorkshopParticipantsDownloadView.as_view()
-workshop_participants_upload_skeleton = WorkshopParticipantsUploadSkeletonView.as_view()
+group_meeting = GroupMeetingView.as_view()
 group_members_map = GroupMembersMapListView.as_view()
 group_list = GroupListView.as_view()
 group_list_api = GroupListView.as_view(is_ajax_request_url=True)

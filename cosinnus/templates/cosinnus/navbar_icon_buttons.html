@@ -27,6 +27,14 @@
             <span class="visible-xs-inline">&nbsp;{% trans "My Stream" %}</span>
         </a>
     </li>
+    {% if SETTINGS.COSINNUS_CLOUD_ENABLED %}
+        <li>
+	        <a href="{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}" title="{% trans "Cloud" %}" {% if SETTINGS.COSINNUS_CLOUD_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}>
+	            <i class="fas fa-fw fa-cloud"></i>
+	            <span class="visible-xs-inline">&nbsp;{% trans "Cloud" %}</span>
+	        </a>
+	    </li>
+    {% endif %}
 {% endif %}
 
 {% block extra_navbar_icon_buttons %}{% endblock extra_navbar_icon_buttons %}

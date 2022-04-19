@@ -1,6 +1,5 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n cosinnus_tags %}
-{% load static from staticfiles %}
+{% load i18n cosinnus_tags static %}
 
 {% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
 
@@ -56,9 +55,9 @@
                     <button type="button" class="btn btn-emphasized bottom-align" href="{% if edit_mode %}{% group_url 'cosinnus:group-microsite' group=group %}{% else %}{% group_url 'cosinnus:group-microsite-edit' group=group %}{% endif %}">
                         <ul class="media-list">
                             <li class="media">
-                                <a class="pull-left" href="#">
+                                <span class="pull-left">
                                     <i class="fa {% if edit_mode %}fa-reply{% else %}fa-cogs{% endif %}"></i>
-                                </a>
+                                </span>
                                 <div class="media-body">
                                     {% if edit_mode %}{% trans "Done" %}{% else %}{% trans "Configure" %}{% endif %}
                                 </div>
@@ -69,9 +68,9 @@
                     <button type="button" class="btn btn-emphasized bottom-align" data-toggle="modal" data-target="#join_withdraw_modal">
                         <ul class="media-list">
                             <li class="media">
-                                <a class="pull-left" href="#">
+                                <span class="pull-left">
                                     <i class="fa fa-sign-out"></i>
-                                </a>
+                                </span>
                                 <div class="media-body">
                                     {% trans "Withdraw request" %} 
                                 </div>
@@ -82,9 +81,9 @@
                     <button type="button" class="btn btn-emphasized bottom-align" data-toggle="modal" data-target="#join_withdraw_modal">
                         <ul class="media-list">
                             <li class="media">
-                                <a class="pull-left" href="#">
+                                <span class="pull-left">
                                     <i class="fa fa-sign-in"></i>
-                                </a>
+                                </span>
                                 <div class="media-body">
                                     {% trans "Join" %} 
                                 </div>
@@ -130,9 +129,9 @@
 	                <ul class="media-list ">
 	                    <li class="media">
 	                        <a class="pull-left btn-extra-emphasized" href="#"></a>
-	                        <a class="pull-left" href="#">
+	                        <span class="pull-left">
 	                            <i class="fa fa-plus"></i>
-	                        </a>
+	                        </span>
 	                        <div class="media-body">
 	                            {% trans "Add widget" %}
 	                        </div>

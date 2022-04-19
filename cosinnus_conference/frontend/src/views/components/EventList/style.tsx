@@ -35,8 +35,9 @@ export const useStyles = makeStyles((theme) => ({
       "& div.room-title": {
         "& span, & p": {
           fontWeight: 700,
-          color: theme.palette.text.secondary,
+          color: theme.palette.text.primary,
           wordBreak: "break-word",
+          hyphens: "auto",
         }
       },
       "& div.event-title": {
@@ -46,7 +47,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         "& span:last-child, span:last-child *": {
           background: "transparent",
-          color: theme.palette.text.secondary,
+          color: theme.palette.text.primary,
           padding: 0,
           lineHeight: "1.3",
         }
@@ -55,19 +56,19 @@ export const useStyles = makeStyles((theme) => ({
         background: theme.palette.primary.main,
         "& div.room-title": {
           "& span, & p": {
-            color: theme.palette.primary.light
+            color: theme.palette.text.secondary
           }
         },
         "& div.event-title": {
           "& span:first-child": {
-            color: "#ffffff"
+            color: theme.palette.text.secondary
           },
           "& span:last-child, span:last-child *": {
-            color: theme.palette.primary.light,
+            color: theme.palette.text.secondary,
           }
         },
         "& a": {
-          color: "#ffffff"
+          color: theme.palette.text.secondary
         }
       },
       [theme.breakpoints.down('sm')]: {

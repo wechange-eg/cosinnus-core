@@ -16,12 +16,13 @@ from cosinnus.conf import settings
 from cosinnus.core import signals
 from cosinnus.core.middleware.login_ratelimit_middleware import login_ratelimit_triggered
 from cosinnus.core.registries.group_models import group_model_registry
-from cosinnus.models.conference import CosinnusConferenceRoom
+from cosinnus.models.conference import CosinnusConferenceRoom,\
+    CosinnusConferencePremiumBlock
 from cosinnus.models.feedback import CosinnusFailedLoginRateLimitLog
 from cosinnus.models.group import CosinnusGroup, CosinnusPortalMembership, \
     CosinnusGroupMembership
 from cosinnus.models.membership import MEMBERSHIP_MEMBER, MEMBER_STATUS, \
-    MEMBERSHIP_ADMIN
+    MEMBERSHIP_ADMIN, MEMBERSHIP_MANAGER
 from cosinnus.models.profile import GlobalBlacklistedEmail, \
     GlobalUserNotificationSetting, get_user_profile_model
 from cosinnus.models.tagged import ensure_container, LikeObject
@@ -33,6 +34,7 @@ from cosinnus.utils.user import assign_user_to_default_auth_group, \
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment,\
     CosinnusManagedTag
 from cosinnus.models.group_extra import ensure_group_type
+from cosinnus_conference.utils import update_conference_premium_status
 
 logger = logging.getLogger('cosinnus')
 
@@ -129,21 +131,24 @@ if getattr(settings, 'COSINNUS_USER_FOLLOWS_GROUP_WHEN_JOINING', True):
 
     @receiver(signals.user_joined_group)
     def user_follow_joined_group_trigger(sender, user, group, **kwargs):
-        """ Will automatically make a user follow a group after they joined it """
-        group_ct = ContentType.objects.get_for_model(get_cosinnus_group_model())
-        # create a new followed likeobject
-        likeobj, created = LikeObject.objects.get_or_create(
-            content_type=group_ct,
-            object_id=group.id,
-            user=user,
-            defaults={'liked': False, 'followed': True}
-        )
-        # or make the existing likeobject followed
-        if not created:
-            if not likeobj.followed:
-                likeobj.followed = True
-                likeobj.save(update_fields=['followed'])
-        group.clear_likes_cache()
+        """ Will automatically make a user follow a group after they joined it except for the forums group"""
+
+        forums_group_slug = settings.NEWW_FORUM_GROUP_SLUG
+        if not group.slug == forums_group_slug:
+            group_ct = ContentType.objects.get_for_model(get_cosinnus_group_model())
+            # create a new followed likeobject
+            likeobj, created = LikeObject.objects.get_or_create(
+                content_type=group_ct,
+                object_id=group.id,
+                user=user,
+                defaults={'liked': False, 'followed': True}
+            )
+            # or make the existing likeobject followed
+            if not created:
+                if not likeobj.followed:
+                    likeobj.followed = True
+                    likeobj.save(update_fields=['followed'])
+            group.clear_likes_cache()
 
 
     @receiver(signals.user_left_group)
@@ -224,7 +229,7 @@ def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
                         room.remove_user(instance.user)
                     else:
                         if instance.status in MEMBER_STATUS:
-                            room.join_user(instance.user, as_moderator=bool(instance.status==MEMBERSHIP_ADMIN))
+                            room.join_user(instance.user, as_moderator=bool(instance.status==MEMBERSHIP_MANAGER))
 
                 # For group conferences:
                 group = instance.group
@@ -351,5 +356,12 @@ def group_membership_cache_clear_triggers(sender, instance, created=False, **kwa
         logger.exception(e)
 
 
+@receiver(post_save, sender=CosinnusConferencePremiumBlock)
+def update_conference_premium_status_on_block_save(sender, instance, created=False, **kwargs):
+    """ Clears the cache for tags when saved/deleted """
+    update_conference_premium_status(conferences=[instance.conference])
+        
+
 from cosinnus.apis.cleverreach import * # noqa
 from cosinnus.models.wagtail_models import *  # noqa
+

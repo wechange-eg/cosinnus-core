@@ -6,7 +6,7 @@ import time
 
 from annoying.functions import get_object_or_None
 from django.http.response import HttpResponseNotFound, \
-    HttpResponse, JsonResponse
+    HttpResponse, JsonResponse, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.base import RedirectView, View
 
@@ -92,7 +92,7 @@ class BBBRoomMeetingQueueAPIView(RequireLoggedInMixin, View):
         media_tag_id = kwargs.get('mt_id')
         user = self.request.user
         if not user.is_authenticated:
-            return redirect_to_not_logged_in(self.request, view=self)
+            return HttpResponseBadRequest('User is not logged in.')
         media_tag = get_object_or_404(get_tag_object_model(), id=media_tag_id)
         
         data = {
@@ -100,8 +100,14 @@ class BBBRoomMeetingQueueAPIView(RequireLoggedInMixin, View):
         }
         # return a waiting status or the concrete room URL on the BBB server wrapped in a result object
         if media_tag.bbb_room is not None:
-            room_url = media_tag.bbb_room.get_direct_room_url_for_user(user=user)
+            room = media_tag.bbb_room
+            if not user in room.attendees.all() and not user in room.moderators.all() \
+                    and not check_user_superuser(user):
+                return HttpResponseBadRequest('User is not allowed to enter this room.')
             
+            room_url = room.get_direct_room_url_for_user(user=user)
+            if not room_url:
+                return HttpResponseBadRequest('Room membership for this user could not be established.')
             # if the URL matches a cluster URL, we check if the room_url returns a http redirect
             # and if so, return the redirect target.
             # this way, we peel the cluster gateway from the URL to be able to insert
@@ -112,10 +118,15 @@ class BBBRoomMeetingQueueAPIView(RequireLoggedInMixin, View):
                 if response.status_code == 302 and 'Location' in response.headers:
                     room_url = response.headers['Location']
                 elif not response.status_code == 200:
-                    logger.error('BBB Queue final step did not receive a 200/302 response!', extra={'response': response.json()})
+                    # this can happen when a room is still being created on the BBB server and 
+                    # we quickly ask BBBAtScale for its URL; it will return a "Room is still being created" error
+                    logger.warn('BBB Queue Scale-Cluster URL resolve step did not receive a 200/302 response, retrying.', 
+                                 extra={'response': response, 'response_text': response.text})
+                    return JsonResponse(data)
             data = {
                 'status': "DONE", 
                 'url': room_url,
+                'recorded_meeting': room.is_recorded_meeting,
             }
         elif media_tag.bbb_room is None and settings.COSINNUS_TRIGGER_BBB_ROOM_CREATION_IN_QUEUE:
             # if the media_tag is attached to a conference event, but no room has been created yet,

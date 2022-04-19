@@ -32,6 +32,7 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
             'cosinnus_marketplace.Offer',
+            'cosinnus_cloud.LinkedCloudFile',
         ],
         'cosinnus_event.Event': [
             'cosinnus_file.FileEntry',
@@ -40,6 +41,7 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
             'cosinnus_marketplace.Offer',
+            'cosinnus_cloud.LinkedCloudFile',
         ],
         'cosinnus_etherpad.Etherpad': [
             'cosinnus_file.FileEntry',
@@ -49,6 +51,7 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
             'cosinnus_marketplace.Offer',
+            'cosinnus_cloud.LinkedCloudFile',
         ],
         'cosinnus_todo.TodoEntry': [
             'cosinnus_file.FileEntry',
@@ -57,6 +60,7 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
             'cosinnus_marketplace.Offer',
+            'cosinnus_cloud.LinkedCloudFile',
         ],
         'cosinnus_poll.Poll': [
             'cosinnus_file.FileEntry',
@@ -65,6 +69,7 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
             'cosinnus_marketplace.Offer',
+            'cosinnus_cloud.LinkedCloudFile',
         ],
       'cosinnus_marketplace.Offer': [
             'cosinnus_file.FileEntry',
@@ -73,6 +78,7 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
             'cosinnus_event.Event',
+            'cosinnus_cloud.LinkedCloudFile',
         ],
     }
     if not settings.COSINNUS_ROCKET_ENABLED:
@@ -130,6 +136,13 @@ class CosinnusConf(AppConf):
             'aufgabe',
             'task'
         ],
+        'cosinnus_cloud.LinkedCloudFile': [
+            'cloud',
+            'file',
+            'doc',
+            'excel',
+            'word'
+        ]
     }
     
     # list of BaseTaggableObjectModels that can be reflected from groups into projects
@@ -164,9 +177,17 @@ class CosinnusConf(AppConf):
     # Set up at least one device at <host>/admin/otp_totp/totpdevice/ before activating this setting!
     ADMIN_2_FACTOR_AUTH_ENABLED = False
     
+    # if True while `ADMIN_2_FACTOR_AUTH_ENABLED` is enabled,
+    # the 2fa-check will extend to the /administration/ area, which it doesn't usually
+    ADMIN_2_FACTOR_AUTH_INCLUDE_ADMINISTRATION_AREA = False
+    
     # if True while `ADMIN_2_FACTOR_AUTH_ENABLED` is enabled, will force 2-factor-authentication
     # for superusers and portal on the ENTIRE site, and not only on the /admin/ backend
     ADMIN_2_FACTOR_AUTH_STRICT_MODE = False
+
+    # if True, users may activate the 2-factor-authentication for
+    # their user profiles within the portal
+    USER_2_FACTOR_AUTH_ENABLED = False
     
     # enable this to sign up new members to a cleverreach newsletter group
     CLEVERREACH_AUTO_SIGNUP_ENABLED = False
@@ -189,6 +210,9 @@ class CosinnusConf(AppConf):
     
     # the class with the implementation for importing CosinnusGroups used for the CSV import
     CSV_IMPORT_GROUP_IMPORTER = 'cosinnus.utils.import_utils.GroupCSVImporter'
+    
+    # the email domain for "fake" addresses for temporary CSV users for conferences
+    TEMP_USER_EMAIL_DOMAIN = None
     
     # should a custom premoum page be shown for actions that require a paid subscription,
     # like creating groups. template for this is `premium_info_page.html`
@@ -215,11 +239,19 @@ class CosinnusConf(AppConf):
     # the global notification setting for users on the plattform (3: weekly)
     DEFAULT_GLOBAL_NOTIFICATION_SETTING = 3
     
+    # default rocketchat notification mails are off
+    # (see `GlobalUserNotificationSetting.ROCKETCHAT_SETTING_CHOICES`)
+    DEFAULT_ROCKETCHAT_NOTIFICATION_SETTING = 0
+    
     # default setting for notifications for followed objects
     DEFAULT_FOLLOWED_OBJECT_NOTIFICATION_SETTING = 2 # SETTING_DAILY = 2
     
     # when etherpad objects are deleted, should the etherpads on the server be deleted as well?
     DELETE_ETHERPADS_ON_SERVER_ON_DELETE = False
+    
+    # if True, will forbid anyone to edit an etherpad created by a user
+    # whose account is inactive or deleted. view-only is still possible.
+    LOCK_ETHERPAD_WRITE_MODE_ON_CREATOR_DELETE = False
     
     # a list of cosinnus apps that are installed but are disabled for the users, e.g. ['cosinnus_marketplace', ]
     # (they are still admin accessible)
@@ -228,10 +260,12 @@ class CosinnusConf(AppConf):
     # a list of which app checkboxes should be default-active on the create group form
     DEFAULT_ACTIVE_GROUP_APPS = [
         'cosinnus_conference',
+        'cosinnus_exchange',
         'cosinnus_etherpad',
         'cosinnus_event',
         'cosinnus_file',
         'cosinnus_marketplace',
+        'cosinnus_message',
         'cosinnus_note',
         'cosinnus_poll',
         'cosinnus_todo',
@@ -261,6 +295,10 @@ class CosinnusConf(AppConf):
     # how long managed tags by portal should stay in cache until they will be removed
     MANAGED_TAG_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
     
+    # very very small timeout for cached BBB server configs!
+    # this should be in the seconds region
+    CONFERENCE_SETTING_MICRO_CACHE_TIMEOUT = 2 # 2 seconds
+    
     # should CosinnusIdeas be enabled for this Portal?
     IDEAS_ENABLED = False
     
@@ -273,14 +311,17 @@ class CosinnusConf(AppConf):
         'place_type': 0, # TODO should always be 'initiative'
     }
 
-    # should CosinnusOrganizations be enabled for this Portal?
+    # Should CosinnusOrganizations be enabled for this Portal?
     ORGANIZATIONS_ENABLED = False
     
-    # disables the navbar language select menus
+    # Disables the navbar language select menus
     LANGUAGE_SELECT_DISABLED = False
     
-    # is the external content (GoodDB for example) enabled?
-    EXTERNAL_CONTENT_ENABLED = False
+    # Is external content from other platforms enabled?
+    EXCHANGE_ENABLED = False
+
+    # Internal portal ID for external content
+    EXCHANGE_PORTAL_ID = 99999
 
     #: How long a group should at most stay in cache until it will be removed
     GROUP_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
@@ -300,6 +341,11 @@ class CosinnusConf(AppConf):
     # sets if live notification alerts are enabled
     NOTIFICATION_ALERTS_ENABLED = False
     
+    # sets how often actual data should be retrieved for user alerts,
+    # independent of how often it is polled, in seconds
+    # (affects how fresh data is on reloads and multiple tabs)
+    NOTIFICATION_ALERTS_CACHE_TIMEOUT = 30 # 30 seconds
+    
     # how long like and follow counts should be retained in cache
     LIKEFOLLOW_COUNT_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
     
@@ -309,6 +355,18 @@ class CosinnusConf(AppConf):
     # number of members displayed in the group widet
     GROUP_MEMBER_WIDGET_USER_COUNT = 19
     
+    # a dict by group type for the allowed membership modes
+    # for each group type.
+    # Note: mode 1 (applications) should stay reserved for type 2 (conferences)
+    GROUP_MEMBERSHIP_MODE_CHOICES = {
+        # projects
+        0: [0, 2], # regular, auto-join
+        # groups
+        1: [0, 2], # regular, auto-join
+        # conferences
+        2: [0, 1, 2], # regular, applications, auto-join
+    }
+    
     # widgets listed here will be created for the group dashboard upon CosinnusGroup creation.
     # this. will check if the cosinnus app is installed and if the widget is registered, so
     # invalid entries do not produce errors
@@ -316,6 +374,7 @@ class CosinnusConf(AppConf):
         #(app_name, widget_name, options),
         ("note", "detailed_news_list", {'amount':'3', 'sort_field':'1'}),
         ("event", "upcoming", {'amount':'5', 'sort_field':'2'}),
+        ("message", "embeddedchat", {'amount':'5', 'sort_field':'2'}),
         ("todo", "mine", {'amount':'5', 'amount_subtask':'2', 'sort_field':'3'}),
         ("etherpad", "latest", {'amount':'5', 'sort_field':'4'}),
         ("cloud", "latest", {'amount':'5', 'sort_field':'4'}),
@@ -342,9 +401,16 @@ class CosinnusConf(AppConf):
         ("cosinnus", "meta_attr_widget", {'sort_field':'1'}),
         ("event", "upcoming", {'sort_field':'2', 'amount':'5'}),
         ("file", "latest", {'sort_field':'3', 'amount':'5'}),
-        
     ]
-    
+    # these apps only deactivate a group widget and not the app itself
+    GROUP_APPS_WIDGET_SETTING_ONLY = [
+        'cosinnus_message',
+    ]
+    # these apps' widgets are not displayable on the microsite
+    GROUP_APPS_WIDGETS_MICROSITE_DISABLED = [
+        'cosinnus_cloud',
+        'cosinnus_message',
+    ]
     
     # a map of class dropins for the typed group trans classes
     # status (int) --> class (str classpath)
@@ -367,6 +433,14 @@ class CosinnusConf(AppConf):
     
     # should the group avatar image be a required field?
     GROUP_AVATAR_REQUIRED = False
+    
+    # whether to show the "publicly_visible" field in the group form options
+    GROUP_PUBLICY_VISIBLE_OPTION_SHOWN = True
+    
+    # sets the "publicly_visible" field value per portal
+    # Note! this is reflected in migration 0113! If the setting is changed afte the migration
+    # has been run, previous values of all existing groups will remain unchanged!
+    GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE = True
     
     # this is the thumbnail size for small image previews
     IMAGE_THUMBNAIL_SIZE_SCALE = (80, 80)
@@ -485,11 +559,34 @@ class CosinnusConf(AppConf):
         'geojson_region': None,
         'filter_panel_default_visible': False, # whether the dropdown filter panel should be visible on load
         'ignore_location_default_activated': False, # whether the "In map area" button should be off on load
+        'exchange_default_activated': True, # whether the "also show external contents" button should be off on load
     }
+    
+    # how many results per map results page are shown,
+    # if not modified by the get request
+    MAP_DEFAULT_RESULTS_PER_PAGE = 20
+    
+    # Only for the dashboard map widget view if the user has no custom location set
+    # If not set, will attempt to use what is given in COSINNUS_MAP_OPTIONS
+    # Example:
+    #     DASHBOARD_WIDGET_MAP_DEFAULTS = {
+    #         "location": [
+    #              52.51, 
+    #             13.39
+    #          ],
+    #         "zoom": 10
+    #     }
+    DASHBOARD_WIDGET_MAP_DEFAULTS = {}
     
     # dimensions of the images for map images
     MAP_IMAGE_SIZE = (500, 500)
+
+    # display map in iframe in user dashboard
+    USERDASHBOARD_USE_LIVE_MAP_WIDGET = False
     
+    # switch to the German version of OpenStreetMap tileset
+    MAP_USE_MODERN_TILESET = False
+
     # switch to set if Microsites should be enabled.
     # this can be override for each portal to either activate or deactivate them
     MICROSITES_ENABLED = False
@@ -520,10 +617,12 @@ class CosinnusConf(AppConf):
     # should twitter and flickr embed fields and display be active for microsites?
     MICROSITE_SOCIAL_MEDIA_FIELDS_ACTIVE = False
     
+    
+    
     #: A list of app_names (``'cosinnus_note'`` rather than ``note``) that will
     #: e.g. not be displayed in the cosinnus menu
     HIDE_APPS = set(['cosinnus_organization', 'cosinnus_conference', 'cosinnus_message', 'cosinnus_notifications',
-                     'cosinnus_stream'])
+                     'cosinnus_stream', 'cosinnus_exchange'])
     
     #: How long the perm redirect cache should last (1 week, because it organizes itself)
     PERMANENT_REDIRECT_CACHE_TIMEOUT = 60 * 60 * 24 * 7
@@ -575,7 +674,8 @@ class CosinnusConf(AppConf):
         (9, _('Bauen und Wohnen')),
         (10, _('Klimaschutz')),
     )
-    
+    # whether or not to show the topics as filter-buttons on the map
+    TOPICS_SHOW_AS_MAP_FILTERS = True
     
     # a list of portal-ids of foreign portals to display search data from
     SEARCH_DISPLAY_FOREIGN_PORTALS = []
@@ -612,16 +712,36 @@ class CosinnusConf(AppConf):
     #: The serializer used for the user profile
     USER_PROFILE_SERIALIZER = 'cosinnus.api.serializers.user.UserProfileSerializer'
     
+    # the duration in days from which a user deletes their user
+    # account until its actual deletion is triggererd
+    # see `UserProfile.scheduled_for_deletion_at`
+    USER_PROFILE_DELETION_SCHEDULE_DAYS = 30
+    
     # when users newly register, are their profiles marked as visible rather than private on the site?
     USER_DEFAULT_VISIBLE_WHEN_CREATED = True
+    
+    # for portals with `email_needs_verification` active, how many days after registration
+    # should the user get a full-screen popup to "please verify your email now" on every
+    # page access?
+    # value: days in int, 0 for popup will never show
+    USER_SHOW_EMAIL_VERIFIED_POPUP_AFTER_DAYS = 0
     
     # should regular, non-admin users be allowed to create Groups (Societies) as well?
     # if False, users can only create Projects 
     USERS_CAN_CREATE_GROUPS = False
     
+    # setting this to True will only show the create group button in the navbar "+"-menu 
+    # if the current user actually has permission to create a group
+    SHOW_MAIN_MENU_GROUP_CREATE_BUTTON_ONLY_FOR_PERMITTED = False
+    
     # should regular, non-admin users be allowed to create CosinnusConferences as well?
     # if False, users can only create Projects 
     USERS_CAN_CREATE_CONFERENCES = False
+    
+    # if `CONFERENCES_ENABLED` is True, setting this to 
+    # True will only show the conference button if the current user actually
+    # has permission to create a conference
+    SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON_ONLY_FOR_PERMITTED = True
     
     # any users with any of these managed_tag_slugs
     # supersedes `USERS_CAN_CREATE_CONFERENCES`
@@ -630,10 +750,8 @@ class CosinnusConf(AppConf):
     # whether to show conferences on the site
     CONFERENCES_ENABLED = False
     
-    # if `CONFERENCES_ENABLED` is True, setting this to 
-    # True will only show the conference button if the current user actually
-    # has permission to create a conference
-    SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON_ONLY_FOR_PERMITTED = False
+    # whether to use the premium difference for conferences
+    PREMIUM_CONFERENCES_ENABLED = False
     
     # For conferences, disables the react conference interface, locks non-admin members 
     # to the microsite, removes most group-like elements like apps andremoves room management
@@ -641,9 +759,35 @@ class CosinnusConf(AppConf):
     
     CONFERENCES_USE_APPLICATIONS_CHOICE_DEFAULT = False
     
+    # whether or not BBB-streaming is enabled for this portal
+    CONFERENCES_STREAMING_ENABLED = False
+    
+    # BBB Streaming base api url
+    CONFERENCES_STREAMING_API_URL = None
+    # BBB Streaming credentials username
+    CONFERENCES_STREAMING_API_AUTH_USER = None
+    # BBB Streaming credentials password
+    CONFERENCES_STREAMING_API_AUTH_PASSWORD = None
+    # how many minutes before the streamed event start time the streamer is created via API
+    CONFERENCES_STREAMING_API_CREATE_STREAMER_BEFORE_MINUTES = 120
+    # how many minutes before the streamed event start time the streamer is called to start streaming via API
+    CONFERENCES_STREAMING_API_START_STREAMER_BEFORE_MINUTES = 10
+    # how many minutes after the streamed event start time the streamer is stopped and deleted via API
+    CONFERENCES_STREAMING_API_STOP_DELETE_STREAMER_AFTER_MINUTES = 30
+    
     # if set to any value other than None, the conference public field will be disabled
     # and locked to the value set here
     CONFERENCES_PUBLIC_SETTING_LOCKED = None
+    
+    # can be set to a function receiving `user` as only argument, 
+    # to modify the user display name that BBB will use for a joining user
+    # default if None: `full_name`
+    CONFERENCES_USER_DISPLAY_NAME_FUNC = None
+    
+    # can be set to a function receiving `user` as only argument, 
+    # to modify the user display name that external services like
+    # nextcloud and rocketchat receive for that user
+    EXTERNAL_USER_DISPLAY_NAME_FUNC = None
     
     # if set to True, regular non-portal admin users can not create projects and groups by themselves
     # and some elements like the "+" button in the navbar is hidden
@@ -697,10 +841,24 @@ class CosinnusConf(AppConf):
     # whether the regular user signup method is enabled for this portal
     USER_SIGNUP_ENABLED = True
     
+    # if True, won't let any user log in before verifying their e-mail 
+    USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN = False
+    
     USER_EXTERNAL_USERS_FORBIDDEN = False
+    
+    # whether the "last name" user form field is also required, just like "first name"
+    USER_FORM_LAST_NAME_REQUIRED = False
     
     # if true, an additional signup form field will be present
     SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK = False
+    
+    # whether the user signup form has the media-tag location field with a map
+    USER_SIGNUP_INCLUDES_LOCATION_FIELD = False
+    # if USER_SIGNUP_INCLUDES_LOCATION_FIELD==True, whether the field is required
+    USER_SIGNUP_LOCATION_FIELD_IS_REQUIRED = False
+    
+    # whether the user signup form has the media-tag topic field
+    USER_SIGNUP_INCLUDES_TOPIC_FIELD = False
     
     # if True, the modern user import views will be shown
     # they require a per-portal implementation of the importer class
@@ -734,13 +892,17 @@ class CosinnusConf(AppConf):
     #         in_signup=True, # whether to show up in the signup form
     #     ), ...
     # }
-    # example: {'organisation': {'type': 'text', 'required': True}}
+    # example: {'organization': {'type': 'text', 'required': True}}
     USERPROFILE_EXTRA_FIELDS = {}
+    USERPROFILE_EXTRA_FIELDS_TRANSLATED_FIELDS = []
     
     # a dict of <form-name> -> list of formfield names that will be disabled in the user profile forms 
     # for the current portal. can be dynamic and regular fields
     # multiforms choosable are 'obj' (CosinnusProfile), 'user', 'media_tag'
     USERPROFILE_DISABLED_FIELDS = {}
+    
+    # should the 'user_profile_dynamic_fields.html' be shown as extra_html in the profile map detail page?
+    USERPROFILE_EXTRA_FIELDS_SHOW_ON_MAP = False
     
     # should the form view for admin-defined dynamic fields be shown
     # in the admin
@@ -749,6 +911,10 @@ class CosinnusConf(AppConf):
     # a list of tuples of a <LIST of managed tag slugs> and <LIST of profile extra field names>
     # that become disabled unless the user has the managed tag
     USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS = []
+    
+    # extra fields for CosinnusBaseGroup derived models.
+    # usage: see `USERPROFILE_EXTRA_FIELDS`
+    GROUP_EXTRA_FIELDS = {}
     
     # a i18n str that explains the special password rules to the user,
     # can be markdown.
@@ -777,7 +943,7 @@ class CosinnusConf(AppConf):
     # URL for the iframe/tab leading to a specific group folder (with leading slash)
     CLOUD_GROUP_FOLDER_IFRAME_URL = '/apps/files/?dir=/%(group_folder_name)s'
     # whether all cloud links should open with target="_blank"
-    CLOUD_OPEN_IN_NEW_TAB = False
+    CLOUD_OPEN_IN_NEW_TAB = True
     # whether to prefix all nextcloud group folders with "Projekt" or "Gruppe"
     CLOUD_PREFIX_GROUP_FOLDERS = True
     # the quota for groupfolders, in bytes. -3 is the default for "unlimited"
@@ -786,14 +952,14 @@ class CosinnusConf(AppConf):
     # timeout for nextcloud webdav requests in seconds
     CLOUD_NEXTCLOUD_REQUEST_TIMEOUT = 15
     
+    # disable: ["spreed", "calendar", "mail"], these seem not necessary as they are disabled by default
     CLOUD_NEXTCLOUD_SETTINGS = {
         'DEFAULT_USER_QUOTA': '100 MB', # in human readable nextcloud format
         'ALLOW_PUBLIC_UPLOADS': 'no', # "yes" or "no"
         'ALLOW_AUTOCOMPLETE_USERS': 'no', # "yes" or "no"
         'SEND_EMAIL_TO_NEW_USERS': 'no', # "yes" or "no"
         'ENABLE_APP_IDS': ["groupfolders", "onlyoffice", "sociallogin", "wechangecsp"], # list of string app ids
-        'DISABLE_APP_IDS': ["theming", "photos", "activity", "systemtags"], # list of string app ids
-        # disable: ["spreed", "calendar", "mail"], these seem not necessary as they are disabled by default
+        'DISABLE_APP_IDS': ["theming", "photos", "activity", "systemtags", "dashboard"], # list of string app ids
     }
     
     # if set to a hex color string,
@@ -845,7 +1011,7 @@ class CosinnusConf(AppConf):
 
     # default value for form field for how many coffee table
     # participants should be allowed
-    CONFERENCE_COFFEETABLES_MAX_PARTICIPANTS_DEFAULT = 6
+    CONFERENCE_COFFEETABLES_MAX_PARTICIPANTS_DEFAULT = 500
 
     # default value for form field for if to allow user creation of coffee tables
     CONFERENCE_COFFEETABLES_ALLOW_USER_CREATION_DEFAULT = False
@@ -904,6 +1070,25 @@ class CosinnusConf(AppConf):
     # filtered on users tagged with this tag
     MANAGED_TAG_DYNAMIC_USER_FIELD_FILTER_ON_TAG_SLUG = None
     
+    # if set to a list of ids, in the map filter only managed tags will be shown
+    # that have an assigneg CosinnusManagedTagType of a matchind id
+    MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_FROM_TYPE_IDS = []
+    
+    # if set to a list of ids, in the map filter only managed tags will be shown
+    # that have a matching id
+    MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS = []
+    
+    # managed tag filters will only be shown on the map for these
+    # map content types
+    MANAGED_TAGS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = []
+
+    # text topic filters will only be shown on the map for these
+    # map content types (and if any text topics even exist)
+    TEXT_TOPICS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = []
+    
+    # if True, will show the user's selected timezone on the userprofile detail page
+    TIMEZONE_SHOW_IN_USERPROFILE = False
+    
     # set to True to enable virusscan. the clamd daeomon needs to be running!
     # see https://pypi.org/project/django-clamd/
     VIRUS_SCAN_UPLOADED_FILES = False
@@ -913,6 +1098,8 @@ class CosinnusConf(AppConf):
     # if False, it will be triggered on requesting of the queue-URL (should happen less often)
     TRIGGER_BBB_ROOM_CREATION_IN_QUEUE = True
     
+    # The BBB Server choice list for select fields,
+    # indices correspond to an auth pair in `BBB_SERVER_AUTH_AND_SECRET_PAIRS`
     BBB_SERVER_CHOICES = (
         (0, '(None)'),
     )
@@ -925,6 +1112,40 @@ class CosinnusConf(AppConf):
     }
     
     BBB_RESOLVE_CLUSTER_REDIRECTS_IF_URL_MATCHES = lambda url: url.startswith('https://bbbatscale')
+    
+    BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS = False
+    
+    STARRED_STAR_LABEL = _('Bookmark')
+    STARRED_STARRING_LABEL = _('Bookmarked')
+    STARRED_OBJECTS_LIST = _('Bookmark list')
+    STARRED_USERS_LIST = _('Bookmarked Users list')
+    
+    # should the editable user-list be shown in the administration area?
+    PLATFORM_ADMIN_CAN_EDIT_PROFILES = False
+    
+    # should the group dashboard widget be displayed in the week-list view instead of as a grid calendar?
+    CALENDAR_WIDGET_DISPLAY_AS_LIST = False
+    # should the group dashboard widget grid calendar allow drag & drop of events (only while CALENDAR_WIDGET_DISPLAY_AS_LIST == False)
+    CALENDAR_WIDGET_ALLOW_EDIT_IN_GROUP_DASHBOARD = True
+    
+    # enables the translated fields on groups/events/conference rooms and more
+    # that show additional formfields and use model mixins to in-place replace translated field values
+    # see `TranslateableFieldsModelMixin`
+    TRANSLATED_FIELDS_ENABLED = False
+
+    # user gets notification if s/he was invited to a group even if his/er notification preferences 
+    # are tunrned on 'daily', 'weekly', or even on 'never'
+    NOTIFICATIONS_GROUP_INVITATIONS_IGNORE_USER_SETTING = False
+    
+    # if set to True group admins can decide if a contact form should be displayed on the groups micropage
+    ALLOW_CONTACT_FORM_ON_MICROPAGE = False
+    
+    # determines if the elasticsearch backend should use threading on update/remove/clear writing actions
+    ELASTIC_BACKEND_RUN_THREADED = True
+
+    # all groups, projects or / and conferences will be shown alphabetically by names
+    # e.g.: ['projects', 'groups', 'conferences']
+    ALPHABETICAL_ORDER_FOR_SEARCH_MODELS_WHEN_SINGLE = []
     
 
 class CosinnusDefaultSettings(AppConf):
@@ -950,51 +1171,140 @@ class CosinnusDefaultSettings(AppConf):
     BBB_API_URL = None
     BBB_HASH_ALGORITHM = "SHA1"
 
-    BBB_ROOM_DEFAULT_SETTINGS = {
-        "record": False,
-        "autoStartRecording": False,
-        "allowStartStopRecording": True
-    }
     # cache timeout for retrieval of participants
     BBB_ROOM_PARTICIPANTS_CACHE_TIMEOUT_SECONDS = 20
     # should we monkeypatch for BBB appearently allowing one less persons to enter a room
     # than provided in max_participants during room creation
-    BBB_ROOM_FIX_PARTICIPANT_COUNT_PLUS_ONE = True
-
-    # the default parameters added to every BBB room join
-    # see https://docs.bigbluebutton.org/2.2/customize.html#passing-custom-parameters-to-the-client-on-join
-    BBB_DEFAULT_EXTRA_JOIN_PARAMETER = {
-        'userdata-bbb_mirror_own_webcam': 'true',
-
+    BBB_ROOM_FIX_PARTICIPANT_COUNT_PLUS_ONE = False
+    
+    # the default BBB create-call parameters for all room types
+    BBB_DEFAULT_CREATE_PARAMETERS = {
+        "record": False,
+        "autoStartRecording": False,
+        "allowStartStopRecording": True
     }
-    BBB_ROOM_TYPE_DEFAULT = 0
-    BBB_ROOM_TYPE_CHOICES = (
-        (0, _('General')),
-        (1, _('Active')),
-        (2, _('Restricted')),
-        (3, _('Premium')),
-    )
-    # a map for variable room types
-    BBB_ROOM_TYPE_EXTRA_JOIN_PARAMETERS = {
-        0: {},
-        1: {
-            'userdata-bbb_skip_check_audio': 'true',
-            'userdata-bbb_auto_join_audio': 'true',
-            'userdata-bbb_listen_only_mode': 'false',
-            'userdata-bbb_auto_share_webcam': 'true',
-            'userdata-bbb_skip_video_preview': 'true',
-            'userdata-bbb_auto_swap_layout': 'true', #  keine Präsentation zeigen
+    
+    """
+    The configuration of BBB join/create params
+    for the field presets in `CosinnusConferenceSettings`.
+    - dict keys for the fields correspond to 
+        0: `CosinnusConferenceSettings.SETTING_NO`
+        1: `CosinnusConferenceSettings.SETTING_YES`
+    - sub-dict keys for the dicts correspond to
+        'create' the BBB API create call
+        'join': the BBB join URL params
+    
+    Full example for a single field (value keys and create/join keys
+    may be empty or missing for non-options):
+    
+        'auto_mic': {
+            0: {
+                'create': {
+                    'param1': 'false',
+                },
+                'join': {
+                    'param2': 'false',
+                },
+            },
+            1: {
+                'create': {
+                    'param1': 'true',
+                },
+                'join': {
+                    'param2': 'true',
+                },
+            },
         },
-        2: {},
-        3: {},
+    """
+    BBB_PRESET_FORM_FIELD_PARAMS = {
+        'mic_starts_on': {
+            0: {
+                'create': {
+                    'muteOnStart': 'true',
+                },
+            },
+            1: {
+                'create': {
+                    'muteOnStart': 'false',
+                },
+            },
+        },
+        'cam_starts_on': {
+            0: {
+                'join': {
+                    'userdata-bbb_auto_share_webcam': 'false',
+                },
+            },
+            1: {
+                'join': {
+                    'userdata-bbb_auto_share_webcam': 'true',
+                },
+            },
+        },
+        'record_meeting': {
+            0: {
+                'create': {
+                    'record': 'false',
+                },
+            },
+            1: {
+                'create': {
+                    'record': 'true',
+                },
+            },
+        },
     }
+    
+    # the default baseline portal values for the BBB call params
+    # these are also used to generate the portal preset defaults for inheritance
+    # Define nature-specific params by adding a '<call>__<nature>' key to the dict!
+    # see https://docs.bigbluebutton.org/2.2/customize.html#passing-custom-parameters-to-the-client-on-join
+    BBB_PARAM_PORTAL_DEFAULTS = {
+        'create': {
+            'muteOnStart': 'true', # default preset for 'mic_starts_on': False
+            'record': 'false', # default preset for 'record_meeting'
+        },
+        'join': {
+            'userdata-bbb_auto_share_webcam': 'false', # default preset for 'cam_starts_on': False
+            'userdata-bbb_mirror_own_webcam': 'true', # mirror webcam makes seeing your picture less confusing
+        },
+        'create__coffee': {
+            'muteOnStart': 'false', # coffee tables insta-join on microphone (overwritten by userdata-bbb_auto_join_audio 'true' anyways, so we show this to be clear)
+        },
+        'join__coffee': {
+            'userdata-bbb_skip_check_audio': 'true', # coffee table insta-join
+            'userdata-bbb_auto_join_audio': 'true', # coffee table insta-join
+            'userdata-bbb_listen_only_mode': 'false', # coffee table insta-join
+            'userdata-bbb_auto_share_webcam': 'true', # coffee table insta-join
+            'userdata-bbb_skip_video_preview': 'true', # coffee table insta-join
+            'userdata-bbb_auto_swap_layout': 'true', # coffee tables don't show presentations on start
+        }
+    }
+    
+    # a list of field names from fields in fields in `CosinnusConferenceSettings`
+    # that will be shown to the users in the frontend Event forms as choices
+    # for presets for BBB rooms
+    # note that 'record_meeting' is disabled by default, as it
+    # requires setting up the BBB servers correctly for it, and should
+    # only be enabled for a portal specifically after that has been done
+    BBB_PRESET_USER_FORM_FIELDS = [
+        'mic_starts_on',
+        'cam_starts_on',
+    ]
+    # a complete list of all choices that could be made for BBB_PRESET_USER_FORM_FIELDS
+    #__all_choices__BBB_PRESET_USER_FORM_FIELDS = [
+    #    'mic_starts_on',
+    #    'cam_starts_on',
+    #    'record_meeting',
+    #]
+    
+    # a list of field names from `BBB_PRESET_USER_FORM_FIELDS` that can only
+    # be changed by users if a conference is premium at some point
+    BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY = [
+        'record_meeting',
+    ]
+    
+    
     # limit visit creation for (user, bbb_room) pairs to a time window
     BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60*60
-
-    STARRED_STAR_LABEL = _('Bookmark')
-    STARRED_STARRING_LABEL = _('Bookmarked')
-    STARRED_OBJECTS_LIST = _('Bookmark list')
-    STARRED_USERS_LIST = _('Bookmarked Users list')
-
-    PLATFORM_ADMIN_CAN_EDIT_PROFILES = False
-
+    

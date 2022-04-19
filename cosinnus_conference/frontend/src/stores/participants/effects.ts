@@ -11,7 +11,7 @@ import {setFetchParticipantsError, setFetchParticipantsSuccess} from "./actions"
  */
 export const fetchParticipants: ReduxThunkActionCreator<[string], Promise<void>> = () => (
   dispatch: Dispatch) => {
-  return fetch(`/api/v2/conferences/${window.conferenceId}/participants/?page_size=1000`, {
+  return fetch(`/api/v2/conferences/${window.conferenceId}/participants/?page_size=1000&limit=1000&`, {
     method: "GET"
   }).then(response => {
     if (response.status === 200) {

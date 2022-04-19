@@ -3,17 +3,13 @@ from __future__ import unicode_literals
 
 from django import forms
 from django.apps import apps
-from django.utils.encoding import smart_text
-from django.utils.text import capfirst
 from django.utils.translation import ugettext_lazy as _
 
-from haystack import connections
 from haystack.backends import SQ
-from haystack.constants import DEFAULT_ALIAS
-from haystack.forms import SearchForm, model_choices
+from haystack.forms import SearchForm
 
 from cosinnus.conf import settings
-from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject
+from cosinnus.models.tagged import BaseTagObject
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -23,8 +19,12 @@ from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,\
 from haystack.query import EmptySearchQuerySet
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.utils.functions import ensure_list_of_ints
-from cosinnus.external.search_indexes import EXTERNAL_CONTENT_PORTAL_ID
 
+import logging
+
+logger = logging.getLogger('cosinnus')
+
+# FIXME: This can probably be replaced with SEARCH_MODEL_NAMES_REVERSE
 MODEL_ALIASES = {
     'todo': 'cosinnus_todo.todoentry',
     'file': 'cosinnus_file.fileentry',
@@ -37,6 +37,7 @@ MODEL_ALIASES = {
     'offer': 'cosinnus_marketplace.Offer',
     'project': 'cosinnus.CosinnusProject',
     'group': 'cosinnus.CosinnusSociety',
+    'organization': 'cosinnus_organization.CosinnusOrganization',
 }
 
 VISIBLE_PORTAL_IDS = None  # global
@@ -79,7 +80,7 @@ def filter_searchqueryset_for_read_access(sqs, user):
                  | logged_in_user_visibility | visible_for_all_authenticated_users
             
             users_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
-            if users_group_ids:
+            if True:
                 group_member_user_visibility = (
                     SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
                     SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_USER) & # team mambers can see this user 
@@ -103,19 +104,19 @@ def get_visible_portal_ids():
     return VISIBLE_PORTAL_IDS
 
 
-def filter_searchqueryset_for_portal(sqs, portals=None, restrict_multiportals_to_current=False, external=False):
+def filter_searchqueryset_for_portal(sqs, portals=None, restrict_multiportals_to_current=False, exchange=False):
     """ Filters a searchqueryset by which portal the objects belong to.
         @param portals: If not provided, will default to this portal and all foreign portals allowed in settings 
             ([current-portal] + settings.COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS)
         @param restrict_multiportals_to_current: if True, will force objects with multiple portals to
             definitely be in the current portal  
-        @param external: should we include external API content? """
+        @param exchange: should we include external API content? """
             
     if portals is None:
         portals = get_visible_portal_ids()
-    if external:
+    if exchange:
         # if enabled, add the non-existing 0-id portal, for external portals
-        portals = [EXTERNAL_CONTENT_PORTAL_ID] + portals
+        portals = [settings.COSINNUS_EXCHANGE_PORTAL_ID] + portals
     
     if portals and restrict_multiportals_to_current:
         sqs = sqs.filter_and(SQ(portal__in=portals) | SQ(portals__in=[CosinnusPortal.get_current().id]))
@@ -139,6 +140,7 @@ class TaggableModelSearchForm(SearchForm):
     models = forms.MultipleChoiceField(required=False)
     topics = CommaSeparatedSelect2MultipleChoiceField(required=False, choices=BaseTagObject.TOPIC_CHOICES,
             widget=CommaSeparatedSelect2MultipleWidget(select2_options={'closeOnSelect': 'true'}))
+    exchange = forms.BooleanField(required=False, initial=True)
 
     location = forms.CharField(required=False)
     valid_start = forms.DateField(required=False)
@@ -151,12 +153,15 @@ class TaggableModelSearchForm(SearchForm):
 
     def get_models(self):
         """ Return the models of types user has selected to filter search on """
+        from cosinnus.models.map import EXCHANGE_SEARCH_MODEL_NAMES_REVERSE
         search_models = []
 
         if self.is_valid():
             # we either use the models given to us from the form, or if empty,
             # all models available for search
             model_aliases_query = self.cleaned_data.get('models', [])
+            exchange = self.cleaned_data.get('exchange', False)
+
             if not model_aliases_query:
                 model_aliases_query = list(MODEL_ALIASES.keys())
             for model_alias in model_aliases_query:
@@ -165,25 +170,34 @@ class TaggableModelSearchForm(SearchForm):
                     if model_string == '<userprofile>':
                         model = get_user_profile_model()
                     else:
-                        model = apps.get_model(*model_string.split('.'))
+                        # GOTCHA: if you receive an error here and have disabled/left out a
+                        # cosinnus app, you should add it to `settings.COSINNUS_DISABLED_COSINNUS_APPS`!
+                        try:
+                            model = apps.get_model(*model_string.split('.'))
+                        except LookupError as e:
+                            logger.error('Search: Lookup error during search for cosinnus app model %s' % model_string, extra={'exception': e})
+                            continue
                     search_models.append(model)
+                # Add exchange model if activated
+                if exchange and f'{model_alias}s' in EXCHANGE_SEARCH_MODEL_NAMES_REVERSE:
+                    search_models.append(EXCHANGE_SEARCH_MODEL_NAMES_REVERSE[f'{model_alias}s'])
         
         return search_models
 
     def search(self):
         sqs = super(TaggableModelSearchForm, self).search()
-        
+        sqs = sqs.models(*self.get_models())
+
         if hasattr(self, 'cleaned_data'):
+            sqs = filter_searchqueryset_for_portal(sqs, exchange=self.cleaned_data.get('exchange', False))
             sqs = filter_searchqueryset_for_read_access(sqs, self.request.user)
-            sqs = filter_searchqueryset_for_portal(sqs)
             sqs = self._filter_group_selection(sqs)
             sqs = self._filter_media_tags(sqs)
             if self.cleaned_data.get('q', None):
                 sqs = self._boost_search_query(sqs)
             if self.request.GET.get('o', None) == 'newest':
                 sqs = sqs.order_by('-created', '-_score')
-        ret = sqs.models(*self.get_models())
-        ret = ret[:self.MAX_RESULTS]
+        ret = sqs[:self.MAX_RESULTS]
         return ret
     
     def no_query_found(self):

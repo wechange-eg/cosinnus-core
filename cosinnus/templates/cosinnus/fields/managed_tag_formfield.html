@@ -8,10 +8,17 @@
     {% if not label %}
         {% captureas label %}{{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_LABEL }}{% endcaptureas %}
     {% endif %}
-    {% if not legend %}
-        {% captureas legend %}{{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_LEGEND_CONTENT }}{% endcaptureas %}
-    {% endif %}
-	{% captureas managed_tag_extra_html %}
+    {% captureas legend_textonly %}{% if legend %}{{ legend }}{% else %}{{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_LEGEND_CONTENT }}{% endif %}{% endcaptureas %}
+    {% captureas legend %}
+        <div class="textfield transparent">
+            {% if legend %}
+                {{ legend|textfield }}
+            {% else %}
+                {{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_FIELD_LEGEND_CONTENT|textfield }}
+            {% endif %}
+        </div>
+    {% endcaptureas %}
+    {% captureas managed_tag_extra_html %}
 	    {% if SETTINGS.COSINNUS_MANAGED_TAGS_SHOW_FORMFIELD_SELECTED_TAG_DETAILS %}
 		    <div class="managed-tags-form-detail-frame" id="managed-tags-detail-frame" {% if not form.fields.managed_tag_field.initial %}style="display: none;"{% endif %}>
 		        {% for tag in form.fields.managed_tag_field.all_managed_tags %}
@@ -38,7 +45,7 @@
 		        });
 		        
 			    {% if SETTINGS.COSINNUS_MANAGED_TAGS_ASSIGN_MULTIPLE_ENABLED %}
-	               $("#managed-tag-field").select2({'placeholder': '{{ legend }}', 'closeOnSelect': false});
+	               $("#managed-tag-field").select2({'placeholder': '{{ legend_textonly }}', 'closeOnSelect': false});
 	            {% endif %}
 		    </script>
 		{% endif %}

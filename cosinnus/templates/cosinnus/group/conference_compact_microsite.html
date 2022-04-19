@@ -3,6 +3,10 @@
 
 {% block teaser %}{% endblock %}
 
+{% block og_meta_attributes %}
+	{% include 'cosinnus/group/group_og_meta_attributes.html' with group=group %}
+{% endblock og_meta_attributes %}
+
 {% block microsite_subheader %}
 	<div class="group-microsite-subheader">
 		<div class="group-microsite-subheader-container">
@@ -52,15 +56,9 @@
                 <div class="textfield">
 	                {% if group.from_date %}
 	                    <div class="large-space">
-	                       <b>
-	                           {{ group.from_date|date:"SHORT_DATE_FORMAT" }}, {{ group.from_date|date:"H:i" }} 
-	                           {% trans "o'clock" context "time" %}
-	                           {% if group.to_date %}
-	                               {% trans "until" context "time" %}
-	                               {{ group.to_date|date:"SHORT_DATE_FORMAT" }}, {{ group.to_date|date:"H:i" }}
-	                               {% trans "o'clock" context "time" %}
-	                           {% endif %}
-	                       </b>
+                            <b>
+                            {% include 'cosinnus_event/common/humanized_event_time.html' with event=group %}
+                            </b>
 	                    </div>
 	                {% endif %}
                     
@@ -83,37 +81,47 @@
                         <div class="indented">
 		                    {% for room in group.rooms.all %}
 		                        {% with room_events=room.non_table_events_qs %}
-		                            {% if room_events %}
+		                            {% if room.is_visible and room_events %}
 					                    <div class="regular-space">
 				                            <b>{{ room.title }}:</b>
 				                        </div>
 					                    <div class="microsite-conference-workshop-list large-space">
 					                        {% for event in room_events %}
 					                            {% if not event.is_break %}
-					                                <div class="fadedown regular-space">
-					                                   <div class="small-space">
-							                                <a href="{{ event.get_absolute_url }}">
-									                            {{ event.title }} - {{ event.media_tag.visibility }}
-								                            </a>
-								                            
-								                            {% if event.from_date %}
-                                                                <br/>
-                                                                {% include 'cosinnus_event/common/humanized_event_time.html' with event=event %}
-                                                                {% if event.note %}
-                                                                &nbsp;
-                                                                <a href="#" class="fadedown-clickarea">
-                                                                    {% trans "More infos..." %}
-                                                                    <i class="fa fa-chevron-down"></i>
+                                                    {% if event.is_visible_on_microsite %}
+                                                        <div class="fadedown regular-space">
+                                                        <div class="small-space">
+                                                                <a href="{{ event.get_absolute_url }}">
+                                                                    {{ event.title }} - {{ event.media_tag.visibility }}
                                                                 </a>
-                                                            {% endif %}
-                                                            {% endif %}
-						                                </div>
-						                                {% if event.note %}
-								                            <div class="textfield transparent">
-								                                {{ event.note|textfield }}
-								                            </div>
-							                            {% endif %}
-						                            </div>
+                                                                {% if event.from_date or event.note %}
+                                                                    <div class="fadedown">
+                                                                        <div class="div">
+                                                                            {% include 'cosinnus_event/common/humanized_event_time.html' with event=event hide_time_zone=True %}
+                                                                            
+                                                                            {% if event.note and event.is_description_visible_on_microsite %}
+                                                                                &nbsp;
+                                                                                <a href="#" class="fadedown-clickarea">
+                                                                                    {% trans "More infos..." %}
+                                                                                    <i class="fa fa-chevron-down"></i>
+                                                                                </a>
+                                                                            {% endif %}
+                                                                        </div>
+                                                                        {% if event.note and event.is_description_visible_on_microsite %}
+                                                                            {% comment %} This is being fade-downed {% endcomment %}
+                                                                            <div class="textfield transparent">
+                                                                                {% if user.is_authenticated %}
+                                                                                    {{ event.note|textfield }}
+                                                                                {% else %}
+                                                                                    <i>{% trans "Please Login or Register to view the event's description." %}</i>
+                                                                                {% endif %}
+                                                                            </div>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
 						                        {% endif %}
 						                    {% endfor %}
 					                    </div>
@@ -196,9 +204,9 @@
                                 <button href="{% if user.is_authenticated %}{{ contact_url }}{% else %}{% url 'login' %}?next={{ contact_url|urlencode }}{% endif %}" type="button" class="btn btn-emphasized" style="float: none; margin-left: 0px;">
                                     <ul class="media-list">
                                         <li class="media">
-                                            <a class="pull-left" href="#">
+                                            <span class="pull-left">
                                                 <i class="fa fa-envelope"></i>
-                                            </a>
+                                            </span>
                                             <div class="media-body">
                                                 {% trans "Contact" %}
                                             </div>

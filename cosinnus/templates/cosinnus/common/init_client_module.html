@@ -1,4 +1,4 @@
-<div id="app-{{id}}" style="width: {{width}}px; height: {{height}}px;" class="app-root {% if fullscreen == True %}app-fullscreen{% else %}app-embed no-navbar{% endif %} {{ extra_classes }}"></div>
+<div id="app-{{id}}" style="width: {{width}}px; height: {{height}}px;" class="app-root {% if fullscreen == True %}app-fullscreen{% else %}no-navbar{% endif %} {% if embed %}app-embed {% endif %} {{ extra_classes }}"></div>
 
 <script>
     $('html').on('init:client', function () {

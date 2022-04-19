@@ -4,17 +4,16 @@ from __future__ import unicode_literals
 from builtins import object
 from collections import OrderedDict
 import locale
+import six
 
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models import Q
 from django.urls import reverse
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
-import six
-from jsonfield import JSONField
 from osm_field.fields import OSMField, LatitudeField, LongitudeField
 
 from cosinnus.conf import settings
@@ -123,7 +122,6 @@ class OrganizationManager(models.Manager):
             cache.set(self._ORGANIZATIONS_PK_TO_SLUG_CACHE_KEY % (portal_id), pks,
                 settings.COSINNUS_ORGANIZATION_CACHE_TIMEOUT)
         return pks
-
     
     def all_in_portal(self):
         """ Returns all groups within the current portal only """
@@ -132,7 +130,7 @@ class OrganizationManager(models.Manager):
     def public(self):
         """ Returns active, public Organizations """
         qs = self.active()
-        return qs.filter(public=True)
+        return qs.filter(media_tag__public=True)
     
     def active(self):
         """ Returns active Organizations """
@@ -220,17 +218,17 @@ class CosinnusUnregisteredUserOrganizationInvite(BaseMembership):
         unique_together = (('email', 'group'),)
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model):
     """
     Organization model.
     """
     TYPE_OTHER = 0
-    TYPE_CIVIL_SOCIETY_ORGANISATION = 1
+    TYPE_CIVIL_SOCIETY_ORGANIZATION = 1
     TYPE_COMPANY = 2
     TYPE_PUBLIC_INSTITUTION = 3
     TYPE_CHOICES = (
-        (TYPE_CIVIL_SOCIETY_ORGANISATION, _('Civil society organization')),
+        (TYPE_CIVIL_SOCIETY_ORGANIZATION, _('Civil society organization')),
         (TYPE_COMPANY, _('Company (commercial)')),
         (TYPE_PUBLIC_INSTITUTION, _('Public institution')),
         (TYPE_OTHER, _('Other')),
@@ -277,7 +275,8 @@ class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
                                    related_name='cosinnus_organizations', through=CosinnusOrganizationMembership)
 
-    extra_fields = JSONField(default={}, blank=True)
+    settings = models.JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder)
+    extra_fields = models.JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder)
     objects = OrganizationManager()
 
     # this indicates that objects of this model are in some way always visible by registered users
@@ -377,7 +376,17 @@ class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model
 
     def get_image_field_for_background(self):
         return self.wallpaper
-    
+
+    @property
+    def avatar_url(self):
+        return self.avatar.url if self.avatar else None
+
+    def get_avatar_thumbnail(self, size=(80, 80)):
+        return image_thumbnail(self.avatar, size)
+
+    def get_avatar_thumbnail_url(self, size=(80, 80)):
+        return image_thumbnail_url(self.avatar, size) or get_image_url_for_icon(self.get_icon(), large=True)
+
     def is_foreign_portal(self):
         return CosinnusPortal.get_current().id != self.portal_id
     
@@ -388,8 +397,8 @@ class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model
         return getattr(self, key)
     
     def get_absolute_url(self):
-        item_id = '%d.organizations.%s' % (self.portal_id, self.slug)
-        return get_domain_for_portal(self.portal) + reverse('cosinnus:map') + '?item=' + item_id
+        return get_domain_for_portal(self.portal) + reverse('cosinnus:organization-detail',
+                                                            kwargs={'organization': self.slug})
     
     def get_edit_url(self):
         return reverse('cosinnus:organization-edit', kwargs={'organization': self.slug})
@@ -456,16 +465,16 @@ class CosinnusOrganizationLocation(models.Model):
     def location_url(self):
         if not self.location_lat or not self.location_lon:
             return None
-        return 'http://www.openstreetmap.org/?mlat=%s&mlon=%s&zoom=15&layers=M' % (self.location_lat, self.location_lon)
+        return 'https://openstreetmap.org/?mlat=%s&mlon=%s&zoom=15&layers=M' % (self.location_lat, self.location_lon)
 
 
 class CosinnusOrganizationGroupQuerySet(models.QuerySet):
 
     def active_groups(self):
-        return self.filter(status__in=(MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN), group__is_active=True)
+        return self.filter(status__in=MEMBER_STATUS, group__is_active=True)
 
     def active_organizations(self):
-        return self.filter(status__in=(MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN), organization__is_active=True)
+        return self.filter(status__in=MEMBER_STATUS, organization__is_active=True)
 
 
 class CosinnusOrganizationGroup(models.Model):
@@ -496,6 +505,6 @@ class CosinnusOrganizationGroup(models.Model):
         # Only update the date if the the state changes from pending to member
         # or admin
         if (self._old_current_status == MEMBERSHIP_PENDING or self._old_current_status == MEMBERSHIP_INVITED_PENDING) and \
-                (self.status == MEMBERSHIP_ADMIN or self.status == MEMBERSHIP_MEMBER):
+                (self.status in MEMBER_STATUS):
             self.date = now()
         return super(CosinnusOrganizationGroup, self).save(*args, **kwargs)

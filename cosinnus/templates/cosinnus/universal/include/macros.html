@@ -147,7 +147,7 @@
                 {% trans "Groups" %}{% if colon == 1 %}:{% endif %}
             {% elif type == "conferences" %}
                 {% if showIcon == 1 %}<i class="fa fa-calendar"></i>{% endif %}
-                {{ COSINNUS_TRANS.COSINNUS_TRANS_CONFERENCE }}{% if colon == 1 %}:{% endif %}
+                {{ COSINNUS_TRANS.COSINNUS_TRANS_CONFERENCES }}{% if colon == 1 %}:{% endif %}
             {% elif type == "ideas" %}
                 {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
@@ -225,7 +225,7 @@
 	    				{% endif %}
     				</div>
 	    			{% if subtext['is_date'] %}
-	    				<div class="moment-data-date" data-date="{{ subtext.date }}" data-date-style="short"></div>
+	    				<div class="moment-data-date" data-date="{{ subtext.date }}"></div>
 	    			{% else %}
 	    				<div>
 		    				{% if makeSafe %}
@@ -264,7 +264,7 @@
 	</li>
 {% endmacro %}
 
-{% macro starredlistItem(item) %}
+{% macro starredlistItem(item, makeSafe=true) %}
 <li>
     <a class="list-item" href="{{ item.url }}" titledby=".item-text">
         <div class="item-icon">
@@ -275,7 +275,11 @@
             {% endif %}
         </div>
         <div class="item-text">
-            {{ item.text }}
+            {% if makeSafe %}
+                {{ item.text|safe }}
+            {% else %}
+                {{ item.text }} 
+            {% endif %}
         </div>
         <div class="right-side-annotation right-side-action truncated-oneline">
             <div class="likefollowstar-button action-do-likefollowstar likefollowstar-button-simple selected" data-type="star" data-ct="{{ item.ct }}" data-id="{{ item.id }}">
@@ -291,7 +295,7 @@
 </li>
 {% endmacro %}
 
-{% macro followedlistItem(item) %}
+{% macro followedlistItem(item, makeSafe=true) %}
 <li>
     <a class="list-item" href="{{ item.url }}" titledby=".item-text">
         <div class="item-icon">
@@ -302,7 +306,11 @@
             {% endif %}
         </div>
         <div class="item-text">
-            {{ item.text }}
+            {% if makeSafe %}
+                {{ item.text|safe }}
+            {% else %}
+                {{ item.text }} 
+            {% endif %}
         </div>
         <div class="right-side-annotation right-side-action truncated-oneline">
             <div class="likefollowstar-button action-do-likefollowstar likefollowstar-button-simple selected" data-type="follow" data-ct="{{ item.ct }}" data-id="{{ item.id }}">

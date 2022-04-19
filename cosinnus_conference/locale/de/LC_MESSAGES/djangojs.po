@@ -163,6 +163,13 @@ msgstr "Veranstaltungen bearbeiten"
 msgid "Manage rooms"
 msgstr "Räume bearbeiten"
 
+#. [Membership]
+#. defaultMessage is:
+#. undefined
+#: locale/src/views/components/Nav/index.json
+msgid "Membership"
+msgstr "Mitgliedschaft"
+
 #. [Name]
 #. defaultMessage is:
 #. undefined
@@ -220,11 +227,11 @@ msgstr "Keine Netzworking-Kanäle vorhanden."
 msgid "No participants."
 msgstr "Keine Teilnehmenden vorhanden."
 
-#. [No represented organisations.]
+#. [No represented organizations.]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Organisations/index.json
-msgid "No represented organisations."
+msgid "No represented organizations."
 msgstr "Keine Organisationen vorhanden."
 
 #. [No stage events.]
@@ -252,14 +259,20 @@ msgstr "Jetzt"
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Participants/list.json
-msgid "Organisation"
+msgid "Organization"
 msgstr "Institution"
 
-#. [Represented organisations]
+#. [City]
+#. defaultMessage is:
+#. undefined
+msgid "City"
+msgstr "Stadt"
+
+#. [Represented organizations]
 #. defaultMessage is:
 #. undefined
 #: locale/src/views/Organisations/index.json
-msgid "Represented organisations"
+msgid "Represented organizations"
 msgstr "Repräsentierte Organisationen"
 
 #. [The conference is being prepared, please try again at a later date.]
@@ -343,7 +356,7 @@ msgstr "Veranstaltungen parallel"
 #: locale/src/views/components/CoffeeTable/index.json
 #: locale/src/views/components/EventGrid/index.json
 msgid "participants"
-msgstr "Teilnehmer"
+msgstr "Teilnehmende"
 
 #. [places left]
 #. defaultMessage is:
@@ -352,13 +365,23 @@ msgstr "Teilnehmer"
 msgid "places left"
 msgstr "Plätze frei"
 
-msgid "Are you sure you want to leave this event?"
-msgstr "Sind Sie sicher, dass Sie diese Veranstaltung verlassen wollen?"
+msgid "Are you sure you want to leave this video conference?"
+msgstr "Sind Sie sicher, dass Sie diese Videokonferenz verlassen wollen?"
 
-msgid ""
-"You're currently attending an event. Are you sure you want to leave? Tip: You can "
-"open a new tab or window instead."
-msgstr ""
-"Sie nehmen derzeit an einer Veranstaltung teil. Sind Sie sicher, dass Sie gehen "
-"möchten? Tipp: Sie können stattdessen eine neue Registerkarte oder ein neues "
-"Fenster öffnen."
+msgid "If you click, you will leave the video conference. Are you sure you want to leave? Tip: Alternatively, you can open the link in a new tab or window and stay in the event."
+msgstr "Wenn Sie Ihren Klick ausführen, würden Sie die Videkonferenz verlassen. Sind Sie sicher, dass Sie gehen möchten? Tipp: Alternativ können Sie den Link in einer neuen Registerkarte oder in einem neuen Fenster öffnen und in der Veranstaltung bleiben."
+
+msgid "Your profile is not shown here or not displayed correctly? Add to your profile or make yourself visible to other conference participants."
+msgstr "Dein Profil wird hier nicht oder nicht richtig angezeigt? Ergänze dein Profil bzw. mache dich sichtbar für andere Tagungsteilehmende."
+
+msgid "Edit Profile"
+msgstr "Profil bearbeiten"
+
+msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
+msgstr "Du kannst nur an dieser Besprechung teilnehmen, wenn du damit einverstanden bist, aufgezeichnet zu werden. Um an dieser Sitzung teilzunehmen, lade bitte diese Seite neu und versuche es erneut."
+
+msgid "Do you consent to be recorded?"
+msgstr "Bist du damit einverstanden, aufgezeichnet zu werden?"
+
+msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
+msgstr "Diese Sitzung kann von den Veranstaltern aufgezeichnet werden. Indem du fortfährst, erklärst du dich damit einverstanden, aufgezeichnet zu werden. Dazu gehören Audio, Video, Chat, gemeinsame Notizen und Whiteboard-Aktivitäten. Die Aufzeichnung kann durch die Veranstalter weitergegeben werden."

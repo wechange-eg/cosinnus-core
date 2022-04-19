@@ -23,6 +23,7 @@ from django.contrib import messages
 import logging 
 from django.utils.encoding import force_text
 from cosinnus.models.group import CosinnusPortal
+from threading import Thread
 logger = logging.getLogger('cosinnus')
 
 
@@ -92,34 +93,72 @@ class DKIMEmailBackend(EmailBackend):
             return False
         return True
     
+    
+def threaded_execution_and_catch_error(f):
+    """ Will run in a thread and catch all errors """
+    
+    def error_wrapper(self, *args, **kwargs):
+        my_self = self
+        def do_execute():
+            try:
+                return f(my_self, *args, **kwargs)
+            except (TransportError, ProtocolError, ConnectionError) as e:
+                logger.error('Could not connect to the ElasticSearch backend for indexing! The search function will not work and saving objects on the site will be terribly slow! Exception in extra.', extra={'exception': force_text(e)})
+            except Exception as e:
+                logger.error('An unknown error occured while indexing an object! Exception in extra.', extra={'exception': force_text(e)})
+        
+        if getattr(settings, 'COSINNUS_ELASTIC_BACKEND_RUN_THREADED', True):
+            class CosinnusElasticsearchExecutionThread(Thread):
+                def run(self):
+                    do_execute()
+            CosinnusElasticsearchExecutionThread().start()
+        else:
+            do_execute()
+    return error_wrapper
+
 
 class RobustElasticSearchBackend(ElasticsearchSearchBackend):
     """A robust backend that doesn't crash when no connection is available"""
+    
+    MIN_GRAM = 2
+    MAX_NGRAM = 25
+    
 
-    def mute_error(f):
-        def error_wrapper(self, *args, **kwargs):
-            try:
-                return f(self, *args, **kwargs)
-            except (TransportError, ProtocolError, ConnectionError) as e:
-                logger.exception('Could not connect to the ElasticSearch backend for indexing! The search function will not work and saving objects on the site will be terribly slow! Exception in extra.', extra={'exception': force_text(e)})
-            except Exception as e:
-                logger.exception('An unknown error occured while indexing an object! Exception in extra.', extra={'exception': force_text(e)})
-        return error_wrapper
+    def __init__(self, *args, **options):
+        """ Add custom default options """
+        tokenizer_settings = self.DEFAULT_SETTINGS['settings']['analysis']['tokenizer']
+        filter_settings = self.DEFAULT_SETTINGS['settings']['analysis']['filter']
+        
+        tokenizer_settings['haystack_ngram_tokenizer']['min_gram'] = self.MIN_GRAM
+        tokenizer_settings['haystack_ngram_tokenizer']['max_gram'] = self.MAX_NGRAM
+        tokenizer_settings['haystack_edgengram_tokenizer']['min_gram'] = self.MIN_GRAM
+        tokenizer_settings['haystack_edgengram_tokenizer']['max_gram'] = self.MAX_NGRAM
+        filter_settings['haystack_ngram']['min_gram'] = self.MIN_GRAM
+        filter_settings['haystack_ngram']['max_gram'] = self.MAX_NGRAM
+        filter_settings['haystack_edgengram']['min_gram'] = self.MIN_GRAM
+        filter_settings['haystack_edgengram']['max_gram'] = self.MAX_NGRAM
+        super(RobustElasticSearchBackend, self).__init__(*args, **options)
 
-    def __init__(self, connectionalias, **options):
-        super(RobustElasticSearchBackend, self).__init__(connectionalias, **options)
+    def build_schema(self, *args, **kwargs):
+        """ Use the standard search_analyzer for ngram fields, so the search query itself won't be n-gramed """
+        content_field_name, mapping = super(RobustElasticSearchBackend, self).build_schema(*args, **kwargs)
+        for _field_name, field_mapping in mapping.items():
+            if "analyzer" in field_mapping and field_mapping["analyzer"] == "ngram_analyzer":
+                field_mapping["search_analyzer"] = "standard"
+        return content_field_name, mapping
 
-    @mute_error
-    def update(self, indexer, iterable, commit=True):
-        super(RobustElasticSearchBackend, self).update(indexer, iterable, commit)
+    @threaded_execution_and_catch_error
+    def update(self, *args, **kwargs):
+        super(RobustElasticSearchBackend, self).update(*args, **kwargs)
 
-    @mute_error
-    def remove(self, obj, commit=True):
-        super(RobustElasticSearchBackend, self).remove(obj, commit)
+    @threaded_execution_and_catch_error
+    def remove(self, *args, **kwargs):
+        super(RobustElasticSearchBackend, self).remove(*args, **kwargs)
 
-    @mute_error
-    def clear(self, models=[], commit=True):
-        super(RobustElasticSearchBackend, self).clear(models, commit)
+    @threaded_execution_and_catch_error
+    def clear(self, *args, **kwargs):
+        super(RobustElasticSearchBackend, self).clear(*args, **kwargs)
+
 
 class RobustElasticSearchEngine(ElasticsearchSearchEngine):
     backend = RobustElasticSearchBackend

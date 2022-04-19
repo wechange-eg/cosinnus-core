@@ -9,8 +9,12 @@ export const Content = styled(Grid)(({ theme }) => ({
     fontSize: "1rem",
     textTransform: "uppercase",
     fontWeight: "700",
-    color: theme.palette.primary.main,
+    color: theme.palette.text.primary,
     marginBottom: "1rem",
+  },
+  "& a, & a:hover, & a:focus, & a:visited": {
+    color: theme.palette.text.primary,
+    fontWeight: "700",
   },
   "&.fullheight": {
     display: "flex",

@@ -48,7 +48,7 @@ if getattr(settings, 'COSINNUS_MANAGED_TAGS_ENABLED', False):
                         qs = tag_assignment_instance.managed_tag_assignments.all()
                         managed_tag_slugs = qs.filter(approved=True).values_list('managed_tag__slug', flat=True)
                         if managed_tag_slugs:
-                            self.fields['managed_tag_field'].initial = ','.join(list(managed_tag_slugs))
+                            self.fields['managed_tag_field'].initial = managed_tag_slugs
                     if not self.fields['managed_tag_field'].initial and 'managed_tag_field' in self.initial:
                         self.fields['managed_tag_field'].initial = self.initial['managed_tag_field']
                 

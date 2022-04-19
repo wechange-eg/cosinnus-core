@@ -25,6 +25,16 @@
 {% block extrahead %}
 	{{ block.super }}
 	{% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.email_text.id_for_label %}
+	
+    {% comment %} Hides the "Send" button on any change to the newsletter {% endcomment %}
+    <script type="text/javascript">
+	    $(function() {
+            $("input,textarea").change(function() {
+                $('.btn-send-newsletter').hide();
+            });
+	    });
+
+    </script>
 {% endblock %}
 
 {% block content %}
@@ -67,77 +77,114 @@
         {% include 'cosinnus/fields/default_field.html' with field=form.body label=newsletter_body_label placeholder=newsletter_body_placeholder large_field=True %}
 
         {% if form.instance.id %}
-        <div class="large-space">
-            <div class="content-box white-content">
-                <h2>{% trans "Currently set Email Text" %}:</h2>
-                <div class="textfield">{{ form.instance.body|textfield }}</div>
+	        <div class="large-space">
+	            <div class="content-box white-content">
+	                <h2>{% trans "Currently set Email Text" %}:</h2>
+	                <div class="textfield">{{ form.instance.body|textfield }}</div>
+	            </div>
+	        </div>
+	        
+	        <div class="large-space">
+	           <div class="panel panel-default large-space">
+                    <div class="panel-heading">
+                        <h4 class="panel-title collapsed" data-toggle="collapse" data-target="#collapseGroupsInvite">
+                            <i class="fa fa-chevron-down panel-collapsed"></i>
+                            <i class="fa fa-chevron-up panel-open"></i>
+                            {% trans "Show all recipients..." %} ({{ receipients|length }})
+                        </h4>
+                    </div>
+                    <div id="collapseGroupsInvite" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="textfield transparent">
+                                {% for recipient in receipients %}
+	                                <a href="{{ recipient|profile_url }}">{{ recipient|full_name }}</a>{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+	        </div>
+	        
+	        <div class="textfield transparent">
+                <p>
+                    {% trans "Note: The newsletter can only be sent after saving any changes made to it!" %}
+                </p>
             </div>
-        </div>
         {% endif %}
     </div>
 
     {% if form.instance.id %}
         {% if not form.instance.sent %}
-        {% captureas modal_send_newsletter %}send_newsletter_{{ form.instance.id }}{% endcaptureas %}
-        <button type="button" class="btn btn-emphasized btn-autosize" data-toggle="modal" data-target="#{{ modal_send_newsletter }}">
-            <ul class="media-list">
-                <li class="media">
-                    <a class="pull-left" href="#">
-                            <i class="fa fa-envelope"></i>
-                        </a>
-                    <div class="media-body">
-                        {% trans "Send newsletter" %}
-                    </div>
-                </li>
-            </ul>
-        </button>
-
-        <button type="submit" name="send_test_mail" class="btn btn-emphasized btn-autosize">
-            <ul class="media-list">
-                <li class="media">
-                    <a class="pull-left" href="#">
-                        <i class="fa fa-envelope"></i>
-                    </a>
-                    <div class="media-body">
-                        {% trans "Send yourself a Test-Mail" %}
-                    </div>
-                </li>
-            </ul>
-        </button>
+        
+	        {% captureas modal_send_newsletter %}send_newsletter_{{ form.instance.id }}{% endcaptureas %}
+	        <button type="button" class="btn btn-emphasized btn-autosize btn-send-newsletter" data-toggle="modal" data-target="#{{ modal_send_newsletter }}">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <span class="pull-left">
+	                            <i class="fa fa-envelope"></i>
+	                    </span>
+	                    <div class="media-body">
+	                        {% trans "Send newsletter" %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </button>
+	
+	        <button type="submit" name="send_test_mail" class="btn btn-emphasized btn-autosize">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <span class="pull-left">
+	                        <i class="fa fa-envelope"></i>
+	                    </span>
+	                    <div class="media-body">
+	                        {% trans "Send yourself a Test-Mail" %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </button>
         {% else %}
-        <button type="submit" name="copy_newsletter" class="btn btn-emphasized btn-autosize">
-            <ul class="media-list">
-                <li class="media">
-                    <a class="pull-left" href="#">
-                        <i class="fas fa-copy"></i>
-                    </a>
-                    <div class="media-body">
-                        {% trans "Copy this newsletter" %}
-                    </div>
-                </li>
-            </ul>
-        </button>
+	        <button type="submit" name="copy_newsletter" class="btn btn-emphasized btn-autosize">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <span class="pull-left">
+	                        <i class="fas fa-copy"></i>
+	                    </span>
+	                    <div class="media-body">
+	                        {% trans "Copy this newsletter" %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </button>
         {% endif  %}
     {% endif  %}
 
     {% if not form.instance.sent %}
-    <button type="submit" name="save_draft" class="btn btn-emphasized btn-autosize">
-        <ul class="media-list">
-            <li class="media">
-                <a class="pull-left" href="#">
-                    <i class="fa fa-floppy-o"></i>
-                </a>
-                <div class="media-body">
-                    {% trans "Save draft" %}
-                </div>
-            </li>
-        </ul>
-    </button>
+	    <button type="submit" name="save_draft" class="btn btn-emphasized btn-autosize">
+	        <ul class="media-list">
+	            <li class="media">
+	                <span class="pull-left">
+	                    <i class="fa fa-floppy-o"></i>
+	                </span>
+	                <div class="media-body">
+	                    {% trans "Save draft" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
     {% endif %}
     
     {% block modal_send_newsletter %}
 	    {% if form.instance.id %}
-		    {% captureas label %}{% trans "Do you really want to send the newsletter?" %}{% endcaptureas %}
+		    {% captureas label %}
+		        <p>
+		            {% trans "Do you really want to send the newsletter?" %}
+		        </p>
+		        <p>
+    		        <b>
+		                {% blocktrans count counter=receipients|length %}With the current selection the newsletter will be sent to {{ counter }} recipients.{% plural %}With the current selection the newsletter will be sent to {{ counter }} recipients.{% endblocktrans %}
+	       	        </b>
+		        </p>
+		    {% endcaptureas %}
 		    {% captureas title %}{% trans "Send newsletter" %}{% endcaptureas %}
 		    {% captureas action %}{% url 'cosinnus:administration-managed-tags-newsletter-update' newsletter_id=form.instance.id %}{% endcaptureas %}
 		    {% include "cosinnus/modal_box.html" with id=modal_send_newsletter label=label title=title form_action=action submit_name="send_newsletter" title_icon='fa fa-envelope' %}

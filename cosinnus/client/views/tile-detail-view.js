@@ -30,6 +30,7 @@ module.exports = BaseView.extend({
         'click .result-link': 'onResultLinkClicked',
         'click .tile-close-button': 'onDeselectClicked',
         'click .topic-filter-link': 'onTopicLinkClicked',
+        'click .text-topic-filter-link': 'onTextTopicLinkClicked',
         'click .managed-tag-filter-link': 'onManagedTagLinkClicked',
         'click .button-like': 'onLikeButtonClicked',
         'click .button-follow': 'onFollowButtonClicked',
@@ -102,6 +103,7 @@ module.exports = BaseView.extend({
     afterRender: function () {
     	// render moment dates
     	$.cosinnus.renderMomentDataDate();
+        $.cosinnus.renderTimezoneAwareDates();
     },
     
     /** Called when a topic link is clicked to filter for that topic only */
@@ -109,6 +111,13 @@ module.exports = BaseView.extend({
         // make sure to close
         this.App.controlView.displayDetailResult(null);
         this.App.controlView.onTopicLinkClicked(event);
+    },
+
+    /** Called when a text topic link is clicked to filter for that topic only */
+    onTextTopicLinkClicked: function(event) {
+        // make sure to close
+        this.App.controlView.displayDetailResult(null);
+        this.App.controlView.onTextTopicLinkClicked(event);
     },
     
     /** Called when a managed tag link is clicked to filter for that topic only */

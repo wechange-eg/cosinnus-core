@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.forms import widgets
 from django.utils.formats import get_format
 from django.utils.translation import get_language
 
@@ -8,6 +9,7 @@ from bootstrap3_datetime.widgets import DateTimePicker
 
 from cosinnus.utils.dates import datetime_format_js2py
 from django.forms.widgets import SplitDateTimeWidget, DateInput, TimeInput
+import json
 
 
 def _is_number(s):
@@ -20,7 +22,7 @@ def _is_number(s):
 class BaseL10NPicker(DateTimePicker):
     js_format_key = None
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
         if self.js_format_key is not None and self.options:
             js_format_string = get_format(self.js_format_key)
             self.options.update({
@@ -93,6 +95,7 @@ class CosinnusSplitDateTimeWidget(SplitDateTimeWidget):
             data[time_name] = self.default_time
         return super(CosinnusSplitDateTimeWidget, self).value_from_datadict(data, files, name)
     
+    
 class SplitHiddenDateWidget(CosinnusSplitDateTimeWidget):
     """
     A Widget that splits datetime input into a hidden date input and a shown time input.
@@ -102,3 +105,19 @@ class SplitHiddenDateWidget(CosinnusSplitDateTimeWidget):
     def __init__(self, attrs=None, date_format=None, time_format=None, default_time=None):
         super(SplitHiddenDateWidget, self).__init__(attrs, date_format, time_format, default_time=default_time)
         self.widgets[0].input_type = 'hidden'
+        
+        
+class PrettyJSONWidget(widgets.Textarea):
+    """ A pretty-printed JSON widget.
+        From https://stackoverflow.com/a/52627264/1407929 """
+    
+    def format_value(self, value):
+        try:
+            value = json.dumps(json.loads(value), indent=4, sort_keys=True)
+            # these lines will try to adjust size of TextArea to fit to content
+            row_lengths = [len(r) for r in value.split('\n')]
+            self.attrs['rows'] = min(max(len(row_lengths) + 4, 10), 30)
+            self.attrs['cols'] = min(max(max(row_lengths) + 4, 40), 120)
+            return value
+        except:
+            return super(PrettyJSONWidget, self).format_value(value)

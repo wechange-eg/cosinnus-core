@@ -18,9 +18,9 @@
     <button type="button" href="{% group_url "cosinnus:conference:room-add" group=group %}" class="btn btn-emphasized btn-autosize" title="{% trans "Create Room" %}">
         <ul class="media-list">
             <li class="media">
-                <a class="pull-left" href="#">
+                <span class="pull-left">
                     <i class="fa fa-plus"></i>
-                </a>
+                </span>
                 <div class="media-body">
                     {% trans "Create Room" %}
                 </div>
@@ -32,6 +32,16 @@
     <!-- a box with semi transparent background -->
     <div class="content-box large-space">
         <h2>{% trans "Conference Room Management" %}</h2>
+        
+        {% if SETTINGS.COSINNUS_PREMIUM_CONFERENCES_ENABLED and not group.is_premium %}
+            <div class="alert alert-warning alert-dismissable">
+                <i class="fas fa-exclamation-triangle fa-3x"></i>
+                <p>
+		            {% trans "Your conference is still in trial mode. You have access to all features, but can only use them with a few people without restrictions. To ensure full performance for your conference with multiple users, book sufficient capacities here for free:" %}
+		            <a href="{% include 'cosinnus/v2/urls/conference_premium_booking_url.html' %}" target="_blank">{% trans "Conference Bookings" %}</a>
+                </p>
+            </div>
+        {% endif %}
         
         {% if not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
 	        <div class='form-info textfield transparent'>

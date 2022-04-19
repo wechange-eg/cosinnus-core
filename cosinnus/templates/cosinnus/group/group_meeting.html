@@ -1,0 +1,149 @@
+{% extends "cosinnus_event/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks sekizai_tags %}
+
+{% block html_attributes %}class="mobile-noscroll"{% endblock html_attributes %}
+
+{% block page_title %}
+{% trans "Meeting" %} {{ object.title }}{{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+        <li><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></li>
+        <li class="active">{% if group.video_conference_type == 1 %}{% trans 'BBB-Meeting' %}{% else %}{% trans 'Fairmeeting' %}{% endif %}</li>
+{% endblock %}
+
+{% block og_image %}{% if object.attached_images %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ object.attached_images.0.static_image_url }}{% else %}{{ block.super }}{% endif %}{% endblock og_image %}
+{% block og_title %}{% if object.title %}{{ object.title }}{% else %}{{ object.description|truncatewords:8 }}{% endif %} - {{ group.name }} - {{ block.super }}{% endblock og_title %}
+{% block og_description %}{{ object.description|truncatewords:30 }}{% endblock og_description %}
+
+{% block content %}
+{% endblock content %}
+
+{% block main_page %}
+	{{ block.super }}
+	
+	<div class="row">
+	    <div class="col-lg-12 col-md-12">    
+	    
+	        <div class="content-box"> <!-- a box with semi transparent background -->
+	            
+	            {% if recording_prompt_required and not request.GET.consent == '1' %}
+	                
+	                {% captureas label %}
+			            <p>
+			                {% trans "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers." %}
+			            </p>
+			        {% endcaptureas %}
+			        {% captureas title %}{% trans "This session is being recorded" %}{% endcaptureas %}
+			        {% captureas action %}.?consent=1{% endcaptureas %}
+			        {% trans "Continue" as continue_label %}
+			        {% include "cosinnus/modal_box.html" with id="consent_modal" label=label title=title submit_button_label=continue_label form_action=action action_as_href=True title_icon='fa fa-camera' %}
+	                <script type="text/javascript">
+	                    $(function(){
+		                    $('#consent_modal').modal('show');
+	                    });
+	                </script>
+	                
+	                <div class="textfield transparent">
+	                    <p>{% trans "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again." %}</p>
+	                </div>
+	                
+	            {% else %}
+		            <div class="regular-space">
+		                <div class="btn btn-extra-emphasized w100">
+		                    <ul class="media-list">
+		                        <li class="media">
+									<span class="pull-left">
+										<i class="fa fa-fw fa-eye"></i>
+									</span>
+	
+		                            <div class="media-body">
+		                                    <span class="annotation">
+					                            <a class="fullscreen-button fullscreen-popout" title="{% trans "Popout" %}" target="_blank" 
+					                                    {% if SETTINGS.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and group.video_conference_type == 1 %}
+					                                        href="{{ group.get_bbb_room_url }}"
+					                                    {% elif COSINNUS_CURRENT_PORTAL.video_conference_server and group.video_conference_type == 2 %}
+	                                                        href="{{ COSINNUS_CURRENT_PORTAL.video_conference_server_url }}-{{ group.id }}-{{ group.secret_from_created }}"
+	                                                    {% endif %}
+					                                    >
+					                                <span>{% trans "Popout" %}</span>
+					                                <i class="fa fa-external-link"></i>
+					                            </a>
+		                                        <a class="fullscreen-button fullscreen-toggle" title="{% trans "Fullscreen" %}">
+		                                            <span>{% trans "Fullscreen" %}</span>
+		                                            <i class="fa fa-expand"></i>
+		                                        </a>
+		                                    </span>
+		                                <span>{{ object.name }}</span>
+		                            </div>
+		                        </li>
+		                    </ul>
+		                </div>
+		                
+		                {% include 'cosinnus/media_tags_readonly.html' with object=object list_view="noindent" %}
+		            </div> 
+		            
+		            
+			        {% if object.attached_images %}
+			            {% include 'cosinnus/common/attached_images_gallery.html' with object=object max_images=3 %}
+			        {% endif %}
+		           
+				{% if SETTINGS.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and group.video_conference_type == 1 %}
+					<div class="video-conference-iframe">
+						<iframe src="{{ group.get_bbb_room_url }}" allow="display-capture *; geolocation *; microphone *; camera *; fullscreen *;" width="100%" height="100%"></iframe>
+					</div>
+				{% elif COSINNUS_CURRENT_PORTAL.video_conference_server and group.video_conference_type == 2 %}
+					<div class="video-conference-iframe">
+						<iframe src="{{ COSINNUS_CURRENT_PORTAL.video_conference_server_url }}-{{ group.id }}-{{ group.secret_from_created }}" allow="display-capture *; geolocation *; microphone *; camera *; fullscreen *;" width="100%" height="100%"></iframe>
+					</div>
+				{% endif %}
+		
+	            <button type="button" class="btn btn-small w100 btn-emphasized btn-autosize fullscreen-leave-button fullscreen-toggle mobile-hidden">
+	                <ul class="media-list">
+	                    <li class="media">
+	                        <span class="pull-left">
+	                            <i class="fa fa-compress"></i>
+	                        </span>
+	                        <div class="media-body">
+	                            {% trans "Leave Fullscreen" %}
+	                        </div>
+	                    </li>
+	                </ul>
+	            </button>
+	            
+	            <!-- Safari can only scroll with the extra CSS, but non-safari browser can't scroll with it, so add it dynamically. -->
+	            <script type="text/javascript">
+	            	var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+					var is_safari = navigator.userAgent.indexOf("Safari") > -1;
+					function isSafariBrowser(){
+					    if (is_safari){
+					        if (is_chrome)  // Chrome seems to have both Chrome and Safari userAgents
+					            return false;
+					        else
+					            return true;
+					    }
+					    return false;
+					}
+					if (isSafariBrowser()){
+					    $('.video-conference-iframe').css('overflow-y', 'scroll').css('-webkit-overflow-scrolling', 'touch');
+					}$(function() {
+						/** Video chat fullscreen toggle: left as 'video-conference-iframe' due to constant bugs with fullscreen-mode */
+						$('.fullscreen-popout').click(function() {
+	                        $('.video-conference-iframe').html('<p class="textfield">{% trans "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page." %}</p>');
+	                    });
+						$('.fullscreen-toggle').click(function() {
+							$('.video-conference-iframe').toggleClass('fullscreen');
+						});
+						$('.stop-etherpad').click(function(){
+							$('.video-conference-iframe').html('');
+						});
+					});
+	            </script>
+	            
+            {% endif %}
+	    
+	    </div><!-- content-box -->
+	    
+	</div> <!-- row -->
+    
+{% endblock main_page %}

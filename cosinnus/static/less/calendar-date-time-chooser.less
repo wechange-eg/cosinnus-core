@@ -18,7 +18,24 @@
 		border-top-width: 0;
 	}
 }
-
+/** The "X"-clear button for the calendar */
+.clear-small-calendar {
+    display: inline-block;
+    height: 48px;
+    cursor: pointer;
+    float: right;
+    padding: 12px;
+    
+    i {
+        font-size: 24px;
+        color: @text-color;
+    }
+    &:hover {
+        i {
+            color: @text-color-pale;
+        }
+    }
+}
 
 // small date time chooser in left column
 .input-area.input-area-left-column {
@@ -31,7 +48,7 @@
 			// width: 4em;
 		}
 		.small-calendar {
-			background-color: @app-neutral-color-white;
+			background-color: #FFFFFF;
 		}
 	}
 

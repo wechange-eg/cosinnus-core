@@ -4,30 +4,31 @@ from __future__ import unicode_literals
 from builtins import object
 from datetime import datetime
 import pytz
+from django.db.models import Q
 from rest_framework import serializers
 
-from cosinnus.models import MEMBERSHIP_ADMIN, CosinnusGroup
-from cosinnus.models.group import CosinnusGroup
-
+from cosinnus.models import MEMBERSHIP_ADMIN, get_cosinnus_group_model, RelatedGroups
 
 __all__ = ('GroupSimpleSerializer', 'CosinnusSocietySerializer', 'CosinnusProjectSerializer')
 
 from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
 
 
+CosinnusGroup = get_cosinnus_group_model()
+
+
 class GroupSimpleSerializer(serializers.ModelSerializer):
 
     class Meta(object):
         model = CosinnusGroup
-        fields = ('id', 'name', 'slug', 'public', 'description', )
+        fields = ('id', 'name', 'slug', 'public', 'description')
 
 
 class CosinnusSocietySerializer(serializers.HyperlinkedModelSerializer):
     topics = serializers.SerializerMethodField()
     tags = serializers.SerializerMethodField()
     locations = serializers.SerializerMethodField()
-    parent = serializers.PrimaryKeyRelatedField(read_only=True)
-    related_groups = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    related = serializers.SerializerMethodField()
 
     def get_topics(self, obj):
         return obj.media_tag.get_topics()
@@ -46,15 +47,24 @@ class CosinnusSocietySerializer(serializers.HyperlinkedModelSerializer):
             })
         return locations
 
+    def get_related(self, obj):
+        qs = RelatedGroups.objects
+        slugs = set(qs.filter(from_group=obj).exclude(to_group=obj).values_list('to_group__slug', flat=True))
+        slugs.update(set(qs.filter(to_group=obj).exclude(from_group=obj).values_list('from_group__slug', flat=True)))
+        return slugs
+
     class Meta(object):
         model = CosinnusSociety
         fields = ('name', 'slug', 'description', 'description_long', 'contact_info',
-                  'avatar', 'website', 'parent', 'related_groups', 'topics', 'tags', 'locations', 'created')
+                  'avatar', 'website', 'related', 'topics', 'tags', 'locations', 'created')
 
 
 class CosinnusProjectSerializer(CosinnusSocietySerializer):
+    parent = serializers.SlugRelatedField(queryset=CosinnusSociety.objects.all(), slug_field='slug', required=False)
+
     class Meta(CosinnusSocietySerializer.Meta):
         model = CosinnusProject
+        fields = CosinnusSocietySerializer.Meta.fields + ('parent', )
 
 
 class CosinnusLocationSerializer(serializers.HyperlinkedModelSerializer):
@@ -146,11 +156,3 @@ class CosinnusProjectGoodDBSerializer(serializers.HyperlinkedModelSerializer):
                 'title': obj.avatar.name
             }]
         return images
-
-
-class GroupSimpleSerializer(serializers.ModelSerializer):
-    class Meta(object):
-        model = CosinnusGroup
-        fields = ('id', 'name', 'slug', 'public', 'description')
-
-

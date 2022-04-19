@@ -32,19 +32,23 @@ export const useStyles = makeStyles((theme) => ({
     float: "right",
     marginTop: "-2.6rem",
     fontSize: "1.6rem",
-    color: theme.palette.primary.main,
+    color: theme.palette.text.primary,
     width: "4rem",
     display: "flex",
     alignItems: "right",
     "& > a": {
       flex: 1,
+      color: theme.palette.text.primary,
       "&:hover,&:focus,&:active": {
-        color: theme.palette.primary.light,
+        color: theme.palette.primary.main,
       }
     }
   },
   newTabLink: {
   },
   fullScreenLink: {
+  },
+  dialogText: {
+    color: theme.palette.text.primary
   },
 }));

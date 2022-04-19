@@ -70,7 +70,7 @@ body .ultra-space {
 */
 .input-area {
 	margin: 0 0 0 0;
-	background-color: @app-neutral-color-white;
+	background-color: #FFFFFF;
 	color: @app-neutral-color-dark;
   list-style: none;
 	padding: 0;
@@ -164,7 +164,7 @@ body .ultra-space {
 	cursor: text;
 }
 #searchbar.expanded {
-	background-color: @app-neutral-color-white;
+	background-color: #FFFFFF;
 }
 #searchbar input {
 	width: 0px;
@@ -249,8 +249,12 @@ ul.errorlist {
 .panel-default {
     border: none;
     border-left: 3px solid whitesmoke;
-    margin-bottom: 20px !important;
+    margin-bottom: 12px !important;
     background-color: transparent;
+    
+    &.large-space {
+        margin-bottom: 20px !important;
+    }
 }
 
 #map {
@@ -295,7 +299,10 @@ ul.errorlist {
 	.generic-background-colors(@app-poll-color-light,@app-poll-color,@app-poll-color-dark);
 }
 .app-marketplace {
-	.generic-background-colors(@app-marketplace-color-light,@app-marketplace-color,@app-marketplace-color-dark);
+    .generic-background-colors(@app-marketplace-color-light,@app-marketplace-color,@app-marketplace-color-dark);
+}
+.app-message {
+    .generic-background-colors(@app-message-color-light,@app-message-color,@app-message-color-dark);
 }
 .app-todos {
 	.generic-background-colors(@app-todos-color-light,@app-todos-color,@app-todos-color-dark);

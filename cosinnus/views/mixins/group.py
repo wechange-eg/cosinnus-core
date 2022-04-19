@@ -5,8 +5,8 @@ from builtins import object
 from cosinnus.core.decorators.views import (require_read_access,
     require_write_access, require_admin_access,
     require_create_objects_in_access, redirect_to_not_logged_in,
-    dispatch_group_access, require_logged_in, require_write_access_groupless,
-    superuser_required, require_superuser)
+    dispatch_group_access, require_logged_in, require_write_access_groupless, 
+    require_superuser, require_verified_user_access, require_portal_manager)
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user,\
     check_object_write_access, check_object_read_access
 from cosinnus.utils.urls import group_aware_reverse
@@ -49,6 +49,18 @@ class RequireLoggedInMixin(object):
         return super(RequireLoggedInMixin, self).dispatch(request, *args, **kwargs)
 
 
+class RequireVerifiedUserMixin(object):
+    """
+    Mixin to ease the use of :meth:`require_verified_user_access`.
+
+    .. seealso:: :class:`RequireLoggedInMixin`
+    """
+
+    @require_verified_user_access()
+    def dispatch(self, request, *args, **kwargs):
+        return super(RequireVerifiedUserMixin, self).dispatch(request, *args, **kwargs)
+
+
 class RequireSuperuserMixin(object):
     """
     Mixin to ease the use of :meth:`require_admin_access`.
@@ -59,6 +71,18 @@ class RequireSuperuserMixin(object):
     @require_superuser()
     def dispatch(self, request, *args, **kwargs):
         return super(RequireSuperuserMixin, self).dispatch(request, *args, **kwargs)
+    
+
+class RequirePortalManagerMixin(object):
+    """
+    Mixin to ease the use of :meth:`require_portal_manager_access`.
+
+    .. seealso:: :class:`RequireReadMixin`, :class:`RequireWriteMixin`, :class:`RequireCreateObjectsInMixin`
+    """
+
+    @require_portal_manager()
+    def dispatch(self, request, *args, **kwargs):
+        return super(RequirePortalManagerMixin, self).dispatch(request, *args, **kwargs)
 
 
 class DipatchGroupURLMixin(object):

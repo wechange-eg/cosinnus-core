@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from builtins import object
 
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.templatetags.static import static
 from rest_framework import serializers
 from cosinnus.models import CosinnusPortal
 
@@ -19,6 +19,4 @@ class PortalSettingsSerializer(serializers.ModelSerializer):
         fields = ('name', 'background_image', 'logo_image', 'top_color', 'bottom_color', 'extra_css')
 
     def get_logo_image(self, obj):
-        if obj.logo_image:
-            return obj.logo_image.url
-        return static('img/logo-icon.png')
+        return static('img/v2_navbar_brand.png')

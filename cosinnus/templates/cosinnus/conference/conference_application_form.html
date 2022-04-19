@@ -40,18 +40,20 @@
                     <h2>{% trans 'Edit your application for' %} <i>{{ group.name }}</i></h2>
                 {% endif %}
                 
-                <div class="textfield transparent">
-                    <p>
-                        {% trans "Please fill out the fields below to submit your application. Be aware that the organizers may take your profile into consideration when processing your application, so make sure that your profile page is well maintained. You can view and edit your profile page here:" %}
-                        <a href="{% url 'cosinnus:profile-detail' %}" target="_blank">
-			                {% trans "Your profile" %}
-			            </a>
-                    </p>
-                    <p class="ultra-space">
-                        {% trans "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!" %}
-                    </p>
-                </div>
-                <div class="large-space"></div>
+                {% block notice_text %} 
+	                <div class="textfield transparent">
+	                    <p>
+	                        {% trans "Please fill out the fields below to submit your application. Be aware that the organizers may take your profile into consideration when processing your application, so make sure that your profile page is well maintained. You can view and edit your profile page here:" %}
+	                        <a href="{% url 'cosinnus:profile-detail' %}" target="_blank">
+				                {% trans "Your profile" %}
+				            </a>
+	                    </p>
+	                    <p class="ultra-space">
+	                        {% trans "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!" %}
+	                    </p>
+	                </div>
+	                <div class="large-space"></div>
+		        {% endblock notice_text %}
 		        
 		        {% if form.information %}
 			        {% trans "Please provide your motivation for applying" as information_label %}
@@ -134,9 +136,9 @@
 		    <button type="submit" class="btn btn-emphasized btn-autosize">
 		        <ul class="media-list">
 		            <li class="media">
-		                <a class="pull-left" href="#">
+		                <span class="pull-left">
 		                    <i class="fa fa-check"></i>
-		                </a>
+		                </span>
 		                <div class="media-body">
 		                    {% if form.instance.id %}
 		                        {% trans "Save changes" %}
@@ -152,9 +154,9 @@
 			    <button type="submit" name="withdraw" class="btn btn-emphasized">
 			        <ul class="media-list">
 			            <li class="media">
-			                <a class="pull-left" href="#">
+			                <span class="pull-left">
 			                    <i class="fa fa-trash"></i>
-			                </a>
+			                </span>
 			                <div class="media-body">
 			                    {% trans "Withdraw" %}
 			                </div>

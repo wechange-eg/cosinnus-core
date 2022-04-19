@@ -75,3 +75,32 @@ def validate_file_infection(file):
             raise 
         except Exception as e:
             logger.error('Error during file upload: django-clamd infection validation failed for uploaded file!', extra={'uploaded-file': str(file), 'exception': e})
+
+
+class CleanFromToDateFieldsMixin(object):
+    """ Mixin for a ModelForm with a from_date and to_date field that checks the validity
+        of the date range """
+    
+    from_date_field_name = 'from_date'
+    to_date_field_name = 'to_date'
+        
+    def clean(self):
+        cleaned_data = super().clean()
+        from_date = cleaned_data.get(self.from_date_field_name)
+        to_date = cleaned_data.get(self.to_date_field_name)
+
+        if to_date and to_date:
+            if to_date <= from_date:
+                msg = _('The start date must be before the end date')
+                self.add_error(self.to_date_field_name, msg)
+
+        elif to_date and not from_date:
+            msg = _('Please also provide a start date')
+            self.add_error(self.from_date_field_name, msg)
+
+        elif from_date and not to_date:
+            msg = _('Please also provide an end date')
+            self.add_error(self.to_date_field_name, msg)
+
+        return cleaned_data
+

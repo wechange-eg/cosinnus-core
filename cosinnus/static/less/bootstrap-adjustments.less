@@ -1,12 +1,14 @@
 body {
-  padding-top: 70px;
-
 	// works in IE 9+: http://css-tricks.com/perfect-full-page-background-image/
 	// background: no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+}
+
+body > .container {
+    margin-top: 70px;
 }
 
 body.body-no-nav {
@@ -42,7 +44,7 @@ body.body-no-nav {
 		position: absolute;
 		right: 5px;
 		top: 10px;
-		background-color: @app-neutral-color-white;
+		background-color: #FFFFFF;
 		border-radius: 1em;
 		padding: 0 0.5em;
 		font-size: 0.8em;
@@ -50,7 +52,7 @@ body.body-no-nav {
 
 	.navbar-collapse {
 		@media(max-width:767px){
-			background-color: @app-neutral-color-white;
+			background-color: #FFFFFF;
 				ul {
 					margin-top: 0;
 					margin-bottom: 0;
@@ -127,7 +129,7 @@ body.body-no-nav {
 p, .white-content, .textfield, .CodeMirror .editor-preview {
 	margin-bottom: 0;
     padding: 8px;
-	background-color: @app-neutral-color-white;
+	background-color: #FFFFFF;
 	color: @app-neutral-color-dark;
 
 	a {
@@ -252,7 +254,7 @@ textarea {
 	width: 100%;
 	border-width: 0;
 	margin: 0;
-	background-color: @app-neutral-color-white;
+	background-color: #FFFFFF;
 	color: @app-neutral-color-dark;
 	resize: vertical;
 	height: 10em;
@@ -304,57 +306,14 @@ textarea {
 		margin: 5px 0 0 0;
     }
 }
-.announcement {
-	
-	border-width: 0;
-	padding: 5px 5px 5px 44px;
-	position: relative;
-	min-height: 35px;
-	margin-bottom: 12px;
-	margin-top: -17px;
-	
-	i {
-		position: absolute;
-		top: 6px;
-		left: 12px;
-    }
-    
-    p {
-		margin: 5px 0;
-    }
-	
-}
-.alert, .announcement {
-	&.alert-success {
-		color: @app-neutral-color-white;
-		background-color: @app-main-color-yes;
-	}
-	&.alert-info {
-		color: @app-neutral-color-dark;
-		background-color:fadeout(@app-neutral-color-light, 70);
-	}
-	&.alert-warning {
-		color: @app-neutral-color-white;
-		background-color: @app-main-color-maybe;
-	}
-	&.alert-danger {
-		color: @app-neutral-color-white;
-		background-color: @app-main-color-no;
-	}
-	
-	p {
-		background-color: transparent;
-		padding: 0;
-		color: inherit;
-	}
-}
+
 
 
 ul.pagination {
 	margin-bottom: 0;
 
 	li {
-		background-color: @app-neutral-color-white;
+		background-color: #FFFFFF;
 		border-width: 0;
 		margin-right: 5px;
 		display: inline-block;
@@ -370,7 +329,7 @@ ul.pagination {
 	}
 	li.active {
 		> a {
-			background-color: @app-neutral-color-white;
+			background-color: #FFFFFF;
 			color: @app-neutral-color-dark;
 			font-weight: bold;
 			border-width: 0;
@@ -387,7 +346,7 @@ ul.pagination {
 // Box with content from WYSIWYG-Editor
 .well {
 	border-width: 0;
-	background-color: @app-neutral-color-white;
+	background-color: #FFFFFF;
 	margin: 8px 0 8px 0;
 	font-size: 14px;
 	padding: 0;

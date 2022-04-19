@@ -8,10 +8,11 @@ var cosinnus_datetime_format = "{{ COSINNUS_DATETIME_FORMAT }}";
 var cosinnus_time_format = "{{ COSINNUS_TIME_FORMAT }}";
 var cosinnus_group_url_path = "{% cosinnus_group_url_path %}";
 var cosinnus_current_language = "{{ COSINNUS_CURRENT_LANGUAGE }}";
+var cosinnus_user_timezone = {% if COSINNUS_USER_TIMEZONE %}"{{ COSINNUS_USER_TIMEZONE }}"{% else %}null{% endif %};
 var cosinnus_report_object_url = "{% url 'cosinnus:report-object' %}";
 
 // cosinnus/static_dependencies.html
-var COSINNUS_MAP_TOPICS_JSON = {% render_cosinnus_topics_json %};
+var COSINNUS_MAP_TOPICS_JSON = {% if SETTINGS.COSINNUS_TOPICS_SHOW_AS_MAP_FILTERS %}{% render_cosinnus_topics_json %}{% else %}{}{% endif %};
 {% if SETTINGS.COSINNUS_ENABLE_SDGS %}
 var COSINNUS_MAP_SDGS_JSON = {% render_sdg_json %};
 {% endif %}
@@ -29,6 +30,8 @@ var COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE = {% if SETTINGS.COSINNUS_V2_DASHBOAR
 var COSINNUS_ROCKET_ENABLED = {% if SETTINGS.COSINNUS_ROCKET_ENABLED %}true{% else %}false{% endif %};
 var COSINNUS_MESSAGES_ENABLED = {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}true{% else %}false{% endif %};
 var COSINNUS_CLOUD_ENABLED = {% if SETTINGS.COSINNUS_CLOUD_ENABLED %}true{% else %}false{% endif %};
+var COSINNUS_EXCHANGE_ENABLED = {% if SETTINGS.COSINNUS_EXCHANGE_ENABLED %}true{% else %}false{% endif %};
+var COSINNUS_EXCHANGE_PORTAL_ID = {{ SETTINGS.COSINNUS_EXCHANGE_PORTAL_ID }};
 var COSINNUS_CLOUD_DASHBOARD_WIDGET_ENABLED = {% if SETTINGS.COSINNUS_CLOUD_ENABLED and SETTINGS.COSINNUS_CLOUD_DASHBOARD_WIDGET_ENABLED %}true{% else %}false{% endif %};
 var COSINNUS_SHOW_SUPERUSER_CONTROLS = {% if user|is_superuser %}true{% else %}false{% endif %};
 var COSINNUS_TRANS_MY_CONFERENCES = "{{ COSINNUS_CONFERENCE_TRANS.MY_LIST }}";
@@ -39,4 +42,4 @@ var COSINNUS_TRANS_ALL_CONFERENCES = "{{ COSINNUS_CONFERENCE_TRANS.ALL_LIST }}";
 var COSINNUS_TRANS_BROWSE_ALL_CONFERENCES = "{{ COSINNUS_CONFERENCE_TRANS.BROWSE_ALL }}";
 var COSINNUS_TRANS_CREATE_CONFERENCE = "{{ COSINNUS_CONFERENCE_TRANS.CREATE_NEW }}";
 var COSINNUS_USER_CAN_CREATE_CONFERENCE = {% if user|user_can_create_conferences %}true{% else %}false{% endif %};
-    
+var COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN = {% if SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}true{% else %}false{% endif %};

@@ -15,14 +15,16 @@ window.AjaxForms = {
 		var data = $form.serializeArray();
 		data.push({'name': 'ajax_form_id', 'value': $form.attr('id')});
         $form.addClass('disabled');
-        $form.find('input,textarea').attr('disabled', 'disabled');
+        $form.find('input,textarea,button').attr('disabled', 'disabled');
     	
     	window.AjaxForms.submitForm($form, data).then(function(data){
     		window.AjaxForms.handleData(data);
 		}).catch(function(responseJSON){
 			if (responseJSON && 'form_errors' in responseJSON) {
 			    if ($form.attr('data-ajax-form-error-message')) {
-                    alert($form.attr('data-ajax-form-error-message'));			        
+                    alert($form.attr('data-ajax-form-error-message'));
+                } else if ('__all__' in responseJSON['form_errors']) {
+                    alert(responseJSON['form_errors']['__all__']);
 			    } else {
     				alert('Please fill out all required fields!');
 			    }
@@ -32,7 +34,7 @@ window.AjaxForms = {
 			
 			// re-enable form
 	        $form.removeClass('disabled');
-	        $form.find('input,textarea').removeAttr('disabled');
+	        $form.find('input,textarea,button').removeAttr('disabled');
 		});
     }, 
 	
@@ -81,8 +83,12 @@ window.AjaxForms = {
 		}
 		if ('ajax_form_id' in data) {
 			// delete elements marked to delete 
-			$('[data-target="ajax-form-delete-element"][data-ajax-form-id="' + data['ajax_form_id'] + '"]')
-				.fadeOut(function() {$(this).remove();});
+            $('[data-target="ajax-form-delete-element"][data-ajax-form-id="' + data['ajax_form_id'] + '"]')
+                .fadeOut(200, function() {
+                    $(this).remove();
+        			// show elements marked to show
+        			$('[data-target="ajax-form-show-element"][data-ajax-form-id="' + data['ajax_form_id'] + '"]').show();
+                });
 			// execute oncomplete code
 			var oncomplete = $('[data-target="ajax-form"][id="' + data['ajax_form_id'] + '"]').attr('data-ajax-oncomplete');
 			if (oncomplete) {

@@ -19,6 +19,10 @@ from django.utils.translation import ugettext_lazy as _
 # this is the default portal, and will change the location of the staticfiles
 COSINNUS_PORTAL_NAME = None
 
+# the suffix of every often-changing JS/CSS staticfile
+# increase this to make sure browsers reload a cached version 
+# after making non-compatible changes to scripts or styles!
+COSINNUS_STATICFILES_VERSION = '1.15'
 
 DEBUG = False
 
@@ -31,6 +35,10 @@ ALLOWED_HOSTS = ()
 
 DATABASES = {}
 
+# Default primary key field type to use for models that don’t have a field with primary_key=True.
+# New in Django 3.2.
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -42,8 +50,6 @@ TIME_ZONE = 'Europe/Berlin'
 LANGUAGE_CODE = 'de'
 
 SITE_ID = 1
-
-FILE_CHARSET = 'utf-8'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -71,7 +77,7 @@ STATIC_URL = '/static/'
 
 
 # List of finder classes that know how to find static files in
-# various locations.
+# various locations
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -91,14 +97,14 @@ MIDDLEWARE = [
     
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django_otp.middleware.OTPMiddleware',
-    'cosinnus.core.middleware.cosinnus_middleware.OTPMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.AdminOTPMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.UserOTPMiddleware',
     
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     
     'cosinnus.core.middleware.cosinnus_middleware.StartupMiddleware',
@@ -106,7 +112,9 @@ MIDDLEWARE = [
     'cosinnus.core.middleware.cosinnus_middleware.ConditionalRedirectMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.AddRequestToModelSaveMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.GroupPermanentRedirectMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.ExternalEmailLinkRedirectNoticeMiddleware',
     'cosinnus.core.middleware.login_ratelimit_middleware.LoginRateLimitMiddleware',
+    'cosinnus.core.middleware.time_zone_middleware.TimezoneMiddleware',
 ]
 
 
@@ -132,6 +140,7 @@ TEMPLATES = [
                 'cosinnus.utils.context_processors.settings',
                 'cosinnus.utils.context_processors.cosinnus',
                 'cosinnus.utils.context_processors.tos_check',
+                'cosinnus.utils.context_processors.email_verified',
                 'announcements.context_processors.add_custom_announcements',
              ],
             'loaders': (
@@ -164,26 +173,6 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'suit',
         'django.contrib.admin',
         'sekizai',
-        
-        # haystack needs to precede wagtail because wagtail idiotically overrides haystack's mmanagement commands
-        'haystack',
-        
-        # wagtail
-        'wagtail_overextends',
-        'compressor',
-        'modelcluster',
-        'wagtail.core',
-        'wagtail.admin',
-        'wagtail.documents',
-        'wagtail.snippets',
-        'wagtail.users',
-        'wagtail.images',
-        'wagtail.embeds',
-        'wagtail.search',
-        'wagtail.sites',
-        'wagtail.contrib.redirects',
-        'wagtail.contrib.forms',
-        
     ]
     
     # Internal Apps (as defined in external project)
@@ -205,12 +194,34 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'cosinnus_stream',
         'cosinnus_todo',
         'cosinnus_conference',
+        'cosinnus_exchange',
     ]
     
     # Extra Cosinnus Apps (as defined in external project)
     _INSTALLED_APPS += extra_cosinnus_apps
     
     _INSTALLED_APPS += [
+        
+        # haystack needs to precede wagtail because wagtail idiotically overrides haystack's mmanagement commands
+        'haystack',
+        
+        # wagtail
+        'wagtail_overextends',
+        'compressor',
+        'modelcluster',
+        'wagtail.core',
+        'wagtail.admin',
+        'wagtail.documents',
+        'wagtail.snippets',
+        'wagtail.users',
+        'wagtail.images',
+        'wagtail.embeds',
+        'wagtail.search',
+        'wagtail.sites',
+        'wagtail.contrib.redirects',
+        'wagtail.contrib.forms',
+        
+        
         'announcements',
         'ajax_forms',
       
@@ -226,6 +237,9 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'widget_tweaks',
         'django_otp',
         'django_otp.plugins.otp_totp',
+        'django_otp.plugins.otp_static',
+        'two_factor',
+        'timezone_field',
         
         # External Apps
         'awesome_avatar',
@@ -241,7 +255,6 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'osm_field',
         'phonenumber_field',
         'postman',
-        'raven.contrib.django.raven_compat',
         'oauth2_provider',
         'corsheaders',
         'rest_framework',
@@ -253,28 +266,31 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
     
     return _INSTALLED_APPS
 
+# for language codes see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 LANGUAGES = [
-    ('de', _('Deutsch--NATIVE-LANGUAGE')),
-    ('en', _('English--NATIVE-LANGUAGE')),
-    ('ru', _('Russian--NATIVE-LANGUAGE')),
-    ('uk', _('Ukrainian--NATIVE-LANGUAGE')),
+    ('de', _('Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('en', _('English--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('ru', _('Russian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('uk', _('Ukrainian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
     # other languages available, but not yet, or not by default
     # (enable them for your specific portals by defining `LANGUAGES` in settings.py
-    ('fr', _('French--NATIVE-LANGUAGE')),
-    ('pl', _('Polish--NATIVE-LANGUAGE')),
-    ('es', _('Spanish--NATIVE-LANGUAGE')),
-    ('ro', _('Romanian--NATIVE-LANGUAGE')),
-    ('be', _('Belarussian--NATIVE-LANGUAGE')),
-    ('nl', _('Dutch--NATIVE-LANGUAGE')),
+    ('fr', _('French--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('pl', _('Polish--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('es', _('Spanish--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('ro', _('Romanian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('be', _('Belarussian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('nl', _('Dutch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
     
-    ('cs', _('Czech--NATIVE-LANGUAGE')),
-    ('az', _('Azerbaijani--NATIVE-LANGUAGE')),
-    ('hy', _('Armenian--NATIVE-LANGUAGE')),
-    ('ka', _('Georgian--NATIVE-LANGUAGE')),
-    ('kk', _('Kazakh--NATIVE-LANGUAGE')),
+    ('cs', _('Czech--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('az', _('Azerbaijani--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('hy', _('Armenian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('ka', _('Georgian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('kk', _('Kazakh--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
     
-    ('ar', _('Arabic--NATIVE-LANGUAGE')),
-    ('he', _('Hebrew--NATIVE-LANGUAGE')),
+    ('ar', _('Arabic--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('he', _('Hebrew--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('el', _('Greek--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
+    ('fa', _('Persian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
 ]
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -289,7 +305,7 @@ LOGGING = {
     'disable_existing_loggers': True,
     'root': {
         'level': 'WARNING',
-        'handlers': ['sentry'],
+        'handlers': ['console'],
     },
     'formatters': {
         'verbose': {
@@ -297,10 +313,6 @@ LOGGING = {
         },
     },
     'handlers': {
-        'sentry': {
-            'level': 'INFO',
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        },
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
@@ -313,24 +325,14 @@ LOGGING = {
             'handlers': ['console'],
             'propagate': False,
         },
-        'raven': {
-            'level': 'DEBUG',
-            'handlers': ['console', 'sentry'],
-            'propagate': False,
-        },
-        'sentry.errors': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
         'cosinnus': {
             'level': 'DEBUG',
-            'handlers': ['console', 'sentry'],
+            'handlers': ['console',],
             'propagate': False,
         },
         'wechange-payments': {
             'level': 'DEBUG',
-            'handlers': ['console', 'sentry'],
+            'handlers': ['console',],
             'propagate': False,
         },
     },
@@ -338,6 +340,7 @@ LOGGING = {
 
 # allow a lot of POST parameters (notification settings will have many fields)
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # Required for cmsplugin_filer_image
 THUMBNAIL_PROCESSORS = (
@@ -414,9 +417,13 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 # TODO: FIXME: this should be inverted, ie each cosinnus app should set these settings!
 # cosinnus-core should not know about other cosinnus apps here!
 CRON_CLASSES = [
+    'cosinnus.cron.DeleteScheduledUserProfiles',
+    'cosinnus.cron.UpdateConferencePremiumStatus',
+    'cosinnus_conference.cron.SendConferenceReminders',
+    'cosinnus_event.cron.TriggerBBBStreamers',
+    'cosinnus_exchange.cron.PullData',
     'cosinnus_marketplace.cron.DeactivateExpiredOffers',
     'cosinnus_message.cron.ProcessDirectReplyMails',
-    'cosinnus_conference.cron.SendConferenceReminders',
 ]
 # delete cronjob logs older than 30 days
 DJANGO_CRON_DELETE_LOGS_OLDER_THAN = 30
@@ -513,14 +520,15 @@ LOGIN_RATELIMIT_LOGGER_NAME = 'cosinnus'
 # new users that register will automatically be assigned these django permission groups
 NEWW_DEFAULT_USER_AUTH_GROUPS = ['Users']
 
-# new user that register will automatically become members of these groups/projects (supply group slugs!)
-NEWW_DEFAULT_USER_GROUPS = ['forum']
-
-# these groups will accept members instantly after requesting membership
-COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS = ['forum']
-
 # the "Home" group for this portal. if not set, some things won't work (like attaching files to direct messages)
 NEWW_FORUM_GROUP_SLUG = 'forum'
+
+# new user that register will automatically become members of these groups/projects (supply group slugs!)
+NEWW_DEFAULT_USER_GROUPS = [NEWW_FORUM_GROUP_SLUG]
+
+# these groups will accept members instantly after requesting membership
+COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS = NEWW_DEFAULT_USER_GROUPS
+
 
 # the resident "Events" group for this portal. set this to thhe `NEWW_FORUM_GROUP_SLUG` if there isn't a seperate group!
 NEWW_EVENTS_GROUP_SLUG = NEWW_FORUM_GROUP_SLUG
@@ -564,6 +572,16 @@ REST_FRAMEWORK = {
     )
 }
 
+COSINNUS_API_SETTINGS = {
+    'user': ['head', 'post'],
+    # 'users': [ 'head', 'get', 'post', 'put', 'patch', 'delete']
+    # 'hooks': {
+    #     'user.activated': ['https://webhook.site/test'],
+    #     'user.updated': ['https://webhook.site/test'],
+    #     'user.deactivated': ['https://webhook.site/test'],
+    # }
+}
+
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'cosinnus.utils.jwt.jwt_response_handler'
 }
@@ -604,28 +622,18 @@ COSINNUS_PROJECT_ADDITIONAL_FORMS = []
 COSINNUS_GROUP_ADDITIONAL_FORMS = []
 COSINNUS_CONFERENCE_ADDITIONAL_FORMS = []
 
-# Organizations
-COSINNUS_DATA_EXCHANGE_ENABLED = False
-COSINNUS_GOODDB_BASE_URL = "https://virtserver.swaggerhub.com/WECHANGE-eG/GoodDB/0.0.9"
-COSINNUS_GOODDB_USER = "user"
-COSINNUS_GOODDB_PASSWORD = "password"
-COSINNUS_GOODDB_PUSH = {
-    'events': {
-        'path': '/events/batch',
-        'model': 'cosinnus_event.Event',
-        'serializer': 'cosinnus_event.api.serializers.EventGoodDBSerializer'
-    },
-}
-COSINNUS_GOODDB_PULL = {
-    'events': {
-        'path': '/events/',
-        'model': 'cosinnus.ExternalEvent',
-        'serializer': 'cosinnus.external.serializers.ExternalEventGoodDBSerializer'
-    },
-}
-
-COSINNUS_STARRED_STAR_LABEL = _('Bookmark')
-COSINNUS_STARRED_STARRING_LABEL = _('Bookmarked')
-COSINNUS_STARRED_OBJECTS_LIST = _('Bookmark list')
-COSINNUS_STARRED_USERS_LIST = _('Bookmarked Users list')
+# Exchange
+COSINNUS_EXCHANGE_ENABLED = False
+COSINNUS_EXCHANGE_RUN_EVERY_MINS = 60 * 24
+# Exchange Backends
+# Defaults:
+#   backend: 'cosinnus_exchange.backends.ExchangeBackend'
+#   url: None (required)
+#   token_url: (url + ../token/)
+#   username: None (if no login required)
+#   password: None (if no login required)
+#   source: (domain from URL)
+#   model: None (required, e.g. 'cosinnus_exchange.Event')
+#   serializer: None (required, e.g. 'cosinnus_exchange.serializers.ExchangeEventSerializer')
+COSINNUS_EXCHANGE_BACKENDS = []
 

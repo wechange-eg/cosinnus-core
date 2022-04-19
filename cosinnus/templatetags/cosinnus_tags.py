@@ -29,10 +29,11 @@ from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_group_create_objects_access, check_object_read_access, get_user_token,
     check_user_portal_admin, check_user_superuser,
     check_object_likefollowstar_access, filter_tagged_object_queryset_for_user,
-    check_user_can_create_conferences)
+    check_user_can_create_conferences, check_user_can_create_groups,
+    check_user_portal_manager)
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,  CommaSeparatedSelect2MultipleWidget
 from cosinnus.models.tagged import get_tag_object_model, BaseTagObject,\
-    LikeObject
+    LikeObject, CosinnusTopicCategory
 from django.template.base import TemplateSyntaxError
 from cosinnus.core.registries.group_models import group_model_registry
 from django.core.cache import cache
@@ -45,8 +46,8 @@ import json as _json
 from django.utils.encoding import force_text
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
-from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.template.defaultfilters import linebreaksbr
+from django.templatetags.static import static
+from django.template.defaultfilters import linebreaksbr, pprint
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
     CosinnusConference
 from cosinnus.models.conference import CosinnusConferenceApplication
@@ -54,7 +55,7 @@ from wagtail.core.templatetags.wagtailcore_tags import richtext
 from uuid import uuid1
 from annoying.functions import get_object_or_None
 from django.utils.text import normalize_newlines
-from cosinnus.utils.functions import ensure_list_of_ints
+from cosinnus.utils.functions import ensure_list_of_ints, convert_html_to_string
 from django.db.models.query import QuerySet
 from django.core.serializers import serialize
 from cosinnus.models.idea import CosinnusIdea
@@ -67,8 +68,11 @@ from cosinnus.utils.user import check_user_has_accepted_portal_tos,\
 from cosinnus.utils.urls import get_non_cms_root_url as _get_non_cms_root_url
 from django.templatetags.i18n import do_translate, do_block_translate, TranslateNode, BlockTranslateNode
 from cosinnus.utils.html import render_html_with_variables
-from cosinnus.models.managed_tags import CosinnusManagedTag
+from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignment
 from cosinnus.views.ui_prefs import get_ui_prefs_for_user
+from datetime import timedelta
+from django.utils.timezone import now
+from django_otp import user_has_device
 
 logger = logging.getLogger('cosinnus')
 
@@ -152,6 +156,13 @@ def is_superuser(user):
     Template filter to check if a user has admin priviledges or is a portal admin.
     """
     return check_user_superuser(user)
+
+@register.filter
+def is_portal_manager(user):
+    """
+    Template filter to check if a user has manager priviledges on this portal.
+    """
+    return check_user_portal_manager(user)
 
 @register.filter
 def is_portal_admin(user):
@@ -418,6 +429,22 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
                 membership_requests_count += len(pending_ids)
         context['group_requests_json_encoded'] = _escape_quotes(_json.dumps(membership_requests))
         context['group_requests_count'] = membership_requests_count
+
+        conference_application_requests = []
+        conference_application_requests_count = 0
+        admined_group_ids = get_cosinnus_group_model().objects.get_for_user_group_admin_pks(request.user)
+        admined_groups = get_cosinnus_group_model().objects.get_cached(pks=admined_group_ids)
+        for admined_group in admined_groups:
+            pending_ids = CosinnusConferenceApplication.objects.pending_current().filter(conference=admined_group)
+            if len(pending_ids) > 0:
+                conference_application_request_item = DashboardItem()
+                conference_application_request_item['icon'] = 'fa-sitemap' if admined_group.type == get_cosinnus_group_model().TYPE_CONFERENCE else 'fa-group'
+                conference_application_request_item['text'] = escape('%s (%d)' % (admined_group.name, len(pending_ids)))
+                conference_application_request_item['url'] = group_aware_reverse('cosinnus:conference:participation-management-applications', kwargs={'group': admined_group})
+                conference_application_requests.append(conference_application_request_item)
+                conference_application_requests_count += len(pending_ids)
+        context['conference_requests_json_encoded'] = _escape_quotes(_json.dumps(conference_application_requests))
+        context['conference_requests_count'] = conference_application_requests_count
         
         attending_events = []
         try:
@@ -432,6 +459,11 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
         
         # TODO cache the dumped JSON strings?
         
+    return render_to_string(template, context.flatten(), request=request)
+
+
+@register.simple_tag(takes_context=True)
+def cosinnus_footer_v2(context, template="cosinnus/v2/footer.html", request=None):
     return render_to_string(template, context.flatten(), request=request)
 
 
@@ -477,7 +509,7 @@ def cosinnus_render_attached_objects(context, source, filter=None, skipImages=Tr
         Renderer = attached_object_registry.get(model_name)  # Renderer is a class
         if Renderer:
             # pass the list to that manager and expect a rendered html string
-            rendered_output.append(Renderer.render(context, objects, v2Style=v2Style))
+            rendered_output.append(Renderer.render(context, objects, v2Style=v2Style, request=context['request']))
         elif settings.DEBUG:
             rendered_output.append(_('<i>Renderer for %(model_name)s not found!</i>') % {
                 'model_name': model_name
@@ -1032,6 +1064,11 @@ def json(obj):
     return _json.dumps(obj)
 
 @register.filter
+def pretty_json(obj):
+    """ Prints nicely readable JSON. Recommended to use a <pre> tag with this. """
+    return _json.dumps(obj, indent=4)
+
+@register.filter
 def get_membership_portals(user):
     """ Returns all portals a user is a member of """
     return CosinnusPortal.objects.filter(id__in=user.cosinnus_portal_memberships.values_list('group_id', flat=True))
@@ -1123,9 +1160,21 @@ def render_cosinnus_topics_json():
     return mark_safe(_json.dumps(topic_choices))
 
 @register.simple_tag()
+def render_cosinnus_text_topics_json():
+    """ Returns a JSON dict of {<topic-id>: <topic-label-translated>, ...} """
+    text_topic_choices = dict([(top.id, force_text(top.name)) for top in CosinnusTopicCategory.objects.all()])
+    return mark_safe(_json.dumps(text_topic_choices))
+
+@register.simple_tag()
 def render_managed_tags_json():
     """ Returns all managed tags as JSON array of objects"""
-    all_managed_tags = CosinnusManagedTag.objects.all_in_portal_cached()
+    all_managed_tags = CosinnusManagedTag.objects.all_in_portal()
+    if settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_FROM_TYPE_IDS:
+        type_ids = settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_FROM_TYPE_IDS
+        all_managed_tags = all_managed_tags.filter(type__id__in=type_ids)
+    if settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS:
+        tag_slugs = settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS
+        all_managed_tags = all_managed_tags.filter(slug__in=tag_slugs)
     managed_tags_json = [
         {
             'id': tag.id,
@@ -1137,6 +1186,29 @@ def render_managed_tags_json():
         } for tag in all_managed_tags
     ]
     return mark_safe(_json.dumps(managed_tags_json))
+
+
+@register.simple_tag()
+def managed_tags_for_user(user):
+    if hasattr(user, 'cosinnus_profile'):
+        profile_type = ContentType.objects.get(
+                        app_label='cosinnus', model='userprofile')
+        profile = user.cosinnus_profile
+        assignments = CosinnusManagedTagAssignment.objects.filter(
+                        content_type=profile_type.id,
+                        object_id=profile.id).values_list(
+                            'managed_tag__slug', flat=True)
+
+        if settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS:
+            predefined_slugs = \
+                settings.COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS
+            assignments = assignments.filter(
+                managed_tag__slug__in=predefined_slugs)
+
+        managed_tags = CosinnusManagedTag.objects.filter(
+            slug__in=assignments).distinct()
+        return managed_tags
+
 
 @register.simple_tag()
 def get_non_cms_root_url():
@@ -1241,13 +1313,16 @@ def get_user_from_id(id):
 def get_attr(obj, attr_name):
     """ Returns the given attribute object instead of trying to resolve
         it in the template using __getitem__ """
-    return getattr(obj, attr_name)
+    return getattr(obj, attr_name, None)
 
 @register.filter
 def get_item(obj, attr_name):
     """ Returns the given attribute by trying to resolve
         it in the template using __getitem__ """
-    return obj[attr_name]
+    try:
+        return obj[attr_name]
+    except KeyError:
+        return ''
 
 @register.filter
 def get_item_or_none(obj, attr_name):
@@ -1262,6 +1337,19 @@ def get_country_name(country_code):
     from django_countries import countries
     return dict(countries).get(country_code, '(unknown)')
 
+@register.filter
+def get_language_name(language_code):
+    """ Returns the verbose language for a ISO 639-1 language code """
+    import pycountry
+    return _(pycountry.languages.get(alpha_2=language_code).name)
+
+@register.filter
+def get_dynamic_field_value(dynamic_field_key, dynamic_field_name):
+    choices = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.get(dynamic_field_name).choices
+    for choice in choices:
+        if choice[0] == dynamic_field_key:
+            return choice[1]
+
 @register.simple_tag
 def get_setting(name):
     return getattr(settings, name, "")
@@ -1272,7 +1360,11 @@ def parse_datetime(value):
 
 @register.filter
 def stringformat(value, args):
-    return dateutil.parser.parse(value)
+    try:
+        return dateutil.parser.parse(value)
+    except Exception as e:
+        logger.error(f'Exception in cosinnus_tags.py date `stringformat` filter: e', extra={'exception': e})
+        return None
 
 @register.filter
 def listformat(value):
@@ -1323,7 +1415,46 @@ def is_user_active(user):
     return utils_is_user_active(user)
 
 @register.filter
+def user_can_create_groups(user):
+    """ Checks if a user has the necessary permissions to create a CosinnusGroup """
+    return check_user_can_create_groups(user)
+
+@register.filter
 def user_can_create_conferences(user):
-    """ Checks if a user has the necessary permissions to create a CosinnusConference"""
+    """ Checks if a user has the necessary permissions to create a CosinnusConference """
     return check_user_can_create_conferences(user)
 
+@register.filter
+def next_day(datetime_obj):
+    """ Adds a timedelta day=1 to a date/datetime. Usefull for fullcalendars way
+        of considering a full-day event with the end-date on a day to span only to the end of the previous day. """
+    return datetime_obj + timedelta(days=1)
+
+@register.filter
+def older_than_days(datetime_obj, num_days):
+    """ Checks if a given datetime is older than `num_days` than today's date. """
+    return (datetime_obj + timedelta(days=num_days)) <= now()
+
+@register.simple_tag()
+def get_admin_data():
+    """ Returns the portal administrators on the signup page """
+    admins = get_user_model().objects.filter(id__in=CosinnusPortal.get_current().admins)
+    return admins
+
+@register.filter
+def safe_text(text):
+    """ Returns JS-safe text, for use in form-elements that might get re-used in JS. """
+    return convert_html_to_string(text)
+
+@register.filter
+def user_has_otp_device(user):
+    """ Templatefilter to check if the user has an OTP device """
+    return user_has_device(user)
+
+@register.simple_tag()
+def get_forum_group():
+    """ Returns the forum object """
+    forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+    forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
+    return forum_group
+    

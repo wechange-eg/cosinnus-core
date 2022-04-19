@@ -20,6 +20,7 @@ import {Room} from "../../stores/room/models"
 import {EventRoomState} from "../../stores/events/reducer"
 import {Loading} from "../components/Loading"
 import {Header} from "../components/Header"
+import {Notification} from "../components/Notification"
 
 interface LobbyProps {
   events: EventRoomState
@@ -53,6 +54,7 @@ function LobbyConnector (props: LobbyProps & RouteComponentProps) {
     <Grid container>
       <Content>
         <Header />
+        <Notification />
         <Typography component="h1">
           <FormattedMessage id="Agenda" />
         </Typography>

@@ -9,7 +9,7 @@
 
 {% block breadcrumb %}
         {{ block.super }}
-        <li class="active">{% trans "Conference reminders" %}</li>
+        <li class="active">{% trans "Emails to conference participants" %}</li>
 {% endblock %}
 
 {% block content %}
@@ -18,7 +18,7 @@
         <input type="hidden" id="provider" name="provider" value="{{ request.GET.provider }}">
 
         <div class="content-box">
-		<h2 class="large-space">{% trans "Conference reminders" %}</h2>
+		<h2 class="large-space">{% trans "Emails to conference participants" %}</h2>
         <p class="transparent extra-space-bottom">{% blocktrans %}Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference{% endblocktrans %}</p>
 
         {{ form.non_field_errors }}
@@ -134,6 +134,62 @@
                         <ul class="media-list">
                             <li class="media">
                                 <span class="pull-left" href="#" tabindex="-1">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans 'Send test to myself' %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default large-space">
+            <div class="panel-heading">
+                <label for="id_send_immediately" class="cursor-pointer">
+                    <h4 class="panel-title">
+                        {% trans "send immediately" %}
+                    </h4>
+                </label>
+            </div>
+            <div id="collapseSendImmediately" class="panel-collapse">
+                <div class="panel-body">
+                    <label>
+                        {% trans "This email will be sent immediately." %}
+                    </label>
+                    <div class="alert alert-info">
+                        <i class="fa fa-info fa-2x"></i>
+                        {% if immediately_message_last_sent %}
+                        <p>{% blocktrans with date=immediately_message_last_sent %}last instant email was sent on {{ date }} {% endblocktrans %}</p>
+                        {% else %}
+                        <p>{% trans 'no instant email has been sent yet.' %}</p>
+                        {% endif %}
+                    </div>
+                    {# send immediately subject #}
+                    {% trans "Invitation subject" as subject_label %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.send_immediately_subject label=subject_label %}
+
+                    {# send immediately email text #}
+                    {% trans "Invitation text" as content_label %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.send_immediately_content label=content_label legend_selectable=True legend=content_legend large_field=True %}
+                    <button type="submit" class="btn btn-default btn-autosize" name="send" value="send_immediately">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left" href="#" tabindex="-1">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans 'Send immediately' %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                    <button type="submit" class="btn btn-default btn-autosize" name="test" value="send_immediately">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left" tabindex="-1">
                                     <i class="fa fa-envelope"></i>
                                 </span>
                                 <div class="media-body">

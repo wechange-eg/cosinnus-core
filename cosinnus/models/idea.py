@@ -9,7 +9,6 @@ from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.urls import reverse
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 import six
 
@@ -166,7 +165,7 @@ class IdeaManager(models.Manager):
     
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusIdea(IndexingUtilsMixin, LikeableObjectMixin, models.Model):
     # don't worry, the default Portal with id 1 is created in a datamigration
     # there was no other way to generate completely runnable migrations 

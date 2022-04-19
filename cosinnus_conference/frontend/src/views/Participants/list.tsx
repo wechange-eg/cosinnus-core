@@ -1,8 +1,9 @@
 import {
-  Button, CardActionArea, FormControl,
-  Grid, InputLabel, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
+  Avatar, Button, CardHeader, FormControl,
+  Grid, InputLabel, Link, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
   Typography
 } from "@material-ui/core"
+import Alert from '@material-ui/lab/Alert';
 import React, {useEffect, useState} from "react"
 import {connect as reduxConnect} from "react-redux"
 import {RouteComponentProps} from "react-router-dom"
@@ -20,6 +21,7 @@ import {Room} from "../../stores/room/models"
 import {fetchParticipants} from "../../stores/participants/effects"
 import {Participant} from "../../stores/participants/models"
 import {ManageRoomButtons} from "../components/ManageRoomButtons"
+import {Notification} from "../components/Notification"
 
 interface ParticipantsProps {
   participants: Participant[]
@@ -51,17 +53,31 @@ function ParticipantsTable (props: ParticipantsTableProps) {
         <TableHead>
           <TableRow>
             <TableCell><FormattedMessage id="Name" /></TableCell>
-            <TableCell><FormattedMessage id="Organisation" /></TableCell>
+            <TableCell><FormattedMessage id="Organization" /></TableCell>
             <TableCell><FormattedMessage id="Country" /></TableCell>
+            <TableCell><FormattedMessage id="City" /></TableCell>
             <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {participants.map((participant, index) => (
             <TableRow key={index}>
-              <TableCell component="th" scope="row">{participant.getFullName()}</TableCell>
-              <TableCell>{participant.props.organisation}</TableCell>
+              <TableCell component="th" scope="row">
+                  <CardHeader
+                    avatar={
+                      <Avatar
+                        alt={participant.getFullName()}
+                        src={participant.getAvatarUrl()}
+                        variant="square" />
+                    }
+                    title={
+                      <Link href={participant.getProfileUrl()} target="_blank">{participant.getFullName()}</Link>
+                    }
+                  />
+              </TableCell>
+              <TableCell>{participant.props.organization}</TableCell>
               <TableCell>{participant.props.country}</TableCell>
+              <TableCell>{participant.getLocation()}</TableCell>
               <TableCell align="right">
                 <Button
                   variant="contained"
@@ -88,7 +104,7 @@ function ParticipantsTable (props: ParticipantsTableProps) {
 
 function ParticipantsConnector (props: ParticipantsProps & RouteComponentProps) {
   const { participants, fetchParticipants, room } = props
-  const [country, setCountry] = useState("")
+  const [country, setCountry] = useState("-----")
   const classes = useStyles()
   let filteredParticipants: Participant[] = participants
   if (!participants || participants.length == 0) {
@@ -99,23 +115,39 @@ function ParticipantsConnector (props: ParticipantsProps & RouteComponentProps) 
     setCountry(event.target.value)
   }
 
+  function getIframeUrl() {
+    return `/map/embed/?controls_disabled=1&filter_group=${window.conferenceId}&noFullscreen=1`
+  }
+
   const countries: string[] = uniqBy(participants, p => p.props.country).map(p => p.props.country)
-  if (country !== "") {
+  if (country !== "-----") {
     filteredParticipants = participants.filter(p => p.props.country === country)
   }
   return (
     <Grid container>
       <Content>
+        <Notification />
         <Typography component="h1">{room.props.title}</Typography>
+        <iframe src={getIframeUrl()} frameborder="0" width="100%" height="400px"></iframe>
         {room.props.descriptionHtml && (
           <div className="description" dangerouslySetInnerHTML={{__html: room.props.descriptionHtml}} />
         )}
+        <Alert 
+            severity="info"
+            action={
+                <Link className={classes.link} target="_blank" href="/profile/edit/" >
+                  <FormattedMessage id="Edit Profile" />
+                </Link>
+            }>
+            <FormattedMessage id="Your profile is not shown here or not displayed correctly? Add to your profile or make yourself visible to other conference participants." />
+        </Alert>
         <FormControl className={classes.formControl}>
           <InputLabel><FormattedMessage id="Filter by country" /></InputLabel>
           <Select
             value={country}
             onChange={handleCountryChange}
           >
+            <MenuItem value={'-----'}><FormattedMessage id="Filter by country" /></MenuItem>
             {countries.map((country) => (
               <MenuItem key={country} value={country}>{country}</MenuItem>
             ))}

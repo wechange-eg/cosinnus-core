@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import six
+
 from builtins import object
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusMicropage(models.Model):
     
     group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, related_name='micropages',

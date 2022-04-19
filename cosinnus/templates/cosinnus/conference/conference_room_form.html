@@ -6,7 +6,7 @@
     {% if not object and request.GET.description %}
 	    {% captureas description_value %}{{ request.GET.description }}{% endcaptureas %}
 	{% endif %}
-    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.description.id_for_label value=description_value %}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.description.id_for_label value=description_value translation_form=form translated_field_name=form.description.html_name %}
 {% endblock %}
 
 {% block page_title %}
@@ -58,7 +58,7 @@
                     <p class="textfield transparent">{% trans "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here." %}</p>
                 </div>
                 <div class="room-type-selector room-type-selector-1">
-                    <p class="textfield transparent">{% trans "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it." %}</p>
+                    <p class="textfield transparent">{% trans "The Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it." %}</p>
                 </div>
                 <div class="room-type-selector room-type-selector-2">
                     <p class="textfield transparent">{% trans "In Workshops each event has a video conference. Presenters are allowed to moderate those." %}</p>
@@ -97,19 +97,26 @@
             {% endcaptureas %}
             {% include 'cosinnus/fields/default_field.html' with field=form.type label=type_label extra_html=type_description_html %}
             
-            <div class="room-type-selector room-type-selector-4">
-                {% comment %} Maximum table users Field {% endcomment %}
-                {% trans "Maximum Coffee Table Participants" as max_label %}
-                {% trans "How many participants should can join one coffee table before it is full" as max_legend %}
-                {% include 'cosinnus/fields/default_field.html' with field=form.max_coffeetable_participants label=max_label legend=max_legend %}
-                
-                {% comment %} Allow user Field {% endcomment %}
-                {% comment %} Disabled this option as the frontend isn't implemented
-                {% trans "Allow users to create new coffee tables" as allow_label %}
-                {% trans "Enable this to allow users to create their own coffee tables" as allow_legend %}
-                {% include 'cosinnus/fields/checkbox_field.html' with field=form.allow_user_table_creation label=allow_label legend=allow_legend checkbox_label=allow_label %}
-                 {% endcomment %}
-            </div>
+            {% comment %} The max_coffeetable_participants field is disabled in ConferenceRooms for now and only shows in ConferenceEvents! {% endcomment %}
+            {% if False %}
+	            <div class="room-type-selector room-type-selector-4">
+	                {% comment %} Maximum table users Field {% endcomment %}
+	                {% trans "Maximum Coffee Table Participants" as max_label %}
+	                {% trans "How many participants should can join one coffee table before it is full" as max_legend %}
+	                {% include 'cosinnus/fields/default_field.html' with field=form.max_coffeetable_participants label=max_label legend=max_legend %}
+	                
+	                <p>
+	                    <i class="fas fa-exclamation-triangle"></i>
+	                    {% trans "Attention: The visible update of the free seats is still work in progress. Therefore, we recommend not to use the limitation of individual coffee tables, so as not to let the virtual coffee go cold while searching for free seats." %}
+	                </p>
+	                {% comment %} Allow user Field {% endcomment %}
+	                {% comment %} Disabled this option as the frontend isn't implemented
+	                {% trans "Allow users to create new coffee tables" as allow_label %}
+	                {% trans "Enable this to allow users to create their own coffee tables" as allow_legend %}
+	                {% include 'cosinnus/fields/checkbox_field.html' with field=form.allow_user_table_creation label=allow_label legend=allow_legend checkbox_label=allow_label %}
+	                 {% endcomment %}
+	            </div>
+            {% endif %}
             
             <div class="room-type-selector room-type-selector-5">
                 {% comment %} Target project Field {% endcomment %}
@@ -122,35 +129,50 @@
             
             {% comment %} Title Field {% endcomment %}
             {% trans "Title" as title_label %}
-            {% include 'cosinnus/fields/default_field.html' with field=form.title label=title_label placeholder=title_label first=True %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.title label=title_label placeholder=title_label first=True translation_form=form %}
             
             {% comment %} Sort Field {% endcomment %}
             {% trans "Sort index" as sort_label %}
             {% trans "Number by which rooms are sorted in ascending order in the conference room navigation list" as sort_legend %}
             {% include 'cosinnus/fields/default_field.html' with field=form.sort_index label=sort_label legend=sort_legend %}
             
-	        {% comment %} SimpleMDE Description Field (gets initialized in extrahead) {% endcomment %}                                  
+	        {% comment %} SimpleMDE Description Field (gets initialized in extrahead) {% endcomment %}
             {% trans "Description" as description_label %}
             {% captureas description_placeholder %}{% trans "A short description or topic for your room. Will be shown on top of the room page." %}{% endcaptureas %}
-            {% include 'cosinnus/fields/default_field.html' with field=form.description label=description_label legend=description_placeholder placeholder=description_placeholder large_field=True %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.description label=description_label legend=description_placeholder placeholder=description_placeholder large_field=True translation_form=form %}
 
             {% comment %} Visibility Field {% endcomment %}
             {% trans "Room is visible" as vis_label %}
             {% trans "Uncheck this to hide the room for participants (you will still be able to see it)" as vis_legend %}
             {% include 'cosinnus/fields/checkbox_field.html' with field=form.is_visible label=vis_label legend=vis_legend checkbox_label=vis_label %}
-
-            {% comment %} Show chat {% endcomment %}
-	        {% trans "Show chat" as show_chat_label %}
-	        {% trans "Check this to show rocket chat in the sidebar." as show_chat_legend %}
-            {% include 'cosinnus/fields/checkbox_field.html' with field=form.show_chat label=show_chat_label legend=show_chat_legend checkbox_label=show_chat_label %}
+            
+            {% if SETTINGS.COSINNUS_ROCKET_ENABLED %}
+	            {% comment %} Show chat {% endcomment %}
+		        {% trans "Show chat" as show_chat_label %}
+		        {% trans "Check this to show rocket chat in the sidebar." as show_chat_legend %}
+	            {% include 'cosinnus/fields/checkbox_field.html' with field=form.show_chat label=show_chat_label legend=show_chat_legend checkbox_label=show_chat_label %}
+	        {% endif %}
+	        
+	        {% if SETTINGS.BBB_PRESET_USER_FORM_FIELDS %}
+		        <div class="room-type-selector room-type-selector-2 room-type-selector-3 room-type-selector-4">
+	                <div class="cosinnus-field ">
+	                    <label>{% trans "BBB video conference options" %}</label>
+	                    <div class="field-description no-select">
+	                        {% trans "These settings will be the default for all conference events in this room." %}
+	                        {% trans "You may still override these options in each individual event." %}
+	                    </div>
+	                    {% include 'cosinnus/conference/conference_settings_formfields.html' with form=form %}
+	                </div>
+	            </div>
+            {% endif %}
         </div>
 	    
 	    <button type="submit" class="btn btn-emphasized">
 	        <ul class="media-list">
 	            <li class="media">
-	                <a class="pull-left" href="#">
+	                <span class="pull-left">
 	                    <i class="fa fa-check"></i>
-	                </a>
+	                </span>
 	                <div class="media-body">
                         {% trans "Save" %}
 	                </div>

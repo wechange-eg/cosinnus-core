@@ -15,9 +15,11 @@ export const useStyles = makeStyles((theme) => ({
     border: "none",
     color: "#c3bdde",
     marginTop: "50px",
+    height: "calc(100% - 50px)",
+    overflowX: "hidden",
     width: navWidth,
     zIndex: 1,
-    padding: "1.5rem 1rem 1.5rem 1.5rem",
+    padding: "1.5rem 1rem 0.5rem 1.5rem",
     [theme.breakpoints.down('sm')]: {
       width: "100%",
       position: "static",
@@ -26,11 +28,11 @@ export const useStyles = makeStyles((theme) => ({
   },
   drawerHeader: {
     marginBottom: "2rem",
+    wordBreak: "break-word",
     "& h3": {
       fontWeight: 700,
-      color: "#ffffff",
-      textTransform: "uppercase",
-      fontSize: "1.4rem",
+      color: theme.palette.text.secondary,
+      fontSize: "1.3rem",
       marginBottom: "1rem"
     },
     "& h4": {
@@ -55,10 +57,13 @@ export const useStyles = makeStyles((theme) => ({
       fontSize: "1rem",
     },
     "& p": {
-      color: theme.palette.primary.light,
+      color: theme.palette.text.primary,
+    },
+    "& span,svg": {
+      color: theme.palette.text.secondary,
     },
     "&:hover,&.Mui-selected,&.Mui-selected:hover": {
-      background: "#ffffff",
+      background: theme.palette.text.secondary,
       "& span,svg": {
         color: theme.palette.primary.main,
       },
@@ -80,7 +85,12 @@ export const useStyles = makeStyles((theme) => ({
       fontWeight: 300,
       fontSize: ".8rem",
       right: ".5rem",
-      color: theme.palette.primary.light
+      color: theme.palette.text.secondary
+    },
+    "&:hover,&.Mui-selected,&.Mui-selected:hover": {
+      "& span": {
+        color: theme.palette.text.secondary
+      },
     }
   },
   toggleMenuButton: {
@@ -88,7 +98,7 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.light,
     marginTop: "1rem",
     display: "block",
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       display: "none"
     },
   },
@@ -105,5 +115,12 @@ export const useStyles = makeStyles((theme) => ({
       width: "50%",
       margin: "0 auto 1rem"
     },
+  },
+  divider: {
+    margin: "15px 0",
+    border: "0",
+    borderTop: "1px solid",
+    borderTopColor: theme.palette.text.secondary,
+    boxSizing: "inherit",
   }
 }));

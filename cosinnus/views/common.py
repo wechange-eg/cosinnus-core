@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from annoying.functions import get_object_or_None
 from bs4 import BeautifulSoup
 from django.apps import apps
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, logout
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.contenttypes.models import ContentType
@@ -17,7 +17,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _, LANGUAGE_SESSION_KEY
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import RedirectView
-from django.views.generic.base import View
+from django.views.generic.base import View, TemplateView
 import requests
 
 from cosinnus.conf import settings
@@ -29,6 +29,8 @@ from cosinnus.utils.permissions import check_object_write_access, \
     check_object_likefollowstar_access
 from cosinnus.utils.urls import safe_redirect
 from cosinnus.views.mixins.group import RequireCreateObjectsInMixin
+from django.shortcuts import redirect
+from cosinnus.views.user import send_user_email_to_verify
 
 
 class IndexView(RedirectView):
@@ -76,26 +78,40 @@ def view_500(request):
     return HttpResponseServerError(content)
 
 
+class GenericErrorPageView(TemplateView):
+    """ Displays a simple error page, listing all attributed supplied as GET param. """
+    
+    template_name = 'cosinnus/conference/error_page.html'
+
+generic_error_page_view = GenericErrorPageView.as_view()
+
+
 class SwitchLanguageView(RedirectView):
-    
+
     permanent = False
-    
+
     def get(self, request, *args, **kwargs):
         language = kwargs.pop('language', None)
-        
+
         if not language or language not in list(dict(settings.LANGUAGES).keys()):
             messages.error(request, _('The language "%s" is not supported' % language))
         else:
-            request.session[LANGUAGE_SESSION_KEY] = language
-            request.session['django_language'] = language
-            request.LANGUAGE_CODE = language
-        #messages.success(request, _('Language was switched successfully.'))
-        
-        return super(SwitchLanguageView, self).get(request, *args, **kwargs)
-        
+            response = super(SwitchLanguageView, self).get(request, *args, **kwargs)
+            response.set_cookie(
+                settings.LANGUAGE_COOKIE_NAME,
+                language,
+                max_age=settings.LANGUAGE_COOKIE_AGE,
+                path=settings.LANGUAGE_COOKIE_PATH,
+                domain=settings.LANGUAGE_COOKIE_DOMAIN,
+                secure=settings.LANGUAGE_COOKIE_SECURE,
+                httponly=settings.LANGUAGE_COOKIE_HTTPONLY,
+                samesite=settings.LANGUAGE_COOKIE_SAMESITE,
+            )
+        return response
+
     def get_redirect_url(self, **kwargs):
         return safe_redirect(self.request.GET.get('next', self.request.META.get('HTTP_REFERER', '/')), self.request)
-        
+
 
 switch_language = SwitchLanguageView.as_view()
 
@@ -109,7 +125,20 @@ def cosinnus_login(request, **kwargs):
         kwargs['template_name'] = 'cosinnus/registration/login_sso_provider.html'
     
     response = LoginView.as_view(**kwargs)(request)  #login(request, **kwargs)
+    
     if request.method == 'POST' and request.user.is_authenticated:
+        # for email-verified-locked portals, "belatedly" refuse the login for users who haven't got their email verified
+        if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN \
+                and CosinnusPortal.get_current().email_needs_verification and not request.user.cosinnus_profile.email_verified:
+            # send user another verification email
+            send_user_email_to_verify(request.user, request.user.email, request)
+            msg = _('New verification email sent!')
+            msg += '\n\n' + _('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.')
+            msg += '\n\n' + _('We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email.')
+            messages.warning(request, msg)
+            logout(request)
+            return redirect('login')
+        
         response.set_cookie('wp_user_logged_in', 1, 60*60*24*30) # 30 day expiry
     return response
 
@@ -220,6 +249,8 @@ def do_likefollowstar(request, **kwargs):
     like = PARAM_VALUE_MAP.get(request.POST.get('like', None), UNSPECIFIED)
     follow = PARAM_VALUE_MAP.get(request.POST.get('follow', None), UNSPECIFIED)
     star = PARAM_VALUE_MAP.get(request.POST.get('star', None), UNSPECIFIED)
+    # all_deselect indicates the user only wants to unfollow/unstar/unlike
+    all_deselect = all([param in (False, UNSPECIFIED,) for param in (like, follow, star,)])
     
     if ct is None or (id is None and slug is None) or (like is UNSPECIFIED and follow is UNSPECIFIED and star is UNSPECIFIED):
         return HttpResponseBadRequest('Incomplete data submitted.')
@@ -249,7 +280,8 @@ def do_likefollowstar(request, **kwargs):
     if obj is None:
         return HttpResponseNotFound('Target object not found on server.')
     
-    if not check_object_likefollowstar_access(obj, request.user):
+    # unfollow/unstar/unlike is always allowed, even if the user's permissions changed
+    if not all_deselect and not check_object_likefollowstar_access(obj, request.user):
         return HttpResponseForbidden('Your access to this object is forbidden.')
     
     was_liked, was_followed, was_starred = apply_likefollowstar_object(obj, request.user, like=like, follow=follow, star=star)

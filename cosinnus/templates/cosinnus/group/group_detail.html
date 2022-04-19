@@ -38,7 +38,7 @@
 	    	{% include 'cosinnus/common/internet_explorer_not_supported.html' %}
 	    
 			{% captureas map_settings %}{"filterGroup": {{ group.id }}, "controlsEnabled": false, "activeFilters": {"groups": false, "events": false, "projects": {% if group.type == 1 %}true{% else %}false{% endif %}, "people": true}, "availableFilters": {"groups": true, "events": true, "projects": true, "people": true}}{% endcaptureas %}
-			{% include 'cosinnus/common/init_client_module.html' with module='module-embed' id=""|add_uuid height=400 settings=map_settings %}
+			{% include 'cosinnus/common/init_client_module.html' with module='module-embed' id=""|add_uuid embed=True height=400 settings=map_settings %}
 	        <div class="clearfix"></div>
 	    </div>
     {% endif %}
@@ -50,7 +50,7 @@
         <a class="anchor" id="invite"></a>
         
         
-        {% if group.group_is_conference and group.use_conference_applications %}
+        {% if user|has_write_access:object and group.group_is_conference and group.use_conference_applications %}
             <div class="panel panel-default large-space">
                 <div class="panel-heading">
                     <h4 class="panel-title" data-toggle="collapse" data-target="#collapseFive">
@@ -71,9 +71,9 @@
 		                         class="btn btn-emphasized btn-autosize no-margin pull-left" title="{% trans "Manage applications" %}">
 					        <ul class="media-list">
 					            <li class="media">
-					                <a class="pull-left" href="#">
+					                <span class="pull-left">
 					                    <i class="fas fa-user-friends"></i>
-					                </a>
+					                </span>
 					                <div class="media-body">
 					                    {% trans "Manage applications" %}
 					                </div>
@@ -112,9 +112,9 @@
 								<button type="submit" class="btn btn-emphasized btn-autosize large-space">
 									<ul class="media-list">
 										<li class="media">
-											<a class="pull-left" href="#">
+											<span class="pull-left">
 												<i class="fa fa-check"></i>
-											</a>
+											</span>
 											<div class="media-body">
 												{% trans "Invite groups" %}
 											</div>
@@ -129,12 +129,12 @@
 					
 				                {% for group in invited_groups %}
 				                    <div class="regular-space">
-				                        <div class="btn btn-default w100">
+				                        <div class="btn btn-default w100" href="{{ group.get_absolute_url }}">
 				                            <ul class="media-list">
 				                                <li class="media">
-				                                    <a class="pull-left" href="{{ group.get_absolute_url }}">
+				                                    <span class="pull-left">
 				                                        <i class="fas fa-fw fa-group"></i>
-				                                    </a>
+				                                    </span>
 				                                    {% comment %}
 				                                        Revoke group invite button removed for now, as it would give the impression
 				                                        of being an "undo" button, while all invititations that have already been 
@@ -145,9 +145,9 @@
 					                                            data-toggle="modal" data-target="#{{modal_group_revoke_id}}" title="{% trans "Revoke Invitation" %}">
 					                                            <ul class="media-list">
 					                                                <li class="media">
-					                                                    <a class="pull-left" href="#">
+					                                                    <span class="pull-left">
 					                                                        <i class="fa fa-close"></i>
-					                                                    </a>
+					                                                    </span>
 					                                                </li>
 					                                            </ul>
 					                                    </button>
@@ -208,9 +208,9 @@
 					                <button type="submit" class="btn btn-emphasized btn-autosize large-space">
 					                    <ul class="media-list">
 					                        <li class="media">
-					                            <a class="pull-left" href="#">
+					                            <span class="pull-left">
 					                                <i class="fa fa-check"></i>
-					                            </a>
+					                            </span>
 					                            <div class="media-body">
 					                                {% trans "Invite users" %}
 					                            </div>
@@ -244,9 +244,9 @@
 				                                                         data-toggle="modal" data-target="#{{modal_revoke_id}}" title="{% trans "Revoke Invitation" %}">
 				                                                    <ul class="media-list">
 				                                                        <li class="media">
-				                                                            <a class="pull-left" href="#">
+				                                                            <span class="pull-left">
 				                                                                <i class="fa fa-close"></i>
-				                                                            </a>
+				                                                            </span>
 				                                                        </li>
 				                                                    </ul>
 				                                                </button>
@@ -259,9 +259,9 @@
 				                                                         data-toggle="modal" data-target="#{{modal_decline_invitation_id}}" title="{% trans "Decline Invitation" %}">
 				                                                    <ul class="media-list">
 				                                                        <li class="media">
-				                                                            <a class="pull-left" href="#">
+				                                                            <span class="pull-left">
 				                                                                <i class="fa fa-close"></i>
-				                                                            </a>
+				                                                            </span>
 				                                                        </li>
 				                                                    </ul>
 				                                                </button>
@@ -270,9 +270,9 @@
 				                                                    <button type="submit" class="btn btn-emphasized">
 				                                                        <ul class="media-list">
 				                                                            <li class="media">
-				                                                                <a class="pull-left" href="#">
+				                                                                <span class="pull-left">
 				                                                                    <i class="fa fa-sign-in"></i>
-				                                                                </a>
+				                                                                </span>
 				                                                                <div class="media-body">
 				                                                                    {% trans "Accept Invitation" %}
 				                                                                </div>
@@ -329,7 +329,7 @@
 	        {% endif %}
 	        
 	        {% if SETTINGS.COSINNUS_USER_SIGNUP_ENABLED %}
-		        {% if user in admins or user|is_superuser or recruited %}
+		        {% if user in admins or user_is_superuser or recruited %}
 		
 			        <div class="panel panel-default large-space">
 			            <div class="panel-heading">
@@ -349,7 +349,7 @@
 			        
 						        {% comment %} -------- Recruit Box and list of recruitees -------- {% endcomment %}
 						        
-						        {% if user in admins or user|is_superuser %}
+						        {% if user in admins or user_is_superuser %}
 						            <div class="clearfix large-space"></div>
 						        
 						            <legend>{% trans "Invite People to Register and Join" %}</legend>
@@ -357,9 +357,9 @@
 						            <button type="submit" class="btn btn-emphasized btn-autosize btn-left" data-toggle="modal" data-target="#modal-recruit-users">
 						                <ul class="media-list">
 						                    <li class="media">
-						                        <a class="pull-left" href="#">
+						                        <span class="pull-left">
 						                            <i class="fa fa-user-plus"></i>
-						                        </a>
+						                        </span>
 						                        <div class="media-body">
 						                            {% trans "Invite people" %}
 						                        </div>
@@ -379,7 +379,7 @@
 						        {% endif %}
 						        
 						        {% if recruited %}
-						            {% if user in admins or user|is_superuser %}        
+						            {% if user in admins or user_is_superuser %}        
 						                <legend>{% trans "All currently invited people" %}</legend>
 						            {% else %}
 						                <legend>{% trans "People currently invited by you" %}</legend>
@@ -391,14 +391,14 @@
 							                <div class="btn btn-default w100 regular-space">
 						                        <ul class="media-list">
 						                            <li class="media">
-				                                        {% if user == recruitation.invited_by or user in admins or user|is_superuser %}
+				                                        {% if user == recruitation.invited_by or user in admins or user_is_superuser %}
 				                                            <button type="button" class="btn btn-emphasized btn-icon-only pull-right" 
 		                                                             data-toggle="modal" data-target="#{{modal_id}}" title="{% trans "Delete invitation" %}">
 		                                                        <ul class="media-list">
 		                                                            <li class="media">
-		                                                                <a class="pull-left" href="#">
+		                                                                <span class="pull-left">
 		                                                                    <i class="fa fa-trash"></i>
-		                                                                </a>
+		                                                                </span>
 		                                                            </li>
 		                                                        </ul>
 		                                                    </button>
@@ -406,9 +406,9 @@
 		                                                    <button data-email="{{ recruitation.email }}" type="button" class="btn btn-emphasized btn-icon-only pull-right button-add-email" title="{% trans "Resend invitation" %}">
 		                                                        <ul class="media-list">
 		                                                            <li class="media">
-		                                                                <a class="pull-left" href="#">
+		                                                                <span class="pull-left">
 		                                                                    <i class="fa fa-refresh"></i>
-		                                                                </a>
+		                                                                </span>
 		                                                            </li>
 		                                                        </ul>
 		                                                    </button>
@@ -433,7 +433,7 @@
 						                            </li>
 						                        </ul>
 						                    </div>
-						                    {% if user == recruitation.invited_by or user in admins or user|is_superuser %}
+						                    {% if user == recruitation.invited_by or user in admins or user_is_superuser %}
 						                        {% captureas label %}{% blocktrans with title=recruitation.email %}Do you really want to delete the invitation for "{{ title }}"?{% endblocktrans %}{% endcaptureas %}
 						                        {% captureas title %}{% trans "Delete invitation" %}{% endcaptureas %}
 						                        {% captureas action %}{% group_url 'cosinnus:group-user-recruit-delete' group=group id=recruitation.id %}{% endcaptureas %}
@@ -510,9 +510,9 @@
 		                                                             data-toggle="modal" data-target="#{{modal_kick_id}}" title="{% trans "Decline User" %}">
 		                                                        <ul class="media-list">
 		                                                            <li class="media">
-		                                                                <a class="pull-left" href="#">
+		                                                                <span class="pull-left">
 		                                                                    <i class="fa fa-close"></i>
-		                                                                </a>
+		                                                                </span>
 		                                                            </li>
 		                                                        </ul>
 		                                                    </button>
@@ -521,9 +521,9 @@
 		                                                             data-toggle="modal" data-target="#{{modal_promote_id}}" title="{% trans "Accept User" %}">
 		                                                        <ul class="media-list">
 		                                                            <li class="media">
-		                                                                <a class="pull-left" href="#">
+		                                                                <span class="pull-left">
 		                                                                    <i class="fa fa-check"></i>
-		                                                                </a>
+		                                                                </span>
 		                                                            </li>
 		                                                        </ul>
 		                                                    </button>
@@ -580,7 +580,10 @@
                 <h4 class="panel-title {% if request.GET.invite %}collapsed{% endif %}" data-toggle="collapse" data-target="#collapseThree">
                     <i class="fa fa-chevron-down panel-collapsed"></i>
                     <i class="fa fa-chevron-up panel-open"></i>
-                    {% trans "Current Members" %} ({{ members|length }})
+                    {% trans "Current Members" %} ({{ member_count }})
+                    {% if user_is_superuser and inactive_member_count %}
+	                    (+{{ inactive_member_count }} {% trans "inactive" %})
+	                {% endif %}
                 </h4>
             </div>
             <div id="collapseThree" class="panel-collapse {% if request.GET.invite %}collapse{% else %}in{% endif %}">
@@ -602,7 +605,13 @@
 					            </ul>
 					        </div>
 				        {% endif %}
-				        <legend>{% trans "Members" %}{% if member_count %} ({{ member_count }}){% endif %}</legend>
+				        <legend>
+				            {% trans "Members" %}
+			                {% if member_count %} ({{ member_count }}){% endif %}
+			                {% if user_is_superuser and inactive_member_count %}
+			                    (+{{ inactive_member_count }} {% trans "inactive" %})
+			                {% endif %}
+		                </legend>
 			        </div>
 			        <div class="clearfix"></div>
 			        {% endif %}
@@ -614,9 +623,9 @@
 				                <div class="btn btn-{% if member_active %}emphasized{% else %}default{% endif %} w100">
 				                    <ul class="media-list">
 				                        <li class="media">
-				                            <span class="pull-left" href="{{ member|profile_url }}">
+				                            <a class="pull-left" href="{{ member|profile_url }}">
 				                                {% include "cosinnus/user/user_avatar_image.html" with user=member %}
-				                            </span>
+				                            </a>
 				                            {% if user|has_write_access:object %}
 				                            <a class="pull-right fadedown-clickarea" href="#">
 				                                <i class="fa fa-chevron-down"></i>
@@ -655,9 +664,9 @@
 					                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_kick_id}}">
 					                        <ul class="media-list">
 					                            <li class="media">
-					                                <a class="pull-left" href="#">
+					                                <span class="pull-left">
 					                                    <i class="fa fa-eraser"></i>
-					                                </a>
+					                                </span>
 					                                <div class="media-body">
 					                                    {% trans "Kick" %}
 					                                </div>
@@ -668,9 +677,9 @@
 					                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_promote_id}}">
 					                        <ul class="media-list">
 					                            <li class="media">
-					                                <a class="pull-left" href="#">
+					                                <span class="pull-left">
 					                                    <i class="fa fa-group"></i>
-					                                </a>
+					                                </span>
 					                                <div class="media-body">
 					                                    {% if member in admins %}
 					                                        {% trans "Make Member" %}
@@ -715,9 +724,9 @@
 			            <div class="btn btn-default w100">
 			                <ul class="media-list">
 			                    <li class="media">
-			                        <a class="pull-left" href="#">
+			                        <span class="pull-left">
 			                            <img src="{% static 'images/jane-doe.png' %}" />
-			                        </a>
+			                        </span>
 			                        <div class="media-body">
 			                            {% blocktrans with hidden_count=hidden_user_count %}And {{ hidden_count }} private users...{% endblocktrans %}
 			                        </div>

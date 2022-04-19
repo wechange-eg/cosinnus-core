@@ -4,27 +4,56 @@
 {% block page_title %}{% trans "Simple Statistics" %}{% endblock %}
 
 {% block leftnav %}
-	<div type="button" class="btn w100 btn-appnavi btn-no-interact regular-space">
+	<button type="button" class="btn w100 btn-emphasized large-space" href="#">
 	    <ul class="media-list">
 	        <li class="media">
-	        	<a class="pull-left" href="#">
-                </a>
-                <a class="pull-left" href="#">
-                    <i class="fa fa-table"></i>
-                </a>
+	           <span class="pull-left">
+	                <i class="fa fa-table"></i>
+	            </span>
 	            <div class="media-body">
                     {% trans "CSV Downloads" %}
 	            </div>
 	        </li>
 	    </ul>
-	</div>
+	</button>
+
+	{% if request.user|is_superuser %}
+		<button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:housekeeping-portal-switches-and-settings' %}">
+			<ul class="media-list">
+				<li class="media">
+				<span class="pull-left">
+						<i class="fa fa-download"></i>
+					</span>
+					<div class="media-body">
+						{% trans "Portal switches and settings" %}
+					</div>
+				</li>
+			</ul>
+		</button>
+	{% endif %}
+
+	{% if SETTINGS.COSINNUS_CONFERENCES_ENABLED %}
+	    <button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:housekeeping-conference-storage-report' %}">
+	        <ul class="media-list">
+	            <li class="media">
+	               <span class="pull-left">
+	                    <i class="fa fa-download"></i>
+	                </span>
+	                <div class="media-body">
+	                    {% trans "HD space used by conferences" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+	
+	{% endif %}
 	
 	<button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:housekeeping-group-storage-report' %}">
 	    <ul class="media-list">
 	        <li class="media">
-	           <a class="pull-left">
+	           <span class="pull-left">
 	                <i class="fa fa-download"></i>
-	            </a>
+	            </span>
 	            <div class="media-body">
                     {% trans "HD space used by groups" %}
 	            </div>
@@ -35,9 +64,9 @@
 	<button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:housekeeping-project-storage-report' %}">
 	    <ul class="media-list">
 	        <li class="media">
-	           <a class="pull-left">
+	           <span class="pull-left">
 	                <i class="fa fa-download"></i>
-	            </a>
+	            </span>
 	            <div class="media-body">
                     {% trans "HD space used by projects" %}
 	            </div>
@@ -48,9 +77,9 @@
 	<button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:housekeeping-user-activity-info' %}">
         <ul class="media-list">
             <li class="media">
-               <a class="pull-left">
+               <span class="pull-left">
                     <i class="fa fa-download"></i>
-                </a>
+                </span>
                 <div class="media-body">
                     {% trans "User statistics (min 1x logged in)" %}
                 </div>
@@ -58,27 +87,28 @@
         </ul>
     </button>
     
-    <button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:simple-statistics-bbb-room-visits' %}">
-        <ul class="media-list">
-            <li class="media">
-               <a class="pull-left">
-                    <i class="fa fa-download"></i>
-                </a>
-                <div class="media-body">
-                    {% trans "BBB Room Visits" %}
-                </div>
-            </li>
-        </ul>
-    </button>
+    {% if SETTINGS.COSINNUS_CONFERENCES_ENABLED and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+	    <button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:simple-statistics-bbb-room-visits' %}">
+	        <ul class="media-list">
+	            <li class="media">
+	               <span class="pull-left">
+	                    <i class="fa fa-download"></i>
+	                </span>
+	                <div class="media-body">
+	                    {% trans "BBB Room Visits" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+    {% endif %}
     
-    
-    {% if SETTINGS.COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS %}
+    {% if SETTINGS.COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS and request.user|is_superuser %}
 	    <button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:housekeeping-newsletter-user-emails' %}">
 	        <ul class="media-list">
 	            <li class="media">
-	               <a class="pull-left">
+	               <span class="pull-left">
 	                    <i class="fa fa-download"></i>
-	                </a>
+	                </span>
 	                <div class="media-body">
                         {% trans "E-Mails of all newsletter subcribers" %}
 	                </div>
@@ -89,9 +119,9 @@
 	    <button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:housekeeping-active-user-emails' %}">
 	        <ul class="media-list">
 	            <li class="media">
-	               <a class="pull-left">
+	               <span class="pull-left">
 	                    <i class="fa fa-download"></i>
-	                </a>
+	                </span>
 	                <div class="media-body">
 	                    {% trans "E-Mails of ALL active users" %}
 	                </div>
@@ -125,72 +155,23 @@
         <!-- a box with semi transparent background -->
         <div class="content-box">
         
-	        <h1>Simple Statistics (only visible for Admins)</h1>
+	        <h1>{% trans "Simple Statistics" %}</h1>
 	        
-	        <div>Select the date range for which you would like statistics</div>
-	        
+	        <div>{% trans "Select the date range for which you would like statistics" %}</div>
 	        
 	        {% trans "Date" as date_label %}
-	        {% captureas date_html %}
-	            {{ form.from_date.errors }}
-	            {{ form.to_date.errors }}
-	            <ol class="input-area">
-	                <li class="calendar-date-time-chooser">
-	                    {% trans "From" %} <i class="fa fa-calendar"></i>
-	                    <input
-	                        placeholder="{% trans "Date" %}"
-	                        readonly ="readonly"
-	                        class="calendar-date-time-chooser-date" />
-	                    <input class="calendar-date-time-chooser-hiddendate" id="id_from_date_0" name="from_date_0" 
-	                        placeholder="{% trans "Start date." %}" type="hidden" 
-	                        {% if form.from_date.value|date:"Y-m-d" %}
-	                        value="{{ form.from_date.value|date:"Y-m-d" }}" 
-	                        {% else %}
-	                        value="{% now "Y-m-d" %}" 
-	                        {% endif %}
-	                    >
-	                    <input class="calendar-date-time-chooser-time" id="id_from_date_1" name="from_date_1" 
-	                        placeholder="{% trans "Time" %}" type="text" 
-	                        value="00:00" 
-	                        style="display: none;"
-	                    >                                           
-	                    <div class="small-calendar"></div>
-	                </li>
-	                <li class="calendar-date-time-chooser">
-	                    {% trans "Until" %} <i class="fa fa-calendar"></i>
-	                    <input
-	                        placeholder="{% trans "Date" %}"
-	                        readonly ="readonly"
-	                        class="calendar-date-time-chooser-date" />
-	                    <input class="calendar-date-time-chooser-hiddendate" id="id_to_date_0" name="to_date_0" 
-	                        placeholder="{% trans "End date." %}" type="hidden" 
-	                        {% if form.to_date.value|date:"Y-m-d" %}
-	                        value="{{ form.to_date.value|date:"Y-m-d" }}" 
-	                        {% else %}
-	                        value="{% now "Y-m-d" %}" 
-	                        {% endif %}
-	                    >
-	                    <input class="calendar-date-time-chooser-time" id="id_to_date_1" name="to_date_1" 
-	                        placeholder="{% trans "Time" %}" type="text" 
-	                        value="23:59" 
-	                        style="display: none;"
-	                    >    
-	                    <div class="small-calendar"></div>
-	                </li>
-	            </ol>
-	        {% endcaptureas %}
-	        {% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label label=date_label large_field=True %} 
+	        {% include 'cosinnus/fields/from_to_date_field.html' with from_date_field=form.from_date to_date_field=form.to_date label=date_label%} 
         </div>
         
         
         <button type="submit" class="btn btn-emphasized">
 	        <ul class="media-list">
 	            <li class="media">
-	                <a class="pull-left" href="#">
+	                <span class="pull-left">
 	                    <i class="fa fa-pencil"></i>
-	                </a>
+	                </span>
 	                <div class="media-body">
-	                      {% trans "Ok" %}
+	                      {% trans "OK" %}
 	                </div>
 	            </li>
 	        </ul>
@@ -215,4 +196,3 @@
     {% endif %}
     
 {% endblock %}
-

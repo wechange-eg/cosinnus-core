@@ -5,21 +5,11 @@
     <div type="button" href="{{ group.get_absolute_url }}" class="btn btn-emphasized dashboard-appwidget-contentline">
         <ul class="media-list fine-space">
             <li class="media">
-                <a class="pull-left" href="{{ group.get_absolute_url }}">
+                <span class="pull-left">
                     {% include "cosinnus/group/group_avatar_image.html" with group=group %}
-                </a>
+                </span>
                 <div class="media-body">
                     <a href="{{ group.get_absolute_url }}">{{ group.name }}</a>
-                    <div class="group-annotation">
-                            <i class="fa fa-info"></i>
-                            {% if group.description_long %}
-                            	{{ group.description_long }}
-                            {% elif group.description %}
-                            	{{ group.description }}
-                            {% else %}
-                            	<i>{% trans "No Description set" %}</i>
-                            {% endif %}
-                    </div>
                 </div>
             </li>
         </ul>
@@ -28,9 +18,9 @@
     <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline fine-space">
         <ul class="media-list">
             <li class="media">
-                <a class="pull-left" href="#">
+                <span class="pull-left">
                     <i class="fa {{ group.get_icon }}"></i>
-                </a>
+                </span>
                 <div class="media-body">
                     ({% trans "No related projects/groups" %})
                 </div>

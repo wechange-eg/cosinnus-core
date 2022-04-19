@@ -1,15 +1,9 @@
+#
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2020-10-06T13:53:05.285Z\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"MIME-Version: 1.0\n"
-"X-Generator: Poedit 2.0.6\n"
-"Project-Id-Version: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
 "Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 
 #. [Agenda]
 #. defaultMessage is:
@@ -23,10 +17,8 @@ msgstr ""
 #. [Agenda]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/Discussions/list.json locale/src/views/Lobby/index.json
-#: locale/src/views/Stage/list.json locale/src/views/Workshops/list.json
 msgid "Agenda"
-msgstr ""
+msgstr "Program"
 
 #. [Are you sure you want to delete this event?]
 #. defaultMessage is:
@@ -34,59 +26,56 @@ msgstr ""
 #. [Are you sure you want to delete this event?]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/ManageEventButtons/index.json
-#: locale/src/views/components/ManageEventIcons/index.json
 msgid "Are you sure you want to delete this event?"
-msgstr ""
+msgstr "Jesteś pewna/y, że chcesz usunąć to wydarzenie?"
 
 #. [Are you sure you want to delete this room?]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/ManageRoomButtons/index.json
 msgid "Are you sure you want to delete this room?"
-msgstr ""
+msgstr "Jesteś pewna/y, że chcesz usunąć ten pokój?"
+
+msgid "Are you sure you want to leave this event?"
+msgstr "Czy na pewno chcesz opuścić to wydarzenie?"
+
+msgid "Are you sure you want to leave this video conference?"
+msgstr "Jesteś pewna/y, że chcesz opóścić tę wideokonferencję?"
 
 #. [Chats]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/Sidebar/index.json
 msgid "Chats"
-msgstr ""
+msgstr "Czaty"
 
 #. [Conference is being prepared]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/App.json
 msgid "Conference is being prepared"
-msgstr ""
+msgstr "Konferencja jest w trakcie przygotowywania."
 
 #. [Connect with someone via videochat for 5 minutes]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/Channels/list.json
 msgid "Connect with someone via videochat for 5 minutes"
-msgstr ""
+msgstr "Połącz się z kimś na 5 minut przez wideoczat."
 
 #. [Contact]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/Participants/list.json
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #. [Country]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/Participants/list.json
 msgid "Country"
-msgstr ""
+msgstr "Kraj"
 
 #. [Create event]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/ManageRoomButtons/index.json
 msgid "Create event"
-msgstr ""
+msgstr "Utwórz wydarzenie"
 
 #. [Delete event]
 #. defaultMessage is:
@@ -94,38 +83,32 @@ msgstr ""
 #. [Delete event]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/ManageEventButtons/index.json
-#: locale/src/views/components/ManageEventIcons/index.json
 msgid "Delete event"
-msgstr ""
+msgstr "Usuń wydarzenie"
 
 #. [Delete room]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/ManageRoomButtons/index.json
 msgid "Delete room"
-msgstr ""
+msgstr "Usuń pokój"
 
 #. [Edit event]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/ManageEventButtons/index.json
 msgid "Edit event"
-msgstr ""
+msgstr "Edytuj wydarzenie"
 
 #. [Edit room]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/ManageRoomButtons/index.json
 msgid "Edit room"
-msgstr ""
+msgstr "Edytuj pokój"
 
 #. [Filter by country]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/Participants/list.json
 msgid "Filter by country"
-msgstr ""
+msgstr "Filtruj według kraju"
 
 #. [Happening now]
 #. defaultMessage is:
@@ -136,39 +119,47 @@ msgstr ""
 #. [Happening now]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/CoffeeTables/list.json
-#: locale/src/views/components/EventGrid/index.json
-#: locale/src/views/components/EventList/index.json
 msgid "Happening now"
+msgstr "W trakcie"
+
+msgid ""
+"If you click, you will leave the video conference. Are you sure you want to "
+"leave? Tip: Alternatively, you can open the link in a new tab or window and "
+"stay in the event."
 msgstr ""
+"Jeśli klikniesz na „Tak”, to opuścisz wideokonferencję. Jesteś pewna/y, że "
+"chcesz opuścić tę wideokonferencję? Wskazówka: alternatywnie możesz otworzyć"
+" link w nowej zakładce lub w nowym oknie i dalej uczestniczyć w wydarzeniu."
 
 #. [Manage conference]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/Nav/index.json
 msgid "Manage conference"
-msgstr ""
+msgstr "Zarządzaj konferencją"
 
 #. [Manage events]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/Nav/index.json
 msgid "Manage events"
-msgstr ""
+msgstr "Zarządzaj wydarzeniem"
 
 #. [Manage rooms]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/Nav/index.json
 msgid "Manage rooms"
-msgstr ""
+msgstr "Zarządzaj pokojami"
+
+#. [Membership]
+#. defaultMessage is:
+#. undefined
+msgid "Membership"
+msgstr "Członkostwo"
 
 #. [Name]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/Participants/list.json
 msgid "Name"
-msgstr ""
+msgstr "Imię"
 
 #. [No]
 #. defaultMessage is:
@@ -179,95 +170,104 @@ msgstr ""
 #. [No]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/ManageEventButtons/index.json
-#: locale/src/views/components/ManageEventIcons/index.json
-#: locale/src/views/components/ManageRoomButtons/index.json
 msgid "No"
-msgstr ""
+msgstr "Nie"
 
 #. [No coffee tables.]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/CoffeeTables/list.json
 msgid "No coffee tables."
-msgstr ""
+msgstr "Brak stolików"
 
 #. [No discussions.]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/Discussions/list.json
 msgid "No discussions."
-msgstr ""
+msgstr "Brak dyskusji"
 
 #. [No events.]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/Lobby/index.json
 msgid "No events."
-msgstr ""
+msgstr "Brak wydarzeń"
 
 #. [No networking channels.]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/Channels/list.json
 msgid "No networking channels."
-msgstr ""
+msgstr "Brak kanałów networkingowych"
 
 #. [No participants.]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/Participants/list.json
 msgid "No participants."
-msgstr ""
+msgstr "Brak uczestniczek/ków"
 
 #. [No represented organisations.]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/Organisations/index.json
 msgid "No represented organisations."
-msgstr ""
+msgstr "Brak organizacji"
+
+#. [No represented organizations.]
+#. defaultMessage is:
+#. undefined
+msgid "No represented organizations."
+msgstr "Brak reprezentowanych organizacji."
 
 #. [No stage events.]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/Stage/list.json
 msgid "No stage events."
-msgstr ""
+msgstr "Brak wydarzeń na scenie"
 
 #. [No workshops.]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/Workshops/list.json
 msgid "No workshops."
-msgstr ""
+msgstr "Brak warsztatów"
 
 #. [Now]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/EventGrid/index.json
 msgid "Now"
-msgstr ""
+msgstr "Teraz"
 
 #. [Organisation]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/Participants/list.json
 msgid "Organisation"
+msgstr "Organizacja"
+
+#. [Organisation]
+#. defaultMessage is:
+#. undefined
+msgid "Organization"
+msgstr "Organizacja"
+
+#. [City]
+#. defaultMessage is:
+#. undefined
+msgid "City"
 msgstr ""
 
 #. [Represented organisations]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/Organisations/index.json
 msgid "Represented organisations"
-msgstr ""
+msgstr "Reprezentowane organizacje"
+
+#. [Represented organizations]
+#. defaultMessage is:
+#. undefined
+msgid "Represented organizations"
+msgstr "Reprezentowane organizacje"
 
 #. [The conference is being prepared, please try again at a later date.]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/App.json
 msgid "The conference is being prepared, please try again at a later date."
-msgstr ""
+msgstr "Konferencja jest w trakcie przygotowywania. Spróbuj ponownie później."
 
 #. [Today]
 #. defaultMessage is:
@@ -275,10 +275,8 @@ msgstr ""
 #. [Today]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/EventGrid/index.json
-#: locale/src/views/components/EventList/index.json
 msgid "Today"
-msgstr ""
+msgstr "Dziś"
 
 #. [Tomorrow]
 #. defaultMessage is:
@@ -286,17 +284,14 @@ msgstr ""
 #. [Tomorrow]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/EventGrid/index.json
-#: locale/src/views/components/EventList/index.json
 msgid "Tomorrow"
-msgstr ""
+msgstr "Jutro"
 
 #. [Upcoming]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/EventGrid/index.json
 msgid "Upcoming"
-msgstr ""
+msgstr "Nadchodzące wydarzenie"
 
 #. [Yes]
 #. defaultMessage is:
@@ -307,32 +302,33 @@ msgstr ""
 #. [Yes]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/ManageEventButtons/index.json
-#: locale/src/views/components/ManageEventIcons/index.json
-#: locale/src/views/components/ManageRoomButtons/index.json
 msgid "Yes"
+msgstr "Tak"
+
+msgid ""
+"You're currently attending an event. Are you sure you want to leave? Tip: "
+"You can open a new tab or window instead."
 msgstr ""
+"Właśnie uczestniczysz w wydarzeniu. Czy na pewno chcesz opuścić to "
+"wydarzenie? Wskazówka: Zamiast tego możesz otworzyć nową kartę lub okno."
 
 #. [hidden]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/Nav/index.json
 msgid "hidden"
-msgstr ""
+msgstr "ukryte"
 
 #. [minutes left]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/EventGrid/index.json
 msgid "minutes left"
-msgstr ""
+msgstr "minut/y do wydarzenia"
 
 #. [parallel events]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/EventList/index.json
 msgid "parallel events"
-msgstr ""
+msgstr "równoczesne wydarzenia/równoczesnych wydarzeń"
 
 #. [participants]
 #. defaultMessage is:
@@ -340,22 +336,34 @@ msgstr ""
 #. [participants]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/CoffeeTable/index.json
-#: locale/src/views/components/EventGrid/index.json
 msgid "participants"
-msgstr ""
+msgstr "uczestniczki/ek i uczestnicy/ków"
 
 #. [places left]
 #. defaultMessage is:
 #. undefined
-#: locale/src/views/components/CoffeeTable/index.json
 msgid "places left"
+msgstr "wolne miejsce/wolne miejsca/wolnych miejsc"
+
+msgid ""
+"Your profile is not shown here or not displayed correctly? Add to your "
+"profile or make yourself visible to other conference participants."
 msgstr ""
 
-msgid "Are you sure you want to leave this event?"
+msgid "Edit Profile"
 msgstr ""
 
 msgid ""
-"You're currently attending an event. Are you sure you want to leave? "
-"Tip: You can open a new tab or window instead."
+"You can only join this meeting if you accept being recorded. To join this "
+"meeting please reload this page to try again."
+msgstr ""
+
+msgid "Do you consent to be recorded?"
+msgstr ""
+
+msgid ""
+"This session may be recorded by the organizers. By continuing, you consent "
+"to be recorded. This includes audio, video, chat, shared notes and "
+"whiteboard activities. The recording may be shared according to the "
+"organizers."
 msgstr ""

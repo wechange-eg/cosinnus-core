@@ -10,4 +10,33 @@
 	    </script>
 	{% endif %}
 	
+	{% if COSINNUS_CURRENT_PORTAL.email_needs_verification and SETTINGS.COSINNUS_USER_SHOW_EMAIL_VERIFIED_POPUP_AFTER_DAYS > 0 %}
+	    {% if not user.cosinnus_profile.email_verified and user.date_joined|older_than_days:SETTINGS.COSINNUS_USER_SHOW_EMAIL_VERIFIED_POPUP_AFTER_DAYS %}
+            {% captureas label %}
+	            <p>
+	                {% trans "Please verify your email address to continue using your account." %}
+	                {% trans "You should already have received an email with a verification link we sent to your account's email address:" %}
+	                <b>{{ request.user.email }}</b>
+	            </p>
+	            <p>
+	                <a href="{% url "cosinnus:resend-email-validation" %}">{% trans "Click here to send the validation link again." %}</a>
+	            </p>
+	            <hr/>
+	            <p>
+                    {% trans "If you have trouble verifying your email address are not receiving our verification email, please contact the support!" %}
+	                {% if COSINNUS_CURRENT_PORTAL.support_email %}
+                        <a href="mailto:{{ COSINNUS_CURRENT_PORTAL.support_email }}">{{ COSINNUS_CURRENT_PORTAL.support_email }}</a>
+                    {% endif %}
+	            </p>
+	            
+	        {% endcaptureas %}
+	        {% captureas title %}{% trans "Please verify your email address!" %}{% endcaptureas %}
+	        {% trans "Close" as submit_button_label %}
+	        {% include "cosinnus/modal_box.html" with id="modal_verify_email" label=label title=title title_icon='fa fa-envelope' submit_button_icon="fa-close" submit_button_label=submit_button_label %}
+	        <script type="text/javascript">
+	            $('#modal_verify_email').modal('show');
+	        </script>
+        {% endif %}    
+    {% endif %}
+	
 {% endif %}

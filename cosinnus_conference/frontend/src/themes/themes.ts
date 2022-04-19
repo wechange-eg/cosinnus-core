@@ -1,4 +1,5 @@
 import { createMuiTheme, lighten } from "@material-ui/core"
+var tinycolor = require("tinycolor2");
 
 import BrandonTextRegular from "./fonts/brandon-text-regular.ttf"
 import BrandonTextItalic from "./fonts/brandon-text-italic.ttf"
@@ -54,6 +55,9 @@ const muiCssBaseline = {
       "background": "#ffffff",
       "height": "100%",
     },
+    ".announcement": {
+      "margin-top": "0",
+    },
     ".conference": {
       "margin-left": navWidth,
       "height": "100%",
@@ -76,45 +80,58 @@ const muiCssBaseline = {
   }
 }
 
-export const getTheme = (primaryColor= "#7062b3") => createMuiTheme({
-  palette: {
-    type: "light",
-    primary: {
-      main: primaryColor,
-      light: lighten(primaryColor, 0.5),
-      contrastText: lighten(primaryColor, 0.75),
-    },
-    text: {
-      primary: "#4a4a4a",
-      secondary: "#929292"
-    },
-    background: {
-      default: "#ffffff",
-      paper: "#f2f2f2"
-    },
-    success: {
-      main: "#3e806d"
-    }
-  },
-  typography: {
-    fontFamily: '"Brandon Text",sans-serif',
-    fontWeight: 400,
-    fontSize: 14,
-    htmlFontSize: 14
-  },
-  overrides: {
-    MuiCssBaseline: muiCssBaseline,
-    MuiTypography: {
-      body1: {
-        fontSize: "1rem"
+
+export const getTheme = (primaryColor= "#7062b3") => {
+  var primaryText = "#4a4a4a" // regular flow text
+  var secondaryText = "#ffffff" // hovered and emphasized text
+
+  // if the primary color is set too bright to be readable,
+  // swith the secondary text color to dark
+  if (tinycolor(primaryColor).getBrightness() > 200) {
+      primaryText = "#4a4a4a" // regular flow text
+      secondaryText = "#333333" // hovered and emphasized text
+  }
+
+  return createMuiTheme({
+    palette: {
+      type: "light",
+      primary: {
+        main: primaryColor,
+        light: lighten(primaryColor, 0.5),
+        contrastText: lighten(primaryColor, 0.75),
+      },
+      text: {
+        primary: primaryText,
+        secondary: secondaryText,
+      },
+      background: {
+        default: "#ffffff",
+        paper: "#f2f2f2"
+      },
+      success: {
+        main: "#3e806d"
       }
     },
-    MuiFilledInput: {
-      root: {
-        backgroundColor: "rgba(0, 0, 0, 0)"
+    typography: {
+      fontFamily: '"Brandon Text",sans-serif',
+      fontWeight: 400,
+      fontSize: 14,
+      htmlFontSize: 14
+    },
+    overrides: {
+      MuiCssBaseline: muiCssBaseline,
+      MuiTypography: {
+        body1: {
+          fontSize: "1rem"
+        }
+      },
+      MuiFilledInput: {
+        root: {
+          backgroundColor: "rgba(0, 0, 0, 0)"
+        }
       }
-    }
-  },
-  shadows: Array(25).fill("none")
-})
+    },
+    shadows: Array(25).fill("none")
+  })
+}
 

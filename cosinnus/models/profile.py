@@ -4,43 +4,47 @@ from __future__ import unicode_literals
 from builtins import object
 import copy
 import logging
+import six
 
 from annoying.functions import get_object_or_None
 import django
 from django.apps import apps
 from django.contrib.contenttypes.fields import GenericRelation
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.core.serializers.json import DjangoJSONEncoder
+from django.db.models import JSONField
+from django.templatetags.static import static
 from django.core.cache import cache
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.db import models, transaction
 from django.db.models.signals import post_save, class_prepared
 from django.template.loader import render_to_string
-from django.utils.encoding import python_2_unicode_compatible
+from django.urls import reverse
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 from django_countries.fields import CountryField
-from jsonfield import JSONField
-from django.contrib.postgres.fields import JSONField as PostgresJSONField
+from timezone_field import TimeZoneField
 import six
 
 from cosinnus.conf import settings
 from cosinnus.conf import settings as cosinnus_settings
 from cosinnus.core import signals
-from cosinnus.core.mail import send_mail_or_fail_threaded
+from cosinnus.core.mail import send_mail_or_fail_threaded,\
+    convert_html_to_plaintext
 from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
-from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin
+from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin,\
+    CosinnusManagedTag
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from cosinnus.models.tagged import LikeableObjectMixin
 from cosinnus.utils.files import get_avatar_filename, image_thumbnail, \
     image_thumbnail_url
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus.utils.user import get_newly_registered_user_email
+from cosinnus.utils.user import get_newly_registered_user_email, is_user_active
 from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
-from cosinnus.dynamic_fields.dynamic_formfields import EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS
-from django.core.serializers.json import DjangoJSONEncoder
+
+from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
 
 
 logger = logging.getLogger('cosinnus')
@@ -89,9 +93,9 @@ class BaseUserProfileManager(models.Manager):
         raise TypeError('user must be of type int or Model but is %s' % type(user))
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
-                      LikeableObjectMixin, CosinnusManagedTagAssignmentModelMixin,
+                      TranslateableFieldsModelMixin, LikeableObjectMixin, CosinnusManagedTagAssignmentModelMixin,
                       models.Model):
     """
     This is a base user profile used within cosinnus. To use it, create your
@@ -124,33 +128,46 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     # such as middle name, list the field names here
     ADDITIONAL_USERNAME_FIELDS = []
     
+    if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
+        translateable_fields = ['description', 'dynamic_fields']
+        try:
+            translatable_dynamic_fields = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS_TRANSLATED_FIELDS
+            dynamic_fields_settings = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
+        except AttributeError:
+            pass
+
     user = models.OneToOneField(settings.AUTH_USER_MODEL, editable=False,
         related_name='cosinnus_profile', on_delete=models.CASCADE)
+    # whether this user's email address has been verified. non-verified users do not receive emails
+    email_verified = models.BooleanField(_('Email verified'), default=False)
     
     avatar = models.ImageField(_("Avatar"), null=True, blank=True,
         upload_to=get_avatar_filename)
     description = models.TextField(verbose_name=_('Description'), blank=True, null=True)
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
         blank=True, null=True, editable=False, on_delete=models.SET_NULL)
-    website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
+    website = models.URLField(_('Website'), max_length=200, blank=True, null=True)
     language = models.CharField(_('Language'), max_length=2,
         choices=settings.LANGUAGES, default='de')
     # display and inclusion in forms is dependent on setting `COSINNUS_USER_SHOW_MAY_BE_CONTACTED_FIELD`
     may_be_contacted = models.BooleanField(_('May be contacted'), default=False)
     
     # UI and other preferences and extra settings for the user account
-    settings = JSONField(default={})
-    extra_fields = JSONField(default={}, blank=True,
+    settings = JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder)
+    extra_fields = JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder,
                 help_text='NO LONGER USED! Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`')
-    dynamic_fields = PostgresJSONField(default=dict, blank=True, verbose_name=_('Dynamic extra fields'),
-                help_text='Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`',
-                encoder=DjangoJSONEncoder)                       
-
+    dynamic_fields = JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder, verbose_name=_('Dynamic extra fields'),
+                help_text='Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`')
+    scheduled_for_deletion_at = models.DateTimeField(_('Scheduled for Deletion at'), default=None, blank=True, null=True,
+                                               help_text=_('The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)'))
+    deletion_triggered_by_self = models.BooleanField(_('Deletion triggered by self'), default=False, editable=False)
+    
     managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
     
     objects = BaseUserProfileManager()
 
-    SKIP_FIELDS = ['id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings', 'managed_tag_assignments', 'likes']\
+    SKIP_FIELDS = ['id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings', 
+                   'managed_tag_assignments', 'likes', 'deletion_triggered_by_self']\
                     + getattr(cosinnus_settings, 'COSINNUS_USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS', [])
     
     # this indicates that objects of this model are in some way always visible by registered users
@@ -166,6 +183,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     def __init__(self, *args, **kwargs):
         super(BaseUserProfile, self).__init__(*args, **kwargs)
         self._settings = copy.deepcopy(self.settings)
+        self._dynamic_fields = copy.deepcopy(self.dynamic_fields)
         
     def __str__(self):
         return six.text_type(self.user)
@@ -179,6 +197,14 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     
     def get_extended_full_name(self):
         """ Stub extended username, including possible titles, middle names, etc """
+        return self.get_full_name()
+    
+    def get_external_full_name(self):
+        """ Return the display name that external services like
+            nextcloud and rocketchat receive for this user """
+        display_name_func = settings.COSINNUS_EXTERNAL_USER_DISPLAY_NAME_FUNC
+        if display_name_func is not None and callable(display_name_func):
+            return display_name_func(self.user)
         return self.get_full_name()
     
     def save(self, *args, **kwargs):
@@ -201,6 +227,10 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
             # send creation signal
             signals.userprofile_created.send(sender=self, profile=self)
         
+        # manual indexing sanity: remove inactive users from index
+        if not is_user_active(self.user):
+            self.remove_index()
+        
         # send a copy of the ToS to the User via email?
         if settings.COSINNUS_SEND_TOS_AFTER_USER_REGISTRATION and self.user and self.user.email:
             if self.settings.get('tos_accepted', False) and not self._settings.get('tos_accepted', False):
@@ -214,6 +244,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
                 subj_user = '%s - %s' % (_('Terms of Service'), data['site_name'])
                 send_mail_or_fail_threaded(get_newly_registered_user_email(self.user), subj_user, 'cosinnus/mail/user_terms_of_services.html', data)
         self._settings = copy.deepcopy(self.settings)
+        self._dynamic_fields = copy.deepcopy(self.dynamic_fields)
 
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:profile-detail', kwargs={'username': self.user.username})
@@ -253,7 +284,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     def cosinnus_groups(self):
         """ Returns all groups this user is a member or admin of """
         return get_cosinnus_group_model().objects.get_for_user(self.user)
-    
+
     @property
     def cosinnus_groups_pks(self):
         """ Returns all group ids this user is a member or admin of """
@@ -270,6 +301,12 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
         """ Returns all societies this user is a member or admin of """
         from cosinnus.models.group_extra import CosinnusSociety
         return CosinnusSociety.objects.get_for_user(self.user)
+
+    @property
+    def cosinnus_conferences(self):
+        """ Returns all conferences this user is a member or admin of """
+        from cosinnus.models.group_extra import CosinnusConference
+        return CosinnusConference.objects.get_for_user(self.user)
     
     def get_deactivated_groups(self):
         """ Returns a QS of all (untyped) deactivated groups for this user """
@@ -299,6 +336,25 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
             setattr(self, key, self.media_tag)
         return getattr(self, key)
     
+    def get_dynamic_fields_rendered(self, request=None):
+        """ Returns the rendered HTML of the userprofile's dynamic fields detail template snippet """ 
+        data = {
+            'profile': self,
+            'profile_values': self.dynamic_fields,
+            'labels': settings.COSINNUS_USERPROFILE_EXTRA_FIELDS,
+            'SETTINGS': settings,
+            'COSINNUS_MANAGED_TAG_LABELS': CosinnusManagedTag.labels,
+        }
+        return render_to_string(
+            'cosinnus/user/user_profile_dynamic_fields.html',
+            data, 
+            request=request
+        )
+    
+    def get_dynamic_fields_rendered_plaintext(self, request=None):
+        """ Returns a text-only version of the dynamic profile fields for this userprofile """
+        return convert_html_to_plaintext(self.get_dynamic_fields_rendered(request=request))
+    
     def add_redirect_on_next_page(self, resolved_url, message=None, priority=False):
         """ Adds a redirect-page to the user's settings redirect list.
             A middleware enforces that the user will be redirected to the first URL in the list on the next page hit.
@@ -312,7 +368,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
             else:
                 redirects.append((resolved_url, message))
             self.settings[PROFILE_SETTING_REDIRECT_NEXT_VISIT] = redirects
-            self.save(update_fields=['settings'])
+            self.save()
     
     def pop_next_redirect(self):
         """ Tries to remove the first redirect URL in the user's setting's redirect list, and return it.
@@ -337,7 +393,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
 
         def is_username_free(username):
             value = f'"{PROFILE_SETTING_ROCKET_CHAT_USERNAME}":"{username}"'
-            queryset = get_user_profile_model().objects.filter(settings__contains=value)
+            queryset = get_user_profile_model().objects.filter(settings__has_key=value)
             return queryset.count() == 0
 
         i = 1
@@ -368,6 +424,19 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     def rocket_username(self, username):
         """ Sets new username for Rocket.Chat """
         self.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME] = username
+        
+    @property
+    def rocket_user_email(self):
+        """ Returns the email that rocketchat should use for this user.
+            Rocket should only ever be given the user's email through this getter.
+            Depending on the verification status of the user account,
+            this email might be a fake @wechange email instead of the real account's email
+            because rocketchat can just not behave and never send emails, and the "mail is verified"
+            feature is broken and still sends out emails. We have to prevent that for unverified mails. """
+        portal = CosinnusPortal.get_current()
+        if portal.email_needs_verification and not self.email_verified:
+            return f'unverified_rocketchat_{portal.slug}_{portal.id}_{self.user.id}@wechange.de'
+        return self.user.email.lower()
 
     @property
     def workshop_user_name(self):
@@ -386,8 +455,26 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     def get_last_login_token_sent(self):
         return self.settings.get(PROFILE_SETTING_LOGIN_TOKEN_SENT, None)
 
+    @property
+    def map_embed_url(self):
+        url = reverse('cosinnus:map-embed')
+        defaults = settings.COSINNUS_DASHBOARD_WIDGET_MAP_DEFAULTS
+        if (not defaults or not 'location' in defaults) and not self.media_tag.location:
+            return url
+        if self.media_tag.location:
+            lat = self.media_tag.location_lat
+            lon = self.media_tag.location_lon
+        else:
+            lat = defaults['location'][0]
+            lon = defaults['location'][1]
+        zoom = defaults.get('zoom', 10)
+        content_display = "&people=false&ideas=false&conferences=false"
+        return '{}?location_lat={}&location_lon={}&zoom={}{}'.format(
+            url, lat, lon, zoom, content_display)
+
 
 class UserProfile(BaseUserProfile):
+    timezone = TimeZoneField(default='Europe/Berlin')
     
     class Meta(object):
         app_label = 'cosinnus'
@@ -446,7 +533,8 @@ else:
 class GlobalUserNotificationSettingManager(models.Manager):
     """ Cached acces to user notification settings  """
     
-    _NOTIFICATION_CACHE_KEY = 'cosinnus/core/portal/%d/user/%d/slugs' # portal_id, user_id  --> setting value (int)
+    _NOTIFICATION_CACHE_KEY = 'cosinnus/core/portal/%d/user/%d/globalnotificationsetting' # portal_id, user_id  --> setting value (int)
+    _ROCKETCHAT_NOTIFICATION_CACHE_KEY = 'cosinnus/core/portal/%d/user/%d/rocketchatnotificationsetting' # portal_id, user_id  --> setting value (int)
     
     def get_for_user(self, user):
         """ Returns the cached setting value for this user's global notification setting. """
@@ -454,6 +542,15 @@ class GlobalUserNotificationSettingManager(models.Manager):
         if setting is None:
             setting = self.get_object_for_user(user).setting
             cache.set(self._NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id), setting,
+                settings.COSINNUS_GLOBAL_USER_NOTIFICATION_SETTING_CACHE_TIMEOUT)
+        return setting
+    
+    def get_rocketchat_setting_for_user(self, user):
+        """ Returns the cached setting value for this user's global notification setting. """
+        setting = cache.get(self._ROCKETCHAT_NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id))
+        if setting is None:
+            setting = self.get_object_for_user(user).rocketchat_setting
+            cache.set(self._ROCKETCHAT_NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id), setting,
                 settings.COSINNUS_GLOBAL_USER_NOTIFICATION_SETTING_CACHE_TIMEOUT)
         return setting
     
@@ -468,6 +565,7 @@ class GlobalUserNotificationSettingManager(models.Manager):
     
     def clear_cache_for_user(self, user):
         cache.delete(self._NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id))
+        cache.delete(self._ROCKETCHAT_NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id))
     
 
 class GlobalUserNotificationSetting(models.Model):
@@ -493,12 +591,25 @@ class GlobalUserNotificationSetting(models.Model):
         (SETTING_GROUP_INDIVIDUAL, pgettext_lazy('answer to "i wish to receive notification emails:"', 'Individual settings for each Project/Group...')),
     )
     
+    # no rocketchat notification mails
+    ROCKETCHAT_SETTING_OFF = 0
+    # all DMs and mentions
+    ROCKETCHAT_SETTING_MENTIONS = 1
+    
+    ROCKETCHAT_SETTING_CHOICES = (
+        (ROCKETCHAT_SETTING_OFF, pgettext_lazy('answer to "i wish to receive rocketchat notification emails:"', 'No E-Mails for RocketChat messages')),
+        (ROCKETCHAT_SETTING_MENTIONS, pgettext_lazy('answer to "i wish to receive rocketchat notification emails:"', 'E-Mails for all direct messages and mentions')),
+    )
+    
     user = models.ForeignKey(settings.AUTH_USER_MODEL, editable=False, related_name='cosinnus_notification_settings', on_delete=models.CASCADE)
     portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='user_notification_settings', 
         null=False, blank=False, default=1, on_delete=models.CASCADE)
     setting = models.PositiveSmallIntegerField(choices=SETTING_CHOICES,
             default=settings.COSINNUS_DEFAULT_GLOBAL_NOTIFICATION_SETTING,
             help_text='Determines if the user wants no mail, immediate mails,s aggregated mails, or group specific settings')
+    rocketchat_setting = models.PositiveSmallIntegerField(choices=ROCKETCHAT_SETTING_CHOICES,
+            default=settings.COSINNUS_DEFAULT_ROCKETCHAT_NOTIFICATION_SETTING,
+            help_text='Determines if the user wants rocketchat notification emails')
     last_modified = models.DateTimeField(_('Last modified'), auto_now=True, editable=False)
     
     objects = GlobalUserNotificationSettingManager()
@@ -564,132 +675,3 @@ def _make_country_formfield(**kwargs):
     ).formfield(**kwargs)
 
 
-class _UserProfileFormExtraFieldsBaseMixin(object):
-    """ Base for the Mixins for the UserProfile or User modelforms that
-        add functionality for by-portal configured extra profile form fields """
-    
-    # if set to a string, will only include such fields in the form
-    # that have the given option name set to True in `COSINNUS_USERPROFILE_EXTRA_FIELDS`
-    filter_included_fields_by_option_name = None
-    
-    # (passed in kwargs) if set to True, hidden dynamic fields will be shown, e.g. to display them to admins
-    hidden_dynamic_fields_shown = False
-    
-    # (passed in kwargs) if set to True, enable readonly dynamic fields will be enabled instead of disabled, e.g. to display them to admins
-    readonly_dynamic_fields_enabled = False
-    
-    def __init__(self, *args, **kwargs):
-        self.hidden_dynamic_fields_shown = kwargs.pop('hidden_dynamic_fields_shown', False)
-        self.readonly_dynamic_fields_enabled = kwargs.pop('readonly_dynamic_fields_enabled', False)
-        
-        super().__init__(*args, **kwargs)
-        
-        self.prepare_extra_fields_initial()
-        self.prepare_extra_fields()
-        if 'extra_fields' in self.fields:
-            del self.fields['extra_fields']
-        if 'dynamic_fields' in self.fields:
-            del self.fields['dynamic_fields']
-            
-    def prepare_extra_fields_initial(self):
-        """ Stub for settting the initial data for `self.dynamic_fields` as defined in
-            `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`.
-            Only a form with an UpdateView needs to implement this.  """
-        pass
-    
-    def prepare_extra_fields(self):
-        """ Creates extra fields for `self.dynamic_fields` as defined in
-            `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS` """
-        field_map = {}
-        for field_name, field_options in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.items():
-            if field_name in self.fields:
-                raise ImproperlyConfigured(f'COSINNUS_USERPROFILE_EXTRA_FIELDS: {field_name} clashes with an existing UserProfile field!')
-            if not field_options.type in EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS:
-                raise ImproperlyConfigured(f'COSINNUS_USERPROFILE_EXTRA_FIELDS: {field_name}\'s "type" attribute was not found in {self.__class__.__name__}.EXTRA_FIELD_TYPE_FORMFIELDS!')
-            # filter by whether a given option is set
-            if self.filter_included_fields_by_option_name \
-                    and not getattr(field_options, self.filter_included_fields_by_option_name, False):
-                continue
-            if field_options.hidden and not self.hidden_dynamic_fields_shown:
-                continue
-            
-            # create a formfield from the dynamic field definitions
-            dynamic_field_generator = EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS[field_options.type]()
-            formfield = dynamic_field_generator.get_formfield(
-                field_name,
-                field_options,
-                dynamic_field_initial=self.initial.get(field_name, None),
-                readonly_dynamic_fields_enabled=self.readonly_dynamic_fields_enabled,
-                data=self.data,
-                form=self
-            )
-            self.fields[field_name] = formfield
-            setattr(self.fields[field_name], 'field_name', field_name)
-            setattr(self.fields[field_name], 'label', field_options.label)
-            setattr(self.fields[field_name], 'legend', field_options.legend)
-            setattr(self.fields[field_name], 'placeholder', field_options.placeholder)
-            setattr(self.fields[field_name], 'large_field', dynamic_field_generator.get_is_large_field()) 
-            setattr(self.fields[field_name], 'dynamic_field_type', field_options.type) 
-            
-            # some formfields may need to change the initial data in the form itself
-            if dynamic_field_generator.get_new_initial_after_formfield_creation():
-                self.initial[field_name] = dynamic_field_generator.get_new_initial_after_formfield_creation()
-            
-            # todo multi address field
-            
-            # "register" the extra field additionally
-            field_map[field_name] = self.fields[field_name]
-            
-        setattr(self, 'extra_field_list', field_map.keys())
-        setattr(self, 'extra_field_items', field_map.items())
-    
-    
-class UserProfileFormExtraFieldsMixin(_UserProfileFormExtraFieldsBaseMixin):
-    """ Mixin for the UserProfile modelform that
-        adds functionality for by-portal configured extra profile form fields """
-    
-    def prepare_extra_fields_initial(self):
-        """ Set the initial data for `self.dynamic_fields` as defined in
-            `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS` """
-        for field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.keys():
-            if field_name in self.instance.dynamic_fields:
-                self.initial[field_name] = self.instance.dynamic_fields[field_name]
-        
-    def full_clean(self):
-        """ Assign the extra fields to the `extra_fields` the userprofile JSON field
-            instead of model fields, during regular form saving """
-        super().full_clean()
-        if hasattr(self, 'cleaned_data'):
-            for field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.keys():
-                # skip saving fields that weren't included in the POST
-                # this is important, do not add exceptions here.
-                # if you need an exception, add a hidden field with the field name and any value!
-                if not field_name in self.data.keys():
-                    continue
-                # skip saving disabled fields
-                if field_name in self.fields and not self.fields[field_name].disabled:
-                    self.instance.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
-
-
-class UserCreationFormExtraFieldsMixin(_UserProfileFormExtraFieldsBaseMixin):
-    """ Like UserProfileFormExtraFieldsMixin, but works with the user signup form """
-    
-    # only show fields with option `in_signup` set to True
-    filter_included_fields_by_option_name = 'in_signup'
-    
-    def save(self, commit=True):
-        """ Assign the extra fields to the user's cosinnus_profile's `dynamic_fields` 
-        JSON field instead of model fields, after user form save """
-        ret = super().save(commit=commit)
-        if commit:
-            if hasattr(self, 'cleaned_data'):
-                # sanity check, retrieve the user's profile (will create it if it doesnt exist)
-                if not self.instance.cosinnus_profile:
-                    get_user_profile_model()._default_manager.get_for_user(self.instance)
-                
-                profile = self.instance.cosinnus_profile
-                for field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.keys():
-                    profile.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
-                    profile.save()
-        return ret
-    

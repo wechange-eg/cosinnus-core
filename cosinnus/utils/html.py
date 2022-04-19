@@ -14,11 +14,21 @@ def replace_non_portal_urls(html_text, replacement_url=None, portal_url=None):
     if portal_url is None:
         portal_url = CosinnusPortal.get_current().get_domain()
     if replacement_url is None:
-        replacement_url = portal_url
+        # do no replacements unless we have a proper target to point to
+        # this will only affect admin-user-generated content
+        return html_text
+    whitelisted_urls = [
+        'https://openstreetmap.org', # we whitelist OSm as it is used in location links in emails
+        portal_url,
+    ]
+    # add a GET param to show a redirect warning to the user 
+    # (handled by `ExternalEmailLinkRedirectNoticeMiddleware`)
+    append_param_arg = '?' if not '?' in replacement_url else '&'
+    replacement_url = f'{replacement_url}{append_param_arg}external_link_redirect=1'
     
     for m in reversed([it for it in BETTER_URL_RE.finditer(html_text)]):
         matched_url = m.group()
-        if not matched_url.startswith(portal_url):
+        if not any([matched_url.startswith(whitelisted_url) for whitelisted_url in whitelisted_urls]):
             html_text = html_text[:m.start()] + replacement_url + html_text[m.end():]
     return html_text
 

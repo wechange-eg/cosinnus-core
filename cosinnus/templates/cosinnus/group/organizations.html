@@ -64,9 +64,9 @@
 				                <button type="submit" class="btn btn-emphasized btn-autosize large-space">
 				                    <ul class="media-list">
 				                        <li class="media">
-				                            <a class="pull-left" href="#">
+				                            <span class="pull-left">
 				                                <i class="fa fa-check"></i>
-				                            </a>
+				                            </span>
 				                            <div class="media-body">
 				                                {% trans "Request organizations" %}
 				                            </div>
@@ -100,9 +100,9 @@
 			                                                         data-toggle="modal" data-target="#{{modal_revoke_id}}" title="{% trans "Revoke request" %}">
 			                                                    <ul class="media-list">
 			                                                        <li class="media">
-			                                                            <a class="pull-left" href="#">
+			                                                            <span class="pull-left">
 			                                                                <i class="fa fa-close"></i>
-			                                                            </a>
+			                                                            </span>
 			                                                        </li>
 			                                                    </ul>
 			                                                </button>
@@ -115,9 +115,9 @@
 			                                                         data-toggle="modal" data-target="#{{modal_decline_request_id}}" title="{% trans "Decline request" %}">
 			                                                    <ul class="media-list">
 			                                                        <li class="media">
-			                                                            <a class="pull-left" href="#">
+			                                                            <span class="pull-left">
 			                                                                <i class="fa fa-close"></i>
-			                                                            </a>
+			                                                            </span>
 			                                                        </li>
 			                                                    </ul>
 			                                                </button>
@@ -126,9 +126,9 @@
 			                                                    <button type="submit" class="btn btn-emphasized">
 			                                                        <ul class="media-list">
 			                                                            <li class="media">
-			                                                                <a class="pull-left" href="#">
+			                                                                <span class="pull-left">
 			                                                                    <i class="fa fa-sign-in"></i>
-			                                                                </a>
+			                                                                </span>
 			                                                                <div class="media-body">
 			                                                                    {% trans "Accept request" %}
 			                                                                </div>
@@ -171,8 +171,8 @@
 				                {% endif %}
 
 				            {% empty %}
-				                <!-- {% trans "There are no pending invitations." %} -->
-				                {% include 'cosinnus/common/empty_button.html' with message="There are no pending organization requests." %}
+				                {% trans "There are no pending organization requests." as empty_message %}
+				                {% include 'cosinnus/common/empty_button.html' with message=empty_message %}
 				            {% endfor %}
 
 				        {% endif %}
@@ -214,9 +214,9 @@
 																 data-toggle="modal" data-target="#{{modal_decline_invitation_id}}" title="{% trans "Decline invitation" %}">
 															<ul class="media-list">
 																<li class="media">
-																	<a class="pull-left" href="#">
+																	<span class="pull-left">
 																		<i class="fa fa-close"></i>
-																	</a>
+																	</span>
 																</li>
 															</ul>
 														</button>
@@ -225,9 +225,9 @@
 															<button type="submit" class="btn btn-emphasized">
 																<ul class="media-list">
 																	<li class="media">
-																		<a class="pull-left" href="#">
+																		<span class="pull-left">
 																			<i class="fa fa-sign-in"></i>
-																		</a>
+																		</span>
 																		<div class="media-body">
 																			{% trans "Accept invitation" %}
 																		</div>
@@ -262,7 +262,8 @@
 							{% endif %}
 
 						{% empty %}
-							{% include 'cosinnus/common/empty_button.html' with message="There are no organization invitations." %}
+							{% trans "There are no organization invitations." as empty_message %}
+							{% include 'cosinnus/common/empty_button.html' with message=empty_message %}
 						{% endfor %}
 
 						<div class="clearfix"></div>
@@ -291,9 +292,9 @@
 			                <div class="btn btn-emphasized w100">
 			                    <ul class="media-list">
 			                        <li class="media">
-			                            <span class="pull-left" href="{{ member|profile_url }}">
+			                            <a class="pull-left" href="{{ member|profile_url }}">
 			                                {% include "cosinnus/user/user_avatar_image.html" with user=member %}
-			                            </span>
+			                            </a>
 			                            {% if user|has_write_access:object %}
 			                            <a class="pull-right fadedown-clickarea" href="#">
 			                                <i class="fa fa-chevron-down"></i>
@@ -314,9 +315,9 @@
 				                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_kick_id}}">
 				                        <ul class="media-list">
 				                            <li class="media">
-				                                <a class="pull-left" href="#">
+				                                <span class="pull-left">
 				                                    <i class="fa fa-eraser"></i>
-				                                </a>
+				                                </span>
 				                                <div class="media-body">
 				                                    {% trans "Kick" %}
 				                                </div>
@@ -339,8 +340,8 @@
 			            {% endif %}
 
 					{% empty %}
-						<!-- {% trans "There are no new membership requests." %} -->
-						{% include 'cosinnus/common/empty_button.html' with message="There are no assigned organizations." %}
+						{% trans "There are no assigned organizations." as empty_message %}
+						{% include 'cosinnus/common/empty_button.html' with message=empty_message %}
 			        {% endfor %}
 
                 </div> {% comment %} panel-body {% endcomment %}

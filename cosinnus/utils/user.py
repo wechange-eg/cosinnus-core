@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import logging
+import random
 
 from cosinnus.conf import settings
 from cosinnus.core.registries.widgets import widget_registry
@@ -22,6 +23,7 @@ from django.utils.timezone import now, is_naive
 from dateutil import parser
 import datetime
 import pytz
+from django.core.cache import cache
 
 
 _CosinnusPortal = None
@@ -114,7 +116,10 @@ def ensure_user_to_default_portal_groups(sender, created, **kwargs):
 def is_user_active(user):
     """ Similar to `filter_active_users`, returns True if 
         the user account is considered active in the portal """
-    return user.is_active and user.last_login and user.cosinnus_profile.settings.get('tos_accepted', False)
+    return user.is_active and user.last_login and \
+            user.cosinnus_profile.settings.get('tos_accepted', False) and \
+            user.email and not user.email.startswith('__unverified__') and \
+            not user.email.startswith('__deleted_user__')
 
 def filter_active_users(user_model_qs, filter_on_user_profile_model=False):
     """ Filters a QS of ``get_user_model()`` so that all users are removed that are either of
@@ -125,11 +130,13 @@ def filter_active_users(user_model_qs, filter_on_user_profile_model=False):
     if filter_on_user_profile_model:
         return user_model_qs.exclude(user__is_active=False).\
             exclude(user__last_login__exact=None).\
-            filter(settings__contains='tos_accepted')
+            exclude(user__email__icontains='__unverified__').\
+            filter(settings__tos_accepted=True)
     else:
         return user_model_qs.exclude(is_active=False).\
             exclude(last_login__exact=None).\
-            filter(cosinnus_profile__settings__contains='tos_accepted')
+            exclude(email__icontains='__unverified__').\
+            filter(cosinnus_profile__settings__tos_accepted=True)
             
 def filter_portal_users(user_model_qs, portal=None):
     """ Filters a QS of ``get_user_model()`` so that only users of this portal remain. """
@@ -178,7 +185,6 @@ def create_base_user(email, username=None, password=None, first_name=None, last_
     from cosinnus.models.profile import get_user_profile_model
     from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal
     from cosinnus.models.membership import MEMBERSHIP_MEMBER
-    from cosinnus.views.user import email_first_login_token_to_user
     from django.contrib.auth import get_user_model
     from django.core.exceptions import ObjectDoesNotExist
 
@@ -193,20 +199,18 @@ def create_base_user(email, username=None, password=None, first_name=None, last_
     if not password and no_generated_password:
         # special handling for user without password
         user_model = get_user_model()
-        temp_username = email if not username else username
+        temp_username = str(random.randint(100000000000, 999999999999)) if not username else username
 
         # check if user with that password already exist
-        user, created = user_model.objects.get_or_create(username=temp_username, email=email)
-
-        email_first_login_token_to_user(user=user)
+        user, created = user_model.objects.get_or_create(username=temp_username, email=email, is_active=False)
         if not created:
             logger.error('Manual user creation failed. A user with tha username already exists!')
 
     else:
-        password = get_random_string()
+        password = get_random_string(length=12)
 
         user_data = {
-            'username': username or get_random_string(),
+            'username': username or get_random_string(length=12),
             'password1': password,
             'password2': password
         }
@@ -248,9 +252,9 @@ def create_user(email, username=None, first_name=None, last_name=None, tos_check
     from cosinnus.forms.user import UserCreationForm
     from cosinnus.models.profile import get_user_profile_model # leave here because of cyclic imports
     
-    pwd = get_random_string()
+    pwd = get_random_string(length=12)
     data = {
-        'username': username or get_random_string(),
+        'username': username or get_random_string(length=12),
         'email': email,
         'password1': pwd,
         'password2': pwd,
@@ -284,7 +288,7 @@ def create_user(email, username=None, first_name=None, last_name=None, tos_check
 def get_newly_registered_user_email(user):
     """ Safely gets a user object's email address, even if they have yet to veryify their email address
         (in this case, the `user.email` field is scrambled.
-        See `cosinnus.views.user.set_user_email_to_verify()` """
+        See `cosinnus.views.user.send_user_email_to_verify()` """
     from cosinnus.models.profile import PROFILE_SETTING_EMAIL_TO_VERIFY
     return user.cosinnus_profile.settings.get(PROFILE_SETTING_EMAIL_TO_VERIFY, user.email)
 
@@ -387,9 +391,21 @@ def get_unread_message_count_for_user(user):
     if not user.is_authenticated:
         return 0
     if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
-        from cosinnus_message.rocket_chat import RocketChatConnection # noqa
-        unread_count = RocketChatConnection().unread_messages(user)
-        
+        unread_count = 0
+        # rocketchat mollycoddling: if the unread message retrieval gets an exception
+        # for any reason, we impose a 5 minute break on retrieving it again, for this user
+        # if the rocketchat service experiences timeouts because of high load, frequent
+        # re-requesting on this connection has shown to finish it off for good, so we give it a break
+        cache_key =  'cosinnus/core/alerts/user/%(user_id)s/rocketchatunreadtimeout' % {'user_id': user.id}
+        is_paused = cache.get(cache_key)
+        if not is_paused:
+            from cosinnus_message.rocket_chat import RocketChatConnection # noqa
+            try:
+                unread_count = RocketChatConnection().unread_messages(user)
+            except:
+                # we do not care what caused an exception here, but we handle them by returning
+                # 0 unread messages and imposing a break for this user
+                cache.set(cache_key, True, 60*5) # 5 minutes
     else:
         from postman.models import Message
         unread_count = Message.objects.inbox_unread_count(user)
@@ -409,7 +425,7 @@ def get_user_from_set_password_token(token):
     USER_MODEL = get_user_model()
 
     # TODO this query could be simplified, if json field is imported by postgress library instead of django-jsonfield
-    token_users = USER_MODEL.objects.filter(cosinnus_profile__settings__contains='password_not_set')
+    token_users = USER_MODEL.objects.filter(cosinnus_profile__settings__has_key='password_not_set')
 
     for user in token_users:
         if user.cosinnus_profile.settings.get(PROFILE_SETTING_PASSWORD_NOT_SET, "") == token:

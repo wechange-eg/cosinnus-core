@@ -6,13 +6,13 @@ import functools
 
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseForbidden, HttpResponseNotFound
-from django.utils.decorators import available_attrs
 from django.utils.translation import ugettext_lazy as _
+from cosinnus.utils.group import get_cosinnus_group_model
 
 from cosinnus_organization.models import CosinnusOrganization
 from cosinnus.utils.permissions import check_object_write_access,\
     check_group_create_objects_access, check_object_read_access, get_user_token,\
-    check_user_superuser
+    check_user_superuser, check_user_verified, check_user_portal_manager
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect, Http404
 from django.urls import reverse_lazy
@@ -24,14 +24,34 @@ from cosinnus.utils.exceptions import CosinnusPermissionDeniedException
 
 import logging
 from cosinnus.models.group import CosinnusPortal
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render, get_object_or_404
 from cosinnus.utils.urls import group_aware_reverse
 from django.template.defaultfilters import urlencode
 logger = logging.getLogger('cosinnus')
 
 
+MSG_USER_NOT_VERIFIED = _('You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above.')
+
+
+def redirect_to_error_page(request, view=None, group=None):
+    """ Returns a redirect to an error page with the same URL and support for displaying error messages.
+        You should always use `messages.error/warning/info` before calling this function, otherwise the page
+        will be blank.
+        @param group: If supplied, the user will in most cases be redirected to the group's micropage instead """
+    # support for the ajaxable view mixin
+    if view and getattr(view, 'is_ajax_request_url', False):
+        return HttpResponseForbidden('Not authenticated')
+    # redirect to group's micropage
+    if group is not None:
+        # only redirect to micropage if user isn't a member of the group
+        if not request.user.is_authenticated or not request.user.id in group.members:
+            messages.warning(request, group.trans.MESSAGE_MEMBERS_ONLY)
+            return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': group}))
+    return render(request, template_name='cosinnus/common/error.html', context={})
+
+
 def redirect_to_403(request, view=None, group=None):
-    """ Returns a redirect to the login page with a next-URL parameter and an error message 
+    """ Returns a redirect to a permission-denied page with the same URL and an and an error message 
         @param group: If supplied, the user will in most cases be redirected to the group's micropage instead """
     # support for the ajaxable view mixin
     if view and getattr(view, 'is_ajax_request_url', False):
@@ -58,10 +78,19 @@ def redirect_to_not_logged_in(request, view=None, group=None):
     next_arg = urlencode(next_arg)
     if group is not None:
         messages.warning(request, _('Only registered members can see the content you requested! Log in or create an account now!'))
+    else:
+        messages.error(request, _('Please log in to access this page.'))
+    if group is not None and group.is_publicly_visible:
         return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': group}) + '?next=' + next_arg)
-    messages.error(request, _('Please log in to access this page.'))
     return HttpResponseRedirect(reverse_lazy('login') + '?next=' + next_arg)
-    
+
+
+def redirect_to_not_verified(request, view=None, group=None):
+    """ Returns a redirect to an empty page with an error message, telling the user they need to verify
+        their email address to continue. """
+    messages.warning(request, MSG_USER_NOT_VERIFIED)
+    return redirect_to_error_page(request, view=view, group=group)
+
 
 def get_group_for_request(group_name, request):
     """ Retrieve the proxy group object depending on the URL path regarding 
@@ -130,7 +159,8 @@ def _check_deactivated_app_access(view, group, request):
     """ Will check if a view is being accessed within a cosinnus app that 
     has been deactivated for this group. """
     app_name = view.__module__.split('.')[0]
-    if hasattr(group, 'is_app_deactivated') and group.is_app_deactivated(app_name):
+    if hasattr(group, 'is_app_deactivated') and group.is_app_deactivated(app_name) \
+            and not getattr(view, 'ALLOW_VIEW_ACCESS_WHEN_GROUP_APP_DEACTIVATED', False):
         messages.error(request, _("The page you tried to access belongs to an app that has been deactivated for this %(team_type)s. If you feel this is in error, ask the %(team_type)s's administrator to reactivate the app.") % {'team_type': group._meta.verbose_name})
         return HttpResponseRedirect(group.get_absolute_url())
     return None
@@ -138,7 +168,7 @@ def _check_deactivated_app_access(view, group, request):
 
 def require_admin_access_decorator(group_url_arg='group'):
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(request, *args, **kwargs):
             group_name = kwargs.get(group_url_arg, None)
             if not group_name:
@@ -166,7 +196,7 @@ def require_logged_in():
     """
 
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(self, request, *args, **kwargs):
             user = request.user
             
@@ -179,18 +209,56 @@ def require_logged_in():
     return decorator
 
 
+def require_verified_user_access():
+    """A method decorator that checks that the requesting user has a verified email address  """
+
+    def decorator(function):
+        @functools.wraps(function)
+        def wrapper(self, request, *args, **kwargs):
+            user = request.user
+            if not user.is_authenticated:
+                return redirect_to_not_logged_in(request, view=self)
+            if not check_user_verified(user):
+                return redirect_to_not_verified(request, view=self)
+            
+            return function(self, request, *args, **kwargs)
+            
+        return wrapper
+    return decorator
+
+
 def require_superuser():
     """A method decorator that checks that the requesting user is a superuser (admin or portal admin)
     """
 
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(self, request, *args, **kwargs):
             user = request.user
             
             if not user.is_authenticated:
                 return redirect_to_not_logged_in(request, view=self)
             if not check_user_superuser(user):
+                raise PermissionDenied('You do not have permission to access this page.')
+            
+            return function(self, request, *args, **kwargs)
+            
+        return wrapper
+    return decorator
+
+
+def require_portal_manager():
+    """A method decorator that checks that the requesting user is a portal manager or superuser (admin or portal admin)
+    """
+
+    def decorator(function):
+        @functools.wraps(function)
+        def wrapper(self, request, *args, **kwargs):
+            user = request.user
+            
+            if not user.is_authenticated:
+                return redirect_to_not_logged_in(request, view=self)
+            if not check_user_portal_manager(user) and not check_user_superuser(user):
                 raise PermissionDenied('You do not have permission to access this page.')
             
             return function(self, request, *args, **kwargs)
@@ -214,7 +282,7 @@ def dispatch_group_access(group_url_kwarg='group', group_attr='group'):
     """
 
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(self, request, *args, **kwargs):
             group_name = kwargs.get(group_url_kwarg, None)
             if not group_name:
@@ -250,7 +318,7 @@ def require_admin_access(group_url_kwarg=None, group_attr=None):
     """
 
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(self, request, *args, **kwargs):
             url_kwarg = group_url_kwarg or getattr(self, 'group_url_kwarg', 'group')
             attr = group_attr or getattr(self, 'group_attr', 'group')
@@ -295,7 +363,7 @@ def require_read_access(group_url_kwarg=None, group_attr=None):
     """
 
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(self, request, *args, **kwargs):
             url_kwarg = group_url_kwarg or getattr(self, 'group_url_kwarg', 'group')
             attr = group_attr or getattr(self, 'group_attr', 'group')
@@ -363,7 +431,7 @@ def require_write_access(group_url_kwarg=None, group_attr=None):
     """
 
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(self, request, *args, **kwargs):
             url_kwarg = group_url_kwarg or getattr(self, 'group_url_kwarg', 'group')
             attr = group_attr or getattr(self, 'group_attr', 'group')
@@ -418,7 +486,7 @@ def require_write_access_groupless():
     """
 
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(self, request, *args, **kwargs):
             user = request.user
             
@@ -445,7 +513,7 @@ def require_write_access_groupless():
 
 
 
-def require_user_token_access(token_name, group_url_kwarg='group', group_attr='group'):
+def require_user_token_access(token_name, group_url_kwarg='group', group_attr='group', id_url_kwarg=None):
     """ A method decorator that allows access only if the URL params
     `user=999&token=1234567` are supplied, and if the token supplied matches
     the specific token (determined by :param ``token_name``) in the supplied 
@@ -459,10 +527,13 @@ def require_user_token_access(token_name, group_url_kwarg='group', group_attr='g
     :param str group_attr: The attribute name which can later be used to access
         the group from within an view instance (e.g. `self.group`). Defaults to
         `'group'`.
+    :param str id_url_kwarg: The attribut id which can later be used to access
+        the group or a project from within an view instance (e.g. `team_id`). Defaults to
+        `None`.
     """
 
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(self, request, *args, **kwargs):
             
             # assume no user is logged in, and check the user id and token from the args
@@ -484,10 +555,14 @@ def require_user_token_access(token_name, group_url_kwarg='group', group_attr='g
             self.user = user
             
             group_name = kwargs.get(group_url_kwarg, None)
-            if not group_name:
+            if id_url_kwarg is not None:
+                team_id = kwargs.get(id_url_kwarg)
+                group = get_object_or_404(get_cosinnus_group_model(), id=team_id, portal_id=CosinnusPortal.get_current().id)
+            elif not group_name:
                 return HttpResponseNotFound(_("No team provided"))
+            else:
+                group = get_group_for_request(group_name, request)
 
-            group = get_group_for_request(group_name, request)
             
             # set the group attribute
             setattr(self, group_attr, group)
@@ -532,7 +607,7 @@ def require_create_objects_in_access(group_url_kwarg='group', group_attr='group'
     """
 
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(self, request, *args, **kwargs):
             group_name = kwargs.get(group_url_kwarg, None)
             if not group_name:

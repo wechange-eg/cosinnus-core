@@ -33,6 +33,21 @@
 			
 			<hr>
 		{% endif %}
+
+		{% if conference_requests|length > 0 %}
+			<h2 class="headline headline-condensed">
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "Conference Applications" %} ({{ conference_requests_count }})
+			</h2>
+		
+			<ul class="item-list">
+				{% for item in conference_requests %}
+					{{ macros.listItem(item.text, item.url, item.icon, is_emphasized=item.is_emphasized) }}
+				{% endfor %}
+			</ul>
+			
+			<hr>
+		{% endif %}
 		
 		<h2 class="headline headline-condensed">
 			{# Translators: __INCLUDE_JS_PO__ #}
@@ -99,7 +114,7 @@
 		</div>
 	</div>
 	
-	{% if COSINNUS_IDEAS_ENABLED or COSINNUS_ORGANIZATIONS_ENABLED or COSINNUS_ORGANIZATIONS_ENABLED %}
+	{% if COSINNUS_CONFERENCES_ENABLED or COSINNUS_IDEAS_ENABLED or COSINNUS_ORGANIZATIONS_ENABLED %}
 	<div class="nav-column">
 	    {% if COSINNUS_CONFERENCES_ENABLED %}
 	        <h2 class="headline headline-condensed">

@@ -3,9 +3,9 @@
 	<button class="btn btn-emphasized regular-space" style="float: inherit; margin-top: 10px;" href="{% if type == "group" %}{% url 'cosinnus:group__group-add' %}{% else %}{% url 'cosinnus:group-add' %}{% endif %}">
 	    <ul class="media-list">
 	        <li class="media">
-	            <a class="pull-left" href="#">
+	            <span class="pull-left">
 	                <i class="fa fa-group"></i>
-	            </a>
+	            </span>
 	            <div class="media-body">
 	                {% if type == "group" %}{% trans "Create Group" %}{% else %}{% trans "Create Project" %}{% endif %}!
 	            </div>

@@ -17,7 +17,7 @@ from threading import Thread
 from django.core.mail.message import EmailMultiAlternatives
 from cosinnus.utils.user import get_list_unsubscribe_url
 from cosinnus.models.group import CosinnusPortal
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.templatetags.static import static
 from django.utils.safestring import mark_safe
 from django.utils.html import strip_tags
 from cosinnus.utils.html import replace_non_portal_urls
@@ -88,7 +88,7 @@ def deliver_mail(to, subject, message, from_email, bcc=None, is_html=False, head
 
     connection = get_connection()
     if is_html:
-        text_message = convert_html_email_to_plaintext(message)
+        text_message = convert_html_to_plaintext(message)
         mail = EmailMultiAlternatives(subject, text_message, from_email, [to], connection=connection, headers=headers)
         mail.attach_alternative(message, 'text/html')
         ret = mail.send()
@@ -99,7 +99,7 @@ def deliver_mail(to, subject, message, from_email, bcc=None, is_html=False, head
     return ret
         
 
-def convert_html_email_to_plaintext(html_message):
+def convert_html_to_plaintext(html_message):
     """ Converts a cosinnus HTML rendered message to useful plaintext """
     
     htmler = html2text.HTML2Text()
@@ -164,7 +164,7 @@ def send_mail_or_fail_threaded(to, subject, template, data, from_email=None, bcc
         mail_thread.start()
 
 
-def send_html_mail_threaded(to_user, subject, html_content, topic_instead_of_subject=None):
+def send_html_mail(to_user, subject, html_content, topic_instead_of_subject=None, threaded=False):
     """ Sends out a pretty html to an email-address.
         The given `html_content` will be placed inside the notification html template,
         and the style will be a "from-portal" style (instead of a "from-group" style.
@@ -173,8 +173,14 @@ def send_html_mail_threaded(to_user, subject, html_content, topic_instead_of_sub
     
     template = '/cosinnus/html_mail/notification.html'
     data = get_html_mail_data(to_user, topic_instead_of_subject or subject, html_content)
-    send_mail_or_fail_threaded(to_user.email, subject, template, data, is_html=True)
-
+    if threaded:
+        send_mail_func = send_mail_or_fail_threaded
+    else:
+        send_mail_func = send_mail_or_fail
+    send_mail_func(to_user.email, subject, template, data, is_html=True)
+    
+def send_html_mail_threaded(to_user, subject, html_content, topic_instead_of_subject=None):
+    send_html_mail(to_user, subject, html_content, topic_instead_of_subject=topic_instead_of_subject, threaded=True)
 
 def render_html_mail(to_user, subject, html_content):
     """ Renders the HTML that would be used to send an email given the content.
@@ -236,6 +242,7 @@ def get_common_mail_context(request, group=None, user=None):
         'site_name': portal.name,
         'protocol': protocol,
         'domain_url': portal.get_domain(),
+        'portal': portal,
     }
     if group:
         context.update({
@@ -243,8 +250,9 @@ def get_common_mail_context(request, group=None, user=None):
             'group': group,
         })
     if user:
+        from cosinnus.templatetags.cosinnus_tags import full_name_force
         context.update({
-            'user_name': user.get_full_name() or user.get_username(),
+            'user_name': full_name_force(user),
             'user': user,
         })
     return context

@@ -3,13 +3,12 @@ from __future__ import unicode_literals
 
 from builtins import object
 import locale
+import six
 from threading import Thread
 
-from django.contrib.postgres.fields.jsonb import JSONField as PostgresJSONField
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models, transaction
 from django.urls.base import reverse
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
@@ -63,7 +62,7 @@ class CosinnusUserImportReportItems(object):
         return render_to_string('cosinnus/user_import/report_item.html', context=context)
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusUserImport(models.Model):
     """ Saves uploaded import data and report output so that a dry-run can be saved and the user can,
         after checking the report, finalize the import from the dry run.
@@ -103,9 +102,8 @@ class CosinnusUserImport(models.Model):
     state = models.PositiveSmallIntegerField(_('Import state'), blank=False,
         default=STATE_DRY_RUN_RUNNING, choices=STATE_CHOICES, editable=False)
     
-    import_data = PostgresJSONField(default=dict, verbose_name=_('Import Data'), blank=True,
-        help_text='Stores the uploaded CSV data',
-        encoder=DjangoJSONEncoder, editable=False)
+    import_data = models.JSONField(default=dict, verbose_name=_('Import Data'), blank=True,
+        help_text='Stores the uploaded CSV data', editable=False, encoder=DjangoJSONEncoder)
     import_report_html = models.TextField(verbose_name=_('Import Report HTML'),
        help_text='Stores the generated report for what the import will do / has done.', blank=True)
     
@@ -190,7 +188,7 @@ class CosinnusUserImportProcessorBase(object):
     CSV_HEADERS_TO_FIELD_MAP = {
         'email': 'email',
         'firstname': 'first_name',
-        'lastname':'last_name',
+        'lastname': 'last_name',
     }
     
     # lower case list of all column names known and used for the import
@@ -205,10 +203,10 @@ class CosinnusUserImportProcessorBase(object):
         'first_name',
     ]
     # reverse map of CSV_HEADERS_TO_FIELD_MAP, initialized on init
-    field_name_map = None # dict
+    field_name_map = None  # dict
     
     # a list of django.auth.Users created already during the run
-    created_users = None # dict
+    created_users = None  # dict
     
     # the user performing the import, or None
     import_creator = None
@@ -386,8 +384,8 @@ class CosinnusUserImportProcessorBase(object):
             @return: None if not successful, else a auth user object """
         # fields are in REQUIRED_FIELDS_FOR_IMPORT so we can assume they exist
         email = item_data.get(self.field_name_map['email']).lower()
-        first_name = item_data.get(self.field_name_map['first_name']) 
-        last_name = item_data.get(self.field_name_map['last_name'], None) 
+        first_name = item_data.get(self.field_name_map['first_name'], '')[:30]
+        last_name = item_data.get(self.field_name_map['last_name'], '')[:30]
         
         if not validates(EmailValidator, email):
             user_import_item.add_user_report_item(_('The email address was not a valid email address!'), report_class="error")
@@ -401,12 +399,13 @@ class CosinnusUserImportProcessorBase(object):
         if last_name:
             user_kwargs['last_name'] = last_name
         user = get_user_model()(**user_kwargs)
-        
+        #
         if not dry_run:
             user.save()
             user.username = str(user.id)
             user.save()
-            CosinnusPortalMembership.objects.create(group=CosinnusPortal.get_current(), user=user, status=MEMBERSHIP_MEMBER)
+            # CosinnusPortalMembership.objects.get_or_create(group=CosinnusPortal.get_current(), user=user,
+            #                                                status=MEMBERSHIP_MEMBER)
             
         del user_kwargs['username']
         user_import_item.add_user_report_item(str(_('New user account: ') + str(user_kwargs)), report_class="info")
