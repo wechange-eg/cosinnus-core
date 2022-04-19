@@ -10,7 +10,7 @@
 
 coverage.xml
 build/
-dist/
+# dist/
 docs/_build/
 
 !.coveragerc
@@ -20,7 +20,7 @@ _old_templates
 
 # Ignore JavaScript build artifacts.
 cosinnus/static/js/client.js
-dist
+# dist
 
 # Ignore node modules.
 node_modules
