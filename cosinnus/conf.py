@@ -844,6 +844,8 @@ class CosinnusConf(AppConf):
     # if True, won't let any user log in before verifying their e-mail 
     USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN = False
     
+    # if True, hides the portal completey from external visitors.
+    # "logged in only" mode for the portal
     USER_EXTERNAL_USERS_FORBIDDEN = False
     
     # whether the "last name" user form field is also required, just like "first name"
