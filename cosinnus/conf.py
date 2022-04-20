@@ -588,7 +588,7 @@ class CosinnusConf(AppConf):
     MAP_IMAGE_SIZE = (500, 500)
 
     # display map in iframe in user dashboard
-    USERDASHBOARD_USE_LIVE_MAP_WIDGET = False
+    USERDASHBOARD_USE_LIVE_MAP_WIDGET = True
     
     # switch to the German version of OpenStreetMap tileset
     MAP_USE_MODERN_TILESET = False
