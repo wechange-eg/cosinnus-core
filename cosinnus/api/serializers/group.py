@@ -55,8 +55,8 @@ class CosinnusSocietySerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta(object):
         model = CosinnusSociety
-        fields = ('name', 'slug', 'description', 'description_long', 'contact_info',
-                  'avatar', 'website', 'related', 'topics', 'tags', 'locations', 'created')
+        fields = ('name', 'slug', 'description', 'description_long', 'contact_info', 'avatar', 'website',
+                  'related', 'topics', 'tags', 'locations', 'created', 'is_open_for_cooperation')
 
 
 class CosinnusProjectSerializer(CosinnusSocietySerializer):

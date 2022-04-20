@@ -168,6 +168,13 @@
                     {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.media_tag.public label=public_label legend=public_legend checkbox_label=public_box_label %}
                     {% endif %}
 
+                    {% if SETTINGS.COSINNUS_MATCHING_ENABLED %}
+                    {# is_open_for_cooperation Field #}
+                    {% trans "Is your organization open for cooperation in the funding program?" as is_open_for_cooperation_label %}
+                    {% trans "Organization is open for future projects." as is_open_for_cooperation_box_label %}
+                    {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.is_open_for_cooperation label=is_open_for_cooperation_label checkbox_label=is_open_for_cooperation_box_label %}
+                    {% endif %}
+
                 </div>
                 {% block extra_forms %}
                 {% for form in form.forms.obj.extra_forms %}

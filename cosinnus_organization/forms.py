@@ -54,7 +54,7 @@ class CosinnusOrganizationLocationInlineFormset(InlineFormSetFactory):
 
 class _CosinnusOrganizationForm(AsssignPortalMixin, AdditionalFormsMixin, forms.ModelForm):
 
-    extra_forms_setting = 'COSINNUS_ORGANIZATION_ADDITIONAL_FORMS'
+    dynamic_forms_setting = 'COSINNUS_ORGANIZATION_ADDITIONAL_FORMS'
 
     avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), 
                       disable_preview=True, validators=[validate_file_infection])
@@ -62,7 +62,7 @@ class _CosinnusOrganizationForm(AsssignPortalMixin, AdditionalFormsMixin, forms.
     class Meta(object):
         model = CosinnusOrganization
         fields = ['name', 'type', 'type_other', 'description', 'avatar', 'wallpaper', 'website', 'email',
-                  'phone_number']
+                  'phone_number', 'is_open_for_cooperation']
 
     def __init__(self, instance, *args, **kwargs):
         if 'request' in kwargs:

@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 from haystack import indexes
 
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.contrib.auth.models import AnonymousUser
 from django.utils.timezone import now
+from haystack.fields import SearchField
 
 from cosinnus.conf import settings
 from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveNgramField,\
@@ -23,7 +25,23 @@ from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_ids
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus_organization.models import CosinnusOrganization
-    
+
+
+class NestedField(SearchField):
+    field_type = "nested"
+    nested_fields = []
+    properties = {
+    }
+
+    def __init__(self, *args, nested_fields=None, **kwargs):
+        self.nested_fields = nested_fields or getattr(settings, 'COSINNUS_MATCHING_DYNAMIC_FIELDS', [])
+        super().__init__(*args, **kwargs)
+
+    def get_properties(self):
+        if not self.properties:
+            self.properties = dict((k, {"type": "keyword"}) for k in self.nested_fields)
+        return self.properties
+
 
 class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataIndexMixin, indexes.SearchIndex):
     
@@ -41,6 +59,8 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     group = indexes.IntegerField(model_attr='id')
     from_date = TimezoneAwareHaystackDateTimeField(model_attr='from_date', null=True)
     to_date = TimezoneAwareHaystackDateTimeField(model_attr='to_date', null=True)
+    dynamic_fields = NestedField(model_attr='dynamic_fields', stored=True, indexed=False)
+    is_open_for_cooperation = indexes.BooleanField(model_attr='is_open_for_cooperation')
     
     # for filtering on this model
     is_group_model = indexes.BooleanField(default=True)
@@ -126,7 +146,7 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
         except ImportError:
             return -1
         return event_model.get_current(obj, AnonymousUser()).count()
-    
+
     def index_queryset(self, using=None):
         qs = self.get_model().objects.all()
         qs = qs.filter(is_active=True)

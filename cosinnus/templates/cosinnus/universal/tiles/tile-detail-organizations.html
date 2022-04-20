@@ -25,6 +25,17 @@
     </div>
 {% endblock top_line_group %}
 
+{% block additional_top_line %}
+{{ block.super }}
+{% if is_open_for_cooperation %}
+<div class="alert apply-bg-color-organizations">
+    <i class="fa fa-puzzle-piece"></i>
+    {# Translators: __INCLUDE_JS_PO__ #}
+    <p>{% trans "This organization is open for further partner organizations." %}</p>
+</div>
+{% endif %}
+{% endblock %}
+
 {% block action_buttons %}
 {% if portal == COSINNUS_EXCHANGE_PORTAL_ID and url %}
     <div class="tile-section tile-section-button-list">

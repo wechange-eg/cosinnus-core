@@ -54,6 +54,10 @@ module.exports = ContentControlView.extend({
         
         // in fullscreen mode, this must always be the base URL we started at
         basePageURL: '/map/',
+
+        myGroups: [],
+        myProjects: [],
+        myOrganizations: [],
         
         // will be set to self.state during initialization
         state: {
@@ -72,6 +76,7 @@ module.exports = ContentControlView.extend({
             managedTagsFiltersActive: false,
             ignoreLocation: false, // if true, search ignores all geo-loc and even shows results without tagged location
             exchange: false, // if true, search includes contents from external platforms
+            matching: '', // if set, search shows contents matching group/project/organization specified
             searching: false,
             searchHadErrors: false,
             searchResultLimit: 20,
@@ -148,6 +153,11 @@ module.exports = ContentControlView.extend({
         if (COSINNUS_MAP_OPTIONS['exchange_default_activated']) {
             self.state.exchange = true;
         }
+        if (COSINNUS_MATCHING_ENABLED ) {
+            var searchParams = new URLSearchParams(window.location.search);
+            self.state.matching = searchParams.get('matching');
+            self.state.ignoreLocation = true;
+        }
         
         if (!self.collection) {
             self.collection = new ResultCollection();
@@ -199,7 +209,9 @@ module.exports = ContentControlView.extend({
         'click .managed-tag-button': 'toggleManagedTagsFilterButton',
         'mouseenter .hover-image-button': 'showHoverIcon',
         'mouseleave .hover-image-button': 'hideHoverIcon',
-        'mouseenter .hover-image-icon': 'hideHoverIcon'
+        'mouseenter .hover-image-icon': 'hideHoverIcon',
+
+        'click .match-button': 'matchButtonClicked'
     },
 
     // Event Handlers
@@ -369,6 +381,16 @@ module.exports = ContentControlView.extend({
         $button.toggleClass('selected');
         // mark search box as searchable
         this.markSearchBoxSearchable();
+    },
+
+    matchButtonClicked: function (event) {
+        event.preventDefault();
+        var $button = $(event.currentTarget);
+        // Replace matching parameter
+        var searchParams = new URLSearchParams(window.location.search);
+        searchParams.set('matching', $button.data('match'));
+        window.location.search = searchParams.toString();
+        this.triggerSearchFromUrl(true);
     },
     
     /** Reset all types of input filters and trigger a new search */
@@ -1165,6 +1187,10 @@ module.exports = ContentControlView.extend({
             view.applyUrlSearchParameters(urlParams);
         });
         this.determineActiveFilterStatuses();
+        // Check if matching enabled and matching object given
+        if (COSINNUS_MATCHING_ENABLED && this.state.matching) {
+            _.extend(this.options, this.getMatchingOptions());
+        }
         this.render();
         this.triggerDelayedSearch(true, true, noNewNavigateEvent, 'initial-search');
     },
@@ -1336,7 +1362,60 @@ module.exports = ContentControlView.extend({
             this.hoveredResult.set('hovered', true);
         }
     },
-    
+
+
+    /**
+     * Get options for matching (my groups, project and organizations)
+     */
+    getMatchingOptions: function () {
+        var options = {
+            myGroups: [],
+            myProjects: [],
+            myOrganizations: [],
+        };
+        var self = this;
+        var filterOpenForCooperation = function (item) {
+            return item.is_open_for_cooperation;
+        }
+        var addSelected = function (prefix) {
+            return function (item) {
+                return _.extend(item,
+                  {
+                      selected: self.state.matching === prefix + "." + item.slug,
+                  }
+                )
+            }
+        }
+        $.ajax({
+            url: '/api/v2/groups/mine?limit=100',
+            success: function(data) {
+                var filteredResult = data.results.filter(function (item) {
+                    return filterOpenForCooperation(item) && item.slug !== COSINNUS_FORUM_GROUP_SLUG;
+                });
+                options.myGroups = filteredResult.map(addSelected('groups'));
+            },
+            async: false
+        });
+        $.ajax({
+            url: '/api/v2/projects/mine?limit=100',
+            success: function(data) {
+                var filteredResult = data.results.filter(filterOpenForCooperation);
+                options.myProjects = filteredResult.map(addSelected('projects'));
+            },
+            async: false
+        });
+        $.ajax({
+            url: '/api/v2/organizations/mine?limit=100',
+            success: function(data) {
+                var filteredResult = data.results.filter(filterOpenForCooperation);
+                options.myOrganizations = filteredResult.map(addSelected('organizations'));
+            },
+            async: false
+        });
+        console.log(options);
+        return options;
+    },
+
     
     /** determine if any filtering method is active (topics or result types) */
     determineActiveFilterStatuses: function () {
@@ -1385,7 +1464,7 @@ module.exports = ContentControlView.extend({
             util.log('control-view.js: New search! Aborting current search request.')
             self.currentSearchHttpRequest.abort();
         }
-        
+
         self.currentSearchHttpRequest = $.ajax(url, {
             type: 'GET',
             timeout: self.searchXHRTimeout,
@@ -1490,6 +1569,7 @@ module.exports = ContentControlView.extend({
             q: util.ifundef(urlParams.q, this.state.q),
             ignoreLocation: util.ifundef(urlParams.ignore_location, this.state.ignoreLocation),
             exchange: util.ifundef(urlParams.exchange, this.state.exchange),
+            matching: util.ifundef(urlParams.matching, this.state.matching),
             searchResultLimit: util.ifundef(urlParams.limit, this.state.searchResultLimit),
             activeTopicIds: util.ifundef(urlParams.topics, this.state.activeTopicIds),
             activeTextTopicIds: util.ifundef(urlParams.text_topics, this.state.activeTextTopicIds),
@@ -1663,6 +1743,11 @@ module.exports = ContentControlView.extend({
                 exchange: 1
             });
         }
+        if (this.state.matching) {
+            _.extend(searchParams, {
+                matching: this.state.matching
+            });
+        }
         if (forAPI) {
             _.extend(searchParams, {
                 limit: this.state.searchResultLimit
@@ -1673,7 +1758,7 @@ module.exports = ContentControlView.extend({
         util.log(searchParams)
         return searchParams
     },
-    
+
     /**
      * Build the URL containing all parameters for the current view
      * 
