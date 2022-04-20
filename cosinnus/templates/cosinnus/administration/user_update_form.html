@@ -10,7 +10,11 @@
 {% block breadcrumb %}
 <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
 <li><a href="{% url 'cosinnus:administration-users' %}">{% trans "User Management" %}</a></li>
-<li class="active">{% trans "User" %}</li>
+<li class="active">
+    {% trans "User" %}: 
+    {{ form.forms.user.first_name.value }}
+    {{ form.forms.user.last_name.value }}
+</li>
 {% endblock %}
 
 {% block managed_tags %}
