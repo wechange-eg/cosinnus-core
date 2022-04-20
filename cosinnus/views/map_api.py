@@ -349,15 +349,20 @@ class MapMatchingView(SearchQuerySetMixin, APIView):
     """
     def get(self, request, filter_group_id=None):
         matching_result = self.get_matching_result()
-        sqs = list(self.get_queryset_matching(matching_result, filter_group_id=filter_group_id))
-        sqs += list(self.get_queryset_not_matching(matching_result, filter_group_id=filter_group_id))
-        data = self.search(sqs)
-        return Response(data)
+        if matching_result:
+            sqs = list(self.get_queryset_matching(matching_result, filter_group_id=filter_group_id))
+            sqs += list(self.get_queryset_not_matching(matching_result, filter_group_id=filter_group_id))
+            data = self.search(sqs)
+            return Response(data)
+        return Response({
+            "results": [],
+            "page": None
+        })
 
     def get_matching_result(self):
         """Return result described with matching parameter (e. g. project.<slug>)"""
         # get matching candidate for comparison (e. g. project.<slug>)
-        matching = re.match(r'(projects|groups|organizations)\.([a-z0-9-_]+)', self.params.get('matching', ''))
+        matching = re.match(r'(projects|groups|organizations)\.([a-z0-9-_]+)', str(self.params.get('matching', '')))
         if not matching:
             return None
         matching_type, matching_slug = matching.groups()
