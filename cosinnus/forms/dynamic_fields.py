@@ -129,8 +129,6 @@ class _DynamicFieldsBaseFormMixin(object):
         
         self.prepare_extra_fields_initial()
         self.prepare_extra_fields()
-        if 'extra_fields' in self.fields:
-            del self.fields['extra_fields']
         if 'dynamic_fields' in self.fields:
             del self.fields['dynamic_fields']
             

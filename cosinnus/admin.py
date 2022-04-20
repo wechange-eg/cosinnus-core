@@ -545,14 +545,13 @@ USER_MODEL = get_user_model()
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    exclude = ('extra_fields',)
+    pass
 
 admin.site.register(get_user_profile_model(), UserProfileAdmin)
 
 
 class UserProfileInline(admin.StackedInline):
     model = USER_PROFILE_MODEL
-    exclude = ('extra_fields',)
     readonly_fields = ('deletion_triggered_by_self',)
 
 class PortalMembershipInline(admin.TabularInline):

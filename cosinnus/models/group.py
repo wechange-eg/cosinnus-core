@@ -886,10 +886,6 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
 
     is_open_for_cooperation = models.BooleanField(_('Open for cooperation'), default=False)
 
-    # NOTE: this is the deprecated old extra_field jsonfield,
-    # but it is still in use for some custom portal code, so cannot yet be removed.
-    # DO NOT USE THIS IN NEW CODE ANYMORE. USE `group.dynamic_fields` or `group.settings` instead!
-    extra_fields = models.JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder)
     settings = models.JSONField(default=dict, blank=True, null=True, encoder=DjangoJSONEncoder)
     
     dynamic_fields = models.JSONField(default=dict, blank=True, verbose_name=_('Dynamic extra fields'),

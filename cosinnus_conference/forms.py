@@ -75,7 +75,7 @@ class ConferenceConfirmSendRemindersForm(forms.ModelForm):
 
     class Meta:
         model = get_cosinnus_group_model()
-        fields = ('extra_fields', )
+        fields = ('dynamic_fields', )
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
@@ -95,21 +95,21 @@ class ConferenceConfirmSendRemindersForm(forms.ModelForm):
         }
 
     def get_initial_for_field(self, field, field_name):
-        extra_fields = {}
-        if self.instance.extra_fields:
-            extra_fields = self.instance.extra_fields
+        dynamic_fields = {}
+        if self.instance.dynamic_fields:
+            dynamic_fields = self.instance.dynamic_fields
         if field_name == 'subject' or field_name == 'content':
             field_name = 'send_immediately_{}'.format(field_name)
-            field_value = extra_fields.get('reminder_{}'.format(field_name),
+            field_value = dynamic_fields.get('reminder_{}'.format(field_name),
                                            get_initial_template(field_name))
             return render_html_with_variables(
                 self.user, field_value, self.get_variables())
 
     def save(self, commit=True):
         now = timezone.now()
-        if not self.instance.extra_fields:
-            self.instance.extra_fields = {}
-        self.instance.extra_fields['reminder_send_immediately_last_sent'] = now
+        if not self.instance.dynamic_fields:
+            self.instance.dynamic_fields = {}
+        self.instance.dynamic_fields['reminder_send_immediately_last_sent'] = now
         return super().save(commit)
 
 
