@@ -62,7 +62,7 @@ from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm, Member
     CosinnusGroupGalleryImageForm, CosinnusGroupCallToActionButtonForm, MultiUserSelectForm, MultiGroupSelectForm
 from cosinnus.forms.tagged import get_form
 from cosinnus.models import group  # circular import
-from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
+from cosinnus.models.group import (CosinnusGroup, CosinnusGroupInviteToken, CosinnusGroupMembership,
                                    CosinnusPortal, CosinnusLocation,
                                    CosinnusGroupGalleryImage, CosinnusGroupCallToActionButton,
                                    CosinnusUnregisterdUserGroupInvite)
@@ -558,6 +558,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             'group_invite_form': MultiGroupSelectForm(group=self.group),
             'invited_groups': invited_groups,
             'user_is_superuser': user_is_superuser,
+            'invite_tokens': CosinnusGroupInviteToken.objects.filter(title__startswith=self.group.name).filter(is_active=True),
         })
         return context
 

@@ -43,6 +43,17 @@
 	    </div>
     {% endif %}
 
+	{% block join_token_link %}
+		<div class="content-box">
+			{% if group.use_invite_token and user in admins%}
+				<label>{% trans "Invite users directly via the following link: " %}</label>
+				{% for invite_token in invite_tokens %}
+					<label>{{ invite_token.get_absolute_url }}</label>
+				{% endfor %}
+			{% endif %}
+		</div>
+	{% endblock join_token_link %}
+
     <!-- a box with semi transparent background -->
     <div class="content-box">
         
@@ -366,6 +377,8 @@
 						                    </li>
 						                </ul>
 						            </button>
+
+									<!-- {% include 'cosinnus/common/empty_button.html' with message="There are no new membership requests." %} -->
 						            
 						            <div class="clearfix large-space"></div>
 						            <div class="alert alert-warning alert-dismissable" id="label-invite-email-added" style="display: none; min-height: 48px;">
