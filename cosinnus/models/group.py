@@ -974,20 +974,24 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         if self.conference_theme_color:
             self.conference_theme_color = self.conference_theme_color.replace('#', '')
 
-        # generate invite token
-        if self.use_invite_token and self.settings.get('invite_token') == None:
-            random_string = get_random_string(8)
-            self.settings.update({'invite_token': random_string})
-            token = CosinnusGroupInviteToken.objects.create(token=random_string, title=f"{self.name}_{self.settings.get('invite_token')}")
-            token.invite_groups.add(self)
-            token.save()
-        elif self.use_invite_token and self.settings.get('invite_token') != None:
-            if self.name != self._original_name:
-                CosinnusGroupInviteToken.objects.filter(title__startswith=self._original_name).update(title=f"{self.name}_{self.settings.get('invite_token')}")
-            if getattr(CosinnusGroupInviteToken, 'is_active', False):
-                CosinnusGroupInviteToken.objects.filter(title__startswith=self.name).update(is_active=True)
-        elif not self.use_invite_token and self.settings.get('invite_token') and getattr(CosinnusGroupInviteToken, 'is_active', True):
-            CosinnusGroupInviteToken.objects.filter(title__startswith=self.name).update(is_active=False)
+        # generate invite token: 
+        try: 
+            CosinnusGroupInviteToken.objects.get(token=self.settings.get('invite_token'))
+            if self.use_invite_token and self.settings.get('invite_token') != None:
+                if self.name != self._original_name:
+                    CosinnusGroupInviteToken.objects.filter(title__startswith=self._original_name).update(title=f"{self.name}")
+                if getattr(CosinnusGroupInviteToken, 'is_active', False):
+                    CosinnusGroupInviteToken.objects.filter(title__startswith=self.name).update(is_active=True)
+            elif not self.use_invite_token and self.settings.get('invite_token') and getattr(CosinnusGroupInviteToken, 'is_active', True):
+                CosinnusGroupInviteToken.objects.filter(title__startswith=self.name).update(is_active=False)
+        except CosinnusGroupInviteToken.DoesNotExist:
+            self.settings.update({'invite_token': None}) 
+            if self.use_invite_token and self.settings.get('invite_token') == None:
+                random_string = get_random_string(8)
+                self.settings.update({'invite_token': random_string})
+                token = CosinnusGroupInviteToken.objects.create(token=random_string, title=f"{self.name}")
+                token.invite_groups.add(self)
+                token.save()
 
         super(CosinnusBaseGroup, self).save(*args, **kwargs)
 

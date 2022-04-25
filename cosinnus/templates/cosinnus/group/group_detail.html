@@ -46,10 +46,12 @@
 	{% block join_token_link %}
 		<div class="content-box">
 			{% if group.use_invite_token and user in admins%}
-				<label>{% trans "Invite users directly via the following link: " %}</label>
-				{% for invite_token in invite_tokens %}
-					<label>{{ invite_token.get_absolute_url }}</label>
-				{% endfor %}
+			<p class="transparent">
+					{% trans "Invite users directly via the following link: " %}
+					{% for invite_token in invite_tokens %}
+						<a href="{{ invite_token.get_absolute_url }}" target="_blank">{{ invite_token.get_absolute_url }}</a>
+					{% endfor %}
+				</p>
 			{% endif %}
 		</div>
 	{% endblock join_token_link %}

@@ -1457,11 +1457,3 @@ def get_forum_group():
     forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
     forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
     return forum_group
-
-# @register.simple_tag()
-# def get_invite_tokens():
-#     #group = get_object_or_None(get_cosinnus_group_model(), portal=CosinnusPortal.get_current())
-#     group = get_object_or_None(get_cosinnus_group_model(), use_invite_token=True, portal=CosinnusPortal.get_current())
-#     invite_tokens = CosinnusGroupInviteToken.objects.filter(invite_groups__in=group.use_invite_token)
-#     print(invite_tokens)
-#     return invite_tokens
