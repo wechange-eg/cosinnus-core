@@ -2,6 +2,7 @@
 {% import "include/macros.html" as macros %}
 
 {% block description_area %}
+    {% block title %}
     <h1>
     	{{title}}
     	{% if isYou %}
@@ -11,6 +12,7 @@
 			</i>
 		{% endif %}
     </h1>
+    {% endblock %}
     
     {% if group_slug and group_name and portal %}
         <div class="pale-color one-line">

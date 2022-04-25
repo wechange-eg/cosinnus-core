@@ -407,9 +407,9 @@ class CosinnusGroupManager(models.Manager):
         from cosinnus.models.group_extra import CosinnusConference # noqa
         # Prepare query: Mark due conferences
         key = f'reminder_{field_name}'
-        queryset = CosinnusConference.objects.annotate(extra_fields_json=Cast(F('extra_fields'),
-                                                                                      models.JSONField(default={}, encoder=DjangoJSONEncoder)))
-        queryset = queryset.annotate(to_be_reminded=KeyTextTransform(key, 'extra_fields_json'))
+        queryset = CosinnusConference.objects.annotate(dynamic_fields_json=Cast(F('dynamic_fields'),
+                                                                              PostgresJSONField(default={})))
+        queryset = queryset.annotate(to_be_reminded=KeyTextTransform(key, 'dynamic_fields_json'))
         # Prepare query: Mark conferences already notified
         queryset = queryset.annotate(settings_json=Cast(F('settings'), models.JSONField(default={}, encoder=DjangoJSONEncoder)))
         queryset = queryset.annotate(already_reminded=KeyTextTransform(f'{key}_sent', 'settings_json'))
@@ -563,7 +563,7 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
     email_needs_verification = models.BooleanField(_('Emails Need Verification'),
                                                    help_text=_(
                                                        'If activated, newly registered users and users who change their email address will need to confirm their email by clicking a link in a mail sent to them.'),
-                                                   default=False)
+                                                   default=True)
 
     # The different keys used for this are static variables in CosinnusPortal!
     saved_infos = models.JSONField(default=dict, encoder=DjangoJSONEncoder)
@@ -884,10 +884,8 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
     # on the platform, no matter their visibility settings, and thus subject to moderation
     cosinnus_always_visible_by_users_moderator_flag = True
 
-    # NOTE: this is the deprecated old extra_field jsonfield, 
-    # but it is still in use for some custom portal code, so cannot yet be removed.
-    # DO NOT USE THIS IN NEW CODE ANYMORE. USE `group.dynamic_fields` or `group.settings` instead!
-    extra_fields = models.JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder)
+    is_open_for_cooperation = models.BooleanField(_('Open for cooperation'), default=False)
+
     settings = models.JSONField(default=dict, blank=True, null=True, encoder=DjangoJSONEncoder)
     
     dynamic_fields = models.JSONField(default=dict, blank=True, verbose_name=_('Dynamic extra fields'),

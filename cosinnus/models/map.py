@@ -28,8 +28,10 @@ from cosinnus.utils.group import message_group_admins_url
 from cosinnus.utils.permissions import check_ug_membership, check_ug_pending, \
     check_ug_invited_pending, check_user_superuser
 from cosinnus.utils.urls import group_aware_reverse
+from cosinnus_event.models import Event
 from cosinnus_exchange.models import ExchangeProject, ExchangeSociety, ExchangeOrganization, ExchangeEvent
 from cosinnus.utils.dates import HumanizedEventTimeObject
+from cosinnus_organization.models import CosinnusOrganization
 
 
 def _prepend_url(user, portal=None):
@@ -95,6 +97,7 @@ class HaystackMapCard(BaseMapCard):
             'address': result.mt_location,
             'url': result.url,
             'iconImageUrl': result.icon_image_url,
+
         }
         fields.update(**kwargs)
         
@@ -186,6 +189,8 @@ class BaseMapResult(DictResult):
         'type': 'BaseResult',  # should be different for every class
         'liked': False,  # has the current user liked this?
         'source': None,  # source platform if external content
+        'dynamic_fields': None,
+        'is_open_for_cooperation': None,
     }
 
 
@@ -242,6 +247,8 @@ class HaystackMapResult(BaseMapResult):
             'content_count': result.content_count,
             'liked': user.id in result.liked_user_ids if (user and getattr(result, 'liked_user_ids', [])) else False,
             'source': result.source,
+            'dynamic_fields': result.dynamic_fields,
+            'is_open_for_cooperation': result.is_open_for_cooperation,
         }
         if settings.COSINNUS_ENABLE_SDGS:
             fields.update({
@@ -640,23 +647,33 @@ SHORTENED_ID_MAP = {
     'cosinnus.userprofile': 3,
     'cosinnus_event.event': 4,
     'cosinnus.cosinnusidea': 5,
-    'cosinnus_organization.CosinnusOrganization': 6,
+    'cosinnus_organization.cosinnusorganization': 6,
 }
+SHORTENED_ID_MAP_REVERSE = dict([(val, key) for key, val in list(SHORTENED_ID_MAP.items())])
 
 SEARCH_MODEL_NAMES = {
     get_user_profile_model(): 'people',
     CosinnusProject: 'projects',
     CosinnusSociety: 'groups',
+    Event: 'events',
+    CosinnusOrganization: 'organizations',
 }
+SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(SEARCH_MODEL_NAMES.items())])
+
 SHORT_MODEL_MAP = {
     1: CosinnusProject,
     2: CosinnusSociety,
     3: get_user_profile_model(),
+    # 4: Event,
+    # 5: CosinnusIdea,
+    6: CosinnusOrganization,
 }
+SHORT_MODEL_MAP_REVERSE = dict([(val, key) for key, val in list(SHORT_MODEL_MAP.items())])
 SEARCH_RESULT_DETAIL_TYPE_MAP = {
     'people': DetailedUserMapResult,
     'projects': DetailedProjectMapResult,
     'groups': DetailedSocietyMapResult,
+    'organizations': DetailedOrganizationMapResult,
 }
 try:
     from cosinnus_event.models import Event #noqa
@@ -810,8 +827,7 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
         'conferences': DetailedConferenceMapResult,
     })
 
-    
-SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(SEARCH_MODEL_NAMES.items())])
+
 # these can always be read by any user (returned fields still vary)
 SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS = [
     'projects',

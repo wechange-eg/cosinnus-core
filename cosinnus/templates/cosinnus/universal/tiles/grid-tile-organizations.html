@@ -1,0 +1,14 @@
+{% extends 'tiles/grid-tile-default' %}
+
+{% block title %}
+    {% if is_open_for_cooperation %}
+    <h1 class="with-icon">
+        <span>{{ title }}</span>
+        <i class="fa fa-puzzle-piece apply-color-organizations"></i>
+    </h1>
+    {% else %}
+    <h1>
+        {{ title }}
+    </h1>
+    {% endif %}
+{% endblock %}

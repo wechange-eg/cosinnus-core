@@ -144,7 +144,7 @@ var App = function App () {
      *  or enabling only specific Result model types. */
     self.initAppFromOptions = function (options) {
         // add passed options into params extended over the default options
-    	var el = options.el ? options.el : self.defaultEl;
+    	  var el = options.el ? options.el : self.defaultEl;
         var displayOptions = $.extend(true, {}, self.defaultDisplayOptions, options.display || {});
         var settings = $.extend(true, {}, self.defaultSettings, options.settings || {});
         var basePageUrl = options.basePageUrl || self.defaultBasePageUrl;
@@ -194,8 +194,8 @@ var App = function App () {
                 splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles,
                 searchResultLimit: self.settings.searchResultLimit || 20,
                 hideTopics: self.settings.hideTopics || false,
-            }, 
-            self, 
+            },
+            self,
             null
         ); // collection=null here, gets instantiated in the control view
         self.contentViews.push(self.controlView);
@@ -299,7 +299,7 @@ var App = function App () {
 
     self.initNavbarQuicksearchFromOptions = function (options) {
         // add passed options into params extended over the default options
-    	var el = options.el ? options.el : '#nav-quicksearch';
+    	  var el = options.el ? options.el : '#nav-quicksearch';
         var topicsJson = typeof COSINNUS_MAP_TOPICS_JSON !== 'undefined' ? COSINNUS_MAP_TOPICS_JSON : {};
         var textTopicsJson = typeof COSINNUS_MAP_TEXT_TOPICS_JSON !== 'undefined' ? COSINNUS_MAP_TEXT_TOPICS_JSON : {};
         var sdgsJson = typeof COSINNUS_MAP_SDGS_JSON !== 'undefined' ? COSINNUS_MAP_SDGS_JSON : {};
@@ -333,7 +333,7 @@ var App = function App () {
         var portalInfo = typeof COSINNUS_PORTAL_INFOS !== 'undefined' ? COSINNUS_PORTAL_INFOS : {};
         var contextData = options.contextData ? options.contextData : {};
         var contextDataJSON = options.contextDataJSON ? options.contextDataJSON : {};
-        
+
         if (self.navbarMainMenuView == null) {
             self.navbarMainMenuView = new NavbarMainMenuView({
                 model: null,

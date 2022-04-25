@@ -31,7 +31,7 @@ module.exports = ContentControlView.extend({
         splitscreen: false,
         
         state: {
-            
+            matching: ''
         }
     },
     
@@ -109,7 +109,9 @@ module.exports = ContentControlView.extend({
     
     // extended from content-control-view.js
     applyUrlSearchParameters: function (urlParams) {
-        // don't need this here
+        _.extend(this.state, {
+            matching: util.ifundef(urlParams.matching, this.state.matching),
+        });
     },
     
     // extended from content-control-view.js

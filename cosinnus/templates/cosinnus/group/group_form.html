@@ -528,11 +528,18 @@
                         {% endblock visibility_field %}
                         
 						{% if SETTINGS.COSINNUS_EXCHANGE_ENABLED %}
-						{# public Field #}
-						{% trans "Visibility on other platforms" as public_label %}
-						{% blocktrans asvar public_legend with url="/cms/partner-platforms/" %}Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href="#" target="_blank">partner platforms</a> by WECHANGE.{% endblocktrans %}
-						{% trans "This project shall be made publicly findable via other platforms." as public_box_label %}
-						{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.media_tag.public label=public_label legend=public_legend checkbox_label=public_box_label %}
+							{# public Field #}
+							{% trans "Visibility on other platforms" as public_label %}
+							{% blocktrans asvar public_legend with url="/cms/partner-platforms/" %}Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href="#" target="_blank">partner platforms</a> by WECHANGE.{% endblocktrans %}
+							{% trans "This project shall be made publicly findable via other platforms." as public_box_label %}
+							{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.media_tag.public label=public_label legend=public_legend checkbox_label=public_box_label %}
+						{% endif %}
+
+						{% if SETTINGS.COSINNUS_MATCHING_ENABLED %}
+							{# is_open_for_cooperation Field #}
+							{% trans "Is your project open to other partner organizations?" as is_open_for_cooperation_label %}
+							{% trans "Project is open for further partner organizations." as is_open_for_cooperation_box_label %}
+							{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.is_open_for_cooperation label=is_open_for_cooperation_label checkbox_label=is_open_for_cooperation_box_label %}
 						{% endif %}
                         
                         <div {% if group_model == "CosinnusConference" %}style="display: none;"{% endif %}>

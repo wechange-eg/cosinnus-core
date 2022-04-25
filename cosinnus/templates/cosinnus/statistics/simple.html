@@ -17,6 +17,21 @@
 	    </ul>
 	</button>
 
+	{% if request.user|is_superuser %}
+		<button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:housekeeping-portal-switches-and-settings' %}">
+			<ul class="media-list">
+				<li class="media">
+				<span class="pull-left">
+						<i class="fa fa-download"></i>
+					</span>
+					<div class="media-body">
+						{% trans "Portal switches and settings" %}
+					</div>
+				</li>
+			</ul>
+		</button>
+	{% endif %}
+
 	{% if SETTINGS.COSINNUS_CONFERENCES_ENABLED %}
 	    <button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:housekeeping-conference-storage-report' %}">
 	        <ul class="media-list">

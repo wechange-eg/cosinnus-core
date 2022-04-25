@@ -15,6 +15,12 @@ class CosinnusConf(AppConf):
      
      If you are looking for third-party default settings needed by cosinnus, 
      check cosinnus/default_settings.py!
+     
+     Supported tags in comments of settings attributes,
+     for the conf.py parser that prints all contained settings
+     as an excel sheet download:
+         - #internal if this appears in any setting comment, the setting 
+             will be excluded from the excel list
     """
     
     class Meta(object):
@@ -249,6 +255,10 @@ class CosinnusConf(AppConf):
     # when etherpad objects are deleted, should the etherpads on the server be deleted as well?
     DELETE_ETHERPADS_ON_SERVER_ON_DELETE = False
     
+    # if True, will forbid anyone to edit an etherpad created by a user
+    # whose account is inactive or deleted. view-only is still possible.
+    LOCK_ETHERPAD_WRITE_MODE_ON_CREATOR_DELETE = False
+    
     # a list of cosinnus apps that are installed but are disabled for the users, e.g. ['cosinnus_marketplace', ]
     # (they are still admin accessible)
     DISABLED_COSINNUS_APPS = []
@@ -336,6 +346,11 @@ class CosinnusConf(AppConf):
     
     # sets if live notification alerts are enabled
     NOTIFICATION_ALERTS_ENABLED = False
+    
+    # sets how often actual data should be retrieved for user alerts,
+    # independent of how often it is polled, in seconds
+    # (affects how fresh data is on reloads and multiple tabs)
+    NOTIFICATION_ALERTS_CACHE_TIMEOUT = 30 # 30 seconds
     
     # how long like and follow counts should be retained in cache
     LIKEFOLLOW_COUNT_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
@@ -573,7 +588,7 @@ class CosinnusConf(AppConf):
     MAP_IMAGE_SIZE = (500, 500)
 
     # display map in iframe in user dashboard
-    USERDASHBOARD_USE_LIVE_MAP_WIDGET = False
+    USERDASHBOARD_USE_LIVE_MAP_WIDGET = True
     
     # switch to the German version of OpenStreetMap tileset
     MAP_USE_MODERN_TILESET = False
@@ -835,6 +850,8 @@ class CosinnusConf(AppConf):
     # if True, won't let any user log in before verifying their e-mail 
     USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN = False
     
+    # if True, hides the portal completey from external visitors.
+    # "logged in only" mode for the portal
     USER_EXTERNAL_USERS_FORBIDDEN = False
     
     # whether the "last name" user form field is also required, just like "first name"
@@ -884,15 +901,22 @@ class CosinnusConf(AppConf):
     #     ), ...
     # }
     # example: {'organization': {'type': 'text', 'required': True}}
+    # #internal 
     USERPROFILE_EXTRA_FIELDS = {}
+    
+    # which of the fields inUSERPROFILE_EXTRA_FIELDS are translated fields
+    # #internal 
     USERPROFILE_EXTRA_FIELDS_TRANSLATED_FIELDS = []
     
     # a dict of <form-name> -> list of formfield names that will be disabled in the user profile forms 
     # for the current portal. can be dynamic and regular fields
     # multiforms choosable are 'obj' (CosinnusProfile), 'user', 'media_tag'
+    # #internal 
     USERPROFILE_DISABLED_FIELDS = {}
     
     # should the 'user_profile_dynamic_fields.html' be shown as extra_html in the profile map detail page?
+    # meaning, should the full profile of the user be visible on their map detail page
+    # warning: handle this with care if the profile extra fields contain fields with sensitive data
     USERPROFILE_EXTRA_FIELDS_SHOW_ON_MAP = False
     
     # should the form view for admin-defined dynamic fields be shown
@@ -901,6 +925,7 @@ class CosinnusConf(AppConf):
     
     # a list of tuples of a <LIST of managed tag slugs> and <LIST of profile extra field names>
     # that become disabled unless the user has the managed tag
+    # #internal 
     USERPROFILE_EXTRA_FIELDS_ONLY_ENABLED_FOR_MANAGED_TAGS = []
     
     # extra fields for CosinnusBaseGroup derived models.
@@ -943,14 +968,14 @@ class CosinnusConf(AppConf):
     # timeout for nextcloud webdav requests in seconds
     CLOUD_NEXTCLOUD_REQUEST_TIMEOUT = 15
     
+    # disable: ["spreed", "calendar", "mail"], these seem not necessary as they are disabled by default
     CLOUD_NEXTCLOUD_SETTINGS = {
         'DEFAULT_USER_QUOTA': '100 MB', # in human readable nextcloud format
         'ALLOW_PUBLIC_UPLOADS': 'no', # "yes" or "no"
         'ALLOW_AUTOCOMPLETE_USERS': 'no', # "yes" or "no"
         'SEND_EMAIL_TO_NEW_USERS': 'no', # "yes" or "no"
         'ENABLE_APP_IDS': ["groupfolders", "onlyoffice", "sociallogin", "wechangecsp"], # list of string app ids
-        'DISABLE_APP_IDS': ["theming", "photos", "activity", "systemtags"], # list of string app ids
-        # disable: ["spreed", "calendar", "mail"], these seem not necessary as they are disabled by default
+        'DISABLE_APP_IDS': ["theming", "photos", "activity", "systemtags", "dashboard"], # list of string app ids
     }
     
     # if set to a hex color string,
@@ -1138,6 +1163,12 @@ class CosinnusConf(AppConf):
     # e.g.: ['projects', 'groups', 'conferences']
     ALPHABETICAL_ORDER_FOR_SEARCH_MODELS_WHEN_SINGLE = []
     
+    # Matching
+    MATCHING_ENABLED = False
+    # Fields that will be used for matching ranking, should be present in projects, groups and organizations
+    MATCHING_FIELDS = ()
+    MATCHING_DYNAMIC_FIELDS = ()
+    
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.
@@ -1298,4 +1329,6 @@ class CosinnusDefaultSettings(AppConf):
     
     # limit visit creation for (user, bbb_room) pairs to a time window
     BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60*60
+    
+    
     

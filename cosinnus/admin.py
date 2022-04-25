@@ -42,6 +42,7 @@ from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.forms.widgets import PrettyJSONWidget
+from annoying.functions import get_object_or_None
 
 
 class SingleDeleteActionMixin(object):
@@ -278,8 +279,12 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             
             # re-index haystack for this group after getting a properly classed, fresh object
             group.remove_index()
-            group = to_group_klass.objects.get(id=group.id)
-            group.update_index()
+            converted_typed_group = get_object_or_None(to_group_klass, id=group.id)
+            if converted_typed_group:
+                converted_typed_group.update_index()
+            else:
+                message_error = f'There seems to have been a problem converting: "{group.slug}". Please check if it has been converted in the admin. If it has, it may not appear converted until the cache is refreshed. You can do this by saving it in the admin again now.'
+                self.message_error(request, message_error, messages.ERROR)
         
         if converted_names:
             message = _('The following items were converted to %s:') % to_group_klass.get_trans().VERBOSE_NAME_PLURAL + '\n' + ", ".join(converted_names)
@@ -540,14 +545,13 @@ USER_MODEL = get_user_model()
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    exclude = ('extra_fields',)
+    pass
 
 admin.site.register(get_user_profile_model(), UserProfileAdmin)
 
 
 class UserProfileInline(admin.StackedInline):
     model = USER_PROFILE_MODEL
-    exclude = ('extra_fields',)
     readonly_fields = ('deletion_triggered_by_self',)
 
 class PortalMembershipInline(admin.TabularInline):
@@ -654,6 +658,11 @@ class UserAdmin(DjangoUserAdmin):
                     'is_staff', 'scheduled_for_deletion_at')
     list_filter = list(DjangoUserAdmin.list_filter) + [UserHasLoggedInFilter, UserToSAcceptedFilter,
                        UserScheduledForDeletionAtFilter, EmailVerifiedFilter]
+    
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        qs = qs.exclude(email__startswith='__deleted_user__')
+        return qs
     
     def has_logged_in(self, obj):
         return bool(obj.last_login is not None)

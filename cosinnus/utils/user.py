@@ -23,6 +23,7 @@ from django.utils.timezone import now, is_naive
 from dateutil import parser
 import datetime
 import pytz
+from django.core.cache import cache
 
 
 _CosinnusPortal = None
@@ -390,9 +391,21 @@ def get_unread_message_count_for_user(user):
     if not user.is_authenticated:
         return 0
     if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
-        from cosinnus_message.rocket_chat import RocketChatConnection # noqa
-        unread_count = RocketChatConnection().unread_messages(user)
-        
+        unread_count = 0
+        # rocketchat mollycoddling: if the unread message retrieval gets an exception
+        # for any reason, we impose a 5 minute break on retrieving it again, for this user
+        # if the rocketchat service experiences timeouts because of high load, frequent
+        # re-requesting on this connection has shown to finish it off for good, so we give it a break
+        cache_key =  'cosinnus/core/alerts/user/%(user_id)s/rocketchatunreadtimeout' % {'user_id': user.id}
+        is_paused = cache.get(cache_key)
+        if not is_paused:
+            from cosinnus_message.rocket_chat import RocketChatConnection # noqa
+            try:
+                unread_count = RocketChatConnection().unread_messages(user)
+            except:
+                # we do not care what caused an exception here, but we handle them by returning
+                # 0 unread messages and imposing a break for this user
+                cache.set(cache_key, True, 60*5) # 5 minutes
     else:
         from postman.models import Message
         unread_count = Message.objects.inbox_unread_count(user)

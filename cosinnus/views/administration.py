@@ -433,8 +433,11 @@ class AdminUserUpdateView(UserProfileUpdateView):
         form_kwargs.update({
             'obj__hidden_dynamic_fields_shown': True,
             'obj__readonly_dynamic_fields_enabled': True,
-            'obj__user_admin_form_managed_tag_enabled': True,
         })
+        if getattr(settings, 'COSINNUS_MANAGED_TAGS_ENABLED', False):
+            form_kwargs.update({
+                'obj__user_admin_form_managed_tag_enabled': True,
+            })
         return form_kwargs
 
 user_update = AdminUserUpdateView.as_view()

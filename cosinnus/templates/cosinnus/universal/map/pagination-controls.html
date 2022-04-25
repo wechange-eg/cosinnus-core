@@ -113,4 +113,14 @@
 	        </span>
 	    </a>
     {% endif %}
+
+    {% if splitscreen and COSINNUS_MATCHING_ENABLED %}
+	    <a href="{% if not cosinnus_active_user %}/signup/?acc_req_msg=1&next={% endif %}/map/?matching=true" class="rounded-button button-color-primary-inverted shadowed-button">
+	        <span class="rounded-button-inner">
+	            <i class="fa fa-puzzle-piece"></i>
+	            {# Translators: __INCLUDE_JS_PO__ #}
+	            {% trans "Find partners" %}
+	        </span>
+	    </a>
+    {% endif %}
 </div>
