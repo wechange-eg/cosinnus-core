@@ -16,6 +16,7 @@ from cosinnus.core import signals
 import logging
 from django.contrib.auth.signals import user_logged_in
 from threading import Thread
+from annoying.functions import get_object_or_None
 logger = logging.getLogger(__name__)
 
 
@@ -93,8 +94,8 @@ if settings.COSINNUS_ROCKET_ENABLED:
         try:
             rocket = RocketChatConnection()
             if instance.id:
-                old_instance = CosinnusSociety.objects.get(pk=instance.id)
-                if instance.slug != old_instance.slug:
+                old_instance = get_object_or_None(CosinnusSociety, pk=instance.id)
+                if old_instance and instance.slug != old_instance.slug:
                     rocket.groups_rename(instance)
             else:
                 rocket.groups_create(instance)
@@ -106,8 +107,8 @@ if settings.COSINNUS_ROCKET_ENABLED:
         try:
             rocket = RocketChatConnection()
             if instance.id:
-                old_instance = CosinnusProject.objects.get(pk=instance.id)
-                if instance.slug != old_instance.slug:
+                old_instance = get_object_or_None(CosinnusProject, pk=instance.id)
+                if old_instance and instance.slug != old_instance.slug:
                     rocket.groups_rename(instance)
             else:
                 rocket.groups_create(instance)
@@ -119,8 +120,8 @@ if settings.COSINNUS_ROCKET_ENABLED:
         try:
             rocket = RocketChatConnection()
             if instance.id:
-                old_instance = CosinnusConference.objects.get(pk=instance.id)
-                if instance.slug != old_instance.slug:
+                old_instance = get_object_or_None(CosinnusConference, pk=instance.id)
+                if old_instance and instance.slug != old_instance.slug:
                     rocket.groups_rename(instance)
             else:
                 rocket.groups_create(instance)

@@ -45,7 +45,7 @@ ROCKETCHAT_PREFERENCES_EMAIL_NOTIFICATION = (
     ROCKETCHAT_PREFERENCE_EMAIL_NOTIFICATION_MENTIONS
 )
 
-def get_cached_rocket_connection(rocket_username, password, server_url, reset=False):
+def get_cached_rocket_connection(rocket_username, password, server_url, reset=False, timeout=30):
     """ Retrieves a cached rocketchat connection or creates a new one and caches it.
         @param reset: Resets the cached connection and connects a fresh one immediately """
     cache_key = ROCKETCHAT_USER_CONNECTION_CACHE_KEY % (CosinnusPortal.get_current().id, rocket_username)
@@ -66,7 +66,7 @@ def get_cached_rocket_connection(rocket_username, password, server_url, reset=Fa
             rocket_connection = None
 
     if rocket_connection is None:
-        rocket_connection = RocketChat(user=rocket_username, password=password, server_url=server_url)
+        rocket_connection = RocketChat(user=rocket_username, password=password, server_url=server_url, timeout=timeout)
         cache.set(cache_key, rocket_connection, settings.COSINNUS_CHAT_CONNECTION_CACHE_TIMEOUT)
     return rocket_connection
 
@@ -104,7 +104,7 @@ class RocketChatConnection:
     def __init__(self, user=settings.COSINNUS_CHAT_USER, password=settings.COSINNUS_CHAT_PASSWORD,
                  url=settings.COSINNUS_CHAT_BASE_URL, stdout=None, stderr=None):
         # get a cached version of the rocket connection
-        self.rocket = get_cached_rocket_connection(user, password, url)
+        self.rocket = get_cached_rocket_connection(user, password, url, timeout=settings.COSINNUS_CHAT_CONNECTION_TIMEOUT)
 
         if stdout:
             self.stdout = stdout
@@ -133,6 +133,9 @@ class RocketChatConnection:
             'oauth_id': client_id,
             'oauth_secret': client_secret,
         }
+        # create oauth endpoint
+        response = self.rocket._RocketChat__call_api_post('settings.addCustomOAuth', name=values_dict['portal_name_cap'])
+        # set endpoint attributes
         for setting, value in settings.COSINNUS_CHAT_SYNC_OAUTH_SETTINGS.items():
             if type(value) in six.string_types:
                 value = value % values_dict
@@ -1108,14 +1111,17 @@ class RocketChatConnection:
 
     def unread_messages(self, user):
         """
-        Get number of unread messages for user
+        Get number of unread messages for user. 
+        Throws exceptions that need to be handled, on error!
         :param user:
         :return:
+        @raise RocketConnectionException: on an error connecting to the rocketchat service
+        @raise Exception: on a general error 
         """
         if not hasattr(user, 'cosinnus_profile'):
             return
         profile = user.cosinnus_profile
-
+        
         try:
             user_connection = self._get_user_connection(user)
             if not user_connection:
@@ -1209,7 +1215,7 @@ class RocketChatConnection:
         user_connection = None
         try:
             user_connection = get_cached_rocket_connection(rocket_username=profile.rocket_username, password=user.password,
-                                         server_url=settings.COSINNUS_CHAT_BASE_URL)
+                                         server_url=settings.COSINNUS_CHAT_BASE_URL, timeout=settings.COSINNUS_CHAT_USER_CONNECTION_TIMEOUT)
         except RocketAuthenticationException:
             user_id = user.cosinnus_profile.settings.get(PROFILE_SETTING_ROCKET_CHAT_ID)
             if not user_id:
@@ -1221,7 +1227,8 @@ class RocketChatConnection:
                 logger.error('RocketChat: unread_messages did not receive a success response: ' + str(response.get('errorType', '<No Error Type>')), extra={'response': response})
                 return None
             user_connection = get_cached_rocket_connection(rocket_username=profile.rocket_username, password=user.password,
-                                         server_url=settings.COSINNUS_CHAT_BASE_URL, reset=True) # resets cache
+                                         server_url=settings.COSINNUS_CHAT_BASE_URL, reset=True,
+                                         timeout=settings.COSINNUS_CHAT_USER_CONNECTION_TIMEOUT) # resets cache
         return user_connection
         
         

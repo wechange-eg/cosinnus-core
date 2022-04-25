@@ -28,7 +28,17 @@ class CosinnusMessageDefaultSettings(AppConf):
     COSINNUS_ROCKET_ENABLED = False
     COSINNUS_ROCKET_EXPORT_ENABLED = False
     
+    # the URL for the rocketchat service
     COSINNUS_CHAT_BASE_URL = None
+    
+    # the request timeout for rocketchat connections for important system connections
+    COSINNUS_CHAT_CONNECTION_TIMEOUT = 30
+    
+    # the request timeout for rocketchat user connections, like retrieving unread message counts.
+    # should not be too high, as these connections aren't as important and 
+    # as some requests using user connections are blocking requests, they could clog up
+    # the platform's connections if the rocket service is slow
+    COSINNUS_CHAT_USER_CONNECTION_TIMEOUT = 5
     
     # the keys for the CosinnusGroup.setting object to save the room's id in. 
     # will be prefixed as such: "{cosinnus.models.profile.PROFILE_SETTING_ROCKET_CHAT_ID}_{room_key}"
@@ -76,7 +86,7 @@ class CosinnusMessageDefaultSettings(AppConf):
         'Accounts_AllowUsernameChange': False,
         'Accounts_Default_User_Preferences_sidebarGroupByType': True,
         'Accounts_Default_User_Preferences_sidebarShowUnread': True,
-        'Accounts_ShowFormLogin': False,  # Required to be able to login as bot on first deployment
+        'Accounts_ShowFormLogin': True,  # Required True to be able to login as bot on first deployment
         'Accounts_RegistrationForm': 'Disabled',
         'Accounts_RegistrationForm_LinkReplacementText': '',
         'Accounts_TwoFactorAuthentication_By_Email_Enabled': False,
@@ -112,6 +122,9 @@ class CosinnusMessageDefaultSettings(AppConf):
         # Nachrichten
         'API_Embed': False,
         'Hide_System_Messages': ["uj","ul","ru","subscription-role-added","ut","subscription-role-removed","au"],
+        
+        # User Surveys
+        'NPS_survey_enabled': False,
     }
     
     COSINNUS_CHAT_SYNC_OAUTH_SETTINGS = {

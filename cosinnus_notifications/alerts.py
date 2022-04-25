@@ -10,11 +10,13 @@ from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
+from django.core.cache import cache
 
 
 logger = logging.getLogger('cosinnus')
 
 
+ALERTS_USER_DATA_CACHE_KEY = 'cosinnus/core/alerts/user/%(user_id)s/data'
 
 ALERT_REASONS = {
     'is_group': None, # -- reason will not be shown. the item is a group and is always shown for invitations etc
@@ -87,6 +89,10 @@ def create_user_alert(obj, group, receiver, action_user, notification_id, reason
     # Case C: if the event caused neither a multi user alert or bundle alert, save alert as a new alert
     alert.generate_label()
     alert.save()
+    
+    # delete user-entry cache to be fresh instantly alerts on refresh
+    cache_key = ALERTS_USER_DATA_CACHE_KEY % {'user_id': receiver.id}
+    cache.delete(cache_key)
     
 
 def merge_new_alert_into_multi_alert(new_alert, multi_alert):

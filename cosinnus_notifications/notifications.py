@@ -694,12 +694,17 @@ class NotificationsThread(Thread):
                     pass
                 subject = render_to_string(subj_template, context)
             
+            from_email = None
+            # strip anything unusual from the sender's name and any formatting interfering with the header
             portal_name =  force_text(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS))
-            username = strip_tags(full_name(notification_event.user))
-            # add from-email readable name (yes, this is how this works)
-            from_email = '%(username)s via %(portal_name)s <%(from_email)s>' % {'username': username,'portal_name': portal_name, 'from_email': settings.COSINNUS_DEFAULT_FROM_EMAIL}
-            # Workaround: django 2.x does not support non-ascii chars in the from_email, so strip all non-ascii chars!
-            from_email = from_email.encode("ascii", errors="ignore").decode()
+            username = strip_tags(full_name(notification_event.user))\
+                .replace(',', '').replace('.', '').replace('<', '').replace('>', '')
+            username = username.encode("ascii", errors="ignore").decode().strip()
+            if username:
+                # add from-email readable name (yes, this is how this works)
+                from_email = '%(username)s via %(portal_name)s <%(from_email)s>' % {'username': username,'portal_name': portal_name, 'from_email': settings.COSINNUS_DEFAULT_FROM_EMAIL}
+                # Workaround: django 2.x does not support non-ascii chars in the from_email, so strip all non-ascii chars!
+                from_email = from_email.encode("ascii", errors="ignore").decode()
             send_mail_or_fail(receiver.email, subject, template, context, from_email=from_email, is_html=is_html)
             
         finally:

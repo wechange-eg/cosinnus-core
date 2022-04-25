@@ -40,7 +40,9 @@
 		    {% endif %}
 		{% endif %}
 	{% endif %}
-	({{ TIME_ZONE }})
+	{% if not hide_time_zone %}
+		({{ TIME_ZONE }})
+	{% endif %}
 </span>
 <p>
 	<small class="moment-timezone-aware-date" data-timezone="{{ TIME_ZONE }}" data-from-date="{{ event.from_date|date:'c' }}" data-to-date="{{ event.to_date|date:'c' }}"></small>

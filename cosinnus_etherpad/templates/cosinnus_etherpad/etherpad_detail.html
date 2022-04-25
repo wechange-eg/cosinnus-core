@@ -23,7 +23,7 @@
 
 {% block content %}
 
-    {% if not etherpad.creator.is_active %}
+    {% if SETTINGS.COSINNUS_LOCK_ETHERPAD_WRITE_MODE_ON_CREATOR_DELETE and not etherpad.creator.is_active %}
         <div class="alert alert-warning alert-dismissable">
             <i class="fa fa-warning fa-3x"></i>
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&#215;</button>
@@ -61,7 +61,7 @@
         <div class="large-space">
 		    
 		    {% if user|has_read_access:object or object.media_tag.visibility == 2 %}  
-		        <button type="button" class="btn btn-emphasized" {% if etherpad.creator.is_active %}href="{% group_url "cosinnus:etherpad:pad-write" group=group slug=etherpad.slug %}"{% else %}disabled="disabled"{% endif %}>
+		        <button type="button" class="btn btn-emphasized" {% if SETTINGS.COSINNUS_LOCK_ETHERPAD_WRITE_MODE_ON_CREATOR_DELETE and not etherpad.creator.is_active %}disabled="disabled"{% else %}href="{% group_url "cosinnus:etherpad:pad-write" group=group slug=etherpad.slug %}"{% endif %}>
 		            <ul class="media-list">
 		                <li class="media">
 		                    <span class="pull-left">
