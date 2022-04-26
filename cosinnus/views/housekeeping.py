@@ -727,7 +727,7 @@ def portal_switches_and_settings(request, file_name='portal-switches-and-setting
             if '#internal' in comment:
                 skip_next = True
             if comment:
-                collected_comment += comment
+                collected_comment += comment + ' '
         # getting switches
         if not line.startswith('#') and '=' in line:
             switch_name, switch_value = line.split('=', 1)
