@@ -658,7 +658,6 @@ SHORTENED_ID_MAP = {
     'cosinnus.cosinnusidea': 5,
     'cosinnus_organization.cosinnusorganization': 6,
 }
-SHORTENED_ID_MAP_REVERSE = dict([(val, key) for key, val in list(SHORTENED_ID_MAP.items())])
 
 SEARCH_MODEL_NAMES = {
     get_user_profile_model(): 'people',
@@ -667,7 +666,6 @@ SEARCH_MODEL_NAMES = {
     Event: 'events',
     CosinnusOrganization: 'organizations',
 }
-SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(SEARCH_MODEL_NAMES.items())])
 
 SHORT_MODEL_MAP = {
     1: CosinnusProject,
@@ -677,7 +675,6 @@ SHORT_MODEL_MAP = {
     # 5: CosinnusIdea,
     6: CosinnusOrganization,
 }
-SHORT_MODEL_MAP_REVERSE = dict([(val, key) for key, val in list(SHORT_MODEL_MAP.items())])
 SEARCH_RESULT_DETAIL_TYPE_MAP = {
     'people': DetailedUserMapResult,
     'projects': DetailedProjectMapResult,
@@ -852,8 +849,11 @@ EXCHANGE_SEARCH_MODEL_NAMES = {
 }
 if settings.COSINNUS_EXCHANGE_ENABLED:
     SEARCH_MODEL_NAMES.update(EXCHANGE_SEARCH_MODEL_NAMES)
+    
+SHORTENED_ID_MAP_REVERSE = dict([(val, key) for key, val in list(SHORTENED_ID_MAP.items())])
+SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(SEARCH_MODEL_NAMES.items())])
+SHORT_MODEL_MAP_REVERSE = dict([(val, key) for key, val in list(SHORT_MODEL_MAP.items())])
 EXCHANGE_SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(EXCHANGE_SEARCH_MODEL_NAMES.items())])
-
 
 
 def itemid_from_searchresult(result):
