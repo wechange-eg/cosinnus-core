@@ -8515,3 +8515,8 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "status: "
 #~ msgstr "Status: "
+
+msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
+msgstr "Wenn eine App deaktiviert wird, bleiben ihr Inhalt und die damit verbundenen Daten erhalten, werden aber nicht mehr angezeigt, bis die App wieder aktiviert wird."
+
+
