@@ -196,15 +196,12 @@
         
         {% block contact %}
         {% endblock contact %}
-
-        {% block create_modified_timestamps %}
-        {% endblock create_modified_timestamps %}
         
         {% block report_object %}
             {% if cosinnus_active_user %}
                 <div class="spacer">&nbsp;</div>
                 <div class="spacer">&nbsp;</div>
-                <a class="pale-color button-report-object">
+                <a class="pale-color button-report-object map-search-report-object">
                     <i class="fa fa-warning"></i>
 {# Translators: __INCLUDE_JS_PO__ #}
 {% trans "Report offensive content" %}
@@ -213,6 +210,9 @@
             {% endif %}
         {% endblock report_object %}
         
+        {% block create_modified_timestamps %}
+        {% endblock create_modified_timestamps %}
+
     {% endblock content %}
     
     {# some more space to scroll over the floating search-buttons on mobile #}
