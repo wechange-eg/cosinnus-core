@@ -1457,4 +1457,9 @@ def get_forum_group():
     forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
     forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
     return forum_group
-    
+
+@register.simple_tag()
+def get_project():
+    """" Returns all the projects as Queryset """
+    projects = CosinnusProject.objects.all()
+    return projects

@@ -10,6 +10,7 @@ import pytz
 from django.urls import reverse
 from django.db.models import Q
 from django.template.defaultfilters import linebreaksbr
+from django.template.defaultfilters import date as django_date_filter
 from django.utils.html import escape
 from django.utils import timezone
 from django.utils.timezone import now, is_naive
@@ -191,6 +192,8 @@ class BaseMapResult(DictResult):
         'source': None,  # source platform if external content
         'dynamic_fields': None,
         'is_open_for_cooperation': None,
+        # 'created': None,
+        # 'last_modified': None,
     }
 
 
@@ -389,6 +392,12 @@ class DetailedProjectMapResult(DetailedBaseGroupMapResult):
          into a proper MapResult """
 
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
+
+        kwargs.update({
+            'created': django_date_filter(obj.created, "SHORT_DATE_FORMAT"),
+            'last_modified': django_date_filter(obj.last_modified, "SHORT_DATE_FORMAT"),
+        })
+
         return super(DetailedProjectMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
 
