@@ -24,6 +24,7 @@ from dateutil import parser
 import datetime
 import pytz
 from django.core.cache import cache
+import hashlib
 
 
 _CosinnusPortal = None
@@ -432,3 +433,13 @@ def get_user_from_set_password_token(token):
             return user
 
     return None
+
+
+def get_user_id_hash(user):
+    """ Get a short hash for a user that always stays the same and can be used for
+        identifying a user without using their user id. """
+    salted_id = f'{str(user.id)}_{settings.SECRET_KEY}'
+    hasher = hashlib.sha1(salted_id.encode('utf-8'))
+    short_digest = hasher.hexdigest()[:12]
+    return short_digest
+
