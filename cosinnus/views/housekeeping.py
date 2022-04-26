@@ -29,7 +29,7 @@ from cosinnus.models.tagged import BaseTagObject
 import random
 from django.utils.timezone import now
 from cosinnus.utils.user import filter_active_users, accept_user_tos_for_portal,\
-    get_user_tos_accepted_date, is_user_active
+    get_user_tos_accepted_date, is_user_active, get_user_id_hash
 from cosinnus.models.profile import get_user_profile_model
 from django.core.mail.message import EmailMessage
 from cosinnus.core.mail import send_mail,\
@@ -521,14 +521,16 @@ def user_activity_info(request):
 #                 annotate(group_projects=group_projects).annotate(group_projects_admin=group_projects_admin).\
 #                 annotate(projects_only=projects_only).annotate(groups_only=groups_only):
     portal = CosinnusPortal.get_current()
-    headers = []
-    offset = 0
+    headers = [
+        'user-hashed-id',
+    ]
+    offset = 1
     if settings.COSINNUS_CONFERENCES_ENABLED:
         headers += [
             'conferences-count',
             'admin-of-conferences-count',
         ]
-        offset = 2
+        offset += 2
     headers += [
         'projects-and-groups-count',
         'groups-only-count',
@@ -545,9 +547,14 @@ def user_activity_info(request):
         user_row = users.get(membership.user_id, None)
         if user_row is None:
             user = membership.user
-            initial_row = []
+            initial_row = [
+                get_user_id_hash(user),         # 'user-hashed-id'
+            ]
             if settings.COSINNUS_CONFERENCES_ENABLED:
-                initial_row += [0, 0]
+                initial_row += [
+                    0,                          # 'conferences-count',
+                    0,                          # 'admin-of-conferences-count',
+                ]
             tos_accepted_date = get_user_tos_accepted_date(user)
             tos_accepted = 1
             if portal.tos_date.year > 2000 and (tos_accepted_date is None or tos_accepted_date < portal.tos_date):
@@ -571,9 +578,9 @@ def user_activity_info(request):
             
         if settings.COSINNUS_CONFERENCES_ENABLED:
             if group_type == CosinnusGroup.TYPE_CONFERENCE:
-                user_row[0] += 1 # 'conferences-count'
+                user_row[1] += 1 # 'conferences-count'
                 if membership.status == MEMBERSHIP_ADMIN:
-                    user_row[1] += 1 # 'admin-of-conferences-count',
+                    user_row[2] += 1 # 'admin-of-conferences-count',
         user_row[offset] += 1 # 'projects-and-groups-count'
         if group_type == CosinnusGroup.TYPE_PROJECT:
             user_row[offset+1] += 1 # 'groups-only-count'
