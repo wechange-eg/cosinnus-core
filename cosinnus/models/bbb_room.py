@@ -540,6 +540,7 @@ class BBBRoomVisitStatistics(models.Model):
     
     DATA_DATA_SETTING_ROOM_NAME = 'room_name'
     DATA_DATA_SETTING_GROUP_NAME = 'group_name'
+    DATA_DATA_SETTING_GROUP_SLUG = 'group_slug'
     DATA_DATA_SETTING_GROUP_MANAGED_TAG_IDS = 'group_managed_tag_ids'
     DATA_DATA_SETTING_GROUP_MANAGED_TAG_SLUGS = 'group_managed_tag_slugs'
     DATA_DATA_SETTING_USER_MANAGED_TAG_IDS = 'group_managed_tag_ids'
@@ -548,6 +549,7 @@ class BBBRoomVisitStatistics(models.Model):
     ALL_DATA_SETTINGS = [
         DATA_DATA_SETTING_ROOM_NAME,
         DATA_DATA_SETTING_GROUP_NAME,
+        DATA_DATA_SETTING_GROUP_SLUG,
         DATA_DATA_SETTING_GROUP_MANAGED_TAG_IDS,
         DATA_DATA_SETTING_GROUP_MANAGED_TAG_SLUGS,
         DATA_DATA_SETTING_USER_MANAGED_TAG_IDS,
@@ -592,6 +594,7 @@ class BBBRoomVisitStatistics(models.Model):
         if group:
             data.update({
                 cls.DATA_DATA_SETTING_GROUP_NAME: group.name,
+                cls.DATA_DATA_SETTING_GROUP_SLUG: group.slug,
             })
             group_managed_tags = group.get_managed_tags()
             if group_managed_tags:
