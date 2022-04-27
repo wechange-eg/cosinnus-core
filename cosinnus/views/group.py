@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 import csv
 import datetime
+import pytz
 import logging
 from builtins import object
 from builtins import zip
@@ -44,7 +45,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView,
 from django.views.generic.base import View
 from django.views.generic.edit import FormView
 from django_select2.views import NO_ERR_RESP, Select2View
-from extra_views import (CreateWithInlinesView, InlineFormSet,
+from extra_views import (CreateWithInlinesView, InlineFormSetFactory,
                          UpdateWithInlinesView)
 from multiform.forms import InvalidArgument
 
@@ -119,21 +120,21 @@ class SamePortalGroupMixin(object):
         return super(SamePortalGroupMixin, self).get_queryset().filter(portal=CosinnusPortal.get_current())
 
 
-class CosinnusLocationInlineFormset(InlineFormSet):
+class CosinnusLocationInlineFormset(InlineFormSetFactory):
     extra = 5
     max_num = 5
     form_class = CosinnusLocationForm
     model = CosinnusLocation
 
 
-class CosinnusGroupGalleryImageInlineFormset(InlineFormSet):
+class CosinnusGroupGalleryImageInlineFormset(InlineFormSetFactory):
     extra = 6
     max_num = 6
     form_class = CosinnusGroupGalleryImageForm
     model = CosinnusGroupGalleryImage
 
 
-class CosinnusGroupCallToActionButtonInlineFormset(InlineFormSet):
+class CosinnusGroupCallToActionButtonInlineFormset(InlineFormSetFactory):
     extra = 10
     max_num = 10
     form_class = CosinnusGroupCallToActionButtonForm
@@ -780,8 +781,39 @@ class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin,
         kwargs = super(GroupUpdateView, self).get_form_kwargs()
         kwargs['group'] = self.group
         return kwargs
-    
+
+    def check_fields_changed(self, field_names, form):
+        if self.group.id:
+            form_data = form.cleaned_data.get('obj')
+            obj = CosinnusConference.objects.get(id=self.group.id)
+            for field_name in field_names:
+                form_field_value = form_data.get(field_name)
+                if isinstance(form_field_value, datetime.datetime):
+                    form_field_value = form_field_value.astimezone(pytz.utc)
+                instance_field_value = getattr(obj, field_name)
+                if not form_field_value == instance_field_value:
+                    return True
+        return False
+
     def forms_valid(self, form, inlines):
+        if self.group.__class__.__name__ == 'CosinnusConference':
+            obj = self.group
+            times_changed = self.check_fields_changed(
+                ['from_date', 'to_date'], form)
+            details_changed = self.check_fields_changed(
+                ['name', 'description'], form)
+            if details_changed or (times_changed and details_changed):
+                cosinnus_notifications.attending_conference_changed.send(
+                    sender=self.group, user=self.request.user, obj=obj,
+                    audience=get_user_model().objects.filter(
+                        id__in=self.group.members)
+                )
+            elif times_changed:
+                cosinnus_notifications.attending_conference_time_changed.send(
+                    sender=self.group, user=self.request.user, obj=obj,
+                    audience=get_user_model().objects.filter(
+                        id__in=self.group.members)
+                )
         messages.success(self.request, self.message_success % {'team_type':self.object._meta.verbose_name})
         return super(GroupUpdateView, self).forms_valid(form, inlines)
 

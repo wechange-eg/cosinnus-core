@@ -1,11 +1,17 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-18 09:18+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -430,12 +436,12 @@ msgstr "%(sender_name)s запросив Вас долучитися до ком
 msgid "Accept invitation"
 msgstr "Прийняти запрошення"
 
-msgid "View invitation"
-msgstr "Переглянути запрошення"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s запросив Вас"
+
+msgid "View invitation"
+msgstr "Переглянути запрошення"
 
 msgid "New link to the moved project/group"
 msgstr "Нове посилання до проєкту/групи, які було переміщено"
@@ -485,6 +491,32 @@ msgstr "%(sender_name)s тільки що створив „%(team_name)s“ н�
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s тільки що створив новий профіль користувача на %(portal_name)s!"
+
+msgid "A conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference %(object_name)s has been updated"
+msgstr "Нова конференція: \"%(object_name)s\" була анонсована в %(team_name)s."
+
+#, fuzzy
+#| msgid "You are about to deactivate this conference!"
+msgid "You are attending this conference"
+msgstr "Ви збираєтесь деактивувати цю конференцію!"
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr "Нова конференція: \"%(object_name)s\" була анонсована в %(team_name)s."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The time of conference %(object_name)s has been updated"
+msgstr "Нова конференція: \"%(object_name)s\" була анонсована в %(team_name)s."
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -1438,9 +1470,6 @@ msgstr "Запити щодо Вашого проєкту \"%(group_name)s\""
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Запити щодо Вашої групи \"%(group_name)s\""
 
-msgid "Now"
-msgstr "Зараз"
-
 msgid "Token"
 msgstr "Токен"
 
@@ -2221,6 +2250,125 @@ msgstr "Адміністрація"
 msgid "Select a page on the left side."
 msgstr "Виберіть сторінку зліва."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "Огляд - Конференції, кабінети та воркшопи із власними налаштуваннями BBB-сервера"
+
+msgid "Overview - Premium Conferences Only"
+msgstr "Огляд - тільки преміум -конференції"
+
+msgid "Overview - All Conferences"
+msgstr "Огляд - усі конференції"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "Огляд - конференції, кімнати та воркшопи"
+
+msgid "Past"
+msgstr "Минуле"
+
+msgid "View Upcoming"
+msgstr "Переглянути майбутні"
+
+msgid "Upcoming"
+msgstr "Майбутні"
+
+msgid "View Past"
+msgstr "Переглянути минуле"
+
+msgid "Premium capacity occupancy overview"
+msgstr "Огляд завантаженості преміум-класу"
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr "У цьому календарі відображаються всі конференції для поточного представлення, усі блоки преміум-класу, які наразі заброньовані для конференцій, та загальна визначена ємність сервера преміум-класу."
+
+msgid "Booked"
+msgstr "Заброньовано"
+
+msgid "Permanently Premium"
+msgstr "Постійно преміум-класу"
+
+msgid "Portal Setting"
+msgstr "Налаштування порталу"
+
+msgid "Conference Settings"
+msgstr "Налаштування конференції"
+
+msgid "Premium active"
+msgstr "Преміум активний"
+
+msgid "Premium inactive, but scheduled"
+msgstr "Преміум неактивний, але за розкладом"
+
+msgid "Not premium"
+msgstr "Не є преміум"
+
+msgid "Rooms"
+msgstr "Кімнати"
+
+msgid "Start"
+msgstr "Початок"
+
+msgid "running now!"
+msgstr "Долучитися зараз!"
+
+msgid "Conference Setting"
+msgstr "Налаштування конференції"
+
+msgid "Room"
+msgstr "Кімната"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Подія"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Постійно преміум-класу"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Постійно преміум-класу"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Ви дійсно хочете видалити користувача?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Ви справді бажаєте видалити члена %(name)s з цієї команди?"
+
+msgid "There are no items to show."
+msgstr "Немає жодного елементу для показу"
+
+msgid "BBB"
+msgstr "ВВВ"
+
+msgid "BBB Premium"
+msgstr "ВВВ Преміум"
+
+msgid "BBB Recording API"
+msgstr ""
+
+msgid "Not set"
+msgstr "Не встановлено"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Створити Захід"
+
+msgid "Save"
+msgstr "Зберегти"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Ви справді бажаєте відхилити члена %(name)s?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Видалити Профіль"
+
 msgid "Newsletters"
 msgstr "Інформаційні бюлетені"
 
@@ -2266,6 +2414,15 @@ msgstr "Інформаційна панель оголошення корист�
 
 msgid "User Welcome Email"
 msgstr "Вітальний текст листа користувача"
+
+msgid "Conference Overview"
+msgstr "Налаштування конференції"
+
+msgid "Premium Conferences Only"
+msgstr "Створити Захід"
+
+msgid "Conferences with Custom Settings"
+msgstr "Конференція триває"
 
 msgid "Simple Statistics"
 msgstr "Проста Статистика"
@@ -2324,9 +2481,6 @@ msgstr "Ім'я"
 
 msgid "Lastname"
 msgstr "Прізвище"
-
-msgid "Save"
-msgstr "Зберегти"
 
 msgid "User Administration"
 msgstr "Адміністрація Користувача"
@@ -2605,7 +2759,7 @@ msgstr "helptext_3_дошка оголошень"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_4_profile"
-msgstr "helptext_4_профіль"
+msgstr "Here you can edit your profile. Upload an avatar, enter your location or a topic you are interested in and confirm the changes by clicking on “Save” on the bottom right-hand side."
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_5_password"
@@ -2761,6 +2915,7 @@ msgstr "Подати заявку на участь у конференції"
 msgid "Withdraw"
 msgstr "Вилучити"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Conference Applications"
 msgstr "Заявки на участь у конференції"
 
@@ -3102,6 +3257,9 @@ msgstr "Тут ви можете безпосередньо створювати
 msgid "There are no rooms yet."
 msgstr "Поки що немає жодного кімнати"
 
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
+
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
 
@@ -3282,6 +3440,12 @@ msgstr "Позначено зірочкою"
 msgid "Length"
 msgstr ""
 
+msgid "minute"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
 #, fuzzy
 #| msgid "Delete Account"
 msgid "Delete Recording"
@@ -3295,135 +3459,6 @@ msgstr "Ви дійсно хочете видалити кімнату \"%(title
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Видалити елемент, про який повідомлено..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "Огляд - Конференції, кабінети та воркшопи із власними налаштуваннями BBB-сервера"
-
-msgid "Overview - Premium Conferences Only"
-msgstr "Огляд - тільки преміум -конференції"
-
-msgid "Overview - All Conferences"
-msgstr "Огляд - усі конференції"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Адміністрація Користувача"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "Огляд - конференції, кімнати та воркшопи"
-
-msgid "Past"
-msgstr "Минуле"
-
-msgid "View Upcoming"
-msgstr "Переглянути майбутні"
-
-msgid "Upcoming"
-msgstr "Майбутні"
-
-msgid "View Past"
-msgstr "Переглянути минуле"
-
-msgid "Premium capacity occupancy overview"
-msgstr "Огляд завантаженості преміум-класу"
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr "У цьому календарі відображаються всі конференції для поточного представлення, усі блоки преміум-класу, які наразі заброньовані для конференцій, та загальна визначена ємність сервера преміум-класу."
-
-msgid "Booked"
-msgstr "Заброньовано"
-
-msgid "Permanently Premium"
-msgstr "Постійно преміум-класу"
-
-msgid "Portal Setting"
-msgstr "Налаштування порталу"
-
-msgid "Conference Settings"
-msgstr "Налаштування конференції"
-
-msgid "Premium active"
-msgstr "Преміум активний"
-
-msgid "Premium inactive, but scheduled"
-msgstr "Преміум неактивний, але за розкладом"
-
-msgid "Not premium"
-msgstr "Не є преміум"
-
-msgid "Rooms"
-msgstr "Кімнати"
-
-msgid "Start"
-msgstr "Початок"
-
-msgid "running now!"
-msgstr "Долучитися зараз!"
-
-msgid "Conference Setting"
-msgstr "Налаштування конференції"
-
-msgid "Room"
-msgstr "Кімната"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Подія"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Постійно преміум-класу"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Постійно преміум-класу"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Ви дійсно хочете видалити користувача?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Ви справді бажаєте видалити члена %(name)s з цієї команди?"
-
-msgid "There are no items to show."
-msgstr "Немає жодного елементу для показу"
-
-msgid "BBB"
-msgstr "ВВВ"
-
-msgid "BBB Premium"
-msgstr "ВВВ Преміум"
-
-msgid "BBB Recording API"
-msgstr ""
-
-msgid "Not set"
-msgstr "Не встановлено"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Створити Захід"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Ви справді бажаєте відхилити члена %(name)s?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Видалити Профіль"
-
-msgid "Conference Overview"
-msgstr "Налаштування конференції"
-
-msgid "Premium Conferences Only"
-msgstr "Створити Захід"
-
-msgid "Conferences with Custom Settings"
-msgstr "Конференція триває"
 
 msgid "Rearrange"
 msgstr "Переставити"
@@ -5645,8 +5680,8 @@ msgstr "Електронні адреси всіх підписників на �
 msgid "E-Mails of ALL active users"
 msgstr "Електронні адреси ВСІХ активних користувачів"
 
-msgid "Ok"
-msgstr "Ok"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr "WE-Хмара тут!"
@@ -6305,6 +6340,9 @@ msgstr "Я НЕ хочу, щоб зі мною зв’язувалися щод�
 msgid "My Website"
 msgstr "Мій Вебсайт"
 
+msgid "My time zone"
+msgstr ""
+
 #, fuzzy
 msgid "ended"
 msgstr "Надіслані"
@@ -6332,6 +6370,14 @@ msgstr "Хто ви й що вас мотивує?"
 
 msgid "Tell others something about you!"
 msgstr "Розкажіть іншим щось про себе!"
+
+#, fuzzy
+#| msgid "Timeline"
+msgid "Time zone"
+msgstr "Хронологія"
+
+msgid "This will determine the time and date shown for events on the website and in your notification emails."
+msgstr ""
 
 msgid "Cooperation requests for you"
 msgstr "Ваші запити на співпрацю"
@@ -7460,6 +7506,9 @@ msgstr "Опис Команди"
 msgid "About Us"
 msgstr "Про нас"
 
+msgid "Now"
+msgstr "Зараз"
+
 msgid "Question about"
 msgstr "Питання щодо"
 
@@ -8031,6 +8080,13 @@ msgstr "Наразі Ви не є членом %s! Якщо ви бажаєте 
 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "Адміністрація Користувача"
+
+#~ msgid "Ok"
+#~ msgstr "Ok"
 
 #~ msgid "Active"
 #~ msgstr "Активний"

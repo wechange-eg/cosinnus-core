@@ -4,17 +4,16 @@ from __future__ import unicode_literals
 from builtins import object
 from collections import OrderedDict
 import locale
+import six
 
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models import Q
 from django.urls import reverse
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
-import six
-from jsonfield import JSONField
 from osm_field.fields import OSMField, LatitudeField, LongitudeField
 
 from cosinnus.conf import settings
@@ -219,7 +218,7 @@ class CosinnusUnregisteredUserOrganizationInvite(BaseMembership):
         unique_together = (('email', 'group'),)
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model):
     """
     Organization model.
@@ -276,8 +275,8 @@ class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
                                    related_name='cosinnus_organizations', through=CosinnusOrganizationMembership)
 
-    settings = JSONField(default={}, blank=True)
-    extra_fields = JSONField(default={}, blank=True)
+    settings = models.JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder)
+    extra_fields = models.JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder)
     objects = OrganizationManager()
 
     # this indicates that objects of this model are in some way always visible by registered users

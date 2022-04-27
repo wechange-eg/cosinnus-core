@@ -31,6 +31,8 @@ user_conference_application_declined = dispatch.Signal(providing_args=["user", "
 user_conference_application_waitlisted = dispatch.Signal(providing_args=["user", "obj", "audience"])
 conference_created_in_group = dispatch.Signal(providing_args=["user", "obj", "audience"])
 conference_created_in_group_alert = dispatch.Signal(providing_args=["user", "obj", "audience"])
+attending_conference_changed = dispatch.Signal(providing_args=["user", "obj", "audience"])
+attending_conference_time_changed = dispatch.Signal(providing_args=["user", "obj", "audience"])
 user_conference_invited_to_apply = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 
@@ -336,7 +338,6 @@ notifications = {
         },
         'origin_url_suffix': '?join=1',
         'action_button_text': _('Accept invitation'),
-        'action_button_alternate_text': _('View invitation'),
         'notification_reason': 'none',
     }, 
     'user_group_recruited': {
@@ -409,6 +410,8 @@ notifications = {
             'object_text': 'description_long_or_short',
             'image_url': 'get_avatar_thumbnail_url',
             'event_meta': 'from_date',
+            'action_button_url': 'get_apply_url',
+            'action_button_alternate_url': 'get_absolute_url',
         },
         'action_button_text': pgettext_lazy('email campaign button label to apply for a conference', 'Apply now!'),
         'action_button_alternate_text': _('View conference'),
@@ -500,6 +503,42 @@ notifications = {
         'notification_reason': 'none',
     },
     
+    'attending_conference_changed': {
+        'label': _('A conference you are attending has been updated'),
+        'signals': [attending_conference_changed],
+        'requires_object_state_check': 'is_user_attending',
+        'default': True,
+        'alert_text': _('The conference %(object_name)s has been updated'),
+        'alert_multi_type': 1,
+        'alert_reason': _('You are attending this conference'),
+        'is_html': True,
+        'event_text': _('A conference you are attending has been updated'),
+        'subject_text': _('The conference "%(object_name)s" was updated.'),
+        'data_attributes': {
+            'object_name': 'name',
+            'object_url': 'get_absolute_url',
+            'object_text': 'note',
+            'image_url': 'attached_image.static_image_url_thumbnail'
+        },
+    },
+    'attending_conference_time_changed': {
+        'label': _('The time of a conference you are attending has been updated'),
+        'signals': [attending_conference_time_changed],
+        'requires_object_state_check': 'is_user_attending',
+        'default': True,
+        'alert_text': _('The time of conference %(object_name)s has been updated'),
+        'alert_multi_type': 1,
+        'alert_reason': _('You are attending this conference'),
+        'is_html': True,
+        'event_text': _('The time of a conference you are attending has been updated'),
+        'subject_text': _('The time of conference %(object_name)s has been updated'),
+        'data_attributes': {
+            'object_name': 'name',
+            'object_url': 'get_absolute_url',
+            'object_text': 'note',
+            'image_url': 'attached_image.static_image_url_thumbnail'
+        },
+    },
 }
 
 if settings.COSINNUS_IDEAS_ENABLED:

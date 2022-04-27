@@ -1,11 +1,17 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-18 09:18+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -434,12 +440,12 @@ msgstr "%(sender_name)s הזמין אותך להצטרף ל-\"%(team_name)s\" ב
 msgid "Accept invitation"
 msgstr "אשר הזמנה"
 
-msgid "View invitation"
-msgstr "צפה בהזמנה"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s הזמין אותך"
+
+msgid "View invitation"
+msgstr "צפה בהזמנה"
 
 msgid "New link to the moved project/group"
 msgstr "קישור חדש לקבוצה/פרויקט שהועברו"
@@ -489,6 +495,32 @@ msgstr "%(sender_name)s יצר כרגע \"%(team_name)s\" ב-%(portal_name)s!"
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s יצר כרגע חשבון משתמש חדש ב-%(portal_name)s!"
+
+msgid "A conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference %(object_name)s has been updated"
+msgstr "ועידה חדשה: \"%(object_name)s\" נוצרה בצוות %(team_name)s."
+
+#, fuzzy
+#| msgid "You are about to deactivate this conference!"
+msgid "You are attending this conference"
+msgstr "אתה עומד להשבית ועידה זו!"
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr "ועידה חדשה: \"%(object_name)s\" נוצרה בצוות %(team_name)s."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The time of conference %(object_name)s has been updated"
+msgstr "ועידה חדשה: \"%(object_name)s\" נוצרה בצוות %(team_name)s."
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -1445,10 +1477,6 @@ msgstr "בקשה אודות הפרויקט שלך \"%(group_name)s\""
 msgid "Request about your group \"%(group_name)s\""
 msgstr "בקשה אודות הקבוצה שלך \"%(group_name)s\""
 
-#, fuzzy
-msgid "Now"
-msgstr "כעת"
-
 msgid "Token"
 msgstr "אסימון גישה"
 
@@ -2092,7 +2120,7 @@ msgid "insert inside"
 msgstr "הכנס פנימה"
 
 msgid "softroot"
-msgstr "Softroot"
+msgstr "‫Softroot"
 
 msgid "home"
 msgstr "דף הבית"
@@ -2232,6 +2260,129 @@ msgstr "ניהול מערכת"
 msgid "Select a page on the left side."
 msgstr "בחר עמוד בצד שמאל."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "סקירה כללית - ועידות, חדרים וסדנאות עם הגדרות שרת BBB מותאמות אישית"
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "סקירה כללית - כל הועידות"
+
+msgid "Overview - All Conferences"
+msgstr "סקירה כללית - כל הועידות"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "סקירה כללית- ועידות, חדרים וסדנאות"
+
+msgid "Past"
+msgstr "היו בעבר"
+
+msgid "View Upcoming"
+msgstr "צפה בתצוגה"
+
+msgid "Upcoming"
+msgstr "תצוגה"
+
+msgid "View Past"
+msgstr "צפה במה שהיה בעבר"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+msgid "Booked"
+msgstr "מסומן"
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "הוועידה בסטטוס פרימיום לצמיתות"
+
+msgid "Portal Setting"
+msgstr "הגדרת פורטל"
+
+msgid "Conference Settings"
+msgstr "הגדרות ועידה"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "פרמיום"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr "לא פרימיום"
+
+msgid "Rooms"
+msgstr "חדרים"
+
+msgid "Start"
+msgstr "התחל"
+
+msgid "running now!"
+msgstr "מתקיים כרגע!"
+
+msgid "Conference Setting"
+msgstr "הגדרת ועידה"
+
+msgid "Room"
+msgstr "חדר"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "אירוע"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "הוועידה בסטטוס פרימיום לצמיתות"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "הוועידה בסטטוס פרימיום לצמיתות"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "האם אתה בטוח שברצונך להסיר את המשתמש?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "האם אתה בטוח שברצונך להסיר את החבר „%(name)s“ מהצוות?"
+
+msgid "There are no items to show."
+msgstr "אין פריטים להצגה."
+
+msgid "BBB"
+msgstr "BBB"
+
+msgid "BBB Premium"
+msgstr "BBB פרימיום"
+
+msgid "BBB Recording API"
+msgstr ""
+
+msgid "Not set"
+msgstr "לא נקבע"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "שרת BBB לועידות פרימיום"
+
+msgid "Save"
+msgstr "שמור"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "האם אתה בטוח שברצונך לבטל את החברות של „%(name)s“?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "מחק פרופיל"
+
 msgid "Newsletters"
 msgstr "ידיעות"
 
@@ -2276,6 +2427,16 @@ msgstr "הודעות לוח של כלים של המשתמש"
 
 msgid "User Welcome Email"
 msgstr "דוא\"ל ברכת הצטרפות"
+
+msgid "Conference Overview"
+msgstr "מבט כולל על ועידה"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "שרת BBB לועידות פרימיום"
+
+msgid "Conferences with Custom Settings"
+msgstr "ועידות עם הגדרות מותאמות אישית"
 
 msgid "Simple Statistics"
 msgstr "סטטיסטיקה פשוטה"
@@ -2335,9 +2496,6 @@ msgstr "שם פרטי"
 
 msgid "Lastname"
 msgstr "שם משפחה"
-
-msgid "Save"
-msgstr "שמור"
 
 msgid "User Administration"
 msgstr "ניהול משתמש"
@@ -2619,7 +2777,7 @@ msgstr "helptext_3_marketplace"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_4_profile"
-msgstr "helptext_4_profile"
+msgstr "‫Here you can edit your profile. Upload an avatar, enter your location or a topic you are interested in and confirm the changes by clicking on “Save” on the bottom right-hand side."
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_5_password"
@@ -2775,6 +2933,7 @@ msgstr "הגש בקשה להשתתפות בוועידה"
 msgid "Withdraw"
 msgstr "הסר"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Conference Applications"
 msgstr "בקשות השתתפות לועידה"
 
@@ -3113,6 +3272,9 @@ msgstr "תוכלו ליצור ישירות אירועי ועידה לחדרים 
 msgid "There are no rooms yet."
 msgstr "אין עדיין חדרים."
 
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
+
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
 
@@ -3297,6 +3459,12 @@ msgstr "מסומן בכוכב"
 msgid "Length"
 msgstr ""
 
+msgid "minute"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
 #, fuzzy
 #| msgid "Delete Account"
 msgid "Delete Recording"
@@ -3310,140 +3478,6 @@ msgstr "האם את/ה בטוח שברצונך למחוק את הקובץ \"%(ti
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "מחיקת פריט שדווח..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "סקירה כללית - ועידות, חדרים וסדנאות עם הגדרות שרת BBB מותאמות אישית"
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "סקירה כללית - כל הועידות"
-
-msgid "Overview - All Conferences"
-msgstr "סקירה כללית - כל הועידות"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "ניהול משתמש"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "סקירה כללית- ועידות, חדרים וסדנאות"
-
-msgid "Past"
-msgstr "היו בעבר"
-
-msgid "View Upcoming"
-msgstr "צפה בתצוגה"
-
-msgid "Upcoming"
-msgstr "תצוגה"
-
-msgid "View Past"
-msgstr "צפה במה שהיה בעבר"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-#, fuzzy
-msgid "Booked"
-msgstr "מסומן"
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "הוועידה בסטטוס פרימיום לצמיתות"
-
-msgid "Portal Setting"
-msgstr "הגדרת פורטל"
-
-msgid "Conference Settings"
-msgstr "הגדרות ועידה"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "פרמיום"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr "לא פרימיום"
-
-msgid "Rooms"
-msgstr "חדרים"
-
-msgid "Start"
-msgstr "התחל"
-
-msgid "running now!"
-msgstr "מתקיים כרגע!"
-
-msgid "Conference Setting"
-msgstr "הגדרת ועידה"
-
-msgid "Room"
-msgstr "חדר"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "אירוע"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "הוועידה בסטטוס פרימיום לצמיתות"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "הוועידה בסטטוס פרימיום לצמיתות"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "האם אתה בטוח שברצונך להסיר את המשתמש?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "האם אתה בטוח שברצונך להסיר את החבר „%(name)s“ מהצוות?"
-
-msgid "There are no items to show."
-msgstr "אין פריטים להצגה."
-
-msgid "BBB"
-msgstr "BBB"
-
-msgid "BBB Premium"
-msgstr "BBB פרימיום"
-
-msgid "BBB Recording API"
-msgstr ""
-
-msgid "Not set"
-msgstr "לא נקבע"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "שרת BBB לועידות פרימיום"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "האם אתה בטוח שברצונך לבטל את החברות של „%(name)s“?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "מחק פרופיל"
-
-msgid "Conference Overview"
-msgstr "מבט כולל על ועידה"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "שרת BBB לועידות פרימיום"
-
-msgid "Conferences with Custom Settings"
-msgstr "ועידות עם הגדרות מותאמות אישית"
 
 msgid "Rearrange"
 msgstr "סידור מחדש"
@@ -5671,8 +5705,8 @@ msgstr "דוא\"ל של כל מנויי הניוזלטר"
 msgid "E-Mails of ALL active users"
 msgstr "דוא\"ל של כל המשתמשים הפעילים"
 
-msgid "Ok"
-msgstr "אישור"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr "ה-WE-Cloud כאן!"
@@ -6336,6 +6370,9 @@ msgstr "אני לא מעוניין שיצרו איתי קשר לגבי שיתו�
 msgid "My Website"
 msgstr "האתר שלי"
 
+msgid "My time zone"
+msgstr ""
+
 #, fuzzy
 msgid "ended"
 msgstr "פורסם"
@@ -6363,6 +6400,14 @@ msgstr "מי אתה ומה מניע אותך?"
 
 msgid "Tell others something about you!"
 msgstr "ספר לאחרים משהו עליך!"
+
+#, fuzzy
+#| msgid "Timeline"
+msgid "Time zone"
+msgstr "ציר זמן"
+
+msgid "This will determine the time and date shown for events on the website and in your notification emails."
+msgstr ""
 
 msgid "Cooperation requests for you"
 msgstr "בקשות לשיתוף פעולה עבורך"
@@ -7492,6 +7537,10 @@ msgstr "תיאור צוות"
 msgid "About Us"
 msgstr "אודותנו"
 
+#, fuzzy
+msgid "Now"
+msgstr "כעת"
+
 msgid "Question about"
 msgstr "שאלה על"
 
@@ -8060,6 +8109,13 @@ msgstr "כרגע אינך חבר ב-%s! אם תרצה, אתה יכול לבקש 
 
 msgid "Your changes have been saved."
 msgstr "השינויים שביצעת נשמרו בהצלחה."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "ניהול משתמש"
+
+#~ msgid "Ok"
+#~ msgstr "אישור"
 
 #~ msgid "Active"
 #~ msgstr "פעיל"

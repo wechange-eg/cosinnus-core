@@ -1,6 +1,7 @@
 {% load i18n  cosinnus_tags  %}
 
 <p class="transparent">
+	{% trans "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join." %}<br><br>
     {% trans "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!" %}
 </p>
 
@@ -43,7 +44,7 @@
 		            {% trans "Allow recording" %}
                     {% if premium_label %}{{ premium_label }}{% endif %}
 		            ({% trans "Default" %}: <b>{{ form.inherited_field_value_labels.record_meeting }})</b>
-		            <br/>
+					<br/>
 		            {% trans "Note: New recordings can only be made if you have booked premium features for this conference." %}
 		        {% endcaptureas %}
 		        {% include 'cosinnus/fields/condensed_radio_field.html' with field=form.record_meeting label=record_meeting_label %}

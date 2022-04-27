@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-18 09:18+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -460,12 +460,12 @@ msgstr "لقد دعتك %(sender_name)s للانضمام إلى \"%(team_name)s\
 msgid "Accept invitation"
 msgstr "قبول دعوة"
 
-msgid "View invitation"
-msgstr "عرض الدعوة"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s قام بدعوتك"
+
+msgid "View invitation"
+msgstr "عرض الدعوة"
 
 msgid "New link to the moved project/group"
 msgstr "ارتباط جديد بالمشروع / المجموعة المنقولة"
@@ -515,6 +515,28 @@ msgstr "%(sender_name)s أنشأ للتو فكرة \"%(object_name)s\" على %(
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s قام للتو بإنشاء حساب مستخدم جديد على %(portal_name)s!"
+
+msgid "A conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The conference %(object_name)s has been updated"
+msgstr "قد تمت الإشارة لم في \"%(object_name)s\" في %(team_name)s."
+
+#, fuzzy
+msgid "You are attending this conference"
+msgstr "أنت على وشك إلغاء تنشيط هذا المشروع/المجموعة!"
+
+#, fuzzy, python-format
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr "قد تمت الإشارة لم في \"%(object_name)s\" في %(team_name)s."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The time of conference %(object_name)s has been updated"
+msgstr "قد تمت الإشارة لم في \"%(object_name)s\" في %(team_name)s."
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -1528,10 +1550,6 @@ msgstr "طلب حول مشروعك \"%(group_name)s\""
 msgid "Request about your group \"%(group_name)s\""
 msgstr "طلب حول مجموعتك \"%(group_name)s\""
 
-#, fuzzy
-msgid "Now"
-msgstr "الآن"
-
 msgid "Token"
 msgstr "رمز"
 
@@ -2350,6 +2368,134 @@ msgstr "الإدارة"
 msgid "Select a page on the left side."
 msgstr "حدد صفحة على الجانب الأيسر."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "نظرة عامة - المؤتمرات والغرف وورش العمل مع إعدادات خادم BBB المخصصة"
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "نظرة عامة - جميع المؤتمرات"
+
+msgid "Overview - All Conferences"
+msgstr "نظرة عامة - جميع المؤتمرات"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "نظرة عامة - المؤتمرات والغرف وورش العمل"
+
+msgid "Past"
+msgstr "ماضي"
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "عرض على الصفحة"
+
+msgid "Upcoming"
+msgstr "القادمة"
+
+#, fuzzy
+msgid "View Past"
+msgstr "عرض المشروع"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+msgid "Booked"
+msgstr "مرجعية"
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "المؤتمر هو مميز و دائم"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "إعدادات الخصوصية"
+
+msgid "Conference Settings"
+msgstr "إعدادات المؤتمر"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "مميز"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr "غير مميز"
+
+msgid "Rooms"
+msgstr "غرف"
+
+msgid "Start"
+msgstr "ابدأ"
+
+msgid "running now!"
+msgstr "قيد الشتغيل"
+
+msgid "Conference Setting"
+msgstr "إعداد المؤتمر"
+
+msgid "Room"
+msgstr "غرفة"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "مناسبة"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "المؤتمر هو مميز و دائم"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "المؤتمر هو مميز و دائم"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "هل تريد حقًا رفض الدعوة؟"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "هل تريد حقًا إزالة العضو „%(name)s“من الفريق؟"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "لا توجد عناصر حتى الآن"
+
+msgid "BBB"
+msgstr "BBB"
+
+msgid "BBB Premium"
+msgstr "BBB مميز"
+
+msgid "BBB Recording API"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "غير معتمد"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "خادم BBB للمؤتمرات المتميزة"
+
+msgid "Save"
+msgstr "حفظ"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "هل تريد حقًا رفض العضو „%(name)s“؟"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "حذف الملف الشخصي"
+
 msgid "Newsletters"
 msgstr "النشرات الإخبارية"
 
@@ -2403,6 +2549,18 @@ msgstr "إعلانات لوحة تحكم المستخدم"
 
 msgid "User Welcome Email"
 msgstr "البريد الإلكتروني الترحيبي للمستخدم"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "المؤتمر قيد التشغيل"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "خادم BBB للمؤتمرات المتميزة"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "المؤتمر قيد التشغيل"
 
 msgid "Simple Statistics"
 msgstr "إحصائيات بسيطة"
@@ -2464,9 +2622,6 @@ msgstr "الاسم الأول"
 
 msgid "Lastname"
 msgstr "اسم العائلة"
-
-msgid "Save"
-msgstr "حفظ"
 
 msgid "User Administration"
 msgstr "إدارة المستخدم"
@@ -2929,6 +3084,7 @@ msgstr "التقدم للمشاركة في المؤتمر"
 msgid "Withdraw"
 msgstr "انسحب"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Conference Applications"
 msgstr "تطبيقات المؤتمر"
 
@@ -3291,6 +3447,9 @@ msgstr "يمكنك إنشاء أحداث مؤتمرات للغرف مباشرة�
 msgid "There are no rooms yet."
 msgstr "لا توجد عناصر حتى الآن"
 
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
+
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
 
@@ -3474,6 +3633,12 @@ msgstr "مميز بنجمة"
 msgid "Length"
 msgstr ""
 
+msgid "minute"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
 #, fuzzy
 #| msgid "Delete Account"
 msgid "Delete Recording"
@@ -3487,147 +3652,6 @@ msgstr "هل تريد حقًا حذف الإعلان \"%(title)s\"؟"
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "حذف العنصر المبلغ عنه..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "نظرة عامة - المؤتمرات والغرف وورش العمل مع إعدادات خادم BBB المخصصة"
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "نظرة عامة - جميع المؤتمرات"
-
-msgid "Overview - All Conferences"
-msgstr "نظرة عامة - جميع المؤتمرات"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "إدارة المستخدم"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "نظرة عامة - المؤتمرات والغرف وورش العمل"
-
-msgid "Past"
-msgstr "ماضي"
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "عرض على الصفحة"
-
-msgid "Upcoming"
-msgstr "القادمة"
-
-#, fuzzy
-msgid "View Past"
-msgstr "عرض المشروع"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-#, fuzzy
-msgid "Booked"
-msgstr "مرجعية"
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "المؤتمر هو مميز و دائم"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "إعدادات الخصوصية"
-
-msgid "Conference Settings"
-msgstr "إعدادات المؤتمر"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "مميز"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr "غير مميز"
-
-msgid "Rooms"
-msgstr "غرف"
-
-msgid "Start"
-msgstr "ابدأ"
-
-msgid "running now!"
-msgstr "قيد الشتغيل"
-
-msgid "Conference Setting"
-msgstr "إعداد المؤتمر"
-
-msgid "Room"
-msgstr "غرفة"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "مناسبة"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "المؤتمر هو مميز و دائم"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "المؤتمر هو مميز و دائم"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "هل تريد حقًا رفض الدعوة؟"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "هل تريد حقًا إزالة العضو „%(name)s“من الفريق؟"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "لا توجد عناصر حتى الآن"
-
-msgid "BBB"
-msgstr "BBB"
-
-msgid "BBB Premium"
-msgstr "BBB مميز"
-
-msgid "BBB Recording API"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "غير معتمد"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "خادم BBB للمؤتمرات المتميزة"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "هل تريد حقًا رفض العضو „%(name)s“؟"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "حذف الملف الشخصي"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "المؤتمر قيد التشغيل"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "خادم BBB للمؤتمرات المتميزة"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "المؤتمر قيد التشغيل"
 
 msgid "Rearrange"
 msgstr "إعادة الترتيب"
@@ -5868,8 +5892,8 @@ msgstr "رسائل البريد الإلكتروني لجميع مشتركي ا�
 msgid "E-Mails of ALL active users"
 msgstr "رسائل البريد الإلكتروني لجميع المستخدمين النشطين"
 
-msgid "Ok"
-msgstr "حسناً"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr "هنا سحابة-WE!"
@@ -6535,6 +6559,9 @@ msgstr "لا أرغب في أن يتم الاتصال بي من أجل التع�
 msgid "My Website"
 msgstr "الموقع الإلكتروني الخاص بي"
 
+msgid "My time zone"
+msgstr ""
+
 #, fuzzy
 msgid "ended"
 msgstr "أرسلت"
@@ -6562,6 +6589,14 @@ msgstr "من أنت وما الذي يحفزك؟"
 
 msgid "Tell others something about you!"
 msgstr "أخبر الآخرين بشيء عنك!"
+
+#, fuzzy
+#| msgid "Timeline"
+msgid "Time zone"
+msgstr "اليوميات (التايم لاين)"
+
+msgid "This will determine the time and date shown for events on the website and in your notification emails."
+msgstr ""
 
 msgid "Cooperation requests for you"
 msgstr "طلبات التعاون (المرسلة) لك"
@@ -7747,6 +7782,10 @@ msgstr "وصف الفريق"
 msgid "About Us"
 msgstr "عن المشروع"
 
+#, fuzzy
+msgid "Now"
+msgstr "الآن"
+
 msgid "Question about"
 msgstr "سؤال عن"
 
@@ -8319,6 +8358,13 @@ msgstr "أنت لست عضوًا حاليًا في %s! إذا كنت ترغب ف
 
 msgid "Your changes have been saved."
 msgstr "تم حفظ التغييرات."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "إدارة المستخدم"
+
+#~ msgid "Ok"
+#~ msgstr "حسناً"
 
 #~ msgid "Active"
 #~ msgstr "تفعيل"

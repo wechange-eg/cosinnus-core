@@ -1,27 +1,29 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 from __future__ import print_function
+from __future__ import unicode_literals
 
 from builtins import object
-from django.template import loader, Context
 
+from django.apps import apps
+from django.core.cache import cache
+from django.db.models import Count
+from django.template import loader, Context
+from django.utils.dateparse import parse_datetime
 from haystack import indexes
 from haystack.exceptions import SearchFieldError
+import numpy
+import pytz
+import six
 
 from cosinnus.conf import settings
-from cosinnus.utils.import_utils import import_from_settings
 from cosinnus.models.group import CosinnusGroup
-from cosinnus.utils.functions import ensure_list_of_ints,\
-    normalize_within_stddev
-
-from django.db.models import Count
-from django.core.cache import cache
-from django.apps import apps
-import numpy
-from cosinnus.utils.group import get_cosinnus_group_model,\
-    get_default_user_group_slugs
-import six
 from cosinnus.utils.files import image_thumbnail_url
+from cosinnus.utils.functions import ensure_list_of_ints, \
+    normalize_within_stddev
+from cosinnus.utils.group import get_cosinnus_group_model, \
+    get_default_user_group_slugs
+from cosinnus.utils.import_utils import import_from_settings
+
 
 _CosinnusPortal = None
 
@@ -38,6 +40,21 @@ class CommaSeperatedIntegerMultiValueField(indexes.MultiValueField):
     
     def convert(self, value):
         return ensure_list_of_ints(value)
+    
+
+class TimezoneAwareHaystackDateTimeField(indexes.DateTimeField):
+    """ A timezone-aware replacement for indexes.DateTimeField (which currently
+        drops the timezone in reading the index and reconstructing the object) """
+        
+    def convert(self, value):
+        if value is None:
+            return None
+        if isinstance(value, six.string_types):
+            try:
+                value = parse_datetime(value).astimezone(pytz.utc)
+            except:
+                raise SearchFieldError("Datetime provided to '%s' field doesn't appear to be a valid datetime string: '%s'" % (self.instance_name, value))
+        return value
 
 
 class DefaultTagObjectIndex(indexes.SearchIndex):
@@ -322,7 +339,7 @@ class BaseTaggableObjectIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObje
     group = indexes.IntegerField(model_attr='group_id')
     group_members = indexes.MultiValueField(indexed=False)
     location = indexes.LocationField(null=True)
-    created = indexes.DateTimeField(model_attr='created')
+    created = TimezoneAwareHaystackDateTimeField(model_attr='created')
     
     local_cached_attrs = ['_group_members']
     

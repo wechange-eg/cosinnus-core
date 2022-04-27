@@ -46,7 +46,7 @@ import json as _json
 from django.utils.encoding import force_text
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.templatetags.static import static
 from django.template.defaultfilters import linebreaksbr, pprint
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
     CosinnusConference

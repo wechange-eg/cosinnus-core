@@ -6,11 +6,11 @@
 {% endblock %}
 
 {% block leftnav %}
-    {% include 'cosinnus/conference_administration/leftnav.html' %}
+    {% include 'cosinnus/administration/leftnav.html' %}
 {% endblock leftnav %}
 
 {% block breadcrumb %}
-    <li><a href="{% url 'cosinnus:conference-administration' %}">{% trans "Conference Administration" %}</a></li>
+    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
     <li class="active">
         {{ title }}
     </li>

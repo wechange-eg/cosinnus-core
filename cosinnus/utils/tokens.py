@@ -1,7 +1,7 @@
 from builtins import object
 from datetime import date
 
-from django.utils import six
+import six
 from django.utils.crypto import constant_time_compare, salted_hmac
 from django.utils.http import base36_to_int, int_to_base36
 

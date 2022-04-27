@@ -167,6 +167,15 @@
 			                <i class="fa fa-globe"></i> <a href="{{ profile.website }}" target="_blank">{{ profile.website }}</a>
 			            </p>
 		            {% endif %}
+
+
+					{% if SETTINGS.COSINNUS_TIMEZONE_SHOW_IN_USERPROFILE and profile.timezone %}
+						<legend>{% trans "My time zone" %}</legend>
+						<p class="transparent">
+							<i class="fa fa-clock"></i> {{ profile.timezone }}
+						</p>
+					{% endif %}
+
 		            
 	                {% comment %} 
 	                    If a portal defines dynamic user profile form fields with the 

@@ -23,6 +23,8 @@ from django.utils.timezone import now, is_naive
 from dateutil import parser
 import datetime
 import pytz
+from django.core.cache import cache
+import hashlib
 
 
 _CosinnusPortal = None
@@ -130,12 +132,12 @@ def filter_active_users(user_model_qs, filter_on_user_profile_model=False):
         return user_model_qs.exclude(user__is_active=False).\
             exclude(user__last_login__exact=None).\
             exclude(user__email__icontains='__unverified__').\
-            filter(settings__contains='tos_accepted')
+            filter(settings__tos_accepted=True)
     else:
         return user_model_qs.exclude(is_active=False).\
             exclude(last_login__exact=None).\
             exclude(email__icontains='__unverified__').\
-            filter(cosinnus_profile__settings__contains='tos_accepted')
+            filter(cosinnus_profile__settings__tos_accepted=True)
             
 def filter_portal_users(user_model_qs, portal=None):
     """ Filters a QS of ``get_user_model()`` so that only users of this portal remain. """
@@ -206,10 +208,10 @@ def create_base_user(email, username=None, password=None, first_name=None, last_
             logger.error('Manual user creation failed. A user with tha username already exists!')
 
     else:
-        password = get_random_string()
+        password = get_random_string(length=12)
 
         user_data = {
-            'username': username or get_random_string(),
+            'username': username or get_random_string(length=12),
             'password1': password,
             'password2': password
         }
@@ -251,9 +253,9 @@ def create_user(email, username=None, first_name=None, last_name=None, tos_check
     from cosinnus.forms.user import UserCreationForm
     from cosinnus.models.profile import get_user_profile_model # leave here because of cyclic imports
     
-    pwd = get_random_string()
+    pwd = get_random_string(length=12)
     data = {
-        'username': username or get_random_string(),
+        'username': username or get_random_string(length=12),
         'email': email,
         'password1': pwd,
         'password2': pwd,
@@ -390,9 +392,21 @@ def get_unread_message_count_for_user(user):
     if not user.is_authenticated:
         return 0
     if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
-        from cosinnus_message.rocket_chat import RocketChatConnection # noqa
-        unread_count = RocketChatConnection().unread_messages(user)
-        
+        unread_count = 0
+        # rocketchat mollycoddling: if the unread message retrieval gets an exception
+        # for any reason, we impose a 5 minute break on retrieving it again, for this user
+        # if the rocketchat service experiences timeouts because of high load, frequent
+        # re-requesting on this connection has shown to finish it off for good, so we give it a break
+        cache_key =  'cosinnus/core/alerts/user/%(user_id)s/rocketchatunreadtimeout' % {'user_id': user.id}
+        is_paused = cache.get(cache_key)
+        if not is_paused:
+            from cosinnus_message.rocket_chat import RocketChatConnection # noqa
+            try:
+                unread_count = RocketChatConnection().unread_messages(user)
+            except:
+                # we do not care what caused an exception here, but we handle them by returning
+                # 0 unread messages and imposing a break for this user
+                cache.set(cache_key, True, 60*5) # 5 minutes
     else:
         from postman.models import Message
         unread_count = Message.objects.inbox_unread_count(user)
@@ -412,10 +426,20 @@ def get_user_from_set_password_token(token):
     USER_MODEL = get_user_model()
 
     # TODO this query could be simplified, if json field is imported by postgress library instead of django-jsonfield
-    token_users = USER_MODEL.objects.filter(cosinnus_profile__settings__contains='password_not_set')
+    token_users = USER_MODEL.objects.filter(cosinnus_profile__settings__has_key='password_not_set')
 
     for user in token_users:
         if user.cosinnus_profile.settings.get(PROFILE_SETTING_PASSWORD_NOT_SET, "") == token:
             return user
 
     return None
+
+
+def get_user_id_hash(user):
+    """ Get a short hash for a user that always stays the same and can be used for
+        identifying a user without using their user id. """
+    salted_id = f'{str(user.id)}_{settings.SECRET_KEY}'
+    hasher = hashlib.sha1(salted_id.encode('utf-8'))
+    short_digest = hasher.hexdigest()[:12]
+    return short_digest
+

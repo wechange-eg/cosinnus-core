@@ -11,6 +11,7 @@ from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.contrib.contenttypes.admin import GenericStackedInline
 from django.core.exceptions import ValidationError
 from django.db.models import Q
+from django.db.models import JSONField
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 from django_reverse_admin import ReverseModelAdmin
@@ -40,8 +41,8 @@ from cosinnus.models.user_import import CosinnusUserImport
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.utils.group import get_cosinnus_group_model
-from django.contrib.postgres.fields import JSONField as PostgresJSONField
 from cosinnus.forms.widgets import PrettyJSONWidget
+from annoying.functions import get_object_or_None
 
 
 class SingleDeleteActionMixin(object):
@@ -163,7 +164,7 @@ class CosinnusConferenceSettingsInline(GenericStackedInline):
     max_num = 1
     
     formfield_overrides = {
-        PostgresJSONField: {'widget': PrettyJSONWidget(attrs={'style': "width:initial;"})}
+        JSONField: {'widget': PrettyJSONWidget(attrs={'style': "width:initial;"})}
     }
     
 
@@ -278,8 +279,12 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             
             # re-index haystack for this group after getting a properly classed, fresh object
             group.remove_index()
-            group = to_group_klass.objects.get(id=group.id)
-            group.update_index()
+            converted_typed_group = get_object_or_None(to_group_klass, id=group.id)
+            if converted_typed_group:
+                converted_typed_group.update_index()
+            else:
+                message_error = f'There seems to have been a problem converting: "{group.slug}". Please check if it has been converted in the admin. If it has, it may not appear converted until the cache is refreshed. You can do this by saving it in the admin again now.'
+                self.message_error(request, message_error, messages.ERROR)
         
         if converted_names:
             message = _('The following items were converted to %s:') % to_group_klass.get_trans().VERBOSE_NAME_PLURAL + '\n' + ", ".join(converted_names)
@@ -575,9 +580,9 @@ class UserToSAcceptedFilter(admin.SimpleListFilter):
 
     def queryset(self, request, queryset):
         if self.value() == 'yes':
-            return queryset.filter(cosinnus_profile__settings__contains='tos_accepted')
+            return queryset.filter(cosinnus_profile__settings__tos_accepted=True)
         if self.value() == 'no':
-            return queryset.exclude(cosinnus_profile__settings__contains='tos_accepted')
+            return queryset.exclude(cosinnus_profile__settings__has_key='tos_accepted')
         
         
 class EmailVerifiedFilter(admin.SimpleListFilter):
@@ -654,6 +659,11 @@ class UserAdmin(DjangoUserAdmin):
                     'is_staff', 'scheduled_for_deletion_at')
     list_filter = list(DjangoUserAdmin.list_filter) + [UserHasLoggedInFilter, UserToSAcceptedFilter,
                        UserScheduledForDeletionAtFilter, EmailVerifiedFilter]
+    
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        qs = qs.exclude(email__startswith='__deleted_user__')
+        return qs
     
     def has_logged_in(self, obj):
         return bool(obj.last_login is not None)

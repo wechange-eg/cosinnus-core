@@ -8,16 +8,16 @@ import os
 import re
 import six
 
-from django.contrib.postgres.fields.jsonb import JSONField as PostgresJSONField, KeyTextTransform
+from django.db.models.fields.json import KeyTextTransform
 from django.contrib.sites.models import Site
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
+from django.core.serializers.json import DjangoJSONEncoder
 from django.core.validators import RegexValidator, MaxLengthValidator
 from django.db import models
 from django.db.models import Q, Max, Min, F
 from django.db.models.functions import Cast
 from django.utils import timezone
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
@@ -51,7 +51,6 @@ from cosinnus.utils.group import get_cosinnus_group_model,\
 from cosinnus.models.mixins.images import ThumbnailableImageMixin
 from cosinnus.views.mixins.media import VideoEmbedFieldMixin,\
     FlickrEmbedFieldMixin
-from jsonfield.fields import JSONField
 from django.templatetags.static import static
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from cosinnus.core.registries.attached_objects import attached_object_registry
@@ -61,7 +60,6 @@ from cosinnus.models.tagged import LikeableObjectMixin, LastVisitedMixin,\
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericRelation
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin
-from django.core.serializers.json import DjangoJSONEncoder
 from cosinnus.trans.group import get_group_trans_by_type
 from annoying.functions import get_object_or_None
 from django.utils.safestring import mark_safe
@@ -70,7 +68,8 @@ from django.template.defaultfilters import date as django_date_filter
 
 from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
 from cosinnus_event.mixins import BBBRoomMixin # noqa
-from cosinnus.utils.dates import timestamp_from_datetime
+from cosinnus.utils.dates import timestamp_from_datetime,\
+    HumanizedEventTimeMixin
 
 logger = logging.getLogger('cosinnus')
 
@@ -409,10 +408,10 @@ class CosinnusGroupManager(models.Manager):
         # Prepare query: Mark due conferences
         key = f'reminder_{field_name}'
         queryset = CosinnusConference.objects.annotate(extra_fields_json=Cast(F('extra_fields'),
-                                                                                      PostgresJSONField(default={})))
+                                                                                      models.JSONField(default={}, encoder=DjangoJSONEncoder)))
         queryset = queryset.annotate(to_be_reminded=KeyTextTransform(key, 'extra_fields_json'))
         # Prepare query: Mark conferences already notified
-        queryset = queryset.annotate(settings_json=Cast(F('settings'), PostgresJSONField(default={})))
+        queryset = queryset.annotate(settings_json=Cast(F('settings'), models.JSONField(default={}, encoder=DjangoJSONEncoder)))
         queryset = queryset.annotate(already_reminded=KeyTextTransform(f'{key}_sent', 'settings_json'))
         # Prepare query: Start date
         queryset = queryset.prefetch_related('rooms__events')
@@ -510,7 +509,7 @@ class CosinnusPortalMembership(BaseMembership):
         verbose_name_plural = _('Portal memberships')
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
     _CURRENT_PORTAL_CACHE_KEY = 'cosinnus/core/portal/current'
     _ALL_PORTAL_CACHE_KEY = 'cosinnus/core/portal/all'
@@ -564,10 +563,10 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
     email_needs_verification = models.BooleanField(_('Emails Need Verification'),
                                                    help_text=_(
                                                        'If activated, newly registered users and users who change their email address will need to confirm their email by clicking a link in a mail sent to them.'),
-                                                   default=False)
+                                                   default=True)
 
     # The different keys used for this are static variables in CosinnusPortal!
-    saved_infos = JSONField(default={})
+    saved_infos = models.JSONField(default=dict, encoder=DjangoJSONEncoder)
 
     tos_date = models.DateTimeField(_('ToS Version'), default=datetime.datetime(1999, 1, 1, 13, 37, 0),
                                     help_text='This is used to determine the date the newest ToS have been released, that users have acceppted. When a portal`s ToS update, set this to a newer date to have a popup come up for all users whose `settings.tos_accepted_date` is not after this date.')
@@ -601,9 +600,8 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
     video_conference_server = models.URLField(_('Video Conference Server'), max_length=250, blank=True, null=True,
         help_text=_('For old-style events meeting popups only! If entered, will enable Jitsi-like video conference functionality across the site. Needs to be a URL up to the point where any random room name can be appended.'))
 
-    dynamic_field_choices = PostgresJSONField(default=dict, verbose_name=_('Dynamic choice field choices'), blank=True,
-        help_text='A dict storage for all choice lists for the dynamic fields of type `DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT`',
-        encoder=DjangoJSONEncoder)
+    dynamic_field_choices = models.JSONField(default=dict, verbose_name=_('Dynamic choice field choices'), blank=True, encoder=DjangoJSONEncoder,
+        help_text='A dict storage for all choice lists for the dynamic fields of type `DYNAMIC_FIELD_TYPE_ADMIN_DEFINED_CHOICES_TEXT`')
 
     userprofile_default_description = models.TextField(verbose_name=_('Default userprofile description'), blank=True, null=True)
 
@@ -694,10 +692,12 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
         return None
 
 
-@python_2_unicode_compatible
-class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin,
-                        CosinnusManagedTagAssignmentModelMixin, VideoEmbedFieldMixin, MembersManagerMixin, BBBRoomMixin,
-                        AttachableObjectModel):
+@six.python_2_unicode_compatible
+class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, LastVisitedMixin,
+                          LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin,
+                          CosinnusManagedTagAssignmentModelMixin, VideoEmbedFieldMixin, MembersManagerMixin, BBBRoomMixin,
+                          AttachableObjectModel):
+    
     TYPE_PROJECT = 0
     TYPE_SOCIETY = 1
     TYPE_CONFERENCE = 2
@@ -887,13 +887,12 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
     # NOTE: this is the deprecated old extra_field jsonfield, 
     # but it is still in use for some custom portal code, so cannot yet be removed.
     # DO NOT USE THIS IN NEW CODE ANYMORE. USE `group.dynamic_fields` or `group.settings` instead!
-    extra_fields = JSONField(default={}, blank=True)
-    settings = PostgresJSONField(default=dict, blank=True, null=True)
+    extra_fields = models.JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder)
+    settings = models.JSONField(default=dict, blank=True, null=True, encoder=DjangoJSONEncoder)
     
-    dynamic_fields = PostgresJSONField(default=dict, blank=True, verbose_name=_('Dynamic extra fields'),
-            help_text='Extra group fields for each portal, as defined in `settings.COSINNUS_GROUP_EXTRA_FIELDS`',
-            encoder=DjangoJSONEncoder)  
-    sdgs = PostgresJSONField(default=list, blank=True, null=True)
+    dynamic_fields = models.JSONField(default=dict, blank=True, verbose_name=_('Dynamic extra fields'),
+            help_text='Extra group fields for each portal, as defined in `settings.COSINNUS_GROUP_EXTRA_FIELDS`', encoder=DjangoJSONEncoder)
+    sdgs = models.JSONField(default=list, blank=True, null=True, encoder=DjangoJSONEncoder)
     
     show_contact_form = models.BooleanField(default=False, help_text=_('If set to true, a contact form will be displayed on the micropage.'))
     
@@ -1113,7 +1112,7 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
         return self.is_premium or self.has_premium_blocks
 
     @property
-    def temporary_users_allowed(self):
+    def has_premium_rights(self):
         return self.has_premium_blocks or self.is_premium_permanently
     
     def add_member_to_group(self, user, membership_status):
@@ -1157,7 +1156,7 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
         """ Returns a User QS of *AUTO-INVITED* (!) conference member accounts of this group if it is a conference, an empty QS else """
         from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
         if self.group_is_conference:
-            return self.users.filter(cosinnus_profile__settings__contains=PROFILE_SETTING_WORKSHOP_PARTICIPANT).order_by('id')
+            return self.users.filter(cosinnus_profile__settings__has_key=PROFILE_SETTING_WORKSHOP_PARTICIPANT).order_by('id')
         return get_user_model().objects.none()
 
     @property
@@ -1203,11 +1202,6 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
             self.TYPE_CONFERENCE: 'cosinnusconference',
         }
         return reverse(f'admin:cosinnus_{type_map[self.type]}_change', kwargs={'object_id': self.id})
-    
-    def get_humanized_event_time_html(self):
-        if not self.from_date:
-            return ''
-        return mark_safe(render_to_string('cosinnus_event/common/humanized_event_time.html', {'event': self})).strip()
     
     @property
     def description_long_or_short(self):
@@ -1440,7 +1434,12 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
 
     def get_member_page_url(self):
         return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self})
-
+    
+    def get_apply_url(self):
+        if self.group_is_conference and self.membership_mode == self.MEMBERSHIP_MODE_APPLICATION:
+            return group_aware_reverse('cosinnus:conference:application', kwargs={'group': self})
+        return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self}) + '?apply=1'
+    
     @cached_property
     def get_parent_typed(self):
         """ This is the only way to make sure to get the real object of a group's parent
@@ -1500,26 +1499,6 @@ class CosinnusBaseGroup(TranslateableFieldsModelMixin, LastVisitedMixin, Likeabl
         if queryset.count() > 0:
             return queryset.aggregate(Max('to_date'))['to_date__max']
         return None
-    
-    def get_date_or_now_starting_time(self):
-        """ Returns a dict like {'is_date': True, 'date': <date>}
-            with is_date=False date as string "Now" if the event is running, 
-            else is_date=True and date as the moment-usable datetime of the from_date. """
-        _now = now()
-        if self.from_date and self.from_date < _now and self.to_date > _now:
-            return {'is_date': False, 'date': str(_("Now"))}
-        return {'is_date': True, 'date': django_date_filter(self.from_date, 'c')}
-    
-    @property
-    def is_running(self):
-        has_time = self.from_date and self.to_date
-        running = has_time and self.from_date <= now() <= self.to_date
-        return has_time and running
-
-    @property
-    def has_ended(self):
-        if self.to_date:
-            return self.to_date <= now()
 
     @property
     def conference_events(self):
@@ -1540,7 +1519,7 @@ class CosinnusGroup(CosinnusBaseGroup):
         swappable = 'COSINNUS_GROUP_OBJECT_MODEL'
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusGroupInviteToken(models.Model):
     # determines on which portal the token will be accessible for users
     portal = models.ForeignKey(CosinnusPortal, verbose_name=_('Portal'), related_name='group_invite_tokens', 

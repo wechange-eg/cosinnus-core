@@ -6,7 +6,6 @@ import functools
 
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseForbidden, HttpResponseNotFound
-from django.utils.decorators import available_attrs
 from django.utils.translation import ugettext_lazy as _
 from cosinnus.utils.group import get_cosinnus_group_model
 
@@ -169,7 +168,7 @@ def _check_deactivated_app_access(view, group, request):
 
 def require_admin_access_decorator(group_url_arg='group'):
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(request, *args, **kwargs):
             group_name = kwargs.get(group_url_arg, None)
             if not group_name:
@@ -197,7 +196,7 @@ def require_logged_in():
     """
 
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(self, request, *args, **kwargs):
             user = request.user
             
@@ -214,7 +213,7 @@ def require_verified_user_access():
     """A method decorator that checks that the requesting user has a verified email address  """
 
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(self, request, *args, **kwargs):
             user = request.user
             if not user.is_authenticated:
@@ -233,7 +232,7 @@ def require_superuser():
     """
 
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(self, request, *args, **kwargs):
             user = request.user
             
@@ -253,7 +252,7 @@ def require_portal_manager():
     """
 
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(self, request, *args, **kwargs):
             user = request.user
             
@@ -283,7 +282,7 @@ def dispatch_group_access(group_url_kwarg='group', group_attr='group'):
     """
 
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(self, request, *args, **kwargs):
             group_name = kwargs.get(group_url_kwarg, None)
             if not group_name:
@@ -319,7 +318,7 @@ def require_admin_access(group_url_kwarg=None, group_attr=None):
     """
 
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(self, request, *args, **kwargs):
             url_kwarg = group_url_kwarg or getattr(self, 'group_url_kwarg', 'group')
             attr = group_attr or getattr(self, 'group_attr', 'group')
@@ -364,7 +363,7 @@ def require_read_access(group_url_kwarg=None, group_attr=None):
     """
 
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(self, request, *args, **kwargs):
             url_kwarg = group_url_kwarg or getattr(self, 'group_url_kwarg', 'group')
             attr = group_attr or getattr(self, 'group_attr', 'group')
@@ -432,7 +431,7 @@ def require_write_access(group_url_kwarg=None, group_attr=None):
     """
 
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(self, request, *args, **kwargs):
             url_kwarg = group_url_kwarg or getattr(self, 'group_url_kwarg', 'group')
             attr = group_attr or getattr(self, 'group_attr', 'group')
@@ -487,7 +486,7 @@ def require_write_access_groupless():
     """
 
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(self, request, *args, **kwargs):
             user = request.user
             
@@ -534,7 +533,7 @@ def require_user_token_access(token_name, group_url_kwarg='group', group_attr='g
     """
 
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(self, request, *args, **kwargs):
             
             # assume no user is logged in, and check the user id and token from the args
@@ -608,7 +607,7 @@ def require_create_objects_in_access(group_url_kwarg='group', group_attr='group'
     """
 
     def decorator(function):
-        @functools.wraps(function, assigned=available_attrs(function))
+        @functools.wraps(function)
         def wrapper(self, request, *args, **kwargs):
             group_name = kwargs.get(group_url_kwarg, None)
             if not group_name:

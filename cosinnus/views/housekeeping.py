@@ -29,7 +29,7 @@ from cosinnus.models.tagged import BaseTagObject
 import random
 from django.utils.timezone import now
 from cosinnus.utils.user import filter_active_users, accept_user_tos_for_portal,\
-    get_user_tos_accepted_date, is_user_active
+    get_user_tos_accepted_date, is_user_active, get_user_id_hash
 from cosinnus.models.profile import get_user_profile_model
 from django.core.mail.message import EmailMessage
 from cosinnus.core.mail import send_mail,\
@@ -40,7 +40,7 @@ from django.db.models.aggregates import Count
 from cosinnus.utils.http import make_csv_response, make_xlsx_response
 from operator import itemgetter
 from cosinnus.utils.permissions import check_user_can_receive_emails,\
-    check_user_superuser
+    check_user_superuser, check_user_portal_manager
 import logging
 from cosinnus.templatetags.cosinnus_tags import textfield
 from annoying.functions import get_object_or_None
@@ -469,7 +469,7 @@ def group_storage_report_csv(request, group_model=None, filename='group-storage-
         Will return a CSV containing infos about all Groups:
             URL, Member-count, Number-of-Projects, Storage-Size-in-MB, Storage-Size-of-Group-and-all-Child-Projects-in-MB
     """
-    if request and not check_user_superuser(request.user):
+    if request and not check_user_superuser(request.user) and not check_user_portal_manager(request.user):
         return HttpResponseForbidden('Not authenticated')
     
     rows = []
@@ -492,7 +492,7 @@ def project_storage_report_csv(request):
         Will return a CSV containing infos about all Projects:
             URL, Member-count, Storage-Size-in-MB
     """
-    if request and not check_user_superuser(request.user):
+    if request and not check_user_superuser(request.user) and not check_user_portal_manager(request.user):
         return HttpResponseForbidden('Not authenticated')
     
     rows = []
@@ -506,7 +506,7 @@ def project_storage_report_csv(request):
 
     
 def user_activity_info(request):
-    if request and not check_user_superuser(request.user):
+    if request and not check_user_superuser(request.user) and not check_user_portal_manager(request.user):
         return HttpResponseForbidden('Not authenticated')
     
     prints = '<h1>User activity of users who logged in at least once, in terms of memberships in projects+groups, sorted by highest, one user per row:</h1><br/></br>'
@@ -521,14 +521,16 @@ def user_activity_info(request):
 #                 annotate(group_projects=group_projects).annotate(group_projects_admin=group_projects_admin).\
 #                 annotate(projects_only=projects_only).annotate(groups_only=groups_only):
     portal = CosinnusPortal.get_current()
-    headers = []
-    offset = 0
+    headers = [
+        'user-hashed-id',
+    ]
+    offset = 1
     if settings.COSINNUS_CONFERENCES_ENABLED:
         headers += [
             'conferences-count',
             'admin-of-conferences-count',
         ]
-        offset = 2
+        offset += 2
     headers += [
         'projects-and-groups-count',
         'groups-only-count',
@@ -545,9 +547,14 @@ def user_activity_info(request):
         user_row = users.get(membership.user_id, None)
         if user_row is None:
             user = membership.user
-            initial_row = []
+            initial_row = [
+                get_user_id_hash(user),         # 'user-hashed-id'
+            ]
             if settings.COSINNUS_CONFERENCES_ENABLED:
-                initial_row += [0, 0]
+                initial_row += [
+                    0,                          # 'conferences-count',
+                    0,                          # 'admin-of-conferences-count',
+                ]
             tos_accepted_date = get_user_tos_accepted_date(user)
             tos_accepted = 1
             if portal.tos_date.year > 2000 and (tos_accepted_date is None or tos_accepted_date < portal.tos_date):
@@ -571,9 +578,9 @@ def user_activity_info(request):
             
         if settings.COSINNUS_CONFERENCES_ENABLED:
             if group_type == CosinnusGroup.TYPE_CONFERENCE:
-                user_row[0] += 1 # 'conferences-count'
+                user_row[1] += 1 # 'conferences-count'
                 if membership.status == MEMBERSHIP_ADMIN:
-                    user_row[1] += 1 # 'admin-of-conferences-count',
+                    user_row[2] += 1 # 'admin-of-conferences-count',
         user_row[offset] += 1 # 'projects-and-groups-count'
         if group_type == CosinnusGroup.TYPE_PROJECT:
             user_row[offset+1] += 1 # 'groups-only-count'
@@ -685,3 +692,68 @@ def group_admin_emails(request, slugs):
     user_mails = [[user_mail] for user_mail in user_mails]
     
     return make_csv_response(user_mails, file_name=file_name)
+
+
+def portal_switches_and_settings(request, file_name='portal-switches-and-settings'):
+    """ Returns a downloadable excel spreadsheet of all the settings in conf.py, 
+        including their comments and default values.
+        Will ignore any setting with the tag #internal in its comments. """
+        
+    if request and not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    
+    headers = [
+        'Switch names',
+        'Default values',
+        'Commentary',
+    ]
+
+    import inspect
+    import cosinnus.conf as cosconf
+
+    data = inspect.getsourcelines(cosconf)[0]
+
+    switch_names = []
+    default_values = {}
+    collected_comment = ''
+    comments = {}
+    
+    skip_next = False
+    for line in data:
+        line = line.strip()
+        # getting comments
+        if line.startswith('#'):
+            comment = line.split('#', 1)[1].strip()
+            if '#internal' in comment:
+                skip_next = True
+            if comment:
+                collected_comment += comment + ' '
+        # getting switches
+        if not line.startswith('#') and '=' in line:
+            switch_name, switch_value = line.split('=', 1)
+            switch_name = switch_name.strip()
+            switch_value = switch_value.strip()
+            if switch_name and switch_name.isupper():
+                # if this is an internal switch we skip it
+                if skip_next:
+                    skip_next = False
+                    collected_comment = ''
+                    continue
+                
+                switch_names.append(switch_name)
+                if switch_value in ('[', '(', '{'):
+                    switch_value = '(object)'
+                default_values[switch_name] = switch_value
+                # putting comments to dict to bound each comment with its switch
+                if collected_comment:
+                    comments[switch_name] = collected_comment
+                    collected_comment = ''
+                    
+    
+    # 'COSINNUS_' prefix  should be applied only to switches bounded with the `CosinnusConf` class
+    rows = [[f'COSINNUS_{switch_name}', default_values.get(switch_name), comments.get(switch_name, '')]
+            if hasattr(cosconf.CosinnusConf, switch_name) 
+            else [switch_name, default_values.get(switch_name), comments.get(switch_name, '')] 
+            for switch_name in switch_names]
+    
+    return make_xlsx_response(rows=rows, row_names=headers, file_name=file_name)

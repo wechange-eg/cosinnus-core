@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from builtins import object
+from functools import partial as curry
 import logging
 
 from django.contrib import messages
@@ -12,7 +13,6 @@ from django.apps import apps
 from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.utils.encoding import force_text
-from django.utils.functional import curry
 from django.utils.translation import gettext, ugettext_lazy as _
 
 from cosinnus.conf import settings
@@ -255,7 +255,7 @@ class GroupPermanentRedirectMiddleware(MiddlewareMixin, object):
                                 # except for the conference application view and any event views
                                 if len(request_tokens) > 4 and not (is_admin or \
                                                                     (len(request_tokens) >= 6 and request_tokens[5] in ['apply',]) or \
-                                                                    (len(request_tokens) >= 5 and request_tokens[4] in ['event', 'join', 'decline', 'accept', 'withdraw', 'leave'])):
+                                                                    (len(request_tokens) >= 5 and request_tokens[4] in ['members', 'event', 'join', 'decline', 'accept', 'withdraw', 'leave'])):
                                     return HttpResponseRedirect(target_group.get_absolute_url())
                             elif check_ug_membership(request.user, target_group):
                                 # normal users only have access to the conference page of a conference group (and the management views)

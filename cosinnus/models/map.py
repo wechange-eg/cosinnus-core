@@ -12,7 +12,7 @@ from django.db.models import Q
 from django.template.defaultfilters import linebreaksbr
 from django.utils.html import escape
 from django.utils import timezone
-from django.utils.timezone import now
+from django.utils.timezone import now, is_naive
 from django.template.loader import render_to_string
 from haystack.query import SearchQuerySet
 
@@ -29,6 +29,7 @@ from cosinnus.utils.permissions import check_ug_membership, check_ug_pending, \
     check_ug_invited_pending, check_user_superuser
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus_exchange.models import ExchangeProject, ExchangeSociety, ExchangeOrganization, ExchangeEvent
+from cosinnus.utils.dates import HumanizedEventTimeObject
 
 
 def _prepend_url(user, portal=None):
@@ -133,8 +134,9 @@ class HaystackGroupMapCard(HaystackMapCard):
 class HaystackConferenceMapCard(HaystackMapCard):
     
     def __init__(self, result, *args, **kwargs):
+        humanized_datetime_obj = HumanizedEventTimeObject(result.from_date, result.to_date)
         kwargs.update({
-            'dataSlot1': result.humanized_event_time_html, # time and date 
+            'dataSlot1': humanized_datetime_obj.get_humanized_event_time_html(), # time and date in a user-localized version
             'dataSlot2': result.participant_count, # group member count
         })
         return super(HaystackConferenceMapCard, self).__init__(result, *args, **kwargs)
@@ -149,8 +151,9 @@ class HaystackOrganizationMapCard(HaystackMapCard):
 class HaystackEventMapCard(HaystackMapCard):
     
     def __init__(self, result, *args, **kwargs):
+        humanized_datetime_obj = HumanizedEventTimeObject(result.from_date, result.to_date)
         kwargs.update({
-            'dataSlot1': result.humanized_event_time_html,  # time and date 
+            'dataSlot1': humanized_datetime_obj.get_humanized_event_time_html(), # time and date in a user-localized version
             'dataSlot2': None,
         })
         return super(HaystackEventMapCard, self).__init__(result, *args, **kwargs)
@@ -409,8 +412,9 @@ class DetailedConferenceMapResult(DetailedBaseGroupMapResult):
          into a proper MapResult """
 
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
+        humanized_datetime_obj = HumanizedEventTimeObject(haystack_result.from_date, haystack_result.to_date)
         kwargs.update({
-            'time_html': haystack_result.humanized_event_time_html,
+            'time_html': humanized_datetime_obj.get_humanized_event_time_html(), # time and date in a user-localized version
             'participants_limit_count': haystack_result.participants_limit_count,
         })
         return super(DetailedConferenceMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
@@ -492,9 +496,10 @@ class DetailedEventResult(DetailedMapResult):
     })
     
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
+        humanized_datetime_obj = HumanizedEventTimeObject(haystack_result.from_date, haystack_result.to_date)
         kwargs.update({
             'is_member': check_ug_membership(user, obj.group),
-            'time_html': haystack_result.humanized_event_time_html,
+            'time_html': humanized_datetime_obj.get_humanized_event_time_html(),
         })
         
         # collect visible attending users
@@ -820,7 +825,8 @@ EXCHANGE_SEARCH_MODEL_NAMES = {
     ExchangeOrganization: 'organizations',
     ExchangeEvent: 'events'
 }
-SEARCH_MODEL_NAMES.update(EXCHANGE_SEARCH_MODEL_NAMES)
+if settings.COSINNUS_EXCHANGE_ENABLED:
+    SEARCH_MODEL_NAMES.update(EXCHANGE_SEARCH_MODEL_NAMES)
 EXCHANGE_SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(EXCHANGE_SEARCH_MODEL_NAMES.items())])
 
 

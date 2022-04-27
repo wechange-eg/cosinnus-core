@@ -39,6 +39,7 @@ from cosinnus.views.user import send_user_email_to_verify
 from django.utils.crypto import get_random_string
 from oauth2_provider import models as oauth2_provider_models
 from cosinnus.core.mail import send_html_mail
+from cosinnus.utils.user import filter_active_users
 
 
 logger = logging.getLogger('cosinnus')
@@ -143,7 +144,7 @@ def delete_userprofile(user):
     user.last_name = "user"
     user.username = user.id
     # replace e-mail with random address
-    user.email = '__deleted_user__%s@deleted.com' % get_random_string()
+    user.email = '__deleted_user__%s@deleted.com' % get_random_string(length=12)
     
     # we no longer retain a padded version of the user's email
     #scramble_cutoff = user._meta.get_field('email').max_length - len(scrambled_email_prefix) - 2
@@ -221,9 +222,7 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
         if not getattr(self, 'qs', None):
             qs = super(UserProfileDetailView, self).get_queryset()
             if not (self.request.GET.get('force_show', False) == '1' and check_user_superuser(self.request.user)):
-                qs = qs.exclude(user__is_active=False).\
-                        exclude(user__last_login__exact=None).\
-                        filter(settings__contains='tos_accepted')
+                qs = filter_active_users(qs, filter_on_user_profile_model=True)
             self.qs = qs
         return self.qs
 

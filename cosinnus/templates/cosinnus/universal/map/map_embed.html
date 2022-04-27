@@ -27,6 +27,7 @@
             var COSINNUS_EXCHANGE_PORTAL_ID = {{ SETTINGS.COSINNUS_EXCHANGE_PORTAL_ID }};
             var COSINNUS_CLOUD_DASHBOARD_WIDGET_ENABLED = {% if SETTINGS.COSINNUS_CLOUD_ENABLED and SETTINGS.COSINNUS_CLOUD_DASHBOARD_WIDGET_ENABLED %}true{% else %}false{% endif %};
             var cosinnus_current_language = "{{ COSINNUS_CURRENT_LANGUAGE }}";
+            var cosinnus_user_timezone = {% if COSINNUS_USER_TIMEZONE %}"{{ COSINNUS_USER_TIMEZONE }}"{% else %}null{% endif %};
             var cosinnus_active_user = JSON.parse("{{ COSINNUS_USER|escapejs }}");
             var COSINNUS_SHOW_SUPERUSER_CONTROLS = {% if user|is_superuser %}true{% else %}false{% endif %};
             var COSINNUS_STARRED_STAR_LABEL = "{% get_setting 'COSINNUS_STARRED_STAR_LABEL' %}";
@@ -57,7 +58,11 @@
 	    <script src="{% static 'js/vendor/moment-timezone-with-data.min.js' %}"></script>
         <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
         <script src="{% static 'js/cosinnus.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
+        {% if request.LANGUAGE_CODE in 'de,en,ru,uk' %}
         <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
+        {% else %}
+        <script src="{% static 'js/locale/en/cosinnus_formats.js' %}?lang=en&v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
+        {% endif %}
         <script src="{% static 'js/client.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
         <link href="{% static 'css/bootstrap3-cosinnus.css' %}" rel="stylesheet">
         <link href="{% static 'css/vendor/font-awesome.min.css' %}" rel="stylesheet">

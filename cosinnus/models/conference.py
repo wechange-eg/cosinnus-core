@@ -4,12 +4,12 @@ from __future__ import unicode_literals
 from builtins import object
 import locale
 import logging
+import six
 
 from annoying.functions import get_object_or_None
 from django.contrib.contenttypes.fields import GenericForeignKey, \
     GenericRelation
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.postgres.fields import JSONField as PostgresJSONField
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.cache import cache
 from django.core.exceptions import ValidationError, ImproperlyConfigured
@@ -17,7 +17,6 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.crypto import get_random_string
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 from phonenumber_field.modelfields import PhoneNumberField
 import six
@@ -124,9 +123,8 @@ class CosinnusConferenceSettings(models.Model):
         default=SETTING_INHERIT, choices=BBB_SERVER_CHOICES_WITH_INHERIT,
         help_text='The chosen BBB-Server/Cluster setting for connections to the recording API server. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!')
     
-    bbb_params = PostgresJSONField(default=dict, blank=True, verbose_name=_('BBB API Parameters'),
-            help_text='Custom parameters for API calls like join/create for all BBB rooms for this object and in its inherited objects.',
-            encoder=DjangoJSONEncoder)
+    bbb_params = models.JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder, verbose_name=_('BBB API Parameters'),
+            help_text='Custom parameters for API calls like join/create for all BBB rooms for this object and in its inherited objects.')
     
     # The nature (str or None) set through the source object for this config object. 
     # Only set during retrieval by `get_for_object()`.
@@ -488,7 +486,7 @@ class CosinnusConferenceRoomManager(models.Manager):
                 .select_related('group').order_by('sort_index', 'title')
     
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class CosinnusConferenceRoom(TranslateableFieldsModelMixin, BBBRoomMixin,
                              ModelInheritsGroupReadWritePermissionsMixin,
                              models.Model):
@@ -705,7 +703,7 @@ class ParticipationManagement(models.Model):
                                   null=True, blank=True,
                                   upload_to=get_conference_conditions_filename,
                                   max_length=250)
-    application_options = PostgresJSONField(default=list, blank=True, null=True)
+    application_options = models.JSONField(default=list, encoder=DjangoJSONEncoder, blank=True, null=True)
     conference = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
                                            verbose_name=_('Participation Management'),
                                            related_name='participation_management',
@@ -837,8 +835,8 @@ class CosinnusConferenceApplication(models.Model):
         related_name='user_applications', on_delete=models.CASCADE)
     status = models.PositiveSmallIntegerField(choices=APPLICATION_STATES,
                                               default=APPLICATION_SUBMITTED)
-    options = PostgresJSONField(default=list, blank=True, null=True)
-    priorities = PostgresJSONField(_('Priorities'), default=dict, blank=True, null=True)
+    options = models.JSONField(default=list, blank=True, null=True, encoder=DjangoJSONEncoder)
+    priorities = models.JSONField(_('Priorities'), default=dict, blank=True, null=True, encoder=DjangoJSONEncoder)
     information = models.TextField(_('Motivation for applying'), blank=True)
     contact_email = models.EmailField(_('Contact E-Mail Address'), blank=True, null=True)
     contact_phone = PhoneNumberField(('Contact Phone Number'), blank=True, null=True)

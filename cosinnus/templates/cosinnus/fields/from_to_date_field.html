@@ -1,4 +1,5 @@
-{% load i18n cosinnus_tags %}
+{% load i18n cosinnus_tags tz %}
+{% get_current_timezone as TIME_ZONE %}
 
 {% comment %} 
     A formfield date-picker for a form containing `from_date`, `to_date` DateTimeFields.  
@@ -10,12 +11,13 @@
     Optional parameters:
         - date_label: Label for the formfield
         - date_legend: Legend for the formfield
-        
+
 {% endcomment %}
 
 {% if not date_label %}
     {% trans "Date" as date_label %}
 {% endif %}
+{% captureas date_legend %}{% blocktrans %}Time zone: {{ TIME_ZONE }}{% endblocktrans %}{% endcaptureas %}
 {% captureas date_html %}
     {{ from_date_field.errors }}
     {{ to_date_field.errors }}
@@ -38,7 +40,7 @@
                     value="{% now "Y-m-d" %}" 
                 {% endif %}
             >
-            <input {% if hide_time_field %}type="hidden"{% endif%} class="calendar-date-time-chooser-time" id="id_{{ from_date_field.html_name }}_1" name="{{ from_date_field.html_name }}_1" 
+            <input {% if hide_time_field %}type="hidden"{% endif%} class="calendar-date-time-chooser-time" id="id_{{ from_date_field.html_name }}_1" name="{{ from_date_field.html_name }}_1" autocomplete="off"
                 placeholder="00:00" type="text"
                 {% if from_date_field.value and from_date_field.value|date:'H:i' %}
                     value="{{ from_date_field.value|date:'H:i' }}"
@@ -68,7 +70,7 @@
                    value="{% now "Y-m-d" %}" 
                 {% endif %}
             >
-            <input {% if hide_time_field %}type="hidden"{% endif%} class="calendar-date-time-chooser-time" id="id_{{ to_date_field.html_name }}_1" name="{{ to_date_field.html_name }}_1"
+            <input {% if hide_time_field %}type="hidden"{% endif%} class="calendar-date-time-chooser-time" id="id_{{ to_date_field.html_name }}_1" name="{{ to_date_field.html_name }}_1" autocomplete="off"
                 placeholder="23:59" type="text" 
                 {% if to_date_field.value and to_date_field.value|date:'H:i' %}
                     value="{{ to_date_field.value|date:'H:i' }}"
@@ -88,12 +90,30 @@
 	    {% endif %}
     </ol>
 {% endcaptureas %}
-{% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label large_field=True date_legend=date_legend %}
+{% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label large_field=True legend=date_legend %}
 
 <script type="text/javascript">
     $(function(){
 	    $.cosinnus.fullcalendar();
 	    $.cosinnus.calendarDayTimeChooser();
     });
-</script>
 
+    $('#id_{{ from_date_field.html_name }}_1').keyup(function(){
+        if(/[0-9]{1,2}\:[0-9]{2}/.test($(this).val())) {
+            var startTime = $(this).val().split(':');
+            var endHours = parseInt(startTime) + 1;
+            $('#id_{{ to_date_field.html_name }}_1').val(endHours +':'+ startTime[1]);
+        } else if (/[0-9]{4}/.test($(this).val())) {
+            var startTime = $(this).val();
+            var endHours = parseInt(startTime) + 100;
+            $('#id_{{ to_date_field.html_name }}_1').val(endHours);
+        } else if (/[0-9]{1,2}/.test($(this).val())) {
+            var startTime = $(this).val();
+            var endHours = parseInt(startTime) + 1;
+            $('#id_{{ to_date_field.html_name }}_1').val(endHours);
+        } else if ($(this).val().trim() == '') {
+            $('#id_{{ to_date_field.html_name }}_1').val('');
+        }
+    });
+
+</script>

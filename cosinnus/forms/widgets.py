@@ -22,7 +22,7 @@ def _is_number(s):
 class BaseL10NPicker(DateTimePicker):
     js_format_key = None
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
         if self.js_format_key is not None and self.options:
             js_format_string = get_format(self.js_format_key)
             self.options.update({

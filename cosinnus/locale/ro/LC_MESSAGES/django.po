@@ -1,10 +1,17 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-18 09:18+0100\n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n==0 || (n!=1 && n%100>=1 && n%100<=19) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -435,12 +442,12 @@ msgstr "%(sender_name)s v-a invitat să vă alăturați ”%(team_name)s” pe %
 msgid "Accept invitation"
 msgstr "Invitația acceptată"
 
-msgid "View invitation"
-msgstr "Vizualizați invitația"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s te-a invitat"
+
+msgid "View invitation"
+msgstr "Vizualizați invitația"
 
 msgid "New link to the moved project/group"
 msgstr "Nou link către proiectul/grupul mutat"
@@ -493,6 +500,28 @@ msgstr "%(sender_name)s tocmai a creat ideea ”%(object_name)s” pe %(portal_n
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s tocmai a creat un nou cont de utilizator  pe %(portal_name)s!"
+
+msgid "A conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The conference %(object_name)s has been updated"
+msgstr "Ai fost etichetat în ”%(object_name)s” în %(team_name)s."
+
+#, fuzzy
+msgid "You are attending this conference"
+msgstr "Sunteți pe punctul de a dezactiva acest proiect/grup!"
+
+#, fuzzy, python-format
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr "Ai fost etichetat în ”%(object_name)s” în %(team_name)s."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The time of conference %(object_name)s has been updated"
+msgstr "Ai fost etichetat în ”%(object_name)s” în %(team_name)s."
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -1474,10 +1503,6 @@ msgstr "Cerere despre proiectul dvs. ”%(group_name)s”"
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Cerere despre grupul dvs. ”%(group_name)s”"
 
-#, fuzzy
-msgid "Now"
-msgstr "Acum"
-
 msgid "Token"
 msgstr "Jeton"
 
@@ -2276,6 +2301,141 @@ msgstr "Administrare"
 msgid "Select a page on the left side."
 msgstr "Selectați o pagină din partea stângă."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Este conferință"
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "Este conferință"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "Vizualizarea pe pagină"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Vezi Proiect"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Conferința se desfășoară"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "Setările de confidențialitate"
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "Setările Conferinței"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+#, fuzzy
+msgid "Not premium"
+msgstr "Premium"
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Restrâns"
+
+#, fuzzy
+msgid "running now!"
+msgstr "Alătură-te acum!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Setările Conferinței"
+
+#, fuzzy
+msgid "Room"
+msgstr "Tipul Camerei"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Eveniment"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Conferința se desfășoară"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Conferința se desfășoară"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Chiar vrei să lași „%(title)s”?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Vrei cu adevărat să eliminați membru „%(name)s” din echipă?"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "Nu există articole încă"
+
+msgid "BBB"
+msgstr ""
+
+#, fuzzy
+msgid "BBB Premium"
+msgstr "Premium"
+
+msgid "BBB Recording API"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "Nealocat"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Creează Eveniment"
+
+msgid "Save"
+msgstr "Salvați"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Vrei într-adevăr să refuzi membru „%(name)s”?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Ștergeți Profilul"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2295,6 +2455,7 @@ msgid "With the current selection the newsletter will be sent to %(counter)s rec
 msgid_plural "With the current selection the newsletter will be sent to %(counter)s recipients."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 msgid "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter."
 msgstr ""
@@ -2325,6 +2486,18 @@ msgstr "Anunțuri pentru Tabloul de Bord al Utilizatorului"
 
 msgid "User Welcome Email"
 msgstr "Utilizator Bun Venit pe E-mail"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Setările Conferinței"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Creează Eveniment"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Conferința se desfășoară"
 
 msgid "Simple Statistics"
 msgstr "Statistici Simple"
@@ -2391,9 +2564,6 @@ msgstr "Nume"
 msgid "Lastname"
 msgstr "Numele de familie"
 
-msgid "Save"
-msgstr "Salvați"
-
 #, fuzzy
 msgid "User Administration"
 msgstr "Administrare"
@@ -2425,6 +2595,7 @@ msgid_plural ""
 "                "
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 msgid "clear search"
 msgstr ""
@@ -2679,7 +2850,7 @@ msgstr "helptext_3_marketplace"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_4_profile"
-msgstr "helptext_4_profile"
+msgstr "Here you can edit your profile. Upload an avatar, enter your location or a topic you are interested în and confirm the changes by clicking on “Save” on the bottom right-hand side."
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_5_password"
@@ -2844,6 +3015,7 @@ msgstr ""
 msgid "Withdraw"
 msgstr "Retrage"
 
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 msgid "Conference Applications"
 msgstr "Setările Conferinței"
@@ -2878,6 +3050,7 @@ msgid " 1 place left "
 msgid_plural " %(counter)s places left "
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 msgid "Collapse all processed applications"
 msgstr ""
@@ -2940,6 +3113,7 @@ msgid_plural ""
 "                    "
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 msgid "Are you sure? Please check your entries beforehand with the help of a test email."
 msgstr ""
@@ -2955,6 +3129,7 @@ msgid_plural ""
 "                        "
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 msgid "No, don\\"
 msgstr ""
@@ -3204,6 +3379,9 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr "Nu există articole încă"
 
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
+
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
 
@@ -3394,6 +3572,12 @@ msgstr "Restrâns"
 msgid "Length"
 msgstr ""
 
+msgid "minute"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
 #, fuzzy
 #| msgid "Delete Account"
 msgid "Delete Recording"
@@ -3406,154 +3590,6 @@ msgstr "Doriți cu adevărat să ștergeți anunțul ”%(title)s”?"
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Ștergeți articolul raportat..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Este conferință"
-
-#, fuzzy
-msgid "Overview - All Conferences"
-msgstr "Este conferință"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Administrare"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "Vizualizarea pe pagină"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Vezi Proiect"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Conferința se desfășoară"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "Setările de confidențialitate"
-
-#, fuzzy
-msgid "Conference Settings"
-msgstr "Setările Conferinței"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "Premium"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-#, fuzzy
-msgid "Not premium"
-msgstr "Premium"
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-msgid "Start"
-msgstr "Restrâns"
-
-#, fuzzy
-msgid "running now!"
-msgstr "Alătură-te acum!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Setările Conferinței"
-
-#, fuzzy
-msgid "Room"
-msgstr "Tipul Camerei"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Eveniment"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Conferința se desfășoară"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Conferința se desfășoară"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Chiar vrei să lași „%(title)s”?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Vrei cu adevărat să eliminați membru „%(name)s” din echipă?"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "Nu există articole încă"
-
-msgid "BBB"
-msgstr ""
-
-#, fuzzy
-msgid "BBB Premium"
-msgstr "Premium"
-
-msgid "BBB Recording API"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "Nealocat"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Creează Eveniment"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Vrei într-adevăr să refuzi membru „%(name)s”?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Ștergeți Profilul"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Setările Conferinței"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Creează Eveniment"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Conferința se desfășoară"
 
 msgid "Rearrange"
 msgstr "Rearanja"
@@ -5812,8 +5848,8 @@ msgstr "E-mailuri ale tuturor abonaților la buletin informativ"
 msgid "E-Mails of ALL active users"
 msgstr "E-mailurile Tuturor utilizatorilor activi"
 
-msgid "Ok"
-msgstr "OK"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr "WE-Cloud este aici!"
@@ -6491,6 +6527,9 @@ msgstr "NU doresc să fiu contactat pentru o colaborare potențială!"
 msgid "My Website"
 msgstr "Site-ul Meu"
 
+msgid "My time zone"
+msgstr ""
+
 #, fuzzy
 msgid "ended"
 msgstr "Dent s-a înălțat mult"
@@ -6518,6 +6557,14 @@ msgstr "Cine ești tu și ce te motivează?"
 
 msgid "Tell others something about you!"
 msgstr "Spune altora ceva despre tine!"
+
+#, fuzzy
+#| msgid "Timeline"
+msgid "Time zone"
+msgstr "Cronologie"
+
+msgid "This will determine the time and date shown for events on the website and in your notification emails."
+msgstr ""
 
 msgid "Cooperation requests for you"
 msgstr "Cereri de cooperare pentru dumneavoastră"
@@ -6655,6 +6702,7 @@ msgid "You have only one backup token remaining."
 msgid_plural "<br> You have %(counter)s backup tokens remaining."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #, fuzzy
 msgid "Show Tokens"
@@ -7706,6 +7754,10 @@ msgstr "Descrierea Echipei"
 msgid "About Us"
 msgstr "Despre Noi"
 
+#, fuzzy
+msgid "Now"
+msgstr "Acum"
+
 msgid "Question about"
 msgstr "Întrebare despre"
 
@@ -8282,6 +8334,13 @@ msgstr "În prezent nu sunteți membru %s! Dacă doriți, puteți solicita să d
 
 msgid "Your changes have been saved."
 msgstr "Schimbările tale au fost salvate."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "Administrare"
+
+#~ msgid "Ok"
+#~ msgstr "OK"
 
 #~ msgid "Active"
 #~ msgstr "Activ"

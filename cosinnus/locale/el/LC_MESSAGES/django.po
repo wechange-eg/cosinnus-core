@@ -1,11 +1,17 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-18 09:18+0100\n"
-"Language: \n"
+"POT-Creation-Date: 2022-03-25 14:14+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -432,12 +438,12 @@ msgstr "Ο/η %(sender_name)s σας έχει προσκαλέσει να εγγ
 msgid "Accept invitation"
 msgstr "Αποδοχή πρόσκλησης"
 
-msgid "View invitation"
-msgstr "Προβολή πρόσκλησης"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "Ο/η %(sender_name)s σας προσκάλεσε"
+
+msgid "View invitation"
+msgstr "Προβολή πρόσκλησης"
 
 msgid "New link to the moved project/group"
 msgstr "Νέος σύνδεσμος για το έργο/την ομάδα που μεταφέρθηκε"
@@ -487,6 +493,32 @@ msgstr "Ο/η %(sender_name)s μόλις δημιούργησε %(team_name)s σ
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "Ο/η %(sender_name)s έχει μόλις δημιουργήσει ένα νέο λογαριασμό χρήστη σε %(portal_name)s!"
+
+msgid "A conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference %(object_name)s has been updated"
+msgstr "Μια νέα σύσκεψη: \"%(object_name)s\" ανακοινώθηκε σε %(team_name)s."
+
+#, fuzzy
+#| msgid "You are about to deactivate this conference!"
+msgid "You are attending this conference"
+msgstr "Πρόκειται να απενεργοποιήσετε αυτή τη σύσκεψη!"
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr "Μια νέα σύσκεψη: \"%(object_name)s\" ανακοινώθηκε σε %(team_name)s."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The time of conference %(object_name)s has been updated"
+msgstr "Μια νέα σύσκεψη: \"%(object_name)s\" ανακοινώθηκε σε %(team_name)s."
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -1443,10 +1475,6 @@ msgstr "Αίτημα για το έργο σας \"%(group_name)s\""
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Αίτημα για την ομάδα σας \"%(group_name)s\""
 
-#, fuzzy
-msgid "Now"
-msgstr "Τώρα"
-
 msgid "Token"
 msgstr "Διακριτικό"
 
@@ -2228,6 +2256,129 @@ msgstr "Διαχείριση"
 msgid "Select a page on the left side."
 msgstr "Επιλέξτε μια σελίδα στην αριστερή πλευρά."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια με προσαρμοσμένες ρυθμίσεις Εξυπηρετητή-BBB"
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
+
+msgid "Overview - All Conferences"
+msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια"
+
+msgid "Past"
+msgstr "Προηγούμενος"
+
+msgid "View Upcoming"
+msgstr "Προβολή Προσεχούς"
+
+msgid "Upcoming"
+msgstr "Προσεχής"
+
+msgid "View Past"
+msgstr "Προβολή Προηγούμενου"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+msgid "Booked"
+msgstr "Με σελιδοδείκτη"
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Η σύσκεψη είναι μόνιμα premium"
+
+msgid "Portal Setting"
+msgstr "Ρύθμιση Πύλης"
+
+msgid "Conference Settings"
+msgstr "Ρυθμίσεις Σύσκεψης"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr "Όχι premium"
+
+msgid "Rooms"
+msgstr "Δωμάτια"
+
+msgid "Start"
+msgstr "Έναρξη"
+
+msgid "running now!"
+msgstr "εκτελείται τώρα!"
+
+msgid "Conference Setting"
+msgstr "Ρύθμιση Σύσκεψης"
+
+msgid "Room"
+msgstr "Δωμάτιο"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Εκδήλωση"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Η σύσκεψη είναι μόνιμα premium"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Η σύσκεψη είναι μόνιμα premium"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε τον χρήστη;"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε το μέλος \"%(name)s\" από την ομάδα;"
+
+msgid "There are no items to show."
+msgstr "Δεν υπάρχουν στοιχεία να προβληθούν."
+
+msgid "BBB"
+msgstr "BBB"
+
+msgid "BBB Premium"
+msgstr "BBB Premium"
+
+msgid "BBB Recording API"
+msgstr ""
+
+msgid "Not set"
+msgstr "Δεν έχει οριστεί"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
+
+msgid "Save"
+msgstr "Αποθήκευση"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Είστε βέβαιοι ότι θέλετε να απορρίψετε το μέλος „%(name)s“;"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Διαγραφή Προφίλ"
+
 msgid "Newsletters"
 msgstr "Newsletter"
 
@@ -2272,6 +2423,16 @@ msgstr "Ανακοινώσεις Πίνακα Χρήστη"
 
 msgid "User Welcome Email"
 msgstr "Email Καλωσορίσματος Χρήστη"
+
+msgid "Conference Overview"
+msgstr "Επισκόπηση Σύσκεψης"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
+
+msgid "Conferences with Custom Settings"
+msgstr "Συσκέψεις με Προσαρμοσμένες Ρυθμίσεις"
 
 msgid "Simple Statistics"
 msgstr "Απλή Στατιστική"
@@ -2331,9 +2492,6 @@ msgstr "Όνομα"
 
 msgid "Lastname"
 msgstr "Επίθετο"
-
-msgid "Save"
-msgstr "Αποθήκευση"
 
 msgid "User Administration"
 msgstr "Διαχείριση Χρήστη"
@@ -2617,7 +2775,7 @@ msgstr "helptext_3_marketplace"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_4_profile"
-msgstr "helptext_4_profile"
+msgstr "Here you can edit your profile. Upload an avatar, enter your location or a topic you are interested in and confirm the changes by clicking on “Save” on the bottom right-hand side."
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_5_password"
@@ -2773,6 +2931,7 @@ msgstr "Αίτηση για συμμετοχή στη σύσκεψη"
 msgid "Withdraw"
 msgstr "Αποχώρηση"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Conference Applications"
 msgstr "Εφαρμογές Σύσκεψης"
 
@@ -3111,6 +3270,9 @@ msgstr "Μπορείτε άμεσα να δημιουργήσετε εκδηλώ
 msgid "There are no rooms yet."
 msgstr "Δεν υπάρχουν ακόμη δωμάτια."
 
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
+
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
 
@@ -3290,6 +3452,12 @@ msgstr "Με αστερίσκο"
 msgid "Length"
 msgstr ""
 
+msgid "minute"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
 #, fuzzy
 #| msgid "Delete Account"
 msgid "Delete Recording"
@@ -3303,140 +3471,6 @@ msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε 
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Διαγραφή αναφερόμενου στοιχείου..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια με προσαρμοσμένες ρυθμίσεις Εξυπηρετητή-BBB"
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
-
-msgid "Overview - All Conferences"
-msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Διαχείριση Χρήστη"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια"
-
-msgid "Past"
-msgstr "Προηγούμενος"
-
-msgid "View Upcoming"
-msgstr "Προβολή Προσεχούς"
-
-msgid "Upcoming"
-msgstr "Προσεχής"
-
-msgid "View Past"
-msgstr "Προβολή Προηγούμενου"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-#, fuzzy
-msgid "Booked"
-msgstr "Με σελιδοδείκτη"
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Η σύσκεψη είναι μόνιμα premium"
-
-msgid "Portal Setting"
-msgstr "Ρύθμιση Πύλης"
-
-msgid "Conference Settings"
-msgstr "Ρυθμίσεις Σύσκεψης"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "Premium"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr "Όχι premium"
-
-msgid "Rooms"
-msgstr "Δωμάτια"
-
-msgid "Start"
-msgstr "Έναρξη"
-
-msgid "running now!"
-msgstr "εκτελείται τώρα!"
-
-msgid "Conference Setting"
-msgstr "Ρύθμιση Σύσκεψης"
-
-msgid "Room"
-msgstr "Δωμάτιο"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr "Εκδήλωση"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Η σύσκεψη είναι μόνιμα premium"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Η σύσκεψη είναι μόνιμα premium"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε τον χρήστη;"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε το μέλος \"%(name)s\" από την ομάδα;"
-
-msgid "There are no items to show."
-msgstr "Δεν υπάρχουν στοιχεία να προβληθούν."
-
-msgid "BBB"
-msgstr "BBB"
-
-msgid "BBB Premium"
-msgstr "BBB Premium"
-
-msgid "BBB Recording API"
-msgstr ""
-
-msgid "Not set"
-msgstr "Δεν έχει οριστεί"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Είστε βέβαιοι ότι θέλετε να απορρίψετε το μέλος „%(name)s“;"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Διαγραφή Προφίλ"
-
-msgid "Conference Overview"
-msgstr "Επισκόπηση Σύσκεψης"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
-
-msgid "Conferences with Custom Settings"
-msgstr "Συσκέψεις με Προσαρμοσμένες Ρυθμίσεις"
 
 msgid "Rearrange"
 msgstr "Αναδιάταξη"
@@ -5664,8 +5698,8 @@ msgstr "E-Mail από όλους τους συνδρομητές του newslett
 msgid "E-Mails of ALL active users"
 msgstr "E-Mail από ΟΛΟΥΣ τους ενεργούς χρήστες"
 
-msgid "Ok"
-msgstr "Εντάξει"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr "Το WE-Cloud είναι εδώ!"
@@ -6329,6 +6363,9 @@ msgstr "ΔΕΝ επιθυμώ την επικοινωνία για πιθανή 
 msgid "My Website"
 msgstr "Η Ιστοσελίδα Μου"
 
+msgid "My time zone"
+msgstr ""
+
 msgid "ended"
 msgstr ""
 
@@ -6355,6 +6392,14 @@ msgstr "Ποιος είστε και ποια είναι τα κίνητρά σ�
 
 msgid "Tell others something about you!"
 msgstr "Αναφέρατε στους άλλους κάτι για εσάς!"
+
+#, fuzzy
+#| msgid "Timeline"
+msgid "Time zone"
+msgstr "Χρονολόγιο"
+
+msgid "This will determine the time and date shown for events on the website and in your notification emails."
+msgstr ""
 
 msgid "Cooperation requests for you"
 msgstr "Αιτήματα συνεργασίας για εσάς"
@@ -7483,6 +7528,10 @@ msgstr "Περιγραφή Ομάδας"
 msgid "About Us"
 msgstr "Σχετικά με Εμάς"
 
+#, fuzzy
+msgid "Now"
+msgstr "Τώρα"
+
 msgid "Question about"
 msgstr "Ερώτηση σχετικά με"
 
@@ -8051,6 +8100,13 @@ msgstr "Δεν είστε μέλος του %s αυτή τη στιγμή! Εά�
 
 msgid "Your changes have been saved."
 msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
+
+#, fuzzy
+#~ msgid "Conference Administration"
+#~ msgstr "Διαχείριση Χρήστη"
+
+#~ msgid "Ok"
+#~ msgstr "Εντάξει"
 
 #~ msgid "Active"
 #~ msgstr "Ενεργός"

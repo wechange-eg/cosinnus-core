@@ -538,6 +538,7 @@
                         <div {% if group_model == "CosinnusConference" %}style="display: none;"{% endif %}>
 	                        {# Apps selector fields #}			                
 			                {% trans "Which apps should be activated?" as apps_label %}
+                            {% trans "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated." as apps_legend %}
 			                {% captureas apps_html %}
 			                    <div class="input-area" style="padding: 5px;">
 				                    {% for app_option in deactivated_app_selection %}
@@ -560,7 +561,7 @@
 	                                {% endfor %}
 	                            </div>
 			                {% endcaptureas %}
-			                {% include 'cosinnus/fields/default_field.html' with extra_html=apps_html label=apps_label large_field=True %}
+			                {% include 'cosinnus/fields/default_field.html' with extra_html=apps_html label=apps_label legend=apps_legend large_field=True %}
                         </div>
 					            
 					</div>

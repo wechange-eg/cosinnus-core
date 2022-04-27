@@ -77,7 +77,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
     form_class = CosinusWorkshopParticipantCSVImportForm
 
     def extra_dispatch_check(self):
-        if not self.group.temporary_users_allowed:
+        if not self.group.has_premium_rights:
             messages.warning(self.request, _('This function is not enabled for this conference.'))
             return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
 
@@ -145,7 +145,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         elif 'change_password' in request.POST:
             user_id = int(request.POST.get('change_password'))
             user = get_user_model().objects.get(id=user_id)
-            pwd = get_random_string()
+            pwd = get_random_string(length=12)
             user.set_password(pwd)
             user.save()
             return JsonResponse(
@@ -172,7 +172,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         for member in self.get_temporary_users():
             pwd = ''
             if not member.password:
-                pwd = get_random_string()
+                pwd = get_random_string(length=12)
                 member.set_password(pwd)
                 member.save()
             accounts.append([
@@ -275,7 +275,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         try:
             name_string = '"{}":"{}"'.format(PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME, username)
             profile = UserProfile.objects.get(
-                settings__contains=name_string,
+                settings__has_key=name_string,
                 scheduled_for_deletion_at__isnull=True
             )
             user = profile.user
@@ -285,7 +285,7 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
             self.create_or_update_memberships(user)
             return data + [user.email, ''], False
         except ObjectDoesNotExist:
-            random_email = '{}@{}'.format(get_random_string(), email_domain)
+            random_email = '{}@{}'.format(get_random_string(length=12), email_domain)
             user = create_base_user(random_email, first_name=first_name, last_name=last_name, no_generated_password=True)
 
             if user:

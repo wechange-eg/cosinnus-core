@@ -58,7 +58,7 @@
         {% endif %}
         <div class="content-box">
             <div class="row">
-                <div class="col-md-8">
+                <div class="{% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED %}col-md-8{% else %}col-md-12{% endif %}">
                     <div class="cosinnus-field">
                         <label>{% trans 'Search' %}</label>
 						<div class="cosinnus-field-input large-field">
@@ -79,20 +79,22 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-4">
-					<div class="cosinnus-field">
-                        <label>{{ options_label }}</label>
-						<div class="cosinnus-field-input large-field">
-							<select name="managed_tag">
-                                <option value="">{% trans '(No choice)' %}</option>
-								{% for option in options %}
-								<option value="{{ option.0 }}" {% if option.0 == request.GET.managed_tag %}selected{% endif %}>{{ option.1 }}</option>
-								{% endfor %}
-							</select>
+                
+                {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED %}
+	                <div class="col-md-4">
+						<div class="cosinnus-field">
+	                        <label>{{ options_label }}</label>
+							<div class="cosinnus-field-input large-field">
+								<select name="managed_tag">
+	                                <option value="">{% trans '(No choice)' %}</option>
+									{% for option in options %}
+									<option value="{{ option.0 }}" {% if option.0 == request.GET.managed_tag %}selected{% endif %}>{{ option.1 }}</option>
+									{% endfor %}
+								</select>
+							</div>
 						</div>
 					</div>
-				</div>
+				{% endif %}
 
             </div>
         </div>

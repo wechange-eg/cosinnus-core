@@ -87,25 +87,31 @@ generic_error_page_view = GenericErrorPageView.as_view()
 
 
 class SwitchLanguageView(RedirectView):
-    
+
     permanent = False
-    
+
     def get(self, request, *args, **kwargs):
         language = kwargs.pop('language', None)
-        
+
         if not language or language not in list(dict(settings.LANGUAGES).keys()):
             messages.error(request, _('The language "%s" is not supported' % language))
         else:
-            request.session[LANGUAGE_SESSION_KEY] = language
-            request.session['django_language'] = language
-            request.LANGUAGE_CODE = language
-        #messages.success(request, _('Language was switched successfully.'))
-        
-        return super(SwitchLanguageView, self).get(request, *args, **kwargs)
-        
+            response = super(SwitchLanguageView, self).get(request, *args, **kwargs)
+            response.set_cookie(
+                settings.LANGUAGE_COOKIE_NAME,
+                language,
+                max_age=settings.LANGUAGE_COOKIE_AGE,
+                path=settings.LANGUAGE_COOKIE_PATH,
+                domain=settings.LANGUAGE_COOKIE_DOMAIN,
+                secure=settings.LANGUAGE_COOKIE_SECURE,
+                httponly=settings.LANGUAGE_COOKIE_HTTPONLY,
+                samesite=settings.LANGUAGE_COOKIE_SAMESITE,
+            )
+        return response
+
     def get_redirect_url(self, **kwargs):
         return safe_redirect(self.request.GET.get('next', self.request.META.get('HTTP_REFERER', '/')), self.request)
-        
+
 
 switch_language = SwitchLanguageView.as_view()
 
@@ -126,7 +132,10 @@ def cosinnus_login(request, **kwargs):
                 and CosinnusPortal.get_current().email_needs_verification and not request.user.cosinnus_profile.email_verified:
             # send user another verification email
             send_user_email_to_verify(request.user, request.user.email, request)
-            messages.warning(request, _('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.'))
+            msg = _('New verification email sent!')
+            msg += '\n\n' + _('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.')
+            msg += '\n\n' + _('We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email.')
+            messages.warning(request, msg)
             logout(request)
             return redirect('login')
         
