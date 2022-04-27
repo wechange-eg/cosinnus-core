@@ -207,6 +207,14 @@ class CosinnusBaseGroupForm(TranslatedFieldsFormMixin, FacebookIntegrationGroupF
                 self.fields['video_conference_type'].initial = CosinnusBaseGroup.FAIRMEETING
             self.fields['video_conference_type'].choices = custom_choices
         
+        # disable the 'Create token' checkbox in case if the sought-after type of CosinnusBaseGroup has not been given in settings
+        if not CosinnusBaseGroup.TYPE_PROJECT in settings.COSINNUS_ENABLE_USER_JOIN_TOKENS_FOR_GROUP_TYPE and self.instance.group_is_project:
+            self.fields['use_invite_token'].disabled = True
+        elif not CosinnusBaseGroup.TYPE_SOCIETY in settings.COSINNUS_ENABLE_USER_JOIN_TOKENS_FOR_GROUP_TYPE and self.instance.group_is_group:
+            self.fields['use_invite_token'].disabled = True
+        elif not CosinnusBaseGroup.TYPE_CONFERENCE in settings.COSINNUS_ENABLE_USER_JOIN_TOKENS_FOR_GROUP_TYPE and self.instance.group_is_conference:
+            self.fields['use_invite_token'].disabled = True
+
     @property
     def group(self):
         """ This is for `FormAttachableMixin` to get passed the group as a target for

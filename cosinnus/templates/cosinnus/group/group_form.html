@@ -445,16 +445,16 @@
 						{% endif %}
 
 						{# Checkbox field #}
-						{% if form.forms.obj.fields.use_invite_token %}
+						{% if form.forms.obj.fields.use_invite_token and not form.forms.obj.fields.use_invite_token.disabled == True %}
 							{% trans "Create invite token" as use_invite_token_label %}
-							{% captureas legend %}
+							{% captureas use_invite_token_legend %}
 								{% trans "Check this to generate an invite token which allows a user to join the " %}{% if group_model == "CosinnusSociety" %}{% trans "group" %}{% elif group_model == "CosinnusProject" %}{% trans "project" %}{% else %}{% trans "conference" %}{% endif %}{% trans " directly." %} <br>
 								{% if group.use_invite_token %}
 									{% trans "The current token is: " %}{% for invite_token in invite_tokens %}{{ invite_token.get_absolute_url }}{% endfor %}
 								{% endif %}
 							{% endcaptureas %}
 							{% trans "Create token" as use_invite_token_box_label %}
-							{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.use_invite_token label=use_invite_token_label legend=legend checkbox_label=use_invite_token_box_label %}
+							{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.use_invite_token label=use_invite_token_label legend=use_invite_token_legend checkbox_label=use_invite_token_box_label %}
 						{% endif %}
 
 						{# Dropdown field #}

@@ -44,16 +44,18 @@
     {% endif %}
 
 	{% block join_token_link %}
-		<div class="content-box">
-			{% if group.use_invite_token and user in admins%}
-			<p class="transparent">
+		{% if group.type in SETTINGS.COSINNUS_ENABLE_USER_JOIN_TOKENS_FOR_GROUP_TYPE %}
+			<div class="content-box">
+				{% if group.use_invite_token and user in admins %}
+				<p class="transparent">
 					{% trans "Invite users directly via the following link: " %}
 					{% for invite_token in invite_tokens %}
 						<a href="{{ invite_token.get_absolute_url }}" target="_blank">{{ invite_token.get_absolute_url }}</a>
 					{% endfor %}
 				</p>
-			{% endif %}
-		</div>
+				{% endif %}
+			</div>
+		{% endif %}
 	{% endblock join_token_link %}
 
     <!-- a box with semi transparent background -->

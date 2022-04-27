@@ -1023,6 +1023,7 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         self._type = self.type
         self._slug = self.slug
         self._is_active = self.is_active
+        self._original_name = self.name
 
         if display_redirect_created_message and hasattr(self, 'request'):
             # possible because of AddRequestToModelSaveMiddleware
@@ -1168,6 +1169,16 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         membership = get_object_or_None(CosinnusGroupMembership, group=self, user=user)
         if membership:
             membership.delete()
+    
+    @property
+    def group_is_project(self):
+        """ Check if this is a proper project """
+        return self.type == self.TYPE_PROJECT
+
+    @property
+    def group_is_group(self):
+        """ Check if this is a proper group / society """
+        return self.type == self.TYPE_SOCIETY
     
     @property
     def group_is_conference(self):

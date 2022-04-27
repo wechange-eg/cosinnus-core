@@ -1168,7 +1168,10 @@ class CosinnusConf(AppConf):
     # Fields that will be used for matching ranking, should be present in projects, groups and organizations
     MATCHING_FIELDS = ()
     MATCHING_DYNAMIC_FIELDS = ()
-    
+
+    # types of CosinnusBaseGroup which are allowed to use direct join tokens:
+    # 0 for projects; 1 for groups; 2 for conferences
+    ENABLE_USER_JOIN_TOKENS_FOR_GROUP_TYPE = []
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.
