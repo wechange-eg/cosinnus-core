@@ -125,6 +125,7 @@ def bbb_room_visit_statistics_download(request):
     headers = [
         'datetime',
         'conference_name',
+        'conference_slug',
         'conference_mtag_slugs',
         'conference_creator_email_language',
         'room_name',
@@ -163,6 +164,7 @@ def bbb_room_visit_statistics_download(request):
         rows.append([
             timezone.localtime(visit.visit_datetime).strftime('%Y-%m-%d %H:%M:%S'), # 'datetime',
             visit.group and visit.group.name or visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_GROUP_NAME, ''), #'conference_name',
+            visit.group and visit.group.slug or visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_GROUP_SLUG, ''), #'conference_slug',
             ','.join([str(item) for item in visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_GROUP_MANAGED_TAG_SLUGS, [])]), #'conference_mtag_slugs',
             visited_group_admin.cosinnus_profile.language if visited_group_admin else '<no-user>', # conference_creator_email_language
             visit.bbb_room and visit.bbb_room.name or visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_ROOM_NAME, ''), #'room_name',
