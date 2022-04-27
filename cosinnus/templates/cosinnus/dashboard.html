@@ -382,15 +382,11 @@
                         {% endif %}
                     {% endblock group_metadata %}
                     
-                    {% get_project as projects %}
-                    <p class="dashboard-created-updated-timestamps">
-                        {% for project in projects %}
-                            {% if project.name == group.name %}
-                                <i>{% trans "Created on: " %}</i>{{ project.created|date:"SHORT_DATE_FORMAT" }} <br>
-                                <i>{% trans "Last updated on: " %}</i>{{ project.last_modified|date:"SHORT_DATE_FORMAT" }}
-                            {% endif %}
-                        {% endfor %}
-                    </p>
+					<p class="group-microsite-created-updated-timestamp">
+						<i>{% trans "Created on: " %}</i>{{ group.created|date:"SHORT_DATE_FORMAT" }}
+						<br>
+						<i>{% trans "Last updated on: " %}</i>{{ group.last_modified|date:"SHORT_DATE_FORMAT" }}
+					</p>
 
                     </div>
                 <div class="multiline-ellipsis-realend"><a href="#">....{% trans "more" %}</a></div>

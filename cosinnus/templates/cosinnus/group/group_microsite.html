@@ -306,15 +306,23 @@
 					</p>
 					
 					<p class="group-microsite-created-updated-timestamp">
-						{% get_project as projects %}
-						{% for project in projects %}
-							{% if project.name == group.name %}
-								<i>{% trans "Created on: " %}</i>{{ project.created|date:"SHORT_DATE_FORMAT" }}
-								<br>
-								<i>{% trans "Last updated on: " %}</i>{{ project.last_modified|date:"SHORT_DATE_FORMAT" }}
-							{% endif %}
-						{% endfor %}
+						<i>{% trans "Created on: " %}</i>{{ group.created|date:"SHORT_DATE_FORMAT" }}
+						<br>
+						<i>{% trans "Last updated on: " %}</i>{{ group.last_modified|date:"SHORT_DATE_FORMAT" }}
 					</p>
+
+					{% comment %}
+
+					{% get_project as projects %}
+					{% for project in projects %}
+						{% if project.name == group.name %}
+							<i>{% trans "Created on: " %}</i>{{ project.created|date:"SHORT_DATE_FORMAT" }}
+							<br>
+							<i>{% trans "Last updated on: " %}</i>{{ project.last_modified|date:"SHORT_DATE_FORMAT" }}
+						{% endif %}
+					{% endfor %}
+
+					{% endcomment %}
 
 					{% if SETTINGS.COSINNUS_ENABLE_SDGS %}
 					<p>

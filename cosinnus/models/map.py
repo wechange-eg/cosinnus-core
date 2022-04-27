@@ -192,8 +192,6 @@ class BaseMapResult(DictResult):
         'source': None,  # source platform if external content
         'dynamic_fields': None,
         'is_open_for_cooperation': None,
-        # 'created': None,
-        # 'last_modified': None,
     }
 
 
@@ -299,7 +297,7 @@ class DetailedMapResult(HaystackMapResult):
         model_str = '%s.%s' % (app_label, model_name)
         kwargs.update({
             'report_model': model_str,
-            'report_id': obj.id
+            'report_id': obj.id,
         })
         """
         if self.background_image_field:
@@ -345,7 +343,9 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
             'website_url': obj.website,
             'contact': linebreaksbr(escape(obj.contact_info)),
             'followed': obj.is_user_following(user),
-            'starred': obj.is_user_starring(user)
+            'starred': obj.is_user_starring(user),
+            'created': django_date_filter(obj.created, "SHORT_DATE_FORMAT"),
+            'last_modified': django_date_filter(obj.last_modified, "SHORT_DATE_FORMAT"),
         })
         """ TODO: check all read permissions on related objects! """
         
@@ -392,12 +392,6 @@ class DetailedProjectMapResult(DetailedBaseGroupMapResult):
          into a proper MapResult """
 
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
-
-        kwargs.update({
-            'created': django_date_filter(obj.created, "SHORT_DATE_FORMAT"),
-            'last_modified': django_date_filter(obj.last_modified, "SHORT_DATE_FORMAT"),
-        })
-
         return super(DetailedProjectMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
 
@@ -557,7 +551,9 @@ class DetailedIdeaMapResult(DetailedMapResult):
             'creator_name': obj.creator.get_full_name(),
             'creator_slug': obj.creator.username,
             'followed': obj.is_user_following(user),
-            'starred': obj.is_user_starring(user)
+            'starred': obj.is_user_starring(user),
+            'created': django_date_filter(obj.created, "SHORT_DATE_FORMAT"),
+            'last_modified': django_date_filter(obj.last_modified, "SHORT_DATE_FORMAT"),
         })
         ret = super(DetailedIdeaMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
         return ret

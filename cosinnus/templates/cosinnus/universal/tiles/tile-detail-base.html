@@ -211,6 +211,12 @@
         {% endblock report_object %}
         
         {% block create_modified_timestamps %}
+            <p class="map-search-created-updated-timestamps">
+                {# Translators: __INCLUDE_JS_PO__ #}
+                <i>{% trans "Created on: " %}</i>{{ created }} <br>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                <i>{% trans "Last updated on: " %}</i>{{ last_modified }}
+            </p>
         {% endblock create_modified_timestamps %}
 
     {% endblock content %}
