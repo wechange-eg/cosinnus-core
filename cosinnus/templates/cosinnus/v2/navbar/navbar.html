@@ -413,21 +413,19 @@
 			</ul>
 		</div>
 
-		{% if SETTINGS.COSINNUS_PREMIUM_CONFERENCES_ENABLED %}
-			{% if request.user|is_portal_manager or request.user|is_superuser  %}
-				<div class="nav-flyout-section padded">
-						<ul class="item-list">
-							<li>
-								<a href="{% url 'cosinnus:administration' %}" class="list-item" role="button" titledby=".item-text">
-									<div class="item-text">
-										{% trans "Administration" %}
-									</div>
-								</a>
-							</li>
-						</ul>
-					</div>
-			{% endif %}
-        {% endif %}
+		{% if request.user|is_superuser or request.user|is_portal_manager  %}
+			<div class="nav-flyout-section padded">
+				<ul class="item-list">
+					<li>
+						<a href="{% url 'cosinnus:administration' %}" class="list-item" role="button" titledby=".item-text">
+							<div class="item-text">
+								{% trans "Administration" %}
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		{% endif %}
         
 
 		<div class="nav-flyout-section padded">
