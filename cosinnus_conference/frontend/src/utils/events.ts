@@ -81,7 +81,7 @@ export const formatTime = (datetime: Date) => {
  *
  * @returns string
  */
-export const getTimezoneForUser = (datetime: Date): string => {
+export const getTimezoneForUser = (): string => {
   if (window.hasOwnProperty('cosinnus_user_timezone') && window.cosinnus_user_timezone) {
     return window.cosinnus_user_timezone
   }
