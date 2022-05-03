@@ -16,8 +16,13 @@ export const groupByDaysAndSlots = (events: Event[]) => {
     }
   } = {}
   events.map((event) => {
-    const dayKey = moment(event.props.fromDate).format("YYYY-MM-DD")
-    const slotKey = event.props.fromDate.toUTCString()
+    let dayKey = moment(event.props.fromDate).format("YYYY-MM-DD")
+    let slotKey = event.props.fromDate.toUTCString()
+    if (window.hasOwnProperty('cosinnus_user_timezone') && window.cosinnus_user_timezone) {
+      const userDate = moment(event.props.fromDate).tz(window.cosinnus_user_timezone)
+      dayKey = userDate.format('YYYY-MM-DD')
+      slotKey = userDate.format()
+    }
     if (!(dayKey in days)) days[dayKey] = {}
     if (!(slotKey in days[dayKey])) days[dayKey][slotKey] = []
     days[dayKey][slotKey].push(event)
