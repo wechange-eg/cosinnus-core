@@ -89,7 +89,7 @@ export function EventList(props: EventListProps) {
                     <ListItem>
                       <ListItemText
                         primary={formatTime(slot.props.fromDate) + "-" + formatTime(slot.props.toDate)}
-                        secondary={"(" + getTimezoneForUser() + ")"}
+                        secondary={getTimezoneForUser()}
                         secondaryTypographyProps={{
                           color: "textPrimary",
                           variant: "caption"
@@ -123,7 +123,7 @@ export function EventList(props: EventListProps) {
                     <ListItem>
                       <ListItemText
                         primary={formatTime(slot.props.fromDate) + "-" + formatTime(slot.props.toDate)}
-                        secondary={"(" + getTimezoneForUser() + ")"}
+                        secondary={getTimezoneForUser()}
                         secondaryTypographyProps={{
                           color: "textPrimary",
                           variant: "caption"

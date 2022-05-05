@@ -83,9 +83,10 @@ export const formatTime = (datetime: Date) => {
  */
 export const getTimezoneForUser = (): string => {
   if (window.hasOwnProperty('cosinnus_user_timezone') && window.cosinnus_user_timezone) {
-    return window.cosinnus_user_timezone
+    return `(${window.cosinnus_user_timezone})`
   }
-  return Intl.DateTimeFormat().resolvedOptions().timeZone
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+  return `(${timezone})`
 }
 
 /**
