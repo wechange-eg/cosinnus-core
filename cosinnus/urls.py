@@ -7,8 +7,12 @@ from django.views.generic.base import RedirectView, TemplateView
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import routers, permissions
-from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 import two_factor.views as two_factor_views
+
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 from cosinnus.api.views.group import CosinnusSocietyViewSet, CosinnusProjectViewSet
 from cosinnus.api.views.i18n import translations
@@ -367,8 +371,8 @@ urlpatterns += [
 ]
 
 schema_url_patterns = [
-    url(r'^api/v2/token/', obtain_jwt_token),
-    url(r'^api/v2/token/refresh/', refresh_jwt_token),
+    url(r'^api/v2/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    url(r'^api/v2/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     url(r'^api/v2/current_user/', current_user, name='api-current-user'),
     url(r'^api/v2/settings/$', api_settings, name='api-settings'),
     url(r'^api/v2/statistics/', api_statistics, name='api-statistics'),
