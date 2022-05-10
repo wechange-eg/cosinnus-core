@@ -18,6 +18,7 @@ from django.db import models
 from django.db.models import Q, Max, Min, F
 from django.db.models.functions import Cast
 from django.utils import timezone
+from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
@@ -893,6 +894,10 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
     sdgs = models.JSONField(default=list, blank=True, null=True, encoder=DjangoJSONEncoder)
     
     show_contact_form = models.BooleanField(default=False, help_text=_('If set to true, a contact form will be displayed on the micropage.'))
+
+    use_invite_token = models.BooleanField(_('Use invite token'),
+                                            default=False, 
+                                            help_text='If enabled, allows the creation of invite tokens in non-admin area')
     
     managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
     
@@ -915,6 +920,7 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         self._type = self.type
         self._slug = self.slug
         self._is_active = self.is_active
+        self._original_name = self.name
 
     def __str__(self):
         # FIXME: better caching for .portal.name
@@ -968,6 +974,25 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         if self.conference_theme_color:
             self.conference_theme_color = self.conference_theme_color.replace('#', '')
 
+        # generate invite token: 
+        try: 
+            CosinnusGroupInviteToken.objects.get(token=self.settings.get('invite_token'))
+            if self.use_invite_token and self.settings.get('invite_token') != None:
+                if self.name != self._original_name:
+                    CosinnusGroupInviteToken.objects.filter(title__startswith=self._original_name).update(title=f"{self.name}")
+                if getattr(CosinnusGroupInviteToken, 'is_active', False):
+                    CosinnusGroupInviteToken.objects.filter(title__startswith=self.name).update(is_active=True)
+            elif not self.use_invite_token and self.settings.get('invite_token') and getattr(CosinnusGroupInviteToken, 'is_active', True):
+                CosinnusGroupInviteToken.objects.filter(title__startswith=self.name).update(is_active=False)
+        except CosinnusGroupInviteToken.DoesNotExist:
+            self.settings.update({'invite_token': None}) 
+            if self.use_invite_token and self.settings.get('invite_token') == None:
+                random_string = get_random_string(8)
+                self.settings.update({'invite_token': random_string})
+                token = CosinnusGroupInviteToken.objects.create(token=random_string, title=f"{self.name}")
+                token.invite_groups.add(self)
+                token.save()
+
         super(CosinnusBaseGroup, self).save(*args, **kwargs)
 
         # check if a redirect should be created AFTER SAVING!
@@ -998,6 +1023,7 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         self._type = self.type
         self._slug = self.slug
         self._is_active = self.is_active
+        self._original_name = self.name
 
         if display_redirect_created_message and hasattr(self, 'request'):
             # possible because of AddRequestToModelSaveMiddleware
@@ -1143,6 +1169,16 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         membership = get_object_or_None(CosinnusGroupMembership, group=self, user=user)
         if membership:
             membership.delete()
+    
+    @property
+    def group_is_project(self):
+        """ Check if this is a proper project """
+        return self.type == self.TYPE_PROJECT
+
+    @property
+    def group_is_group(self):
+        """ Check if this is a proper group / society """
+        return self.type == self.TYPE_SOCIETY
     
     @property
     def group_is_conference(self):
@@ -1581,6 +1617,8 @@ class CosinnusGroupInviteToken(models.Model):
         self._portal_id = self.portal_id
         self._token = self.token
         
+    def get_absolute_url(self):
+        return get_domain_for_portal(self.portal) + reverse('cosinnus:group-invite-token', kwargs={'token': self.token})
 
 class CosinnusPermanentRedirect(models.Model):
     """ Sets up a redirect for all URLs that match the pattern of
