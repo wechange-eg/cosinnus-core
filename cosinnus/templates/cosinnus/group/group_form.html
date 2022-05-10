@@ -450,7 +450,10 @@
 							{% captureas use_invite_token_legend %}
 								{% trans "Check this to generate an invite token which allows a user to join the " %}{% if group_model == "CosinnusSociety" %}{% trans "group" %}{% elif group_model == "CosinnusProject" %}{% trans "project" %}{% else %}{% trans "conference" %}{% endif %}{% trans " directly." %} <br>
 								{% if group.use_invite_token %}
-									{% trans "The current token is: " %}{% for invite_token in invite_tokens %}{{ invite_token.get_absolute_url }}{% endfor %}
+									{% trans "The current token is: " %}
+									   {% for invite_token in invite_tokens %}
+									       <a href="{{ invite_token.get_absolute_url }}" target="_blank">{{ invite_token.get_absolute_url }}</a>
+								       {% endfor %}
 								{% endif %}
 							{% endcaptureas %}
 							{% trans "Create token" as use_invite_token_box_label %}
