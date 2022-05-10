@@ -10,7 +10,7 @@ import re
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cosinnus', '0125_merge_20220303_1302'),
+        ('cosinnus', '0128_auto_20220425_1403'),
     ]
 
     operations = [
