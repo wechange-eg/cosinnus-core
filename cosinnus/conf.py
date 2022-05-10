@@ -536,7 +536,7 @@ class CosinnusConf(AppConf):
     IMPORT_PROJECTS_PERMITTED = False
     
     # shall each individual email be logged as a `CosinnusSentEmailLog`?
-    LOG_SENT_EMAILS = False
+    LOG_SENT_EMAILS = True
     
     # in addition to the django setting, so we can know when this is set to None
     # may be used for specific portals to overwrite login redirect
