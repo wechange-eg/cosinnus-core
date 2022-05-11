@@ -414,12 +414,28 @@
 				                                <span class="pull-left">
 				                                    <i class="fa fa-envelope"></i>
 				                                </span>
-				                                <div class="media-body">
-				                                    {% trans "Contact" %}
+				                                <div class="media-body microsite-contact-button">
+													{% if group.type == 0 %}
+														{% trans "Contact Project Admins" %}
+													{% elif group.type == 1 %}
+														{% trans "Contact Group Admins" %}
+													{% else %}
+														{% trans "Contact Conference Admins" %}
+													{% endif %}
 				                                </div>
 				                            </li>
 				                        </ul>
 				                    </button>
+									<p>
+										{% trans "Here you can send a message to the admins." %}<br>
+										{% if group.type == 0 %}
+											{% trans "If you want to send your message to the project chat, you have to turn directly to the project." %}
+										{% elif group.type == 1 %}
+											{% trans "If you want to send your message to the group chat, you have to turn directly to the group." %}
+										{% else %}
+											{% trans "If you want to send your message to the conference chat, you have to turn directly to the conference." %}
+										{% endif %}
+									</p>
 			                    {% endwith %}
 		                    {% endif %}
 						</div>
