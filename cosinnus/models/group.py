@@ -986,7 +986,7 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
                 CosinnusGroupInviteToken.objects.filter(title__startswith=self.name).update(is_active=False)
         except CosinnusGroupInviteToken.DoesNotExist:
             self.settings.update({'invite_token': None}) 
-            if self.use_invite_token and self.settings.get('invite_token') == None:
+            if self.pk and self.use_invite_token and self.settings.get('invite_token') == None:
                 random_string = get_random_string(8)
                 self.settings.update({'invite_token': random_string})
                 token = CosinnusGroupInviteToken.objects.create(token=random_string, title=f"{self.name}")
