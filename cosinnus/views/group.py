@@ -121,22 +121,28 @@ class SamePortalGroupMixin(object):
 
 
 class CosinnusLocationInlineFormset(InlineFormSetFactory):
-    extra = 5
-    max_num = 5
+    factory_kwargs = {
+        'extra': 5,
+        'max_num': 5,
+    }    
     form_class = CosinnusLocationForm
     model = CosinnusLocation
 
 
 class CosinnusGroupGalleryImageInlineFormset(InlineFormSetFactory):
-    extra = 6
-    max_num = 6
+    factory_kwargs = {
+        'extra': 6,
+        'max_num': 6,
+    }
     form_class = CosinnusGroupGalleryImageForm
     model = CosinnusGroupGalleryImage
 
 
 class CosinnusGroupCallToActionButtonInlineFormset(InlineFormSetFactory):
-    extra = 10
-    max_num = 10
+    factory_kwargs = {
+        'extra': 10,
+        'max_num': 10,
+    }
     form_class = CosinnusGroupCallToActionButtonForm
     model = CosinnusGroupCallToActionButton
 
