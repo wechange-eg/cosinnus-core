@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from __future__ import print_function
-from builtins import str
+from builtins import str, FileNotFoundError
 from builtins import range
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
     CosinnusPermanentRedirect, CosinnusPortal, CosinnusPortalMembership, CosinnusLocation
@@ -443,7 +443,10 @@ def _get_group_storage_space_mb(group):
     size = 0
     for f in group.cosinnus_file_fileentry_set.all():
         if f.file:
-            size += f.file.size
+            try:
+                size += f.file.size
+            except FileNotFoundError:
+                pass
     size = size * 0.00000095367431640625  # in Mb
     return size
 
