@@ -550,6 +550,8 @@ def user_activity_info(request):
         user_row = users.get(membership.user_id, None)
         if user_row is None:
             user = membership.user
+            if not hasattr(user, 'cosinnus_profile'):
+                continue
             initial_row = [
                 get_user_id_hash(user),         # 'user-hashed-id'
             ]
