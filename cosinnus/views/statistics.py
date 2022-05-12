@@ -17,7 +17,7 @@ from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject, \
     CosinnusConference
 from cosinnus.utils.http import make_csv_response
 from cosinnus.utils.permissions import check_user_portal_manager, check_user_superuser
-from cosinnus.utils.user import filter_active_users
+from cosinnus.utils.user import filter_active_users, get_user_id_hash
 from cosinnus.views.mixins.group import RequirePortalManagerMixin
 
 
@@ -125,10 +125,11 @@ def bbb_room_visit_statistics_download(request):
     headers = [
         'datetime',
         'conference_name',
+        'conference_slug',
         'conference_mtag_slugs',
         'conference_creator_email_language',
         'room_name',
-        'visitor_id',
+        'visitor_hashed_id',
         'visitor_mtag_slugs',
         'visitor_email_language',
         'visitor_location',
@@ -140,6 +141,8 @@ def bbb_room_visit_statistics_download(request):
     
     # cache for group_id (int) -> user
     group_admin_cache = {}
+    # cache for user-hash user.id (int) --> hash (str)
+    user_hash_cache = {}
     for visit in BBBRoomVisitStatistics.objects.all().order_by('visit_datetime').\
             prefetch_related('user', 'user__cosinnus_profile', 'user__cosinnus_profile__media_tag',
                              'group', 'bbb_room'):
@@ -152,14 +155,20 @@ def bbb_room_visit_statistics_download(request):
             # only reporting data on the first admin for simplicity
             visited_group_admin = len(visited_group_admins) > 0 and visited_group_admins[0] or None
             group_admin_cache[visit.group_id] = visited_group_admin
-            
+        
+        user_hash = user_hash_cache.get(visitor.id) if visitor else '<no-user>'
+        if not user_hash:
+            user_hash = get_user_id_hash(visitor)
+            user_hash_cache[visitor.id] = user_hash
+        
         rows.append([
             timezone.localtime(visit.visit_datetime).strftime('%Y-%m-%d %H:%M:%S'), # 'datetime',
             visit.group and visit.group.name or visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_GROUP_NAME, ''), #'conference_name',
+            visit.group and visit.group.slug or visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_GROUP_SLUG, ''), #'conference_slug',
             ','.join([str(item) for item in visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_GROUP_MANAGED_TAG_SLUGS, [])]), #'conference_mtag_slugs',
             visited_group_admin.cosinnus_profile.language if visited_group_admin else '<no-user>', # conference_creator_email_language
             visit.bbb_room and visit.bbb_room.name or visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_ROOM_NAME, ''), #'room_name',
-            visitor.id if visitor else '<no-user>', #'visitor_id',
+            user_hash, #'visitor_id',
             ','.join([str(item) for item in visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_USER_MANAGED_TAG_SLUGS, [])]), #'visitor_mtag_slugs',
             visitor.cosinnus_profile.language if visitor else '<no-user>', # visitor_email_language
             visitor_mt and visitor_mt.location if visitor_mt else '', # visitor_location

@@ -22,7 +22,7 @@ from django.utils.translation import ugettext_lazy as _, get_language
 
 from cosinnus.conf import settings
 from cosinnus.core.registries import app_registry, attached_object_registry
-from cosinnus.models.group import CosinnusGroup, CosinnusGroupManager,\
+from cosinnus.models.group import CosinnusBaseGroup, CosinnusGroup, CosinnusGroupInviteToken, CosinnusGroupManager,\
     CosinnusPortal, get_cosinnus_group_model, CosinnusGroupMembership
 from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
@@ -1457,4 +1457,3 @@ def get_forum_group():
     forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
     forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
     return forum_group
-    

@@ -133,6 +133,14 @@
                 </div> {% comment %} end div[textfield] {% endcomment %}
                 
                 <hr class="invisible" />
+
+
+                <p class="conference-microsite-created-updated-timestamp">
+                    <i>{% trans "Created on: " %}</i>{{ group.created|date:"SHORT_DATE_FORMAT" }}
+                    <br>
+                    <i>{% trans "Last updated on: " %}</i>{{ group.last_modified|date:"SHORT_DATE_FORMAT" }}
+                </p>
+
                 {% trans "You will now receive notifications for content posted in this conference." as follow_success_message %}
                 {% include 'cosinnus/common/likefollowstar/like_button.html' with object=group %}
                 {% include 'cosinnus/common/likefollowstar/star_button.html' with object=group %}

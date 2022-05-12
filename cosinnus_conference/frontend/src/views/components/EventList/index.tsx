@@ -13,7 +13,7 @@ import clsx from "clsx"
 import moment from "moment"
 
 import {Event, EventDay} from "../../../stores/events/models"
-import {formatTime, getCurrentDay, groupByDaysAndSlots} from "../../../utils/events"
+import {formatTime, getCurrentDay, groupByDaysAndSlots, getTimezoneForUser} from "../../../utils/events"
 import {EventIcons} from "../EventIcons"
 import {useStyles} from "./style"
 
@@ -87,7 +87,14 @@ export function EventList(props: EventListProps) {
                     })}
                   >
                     <ListItem>
-                      <ListItemText primary={formatTime(slot.props.fromDate) + "-" + formatTime(slot.props.toDate)} />
+                      <ListItemText
+                        primary={formatTime(slot.props.fromDate) + "-" + formatTime(slot.props.toDate)}
+                        secondary={getTimezoneForUser()}
+                        secondaryTypographyProps={{
+                          color: "textPrimary",
+                          variant: "caption"
+                        }}
+                      />
                       {slot.props.isBreak && slot.props.title && (
                         <ListItemText primary={slot.props.title} />
                       ) || (
@@ -114,7 +121,14 @@ export function EventList(props: EventListProps) {
                     className={classes.list}
                   >
                     <ListItem>
-                      <ListItemText primary={formatTime(slot.props.fromDate) + "-" + formatTime(slot.props.toDate)} />
+                      <ListItemText
+                        primary={formatTime(slot.props.fromDate) + "-" + formatTime(slot.props.toDate)}
+                        secondary={getTimezoneForUser()}
+                        secondaryTypographyProps={{
+                          color: "textPrimary",
+                          variant: "caption"
+                        }}
+                        />
                       {slot.props.isBreak && slot.props.title && (
                         <ListItemText primary={slot.props.title} />
                       ) || (

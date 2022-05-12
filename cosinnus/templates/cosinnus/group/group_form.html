@@ -444,6 +444,22 @@
 							{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.publicly_visible label=groups_projects_public_visibility_label legend=groups_projects_public_visibility_legend checkbox_label=groups_projects_public_visibility_box_label %}
 						{% endif %}
 
+						{# Checkbox field #}
+						{% if form.forms.obj.fields.use_invite_token and not form.forms.obj.fields.use_invite_token.disabled == True %}
+							{% trans "Create invite token" as use_invite_token_label %}
+							{% captureas use_invite_token_legend %}
+								{% trans "Check this to generate an invite token which allows a user to join the " %}{% if group_model == "CosinnusSociety" %}{% trans "group" %}{% elif group_model == "CosinnusProject" %}{% trans "project" %}{% else %}{% trans "conference" %}{% endif %}{% trans " directly." %} <br>
+								{% if group.use_invite_token %}
+									{% trans "The current token is: " %}
+									   {% for invite_token in invite_tokens %}
+									       <a href="{{ invite_token.get_absolute_url }}" target="_blank">{{ invite_token.get_absolute_url }}</a>
+								       {% endfor %}
+								{% endif %}
+							{% endcaptureas %}
+							{% trans "Create token" as use_invite_token_box_label %}
+							{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.use_invite_token label=use_invite_token_label legend=use_invite_token_legend checkbox_label=use_invite_token_box_label %}
+						{% endif %}
+
 						{# Dropdown field #}
 						{% block video_conference_type_dropdown %}
 						    {% if not group_model == "CosinnusConference" %}
@@ -545,6 +561,7 @@
                         <div {% if group_model == "CosinnusConference" %}style="display: none;"{% endif %}>
 	                        {# Apps selector fields #}			                
 			                {% trans "Which apps should be activated?" as apps_label %}
+                            {% trans "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated." as apps_legend %}
 			                {% captureas apps_html %}
 			                    <div class="input-area" style="padding: 5px;">
 				                    {% for app_option in deactivated_app_selection %}
@@ -567,7 +584,7 @@
 	                                {% endfor %}
 	                            </div>
 			                {% endcaptureas %}
-			                {% include 'cosinnus/fields/default_field.html' with extra_html=apps_html label=apps_label large_field=True %}
+			                {% include 'cosinnus/fields/default_field.html' with extra_html=apps_html label=apps_label legend=apps_legend large_field=True %}
                         </div>
 					            
 					</div>

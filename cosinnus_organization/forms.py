@@ -29,8 +29,10 @@ class CosinnusOrganizationSocialMediaForm(forms.ModelForm):
 
 
 class CosinnusOrganizationSocialMediaInlineFormset(InlineFormSetFactory):
-    extra = 5
-    max_num = 5
+    factory_kwargs = {
+        'extra': 5,
+        'max_num': 5,
+    }
     form_class = CosinnusOrganizationSocialMediaForm
     model = CosinnusOrganizationSocialMedia
 
@@ -46,8 +48,10 @@ class CosinnusOrganizationLocationForm(forms.ModelForm):
 
 
 class CosinnusOrganizationLocationInlineFormset(InlineFormSetFactory):
-    extra = 5
-    max_num = 5
+    factory_kwargs = {
+        'extra': 5,
+        'max_num': 5,
+    }
     form_class = CosinnusOrganizationLocationForm
     model = CosinnusOrganizationLocation
 

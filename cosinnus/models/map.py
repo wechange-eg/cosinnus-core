@@ -10,6 +10,7 @@ import pytz
 from django.urls import reverse
 from django.db.models import Q
 from django.template.defaultfilters import linebreaksbr
+from django.template.defaultfilters import date as django_date_filter
 from django.utils.html import escape
 from django.utils import timezone
 from django.utils.timezone import now, is_naive
@@ -296,7 +297,7 @@ class DetailedMapResult(HaystackMapResult):
         model_str = '%s.%s' % (app_label, model_name)
         kwargs.update({
             'report_model': model_str,
-            'report_id': obj.id
+            'report_id': obj.id,
         })
         """
         if self.background_image_field:
@@ -342,7 +343,9 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
             'website_url': obj.website,
             'contact': linebreaksbr(escape(obj.contact_info)),
             'followed': obj.is_user_following(user),
-            'starred': obj.is_user_starring(user)
+            'starred': obj.is_user_starring(user),
+            'created': django_date_filter(obj.created, "SHORT_DATE_FORMAT"),
+            'last_modified': django_date_filter(obj.last_modified, "SHORT_DATE_FORMAT"),
         })
         """ TODO: check all read permissions on related objects! """
         
@@ -548,7 +551,9 @@ class DetailedIdeaMapResult(DetailedMapResult):
             'creator_name': obj.creator.get_full_name(),
             'creator_slug': obj.creator.username,
             'followed': obj.is_user_following(user),
-            'starred': obj.is_user_starring(user)
+            'starred': obj.is_user_starring(user),
+            'created': django_date_filter(obj.created, "SHORT_DATE_FORMAT"),
+            'last_modified': django_date_filter(obj.last_modified, "SHORT_DATE_FORMAT"),
         })
         ret = super(DetailedIdeaMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
         return ret
@@ -649,7 +654,6 @@ SHORTENED_ID_MAP = {
     'cosinnus.cosinnusidea': 5,
     'cosinnus_organization.cosinnusorganization': 6,
 }
-SHORTENED_ID_MAP_REVERSE = dict([(val, key) for key, val in list(SHORTENED_ID_MAP.items())])
 
 SEARCH_MODEL_NAMES = {
     get_user_profile_model(): 'people',
@@ -658,7 +662,6 @@ SEARCH_MODEL_NAMES = {
     Event: 'events',
     CosinnusOrganization: 'organizations',
 }
-SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(SEARCH_MODEL_NAMES.items())])
 
 SHORT_MODEL_MAP = {
     1: CosinnusProject,
@@ -668,7 +671,6 @@ SHORT_MODEL_MAP = {
     # 5: CosinnusIdea,
     6: CosinnusOrganization,
 }
-SHORT_MODEL_MAP_REVERSE = dict([(val, key) for key, val in list(SHORT_MODEL_MAP.items())])
 SEARCH_RESULT_DETAIL_TYPE_MAP = {
     'people': DetailedUserMapResult,
     'projects': DetailedProjectMapResult,
@@ -843,8 +845,11 @@ EXCHANGE_SEARCH_MODEL_NAMES = {
 }
 if settings.COSINNUS_EXCHANGE_ENABLED:
     SEARCH_MODEL_NAMES.update(EXCHANGE_SEARCH_MODEL_NAMES)
+    
+SHORTENED_ID_MAP_REVERSE = dict([(val, key) for key, val in list(SHORTENED_ID_MAP.items())])
+SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(SEARCH_MODEL_NAMES.items())])
+SHORT_MODEL_MAP_REVERSE = dict([(val, key) for key, val in list(SHORT_MODEL_MAP.items())])
 EXCHANGE_SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(EXCHANGE_SEARCH_MODEL_NAMES.items())])
-
 
 
 def itemid_from_searchresult(result):
