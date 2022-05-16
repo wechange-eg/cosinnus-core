@@ -52,25 +52,15 @@
         {% trans "Subject" context "subject of an E-Mail" as newsletter_subject_label %}
         {% trans "Subject" context "subject of an E-Mail" as newsletter_subject_placeholder %}
         {% include 'cosinnus/fields/default_field.html' with field=form.subject label=newsletter_subject_label placeholder=newsletter_subject_placeholder large_field=True %}
-        
-        {% block recipient_formfield %}
-	        <div class="cosinnus-field">
-	            <label>{% trans 'Recipients' %}</label>
-	            <div class="field-description no-select {{ legend_class }}">
-	                {% blocktrans count counter=receipients|length %}With the current selection the newsletter will be sent to {{ counter }} recipients.{% plural %}With the current selection the newsletter will be sent to {{ counter }} recipients.{% endblocktrans %}
-	                {% if SETTINGS.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN %}
-	                    {% trans "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter." %}
-	                {% endif %}
-	            </div>
-	            {{ form.managed_tags.errors }}
-	            <div class="checkbox-multiple">
-	                {{ form.managed_tags }}
-	                {% if form.instance.id and not form.managed_tags.errors %}
-	                {% endif %}
-	            </div>
-	
-	        </div>
-        {% endblock recipient_formfield %}
+
+		{% trans "Recipients" as recipients_label %}
+		{% captureas recipients_legend %}
+		    {% blocktrans count counter=receipients|length %}With the current selection the newsletter will be sent to {{ counter }} recipients.{% plural %}With the current selection the newsletter will be sent to {{ counter }} recipients.{% endblocktrans %}
+            {% if SETTINGS.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN %}
+                {% trans "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter." %}
+            {% endif %}
+		{% endcaptureas %}
+		{% include 'cosinnus/fields/default_field.html' with field=form.groups label=recipients_label legend=recipients_legend large_field=True %}
 
         {% trans "Body" as newsletter_body_label %}
         {% trans "Body" as newsletter_body_placeholder %}

@@ -11,6 +11,7 @@ from django.forms.models import ModelMultipleChoiceField
 from django.contrib.auth import get_user_model
 from django.utils.translation import ngettext
 from django.utils.translation import ugettext_lazy as _
+from django_select2.widgets import Select2MultipleWidget
 
 from cosinnus.models.managed_tags import CosinnusManagedTag
 from cosinnus.models.newsletter import Newsletter, GroupsNewsletter
@@ -27,6 +28,7 @@ class CustomSelectMultiple(ModelMultipleChoiceField):
     def label_from_instance(self, obj):
         return obj.name
 
+
 class NewsletterForManagedTagsForm(forms.ModelForm):
     managed_tags = CustomSelectMultiple(
             queryset=CosinnusManagedTag.objects.all(),
@@ -37,21 +39,26 @@ class NewsletterForManagedTagsForm(forms.ModelForm):
         model = Newsletter
         fields = ['subject', 'body', 'managed_tags']
 
+
 class NewsletterForGroupsForm(forms.ModelForm):
-    groups = CustomSelectMultiple(
-        queryset=None,
-        widget=forms.CheckboxSelectMultiple
-    )
+    groups = forms.ModelMultipleChoiceField(
+        queryset=get_cosinnus_group_model().objects.none(), 
+        widget=Select2MultipleWidget
+        )
 
     class Meta(object):
         model = GroupsNewsletter
         fields = ['subject', 'body', 'groups']
         
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # cannot use the group model getter at Class construction time, so add queryset here
+    def __init__(self, instance, *args, **kwargs):
+        super().__init__(instance=instance, *args, **kwargs)
+
         if 'groups' in self.fields:
-            self.fields['groups'].queryset = get_cosinnus_group_model().objects.all_in_portal()
+            self.fields['groups'] = ModelMultipleChoiceField(
+                queryset=get_cosinnus_group_model().objects.all_in_portal(),
+                widget=Select2MultipleWidget,
+                initial=[] if not instance else [rel_group.pk for rel_group in instance.groups.all()],
+            )
 
 
 class UserAdminForm(forms.ModelForm):
