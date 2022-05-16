@@ -1216,7 +1216,7 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         if 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
             return ''
         if settings.COSINNUS_ROCKET_ENABLED:
-            return reverse('cosinnus:message-write-group', kwargs={'slug': self.slug})
+            return reverse('cosinnus:message-write-group-compose', kwargs={'slug': self.slug})
         else:
             subject = _('Request about your project "%(group_name)s"') if self.type == self.TYPE_PROJECT else _(
                 'Request about your group "%(group_name)s"')
