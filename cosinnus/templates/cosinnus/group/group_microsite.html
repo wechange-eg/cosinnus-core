@@ -310,6 +310,7 @@
 						<br>
 						<i>{% trans "Last updated on: " %}</i>{{ group.last_modified|date:"SHORT_DATE_FORMAT" }}
 					</p>
+					<div class="clearfix"></div>
 
 					{% comment %}
 
@@ -408,7 +409,7 @@
 						    </p>
 						    {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
 							    {% with contact_url=group.get_admin_contact_url %}
-								    <button href="{% if user.is_authenticated %}{{ contact_url }}{% else %}{% url 'login' %}?next={{ contact_url|urlencode }}{% endif %}" type="button" class="btn btn-emphasized" style="float: none; margin-left: 0px;" target="_blank">
+								    <button href="{% if user.is_authenticated %}{{ contact_url }}{% else %}{% url 'login' %}?next={{ contact_url|urlencode }}{% endif %}" type="button" class="btn btn-emphasized btn-autosize" style="float: none; margin-left: 0px;" target="_blank">
 				                        <ul class="media-list">
 				                            <li class="media">
 				                                <span class="pull-left">

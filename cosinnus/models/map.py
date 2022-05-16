@@ -326,7 +326,7 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
         message_url = None
         if not settings.COSINNUS_IS_INTEGRATED_PORTAL and not 'cosinnus_message' in settings.COSINNUS_DISABLED_COSINNUS_APPS:
             if settings.COSINNUS_ROCKET_ENABLED:
-                message_url = reverse('cosinnus:message-write-group-compose', kwargs={'slug': obj.slug})
+                message_url = reverse('cosinnus:message-write-group', kwargs={'slug': obj.slug})
             else:
                 group_admins = list(obj.actual_admins)
                 message_url = message_group_admins_url(obj, group_admins)
