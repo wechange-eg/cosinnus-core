@@ -29,7 +29,7 @@
     {% comment %} Hides the "Send" button on any change to the newsletter {% endcomment %}
     <script type="text/javascript">
 	    $(function() {
-            $("input,textarea").change(function() {
+            $("input,textarea,#recipients-field").change(function() {
                 $('.btn-send-newsletter').hide();
             });
 	    });
@@ -54,13 +54,15 @@
         {% include 'cosinnus/fields/default_field.html' with field=form.subject label=newsletter_subject_label placeholder=newsletter_subject_placeholder large_field=True %}
 
 		{% trans "Recipients" as recipients_label %}
+		<div id="recipients-field"> 
 		{% captureas recipients_legend %}
-		    {% blocktrans count counter=receipients|length %}With the current selection the newsletter will be sent to {{ counter }} recipients.{% plural %}With the current selection the newsletter will be sent to {{ counter }} recipients.{% endblocktrans %}
-            {% if SETTINGS.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN %}
-                {% trans "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter." %}
-            {% endif %}
+			{% blocktrans count counter=receipients|length %}With the current selection the newsletter will be sent to {{ counter }} recipients.{% plural %}With the current selection the newsletter will be sent to {{ counter }} recipients.{% endblocktrans %}
+			{% if SETTINGS.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN %}
+				{% trans "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter." %}
+			{% endif %}
 		{% endcaptureas %}
 		{% include 'cosinnus/fields/default_field.html' with field=form.groups label=recipients_label legend=recipients_legend large_field=True %}
+		</div>
 
         {% trans "Body" as newsletter_body_label %}
         {% trans "Body" as newsletter_body_placeholder %}
