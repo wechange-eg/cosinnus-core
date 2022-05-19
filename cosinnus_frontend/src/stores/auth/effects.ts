@@ -26,14 +26,11 @@ export const fetchAuthToken: ReduxThunkActionCreator<[string, string, (isSubmitt
         .json()
         .then(data => {
           dispatch(setAuthError(null))
-          dispatch(setAuthToken(data.token))
+          dispatch(setAuthToken(data.access))
         })
         .then(callback)
-    } else if (response.status === 400) {
-      dispatch(setAuthError("Invalid username and/or password"))
-      setSubmitting(false)
     } else {
-      dispatch(setAuthError("Server error"))
+      dispatch(setAuthError("Invalid username and/or password"))
       setSubmitting(false)
     }
   })
