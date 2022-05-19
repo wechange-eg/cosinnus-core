@@ -209,18 +209,21 @@
                         </p>
                         {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
                             {% with contact_url=group.get_admin_contact_url %}
-                                <button href="{% if user.is_authenticated %}{{ contact_url }}{% else %}{% url 'login' %}?next={{ contact_url|urlencode }}{% endif %}" type="button" class="btn btn-emphasized" style="float: none; margin-left: 0px;">
+                                <button href="{% if user.is_authenticated %}{{ contact_url }}{% else %}{% url 'login' %}?next={{ contact_url|urlencode }}{% endif %}" type="button" class="btn btn-emphasized btn-autosize" style="float: none; margin-left: 0px;">
                                     <ul class="media-list">
                                         <li class="media">
                                             <span class="pull-left">
                                                 <i class="fa fa-envelope"></i>
                                             </span>
                                             <div class="media-body">
-                                                {% trans "Contact" %}
+                                                {% trans "Contact organizers" %}
                                             </div>
                                         </li>
                                     </ul>
                                 </button>
+                                <p>
+                                    {% trans "Here you can send a message to the admins." %}
+                                </p>
                             {% endwith %}
                         {% endif %}
                     </div>

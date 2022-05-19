@@ -52,10 +52,10 @@ class UserViewSet(CosinnusFilterQuerySetMixin, viewsets.ModelViewSet):
             user.save(update_fields=['username'])
         if password is not None:
             user.set_password(password)
-        user.save(update_fields=['password'])
+            user.save(update_fields=['password'])
 
         # sanity check, retrieve the user's profile (will create it if it doesnt exist)
-        if not user.cosinnus_profile:
+        if not hasattr(user, 'cosinnus_profile') or not user.cosinnus_profile:
             get_user_profile_model()._default_manager.get_for_user(user)
 
         # Set dynamic_fields

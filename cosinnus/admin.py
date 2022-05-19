@@ -649,7 +649,7 @@ class UserScheduledForDeletionAtFilter(admin.SimpleListFilter):
 
 class UserAdmin(DjangoUserAdmin):
     inlines = (UserProfileInline, PortalMembershipInline)#, GroupMembershipInline)
-    actions = ['deactivate_users', 'reactivate_users', 'export_as_csv', 'log_in_as_user']
+    actions = ['deactivate_users', 'reactivate_users', 'export_as_csv', 'log_in_as_user', 'refresh_group_memberships',]
     if settings.COSINNUS_ROCKET_ENABLED:
         actions += ['force_sync_rocket_user', 'make_user_rocket_admin', 'force_redo_user_room_memberships',
                     'ensure_user_account_sanity']
@@ -718,6 +718,17 @@ class UserAdmin(DjangoUserAdmin):
         user = queryset[0]
         user.backend = 'cosinnus.backends.EmailAuthBackend'
         django_login(request, user)
+        
+    def refresh_group_memberships(self, request, queryset):
+        count = 0
+        for user in queryset:
+            if hasattr(user, 'cosinnus_profile') and user.cosinnus_profile:
+                for group in user.cosinnus_profile.cosinnus_groups:
+                    CosinnusGroupMembership.objects.get(group=group, user=user).save(force_joined_signal=True)
+                count += 1
+        message = _('%(count)d Users\' group memberships were refreshed.') % {'count': count}
+        self.message_user(request, message)
+    refresh_group_memberships.short_description = _('Refresh user group membership associations (e.g. cache or Nextcloud folder problems)')
     
     if settings.COSINNUS_ROCKET_ENABLED:
         def force_sync_rocket_user(self, request, queryset):

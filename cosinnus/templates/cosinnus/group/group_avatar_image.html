@@ -3,5 +3,5 @@
 {% if group and group.avatar %}
     <img src="{% include 'cosinnus/group/group_avatar_image_url.html' %}" {% if extra_classes %}class="{{ extra_classes }}"{% endif %} {% if extra_style %}style="{{ extra_style }}" {% endif %}/>
 {% else %}
-    <img src="{% include 'cosinnus/group/group_avatar_image_url.html' with group_avatar_type=group_avatar_type %}" title="{{ group.name }}" {% if extra_classes %}class="{{ extra_classes }}"{% endif %} {% if extra_style %}style="{{ extra_style }}" {% endif %}></img>
+    <img src="{% include 'cosinnus/group/group_avatar_image_url.html' with group_avatar_type=group_avatar_type %}" {% if extra_classes %}class="{{ extra_classes }}"{% endif %} {% if extra_style %}style="{{ extra_style }}" {% endif %}></img>
 {% endif %}
