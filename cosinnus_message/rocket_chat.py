@@ -200,6 +200,8 @@ class RocketChatConnection:
                 break
 
             for rocket_user in response['users']:
+                if "username" not in rocket_user:
+                    continue
                 rocket_users[rocket_user['username']] = rocket_user
                 for email in rocket_user.get('emails', []):
                     if not email.get('address'):
@@ -592,7 +594,7 @@ class RocketChatConnection:
         group_name = response.get('group', {}).get('name', None)
         return group_name
     
-    def groups_request(self, group, user, force_sync_membership=False):
+    def groups_request(self, group, user, first_message='', force_sync_membership=False, create=False):
         """
         Returns name of group if user is member of group, otherwise creates private group for group request
         (with user and group admins as members) and returns group name
@@ -601,49 +603,62 @@ class RocketChatConnection:
         :param force_sync_membership: if True, and the user is a member of the CosinnusGroup,
             the user will be added to the rocketchat group again (useful to make sure
             that users are *really* members of the group)
-        :return:
+        :return: group name or none if the group didn't exist and create has been not given
         """
         group_name = ''
         if group.is_member(user):
             group_name = self.get_group_room_name(group)
             if force_sync_membership:
                 self.force_redo_user_room_membership_for_group(user, group)
+            return group_name
         else:
-            # Create private group
-            group_name = f'{group.slug}-{get_random_string(7)}'
-            if not hasattr(user, 'cosinnus_profile'):
-                return
-            profile = user.cosinnus_profile
-            members = [u.cosinnus_profile.rocket_username for u in group.actual_admins] + [profile.rocket_username, ]
-            response = self.rocket.groups_create(group_name, members=members).json()
-            if not response.get('success'):
-                logger.error('RocketChat: groups_request: groups_create ' + response.get('errorType', '<No Error Type>'), extra={'response': response})
-            group_name = response.get('group', {}).get('name')
-            room_id = response.get('group', {}).get('_id')
-
-            # Make user moderator of group
-            user_id = user.cosinnus_profile.settings.get(PROFILE_SETTING_ROCKET_CHAT_ID)
-            if user_id:
-                response = self.rocket.groups_add_moderator(room_id=room_id, user_id=profile.rocket_username).json()
+            # Try to find an existing group for this user
+            group_name = f'{group.slug}--contact-{user.id}'
+            response = self.rocket.groups_info(room_name=group_name).json()
+            if response.get('success'):
+                return group_name
+            # Create private group if it didn't exist and the flag is set
+            if create:
+                if not hasattr(user, 'cosinnus_profile'):
+                    return
+                profile = user.cosinnus_profile
+                members = [u.cosinnus_profile.rocket_username for u in group.actual_admins] + [profile.rocket_username, ]
+                response = self.rocket.groups_create(group_name, members=members).json()
                 if not response.get('success'):
-                    logger.error('RocketChat: groups_request: groups_add_moderator ' + response.get('errorType', '<No Error Type>'), extra={'response': response})
+                    logger.error('RocketChat: groups_request: groups_create ' + response.get('errorType', '<No Error Type>'), extra={'response': response})
+                group_name = response.get('group', {}).get('name')
+                room_id = response.get('group', {}).get('_id')
 
-            # Set description of group
-            topic = group.trans.CONTACT_ROOM_TOPIC % {'group_name': group.name}
-            topic = f'{topic} ({group.get_absolute_url()})'
-            response = self.rocket.groups_set_topic(room_id=room_id, topic=topic).json()
-            if not response.get('success'):
-                logger.error('RocketChat: groups_request: groups_set_topic ' + response.get('errorType', '<No Error Type>'), extra={'response': response})
-                
-            # Post help message
-            greeting_message = group.trans.CONTACT_ROOM_GREETING_MESSAGE
-            info_message = settings.COSINNUS_ROCKET_GROUP_CONTACT_ROOM_INFO_MESSAGE
-            message = f'@{profile.rocket_username} @all {greeting_message} {info_message}'
-            response = self.rocket.chat_post_message(text=message, room_id=room_id).json()
-            if not response.get('success'):
-                logger.error('RocketChat: groups_request: chat_post_message ' + response.get('errorType', '<No Error Type>'), extra={'response': response})
-                
-        return group_name
+                # Make user moderator of group
+                user_id = user.cosinnus_profile.settings.get(PROFILE_SETTING_ROCKET_CHAT_ID)
+                if user_id:
+                    response = self.rocket.groups_add_moderator(room_id=room_id, user_id=profile.rocket_username).json()
+                    if not response.get('success'):
+                        logger.error('RocketChat: groups_request: groups_add_moderator ' + response.get('errorType', '<No Error Type>'), extra={'response': response})
+
+                # Set description of group
+                topic = group.trans.CONTACT_ROOM_TOPIC % {'group_name': group.name}
+                topic = f'{topic} ({group.get_absolute_url()})'
+                response = self.rocket.groups_set_topic(room_id=room_id, topic=topic).json()
+                if not response.get('success'):
+                    logger.error('RocketChat: groups_request: groups_set_topic ' + response.get('errorType', '<No Error Type>'), extra={'response': response})
+                    
+                # Post help message
+                greeting_message = f'{group.trans.CONTACT_ROOM_GREETING_MESSAGE}'
+                info_message = settings.COSINNUS_ROCKET_GROUP_CONTACT_ROOM_INFO_MESSAGE
+                message = f'@{profile.rocket_username} @all {greeting_message} {info_message}'
+                if first_message:
+                    request_message = _('Contact request')
+                    # add message in blockquotes
+                    first_message = first_message.replace('\n', '\n> ')
+                    message += f'\n\n{request_message}: @{profile.rocket_username}\n\n> {first_message}'
+                response = self.rocket.chat_post_message(text=message, room_id=room_id).json()
+                if not response.get('success'):
+                    logger.error('RocketChat: groups_request: chat_post_message ' + response.get('errorType', '<No Error Type>'), extra={'response': response})
+
+                return group_name
+
+        return None
 
     def create_private_room(self, group_name, moderator_user, member_users=None, additional_admin_users=None):
         """ Create a private group with a user as first member and moderator.
@@ -687,7 +702,7 @@ class RocketChatConnection:
         admin_ids = [self.get_user_id(m.user) for m in admin_qs]
         members_qs = memberships.filter_membership_status(MEMBER_STATUS)
         member_usernames = [str(m.user.cosinnus_profile.rocket_username)
-                            for m in members_qs if m.user.cosinnus_profile]
+                            for m in members_qs if hasattr(m.user, 'cosinnus_profile') and m.user.cosinnus_profile]
         member_usernames.append(settings.COSINNUS_CHAT_USER)
 
         # Createconfigured channels

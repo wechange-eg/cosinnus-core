@@ -1,0 +1,43 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags djajax_tags widget_tweaks %}
+
+{% block page_title %}
+    {% trans "Contact" %}
+{% endblock page_title %}
+
+{% block main_page %}
+
+    {% captureas label %}
+        {% block description %}
+            <p class="no-horizontal-padding no-vertical-padding large-space">
+                {% if group.type == 1 %}
+                    {% trans "You can contact the group administration via this form. Write your message in the field below and than you will be redirected to the chat with group admins." %}
+                {% else %}
+                    {% trans "You can contact the project administration via this form. Write your message in the field below and than you will be redirected to the chat with project admins." %}
+                {% endif %}
+            </p>
+        {% endblock description %}
+
+        {% block contact_message_field %}
+            {% if form %}
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {% trans "What is your message?" as contact_message_form_label %}
+                    {% trans "Write it here" as contact_message_form_placeholder %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.contact_message label=contact_message_form_label placeholder=contact_message_form_placeholder large_field=True %}
+                    
+                    <button type="submit" class="rounded-button button-color-primary-inverted">
+                        <span class="rounded-button-inner">
+                            {% trans "Send" %}
+                        </span>
+                    </button>
+                </form>
+            {% endif %}
+        {% endblock contact_message_field %}
+
+    {% endcaptureas label %}
+
+    {% captureas title %}{% blocktrans with group_name=group.name %}Contact the administration of {{ group_name }}:{% endblocktrans %}{% endcaptureas %}
+    {% include "cosinnus/modal_box.html" with label=label title=title title_icon="fa-user" form_action=contact_message_field show_inline=True hide_cancel_button=True hide_submit_button=True  %}
+
+{% endblock main_page %}
