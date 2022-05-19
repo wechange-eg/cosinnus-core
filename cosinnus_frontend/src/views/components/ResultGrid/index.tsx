@@ -8,3 +8,4 @@ class ParentClass extends React.Component {
 }
 
 
+export const ResultGrid = ParentClass

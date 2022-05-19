@@ -5,29 +5,16 @@ import {RootState} from "../rootReducer"
 import {setUser} from "./actions"
 import {User} from "./models"
 
-/**
- * Fetch user data
- *
- * @returns {(dispatch: Dispatch, getState: () => RootState) => Promise<void>} - return function
- */
+import AuthService from "../../services/auth.service"
+import UserService from "../../services/user.service"
+
 export const fetchUser: ReduxThunkActionCreator<[], Promise<void>> = () => (
   dispatch: Dispatch,
   _getState: () => RootState
 ) => {
-  // const {jwtToken} = getState()
-  const headers = new Headers()
-  // headers.append("Authorization", "JWT " + authToken)
-  headers.append( "Content-Type", "application/json")
-  return fetch(`${process.env.API_URL}/current_user/`, {
-    method: "GET",
-    headers: headers
-  }).then(response => {
-    if (response.status === 200) {
-      response.json().then(data => {
-        if (data.id) {
-          dispatch(setUser(User.fromJson(data)))
-        }
-      })
+  return UserService.getUserBoard().then(
+    data => {
+      dispatch(setUser(User.fromJson(data)))
     }
-  })
+  )
 }

@@ -33,18 +33,14 @@ function MapConnector (props: MapProps & RouteComponentProps) {
   const classes = useStyles()
 
   return (
-    <Grid
-      className={classes.grid}
-      container
-    >
+    <div>
       <Content className="fullheight">
         <ResultMap results={results} />
       </Content>
       <Sidebar>
-        <ResultFilter />
-        <ResultGrid results={results} />
+        <h1>Sidebar</h1>
       </Sidebar>
-    </Grid>
+    </div>
   )
 }
 

@@ -32,7 +32,8 @@ import { setAuthError } from "../../../stores/auth/actions"
 import { RootState } from "../../../stores/rootReducer"
 import { DispatchedReduxThunkActionCreator } from "../../../utils/types"
 import { fetchAuthToken } from "../../../stores/auth/effects"
-import { Settings } from "../../../stores/settings/models";
+import { Settings } from "../../../stores/settings/models"
+import AuthService from "../../../services/auth.service"
 
 interface LoginProps {
   authError: string | null
@@ -71,14 +72,32 @@ export function LoginConnector(props: LoginProps) {
     formikBag: FormikBag<FormikProps<FormikValues>, FormikValues>
   ) => {
     setAuthError(null)
-    fetchAuthToken(
-      values.email,
-      values.password,
-      formikBag.setSubmitting,
+    AuthService.login(values.email, values.password).then(
       () => {
         history.push("/")
+        window.location.reload();
+      },
+      error => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        this.setState({
+          isSubmitting: false,
+          message: resMessage
+        });
       }
-    )
+    );
+    // fetchAuthToken(
+    //   values.email,
+    //   values.password,
+    //   formikBag.setSubmitting,
+    //   () => {
+    //     history.push("/")
+    //   }
+    // )
   }
 
   const getForm = ({ isSubmitting }: { isSubmitting: boolean }) => {

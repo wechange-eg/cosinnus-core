@@ -18,7 +18,8 @@ import {Result} from "./Result"
 import {Map} from "./Map"
 import {Settings} from "../stores/settings/models"
 import {fetchSettings} from "../stores/settings/effects"
-import {Login} from "./components/Login";
+import {Login} from "./components/Login"
+import AuthService from "../services/auth.service"
 
 interface AppProps {
   authToken: string
@@ -46,14 +47,19 @@ const mapDispatchToProps = {
 
 class AppConnector extends Component<AppProps> {
   render() {
-    const {authToken} = this.props
+    let authToken = null
+    let userData = AuthService.getCurrentUser()
+    if (userData) {
+      authToken = userData.access
+    }
+
     const {settings, fetchSettings} = this.props
     const {user, fetchUser} = this.props
     const {translations, fetchTranslations} = this.props
     if (!settings) fetchSettings()
     if (!translations) fetchTranslations()
     if (authToken) {
-      if (!user) fetchUser()
+       if (!user) fetchUser()
     }
 
     const routeProps: ProtectedRouteProps = {
