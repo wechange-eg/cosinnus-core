@@ -1,0 +1,43 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_urls %}
+
+{% block object-tools-items %}
+    {% with profile=original.cosinnus_profile %}
+	    {% if profile and profile.scheduled_for_deletion_at and not original.is_active %}
+            <li>
+                <a href="#" style="color:green">
+                    <i class="icon-info-sign icon-alpha75"></i>
+                    {% trans "This user profile is scheduled for deletion at: " %}
+                    {{ profile.scheduled_for_deletion_at }}
+                </a>
+            </li>
+        {% elif profile and profile.scheduled_for_deletion_at and original.is_active %}
+            <li>
+                <a href="#" style="color:orange">
+                    <i class="icon-info-sign icon-alpha75"></i>
+                    {% trans "This user profile is scheduled for deletion at: " %}
+                    {{ profile.scheduled_for_deletion_at }}
+                    <br/>
+                    {% trans "However, it will not be deleted, because it is still active." %}
+                </a>
+            </li>
+        {% elif profile and not profile.scheduled_for_deletion_at and not original.is_active %}
+            <li>
+                <a href="#" style="color:orange">
+                    <i class="icon-info-sign icon-alpha75"></i>
+                    {% trans "This user account is disabled. The user cannot log in or use the account." %}
+                </a>
+            </li>
+        {% endif %}
+        {% if profile and not profile.scheduled_for_deletion_at %}
+            <li>
+                <a href="#" style="color:green">
+                    <i class="icon-info-sign icon-alpha75"></i>
+                    {% trans "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:" %}
+                    "{% trans "DEACTIVATE user accounts and DELETE them after 30 days" %}"
+                </a>
+            </li>
+        {% endif %}
+    {% endwith %}
+    {{ block.super }}
+{% endblock %}
