@@ -253,7 +253,7 @@ class SearchQuerySetMixin:
             if any([self.params.get(checktype, None) for checktype in settings.COSINNUS_ALPHABETICAL_ORDER_FOR_SEARCH_MODELS_WHEN_SINGLE]) and len(model_list) == 1:
                 # sort by slug instead of title because haystack doesn't support 
                 # case-insensitive ordering
-                sort_args = ['slug']
+                sort_args = ['sort_field', 'title', 'text']
                 self.skip_score_sorting = True
             else:
                 sort_args = ['-local_boost']
