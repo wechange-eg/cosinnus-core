@@ -1,10 +1,9 @@
 import React, {Component} from "react"
 import { connect } from "react-redux"
 import { Route } from "react-router"
-import { HashRouter as Router, Switch } from "react-router-dom"
+import { BrowserRouter as Router, Switch } from "react-router-dom"
 import { IntlProvider} from "react-intl"
 
-import { RootState } from "../stores/rootReducer"
 import { ProtectedRoute, ProtectedRouteProps } from "./routes/ProtectedRoute"
 import {
   fetchTranslations
@@ -13,15 +12,14 @@ import { TranslationsState } from "../stores/translations/reducer"
 import {fetchUser} from "../stores/user/effects"
 import {User} from "../stores/user/models"
 import {DispatchedReduxThunkActionCreator} from "../utils/types"
-import {Search} from "./Search"
-import {Result} from "./Result"
 import {Map} from "./Map"
 import {Settings} from "../stores/settings/models"
 import {fetchSettings} from "../stores/settings/effects"
-import {Login} from "./components/Login"
-import AuthService from "../services/auth.service"
+import {Login} from "./Login"
+import {Register} from "./Register"
 
 interface AppProps {
+  isLoggedIn: boolean
   authToken: string
   settings: Settings
   user: User
@@ -31,11 +29,10 @@ interface AppProps {
   fetchUser: DispatchedReduxThunkActionCreator<Promise<void>>
 }
 
-function mapStateToProps(state: RootState) {
+function mapStateToProps(state: any) {
   return {
-    authToken: state.auth.token,
-    settings: state.settings,
-    translations: state.translations,
+    isLoggedIn: state.auth.isLoggedIn,
+    user: state.user
   }
 }
 
@@ -46,28 +43,22 @@ const mapDispatchToProps = {
 }
 
 class AppConnector extends Component<AppProps> {
-  render() {
-    let authToken = null
-    let userData = AuthService.getCurrentUser()
-    if (userData) {
-      authToken = userData.access
-    }
 
+  render() {
     const {settings, fetchSettings} = this.props
-    const {user, fetchUser} = this.props
+    const {isLoggedIn} = this.props
     const {translations, fetchTranslations} = this.props
     if (!settings) fetchSettings()
     if (!translations) fetchTranslations()
-    if (authToken) {
-       if (!user) fetchUser()
-    }
+    if (isLoggedIn) fetchUser()
 
     const routeProps: ProtectedRouteProps = {
-      isAuthenticated: !!authToken,
+      isAuthenticated: !!isLoggedIn,
       authPath: "/login",
       exact: true,
       path: "/",
     }
+
     return (
       <IntlProvider
         locale={translations && translations.locale || "en"}
@@ -87,11 +78,8 @@ class AppConnector extends Component<AppProps> {
         <Router>
           <Switch>
             <Route exact path="/login"><Login /></Route>
+            <Route exact path="/register"><Register /></Route>
             <ProtectedRoute {...routeProps} component={Map}/>
-            <ProtectedRoute {...routeProps} path="/search/" component={Search}/>
-            <ProtectedRoute {...routeProps} path="/r/:id" render={props => (
-              <Result id={+props.match.params.id} {...props} />
-            )}/>
           </Switch>
         </Router>
       </IntlProvider>

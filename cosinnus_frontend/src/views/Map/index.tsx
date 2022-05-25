@@ -1,49 +1,58 @@
-import {
-  Grid
-} from "@material-ui/core"
 import React from "react"
-import {connect as reduxConnect} from "react-redux"
-import {RouteComponentProps} from "react-router-dom"
-import {withRouter} from "react-router"
+import { connect } from "react-redux"
+import { withRouter } from "react-router"
 
-import {RootState} from "../../stores/rootReducer"
-import {Content} from "../components/Content/style"
-import {Sidebar} from "../components/Sidebar"
-import {Result} from "../../stores/search/models"
-import {ResultGrid} from "../components/ResultGrid";
-import {ResultMap} from "../components/ResultMap";
-import {useStyles} from "./style";
-import {ResultFilter} from "../components/ResultFilter";
+import { fetchUser } from "../../stores/user/effects"
+import { logout } from "../../stores/auth/effects";
 
-interface MapProps {
-  results: Result[]
-}
+import {
+  Container,
+  Center,
+  Box,
+  Button,
+  Heading
+} from '@chakra-ui/react'
 
-function mapStateToProps(state: RootState) {
+function mapStateToProps(state: any) {
+  const { isLoggedIn } = state.auth;
+  const { message } = state.message;
+  const { user } = state
+
   return {
-    results: state.search.results,
-  }
+    isLoggedIn,
+    message,
+    user
+  };
 }
 
 const mapDispatchToProps = {
+  fetchUser,
+  logout
 }
 
-function MapConnector (props: MapProps & RouteComponentProps) {
-  const { results } = props
-  const classes = useStyles()
+export function MapConnector(props: any) {
+
+  const { fetchUser, user, logout } = props
+  if (!user) fetchUser()
 
   return (
-    <div>
-      <Content className="fullheight">
-        <ResultMap results={results} />
-      </Content>
-      <Sidebar>
-        <h1>Sidebar</h1>
-      </Sidebar>
-    </div>
+    <Container maxW='2xl'>
+      <Box mt={100} mb={5} px={5} pt={5} pb={100} border='1px' borderColor='gray.200'>
+        <Center>
+          {user &&
+            <Box>
+              <Heading>Hello {user.props.username}</Heading>
+              <Center>
+                <Button colorScheme="blue" onClick={logout}>LogOut</Button>
+              </Center>
+            </Box>
+          }
+        </Center>
+      </Box>
+    </Container>
   )
 }
 
-export const Map = reduxConnect(mapStateToProps, mapDispatchToProps)(
+export const Map = connect(mapStateToProps, mapDispatchToProps)(
   withRouter(MapConnector)
 )

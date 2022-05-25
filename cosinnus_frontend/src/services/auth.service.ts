@@ -1,8 +1,6 @@
 import axios from "axios"
 import {Dispatch} from "redux"
 
-import {setAuthToken, setAuthError} from "../stores/auth/actions"
-
 const API_URL = `${process.env.API_URL}/`;
 class AuthService {
   login(username: string, password: string) {

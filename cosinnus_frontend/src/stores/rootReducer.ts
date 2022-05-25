@@ -7,13 +7,15 @@ import {Settings} from "./settings/models"
 import {SettingsReducer} from "./settings/reducer"
 import {SearchReducer, SearchState} from "./search/reducer"
 import {AuthState, AuthReducer} from "./auth/reducers";
+import { MessageState, MessageReducer } from "./messages/reducers"
 
 export interface RootState {
   auth: AuthState
   settings: Settings
   search: SearchState
   translations: TranslationsState
-  user: User
+  user: User,
+  message: MessageState
 }
 
 export const rootReducer = combineReducers({
@@ -22,4 +24,5 @@ export const rootReducer = combineReducers({
   search: SearchReducer,
   translations: TranslationsReducer,
   user: UserReducer,
+  message: MessageReducer
 })

@@ -1,2 +1,4 @@
+^/$
 ^/login/$
+^/register/$
 ^/test/$

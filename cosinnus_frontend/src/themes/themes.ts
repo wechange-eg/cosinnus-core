@@ -1,30 +1,27 @@
-import { createMuiTheme, lighten } from "@material-ui/core"
+import { extendTheme } from "@chakra-ui/react"
 
-export const getTheme = (primaryColor= "#7062b3") => createMuiTheme({
-  palette: {
-    type: "light",
-    primary: {
-      main: primaryColor,
-      light: lighten(primaryColor, 0.5),
-      contrastText: lighten(primaryColor, 0.75),
+
+const theme = extendTheme({
+  components: {
+    Button: {
+      baseStyle: {
+        fontWeight: 'bold',
+      },
+      sizes: {
+        xl: {
+          h: '56px',
+          fontSize: 'lg',
+          px: '32px',
+        },
+      },
+      variants: {
+        'with-shadow': {
+          bg: 'red.400',
+          boxShadow: '0 0 2px 2px #efdfde',
+        },
+      },
     },
-    text: {
-      primary: "#4a4a4a",
-      secondary: "#929292"
-    },
-    background: {
-      default: "#ffffff",
-      paper: "#f2f2f2"
-    },
-    success: {
-      main: "#3e806d"
-    }
-  },
-  typography: {
-    fontFamily: '"Brandon Text",sans-serif',
-    fontWeight: 400,
-    fontSize: 14,
-    htmlFontSize: 14
   },
 })
 
+export default theme

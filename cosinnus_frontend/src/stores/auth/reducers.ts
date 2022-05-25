@@ -2,29 +2,56 @@ import { AnyAction } from "redux"
 
 import { ActionType } from "../../constants/actions"
 
-export interface AuthState {
-  token: string
-  error?: string
+type Token = {
+  'access': string,
+  'refresh': string
 }
 
+export interface AuthState {
+  isLoggedIn: boolean,
+  token: Token
+}
+
+const token = JSON.parse(localStorage.getItem("user"));
+const initialState = token
+  ? { isLoggedIn: true, token }
+  : { isLoggedIn: false, token: null };
+
 export function AuthReducer(
-  state: AuthState = { token: null },
+  state: AuthState = initialState,
   action: AnyAction
 ): AuthState {
-  switch (action.type) {
-    case ActionType.SET_AUTH_TOKEN: {
+  const { type, payload } = action;
+  switch (type) {
+    case ActionType.REGISTER_SUCCESS:
       return {
-        token: action.payload
-      }
-    }
-    case ActionType.SET_AUTH_ERROR: {
+        ...state,
+        isLoggedIn: false,
+      };
+    case ActionType.REGISTER_FAIL:
       return {
+        ...state,
+        isLoggedIn: false,
+      };
+    case ActionType.LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLoggedIn: true,
+        token: payload.user,
+      };
+    case ActionType.LOGIN_FAIL:
+      return {
+        ...state,
+        isLoggedIn: false,
         token: null,
-        error: action.payload ? action.payload.message : null
-      }
-    }
-    default: {
-      return state
-    }
+      };
+    case ActionType.LOGOUT:
+      return {
+        ...state,
+        isLoggedIn: false,
+        token: null,
+      };
+    default:
+      return state;
   }
 }

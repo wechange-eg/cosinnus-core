@@ -1,6 +1,5 @@
 import * as React from "react"
 import { Redirect, Route, RouteProps } from "react-router-dom"
-import {Loading} from "../components/Loading"
 
 export interface ProtectedRouteProps extends RouteProps {
   isAuthenticated: boolean
