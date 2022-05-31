@@ -77,13 +77,14 @@ from django.utils.timezone import now
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
     CosinnusConference
 from django_select2.views import Select2View, NO_ERR_RESP
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ImproperlyConfigured
 from cosinnus import cosinnus_notifications
 from cosinnus.utils.html import render_html_with_variables
 from django.utils import timezone
 from two_factor.views.core import QRGeneratorView
 from two_factor.views.utils import class_view_decorator
 from two_factor.utils import default_device
+from copy import copy
 logger = logging.getLogger('cosinnus')
 
 USER_MODEL = get_user_model()
@@ -904,14 +905,23 @@ def send_user_email_to_verify(user, new_email, request=None, user_has_just_regis
     
     # message user for email verification
     if request:
+        # create a readonly temp copy of the user object with the new email
+        # so we can send the mail to the new e-mail address
+        def _protected_func(*args, **kwargs):
+            raise ImproperlyConfigured('This function cannot be used on a User instance converted to readonly!')
+        readonly_temp_user = copy(user)
+        setattr(readonly_temp_user, 'save', _protected_func) # replace writing functions
+        setattr(readonly_temp_user, 'delete', _protected_func) # replace writing functions
+        readonly_temp_user.email = new_email
+        
         data = get_common_mail_context(request)
         user_verification_url = CosinnusPortal.get_current().get_domain() +\
                 reverse('cosinnus:user-verifiy-email', kwargs={'email_verification_param': verification_url_param}) +\
                 redirect_with_next('', request)
         data.update({
             'site_name': settings.COSINNUS_BASE_PAGE_TITLE_TRANS,
-            'user':user,
-            'user_email':new_email,
+            'user': readonly_temp_user,
+            'user_email': readonly_temp_user.email,
             'user_verification_url': user_verification_url,
         })
         subject = _('Please verify your email address for %(site_name)s!') % data
@@ -928,9 +938,9 @@ def send_user_email_to_verify(user, new_email, request=None, user_has_just_regis
         text += str(_('If you did not sign up for an account you may ignore this email. You can also click the unsubscrible link on the bottom of this email to never receive mails from us again!') % data) + '\n\n'
         
         # send a notification email ignoring notification settings
-        if not GlobalBlacklistedEmail.is_email_blacklisted(user.email):
+        if not GlobalBlacklistedEmail.is_email_blacklisted(readonly_temp_user.email):
             body_text = textfield(text)
-            send_html_mail_threaded(user, subject, body_text)
+            send_html_mail_threaded(readonly_temp_user, subject, body_text)
 
 
 def email_first_login_token_to_user(user, threaded=True):
