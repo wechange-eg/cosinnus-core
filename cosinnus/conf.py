@@ -850,6 +850,13 @@ class CosinnusConf(AppConf):
     # if True, won't let any user log in before verifying their e-mail 
     USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN = False
     
+    # if True, sends a "please verify your e-mail" mail to the user
+    # instantly after they signed up. if False, the user has to click
+    # the "your email has not been verified - send now" banner on top
+    # the page to trigger the mail
+    # (does not affect mails if USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN is True)
+    USER_SIGNUP_SEND_VERIFICATION_MAIL_INSTANTLY = False
+    
     # if True, hides the portal completey from external visitors.
     # "logged in only" mode for the portal
     USER_EXTERNAL_USERS_FORBIDDEN = False

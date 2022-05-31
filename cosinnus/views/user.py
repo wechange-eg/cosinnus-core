@@ -298,8 +298,15 @@ class UserCreateView(CreateView):
             # on portal settings
             do_login = True
             if CosinnusPortal.get_current().email_needs_verification:
-                send_user_email_to_verify(user, user.email, self.request)
-                messages.success(self.request, self.message_success_email_verification % {'email': user.email})
+                # send out an instant "please verifiy your e-mail" mail after the user registers,
+                # if this is enabled, or the portal locks signups behind verifying the mail
+                # if this is not set, users have to manually click the "send verification mail" site header to verify
+                if (settings.COSINNUS_USER_SIGNUP_SEND_VERIFICATION_MAIL_INSTANTLY or \
+                         settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN):
+                    send_user_email_to_verify(user, user.email, self.request)
+                    messages.success(self.request, self.message_success_email_verification % {'email': user.email})
+                else:
+                    messages.success(self.request, self.message_success % {'user': user.email})
                 if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
                     # show message to tell the user they need to register on this portal
                     messages.warning(self.request, _('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.'))
