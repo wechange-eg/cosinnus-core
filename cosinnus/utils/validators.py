@@ -104,3 +104,12 @@ class CleanFromToDateFieldsMixin(object):
 
         return cleaned_data
 
+
+def validate_username(value):
+    """ A simple validator to reduce possible spam attempts in usernames. """
+    disallowed_strings = ['/', 'http', 'www', '<', '>']
+    if any([fragment in value for fragment in disallowed_strings]) or value.count('.') > 1:
+        raise ValidationError(
+            _('Ensure that your name does not contain any invalid characters.'),
+            code='invalid_username',
+        )

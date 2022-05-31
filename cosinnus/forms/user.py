@@ -25,9 +25,12 @@ from cosinnus.models.tagged import BaseTagObject, get_tag_object_model
 from cosinnus.utils.user import accept_user_tos_for_portal
 from osm_field.fields import OSMField, LatitudeField, LongitudeField
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField
+from cosinnus.utils.validators import validate_username
 
 
 logger = logging.getLogger('cosinnus')
+
+USER_NAME_FIELDS_MAX_LENGTH = 30
 
 
 class UserKwargModelFormMixin(object):
@@ -91,7 +94,7 @@ class UserCreationFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
 
 class UserCreationForm(UserCreationFormDynamicFieldsMixin, TermsOfServiceFormFields, ManagedTagFormMixin, DjUserCreationForm):
     # Inherit from UserCreationForm for proper password hashing!
-
+    
     class Meta(object):
         model = get_user_model()
         fields = [
@@ -104,8 +107,14 @@ class UserCreationForm(UserCreationFormDynamicFieldsMixin, TermsOfServiceFormFie
     
     # email maxlength 220 instead of 254, to accomodate hashes to scramble them 
     email = forms.EmailField(label=_('email address'), required=True, validators=[MaxLengthValidator(220)]) 
-    first_name = forms.CharField(label=_('first name'), required=True)  
-    
+    first_name = forms.CharField(
+        label=_('first name'), required=True, 
+        validators=[MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username]
+    )
+    last_name = forms.CharField(
+        label=_('last name'), 
+        validators=[MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username]
+    )
     
     if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF \
                 and settings.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM:
@@ -118,8 +127,7 @@ class UserCreationForm(UserCreationFormDynamicFieldsMixin, TermsOfServiceFormFie
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
         self.fields['first_name'].required = True
-        if settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED:
-            self.fields['last_name'].required = True
+        self.fields['last_name'].required = bool(settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED)
         
         # if the location field is to be shown in signup, show it here
         if settings.COSINNUS_USER_SIGNUP_INCLUDES_LOCATION_FIELD:
@@ -219,18 +227,25 @@ class UserCreationForm(UserCreationFormDynamicFieldsMixin, TermsOfServiceFormFie
 
 class UserChangeForm(forms.ModelForm):
     # Inherit from UserCreationForm for proper password hashing!
-
+    
     class Meta(object):
         model = get_user_model()
         fields = ('email', 'first_name', 'last_name', )
-        
+    
+    first_name = forms.CharField(
+        label=_('first name'), required=True, 
+        validators=[MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username]
+    )
+    last_name = forms.CharField(
+        label=_('last name'), 
+        validators=[MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username]
+    )
+    
     def __init__(self, *args, **kwargs):
         super(UserChangeForm, self).__init__(*args, **kwargs)
         self.fields['email'].required = True
         self.fields['first_name'].required = True
-        if settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED:
-            self.fields['last_name'].required = True
-        
+        self.fields['last_name'].required = bool(settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED)
         
     def clean_email(self):
         email = self.cleaned_data.get('email')
