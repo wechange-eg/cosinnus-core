@@ -1,4 +1,5 @@
-import {Room, RoomJson} from "../room/models"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 export interface SettingsJson {
   name: string
@@ -31,7 +32,7 @@ export class Settings {
    * @param json - response data in JSON format
    * @returns {User} - Settings object
    */
-  public static fromJson(json: SettingsJson) : Settings {
+  public static fromJson(json: SettingsJson): Settings {
     const props: SettingsProps = {
       name: json.name,
       backgroundImage: json.background_image,
@@ -49,7 +50,7 @@ export class Settings {
    *
    * @returns {SettingsJson} - object in JSON format
    */
-  toJson() : SettingsJson {
+  toJson(): SettingsJson {
     const props = this.props
     return {
       name: props.name,
@@ -66,7 +67,7 @@ export class Settings {
    *
    * @returns {string} Color including # or undefined if none
    */
-  getThemeColor() : string {
+  getThemeColor(): string {
     return this.props.topColor && '#' + this.props.topColor || undefined
   }
 
@@ -75,10 +76,42 @@ export class Settings {
    *
    * @returns {string} Absolute URL
    */
-  getLogoUrl() : string {
+  getLogoUrl(): string {
     if (this.props.logoImage) {
       return `${process.env.BASE_URL}/${this.props.logoImage}`
     }
     return undefined
   }
 }
+
+const API_URL = `${process.env.API_URL}`;
+
+export const fetchSettings = createAsyncThunk(
+  "settings/fetch",
+  async (
+    values: null,
+    { dispatch, getState }
+  ): Promise<SettingsProps | undefined> => {
+    const { data } = await axios.get<SettingsJson>(
+      `${API_URL}/settings/`,
+      values
+    );
+    return Settings.fromJson(data).props;
+  }
+);
+
+const settingsSlice = createSlice({
+  name: "Settings",
+  initialState: {} as SettingsProps,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchSettings.fulfilled, (state, action) => {
+        if (!action.payload) return;
+        state = action.payload;
+      })
+  },
+});
+
+export const {} = settingsSlice.actions;
+export default settingsSlice.reducer;

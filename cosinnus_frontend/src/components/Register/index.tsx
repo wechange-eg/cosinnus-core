@@ -31,19 +31,16 @@ import {
 
 import { FormattedMessage } from "react-intl";
 
-import { RootState } from "../../stores/rootReducer"
-import { setAuthError } from "../../stores/auth/actions"
+import { RootState } from "../../rootStore"
+
 
 import { LoginTextField } from "../Login/style"
 
 const mapStateToProps = (state: RootState) => ({
-  authError: state.auth.error,
-  settings: state.settings
+  settings: state.Settings
 })
 
-const mapDispatchToProps = {
-  setAuthError: setAuthError
-}
+const mapDispatchToProps = {}
 
 
 export function RegisterConnector() {
