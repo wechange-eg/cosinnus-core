@@ -8,7 +8,7 @@ import { ProfilePage } from "./Profile"
 import { fetchTranslations } from "../reducers/translations"
 import { fetchUser } from "../reducers/user"
 import { LoginPage } from "./Login"
-import { Register } from "./Register"
+import { RegisterPage } from "./Register"
 
 import { useAppDispatch, RootState } from "../rootStore"
 import { useSelector } from 'react-redux'
@@ -46,7 +46,7 @@ export default function App() {
       <Router>
         <Switch>
           <Route exact path="/login"><LoginPage /></Route>
-          <Route exact path="/register"><Register /></Route>
+          <Route exact path="/register"><RegisterPage /></Route>
           <ProtectedRoute {...routeProps} component={ProfilePage} />
         </Switch>
       </Router>

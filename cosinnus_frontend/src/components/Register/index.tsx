@@ -9,14 +9,8 @@ import {
   Heading,
   Button,
   VStack,
-  Divider,
-  Alert,
-  AlertIcon,
-  AlertTitle,
   FormControl,
   FormLabel,
-  Link,
-  FormHelperText,
   Center,
   Text
 } from '@chakra-ui/react'
@@ -30,20 +24,10 @@ import {
 } from "formik"
 
 import { FormattedMessage } from "react-intl";
-
-import { RootState } from "../../rootStore"
-
-
 import { LoginTextField } from "../Login/style"
 
-const mapStateToProps = (state: RootState) => ({
-  settings: state.Settings
-})
 
-const mapDispatchToProps = {}
-
-
-export function RegisterConnector() {
+export function RegisterPage() {
 
   const onSubmit = (
     values: FormikValues,
@@ -107,5 +91,3 @@ export function RegisterConnector() {
     </Container>
   )
 }
-
-export const Register = connect(mapStateToProps, mapDispatchToProps)(RegisterConnector)
