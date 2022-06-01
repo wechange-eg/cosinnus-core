@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 16:02+0200\n"
+"POT-Creation-Date: 2022-06-01 15:58+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -175,6 +175,14 @@ msgstr "%d משתמשים הושבתו בהצלחה."
 msgid "Reactivate user accounts"
 msgstr "חשבון משתמש הופעל בהצלחה"
 
+#, fuzzy, python-format
+#| msgid "%d Users' rocketchat room memberships were re-done."
+msgid "%(count)d Users' group memberships were refreshed."
+msgstr "%d חברויות של משתמשים החדרי צקאט של רוקט-צ'ט אותחלו מחדש."
+
+msgid "Refresh user group membership associations (e.g. cache or Nextcloud folder problems)"
+msgstr ""
+
 #, python-format
 msgid "%d Users were synchronized successfully."
 msgstr "משתמשי %d סונכרנו בהצלחה."
@@ -279,6 +287,15 @@ msgstr "רשימת מסומנים"
 
 msgid "Bookmarked Users list"
 msgstr "רשימת משתמשים מסומנים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Invitations"
+msgstr "הזמנות"
+
+#, fuzzy
+#| msgid "Conference"
+msgid "Conferences"
+msgstr "ועידה"
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
@@ -480,12 +497,12 @@ msgstr "%(sender_name)s הזמין אותך להצטרף ל-\"%(team_name)s\" ב
 msgid "Accept invitation"
 msgstr "אשר הזמנה"
 
-msgid "View invitation"
-msgstr "צפה בהזמנה"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s הזמין אותך"
+
+msgid "View invitation"
+msgstr "צפה בהזמנה"
 
 msgid "New link to the moved project/group"
 msgstr "קישור חדש לקבוצה/פרויקט שהועברו"
@@ -535,6 +552,32 @@ msgstr "%(sender_name)s יצר כרגע \"%(team_name)s\" ב-%(portal_name)s!"
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s יצר כרגע חשבון משתמש חדש ב-%(portal_name)s!"
+
+msgid "A conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference %(object_name)s has been updated"
+msgstr "ועידה חדשה: \"%(object_name)s\" נוצרה בצוות %(team_name)s."
+
+#, fuzzy
+#| msgid "You are about to deactivate this conference!"
+msgid "You are attending this conference"
+msgstr "אתה עומד להשבית ועידה זו!"
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr "ועידה חדשה: \"%(object_name)s\" נוצרה בצוות %(team_name)s."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The time of conference %(object_name)s has been updated"
+msgstr "ועידה חדשה: \"%(object_name)s\" נוצרה בצוות %(team_name)s."
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -800,6 +843,11 @@ msgstr "אהבתי"
 
 msgid "Persons"
 msgstr "אנשים"
+
+#, fuzzy
+#| msgid "Last name"
+msgid "last name"
+msgstr "שם משפחה"
 
 #, fuzzy
 #| msgid "My location"
@@ -1490,12 +1538,22 @@ msgstr "קבוצת הורים"
 msgid "Related Teams"
 msgstr "צוותים קשורים"
 
+#, fuzzy
+#| msgid "I am open for cooperation requests"
+msgid "Open for cooperation"
+msgstr "אני פתוח לבקשות לשיתוף פעולה"
+
 msgid "Dynamic extra fields"
 msgstr "שדות דינאמיים נוספים"
 
 #, fuzzy
 msgid "If set to true, a contact form will be displayed on the micropage."
 msgstr "אם היא פעילה, הקריאה לפעולת תיבה פעילה תוצג על גבי Microsite זה."
+
+#, fuzzy
+#| msgid "User token"
+msgid "Use invite token"
+msgstr "אסימון משתמש"
 
 msgid "Cosinnus project"
 msgstr "פרויקט קוסינוס"
@@ -2214,6 +2272,18 @@ msgstr "מחיקת פריט שדווח..."
 msgid "(The reported item has been deleted.)"
 msgstr "(הפריט המדווח נמחק.)"
 
+msgid "This user profile is scheduled for deletion at: "
+msgstr ""
+
+msgid "However, it will not be deleted, because it is still active."
+msgstr ""
+
+msgid "This user account is disabled. The user cannot log in or use the account."
+msgstr ""
+
+msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
+msgstr ""
+
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "הזן את 4 האותיות הגדולות בתמונה המטושטשת"
 
@@ -2297,6 +2367,134 @@ msgstr "ניהול מערכת"
 msgid "Select a page on the left side."
 msgstr "בחר עמוד בצד שמאל."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "סקירה כללית - ועידות, חדרים וסדנאות עם הגדרות שרת BBB מותאמות אישית"
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "סקירה כללית - כל הועידות"
+
+msgid "Overview - All Conferences"
+msgstr "סקירה כללית - כל הועידות"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "סקירה כללית- ועידות, חדרים וסדנאות"
+
+msgid "Past"
+msgstr "היו בעבר"
+
+msgid "View Upcoming"
+msgstr "צפה בתצוגה"
+
+msgid "Upcoming"
+msgstr "תצוגה"
+
+msgid "View Past"
+msgstr "צפה במה שהיה בעבר"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+msgid "Booked"
+msgstr "מסומן"
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "הוועידה בסטטוס פרימיום לצמיתות"
+
+msgid "Portal Setting"
+msgstr "הגדרת פורטל"
+
+msgid "Conference Settings"
+msgstr "הגדרות ועידה"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "פרמיום"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr "לא פרימיום"
+
+msgid "Rooms"
+msgstr "חדרים"
+
+msgid "Start"
+msgstr "התחילו"
+
+msgid "running now!"
+msgstr "מתקיים כרגע!"
+
+msgid "Conference Setting"
+msgstr "הגדרת ועידה"
+
+#, fuzzy
+#| msgid "Rooms"
+msgid "Room"
+msgstr "חדרים"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgctxt "Calendar"
+#| msgid "Event"
+msgid "Event"
+msgstr "אירוע"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "הוועידה בסטטוס פרימיום לצמיתות"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "הוועידה בסטטוס פרימיום לצמיתות"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "האם אתה בטוח שברצונך להסיר את המשתמש?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "האם אתה בטוח שברצונך להסיר את החבר „%(name)s“ מהצוות?"
+
+msgid "There are no items to show."
+msgstr "אין פריטים להצגה."
+
+msgid "BBB"
+msgstr "BBB"
+
+msgid "BBB Premium"
+msgstr "BBB פרימיום"
+
+msgid "BBB Recording API"
+msgstr ""
+
+msgid "Not set"
+msgstr "לא נקבע"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "שרת BBB לועידות פרימיום"
+
+msgid "Save"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "האם אתה בטוח שברצונך לבטל את החברות של „%(name)s“?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "מחק פרופיל"
+
 msgid "Newsletters"
 msgstr "ידיעות"
 
@@ -2343,6 +2541,16 @@ msgstr "הודעות לוח של כלים של המשתמש"
 
 msgid "User Welcome Email"
 msgstr "דוא\"ל ברכת הצטרפות"
+
+msgid "Conference Overview"
+msgstr "מבט כולל על ועידה"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "שרת BBB לועידות פרימיום"
+
+msgid "Conferences with Custom Settings"
+msgstr "ועידות עם הגדרות מותאמות אישית"
 
 msgid "Simple Statistics"
 msgstr "סטטיסטיקה פשוטה"
@@ -2402,9 +2610,6 @@ msgstr "שם פרטי"
 
 msgid "Lastname"
 msgstr "שם משפחה"
-
-msgid "Save"
-msgstr ""
 
 msgid "User Administration"
 msgstr "ניהול משתמש"
@@ -3115,7 +3320,9 @@ msgstr "סוג חדר"
 msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
 msgstr "הלובי הוא נקודת הכניסה הראשית למשתתפים. תמצאו את סדר היום של הועידה כאן."
 
-msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+#, fuzzy
+#| msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+msgid "The Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgstr "הבמה משמשת להצגת שידור, למשל מיוטיוב או Vimeo. לידו מוצג צ'אט."
 
 msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
@@ -3203,6 +3410,9 @@ msgstr "תוכלו ליצור ישירות אירועי ועידה לחדרים 
 
 msgid "There are no rooms yet."
 msgstr "אין עדיין חדרים."
+
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
@@ -3387,6 +3597,12 @@ msgstr "מסומן בכוכב"
 msgid "Length"
 msgstr ""
 
+msgid "minute"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
 #, fuzzy
 #| msgid "Delete Account"
 msgid "Delete Recording"
@@ -3400,145 +3616,6 @@ msgstr "האם את/ה בטוח שברצונך למחוק את הקובץ \"%(ti
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "מחיקת פריט שדווח..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "סקירה כללית - ועידות, חדרים וסדנאות עם הגדרות שרת BBB מותאמות אישית"
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "סקירה כללית - כל הועידות"
-
-msgid "Overview - All Conferences"
-msgstr "סקירה כללית - כל הועידות"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "ניהול משתמש"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "סקירה כללית- ועידות, חדרים וסדנאות"
-
-msgid "Past"
-msgstr "היו בעבר"
-
-msgid "View Upcoming"
-msgstr "צפה בתצוגה"
-
-msgid "Upcoming"
-msgstr "תצוגה"
-
-msgid "View Past"
-msgstr "צפה במה שהיה בעבר"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-#, fuzzy
-msgid "Booked"
-msgstr "מסומן"
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "הוועידה בסטטוס פרימיום לצמיתות"
-
-msgid "Portal Setting"
-msgstr "הגדרת פורטל"
-
-msgid "Conference Settings"
-msgstr "הגדרות ועידה"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "פרמיום"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr "לא פרימיום"
-
-msgid "Rooms"
-msgstr "חדרים"
-
-msgid "Start"
-msgstr "התחילו"
-
-msgid "running now!"
-msgstr "מתקיים כרגע!"
-
-msgid "Conference Setting"
-msgstr "הגדרת ועידה"
-
-#, fuzzy
-#| msgid "Rooms"
-msgid "Room"
-msgstr "חדרים"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgctxt "Calendar"
-#| msgid "Event"
-msgid "Event"
-msgstr "אירוע"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "הוועידה בסטטוס פרימיום לצמיתות"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "הוועידה בסטטוס פרימיום לצמיתות"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "האם אתה בטוח שברצונך להסיר את המשתמש?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "האם אתה בטוח שברצונך להסיר את החבר „%(name)s“ מהצוות?"
-
-msgid "There are no items to show."
-msgstr "אין פריטים להצגה."
-
-msgid "BBB"
-msgstr "BBB"
-
-msgid "BBB Premium"
-msgstr "BBB פרימיום"
-
-msgid "BBB Recording API"
-msgstr ""
-
-msgid "Not set"
-msgstr "לא נקבע"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "שרת BBB לועידות פרימיום"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "האם אתה בטוח שברצונך לבטל את החברות של „%(name)s“?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "מחק פרופיל"
-
-msgid "Conference Overview"
-msgstr "מבט כולל על ועידה"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "שרת BBB לועידות פרימיום"
-
-msgid "Conferences with Custom Settings"
-msgstr "ועידות עם הגדרות מותאמות אישית"
 
 msgid "Rearrange"
 msgstr "סידור מחדש"
@@ -3573,6 +3650,11 @@ msgstr "התחל כאן..."
 
 msgid "Activate Cloud"
 msgstr "הפעל ענן"
+
+#, fuzzy
+#| msgid "Members"
+msgid "Members-Map"
+msgstr "חברים"
 
 #, fuzzy
 #| msgctxt "the_app"
@@ -3678,6 +3760,18 @@ msgstr "כעת תקבל הודעות בכל פעם שתוכן ציבורי יפ�
 msgid "No Description set"
 msgstr "לא הוגדר תיאור"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created"
+msgid "Created on: "
+msgstr "נוצר"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Last sent on: "
+msgid "Last updated on: "
+msgstr "נשלח לאחרונה ב: "
+
 #, fuzzy
 #| msgid "Show more"
 msgid "more"
@@ -3754,6 +3848,10 @@ msgstr ""
 #| msgid "Dates"
 msgid "Date"
 msgstr "תאריכים"
+
+#, python-format
+msgid "Time zone: %(TIME_ZONE)s"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -3834,6 +3932,14 @@ msgstr "פרטי יצירת קשר"
 msgid "No contact data has been added yet."
 msgstr "עדיין לא נוספו נתוני איש קשר."
 
+msgid "Contact organizers"
+msgstr "צור קשר עם המארגנים"
+
+#, fuzzy
+#| msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgid "Here you can send a message to the admins."
+msgstr "בתאריך %(date)s, ביקשת לשלוח הודעה למשתמש '%(recipient)s'."
+
 msgid "Your Deactivated Content"
 msgstr "התוכן המושבת שלך"
 
@@ -3858,6 +3964,9 @@ msgstr "האם אתה בטוח שברצונך למחוק צוות זה?"
 #, python-format
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - חברים"
+
+msgid "Invite users directly via the following link: "
+msgstr ""
 
 msgid "Membership requests"
 msgstr "בקשות חברות"
@@ -4228,6 +4337,43 @@ msgid "Enable the public visibility of your group/project"
 msgstr ""
 
 #, fuzzy
+#| msgid "Delete invitation"
+msgid "Create invite token"
+msgstr "מחק הזמנה"
+
+msgid "Check this to generate an invite token which allows a user to join the "
+msgstr ""
+
+#, fuzzy
+#| msgid "Groups"
+msgid "group"
+msgstr "קבוצות"
+
+#, fuzzy
+#| msgid "Project"
+msgid "project"
+msgstr "פרויקט"
+
+#, fuzzy
+#| msgctxt "the_app"
+#| msgid "conference"
+msgid "conference"
+msgstr "שרת ועידות וידאו"
+
+msgid " directly."
+msgstr ""
+
+#, fuzzy
+#| msgid "No current offers"
+msgid "The current token is: "
+msgstr "אין הצעות נוכחיות"
+
+#, fuzzy
+#| msgid "Create content"
+msgid "Create token"
+msgstr "יצירת תוכן"
+
+#, fuzzy
 #| msgid "Send 1 day before conference"
 msgid "Include a video conference"
 msgstr "שלח יום אחד לפני הוועידה"
@@ -4288,8 +4434,17 @@ msgstr "כאן את/ה יכול/ה לשלוט האם המידע הנראה בא�
 msgid "This project shall be made publicly findable via other platforms."
 msgstr "פרויקט זה יהפוך להיות גלוי בפומבי וניתן יהיה למצוא אותו בפלטפורמות אחרות."
 
+msgid "Is your project open to other partner organizations?"
+msgstr ""
+
+msgid "Project is open for further partner organizations."
+msgstr ""
+
 msgid "Which apps should be activated?"
 msgstr "אילו אפליקציות יש להפעיל?"
+
+msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
+msgstr ""
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "אפליקציה זו זמינה רק עבור קבוצה, ולא בעבור פרויקט!"
@@ -4394,10 +4549,6 @@ msgstr "שילוב פייסבוק זמין לאחר שיצרת את הפרויי
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr "ה- HTML שהוזן כאן יוצג בלוח הכלים של הקבוצה/פרויקט (לחברים בלבד)"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Invitations"
-msgstr "הזמנות"
 
 msgid "About me"
 msgstr "כמה מילים עלי"
@@ -4528,6 +4679,32 @@ msgstr "שתף בטוויטר"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr "יעדי התפתחות ברת קיימה"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created Projects"
+msgid "Contact Project Admins"
+msgstr "פרויקטים שנוצרו"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Group Admins"
+msgstr "פרטי יצירת קשר"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Contact Conference Admins"
+msgstr "ניהול משתמש"
+
+msgid "If you want to send your message to the project chat, you have to turn directly to the project."
+msgstr ""
+
+msgid "If you want to send your message to the group chat, you have to turn directly to the group."
+msgstr ""
+
+msgid "If you want to send your message to the conference chat, you have to turn directly to the conference."
+msgstr ""
 
 #, fuzzy
 msgid "Email the group administrators"
@@ -5816,6 +5993,11 @@ msgid "CSV Downloads"
 msgstr "הורדות CSV"
 
 #, fuzzy
+#| msgid "Portal Setting"
+msgid "Portal switches and settings"
+msgstr "הגדרת פורטל"
+
+#, fuzzy
 msgid "HD space used by conferences"
 msgstr "שטח HD המשמש פרוייקטים"
 
@@ -5837,8 +6019,8 @@ msgstr "דוא\"ל של כל מנויי הניוזלטר"
 msgid "E-Mails of ALL active users"
 msgstr "דוא\"ל של כל המשתמשים הפעילים"
 
-msgid "Ok"
-msgstr "אישור"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr "ה-WE-Cloud כאן!"
@@ -5962,6 +6144,24 @@ msgstr "איפוס מסננים"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+#| msgid "Show detailed steps"
+msgid "Show potential partners"
+msgstr "הצג שלבים מפורטים"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Here you can search for partner organisations and projects that are open for further partners. The results are sorted so that partners with a lot of overlap in the funding objectives, eligible areas and SDGs you are active on are listed first."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners for ..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You're currently not member of any project, group or organization."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 #| msgid "Stream"
 msgid "Street"
 msgstr "שידור"
@@ -5997,6 +6197,10 @@ msgstr "חיפוש בעת הזזת המפה"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search this area"
 msgstr "חפש באזור זה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Find partners"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Membership Requests"
@@ -6174,10 +6378,6 @@ msgid "Participate"
 msgstr "השתתף"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Contact organizers"
-msgstr "צור קשר עם המארגנים"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications for content posted."
 msgstr "כעת תקבל התראות על תוכן שפורסם."
 
@@ -6247,16 +6447,16 @@ msgid "Hidden User"
 msgstr "משתמש מוסתר"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "This group is open for further partner organizations."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are a Member"
 msgstr "אתה חבר"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Join Group"
 msgstr "הצטרף לקבוצה"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Message Group"
-msgstr "שלח הודעה לקבוצה"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Author"
@@ -6277,6 +6477,10 @@ msgstr "תתקבל התראה כאשר פרויקט נוצר מרעיון שאה
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"
 msgstr "פרויקטים שנוצרו מרעיון זה"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This organization is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are a Admin"
@@ -6308,12 +6512,12 @@ msgid "To Profile"
 msgstr "הפרופיל שלך"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Join Project"
-msgstr "הצטרף לפרוייקט"
+msgid "This project is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Message Project"
-msgstr "שלח/י הודעה לפרויקט"
+msgid "Join Project"
+msgstr "הצטרף לפרוייקט"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Move up"
@@ -7476,11 +7680,6 @@ msgstr "מצטערים, רק מנהלי מערכת פורטל יכולים לה�
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "רק חברי קבוצה יכולים לראות את התוכן שביקשת. הגש בקשה להיות חבר עכשיו!"
 
-#, fuzzy
-#| msgid "Conference"
-msgid "Conferences"
-msgstr "ועידה"
-
 msgid "My Conferences"
 msgstr "שיחות הועידה שלי"
 
@@ -7634,6 +7833,9 @@ msgstr "נא ספק גם תאריך התחלה"
 msgid "Please also provide an end date"
 msgstr "נא ספק גם תאריך התחלה"
 
+msgid "Ensure that your name does not contain any invalid characters."
+msgstr ""
+
 msgid "Test email sent!"
 msgstr "בדיקת אימות נשלחה לדוא\"ל!"
 
@@ -7670,6 +7872,14 @@ msgstr ""
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "השפה \"%s\" אינה נתמכת"
+
+#, fuzzy
+#| msgid "Test email sent!"
+msgid "New verification email sent!"
+msgstr "בדיקת אימות נשלחה לדוא\"ל!"
+
+msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
 
 #, fuzzy
 msgid "Successfully made conference permanent premium"
@@ -8197,6 +8407,15 @@ msgstr "קבצי ענן"
 msgid "Linked Cloud Files"
 msgstr "קבצי ענן"
 
+msgid "Cloud Stub"
+msgstr "ספח ענן"
+
+msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
+msgstr ""
+
+msgid "There are no cloud files yet"
+msgstr "אין עדיין קבצי ענן"
+
 msgid "Restart"
 msgstr "הפעל מחדש"
 
@@ -8212,6 +8431,12 @@ msgstr ""
 msgctxt "the_app"
 msgid "conference"
 msgstr "שרת ועידות וידאו"
+
+msgid "Error message:"
+msgstr ""
+
+msgid "No error message supplied."
+msgstr ""
 
 msgid "Go to conference"
 msgstr "עבור לוועידה"
@@ -8420,8 +8645,94 @@ msgstr "הלוחות החדשים ביותר"
 msgid "Pad Type"
 msgstr "סוג הפנקס"
 
+msgid "Pad"
+msgstr "פנקס"
+
+msgid "This pad can no longer be edited because its creator has deleted their account."
+msgstr "אין עוד אפשרות לערוך פנקס זה מאחר שיוצרו מחק את החשבון שלו."
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(pad)s“?"
+msgstr "האם אתם בטוחים שברצונכם למחוק את הפנקס „%(pad)s“?"
+
+msgid "Delete Etherpad"
+msgstr "מחק את הפנקס"
+
 msgid "The document can not be accessed because the etherpad server could not be reached. Please contact an administrator!"
 msgstr "אין אפשרות לגשת למסמך מאחר שלא היתה אפשרות להגיע לשרת Etherpad. נא פנה למנהל מערכת!"
+
+msgid "This document is empty"
+msgstr "מסמך זה ריק"
+
+msgid "Pads"
+msgstr "פנקסים"
+
+msgid "Enter a title for the Pad."
+msgstr "הזן כותרת עבור לוח זה."
+
+msgid "Enter the title for a new Document or Table."
+msgstr "הזן את הכותרת עבור מסמך או טבלה חדשים."
+
+msgid "Enter the title for a new Document."
+msgstr "הזן את הכותרת עבור מסמך חדש."
+
+msgid "Create Etherpad"
+msgstr "יצירת פנקס Etherpad חדש"
+
+msgid "Create Ethercalc"
+msgstr "יצירת לוח Ethercalc חדש"
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(title)s“?"
+msgstr "האם אתם בטוחים שברצונכם למחוק את הפנקס  „%(title)s“?"
+
+msgid "No etherpads have been created yet."
+msgstr "טרם נוצרו פנקסי Etherpads."
+
+msgid "Download CSV"
+msgstr "הורד CSV"
+
+msgid "Download Excel"
+msgstr "הורדת קובץ אקסל"
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"היי, %(receiver_name)s,\n"
+"\n"
+"פנקס Etherpad (עורך רשת שיתופי) בשם \"%(object_name)s\" נוצר בצוות %(team_name)s על ידי %(sender_name)s. \n"
+"\n"
+"\n"
+"לחצו על קישור זה על מנת לעבור לפנקס: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(עקבו אחר קישור זה על מנת לערוך את העדפות ההתראה שלכם: %(notification_settings_url)s )\n"
+"\n"
+"\n"
+"שלכם, \n"
+"צוות %(site_name)s."
+
+msgid "You created a pad"
+msgstr "יצרת פנקס עריכה שיתופית"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a Pad"
+msgstr "יצר/ה פנקס חדש"
+
+msgid "There are no etherpads yet"
+msgstr "טרם נוצרו פנקסי עריכה שיתופית Etherpads"
 
 #, python-format
 msgid "Etherpad \"%(title)s\" was edited successfully."
@@ -8873,1957 +9184,6 @@ msgstr "אירועי ועידה"
 msgid "%(event)s %(type)s"
 msgstr "%(event)s %(type)s"
 
-#, python-format
-msgid "Event \"%(title)s\" was edited successfully."
-msgstr "האירוע \"%(title)s\" נערך בהצלחה."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be edited."
-msgstr "לא הייתה אפשרות לערוך את האירוע \"%(title)s\"."
-
-msgid "Please use the conference management area to add new workshops!"
-msgstr "אנא השתמשו באזור ניהול הועידות להוספת סדנאות חדשות!"
-
-msgid "The page you requested is not available for this event at this time."
-msgstr "הדף שביקשת אינו זמין עבור אירוע זה כעת."
-
-msgid "One of the event suggestions times could not be understood!"
-msgstr "אחת מהצעות התזמון לאירוע לא מובנת!"
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was edited successfully."
-msgstr "האירוע הלא מתוזמן \"%(title)s\" נערך בהצלחה."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be edited."
-msgstr "לא היתה אפשרות לערוך את האירוע הלא מתוזמן \"%(title)s\"."
-
-#, python-format
-msgid "Event \"%(title)s\" was added successfully."
-msgstr "האירוע \"%(title)s\" נוסף בהצלחה."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be added."
-msgstr "לא היתה אפשרות להוסיף את האירוע \"%(title)s\"."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was added successfully."
-msgstr "האירוע הלא מתוזמן \"%(title)s\" נוסף בהצלחה."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be added."
-msgstr "לא היתה אפשרות להוסיף את האירוע הלא מתוזמן \"%(title)s\"."
-
-msgid "You should define at least one date suggestion."
-msgstr "עליך להגדיר לפחות הצעת תאריך אחת."
-
-#, python-format
-msgid "Event \"%(title)s\" was deleted successfully."
-msgstr "האירוע \"%(title)s\" נמחק בהצלחה."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be deleted."
-msgstr "לא הייתה אפשרות למחוק את האירוע \"%(title)s\"."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was deleted successfully."
-msgstr "האירוע הלא מתוזמן \"%(title)s\" נמחק בהצלחה."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be deleted."
-msgstr "לא הייתה אפשרות למחוק את האירוע הלא מתוזמן \"%(title)s\"."
-
-#, fuzzy
-#| msgid "Your data was saved successfully!"
-msgid "Your votes were saved successfully."
-msgstr "הנתונים שלך נשמרו בהצלחה!"
-
-#, fuzzy
-#| msgid "Poll \"%(title)s\" could not be added."
-msgid "Your votes could not be saved."
-msgstr "לא ניתן להוסיף את הסקר \"%(title)s\"."
-
-msgid "This is event is already scheduled. You cannot vote for it any more."
-msgstr "אירוע זה כבר מתוזמן. אינך יכול/ה להצביע בסקר יותר."
-
-msgid "The complete request can only be sent via POST!"
-msgstr "ניתן לשלוח את הבקשה המלאה רק באמצעות POST!"
-
-msgid "Event cannot be completed: No date was supplied."
-msgstr "אין אפשרות להוסיף אירוע חדש: לא סופק תאריך."
-
-msgid "The event was created successfully at the specified date."
-msgstr "האירוע נוצר בהצלחה בתאריך שצויין."
-
-msgid "Upcoming events"
-msgstr "אירועים קרובים"
-
-#, fuzzy
-msgid "Upcoming event"
-msgstr "אירועים קרובים"
-
-msgid "Your comment was added successfully."
-msgstr "תגובתך נוספה בהצלחה."
-
-msgid "Your comment was deleted successfully."
-msgstr "תגובתך נמחקה בהצלחה."
-
-msgid "Exchange"
-msgstr ""
-
-msgctxt "the_app"
-msgid "exchange"
-msgstr ""
-
-msgctxt "the_app"
-msgid "file"
-msgstr "קבצים"
-
-msgid "A user uploaded a new file"
-msgstr "משתמש העלה קובץ חדש"
-
-#, python-format
-msgid "%(sender_name)s uploaded the file %(object_name)s"
-msgstr "%(sender_name)s העלו את הקובץ %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s uploaded %(count)d files"
-msgstr "%(sender_name)s העלו %(count)d קבצים"
-
-#, python-format
-msgid "%(sender_name)s created a new file"
-msgstr "%(sender_name)s יצר/ה קובץ חדש"
-
-#, python-format
-msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "קובץ חדש: \"%(object_name)s\" נוצר ב-%(team_name)s."
-
-msgid "A user uploaded a new file in a team you are following"
-msgstr "משתמש העלה קובץ חדש בצוות שאתם עוקבים"
-
-#, python-format
-msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s יצרו קובץ חדש ב-%(team_name)s שאתם עוקבים"
-
-#, python-format
-msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "קובץ חדש: \"%(object_name)s\" נוצר ב-%(team_name)s שאתם עוקבים."
-
-msgid "Latest Files"
-msgstr "הקבצים האחרונים"
-
-msgid "No files"
-msgstr "אין קבצים"
-
-msgid "Pictures"
-msgstr "תמונות"
-
-msgid "Documents"
-msgstr "מסמכים"
-
-msgid "Audio Files"
-msgstr "קבצי שמע"
-
-msgid "Videos"
-msgstr "וידיאו"
-
-msgid "File Type"
-msgstr "סוג קובץ"
-
-msgid "File Name"
-msgstr "שם קובץ"
-
-msgid "File Name (descending)"
-msgstr "שם קובץ (יורד)"
-
-msgid "Smallest Files"
-msgstr "הקבצים הקטנים ביותר"
-
-msgid "Largest Files"
-msgstr "הקבצים הגדולים ביותר"
-
-msgid "The given URL does not seem to be valid."
-msgstr "נראה שכתובת ה- URL הנתונה אינה חוקית."
-
-msgid "Must supply either a URL or File"
-msgstr "יש לספק כתובת URL או קובץ"
-
-msgid "Is URL Link"
-msgstr "קישור URL"
-
-msgid "Uploaded by"
-msgstr "הועלה על-ידי"
-
-msgid "Uploaded on"
-msgstr "הועלה ב"
-
-msgid "No files selected."
-msgstr "לא נבחרו קבצים."
-
-msgctxt "special_folder_type"
-msgid "Attachments"
-msgstr "קבצים מצורפים"
-
-msgid "File does not exist or you are not allowed to delete it."
-msgstr "הקובץ אינו קיים או שאינך מורשה למחוק אותו."
-
-#, python-format
-msgid "A problem occurred during export. The following file is missing: %(filename)s."
-msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
-msgstr[0] "אירעה שגיאה במהלך הייצוא. הקובץ הבא חסר: %(filename)s."
-msgstr[1] "אירעה שגיאה במהלך הייצוא. הקבצים הבאים חסרים: %(filename)s."
-
-msgid "Invalid request."
-msgstr "בקשה לא תקינה."
-
-#, python-format
-msgid "File \"%(title)s\" was updated successfully."
-msgstr "הקובץ \"%(title)s\" עודכן בהצלחה."
-
-#, python-format
-msgid "File \"%(title)s\" could not be updated."
-msgstr "לא ניתן להשלים את העדכון של הקובץ \"%(title)s."
-
-msgid "Downloading failed, the target object was not a folder!"
-msgstr "ההורדה נכשלה, אובייקט היעד לא היה תיקייה!"
-
-msgid "Canceled the download because there seem to be no files in this folder."
-msgstr "אין קבצים בתיקייה זו, ההורדה בוטלה."
-
-msgid "Internal Error: Group not Found"
-msgstr "שגיאה פנימית: הקבוצה לא נמצאה"
-
-msgid "Permission for upload denied"
-msgstr "ההרשאה להעלאה נדחתה"
-
-msgid "The uploaded file was invalid."
-msgstr "הקובץ שהועלה לא היה חוקי."
-
-#, python-format
-msgid "%(count)d File was added successfully."
-msgid_plural "%(count)d Files were added successfully."
-msgstr[0] "%(count)d קובץ נוסף בהצלחה."
-msgstr[1] "%(count)d נוספו בהצלחה."
-
-msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
-msgstr "הקובץ שהעלית היה גדול מדי או שסוג הקובץ לא הורשה לעלות!"
-
-msgctxt "the_app"
-msgid "marketplace"
-msgstr "זירת המסחר"
-
-msgid "A user created a new offer"
-msgstr "משתמש יצר/ה הצעה חדשה"
-
-#, python-format
-msgid "%(sender_name)s created the offer %(object_name)s"
-msgstr "%(sender_name)s יצר/ה את ההצעה %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d offers"
-msgstr "%(sender_name)s יצר/ה %(count)d events"
-
-#, python-format
-msgid "%(sender_name)s created a new offer"
-msgstr "%(sender_name)s יצר/ה קובץ חדש"
-
-#, python-format
-msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "הצעה חדשה: \"%(object_name)s\" נוצרה ב-%(team_name)s."
-
-msgid "One of your offers expired"
-msgstr "פג תוקפה של אחת ההצעות שלך"
-
-#, python-format
-msgid "Your offer %(object_name)s expired"
-msgstr "פג תוקפה של ההצעה %(object_name)s"
-
-#, python-format
-msgid "%(count)d of your offers expired"
-msgstr "פג תוקפן של %(count)d מהצעותיך"
-
-msgid "Your offer has expired"
-msgstr "פג תוקפה של ההצעה שלך"
-
-#, python-format
-msgid "Offer \"%(object_name)s\" has expired."
-msgstr "פג תוקפה של ההצעה \"%(object_name)s\"."
-
-msgid "A user commented on one of your offers"
-msgstr "משתמש הגיב על אחת מההצעות שלך"
-
-#, python-format
-msgid "%(sender_name)s commented on your offer %(object_name)s"
-msgstr "%(sender_name)s הגיב/ה על אחת מההצעות שלך %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
-msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר הגיבו על ההצעה שלך %(object_name)s"
-msgstr[1] "%(sender_name)s ו-%(count_minus_one)d הגיבו על הצעה שלך %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your offer"
-msgstr "%(sender_name)s הגיב/ה על הצעה שלך"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your offers"
-msgstr "%(sender_name)s הגיב/ה על אחד מהפוסטים שלך"
-
-msgid "A user commented on an offer you were tagged in"
-msgstr "משתמש הגיב על הצעה שתויגת בה"
-
-#, python-format
-msgid "%(sender_name)s commented on the offer %(object_name)s"
-msgstr "%(sender_name)s הגיב/ה על אחת מההצעות שלך %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
-msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר הגיבו על ההצעה %(object_name)s"
-msgstr[1] "%(sender_name)s ו-(%(count_minus_one)d אחרים הגיבו על ההצעה %(object_name)s"
-
-msgid "You were tagged in this offer"
-msgstr "תויגת בהצעה זו"
-
-#, python-format
-msgid "%(sender_name)s commented on an offer you were tagged in"
-msgstr "%(sender_name)s הגיב/ה על הצעה שתויגת בה"
-
-#, python-format
-msgid "%(sender_name)s commented on an offer you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s הגיב/ה על אירוע שתויגתם בו ב-%(team_name)s"
-
-msgid "A user created a new offer in a team you are following"
-msgstr "משתמש יצר הצעה חדשה בצוות שאתם עוקבים אחריו"
-
-#, python-format
-msgid "%(sender_name)s created a new offer in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s יצר/ה הצעה חדשה ב-%(team_name)s (שאתם עוקבים אחריו)"
-
-#, python-format
-msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "הצעה חדשה: \"%(object_name)s\" נוצרה ב-%(team_name)s (שאתם עוקבים אחריו)"
-
-msgid "A user updated an offer you are following"
-msgstr "משתמש עדכן הצעה שאת/ה עוקב אחריה"
-
-#, python-format
-msgid "%(sender_name)s updated the offer %(object_name)s"
-msgstr "%(sender_name)s עדכן/ה את ההצעה %(object_name)s"
-
-msgid "You are following this offer"
-msgstr "אתם עוקבים אחר הצעה זו"
-
-#, python-format
-msgid "%(sender_name)s updated an offer you are following"
-msgstr "%(sender_name)s עדכן/ה הצעה שאתם עוקבים אחריה"
-
-#, python-format
-msgid "An offer you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "ההצעה שאתם עוקבים אחריה: \"%(object_name)s\" עודכנה ב-%(team_name)s."
-
-msgid "A user commented on an offer you are following"
-msgstr "משתמש הגיב/ה על הצעה שאתם עוקבים אחריה"
-
-#, python-format
-msgid "%(sender_name)s commented on on an offer you are following"
-msgstr "%(sender_name)s הגיב/ה על הצעה שאתם עוקבים אחריה"
-
-msgid "Current Offers"
-msgstr "הצעות נוכחיות"
-
-msgid "No current offers"
-msgstr "אין הצעות נוכחיות"
-
-msgid "Order Key"
-msgstr "מפתח סדר"
-
-msgid "Looking for"
-msgstr "מחפש/ת"
-
-msgid "Offering"
-msgstr "מציע/ה"
-
-msgid "Offer currently active?"
-msgstr "ההצעה פעילה כעת?"
-
-msgid "Offer Category"
-msgstr "קטגוריית הצעה"
-
-#, python-format
-msgid "Offer: %(offer)s (%(type)s)"
-msgstr "הצעה: (%(type)s) %(offer)s"
-
-#, python-format
-msgid "Offer \"%(title)s\" was edited successfully."
-msgstr "ההצעה \"%(title)s\" נערכה בהצלחה."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be edited."
-msgstr "לא היתה אפשרות לערוך את ההצעה \"%(title)s\"."
-
-#, python-format
-msgid "Offer \"%(title)s\" was added successfully."
-msgstr "ההצעה \"%(title)s\" נוספה בהצלחה."
-
-#, python-format
-msgid "Offer \"%(title)s\" was saved successfully, but is not active yet."
-msgstr "ההצעה \"%(title)s\" נשמרה בהצלחה, אך עדיין אינה פעילה."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be added."
-msgstr "לא היתה אפשרות להוסיף את ההצעה \"%(title)s\"."
-
-#, python-format
-msgid "Offer \"%(title)s\" was deleted successfully."
-msgstr "ההצעה \"%(title)s\" נמחקה בהצלחה."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be deleted."
-msgstr "לא היתה אפשרות למחוק את ההצעה \"%(title)s\"."
-
-msgid "The offer you requested is no longer active. Sorry!"
-msgstr "ההצעה שביקשת אינה פעילה עוד. מצטערים!"
-
-msgid "Invalid action for this offer. The request could not be completed!"
-msgstr "פעולה לא חוקית עבור הצעה זו. לא היתה דרך להשלים את הבקשה!"
-
-msgid "The offer is already active"
-msgstr "הצעה זו כבר פעילה"
-
-msgid "The offer is already deactivated"
-msgstr "הצעה זו כבר בהשהיה"
-
-msgid "The offer was deactivated successfully."
-msgstr "ההצעה הושהתה בהצלחה."
-
-msgid "The offer was reactivated successfully."
-msgstr "ההצעה הופעלה מחדש בהצלחה."
-
-msgid "The offer was activated successfully."
-msgstr "ההצעה הופעלה בהצלחה."
-
-msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
-msgstr ""
-
-msgctxt "the_app"
-msgid "Chat"
-msgstr ""
-
-msgctxt "the_app"
-msgid "message"
-msgstr "הודעה"
-
-msgid "Chat"
-msgstr ""
-
-msgid "Only Administrators may send a message to this project/group!"
-msgstr "רק מנהלי מערכת רשאים לשלוח הודעה לפרוייקט/קבוצה זו!"
-
-msgid "Additional Recipients"
-msgstr "נמענים נוספים"
-
-msgid "Undefined recipient."
-msgstr "נמען לא מוגדר."
-
-msgid "Your reply could not be matched to an existing message."
-msgstr "לא היתה דרך להתאים את תשובתך להודעה קיימת."
-
-msgid "An internal error occured."
-msgstr "אירעה שגיאה פנימית."
-
-msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
-msgstr "כתובת הדואר האלקטרוני ממנה שלחתם את התשובה אינה זו המשויכת לחשבון המשתמש שלכם. אנא שלחו תגובות ישירות רק מכתובת הדוא\"ל איתה נרשמתם באתר!"
-
-msgid "There was an error when processing your message text!"
-msgstr "אירעה שגיאה בעת עיבוד טקסט ההודעה שלך!"
-
-msgid "Your direct reply failed!"
-msgstr "תשובתך הישירה נכשלה!"
-
-msgid "Select at least one object."
-msgstr "בחרו אובייקט אחד לפחות."
-
-msgid "Messages or conversations successfully archived."
-msgstr "הודעות או שיחות אוחסנו בארכיון בהצלחה."
-
-msgid "Messages or conversations successfully deleted."
-msgstr "הודעות או שיחות נמחקו בהצלחה."
-
-msgid "Messages were marked as read."
-msgstr "ההודעות סומנו כנקראו."
-
-msgid "Messages or conversations successfully recovered."
-msgstr "הודעות או שיחות אוחזרו בהצלחה."
-
-msgid "Notes"
-msgstr "פתקים"
-
-msgctxt "the_app"
-msgid "note"
-msgstr "פתק"
-
-msgid "A user commented on a news post"
-msgstr "משתמש הגיב על פוסט"
-
-#, python-format
-msgid "%(sender_name)s commented on a news post"
-msgstr "%(sender_name)s הגיב/ה על פוסט"
-
-msgid "A user commented on one of your news posts"
-msgstr "משתמש הגיב על אחד הפרסומים שלך"
-
-#, python-format
-msgid "%(sender_name)s commented on your news post %(object_name)s"
-msgstr "%(sender_name)s הגיב/ה על פרסום שלך %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
-msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר הגיבו על הפוסט שלך %(object_name)s"
-msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים הגיבו על הפוסט שלך %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your news post"
-msgstr "%(sender_name)s הגיב/ה על פוסט שלך"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your news posts"
-msgstr "%(sender_name)s הגיב/ה על אחד מהפוסטים שלך"
-
-msgid "A user commented on a news posts you commented in"
-msgstr "משתמש הגיב על פוסט שהגבת עליו"
-
-#, python-format
-msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
-msgstr "%(sender_name)s הגיב/ה על הפוסט %(object_name)s שהגבת עליו"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
-msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר הגיבו על הפוסט  %(object_name)s שהגבת בו"
-msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים הגיבו על הפוסט %(object_name)s שהגבת בו"
-
-#, python-format
-msgid "%(sender_name)s commented on a news post you commented in"
-msgstr "%(sender_name)s הגיב/ה על פוסט שהגבת עליו"
-
-msgid "A user created a news post"
-msgstr "משתמש העלה פוסט חדש"
-
-#, python-format
-msgid "%(sender_name)s created the news post %(object_name)s"
-msgstr "%(sender_name)s העלת/ה את הפוסט %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d news posts"
-msgstr "%(sender_name)s יצר/ה %(count)d פוסטים"
-
-#, python-format
-msgid "%(sender_name)s created a new news post"
-msgstr "%(sender_name)s יצר/ה פוסט חדש"
-
-#, python-format
-msgid "%(sender_name)s posted in %(team_name)s:"
-msgstr "%(sender_name)s פרסמ/ה פוסט ב- %(team_name)s:"
-
-msgid "A user created a news post in a team you are following"
-msgstr "משתמש יצר פוסט חדש בצוות שאתה עוקב אחריו"
-
-#, python-format
-msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s יצר/ה פוסט חדש ב-%(team_name)s (שאתם עוקבים)"
-
-#, python-format
-msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
-msgstr "%(sender_name)s פרסמ/ה ב-%(team_name)s: (שאתם עוקבים)"
-
-msgid "A user updated a news post"
-msgstr "משתמש עדכן פוסט"
-
-#, python-format
-msgid "%(sender_name)s updated the news post %(object_name)s"
-msgstr "%(sender_name)s עדכן/ה את הפוסט %(object_name)s"
-
-msgid "You are following this news post"
-msgstr "אתם עוקבים אחר פוסט זה"
-
-#, python-format
-msgid "%(sender_name)s updated a news post you are following"
-msgstr "%(sender_name)s עדכן/ה פוסט שאתם עוקבים"
-
-#, python-format
-msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
-msgstr "פוסט שנוצר על ידי %(sender_name)s (שאתם עוקבים) עודכן ב-%(team_name)s:"
-
-msgid "A user commented on a news post you are following"
-msgstr "משתמש הגיב על פוסט שאתם עוקבים"
-
-#, python-format
-msgid "%(sender_name)s commented on the news post %(object_name)s"
-msgstr "%(sender_name)s הגיב/ה על הפוסט %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
-msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר הגיבו על הפוסט %(object_name)s"
-msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים הגיבו על הפוסט %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on a news posts you are following"
-msgstr "%(sender_name)s הגיב/ה על פוסט שאתם עוקבים"
-
-msgid "No news"
-msgstr "אין חדשות"
-
-msgid "Write a news post"
-msgstr "כתיבת פוסט חדש"
-
-msgid "News stream"
-msgstr "ניוז סטרים"
-
-msgid "Popularity"
-msgstr "פופולריות"
-
-msgid "Facebook Share"
-msgstr "שתף בפייסבוק"
-
-msgid "Note Item"
-msgstr "פריט פתקים"
-
-msgid "Note Items"
-msgstr "פריטי פתקים"
-
-msgid "Your news post was added successfully."
-msgstr "הפרסום שלך הועלה בהצלחה."
-
-msgid "Your news post was deleted successfully."
-msgstr "הפרסום שלך נמחק בהצלחה."
-
-msgid "Your news post was edited successfully."
-msgstr "הפרסום שלך נערך בהצלחה."
-
-msgid "You are seeing this alert because you created this content."
-msgstr "אתם רואים התראה זו מכיוון שיצרתם תוכן זה."
-
-msgid "You are seeing this alert because you are following the item's project or group."
-msgstr "אתם רואים התראה זו מכיוון שאתם עוקבים אחר הפרויקט או הקבוצה של הפריט."
-
-msgid "You are seeing this alert because you are following this item."
-msgstr "אתם רואים התראה זו מכיוון שאתם עוקבים אחר פריט זה."
-
-msgctxt "the_app"
-msgid "notifications"
-msgstr "התראות"
-
-#, python-format
-msgid "Your daily digest for %(portal_name)s"
-msgstr "התמצית היומית שלך עבור %(portal_name)s"
-
-msgid "This is what happened during the last day!"
-msgstr "זה מה שקרה במהלך היום האחרון!"
-
-#, python-format
-msgid "Your weekly digest for %(portal_name)s"
-msgstr "התמצית השבועית שלך עבור %(portal_name)s"
-
-msgid "This is what happened during the last week!"
-msgstr "זה מה שקרה בשבוע האחרון!"
-
-msgctxt "notification frequency"
-msgid "Never"
-msgstr "אף פעם"
-
-msgctxt "notification frequency"
-msgid "Immediately"
-msgstr "מיידית"
-
-msgctxt "notification frequency"
-msgid "Daily"
-msgstr "יומית"
-
-msgctxt "notification frequency"
-msgid "Weekly"
-msgstr "שבועית"
-
-msgid "Notification Preference for User"
-msgstr "העדפות התראה למשתמש"
-
-msgid "Notification Preference"
-msgstr "העדפת התראה"
-
-msgid "Multi Notification ID"
-msgstr "פרטי זיהוי התראות מרובות"
-
-msgid "Multi Notification Preference"
-msgstr "העדפות התראה מרובות"
-
-msgid "Multi Notification Preferences"
-msgstr "העדפות התראה מרובות"
-
-msgid "User who caused this notification event"
-msgstr "משתמש שגרם לאירוע התראות זה"
-
-msgid "Audience"
-msgstr "קהל יעד"
-
-msgid "Owner of the alert"
-msgstr "בעל ההתראה"
-
-msgid "Alert Reason key"
-msgstr "מפתח 'סיבה להתראה'"
-
-msgid "Last user who caused this notification event"
-msgstr "משתמש אחרון שגרם לאירוע התראות זה"
-
-msgid "Alert State"
-msgstr "מצב התראה"
-
-msgid "You are following this content or its Project or Group"
-msgstr "אתם עוקבים אחר תוכן זה או הפרויקט או הקבוצה שלו"
-
-msgid "All notifications"
-msgstr "כל ההתראות"
-
-msgid "No notifications"
-msgstr "אין התראות"
-
-msgid "For content that I am following, I wish to receive notification emails"
-msgstr "עבור תוכן שאני עוקב/ת, ברצוני לקבל הודעות דוא\"ל"
-
-msgid "You are getting this notification because you are subscribed to these kinds of events in your project or group."
-msgstr "אתם מקבלים התראה זו מכיוון שאתם מנויים לאירועים מסוג זה בפרויקט/קבוצה שלכם."
-
-msgid "You are getting this notification because you are an administrator of this project or group."
-msgstr "אתם מקבלים התראה זו מכיוון שאתם מנהלי מערכת של פרויקט או קבוצה זו."
-
-msgid "You are getting this notification because you are an administrator of this portal."
-msgstr "אתם מקבלים התראה זו מכיוון שאתם מנהלי מערכת של פורטל זה."
-
-msgid "You are getting this email because you are subscribed to one or more daily notifications."
-msgstr "אתם מקבלים את הדוא\"ל מכיוון שאתם מנויים להתראה יומית אחת או יותר."
-
-msgid "You are getting this email because you are subscribed to one or more weekly notifications."
-msgstr "אתם מקבלים דוא\"ל זו מכיוון שאתם מנויים להתראה שבועית אחת או יותר."
-
-msgid "New item"
-msgstr "פריט חדש"
-
-#, python-format
-msgid "View on %(portal_name)s"
-msgstr "הצג על %(portal_name)s"
-
-msgid "Untitled"
-msgstr "ללא כותרת"
-
-msgid "Your notification preferences were updated successfully."
-msgstr "העדפות ההתראה שלך עודכנו בהצלחה."
-
-msgid "Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!"
-msgstr ""
-
-msgid "Your notifications preferences were reset to default!"
-msgstr "העדפות ההתראה שלך אותחלו לברירת מחדל!"
-
-msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
-msgstr ""
-
-#, fuzzy
-#| msgid "Successfully deactivated user account"
-msgid "Successfully signed in as {}."
-msgstr "חשבון משתמש הושבת בהצלחה"
-
-#, fuzzy
-#| msgid "Successfully deactivated user account"
-msgid "Successfully connected account."
-msgstr "חשבון משתמש הושבת בהצלחה"
-
-#, fuzzy
-#| msgid "Successfully removed user"
-msgid "Successfully removed connection."
-msgstr "משתמש הוסר בהצלחה"
-
-#, fuzzy
-#| msgid "Organization"
-msgctxt "the_app"
-msgid "organization"
-msgstr "ארגון"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization membership"
-msgstr "ארגונים"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization memberships"
-msgstr "ארגונים"
-
-#, fuzzy
-#| msgid "Team Invite for Unregistered User"
-msgid "Organization Invite for Unregistered User"
-msgstr "הזמנת צוות עבור משתמש לא רשום"
-
-#, fuzzy
-#| msgid "Team Invites for Unregistered Users"
-msgid "Organization Invites for Unregistered Users"
-msgstr "הזמנות צוות עבור משתמשים לא רשומים"
-
-#, fuzzy
-#| msgid "Assigned organizations"
-msgid "Civil society organization"
-msgstr "ארגונים שהוקצו"
-
-msgid "Company (commercial)"
-msgstr ""
-
-#, fuzzy
-#| msgid "Public voting"
-msgid "Public institution"
-msgstr "הצבעה ציבורית"
-
-#, fuzzy
-#| msgid "Other teams"
-msgid "Other"
-msgstr "צוותים אחרים"
-
-#, fuzzy
-#| msgid "Remove organization"
-msgid "Name of the organization"
-msgstr "הסר ארגון"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Organization type"
-msgstr "ארגון"
-
-#, fuzzy
-#| msgid "Logout"
-msgid "Logo"
-msgstr "התנתק"
-
-#, fuzzy
-#| msgid "Email address"
-msgid "Email Address"
-msgstr "כתובת דוא\"ל"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Cosinnus Organization"
-msgstr "ארגון"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Cosinnus Organizations"
-msgstr "ארגונים"
-
-msgid "CosinnusOrganizationSocialMedia"
-msgstr ""
-
-#, fuzzy
-#| msgid "CosinnusLocation"
-msgid "CosinnusOrganizationLocation"
-msgstr "מיקום קוסינוס"
-
-#, fuzzy
-#| msgid "CosinnusLocations"
-msgid "CosinnusOrganizationLocations"
-msgstr "מיקומי קוסינוס"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Organization group"
-msgstr "ארגון"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization groups"
-msgstr "ארגונים"
-
-#, fuzzy, python-format
-#| msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
-msgid "Project/group %(name)s had already requested and has now been accepted."
-msgstr "פרוקיט/קבוצה %(group)s כבר הוזמנו ובעת הוקצו באופן מיידי!"
-
-#, fuzzy, python-format
-#| msgid "User %(username)s was successfully invited!"
-msgid "Project/group %(name)s was successfully invited."
-msgstr "המשתמש %(username)s הוזמן בהצלחה!"
-
-#, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
-msgid "Your join request was withdrawn from organization “%(name)s” successfully."
-msgstr "בקשת ההצטרפות שלך ל-%(team_type)s  “%(team_name)s” בוטלה בהצלחה."
-
-#, fuzzy, python-format
-#| msgid "You have declined the invitation to %(team_type)s “%(team_name)s”."
-msgid "You have declined the invitation to organization “%(name)s”."
-msgstr "דחית את ההזזמנה ל-%(team_type)s “%(team_name)s”."
-
-#, fuzzy, python-format
-#| msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
-msgid "Your project/group is now assigned to the organization “%(name)s”. Welcome!"
-msgstr "כעת אתה חבר ב-%(team_type)s “%(team_name)s”. ברוך הבא!"
-
-#, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
-msgid "Your request was withdrawn from organization \"%(name)s\" successfully."
-msgstr "בקשת ההצטרפות שלך ל-%(team_type)s \"%(team_name)s\" הוסרה בהצלחה."
-
-#, fuzzy, python-format
-#| msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
-msgid "Your invitation to project/group \"%(name)s\" was withdrawn successfully."
-msgstr "הזמנתך למשתמש \"%(username)s\" הוסרה בהצלחה."
-
-#, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
-msgid "Project/group \"%(name)s\" is no longer assigned."
-msgstr "המשתמש \"%(username)s\" אינו חבר יותר."
-
-#, fuzzy
-#| msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
-msgid "Sorry, only portal administrators can create Organizations! You can either create a Project, or write a message to one of the administrators to create a Organization for you. Below you can find a listing of all administrators."
-msgstr "מצטערים, רק מנהלי פורטל יכולים ליצור קבוצות! באפשרותך ליצור פרוייקט, או לכתוב הודעה לאחד המנהלים כדי ליצור קבוצה עבורך. להלן ניתן למצוא רשימה של כל מנהלי המערכת."
-
-#, fuzzy, python-format
-#| msgid "Event \"%(title)s\" was edited successfully."
-msgid "Organization \"%(name)s\" was created successfully."
-msgstr "האירוע \"%(title)s\" נערך בהצלחה."
-
-#, fuzzy
-#| msgid "Your idea was deleted successfully."
-msgid "Your organization was deleted successfully."
-msgstr "הרעיון שלך נמחק בהצלחה."
-
-msgctxt "the_app"
-msgid "poll"
-msgstr "סקר"
-
-msgid "A user created a new poll"
-msgstr "משתמש יצר/ה סקר חדש"
-
-#, python-format
-msgid "%(sender_name)s created the poll %(object_name)s"
-msgstr "%(sender_name)s יצר/ה את הסקר %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d polls"
-msgstr "%(sender_name)s יצר/ה %(count)d סקרים"
-
-#, python-format
-msgid "%(sender_name)s created a new poll"
-msgstr "%(sender_name)s יצר/ה סקר חדש"
-
-#, python-format
-msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "סקר חדש: \"%(object_name)s\" נוצר ב-%(team_name)s."
-
-msgid "A poll you voted on was completed"
-msgstr "סקר שהצבעתם בו הושלם"
-
-#, python-format
-msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
-msgstr "%(sender_name)s השלימ/ה את הסקר שהצבעתם בו %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d polls you voted on"
-msgstr "%(sender_name)s השלימ/ה %(count)d סקרים שהצבעת בהם"
-
-#, python-format
-msgid "%(sender_name)s completed the poll"
-msgstr "%(sender_name)s השלימ/ה את הסקר"
-
-#, python-format
-msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
-msgstr "הסקר \"%(object_name)s\" הושלם ב-%(team_name)s."
-
-msgid "A user commented on one of your polls"
-msgstr "משתמש הגיב על אחד מהסקרים שלך"
-
-#, python-format
-msgid "%(sender_name)s commented on your poll %(object_name)s"
-msgstr "%(sender_name)s הגיב/ה על הסקר שלך %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
-msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר הגיבו על הסקר שלך %(object_name)s"
-msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים הגיבו על הסקר %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your poll"
-msgstr "%(sender_name)s הגיב/ה על הסקר שלך"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your polls"
-msgstr "%(sender_name)s הגיב/ה על אחד הסקרים שלך"
-
-msgid "A user commented on a poll you were tagged in"
-msgstr "משתמש הגיב על סקר שתויגת בו"
-
-#, python-format
-msgid "%(sender_name)s commented on the poll %(object_name)s"
-msgstr "%(sender_name)s הגיב/ה על הסקר %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
-msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר השיבו על הסקר %(object_name)s"
-msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים הגיבו על הסקר %(object_name)s"
-
-msgid "You were tagged in this poll"
-msgstr "תויגתם בסקר זה"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you were tagged in"
-msgstr "%(sender_name)s הגיב/ה על סקר שתויגת בו"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s הגיב/ה על סקר שתויגתם בו ב-%(team_name)s"
-
-msgid "A user commented on an poll you voted in"
-msgstr "משתמש הגיב בסקר שהצבעת בו"
-
-msgid "You voted on this poll"
-msgstr "הצבעתם בסקר זה"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you voted in"
-msgstr "%(sender_name)s הגיב/ה בסקר שהצבעתם בו"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
-msgstr "%(sender_name)s הגיב/ה על סקר שהצבעתם בו ב-%(team_name)s"
-
-msgid "A user created a new poll in a team you are following"
-msgstr "משתמש יצר סקר חדש בצוות שאתם עוקבים"
-
-#, python-format
-msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s יצר/ה סקר חדש ב-%(team_name)s (שאתם עוקבים אחריו)"
-
-#, python-format
-msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "סקר חדש: \"%(object_name)s\" נוצר ב-%(team_name)s (שאתם עוקבים אחריו)"
-
-msgid "A user updated a poll you are following"
-msgstr "משתמש עידכן סקר שאתם עוקבים"
-
-#, python-format
-msgid "%(sender_name)s updated the poll %(object_name)s"
-msgstr "%(sender_name)s עדכנ/ה את הסקר %(object_name)s"
-
-msgid "You are following this poll"
-msgstr "אתם עוקבים אחר סקר זה"
-
-#, python-format
-msgid "%(sender_name)s updated a poll you are following"
-msgstr "%(sender_name)s עדכנ/ה סקר שאתם עוקבים בו"
-
-#, python-format
-msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "הסקר שאתם עוקבים אחריו: \"%(object_name)s\" עודכן ב-%(team_name)s."
-
-msgid "A poll you are following was completed"
-msgstr "סקר שאתם עוקבים הושלם"
-
-#, python-format
-msgid "%(sender_name)s completed the poll %(object_name)s"
-msgstr "%(sender_name)s השלימ/ה את הסקר %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d polls"
-msgstr "%(sender_name)s השלימ/ה %(count)d סקרים"
-
-#, python-format
-msgid "%(sender_name)s completed the poll you are following"
-msgstr "%(sender_name)s השלימ/ה את הסקר שאתם עוקבים אחריו"
-
-#, python-format
-msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
-msgstr "הסקר \"%(object_name)s\" שאתם עוקבים הושלם ב-%(team_name)s."
-
-msgid "A user commented on one a poll you are following"
-msgstr "משתמש הגיב על סקר שאתם עוקבים"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you are following"
-msgstr "%(sender_name)s הגיב/ה על סקר שאתה עוקבים"
-
-msgid "Current Polls"
-msgstr "סקרים נוכחיים"
-
-msgid "No current polls"
-msgstr "אין סקרים כרגע"
-
-msgid "You must write a description for this poll option!"
-msgstr "אתם חייבים לכתוב תיאור עבור אפשרות סקר זו!"
-
-msgid "Voting closed"
-msgstr "ההצבעה סגורה"
-
-msgid "Poll archived"
-msgstr "סקר בארכיון"
-
-msgid "Multiple options votable"
-msgstr "אפשרויות הצבעה מרובות"
-
-msgid "Does this poll allow users to vote on multiple options or just decide for one?"
-msgstr "האם סקר זה מאפשר למשתמשים להצביע על אפשרויות מרובות או פשוט להחליט על אחת?"
-
-msgid "\"Maybe\" option enabled"
-msgstr "האפשרות \"אולי\" זמינה"
-
-msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
-msgstr "האם האפשרות 'אולי' זמינה? התעלם והחל ברירת מחדל אם ``multiple_votes==False`` ההצבעה כוזבת"
-
-msgid "Anyone can vote"
-msgstr "כל אחד יכול להצביע"
-
-msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
-msgstr "אם כן, כל מי שיכול לראות את הסקר יכול להצביע בו. אם לא, רק חברי הקבוצה יכולים."
-
-msgid "Show voters"
-msgstr "הצג מצביעים"
-
-msgid "If true, display a list of which user voted for each option."
-msgstr "אם כן, הצג רשימת משתמשים ובחירותיהם באילו מן האפשרויות."
-
-msgid "Winning Option"
-msgstr "האפשרות הזוכה"
-
-#, python-format
-msgid "Poll: %(poll)s (%(state)s)"
-msgstr "סקר: (%(state)s) %(poll)s"
-
-msgid "Poll Option"
-msgstr "אפשרות סקר"
-
-msgid "Poll Options"
-msgstr "אפשרויות הסקר"
-
-#, python-format
-msgid "Poll \"%(title)s\" was edited successfully."
-msgstr "הסקר \"%(title)s\" נערך בהצלחה."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be edited."
-msgstr "לא ניתן לערוך את הסקר \"%(title)s\" ."
-
-#, python-format
-msgid "Poll \"%(title)s\" was added successfully."
-msgstr "הסקר \"%(title)s\" נוסף בהצלחה."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be added."
-msgstr "לא ניתן להוסיף את הסקר \"%(title)s\"."
-
-msgid "You should define at least one poll option!"
-msgstr "עליכם להגדיר לפחות אפשרות סקר אחת!"
-
-msgid "This poll is archived and cannot be edited anymore!"
-msgstr "סקר זה בארכיון ולא ניתן לערוך אותו יותר!"
-
-#, python-format
-msgid "Poll \"%(title)s\" was deleted successfully."
-msgstr "הסקר \"%(title)s\" נמחק בהצלחה."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be deleted."
-msgstr "לא ניתן למחוק את הסקר \"%(title)s\"."
-
-msgid "The voting phase for this poll is over. You cannot vote for it any more."
-msgstr "שלב ההצבעה לסקר זה הסתיים. לא ניתן להצביע יותר."
-
-msgid "In this poll you must vote for exactly one item!"
-msgstr "בסקר זה עליכם להצביע בדיוק לפריט אחד!"
-
-msgid "Invalid action for this poll. The request could not be completed!"
-msgstr "פעולה לא חוקית לסקר זה. לא ניתן להשלים את הבקשה!"
-
-msgid "This action is not permitted for this poll at this stage!"
-msgstr "פעולה זו אינה מותרת לסקר בשלב זה!"
-
-msgid "The poll was closed successfully."
-msgstr "הסקר נסגר בהצלחה."
-
-msgid "The poll was re-opened successfully."
-msgstr "הסקר נפתח מחדש בהצלחה."
-
-msgid "The poll was archived successfully."
-msgstr "הסקר הועבר לארכיון בהצלחה."
-
-msgid "Stream"
-msgstr "שידור"
-
-msgctxt "the_app"
-msgid "stream"
-msgstr "סטרים"
-
-msgid "My Streams"
-msgstr "השידורים שלי"
-
-msgid "Streams"
-msgstr "שידורים"
-
-msgid "Models"
-msgstr "דגמים"
-
-msgid "Portal IDs"
-msgstr "מזהי פורטל"
-
-msgid "Last seen"
-msgstr "נראה לאחרונה"
-
-msgid "Special Stream"
-msgstr "שידור מיוחד"
-
-msgid "Special Group IDs"
-msgstr "תעודות זהות קבוצתיות מיוחדות"
-
-msgid "You do not have permission to access this stream."
-msgstr "אין לך הרשאה לגשת לשידור זה."
-
-msgid "Your stream was added successfully."
-msgstr "השידור שלך נוסף בהצלחה."
-
-msgid "Your stream was updated successfully."
-msgstr "השידור שלך עודכן בהצלחה."
-
-msgid "Your stream was deleted successfully."
-msgstr "השידור שלך נמחק בהצלחה."
-
-msgid "You cannot delete the default stream!"
-msgstr "אינך יכול למחוק את שידור ברירת המחדל!"
-
-msgctxt "the_app"
-msgid "todo"
-msgstr "טודו - רשימת משימות"
-
-msgid "A user created a new todo"
-msgstr "משתמש יצר משימה"
-
-#, python-format
-msgid "%(sender_name)s created the todo %(object_name)s"
-msgstr "%(sender_name)s יצר/ה את המשימה %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d todos"
-msgstr "%(sender_name)s יצר/ה %(count)d משימות"
-
-#, python-format
-msgid "%(sender_name)s created a new todo"
-msgstr "%(sender_name)s יצר/ה משימה חדשה"
-
-#, python-format
-msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "משימה חדשה: \"%(object_name)s\" נוצרה ב-%(team_name)s."
-
-msgid "A todo was assigned to me"
-msgstr "שויכה אלי משימה"
-
-#, python-format
-msgid "%(sender_name)s assigned the todo %(object_name)s to you"
-msgstr "%(sender_name)s שייך את המשימה %(object_name)s לך"
-
-#, python-format
-msgid "%(sender_name)s assigned %(count)d todos to you"
-msgstr "%(sender_name)s שייך אליך %(count)d משימות"
-
-#, python-format
-msgid "%(sender_name)s assigned a todo to you"
-msgstr "%(sender_name)s שייך אותך למשימה"
-
-msgid "A todo I created was completed"
-msgstr "משימה שיצרתי הושלמה בהצלחה"
-
-#, python-format
-msgid "%(sender_name)s completed the todo %(object_name)s"
-msgstr "%(sender_name)s השלימ/ה את המשימה %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d todos"
-msgstr "%(sender_name)s השלימ/ה %(count)d משימות"
-
-msgid "You created this todo"
-msgstr "את/ה יצרת את המשימה הזו"
-
-#, python-format
-msgid "%(sender_name)s completed your todo"
-msgstr "%(sender_name)s השלימ/ה את המטלה שלך"
-
-#, python-format
-msgid "%(sender_name)s completed one of your todos"
-msgstr "%(sender_name)s השלימ/ה את המשימות שלך"
-
-msgid "A user commented on one of your todos"
-msgstr "משתמש הגיב על אחת המשימות שלך"
-
-#, python-format
-msgid "%(sender_name)s commented on your todo %(object_name)s"
-msgstr "%(sender_name)s הגיב/ה על המשימה שלך %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
-msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר הגיבו על המשימה שלך %(object_name)s"
-msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים הגיבו על המשימה שלך %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your todo"
-msgstr "%(sender_name)s הגיב/ה על המשימה שלך"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your todos"
-msgstr "%(sender_name)s הגיב/ה על אחת מהמשימות שלך"
-
-msgid "A user commented on a todo you were tagged in"
-msgstr "משתמש הגיב על משימה שתויגת בה"
-
-#, python-format
-msgid "%(sender_name)s commented on the todo %(object_name)s"
-msgstr "%(sender_name)s הגיב/ה על על המשימה שלך %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
-msgstr[0] "%(sender_name)s ו- %(count_minus_one)d אחר הגיבו על המשימה %(object_name)s"
-msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים הגיבו על המשימה %(object_name)s"
-
-msgid "You were tagged in this todo"
-msgstr "תוייגת במשימה זו"
-
-#, python-format
-msgid "%(sender_name)s commented on a todo you were tagged in"
-msgstr "%(sender_name)s הגיב/ה על משימה שתויגת בה"
-
-#, python-format
-msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s הגיב/ה על משימה שתויגת בה ב-%(team_name)s"
-
-msgid "A user commented on a todo you were assigned to"
-msgstr "משתמש הגיב על משימה ששויכה אליך"
-
-#, python-format
-msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
-msgstr "%(sender_name)s הגיב על המשימה %(object_name)s ששויכה אליך"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
-msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר הגיבו על המשימה שניתנה לך %(object_name)s"
-msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים הגיבו על המשימה שניתנה לך %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your assigned todos"
-msgstr "%(sender_name)s הגיב על אחת מהמשימות שניתנו לך"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
-msgstr "%(sender_name)s הגיב על אחת מהמשימות שניתנו לך ב-%(team_name)s"
-
-msgid "A user updated a todo you are following"
-msgstr "משתמש עדכן משימה שאתה עוקב אחריה"
-
-#, python-format
-msgid "%(sender_name)s updated the todo %(object_name)s"
-msgstr "%(sender_name)s עדכן את המשימה %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
-msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר עדכנו את המשימה %(object_name)s"
-msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים עדכנו את המשימה %(object_name)s"
-
-msgid "You are following this todo"
-msgstr "אתה עוקב אחר משימה זו"
-
-#, python-format
-msgid "%(sender_name)s updated a todo you are following"
-msgstr "%(sender_name)s עדכן משימה שאתה עוקב אחריה"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "המשימה שאתה עוקב אחריה: \"%(object_name)s\" עודכנה ב-%(team_name)s."
-
-msgid "A user reassigned a todo you are following"
-msgstr "משתמש שייך מחדש משימה שאתה עוקב אחריה"
-
-#, python-format
-msgid "%(sender_name)s reassigned the todo %(object_name)s"
-msgstr "%(sender_name)s שייך מחדש את המשימה %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s reassigned %(count)d todos"
-msgstr "%(sender_name)s שייך מחדש %(count)d משימות"
-
-#, python-format
-msgid "%(sender_name)s reassigned a todo you are following"
-msgstr "%(sender_name)s שייך מחדש משימה שאתה עוקב אחריה"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
-msgstr "משימה שאתה עוקב אחריה: \"%(object_name)s\" שויכה מחדש ב-%(team_name)s."
-
-msgid "A user completed a todo you are following"
-msgstr "משתמש השלים משימה שאתה עוקב אחריה"
-
-#, python-format
-msgid "%(sender_name)s completed a todo you are following"
-msgstr "%(sender_name)s השלים משימה שאתה עוקב אחריה"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
-msgstr "משימה שאתה עוקב אחריה: \"%(object_name)s\" הושלמה ב-%(team_name)s."
-
-msgid "A user commented on a todo you are following"
-msgstr "משתמש הגיב על משימה שאתה עוקב אחריה"
-
-#, python-format
-msgid "%(sender_name)s commented on on a todo you are following"
-msgstr "%(sender_name)s הגיב על משימה שאתה עוקב אחריה"
-
-msgid "My Todos"
-msgstr "המשימות שלי"
-
-msgid "No todos"
-msgstr "אין משימות"
-
-msgid "Open"
-msgstr "טרם הושלמה"
-
-msgid "Completed"
-msgstr "הושלמה"
-
-msgid "Assigned To"
-msgstr "הוקצה ל-"
-
-msgid "Priority"
-msgstr "עדיפות"
-
-msgid "Due date"
-msgstr "תאריך יעד"
-
-msgid "Soonest Due"
-msgstr "המועד הקרוב ביותר"
-
-msgid "You are not allowed to assign this Todo entry."
-msgstr "אינך מורשה לשייך ערך משימה זו."
-
-msgid "Later"
-msgstr "יותר מאוחר"
-
-msgid "Normal"
-msgstr "רגיל"
-
-msgid "Important"
-msgstr "חשוב"
-
-msgid "Due by"
-msgstr "עד ל"
-
-msgid "Completed on"
-msgstr "הושלם בתאריך"
-
-msgid "Completed by"
-msgstr "הושלם על ידי"
-
-msgid "Assigned to"
-msgstr "שויכה ל-"
-
-msgid "List"
-msgstr ""
-
-#, python-format
-msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
-msgstr "המשימה \"%(todo_name)s\" ניתנה ל-%(assignee_name)s"
-
-#, python-format
-msgid "Todo \"%(title)s\" was added successfully."
-msgstr "המשימה \"%(title)s\" נוספה בהצלחה."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be added."
-msgstr "לא ניתן להוסיף את המשימה \"%(title)s\"."
-
-msgid "You were trying to add a todo to a todolist that does not exist!"
-msgstr "ניסית להוסיף משימה לרשימה שלא קיימת!"
-
-#, python-format
-msgid "Todo \"%(title)s\" was edited successfully."
-msgstr "המשימה \"%(title)s\" נערכה בהצלחה."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be edited."
-msgstr "לא ניתן לערוך את המשימה \"%(title)s\"."
-
-#, python-format
-msgid "Todo \"%(title)s\" was deleted successfully."
-msgstr "המשימה \"%(title)s\" נמחקה בהצלחה."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be deleted."
-msgstr "לא ניתן למחוק את המשימה \"%(title)s\"."
-
-#, python-format
-msgid "Todo \"%(title)s\" was assigned successfully."
-msgstr "המשימה \"%(title)s\" שוייכה בהצלחה."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be assigned."
-msgstr "לא ניתן לשייך את המשימה \"%(title)s\"."
-
-#, python-format
-msgid "Todo \"%(title)s\" was assigned to You successfully."
-msgstr "המשימה \"%(title)s\" הוקצתה לך בהצלחה."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be assigned to You."
-msgstr "לא ניתן היה להקצות לך את המשימה \"%(title)s\"."
-
-#, python-format
-msgid "Todo \"%(title)s\" was unassigned successfully."
-msgstr "שיוך המשימה \"%(title)s\" הוסר בהצלחה."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be unassigned."
-msgstr "לא ניתן היה להסיר את השיוך למשימה \"%(title)s\"."
-
-#, python-format
-msgid "Todo \"%(title)s\" was completed successfully."
-msgstr "המשימה \"%(title)s\" הושלמה בהצלחה."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be completed."
-msgstr "לא ניתן היה להשלים את המשימה \"%(title)s\"."
-
-#, python-format
-msgid "Todo \"%(title)s\" was completed by You successfully."
-msgstr "המשימה \"%(title)s\" הושלמה בהצלחה על ידך."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be completed by You."
-msgstr "אינך יכול/ה להשלים את המשימה \"%(title)s\"."
-
-#, python-format
-msgid "Todo \"%(title)s\" was set to incomplete successfully."
-msgstr "המשימה \"%(title)s\" הוגדרה כבלתי שלמה בהצלחה."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be set to incomplete."
-msgstr "לא ניתן להגדיר את המשימה \"%(title)s\" כבלתי שלמה."
-
-#, python-format
-msgid "Todolist \"%(title)s\" was edited successfully."
-msgstr "רשימת המשימות \"%(title)s\" נערכה בהצלחה."
-
-#, python-format
-msgid "Todolist \"%(title)s\" could not be edited."
-msgstr "לא ניתן לערוך את רשימת המשימות \"%(title)s\"."
-
-#, python-format
-msgid "Todolist \"%(title)s\" was added successfully."
-msgstr "רשימת המשימות \"%(title)s\" נוספה בהצלחה."
-
-#, python-format
-msgid "Todolist \"%(title)s\" could not be added."
-msgstr "לא ניתן להוסיף את רשימת המשימות \"%(title)s\"."
-
-msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
-msgstr "אינך יכול למחוק תיקיה זו מכיוון שאין לך הרשאה למחוק פריט אחד או יותר שהיא מכילה!"
-
-msgid "Sender and Recipient cannot be both undefined."
-msgstr ""
-
-msgid "Visitor's email is in excess."
-msgstr ""
-
-msgid "Visitor's email is missing."
-msgstr ""
-
-msgid "Reading date must be later than sending date."
-msgstr ""
-
-msgid "Deletion date by sender must be later than sending date."
-msgstr ""
-
-msgid "Deletion date by recipient must be later than sending date."
-msgstr ""
-
-msgid "Response date must be later than sending date."
-msgstr ""
-
-msgid "The message cannot be replied without having been read."
-msgstr ""
-
-msgid "Response date must be later than reading date."
-msgstr ""
-
-msgid "Response date cannot be set without at least one reply."
-msgstr ""
-
-#, fuzzy
-#| msgid "This message was sent in a conversation with: "
-msgid "The message cannot be replied without being in a conversation."
-msgstr "הודעה זו נשלחה בשיחה עם: "
-
-msgid "Dates"
-msgstr "תאריכים"
-
-#, fuzzy
-#| msgid "Is Moderator"
-msgid "Moderation"
-msgstr "הוא מנהל פורום"
-
-#, python-brace-format
-msgid "Some usernames are unknown or no longer active: {users}."
-msgstr ""
-
-#, python-brace-format
-msgid "Ensure this value has at most {limit_value} distinct items (it has {show_value})."
-msgstr ""
-
-#, python-brace-format
-msgid "Ensure this value has at least {limit_value} distinct items (it has {show_value})."
-msgstr ""
-
-#, python-brace-format
-msgid "Some usernames are rejected: {users}."
-msgstr ""
-
-#, fuzzy, python-brace-format
-#| msgid "Your name"
-msgid "{username}"
-msgstr "השם שלך"
-
-#, python-brace-format
-msgid "{username} ({reason})"
-msgstr ""
-
-#, python-brace-format
-msgid "Writing to some users is not possible: {users}."
-msgstr ""
-
-msgid "Recipient"
-msgstr "נמען"
-
-#, fuzzy
-#| msgid "Additional Recipients"
-msgid "Additional recipients"
-msgstr "נמענים נוספים"
-
-#, fuzzy
-#| msgid "Additional Recipients"
-msgid "Additional recipient"
-msgstr "נמענים נוספים"
-
-#, fuzzy
-#| msgid "Message Project"
-msgid "Message Rejected"
-msgstr "שלח/י הודעה לפרויקט"
-
-#, fuzzy
-msgid "Your message has been rejected"
-msgstr "השינויים שביצעת נשמרו בהצלחה."
-
-#, fuzzy
-#| msgid "Message Project"
-msgid "Message Received"
-msgstr "שלח/י הודעה לפרויקט"
-
-#, fuzzy
-#| msgid "You have been invited to apply!"
-msgid "You have received a message"
-msgstr "הוזמנת להגיש מועמדות!"
-
-msgid "Reply Received"
-msgstr ""
-
-#, fuzzy
-#| msgid "You have been invited to apply!"
-msgid "You have received a reply"
-msgstr "הוזמנת להגיש מועמדות!"
-
-msgid "Pending"
-msgstr ""
-
-#, fuzzy
-#| msgid "Restricted"
-msgid "Rejected"
-msgstr "מוגבל"
-
-#, fuzzy
-#| msgid "Everybody"
-msgid "body"
-msgstr "כולם"
-
-#, fuzzy
-msgid "sender"
-msgstr "פורסם"
-
-#, fuzzy
-#| msgid "Recipient"
-msgid "recipient"
-msgstr "נמען"
-
-#, fuzzy
-#| msgid "Visitor"
-msgid "visitor"
-msgstr "מבקר"
-
-#, fuzzy
-msgid "parent message"
-msgstr "השם שלך"
-
-#, fuzzy
-#| msgid "No messages"
-msgid "root message"
-msgstr "אין הודעות"
-
-#, fuzzy
-#| msgid "Sent at:"
-msgid "sent at"
-msgstr "נשלח ב:"
-
-msgid "read at"
-msgstr ""
-
-msgid "replied at"
-msgstr ""
-
-msgid "archived by sender"
-msgstr ""
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "archived by recipient"
-msgstr "נמען לא מוגדר."
-
-#, fuzzy
-#| msgid "Delete user account"
-msgid "deleted by sender at"
-msgstr "מחק חשבון משתמש"
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "deleted by recipient at"
-msgstr "נמען לא מוגדר."
-
-msgid "status"
-msgstr ""
-
-#, fuzzy
-#| msgid "Is Moderator"
-msgid "moderator"
-msgstr "הוא מנהל פורום"
-
-#, fuzzy
-#| msgid "Related to"
-msgid "moderated at"
-msgstr "משויך ל"
-
-msgid "rejection reason"
-msgstr ""
-
-msgid "Direct Reply Hash"
-msgstr ""
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "message"
-msgstr "הודעה"
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "messages"
-msgstr "הודעה"
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "Undefined sender."
-msgstr "נמען לא מוגדר."
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "pending message"
-msgstr "הודעה"
-
-#, fuzzy
-msgid "pending messages"
-msgstr "השם שלך"
-
-msgid "<me>"
-msgstr ""
-
-msgid "> "
-msgstr ""
-
-#, python-brace-format
-msgid ""
-"\n"
-"\n"
-"{sender} wrote:\n"
-"{body}\n"
-msgstr ""
-
-#, fuzzy, python-brace-format
-msgid "Re: {subject}"
-msgstr "נושא"
-
-#, fuzzy
-#| msgid "User successfully created!"
-msgid "Message successfully sent."
-msgstr "המשתמש נוצר בהצלחה!"
-
-#, fuzzy
-#| msgid "Select at least one object."
-msgid "Message rejected for at least one recipient."
-msgstr "בחרו אובייקט אחד לפחות."
-
-msgid "A conference you are attending has been updated"
-msgstr ""
-
-#, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
-msgid "The conference %(object_name)s has been updated"
-msgstr "ועידה חדשה: \"%(object_name)s\" נוצרה בצוות %(team_name)s."
-
-#, fuzzy
-#| msgid "You are about to deactivate this conference!"
-msgid "You are attending this conference"
-msgstr "אתה עומד להשבית ועידה זו!"
-
-#, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
-msgid "The conference \"%(object_name)s\" was updated."
-msgstr "ועידה חדשה: \"%(object_name)s\" נוצרה בצוות %(team_name)s."
-
-msgid "The time of a conference you are attending has been updated"
-msgstr ""
-
-#, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
-msgid "The time of conference %(object_name)s has been updated"
-msgstr "ועידה חדשה: \"%(object_name)s\" נוצרה בצוות %(team_name)s."
-
-msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
-msgstr ""
-
-msgid "minute"
-msgstr ""
-
-msgid "minutes"
-msgstr ""
-
-msgid "Select the date range for which you would like statistics"
-msgstr ""
-
-msgid "Cloud Stub"
-msgstr "ספח ענן"
-
-msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
-msgstr ""
-
-msgid "There are no cloud files yet"
-msgstr "אין עדיין קבצי ענן"
-
-msgid "Error message:"
-msgstr ""
-
-msgid "No error message supplied."
-msgstr ""
-
-msgid "Pad"
-msgstr "פנקס"
-
-msgid "This pad can no longer be edited because its creator has deleted their account."
-msgstr "אין עוד אפשרות לערוך פנקס זה מאחר שיוצרו מחק את החשבון שלו."
-
-#, python-format
-msgid "Do you really want to delete etherpad „%(pad)s“?"
-msgstr "האם אתם בטוחים שברצונכם למחוק את הפנקס „%(pad)s“?"
-
-msgid "Delete Etherpad"
-msgstr "מחק את הפנקס"
-
-msgid "This document is empty"
-msgstr "מסמך זה ריק"
-
-msgid "Pads"
-msgstr "פנקסים"
-
-msgid "Enter a title for the Pad."
-msgstr "הזן כותרת עבור לוח זה."
-
-msgid "Enter the title for a new Document or Table."
-msgstr "הזן את הכותרת עבור מסמך או טבלה חדשים."
-
-msgid "Enter the title for a new Document."
-msgstr "הזן את הכותרת עבור מסמך חדש."
-
-msgid "Create Etherpad"
-msgstr "יצירת פנקס Etherpad חדש"
-
-msgid "Create Ethercalc"
-msgstr "יצירת לוח Ethercalc חדש"
-
-#, python-format
-msgid "Do you really want to delete etherpad „%(title)s“?"
-msgstr "האם אתם בטוחים שברצונכם למחוק את הפנקס  „%(title)s“?"
-
-msgid "No etherpads have been created yet."
-msgstr "טרם נוצרו פנקסי Etherpads."
-
-msgid "Download CSV"
-msgstr "הורד CSV"
-
-msgid "Download Excel"
-msgstr "הורדת קובץ אקסל"
-
-#, python-format
-msgid ""
-"Hi %(receiver_name)s,\n"
-"\n"
-"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
-"\n"
-"You can find it by following this link: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s Team."
-msgstr ""
-"היי, %(receiver_name)s,\n"
-"\n"
-"פנקס Etherpad (עורך רשת שיתופי) בשם \"%(object_name)s\" נוצר בצוות %(team_name)s על ידי %(sender_name)s. \n"
-"\n"
-"\n"
-"לחצו על קישור זה על מנת לעבור לפנקס: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(עקבו אחר קישור זה על מנת לערוך את העדפות ההתראה שלכם: %(notification_settings_url)s )\n"
-"\n"
-"\n"
-"שלכם, \n"
-"צוות %(site_name)s."
-
-msgid "You created a pad"
-msgstr "יצרת פנקס עריכה שיתופית"
-
-msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
-msgid "created a Pad"
-msgstr "יצר/ה פנקס חדש"
-
-msgid "There are no etherpads yet"
-msgstr "טרם נוצרו פנקסי עריכה שיתופית Etherpads"
-
 msgid "Would you like to create an event"
 msgstr "האם תרצו ליצור אירוע חדש"
 
@@ -10964,6 +9324,9 @@ msgstr "סקרי אירועים"
 
 msgid "Enter a title for the new event to be scheduled."
 msgstr "הזינו כותרת עבור האירוע החדש לתזמון."
+
+msgid "Dates"
+msgstr "תאריכים"
 
 msgid "Please select the available days in the calendar."
 msgstr "נא בחרו את הימים הזמינים בלוח השנה."
@@ -11108,6 +9471,9 @@ msgstr "חזור לסקרי אירועים"
 
 msgid "Return to Archived Event Polls"
 msgstr "חזור לסקרי אירועים שבארכיון"
+
+msgid "List"
+msgstr ""
 
 msgid "View"
 msgstr "ראה/י"
@@ -11456,6 +9822,197 @@ msgstr "יצר/ה אירוע חדש"
 msgid "Show all"
 msgstr "הצג הכל"
 
+msgid "Upcoming events"
+msgstr "אירועים קרובים"
+
+#, python-format
+msgid "Event \"%(title)s\" was edited successfully."
+msgstr "האירוע \"%(title)s\" נערך בהצלחה."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be edited."
+msgstr "לא הייתה אפשרות לערוך את האירוע \"%(title)s\"."
+
+msgid "Please use the conference management area to add new workshops!"
+msgstr "אנא השתמשו באזור ניהול הועידות להוספת סדנאות חדשות!"
+
+msgid "The page you requested is not available for this event at this time."
+msgstr "הדף שביקשת אינו זמין עבור אירוע זה כעת."
+
+msgid "One of the event suggestions times could not be understood!"
+msgstr "אחת מהצעות התזמון לאירוע לא מובנת!"
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was edited successfully."
+msgstr "האירוע הלא מתוזמן \"%(title)s\" נערך בהצלחה."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be edited."
+msgstr "לא היתה אפשרות לערוך את האירוע הלא מתוזמן \"%(title)s\"."
+
+#, python-format
+msgid "Event \"%(title)s\" was added successfully."
+msgstr "האירוע \"%(title)s\" נוסף בהצלחה."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be added."
+msgstr "לא היתה אפשרות להוסיף את האירוע \"%(title)s\"."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was added successfully."
+msgstr "האירוע הלא מתוזמן \"%(title)s\" נוסף בהצלחה."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be added."
+msgstr "לא היתה אפשרות להוסיף את האירוע הלא מתוזמן \"%(title)s\"."
+
+msgid "You should define at least one date suggestion."
+msgstr "עליך להגדיר לפחות הצעת תאריך אחת."
+
+#, python-format
+msgid "Event \"%(title)s\" was deleted successfully."
+msgstr "האירוע \"%(title)s\" נמחק בהצלחה."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be deleted."
+msgstr "לא הייתה אפשרות למחוק את האירוע \"%(title)s\"."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was deleted successfully."
+msgstr "האירוע הלא מתוזמן \"%(title)s\" נמחק בהצלחה."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be deleted."
+msgstr "לא הייתה אפשרות למחוק את האירוע הלא מתוזמן \"%(title)s\"."
+
+#, fuzzy
+#| msgid "Your data was saved successfully!"
+msgid "Your votes were saved successfully."
+msgstr "הנתונים שלך נשמרו בהצלחה!"
+
+#, fuzzy
+#| msgid "Poll \"%(title)s\" could not be added."
+msgid "Your votes could not be saved."
+msgstr "לא ניתן להוסיף את הסקר \"%(title)s\"."
+
+msgid "This is event is already scheduled. You cannot vote for it any more."
+msgstr "אירוע זה כבר מתוזמן. אינך יכול/ה להצביע בסקר יותר."
+
+msgid "The complete request can only be sent via POST!"
+msgstr "ניתן לשלוח את הבקשה המלאה רק באמצעות POST!"
+
+msgid "Event cannot be completed: No date was supplied."
+msgstr "אין אפשרות להוסיף אירוע חדש: לא סופק תאריך."
+
+msgid "The event was created successfully at the specified date."
+msgstr "האירוע נוצר בהצלחה בתאריך שצויין."
+
+#, fuzzy
+msgid "Upcoming event"
+msgstr "אירועים קרובים"
+
+msgid "Your comment was added successfully."
+msgstr "תגובתך נוספה בהצלחה."
+
+msgid "Your comment was deleted successfully."
+msgstr "תגובתך נמחקה בהצלחה."
+
+msgid "Exchange"
+msgstr ""
+
+msgctxt "the_app"
+msgid "exchange"
+msgstr ""
+
+msgctxt "the_app"
+msgid "file"
+msgstr "קבצים"
+
+msgid "A user uploaded a new file"
+msgstr "משתמש העלה קובץ חדש"
+
+#, python-format
+msgid "%(sender_name)s uploaded the file %(object_name)s"
+msgstr "%(sender_name)s העלו את הקובץ %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s uploaded %(count)d files"
+msgstr "%(sender_name)s העלו %(count)d קבצים"
+
+#, python-format
+msgid "%(sender_name)s created a new file"
+msgstr "%(sender_name)s יצר/ה קובץ חדש"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "קובץ חדש: \"%(object_name)s\" נוצר ב-%(team_name)s."
+
+msgid "A user uploaded a new file in a team you are following"
+msgstr "משתמש העלה קובץ חדש בצוות שאתם עוקבים"
+
+#, python-format
+msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s יצרו קובץ חדש ב-%(team_name)s שאתם עוקבים"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "קובץ חדש: \"%(object_name)s\" נוצר ב-%(team_name)s שאתם עוקבים."
+
+msgid "Latest Files"
+msgstr "הקבצים האחרונים"
+
+msgid "No files"
+msgstr "אין קבצים"
+
+msgid "Pictures"
+msgstr "תמונות"
+
+msgid "Documents"
+msgstr "מסמכים"
+
+msgid "Audio Files"
+msgstr "קבצי שמע"
+
+msgid "Videos"
+msgstr "וידיאו"
+
+msgid "File Type"
+msgstr "סוג קובץ"
+
+msgid "File Name"
+msgstr "שם קובץ"
+
+msgid "File Name (descending)"
+msgstr "שם קובץ (יורד)"
+
+msgid "Smallest Files"
+msgstr "הקבצים הקטנים ביותר"
+
+msgid "Largest Files"
+msgstr "הקבצים הגדולים ביותר"
+
+msgid "The given URL does not seem to be valid."
+msgstr "נראה שכתובת ה- URL הנתונה אינה חוקית."
+
+msgid "Must supply either a URL or File"
+msgstr "יש לספק כתובת URL או קובץ"
+
+msgid "Is URL Link"
+msgstr "קישור URL"
+
+msgid "Uploaded by"
+msgstr "הועלה על-ידי"
+
+msgid "Uploaded on"
+msgstr "הועלה ב"
+
+msgid "No files selected."
+msgstr "לא נבחרו קבצים."
+
+msgctxt "special_folder_type"
+msgid "Attachments"
+msgstr "קבצים מצורפים"
+
 msgid "The URL you have entered does not seem to be valid!"
 msgstr "נראה שכתובת ה- URL שהזנת אינה חוקית!"
 
@@ -11569,6 +10126,197 @@ msgstr "הקבצים האחרונים"
 
 msgid "There are no files  yet"
 msgstr "אין עדיין קבצים"
+
+msgid "File does not exist or you are not allowed to delete it."
+msgstr "הקובץ אינו קיים או שאינך מורשה למחוק אותו."
+
+#, python-format
+msgid "A problem occurred during export. The following file is missing: %(filename)s."
+msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
+msgstr[0] "אירעה שגיאה במהלך הייצוא. הקובץ הבא חסר: %(filename)s."
+msgstr[1] "אירעה שגיאה במהלך הייצוא. הקבצים הבאים חסרים: %(filename)s."
+
+msgid "Invalid request."
+msgstr "בקשה לא תקינה."
+
+#, python-format
+msgid "File \"%(title)s\" was updated successfully."
+msgstr "הקובץ \"%(title)s\" עודכן בהצלחה."
+
+#, python-format
+msgid "File \"%(title)s\" could not be updated."
+msgstr "לא ניתן להשלים את העדכון של הקובץ \"%(title)s."
+
+msgid "Downloading failed, the target object was not a folder!"
+msgstr "ההורדה נכשלה, אובייקט היעד לא היה תיקייה!"
+
+msgid "Canceled the download because there seem to be no files in this folder."
+msgstr "אין קבצים בתיקייה זו, ההורדה בוטלה."
+
+msgid "Internal Error: Group not Found"
+msgstr "שגיאה פנימית: הקבוצה לא נמצאה"
+
+msgid "Permission for upload denied"
+msgstr "ההרשאה להעלאה נדחתה"
+
+msgid "The uploaded file was invalid."
+msgstr "הקובץ שהועלה לא היה חוקי."
+
+#, python-format
+msgid "%(count)d File was added successfully."
+msgid_plural "%(count)d Files were added successfully."
+msgstr[0] "%(count)d קובץ נוסף בהצלחה."
+msgstr[1] "%(count)d נוספו בהצלחה."
+
+msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
+msgstr "הקובץ שהעלית היה גדול מדי או שסוג הקובץ לא הורשה לעלות!"
+
+msgctxt "the_app"
+msgid "marketplace"
+msgstr "זירת המסחר"
+
+msgid "A user created a new offer"
+msgstr "משתמש יצר/ה הצעה חדשה"
+
+#, python-format
+msgid "%(sender_name)s created the offer %(object_name)s"
+msgstr "%(sender_name)s יצר/ה את ההצעה %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d offers"
+msgstr "%(sender_name)s יצר/ה %(count)d events"
+
+#, python-format
+msgid "%(sender_name)s created a new offer"
+msgstr "%(sender_name)s יצר/ה קובץ חדש"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "הצעה חדשה: \"%(object_name)s\" נוצרה ב-%(team_name)s."
+
+msgid "One of your offers expired"
+msgstr "פג תוקפה של אחת ההצעות שלך"
+
+#, python-format
+msgid "Your offer %(object_name)s expired"
+msgstr "פג תוקפה של ההצעה %(object_name)s"
+
+#, python-format
+msgid "%(count)d of your offers expired"
+msgstr "פג תוקפן של %(count)d מהצעותיך"
+
+msgid "Your offer has expired"
+msgstr "פג תוקפה של ההצעה שלך"
+
+#, python-format
+msgid "Offer \"%(object_name)s\" has expired."
+msgstr "פג תוקפה של ההצעה \"%(object_name)s\"."
+
+msgid "A user commented on one of your offers"
+msgstr "משתמש הגיב על אחת מההצעות שלך"
+
+#, python-format
+msgid "%(sender_name)s commented on your offer %(object_name)s"
+msgstr "%(sender_name)s הגיב/ה על אחת מההצעות שלך %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
+msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר הגיבו על ההצעה שלך %(object_name)s"
+msgstr[1] "%(sender_name)s ו-%(count_minus_one)d הגיבו על הצעה שלך %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your offer"
+msgstr "%(sender_name)s הגיב/ה על הצעה שלך"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your offers"
+msgstr "%(sender_name)s הגיב/ה על אחד מהפוסטים שלך"
+
+msgid "A user commented on an offer you were tagged in"
+msgstr "משתמש הגיב על הצעה שתויגת בה"
+
+#, python-format
+msgid "%(sender_name)s commented on the offer %(object_name)s"
+msgstr "%(sender_name)s הגיב/ה על אחת מההצעות שלך %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
+msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר הגיבו על ההצעה %(object_name)s"
+msgstr[1] "%(sender_name)s ו-(%(count_minus_one)d אחרים הגיבו על ההצעה %(object_name)s"
+
+msgid "You were tagged in this offer"
+msgstr "תויגת בהצעה זו"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in"
+msgstr "%(sender_name)s הגיב/ה על הצעה שתויגת בה"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s הגיב/ה על אירוע שתויגתם בו ב-%(team_name)s"
+
+msgid "A user created a new offer in a team you are following"
+msgstr "משתמש יצר הצעה חדשה בצוות שאתם עוקבים אחריו"
+
+#, python-format
+msgid "%(sender_name)s created a new offer in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s יצר/ה הצעה חדשה ב-%(team_name)s (שאתם עוקבים אחריו)"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "הצעה חדשה: \"%(object_name)s\" נוצרה ב-%(team_name)s (שאתם עוקבים אחריו)"
+
+msgid "A user updated an offer you are following"
+msgstr "משתמש עדכן הצעה שאת/ה עוקב אחריה"
+
+#, python-format
+msgid "%(sender_name)s updated the offer %(object_name)s"
+msgstr "%(sender_name)s עדכן/ה את ההצעה %(object_name)s"
+
+msgid "You are following this offer"
+msgstr "אתם עוקבים אחר הצעה זו"
+
+#, python-format
+msgid "%(sender_name)s updated an offer you are following"
+msgstr "%(sender_name)s עדכן/ה הצעה שאתם עוקבים אחריה"
+
+#, python-format
+msgid "An offer you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "ההצעה שאתם עוקבים אחריה: \"%(object_name)s\" עודכנה ב-%(team_name)s."
+
+msgid "A user commented on an offer you are following"
+msgstr "משתמש הגיב/ה על הצעה שאתם עוקבים אחריה"
+
+#, python-format
+msgid "%(sender_name)s commented on on an offer you are following"
+msgstr "%(sender_name)s הגיב/ה על הצעה שאתם עוקבים אחריה"
+
+msgid "Current Offers"
+msgstr "הצעות נוכחיות"
+
+msgid "No current offers"
+msgstr "אין הצעות נוכחיות"
+
+msgid "Order Key"
+msgstr "מפתח סדר"
+
+msgid "Looking for"
+msgstr "מחפש/ת"
+
+msgid "Offering"
+msgstr "מציע/ה"
+
+msgid "Offer currently active?"
+msgstr "ההצעה פעילה כעת?"
+
+msgid "Offer Category"
+msgstr "קטגוריית הצעה"
+
+#, python-format
+msgid "Offer: %(offer)s (%(type)s)"
+msgstr "הצעה: (%(type)s) %(offer)s"
 
 msgid "Back to Offers"
 msgstr "חזרה להצעות"
@@ -11700,11 +10448,102 @@ msgstr "יצר/ה הצעה חדשה"
 msgid "There are no current offers"
 msgstr "אין הצעות נוכחיות"
 
+#, python-format
+msgid "Offer \"%(title)s\" was edited successfully."
+msgstr "ההצעה \"%(title)s\" נערכה בהצלחה."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be edited."
+msgstr "לא היתה אפשרות לערוך את ההצעה \"%(title)s\"."
+
+#, python-format
+msgid "Offer \"%(title)s\" was added successfully."
+msgstr "ההצעה \"%(title)s\" נוספה בהצלחה."
+
+#, python-format
+msgid "Offer \"%(title)s\" was saved successfully, but is not active yet."
+msgstr "ההצעה \"%(title)s\" נשמרה בהצלחה, אך עדיין אינה פעילה."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be added."
+msgstr "לא היתה אפשרות להוסיף את ההצעה \"%(title)s\"."
+
+#, python-format
+msgid "Offer \"%(title)s\" was deleted successfully."
+msgstr "ההצעה \"%(title)s\" נמחקה בהצלחה."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be deleted."
+msgstr "לא היתה אפשרות למחוק את ההצעה \"%(title)s\"."
+
+msgid "The offer you requested is no longer active. Sorry!"
+msgstr "ההצעה שביקשת אינה פעילה עוד. מצטערים!"
+
+msgid "Invalid action for this offer. The request could not be completed!"
+msgstr "פעולה לא חוקית עבור הצעה זו. לא היתה דרך להשלים את הבקשה!"
+
+msgid "The offer is already active"
+msgstr "הצעה זו כבר פעילה"
+
+msgid "The offer is already deactivated"
+msgstr "הצעה זו כבר בהשהיה"
+
+msgid "The offer was deactivated successfully."
+msgstr "ההצעה הושהתה בהצלחה."
+
+msgid "The offer was reactivated successfully."
+msgstr "ההצעה הופעלה מחדש בהצלחה."
+
+msgid "The offer was activated successfully."
+msgstr "ההצעה הופעלה בהצלחה."
+
+msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
+msgstr ""
+
+msgctxt "the_app"
+msgid "Chat"
+msgstr ""
+
+msgctxt "the_app"
+msgid "message"
+msgstr "הודעה"
+
+msgid "Chat"
+msgstr ""
+
+msgid "Only Administrators may send a message to this project/group!"
+msgstr "רק מנהלי מערכת רשאים לשלוח הודעה לפרוייקט/קבוצה זו!"
+
+msgid "Additional Recipients"
+msgstr "נמענים נוספים"
+
+msgid "Undefined recipient."
+msgstr "נמען לא מוגדר."
+
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
 msgstr "באפשרותכם לצרף קבצים ותמונות להודעות רק אם אתם חברים בפורום. באפשרותכם להצטרך אליו כאן:"
 
 msgid "The legacy messaging app is no longer in use. You can view all of your old messages, but you cannot write new ones. Please use the new messaging app in the navigation from now on!"
 msgstr "אפליקציית ממסר ההודעות Lgacy איננה בשימוש יותר. אתם יכולים לצפות בהודעותיכם הישנות אך אין באפשרותכם לכתוב חדשות. אנא השתמשו באפליקציית הממסר החדשה בניווט מעתה והלאה!"
+
+msgid "You can contact the group administration via this form. Write your message in the field below and than you will be redirected to the chat with group admins."
+msgstr ""
+
+msgid "You can contact the project administration via this form. Write your message in the field below and than you will be redirected to the chat with project admins."
+msgstr ""
+
+#, fuzzy
+msgid "What is your message?"
+msgstr "השם שלך"
+
+#, fuzzy
+#| msgid "Change it here..."
+msgid "Write it here"
+msgstr "שנה זאת כאן..."
+
+#, python-format
+msgid "Contact the administration of %(group_name)s:"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -11854,6 +10693,9 @@ msgstr "כתוב"
 msgid "Reply"
 msgstr "השב"
 
+msgid "Recipient"
+msgstr "נמען"
+
 msgid "Conversation"
 msgstr "שיחה"
 
@@ -11883,6 +10725,174 @@ msgstr "השב ל- %(sender_name)s"
 #, python-format
 msgid "Reply to all %(adressee_count)s"
 msgstr "השב לכל %(adressee_count)s"
+
+msgid "Your reply could not be matched to an existing message."
+msgstr "לא היתה דרך להתאים את תשובתך להודעה קיימת."
+
+msgid "An internal error occured."
+msgstr "אירעה שגיאה פנימית."
+
+msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
+msgstr "כתובת הדואר האלקטרוני ממנה שלחתם את התשובה אינה זו המשויכת לחשבון המשתמש שלכם. אנא שלחו תגובות ישירות רק מכתובת הדוא\"ל איתה נרשמתם באתר!"
+
+msgid "There was an error when processing your message text!"
+msgstr "אירעה שגיאה בעת עיבוד טקסט ההודעה שלך!"
+
+msgid "Your direct reply failed!"
+msgstr "תשובתך הישירה נכשלה!"
+
+msgid "Select at least one object."
+msgstr "בחרו אובייקט אחד לפחות."
+
+msgid "Messages or conversations successfully archived."
+msgstr "הודעות או שיחות אוחסנו בארכיון בהצלחה."
+
+msgid "Messages or conversations successfully deleted."
+msgstr "הודעות או שיחות נמחקו בהצלחה."
+
+msgid "Messages were marked as read."
+msgstr "ההודעות סומנו כנקראו."
+
+msgid "Messages or conversations successfully recovered."
+msgstr "הודעות או שיחות אוחזרו בהצלחה."
+
+msgid "Notes"
+msgstr "פתקים"
+
+msgctxt "the_app"
+msgid "note"
+msgstr "פתק"
+
+msgid "A user commented on a news post"
+msgstr "משתמש הגיב על פוסט"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post"
+msgstr "%(sender_name)s הגיב/ה על פוסט"
+
+msgid "A user commented on one of your news posts"
+msgstr "משתמש הגיב על אחד הפרסומים שלך"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post %(object_name)s"
+msgstr "%(sender_name)s הגיב/ה על פרסום שלך %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
+msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר הגיבו על הפוסט שלך %(object_name)s"
+msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים הגיבו על הפוסט שלך %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post"
+msgstr "%(sender_name)s הגיב/ה על פוסט שלך"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts"
+msgstr "%(sender_name)s הגיב/ה על אחד מהפוסטים שלך"
+
+msgid "A user commented on a news posts you commented in"
+msgstr "משתמש הגיב על פוסט שהגבת עליו"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
+msgstr "%(sender_name)s הגיב/ה על הפוסט %(object_name)s שהגבת עליו"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
+msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר הגיבו על הפוסט  %(object_name)s שהגבת בו"
+msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים הגיבו על הפוסט %(object_name)s שהגבת בו"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in"
+msgstr "%(sender_name)s הגיב/ה על פוסט שהגבת עליו"
+
+msgid "A user created a news post"
+msgstr "משתמש העלה פוסט חדש"
+
+#, python-format
+msgid "%(sender_name)s created the news post %(object_name)s"
+msgstr "%(sender_name)s העלת/ה את הפוסט %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d news posts"
+msgstr "%(sender_name)s יצר/ה %(count)d פוסטים"
+
+#, python-format
+msgid "%(sender_name)s created a new news post"
+msgstr "%(sender_name)s יצר/ה פוסט חדש"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s:"
+msgstr "%(sender_name)s פרסמ/ה פוסט ב- %(team_name)s:"
+
+msgid "A user created a news post in a team you are following"
+msgstr "משתמש יצר פוסט חדש בצוות שאתה עוקב אחריו"
+
+#, python-format
+msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s יצר/ה פוסט חדש ב-%(team_name)s (שאתם עוקבים)"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
+msgstr "%(sender_name)s פרסמ/ה ב-%(team_name)s: (שאתם עוקבים)"
+
+msgid "A user updated a news post"
+msgstr "משתמש עדכן פוסט"
+
+#, python-format
+msgid "%(sender_name)s updated the news post %(object_name)s"
+msgstr "%(sender_name)s עדכן/ה את הפוסט %(object_name)s"
+
+msgid "You are following this news post"
+msgstr "אתם עוקבים אחר פוסט זה"
+
+#, python-format
+msgid "%(sender_name)s updated a news post you are following"
+msgstr "%(sender_name)s עדכן/ה פוסט שאתם עוקבים"
+
+#, python-format
+msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
+msgstr "פוסט שנוצר על ידי %(sender_name)s (שאתם עוקבים) עודכן ב-%(team_name)s:"
+
+msgid "A user commented on a news post you are following"
+msgstr "משתמש הגיב על פוסט שאתם עוקבים"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s"
+msgstr "%(sender_name)s הגיב/ה על הפוסט %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
+msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר הגיבו על הפוסט %(object_name)s"
+msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים הגיבו על הפוסט %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on a news posts you are following"
+msgstr "%(sender_name)s הגיב/ה על פוסט שאתם עוקבים"
+
+msgid "No news"
+msgstr "אין חדשות"
+
+msgid "Write a news post"
+msgstr "כתיבת פוסט חדש"
+
+msgid "News stream"
+msgstr "ניוז סטרים"
+
+msgid "Popularity"
+msgstr "פופולריות"
+
+msgid "Facebook Share"
+msgstr "שתף בפייסבוק"
+
+msgid "Note Item"
+msgstr "פריט פתקים"
+
+msgid "Note Items"
+msgstr "פריטי פתקים"
 
 msgctxt "the_verb"
 msgid "Comment"
@@ -12058,6 +11068,128 @@ msgctxt "This appears next to new items in the timeline, as in '<Jane> created a
 msgid "added a post"
 msgstr "העלה/תה פוסט חדש"
 
+msgid "Your news post was added successfully."
+msgstr "הפרסום שלך הועלה בהצלחה."
+
+msgid "Your news post was deleted successfully."
+msgstr "הפרסום שלך נמחק בהצלחה."
+
+msgid "Your news post was edited successfully."
+msgstr "הפרסום שלך נערך בהצלחה."
+
+msgid "You are seeing this alert because you created this content."
+msgstr "אתם רואים התראה זו מכיוון שיצרתם תוכן זה."
+
+msgid "You are seeing this alert because you are following the item's project or group."
+msgstr "אתם רואים התראה זו מכיוון שאתם עוקבים אחר הפרויקט או הקבוצה של הפריט."
+
+msgid "You are seeing this alert because you are following this item."
+msgstr "אתם רואים התראה זו מכיוון שאתם עוקבים אחר פריט זה."
+
+msgctxt "the_app"
+msgid "notifications"
+msgstr "התראות"
+
+#, python-format
+msgid "Your daily digest for %(portal_name)s"
+msgstr "התמצית היומית שלך עבור %(portal_name)s"
+
+msgid "This is what happened during the last day!"
+msgstr "זה מה שקרה במהלך היום האחרון!"
+
+#, python-format
+msgid "Your weekly digest for %(portal_name)s"
+msgstr "התמצית השבועית שלך עבור %(portal_name)s"
+
+msgid "This is what happened during the last week!"
+msgstr "זה מה שקרה בשבוע האחרון!"
+
+msgctxt "notification frequency"
+msgid "Never"
+msgstr "אף פעם"
+
+msgctxt "notification frequency"
+msgid "Immediately"
+msgstr "מיידית"
+
+msgctxt "notification frequency"
+msgid "Daily"
+msgstr "יומית"
+
+msgctxt "notification frequency"
+msgid "Weekly"
+msgstr "שבועית"
+
+msgid "Notification Preference for User"
+msgstr "העדפות התראה למשתמש"
+
+msgid "Notification Preference"
+msgstr "העדפת התראה"
+
+msgid "Multi Notification ID"
+msgstr "פרטי זיהוי התראות מרובות"
+
+msgid "Multi Notification Preference"
+msgstr "העדפות התראה מרובות"
+
+msgid "Multi Notification Preferences"
+msgstr "העדפות התראה מרובות"
+
+msgid "User who caused this notification event"
+msgstr "משתמש שגרם לאירוע התראות זה"
+
+msgid "Audience"
+msgstr "קהל יעד"
+
+msgid "Owner of the alert"
+msgstr "בעל ההתראה"
+
+msgid "Alert Reason key"
+msgstr "מפתח 'סיבה להתראה'"
+
+msgid "Last user who caused this notification event"
+msgstr "משתמש אחרון שגרם לאירוע התראות זה"
+
+msgid "Alert State"
+msgstr "מצב התראה"
+
+msgid "You are following this content or its Project or Group"
+msgstr "אתם עוקבים אחר תוכן זה או הפרויקט או הקבוצה שלו"
+
+msgid "All notifications"
+msgstr "כל ההתראות"
+
+msgid "No notifications"
+msgstr "אין התראות"
+
+msgid "For content that I am following, I wish to receive notification emails"
+msgstr "עבור תוכן שאני עוקב/ת, ברצוני לקבל הודעות דוא\"ל"
+
+msgid "You are getting this notification because you are subscribed to these kinds of events in your project or group."
+msgstr "אתם מקבלים התראה זו מכיוון שאתם מנויים לאירועים מסוג זה בפרויקט/קבוצה שלכם."
+
+msgid "You are getting this notification because you are an administrator of this project or group."
+msgstr "אתם מקבלים התראה זו מכיוון שאתם מנהלי מערכת של פרויקט או קבוצה זו."
+
+msgid "You are getting this notification because you are an administrator of this portal."
+msgstr "אתם מקבלים התראה זו מכיוון שאתם מנהלי מערכת של פורטל זה."
+
+msgid "You are getting this email because you are subscribed to one or more daily notifications."
+msgstr "אתם מקבלים את הדוא\"ל מכיוון שאתם מנויים להתראה יומית אחת או יותר."
+
+msgid "You are getting this email because you are subscribed to one or more weekly notifications."
+msgstr "אתם מקבלים דוא\"ל זו מכיוון שאתם מנויים להתראה שבועית אחת או יותר."
+
+msgid "New item"
+msgstr "פריט חדש"
+
+#, python-format
+msgid "View on %(portal_name)s"
+msgstr "הצג על %(portal_name)s"
+
+msgid "Untitled"
+msgstr "ללא כותרת"
+
 msgid "Select which notifications you would like to receive for each group or project you are involved in."
 msgstr "בחרו איזה התראות תרצו לקבל עבור כל פרויקט/קבוצה שאתם מעורבים בה."
 
@@ -12114,6 +11246,33 @@ msgstr "אתחל לברירת מחדל"
 
 msgid "This will reset all of your notification preferences to their default setting. Are you sure you wish to do that?"
 msgstr "פעולה זו תאתחל את כל ההתראות שלכם להגדרות ברירות מחדל. האם אתם בטוחים שברצונכם לעשות זאת?"
+
+msgid "Your notification preferences were updated successfully."
+msgstr "העדפות ההתראה שלך עודכנו בהצלחה."
+
+msgid "Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!"
+msgstr ""
+
+msgid "Your notifications preferences were reset to default!"
+msgstr "העדפות ההתראה שלך אותחלו לברירת מחדל!"
+
+msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
+msgstr ""
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully signed in as {}."
+msgstr "חשבון משתמש הושבת בהצלחה"
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully connected account."
+msgstr "חשבון משתמש הושבת בהצלחה"
+
+#, fuzzy
+#| msgid "Successfully removed user"
+msgid "Successfully removed connection."
+msgstr "משתמש הוסר בהצלחה"
 
 #, fuzzy
 msgid "Set password"
@@ -12241,11 +11400,6 @@ msgstr ""
 
 msgid " This data we received from your WECHANGE account"
 msgstr ""
-
-#, fuzzy
-#| msgid "Last name"
-msgid "last name"
-msgstr "שם משפחה"
 
 msgid "Your Avatar and other settings from your profile were also copied."
 msgstr ""
@@ -12375,6 +11529,103 @@ msgstr ""
 #| msgid "Log in with %(portal_name)s"
 msgid "Login with %(provider_id)s"
 msgstr "התחבר באמצעות %(portal_name)s"
+
+#, fuzzy
+#| msgid "Organization"
+msgctxt "the_app"
+msgid "organization"
+msgstr "ארגון"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization membership"
+msgstr "ארגונים"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization memberships"
+msgstr "ארגונים"
+
+#, fuzzy
+#| msgid "Team Invite for Unregistered User"
+msgid "Organization Invite for Unregistered User"
+msgstr "הזמנת צוות עבור משתמש לא רשום"
+
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Organization Invites for Unregistered Users"
+msgstr "הזמנות צוות עבור משתמשים לא רשומים"
+
+#, fuzzy
+#| msgid "Assigned organizations"
+msgid "Civil society organization"
+msgstr "ארגונים שהוקצו"
+
+msgid "Company (commercial)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Public voting"
+msgid "Public institution"
+msgstr "הצבעה ציבורית"
+
+#, fuzzy
+#| msgid "Other teams"
+msgid "Other"
+msgstr "צוותים אחרים"
+
+#, fuzzy
+#| msgid "Remove organization"
+msgid "Name of the organization"
+msgstr "הסר ארגון"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Organization type"
+msgstr "ארגון"
+
+#, fuzzy
+#| msgid "Logout"
+msgid "Logo"
+msgstr "התנתק"
+
+#, fuzzy
+#| msgid "Email address"
+msgid "Email Address"
+msgstr "כתובת דוא\"ל"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Cosinnus Organization"
+msgstr "ארגון"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Cosinnus Organizations"
+msgstr "ארגונים"
+
+msgid "CosinnusOrganizationSocialMedia"
+msgstr ""
+
+#, fuzzy
+#| msgid "CosinnusLocation"
+msgid "CosinnusOrganizationLocation"
+msgstr "מיקום קוסינוס"
+
+#, fuzzy
+#| msgid "CosinnusLocations"
+msgid "CosinnusOrganizationLocations"
+msgstr "מיקומי קוסינוס"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Organization group"
+msgstr "ארגון"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization groups"
+msgstr "ארגונים"
 
 #, fuzzy, python-format
 #| msgid "%(team_name)s - Assigned organizations"
@@ -12563,10 +11814,281 @@ msgstr ""
 msgid "This organization should be made publicly findable via other platforms."
 msgstr "פרויקט זה יהפוך להיות גלוי בפומבי וניתן יהיה למצוא אותו בפלטפורמות אחרות."
 
+msgid "Is your organization open for cooperation in the funding program?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Organization is open for future projects."
+msgstr "הזמנות צוות עבור משתמשים לא רשומים"
+
 #, fuzzy, python-format
 #| msgid "Users in team %(group)s"
 msgid "Users in organization %(group)s"
 msgstr "משתמשים בצוות %(group)s"
+
+#, fuzzy, python-format
+#| msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
+msgid "Project/group %(name)s had already requested and has now been accepted."
+msgstr "פרוקיט/קבוצה %(group)s כבר הוזמנו ובעת הוקצו באופן מיידי!"
+
+#, fuzzy, python-format
+#| msgid "User %(username)s was successfully invited!"
+msgid "Project/group %(name)s was successfully invited."
+msgstr "המשתמש %(username)s הוזמן בהצלחה!"
+
+#, fuzzy, python-format
+#| msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
+msgid "Your join request was withdrawn from organization “%(name)s” successfully."
+msgstr "בקשת ההצטרפות שלך ל-%(team_type)s  “%(team_name)s” בוטלה בהצלחה."
+
+#, fuzzy, python-format
+#| msgid "You have declined the invitation to %(team_type)s “%(team_name)s”."
+msgid "You have declined the invitation to organization “%(name)s”."
+msgstr "דחית את ההזזמנה ל-%(team_type)s “%(team_name)s”."
+
+#, fuzzy, python-format
+#| msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
+msgid "Your project/group is now assigned to the organization “%(name)s”. Welcome!"
+msgstr "כעת אתה חבר ב-%(team_type)s “%(team_name)s”. ברוך הבא!"
+
+#, fuzzy, python-format
+#| msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
+msgid "Your request was withdrawn from organization \"%(name)s\" successfully."
+msgstr "בקשת ההצטרפות שלך ל-%(team_type)s \"%(team_name)s\" הוסרה בהצלחה."
+
+#, fuzzy, python-format
+#| msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
+msgid "Your invitation to project/group \"%(name)s\" was withdrawn successfully."
+msgstr "הזמנתך למשתמש \"%(username)s\" הוסרה בהצלחה."
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Project/group \"%(name)s\" is no longer assigned."
+msgstr "המשתמש \"%(username)s\" אינו חבר יותר."
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can create Organizations! You can either create a Project, or write a message to one of the administrators to create a Organization for you. Below you can find a listing of all administrators."
+msgstr "מצטערים, רק מנהלי פורטל יכולים ליצור קבוצות! באפשרותך ליצור פרוייקט, או לכתוב הודעה לאחד המנהלים כדי ליצור קבוצה עבורך. להלן ניתן למצוא רשימה של כל מנהלי המערכת."
+
+#, fuzzy, python-format
+#| msgid "Event \"%(title)s\" was edited successfully."
+msgid "Organization \"%(name)s\" was created successfully."
+msgstr "האירוע \"%(title)s\" נערך בהצלחה."
+
+#, fuzzy
+#| msgid "Your idea was deleted successfully."
+msgid "Your organization was deleted successfully."
+msgstr "הרעיון שלך נמחק בהצלחה."
+
+msgctxt "the_app"
+msgid "poll"
+msgstr "סקר"
+
+msgid "A user created a new poll"
+msgstr "משתמש יצר/ה סקר חדש"
+
+#, python-format
+msgid "%(sender_name)s created the poll %(object_name)s"
+msgstr "%(sender_name)s יצר/ה את הסקר %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d polls"
+msgstr "%(sender_name)s יצר/ה %(count)d סקרים"
+
+#, python-format
+msgid "%(sender_name)s created a new poll"
+msgstr "%(sender_name)s יצר/ה סקר חדש"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "סקר חדש: \"%(object_name)s\" נוצר ב-%(team_name)s."
+
+msgid "A poll you voted on was completed"
+msgstr "סקר שהצבעתם בו הושלם"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
+msgstr "%(sender_name)s השלימ/ה את הסקר שהצבעתם בו %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls you voted on"
+msgstr "%(sender_name)s השלימ/ה %(count)d סקרים שהצבעת בהם"
+
+#, python-format
+msgid "%(sender_name)s completed the poll"
+msgstr "%(sender_name)s השלימ/ה את הסקר"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "הסקר \"%(object_name)s\" הושלם ב-%(team_name)s."
+
+msgid "A user commented on one of your polls"
+msgstr "משתמש הגיב על אחד מהסקרים שלך"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll %(object_name)s"
+msgstr "%(sender_name)s הגיב/ה על הסקר שלך %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
+msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר הגיבו על הסקר שלך %(object_name)s"
+msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים הגיבו על הסקר %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll"
+msgstr "%(sender_name)s הגיב/ה על הסקר שלך"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls"
+msgstr "%(sender_name)s הגיב/ה על אחד הסקרים שלך"
+
+msgid "A user commented on a poll you were tagged in"
+msgstr "משתמש הגיב על סקר שתויגת בו"
+
+#, python-format
+msgid "%(sender_name)s commented on the poll %(object_name)s"
+msgstr "%(sender_name)s הגיב/ה על הסקר %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
+msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר השיבו על הסקר %(object_name)s"
+msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים הגיבו על הסקר %(object_name)s"
+
+msgid "You were tagged in this poll"
+msgstr "תויגתם בסקר זה"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in"
+msgstr "%(sender_name)s הגיב/ה על סקר שתויגת בו"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s הגיב/ה על סקר שתויגתם בו ב-%(team_name)s"
+
+msgid "A user commented on an poll you voted in"
+msgstr "משתמש הגיב בסקר שהצבעת בו"
+
+msgid "You voted on this poll"
+msgstr "הצבעתם בסקר זה"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in"
+msgstr "%(sender_name)s הגיב/ה בסקר שהצבעתם בו"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
+msgstr "%(sender_name)s הגיב/ה על סקר שהצבעתם בו ב-%(team_name)s"
+
+msgid "A user created a new poll in a team you are following"
+msgstr "משתמש יצר סקר חדש בצוות שאתם עוקבים"
+
+#, python-format
+msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s יצר/ה סקר חדש ב-%(team_name)s (שאתם עוקבים אחריו)"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "סקר חדש: \"%(object_name)s\" נוצר ב-%(team_name)s (שאתם עוקבים אחריו)"
+
+msgid "A user updated a poll you are following"
+msgstr "משתמש עידכן סקר שאתם עוקבים"
+
+#, python-format
+msgid "%(sender_name)s updated the poll %(object_name)s"
+msgstr "%(sender_name)s עדכנ/ה את הסקר %(object_name)s"
+
+msgid "You are following this poll"
+msgstr "אתם עוקבים אחר סקר זה"
+
+#, python-format
+msgid "%(sender_name)s updated a poll you are following"
+msgstr "%(sender_name)s עדכנ/ה סקר שאתם עוקבים בו"
+
+#, python-format
+msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "הסקר שאתם עוקבים אחריו: \"%(object_name)s\" עודכן ב-%(team_name)s."
+
+msgid "A poll you are following was completed"
+msgstr "סקר שאתם עוקבים הושלם"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s"
+msgstr "%(sender_name)s השלימ/ה את הסקר %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls"
+msgstr "%(sender_name)s השלימ/ה %(count)d סקרים"
+
+#, python-format
+msgid "%(sender_name)s completed the poll you are following"
+msgstr "%(sender_name)s השלימ/ה את הסקר שאתם עוקבים אחריו"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
+msgstr "הסקר \"%(object_name)s\" שאתם עוקבים הושלם ב-%(team_name)s."
+
+msgid "A user commented on one a poll you are following"
+msgstr "משתמש הגיב על סקר שאתם עוקבים"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you are following"
+msgstr "%(sender_name)s הגיב/ה על סקר שאתה עוקבים"
+
+msgid "Current Polls"
+msgstr "סקרים נוכחיים"
+
+msgid "No current polls"
+msgstr "אין סקרים כרגע"
+
+msgid "You must write a description for this poll option!"
+msgstr "אתם חייבים לכתוב תיאור עבור אפשרות סקר זו!"
+
+msgid "Voting closed"
+msgstr "ההצבעה סגורה"
+
+msgid "Poll archived"
+msgstr "סקר בארכיון"
+
+msgid "Multiple options votable"
+msgstr "אפשרויות הצבעה מרובות"
+
+msgid "Does this poll allow users to vote on multiple options or just decide for one?"
+msgstr "האם סקר זה מאפשר למשתמשים להצביע על אפשרויות מרובות או פשוט להחליט על אחת?"
+
+msgid "\"Maybe\" option enabled"
+msgstr "האפשרות \"אולי\" זמינה"
+
+msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
+msgstr "האם האפשרות 'אולי' זמינה? התעלם והחל ברירת מחדל אם ``multiple_votes==False`` ההצבעה כוזבת"
+
+msgid "Anyone can vote"
+msgstr "כל אחד יכול להצביע"
+
+msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
+msgstr "אם כן, כל מי שיכול לראות את הסקר יכול להצביע בו. אם לא, רק חברי הקבוצה יכולים."
+
+msgid "Show voters"
+msgstr "הצג מצביעים"
+
+msgid "If true, display a list of which user voted for each option."
+msgstr "אם כן, הצג רשימת משתמשים ובחירותיהם באילו מן האפשרויות."
+
+msgid "Winning Option"
+msgstr "האפשרות הזוכה"
+
+#, python-format
+msgid "Poll: %(poll)s (%(state)s)"
+msgstr "סקר: (%(state)s) %(poll)s"
+
+msgid "Poll Option"
+msgstr "אפשרות סקר"
+
+msgid "Poll Options"
+msgstr "אפשרויות הסקר"
 
 msgid "Poll choice"
 msgstr "בחירת סקר"
@@ -12913,6 +12435,85 @@ msgstr "יצר/ה"
 msgid "There are no polls yet"
 msgstr "אין סקרים עדיין"
 
+#, python-format
+msgid "Poll \"%(title)s\" was edited successfully."
+msgstr "הסקר \"%(title)s\" נערך בהצלחה."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be edited."
+msgstr "לא ניתן לערוך את הסקר \"%(title)s\" ."
+
+#, python-format
+msgid "Poll \"%(title)s\" was added successfully."
+msgstr "הסקר \"%(title)s\" נוסף בהצלחה."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be added."
+msgstr "לא ניתן להוסיף את הסקר \"%(title)s\"."
+
+msgid "You should define at least one poll option!"
+msgstr "עליכם להגדיר לפחות אפשרות סקר אחת!"
+
+msgid "This poll is archived and cannot be edited anymore!"
+msgstr "סקר זה בארכיון ולא ניתן לערוך אותו יותר!"
+
+#, python-format
+msgid "Poll \"%(title)s\" was deleted successfully."
+msgstr "הסקר \"%(title)s\" נמחק בהצלחה."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be deleted."
+msgstr "לא ניתן למחוק את הסקר \"%(title)s\"."
+
+msgid "The voting phase for this poll is over. You cannot vote for it any more."
+msgstr "שלב ההצבעה לסקר זה הסתיים. לא ניתן להצביע יותר."
+
+msgid "In this poll you must vote for exactly one item!"
+msgstr "בסקר זה עליכם להצביע בדיוק לפריט אחד!"
+
+msgid "Invalid action for this poll. The request could not be completed!"
+msgstr "פעולה לא חוקית לסקר זה. לא ניתן להשלים את הבקשה!"
+
+msgid "This action is not permitted for this poll at this stage!"
+msgstr "פעולה זו אינה מותרת לסקר בשלב זה!"
+
+msgid "The poll was closed successfully."
+msgstr "הסקר נסגר בהצלחה."
+
+msgid "The poll was re-opened successfully."
+msgstr "הסקר נפתח מחדש בהצלחה."
+
+msgid "The poll was archived successfully."
+msgstr "הסקר הועבר לארכיון בהצלחה."
+
+msgid "Stream"
+msgstr "שידור"
+
+msgctxt "the_app"
+msgid "stream"
+msgstr "סטרים"
+
+msgid "My Streams"
+msgstr "השידורים שלי"
+
+msgid "Streams"
+msgstr "שידורים"
+
+msgid "Models"
+msgstr "דגמים"
+
+msgid "Portal IDs"
+msgstr "מזהי פורטל"
+
+msgid "Last seen"
+msgstr "נראה לאחרונה"
+
+msgid "Special Stream"
+msgstr "שידור מיוחד"
+
+msgid "Special Group IDs"
+msgstr "תעודות זהות קבוצתיות מיוחדות"
+
 msgid "Public Stream"
 msgstr "שידור"
 
@@ -12967,6 +12568,260 @@ msgstr "לסנן לפי מחברים, תגים או מאפיינים מתויג�
 
 msgid "Filter by item types?"
 msgstr "לסנן לפי סוגי פריטים?"
+
+msgid "You do not have permission to access this stream."
+msgstr "אין לך הרשאה לגשת לשידור זה."
+
+msgid "Your stream was added successfully."
+msgstr "השידור שלך נוסף בהצלחה."
+
+msgid "Your stream was updated successfully."
+msgstr "השידור שלך עודכן בהצלחה."
+
+msgid "Your stream was deleted successfully."
+msgstr "השידור שלך נמחק בהצלחה."
+
+msgid "You cannot delete the default stream!"
+msgstr "אינך יכול למחוק את שידור ברירת המחדל!"
+
+msgctxt "the_app"
+msgid "todo"
+msgstr "טודו - רשימת משימות"
+
+msgid "A user created a new todo"
+msgstr "משתמש יצר משימה"
+
+#, python-format
+msgid "%(sender_name)s created the todo %(object_name)s"
+msgstr "%(sender_name)s יצר/ה את המשימה %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d todos"
+msgstr "%(sender_name)s יצר/ה %(count)d משימות"
+
+#, python-format
+msgid "%(sender_name)s created a new todo"
+msgstr "%(sender_name)s יצר/ה משימה חדשה"
+
+#, python-format
+msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "משימה חדשה: \"%(object_name)s\" נוצרה ב-%(team_name)s."
+
+msgid "A todo was assigned to me"
+msgstr "שויכה אלי משימה"
+
+#, python-format
+msgid "%(sender_name)s assigned the todo %(object_name)s to you"
+msgstr "%(sender_name)s שייך את המשימה %(object_name)s לך"
+
+#, python-format
+msgid "%(sender_name)s assigned %(count)d todos to you"
+msgstr "%(sender_name)s שייך אליך %(count)d משימות"
+
+#, python-format
+msgid "%(sender_name)s assigned a todo to you"
+msgstr "%(sender_name)s שייך אותך למשימה"
+
+msgid "A todo I created was completed"
+msgstr "משימה שיצרתי הושלמה בהצלחה"
+
+#, python-format
+msgid "%(sender_name)s completed the todo %(object_name)s"
+msgstr "%(sender_name)s השלימ/ה את המשימה %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d todos"
+msgstr "%(sender_name)s השלימ/ה %(count)d משימות"
+
+msgid "You created this todo"
+msgstr "את/ה יצרת את המשימה הזו"
+
+#, python-format
+msgid "%(sender_name)s completed your todo"
+msgstr "%(sender_name)s השלימ/ה את המטלה שלך"
+
+#, python-format
+msgid "%(sender_name)s completed one of your todos"
+msgstr "%(sender_name)s השלימ/ה את המשימות שלך"
+
+msgid "A user commented on one of your todos"
+msgstr "משתמש הגיב על אחת המשימות שלך"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo %(object_name)s"
+msgstr "%(sender_name)s הגיב/ה על המשימה שלך %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
+msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר הגיבו על המשימה שלך %(object_name)s"
+msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים הגיבו על המשימה שלך %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo"
+msgstr "%(sender_name)s הגיב/ה על המשימה שלך"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your todos"
+msgstr "%(sender_name)s הגיב/ה על אחת מהמשימות שלך"
+
+msgid "A user commented on a todo you were tagged in"
+msgstr "משתמש הגיב על משימה שתויגת בה"
+
+#, python-format
+msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgstr "%(sender_name)s הגיב/ה על על המשימה שלך %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
+msgstr[0] "%(sender_name)s ו- %(count_minus_one)d אחר הגיבו על המשימה %(object_name)s"
+msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים הגיבו על המשימה %(object_name)s"
+
+msgid "You were tagged in this todo"
+msgstr "תוייגת במשימה זו"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in"
+msgstr "%(sender_name)s הגיב/ה על משימה שתויגת בה"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s הגיב/ה על משימה שתויגת בה ב-%(team_name)s"
+
+msgid "A user commented on a todo you were assigned to"
+msgstr "משתמש הגיב על משימה ששויכה אליך"
+
+#, python-format
+msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
+msgstr "%(sender_name)s הגיב על המשימה %(object_name)s ששויכה אליך"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
+msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר הגיבו על המשימה שניתנה לך %(object_name)s"
+msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים הגיבו על המשימה שניתנה לך %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos"
+msgstr "%(sender_name)s הגיב על אחת מהמשימות שניתנו לך"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgstr "%(sender_name)s הגיב על אחת מהמשימות שניתנו לך ב-%(team_name)s"
+
+msgid "A user updated a todo you are following"
+msgstr "משתמש עדכן משימה שאתה עוקב אחריה"
+
+#, python-format
+msgid "%(sender_name)s updated the todo %(object_name)s"
+msgstr "%(sender_name)s עדכן את המשימה %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
+msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר עדכנו את המשימה %(object_name)s"
+msgstr[1] "%(sender_name)s ו-%(count_minus_one)d אחרים עדכנו את המשימה %(object_name)s"
+
+msgid "You are following this todo"
+msgstr "אתה עוקב אחר משימה זו"
+
+#, python-format
+msgid "%(sender_name)s updated a todo you are following"
+msgstr "%(sender_name)s עדכן משימה שאתה עוקב אחריה"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "המשימה שאתה עוקב אחריה: \"%(object_name)s\" עודכנה ב-%(team_name)s."
+
+msgid "A user reassigned a todo you are following"
+msgstr "משתמש שייך מחדש משימה שאתה עוקב אחריה"
+
+#, python-format
+msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgstr "%(sender_name)s שייך מחדש את המשימה %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s reassigned %(count)d todos"
+msgstr "%(sender_name)s שייך מחדש %(count)d משימות"
+
+#, python-format
+msgid "%(sender_name)s reassigned a todo you are following"
+msgstr "%(sender_name)s שייך מחדש משימה שאתה עוקב אחריה"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
+msgstr "משימה שאתה עוקב אחריה: \"%(object_name)s\" שויכה מחדש ב-%(team_name)s."
+
+msgid "A user completed a todo you are following"
+msgstr "משתמש השלים משימה שאתה עוקב אחריה"
+
+#, python-format
+msgid "%(sender_name)s completed a todo you are following"
+msgstr "%(sender_name)s השלים משימה שאתה עוקב אחריה"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "משימה שאתה עוקב אחריה: \"%(object_name)s\" הושלמה ב-%(team_name)s."
+
+msgid "A user commented on a todo you are following"
+msgstr "משתמש הגיב על משימה שאתה עוקב אחריה"
+
+#, python-format
+msgid "%(sender_name)s commented on on a todo you are following"
+msgstr "%(sender_name)s הגיב על משימה שאתה עוקב אחריה"
+
+msgid "My Todos"
+msgstr "המשימות שלי"
+
+msgid "No todos"
+msgstr "אין משימות"
+
+msgid "Open"
+msgstr "טרם הושלמה"
+
+msgid "Completed"
+msgstr "הושלמה"
+
+msgid "Assigned To"
+msgstr "הוקצה ל-"
+
+msgid "Priority"
+msgstr "עדיפות"
+
+msgid "Due date"
+msgstr "תאריך יעד"
+
+msgid "Soonest Due"
+msgstr "המועד הקרוב ביותר"
+
+msgid "You are not allowed to assign this Todo entry."
+msgstr "אינך מורשה לשייך ערך משימה זו."
+
+msgid "Later"
+msgstr "יותר מאוחר"
+
+msgid "Normal"
+msgstr "רגיל"
+
+msgid "Important"
+msgstr "חשוב"
+
+msgid "Due by"
+msgstr "עד ל"
+
+msgid "Completed on"
+msgstr "הושלם בתאריך"
+
+msgid "Completed by"
+msgstr "הושלם על ידי"
+
+msgid "Assigned to"
+msgstr "שויכה ל-"
+
+#, python-format
+msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
+msgstr "המשימה \"%(todo_name)s\" ניתנה ל-%(assignee_name)s"
 
 #, python-format
 msgid ""
@@ -13276,6 +13131,262 @@ msgstr "אין משימות המשויכות לך"
 
 msgid "Tasks are shown only for logged in users"
 msgstr "משימות מוצגות רק עבור משתמשים מחוברים"
+
+#, python-format
+msgid "Todo \"%(title)s\" was added successfully."
+msgstr "המשימה \"%(title)s\" נוספה בהצלחה."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be added."
+msgstr "לא ניתן להוסיף את המשימה \"%(title)s\"."
+
+msgid "You were trying to add a todo to a todolist that does not exist!"
+msgstr "ניסית להוסיף משימה לרשימה שלא קיימת!"
+
+#, python-format
+msgid "Todo \"%(title)s\" was edited successfully."
+msgstr "המשימה \"%(title)s\" נערכה בהצלחה."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be edited."
+msgstr "לא ניתן לערוך את המשימה \"%(title)s\"."
+
+#, python-format
+msgid "Todo \"%(title)s\" was deleted successfully."
+msgstr "המשימה \"%(title)s\" נמחקה בהצלחה."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be deleted."
+msgstr "לא ניתן למחוק את המשימה \"%(title)s\"."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned successfully."
+msgstr "המשימה \"%(title)s\" שוייכה בהצלחה."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned."
+msgstr "לא ניתן לשייך את המשימה \"%(title)s\"."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned to You successfully."
+msgstr "המשימה \"%(title)s\" הוקצתה לך בהצלחה."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned to You."
+msgstr "לא ניתן היה להקצות לך את המשימה \"%(title)s\"."
+
+#, python-format
+msgid "Todo \"%(title)s\" was unassigned successfully."
+msgstr "שיוך המשימה \"%(title)s\" הוסר בהצלחה."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be unassigned."
+msgstr "לא ניתן היה להסיר את השיוך למשימה \"%(title)s\"."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed successfully."
+msgstr "המשימה \"%(title)s\" הושלמה בהצלחה."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed."
+msgstr "לא ניתן היה להשלים את המשימה \"%(title)s\"."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed by You successfully."
+msgstr "המשימה \"%(title)s\" הושלמה בהצלחה על ידך."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed by You."
+msgstr "אינך יכול/ה להשלים את המשימה \"%(title)s\"."
+
+#, python-format
+msgid "Todo \"%(title)s\" was set to incomplete successfully."
+msgstr "המשימה \"%(title)s\" הוגדרה כבלתי שלמה בהצלחה."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be set to incomplete."
+msgstr "לא ניתן להגדיר את המשימה \"%(title)s\" כבלתי שלמה."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was edited successfully."
+msgstr "רשימת המשימות \"%(title)s\" נערכה בהצלחה."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be edited."
+msgstr "לא ניתן לערוך את רשימת המשימות \"%(title)s\"."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was added successfully."
+msgstr "רשימת המשימות \"%(title)s\" נוספה בהצלחה."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be added."
+msgstr "לא ניתן להוסיף את רשימת המשימות \"%(title)s\"."
+
+msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
+msgstr "אינך יכול למחוק תיקיה זו מכיוון שאין לך הרשאה למחוק פריט אחד או יותר שהיא מכילה!"
+
+#~ msgid "Ok"
+#~ msgstr "אישור"
+
+#~ msgid "Message Group"
+#~ msgstr "שלח הודעה לקבוצה"
+
+#~ msgid "Message Project"
+#~ msgstr "שלח/י הודעה לפרויקט"
+
+#, fuzzy
+#~| msgid "This message was sent in a conversation with: "
+#~ msgid "The message cannot be replied without being in a conversation."
+#~ msgstr "הודעה זו נשלחה בשיחה עם: "
+
+#, fuzzy
+#~| msgid "Is Moderator"
+#~ msgid "Moderation"
+#~ msgstr "הוא מנהל פורום"
+
+#, fuzzy
+#~| msgid "Your name"
+#~ msgid "{username}"
+#~ msgstr "השם שלך"
+
+#, fuzzy
+#~| msgid "Additional Recipients"
+#~ msgid "Additional recipients"
+#~ msgstr "נמענים נוספים"
+
+#, fuzzy
+#~| msgid "Additional Recipients"
+#~ msgid "Additional recipient"
+#~ msgstr "נמענים נוספים"
+
+#, fuzzy
+#~| msgid "Message Project"
+#~ msgid "Message Rejected"
+#~ msgstr "שלח/י הודעה לפרויקט"
+
+#, fuzzy
+#~ msgid "Your message has been rejected"
+#~ msgstr "השינויים שביצעת נשמרו בהצלחה."
+
+#, fuzzy
+#~| msgid "Message Project"
+#~ msgid "Message Received"
+#~ msgstr "שלח/י הודעה לפרויקט"
+
+#, fuzzy
+#~| msgid "You have been invited to apply!"
+#~ msgid "You have received a message"
+#~ msgstr "הוזמנת להגיש מועמדות!"
+
+#, fuzzy
+#~| msgid "You have been invited to apply!"
+#~ msgid "You have received a reply"
+#~ msgstr "הוזמנת להגיש מועמדות!"
+
+#, fuzzy
+#~| msgid "Restricted"
+#~ msgid "Rejected"
+#~ msgstr "מוגבל"
+
+#, fuzzy
+#~| msgid "Everybody"
+#~ msgid "body"
+#~ msgstr "כולם"
+
+#, fuzzy
+#~ msgid "sender"
+#~ msgstr "פורסם"
+
+#, fuzzy
+#~| msgid "Recipient"
+#~ msgid "recipient"
+#~ msgstr "נמען"
+
+#, fuzzy
+#~| msgid "Visitor"
+#~ msgid "visitor"
+#~ msgstr "מבקר"
+
+#, fuzzy
+#~ msgid "parent message"
+#~ msgstr "השם שלך"
+
+#, fuzzy
+#~| msgid "No messages"
+#~ msgid "root message"
+#~ msgstr "אין הודעות"
+
+#, fuzzy
+#~| msgid "Sent at:"
+#~ msgid "sent at"
+#~ msgstr "נשלח ב:"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "archived by recipient"
+#~ msgstr "נמען לא מוגדר."
+
+#, fuzzy
+#~| msgid "Delete user account"
+#~ msgid "deleted by sender at"
+#~ msgstr "מחק חשבון משתמש"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "deleted by recipient at"
+#~ msgstr "נמען לא מוגדר."
+
+#, fuzzy
+#~| msgid "Is Moderator"
+#~ msgid "moderator"
+#~ msgstr "הוא מנהל פורום"
+
+#, fuzzy
+#~| msgid "Related to"
+#~ msgid "moderated at"
+#~ msgstr "משויך ל"
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "message"
+#~ msgstr "הודעה"
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "messages"
+#~ msgstr "הודעה"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "Undefined sender."
+#~ msgstr "נמען לא מוגדר."
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "pending message"
+#~ msgstr "הודעה"
+
+#, fuzzy
+#~ msgid "pending messages"
+#~ msgstr "השם שלך"
+
+#, fuzzy
+#~ msgid "Re: {subject}"
+#~ msgstr "נושא"
+
+#, fuzzy
+#~| msgid "User successfully created!"
+#~ msgid "Message successfully sent."
+#~ msgstr "המשתמש נוצר בהצלחה!"
+
+#, fuzzy
+#~| msgid "Select at least one object."
+#~ msgid "Message rejected for at least one recipient."
+#~ msgstr "בחרו אובייקט אחד לפחות."
 
 #, fuzzy
 #~ msgid "CSV Import Results"

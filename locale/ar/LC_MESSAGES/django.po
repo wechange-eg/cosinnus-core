@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 16:02+0200\n"
+"POT-Creation-Date: 2022-06-01 15:58+0200\n"
 "PO-Revision-Date: 2021-03-05 18:22+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -180,6 +180,14 @@ msgid "Reactivate user accounts"
 msgstr "تم تنشيط حساب المستخدم بنجاح"
 
 #, fuzzy, python-format
+#| msgid "%d Users' rocketchat room memberships were re-done."
+msgid "%(count)d Users' group memberships were refreshed."
+msgstr "%dتمت إعادة عضويات غرفة rocketchat للمستخدمين."
+
+msgid "Refresh user group membership associations (e.g. cache or Nextcloud folder problems)"
+msgstr ""
+
+#, fuzzy, python-format
 msgid "%d Users were synchronized successfully."
 msgstr "%d تم إلغاء تنشيط المستخدمين بنجاح."
 
@@ -283,6 +291,13 @@ msgstr "قائمة المرجعية"
 
 msgid "Bookmarked Users list"
 msgstr "قائمة المستخدمين المرجعية"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Invitations"
+msgstr "دعوات"
+
+msgid "Conferences"
+msgstr "مؤتمرات"
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
@@ -505,12 +520,12 @@ msgstr "لقد دعتك %(sender_name)s للانضمام إلى \"%(team_name)s\
 msgid "Accept invitation"
 msgstr "قبول دعوة"
 
-msgid "View invitation"
-msgstr "عرض الدعوة"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s قام بدعوتك"
+
+msgid "View invitation"
+msgstr "عرض الدعوة"
 
 msgid "New link to the moved project/group"
 msgstr "ارتباط جديد بالمشروع / المجموعة المنقولة"
@@ -560,6 +575,28 @@ msgstr "%(sender_name)s أنشأ للتو فكرة \"%(object_name)s\" على %(
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s قام للتو بإنشاء حساب مستخدم جديد على %(portal_name)s!"
+
+msgid "A conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The conference %(object_name)s has been updated"
+msgstr "قد تمت الإشارة لم في \"%(object_name)s\" في %(team_name)s."
+
+#, fuzzy
+msgid "You are attending this conference"
+msgstr "أنت على وشك إلغاء تنشيط هذا المشروع/المجموعة!"
+
+#, fuzzy, python-format
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr "قد تمت الإشارة لم في \"%(object_name)s\" في %(team_name)s."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The time of conference %(object_name)s has been updated"
+msgstr "قد تمت الإشارة لم في \"%(object_name)s\" في %(team_name)s."
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -830,6 +867,11 @@ msgstr "أعجبني"
 
 msgid "Persons"
 msgstr "أشخاص"
+
+#, fuzzy
+#| msgid "Last name"
+msgid "last name"
+msgstr "اسم العائلة"
 
 #, fuzzy
 #| msgid "My location"
@@ -1562,12 +1604,21 @@ msgstr "المجموعة الأم"
 msgid "Related Teams"
 msgstr "الفرق ذات الصلة"
 
+#, fuzzy
+#| msgid "I am open for cooperation requests"
+msgid "Open for cooperation"
+msgstr "أنا منفتح على طلبات التعاون"
+
 msgid "Dynamic extra fields"
 msgstr "الحقول الإضافية الديناميكية"
 
 #, fuzzy
 msgid "If set to true, a contact form will be displayed on the micropage."
 msgstr "ذا كان هذا نشطًا، فسيتم عرض مربع الدعوة للعمل على الموقع المصغر."
+
+#, fuzzy
+msgid "Use invite token"
+msgstr "إدخال رمز:"
 
 msgid "Cosinnus project"
 msgstr "مشروع جار"
@@ -2316,6 +2367,18 @@ msgstr "حذف العنصر المبلغ عنه..."
 msgid "(The reported item has been deleted.)"
 msgstr "(تم حذف العنصر المبلغ عنه.)"
 
+msgid "This user profile is scheduled for deletion at: "
+msgstr ""
+
+msgid "However, it will not be deleted, because it is still active."
+msgstr ""
+
+msgid "This user account is disabled. The user cannot log in or use the account."
+msgstr ""
+
+msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
+msgstr ""
+
 #, fuzzy
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "أدخل الأحرف الأربعة الكبيرة في الصورة المشوشة"
@@ -2402,6 +2465,139 @@ msgstr "الإدارة"
 msgid "Select a page on the left side."
 msgstr "حدد صفحة على الجانب الأيسر."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "نظرة عامة - المؤتمرات والغرف وورش العمل مع إعدادات خادم BBB المخصصة"
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "نظرة عامة - جميع المؤتمرات"
+
+msgid "Overview - All Conferences"
+msgstr "نظرة عامة - جميع المؤتمرات"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "نظرة عامة - المؤتمرات والغرف وورش العمل"
+
+msgid "Past"
+msgstr "ماضي"
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "عرض على الصفحة"
+
+msgid "Upcoming"
+msgstr "القادمة"
+
+#, fuzzy
+msgid "View Past"
+msgstr "عرض المشروع"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+msgid "Booked"
+msgstr "مرجعية"
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "المؤتمر هو مميز و دائم"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "إعدادات الخصوصية"
+
+msgid "Conference Settings"
+msgstr "إعدادات المؤتمر"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "مميز"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr "غير مميز"
+
+msgid "Rooms"
+msgstr "غرف"
+
+msgid "Start"
+msgstr "ابدأ"
+
+msgid "running now!"
+msgstr "قيد الشتغيل"
+
+msgid "Conference Setting"
+msgstr "إعداد المؤتمر"
+
+#, fuzzy
+#| msgid "Rooms"
+msgid "Room"
+msgstr "غرف"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgctxt "Calendar"
+#| msgid "Event"
+msgid "Event"
+msgstr "مناسبة"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "المؤتمر هو مميز و دائم"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "المؤتمر هو مميز و دائم"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "هل تريد حقًا رفض الدعوة؟"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "هل تريد حقًا إزالة العضو „%(name)s“من الفريق؟"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "لا توجد عناصر حتى الآن"
+
+msgid "BBB"
+msgstr "BBB"
+
+msgid "BBB Premium"
+msgstr "BBB مميز"
+
+msgid "BBB Recording API"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "غير معتمد"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "خادم BBB للمؤتمرات المتميزة"
+
+msgid "Save"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "هل تريد حقًا رفض العضو „%(name)s“؟"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "حذف الملف الشخصي"
+
 msgid "Newsletters"
 msgstr "النشرات الإخبارية"
 
@@ -2457,6 +2653,18 @@ msgstr "إعلانات لوحة تحكم المستخدم"
 
 msgid "User Welcome Email"
 msgstr "البريد الإلكتروني الترحيبي للمستخدم"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "المؤتمر قيد التشغيل"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "خادم BBB للمؤتمرات المتميزة"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "المؤتمر قيد التشغيل"
 
 msgid "Simple Statistics"
 msgstr "إحصائيات بسيطة"
@@ -2518,9 +2726,6 @@ msgstr "الاسم الأول"
 
 msgid "Lastname"
 msgstr "اسم العائلة"
-
-msgid "Save"
-msgstr ""
 
 msgid "User Administration"
 msgstr "إدارة المستخدم"
@@ -3271,7 +3476,9 @@ msgstr "من نوع الفريق"
 msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
 msgstr "اللوبي هو نقطة الدخول الرئيسية للمشاركين. ستجد أجندة المؤتمر هنا."
 
-msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+#, fuzzy
+#| msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+msgid "The Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgstr "تُستخدم المنصة لعرض تيار ، على سبيل المثال من يوتيوب أو فيميو. دردشة ستظهر بجانبه."
 
 msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
@@ -3362,6 +3569,9 @@ msgstr "يمكنك إنشاء أحداث مؤتمرات للغرف مباشرة�
 #, fuzzy
 msgid "There are no rooms yet."
 msgstr "لا توجد عناصر حتى الآن"
+
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
@@ -3545,6 +3755,12 @@ msgstr "مميز بنجمة"
 msgid "Length"
 msgstr ""
 
+msgid "minute"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
 #, fuzzy
 #| msgid "Delete Account"
 msgid "Delete Recording"
@@ -3558,152 +3774,6 @@ msgstr "هل تريد حقًا حذف الإعلان \"%(title)s\"؟"
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "حذف العنصر المبلغ عنه..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "نظرة عامة - المؤتمرات والغرف وورش العمل مع إعدادات خادم BBB المخصصة"
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "نظرة عامة - جميع المؤتمرات"
-
-msgid "Overview - All Conferences"
-msgstr "نظرة عامة - جميع المؤتمرات"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "إدارة المستخدم"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "نظرة عامة - المؤتمرات والغرف وورش العمل"
-
-msgid "Past"
-msgstr "ماضي"
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "عرض على الصفحة"
-
-msgid "Upcoming"
-msgstr "القادمة"
-
-#, fuzzy
-msgid "View Past"
-msgstr "عرض المشروع"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-#, fuzzy
-msgid "Booked"
-msgstr "مرجعية"
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "المؤتمر هو مميز و دائم"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "إعدادات الخصوصية"
-
-msgid "Conference Settings"
-msgstr "إعدادات المؤتمر"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "مميز"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr "غير مميز"
-
-msgid "Rooms"
-msgstr "غرف"
-
-msgid "Start"
-msgstr "ابدأ"
-
-msgid "running now!"
-msgstr "قيد الشتغيل"
-
-msgid "Conference Setting"
-msgstr "إعداد المؤتمر"
-
-#, fuzzy
-#| msgid "Rooms"
-msgid "Room"
-msgstr "غرف"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgctxt "Calendar"
-#| msgid "Event"
-msgid "Event"
-msgstr "مناسبة"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "المؤتمر هو مميز و دائم"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "المؤتمر هو مميز و دائم"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "هل تريد حقًا رفض الدعوة؟"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "هل تريد حقًا إزالة العضو „%(name)s“من الفريق؟"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "لا توجد عناصر حتى الآن"
-
-msgid "BBB"
-msgstr "BBB"
-
-msgid "BBB Premium"
-msgstr "BBB مميز"
-
-msgid "BBB Recording API"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "غير معتمد"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "خادم BBB للمؤتمرات المتميزة"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "هل تريد حقًا رفض العضو „%(name)s“؟"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "حذف الملف الشخصي"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "المؤتمر قيد التشغيل"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "خادم BBB للمؤتمرات المتميزة"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "المؤتمر قيد التشغيل"
 
 msgid "Rearrange"
 msgstr "إعادة الترتيب"
@@ -3739,6 +3809,11 @@ msgstr "ابدأ هنا..."
 
 msgid "Activate Cloud"
 msgstr "تفعيل السحابة"
+
+#, fuzzy
+#| msgid "Members"
+msgid "Members-Map"
+msgstr "أعضاء"
 
 #, fuzzy
 #| msgctxt "the_app"
@@ -3842,6 +3917,18 @@ msgstr "ستتلقى الآن إشعارات كلما تم نشر محتوى ع�
 msgid "No Description set"
 msgstr "لم يتم تعيين وصف"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created By"
+msgid "Created on: "
+msgstr "تم الإنشاء بواسطة"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Last sent on: "
+msgid "Last updated on: "
+msgstr "آخر إرسال في:"
+
 #, fuzzy
 #| msgid "Show more"
 msgid "more"
@@ -3918,6 +4005,10 @@ msgstr ""
 #| msgid "Dates"
 msgid "Date"
 msgstr "تورايخ"
+
+#, python-format
+msgid "Time zone: %(TIME_ZONE)s"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -4004,6 +4095,14 @@ msgstr "معلومات التواصل"
 msgid "No contact data has been added yet."
 msgstr "لم يتم إضافة بيانات الاتصال حتى الآن."
 
+msgid "Contact organizers"
+msgstr "معلومات التواصل"
+
+#, fuzzy
+#| msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgid "Here you can send a message to the admins."
+msgstr "في%(date)s, (التاريخ) s ، لقدطلبت إرسال رسالة إلى المستخدم'%(recipient)s'.."
+
 #, fuzzy
 msgid "Your Deactivated Content"
 msgstr "المحتوى المحمي"
@@ -4030,6 +4129,9 @@ msgstr "هل أنت متأكد أنك تريد حذف هذا الفريق؟"
 #, python-format
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - أعضاء"
+
+msgid "Invite users directly via the following link: "
+msgstr ""
 
 msgid "Membership requests"
 msgstr "طلبات العضوية"
@@ -4413,6 +4515,43 @@ msgid "Enable the public visibility of your group/project"
 msgstr ""
 
 #, fuzzy
+#| msgid "Delete invitation"
+msgid "Create invite token"
+msgstr "حذف الدعوة"
+
+msgid "Check this to generate an invite token which allows a user to join the "
+msgstr ""
+
+#, fuzzy
+#| msgid "Groups"
+msgid "group"
+msgstr "مجموعات"
+
+#, fuzzy
+#| msgid "Project"
+msgid "project"
+msgstr "مشروع"
+
+#, fuzzy
+#| msgctxt "the_app"
+#| msgid "conference"
+msgid "conference"
+msgstr "مؤتمر"
+
+msgid " directly."
+msgstr ""
+
+#, fuzzy
+#| msgid "No current offers"
+msgid "The current token is: "
+msgstr "لا يوجد أي عروض حالية"
+
+#, fuzzy
+#| msgid "Create content"
+msgid "Create token"
+msgstr "إنشاء محتوى"
+
+#, fuzzy
 #| msgid "Send 1 day before conference"
 msgid "Include a video conference"
 msgstr "أرسل قبل يوم واحد من المؤتمر"
@@ -4474,8 +4613,17 @@ msgstr "هنا يمكنك التحكم في ما إذا كان سيتم نقل �
 msgid "This project shall be made publicly findable via other platforms."
 msgstr "سيتم تعيين هذا المشروع لتكون مرئية للعامة!"
 
+msgid "Is your project open to other partner organizations?"
+msgstr ""
+
+msgid "Project is open for further partner organizations."
+msgstr ""
+
 msgid "Which apps should be activated?"
 msgstr "ما هي التطبيقات التي يجب تنشيطها؟"
+
+msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
+msgstr ""
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "لا يمكن تنشيط هذا التطبيق إلا لمجموعة، ولكن ليس لمشروع!"
@@ -4580,10 +4728,6 @@ msgstr "يتوفر تكامل Facebook بعد إنشاء المشروع!"
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr "سيتم عرض HTML الذي تم إدخاله هنا في لوحة معلومات المجموعة/المشروع (للأعضاء فقط)"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Invitations"
-msgstr "دعوات"
 
 msgid "About me"
 msgstr "عني"
@@ -4715,6 +4859,32 @@ msgstr "شارك على تويتر"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr "أهداف التنمية المستدامة"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created Projects"
+msgid "Contact Project Admins"
+msgstr "مشاريع منشئة"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Group Admins"
+msgstr "معلومات التواصل"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Contact Conference Admins"
+msgstr "إدارة المستخدم"
+
+msgid "If you want to send your message to the project chat, you have to turn directly to the project."
+msgstr ""
+
+msgid "If you want to send your message to the group chat, you have to turn directly to the group."
+msgstr ""
+
+msgid "If you want to send your message to the conference chat, you have to turn directly to the conference."
+msgstr ""
 
 #, fuzzy
 msgid "Email the group administrators"
@@ -5983,6 +6153,10 @@ msgid "CSV Downloads"
 msgstr "تنزيلات CSV"
 
 #, fuzzy
+msgid "Portal switches and settings"
+msgstr "إعدادات الخصوصية"
+
+#, fuzzy
 msgid "HD space used by conferences"
 msgstr "مساحة HD مستخدمة من قبل المشروعات"
 
@@ -6004,8 +6178,8 @@ msgstr "رسائل البريد الإلكتروني لجميع مشتركي ا�
 msgid "E-Mails of ALL active users"
 msgstr "رسائل البريد الإلكتروني لجميع المستخدمين النشطين"
 
-msgid "Ok"
-msgstr "حسناً"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr "هنا سحابة-WE!"
@@ -6129,6 +6303,24 @@ msgstr "ازالة أكثر من فيلر"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+#| msgid "Show detailed steps"
+msgid "Show potential partners"
+msgstr "إعرض الخطوات التفصيلية"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Here you can search for partner organisations and projects that are open for further partners. The results are sorted so that partners with a lot of overlap in the funding objectives, eligible areas and SDGs you are active on are listed first."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners for ..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You're currently not member of any project, group or organization."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 #| msgid "Stream"
 msgid "Street"
 msgstr "عرض"
@@ -6164,6 +6356,10 @@ msgstr "ابحث عند تحريك الخريطة"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search this area"
 msgstr "ابحث في هذه المنطقة"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Find partners"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Membership Requests"
@@ -6341,10 +6537,6 @@ msgid "Participate"
 msgstr "شارك"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Contact organizers"
-msgstr "معلومات التواصل"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications for content posted."
 msgstr "ستتلقى الآن إشعارات بالمحتوى المنشور في هذه المجموعة."
 
@@ -6414,16 +6606,16 @@ msgid "Hidden User"
 msgstr "المستخدم مخفي"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "This group is open for further partner organizations."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are a Member"
 msgstr "انت عضو"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Join Group"
 msgstr "انضم للمجموعة"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Message Group"
-msgstr "أرسل رسالة إلى المجموعة"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Author"
@@ -6444,6 +6636,10 @@ msgstr "ستتلقى إشعارًا عند إنشاء مشروع من فكرتك
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"
 msgstr "المشاريع - التي تم إنشاؤها من هذه الفكرة"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This organization is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are a Admin"
@@ -6475,12 +6671,12 @@ msgid "To Profile"
 msgstr "صفحتك الشخصية"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Join Project"
-msgstr "انضم إلى المشروع"
+msgid "This project is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Message Project"
-msgstr "أرسل رسالة إلى المجموعة"
+msgid "Join Project"
+msgstr "انضم إلى المشروع"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Move up"
@@ -7688,9 +7884,6 @@ msgstr "عذرًا ، يمكن فقط لمسؤولي البوابة إلغاء �
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "يمكن لأعضاء الفريق فقط رؤية المحتوى الذي طلبته. تقدم لتصبح عضوا الآن!"
 
-msgid "Conferences"
-msgstr "مؤتمرات"
-
 #, fuzzy
 msgid "My Conferences"
 msgstr "هو مؤتمر"
@@ -7855,6 +8048,9 @@ msgstr "يرجى أيضًا تقديم تاريخ الابتداء"
 msgid "Please also provide an end date"
 msgstr "يرجى أيضًا تقديم تاريخ الابتداء"
 
+msgid "Ensure that your name does not contain any invalid characters."
+msgstr ""
+
 msgid "Test email sent!"
 msgstr "تم إرسال بريد الكتروني تجريبي!"
 
@@ -7891,6 +8087,14 @@ msgstr ""
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "هذه اللغة \"%s\" غير مدعومة"
+
+#, fuzzy
+#| msgid "Test email sent!"
+msgid "New verification email sent!"
+msgstr "تم إرسال بريد الكتروني تجريبي!"
+
+msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
 
 #, fuzzy
 msgid "Successfully made conference permanent premium"
@@ -8422,6 +8626,15 @@ msgstr "ملفات كلاود"
 msgid "Linked Cloud Files"
 msgstr "ملفات كلاود"
 
+msgid "Cloud Stub"
+msgstr "ملفات كلاود"
+
+msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
+msgstr ""
+
+msgid "There are no cloud files yet"
+msgstr "لا يوجد أية ملفات كلاود حتى الأن"
+
 msgid "Restart"
 msgstr "إعادة تشغيل"
 
@@ -8437,6 +8650,12 @@ msgstr ""
 msgctxt "the_app"
 msgid "conference"
 msgstr "مؤتمر"
+
+msgid "Error message:"
+msgstr ""
+
+msgid "No error message supplied."
+msgstr ""
 
 msgid "Go to conference"
 msgstr "اذهب إلى المؤتمر"
@@ -8651,8 +8870,94 @@ msgstr "أحدث اللوحات"
 msgid "Pad Type"
 msgstr "نوع اللوحة"
 
+#, fuzzy
+#| msgid "Pads"
+msgid "Pad"
+msgstr "لوحات"
+
+msgid "This pad can no longer be edited because its creator has deleted their account."
+msgstr "لم يعد من الممكن تعديل هذه اللوحة لأن منشئها قد حذف حسابه."
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(pad)s“?"
+msgstr "هل تريد حقًا حذف „%(pad)s“؟"
+
+msgid "Delete Etherpad"
+msgstr "حدف Etherpad"
+
 msgid "The document can not be accessed because the etherpad server could not be reached. Please contact an administrator!"
 msgstr "لا يمكن الوصول إلى المستند بسبب تعذر الوصول إلى خادم etherpad. الرجاء الاتصال مع احد المسؤولين!"
+
+msgid "This document is empty"
+msgstr "هذا المستند فارغ"
+
+msgid "Pads"
+msgstr "لوحات"
+
+msgid "Enter a title for the Pad."
+msgstr "أدخل عنوانًا للوحة."
+
+msgid "Enter the title for a new Document or Table."
+msgstr "أدخل العنوان لمستند أو جدول الجديد."
+
+msgid "Enter the title for a new Document."
+msgstr "أدخل العنوان لمستند جديد."
+
+msgid "Create Etherpad"
+msgstr "قم بإنشاء Ethercalc"
+
+msgid "Create Ethercalc"
+msgstr "قم بإنشاء Ethercalc"
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(title)s“?"
+msgstr "هل تريد حقًا حذف etherpad „%(title)s““؟"
+
+msgid "No etherpads have been created yet."
+msgstr "لم يتم إنشاء etherpads حتى الان."
+
+msgid "Download CSV"
+msgstr "قم بتحميل ملف CVS"
+
+msgid "Download Excel"
+msgstr "قم بتحميل Excel"
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"مرحبًا %(receiver_name)s,\n"
+"\n"
+"تم إنشاء لوحة etherpad جديدة \"%(object_name)s\" في %(team_name)s بواسطة %(sender_name)s.\n"
+"\n"
+"يمكنك العثور عليه باتباع هذا الرابط: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"(اتبع هذا الرابط لتعديل اشعاراتك المفضلة: %(notification_settings_url)s )\n"
+"\n"
+"فريقك %(site_name)s."
+
+msgid "You created a pad"
+msgstr "لقد قمت بإنشاء لوحة"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a Pad"
+msgstr "قد تم انشاء لوحة"
+
+msgid "There are no etherpads yet"
+msgstr "لا توجد etherpads بعد"
 
 #, python-format
 msgid "Etherpad \"%(title)s\" was edited successfully."
@@ -9130,2061 +9435,6 @@ msgstr "انشاء مناسبة"
 msgid "%(event)s %(type)s"
 msgstr "%(event)s (معلقة)"
 
-#, python-format
-msgid "Event \"%(title)s\" was edited successfully."
-msgstr "Event \"%(title)s\" تم التعديل بنجاح."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be edited."
-msgstr "مناسبة \"%(title)s\"تعذر تعديلها."
-
-msgid "Please use the conference management area to add new workshops!"
-msgstr "الرجاء استخدام منطقة إدارة المؤتمرات لإضافة ورش عمل جديدة!"
-
-msgid "The page you requested is not available for this event at this time."
-msgstr "الصفحة التي طلبتها غير متاحة لهذه الماسبة في الوقت الحالي."
-
-msgid "One of the event suggestions times could not be understood!"
-msgstr "واحدة من أوقات الاقتراحات لمناسبة قد تكون غير مفهومة!"
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was edited successfully."
-msgstr "تم تعديل مناسبة غير مجدولة\"%(title)s\" بنجاح."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be edited."
-msgstr "تعذر عن تعديل المناسبة الغير مجدولة \"%(title)s\"."
-
-#, python-format
-msgid "Event \"%(title)s\" was added successfully."
-msgstr "تمت إضافة مناسبة \"%(title)s\" بنجاح."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be added."
-msgstr "تعذر إضافة المناسبة \"%(title)s\"."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was added successfully."
-msgstr "تمت إضافة مناسبة غير مجدولة\"%(title)s\"بنجاح."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be added."
-msgstr "تعذر إضافة المناسبة الغير مجدولة \"%(title)s\"."
-
-msgid "You should define at least one date suggestion."
-msgstr "يجب عليك تحديد اقتراح لتاريخ واحد على الأقل."
-
-#, python-format
-msgid "Event \"%(title)s\" was deleted successfully."
-msgstr "تم حذف مناسبة \"%(title)s\" بنجاح."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be deleted."
-msgstr "تعذر حذف المناسبة \"%(title)s\"."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was deleted successfully."
-msgstr "تم حذف مناسبة غير مجدولة\"%(title)s\" بنجاح."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be deleted."
-msgstr "تعذر حذف المناسبة الغير مجدولة \"%(title)s\"."
-
-#, fuzzy
-#| msgid "Your data was saved successfully!"
-msgid "Your votes were saved successfully."
-msgstr "تم حفظ بياناتك بنجاح!"
-
-#, fuzzy
-#| msgid "Poll \"%(title)s\" could not be added."
-msgid "Your votes could not be saved."
-msgstr "استطلاع رأي \"%(title)s\" لا يمكن تعديله."
-
-msgid "This is event is already scheduled. You cannot vote for it any more."
-msgstr "هذiه المناسبة تمت جدولتها بالفعل. لا يمكنك التصويت عليها بعد الآن."
-
-msgid "The complete request can only be sent via POST!"
-msgstr "لا يمكن إرسال الطلب الكامل إلا من خلال البريد!"
-
-msgid "Event cannot be completed: No date was supplied."
-msgstr "لا يمكن إكمال المناسبة: لم يتم تقديم أي تاريخ."
-
-msgid "The event was created successfully at the specified date."
-msgstr "تم إنشاء المناسبة بنجاح في التاريخ المحدد."
-
-msgid "Upcoming events"
-msgstr "المناسبات القادمة"
-
-#, fuzzy
-msgid "Upcoming event"
-msgstr "المناسبات القادمة"
-
-msgid "Your comment was added successfully."
-msgstr "تم إضافة تعليقك بنجاح."
-
-msgid "Your comment was deleted successfully."
-msgstr "تم حذق تعليقك بنجاح."
-
-msgid "Exchange"
-msgstr ""
-
-msgctxt "the_app"
-msgid "exchange"
-msgstr ""
-
-msgctxt "the_app"
-msgid "file"
-msgstr "ملف"
-
-msgid "A user uploaded a new file"
-msgstr "قام مستخدم بتحميل ملف جديد"
-
-#, python-format
-msgid "%(sender_name)s uploaded the file %(object_name)s"
-msgstr "قام%(sender_name)s بتحميل الملف%(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s uploaded %(count)d files"
-msgstr "%(sender_name)s تم تحميل %(count)d ملفات"
-
-#, python-format
-msgid "%(sender_name)s created a new file"
-msgstr "%(sender_name)s تم إنشاء ملف جديد"
-
-#, python-format
-msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "ملف جديد: \"%(object_name)s\" تم إنشاؤه في%(team_name)s."
-
-msgid "A user uploaded a new file in a team you are following"
-msgstr "قام مستخدم بتحميل ملف جديد في فريق تتابعه"
-
-#, python-format
-msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s تم إنشاء ملف جديد في%(team_name)s انت تتابعه)"
-
-#, python-format
-msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "ملف جديد: \"%(object_name)s\" تم إنشاؤه في%(team_name)s (انت تتابعه)."
-
-msgid "Latest Files"
-msgstr "اكبر الملفات حجما"
-
-msgid "No files"
-msgstr "لا يوجد ملفات"
-
-msgid "Pictures"
-msgstr "صور"
-
-msgid "Documents"
-msgstr "مستندات"
-
-msgid "Audio Files"
-msgstr "ملفات صوتية"
-
-msgid "Videos"
-msgstr "فيديو"
-
-msgid "File Type"
-msgstr "نوع الملف"
-
-msgid "File Name"
-msgstr "اسم الملف"
-
-msgid "File Name (descending)"
-msgstr "اسم الملف (تنازلي)"
-
-msgid "Smallest Files"
-msgstr "اصغر الملقات حجما"
-
-msgid "Largest Files"
-msgstr "أكبر الملفات حجما"
-
-msgid "The given URL does not seem to be valid."
-msgstr "يبدو أن عنوان URL المُقدم غير صالح."
-
-msgid "Must supply either a URL or File"
-msgstr "يجب توفير عنوان URL أو ملف"
-
-msgid "Is URL Link"
-msgstr "هو رابط URL"
-
-msgid "Uploaded by"
-msgstr "تم تحميله بواسطة"
-
-msgid "Uploaded on"
-msgstr "تم التحميل في"
-
-msgid "No files selected."
-msgstr "لم يتم تحديد أية ملفات."
-
-msgctxt "special_folder_type"
-msgid "Attachments"
-msgstr "المرفقات"
-
-msgid "File does not exist or you are not allowed to delete it."
-msgstr "الملف غير موجود أو غير مسموح لك بحذفه."
-
-#, fuzzy, python-format
-msgid "A problem occurred during export. The following file is missing: %(filename)s."
-msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
-msgstr[0] ""
-"حدثت مشكلة أثناء التصدير. الملف التالي مفقود:%s(filename).\n"
-"\n"
-"\n"
-"\n"
-"حدثت مشكلة أثناء التصدير. الملفات التالية مفقودة:%s(filename)."
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
-msgid "Invalid request."
-msgstr "طلب غير صالح."
-
-#, python-format
-msgid "File \"%(title)s\" was updated successfully."
-msgstr "تم تحديث الملف\"%(title)s\" بنجاح."
-
-#, python-format
-msgid "File \"%(title)s\" could not be updated."
-msgstr "تعذر تحديث الملف\"%(title)s\"."
-
-msgid "Downloading failed, the target object was not a folder!"
-msgstr "فشل التنزيل ، الموضوع المستهدف لم يكن مجلد!"
-
-msgid "Canceled the download because there seem to be no files in this folder."
-msgstr "تم إلغاء التحميل لأنه يبدو أنه لا توجد ملفات في هذا المجلد."
-
-msgid "Internal Error: Group not Found"
-msgstr "خطأ داخلي: المجموعة غير موجودة"
-
-msgid "Permission for upload denied"
-msgstr "الاذن بالتحميل غير متاح"
-
-msgid "The uploaded file was invalid."
-msgstr "الملف الذي تم تحميله غير صالح "
-
-#, fuzzy, python-format
-msgid "%(count)d File was added successfully."
-msgid_plural "%(count)d Files were added successfully."
-msgstr[0] ""
-"% (count)d تمت إضافة الملف بنجاح.\n"
-"\n"
-"\n"
-"% (count)d تمت إضافة الملفات بنجاح."
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
-msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
-msgstr "الملف الذي قمت بتحميله كان كبيرًا جدًا أو لم يتم السماح بتحميل نوع هذا الملف!"
-
-msgctxt "the_app"
-msgid "marketplace"
-msgstr "المتجر"
-
-msgid "A user created a new offer"
-msgstr "أنشأ المستخدم عرضًا جديدًا"
-
-#, python-format
-msgid "%(sender_name)s created the offer %(object_name)s"
-msgstr "%(sender_name)sتم إنشاء العرض%(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d offers"
-msgstr "%(sender_name)s تم انشاء %(count)dعروض"
-
-#, python-format
-msgid "%(sender_name)s created a new offer"
-msgstr "%(sender_name)s تم إنشاء عرض جديد"
-
-#, python-format
-msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "عرض جديد: \"%(object_name)s\" تم إنشاؤه في %(team_name)s."
-
-msgid "One of your offers expired"
-msgstr "احد عروضك قد انتهت صلاحيته"
-
-#, python-format
-msgid "Your offer %(object_name)s expired"
-msgstr "قد انتهت صلاحية عرضك%(object_name)s"
-
-#, python-format
-msgid "%(count)d of your offers expired"
-msgstr "%(count)dواحد من عروضك انتهت صلاحيته"
-
-msgid "Your offer has expired"
-msgstr "عرضك قد انتهى"
-
-#, python-format
-msgid "Offer \"%(object_name)s\" has expired."
-msgstr "انتهت صلاحية عرض. \"%(object_name)s\"."
-
-msgid "A user commented on one of your offers"
-msgstr "علق مستخدم على احد عروضك"
-
-#, python-format
-msgid "%(sender_name)s commented on your offer %(object_name)s"
-msgstr "%(sender_name)sتم التعليق على عرضك%(object_name)s"
-
-#, fuzzy, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
-msgstr[0] ""
-"% (sender_name)s و% (count_minus_one)d آخر علق على عرضك% (object_name)s\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"% (sender_name)s و% (count_minus_one)d آخرون علقوا على عرضك% (object_name)s"
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
-#, python-format
-msgid "%(sender_name)s commented on your offer"
-msgstr "%(sender_name)s تم التعليق على عرضك"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your offers"
-msgstr "%(sender_name)sعلق على أحد عروضك"
-
-msgid "A user commented on an offer you were tagged in"
-msgstr "علق أحد المستخدمين على عرض تمت الإشارة إليك فيه"
-
-#, python-format
-msgid "%(sender_name)s commented on the offer %(object_name)s"
-msgstr "%(sender_name)s علق على العرض%(object_name)s"
-
-#, fuzzy, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
-msgstr[0] ""
-"% (sender_name)s و% (count_minus_one)d آخر علق على عرضك% (object_name)s\n"
-"\n"
-"\n"
-"% (sender_name)s و% (count_minus_one)d آخرون علقوا على عرضك% (object_name)s"
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
-msgid "You were tagged in this offer"
-msgstr "تم الإشارة إليك في هذا العرض"
-
-#, python-format
-msgid "%(sender_name)s commented on an offer you were tagged in"
-msgstr "%(sender_name)s تم التعليق على عرض قد اشير اليك به"
-
-#, python-format
-msgid "%(sender_name)s commented on an offer you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s تم التعليق على عرض اشير اليك به في%(team_name)s"
-
-msgid "A user created a new offer in a team you are following"
-msgstr "أنشأ مستخدم عرضًا جديدًا في فريق انت تتابعه"
-
-#, python-format
-msgid "%(sender_name)s created a new offer in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s تم انشاء عرضًا جديدًا في%(team_name)s (أنت تتابعه)"
-
-#, python-format
-msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "عرض جديد:  \"%(object_name)s\" تم إنشاؤه في%(team_name)s (انت تتابعه)."
-
-msgid "A user updated an offer you are following"
-msgstr "قام مستخدم بتحديث عرض أنت تتابعه"
-
-#, python-format
-msgid "%(sender_name)s updated the offer %(object_name)s"
-msgstr "%(sender_name)s تم تحديث العرض%(object_name)s"
-
-msgid "You are following this offer"
-msgstr "أنت تتابع هذا العرض"
-
-#, python-format
-msgid "%(sender_name)s updated an offer you are following"
-msgstr "%(sender_name)s تم تحديث عرض انت تتابعه"
-
-#, python-format
-msgid "An offer you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "عرض انت تتابعه:\"%(object_name)s\" تم تحديثه في%(team_name)s.."
-
-msgid "A user commented on an offer you are following"
-msgstr "علق مستخدم على عرض أنت تتابعه"
-
-#, python-format
-msgid "%(sender_name)s commented on on an offer you are following"
-msgstr "%(sender_name)s تم التعليق على عرض انت تتابعه"
-
-msgid "Current Offers"
-msgstr "العروض الحالية"
-
-msgid "No current offers"
-msgstr "لا يوجد أي عروض حالية"
-
-msgid "Order Key"
-msgstr "مفتاح الطلب"
-
-msgid "Looking for"
-msgstr "يبحث عن"
-
-msgid "Offering"
-msgstr "يعرض"
-
-msgid "Offer currently active?"
-msgstr "العرض نشط حاليا؟"
-
-msgid "Offer Category"
-msgstr "فئة العرض"
-
-#, python-format
-msgid "Offer: %(offer)s (%(type)s)"
-msgstr "عرض: %(offer)s (%(type)s)"
-
-#, python-format
-msgid "Offer \"%(title)s\" was edited successfully."
-msgstr "تم تعديل العرض\"%(title)s\" بنجاح."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be edited."
-msgstr "تعذر تعديل العرض\"%(title)s\"."
-
-#, python-format
-msgid "Offer \"%(title)s\" was added successfully."
-msgstr "تمت إضافة العرض \"%(title)s\"  بنجاح."
-
-#, python-format
-msgid "Offer \"%(title)s\" was saved successfully, but is not active yet."
-msgstr "تم حفظ العرض\"%(title)s\" بنجاح ، ولكنه غير فعال بعد."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be added."
-msgstr "قد لا يمكن إضافة العرض\"%(title)s\"."
-
-#, python-format
-msgid "Offer \"%(title)s\" was deleted successfully."
-msgstr "تم حذف العرض \"%(title)s\" بنجاح."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be deleted."
-msgstr "قد لا يمكن حذف العرض\"%(title)s\"."
-
-msgid "The offer you requested is no longer active. Sorry!"
-msgstr "العرض الذي طلبته لم يعدفعالا. نآسف!"
-
-msgid "Invalid action for this offer. The request could not be completed!"
-msgstr "إجراء غير صالح لهذا العرض. لا يمكن استكمال الطلب!"
-
-msgid "The offer is already active"
-msgstr "تم تفعيل العرض بالفعل"
-
-msgid "The offer is already deactivated"
-msgstr "تم إلغاء تفعيل العرض بالفعل"
-
-msgid "The offer was deactivated successfully."
-msgstr "تم إلغاء تفعيل العرض بنجاح."
-
-msgid "The offer was reactivated successfully."
-msgstr "تمت إعادة تفعيل العرض بنجاح."
-
-msgid "The offer was activated successfully."
-msgstr "تم تفعيل العرض بنجاح."
-
-msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
-msgstr ""
-
-msgctxt "the_app"
-msgid "Chat"
-msgstr ""
-
-msgctxt "the_app"
-msgid "message"
-msgstr "الرسالة"
-
-msgid "Chat"
-msgstr ""
-
-msgid "Only Administrators may send a message to this project/group!"
-msgstr "يمكن للمسؤولين فقط إرسال رسالة إلى هذا المشروع / المجموعة!"
-
-msgid "Additional Recipients"
-msgstr "مستلمين إضافيين"
-
-msgid "Undefined recipient."
-msgstr "مستلم غير محدد."
-
-msgid "Your reply could not be matched to an existing message."
-msgstr "لا يمكن مطابقة ردك برسالة موجودة."
-
-msgid "An internal error occured."
-msgstr "حدث خطأ داخلي."
-
-msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
-msgstr "عنوان البريد الإلكتروني الذي أرسلت منه الرد ليس مرتبطا بحسابك الشخصي. يرجى إرسال الردود المباشرة فقط من عنوان البريد الإلكتروني الذي قمت بالتسجيل به على الموقع!"
-
-msgid "There was an error when processing your message text!"
-msgstr "كان هناك خطأ أثناء معالجة نص رسالتك!"
-
-msgid "Your direct reply failed!"
-msgstr "فشل ارسال رد مباشر!"
-
-msgid "Select at least one object."
-msgstr "حدد موضوع واحد على الأقل."
-
-msgid "Messages or conversations successfully archived."
-msgstr "تمت أرشفة الرسائل أو المحادثات بنجاح."
-
-msgid "Messages or conversations successfully deleted."
-msgstr "تم حذف الرسائل أو المحادثات بنجاح."
-
-msgid "Messages were marked as read."
-msgstr "تم وضع علامة على هذه الرسائل كمقروءة."
-
-msgid "Messages or conversations successfully recovered."
-msgstr "تم استعادة الرسائل أو المحادثات بنجاح."
-
-msgid "Notes"
-msgstr "ملاحظات"
-
-msgctxt "the_app"
-msgid "note"
-msgstr "ملاحظة"
-
-msgid "A user commented on a news post"
-msgstr "علق مستخدم على منشور"
-
-#, python-format
-msgid "%(sender_name)s commented on a news post"
-msgstr "%(sender_name)sتم العليق علق على منشور"
-
-msgid "A user commented on one of your news posts"
-msgstr "علق مستخدم على إحدى منشوراتك"
-
-#, python-format
-msgid "%(sender_name)s commented on your news post %(object_name)s"
-msgstr "%(sender_name)s تم على منشور خاص بك %(object_name)s"
-
-#, fuzzy, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
-msgstr[0] ""
-"%(sender_name)s و %(count_minus_one)d و أخر علق على الحدث الجديد%(object_name)s\n"
-"\n"
-"\n"
-"%(sender_name)s و %(count_minus_one)d و أخر علقوا على الحدث الجديد%(object_name)s"
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
-#, python-format
-msgid "%(sender_name)s commented on your news post"
-msgstr "علق %(sender_name)s على منشور خاص بك"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your news posts"
-msgstr "%(sender_name)s علق على إحدى منشوراتك"
-
-msgid "A user commented on a news posts you commented in"
-msgstr "علق مستخدم على منشورات قمت بالتعليق عليها"
-
-#, python-format
-msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
-msgstr "%(sender_name)s تم التعليق على منشور %(object_name)sقمت بالتعليق عليه"
-
-#, fuzzy, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
-msgstr[0] ""
-"\n"
-"% (sender_name)s و\n"
-"% (count_minus_one)d آخر علق على منشور الأخبار% (object_name)s الذي علقت فيه\n"
-"\n"
-"\n"
-"\n"
-"% (sender_name)s و% (count_minus_one)d آخرون علقوا على منشور الأخبار% (object_name)s الذي علقت فيه"
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
-#, python-format
-msgid "%(sender_name)s commented on a news post you commented in"
-msgstr "%(sender_name)s تم التعليق على منشور قمت بالتعليق عليه"
-
-msgid "A user created a news post"
-msgstr "أنشأ المستخدم منشورًا"
-
-#, python-format
-msgid "%(sender_name)s created the news post %(object_name)s"
-msgstr "%(sender_name)sتم إنشاء المنشور الجديد%(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d news posts"
-msgstr "%(sender_name)s تم إنشاء%(count)d منشورات جديدة"
-
-#, python-format
-msgid "%(sender_name)s created a new news post"
-msgstr "%(sender_name)s تم إنشاء منشور جديد"
-
-#, python-format
-msgid "%(sender_name)s posted in %(team_name)s:"
-msgstr "تم نشر%(sender_name)s في%(team_name)s:"
-
-msgid "A user created a news post in a team you are following"
-msgstr "قام مستخدم بإنشاء منشور في فريق تتابعه"
-
-#, python-format
-msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s تم إنشاء منشور اخباري جديد في%(team_name)s (الذي تتابعه)"
-
-#, python-format
-msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
-msgstr "تم نشر%(sender_name)s في%(team_name)s: (أنت تتابعه)"
-
-msgid "A user updated a news post"
-msgstr "قام مستخدم يتحديث المنشور الاخباري"
-
-#, python-format
-msgid "%(sender_name)s updated the news post %(object_name)s"
-msgstr "%(sender_name)s تم تحديث المنشور اخباري%(object_name)s"
-
-msgid "You are following this news post"
-msgstr "أنت تتابع هذا المنشور الإخباري"
-
-#, python-format
-msgid "%(sender_name)s updated a news post you are following"
-msgstr "حدث %(sender_name)s منشور إخباري أنت تتابعه"
-
-#, python-format
-msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
-msgstr "تم تحديث منشور إخباري جديد ل%(sender_name)s تتابعه بواسطة %(team_name)s:"
-
-msgid "A user commented on a news post you are following"
-msgstr "علق مستخدم على منشور إخباري أنت تتابعه"
-
-#, python-format
-msgid "%(sender_name)s commented on the news post %(object_name)s"
-msgstr "%(sender_name)s تم التعليق على منشور الأخبار%(object_name)s"
-
-#, fuzzy, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
-msgstr[0] ""
-"\n"
-"% (sender_name)s و% (count_minus_one)d آخر علق على منشور الأخبار% (object_name)s\n"
-"\n"
-"\n"
-"\n"
-"% (sender_name)s و% (count_minus_one)d آخرون علقوا على منشور الأخبار% (object_name)s"
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
-#, python-format
-msgid "%(sender_name)s commented on a news posts you are following"
-msgstr "%(sender_name)s تم التعليق على منشورات الأخبار التي تتابعها"
-
-msgid "No news"
-msgstr "لا توجد أية أخبار"
-
-msgid "Write a news post"
-msgstr "كتابة منشور أخبار"
-
-msgid "News stream"
-msgstr "اخبار العرض"
-
-msgid "Popularity"
-msgstr "شعبية"
-
-msgid "Facebook Share"
-msgstr "مشاركة فيسبوك"
-
-msgid "Note Item"
-msgstr "ايقونة ملاحظة"
-
-msgid "Note Items"
-msgstr "ايقونة ملاحظات"
-
-msgid "Your news post was added successfully."
-msgstr "تم إضافة منشور الأخبار الخاص بك بنجاح."
-
-msgid "Your news post was deleted successfully."
-msgstr "تم حذف منشور الأخبار الخاصة بك بنجاح."
-
-msgid "Your news post was edited successfully."
-msgstr "تم تعديل منشور الأخبار الخاصة بك بنجاح."
-
-msgid "You are seeing this alert because you created this content."
-msgstr "أنت ترى هذا التنبيه لأنك أنشأت هذا المحتوى."
-
-msgid "You are seeing this alert because you are following the item's project or group."
-msgstr "-أنت تشاهد هذا التنبيه لأنك تتابع عناصر مشروع أو مجموعة."
-
-msgid "You are seeing this alert because you are following this item."
-msgstr "أنت ترى هذا التنبيه لأنك تتابع هذا العنصر."
-
-msgctxt "the_app"
-msgid "notifications"
-msgstr "اشعارات"
-
-#, python-format
-msgid "Your daily digest for %(portal_name)s"
-msgstr "ملخصك اليومي لـ %(portal_name)s"
-
-msgid "This is what happened during the last day!"
-msgstr "هذا ما حدث في اليوم الأخير!"
-
-#, python-format
-msgid "Your weekly digest for %(portal_name)s"
-msgstr "ملخصك الأسبوعي لـ%(portal_name)s"
-
-msgid "This is what happened during the last week!"
-msgstr "هذا ما خدث خلال الأسبوع الماضي!"
-
-msgctxt "notification frequency"
-msgid "Never"
-msgstr "ابدا"
-
-msgctxt "notification frequency"
-msgid "Immediately"
-msgstr "فورا"
-
-msgctxt "notification frequency"
-msgid "Daily"
-msgstr "يومياً"
-
-msgctxt "notification frequency"
-msgid "Weekly"
-msgstr "اسبوعياً"
-
-msgid "Notification Preference for User"
-msgstr "تفضيل الإشعار للمستخدم"
-
-msgid "Notification Preference"
-msgstr "تفضيل الإشعار"
-
-msgid "Multi Notification ID"
-msgstr "معرف الاشعار المتعدد"
-
-msgid "Multi Notification Preference"
-msgstr "تفضيل اشعار متعدد"
-
-msgid "Multi Notification Preferences"
-msgstr "تفضيلات اشعارات متعددة"
-
-msgid "User who caused this notification event"
-msgstr "مستخدم تسبب في حدث الاشعار"
-
-msgid "Audience"
-msgstr "الجمهور"
-
-msgid "Owner of the alert"
-msgstr "صاحب بالتنبيه"
-
-msgid "Alert Reason key"
-msgstr "مفتاح سبب التنبيه"
-
-msgid "Last user who caused this notification event"
-msgstr "اخر مستخدم تسبب في خدث الاشعار"
-
-msgid "Alert State"
-msgstr "حالة التنبيه"
-
-msgid "You are following this content or its Project or Group"
-msgstr "أنت تتابع هذا المحتوى أو مشروعه أو مجموعته"
-
-msgid "All notifications"
-msgstr "كل الاشعارات"
-
-msgid "No notifications"
-msgstr "لا توجد اشعارات"
-
-msgid "For content that I am following, I wish to receive notification emails"
-msgstr "بما يتعلق بللمحتوى الذي أتابعه ، أرغب في تلقي إشعارات عبر البريد الإلكتروني"
-
-msgid "You are getting this notification because you are subscribed to these kinds of events in your project or group."
-msgstr "أنت تتلقى هذا الإشعار لأنك مشترك في هذه الأنواع من الأحداث في مشروعك أو مجموعتك."
-
-msgid "You are getting this notification because you are an administrator of this project or group."
-msgstr "أنت تتلقى هذا الإشعار لأنك مسؤول عن هذا المشروع أو المجموعة."
-
-msgid "You are getting this notification because you are an administrator of this portal."
-msgstr "أنت تتلقى هذا الإشعار لأنك مسؤول عن هذه البوابة."
-
-msgid "You are getting this email because you are subscribed to one or more daily notifications."
-msgstr "أنت تتلقى هذا البريد الإلكتروني لأنك مشترك في إشعار واحد أو أكثر يوميًا."
-
-msgid "You are getting this email because you are subscribed to one or more weekly notifications."
-msgstr "أنت تتلقى هذا البريد الإلكتروني لأنك مشترك في واحد أو أكثر من الإشعارات الأسبوعية."
-
-msgid "New item"
-msgstr "عنصر جديد"
-
-#, python-format
-msgid "View on %(portal_name)s"
-msgstr "عرض على %(portal_name)s"
-
-msgid "Untitled"
-msgstr "بدون عنوان"
-
-msgid "Your notification preferences were updated successfully."
-msgstr "تم تحديث تفضيلات اشعاراتك الخاصة بك بنجاح."
-
-msgid "Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!"
-msgstr ""
-
-msgid "Your notifications preferences were reset to default!"
-msgstr "تم إعادة تعيين تفضيلات اشعاراتك إلى الافتراضي!"
-
-msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
-msgstr ""
-
-#, fuzzy
-#| msgid "Successfully deactivated user account"
-msgid "Successfully signed in as {}."
-msgstr "تم إلغاء تنشيط حساب المستخدم بنجاح"
-
-#, fuzzy
-#| msgid "Successfully deactivated user account"
-msgid "Successfully connected account."
-msgstr "تم إلغاء تنشيط حساب المستخدم بنجاح"
-
-#, fuzzy
-#| msgid "Successfully removed user"
-msgid "Successfully removed connection."
-msgstr "تم إزالة المستخدم بنجاح"
-
-#, fuzzy
-#| msgid "Organization"
-msgctxt "the_app"
-msgid "organization"
-msgstr "منظمات"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization membership"
-msgstr "منظمات"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization memberships"
-msgstr "منظمات"
-
-#, fuzzy
-#| msgid "Team Invite for Unregistered User"
-msgid "Organization Invite for Unregistered User"
-msgstr "دعوة الفريق لمستخدم غير مسجل"
-
-#, fuzzy
-#| msgid "Team Invites for Unregistered Users"
-msgid "Organization Invites for Unregistered Users"
-msgstr "دعوات الفريق للمستخدمين غير المسجلين"
-
-#, fuzzy
-#| msgid "Assigned organizations"
-msgid "Civil society organization"
-msgstr "المنظمات المعينة"
-
-msgid "Company (commercial)"
-msgstr ""
-
-#, fuzzy
-#| msgid "Public voting"
-msgid "Public institution"
-msgstr "تصويت علني"
-
-#, fuzzy
-#| msgid "Other teams"
-msgid "Other"
-msgstr "فرق أخرى"
-
-#, fuzzy
-#| msgid "Remove organization"
-msgid "Name of the organization"
-msgstr "إزالة الموقع"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Organization type"
-msgstr "منظمات"
-
-#, fuzzy
-#| msgid "Logout"
-msgid "Logo"
-msgstr "نسجيل خروج"
-
-#, fuzzy
-#| msgid "Email address"
-msgid "Email Address"
-msgstr "البريد الالكتروني"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Cosinnus Organization"
-msgstr "منظمات"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Cosinnus Organizations"
-msgstr "منظمات"
-
-msgid "CosinnusOrganizationSocialMedia"
-msgstr ""
-
-#, fuzzy
-#| msgid "CosinnusLocation"
-msgid "CosinnusOrganizationLocation"
-msgstr "موقع Cosinnus"
-
-#, fuzzy
-#| msgid "CosinnusLocations"
-msgid "CosinnusOrganizationLocations"
-msgstr "مواقع Cosinnus"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Organization group"
-msgstr "منظمات"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization groups"
-msgstr "منظمات"
-
-#, fuzzy, python-format
-msgid "Project/group %(name)s had already requested and has now been accepted."
-msgstr "لقد تمت دعوتك بالفعل إلى \"%(team_name)s\" وتم جعلك الآن عضوًا على الفور!"
-
-#, fuzzy, python-format
-#| msgid "User %(username)s was successfully invited!"
-msgid "Project/group %(name)s was successfully invited."
-msgstr "تمت دعوة المستخدم %(username)s بنجاح!"
-
-#, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
-msgid "Your join request was withdrawn from organization “%(name)s” successfully."
-msgstr "تم سحب طلب الانضمام الخاص بك من %(team_type)s “%(team_name)s” بنجاح."
-
-#, fuzzy, python-format
-msgid "You have declined the invitation to organization “%(name)s”."
-msgstr "لم تعد عضوًا في %(team_type)s “%(team_name)s”."
-
-#, fuzzy, python-format
-#| msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
-msgid "Your project/group is now assigned to the organization “%(name)s”. Welcome!"
-msgstr "أنت الآن عضو في %(team_type)s “%(team_name)s”. أهلاً بك!"
-
-#, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
-msgid "Your request was withdrawn from organization \"%(name)s\" successfully."
-msgstr "تم سحب طلب الانضمام الخاص بك من %(team_type)s “%(team_name)s” بنجاح."
-
-#, fuzzy, python-format
-#| msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
-msgid "Your invitation to project/group \"%(name)s\" was withdrawn successfully."
-msgstr "تم سحب دعوتك للمستخدم \"%(username)s\" بنجاح."
-
-#, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
-msgid "Project/group \"%(name)s\" is no longer assigned."
-msgstr "المستخدم \"%(username)s\" لم يعد عضوًا."
-
-#, fuzzy
-#| msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
-msgid "Sorry, only portal administrators can create Organizations! You can either create a Project, or write a message to one of the administrators to create a Organization for you. Below you can find a listing of all administrators."
-msgstr "عذرًا، يمكن لمسؤولي البوابة فقط إنشاء مجموعات! يمكنك إما إنشاء مشروع أو كتابة رسالة إلى أحد المسؤولين لإنشاء مجموعة لك. أدناه يمكنك العثور على قائمة بجميع المسؤولين."
-
-#, fuzzy, python-format
-#| msgid "Event \"%(title)s\" was edited successfully."
-msgid "Organization \"%(name)s\" was created successfully."
-msgstr "Event \"%(title)s\" تم التعديل بنجاح."
-
-#, fuzzy
-#| msgid "Your idea was deleted successfully."
-msgid "Your organization was deleted successfully."
-msgstr "تم حذف فكرتك بنجاح."
-
-msgctxt "the_app"
-msgid "poll"
-msgstr "استطلاع رأي"
-
-msgid "A user created a new poll"
-msgstr "مستخدم أعد استطلاع رأي جديد"
-
-#, python-format
-msgid "%(sender_name)s created the poll %(object_name)s"
-msgstr "%(sender_name)s أعد استطلاع رأي%(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d polls"
-msgstr "%(sender_name)sأعد %(count)d استطلاع رأي"
-
-#, python-format
-msgid "%(sender_name)s created a new poll"
-msgstr "%(sender_name)sأعد استطلاع رأي"
-
-#, python-format
-msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "استطلاع رأي جديد: \"%(object_name)s\" أعد في %(team_name)s."
-
-msgid "A poll you voted on was completed"
-msgstr "تم انجاز التصويت لاستطلاع الرأي"
-
-#, python-format
-msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
-msgstr "%(sender_name)s أنجز استطلاع الرأي %(object_name)s الذي قمت بالتصويت عليه"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d polls you voted on"
-msgstr "%(sender_name)s أنجز %(count)d التصويت على استطلاع الرأي"
-
-#, python-format
-msgid "%(sender_name)s completed the poll"
-msgstr "%(sender_name)s استطلاع الرأي منجز"
-
-#, python-format
-msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
-msgstr "استطلاع الرأي \"%(object_name)s\" منجز في %(team_name)s."
-
-msgid "A user commented on one of your polls"
-msgstr "علق أحد المستخدمين على أحد استطلاعات الرأي الخاصة بك"
-
-#, python-format
-msgid "%(sender_name)s commented on your poll %(object_name)s"
-msgstr "%(sender_name)s تم التعليق على استطلاع الرأي الخاص بك %(object_name)s"
-
-#, fuzzy, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
-msgstr[0] ""
-"% (sender_name)s و% (count_minus_one)d آخر علق على استطلاعك% (object_name)s\n"
-"\n"
-"\n"
-"\n"
-"% (sender_name)s و% (count_minus_one)d آخرون علقوا على استطلاعك% (object_name)s"
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
-#, python-format
-msgid "%(sender_name)s commented on your poll"
-msgstr "%(sender_name)sتم التعليق على استطلاع الرأي الخاص بك"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your polls"
-msgstr "%(sender_name)s تم التعليق على واحدة من استطلاعات الرأي الخاصة بك"
-
-msgid "A user commented on a poll you were tagged in"
-msgstr "علق أحد المستخدمين على استطلاع رأي أشير اليك به"
-
-#, python-format
-msgid "%(sender_name)s commented on the poll %(object_name)s"
-msgstr "%(sender_name)s تم التعليق على استطلاع الرأي%(object_name)s"
-
-#, fuzzy, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
-msgstr[0] ""
-"% (sender_name)s و% (count_minus_one)d آخر علق على الاستطلاع% (object_name)s\n"
-"\n"
-"\n"
-"% (sender_name)s و% (count_minus_one)d آخرون علقوا على الاستطلاع% (object_name)s"
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
-msgid "You were tagged in this poll"
-msgstr "تم الإشارة اليك في استطلاع الرأي"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you were tagged in"
-msgstr "%(sender_name)s تم التعليق على استطلاع رأي أشير اليك به"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s تم التعليق على استطلاع رأي أشير اليك به في %(team_name)s"
-
-msgid "A user commented on an poll you voted in"
-msgstr "علق مستخدم على استطلاع رأي قد قمت بالتصويت عليه"
-
-msgid "You voted on this poll"
-msgstr "لقد قمت بالتصويت على استطلاع الرأي"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you voted in"
-msgstr "%(sender_name)s تم التعليق على استطلاع رأي قمت بالتصويت عليه"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
-msgstr "%(sender_name)s تم التعليق على استطلاع رأي قمت بالتصويت عليه في %(team_name)s"
-
-msgid "A user created a new poll in a team you are following"
-msgstr "أعد مستخدم استطلاع رأي جديد في فريق أنت تتابعه"
-
-#, python-format
-msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s تم إعداد استطلاع رأي جديد في %(team_name)s (which you follow)"
-
-#, python-format
-msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "استطلاع رأي جديد: \"%(object_name)s\" تم إعداد في %(team_name)s (الذي تتبعه)."
-
-msgid "A user updated a poll you are following"
-msgstr "قام مستخدم بتحديث استطلاع رأي أنت تتابعه"
-
-#, python-format
-msgid "%(sender_name)s updated the poll %(object_name)s"
-msgstr "%(sender_name)s تم تحديث استطلاع الرأي %(object_name)s"
-
-msgid "You are following this poll"
-msgstr "أنت تتابع هذا الاستطلاع"
-
-#, python-format
-msgid "%(sender_name)s updated a poll you are following"
-msgstr "%(sender_name)s تم تحديث استطلاع رأي أنت تتابعه"
-
-#, python-format
-msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "استطلاع رأي أنت تتابعه: \"%(object_name)s\" تم تحديثه في %(team_name)s."
-
-msgid "A poll you are following was completed"
-msgstr "لقد تم انجاز استطلاع الرأي الذي تتابعه"
-
-#, python-format
-msgid "%(sender_name)s completed the poll %(object_name)s"
-msgstr "%(sender_name)s تم انجاز استطلاع الرأي %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d polls"
-msgstr "%(sender_name)s منجز %(count)d polls"
-
-#, python-format
-msgid "%(sender_name)s completed the poll you are following"
-msgstr "%(sender_name)s أنجز استطلاع الرأي الذي تتابعه"
-
-#, python-format
-msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
-msgstr "استطلاع رأي \"%(object_name)s\"الذي تتابعه أنجز في %(team_name)s."
-
-msgid "A user commented on one a poll you are following"
-msgstr "علق مستخدم على واحدة من استطلاعات الرأي الذي تتابعه"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you are following"
-msgstr "%(sender_name)s تم التعليق على استطلاع رأي أنت تتابعه"
-
-msgid "Current Polls"
-msgstr "الاستطلاعات الحالية"
-
-msgid "No current polls"
-msgstr "لا يوجد استطلاعات حالية"
-
-msgid "You must write a description for this poll option!"
-msgstr "يجب عليك كتابة وصف لخيار الاستطلاع هذا!"
-
-msgid "Voting closed"
-msgstr "أغلق التصويت"
-
-msgid "Poll archived"
-msgstr "تمت أرشفة الاستطلاع"
-
-msgid "Multiple options votable"
-msgstr "خيارات متعددة قابلة للتصويت"
-
-msgid "Does this poll allow users to vote on multiple options or just decide for one?"
-msgstr "هل يسمح هذا الاستطلاع للمستخدمين بالتصويت على خيارات متعددة أم فقط يقرر خيارا واحدا؟"
-
-msgid "\"Maybe\" option enabled"
-msgstr "\"ربما\""
-
-msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
-msgstr "هل الخيار ربما ممكن؟ تجاهل وفم بالتعيين الافتراضي إلى خطأ إذا كان ``multiple_votes==False``"
-
-msgid "Anyone can vote"
-msgstr "يمكن لأي شخص أن يصوت"
-
-msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
-msgstr "إذا كان هذا صحيحًا ، فيمكن لأي شخص رؤية هذا الاستطلاع التصويت عليه. إذا كان خطأ ، يمكن فقط لأعضاء المجموعة."
-
-msgid "Show voters"
-msgstr "عرض المنتخبين/المصوتين"
-
-msgid "If true, display a list of which user voted for each option."
-msgstr "إذا كان هذا صحيحًا ، اعرض قائمة المستخدمين الذين صوتوا لكل خيار."
-
-msgid "Winning Option"
-msgstr "خيار الربح"
-
-#, python-format
-msgid "Poll: %(poll)s (%(state)s)"
-msgstr "استطلاع: %(poll)s (%(state)s)"
-
-msgid "Poll Option"
-msgstr "خيار الاستطلاع"
-
-msgid "Poll Options"
-msgstr "خيارات الاستطلاع"
-
-#, python-format
-msgid "Poll \"%(title)s\" was edited successfully."
-msgstr "استطلاع رأي \"%(title)s\" تم تعديله بنجاخ."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be edited."
-msgstr "استطلاع رأي \"%(title)s\" لا يمكن تعديله."
-
-#, python-format
-msgid "Poll \"%(title)s\" was added successfully."
-msgstr "استطلاع رأي \"%(title)s\" تمت اضافته بنجاح."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be added."
-msgstr "استطلاع رأي \"%(title)s\" لا يمكن تعديله."
-
-msgid "You should define at least one poll option!"
-msgstr "يجب عليك تحديد خيار استطلاع رأي واحد على الأقل!"
-
-msgid "This poll is archived and cannot be edited anymore!"
-msgstr "تمت أرشفة هذا الاستطلاع ولا يمكن تعديله بعد الآن!"
-
-#, python-format
-msgid "Poll \"%(title)s\" was deleted successfully."
-msgstr "استطلاع رأي \"%(title)s\" تم حذفه بنجاخ."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be deleted."
-msgstr "استطلاع رأي \"%(title)s\" لا يمكن حذفه."
-
-msgid "The voting phase for this poll is over. You cannot vote for it any more."
-msgstr "انتهت مرحلة التصويت لهذا الاستطلاع. لا يمكنك التصويت بعد الآن."
-
-msgid "In this poll you must vote for exactly one item!"
-msgstr "في هذا الاستطلاع يجب أن تصوت لعنصر واحد محدد!"
-
-msgid "Invalid action for this poll. The request could not be completed!"
-msgstr "إجراء غير صالح لهذا الاستطلاع. لا يمكن استكمال الطلب!"
-
-msgid "This action is not permitted for this poll at this stage!"
-msgstr "هذا الإجراء لهذا الاستطلاع غير مسموح به في هذه المرحلة !"
-
-msgid "The poll was closed successfully."
-msgstr "تم إغلاق الاستطلاع بنجاح."
-
-msgid "The poll was re-opened successfully."
-msgstr "تم إعادة فتح الاستطلاع بنجاح."
-
-msgid "The poll was archived successfully."
-msgstr "تم أرشفة الاستطلاع بنجاح."
-
-msgid "Stream"
-msgstr "عرض"
-
-msgctxt "the_app"
-msgid "stream"
-msgstr "the_app عرض"
-
-msgid "My Streams"
-msgstr "عرضي"
-
-msgid "Streams"
-msgstr "عروض"
-
-msgid "Models"
-msgstr "النماذج"
-
-msgid "Portal IDs"
-msgstr "هويات البوابة"
-
-msgid "Last seen"
-msgstr "اخر مشاهدة"
-
-msgid "Special Stream"
-msgstr "عرض خاص"
-
-msgid "Special Group IDs"
-msgstr "هويات مجموعة خاصة"
-
-msgid "You do not have permission to access this stream."
-msgstr "لا يوجد لديك إذن بالدخول إلى هذا العرض."
-
-msgid "Your stream was added successfully."
-msgstr "لقد تم إضافة العرض بنجاح."
-
-msgid "Your stream was updated successfully."
-msgstr "لقد تم تحديث عرضك بنجاح."
-
-msgid "Your stream was deleted successfully."
-msgstr "لقد تم حذف عرضك بنجاح."
-
-msgid "You cannot delete the default stream!"
-msgstr "لا يمكن حذف العرض الإفتراضي!"
-
-msgctxt "the_app"
-msgid "todo"
-msgstr "the_app مهمة"
-
-msgid "A user created a new todo"
-msgstr "قام مستخدم بإنشاء مهمة جديدة"
-
-#, python-format
-msgid "%(sender_name)s created the todo %(object_name)s"
-msgstr "%(sender_name)s انشاء المهمة %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d todos"
-msgstr "%(sender_name)s تم انشاء %(count)d المهام"
-
-#, python-format
-msgid "%(sender_name)s created a new todo"
-msgstr "%(sender_name)s تم انشاء مهمة جديدة"
-
-#, python-format
-msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "المهمة الجديدة: \"%(object_name)s\" أنشئت بواسطة%(team_name)s."
-
-msgid "A todo was assigned to me"
-msgstr "مهمة أوكلت إلي"
-
-#, python-format
-msgid "%(sender_name)s assigned the todo %(object_name)s to you"
-msgstr "%(sender_name)sعُينت المهمة%(object_name)s لي"
-
-#, python-format
-msgid "%(sender_name)s assigned %(count)d todos to you"
-msgstr "%(sender_name)s تم تعيين%(count)d مهمة لك"
-
-#, python-format
-msgid "%(sender_name)s assigned a todo to you"
-msgstr "%(sender_name)sتعيين مهمة لك"
-
-msgid "A todo I created was completed"
-msgstr "المهمة التي أُنشئت تم إنجازها"
-
-#, python-format
-msgid "%(sender_name)s completed the todo %(object_name)s"
-msgstr "%(sender_name)s انجز المهمة%(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d todos"
-msgstr "%(sender_name)s انجزوا %(count)d من المهام"
-
-msgid "You created this todo"
-msgstr "أنت أنشئت هذه المهمة"
-
-#, python-format
-msgid "%(sender_name)s completed your todo"
-msgstr "%(sender_name)s أنجز مهمتك"
-
-#, python-format
-msgid "%(sender_name)s completed one of your todos"
-msgstr "%(sender_name)s أنجزوا واحدة من المهام"
-
-msgid "A user commented on one of your todos"
-msgstr "المتسخدم علق على واحدة من مهامك"
-
-#, python-format
-msgid "%(sender_name)s commented on your todo %(object_name)s"
-msgstr "%(sender_name)s تم التعليق على مهمتك %(object_name)s"
-
-#, fuzzy, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
-msgstr[0] ""
-"% (sender_name)s و% (count_minus_one)d آخر علقوا على ما يجب القيام به% (object_name)s\n"
-"\n"
-"\n"
-"% (sender_name)s و% (count_minus_one)d آخر علقوا على ما يجب القيام به% (object_name)s"
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
-#, python-format
-msgid "%(sender_name)s commented on your todo"
-msgstr "%(sender_name)s تم التعليق على مهمتك"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your todos"
-msgstr "%(sender_name)s تم التعليق على واحدة من مهامك"
-
-msgid "A user commented on a todo you were tagged in"
-msgstr "مستخدم علق على مهمة أشير إليك بها"
-
-#, python-format
-msgid "%(sender_name)s commented on the todo %(object_name)s"
-msgstr "%(sender_name)s تم التعليق على المهمة %(object_name)s"
-
-#, fuzzy, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
-msgstr[0] ""
-"%(sender_name)s و% (count_minus_one)d آخر علق على المهام% (object_name)s\n"
-"\n"
-"\n"
-"% (sender_name)s و% (count_minus_one)d آخرون علقوا على المهام% (object_name)s"
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
-msgid "You were tagged in this todo"
-msgstr "تم الإشارة إليك في هذه المهمة"
-
-#, python-format
-msgid "%(sender_name)s commented on a todo you were tagged in"
-msgstr "%(sender_name)s علق على مهمة أشير إليك بها"
-
-#, python-format
-msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s علق على مهمة أشير اليك بها %(team_name)s"
-
-msgid "A user commented on a todo you were assigned to"
-msgstr "المتسخدم علق على مهمة أوكلت إليك"
-
-#, python-format
-msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
-msgstr "%(sender_name)sتم التعليق على المهمة الموكلة اليك%(object_name)s"
-
-#, fuzzy, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
-msgstr[0] ""
-"% (sender_name)s و% (count_minus_one)d آخر علق على المهام المعينة لك% (object_name)s\n"
-"\n"
-"\n"
-"% (sender_name)s و% (count_minus_one)d آخرون علقوا على المهام المعينة لك% (object_name)s"
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
-#, python-format
-msgid "%(sender_name)s commented on one of your assigned todos"
-msgstr "%(sender_name)s علقوا على واحدة من المهام التي أوكلت إليك"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
-msgstr "%(sender_name)s  علقوا على واحدة من المهام التي أوكلت إليك ضمن%(team_name)s"
-
-msgid "A user updated a todo you are following"
-msgstr "مستخدم قام بتحديث مهمة أنت تتابعها"
-
-#, python-format
-msgid "%(sender_name)s updated the todo %(object_name)s"
-msgstr "%(sender_name)s  حدث المهمة%(object_name)s"
-
-#, fuzzy, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
-msgstr[0] ""
-"% (sender_name)s و% (count_minus_one)d قام أخر بتحديث المهام% (object_name)s\n"
-"\n"
-"% (sender_name)s و% (count_minus_one)d قام أخرون بتحديث المهام% (object_name)s"
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
-msgid "You are following this todo"
-msgstr "انت تتابع هذه المهمة"
-
-#, python-format
-msgid "%(sender_name)s updated a todo you are following"
-msgstr "%(sender_name)s قاموا بتحديث مهمة أنت تتابعها"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "المهمة التي انت تتابعها\"%(object_name)s\" تم تحديثها ضمن الفريق%(team_name)s."
-
-msgid "A user reassigned a todo you are following"
-msgstr "مستخدم قام بإعادة تعين مهمة أنت تتابعها"
-
-#, python-format
-msgid "%(sender_name)s reassigned the todo %(object_name)s"
-msgstr "%(sender_name)s قام بإعادة تعيين المهمة%(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s reassigned %(count)d todos"
-msgstr "%(sender_name)s قام بإعادة تعيين %(count)d من المهام"
-
-#, python-format
-msgid "%(sender_name)s reassigned a todo you are following"
-msgstr "%(sender_name)s قام بتعيين مهمة أنت تتابعها"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
-msgstr "المهمة التي أنت تتابعها \"%(object_name)s\"  تم إعادة تعيينها ضمن %(team_name)s."
-
-msgid "A user completed a todo you are following"
-msgstr "مستخدم أنجز مهمة انت تتابعها"
-
-#, python-format
-msgid "%(sender_name)s completed a todo you are following"
-msgstr "%(sender_name)s أنجز مهمة أنت تتابعها"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
-msgstr "المهمة التي أنت تتابعها\"%(object_name)s\" تم إنجازها في %(team_name)s."
-
-msgid "A user commented on a todo you are following"
-msgstr "مستخدم علق على مهمة أنت تتابعها"
-
-#, python-format
-msgid "%(sender_name)s commented on on a todo you are following"
-msgstr "%(sender_name)s تم التعليق على مهمة أنت تتابعها"
-
-msgid "My Todos"
-msgstr "قائمة مهامي"
-
-msgid "No todos"
-msgstr "لا يوجد مهام"
-
-msgid "Open"
-msgstr "مفتوحة"
-
-msgid "Completed"
-msgstr "منجزة"
-
-msgid "Assigned To"
-msgstr "عينت لـ"
-
-msgid "Priority"
-msgstr "أولولية"
-
-msgid "Due date"
-msgstr "حتى تاريخ"
-
-msgid "Soonest Due"
-msgstr "في أقرب وقت ممكن"
-
-msgid "You are not allowed to assign this Todo entry."
-msgstr "غير مسموح لك الدخول لهذه المهمة."
-
-msgid "Later"
-msgstr "لاحقا"
-
-msgid "Normal"
-msgstr "عادي"
-
-msgid "Important"
-msgstr "مهم"
-
-msgid "Due by"
-msgstr "مقرر"
-
-msgid "Completed on"
-msgstr "أنجز في"
-
-msgid "Completed by"
-msgstr "اكتمل بواسطة/ من قبل"
-
-msgid "Assigned to"
-msgstr "معين لـ"
-
-msgid "List"
-msgstr ""
-
-#, python-format
-msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
-msgstr "المهمة \"%(todo_name)s\" عينت ل %(assignee_name)s"
-
-#, python-format
-msgid "Todo \"%(title)s\" was added successfully."
-msgstr "تمت إضافة \"%(title)s\" المهمة بنجاح."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be added."
-msgstr "لا يمكن إضافة المهمة\"%(title)s\"."
-
-msgid "You were trying to add a todo to a todolist that does not exist!"
-msgstr "كنت تحاول إضافة مهمة غير موجودة إلى قائمة المهام!"
-
-#, python-format
-msgid "Todo \"%(title)s\" was edited successfully."
-msgstr "تم تعديل \"%(title)s\" المهام بنجاح."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be edited."
-msgstr "تعذر تعديل\"%(title)s\" المهام."
-
-#, python-format
-msgid "Todo \"%(title)s\" was deleted successfully."
-msgstr "لقد تم حذف\"%(title)s\" المهام بنجاح."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be deleted."
-msgstr "تعذر حذف\"%(title)s\" المهام."
-
-#, python-format
-msgid "Todo \"%(title)s\" was assigned successfully."
-msgstr "تم تعيين\"%(title)s\" المهام بنجاح."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be assigned."
-msgstr "تعذر تعيين \"%(title)s\" المهام."
-
-#, python-format
-msgid "Todo \"%(title)s\" was assigned to You successfully."
-msgstr "تم تعيين\"%(title)s\" المهمة لك بنجاح."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be assigned to You."
-msgstr "تعذر لك تعيين\"%(title)s\" المهمة."
-
-#, python-format
-msgid "Todo \"%(title)s\" was unassigned successfully."
-msgstr "تم إلغاء تعيين\"%(title)s\" المهمة بنجاح."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be unassigned."
-msgstr "تعذر إلغاء تعيين\"%(title)s\"المهمة."
-
-#, python-format
-msgid "Todo \"%(title)s\" was completed successfully."
-msgstr "تم انجاز\"%(title)s\"المهمة بنجاح."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be completed."
-msgstr "تعذر انجاز\"%(title)s\" المهمة."
-
-#, python-format
-msgid "Todo \"%(title)s\" was completed by You successfully."
-msgstr "تم انجاز\"%(title)s\" المهام بواسطتك بنجاح."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be completed by You."
-msgstr "تعذّر عليك إكمال\"%(title)s\" المهام."
-
-#, python-format
-msgid "Todo \"%(title)s\" was set to incomplete successfully."
-msgstr "لم يتم اكمال \"%(title)s\"المهمة بنجاح."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be set to incomplete."
-msgstr "قد لا يتم انجاز \"%(title)s\"\" قائمة المهمة."
-
-#, python-format
-msgid "Todolist \"%(title)s\" was edited successfully."
-msgstr "تم تعديل \"%(title)s\" قائمة المهام بنجاح."
-
-#, python-format
-msgid "Todolist \"%(title)s\" could not be edited."
-msgstr "قد لا يتم تعديل \"%(title)s\" قائمة المهام."
-
-#, python-format
-msgid "Todolist \"%(title)s\" was added successfully."
-msgstr "تم إضافة \"%(title)s\" قائمة المهام بنجاح."
-
-#, python-format
-msgid "Todolist \"%(title)s\" could not be added."
-msgstr "قد لا يمكن إضافة \"%(title)s\" قائمة/قوائم المهام."
-
-msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
-msgstr "لا يمكنك حذف هذا المجلد لأنه ليس لديك إذن بحذف عنصر أو أكثر من محتواه!"
-
-msgid "Sender and Recipient cannot be both undefined."
-msgstr ""
-
-msgid "Visitor's email is in excess."
-msgstr ""
-
-msgid "Visitor's email is missing."
-msgstr ""
-
-msgid "Reading date must be later than sending date."
-msgstr ""
-
-msgid "Deletion date by sender must be later than sending date."
-msgstr ""
-
-msgid "Deletion date by recipient must be later than sending date."
-msgstr ""
-
-msgid "Response date must be later than sending date."
-msgstr ""
-
-msgid "The message cannot be replied without having been read."
-msgstr ""
-
-msgid "Response date must be later than reading date."
-msgstr ""
-
-msgid "Response date cannot be set without at least one reply."
-msgstr ""
-
-#, fuzzy
-#| msgid "This message was sent in a conversation with: "
-msgid "The message cannot be replied without being in a conversation."
-msgstr "تم إرسال هذه الرسالة في محادثة مع: "
-
-msgid "Dates"
-msgstr "تورايخ"
-
-#, fuzzy
-msgid "Moderation"
-msgstr "هو مشرف"
-
-#, python-brace-format
-msgid "Some usernames are unknown or no longer active: {users}."
-msgstr ""
-
-#, python-brace-format
-msgid "Ensure this value has at most {limit_value} distinct items (it has {show_value})."
-msgstr ""
-
-#, python-brace-format
-msgid "Ensure this value has at least {limit_value} distinct items (it has {show_value})."
-msgstr ""
-
-#, python-brace-format
-msgid "Some usernames are rejected: {users}."
-msgstr ""
-
-#, fuzzy, python-brace-format
-#| msgid "Your name"
-msgid "{username}"
-msgstr "اسمك"
-
-#, python-brace-format
-msgid "{username} ({reason})"
-msgstr ""
-
-#, python-brace-format
-msgid "Writing to some users is not possible: {users}."
-msgstr ""
-
-msgid "Recipient"
-msgstr "المُستقبل"
-
-#, fuzzy
-#| msgid "Additional Recipients"
-msgid "Additional recipients"
-msgstr "مستلمين إضافيين"
-
-#, fuzzy
-#| msgid "Additional Recipients"
-msgid "Additional recipient"
-msgstr "مستلمين إضافيين"
-
-#, fuzzy
-#| msgid "Message Project"
-msgid "Message Rejected"
-msgstr "أرسل رسالة إلى المجموعة"
-
-#, fuzzy
-msgid "Your message has been rejected"
-msgstr "تم حفظ التغييرات."
-
-#, fuzzy
-#| msgid "Message Project"
-msgid "Message Received"
-msgstr "أرسل رسالة إلى المجموعة"
-
-#, fuzzy
-#| msgid "You have been invited to apply!"
-msgid "You have received a message"
-msgstr "لقد تمت دعوتك للتقديم!"
-
-msgid "Reply Received"
-msgstr ""
-
-#, fuzzy
-#| msgid "You have been invited to apply!"
-msgid "You have received a reply"
-msgstr "لقد تمت دعوتك للتقديم!"
-
-msgid "Pending"
-msgstr ""
-
-#, fuzzy
-#| msgid "Restricted"
-msgid "Rejected"
-msgstr "محدد/مُقيد"
-
-#, fuzzy
-#| msgid "Everybody"
-msgid "body"
-msgstr "الجميع"
-
-#, fuzzy
-msgid "sender"
-msgstr "أرسلت"
-
-#, fuzzy
-#| msgid "Recipient"
-msgid "recipient"
-msgstr "المُستقبل"
-
-#, fuzzy
-#| msgid "Visitor"
-msgid "visitor"
-msgstr "زائر"
-
-#, fuzzy
-msgid "parent message"
-msgstr "اسمك"
-
-#, fuzzy
-#| msgid "No messages"
-msgid "root message"
-msgstr "لا يوجد رسائل"
-
-#, fuzzy
-#| msgid "Sent at:"
-msgid "sent at"
-msgstr "مرسل في:"
-
-msgid "read at"
-msgstr ""
-
-msgid "replied at"
-msgstr ""
-
-msgid "archived by sender"
-msgstr ""
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "archived by recipient"
-msgstr "مستلم غير محدد."
-
-#, fuzzy
-#| msgid "Delete user account"
-msgid "deleted by sender at"
-msgstr "حذف حساب المستخدم"
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "deleted by recipient at"
-msgstr "مستلم غير محدد."
-
-msgid "status"
-msgstr ""
-
-#, fuzzy
-msgid "moderator"
-msgstr "هو مشرف"
-
-#, fuzzy
-#| msgid "Related to"
-msgid "moderated at"
-msgstr "متعلق ب"
-
-msgid "rejection reason"
-msgstr ""
-
-msgid "Direct Reply Hash"
-msgstr ""
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "message"
-msgstr "الرسالة"
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "messages"
-msgstr "الرسالة"
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "Undefined sender."
-msgstr "مستلم غير محدد."
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "pending message"
-msgstr "الرسالة"
-
-#, fuzzy
-msgid "pending messages"
-msgstr "اسمك"
-
-msgid "<me>"
-msgstr ""
-
-msgid "> "
-msgstr ""
-
-#, python-brace-format
-msgid ""
-"\n"
-"\n"
-"{sender} wrote:\n"
-"{body}\n"
-msgstr ""
-
-#, fuzzy, python-brace-format
-msgid "Re: {subject}"
-msgstr "موضوع"
-
-#, fuzzy
-#| msgid "User successfully created!"
-msgid "Message successfully sent."
-msgstr "تم إنشاء المستخدم بنجاح!"
-
-#, fuzzy
-#| msgid "Select at least one object."
-msgid "Message rejected for at least one recipient."
-msgstr "حدد موضوع واحد على الأقل."
-
-msgid "A conference you are attending has been updated"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "The conference %(object_name)s has been updated"
-msgstr "قد تمت الإشارة لم في \"%(object_name)s\" في %(team_name)s."
-
-#, fuzzy
-msgid "You are attending this conference"
-msgstr "أنت على وشك إلغاء تنشيط هذا المشروع/المجموعة!"
-
-#, fuzzy, python-format
-msgid "The conference \"%(object_name)s\" was updated."
-msgstr "قد تمت الإشارة لم في \"%(object_name)s\" في %(team_name)s."
-
-msgid "The time of a conference you are attending has been updated"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "The time of conference %(object_name)s has been updated"
-msgstr "قد تمت الإشارة لم في \"%(object_name)s\" في %(team_name)s."
-
-msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
-msgstr ""
-
-msgid "minute"
-msgstr ""
-
-msgid "minutes"
-msgstr ""
-
-msgid "Select the date range for which you would like statistics"
-msgstr ""
-
-msgid "Cloud Stub"
-msgstr "ملفات كلاود"
-
-msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
-msgstr ""
-
-msgid "There are no cloud files yet"
-msgstr "لا يوجد أية ملفات كلاود حتى الأن"
-
-msgid "Error message:"
-msgstr ""
-
-msgid "No error message supplied."
-msgstr ""
-
-#, fuzzy
-#| msgid "Pads"
-msgid "Pad"
-msgstr "لوحات"
-
-msgid "This pad can no longer be edited because its creator has deleted their account."
-msgstr "لم يعد من الممكن تعديل هذه اللوحة لأن منشئها قد حذف حسابه."
-
-#, python-format
-msgid "Do you really want to delete etherpad „%(pad)s“?"
-msgstr "هل تريد حقًا حذف „%(pad)s“؟"
-
-msgid "Delete Etherpad"
-msgstr "حدف Etherpad"
-
-msgid "This document is empty"
-msgstr "هذا المستند فارغ"
-
-msgid "Pads"
-msgstr "لوحات"
-
-msgid "Enter a title for the Pad."
-msgstr "أدخل عنوانًا للوحة."
-
-msgid "Enter the title for a new Document or Table."
-msgstr "أدخل العنوان لمستند أو جدول الجديد."
-
-msgid "Enter the title for a new Document."
-msgstr "أدخل العنوان لمستند جديد."
-
-msgid "Create Etherpad"
-msgstr "قم بإنشاء Ethercalc"
-
-msgid "Create Ethercalc"
-msgstr "قم بإنشاء Ethercalc"
-
-#, python-format
-msgid "Do you really want to delete etherpad „%(title)s“?"
-msgstr "هل تريد حقًا حذف etherpad „%(title)s““؟"
-
-msgid "No etherpads have been created yet."
-msgstr "لم يتم إنشاء etherpads حتى الان."
-
-msgid "Download CSV"
-msgstr "قم بتحميل ملف CVS"
-
-msgid "Download Excel"
-msgstr "قم بتحميل Excel"
-
-#, python-format
-msgid ""
-"Hi %(receiver_name)s,\n"
-"\n"
-"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
-"\n"
-"You can find it by following this link: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s Team."
-msgstr ""
-"مرحبًا %(receiver_name)s,\n"
-"\n"
-"تم إنشاء لوحة etherpad جديدة \"%(object_name)s\" في %(team_name)s بواسطة %(sender_name)s.\n"
-"\n"
-"يمكنك العثور عليه باتباع هذا الرابط: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"(اتبع هذا الرابط لتعديل اشعاراتك المفضلة: %(notification_settings_url)s )\n"
-"\n"
-"فريقك %(site_name)s."
-
-msgid "You created a pad"
-msgstr "لقد قمت بإنشاء لوحة"
-
-msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
-msgid "created a Pad"
-msgstr "قد تم انشاء لوحة"
-
-msgid "There are no etherpads yet"
-msgstr "لا توجد etherpads بعد"
-
 msgid "Would you like to create an event"
 msgstr "هل تود انشاء مناسبة"
 
@@ -11326,6 +9576,9 @@ msgstr "مناسبة الاستطلاعات"
 
 msgid "Enter a title for the new event to be scheduled."
 msgstr "أدخل عنوانًا للمناسبة الجديدة المراد جدولتها."
+
+msgid "Dates"
+msgstr "تورايخ"
 
 msgid "Please select the available days in the calendar."
 msgstr "يرجى تحديد الأيام المتاحة في التقويم."
@@ -11472,6 +9725,9 @@ msgstr "العودة إلى مناسبة استطلاع"
 
 msgid "Return to Archived Event Polls"
 msgstr "العودة إلى مناسبة استطلاع مؤرشفة"
+
+msgid "List"
+msgstr ""
 
 msgid "View"
 msgstr "عرض"
@@ -11851,6 +10107,197 @@ msgstr "انشاء مناسبة"
 msgid "Show all"
 msgstr "عرض الكل"
 
+msgid "Upcoming events"
+msgstr "المناسبات القادمة"
+
+#, python-format
+msgid "Event \"%(title)s\" was edited successfully."
+msgstr "Event \"%(title)s\" تم التعديل بنجاح."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be edited."
+msgstr "مناسبة \"%(title)s\"تعذر تعديلها."
+
+msgid "Please use the conference management area to add new workshops!"
+msgstr "الرجاء استخدام منطقة إدارة المؤتمرات لإضافة ورش عمل جديدة!"
+
+msgid "The page you requested is not available for this event at this time."
+msgstr "الصفحة التي طلبتها غير متاحة لهذه الماسبة في الوقت الحالي."
+
+msgid "One of the event suggestions times could not be understood!"
+msgstr "واحدة من أوقات الاقتراحات لمناسبة قد تكون غير مفهومة!"
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was edited successfully."
+msgstr "تم تعديل مناسبة غير مجدولة\"%(title)s\" بنجاح."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be edited."
+msgstr "تعذر عن تعديل المناسبة الغير مجدولة \"%(title)s\"."
+
+#, python-format
+msgid "Event \"%(title)s\" was added successfully."
+msgstr "تمت إضافة مناسبة \"%(title)s\" بنجاح."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be added."
+msgstr "تعذر إضافة المناسبة \"%(title)s\"."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was added successfully."
+msgstr "تمت إضافة مناسبة غير مجدولة\"%(title)s\"بنجاح."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be added."
+msgstr "تعذر إضافة المناسبة الغير مجدولة \"%(title)s\"."
+
+msgid "You should define at least one date suggestion."
+msgstr "يجب عليك تحديد اقتراح لتاريخ واحد على الأقل."
+
+#, python-format
+msgid "Event \"%(title)s\" was deleted successfully."
+msgstr "تم حذف مناسبة \"%(title)s\" بنجاح."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be deleted."
+msgstr "تعذر حذف المناسبة \"%(title)s\"."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was deleted successfully."
+msgstr "تم حذف مناسبة غير مجدولة\"%(title)s\" بنجاح."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be deleted."
+msgstr "تعذر حذف المناسبة الغير مجدولة \"%(title)s\"."
+
+#, fuzzy
+#| msgid "Your data was saved successfully!"
+msgid "Your votes were saved successfully."
+msgstr "تم حفظ بياناتك بنجاح!"
+
+#, fuzzy
+#| msgid "Poll \"%(title)s\" could not be added."
+msgid "Your votes could not be saved."
+msgstr "استطلاع رأي \"%(title)s\" لا يمكن تعديله."
+
+msgid "This is event is already scheduled. You cannot vote for it any more."
+msgstr "هذiه المناسبة تمت جدولتها بالفعل. لا يمكنك التصويت عليها بعد الآن."
+
+msgid "The complete request can only be sent via POST!"
+msgstr "لا يمكن إرسال الطلب الكامل إلا من خلال البريد!"
+
+msgid "Event cannot be completed: No date was supplied."
+msgstr "لا يمكن إكمال المناسبة: لم يتم تقديم أي تاريخ."
+
+msgid "The event was created successfully at the specified date."
+msgstr "تم إنشاء المناسبة بنجاح في التاريخ المحدد."
+
+#, fuzzy
+msgid "Upcoming event"
+msgstr "المناسبات القادمة"
+
+msgid "Your comment was added successfully."
+msgstr "تم إضافة تعليقك بنجاح."
+
+msgid "Your comment was deleted successfully."
+msgstr "تم حذق تعليقك بنجاح."
+
+msgid "Exchange"
+msgstr ""
+
+msgctxt "the_app"
+msgid "exchange"
+msgstr ""
+
+msgctxt "the_app"
+msgid "file"
+msgstr "ملف"
+
+msgid "A user uploaded a new file"
+msgstr "قام مستخدم بتحميل ملف جديد"
+
+#, python-format
+msgid "%(sender_name)s uploaded the file %(object_name)s"
+msgstr "قام%(sender_name)s بتحميل الملف%(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s uploaded %(count)d files"
+msgstr "%(sender_name)s تم تحميل %(count)d ملفات"
+
+#, python-format
+msgid "%(sender_name)s created a new file"
+msgstr "%(sender_name)s تم إنشاء ملف جديد"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "ملف جديد: \"%(object_name)s\" تم إنشاؤه في%(team_name)s."
+
+msgid "A user uploaded a new file in a team you are following"
+msgstr "قام مستخدم بتحميل ملف جديد في فريق تتابعه"
+
+#, python-format
+msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s تم إنشاء ملف جديد في%(team_name)s انت تتابعه)"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "ملف جديد: \"%(object_name)s\" تم إنشاؤه في%(team_name)s (انت تتابعه)."
+
+msgid "Latest Files"
+msgstr "اكبر الملفات حجما"
+
+msgid "No files"
+msgstr "لا يوجد ملفات"
+
+msgid "Pictures"
+msgstr "صور"
+
+msgid "Documents"
+msgstr "مستندات"
+
+msgid "Audio Files"
+msgstr "ملفات صوتية"
+
+msgid "Videos"
+msgstr "فيديو"
+
+msgid "File Type"
+msgstr "نوع الملف"
+
+msgid "File Name"
+msgstr "اسم الملف"
+
+msgid "File Name (descending)"
+msgstr "اسم الملف (تنازلي)"
+
+msgid "Smallest Files"
+msgstr "اصغر الملقات حجما"
+
+msgid "Largest Files"
+msgstr "أكبر الملفات حجما"
+
+msgid "The given URL does not seem to be valid."
+msgstr "يبدو أن عنوان URL المُقدم غير صالح."
+
+msgid "Must supply either a URL or File"
+msgstr "يجب توفير عنوان URL أو ملف"
+
+msgid "Is URL Link"
+msgstr "هو رابط URL"
+
+msgid "Uploaded by"
+msgstr "تم تحميله بواسطة"
+
+msgid "Uploaded on"
+msgstr "تم التحميل في"
+
+msgid "No files selected."
+msgstr "لم يتم تحديد أية ملفات."
+
+msgctxt "special_folder_type"
+msgid "Attachments"
+msgstr "المرفقات"
+
 msgid "The URL you have entered does not seem to be valid!"
 msgstr "يبدو أن عنوان URL الذي أدخلته غير صالح!"
 
@@ -11963,6 +10410,232 @@ msgstr "أحدث الملفات"
 
 msgid "There are no files  yet"
 msgstr "لا توجد أية ملفات بعد"
+
+msgid "File does not exist or you are not allowed to delete it."
+msgstr "الملف غير موجود أو غير مسموح لك بحذفه."
+
+#, fuzzy, python-format
+msgid "A problem occurred during export. The following file is missing: %(filename)s."
+msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
+msgstr[0] ""
+"حدثت مشكلة أثناء التصدير. الملف التالي مفقود:%s(filename).\n"
+"\n"
+"\n"
+"\n"
+"حدثت مشكلة أثناء التصدير. الملفات التالية مفقودة:%s(filename)."
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+msgid "Invalid request."
+msgstr "طلب غير صالح."
+
+#, python-format
+msgid "File \"%(title)s\" was updated successfully."
+msgstr "تم تحديث الملف\"%(title)s\" بنجاح."
+
+#, python-format
+msgid "File \"%(title)s\" could not be updated."
+msgstr "تعذر تحديث الملف\"%(title)s\"."
+
+msgid "Downloading failed, the target object was not a folder!"
+msgstr "فشل التنزيل ، الموضوع المستهدف لم يكن مجلد!"
+
+msgid "Canceled the download because there seem to be no files in this folder."
+msgstr "تم إلغاء التحميل لأنه يبدو أنه لا توجد ملفات في هذا المجلد."
+
+msgid "Internal Error: Group not Found"
+msgstr "خطأ داخلي: المجموعة غير موجودة"
+
+msgid "Permission for upload denied"
+msgstr "الاذن بالتحميل غير متاح"
+
+msgid "The uploaded file was invalid."
+msgstr "الملف الذي تم تحميله غير صالح "
+
+#, fuzzy, python-format
+msgid "%(count)d File was added successfully."
+msgid_plural "%(count)d Files were added successfully."
+msgstr[0] ""
+"% (count)d تمت إضافة الملف بنجاح.\n"
+"\n"
+"\n"
+"% (count)d تمت إضافة الملفات بنجاح."
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
+msgstr "الملف الذي قمت بتحميله كان كبيرًا جدًا أو لم يتم السماح بتحميل نوع هذا الملف!"
+
+msgctxt "the_app"
+msgid "marketplace"
+msgstr "المتجر"
+
+msgid "A user created a new offer"
+msgstr "أنشأ المستخدم عرضًا جديدًا"
+
+#, python-format
+msgid "%(sender_name)s created the offer %(object_name)s"
+msgstr "%(sender_name)sتم إنشاء العرض%(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d offers"
+msgstr "%(sender_name)s تم انشاء %(count)dعروض"
+
+#, python-format
+msgid "%(sender_name)s created a new offer"
+msgstr "%(sender_name)s تم إنشاء عرض جديد"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "عرض جديد: \"%(object_name)s\" تم إنشاؤه في %(team_name)s."
+
+msgid "One of your offers expired"
+msgstr "احد عروضك قد انتهت صلاحيته"
+
+#, python-format
+msgid "Your offer %(object_name)s expired"
+msgstr "قد انتهت صلاحية عرضك%(object_name)s"
+
+#, python-format
+msgid "%(count)d of your offers expired"
+msgstr "%(count)dواحد من عروضك انتهت صلاحيته"
+
+msgid "Your offer has expired"
+msgstr "عرضك قد انتهى"
+
+#, python-format
+msgid "Offer \"%(object_name)s\" has expired."
+msgstr "انتهت صلاحية عرض. \"%(object_name)s\"."
+
+msgid "A user commented on one of your offers"
+msgstr "علق مستخدم على احد عروضك"
+
+#, python-format
+msgid "%(sender_name)s commented on your offer %(object_name)s"
+msgstr "%(sender_name)sتم التعليق على عرضك%(object_name)s"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
+msgstr[0] ""
+"% (sender_name)s و% (count_minus_one)d آخر علق على عرضك% (object_name)s\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"% (sender_name)s و% (count_minus_one)d آخرون علقوا على عرضك% (object_name)s"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#, python-format
+msgid "%(sender_name)s commented on your offer"
+msgstr "%(sender_name)s تم التعليق على عرضك"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your offers"
+msgstr "%(sender_name)sعلق على أحد عروضك"
+
+msgid "A user commented on an offer you were tagged in"
+msgstr "علق أحد المستخدمين على عرض تمت الإشارة إليك فيه"
+
+#, python-format
+msgid "%(sender_name)s commented on the offer %(object_name)s"
+msgstr "%(sender_name)s علق على العرض%(object_name)s"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
+msgstr[0] ""
+"% (sender_name)s و% (count_minus_one)d آخر علق على عرضك% (object_name)s\n"
+"\n"
+"\n"
+"% (sender_name)s و% (count_minus_one)d آخرون علقوا على عرضك% (object_name)s"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+msgid "You were tagged in this offer"
+msgstr "تم الإشارة إليك في هذا العرض"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in"
+msgstr "%(sender_name)s تم التعليق على عرض قد اشير اليك به"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s تم التعليق على عرض اشير اليك به في%(team_name)s"
+
+msgid "A user created a new offer in a team you are following"
+msgstr "أنشأ مستخدم عرضًا جديدًا في فريق انت تتابعه"
+
+#, python-format
+msgid "%(sender_name)s created a new offer in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s تم انشاء عرضًا جديدًا في%(team_name)s (أنت تتابعه)"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "عرض جديد:  \"%(object_name)s\" تم إنشاؤه في%(team_name)s (انت تتابعه)."
+
+msgid "A user updated an offer you are following"
+msgstr "قام مستخدم بتحديث عرض أنت تتابعه"
+
+#, python-format
+msgid "%(sender_name)s updated the offer %(object_name)s"
+msgstr "%(sender_name)s تم تحديث العرض%(object_name)s"
+
+msgid "You are following this offer"
+msgstr "أنت تتابع هذا العرض"
+
+#, python-format
+msgid "%(sender_name)s updated an offer you are following"
+msgstr "%(sender_name)s تم تحديث عرض انت تتابعه"
+
+#, python-format
+msgid "An offer you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "عرض انت تتابعه:\"%(object_name)s\" تم تحديثه في%(team_name)s.."
+
+msgid "A user commented on an offer you are following"
+msgstr "علق مستخدم على عرض أنت تتابعه"
+
+#, python-format
+msgid "%(sender_name)s commented on on an offer you are following"
+msgstr "%(sender_name)s تم التعليق على عرض انت تتابعه"
+
+msgid "Current Offers"
+msgstr "العروض الحالية"
+
+msgid "No current offers"
+msgstr "لا يوجد أي عروض حالية"
+
+msgid "Order Key"
+msgstr "مفتاح الطلب"
+
+msgid "Looking for"
+msgstr "يبحث عن"
+
+msgid "Offering"
+msgstr "يعرض"
+
+msgid "Offer currently active?"
+msgstr "العرض نشط حاليا؟"
+
+msgid "Offer Category"
+msgstr "فئة العرض"
+
+#, python-format
+msgid "Offer: %(offer)s (%(type)s)"
+msgstr "عرض: %(offer)s (%(type)s)"
 
 msgid "Back to Offers"
 msgstr "عودة إلى العروض"
@@ -12094,11 +10767,102 @@ msgstr "تم انشاء عرض"
 msgid "There are no current offers"
 msgstr "لا يوجد أي عروض حالية"
 
+#, python-format
+msgid "Offer \"%(title)s\" was edited successfully."
+msgstr "تم تعديل العرض\"%(title)s\" بنجاح."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be edited."
+msgstr "تعذر تعديل العرض\"%(title)s\"."
+
+#, python-format
+msgid "Offer \"%(title)s\" was added successfully."
+msgstr "تمت إضافة العرض \"%(title)s\"  بنجاح."
+
+#, python-format
+msgid "Offer \"%(title)s\" was saved successfully, but is not active yet."
+msgstr "تم حفظ العرض\"%(title)s\" بنجاح ، ولكنه غير فعال بعد."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be added."
+msgstr "قد لا يمكن إضافة العرض\"%(title)s\"."
+
+#, python-format
+msgid "Offer \"%(title)s\" was deleted successfully."
+msgstr "تم حذف العرض \"%(title)s\" بنجاح."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be deleted."
+msgstr "قد لا يمكن حذف العرض\"%(title)s\"."
+
+msgid "The offer you requested is no longer active. Sorry!"
+msgstr "العرض الذي طلبته لم يعدفعالا. نآسف!"
+
+msgid "Invalid action for this offer. The request could not be completed!"
+msgstr "إجراء غير صالح لهذا العرض. لا يمكن استكمال الطلب!"
+
+msgid "The offer is already active"
+msgstr "تم تفعيل العرض بالفعل"
+
+msgid "The offer is already deactivated"
+msgstr "تم إلغاء تفعيل العرض بالفعل"
+
+msgid "The offer was deactivated successfully."
+msgstr "تم إلغاء تفعيل العرض بنجاح."
+
+msgid "The offer was reactivated successfully."
+msgstr "تمت إعادة تفعيل العرض بنجاح."
+
+msgid "The offer was activated successfully."
+msgstr "تم تفعيل العرض بنجاح."
+
+msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
+msgstr ""
+
+msgctxt "the_app"
+msgid "Chat"
+msgstr ""
+
+msgctxt "the_app"
+msgid "message"
+msgstr "الرسالة"
+
+msgid "Chat"
+msgstr ""
+
+msgid "Only Administrators may send a message to this project/group!"
+msgstr "يمكن للمسؤولين فقط إرسال رسالة إلى هذا المشروع / المجموعة!"
+
+msgid "Additional Recipients"
+msgstr "مستلمين إضافيين"
+
+msgid "Undefined recipient."
+msgstr "مستلم غير محدد."
+
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
 msgstr "يمكنك فقط إرفاق ملفات وصور للرسائل إذا كنت عضوًا في المنتدى. يمكنك الانضمام هنا:"
 
 msgid "The legacy messaging app is no longer in use. You can view all of your old messages, but you cannot write new ones. Please use the new messaging app in the navigation from now on!"
 msgstr "لم يعد تطبيق المراسلة القديم قيد الاستخدام. يمكنك عرض جميع رسائلك القديمة ، ولكن لا يمكنك كتابة رسائل جديدة. الرجاء استخدام تطبيق المراسلة الجديد في التنقل من الآن فصاعدًا!"
+
+msgid "You can contact the group administration via this form. Write your message in the field below and than you will be redirected to the chat with group admins."
+msgstr ""
+
+msgid "You can contact the project administration via this form. Write your message in the field below and than you will be redirected to the chat with project admins."
+msgstr ""
+
+#, fuzzy
+msgid "What is your message?"
+msgstr "اسمك"
+
+#, fuzzy
+#| msgid "Change it here..."
+msgid "Write it here"
+msgstr "قم بتغييره هنا..."
+
+#, python-format
+msgid "Contact the administration of %(group_name)s:"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -12247,6 +11011,9 @@ msgstr "كتابة"
 msgid "Reply"
 msgstr "الرد"
 
+msgid "Recipient"
+msgstr "المُستقبل"
+
 msgid "Conversation"
 msgstr "محادثة"
 
@@ -12276,6 +11043,203 @@ msgstr "الرد على%(sender_name)s"
 #, python-format
 msgid "Reply to all %(adressee_count)s"
 msgstr "الرد على الجميع%(adressee_count)s"
+
+msgid "Your reply could not be matched to an existing message."
+msgstr "لا يمكن مطابقة ردك برسالة موجودة."
+
+msgid "An internal error occured."
+msgstr "حدث خطأ داخلي."
+
+msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
+msgstr "عنوان البريد الإلكتروني الذي أرسلت منه الرد ليس مرتبطا بحسابك الشخصي. يرجى إرسال الردود المباشرة فقط من عنوان البريد الإلكتروني الذي قمت بالتسجيل به على الموقع!"
+
+msgid "There was an error when processing your message text!"
+msgstr "كان هناك خطأ أثناء معالجة نص رسالتك!"
+
+msgid "Your direct reply failed!"
+msgstr "فشل ارسال رد مباشر!"
+
+msgid "Select at least one object."
+msgstr "حدد موضوع واحد على الأقل."
+
+msgid "Messages or conversations successfully archived."
+msgstr "تمت أرشفة الرسائل أو المحادثات بنجاح."
+
+msgid "Messages or conversations successfully deleted."
+msgstr "تم حذف الرسائل أو المحادثات بنجاح."
+
+msgid "Messages were marked as read."
+msgstr "تم وضع علامة على هذه الرسائل كمقروءة."
+
+msgid "Messages or conversations successfully recovered."
+msgstr "تم استعادة الرسائل أو المحادثات بنجاح."
+
+msgid "Notes"
+msgstr "ملاحظات"
+
+msgctxt "the_app"
+msgid "note"
+msgstr "ملاحظة"
+
+msgid "A user commented on a news post"
+msgstr "علق مستخدم على منشور"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post"
+msgstr "%(sender_name)sتم العليق علق على منشور"
+
+msgid "A user commented on one of your news posts"
+msgstr "علق مستخدم على إحدى منشوراتك"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post %(object_name)s"
+msgstr "%(sender_name)s تم على منشور خاص بك %(object_name)s"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
+msgstr[0] ""
+"%(sender_name)s و %(count_minus_one)d و أخر علق على الحدث الجديد%(object_name)s\n"
+"\n"
+"\n"
+"%(sender_name)s و %(count_minus_one)d و أخر علقوا على الحدث الجديد%(object_name)s"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#, python-format
+msgid "%(sender_name)s commented on your news post"
+msgstr "علق %(sender_name)s على منشور خاص بك"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts"
+msgstr "%(sender_name)s علق على إحدى منشوراتك"
+
+msgid "A user commented on a news posts you commented in"
+msgstr "علق مستخدم على منشورات قمت بالتعليق عليها"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
+msgstr "%(sender_name)s تم التعليق على منشور %(object_name)sقمت بالتعليق عليه"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
+msgstr[0] ""
+"\n"
+"% (sender_name)s و\n"
+"% (count_minus_one)d آخر علق على منشور الأخبار% (object_name)s الذي علقت فيه\n"
+"\n"
+"\n"
+"\n"
+"% (sender_name)s و% (count_minus_one)d آخرون علقوا على منشور الأخبار% (object_name)s الذي علقت فيه"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in"
+msgstr "%(sender_name)s تم التعليق على منشور قمت بالتعليق عليه"
+
+msgid "A user created a news post"
+msgstr "أنشأ المستخدم منشورًا"
+
+#, python-format
+msgid "%(sender_name)s created the news post %(object_name)s"
+msgstr "%(sender_name)sتم إنشاء المنشور الجديد%(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d news posts"
+msgstr "%(sender_name)s تم إنشاء%(count)d منشورات جديدة"
+
+#, python-format
+msgid "%(sender_name)s created a new news post"
+msgstr "%(sender_name)s تم إنشاء منشور جديد"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s:"
+msgstr "تم نشر%(sender_name)s في%(team_name)s:"
+
+msgid "A user created a news post in a team you are following"
+msgstr "قام مستخدم بإنشاء منشور في فريق تتابعه"
+
+#, python-format
+msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s تم إنشاء منشور اخباري جديد في%(team_name)s (الذي تتابعه)"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
+msgstr "تم نشر%(sender_name)s في%(team_name)s: (أنت تتابعه)"
+
+msgid "A user updated a news post"
+msgstr "قام مستخدم يتحديث المنشور الاخباري"
+
+#, python-format
+msgid "%(sender_name)s updated the news post %(object_name)s"
+msgstr "%(sender_name)s تم تحديث المنشور اخباري%(object_name)s"
+
+msgid "You are following this news post"
+msgstr "أنت تتابع هذا المنشور الإخباري"
+
+#, python-format
+msgid "%(sender_name)s updated a news post you are following"
+msgstr "حدث %(sender_name)s منشور إخباري أنت تتابعه"
+
+#, python-format
+msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
+msgstr "تم تحديث منشور إخباري جديد ل%(sender_name)s تتابعه بواسطة %(team_name)s:"
+
+msgid "A user commented on a news post you are following"
+msgstr "علق مستخدم على منشور إخباري أنت تتابعه"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s"
+msgstr "%(sender_name)s تم التعليق على منشور الأخبار%(object_name)s"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
+msgstr[0] ""
+"\n"
+"% (sender_name)s و% (count_minus_one)d آخر علق على منشور الأخبار% (object_name)s\n"
+"\n"
+"\n"
+"\n"
+"% (sender_name)s و% (count_minus_one)d آخرون علقوا على منشور الأخبار% (object_name)s"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#, python-format
+msgid "%(sender_name)s commented on a news posts you are following"
+msgstr "%(sender_name)s تم التعليق على منشورات الأخبار التي تتابعها"
+
+msgid "No news"
+msgstr "لا توجد أية أخبار"
+
+msgid "Write a news post"
+msgstr "كتابة منشور أخبار"
+
+msgid "News stream"
+msgstr "اخبار العرض"
+
+msgid "Popularity"
+msgstr "شعبية"
+
+msgid "Facebook Share"
+msgstr "مشاركة فيسبوك"
+
+msgid "Note Item"
+msgstr "ايقونة ملاحظة"
+
+msgid "Note Items"
+msgstr "ايقونة ملاحظات"
 
 msgctxt "the_verb"
 msgid "Comment"
@@ -12451,6 +11415,128 @@ msgctxt "This appears next to new items in the timeline, as in '<Jane> created a
 msgid "added a post"
 msgstr "تم اضافة منشور"
 
+msgid "Your news post was added successfully."
+msgstr "تم إضافة منشور الأخبار الخاص بك بنجاح."
+
+msgid "Your news post was deleted successfully."
+msgstr "تم حذف منشور الأخبار الخاصة بك بنجاح."
+
+msgid "Your news post was edited successfully."
+msgstr "تم تعديل منشور الأخبار الخاصة بك بنجاح."
+
+msgid "You are seeing this alert because you created this content."
+msgstr "أنت ترى هذا التنبيه لأنك أنشأت هذا المحتوى."
+
+msgid "You are seeing this alert because you are following the item's project or group."
+msgstr "-أنت تشاهد هذا التنبيه لأنك تتابع عناصر مشروع أو مجموعة."
+
+msgid "You are seeing this alert because you are following this item."
+msgstr "أنت ترى هذا التنبيه لأنك تتابع هذا العنصر."
+
+msgctxt "the_app"
+msgid "notifications"
+msgstr "اشعارات"
+
+#, python-format
+msgid "Your daily digest for %(portal_name)s"
+msgstr "ملخصك اليومي لـ %(portal_name)s"
+
+msgid "This is what happened during the last day!"
+msgstr "هذا ما حدث في اليوم الأخير!"
+
+#, python-format
+msgid "Your weekly digest for %(portal_name)s"
+msgstr "ملخصك الأسبوعي لـ%(portal_name)s"
+
+msgid "This is what happened during the last week!"
+msgstr "هذا ما خدث خلال الأسبوع الماضي!"
+
+msgctxt "notification frequency"
+msgid "Never"
+msgstr "ابدا"
+
+msgctxt "notification frequency"
+msgid "Immediately"
+msgstr "فورا"
+
+msgctxt "notification frequency"
+msgid "Daily"
+msgstr "يومياً"
+
+msgctxt "notification frequency"
+msgid "Weekly"
+msgstr "اسبوعياً"
+
+msgid "Notification Preference for User"
+msgstr "تفضيل الإشعار للمستخدم"
+
+msgid "Notification Preference"
+msgstr "تفضيل الإشعار"
+
+msgid "Multi Notification ID"
+msgstr "معرف الاشعار المتعدد"
+
+msgid "Multi Notification Preference"
+msgstr "تفضيل اشعار متعدد"
+
+msgid "Multi Notification Preferences"
+msgstr "تفضيلات اشعارات متعددة"
+
+msgid "User who caused this notification event"
+msgstr "مستخدم تسبب في حدث الاشعار"
+
+msgid "Audience"
+msgstr "الجمهور"
+
+msgid "Owner of the alert"
+msgstr "صاحب بالتنبيه"
+
+msgid "Alert Reason key"
+msgstr "مفتاح سبب التنبيه"
+
+msgid "Last user who caused this notification event"
+msgstr "اخر مستخدم تسبب في خدث الاشعار"
+
+msgid "Alert State"
+msgstr "حالة التنبيه"
+
+msgid "You are following this content or its Project or Group"
+msgstr "أنت تتابع هذا المحتوى أو مشروعه أو مجموعته"
+
+msgid "All notifications"
+msgstr "كل الاشعارات"
+
+msgid "No notifications"
+msgstr "لا توجد اشعارات"
+
+msgid "For content that I am following, I wish to receive notification emails"
+msgstr "بما يتعلق بللمحتوى الذي أتابعه ، أرغب في تلقي إشعارات عبر البريد الإلكتروني"
+
+msgid "You are getting this notification because you are subscribed to these kinds of events in your project or group."
+msgstr "أنت تتلقى هذا الإشعار لأنك مشترك في هذه الأنواع من الأحداث في مشروعك أو مجموعتك."
+
+msgid "You are getting this notification because you are an administrator of this project or group."
+msgstr "أنت تتلقى هذا الإشعار لأنك مسؤول عن هذا المشروع أو المجموعة."
+
+msgid "You are getting this notification because you are an administrator of this portal."
+msgstr "أنت تتلقى هذا الإشعار لأنك مسؤول عن هذه البوابة."
+
+msgid "You are getting this email because you are subscribed to one or more daily notifications."
+msgstr "أنت تتلقى هذا البريد الإلكتروني لأنك مشترك في إشعار واحد أو أكثر يوميًا."
+
+msgid "You are getting this email because you are subscribed to one or more weekly notifications."
+msgstr "أنت تتلقى هذا البريد الإلكتروني لأنك مشترك في واحد أو أكثر من الإشعارات الأسبوعية."
+
+msgid "New item"
+msgstr "عنصر جديد"
+
+#, python-format
+msgid "View on %(portal_name)s"
+msgstr "عرض على %(portal_name)s"
+
+msgid "Untitled"
+msgstr "بدون عنوان"
+
 msgid "Select which notifications you would like to receive for each group or project you are involved in."
 msgstr "حدد الاشعارات التي ترغب في تلقيها لكل مجموعة أو مشروع انت مشترك به."
 
@@ -12507,6 +11593,33 @@ msgstr "إعادة تعيين إلى الافتراضي"
 
 msgid "This will reset all of your notification preferences to their default setting. Are you sure you wish to do that?"
 msgstr "هذا سيؤدي إلى إعادة تعيين جميع تفضيلات اشعاراتك إلى إعداداتها الافتراضية. هل أنت متأكد أنك ترغب في القيام بذلك؟"
+
+msgid "Your notification preferences were updated successfully."
+msgstr "تم تحديث تفضيلات اشعاراتك الخاصة بك بنجاح."
+
+msgid "Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!"
+msgstr ""
+
+msgid "Your notifications preferences were reset to default!"
+msgstr "تم إعادة تعيين تفضيلات اشعاراتك إلى الافتراضي!"
+
+msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
+msgstr ""
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully signed in as {}."
+msgstr "تم إلغاء تنشيط حساب المستخدم بنجاح"
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully connected account."
+msgstr "تم إلغاء تنشيط حساب المستخدم بنجاح"
+
+#, fuzzy
+#| msgid "Successfully removed user"
+msgid "Successfully removed connection."
+msgstr "تم إزالة المستخدم بنجاح"
 
 #, fuzzy
 msgid "Set password"
@@ -12632,11 +11745,6 @@ msgstr ""
 
 msgid " This data we received from your WECHANGE account"
 msgstr ""
-
-#, fuzzy
-#| msgid "Last name"
-msgid "last name"
-msgstr "اسم العائلة"
 
 msgid "Your Avatar and other settings from your profile were also copied."
 msgstr ""
@@ -12764,6 +11872,103 @@ msgstr ""
 #| msgid "Log in with %(portal_name)s"
 msgid "Login with %(provider_id)s"
 msgstr "تسجيل الدخول عن طريق %(portal_name)s"
+
+#, fuzzy
+#| msgid "Organization"
+msgctxt "the_app"
+msgid "organization"
+msgstr "منظمات"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization membership"
+msgstr "منظمات"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization memberships"
+msgstr "منظمات"
+
+#, fuzzy
+#| msgid "Team Invite for Unregistered User"
+msgid "Organization Invite for Unregistered User"
+msgstr "دعوة الفريق لمستخدم غير مسجل"
+
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Organization Invites for Unregistered Users"
+msgstr "دعوات الفريق للمستخدمين غير المسجلين"
+
+#, fuzzy
+#| msgid "Assigned organizations"
+msgid "Civil society organization"
+msgstr "المنظمات المعينة"
+
+msgid "Company (commercial)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Public voting"
+msgid "Public institution"
+msgstr "تصويت علني"
+
+#, fuzzy
+#| msgid "Other teams"
+msgid "Other"
+msgstr "فرق أخرى"
+
+#, fuzzy
+#| msgid "Remove organization"
+msgid "Name of the organization"
+msgstr "إزالة الموقع"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Organization type"
+msgstr "منظمات"
+
+#, fuzzy
+#| msgid "Logout"
+msgid "Logo"
+msgstr "نسجيل خروج"
+
+#, fuzzy
+#| msgid "Email address"
+msgid "Email Address"
+msgstr "البريد الالكتروني"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Cosinnus Organization"
+msgstr "منظمات"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Cosinnus Organizations"
+msgstr "منظمات"
+
+msgid "CosinnusOrganizationSocialMedia"
+msgstr ""
+
+#, fuzzy
+#| msgid "CosinnusLocation"
+msgid "CosinnusOrganizationLocation"
+msgstr "موقع Cosinnus"
+
+#, fuzzy
+#| msgid "CosinnusLocations"
+msgid "CosinnusOrganizationLocations"
+msgstr "مواقع Cosinnus"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Organization group"
+msgstr "منظمات"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization groups"
+msgstr "منظمات"
 
 #, fuzzy, python-format
 #| msgid "%(team_name)s - Assigned organizations"
@@ -12947,10 +12152,296 @@ msgstr ""
 msgid "This organization should be made publicly findable via other platforms."
 msgstr "سيتم تعيين هذا المشروع لتكون مرئية للعامة!"
 
+msgid "Is your organization open for cooperation in the funding program?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Organization is open for future projects."
+msgstr "دعوات الفريق للمستخدمين غير المسجلين"
+
 #, fuzzy, python-format
 #| msgid "Users in team %(group)s"
 msgid "Users in organization %(group)s"
 msgstr "المستخدمون في الفريق %(group)s"
+
+#, fuzzy, python-format
+msgid "Project/group %(name)s had already requested and has now been accepted."
+msgstr "لقد تمت دعوتك بالفعل إلى \"%(team_name)s\" وتم جعلك الآن عضوًا على الفور!"
+
+#, fuzzy, python-format
+#| msgid "User %(username)s was successfully invited!"
+msgid "Project/group %(name)s was successfully invited."
+msgstr "تمت دعوة المستخدم %(username)s بنجاح!"
+
+#, fuzzy, python-format
+#| msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
+msgid "Your join request was withdrawn from organization “%(name)s” successfully."
+msgstr "تم سحب طلب الانضمام الخاص بك من %(team_type)s “%(team_name)s” بنجاح."
+
+#, fuzzy, python-format
+msgid "You have declined the invitation to organization “%(name)s”."
+msgstr "لم تعد عضوًا في %(team_type)s “%(team_name)s”."
+
+#, fuzzy, python-format
+#| msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
+msgid "Your project/group is now assigned to the organization “%(name)s”. Welcome!"
+msgstr "أنت الآن عضو في %(team_type)s “%(team_name)s”. أهلاً بك!"
+
+#, fuzzy, python-format
+#| msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
+msgid "Your request was withdrawn from organization \"%(name)s\" successfully."
+msgstr "تم سحب طلب الانضمام الخاص بك من %(team_type)s “%(team_name)s” بنجاح."
+
+#, fuzzy, python-format
+#| msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
+msgid "Your invitation to project/group \"%(name)s\" was withdrawn successfully."
+msgstr "تم سحب دعوتك للمستخدم \"%(username)s\" بنجاح."
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Project/group \"%(name)s\" is no longer assigned."
+msgstr "المستخدم \"%(username)s\" لم يعد عضوًا."
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can create Organizations! You can either create a Project, or write a message to one of the administrators to create a Organization for you. Below you can find a listing of all administrators."
+msgstr "عذرًا، يمكن لمسؤولي البوابة فقط إنشاء مجموعات! يمكنك إما إنشاء مشروع أو كتابة رسالة إلى أحد المسؤولين لإنشاء مجموعة لك. أدناه يمكنك العثور على قائمة بجميع المسؤولين."
+
+#, fuzzy, python-format
+#| msgid "Event \"%(title)s\" was edited successfully."
+msgid "Organization \"%(name)s\" was created successfully."
+msgstr "Event \"%(title)s\" تم التعديل بنجاح."
+
+#, fuzzy
+#| msgid "Your idea was deleted successfully."
+msgid "Your organization was deleted successfully."
+msgstr "تم حذف فكرتك بنجاح."
+
+msgctxt "the_app"
+msgid "poll"
+msgstr "استطلاع رأي"
+
+msgid "A user created a new poll"
+msgstr "مستخدم أعد استطلاع رأي جديد"
+
+#, python-format
+msgid "%(sender_name)s created the poll %(object_name)s"
+msgstr "%(sender_name)s أعد استطلاع رأي%(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d polls"
+msgstr "%(sender_name)sأعد %(count)d استطلاع رأي"
+
+#, python-format
+msgid "%(sender_name)s created a new poll"
+msgstr "%(sender_name)sأعد استطلاع رأي"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "استطلاع رأي جديد: \"%(object_name)s\" أعد في %(team_name)s."
+
+msgid "A poll you voted on was completed"
+msgstr "تم انجاز التصويت لاستطلاع الرأي"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
+msgstr "%(sender_name)s أنجز استطلاع الرأي %(object_name)s الذي قمت بالتصويت عليه"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls you voted on"
+msgstr "%(sender_name)s أنجز %(count)d التصويت على استطلاع الرأي"
+
+#, python-format
+msgid "%(sender_name)s completed the poll"
+msgstr "%(sender_name)s استطلاع الرأي منجز"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "استطلاع الرأي \"%(object_name)s\" منجز في %(team_name)s."
+
+msgid "A user commented on one of your polls"
+msgstr "علق أحد المستخدمين على أحد استطلاعات الرأي الخاصة بك"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll %(object_name)s"
+msgstr "%(sender_name)s تم التعليق على استطلاع الرأي الخاص بك %(object_name)s"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
+msgstr[0] ""
+"% (sender_name)s و% (count_minus_one)d آخر علق على استطلاعك% (object_name)s\n"
+"\n"
+"\n"
+"\n"
+"% (sender_name)s و% (count_minus_one)d آخرون علقوا على استطلاعك% (object_name)s"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#, python-format
+msgid "%(sender_name)s commented on your poll"
+msgstr "%(sender_name)sتم التعليق على استطلاع الرأي الخاص بك"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls"
+msgstr "%(sender_name)s تم التعليق على واحدة من استطلاعات الرأي الخاصة بك"
+
+msgid "A user commented on a poll you were tagged in"
+msgstr "علق أحد المستخدمين على استطلاع رأي أشير اليك به"
+
+#, python-format
+msgid "%(sender_name)s commented on the poll %(object_name)s"
+msgstr "%(sender_name)s تم التعليق على استطلاع الرأي%(object_name)s"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
+msgstr[0] ""
+"% (sender_name)s و% (count_minus_one)d آخر علق على الاستطلاع% (object_name)s\n"
+"\n"
+"\n"
+"% (sender_name)s و% (count_minus_one)d آخرون علقوا على الاستطلاع% (object_name)s"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+msgid "You were tagged in this poll"
+msgstr "تم الإشارة اليك في استطلاع الرأي"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in"
+msgstr "%(sender_name)s تم التعليق على استطلاع رأي أشير اليك به"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s تم التعليق على استطلاع رأي أشير اليك به في %(team_name)s"
+
+msgid "A user commented on an poll you voted in"
+msgstr "علق مستخدم على استطلاع رأي قد قمت بالتصويت عليه"
+
+msgid "You voted on this poll"
+msgstr "لقد قمت بالتصويت على استطلاع الرأي"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in"
+msgstr "%(sender_name)s تم التعليق على استطلاع رأي قمت بالتصويت عليه"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
+msgstr "%(sender_name)s تم التعليق على استطلاع رأي قمت بالتصويت عليه في %(team_name)s"
+
+msgid "A user created a new poll in a team you are following"
+msgstr "أعد مستخدم استطلاع رأي جديد في فريق أنت تتابعه"
+
+#, python-format
+msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s تم إعداد استطلاع رأي جديد في %(team_name)s (which you follow)"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "استطلاع رأي جديد: \"%(object_name)s\" تم إعداد في %(team_name)s (الذي تتبعه)."
+
+msgid "A user updated a poll you are following"
+msgstr "قام مستخدم بتحديث استطلاع رأي أنت تتابعه"
+
+#, python-format
+msgid "%(sender_name)s updated the poll %(object_name)s"
+msgstr "%(sender_name)s تم تحديث استطلاع الرأي %(object_name)s"
+
+msgid "You are following this poll"
+msgstr "أنت تتابع هذا الاستطلاع"
+
+#, python-format
+msgid "%(sender_name)s updated a poll you are following"
+msgstr "%(sender_name)s تم تحديث استطلاع رأي أنت تتابعه"
+
+#, python-format
+msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "استطلاع رأي أنت تتابعه: \"%(object_name)s\" تم تحديثه في %(team_name)s."
+
+msgid "A poll you are following was completed"
+msgstr "لقد تم انجاز استطلاع الرأي الذي تتابعه"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s"
+msgstr "%(sender_name)s تم انجاز استطلاع الرأي %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls"
+msgstr "%(sender_name)s منجز %(count)d polls"
+
+#, python-format
+msgid "%(sender_name)s completed the poll you are following"
+msgstr "%(sender_name)s أنجز استطلاع الرأي الذي تتابعه"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
+msgstr "استطلاع رأي \"%(object_name)s\"الذي تتابعه أنجز في %(team_name)s."
+
+msgid "A user commented on one a poll you are following"
+msgstr "علق مستخدم على واحدة من استطلاعات الرأي الذي تتابعه"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you are following"
+msgstr "%(sender_name)s تم التعليق على استطلاع رأي أنت تتابعه"
+
+msgid "Current Polls"
+msgstr "الاستطلاعات الحالية"
+
+msgid "No current polls"
+msgstr "لا يوجد استطلاعات حالية"
+
+msgid "You must write a description for this poll option!"
+msgstr "يجب عليك كتابة وصف لخيار الاستطلاع هذا!"
+
+msgid "Voting closed"
+msgstr "أغلق التصويت"
+
+msgid "Poll archived"
+msgstr "تمت أرشفة الاستطلاع"
+
+msgid "Multiple options votable"
+msgstr "خيارات متعددة قابلة للتصويت"
+
+msgid "Does this poll allow users to vote on multiple options or just decide for one?"
+msgstr "هل يسمح هذا الاستطلاع للمستخدمين بالتصويت على خيارات متعددة أم فقط يقرر خيارا واحدا؟"
+
+msgid "\"Maybe\" option enabled"
+msgstr "\"ربما\""
+
+msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
+msgstr "هل الخيار ربما ممكن؟ تجاهل وفم بالتعيين الافتراضي إلى خطأ إذا كان ``multiple_votes==False``"
+
+msgid "Anyone can vote"
+msgstr "يمكن لأي شخص أن يصوت"
+
+msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
+msgstr "إذا كان هذا صحيحًا ، فيمكن لأي شخص رؤية هذا الاستطلاع التصويت عليه. إذا كان خطأ ، يمكن فقط لأعضاء المجموعة."
+
+msgid "Show voters"
+msgstr "عرض المنتخبين/المصوتين"
+
+msgid "If true, display a list of which user voted for each option."
+msgstr "إذا كان هذا صحيحًا ، اعرض قائمة المستخدمين الذين صوتوا لكل خيار."
+
+msgid "Winning Option"
+msgstr "خيار الربح"
+
+#, python-format
+msgid "Poll: %(poll)s (%(state)s)"
+msgstr "استطلاع: %(poll)s (%(state)s)"
+
+msgid "Poll Option"
+msgstr "خيار الاستطلاع"
+
+msgid "Poll Options"
+msgstr "خيارات الاستطلاع"
 
 msgid "Poll choice"
 msgstr "خيار الاستطلاع"
@@ -13271,6 +12762,85 @@ msgstr "أعد استطلاع رأي"
 msgid "There are no polls yet"
 msgstr "لا يوجد أي تعليقات بعد"
 
+#, python-format
+msgid "Poll \"%(title)s\" was edited successfully."
+msgstr "استطلاع رأي \"%(title)s\" تم تعديله بنجاخ."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be edited."
+msgstr "استطلاع رأي \"%(title)s\" لا يمكن تعديله."
+
+#, python-format
+msgid "Poll \"%(title)s\" was added successfully."
+msgstr "استطلاع رأي \"%(title)s\" تمت اضافته بنجاح."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be added."
+msgstr "استطلاع رأي \"%(title)s\" لا يمكن تعديله."
+
+msgid "You should define at least one poll option!"
+msgstr "يجب عليك تحديد خيار استطلاع رأي واحد على الأقل!"
+
+msgid "This poll is archived and cannot be edited anymore!"
+msgstr "تمت أرشفة هذا الاستطلاع ولا يمكن تعديله بعد الآن!"
+
+#, python-format
+msgid "Poll \"%(title)s\" was deleted successfully."
+msgstr "استطلاع رأي \"%(title)s\" تم حذفه بنجاخ."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be deleted."
+msgstr "استطلاع رأي \"%(title)s\" لا يمكن حذفه."
+
+msgid "The voting phase for this poll is over. You cannot vote for it any more."
+msgstr "انتهت مرحلة التصويت لهذا الاستطلاع. لا يمكنك التصويت بعد الآن."
+
+msgid "In this poll you must vote for exactly one item!"
+msgstr "في هذا الاستطلاع يجب أن تصوت لعنصر واحد محدد!"
+
+msgid "Invalid action for this poll. The request could not be completed!"
+msgstr "إجراء غير صالح لهذا الاستطلاع. لا يمكن استكمال الطلب!"
+
+msgid "This action is not permitted for this poll at this stage!"
+msgstr "هذا الإجراء لهذا الاستطلاع غير مسموح به في هذه المرحلة !"
+
+msgid "The poll was closed successfully."
+msgstr "تم إغلاق الاستطلاع بنجاح."
+
+msgid "The poll was re-opened successfully."
+msgstr "تم إعادة فتح الاستطلاع بنجاح."
+
+msgid "The poll was archived successfully."
+msgstr "تم أرشفة الاستطلاع بنجاح."
+
+msgid "Stream"
+msgstr "عرض"
+
+msgctxt "the_app"
+msgid "stream"
+msgstr "the_app عرض"
+
+msgid "My Streams"
+msgstr "عرضي"
+
+msgid "Streams"
+msgstr "عروض"
+
+msgid "Models"
+msgstr "النماذج"
+
+msgid "Portal IDs"
+msgstr "هويات البوابة"
+
+msgid "Last seen"
+msgstr "اخر مشاهدة"
+
+msgid "Special Stream"
+msgstr "عرض خاص"
+
+msgid "Special Group IDs"
+msgstr "هويات مجموعة خاصة"
+
 msgid "Public Stream"
 msgstr "عرض عام"
 
@@ -13325,6 +12895,291 @@ msgstr "تصنيف حسب المؤلفين, العلامات أو غيرها م�
 
 msgid "Filter by item types?"
 msgstr "تصنيف حسب نوع العناصر؟"
+
+msgid "You do not have permission to access this stream."
+msgstr "لا يوجد لديك إذن بالدخول إلى هذا العرض."
+
+msgid "Your stream was added successfully."
+msgstr "لقد تم إضافة العرض بنجاح."
+
+msgid "Your stream was updated successfully."
+msgstr "لقد تم تحديث عرضك بنجاح."
+
+msgid "Your stream was deleted successfully."
+msgstr "لقد تم حذف عرضك بنجاح."
+
+msgid "You cannot delete the default stream!"
+msgstr "لا يمكن حذف العرض الإفتراضي!"
+
+msgctxt "the_app"
+msgid "todo"
+msgstr "the_app مهمة"
+
+msgid "A user created a new todo"
+msgstr "قام مستخدم بإنشاء مهمة جديدة"
+
+#, python-format
+msgid "%(sender_name)s created the todo %(object_name)s"
+msgstr "%(sender_name)s انشاء المهمة %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d todos"
+msgstr "%(sender_name)s تم انشاء %(count)d المهام"
+
+#, python-format
+msgid "%(sender_name)s created a new todo"
+msgstr "%(sender_name)s تم انشاء مهمة جديدة"
+
+#, python-format
+msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "المهمة الجديدة: \"%(object_name)s\" أنشئت بواسطة%(team_name)s."
+
+msgid "A todo was assigned to me"
+msgstr "مهمة أوكلت إلي"
+
+#, python-format
+msgid "%(sender_name)s assigned the todo %(object_name)s to you"
+msgstr "%(sender_name)sعُينت المهمة%(object_name)s لي"
+
+#, python-format
+msgid "%(sender_name)s assigned %(count)d todos to you"
+msgstr "%(sender_name)s تم تعيين%(count)d مهمة لك"
+
+#, python-format
+msgid "%(sender_name)s assigned a todo to you"
+msgstr "%(sender_name)sتعيين مهمة لك"
+
+msgid "A todo I created was completed"
+msgstr "المهمة التي أُنشئت تم إنجازها"
+
+#, python-format
+msgid "%(sender_name)s completed the todo %(object_name)s"
+msgstr "%(sender_name)s انجز المهمة%(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d todos"
+msgstr "%(sender_name)s انجزوا %(count)d من المهام"
+
+msgid "You created this todo"
+msgstr "أنت أنشئت هذه المهمة"
+
+#, python-format
+msgid "%(sender_name)s completed your todo"
+msgstr "%(sender_name)s أنجز مهمتك"
+
+#, python-format
+msgid "%(sender_name)s completed one of your todos"
+msgstr "%(sender_name)s أنجزوا واحدة من المهام"
+
+msgid "A user commented on one of your todos"
+msgstr "المتسخدم علق على واحدة من مهامك"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo %(object_name)s"
+msgstr "%(sender_name)s تم التعليق على مهمتك %(object_name)s"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
+msgstr[0] ""
+"% (sender_name)s و% (count_minus_one)d آخر علقوا على ما يجب القيام به% (object_name)s\n"
+"\n"
+"\n"
+"% (sender_name)s و% (count_minus_one)d آخر علقوا على ما يجب القيام به% (object_name)s"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#, python-format
+msgid "%(sender_name)s commented on your todo"
+msgstr "%(sender_name)s تم التعليق على مهمتك"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your todos"
+msgstr "%(sender_name)s تم التعليق على واحدة من مهامك"
+
+msgid "A user commented on a todo you were tagged in"
+msgstr "مستخدم علق على مهمة أشير إليك بها"
+
+#, python-format
+msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgstr "%(sender_name)s تم التعليق على المهمة %(object_name)s"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
+msgstr[0] ""
+"%(sender_name)s و% (count_minus_one)d آخر علق على المهام% (object_name)s\n"
+"\n"
+"\n"
+"% (sender_name)s و% (count_minus_one)d آخرون علقوا على المهام% (object_name)s"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+msgid "You were tagged in this todo"
+msgstr "تم الإشارة إليك في هذه المهمة"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in"
+msgstr "%(sender_name)s علق على مهمة أشير إليك بها"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s علق على مهمة أشير اليك بها %(team_name)s"
+
+msgid "A user commented on a todo you were assigned to"
+msgstr "المتسخدم علق على مهمة أوكلت إليك"
+
+#, python-format
+msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
+msgstr "%(sender_name)sتم التعليق على المهمة الموكلة اليك%(object_name)s"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
+msgstr[0] ""
+"% (sender_name)s و% (count_minus_one)d آخر علق على المهام المعينة لك% (object_name)s\n"
+"\n"
+"\n"
+"% (sender_name)s و% (count_minus_one)d آخرون علقوا على المهام المعينة لك% (object_name)s"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos"
+msgstr "%(sender_name)s علقوا على واحدة من المهام التي أوكلت إليك"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgstr "%(sender_name)s  علقوا على واحدة من المهام التي أوكلت إليك ضمن%(team_name)s"
+
+msgid "A user updated a todo you are following"
+msgstr "مستخدم قام بتحديث مهمة أنت تتابعها"
+
+#, python-format
+msgid "%(sender_name)s updated the todo %(object_name)s"
+msgstr "%(sender_name)s  حدث المهمة%(object_name)s"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
+msgstr[0] ""
+"% (sender_name)s و% (count_minus_one)d قام أخر بتحديث المهام% (object_name)s\n"
+"\n"
+"% (sender_name)s و% (count_minus_one)d قام أخرون بتحديث المهام% (object_name)s"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+msgid "You are following this todo"
+msgstr "انت تتابع هذه المهمة"
+
+#, python-format
+msgid "%(sender_name)s updated a todo you are following"
+msgstr "%(sender_name)s قاموا بتحديث مهمة أنت تتابعها"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "المهمة التي انت تتابعها\"%(object_name)s\" تم تحديثها ضمن الفريق%(team_name)s."
+
+msgid "A user reassigned a todo you are following"
+msgstr "مستخدم قام بإعادة تعين مهمة أنت تتابعها"
+
+#, python-format
+msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgstr "%(sender_name)s قام بإعادة تعيين المهمة%(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s reassigned %(count)d todos"
+msgstr "%(sender_name)s قام بإعادة تعيين %(count)d من المهام"
+
+#, python-format
+msgid "%(sender_name)s reassigned a todo you are following"
+msgstr "%(sender_name)s قام بتعيين مهمة أنت تتابعها"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
+msgstr "المهمة التي أنت تتابعها \"%(object_name)s\"  تم إعادة تعيينها ضمن %(team_name)s."
+
+msgid "A user completed a todo you are following"
+msgstr "مستخدم أنجز مهمة انت تتابعها"
+
+#, python-format
+msgid "%(sender_name)s completed a todo you are following"
+msgstr "%(sender_name)s أنجز مهمة أنت تتابعها"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "المهمة التي أنت تتابعها\"%(object_name)s\" تم إنجازها في %(team_name)s."
+
+msgid "A user commented on a todo you are following"
+msgstr "مستخدم علق على مهمة أنت تتابعها"
+
+#, python-format
+msgid "%(sender_name)s commented on on a todo you are following"
+msgstr "%(sender_name)s تم التعليق على مهمة أنت تتابعها"
+
+msgid "My Todos"
+msgstr "قائمة مهامي"
+
+msgid "No todos"
+msgstr "لا يوجد مهام"
+
+msgid "Open"
+msgstr "مفتوحة"
+
+msgid "Completed"
+msgstr "منجزة"
+
+msgid "Assigned To"
+msgstr "عينت لـ"
+
+msgid "Priority"
+msgstr "أولولية"
+
+msgid "Due date"
+msgstr "حتى تاريخ"
+
+msgid "Soonest Due"
+msgstr "في أقرب وقت ممكن"
+
+msgid "You are not allowed to assign this Todo entry."
+msgstr "غير مسموح لك الدخول لهذه المهمة."
+
+msgid "Later"
+msgstr "لاحقا"
+
+msgid "Normal"
+msgstr "عادي"
+
+msgid "Important"
+msgstr "مهم"
+
+msgid "Due by"
+msgstr "مقرر"
+
+msgid "Completed on"
+msgstr "أنجز في"
+
+msgid "Completed by"
+msgstr "اكتمل بواسطة/ من قبل"
+
+msgid "Assigned to"
+msgstr "معين لـ"
+
+#, python-format
+msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
+msgstr "المهمة \"%(todo_name)s\" عينت ل %(assignee_name)s"
 
 #, python-format
 msgid ""
@@ -13636,6 +13491,260 @@ msgstr "لا يوجد لك أي مهام معتمدة"
 
 msgid "Tasks are shown only for logged in users"
 msgstr "تظهر المهام فقط للمستخدمين الذين قاموا بتسجيل الدخول"
+
+#, python-format
+msgid "Todo \"%(title)s\" was added successfully."
+msgstr "تمت إضافة \"%(title)s\" المهمة بنجاح."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be added."
+msgstr "لا يمكن إضافة المهمة\"%(title)s\"."
+
+msgid "You were trying to add a todo to a todolist that does not exist!"
+msgstr "كنت تحاول إضافة مهمة غير موجودة إلى قائمة المهام!"
+
+#, python-format
+msgid "Todo \"%(title)s\" was edited successfully."
+msgstr "تم تعديل \"%(title)s\" المهام بنجاح."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be edited."
+msgstr "تعذر تعديل\"%(title)s\" المهام."
+
+#, python-format
+msgid "Todo \"%(title)s\" was deleted successfully."
+msgstr "لقد تم حذف\"%(title)s\" المهام بنجاح."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be deleted."
+msgstr "تعذر حذف\"%(title)s\" المهام."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned successfully."
+msgstr "تم تعيين\"%(title)s\" المهام بنجاح."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned."
+msgstr "تعذر تعيين \"%(title)s\" المهام."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned to You successfully."
+msgstr "تم تعيين\"%(title)s\" المهمة لك بنجاح."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned to You."
+msgstr "تعذر لك تعيين\"%(title)s\" المهمة."
+
+#, python-format
+msgid "Todo \"%(title)s\" was unassigned successfully."
+msgstr "تم إلغاء تعيين\"%(title)s\" المهمة بنجاح."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be unassigned."
+msgstr "تعذر إلغاء تعيين\"%(title)s\"المهمة."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed successfully."
+msgstr "تم انجاز\"%(title)s\"المهمة بنجاح."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed."
+msgstr "تعذر انجاز\"%(title)s\" المهمة."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed by You successfully."
+msgstr "تم انجاز\"%(title)s\" المهام بواسطتك بنجاح."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed by You."
+msgstr "تعذّر عليك إكمال\"%(title)s\" المهام."
+
+#, python-format
+msgid "Todo \"%(title)s\" was set to incomplete successfully."
+msgstr "لم يتم اكمال \"%(title)s\"المهمة بنجاح."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be set to incomplete."
+msgstr "قد لا يتم انجاز \"%(title)s\"\" قائمة المهمة."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was edited successfully."
+msgstr "تم تعديل \"%(title)s\" قائمة المهام بنجاح."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be edited."
+msgstr "قد لا يتم تعديل \"%(title)s\" قائمة المهام."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was added successfully."
+msgstr "تم إضافة \"%(title)s\" قائمة المهام بنجاح."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be added."
+msgstr "قد لا يمكن إضافة \"%(title)s\" قائمة/قوائم المهام."
+
+msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
+msgstr "لا يمكنك حذف هذا المجلد لأنه ليس لديك إذن بحذف عنصر أو أكثر من محتواه!"
+
+#~ msgid "Ok"
+#~ msgstr "حسناً"
+
+#~ msgid "Message Group"
+#~ msgstr "أرسل رسالة إلى المجموعة"
+
+#~ msgid "Message Project"
+#~ msgstr "أرسل رسالة إلى المجموعة"
+
+#, fuzzy
+#~| msgid "This message was sent in a conversation with: "
+#~ msgid "The message cannot be replied without being in a conversation."
+#~ msgstr "تم إرسال هذه الرسالة في محادثة مع: "
+
+#, fuzzy
+#~ msgid "Moderation"
+#~ msgstr "هو مشرف"
+
+#, fuzzy
+#~| msgid "Your name"
+#~ msgid "{username}"
+#~ msgstr "اسمك"
+
+#, fuzzy
+#~| msgid "Additional Recipients"
+#~ msgid "Additional recipients"
+#~ msgstr "مستلمين إضافيين"
+
+#, fuzzy
+#~| msgid "Additional Recipients"
+#~ msgid "Additional recipient"
+#~ msgstr "مستلمين إضافيين"
+
+#, fuzzy
+#~| msgid "Message Project"
+#~ msgid "Message Rejected"
+#~ msgstr "أرسل رسالة إلى المجموعة"
+
+#, fuzzy
+#~ msgid "Your message has been rejected"
+#~ msgstr "تم حفظ التغييرات."
+
+#, fuzzy
+#~| msgid "Message Project"
+#~ msgid "Message Received"
+#~ msgstr "أرسل رسالة إلى المجموعة"
+
+#, fuzzy
+#~| msgid "You have been invited to apply!"
+#~ msgid "You have received a message"
+#~ msgstr "لقد تمت دعوتك للتقديم!"
+
+#, fuzzy
+#~| msgid "You have been invited to apply!"
+#~ msgid "You have received a reply"
+#~ msgstr "لقد تمت دعوتك للتقديم!"
+
+#, fuzzy
+#~| msgid "Restricted"
+#~ msgid "Rejected"
+#~ msgstr "محدد/مُقيد"
+
+#, fuzzy
+#~| msgid "Everybody"
+#~ msgid "body"
+#~ msgstr "الجميع"
+
+#, fuzzy
+#~ msgid "sender"
+#~ msgstr "أرسلت"
+
+#, fuzzy
+#~| msgid "Recipient"
+#~ msgid "recipient"
+#~ msgstr "المُستقبل"
+
+#, fuzzy
+#~| msgid "Visitor"
+#~ msgid "visitor"
+#~ msgstr "زائر"
+
+#, fuzzy
+#~ msgid "parent message"
+#~ msgstr "اسمك"
+
+#, fuzzy
+#~| msgid "No messages"
+#~ msgid "root message"
+#~ msgstr "لا يوجد رسائل"
+
+#, fuzzy
+#~| msgid "Sent at:"
+#~ msgid "sent at"
+#~ msgstr "مرسل في:"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "archived by recipient"
+#~ msgstr "مستلم غير محدد."
+
+#, fuzzy
+#~| msgid "Delete user account"
+#~ msgid "deleted by sender at"
+#~ msgstr "حذف حساب المستخدم"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "deleted by recipient at"
+#~ msgstr "مستلم غير محدد."
+
+#, fuzzy
+#~ msgid "moderator"
+#~ msgstr "هو مشرف"
+
+#, fuzzy
+#~| msgid "Related to"
+#~ msgid "moderated at"
+#~ msgstr "متعلق ب"
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "message"
+#~ msgstr "الرسالة"
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "messages"
+#~ msgstr "الرسالة"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "Undefined sender."
+#~ msgstr "مستلم غير محدد."
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "pending message"
+#~ msgstr "الرسالة"
+
+#, fuzzy
+#~ msgid "pending messages"
+#~ msgstr "اسمك"
+
+#, fuzzy
+#~ msgid "Re: {subject}"
+#~ msgstr "موضوع"
+
+#, fuzzy
+#~| msgid "User successfully created!"
+#~ msgid "Message successfully sent."
+#~ msgstr "تم إنشاء المستخدم بنجاح!"
+
+#, fuzzy
+#~| msgid "Select at least one object."
+#~ msgid "Message rejected for at least one recipient."
+#~ msgstr "حدد موضوع واحد على الأقل."
 
 #, fuzzy
 #~ msgid "CSV Import Results"

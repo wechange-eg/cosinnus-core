@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 16:02+0200\n"
+"POT-Creation-Date: 2022-06-01 15:58+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -174,6 +174,13 @@ msgstr "%d пайдаланушылар сәтті ажыратылды."
 msgid "Reactivate user accounts"
 msgstr "Пайдаланушы тіркелгісін жою"
 
+#, python-format
+msgid "%(count)d Users' group memberships were refreshed."
+msgstr ""
+
+msgid "Refresh user group membership associations (e.g. cache or Nextcloud folder problems)"
+msgstr ""
+
 #, fuzzy, python-format
 msgid "%d Users were synchronized successfully."
 msgstr "%d пайдаланушылар сәтті ажыратылды."
@@ -279,6 +286,14 @@ msgstr ""
 
 msgid "Bookmarked Users list"
 msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Invitations"
+msgstr "Шақырулар"
+
+#, fuzzy
+msgid "Conferences"
+msgstr "Бейне конференциялар сервері"
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
@@ -478,12 +493,12 @@ msgstr "%(sender_name)s сізді %(portal_name)s „%(team_name)s“ тобы�
 msgid "Accept invitation"
 msgstr "Шақыруды қабылдау"
 
-msgid "View invitation"
-msgstr "Шақыруды қарау"
-
 #, fuzzy, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s сізді белгіледі"
+
+msgid "View invitation"
+msgstr "Шақыруды қарау"
 
 msgid "New link to the moved project/group"
 msgstr "Көшірілген жоба / топқа жаңа сілтеме"
@@ -535,6 +550,28 @@ msgstr "%(sender_name)s %(portal_name)s-де „%(object_name)s“ идеясы�
 #, fuzzy, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s %(portal_name)s-де „%(object_name)s“ идеясын жаңа ғана жасады!"
+
+msgid "A conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The conference %(object_name)s has been updated"
+msgstr "Сіз „%(object_name)s“ %(team_name)s ішінде белгіленгенсіз."
+
+#, fuzzy
+msgid "You are attending this conference"
+msgstr "Сіз бұл жобаны / топты өшіргіңіз келеді!"
+
+#, fuzzy, python-format
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr "Сіз „%(object_name)s“ %(team_name)s ішінде белгіленгенсіз."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The time of conference %(object_name)s has been updated"
+msgstr "Сіз „%(object_name)s“ %(team_name)s ішінде белгіленгенсіз."
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -799,6 +836,11 @@ msgstr "Ұнатылған"
 
 msgid "Persons"
 msgstr "Адамдар"
+
+#, fuzzy
+#| msgid "Last name"
+msgid "last name"
+msgstr "Тегі"
 
 #, fuzzy
 #| msgid "My location"
@@ -1523,12 +1565,21 @@ msgstr "Бас топ"
 msgid "Related Teams"
 msgstr "Қатысты командалар"
 
+#, fuzzy
+#| msgid "I am open for cooperation requests"
+msgid "Open for cooperation"
+msgstr "Мен ынтымақтастық туралы өтініштерге дайынмын"
+
 msgid "Dynamic extra fields"
 msgstr ""
 
 #, fuzzy
 msgid "If set to true, a contact form will be displayed on the micropage."
 msgstr "Егер бұл функция белсенді болса, «Шақыруға әрекет ету» терезесі микросайтта көрсетіледі."
+
+#, fuzzy
+msgid "Use invite token"
+msgstr "Токенді енгізіңіз:"
 
 msgid "Cosinnus project"
 msgstr "Косинус жобасы"
@@ -2262,6 +2313,18 @@ msgstr "Хабарланған бұйымды өшіру."
 msgid "(The reported item has been deleted.)"
 msgstr "(Хабарланған элемент жойылды.)"
 
+msgid "This user profile is scheduled for deletion at: "
+msgstr ""
+
+msgid "However, it will not be deleted, because it is still active."
+msgstr ""
+
+msgid "This user account is disabled. The user cannot log in or use the account."
+msgstr ""
+
+msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
+msgstr ""
+
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Шифрланған кескінге 4 бас әріп енгізіңіз"
 
@@ -2345,6 +2408,145 @@ msgstr "Әкімшілік"
 msgid "Select a page on the left side."
 msgstr "Сол жақтағы бетті таңдаңыз."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "Бейне конференциялар сервері"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "Бетте қарау"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Жобаны қарау"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "Құпиялылық параметрлері"
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "белсенді емес"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Басталу күні."
+
+#, fuzzy
+msgid "running now!"
+msgstr "Қазір қосылыңыз!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Room"
+msgstr "Команда түрінен"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgctxt "Calendar"
+#| msgid "Event"
+msgid "Event"
+msgstr "Оқиға"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Шынымен %(title)s“ қалдырғыңыз келе ме?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Шынымен „%(name)s“ мүшелер командасынан жойғыңыз келе ме?"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "Әзірге бұл жерде ештеңе жоқ"
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+msgid "BBB Recording API"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "Тағайындалмаған"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Шара құру"
+
+#, fuzzy
+#| msgctxt "sinn"
+#| msgid "Save"
+msgid "Save"
+msgstr "Speichern"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "„%(name)s“-дан бас тартқыңыз келе ме?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Профильді жою"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2393,6 +2595,18 @@ msgstr "Пайдаланушы бақылау тақтасындағы хаба�
 
 msgid "User Welcome Email"
 msgstr "Пайдаланушының электрондық поштасына қош келдіңіз"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Шара құру"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Бейне конференциялар сервері"
 
 msgid "Simple Statistics"
 msgstr "Қарапайым статистика"
@@ -2458,12 +2672,6 @@ msgstr "Аты"
 #, fuzzy
 msgid "Lastname"
 msgstr "Тегі"
-
-#, fuzzy
-#| msgctxt "sinn"
-#| msgid "Save"
-msgid "Save"
-msgstr "Speichern"
 
 #, fuzzy
 msgid "User Administration"
@@ -3187,7 +3395,7 @@ msgstr "Команда түрінен"
 msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
 msgstr ""
 
-msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+msgid "The Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgstr ""
 
 msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
@@ -3278,6 +3486,9 @@ msgstr ""
 #, fuzzy
 msgid "There are no rooms yet."
 msgstr "Әзірге бұл жерде ештеңе жоқ"
+
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
@@ -3468,6 +3679,12 @@ msgstr "Басталу күні."
 msgid "Length"
 msgstr ""
 
+msgid "minute"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
 #, fuzzy
 #| msgid "Delete Account"
 msgid "Delete Recording"
@@ -3480,155 +3697,6 @@ msgstr "„%(title)s“ шақыруын шынымен жойғыңыз кел�
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Хабарланған бұйымды өшіру."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Бейне конференциялар сервері"
-
-#, fuzzy
-msgid "Overview - All Conferences"
-msgstr "Бейне конференциялар сервері"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Әкімшілік"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "Бетте қарау"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Жобаны қарау"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Бейне конференциялар сервері"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "Құпиялылық параметрлері"
-
-#, fuzzy
-msgid "Conference Settings"
-msgstr "Бейне конференциялар сервері"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "белсенді емес"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr ""
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-msgid "Start"
-msgstr "Басталу күні."
-
-#, fuzzy
-msgid "running now!"
-msgstr "Қазір қосылыңыз!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Бейне конференциялар сервері"
-
-#, fuzzy
-msgid "Room"
-msgstr "Команда түрінен"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgctxt "Calendar"
-#| msgid "Event"
-msgid "Event"
-msgstr "Оқиға"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Бейне конференциялар сервері"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Бейне конференциялар сервері"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Шынымен %(title)s“ қалдырғыңыз келе ме?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Шынымен „%(name)s“ мүшелер командасынан жойғыңыз келе ме?"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "Әзірге бұл жерде ештеңе жоқ"
-
-msgid "BBB"
-msgstr ""
-
-msgid "BBB Premium"
-msgstr ""
-
-msgid "BBB Recording API"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "Тағайындалмаған"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Шара құру"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "„%(name)s“-дан бас тартқыңыз келе ме?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Профильді жою"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Бейне конференциялар сервері"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Шара құру"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Бейне конференциялар сервері"
 
 msgid "Rearrange"
 msgstr "Қайта құру"
@@ -3664,6 +3732,11 @@ msgstr "осы жерден бастаңыз."
 #, fuzzy
 msgid "Activate Cloud"
 msgstr "Іске қосыңыз"
+
+#, fuzzy
+#| msgid "Members"
+msgid "Members-Map"
+msgstr "Мүшелері"
 
 #, fuzzy
 msgid "Cloud"
@@ -3767,6 +3840,18 @@ msgstr "Енді осы топқа жалпыға ортақ мазмұн орн
 msgid "No Description set"
 msgstr "Сипаттама жоқ"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created"
+msgid "Created on: "
+msgstr "Құрған"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Last edited by"
+msgid "Last updated on: "
+msgstr "Соңғы редакциялаған"
+
 #, fuzzy
 #| msgid "Show more"
 msgid "more"
@@ -3841,6 +3926,10 @@ msgstr ""
 #| msgid "Dates"
 msgid "Date"
 msgstr "Мерзімдері"
+
+#, python-format
+msgid "Time zone: %(TIME_ZONE)s"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -3928,6 +4017,15 @@ msgid "No contact data has been added yet."
 msgstr "Контакт мәліметтері әлі қосылмаған."
 
 #, fuzzy
+msgid "Contact organizers"
+msgstr "Байланыс ақпараты"
+
+#, fuzzy
+#| msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgid "Here you can send a message to the admins."
+msgstr "%(date)s ішінде сіз ‚%(recipient)s’пайдаланушысына хабарлама жіберуді сұрадыңыз."
+
+#, fuzzy
 msgid "Your Deactivated Content"
 msgstr "Қорғалған контент"
 
@@ -3952,6 +4050,9 @@ msgstr "Бұл пәрменді шынымен жойғыңыз келе ме?"
 #, python-format
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s – мүшелер"
+
+msgid "Invite users directly via the following link: "
+msgstr ""
 
 msgid "Membership requests"
 msgstr "Мүшелік туралы өтініштер"
@@ -4331,6 +4432,41 @@ msgid "Enable the public visibility of your group/project"
 msgstr ""
 
 #, fuzzy
+#| msgid "Delete invitation"
+msgid "Create invite token"
+msgstr "Шақыруды жою"
+
+msgid "Check this to generate an invite token which allows a user to join the "
+msgstr ""
+
+#, fuzzy
+#| msgid "Groups"
+msgid "group"
+msgstr "Топтар"
+
+#, fuzzy
+#| msgid "Project"
+msgid "project"
+msgstr "Жоба"
+
+#, fuzzy
+msgid "conference"
+msgstr "Бейне конференциялар сервері"
+
+msgid " directly."
+msgstr ""
+
+#, fuzzy
+#| msgid "No current offers"
+msgid "The current token is: "
+msgstr "Ағымда ұсыныстар жоқ"
+
+#, fuzzy
+#| msgid "Create content"
+msgid "Create token"
+msgstr "Контент жасау"
+
+#, fuzzy
 msgid "Include a video conference"
 msgstr "Бейне конференциялар сервері"
 
@@ -4391,8 +4527,17 @@ msgstr ""
 msgid "This project shall be made publicly findable via other platforms."
 msgstr "Бұл жоба көпшілік назарына ұсынылады!"
 
+msgid "Is your project open to other partner organizations?"
+msgstr ""
+
+msgid "Project is open for further partner organizations."
+msgstr ""
+
 msgid "Which apps should be activated?"
 msgstr "Қандай қосымшаларды іске қосу керек?"
+
+msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
+msgstr ""
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Бұл қосымшаны жоба үшін емес, тек топ үшін іске қосуға болады!"
@@ -4497,10 +4642,6 @@ msgstr "Facebook интеграциясы жоба жасалғаннан кей
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Invitations"
-msgstr "Шақырулар"
 
 msgid "About me"
 msgstr "Мен туралы"
@@ -4632,6 +4773,32 @@ msgstr "Facebook-те бөлісіңіз"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created Projects"
+msgid "Contact Project Admins"
+msgstr "Жасалған жобалар"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Group Admins"
+msgstr "Байланыс ақпараты"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Contact Conference Admins"
+msgstr "Әкімшілік"
+
+msgid "If you want to send your message to the project chat, you have to turn directly to the project."
+msgstr ""
+
+msgid "If you want to send your message to the group chat, you have to turn directly to the group."
+msgstr ""
+
+msgid "If you want to send your message to the conference chat, you have to turn directly to the conference."
 msgstr ""
 
 #, fuzzy
@@ -5919,6 +6086,10 @@ msgstr "Бір немесе бірнеше іздеу шартын енгізі�
 msgid "CSV Downloads"
 msgstr "Жүктеу"
 
+#, fuzzy
+msgid "Portal switches and settings"
+msgstr "Құпиялылық параметрлері"
+
 msgid "HD space used by conferences"
 msgstr ""
 
@@ -5940,8 +6111,8 @@ msgstr ""
 msgid "E-Mails of ALL active users"
 msgstr ""
 
-msgid "Ok"
-msgstr "ОК"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr ""
@@ -6068,6 +6239,22 @@ msgid "Clear Filters"
 msgstr "Фильтірлерді Алып тастау"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Here you can search for partner organisations and projects that are open for further partners. The results are sorted so that partners with a lot of overlap in the funding objectives, eligible areas and SDGs you are active on are listed first."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners for ..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You're currently not member of any project, group or organization."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "Stream"
 msgid "Street"
@@ -6104,6 +6291,10 @@ msgstr "Картаны жылжытқанда іздеу"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search this area"
 msgstr "Осы аймақты іздеңіз"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Find partners"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Membership Requests"
@@ -6290,11 +6481,6 @@ msgstr "Мүшелер"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-msgid "Contact organizers"
-msgstr "Байланыс ақпараты"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
 msgid "You will now receive notifications for content posted."
 msgstr "Енді осы топта жарияланған мазмұн туралы хабарландырулар аласыз."
 
@@ -6364,16 +6550,16 @@ msgid "Hidden User"
 msgstr "Жасырын Пайдаланушы"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "This group is open for further partner organizations."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are a Member"
 msgstr "Сіз мүшесіз"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Join Group"
 msgstr "Топқа қосылу"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Message Group"
-msgstr "Топқа хабарлама жазу"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Author"
@@ -6394,6 +6580,10 @@ msgstr "Сізге ұнайтын идеяңыздан жоба жасалған
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"
 msgstr "Жобалар - осы идеядан жасалған"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This organization is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -6429,12 +6619,12 @@ msgid "To Profile"
 msgstr "Сіздің профиліңіз"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Join Project"
-msgstr "Жобаға қосылу"
+msgid "This project is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Message Project"
-msgstr "Жобаға хабарлама жазу"
+msgid "Join Project"
+msgstr "Жобаға қосылу"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Move up"
@@ -7636,10 +7826,6 @@ msgid "Only group members can see the content you requested. Apply to become a m
 msgstr "Сіз сұраған мазмұнды тек топ мүшелері көре алады. Қазір мүшелікке өтініш бер!"
 
 #, fuzzy
-msgid "Conferences"
-msgstr "Бейне конференциялар сервері"
-
-#, fuzzy
 msgid "My Conferences"
 msgstr "Бейне конференциялар сервері"
 
@@ -7816,6 +8002,9 @@ msgstr ""
 msgid "Please also provide an end date"
 msgstr ""
 
+msgid "Ensure that your name does not contain any invalid characters."
+msgstr ""
+
 msgid "Test email sent!"
 msgstr ""
 
@@ -7854,6 +8043,14 @@ msgstr ""
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Тіл “%s” қолданылмайды"
+
+#, fuzzy
+#| msgid "I wish to receive notification emails"
+msgid "New verification email sent!"
+msgstr "Мен электрондық пошта хабарландыруларын алғым келеді"
+
+msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
 
 #, fuzzy
 msgid "Successfully made conference permanent premium"
@@ -8382,6 +8579,15 @@ msgstr ""
 msgid "Linked Cloud Files"
 msgstr ""
 
+msgid "Cloud Stub"
+msgstr ""
+
+msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
+msgstr ""
+
+msgid "There are no cloud files yet"
+msgstr ""
+
 msgid "Restart"
 msgstr ""
 
@@ -8398,6 +8604,13 @@ msgstr ""
 msgctxt "the_app"
 msgid "conference"
 msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Error message:"
+msgstr "Хабарламалар"
+
+msgid "No error message supplied."
+msgstr ""
 
 #, fuzzy
 msgid "Go to conference"
@@ -8613,8 +8826,93 @@ msgstr "Жаңа төсеніштер"
 msgid "Pad Type"
 msgstr "Төсем түрі"
 
+#, fuzzy
+#| msgid "Pads"
+msgid "Pad"
+msgstr "Мәтін бөлімдері"
+
+msgid "This pad can no longer be edited because its creator has deleted their account."
+msgstr "Бұл мәтін бөлімін енді өзгерту мүмкін емес, өйткені оны жасаушы олардың тіркелгісін жойды."
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(pad)s“?"
+msgstr "Мәтін бөлімін шынымен жойғыңыз келе ме „%(pad)s“?"
+
+msgid "Delete Etherpad"
+msgstr "Мәтін бөлімін жою"
+
 msgid "The document can not be accessed because the etherpad server could not be reached. Please contact an administrator!"
 msgstr "Etherpad серверіне қол жетімділіктің болмауына байланысты құжатқа қол жеткізу мүмкін емес. Админмен хабарласыңыз!"
+
+msgid "This document is empty"
+msgstr "Бұл құжат бос"
+
+msgid "Pads"
+msgstr "Мәтін бөлімдері"
+
+msgid "Enter a title for the Pad."
+msgstr "Мәтін бөліміне атау енгізіңіз."
+
+msgid "Enter the title for a new Document or Table."
+msgstr "Жаңа құжаттың немесе электрондық кестенің атауын енгізіңіз."
+
+msgid "Enter the title for a new Document."
+msgstr "Жаңа құжаттың атауын енгізіңіз."
+
+msgid "Create Etherpad"
+msgstr "Etherpad құрыңыз"
+
+msgid "Create Ethercalc"
+msgstr "Ethercalc құрыңыз"
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(title)s“?"
+msgstr "Шынымен „%(title)s“ эфирлік тақтаны жойғыңыз келе ме?"
+
+msgid "No etherpads have been created yet."
+msgstr "Ортақ мәтін бөлімдері әлі жасалмады."
+
+msgid "Download CSV"
+msgstr "CSV жүктеу"
+
+msgid "Download Excel"
+msgstr "Excel бағдарламасын жүктеу"
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Сәлем %(receiver_name)s,\n"
+"\n"
+"%(team_name)s ішінде „%(object_name)s“ жаңа шара %(sender_name)s құрылды.\n"
+"\n"
+"Оны мына сілтемені басу арқылы табуға болады: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Хабарландыру параметрлерін өзгерту үшін мына сілтемені қараңыз: %(notification_settings_url)s\n"
+"\n"
+"Сіздің командаңыз %(site_name)s."
+
+msgid "You created a pad"
+msgstr "Сіз мәтіндік құжат жасадыңыз"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a Pad"
+msgstr "төсеніш жасады"
+
+msgid "There are no etherpads yet"
+msgstr "Әзірше мәтіндік құжаттар жоқ"
 
 #, python-format
 msgid "Etherpad \"%(title)s\" was edited successfully."
@@ -9070,1990 +9368,6 @@ msgstr "Шара құру"
 msgid "%(event)s %(type)s"
 msgstr "%(event)s (күтілуде)"
 
-#, python-format
-msgid "Event \"%(title)s\" was edited successfully."
-msgstr "„%(title)s“ шарасы сәтті өңделді."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be edited."
-msgstr "„%(title)s“ шарасын өңдеу мүмкін емес."
-
-msgid "Please use the conference management area to add new workshops!"
-msgstr ""
-
-msgid "The page you requested is not available for this event at this time."
-msgstr "Сіз сұраған бет бұл шара үшін қазір қол жетімді емес."
-
-msgid "One of the event suggestions times could not be understood!"
-msgstr "Іс-шараға арналған ұсыныстардың біреуін түсіну мүмкін емес!"
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was edited successfully."
-msgstr "Жоспардан тыс „%(title)s“ шара сәтті өңделді."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be edited."
-msgstr "Жоспарланбаған „%(title)s“ шарасын өзгерту мүмкін емес."
-
-#, python-format
-msgid "Event \"%(title)s\" was added successfully."
-msgstr "„%(title)s“ шарасы сәтті қосылды."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be added."
-msgstr "„%(title)s“ шарасын қосу мүмкін емес."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was added successfully."
-msgstr "Жоспардан тыс „%(title)s“ шара сәтті қосылды."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be added."
-msgstr "Жоспарланбаған шараны „%(title)s“ қосу мүмкін емес."
-
-msgid "You should define at least one date suggestion."
-msgstr "Жоспарланбаған шараны «% (тақырып) s» қосу мүмкін емес."
-
-#, python-format
-msgid "Event \"%(title)s\" was deleted successfully."
-msgstr "„%(title)s“ шарасы сәтті жойылды."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be deleted."
-msgstr "„%(title)s“ шарасын жою мүмкін емес."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was deleted successfully."
-msgstr "Жоспардан тыс „%(title)s“ шара сәтті жойылды."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be deleted."
-msgstr "Жоспарланбаған „%(title)s“ шарасын жою мүмкін емес."
-
-#, fuzzy
-msgid "Your votes were saved successfully."
-msgstr "Сіздің идеяңыз сәтті жойылды."
-
-#, fuzzy
-#| msgid "Poll \"%(title)s\" could not be added."
-msgid "Your votes could not be saved."
-msgstr "Todo „%(title)s“ қосу мүмкін емес."
-
-msgid "This is event is already scheduled. You cannot vote for it any more."
-msgstr "Бұл шара бұрыннан жоспарланған. Енді оған дауыс бере алмайсыз."
-
-msgid "The complete request can only be sent via POST!"
-msgstr "Толық сұранымды тек POST арқылы жіберуге болады!"
-
-msgid "Event cannot be completed: No date was supplied."
-msgstr "Шараны аяқтау мүмкін емес: күні көрсетілмеген."
-
-msgid "The event was created successfully at the specified date."
-msgstr "Іс-шара көрсетілген күні сәтті жасалды."
-
-msgid "Upcoming events"
-msgstr "Алдағы шаралар"
-
-#, fuzzy
-msgid "Upcoming event"
-msgstr "Алдағы шаралар"
-
-msgid "Your comment was added successfully."
-msgstr "Сіздің пікіріңіз сәтті қосылды."
-
-msgid "Your comment was deleted successfully."
-msgstr "Пікіріңіз сәтті жойылды."
-
-#, fuzzy
-#| msgid "Save changes"
-msgid "Exchange"
-msgstr "Өзгерістерді сақтаңыз"
-
-#, fuzzy
-#| msgid "Save changes"
-msgctxt "the_app"
-msgid "exchange"
-msgstr "Өзгерістерді сақтаңыз"
-
-msgctxt "the_app"
-msgid "file"
-msgstr "файл"
-
-msgid "A user uploaded a new file"
-msgstr "Пайдаланушы жаңа файл жүктеді"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s created a new file"
-msgid "%(sender_name)s uploaded the file %(object_name)s"
-msgstr "%(sender_name)s жаңа файл жасады"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s created a new file"
-msgid "%(sender_name)s uploaded %(count)d files"
-msgstr "%(sender_name)s жаңа файл жасады"
-
-#, python-format
-msgid "%(sender_name)s created a new file"
-msgstr "%(sender_name)s жаңа файл жасады"
-
-#, python-format
-msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Жаңа файл: „%(object_name)s“ %(team_name)s ішінде жасалды."
-
-msgid "A user uploaded a new file in a team you are following"
-msgstr "Пайдаланушы сіз бақылайтын командаға жаңа файл жүктеді"
-
-#, python-format
-msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s %(team_name)s ішінде жаңа файл жасады (сіз бақылайтын)"
-
-#, python-format
-msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "Жаңа файл: „%(object_name)s“ %(team_name)s ішінде жасалды (сіз бақылайтын)."
-
-msgid "Latest Files"
-msgstr "Соңғы файлдар"
-
-msgid "No files"
-msgstr "Файлдар жоқ"
-
-msgid "Pictures"
-msgstr "Суреттер"
-
-msgid "Documents"
-msgstr "Құжаттар"
-
-msgid "Audio Files"
-msgstr "Аудио файлдар"
-
-msgid "Videos"
-msgstr "Бейне"
-
-msgid "File Type"
-msgstr "Файл түрі"
-
-msgid "File Name"
-msgstr "Файл атауы"
-
-msgid "File Name (descending)"
-msgstr "Файл атауы (әдепкі)"
-
-msgid "Smallest Files"
-msgstr "Ең кіші файлдар"
-
-msgid "Largest Files"
-msgstr "Ең үлкен файлдар"
-
-msgid "The given URL does not seem to be valid."
-msgstr ""
-
-msgid "Must supply either a URL or File"
-msgstr ""
-
-msgid "Is URL Link"
-msgstr ""
-
-msgid "Uploaded by"
-msgstr "Жүктеген"
-
-msgid "Uploaded on"
-msgstr "Жүктелген"
-
-msgid "No files selected."
-msgstr "Файлдар таңдалмады."
-
-msgctxt "special_folder_type"
-msgid "Attachments"
-msgstr "Акциялар"
-
-msgid "File does not exist or you are not allowed to delete it."
-msgstr "Файл жоқ немесе сіз оны жоюға құқығыңыз жоқ."
-
-#, python-format
-msgid "A problem occurred during export. The following file is missing: %(filename)s."
-msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
-msgstr[0] ""
-"Экспорттау кезінде мәселе туындады. Келесі файл жоқ: %(filename)s.\n"
-"Экспорттау кезінде мәселе туындады. Келесі файлдар жоқ: %(filename)s."
-
-msgid "Invalid request."
-msgstr "Жарамсыз сұрау."
-
-#, python-format
-msgid "File \"%(title)s\" was updated successfully."
-msgstr "„%(title)s“ файлы сәтті жаңартылды."
-
-#, python-format
-msgid "File \"%(title)s\" could not be updated."
-msgstr "„%(title)s“ файлын жаңарту мүмкін емес."
-
-msgid "Downloading failed, the target object was not a folder!"
-msgstr "Жүктеу сәтсіз аяқталды, мақсат қапшық емес!"
-
-msgid "Canceled the download because there seem to be no files in this folder."
-msgstr "Жүктеуді болдырмаңыз, себебі бұл қалтада файл жоқ сияқты."
-
-msgid "Internal Error: Group not Found"
-msgstr ""
-
-msgid "Permission for upload denied"
-msgstr ""
-
-msgid "The uploaded file was invalid."
-msgstr ""
-
-#, python-format
-msgid "%(count)d File was added successfully."
-msgid_plural "%(count)d Files were added successfully."
-msgstr[0] ""
-"%(count)d Файл сәтті қосылды.\n"
-"\n"
-"%(count)d Файлдар сәтті қосылды."
-
-msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
-msgstr ""
-
-msgctxt "the_app"
-msgid "marketplace"
-msgstr "маркетплейс"
-
-msgid "A user created a new offer"
-msgstr "Пайдаланушы жаңа ұсыныс жасады"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s created a new offer"
-msgid "%(sender_name)s created the offer %(object_name)s"
-msgstr "%(sender_name)s жаңа ұсыныс жасады"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s created a new offer"
-msgid "%(sender_name)s created %(count)d offers"
-msgstr "%(sender_name)s жаңа ұсыныс жасады"
-
-#, python-format
-msgid "%(sender_name)s created a new offer"
-msgstr "%(sender_name)s жаңа ұсыныс жасады"
-
-#, python-format
-msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Жаңа ұсыныс: „%(object_name)s“ %(team_name)s де жасалды (әрі қарай)"
-
-msgid "One of your offers expired"
-msgstr "Сіздің ұсыныстарыңыздың біреуінің мерзімі аяқталды"
-
-#, fuzzy, python-format
-#| msgid "Offer \"%(object_name)s\" has expired."
-msgid "Your offer %(object_name)s expired"
-msgstr "„%(object_name)s“ ұсынысының мерзімі аяқталды."
-
-#, fuzzy, python-format
-#| msgid "One of your offers expired"
-msgid "%(count)d of your offers expired"
-msgstr "Сіздің ұсыныстарыңыздың біреуінің мерзімі аяқталды"
-
-msgid "Your offer has expired"
-msgstr "Ұсынысыңыздың мерзімі аяқталды"
-
-#, python-format
-msgid "Offer \"%(object_name)s\" has expired."
-msgstr "„%(object_name)s“ ұсынысының мерзімі аяқталды."
-
-msgid "A user commented on one of your offers"
-msgstr "Пайдаланушы сіздің ұсыныстарыңыздың біреуіне пікір қалдырды"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on your offer"
-msgid "%(sender_name)s commented on your offer %(object_name)s"
-msgstr "%(sender_name)s сіздің ұсынысыңызға пікір қалдырды"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your offers"
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
-msgstr[0] "%(sender_name)s сіздің ұсыныстарыңызға пікір қалдырды"
-
-#, python-format
-msgid "%(sender_name)s commented on your offer"
-msgstr "%(sender_name)s сіздің ұсынысыңызға пікір қалдырды"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your offers"
-msgstr "%(sender_name)s сіздің ұсыныстарыңызға пікір қалдырды"
-
-msgid "A user commented on an offer you were tagged in"
-msgstr "Пайдаланушы сіз белгіленген ұсынысқа пікір қалдырды"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on your offer"
-msgid "%(sender_name)s commented on the offer %(object_name)s"
-msgstr "%(sender_name)s сіздің ұсынысыңызға пікір қалдырды"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
-msgstr[0] ""
-
-#, fuzzy
-#| msgid "You created an offer"
-msgid "You were tagged in this offer"
-msgstr "Сіз ұсыныс жасадыңыз"
-
-#, python-format
-msgid "%(sender_name)s commented on an offer you were tagged in"
-msgstr "%(sender_name)s сіз белгіленген ұсынысқа пікір қалдырды"
-
-#, python-format
-msgid "%(sender_name)s commented on an offer you were tagged in in %(team_name)s"
-msgstr "%(team_name)s сіз белгілеген сөйлемге %(sender_name)s пікір қалдырды"
-
-msgid "A user created a new offer in a team you are following"
-msgstr "Пайдаланушы сіз бақылайтын топта жаңа шара жасады"
-
-#, python-format
-msgid "%(sender_name)s created a new offer in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s %(team_name)s ішінде жаңа ұсыныс жасады (сіз бақылап отырған)"
-
-#, python-format
-msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "Жаңа ұсыныс: „%(object_name)s“ %(team_name)s де жасалды (сіз бақылап отырған)"
-
-msgid "A user updated an offer you are following"
-msgstr "Пайдаланушы сіз бақылап отырған ұсынысты жаңартты"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s updated an offer you are following"
-msgid "%(sender_name)s updated the offer %(object_name)s"
-msgstr "%(sender_name)s сіз бақылайтын ұсынысты жаңартты"
-
-msgid "You are following this offer"
-msgstr ""
-
-#, python-format
-msgid "%(sender_name)s updated an offer you are following"
-msgstr "%(sender_name)s сіз бақылайтын ұсынысты жаңартты"
-
-#, python-format
-msgid "An offer you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "Сіз бақылап отырған ұсыныс: %(team_name)s ішінде „%(object_name)s жаңартылды."
-
-msgid "A user commented on an offer you are following"
-msgstr "Пайдаланушы сіз бақылап отырған ұсынысқа пікір қалдырды"
-
-#, python-format
-msgid "%(sender_name)s commented on on an offer you are following"
-msgstr "%(sender_name)s сіз бақылайтын ұсынысқа пікір қалдырды"
-
-msgid "Current Offers"
-msgstr "Ағымдағы ұсыныстар"
-
-msgid "No current offers"
-msgstr "Ағымда ұсыныстар жоқ"
-
-msgid "Order Key"
-msgstr "Тапсырыс кілті"
-
-msgid "Looking for"
-msgstr "Іздейді"
-
-msgid "Offering"
-msgstr "Ұсыныс"
-
-msgid "Offer currently active?"
-msgstr "Қазіргі уақытта ұсыныс белсенді ме?"
-
-msgid "Offer Category"
-msgstr "Санат ұсыну"
-
-#, python-format
-msgid "Offer: %(offer)s (%(type)s)"
-msgstr "Ұсыныс: %(offer)s (%(type)s)"
-
-#, python-format
-msgid "Offer \"%(title)s\" was edited successfully."
-msgstr "„%(title)s“ сәтті өңделді."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be edited."
-msgstr "„%(title)s“ өңдеу мүмкін емес."
-
-#, python-format
-msgid "Offer \"%(title)s\" was added successfully."
-msgstr "„%(title)s“ сәтті қосылды."
-
-#, python-format
-msgid "Offer \"%(title)s\" was saved successfully, but is not active yet."
-msgstr "%(title)s“ сәтті сақталды, бірақ әлі белсенді емес."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be added."
-msgstr "„%(title)s“ қосу мүмкін емес."
-
-#, python-format
-msgid "Offer \"%(title)s\" was deleted successfully."
-msgstr "„%(title)s“ сәтті жойылды."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be deleted."
-msgstr "„%(title)s“ жою мүмкін емес."
-
-msgid "The offer you requested is no longer active. Sorry!"
-msgstr "Сіз сұраған ұсыныс енді қол жетімсіз. Кешіріңіз!"
-
-msgid "Invalid action for this offer. The request could not be completed!"
-msgstr "Осы ұсынысқа байланысты жарамсыз әрекеттер. Сұраныс орындалмады!"
-
-msgid "The offer is already active"
-msgstr "Ұсыныс қазірдің өзінде жарамды"
-
-msgid "The offer is already deactivated"
-msgstr "Ұсыныс өшірілді"
-
-msgid "The offer was deactivated successfully."
-msgstr "Ұсыныс сәтті өшірілді."
-
-msgid "The offer was reactivated successfully."
-msgstr "Ұсыныс сәтті қайта қосылды."
-
-msgid "The offer was activated successfully."
-msgstr "Ұсыныс сәтті іске қосылды."
-
-msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
-msgstr ""
-
-msgctxt "the_app"
-msgid "Chat"
-msgstr ""
-
-msgctxt "the_app"
-msgid "message"
-msgstr "xабарлама"
-
-msgid "Chat"
-msgstr ""
-
-msgid "Only Administrators may send a message to this project/group!"
-msgstr "Осы жобаға / топқа тек әкімшілер ғана хабарлама жібере алады!"
-
-msgid "Additional Recipients"
-msgstr "Қосымша алушылар"
-
-msgid "Undefined recipient."
-msgstr "Анықталмаған алушы."
-
-msgid "Your reply could not be matched to an existing message."
-msgstr "Сіздің жауабыңыз бұрыннан бар хабарламамен сәйкестендіру мүмкін емес."
-
-msgid "An internal error occured."
-msgstr "Ішкі қате пайда болды."
-
-msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
-msgstr "Жауап жіберген электрондық пошта мекенжайы пайдаланушы тіркелгісімен байланысты емес. Тікелей жауаптарды тек сайтта тіркелген электрондық пошта мекен-жайынан жіберіңіз!"
-
-msgid "There was an error when processing your message text!"
-msgstr "Хабарлама мәтінін өңдеу кезінде қате пайда болды!"
-
-msgid "Your direct reply failed!"
-msgstr "Сіздің тікелей жауабыңыз болмады!"
-
-msgid "Select at least one object."
-msgstr "Кем дегенде бір элементті таңдаңыз."
-
-msgid "Messages or conversations successfully archived."
-msgstr "Хабарлар немесе әңгімелер сәтті мұрағатталды."
-
-msgid "Messages or conversations successfully deleted."
-msgstr "Хабарлар немесе сөйлесулер сәтті жойылды."
-
-msgid "Messages were marked as read."
-msgstr "Хабарлар оқылды деп белгіленген."
-
-msgid "Messages or conversations successfully recovered."
-msgstr "Хабарлар немесе сөйлесулер сәтті қалпына келтірілді."
-
-msgid "Notes"
-msgstr "Ескертпелер"
-
-msgctxt "the_app"
-msgid "note"
-msgstr "ескерте"
-
-msgid "A user commented on a news post"
-msgstr "Пайдаланушы жаңалық жазбасына пікір қалдырды"
-
-#, python-format
-msgid "%(sender_name)s commented on a news post"
-msgstr "%(sender_name)s жаңалық жазбасына пікір қалдырды"
-
-msgid "A user commented on one of your news posts"
-msgstr "Пайдаланушы сіздің жаңалықтарыңыздың біріне пікір қалдырды"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
-msgid "%(sender_name)s commented on your news post %(object_name)s"
-msgstr "%(team_name)s хабарламаларыңызға %(sender_name)s пікір жазды."
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
-msgstr[0] "%(team_name)s хабарламаларыңызға %(sender_name)s пікір жазды."
-
-#, python-format
-msgid "%(sender_name)s commented on your news post"
-msgstr "%(sender_name)s сіздің жаңалықтарыңызға пікір қалдырды"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your news posts"
-msgstr "%(sender_name)s сіздің жаңалықтар жазбаңыздың біріне пікір қалдырды"
-
-msgid "A user commented on a news posts you commented in"
-msgstr "Пайдаланушы сіз сайтта пікір қалдырған жаңалықтар жазбаларына пікір қалдырды"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on a news post you commented in"
-msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
-msgstr "%(sender_name)s сіз пікір жазған жаңалыққа пікір қалдырды"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on a news post you commented in"
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
-msgstr[0] "%(sender_name)s сіз пікір жазған жаңалыққа пікір қалдырды"
-
-#, python-format
-msgid "%(sender_name)s commented on a news post you commented in"
-msgstr "%(sender_name)s сіз пікір жазған жаңалыққа пікір қалдырды"
-
-msgid "A user created a news post"
-msgstr "Пайдаланушы жаңалық жазбасын жасады"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s created a new news post"
-msgid "%(sender_name)s created the news post %(object_name)s"
-msgstr "%(sender_name)s жаңа жаңалық жазбасын жасады"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s created a new news post"
-msgid "%(sender_name)s created %(count)d news posts"
-msgstr "%(sender_name)s жаңа жаңалық жазбасын жасады"
-
-#, python-format
-msgid "%(sender_name)s created a new news post"
-msgstr "%(sender_name)s жаңа жаңалық жазбасын жасады"
-
-#, python-format
-msgid "%(sender_name)s posted in %(team_name)s:"
-msgstr "%(sender_name)s %(team_name)s тобында жазба қалдырды:"
-
-msgid "A user created a news post in a team you are following"
-msgstr "Пайдаланушы сіз бақылайтын топта пост қалдырды"
-
-#, python-format
-msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s %(team_name)s ішінде жаңа пост қалдырды (сіз бақылайтын)"
-
-#, python-format
-msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
-msgstr "%(sender_name)s %(team_name)s де (сіз бақылайтын) пост қалдырды"
-
-msgid "A user updated a news post"
-msgstr "Пайдаланушы өзіңің постын жаңартты"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s updated a news post you are following"
-msgid "%(sender_name)s updated the news post %(object_name)s"
-msgstr "%(sender_name)s сіз бақылайтын постты жаңартты"
-
-msgid "You are following this news post"
-msgstr ""
-
-#, python-format
-msgid "%(sender_name)s updated a news post you are following"
-msgstr "%(sender_name)s сіз бақылайтын постты жаңартты"
-
-#, python-format
-msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
-msgstr "Сіз бақылайтын %(sender_name)s қалдырған пост %(team_name)s тобына жаңартылды:"
-
-#, fuzzy
-#| msgid "A user commented on a news posts you are following"
-msgid "A user commented on a news post you are following"
-msgstr "Пайдаланушы сіз бақылайтын постқа пікір қалдырды"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
-msgid "%(sender_name)s commented on the news post %(object_name)s"
-msgstr "%(team_name)s хабарламаларыңызға %(sender_name)s пікір жазды."
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
-msgstr[0] "%(team_name)s хабарламаларыңызға %(sender_name)s пікір жазды."
-
-#, python-format
-msgid "%(sender_name)s commented on a news posts you are following"
-msgstr "%(sender_name)s сіз бақылайтын постқа пікір қалдырды"
-
-msgid "No news"
-msgstr "Жаңалықтар жоқ"
-
-msgid "Write a news post"
-msgstr "Жаңалық жазба жазыңыз"
-
-msgid "News stream"
-msgstr "Жаңалықтар ағыны"
-
-msgid "Popularity"
-msgstr "Танымалдық"
-
-msgid "Facebook Share"
-msgstr "Facebook-те бөлісіңіз"
-
-msgid "Note Item"
-msgstr "Жазба"
-
-msgid "Note Items"
-msgstr "Жазбалар"
-
-msgid "Your news post was added successfully."
-msgstr "Сіздің жаңалықтарыңыз сәтті қосылды."
-
-msgid "Your news post was deleted successfully."
-msgstr "Сіздің жаңалықтарыңыз сәтті жойылды."
-
-msgid "Your news post was edited successfully."
-msgstr "Сіздің жаңалықтарыңыз сәтті өңделді."
-
-#, fuzzy
-#| msgid "You are getting this notification because you are an administrator of this portal."
-msgid "You are seeing this alert because you created this content."
-msgstr "Сіз осы хабарландыруды осы порталдың әкімшісі болғандықтан аласыз."
-
-#, fuzzy
-#| msgid "You are getting this notification because you are an administrator of this project or group."
-msgid "You are seeing this alert because you are following the item's project or group."
-msgstr "Сіз осы жобаны немесе топтың әкімшісісіз болғандықтан бұл ескертуді аласыз."
-
-#, fuzzy
-#| msgid "You are getting this notification because you are an administrator of this portal."
-msgid "You are seeing this alert because you are following this item."
-msgstr "Сіз осы хабарландыруды осы порталдың әкімшісі болғандықтан аласыз."
-
-msgctxt "the_app"
-msgid "notifications"
-msgstr "… хабарламалар …"
-
-#, python-format
-msgid "Your daily digest for %(portal_name)s"
-msgstr "Сіздің %(portal_name)s үшін күнделікті дайджестіңіз"
-
-msgid "This is what happened during the last day!"
-msgstr "Бұл соңғы күнде болды!"
-
-#, python-format
-msgid "Your weekly digest for %(portal_name)s"
-msgstr "Сіздің %(portal_name)s үшін апта сайынғы дайджестіңіз"
-
-msgid "This is what happened during the last week!"
-msgstr "Міне, өткен аптада болған оқиға!"
-
-msgctxt "notification frequency"
-msgid "Never"
-msgstr "Хабарландыру жиілігі Ешқашан"
-
-msgctxt "notification frequency"
-msgid "Immediately"
-msgstr "Хабарландыру жиілігі бірден"
-
-msgctxt "notification frequency"
-msgid "Daily"
-msgstr "Хабарлама жиілігі күнделікті"
-
-msgctxt "notification frequency"
-msgid "Weekly"
-msgstr "Хабарландыру жиілігі апта сайын"
-
-msgid "Notification Preference for User"
-msgstr "Хабарландырулар Пайдаланушының таңдауы"
-
-msgid "Notification Preference"
-msgstr "Хабарландыруды қалау"
-
-msgid "Multi Notification ID"
-msgstr "Бірнеше ескертулердің идентификаторы"
-
-msgid "Multi Notification Preference"
-msgstr "Бірнеше хабарландырулар үшін параметрлер"
-
-msgid "Multi Notification Preferences"
-msgstr "Хабарландырудың бірнеше нұсқалары"
-
-msgid "User who caused this notification event"
-msgstr "Бұл хабарландыруға қоңырау шалған пайдаланушы"
-
-msgid "Audience"
-msgstr "Көрермендер"
-
-msgid "Owner of the alert"
-msgstr ""
-
-msgid "Alert Reason key"
-msgstr ""
-
-#, fuzzy
-#| msgid "User who caused this notification event"
-msgid "Last user who caused this notification event"
-msgstr "Бұл хабарландыруға қоңырау шалған пайдаланушы"
-
-msgid "Alert State"
-msgstr ""
-
-msgid "You are following this content or its Project or Group"
-msgstr ""
-
-msgid "All notifications"
-msgstr "Барлық хабарландырулар"
-
-msgid "No notifications"
-msgstr "Хабарландырулар жоқ"
-
-msgid "For content that I am following, I wish to receive notification emails"
-msgstr "Мен бақылайтын мазмұн үшін электрондық пошта хабарландыруларын алғым келеді"
-
-msgid "You are getting this notification because you are subscribed to these kinds of events in your project or group."
-msgstr "Сіз өз жобаңыздағы немесе тобыңыздағы оқиғалардың осы түріне жазылғаныңыз үшін осы хабарландыруды аласыз."
-
-msgid "You are getting this notification because you are an administrator of this project or group."
-msgstr "Сіз осы жобаны немесе топтың әкімшісісіз болғандықтан бұл ескертуді аласыз."
-
-msgid "You are getting this notification because you are an administrator of this portal."
-msgstr "Сіз осы хабарландыруды осы порталдың әкімшісі болғандықтан аласыз."
-
-msgid "You are getting this email because you are subscribed to one or more daily notifications."
-msgstr "Сіз бұл электрондық хабарды күнделікті бір немесе бірнеше хабарландыруларға жазылғаныңыз үшін аласыз."
-
-msgid "You are getting this email because you are subscribed to one or more weekly notifications."
-msgstr "Сіз бұл электрондық хабарды аптасына бір немесе бірнеше хабарландыруларға жазылғаныңыз үшін аласыз."
-
-msgid "New item"
-msgstr "Жаңа элемент"
-
-#, fuzzy, python-format
-#| msgid "Your daily digest for %(portal_name)s"
-msgid "View on %(portal_name)s"
-msgstr "Сіздің %(portal_name)s үшін күнделікті дайджестіңіз"
-
-msgid "Untitled"
-msgstr "Атаусыз"
-
-msgid "Your notification preferences were updated successfully."
-msgstr "Сіздің хабарландыру параметрлеріңіз сәтті жаңартылды."
-
-msgid "Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!"
-msgstr ""
-
-msgid "Your notifications preferences were reset to default!"
-msgstr "Сіздің хабарландыру параметрлеріңіз зауыттық күйге келтірілді!"
-
-msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
-msgstr ""
-
-#, fuzzy
-msgid "Successfully signed in as {}."
-msgstr "Пайдаланушы тіркелгісін жою"
-
-#, fuzzy
-msgid "Successfully connected account."
-msgstr "Пайдаланушы тіркелгісін жою"
-
-#, fuzzy
-msgid "Successfully removed connection."
-msgstr "Пайдаланушы тіркелгісін жою"
-
-#, fuzzy
-msgctxt "the_app"
-msgid "organization"
-msgstr "Шақырулар"
-
-#, fuzzy
-msgid "Organization membership"
-msgstr "Шақырулар"
-
-#, fuzzy
-msgid "Organization memberships"
-msgstr "Шақырулар"
-
-#, fuzzy
-#| msgid "Team Invite for Unregistered User"
-msgid "Organization Invite for Unregistered User"
-msgstr "Тіркелмеген пайдаланушыға топтық шақыру"
-
-#, fuzzy
-#| msgid "Team Invites for Unregistered Users"
-msgid "Organization Invites for Unregistered Users"
-msgstr "Тіркелмеген Пайдаланушыларға Топтық шақырмалар"
-
-#, fuzzy
-msgid "Civil society organization"
-msgstr "Шақырулар"
-
-msgid "Company (commercial)"
-msgstr ""
-
-#, fuzzy
-#| msgid "Public voting"
-msgid "Public institution"
-msgstr "Ашық дауыс беру"
-
-#, fuzzy
-#| msgid "Other teams"
-msgid "Other"
-msgstr "Басқа топтар"
-
-#, fuzzy
-msgid "Name of the organization"
-msgstr "Орынды жою"
-
-#, fuzzy
-msgid "Organization type"
-msgstr "Шақырулар"
-
-#, fuzzy
-#| msgid "Logout"
-msgid "Logo"
-msgstr "Шығу"
-
-#, fuzzy
-#| msgid "Email address"
-msgid "Email Address"
-msgstr "Электрондық пошта"
-
-#, fuzzy
-msgid "Cosinnus Organization"
-msgstr "Шақырулар"
-
-#, fuzzy
-msgid "Cosinnus Organizations"
-msgstr "Шақырулар"
-
-msgid "CosinnusOrganizationSocialMedia"
-msgstr ""
-
-#, fuzzy
-#| msgid "CosinnusLocation"
-msgid "CosinnusOrganizationLocation"
-msgstr "CosinnusОрналасу"
-
-#, fuzzy
-#| msgid "CosinnusLocations"
-msgid "CosinnusOrganizationLocations"
-msgstr "CosinnusОрналасулар"
-
-#, fuzzy
-msgid "Organization group"
-msgstr "Шақырулар"
-
-#, fuzzy
-msgid "Organization groups"
-msgstr "Шақырулар"
-
-#, fuzzy, python-format
-msgid "Project/group %(name)s had already requested and has now been accepted."
-msgstr "Сіз әлдеқайда “%(team_name)s” сайтына шақырылып, қазір бірден мүше болдыңыз!"
-
-#, fuzzy, python-format
-#| msgid "User %(username)s was successfully invited!"
-msgid "Project/group %(name)s was successfully invited."
-msgstr "Қолданушы %(username)s сәтті шақырылды!"
-
-#, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
-msgid "Your join request was withdrawn from organization “%(name)s” successfully."
-msgstr "Сіздің %(team_type)s “%(team_name)s” қосылуға сұрауыңыз сәтті алынып тасталды."
-
-#, fuzzy, python-format
-msgid "You have declined the invitation to organization “%(name)s”."
-msgstr "Сіз %(team_type)s “%(team_name)s” мүшесі емессіз."
-
-#, fuzzy, python-format
-#| msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
-msgid "Your project/group is now assigned to the organization “%(name)s”. Welcome!"
-msgstr "Қазір сіз %(team_type)s “%(team_name)s” мүшесісіз. Қош келдіңіз!"
-
-#, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
-msgid "Your request was withdrawn from organization \"%(name)s\" successfully."
-msgstr "Сіздің %(team_type)s “%(team_name)s” қосылу сұрауыңыз сәтті алынды."
-
-#, fuzzy, python-format
-#| msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
-msgid "Your invitation to project/group \"%(name)s\" was withdrawn successfully."
-msgstr "Сіздің “%(username)s” пайдаланушысына шақыруыңыз сәтті алынды."
-
-#, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
-msgid "Project/group \"%(name)s\" is no longer assigned."
-msgstr "“%(username)s” пайдаланушы енді мүше емес."
-
-#, fuzzy
-#| msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
-msgid "Sorry, only portal administrators can create Organizations! You can either create a Project, or write a message to one of the administrators to create a Organization for you. Below you can find a listing of all administrators."
-msgstr "Кешіріңіз, тек портал әкімшілері Топтар жасай алады! Сіз Жобаны құра аласыз немесе сіз үшін Топ құру үшін әкімшілердің біріне хабарлама жаза аласыз. Төменде сіз барлық әкімшілердің тізімін таба аласыз."
-
-#, fuzzy, python-format
-#| msgid "Event \"%(title)s\" was edited successfully."
-msgid "Organization \"%(name)s\" was created successfully."
-msgstr "„%(title)s“ шарасы сәтті өңделді."
-
-#, fuzzy
-#| msgid "Your idea was deleted successfully."
-msgid "Your organization was deleted successfully."
-msgstr "Сіздің идеяңыз сәтті жойылды."
-
-msgctxt "the_app"
-msgid "poll"
-msgstr "сауалнама"
-
-msgid "A user created a new poll"
-msgstr "Пайдаланушы жаңа сауалнама жасады"
-
-#, python-format
-msgid "%(sender_name)s created the poll %(object_name)s"
-msgstr "%(sender_name)s %(object_name)s ішінде жаңа сауалнама жасады"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d polls"
-msgstr "%(sender_name)s %(count)d polls жасады"
-
-#, python-format
-msgid "%(sender_name)s created a new poll"
-msgstr "%(sender_name)s жаңа сауалнама жасады"
-
-#, python-format
-msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Жаңа сауалнамас „%(object_name)s“ %(team_name)s ішінде жасалды."
-
-msgid "A poll you voted on was completed"
-msgstr "Сіз дауыс берген сауалнама аяқталды"
-
-#, python-format
-msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
-msgstr "%(sender_name)s сіз дауыс берген %(object_name)s сауалнаманы аяқтады"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d polls you voted on"
-msgstr "%(sender_name)s сіз дауыс берген %(count)d polls сауалнаманы аяқтады"
-
-#, python-format
-msgid "%(sender_name)s completed the poll"
-msgstr "%(sender_name)s сауалнаманы аяқтады"
-
-#, python-format
-msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
-msgstr "“%(object_name)s” сауалнамасы %(team_name)s ішінде аяқталды."
-
-msgid "A user commented on one of your polls"
-msgstr "Пайдаланушы сіздің сауалнамалырыңздың біріне комментарий қалдырды"
-
-#, python-format
-msgid "%(sender_name)s commented on your poll %(object_name)s"
-msgstr "%(sender_name)s сіздің %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
-msgstr[0] "%(sender_name)s және %(count_minus_one)d басқа сіздің сауалнама %(object_name)s пікір қалдырды"
-msgstr[1] "%(sender_name)s және %(count_minus_one)d басқалар сіздің сауалнама %(object_name)s пікір қалдырды"
-
-#, python-format
-msgid "%(sender_name)s commented on your poll"
-msgstr "%(sender_name)s сіздің сауалнамаға пікір қалдырды"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your polls"
-msgstr "%(sender_name)s сіздің сауалнамаға пікір қалдырды"
-
-msgid "A user commented on a poll you were tagged in"
-msgstr "Пайдаланушы сіз белгіленген сауалнамалардың біріне комментарий қалдырды"
-
-#, python-format
-msgid "%(sender_name)s commented on the poll %(object_name)s"
-msgstr "%(sender_name)s %(object_name)s сауалнамасына пікір қалдырды"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
-msgstr[0] "%(sender_name)s және %(count_minus_one)d басқа сіздің сауалнама %(object_name)s пікір қалдырды"
-msgstr[1] "%(sender_name)s және %(count_minus_one)d басқалар сіздің сауалнама %(object_name)s пікір қалдырды"
-
-msgid "You were tagged in this poll"
-msgstr "Сізді осы сауалнамада белгіледі"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you were tagged in"
-msgstr "%(sender_name)s сіз белгіленген сауалнамалардың біріне пікір қалдырды"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s сіз белгіленген %(team_name)s ішінде сауалнамалардың біріне пікір қалдырды"
-
-msgid "A user commented on an poll you voted in"
-msgstr "Пайдаланушы сіз дауыс берген сауалнамаға пікір қалдырды"
-
-msgid "You voted on this poll"
-msgstr "Сіз бұл сауалнамада дауыс бердіңіз"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you voted in"
-msgstr "%(sender_name)s сіз қатысқан сауалнамаға пікір қалдырды"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
-msgstr "%(sender_name)s сіз қатысқан сауалнамаға %(team_name)s ішінде пікір қалдырды"
-
-msgid "A user created a new poll in a team you are following"
-msgstr "Пайдаланушы сіз бақылайтын топта жаңа сауалнама жасады"
-
-#, python-format
-msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s %(team_name) s ішінде (сіз бақылап отырған) жаңа сауалнама жасады"
-
-#, python-format
-msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "Жаңа сауалнама: „%(object_name)s“ %(team_name)s де (сіз бақылап отырған) жасалды."
-
-msgid "A user updated a poll you are following"
-msgstr "Пайдаланушы сіз қадағалайтын сауалнаманы жаңартты"
-
-#, python-format
-msgid "%(sender_name)s updated the poll %(object_name)s"
-msgstr "%(sender_name)s %(object_name)s ішінде сауалнаманы жаңартты"
-
-msgid "You are following this poll"
-msgstr "Сіз осы сауалнаманы бақылап отырсыз"
-
-#, python-format
-msgid "%(sender_name)s updated a poll you are following"
-msgstr "Сіз бақылап жатқан сауалнаманы %(sender_name)s жаңартты"
-
-#, python-format
-msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "Сіз бақылап отырған сауалнама: %(team_name)s ішінде „%(object_name)s жаңартылды."
-
-msgid "A poll you are following was completed"
-msgstr "Сіз дауыс берген сауалнама аяқталды"
-
-#, python-format
-msgid "%(sender_name)s completed the poll %(object_name)s"
-msgstr "%(sender_name)s %(object_name)s сауалнамасын аяқтады"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d polls"
-msgstr "%(sender_name)s %(count)d polls сауалнамасын аяқтады"
-
-#, python-format
-msgid "%(sender_name)s completed the poll you are following"
-msgstr "Сіз бақылап жатқан сауалнаманы %(sender_name)s аяқтады"
-
-#, python-format
-msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
-msgstr "Сіз бақылап отырған сауалнама: %(team_name)s ішінде „%(object_name)s аяқталды."
-
-msgid "A user commented on one a poll you are following"
-msgstr "Пайдаланушы сіз бақылайтын сауалнамаға пікір қалдырды"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you are following"
-msgstr "Сіз бақылайтын сауалнамаға %(sender_name)s пікір қалдырды"
-
-msgid "Current Polls"
-msgstr "Ағымдағы сауалнамалар"
-
-msgid "No current polls"
-msgstr "Ағымда сауалнамалар жоқ"
-
-msgid "You must write a description for this poll option!"
-msgstr "Осы сауалнамаға сипаттама жазу керек!"
-
-msgid "Voting closed"
-msgstr "Дауыс беру жабылды"
-
-msgid "Poll archived"
-msgstr "Сауалнама мұрағатталды"
-
-msgid "Multiple options votable"
-msgstr "Бірнеше опцияға дауыс беруге болады"
-
-msgid "Does this poll allow users to vote on multiple options or just decide for one?"
-msgstr "Бұл сауалнама пайдаланушыларға бірнеше нұсқалар бойынша дауыс беруге мүмкіндік бере ме, әлде тек біреуіне ме?"
-
-msgid "\"Maybe\" option enabled"
-msgstr "«Мүмкін» опциясы қосылған"
-
-msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
-msgstr "Мүмкін опция қосылған ба? Егер ``multiple_votes==False`` болса, еленбейді және «Жалған» күйіне келтіріледі"
-
-msgid "Anyone can vote"
-msgstr "Әркім дауыс бере алады"
-
-msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
-msgstr "Егер шын болса, осы сауалнаманы көретін кез-келген адам оған дауыс бере алады. Жалған болса, тек топ мүшелері жасай алады."
-
-msgid "Show voters"
-msgstr "Дауыс берушілерді көрсету"
-
-msgid "If true, display a list of which user voted for each option."
-msgstr "Егер «шын» болса, әр опция үшін қай пайдаланушы дауыс бергенін көрсетіңіз."
-
-msgid "Winning Option"
-msgstr "Жеңу опциясы"
-
-#, python-format
-msgid "Poll: %(poll)s (%(state)s)"
-msgstr "Сауалнама: %(poll)s (%(state)s)"
-
-msgid "Poll Option"
-msgstr "Сауалнама варианты"
-
-msgid "Poll Options"
-msgstr "Сауалнама варианттары"
-
-#, python-format
-msgid "Poll \"%(title)s\" was edited successfully."
-msgstr "Сауалнама „%(title)s“ сәтті өңделді."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be edited."
-msgstr "„%(title)s“ өңдеу мүмкін емес."
-
-#, python-format
-msgid "Poll \"%(title)s\" was added successfully."
-msgstr "„%(title)s“ сәтті қосылды."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be added."
-msgstr "Todo „%(title)s“ қосу мүмкін емес."
-
-msgid "You should define at least one poll option!"
-msgstr "Сіз кем дегенде бір сауалнаманы анықтауыңыз керек!"
-
-msgid "This poll is archived and cannot be edited anymore!"
-msgstr "Бұл сауалнама мұрағатталған және енді өзгерту мүмкін емес!"
-
-#, python-format
-msgid "Poll \"%(title)s\" was deleted successfully."
-msgstr "„%(title)s“ сәтті жойылды."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be deleted."
-msgstr "„%(title)s“ сауалнамасын жою мүмкін емес."
-
-msgid "The voting phase for this poll is over. You cannot vote for it any more."
-msgstr "Осы сауалнама бойынша дауыс беру кезеңі аяқталды. Енді сіз оған дауыс бере алмайсыз."
-
-msgid "In this poll you must vote for exactly one item!"
-msgstr "Бұл сауалнамада сіз дәл бір мәселе үшін дауыс беруіңіз керек!"
-
-msgid "Invalid action for this poll. The request could not be completed!"
-msgstr "Бұл сауалнама үшін жарамсыз әрекет. Сұрау орындалмады!"
-
-msgid "This action is not permitted for this poll at this stage!"
-msgstr "Бұл сауалнама үшін жарамсыз әрекет. Сұрау орындалмады!"
-
-msgid "The poll was closed successfully."
-msgstr "Дауыс беру жабылды."
-
-msgid "The poll was re-opened successfully."
-msgstr "Сауалнама қайтадан ашылды."
-
-msgid "The poll was archived successfully."
-msgstr "Сауалнама сәтті архивтелді."
-
-msgid "Stream"
-msgstr "Ағынды жою"
-
-msgctxt "the_app"
-msgid "stream"
-msgstr "менің ағындарым"
-
-msgid "My Streams"
-msgstr "Менің ағындарым"
-
-msgid "Streams"
-msgstr "Ағындар"
-
-msgid "Models"
-msgstr "Модельдер"
-
-msgid "Portal IDs"
-msgstr "Портал идентификаторлары"
-
-msgid "Last seen"
-msgstr "Соңғы қаралған"
-
-msgid "Special Stream"
-msgstr "Арнайы ағым"
-
-msgid "Special Group IDs"
-msgstr "Арнайы топ идентификаторлары"
-
-msgid "You do not have permission to access this stream."
-msgstr "Бұл ағынға кіруге рұқсатыңыз жоқ."
-
-msgid "Your stream was added successfully."
-msgstr "Ағын сәтті қосылды."
-
-msgid "Your stream was updated successfully."
-msgstr "Бұл параққа кіру үшін жүйеге кіріңіз."
-
-msgid "Your stream was deleted successfully."
-msgstr "Ағын сәтті жойылды."
-
-msgid "You cannot delete the default stream!"
-msgstr "Әдепкі ағынды жою мүмкін емес!"
-
-# The Cosinnus App Name
-msgctxt "the_app"
-msgid "todo"
-msgstr "the_app todo"
-
-msgid "A user created a new todo"
-msgstr "Пайдаланушы жаңа тапсырма жасады"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s created a new todo"
-msgid "%(sender_name)s created the todo %(object_name)s"
-msgstr "%(sender_name)s жаңа толтыру жасады"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s created a new todo"
-msgid "%(sender_name)s created %(count)d todos"
-msgstr "%(sender_name)s жаңа толтыру жасады"
-
-#, python-format
-msgid "%(sender_name)s created a new todo"
-msgstr "%(sender_name)s жаңа толтыру жасады"
-
-#, python-format
-msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Жаңа тапсырма: „%(object_name)s“ %(team_name)s ішінде жасалды."
-
-msgid "A todo was assigned to me"
-msgstr "Маған жаңа тапсырма жүктелді"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s assigned a todo to you"
-msgid "%(sender_name)s assigned the todo %(object_name)s to you"
-msgstr "%(sender_name)s сізге жаңа тапсырма берді"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s assigned a todo to you"
-msgid "%(sender_name)s assigned %(count)d todos to you"
-msgstr "%(sender_name)s сізге жаңа тапсырма берді"
-
-#, python-format
-msgid "%(sender_name)s assigned a todo to you"
-msgstr "%(sender_name)s сізге жаңа тапсырма берді"
-
-msgid "A todo I created was completed"
-msgstr "Мен жасаған жаңа тапсырма аяқталды"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s completed your todo"
-msgid "%(sender_name)s completed the todo %(object_name)s"
-msgstr "%(sender_name)s тапсырманы аяқтады"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s completed your todo"
-msgid "%(sender_name)s completed %(count)d todos"
-msgstr "%(sender_name)s тапсырманы аяқтады"
-
-#, fuzzy
-#| msgid "You created a todo"
-msgid "You created this todo"
-msgstr "Сіз todo жасадыңыз"
-
-#, python-format
-msgid "%(sender_name)s completed your todo"
-msgstr "%(sender_name)s тапсырманы аяқтады"
-
-#, python-format
-msgid "%(sender_name)s completed one of your todos"
-msgstr "%(sender_name)s сіздің тапсырмаларыңыздың бірін аяқтады"
-
-msgid "A user commented on one of your todos"
-msgstr "Пайдаланушы сіздің тапсырмаларыңыздың біріне түсініктеме берді"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
-msgid "%(sender_name)s commented on your todo %(object_name)s"
-msgstr "%(sender_name)s %(team_name)s ішінде сіздің бір тобыңызға түсініктеме берді."
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
-msgstr[0] "%(sender_name)s %(team_name)s ішінде сіздің бір тобыңызға түсініктеме берді."
-msgstr[1] "%(sender_name)s %(team_name)s ішінде сіздің бір тобыңызға түсініктеме берді."
-
-#, python-format
-msgid "%(sender_name)s commented on your todo"
-msgstr "%(sender_name)s сіздің тапсырмаңызға түсініктеме берді"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your todos"
-msgstr "%(sender_name)s сіздің тапсырмаларыңыздың біреуіне түсініктеме берді"
-
-msgid "A user commented on a todo you were tagged in"
-msgstr "Пайдаланушы сіз белгіленген тапсырмаға түсініктеме берді"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
-msgid "%(sender_name)s commented on the todo %(object_name)s"
-msgstr "%(sender_name)s %(team_name)s ішінде сіздің бір тобыңызға түсініктеме берді."
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
-msgstr[0] "%(sender_name)s %(team_name)s ішінде сіздің бір тобыңызға түсініктеме берді."
-msgstr[1] "%(sender_name)s %(team_name)s ішінде сіздің бір тобыңызға түсініктеме берді."
-
-#, fuzzy
-#| msgid "You created a todo"
-msgid "You were tagged in this todo"
-msgstr "Сіз todo жасадыңыз"
-
-#, python-format
-msgid "%(sender_name)s commented on a todo you were tagged in"
-msgstr "%(sender_name)s сіз белгіленген тапсырмаға түсініктеме берді"
-
-#, python-format
-msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s сіз белгіленген тапсырмаға түсініктеме берді %(team_name)s"
-
-msgid "A user commented on a todo you were assigned to"
-msgstr "Пайдаланушы сіз тағайындалған тапсырмаға түсініктеме берді"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
-msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
-msgstr "%(sender_name)s %(team_name)s ішінде тағайындалған тобыңыздың біріне түсініктеме берді"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
-msgstr[0] "%(sender_name)s %(team_name)s ішінде тағайындалған тобыңыздың біріне түсініктеме берді"
-msgstr[1] "%(sender_name)s %(team_name)s ішінде тағайындалған тобыңыздың біріне түсініктеме берді"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your assigned todos"
-msgstr "%(sender_name)s тағайындалған тапсырмаларыңыздың біріне түсініктеме берді"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
-msgstr "%(sender_name)s %(team_name)s ішінде тағайындалған тобыңыздың біріне түсініктеме берді"
-
-msgid "A user updated a todo you are following"
-msgstr "Пайдаланушы сіз қадағалайтын тапсырманы жаңартты"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s updated a todo you are following"
-msgid "%(sender_name)s updated the todo %(object_name)s"
-msgstr "%(sender_name)s сіз бақылайтын жаңартуды жаңартты"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
-msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
-msgstr[0] "%(sender_name)s %(team_name)s ішінде тағайындалған тобыңыздың біріне түсініктеме берді"
-msgstr[1] "%(sender_name)s %(team_name)s ішінде тағайындалған тобыңыздың біріне түсініктеме берді"
-
-#, fuzzy
-#| msgid "You are not allowed to assign this Todo entry."
-msgid "You are following this todo"
-msgstr "Бұл тапсырманы тағайындауға сізге рұқсат жоқ."
-
-#, python-format
-msgid "%(sender_name)s updated a todo you are following"
-msgstr "%(sender_name)s сіз бақылайтын жаңартуды жаңартты"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "Сіз мынаны қадағалап отырсыз: „%(object_name)s“ %(team_name)s ішінде жаңартылды."
-
-msgid "A user reassigned a todo you are following"
-msgstr "Пайдаланушы сіз бақылайтын тобын қайта тағайындады"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s assigned a todo to you"
-msgid "%(sender_name)s reassigned the todo %(object_name)s"
-msgstr "%(sender_name)s сізге жаңа тапсырма берді"
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s assigned a todo to you"
-msgid "%(sender_name)s reassigned %(count)d todos"
-msgstr "%(sender_name)s сізге жаңа тапсырма берді"
-
-#, python-format
-msgid "%(sender_name)s reassigned a todo you are following"
-msgstr "%(sender_name)s сіз қадағалап отырды"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
-msgstr "Сіз мынаны қадағалап отырсыз: „%(object_name)s“ %(team_name)s ішінде қайта тағайындалды."
-
-msgid "A user completed a todo you are following"
-msgstr "Пайдаланушы сіз бақылайтын толтыру аяқтады"
-
-#, python-format
-msgid "%(sender_name)s completed a todo you are following"
-msgstr "%(sender_name)s сіз қадағалап жатқан әрекетті аяқтады"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
-msgstr "Сіз мынаны қадағалап отырсыз: „%(object_name)s“ %(team_name)s де аяқталды."
-
-msgid "A user commented on a todo you are following"
-msgstr "Пайдаланушы сіз бақылайтын тобыңызға түсініктеме берді"
-
-#, python-format
-msgid "%(sender_name)s commented on on a todo you are following"
-msgstr "%(sender_name)s сіз қадағалап жатқан пікірге түсініктеме берді"
-
-msgid "My Todos"
-msgstr "Менің міндеттерім"
-
-msgid "No todos"
-msgstr "Тапсырмалар жоқ"
-
-msgid "Open"
-msgstr "Ашық"
-
-msgid "Completed"
-msgstr "Орындалды"
-
-msgid "Assigned To"
-msgstr "Тағайындалған"
-
-msgid "Priority"
-msgstr "Басымдық"
-
-msgid "Due date"
-msgstr "Мерзімі"
-
-msgid "Soonest Due"
-msgstr "Жылдам орындау"
-
-msgid "You are not allowed to assign this Todo entry."
-msgstr "Бұл тапсырманы тағайындауға сізге рұқсат жоқ."
-
-msgid "Later"
-msgstr "Кейінірек"
-
-msgid "Normal"
-msgstr "Жарайды"
-
-msgid "Important"
-msgstr "Маңызды"
-
-msgid "Due by"
-msgstr "Жасау керек"
-
-msgid "Completed on"
-msgstr "Аяқталды"
-
-msgid "Completed by"
-msgstr "Аяқтаған"
-
-msgid "Assigned to"
-msgstr "Тағайындалған"
-
-msgid "List"
-msgstr ""
-
-#, python-format
-msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
-msgstr "„%(todo_name)s“ Todo %(assignee_name)s тағайындалды"
-
-#, python-format
-msgid "Todo \"%(title)s\" was added successfully."
-msgstr "Todo „%(title)s“ сәтті қосылды."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be added."
-msgstr "Todo „%(title)s“ қосу мүмкін емес."
-
-msgid "You were trying to add a todo to a todolist that does not exist!"
-msgstr "Сіз жоқ тодолистке тодовик қосқыңыз келді!"
-
-#, python-format
-msgid "Todo \"%(title)s\" was edited successfully."
-msgstr "Todo „%(title)s“ сәтті өңделді."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be edited."
-msgstr "Todo „%(title)s“ редакцияланбады."
-
-#, python-format
-msgid "Todo \"%(title)s\" was deleted successfully."
-msgstr "Todo „%(title)s“ сәтті жойылды."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be deleted."
-msgstr "Todo „%(title)s“ жойылмады."
-
-#, python-format
-msgid "Todo \"%(title)s\" was assigned successfully."
-msgstr "Todo „%(title)s“ сәтті тағайындалды."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be assigned."
-msgstr "Todo „%(title)s“ тағайындау мүмкін емес."
-
-#, python-format
-msgid "Todo \"%(title)s\" was assigned to You successfully."
-msgstr "Todo „%(title)s“ сізге сәтті тағайындалды."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be assigned to You."
-msgstr "Todo „%(title)s“ сізге тағайындалмады."
-
-#, python-format
-msgid "Todo \"%(title)s\" was unassigned successfully."
-msgstr "Todo „%(title)s“ сәтті тағайындалмаған."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be unassigned."
-msgstr "Todo „%(title)s“ тағайындау мүмкін емес."
-
-#, python-format
-msgid "Todo \"%(title)s\" was completed successfully."
-msgstr "Todo „%(title)s“ сәтті аяқталды."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be completed."
-msgstr "Todo „%(title)s“ аяқталмады."
-
-#, python-format
-msgid "Todo \"%(title)s\" was completed by You successfully."
-msgstr "Todo „%(title)s“ сәтті аяқталды."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be completed by You."
-msgstr "„%(title)s“ Todo сіз толтыра алмадыңыз."
-
-#, python-format
-msgid "Todo \"%(title)s\" was set to incomplete successfully."
-msgstr "Todo „%(title)s“ сәтсіз аяқталды."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be set to incomplete."
-msgstr "Todo „%(title)s“ аяқталмады."
-
-#, python-format
-msgid "Todolist \"%(title)s\" was edited successfully."
-msgstr "Todolist „%(title)s“ сәтті өңделді."
-
-#, python-format
-msgid "Todolist \"%(title)s\" could not be edited."
-msgstr "Todolist „%(title)s“ өңдеу мүмкін емес."
-
-#, python-format
-msgid "Todolist \"%(title)s\" was added successfully."
-msgstr "Todolist „%(title)s“ сәтті қосылды."
-
-#, python-format
-msgid "Todolist \"%(title)s\" could not be added."
-msgstr "Todolist „%(title)s“ қосу мүмкін емес."
-
-msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
-msgstr "Сіз бұл қалтаны жоя алмайсыз, өйткені онда бір немесе бірнеше элементті жоюға рұқсатыңыз жоқ!"
-
-msgid "Sender and Recipient cannot be both undefined."
-msgstr ""
-
-msgid "Visitor's email is in excess."
-msgstr ""
-
-msgid "Visitor's email is missing."
-msgstr ""
-
-msgid "Reading date must be later than sending date."
-msgstr ""
-
-msgid "Deletion date by sender must be later than sending date."
-msgstr ""
-
-msgid "Deletion date by recipient must be later than sending date."
-msgstr ""
-
-msgid "Response date must be later than sending date."
-msgstr ""
-
-msgid "The message cannot be replied without having been read."
-msgstr ""
-
-msgid "Response date must be later than reading date."
-msgstr ""
-
-msgid "Response date cannot be set without at least one reply."
-msgstr ""
-
-#, fuzzy
-#| msgid "This message was sent in a conversation with: "
-msgid "The message cannot be replied without being in a conversation."
-msgstr "Бұл хабарлама қоңырау кезінде жіберілді: "
-
-msgid "Dates"
-msgstr "Мерзімдері"
-
-#, fuzzy
-#| msgid "Is Moderator"
-msgid "Moderation"
-msgstr "Модератор"
-
-#, python-brace-format
-msgid "Some usernames are unknown or no longer active: {users}."
-msgstr ""
-
-#, python-brace-format
-msgid "Ensure this value has at most {limit_value} distinct items (it has {show_value})."
-msgstr ""
-
-#, python-brace-format
-msgid "Ensure this value has at least {limit_value} distinct items (it has {show_value})."
-msgstr ""
-
-#, python-brace-format
-msgid "Some usernames are rejected: {users}."
-msgstr ""
-
-#, fuzzy, python-brace-format
-#| msgid "Your name"
-msgid "{username}"
-msgstr "Сіздің атыңыз"
-
-#, python-brace-format
-msgid "{username} ({reason})"
-msgstr ""
-
-#, python-brace-format
-msgid "Writing to some users is not possible: {users}."
-msgstr ""
-
-msgid "Recipient"
-msgstr "Алушы"
-
-#, fuzzy
-#| msgid "Additional Recipients"
-msgid "Additional recipients"
-msgstr "Қосымша алушылар"
-
-#, fuzzy
-#| msgid "Additional Recipients"
-msgid "Additional recipient"
-msgstr "Қосымша алушылар"
-
-#, fuzzy
-#| msgid "Message Project"
-msgid "Message Rejected"
-msgstr "Жобаға хабарлама жазу"
-
-#, fuzzy
-msgid "Your message has been rejected"
-msgstr "Сіздің өзгертулеріңіз сақталды."
-
-#, fuzzy
-#| msgid "Message Project"
-msgid "Message Received"
-msgstr "Жобаға хабарлама жазу"
-
-#, fuzzy
-msgid "You have received a message"
-msgstr "Сізді ынтымақтастыққа шақырды!"
-
-msgid "Reply Received"
-msgstr ""
-
-#, fuzzy
-msgid "You have received a reply"
-msgstr "Сізді ынтымақтастыққа шақырды!"
-
-msgid "Pending"
-msgstr ""
-
-msgid "Rejected"
-msgstr ""
-
-#, fuzzy
-#| msgid "Everybody"
-msgid "body"
-msgstr "Барлығы"
-
-#, fuzzy
-msgid "sender"
-msgstr "Жіберілген"
-
-#, fuzzy
-#| msgid "Recipient"
-msgid "recipient"
-msgstr "Алушы"
-
-#, fuzzy
-msgid "visitor"
-msgstr "Кірді"
-
-#, fuzzy
-msgid "parent message"
-msgstr "Хабарламалар"
-
-#, fuzzy
-#| msgid "No messages"
-msgid "root message"
-msgstr "Хабарламалар жоқ"
-
-#, fuzzy
-#| msgid "Event date"
-msgid "sent at"
-msgstr "Шара күні"
-
-msgid "read at"
-msgstr ""
-
-msgid "replied at"
-msgstr ""
-
-msgid "archived by sender"
-msgstr ""
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "archived by recipient"
-msgstr "Анықталмаған алушы."
-
-#, fuzzy
-#| msgid "New etherpad by %(sender_name)s"
-msgid "deleted by sender at"
-msgstr "%(sender_name)s тен жаңа редактор"
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "deleted by recipient at"
-msgstr "Анықталмаған алушы."
-
-#, fuzzy
-#| msgid "Status"
-msgid "status"
-msgstr "Күй"
-
-#, fuzzy
-#| msgid "Is Moderator"
-msgid "moderator"
-msgstr "Модератор"
-
-#, fuzzy
-#| msgid "Related to"
-msgid "moderated at"
-msgstr "Ассоциацияланған"
-
-msgid "rejection reason"
-msgstr ""
-
-msgid "Direct Reply Hash"
-msgstr ""
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "message"
-msgstr "xабарлама"
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "messages"
-msgstr "xабарлама"
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "Undefined sender."
-msgstr "Анықталмаған алушы."
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "pending message"
-msgstr "xабарлама"
-
-#, fuzzy
-msgid "pending messages"
-msgstr "Хабарламалар"
-
-msgid "<me>"
-msgstr ""
-
-msgid "> "
-msgstr ""
-
-#, python-brace-format
-msgid ""
-"\n"
-"\n"
-"{sender} wrote:\n"
-"{body}\n"
-msgstr ""
-
-#, python-brace-format
-msgid "Re: {subject}"
-msgstr ""
-
-#, fuzzy
-msgid "Message successfully sent."
-msgstr "Қолданушы %(username)s сәтті шақырылды!"
-
-#, fuzzy
-#| msgid "Select at least one object."
-msgid "Message rejected for at least one recipient."
-msgstr "Кем дегенде бір элементті таңдаңыз."
-
-msgid "A conference you are attending has been updated"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "The conference %(object_name)s has been updated"
-msgstr "Сіз „%(object_name)s“ %(team_name)s ішінде белгіленгенсіз."
-
-#, fuzzy
-msgid "You are attending this conference"
-msgstr "Сіз бұл жобаны / топты өшіргіңіз келеді!"
-
-#, fuzzy, python-format
-msgid "The conference \"%(object_name)s\" was updated."
-msgstr "Сіз „%(object_name)s“ %(team_name)s ішінде белгіленгенсіз."
-
-msgid "The time of a conference you are attending has been updated"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "The time of conference %(object_name)s has been updated"
-msgstr "Сіз „%(object_name)s“ %(team_name)s ішінде белгіленгенсіз."
-
-msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
-msgstr ""
-
-msgid "minute"
-msgstr ""
-
-msgid "minutes"
-msgstr ""
-
-msgid "Select the date range for which you would like statistics"
-msgstr ""
-
-msgid "Cloud Stub"
-msgstr ""
-
-msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
-msgstr ""
-
-msgid "There are no cloud files yet"
-msgstr ""
-
-#, fuzzy
-msgid "Error message:"
-msgstr "Хабарламалар"
-
-msgid "No error message supplied."
-msgstr ""
-
-#, fuzzy
-#| msgid "Pads"
-msgid "Pad"
-msgstr "Мәтін бөлімдері"
-
-msgid "This pad can no longer be edited because its creator has deleted their account."
-msgstr "Бұл мәтін бөлімін енді өзгерту мүмкін емес, өйткені оны жасаушы олардың тіркелгісін жойды."
-
-#, python-format
-msgid "Do you really want to delete etherpad „%(pad)s“?"
-msgstr "Мәтін бөлімін шынымен жойғыңыз келе ме „%(pad)s“?"
-
-msgid "Delete Etherpad"
-msgstr "Мәтін бөлімін жою"
-
-msgid "This document is empty"
-msgstr "Бұл құжат бос"
-
-msgid "Pads"
-msgstr "Мәтін бөлімдері"
-
-msgid "Enter a title for the Pad."
-msgstr "Мәтін бөліміне атау енгізіңіз."
-
-msgid "Enter the title for a new Document or Table."
-msgstr "Жаңа құжаттың немесе электрондық кестенің атауын енгізіңіз."
-
-msgid "Enter the title for a new Document."
-msgstr "Жаңа құжаттың атауын енгізіңіз."
-
-msgid "Create Etherpad"
-msgstr "Etherpad құрыңыз"
-
-msgid "Create Ethercalc"
-msgstr "Ethercalc құрыңыз"
-
-#, python-format
-msgid "Do you really want to delete etherpad „%(title)s“?"
-msgstr "Шынымен „%(title)s“ эфирлік тақтаны жойғыңыз келе ме?"
-
-msgid "No etherpads have been created yet."
-msgstr "Ортақ мәтін бөлімдері әлі жасалмады."
-
-msgid "Download CSV"
-msgstr "CSV жүктеу"
-
-msgid "Download Excel"
-msgstr "Excel бағдарламасын жүктеу"
-
-#, python-format
-msgid ""
-"Hi %(receiver_name)s,\n"
-"\n"
-"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
-"\n"
-"You can find it by following this link: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s Team."
-msgstr ""
-"Сәлем %(receiver_name)s,\n"
-"\n"
-"%(team_name)s ішінде „%(object_name)s“ жаңа шара %(sender_name)s құрылды.\n"
-"\n"
-"Оны мына сілтемені басу арқылы табуға болады: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Хабарландыру параметрлерін өзгерту үшін мына сілтемені қараңыз: %(notification_settings_url)s\n"
-"\n"
-"Сіздің командаңыз %(site_name)s."
-
-msgid "You created a pad"
-msgstr "Сіз мәтіндік құжат жасадыңыз"
-
-msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
-msgid "created a Pad"
-msgstr "төсеніш жасады"
-
-msgid "There are no etherpads yet"
-msgstr "Әзірше мәтіндік құжаттар жоқ"
-
 msgid "Would you like to create an event"
 msgstr "Шара құрғыңыз келеді ме"
 
@@ -11194,6 +9508,9 @@ msgstr "Шаралар сауалнамалары"
 
 msgid "Enter a title for the new event to be scheduled."
 msgstr "Жоспарланатын жаңа шараның атын енгізіңіз."
+
+msgid "Dates"
+msgstr "Мерзімдері"
 
 msgid "Please select the available days in the calendar."
 msgstr "Күнтізбедегі бос күндерді таңдаңыз."
@@ -11338,6 +9655,9 @@ msgstr "Сауалнамаларға оралу"
 
 msgid "Return to Archived Event Polls"
 msgstr "Мұрағатталған шара сауалнамаларына оралу"
+
+msgid "List"
+msgstr ""
 
 msgid "View"
 msgstr ""
@@ -11688,6 +10008,202 @@ msgstr "сіз шара жасадыңыз"
 msgid "Show all"
 msgstr "Барлығын көрсету"
 
+msgid "Upcoming events"
+msgstr "Алдағы шаралар"
+
+#, python-format
+msgid "Event \"%(title)s\" was edited successfully."
+msgstr "„%(title)s“ шарасы сәтті өңделді."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be edited."
+msgstr "„%(title)s“ шарасын өңдеу мүмкін емес."
+
+msgid "Please use the conference management area to add new workshops!"
+msgstr ""
+
+msgid "The page you requested is not available for this event at this time."
+msgstr "Сіз сұраған бет бұл шара үшін қазір қол жетімді емес."
+
+msgid "One of the event suggestions times could not be understood!"
+msgstr "Іс-шараға арналған ұсыныстардың біреуін түсіну мүмкін емес!"
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was edited successfully."
+msgstr "Жоспардан тыс „%(title)s“ шара сәтті өңделді."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be edited."
+msgstr "Жоспарланбаған „%(title)s“ шарасын өзгерту мүмкін емес."
+
+#, python-format
+msgid "Event \"%(title)s\" was added successfully."
+msgstr "„%(title)s“ шарасы сәтті қосылды."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be added."
+msgstr "„%(title)s“ шарасын қосу мүмкін емес."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was added successfully."
+msgstr "Жоспардан тыс „%(title)s“ шара сәтті қосылды."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be added."
+msgstr "Жоспарланбаған шараны „%(title)s“ қосу мүмкін емес."
+
+msgid "You should define at least one date suggestion."
+msgstr "Жоспарланбаған шараны «% (тақырып) s» қосу мүмкін емес."
+
+#, python-format
+msgid "Event \"%(title)s\" was deleted successfully."
+msgstr "„%(title)s“ шарасы сәтті жойылды."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be deleted."
+msgstr "„%(title)s“ шарасын жою мүмкін емес."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was deleted successfully."
+msgstr "Жоспардан тыс „%(title)s“ шара сәтті жойылды."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be deleted."
+msgstr "Жоспарланбаған „%(title)s“ шарасын жою мүмкін емес."
+
+#, fuzzy
+msgid "Your votes were saved successfully."
+msgstr "Сіздің идеяңыз сәтті жойылды."
+
+#, fuzzy
+#| msgid "Poll \"%(title)s\" could not be added."
+msgid "Your votes could not be saved."
+msgstr "Todo „%(title)s“ қосу мүмкін емес."
+
+msgid "This is event is already scheduled. You cannot vote for it any more."
+msgstr "Бұл шара бұрыннан жоспарланған. Енді оған дауыс бере алмайсыз."
+
+msgid "The complete request can only be sent via POST!"
+msgstr "Толық сұранымды тек POST арқылы жіберуге болады!"
+
+msgid "Event cannot be completed: No date was supplied."
+msgstr "Шараны аяқтау мүмкін емес: күні көрсетілмеген."
+
+msgid "The event was created successfully at the specified date."
+msgstr "Іс-шара көрсетілген күні сәтті жасалды."
+
+#, fuzzy
+msgid "Upcoming event"
+msgstr "Алдағы шаралар"
+
+msgid "Your comment was added successfully."
+msgstr "Сіздің пікіріңіз сәтті қосылды."
+
+msgid "Your comment was deleted successfully."
+msgstr "Пікіріңіз сәтті жойылды."
+
+#, fuzzy
+#| msgid "Save changes"
+msgid "Exchange"
+msgstr "Өзгерістерді сақтаңыз"
+
+#, fuzzy
+#| msgid "Save changes"
+msgctxt "the_app"
+msgid "exchange"
+msgstr "Өзгерістерді сақтаңыз"
+
+msgctxt "the_app"
+msgid "file"
+msgstr "файл"
+
+msgid "A user uploaded a new file"
+msgstr "Пайдаланушы жаңа файл жүктеді"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new file"
+msgid "%(sender_name)s uploaded the file %(object_name)s"
+msgstr "%(sender_name)s жаңа файл жасады"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new file"
+msgid "%(sender_name)s uploaded %(count)d files"
+msgstr "%(sender_name)s жаңа файл жасады"
+
+#, python-format
+msgid "%(sender_name)s created a new file"
+msgstr "%(sender_name)s жаңа файл жасады"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Жаңа файл: „%(object_name)s“ %(team_name)s ішінде жасалды."
+
+msgid "A user uploaded a new file in a team you are following"
+msgstr "Пайдаланушы сіз бақылайтын командаға жаңа файл жүктеді"
+
+#, python-format
+msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s %(team_name)s ішінде жаңа файл жасады (сіз бақылайтын)"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Жаңа файл: „%(object_name)s“ %(team_name)s ішінде жасалды (сіз бақылайтын)."
+
+msgid "Latest Files"
+msgstr "Соңғы файлдар"
+
+msgid "No files"
+msgstr "Файлдар жоқ"
+
+msgid "Pictures"
+msgstr "Суреттер"
+
+msgid "Documents"
+msgstr "Құжаттар"
+
+msgid "Audio Files"
+msgstr "Аудио файлдар"
+
+msgid "Videos"
+msgstr "Бейне"
+
+msgid "File Type"
+msgstr "Файл түрі"
+
+msgid "File Name"
+msgstr "Файл атауы"
+
+msgid "File Name (descending)"
+msgstr "Файл атауы (әдепкі)"
+
+msgid "Smallest Files"
+msgstr "Ең кіші файлдар"
+
+msgid "Largest Files"
+msgstr "Ең үлкен файлдар"
+
+msgid "The given URL does not seem to be valid."
+msgstr ""
+
+msgid "Must supply either a URL or File"
+msgstr ""
+
+msgid "Is URL Link"
+msgstr ""
+
+msgid "Uploaded by"
+msgstr "Жүктеген"
+
+msgid "Uploaded on"
+msgstr "Жүктелген"
+
+msgid "No files selected."
+msgstr "Файлдар таңдалмады."
+
+msgctxt "special_folder_type"
+msgid "Attachments"
+msgstr "Акциялар"
+
 msgid "The URL you have entered does not seem to be valid!"
 msgstr ""
 
@@ -11802,6 +10318,208 @@ msgstr "Соңғы файлдар"
 
 msgid "There are no files  yet"
 msgstr "Әлі файлдар жоқ"
+
+msgid "File does not exist or you are not allowed to delete it."
+msgstr "Файл жоқ немесе сіз оны жоюға құқығыңыз жоқ."
+
+#, python-format
+msgid "A problem occurred during export. The following file is missing: %(filename)s."
+msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
+msgstr[0] ""
+"Экспорттау кезінде мәселе туындады. Келесі файл жоқ: %(filename)s.\n"
+"Экспорттау кезінде мәселе туындады. Келесі файлдар жоқ: %(filename)s."
+
+msgid "Invalid request."
+msgstr "Жарамсыз сұрау."
+
+#, python-format
+msgid "File \"%(title)s\" was updated successfully."
+msgstr "„%(title)s“ файлы сәтті жаңартылды."
+
+#, python-format
+msgid "File \"%(title)s\" could not be updated."
+msgstr "„%(title)s“ файлын жаңарту мүмкін емес."
+
+msgid "Downloading failed, the target object was not a folder!"
+msgstr "Жүктеу сәтсіз аяқталды, мақсат қапшық емес!"
+
+msgid "Canceled the download because there seem to be no files in this folder."
+msgstr "Жүктеуді болдырмаңыз, себебі бұл қалтада файл жоқ сияқты."
+
+msgid "Internal Error: Group not Found"
+msgstr ""
+
+msgid "Permission for upload denied"
+msgstr ""
+
+msgid "The uploaded file was invalid."
+msgstr ""
+
+#, python-format
+msgid "%(count)d File was added successfully."
+msgid_plural "%(count)d Files were added successfully."
+msgstr[0] ""
+"%(count)d Файл сәтті қосылды.\n"
+"\n"
+"%(count)d Файлдар сәтті қосылды."
+
+msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
+msgstr ""
+
+msgctxt "the_app"
+msgid "marketplace"
+msgstr "маркетплейс"
+
+msgid "A user created a new offer"
+msgstr "Пайдаланушы жаңа ұсыныс жасады"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new offer"
+msgid "%(sender_name)s created the offer %(object_name)s"
+msgstr "%(sender_name)s жаңа ұсыныс жасады"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new offer"
+msgid "%(sender_name)s created %(count)d offers"
+msgstr "%(sender_name)s жаңа ұсыныс жасады"
+
+#, python-format
+msgid "%(sender_name)s created a new offer"
+msgstr "%(sender_name)s жаңа ұсыныс жасады"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Жаңа ұсыныс: „%(object_name)s“ %(team_name)s де жасалды (әрі қарай)"
+
+msgid "One of your offers expired"
+msgstr "Сіздің ұсыныстарыңыздың біреуінің мерзімі аяқталды"
+
+#, fuzzy, python-format
+#| msgid "Offer \"%(object_name)s\" has expired."
+msgid "Your offer %(object_name)s expired"
+msgstr "„%(object_name)s“ ұсынысының мерзімі аяқталды."
+
+#, fuzzy, python-format
+#| msgid "One of your offers expired"
+msgid "%(count)d of your offers expired"
+msgstr "Сіздің ұсыныстарыңыздың біреуінің мерзімі аяқталды"
+
+msgid "Your offer has expired"
+msgstr "Ұсынысыңыздың мерзімі аяқталды"
+
+#, python-format
+msgid "Offer \"%(object_name)s\" has expired."
+msgstr "„%(object_name)s“ ұсынысының мерзімі аяқталды."
+
+msgid "A user commented on one of your offers"
+msgstr "Пайдаланушы сіздің ұсыныстарыңыздың біреуіне пікір қалдырды"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on your offer"
+msgid "%(sender_name)s commented on your offer %(object_name)s"
+msgstr "%(sender_name)s сіздің ұсынысыңызға пікір қалдырды"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your offers"
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
+msgstr[0] "%(sender_name)s сіздің ұсыныстарыңызға пікір қалдырды"
+
+#, python-format
+msgid "%(sender_name)s commented on your offer"
+msgstr "%(sender_name)s сіздің ұсынысыңызға пікір қалдырды"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your offers"
+msgstr "%(sender_name)s сіздің ұсыныстарыңызға пікір қалдырды"
+
+msgid "A user commented on an offer you were tagged in"
+msgstr "Пайдаланушы сіз белгіленген ұсынысқа пікір қалдырды"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on your offer"
+msgid "%(sender_name)s commented on the offer %(object_name)s"
+msgstr "%(sender_name)s сіздің ұсынысыңызға пікір қалдырды"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
+msgstr[0] ""
+
+#, fuzzy
+#| msgid "You created an offer"
+msgid "You were tagged in this offer"
+msgstr "Сіз ұсыныс жасадыңыз"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in"
+msgstr "%(sender_name)s сіз белгіленген ұсынысқа пікір қалдырды"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in in %(team_name)s"
+msgstr "%(team_name)s сіз белгілеген сөйлемге %(sender_name)s пікір қалдырды"
+
+msgid "A user created a new offer in a team you are following"
+msgstr "Пайдаланушы сіз бақылайтын топта жаңа шара жасады"
+
+#, python-format
+msgid "%(sender_name)s created a new offer in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s %(team_name)s ішінде жаңа ұсыныс жасады (сіз бақылап отырған)"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Жаңа ұсыныс: „%(object_name)s“ %(team_name)s де жасалды (сіз бақылап отырған)"
+
+msgid "A user updated an offer you are following"
+msgstr "Пайдаланушы сіз бақылап отырған ұсынысты жаңартты"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s updated an offer you are following"
+msgid "%(sender_name)s updated the offer %(object_name)s"
+msgstr "%(sender_name)s сіз бақылайтын ұсынысты жаңартты"
+
+msgid "You are following this offer"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s updated an offer you are following"
+msgstr "%(sender_name)s сіз бақылайтын ұсынысты жаңартты"
+
+#, python-format
+msgid "An offer you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Сіз бақылап отырған ұсыныс: %(team_name)s ішінде „%(object_name)s жаңартылды."
+
+msgid "A user commented on an offer you are following"
+msgstr "Пайдаланушы сіз бақылап отырған ұсынысқа пікір қалдырды"
+
+#, python-format
+msgid "%(sender_name)s commented on on an offer you are following"
+msgstr "%(sender_name)s сіз бақылайтын ұсынысқа пікір қалдырды"
+
+msgid "Current Offers"
+msgstr "Ағымдағы ұсыныстар"
+
+msgid "No current offers"
+msgstr "Ағымда ұсыныстар жоқ"
+
+msgid "Order Key"
+msgstr "Тапсырыс кілті"
+
+msgid "Looking for"
+msgstr "Іздейді"
+
+msgid "Offering"
+msgstr "Ұсыныс"
+
+msgid "Offer currently active?"
+msgstr "Қазіргі уақытта ұсыныс белсенді ме?"
+
+msgid "Offer Category"
+msgstr "Санат ұсыну"
+
+#, python-format
+msgid "Offer: %(offer)s (%(type)s)"
+msgstr "Ұсыныс: %(offer)s (%(type)s)"
 
 msgid "Back to Offers"
 msgstr "Шараларға оралу"
@@ -11933,10 +10651,101 @@ msgstr "ұсыныс жасады"
 msgid "There are no current offers"
 msgstr "Ағымда ұсыныстар жоқ"
 
+#, python-format
+msgid "Offer \"%(title)s\" was edited successfully."
+msgstr "„%(title)s“ сәтті өңделді."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be edited."
+msgstr "„%(title)s“ өңдеу мүмкін емес."
+
+#, python-format
+msgid "Offer \"%(title)s\" was added successfully."
+msgstr "„%(title)s“ сәтті қосылды."
+
+#, python-format
+msgid "Offer \"%(title)s\" was saved successfully, but is not active yet."
+msgstr "%(title)s“ сәтті сақталды, бірақ әлі белсенді емес."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be added."
+msgstr "„%(title)s“ қосу мүмкін емес."
+
+#, python-format
+msgid "Offer \"%(title)s\" was deleted successfully."
+msgstr "„%(title)s“ сәтті жойылды."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be deleted."
+msgstr "„%(title)s“ жою мүмкін емес."
+
+msgid "The offer you requested is no longer active. Sorry!"
+msgstr "Сіз сұраған ұсыныс енді қол жетімсіз. Кешіріңіз!"
+
+msgid "Invalid action for this offer. The request could not be completed!"
+msgstr "Осы ұсынысқа байланысты жарамсыз әрекеттер. Сұраныс орындалмады!"
+
+msgid "The offer is already active"
+msgstr "Ұсыныс қазірдің өзінде жарамды"
+
+msgid "The offer is already deactivated"
+msgstr "Ұсыныс өшірілді"
+
+msgid "The offer was deactivated successfully."
+msgstr "Ұсыныс сәтті өшірілді."
+
+msgid "The offer was reactivated successfully."
+msgstr "Ұсыныс сәтті қайта қосылды."
+
+msgid "The offer was activated successfully."
+msgstr "Ұсыныс сәтті іске қосылды."
+
+msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
+msgstr ""
+
+msgctxt "the_app"
+msgid "Chat"
+msgstr ""
+
+msgctxt "the_app"
+msgid "message"
+msgstr "xабарлама"
+
+msgid "Chat"
+msgstr ""
+
+msgid "Only Administrators may send a message to this project/group!"
+msgstr "Осы жобаға / топқа тек әкімшілер ғана хабарлама жібере алады!"
+
+msgid "Additional Recipients"
+msgstr "Қосымша алушылар"
+
+msgid "Undefined recipient."
+msgstr "Анықталмаған алушы."
+
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
 msgstr "Сіз форумға қатысқан жағдайда ғана хабарламалар мен файлдарды қоса аласыз. Оған мына жерде қосыла аласыз:"
 
 msgid "The legacy messaging app is no longer in use. You can view all of your old messages, but you cannot write new ones. Please use the new messaging app in the navigation from now on!"
+msgstr ""
+
+msgid "You can contact the group administration via this form. Write your message in the field below and than you will be redirected to the chat with group admins."
+msgstr ""
+
+msgid "You can contact the project administration via this form. Write your message in the field below and than you will be redirected to the chat with project admins."
+msgstr ""
+
+#, fuzzy
+msgid "What is your message?"
+msgstr "Хабарламалар"
+
+#, fuzzy
+#| msgid "Change it here..."
+msgid "Write it here"
+msgstr "Осы жерде өзгертіңіз."
+
+#, python-format
+msgid "Contact the administration of %(group_name)s:"
 msgstr ""
 
 #, python-format
@@ -12086,6 +10895,9 @@ msgstr "Жазу үшін"
 msgid "Reply"
 msgstr "Жауап беру"
 
+msgid "Recipient"
+msgstr "Алушы"
+
 msgid "Conversation"
 msgstr "Әңгіме"
 
@@ -12115,6 +10927,182 @@ msgstr "Жауап беру %(sender_name)s"
 #, python-format
 msgid "Reply to all %(adressee_count)s"
 msgstr "Барлық сұрақтарға жауап беріңіз %(adressee_count)s"
+
+msgid "Your reply could not be matched to an existing message."
+msgstr "Сіздің жауабыңыз бұрыннан бар хабарламамен сәйкестендіру мүмкін емес."
+
+msgid "An internal error occured."
+msgstr "Ішкі қате пайда болды."
+
+msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
+msgstr "Жауап жіберген электрондық пошта мекенжайы пайдаланушы тіркелгісімен байланысты емес. Тікелей жауаптарды тек сайтта тіркелген электрондық пошта мекен-жайынан жіберіңіз!"
+
+msgid "There was an error when processing your message text!"
+msgstr "Хабарлама мәтінін өңдеу кезінде қате пайда болды!"
+
+msgid "Your direct reply failed!"
+msgstr "Сіздің тікелей жауабыңыз болмады!"
+
+msgid "Select at least one object."
+msgstr "Кем дегенде бір элементті таңдаңыз."
+
+msgid "Messages or conversations successfully archived."
+msgstr "Хабарлар немесе әңгімелер сәтті мұрағатталды."
+
+msgid "Messages or conversations successfully deleted."
+msgstr "Хабарлар немесе сөйлесулер сәтті жойылды."
+
+msgid "Messages were marked as read."
+msgstr "Хабарлар оқылды деп белгіленген."
+
+msgid "Messages or conversations successfully recovered."
+msgstr "Хабарлар немесе сөйлесулер сәтті қалпына келтірілді."
+
+msgid "Notes"
+msgstr "Ескертпелер"
+
+msgctxt "the_app"
+msgid "note"
+msgstr "ескерте"
+
+msgid "A user commented on a news post"
+msgstr "Пайдаланушы жаңалық жазбасына пікір қалдырды"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post"
+msgstr "%(sender_name)s жаңалық жазбасына пікір қалдырды"
+
+msgid "A user commented on one of your news posts"
+msgstr "Пайдаланушы сіздің жаңалықтарыңыздың біріне пікір қалдырды"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
+msgid "%(sender_name)s commented on your news post %(object_name)s"
+msgstr "%(team_name)s хабарламаларыңызға %(sender_name)s пікір жазды."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
+msgstr[0] "%(team_name)s хабарламаларыңызға %(sender_name)s пікір жазды."
+
+#, python-format
+msgid "%(sender_name)s commented on your news post"
+msgstr "%(sender_name)s сіздің жаңалықтарыңызға пікір қалдырды"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts"
+msgstr "%(sender_name)s сіздің жаңалықтар жазбаңыздың біріне пікір қалдырды"
+
+msgid "A user commented on a news posts you commented in"
+msgstr "Пайдаланушы сіз сайтта пікір қалдырған жаңалықтар жазбаларына пікір қалдырды"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on a news post you commented in"
+msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
+msgstr "%(sender_name)s сіз пікір жазған жаңалыққа пікір қалдырды"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on a news post you commented in"
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
+msgstr[0] "%(sender_name)s сіз пікір жазған жаңалыққа пікір қалдырды"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in"
+msgstr "%(sender_name)s сіз пікір жазған жаңалыққа пікір қалдырды"
+
+msgid "A user created a news post"
+msgstr "Пайдаланушы жаңалық жазбасын жасады"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new news post"
+msgid "%(sender_name)s created the news post %(object_name)s"
+msgstr "%(sender_name)s жаңа жаңалық жазбасын жасады"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new news post"
+msgid "%(sender_name)s created %(count)d news posts"
+msgstr "%(sender_name)s жаңа жаңалық жазбасын жасады"
+
+#, python-format
+msgid "%(sender_name)s created a new news post"
+msgstr "%(sender_name)s жаңа жаңалық жазбасын жасады"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s:"
+msgstr "%(sender_name)s %(team_name)s тобында жазба қалдырды:"
+
+msgid "A user created a news post in a team you are following"
+msgstr "Пайдаланушы сіз бақылайтын топта пост қалдырды"
+
+#, python-format
+msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s %(team_name)s ішінде жаңа пост қалдырды (сіз бақылайтын)"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
+msgstr "%(sender_name)s %(team_name)s де (сіз бақылайтын) пост қалдырды"
+
+msgid "A user updated a news post"
+msgstr "Пайдаланушы өзіңің постын жаңартты"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s updated a news post you are following"
+msgid "%(sender_name)s updated the news post %(object_name)s"
+msgstr "%(sender_name)s сіз бақылайтын постты жаңартты"
+
+msgid "You are following this news post"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s updated a news post you are following"
+msgstr "%(sender_name)s сіз бақылайтын постты жаңартты"
+
+#, python-format
+msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
+msgstr "Сіз бақылайтын %(sender_name)s қалдырған пост %(team_name)s тобына жаңартылды:"
+
+#, fuzzy
+#| msgid "A user commented on a news posts you are following"
+msgid "A user commented on a news post you are following"
+msgstr "Пайдаланушы сіз бақылайтын постқа пікір қалдырды"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
+msgid "%(sender_name)s commented on the news post %(object_name)s"
+msgstr "%(team_name)s хабарламаларыңызға %(sender_name)s пікір жазды."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
+msgstr[0] "%(team_name)s хабарламаларыңызға %(sender_name)s пікір жазды."
+
+#, python-format
+msgid "%(sender_name)s commented on a news posts you are following"
+msgstr "%(sender_name)s сіз бақылайтын постқа пікір қалдырды"
+
+msgid "No news"
+msgstr "Жаңалықтар жоқ"
+
+msgid "Write a news post"
+msgstr "Жаңалық жазба жазыңыз"
+
+msgid "News stream"
+msgstr "Жаңалықтар ағыны"
+
+msgid "Popularity"
+msgstr "Танымалдық"
+
+msgid "Facebook Share"
+msgstr "Facebook-те бөлісіңіз"
+
+msgid "Note Item"
+msgstr "Жазба"
+
+msgid "Note Items"
+msgstr "Жазбалар"
 
 msgctxt "the_verb"
 msgid "Comment"
@@ -12290,6 +11278,137 @@ msgctxt "This appears next to new items in the timeline, as in '<Jane> created a
 msgid "added a post"
 msgstr "хабарлама қосты"
 
+msgid "Your news post was added successfully."
+msgstr "Сіздің жаңалықтарыңыз сәтті қосылды."
+
+msgid "Your news post was deleted successfully."
+msgstr "Сіздің жаңалықтарыңыз сәтті жойылды."
+
+msgid "Your news post was edited successfully."
+msgstr "Сіздің жаңалықтарыңыз сәтті өңделді."
+
+#, fuzzy
+#| msgid "You are getting this notification because you are an administrator of this portal."
+msgid "You are seeing this alert because you created this content."
+msgstr "Сіз осы хабарландыруды осы порталдың әкімшісі болғандықтан аласыз."
+
+#, fuzzy
+#| msgid "You are getting this notification because you are an administrator of this project or group."
+msgid "You are seeing this alert because you are following the item's project or group."
+msgstr "Сіз осы жобаны немесе топтың әкімшісісіз болғандықтан бұл ескертуді аласыз."
+
+#, fuzzy
+#| msgid "You are getting this notification because you are an administrator of this portal."
+msgid "You are seeing this alert because you are following this item."
+msgstr "Сіз осы хабарландыруды осы порталдың әкімшісі болғандықтан аласыз."
+
+msgctxt "the_app"
+msgid "notifications"
+msgstr "… хабарламалар …"
+
+#, python-format
+msgid "Your daily digest for %(portal_name)s"
+msgstr "Сіздің %(portal_name)s үшін күнделікті дайджестіңіз"
+
+msgid "This is what happened during the last day!"
+msgstr "Бұл соңғы күнде болды!"
+
+#, python-format
+msgid "Your weekly digest for %(portal_name)s"
+msgstr "Сіздің %(portal_name)s үшін апта сайынғы дайджестіңіз"
+
+msgid "This is what happened during the last week!"
+msgstr "Міне, өткен аптада болған оқиға!"
+
+msgctxt "notification frequency"
+msgid "Never"
+msgstr "Хабарландыру жиілігі Ешқашан"
+
+msgctxt "notification frequency"
+msgid "Immediately"
+msgstr "Хабарландыру жиілігі бірден"
+
+msgctxt "notification frequency"
+msgid "Daily"
+msgstr "Хабарлама жиілігі күнделікті"
+
+msgctxt "notification frequency"
+msgid "Weekly"
+msgstr "Хабарландыру жиілігі апта сайын"
+
+msgid "Notification Preference for User"
+msgstr "Хабарландырулар Пайдаланушының таңдауы"
+
+msgid "Notification Preference"
+msgstr "Хабарландыруды қалау"
+
+msgid "Multi Notification ID"
+msgstr "Бірнеше ескертулердің идентификаторы"
+
+msgid "Multi Notification Preference"
+msgstr "Бірнеше хабарландырулар үшін параметрлер"
+
+msgid "Multi Notification Preferences"
+msgstr "Хабарландырудың бірнеше нұсқалары"
+
+msgid "User who caused this notification event"
+msgstr "Бұл хабарландыруға қоңырау шалған пайдаланушы"
+
+msgid "Audience"
+msgstr "Көрермендер"
+
+msgid "Owner of the alert"
+msgstr ""
+
+msgid "Alert Reason key"
+msgstr ""
+
+#, fuzzy
+#| msgid "User who caused this notification event"
+msgid "Last user who caused this notification event"
+msgstr "Бұл хабарландыруға қоңырау шалған пайдаланушы"
+
+msgid "Alert State"
+msgstr ""
+
+msgid "You are following this content or its Project or Group"
+msgstr ""
+
+msgid "All notifications"
+msgstr "Барлық хабарландырулар"
+
+msgid "No notifications"
+msgstr "Хабарландырулар жоқ"
+
+msgid "For content that I am following, I wish to receive notification emails"
+msgstr "Мен бақылайтын мазмұн үшін электрондық пошта хабарландыруларын алғым келеді"
+
+msgid "You are getting this notification because you are subscribed to these kinds of events in your project or group."
+msgstr "Сіз өз жобаңыздағы немесе тобыңыздағы оқиғалардың осы түріне жазылғаныңыз үшін осы хабарландыруды аласыз."
+
+msgid "You are getting this notification because you are an administrator of this project or group."
+msgstr "Сіз осы жобаны немесе топтың әкімшісісіз болғандықтан бұл ескертуді аласыз."
+
+msgid "You are getting this notification because you are an administrator of this portal."
+msgstr "Сіз осы хабарландыруды осы порталдың әкімшісі болғандықтан аласыз."
+
+msgid "You are getting this email because you are subscribed to one or more daily notifications."
+msgstr "Сіз бұл электрондық хабарды күнделікті бір немесе бірнеше хабарландыруларға жазылғаныңыз үшін аласыз."
+
+msgid "You are getting this email because you are subscribed to one or more weekly notifications."
+msgstr "Сіз бұл электрондық хабарды аптасына бір немесе бірнеше хабарландыруларға жазылғаныңыз үшін аласыз."
+
+msgid "New item"
+msgstr "Жаңа элемент"
+
+#, fuzzy, python-format
+#| msgid "Your daily digest for %(portal_name)s"
+msgid "View on %(portal_name)s"
+msgstr "Сіздің %(portal_name)s үшін күнделікті дайджестіңіз"
+
+msgid "Untitled"
+msgstr "Атаусыз"
+
 msgid "Select which notifications you would like to receive for each group or project you are involved in."
 msgstr "Сіз қатысатын әр топ немесе жоба үшін алғыңыз келетін хабарландыруларды таңдаңыз."
 
@@ -12346,6 +11465,30 @@ msgstr "Зауыттық параметрлерді қалпына келтір�
 
 msgid "This will reset all of your notification preferences to their default setting. Are you sure you wish to do that?"
 msgstr "Бұл жағдайда барлық хабарландыру параметрлері әдепкі мәндерге қайтарылады. Бұл әрекетті жасағыңыз келе ме?"
+
+msgid "Your notification preferences were updated successfully."
+msgstr "Сіздің хабарландыру параметрлеріңіз сәтті жаңартылды."
+
+msgid "Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!"
+msgstr ""
+
+msgid "Your notifications preferences were reset to default!"
+msgstr "Сіздің хабарландыру параметрлеріңіз зауыттық күйге келтірілді!"
+
+msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
+msgstr ""
+
+#, fuzzy
+msgid "Successfully signed in as {}."
+msgstr "Пайдаланушы тіркелгісін жою"
+
+#, fuzzy
+msgid "Successfully connected account."
+msgstr "Пайдаланушы тіркелгісін жою"
+
+#, fuzzy
+msgid "Successfully removed connection."
+msgstr "Пайдаланушы тіркелгісін жою"
 
 #, fuzzy
 msgid "Set password"
@@ -12469,11 +11612,6 @@ msgstr ""
 msgid " This data we received from your WECHANGE account"
 msgstr ""
 
-#, fuzzy
-#| msgid "Last name"
-msgid "last name"
-msgstr "Тегі"
-
 msgid "Your Avatar and other settings from your profile were also copied."
 msgstr ""
 
@@ -12594,6 +11732,93 @@ msgstr ""
 #, fuzzy, python-format
 msgid "Login with %(provider_id)s"
 msgstr "to %(portal_name)s"
+
+#, fuzzy
+msgctxt "the_app"
+msgid "organization"
+msgstr "Шақырулар"
+
+#, fuzzy
+msgid "Organization membership"
+msgstr "Шақырулар"
+
+#, fuzzy
+msgid "Organization memberships"
+msgstr "Шақырулар"
+
+#, fuzzy
+#| msgid "Team Invite for Unregistered User"
+msgid "Organization Invite for Unregistered User"
+msgstr "Тіркелмеген пайдаланушыға топтық шақыру"
+
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Organization Invites for Unregistered Users"
+msgstr "Тіркелмеген Пайдаланушыларға Топтық шақырмалар"
+
+#, fuzzy
+msgid "Civil society organization"
+msgstr "Шақырулар"
+
+msgid "Company (commercial)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Public voting"
+msgid "Public institution"
+msgstr "Ашық дауыс беру"
+
+#, fuzzy
+#| msgid "Other teams"
+msgid "Other"
+msgstr "Басқа топтар"
+
+#, fuzzy
+msgid "Name of the organization"
+msgstr "Орынды жою"
+
+#, fuzzy
+msgid "Organization type"
+msgstr "Шақырулар"
+
+#, fuzzy
+#| msgid "Logout"
+msgid "Logo"
+msgstr "Шығу"
+
+#, fuzzy
+#| msgid "Email address"
+msgid "Email Address"
+msgstr "Электрондық пошта"
+
+#, fuzzy
+msgid "Cosinnus Organization"
+msgstr "Шақырулар"
+
+#, fuzzy
+msgid "Cosinnus Organizations"
+msgstr "Шақырулар"
+
+msgid "CosinnusOrganizationSocialMedia"
+msgstr ""
+
+#, fuzzy
+#| msgid "CosinnusLocation"
+msgid "CosinnusOrganizationLocation"
+msgstr "CosinnusОрналасу"
+
+#, fuzzy
+#| msgid "CosinnusLocations"
+msgid "CosinnusOrganizationLocations"
+msgstr "CosinnusОрналасулар"
+
+#, fuzzy
+msgid "Organization group"
+msgstr "Шақырулар"
+
+#, fuzzy
+msgid "Organization groups"
+msgstr "Шақырулар"
 
 #, fuzzy, python-format
 msgid "%(team_name)s - Assigned projects/groups"
@@ -12764,10 +11989,279 @@ msgstr ""
 msgid "This organization should be made publicly findable via other platforms."
 msgstr "Бұл жоба көпшілік назарына ұсынылады!"
 
+msgid "Is your organization open for cooperation in the funding program?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Organization is open for future projects."
+msgstr "Тіркелмеген Пайдаланушыларға Топтық шақырмалар"
+
 #, fuzzy, python-format
 #| msgid "Users in team %(group)s"
 msgid "Users in organization %(group)s"
 msgstr "%(group)s пайдаланушылар"
+
+#, fuzzy, python-format
+msgid "Project/group %(name)s had already requested and has now been accepted."
+msgstr "Сіз әлдеқайда “%(team_name)s” сайтына шақырылып, қазір бірден мүше болдыңыз!"
+
+#, fuzzy, python-format
+#| msgid "User %(username)s was successfully invited!"
+msgid "Project/group %(name)s was successfully invited."
+msgstr "Қолданушы %(username)s сәтті шақырылды!"
+
+#, fuzzy, python-format
+#| msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
+msgid "Your join request was withdrawn from organization “%(name)s” successfully."
+msgstr "Сіздің %(team_type)s “%(team_name)s” қосылуға сұрауыңыз сәтті алынып тасталды."
+
+#, fuzzy, python-format
+msgid "You have declined the invitation to organization “%(name)s”."
+msgstr "Сіз %(team_type)s “%(team_name)s” мүшесі емессіз."
+
+#, fuzzy, python-format
+#| msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
+msgid "Your project/group is now assigned to the organization “%(name)s”. Welcome!"
+msgstr "Қазір сіз %(team_type)s “%(team_name)s” мүшесісіз. Қош келдіңіз!"
+
+#, fuzzy, python-format
+#| msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
+msgid "Your request was withdrawn from organization \"%(name)s\" successfully."
+msgstr "Сіздің %(team_type)s “%(team_name)s” қосылу сұрауыңыз сәтті алынды."
+
+#, fuzzy, python-format
+#| msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
+msgid "Your invitation to project/group \"%(name)s\" was withdrawn successfully."
+msgstr "Сіздің “%(username)s” пайдаланушысына шақыруыңыз сәтті алынды."
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Project/group \"%(name)s\" is no longer assigned."
+msgstr "“%(username)s” пайдаланушы енді мүше емес."
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can create Organizations! You can either create a Project, or write a message to one of the administrators to create a Organization for you. Below you can find a listing of all administrators."
+msgstr "Кешіріңіз, тек портал әкімшілері Топтар жасай алады! Сіз Жобаны құра аласыз немесе сіз үшін Топ құру үшін әкімшілердің біріне хабарлама жаза аласыз. Төменде сіз барлық әкімшілердің тізімін таба аласыз."
+
+#, fuzzy, python-format
+#| msgid "Event \"%(title)s\" was edited successfully."
+msgid "Organization \"%(name)s\" was created successfully."
+msgstr "„%(title)s“ шарасы сәтті өңделді."
+
+#, fuzzy
+#| msgid "Your idea was deleted successfully."
+msgid "Your organization was deleted successfully."
+msgstr "Сіздің идеяңыз сәтті жойылды."
+
+msgctxt "the_app"
+msgid "poll"
+msgstr "сауалнама"
+
+msgid "A user created a new poll"
+msgstr "Пайдаланушы жаңа сауалнама жасады"
+
+#, python-format
+msgid "%(sender_name)s created the poll %(object_name)s"
+msgstr "%(sender_name)s %(object_name)s ішінде жаңа сауалнама жасады"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d polls"
+msgstr "%(sender_name)s %(count)d polls жасады"
+
+#, python-format
+msgid "%(sender_name)s created a new poll"
+msgstr "%(sender_name)s жаңа сауалнама жасады"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Жаңа сауалнамас „%(object_name)s“ %(team_name)s ішінде жасалды."
+
+msgid "A poll you voted on was completed"
+msgstr "Сіз дауыс берген сауалнама аяқталды"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
+msgstr "%(sender_name)s сіз дауыс берген %(object_name)s сауалнаманы аяқтады"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls you voted on"
+msgstr "%(sender_name)s сіз дауыс берген %(count)d polls сауалнаманы аяқтады"
+
+#, python-format
+msgid "%(sender_name)s completed the poll"
+msgstr "%(sender_name)s сауалнаманы аяқтады"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "“%(object_name)s” сауалнамасы %(team_name)s ішінде аяқталды."
+
+msgid "A user commented on one of your polls"
+msgstr "Пайдаланушы сіздің сауалнамалырыңздың біріне комментарий қалдырды"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll %(object_name)s"
+msgstr "%(sender_name)s сіздің %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
+msgstr[0] "%(sender_name)s және %(count_minus_one)d басқа сіздің сауалнама %(object_name)s пікір қалдырды"
+msgstr[1] "%(sender_name)s және %(count_minus_one)d басқалар сіздің сауалнама %(object_name)s пікір қалдырды"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll"
+msgstr "%(sender_name)s сіздің сауалнамаға пікір қалдырды"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls"
+msgstr "%(sender_name)s сіздің сауалнамаға пікір қалдырды"
+
+msgid "A user commented on a poll you were tagged in"
+msgstr "Пайдаланушы сіз белгіленген сауалнамалардың біріне комментарий қалдырды"
+
+#, python-format
+msgid "%(sender_name)s commented on the poll %(object_name)s"
+msgstr "%(sender_name)s %(object_name)s сауалнамасына пікір қалдырды"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
+msgstr[0] "%(sender_name)s және %(count_minus_one)d басқа сіздің сауалнама %(object_name)s пікір қалдырды"
+msgstr[1] "%(sender_name)s және %(count_minus_one)d басқалар сіздің сауалнама %(object_name)s пікір қалдырды"
+
+msgid "You were tagged in this poll"
+msgstr "Сізді осы сауалнамада белгіледі"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in"
+msgstr "%(sender_name)s сіз белгіленген сауалнамалардың біріне пікір қалдырды"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s сіз белгіленген %(team_name)s ішінде сауалнамалардың біріне пікір қалдырды"
+
+msgid "A user commented on an poll you voted in"
+msgstr "Пайдаланушы сіз дауыс берген сауалнамаға пікір қалдырды"
+
+msgid "You voted on this poll"
+msgstr "Сіз бұл сауалнамада дауыс бердіңіз"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in"
+msgstr "%(sender_name)s сіз қатысқан сауалнамаға пікір қалдырды"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
+msgstr "%(sender_name)s сіз қатысқан сауалнамаға %(team_name)s ішінде пікір қалдырды"
+
+msgid "A user created a new poll in a team you are following"
+msgstr "Пайдаланушы сіз бақылайтын топта жаңа сауалнама жасады"
+
+#, python-format
+msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s %(team_name) s ішінде (сіз бақылап отырған) жаңа сауалнама жасады"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Жаңа сауалнама: „%(object_name)s“ %(team_name)s де (сіз бақылап отырған) жасалды."
+
+msgid "A user updated a poll you are following"
+msgstr "Пайдаланушы сіз қадағалайтын сауалнаманы жаңартты"
+
+#, python-format
+msgid "%(sender_name)s updated the poll %(object_name)s"
+msgstr "%(sender_name)s %(object_name)s ішінде сауалнаманы жаңартты"
+
+msgid "You are following this poll"
+msgstr "Сіз осы сауалнаманы бақылап отырсыз"
+
+#, python-format
+msgid "%(sender_name)s updated a poll you are following"
+msgstr "Сіз бақылап жатқан сауалнаманы %(sender_name)s жаңартты"
+
+#, python-format
+msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Сіз бақылап отырған сауалнама: %(team_name)s ішінде „%(object_name)s жаңартылды."
+
+msgid "A poll you are following was completed"
+msgstr "Сіз дауыс берген сауалнама аяқталды"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s"
+msgstr "%(sender_name)s %(object_name)s сауалнамасын аяқтады"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls"
+msgstr "%(sender_name)s %(count)d polls сауалнамасын аяқтады"
+
+#, python-format
+msgid "%(sender_name)s completed the poll you are following"
+msgstr "Сіз бақылап жатқан сауалнаманы %(sender_name)s аяқтады"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
+msgstr "Сіз бақылап отырған сауалнама: %(team_name)s ішінде „%(object_name)s аяқталды."
+
+msgid "A user commented on one a poll you are following"
+msgstr "Пайдаланушы сіз бақылайтын сауалнамаға пікір қалдырды"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you are following"
+msgstr "Сіз бақылайтын сауалнамаға %(sender_name)s пікір қалдырды"
+
+msgid "Current Polls"
+msgstr "Ағымдағы сауалнамалар"
+
+msgid "No current polls"
+msgstr "Ағымда сауалнамалар жоқ"
+
+msgid "You must write a description for this poll option!"
+msgstr "Осы сауалнамаға сипаттама жазу керек!"
+
+msgid "Voting closed"
+msgstr "Дауыс беру жабылды"
+
+msgid "Poll archived"
+msgstr "Сауалнама мұрағатталды"
+
+msgid "Multiple options votable"
+msgstr "Бірнеше опцияға дауыс беруге болады"
+
+msgid "Does this poll allow users to vote on multiple options or just decide for one?"
+msgstr "Бұл сауалнама пайдаланушыларға бірнеше нұсқалар бойынша дауыс беруге мүмкіндік бере ме, әлде тек біреуіне ме?"
+
+msgid "\"Maybe\" option enabled"
+msgstr "«Мүмкін» опциясы қосылған"
+
+msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
+msgstr "Мүмкін опция қосылған ба? Егер ``multiple_votes==False`` болса, еленбейді және «Жалған» күйіне келтіріледі"
+
+msgid "Anyone can vote"
+msgstr "Әркім дауыс бере алады"
+
+msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
+msgstr "Егер шын болса, осы сауалнаманы көретін кез-келген адам оған дауыс бере алады. Жалған болса, тек топ мүшелері жасай алады."
+
+msgid "Show voters"
+msgstr "Дауыс берушілерді көрсету"
+
+msgid "If true, display a list of which user voted for each option."
+msgstr "Егер «шын» болса, әр опция үшін қай пайдаланушы дауыс бергенін көрсетіңіз."
+
+msgid "Winning Option"
+msgstr "Жеңу опциясы"
+
+#, python-format
+msgid "Poll: %(poll)s (%(state)s)"
+msgstr "Сауалнама: %(poll)s (%(state)s)"
+
+msgid "Poll Option"
+msgstr "Сауалнама варианты"
+
+msgid "Poll Options"
+msgstr "Сауалнама варианттары"
 
 msgid "Poll choice"
 msgstr "Сауалнама таңдауы"
@@ -13118,6 +12612,85 @@ msgstr "сауалнаманы жасады"
 msgid "There are no polls yet"
 msgstr "Ағымда сауалнамалар жоқ"
 
+#, python-format
+msgid "Poll \"%(title)s\" was edited successfully."
+msgstr "Сауалнама „%(title)s“ сәтті өңделді."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be edited."
+msgstr "„%(title)s“ өңдеу мүмкін емес."
+
+#, python-format
+msgid "Poll \"%(title)s\" was added successfully."
+msgstr "„%(title)s“ сәтті қосылды."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be added."
+msgstr "Todo „%(title)s“ қосу мүмкін емес."
+
+msgid "You should define at least one poll option!"
+msgstr "Сіз кем дегенде бір сауалнаманы анықтауыңыз керек!"
+
+msgid "This poll is archived and cannot be edited anymore!"
+msgstr "Бұл сауалнама мұрағатталған және енді өзгерту мүмкін емес!"
+
+#, python-format
+msgid "Poll \"%(title)s\" was deleted successfully."
+msgstr "„%(title)s“ сәтті жойылды."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be deleted."
+msgstr "„%(title)s“ сауалнамасын жою мүмкін емес."
+
+msgid "The voting phase for this poll is over. You cannot vote for it any more."
+msgstr "Осы сауалнама бойынша дауыс беру кезеңі аяқталды. Енді сіз оған дауыс бере алмайсыз."
+
+msgid "In this poll you must vote for exactly one item!"
+msgstr "Бұл сауалнамада сіз дәл бір мәселе үшін дауыс беруіңіз керек!"
+
+msgid "Invalid action for this poll. The request could not be completed!"
+msgstr "Бұл сауалнама үшін жарамсыз әрекет. Сұрау орындалмады!"
+
+msgid "This action is not permitted for this poll at this stage!"
+msgstr "Бұл сауалнама үшін жарамсыз әрекет. Сұрау орындалмады!"
+
+msgid "The poll was closed successfully."
+msgstr "Дауыс беру жабылды."
+
+msgid "The poll was re-opened successfully."
+msgstr "Сауалнама қайтадан ашылды."
+
+msgid "The poll was archived successfully."
+msgstr "Сауалнама сәтті архивтелді."
+
+msgid "Stream"
+msgstr "Ағынды жою"
+
+msgctxt "the_app"
+msgid "stream"
+msgstr "менің ағындарым"
+
+msgid "My Streams"
+msgstr "Менің ағындарым"
+
+msgid "Streams"
+msgstr "Ағындар"
+
+msgid "Models"
+msgstr "Модельдер"
+
+msgid "Portal IDs"
+msgstr "Портал идентификаторлары"
+
+msgid "Last seen"
+msgstr "Соңғы қаралған"
+
+msgid "Special Stream"
+msgstr "Арнайы ағым"
+
+msgid "Special Group IDs"
+msgstr "Арнайы топ идентификаторлары"
+
 msgid "Public Stream"
 msgstr "Менің ағындарым"
 
@@ -13172,6 +12745,283 @@ msgstr "Авторлар, тегтер немесе басқа белгілер 
 
 msgid "Filter by item types?"
 msgstr "Түрі бойынша сүзу керек пе?"
+
+msgid "You do not have permission to access this stream."
+msgstr "Бұл ағынға кіруге рұқсатыңыз жоқ."
+
+msgid "Your stream was added successfully."
+msgstr "Ағын сәтті қосылды."
+
+msgid "Your stream was updated successfully."
+msgstr "Бұл параққа кіру үшін жүйеге кіріңіз."
+
+msgid "Your stream was deleted successfully."
+msgstr "Ағын сәтті жойылды."
+
+msgid "You cannot delete the default stream!"
+msgstr "Әдепкі ағынды жою мүмкін емес!"
+
+# The Cosinnus App Name
+msgctxt "the_app"
+msgid "todo"
+msgstr "the_app todo"
+
+msgid "A user created a new todo"
+msgstr "Пайдаланушы жаңа тапсырма жасады"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new todo"
+msgid "%(sender_name)s created the todo %(object_name)s"
+msgstr "%(sender_name)s жаңа толтыру жасады"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new todo"
+msgid "%(sender_name)s created %(count)d todos"
+msgstr "%(sender_name)s жаңа толтыру жасады"
+
+#, python-format
+msgid "%(sender_name)s created a new todo"
+msgstr "%(sender_name)s жаңа толтыру жасады"
+
+#, python-format
+msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Жаңа тапсырма: „%(object_name)s“ %(team_name)s ішінде жасалды."
+
+msgid "A todo was assigned to me"
+msgstr "Маған жаңа тапсырма жүктелді"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s assigned the todo %(object_name)s to you"
+msgstr "%(sender_name)s сізге жаңа тапсырма берді"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s assigned %(count)d todos to you"
+msgstr "%(sender_name)s сізге жаңа тапсырма берді"
+
+#, python-format
+msgid "%(sender_name)s assigned a todo to you"
+msgstr "%(sender_name)s сізге жаңа тапсырма берді"
+
+msgid "A todo I created was completed"
+msgstr "Мен жасаған жаңа тапсырма аяқталды"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed your todo"
+msgid "%(sender_name)s completed the todo %(object_name)s"
+msgstr "%(sender_name)s тапсырманы аяқтады"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s completed your todo"
+msgid "%(sender_name)s completed %(count)d todos"
+msgstr "%(sender_name)s тапсырманы аяқтады"
+
+#, fuzzy
+#| msgid "You created a todo"
+msgid "You created this todo"
+msgstr "Сіз todo жасадыңыз"
+
+#, python-format
+msgid "%(sender_name)s completed your todo"
+msgstr "%(sender_name)s тапсырманы аяқтады"
+
+#, python-format
+msgid "%(sender_name)s completed one of your todos"
+msgstr "%(sender_name)s сіздің тапсырмаларыңыздың бірін аяқтады"
+
+msgid "A user commented on one of your todos"
+msgstr "Пайдаланушы сіздің тапсырмаларыңыздың біріне түсініктеме берді"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s commented on your todo %(object_name)s"
+msgstr "%(sender_name)s %(team_name)s ішінде сіздің бір тобыңызға түсініктеме берді."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
+msgstr[0] "%(sender_name)s %(team_name)s ішінде сіздің бір тобыңызға түсініктеме берді."
+msgstr[1] "%(sender_name)s %(team_name)s ішінде сіздің бір тобыңызға түсініктеме берді."
+
+#, python-format
+msgid "%(sender_name)s commented on your todo"
+msgstr "%(sender_name)s сіздің тапсырмаңызға түсініктеме берді"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your todos"
+msgstr "%(sender_name)s сіздің тапсырмаларыңыздың біреуіне түсініктеме берді"
+
+msgid "A user commented on a todo you were tagged in"
+msgstr "Пайдаланушы сіз белгіленген тапсырмаға түсініктеме берді"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgstr "%(sender_name)s %(team_name)s ішінде сіздің бір тобыңызға түсініктеме берді."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
+msgstr[0] "%(sender_name)s %(team_name)s ішінде сіздің бір тобыңызға түсініктеме берді."
+msgstr[1] "%(sender_name)s %(team_name)s ішінде сіздің бір тобыңызға түсініктеме берді."
+
+#, fuzzy
+#| msgid "You created a todo"
+msgid "You were tagged in this todo"
+msgstr "Сіз todo жасадыңыз"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in"
+msgstr "%(sender_name)s сіз белгіленген тапсырмаға түсініктеме берді"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s сіз белгіленген тапсырмаға түсініктеме берді %(team_name)s"
+
+msgid "A user commented on a todo you were assigned to"
+msgstr "Пайдаланушы сіз тағайындалған тапсырмаға түсініктеме берді"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
+msgstr "%(sender_name)s %(team_name)s ішінде тағайындалған тобыңыздың біріне түсініктеме берді"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
+msgstr[0] "%(sender_name)s %(team_name)s ішінде тағайындалған тобыңыздың біріне түсініктеме берді"
+msgstr[1] "%(sender_name)s %(team_name)s ішінде тағайындалған тобыңыздың біріне түсініктеме берді"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos"
+msgstr "%(sender_name)s тағайындалған тапсырмаларыңыздың біріне түсініктеме берді"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgstr "%(sender_name)s %(team_name)s ішінде тағайындалған тобыңыздың біріне түсініктеме берді"
+
+msgid "A user updated a todo you are following"
+msgstr "Пайдаланушы сіз қадағалайтын тапсырманы жаңартты"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s updated a todo you are following"
+msgid "%(sender_name)s updated the todo %(object_name)s"
+msgstr "%(sender_name)s сіз бақылайтын жаңартуды жаңартты"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
+msgstr[0] "%(sender_name)s %(team_name)s ішінде тағайындалған тобыңыздың біріне түсініктеме берді"
+msgstr[1] "%(sender_name)s %(team_name)s ішінде тағайындалған тобыңыздың біріне түсініктеме берді"
+
+#, fuzzy
+#| msgid "You are not allowed to assign this Todo entry."
+msgid "You are following this todo"
+msgstr "Бұл тапсырманы тағайындауға сізге рұқсат жоқ."
+
+#, python-format
+msgid "%(sender_name)s updated a todo you are following"
+msgstr "%(sender_name)s сіз бақылайтын жаңартуды жаңартты"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Сіз мынаны қадағалап отырсыз: „%(object_name)s“ %(team_name)s ішінде жаңартылды."
+
+msgid "A user reassigned a todo you are following"
+msgstr "Пайдаланушы сіз бақылайтын тобын қайта тағайындады"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgstr "%(sender_name)s сізге жаңа тапсырма берді"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s assigned a todo to you"
+msgid "%(sender_name)s reassigned %(count)d todos"
+msgstr "%(sender_name)s сізге жаңа тапсырма берді"
+
+#, python-format
+msgid "%(sender_name)s reassigned a todo you are following"
+msgstr "%(sender_name)s сіз қадағалап отырды"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
+msgstr "Сіз мынаны қадағалап отырсыз: „%(object_name)s“ %(team_name)s ішінде қайта тағайындалды."
+
+msgid "A user completed a todo you are following"
+msgstr "Пайдаланушы сіз бақылайтын толтыру аяқтады"
+
+#, python-format
+msgid "%(sender_name)s completed a todo you are following"
+msgstr "%(sender_name)s сіз қадағалап жатқан әрекетті аяқтады"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Сіз мынаны қадағалап отырсыз: „%(object_name)s“ %(team_name)s де аяқталды."
+
+msgid "A user commented on a todo you are following"
+msgstr "Пайдаланушы сіз бақылайтын тобыңызға түсініктеме берді"
+
+#, python-format
+msgid "%(sender_name)s commented on on a todo you are following"
+msgstr "%(sender_name)s сіз қадағалап жатқан пікірге түсініктеме берді"
+
+msgid "My Todos"
+msgstr "Менің міндеттерім"
+
+msgid "No todos"
+msgstr "Тапсырмалар жоқ"
+
+msgid "Open"
+msgstr "Ашық"
+
+msgid "Completed"
+msgstr "Орындалды"
+
+msgid "Assigned To"
+msgstr "Тағайындалған"
+
+msgid "Priority"
+msgstr "Басымдық"
+
+msgid "Due date"
+msgstr "Мерзімі"
+
+msgid "Soonest Due"
+msgstr "Жылдам орындау"
+
+msgid "You are not allowed to assign this Todo entry."
+msgstr "Бұл тапсырманы тағайындауға сізге рұқсат жоқ."
+
+msgid "Later"
+msgstr "Кейінірек"
+
+msgid "Normal"
+msgstr "Жарайды"
+
+msgid "Important"
+msgstr "Маңызды"
+
+msgid "Due by"
+msgstr "Жасау керек"
+
+msgid "Completed on"
+msgstr "Аяқталды"
+
+msgid "Completed by"
+msgstr "Аяқтаған"
+
+msgid "Assigned to"
+msgstr "Тағайындалған"
+
+#, python-format
+msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
+msgstr "„%(todo_name)s“ Todo %(assignee_name)s тағайындалды"
 
 #, python-format
 msgid ""
@@ -13482,6 +13332,254 @@ msgstr "Сізге тағайындалған тапсырмалар жоқ"
 
 msgid "Tasks are shown only for logged in users"
 msgstr "Тапсырмалар тек кірген пайдаланушылар үшін көрсетіледі"
+
+#, python-format
+msgid "Todo \"%(title)s\" was added successfully."
+msgstr "Todo „%(title)s“ сәтті қосылды."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be added."
+msgstr "Todo „%(title)s“ қосу мүмкін емес."
+
+msgid "You were trying to add a todo to a todolist that does not exist!"
+msgstr "Сіз жоқ тодолистке тодовик қосқыңыз келді!"
+
+#, python-format
+msgid "Todo \"%(title)s\" was edited successfully."
+msgstr "Todo „%(title)s“ сәтті өңделді."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be edited."
+msgstr "Todo „%(title)s“ редакцияланбады."
+
+#, python-format
+msgid "Todo \"%(title)s\" was deleted successfully."
+msgstr "Todo „%(title)s“ сәтті жойылды."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be deleted."
+msgstr "Todo „%(title)s“ жойылмады."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned successfully."
+msgstr "Todo „%(title)s“ сәтті тағайындалды."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned."
+msgstr "Todo „%(title)s“ тағайындау мүмкін емес."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned to You successfully."
+msgstr "Todo „%(title)s“ сізге сәтті тағайындалды."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned to You."
+msgstr "Todo „%(title)s“ сізге тағайындалмады."
+
+#, python-format
+msgid "Todo \"%(title)s\" was unassigned successfully."
+msgstr "Todo „%(title)s“ сәтті тағайындалмаған."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be unassigned."
+msgstr "Todo „%(title)s“ тағайындау мүмкін емес."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed successfully."
+msgstr "Todo „%(title)s“ сәтті аяқталды."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed."
+msgstr "Todo „%(title)s“ аяқталмады."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed by You successfully."
+msgstr "Todo „%(title)s“ сәтті аяқталды."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed by You."
+msgstr "„%(title)s“ Todo сіз толтыра алмадыңыз."
+
+#, python-format
+msgid "Todo \"%(title)s\" was set to incomplete successfully."
+msgstr "Todo „%(title)s“ сәтсіз аяқталды."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be set to incomplete."
+msgstr "Todo „%(title)s“ аяқталмады."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was edited successfully."
+msgstr "Todolist „%(title)s“ сәтті өңделді."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be edited."
+msgstr "Todolist „%(title)s“ өңдеу мүмкін емес."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was added successfully."
+msgstr "Todolist „%(title)s“ сәтті қосылды."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be added."
+msgstr "Todolist „%(title)s“ қосу мүмкін емес."
+
+msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
+msgstr "Сіз бұл қалтаны жоя алмайсыз, өйткені онда бір немесе бірнеше элементті жоюға рұқсатыңыз жоқ!"
+
+#~ msgid "Ok"
+#~ msgstr "ОК"
+
+#~ msgid "Message Group"
+#~ msgstr "Топқа хабарлама жазу"
+
+#~ msgid "Message Project"
+#~ msgstr "Жобаға хабарлама жазу"
+
+#, fuzzy
+#~| msgid "This message was sent in a conversation with: "
+#~ msgid "The message cannot be replied without being in a conversation."
+#~ msgstr "Бұл хабарлама қоңырау кезінде жіберілді: "
+
+#, fuzzy
+#~| msgid "Is Moderator"
+#~ msgid "Moderation"
+#~ msgstr "Модератор"
+
+#, fuzzy
+#~| msgid "Your name"
+#~ msgid "{username}"
+#~ msgstr "Сіздің атыңыз"
+
+#, fuzzy
+#~| msgid "Additional Recipients"
+#~ msgid "Additional recipients"
+#~ msgstr "Қосымша алушылар"
+
+#, fuzzy
+#~| msgid "Additional Recipients"
+#~ msgid "Additional recipient"
+#~ msgstr "Қосымша алушылар"
+
+#, fuzzy
+#~| msgid "Message Project"
+#~ msgid "Message Rejected"
+#~ msgstr "Жобаға хабарлама жазу"
+
+#, fuzzy
+#~ msgid "Your message has been rejected"
+#~ msgstr "Сіздің өзгертулеріңіз сақталды."
+
+#, fuzzy
+#~| msgid "Message Project"
+#~ msgid "Message Received"
+#~ msgstr "Жобаға хабарлама жазу"
+
+#, fuzzy
+#~ msgid "You have received a message"
+#~ msgstr "Сізді ынтымақтастыққа шақырды!"
+
+#, fuzzy
+#~ msgid "You have received a reply"
+#~ msgstr "Сізді ынтымақтастыққа шақырды!"
+
+#, fuzzy
+#~| msgid "Everybody"
+#~ msgid "body"
+#~ msgstr "Барлығы"
+
+#, fuzzy
+#~ msgid "sender"
+#~ msgstr "Жіберілген"
+
+#, fuzzy
+#~| msgid "Recipient"
+#~ msgid "recipient"
+#~ msgstr "Алушы"
+
+#, fuzzy
+#~ msgid "visitor"
+#~ msgstr "Кірді"
+
+#, fuzzy
+#~ msgid "parent message"
+#~ msgstr "Хабарламалар"
+
+#, fuzzy
+#~| msgid "No messages"
+#~ msgid "root message"
+#~ msgstr "Хабарламалар жоқ"
+
+#, fuzzy
+#~| msgid "Event date"
+#~ msgid "sent at"
+#~ msgstr "Шара күні"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "archived by recipient"
+#~ msgstr "Анықталмаған алушы."
+
+#, fuzzy
+#~| msgid "New etherpad by %(sender_name)s"
+#~ msgid "deleted by sender at"
+#~ msgstr "%(sender_name)s тен жаңа редактор"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "deleted by recipient at"
+#~ msgstr "Анықталмаған алушы."
+
+#, fuzzy
+#~| msgid "Status"
+#~ msgid "status"
+#~ msgstr "Күй"
+
+#, fuzzy
+#~| msgid "Is Moderator"
+#~ msgid "moderator"
+#~ msgstr "Модератор"
+
+#, fuzzy
+#~| msgid "Related to"
+#~ msgid "moderated at"
+#~ msgstr "Ассоциацияланған"
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "message"
+#~ msgstr "xабарлама"
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "messages"
+#~ msgstr "xабарлама"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "Undefined sender."
+#~ msgstr "Анықталмаған алушы."
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "pending message"
+#~ msgstr "xабарлама"
+
+#, fuzzy
+#~ msgid "pending messages"
+#~ msgstr "Хабарламалар"
+
+#, fuzzy
+#~ msgid "Message successfully sent."
+#~ msgstr "Қолданушы %(username)s сәтті шақырылды!"
+
+#, fuzzy
+#~| msgid "Select at least one object."
+#~ msgid "Message rejected for at least one recipient."
+#~ msgstr "Кем дегенде бір элементті таңдаңыз."
 
 #, fuzzy
 #~ msgid "CSV Import Results"

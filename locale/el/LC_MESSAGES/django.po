@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 16:02+0200\n"
+"POT-Creation-Date: 2022-06-01 15:58+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -175,6 +175,14 @@ msgstr "%d Χρήστες απενεργοποιήθηκαν με επιτυχί
 msgid "Reactivate user accounts"
 msgstr "Ο λογαριασμός χρήστη ενεργοποιήθηκε με επιτυχία"
 
+#, fuzzy, python-format
+#| msgid "%d Users' rocketchat room memberships were re-done."
+msgid "%(count)d Users' group memberships were refreshed."
+msgstr "Έγινε αναδημιουργία %d συνδρομών χρηστών για δωμάτιο rocketchat."
+
+msgid "Refresh user group membership associations (e.g. cache or Nextcloud folder problems)"
+msgstr ""
+
 #, python-format
 msgid "%d Users were synchronized successfully."
 msgstr "%d Χρήστες συγχρονίστηκαν με επιτυχία."
@@ -279,6 +287,15 @@ msgstr "Λίστα Σελιδοδεικτών"
 
 msgid "Bookmarked Users list"
 msgstr "Λίστα Χρηστών με Σελιδοδείκτη"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Invitations"
+msgstr "Προσκλήσεις"
+
+#, fuzzy
+#| msgid "Conference"
+msgid "Conferences"
+msgstr "Σύσκεψη"
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
@@ -478,12 +495,12 @@ msgstr "Ο/η %(sender_name)s σας έχει προσκαλέσει να εγγ
 msgid "Accept invitation"
 msgstr "Αποδοχή πρόσκλησης"
 
-msgid "View invitation"
-msgstr "Προβολή πρόσκλησης"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "Ο/η %(sender_name)s σας προσκάλεσε"
+
+msgid "View invitation"
+msgstr "Προβολή πρόσκλησης"
 
 msgid "New link to the moved project/group"
 msgstr "Νέος σύνδεσμος για το έργο/την ομάδα που μεταφέρθηκε"
@@ -533,6 +550,32 @@ msgstr "Ο/η %(sender_name)s μόλις δημιούργησε %(team_name)s σ
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "Ο/η %(sender_name)s έχει μόλις δημιουργήσει ένα νέο λογαριασμό χρήστη σε %(portal_name)s!"
+
+msgid "A conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference %(object_name)s has been updated"
+msgstr "Μια νέα σύσκεψη: \"%(object_name)s\" ανακοινώθηκε σε %(team_name)s."
+
+#, fuzzy
+#| msgid "You are about to deactivate this conference!"
+msgid "You are attending this conference"
+msgstr "Πρόκειται να απενεργοποιήσετε αυτή τη σύσκεψη!"
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr "Μια νέα σύσκεψη: \"%(object_name)s\" ανακοινώθηκε σε %(team_name)s."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The time of conference %(object_name)s has been updated"
+msgstr "Μια νέα σύσκεψη: \"%(object_name)s\" ανακοινώθηκε σε %(team_name)s."
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -798,6 +841,11 @@ msgstr "Είναι αρεστό"
 
 msgid "Persons"
 msgstr "Άτομα"
+
+#, fuzzy
+#| msgid "Last name"
+msgid "last name"
+msgstr "Επώνυμο"
 
 #, fuzzy
 #| msgid "My location"
@@ -1488,12 +1536,22 @@ msgstr "Κυρίαρχη Ομάδα"
 msgid "Related Teams"
 msgstr "Σχετικές Ομάδες"
 
+#, fuzzy
+#| msgid "I am open for cooperation requests"
+msgid "Open for cooperation"
+msgstr "Είναι διαθέσιμος για αιτήματα συνεργασίας"
+
 msgid "Dynamic extra fields"
 msgstr "Δυναμικά πρόσθετα πεδία"
 
 #, fuzzy
 msgid "If set to true, a contact form will be displayed on the micropage."
 msgstr "Εάν αυτό είναι ενεργό, ένα πλαίσιο Έκκλησης για Δράση θα εμφανιστεί στον μικρότοπο."
+
+#, fuzzy
+#| msgid "User token"
+msgid "Use invite token"
+msgstr "Διακριτικό Χρήστη"
 
 msgid "Cosinnus project"
 msgstr "Έργο Cosinnus"
@@ -2210,6 +2268,18 @@ msgstr "Διαγραφή αναφερόμενου στοιχείου..."
 msgid "(The reported item has been deleted.)"
 msgstr "(Το αναφερόμενο στοιχείο έχει διαγραφεί.)"
 
+msgid "This user profile is scheduled for deletion at: "
+msgstr ""
+
+msgid "However, it will not be deleted, because it is still active."
+msgstr ""
+
+msgid "This user account is disabled. The user cannot log in or use the account."
+msgstr ""
+
+msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
+msgstr ""
+
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Εισάγετε τα 4 κεφαλαία γράμματα στην κωδικοποιημένη εικόνα"
 
@@ -2293,6 +2363,134 @@ msgstr "Διαχείριση"
 msgid "Select a page on the left side."
 msgstr "Επιλέξτε μια σελίδα στην αριστερή πλευρά."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια με προσαρμοσμένες ρυθμίσεις Εξυπηρετητή-BBB"
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
+
+msgid "Overview - All Conferences"
+msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια"
+
+msgid "Past"
+msgstr "Προηγούμενος"
+
+msgid "View Upcoming"
+msgstr "Προβολή Προσεχούς"
+
+msgid "Upcoming"
+msgstr "Προσεχής"
+
+msgid "View Past"
+msgstr "Προβολή Προηγούμενου"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+msgid "Booked"
+msgstr "Με σελιδοδείκτη"
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Η σύσκεψη είναι μόνιμα premium"
+
+msgid "Portal Setting"
+msgstr "Ρύθμιση Πύλης"
+
+msgid "Conference Settings"
+msgstr "Ρυθμίσεις Σύσκεψης"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr "Όχι premium"
+
+msgid "Rooms"
+msgstr "Δωμάτια"
+
+msgid "Start"
+msgstr "Έναρξη"
+
+msgid "running now!"
+msgstr "εκτελείται τώρα!"
+
+msgid "Conference Setting"
+msgstr "Ρύθμιση Σύσκεψης"
+
+#, fuzzy
+#| msgid "Rooms"
+msgid "Room"
+msgstr "Δωμάτια"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgctxt "Calendar"
+#| msgid "Event"
+msgid "Event"
+msgstr "Εκδήλωση"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Η σύσκεψη είναι μόνιμα premium"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Η σύσκεψη είναι μόνιμα premium"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε τον χρήστη;"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε το μέλος \"%(name)s\" από την ομάδα;"
+
+msgid "There are no items to show."
+msgstr "Δεν υπάρχουν στοιχεία να προβληθούν."
+
+msgid "BBB"
+msgstr "BBB"
+
+msgid "BBB Premium"
+msgstr "BBB Premium"
+
+msgid "BBB Recording API"
+msgstr ""
+
+msgid "Not set"
+msgstr "Δεν έχει οριστεί"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
+
+msgid "Save"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Είστε βέβαιοι ότι θέλετε να απορρίψετε το μέλος „%(name)s“;"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Διαγραφή Προφίλ"
+
 msgid "Newsletters"
 msgstr "Newsletter"
 
@@ -2339,6 +2537,16 @@ msgstr "Ανακοινώσεις Πίνακα Χρήστη"
 
 msgid "User Welcome Email"
 msgstr "Email Καλωσορίσματος Χρήστη"
+
+msgid "Conference Overview"
+msgstr "Επισκόπηση Σύσκεψης"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
+
+msgid "Conferences with Custom Settings"
+msgstr "Συσκέψεις με Προσαρμοσμένες Ρυθμίσεις"
 
 msgid "Simple Statistics"
 msgstr "Απλή Στατιστική"
@@ -2398,9 +2606,6 @@ msgstr "Όνομα"
 
 msgid "Lastname"
 msgstr "Επίθετο"
-
-msgid "Save"
-msgstr ""
 
 msgid "User Administration"
 msgstr "Διαχείριση Χρήστη"
@@ -3113,7 +3318,9 @@ msgstr "Είδος Δωματίου"
 msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
 msgstr "Το Λόμπι είναι το κύριο σημείο εισόδου για τους συμμετέχοντες. Θα βρείτε εδώ την ατζέντα της σύσκεψης."
 
-msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+#, fuzzy
+#| msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+msgid "The Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgstr "Η Σκηνή χρησιμοποιείται να την παρουσίαση μιας ζωντανής μετάδοσης π.χ. από το YouTube ή Vimeo. Μια συνομιλία εμφανίζεται δίπλα σε αυτή."
 
 msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
@@ -3201,6 +3408,9 @@ msgstr "Μπορείτε άμεσα να δημιουργήσετε εκδηλώ
 
 msgid "There are no rooms yet."
 msgstr "Δεν υπάρχουν ακόμη δωμάτια."
+
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
@@ -3380,6 +3590,12 @@ msgstr "Με αστερίσκο"
 msgid "Length"
 msgstr ""
 
+msgid "minute"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
 #, fuzzy
 #| msgid "Delete Account"
 msgid "Delete Recording"
@@ -3393,145 +3609,6 @@ msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε 
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Διαγραφή αναφερόμενου στοιχείου..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια με προσαρμοσμένες ρυθμίσεις Εξυπηρετητή-BBB"
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
-
-msgid "Overview - All Conferences"
-msgstr "Επισκόπηση - Όλες οι Συσκέψεις"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Διαχείριση Χρήστη"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "Επισκόπηση - Συσκέψεις, Δωμάτια και Σεμινάρια"
-
-msgid "Past"
-msgstr "Προηγούμενος"
-
-msgid "View Upcoming"
-msgstr "Προβολή Προσεχούς"
-
-msgid "Upcoming"
-msgstr "Προσεχής"
-
-msgid "View Past"
-msgstr "Προβολή Προηγούμενου"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-#, fuzzy
-msgid "Booked"
-msgstr "Με σελιδοδείκτη"
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Η σύσκεψη είναι μόνιμα premium"
-
-msgid "Portal Setting"
-msgstr "Ρύθμιση Πύλης"
-
-msgid "Conference Settings"
-msgstr "Ρυθμίσεις Σύσκεψης"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "Premium"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr "Όχι premium"
-
-msgid "Rooms"
-msgstr "Δωμάτια"
-
-msgid "Start"
-msgstr "Έναρξη"
-
-msgid "running now!"
-msgstr "εκτελείται τώρα!"
-
-msgid "Conference Setting"
-msgstr "Ρύθμιση Σύσκεψης"
-
-#, fuzzy
-#| msgid "Rooms"
-msgid "Room"
-msgstr "Δωμάτια"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgctxt "Calendar"
-#| msgid "Event"
-msgid "Event"
-msgstr "Εκδήλωση"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Η σύσκεψη είναι μόνιμα premium"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Η σύσκεψη είναι μόνιμα premium"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε τον χρήστη;"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε το μέλος \"%(name)s\" από την ομάδα;"
-
-msgid "There are no items to show."
-msgstr "Δεν υπάρχουν στοιχεία να προβληθούν."
-
-msgid "BBB"
-msgstr "BBB"
-
-msgid "BBB Premium"
-msgstr "BBB Premium"
-
-msgid "BBB Recording API"
-msgstr ""
-
-msgid "Not set"
-msgstr "Δεν έχει οριστεί"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Είστε βέβαιοι ότι θέλετε να απορρίψετε το μέλος „%(name)s“;"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Διαγραφή Προφίλ"
-
-msgid "Conference Overview"
-msgstr "Επισκόπηση Σύσκεψης"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
-
-msgid "Conferences with Custom Settings"
-msgstr "Συσκέψεις με Προσαρμοσμένες Ρυθμίσεις"
 
 msgid "Rearrange"
 msgstr "Αναδιάταξη"
@@ -3566,6 +3643,11 @@ msgstr "ξεκινήστε εδώ..."
 
 msgid "Activate Cloud"
 msgstr "Ενεργοποίηση Cloud"
+
+#, fuzzy
+#| msgid "Members"
+msgid "Members-Map"
+msgstr "Μέλη"
 
 #, fuzzy
 #| msgctxt "the_app"
@@ -3671,6 +3753,18 @@ msgstr "Τώρα θα λαμβάνετε ειδοποιήσεις όταν δη�
 msgid "No Description set"
 msgstr "Δεν έχει οριστεί Περιγραφή"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created"
+msgid "Created on: "
+msgstr "Δημιουργήθηκε"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Last sent on: "
+msgid "Last updated on: "
+msgstr "Τελευταία αποστολή στις: "
+
 #, fuzzy
 #| msgid "Show more"
 msgid "more"
@@ -3746,6 +3840,10 @@ msgstr ""
 msgid "Date"
 msgstr "Ημερομηνία"
 
+#, python-format
+msgid "Time zone: %(TIME_ZONE)s"
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "From"
 msgstr "Από"
@@ -3817,6 +3915,14 @@ msgstr "Πληροφορίες Επικοινωνίας"
 msgid "No contact data has been added yet."
 msgstr "Δεν έχουν προστεθεί ακόμη στοιχεία επικοινωνίας."
 
+msgid "Contact organizers"
+msgstr "Επικοινωνία με διοργανωτές"
+
+#, fuzzy
+#| msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgid "Here you can send a message to the admins."
+msgstr "Στις %(date)s, ζητήσατε να στείλετε μήνυμα στο χρήστη '%(recipient)s'."
+
 msgid "Your Deactivated Content"
 msgstr "Το Περιεχόμενο που Απενεργοποιήθηκε"
 
@@ -3841,6 +3947,9 @@ msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε 
 #, python-format
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - Μέλη"
+
+msgid "Invite users directly via the following link: "
+msgstr ""
 
 msgid "Membership requests"
 msgstr "Αιτήματα συνδρομής"
@@ -4211,6 +4320,43 @@ msgid "Enable the public visibility of your group/project"
 msgstr ""
 
 #, fuzzy
+#| msgid "Delete invitation"
+msgid "Create invite token"
+msgstr "Διαγραφή πρόσκλησης"
+
+msgid "Check this to generate an invite token which allows a user to join the "
+msgstr ""
+
+#, fuzzy
+#| msgid "Groups"
+msgid "group"
+msgstr "Ομάδες"
+
+#, fuzzy
+#| msgid "Project"
+msgid "project"
+msgstr "Έργο"
+
+#, fuzzy
+#| msgctxt "the_app"
+#| msgid "conference"
+msgid "conference"
+msgstr "σύσκεψη"
+
+msgid " directly."
+msgstr ""
+
+#, fuzzy
+#| msgid "No current offers"
+msgid "The current token is: "
+msgstr "Δεν υπάρχουν τρέχουσες προσφορές"
+
+#, fuzzy
+#| msgid "Create content"
+msgid "Create token"
+msgstr "Δημιουργία περιεχομένου"
+
+#, fuzzy
 #| msgid "Send 1 day before conference"
 msgid "Include a video conference"
 msgstr "Αποστολή 1 ημέρα πριν από τη σύσκεψη"
@@ -4271,8 +4417,17 @@ msgstr "Εδώ μπορείτε να ελέγξετε εάν οι δημόσια
 msgid "This project shall be made publicly findable via other platforms."
 msgstr "Αυτό το έργο θα είναι δυνατόν να βρεθεί δημόσια μέσω άλλης πλατφόρμας."
 
+msgid "Is your project open to other partner organizations?"
+msgstr ""
+
+msgid "Project is open for further partner organizations."
+msgstr ""
+
 msgid "Which apps should be activated?"
 msgstr "Ποιες εφαρμογές πρέπει να ενεργοποιηθούν;"
+
+msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
+msgstr ""
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Αυτή η Εφαρμογή μπορεί να ενεργοποιηθεί μόνο για Ομάδα αλλά όχι για Έργο!"
@@ -4377,10 +4532,6 @@ msgstr "Η ενσωμάτωση του Facebook είναι διαθέσιμη μ
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr "Το HTML που εισήχθη εδώ θα εμφανιστεί στον πίνακα της ομάδας/έργου (μόνο για μέλη)"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Invitations"
-msgstr "Προσκλήσεις"
 
 msgid "About me"
 msgstr "Σχετικά με εμένα"
@@ -4511,6 +4662,32 @@ msgstr "Κοινή χρήση στο Twitter"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr "Στόχοι Βιώσιμης Ανάπτυξης"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created Projects"
+msgid "Contact Project Admins"
+msgstr "Έργα που Δημιουργήθηκαν"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Group Admins"
+msgstr "Πληροφορίες Επικοινωνίας"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Contact Conference Admins"
+msgstr "Διαχείριση Χρήστη"
+
+msgid "If you want to send your message to the project chat, you have to turn directly to the project."
+msgstr ""
+
+msgid "If you want to send your message to the group chat, you have to turn directly to the group."
+msgstr ""
+
+msgid "If you want to send your message to the conference chat, you have to turn directly to the conference."
+msgstr ""
 
 #, fuzzy
 msgid "Email the group administrators"
@@ -5799,6 +5976,11 @@ msgid "CSV Downloads"
 msgstr "Λήψεις CSV"
 
 #, fuzzy
+#| msgid "Portal Setting"
+msgid "Portal switches and settings"
+msgstr "Ρύθμιση Πύλης"
+
+#, fuzzy
 msgid "HD space used by conferences"
 msgstr "Χώρος HD που χρησιμοποιείται από έργα"
 
@@ -5820,8 +6002,8 @@ msgstr "E-Mail από όλους τους συνδρομητές του newslett
 msgid "E-Mails of ALL active users"
 msgstr "E-Mail από ΟΛΟΥΣ τους ενεργούς χρήστες"
 
-msgid "Ok"
-msgstr "Εντάξει"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr "Το WE-Cloud είναι εδώ!"
@@ -5945,6 +6127,24 @@ msgstr "Καθαρισμός Φίλτρων"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+#| msgid "Show detailed steps"
+msgid "Show potential partners"
+msgstr "Λεπτομερής εμφάνιση βημάτων"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Here you can search for partner organisations and projects that are open for further partners. The results are sorted so that partners with a lot of overlap in the funding objectives, eligible areas and SDGs you are active on are listed first."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners for ..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You're currently not member of any project, group or organization."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 #| msgid "Stream"
 msgid "Street"
 msgstr "Ζωντανή Μετάδοση"
@@ -5980,6 +6180,10 @@ msgstr "Αναζήτηση κατά τη μετακίνηση του χάρτη"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search this area"
 msgstr "Αναζήτηση αυτής της περιοχής"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Find partners"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Membership Requests"
@@ -6157,10 +6361,6 @@ msgid "Participate"
 msgstr "Συμμετοχή"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Contact organizers"
-msgstr "Επικοινωνία με διοργανωτές"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications for content posted."
 msgstr "Θα λαμβάνετε τώρα ειδοποιήσεις για περιεχόμενο που αναρτάται."
 
@@ -6230,16 +6430,16 @@ msgid "Hidden User"
 msgstr "Κρυφός Χρήστης"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "This group is open for further partner organizations."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are a Member"
 msgstr "Είστε Μέλος"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Join Group"
 msgstr "Συμμετοχή σε Ομάδα"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Message Group"
-msgstr "Αποστολή Μηνύματος σε Ομάδα"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Author"
@@ -6260,6 +6460,10 @@ msgstr "Θα λάβετε ειδοποίηση όταν το έργο δημιο
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"
 msgstr "Έργα που Δημιουργήθηκαν από αυτή την Ιδέα"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This organization is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are a Admin"
@@ -6291,12 +6495,12 @@ msgid "To Profile"
 msgstr "Το Προφίλ Σας"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Join Project"
-msgstr "Συμμετοχή σε Έργο"
+msgid "This project is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Message Project"
-msgstr "Αποστολή Μηνύματος σε Έργο"
+msgid "Join Project"
+msgstr "Συμμετοχή σε Έργο"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Move up"
@@ -7457,11 +7661,6 @@ msgstr "Λυπούμαστε, μόνο οι διαχειριστές πύλης 
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "Μόνο τα μέλη ομάδας μπορούν να δουν το περιεχόμενο που ζητήσατε. Κάντε αίτηση για να γίνετε μέλος τώρα!"
 
-#, fuzzy
-#| msgid "Conference"
-msgid "Conferences"
-msgstr "Σύσκεψη"
-
 msgid "My Conferences"
 msgstr "Οι Συσκέψεις Μου"
 
@@ -7615,6 +7814,9 @@ msgstr "Παρακαλούμε εισάγετε επίσης ημερομηνί�
 msgid "Please also provide an end date"
 msgstr "Παρακαλούμε εισάγετε επίσης ημερομηνία έναρξης"
 
+msgid "Ensure that your name does not contain any invalid characters."
+msgstr ""
+
 msgid "Test email sent!"
 msgstr "Το δοκιμαστικό email στάλθηκε!"
 
@@ -7651,6 +7853,14 @@ msgstr ""
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Η γλώσσα \"%s\" δεν υποστηρίζεται"
+
+#, fuzzy
+#| msgid "Test email sent!"
+msgid "New verification email sent!"
+msgstr "Το δοκιμαστικό email στάλθηκε!"
+
+msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
 
 #, fuzzy
 msgid "Successfully made conference permanent premium"
@@ -8178,6 +8388,15 @@ msgstr "Αρχεία Cloud"
 msgid "Linked Cloud Files"
 msgstr "Αρχεία Cloud"
 
+msgid "Cloud Stub"
+msgstr "Cloud Stub"
+
+msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
+msgstr ""
+
+msgid "There are no cloud files yet"
+msgstr "Δεν υπάρχουν ακόμη αρχεία cloud"
+
 msgid "Restart"
 msgstr "Επανεκκίνηση"
 
@@ -8193,6 +8412,12 @@ msgstr ""
 msgctxt "the_app"
 msgid "conference"
 msgstr "σύσκεψη"
+
+msgid "Error message:"
+msgstr ""
+
+msgid "No error message supplied."
+msgstr ""
 
 msgid "Go to conference"
 msgstr "Μετάβαση στη σύσκεψη"
@@ -8401,8 +8626,91 @@ msgstr "Πιο πρόσφατα Pad"
 msgid "Pad Type"
 msgstr "Είδος Pad"
 
+msgid "Pad"
+msgstr "Pad"
+
+msgid "This pad can no longer be edited because its creator has deleted their account."
+msgstr "Αυτό το pad δεν μπορεί πλέον να υποβληθεί σε επεξεργασία καθώς ο δημιουργός του έχει διαγράψει τον λογαριασμό του."
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(pad)s“?"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε το etherpad \"%(pad)s\";"
+
+msgid "Delete Etherpad"
+msgstr "Διαγραφή Etherpad"
+
 msgid "The document can not be accessed because the etherpad server could not be reached. Please contact an administrator!"
 msgstr "Δεν έχετε πρόσβαση στο έγγραφο διότι δεν ήταν δυνατή η επικοινωνία με τον διακομιστή etherpad. Παρακαλούμε επικοινωνήστε με ένα διαχειριστή!"
+
+msgid "This document is empty"
+msgstr "Το έγγραφο είναι κενό"
+
+msgid "Pads"
+msgstr "Pad"
+
+msgid "Enter a title for the Pad."
+msgstr "Εισάγετε τίτλο για το Pad."
+
+msgid "Enter the title for a new Document or Table."
+msgstr "Εισάγετε τίτλο για ένα νέο Έγγραφο ή Πίνακα."
+
+msgid "Enter the title for a new Document."
+msgstr "Εισάγετε τίτλο για ένα νέο Έγγραφο."
+
+msgid "Create Etherpad"
+msgstr "Δημιουργήστε Etherpad"
+
+msgid "Create Ethercalc"
+msgstr "Δημιουργήστε Ethercalc"
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(title)s“?"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε το etherpad \"%(title)s\";"
+
+msgid "No etherpads have been created yet."
+msgstr "Δεν έχουν ακόμη δημιουργηθεί etherpad."
+
+msgid "Download CSV"
+msgstr "Λήψη CSV"
+
+msgid "Download Excel"
+msgstr "Λήψη Excel"
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Γεια %(receiver_name)s,\n"
+"\n"
+"ένα νέο etherpad \"%(object_name)s\" σε %(team_name)s δημιουργήθηκε από %(sender_name)s. \n"
+"\n"
+"Μπορείτε να το βρείτε ακολουθώντας τον συγκεκριμένο σύνδεσμο: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Ακολουθείστε τον σύνδεσμο αυτό για να επεξεργαστείτε τις προτιμήσεις ειδοποίησης: %(notification_settings_url)s )\n"
+"\n"
+"Η Ομάδα %(site_name)s."
+
+msgid "You created a pad"
+msgstr "Δημιουργήσατε ένα pad"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a Pad"
+msgstr "δημιούργησε ένα Pad"
+
+msgid "There are no etherpads yet"
+msgstr "Δεν υπάρχουν ακόμη etherpad"
 
 #, python-format
 msgid "Etherpad \"%(title)s\" was edited successfully."
@@ -8854,1953 +9162,6 @@ msgstr "Εκδηλώσεις Σύσκεψης"
 msgid "%(event)s %(type)s"
 msgstr "%(event)s %(type)s"
 
-#, python-format
-msgid "Event \"%(title)s\" was edited successfully."
-msgstr "Η εκδήλωση \"%(title)s\" υποβλήθηκε σε επεξεργασία με επιτυχία."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be edited."
-msgstr "Δεν ήταν δυνατή η επεξεργασία της εκδήλωσης \"%(title)s\"."
-
-msgid "Please use the conference management area to add new workshops!"
-msgstr "Παρακαλούμε χρησιμοποιήστε την περιοχή διαχείρισης σύσκεψης για να προσθέσετε νέα σεμινάρια!"
-
-msgid "The page you requested is not available for this event at this time."
-msgstr "Η σελίδα που ζητήσατε δεν είναι διαθέσιμη για αυτή την εκδήλωση τη συγκεκριμένη ώρα."
-
-msgid "One of the event suggestions times could not be understood!"
-msgstr "Μία από τις ώρες των προτάσεων εκδήλωσης δεν ήταν δυνατό να γίνει κατανοητή!"
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was edited successfully."
-msgstr "Η μη προγραμματισμένη εκδήλωση \"%(title)s\" υποβλήθηκε σε επεξεργασία με επιτυχία."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be edited."
-msgstr "Δεν ήταν δυνατή η επεξεργασία της μη προγραμματισμένης εκδήλωσης \"%(title)s\"."
-
-#, python-format
-msgid "Event \"%(title)s\" was added successfully."
-msgstr "Η εκδήλωση \"%(title)s\" προστέθηκε με επιτυχία."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be added."
-msgstr "Δεν ήταν δυνατή η προσθήκη της εκδήλωσης \"%(title)s\"."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was added successfully."
-msgstr "Η μη προγραμματισμένη εκδήλωση %(title)s\" προστέθηκε με επιτυχία."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be added."
-msgstr "Δεν ήταν δυνατή η προσθήκη της μη προγραμματισμένης εκδήλωσης \"%(title)s\"."
-
-msgid "You should define at least one date suggestion."
-msgstr "Θα πρέπει να δώσετε τουλάχιστον μια πρόταση για ημερομηνία."
-
-#, python-format
-msgid "Event \"%(title)s\" was deleted successfully."
-msgstr "Η εκδήλωση \"%(title)s\" διαγράφηκε με επιτυχία."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be deleted."
-msgstr "Δεν ήταν δυνατή η διαγραφή της εκδήλωσης \"%(title)s\"."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was deleted successfully."
-msgstr "Η μη προγραμματισμένη εκδήλωση \"%(title)s\" διαγράφηκε με επιτυχία."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be deleted."
-msgstr "Δεν ήταν δυνατή η διαγραφή της μη προγραμματισμένης εκδήλωσης \"%(title)s\"."
-
-#, fuzzy
-#| msgid "Your data was saved successfully!"
-msgid "Your votes were saved successfully."
-msgstr "Τα δεδομένα σας αποθηκεύτηκαν με επιτυχία!"
-
-#, fuzzy
-#| msgid "Poll \"%(title)s\" could not be added."
-msgid "Your votes could not be saved."
-msgstr "Δεν ήταν δυνατή η προσθήκη της δημοσκόπησης \"%(title)s\"."
-
-msgid "This is event is already scheduled. You cannot vote for it any more."
-msgstr "Αυτή η εκδήλωση έχει ήδη προγραμματιστεί. Δεν μπορείτε πλέον να ψηφίσετε για αυτή."
-
-msgid "The complete request can only be sent via POST!"
-msgstr "Το πλήρες αίτημα μπορεί να σταλεί μόνο μέσω ΑΝΑΡΤΗΣΗΣ!"
-
-msgid "Event cannot be completed: No date was supplied."
-msgstr "Δεν είναι δυνατή η ολοκλήρωση της εκδήλωσης: Δεν δόθηκε ημερομηνία."
-
-msgid "The event was created successfully at the specified date."
-msgstr "Η εκδήλωση δημιουργήθηκε με επιτυχία τη συγκεκριμένη ημερομηνία."
-
-msgid "Upcoming events"
-msgstr "Προσεχείς εκδηλώσεις"
-
-#, fuzzy
-msgid "Upcoming event"
-msgstr "Προσεχείς εκδηλώσεις"
-
-msgid "Your comment was added successfully."
-msgstr "Το σχόλιό σας προστέθηκε με επιτυχία."
-
-msgid "Your comment was deleted successfully."
-msgstr "Το σχόλιό σας διαγράφηκε με επιτυχία."
-
-msgid "Exchange"
-msgstr ""
-
-msgctxt "the_app"
-msgid "exchange"
-msgstr ""
-
-msgctxt "the_app"
-msgid "file"
-msgstr "αρχείο"
-
-msgid "A user uploaded a new file"
-msgstr "Ένας χρήστης ανέβασε ένα νέο αρχείο"
-
-#, python-format
-msgid "%(sender_name)s uploaded the file %(object_name)s"
-msgstr "Ο/η %(sender_name)s ανέβασε το αρχείο %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s uploaded %(count)d files"
-msgstr "Ο/η %(sender_name)s ανέβασε %(count)d αρχεία"
-
-#, python-format
-msgid "%(sender_name)s created a new file"
-msgstr "Ο/η %(sender_name)s δημιούργησε ένα νέο αρχείο"
-
-#, python-format
-msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Ένα νέο αρχείο: \"%(object_name)s\" δημιουργήθηκε σε %(team_name)s."
-
-msgid "A user uploaded a new file in a team you are following"
-msgstr "Ένας χρήστης ανέβασε ένα νέο αρχείο σε μια ομάδα που ακολουθείτε"
-
-#, python-format
-msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
-msgstr "Ο/η %(sender_name)s δημιούργησε ένα νέο αρχείο σε %(team_name)s (που ακολουθείτε)"
-
-#, python-format
-msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "Ένα νέο αρχείο: \"%(object_name)s\" δημιουργήθηκε σε %(team_name)s (που ακολουθείτε)."
-
-msgid "Latest Files"
-msgstr "Τελευταία Αρχεία"
-
-msgid "No files"
-msgstr "Δεν υπάρχουν αρχεία"
-
-msgid "Pictures"
-msgstr "Εικόνες"
-
-msgid "Documents"
-msgstr "Έγγραφα"
-
-msgid "Audio Files"
-msgstr "Ηχητικά Αρχεία"
-
-msgid "Videos"
-msgstr "Βίντεο"
-
-msgid "File Type"
-msgstr "Είδος Αρχείου"
-
-msgid "File Name"
-msgstr "Όνομα Αρχείου"
-
-msgid "File Name (descending)"
-msgstr "Όνομα Αρχείου (φθίνουσα σειρά)"
-
-msgid "Smallest Files"
-msgstr "Μικρότερα Αρχεία"
-
-msgid "Largest Files"
-msgstr "Μεγαλύτερα Αρχεία"
-
-msgid "The given URL does not seem to be valid."
-msgstr "Το URL που έχει δοθεί δεν φαίνεται να είναι έγκυρο."
-
-msgid "Must supply either a URL or File"
-msgstr "Πρέπει να δοθεί URL ή Αρχείο"
-
-msgid "Is URL Link"
-msgstr "Είναι Σύνδεσμος URL"
-
-msgid "Uploaded by"
-msgstr "Ανέβηκε από"
-
-msgid "Uploaded on"
-msgstr "Ανέβηκε στις"
-
-msgid "No files selected."
-msgstr "Δεν έχουν επιλεγεί αρχεία."
-
-msgctxt "special_folder_type"
-msgid "Attachments"
-msgstr "Επισυνάψεις"
-
-msgid "File does not exist or you are not allowed to delete it."
-msgstr "Το αρχείο δεν υπάρχει ή δεν επιτρέπεται να το διαγράψετε."
-
-#, python-format
-msgid "A problem occurred during export. The following file is missing: %(filename)s."
-msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
-msgstr[0] "Προέκυψε πρόβλημα κατά την εξαγωγή. Λείπει το παρακάτω αρχείο: %(filename)s."
-msgstr[1] "Προέκυψε πρόβλημα κατά την εξαγωγή. Λείπουν τα παρακάτω αρχεία: %(filename)s."
-
-msgid "Invalid request."
-msgstr "Μη έγκυρο αίτημα."
-
-#, python-format
-msgid "File \"%(title)s\" was updated successfully."
-msgstr "Το αρχείο \"%(title)s\" ενημερώθηκε με επιτυχία."
-
-#, python-format
-msgid "File \"%(title)s\" could not be updated."
-msgstr "Δεν ήταν δυνατή η ενημέρωση του αρχείου \"%(title)s\"."
-
-msgid "Downloading failed, the target object was not a folder!"
-msgstr "Η λήψη απέτυχε, το τελικό αντικείμενο δεν ήταν φάκελος!"
-
-msgid "Canceled the download because there seem to be no files in this folder."
-msgstr "Η λήψη ακυρώθηκε καθώς φαίνεται να μην υπάρχουν αρχεία σε αυτό τον φάκελο."
-
-msgid "Internal Error: Group not Found"
-msgstr "Εσωτερικό Σφάλμα: Δεν Βρέθηκε Ομάδα"
-
-msgid "Permission for upload denied"
-msgstr "Απορρίφθηκε το αίτημα άδειας για φόρτωση"
-
-msgid "The uploaded file was invalid."
-msgstr "Το αρχείο που ανέβηκε δεν ήταν έγκυρο."
-
-#, python-format
-msgid "%(count)d File was added successfully."
-msgid_plural "%(count)d Files were added successfully."
-msgstr[0] "%(count)d Aρχείο προστέθηκε με επιτυχία."
-msgstr[1] "%(count)d Αρχεία προστέθηκαν με επιτυχία."
-
-msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
-msgstr "Το αρχείο που ανεβάσατε ήταν πολύ μεγάλο ή δεν επιτρεπόταν να ανεβεί αυτό το είδος αρχείου!"
-
-msgctxt "the_app"
-msgid "marketplace"
-msgstr "marketplace"
-
-msgid "A user created a new offer"
-msgstr "Ένας χρήστης δημιούργησε μια νέα προσφορά"
-
-#, python-format
-msgid "%(sender_name)s created the offer %(object_name)s"
-msgstr "Ο/η %(sender_name)s δημιούργησε την προσφορά %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d offers"
-msgstr "Ο/η %(sender_name)s δημιούργησε %(count)d προσφορές"
-
-#, python-format
-msgid "%(sender_name)s created a new offer"
-msgstr "Ο/η %(sender_name)s δημιούργησε μια νέα προσφορά"
-
-#, python-format
-msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Μια νέα προσφορά: \"%(object_name)s\" δημιουργήθηκε σε %(team_name)s."
-
-msgid "One of your offers expired"
-msgstr "Μία από τις προσφορές σας έληξε"
-
-#, python-format
-msgid "Your offer %(object_name)s expired"
-msgstr "Η προσφορά σας %(object_name)s έληξε"
-
-#, python-format
-msgid "%(count)d of your offers expired"
-msgstr "%(count)d από τις προσφορές σας έληξαν"
-
-msgid "Your offer has expired"
-msgstr "Η προσφορά σας έχει λήξει"
-
-#, python-format
-msgid "Offer \"%(object_name)s\" has expired."
-msgstr "Η προσφορά \"%(object_name)s\" έχει λήξει."
-
-msgid "A user commented on one of your offers"
-msgstr "Ένα χρήστης σχολίασε μία από τις προσφορές σας"
-
-#, python-format
-msgid "%(sender_name)s commented on your offer %(object_name)s"
-msgstr "Ο/η %(sender_name)s σχολίασε την προσφορά σας %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
-msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε την προσφορά σας %(object_name)s"
-msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν την προσφορά σας %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your offer"
-msgstr "Ο/η %(sender_name)s σχολίασε την προσφορά σας"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your offers"
-msgstr "Ο/η %(sender_name)s σχολίασε μία από τις προσφορές σας"
-
-msgid "A user commented on an offer you were tagged in"
-msgstr "Ένας χρήστης σχολίασε μια προσφορά στην οποία έχετε προστεθεί με ετικέτα"
-
-#, python-format
-msgid "%(sender_name)s commented on the offer %(object_name)s"
-msgstr "Ο/η %(sender_name)s σχολίασε την προσφορά %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
-msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε την προσφορά %(object_name)s"
-msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν την προσφορά %(object_name)s"
-
-msgid "You were tagged in this offer"
-msgstr "Προστεθήκατε με ετικέτα σε αυτή την προσφορά"
-
-#, python-format
-msgid "%(sender_name)s commented on an offer you were tagged in"
-msgstr "Ο/η %(sender_name)s σχολίασε μια προσφορά στην οποία προστεθήκατε με ετικέτα"
-
-#, python-format
-msgid "%(sender_name)s commented on an offer you were tagged in in %(team_name)s"
-msgstr "Ο/η %(sender_name)s σχολίασε μια προσφορά στην οποία προστεθήκατε με ετικέτα σε %(team_name)s"
-
-msgid "A user created a new offer in a team you are following"
-msgstr "Ένας χρήστης δημιούργησε μια νέα προσφορά σε μια ομάδα που ακολουθείτε"
-
-#, python-format
-msgid "%(sender_name)s created a new offer in %(team_name)s (which you follow)"
-msgstr "Ο/η %(sender_name)s δημιούργησε μια νέα προσφορά σε %(team_name)s (που ακολουθείτε)"
-
-#, python-format
-msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "Μια νέα προσφορά: \"%(object_name)s\" δημιουργήθηκε σε %(team_name)s (που ακολουθείτε)."
-
-msgid "A user updated an offer you are following"
-msgstr "Ένας χρήστης ενημέρωσε μια προσφορά που ακολουθείτε"
-
-#, python-format
-msgid "%(sender_name)s updated the offer %(object_name)s"
-msgstr "Ο/η %(sender_name)s ενημέρωσε την προσφορά %(object_name)s"
-
-msgid "You are following this offer"
-msgstr "Ακολουθείτε αυτή την προσφορά"
-
-#, python-format
-msgid "%(sender_name)s updated an offer you are following"
-msgstr "Ο/η %(sender_name)s ενημέρωσε μια προσφορά που ακολουθείτε"
-
-#, python-format
-msgid "An offer you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "Μια προσφορά που ακολουθείτε: \"%(object_name)s\" ενημερώθηκε σε %(team_name)s."
-
-msgid "A user commented on an offer you are following"
-msgstr "Ένας χρήστης σχολίασε μια προσφορά που ακολουθείτε"
-
-#, python-format
-msgid "%(sender_name)s commented on on an offer you are following"
-msgstr "Ο/η %(sender_name)s σχολίασε μια προσφορά που ακολουθείτε"
-
-msgid "Current Offers"
-msgstr "Τρέχουσες Προσφορές"
-
-msgid "No current offers"
-msgstr "Δεν υπάρχουν τρέχουσες προσφορές"
-
-msgid "Order Key"
-msgstr "Κλειδί Εντολής"
-
-msgid "Looking for"
-msgstr "Αναζήτηση για"
-
-msgid "Offering"
-msgstr "Προσφορά"
-
-msgid "Offer currently active?"
-msgstr "Η προσφορά είναι τώρα ενεργή;"
-
-msgid "Offer Category"
-msgstr "Κατηγορία Προσφοράς"
-
-#, python-format
-msgid "Offer: %(offer)s (%(type)s)"
-msgstr "Προσφορά: %(offer)s (%(type)s)"
-
-#, python-format
-msgid "Offer \"%(title)s\" was edited successfully."
-msgstr "Η προσφορά \"%(title)s\" υποβλήθηκε σε επεξεργασία με επιτυχία."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be edited."
-msgstr "Δεν ήταν δυνατή η επεξεργασία της προσφοράς \"%(title)s\"."
-
-#, python-format
-msgid "Offer \"%(title)s\" was added successfully."
-msgstr "Η προσφορά \"%(title)s\" προστέθηκε με επιτυχία."
-
-#, python-format
-msgid "Offer \"%(title)s\" was saved successfully, but is not active yet."
-msgstr "Η προσφορά \"%(title)s\" αποθηκεύτηκε με επιτυχία, αλλά δεν είναι ακόμη ενεργή."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be added."
-msgstr "Δεν ήταν δυνατή η προσθήκη της προσφοράς \"%(title)s\"."
-
-#, python-format
-msgid "Offer \"%(title)s\" was deleted successfully."
-msgstr "Η προσφορά\"%(title)s\" διαγράφηκε με επιτυχία."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be deleted."
-msgstr "Δεν ήταν δυνατή η διαγραφή της προσφοράς \"%(title)s\"."
-
-msgid "The offer you requested is no longer active. Sorry!"
-msgstr "Η προσφορά που ζητήσατε δεν είναι πλέον ενεργή. Λυπούμαστε!"
-
-msgid "Invalid action for this offer. The request could not be completed!"
-msgstr "Μη έγκυρη ενέργεια για αυτή την προσφορά. Το αίτημα δεν μπόρεσε να ολοκληρωθεί!"
-
-msgid "The offer is already active"
-msgstr "Η προσφορά είναι ήδη ενεργή"
-
-msgid "The offer is already deactivated"
-msgstr "Η προσφορά έχει ήδη απενεργοποιηθεί"
-
-msgid "The offer was deactivated successfully."
-msgstr "Η προσφορά απενεργοποιήθηκε με επιτυχία."
-
-msgid "The offer was reactivated successfully."
-msgstr "Η προσφορά ενεργοποιήθηκε εκ νέου με επιτυχία."
-
-msgid "The offer was activated successfully."
-msgstr "Η προσφορά ενεργοποιήθηκε με επιτυχία."
-
-msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
-msgstr ""
-
-msgctxt "the_app"
-msgid "Chat"
-msgstr ""
-
-msgctxt "the_app"
-msgid "message"
-msgstr "μήνυμα"
-
-msgid "Chat"
-msgstr ""
-
-msgid "Only Administrators may send a message to this project/group!"
-msgstr "Μόνο οι Διαχειριστές μπορούν να στείλουν μήνυμα σε αυτό το έργο/σε αυτή την ομάδα!"
-
-msgid "Additional Recipients"
-msgstr "Επιπλέον Παραλήπτες"
-
-msgid "Undefined recipient."
-msgstr "Μη καθορισμένος παραλήπτης."
-
-msgid "Your reply could not be matched to an existing message."
-msgstr "Δεν ήταν δυνατή η αντιστοιχία της απάντησή σας με υπάρχον μήνυμα."
-
-msgid "An internal error occured."
-msgstr "Παρουσιάστηκε εσωτερικό σφάλμα."
-
-msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
-msgstr "Η διεύθυνση email από την οποία στείλατε την απάντηση δεν είναι αυτή με την οποία συνδέεται ο λογαριασμός χρήστη σας. Παρακαλούμε να στέλνετε άμεση απάντηση μόνο από τη διεύθυνση email την οποία χρησιμοποιήσατε για την εγγραφή σας στον ιστότοπο!"
-
-msgid "There was an error when processing your message text!"
-msgstr "Υπήρξε ένα σφάλμα κατά την επεξεργασία του κειμένου μηνύματός σας!"
-
-msgid "Your direct reply failed!"
-msgstr "Η άμεση απάντησή σας δεν στάλθηκε!"
-
-msgid "Select at least one object."
-msgstr "Επιλέξτε τουλάχιστον ένα αντικείμενο."
-
-msgid "Messages or conversations successfully archived."
-msgstr "Τα μηνύματα ή οι συζητήσεις αρχειοθετήθηκαν με επιτυχία."
-
-msgid "Messages or conversations successfully deleted."
-msgstr "Τα μηνύματα ή οι συζητήσεις διαγράφηκαν με επιτυχία."
-
-msgid "Messages were marked as read."
-msgstr "Τα μηνύματα έχουν επισημανθεί ως αναγνωσμένα."
-
-msgid "Messages or conversations successfully recovered."
-msgstr "Τα μηνύματα ή οι συζητήσεις ανακτήθηκαν με επιτυχία."
-
-msgid "Notes"
-msgstr "Σημειώσεις"
-
-msgctxt "the_app"
-msgid "note"
-msgstr "σημείωση"
-
-msgid "A user commented on a news post"
-msgstr "Ένα χρήστης σχολίασε μια ανάρτηση ειδήσεων"
-
-#, python-format
-msgid "%(sender_name)s commented on a news post"
-msgstr "Ο/η %(sender_name)s σχολίασε μια ανάρτηση ειδήσεων"
-
-msgid "A user commented on one of your news posts"
-msgstr "Ένας χρήστης σχολίασε μία από τις αναρτήσεις ειδήσεών σας"
-
-#, python-format
-msgid "%(sender_name)s commented on your news post %(object_name)s"
-msgstr "Ο/η %(sender_name)s σχολίασε την ανάρτηση ειδήσεών σας %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
-msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε την ανάρτηση ειδήσεών σας %(object_name)s"
-msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν την ανάρτηση ειδήσεών σας %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your news post"
-msgstr "Ο/η %(sender_name)s σχολίασε την ανάρτηση ειδήσεών σας"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your news posts"
-msgstr "Ο/η %(sender_name)s σχολίασε μία από τις αναρτήσεις ειδήσεών σας"
-
-msgid "A user commented on a news posts you commented in"
-msgstr "Ένας χρήστης σχολίασε μια ανάρτηση ειδήσεων που εσείς σχολιάσατε"
-
-#, python-format
-msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
-msgstr "Ο/η %(sender_name)s σχολίασε την ανάρτηση ειδήσεων %(object_name)s που σχολιάσατε"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
-msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε την ανάρτηση ειδήσεων %(object_name)s που σχολιάσατε"
-msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν την ανάρτηση ειδήσεων %(object_name)s που σχολιάσατε"
-
-#, python-format
-msgid "%(sender_name)s commented on a news post you commented in"
-msgstr "Ο/η %(sender_name)s σχολίασε μια ανάρτηση ειδήσεων που σχολιάσατε"
-
-msgid "A user created a news post"
-msgstr "Ένας χρήστης δημιούργησε μια ανάρτηση ειδήσεων"
-
-#, python-format
-msgid "%(sender_name)s created the news post %(object_name)s"
-msgstr "Ο/η %(sender_name)s δημιούργησε την ανάρτηση ειδήσεων %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d news posts"
-msgstr "Ο/η %(sender_name)s δημιούργησε %(count)d αναρτήσεις ειδήσεων"
-
-#, python-format
-msgid "%(sender_name)s created a new news post"
-msgstr "Ο/η %(sender_name)s δημιούργησε μία νέα ανάρτηση ειδήσεων"
-
-#, python-format
-msgid "%(sender_name)s posted in %(team_name)s:"
-msgstr "Ο/η %(sender_name)s ανάρτησε μια δημοσίευση σε %(team_name)s:"
-
-msgid "A user created a news post in a team you are following"
-msgstr "Ένας χρήστης δημιούργησε μία ανάρτηση ειδήσεων σε μια ομάδα που ακολουθείτε"
-
-#, python-format
-msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
-msgstr "Ο/η %(sender_name)s δημιούργησε μια νέα ανάρτηση ειδήσεων σε %(team_name)s (που ακολουθείτε)"
-
-#, python-format
-msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
-msgstr "Ο/η %(sender_name)s ανάρτησε μια δημοσίευση σε%(team_name)s (που ακολουθείτε)"
-
-msgid "A user updated a news post"
-msgstr "Ένας χρήστης ενημέρωσε μια ανάρτηση ειδήσεων"
-
-#, python-format
-msgid "%(sender_name)s updated the news post %(object_name)s"
-msgstr "Ο/η %(sender_name)s ενημέρωσε την ανάρτηση ειδήσεων %(object_name)s"
-
-msgid "You are following this news post"
-msgstr "Ακολουθείτε αυτή την ανάρτηση ειδήσεων"
-
-#, python-format
-msgid "%(sender_name)s updated a news post you are following"
-msgstr "Ο/η %(sender_name)s ενημέρωσε μια ανάρτηση ειδήσεων που ακολουθείτε"
-
-#, python-format
-msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
-msgstr "Μια ανάρτηση ειδήσεων που ακολουθείτε από %(sender_name)s ενημερώθηκε %(team_name)s:"
-
-msgid "A user commented on a news post you are following"
-msgstr "Ένας χρήστης σχολίασε μια ανάρτηση ειδήσεων που ακολουθείτε"
-
-#, python-format
-msgid "%(sender_name)s commented on the news post %(object_name)s"
-msgstr "Ο/η %(sender_name)s σχολίασε την ανάρτηση ειδήσεων %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
-msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε την ανάρτηση ειδήσεων %(object_name)s"
-msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν την ανάρτηση ειδήσεων %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on a news posts you are following"
-msgstr "Ο/η %(sender_name)s σχολίασε μία ανάρτηση ειδήσεων που εσείς ακολουθείτε"
-
-msgid "No news"
-msgstr "Καμία είδηση"
-
-msgid "Write a news post"
-msgstr "Γράψτε μια ανάρτηση ειδήσεων"
-
-msgid "News stream"
-msgstr "Ζωντανή μετάδοση ειδήσεων"
-
-msgid "Popularity"
-msgstr "Δημοτικότητα"
-
-msgid "Facebook Share"
-msgstr "Κοινή Χρήση στο Facebook"
-
-msgid "Note Item"
-msgstr "Στοιχείο Σημείωσης"
-
-msgid "Note Items"
-msgstr "Στοιχεία Σημείωσης"
-
-msgid "Your news post was added successfully."
-msgstr "Η ανάρτηση ειδήσεών σας προστέθηκε με επιτυχία."
-
-msgid "Your news post was deleted successfully."
-msgstr "Η ανάρτηση ειδήσεών σας διαγράφηκε με επιτυχία."
-
-msgid "Your news post was edited successfully."
-msgstr "Η ανάρτηση ειδήσεών σας υποβλήθηκε σε επεξεργασία με επιτυχία."
-
-msgid "You are seeing this alert because you created this content."
-msgstr "Βλέπετε αυτή την προειδοποίηση επειδή δημιουργήσατε αυτό το περιεχόμενο."
-
-msgid "You are seeing this alert because you are following the item's project or group."
-msgstr "Βλέπετε αυτή την προειδοποίηση επειδή ακολουθείτε το έργο ή την ομάδα του στοιχείου."
-
-msgid "You are seeing this alert because you are following this item."
-msgstr "Βλέπετε αυτή την προειδοποίηση επειδή ακολουθείτε αυτό το στοιχείο."
-
-msgctxt "the_app"
-msgid "notifications"
-msgstr "ειδοποιήσεις"
-
-#, python-format
-msgid "Your daily digest for %(portal_name)s"
-msgstr "Η ημερήσια σύνοψή σας για %(portal_name)s"
-
-msgid "This is what happened during the last day!"
-msgstr "Αυτό συνέβη την τελευταία ημέρα!"
-
-#, python-format
-msgid "Your weekly digest for %(portal_name)s"
-msgstr "Η εβδομαδιαία σύνοψή σας για %(portal_name)s"
-
-msgid "This is what happened during the last week!"
-msgstr "Αυτό συνέβη την τελευταία εβδομάδα!"
-
-msgctxt "notification frequency"
-msgid "Never"
-msgstr "Ποτέ"
-
-msgctxt "notification frequency"
-msgid "Immediately"
-msgstr "Άμεσα"
-
-msgctxt "notification frequency"
-msgid "Daily"
-msgstr "Καθημερινά"
-
-msgctxt "notification frequency"
-msgid "Weekly"
-msgstr "Εβδομαδιαία"
-
-msgid "Notification Preference for User"
-msgstr "Προτίμηση Ειδοποίησης για τον Χρήστη"
-
-msgid "Notification Preference"
-msgstr "Προτίμηση Ειδοποίησης"
-
-msgid "Multi Notification ID"
-msgstr "Ταυτότητα Πολλαπλής Ειδοποίησης"
-
-msgid "Multi Notification Preference"
-msgstr "Προτίμηση Πολλαπλής Ειδοποίησης"
-
-msgid "Multi Notification Preferences"
-msgstr "Προτιμήσεις Πολλαπλής Ειδοποίησης"
-
-msgid "User who caused this notification event"
-msgstr "Ο χρήστης που ενεργοποίησε αυτό το συμβάν ειδοποίησης"
-
-msgid "Audience"
-msgstr "Κοινό"
-
-msgid "Owner of the alert"
-msgstr "Κάτοχος της προειδοποίησης"
-
-msgid "Alert Reason key"
-msgstr "Κλειδί Λόγου Προειδοποίησης"
-
-msgid "Last user who caused this notification event"
-msgstr "Ο τελευταίος χρήστης που ενεργοποίησε αυτό το συμβάν ειδοποίησης"
-
-msgid "Alert State"
-msgstr "Κατάσταση Συναγερμού"
-
-msgid "You are following this content or its Project or Group"
-msgstr "Ακολουθείτε αυτό το περιεχόμενο ή το Έργο ή την Ομάδα του"
-
-msgid "All notifications"
-msgstr "Όλες οι ειδοποιήσεις"
-
-msgid "No notifications"
-msgstr "Καμία ειδοποίηση"
-
-msgid "For content that I am following, I wish to receive notification emails"
-msgstr "Για το περιεχόμενο που ακολουθώ, επιθυμώ να λαμβάνω email ειδοποίησης"
-
-msgid "You are getting this notification because you are subscribed to these kinds of events in your project or group."
-msgstr "Λαμβάνετε αυτή την ειδοποίηση επειδή έχετε εγγραφεί σε τέτοιου είδους συμβάντα στο έργο ή την ομάδα σας."
-
-msgid "You are getting this notification because you are an administrator of this project or group."
-msgstr "Λαμβάνετε αυτή την ειδοποίηση επειδή είστε ο διαχειριστής αυτού του έργου ή της ομάδας."
-
-msgid "You are getting this notification because you are an administrator of this portal."
-msgstr "Λαμβάνετε αυτή την ειδοποίηση επειδή είστε ο διαχειριστής αυτής της πύλης."
-
-msgid "You are getting this email because you are subscribed to one or more daily notifications."
-msgstr "Λαμβάνετε αυτό το email επειδή έχετε εγγραφεί σε μία ή περισσότερες καθημερινές ειδοποιήσεις."
-
-msgid "You are getting this email because you are subscribed to one or more weekly notifications."
-msgstr "Λαμβάνετε αυτό το email επειδή έχετε εγγραφεί σε μία ή περισσότερες εβδομαδιαίες ειδοποιήσεις."
-
-msgid "New item"
-msgstr "Νέο στοιχείο"
-
-#, python-format
-msgid "View on %(portal_name)s"
-msgstr "Προβολή σε %(portal_name)s"
-
-msgid "Untitled"
-msgstr "Χωρίς τίτλο"
-
-msgid "Your notification preferences were updated successfully."
-msgstr "Οι προτιμήσεις ειδοποίησης ενημερώθηκαν με επιτυχία."
-
-msgid "Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!"
-msgstr ""
-
-msgid "Your notifications preferences were reset to default!"
-msgstr "Οι προτιμήσεις ειδοποιήσεων έχουν επανέλθει στην προεπιλογή!"
-
-msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
-msgstr ""
-
-#, fuzzy
-#| msgid "Successfully deactivated user account"
-msgid "Successfully signed in as {}."
-msgstr "Ο λογαριασμός χρήστη απενεργοποιήθηκε με επιτυχία"
-
-#, fuzzy
-#| msgid "Successfully deactivated user account"
-msgid "Successfully connected account."
-msgstr "Ο λογαριασμός χρήστη απενεργοποιήθηκε με επιτυχία"
-
-#, fuzzy
-#| msgid "Successfully removed user"
-msgid "Successfully removed connection."
-msgstr "Ο χρήστης αφαιρέθηκε με επιτυχία"
-
-#, fuzzy
-#| msgid "Organization"
-msgctxt "the_app"
-msgid "organization"
-msgstr "Οργανισμός"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization membership"
-msgstr "Οργανισμοί"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization memberships"
-msgstr "Οργανισμοί"
-
-#, fuzzy
-#| msgid "Team Invite for Unregistered User"
-msgid "Organization Invite for Unregistered User"
-msgstr "Πρόσκληση Ομάδας για Μη Εγγεγραμμένο Χρήστη"
-
-#, fuzzy
-#| msgid "Team Invites for Unregistered Users"
-msgid "Organization Invites for Unregistered Users"
-msgstr "Προσκλήσεις Ομάδας για Μη Εγγεγραμμένους Χρήστες"
-
-#, fuzzy
-#| msgid "Assigned organizations"
-msgid "Civil society organization"
-msgstr "Διορισμένοι οργανισμοί"
-
-msgid "Company (commercial)"
-msgstr ""
-
-#, fuzzy
-#| msgid "Public voting"
-msgid "Public institution"
-msgstr "Δημόσια ψηφοφορία"
-
-#, fuzzy
-#| msgid "Other teams"
-msgid "Other"
-msgstr "Άλλες ομάδες"
-
-#, fuzzy
-#| msgid "Remove organization"
-msgid "Name of the organization"
-msgstr "Αφαίρεση οργανισμού"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Organization type"
-msgstr "Οργανισμός"
-
-#, fuzzy
-#| msgid "Logout"
-msgid "Logo"
-msgstr "Αποσύνδεση"
-
-#, fuzzy
-#| msgid "Email address"
-msgid "Email Address"
-msgstr "Διεύθυνση email"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Cosinnus Organization"
-msgstr "Οργανισμός"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Cosinnus Organizations"
-msgstr "Οργανισμοί"
-
-msgid "CosinnusOrganizationSocialMedia"
-msgstr ""
-
-#, fuzzy
-#| msgid "CosinnusLocation"
-msgid "CosinnusOrganizationLocation"
-msgstr "Τοποθεσία Cosinnus"
-
-#, fuzzy
-#| msgid "CosinnusLocations"
-msgid "CosinnusOrganizationLocations"
-msgstr "Τοποθεσίες Cosinnus"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Organization group"
-msgstr "Οργανισμός"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization groups"
-msgstr "Οργανισμοί"
-
-#, fuzzy, python-format
-#| msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
-msgid "Project/group %(name)s had already requested and has now been accepted."
-msgstr "Το έργο/η ομάδα  %(group)s έχει ήδη προσκληθεί και έχει τώρα ανατεθεί άμεσα!"
-
-#, fuzzy, python-format
-#| msgid "User %(username)s was successfully invited!"
-msgid "Project/group %(name)s was successfully invited."
-msgstr "Ο χρήστης %(username)s προσκλήθηκε με επιτυχία!"
-
-#, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
-msgid "Your join request was withdrawn from organization “%(name)s” successfully."
-msgstr "Το αίτημά συμμετοχής σας αποσύρθηκε από %(team_type)s “%(team_name)s” με επιτυχία."
-
-#, fuzzy, python-format
-#| msgid "You have declined the invitation to %(team_type)s “%(team_name)s”."
-msgid "You have declined the invitation to organization “%(name)s”."
-msgstr "Έχετε απορρίψει την πρόσκληση σε %(team_type)s “%(team_name)s”."
-
-#, fuzzy, python-format
-#| msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
-msgid "Your project/group is now assigned to the organization “%(name)s”. Welcome!"
-msgstr "Είστε τώρα μέλος της %(team_type)s “%(team_name)s”. Καλώς ήρθατε!"
-
-#, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
-msgid "Your request was withdrawn from organization \"%(name)s\" successfully."
-msgstr "Το αίτημα συμμετοχής σας αποσύρθηκε από %(team_type)s \"%(team_name)s\" με επιτυχία."
-
-#, fuzzy, python-format
-#| msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
-msgid "Your invitation to project/group \"%(name)s\" was withdrawn successfully."
-msgstr "Η πρόσκλησή σας στον χρήστη \"%(username)s\" αποσύρθηκε με επιτυχία."
-
-#, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
-msgid "Project/group \"%(name)s\" is no longer assigned."
-msgstr "Ο χρήστης \"%(username)s\" δεν είναι πλέον μέλος."
-
-#, fuzzy
-#| msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
-msgid "Sorry, only portal administrators can create Organizations! You can either create a Project, or write a message to one of the administrators to create a Organization for you. Below you can find a listing of all administrators."
-msgstr "Λυπούμαστε, μόνο οι διαχειριστές πύλης μπορούν να δημιουργούν Ομάδες! Μπορείτε να γράψετε ένα μήνυμα σε κάποιο από τους διαχειριστές για να δημιουργήσουν μια Ομάδα για εσάς. Παρακάτω μπορείτε να βρείτε μια λίστα με όλους τους διαχειριστές."
-
-#, fuzzy, python-format
-#| msgid "Event \"%(title)s\" was edited successfully."
-msgid "Organization \"%(name)s\" was created successfully."
-msgstr "Η εκδήλωση \"%(title)s\" υποβλήθηκε σε επεξεργασία με επιτυχία."
-
-#, fuzzy
-#| msgid "Your idea was deleted successfully."
-msgid "Your organization was deleted successfully."
-msgstr "Η ιδέα σας διαγράφηκε με επιτυχία."
-
-msgctxt "the_app"
-msgid "poll"
-msgstr "δημοσκόπηση"
-
-msgid "A user created a new poll"
-msgstr "Ένας χρήστης δημιούργησε μια νέα δημοσκόπηση"
-
-#, python-format
-msgid "%(sender_name)s created the poll %(object_name)s"
-msgstr "Ο/η %(sender_name)s δημιούργησε τη δημοσκόπηση %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d polls"
-msgstr "Ο/η %(sender_name)s δημιούργησε %(count)d δημοσκοπήσεις"
-
-#, python-format
-msgid "%(sender_name)s created a new poll"
-msgstr "Ο/η %(sender_name)s δημιούργησε μια νέα δημοσκόπηση"
-
-#, python-format
-msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Μια νέα δημοσκόπηση: \"%(object_name)s\" δημιουργήθηκε σε %(team_name)s."
-
-msgid "A poll you voted on was completed"
-msgstr "Μια δημοσκόπηση στην οποία ψηφίσατε ολοκληρώθηκε"
-
-#, python-format
-msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
-msgstr "Ο/η %(sender_name)s ολοκλήρωσε τη δημοσκόπηση %(object_name)s στην οποία ψηφίσατε"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d polls you voted on"
-msgstr "Ο/η %(sender_name)s ολοκλήρωσε %(count)d δημοσκοπήσεις στις οποίες ψηφίσατε"
-
-#, python-format
-msgid "%(sender_name)s completed the poll"
-msgstr "Ο/η %(sender_name)s ολοκλήρωσε τη δημοσκόπηση"
-
-#, python-format
-msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
-msgstr "Η δημοσκόπηση \"%(object_name)s\" ολοκληρώθηκε σε %(team_name)s."
-
-msgid "A user commented on one of your polls"
-msgstr "Ένας χρήστης σχολίασε μία από τις δημοσκοπήσεις σας"
-
-#, python-format
-msgid "%(sender_name)s commented on your poll %(object_name)s"
-msgstr "Ο/η %(sender_name)s σχολίασε τη δημοσκόπησή σας %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
-msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε τη δημοσκόπησή σας %(object_name)s"
-msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν τη δημοσκόπησή σας %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your poll"
-msgstr "Ο/η %(sender_name)s σχολίασε τη δημοσκόπησή σας"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your polls"
-msgstr "Ο/η %(sender_name)s σχολίασε μία από τις δημοσκοπήσεις σας"
-
-msgid "A user commented on a poll you were tagged in"
-msgstr "Ένας χρήστης σχολίασε μια δημοσκόπηση στην οποία προστεθήκατε με ετικέτα"
-
-#, python-format
-msgid "%(sender_name)s commented on the poll %(object_name)s"
-msgstr "Ο/η %(sender_name)s σχολίασε τη δημοσκόπηση %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
-msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε τη δημοσκόπηση %(object_name)s"
-msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν τη δημοσκόπηση %(object_name)s"
-
-msgid "You were tagged in this poll"
-msgstr "Προστεθήκατε με ετικέτα σε αυτή τη δημοσκόπηση"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you were tagged in"
-msgstr "Ο/η %(sender_name)s σχολίασε μια δημοσκόπηση στην οποία προστεθήκατε με ετικέτα"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
-msgstr "Ο/η %(sender_name)s σχολίασε μια δημοσίευση στην οποία προστεθήκατε με ετικέτα σε %(team_name)s"
-
-msgid "A user commented on an poll you voted in"
-msgstr "Ένας χρήστης σχολίασε μια δημοσκόπηση στην οποία ψηφίσατε"
-
-msgid "You voted on this poll"
-msgstr "Ψηφίσατε στη συγκεκριμένη δημοσκόπηση"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you voted in"
-msgstr "Ο/η %(sender_name)s σχολίασε μια δημοσκόπηση στην οποία εσείς ψηφίσατε"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
-msgstr "Ο/η %(sender_name)s σχολίασε μια δημοσκόπηση στην οποία εσείς ψηφίσατε σε %(team_name)s"
-
-msgid "A user created a new poll in a team you are following"
-msgstr "Ένας χρήστης δημιούργησε μια νέα δημοσκόπηση σε μια ομάδα που ακολουθείτε"
-
-#, python-format
-msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
-msgstr "Ο/η %(sender_name)s δημιούργησε μια νέα δημοσκόπηση σε %(team_name)s (που ακολουθείτε)"
-
-#, python-format
-msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "Μια νέα δημοσκόπηση; \"%(object_name)s\" δημιουργήθηκε σε %(team_name)s (που ακολουθείτε)."
-
-msgid "A user updated a poll you are following"
-msgstr "Ένας χρήστης ενημέρωσε μια δημοσκόπηση που ακολουθείτε"
-
-#, python-format
-msgid "%(sender_name)s updated the poll %(object_name)s"
-msgstr "Ο/η %(sender_name)s ενημέρωσε τη δημοσκόπηση %(object_name)s"
-
-msgid "You are following this poll"
-msgstr "Ακολουθείτε αυτή τη δημοσκόπηση"
-
-#, python-format
-msgid "%(sender_name)s updated a poll you are following"
-msgstr "Ο/η %(sender_name)s ενημέρωσε μια δημοσκόπηση που ακολουθείτε"
-
-#, python-format
-msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "Μια δημοσκόπηση που ακολουθείτε: \"%(object_name)s\" ενημερώθηκε σε %(team_name)s."
-
-msgid "A poll you are following was completed"
-msgstr "Μια δημοσκόπηση που ακολουθείτε ολοκληρώθηκε"
-
-#, python-format
-msgid "%(sender_name)s completed the poll %(object_name)s"
-msgstr "Ο/η %(sender_name)s ολοκλήρωσε τη δημοσκόπηση %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d polls"
-msgstr "Ο/η %(sender_name)s ολοκλήρωσε %(count)d δημοσκοπήσεις"
-
-#, python-format
-msgid "%(sender_name)s completed the poll you are following"
-msgstr "Ο/η %(sender_name)s ολοκλήρωσε τη δημοσκόπηση που ακολουθείτε"
-
-#, python-format
-msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
-msgstr "Η δημοσκόπηση \"%(object_name)s\" που ακολουθείτε ολοκληρώθηκε σε %(team_name)s."
-
-msgid "A user commented on one a poll you are following"
-msgstr "Ένας χρήστης σχολίασε μια δημοσκόπηση που ακολουθείτε"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you are following"
-msgstr "Ο/η %(sender_name)s σχολίασε μια δημοσκόπηση που ακολουθείτε"
-
-msgid "Current Polls"
-msgstr "Τρέχουσες Δημοσκοπήσεις"
-
-msgid "No current polls"
-msgstr "Καμία τρέχουσα δημοσκόπηση"
-
-msgid "You must write a description for this poll option!"
-msgstr "Πρέπει να γράψετε μια περιγραφή για αυτή την επιλογή δημοσκόπησης!"
-
-msgid "Voting closed"
-msgstr "Η ψηφοφορία έκλεισε"
-
-msgid "Poll archived"
-msgstr "Η δημοσκόπηση αρχειοθετήθηκε"
-
-msgid "Multiple options votable"
-msgstr "Μπορούν να ψηφιστούν πολλές επιλογές"
-
-msgid "Does this poll allow users to vote on multiple options or just decide for one?"
-msgstr "Αυτή η δημοσκόπηση επιτρέπει τους χρήστες να ψηφίζουν με πολλές επιλογές ή απλώς να αποφασίζουν για μία;"
-
-msgid "\"Maybe\" option enabled"
-msgstr "Η επιλογή \"Ίσως\" ενεργοποιήθηκε"
-
-msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
-msgstr "Έχει ενεργοποιηθεί η επιλογή \"ίσως\"; Παραβλέπεται και αντιμετωπίζεται ως Ψευδής εάν `multiple_votes==False``"
-
-msgid "Anyone can vote"
-msgstr "Μπορεί να ψηφίσει οποιοσδήποτε"
-
-msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
-msgstr "Εάν ισχύει, όποιος μπορεί να δει αυτή τη δημοσκόπηση μπορεί να ψηφίσει. Εάν δεν ισχύει, μόνο τα μέλη της ομάδας μπορούν."
-
-msgid "Show voters"
-msgstr "Εμφάνιση ψηφοφόρων"
-
-msgid "If true, display a list of which user voted for each option."
-msgstr "Εάν ισχύει, εμφανίστε ένα κατάλογο με τους χρήστες που ψήφισαν κάθε επιλογή."
-
-msgid "Winning Option"
-msgstr "Επικρατούσα Επιλογή"
-
-#, python-format
-msgid "Poll: %(poll)s (%(state)s)"
-msgstr "Δημοσκόπηση: %(poll)s (%(state)s)"
-
-msgid "Poll Option"
-msgstr "Επιλογή Δημοσκόπησης"
-
-msgid "Poll Options"
-msgstr "Επιλογές Δημοσκόπησης"
-
-#, python-format
-msgid "Poll \"%(title)s\" was edited successfully."
-msgstr "Η δημοσκόπηση \"%(title)s\" υποβλήθηκε σε επεξεργασία με επιτυχία."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be edited."
-msgstr "Δεν ήταν δυνατή η επεξεργασία της δημοσκόπησης \"%(title)s\"."
-
-#, python-format
-msgid "Poll \"%(title)s\" was added successfully."
-msgstr "Η δημοσκόπηση \"%(title)s\" προστέθηκε με επιτυχία."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be added."
-msgstr "Δεν ήταν δυνατή η προσθήκη της δημοσκόπησης \"%(title)s\"."
-
-msgid "You should define at least one poll option!"
-msgstr "Θα πρέπει να ορίσετε τουλάχιστον μία επιλογή δημοσκόπησης!"
-
-msgid "This poll is archived and cannot be edited anymore!"
-msgstr "Η δημοσκόπηση αρχειοθετήθηκε και δεν μπορεί να υποβληθεί σε επεξεργασία πλέον!"
-
-#, python-format
-msgid "Poll \"%(title)s\" was deleted successfully."
-msgstr "Η δημοσκόπηση \"%(title)s\" έχει διαγραφεί με επιτυχία."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be deleted."
-msgstr "Δεν ήταν δυνατή η διαγραφή της δημοσκόπησης \"%(title)s\"."
-
-msgid "The voting phase for this poll is over. You cannot vote for it any more."
-msgstr "Η φάση της ψηφοφορίας για αυτή τη δημοσκόπηση έχει ολοκληρωθεί. Δεν μπορείτε πλέον να ψηφίσετε γι' αυτήν."
-
-msgid "In this poll you must vote for exactly one item!"
-msgstr "Σε αυτή τη δημοσκόπηση πρέπει να ψηφίσετε ακριβώς για ένα στοιχείο!"
-
-msgid "Invalid action for this poll. The request could not be completed!"
-msgstr "Μη έγκυρη ενέργεια για αυτή την δημοσκόπηση. Το αίτημα δεν μπόρεσε να ολοκληρωθεί!"
-
-msgid "This action is not permitted for this poll at this stage!"
-msgstr "Αυτή η ενέργεια δεν επιτρέπεται για αυτή τη δημοσκόπηση σε αυτό το στάδιο!"
-
-msgid "The poll was closed successfully."
-msgstr "Η δημοσκόπηση έκλεισε με επιτυχία."
-
-msgid "The poll was re-opened successfully."
-msgstr "Η δημοσκόπηση ξανάνοιξε με επιτυχία."
-
-msgid "The poll was archived successfully."
-msgstr "Η δημοσκόπηση αρχειοθετήθηκε με επιτυχία."
-
-msgid "Stream"
-msgstr "Ζωντανή Μετάδοση"
-
-msgctxt "the_app"
-msgid "stream"
-msgstr "ζωντανή μετάδοση"
-
-msgid "My Streams"
-msgstr "Οι Ζωντανές Μεταδόσεις Μου"
-
-msgid "Streams"
-msgstr "Ζωντανές Μεταδόσεις"
-
-msgid "Models"
-msgstr "Πρότυπα"
-
-msgid "Portal IDs"
-msgstr "Ταυτότητες Πύλης"
-
-msgid "Last seen"
-msgstr "Τελευταία προβολή"
-
-msgid "Special Stream"
-msgstr "Ειδική Ζωντανή Μετάδοση"
-
-msgid "Special Group IDs"
-msgstr "Ταυτότητες Ειδικής Ομάδας"
-
-msgid "You do not have permission to access this stream."
-msgstr "Δεν έχετε άδεια για να αποκτήσετε πρόσβαση σε αυτή τη ζωντανή μετάδοση."
-
-msgid "Your stream was added successfully."
-msgstr "Η ζωντανή μετάδοσή σας προστέθηκε με επιτυχία."
-
-msgid "Your stream was updated successfully."
-msgstr "Η ζωντανή μετάδοσή σας ενημερώθηκε με επιτυχία."
-
-msgid "Your stream was deleted successfully."
-msgstr "Η ζωντανή μετάδοσή σας διαγράφηκε με επιτυχία."
-
-msgid "You cannot delete the default stream!"
-msgstr "Δεν μπορείτε να διαγράψετε την προεπιλεγμένη ζωντανή μετάδοση!"
-
-msgctxt "the_app"
-msgid "todo"
-msgstr "καθήκοντα"
-
-msgid "A user created a new todo"
-msgstr "Ένας χρήστης δημιούργησε ένα νέο καθήκον"
-
-#, python-format
-msgid "%(sender_name)s created the todo %(object_name)s"
-msgstr "Ο/η %(sender_name)s δημιούργησε το καθήκον %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d todos"
-msgstr "Ο/η %(sender_name)s δημιούργησε %(count)d καθήκοντα"
-
-#, python-format
-msgid "%(sender_name)s created a new todo"
-msgstr "Ο/η %(sender_name)s δημιούργησε ένα νέο καθήκον"
-
-#, python-format
-msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Ένα νέο καθήκον: \"%(object_name)s\" δημιουργήθηκε σε %(team_name)s."
-
-msgid "A todo was assigned to me"
-msgstr "Ένα καθήκον ανατέθηκε σε εμένα"
-
-#, python-format
-msgid "%(sender_name)s assigned the todo %(object_name)s to you"
-msgstr "Ο/η %(sender_name)s ανέθεσε ένα καθήκον %(object_name)s σε εσάς"
-
-#, python-format
-msgid "%(sender_name)s assigned %(count)d todos to you"
-msgstr "Ο/η %(sender_name)s ανέθεσε %(count)d καθήκοντα σε εσάς"
-
-#, python-format
-msgid "%(sender_name)s assigned a todo to you"
-msgstr "Ο/η %(sender_name)s ανέθεσε ένα καθήκον σε εσάς"
-
-msgid "A todo I created was completed"
-msgstr "Ένα καθήκον που δημιούργησα ολοκληρώθηκε"
-
-#, python-format
-msgid "%(sender_name)s completed the todo %(object_name)s"
-msgstr "Ο/η %(sender_name)s ολοκλήρωσε το καθήκον %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d todos"
-msgstr "Ο/η %(sender_name)s ολοκλήρωσε %(count)d καθήκοντα"
-
-msgid "You created this todo"
-msgstr "Δημιουργήσατε αυτό το καθήκον"
-
-#, python-format
-msgid "%(sender_name)s completed your todo"
-msgstr "Ο/η %(sender_name)s ολοκλήρωσε το καθήκον σας"
-
-#, python-format
-msgid "%(sender_name)s completed one of your todos"
-msgstr "Ο/η %(sender_name)s ολοκλήρωσε ένα από τα καθήκοντά σας"
-
-msgid "A user commented on one of your todos"
-msgstr "Ένας χρήστης σχολίασε ένα από τα καθήκοντά σας"
-
-#, python-format
-msgid "%(sender_name)s commented on your todo %(object_name)s"
-msgstr "Ο/η %(sender_name)s σχολίασε το καθήκον %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
-msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε το καθήκον %(object_name)s"
-msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν το καθήκον %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your todo"
-msgstr "Ο/η %(sender_name)s σχολίασε το καθήκον σας"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your todos"
-msgstr "Ο/η %(sender_name)s σχολίασε ένα από τα καθήκοντά σας"
-
-msgid "A user commented on a todo you were tagged in"
-msgstr "Ένας χρήστης σχολίασε ένα καθήκον στο οποίο προστεθήκατε με ετικέτα"
-
-#, python-format
-msgid "%(sender_name)s commented on the todo %(object_name)s"
-msgstr "Ο/η %(sender_name)s σχολίασε το καθήκον %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
-msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε το καθήκον %(object_name)s"
-msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν το καθήκον %(object_name)s"
-
-msgid "You were tagged in this todo"
-msgstr "Προστεθήκατε με ετικέτα σε αυτό το καθήκον"
-
-#, python-format
-msgid "%(sender_name)s commented on a todo you were tagged in"
-msgstr "Ο/η %(sender_name)s σχολίασε ένα καθήκον στο οποίο προστεθήκατε με ετικέτα"
-
-#, python-format
-msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
-msgstr "Ο/η %(sender_name)s σχολίασε ένα καθήκον στο οποίο προστεθήκατε με ετικέτα σε %(team_name)s"
-
-msgid "A user commented on a todo you were assigned to"
-msgstr "Ένας χρήστης σχολίασε ένα καθήκον που σας ανατέθηκε"
-
-#, python-format
-msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
-msgstr "Ο/η %(sender_name)s σχολίασε το καθήκον %(object_name)s που σας ανατέθηκε"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
-msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε το καθήκον %(object_name)s που σας ανατέθηκε"
-msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν το καθήκον %(object_name)s που σας ανατέθηκε"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your assigned todos"
-msgstr "Ο/η %(sender_name)s σχολίασε ένα από τα καθήκοντα που σας ανατέθηκαν"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
-msgstr "Ο/η %(sender_name)s σχολίασε ένα από τα καθήκοντα που σας ανατέθηκαν σε %(team_name)s"
-
-msgid "A user updated a todo you are following"
-msgstr "Ένας χρήστης ενημέρωσε ένα καθήκον που ακολουθείτε"
-
-#, python-format
-msgid "%(sender_name)s updated the todo %(object_name)s"
-msgstr "Ο/η %(sender_name)s ενημέρωσε το καθήκον %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
-msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος ενημέρωσε το καθήκον %(object_name)s"
-msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι ενημέρωσαν το καθήκον %(object_name)s"
-
-msgid "You are following this todo"
-msgstr "Ακολουθείτε αυτό το καθήκον"
-
-#, python-format
-msgid "%(sender_name)s updated a todo you are following"
-msgstr "Ο/η %(sender_name)s ενημέρωσε ένα καθήκον που ακολουθείτε"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "Ένα καθήκον που ακολουθείτε: \"%(object_name)s\" ενημερώθηκε σε %(team_name)s."
-
-msgid "A user reassigned a todo you are following"
-msgstr "Ένας χρήστης ανέθεσε εκ νέου ένα καθήκον που ακολουθείτε"
-
-#, python-format
-msgid "%(sender_name)s reassigned the todo %(object_name)s"
-msgstr "Ο/η %(sender_name)s ανέθεσε εκ νέου το καθήκον %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s reassigned %(count)d todos"
-msgstr "Ο/η %(sender_name)s ανέθεσε εκ νέου %(count)d καθήκοντα"
-
-#, python-format
-msgid "%(sender_name)s reassigned a todo you are following"
-msgstr "Ο/η %(sender_name)s ανέθεσε εκ νέου ένα καθήκον που ακολουθείτε"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
-msgstr "Ένα καθήκον που ακολουθείτε: \"%(object_name)s\" ανατέθηκε εκ νέου σε %(team_name)s."
-
-msgid "A user completed a todo you are following"
-msgstr "Ένας χρήστης ολοκλήρωσε ένα καθήκον που ακολουθείτε"
-
-#, python-format
-msgid "%(sender_name)s completed a todo you are following"
-msgstr "Ο/η %(sender_name)s ολοκλήρωσε ένα καθήκον που ακολουθείτε"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
-msgstr "Ένα καθήκον που ακολουθείτε: \"%(object_name)s\" ολοκληρώθηκε σε %(team_name)s."
-
-msgid "A user commented on a todo you are following"
-msgstr "Ένας χρήστης σχολίασε ένα καθήκον που ακολουθείτε"
-
-#, python-format
-msgid "%(sender_name)s commented on on a todo you are following"
-msgstr "Ο/η %(sender_name)s σχολίασε ένα καθήκον που ακολουθείτε"
-
-msgid "My Todos"
-msgstr "Τα Καθήκοντά Μου"
-
-msgid "No todos"
-msgstr "Κανένα καθήκον"
-
-msgid "Open"
-msgstr "Ανοιχτό"
-
-msgid "Completed"
-msgstr "Ολοκληρώθηκε"
-
-msgid "Assigned To"
-msgstr "Ανατέθηκε Σε"
-
-msgid "Priority"
-msgstr "Προτεραιότητα"
-
-msgid "Due date"
-msgstr "Προθεσμία"
-
-msgid "Soonest Due"
-msgstr "Πλησιέστερη Ημερομηνία"
-
-msgid "You are not allowed to assign this Todo entry."
-msgstr "Δεν σας επιτρέπεται η ανάθεση αυτού του Καθήκοντος."
-
-msgid "Later"
-msgstr "Αργότερα"
-
-msgid "Normal"
-msgstr "Κανονικό"
-
-msgid "Important"
-msgstr "Σημαντικό"
-
-msgid "Due by"
-msgstr "Προθεσμία μέχρι"
-
-msgid "Completed on"
-msgstr "Ολοκληρώθηκε στις"
-
-msgid "Completed by"
-msgstr "Ολοκληρώθηκε από"
-
-msgid "Assigned to"
-msgstr "Ανατέθηκε σε"
-
-msgid "List"
-msgstr ""
-
-#, python-format
-msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
-msgstr "Το καθήκον \"%(todo_name)s\" ανατέθηκε σε %(assignee_name)s"
-
-#, python-format
-msgid "Todo \"%(title)s\" was added successfully."
-msgstr "Το καθήκον \"%(title)s\" προστέθηκε με επιτυχία."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be added."
-msgstr "Δεν ήταν δυνατή η προσθήκη του καθήκοντος \"%(title)s\"."
-
-msgid "You were trying to add a todo to a todolist that does not exist!"
-msgstr "Προσπαθούσατε να προσθέσετε ένα καθήκον σε μια λίστα καθηκόντων που δεν υπάρχει!"
-
-#, python-format
-msgid "Todo \"%(title)s\" was edited successfully."
-msgstr "To καθήκον \"%(title)s\" υποβλήθηκε σε επεξεργασία με επιτυχία."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be edited."
-msgstr "Δεν ήταν δυνατή η επεξεργασία του καθήκοντος \"%(title)s\"."
-
-#, python-format
-msgid "Todo \"%(title)s\" was deleted successfully."
-msgstr "Το καθήκον \"%(title)s\" διαγράφηκε με επιτυχία."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be deleted."
-msgstr "Δεν ήταν δυνατή η διαγραφή του καθήκοντος \"%(title)s\"."
-
-#, python-format
-msgid "Todo \"%(title)s\" was assigned successfully."
-msgstr "Το καθήκον \"%(title)s\" ανατέθηκε με επιτυχία."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be assigned."
-msgstr "Δεν ήταν δυνατή η ανάθεση του καθήκοντος \"%(title)s\"."
-
-#, python-format
-msgid "Todo \"%(title)s\" was assigned to You successfully."
-msgstr "Το καθήκον \"%(title)s\" ανατέθηκε σε Εσάς με επιτυχία."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be assigned to You."
-msgstr "Δεν ήταν δυνατή η ανάθεση του καθήκοντος \"%(title)s\" σε Εσάς."
-
-#, python-format
-msgid "Todo \"%(title)s\" was unassigned successfully."
-msgstr "To καθήκον \"%(title)s\" ανακλήθηκε με επιτυχία."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be unassigned."
-msgstr "Δεν ήταν δυνατή η ανάκληση του καθήκοντος \"%(title)s\"."
-
-#, python-format
-msgid "Todo \"%(title)s\" was completed successfully."
-msgstr "Το καθήκον \"%(title)s\" ολοκληρώθηκε με επιτυχία."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be completed."
-msgstr "Δεν ήταν δυνατή η ολοκλήρωση του καθήκοντος \"%(title)s\"."
-
-#, python-format
-msgid "Todo \"%(title)s\" was completed by You successfully."
-msgstr "Το καθήκον \"%(title)s\" ολοκληρώθηκε από Εσάς με επιτυχία."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be completed by You."
-msgstr "Δεν ήταν δυνατή η ολοκλήρωση του καθήκοντος \"%(title)s\" από Εσάς."
-
-#, python-format
-msgid "Todo \"%(title)s\" was set to incomplete successfully."
-msgstr "Το καθήκον \"%(title)s\" ορίστηκε ως μη ολοκληρωμένο με επιτυχία."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be set to incomplete."
-msgstr "Το καθήκον \"%(title)s\" δεν μπορούσε να οριστεί ως μη ολοκληρωμένο."
-
-#, python-format
-msgid "Todolist \"%(title)s\" was edited successfully."
-msgstr "Η λίστα καθηκόντων \"%(title)s\" υποβλήθηκε σε επεξεργασία με επιτυχία."
-
-#, python-format
-msgid "Todolist \"%(title)s\" could not be edited."
-msgstr "Δεν ήταν δυνατή η επεξεργασία της λίστας καθηκόντων \"%(title)s\"."
-
-#, python-format
-msgid "Todolist \"%(title)s\" was added successfully."
-msgstr "Η λίστα καθηκόντων \"%(title)s\" προστέθηκε με επιτυχία."
-
-#, python-format
-msgid "Todolist \"%(title)s\" could not be added."
-msgstr "Δεν ήταν δυνατή η προσθήκη της λίστας καθηκόντων \"%(title)s\"."
-
-msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
-msgstr "Δεν μπορείτε να διαγράψετε αυτόν τον φάκελο διότι δεν έχετε άδεια να διαγράψετε ένα ή περισσότερα στοιχεία που περιέχει!"
-
-msgid "Sender and Recipient cannot be both undefined."
-msgstr ""
-
-msgid "Visitor's email is in excess."
-msgstr ""
-
-msgid "Visitor's email is missing."
-msgstr ""
-
-msgid "Reading date must be later than sending date."
-msgstr ""
-
-msgid "Deletion date by sender must be later than sending date."
-msgstr ""
-
-msgid "Deletion date by recipient must be later than sending date."
-msgstr ""
-
-msgid "Response date must be later than sending date."
-msgstr ""
-
-msgid "The message cannot be replied without having been read."
-msgstr ""
-
-msgid "Response date must be later than reading date."
-msgstr ""
-
-msgid "Response date cannot be set without at least one reply."
-msgstr ""
-
-#, fuzzy
-#| msgid "This message was sent in a conversation with: "
-msgid "The message cannot be replied without being in a conversation."
-msgstr "Αυτό το μήνυμα στάλθηκε σε συζήτηση με: "
-
-msgid "Dates"
-msgstr "Ημερομηνίες"
-
-#, fuzzy
-#| msgid "Is Moderator"
-msgid "Moderation"
-msgstr "Είναι Συντονιστής"
-
-#, python-brace-format
-msgid "Some usernames are unknown or no longer active: {users}."
-msgstr ""
-
-#, python-brace-format
-msgid "Ensure this value has at most {limit_value} distinct items (it has {show_value})."
-msgstr ""
-
-#, python-brace-format
-msgid "Ensure this value has at least {limit_value} distinct items (it has {show_value})."
-msgstr ""
-
-#, python-brace-format
-msgid "Some usernames are rejected: {users}."
-msgstr ""
-
-#, fuzzy, python-brace-format
-#| msgid "Your name"
-msgid "{username}"
-msgstr "Το όνομά σας"
-
-#, python-brace-format
-msgid "{username} ({reason})"
-msgstr ""
-
-#, python-brace-format
-msgid "Writing to some users is not possible: {users}."
-msgstr ""
-
-msgid "Recipient"
-msgstr "Παραλήπτης"
-
-#, fuzzy
-#| msgid "Additional Recipients"
-msgid "Additional recipients"
-msgstr "Επιπλέον Παραλήπτες"
-
-#, fuzzy
-#| msgid "Additional Recipients"
-msgid "Additional recipient"
-msgstr "Επιπλέον Παραλήπτες"
-
-#, fuzzy
-#| msgid "Message Project"
-msgid "Message Rejected"
-msgstr "Αποστολή Μηνύματος σε Έργο"
-
-#, fuzzy
-msgid "Your message has been rejected"
-msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
-
-#, fuzzy
-#| msgid "Message Project"
-msgid "Message Received"
-msgstr "Αποστολή Μηνύματος σε Έργο"
-
-#, fuzzy
-#| msgid "You have been invited to apply!"
-msgid "You have received a message"
-msgstr "Έχετε προσκληθεί για να υποβάλλετε αίτηση!"
-
-msgid "Reply Received"
-msgstr ""
-
-#, fuzzy
-#| msgid "You have been invited to apply!"
-msgid "You have received a reply"
-msgstr "Έχετε προσκληθεί για να υποβάλλετε αίτηση!"
-
-msgid "Pending"
-msgstr ""
-
-#, fuzzy
-#| msgid "Restricted"
-msgid "Rejected"
-msgstr "Περιορισμένος"
-
-#, fuzzy
-#| msgid "Everybody"
-msgid "body"
-msgstr "Όλοι"
-
-msgid "sender"
-msgstr ""
-
-#, fuzzy
-#| msgid "Recipient"
-msgid "recipient"
-msgstr "Παραλήπτης"
-
-#, fuzzy
-#| msgid "Visitor"
-msgid "visitor"
-msgstr "Επισκέπτης"
-
-#, fuzzy
-msgid "parent message"
-msgstr "Το όνομά σας"
-
-#, fuzzy
-#| msgid "No messages"
-msgid "root message"
-msgstr "Κανένα μήνυμα"
-
-#, fuzzy
-#| msgid "Sent at:"
-msgid "sent at"
-msgstr "Εστάλη σε:"
-
-msgid "read at"
-msgstr ""
-
-msgid "replied at"
-msgstr ""
-
-msgid "archived by sender"
-msgstr ""
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "archived by recipient"
-msgstr "Μη καθορισμένος παραλήπτης."
-
-#, fuzzy
-#| msgid "Delete user account"
-msgid "deleted by sender at"
-msgstr "Διαγραφή λογαριασμού χρήστη"
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "deleted by recipient at"
-msgstr "Μη καθορισμένος παραλήπτης."
-
-msgid "status"
-msgstr ""
-
-#, fuzzy
-#| msgid "Is Moderator"
-msgid "moderator"
-msgstr "Είναι Συντονιστής"
-
-#, fuzzy
-#| msgid "Related to"
-msgid "moderated at"
-msgstr "Αναφορικά με"
-
-msgid "rejection reason"
-msgstr ""
-
-msgid "Direct Reply Hash"
-msgstr ""
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "message"
-msgstr "μήνυμα"
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "messages"
-msgstr "μήνυμα"
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "Undefined sender."
-msgstr "Μη καθορισμένος παραλήπτης."
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "pending message"
-msgstr "μήνυμα"
-
-#, fuzzy
-msgid "pending messages"
-msgstr "Το όνομά σας"
-
-msgid "<me>"
-msgstr ""
-
-msgid "> "
-msgstr ""
-
-#, python-brace-format
-msgid ""
-"\n"
-"\n"
-"{sender} wrote:\n"
-"{body}\n"
-msgstr ""
-
-#, fuzzy, python-brace-format
-msgid "Re: {subject}"
-msgstr "Θέμα"
-
-#, fuzzy
-#| msgid "User successfully created!"
-msgid "Message successfully sent."
-msgstr "Ο χρήστης δημιουργήθηκε με επιτυχία!"
-
-#, fuzzy
-#| msgid "Select at least one object."
-msgid "Message rejected for at least one recipient."
-msgstr "Επιλέξτε τουλάχιστον ένα αντικείμενο."
-
-msgid "A conference you are attending has been updated"
-msgstr ""
-
-#, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
-msgid "The conference %(object_name)s has been updated"
-msgstr "Μια νέα σύσκεψη: \"%(object_name)s\" ανακοινώθηκε σε %(team_name)s."
-
-#, fuzzy
-#| msgid "You are about to deactivate this conference!"
-msgid "You are attending this conference"
-msgstr "Πρόκειται να απενεργοποιήσετε αυτή τη σύσκεψη!"
-
-#, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
-msgid "The conference \"%(object_name)s\" was updated."
-msgstr "Μια νέα σύσκεψη: \"%(object_name)s\" ανακοινώθηκε σε %(team_name)s."
-
-msgid "The time of a conference you are attending has been updated"
-msgstr ""
-
-#, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
-msgid "The time of conference %(object_name)s has been updated"
-msgstr "Μια νέα σύσκεψη: \"%(object_name)s\" ανακοινώθηκε σε %(team_name)s."
-
-msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
-msgstr ""
-
-msgid "minute"
-msgstr ""
-
-msgid "minutes"
-msgstr ""
-
-msgid "Select the date range for which you would like statistics"
-msgstr ""
-
-msgid "Cloud Stub"
-msgstr "Cloud Stub"
-
-msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
-msgstr ""
-
-msgid "There are no cloud files yet"
-msgstr "Δεν υπάρχουν ακόμη αρχεία cloud"
-
-msgid "Error message:"
-msgstr ""
-
-msgid "No error message supplied."
-msgstr ""
-
-msgid "Pad"
-msgstr "Pad"
-
-msgid "This pad can no longer be edited because its creator has deleted their account."
-msgstr "Αυτό το pad δεν μπορεί πλέον να υποβληθεί σε επεξεργασία καθώς ο δημιουργός του έχει διαγράψει τον λογαριασμό του."
-
-#, python-format
-msgid "Do you really want to delete etherpad „%(pad)s“?"
-msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε το etherpad \"%(pad)s\";"
-
-msgid "Delete Etherpad"
-msgstr "Διαγραφή Etherpad"
-
-msgid "This document is empty"
-msgstr "Το έγγραφο είναι κενό"
-
-msgid "Pads"
-msgstr "Pad"
-
-msgid "Enter a title for the Pad."
-msgstr "Εισάγετε τίτλο για το Pad."
-
-msgid "Enter the title for a new Document or Table."
-msgstr "Εισάγετε τίτλο για ένα νέο Έγγραφο ή Πίνακα."
-
-msgid "Enter the title for a new Document."
-msgstr "Εισάγετε τίτλο για ένα νέο Έγγραφο."
-
-msgid "Create Etherpad"
-msgstr "Δημιουργήστε Etherpad"
-
-msgid "Create Ethercalc"
-msgstr "Δημιουργήστε Ethercalc"
-
-#, python-format
-msgid "Do you really want to delete etherpad „%(title)s“?"
-msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε το etherpad \"%(title)s\";"
-
-msgid "No etherpads have been created yet."
-msgstr "Δεν έχουν ακόμη δημιουργηθεί etherpad."
-
-msgid "Download CSV"
-msgstr "Λήψη CSV"
-
-msgid "Download Excel"
-msgstr "Λήψη Excel"
-
-#, python-format
-msgid ""
-"Hi %(receiver_name)s,\n"
-"\n"
-"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
-"\n"
-"You can find it by following this link: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s Team."
-msgstr ""
-"Γεια %(receiver_name)s,\n"
-"\n"
-"ένα νέο etherpad \"%(object_name)s\" σε %(team_name)s δημιουργήθηκε από %(sender_name)s. \n"
-"\n"
-"Μπορείτε να το βρείτε ακολουθώντας τον συγκεκριμένο σύνδεσμο: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Ακολουθείστε τον σύνδεσμο αυτό για να επεξεργαστείτε τις προτιμήσεις ειδοποίησης: %(notification_settings_url)s )\n"
-"\n"
-"Η Ομάδα %(site_name)s."
-
-msgid "You created a pad"
-msgstr "Δημιουργήσατε ένα pad"
-
-msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
-msgid "created a Pad"
-msgstr "δημιούργησε ένα Pad"
-
-msgid "There are no etherpads yet"
-msgstr "Δεν υπάρχουν ακόμη etherpad"
-
 msgid "Would you like to create an event"
 msgstr "Θα θέλατε να δημιουργήσετε μια εκδήλωση"
 
@@ -10941,6 +9302,9 @@ msgstr "Δημοσκοπήσεις για Εκδήλωση"
 
 msgid "Enter a title for the new event to be scheduled."
 msgstr "Εισάγετε τίτλο για τη νέα εκδήλωση που πρόκειται να προγραμματιστεί."
+
+msgid "Dates"
+msgstr "Ημερομηνίες"
 
 msgid "Please select the available days in the calendar."
 msgstr "Παρακαλούμε επιλέξτε τις διαθέσιμες ημέρες στο ημερολόγιο."
@@ -11085,6 +9449,9 @@ msgstr "Επιστροφή στις Δημοσκοπήσεις για Εκδήλ
 
 msgid "Return to Archived Event Polls"
 msgstr "Επιστροφή στις Αρχειοθετημένες Δημοσκοπήσεις για Εκδήλωση"
+
+msgid "List"
+msgstr ""
 
 msgid "View"
 msgstr "Προβολή"
@@ -11433,6 +9800,197 @@ msgstr "δημιούργησε μια εκδήλωση"
 msgid "Show all"
 msgstr "Εμφάνιση όλων"
 
+msgid "Upcoming events"
+msgstr "Προσεχείς εκδηλώσεις"
+
+#, python-format
+msgid "Event \"%(title)s\" was edited successfully."
+msgstr "Η εκδήλωση \"%(title)s\" υποβλήθηκε σε επεξεργασία με επιτυχία."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be edited."
+msgstr "Δεν ήταν δυνατή η επεξεργασία της εκδήλωσης \"%(title)s\"."
+
+msgid "Please use the conference management area to add new workshops!"
+msgstr "Παρακαλούμε χρησιμοποιήστε την περιοχή διαχείρισης σύσκεψης για να προσθέσετε νέα σεμινάρια!"
+
+msgid "The page you requested is not available for this event at this time."
+msgstr "Η σελίδα που ζητήσατε δεν είναι διαθέσιμη για αυτή την εκδήλωση τη συγκεκριμένη ώρα."
+
+msgid "One of the event suggestions times could not be understood!"
+msgstr "Μία από τις ώρες των προτάσεων εκδήλωσης δεν ήταν δυνατό να γίνει κατανοητή!"
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was edited successfully."
+msgstr "Η μη προγραμματισμένη εκδήλωση \"%(title)s\" υποβλήθηκε σε επεξεργασία με επιτυχία."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be edited."
+msgstr "Δεν ήταν δυνατή η επεξεργασία της μη προγραμματισμένης εκδήλωσης \"%(title)s\"."
+
+#, python-format
+msgid "Event \"%(title)s\" was added successfully."
+msgstr "Η εκδήλωση \"%(title)s\" προστέθηκε με επιτυχία."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be added."
+msgstr "Δεν ήταν δυνατή η προσθήκη της εκδήλωσης \"%(title)s\"."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was added successfully."
+msgstr "Η μη προγραμματισμένη εκδήλωση %(title)s\" προστέθηκε με επιτυχία."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be added."
+msgstr "Δεν ήταν δυνατή η προσθήκη της μη προγραμματισμένης εκδήλωσης \"%(title)s\"."
+
+msgid "You should define at least one date suggestion."
+msgstr "Θα πρέπει να δώσετε τουλάχιστον μια πρόταση για ημερομηνία."
+
+#, python-format
+msgid "Event \"%(title)s\" was deleted successfully."
+msgstr "Η εκδήλωση \"%(title)s\" διαγράφηκε με επιτυχία."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be deleted."
+msgstr "Δεν ήταν δυνατή η διαγραφή της εκδήλωσης \"%(title)s\"."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was deleted successfully."
+msgstr "Η μη προγραμματισμένη εκδήλωση \"%(title)s\" διαγράφηκε με επιτυχία."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be deleted."
+msgstr "Δεν ήταν δυνατή η διαγραφή της μη προγραμματισμένης εκδήλωσης \"%(title)s\"."
+
+#, fuzzy
+#| msgid "Your data was saved successfully!"
+msgid "Your votes were saved successfully."
+msgstr "Τα δεδομένα σας αποθηκεύτηκαν με επιτυχία!"
+
+#, fuzzy
+#| msgid "Poll \"%(title)s\" could not be added."
+msgid "Your votes could not be saved."
+msgstr "Δεν ήταν δυνατή η προσθήκη της δημοσκόπησης \"%(title)s\"."
+
+msgid "This is event is already scheduled. You cannot vote for it any more."
+msgstr "Αυτή η εκδήλωση έχει ήδη προγραμματιστεί. Δεν μπορείτε πλέον να ψηφίσετε για αυτή."
+
+msgid "The complete request can only be sent via POST!"
+msgstr "Το πλήρες αίτημα μπορεί να σταλεί μόνο μέσω ΑΝΑΡΤΗΣΗΣ!"
+
+msgid "Event cannot be completed: No date was supplied."
+msgstr "Δεν είναι δυνατή η ολοκλήρωση της εκδήλωσης: Δεν δόθηκε ημερομηνία."
+
+msgid "The event was created successfully at the specified date."
+msgstr "Η εκδήλωση δημιουργήθηκε με επιτυχία τη συγκεκριμένη ημερομηνία."
+
+#, fuzzy
+msgid "Upcoming event"
+msgstr "Προσεχείς εκδηλώσεις"
+
+msgid "Your comment was added successfully."
+msgstr "Το σχόλιό σας προστέθηκε με επιτυχία."
+
+msgid "Your comment was deleted successfully."
+msgstr "Το σχόλιό σας διαγράφηκε με επιτυχία."
+
+msgid "Exchange"
+msgstr ""
+
+msgctxt "the_app"
+msgid "exchange"
+msgstr ""
+
+msgctxt "the_app"
+msgid "file"
+msgstr "αρχείο"
+
+msgid "A user uploaded a new file"
+msgstr "Ένας χρήστης ανέβασε ένα νέο αρχείο"
+
+#, python-format
+msgid "%(sender_name)s uploaded the file %(object_name)s"
+msgstr "Ο/η %(sender_name)s ανέβασε το αρχείο %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s uploaded %(count)d files"
+msgstr "Ο/η %(sender_name)s ανέβασε %(count)d αρχεία"
+
+#, python-format
+msgid "%(sender_name)s created a new file"
+msgstr "Ο/η %(sender_name)s δημιούργησε ένα νέο αρχείο"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Ένα νέο αρχείο: \"%(object_name)s\" δημιουργήθηκε σε %(team_name)s."
+
+msgid "A user uploaded a new file in a team you are following"
+msgstr "Ένας χρήστης ανέβασε ένα νέο αρχείο σε μια ομάδα που ακολουθείτε"
+
+#, python-format
+msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
+msgstr "Ο/η %(sender_name)s δημιούργησε ένα νέο αρχείο σε %(team_name)s (που ακολουθείτε)"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Ένα νέο αρχείο: \"%(object_name)s\" δημιουργήθηκε σε %(team_name)s (που ακολουθείτε)."
+
+msgid "Latest Files"
+msgstr "Τελευταία Αρχεία"
+
+msgid "No files"
+msgstr "Δεν υπάρχουν αρχεία"
+
+msgid "Pictures"
+msgstr "Εικόνες"
+
+msgid "Documents"
+msgstr "Έγγραφα"
+
+msgid "Audio Files"
+msgstr "Ηχητικά Αρχεία"
+
+msgid "Videos"
+msgstr "Βίντεο"
+
+msgid "File Type"
+msgstr "Είδος Αρχείου"
+
+msgid "File Name"
+msgstr "Όνομα Αρχείου"
+
+msgid "File Name (descending)"
+msgstr "Όνομα Αρχείου (φθίνουσα σειρά)"
+
+msgid "Smallest Files"
+msgstr "Μικρότερα Αρχεία"
+
+msgid "Largest Files"
+msgstr "Μεγαλύτερα Αρχεία"
+
+msgid "The given URL does not seem to be valid."
+msgstr "Το URL που έχει δοθεί δεν φαίνεται να είναι έγκυρο."
+
+msgid "Must supply either a URL or File"
+msgstr "Πρέπει να δοθεί URL ή Αρχείο"
+
+msgid "Is URL Link"
+msgstr "Είναι Σύνδεσμος URL"
+
+msgid "Uploaded by"
+msgstr "Ανέβηκε από"
+
+msgid "Uploaded on"
+msgstr "Ανέβηκε στις"
+
+msgid "No files selected."
+msgstr "Δεν έχουν επιλεγεί αρχεία."
+
+msgctxt "special_folder_type"
+msgid "Attachments"
+msgstr "Επισυνάψεις"
+
 msgid "The URL you have entered does not seem to be valid!"
 msgstr "Το URL που έχετε εισάγει δεν φαίνεται να είναι έγκυρο!"
 
@@ -11545,6 +10103,197 @@ msgstr "Τελευταία αρχεία"
 
 msgid "There are no files  yet"
 msgstr "Δεν υπάρχουν ακόμη αρχεία"
+
+msgid "File does not exist or you are not allowed to delete it."
+msgstr "Το αρχείο δεν υπάρχει ή δεν επιτρέπεται να το διαγράψετε."
+
+#, python-format
+msgid "A problem occurred during export. The following file is missing: %(filename)s."
+msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
+msgstr[0] "Προέκυψε πρόβλημα κατά την εξαγωγή. Λείπει το παρακάτω αρχείο: %(filename)s."
+msgstr[1] "Προέκυψε πρόβλημα κατά την εξαγωγή. Λείπουν τα παρακάτω αρχεία: %(filename)s."
+
+msgid "Invalid request."
+msgstr "Μη έγκυρο αίτημα."
+
+#, python-format
+msgid "File \"%(title)s\" was updated successfully."
+msgstr "Το αρχείο \"%(title)s\" ενημερώθηκε με επιτυχία."
+
+#, python-format
+msgid "File \"%(title)s\" could not be updated."
+msgstr "Δεν ήταν δυνατή η ενημέρωση του αρχείου \"%(title)s\"."
+
+msgid "Downloading failed, the target object was not a folder!"
+msgstr "Η λήψη απέτυχε, το τελικό αντικείμενο δεν ήταν φάκελος!"
+
+msgid "Canceled the download because there seem to be no files in this folder."
+msgstr "Η λήψη ακυρώθηκε καθώς φαίνεται να μην υπάρχουν αρχεία σε αυτό τον φάκελο."
+
+msgid "Internal Error: Group not Found"
+msgstr "Εσωτερικό Σφάλμα: Δεν Βρέθηκε Ομάδα"
+
+msgid "Permission for upload denied"
+msgstr "Απορρίφθηκε το αίτημα άδειας για φόρτωση"
+
+msgid "The uploaded file was invalid."
+msgstr "Το αρχείο που ανέβηκε δεν ήταν έγκυρο."
+
+#, python-format
+msgid "%(count)d File was added successfully."
+msgid_plural "%(count)d Files were added successfully."
+msgstr[0] "%(count)d Aρχείο προστέθηκε με επιτυχία."
+msgstr[1] "%(count)d Αρχεία προστέθηκαν με επιτυχία."
+
+msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
+msgstr "Το αρχείο που ανεβάσατε ήταν πολύ μεγάλο ή δεν επιτρεπόταν να ανεβεί αυτό το είδος αρχείου!"
+
+msgctxt "the_app"
+msgid "marketplace"
+msgstr "marketplace"
+
+msgid "A user created a new offer"
+msgstr "Ένας χρήστης δημιούργησε μια νέα προσφορά"
+
+#, python-format
+msgid "%(sender_name)s created the offer %(object_name)s"
+msgstr "Ο/η %(sender_name)s δημιούργησε την προσφορά %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d offers"
+msgstr "Ο/η %(sender_name)s δημιούργησε %(count)d προσφορές"
+
+#, python-format
+msgid "%(sender_name)s created a new offer"
+msgstr "Ο/η %(sender_name)s δημιούργησε μια νέα προσφορά"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Μια νέα προσφορά: \"%(object_name)s\" δημιουργήθηκε σε %(team_name)s."
+
+msgid "One of your offers expired"
+msgstr "Μία από τις προσφορές σας έληξε"
+
+#, python-format
+msgid "Your offer %(object_name)s expired"
+msgstr "Η προσφορά σας %(object_name)s έληξε"
+
+#, python-format
+msgid "%(count)d of your offers expired"
+msgstr "%(count)d από τις προσφορές σας έληξαν"
+
+msgid "Your offer has expired"
+msgstr "Η προσφορά σας έχει λήξει"
+
+#, python-format
+msgid "Offer \"%(object_name)s\" has expired."
+msgstr "Η προσφορά \"%(object_name)s\" έχει λήξει."
+
+msgid "A user commented on one of your offers"
+msgstr "Ένα χρήστης σχολίασε μία από τις προσφορές σας"
+
+#, python-format
+msgid "%(sender_name)s commented on your offer %(object_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε την προσφορά σας %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
+msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε την προσφορά σας %(object_name)s"
+msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν την προσφορά σας %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your offer"
+msgstr "Ο/η %(sender_name)s σχολίασε την προσφορά σας"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your offers"
+msgstr "Ο/η %(sender_name)s σχολίασε μία από τις προσφορές σας"
+
+msgid "A user commented on an offer you were tagged in"
+msgstr "Ένας χρήστης σχολίασε μια προσφορά στην οποία έχετε προστεθεί με ετικέτα"
+
+#, python-format
+msgid "%(sender_name)s commented on the offer %(object_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε την προσφορά %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
+msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε την προσφορά %(object_name)s"
+msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν την προσφορά %(object_name)s"
+
+msgid "You were tagged in this offer"
+msgstr "Προστεθήκατε με ετικέτα σε αυτή την προσφορά"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in"
+msgstr "Ο/η %(sender_name)s σχολίασε μια προσφορά στην οποία προστεθήκατε με ετικέτα"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in in %(team_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε μια προσφορά στην οποία προστεθήκατε με ετικέτα σε %(team_name)s"
+
+msgid "A user created a new offer in a team you are following"
+msgstr "Ένας χρήστης δημιούργησε μια νέα προσφορά σε μια ομάδα που ακολουθείτε"
+
+#, python-format
+msgid "%(sender_name)s created a new offer in %(team_name)s (which you follow)"
+msgstr "Ο/η %(sender_name)s δημιούργησε μια νέα προσφορά σε %(team_name)s (που ακολουθείτε)"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Μια νέα προσφορά: \"%(object_name)s\" δημιουργήθηκε σε %(team_name)s (που ακολουθείτε)."
+
+msgid "A user updated an offer you are following"
+msgstr "Ένας χρήστης ενημέρωσε μια προσφορά που ακολουθείτε"
+
+#, python-format
+msgid "%(sender_name)s updated the offer %(object_name)s"
+msgstr "Ο/η %(sender_name)s ενημέρωσε την προσφορά %(object_name)s"
+
+msgid "You are following this offer"
+msgstr "Ακολουθείτε αυτή την προσφορά"
+
+#, python-format
+msgid "%(sender_name)s updated an offer you are following"
+msgstr "Ο/η %(sender_name)s ενημέρωσε μια προσφορά που ακολουθείτε"
+
+#, python-format
+msgid "An offer you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Μια προσφορά που ακολουθείτε: \"%(object_name)s\" ενημερώθηκε σε %(team_name)s."
+
+msgid "A user commented on an offer you are following"
+msgstr "Ένας χρήστης σχολίασε μια προσφορά που ακολουθείτε"
+
+#, python-format
+msgid "%(sender_name)s commented on on an offer you are following"
+msgstr "Ο/η %(sender_name)s σχολίασε μια προσφορά που ακολουθείτε"
+
+msgid "Current Offers"
+msgstr "Τρέχουσες Προσφορές"
+
+msgid "No current offers"
+msgstr "Δεν υπάρχουν τρέχουσες προσφορές"
+
+msgid "Order Key"
+msgstr "Κλειδί Εντολής"
+
+msgid "Looking for"
+msgstr "Αναζήτηση για"
+
+msgid "Offering"
+msgstr "Προσφορά"
+
+msgid "Offer currently active?"
+msgstr "Η προσφορά είναι τώρα ενεργή;"
+
+msgid "Offer Category"
+msgstr "Κατηγορία Προσφοράς"
+
+#, python-format
+msgid "Offer: %(offer)s (%(type)s)"
+msgstr "Προσφορά: %(offer)s (%(type)s)"
 
 msgid "Back to Offers"
 msgstr "Πίσω στις Προσφορές"
@@ -11676,11 +10425,102 @@ msgstr "δημιούργησε μια προσφορά"
 msgid "There are no current offers"
 msgstr "Δεν υπάρχουν τρέχουσες προσφορές"
 
+#, python-format
+msgid "Offer \"%(title)s\" was edited successfully."
+msgstr "Η προσφορά \"%(title)s\" υποβλήθηκε σε επεξεργασία με επιτυχία."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be edited."
+msgstr "Δεν ήταν δυνατή η επεξεργασία της προσφοράς \"%(title)s\"."
+
+#, python-format
+msgid "Offer \"%(title)s\" was added successfully."
+msgstr "Η προσφορά \"%(title)s\" προστέθηκε με επιτυχία."
+
+#, python-format
+msgid "Offer \"%(title)s\" was saved successfully, but is not active yet."
+msgstr "Η προσφορά \"%(title)s\" αποθηκεύτηκε με επιτυχία, αλλά δεν είναι ακόμη ενεργή."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be added."
+msgstr "Δεν ήταν δυνατή η προσθήκη της προσφοράς \"%(title)s\"."
+
+#, python-format
+msgid "Offer \"%(title)s\" was deleted successfully."
+msgstr "Η προσφορά\"%(title)s\" διαγράφηκε με επιτυχία."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be deleted."
+msgstr "Δεν ήταν δυνατή η διαγραφή της προσφοράς \"%(title)s\"."
+
+msgid "The offer you requested is no longer active. Sorry!"
+msgstr "Η προσφορά που ζητήσατε δεν είναι πλέον ενεργή. Λυπούμαστε!"
+
+msgid "Invalid action for this offer. The request could not be completed!"
+msgstr "Μη έγκυρη ενέργεια για αυτή την προσφορά. Το αίτημα δεν μπόρεσε να ολοκληρωθεί!"
+
+msgid "The offer is already active"
+msgstr "Η προσφορά είναι ήδη ενεργή"
+
+msgid "The offer is already deactivated"
+msgstr "Η προσφορά έχει ήδη απενεργοποιηθεί"
+
+msgid "The offer was deactivated successfully."
+msgstr "Η προσφορά απενεργοποιήθηκε με επιτυχία."
+
+msgid "The offer was reactivated successfully."
+msgstr "Η προσφορά ενεργοποιήθηκε εκ νέου με επιτυχία."
+
+msgid "The offer was activated successfully."
+msgstr "Η προσφορά ενεργοποιήθηκε με επιτυχία."
+
+msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
+msgstr ""
+
+msgctxt "the_app"
+msgid "Chat"
+msgstr ""
+
+msgctxt "the_app"
+msgid "message"
+msgstr "μήνυμα"
+
+msgid "Chat"
+msgstr ""
+
+msgid "Only Administrators may send a message to this project/group!"
+msgstr "Μόνο οι Διαχειριστές μπορούν να στείλουν μήνυμα σε αυτό το έργο/σε αυτή την ομάδα!"
+
+msgid "Additional Recipients"
+msgstr "Επιπλέον Παραλήπτες"
+
+msgid "Undefined recipient."
+msgstr "Μη καθορισμένος παραλήπτης."
+
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
 msgstr "Μπορείτε να επισυνάψετε αρχεία και εικόνες σε μηνύματα μόνο εάν είστε μέλος του φόρουμ. Μπορείτε να εγγραφείτε εδώ:"
 
 msgid "The legacy messaging app is no longer in use. You can view all of your old messages, but you cannot write new ones. Please use the new messaging app in the navigation from now on!"
 msgstr "Η εφαρμογή μηνυμάτων του κληροδοτημένου συστήματος δεν χρησιμοποιείται πλέον. Μπορείτε να δείτε όλα τα παλιά σας μηνύματά, αλλά δεν μπορείτε να γράψετε νέα. Παρακαλούμε να χρησιμοποιείτε τη νέα εφαρμογή μηνυμάτων στην πλοήγηση από τώρα και στο εξής!"
+
+msgid "You can contact the group administration via this form. Write your message in the field below and than you will be redirected to the chat with group admins."
+msgstr ""
+
+msgid "You can contact the project administration via this form. Write your message in the field below and than you will be redirected to the chat with project admins."
+msgstr ""
+
+#, fuzzy
+msgid "What is your message?"
+msgstr "Το όνομά σας"
+
+#, fuzzy
+#| msgid "Change it here..."
+msgid "Write it here"
+msgstr "Αλλάξτε το εδώ..."
+
+#, python-format
+msgid "Contact the administration of %(group_name)s:"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -11829,6 +10669,9 @@ msgstr "Σύνταξη"
 msgid "Reply"
 msgstr "Απάντηση"
 
+msgid "Recipient"
+msgstr "Παραλήπτης"
+
 msgid "Conversation"
 msgstr "Συζήτηση"
 
@@ -11858,6 +10701,174 @@ msgstr "Απάντηση σε %(sender_name)s"
 #, python-format
 msgid "Reply to all %(adressee_count)s"
 msgstr "Απάντηση σε όλους τους %(adressee_count)s"
+
+msgid "Your reply could not be matched to an existing message."
+msgstr "Δεν ήταν δυνατή η αντιστοιχία της απάντησή σας με υπάρχον μήνυμα."
+
+msgid "An internal error occured."
+msgstr "Παρουσιάστηκε εσωτερικό σφάλμα."
+
+msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
+msgstr "Η διεύθυνση email από την οποία στείλατε την απάντηση δεν είναι αυτή με την οποία συνδέεται ο λογαριασμός χρήστη σας. Παρακαλούμε να στέλνετε άμεση απάντηση μόνο από τη διεύθυνση email την οποία χρησιμοποιήσατε για την εγγραφή σας στον ιστότοπο!"
+
+msgid "There was an error when processing your message text!"
+msgstr "Υπήρξε ένα σφάλμα κατά την επεξεργασία του κειμένου μηνύματός σας!"
+
+msgid "Your direct reply failed!"
+msgstr "Η άμεση απάντησή σας δεν στάλθηκε!"
+
+msgid "Select at least one object."
+msgstr "Επιλέξτε τουλάχιστον ένα αντικείμενο."
+
+msgid "Messages or conversations successfully archived."
+msgstr "Τα μηνύματα ή οι συζητήσεις αρχειοθετήθηκαν με επιτυχία."
+
+msgid "Messages or conversations successfully deleted."
+msgstr "Τα μηνύματα ή οι συζητήσεις διαγράφηκαν με επιτυχία."
+
+msgid "Messages were marked as read."
+msgstr "Τα μηνύματα έχουν επισημανθεί ως αναγνωσμένα."
+
+msgid "Messages or conversations successfully recovered."
+msgstr "Τα μηνύματα ή οι συζητήσεις ανακτήθηκαν με επιτυχία."
+
+msgid "Notes"
+msgstr "Σημειώσεις"
+
+msgctxt "the_app"
+msgid "note"
+msgstr "σημείωση"
+
+msgid "A user commented on a news post"
+msgstr "Ένα χρήστης σχολίασε μια ανάρτηση ειδήσεων"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post"
+msgstr "Ο/η %(sender_name)s σχολίασε μια ανάρτηση ειδήσεων"
+
+msgid "A user commented on one of your news posts"
+msgstr "Ένας χρήστης σχολίασε μία από τις αναρτήσεις ειδήσεών σας"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post %(object_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε την ανάρτηση ειδήσεών σας %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
+msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε την ανάρτηση ειδήσεών σας %(object_name)s"
+msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν την ανάρτηση ειδήσεών σας %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post"
+msgstr "Ο/η %(sender_name)s σχολίασε την ανάρτηση ειδήσεών σας"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts"
+msgstr "Ο/η %(sender_name)s σχολίασε μία από τις αναρτήσεις ειδήσεών σας"
+
+msgid "A user commented on a news posts you commented in"
+msgstr "Ένας χρήστης σχολίασε μια ανάρτηση ειδήσεων που εσείς σχολιάσατε"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
+msgstr "Ο/η %(sender_name)s σχολίασε την ανάρτηση ειδήσεων %(object_name)s που σχολιάσατε"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
+msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε την ανάρτηση ειδήσεων %(object_name)s που σχολιάσατε"
+msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν την ανάρτηση ειδήσεων %(object_name)s που σχολιάσατε"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in"
+msgstr "Ο/η %(sender_name)s σχολίασε μια ανάρτηση ειδήσεων που σχολιάσατε"
+
+msgid "A user created a news post"
+msgstr "Ένας χρήστης δημιούργησε μια ανάρτηση ειδήσεων"
+
+#, python-format
+msgid "%(sender_name)s created the news post %(object_name)s"
+msgstr "Ο/η %(sender_name)s δημιούργησε την ανάρτηση ειδήσεων %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d news posts"
+msgstr "Ο/η %(sender_name)s δημιούργησε %(count)d αναρτήσεις ειδήσεων"
+
+#, python-format
+msgid "%(sender_name)s created a new news post"
+msgstr "Ο/η %(sender_name)s δημιούργησε μία νέα ανάρτηση ειδήσεων"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s:"
+msgstr "Ο/η %(sender_name)s ανάρτησε μια δημοσίευση σε %(team_name)s:"
+
+msgid "A user created a news post in a team you are following"
+msgstr "Ένας χρήστης δημιούργησε μία ανάρτηση ειδήσεων σε μια ομάδα που ακολουθείτε"
+
+#, python-format
+msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
+msgstr "Ο/η %(sender_name)s δημιούργησε μια νέα ανάρτηση ειδήσεων σε %(team_name)s (που ακολουθείτε)"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
+msgstr "Ο/η %(sender_name)s ανάρτησε μια δημοσίευση σε%(team_name)s (που ακολουθείτε)"
+
+msgid "A user updated a news post"
+msgstr "Ένας χρήστης ενημέρωσε μια ανάρτηση ειδήσεων"
+
+#, python-format
+msgid "%(sender_name)s updated the news post %(object_name)s"
+msgstr "Ο/η %(sender_name)s ενημέρωσε την ανάρτηση ειδήσεων %(object_name)s"
+
+msgid "You are following this news post"
+msgstr "Ακολουθείτε αυτή την ανάρτηση ειδήσεων"
+
+#, python-format
+msgid "%(sender_name)s updated a news post you are following"
+msgstr "Ο/η %(sender_name)s ενημέρωσε μια ανάρτηση ειδήσεων που ακολουθείτε"
+
+#, python-format
+msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
+msgstr "Μια ανάρτηση ειδήσεων που ακολουθείτε από %(sender_name)s ενημερώθηκε %(team_name)s:"
+
+msgid "A user commented on a news post you are following"
+msgstr "Ένας χρήστης σχολίασε μια ανάρτηση ειδήσεων που ακολουθείτε"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε την ανάρτηση ειδήσεων %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
+msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε την ανάρτηση ειδήσεων %(object_name)s"
+msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν την ανάρτηση ειδήσεων %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on a news posts you are following"
+msgstr "Ο/η %(sender_name)s σχολίασε μία ανάρτηση ειδήσεων που εσείς ακολουθείτε"
+
+msgid "No news"
+msgstr "Καμία είδηση"
+
+msgid "Write a news post"
+msgstr "Γράψτε μια ανάρτηση ειδήσεων"
+
+msgid "News stream"
+msgstr "Ζωντανή μετάδοση ειδήσεων"
+
+msgid "Popularity"
+msgstr "Δημοτικότητα"
+
+msgid "Facebook Share"
+msgstr "Κοινή Χρήση στο Facebook"
+
+msgid "Note Item"
+msgstr "Στοιχείο Σημείωσης"
+
+msgid "Note Items"
+msgstr "Στοιχεία Σημείωσης"
 
 msgctxt "the_verb"
 msgid "Comment"
@@ -12035,6 +11046,128 @@ msgctxt "This appears next to new items in the timeline, as in '<Jane> created a
 msgid "added a post"
 msgstr "πρόσθεσε μια ανάρτηση"
 
+msgid "Your news post was added successfully."
+msgstr "Η ανάρτηση ειδήσεών σας προστέθηκε με επιτυχία."
+
+msgid "Your news post was deleted successfully."
+msgstr "Η ανάρτηση ειδήσεών σας διαγράφηκε με επιτυχία."
+
+msgid "Your news post was edited successfully."
+msgstr "Η ανάρτηση ειδήσεών σας υποβλήθηκε σε επεξεργασία με επιτυχία."
+
+msgid "You are seeing this alert because you created this content."
+msgstr "Βλέπετε αυτή την προειδοποίηση επειδή δημιουργήσατε αυτό το περιεχόμενο."
+
+msgid "You are seeing this alert because you are following the item's project or group."
+msgstr "Βλέπετε αυτή την προειδοποίηση επειδή ακολουθείτε το έργο ή την ομάδα του στοιχείου."
+
+msgid "You are seeing this alert because you are following this item."
+msgstr "Βλέπετε αυτή την προειδοποίηση επειδή ακολουθείτε αυτό το στοιχείο."
+
+msgctxt "the_app"
+msgid "notifications"
+msgstr "ειδοποιήσεις"
+
+#, python-format
+msgid "Your daily digest for %(portal_name)s"
+msgstr "Η ημερήσια σύνοψή σας για %(portal_name)s"
+
+msgid "This is what happened during the last day!"
+msgstr "Αυτό συνέβη την τελευταία ημέρα!"
+
+#, python-format
+msgid "Your weekly digest for %(portal_name)s"
+msgstr "Η εβδομαδιαία σύνοψή σας για %(portal_name)s"
+
+msgid "This is what happened during the last week!"
+msgstr "Αυτό συνέβη την τελευταία εβδομάδα!"
+
+msgctxt "notification frequency"
+msgid "Never"
+msgstr "Ποτέ"
+
+msgctxt "notification frequency"
+msgid "Immediately"
+msgstr "Άμεσα"
+
+msgctxt "notification frequency"
+msgid "Daily"
+msgstr "Καθημερινά"
+
+msgctxt "notification frequency"
+msgid "Weekly"
+msgstr "Εβδομαδιαία"
+
+msgid "Notification Preference for User"
+msgstr "Προτίμηση Ειδοποίησης για τον Χρήστη"
+
+msgid "Notification Preference"
+msgstr "Προτίμηση Ειδοποίησης"
+
+msgid "Multi Notification ID"
+msgstr "Ταυτότητα Πολλαπλής Ειδοποίησης"
+
+msgid "Multi Notification Preference"
+msgstr "Προτίμηση Πολλαπλής Ειδοποίησης"
+
+msgid "Multi Notification Preferences"
+msgstr "Προτιμήσεις Πολλαπλής Ειδοποίησης"
+
+msgid "User who caused this notification event"
+msgstr "Ο χρήστης που ενεργοποίησε αυτό το συμβάν ειδοποίησης"
+
+msgid "Audience"
+msgstr "Κοινό"
+
+msgid "Owner of the alert"
+msgstr "Κάτοχος της προειδοποίησης"
+
+msgid "Alert Reason key"
+msgstr "Κλειδί Λόγου Προειδοποίησης"
+
+msgid "Last user who caused this notification event"
+msgstr "Ο τελευταίος χρήστης που ενεργοποίησε αυτό το συμβάν ειδοποίησης"
+
+msgid "Alert State"
+msgstr "Κατάσταση Συναγερμού"
+
+msgid "You are following this content or its Project or Group"
+msgstr "Ακολουθείτε αυτό το περιεχόμενο ή το Έργο ή την Ομάδα του"
+
+msgid "All notifications"
+msgstr "Όλες οι ειδοποιήσεις"
+
+msgid "No notifications"
+msgstr "Καμία ειδοποίηση"
+
+msgid "For content that I am following, I wish to receive notification emails"
+msgstr "Για το περιεχόμενο που ακολουθώ, επιθυμώ να λαμβάνω email ειδοποίησης"
+
+msgid "You are getting this notification because you are subscribed to these kinds of events in your project or group."
+msgstr "Λαμβάνετε αυτή την ειδοποίηση επειδή έχετε εγγραφεί σε τέτοιου είδους συμβάντα στο έργο ή την ομάδα σας."
+
+msgid "You are getting this notification because you are an administrator of this project or group."
+msgstr "Λαμβάνετε αυτή την ειδοποίηση επειδή είστε ο διαχειριστής αυτού του έργου ή της ομάδας."
+
+msgid "You are getting this notification because you are an administrator of this portal."
+msgstr "Λαμβάνετε αυτή την ειδοποίηση επειδή είστε ο διαχειριστής αυτής της πύλης."
+
+msgid "You are getting this email because you are subscribed to one or more daily notifications."
+msgstr "Λαμβάνετε αυτό το email επειδή έχετε εγγραφεί σε μία ή περισσότερες καθημερινές ειδοποιήσεις."
+
+msgid "You are getting this email because you are subscribed to one or more weekly notifications."
+msgstr "Λαμβάνετε αυτό το email επειδή έχετε εγγραφεί σε μία ή περισσότερες εβδομαδιαίες ειδοποιήσεις."
+
+msgid "New item"
+msgstr "Νέο στοιχείο"
+
+#, python-format
+msgid "View on %(portal_name)s"
+msgstr "Προβολή σε %(portal_name)s"
+
+msgid "Untitled"
+msgstr "Χωρίς τίτλο"
+
 msgid "Select which notifications you would like to receive for each group or project you are involved in."
 msgstr "Επιλέξτε ποιες ειδοποιήσεις θα θέλατε να λαμβάνετε για κάθε ομάδα ή έργο με το οποίο ασχολείστε."
 
@@ -12091,6 +11224,33 @@ msgstr "Επαναφορά στην προεπιλογή"
 
 msgid "This will reset all of your notification preferences to their default setting. Are you sure you wish to do that?"
 msgstr "Με αυτό τον τρόπο θα επαναφέρετε όλες τις προτιμήσεις ειδοποίησής σας στη ρύθμιση προεπιλογής. Είστε βέβαιοι ότι επιθυμείτε να προχωρήσετε σε αυτή την ενέργεια;"
+
+msgid "Your notification preferences were updated successfully."
+msgstr "Οι προτιμήσεις ειδοποίησης ενημερώθηκαν με επιτυχία."
+
+msgid "Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!"
+msgstr ""
+
+msgid "Your notifications preferences were reset to default!"
+msgstr "Οι προτιμήσεις ειδοποιήσεων έχουν επανέλθει στην προεπιλογή!"
+
+msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
+msgstr ""
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully signed in as {}."
+msgstr "Ο λογαριασμός χρήστη απενεργοποιήθηκε με επιτυχία"
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully connected account."
+msgstr "Ο λογαριασμός χρήστη απενεργοποιήθηκε με επιτυχία"
+
+#, fuzzy
+#| msgid "Successfully removed user"
+msgid "Successfully removed connection."
+msgstr "Ο χρήστης αφαιρέθηκε με επιτυχία"
 
 #, fuzzy
 msgid "Set password"
@@ -12218,11 +11378,6 @@ msgstr ""
 
 msgid " This data we received from your WECHANGE account"
 msgstr ""
-
-#, fuzzy
-#| msgid "Last name"
-msgid "last name"
-msgstr "Επώνυμο"
 
 msgid "Your Avatar and other settings from your profile were also copied."
 msgstr ""
@@ -12352,6 +11507,103 @@ msgstr ""
 #| msgid "Log in with %(portal_name)s"
 msgid "Login with %(provider_id)s"
 msgstr "Συνδεθείτε με %(portal_name)s"
+
+#, fuzzy
+#| msgid "Organization"
+msgctxt "the_app"
+msgid "organization"
+msgstr "Οργανισμός"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization membership"
+msgstr "Οργανισμοί"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization memberships"
+msgstr "Οργανισμοί"
+
+#, fuzzy
+#| msgid "Team Invite for Unregistered User"
+msgid "Organization Invite for Unregistered User"
+msgstr "Πρόσκληση Ομάδας για Μη Εγγεγραμμένο Χρήστη"
+
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Organization Invites for Unregistered Users"
+msgstr "Προσκλήσεις Ομάδας για Μη Εγγεγραμμένους Χρήστες"
+
+#, fuzzy
+#| msgid "Assigned organizations"
+msgid "Civil society organization"
+msgstr "Διορισμένοι οργανισμοί"
+
+msgid "Company (commercial)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Public voting"
+msgid "Public institution"
+msgstr "Δημόσια ψηφοφορία"
+
+#, fuzzy
+#| msgid "Other teams"
+msgid "Other"
+msgstr "Άλλες ομάδες"
+
+#, fuzzy
+#| msgid "Remove organization"
+msgid "Name of the organization"
+msgstr "Αφαίρεση οργανισμού"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Organization type"
+msgstr "Οργανισμός"
+
+#, fuzzy
+#| msgid "Logout"
+msgid "Logo"
+msgstr "Αποσύνδεση"
+
+#, fuzzy
+#| msgid "Email address"
+msgid "Email Address"
+msgstr "Διεύθυνση email"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Cosinnus Organization"
+msgstr "Οργανισμός"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Cosinnus Organizations"
+msgstr "Οργανισμοί"
+
+msgid "CosinnusOrganizationSocialMedia"
+msgstr ""
+
+#, fuzzy
+#| msgid "CosinnusLocation"
+msgid "CosinnusOrganizationLocation"
+msgstr "Τοποθεσία Cosinnus"
+
+#, fuzzy
+#| msgid "CosinnusLocations"
+msgid "CosinnusOrganizationLocations"
+msgstr "Τοποθεσίες Cosinnus"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Organization group"
+msgstr "Οργανισμός"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization groups"
+msgstr "Οργανισμοί"
 
 #, fuzzy, python-format
 #| msgid "%(team_name)s - Assigned organizations"
@@ -12540,10 +11792,281 @@ msgstr ""
 msgid "This organization should be made publicly findable via other platforms."
 msgstr "Αυτό το έργο θα είναι δυνατόν να βρεθεί δημόσια μέσω άλλης πλατφόρμας."
 
+msgid "Is your organization open for cooperation in the funding program?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Organization is open for future projects."
+msgstr "Προσκλήσεις Ομάδας για Μη Εγγεγραμμένους Χρήστες"
+
 #, fuzzy, python-format
 #| msgid "Users in team %(group)s"
 msgid "Users in organization %(group)s"
 msgstr "Χρήστες στην ομάδα %(group)s"
+
+#, fuzzy, python-format
+#| msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
+msgid "Project/group %(name)s had already requested and has now been accepted."
+msgstr "Το έργο/η ομάδα  %(group)s έχει ήδη προσκληθεί και έχει τώρα ανατεθεί άμεσα!"
+
+#, fuzzy, python-format
+#| msgid "User %(username)s was successfully invited!"
+msgid "Project/group %(name)s was successfully invited."
+msgstr "Ο χρήστης %(username)s προσκλήθηκε με επιτυχία!"
+
+#, fuzzy, python-format
+#| msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
+msgid "Your join request was withdrawn from organization “%(name)s” successfully."
+msgstr "Το αίτημά συμμετοχής σας αποσύρθηκε από %(team_type)s “%(team_name)s” με επιτυχία."
+
+#, fuzzy, python-format
+#| msgid "You have declined the invitation to %(team_type)s “%(team_name)s”."
+msgid "You have declined the invitation to organization “%(name)s”."
+msgstr "Έχετε απορρίψει την πρόσκληση σε %(team_type)s “%(team_name)s”."
+
+#, fuzzy, python-format
+#| msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
+msgid "Your project/group is now assigned to the organization “%(name)s”. Welcome!"
+msgstr "Είστε τώρα μέλος της %(team_type)s “%(team_name)s”. Καλώς ήρθατε!"
+
+#, fuzzy, python-format
+#| msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
+msgid "Your request was withdrawn from organization \"%(name)s\" successfully."
+msgstr "Το αίτημα συμμετοχής σας αποσύρθηκε από %(team_type)s \"%(team_name)s\" με επιτυχία."
+
+#, fuzzy, python-format
+#| msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
+msgid "Your invitation to project/group \"%(name)s\" was withdrawn successfully."
+msgstr "Η πρόσκλησή σας στον χρήστη \"%(username)s\" αποσύρθηκε με επιτυχία."
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Project/group \"%(name)s\" is no longer assigned."
+msgstr "Ο χρήστης \"%(username)s\" δεν είναι πλέον μέλος."
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can create Organizations! You can either create a Project, or write a message to one of the administrators to create a Organization for you. Below you can find a listing of all administrators."
+msgstr "Λυπούμαστε, μόνο οι διαχειριστές πύλης μπορούν να δημιουργούν Ομάδες! Μπορείτε να γράψετε ένα μήνυμα σε κάποιο από τους διαχειριστές για να δημιουργήσουν μια Ομάδα για εσάς. Παρακάτω μπορείτε να βρείτε μια λίστα με όλους τους διαχειριστές."
+
+#, fuzzy, python-format
+#| msgid "Event \"%(title)s\" was edited successfully."
+msgid "Organization \"%(name)s\" was created successfully."
+msgstr "Η εκδήλωση \"%(title)s\" υποβλήθηκε σε επεξεργασία με επιτυχία."
+
+#, fuzzy
+#| msgid "Your idea was deleted successfully."
+msgid "Your organization was deleted successfully."
+msgstr "Η ιδέα σας διαγράφηκε με επιτυχία."
+
+msgctxt "the_app"
+msgid "poll"
+msgstr "δημοσκόπηση"
+
+msgid "A user created a new poll"
+msgstr "Ένας χρήστης δημιούργησε μια νέα δημοσκόπηση"
+
+#, python-format
+msgid "%(sender_name)s created the poll %(object_name)s"
+msgstr "Ο/η %(sender_name)s δημιούργησε τη δημοσκόπηση %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d polls"
+msgstr "Ο/η %(sender_name)s δημιούργησε %(count)d δημοσκοπήσεις"
+
+#, python-format
+msgid "%(sender_name)s created a new poll"
+msgstr "Ο/η %(sender_name)s δημιούργησε μια νέα δημοσκόπηση"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Μια νέα δημοσκόπηση: \"%(object_name)s\" δημιουργήθηκε σε %(team_name)s."
+
+msgid "A poll you voted on was completed"
+msgstr "Μια δημοσκόπηση στην οποία ψηφίσατε ολοκληρώθηκε"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
+msgstr "Ο/η %(sender_name)s ολοκλήρωσε τη δημοσκόπηση %(object_name)s στην οποία ψηφίσατε"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls you voted on"
+msgstr "Ο/η %(sender_name)s ολοκλήρωσε %(count)d δημοσκοπήσεις στις οποίες ψηφίσατε"
+
+#, python-format
+msgid "%(sender_name)s completed the poll"
+msgstr "Ο/η %(sender_name)s ολοκλήρωσε τη δημοσκόπηση"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Η δημοσκόπηση \"%(object_name)s\" ολοκληρώθηκε σε %(team_name)s."
+
+msgid "A user commented on one of your polls"
+msgstr "Ένας χρήστης σχολίασε μία από τις δημοσκοπήσεις σας"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll %(object_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε τη δημοσκόπησή σας %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
+msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε τη δημοσκόπησή σας %(object_name)s"
+msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν τη δημοσκόπησή σας %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll"
+msgstr "Ο/η %(sender_name)s σχολίασε τη δημοσκόπησή σας"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls"
+msgstr "Ο/η %(sender_name)s σχολίασε μία από τις δημοσκοπήσεις σας"
+
+msgid "A user commented on a poll you were tagged in"
+msgstr "Ένας χρήστης σχολίασε μια δημοσκόπηση στην οποία προστεθήκατε με ετικέτα"
+
+#, python-format
+msgid "%(sender_name)s commented on the poll %(object_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε τη δημοσκόπηση %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
+msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε τη δημοσκόπηση %(object_name)s"
+msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν τη δημοσκόπηση %(object_name)s"
+
+msgid "You were tagged in this poll"
+msgstr "Προστεθήκατε με ετικέτα σε αυτή τη δημοσκόπηση"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in"
+msgstr "Ο/η %(sender_name)s σχολίασε μια δημοσκόπηση στην οποία προστεθήκατε με ετικέτα"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε μια δημοσίευση στην οποία προστεθήκατε με ετικέτα σε %(team_name)s"
+
+msgid "A user commented on an poll you voted in"
+msgstr "Ένας χρήστης σχολίασε μια δημοσκόπηση στην οποία ψηφίσατε"
+
+msgid "You voted on this poll"
+msgstr "Ψηφίσατε στη συγκεκριμένη δημοσκόπηση"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in"
+msgstr "Ο/η %(sender_name)s σχολίασε μια δημοσκόπηση στην οποία εσείς ψηφίσατε"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε μια δημοσκόπηση στην οποία εσείς ψηφίσατε σε %(team_name)s"
+
+msgid "A user created a new poll in a team you are following"
+msgstr "Ένας χρήστης δημιούργησε μια νέα δημοσκόπηση σε μια ομάδα που ακολουθείτε"
+
+#, python-format
+msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
+msgstr "Ο/η %(sender_name)s δημιούργησε μια νέα δημοσκόπηση σε %(team_name)s (που ακολουθείτε)"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Μια νέα δημοσκόπηση; \"%(object_name)s\" δημιουργήθηκε σε %(team_name)s (που ακολουθείτε)."
+
+msgid "A user updated a poll you are following"
+msgstr "Ένας χρήστης ενημέρωσε μια δημοσκόπηση που ακολουθείτε"
+
+#, python-format
+msgid "%(sender_name)s updated the poll %(object_name)s"
+msgstr "Ο/η %(sender_name)s ενημέρωσε τη δημοσκόπηση %(object_name)s"
+
+msgid "You are following this poll"
+msgstr "Ακολουθείτε αυτή τη δημοσκόπηση"
+
+#, python-format
+msgid "%(sender_name)s updated a poll you are following"
+msgstr "Ο/η %(sender_name)s ενημέρωσε μια δημοσκόπηση που ακολουθείτε"
+
+#, python-format
+msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Μια δημοσκόπηση που ακολουθείτε: \"%(object_name)s\" ενημερώθηκε σε %(team_name)s."
+
+msgid "A poll you are following was completed"
+msgstr "Μια δημοσκόπηση που ακολουθείτε ολοκληρώθηκε"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s"
+msgstr "Ο/η %(sender_name)s ολοκλήρωσε τη δημοσκόπηση %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls"
+msgstr "Ο/η %(sender_name)s ολοκλήρωσε %(count)d δημοσκοπήσεις"
+
+#, python-format
+msgid "%(sender_name)s completed the poll you are following"
+msgstr "Ο/η %(sender_name)s ολοκλήρωσε τη δημοσκόπηση που ακολουθείτε"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
+msgstr "Η δημοσκόπηση \"%(object_name)s\" που ακολουθείτε ολοκληρώθηκε σε %(team_name)s."
+
+msgid "A user commented on one a poll you are following"
+msgstr "Ένας χρήστης σχολίασε μια δημοσκόπηση που ακολουθείτε"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you are following"
+msgstr "Ο/η %(sender_name)s σχολίασε μια δημοσκόπηση που ακολουθείτε"
+
+msgid "Current Polls"
+msgstr "Τρέχουσες Δημοσκοπήσεις"
+
+msgid "No current polls"
+msgstr "Καμία τρέχουσα δημοσκόπηση"
+
+msgid "You must write a description for this poll option!"
+msgstr "Πρέπει να γράψετε μια περιγραφή για αυτή την επιλογή δημοσκόπησης!"
+
+msgid "Voting closed"
+msgstr "Η ψηφοφορία έκλεισε"
+
+msgid "Poll archived"
+msgstr "Η δημοσκόπηση αρχειοθετήθηκε"
+
+msgid "Multiple options votable"
+msgstr "Μπορούν να ψηφιστούν πολλές επιλογές"
+
+msgid "Does this poll allow users to vote on multiple options or just decide for one?"
+msgstr "Αυτή η δημοσκόπηση επιτρέπει τους χρήστες να ψηφίζουν με πολλές επιλογές ή απλώς να αποφασίζουν για μία;"
+
+msgid "\"Maybe\" option enabled"
+msgstr "Η επιλογή \"Ίσως\" ενεργοποιήθηκε"
+
+msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
+msgstr "Έχει ενεργοποιηθεί η επιλογή \"ίσως\"; Παραβλέπεται και αντιμετωπίζεται ως Ψευδής εάν `multiple_votes==False``"
+
+msgid "Anyone can vote"
+msgstr "Μπορεί να ψηφίσει οποιοσδήποτε"
+
+msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
+msgstr "Εάν ισχύει, όποιος μπορεί να δει αυτή τη δημοσκόπηση μπορεί να ψηφίσει. Εάν δεν ισχύει, μόνο τα μέλη της ομάδας μπορούν."
+
+msgid "Show voters"
+msgstr "Εμφάνιση ψηφοφόρων"
+
+msgid "If true, display a list of which user voted for each option."
+msgstr "Εάν ισχύει, εμφανίστε ένα κατάλογο με τους χρήστες που ψήφισαν κάθε επιλογή."
+
+msgid "Winning Option"
+msgstr "Επικρατούσα Επιλογή"
+
+#, python-format
+msgid "Poll: %(poll)s (%(state)s)"
+msgstr "Δημοσκόπηση: %(poll)s (%(state)s)"
+
+msgid "Poll Option"
+msgstr "Επιλογή Δημοσκόπησης"
+
+msgid "Poll Options"
+msgstr "Επιλογές Δημοσκόπησης"
 
 msgid "Poll choice"
 msgstr "Επιλογή Δημοσκόπησης"
@@ -12894,6 +12417,85 @@ msgstr "δημιούργησε μια δημοσκόπηση"
 msgid "There are no polls yet"
 msgstr "Δεν υπάρχουν ακόμη δημοσκοπήσεις"
 
+#, python-format
+msgid "Poll \"%(title)s\" was edited successfully."
+msgstr "Η δημοσκόπηση \"%(title)s\" υποβλήθηκε σε επεξεργασία με επιτυχία."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be edited."
+msgstr "Δεν ήταν δυνατή η επεξεργασία της δημοσκόπησης \"%(title)s\"."
+
+#, python-format
+msgid "Poll \"%(title)s\" was added successfully."
+msgstr "Η δημοσκόπηση \"%(title)s\" προστέθηκε με επιτυχία."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be added."
+msgstr "Δεν ήταν δυνατή η προσθήκη της δημοσκόπησης \"%(title)s\"."
+
+msgid "You should define at least one poll option!"
+msgstr "Θα πρέπει να ορίσετε τουλάχιστον μία επιλογή δημοσκόπησης!"
+
+msgid "This poll is archived and cannot be edited anymore!"
+msgstr "Η δημοσκόπηση αρχειοθετήθηκε και δεν μπορεί να υποβληθεί σε επεξεργασία πλέον!"
+
+#, python-format
+msgid "Poll \"%(title)s\" was deleted successfully."
+msgstr "Η δημοσκόπηση \"%(title)s\" έχει διαγραφεί με επιτυχία."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be deleted."
+msgstr "Δεν ήταν δυνατή η διαγραφή της δημοσκόπησης \"%(title)s\"."
+
+msgid "The voting phase for this poll is over. You cannot vote for it any more."
+msgstr "Η φάση της ψηφοφορίας για αυτή τη δημοσκόπηση έχει ολοκληρωθεί. Δεν μπορείτε πλέον να ψηφίσετε γι' αυτήν."
+
+msgid "In this poll you must vote for exactly one item!"
+msgstr "Σε αυτή τη δημοσκόπηση πρέπει να ψηφίσετε ακριβώς για ένα στοιχείο!"
+
+msgid "Invalid action for this poll. The request could not be completed!"
+msgstr "Μη έγκυρη ενέργεια για αυτή την δημοσκόπηση. Το αίτημα δεν μπόρεσε να ολοκληρωθεί!"
+
+msgid "This action is not permitted for this poll at this stage!"
+msgstr "Αυτή η ενέργεια δεν επιτρέπεται για αυτή τη δημοσκόπηση σε αυτό το στάδιο!"
+
+msgid "The poll was closed successfully."
+msgstr "Η δημοσκόπηση έκλεισε με επιτυχία."
+
+msgid "The poll was re-opened successfully."
+msgstr "Η δημοσκόπηση ξανάνοιξε με επιτυχία."
+
+msgid "The poll was archived successfully."
+msgstr "Η δημοσκόπηση αρχειοθετήθηκε με επιτυχία."
+
+msgid "Stream"
+msgstr "Ζωντανή Μετάδοση"
+
+msgctxt "the_app"
+msgid "stream"
+msgstr "ζωντανή μετάδοση"
+
+msgid "My Streams"
+msgstr "Οι Ζωντανές Μεταδόσεις Μου"
+
+msgid "Streams"
+msgstr "Ζωντανές Μεταδόσεις"
+
+msgid "Models"
+msgstr "Πρότυπα"
+
+msgid "Portal IDs"
+msgstr "Ταυτότητες Πύλης"
+
+msgid "Last seen"
+msgstr "Τελευταία προβολή"
+
+msgid "Special Stream"
+msgstr "Ειδική Ζωντανή Μετάδοση"
+
+msgid "Special Group IDs"
+msgstr "Ταυτότητες Ειδικής Ομάδας"
+
 msgid "Public Stream"
 msgstr "Δημόσια Ζωντανή Μετάδοση"
 
@@ -12948,6 +12550,260 @@ msgstr "Φίλτρο ανά συντάκτη, ετικέτες ή άλλα χα�
 
 msgid "Filter by item types?"
 msgstr "Φίλτρο ανά είδος στοιχείου;"
+
+msgid "You do not have permission to access this stream."
+msgstr "Δεν έχετε άδεια για να αποκτήσετε πρόσβαση σε αυτή τη ζωντανή μετάδοση."
+
+msgid "Your stream was added successfully."
+msgstr "Η ζωντανή μετάδοσή σας προστέθηκε με επιτυχία."
+
+msgid "Your stream was updated successfully."
+msgstr "Η ζωντανή μετάδοσή σας ενημερώθηκε με επιτυχία."
+
+msgid "Your stream was deleted successfully."
+msgstr "Η ζωντανή μετάδοσή σας διαγράφηκε με επιτυχία."
+
+msgid "You cannot delete the default stream!"
+msgstr "Δεν μπορείτε να διαγράψετε την προεπιλεγμένη ζωντανή μετάδοση!"
+
+msgctxt "the_app"
+msgid "todo"
+msgstr "καθήκοντα"
+
+msgid "A user created a new todo"
+msgstr "Ένας χρήστης δημιούργησε ένα νέο καθήκον"
+
+#, python-format
+msgid "%(sender_name)s created the todo %(object_name)s"
+msgstr "Ο/η %(sender_name)s δημιούργησε το καθήκον %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d todos"
+msgstr "Ο/η %(sender_name)s δημιούργησε %(count)d καθήκοντα"
+
+#, python-format
+msgid "%(sender_name)s created a new todo"
+msgstr "Ο/η %(sender_name)s δημιούργησε ένα νέο καθήκον"
+
+#, python-format
+msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Ένα νέο καθήκον: \"%(object_name)s\" δημιουργήθηκε σε %(team_name)s."
+
+msgid "A todo was assigned to me"
+msgstr "Ένα καθήκον ανατέθηκε σε εμένα"
+
+#, python-format
+msgid "%(sender_name)s assigned the todo %(object_name)s to you"
+msgstr "Ο/η %(sender_name)s ανέθεσε ένα καθήκον %(object_name)s σε εσάς"
+
+#, python-format
+msgid "%(sender_name)s assigned %(count)d todos to you"
+msgstr "Ο/η %(sender_name)s ανέθεσε %(count)d καθήκοντα σε εσάς"
+
+#, python-format
+msgid "%(sender_name)s assigned a todo to you"
+msgstr "Ο/η %(sender_name)s ανέθεσε ένα καθήκον σε εσάς"
+
+msgid "A todo I created was completed"
+msgstr "Ένα καθήκον που δημιούργησα ολοκληρώθηκε"
+
+#, python-format
+msgid "%(sender_name)s completed the todo %(object_name)s"
+msgstr "Ο/η %(sender_name)s ολοκλήρωσε το καθήκον %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d todos"
+msgstr "Ο/η %(sender_name)s ολοκλήρωσε %(count)d καθήκοντα"
+
+msgid "You created this todo"
+msgstr "Δημιουργήσατε αυτό το καθήκον"
+
+#, python-format
+msgid "%(sender_name)s completed your todo"
+msgstr "Ο/η %(sender_name)s ολοκλήρωσε το καθήκον σας"
+
+#, python-format
+msgid "%(sender_name)s completed one of your todos"
+msgstr "Ο/η %(sender_name)s ολοκλήρωσε ένα από τα καθήκοντά σας"
+
+msgid "A user commented on one of your todos"
+msgstr "Ένας χρήστης σχολίασε ένα από τα καθήκοντά σας"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo %(object_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε το καθήκον %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
+msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε το καθήκον %(object_name)s"
+msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν το καθήκον %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo"
+msgstr "Ο/η %(sender_name)s σχολίασε το καθήκον σας"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your todos"
+msgstr "Ο/η %(sender_name)s σχολίασε ένα από τα καθήκοντά σας"
+
+msgid "A user commented on a todo you were tagged in"
+msgstr "Ένας χρήστης σχολίασε ένα καθήκον στο οποίο προστεθήκατε με ετικέτα"
+
+#, python-format
+msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε το καθήκον %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
+msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε το καθήκον %(object_name)s"
+msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν το καθήκον %(object_name)s"
+
+msgid "You were tagged in this todo"
+msgstr "Προστεθήκατε με ετικέτα σε αυτό το καθήκον"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in"
+msgstr "Ο/η %(sender_name)s σχολίασε ένα καθήκον στο οποίο προστεθήκατε με ετικέτα"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε ένα καθήκον στο οποίο προστεθήκατε με ετικέτα σε %(team_name)s"
+
+msgid "A user commented on a todo you were assigned to"
+msgstr "Ένας χρήστης σχολίασε ένα καθήκον που σας ανατέθηκε"
+
+#, python-format
+msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε το καθήκον %(object_name)s που σας ανατέθηκε"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
+msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος σχολίασε το καθήκον %(object_name)s που σας ανατέθηκε"
+msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι σχολίασαν το καθήκον %(object_name)s που σας ανατέθηκε"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos"
+msgstr "Ο/η %(sender_name)s σχολίασε ένα από τα καθήκοντα που σας ανατέθηκαν"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgstr "Ο/η %(sender_name)s σχολίασε ένα από τα καθήκοντα που σας ανατέθηκαν σε %(team_name)s"
+
+msgid "A user updated a todo you are following"
+msgstr "Ένας χρήστης ενημέρωσε ένα καθήκον που ακολουθείτε"
+
+#, python-format
+msgid "%(sender_name)s updated the todo %(object_name)s"
+msgstr "Ο/η %(sender_name)s ενημέρωσε το καθήκον %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
+msgstr[0] "Ο/η %(sender_name)s και %(count_minus_one)d άλλος ενημέρωσε το καθήκον %(object_name)s"
+msgstr[1] "Ο/η %(sender_name)s και %(count_minus_one)d άλλοι ενημέρωσαν το καθήκον %(object_name)s"
+
+msgid "You are following this todo"
+msgstr "Ακολουθείτε αυτό το καθήκον"
+
+#, python-format
+msgid "%(sender_name)s updated a todo you are following"
+msgstr "Ο/η %(sender_name)s ενημέρωσε ένα καθήκον που ακολουθείτε"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Ένα καθήκον που ακολουθείτε: \"%(object_name)s\" ενημερώθηκε σε %(team_name)s."
+
+msgid "A user reassigned a todo you are following"
+msgstr "Ένας χρήστης ανέθεσε εκ νέου ένα καθήκον που ακολουθείτε"
+
+#, python-format
+msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgstr "Ο/η %(sender_name)s ανέθεσε εκ νέου το καθήκον %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s reassigned %(count)d todos"
+msgstr "Ο/η %(sender_name)s ανέθεσε εκ νέου %(count)d καθήκοντα"
+
+#, python-format
+msgid "%(sender_name)s reassigned a todo you are following"
+msgstr "Ο/η %(sender_name)s ανέθεσε εκ νέου ένα καθήκον που ακολουθείτε"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
+msgstr "Ένα καθήκον που ακολουθείτε: \"%(object_name)s\" ανατέθηκε εκ νέου σε %(team_name)s."
+
+msgid "A user completed a todo you are following"
+msgstr "Ένας χρήστης ολοκλήρωσε ένα καθήκον που ακολουθείτε"
+
+#, python-format
+msgid "%(sender_name)s completed a todo you are following"
+msgstr "Ο/η %(sender_name)s ολοκλήρωσε ένα καθήκον που ακολουθείτε"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Ένα καθήκον που ακολουθείτε: \"%(object_name)s\" ολοκληρώθηκε σε %(team_name)s."
+
+msgid "A user commented on a todo you are following"
+msgstr "Ένας χρήστης σχολίασε ένα καθήκον που ακολουθείτε"
+
+#, python-format
+msgid "%(sender_name)s commented on on a todo you are following"
+msgstr "Ο/η %(sender_name)s σχολίασε ένα καθήκον που ακολουθείτε"
+
+msgid "My Todos"
+msgstr "Τα Καθήκοντά Μου"
+
+msgid "No todos"
+msgstr "Κανένα καθήκον"
+
+msgid "Open"
+msgstr "Ανοιχτό"
+
+msgid "Completed"
+msgstr "Ολοκληρώθηκε"
+
+msgid "Assigned To"
+msgstr "Ανατέθηκε Σε"
+
+msgid "Priority"
+msgstr "Προτεραιότητα"
+
+msgid "Due date"
+msgstr "Προθεσμία"
+
+msgid "Soonest Due"
+msgstr "Πλησιέστερη Ημερομηνία"
+
+msgid "You are not allowed to assign this Todo entry."
+msgstr "Δεν σας επιτρέπεται η ανάθεση αυτού του Καθήκοντος."
+
+msgid "Later"
+msgstr "Αργότερα"
+
+msgid "Normal"
+msgstr "Κανονικό"
+
+msgid "Important"
+msgstr "Σημαντικό"
+
+msgid "Due by"
+msgstr "Προθεσμία μέχρι"
+
+msgid "Completed on"
+msgstr "Ολοκληρώθηκε στις"
+
+msgid "Completed by"
+msgstr "Ολοκληρώθηκε από"
+
+msgid "Assigned to"
+msgstr "Ανατέθηκε σε"
+
+#, python-format
+msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
+msgstr "Το καθήκον \"%(todo_name)s\" ανατέθηκε σε %(assignee_name)s"
 
 #, python-format
 msgid ""
@@ -13258,6 +13114,258 @@ msgstr "Δεν σας έχουν ανατεθεί καθήκοντα"
 
 msgid "Tasks are shown only for logged in users"
 msgstr "Τα καθήκοντα εμφανίζονται μόνο στους συνδεδεμένους χρήστες"
+
+#, python-format
+msgid "Todo \"%(title)s\" was added successfully."
+msgstr "Το καθήκον \"%(title)s\" προστέθηκε με επιτυχία."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be added."
+msgstr "Δεν ήταν δυνατή η προσθήκη του καθήκοντος \"%(title)s\"."
+
+msgid "You were trying to add a todo to a todolist that does not exist!"
+msgstr "Προσπαθούσατε να προσθέσετε ένα καθήκον σε μια λίστα καθηκόντων που δεν υπάρχει!"
+
+#, python-format
+msgid "Todo \"%(title)s\" was edited successfully."
+msgstr "To καθήκον \"%(title)s\" υποβλήθηκε σε επεξεργασία με επιτυχία."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be edited."
+msgstr "Δεν ήταν δυνατή η επεξεργασία του καθήκοντος \"%(title)s\"."
+
+#, python-format
+msgid "Todo \"%(title)s\" was deleted successfully."
+msgstr "Το καθήκον \"%(title)s\" διαγράφηκε με επιτυχία."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be deleted."
+msgstr "Δεν ήταν δυνατή η διαγραφή του καθήκοντος \"%(title)s\"."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned successfully."
+msgstr "Το καθήκον \"%(title)s\" ανατέθηκε με επιτυχία."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned."
+msgstr "Δεν ήταν δυνατή η ανάθεση του καθήκοντος \"%(title)s\"."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned to You successfully."
+msgstr "Το καθήκον \"%(title)s\" ανατέθηκε σε Εσάς με επιτυχία."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned to You."
+msgstr "Δεν ήταν δυνατή η ανάθεση του καθήκοντος \"%(title)s\" σε Εσάς."
+
+#, python-format
+msgid "Todo \"%(title)s\" was unassigned successfully."
+msgstr "To καθήκον \"%(title)s\" ανακλήθηκε με επιτυχία."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be unassigned."
+msgstr "Δεν ήταν δυνατή η ανάκληση του καθήκοντος \"%(title)s\"."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed successfully."
+msgstr "Το καθήκον \"%(title)s\" ολοκληρώθηκε με επιτυχία."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed."
+msgstr "Δεν ήταν δυνατή η ολοκλήρωση του καθήκοντος \"%(title)s\"."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed by You successfully."
+msgstr "Το καθήκον \"%(title)s\" ολοκληρώθηκε από Εσάς με επιτυχία."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed by You."
+msgstr "Δεν ήταν δυνατή η ολοκλήρωση του καθήκοντος \"%(title)s\" από Εσάς."
+
+#, python-format
+msgid "Todo \"%(title)s\" was set to incomplete successfully."
+msgstr "Το καθήκον \"%(title)s\" ορίστηκε ως μη ολοκληρωμένο με επιτυχία."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be set to incomplete."
+msgstr "Το καθήκον \"%(title)s\" δεν μπορούσε να οριστεί ως μη ολοκληρωμένο."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was edited successfully."
+msgstr "Η λίστα καθηκόντων \"%(title)s\" υποβλήθηκε σε επεξεργασία με επιτυχία."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be edited."
+msgstr "Δεν ήταν δυνατή η επεξεργασία της λίστας καθηκόντων \"%(title)s\"."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was added successfully."
+msgstr "Η λίστα καθηκόντων \"%(title)s\" προστέθηκε με επιτυχία."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be added."
+msgstr "Δεν ήταν δυνατή η προσθήκη της λίστας καθηκόντων \"%(title)s\"."
+
+msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
+msgstr "Δεν μπορείτε να διαγράψετε αυτόν τον φάκελο διότι δεν έχετε άδεια να διαγράψετε ένα ή περισσότερα στοιχεία που περιέχει!"
+
+#~ msgid "Ok"
+#~ msgstr "Εντάξει"
+
+#~ msgid "Message Group"
+#~ msgstr "Αποστολή Μηνύματος σε Ομάδα"
+
+#~ msgid "Message Project"
+#~ msgstr "Αποστολή Μηνύματος σε Έργο"
+
+#, fuzzy
+#~| msgid "This message was sent in a conversation with: "
+#~ msgid "The message cannot be replied without being in a conversation."
+#~ msgstr "Αυτό το μήνυμα στάλθηκε σε συζήτηση με: "
+
+#, fuzzy
+#~| msgid "Is Moderator"
+#~ msgid "Moderation"
+#~ msgstr "Είναι Συντονιστής"
+
+#, fuzzy
+#~| msgid "Your name"
+#~ msgid "{username}"
+#~ msgstr "Το όνομά σας"
+
+#, fuzzy
+#~| msgid "Additional Recipients"
+#~ msgid "Additional recipients"
+#~ msgstr "Επιπλέον Παραλήπτες"
+
+#, fuzzy
+#~| msgid "Additional Recipients"
+#~ msgid "Additional recipient"
+#~ msgstr "Επιπλέον Παραλήπτες"
+
+#, fuzzy
+#~| msgid "Message Project"
+#~ msgid "Message Rejected"
+#~ msgstr "Αποστολή Μηνύματος σε Έργο"
+
+#, fuzzy
+#~ msgid "Your message has been rejected"
+#~ msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
+
+#, fuzzy
+#~| msgid "Message Project"
+#~ msgid "Message Received"
+#~ msgstr "Αποστολή Μηνύματος σε Έργο"
+
+#, fuzzy
+#~| msgid "You have been invited to apply!"
+#~ msgid "You have received a message"
+#~ msgstr "Έχετε προσκληθεί για να υποβάλλετε αίτηση!"
+
+#, fuzzy
+#~| msgid "You have been invited to apply!"
+#~ msgid "You have received a reply"
+#~ msgstr "Έχετε προσκληθεί για να υποβάλλετε αίτηση!"
+
+#, fuzzy
+#~| msgid "Restricted"
+#~ msgid "Rejected"
+#~ msgstr "Περιορισμένος"
+
+#, fuzzy
+#~| msgid "Everybody"
+#~ msgid "body"
+#~ msgstr "Όλοι"
+
+#, fuzzy
+#~| msgid "Recipient"
+#~ msgid "recipient"
+#~ msgstr "Παραλήπτης"
+
+#, fuzzy
+#~| msgid "Visitor"
+#~ msgid "visitor"
+#~ msgstr "Επισκέπτης"
+
+#, fuzzy
+#~ msgid "parent message"
+#~ msgstr "Το όνομά σας"
+
+#, fuzzy
+#~| msgid "No messages"
+#~ msgid "root message"
+#~ msgstr "Κανένα μήνυμα"
+
+#, fuzzy
+#~| msgid "Sent at:"
+#~ msgid "sent at"
+#~ msgstr "Εστάλη σε:"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "archived by recipient"
+#~ msgstr "Μη καθορισμένος παραλήπτης."
+
+#, fuzzy
+#~| msgid "Delete user account"
+#~ msgid "deleted by sender at"
+#~ msgstr "Διαγραφή λογαριασμού χρήστη"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "deleted by recipient at"
+#~ msgstr "Μη καθορισμένος παραλήπτης."
+
+#, fuzzy
+#~| msgid "Is Moderator"
+#~ msgid "moderator"
+#~ msgstr "Είναι Συντονιστής"
+
+#, fuzzy
+#~| msgid "Related to"
+#~ msgid "moderated at"
+#~ msgstr "Αναφορικά με"
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "message"
+#~ msgstr "μήνυμα"
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "messages"
+#~ msgstr "μήνυμα"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "Undefined sender."
+#~ msgstr "Μη καθορισμένος παραλήπτης."
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "pending message"
+#~ msgstr "μήνυμα"
+
+#, fuzzy
+#~ msgid "pending messages"
+#~ msgstr "Το όνομά σας"
+
+#, fuzzy
+#~ msgid "Re: {subject}"
+#~ msgstr "Θέμα"
+
+#, fuzzy
+#~| msgid "User successfully created!"
+#~ msgid "Message successfully sent."
+#~ msgstr "Ο χρήστης δημιουργήθηκε με επιτυχία!"
+
+#, fuzzy
+#~| msgid "Select at least one object."
+#~ msgid "Message rejected for at least one recipient."
+#~ msgstr "Επιλέξτε τουλάχιστον ένα αντικείμενο."
 
 #, fuzzy
 #~ msgid "CSV Import Results"

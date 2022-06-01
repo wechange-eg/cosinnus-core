@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 16:02+0200\n"
+"POT-Creation-Date: 2022-06-01 15:58+0200\n"
 "PO-Revision-Date: 2021-03-14 21:02+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -175,6 +175,14 @@ msgstr "%d utilisateurs ont été désactivés."
 msgid "Reactivate user accounts"
 msgstr "Compte utilisateur activé avec succès"
 
+#, fuzzy, python-format
+#| msgid "%d Users' rocketchat room memberships were re-done."
+msgid "%(count)d Users' group memberships were refreshed."
+msgstr "%d Les adhésions des utilisateurs à la salle Rocketchat ont été refaites."
+
+msgid "Refresh user group membership associations (e.g. cache or Nextcloud folder problems)"
+msgstr ""
+
 #, python-format
 msgid "%d Users were synchronized successfully."
 msgstr "%d utilisateurs ont été synchronisés avec succès."
@@ -279,6 +287,15 @@ msgstr "Liste des favoris"
 
 msgid "Bookmarked Users list"
 msgstr "Liste des utilisateurs favoris"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Invitations"
+msgstr "Invitations"
+
+#, fuzzy
+#| msgid "Conference"
+msgid "Conferences"
+msgstr "Conférence"
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
@@ -478,12 +495,12 @@ msgstr "%(sender_name)s t'a invité à rejoindre \"%(team_name)s sur %(portal_na
 msgid "Accept invitation"
 msgstr "Accepter l'invitation"
 
-msgid "View invitation"
-msgstr "Voir l’invitation"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s t'a identifié"
+
+msgid "View invitation"
+msgstr "Voir l’invitation"
 
 msgid "New link to the moved project/group"
 msgstr "Nouveau lien vers le projet / groupe déplacé"
@@ -533,6 +550,32 @@ msgstr "%(sender_name)s vient de créer l'idée \"%(team_name)s\" sur %(portal_n
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s vient de créer un nouveau compte utilisateur sur %(portal_name)s !"
+
+msgid "A conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference %(object_name)s has been updated"
+msgstr "Une nouvelle conférence: \"%(object_name)s\" a été annoncée dans %(team_name)s."
+
+#, fuzzy
+#| msgid "You are about to deactivate this conference!"
+msgid "You are attending this conference"
+msgstr "Tu es sur le point de désactiver cette conférence !"
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr "Une nouvelle conférence: \"%(object_name)s\" a été annoncée dans %(team_name)s."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The time of conference %(object_name)s has been updated"
+msgstr "Une nouvelle conférence: \"%(object_name)s\" a été annoncée dans %(team_name)s."
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -798,6 +841,11 @@ msgstr "Est aimé"
 
 msgid "Persons"
 msgstr "Personnes"
+
+#, fuzzy
+#| msgid "Last name"
+msgid "last name"
+msgstr "Nom de famille"
 
 #, fuzzy
 #| msgid "My location"
@@ -1495,12 +1543,22 @@ msgstr "Groupe parent"
 msgid "Related Teams"
 msgstr "Equipes liées"
 
+#, fuzzy
+#| msgid "I am open for cooperation requests"
+msgid "Open for cooperation"
+msgstr "Je suis ouvert ( e ) aux demandes de coopération"
+
 msgid "Dynamic extra fields"
 msgstr "Champs supplémentaires dynamiques"
 
 #, fuzzy
 msgid "If set to true, a contact form will be displayed on the micropage."
 msgstr "Si ceci est actif, une boîte d'appel à l'action sera affichée sur le microsite."
+
+#, fuzzy
+#| msgid "User token"
+msgid "Use invite token"
+msgstr "Jeton utilisateur"
 
 msgid "Cosinnus project"
 msgstr "Projet Cosinnus"
@@ -2219,6 +2277,18 @@ msgstr "Supprimer l'item rapporté..."
 msgid "(The reported item has been deleted.)"
 msgstr "(L'item rapporté a été supprimé)"
 
+msgid "This user profile is scheduled for deletion at: "
+msgstr ""
+
+msgid "However, it will not be deleted, because it is still active."
+msgstr ""
+
+msgid "This user account is disabled. The user cannot log in or use the account."
+msgstr ""
+
+msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
+msgstr ""
+
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Ecris les 4 lettres majuscules de l'image brouillée"
 
@@ -2302,6 +2372,134 @@ msgstr "Administration"
 msgid "Select a page on the left side."
 msgstr "Sélectionnez une page sur le côté gauche."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "Vue d’ensemble - Conférences, salles et ateliers avec des paramètres de serveur BBB personnalisés"
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Vue d’ensemble - Toutes les conférences"
+
+msgid "Overview - All Conferences"
+msgstr "Vue d’ensemble - Toutes les conférences"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "Vue d’ensemble - Conférences, salles et ateliers"
+
+msgid "Past"
+msgstr "Passé"
+
+msgid "View Upcoming"
+msgstr "Voir à venir"
+
+msgid "Upcoming"
+msgstr "À venir"
+
+msgid "View Past"
+msgstr "Voir le passé"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+msgid "Booked"
+msgstr "Mis en favori"
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "La conférence est constamment premium"
+
+msgid "Portal Setting"
+msgstr "Paramétrage du portail"
+
+msgid "Conference Settings"
+msgstr "Paramètres de la conférence"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr "Pas premium"
+
+msgid "Rooms"
+msgstr "Salles"
+
+msgid "Start"
+msgstr "Début"
+
+msgid "running now!"
+msgstr "en cours d’exécution maintenant !"
+
+msgid "Conference Setting"
+msgstr "Paramétrage de la conférence"
+
+#, fuzzy
+#| msgid "Rooms"
+msgid "Room"
+msgstr "Salles"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgctxt "Calendar"
+#| msgid "Event"
+msgid "Event"
+msgstr "Événement"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "La conférence est constamment premium"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "La conférence est constamment premium"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Veux-tu vraiment supprimer l’utilisateur ?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Veux-tu vraiment enlever le membre „%(name)s“ de l'équipe ?"
+
+msgid "There are no items to show."
+msgstr "Il n’y a pas d’éléments à montrer."
+
+msgid "BBB"
+msgstr "BBB"
+
+msgid "BBB Premium"
+msgstr "BBB Premium"
+
+msgid "BBB Recording API"
+msgstr ""
+
+msgid "Not set"
+msgstr "Non défini"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Serveur BBB pour les conférences premium"
+
+msgid "Save"
+msgstr "Enregistrer"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Veux-tu vraiment refuser l'utilisateur „%(name)s“ ?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Supprimer profil"
+
 msgid "Newsletters"
 msgstr "Newsletters"
 
@@ -2348,6 +2546,16 @@ msgstr "Annonces du tableau de bord de l’utilisateur"
 
 msgid "User Welcome Email"
 msgstr "E-mail de bienvenue de l’utilisateur"
+
+msgid "Conference Overview"
+msgstr "Vue d’ensemble de la conférence"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Serveur BBB pour les conférences premium"
+
+msgid "Conferences with Custom Settings"
+msgstr "Conférences avec paramètres personnalisés"
 
 msgid "Simple Statistics"
 msgstr "Statistiques simples"
@@ -2409,9 +2617,6 @@ msgstr "Prénom"
 
 msgid "Lastname"
 msgstr "Nom de famille"
-
-msgid "Save"
-msgstr "Enregistrer"
 
 msgid "User Administration"
 msgstr "Gestion des utilisateurs"
@@ -3129,7 +3334,9 @@ msgstr "Type de pièce"
 msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
 msgstr "Le hall est le point d’entrée principal pour les participants. Tu trouveras l’ordre du jour de la conférence ici."
 
-msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+#, fuzzy
+#| msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+msgid "The Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgstr "La scène est utilisée pour afficher un flux, par exemple à partir de YouTube ou Vimeo. Un chat est affiché à côté."
 
 msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
@@ -3229,6 +3436,9 @@ msgstr "Tu peux créer directement des événements de conférence pour les sall
 #| msgid "There are no users yet."
 msgid "There are no rooms yet."
 msgstr "Il n’y a pas encore d’utilisateurs."
+
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
@@ -3426,6 +3636,12 @@ msgstr "Favoris"
 msgid "Length"
 msgstr ""
 
+msgid "minute"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
 #, fuzzy
 #| msgid "Delete Account"
 msgid "Delete Recording"
@@ -3439,145 +3655,6 @@ msgstr "Veux-tu vraiment supprimer la salle \"%(title)s\" ?"
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Supprimer l'item rapporté..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "Vue d’ensemble - Conférences, salles et ateliers avec des paramètres de serveur BBB personnalisés"
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Vue d’ensemble - Toutes les conférences"
-
-msgid "Overview - All Conferences"
-msgstr "Vue d’ensemble - Toutes les conférences"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Gestion des utilisateurs"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "Vue d’ensemble - Conférences, salles et ateliers"
-
-msgid "Past"
-msgstr "Passé"
-
-msgid "View Upcoming"
-msgstr "Voir à venir"
-
-msgid "Upcoming"
-msgstr "À venir"
-
-msgid "View Past"
-msgstr "Voir le passé"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-#, fuzzy
-msgid "Booked"
-msgstr "Mis en favori"
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "La conférence est constamment premium"
-
-msgid "Portal Setting"
-msgstr "Paramétrage du portail"
-
-msgid "Conference Settings"
-msgstr "Paramètres de la conférence"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "Premium"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr "Pas premium"
-
-msgid "Rooms"
-msgstr "Salles"
-
-msgid "Start"
-msgstr "Début"
-
-msgid "running now!"
-msgstr "en cours d’exécution maintenant !"
-
-msgid "Conference Setting"
-msgstr "Paramétrage de la conférence"
-
-#, fuzzy
-#| msgid "Rooms"
-msgid "Room"
-msgstr "Salles"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgctxt "Calendar"
-#| msgid "Event"
-msgid "Event"
-msgstr "Événement"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "La conférence est constamment premium"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "La conférence est constamment premium"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Veux-tu vraiment supprimer l’utilisateur ?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Veux-tu vraiment enlever le membre „%(name)s“ de l'équipe ?"
-
-msgid "There are no items to show."
-msgstr "Il n’y a pas d’éléments à montrer."
-
-msgid "BBB"
-msgstr "BBB"
-
-msgid "BBB Premium"
-msgstr "BBB Premium"
-
-msgid "BBB Recording API"
-msgstr ""
-
-msgid "Not set"
-msgstr "Non défini"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Serveur BBB pour les conférences premium"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Veux-tu vraiment refuser l'utilisateur „%(name)s“ ?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Supprimer profil"
-
-msgid "Conference Overview"
-msgstr "Vue d’ensemble de la conférence"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Serveur BBB pour les conférences premium"
-
-msgid "Conferences with Custom Settings"
-msgstr "Conférences avec paramètres personnalisés"
 
 msgid "Rearrange"
 msgstr "Réarranger"
@@ -3612,6 +3689,11 @@ msgstr "commence ici..."
 
 msgid "Activate Cloud"
 msgstr "Activer le cloud"
+
+#, fuzzy
+#| msgid "Members"
+msgid "Members-Map"
+msgstr "Membres"
 
 #, fuzzy
 #| msgctxt "the_app"
@@ -3717,6 +3799,18 @@ msgstr "Vous recevrez désormais des notifications chaque fois qu'un contenu pub
 msgid "No Description set"
 msgstr "Pas de descriptions définie"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created"
+msgid "Created on: "
+msgstr "Créé"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Last sent on: "
+msgid "Last updated on: "
+msgstr "Envoyé la dernière fois le :"
+
 #, fuzzy
 #| msgid "Show more"
 msgid "more"
@@ -3793,6 +3887,10 @@ msgstr ""
 #| msgid "Dates"
 msgid "Date"
 msgstr "Dates"
+
+#, python-format
+msgid "Time zone: %(TIME_ZONE)s"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -3873,6 +3971,14 @@ msgstr "Info du contact"
 msgid "No contact data has been added yet."
 msgstr "Aucune données de contact n'ont été ajoutées."
 
+msgid "Contact organizers"
+msgstr "Contacter les organisateurs"
+
+#, fuzzy
+#| msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgid "Here you can send a message to the admins."
+msgstr "Le %(date)s, tu as demandé à envoyer un message à '%(recipient)s'."
+
 msgid "Your Deactivated Content"
 msgstr "Ton contenu désactivé"
 
@@ -3897,6 +4003,9 @@ msgstr "Veux-tu vraiment supprimer cette équipe ?"
 #, python-format
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - Membres"
+
+msgid "Invite users directly via the following link: "
+msgstr ""
 
 msgid "Membership requests"
 msgstr "Demandes d'ajout"
@@ -4270,6 +4379,43 @@ msgid "Enable the public visibility of your group/project"
 msgstr "Activer la visibilité publique de votre groupe/projet"
 
 #, fuzzy
+#| msgid "Delete invitation"
+msgid "Create invite token"
+msgstr "Supprimer l'invitation"
+
+msgid "Check this to generate an invite token which allows a user to join the "
+msgstr ""
+
+#, fuzzy
+#| msgid "Groups"
+msgid "group"
+msgstr "Groupes"
+
+#, fuzzy
+#| msgid "Project"
+msgid "project"
+msgstr "Projet"
+
+#, fuzzy
+#| msgctxt "the_app"
+#| msgid "conference"
+msgid "conference"
+msgstr "Conférence"
+
+msgid " directly."
+msgstr ""
+
+#, fuzzy
+#| msgid "No current offers"
+msgid "The current token is: "
+msgstr "Pas d'offres actuelles"
+
+#, fuzzy
+#| msgid "Create content"
+msgid "Create token"
+msgstr "Créer du contenu"
+
+#, fuzzy
 #| msgid "Send 1 day before conference"
 msgid "Include a video conference"
 msgstr "Envoyer 1 jour avant la conférence"
@@ -4330,8 +4476,17 @@ msgstr "Vous pouvez ici contrôler si les informations visibles au public concer
 msgid "This project shall be made publicly findable via other platforms."
 msgstr "Ce projet doit être rendu public accessible via d’autres plateformes."
 
+msgid "Is your project open to other partner organizations?"
+msgstr ""
+
+msgid "Project is open for further partner organizations."
+msgstr ""
+
 msgid "Which apps should be activated?"
 msgstr "Quelles applications doivent être activées ?"
+
+msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
+msgstr ""
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Cette application peut seulement être activée pour un groupe, mais pas pour un projet !"
@@ -4434,10 +4589,6 @@ msgstr "L'intégration Facebook est disponible après la création du projet !"
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr "Le HTML saisi ici sera affiché sur le tableau de bord du groupe/projet (uniquement pour les membres)"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Invitations"
-msgstr "Invitations"
 
 msgid "About me"
 msgstr "A propos de moi"
@@ -4568,6 +4719,32 @@ msgstr "Partager sur Twitter"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr "Objectifs de développement durable"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created Projects"
+msgid "Contact Project Admins"
+msgstr "Projets créés"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Group Admins"
+msgstr "Info du contact"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Contact Conference Admins"
+msgstr "Gestion des utilisateurs"
+
+msgid "If you want to send your message to the project chat, you have to turn directly to the project."
+msgstr ""
+
+msgid "If you want to send your message to the group chat, you have to turn directly to the group."
+msgstr ""
+
+msgid "If you want to send your message to the conference chat, you have to turn directly to the conference."
+msgstr ""
 
 msgid "Email the group administrators"
 msgstr "Envoyer un courriel aux administrateurs du groupe"
@@ -5864,6 +6041,11 @@ msgid "CSV Downloads"
 msgstr "Téléchargements CSV"
 
 #, fuzzy
+#| msgid "Portal Setting"
+msgid "Portal switches and settings"
+msgstr "Paramétrage du portail"
+
+#, fuzzy
 msgid "HD space used by conferences"
 msgstr "Espace HD utilisé par les projets"
 
@@ -5885,8 +6067,8 @@ msgstr "e-mails de tous les abonnés à la newsletter"
 msgid "E-Mails of ALL active users"
 msgstr "e-mails de TOUS les utilisateurs actifs"
 
-msgid "Ok"
-msgstr "Ok"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr "Le WE-Cloud est là !"
@@ -6010,6 +6192,24 @@ msgstr "Supprimer les filtres"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+#| msgid "Show detailed steps"
+msgid "Show potential partners"
+msgstr "Afficher les étapes détaillées"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Here you can search for partner organisations and projects that are open for further partners. The results are sorted so that partners with a lot of overlap in the funding objectives, eligible areas and SDGs you are active on are listed first."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners for ..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You're currently not member of any project, group or organization."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 #| msgid "Stream"
 msgid "Street"
 msgstr "Fil d'actualité"
@@ -6045,6 +6245,10 @@ msgstr "Rechercher en faisant bouger la carte"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search this area"
 msgstr "Rechercher dans cette zone"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Find partners"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Membership Requests"
@@ -6222,10 +6426,6 @@ msgid "Participate"
 msgstr "Participer"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Contact organizers"
-msgstr "Contacter les organisateurs"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications for content posted."
 msgstr "Tu recevras désormais des notifications pour le contenu affiché."
 
@@ -6295,16 +6495,16 @@ msgid "Hidden User"
 msgstr "Utilisateur masqué"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "This group is open for further partner organizations."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are a Member"
 msgstr "Tu es membre"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Join Group"
 msgstr "Rejoindre groupe"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Message Group"
-msgstr "Groupe message"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Author"
@@ -6325,6 +6525,10 @@ msgstr "Tu recevras une notification lorsqu'un projet sera créé à partir de l
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"
 msgstr "Projets - Créés à partir de cette idée"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This organization is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are a Admin"
@@ -6356,12 +6560,12 @@ msgid "To Profile"
 msgstr "Ton profil"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Join Project"
-msgstr "Rejoindre projet"
+msgid "This project is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Message Project"
-msgstr "Projet message"
+msgid "Join Project"
+msgstr "Rejoindre projet"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Move up"
@@ -7524,11 +7728,6 @@ msgstr "Désolé, seulement les admins du portail peuvent désactiver des groupe
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "Seuls les membres du groupe peuvent voir le contenu demandé. Demande à être membre !"
 
-#, fuzzy
-#| msgid "Conference"
-msgid "Conferences"
-msgstr "Conférence"
-
 msgid "My Conferences"
 msgstr "Mes conférences"
 
@@ -7682,6 +7881,9 @@ msgstr "Veuillez également fournir une date de début"
 msgid "Please also provide an end date"
 msgstr "Veuillez également fournir une date de début"
 
+msgid "Ensure that your name does not contain any invalid characters."
+msgstr ""
+
 msgid "Test email sent!"
 msgstr "Envoi d'un e-mail de test !\t"
 
@@ -7718,6 +7920,14 @@ msgstr ""
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Le langage \"%s\" n'est pas supporté"
+
+#, fuzzy
+#| msgid "Test email sent!"
+msgid "New verification email sent!"
+msgstr "Envoi d'un e-mail de test !\t"
+
+msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
 
 #, fuzzy
 msgid "Successfully made conference permanent premium"
@@ -8244,6 +8454,15 @@ msgstr "Fichiers cloud"
 msgid "Linked Cloud Files"
 msgstr "Fichiers cloud"
 
+msgid "Cloud Stub"
+msgstr "cloud stub"
+
+msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
+msgstr ""
+
+msgid "There are no cloud files yet"
+msgstr "Il n’y a pas encore de fichiers cloud"
+
 msgid "Restart"
 msgstr "Redémarrer"
 
@@ -8259,6 +8478,12 @@ msgstr ""
 msgctxt "the_app"
 msgid "conference"
 msgstr "Conférence"
+
+msgid "Error message:"
+msgstr ""
+
+msgid "No error message supplied."
+msgstr ""
 
 msgid "Go to conference"
 msgstr "Aller à la conférence"
@@ -8467,8 +8692,91 @@ msgstr "Pads les plus récents"
 msgid "Pad Type"
 msgstr "Type de pad"
 
+msgid "Pad"
+msgstr "Pad"
+
+msgid "This pad can no longer be edited because its creator has deleted their account."
+msgstr "Ce pad ne peut plus être modifié parce que son créateur a supprimé son compte."
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(pad)s“?"
+msgstr "Souhaites-tu vraiment supprimer l'etherpad „%(pad)s“ ?"
+
+msgid "Delete Etherpad"
+msgstr "Suprimer l'etherpad"
+
 msgid "The document can not be accessed because the etherpad server could not be reached. Please contact an administrator!"
 msgstr "Accès impossible au document, car le serveur etherpad n'a pas pu être joint. Contacte un admin !"
+
+msgid "This document is empty"
+msgstr "Ce document est vide"
+
+msgid "Pads"
+msgstr "Pads"
+
+msgid "Enter a title for the Pad."
+msgstr "Entrer un titre pour le pad."
+
+msgid "Enter the title for a new Document or Table."
+msgstr "Saisir le titre pour un nouveau document ou tableau."
+
+msgid "Enter the title for a new Document."
+msgstr "Saisir le titre pour un nouveau document"
+
+msgid "Create Etherpad"
+msgstr "Créer etherpad"
+
+msgid "Create Ethercalc"
+msgstr "Créer ethercalc"
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(title)s“?"
+msgstr "Souhaites-tu vraiment supprimer l'etherpad „%(title)s“ ?"
+
+msgid "No etherpads have been created yet."
+msgstr "Aucun etherpad n'a encore été créé."
+
+msgid "Download CSV"
+msgstr "Télécharger CSV"
+
+msgid "Download Excel"
+msgstr "Télécharger Excel"
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Salut %(receiver_name)s,\n"
+"\n"
+"un nouvel etherpad \"%(object_name)s\" dans %(team_name)s a été créé par %(sender_name)s. \n"
+"\n"
+"Tu peux le trouver en suivant le lien suivant : %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Suis ce lien pour modifier tes préférences de notification : %(notification_settings_url)s )\n"
+"\n"
+"L'équipe %(site_name)s"
+
+msgid "You created a pad"
+msgstr "Tu as créé un pad"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a Pad"
+msgstr "a créé un pad"
+
+msgid "There are no etherpads yet"
+msgstr "Il n'y a pas encore d'etherpads"
 
 #, python-format
 msgid "Etherpad \"%(title)s\" was edited successfully."
@@ -8920,1955 +9228,6 @@ msgstr "Evénements de conférence"
 msgid "%(event)s %(type)s"
 msgstr "%(event)s %(type)s"
 
-#, python-format
-msgid "Event \"%(title)s\" was edited successfully."
-msgstr "L'événement \"%(title)s\" a été modifié."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be edited."
-msgstr "L'événement \"%(title)s\" n'a pas pu être modifié."
-
-msgid "Please use the conference management area to add new workshops!"
-msgstr "Utiliser la zone de gestion de la conférence pour ajouter de nouveaux ateliers !"
-
-msgid "The page you requested is not available for this event at this time."
-msgstr "La page que tu as demandé n'est pas disponible pour cet événement à cet horaire."
-
-msgid "One of the event suggestions times could not be understood!"
-msgstr "Un des horaires suggérés pour l'événement ne peut pas être compris !"
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was edited successfully."
-msgstr "L'événement non programmé\"%(title)s\" a été modifié."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be edited."
-msgstr "L'événement non programmé \"%(title)s\" n'a pas pu être modifié."
-
-#, python-format
-msgid "Event \"%(title)s\" was added successfully."
-msgstr "L'événement \"%(title)s\" a été ajouté."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be added."
-msgstr "L'événement \"%(title)s\" n'a pas pu être ajouté."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was added successfully."
-msgstr "L'événement non programmé\"%(title)s\" a été ajouté."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be added."
-msgstr "L'événement non programmé \"%(title)s\" n'a pas pu être ajouté."
-
-msgid "You should define at least one date suggestion."
-msgstr "Tu devrais définir au moins une suggestion de date."
-
-#, python-format
-msgid "Event \"%(title)s\" was deleted successfully."
-msgstr "L'événement\"%(title)s\" a été supprimé."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be deleted."
-msgstr "L'événement \"%(title)s\" n'a pas pu être supprimé."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was deleted successfully."
-msgstr "L'événement non programmé\"%(title)s\" a été supprimé."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be deleted."
-msgstr "L'événement non programmé \"%(title)s\" n'a pas pu être supprimé."
-
-#, fuzzy
-#| msgid "Your data was saved successfully!"
-msgid "Your votes were saved successfully."
-msgstr "Tes données ont été enregistrées avec succès !"
-
-#, fuzzy
-#| msgid "Poll \"%(title)s\" could not be added."
-msgid "Your votes could not be saved."
-msgstr "Le sondage \"%(title)s\" n'a pas pu être ajouté."
-
-msgid "This is event is already scheduled. You cannot vote for it any more."
-msgstr "Cet événement est déjà programmé. Tu ne peux plus voter pour."
-
-msgid "The complete request can only be sent via POST!"
-msgstr "La requête complète ne peut être envoyée que par un POST !"
-
-msgid "Event cannot be completed: No date was supplied."
-msgstr "L'événement n'est pas complet : aucune date n'a été fournie."
-
-msgid "The event was created successfully at the specified date."
-msgstr "L'événement a été créé à la date donnée."
-
-msgid "Upcoming events"
-msgstr "Evénements à venir"
-
-#, fuzzy
-msgid "Upcoming event"
-msgstr "Evénements à venir"
-
-msgid "Your comment was added successfully."
-msgstr "Ton commentaire a été ajouté."
-
-msgid "Your comment was deleted successfully."
-msgstr "Ton commentaire a été supprimé."
-
-msgid "Exchange"
-msgstr ""
-
-msgctxt "the_app"
-msgid "exchange"
-msgstr ""
-
-msgctxt "the_app"
-msgid "file"
-msgstr "fichier"
-
-msgid "A user uploaded a new file"
-msgstr "Un utilisateur a téléchargé un nouveau fichier"
-
-#, python-format
-msgid "%(sender_name)s uploaded the file %(object_name)s"
-msgstr "%(sender_name)s a téléchargé le fichier %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s uploaded %(count)d files"
-msgstr "%(sender_name)s fichiers %(count)d téléchargés"
-
-#, python-format
-msgid "%(sender_name)s created a new file"
-msgstr "%(sender_name)s a créé un nouveau fichier"
-
-#, python-format
-msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Un nouveau fichier : \"%(object_name)s\" a été créé dans %(team_name)s."
-
-msgid "A user uploaded a new file in a team you are following"
-msgstr "Un utilisateur a téléchargé un nouveau fichier dans une équipe que tu suis"
-
-#, python-format
-msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s a créé un nouveau fichier dans %(team_name)s (que tu suis)"
-
-#, python-format
-msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "Un nouveau fichier : \"%(object_name)s\" a été créé dans %(team_name)s (que tu suis)."
-
-msgid "Latest Files"
-msgstr "Derniers fichiers"
-
-msgid "No files"
-msgstr "Pas de fichiers"
-
-msgid "Pictures"
-msgstr "Photos"
-
-msgid "Documents"
-msgstr "Documents"
-
-msgid "Audio Files"
-msgstr "Fichiers audio"
-
-msgid "Videos"
-msgstr "Vidéos"
-
-msgid "File Type"
-msgstr "Type de fichier"
-
-msgid "File Name"
-msgstr "Nom du fichier"
-
-msgid "File Name (descending)"
-msgstr "Nom du fichier (décroissant)"
-
-msgid "Smallest Files"
-msgstr "Plus petits fichiers"
-
-msgid "Largest Files"
-msgstr "Plus grands fichiers"
-
-msgid "The given URL does not seem to be valid."
-msgstr "L'URL donnée ne semble pas être valide."
-
-msgid "Must supply either a URL or File"
-msgstr "Doit fournir une URL ou un fichier"
-
-msgid "Is URL Link"
-msgstr "Est un lien URL"
-
-msgid "Uploaded by"
-msgstr "Téléchargé par"
-
-msgid "Uploaded on"
-msgstr "Téléchargé sur"
-
-msgid "No files selected."
-msgstr "Aucun fichier sélectionné."
-
-msgctxt "special_folder_type"
-msgid "Attachments"
-msgstr "Pièces jointes"
-
-msgid "File does not exist or you are not allowed to delete it."
-msgstr "Le fichier n'existe pas ou tu n'as pas l'autorisation de le supprimer."
-
-#, python-format
-msgid "A problem occurred during export. The following file is missing: %(filename)s."
-msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
-msgstr[0] "Un problème est survenu durant l'export. Le fichier suivant manque : %(filename)s."
-msgstr[1] "Un problème est survenu durant l'export. Les fichiers suivants manquent : %(filename)s."
-
-msgid "Invalid request."
-msgstr "Demande invalide."
-
-#, python-format
-msgid "File \"%(title)s\" was updated successfully."
-msgstr "Le fichier \"%(title)s\" a été mis à jour."
-
-#, python-format
-msgid "File \"%(title)s\" could not be updated."
-msgstr "Le fichier \"%(title)s\" n'a pas pu être mis à jour."
-
-msgid "Downloading failed, the target object was not a folder!"
-msgstr "Le téléchargement a échoué, l'objet cible n'était pas un dossier !"
-
-msgid "Canceled the download because there seem to be no files in this folder."
-msgstr "Téléchargement annulé car il semble qu'il n'y ait pas de fichiers dans ce dossier."
-
-msgid "Internal Error: Group not Found"
-msgstr "Erreur interne : groupe non trouvé"
-
-msgid "Permission for upload denied"
-msgstr "Autorisation de téléchargement refusée"
-
-msgid "The uploaded file was invalid."
-msgstr "Le fichier téléchargé était invalide."
-
-#, python-format
-msgid "%(count)d File was added successfully."
-msgid_plural "%(count)d Files were added successfully."
-msgstr[0] "%(count)d fichier a été ajouté."
-msgstr[1] "%(count)d fichiers ont été ajoutés."
-
-msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
-msgstr "Le fichier que tu as téléchargé était trop grand ou le type de fichier n’était pas autorisé à être téléchargé !"
-
-msgctxt "the_app"
-msgid "marketplace"
-msgstr "marché virtuel"
-
-msgid "A user created a new offer"
-msgstr "Un utilisateur a créé une nouvelle offre"
-
-#, python-format
-msgid "%(sender_name)s created the offer %(object_name)s"
-msgstr "%(sender_name)s a créé l’offre %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d offers"
-msgstr "%(sender_name)s offres %(count)d créées"
-
-#, python-format
-msgid "%(sender_name)s created a new offer"
-msgstr "%(sender_name)s a créé une nouvelle offre"
-
-#, python-format
-msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Une nouvelle offre : \"%(object_name)s\" a été créée dans %(team_name)s."
-
-msgid "One of your offers expired"
-msgstr "L’une de tes offres a expiré"
-
-#, python-format
-msgid "Your offer %(object_name)s expired"
-msgstr "Ton offre \"%(object_name)s\" a expiré"
-
-#, python-format
-msgid "%(count)d of your offers expired"
-msgstr "%(count)d de tes offres expirées"
-
-msgid "Your offer has expired"
-msgstr "Ton offre a expiré"
-
-#, python-format
-msgid "Offer \"%(object_name)s\" has expired."
-msgstr "L'offre \"%(object_name)s\" a expiré."
-
-msgid "A user commented on one of your offers"
-msgstr "Un utilisateur a commenté l'une de tes offres"
-
-#, python-format
-msgid "%(sender_name)s commented on your offer %(object_name)s"
-msgstr "%(sender_name)s a commenté ton offre %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
-msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté ton offre %(object_name)s"
-msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté ton offre %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your offer"
-msgstr "%(sender_name)s a commenté ton offre"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your offers"
-msgstr "%(sender_name)s a commenté une de tes offres"
-
-msgid "A user commented on an offer you were tagged in"
-msgstr "Un utilisateur a commenté une offre sur laquelle tu es tagué"
-
-#, python-format
-msgid "%(sender_name)s commented on the offer %(object_name)s"
-msgstr "%(sender_name)s a commenté l’offre %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
-msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté l’offre %(object_name)s"
-msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté l’offre %(object_name)s"
-
-msgid "You were tagged in this offer"
-msgstr "Tu as été marqué dans cette offre"
-
-#, python-format
-msgid "%(sender_name)s commented on an offer you were tagged in"
-msgstr "%(sender_name)s a commenté une offre sur laquelle tu es tagué"
-
-#, python-format
-msgid "%(sender_name)s commented on an offer you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s a commenté une offre sur laquelle tu es tagué dans %(team_name)s"
-
-msgid "A user created a new offer in a team you are following"
-msgstr "Un utilisateur a créé une nouvelle offre dans une équipe que tu suis"
-
-#, python-format
-msgid "%(sender_name)s created a new offer in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s a créé une nouvelle offre dans %(team_name)s (que tu suis)"
-
-#, python-format
-msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "Une nouvelle offre : \"%(object_name)s\" a été créée dans %(team_name)s (que tu suis)."
-
-msgid "A user updated an offer you are following"
-msgstr "Un utilisateur a mis à jour une offre que tu suis"
-
-#, python-format
-msgid "%(sender_name)s updated the offer %(object_name)s"
-msgstr "%(sender_name)s a mis à jour l’offre %(object_name)s"
-
-msgid "You are following this offer"
-msgstr "Tu suis cette offre"
-
-#, python-format
-msgid "%(sender_name)s updated an offer you are following"
-msgstr "%(sender_name)s a mis à jour une offre que tu suis"
-
-#, python-format
-msgid "An offer you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "Une offre que tu suis : \"%(object_name)s\" a été mise à jour en %(team_name)s."
-
-msgid "A user commented on an offer you are following"
-msgstr "Un utilisateur a commenté une offre que tu suis"
-
-#, python-format
-msgid "%(sender_name)s commented on on an offer you are following"
-msgstr "%(sender_name)s a commenté une offre que tu suis"
-
-msgid "Current Offers"
-msgstr "Offres actuelles"
-
-msgid "No current offers"
-msgstr "Pas d'offres actuelles"
-
-msgid "Order Key"
-msgstr "Clé d'ordre"
-
-msgid "Looking for"
-msgstr "A la recherche de"
-
-msgid "Offering"
-msgstr "Propose"
-
-msgid "Offer currently active?"
-msgstr "Offre active actuellement ?"
-
-msgid "Offer Category"
-msgstr "Catégorie de l'offre"
-
-#, python-format
-msgid "Offer: %(offer)s (%(type)s)"
-msgstr "Offre : %(offer)s (%(type)s)"
-
-#, python-format
-msgid "Offer \"%(title)s\" was edited successfully."
-msgstr "L'offre\"%(title)s\" a été modifiée."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be edited."
-msgstr "L'offre \"%(title)s\" n'a pas pu être modifiée."
-
-#, python-format
-msgid "Offer \"%(title)s\" was added successfully."
-msgstr "L'offre\"%(title)s\" a été ajoutée."
-
-#, python-format
-msgid "Offer \"%(title)s\" was saved successfully, but is not active yet."
-msgstr "L'offre \"%(title)s\" a été enregistrée mais n'est pas encore active."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be added."
-msgstr "L'offre \"%(title)s\" n'a pas pu être ajoutée."
-
-#, python-format
-msgid "Offer \"%(title)s\" was deleted successfully."
-msgstr "L'offre\"%(title)s\" a été supprimée."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be deleted."
-msgstr "L'offre \"%(title)s\" n'a pas pu être supprimée."
-
-msgid "The offer you requested is no longer active. Sorry!"
-msgstr "L'offre que tu as demandée n'est plus active. Désolé !"
-
-msgid "Invalid action for this offer. The request could not be completed!"
-msgstr "Action invalide pour cette offre. La demande n'a pas pu être complétée !"
-
-msgid "The offer is already active"
-msgstr "L'offre est déjà active"
-
-msgid "The offer is already deactivated"
-msgstr "L'offre est déjà désactivée"
-
-msgid "The offer was deactivated successfully."
-msgstr "L'offre\"%(title)s\" a été désactivée."
-
-msgid "The offer was reactivated successfully."
-msgstr "L'offre\"%(title)s\" a été réactivée."
-
-msgid "The offer was activated successfully."
-msgstr "L'offre\"%(title)s\" a été activée."
-
-msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
-msgstr ""
-
-msgctxt "the_app"
-msgid "Chat"
-msgstr ""
-
-msgctxt "the_app"
-msgid "message"
-msgstr "message"
-
-msgid "Chat"
-msgstr ""
-
-msgid "Only Administrators may send a message to this project/group!"
-msgstr "Les admins seulement peuvent envoyer un message à ce projet / groupe !"
-
-msgid "Additional Recipients"
-msgstr "Destinataires supplémentaires"
-
-msgid "Undefined recipient."
-msgstr "Destinataire non défini."
-
-msgid "Your reply could not be matched to an existing message."
-msgstr "Ta réponse n'a pas pu être assortie à un message existant."
-
-msgid "An internal error occured."
-msgstr "Une erreur interne s'est produite."
-
-msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
-msgstr "L'adresse e-mail depuis laquelle tu as envoyé la réponse n'est pas celle associée à ton compte. Envoie les réponses directes depuis l'adresse avec laquelle tu t'es inscrit sur le site !"
-
-msgid "There was an error when processing your message text!"
-msgstr "Il y a eu une erreur lors du traitement du texte de ton message !"
-
-msgid "Your direct reply failed!"
-msgstr "Ta réponse directe a échoué !"
-
-msgid "Select at least one object."
-msgstr "Sélectionne au moins un objet."
-
-msgid "Messages or conversations successfully archived."
-msgstr "Messages ou conversations archivés."
-
-msgid "Messages or conversations successfully deleted."
-msgstr "Messages ou conversations supprimés."
-
-msgid "Messages were marked as read."
-msgstr "Les messages ont été marqués comme lus."
-
-msgid "Messages or conversations successfully recovered."
-msgstr "Messages ou conversations récupérés."
-
-msgid "Notes"
-msgstr "Notes"
-
-msgctxt "the_app"
-msgid "note"
-msgstr "note"
-
-msgid "A user commented on a news post"
-msgstr "Un utilisateur a commenté un post"
-
-#, python-format
-msgid "%(sender_name)s commented on a news post"
-msgstr "%(sender_name)s a commenté un post"
-
-msgid "A user commented on one of your news posts"
-msgstr "Un utilisateur a commenté un de tes posts"
-
-#, python-format
-msgid "%(sender_name)s commented on your news post %(object_name)s"
-msgstr "%(sender_name)s a commenté ton post %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
-msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté ton post %(object_name)s"
-msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté ton post %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your news post"
-msgstr "%(sender_name)s a commenté ton post"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your news posts"
-msgstr "%(sender_name)s a commenté un de tes posts"
-
-msgid "A user commented on a news posts you commented in"
-msgstr "Un utilisateur a commenté un post que tu a commenté"
-
-#, python-format
-msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
-msgstr "%(sender_name)s a commenté le post %(object_name)s que tu as commenté dans"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
-msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté le poste %(object_name)s que tu as commenté dans"
-msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté le poste %(object_name)s que tu as commenté dans"
-
-#, python-format
-msgid "%(sender_name)s commented on a news post you commented in"
-msgstr "%(sender_name)s a commenté un post que tu as commenté"
-
-msgid "A user created a news post"
-msgstr "Un utilisateur a créé un post"
-
-#, python-format
-msgid "%(sender_name)s created the news post %(object_name)s"
-msgstr "%(sender_name)s a créé le post  %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d news posts"
-msgstr "%(sender_name)s posts %(count)d créés"
-
-#, python-format
-msgid "%(sender_name)s created a new news post"
-msgstr "%(sender_name)s a créé un nouveau post"
-
-#, python-format
-msgid "%(sender_name)s posted in %(team_name)s:"
-msgstr "%(sender_name)s a posté dans %(team_name)s :"
-
-msgid "A user created a news post in a team you are following"
-msgstr "Un utilisateur a créé un post dans une équipe que tu suis"
-
-#, python-format
-msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s a créé un nouveau post dans %(team_name)s (que tu suis)"
-
-#, python-format
-msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
-msgstr "%(sender_name)s a posté dans %(team_name)s : (que tu suis)"
-
-msgid "A user updated a news post"
-msgstr "Un utilisateur a mis à jour un post"
-
-#, python-format
-msgid "%(sender_name)s updated the news post %(object_name)s"
-msgstr "%(sender_name)s a mis à jour le post %(object_name)s"
-
-msgid "You are following this news post"
-msgstr "Tu suis ce post"
-
-#, python-format
-msgid "%(sender_name)s updated a news post you are following"
-msgstr "%(sender_name)s a mis à jour un post que tu suis"
-
-#, python-format
-msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
-msgstr "Un post que tu suis par %(sender_name)s a été mis à jour %(team_name)s :"
-
-msgid "A user commented on a news post you are following"
-msgstr "Un utilisateur a commenté un post que tu suis"
-
-#, python-format
-msgid "%(sender_name)s commented on the news post %(object_name)s"
-msgstr "%(sender_name)s a commenté le post %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
-msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté le post %(object_name)s"
-msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté le post %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on a news posts you are following"
-msgstr "%(sender_name)s a commenté un post que tu suis"
-
-msgid "No news"
-msgstr "Pas de nouveaux posts"
-
-msgid "Write a news post"
-msgstr "Ecrire un post"
-
-msgid "News stream"
-msgstr "Fil d'actualité"
-
-msgid "Popularity"
-msgstr "Popularité"
-
-msgid "Facebook Share"
-msgstr "Partager sur Facebook"
-
-msgid "Note Item"
-msgstr "Item de note"
-
-msgid "Note Items"
-msgstr "Items de note"
-
-msgid "Your news post was added successfully."
-msgstr "Ton post a été ajouté."
-
-msgid "Your news post was deleted successfully."
-msgstr "Ton post a été supprimé."
-
-msgid "Your news post was edited successfully."
-msgstr "Ton post a été modifié."
-
-msgid "You are seeing this alert because you created this content."
-msgstr "Tu vois cette alerte parce que tu as créé ce contenu."
-
-msgid "You are seeing this alert because you are following the item's project or group."
-msgstr "Tu vois cette alerte parce que tu suis le projet ou le groupe de l’élément."
-
-msgid "You are seeing this alert because you are following this item."
-msgstr "Tu vois cette alerte parce que tu suis cet élément."
-
-msgctxt "the_app"
-msgid "notifications"
-msgstr "notification"
-
-#, python-format
-msgid "Your daily digest for %(portal_name)s"
-msgstr "Ton résumé quotidien pour %(portal_name)s"
-
-msgid "This is what happened during the last day!"
-msgstr "Voici ce qui s’est passé au cours de la dernière journée !"
-
-#, python-format
-msgid "Your weekly digest for %(portal_name)s"
-msgstr "Ton résumé hebdomadaire pour %(portal_name)s"
-
-msgid "This is what happened during the last week!"
-msgstr "Voici ce qui s’est passé au cours de la semaine dernière !"
-
-msgctxt "notification frequency"
-msgid "Never"
-msgstr "Jamais"
-
-msgctxt "notification frequency"
-msgid "Immediately"
-msgstr "Immédiatement"
-
-msgctxt "notification frequency"
-msgid "Daily"
-msgstr "Quotidienne"
-
-msgctxt "notification frequency"
-msgid "Weekly"
-msgstr "Hebdomadaire"
-
-msgid "Notification Preference for User"
-msgstr "Préférences de notification pour l'utilisateur"
-
-msgid "Notification Preference"
-msgstr "Préférence de notification"
-
-msgid "Multi Notification ID"
-msgstr "ID de notification multiple"
-
-msgid "Multi Notification Preference"
-msgstr "Préférence de notification multiple"
-
-msgid "Multi Notification Preferences"
-msgstr "Préférences de notification multiple"
-
-msgid "User who caused this notification event"
-msgstr "Utilisateur qui a causé cet événement de notification"
-
-msgid "Audience"
-msgstr "Audience"
-
-msgid "Owner of the alert"
-msgstr "Propriétaire de l’alerte"
-
-msgid "Alert Reason key"
-msgstr "Clé de raison d’alerte"
-
-msgid "Last user who caused this notification event"
-msgstr "Dernier utilisateur à avoir causé cet événement de notification"
-
-msgid "Alert State"
-msgstr "État d’alerte"
-
-msgid "You are following this content or its Project or Group"
-msgstr "Tu suis ce contenu ou son Projet ou Groupe"
-
-msgid "All notifications"
-msgstr "Toutes les notifications"
-
-msgid "No notifications"
-msgstr "Pas de notifications"
-
-msgid "For content that I am following, I wish to receive notification emails"
-msgstr "Pour le contenu que je suis, je souhaite recevoir des e-mails de notification"
-
-msgid "You are getting this notification because you are subscribed to these kinds of events in your project or group."
-msgstr "Tu reçois cette notification car tu t'es abonné à ce type d'événement dans ton projet ou groupe."
-
-msgid "You are getting this notification because you are an administrator of this project or group."
-msgstr "Tu reçois cette notification car tu es admin de ce projet ou groupe."
-
-msgid "You are getting this notification because you are an administrator of this portal."
-msgstr "Tu reçois cette notification car tu es admin de ce portail."
-
-msgid "You are getting this email because you are subscribed to one or more daily notifications."
-msgstr "Tu reçois cet e-mail car tu t'es abonné à une notification quotidienne ou plus."
-
-msgid "You are getting this email because you are subscribed to one or more weekly notifications."
-msgstr "Tu reçois cet e-mail car tu t'es abonné à une notification hebdomadaire ou plus."
-
-msgid "New item"
-msgstr "Nouvel item"
-
-#, python-format
-msgid "View on %(portal_name)s"
-msgstr "Afficher sur %(portal_name)s"
-
-msgid "Untitled"
-msgstr "Sans titre"
-
-msgid "Your notification preferences were updated successfully."
-msgstr "Tes préférences de notification ont été mises à jour."
-
-msgid "Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!"
-msgstr ""
-
-msgid "Your notifications preferences were reset to default!"
-msgstr "Tes préférences de notifications ont été réinitialisées aux valeurs par défaut !"
-
-msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
-msgstr ""
-
-#, fuzzy
-#| msgid "Successfully deactivated user account"
-msgid "Successfully signed in as {}."
-msgstr "Le compte utilisateur a été déactivé. "
-
-#, fuzzy
-#| msgid "Successfully deactivated user account"
-msgid "Successfully connected account."
-msgstr "Le compte utilisateur a été déactivé. "
-
-#, fuzzy
-#| msgid "Successfully removed user"
-msgid "Successfully removed connection."
-msgstr "L'utilisateur a été supprimé."
-
-#, fuzzy
-#| msgid "Organization"
-msgctxt "the_app"
-msgid "organization"
-msgstr "Organisation"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization membership"
-msgstr "Organisations"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization memberships"
-msgstr "Organisations"
-
-#, fuzzy
-#| msgid "Team Invite for Unregistered User"
-msgid "Organization Invite for Unregistered User"
-msgstr "Invitation à rejoindre l'équipe pour un utilisateur non-enregistré"
-
-#, fuzzy
-#| msgid "Team Invites for Unregistered Users"
-msgid "Organization Invites for Unregistered Users"
-msgstr "Invitations à rejoindre l'équipe pour les utilisateurs non-enregistrés"
-
-#, fuzzy
-#| msgid "Assigned organizations"
-msgid "Civil society organization"
-msgstr "Organisations assignées"
-
-msgid "Company (commercial)"
-msgstr ""
-
-#, fuzzy
-#| msgid "Public voting"
-msgid "Public institution"
-msgstr "Vote public"
-
-#, fuzzy
-#| msgid "Other teams"
-msgid "Other"
-msgstr "Autres équipes"
-
-#, fuzzy
-#| msgid "Remove organization"
-msgid "Name of the organization"
-msgstr "Enlever l’organisation"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Organization type"
-msgstr "Organisation"
-
-#, fuzzy
-#| msgid "Logout"
-msgid "Logo"
-msgstr "Déconnexion"
-
-#, fuzzy
-#| msgid "Email address"
-msgid "Email Address"
-msgstr "Adresse e-mail"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Cosinnus Organization"
-msgstr "Organisation"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Cosinnus Organizations"
-msgstr "Organisations"
-
-msgid "CosinnusOrganizationSocialMedia"
-msgstr ""
-
-#, fuzzy
-#| msgid "CosinnusLocation"
-msgid "CosinnusOrganizationLocation"
-msgstr "Lieu Cosinnus"
-
-#, fuzzy
-#| msgid "CosinnusLocations"
-msgid "CosinnusOrganizationLocations"
-msgstr "Lieux Cosinnus"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Organization group"
-msgstr "Organisation"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization groups"
-msgstr "Organisations"
-
-#, fuzzy, python-format
-#| msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
-msgid "Project/group %(name)s had already requested and has now been accepted."
-msgstr "Le projet/groupe %(group)s avait déjà été invité et a été assigné immédiatement !"
-
-#, fuzzy, python-format
-#| msgid "User %(username)s was successfully invited!"
-msgid "Project/group %(name)s was successfully invited."
-msgstr "L'utilisateur %(username)s a été invité avec succès !"
-
-#, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
-msgid "Your join request was withdrawn from organization “%(name)s” successfully."
-msgstr "Ta demande d'ajout a été enlevée de %(team_type)s “%(team_name)s” avec succès."
-
-#, fuzzy, python-format
-#| msgid "You have declined the invitation to %(team_type)s “%(team_name)s”."
-msgid "You have declined the invitation to organization “%(name)s”."
-msgstr "Tu as refusé l’invitation à %(team_type)s \"%(team_name)s\"."
-
-#, fuzzy, python-format
-#| msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
-msgid "Your project/group is now assigned to the organization “%(name)s”. Welcome!"
-msgstr "Tu es désormais membre de %(team_type)s “%(team_name)s”. Bienvenue !"
-
-#, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
-msgid "Your request was withdrawn from organization \"%(name)s\" successfully."
-msgstr "Ta demande d'ajout a été enlevée de %(team_type)s “%(team_name)s” avec succès."
-
-#, fuzzy, python-format
-#| msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
-msgid "Your invitation to project/group \"%(name)s\" was withdrawn successfully."
-msgstr "Ton invitation pour l'utilisateur \"%(username)s\" a été annulée avec succès."
-
-#, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
-msgid "Project/group \"%(name)s\" is no longer assigned."
-msgstr "L'utilisateur %(username)s n'est plus membre."
-
-#, fuzzy
-#| msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
-msgid "Sorry, only portal administrators can create Organizations! You can either create a Project, or write a message to one of the administrators to create a Organization for you. Below you can find a listing of all administrators."
-msgstr "Désolé, seulement les admins de portails peuvent créer des groupes ! Tu peux soit créer un projet, soit écrire un message à un des admins pour créer un groupe pour toi. Tu peux trouver la liste des admins ci-dessous."
-
-#, fuzzy, python-format
-#| msgid "Event \"%(title)s\" was edited successfully."
-msgid "Organization \"%(name)s\" was created successfully."
-msgstr "L'événement \"%(title)s\" a été modifié."
-
-#, fuzzy
-#| msgid "Your idea was deleted successfully."
-msgid "Your organization was deleted successfully."
-msgstr "Ton idée a été supprimée avec succès."
-
-msgctxt "the_app"
-msgid "poll"
-msgstr "sondage"
-
-msgid "A user created a new poll"
-msgstr "Un utilisateur a créé un nouveau sondage"
-
-#, python-format
-msgid "%(sender_name)s created the poll %(object_name)s"
-msgstr "%(sender_name)s a créé le sondage %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d polls"
-msgstr "%(sender_name) sondages %(count)d créés"
-
-#, python-format
-msgid "%(sender_name)s created a new poll"
-msgstr "%(sender_name)s a créé un nouveau sondage"
-
-#, python-format
-msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Un nouveau sondage : \"%(object_name)s\" a été créé dans %(team_name)s."
-
-msgid "A poll you voted on was completed"
-msgstr "Un sondage pour lequel tu as voté a été rempli"
-
-#, python-format
-msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
-msgstr "%(sender_name)s a rempli le sondage %(object_name)s sur lequel tu as voté"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d polls you voted on"
-msgstr "%(sender_name)s a rempli %(count)d sondages sur lesquels tu as voté"
-
-#, python-format
-msgid "%(sender_name)s completed the poll"
-msgstr "%(sender_name)s a rempli le sondage"
-
-#, python-format
-msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
-msgstr "Le sondage \"%(object_name)s\" a été rempli dans %(team_name)s."
-
-msgid "A user commented on one of your polls"
-msgstr "Un utilisateur a commenté l'un de tes sondages"
-
-#, python-format
-msgid "%(sender_name)s commented on your poll %(object_name)s"
-msgstr "%(sender_name)s a commenté ton sondage %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
-msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté ton sondage %(object_name)s"
-msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté ton sondage %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your poll"
-msgstr "%(sender_name)s a commenté ton sondage"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your polls"
-msgstr "%(sender_name)s a commenté un de tes sondages"
-
-msgid "A user commented on a poll you were tagged in"
-msgstr "Un utilisateur a commenté un sondage sur lequel tu es tagué"
-
-#, python-format
-msgid "%(sender_name)s commented on the poll %(object_name)s"
-msgstr "%(sender_name)s a commenté le sondage %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
-msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté le sondage %(object_name)s"
-msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté le sondage %(object_name)s"
-
-msgid "You were tagged in this poll"
-msgstr "Tu as été marqué dans ce sondage"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you were tagged in"
-msgstr "%(sender_name)s a commenté un sondage sur lequel tu es tagué"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s a commenté un sondage sur lequel tu es tagué dans %(team_name)s"
-
-msgid "A user commented on an poll you voted in"
-msgstr "Un utilisateur a commenté un sondage à propos duquel tu as voté"
-
-msgid "You voted on this poll"
-msgstr "Tu as voté sur ce sondage"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you voted in"
-msgstr "%(sender_name)s a commenté un sondage pour lequel tu as voté"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
-msgstr "%(sender_name)s a commenté un sondage pour lequel tu as voté dans %(team_name)s"
-
-msgid "A user created a new poll in a team you are following"
-msgstr "Un utilisateur a créé un nouveau sondage dans une équipe que tu suis"
-
-#, python-format
-msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s a créé un nouveau sondage dans %(team_name)s (que tu suis)"
-
-#, python-format
-msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "Un nouveau sondage : \"%(object_name)s\" a été créé dans %(team_name)s (que tu suis)."
-
-msgid "A user updated a poll you are following"
-msgstr "Un utilisateur a mis à jour un sondage que tu suis"
-
-#, python-format
-msgid "%(sender_name)s updated the poll %(object_name)s"
-msgstr "%(sender_name)s a mis à jour le sondage %(object_name)s"
-
-msgid "You are following this poll"
-msgstr "Tu suis ce sondage"
-
-#, python-format
-msgid "%(sender_name)s updated a poll you are following"
-msgstr "%(sender_name)s mis à jour un sondage que tu suis"
-
-#, python-format
-msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "Un sondage que tu suis : \"%(object_name)s\" a été mis à jour en %(team_name)s."
-
-msgid "A poll you are following was completed"
-msgstr "Un sondage que tu suis a été réalisé"
-
-#, python-format
-msgid "%(sender_name)s completed the poll %(object_name)s"
-msgstr "%(sender_name)s a réalisé le sondage %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d polls"
-msgstr "%(sender_name)s sondages %(count)d réalisés"
-
-#, python-format
-msgid "%(sender_name)s completed the poll you are following"
-msgstr "%(sender_name)s a réalisé le sondage"
-
-#, python-format
-msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
-msgstr "Le sondage \"%(object_name)s\" que tu suis a été réalisé dans %(team_name)s."
-
-msgid "A user commented on one a poll you are following"
-msgstr "Un utilisateur a commenté un sondage que tu suis"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you are following"
-msgstr "%(sender_name)s a commenté un sondage que tu suis"
-
-msgid "Current Polls"
-msgstr "Sondages actuels"
-
-msgid "No current polls"
-msgstr "Pas de sondages actuels"
-
-msgid "You must write a description for this poll option!"
-msgstr "Tu dois écrire une description pour cette option de sondage !"
-
-msgid "Voting closed"
-msgstr "Vote clos"
-
-msgid "Poll archived"
-msgstr "Sondage archivé"
-
-msgid "Multiple options votable"
-msgstr "Plusieurs réponses possibles"
-
-msgid "Does this poll allow users to vote on multiple options or just decide for one?"
-msgstr "Ce sondage permet-il aux utilisateurs de voter pour de multiples options ou seulement d'en choisir une ?"
-
-msgid "\"Maybe\" option enabled"
-msgstr "Option \"Peut-être\" activée"
-
-msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
-msgstr "L'option \"peut-être\" est-elle activée ? Ignorer et mettre Faux par défaut si ``votes_multiples==Faux``"
-
-msgid "Anyone can vote"
-msgstr "Tout le monde peut voter"
-
-msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
-msgstr "Si vrai, n'importe qui voyant ce sondage peut vote. Si faux, uniquement les membres du groupe le peuvent."
-
-msgid "Show voters"
-msgstr "Afficher les votants"
-
-msgid "If true, display a list of which user voted for each option."
-msgstr "Si vrai, afficher une liste décrivant quel utilisateur a voté pour chaque option."
-
-msgid "Winning Option"
-msgstr "Option gagnante"
-
-#, python-format
-msgid "Poll: %(poll)s (%(state)s)"
-msgstr "Sondage : %(poll)s (%(state)s)"
-
-msgid "Poll Option"
-msgstr "Option du sondage"
-
-msgid "Poll Options"
-msgstr "Options du sondage"
-
-#, python-format
-msgid "Poll \"%(title)s\" was edited successfully."
-msgstr "Le sondage \"%(title)s\" a été modifié."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be edited."
-msgstr "Le sondage \"%(title)s\" n'a pas pu être modifié."
-
-#, python-format
-msgid "Poll \"%(title)s\" was added successfully."
-msgstr "Le sondage \"%(title)s\" a été ajouté."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be added."
-msgstr "Le sondage \"%(title)s\" n'a pas pu être ajouté."
-
-msgid "You should define at least one poll option!"
-msgstr "Tu devrais définir au moins une option de sondage !"
-
-msgid "This poll is archived and cannot be edited anymore!"
-msgstr "Ce sondage est archivé et ne peut plus être modifié !"
-
-#, python-format
-msgid "Poll \"%(title)s\" was deleted successfully."
-msgstr "Le sondage \"%(title)s\" a été supprimé."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be deleted."
-msgstr "Le sondage \"%(title)s\" n'a pas pu être supprimé."
-
-msgid "The voting phase for this poll is over. You cannot vote for it any more."
-msgstr "Le vote pour ce sondage est clos. Tu ne peux plus voter."
-
-msgid "In this poll you must vote for exactly one item!"
-msgstr "Dans ce sondage, tu dois voter pour une seule option !"
-
-msgid "Invalid action for this poll. The request could not be completed!"
-msgstr "Action invalide pour ce sondage. La demande n'a pas pu être complétée !"
-
-msgid "This action is not permitted for this poll at this stage!"
-msgstr "Cette action n'est pas permise à ce stade pour ce sondage !"
-
-msgid "The poll was closed successfully."
-msgstr "Le sondage a été fermé."
-
-msgid "The poll was re-opened successfully."
-msgstr "Le sondage a été rouvert."
-
-msgid "The poll was archived successfully."
-msgstr "Le sondage a été archivé."
-
-msgid "Stream"
-msgstr "Fil d'actualité"
-
-msgctxt "the_app"
-msgid "stream"
-msgstr "fil d'actualité"
-
-msgid "My Streams"
-msgstr "Mes fils d'actualité"
-
-msgid "Streams"
-msgstr "Fils d'actualité"
-
-msgid "Models"
-msgstr "Modèles"
-
-msgid "Portal IDs"
-msgstr "IDs du portail"
-
-msgid "Last seen"
-msgstr "Vu pour la dernière fois"
-
-msgid "Special Stream"
-msgstr "Fil spécial"
-
-msgid "Special Group IDs"
-msgstr "IDs des groupes spéciaux"
-
-msgid "You do not have permission to access this stream."
-msgstr "Tu n'as pas la permission d'accéder à ce fil."
-
-msgid "Your stream was added successfully."
-msgstr "Ton fil a été ajouté."
-
-msgid "Your stream was updated successfully."
-msgstr "Ton fil a été mis à jour."
-
-msgid "Your stream was deleted successfully."
-msgstr "Ton fil a été supprimé."
-
-msgid "You cannot delete the default stream!"
-msgstr "Tu ne peux pas supprimer le fil par défaut !"
-
-msgctxt "the_app"
-msgid "todo"
-msgstr "tâches"
-
-msgid "A user created a new todo"
-msgstr "Un utilisateur a créé une nouvelle tâche"
-
-#, python-format
-msgid "%(sender_name)s created the todo %(object_name)s"
-msgstr "%(sender_name)s a créé une nouvelle tâche %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d todos"
-msgstr "%(sender_name)s a créé %(count)d nouvelles tâches"
-
-#, python-format
-msgid "%(sender_name)s created a new todo"
-msgstr "%(sender_name)s a créé une nouvelle tâche"
-
-#, python-format
-msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Une nouvelle tâche : \"%(object_name)s\" a été créée dans %(team_name)s."
-
-msgid "A todo was assigned to me"
-msgstr "Une tâche m'a été assignée"
-
-#, python-format
-msgid "%(sender_name)s assigned the todo %(object_name)s to you"
-msgstr "%(sender_name)s t'a assigné la nouvelle tâche %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s assigned %(count)d todos to you"
-msgstr "%(sender_name)s t'a assigné %(count)d nouvelles tâches"
-
-#, python-format
-msgid "%(sender_name)s assigned a todo to you"
-msgstr "%(sender_name)s t'a assigné une nouvelle tâche"
-
-msgid "A todo I created was completed"
-msgstr "Une tâche que j'ai créée a été complétée"
-
-#, python-format
-msgid "%(sender_name)s completed the todo %(object_name)s"
-msgstr "%(sender_name)s a effectué la tâche %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d todos"
-msgstr "%(sender_name)s a effectué %(count)d tâches"
-
-msgid "You created this todo"
-msgstr "Tu as créé cette nouvelle tâche"
-
-#, python-format
-msgid "%(sender_name)s completed your todo"
-msgstr "%(sender_name)s a effectué ta tâche"
-
-#, python-format
-msgid "%(sender_name)s completed one of your todos"
-msgstr "%(sender_name)s a effectué une tâche"
-
-msgid "A user commented on one of your todos"
-msgstr "Un utilisateur a commenté l'une de tes tâches"
-
-#, python-format
-msgid "%(sender_name)s commented on your todo %(object_name)s"
-msgstr "%(sender_name)s a commenté ta tâche %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
-msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté ta tâche %(object_name)s"
-msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté ta tâche %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your todo"
-msgstr "%(sender_name)s a commenté ta tâche"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your todos"
-msgstr "%(sender_name)s a commenté une de tes tâches"
-
-msgid "A user commented on a todo you were tagged in"
-msgstr "Un utilisateur a commenté une tâche sur laquelle tu es tagué"
-
-#, python-format
-msgid "%(sender_name)s commented on the todo %(object_name)s"
-msgstr "%(sender_name)s a commenté ta tâche %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
-msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté la tâche %(object_name)s"
-msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté la tâche %(object_name)s"
-
-msgid "You were tagged in this todo"
-msgstr "Tu as été marqué dans cette tâche"
-
-#, python-format
-msgid "%(sender_name)s commented on a todo you were tagged in"
-msgstr "%(sender_name)s a commenté une tâche sur laquelle tu es tagué"
-
-#, python-format
-msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s a commenté une tâche sur laquelle tu es tagué dans %(team_name)s"
-
-msgid "A user commented on a todo you were assigned to"
-msgstr "Un utilisateur a commenté une tâche qui t'est assignée"
-
-#, python-format
-msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
-msgstr "%(sender_name)s a commenté ta tâche assignée %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
-msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté ta tâche assignée %(object_name)s"
-msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté ta tâche assignée %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your assigned todos"
-msgstr "%(sender_name)s a commenté une de tes tâches assignées"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
-msgstr "%(sender_name)s a commenté une de tes tâches assignées dans %(team_name)s"
-
-msgid "A user updated a todo you are following"
-msgstr "Un utilisateur a mis à jour une tâche que tu suis"
-
-#, python-format
-msgid "%(sender_name)s updated the todo %(object_name)s"
-msgstr "%(sender_name)s a mis à jour la tâche %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
-msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont mis à jour la tâche %(object_name)s"
-msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont mis à jour la tâche %(object_name)s"
-
-msgid "You are following this todo"
-msgstr "Tu suis cette tâche"
-
-#, python-format
-msgid "%(sender_name)s updated a todo you are following"
-msgstr "%(sender_name)s mis à jour une tâche que tu suis"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "Une tâche que tu suis : \"%(object_name)s\" a été mise à jour dans %(team_name)s."
-
-msgid "A user reassigned a todo you are following"
-msgstr "Un utilisateur a réaffecté une tâche que tu suis"
-
-#, python-format
-msgid "%(sender_name)s reassigned the todo %(object_name)s"
-msgstr "%(sender_name)s a réaffecté la tâche %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s reassigned %(count)d todos"
-msgstr "%(sender_name)s tâches %(count)d réaffectées"
-
-#, python-format
-msgid "%(sender_name)s reassigned a todo you are following"
-msgstr "%(sender_name)s a réaffecté une tâche que tu suis"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
-msgstr "Une tâche que tu suis : \"%(object_name)s\" a été réaffectée dans %(team_name)s."
-
-msgid "A user completed a todo you are following"
-msgstr "Un utilisateur a éffectué une tâche que tu suis"
-
-#, python-format
-msgid "%(sender_name)s completed a todo you are following"
-msgstr "%(sender_name)s a effectué une tâche que tu suis"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
-msgstr "Une tâche que tu suis : \"%(object_name)s\" a été effectuée dans %(team_name)s."
-
-msgid "A user commented on a todo you are following"
-msgstr "Un utilisateur a commenté une tâche que tu suis"
-
-#, python-format
-msgid "%(sender_name)s commented on on a todo you are following"
-msgstr "%(sender_name)s a commenté une tâche que tu suis"
-
-msgid "My Todos"
-msgstr "Mes tâches"
-
-msgid "No todos"
-msgstr "Aucune tâche"
-
-msgid "Open"
-msgstr "Ouverte"
-
-msgid "Completed"
-msgstr "Effectuée"
-
-msgid "Assigned To"
-msgstr "Assigné à"
-
-msgid "Priority"
-msgstr "Priorité"
-
-msgid "Due date"
-msgstr "Echéance"
-
-msgid "Soonest Due"
-msgstr "Echéance la plus proche"
-
-msgid "You are not allowed to assign this Todo entry."
-msgstr "Tu n'as pas l'autorisation d'assigner cette tâche."
-
-msgid "Later"
-msgstr "Plus tard"
-
-msgid "Normal"
-msgstr "Normale"
-
-msgid "Important"
-msgstr "Importante"
-
-msgid "Due by"
-msgstr "A faire avant le"
-
-msgid "Completed on"
-msgstr "Effectuée le"
-
-msgid "Completed by"
-msgstr "Effectuée par"
-
-msgid "Assigned to"
-msgstr "Assignée à"
-
-msgid "List"
-msgstr ""
-
-#, python-format
-msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
-msgstr "La tâche \"%(todo_name)s\" a été assignée à %(assignee_name)s"
-
-#, python-format
-msgid "Todo \"%(title)s\" was added successfully."
-msgstr "La tâche \"%(title)s\" a été ajoutée."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be added."
-msgstr "La tâche \"%(title)s\" n'a pas pu être ajoutée."
-
-msgid "You were trying to add a todo to a todolist that does not exist!"
-msgstr "Tu essayais d'ajouter une tâche à une liste de tâches qui n'existe pas !"
-
-#, python-format
-msgid "Todo \"%(title)s\" was edited successfully."
-msgstr "La tâche\"%(title)s\" a été modifiée."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be edited."
-msgstr "La tâche \"%(title)s\" n'a pas pu être modifiée."
-
-#, python-format
-msgid "Todo \"%(title)s\" was deleted successfully."
-msgstr "La tâche \"%(title)s\" a été supprimée."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be deleted."
-msgstr "La tâche \"%(title)s\" n'a pas pu être supprimée."
-
-#, python-format
-msgid "Todo \"%(title)s\" was assigned successfully."
-msgstr "La tâche \"%(title)s\" a été assignée."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be assigned."
-msgstr "La tâche \"%(title)s\" n'a pas pu être assignée."
-
-#, python-format
-msgid "Todo \"%(title)s\" was assigned to You successfully."
-msgstr "La tâche \"%(title)s\" t'a été assignée."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be assigned to You."
-msgstr "La tâche \"%(title)s\" n'a pas pu t'être assignée."
-
-#, python-format
-msgid "Todo \"%(title)s\" was unassigned successfully."
-msgstr "La tâche \"%(title)s\" n'a pas été assignée."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be unassigned."
-msgstr "La tâche \"%(title)s\" n'a pas pu être non-assignée."
-
-#, python-format
-msgid "Todo \"%(title)s\" was completed successfully."
-msgstr "La tâche \"%(title)s\" a été effectuée."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be completed."
-msgstr "La tâche \"%(title)s\" n'a pas pu être effectuée."
-
-#, python-format
-msgid "Todo \"%(title)s\" was completed by You successfully."
-msgstr "La tâche \"%(title)s\" a été effectuée par toi."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be completed by You."
-msgstr "La tâche \"%(title)s\" n'a pas pu être effectuée par toi."
-
-#, python-format
-msgid "Todo \"%(title)s\" was set to incomplete successfully."
-msgstr "La tâche \"%(title)s\" a été désignée comme incomplète."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be set to incomplete."
-msgstr "La tâche \"%(title)s\" n'a pas pu être désignée comme incomplète."
-
-#, python-format
-msgid "Todolist \"%(title)s\" was edited successfully."
-msgstr "La liste de tâches \"%(title)s\" a été modifiée."
-
-#, python-format
-msgid "Todolist \"%(title)s\" could not be edited."
-msgstr "La liste de tâches \"%(title)s\" n'a pas pu être modifiée."
-
-#, python-format
-msgid "Todolist \"%(title)s\" was added successfully."
-msgstr "La liste de tâches \"%(title)s\" a été ajoutée."
-
-#, python-format
-msgid "Todolist \"%(title)s\" could not be added."
-msgstr "La liste de tâches \"%(title)s\" n'a pas pu être ajoutée."
-
-msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
-msgstr "Tu ne peux supprimer ce dossier car tu n'as pas la permission de supprimer un ou plusieurs items qu'il contient !"
-
-msgid "Sender and Recipient cannot be both undefined."
-msgstr ""
-
-msgid "Visitor's email is in excess."
-msgstr ""
-
-msgid "Visitor's email is missing."
-msgstr ""
-
-msgid "Reading date must be later than sending date."
-msgstr ""
-
-msgid "Deletion date by sender must be later than sending date."
-msgstr ""
-
-msgid "Deletion date by recipient must be later than sending date."
-msgstr ""
-
-msgid "Response date must be later than sending date."
-msgstr ""
-
-msgid "The message cannot be replied without having been read."
-msgstr ""
-
-msgid "Response date must be later than reading date."
-msgstr ""
-
-msgid "Response date cannot be set without at least one reply."
-msgstr ""
-
-#, fuzzy
-#| msgid "This message was sent in a conversation with: "
-msgid "The message cannot be replied without being in a conversation."
-msgstr "Ce message a été envoyé dans une conversation avec : "
-
-msgid "Dates"
-msgstr "Dates"
-
-#, fuzzy
-#| msgid "Is Moderator"
-msgid "Moderation"
-msgstr "Est un modérateur"
-
-#, python-brace-format
-msgid "Some usernames are unknown or no longer active: {users}."
-msgstr ""
-
-#, python-brace-format
-msgid "Ensure this value has at most {limit_value} distinct items (it has {show_value})."
-msgstr ""
-
-#, python-brace-format
-msgid "Ensure this value has at least {limit_value} distinct items (it has {show_value})."
-msgstr ""
-
-#, python-brace-format
-msgid "Some usernames are rejected: {users}."
-msgstr ""
-
-#, fuzzy, python-brace-format
-#| msgid "Your name"
-msgid "{username}"
-msgstr "Ton nom"
-
-#, python-brace-format
-msgid "{username} ({reason})"
-msgstr ""
-
-#, python-brace-format
-msgid "Writing to some users is not possible: {users}."
-msgstr ""
-
-msgid "Recipient"
-msgstr "Destinataire"
-
-#, fuzzy
-#| msgid "Additional Recipients"
-msgid "Additional recipients"
-msgstr "Destinataires supplémentaires"
-
-#, fuzzy
-#| msgid "Additional Recipients"
-msgid "Additional recipient"
-msgstr "Destinataires supplémentaires"
-
-#, fuzzy
-#| msgid "Message Project"
-msgid "Message Rejected"
-msgstr "Projet message"
-
-#, fuzzy
-#| msgid "Your message has been sent."
-msgid "Your message has been rejected"
-msgstr "Votre message a été envoyé."
-
-#, fuzzy
-#| msgid "Message Project"
-msgid "Message Received"
-msgstr "Projet message"
-
-#, fuzzy
-#| msgid "You have been invited to apply!"
-msgid "You have received a message"
-msgstr "Tu as été invité à postuler !"
-
-msgid "Reply Received"
-msgstr ""
-
-#, fuzzy
-#| msgid "You have been invited to apply!"
-msgid "You have received a reply"
-msgstr "Tu as été invité à postuler !"
-
-msgid "Pending"
-msgstr ""
-
-#, fuzzy
-#| msgid "Restricted"
-msgid "Rejected"
-msgstr "Restreint"
-
-#, fuzzy
-#| msgid "Everybody"
-msgid "body"
-msgstr "Tout le monde"
-
-#, fuzzy
-msgid "sender"
-msgstr "Envoyé"
-
-#, fuzzy
-#| msgid "Recipient"
-msgid "recipient"
-msgstr "Destinataire"
-
-#, fuzzy
-#| msgid "Visitor"
-msgid "visitor"
-msgstr "Visiteur"
-
-#, fuzzy
-msgid "parent message"
-msgstr "État d’importation"
-
-#, fuzzy
-#| msgid "No messages"
-msgid "root message"
-msgstr "Pas de messages"
-
-#, fuzzy
-#| msgid "Sent at:"
-msgid "sent at"
-msgstr "Envoyée à :"
-
-msgid "read at"
-msgstr ""
-
-msgid "replied at"
-msgstr ""
-
-msgid "archived by sender"
-msgstr ""
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "archived by recipient"
-msgstr "Destinataire non défini."
-
-#, fuzzy
-#| msgid "New etherpad by %(sender_name)s"
-msgid "deleted by sender at"
-msgstr "Nouveau etherpad par %(sender_name)s"
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "deleted by recipient at"
-msgstr "Destinataire non défini."
-
-msgid "status"
-msgstr ""
-
-#, fuzzy
-#| msgid "Is Moderator"
-msgid "moderator"
-msgstr "Est un modérateur"
-
-#, fuzzy
-#| msgid "Related to"
-msgid "moderated at"
-msgstr "Lié à"
-
-msgid "rejection reason"
-msgstr ""
-
-msgid "Direct Reply Hash"
-msgstr ""
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "message"
-msgstr "message"
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "messages"
-msgstr "message"
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "Undefined sender."
-msgstr "Destinataire non défini."
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "pending message"
-msgstr "message"
-
-#, fuzzy
-msgid "pending messages"
-msgstr "Messages"
-
-msgid "<me>"
-msgstr ""
-
-msgid "> "
-msgstr ""
-
-#, python-brace-format
-msgid ""
-"\n"
-"\n"
-"{sender} wrote:\n"
-"{body}\n"
-msgstr ""
-
-#, fuzzy, python-brace-format
-msgid "Re: {subject}"
-msgstr "Sujet"
-
-#, fuzzy
-#| msgid "User successfully created!"
-msgid "Message successfully sent."
-msgstr "Utilisateur créé avec succès !"
-
-#, fuzzy
-#| msgid "Select at least one object."
-msgid "Message rejected for at least one recipient."
-msgstr "Sélectionne au moins un objet."
-
-msgid "A conference you are attending has been updated"
-msgstr ""
-
-#, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
-msgid "The conference %(object_name)s has been updated"
-msgstr "Une nouvelle conférence: \"%(object_name)s\" a été annoncée dans %(team_name)s."
-
-#, fuzzy
-#| msgid "You are about to deactivate this conference!"
-msgid "You are attending this conference"
-msgstr "Tu es sur le point de désactiver cette conférence !"
-
-#, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
-msgid "The conference \"%(object_name)s\" was updated."
-msgstr "Une nouvelle conférence: \"%(object_name)s\" a été annoncée dans %(team_name)s."
-
-msgid "The time of a conference you are attending has been updated"
-msgstr ""
-
-#, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
-msgid "The time of conference %(object_name)s has been updated"
-msgstr "Une nouvelle conférence: \"%(object_name)s\" a été annoncée dans %(team_name)s."
-
-msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
-msgstr ""
-
-msgid "minute"
-msgstr ""
-
-msgid "minutes"
-msgstr ""
-
-msgid "Select the date range for which you would like statistics"
-msgstr ""
-
-msgid "Cloud Stub"
-msgstr "cloud stub"
-
-msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
-msgstr ""
-
-msgid "There are no cloud files yet"
-msgstr "Il n’y a pas encore de fichiers cloud"
-
-msgid "Error message:"
-msgstr ""
-
-msgid "No error message supplied."
-msgstr ""
-
-msgid "Pad"
-msgstr "Pad"
-
-msgid "This pad can no longer be edited because its creator has deleted their account."
-msgstr "Ce pad ne peut plus être modifié parce que son créateur a supprimé son compte."
-
-#, python-format
-msgid "Do you really want to delete etherpad „%(pad)s“?"
-msgstr "Souhaites-tu vraiment supprimer l'etherpad „%(pad)s“ ?"
-
-msgid "Delete Etherpad"
-msgstr "Suprimer l'etherpad"
-
-msgid "This document is empty"
-msgstr "Ce document est vide"
-
-msgid "Pads"
-msgstr "Pads"
-
-msgid "Enter a title for the Pad."
-msgstr "Entrer un titre pour le pad."
-
-msgid "Enter the title for a new Document or Table."
-msgstr "Saisir le titre pour un nouveau document ou tableau."
-
-msgid "Enter the title for a new Document."
-msgstr "Saisir le titre pour un nouveau document"
-
-msgid "Create Etherpad"
-msgstr "Créer etherpad"
-
-msgid "Create Ethercalc"
-msgstr "Créer ethercalc"
-
-#, python-format
-msgid "Do you really want to delete etherpad „%(title)s“?"
-msgstr "Souhaites-tu vraiment supprimer l'etherpad „%(title)s“ ?"
-
-msgid "No etherpads have been created yet."
-msgstr "Aucun etherpad n'a encore été créé."
-
-msgid "Download CSV"
-msgstr "Télécharger CSV"
-
-msgid "Download Excel"
-msgstr "Télécharger Excel"
-
-#, python-format
-msgid ""
-"Hi %(receiver_name)s,\n"
-"\n"
-"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
-"\n"
-"You can find it by following this link: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s Team."
-msgstr ""
-"Salut %(receiver_name)s,\n"
-"\n"
-"un nouvel etherpad \"%(object_name)s\" dans %(team_name)s a été créé par %(sender_name)s. \n"
-"\n"
-"Tu peux le trouver en suivant le lien suivant : %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Suis ce lien pour modifier tes préférences de notification : %(notification_settings_url)s )\n"
-"\n"
-"L'équipe %(site_name)s"
-
-msgid "You created a pad"
-msgstr "Tu as créé un pad"
-
-msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
-msgid "created a Pad"
-msgstr "a créé un pad"
-
-msgid "There are no etherpads yet"
-msgstr "Il n'y a pas encore d'etherpads"
-
 msgid "Would you like to create an event"
 msgstr "Souhaites-tu créer un événement"
 
@@ -11009,6 +9368,9 @@ msgstr "Sondages d'événement"
 
 msgid "Enter a title for the new event to be scheduled."
 msgstr "Saisir le titre pour le nouvel événement à programmer."
+
+msgid "Dates"
+msgstr "Dates"
 
 msgid "Please select the available days in the calendar."
 msgstr "Sélectionne les jours disponibles dans le calendrier."
@@ -11153,6 +9515,9 @@ msgstr "Retour aux sondages d'événement"
 
 msgid "Return to Archived Event Polls"
 msgstr "Retour aux sondages d'événement archivés"
+
+msgid "List"
+msgstr ""
 
 msgid "View"
 msgstr "Voir"
@@ -11500,6 +9865,197 @@ msgstr "a créé un événement"
 msgid "Show all"
 msgstr "Afficher tout"
 
+msgid "Upcoming events"
+msgstr "Evénements à venir"
+
+#, python-format
+msgid "Event \"%(title)s\" was edited successfully."
+msgstr "L'événement \"%(title)s\" a été modifié."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be edited."
+msgstr "L'événement \"%(title)s\" n'a pas pu être modifié."
+
+msgid "Please use the conference management area to add new workshops!"
+msgstr "Utiliser la zone de gestion de la conférence pour ajouter de nouveaux ateliers !"
+
+msgid "The page you requested is not available for this event at this time."
+msgstr "La page que tu as demandé n'est pas disponible pour cet événement à cet horaire."
+
+msgid "One of the event suggestions times could not be understood!"
+msgstr "Un des horaires suggérés pour l'événement ne peut pas être compris !"
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was edited successfully."
+msgstr "L'événement non programmé\"%(title)s\" a été modifié."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be edited."
+msgstr "L'événement non programmé \"%(title)s\" n'a pas pu être modifié."
+
+#, python-format
+msgid "Event \"%(title)s\" was added successfully."
+msgstr "L'événement \"%(title)s\" a été ajouté."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be added."
+msgstr "L'événement \"%(title)s\" n'a pas pu être ajouté."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was added successfully."
+msgstr "L'événement non programmé\"%(title)s\" a été ajouté."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be added."
+msgstr "L'événement non programmé \"%(title)s\" n'a pas pu être ajouté."
+
+msgid "You should define at least one date suggestion."
+msgstr "Tu devrais définir au moins une suggestion de date."
+
+#, python-format
+msgid "Event \"%(title)s\" was deleted successfully."
+msgstr "L'événement\"%(title)s\" a été supprimé."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be deleted."
+msgstr "L'événement \"%(title)s\" n'a pas pu être supprimé."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was deleted successfully."
+msgstr "L'événement non programmé\"%(title)s\" a été supprimé."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be deleted."
+msgstr "L'événement non programmé \"%(title)s\" n'a pas pu être supprimé."
+
+#, fuzzy
+#| msgid "Your data was saved successfully!"
+msgid "Your votes were saved successfully."
+msgstr "Tes données ont été enregistrées avec succès !"
+
+#, fuzzy
+#| msgid "Poll \"%(title)s\" could not be added."
+msgid "Your votes could not be saved."
+msgstr "Le sondage \"%(title)s\" n'a pas pu être ajouté."
+
+msgid "This is event is already scheduled. You cannot vote for it any more."
+msgstr "Cet événement est déjà programmé. Tu ne peux plus voter pour."
+
+msgid "The complete request can only be sent via POST!"
+msgstr "La requête complète ne peut être envoyée que par un POST !"
+
+msgid "Event cannot be completed: No date was supplied."
+msgstr "L'événement n'est pas complet : aucune date n'a été fournie."
+
+msgid "The event was created successfully at the specified date."
+msgstr "L'événement a été créé à la date donnée."
+
+#, fuzzy
+msgid "Upcoming event"
+msgstr "Evénements à venir"
+
+msgid "Your comment was added successfully."
+msgstr "Ton commentaire a été ajouté."
+
+msgid "Your comment was deleted successfully."
+msgstr "Ton commentaire a été supprimé."
+
+msgid "Exchange"
+msgstr ""
+
+msgctxt "the_app"
+msgid "exchange"
+msgstr ""
+
+msgctxt "the_app"
+msgid "file"
+msgstr "fichier"
+
+msgid "A user uploaded a new file"
+msgstr "Un utilisateur a téléchargé un nouveau fichier"
+
+#, python-format
+msgid "%(sender_name)s uploaded the file %(object_name)s"
+msgstr "%(sender_name)s a téléchargé le fichier %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s uploaded %(count)d files"
+msgstr "%(sender_name)s fichiers %(count)d téléchargés"
+
+#, python-format
+msgid "%(sender_name)s created a new file"
+msgstr "%(sender_name)s a créé un nouveau fichier"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Un nouveau fichier : \"%(object_name)s\" a été créé dans %(team_name)s."
+
+msgid "A user uploaded a new file in a team you are following"
+msgstr "Un utilisateur a téléchargé un nouveau fichier dans une équipe que tu suis"
+
+#, python-format
+msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s a créé un nouveau fichier dans %(team_name)s (que tu suis)"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Un nouveau fichier : \"%(object_name)s\" a été créé dans %(team_name)s (que tu suis)."
+
+msgid "Latest Files"
+msgstr "Derniers fichiers"
+
+msgid "No files"
+msgstr "Pas de fichiers"
+
+msgid "Pictures"
+msgstr "Photos"
+
+msgid "Documents"
+msgstr "Documents"
+
+msgid "Audio Files"
+msgstr "Fichiers audio"
+
+msgid "Videos"
+msgstr "Vidéos"
+
+msgid "File Type"
+msgstr "Type de fichier"
+
+msgid "File Name"
+msgstr "Nom du fichier"
+
+msgid "File Name (descending)"
+msgstr "Nom du fichier (décroissant)"
+
+msgid "Smallest Files"
+msgstr "Plus petits fichiers"
+
+msgid "Largest Files"
+msgstr "Plus grands fichiers"
+
+msgid "The given URL does not seem to be valid."
+msgstr "L'URL donnée ne semble pas être valide."
+
+msgid "Must supply either a URL or File"
+msgstr "Doit fournir une URL ou un fichier"
+
+msgid "Is URL Link"
+msgstr "Est un lien URL"
+
+msgid "Uploaded by"
+msgstr "Téléchargé par"
+
+msgid "Uploaded on"
+msgstr "Téléchargé sur"
+
+msgid "No files selected."
+msgstr "Aucun fichier sélectionné."
+
+msgctxt "special_folder_type"
+msgid "Attachments"
+msgstr "Pièces jointes"
+
 msgid "The URL you have entered does not seem to be valid!"
 msgstr "L’URL que ts as saisie ne semble pas être valide !"
 
@@ -11612,6 +10168,197 @@ msgstr "Derniers fichiers"
 
 msgid "There are no files  yet"
 msgstr "Il n'y a pas encore de fichiers"
+
+msgid "File does not exist or you are not allowed to delete it."
+msgstr "Le fichier n'existe pas ou tu n'as pas l'autorisation de le supprimer."
+
+#, python-format
+msgid "A problem occurred during export. The following file is missing: %(filename)s."
+msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
+msgstr[0] "Un problème est survenu durant l'export. Le fichier suivant manque : %(filename)s."
+msgstr[1] "Un problème est survenu durant l'export. Les fichiers suivants manquent : %(filename)s."
+
+msgid "Invalid request."
+msgstr "Demande invalide."
+
+#, python-format
+msgid "File \"%(title)s\" was updated successfully."
+msgstr "Le fichier \"%(title)s\" a été mis à jour."
+
+#, python-format
+msgid "File \"%(title)s\" could not be updated."
+msgstr "Le fichier \"%(title)s\" n'a pas pu être mis à jour."
+
+msgid "Downloading failed, the target object was not a folder!"
+msgstr "Le téléchargement a échoué, l'objet cible n'était pas un dossier !"
+
+msgid "Canceled the download because there seem to be no files in this folder."
+msgstr "Téléchargement annulé car il semble qu'il n'y ait pas de fichiers dans ce dossier."
+
+msgid "Internal Error: Group not Found"
+msgstr "Erreur interne : groupe non trouvé"
+
+msgid "Permission for upload denied"
+msgstr "Autorisation de téléchargement refusée"
+
+msgid "The uploaded file was invalid."
+msgstr "Le fichier téléchargé était invalide."
+
+#, python-format
+msgid "%(count)d File was added successfully."
+msgid_plural "%(count)d Files were added successfully."
+msgstr[0] "%(count)d fichier a été ajouté."
+msgstr[1] "%(count)d fichiers ont été ajoutés."
+
+msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
+msgstr "Le fichier que tu as téléchargé était trop grand ou le type de fichier n’était pas autorisé à être téléchargé !"
+
+msgctxt "the_app"
+msgid "marketplace"
+msgstr "marché virtuel"
+
+msgid "A user created a new offer"
+msgstr "Un utilisateur a créé une nouvelle offre"
+
+#, python-format
+msgid "%(sender_name)s created the offer %(object_name)s"
+msgstr "%(sender_name)s a créé l’offre %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d offers"
+msgstr "%(sender_name)s offres %(count)d créées"
+
+#, python-format
+msgid "%(sender_name)s created a new offer"
+msgstr "%(sender_name)s a créé une nouvelle offre"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Une nouvelle offre : \"%(object_name)s\" a été créée dans %(team_name)s."
+
+msgid "One of your offers expired"
+msgstr "L’une de tes offres a expiré"
+
+#, python-format
+msgid "Your offer %(object_name)s expired"
+msgstr "Ton offre \"%(object_name)s\" a expiré"
+
+#, python-format
+msgid "%(count)d of your offers expired"
+msgstr "%(count)d de tes offres expirées"
+
+msgid "Your offer has expired"
+msgstr "Ton offre a expiré"
+
+#, python-format
+msgid "Offer \"%(object_name)s\" has expired."
+msgstr "L'offre \"%(object_name)s\" a expiré."
+
+msgid "A user commented on one of your offers"
+msgstr "Un utilisateur a commenté l'une de tes offres"
+
+#, python-format
+msgid "%(sender_name)s commented on your offer %(object_name)s"
+msgstr "%(sender_name)s a commenté ton offre %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
+msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté ton offre %(object_name)s"
+msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté ton offre %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your offer"
+msgstr "%(sender_name)s a commenté ton offre"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your offers"
+msgstr "%(sender_name)s a commenté une de tes offres"
+
+msgid "A user commented on an offer you were tagged in"
+msgstr "Un utilisateur a commenté une offre sur laquelle tu es tagué"
+
+#, python-format
+msgid "%(sender_name)s commented on the offer %(object_name)s"
+msgstr "%(sender_name)s a commenté l’offre %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
+msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté l’offre %(object_name)s"
+msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté l’offre %(object_name)s"
+
+msgid "You were tagged in this offer"
+msgstr "Tu as été marqué dans cette offre"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in"
+msgstr "%(sender_name)s a commenté une offre sur laquelle tu es tagué"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s a commenté une offre sur laquelle tu es tagué dans %(team_name)s"
+
+msgid "A user created a new offer in a team you are following"
+msgstr "Un utilisateur a créé une nouvelle offre dans une équipe que tu suis"
+
+#, python-format
+msgid "%(sender_name)s created a new offer in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s a créé une nouvelle offre dans %(team_name)s (que tu suis)"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Une nouvelle offre : \"%(object_name)s\" a été créée dans %(team_name)s (que tu suis)."
+
+msgid "A user updated an offer you are following"
+msgstr "Un utilisateur a mis à jour une offre que tu suis"
+
+#, python-format
+msgid "%(sender_name)s updated the offer %(object_name)s"
+msgstr "%(sender_name)s a mis à jour l’offre %(object_name)s"
+
+msgid "You are following this offer"
+msgstr "Tu suis cette offre"
+
+#, python-format
+msgid "%(sender_name)s updated an offer you are following"
+msgstr "%(sender_name)s a mis à jour une offre que tu suis"
+
+#, python-format
+msgid "An offer you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Une offre que tu suis : \"%(object_name)s\" a été mise à jour en %(team_name)s."
+
+msgid "A user commented on an offer you are following"
+msgstr "Un utilisateur a commenté une offre que tu suis"
+
+#, python-format
+msgid "%(sender_name)s commented on on an offer you are following"
+msgstr "%(sender_name)s a commenté une offre que tu suis"
+
+msgid "Current Offers"
+msgstr "Offres actuelles"
+
+msgid "No current offers"
+msgstr "Pas d'offres actuelles"
+
+msgid "Order Key"
+msgstr "Clé d'ordre"
+
+msgid "Looking for"
+msgstr "A la recherche de"
+
+msgid "Offering"
+msgstr "Propose"
+
+msgid "Offer currently active?"
+msgstr "Offre active actuellement ?"
+
+msgid "Offer Category"
+msgstr "Catégorie de l'offre"
+
+#, python-format
+msgid "Offer: %(offer)s (%(type)s)"
+msgstr "Offre : %(offer)s (%(type)s)"
 
 msgid "Back to Offers"
 msgstr "Retour aux offres"
@@ -11743,11 +10490,103 @@ msgstr "créé une offre"
 msgid "There are no current offers"
 msgstr "Il n'y a pas d'offres actuelles"
 
+#, python-format
+msgid "Offer \"%(title)s\" was edited successfully."
+msgstr "L'offre\"%(title)s\" a été modifiée."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be edited."
+msgstr "L'offre \"%(title)s\" n'a pas pu être modifiée."
+
+#, python-format
+msgid "Offer \"%(title)s\" was added successfully."
+msgstr "L'offre\"%(title)s\" a été ajoutée."
+
+#, python-format
+msgid "Offer \"%(title)s\" was saved successfully, but is not active yet."
+msgstr "L'offre \"%(title)s\" a été enregistrée mais n'est pas encore active."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be added."
+msgstr "L'offre \"%(title)s\" n'a pas pu être ajoutée."
+
+#, python-format
+msgid "Offer \"%(title)s\" was deleted successfully."
+msgstr "L'offre\"%(title)s\" a été supprimée."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be deleted."
+msgstr "L'offre \"%(title)s\" n'a pas pu être supprimée."
+
+msgid "The offer you requested is no longer active. Sorry!"
+msgstr "L'offre que tu as demandée n'est plus active. Désolé !"
+
+msgid "Invalid action for this offer. The request could not be completed!"
+msgstr "Action invalide pour cette offre. La demande n'a pas pu être complétée !"
+
+msgid "The offer is already active"
+msgstr "L'offre est déjà active"
+
+msgid "The offer is already deactivated"
+msgstr "L'offre est déjà désactivée"
+
+msgid "The offer was deactivated successfully."
+msgstr "L'offre\"%(title)s\" a été désactivée."
+
+msgid "The offer was reactivated successfully."
+msgstr "L'offre\"%(title)s\" a été réactivée."
+
+msgid "The offer was activated successfully."
+msgstr "L'offre\"%(title)s\" a été activée."
+
+msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
+msgstr ""
+
+msgctxt "the_app"
+msgid "Chat"
+msgstr ""
+
+msgctxt "the_app"
+msgid "message"
+msgstr "message"
+
+msgid "Chat"
+msgstr ""
+
+msgid "Only Administrators may send a message to this project/group!"
+msgstr "Les admins seulement peuvent envoyer un message à ce projet / groupe !"
+
+msgid "Additional Recipients"
+msgstr "Destinataires supplémentaires"
+
+msgid "Undefined recipient."
+msgstr "Destinataire non défini."
+
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
 msgstr "Tu peux joindre des fichiers et des images aux messages uniquement si tu es membre du forum. Tu peux le rejoindre ici :"
 
 msgid "The legacy messaging app is no longer in use. You can view all of your old messages, but you cannot write new ones. Please use the new messaging app in the navigation from now on!"
 msgstr "L’application de messagerie héritée n’est plus en service. Tu peux afficher tous tes anciens messages, mais tu ne peux pas en écrire de nouveaux. Utilise la nouvelle application de messagerie dans la navigation à partir de maintenant !"
+
+msgid "You can contact the group administration via this form. Write your message in the field below and than you will be redirected to the chat with group admins."
+msgstr ""
+
+msgid "You can contact the project administration via this form. Write your message in the field below and than you will be redirected to the chat with project admins."
+msgstr ""
+
+#, fuzzy
+#| msgid "Your message"
+msgid "What is your message?"
+msgstr "Votre message"
+
+#, fuzzy
+#| msgid "Change it here..."
+msgid "Write it here"
+msgstr "Change-la ici..."
+
+#, python-format
+msgid "Contact the administration of %(group_name)s:"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -11896,6 +10735,9 @@ msgstr "Ecrire"
 msgid "Reply"
 msgstr "Répondre"
 
+msgid "Recipient"
+msgstr "Destinataire"
+
 msgid "Conversation"
 msgstr "Conversation"
 
@@ -11925,6 +10767,174 @@ msgstr "Répondre à %(sender_name)s"
 #, python-format
 msgid "Reply to all %(adressee_count)s"
 msgstr "Répondre à tous les %(adressee_count)s"
+
+msgid "Your reply could not be matched to an existing message."
+msgstr "Ta réponse n'a pas pu être assortie à un message existant."
+
+msgid "An internal error occured."
+msgstr "Une erreur interne s'est produite."
+
+msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
+msgstr "L'adresse e-mail depuis laquelle tu as envoyé la réponse n'est pas celle associée à ton compte. Envoie les réponses directes depuis l'adresse avec laquelle tu t'es inscrit sur le site !"
+
+msgid "There was an error when processing your message text!"
+msgstr "Il y a eu une erreur lors du traitement du texte de ton message !"
+
+msgid "Your direct reply failed!"
+msgstr "Ta réponse directe a échoué !"
+
+msgid "Select at least one object."
+msgstr "Sélectionne au moins un objet."
+
+msgid "Messages or conversations successfully archived."
+msgstr "Messages ou conversations archivés."
+
+msgid "Messages or conversations successfully deleted."
+msgstr "Messages ou conversations supprimés."
+
+msgid "Messages were marked as read."
+msgstr "Les messages ont été marqués comme lus."
+
+msgid "Messages or conversations successfully recovered."
+msgstr "Messages ou conversations récupérés."
+
+msgid "Notes"
+msgstr "Notes"
+
+msgctxt "the_app"
+msgid "note"
+msgstr "note"
+
+msgid "A user commented on a news post"
+msgstr "Un utilisateur a commenté un post"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post"
+msgstr "%(sender_name)s a commenté un post"
+
+msgid "A user commented on one of your news posts"
+msgstr "Un utilisateur a commenté un de tes posts"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post %(object_name)s"
+msgstr "%(sender_name)s a commenté ton post %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
+msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté ton post %(object_name)s"
+msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté ton post %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post"
+msgstr "%(sender_name)s a commenté ton post"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts"
+msgstr "%(sender_name)s a commenté un de tes posts"
+
+msgid "A user commented on a news posts you commented in"
+msgstr "Un utilisateur a commenté un post que tu a commenté"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
+msgstr "%(sender_name)s a commenté le post %(object_name)s que tu as commenté dans"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
+msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté le poste %(object_name)s que tu as commenté dans"
+msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté le poste %(object_name)s que tu as commenté dans"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in"
+msgstr "%(sender_name)s a commenté un post que tu as commenté"
+
+msgid "A user created a news post"
+msgstr "Un utilisateur a créé un post"
+
+#, python-format
+msgid "%(sender_name)s created the news post %(object_name)s"
+msgstr "%(sender_name)s a créé le post  %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d news posts"
+msgstr "%(sender_name)s posts %(count)d créés"
+
+#, python-format
+msgid "%(sender_name)s created a new news post"
+msgstr "%(sender_name)s a créé un nouveau post"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s:"
+msgstr "%(sender_name)s a posté dans %(team_name)s :"
+
+msgid "A user created a news post in a team you are following"
+msgstr "Un utilisateur a créé un post dans une équipe que tu suis"
+
+#, python-format
+msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s a créé un nouveau post dans %(team_name)s (que tu suis)"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
+msgstr "%(sender_name)s a posté dans %(team_name)s : (que tu suis)"
+
+msgid "A user updated a news post"
+msgstr "Un utilisateur a mis à jour un post"
+
+#, python-format
+msgid "%(sender_name)s updated the news post %(object_name)s"
+msgstr "%(sender_name)s a mis à jour le post %(object_name)s"
+
+msgid "You are following this news post"
+msgstr "Tu suis ce post"
+
+#, python-format
+msgid "%(sender_name)s updated a news post you are following"
+msgstr "%(sender_name)s a mis à jour un post que tu suis"
+
+#, python-format
+msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
+msgstr "Un post que tu suis par %(sender_name)s a été mis à jour %(team_name)s :"
+
+msgid "A user commented on a news post you are following"
+msgstr "Un utilisateur a commenté un post que tu suis"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s"
+msgstr "%(sender_name)s a commenté le post %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
+msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté le post %(object_name)s"
+msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté le post %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on a news posts you are following"
+msgstr "%(sender_name)s a commenté un post que tu suis"
+
+msgid "No news"
+msgstr "Pas de nouveaux posts"
+
+msgid "Write a news post"
+msgstr "Ecrire un post"
+
+msgid "News stream"
+msgstr "Fil d'actualité"
+
+msgid "Popularity"
+msgstr "Popularité"
+
+msgid "Facebook Share"
+msgstr "Partager sur Facebook"
+
+msgid "Note Item"
+msgstr "Item de note"
+
+msgid "Note Items"
+msgstr "Items de note"
 
 msgctxt "the_verb"
 msgid "Comment"
@@ -12102,6 +11112,128 @@ msgctxt "This appears next to new items in the timeline, as in '<Jane> created a
 msgid "added a post"
 msgstr "ajouté un post"
 
+msgid "Your news post was added successfully."
+msgstr "Ton post a été ajouté."
+
+msgid "Your news post was deleted successfully."
+msgstr "Ton post a été supprimé."
+
+msgid "Your news post was edited successfully."
+msgstr "Ton post a été modifié."
+
+msgid "You are seeing this alert because you created this content."
+msgstr "Tu vois cette alerte parce que tu as créé ce contenu."
+
+msgid "You are seeing this alert because you are following the item's project or group."
+msgstr "Tu vois cette alerte parce que tu suis le projet ou le groupe de l’élément."
+
+msgid "You are seeing this alert because you are following this item."
+msgstr "Tu vois cette alerte parce que tu suis cet élément."
+
+msgctxt "the_app"
+msgid "notifications"
+msgstr "notification"
+
+#, python-format
+msgid "Your daily digest for %(portal_name)s"
+msgstr "Ton résumé quotidien pour %(portal_name)s"
+
+msgid "This is what happened during the last day!"
+msgstr "Voici ce qui s’est passé au cours de la dernière journée !"
+
+#, python-format
+msgid "Your weekly digest for %(portal_name)s"
+msgstr "Ton résumé hebdomadaire pour %(portal_name)s"
+
+msgid "This is what happened during the last week!"
+msgstr "Voici ce qui s’est passé au cours de la semaine dernière !"
+
+msgctxt "notification frequency"
+msgid "Never"
+msgstr "Jamais"
+
+msgctxt "notification frequency"
+msgid "Immediately"
+msgstr "Immédiatement"
+
+msgctxt "notification frequency"
+msgid "Daily"
+msgstr "Quotidienne"
+
+msgctxt "notification frequency"
+msgid "Weekly"
+msgstr "Hebdomadaire"
+
+msgid "Notification Preference for User"
+msgstr "Préférences de notification pour l'utilisateur"
+
+msgid "Notification Preference"
+msgstr "Préférence de notification"
+
+msgid "Multi Notification ID"
+msgstr "ID de notification multiple"
+
+msgid "Multi Notification Preference"
+msgstr "Préférence de notification multiple"
+
+msgid "Multi Notification Preferences"
+msgstr "Préférences de notification multiple"
+
+msgid "User who caused this notification event"
+msgstr "Utilisateur qui a causé cet événement de notification"
+
+msgid "Audience"
+msgstr "Audience"
+
+msgid "Owner of the alert"
+msgstr "Propriétaire de l’alerte"
+
+msgid "Alert Reason key"
+msgstr "Clé de raison d’alerte"
+
+msgid "Last user who caused this notification event"
+msgstr "Dernier utilisateur à avoir causé cet événement de notification"
+
+msgid "Alert State"
+msgstr "État d’alerte"
+
+msgid "You are following this content or its Project or Group"
+msgstr "Tu suis ce contenu ou son Projet ou Groupe"
+
+msgid "All notifications"
+msgstr "Toutes les notifications"
+
+msgid "No notifications"
+msgstr "Pas de notifications"
+
+msgid "For content that I am following, I wish to receive notification emails"
+msgstr "Pour le contenu que je suis, je souhaite recevoir des e-mails de notification"
+
+msgid "You are getting this notification because you are subscribed to these kinds of events in your project or group."
+msgstr "Tu reçois cette notification car tu t'es abonné à ce type d'événement dans ton projet ou groupe."
+
+msgid "You are getting this notification because you are an administrator of this project or group."
+msgstr "Tu reçois cette notification car tu es admin de ce projet ou groupe."
+
+msgid "You are getting this notification because you are an administrator of this portal."
+msgstr "Tu reçois cette notification car tu es admin de ce portail."
+
+msgid "You are getting this email because you are subscribed to one or more daily notifications."
+msgstr "Tu reçois cet e-mail car tu t'es abonné à une notification quotidienne ou plus."
+
+msgid "You are getting this email because you are subscribed to one or more weekly notifications."
+msgstr "Tu reçois cet e-mail car tu t'es abonné à une notification hebdomadaire ou plus."
+
+msgid "New item"
+msgstr "Nouvel item"
+
+#, python-format
+msgid "View on %(portal_name)s"
+msgstr "Afficher sur %(portal_name)s"
+
+msgid "Untitled"
+msgstr "Sans titre"
+
 msgid "Select which notifications you would like to receive for each group or project you are involved in."
 msgstr "Sélectionne les notifications que tu souhaites recevoir pour chaque groupe ou projet dans lequel tu es impliqué."
 
@@ -12158,6 +11290,33 @@ msgstr "Réinitialiser aux valeurs par défaut"
 
 msgid "This will reset all of your notification preferences to their default setting. Are you sure you wish to do that?"
 msgstr "Cela réinitialisera toutes tes préférences de notifications à leur valeur par défaut. Souhaites-tu vraiment faire ça ?"
+
+msgid "Your notification preferences were updated successfully."
+msgstr "Tes préférences de notification ont été mises à jour."
+
+msgid "Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!"
+msgstr ""
+
+msgid "Your notifications preferences were reset to default!"
+msgstr "Tes préférences de notifications ont été réinitialisées aux valeurs par défaut !"
+
+msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
+msgstr ""
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully signed in as {}."
+msgstr "Le compte utilisateur a été déactivé. "
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully connected account."
+msgstr "Le compte utilisateur a été déactivé. "
+
+#, fuzzy
+#| msgid "Successfully removed user"
+msgid "Successfully removed connection."
+msgstr "L'utilisateur a été supprimé."
 
 #, fuzzy
 msgid "Set password"
@@ -12285,11 +11444,6 @@ msgstr ""
 
 msgid " This data we received from your WECHANGE account"
 msgstr ""
-
-#, fuzzy
-#| msgid "Last name"
-msgid "last name"
-msgstr "Nom de famille"
 
 msgid "Your Avatar and other settings from your profile were also copied."
 msgstr ""
@@ -12419,6 +11573,103 @@ msgstr ""
 #| msgid "Log in with %(portal_name)s"
 msgid "Login with %(provider_id)s"
 msgstr "Connecte-toi avec %(portal_name)s"
+
+#, fuzzy
+#| msgid "Organization"
+msgctxt "the_app"
+msgid "organization"
+msgstr "Organisation"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization membership"
+msgstr "Organisations"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization memberships"
+msgstr "Organisations"
+
+#, fuzzy
+#| msgid "Team Invite for Unregistered User"
+msgid "Organization Invite for Unregistered User"
+msgstr "Invitation à rejoindre l'équipe pour un utilisateur non-enregistré"
+
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Organization Invites for Unregistered Users"
+msgstr "Invitations à rejoindre l'équipe pour les utilisateurs non-enregistrés"
+
+#, fuzzy
+#| msgid "Assigned organizations"
+msgid "Civil society organization"
+msgstr "Organisations assignées"
+
+msgid "Company (commercial)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Public voting"
+msgid "Public institution"
+msgstr "Vote public"
+
+#, fuzzy
+#| msgid "Other teams"
+msgid "Other"
+msgstr "Autres équipes"
+
+#, fuzzy
+#| msgid "Remove organization"
+msgid "Name of the organization"
+msgstr "Enlever l’organisation"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Organization type"
+msgstr "Organisation"
+
+#, fuzzy
+#| msgid "Logout"
+msgid "Logo"
+msgstr "Déconnexion"
+
+#, fuzzy
+#| msgid "Email address"
+msgid "Email Address"
+msgstr "Adresse e-mail"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Cosinnus Organization"
+msgstr "Organisation"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Cosinnus Organizations"
+msgstr "Organisations"
+
+msgid "CosinnusOrganizationSocialMedia"
+msgstr ""
+
+#, fuzzy
+#| msgid "CosinnusLocation"
+msgid "CosinnusOrganizationLocation"
+msgstr "Lieu Cosinnus"
+
+#, fuzzy
+#| msgid "CosinnusLocations"
+msgid "CosinnusOrganizationLocations"
+msgstr "Lieux Cosinnus"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Organization group"
+msgstr "Organisation"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization groups"
+msgstr "Organisations"
 
 #, fuzzy, python-format
 #| msgid "%(team_name)s - Assigned organizations"
@@ -12607,10 +11858,281 @@ msgstr ""
 msgid "This organization should be made publicly findable via other platforms."
 msgstr "Ce projet doit être rendu public accessible via d’autres plateformes."
 
+msgid "Is your organization open for cooperation in the funding program?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Organization is open for future projects."
+msgstr "Invitations à rejoindre l'équipe pour les utilisateurs non-enregistrés"
+
 #, fuzzy, python-format
 #| msgid "Users in team %(group)s"
 msgid "Users in organization %(group)s"
 msgstr "Utilisateurs dans l'équipe %(group)s"
+
+#, fuzzy, python-format
+#| msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
+msgid "Project/group %(name)s had already requested and has now been accepted."
+msgstr "Le projet/groupe %(group)s avait déjà été invité et a été assigné immédiatement !"
+
+#, fuzzy, python-format
+#| msgid "User %(username)s was successfully invited!"
+msgid "Project/group %(name)s was successfully invited."
+msgstr "L'utilisateur %(username)s a été invité avec succès !"
+
+#, fuzzy, python-format
+#| msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
+msgid "Your join request was withdrawn from organization “%(name)s” successfully."
+msgstr "Ta demande d'ajout a été enlevée de %(team_type)s “%(team_name)s” avec succès."
+
+#, fuzzy, python-format
+#| msgid "You have declined the invitation to %(team_type)s “%(team_name)s”."
+msgid "You have declined the invitation to organization “%(name)s”."
+msgstr "Tu as refusé l’invitation à %(team_type)s \"%(team_name)s\"."
+
+#, fuzzy, python-format
+#| msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
+msgid "Your project/group is now assigned to the organization “%(name)s”. Welcome!"
+msgstr "Tu es désormais membre de %(team_type)s “%(team_name)s”. Bienvenue !"
+
+#, fuzzy, python-format
+#| msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
+msgid "Your request was withdrawn from organization \"%(name)s\" successfully."
+msgstr "Ta demande d'ajout a été enlevée de %(team_type)s “%(team_name)s” avec succès."
+
+#, fuzzy, python-format
+#| msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
+msgid "Your invitation to project/group \"%(name)s\" was withdrawn successfully."
+msgstr "Ton invitation pour l'utilisateur \"%(username)s\" a été annulée avec succès."
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Project/group \"%(name)s\" is no longer assigned."
+msgstr "L'utilisateur %(username)s n'est plus membre."
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can create Organizations! You can either create a Project, or write a message to one of the administrators to create a Organization for you. Below you can find a listing of all administrators."
+msgstr "Désolé, seulement les admins de portails peuvent créer des groupes ! Tu peux soit créer un projet, soit écrire un message à un des admins pour créer un groupe pour toi. Tu peux trouver la liste des admins ci-dessous."
+
+#, fuzzy, python-format
+#| msgid "Event \"%(title)s\" was edited successfully."
+msgid "Organization \"%(name)s\" was created successfully."
+msgstr "L'événement \"%(title)s\" a été modifié."
+
+#, fuzzy
+#| msgid "Your idea was deleted successfully."
+msgid "Your organization was deleted successfully."
+msgstr "Ton idée a été supprimée avec succès."
+
+msgctxt "the_app"
+msgid "poll"
+msgstr "sondage"
+
+msgid "A user created a new poll"
+msgstr "Un utilisateur a créé un nouveau sondage"
+
+#, python-format
+msgid "%(sender_name)s created the poll %(object_name)s"
+msgstr "%(sender_name)s a créé le sondage %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d polls"
+msgstr "%(sender_name) sondages %(count)d créés"
+
+#, python-format
+msgid "%(sender_name)s created a new poll"
+msgstr "%(sender_name)s a créé un nouveau sondage"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Un nouveau sondage : \"%(object_name)s\" a été créé dans %(team_name)s."
+
+msgid "A poll you voted on was completed"
+msgstr "Un sondage pour lequel tu as voté a été rempli"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
+msgstr "%(sender_name)s a rempli le sondage %(object_name)s sur lequel tu as voté"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls you voted on"
+msgstr "%(sender_name)s a rempli %(count)d sondages sur lesquels tu as voté"
+
+#, python-format
+msgid "%(sender_name)s completed the poll"
+msgstr "%(sender_name)s a rempli le sondage"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Le sondage \"%(object_name)s\" a été rempli dans %(team_name)s."
+
+msgid "A user commented on one of your polls"
+msgstr "Un utilisateur a commenté l'un de tes sondages"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll %(object_name)s"
+msgstr "%(sender_name)s a commenté ton sondage %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
+msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté ton sondage %(object_name)s"
+msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté ton sondage %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll"
+msgstr "%(sender_name)s a commenté ton sondage"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls"
+msgstr "%(sender_name)s a commenté un de tes sondages"
+
+msgid "A user commented on a poll you were tagged in"
+msgstr "Un utilisateur a commenté un sondage sur lequel tu es tagué"
+
+#, python-format
+msgid "%(sender_name)s commented on the poll %(object_name)s"
+msgstr "%(sender_name)s a commenté le sondage %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
+msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté le sondage %(object_name)s"
+msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté le sondage %(object_name)s"
+
+msgid "You were tagged in this poll"
+msgstr "Tu as été marqué dans ce sondage"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in"
+msgstr "%(sender_name)s a commenté un sondage sur lequel tu es tagué"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s a commenté un sondage sur lequel tu es tagué dans %(team_name)s"
+
+msgid "A user commented on an poll you voted in"
+msgstr "Un utilisateur a commenté un sondage à propos duquel tu as voté"
+
+msgid "You voted on this poll"
+msgstr "Tu as voté sur ce sondage"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in"
+msgstr "%(sender_name)s a commenté un sondage pour lequel tu as voté"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
+msgstr "%(sender_name)s a commenté un sondage pour lequel tu as voté dans %(team_name)s"
+
+msgid "A user created a new poll in a team you are following"
+msgstr "Un utilisateur a créé un nouveau sondage dans une équipe que tu suis"
+
+#, python-format
+msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s a créé un nouveau sondage dans %(team_name)s (que tu suis)"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Un nouveau sondage : \"%(object_name)s\" a été créé dans %(team_name)s (que tu suis)."
+
+msgid "A user updated a poll you are following"
+msgstr "Un utilisateur a mis à jour un sondage que tu suis"
+
+#, python-format
+msgid "%(sender_name)s updated the poll %(object_name)s"
+msgstr "%(sender_name)s a mis à jour le sondage %(object_name)s"
+
+msgid "You are following this poll"
+msgstr "Tu suis ce sondage"
+
+#, python-format
+msgid "%(sender_name)s updated a poll you are following"
+msgstr "%(sender_name)s mis à jour un sondage que tu suis"
+
+#, python-format
+msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Un sondage que tu suis : \"%(object_name)s\" a été mis à jour en %(team_name)s."
+
+msgid "A poll you are following was completed"
+msgstr "Un sondage que tu suis a été réalisé"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s"
+msgstr "%(sender_name)s a réalisé le sondage %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls"
+msgstr "%(sender_name)s sondages %(count)d réalisés"
+
+#, python-format
+msgid "%(sender_name)s completed the poll you are following"
+msgstr "%(sender_name)s a réalisé le sondage"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
+msgstr "Le sondage \"%(object_name)s\" que tu suis a été réalisé dans %(team_name)s."
+
+msgid "A user commented on one a poll you are following"
+msgstr "Un utilisateur a commenté un sondage que tu suis"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you are following"
+msgstr "%(sender_name)s a commenté un sondage que tu suis"
+
+msgid "Current Polls"
+msgstr "Sondages actuels"
+
+msgid "No current polls"
+msgstr "Pas de sondages actuels"
+
+msgid "You must write a description for this poll option!"
+msgstr "Tu dois écrire une description pour cette option de sondage !"
+
+msgid "Voting closed"
+msgstr "Vote clos"
+
+msgid "Poll archived"
+msgstr "Sondage archivé"
+
+msgid "Multiple options votable"
+msgstr "Plusieurs réponses possibles"
+
+msgid "Does this poll allow users to vote on multiple options or just decide for one?"
+msgstr "Ce sondage permet-il aux utilisateurs de voter pour de multiples options ou seulement d'en choisir une ?"
+
+msgid "\"Maybe\" option enabled"
+msgstr "Option \"Peut-être\" activée"
+
+msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
+msgstr "L'option \"peut-être\" est-elle activée ? Ignorer et mettre Faux par défaut si ``votes_multiples==Faux``"
+
+msgid "Anyone can vote"
+msgstr "Tout le monde peut voter"
+
+msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
+msgstr "Si vrai, n'importe qui voyant ce sondage peut vote. Si faux, uniquement les membres du groupe le peuvent."
+
+msgid "Show voters"
+msgstr "Afficher les votants"
+
+msgid "If true, display a list of which user voted for each option."
+msgstr "Si vrai, afficher une liste décrivant quel utilisateur a voté pour chaque option."
+
+msgid "Winning Option"
+msgstr "Option gagnante"
+
+#, python-format
+msgid "Poll: %(poll)s (%(state)s)"
+msgstr "Sondage : %(poll)s (%(state)s)"
+
+msgid "Poll Option"
+msgstr "Option du sondage"
+
+msgid "Poll Options"
+msgstr "Options du sondage"
 
 msgid "Poll choice"
 msgstr "Choix du sondage"
@@ -12959,6 +12481,85 @@ msgstr "a créé un sondage"
 msgid "There are no polls yet"
 msgstr "Il n'y a pas encore de sondages"
 
+#, python-format
+msgid "Poll \"%(title)s\" was edited successfully."
+msgstr "Le sondage \"%(title)s\" a été modifié."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be edited."
+msgstr "Le sondage \"%(title)s\" n'a pas pu être modifié."
+
+#, python-format
+msgid "Poll \"%(title)s\" was added successfully."
+msgstr "Le sondage \"%(title)s\" a été ajouté."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be added."
+msgstr "Le sondage \"%(title)s\" n'a pas pu être ajouté."
+
+msgid "You should define at least one poll option!"
+msgstr "Tu devrais définir au moins une option de sondage !"
+
+msgid "This poll is archived and cannot be edited anymore!"
+msgstr "Ce sondage est archivé et ne peut plus être modifié !"
+
+#, python-format
+msgid "Poll \"%(title)s\" was deleted successfully."
+msgstr "Le sondage \"%(title)s\" a été supprimé."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be deleted."
+msgstr "Le sondage \"%(title)s\" n'a pas pu être supprimé."
+
+msgid "The voting phase for this poll is over. You cannot vote for it any more."
+msgstr "Le vote pour ce sondage est clos. Tu ne peux plus voter."
+
+msgid "In this poll you must vote for exactly one item!"
+msgstr "Dans ce sondage, tu dois voter pour une seule option !"
+
+msgid "Invalid action for this poll. The request could not be completed!"
+msgstr "Action invalide pour ce sondage. La demande n'a pas pu être complétée !"
+
+msgid "This action is not permitted for this poll at this stage!"
+msgstr "Cette action n'est pas permise à ce stade pour ce sondage !"
+
+msgid "The poll was closed successfully."
+msgstr "Le sondage a été fermé."
+
+msgid "The poll was re-opened successfully."
+msgstr "Le sondage a été rouvert."
+
+msgid "The poll was archived successfully."
+msgstr "Le sondage a été archivé."
+
+msgid "Stream"
+msgstr "Fil d'actualité"
+
+msgctxt "the_app"
+msgid "stream"
+msgstr "fil d'actualité"
+
+msgid "My Streams"
+msgstr "Mes fils d'actualité"
+
+msgid "Streams"
+msgstr "Fils d'actualité"
+
+msgid "Models"
+msgstr "Modèles"
+
+msgid "Portal IDs"
+msgstr "IDs du portail"
+
+msgid "Last seen"
+msgstr "Vu pour la dernière fois"
+
+msgid "Special Stream"
+msgstr "Fil spécial"
+
+msgid "Special Group IDs"
+msgstr "IDs des groupes spéciaux"
+
 msgid "Public Stream"
 msgstr "Fil public"
 
@@ -13013,6 +12614,260 @@ msgstr "Filtrer par auteur, tags ou autres propriétés taguées ?"
 
 msgid "Filter by item types?"
 msgstr "Filtrer par type d'item ?"
+
+msgid "You do not have permission to access this stream."
+msgstr "Tu n'as pas la permission d'accéder à ce fil."
+
+msgid "Your stream was added successfully."
+msgstr "Ton fil a été ajouté."
+
+msgid "Your stream was updated successfully."
+msgstr "Ton fil a été mis à jour."
+
+msgid "Your stream was deleted successfully."
+msgstr "Ton fil a été supprimé."
+
+msgid "You cannot delete the default stream!"
+msgstr "Tu ne peux pas supprimer le fil par défaut !"
+
+msgctxt "the_app"
+msgid "todo"
+msgstr "tâches"
+
+msgid "A user created a new todo"
+msgstr "Un utilisateur a créé une nouvelle tâche"
+
+#, python-format
+msgid "%(sender_name)s created the todo %(object_name)s"
+msgstr "%(sender_name)s a créé une nouvelle tâche %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d todos"
+msgstr "%(sender_name)s a créé %(count)d nouvelles tâches"
+
+#, python-format
+msgid "%(sender_name)s created a new todo"
+msgstr "%(sender_name)s a créé une nouvelle tâche"
+
+#, python-format
+msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Une nouvelle tâche : \"%(object_name)s\" a été créée dans %(team_name)s."
+
+msgid "A todo was assigned to me"
+msgstr "Une tâche m'a été assignée"
+
+#, python-format
+msgid "%(sender_name)s assigned the todo %(object_name)s to you"
+msgstr "%(sender_name)s t'a assigné la nouvelle tâche %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s assigned %(count)d todos to you"
+msgstr "%(sender_name)s t'a assigné %(count)d nouvelles tâches"
+
+#, python-format
+msgid "%(sender_name)s assigned a todo to you"
+msgstr "%(sender_name)s t'a assigné une nouvelle tâche"
+
+msgid "A todo I created was completed"
+msgstr "Une tâche que j'ai créée a été complétée"
+
+#, python-format
+msgid "%(sender_name)s completed the todo %(object_name)s"
+msgstr "%(sender_name)s a effectué la tâche %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d todos"
+msgstr "%(sender_name)s a effectué %(count)d tâches"
+
+msgid "You created this todo"
+msgstr "Tu as créé cette nouvelle tâche"
+
+#, python-format
+msgid "%(sender_name)s completed your todo"
+msgstr "%(sender_name)s a effectué ta tâche"
+
+#, python-format
+msgid "%(sender_name)s completed one of your todos"
+msgstr "%(sender_name)s a effectué une tâche"
+
+msgid "A user commented on one of your todos"
+msgstr "Un utilisateur a commenté l'une de tes tâches"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo %(object_name)s"
+msgstr "%(sender_name)s a commenté ta tâche %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
+msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté ta tâche %(object_name)s"
+msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté ta tâche %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo"
+msgstr "%(sender_name)s a commenté ta tâche"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your todos"
+msgstr "%(sender_name)s a commenté une de tes tâches"
+
+msgid "A user commented on a todo you were tagged in"
+msgstr "Un utilisateur a commenté une tâche sur laquelle tu es tagué"
+
+#, python-format
+msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgstr "%(sender_name)s a commenté ta tâche %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
+msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté la tâche %(object_name)s"
+msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté la tâche %(object_name)s"
+
+msgid "You were tagged in this todo"
+msgstr "Tu as été marqué dans cette tâche"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in"
+msgstr "%(sender_name)s a commenté une tâche sur laquelle tu es tagué"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s a commenté une tâche sur laquelle tu es tagué dans %(team_name)s"
+
+msgid "A user commented on a todo you were assigned to"
+msgstr "Un utilisateur a commenté une tâche qui t'est assignée"
+
+#, python-format
+msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
+msgstr "%(sender_name)s a commenté ta tâche assignée %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
+msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté ta tâche assignée %(object_name)s"
+msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté ta tâche assignée %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos"
+msgstr "%(sender_name)s a commenté une de tes tâches assignées"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgstr "%(sender_name)s a commenté une de tes tâches assignées dans %(team_name)s"
+
+msgid "A user updated a todo you are following"
+msgstr "Un utilisateur a mis à jour une tâche que tu suis"
+
+#, python-format
+msgid "%(sender_name)s updated the todo %(object_name)s"
+msgstr "%(sender_name)s a mis à jour la tâche %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
+msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont mis à jour la tâche %(object_name)s"
+msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont mis à jour la tâche %(object_name)s"
+
+msgid "You are following this todo"
+msgstr "Tu suis cette tâche"
+
+#, python-format
+msgid "%(sender_name)s updated a todo you are following"
+msgstr "%(sender_name)s mis à jour une tâche que tu suis"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Une tâche que tu suis : \"%(object_name)s\" a été mise à jour dans %(team_name)s."
+
+msgid "A user reassigned a todo you are following"
+msgstr "Un utilisateur a réaffecté une tâche que tu suis"
+
+#, python-format
+msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgstr "%(sender_name)s a réaffecté la tâche %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s reassigned %(count)d todos"
+msgstr "%(sender_name)s tâches %(count)d réaffectées"
+
+#, python-format
+msgid "%(sender_name)s reassigned a todo you are following"
+msgstr "%(sender_name)s a réaffecté une tâche que tu suis"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
+msgstr "Une tâche que tu suis : \"%(object_name)s\" a été réaffectée dans %(team_name)s."
+
+msgid "A user completed a todo you are following"
+msgstr "Un utilisateur a éffectué une tâche que tu suis"
+
+#, python-format
+msgid "%(sender_name)s completed a todo you are following"
+msgstr "%(sender_name)s a effectué une tâche que tu suis"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Une tâche que tu suis : \"%(object_name)s\" a été effectuée dans %(team_name)s."
+
+msgid "A user commented on a todo you are following"
+msgstr "Un utilisateur a commenté une tâche que tu suis"
+
+#, python-format
+msgid "%(sender_name)s commented on on a todo you are following"
+msgstr "%(sender_name)s a commenté une tâche que tu suis"
+
+msgid "My Todos"
+msgstr "Mes tâches"
+
+msgid "No todos"
+msgstr "Aucune tâche"
+
+msgid "Open"
+msgstr "Ouverte"
+
+msgid "Completed"
+msgstr "Effectuée"
+
+msgid "Assigned To"
+msgstr "Assigné à"
+
+msgid "Priority"
+msgstr "Priorité"
+
+msgid "Due date"
+msgstr "Echéance"
+
+msgid "Soonest Due"
+msgstr "Echéance la plus proche"
+
+msgid "You are not allowed to assign this Todo entry."
+msgstr "Tu n'as pas l'autorisation d'assigner cette tâche."
+
+msgid "Later"
+msgstr "Plus tard"
+
+msgid "Normal"
+msgstr "Normale"
+
+msgid "Important"
+msgstr "Importante"
+
+msgid "Due by"
+msgstr "A faire avant le"
+
+msgid "Completed on"
+msgstr "Effectuée le"
+
+msgid "Completed by"
+msgstr "Effectuée par"
+
+msgid "Assigned to"
+msgstr "Assignée à"
+
+#, python-format
+msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
+msgstr "La tâche \"%(todo_name)s\" a été assignée à %(assignee_name)s"
 
 #, python-format
 msgid ""
@@ -13323,6 +13178,263 @@ msgstr "Tu n'as pas de tâches assignées"
 
 msgid "Tasks are shown only for logged in users"
 msgstr "Les tâches sont affichées seulement pour les membres connectés"
+
+#, python-format
+msgid "Todo \"%(title)s\" was added successfully."
+msgstr "La tâche \"%(title)s\" a été ajoutée."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be added."
+msgstr "La tâche \"%(title)s\" n'a pas pu être ajoutée."
+
+msgid "You were trying to add a todo to a todolist that does not exist!"
+msgstr "Tu essayais d'ajouter une tâche à une liste de tâches qui n'existe pas !"
+
+#, python-format
+msgid "Todo \"%(title)s\" was edited successfully."
+msgstr "La tâche\"%(title)s\" a été modifiée."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be edited."
+msgstr "La tâche \"%(title)s\" n'a pas pu être modifiée."
+
+#, python-format
+msgid "Todo \"%(title)s\" was deleted successfully."
+msgstr "La tâche \"%(title)s\" a été supprimée."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be deleted."
+msgstr "La tâche \"%(title)s\" n'a pas pu être supprimée."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned successfully."
+msgstr "La tâche \"%(title)s\" a été assignée."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned."
+msgstr "La tâche \"%(title)s\" n'a pas pu être assignée."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned to You successfully."
+msgstr "La tâche \"%(title)s\" t'a été assignée."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned to You."
+msgstr "La tâche \"%(title)s\" n'a pas pu t'être assignée."
+
+#, python-format
+msgid "Todo \"%(title)s\" was unassigned successfully."
+msgstr "La tâche \"%(title)s\" n'a pas été assignée."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be unassigned."
+msgstr "La tâche \"%(title)s\" n'a pas pu être non-assignée."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed successfully."
+msgstr "La tâche \"%(title)s\" a été effectuée."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed."
+msgstr "La tâche \"%(title)s\" n'a pas pu être effectuée."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed by You successfully."
+msgstr "La tâche \"%(title)s\" a été effectuée par toi."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed by You."
+msgstr "La tâche \"%(title)s\" n'a pas pu être effectuée par toi."
+
+#, python-format
+msgid "Todo \"%(title)s\" was set to incomplete successfully."
+msgstr "La tâche \"%(title)s\" a été désignée comme incomplète."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be set to incomplete."
+msgstr "La tâche \"%(title)s\" n'a pas pu être désignée comme incomplète."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was edited successfully."
+msgstr "La liste de tâches \"%(title)s\" a été modifiée."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be edited."
+msgstr "La liste de tâches \"%(title)s\" n'a pas pu être modifiée."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was added successfully."
+msgstr "La liste de tâches \"%(title)s\" a été ajoutée."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be added."
+msgstr "La liste de tâches \"%(title)s\" n'a pas pu être ajoutée."
+
+msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
+msgstr "Tu ne peux supprimer ce dossier car tu n'as pas la permission de supprimer un ou plusieurs items qu'il contient !"
+
+#~ msgid "Ok"
+#~ msgstr "Ok"
+
+#~ msgid "Message Group"
+#~ msgstr "Groupe message"
+
+#~ msgid "Message Project"
+#~ msgstr "Projet message"
+
+#, fuzzy
+#~| msgid "This message was sent in a conversation with: "
+#~ msgid "The message cannot be replied without being in a conversation."
+#~ msgstr "Ce message a été envoyé dans une conversation avec : "
+
+#, fuzzy
+#~| msgid "Is Moderator"
+#~ msgid "Moderation"
+#~ msgstr "Est un modérateur"
+
+#, fuzzy
+#~| msgid "Your name"
+#~ msgid "{username}"
+#~ msgstr "Ton nom"
+
+#, fuzzy
+#~| msgid "Additional Recipients"
+#~ msgid "Additional recipients"
+#~ msgstr "Destinataires supplémentaires"
+
+#, fuzzy
+#~| msgid "Additional Recipients"
+#~ msgid "Additional recipient"
+#~ msgstr "Destinataires supplémentaires"
+
+#, fuzzy
+#~| msgid "Message Project"
+#~ msgid "Message Rejected"
+#~ msgstr "Projet message"
+
+#, fuzzy
+#~| msgid "Your message has been sent."
+#~ msgid "Your message has been rejected"
+#~ msgstr "Votre message a été envoyé."
+
+#, fuzzy
+#~| msgid "Message Project"
+#~ msgid "Message Received"
+#~ msgstr "Projet message"
+
+#, fuzzy
+#~| msgid "You have been invited to apply!"
+#~ msgid "You have received a message"
+#~ msgstr "Tu as été invité à postuler !"
+
+#, fuzzy
+#~| msgid "You have been invited to apply!"
+#~ msgid "You have received a reply"
+#~ msgstr "Tu as été invité à postuler !"
+
+#, fuzzy
+#~| msgid "Restricted"
+#~ msgid "Rejected"
+#~ msgstr "Restreint"
+
+#, fuzzy
+#~| msgid "Everybody"
+#~ msgid "body"
+#~ msgstr "Tout le monde"
+
+#, fuzzy
+#~ msgid "sender"
+#~ msgstr "Envoyé"
+
+#, fuzzy
+#~| msgid "Recipient"
+#~ msgid "recipient"
+#~ msgstr "Destinataire"
+
+#, fuzzy
+#~| msgid "Visitor"
+#~ msgid "visitor"
+#~ msgstr "Visiteur"
+
+#, fuzzy
+#~ msgid "parent message"
+#~ msgstr "État d’importation"
+
+#, fuzzy
+#~| msgid "No messages"
+#~ msgid "root message"
+#~ msgstr "Pas de messages"
+
+#, fuzzy
+#~| msgid "Sent at:"
+#~ msgid "sent at"
+#~ msgstr "Envoyée à :"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "archived by recipient"
+#~ msgstr "Destinataire non défini."
+
+#, fuzzy
+#~| msgid "New etherpad by %(sender_name)s"
+#~ msgid "deleted by sender at"
+#~ msgstr "Nouveau etherpad par %(sender_name)s"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "deleted by recipient at"
+#~ msgstr "Destinataire non défini."
+
+#, fuzzy
+#~| msgid "Is Moderator"
+#~ msgid "moderator"
+#~ msgstr "Est un modérateur"
+
+#, fuzzy
+#~| msgid "Related to"
+#~ msgid "moderated at"
+#~ msgstr "Lié à"
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "message"
+#~ msgstr "message"
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "messages"
+#~ msgstr "message"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "Undefined sender."
+#~ msgstr "Destinataire non défini."
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "pending message"
+#~ msgstr "message"
+
+#, fuzzy
+#~ msgid "pending messages"
+#~ msgstr "Messages"
+
+#, fuzzy
+#~ msgid "Re: {subject}"
+#~ msgstr "Sujet"
+
+#, fuzzy
+#~| msgid "User successfully created!"
+#~ msgid "Message successfully sent."
+#~ msgstr "Utilisateur créé avec succès !"
+
+#, fuzzy
+#~| msgid "Select at least one object."
+#~ msgid "Message rejected for at least one recipient."
+#~ msgstr "Sélectionne au moins un objet."
 
 #, fuzzy
 #~ msgid "CSV Import Results"

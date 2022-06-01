@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 16:02+0200\n"
+"POT-Creation-Date: 2022-06-01 15:58+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -175,6 +175,13 @@ msgid "Reactivate user accounts"
 msgstr "Gebruikersaccount succesvol geactiveerd"
 
 #, python-format
+msgid "%(count)d Users' group memberships were refreshed."
+msgstr ""
+
+msgid "Refresh user group membership associations (e.g. cache or Nextcloud folder problems)"
+msgstr ""
+
+#, python-format
 msgid "%d Users were synchronized successfully."
 msgstr "%d gebruikers zijn succesvol gesynchroniseerd."
 
@@ -280,6 +287,14 @@ msgstr ""
 
 msgid "Bookmarked Users list"
 msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Invitations"
+msgstr "Uitnodigingen"
+
+#, fuzzy
+msgid "Conferences"
+msgstr "Conferentieruimtes"
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
@@ -479,12 +494,12 @@ msgstr "%(sender_name)s heeft je uitgenodigd deel te nemen aan “%(team_name)s�
 msgid "Accept invitation"
 msgstr "Uitnodiging accepteren"
 
-msgid "View invitation"
-msgstr "Uitnodiging bekijken"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s heeft je uitgenodigd"
+
+msgid "View invitation"
+msgstr "Uitnodiging bekijken"
 
 msgid "New link to the moved project/group"
 msgstr "Nieuwe link naar verplaatst(e) project/groep"
@@ -537,6 +552,28 @@ msgstr "%(sender_name)s heeft zojuist het idee “%(object_name)s” aangemaakt 
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s heeft zojuist een nieuwe gebruikersaccount aangemaakt op %(portal_name)s!"
+
+msgid "A conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The conference %(object_name)s has been updated"
+msgstr "Je bent getagd in “%(object_name)s” in %(team_name)s."
+
+#, fuzzy
+msgid "You are attending this conference"
+msgstr "Je staat op het punt dit project/deze groep te deactiveren!"
+
+#, fuzzy, python-format
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr "Je bent getagd in “%(object_name)s” in %(team_name)s."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The time of conference %(object_name)s has been updated"
+msgstr "Je bent getagd in “%(object_name)s” in %(team_name)s."
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -802,6 +839,11 @@ msgstr "Ge-liked"
 
 msgid "Persons"
 msgstr "Personen"
+
+#, fuzzy
+#| msgid "Last name"
+msgid "last name"
+msgstr "Achternaam"
 
 #, fuzzy
 #| msgid "My location"
@@ -1514,12 +1556,21 @@ msgstr "Parent groep"
 msgid "Related Teams"
 msgstr "Verwante teams"
 
+#, fuzzy
+#| msgid "I am open for cooperation requests"
+msgid "Open for cooperation"
+msgstr "Ik sta open voor samenwerkingsverzoeken"
+
 msgid "Dynamic extra fields"
 msgstr ""
 
 #, fuzzy
 msgid "If set to true, a contact form will be displayed on the micropage."
 msgstr "Als dit actief is, wordt er een Call to Action box getoond op de microsite."
+
+#, fuzzy
+msgid "Use invite token"
+msgstr "Voer een token in:"
 
 msgid "Cosinnus project"
 msgstr "Cosinnus project"
@@ -2251,6 +2302,18 @@ msgstr "Gerapporteerd item verwijderen…"
 msgid "(The reported item has been deleted.)"
 msgstr "(Het gerapporteerde item is verwijderd.)"
 
+msgid "This user profile is scheduled for deletion at: "
+msgstr ""
+
+msgid "However, it will not be deleted, because it is still active."
+msgstr ""
+
+msgid "This user account is disabled. The user cannot log in or use the account."
+msgstr ""
+
+msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
+msgstr ""
+
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Voeg de 4 hoofdletters in het versleutelde beeld in"
 
@@ -2334,6 +2397,140 @@ msgstr "Administratie"
 msgid "Select a page on the left side."
 msgstr "Selecteer een pagina aan de linker kant."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+msgid "Overview - Premium Conferences Only"
+msgstr ""
+
+msgid "Overview - All Conferences"
+msgstr ""
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "Op pagina bekijken"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Toon project"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Conferentie is bezig"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "Privacy instellingen"
+
+msgid "Conference Settings"
+msgstr "Conferentie instellingen"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+#, fuzzy
+msgid "Not premium"
+msgstr "Premium"
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Startdatum."
+
+#, fuzzy
+msgid "running now!"
+msgstr "Doe mee!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Conferentie instellingen"
+
+msgid "Room"
+msgstr "Ruimte"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgctxt "Calendar"
+#| msgid "Event"
+msgid "Event"
+msgstr "Evenement"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Conferentie is bezig"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Conferentie is bezig"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Weet u zeker dat je „%(title)s“ wilt verlaten?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Weet je zeker dat je lid “%(name)s” uit het team wilt verwijderen?"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "Er zijn nog geen items"
+
+msgid "BBB"
+msgstr ""
+
+#, fuzzy
+msgid "BBB Premium"
+msgstr "Premium"
+
+msgid "BBB Recording API"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "Niet toegewezen"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Evenement aanmaken"
+
+msgid "Save"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Weet je zeker dat je lid “%(name)s” wilt weigeren?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Profiel verwijderen"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2381,6 +2578,18 @@ msgstr "Gebruikersdashboard mededelingen"
 
 msgid "User Welcome Email"
 msgstr "Welkomstmail voor gebruikers"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Videoconferentie server"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Evenement aanmaken"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Conferentie instellingen"
 
 msgid "Simple Statistics"
 msgstr "Simpele statistieken"
@@ -2446,9 +2655,6 @@ msgstr "Voornaam"
 #, fuzzy
 msgid "Lastname"
 msgstr "Achternaam"
-
-msgid "Save"
-msgstr ""
 
 #, fuzzy
 msgid "User Administration"
@@ -3171,7 +3377,7 @@ msgstr "Ruimte type"
 msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
 msgstr ""
 
-msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+msgid "The Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgstr ""
 
 msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
@@ -3264,6 +3470,9 @@ msgstr ""
 #, fuzzy
 msgid "There are no rooms yet."
 msgstr "Er zijn nog geen items"
+
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
@@ -3454,6 +3663,12 @@ msgstr "Startdatum."
 msgid "Length"
 msgstr ""
 
+msgid "minute"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
 #, fuzzy
 #| msgid "Delete Account"
 msgid "Delete Recording"
@@ -3466,153 +3681,6 @@ msgstr "Weet je zeker dat je aankondiging “%(title)s” wilt verwijderen?"
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Gerapporteerd item verwijderen…"
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-msgid "Overview - Premium Conferences Only"
-msgstr ""
-
-msgid "Overview - All Conferences"
-msgstr ""
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Administratie"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "Op pagina bekijken"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Toon project"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Conferentie is bezig"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "Privacy instellingen"
-
-msgid "Conference Settings"
-msgstr "Conferentie instellingen"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "Premium"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-#, fuzzy
-msgid "Not premium"
-msgstr "Premium"
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-msgid "Start"
-msgstr "Startdatum."
-
-#, fuzzy
-msgid "running now!"
-msgstr "Doe mee!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Conferentie instellingen"
-
-msgid "Room"
-msgstr "Ruimte"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgctxt "Calendar"
-#| msgid "Event"
-msgid "Event"
-msgstr "Evenement"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Conferentie is bezig"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Conferentie is bezig"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Weet u zeker dat je „%(title)s“ wilt verlaten?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Weet je zeker dat je lid “%(name)s” uit het team wilt verwijderen?"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "Er zijn nog geen items"
-
-msgid "BBB"
-msgstr ""
-
-#, fuzzy
-msgid "BBB Premium"
-msgstr "Premium"
-
-msgid "BBB Recording API"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "Niet toegewezen"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Evenement aanmaken"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Weet je zeker dat je lid “%(name)s” wilt weigeren?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Profiel verwijderen"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Videoconferentie server"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Evenement aanmaken"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Conferentie instellingen"
 
 msgid "Rearrange"
 msgstr "Herschikken"
@@ -3647,6 +3715,11 @@ msgstr "start hier…"
 
 msgid "Activate Cloud"
 msgstr "Cloud activeren"
+
+#, fuzzy
+#| msgid "Members"
+msgid "Members-Map"
+msgstr "Leden"
 
 #, fuzzy
 #| msgctxt "the_app"
@@ -3752,6 +3825,18 @@ msgstr "Je ontvangt een melding wanneer openbare inhoud in deze groep wordt gepl
 msgid "No Description set"
 msgstr "Geen beschrijving vastgesteld"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created"
+msgid "Created on: "
+msgstr "Aangemaakt"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Last edited by"
+msgid "Last updated on: "
+msgstr "Laatst gewijzigd door"
+
 #, fuzzy
 #| msgid "Show more"
 msgid "more"
@@ -3828,6 +3913,10 @@ msgstr ""
 #| msgid "Dates"
 msgid "Date"
 msgstr "Data"
+
+#, python-format
+msgid "Time zone: %(TIME_ZONE)s"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -3915,6 +4004,15 @@ msgid "No contact data has been added yet."
 msgstr "Er zijn nog geen contactgegevens toegevoegd."
 
 #, fuzzy
+msgid "Contact organizers"
+msgstr "Contactgegevens"
+
+#, fuzzy
+#| msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgid "Here you can send a message to the admins."
+msgstr "Op %(date)s, heb je gevraagd een bericht te sturen naar gebruiker ‘%(recipient)s’."
+
+#, fuzzy
 msgid "Your Deactivated Content"
 msgstr "Beschermde inhoud"
 
@@ -3939,6 +4037,9 @@ msgstr "Weet je zeker dat je dit team wilt verwijderen?"
 #, python-format
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - leden"
+
+msgid "Invite users directly via the following link: "
+msgstr ""
 
 msgid "Membership requests"
 msgstr "Lidmaatschapsverzoeken"
@@ -4319,6 +4420,41 @@ msgid "Enable the public visibility of your group/project"
 msgstr ""
 
 #, fuzzy
+#| msgid "Delete invitation"
+msgid "Create invite token"
+msgstr "Uitnodiging verwijderen"
+
+msgid "Check this to generate an invite token which allows a user to join the "
+msgstr ""
+
+#, fuzzy
+#| msgid "Groups"
+msgid "group"
+msgstr "Groepen"
+
+#, fuzzy
+#| msgid "Project"
+msgid "project"
+msgstr "Project"
+
+#, fuzzy
+msgid "conference"
+msgstr "Conferentieruimte"
+
+msgid " directly."
+msgstr ""
+
+#, fuzzy
+#| msgid "No current offers"
+msgid "The current token is: "
+msgstr "Geen actuele aanbiedingen"
+
+#, fuzzy
+#| msgid "Create content"
+msgid "Create token"
+msgstr "Inhoud aanmaken"
+
+#, fuzzy
 msgid "Include a video conference"
 msgstr "Is conferentie"
 
@@ -4378,8 +4514,17 @@ msgstr "Hier kun je bepalen of de openbare informatie over jouw project, zoals n
 msgid "This project shall be made publicly findable via other platforms."
 msgstr "Dit project wordt openbaar zichtbaar gemaakt via andere platforms."
 
+msgid "Is your project open to other partner organizations?"
+msgstr ""
+
+msgid "Project is open for further partner organizations."
+msgstr ""
+
 msgid "Which apps should be activated?"
 msgstr "Welke apps moeten worden geactiveerd?"
+
+msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
+msgstr ""
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Deze app kan alleen voor een groep worden geactiveerd, maar niet voor een project!"
@@ -4484,10 +4629,6 @@ msgstr "Facebook-integratie is beschikbaar nadat je het project hebt gemaakt!"
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr "De HTML die hier wordt ingevoerd is alleen zichtbaar in het dashboard van de groep/het project (alleen leden)"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Invitations"
-msgstr "Uitnodigingen"
 
 msgid "About me"
 msgstr "Over mij"
@@ -4619,6 +4760,32 @@ msgstr "Delen op Twitter"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr "Doelstellingen duurzame ontwikeling"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created Projects"
+msgid "Contact Project Admins"
+msgstr "Gecreëerde projecten"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Group Admins"
+msgstr "Contactgegevens"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Contact Conference Admins"
+msgstr "Administratie"
+
+msgid "If you want to send your message to the project chat, you have to turn directly to the project."
+msgstr ""
+
+msgid "If you want to send your message to the group chat, you have to turn directly to the group."
+msgstr ""
+
+msgid "If you want to send your message to the conference chat, you have to turn directly to the conference."
+msgstr ""
 
 #, fuzzy
 msgid "Email the group administrators"
@@ -5917,6 +6084,10 @@ msgid "CSV Downloads"
 msgstr "CSV downloads"
 
 #, fuzzy
+msgid "Portal switches and settings"
+msgstr "Privacy instellingen"
+
+#, fuzzy
 msgid "HD space used by conferences"
 msgstr "HD space gebruikt door projecten"
 
@@ -5938,8 +6109,8 @@ msgstr "E-mailadressen van alle nieuwsbriefabonnees"
 msgid "E-Mails of ALL active users"
 msgstr "E-mailadressen van ALLE actieve gebruikers"
 
-msgid "Ok"
-msgstr "Oké"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr "De WE-cloud is hier!"
@@ -6062,6 +6233,24 @@ msgstr "Filters toepassen"
 msgid "Clear Filters"
 msgstr "Filters wissen"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Show detailed steps"
+msgid "Show potential partners"
+msgstr "Gedetailleerde stappen tonen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Here you can search for partner organisations and projects that are open for further partners. The results are sorted so that partners with a lot of overlap in the funding objectives, eligible areas and SDGs you are active on are listed first."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners for ..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You're currently not member of any project, group or organization."
+msgstr ""
+
 # What is this app about?
 # Translation: Stream or Activiteiten?
 #. Translators: __INCLUDE_JS_PO__
@@ -6101,6 +6290,10 @@ msgstr "Zoeken door het verplaatsen van de kaart"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search this area"
 msgstr "Zoeken in dit gebied"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Find partners"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Membership Requests"
@@ -6283,11 +6476,6 @@ msgstr "Deelnemers"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-msgid "Contact organizers"
-msgstr "Contactgegevens"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
 msgid "You will now receive notifications for content posted."
 msgstr "Je ontvangt nu meldingen wanneer inhoud in deze groep wordt geplaatst."
 
@@ -6357,16 +6545,16 @@ msgid "Hidden User"
 msgstr "Verborgen gebruiker"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "This group is open for further partner organizations."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are a Member"
 msgstr "Je bent lid"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Join Group"
 msgstr "Deelnemen aan groep"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Message Group"
-msgstr "Bericht sturen aan groep"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Author"
@@ -6387,6 +6575,10 @@ msgstr "Je ontvangt een melding wanneer een project wordt gemaakt op basis van j
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"
 msgstr "Projecten - gemaakt van dit idee"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This organization is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are a Admin"
@@ -6421,12 +6613,12 @@ msgid "To Profile"
 msgstr "Jouw profiel"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Join Project"
-msgstr "Meedoen aan project"
+msgid "This project is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Message Project"
-msgstr "Bericht project"
+msgid "Join Project"
+msgstr "Meedoen aan project"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Move up"
@@ -7621,10 +7813,6 @@ msgid "Only group members can see the content you requested. Apply to become a m
 msgstr "Alleen teamleden kunnen deze inhoud zien. Meld je nu aan om lid te worden!"
 
 #, fuzzy
-msgid "Conferences"
-msgstr "Conferentieruimtes"
-
-#, fuzzy
 msgid "My Conferences"
 msgstr "Is conferentie"
 
@@ -7801,6 +7989,9 @@ msgstr ""
 msgid "Please also provide an end date"
 msgstr ""
 
+msgid "Ensure that your name does not contain any invalid characters."
+msgstr ""
+
 msgid "Test email sent!"
 msgstr "Testmail verstuurd!"
 
@@ -7840,6 +8031,14 @@ msgstr ""
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "De taal “%s” wordt niet ondersteund"
+
+#, fuzzy
+#| msgid "Test email sent!"
+msgid "New verification email sent!"
+msgstr "Testmail verstuurd!"
+
+msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
 
 #, fuzzy
 msgid "Successfully made conference permanent premium"
@@ -8372,6 +8571,15 @@ msgstr "Cloud bestanden"
 msgid "Linked Cloud Files"
 msgstr "Cloud bestanden"
 
+msgid "Cloud Stub"
+msgstr "Cloud Stub"
+
+msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
+msgstr ""
+
+msgid "There are no cloud files yet"
+msgstr "Er zijn nog geen cloud bestanden"
+
 #, fuzzy
 msgid "Restart"
 msgstr "Beperkt"
@@ -8389,6 +8597,13 @@ msgstr ""
 msgctxt "the_app"
 msgid "conference"
 msgstr "Conferentieruimte"
+
+#, fuzzy
+msgid "Error message:"
+msgstr "Berichten"
+
+msgid "No error message supplied."
+msgstr ""
 
 #, fuzzy
 msgid "Go to conference"
@@ -8599,8 +8814,91 @@ msgstr "Nieuwste pads"
 msgid "Pad Type"
 msgstr "Pad type"
 
+msgid "Pad"
+msgstr "Pad"
+
+msgid "This pad can no longer be edited because its creator has deleted their account."
+msgstr "Dit pad kan niet meer worden gewijzigd omdat de maker zijn/haar account heeft verwijderd."
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(pad)s“?"
+msgstr "Weet je zeker dat je etherpad „%(pad)s\" wilt verwijderen?"
+
+msgid "Delete Etherpad"
+msgstr "Etherpad verwijderen"
+
 msgid "The document can not be accessed because the etherpad server could not be reached. Please contact an administrator!"
 msgstr "Dit document is niet toegankelijk omdat de etherpad server niet kon worden bereikt. Neem contact op met een beheerder!"
+
+msgid "This document is empty"
+msgstr "Dit document is leeg"
+
+msgid "Pads"
+msgstr "Pads"
+
+msgid "Enter a title for the Pad."
+msgstr "Voer een titel in voor het pad."
+
+msgid "Enter the title for a new Document or Table."
+msgstr "Voer een titel in voor een nieuw document of tabel."
+
+msgid "Enter the title for a new Document."
+msgstr "Voer een titel in voor een nieuw document."
+
+msgid "Create Etherpad"
+msgstr "Etherpad aanmaken"
+
+msgid "Create Ethercalc"
+msgstr "Ethercalc aanmaken"
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(title)s“?"
+msgstr "Weet je zeker dat je etherpad „%(title)s“ wilt verwijderen?"
+
+msgid "No etherpads have been created yet."
+msgstr "Er zijn nog geen etherpads aangemaakt."
+
+msgid "Download CSV"
+msgstr "CSV downloaden"
+
+msgid "Download Excel"
+msgstr "Excel downloaden"
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Hallo %(receiver_name)s,\n"
+"\n"
+"Er is een nieuw etherpad “%(object_name)s” in %(team_name)s aangemaakt door %(sender_name)s. \n"
+"\n"
+"Je kunt het vinden door op deze link te klikken %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Volg deze link om je meldingsinstellingen aan te passen: %(notification_settings_url)s )\n"
+"\n"
+"Jouw %(site_name)s team."
+
+msgid "You created a pad"
+msgstr "Je hebt een pad aangemaakt"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a Pad"
+msgstr "heeft een pad aangemaakt"
+
+msgid "There are no etherpads yet"
+msgstr "Er zijn nog geen etherpads"
 
 #, python-format
 msgid "Etherpad \"%(title)s\" was edited successfully."
@@ -9051,1955 +9349,6 @@ msgstr "Conferentie evenementen"
 msgid "%(event)s %(type)s"
 msgstr "%(event)s %(type)s"
 
-#, python-format
-msgid "Event \"%(title)s\" was edited successfully."
-msgstr "Evenement “%(title)s” is succesvol gewijzigd."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be edited."
-msgstr "Evenement “%(title)s” kon niet worden gewijzigd."
-
-msgid "Please use the conference management area to add new workshops!"
-msgstr ""
-
-msgid "The page you requested is not available for this event at this time."
-msgstr "De door jou opgevraagde pagina is momenteel niet beschikbaar voor dit evenement."
-
-msgid "One of the event suggestions times could not be understood!"
-msgstr "Eén van de tijdssuggesties voor een evenement kon niet worden begrepen!"
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was edited successfully."
-msgstr "Ongepland evenement “%(title)s” is succesvol gewijzigd."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be edited."
-msgstr "Ongepland evenement “%(title)s” kon niet worden gewijzigd."
-
-#, python-format
-msgid "Event \"%(title)s\" was added successfully."
-msgstr "Evenement “%(title)s” is succesvol toegevoegd."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be added."
-msgstr "Evenement “%(title)s” kon niet worden toegevoegd."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was added successfully."
-msgstr "Ongepland evenement “%(title)s” is succesvol toegevoegd."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be added."
-msgstr "Ongepland evenement “%(title)s” kon niet worden toegevoegd."
-
-msgid "You should define at least one date suggestion."
-msgstr "Je moet ten minste één suggestie voor een datum opgeven."
-
-#, python-format
-msgid "Event \"%(title)s\" was deleted successfully."
-msgstr "Evenement “%(title)s” is succesvol verwijderd."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be deleted."
-msgstr "Evenement “%(title)s” kon niet worden verwijderd."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was deleted successfully."
-msgstr "Ongepland evenement “%(title)s” is succesvol verwijderd."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be deleted."
-msgstr "Ongepland evenement “%(title)s” kon niet worden verwijderd."
-
-#, fuzzy
-msgid "Your votes were saved successfully."
-msgstr "Je idee is succesvol verwijderd."
-
-#, fuzzy
-#| msgid "Poll \"%(title)s\" could not be added."
-msgid "Your votes could not be saved."
-msgstr "Poll “%(title)s” kon niet worden toegevoegd."
-
-msgid "This is event is already scheduled. You cannot vote for it any more."
-msgstr "Dit evenement is al ingepland. Je kunt niet meer stemmen."
-
-msgid "The complete request can only be sent via POST!"
-msgstr "De voltooide aanvraag kan alleen worden verzonden via POST!"
-
-msgid "Event cannot be completed: No date was supplied."
-msgstr "Evenement kan niet worden voltooid: er is geen datum opgegeven."
-
-msgid "The event was created successfully at the specified date."
-msgstr "Het evenement is met succes aangemaakt op de opgegeven datum."
-
-msgid "Upcoming events"
-msgstr "Aankomende evenementen"
-
-#, fuzzy
-msgid "Upcoming event"
-msgstr "Aankomende evenementen"
-
-msgid "Your comment was added successfully."
-msgstr "Je reactie is succesvol toegevoegd."
-
-msgid "Your comment was deleted successfully."
-msgstr "Je reactie is succesvol verwijderd."
-
-#, fuzzy
-#| msgid "Save changes"
-msgid "Exchange"
-msgstr "Wijzigingen opslaan"
-
-#, fuzzy
-#| msgid "Save changes"
-msgctxt "the_app"
-msgid "exchange"
-msgstr "Wijzigingen opslaan"
-
-msgctxt "the_app"
-msgid "file"
-msgstr "bestand"
-
-msgid "A user uploaded a new file"
-msgstr "Een gebruiker heeft een nieuw bestand geüpload"
-
-#, python-format
-msgid "%(sender_name)s uploaded the file %(object_name)s"
-msgstr "%(sender_name)s heeft het bestand %(object_name)s geüpload"
-
-#, python-format
-msgid "%(sender_name)s uploaded %(count)d files"
-msgstr "%(sender_name)s heeft %(count)d bestand(en) geüpload"
-
-#, python-format
-msgid "%(sender_name)s created a new file"
-msgstr "%(sender_name)s heeft een nieuw bestand aangemaakt"
-
-#, python-format
-msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Een nieuw bestand: “%(object_name)s” is aangemaakt in %(team_name)s."
-
-msgid "A user uploaded a new file in a team you are following"
-msgstr "Een gebruiker heeft een nieuw bestand geüpload in een team dat je volgt"
-
-#, python-format
-msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s heeft een nieuw bestand aangemaakt in %(team_name)s (dat je volgt)"
-
-#, python-format
-msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "Een nieuw bestand: “%(object_name)s” is aangemaakt in %(team_name)s (dat je volgt)."
-
-msgid "Latest Files"
-msgstr "Nieuwste bestanden"
-
-msgid "No files"
-msgstr "Geen bestanden"
-
-msgid "Pictures"
-msgstr "Foto’s"
-
-msgid "Documents"
-msgstr "Documenten"
-
-msgid "Audio Files"
-msgstr "Audiobestanden"
-
-msgid "Videos"
-msgstr "Video’s"
-
-msgid "File Type"
-msgstr "Bestandstype"
-
-msgid "File Name"
-msgstr "Bestandsnaam"
-
-msgid "File Name (descending)"
-msgstr "Bestandsnaam (aflopend)"
-
-msgid "Smallest Files"
-msgstr "Kleinste bestanden"
-
-msgid "Largest Files"
-msgstr "Grootste bestanden"
-
-msgid "The given URL does not seem to be valid."
-msgstr "De opgegeven URL is niet geldig."
-
-msgid "Must supply either a URL or File"
-msgstr "URL of bestand opgeven is verplicht"
-
-msgid "Is URL Link"
-msgstr "Is URL link"
-
-msgid "Uploaded by"
-msgstr "Geüpload door"
-
-msgid "Uploaded on"
-msgstr "Geüpload op"
-
-msgid "No files selected."
-msgstr "Geen bestanden geselecteerd."
-
-msgctxt "special_folder_type"
-msgid "Attachments"
-msgstr "Bijlagen"
-
-msgid "File does not exist or you are not allowed to delete it."
-msgstr "Bestand bestaat niet of je mag het niet verwijderen."
-
-#, python-format
-msgid "A problem occurred during export. The following file is missing: %(filename)s."
-msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
-msgstr[0] "Er is een probleem opgetreden tijdens het exporteren. Het volgende bestand ontbreekt: %(filename)s."
-msgstr[1] "Er is een probleem opgetreden tijdens het exporteren. De volgende bestanden ontbreken: %(filename)s."
-
-msgid "Invalid request."
-msgstr "Ongeldige aanvraag."
-
-#, python-format
-msgid "File \"%(title)s\" was updated successfully."
-msgstr "Bestand “%(title)s” is succesvol geüpload."
-
-#, python-format
-msgid "File \"%(title)s\" could not be updated."
-msgstr "Bestand “%(title)s” kon niet worden bijgewerkt."
-
-msgid "Downloading failed, the target object was not a folder!"
-msgstr "Downloaden niet gelukt, het object was geen map!"
-
-msgid "Canceled the download because there seem to be no files in this folder."
-msgstr "Download is geannuleerd omdat er zich geen bestanden in deze map bevinden."
-
-msgid "Internal Error: Group not Found"
-msgstr ""
-
-msgid "Permission for upload denied"
-msgstr ""
-
-msgid "The uploaded file was invalid."
-msgstr ""
-
-#, python-format
-msgid "%(count)d File was added successfully."
-msgid_plural "%(count)d Files were added successfully."
-msgstr[0] "%(count)d bestand is succesvol toegevoegd."
-msgstr[1] "%(count)d bestanden zijn succesvol toegevoegd."
-
-msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
-msgstr ""
-
-msgctxt "the_app"
-msgid "marketplace"
-msgstr "marktplaats"
-
-msgid "A user created a new offer"
-msgstr "Een gebruiker heeft een nieuwe aanbieding aangemaakt"
-
-#, python-format
-msgid "%(sender_name)s created the offer %(object_name)s"
-msgstr "%(sender_name)s heeft de aanbieding %(object_name)s aangemaakt"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d offers"
-msgstr "%(sender_name)s heeft %(count)d aanbiedingen aangemaakt"
-
-#, python-format
-msgid "%(sender_name)s created a new offer"
-msgstr "%(sender_name)s heeft een nieuwe aanbieding aangemaakt"
-
-#, python-format
-msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Nieuwe aanbieding: “%(object_name)s” aangemaakt in %(team_name)s."
-
-msgid "One of your offers expired"
-msgstr "Eén van je aanbiedingen is verlopen"
-
-#, python-format
-msgid "Your offer %(object_name)s expired"
-msgstr "Je aanbieding %(object_name)s is verlopen"
-
-#, python-format
-msgid "%(count)d of your offers expired"
-msgstr "%(count)d van je aanbiedingen is/zijn verlopen"
-
-msgid "Your offer has expired"
-msgstr "Je aanbieding is verlopen"
-
-#, python-format
-msgid "Offer \"%(object_name)s\" has expired."
-msgstr "Aanbieding “%(object_name)s” is verlopen."
-
-msgid "A user commented on one of your offers"
-msgstr "Een gebruiker heeft gereageerd op één van je aanbiedingen"
-
-#, python-format
-msgid "%(sender_name)s commented on your offer %(object_name)s"
-msgstr "%(sender_name)s heeft gereageerd op je aanbieding %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
-msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben gereageerd op je aanbieding %(object_name)s"
-msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben gereageerd op je aanbieding %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your offer"
-msgstr "%(sender_name)s heeft gereageerd op je aanbieding"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your offers"
-msgstr "%(sender_name)s heeft gereageerd op één van je aanbiedingen"
-
-msgid "A user commented on an offer you were tagged in"
-msgstr "Een gebruiker heeft gereageerd op een aanbieding waarin je bent getagd"
-
-#, python-format
-msgid "%(sender_name)s commented on the offer %(object_name)s"
-msgstr "%(sender_name)s heeft gereageerd op aanbieding %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
-msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben gereageerd op de aanbieding %(object_name)s"
-msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben gereageerd op de aanbieding %(object_name)s"
-
-msgid "You were tagged in this offer"
-msgstr "Je bent getagd in deze aanbieding"
-
-#, python-format
-msgid "%(sender_name)s commented on an offer you were tagged in"
-msgstr "%(sender_name)s heeft gereageerd op een aanbieding waarin je bent getagd"
-
-#, python-format
-msgid "%(sender_name)s commented on an offer you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s heeft gereageerd op een aanbieding waarin je bent getagd in %(team_name)s"
-
-msgid "A user created a new offer in a team you are following"
-msgstr "Een gebruiker heeft een nieuwe aanbieding aangemaakt in een team dat je volgt"
-
-#, python-format
-msgid "%(sender_name)s created a new offer in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s heeft een nieuwe aanbieding aangemaakt in %(team_name)s (dat je volgt)"
-
-#, python-format
-msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "Er is een nieuwe aanbieding: “%(object_name)s” aangemaakt in %(team_name)s (dat je volgt)."
-
-msgid "A user updated an offer you are following"
-msgstr "Een gebruiker heeft een aanbieding die je volgt bijgewerkt"
-
-#, python-format
-msgid "%(sender_name)s updated the offer %(object_name)s"
-msgstr "%(sender_name)s heeft de aanbieding %(object_name)s bijgewerkt"
-
-msgid "You are following this offer"
-msgstr "Je volgt deze aanbieding"
-
-#, python-format
-msgid "%(sender_name)s updated an offer you are following"
-msgstr "%(sender_name)s heeft een aanbieding die je volgt bijgewerkt"
-
-#, python-format
-msgid "An offer you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "Een aanbieding die je volgt: “%(object_name)s” is bijgewerkt in %(team_name)s."
-
-msgid "A user commented on an offer you are following"
-msgstr "Een gebruiker heeft gereageerd op een aanbieding die je volgt"
-
-#, python-format
-msgid "%(sender_name)s commented on on an offer you are following"
-msgstr "%(sender_name)s heeft gereageerd op een aanbieding die je volgt"
-
-msgid "Current Offers"
-msgstr "Actuele aanbiedingen"
-
-msgid "No current offers"
-msgstr "Geen actuele aanbiedingen"
-
-msgid "Order Key"
-msgstr "Sorteren"
-
-msgid "Looking for"
-msgstr "Op zoek naar"
-
-msgid "Offering"
-msgstr "Biedt aan"
-
-msgid "Offer currently active?"
-msgstr "Aanbieding momenteel actief?"
-
-msgid "Offer Category"
-msgstr "Aanbieding categorie"
-
-#, python-format
-msgid "Offer: %(offer)s (%(type)s)"
-msgstr "Aanbieding: %(offer)s (%(type)s)"
-
-#, python-format
-msgid "Offer \"%(title)s\" was edited successfully."
-msgstr "Aanbieding “%(title)s” is succesvol gewijzigd."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be edited."
-msgstr "Aanbieding “%(title)s” kon niet worden gewijzigd."
-
-#, python-format
-msgid "Offer \"%(title)s\" was added successfully."
-msgstr "Aanbieding “%(title)s” is succesvol toegevoegd."
-
-#, python-format
-msgid "Offer \"%(title)s\" was saved successfully, but is not active yet."
-msgstr "Aanbieding “%(title)s” is succesvol opgeslagen, maar nog niet actief."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be added."
-msgstr "Aanbieding “%(title)s” kon niet worden toegevoegd."
-
-#, python-format
-msgid "Offer \"%(title)s\" was deleted successfully."
-msgstr "Aanbieding “%(title)s” is succesvol verwijderd."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be deleted."
-msgstr "Aanbieding “%(title)s” kon niet worden verwijderd."
-
-msgid "The offer you requested is no longer active. Sorry!"
-msgstr "De opgevraagde aanbieding is niet meer actief. Sorry!"
-
-msgid "Invalid action for this offer. The request could not be completed!"
-msgstr "Ongeldige actie voor deze aanbieding. Het verzoek kon niet worden voltooid!"
-
-msgid "The offer is already active"
-msgstr "De aanbieding is al actief"
-
-msgid "The offer is already deactivated"
-msgstr "De aanbieding is al gedeactiveerd"
-
-msgid "The offer was deactivated successfully."
-msgstr "De aanbieding is succesvol gedeactiveerd."
-
-msgid "The offer was reactivated successfully."
-msgstr "De aanbieding is succesvol gereactiveerd."
-
-msgid "The offer was activated successfully."
-msgstr "De aanbieding is succesvol geactiveerd."
-
-msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
-msgstr ""
-
-msgctxt "the_app"
-msgid "Chat"
-msgstr ""
-
-msgctxt "the_app"
-msgid "message"
-msgstr "bericht"
-
-msgid "Chat"
-msgstr ""
-
-msgid "Only Administrators may send a message to this project/group!"
-msgstr "Alleen beheerders mogen een bericht sturen naar dit project/deze groep!"
-
-msgid "Additional Recipients"
-msgstr "Verdere ontvangers"
-
-msgid "Undefined recipient."
-msgstr "Ongedefinieerde ontvanger."
-
-msgid "Your reply could not be matched to an existing message."
-msgstr "Je antwoord kon niet worden gekoppeld aan een bestaand bericht."
-
-msgid "An internal error occured."
-msgstr "Er is een interne fout opgetreden."
-
-msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
-msgstr "Het e-mailadres waarmee je het antwoord hebt verstuurd, is niet het adres dat aan je gebruikersaccount is gekoppeld. Stuur directe antwoorden alleen vanaf het e-mailadres waarmee je op de site bent geregistreerd!"
-
-msgid "There was an error when processing your message text!"
-msgstr "Er is een fout opgetreden bij het verwerken van je bericht!"
-
-msgid "Your direct reply failed!"
-msgstr "Je antwoord is niet gelukt!"
-
-msgid "Select at least one object."
-msgstr "Selecteer minstens één ontvanger."
-
-msgid "Messages or conversations successfully archived."
-msgstr "Berichten of gesprekken succesvol gearchiveerd."
-
-msgid "Messages or conversations successfully deleted."
-msgstr "Berichten of gesprekken succesvol verwijderd."
-
-msgid "Messages were marked as read."
-msgstr "Berichten zijn gemarkeerd als gelezen."
-
-msgid "Messages or conversations successfully recovered."
-msgstr "Berichten of gesprekken zijn succesvol hersteld."
-
-# Depending on what this app and it's content is really about, a more formal translation would be 'Nieuws', or 'Nieuwsberichten'. 
-msgid "Notes"
-msgstr "Nieuwtjes"
-
-msgctxt "the_app"
-msgid "note"
-msgstr "nieuwtjes"
-
-# Nieuwsbericht?
-msgid "A user commented on a news post"
-msgstr "Een gebruiker heeft gereageerd op een nieuwtje"
-
-#, python-format
-msgid "%(sender_name)s commented on a news post"
-msgstr "%(sender_name)s heeft gereageerd op een nieuwtje"
-
-msgid "A user commented on one of your news posts"
-msgstr "Een gebruiker heeft op een van je nieuwtjes gereageerd"
-
-#, python-format
-msgid "%(sender_name)s commented on your news post %(object_name)s"
-msgstr "%(sender_name)s heeft op je nieuwtje %(object_name)s gereageerd"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
-msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben op je nieuwtje %(object_name)s gereageerd"
-msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben op je nieuwtje %(object_name)s gereageerd"
-
-#, python-format
-msgid "%(sender_name)s commented on your news post"
-msgstr "%(sender_name)s heeft gereageerd op je nieuwtje"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your news posts"
-msgstr "%(sender_name)s heeft gereageerd op één van je nieuwtjes"
-
-msgid "A user commented on a news posts you commented in"
-msgstr "Een gebruiker heeft gereageerd op een nieuwtje waarop je hebt gereageerd"
-
-#, python-format
-msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
-msgstr "%(sender_name)s heeft gereageerd op nieuwtje %(object_name)s waarop je hebt gereageerd"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
-msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben gereageerd op nieuwtje %(object_name)s waarop je hebt gereageerd"
-msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben gereageerd op nieuwtje %(object_name)s waarop je hebt gereageerd"
-
-#, python-format
-msgid "%(sender_name)s commented on a news post you commented in"
-msgstr "%(sender_name)s heeft gereageerd op een nieuwtje waarop je hebt gereageerd"
-
-msgid "A user created a news post"
-msgstr "Een gebruiker heeft een nieuwtje geplaatst"
-
-# aangemaakt of geplaatst?
-#, python-format
-msgid "%(sender_name)s created the news post %(object_name)s"
-msgstr "%(sender_name)s heeft het nieuwtje %(object_name)s geplaatst"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d news posts"
-msgstr "%(sender_name)s heeft %(count)d nieuwtjes geplaatst"
-
-#, python-format
-msgid "%(sender_name)s created a new news post"
-msgstr "%(sender_name)s heeft een nieuw nieuwtje geplaatst"
-
-#, python-format
-msgid "%(sender_name)s posted in %(team_name)s:"
-msgstr "%(sender_name)s plaatste in %(team_name)s:"
-
-msgid "A user created a news post in a team you are following"
-msgstr "Een gebruiker heeft een nieuwtje geplaatst in een team dat je volgt"
-
-#, python-format
-msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s heeft zojuist nieuwtje geplaatst in %(team_name)s (dat je volgt)"
-
-#, python-format
-msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
-msgstr "%(sender_name)s plaatste in %(team_name)s: (dat je volgt)"
-
-msgid "A user updated a news post"
-msgstr "Een gebruiker heeft een nieuwtje bijgewerkt"
-
-#, python-format
-msgid "%(sender_name)s updated the news post %(object_name)s"
-msgstr "%(sender_name)s heeft het nieuwtje %(object_name)s bijgewerkt"
-
-msgid "You are following this news post"
-msgstr "Je volgt dit nieuwtje"
-
-#, python-format
-msgid "%(sender_name)s updated a news post you are following"
-msgstr "%(sender_name)s heeft een nieuwtje dat je volgt bijgewerkt"
-
-#, python-format
-msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
-msgstr "Een nieuwtje dat je volgt van %(sender_name)s is bijgewerkt in %(team_name)s:"
-
-msgid "A user commented on a news post you are following"
-msgstr "Een gebruiker heeft gereageerd op een nieuwtje dat je volgt"
-
-#, python-format
-msgid "%(sender_name)s commented on the news post %(object_name)s"
-msgstr "%(sender_name)s heeft gereageerd op het nieuwtje %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
-msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben op het nieuwtje %(object_name)s gereageerd"
-msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben op het nieuwtje %(object_name)s gereageerd"
-
-#, python-format
-msgid "%(sender_name)s commented on a news posts you are following"
-msgstr "%(sender_name)s heeft gereageerd op een nieuwtje dat je volgt"
-
-msgid "No news"
-msgstr "Geen nieuws"
-
-msgid "Write a news post"
-msgstr "Schrijf een nieuwtje"
-
-msgid "News stream"
-msgstr "Nieuws stream"
-
-msgid "Popularity"
-msgstr "Populariteit"
-
-msgid "Facebook Share"
-msgstr "Facebook delen"
-
-msgid "Note Item"
-msgstr "Nieuwtje"
-
-msgid "Note Items"
-msgstr "Nieuwtjes"
-
-msgid "Your news post was added successfully."
-msgstr "Je nieuwtje is succesvol toegevoegd."
-
-msgid "Your news post was deleted successfully."
-msgstr "Je nieuwtje is succesvol verwijderd."
-
-msgid "Your news post was edited successfully."
-msgstr "Je nieuwtje is succesvol gewijzigd."
-
-msgid "You are seeing this alert because you created this content."
-msgstr "Je ziet deze melding omdat je deze inhoud hebt aangemaakt."
-
-msgid "You are seeing this alert because you are following the item's project or group."
-msgstr "Je ziet deze melding omdat je het item in dit project of deze groep volgt."
-
-msgid "You are seeing this alert because you are following this item."
-msgstr "Je ziet deze melding omdat je dit item volgt."
-
-msgctxt "the_app"
-msgid "notifications"
-msgstr "meldingen"
-
-#, python-format
-msgid "Your daily digest for %(portal_name)s"
-msgstr "Je dagelijkse samenvatting voor %(portal_name)s"
-
-msgid "This is what happened during the last day!"
-msgstr "Dit is wat er afgelopen dag is gebeurd!"
-
-#, python-format
-msgid "Your weekly digest for %(portal_name)s"
-msgstr "Je wekelijkse samenvatting voor %(portal_name)s"
-
-msgid "This is what happened during the last week!"
-msgstr "Dit is wat er afgelopen week is gebeurd!"
-
-msgctxt "notification frequency"
-msgid "Never"
-msgstr "Nooit"
-
-msgctxt "notification frequency"
-msgid "Immediately"
-msgstr "Onmiddelijk"
-
-msgctxt "notification frequency"
-msgid "Daily"
-msgstr "Dagelijks"
-
-msgctxt "notification frequency"
-msgid "Weekly"
-msgstr "Wekelijks"
-
-msgid "Notification Preference for User"
-msgstr "Meldingsvoorkeuren voor gebruiker"
-
-msgid "Notification Preference"
-msgstr "Meldingsvoorkeuren"
-
-msgid "Multi Notification ID"
-msgstr "Multi-notificatie ID"
-
-msgid "Multi Notification Preference"
-msgstr "Multi-notificatievoorkeuren"
-
-msgid "Multi Notification Preferences"
-msgstr "Multi-notificatievoorkeuren"
-
-msgid "User who caused this notification event"
-msgstr "Gebruiker die deze meldingsgebeurtenis heeft veroorzaakt"
-
-msgid "Audience"
-msgstr "Publiek"
-
-msgid "Owner of the alert"
-msgstr "Eigenaar van de melding"
-
-msgid "Alert Reason key"
-msgstr "Alert Reason key"
-
-msgid "Last user who caused this notification event"
-msgstr "Laatste gebruiker die deze meldingsgebeurtenis heeft veroorzaakt"
-
-msgid "Alert State"
-msgstr "Meldingsstatus"
-
-msgid "You are following this content or its Project or Group"
-msgstr "Je volgt deze inhoud of bijbehorende project of groep"
-
-msgid "All notifications"
-msgstr "Alle meldingen"
-
-msgid "No notifications"
-msgstr "Geen meldingen"
-
-msgid "For content that I am following, I wish to receive notification emails"
-msgstr "Voor inhoud die ik volg, wil ik meldingen per e-mail ontvangen"
-
-msgid "You are getting this notification because you are subscribed to these kinds of events in your project or group."
-msgstr "Je ontvangt deze melding omdat je bent geabonneerd op dit soort evenementen in je project of groep."
-
-msgid "You are getting this notification because you are an administrator of this project or group."
-msgstr "Je ontvangt deze melding omdat je beheerder bent van dit project of deze groep."
-
-msgid "You are getting this notification because you are an administrator of this portal."
-msgstr "Je ontvangt deze melding omdat je beheerder bent van dit portal."
-
-msgid "You are getting this email because you are subscribed to one or more daily notifications."
-msgstr "Je ontvangt deze e-mail omdat je bent geabonneerd op een of meer dagelijkse meldingen."
-
-msgid "You are getting this email because you are subscribed to one or more weekly notifications."
-msgstr "Je ontvangt deze e-mail omdat je bent geabonneerd op een of meer wekelijkse meldingen."
-
-msgid "New item"
-msgstr "Nieuw item"
-
-#, python-format
-msgid "View on %(portal_name)s"
-msgstr "Bekijken op %(portal_name)s"
-
-msgid "Untitled"
-msgstr "Zonder titel"
-
-msgid "Your notification preferences were updated successfully."
-msgstr "Je meldingsvoorkeuren zijn succesvol bijgewerkt."
-
-msgid "Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!"
-msgstr ""
-
-msgid "Your notifications preferences were reset to default!"
-msgstr "Je meldingsvoorkeuren zijn gereset naar de standaardinstelling!"
-
-msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
-msgstr ""
-
-#, fuzzy
-#| msgid "Successfully removed user"
-msgid "Successfully signed in as {}."
-msgstr "Gebruiker succesvol verwijderd"
-
-#, fuzzy
-#| msgid "Successfully deactivated user account"
-msgid "Successfully connected account."
-msgstr "Gebruikersaccount succesvol gedeactiveerd"
-
-#, fuzzy
-#| msgid "Successfully removed user"
-msgid "Successfully removed connection."
-msgstr "Gebruiker succesvol verwijderd"
-
-#, fuzzy
-#| msgid "Organization"
-msgctxt "the_app"
-msgid "organization"
-msgstr "Organisatie"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization membership"
-msgstr "Organisaties"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization memberships"
-msgstr "Organisaties"
-
-#, fuzzy
-#| msgid "Team Invite for Unregistered User"
-msgid "Organization Invite for Unregistered User"
-msgstr "Team uitnodiging voor ongeregistreerde gebruiker"
-
-#, fuzzy
-#| msgid "Team Invites for Unregistered Users"
-msgid "Organization Invites for Unregistered Users"
-msgstr "Team uitnodigingen voor ongeregistreerde gebruikers"
-
-#, fuzzy
-msgid "Civil society organization"
-msgstr "Alle organisaties"
-
-msgid "Company (commercial)"
-msgstr ""
-
-#, fuzzy
-#| msgid "Public voting"
-msgid "Public institution"
-msgstr "Openbare stemming"
-
-#, fuzzy
-#| msgid "Other teams"
-msgid "Other"
-msgstr "Andere teams"
-
-#, fuzzy
-msgid "Name of the organization"
-msgstr "Locatie verwijderen"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Organization type"
-msgstr "Organisatie"
-
-#, fuzzy
-#| msgid "Logout"
-msgid "Logo"
-msgstr "Uitloggen"
-
-#, fuzzy
-#| msgid "Email address"
-msgid "Email Address"
-msgstr "E-mailadres"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Cosinnus Organization"
-msgstr "Organisatie"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Cosinnus Organizations"
-msgstr "Organisaties"
-
-msgid "CosinnusOrganizationSocialMedia"
-msgstr ""
-
-#, fuzzy
-#| msgid "CosinnusLocation"
-msgid "CosinnusOrganizationLocation"
-msgstr "CosinnusLocatie"
-
-#, fuzzy
-#| msgid "CosinnusLocations"
-msgid "CosinnusOrganizationLocations"
-msgstr "CosinnusLocaties"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Organization group"
-msgstr "Organisatie"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization groups"
-msgstr "Organisaties"
-
-#, fuzzy, python-format
-msgid "Project/group %(name)s had already requested and has now been accepted."
-msgstr "Je was al uitgenodigd voor “%(team_name)s” en je bent nu direct lid geworden!"
-
-#, fuzzy, python-format
-#| msgid "User %(username)s was successfully invited!"
-msgid "Project/group %(name)s was successfully invited."
-msgstr "Gebruiker %(username)s is succesvol uitgenodigd!"
-
-#, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
-msgid "Your join request was withdrawn from organization “%(name)s” successfully."
-msgstr "Je aanmeldingsverzoek is succesvol ingetrokken van %(team_type)s “%(team_name)s”."
-
-#, fuzzy, python-format
-msgid "You have declined the invitation to organization “%(name)s”."
-msgstr "Je bent niet langer lid van de %(team_type)s “%(team_name)s”."
-
-#, fuzzy, python-format
-#| msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
-msgid "Your project/group is now assigned to the organization “%(name)s”. Welcome!"
-msgstr "Je bent nu lid van %(team_type)s “%(team_name)s”. Welkom!"
-
-#, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
-msgid "Your request was withdrawn from organization \"%(name)s\" successfully."
-msgstr "Je aanvraag tot deelname aan %(team_type)s “%(team_name)s” is succesvol ingetrokken."
-
-#, fuzzy, python-format
-#| msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
-msgid "Your invitation to project/group \"%(name)s\" was withdrawn successfully."
-msgstr "Je uitnodiging voor gebruiker “%(username)s” is succesvol ingetrokken."
-
-#, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
-msgid "Project/group \"%(name)s\" is no longer assigned."
-msgstr "Gebruiker “%(username)s” is geen lid meer."
-
-#, fuzzy
-#| msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
-msgid "Sorry, only portal administrators can create Organizations! You can either create a Project, or write a message to one of the administrators to create a Organization for you. Below you can find a listing of all administrators."
-msgstr "Sorry, alleen portalbeheerders kunnen groepen maken. Je kunt een project starten of een bericht schrijven naar een van de beheerders om een groep voor je te aan te maken. Hieronder vind je een lijst met alle beheerders."
-
-#, fuzzy, python-format
-#| msgid "Event \"%(title)s\" was edited successfully."
-msgid "Organization \"%(name)s\" was created successfully."
-msgstr "Evenement “%(title)s” is succesvol gewijzigd."
-
-#, fuzzy
-#| msgid "Your idea was deleted successfully."
-msgid "Your organization was deleted successfully."
-msgstr "Je idee is succesvol verwijderd."
-
-msgctxt "the_app"
-msgid "poll"
-msgstr "poll"
-
-msgid "A user created a new poll"
-msgstr "Een gebruiker heeft een nieuwe poll aangemaakt"
-
-#, python-format
-msgid "%(sender_name)s created the poll %(object_name)s"
-msgstr "%(sender_name)s heeft de poll %(object_name)s aangemaakt"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d polls"
-msgstr "%(sender_name)s heeft %(count)d polls aangemaakt"
-
-#, python-format
-msgid "%(sender_name)s created a new poll"
-msgstr "%(sender_name)s heeft een nieuwe poll aangemaakt"
-
-#, python-format
-msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Er is een nieuwe poll: “%(object_name)s” aangemaakt in %(team_name)s."
-
-msgid "A poll you voted on was completed"
-msgstr "Een poll waarop je hebt gestemd is voltooid"
-
-#, python-format
-msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
-msgstr "%(sender_name)s heeft de poll %(object_name)s waarop je hebt gestemd voltooid"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d polls you voted on"
-msgstr "%(sender_name)s heeft %(count)d polls waarop je hebt gestemd voltooid"
-
-#, python-format
-msgid "%(sender_name)s completed the poll"
-msgstr "%(sender_name)s heeft de poll voltooid"
-
-#, python-format
-msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
-msgstr "Poll “%(object_name)s” is voltooid in %(team_name)s."
-
-msgid "A user commented on one of your polls"
-msgstr "Een gebruiker heeft op één van je polls gereageerd"
-
-#, python-format
-msgid "%(sender_name)s commented on your poll %(object_name)s"
-msgstr "%(sender_name)s heeft gereageerd op jouw poll %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
-msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben gereageerd op jouw poll %(object_name)s"
-msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben gereageerd op jouw poll %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your poll"
-msgstr "%(sender_name)s heeft op je poll gereageerd"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your polls"
-msgstr "%(sender_name)s heeft op één van je polls gereageerd"
-
-msgid "A user commented on a poll you were tagged in"
-msgstr "Een gebruiker heeft gereageerd op een poll waarin je bent getagd"
-
-#, python-format
-msgid "%(sender_name)s commented on the poll %(object_name)s"
-msgstr "%(sender_name)s heeft gereageerd op de poll %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
-msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben gereageerd op de poll %(object_name)s"
-msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben gereageerd op de poll %(object_name)s"
-
-msgid "You were tagged in this poll"
-msgstr "Je bent getagd in deze poll"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you were tagged in"
-msgstr "%(sender_name)s heeft gereageerd op een poll waarin je bent getagd"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s heeft gereageerd op een poll waarin je bent getagd in %(team_name)s"
-
-msgid "A user commented on an poll you voted in"
-msgstr "Een gebruiker heeft gereageerd op een poll waarop je hebt gestemd"
-
-msgid "You voted on this poll"
-msgstr "Je hebt op deze poll gestemd"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you voted in"
-msgstr "%(sender_name)s heeft gereageerd op een poll waarop je hebt gestemd"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
-msgstr "%(sender_name)s heeft gereageerd op een poll waarop je hebt gestemd in %(team_name)s"
-
-msgid "A user created a new poll in a team you are following"
-msgstr "Een gebruiker heeft een nieuwe poll aangemaakt in een team dat je volgt"
-
-#, python-format
-msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s heeft een nieuwe poll aangemaakt in %(team_name)s (dat je volgt)"
-
-#, python-format
-msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "Een nieuwe poll: “%(object_name)s” is aangemaakt in %(team_name)s (dat je volgt)."
-
-msgid "A user updated a poll you are following"
-msgstr "Een gebruiker heeft een poll die je volgt bijgewerkt"
-
-#, python-format
-msgid "%(sender_name)s updated the poll %(object_name)s"
-msgstr "%(sender_name)s heeft de poll %(object_name)s bijgewerkt"
-
-msgid "You are following this poll"
-msgstr "Je volgt deze poll"
-
-#, python-format
-msgid "%(sender_name)s updated a poll you are following"
-msgstr "%(sender_name)s heeft een poll die je volgt bijgewerkt"
-
-#, python-format
-msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "Een poll die je volgt: ”%(object_name)s” is bijgewerkt in %(team_name)s."
-
-msgid "A poll you are following was completed"
-msgstr "Een poll die je volgt is voltooid"
-
-#, python-format
-msgid "%(sender_name)s completed the poll %(object_name)s"
-msgstr "%(sender_name)s heeft de poll %(object_name)s voltooid"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d polls"
-msgstr "%(sender_name)s heeft %(count)d polls voltooid"
-
-#, python-format
-msgid "%(sender_name)s completed the poll you are following"
-msgstr "%(sender_name)s heeft de poll die je volgt voltooid"
-
-#, python-format
-msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
-msgstr "Poll “%(object_name)s” die je volgt in %(team_name)s is voltooid."
-
-msgid "A user commented on one a poll you are following"
-msgstr "Een gebruiker heeft gereageerd op een poll die je volgt"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you are following"
-msgstr "%(sender_name)s heeft gereageerd op een poll die je volgt"
-
-msgid "Current Polls"
-msgstr "Actuele polls"
-
-msgid "No current polls"
-msgstr "Geen actuele polls"
-
-msgid "You must write a description for this poll option!"
-msgstr "Geef een beschrijving voor deze optie!"
-
-msgid "Voting closed"
-msgstr "Stemming gesloten"
-
-msgid "Poll archived"
-msgstr "Poll gearchiveerd"
-
-msgid "Multiple options votable"
-msgstr "Meerdere opties stembaar"
-
-msgid "Does this poll allow users to vote on multiple options or just decide for one?"
-msgstr "Is het mogelijk om op meerdere opties te stemmen of moet er één gekozen worden?"
-
-msgid "\"Maybe\" option enabled"
-msgstr "Optie “misschien” ingeschakeld"
-
-msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
-msgstr "Is de optie misschien ingeschakeld? Wordt genegeerd en behandeld als False if ``multiple_votes==False``"
-
-msgid "Anyone can vote"
-msgstr "Iedereen kan stemmen"
-
-msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
-msgstr "Indien ja, kan iedereen die deze poll kan zien ook stemmen. Indien nee, alleen groepsleden kunnen stemmen."
-
-msgid "Show voters"
-msgstr "Toon stemmers"
-
-msgid "If true, display a list of which user voted for each option."
-msgstr "Indien gekozen, wordt getoond welke gebruikers voor elke optie hebben gestemd."
-
-msgid "Winning Option"
-msgstr "Winnende optie"
-
-#, python-format
-msgid "Poll: %(poll)s (%(state)s)"
-msgstr "Poll: %(poll)s (%(state)s)"
-
-msgid "Poll Option"
-msgstr "Poll optie"
-
-msgid "Poll Options"
-msgstr "Poll opties"
-
-#, python-format
-msgid "Poll \"%(title)s\" was edited successfully."
-msgstr "Poll “%(title)s” is succesvol gewijzigd."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be edited."
-msgstr "Poll “%(title)s” kon niet worden gewijzigd."
-
-#, python-format
-msgid "Poll \"%(title)s\" was added successfully."
-msgstr "Poll “%(title)s” is succesvol toegevoegd."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be added."
-msgstr "Poll “%(title)s” kon niet worden toegevoegd."
-
-msgid "You should define at least one poll option!"
-msgstr "Je moet minstens één optie definiëren!"
-
-msgid "This poll is archived and cannot be edited anymore!"
-msgstr "Deze poll is gearchiveerd en kan niet meer worden bewerkt!"
-
-#, python-format
-msgid "Poll \"%(title)s\" was deleted successfully."
-msgstr "Poll “%(title)s” is succesvol verwijderd."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be deleted."
-msgstr "Poll “%(title)s” kon niet verwijderd worden."
-
-msgid "The voting phase for this poll is over. You cannot vote for it any more."
-msgstr "De stemfase voor deze poll is voorbij. Je kunt niet meer stemmen."
-
-msgid "In this poll you must vote for exactly one item!"
-msgstr "In deze poll kun je maar op één optie stemmen!"
-
-msgid "Invalid action for this poll. The request could not be completed!"
-msgstr "Ongeldige actie voor deze poll. Het verzoek kon niet worden voltooid!"
-
-msgid "This action is not permitted for this poll at this stage!"
-msgstr "Deze actie is in deze fase niet toegestaan voor deze poll!"
-
-msgid "The poll was closed successfully."
-msgstr "De poll is succesvol afgesloten."
-
-msgid "The poll was re-opened successfully."
-msgstr "De poll is succesvol heropend."
-
-msgid "The poll was archived successfully."
-msgstr "De poll is succesvol gearchiveerd."
-
-# What is this app about?
-# Translation: Stream or Activiteiten?
-msgid "Stream"
-msgstr "Activiteiten"
-
-msgctxt "the_app"
-msgid "stream"
-msgstr "activiteiten"
-
-msgid "My Streams"
-msgstr "Mijn activiteiten"
-
-msgid "Streams"
-msgstr "Activiteiten"
-
-msgid "Models"
-msgstr "Modellen"
-
-msgid "Portal IDs"
-msgstr "Portal ID's"
-
-msgid "Last seen"
-msgstr "Laatst gezien"
-
-msgid "Special Stream"
-msgstr "Special Stream"
-
-msgid "Special Group IDs"
-msgstr "Special Group IDs"
-
-msgid "You do not have permission to access this stream."
-msgstr "Je hebt geen toestemming om deze activiteiten-feed te openen."
-
-msgid "Your stream was added successfully."
-msgstr "Je activiteiten-feed is succesvol toegevoegd."
-
-msgid "Your stream was updated successfully."
-msgstr "Je activiteiten-feed is succesvol bijgewerkt."
-
-msgid "Your stream was deleted successfully."
-msgstr "Je activiteiten-feed is succesvol verwijderd."
-
-msgid "You cannot delete the default stream!"
-msgstr "Je kunt de default activiteiten-feed niet verwijderen!"
-
-msgctxt "the_app"
-msgid "todo"
-msgstr "taken"
-
-msgid "A user created a new todo"
-msgstr "Een gebruiker heeft een nieuwe taak aangemaakt"
-
-#, python-format
-msgid "%(sender_name)s created the todo %(object_name)s"
-msgstr "%(sender_name)s heeft de taak %(object_name)s aangemaakt"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d todos"
-msgstr "%(sender_name)s heeft %(count)d taken aangemaakt"
-
-#, python-format
-msgid "%(sender_name)s created a new todo"
-msgstr "%(sender_name)s heeft een nieuwe taak aangemaakt"
-
-#, python-format
-msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Er is een nieuwe taak: “%(object_name)s” aangemaakt in %(team_name)s."
-
-msgid "A todo was assigned to me"
-msgstr "Er is mij een taak toegewezen"
-
-#, python-format
-msgid "%(sender_name)s assigned the todo %(object_name)s to you"
-msgstr "%(sender_name)s heeft de taak %(object_name)s aan je toegewezen"
-
-#, python-format
-msgid "%(sender_name)s assigned %(count)d todos to you"
-msgstr "%(sender_name)s heeft %(count)d taken aan je toegewezen"
-
-#, python-format
-msgid "%(sender_name)s assigned a todo to you"
-msgstr "%(sender_name)s heeft een taak aan je toegewezen"
-
-msgid "A todo I created was completed"
-msgstr "Een taak die ik heb aangemaakt is voltooid"
-
-#, python-format
-msgid "%(sender_name)s completed the todo %(object_name)s"
-msgstr "%(sender_name)s heeft de taak %(object_name)s voltooid"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d todos"
-msgstr "%(sender_name)s heeft %(count)d taken voltooid"
-
-msgid "You created this todo"
-msgstr "Je hebt deze taak aangemaakt"
-
-#, python-format
-msgid "%(sender_name)s completed your todo"
-msgstr "%(sender_name)s heeft jouw taak voltooid"
-
-#, python-format
-msgid "%(sender_name)s completed one of your todos"
-msgstr "%(sender_name)s heeft één van jouw taken voltooid"
-
-msgid "A user commented on one of your todos"
-msgstr "Een gebruiker heeft gereageerd op één van je taken"
-
-#, python-format
-msgid "%(sender_name)s commented on your todo %(object_name)s"
-msgstr "%(sender_name)s heeft gereageerd op je taak %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
-msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben gereageerd op je taak %(object_name)s"
-msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben gereageerd op je taak %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your todo"
-msgstr "%(sender_name)s heeft gereageerd op jouw taak"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your todos"
-msgstr "%(sender_name)s heeft gereageerd op één van je taken"
-
-msgid "A user commented on a todo you were tagged in"
-msgstr "Een gebruiker heeft gereageerd op een taak waarin je bent getagd"
-
-#, python-format
-msgid "%(sender_name)s commented on the todo %(object_name)s"
-msgstr "%(sender_name)s heeft gereageerd op de taak %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
-msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben gereageerd op de taak %(object_name)s"
-msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben gereageerd op je taak %(object_name)s"
-
-msgid "You were tagged in this todo"
-msgstr "Je bent getagd in deze taak"
-
-#, python-format
-msgid "%(sender_name)s commented on a todo you were tagged in"
-msgstr "%(sender_name)s heeft gereageerd op een taak waarin je bent getagd"
-
-#, python-format
-msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s heeft gereageerd op een taak waarin je bent getagd in %(team_name)s"
-
-msgid "A user commented on a todo you were assigned to"
-msgstr "Een gebruiker heeft gereageerd op een taak die aan jou is toegewezen"
-
-#, python-format
-msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
-msgstr "%(sender_name)s heeft gereageerd op de aan jouw toegewezen taak %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
-msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben gereageerd op jouw toegewezen taak %(object_name)s"
-msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben gereageerd op jouw toegewezen taak %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your assigned todos"
-msgstr "%(sender_name)s heeft gereageerd op een van je toegewezen taken"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
-msgstr "%(sender_name)s heeft gereageerd op één van je toegewezen taken in %(team_name)s"
-
-msgid "A user updated a todo you are following"
-msgstr "Een gebruiker heeft een taak die je volgt bijgewerkt"
-
-#, python-format
-msgid "%(sender_name)s updated the todo %(object_name)s"
-msgstr "%(sender_name)s heeft de taak %(object_name)s bijgewerkt"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
-msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben de taak %(object_name)s bijgewerkt"
-msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben de taak %(object_name)s bijgewerkt"
-
-msgid "You are following this todo"
-msgstr "Je volgt deze taak"
-
-#, python-format
-msgid "%(sender_name)s updated a todo you are following"
-msgstr "%(sender_name)s heeft een taak die je volgt bijgewerkt"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "Een taak die je volgt: “%(object_name)s” is bijgewerkt in %(team_name)s."
-
-msgid "A user reassigned a todo you are following"
-msgstr "Een gebruiker heeft een taak die je volgt opnieuw toegewezen"
-
-#, python-format
-msgid "%(sender_name)s reassigned the todo %(object_name)s"
-msgstr "%(sender_name)s heeft de taak %(object_name)s opnieuw toegewezen"
-
-#, python-format
-msgid "%(sender_name)s reassigned %(count)d todos"
-msgstr "%(sender_name)s heeft %(count)d taak's opnieuw toegewezen"
-
-#, python-format
-msgid "%(sender_name)s reassigned a todo you are following"
-msgstr "%(sender_name)s heeft een taak die je volgt opnieuw toegewezen"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
-msgstr "Een taak die je volgt: “%(object_name)s” is opnieuw toegewezen in %(team_name)s."
-
-msgid "A user completed a todo you are following"
-msgstr "Een gebruiker heeft een taak die je volgt voltooid"
-
-#, python-format
-msgid "%(sender_name)s completed a todo you are following"
-msgstr "%(sender_name)s heeft een taak die je volgt voltooid"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
-msgstr "Een taak die je volgt: “%(object_name)s” is voltooid in %(team_name)s."
-
-msgid "A user commented on a todo you are following"
-msgstr "Een gebruiker heeft gereageerd op een taak die je volgt"
-
-#, python-format
-msgid "%(sender_name)s commented on on a todo you are following"
-msgstr "%(sender_name)s heeft gereageerd op een taak die je volgt"
-
-msgid "My Todos"
-msgstr "Mijn taken"
-
-msgid "No todos"
-msgstr "Geen taken"
-
-msgid "Open"
-msgstr "Open"
-
-msgid "Completed"
-msgstr "Voltooid"
-
-msgid "Assigned To"
-msgstr "Toegewezen aan"
-
-msgid "Priority"
-msgstr "Prioriteit"
-
-# Vervaldatum
-msgid "Due date"
-msgstr "Opleveringsdatum"
-
-msgid "Soonest Due"
-msgstr "Binnenkort"
-
-msgid "You are not allowed to assign this Todo entry."
-msgstr "Je mag deze taak niet toewijzen."
-
-msgid "Later"
-msgstr "Later"
-
-msgid "Normal"
-msgstr "Normaal"
-
-msgid "Important"
-msgstr "Belangrijk"
-
-# Vervaldatum? Opleveringsdatum?
-msgid "Due by"
-msgstr "Opleveringsdatum"
-
-msgid "Completed on"
-msgstr "Voltooid op"
-
-msgid "Completed by"
-msgstr "Voltooid door"
-
-msgid "Assigned to"
-msgstr "Toegewezen aan"
-
-msgid "List"
-msgstr ""
-
-#, python-format
-msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
-msgstr "Taak “%(todo_name)s” is toegewezen aan %(assignee_name)s"
-
-#, python-format
-msgid "Todo \"%(title)s\" was added successfully."
-msgstr "Taak “%(title)s” is succesvol toegevoegd."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be added."
-msgstr "Taak “%(title)s” kon niet worden toegevoegd."
-
-msgid "You were trying to add a todo to a todolist that does not exist!"
-msgstr "Je hebt geprobeerd een taak toe te voegen aan een takenlijst die niet bestaat!"
-
-#, python-format
-msgid "Todo \"%(title)s\" was edited successfully."
-msgstr "Taak “%(title)s” is succesvol gewijzigd."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be edited."
-msgstr "Taak “%(title)s” kon niet worden gewijzigd."
-
-#, python-format
-msgid "Todo \"%(title)s\" was deleted successfully."
-msgstr "Taak “%(title)s” is succesvol verwijderd."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be deleted."
-msgstr "Taak “%(title)s” kon niet worden verwijderd."
-
-#, python-format
-msgid "Todo \"%(title)s\" was assigned successfully."
-msgstr "Taak “%(title)s” is succesvol toegewezen."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be assigned."
-msgstr "Taak “%(title)s” kon niet worden toegewezen."
-
-#, python-format
-msgid "Todo \"%(title)s\" was assigned to You successfully."
-msgstr "Taak “%(title)s” is succesvol aan jou toegewezen."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be assigned to You."
-msgstr "Taak “%(title)s” kon niet aan jou worden toegewezen."
-
-#, python-format
-msgid "Todo \"%(title)s\" was unassigned successfully."
-msgstr "Taak “%(title)s” is niet meer toegewezen."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be unassigned."
-msgstr "Taak “%(title)s” kon niet worden afgewezen."
-
-#, python-format
-msgid "Todo \"%(title)s\" was completed successfully."
-msgstr "Taak “%(title)s” is succesvol voltooid."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be completed."
-msgstr "Taak “%(title)s” kon niet worden voltooid."
-
-#, python-format
-msgid "Todo \"%(title)s\" was completed by You successfully."
-msgstr "Taak “%(title)s” is succesvol door jou voltooid."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be completed by You."
-msgstr "Taak “%(title)s” kon niet door jou worden voltooid."
-
-#, python-format
-msgid "Todo \"%(title)s\" was set to incomplete successfully."
-msgstr "Taak “%(title)s” is succesvol ingesteld op onvolledig."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be set to incomplete."
-msgstr "Taak “%(title)s” kon niet op onvolledig ingesteld worden."
-
-#, python-format
-msgid "Todolist \"%(title)s\" was edited successfully."
-msgstr "Takenlijst “%(title)s” is succesvol gewijzigd."
-
-#, python-format
-msgid "Todolist \"%(title)s\" could not be edited."
-msgstr "Takenlijst “%(title)s” kon niet worden gewijzigd."
-
-#, python-format
-msgid "Todolist \"%(title)s\" was added successfully."
-msgstr "Takenlijst “%(title)s” is succesvol toegevoegd."
-
-#, python-format
-msgid "Todolist \"%(title)s\" could not be added."
-msgstr "Takenlijst “%(title)s” kon niet worden toegevoegd."
-
-msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
-msgstr "Je kunt deze map niet verwijderen, omdat je geen toestemming hebt om een of meer van de items te verwijderen!"
-
-msgid "Sender and Recipient cannot be both undefined."
-msgstr ""
-
-msgid "Visitor's email is in excess."
-msgstr ""
-
-msgid "Visitor's email is missing."
-msgstr ""
-
-msgid "Reading date must be later than sending date."
-msgstr ""
-
-msgid "Deletion date by sender must be later than sending date."
-msgstr ""
-
-msgid "Deletion date by recipient must be later than sending date."
-msgstr ""
-
-msgid "Response date must be later than sending date."
-msgstr ""
-
-msgid "The message cannot be replied without having been read."
-msgstr ""
-
-msgid "Response date must be later than reading date."
-msgstr ""
-
-msgid "Response date cannot be set without at least one reply."
-msgstr ""
-
-#, fuzzy
-#| msgid "This message was sent in a conversation with: "
-msgid "The message cannot be replied without being in a conversation."
-msgstr "Dit bericht is verstuurd in een gesprek met: "
-
-msgid "Dates"
-msgstr "Data"
-
-#, fuzzy
-#| msgid "Is Moderator"
-msgid "Moderation"
-msgstr "Is moderator"
-
-#, python-brace-format
-msgid "Some usernames are unknown or no longer active: {users}."
-msgstr ""
-
-#, python-brace-format
-msgid "Ensure this value has at most {limit_value} distinct items (it has {show_value})."
-msgstr ""
-
-#, python-brace-format
-msgid "Ensure this value has at least {limit_value} distinct items (it has {show_value})."
-msgstr ""
-
-#, python-brace-format
-msgid "Some usernames are rejected: {users}."
-msgstr ""
-
-#, fuzzy, python-brace-format
-#| msgid "Your name"
-msgid "{username}"
-msgstr "Je naam"
-
-#, python-brace-format
-msgid "{username} ({reason})"
-msgstr ""
-
-#, python-brace-format
-msgid "Writing to some users is not possible: {users}."
-msgstr ""
-
-msgid "Recipient"
-msgstr "Ontvanger"
-
-#, fuzzy
-#| msgid "Additional Recipients"
-msgid "Additional recipients"
-msgstr "Verdere ontvangers"
-
-#, fuzzy
-#| msgid "Additional Recipients"
-msgid "Additional recipient"
-msgstr "Verdere ontvangers"
-
-#, fuzzy
-#| msgid "Message Project"
-msgid "Message Rejected"
-msgstr "Bericht project"
-
-#, fuzzy
-msgid "Your message has been rejected"
-msgstr "Je wijzigingen zijn opgeslagen."
-
-#, fuzzy
-#| msgid "Message Project"
-msgid "Message Received"
-msgstr "Bericht project"
-
-#, fuzzy
-msgid "You have received a message"
-msgstr "Je bent uitgenodigd om samen te werken!"
-
-msgid "Reply Received"
-msgstr ""
-
-#, fuzzy
-msgid "You have received a reply"
-msgstr "Je bent uitgenodigd om samen te werken!"
-
-msgid "Pending"
-msgstr ""
-
-#, fuzzy
-#| msgid "Restricted"
-msgid "Rejected"
-msgstr "Beperkt"
-
-#, fuzzy
-#| msgid "Everybody"
-msgid "body"
-msgstr "Iedereen"
-
-#, fuzzy
-msgid "sender"
-msgstr "Verzonden"
-
-#, fuzzy
-#| msgid "Recipient"
-msgid "recipient"
-msgstr "Ontvanger"
-
-#, fuzzy
-msgid "visitor"
-msgstr "Bezocht"
-
-#, fuzzy
-msgid "parent message"
-msgstr "Berichten"
-
-#, fuzzy
-#| msgid "No messages"
-msgid "root message"
-msgstr "Geen berichten"
-
-#, fuzzy
-#| msgid "Event date"
-msgid "sent at"
-msgstr "Datum evenement"
-
-msgid "read at"
-msgstr ""
-
-msgid "replied at"
-msgstr ""
-
-msgid "archived by sender"
-msgstr ""
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "archived by recipient"
-msgstr "Ongedefinieerde ontvanger."
-
-#, fuzzy
-#| msgid "New etherpad by %(sender_name)s"
-msgid "deleted by sender at"
-msgstr "Nieuw etherpad door %(sender_name)s"
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "deleted by recipient at"
-msgstr "Ongedefinieerde ontvanger."
-
-#, fuzzy
-#| msgid "Status"
-msgid "status"
-msgstr "Status"
-
-#, fuzzy
-#| msgid "Is Moderator"
-msgid "moderator"
-msgstr "Is moderator"
-
-#, fuzzy
-#| msgid "Related to"
-msgid "moderated at"
-msgstr "Gerelateerd tot"
-
-msgid "rejection reason"
-msgstr ""
-
-msgid "Direct Reply Hash"
-msgstr ""
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "message"
-msgstr "bericht"
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "messages"
-msgstr "bericht"
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "Undefined sender."
-msgstr "Ongedefinieerde ontvanger."
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "pending message"
-msgstr "bericht"
-
-#, fuzzy
-msgid "pending messages"
-msgstr "Berichten"
-
-msgid "<me>"
-msgstr ""
-
-msgid "> "
-msgstr ""
-
-#, python-brace-format
-msgid ""
-"\n"
-"\n"
-"{sender} wrote:\n"
-"{body}\n"
-msgstr ""
-
-#, python-brace-format
-msgid "Re: {subject}"
-msgstr ""
-
-#, fuzzy
-msgid "Message successfully sent."
-msgstr "Gebruiker %(username)s is succesvol uitgenodigd!"
-
-#, fuzzy
-#| msgid "Select at least one object."
-msgid "Message rejected for at least one recipient."
-msgstr "Selecteer minstens één ontvanger."
-
-msgid "A conference you are attending has been updated"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "The conference %(object_name)s has been updated"
-msgstr "Je bent getagd in “%(object_name)s” in %(team_name)s."
-
-#, fuzzy
-msgid "You are attending this conference"
-msgstr "Je staat op het punt dit project/deze groep te deactiveren!"
-
-#, fuzzy, python-format
-msgid "The conference \"%(object_name)s\" was updated."
-msgstr "Je bent getagd in “%(object_name)s” in %(team_name)s."
-
-msgid "The time of a conference you are attending has been updated"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "The time of conference %(object_name)s has been updated"
-msgstr "Je bent getagd in “%(object_name)s” in %(team_name)s."
-
-msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
-msgstr ""
-
-msgid "minute"
-msgstr ""
-
-msgid "minutes"
-msgstr ""
-
-msgid "Select the date range for which you would like statistics"
-msgstr ""
-
-msgid "Cloud Stub"
-msgstr "Cloud Stub"
-
-msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
-msgstr ""
-
-msgid "There are no cloud files yet"
-msgstr "Er zijn nog geen cloud bestanden"
-
-#, fuzzy
-msgid "Error message:"
-msgstr "Berichten"
-
-msgid "No error message supplied."
-msgstr ""
-
-msgid "Pad"
-msgstr "Pad"
-
-msgid "This pad can no longer be edited because its creator has deleted their account."
-msgstr "Dit pad kan niet meer worden gewijzigd omdat de maker zijn/haar account heeft verwijderd."
-
-#, python-format
-msgid "Do you really want to delete etherpad „%(pad)s“?"
-msgstr "Weet je zeker dat je etherpad „%(pad)s\" wilt verwijderen?"
-
-msgid "Delete Etherpad"
-msgstr "Etherpad verwijderen"
-
-msgid "This document is empty"
-msgstr "Dit document is leeg"
-
-msgid "Pads"
-msgstr "Pads"
-
-msgid "Enter a title for the Pad."
-msgstr "Voer een titel in voor het pad."
-
-msgid "Enter the title for a new Document or Table."
-msgstr "Voer een titel in voor een nieuw document of tabel."
-
-msgid "Enter the title for a new Document."
-msgstr "Voer een titel in voor een nieuw document."
-
-msgid "Create Etherpad"
-msgstr "Etherpad aanmaken"
-
-msgid "Create Ethercalc"
-msgstr "Ethercalc aanmaken"
-
-#, python-format
-msgid "Do you really want to delete etherpad „%(title)s“?"
-msgstr "Weet je zeker dat je etherpad „%(title)s“ wilt verwijderen?"
-
-msgid "No etherpads have been created yet."
-msgstr "Er zijn nog geen etherpads aangemaakt."
-
-msgid "Download CSV"
-msgstr "CSV downloaden"
-
-msgid "Download Excel"
-msgstr "Excel downloaden"
-
-#, python-format
-msgid ""
-"Hi %(receiver_name)s,\n"
-"\n"
-"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
-"\n"
-"You can find it by following this link: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s Team."
-msgstr ""
-"Hallo %(receiver_name)s,\n"
-"\n"
-"Er is een nieuw etherpad “%(object_name)s” in %(team_name)s aangemaakt door %(sender_name)s. \n"
-"\n"
-"Je kunt het vinden door op deze link te klikken %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Volg deze link om je meldingsinstellingen aan te passen: %(notification_settings_url)s )\n"
-"\n"
-"Jouw %(site_name)s team."
-
-msgid "You created a pad"
-msgstr "Je hebt een pad aangemaakt"
-
-msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
-msgid "created a Pad"
-msgstr "heeft een pad aangemaakt"
-
-msgid "There are no etherpads yet"
-msgstr "Er zijn nog geen etherpads"
-
 msgid "Would you like to create an event"
 msgstr "Wil je een evenement aanmaken?"
 
@@ -11138,6 +9487,9 @@ msgstr "Evenement polls"
 
 msgid "Enter a title for the new event to be scheduled."
 msgstr "Voer een titel in voor het nieuwe evenement dat moet worden gepland."
+
+msgid "Dates"
+msgstr "Data"
 
 msgid "Please select the available days in the calendar."
 msgstr "Selecteer de beschikbare dagen in de kalender."
@@ -11282,6 +9634,9 @@ msgstr "Terug naar evenementen polls"
 
 msgid "Return to Archived Event Polls"
 msgstr "Terug naar gearchiveerde evenementen polls"
+
+msgid "List"
+msgstr ""
 
 msgid "View"
 msgstr "Bekijken"
@@ -11629,6 +9984,200 @@ msgstr "heeft een evenement aangemaakt"
 msgid "Show all"
 msgstr "Toon alles"
 
+msgid "Upcoming events"
+msgstr "Aankomende evenementen"
+
+#, python-format
+msgid "Event \"%(title)s\" was edited successfully."
+msgstr "Evenement “%(title)s” is succesvol gewijzigd."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be edited."
+msgstr "Evenement “%(title)s” kon niet worden gewijzigd."
+
+msgid "Please use the conference management area to add new workshops!"
+msgstr ""
+
+msgid "The page you requested is not available for this event at this time."
+msgstr "De door jou opgevraagde pagina is momenteel niet beschikbaar voor dit evenement."
+
+msgid "One of the event suggestions times could not be understood!"
+msgstr "Eén van de tijdssuggesties voor een evenement kon niet worden begrepen!"
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was edited successfully."
+msgstr "Ongepland evenement “%(title)s” is succesvol gewijzigd."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be edited."
+msgstr "Ongepland evenement “%(title)s” kon niet worden gewijzigd."
+
+#, python-format
+msgid "Event \"%(title)s\" was added successfully."
+msgstr "Evenement “%(title)s” is succesvol toegevoegd."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be added."
+msgstr "Evenement “%(title)s” kon niet worden toegevoegd."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was added successfully."
+msgstr "Ongepland evenement “%(title)s” is succesvol toegevoegd."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be added."
+msgstr "Ongepland evenement “%(title)s” kon niet worden toegevoegd."
+
+msgid "You should define at least one date suggestion."
+msgstr "Je moet ten minste één suggestie voor een datum opgeven."
+
+#, python-format
+msgid "Event \"%(title)s\" was deleted successfully."
+msgstr "Evenement “%(title)s” is succesvol verwijderd."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be deleted."
+msgstr "Evenement “%(title)s” kon niet worden verwijderd."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was deleted successfully."
+msgstr "Ongepland evenement “%(title)s” is succesvol verwijderd."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be deleted."
+msgstr "Ongepland evenement “%(title)s” kon niet worden verwijderd."
+
+#, fuzzy
+msgid "Your votes were saved successfully."
+msgstr "Je idee is succesvol verwijderd."
+
+#, fuzzy
+#| msgid "Poll \"%(title)s\" could not be added."
+msgid "Your votes could not be saved."
+msgstr "Poll “%(title)s” kon niet worden toegevoegd."
+
+msgid "This is event is already scheduled. You cannot vote for it any more."
+msgstr "Dit evenement is al ingepland. Je kunt niet meer stemmen."
+
+msgid "The complete request can only be sent via POST!"
+msgstr "De voltooide aanvraag kan alleen worden verzonden via POST!"
+
+msgid "Event cannot be completed: No date was supplied."
+msgstr "Evenement kan niet worden voltooid: er is geen datum opgegeven."
+
+msgid "The event was created successfully at the specified date."
+msgstr "Het evenement is met succes aangemaakt op de opgegeven datum."
+
+#, fuzzy
+msgid "Upcoming event"
+msgstr "Aankomende evenementen"
+
+msgid "Your comment was added successfully."
+msgstr "Je reactie is succesvol toegevoegd."
+
+msgid "Your comment was deleted successfully."
+msgstr "Je reactie is succesvol verwijderd."
+
+#, fuzzy
+#| msgid "Save changes"
+msgid "Exchange"
+msgstr "Wijzigingen opslaan"
+
+#, fuzzy
+#| msgid "Save changes"
+msgctxt "the_app"
+msgid "exchange"
+msgstr "Wijzigingen opslaan"
+
+msgctxt "the_app"
+msgid "file"
+msgstr "bestand"
+
+msgid "A user uploaded a new file"
+msgstr "Een gebruiker heeft een nieuw bestand geüpload"
+
+#, python-format
+msgid "%(sender_name)s uploaded the file %(object_name)s"
+msgstr "%(sender_name)s heeft het bestand %(object_name)s geüpload"
+
+#, python-format
+msgid "%(sender_name)s uploaded %(count)d files"
+msgstr "%(sender_name)s heeft %(count)d bestand(en) geüpload"
+
+#, python-format
+msgid "%(sender_name)s created a new file"
+msgstr "%(sender_name)s heeft een nieuw bestand aangemaakt"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Een nieuw bestand: “%(object_name)s” is aangemaakt in %(team_name)s."
+
+msgid "A user uploaded a new file in a team you are following"
+msgstr "Een gebruiker heeft een nieuw bestand geüpload in een team dat je volgt"
+
+#, python-format
+msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s heeft een nieuw bestand aangemaakt in %(team_name)s (dat je volgt)"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Een nieuw bestand: “%(object_name)s” is aangemaakt in %(team_name)s (dat je volgt)."
+
+msgid "Latest Files"
+msgstr "Nieuwste bestanden"
+
+msgid "No files"
+msgstr "Geen bestanden"
+
+msgid "Pictures"
+msgstr "Foto’s"
+
+msgid "Documents"
+msgstr "Documenten"
+
+msgid "Audio Files"
+msgstr "Audiobestanden"
+
+msgid "Videos"
+msgstr "Video’s"
+
+msgid "File Type"
+msgstr "Bestandstype"
+
+msgid "File Name"
+msgstr "Bestandsnaam"
+
+msgid "File Name (descending)"
+msgstr "Bestandsnaam (aflopend)"
+
+msgid "Smallest Files"
+msgstr "Kleinste bestanden"
+
+msgid "Largest Files"
+msgstr "Grootste bestanden"
+
+msgid "The given URL does not seem to be valid."
+msgstr "De opgegeven URL is niet geldig."
+
+msgid "Must supply either a URL or File"
+msgstr "URL of bestand opgeven is verplicht"
+
+msgid "Is URL Link"
+msgstr "Is URL link"
+
+msgid "Uploaded by"
+msgstr "Geüpload door"
+
+msgid "Uploaded on"
+msgstr "Geüpload op"
+
+msgid "No files selected."
+msgstr "Geen bestanden geselecteerd."
+
+msgctxt "special_folder_type"
+msgid "Attachments"
+msgstr "Bijlagen"
+
 msgid "The URL you have entered does not seem to be valid!"
 msgstr "De opgegeven URL is niet geldig!"
 
@@ -11742,6 +10291,197 @@ msgstr "Nieuwste bestanden"
 
 msgid "There are no files  yet"
 msgstr "Er zijn nog geen bestanden"
+
+msgid "File does not exist or you are not allowed to delete it."
+msgstr "Bestand bestaat niet of je mag het niet verwijderen."
+
+#, python-format
+msgid "A problem occurred during export. The following file is missing: %(filename)s."
+msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
+msgstr[0] "Er is een probleem opgetreden tijdens het exporteren. Het volgende bestand ontbreekt: %(filename)s."
+msgstr[1] "Er is een probleem opgetreden tijdens het exporteren. De volgende bestanden ontbreken: %(filename)s."
+
+msgid "Invalid request."
+msgstr "Ongeldige aanvraag."
+
+#, python-format
+msgid "File \"%(title)s\" was updated successfully."
+msgstr "Bestand “%(title)s” is succesvol geüpload."
+
+#, python-format
+msgid "File \"%(title)s\" could not be updated."
+msgstr "Bestand “%(title)s” kon niet worden bijgewerkt."
+
+msgid "Downloading failed, the target object was not a folder!"
+msgstr "Downloaden niet gelukt, het object was geen map!"
+
+msgid "Canceled the download because there seem to be no files in this folder."
+msgstr "Download is geannuleerd omdat er zich geen bestanden in deze map bevinden."
+
+msgid "Internal Error: Group not Found"
+msgstr ""
+
+msgid "Permission for upload denied"
+msgstr ""
+
+msgid "The uploaded file was invalid."
+msgstr ""
+
+#, python-format
+msgid "%(count)d File was added successfully."
+msgid_plural "%(count)d Files were added successfully."
+msgstr[0] "%(count)d bestand is succesvol toegevoegd."
+msgstr[1] "%(count)d bestanden zijn succesvol toegevoegd."
+
+msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
+msgstr ""
+
+msgctxt "the_app"
+msgid "marketplace"
+msgstr "marktplaats"
+
+msgid "A user created a new offer"
+msgstr "Een gebruiker heeft een nieuwe aanbieding aangemaakt"
+
+#, python-format
+msgid "%(sender_name)s created the offer %(object_name)s"
+msgstr "%(sender_name)s heeft de aanbieding %(object_name)s aangemaakt"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d offers"
+msgstr "%(sender_name)s heeft %(count)d aanbiedingen aangemaakt"
+
+#, python-format
+msgid "%(sender_name)s created a new offer"
+msgstr "%(sender_name)s heeft een nieuwe aanbieding aangemaakt"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Nieuwe aanbieding: “%(object_name)s” aangemaakt in %(team_name)s."
+
+msgid "One of your offers expired"
+msgstr "Eén van je aanbiedingen is verlopen"
+
+#, python-format
+msgid "Your offer %(object_name)s expired"
+msgstr "Je aanbieding %(object_name)s is verlopen"
+
+#, python-format
+msgid "%(count)d of your offers expired"
+msgstr "%(count)d van je aanbiedingen is/zijn verlopen"
+
+msgid "Your offer has expired"
+msgstr "Je aanbieding is verlopen"
+
+#, python-format
+msgid "Offer \"%(object_name)s\" has expired."
+msgstr "Aanbieding “%(object_name)s” is verlopen."
+
+msgid "A user commented on one of your offers"
+msgstr "Een gebruiker heeft gereageerd op één van je aanbiedingen"
+
+#, python-format
+msgid "%(sender_name)s commented on your offer %(object_name)s"
+msgstr "%(sender_name)s heeft gereageerd op je aanbieding %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
+msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben gereageerd op je aanbieding %(object_name)s"
+msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben gereageerd op je aanbieding %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your offer"
+msgstr "%(sender_name)s heeft gereageerd op je aanbieding"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your offers"
+msgstr "%(sender_name)s heeft gereageerd op één van je aanbiedingen"
+
+msgid "A user commented on an offer you were tagged in"
+msgstr "Een gebruiker heeft gereageerd op een aanbieding waarin je bent getagd"
+
+#, python-format
+msgid "%(sender_name)s commented on the offer %(object_name)s"
+msgstr "%(sender_name)s heeft gereageerd op aanbieding %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
+msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben gereageerd op de aanbieding %(object_name)s"
+msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben gereageerd op de aanbieding %(object_name)s"
+
+msgid "You were tagged in this offer"
+msgstr "Je bent getagd in deze aanbieding"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in"
+msgstr "%(sender_name)s heeft gereageerd op een aanbieding waarin je bent getagd"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s heeft gereageerd op een aanbieding waarin je bent getagd in %(team_name)s"
+
+msgid "A user created a new offer in a team you are following"
+msgstr "Een gebruiker heeft een nieuwe aanbieding aangemaakt in een team dat je volgt"
+
+#, python-format
+msgid "%(sender_name)s created a new offer in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s heeft een nieuwe aanbieding aangemaakt in %(team_name)s (dat je volgt)"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Er is een nieuwe aanbieding: “%(object_name)s” aangemaakt in %(team_name)s (dat je volgt)."
+
+msgid "A user updated an offer you are following"
+msgstr "Een gebruiker heeft een aanbieding die je volgt bijgewerkt"
+
+#, python-format
+msgid "%(sender_name)s updated the offer %(object_name)s"
+msgstr "%(sender_name)s heeft de aanbieding %(object_name)s bijgewerkt"
+
+msgid "You are following this offer"
+msgstr "Je volgt deze aanbieding"
+
+#, python-format
+msgid "%(sender_name)s updated an offer you are following"
+msgstr "%(sender_name)s heeft een aanbieding die je volgt bijgewerkt"
+
+#, python-format
+msgid "An offer you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Een aanbieding die je volgt: “%(object_name)s” is bijgewerkt in %(team_name)s."
+
+msgid "A user commented on an offer you are following"
+msgstr "Een gebruiker heeft gereageerd op een aanbieding die je volgt"
+
+#, python-format
+msgid "%(sender_name)s commented on on an offer you are following"
+msgstr "%(sender_name)s heeft gereageerd op een aanbieding die je volgt"
+
+msgid "Current Offers"
+msgstr "Actuele aanbiedingen"
+
+msgid "No current offers"
+msgstr "Geen actuele aanbiedingen"
+
+msgid "Order Key"
+msgstr "Sorteren"
+
+msgid "Looking for"
+msgstr "Op zoek naar"
+
+msgid "Offering"
+msgstr "Biedt aan"
+
+msgid "Offer currently active?"
+msgstr "Aanbieding momenteel actief?"
+
+msgid "Offer Category"
+msgstr "Aanbieding categorie"
+
+#, python-format
+msgid "Offer: %(offer)s (%(type)s)"
+msgstr "Aanbieding: %(offer)s (%(type)s)"
 
 msgid "Back to Offers"
 msgstr "Terug naar aanbiedingen"
@@ -11873,11 +10613,102 @@ msgstr "heeft een aanbieding aangemaakt"
 msgid "There are no current offers"
 msgstr "Er zijn geen actuele aanbiedingen"
 
+#, python-format
+msgid "Offer \"%(title)s\" was edited successfully."
+msgstr "Aanbieding “%(title)s” is succesvol gewijzigd."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be edited."
+msgstr "Aanbieding “%(title)s” kon niet worden gewijzigd."
+
+#, python-format
+msgid "Offer \"%(title)s\" was added successfully."
+msgstr "Aanbieding “%(title)s” is succesvol toegevoegd."
+
+#, python-format
+msgid "Offer \"%(title)s\" was saved successfully, but is not active yet."
+msgstr "Aanbieding “%(title)s” is succesvol opgeslagen, maar nog niet actief."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be added."
+msgstr "Aanbieding “%(title)s” kon niet worden toegevoegd."
+
+#, python-format
+msgid "Offer \"%(title)s\" was deleted successfully."
+msgstr "Aanbieding “%(title)s” is succesvol verwijderd."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be deleted."
+msgstr "Aanbieding “%(title)s” kon niet worden verwijderd."
+
+msgid "The offer you requested is no longer active. Sorry!"
+msgstr "De opgevraagde aanbieding is niet meer actief. Sorry!"
+
+msgid "Invalid action for this offer. The request could not be completed!"
+msgstr "Ongeldige actie voor deze aanbieding. Het verzoek kon niet worden voltooid!"
+
+msgid "The offer is already active"
+msgstr "De aanbieding is al actief"
+
+msgid "The offer is already deactivated"
+msgstr "De aanbieding is al gedeactiveerd"
+
+msgid "The offer was deactivated successfully."
+msgstr "De aanbieding is succesvol gedeactiveerd."
+
+msgid "The offer was reactivated successfully."
+msgstr "De aanbieding is succesvol gereactiveerd."
+
+msgid "The offer was activated successfully."
+msgstr "De aanbieding is succesvol geactiveerd."
+
+msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
+msgstr ""
+
+msgctxt "the_app"
+msgid "Chat"
+msgstr ""
+
+msgctxt "the_app"
+msgid "message"
+msgstr "bericht"
+
+msgid "Chat"
+msgstr ""
+
+msgid "Only Administrators may send a message to this project/group!"
+msgstr "Alleen beheerders mogen een bericht sturen naar dit project/deze groep!"
+
+msgid "Additional Recipients"
+msgstr "Verdere ontvangers"
+
+msgid "Undefined recipient."
+msgstr "Ongedefinieerde ontvanger."
+
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
 msgstr "Je kunt alleen bestanden en afbeeldingen aan berichten toevoegen als je lid bent van het forum. Je kunt hier lid worden:"
 
 msgid "The legacy messaging app is no longer in use. You can view all of your old messages, but you cannot write new ones. Please use the new messaging app in the navigation from now on!"
 msgstr "De legacy messaging app is niet meer beschikbaar. Je kunt je oude berichten bekijken, maar geen nieuwe schrijven. Gebruik alsjeblieft per direct de nieuwe bericht app in de navigatie!"
+
+msgid "You can contact the group administration via this form. Write your message in the field below and than you will be redirected to the chat with group admins."
+msgstr ""
+
+msgid "You can contact the project administration via this form. Write your message in the field below and than you will be redirected to the chat with project admins."
+msgstr ""
+
+#, fuzzy
+msgid "What is your message?"
+msgstr "Berichten"
+
+#, fuzzy
+#| msgid "Change it here..."
+msgid "Write it here"
+msgstr "Verander het hier…"
+
+#, python-format
+msgid "Contact the administration of %(group_name)s:"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -12026,6 +10857,9 @@ msgstr "Schrijven"
 msgid "Reply"
 msgstr "Beantwoorden"
 
+msgid "Recipient"
+msgstr "Ontvanger"
+
 msgid "Conversation"
 msgstr "Gesprek"
 
@@ -12055,6 +10889,177 @@ msgstr "Antwoorden aan %(sender_name)s"
 #, python-format
 msgid "Reply to all %(adressee_count)s"
 msgstr "Antwoorden aan alle %(adressee_count)s"
+
+msgid "Your reply could not be matched to an existing message."
+msgstr "Je antwoord kon niet worden gekoppeld aan een bestaand bericht."
+
+msgid "An internal error occured."
+msgstr "Er is een interne fout opgetreden."
+
+msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
+msgstr "Het e-mailadres waarmee je het antwoord hebt verstuurd, is niet het adres dat aan je gebruikersaccount is gekoppeld. Stuur directe antwoorden alleen vanaf het e-mailadres waarmee je op de site bent geregistreerd!"
+
+msgid "There was an error when processing your message text!"
+msgstr "Er is een fout opgetreden bij het verwerken van je bericht!"
+
+msgid "Your direct reply failed!"
+msgstr "Je antwoord is niet gelukt!"
+
+msgid "Select at least one object."
+msgstr "Selecteer minstens één ontvanger."
+
+msgid "Messages or conversations successfully archived."
+msgstr "Berichten of gesprekken succesvol gearchiveerd."
+
+msgid "Messages or conversations successfully deleted."
+msgstr "Berichten of gesprekken succesvol verwijderd."
+
+msgid "Messages were marked as read."
+msgstr "Berichten zijn gemarkeerd als gelezen."
+
+msgid "Messages or conversations successfully recovered."
+msgstr "Berichten of gesprekken zijn succesvol hersteld."
+
+# Depending on what this app and it's content is really about, a more formal translation would be 'Nieuws', or 'Nieuwsberichten'. 
+msgid "Notes"
+msgstr "Nieuwtjes"
+
+msgctxt "the_app"
+msgid "note"
+msgstr "nieuwtjes"
+
+# Nieuwsbericht?
+msgid "A user commented on a news post"
+msgstr "Een gebruiker heeft gereageerd op een nieuwtje"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post"
+msgstr "%(sender_name)s heeft gereageerd op een nieuwtje"
+
+msgid "A user commented on one of your news posts"
+msgstr "Een gebruiker heeft op een van je nieuwtjes gereageerd"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post %(object_name)s"
+msgstr "%(sender_name)s heeft op je nieuwtje %(object_name)s gereageerd"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
+msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben op je nieuwtje %(object_name)s gereageerd"
+msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben op je nieuwtje %(object_name)s gereageerd"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post"
+msgstr "%(sender_name)s heeft gereageerd op je nieuwtje"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts"
+msgstr "%(sender_name)s heeft gereageerd op één van je nieuwtjes"
+
+msgid "A user commented on a news posts you commented in"
+msgstr "Een gebruiker heeft gereageerd op een nieuwtje waarop je hebt gereageerd"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
+msgstr "%(sender_name)s heeft gereageerd op nieuwtje %(object_name)s waarop je hebt gereageerd"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
+msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben gereageerd op nieuwtje %(object_name)s waarop je hebt gereageerd"
+msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben gereageerd op nieuwtje %(object_name)s waarop je hebt gereageerd"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in"
+msgstr "%(sender_name)s heeft gereageerd op een nieuwtje waarop je hebt gereageerd"
+
+msgid "A user created a news post"
+msgstr "Een gebruiker heeft een nieuwtje geplaatst"
+
+# aangemaakt of geplaatst?
+#, python-format
+msgid "%(sender_name)s created the news post %(object_name)s"
+msgstr "%(sender_name)s heeft het nieuwtje %(object_name)s geplaatst"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d news posts"
+msgstr "%(sender_name)s heeft %(count)d nieuwtjes geplaatst"
+
+#, python-format
+msgid "%(sender_name)s created a new news post"
+msgstr "%(sender_name)s heeft een nieuw nieuwtje geplaatst"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s:"
+msgstr "%(sender_name)s plaatste in %(team_name)s:"
+
+msgid "A user created a news post in a team you are following"
+msgstr "Een gebruiker heeft een nieuwtje geplaatst in een team dat je volgt"
+
+#, python-format
+msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s heeft zojuist nieuwtje geplaatst in %(team_name)s (dat je volgt)"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
+msgstr "%(sender_name)s plaatste in %(team_name)s: (dat je volgt)"
+
+msgid "A user updated a news post"
+msgstr "Een gebruiker heeft een nieuwtje bijgewerkt"
+
+#, python-format
+msgid "%(sender_name)s updated the news post %(object_name)s"
+msgstr "%(sender_name)s heeft het nieuwtje %(object_name)s bijgewerkt"
+
+msgid "You are following this news post"
+msgstr "Je volgt dit nieuwtje"
+
+#, python-format
+msgid "%(sender_name)s updated a news post you are following"
+msgstr "%(sender_name)s heeft een nieuwtje dat je volgt bijgewerkt"
+
+#, python-format
+msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
+msgstr "Een nieuwtje dat je volgt van %(sender_name)s is bijgewerkt in %(team_name)s:"
+
+msgid "A user commented on a news post you are following"
+msgstr "Een gebruiker heeft gereageerd op een nieuwtje dat je volgt"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s"
+msgstr "%(sender_name)s heeft gereageerd op het nieuwtje %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
+msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben op het nieuwtje %(object_name)s gereageerd"
+msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben op het nieuwtje %(object_name)s gereageerd"
+
+#, python-format
+msgid "%(sender_name)s commented on a news posts you are following"
+msgstr "%(sender_name)s heeft gereageerd op een nieuwtje dat je volgt"
+
+msgid "No news"
+msgstr "Geen nieuws"
+
+msgid "Write a news post"
+msgstr "Schrijf een nieuwtje"
+
+msgid "News stream"
+msgstr "Nieuws stream"
+
+msgid "Popularity"
+msgstr "Populariteit"
+
+msgid "Facebook Share"
+msgstr "Facebook delen"
+
+msgid "Note Item"
+msgstr "Nieuwtje"
+
+msgid "Note Items"
+msgstr "Nieuwtjes"
 
 msgctxt "the_verb"
 msgid "Comment"
@@ -12231,6 +11236,128 @@ msgctxt "This appears next to new items in the timeline, as in '<Jane> created a
 msgid "added a post"
 msgstr "heeft een post toegevoegd"
 
+msgid "Your news post was added successfully."
+msgstr "Je nieuwtje is succesvol toegevoegd."
+
+msgid "Your news post was deleted successfully."
+msgstr "Je nieuwtje is succesvol verwijderd."
+
+msgid "Your news post was edited successfully."
+msgstr "Je nieuwtje is succesvol gewijzigd."
+
+msgid "You are seeing this alert because you created this content."
+msgstr "Je ziet deze melding omdat je deze inhoud hebt aangemaakt."
+
+msgid "You are seeing this alert because you are following the item's project or group."
+msgstr "Je ziet deze melding omdat je het item in dit project of deze groep volgt."
+
+msgid "You are seeing this alert because you are following this item."
+msgstr "Je ziet deze melding omdat je dit item volgt."
+
+msgctxt "the_app"
+msgid "notifications"
+msgstr "meldingen"
+
+#, python-format
+msgid "Your daily digest for %(portal_name)s"
+msgstr "Je dagelijkse samenvatting voor %(portal_name)s"
+
+msgid "This is what happened during the last day!"
+msgstr "Dit is wat er afgelopen dag is gebeurd!"
+
+#, python-format
+msgid "Your weekly digest for %(portal_name)s"
+msgstr "Je wekelijkse samenvatting voor %(portal_name)s"
+
+msgid "This is what happened during the last week!"
+msgstr "Dit is wat er afgelopen week is gebeurd!"
+
+msgctxt "notification frequency"
+msgid "Never"
+msgstr "Nooit"
+
+msgctxt "notification frequency"
+msgid "Immediately"
+msgstr "Onmiddelijk"
+
+msgctxt "notification frequency"
+msgid "Daily"
+msgstr "Dagelijks"
+
+msgctxt "notification frequency"
+msgid "Weekly"
+msgstr "Wekelijks"
+
+msgid "Notification Preference for User"
+msgstr "Meldingsvoorkeuren voor gebruiker"
+
+msgid "Notification Preference"
+msgstr "Meldingsvoorkeuren"
+
+msgid "Multi Notification ID"
+msgstr "Multi-notificatie ID"
+
+msgid "Multi Notification Preference"
+msgstr "Multi-notificatievoorkeuren"
+
+msgid "Multi Notification Preferences"
+msgstr "Multi-notificatievoorkeuren"
+
+msgid "User who caused this notification event"
+msgstr "Gebruiker die deze meldingsgebeurtenis heeft veroorzaakt"
+
+msgid "Audience"
+msgstr "Publiek"
+
+msgid "Owner of the alert"
+msgstr "Eigenaar van de melding"
+
+msgid "Alert Reason key"
+msgstr "Alert Reason key"
+
+msgid "Last user who caused this notification event"
+msgstr "Laatste gebruiker die deze meldingsgebeurtenis heeft veroorzaakt"
+
+msgid "Alert State"
+msgstr "Meldingsstatus"
+
+msgid "You are following this content or its Project or Group"
+msgstr "Je volgt deze inhoud of bijbehorende project of groep"
+
+msgid "All notifications"
+msgstr "Alle meldingen"
+
+msgid "No notifications"
+msgstr "Geen meldingen"
+
+msgid "For content that I am following, I wish to receive notification emails"
+msgstr "Voor inhoud die ik volg, wil ik meldingen per e-mail ontvangen"
+
+msgid "You are getting this notification because you are subscribed to these kinds of events in your project or group."
+msgstr "Je ontvangt deze melding omdat je bent geabonneerd op dit soort evenementen in je project of groep."
+
+msgid "You are getting this notification because you are an administrator of this project or group."
+msgstr "Je ontvangt deze melding omdat je beheerder bent van dit project of deze groep."
+
+msgid "You are getting this notification because you are an administrator of this portal."
+msgstr "Je ontvangt deze melding omdat je beheerder bent van dit portal."
+
+msgid "You are getting this email because you are subscribed to one or more daily notifications."
+msgstr "Je ontvangt deze e-mail omdat je bent geabonneerd op een of meer dagelijkse meldingen."
+
+msgid "You are getting this email because you are subscribed to one or more weekly notifications."
+msgstr "Je ontvangt deze e-mail omdat je bent geabonneerd op een of meer wekelijkse meldingen."
+
+msgid "New item"
+msgstr "Nieuw item"
+
+#, python-format
+msgid "View on %(portal_name)s"
+msgstr "Bekijken op %(portal_name)s"
+
+msgid "Untitled"
+msgstr "Zonder titel"
+
 msgid "Select which notifications you would like to receive for each group or project you are involved in."
 msgstr "Selecteer welke meldingen je wilt ontvangen voor elke groep of project waarbij je betrokken bent."
 
@@ -12287,6 +11414,33 @@ msgstr "Reset naar standaard"
 
 msgid "This will reset all of your notification preferences to their default setting. Are you sure you wish to do that?"
 msgstr "Hiermee worden al je meldingsvoorkeuren teruggezet naar de standaardinstelling. Weet je zeker dat je dat wilt doen?"
+
+msgid "Your notification preferences were updated successfully."
+msgstr "Je meldingsvoorkeuren zijn succesvol bijgewerkt."
+
+msgid "Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!"
+msgstr ""
+
+msgid "Your notifications preferences were reset to default!"
+msgstr "Je meldingsvoorkeuren zijn gereset naar de standaardinstelling!"
+
+msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
+msgstr ""
+
+#, fuzzy
+#| msgid "Successfully removed user"
+msgid "Successfully signed in as {}."
+msgstr "Gebruiker succesvol verwijderd"
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully connected account."
+msgstr "Gebruikersaccount succesvol gedeactiveerd"
+
+#, fuzzy
+#| msgid "Successfully removed user"
+msgid "Successfully removed connection."
+msgstr "Gebruiker succesvol verwijderd"
 
 #, fuzzy
 msgid "Set password"
@@ -12411,11 +11565,6 @@ msgstr ""
 
 msgid " This data we received from your WECHANGE account"
 msgstr ""
-
-#, fuzzy
-#| msgid "Last name"
-msgid "last name"
-msgstr "Achternaam"
 
 msgid "Your Avatar and other settings from your profile were also copied."
 msgstr ""
@@ -12542,6 +11691,101 @@ msgstr ""
 #| msgid "Log in with %(portal_name)s"
 msgid "Login with %(provider_id)s"
 msgstr "Inloggen met %(portal_name)s"
+
+#, fuzzy
+#| msgid "Organization"
+msgctxt "the_app"
+msgid "organization"
+msgstr "Organisatie"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization membership"
+msgstr "Organisaties"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization memberships"
+msgstr "Organisaties"
+
+#, fuzzy
+#| msgid "Team Invite for Unregistered User"
+msgid "Organization Invite for Unregistered User"
+msgstr "Team uitnodiging voor ongeregistreerde gebruiker"
+
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Organization Invites for Unregistered Users"
+msgstr "Team uitnodigingen voor ongeregistreerde gebruikers"
+
+#, fuzzy
+msgid "Civil society organization"
+msgstr "Alle organisaties"
+
+msgid "Company (commercial)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Public voting"
+msgid "Public institution"
+msgstr "Openbare stemming"
+
+#, fuzzy
+#| msgid "Other teams"
+msgid "Other"
+msgstr "Andere teams"
+
+#, fuzzy
+msgid "Name of the organization"
+msgstr "Locatie verwijderen"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Organization type"
+msgstr "Organisatie"
+
+#, fuzzy
+#| msgid "Logout"
+msgid "Logo"
+msgstr "Uitloggen"
+
+#, fuzzy
+#| msgid "Email address"
+msgid "Email Address"
+msgstr "E-mailadres"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Cosinnus Organization"
+msgstr "Organisatie"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Cosinnus Organizations"
+msgstr "Organisaties"
+
+msgid "CosinnusOrganizationSocialMedia"
+msgstr ""
+
+#, fuzzy
+#| msgid "CosinnusLocation"
+msgid "CosinnusOrganizationLocation"
+msgstr "CosinnusLocatie"
+
+#, fuzzy
+#| msgid "CosinnusLocations"
+msgid "CosinnusOrganizationLocations"
+msgstr "CosinnusLocaties"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Organization group"
+msgstr "Organisatie"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization groups"
+msgstr "Organisaties"
 
 #, fuzzy, python-format
 msgid "%(team_name)s - Assigned projects/groups"
@@ -12718,10 +11962,279 @@ msgstr ""
 msgid "This organization should be made publicly findable via other platforms."
 msgstr "Dit project wordt openbaar zichtbaar gemaakt via andere platforms."
 
+msgid "Is your organization open for cooperation in the funding program?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Organization is open for future projects."
+msgstr "Team uitnodigingen voor ongeregistreerde gebruikers"
+
 #, fuzzy, python-format
 #| msgid "Users in team %(group)s"
 msgid "Users in organization %(group)s"
 msgstr "Gebruikers in team %(group)s"
+
+#, fuzzy, python-format
+msgid "Project/group %(name)s had already requested and has now been accepted."
+msgstr "Je was al uitgenodigd voor “%(team_name)s” en je bent nu direct lid geworden!"
+
+#, fuzzy, python-format
+#| msgid "User %(username)s was successfully invited!"
+msgid "Project/group %(name)s was successfully invited."
+msgstr "Gebruiker %(username)s is succesvol uitgenodigd!"
+
+#, fuzzy, python-format
+#| msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
+msgid "Your join request was withdrawn from organization “%(name)s” successfully."
+msgstr "Je aanmeldingsverzoek is succesvol ingetrokken van %(team_type)s “%(team_name)s”."
+
+#, fuzzy, python-format
+msgid "You have declined the invitation to organization “%(name)s”."
+msgstr "Je bent niet langer lid van de %(team_type)s “%(team_name)s”."
+
+#, fuzzy, python-format
+#| msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
+msgid "Your project/group is now assigned to the organization “%(name)s”. Welcome!"
+msgstr "Je bent nu lid van %(team_type)s “%(team_name)s”. Welkom!"
+
+#, fuzzy, python-format
+#| msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
+msgid "Your request was withdrawn from organization \"%(name)s\" successfully."
+msgstr "Je aanvraag tot deelname aan %(team_type)s “%(team_name)s” is succesvol ingetrokken."
+
+#, fuzzy, python-format
+#| msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
+msgid "Your invitation to project/group \"%(name)s\" was withdrawn successfully."
+msgstr "Je uitnodiging voor gebruiker “%(username)s” is succesvol ingetrokken."
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Project/group \"%(name)s\" is no longer assigned."
+msgstr "Gebruiker “%(username)s” is geen lid meer."
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can create Organizations! You can either create a Project, or write a message to one of the administrators to create a Organization for you. Below you can find a listing of all administrators."
+msgstr "Sorry, alleen portalbeheerders kunnen groepen maken. Je kunt een project starten of een bericht schrijven naar een van de beheerders om een groep voor je te aan te maken. Hieronder vind je een lijst met alle beheerders."
+
+#, fuzzy, python-format
+#| msgid "Event \"%(title)s\" was edited successfully."
+msgid "Organization \"%(name)s\" was created successfully."
+msgstr "Evenement “%(title)s” is succesvol gewijzigd."
+
+#, fuzzy
+#| msgid "Your idea was deleted successfully."
+msgid "Your organization was deleted successfully."
+msgstr "Je idee is succesvol verwijderd."
+
+msgctxt "the_app"
+msgid "poll"
+msgstr "poll"
+
+msgid "A user created a new poll"
+msgstr "Een gebruiker heeft een nieuwe poll aangemaakt"
+
+#, python-format
+msgid "%(sender_name)s created the poll %(object_name)s"
+msgstr "%(sender_name)s heeft de poll %(object_name)s aangemaakt"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d polls"
+msgstr "%(sender_name)s heeft %(count)d polls aangemaakt"
+
+#, python-format
+msgid "%(sender_name)s created a new poll"
+msgstr "%(sender_name)s heeft een nieuwe poll aangemaakt"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Er is een nieuwe poll: “%(object_name)s” aangemaakt in %(team_name)s."
+
+msgid "A poll you voted on was completed"
+msgstr "Een poll waarop je hebt gestemd is voltooid"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
+msgstr "%(sender_name)s heeft de poll %(object_name)s waarop je hebt gestemd voltooid"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls you voted on"
+msgstr "%(sender_name)s heeft %(count)d polls waarop je hebt gestemd voltooid"
+
+#, python-format
+msgid "%(sender_name)s completed the poll"
+msgstr "%(sender_name)s heeft de poll voltooid"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Poll “%(object_name)s” is voltooid in %(team_name)s."
+
+msgid "A user commented on one of your polls"
+msgstr "Een gebruiker heeft op één van je polls gereageerd"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll %(object_name)s"
+msgstr "%(sender_name)s heeft gereageerd op jouw poll %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
+msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben gereageerd op jouw poll %(object_name)s"
+msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben gereageerd op jouw poll %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll"
+msgstr "%(sender_name)s heeft op je poll gereageerd"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls"
+msgstr "%(sender_name)s heeft op één van je polls gereageerd"
+
+msgid "A user commented on a poll you were tagged in"
+msgstr "Een gebruiker heeft gereageerd op een poll waarin je bent getagd"
+
+#, python-format
+msgid "%(sender_name)s commented on the poll %(object_name)s"
+msgstr "%(sender_name)s heeft gereageerd op de poll %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
+msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben gereageerd op de poll %(object_name)s"
+msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben gereageerd op de poll %(object_name)s"
+
+msgid "You were tagged in this poll"
+msgstr "Je bent getagd in deze poll"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in"
+msgstr "%(sender_name)s heeft gereageerd op een poll waarin je bent getagd"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s heeft gereageerd op een poll waarin je bent getagd in %(team_name)s"
+
+msgid "A user commented on an poll you voted in"
+msgstr "Een gebruiker heeft gereageerd op een poll waarop je hebt gestemd"
+
+msgid "You voted on this poll"
+msgstr "Je hebt op deze poll gestemd"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in"
+msgstr "%(sender_name)s heeft gereageerd op een poll waarop je hebt gestemd"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
+msgstr "%(sender_name)s heeft gereageerd op een poll waarop je hebt gestemd in %(team_name)s"
+
+msgid "A user created a new poll in a team you are following"
+msgstr "Een gebruiker heeft een nieuwe poll aangemaakt in een team dat je volgt"
+
+#, python-format
+msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s heeft een nieuwe poll aangemaakt in %(team_name)s (dat je volgt)"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Een nieuwe poll: “%(object_name)s” is aangemaakt in %(team_name)s (dat je volgt)."
+
+msgid "A user updated a poll you are following"
+msgstr "Een gebruiker heeft een poll die je volgt bijgewerkt"
+
+#, python-format
+msgid "%(sender_name)s updated the poll %(object_name)s"
+msgstr "%(sender_name)s heeft de poll %(object_name)s bijgewerkt"
+
+msgid "You are following this poll"
+msgstr "Je volgt deze poll"
+
+#, python-format
+msgid "%(sender_name)s updated a poll you are following"
+msgstr "%(sender_name)s heeft een poll die je volgt bijgewerkt"
+
+#, python-format
+msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Een poll die je volgt: ”%(object_name)s” is bijgewerkt in %(team_name)s."
+
+msgid "A poll you are following was completed"
+msgstr "Een poll die je volgt is voltooid"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s"
+msgstr "%(sender_name)s heeft de poll %(object_name)s voltooid"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls"
+msgstr "%(sender_name)s heeft %(count)d polls voltooid"
+
+#, python-format
+msgid "%(sender_name)s completed the poll you are following"
+msgstr "%(sender_name)s heeft de poll die je volgt voltooid"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
+msgstr "Poll “%(object_name)s” die je volgt in %(team_name)s is voltooid."
+
+msgid "A user commented on one a poll you are following"
+msgstr "Een gebruiker heeft gereageerd op een poll die je volgt"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you are following"
+msgstr "%(sender_name)s heeft gereageerd op een poll die je volgt"
+
+msgid "Current Polls"
+msgstr "Actuele polls"
+
+msgid "No current polls"
+msgstr "Geen actuele polls"
+
+msgid "You must write a description for this poll option!"
+msgstr "Geef een beschrijving voor deze optie!"
+
+msgid "Voting closed"
+msgstr "Stemming gesloten"
+
+msgid "Poll archived"
+msgstr "Poll gearchiveerd"
+
+msgid "Multiple options votable"
+msgstr "Meerdere opties stembaar"
+
+msgid "Does this poll allow users to vote on multiple options or just decide for one?"
+msgstr "Is het mogelijk om op meerdere opties te stemmen of moet er één gekozen worden?"
+
+msgid "\"Maybe\" option enabled"
+msgstr "Optie “misschien” ingeschakeld"
+
+msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
+msgstr "Is de optie misschien ingeschakeld? Wordt genegeerd en behandeld als False if ``multiple_votes==False``"
+
+msgid "Anyone can vote"
+msgstr "Iedereen kan stemmen"
+
+msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
+msgstr "Indien ja, kan iedereen die deze poll kan zien ook stemmen. Indien nee, alleen groepsleden kunnen stemmen."
+
+msgid "Show voters"
+msgstr "Toon stemmers"
+
+msgid "If true, display a list of which user voted for each option."
+msgstr "Indien gekozen, wordt getoond welke gebruikers voor elke optie hebben gestemd."
+
+msgid "Winning Option"
+msgstr "Winnende optie"
+
+#, python-format
+msgid "Poll: %(poll)s (%(state)s)"
+msgstr "Poll: %(poll)s (%(state)s)"
+
+msgid "Poll Option"
+msgstr "Poll optie"
+
+msgid "Poll Options"
+msgstr "Poll opties"
 
 msgid "Poll choice"
 msgstr "Poll keuze"
@@ -13072,6 +12585,87 @@ msgstr "heeft een poll aangemaakt"
 msgid "There are no polls yet"
 msgstr "Er zijn nog geen polls"
 
+#, python-format
+msgid "Poll \"%(title)s\" was edited successfully."
+msgstr "Poll “%(title)s” is succesvol gewijzigd."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be edited."
+msgstr "Poll “%(title)s” kon niet worden gewijzigd."
+
+#, python-format
+msgid "Poll \"%(title)s\" was added successfully."
+msgstr "Poll “%(title)s” is succesvol toegevoegd."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be added."
+msgstr "Poll “%(title)s” kon niet worden toegevoegd."
+
+msgid "You should define at least one poll option!"
+msgstr "Je moet minstens één optie definiëren!"
+
+msgid "This poll is archived and cannot be edited anymore!"
+msgstr "Deze poll is gearchiveerd en kan niet meer worden bewerkt!"
+
+#, python-format
+msgid "Poll \"%(title)s\" was deleted successfully."
+msgstr "Poll “%(title)s” is succesvol verwijderd."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be deleted."
+msgstr "Poll “%(title)s” kon niet verwijderd worden."
+
+msgid "The voting phase for this poll is over. You cannot vote for it any more."
+msgstr "De stemfase voor deze poll is voorbij. Je kunt niet meer stemmen."
+
+msgid "In this poll you must vote for exactly one item!"
+msgstr "In deze poll kun je maar op één optie stemmen!"
+
+msgid "Invalid action for this poll. The request could not be completed!"
+msgstr "Ongeldige actie voor deze poll. Het verzoek kon niet worden voltooid!"
+
+msgid "This action is not permitted for this poll at this stage!"
+msgstr "Deze actie is in deze fase niet toegestaan voor deze poll!"
+
+msgid "The poll was closed successfully."
+msgstr "De poll is succesvol afgesloten."
+
+msgid "The poll was re-opened successfully."
+msgstr "De poll is succesvol heropend."
+
+msgid "The poll was archived successfully."
+msgstr "De poll is succesvol gearchiveerd."
+
+# What is this app about?
+# Translation: Stream or Activiteiten?
+msgid "Stream"
+msgstr "Activiteiten"
+
+msgctxt "the_app"
+msgid "stream"
+msgstr "activiteiten"
+
+msgid "My Streams"
+msgstr "Mijn activiteiten"
+
+msgid "Streams"
+msgstr "Activiteiten"
+
+msgid "Models"
+msgstr "Modellen"
+
+msgid "Portal IDs"
+msgstr "Portal ID's"
+
+msgid "Last seen"
+msgstr "Laatst gezien"
+
+msgid "Special Stream"
+msgstr "Special Stream"
+
+msgid "Special Group IDs"
+msgstr "Special Group IDs"
+
 msgid "Public Stream"
 msgstr "Openbare activiteiten"
 
@@ -13126,6 +12720,262 @@ msgstr "Filteren op auteurs, tags of andere getagde eigenschappen?"
 
 msgid "Filter by item types?"
 msgstr "Filteren op itemtypes?"
+
+msgid "You do not have permission to access this stream."
+msgstr "Je hebt geen toestemming om deze activiteiten-feed te openen."
+
+msgid "Your stream was added successfully."
+msgstr "Je activiteiten-feed is succesvol toegevoegd."
+
+msgid "Your stream was updated successfully."
+msgstr "Je activiteiten-feed is succesvol bijgewerkt."
+
+msgid "Your stream was deleted successfully."
+msgstr "Je activiteiten-feed is succesvol verwijderd."
+
+msgid "You cannot delete the default stream!"
+msgstr "Je kunt de default activiteiten-feed niet verwijderen!"
+
+msgctxt "the_app"
+msgid "todo"
+msgstr "taken"
+
+msgid "A user created a new todo"
+msgstr "Een gebruiker heeft een nieuwe taak aangemaakt"
+
+#, python-format
+msgid "%(sender_name)s created the todo %(object_name)s"
+msgstr "%(sender_name)s heeft de taak %(object_name)s aangemaakt"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d todos"
+msgstr "%(sender_name)s heeft %(count)d taken aangemaakt"
+
+#, python-format
+msgid "%(sender_name)s created a new todo"
+msgstr "%(sender_name)s heeft een nieuwe taak aangemaakt"
+
+#, python-format
+msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Er is een nieuwe taak: “%(object_name)s” aangemaakt in %(team_name)s."
+
+msgid "A todo was assigned to me"
+msgstr "Er is mij een taak toegewezen"
+
+#, python-format
+msgid "%(sender_name)s assigned the todo %(object_name)s to you"
+msgstr "%(sender_name)s heeft de taak %(object_name)s aan je toegewezen"
+
+#, python-format
+msgid "%(sender_name)s assigned %(count)d todos to you"
+msgstr "%(sender_name)s heeft %(count)d taken aan je toegewezen"
+
+#, python-format
+msgid "%(sender_name)s assigned a todo to you"
+msgstr "%(sender_name)s heeft een taak aan je toegewezen"
+
+msgid "A todo I created was completed"
+msgstr "Een taak die ik heb aangemaakt is voltooid"
+
+#, python-format
+msgid "%(sender_name)s completed the todo %(object_name)s"
+msgstr "%(sender_name)s heeft de taak %(object_name)s voltooid"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d todos"
+msgstr "%(sender_name)s heeft %(count)d taken voltooid"
+
+msgid "You created this todo"
+msgstr "Je hebt deze taak aangemaakt"
+
+#, python-format
+msgid "%(sender_name)s completed your todo"
+msgstr "%(sender_name)s heeft jouw taak voltooid"
+
+#, python-format
+msgid "%(sender_name)s completed one of your todos"
+msgstr "%(sender_name)s heeft één van jouw taken voltooid"
+
+msgid "A user commented on one of your todos"
+msgstr "Een gebruiker heeft gereageerd op één van je taken"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo %(object_name)s"
+msgstr "%(sender_name)s heeft gereageerd op je taak %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
+msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben gereageerd op je taak %(object_name)s"
+msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben gereageerd op je taak %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo"
+msgstr "%(sender_name)s heeft gereageerd op jouw taak"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your todos"
+msgstr "%(sender_name)s heeft gereageerd op één van je taken"
+
+msgid "A user commented on a todo you were tagged in"
+msgstr "Een gebruiker heeft gereageerd op een taak waarin je bent getagd"
+
+#, python-format
+msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgstr "%(sender_name)s heeft gereageerd op de taak %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
+msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben gereageerd op de taak %(object_name)s"
+msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben gereageerd op je taak %(object_name)s"
+
+msgid "You were tagged in this todo"
+msgstr "Je bent getagd in deze taak"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in"
+msgstr "%(sender_name)s heeft gereageerd op een taak waarin je bent getagd"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s heeft gereageerd op een taak waarin je bent getagd in %(team_name)s"
+
+msgid "A user commented on a todo you were assigned to"
+msgstr "Een gebruiker heeft gereageerd op een taak die aan jou is toegewezen"
+
+#, python-format
+msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
+msgstr "%(sender_name)s heeft gereageerd op de aan jouw toegewezen taak %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
+msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben gereageerd op jouw toegewezen taak %(object_name)s"
+msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben gereageerd op jouw toegewezen taak %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos"
+msgstr "%(sender_name)s heeft gereageerd op een van je toegewezen taken"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgstr "%(sender_name)s heeft gereageerd op één van je toegewezen taken in %(team_name)s"
+
+msgid "A user updated a todo you are following"
+msgstr "Een gebruiker heeft een taak die je volgt bijgewerkt"
+
+#, python-format
+msgid "%(sender_name)s updated the todo %(object_name)s"
+msgstr "%(sender_name)s heeft de taak %(object_name)s bijgewerkt"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
+msgstr[0] "%(sender_name)s en %(count_minus_one)d ander hebben de taak %(object_name)s bijgewerkt"
+msgstr[1] "%(sender_name)s en %(count_minus_one)d anderen hebben de taak %(object_name)s bijgewerkt"
+
+msgid "You are following this todo"
+msgstr "Je volgt deze taak"
+
+#, python-format
+msgid "%(sender_name)s updated a todo you are following"
+msgstr "%(sender_name)s heeft een taak die je volgt bijgewerkt"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Een taak die je volgt: “%(object_name)s” is bijgewerkt in %(team_name)s."
+
+msgid "A user reassigned a todo you are following"
+msgstr "Een gebruiker heeft een taak die je volgt opnieuw toegewezen"
+
+#, python-format
+msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgstr "%(sender_name)s heeft de taak %(object_name)s opnieuw toegewezen"
+
+#, python-format
+msgid "%(sender_name)s reassigned %(count)d todos"
+msgstr "%(sender_name)s heeft %(count)d taak's opnieuw toegewezen"
+
+#, python-format
+msgid "%(sender_name)s reassigned a todo you are following"
+msgstr "%(sender_name)s heeft een taak die je volgt opnieuw toegewezen"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
+msgstr "Een taak die je volgt: “%(object_name)s” is opnieuw toegewezen in %(team_name)s."
+
+msgid "A user completed a todo you are following"
+msgstr "Een gebruiker heeft een taak die je volgt voltooid"
+
+#, python-format
+msgid "%(sender_name)s completed a todo you are following"
+msgstr "%(sender_name)s heeft een taak die je volgt voltooid"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Een taak die je volgt: “%(object_name)s” is voltooid in %(team_name)s."
+
+msgid "A user commented on a todo you are following"
+msgstr "Een gebruiker heeft gereageerd op een taak die je volgt"
+
+#, python-format
+msgid "%(sender_name)s commented on on a todo you are following"
+msgstr "%(sender_name)s heeft gereageerd op een taak die je volgt"
+
+msgid "My Todos"
+msgstr "Mijn taken"
+
+msgid "No todos"
+msgstr "Geen taken"
+
+msgid "Open"
+msgstr "Open"
+
+msgid "Completed"
+msgstr "Voltooid"
+
+msgid "Assigned To"
+msgstr "Toegewezen aan"
+
+msgid "Priority"
+msgstr "Prioriteit"
+
+# Vervaldatum
+msgid "Due date"
+msgstr "Opleveringsdatum"
+
+msgid "Soonest Due"
+msgstr "Binnenkort"
+
+msgid "You are not allowed to assign this Todo entry."
+msgstr "Je mag deze taak niet toewijzen."
+
+msgid "Later"
+msgstr "Later"
+
+msgid "Normal"
+msgstr "Normaal"
+
+msgid "Important"
+msgstr "Belangrijk"
+
+# Vervaldatum? Opleveringsdatum?
+msgid "Due by"
+msgstr "Opleveringsdatum"
+
+msgid "Completed on"
+msgstr "Voltooid op"
+
+msgid "Completed by"
+msgstr "Voltooid door"
+
+msgid "Assigned to"
+msgstr "Toegewezen aan"
+
+#, python-format
+msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
+msgstr "Taak “%(todo_name)s” is toegewezen aan %(assignee_name)s"
 
 #, python-format
 msgid ""
@@ -13436,6 +13286,259 @@ msgstr "Je hebt geen toegewezen taken"
 
 msgid "Tasks are shown only for logged in users"
 msgstr "Taken zijn alleen zichtbaar voor ingelogde gebruikers"
+
+#, python-format
+msgid "Todo \"%(title)s\" was added successfully."
+msgstr "Taak “%(title)s” is succesvol toegevoegd."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be added."
+msgstr "Taak “%(title)s” kon niet worden toegevoegd."
+
+msgid "You were trying to add a todo to a todolist that does not exist!"
+msgstr "Je hebt geprobeerd een taak toe te voegen aan een takenlijst die niet bestaat!"
+
+#, python-format
+msgid "Todo \"%(title)s\" was edited successfully."
+msgstr "Taak “%(title)s” is succesvol gewijzigd."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be edited."
+msgstr "Taak “%(title)s” kon niet worden gewijzigd."
+
+#, python-format
+msgid "Todo \"%(title)s\" was deleted successfully."
+msgstr "Taak “%(title)s” is succesvol verwijderd."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be deleted."
+msgstr "Taak “%(title)s” kon niet worden verwijderd."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned successfully."
+msgstr "Taak “%(title)s” is succesvol toegewezen."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned."
+msgstr "Taak “%(title)s” kon niet worden toegewezen."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned to You successfully."
+msgstr "Taak “%(title)s” is succesvol aan jou toegewezen."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned to You."
+msgstr "Taak “%(title)s” kon niet aan jou worden toegewezen."
+
+#, python-format
+msgid "Todo \"%(title)s\" was unassigned successfully."
+msgstr "Taak “%(title)s” is niet meer toegewezen."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be unassigned."
+msgstr "Taak “%(title)s” kon niet worden afgewezen."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed successfully."
+msgstr "Taak “%(title)s” is succesvol voltooid."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed."
+msgstr "Taak “%(title)s” kon niet worden voltooid."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed by You successfully."
+msgstr "Taak “%(title)s” is succesvol door jou voltooid."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed by You."
+msgstr "Taak “%(title)s” kon niet door jou worden voltooid."
+
+#, python-format
+msgid "Todo \"%(title)s\" was set to incomplete successfully."
+msgstr "Taak “%(title)s” is succesvol ingesteld op onvolledig."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be set to incomplete."
+msgstr "Taak “%(title)s” kon niet op onvolledig ingesteld worden."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was edited successfully."
+msgstr "Takenlijst “%(title)s” is succesvol gewijzigd."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be edited."
+msgstr "Takenlijst “%(title)s” kon niet worden gewijzigd."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was added successfully."
+msgstr "Takenlijst “%(title)s” is succesvol toegevoegd."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be added."
+msgstr "Takenlijst “%(title)s” kon niet worden toegevoegd."
+
+msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
+msgstr "Je kunt deze map niet verwijderen, omdat je geen toestemming hebt om een of meer van de items te verwijderen!"
+
+#~ msgid "Ok"
+#~ msgstr "Oké"
+
+#~ msgid "Message Group"
+#~ msgstr "Bericht sturen aan groep"
+
+#~ msgid "Message Project"
+#~ msgstr "Bericht project"
+
+#, fuzzy
+#~| msgid "This message was sent in a conversation with: "
+#~ msgid "The message cannot be replied without being in a conversation."
+#~ msgstr "Dit bericht is verstuurd in een gesprek met: "
+
+#, fuzzy
+#~| msgid "Is Moderator"
+#~ msgid "Moderation"
+#~ msgstr "Is moderator"
+
+#, fuzzy
+#~| msgid "Your name"
+#~ msgid "{username}"
+#~ msgstr "Je naam"
+
+#, fuzzy
+#~| msgid "Additional Recipients"
+#~ msgid "Additional recipients"
+#~ msgstr "Verdere ontvangers"
+
+#, fuzzy
+#~| msgid "Additional Recipients"
+#~ msgid "Additional recipient"
+#~ msgstr "Verdere ontvangers"
+
+#, fuzzy
+#~| msgid "Message Project"
+#~ msgid "Message Rejected"
+#~ msgstr "Bericht project"
+
+#, fuzzy
+#~ msgid "Your message has been rejected"
+#~ msgstr "Je wijzigingen zijn opgeslagen."
+
+#, fuzzy
+#~| msgid "Message Project"
+#~ msgid "Message Received"
+#~ msgstr "Bericht project"
+
+#, fuzzy
+#~ msgid "You have received a message"
+#~ msgstr "Je bent uitgenodigd om samen te werken!"
+
+#, fuzzy
+#~ msgid "You have received a reply"
+#~ msgstr "Je bent uitgenodigd om samen te werken!"
+
+#, fuzzy
+#~| msgid "Restricted"
+#~ msgid "Rejected"
+#~ msgstr "Beperkt"
+
+#, fuzzy
+#~| msgid "Everybody"
+#~ msgid "body"
+#~ msgstr "Iedereen"
+
+#, fuzzy
+#~ msgid "sender"
+#~ msgstr "Verzonden"
+
+#, fuzzy
+#~| msgid "Recipient"
+#~ msgid "recipient"
+#~ msgstr "Ontvanger"
+
+#, fuzzy
+#~ msgid "visitor"
+#~ msgstr "Bezocht"
+
+#, fuzzy
+#~ msgid "parent message"
+#~ msgstr "Berichten"
+
+#, fuzzy
+#~| msgid "No messages"
+#~ msgid "root message"
+#~ msgstr "Geen berichten"
+
+#, fuzzy
+#~| msgid "Event date"
+#~ msgid "sent at"
+#~ msgstr "Datum evenement"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "archived by recipient"
+#~ msgstr "Ongedefinieerde ontvanger."
+
+#, fuzzy
+#~| msgid "New etherpad by %(sender_name)s"
+#~ msgid "deleted by sender at"
+#~ msgstr "Nieuw etherpad door %(sender_name)s"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "deleted by recipient at"
+#~ msgstr "Ongedefinieerde ontvanger."
+
+#, fuzzy
+#~| msgid "Status"
+#~ msgid "status"
+#~ msgstr "Status"
+
+#, fuzzy
+#~| msgid "Is Moderator"
+#~ msgid "moderator"
+#~ msgstr "Is moderator"
+
+#, fuzzy
+#~| msgid "Related to"
+#~ msgid "moderated at"
+#~ msgstr "Gerelateerd tot"
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "message"
+#~ msgstr "bericht"
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "messages"
+#~ msgstr "bericht"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "Undefined sender."
+#~ msgstr "Ongedefinieerde ontvanger."
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "pending message"
+#~ msgstr "bericht"
+
+#, fuzzy
+#~ msgid "pending messages"
+#~ msgstr "Berichten"
+
+#, fuzzy
+#~ msgid "Message successfully sent."
+#~ msgstr "Gebruiker %(username)s is succesvol uitgenodigd!"
+
+#, fuzzy
+#~| msgid "Select at least one object."
+#~ msgid "Message rejected for at least one recipient."
+#~ msgstr "Selecteer minstens één ontvanger."
 
 #, fuzzy
 #~ msgid "CSV Import Results"

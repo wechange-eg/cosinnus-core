@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 16:02+0200\n"
+"POT-Creation-Date: 2022-06-01 15:58+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -175,6 +175,13 @@ msgid "Reactivate user accounts"
 msgstr "Cont de utilizator activat cu succes"
 
 #, python-format
+msgid "%(count)d Users' group memberships were refreshed."
+msgstr ""
+
+msgid "Refresh user group membership associations (e.g. cache or Nextcloud folder problems)"
+msgstr ""
+
+#, python-format
 msgid "%d Users were synchronized successfully."
 msgstr "%d Utilizatorii au fost sincronizați cu succes."
 
@@ -280,6 +287,14 @@ msgstr ""
 
 msgid "Bookmarked Users list"
 msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Invitations"
+msgstr "Invitații"
+
+#, fuzzy
+msgid "Conferences"
+msgstr "Este conferință"
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
@@ -482,12 +497,12 @@ msgstr "%(sender_name)s v-a invitat să vă alăturați ”%(team_name)s” pe %
 msgid "Accept invitation"
 msgstr "Invitația acceptată"
 
-msgid "View invitation"
-msgstr "Vizualizați invitația"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s te-a invitat"
+
+msgid "View invitation"
+msgstr "Vizualizați invitația"
 
 msgid "New link to the moved project/group"
 msgstr "Nou link către proiectul/grupul mutat"
@@ -540,6 +555,28 @@ msgstr "%(sender_name)s tocmai a creat ideea ”%(object_name)s” pe %(portal_n
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s tocmai a creat un nou cont de utilizator  pe %(portal_name)s!"
+
+msgid "A conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The conference %(object_name)s has been updated"
+msgstr "Ai fost etichetat în ”%(object_name)s” în %(team_name)s."
+
+#, fuzzy
+msgid "You are attending this conference"
+msgstr "Sunteți pe punctul de a dezactiva acest proiect/grup!"
+
+#, fuzzy, python-format
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr "Ai fost etichetat în ”%(object_name)s” în %(team_name)s."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The time of conference %(object_name)s has been updated"
+msgstr "Ai fost etichetat în ”%(object_name)s” în %(team_name)s."
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -804,6 +841,11 @@ msgstr "Plăcut"
 
 msgid "Persons"
 msgstr "Persoane"
+
+#, fuzzy
+#| msgid "Last name"
+msgid "last name"
+msgstr "Numele de familie"
 
 #, fuzzy
 #| msgid "My location"
@@ -1516,12 +1558,21 @@ msgstr "Grup de Părinți"
 msgid "Related Teams"
 msgstr "Echipe Conexe"
 
+#, fuzzy
+#| msgid "I am open for cooperation requests"
+msgid "Open for cooperation"
+msgstr "Sunt deschis pentru cereri de cooperare"
+
 msgid "Dynamic extra fields"
 msgstr ""
 
 #, fuzzy
 msgid "If set to true, a contact form will be displayed on the micropage."
 msgstr "Dacă aceasta este activă, pe Microsite va fi afișată o casetă Apel la Acțiune."
+
+#, fuzzy
+msgid "Use invite token"
+msgstr "Intră în jeton:"
 
 msgid "Cosinnus project"
 msgstr "Proiect cosinnus"
@@ -2255,6 +2306,18 @@ msgstr "Ștergeți articolul raportat..."
 msgid "(The reported item has been deleted.)"
 msgstr "(Elementul raportat a fost șters.)"
 
+msgid "This user profile is scheduled for deletion at: "
+msgstr ""
+
+msgid "However, it will not be deleted, because it is still active."
+msgstr ""
+
+msgid "This user account is disabled. The user cannot log in or use the account."
+msgstr ""
+
+msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
+msgstr ""
+
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Introduceți 4 litere majuscule în imaginea amestecată"
 
@@ -2338,6 +2401,143 @@ msgstr "Administrare"
 msgid "Select a page on the left side."
 msgstr "Selectați o pagină din partea stângă."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Este conferință"
+
+#, fuzzy
+msgid "Overview - All Conferences"
+msgstr "Este conferință"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+#, fuzzy
+msgid "View Upcoming"
+msgstr "Vizualizarea pe pagină"
+
+msgid "Upcoming"
+msgstr ""
+
+#, fuzzy
+msgid "View Past"
+msgstr "Vezi Proiect"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Conferința se desfășoară"
+
+#, fuzzy
+msgid "Portal Setting"
+msgstr "Setările de confidențialitate"
+
+#, fuzzy
+msgid "Conference Settings"
+msgstr "Setările Conferinței"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+#, fuzzy
+msgid "Not premium"
+msgstr "Premium"
+
+msgid "Rooms"
+msgstr ""
+
+#, fuzzy
+msgid "Start"
+msgstr "Restrâns"
+
+#, fuzzy
+msgid "running now!"
+msgstr "Alătură-te acum!"
+
+#, fuzzy
+msgid "Conference Setting"
+msgstr "Setările Conferinței"
+
+msgid "Room"
+msgstr "Cameră"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgctxt "Calendar"
+#| msgid "Event"
+msgid "Event"
+msgstr "Eveniment"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Conferința se desfășoară"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Conferința se desfășoară"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Chiar vrei să lași „%(title)s”?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Vrei cu adevărat să eliminați membru „%(name)s” din echipă?"
+
+#, fuzzy
+msgid "There are no items to show."
+msgstr "Nu există articole încă"
+
+msgid "BBB"
+msgstr ""
+
+#, fuzzy
+msgid "BBB Premium"
+msgstr "Premium"
+
+msgid "BBB Recording API"
+msgstr ""
+
+#, fuzzy
+msgid "Not set"
+msgstr "Nealocat"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "Creează Eveniment"
+
+msgid "Save"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Vrei într-adevăr să refuzi membru „%(name)s”?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Ștergeți Profilul"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2388,6 +2588,18 @@ msgstr "Anunțuri pentru Tabloul de Bord al Utilizatorului"
 
 msgid "User Welcome Email"
 msgstr "Utilizator Bun Venit pe E-mail"
+
+#, fuzzy
+msgid "Conference Overview"
+msgstr "Setările Conferinței"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "Creează Eveniment"
+
+#, fuzzy
+msgid "Conferences with Custom Settings"
+msgstr "Conferința se desfășoară"
 
 msgid "Simple Statistics"
 msgstr "Statistici Simple"
@@ -2453,9 +2665,6 @@ msgstr "Nume"
 #, fuzzy
 msgid "Lastname"
 msgstr "Numele de familie"
-
-msgid "Save"
-msgstr ""
 
 #, fuzzy
 msgid "User Administration"
@@ -3182,7 +3391,7 @@ msgstr "Tipul Camerei"
 msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
 msgstr ""
 
-msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+msgid "The Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgstr ""
 
 msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
@@ -3275,6 +3484,9 @@ msgstr ""
 #, fuzzy
 msgid "There are no rooms yet."
 msgstr "Nu există articole încă"
+
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
@@ -3466,6 +3678,12 @@ msgstr "Restrâns"
 msgid "Length"
 msgstr ""
 
+msgid "minute"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
 #, fuzzy
 #| msgid "Delete Account"
 msgid "Delete Recording"
@@ -3478,156 +3696,6 @@ msgstr "Doriți cu adevărat să ștergeți anunțul ”%(title)s”?"
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Ștergeți articolul raportat..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Este conferință"
-
-#, fuzzy
-msgid "Overview - All Conferences"
-msgstr "Este conferință"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Administrare"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-#, fuzzy
-msgid "View Upcoming"
-msgstr "Vizualizarea pe pagină"
-
-msgid "Upcoming"
-msgstr ""
-
-#, fuzzy
-msgid "View Past"
-msgstr "Vezi Proiect"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Conferința se desfășoară"
-
-#, fuzzy
-msgid "Portal Setting"
-msgstr "Setările de confidențialitate"
-
-#, fuzzy
-msgid "Conference Settings"
-msgstr "Setările Conferinței"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "Premium"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-#, fuzzy
-msgid "Not premium"
-msgstr "Premium"
-
-msgid "Rooms"
-msgstr ""
-
-#, fuzzy
-msgid "Start"
-msgstr "Restrâns"
-
-#, fuzzy
-msgid "running now!"
-msgstr "Alătură-te acum!"
-
-#, fuzzy
-msgid "Conference Setting"
-msgstr "Setările Conferinței"
-
-msgid "Room"
-msgstr "Cameră"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgctxt "Calendar"
-#| msgid "Event"
-msgid "Event"
-msgstr "Eveniment"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Conferința se desfășoară"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Conferința se desfășoară"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Chiar vrei să lași „%(title)s”?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Vrei cu adevărat să eliminați membru „%(name)s” din echipă?"
-
-#, fuzzy
-msgid "There are no items to show."
-msgstr "Nu există articole încă"
-
-msgid "BBB"
-msgstr ""
-
-#, fuzzy
-msgid "BBB Premium"
-msgstr "Premium"
-
-msgid "BBB Recording API"
-msgstr ""
-
-#, fuzzy
-msgid "Not set"
-msgstr "Nealocat"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "Creează Eveniment"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Vrei într-adevăr să refuzi membru „%(name)s”?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Ștergeți Profilul"
-
-#, fuzzy
-msgid "Conference Overview"
-msgstr "Setările Conferinței"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "Creează Eveniment"
-
-#, fuzzy
-msgid "Conferences with Custom Settings"
-msgstr "Conferința se desfășoară"
 
 msgid "Rearrange"
 msgstr "Rearanja"
@@ -3662,6 +3730,11 @@ msgstr "începe aici..."
 
 msgid "Activate Cloud"
 msgstr "Activați Norul"
+
+#, fuzzy
+#| msgid "Members"
+msgid "Members-Map"
+msgstr "Membrii"
 
 #, fuzzy
 #| msgctxt "the_app"
@@ -3767,6 +3840,18 @@ msgstr "Acum veți primi notificări ori de câte ori conținutul public este po
 msgid "No Description set"
 msgstr "Fără set de Descriere"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created"
+msgid "Created on: "
+msgstr "Creată"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Last edited by"
+msgid "Last updated on: "
+msgstr "Ultima editare de"
+
 #, fuzzy
 #| msgid "Show more"
 msgid "more"
@@ -3843,6 +3928,10 @@ msgstr ""
 #| msgid "Dates"
 msgid "Date"
 msgstr "Datele"
+
+#, python-format
+msgid "Time zone: %(TIME_ZONE)s"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -3930,6 +4019,15 @@ msgid "No contact data has been added yet."
 msgstr "Nu au fost adăugate încă date de contact."
 
 #, fuzzy
+msgid "Contact organizers"
+msgstr "Informații de contact"
+
+#, fuzzy
+#| msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgid "Here you can send a message to the admins."
+msgstr "Pe %(date)s, ați solicitat să trimiteți un mesaj utilizatorului '%(recipient)s'."
+
+#, fuzzy
 msgid "Your Deactivated Content"
 msgstr "Conținutul Protejat"
 
@@ -3954,6 +4052,9 @@ msgstr "Sunteți sigur că doriți să ștergeți această echipă?"
 #, python-format
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - Membrii"
+
+msgid "Invite users directly via the following link: "
+msgstr ""
 
 msgid "Membership requests"
 msgstr "Solicitări de membru"
@@ -4334,6 +4435,41 @@ msgid "Enable the public visibility of your group/project"
 msgstr ""
 
 #, fuzzy
+#| msgid "Delete invitation"
+msgid "Create invite token"
+msgstr "Șterge invitația"
+
+msgid "Check this to generate an invite token which allows a user to join the "
+msgstr ""
+
+#, fuzzy
+#| msgid "Groups"
+msgid "group"
+msgstr "Grupuri"
+
+#, fuzzy
+#| msgid "Project"
+msgid "project"
+msgstr "Proiect"
+
+#, fuzzy
+msgid "conference"
+msgstr "Este conferință"
+
+msgid " directly."
+msgstr ""
+
+#, fuzzy
+#| msgid "No current offers"
+msgid "The current token is: "
+msgstr "Nu există oferte curente"
+
+#, fuzzy
+#| msgid "Create content"
+msgid "Create token"
+msgstr "Creați conținut"
+
+#, fuzzy
 msgid "Include a video conference"
 msgstr "Este conferință"
 
@@ -4393,8 +4529,17 @@ msgstr "Aici puteți controla dacă informațiile vizibile public despre proiect
 msgid "This project shall be made publicly findable via other platforms."
 msgstr "Acest proiect va putea fi găsit public prin intermediul altor platforme."
 
+msgid "Is your project open to other partner organizations?"
+msgstr ""
+
+msgid "Project is open for further partner organizations."
+msgstr ""
+
 msgid "Which apps should be activated?"
 msgstr "Ce aplicații trebuie activate?"
+
+msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
+msgstr ""
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Această Aplicație poate fi activată doar pentru un Grup, dar nu și pentru un Proiect!"
@@ -4499,10 +4644,6 @@ msgstr "Integrarea Facebook este disponibilă după ce ați creat proiectul!"
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr "Codul HTML introdus aici va fi afișat pe tabloul de board al grupului/proiectului (numai pentru membri)"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Invitations"
-msgstr "Invitații"
 
 msgid "About me"
 msgstr "Despre mine"
@@ -4634,6 +4775,32 @@ msgstr "Share pe Twitter"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr "Obiectivele Dezvoltării Durabile"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created Projects"
+msgid "Contact Project Admins"
+msgstr "Proiecte Create"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Group Admins"
+msgstr "Informații de contact"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Contact Conference Admins"
+msgstr "Administrare"
+
+msgid "If you want to send your message to the project chat, you have to turn directly to the project."
+msgstr ""
+
+msgid "If you want to send your message to the group chat, you have to turn directly to the group."
+msgstr ""
+
+msgid "If you want to send your message to the conference chat, you have to turn directly to the conference."
+msgstr ""
 
 #, fuzzy
 msgid "Email the group administrators"
@@ -5928,6 +6095,10 @@ msgid "CSV Downloads"
 msgstr "Descărcări CSV"
 
 #, fuzzy
+msgid "Portal switches and settings"
+msgstr "Setările de confidențialitate"
+
+#, fuzzy
 msgid "HD space used by conferences"
 msgstr "Spațiu HD utilizat de proiecte"
 
@@ -5949,8 +6120,8 @@ msgstr "E-mailuri ale tuturor abonaților la buletin informativ"
 msgid "E-Mails of ALL active users"
 msgstr "E-mailurile Tuturor utilizatorilor activi"
 
-msgid "Ok"
-msgstr "OK"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr "WE-Cloud este aici!"
@@ -6075,6 +6246,24 @@ msgstr "Ștergeți Filtrele"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+#| msgid "Show detailed steps"
+msgid "Show potential partners"
+msgstr "Afișați pașii detaliați"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Here you can search for partner organisations and projects that are open for further partners. The results are sorted so that partners with a lot of overlap in the funding objectives, eligible areas and SDGs you are active on are listed first."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners for ..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You're currently not member of any project, group or organization."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 #| msgid "Stream"
 msgid "Street"
 msgstr "Fluxul"
@@ -6110,6 +6299,10 @@ msgstr "Căutați atunci când mutați harta"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search this area"
 msgstr "Căutați în această zonă"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Find partners"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Membership Requests"
@@ -6292,11 +6485,6 @@ msgstr "Participanți"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-msgid "Contact organizers"
-msgstr "Informații de contact"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
 msgid "You will now receive notifications for content posted."
 msgstr "Acum veți primi notificări pentru conținutul  postat în acest grup."
 
@@ -6366,16 +6554,16 @@ msgid "Hidden User"
 msgstr "Utilizator ascuns"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "This group is open for further partner organizations."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are a Member"
 msgstr "Sunteți membru"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Join Group"
 msgstr "Alăturați-vă Grupului"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Message Group"
-msgstr "Grup de Mesaje"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Author"
@@ -6396,6 +6584,10 @@ msgstr "Veți primi o notificare atunci când un proiect este creat din ideea dv
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"
 msgstr "Proiecte - Create din această Idee"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This organization is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are a Admin"
@@ -6430,12 +6622,12 @@ msgid "To Profile"
 msgstr "Profilul Tău"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Join Project"
-msgstr "Alăturați-vă Proiectului"
+msgid "This project is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Message Project"
-msgstr "Proiect de Mesaje"
+msgid "Join Project"
+msgstr "Alăturați-vă Proiectului"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Move up"
@@ -7633,10 +7825,6 @@ msgid "Only group members can see the content you requested. Apply to become a m
 msgstr "Numai membrii echipei pot vedea conținutul pe care l-ați solicitat. Aplicați pentru a deveni membru acum!"
 
 #, fuzzy
-msgid "Conferences"
-msgstr "Este conferință"
-
-#, fuzzy
 msgid "My Conferences"
 msgstr "Este conferință"
 
@@ -7813,6 +8001,9 @@ msgstr ""
 msgid "Please also provide an end date"
 msgstr ""
 
+msgid "Ensure that your name does not contain any invalid characters."
+msgstr ""
+
 msgid "Test email sent!"
 msgstr "Test de e-mail trimis!"
 
@@ -7852,6 +8043,14 @@ msgstr ""
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Limba ”%s” nu este acceptat"
+
+#, fuzzy
+#| msgid "Test email sent!"
+msgid "New verification email sent!"
+msgstr "Test de e-mail trimis!"
+
+msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
 
 #, fuzzy
 msgid "Successfully made conference permanent premium"
@@ -8384,6 +8583,15 @@ msgstr "Fișiere în Nour"
 msgid "Linked Cloud Files"
 msgstr "Fișiere în Nour"
 
+msgid "Cloud Stub"
+msgstr "Ciot de nor"
+
+msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
+msgstr ""
+
+msgid "There are no cloud files yet"
+msgstr "Nu există încă fișiere în nour"
+
 #, fuzzy
 msgid "Restart"
 msgstr "Restrâns"
@@ -8401,6 +8609,13 @@ msgstr ""
 msgctxt "the_app"
 msgid "conference"
 msgstr "Este conferință"
+
+#, fuzzy
+msgid "Error message:"
+msgstr "Mesaje"
+
+msgid "No error message supplied."
+msgstr ""
 
 #, fuzzy
 msgid "Go to conference"
@@ -8612,8 +8827,91 @@ msgstr "Cel mai nou Pads"
 msgid "Pad Type"
 msgstr "Tip Pad"
 
+msgid "Pad"
+msgstr "Pad"
+
+msgid "This pad can no longer be edited because its creator has deleted their account."
+msgstr "Acest pad nu mai poate fi editat deoarece creatorul său și-a șters contul."
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(pad)s“?"
+msgstr "Vrei cu adevărat să ștergi etherpadul „%(pad)s”?"
+
+msgid "Delete Etherpad"
+msgstr "Șterge Etherpadul"
+
 msgid "The document can not be accessed because the etherpad server could not be reached. Please contact an administrator!"
 msgstr "Documentul nu poate fi accesat deoarece serverul etherpad nu a putut fi accesat. Vă rugăm să contactați cu administratorul!"
+
+msgid "This document is empty"
+msgstr "Acest document este gol"
+
+msgid "Pads"
+msgstr "Pad"
+
+msgid "Enter a title for the Pad."
+msgstr "Introduceți un titlu pentru Pad."
+
+msgid "Enter the title for a new Document or Table."
+msgstr "Introduceți titlul pentru un nou Document sau Tabel."
+
+msgid "Enter the title for a new Document."
+msgstr "Introduceți titlul pentru un nou Document."
+
+msgid "Create Etherpad"
+msgstr "Crea Etherpad"
+
+msgid "Create Ethercalc"
+msgstr "Crea Ethercalc"
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(title)s“?"
+msgstr "Vrei cu adevărat să ștergi etherpadul „%(title)s”?"
+
+msgid "No etherpads have been created yet."
+msgstr "Nu s-au creat încă etherpad."
+
+msgid "Download CSV"
+msgstr "Descărcați CSV"
+
+msgid "Download Excel"
+msgstr "Descărcați Excel"
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Salut %(receiver_name)s,\n"
+"\n"
+"un nou etherpad ”%(object_name)s” în %(team_name)s a fost creat de %(sender_name)s. \n"
+"\n"
+"Îl puteți găsi urmărind acest link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Urmați acest link pentru a modifica preferințele de notificare: %(notification_settings_url)s )\n"
+"\n"
+"A ta %(site_name)s Echipă."
+
+msgid "You created a pad"
+msgstr "Ai creat un pad"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a Pad"
+msgstr "a creat un Pad"
+
+msgid "There are no etherpads yet"
+msgstr "Nu sunt încă etherpaduri"
 
 #, python-format
 msgid "Etherpad \"%(title)s\" was edited successfully."
@@ -9067,1961 +9365,6 @@ msgstr "Conferință Evenimente"
 msgid "%(event)s %(type)s"
 msgstr "%(event)s %(type)s"
 
-#, python-format
-msgid "Event \"%(title)s\" was edited successfully."
-msgstr "Evenimentul ”%(title)s” a fost editat cu succes."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be edited."
-msgstr "Evenimentul ”%(title)s” nu a putut fi editat."
-
-msgid "Please use the conference management area to add new workshops!"
-msgstr ""
-
-msgid "The page you requested is not available for this event at this time."
-msgstr "Pagina solicitată nu este disponibilă pentru acest eveniment."
-
-msgid "One of the event suggestions times could not be understood!"
-msgstr "Unul dintre momentele de sugestii ale evenimentului nu a putut fi prezentat!"
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was edited successfully."
-msgstr "Eveniment neprogramat ”%(title)s” a fost editat cu succes."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be edited."
-msgstr "Eveniment neprogramat ”%(title)s” nu a putut fi editat."
-
-#, python-format
-msgid "Event \"%(title)s\" was added successfully."
-msgstr "Evenimentul ”%(title)s” a fost adăugat cu succes."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be added."
-msgstr "Evenimentul ”%(title)s” nu a putut fi adăugat."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was added successfully."
-msgstr "Evenimentul neprogramat ”%(title)s” a fost adăugat cu succes."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be added."
-msgstr "Evenimentul neprogramat ”%(title)s” nu a putut fi adăugat."
-
-msgid "You should define at least one date suggestion."
-msgstr "Ar trebui să definiți cel puțin o sugestie de dată."
-
-#, python-format
-msgid "Event \"%(title)s\" was deleted successfully."
-msgstr "Evenimentul ”%(title)s” a fost șters cu succes."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be deleted."
-msgstr "Evenimentul ”%(title)s” nu a putut fi șters."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was deleted successfully."
-msgstr "Evenimentul neprogramat ”%(title)s” a fost șters cu succes."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be deleted."
-msgstr "Evenimentul neprogramat ”%(title)s” nu a putut fi șters."
-
-#, fuzzy
-msgid "Your votes were saved successfully."
-msgstr "Ideea ta a fost ștearsă cu succes."
-
-#, fuzzy
-#| msgid "Poll \"%(title)s\" could not be added."
-msgid "Your votes could not be saved."
-msgstr "Sondaj ”%(title)s” nu a putut fi adăugat."
-
-msgid "This is event is already scheduled. You cannot vote for it any more."
-msgstr "Acest eveniment este deja programat. Nu-l mai puteți vota."
-
-msgid "The complete request can only be sent via POST!"
-msgstr "Cererea completă poate fi trimisă doar prin POȘTĂ!"
-
-msgid "Event cannot be completed: No date was supplied."
-msgstr "Evenimentul nu poate fi finalizat: Nici o dată nu a fost furnizată."
-
-msgid "The event was created successfully at the specified date."
-msgstr "Evenimentul a fost creat cu succes la data specificată."
-
-msgid "Upcoming events"
-msgstr "Evenimente viitoare"
-
-#, fuzzy
-msgid "Upcoming event"
-msgstr "Evenimente viitoare"
-
-msgid "Your comment was added successfully."
-msgstr "Comentariul Dvs. a fost adăugat cu succes."
-
-msgid "Your comment was deleted successfully."
-msgstr "Comentariul Dvs. a fost șters cu succes."
-
-#, fuzzy
-#| msgid "Save changes"
-msgid "Exchange"
-msgstr "Salvează modificările"
-
-#, fuzzy
-#| msgid "Save changes"
-msgctxt "the_app"
-msgid "exchange"
-msgstr "Salvează modificările"
-
-msgctxt "the_app"
-msgid "file"
-msgstr "fișier"
-
-msgid "A user uploaded a new file"
-msgstr "Un utilizator a încărcat un nou fișier"
-
-#, python-format
-msgid "%(sender_name)s uploaded the file %(object_name)s"
-msgstr "%(sender_name)s a încărcat fișierul %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s uploaded %(count)d files"
-msgstr "%(sender_name)s încărcat %(count)d fișierele"
-
-#, python-format
-msgid "%(sender_name)s created a new file"
-msgstr "%(sender_name)s a creat un nou fișier"
-
-#, python-format
-msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Un nou fișier: ”%(object_name)s” a fost creat în %(team_name)s."
-
-msgid "A user uploaded a new file in a team you are following"
-msgstr "Un utilizator a încărcat un nou fișier într-o echipă pe care o urmărești"
-
-#, python-format
-msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s a creat un nou fișier în %(team_name)s (pe care le urmezi)"
-
-#, python-format
-msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "Un nou fișier: ”%(object_name)s” a fost creat în %(team_name)s (pe care le urmezi)."
-
-msgid "Latest Files"
-msgstr "Cele mai recente fișiere"
-
-msgid "No files"
-msgstr "Fără fișiere"
-
-msgid "Pictures"
-msgstr "Poze"
-
-msgid "Documents"
-msgstr "Documente"
-
-msgid "Audio Files"
-msgstr "Fișiere Audio"
-
-msgid "Videos"
-msgstr "Videoclipuri"
-
-msgid "File Type"
-msgstr "Tip Fișier"
-
-msgid "File Name"
-msgstr "Nume de Fișier"
-
-msgid "File Name (descending)"
-msgstr "Nume de Fișier (descendentă)"
-
-msgid "Smallest Files"
-msgstr "Cele mai mici fișiere"
-
-msgid "Largest Files"
-msgstr "Cele mai mari fișiere"
-
-msgid "The given URL does not seem to be valid."
-msgstr "URL-ul dat nu pare a fi valid."
-
-msgid "Must supply either a URL or File"
-msgstr "Trebuie să furnizeze fie un URL sau un Fișier"
-
-msgid "Is URL Link"
-msgstr "Este Link URL"
-
-msgid "Uploaded by"
-msgstr "Încărcat de"
-
-msgid "Uploaded on"
-msgstr "Încărcat pe"
-
-msgid "No files selected."
-msgstr "Nu au fost selectate fișiere."
-
-msgctxt "special_folder_type"
-msgid "Attachments"
-msgstr "Atașamente"
-
-msgid "File does not exist or you are not allowed to delete it."
-msgstr "Fișierul nu există sau nu aveți voie să îl ștergeți."
-
-#, python-format
-msgid "A problem occurred during export. The following file is missing: %(filename)s."
-msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
-msgstr[0] "O problemă a apărut în timpul exportului. Fișierul următor lipsește: %(filename)s."
-msgstr[1] "O problemă a apărut în timpul exportului. Fișierul următor lipsește: %(filename)s."
-msgstr[2] "O problemă a apărut în timpul exportului. Fișierele următoare lipsesc: %(filename)s."
-
-msgid "Invalid request."
-msgstr "Cerere invalidă."
-
-#, python-format
-msgid "File \"%(title)s\" was updated successfully."
-msgstr "Fișier ”%(title)s” a fost actualizat cu succes."
-
-#, python-format
-msgid "File \"%(title)s\" could not be updated."
-msgstr "Fișier ”%(title)s” nu a putut fi actualizat."
-
-msgid "Downloading failed, the target object was not a folder!"
-msgstr "Descărcarea a eșuat, obiectul țintă nu era un dosar!"
-
-msgid "Canceled the download because there seem to be no files in this folder."
-msgstr "A anulat descărcarea, deoarece se pare că nu există fișiere în acest dosar."
-
-msgid "Internal Error: Group not Found"
-msgstr ""
-
-msgid "Permission for upload denied"
-msgstr ""
-
-msgid "The uploaded file was invalid."
-msgstr ""
-
-#, python-format
-msgid "%(count)d File was added successfully."
-msgid_plural "%(count)d Files were added successfully."
-msgstr[0] "%(count)d Fișierul a fost adăugat cu succes."
-msgstr[1] "%(count)d Fișierul a fost adăugat cu succes."
-msgstr[2] "%(count)d Fișierele au fost adăugate cu succes."
-
-msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
-msgstr ""
-
-msgctxt "the_app"
-msgid "marketplace"
-msgstr "piața de desfacere"
-
-msgid "A user created a new offer"
-msgstr "Un utilizator a creat o nouă ofertă"
-
-#, python-format
-msgid "%(sender_name)s created the offer %(object_name)s"
-msgstr "%(sender_name)s a creat oferta %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d offers"
-msgstr "%(sender_name)s a creat %(count)d promoții"
-
-#, python-format
-msgid "%(sender_name)s created a new offer"
-msgstr "%(sender_name)s  a creat o nouă ofertă"
-
-#, python-format
-msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "O nouă ofertă: ”%(object_name)s” a fost creat în %(team_name)s."
-
-msgid "One of your offers expired"
-msgstr "Una dintre ofertele tale a expirat"
-
-#, python-format
-msgid "Your offer %(object_name)s expired"
-msgstr "Oferi %(object_name)s a expirat"
-
-#, python-format
-msgid "%(count)d of your offers expired"
-msgstr "%(count)d dintre ofertele dvs., a expirat"
-
-msgid "Your offer has expired"
-msgstr "Oferta ta a expirat"
-
-#, python-format
-msgid "Offer \"%(object_name)s\" has expired."
-msgstr "Oferi ”%(object_name)s” a expirat."
-
-msgid "A user commented on one of your offers"
-msgstr "Un utilizator a comentat una dintre ofertele dvs"
-
-#, python-format
-msgid "%(sender_name)s commented on your offer %(object_name)s"
-msgstr "%(sender_name)s a comentat ofertele tale %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
-msgstr[0] "%(sender_name)s și %(count_minus_one)d altele au comentat oferta ta %(object_name)s"
-msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au comentat oferta dvs., %(object_name)s"
-msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au comentat oferta dvs., %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your offer"
-msgstr "%(sender_name)s a comentat ofertele tale"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your offers"
-msgstr "%(sender_name)s a comentat una dintre ofertele tale"
-
-msgid "A user commented on an offer you were tagged in"
-msgstr "Un utilizator a comentat o ofertă la care ați fost etichetat"
-
-#, python-format
-msgid "%(sender_name)s commented on the offer %(object_name)s"
-msgstr "%(sender_name)s a comentat oferta ta %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
-msgstr[0] "%(sender_name)s și %(count_minus_one)d altele au comentat oferta %(object_name)s"
-msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au comentat oferta %(object_name)s"
-msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au comentat oferta %(object_name)s"
-
-msgid "You were tagged in this offer"
-msgstr "Ai fost etichetat în această ofertă"
-
-#, python-format
-msgid "%(sender_name)s commented on an offer you were tagged in"
-msgstr "%(sender_name)s a comentat o ofertă în care ați fost etichetat"
-
-#, python-format
-msgid "%(sender_name)s commented on an offer you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s a comentat o ofertă în care ați fost etichetat în %(team_name)s"
-
-msgid "A user created a new offer in a team you are following"
-msgstr "Un utilizator a creat o nouă ofertă într-o echipă pe care o urmărești"
-
-#, python-format
-msgid "%(sender_name)s created a new offer in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s a creat o nouă ofertă în %(team_name)s (care urmează)"
-
-#, python-format
-msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "O nouă ofertă: ”%(object_name)s” a fost creat în %(team_name)s (care urmează)."
-
-msgid "A user updated an offer you are following"
-msgstr "Un utilizator a actualizat o ofertă pe care o urmărești"
-
-#, python-format
-msgid "%(sender_name)s updated the offer %(object_name)s"
-msgstr "%(sender_name)s a actualizat oferta %(object_name)s"
-
-msgid "You are following this offer"
-msgstr "Urmăriți această ofertă"
-
-#, python-format
-msgid "%(sender_name)s updated an offer you are following"
-msgstr "%(sender_name)s a actualizat o ofertă pe care o urmărești"
-
-#, python-format
-msgid "An offer you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "O ofertă pe care o urmărești: ”%(object_name)s” a fost actualizat în %(team_name)s."
-
-msgid "A user commented on an offer you are following"
-msgstr "Un utilizator a comentat o ofertă pe care o urmărești"
-
-#, python-format
-msgid "%(sender_name)s commented on on an offer you are following"
-msgstr "%(sender_name)s a comentat o ofertă pe care o urmărești"
-
-msgid "Current Offers"
-msgstr "Oferte Curente"
-
-msgid "No current offers"
-msgstr "Nu există oferte curente"
-
-msgid "Order Key"
-msgstr "Cheie de Comandă"
-
-msgid "Looking for"
-msgstr "Căutări"
-
-msgid "Offering"
-msgstr "Ofertă"
-
-msgid "Offer currently active?"
-msgstr "Ofertă  în prezent activă?"
-
-msgid "Offer Category"
-msgstr "Categoria ofertei"
-
-#, python-format
-msgid "Offer: %(offer)s (%(type)s)"
-msgstr "Oferi: %(offer)s (%(type)s)"
-
-#, python-format
-msgid "Offer \"%(title)s\" was edited successfully."
-msgstr "Oferi ”%(title)s” a fost editat cu succes."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be edited."
-msgstr "Oferi ”%(title)s” cloud să nu fi editat."
-
-#, python-format
-msgid "Offer \"%(title)s\" was added successfully."
-msgstr "Oferi ”%(title)s” a fost adăugat cu succes."
-
-#, python-format
-msgid "Offer \"%(title)s\" was saved successfully, but is not active yet."
-msgstr "Oferi ”%(title)s” a fost salvat cu succes, dar încă nu este activ."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be added."
-msgstr "Oferi ”%(title)s” nu a putut fi adăugat."
-
-#, python-format
-msgid "Offer \"%(title)s\" was deleted successfully."
-msgstr "Oferi ”%(title)s” a fost șters cu succes."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be deleted."
-msgstr "Oferi ”%(title)s” nu a putut fi șters."
-
-msgid "The offer you requested is no longer active. Sorry!"
-msgstr "Oferta pe care ai solicitat-o nu mai este activă. Scuză!"
-
-msgid "Invalid action for this offer. The request could not be completed!"
-msgstr "Acțiune nevalidă pentru această ofertă. Cererea nu a putut fi finalizată!"
-
-msgid "The offer is already active"
-msgstr "Oferta este deja activă"
-
-msgid "The offer is already deactivated"
-msgstr "Oferta este deja dezactivată"
-
-msgid "The offer was deactivated successfully."
-msgstr "Oferta a fost dezactivată cu succes."
-
-msgid "The offer was reactivated successfully."
-msgstr "Oferta a fost reactivată cu succes."
-
-msgid "The offer was activated successfully."
-msgstr "Oferta a fost activată cu succes."
-
-msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
-msgstr ""
-
-msgctxt "the_app"
-msgid "Chat"
-msgstr ""
-
-msgctxt "the_app"
-msgid "message"
-msgstr "mesaj"
-
-msgid "Chat"
-msgstr ""
-
-msgid "Only Administrators may send a message to this project/group!"
-msgstr "Numai Administratorii pot trimite un mesaj către acest proiect/grup!"
-
-msgid "Additional Recipients"
-msgstr "Recipienții suplimentari"
-
-msgid "Undefined recipient."
-msgstr "Recipient nedefinit."
-
-msgid "Your reply could not be matched to an existing message."
-msgstr "Răspunsul dvs. nu a putut fi asociat cu un mesaj existent."
-
-msgid "An internal error occured."
-msgstr "A apărut o eroare internă."
-
-msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
-msgstr "Adresa de e-mail de la care ați trimis răspunsul nu este cea asociată contului dvs. de utilizator. Vă rugăm să trimiteți răspunsuri directe numai din adresa de e-mail cu care sunteți înregistrat pe site!"
-
-msgid "There was an error when processing your message text!"
-msgstr "A apărut o eroare la procesarea textului mesajului!"
-
-msgid "Your direct reply failed!"
-msgstr "Răspunsul dvs. direct a eșuat!"
-
-msgid "Select at least one object."
-msgstr "Selectați cel puțin un obiect."
-
-msgid "Messages or conversations successfully archived."
-msgstr "Mesaje sau conversații arhivate cu succes."
-
-msgid "Messages or conversations successfully deleted."
-msgstr "Mesaje sau conversații  șterse cu succes."
-
-msgid "Messages were marked as read."
-msgstr "Mesajele au fost marcate ca fiind citite."
-
-msgid "Messages or conversations successfully recovered."
-msgstr "Mesajele sau conversațiile s-au recuperat cu succes."
-
-msgid "Notes"
-msgstr "Noate"
-
-msgctxt "the_app"
-msgid "note"
-msgstr "notă"
-
-msgid "A user commented on a news post"
-msgstr "Un utilizator a comentat o postare de știri"
-
-#, python-format
-msgid "%(sender_name)s commented on a news post"
-msgstr "%(sender_name)s a comentat o postare de știri"
-
-msgid "A user commented on one of your news posts"
-msgstr "Un utilizator a comentat una dintre mesajele tale de știri"
-
-#, python-format
-msgid "%(sender_name)s commented on your news post %(object_name)s"
-msgstr "%(sender_name)s a comentat postarea dvs., de știri %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
-msgstr[0] "%(sender_name)s și %(count_minus_one)d și altul a comentat postarea dvs., %(object_name)s"
-msgstr[1] "%(sender_name)s și %(count_minus_one)d altele a comentat postarea dvs., %(object_name)s"
-msgstr[2] "%(sender_name)s și %(count_minus_one)d altele a comentat postarea dvs., %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your news post"
-msgstr "%(sender_name)s a comentat postările tale de știri"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your news posts"
-msgstr "%(sender_name)s a comentat una dintre mesajele tale de știri"
-
-msgid "A user commented on a news posts you commented in"
-msgstr "Un utilizator a comentat postările de știri pe care le-ați comentat"
-
-#, python-format
-msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
-msgstr "%(sender_name)s ai comentat o postare de știri %(object_name)s în care ai comentat"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
-msgstr[0] "%(sender_name)s și %(count_minus_one)d și altul a comentat postarea dvs., %(object_name)s a comentat în"
-msgstr[1] "%(sender_name)s și %(count_minus_one)d și altele a comentat postarea dvs., %(object_name)s au comentat în"
-msgstr[2] "%(sender_name)s și %(count_minus_one)d și altul a comentat postarea dvs., %(object_name)s ai comentat în"
-
-#, python-format
-msgid "%(sender_name)s commented on a news post you commented in"
-msgstr "%(sender_name)s ai comentat o postare de știri în care ai comentat"
-
-msgid "A user created a news post"
-msgstr "Un utilizator a creat o nouă postare"
-
-#, python-format
-msgid "%(sender_name)s created the news post %(object_name)s"
-msgstr "%(sender_name)s a creat o postarea de știri %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d news posts"
-msgstr "%(sender_name)s a creat %(count)d postare de știri"
-
-#, python-format
-msgid "%(sender_name)s created a new news post"
-msgstr "%(sender_name)s a creat o nouă postare de știri"
-
-#, python-format
-msgid "%(sender_name)s posted in %(team_name)s:"
-msgstr "%(sender_name)s postat în %(team_name)s:"
-
-msgid "A user created a news post in a team you are following"
-msgstr "Un utilizator a creat o nouă postare într-o echipă pe care o urmărești"
-
-#, python-format
-msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s a creat o nouă postare de știri în %(team_name)s (pe care le urmezi)"
-
-#, python-format
-msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
-msgstr "%(sender_name)s a postat în %(team_name)s: (pe care le urmezi)"
-
-msgid "A user updated a news post"
-msgstr "Un utilizator a actualizat o nouă postare"
-
-#, python-format
-msgid "%(sender_name)s updated the news post %(object_name)s"
-msgstr "%(sender_name)s a actualizat postare de știri %(object_name)s"
-
-msgid "You are following this news post"
-msgstr "Urmăriți această postare de știri"
-
-#, python-format
-msgid "%(sender_name)s updated a news post you are following"
-msgstr "%(sender_name)s a actualizat o nouă postare pe care o urmărești"
-
-#, python-format
-msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
-msgstr "O nouă postare pe care o urmărești %(sender_name)s a fost actualizat %(team_name)s:"
-
-msgid "A user commented on a news post you are following"
-msgstr "Un utilizator a comentat o postare de știri pe care o urmărești"
-
-#, python-format
-msgid "%(sender_name)s commented on the news post %(object_name)s"
-msgstr "%(sender_name)s a comentat postarea de știri %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
-msgstr[0] "%(sender_name)s și %(count_minus_one)d și altul a comentat postarea de știri %(object_name)s"
-msgstr[1] "%(sender_name)s și %(count_minus_one)d și altele au comentat postarea de știri %(object_name)s"
-msgstr[2] "%(sender_name)s și %(count_minus_one)d și altele au comentat postarea de știri %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on a news posts you are following"
-msgstr "%(sender_name)s a comentat o postare de știri pe care o urmărești"
-
-msgid "No news"
-msgstr "Nici o știre"
-
-msgid "Write a news post"
-msgstr "Scrie o postare de știri"
-
-msgid "News stream"
-msgstr "Flux de știri"
-
-msgid "Popularity"
-msgstr "Popularitate"
-
-msgid "Facebook Share"
-msgstr "A împărtăși pe Facebook"
-
-msgid "Note Item"
-msgstr "Element de notă"
-
-msgid "Note Items"
-msgstr "Elemente de notare"
-
-msgid "Your news post was added successfully."
-msgstr "Postarea dvs. de știri a fost adăugată cu succes."
-
-msgid "Your news post was deleted successfully."
-msgstr "Postarea dvs. de știri a fost ștearsă cu succes."
-
-msgid "Your news post was edited successfully."
-msgstr "Postarea dvs. de știri a fost modificată cu succes."
-
-msgid "You are seeing this alert because you created this content."
-msgstr "Vedeți această alertă pentru că ați creat acest conținut."
-
-msgid "You are seeing this alert because you are following the item's project or group."
-msgstr "Vedeți această alertă deoarece urmăriți proiectul sau grupul articolului."
-
-msgid "You are seeing this alert because you are following this item."
-msgstr "Vedeți această alertă pentru că urmăriți elementul."
-
-msgctxt "the_app"
-msgid "notifications"
-msgstr "notificări"
-
-#, python-format
-msgid "Your daily digest for %(portal_name)s"
-msgstr "Sistematizarea ta zilnică pentru %(portal_name)s"
-
-msgid "This is what happened during the last day!"
-msgstr "Aceasta s-a întâmplat în ultima zi!"
-
-#, python-format
-msgid "Your weekly digest for %(portal_name)s"
-msgstr "Sistematiza săptămânal pentru %(portal_name)s"
-
-msgid "This is what happened during the last week!"
-msgstr "Aceasta s-a întâmplat în ultima săptămână!"
-
-msgctxt "notification frequency"
-msgid "Never"
-msgstr "Niciodată"
-
-msgctxt "notification frequency"
-msgid "Immediately"
-msgstr "Imediat"
-
-msgctxt "notification frequency"
-msgid "Daily"
-msgstr "Zilnic"
-
-msgctxt "notification frequency"
-msgid "Weekly"
-msgstr "Săptămânal"
-
-msgid "Notification Preference for User"
-msgstr "Preferința notificării pentru utilizator"
-
-msgid "Notification Preference"
-msgstr "Preferința notificării"
-
-msgid "Multi Notification ID"
-msgstr "ID-uri de notificare multi"
-
-msgid "Multi Notification Preference"
-msgstr "Preferință de notificare multi"
-
-msgid "Multi Notification Preferences"
-msgstr "Preferințe de Notificare  multiple"
-
-msgid "User who caused this notification event"
-msgstr "Utilizator care a provocat acest eveniment de notificare"
-
-msgid "Audience"
-msgstr "Audiență"
-
-msgid "Owner of the alert"
-msgstr "Proprietarul alertei"
-
-msgid "Alert Reason key"
-msgstr "Cheia Motivului Alert"
-
-msgid "Last user who caused this notification event"
-msgstr "Ultimul utilizator care a provocat acest eveniment de notificare"
-
-msgid "Alert State"
-msgstr "Stare de Alertă"
-
-msgid "You are following this content or its Project or Group"
-msgstr "Urmăriți acest conținut sau Proiect sau Grup al acestuia"
-
-msgid "All notifications"
-msgstr "Toate notificările"
-
-msgid "No notifications"
-msgstr "Nici o notificare"
-
-msgid "For content that I am following, I wish to receive notification emails"
-msgstr "Pentru conținutul pe care îl urmăresc, doresc să primesc e-mailuri de notificare"
-
-msgid "You are getting this notification because you are subscribed to these kinds of events in your project or group."
-msgstr "Primiți această notificare deoarece sunteți abonați la aceste tipuri de evenimente în proiect sau grup."
-
-msgid "You are getting this notification because you are an administrator of this project or group."
-msgstr "Primiți această notificare deoarece sunteți administrator al acestui proiect sau grup."
-
-msgid "You are getting this notification because you are an administrator of this portal."
-msgstr "Primiți această notificare deoarece sunteți administratorul acestui portal."
-
-msgid "You are getting this email because you are subscribed to one or more daily notifications."
-msgstr "Primiți acest e-mail deoarece sunteți abonat la una sau mai multe notificări zilnice."
-
-msgid "You are getting this email because you are subscribed to one or more weekly notifications."
-msgstr "Primiți acest e-mail deoarece sunteți abonat la o altă notificare săptămânală."
-
-msgid "New item"
-msgstr "Element nou"
-
-#, python-format
-msgid "View on %(portal_name)s"
-msgstr "Vedere %(portal_name)s"
-
-msgid "Untitled"
-msgstr "Fără titlu"
-
-msgid "Your notification preferences were updated successfully."
-msgstr "Preferințele dvs. de notificare au fost actualizate cu succes."
-
-msgid "Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!"
-msgstr ""
-
-msgid "Your notifications preferences were reset to default!"
-msgstr "Preferințele dvs. de notificare au fost resetate la valoarea implicită!"
-
-msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
-msgstr ""
-
-#, fuzzy
-#| msgid "Successfully removed user"
-msgid "Successfully signed in as {}."
-msgstr "Elimină cu succes utilizatorul"
-
-#, fuzzy
-#| msgid "Successfully deactivated user account"
-msgid "Successfully connected account."
-msgstr "Cont de utilizator dezactivat cu succes"
-
-#, fuzzy
-#| msgid "Successfully removed user"
-msgid "Successfully removed connection."
-msgstr "Elimină cu succes utilizatorul"
-
-#, fuzzy
-#| msgid "Organization"
-msgctxt "the_app"
-msgid "organization"
-msgstr "Organizare"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization membership"
-msgstr "Organizații"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization memberships"
-msgstr "Organizații"
-
-#, fuzzy
-#| msgid "Team Invite for Unregistered User"
-msgid "Organization Invite for Unregistered User"
-msgstr "Echipa invită pentru un utilizator neînregistrat"
-
-#, fuzzy
-#| msgid "Team Invites for Unregistered Users"
-msgid "Organization Invites for Unregistered Users"
-msgstr "Echipa invitărilor pentru utilizatorii neînregistrați"
-
-#, fuzzy
-msgid "Civil society organization"
-msgstr "Toate Organizațiile"
-
-msgid "Company (commercial)"
-msgstr ""
-
-#, fuzzy
-#| msgid "Public voting"
-msgid "Public institution"
-msgstr "Votare publică"
-
-#, fuzzy
-#| msgid "Other teams"
-msgid "Other"
-msgstr "Alte echipe"
-
-#, fuzzy
-msgid "Name of the organization"
-msgstr "Eliminați locația"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Organization type"
-msgstr "Organizare"
-
-#, fuzzy
-#| msgid "Logout"
-msgid "Logo"
-msgstr "Deconectare"
-
-#, fuzzy
-#| msgid "Email address"
-msgid "Email Address"
-msgstr "Adresa de e-mail"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Cosinnus Organization"
-msgstr "Organizare"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Cosinnus Organizations"
-msgstr "Organizații"
-
-msgid "CosinnusOrganizationSocialMedia"
-msgstr ""
-
-#, fuzzy
-#| msgid "CosinnusLocation"
-msgid "CosinnusOrganizationLocation"
-msgstr "Cosinnus Locație"
-
-#, fuzzy
-#| msgid "CosinnusLocations"
-msgid "CosinnusOrganizationLocations"
-msgstr "Cosinnus Locații"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Organization group"
-msgstr "Organizare"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization groups"
-msgstr "Organizații"
-
-#, fuzzy, python-format
-msgid "Project/group %(name)s had already requested and has now been accepted."
-msgstr "Ai fost deja invitat ”%(team_name)s” și acum au fost făcuți membrii imediat!"
-
-#, fuzzy, python-format
-#| msgid "User %(username)s was successfully invited!"
-msgid "Project/group %(name)s was successfully invited."
-msgstr "Utilizatorul %(username)s trebuia invitat!"
-
-#, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
-msgid "Your join request was withdrawn from organization “%(name)s” successfully."
-msgstr "Solicitarea dvs. de aderare a fost retrasă %(team_type)s ”%(team_name)s” cu succes."
-
-#, fuzzy, python-format
-msgid "You have declined the invitation to organization “%(name)s”."
-msgstr "Nu mai sunteți membru %(team_type)s ”%(team_name)s”."
-
-#, fuzzy, python-format
-#| msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
-msgid "Your project/group is now assigned to the organization “%(name)s”. Welcome!"
-msgstr "Acum sunteți membru %(team_type)s ”%(team_name)s”. Bine ați venit!"
-
-#, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
-msgid "Your request was withdrawn from organization \"%(name)s\" successfully."
-msgstr "Solicitarea dvs. de aderare a fost retrasă %(team_type)s ”%(team_name)s” cu succes."
-
-#, fuzzy, python-format
-#| msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
-msgid "Your invitation to project/group \"%(name)s\" was withdrawn successfully."
-msgstr "Invitația dvs. către utilizator ”%(username)s” a fost retras cu succes."
-
-#, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
-msgid "Project/group \"%(name)s\" is no longer assigned."
-msgstr "Utilizatorul ”%(username)s” nu mai este membru."
-
-#, fuzzy
-#| msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
-msgid "Sorry, only portal administrators can create Organizations! You can either create a Project, or write a message to one of the administrators to create a Organization for you. Below you can find a listing of all administrators."
-msgstr "Ne pare rău, numai administratorii portalului pot crea Grupuri! Puteți crea un Proiect sau scrie un mesaj unuia dintre administratori pentru a crea un Grup pentru dvs. Mai jos puteți găsi o listă cu toți administratorii."
-
-#, fuzzy, python-format
-#| msgid "Event \"%(title)s\" was edited successfully."
-msgid "Organization \"%(name)s\" was created successfully."
-msgstr "Evenimentul ”%(title)s” a fost editat cu succes."
-
-#, fuzzy
-#| msgid "Your idea was deleted successfully."
-msgid "Your organization was deleted successfully."
-msgstr "Ideea ta a fost ștearsă cu succes."
-
-msgctxt "the_app"
-msgid "poll"
-msgstr "sondaj"
-
-msgid "A user created a new poll"
-msgstr "Un utilizator a creat un nou sondaj"
-
-#, python-format
-msgid "%(sender_name)s created the poll %(object_name)s"
-msgstr "%(sender_name)s a creat sondajul %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d polls"
-msgstr "%(sender_name)s a creat %(count)d sondajul"
-
-#, python-format
-msgid "%(sender_name)s created a new poll"
-msgstr "%(sender_name)s a creat un nou sondaj"
-
-#, python-format
-msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Un nou sondaj: ”%(object_name)s” a fost creat în %(team_name)s."
-
-msgid "A poll you voted on was completed"
-msgstr "S-a finalizat un sondaj pentru care ați votat"
-
-#, python-format
-msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
-msgstr "%(sender_name)s a finalizat sondajul %(object_name)s ai votat"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d polls you voted on"
-msgstr "%(sender_name)s a finalizat %(count)d sondajele pe care le-ați votat"
-
-#, python-format
-msgid "%(sender_name)s completed the poll"
-msgstr "%(sender_name)s a completat sondajul"
-
-#, python-format
-msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
-msgstr "Sondaj ”%(object_name)s” a fost completat în %(team_name)s."
-
-msgid "A user commented on one of your polls"
-msgstr "Un utilizator a comentat unul dintre sondajele voastre"
-
-#, python-format
-msgid "%(sender_name)s commented on your poll %(object_name)s"
-msgstr "%(sender_name)s a comentat sondajul dvs., %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
-msgstr[0] "%(sender_name)s și %(count_minus_one)d altul a comentat sondajul dvs., %(object_name)s"
-msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au comentat sondajul dvs., %(object_name)s"
-msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au comentat sondajul dvs., %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your poll"
-msgstr "%(sender_name)s a comentat sondajele vostre"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your polls"
-msgstr "%(sender_name)s a comentat unul dintre sondajele voastre"
-
-msgid "A user commented on a poll you were tagged in"
-msgstr "Un utilizator a comentat un sondaj în care ați fost etichetat"
-
-#, python-format
-msgid "%(sender_name)s commented on the poll %(object_name)s"
-msgstr "%(sender_name)s a comentat sondajul %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
-msgstr[0] "%(sender_name)s și %(count_minus_one)d altul a comentat la sondaj %(object_name)s"
-msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au comentat sondajul %(object_name)s"
-msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au comentat sondajul %(object_name)s"
-
-msgid "You were tagged in this poll"
-msgstr "Ați fost etichetat în acest sondaj"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you were tagged in"
-msgstr "%(sender_name)s a comentat un sondaj în care ați fost etichetat"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s a comentat un sondaj în care ați fost etichetat %(team_name)s"
-
-msgid "A user commented on an poll you voted in"
-msgstr "Un utilizator a comentat un sondaj în care ați votat"
-
-msgid "You voted on this poll"
-msgstr "Ați votat acest sondaj"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you voted in"
-msgstr "%(sender_name)s a comentat un sondaj în care ați votat"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
-msgstr "%(sender_name)s a comentat un sondaj în care ați votat în %(team_name)s"
-
-msgid "A user created a new poll in a team you are following"
-msgstr "Un utilizator a creat un nou sondaj într-o echipă pe care o urmărești"
-
-#, python-format
-msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s a creat un nou sondaj în %(team_name)s (pe care le urmezi)"
-
-#, python-format
-msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "Un nou sondaj: ”%(object_name)s a fost creat în %(team_name)s (pe ccare le urmezi)."
-
-msgid "A user updated a poll you are following"
-msgstr "Un utilizator a actualizat un sondaj pe care îl urmărești"
-
-#, python-format
-msgid "%(sender_name)s updated the poll %(object_name)s"
-msgstr "%(sender_name)s a actualizat sondajul %(object_name)s"
-
-msgid "You are following this poll"
-msgstr "Urmărești acest sondaj"
-
-#, python-format
-msgid "%(sender_name)s updated a poll you are following"
-msgstr "%(sender_name)s a actualizat un sondaj pe care îl urmărești"
-
-#, python-format
-msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "Un sondaj pe care îl urmărești: ”%(object_name)s” a fost actualizat în %(team_name)s."
-
-msgid "A poll you are following was completed"
-msgstr "S-a finalizat un sondaj pe care îl urmărești"
-
-#, python-format
-msgid "%(sender_name)s completed the poll %(object_name)s"
-msgstr "%(sender_name)s a finalizat sondajul %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d polls"
-msgstr "%(sender_name)s a finalizat %(count)d sondajul"
-
-#, python-format
-msgid "%(sender_name)s completed the poll you are following"
-msgstr "%(sender_name)s a completat sondajul pe care îl urmărești"
-
-#, python-format
-msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
-msgstr "Sondaj ”%(object_name)s” urmează să fie finalizată în %(team_name)s."
-
-msgid "A user commented on one a poll you are following"
-msgstr "Un utilizator a comentat un sondaj pe care îl urmărești"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you are following"
-msgstr "%(sender_name)s  a comentat sondajul pe care-l urmărești"
-
-msgid "Current Polls"
-msgstr "Sondaje Actuale"
-
-msgid "No current polls"
-msgstr "Nu există sondaje actuale"
-
-msgid "You must write a description for this poll option!"
-msgstr "Trebuie să scrieți o descriere pentru această opțiune de sondaj!"
-
-msgid "Voting closed"
-msgstr "Votare închisă"
-
-msgid "Poll archived"
-msgstr "Sondaj arhivat"
-
-msgid "Multiple options votable"
-msgstr "Opțiuni multiple eligibile"
-
-msgid "Does this poll allow users to vote on multiple options or just decide for one?"
-msgstr "Acest sondaj permite utilizatorilor să voteze mai multe opțiuni sau să decidă doar una?"
-
-msgid "\"Maybe\" option enabled"
-msgstr "”Poate” opțiune activată"
-
-msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
-msgstr "Opțiunea este activată? Ignorat și implicit pe False dacă ”voturile multiple==False"
-
-msgid "Anyone can vote"
-msgstr "Oricine poate vota"
-
-msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
-msgstr "Dacă este adevărat, oricine poate vedea și vota acest sondaj. Dacă este fals, numai membrii grupul pot."
-
-msgid "Show voters"
-msgstr "Arată alegătorilor"
-
-msgid "If true, display a list of which user voted for each option."
-msgstr "Dacă este adevărat, afișează o listă cu care utilizatorul a votat pentru fiecare opțiune."
-
-msgid "Winning Option"
-msgstr "Opțiune Câștigătoare"
-
-#, python-format
-msgid "Poll: %(poll)s (%(state)s)"
-msgstr "Sondaj: %(poll)s (%(state)s"
-
-msgid "Poll Option"
-msgstr "Opțiune de votare"
-
-msgid "Poll Options"
-msgstr "Opțiuni de sondaj"
-
-#, python-format
-msgid "Poll \"%(title)s\" was edited successfully."
-msgstr "Sondaj ”%(title)s” a fost editat cu succes."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be edited."
-msgstr "Sondaj ”%(title)s” nu a putut fi editat."
-
-#, python-format
-msgid "Poll \"%(title)s\" was added successfully."
-msgstr "Sondaj ”%(title)s” a fost adăugat cu succes."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be added."
-msgstr "Sondaj ”%(title)s” nu a putut fi adăugat."
-
-msgid "You should define at least one poll option!"
-msgstr "Ar trebui să definiți cel puțin o opțiune de sondaj!"
-
-msgid "This poll is archived and cannot be edited anymore!"
-msgstr "Acest sondaj este arhivat și nu mai poate fi editat!"
-
-#, python-format
-msgid "Poll \"%(title)s\" was deleted successfully."
-msgstr "Sondaj ”%(title)s” a fost șters cu succes."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be deleted."
-msgstr "Sondaj ”%(title)s” nu a putut fi șters."
-
-msgid "The voting phase for this poll is over. You cannot vote for it any more."
-msgstr "Faza de votare pentru acest sondaj sa încheiat. Nu o mai puteți vota."
-
-msgid "In this poll you must vote for exactly one item!"
-msgstr "În acest sondaj trebuie să votezi exact un articol!"
-
-msgid "Invalid action for this poll. The request could not be completed!"
-msgstr "Acțiune nevalidă pentru acest sondaj. Cererea nu a putut fi finalizată!"
-
-msgid "This action is not permitted for this poll at this stage!"
-msgstr "Această acțiune nu este permisă pentru acest sondaj în această etapă!"
-
-msgid "The poll was closed successfully."
-msgstr "Sondajul a fost închis cu succes."
-
-msgid "The poll was re-opened successfully."
-msgstr "Sondajul a fost redeschis cu succes."
-
-msgid "The poll was archived successfully."
-msgstr "Sondajul a fost arhivat cu succes."
-
-msgid "Stream"
-msgstr "Fluxul"
-
-msgctxt "the_app"
-msgid "stream"
-msgstr "fluxul de aplicații"
-
-msgid "My Streams"
-msgstr "Fluxul meu"
-
-msgid "Streams"
-msgstr "Fluxuri"
-
-msgid "Models"
-msgstr "Modele"
-
-msgid "Portal IDs"
-msgstr "ID-uri de portal"
-
-msgid "Last seen"
-msgstr "Văzut ultima dată"
-
-msgid "Special Stream"
-msgstr "Flux special"
-
-msgid "Special Group IDs"
-msgstr "ID-uri speciale de grup"
-
-msgid "You do not have permission to access this stream."
-msgstr "Nu aveți permisiunea de a accesa acest flux."
-
-msgid "Your stream was added successfully."
-msgstr "Fluxul Dvs. a fost adăugat cu succes."
-
-msgid "Your stream was updated successfully."
-msgstr "Fluxul Dvs. a fost actualizat cu succes."
-
-msgid "Your stream was deleted successfully."
-msgstr "Fluxul dvs. a fost șters cu succes."
-
-msgid "You cannot delete the default stream!"
-msgstr "Nu puteți șterge fluxul implicit!"
-
-msgctxt "the_app"
-msgid "todo"
-msgstr "tot"
-
-msgid "A user created a new todo"
-msgstr "Utilizatorul a creat totul nou"
-
-#, python-format
-msgid "%(sender_name)s created the todo %(object_name)s"
-msgstr "%(sender_name)s a creat totul %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d todos"
-msgstr "%(sender_name)s a creat totul %(count)d"
-
-#, python-format
-msgid "%(sender_name)s created a new todo"
-msgstr "%(sender_name)s a creat tot nou"
-
-#, python-format
-msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "Facem totul nou: \"%(object_name)s\" a fost creat in %(team_name)s."
-
-msgid "A todo was assigned to me"
-msgstr "S-a atribuit totul"
-
-#, python-format
-msgid "%(sender_name)s assigned the todo %(object_name)s to you"
-msgstr "%(sender_name)s care a atribuit totul %(object_name)s pentru tine"
-
-#, python-format
-msgid "%(sender_name)s assigned %(count)d todos to you"
-msgstr "%(sender_name)s care a atribuit %(count)d totul"
-
-#, python-format
-msgid "%(sender_name)s assigned a todo to you"
-msgstr "%(sender_name)s care a atribuit totul"
-
-msgid "A todo I created was completed"
-msgstr "Totul ce creat a fost finalizat"
-
-#, python-format
-msgid "%(sender_name)s completed the todo %(object_name)s"
-msgstr "%(sender_name)s e completat totul %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d todos"
-msgstr "%(sender_name)s e completat totul %(count)d"
-
-msgid "You created this todo"
-msgstr "Ai creat acest lucru"
-
-#, python-format
-msgid "%(sender_name)s completed your todo"
-msgstr "%(sender_name)s e completat totul"
-
-#, python-format
-msgid "%(sender_name)s completed one of your todos"
-msgstr "%(sender_name)s a completat unul dintre toți"
-
-msgid "A user commented on one of your todos"
-msgstr "Unul dintre toți utilizatori a comentat"
-
-#, python-format
-msgid "%(sender_name)s commented on your todo %(object_name)s"
-msgstr "%(sender_name)s a comentat totul %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
-msgstr[0] "%(sender_name)s și %(count_minus_one)d altul a comentat cu privire la tot %(object_name)s"
-msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au comentat cu privire la totul %(object_name)s"
-msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au comentat cu privire la totul %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your todo"
-msgstr "%(sender_name)s a comentat totul"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your todos"
-msgstr "%(sender_name)s a comentat unul dintre toți"
-
-msgid "A user commented on a todo you were tagged in"
-msgstr "Un utilizator a comentat tot ce a fost etichetat"
-
-#, python-format
-msgid "%(sender_name)s commented on the todo %(object_name)s"
-msgstr "%(sender_name)s a comentat totul %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
-msgstr[0] "%(sender_name)s și %(count_minus_one)d altul a comentat totul %(object_name)s"
-msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au comentat totul %(object_name)s"
-msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au comentat totul %(object_name)s"
-
-msgid "You were tagged in this todo"
-msgstr "Ai fost etichetat în acest lucru"
-
-#, python-format
-msgid "%(sender_name)s commented on a todo you were tagged in"
-msgstr "%(sender_name)s a comentat totul ce a fost etichetat"
-
-#, python-format
-msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s a comentat totul ce a fost etichetat în %(team_name)s"
-
-msgid "A user commented on a todo you were assigned to"
-msgstr "Un utilizator a comentat tot ce ți-a fost atribuit"
-
-#, python-format
-msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
-msgstr "%(sender_name)s a comentat despre atribuirea ta %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
-msgstr[0] "%(sender_name)s și %(count_minus_one)d și altul a comentat lucrurile pe care le-ați atribuit %(object_name)s"
-msgstr[1] "%(sender_name)s și %(count_minus_one)d și alții au comentat lucrurile pe care le-ați atribuit %(object_name)s"
-msgstr[2] "%(sender_name)s și %(count_minus_one)d și alții au comentat lucrurile pe care le-ați atribuit %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your assigned todos"
-msgstr "%(sender_name)s mi-a comentat unul dintre toți"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
-msgstr "%(sender_name)s a comentat unul dintre toți în %(team_name)s"
-
-msgid "A user updated a todo you are following"
-msgstr "Un utilizator a actualizat tot ceea ce urmărești"
-
-#, python-format
-msgid "%(sender_name)s updated the todo %(object_name)s"
-msgstr "%(sender_name)s a actualizat totul %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
-msgstr[0] "%(sender_name)s și %(count_minus_one)d altele au actualizat totul %(object_name)s"
-msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au actualizat totul %(object_name)s"
-msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au actualizat totul %(object_name)s"
-
-msgid "You are following this todo"
-msgstr "Urmărești acest lucru"
-
-#, python-format
-msgid "%(sender_name)s updated a todo you are following"
-msgstr "%(sender_name)s a actualizat totul ce urmărești"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "Tot ce urmărești:\"%(object_name)s\" a fost actualizat în %(team_name)s."
-
-msgid "A user reassigned a todo you are following"
-msgstr "Un utilizator a reasignat totul aceea ce urmarești"
-
-#, python-format
-msgid "%(sender_name)s reassigned the todo %(object_name)s"
-msgstr "%(sender_name)s care a atribuit totul %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s reassigned %(count)d todos"
-msgstr "%(sender_name)s care a atribuit %(count)d totul"
-
-#, python-format
-msgid "%(sender_name)s reassigned a todo you are following"
-msgstr "%(sender_name)s a reasignat tot ceea ce urmărești"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
-msgstr "Tot ce urmărești: \"%(object_name)s\" a fost realocat în %(team_name)s."
-
-msgid "A user completed a todo you are following"
-msgstr "Un utilizator a completat tot ceea ce urmați"
-
-#, python-format
-msgid "%(sender_name)s completed a todo you are following"
-msgstr "%(sender_name)s a completat tot ceea ce urmați"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
-msgstr "Tot ce urmărești: \"%(object_name)s\" a fost completat în %(team_name)s."
-
-msgid "A user commented on a todo you are following"
-msgstr "Un utilizator a comentat un articol pe are îl urmărești"
-
-#, python-format
-msgid "%(sender_name)s commented on on a todo you are following"
-msgstr "%(sender_name)s mi-a comentat un articol pe care  îl urmărești"
-
-msgid "My Todos"
-msgstr "Toate a mele"
-
-msgid "No todos"
-msgstr "Nu toate"
-
-msgid "Open"
-msgstr "Deschis"
-
-msgid "Completed"
-msgstr "Terminat"
-
-msgid "Assigned To"
-msgstr "Atribuit la"
-
-msgid "Priority"
-msgstr "Prioritate"
-
-msgid "Due date"
-msgstr "Data scadentă"
-
-msgid "Soonest Due"
-msgstr "Mai curând datorat"
-
-msgid "You are not allowed to assign this Todo entry."
-msgstr "Nu aveți voie să atribuiți această intrare."
-
-msgid "Later"
-msgstr "Târziu"
-
-msgid "Normal"
-msgstr "Normal"
-
-msgid "Important"
-msgstr "Important"
-
-msgid "Due by"
-msgstr "Datorat de"
-
-msgid "Completed on"
-msgstr "Completat în"
-
-msgid "Completed by"
-msgstr "Completat de"
-
-msgid "Assigned to"
-msgstr "Atribuit"
-
-msgid "List"
-msgstr ""
-
-#, python-format
-msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
-msgstr "A face \"%(todo_name)s\" a fost repartizat la %(assignee_name)s"
-
-#, python-format
-msgid "Todo \"%(title)s\" was added successfully."
-msgstr "Face ”%(title)s” a fost adăugat cu succes."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be added."
-msgstr "Face ”%(title)s” nu a fost adăugat."
-
-msgid "You were trying to add a todo to a todolist that does not exist!"
-msgstr "Încercați să adăugați totul la o listă care încă nu există!"
-
-#, python-format
-msgid "Todo \"%(title)s\" was edited successfully."
-msgstr "Face ”%(title)s” a fost editat cu succes."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be edited."
-msgstr "Face ”%(title)s” nu a fost editat."
-
-#, python-format
-msgid "Todo \"%(title)s\" was deleted successfully."
-msgstr "Face ”%(title)s” a fost șters cu succes."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be deleted."
-msgstr "Face ”%(title)s” nu a fost șters."
-
-#, python-format
-msgid "Todo \"%(title)s\" was assigned successfully."
-msgstr "Face ”%(title)s” a fost repartizat cu succes."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be assigned."
-msgstr "Face ”%(title)s” nu a fost atribuit."
-
-#, python-format
-msgid "Todo \"%(title)s\" was assigned to You successfully."
-msgstr "Face ”%(title)s” a fost atribuit  cu succes."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be assigned to You."
-msgstr "Face ”%(title)s” nu ați putut atribui."
-
-#, python-format
-msgid "Todo \"%(title)s\" was unassigned successfully."
-msgstr "Face ”%(title)s” a fost neasociat  cu succes."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be unassigned."
-msgstr "Face ”%(title)s” nu poate fi semnat ."
-
-#, python-format
-msgid "Todo \"%(title)s\" was completed successfully."
-msgstr "Face ”%(title)s” a fost completat cu succes."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be completed."
-msgstr "Face ”%(title)s” nu poate  fi completat."
-
-#, python-format
-msgid "Todo \"%(title)s\" was completed by You successfully."
-msgstr "Face ”%(title)s” a fost finalizată cu succes."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be completed by You."
-msgstr "Face ”%(title)s” nu a putut fi completată de Dvs."
-
-#, python-format
-msgid "Todo \"%(title)s\" was set to incomplete successfully."
-msgstr "Face ”%(title)s” a fost setat incomplet cu succes."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be set to incomplete."
-msgstr "Face ”%(title)s”  nu a putut fi setat incomplet."
-
-#, python-format
-msgid "Todolist \"%(title)s\" was edited successfully."
-msgstr "Lista tuturor ”%(title)s” a fost editată cu succes."
-
-#, python-format
-msgid "Todolist \"%(title)s\" could not be edited."
-msgstr "Lista tuturor ”%(title)s” nu a putut fi editată."
-
-#, python-format
-msgid "Todolist \"%(title)s\" was added successfully."
-msgstr "Lista tuturor ”%(title)s” a fost adăugată cu succes."
-
-#, python-format
-msgid "Todolist \"%(title)s\" could not be added."
-msgstr "Lista tuturor ”%(title)s” nu a putut fi adăugată."
-
-msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
-msgstr "Nu puteți șterge acest dosar, deoarece nu aveți permisiunea da a șterge unul sau ma multe elemente pe are le conține!"
-
-msgid "Sender and Recipient cannot be both undefined."
-msgstr ""
-
-msgid "Visitor's email is in excess."
-msgstr ""
-
-msgid "Visitor's email is missing."
-msgstr ""
-
-msgid "Reading date must be later than sending date."
-msgstr ""
-
-msgid "Deletion date by sender must be later than sending date."
-msgstr ""
-
-msgid "Deletion date by recipient must be later than sending date."
-msgstr ""
-
-msgid "Response date must be later than sending date."
-msgstr ""
-
-msgid "The message cannot be replied without having been read."
-msgstr ""
-
-msgid "Response date must be later than reading date."
-msgstr ""
-
-msgid "Response date cannot be set without at least one reply."
-msgstr ""
-
-#, fuzzy
-#| msgid "This message was sent in a conversation with: "
-msgid "The message cannot be replied without being in a conversation."
-msgstr "Acest mesaj a fost trimis într-o conversație cu: "
-
-msgid "Dates"
-msgstr "Datele"
-
-#, fuzzy
-#| msgid "Is Moderator"
-msgid "Moderation"
-msgstr "Este Moderator"
-
-#, python-brace-format
-msgid "Some usernames are unknown or no longer active: {users}."
-msgstr ""
-
-#, python-brace-format
-msgid "Ensure this value has at most {limit_value} distinct items (it has {show_value})."
-msgstr ""
-
-#, python-brace-format
-msgid "Ensure this value has at least {limit_value} distinct items (it has {show_value})."
-msgstr ""
-
-#, python-brace-format
-msgid "Some usernames are rejected: {users}."
-msgstr ""
-
-#, fuzzy, python-brace-format
-#| msgid "Your name"
-msgid "{username}"
-msgstr "Numele dumneavoastră"
-
-#, python-brace-format
-msgid "{username} ({reason})"
-msgstr ""
-
-#, python-brace-format
-msgid "Writing to some users is not possible: {users}."
-msgstr ""
-
-msgid "Recipient"
-msgstr "Recipient"
-
-#, fuzzy
-#| msgid "Additional Recipients"
-msgid "Additional recipients"
-msgstr "Recipienții suplimentari"
-
-#, fuzzy
-#| msgid "Additional Recipients"
-msgid "Additional recipient"
-msgstr "Recipienții suplimentari"
-
-#, fuzzy
-#| msgid "Message Project"
-msgid "Message Rejected"
-msgstr "Proiect de Mesaje"
-
-#, fuzzy
-msgid "Your message has been rejected"
-msgstr "Schimbările tale au fost salvate."
-
-#, fuzzy
-#| msgid "Message Project"
-msgid "Message Received"
-msgstr "Proiect de Mesaje"
-
-#, fuzzy
-msgid "You have received a message"
-msgstr "Ai fost invitat să colaborezi!"
-
-msgid "Reply Received"
-msgstr ""
-
-#, fuzzy
-msgid "You have received a reply"
-msgstr "Ai fost invitat să colaborezi!"
-
-msgid "Pending"
-msgstr ""
-
-#, fuzzy
-#| msgid "Restricted"
-msgid "Rejected"
-msgstr "Restrâns"
-
-#, fuzzy
-#| msgid "Everybody"
-msgid "body"
-msgstr "Toată lumea"
-
-#, fuzzy
-msgid "sender"
-msgstr "Dent s-a înălțat mult"
-
-#, fuzzy
-#| msgid "Recipient"
-msgid "recipient"
-msgstr "Recipient"
-
-#, fuzzy
-msgid "visitor"
-msgstr "Vizitat"
-
-#, fuzzy
-msgid "parent message"
-msgstr "Mesaje"
-
-#, fuzzy
-#| msgid "No messages"
-msgid "root message"
-msgstr "Fără mesaje"
-
-#, fuzzy
-#| msgid "Event date"
-msgid "sent at"
-msgstr "Data evenimentului"
-
-msgid "read at"
-msgstr ""
-
-msgid "replied at"
-msgstr ""
-
-msgid "archived by sender"
-msgstr ""
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "archived by recipient"
-msgstr "Recipient nedefinit."
-
-#, fuzzy
-#| msgid "New etherpad by %(sender_name)s"
-msgid "deleted by sender at"
-msgstr "Etherpad nou de %(sender_name)s"
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "deleted by recipient at"
-msgstr "Recipient nedefinit."
-
-#, fuzzy
-#| msgid "Status"
-msgid "status"
-msgstr "Starea"
-
-#, fuzzy
-#| msgid "Is Moderator"
-msgid "moderator"
-msgstr "Este Moderator"
-
-#, fuzzy
-#| msgid "Related to"
-msgid "moderated at"
-msgstr "În legătură cu"
-
-msgid "rejection reason"
-msgstr ""
-
-msgid "Direct Reply Hash"
-msgstr ""
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "message"
-msgstr "mesaj"
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "messages"
-msgstr "mesaj"
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "Undefined sender."
-msgstr "Recipient nedefinit."
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "pending message"
-msgstr "mesaj"
-
-#, fuzzy
-msgid "pending messages"
-msgstr "Mesaje"
-
-msgid "<me>"
-msgstr ""
-
-msgid "> "
-msgstr ""
-
-#, python-brace-format
-msgid ""
-"\n"
-"\n"
-"{sender} wrote:\n"
-"{body}\n"
-msgstr ""
-
-#, python-brace-format
-msgid "Re: {subject}"
-msgstr ""
-
-#, fuzzy
-msgid "Message successfully sent."
-msgstr "Utilizatorul %(username)s trebuia invitat!"
-
-#, fuzzy
-#| msgid "Select at least one object."
-msgid "Message rejected for at least one recipient."
-msgstr "Selectați cel puțin un obiect."
-
-msgid "A conference you are attending has been updated"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "The conference %(object_name)s has been updated"
-msgstr "Ai fost etichetat în ”%(object_name)s” în %(team_name)s."
-
-#, fuzzy
-msgid "You are attending this conference"
-msgstr "Sunteți pe punctul de a dezactiva acest proiect/grup!"
-
-#, fuzzy, python-format
-msgid "The conference \"%(object_name)s\" was updated."
-msgstr "Ai fost etichetat în ”%(object_name)s” în %(team_name)s."
-
-msgid "The time of a conference you are attending has been updated"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "The time of conference %(object_name)s has been updated"
-msgstr "Ai fost etichetat în ”%(object_name)s” în %(team_name)s."
-
-msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
-msgstr ""
-
-msgid "minute"
-msgstr ""
-
-msgid "minutes"
-msgstr ""
-
-msgid "Select the date range for which you would like statistics"
-msgstr ""
-
-msgid "Cloud Stub"
-msgstr "Ciot de nor"
-
-msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
-msgstr ""
-
-msgid "There are no cloud files yet"
-msgstr "Nu există încă fișiere în nour"
-
-#, fuzzy
-msgid "Error message:"
-msgstr "Mesaje"
-
-msgid "No error message supplied."
-msgstr ""
-
-msgid "Pad"
-msgstr "Pad"
-
-msgid "This pad can no longer be edited because its creator has deleted their account."
-msgstr "Acest pad nu mai poate fi editat deoarece creatorul său și-a șters contul."
-
-#, python-format
-msgid "Do you really want to delete etherpad „%(pad)s“?"
-msgstr "Vrei cu adevărat să ștergi etherpadul „%(pad)s”?"
-
-msgid "Delete Etherpad"
-msgstr "Șterge Etherpadul"
-
-msgid "This document is empty"
-msgstr "Acest document este gol"
-
-msgid "Pads"
-msgstr "Pad"
-
-msgid "Enter a title for the Pad."
-msgstr "Introduceți un titlu pentru Pad."
-
-msgid "Enter the title for a new Document or Table."
-msgstr "Introduceți titlul pentru un nou Document sau Tabel."
-
-msgid "Enter the title for a new Document."
-msgstr "Introduceți titlul pentru un nou Document."
-
-msgid "Create Etherpad"
-msgstr "Crea Etherpad"
-
-msgid "Create Ethercalc"
-msgstr "Crea Ethercalc"
-
-#, python-format
-msgid "Do you really want to delete etherpad „%(title)s“?"
-msgstr "Vrei cu adevărat să ștergi etherpadul „%(title)s”?"
-
-msgid "No etherpads have been created yet."
-msgstr "Nu s-au creat încă etherpad."
-
-msgid "Download CSV"
-msgstr "Descărcați CSV"
-
-msgid "Download Excel"
-msgstr "Descărcați Excel"
-
-#, python-format
-msgid ""
-"Hi %(receiver_name)s,\n"
-"\n"
-"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
-"\n"
-"You can find it by following this link: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s Team."
-msgstr ""
-"Salut %(receiver_name)s,\n"
-"\n"
-"un nou etherpad ”%(object_name)s” în %(team_name)s a fost creat de %(sender_name)s. \n"
-"\n"
-"Îl puteți găsi urmărind acest link: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Urmați acest link pentru a modifica preferințele de notificare: %(notification_settings_url)s )\n"
-"\n"
-"A ta %(site_name)s Echipă."
-
-msgid "You created a pad"
-msgstr "Ai creat un pad"
-
-msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
-msgid "created a Pad"
-msgstr "a creat un Pad"
-
-msgid "There are no etherpads yet"
-msgstr "Nu sunt încă etherpaduri"
-
 msgid "Would you like to create an event"
 msgstr "Ai vrea să creezi un eveniment"
 
@@ -11160,6 +9503,9 @@ msgstr "Sondaj de Evenimente"
 
 msgid "Enter a title for the new event to be scheduled."
 msgstr "Introduceți un titlu pentru noul eveniment care va fi programat."
+
+msgid "Dates"
+msgstr "Datele"
 
 msgid "Please select the available days in the calendar."
 msgstr "Selectați zilele disponibile din calendar."
@@ -11304,6 +9650,9 @@ msgstr "Reveniți la Sondajele de Evenimente"
 
 msgid "Return to Archived Event Polls"
 msgstr "Revin la Sondajele de Evenimente Arhivate"
+
+msgid "List"
+msgstr ""
 
 msgid "View"
 msgstr "Vedere"
@@ -11655,6 +10004,200 @@ msgstr "a creat un eveniment"
 msgid "Show all"
 msgstr "Arată tot"
 
+msgid "Upcoming events"
+msgstr "Evenimente viitoare"
+
+#, python-format
+msgid "Event \"%(title)s\" was edited successfully."
+msgstr "Evenimentul ”%(title)s” a fost editat cu succes."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be edited."
+msgstr "Evenimentul ”%(title)s” nu a putut fi editat."
+
+msgid "Please use the conference management area to add new workshops!"
+msgstr ""
+
+msgid "The page you requested is not available for this event at this time."
+msgstr "Pagina solicitată nu este disponibilă pentru acest eveniment."
+
+msgid "One of the event suggestions times could not be understood!"
+msgstr "Unul dintre momentele de sugestii ale evenimentului nu a putut fi prezentat!"
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was edited successfully."
+msgstr "Eveniment neprogramat ”%(title)s” a fost editat cu succes."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be edited."
+msgstr "Eveniment neprogramat ”%(title)s” nu a putut fi editat."
+
+#, python-format
+msgid "Event \"%(title)s\" was added successfully."
+msgstr "Evenimentul ”%(title)s” a fost adăugat cu succes."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be added."
+msgstr "Evenimentul ”%(title)s” nu a putut fi adăugat."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was added successfully."
+msgstr "Evenimentul neprogramat ”%(title)s” a fost adăugat cu succes."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be added."
+msgstr "Evenimentul neprogramat ”%(title)s” nu a putut fi adăugat."
+
+msgid "You should define at least one date suggestion."
+msgstr "Ar trebui să definiți cel puțin o sugestie de dată."
+
+#, python-format
+msgid "Event \"%(title)s\" was deleted successfully."
+msgstr "Evenimentul ”%(title)s” a fost șters cu succes."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be deleted."
+msgstr "Evenimentul ”%(title)s” nu a putut fi șters."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was deleted successfully."
+msgstr "Evenimentul neprogramat ”%(title)s” a fost șters cu succes."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be deleted."
+msgstr "Evenimentul neprogramat ”%(title)s” nu a putut fi șters."
+
+#, fuzzy
+msgid "Your votes were saved successfully."
+msgstr "Ideea ta a fost ștearsă cu succes."
+
+#, fuzzy
+#| msgid "Poll \"%(title)s\" could not be added."
+msgid "Your votes could not be saved."
+msgstr "Sondaj ”%(title)s” nu a putut fi adăugat."
+
+msgid "This is event is already scheduled. You cannot vote for it any more."
+msgstr "Acest eveniment este deja programat. Nu-l mai puteți vota."
+
+msgid "The complete request can only be sent via POST!"
+msgstr "Cererea completă poate fi trimisă doar prin POȘTĂ!"
+
+msgid "Event cannot be completed: No date was supplied."
+msgstr "Evenimentul nu poate fi finalizat: Nici o dată nu a fost furnizată."
+
+msgid "The event was created successfully at the specified date."
+msgstr "Evenimentul a fost creat cu succes la data specificată."
+
+#, fuzzy
+msgid "Upcoming event"
+msgstr "Evenimente viitoare"
+
+msgid "Your comment was added successfully."
+msgstr "Comentariul Dvs. a fost adăugat cu succes."
+
+msgid "Your comment was deleted successfully."
+msgstr "Comentariul Dvs. a fost șters cu succes."
+
+#, fuzzy
+#| msgid "Save changes"
+msgid "Exchange"
+msgstr "Salvează modificările"
+
+#, fuzzy
+#| msgid "Save changes"
+msgctxt "the_app"
+msgid "exchange"
+msgstr "Salvează modificările"
+
+msgctxt "the_app"
+msgid "file"
+msgstr "fișier"
+
+msgid "A user uploaded a new file"
+msgstr "Un utilizator a încărcat un nou fișier"
+
+#, python-format
+msgid "%(sender_name)s uploaded the file %(object_name)s"
+msgstr "%(sender_name)s a încărcat fișierul %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s uploaded %(count)d files"
+msgstr "%(sender_name)s încărcat %(count)d fișierele"
+
+#, python-format
+msgid "%(sender_name)s created a new file"
+msgstr "%(sender_name)s a creat un nou fișier"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Un nou fișier: ”%(object_name)s” a fost creat în %(team_name)s."
+
+msgid "A user uploaded a new file in a team you are following"
+msgstr "Un utilizator a încărcat un nou fișier într-o echipă pe care o urmărești"
+
+#, python-format
+msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s a creat un nou fișier în %(team_name)s (pe care le urmezi)"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Un nou fișier: ”%(object_name)s” a fost creat în %(team_name)s (pe care le urmezi)."
+
+msgid "Latest Files"
+msgstr "Cele mai recente fișiere"
+
+msgid "No files"
+msgstr "Fără fișiere"
+
+msgid "Pictures"
+msgstr "Poze"
+
+msgid "Documents"
+msgstr "Documente"
+
+msgid "Audio Files"
+msgstr "Fișiere Audio"
+
+msgid "Videos"
+msgstr "Videoclipuri"
+
+msgid "File Type"
+msgstr "Tip Fișier"
+
+msgid "File Name"
+msgstr "Nume de Fișier"
+
+msgid "File Name (descending)"
+msgstr "Nume de Fișier (descendentă)"
+
+msgid "Smallest Files"
+msgstr "Cele mai mici fișiere"
+
+msgid "Largest Files"
+msgstr "Cele mai mari fișiere"
+
+msgid "The given URL does not seem to be valid."
+msgstr "URL-ul dat nu pare a fi valid."
+
+msgid "Must supply either a URL or File"
+msgstr "Trebuie să furnizeze fie un URL sau un Fișier"
+
+msgid "Is URL Link"
+msgstr "Este Link URL"
+
+msgid "Uploaded by"
+msgstr "Încărcat de"
+
+msgid "Uploaded on"
+msgstr "Încărcat pe"
+
+msgid "No files selected."
+msgstr "Nu au fost selectate fișiere."
+
+msgctxt "special_folder_type"
+msgid "Attachments"
+msgstr "Atașamente"
+
 msgid "The URL you have entered does not seem to be valid!"
 msgstr "URL-ul pe care l-ați introdus nu pare să fie valid!"
 
@@ -11767,6 +10310,201 @@ msgstr "Cele mai recente fișiere"
 
 msgid "There are no files  yet"
 msgstr "Încă nu există  fișiere"
+
+msgid "File does not exist or you are not allowed to delete it."
+msgstr "Fișierul nu există sau nu aveți voie să îl ștergeți."
+
+#, python-format
+msgid "A problem occurred during export. The following file is missing: %(filename)s."
+msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
+msgstr[0] "O problemă a apărut în timpul exportului. Fișierul următor lipsește: %(filename)s."
+msgstr[1] "O problemă a apărut în timpul exportului. Fișierul următor lipsește: %(filename)s."
+msgstr[2] "O problemă a apărut în timpul exportului. Fișierele următoare lipsesc: %(filename)s."
+
+msgid "Invalid request."
+msgstr "Cerere invalidă."
+
+#, python-format
+msgid "File \"%(title)s\" was updated successfully."
+msgstr "Fișier ”%(title)s” a fost actualizat cu succes."
+
+#, python-format
+msgid "File \"%(title)s\" could not be updated."
+msgstr "Fișier ”%(title)s” nu a putut fi actualizat."
+
+msgid "Downloading failed, the target object was not a folder!"
+msgstr "Descărcarea a eșuat, obiectul țintă nu era un dosar!"
+
+msgid "Canceled the download because there seem to be no files in this folder."
+msgstr "A anulat descărcarea, deoarece se pare că nu există fișiere în acest dosar."
+
+msgid "Internal Error: Group not Found"
+msgstr ""
+
+msgid "Permission for upload denied"
+msgstr ""
+
+msgid "The uploaded file was invalid."
+msgstr ""
+
+#, python-format
+msgid "%(count)d File was added successfully."
+msgid_plural "%(count)d Files were added successfully."
+msgstr[0] "%(count)d Fișierul a fost adăugat cu succes."
+msgstr[1] "%(count)d Fișierul a fost adăugat cu succes."
+msgstr[2] "%(count)d Fișierele au fost adăugate cu succes."
+
+msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
+msgstr ""
+
+msgctxt "the_app"
+msgid "marketplace"
+msgstr "piața de desfacere"
+
+msgid "A user created a new offer"
+msgstr "Un utilizator a creat o nouă ofertă"
+
+#, python-format
+msgid "%(sender_name)s created the offer %(object_name)s"
+msgstr "%(sender_name)s a creat oferta %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d offers"
+msgstr "%(sender_name)s a creat %(count)d promoții"
+
+#, python-format
+msgid "%(sender_name)s created a new offer"
+msgstr "%(sender_name)s  a creat o nouă ofertă"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "O nouă ofertă: ”%(object_name)s” a fost creat în %(team_name)s."
+
+msgid "One of your offers expired"
+msgstr "Una dintre ofertele tale a expirat"
+
+#, python-format
+msgid "Your offer %(object_name)s expired"
+msgstr "Oferi %(object_name)s a expirat"
+
+#, python-format
+msgid "%(count)d of your offers expired"
+msgstr "%(count)d dintre ofertele dvs., a expirat"
+
+msgid "Your offer has expired"
+msgstr "Oferta ta a expirat"
+
+#, python-format
+msgid "Offer \"%(object_name)s\" has expired."
+msgstr "Oferi ”%(object_name)s” a expirat."
+
+msgid "A user commented on one of your offers"
+msgstr "Un utilizator a comentat una dintre ofertele dvs"
+
+#, python-format
+msgid "%(sender_name)s commented on your offer %(object_name)s"
+msgstr "%(sender_name)s a comentat ofertele tale %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d altele au comentat oferta ta %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au comentat oferta dvs., %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au comentat oferta dvs., %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your offer"
+msgstr "%(sender_name)s a comentat ofertele tale"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your offers"
+msgstr "%(sender_name)s a comentat una dintre ofertele tale"
+
+msgid "A user commented on an offer you were tagged in"
+msgstr "Un utilizator a comentat o ofertă la care ați fost etichetat"
+
+#, python-format
+msgid "%(sender_name)s commented on the offer %(object_name)s"
+msgstr "%(sender_name)s a comentat oferta ta %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d altele au comentat oferta %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au comentat oferta %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au comentat oferta %(object_name)s"
+
+msgid "You were tagged in this offer"
+msgstr "Ai fost etichetat în această ofertă"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in"
+msgstr "%(sender_name)s a comentat o ofertă în care ați fost etichetat"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s a comentat o ofertă în care ați fost etichetat în %(team_name)s"
+
+msgid "A user created a new offer in a team you are following"
+msgstr "Un utilizator a creat o nouă ofertă într-o echipă pe care o urmărești"
+
+#, python-format
+msgid "%(sender_name)s created a new offer in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s a creat o nouă ofertă în %(team_name)s (care urmează)"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "O nouă ofertă: ”%(object_name)s” a fost creat în %(team_name)s (care urmează)."
+
+msgid "A user updated an offer you are following"
+msgstr "Un utilizator a actualizat o ofertă pe care o urmărești"
+
+#, python-format
+msgid "%(sender_name)s updated the offer %(object_name)s"
+msgstr "%(sender_name)s a actualizat oferta %(object_name)s"
+
+msgid "You are following this offer"
+msgstr "Urmăriți această ofertă"
+
+#, python-format
+msgid "%(sender_name)s updated an offer you are following"
+msgstr "%(sender_name)s a actualizat o ofertă pe care o urmărești"
+
+#, python-format
+msgid "An offer you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "O ofertă pe care o urmărești: ”%(object_name)s” a fost actualizat în %(team_name)s."
+
+msgid "A user commented on an offer you are following"
+msgstr "Un utilizator a comentat o ofertă pe care o urmărești"
+
+#, python-format
+msgid "%(sender_name)s commented on on an offer you are following"
+msgstr "%(sender_name)s a comentat o ofertă pe care o urmărești"
+
+msgid "Current Offers"
+msgstr "Oferte Curente"
+
+msgid "No current offers"
+msgstr "Nu există oferte curente"
+
+msgid "Order Key"
+msgstr "Cheie de Comandă"
+
+msgid "Looking for"
+msgstr "Căutări"
+
+msgid "Offering"
+msgstr "Ofertă"
+
+msgid "Offer currently active?"
+msgstr "Ofertă  în prezent activă?"
+
+msgid "Offer Category"
+msgstr "Categoria ofertei"
+
+#, python-format
+msgid "Offer: %(offer)s (%(type)s)"
+msgstr "Oferi: %(offer)s (%(type)s)"
 
 msgid "Back to Offers"
 msgstr "Înapoi la Oferte"
@@ -11898,11 +10636,102 @@ msgstr "a creat o ofertă"
 msgid "There are no current offers"
 msgstr "Nu există oferte curente"
 
+#, python-format
+msgid "Offer \"%(title)s\" was edited successfully."
+msgstr "Oferi ”%(title)s” a fost editat cu succes."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be edited."
+msgstr "Oferi ”%(title)s” cloud să nu fi editat."
+
+#, python-format
+msgid "Offer \"%(title)s\" was added successfully."
+msgstr "Oferi ”%(title)s” a fost adăugat cu succes."
+
+#, python-format
+msgid "Offer \"%(title)s\" was saved successfully, but is not active yet."
+msgstr "Oferi ”%(title)s” a fost salvat cu succes, dar încă nu este activ."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be added."
+msgstr "Oferi ”%(title)s” nu a putut fi adăugat."
+
+#, python-format
+msgid "Offer \"%(title)s\" was deleted successfully."
+msgstr "Oferi ”%(title)s” a fost șters cu succes."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be deleted."
+msgstr "Oferi ”%(title)s” nu a putut fi șters."
+
+msgid "The offer you requested is no longer active. Sorry!"
+msgstr "Oferta pe care ai solicitat-o nu mai este activă. Scuză!"
+
+msgid "Invalid action for this offer. The request could not be completed!"
+msgstr "Acțiune nevalidă pentru această ofertă. Cererea nu a putut fi finalizată!"
+
+msgid "The offer is already active"
+msgstr "Oferta este deja activă"
+
+msgid "The offer is already deactivated"
+msgstr "Oferta este deja dezactivată"
+
+msgid "The offer was deactivated successfully."
+msgstr "Oferta a fost dezactivată cu succes."
+
+msgid "The offer was reactivated successfully."
+msgstr "Oferta a fost reactivată cu succes."
+
+msgid "The offer was activated successfully."
+msgstr "Oferta a fost activată cu succes."
+
+msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
+msgstr ""
+
+msgctxt "the_app"
+msgid "Chat"
+msgstr ""
+
+msgctxt "the_app"
+msgid "message"
+msgstr "mesaj"
+
+msgid "Chat"
+msgstr ""
+
+msgid "Only Administrators may send a message to this project/group!"
+msgstr "Numai Administratorii pot trimite un mesaj către acest proiect/grup!"
+
+msgid "Additional Recipients"
+msgstr "Recipienții suplimentari"
+
+msgid "Undefined recipient."
+msgstr "Recipient nedefinit."
+
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
 msgstr "Puteți atașa fișiere și imagini la mesaj doar dacă sunteți membru forumului. Vă puteți alătura aici:"
 
 msgid "The legacy messaging app is no longer in use. You can view all of your old messages, but you cannot write new ones. Please use the new messaging app in the navigation from now on!"
 msgstr "Aplicația de mesaj moștenită nu mai este utilizată. Puteți vizualiza toate mesajele dvs., vechi, dar nu puteți scrie altele noi. Vă rugăm să utilizați noua aplicație de mesagerie în navigare de acum înainte!"
+
+msgid "You can contact the group administration via this form. Write your message in the field below and than you will be redirected to the chat with group admins."
+msgstr ""
+
+msgid "You can contact the project administration via this form. Write your message in the field below and than you will be redirected to the chat with project admins."
+msgstr ""
+
+#, fuzzy
+msgid "What is your message?"
+msgstr "Mesaje"
+
+#, fuzzy
+#| msgid "Change it here..."
+msgid "Write it here"
+msgstr "Schimbă-l aici..."
+
+#, python-format
+msgid "Contact the administration of %(group_name)s:"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -12051,6 +10880,9 @@ msgstr "Scrie"
 msgid "Reply"
 msgstr "Răspuns"
 
+msgid "Recipient"
+msgstr "Recipient"
+
 msgid "Conversation"
 msgstr "Conversație"
 
@@ -12080,6 +10912,177 @@ msgstr "Răspunde la %(sender_name)s"
 #, python-format
 msgid "Reply to all %(adressee_count)s"
 msgstr "Răspunde la toți %(adressee_count)s"
+
+msgid "Your reply could not be matched to an existing message."
+msgstr "Răspunsul dvs. nu a putut fi asociat cu un mesaj existent."
+
+msgid "An internal error occured."
+msgstr "A apărut o eroare internă."
+
+msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
+msgstr "Adresa de e-mail de la care ați trimis răspunsul nu este cea asociată contului dvs. de utilizator. Vă rugăm să trimiteți răspunsuri directe numai din adresa de e-mail cu care sunteți înregistrat pe site!"
+
+msgid "There was an error when processing your message text!"
+msgstr "A apărut o eroare la procesarea textului mesajului!"
+
+msgid "Your direct reply failed!"
+msgstr "Răspunsul dvs. direct a eșuat!"
+
+msgid "Select at least one object."
+msgstr "Selectați cel puțin un obiect."
+
+msgid "Messages or conversations successfully archived."
+msgstr "Mesaje sau conversații arhivate cu succes."
+
+msgid "Messages or conversations successfully deleted."
+msgstr "Mesaje sau conversații  șterse cu succes."
+
+msgid "Messages were marked as read."
+msgstr "Mesajele au fost marcate ca fiind citite."
+
+msgid "Messages or conversations successfully recovered."
+msgstr "Mesajele sau conversațiile s-au recuperat cu succes."
+
+msgid "Notes"
+msgstr "Noate"
+
+msgctxt "the_app"
+msgid "note"
+msgstr "notă"
+
+msgid "A user commented on a news post"
+msgstr "Un utilizator a comentat o postare de știri"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post"
+msgstr "%(sender_name)s a comentat o postare de știri"
+
+msgid "A user commented on one of your news posts"
+msgstr "Un utilizator a comentat una dintre mesajele tale de știri"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post %(object_name)s"
+msgstr "%(sender_name)s a comentat postarea dvs., de știri %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d și altul a comentat postarea dvs., %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d altele a comentat postarea dvs., %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d altele a comentat postarea dvs., %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post"
+msgstr "%(sender_name)s a comentat postările tale de știri"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts"
+msgstr "%(sender_name)s a comentat una dintre mesajele tale de știri"
+
+msgid "A user commented on a news posts you commented in"
+msgstr "Un utilizator a comentat postările de știri pe care le-ați comentat"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
+msgstr "%(sender_name)s ai comentat o postare de știri %(object_name)s în care ai comentat"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d și altul a comentat postarea dvs., %(object_name)s a comentat în"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d și altele a comentat postarea dvs., %(object_name)s au comentat în"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d și altul a comentat postarea dvs., %(object_name)s ai comentat în"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in"
+msgstr "%(sender_name)s ai comentat o postare de știri în care ai comentat"
+
+msgid "A user created a news post"
+msgstr "Un utilizator a creat o nouă postare"
+
+#, python-format
+msgid "%(sender_name)s created the news post %(object_name)s"
+msgstr "%(sender_name)s a creat o postarea de știri %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d news posts"
+msgstr "%(sender_name)s a creat %(count)d postare de știri"
+
+#, python-format
+msgid "%(sender_name)s created a new news post"
+msgstr "%(sender_name)s a creat o nouă postare de știri"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s:"
+msgstr "%(sender_name)s postat în %(team_name)s:"
+
+msgid "A user created a news post in a team you are following"
+msgstr "Un utilizator a creat o nouă postare într-o echipă pe care o urmărești"
+
+#, python-format
+msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s a creat o nouă postare de știri în %(team_name)s (pe care le urmezi)"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
+msgstr "%(sender_name)s a postat în %(team_name)s: (pe care le urmezi)"
+
+msgid "A user updated a news post"
+msgstr "Un utilizator a actualizat o nouă postare"
+
+#, python-format
+msgid "%(sender_name)s updated the news post %(object_name)s"
+msgstr "%(sender_name)s a actualizat postare de știri %(object_name)s"
+
+msgid "You are following this news post"
+msgstr "Urmăriți această postare de știri"
+
+#, python-format
+msgid "%(sender_name)s updated a news post you are following"
+msgstr "%(sender_name)s a actualizat o nouă postare pe care o urmărești"
+
+#, python-format
+msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
+msgstr "O nouă postare pe care o urmărești %(sender_name)s a fost actualizat %(team_name)s:"
+
+msgid "A user commented on a news post you are following"
+msgstr "Un utilizator a comentat o postare de știri pe care o urmărești"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s"
+msgstr "%(sender_name)s a comentat postarea de știri %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d și altul a comentat postarea de știri %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d și altele au comentat postarea de știri %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d și altele au comentat postarea de știri %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on a news posts you are following"
+msgstr "%(sender_name)s a comentat o postare de știri pe care o urmărești"
+
+msgid "No news"
+msgstr "Nici o știre"
+
+msgid "Write a news post"
+msgstr "Scrie o postare de știri"
+
+msgid "News stream"
+msgstr "Flux de știri"
+
+msgid "Popularity"
+msgstr "Popularitate"
+
+msgid "Facebook Share"
+msgstr "A împărtăși pe Facebook"
+
+msgid "Note Item"
+msgstr "Element de notă"
+
+msgid "Note Items"
+msgstr "Elemente de notare"
 
 msgctxt "the_verb"
 msgid "Comment"
@@ -12256,6 +11259,128 @@ msgctxt "This appears next to new items in the timeline, as in '<Jane> created a
 msgid "added a post"
 msgstr "a adăugat o postare"
 
+msgid "Your news post was added successfully."
+msgstr "Postarea dvs. de știri a fost adăugată cu succes."
+
+msgid "Your news post was deleted successfully."
+msgstr "Postarea dvs. de știri a fost ștearsă cu succes."
+
+msgid "Your news post was edited successfully."
+msgstr "Postarea dvs. de știri a fost modificată cu succes."
+
+msgid "You are seeing this alert because you created this content."
+msgstr "Vedeți această alertă pentru că ați creat acest conținut."
+
+msgid "You are seeing this alert because you are following the item's project or group."
+msgstr "Vedeți această alertă deoarece urmăriți proiectul sau grupul articolului."
+
+msgid "You are seeing this alert because you are following this item."
+msgstr "Vedeți această alertă pentru că urmăriți elementul."
+
+msgctxt "the_app"
+msgid "notifications"
+msgstr "notificări"
+
+#, python-format
+msgid "Your daily digest for %(portal_name)s"
+msgstr "Sistematizarea ta zilnică pentru %(portal_name)s"
+
+msgid "This is what happened during the last day!"
+msgstr "Aceasta s-a întâmplat în ultima zi!"
+
+#, python-format
+msgid "Your weekly digest for %(portal_name)s"
+msgstr "Sistematiza săptămânal pentru %(portal_name)s"
+
+msgid "This is what happened during the last week!"
+msgstr "Aceasta s-a întâmplat în ultima săptămână!"
+
+msgctxt "notification frequency"
+msgid "Never"
+msgstr "Niciodată"
+
+msgctxt "notification frequency"
+msgid "Immediately"
+msgstr "Imediat"
+
+msgctxt "notification frequency"
+msgid "Daily"
+msgstr "Zilnic"
+
+msgctxt "notification frequency"
+msgid "Weekly"
+msgstr "Săptămânal"
+
+msgid "Notification Preference for User"
+msgstr "Preferința notificării pentru utilizator"
+
+msgid "Notification Preference"
+msgstr "Preferința notificării"
+
+msgid "Multi Notification ID"
+msgstr "ID-uri de notificare multi"
+
+msgid "Multi Notification Preference"
+msgstr "Preferință de notificare multi"
+
+msgid "Multi Notification Preferences"
+msgstr "Preferințe de Notificare  multiple"
+
+msgid "User who caused this notification event"
+msgstr "Utilizator care a provocat acest eveniment de notificare"
+
+msgid "Audience"
+msgstr "Audiență"
+
+msgid "Owner of the alert"
+msgstr "Proprietarul alertei"
+
+msgid "Alert Reason key"
+msgstr "Cheia Motivului Alert"
+
+msgid "Last user who caused this notification event"
+msgstr "Ultimul utilizator care a provocat acest eveniment de notificare"
+
+msgid "Alert State"
+msgstr "Stare de Alertă"
+
+msgid "You are following this content or its Project or Group"
+msgstr "Urmăriți acest conținut sau Proiect sau Grup al acestuia"
+
+msgid "All notifications"
+msgstr "Toate notificările"
+
+msgid "No notifications"
+msgstr "Nici o notificare"
+
+msgid "For content that I am following, I wish to receive notification emails"
+msgstr "Pentru conținutul pe care îl urmăresc, doresc să primesc e-mailuri de notificare"
+
+msgid "You are getting this notification because you are subscribed to these kinds of events in your project or group."
+msgstr "Primiți această notificare deoarece sunteți abonați la aceste tipuri de evenimente în proiect sau grup."
+
+msgid "You are getting this notification because you are an administrator of this project or group."
+msgstr "Primiți această notificare deoarece sunteți administrator al acestui proiect sau grup."
+
+msgid "You are getting this notification because you are an administrator of this portal."
+msgstr "Primiți această notificare deoarece sunteți administratorul acestui portal."
+
+msgid "You are getting this email because you are subscribed to one or more daily notifications."
+msgstr "Primiți acest e-mail deoarece sunteți abonat la una sau mai multe notificări zilnice."
+
+msgid "You are getting this email because you are subscribed to one or more weekly notifications."
+msgstr "Primiți acest e-mail deoarece sunteți abonat la o altă notificare săptămânală."
+
+msgid "New item"
+msgstr "Element nou"
+
+#, python-format
+msgid "View on %(portal_name)s"
+msgstr "Vedere %(portal_name)s"
+
+msgid "Untitled"
+msgstr "Fără titlu"
+
 msgid "Select which notifications you would like to receive for each group or project you are involved in."
 msgstr "Selectați ce notificare doriți să primiți pentru fiecare grup sau proiect în care sunteți implicat."
 
@@ -12312,6 +11437,33 @@ msgstr "Resetare la valori implicite"
 
 msgid "This will reset all of your notification preferences to their default setting. Are you sure you wish to do that?"
 msgstr "Aceasta va reseta toate preferințele de notificare la setările lor implicite. Sunteți sigur că doriți să faceți asta?"
+
+msgid "Your notification preferences were updated successfully."
+msgstr "Preferințele dvs. de notificare au fost actualizate cu succes."
+
+msgid "Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!"
+msgstr ""
+
+msgid "Your notifications preferences were reset to default!"
+msgstr "Preferințele dvs. de notificare au fost resetate la valoarea implicită!"
+
+msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
+msgstr ""
+
+#, fuzzy
+#| msgid "Successfully removed user"
+msgid "Successfully signed in as {}."
+msgstr "Elimină cu succes utilizatorul"
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully connected account."
+msgstr "Cont de utilizator dezactivat cu succes"
+
+#, fuzzy
+#| msgid "Successfully removed user"
+msgid "Successfully removed connection."
+msgstr "Elimină cu succes utilizatorul"
 
 #, fuzzy
 msgid "Set password"
@@ -12436,11 +11588,6 @@ msgstr ""
 
 msgid " This data we received from your WECHANGE account"
 msgstr ""
-
-#, fuzzy
-#| msgid "Last name"
-msgid "last name"
-msgstr "Numele de familie"
 
 msgid "Your Avatar and other settings from your profile were also copied."
 msgstr ""
@@ -12567,6 +11714,101 @@ msgstr ""
 #| msgid "Log in with %(portal_name)s"
 msgid "Login with %(provider_id)s"
 msgstr "Loghează-te la %(portal_name)s"
+
+#, fuzzy
+#| msgid "Organization"
+msgctxt "the_app"
+msgid "organization"
+msgstr "Organizare"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization membership"
+msgstr "Organizații"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization memberships"
+msgstr "Organizații"
+
+#, fuzzy
+#| msgid "Team Invite for Unregistered User"
+msgid "Organization Invite for Unregistered User"
+msgstr "Echipa invită pentru un utilizator neînregistrat"
+
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Organization Invites for Unregistered Users"
+msgstr "Echipa invitărilor pentru utilizatorii neînregistrați"
+
+#, fuzzy
+msgid "Civil society organization"
+msgstr "Toate Organizațiile"
+
+msgid "Company (commercial)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Public voting"
+msgid "Public institution"
+msgstr "Votare publică"
+
+#, fuzzy
+#| msgid "Other teams"
+msgid "Other"
+msgstr "Alte echipe"
+
+#, fuzzy
+msgid "Name of the organization"
+msgstr "Eliminați locația"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Organization type"
+msgstr "Organizare"
+
+#, fuzzy
+#| msgid "Logout"
+msgid "Logo"
+msgstr "Deconectare"
+
+#, fuzzy
+#| msgid "Email address"
+msgid "Email Address"
+msgstr "Adresa de e-mail"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Cosinnus Organization"
+msgstr "Organizare"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Cosinnus Organizations"
+msgstr "Organizații"
+
+msgid "CosinnusOrganizationSocialMedia"
+msgstr ""
+
+#, fuzzy
+#| msgid "CosinnusLocation"
+msgid "CosinnusOrganizationLocation"
+msgstr "Cosinnus Locație"
+
+#, fuzzy
+#| msgid "CosinnusLocations"
+msgid "CosinnusOrganizationLocations"
+msgstr "Cosinnus Locații"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Organization group"
+msgstr "Organizare"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization groups"
+msgstr "Organizații"
 
 #, fuzzy, python-format
 msgid "%(team_name)s - Assigned projects/groups"
@@ -12743,10 +11985,281 @@ msgstr ""
 msgid "This organization should be made publicly findable via other platforms."
 msgstr "Acest proiect va putea fi găsit public prin intermediul altor platforme."
 
+msgid "Is your organization open for cooperation in the funding program?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Organization is open for future projects."
+msgstr "Echipa invitărilor pentru utilizatorii neînregistrați"
+
 #, fuzzy, python-format
 #| msgid "Users in team %(group)s"
 msgid "Users in organization %(group)s"
 msgstr "Utilizatorii în echipă %(group)s"
+
+#, fuzzy, python-format
+msgid "Project/group %(name)s had already requested and has now been accepted."
+msgstr "Ai fost deja invitat ”%(team_name)s” și acum au fost făcuți membrii imediat!"
+
+#, fuzzy, python-format
+#| msgid "User %(username)s was successfully invited!"
+msgid "Project/group %(name)s was successfully invited."
+msgstr "Utilizatorul %(username)s trebuia invitat!"
+
+#, fuzzy, python-format
+#| msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
+msgid "Your join request was withdrawn from organization “%(name)s” successfully."
+msgstr "Solicitarea dvs. de aderare a fost retrasă %(team_type)s ”%(team_name)s” cu succes."
+
+#, fuzzy, python-format
+msgid "You have declined the invitation to organization “%(name)s”."
+msgstr "Nu mai sunteți membru %(team_type)s ”%(team_name)s”."
+
+#, fuzzy, python-format
+#| msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
+msgid "Your project/group is now assigned to the organization “%(name)s”. Welcome!"
+msgstr "Acum sunteți membru %(team_type)s ”%(team_name)s”. Bine ați venit!"
+
+#, fuzzy, python-format
+#| msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
+msgid "Your request was withdrawn from organization \"%(name)s\" successfully."
+msgstr "Solicitarea dvs. de aderare a fost retrasă %(team_type)s ”%(team_name)s” cu succes."
+
+#, fuzzy, python-format
+#| msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
+msgid "Your invitation to project/group \"%(name)s\" was withdrawn successfully."
+msgstr "Invitația dvs. către utilizator ”%(username)s” a fost retras cu succes."
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Project/group \"%(name)s\" is no longer assigned."
+msgstr "Utilizatorul ”%(username)s” nu mai este membru."
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can create Organizations! You can either create a Project, or write a message to one of the administrators to create a Organization for you. Below you can find a listing of all administrators."
+msgstr "Ne pare rău, numai administratorii portalului pot crea Grupuri! Puteți crea un Proiect sau scrie un mesaj unuia dintre administratori pentru a crea un Grup pentru dvs. Mai jos puteți găsi o listă cu toți administratorii."
+
+#, fuzzy, python-format
+#| msgid "Event \"%(title)s\" was edited successfully."
+msgid "Organization \"%(name)s\" was created successfully."
+msgstr "Evenimentul ”%(title)s” a fost editat cu succes."
+
+#, fuzzy
+#| msgid "Your idea was deleted successfully."
+msgid "Your organization was deleted successfully."
+msgstr "Ideea ta a fost ștearsă cu succes."
+
+msgctxt "the_app"
+msgid "poll"
+msgstr "sondaj"
+
+msgid "A user created a new poll"
+msgstr "Un utilizator a creat un nou sondaj"
+
+#, python-format
+msgid "%(sender_name)s created the poll %(object_name)s"
+msgstr "%(sender_name)s a creat sondajul %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d polls"
+msgstr "%(sender_name)s a creat %(count)d sondajul"
+
+#, python-format
+msgid "%(sender_name)s created a new poll"
+msgstr "%(sender_name)s a creat un nou sondaj"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Un nou sondaj: ”%(object_name)s” a fost creat în %(team_name)s."
+
+msgid "A poll you voted on was completed"
+msgstr "S-a finalizat un sondaj pentru care ați votat"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
+msgstr "%(sender_name)s a finalizat sondajul %(object_name)s ai votat"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls you voted on"
+msgstr "%(sender_name)s a finalizat %(count)d sondajele pe care le-ați votat"
+
+#, python-format
+msgid "%(sender_name)s completed the poll"
+msgstr "%(sender_name)s a completat sondajul"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Sondaj ”%(object_name)s” a fost completat în %(team_name)s."
+
+msgid "A user commented on one of your polls"
+msgstr "Un utilizator a comentat unul dintre sondajele voastre"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll %(object_name)s"
+msgstr "%(sender_name)s a comentat sondajul dvs., %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d altul a comentat sondajul dvs., %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au comentat sondajul dvs., %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au comentat sondajul dvs., %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll"
+msgstr "%(sender_name)s a comentat sondajele vostre"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls"
+msgstr "%(sender_name)s a comentat unul dintre sondajele voastre"
+
+msgid "A user commented on a poll you were tagged in"
+msgstr "Un utilizator a comentat un sondaj în care ați fost etichetat"
+
+#, python-format
+msgid "%(sender_name)s commented on the poll %(object_name)s"
+msgstr "%(sender_name)s a comentat sondajul %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d altul a comentat la sondaj %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au comentat sondajul %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au comentat sondajul %(object_name)s"
+
+msgid "You were tagged in this poll"
+msgstr "Ați fost etichetat în acest sondaj"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in"
+msgstr "%(sender_name)s a comentat un sondaj în care ați fost etichetat"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s a comentat un sondaj în care ați fost etichetat %(team_name)s"
+
+msgid "A user commented on an poll you voted in"
+msgstr "Un utilizator a comentat un sondaj în care ați votat"
+
+msgid "You voted on this poll"
+msgstr "Ați votat acest sondaj"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in"
+msgstr "%(sender_name)s a comentat un sondaj în care ați votat"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
+msgstr "%(sender_name)s a comentat un sondaj în care ați votat în %(team_name)s"
+
+msgid "A user created a new poll in a team you are following"
+msgstr "Un utilizator a creat un nou sondaj într-o echipă pe care o urmărești"
+
+#, python-format
+msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s a creat un nou sondaj în %(team_name)s (pe care le urmezi)"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Un nou sondaj: ”%(object_name)s a fost creat în %(team_name)s (pe ccare le urmezi)."
+
+msgid "A user updated a poll you are following"
+msgstr "Un utilizator a actualizat un sondaj pe care îl urmărești"
+
+#, python-format
+msgid "%(sender_name)s updated the poll %(object_name)s"
+msgstr "%(sender_name)s a actualizat sondajul %(object_name)s"
+
+msgid "You are following this poll"
+msgstr "Urmărești acest sondaj"
+
+#, python-format
+msgid "%(sender_name)s updated a poll you are following"
+msgstr "%(sender_name)s a actualizat un sondaj pe care îl urmărești"
+
+#, python-format
+msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Un sondaj pe care îl urmărești: ”%(object_name)s” a fost actualizat în %(team_name)s."
+
+msgid "A poll you are following was completed"
+msgstr "S-a finalizat un sondaj pe care îl urmărești"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s"
+msgstr "%(sender_name)s a finalizat sondajul %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls"
+msgstr "%(sender_name)s a finalizat %(count)d sondajul"
+
+#, python-format
+msgid "%(sender_name)s completed the poll you are following"
+msgstr "%(sender_name)s a completat sondajul pe care îl urmărești"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
+msgstr "Sondaj ”%(object_name)s” urmează să fie finalizată în %(team_name)s."
+
+msgid "A user commented on one a poll you are following"
+msgstr "Un utilizator a comentat un sondaj pe care îl urmărești"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you are following"
+msgstr "%(sender_name)s  a comentat sondajul pe care-l urmărești"
+
+msgid "Current Polls"
+msgstr "Sondaje Actuale"
+
+msgid "No current polls"
+msgstr "Nu există sondaje actuale"
+
+msgid "You must write a description for this poll option!"
+msgstr "Trebuie să scrieți o descriere pentru această opțiune de sondaj!"
+
+msgid "Voting closed"
+msgstr "Votare închisă"
+
+msgid "Poll archived"
+msgstr "Sondaj arhivat"
+
+msgid "Multiple options votable"
+msgstr "Opțiuni multiple eligibile"
+
+msgid "Does this poll allow users to vote on multiple options or just decide for one?"
+msgstr "Acest sondaj permite utilizatorilor să voteze mai multe opțiuni sau să decidă doar una?"
+
+msgid "\"Maybe\" option enabled"
+msgstr "”Poate” opțiune activată"
+
+msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
+msgstr "Opțiunea este activată? Ignorat și implicit pe False dacă ”voturile multiple==False"
+
+msgid "Anyone can vote"
+msgstr "Oricine poate vota"
+
+msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
+msgstr "Dacă este adevărat, oricine poate vedea și vota acest sondaj. Dacă este fals, numai membrii grupul pot."
+
+msgid "Show voters"
+msgstr "Arată alegătorilor"
+
+msgid "If true, display a list of which user voted for each option."
+msgstr "Dacă este adevărat, afișează o listă cu care utilizatorul a votat pentru fiecare opțiune."
+
+msgid "Winning Option"
+msgstr "Opțiune Câștigătoare"
+
+#, python-format
+msgid "Poll: %(poll)s (%(state)s)"
+msgstr "Sondaj: %(poll)s (%(state)s"
+
+msgid "Poll Option"
+msgstr "Opțiune de votare"
+
+msgid "Poll Options"
+msgstr "Opțiuni de sondaj"
 
 msgid "Poll choice"
 msgstr "Alegerea sondajului"
@@ -13096,6 +12609,85 @@ msgstr "creat un sondaj"
 msgid "There are no polls yet"
 msgstr "Încă nu există sondaje"
 
+#, python-format
+msgid "Poll \"%(title)s\" was edited successfully."
+msgstr "Sondaj ”%(title)s” a fost editat cu succes."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be edited."
+msgstr "Sondaj ”%(title)s” nu a putut fi editat."
+
+#, python-format
+msgid "Poll \"%(title)s\" was added successfully."
+msgstr "Sondaj ”%(title)s” a fost adăugat cu succes."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be added."
+msgstr "Sondaj ”%(title)s” nu a putut fi adăugat."
+
+msgid "You should define at least one poll option!"
+msgstr "Ar trebui să definiți cel puțin o opțiune de sondaj!"
+
+msgid "This poll is archived and cannot be edited anymore!"
+msgstr "Acest sondaj este arhivat și nu mai poate fi editat!"
+
+#, python-format
+msgid "Poll \"%(title)s\" was deleted successfully."
+msgstr "Sondaj ”%(title)s” a fost șters cu succes."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be deleted."
+msgstr "Sondaj ”%(title)s” nu a putut fi șters."
+
+msgid "The voting phase for this poll is over. You cannot vote for it any more."
+msgstr "Faza de votare pentru acest sondaj sa încheiat. Nu o mai puteți vota."
+
+msgid "In this poll you must vote for exactly one item!"
+msgstr "În acest sondaj trebuie să votezi exact un articol!"
+
+msgid "Invalid action for this poll. The request could not be completed!"
+msgstr "Acțiune nevalidă pentru acest sondaj. Cererea nu a putut fi finalizată!"
+
+msgid "This action is not permitted for this poll at this stage!"
+msgstr "Această acțiune nu este permisă pentru acest sondaj în această etapă!"
+
+msgid "The poll was closed successfully."
+msgstr "Sondajul a fost închis cu succes."
+
+msgid "The poll was re-opened successfully."
+msgstr "Sondajul a fost redeschis cu succes."
+
+msgid "The poll was archived successfully."
+msgstr "Sondajul a fost arhivat cu succes."
+
+msgid "Stream"
+msgstr "Fluxul"
+
+msgctxt "the_app"
+msgid "stream"
+msgstr "fluxul de aplicații"
+
+msgid "My Streams"
+msgstr "Fluxul meu"
+
+msgid "Streams"
+msgstr "Fluxuri"
+
+msgid "Models"
+msgstr "Modele"
+
+msgid "Portal IDs"
+msgstr "ID-uri de portal"
+
+msgid "Last seen"
+msgstr "Văzut ultima dată"
+
+msgid "Special Stream"
+msgstr "Flux special"
+
+msgid "Special Group IDs"
+msgstr "ID-uri speciale de grup"
+
 msgid "Public Stream"
 msgstr "Flux public"
 
@@ -13150,6 +12742,264 @@ msgstr "Filtrați după autori, etichete sau alte proprietăți etichetate?"
 
 msgid "Filter by item types?"
 msgstr "Filtrați după tipuri de articole?"
+
+msgid "You do not have permission to access this stream."
+msgstr "Nu aveți permisiunea de a accesa acest flux."
+
+msgid "Your stream was added successfully."
+msgstr "Fluxul Dvs. a fost adăugat cu succes."
+
+msgid "Your stream was updated successfully."
+msgstr "Fluxul Dvs. a fost actualizat cu succes."
+
+msgid "Your stream was deleted successfully."
+msgstr "Fluxul dvs. a fost șters cu succes."
+
+msgid "You cannot delete the default stream!"
+msgstr "Nu puteți șterge fluxul implicit!"
+
+msgctxt "the_app"
+msgid "todo"
+msgstr "tot"
+
+msgid "A user created a new todo"
+msgstr "Utilizatorul a creat totul nou"
+
+#, python-format
+msgid "%(sender_name)s created the todo %(object_name)s"
+msgstr "%(sender_name)s a creat totul %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d todos"
+msgstr "%(sender_name)s a creat totul %(count)d"
+
+#, python-format
+msgid "%(sender_name)s created a new todo"
+msgstr "%(sender_name)s a creat tot nou"
+
+#, python-format
+msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Facem totul nou: \"%(object_name)s\" a fost creat in %(team_name)s."
+
+msgid "A todo was assigned to me"
+msgstr "S-a atribuit totul"
+
+#, python-format
+msgid "%(sender_name)s assigned the todo %(object_name)s to you"
+msgstr "%(sender_name)s care a atribuit totul %(object_name)s pentru tine"
+
+#, python-format
+msgid "%(sender_name)s assigned %(count)d todos to you"
+msgstr "%(sender_name)s care a atribuit %(count)d totul"
+
+#, python-format
+msgid "%(sender_name)s assigned a todo to you"
+msgstr "%(sender_name)s care a atribuit totul"
+
+msgid "A todo I created was completed"
+msgstr "Totul ce creat a fost finalizat"
+
+#, python-format
+msgid "%(sender_name)s completed the todo %(object_name)s"
+msgstr "%(sender_name)s e completat totul %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d todos"
+msgstr "%(sender_name)s e completat totul %(count)d"
+
+msgid "You created this todo"
+msgstr "Ai creat acest lucru"
+
+#, python-format
+msgid "%(sender_name)s completed your todo"
+msgstr "%(sender_name)s e completat totul"
+
+#, python-format
+msgid "%(sender_name)s completed one of your todos"
+msgstr "%(sender_name)s a completat unul dintre toți"
+
+msgid "A user commented on one of your todos"
+msgstr "Unul dintre toți utilizatori a comentat"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo %(object_name)s"
+msgstr "%(sender_name)s a comentat totul %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d altul a comentat cu privire la tot %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au comentat cu privire la totul %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au comentat cu privire la totul %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo"
+msgstr "%(sender_name)s a comentat totul"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your todos"
+msgstr "%(sender_name)s a comentat unul dintre toți"
+
+msgid "A user commented on a todo you were tagged in"
+msgstr "Un utilizator a comentat tot ce a fost etichetat"
+
+#, python-format
+msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgstr "%(sender_name)s a comentat totul %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d altul a comentat totul %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au comentat totul %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au comentat totul %(object_name)s"
+
+msgid "You were tagged in this todo"
+msgstr "Ai fost etichetat în acest lucru"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in"
+msgstr "%(sender_name)s a comentat totul ce a fost etichetat"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s a comentat totul ce a fost etichetat în %(team_name)s"
+
+msgid "A user commented on a todo you were assigned to"
+msgstr "Un utilizator a comentat tot ce ți-a fost atribuit"
+
+#, python-format
+msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
+msgstr "%(sender_name)s a comentat despre atribuirea ta %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d și altul a comentat lucrurile pe care le-ați atribuit %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d și alții au comentat lucrurile pe care le-ați atribuit %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d și alții au comentat lucrurile pe care le-ați atribuit %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos"
+msgstr "%(sender_name)s mi-a comentat unul dintre toți"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgstr "%(sender_name)s a comentat unul dintre toți în %(team_name)s"
+
+msgid "A user updated a todo you are following"
+msgstr "Un utilizator a actualizat tot ceea ce urmărești"
+
+#, python-format
+msgid "%(sender_name)s updated the todo %(object_name)s"
+msgstr "%(sender_name)s a actualizat totul %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
+msgstr[0] "%(sender_name)s și %(count_minus_one)d altele au actualizat totul %(object_name)s"
+msgstr[1] "%(sender_name)s și %(count_minus_one)d alții au actualizat totul %(object_name)s"
+msgstr[2] "%(sender_name)s și %(count_minus_one)d alții au actualizat totul %(object_name)s"
+
+msgid "You are following this todo"
+msgstr "Urmărești acest lucru"
+
+#, python-format
+msgid "%(sender_name)s updated a todo you are following"
+msgstr "%(sender_name)s a actualizat totul ce urmărești"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Tot ce urmărești:\"%(object_name)s\" a fost actualizat în %(team_name)s."
+
+msgid "A user reassigned a todo you are following"
+msgstr "Un utilizator a reasignat totul aceea ce urmarești"
+
+#, python-format
+msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgstr "%(sender_name)s care a atribuit totul %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s reassigned %(count)d todos"
+msgstr "%(sender_name)s care a atribuit %(count)d totul"
+
+#, python-format
+msgid "%(sender_name)s reassigned a todo you are following"
+msgstr "%(sender_name)s a reasignat tot ceea ce urmărești"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
+msgstr "Tot ce urmărești: \"%(object_name)s\" a fost realocat în %(team_name)s."
+
+msgid "A user completed a todo you are following"
+msgstr "Un utilizator a completat tot ceea ce urmați"
+
+#, python-format
+msgid "%(sender_name)s completed a todo you are following"
+msgstr "%(sender_name)s a completat tot ceea ce urmați"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Tot ce urmărești: \"%(object_name)s\" a fost completat în %(team_name)s."
+
+msgid "A user commented on a todo you are following"
+msgstr "Un utilizator a comentat un articol pe are îl urmărești"
+
+#, python-format
+msgid "%(sender_name)s commented on on a todo you are following"
+msgstr "%(sender_name)s mi-a comentat un articol pe care  îl urmărești"
+
+msgid "My Todos"
+msgstr "Toate a mele"
+
+msgid "No todos"
+msgstr "Nu toate"
+
+msgid "Open"
+msgstr "Deschis"
+
+msgid "Completed"
+msgstr "Terminat"
+
+msgid "Assigned To"
+msgstr "Atribuit la"
+
+msgid "Priority"
+msgstr "Prioritate"
+
+msgid "Due date"
+msgstr "Data scadentă"
+
+msgid "Soonest Due"
+msgstr "Mai curând datorat"
+
+msgid "You are not allowed to assign this Todo entry."
+msgstr "Nu aveți voie să atribuiți această intrare."
+
+msgid "Later"
+msgstr "Târziu"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Important"
+msgstr "Important"
+
+msgid "Due by"
+msgstr "Datorat de"
+
+msgid "Completed on"
+msgstr "Completat în"
+
+msgid "Completed by"
+msgstr "Completat de"
+
+msgid "Assigned to"
+msgstr "Atribuit"
+
+#, python-format
+msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
+msgstr "A face \"%(todo_name)s\" a fost repartizat la %(assignee_name)s"
 
 #, python-format
 msgid ""
@@ -13461,6 +13311,259 @@ msgstr "Nu aveți sarcini alocate"
 
 msgid "Tasks are shown only for logged in users"
 msgstr "Sarcinile sunt afișate numai pentru utilizatorii autentificați"
+
+#, python-format
+msgid "Todo \"%(title)s\" was added successfully."
+msgstr "Face ”%(title)s” a fost adăugat cu succes."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be added."
+msgstr "Face ”%(title)s” nu a fost adăugat."
+
+msgid "You were trying to add a todo to a todolist that does not exist!"
+msgstr "Încercați să adăugați totul la o listă care încă nu există!"
+
+#, python-format
+msgid "Todo \"%(title)s\" was edited successfully."
+msgstr "Face ”%(title)s” a fost editat cu succes."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be edited."
+msgstr "Face ”%(title)s” nu a fost editat."
+
+#, python-format
+msgid "Todo \"%(title)s\" was deleted successfully."
+msgstr "Face ”%(title)s” a fost șters cu succes."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be deleted."
+msgstr "Face ”%(title)s” nu a fost șters."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned successfully."
+msgstr "Face ”%(title)s” a fost repartizat cu succes."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned."
+msgstr "Face ”%(title)s” nu a fost atribuit."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned to You successfully."
+msgstr "Face ”%(title)s” a fost atribuit  cu succes."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned to You."
+msgstr "Face ”%(title)s” nu ați putut atribui."
+
+#, python-format
+msgid "Todo \"%(title)s\" was unassigned successfully."
+msgstr "Face ”%(title)s” a fost neasociat  cu succes."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be unassigned."
+msgstr "Face ”%(title)s” nu poate fi semnat ."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed successfully."
+msgstr "Face ”%(title)s” a fost completat cu succes."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed."
+msgstr "Face ”%(title)s” nu poate  fi completat."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed by You successfully."
+msgstr "Face ”%(title)s” a fost finalizată cu succes."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed by You."
+msgstr "Face ”%(title)s” nu a putut fi completată de Dvs."
+
+#, python-format
+msgid "Todo \"%(title)s\" was set to incomplete successfully."
+msgstr "Face ”%(title)s” a fost setat incomplet cu succes."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be set to incomplete."
+msgstr "Face ”%(title)s”  nu a putut fi setat incomplet."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was edited successfully."
+msgstr "Lista tuturor ”%(title)s” a fost editată cu succes."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be edited."
+msgstr "Lista tuturor ”%(title)s” nu a putut fi editată."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was added successfully."
+msgstr "Lista tuturor ”%(title)s” a fost adăugată cu succes."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be added."
+msgstr "Lista tuturor ”%(title)s” nu a putut fi adăugată."
+
+msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
+msgstr "Nu puteți șterge acest dosar, deoarece nu aveți permisiunea da a șterge unul sau ma multe elemente pe are le conține!"
+
+#~ msgid "Ok"
+#~ msgstr "OK"
+
+#~ msgid "Message Group"
+#~ msgstr "Grup de Mesaje"
+
+#~ msgid "Message Project"
+#~ msgstr "Proiect de Mesaje"
+
+#, fuzzy
+#~| msgid "This message was sent in a conversation with: "
+#~ msgid "The message cannot be replied without being in a conversation."
+#~ msgstr "Acest mesaj a fost trimis într-o conversație cu: "
+
+#, fuzzy
+#~| msgid "Is Moderator"
+#~ msgid "Moderation"
+#~ msgstr "Este Moderator"
+
+#, fuzzy
+#~| msgid "Your name"
+#~ msgid "{username}"
+#~ msgstr "Numele dumneavoastră"
+
+#, fuzzy
+#~| msgid "Additional Recipients"
+#~ msgid "Additional recipients"
+#~ msgstr "Recipienții suplimentari"
+
+#, fuzzy
+#~| msgid "Additional Recipients"
+#~ msgid "Additional recipient"
+#~ msgstr "Recipienții suplimentari"
+
+#, fuzzy
+#~| msgid "Message Project"
+#~ msgid "Message Rejected"
+#~ msgstr "Proiect de Mesaje"
+
+#, fuzzy
+#~ msgid "Your message has been rejected"
+#~ msgstr "Schimbările tale au fost salvate."
+
+#, fuzzy
+#~| msgid "Message Project"
+#~ msgid "Message Received"
+#~ msgstr "Proiect de Mesaje"
+
+#, fuzzy
+#~ msgid "You have received a message"
+#~ msgstr "Ai fost invitat să colaborezi!"
+
+#, fuzzy
+#~ msgid "You have received a reply"
+#~ msgstr "Ai fost invitat să colaborezi!"
+
+#, fuzzy
+#~| msgid "Restricted"
+#~ msgid "Rejected"
+#~ msgstr "Restrâns"
+
+#, fuzzy
+#~| msgid "Everybody"
+#~ msgid "body"
+#~ msgstr "Toată lumea"
+
+#, fuzzy
+#~ msgid "sender"
+#~ msgstr "Dent s-a înălțat mult"
+
+#, fuzzy
+#~| msgid "Recipient"
+#~ msgid "recipient"
+#~ msgstr "Recipient"
+
+#, fuzzy
+#~ msgid "visitor"
+#~ msgstr "Vizitat"
+
+#, fuzzy
+#~ msgid "parent message"
+#~ msgstr "Mesaje"
+
+#, fuzzy
+#~| msgid "No messages"
+#~ msgid "root message"
+#~ msgstr "Fără mesaje"
+
+#, fuzzy
+#~| msgid "Event date"
+#~ msgid "sent at"
+#~ msgstr "Data evenimentului"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "archived by recipient"
+#~ msgstr "Recipient nedefinit."
+
+#, fuzzy
+#~| msgid "New etherpad by %(sender_name)s"
+#~ msgid "deleted by sender at"
+#~ msgstr "Etherpad nou de %(sender_name)s"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "deleted by recipient at"
+#~ msgstr "Recipient nedefinit."
+
+#, fuzzy
+#~| msgid "Status"
+#~ msgid "status"
+#~ msgstr "Starea"
+
+#, fuzzy
+#~| msgid "Is Moderator"
+#~ msgid "moderator"
+#~ msgstr "Este Moderator"
+
+#, fuzzy
+#~| msgid "Related to"
+#~ msgid "moderated at"
+#~ msgstr "În legătură cu"
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "message"
+#~ msgstr "mesaj"
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "messages"
+#~ msgstr "mesaj"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "Undefined sender."
+#~ msgstr "Recipient nedefinit."
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "pending message"
+#~ msgstr "mesaj"
+
+#, fuzzy
+#~ msgid "pending messages"
+#~ msgstr "Mesaje"
+
+#, fuzzy
+#~ msgid "Message successfully sent."
+#~ msgstr "Utilizatorul %(username)s trebuia invitat!"
+
+#, fuzzy
+#~| msgid "Select at least one object."
+#~ msgid "Message rejected for at least one recipient."
+#~ msgstr "Selectați cel puțin un obiect."
 
 #, fuzzy
 #~ msgid "CSV Import Results"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 16:02+0200\n"
+"POT-Creation-Date: 2022-06-01 15:58+0200\n"
 "PO-Revision-Date: 2021-05-24 17:02+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -161,6 +161,14 @@ msgstr "%(count)d حساب کاربری باموفقیت دوباره فعال �
 msgid "Reactivate user accounts"
 msgstr "حساب‌های کاربری را دوباره فعال کن"
 
+#, fuzzy, python-format
+#| msgid "%d Users' rocketchat room memberships were re-done."
+msgid "%(count)d Users' group memberships were refreshed."
+msgstr "%d عضویت اتاق راکت‌چت کاربران از نو انجام شدند."
+
+msgid "Refresh user group membership associations (e.g. cache or Nextcloud folder problems)"
+msgstr ""
+
 #, python-format
 msgid "%d Users were synchronized successfully."
 msgstr "%d کاربر باموفقیت هماهنگ شدند."
@@ -267,6 +275,13 @@ msgstr ""
 
 msgid "Bookmarked Users list"
 msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Invitations"
+msgstr ""
+
+msgid "Conferences"
+msgstr "کنفرانس‌ها"
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
@@ -465,12 +480,12 @@ msgstr "%(sender_name)s شما را برای عضویت در \"%(team_name)s\" �
 msgid "Accept invitation"
 msgstr "پذیرفتن دعوت‌نامه"
 
-msgid "View invitation"
-msgstr "دیدن دعوت‌نامه"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s شما را دعوت کرده"
+
+msgid "View invitation"
+msgstr "دیدن دعوت‌نامه"
 
 msgid "New link to the moved project/group"
 msgstr "پیوند نو به گروه/پروژه‌ی جابجا شده"
@@ -520,6 +535,32 @@ msgstr "%(sender_name)s همین الان %(team_name)s\" را روی %(portal_n
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s همین الان یک حساب کاربری روی  %(portal_name)s ساخته‌!"
+
+msgid "A conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference %(object_name)s has been updated"
+msgstr "یک کنفرانس نو: \"%(object_name)s\" در %(team_name)s آگهی شد."
+
+#, fuzzy
+#| msgid "You are an admin of this team"
+msgid "You are attending this conference"
+msgstr "شما یک مدیر این گروه هستید"
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr "یک کنفرانس نو: \"%(object_name)s\" در %(team_name)s آگهی شد."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The time of conference %(object_name)s has been updated"
+msgstr "یک کنفرانس نو: \"%(object_name)s\" در %(team_name)s آگهی شد."
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -781,6 +822,11 @@ msgstr ""
 
 msgid "Persons"
 msgstr "افراد"
+
+#, fuzzy
+#| msgid "Last Name"
+msgid "last name"
+msgstr "نام خانوادگی"
 
 msgid "Location"
 msgstr ""
@@ -1461,11 +1507,19 @@ msgstr ""
 msgid "Related Teams"
 msgstr ""
 
+msgid "Open for cooperation"
+msgstr ""
+
 msgid "Dynamic extra fields"
 msgstr ""
 
 msgid "If set to true, a contact form will be displayed on the micropage."
 msgstr ""
+
+#, fuzzy
+#| msgid "View invitation"
+msgid "Use invite token"
+msgstr "دیدن دعوت‌نامه"
 
 msgid "Cosinnus project"
 msgstr ""
@@ -2180,6 +2234,18 @@ msgstr "مورد گزارش‌شده را پاک کن..."
 msgid "(The reported item has been deleted.)"
 msgstr ""
 
+msgid "This user profile is scheduled for deletion at: "
+msgstr ""
+
+msgid "However, it will not be deleted, because it is still active."
+msgstr ""
+
+msgid "This user account is disabled. The user cannot log in or use the account."
+msgstr ""
+
+msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
+msgstr ""
+
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr ""
 
@@ -2261,6 +2327,126 @@ msgstr ""
 msgid "Select a page on the left side."
 msgstr ""
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr ""
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
+
+msgid "Overview - All Conferences"
+msgstr ""
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+msgid "View Upcoming"
+msgstr ""
+
+msgid "Upcoming"
+msgstr ""
+
+msgid "View Past"
+msgstr ""
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+msgid "Booked"
+msgstr ""
+
+msgid "Permanently Premium"
+msgstr ""
+
+msgid "Portal Setting"
+msgstr ""
+
+msgid "Conference Settings"
+msgstr ""
+
+#, fuzzy
+msgid "Premium active"
+msgstr "اعلاء"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr ""
+
+msgid "Rooms"
+msgstr ""
+
+msgid "Start"
+msgstr ""
+
+msgid "running now!"
+msgstr ""
+
+msgid "Conference Setting"
+msgstr ""
+
+#, fuzzy
+msgid "Room"
+msgstr "اتاق BBB"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr ""
+
+msgid "Add new premium block"
+msgstr ""
+
+msgid "Make Permanent Premium"
+msgstr ""
+
+msgid "Remove Permanent Premium"
+msgstr ""
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "آیا واقعن می‌خواهید دعوت را رد کنید؟"
+
+msgid "There are no items to show."
+msgstr ""
+
+msgid "BBB"
+msgstr ""
+
+msgid "BBB Premium"
+msgstr ""
+
+msgid "BBB Recording API"
+msgstr ""
+
+msgid "Not set"
+msgstr ""
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
+
+msgid "Save"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "تنظیم کنفرانس Cosinnus"
+
 msgid "Newsletters"
 msgstr ""
 
@@ -2304,6 +2490,16 @@ msgid "User Dashboard Announcements"
 msgstr ""
 
 msgid "User Welcome Email"
+msgstr ""
+
+msgid "Conference Overview"
+msgstr ""
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
+
+msgid "Conferences with Custom Settings"
 msgstr ""
 
 msgid "Simple Statistics"
@@ -2362,9 +2558,6 @@ msgid "Firstname"
 msgstr ""
 
 msgid "Lastname"
-msgstr ""
-
-msgid "Save"
 msgstr ""
 
 msgid "User Administration"
@@ -3056,7 +3249,7 @@ msgstr ""
 msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
 msgstr ""
 
-msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+msgid "The Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgstr ""
 
 msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
@@ -3141,6 +3334,9 @@ msgid "You can directly create conference events for rooms from here by using th
 msgstr ""
 
 msgid "There are no rooms yet."
+msgstr ""
+
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
 msgstr ""
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
@@ -3309,6 +3505,12 @@ msgstr ""
 msgid "Length"
 msgstr ""
 
+msgid "minute"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
 #, fuzzy
 #| msgid "Delete reported item..."
 msgid "Delete Recording"
@@ -3322,137 +3524,6 @@ msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر 
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "مورد گزارش‌شده را پاک کن..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr ""
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
-
-msgid "Overview - All Conferences"
-msgstr ""
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "اتاق‌های کنفرانس"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr ""
-
-msgid "Past"
-msgstr ""
-
-msgid "View Upcoming"
-msgstr ""
-
-msgid "Upcoming"
-msgstr ""
-
-msgid "View Past"
-msgstr ""
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-msgid "Booked"
-msgstr ""
-
-msgid "Permanently Premium"
-msgstr ""
-
-msgid "Portal Setting"
-msgstr ""
-
-msgid "Conference Settings"
-msgstr ""
-
-#, fuzzy
-msgid "Premium active"
-msgstr "اعلاء"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr ""
-
-msgid "Rooms"
-msgstr ""
-
-msgid "Start"
-msgstr ""
-
-msgid "running now!"
-msgstr ""
-
-msgid "Conference Setting"
-msgstr ""
-
-#, fuzzy
-msgid "Room"
-msgstr "اتاق BBB"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Event"
-msgstr ""
-
-msgid "Add new premium block"
-msgstr ""
-
-msgid "Make Permanent Premium"
-msgstr ""
-
-msgid "Remove Permanent Premium"
-msgstr ""
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "آیا واقعن می‌خواهید دعوت را رد کنید؟"
-
-msgid "There are no items to show."
-msgstr ""
-
-msgid "BBB"
-msgstr ""
-
-msgid "BBB Premium"
-msgstr ""
-
-msgid "BBB Recording API"
-msgstr ""
-
-msgid "Not set"
-msgstr ""
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "تنظیم کنفرانس Cosinnus"
-
-msgid "Conference Overview"
-msgstr ""
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
-
-msgid "Conferences with Custom Settings"
-msgstr ""
 
 msgid "Rearrange"
 msgstr ""
@@ -3486,6 +3557,9 @@ msgid "get started here..."
 msgstr ""
 
 msgid "Activate Cloud"
+msgstr ""
+
+msgid "Members-Map"
 msgstr ""
 
 msgid "Cloud"
@@ -3571,6 +3645,18 @@ msgstr ""
 msgid "No Description set"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created"
+msgid "Created on: "
+msgstr "ساخته‌شده"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Last edited by"
+msgid "Last updated on: "
+msgstr "آخرین بار ویرایش شده توسط"
+
 msgid "more"
 msgstr ""
 
@@ -3640,6 +3726,10 @@ msgid "If present, the translations below will be shown according to the users' 
 msgstr ""
 
 msgid "Date"
+msgstr ""
+
+#, python-format
+msgid "Time zone: %(TIME_ZONE)s"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -3712,6 +3802,12 @@ msgstr ""
 msgid "No contact data has been added yet."
 msgstr ""
 
+msgid "Contact organizers"
+msgstr ""
+
+msgid "Here you can send a message to the admins."
+msgstr ""
+
 msgid "Your Deactivated Content"
 msgstr ""
 
@@ -3734,6 +3830,9 @@ msgstr ""
 
 #, python-format
 msgid "%(team_name)s - Members"
+msgstr ""
+
+msgid "Invite users directly via the following link: "
 msgstr ""
 
 msgid "Membership requests"
@@ -4094,6 +4193,39 @@ msgid "Enable the public visibility of your group/project"
 msgstr ""
 
 #, fuzzy
+#| msgid "Create Etherpad"
+msgid "Create invite token"
+msgstr "یک Etherpad بساز"
+
+msgid "Check this to generate an invite token which allows a user to join the "
+msgstr ""
+
+#, fuzzy
+#| msgid "Groups"
+msgid "group"
+msgstr "گروه‌ها"
+
+msgid "project"
+msgstr ""
+
+#, fuzzy
+#| msgctxt "the_app"
+#| msgid "conference"
+msgid "conference"
+msgstr "کنفرانس"
+
+msgid " directly."
+msgstr ""
+
+msgid "The current token is: "
+msgstr ""
+
+#, fuzzy
+#| msgid "Create Etherpad"
+msgid "Create token"
+msgstr "یک Etherpad بساز"
+
+#, fuzzy
 #| msgid "View conference"
 msgid "Include a video conference"
 msgstr "کنفرانس را ببینید"
@@ -4146,7 +4278,16 @@ msgstr ""
 msgid "This project shall be made publicly findable via other platforms."
 msgstr ""
 
+msgid "Is your project open to other partner organizations?"
+msgstr ""
+
+msgid "Project is open for further partner organizations."
+msgstr ""
+
 msgid "Which apps should be activated?"
+msgstr ""
+
+msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
 msgstr ""
 
 msgid "This App can only be activated for a Group, but not for a Project!"
@@ -4246,10 +4387,6 @@ msgid "Facebook integration is available after you created the project!"
 msgstr ""
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Invitations"
 msgstr ""
 
 msgid "About me"
@@ -4375,6 +4512,30 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Contact Phone Number"
+msgid "Contact Project Admins"
+msgstr "شماره‌ی تلفن تماس"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Contact Group Admins"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Contact Conference Admins"
+msgstr "اتاق‌های کنفرانس"
+
+msgid "If you want to send your message to the project chat, you have to turn directly to the project."
+msgstr ""
+
+msgid "If you want to send your message to the group chat, you have to turn directly to the group."
+msgstr ""
+
+msgid "If you want to send your message to the conference chat, you have to turn directly to the conference."
 msgstr ""
 
 msgid "Email the group administrators"
@@ -5483,6 +5644,9 @@ msgstr ""
 msgid "CSV Downloads"
 msgstr ""
 
+msgid "Portal switches and settings"
+msgstr ""
+
 #, fuzzy
 msgid "HD space used by conferences"
 msgstr "یک کاربر یک کنفرانس نو ساخته"
@@ -5505,7 +5669,7 @@ msgstr ""
 msgid "E-Mails of ALL active users"
 msgstr ""
 
-msgid "Ok"
+msgid "Select the date range for which you would like statistics"
 msgstr ""
 
 msgid "The WE-Cloud is here!"
@@ -5627,6 +5791,22 @@ msgid "Clear Filters"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Here you can search for partner organisations and projects that are open for further partners. The results are sorted so that partners with a lot of overlap in the funding objectives, eligible areas and SDGs you are active on are listed first."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners for ..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You're currently not member of any project, group or organization."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "Stream"
 msgid "Street"
@@ -5662,6 +5842,10 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search this area"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Find partners"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -5839,10 +6023,6 @@ msgid "Participate"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Contact organizers"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications for content posted."
 msgstr ""
 
@@ -5910,15 +6090,15 @@ msgid "Hidden User"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "This group is open for further partner organizations."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are a Member"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Join Group"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Message Group"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -5939,6 +6119,10 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This organization is open for further partner organizations."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -5970,11 +6154,11 @@ msgid "To Profile"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Join Project"
+msgid "This project is open for further partner organizations."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Message Project"
+msgid "Join Project"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -7104,9 +7288,6 @@ msgstr ""
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "تنها اعضای ثبت‌نام شده می‌توانند درون‌مایه‌ی درخواستی را ببینند! به سامانه وصل بشوید یا یک حساب بسازید!"
 
-msgid "Conferences"
-msgstr "کنفرانس‌ها"
-
 msgid "My Conferences"
 msgstr ""
 
@@ -7255,6 +7436,9 @@ msgstr ""
 msgid "Please also provide an end date"
 msgstr ""
 
+msgid "Ensure that your name does not contain any invalid characters."
+msgstr ""
+
 msgid "Test email sent!"
 msgstr ""
 
@@ -7290,6 +7474,12 @@ msgstr ""
 
 #, python-format
 msgid "The language \"%s\" is not supported"
+msgstr ""
+
+msgid "New verification email sent!"
+msgstr ""
+
+msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
 msgstr ""
 
 msgid "Successfully made conference permanent premium"
@@ -7807,6 +7997,15 @@ msgstr "پرونده‌ی ابری پیوندداده‌شده"
 msgid "Linked Cloud Files"
 msgstr "پرونده‌های ابری پیوندداده‌شده"
 
+msgid "Cloud Stub"
+msgstr ""
+
+msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
+msgstr ""
+
+msgid "There are no cloud files yet"
+msgstr "هنوز پوشه‌ای توی اَبر نیست"
+
 msgid "Restart"
 msgstr "بازراه‌اندازی"
 
@@ -7822,6 +8021,12 @@ msgstr ""
 msgctxt "the_app"
 msgid "conference"
 msgstr "کنفرانس"
+
+msgid "Error message:"
+msgstr ""
+
+msgid "No error message supplied."
+msgstr ""
 
 msgid "Go to conference"
 msgstr "برو به کنفرانس"
@@ -8018,8 +8223,91 @@ msgstr "تازه‌ترین یادداشت‌ها"
 msgid "Pad Type"
 msgstr "نوع یادداشت"
 
+msgid "Pad"
+msgstr "یادداشت"
+
+msgid "This pad can no longer be edited because its creator has deleted their account."
+msgstr "این یادداشت دیگر نمی‌تواند ویرایش شود زیرا سازنده‌ی آن پاکش کرده."
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(pad)s“?"
+msgstr "آیا واقعن می‌خواهید یادداشت „%(pad)s“ را پاک کنید؟"
+
+msgid "Delete Etherpad"
+msgstr "یادداشت Etherpad را پاک کن"
+
 msgid "The document can not be accessed because the etherpad server could not be reached. Please contact an administrator!"
 msgstr "این سند دیگر در دسترس نیست زیراکه سرور Etherpad در دسترس نیست. لطفن با مدیر تماس بگیرید!"
+
+msgid "This document is empty"
+msgstr "این سند خالی است"
+
+msgid "Pads"
+msgstr "یادداشت‌ها"
+
+msgid "Enter a title for the Pad."
+msgstr "یک عنوان برای یادداشت وارد کنید."
+
+msgid "Enter the title for a new Document or Table."
+msgstr "عنوان را برای سند تازه یا جدول وارد کن."
+
+msgid "Enter the title for a new Document."
+msgstr "عنوان را برای سند تازه وارد کن."
+
+msgid "Create Etherpad"
+msgstr "یک Etherpad بساز"
+
+msgid "Create Ethercalc"
+msgstr "یک Ethercalc بساز"
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(title)s“?"
+msgstr "آیا واقعن می‌خواهید یادداشت „%(title)s“ را پاک کنید؟"
+
+msgid "No etherpads have been created yet."
+msgstr "هنوز هیچ یادداشت Etherpadی ساخته نشده."
+
+msgid "Download CSV"
+msgstr "CSV را دانلود کن"
+
+msgid "Download Excel"
+msgstr "Excel را دانلود کن"
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"درود %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s. یک یادداشت تازه با عنوان \"%(object_name)s\" در گروه %(team_name)s نوشته است  \n"
+"\n"
+"با دنبال کردن پیوند روبرو می‌توانید آن را ببینید: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(پیوند روبرو را برای ویرایش اولویت‌های آگاه‌سازی دنبال کنید: %(notification_settings_url)s )\n"
+"\n"
+"گروه %(site_name)s شما."
+
+msgid "You created a pad"
+msgstr "شما یک یادداشت ساخته‌اید"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a Pad"
+msgstr "یک یادداشت تازه ساخته"
+
+msgid "There are no etherpads yet"
+msgstr "هیچ یادداشت Etherpadی نیست"
 
 #, python-format
 msgid "Etherpad \"%(title)s\" was edited successfully."
@@ -8459,6 +8747,533 @@ msgstr ""
 msgid "%(event)s %(type)s"
 msgstr ""
 
+msgid "Would you like to create an event"
+msgstr ""
+
+msgid "until"
+msgstr ""
+
+msgctxt "time"
+msgid "all day"
+msgstr ""
+
+msgctxt "time"
+msgid "at"
+msgstr ""
+
+msgctxt "time"
+msgid "o'clock"
+msgstr ""
+
+msgctxt "time"
+msgid "from"
+msgstr ""
+
+msgctxt "time"
+msgid "until"
+msgstr ""
+
+#, python-format
+msgid "Add %(event_type_verbose)s in Room %(room_name)s"
+msgstr ""
+
+#, python-format
+msgid "Edit %(event_type_verbose)s \"%(event_title)s\" in Room %(room_name)s"
+msgstr ""
+
+msgid "Enter a title for the conference event."
+msgstr ""
+
+msgid "Event is a break"
+msgstr ""
+
+msgid "Check this to create an empty break event that shows up in the agenda and timeline"
+msgstr ""
+
+msgid "Enter a description for the event"
+msgstr ""
+
+msgid "Show this event on microsite"
+msgstr ""
+
+msgid "Uncheck this to hide the event on microsite"
+msgstr ""
+
+msgid "Show the event's description on microsite"
+msgstr ""
+
+msgid "Uncheck this to disable platform-wide viewing of the event's description"
+msgstr ""
+
+msgid "Uncheck this to disable public viewing of the event's description"
+msgstr ""
+
+msgid "Example:"
+msgstr ""
+
+msgid "Stream URL for the Event"
+msgstr ""
+
+msgid "Custom embed code (HTML)"
+msgstr ""
+
+msgid "How many participants can join the video call before it is full."
+msgstr ""
+
+msgid "Note that changing this setting will have no effect while an event is running."
+msgstr ""
+
+msgid "Upload a preview image for the Conference Event"
+msgstr ""
+
+msgid "Will be shown on the event card in the conference room."
+msgstr ""
+
+msgid "The presenters will be shown in order in the event and will receive Moderator permissions for the BBB-Room"
+msgstr ""
+
+msgid "The presentation file (e.g. PDF) will be pre-uploaded to the BBB room."
+msgstr ""
+
+msgid "Note: If a slide is subsequently added to an existing event, it does not automatically appear in the event if this event was recently attended and is therefore active. This requires an active ending of the event or a 5-minute idle time without participants until the event is automatically ended. "
+msgstr ""
+
+msgid "You can actively end an existing event room by clicking on \"End Meeting\" in the top right-hand corner of the room in the \"Three-Dot Menu\"."
+msgstr ""
+
+msgid "Show room chat in the event"
+msgstr ""
+
+msgid "Stream this event"
+msgstr ""
+
+msgid "Please note: Streaming is only available for premium conferences. If you would like to use streaming, please request it explicitly when booking. Otherwise, these settings have no function."
+msgstr ""
+
+msgid "You can set up the BBB event to be streamed to a streaming provider (e.g. YouTube)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Once set up and activated, a streaming-bot will enter the event and stream all video and audio to the selected stream endpoint.\n"
+"The bot will enter and start streaming %(start_minutes)s minutes before the event start time and stop streaming and leave %(end_minutes)s minutes after the event end time.\n"
+"You can adjust the meeting times on-the-fly to allow for longer streaming if the event runs longer than expected."
+msgstr ""
+
+msgid "If you are using the maximum participant limit, please allow for the streaming bot's additional participant spot."
+msgstr ""
+
+msgid "Enable Streaming this BBB meeting"
+msgstr ""
+
+msgid "Create and create another"
+msgstr ""
+
+msgid "Save and create another"
+msgstr ""
+
+msgid "Add unscheduled event"
+msgstr ""
+
+msgid "Event Polls"
+msgstr ""
+
+msgid "Enter a title for the new event to be scheduled."
+msgstr ""
+
+msgid "Dates"
+msgstr ""
+
+msgid "Please select the available days in the calendar."
+msgstr ""
+
+msgid "You can select the same day more than once."
+msgstr ""
+
+msgid "Time: e.g. 10 or 10:30."
+msgstr ""
+
+msgid "Time"
+msgstr ""
+
+msgid "Note: You cannot edit the dates for this event poll because someone has already cast their vote!"
+msgstr ""
+
+msgid "External Link for the event"
+msgstr ""
+
+msgid "There are no open event polls."
+msgstr ""
+
+msgid "Planned Events"
+msgstr ""
+
+msgid "Past Events"
+msgstr ""
+
+msgid "Archived Event Polls"
+msgstr ""
+
+msgid "There are no archived event polls."
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "room name or title"
+msgid "Vote for %(title)s"
+msgstr "نام یا عنوان اتاق"
+
+#, python-format
+msgid "Archived: %(title)s"
+msgstr ""
+
+msgid "This event has already been scheduled. Voting is closed."
+msgstr ""
+
+msgid "This event has been canceled. Voting is closed."
+msgstr ""
+
+msgid "Nobody has voted for this event poll yet."
+msgstr ""
+
+msgid "Create an event from one of the suggestions"
+msgstr ""
+
+#, python-format
+msgid "Set the date to %(suggestion)s."
+msgstr ""
+
+msgid "When do you have time?"
+msgstr ""
+
+msgid "There are no date suggestions for this event poll yet!"
+msgstr ""
+
+#, python-format
+msgid "Do you really want to delete unscheduled event „%(title)s“?"
+msgstr ""
+
+msgid "Delete unscheduled event"
+msgstr ""
+
+msgid "You will now receive notifications for comments or when this event poll is changed and whenever somebody casts their vote."
+msgstr ""
+
+msgid "Post"
+msgstr ""
+
+msgid "Add event"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                            Note: After this event will be posted, each user of %(forum_name)s may be able to see it.<br>\n"
+"                            If you do not want this, please, use another group or project of your choice.\n"
+"                            "
+msgstr ""
+
+msgid "Enter a title for the new event."
+msgstr ""
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
+
+msgid "The first uploaded image will be displayed as a wallpaper."
+msgstr ""
+
+msgid "If you set this, your event will be shown on the map! (if permitted by its visibility settings)"
+msgstr ""
+
+msgid "Calendar"
+msgstr ""
+
+msgid "Copy this iCal-link into your calendar application to import current events:"
+msgstr ""
+
+msgid "Also include all events from projects within this group in feed"
+msgstr ""
+
+msgid "iCal Feed"
+msgstr ""
+
+msgid "Enter the title for a new event or select a day in the Calendar."
+msgstr ""
+
+msgid "Export event feed"
+msgstr ""
+
+msgid "Conference events can be created directly from the rooms themselves of the conference interface or in a central place here"
+msgstr ""
+
+msgid "There are no conference events."
+msgstr ""
+
+msgid "There are no current or future events."
+msgstr ""
+
+msgid "There are no past events."
+msgstr ""
+
+msgid "There are no upcoming events"
+msgstr ""
+
+msgid "Back to Events"
+msgstr ""
+
+msgid "Return to Event Polls"
+msgstr ""
+
+msgid "Return to Archived Event Polls"
+msgstr ""
+
+msgid "List"
+msgstr "فهرست"
+
+msgid "View"
+msgstr ""
+
+msgid "Created Event"
+msgstr ""
+
+#, python-format
+msgid "Do you really want to delete event „%(title)s“?"
+msgstr ""
+
+msgid "Delete event"
+msgstr ""
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you are attending in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending in %(team_name)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new event \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you created in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on one of your events in %(team_name)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new event \"%(object_name)s\", on %(event_date)s, was announced in %(team_name)s by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you were tagged in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on a event you were tagged in %(team_name)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event poll you voted in in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event poll:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on an event poll you voted in in %(team_name)s."
+msgstr ""
+
+msgid "Delete Event"
+msgstr ""
+
+msgid "(Canceled!)"
+msgstr ""
+
+msgid "This is an archived event poll."
+msgstr ""
+
+msgid "The event that was created after the poll can be viewed here:"
+msgstr ""
+
+msgid "(No description set)"
+msgstr ""
+
+msgctxt "someone else is going"
+msgid "Going"
+msgstr ""
+
+msgctxt "someone else is maybe going"
+msgid "Maybe going"
+msgstr ""
+
+msgctxt "someone else can't go"
+msgid "Can't go"
+msgstr ""
+
+msgctxt "one or many people are going"
+msgid "Going"
+msgid_plural "Going"
+msgstr[0] ""
+msgstr[1] ""
+
+msgctxt "one or many people are maybe going"
+msgid "Maybe going"
+msgid_plural "Maybe going"
+msgstr[0] ""
+msgstr[1] ""
+
+msgctxt "one or many people are not going"
+msgid "Can't go"
+msgid_plural "Can't go"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Going"
+msgstr ""
+
+msgid "Maybe going"
+msgstr ""
+
+msgid "Can't go"
+msgstr ""
+
+msgid "Are you going?"
+msgstr ""
+
+msgid "No Choice"
+msgstr ""
+
+msgid "Add event to your calendar"
+msgstr ""
+
+msgid "Copy this iCal-link into your calendar application to import this event:"
+msgstr ""
+
+msgid "Please register or login to join the video conference for this event"
+msgstr ""
+
+msgid "Start/join video conference for this event"
+msgstr ""
+
+#, fuzzy
+#| msgid "View conference"
+msgid "Leave video conference"
+msgstr "کنفرانس را ببینید"
+
+msgid "You created an event"
+msgstr ""
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created an event"
+msgstr ""
+
+msgid "Show all"
+msgstr ""
+
+msgid "Upcoming events"
+msgstr ""
+
 #, python-format
 msgid "Event \"%(title)s\" was edited successfully."
 msgstr ""
@@ -8539,9 +9354,6 @@ msgid "Event cannot be completed: No date was supplied."
 msgstr ""
 
 msgid "The event was created successfully at the specified date."
-msgstr ""
-
-msgid "Upcoming events"
 msgstr ""
 
 msgid "Upcoming event"
@@ -8655,6 +9467,108 @@ msgstr ""
 
 msgctxt "special_folder_type"
 msgid "Attachments"
+msgstr ""
+
+msgid "The URL you have entered does not seem to be valid!"
+msgstr ""
+
+msgid "URL Link"
+msgstr ""
+
+msgid "Paste or type the link's URL here"
+msgstr ""
+
+msgid "Original filename"
+msgstr ""
+
+msgid "Show detailed steps"
+msgstr ""
+
+msgid "Move your files to the Cloud"
+msgstr ""
+
+msgid "Download this folder"
+msgstr ""
+
+msgid "Add URL link"
+msgstr ""
+
+msgid "No files have been uploaded yet."
+msgstr ""
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new file \"%(object_name)s\" in %(team_name)s was uploaded by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was uploaded in %(team_name)s."
+msgstr ""
+
+msgid "Link to this Image"
+msgstr ""
+
+#, python-format
+msgid "Do you really want to delete file „%(title)s“?"
+msgstr ""
+
+msgid "Delete file"
+msgstr ""
+
+msgid "To move your files to the Cloud, follow these steps:"
+msgstr ""
+
+msgid "Navigate to the folder you wish to move to the Cloud, or to the root folder of the Files app if you wish to move all of the files"
+msgstr ""
+
+msgid "Root folder"
+msgstr ""
+
+#, python-format
+msgid "Click \"%(download_label)s\" to download the file archive"
+msgstr ""
+
+msgid "Unzip the file archive to a local folder on your hard drive"
+msgstr ""
+
+#, python-format
+msgid "Open the Cloud folder for \"%(group_name)s\":"
+msgstr ""
+
+msgid "Cloud app"
+msgstr ""
+
+msgid "Drag & drop the entire content of the unzipped folder from your local hard drive to the Cloud folder"
+msgstr ""
+
+#, python-format
+msgid "Your files will now upload to the Cloud and can be accessed by all members of \"%(group_name)s\". Your files will remain here in the Files app as well. If you are satisfied with how they look in the Cloud, you may delete them here."
+msgstr ""
+
+msgid "If you wish to access your files from multiple devices, you may want to consider moving them to the Cloud. The process is easy, and you can still keep your files here until you are satisfied with the Cloud."
+msgstr ""
+
+msgid "You uploaded a file"
+msgstr ""
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "uploaded a file"
+msgstr ""
+
+msgid "Latest files"
+msgstr ""
+
+msgid "There are no files  yet"
 msgstr ""
 
 msgid "File does not exist or you are not allowed to delete it."
@@ -8848,6 +9762,136 @@ msgstr ""
 msgid "Offer: %(offer)s (%(type)s)"
 msgstr ""
 
+msgid "Back to Offers"
+msgstr ""
+
+msgid "My Offers"
+msgstr ""
+
+msgid "Add Offer"
+msgstr ""
+
+msgid "Misc"
+msgstr ""
+
+#, python-format
+msgid "%(link_start)s%(username)s%(link_end)s is looking for"
+msgstr ""
+
+#, python-format
+msgid "%(link_start)s%(username)s%(link_end)s is offering"
+msgstr ""
+
+msgid "Inactive"
+msgstr ""
+
+msgid "Reactivate"
+msgstr ""
+
+#, python-format
+msgid "Do you really want to delete offer „%(title)s“?"
+msgstr ""
+
+msgid "Delete offer"
+msgstr ""
+
+#, python-format
+msgid "Do you really want to deactivate offer „%(title)s“?"
+msgstr ""
+
+msgid "Deactivate offer"
+msgstr ""
+
+#, python-format
+msgid "Do you really want to reactivate offer „%(title)s“?"
+msgstr ""
+
+#, python-format
+msgid "Do you really want to activate offer „%(title)s“?"
+msgstr ""
+
+msgid "Reactivate offer"
+msgstr ""
+
+msgid "Activate offer"
+msgstr ""
+
+msgid "This offer is inactive. It is only visible to you and not listed in the marketplace. You can reactivate it below."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                        Note: after this offer will be posted, each user of %(forum_name)s may be able to see it.<br>\n"
+"                        If you do not want this, please, use another group or project of your choice.\n"
+"                        "
+msgstr ""
+
+msgid "Offer type"
+msgstr ""
+
+msgid "Offer Title"
+msgstr ""
+
+msgid "Enter a description for your offer."
+msgstr ""
+
+msgid "Phone number"
+msgstr ""
+
+msgid "Your phone number is only visible for registered users"
+msgstr ""
+
+msgid "Check all categories that fit your offer"
+msgstr ""
+
+msgid "The first uploaded image will be displayed as a wallpaper"
+msgstr ""
+
+msgid "Offer is active"
+msgstr ""
+
+msgid "Only active offers will be listed in the Marketplace."
+msgstr ""
+
+msgid "Only active offers will be listed in the Marketplace. Your offer will stay active for 4 weeks. After that, you can reactivate it at any time."
+msgstr ""
+
+msgid "Wanted"
+msgstr ""
+
+msgid "No offers"
+msgstr ""
+
+msgid "There are no offers"
+msgstr ""
+
+msgid "offered in"
+msgstr ""
+
+#, python-format
+msgid "Contact %(username)s directly"
+msgstr ""
+
+msgid "Only shown for registered users"
+msgstr ""
+
+msgid "expires on"
+msgstr ""
+
+msgid "expired on"
+msgstr ""
+
+msgid "You created an offer"
+msgstr ""
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created an offer"
+msgstr ""
+
+msgid "There are no current offers"
+msgstr ""
+
 #, python-format
 msgid "Offer \"%(title)s\" was edited successfully."
 msgstr ""
@@ -8918,6 +9962,191 @@ msgid "Additional Recipients"
 msgstr ""
 
 msgid "Undefined recipient."
+msgstr ""
+
+msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
+msgstr ""
+
+msgid "The legacy messaging app is no longer in use. You can view all of your old messages, but you cannot write new ones. Please use the new messaging app in the navigation from now on!"
+msgstr ""
+
+msgid "You can contact the group administration via this form. Write your message in the field below and than you will be redirected to the chat with group admins."
+msgstr ""
+
+msgid "You can contact the project administration via this form. Write your message in the field below and than you will be redirected to the chat with project admins."
+msgstr ""
+
+msgid "What is your message?"
+msgstr ""
+
+msgid "Write it here"
+msgstr ""
+
+#, python-format
+msgid "Contact the administration of %(group_name)s:"
+msgstr ""
+
+#, python-format
+msgid ""
+"Your direct reply could not be processed!\n"
+"\n"
+"The reason was: %(reason)s\n"
+"\n"
+"\n"
+"Your message text was: \n"
+"--------------------------------\n"
+"%(text)s\n"
+"--------------------------------\n"
+"\n"
+"\n"
+"If this keeps happening, consider logging in and sending the reply directly on the site.\n"
+msgstr ""
+
+msgid ""
+"Note: This message is issued by an automated system.\n"
+"Do not reply, this would not be taken into account."
+msgstr ""
+
+msgid "Go to chat"
+msgstr ""
+
+msgid "Archived Messages"
+msgstr ""
+
+msgid "Archive"
+msgstr ""
+
+msgid "Undelete"
+msgstr ""
+
+msgid "Mark as Read"
+msgstr ""
+
+msgid "No messages"
+msgstr ""
+
+msgid "Please enter message..."
+msgstr ""
+
+msgid "Dear user,"
+msgstr ""
+
+#, python-format
+msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgstr ""
+
+msgid "Your message has been rejected by the moderator"
+msgstr ""
+
+msgid ", for the following reason:"
+msgstr ""
+
+#, python-format
+msgid "'%(sender_first)s %(sender_last)s' has replied to your message from %(date)s:"
+msgstr ""
+
+#, python-format
+msgid "'%(sender_first)s %(sender_last)s' has posted a message in one of your conversations."
+msgstr ""
+
+#, python-format
+msgid "You have received a message from the user '%(sender_first)s %(sender_last)s'."
+msgstr ""
+
+msgid "This message was sent in a conversation with: "
+msgstr ""
+
+msgid "Project/Group"
+msgstr ""
+
+msgid "Follow this link to view the message on the site"
+msgstr ""
+
+msgid "If you do not wish to receive any more emails from us, click here to unsubscribe:"
+msgstr ""
+
+msgid "You can also reply to this message directly by replying to this email. When you do, please leave the subject and addressee as it is. The email you reply from *must* be the one you are registered with on the site."
+msgstr ""
+
+msgid "WARNING: Your reply will be sent to all participants of this conversation!"
+msgstr ""
+
+#, python-format
+msgid "Message \"%(subject)s\" on the site %(sitename)s"
+msgstr ""
+
+msgid "Dear visitor,"
+msgstr ""
+
+msgid "As a reminder, please find below the content of your message."
+msgstr ""
+
+#, python-format
+msgid "On %(date)s, you sent a message to the user '%(sender_first)s %(sender_last)s'."
+msgstr ""
+
+msgid "Please find below the answer from your correspondent."
+msgstr ""
+
+msgid "Thank you again for your interest in our services."
+msgstr ""
+
+msgid "For more comfort, we encourage you to open an account on the site."
+msgstr ""
+
+msgid "The site administrator"
+msgstr ""
+
+msgid "Inbox"
+msgstr ""
+
+msgid "Sent"
+msgstr ""
+
+msgctxt "the noun for an Archive"
+msgid "Archive"
+msgstr ""
+
+msgid "Trash"
+msgstr ""
+
+msgid "Write"
+msgstr ""
+
+msgid "Reply"
+msgstr ""
+
+msgid "Recipient"
+msgstr ""
+
+msgid "Conversation"
+msgstr ""
+
+msgid "Conversation with members from"
+msgstr ""
+
+msgid "Conversation with"
+msgstr ""
+
+#, python-format
+msgid "Show all %(count)s participants"
+msgstr ""
+
+msgid "Me"
+msgstr ""
+
+msgid "Answer"
+msgstr ""
+
+msgid "Reply..."
+msgstr ""
+
+#, python-format
+msgid "Reply to %(sender_name)s"
+msgstr ""
+
+#, python-format
+msgid "Reply to all %(adressee_count)s"
 msgstr ""
 
 msgid "Your reply could not be matched to an existing message."
@@ -9089,6 +10318,184 @@ msgstr "مورد نوشتاری"
 msgid "Note Items"
 msgstr "موارد نوشتاری"
 
+msgctxt "the_verb"
+msgid "Comment"
+msgstr "نظردادن"
+
+msgid "There are no public news posts"
+msgstr "هیچ مطلب خبری همگانی‌ای نیست"
+
+#, fuzzy
+#| msgid "There are no public news posts"
+msgid "There are no news posts yet"
+msgstr "هیچ مطلب خبری همگانی‌ای نیست"
+
+msgid "Edit news post"
+msgstr "مطلب خبری را ویرایش کن"
+
+msgid "Title (optional)"
+msgstr "عنوان"
+
+msgctxt "label for the form text input"
+msgid "News text"
+msgstr "نوشته‌ی خبر"
+
+msgid "Please enter a message..."
+msgstr "لطفن یک پیام وارد کنید..."
+
+msgid "To post in this team you need to"
+msgstr "برای فرستادن به این گروه لازم است"
+
+msgid "request to join"
+msgstr "درخواست عضویت بدهید"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a news post you wrote in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your post:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"درود %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s در مورد مطلب خبری‌ای که شما در گروه %(team_name)s نوشته‌اید نظری نوشته :\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"روی مطلب شما:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"این پیوند را دنبال کنید تا نظر را ببینید: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(این پیوند را برای ویرایش اولویت‌های آگاه‌سازی دنبال کنید: %(notification_settings_url)s )\n"
+"\n"
+"\n"
+"گروه %(site_name)s شما.\n"
+"\n"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a news post you a commented in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the post:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"درود %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s در مورد مطلب خبری‌ای که شما در گروه %(team_name)s در موردش نظری نوشته‌اید، نظری نوشته :\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"روی این مطلب:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"این پیوند را دنبال کنید تا نظر را ببینید: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(این پیوند را برای ویرایش اولویت‌های آگاه‌سازی دنبال کنید: %(notification_settings_url)s )\n"
+"\n"
+"گروه %(site_name)s شما.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in, in %(team_name)s."
+msgstr "%(sender_name)s در مورد یک مطلب خبری در گروه %(team_name)s که شما درموردش نظر داده‌اید نظری نوشته است."
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
+msgstr "%(sender_name)s در مورد یکی از مطالب خبری که شما در گروه %(team_name)s نوشته‌اید نظری نوشته است."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s just posted an update in %(team_name)s:\n"
+msgstr ""
+"درود %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s همین الان در گروه %(team_name)s یک به‌روزرسانی داشته:\n"
+
+#, python-format
+msgid ""
+"%(note_text)s\n"
+"\n"
+"\n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"%(note_text)s\n"
+"\n"
+"\n"
+"\n"
+"برای پیداکردن آن پیوند روبرو را دنبال کنید: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(این پیوند را برای ویرایش اولویت‌های آگاه‌سازی دنبال کنید: %(notification_settings_url)s )\n"
+"\n"
+"\n"
+"گروه %(site_name)s شما."
+
+msgid "Delete note"
+msgstr "نوشته را پاک کن"
+
+msgid "Do you really want to delete this note?"
+msgstr "آیا واقعن می‌خواهید این نوشته را پاک کنید؟"
+
+msgid "You added a post"
+msgstr "شما یک مطلب افزودید"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "added a post"
+msgstr "یک مطلب افزود"
+
 msgid "Your news post was added successfully."
 msgstr "مطلب خبری شما با موفقیت افزوده شد."
 
@@ -9211,6 +10618,63 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
+msgid "Select which notifications you would like to receive for each group or project you are involved in."
+msgstr ""
+
+msgid "These notifications will be sent to your configured email address:"
+msgstr ""
+
+msgid "You can choose to receive notifications as soon as they happen, or you can receive a daily (or weekly) e-mail digest."
+msgstr ""
+
+msgid "The digest will aggregate all notifications with the \"Daily\" (or \"Weekly\") setting from all groups and projects. So you will receive only a single e-mail per day (or week) containing everything interesting that happend."
+msgstr ""
+
+msgid "Notifications you set to \"Immediately\" will be e-mailed to you as soon as they happen, with one e-mail per notification."
+msgstr ""
+
+msgid "Don't forget to save your settings once you are done editing them!"
+msgstr ""
+
+msgid "I wish to receive notification emails"
+msgstr ""
+
+msgid "Note that you will receive an email notification if someone has invited you to a group/ project in any case."
+msgstr ""
+
+msgid "I would like to receive instant messages by email for RocketChat mentions and direct messages to me"
+msgstr ""
+
+msgid "Receive notification emails in this language"
+msgstr ""
+
+msgid "Moderator Status (Portal-Admins only)"
+msgstr ""
+
+msgid "I wish to be a Moderator for this portal"
+msgstr ""
+
+msgid "As a Moderator, you will receive an instant notification whenever ANY publicly visible content is posted on this portal. Since you are a portal administrator you can then also delete the content if it is offensive or critical. To delete it, visit the content page on the website while logged into this account."
+msgstr ""
+
+msgid "Immediately"
+msgstr ""
+
+msgid "Daily"
+msgstr ""
+
+msgid "Weekly"
+msgstr ""
+
+msgid "Custom"
+msgstr ""
+
+msgid "Reset to default"
+msgstr ""
+
+msgid "This will reset all of your notification preferences to their default setting. Are you sure you wish to do that?"
+msgstr ""
+
 msgid "Your notification preferences were updated successfully."
 msgstr ""
 
@@ -9237,6 +10701,219 @@ msgstr "حساب‌های کاربران با موفقیت غیرفعال شدن
 #| msgid "Successfully removed user"
 msgid "Successfully removed connection."
 msgstr "کاربر با موفقیت حذف شد"
+
+msgid "Set password"
+msgstr ""
+
+#, python-format
+msgid "Edit %(provider)s account "
+msgstr ""
+
+#, python-format
+msgid " You connected your account with your account on %(provider)s. To change %(provider)s account data (e.g. password or email address) you have to visit the account settings on the %(provider)s website. "
+msgstr ""
+
+#, python-format
+msgid "Go to %(provider)s account settings"
+msgstr ""
+
+msgid "Remove Connection"
+msgstr ""
+
+#, python-format
+msgid "When you remove the connection you cannot login to this website via %(provider)s. Instead you have to use your email address and password. "
+msgstr ""
+
+msgid "Disconnect Accounts"
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to disconnect your account account ?"
+msgstr "آیا واقعن می‌خواهید دعوت را رد کنید؟"
+
+#, python-format
+msgid "Do you want to remove the connection between %(portal_name)s and %(provider)s? To do that you have to set a password for your %(portal_name)s account first."
+msgstr ""
+
+msgid "Set Password"
+msgstr ""
+
+#, python-format
+msgid "Connect your Account with %(provider)s"
+msgstr ""
+
+#, python-format
+msgid " If you already have an account on %(provider)s you can connect both accounts here. After that you only have to login on %(provider)s and are also logged in here."
+msgstr ""
+
+msgid "Connect Accounts"
+msgstr ""
+
+#, python-format
+msgid "Connect Account with %(provider)s"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgid " Do you really want to connect your account with the one on %(provider)s ? "
+msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
+
+#, python-format
+msgid ""
+"Hi %(user_name)s,\n"
+"\n"
+"Your %(site_name)s account has been connected with your %(provider)s Account. Now you can login on %(site_name)s with just one click.\n"
+"\n"
+"If you connected your accounts you don't need to do anything. If not please contact the support.\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+msgid "Account connected"
+msgstr ""
+
+#, python-format
+msgid ""
+"Hi %(user_name)s,\n"
+"\n"
+"The connection with your %(provider)s Account on %(site_name)s has been removed. Now you can't login with your %(provider)s Account on %(site_name)s anymore.\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+msgid "Account connection has been removed"
+msgstr ""
+
+#, python-format
+msgid ""
+"Hi %(user_name)s,\n"
+"\n"
+"Someone has just registered on %(site_name)s with your %(provider)s Account. We are sending you this email to make sure that this was you.\n"
+"\n"
+"If it was you, then you don't have to do anything. Otherwise, please contact the support.\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#, python-format
+msgid "Someone registered on %(site_name)s with your %(provider)s account "
+msgstr ""
+
+msgid "Welcome"
+msgstr ""
+
+msgid "WECHANGE Account connected"
+msgstr ""
+
+msgid " This data we received from your WECHANGE account"
+msgstr ""
+
+msgid "Your Avatar and other settings from your profile were also copied."
+msgstr ""
+
+#, fuzzy
+#| msgid "You cannot change your application anymore."
+msgid "You can change your this data any time in you profile settings."
+msgstr "شما دیگر نمی‌توانید درخواست‌تان را تغییر دهید."
+
+msgid "Social Network Login Failure"
+msgstr ""
+
+msgid "An error occurred while attempting to login via your social network account."
+msgstr ""
+
+msgid "Account Connections"
+msgstr ""
+
+#, python-format
+msgid " %(provider)s Account "
+msgstr ""
+
+msgid "You can sign in to your account using any of the following third party accounts:"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "You currently have no social network accounts connected to this account."
+msgstr ""
+
+msgid "Add a 3rd Party Account"
+msgstr ""
+
+msgid "Login Cancelled"
+msgstr ""
+
+#, python-format
+msgid "You decided to cancel logging in to our site using one of your existing accounts. If this was a mistake, please proceed to <a href=\"%(login_url)s\">sign in</a>."
+msgstr ""
+
+msgid "Signup"
+msgstr ""
+
+#, python-format
+msgid "Login with %(provider)s"
+msgstr ""
+
+msgid "Login and Connect"
+msgstr ""
+
+#, python-format
+msgid " %(portal_name)s wants access to the following information of your %(provider_name)s account"
+msgstr ""
+
+msgid "last name (if set)"
+msgstr ""
+
+#, fuzzy
+msgid "Do you also want to copy your profile data?"
+msgstr "آیا واقعن می‌خواهید دعوت را رد کنید؟"
+
+msgid "Yes, allow access to my profile data: (e.g Avatar, Location, Topics, Language Settings)"
+msgstr ""
+
+msgid "Please also fill in the following information:"
+msgstr ""
+
+msgid "Sign up with"
+msgstr ""
+
+#, python-format
+msgid "Sign up with %(provider)s Account"
+msgstr ""
+
+msgid "Log in with"
+msgstr ""
+
+#, python-format
+msgid "Log in with %(provider)s Account"
+msgstr ""
+
+msgid "Register with Social Account"
+msgstr ""
+
+msgid "Login with Social Account"
+msgstr ""
+
+#, python-format
+msgid " %(portal_name)s is part of the %(provider)s community. You can use your %(provider)s account to login on %(portal_name)s."
+msgstr ""
+
+#, python-format
+msgid " %(portal_name)s is part of the following communities. If you have an account on one of these communities you can use it to login on %(portal_name)s. "
+msgstr ""
+
+#, python-format
+msgid "Sign up with %(provider_id)s"
+msgstr ""
+
+#, python-format
+msgid "Login with %(provider_id)s"
+msgstr ""
 
 msgctxt "the_app"
 msgid "organization"
@@ -9313,6 +10990,169 @@ msgid "Organization group"
 msgstr ""
 
 msgid "Organization groups"
+msgstr ""
+
+#, python-format
+msgid "%(team_name)s - Assigned projects/groups"
+msgstr ""
+
+#, fuzzy
+#| msgid "Assigned to"
+msgid "Assigned projects/groups"
+msgstr "واگذار شده به"
+
+msgid "Invite groups/projects..."
+msgstr ""
+
+#, fuzzy
+#| msgid "New link to the moved project/group"
+msgid "Invite project/group"
+msgstr "پیوند نو به گروه/پروژه‌ی جابجا شده"
+
+#, fuzzy
+#| msgid "Enter a user name or email to find users to invite..."
+msgid "Enter a name to find project/groups to invite..."
+msgstr "یک نام کاریری یا ایمیل وارد کنید تا کاربران را دعوت کنید..."
+
+msgid "Invite projects/groups"
+msgstr ""
+
+#, fuzzy
+#| msgid "Invite users"
+msgid "Invited groups/projects"
+msgstr "کاربران را دعوت کن"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgid "Do you really want to revoke the invitation for „%(name)s“?"
+msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
+
+#, fuzzy
+#| msgid "Revoke Invitation for Member"
+msgid "Revoke invitation for project/group"
+msgstr "دعوت‌نامه را یرای کاربر باطل کن"
+
+msgid "Project/group requests"
+msgstr ""
+
+#, fuzzy
+#| msgid "Decline Invitation"
+msgid "Decline Admin"
+msgstr "دعوت را رد کن"
+
+#, fuzzy
+#| msgid "New link to the moved project/group"
+msgid "Remove project/group"
+msgstr "پیوند نو به گروه/پروژه‌ی جابجا شده"
+
+msgid "Add Organization"
+msgstr ""
+
+msgid "Edit Organization"
+msgstr ""
+
+msgid "Admins"
+msgstr ""
+
+msgid "Joins"
+msgstr ""
+
+msgid "Help about organizations"
+msgstr ""
+
+#, python-format
+msgid "%(team_name)s - Admins"
+msgstr ""
+
+#, fuzzy
+#| msgid "Invited Members"
+msgid "Invited Admins"
+msgstr "کاربران دعوت‌نامه"
+
+#, fuzzy
+#| msgid "Revoke Invitation for Member"
+msgid "Revoke Invitation for Admin"
+msgstr "دعوت‌نامه را یرای کاربر باطل کن"
+
+msgid "Admin requests"
+msgstr ""
+
+msgid "Admin requested"
+msgstr ""
+
+#, fuzzy
+#| msgid "Current File"
+msgid "Current Admins"
+msgstr "پوشه‌ی فعلی"
+
+msgid "Remove Admin"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Edit stream \"%(stream_name)s\""
+msgid "Edit \"%(organization_name)s\""
+msgstr "این جویبار داده‌ی \"%(stream_name)s\" را ویرایش کن"
+
+#, fuzzy
+#| msgid "Delete this Stream"
+msgid "Delete this Organization"
+msgstr "این جویبار داده را پاک کن"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to delete etherpad „%(pad)s“?"
+msgid "Do you really want to delete organization „%(name)s“?"
+msgstr "آیا واقعن می‌خواهید یادداشت „%(pad)s“ را پاک کنید؟"
+
+#, fuzzy
+#| msgid "Decline Invitation"
+msgid "Delete Organization"
+msgstr "دعوت را رد کن"
+
+msgid "Enter the name of your organization"
+msgstr ""
+
+msgid "Type of your organization"
+msgstr ""
+
+msgid "If none of the options apply, specify the type of your organization here"
+msgstr ""
+
+msgid "  Describe the project in a few sentences. This description will be publicly visible."
+msgstr ""
+
+#, fuzzy
+msgid "Social Media Accounts"
+msgstr "حساب‌های کاربری را دوباره فعال کن"
+
+msgid "Remove Social Media Account"
+msgstr ""
+
+msgid "Add Social Media Account"
+msgstr ""
+
+msgid "Phone"
+msgstr ""
+
+msgid "Address(es) of your organization"
+msgstr ""
+
+#, python-format
+msgid "Projects are always transferred to <a href=\"%(url)s\" target=\"_blank\">partner platforms</a> of WECHANGE. These are only organizational data and not personal data."
+msgstr ""
+
+msgid "This organization should be made publicly findable via other platforms."
+msgstr ""
+
+msgid "Is your organization open for cooperation in the funding program?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Organization is open for future projects."
+msgstr "دعوت‌های گروه برای کاربران ثبت‌نشده"
+
+#, python-format
+msgid "Users in organization %(group)s"
 msgstr ""
 
 #, python-format
@@ -9569,2309 +11409,6 @@ msgid "Poll Option"
 msgstr ""
 
 msgid "Poll Options"
-msgstr ""
-
-#, python-format
-msgid "Poll \"%(title)s\" was edited successfully."
-msgstr ""
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be edited."
-msgstr ""
-
-#, python-format
-msgid "Poll \"%(title)s\" was added successfully."
-msgstr ""
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be added."
-msgstr ""
-
-msgid "You should define at least one poll option!"
-msgstr ""
-
-msgid "This poll is archived and cannot be edited anymore!"
-msgstr ""
-
-#, python-format
-msgid "Poll \"%(title)s\" was deleted successfully."
-msgstr ""
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be deleted."
-msgstr ""
-
-msgid "The voting phase for this poll is over. You cannot vote for it any more."
-msgstr ""
-
-msgid "In this poll you must vote for exactly one item!"
-msgstr ""
-
-msgid "Invalid action for this poll. The request could not be completed!"
-msgstr ""
-
-msgid "This action is not permitted for this poll at this stage!"
-msgstr ""
-
-msgid "The poll was closed successfully."
-msgstr ""
-
-msgid "The poll was re-opened successfully."
-msgstr ""
-
-msgid "The poll was archived successfully."
-msgstr ""
-
-msgid "Stream"
-msgstr "جویبار داده"
-
-msgctxt "the_app"
-msgid "stream"
-msgstr "جویبار داده"
-
-msgid "My Streams"
-msgstr "جویبارهای داده‌ی من"
-
-msgid "Streams"
-msgstr "جویبارهای داده"
-
-msgid "Models"
-msgstr "الگوها"
-
-msgid "Portal IDs"
-msgstr "شناسه‌ی درگاه"
-
-msgid "Last seen"
-msgstr "آخرین بار دیده شده"
-
-msgid "Special Stream"
-msgstr "جویبار داده ویژه"
-
-msgid "Special Group IDs"
-msgstr "شناسه‌های گروه ویژه"
-
-msgid "You do not have permission to access this stream."
-msgstr "شما اجازه‌ی دسترسی به این جویبار داده ندارید."
-
-msgid "Your stream was added successfully."
-msgstr "جویبار داده‌ی شما با موفقیت افزوده شد."
-
-msgid "Your stream was updated successfully."
-msgstr "جویبار داده‌ی شما با موفقیت به‌روز شد."
-
-msgid "Your stream was deleted successfully."
-msgstr "جویبار داده‌ی شما با موفقیت پاک شد."
-
-msgid "You cannot delete the default stream!"
-msgstr "شما نمی‌توانید جویبار داده‌ی پیش‌فرض را پاک کنید!"
-
-msgctxt "the_app"
-msgid "todo"
-msgstr "کارِبرای‌انجام"
-
-msgid "A user created a new todo"
-msgstr "یک کاربر یک کارِبرای‌انجام ساخته است"
-
-#, python-format
-msgid "%(sender_name)s created the todo %(object_name)s"
-msgstr "%(sender_name)sکارِبرای‌انجام %(object_name)s را ساخته"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d todos"
-msgstr "%(sender_name)s %(count)d کارِبرای‌انجام ساخته"
-
-#, python-format
-msgid "%(sender_name)s created a new todo"
-msgstr "%(sender_name)s یک کارِبرای‌انجام تازه ساخته"
-
-#, python-format
-msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "یک کارِبرای‌انجام تازه‌: \"%(object_name)s\" در %(team_name)s ساخته شد."
-
-msgid "A todo was assigned to me"
-msgstr "بک کارِبرای‌انجام به من واگذار شد"
-
-#, python-format
-msgid "%(sender_name)s assigned the todo %(object_name)s to you"
-msgstr "%(sender_name)s کارِبرای‌انجام %(object_name)s را به شما واگذار کرده"
-
-#, python-format
-msgid "%(sender_name)s assigned %(count)d todos to you"
-msgstr "%(sender_name)s %(count)d کارِبرای‌انجام را به شما واگذار کرده"
-
-#, python-format
-msgid "%(sender_name)s assigned a todo to you"
-msgstr "%(sender_name)s یک کارِبرای‌انجام را به شما واگذار کرده"
-
-msgid "A todo I created was completed"
-msgstr "کارِبرای‌انجامی که من ساخته بودم انجام شده"
-
-#, python-format
-msgid "%(sender_name)s completed the todo %(object_name)s"
-msgstr "%(sender_name)s کارِبرای‌انجام %(object_name)s را انجام داده"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d todos"
-msgstr "%(sender_name)s %(count)d کارِبرای‌انجام را انجام داده"
-
-msgid "You created this todo"
-msgstr "شما این کارِبرای‌انجام را ساخته‌اید"
-
-#, python-format
-msgid "%(sender_name)s completed your todo"
-msgstr "%(sender_name)s کارِبرای‌انجام خودتان را انجام داده‌اید"
-
-#, python-format
-msgid "%(sender_name)s completed one of your todos"
-msgstr "%(sender_name)s کارِبرای‌انجام شما را انجام داده‌"
-
-msgid "A user commented on one of your todos"
-msgstr "یک کاربر در مورد یکی از کارهای‌برای‌انجام شما نظری نوشته است"
-
-#, python-format
-msgid "%(sender_name)s commented on your todo %(object_name)s"
-msgstr "%(sender_name)s در مورد این کارِبرای‌انجام شما نظری نوشته است: %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
-msgstr[0] "%(sender_name)s و %(count_minus_one)d نفر دیگر نظراتی در مورد این کارِبرای‌انجام شما نوشته‌اند: %(object_name)s"
-msgstr[1] "%(sender_name)s و %(count_minus_one)d نفر دیگر نظراتی در مورد این کارِبرای‌انجام شما نوشته‌اند: %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your todo"
-msgstr "%(sender_name)s در مورد کارِبرای‌انجام شما نظری نوشته است"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your todos"
-msgstr "%(sender_name)s در مورد یکی از کارهای‌برای‌انجام شما نظری نوشته است"
-
-msgid "A user commented on a todo you were tagged in"
-msgstr "یک کاربر در مورد یکی از کارهای‌برای‌انجامی که شما در عنوان شده‌اید نظری نوشته است"
-
-#, python-format
-msgid "%(sender_name)s commented on the todo %(object_name)s"
-msgstr "%(sender_name)s در مورد کارِبرای‌انجام %(object_name)s نظری نوشته است"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
-msgstr[0] "%(sender_name)s و %(count_minus_one)d نفر دیگر نظراتی در مورد این کارِبرای‌انجام نوشته‌اند: %(object_name)s"
-msgstr[1] "%(sender_name)s و %(count_minus_one)d نفر دیگر نظراتی در مورد این کارِبرای‌انجام نوشته‌اند: %(object_name)s"
-
-msgid "You were tagged in this todo"
-msgstr "نام شما در این کارِبرای‌انجام عنوان شده"
-
-#, python-format
-msgid "%(sender_name)s commented on a todo you were tagged in"
-msgstr "%(sender_name)s نظری در مورد کارِبرای‌انجامی که شما در آن عنوان شده‌اید نوشته"
-
-#, python-format
-msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s نظری در مورد کارِبرای‌انجامی که شما در گروه %(team_name)s در آن عنوان شده‌اید نوشته"
-
-msgid "A user commented on a todo you were assigned to"
-msgstr "یک کاربر در مورد یکی از کارهای‌برای‌انجامی که به شما واگذارشده نظری نوشته است"
-
-#, python-format
-msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
-msgstr "%(sender_name)s در مورد این کارِبرای‌انجامی که به شما واگذارشده نظری نوشته است: %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
-msgstr[0] "%(sender_name)s و %(count_minus_one)d نفر دیگر در مورد این کارِبرای‌انجامی که به شما واگذارشده نظری نوشته‌اند: %(object_name)s"
-msgstr[1] "%(sender_name)s و %(count_minus_one)d نفر دیگر در مورد این کارِبرای‌انجامی که به شما واگذارشده نظری نوشته‌اند: %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your assigned todos"
-msgstr "%(sender_name)s در مورد یکی از کارهای‌برای‌انجامی که شما واگذارکرده‌اید نظری نوشته است"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
-msgstr "%(sender_name)s در مورد یکی از کارهای‌برای‌انجامی که شما در گروه %(team_name)s واگذارکرده‌اید نظری نوشته است"
-
-msgid "A user updated a todo you are following"
-msgstr "یک کاربر یک کارِبرای‌انجامی که شما دنبال می‌کنید را به‌روز کرده"
-
-#, python-format
-msgid "%(sender_name)s updated the todo %(object_name)s"
-msgstr "%(sender_name)s کارِبرای‌انجام روبرو را به‌روز کرده: %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
-msgstr[0] "%(sender_name)s و %(count_minus_one)d نفر دیگر کارِبرای‌انجام روبرو را به‌روز کرده‌اند: %(object_name)s"
-msgstr[1] "%(sender_name)s و %(count_minus_one)d نفر دیگر کارِبرای‌انجام روبرو را به‌روز کرده‌اند: %(object_name)s"
-
-msgid "You are following this todo"
-msgstr "شما این کارِبرای‌انجام را دنبال می‌کنید"
-
-#, python-format
-msgid "%(sender_name)s updated a todo you are following"
-msgstr "%(sender_name)s یک کارِبرای‌انجام که شما دنبال می‌کنید را به‌روز کرده"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "کار‌برای‌انجام \"%(object_name)s\" که شما دنبال می‌کنید در گروه %(team_name)s به‌روز شده."
-
-msgid "A user reassigned a todo you are following"
-msgstr "یک کاربر کارِبرای‌انجامی که دنبال می‌کنید را دوباره واگذار کرده"
-
-#, python-format
-msgid "%(sender_name)s reassigned the todo %(object_name)s"
-msgstr "%(sender_name)s کارِبرای‌انجام روبرو را دوباره واگذار کرده: %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s reassigned %(count)d todos"
-msgstr "%(sender_name)s %(count)d کارِبرای‌انجام را واگذارکرده"
-
-#, python-format
-msgid "%(sender_name)s reassigned a todo you are following"
-msgstr "%(sender_name)s یک کارِبرای‌انجام که شما دنبال می‌کنید را دوباره واگذار کرده"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
-msgstr "کار‌برای‌انجام \"%(object_name)s\" که شما دنبال می‌کنید در گروه %(team_name)s دوباره واگذارشده."
-
-msgid "A user completed a todo you are following"
-msgstr "یک کاربر کارِبرای‌انجامی که دنبال می‌کنید را انجام داده"
-
-#, python-format
-msgid "%(sender_name)s completed a todo you are following"
-msgstr "%(sender_name)s یک کارِبرای‌انجام که شما دنبال می‌کنید را انجام داده"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
-msgstr "کار‌برای‌انجام \"%(object_name)s\" که شما دنبال می‌کنید در گروه %(team_name)s انجام شده."
-
-msgid "A user commented on a todo you are following"
-msgstr "یک کاربر در مورد یکی از کارهای‌برای‌انجامی که دنبال می‌کنید نظری نوشته است"
-
-#, python-format
-msgid "%(sender_name)s commented on on a todo you are following"
-msgstr "%(sender_name)s نظری در مورد کارِبرای‌انجامی که شما دنبال می‌کنید نوشته"
-
-msgid "My Todos"
-msgstr "کارهای‌برای‌انجام من"
-
-msgid "No todos"
-msgstr "کارِبرای‌انجامی نیست"
-
-msgid "Open"
-msgstr "باز"
-
-msgid "Completed"
-msgstr "انجام‌شده"
-
-msgid "Assigned To"
-msgstr "واگذار شده به"
-
-msgid "Priority"
-msgstr "اولویت"
-
-msgid "Due date"
-msgstr "مهلت انجام"
-
-msgid "Soonest Due"
-msgstr "نزدیک‌ترین مهلت انجام"
-
-msgid "You are not allowed to assign this Todo entry."
-msgstr "شما اجازه ندارید این کارِبرای‌انجام را به کسی واگذار کنید."
-
-msgid "Later"
-msgstr "بعدن"
-
-msgid "Normal"
-msgstr "ساده"
-
-msgid "Important"
-msgstr "ویژه"
-
-msgid "Due by"
-msgstr "مهلت تا"
-
-msgid "Completed on"
-msgstr "انجام‌شده در تاریخ"
-
-msgid "Completed by"
-msgstr "انجام‌شده به‌دست"
-
-msgid "Assigned to"
-msgstr "واگذار شده به"
-
-msgid "List"
-msgstr "فهرست"
-
-#, python-format
-msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
-msgstr "کارِبرای‌انجام \"%(todo_name)s\" به %(assignee_name)s واگذارشده"
-
-#, python-format
-msgid "Todo \"%(title)s\" was added successfully."
-msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت افزوده شد."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be added."
-msgstr "کارِبرای‌انجام \"%(title)s\" افزوده نشد."
-
-msgid "You were trying to add a todo to a todolist that does not exist!"
-msgstr "شما کوشیدید یک کارِبرای‌انجام به فهرستی بیافزایید که وجود ندارد!"
-
-#, python-format
-msgid "Todo \"%(title)s\" was edited successfully."
-msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت ویرایش شد."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be edited."
-msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت ویرایش نشد."
-
-#, python-format
-msgid "Todo \"%(title)s\" was deleted successfully."
-msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت پاک شد."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be deleted."
-msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت پاک نشد."
-
-#, python-format
-msgid "Todo \"%(title)s\" was assigned successfully."
-msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت واگذار شد."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be assigned."
-msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت واگذار نشد."
-
-#, python-format
-msgid "Todo \"%(title)s\" was assigned to You successfully."
-msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت به شما واگذار شد."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be assigned to You."
-msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت به شما واگذار نشد."
-
-#, python-format
-msgid "Todo \"%(title)s\" was unassigned successfully."
-msgstr "مسئولیت کارِبرای‌انجام \"%(title)s\" با موفقیت بازپس‌گرفته شد."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be unassigned."
-msgstr "مسئولیت کارِبرای‌انجام \"%(title)s\" با موفقیت بازپس‌گرفته نشد."
-
-#, python-format
-msgid "Todo \"%(title)s\" was completed successfully."
-msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت انجام شد."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be completed."
-msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت انجام نشد."
-
-#, python-format
-msgid "Todo \"%(title)s\" was completed by You successfully."
-msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت از سوی شما انجام شد."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be completed by You."
-msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت از سوی شما پایان نیافت."
-
-#, python-format
-msgid "Todo \"%(title)s\" was set to incomplete successfully."
-msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت به عنوان پایان‌نیافته نشانه‌گذاری شد."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be set to incomplete."
-msgstr "کارِبرای‌انجام \"%(title)s\" به عنوان پایان‌نیافته نشانه‌گذاری نشد."
-
-#, python-format
-msgid "Todolist \"%(title)s\" was edited successfully."
-msgstr "فهرست کارهای‌برای‌انجام \"%(title)s\" با موفقیت ویرایش شد."
-
-#, python-format
-msgid "Todolist \"%(title)s\" could not be edited."
-msgstr "فهرست کارهای‌برای‌انجام \"%(title)s\" ویرایش نشد."
-
-#, python-format
-msgid "Todolist \"%(title)s\" was added successfully."
-msgstr "فهرست کارهای‌برای‌انجام \"%(title)s\" با موفقیت افزوده شد."
-
-#, python-format
-msgid "Todolist \"%(title)s\" could not be added."
-msgstr "فهرست کارهای‌برای‌انجام \"%(title)s\" افزوده نشد."
-
-msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
-msgstr "شما نمی‌توانید این پوشه را پاک کنید چراکه شما مجوز پاک کردن یک یا چند مورد در آن را ندارید!"
-
-msgid "Sender and Recipient cannot be both undefined."
-msgstr ""
-
-msgid "Visitor's email is in excess."
-msgstr ""
-
-msgid "Visitor's email is missing."
-msgstr ""
-
-msgid "Reading date must be later than sending date."
-msgstr ""
-
-msgid "Deletion date by sender must be later than sending date."
-msgstr ""
-
-msgid "Deletion date by recipient must be later than sending date."
-msgstr ""
-
-msgid "Response date must be later than sending date."
-msgstr ""
-
-msgid "The message cannot be replied without having been read."
-msgstr ""
-
-msgid "Response date must be later than reading date."
-msgstr ""
-
-msgid "Response date cannot be set without at least one reply."
-msgstr ""
-
-msgid "The message cannot be replied without being in a conversation."
-msgstr ""
-
-msgid "Dates"
-msgstr ""
-
-msgid "Moderation"
-msgstr ""
-
-#, python-brace-format
-msgid "Some usernames are unknown or no longer active: {users}."
-msgstr ""
-
-#, python-brace-format
-msgid "Ensure this value has at most {limit_value} distinct items (it has {show_value})."
-msgstr ""
-
-#, python-brace-format
-msgid "Ensure this value has at least {limit_value} distinct items (it has {show_value})."
-msgstr ""
-
-#, python-brace-format
-msgid "Some usernames are rejected: {users}."
-msgstr ""
-
-#, python-brace-format
-msgid "{username}"
-msgstr ""
-
-#, python-brace-format
-msgid "{username} ({reason})"
-msgstr ""
-
-#, python-brace-format
-msgid "Writing to some users is not possible: {users}."
-msgstr ""
-
-msgid "Recipient"
-msgstr ""
-
-#, fuzzy
-#| msgid "Additional filters"
-msgid "Additional recipients"
-msgstr "پالایه‌های افزوده"
-
-#, fuzzy
-#| msgid "Additional filters"
-msgid "Additional recipient"
-msgstr "پالایه‌های افزوده"
-
-msgid "Message Rejected"
-msgstr ""
-
-#, fuzzy
-msgid "Your message has been rejected"
-msgstr "تغییرات‌تان ذخیره شده‌اند."
-
-msgid "Message Received"
-msgstr ""
-
-#, fuzzy
-#| msgid "You have no assigned tasks"
-msgid "You have received a message"
-msgstr "کارِبرای‌انجامی یه شما واگذار نشده"
-
-msgid "Reply Received"
-msgstr ""
-
-msgid "You have received a reply"
-msgstr ""
-
-msgid "Pending"
-msgstr ""
-
-#, fuzzy
-#| msgid "Restricted"
-msgid "Rejected"
-msgstr "محدودشده"
-
-msgid "body"
-msgstr ""
-
-msgid "sender"
-msgstr ""
-
-msgid "recipient"
-msgstr ""
-
-#, fuzzy
-#| msgid "Visitor"
-msgid "visitor"
-msgstr "ملاقات‌کننده"
-
-#, fuzzy
-#| msgid "Please enter a message..."
-msgid "parent message"
-msgstr "لطفن یک پیام وارد کنید..."
-
-msgid "root message"
-msgstr ""
-
-msgid "sent at"
-msgstr ""
-
-msgid "read at"
-msgstr ""
-
-msgid "replied at"
-msgstr ""
-
-msgid "archived by sender"
-msgstr ""
-
-msgid "archived by recipient"
-msgstr ""
-
-msgid "deleted by sender at"
-msgstr ""
-
-msgid "deleted by recipient at"
-msgstr ""
-
-msgid "status"
-msgstr ""
-
-#, fuzzy
-#| msgid "Creator"
-msgid "moderator"
-msgstr "سازنده"
-
-#, fuzzy
-#| msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
-#| msgid "created a todo"
-msgid "moderated at"
-msgstr "کارِبرای‌انجام ساخته"
-
-msgid "rejection reason"
-msgstr ""
-
-msgid "Direct Reply Hash"
-msgstr ""
-
-msgid "message"
-msgstr ""
-
-msgid "messages"
-msgstr ""
-
-msgid "Undefined sender."
-msgstr ""
-
-msgid "pending message"
-msgstr ""
-
-msgid "pending messages"
-msgstr ""
-
-msgid "<me>"
-msgstr ""
-
-msgid "> "
-msgstr ""
-
-#, python-brace-format
-msgid ""
-"\n"
-"\n"
-"{sender} wrote:\n"
-"{body}\n"
-msgstr ""
-
-#, python-brace-format
-msgid "Re: {subject}"
-msgstr ""
-
-#, fuzzy
-#| msgid "The room was saved successfully."
-msgid "Message successfully sent."
-msgstr "اتاق با موفقیت ذخیره شد."
-
-msgid "Message rejected for at least one recipient."
-msgstr ""
-
-msgid "A conference you are attending has been updated"
-msgstr ""
-
-#, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
-msgid "The conference %(object_name)s has been updated"
-msgstr "یک کنفرانس نو: \"%(object_name)s\" در %(team_name)s آگهی شد."
-
-#, fuzzy
-#| msgid "You are an admin of this team"
-msgid "You are attending this conference"
-msgstr "شما یک مدیر این گروه هستید"
-
-#, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
-msgid "The conference \"%(object_name)s\" was updated."
-msgstr "یک کنفرانس نو: \"%(object_name)s\" در %(team_name)s آگهی شد."
-
-msgid "The time of a conference you are attending has been updated"
-msgstr ""
-
-#, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
-msgid "The time of conference %(object_name)s has been updated"
-msgstr "یک کنفرانس نو: \"%(object_name)s\" در %(team_name)s آگهی شد."
-
-msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
-msgstr ""
-
-msgid "minute"
-msgstr ""
-
-msgid "minutes"
-msgstr ""
-
-msgid "Select the date range for which you would like statistics"
-msgstr ""
-
-msgid "Cloud Stub"
-msgstr ""
-
-msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
-msgstr ""
-
-msgid "There are no cloud files yet"
-msgstr "هنوز پوشه‌ای توی اَبر نیست"
-
-msgid "Error message:"
-msgstr ""
-
-msgid "No error message supplied."
-msgstr ""
-
-msgid "Pad"
-msgstr "یادداشت"
-
-msgid "This pad can no longer be edited because its creator has deleted their account."
-msgstr "این یادداشت دیگر نمی‌تواند ویرایش شود زیرا سازنده‌ی آن پاکش کرده."
-
-#, python-format
-msgid "Do you really want to delete etherpad „%(pad)s“?"
-msgstr "آیا واقعن می‌خواهید یادداشت „%(pad)s“ را پاک کنید؟"
-
-msgid "Delete Etherpad"
-msgstr "یادداشت Etherpad را پاک کن"
-
-msgid "This document is empty"
-msgstr "این سند خالی است"
-
-msgid "Pads"
-msgstr "یادداشت‌ها"
-
-msgid "Enter a title for the Pad."
-msgstr "یک عنوان برای یادداشت وارد کنید."
-
-msgid "Enter the title for a new Document or Table."
-msgstr "عنوان را برای سند تازه یا جدول وارد کن."
-
-msgid "Enter the title for a new Document."
-msgstr "عنوان را برای سند تازه وارد کن."
-
-msgid "Create Etherpad"
-msgstr "یک Etherpad بساز"
-
-msgid "Create Ethercalc"
-msgstr "یک Ethercalc بساز"
-
-#, python-format
-msgid "Do you really want to delete etherpad „%(title)s“?"
-msgstr "آیا واقعن می‌خواهید یادداشت „%(title)s“ را پاک کنید؟"
-
-msgid "No etherpads have been created yet."
-msgstr "هنوز هیچ یادداشت Etherpadی ساخته نشده."
-
-msgid "Download CSV"
-msgstr "CSV را دانلود کن"
-
-msgid "Download Excel"
-msgstr "Excel را دانلود کن"
-
-#, python-format
-msgid ""
-"Hi %(receiver_name)s,\n"
-"\n"
-"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
-"\n"
-"You can find it by following this link: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s Team."
-msgstr ""
-"درود %(receiver_name)s,\n"
-"\n"
-"%(sender_name)s. یک یادداشت تازه با عنوان \"%(object_name)s\" در گروه %(team_name)s نوشته است  \n"
-"\n"
-"با دنبال کردن پیوند روبرو می‌توانید آن را ببینید: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(پیوند روبرو را برای ویرایش اولویت‌های آگاه‌سازی دنبال کنید: %(notification_settings_url)s )\n"
-"\n"
-"گروه %(site_name)s شما."
-
-msgid "You created a pad"
-msgstr "شما یک یادداشت ساخته‌اید"
-
-msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
-msgid "created a Pad"
-msgstr "یک یادداشت تازه ساخته"
-
-msgid "There are no etherpads yet"
-msgstr "هیچ یادداشت Etherpadی نیست"
-
-msgid "Would you like to create an event"
-msgstr ""
-
-msgid "until"
-msgstr ""
-
-msgctxt "time"
-msgid "all day"
-msgstr ""
-
-msgctxt "time"
-msgid "at"
-msgstr ""
-
-msgctxt "time"
-msgid "o'clock"
-msgstr ""
-
-msgctxt "time"
-msgid "from"
-msgstr ""
-
-msgctxt "time"
-msgid "until"
-msgstr ""
-
-#, python-format
-msgid "Add %(event_type_verbose)s in Room %(room_name)s"
-msgstr ""
-
-#, python-format
-msgid "Edit %(event_type_verbose)s \"%(event_title)s\" in Room %(room_name)s"
-msgstr ""
-
-msgid "Enter a title for the conference event."
-msgstr ""
-
-msgid "Event is a break"
-msgstr ""
-
-msgid "Check this to create an empty break event that shows up in the agenda and timeline"
-msgstr ""
-
-msgid "Enter a description for the event"
-msgstr ""
-
-msgid "Show this event on microsite"
-msgstr ""
-
-msgid "Uncheck this to hide the event on microsite"
-msgstr ""
-
-msgid "Show the event's description on microsite"
-msgstr ""
-
-msgid "Uncheck this to disable platform-wide viewing of the event's description"
-msgstr ""
-
-msgid "Uncheck this to disable public viewing of the event's description"
-msgstr ""
-
-msgid "Example:"
-msgstr ""
-
-msgid "Stream URL for the Event"
-msgstr ""
-
-msgid "Custom embed code (HTML)"
-msgstr ""
-
-msgid "How many participants can join the video call before it is full."
-msgstr ""
-
-msgid "Note that changing this setting will have no effect while an event is running."
-msgstr ""
-
-msgid "Upload a preview image for the Conference Event"
-msgstr ""
-
-msgid "Will be shown on the event card in the conference room."
-msgstr ""
-
-msgid "The presenters will be shown in order in the event and will receive Moderator permissions for the BBB-Room"
-msgstr ""
-
-msgid "The presentation file (e.g. PDF) will be pre-uploaded to the BBB room."
-msgstr ""
-
-msgid "Note: If a slide is subsequently added to an existing event, it does not automatically appear in the event if this event was recently attended and is therefore active. This requires an active ending of the event or a 5-minute idle time without participants until the event is automatically ended. "
-msgstr ""
-
-msgid "You can actively end an existing event room by clicking on \"End Meeting\" in the top right-hand corner of the room in the \"Three-Dot Menu\"."
-msgstr ""
-
-msgid "Show room chat in the event"
-msgstr ""
-
-msgid "Stream this event"
-msgstr ""
-
-msgid "Please note: Streaming is only available for premium conferences. If you would like to use streaming, please request it explicitly when booking. Otherwise, these settings have no function."
-msgstr ""
-
-msgid "You can set up the BBB event to be streamed to a streaming provider (e.g. YouTube)."
-msgstr ""
-
-#, python-format
-msgid ""
-"Once set up and activated, a streaming-bot will enter the event and stream all video and audio to the selected stream endpoint.\n"
-"The bot will enter and start streaming %(start_minutes)s minutes before the event start time and stop streaming and leave %(end_minutes)s minutes after the event end time.\n"
-"You can adjust the meeting times on-the-fly to allow for longer streaming if the event runs longer than expected."
-msgstr ""
-
-msgid "If you are using the maximum participant limit, please allow for the streaming bot's additional participant spot."
-msgstr ""
-
-msgid "Enable Streaming this BBB meeting"
-msgstr ""
-
-msgid "Create and create another"
-msgstr ""
-
-msgid "Save and create another"
-msgstr ""
-
-msgid "Add unscheduled event"
-msgstr ""
-
-msgid "Event Polls"
-msgstr ""
-
-msgid "Enter a title for the new event to be scheduled."
-msgstr ""
-
-msgid "Please select the available days in the calendar."
-msgstr ""
-
-msgid "You can select the same day more than once."
-msgstr ""
-
-msgid "Time: e.g. 10 or 10:30."
-msgstr ""
-
-msgid "Time"
-msgstr ""
-
-msgid "Note: You cannot edit the dates for this event poll because someone has already cast their vote!"
-msgstr ""
-
-msgid "External Link for the event"
-msgstr ""
-
-msgid "There are no open event polls."
-msgstr ""
-
-msgid "Planned Events"
-msgstr ""
-
-msgid "Past Events"
-msgstr ""
-
-msgid "Archived Event Polls"
-msgstr ""
-
-msgid "There are no archived event polls."
-msgstr ""
-
-#, fuzzy, python-format
-#| msgid "room name or title"
-msgid "Vote for %(title)s"
-msgstr "نام یا عنوان اتاق"
-
-#, python-format
-msgid "Archived: %(title)s"
-msgstr ""
-
-msgid "This event has already been scheduled. Voting is closed."
-msgstr ""
-
-msgid "This event has been canceled. Voting is closed."
-msgstr ""
-
-msgid "Nobody has voted for this event poll yet."
-msgstr ""
-
-msgid "Create an event from one of the suggestions"
-msgstr ""
-
-#, python-format
-msgid "Set the date to %(suggestion)s."
-msgstr ""
-
-msgid "When do you have time?"
-msgstr ""
-
-msgid "There are no date suggestions for this event poll yet!"
-msgstr ""
-
-#, python-format
-msgid "Do you really want to delete unscheduled event „%(title)s“?"
-msgstr ""
-
-msgid "Delete unscheduled event"
-msgstr ""
-
-msgid "You will now receive notifications for comments or when this event poll is changed and whenever somebody casts their vote."
-msgstr ""
-
-msgid "Post"
-msgstr ""
-
-msgid "Add event"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                            Note: After this event will be posted, each user of %(forum_name)s may be able to see it.<br>\n"
-"                            If you do not want this, please, use another group or project of your choice.\n"
-"                            "
-msgstr ""
-
-msgid "Enter a title for the new event."
-msgstr ""
-
-msgid "Choose the type of the video conference you would like for the event"
-msgstr ""
-
-msgid "The first uploaded image will be displayed as a wallpaper."
-msgstr ""
-
-msgid "If you set this, your event will be shown on the map! (if permitted by its visibility settings)"
-msgstr ""
-
-msgid "Calendar"
-msgstr ""
-
-msgid "Copy this iCal-link into your calendar application to import current events:"
-msgstr ""
-
-msgid "Also include all events from projects within this group in feed"
-msgstr ""
-
-msgid "iCal Feed"
-msgstr ""
-
-msgid "Enter the title for a new event or select a day in the Calendar."
-msgstr ""
-
-msgid "Export event feed"
-msgstr ""
-
-msgid "Conference events can be created directly from the rooms themselves of the conference interface or in a central place here"
-msgstr ""
-
-msgid "There are no conference events."
-msgstr ""
-
-msgid "There are no current or future events."
-msgstr ""
-
-msgid "There are no past events."
-msgstr ""
-
-msgid "There are no upcoming events"
-msgstr ""
-
-msgid "Back to Events"
-msgstr ""
-
-msgid "Return to Event Polls"
-msgstr ""
-
-msgid "Return to Archived Event Polls"
-msgstr ""
-
-msgid "View"
-msgstr ""
-
-msgid "Created Event"
-msgstr ""
-
-#, python-format
-msgid "Do you really want to delete event „%(title)s“?"
-msgstr ""
-
-msgid "Delete event"
-msgstr ""
-
-#, python-format
-msgid ""
-"Hi, %(receiver_name)s!\n"
-"\n"
-"%(sender_name)s has posted a comment on an event you are attending in %(team_name)s:\n"
-"\n"
-"\"%(comment_text)s\"\n"
-"\n"
-"\n"
-"on the event:\n"
-"\n"
-"\"%(event_title)s\"\n"
-"\n"
-"\n"
-"Follow this link to see the comment: \n"
-"%(object_url)s\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s team.\n"
-"\n"
-msgstr ""
-
-#, python-format
-msgid "%(sender_name)s commented on an event you are attending in %(team_name)s."
-msgstr ""
-
-#, python-format
-msgid ""
-"Hi %(receiver_name)s,\n"
-"\n"
-"a new event \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
-"\n"
-"You can find it by following this link: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s Team."
-msgstr ""
-
-#, python-format
-msgid ""
-"Hi, %(receiver_name)s!\n"
-"\n"
-"%(sender_name)s has posted a comment on an event you created in %(team_name)s:\n"
-"\n"
-"\"%(comment_text)s\"\n"
-"\n"
-"\n"
-"on your event:\n"
-"\n"
-"\"%(event_title)s\"\n"
-"\n"
-"\n"
-"Follow this link to see the comment: \n"
-"%(object_url)s\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s team.\n"
-"\n"
-msgstr ""
-
-#, python-format
-msgid "%(sender_name)s commented on one of your events in %(team_name)s."
-msgstr ""
-
-#, python-format
-msgid ""
-"Hi %(receiver_name)s,\n"
-"\n"
-"a new event \"%(object_name)s\", on %(event_date)s, was announced in %(team_name)s by %(sender_name)s. \n"
-"\n"
-"You can find it by following this link: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s Team."
-msgstr ""
-
-#, python-format
-msgid ""
-"Hi, %(receiver_name)s!\n"
-"\n"
-"%(sender_name)s has posted a comment on an event you were tagged in, in %(team_name)s:\n"
-"\n"
-"\"%(comment_text)s\"\n"
-"\n"
-"\n"
-"on the event:\n"
-"\n"
-"\"%(event_title)s\"\n"
-"\n"
-"\n"
-"Follow this link to see the comment: \n"
-"%(object_url)s\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s team.\n"
-"\n"
-msgstr ""
-
-#, python-format
-msgid "%(sender_name)s commented on a event you were tagged in %(team_name)s."
-msgstr ""
-
-#, python-format
-msgid ""
-"Hi, %(receiver_name)s!\n"
-"\n"
-"%(sender_name)s has posted a comment on an event poll you voted in in %(team_name)s:\n"
-"\n"
-"\"%(comment_text)s\"\n"
-"\n"
-"\n"
-"on the event poll:\n"
-"\n"
-"\"%(event_title)s\"\n"
-"\n"
-"\n"
-"Follow this link to see the comment: \n"
-"%(object_url)s\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s team.\n"
-"\n"
-msgstr ""
-
-#, python-format
-msgid "%(sender_name)s commented on an event poll you voted in in %(team_name)s."
-msgstr ""
-
-msgid "Delete Event"
-msgstr ""
-
-msgid "(Canceled!)"
-msgstr ""
-
-msgid "This is an archived event poll."
-msgstr ""
-
-msgid "The event that was created after the poll can be viewed here:"
-msgstr ""
-
-msgid "(No description set)"
-msgstr ""
-
-msgctxt "someone else is going"
-msgid "Going"
-msgstr ""
-
-msgctxt "someone else is maybe going"
-msgid "Maybe going"
-msgstr ""
-
-msgctxt "someone else can't go"
-msgid "Can't go"
-msgstr ""
-
-msgctxt "one or many people are going"
-msgid "Going"
-msgid_plural "Going"
-msgstr[0] ""
-msgstr[1] ""
-
-msgctxt "one or many people are maybe going"
-msgid "Maybe going"
-msgid_plural "Maybe going"
-msgstr[0] ""
-msgstr[1] ""
-
-msgctxt "one or many people are not going"
-msgid "Can't go"
-msgid_plural "Can't go"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Going"
-msgstr ""
-
-msgid "Maybe going"
-msgstr ""
-
-msgid "Can't go"
-msgstr ""
-
-msgid "Are you going?"
-msgstr ""
-
-msgid "No Choice"
-msgstr ""
-
-msgid "Add event to your calendar"
-msgstr ""
-
-msgid "Copy this iCal-link into your calendar application to import this event:"
-msgstr ""
-
-msgid "Please register or login to join the video conference for this event"
-msgstr ""
-
-msgid "Start/join video conference for this event"
-msgstr ""
-
-#, fuzzy
-#| msgid "View conference"
-msgid "Leave video conference"
-msgstr "کنفرانس را ببینید"
-
-msgid "You created an event"
-msgstr ""
-
-msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
-msgid "created an event"
-msgstr ""
-
-msgid "Show all"
-msgstr ""
-
-msgid "The URL you have entered does not seem to be valid!"
-msgstr ""
-
-msgid "URL Link"
-msgstr ""
-
-msgid "Paste or type the link's URL here"
-msgstr ""
-
-msgid "Original filename"
-msgstr ""
-
-msgid "Show detailed steps"
-msgstr ""
-
-msgid "Move your files to the Cloud"
-msgstr ""
-
-msgid "Download this folder"
-msgstr ""
-
-msgid "Add URL link"
-msgstr ""
-
-msgid "No files have been uploaded yet."
-msgstr ""
-
-#, python-format
-msgid ""
-"Hi %(receiver_name)s,\n"
-"\n"
-"a new file \"%(object_name)s\" in %(team_name)s was uploaded by %(sender_name)s. \n"
-"\n"
-"You can find it by following this link: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s Team."
-msgstr ""
-
-#, python-format
-msgid "A new file: \"%(object_name)s\" was uploaded in %(team_name)s."
-msgstr ""
-
-msgid "Link to this Image"
-msgstr ""
-
-#, python-format
-msgid "Do you really want to delete file „%(title)s“?"
-msgstr ""
-
-msgid "Delete file"
-msgstr ""
-
-msgid "To move your files to the Cloud, follow these steps:"
-msgstr ""
-
-msgid "Navigate to the folder you wish to move to the Cloud, or to the root folder of the Files app if you wish to move all of the files"
-msgstr ""
-
-msgid "Root folder"
-msgstr ""
-
-#, python-format
-msgid "Click \"%(download_label)s\" to download the file archive"
-msgstr ""
-
-msgid "Unzip the file archive to a local folder on your hard drive"
-msgstr ""
-
-#, python-format
-msgid "Open the Cloud folder for \"%(group_name)s\":"
-msgstr ""
-
-msgid "Cloud app"
-msgstr ""
-
-msgid "Drag & drop the entire content of the unzipped folder from your local hard drive to the Cloud folder"
-msgstr ""
-
-#, python-format
-msgid "Your files will now upload to the Cloud and can be accessed by all members of \"%(group_name)s\". Your files will remain here in the Files app as well. If you are satisfied with how they look in the Cloud, you may delete them here."
-msgstr ""
-
-msgid "If you wish to access your files from multiple devices, you may want to consider moving them to the Cloud. The process is easy, and you can still keep your files here until you are satisfied with the Cloud."
-msgstr ""
-
-msgid "You uploaded a file"
-msgstr ""
-
-msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
-msgid "uploaded a file"
-msgstr ""
-
-msgid "Latest files"
-msgstr ""
-
-msgid "There are no files  yet"
-msgstr ""
-
-msgid "Back to Offers"
-msgstr ""
-
-msgid "My Offers"
-msgstr ""
-
-msgid "Add Offer"
-msgstr ""
-
-msgid "Misc"
-msgstr ""
-
-#, python-format
-msgid "%(link_start)s%(username)s%(link_end)s is looking for"
-msgstr ""
-
-#, python-format
-msgid "%(link_start)s%(username)s%(link_end)s is offering"
-msgstr ""
-
-msgid "Inactive"
-msgstr ""
-
-msgid "Reactivate"
-msgstr ""
-
-#, python-format
-msgid "Do you really want to delete offer „%(title)s“?"
-msgstr ""
-
-msgid "Delete offer"
-msgstr ""
-
-#, python-format
-msgid "Do you really want to deactivate offer „%(title)s“?"
-msgstr ""
-
-msgid "Deactivate offer"
-msgstr ""
-
-#, python-format
-msgid "Do you really want to reactivate offer „%(title)s“?"
-msgstr ""
-
-#, python-format
-msgid "Do you really want to activate offer „%(title)s“?"
-msgstr ""
-
-msgid "Reactivate offer"
-msgstr ""
-
-msgid "Activate offer"
-msgstr ""
-
-msgid "This offer is inactive. It is only visible to you and not listed in the marketplace. You can reactivate it below."
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                        Note: after this offer will be posted, each user of %(forum_name)s may be able to see it.<br>\n"
-"                        If you do not want this, please, use another group or project of your choice.\n"
-"                        "
-msgstr ""
-
-msgid "Offer type"
-msgstr ""
-
-msgid "Offer Title"
-msgstr ""
-
-msgid "Enter a description for your offer."
-msgstr ""
-
-msgid "Phone number"
-msgstr ""
-
-msgid "Your phone number is only visible for registered users"
-msgstr ""
-
-msgid "Check all categories that fit your offer"
-msgstr ""
-
-msgid "The first uploaded image will be displayed as a wallpaper"
-msgstr ""
-
-msgid "Offer is active"
-msgstr ""
-
-msgid "Only active offers will be listed in the Marketplace."
-msgstr ""
-
-msgid "Only active offers will be listed in the Marketplace. Your offer will stay active for 4 weeks. After that, you can reactivate it at any time."
-msgstr ""
-
-msgid "Wanted"
-msgstr ""
-
-msgid "No offers"
-msgstr ""
-
-msgid "There are no offers"
-msgstr ""
-
-msgid "offered in"
-msgstr ""
-
-#, python-format
-msgid "Contact %(username)s directly"
-msgstr ""
-
-msgid "Only shown for registered users"
-msgstr ""
-
-msgid "expires on"
-msgstr ""
-
-msgid "expired on"
-msgstr ""
-
-msgid "You created an offer"
-msgstr ""
-
-msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
-msgid "created an offer"
-msgstr ""
-
-msgid "There are no current offers"
-msgstr ""
-
-msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
-msgstr ""
-
-msgid "The legacy messaging app is no longer in use. You can view all of your old messages, but you cannot write new ones. Please use the new messaging app in the navigation from now on!"
-msgstr ""
-
-#, python-format
-msgid ""
-"Your direct reply could not be processed!\n"
-"\n"
-"The reason was: %(reason)s\n"
-"\n"
-"\n"
-"Your message text was: \n"
-"--------------------------------\n"
-"%(text)s\n"
-"--------------------------------\n"
-"\n"
-"\n"
-"If this keeps happening, consider logging in and sending the reply directly on the site.\n"
-msgstr ""
-
-msgid ""
-"Note: This message is issued by an automated system.\n"
-"Do not reply, this would not be taken into account."
-msgstr ""
-
-msgid "Go to chat"
-msgstr ""
-
-msgid "Archived Messages"
-msgstr ""
-
-msgid "Archive"
-msgstr ""
-
-msgid "Undelete"
-msgstr ""
-
-msgid "Mark as Read"
-msgstr ""
-
-msgid "No messages"
-msgstr ""
-
-msgid "Please enter message..."
-msgstr ""
-
-msgid "Dear user,"
-msgstr ""
-
-#, python-format
-msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
-msgstr ""
-
-msgid "Your message has been rejected by the moderator"
-msgstr ""
-
-msgid ", for the following reason:"
-msgstr ""
-
-#, python-format
-msgid "'%(sender_first)s %(sender_last)s' has replied to your message from %(date)s:"
-msgstr ""
-
-#, python-format
-msgid "'%(sender_first)s %(sender_last)s' has posted a message in one of your conversations."
-msgstr ""
-
-#, python-format
-msgid "You have received a message from the user '%(sender_first)s %(sender_last)s'."
-msgstr ""
-
-msgid "This message was sent in a conversation with: "
-msgstr ""
-
-msgid "Project/Group"
-msgstr ""
-
-msgid "Follow this link to view the message on the site"
-msgstr ""
-
-msgid "If you do not wish to receive any more emails from us, click here to unsubscribe:"
-msgstr ""
-
-msgid "You can also reply to this message directly by replying to this email. When you do, please leave the subject and addressee as it is. The email you reply from *must* be the one you are registered with on the site."
-msgstr ""
-
-msgid "WARNING: Your reply will be sent to all participants of this conversation!"
-msgstr ""
-
-#, python-format
-msgid "Message \"%(subject)s\" on the site %(sitename)s"
-msgstr ""
-
-msgid "Dear visitor,"
-msgstr ""
-
-msgid "As a reminder, please find below the content of your message."
-msgstr ""
-
-#, python-format
-msgid "On %(date)s, you sent a message to the user '%(sender_first)s %(sender_last)s'."
-msgstr ""
-
-msgid "Please find below the answer from your correspondent."
-msgstr ""
-
-msgid "Thank you again for your interest in our services."
-msgstr ""
-
-msgid "For more comfort, we encourage you to open an account on the site."
-msgstr ""
-
-msgid "The site administrator"
-msgstr ""
-
-msgid "Inbox"
-msgstr ""
-
-msgid "Sent"
-msgstr ""
-
-msgctxt "the noun for an Archive"
-msgid "Archive"
-msgstr ""
-
-msgid "Trash"
-msgstr ""
-
-msgid "Write"
-msgstr ""
-
-msgid "Reply"
-msgstr ""
-
-msgid "Conversation"
-msgstr ""
-
-msgid "Conversation with members from"
-msgstr ""
-
-msgid "Conversation with"
-msgstr ""
-
-#, python-format
-msgid "Show all %(count)s participants"
-msgstr ""
-
-msgid "Me"
-msgstr ""
-
-msgid "Answer"
-msgstr ""
-
-msgid "Reply..."
-msgstr ""
-
-#, python-format
-msgid "Reply to %(sender_name)s"
-msgstr ""
-
-#, python-format
-msgid "Reply to all %(adressee_count)s"
-msgstr ""
-
-msgctxt "the_verb"
-msgid "Comment"
-msgstr "نظردادن"
-
-msgid "There are no public news posts"
-msgstr "هیچ مطلب خبری همگانی‌ای نیست"
-
-#, fuzzy
-#| msgid "There are no public news posts"
-msgid "There are no news posts yet"
-msgstr "هیچ مطلب خبری همگانی‌ای نیست"
-
-msgid "Edit news post"
-msgstr "مطلب خبری را ویرایش کن"
-
-msgid "Title (optional)"
-msgstr "عنوان"
-
-msgctxt "label for the form text input"
-msgid "News text"
-msgstr "نوشته‌ی خبر"
-
-msgid "Please enter a message..."
-msgstr "لطفن یک پیام وارد کنید..."
-
-msgid "To post in this team you need to"
-msgstr "برای فرستادن به این گروه لازم است"
-
-msgid "request to join"
-msgstr "درخواست عضویت بدهید"
-
-#, python-format
-msgid ""
-"Hi, %(receiver_name)s!\n"
-"\n"
-"%(sender_name)s has posted a comment on a news post you wrote in %(team_name)s:\n"
-"\n"
-"\"%(comment_text)s\"\n"
-"\n"
-"\n"
-"on your post:\n"
-"\n"
-"\"%(note_text)s\"\n"
-"\n"
-"\n"
-"Follow this link to see the comment: \n"
-"%(object_url)s\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s team.\n"
-"\n"
-msgstr ""
-"درود %(receiver_name)s!\n"
-"\n"
-"%(sender_name)s در مورد مطلب خبری‌ای که شما در گروه %(team_name)s نوشته‌اید نظری نوشته :\n"
-"\n"
-"\"%(comment_text)s\"\n"
-"\n"
-"\n"
-"روی مطلب شما:\n"
-"\n"
-"\"%(note_text)s\"\n"
-"\n"
-"\n"
-"این پیوند را دنبال کنید تا نظر را ببینید: \n"
-"%(object_url)s\n"
-"\n"
-"\n"
-"(این پیوند را برای ویرایش اولویت‌های آگاه‌سازی دنبال کنید: %(notification_settings_url)s )\n"
-"\n"
-"\n"
-"گروه %(site_name)s شما.\n"
-"\n"
-
-#, python-format
-msgid ""
-"Hi, %(receiver_name)s!\n"
-"\n"
-"%(sender_name)s has posted a comment on a news post you a commented in, in %(team_name)s:\n"
-"\n"
-"\"%(comment_text)s\"\n"
-"\n"
-"\n"
-"on the post:\n"
-"\n"
-"\"%(note_text)s\"\n"
-"\n"
-"\n"
-"Follow this link to see the comment: \n"
-"%(object_url)s\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s team.\n"
-"\n"
-msgstr ""
-"درود %(receiver_name)s!\n"
-"\n"
-"%(sender_name)s در مورد مطلب خبری‌ای که شما در گروه %(team_name)s در موردش نظری نوشته‌اید، نظری نوشته :\n"
-"\n"
-"\"%(comment_text)s\"\n"
-"\n"
-"\n"
-"روی این مطلب:\n"
-"\n"
-"\"%(note_text)s\"\n"
-"\n"
-"\n"
-"این پیوند را دنبال کنید تا نظر را ببینید: \n"
-"%(object_url)s\n"
-"\n"
-"\n"
-"(این پیوند را برای ویرایش اولویت‌های آگاه‌سازی دنبال کنید: %(notification_settings_url)s )\n"
-"\n"
-"گروه %(site_name)s شما.\n"
-"\n"
-
-#, python-format
-msgid "%(sender_name)s commented on a news post you commented in, in %(team_name)s."
-msgstr "%(sender_name)s در مورد یک مطلب خبری در گروه %(team_name)s که شما درموردش نظر داده‌اید نظری نوشته است."
-
-#, python-format
-msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
-msgstr "%(sender_name)s در مورد یکی از مطالب خبری که شما در گروه %(team_name)s نوشته‌اید نظری نوشته است."
-
-#, python-format
-msgid ""
-"Hi %(receiver_name)s,\n"
-"\n"
-"%(sender_name)s just posted an update in %(team_name)s:\n"
-msgstr ""
-"درود %(receiver_name)s,\n"
-"\n"
-"%(sender_name)s همین الان در گروه %(team_name)s یک به‌روزرسانی داشته:\n"
-
-#, python-format
-msgid ""
-"%(note_text)s\n"
-"\n"
-"\n"
-"\n"
-"You can find it by following this link: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s Team."
-msgstr ""
-"%(note_text)s\n"
-"\n"
-"\n"
-"\n"
-"برای پیداکردن آن پیوند روبرو را دنبال کنید: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(این پیوند را برای ویرایش اولویت‌های آگاه‌سازی دنبال کنید: %(notification_settings_url)s )\n"
-"\n"
-"\n"
-"گروه %(site_name)s شما."
-
-msgid "Delete note"
-msgstr "نوشته را پاک کن"
-
-msgid "Do you really want to delete this note?"
-msgstr "آیا واقعن می‌خواهید این نوشته را پاک کنید؟"
-
-msgid "You added a post"
-msgstr "شما یک مطلب افزودید"
-
-msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
-msgid "added a post"
-msgstr "یک مطلب افزود"
-
-msgid "Select which notifications you would like to receive for each group or project you are involved in."
-msgstr ""
-
-msgid "These notifications will be sent to your configured email address:"
-msgstr ""
-
-msgid "You can choose to receive notifications as soon as they happen, or you can receive a daily (or weekly) e-mail digest."
-msgstr ""
-
-msgid "The digest will aggregate all notifications with the \"Daily\" (or \"Weekly\") setting from all groups and projects. So you will receive only a single e-mail per day (or week) containing everything interesting that happend."
-msgstr ""
-
-msgid "Notifications you set to \"Immediately\" will be e-mailed to you as soon as they happen, with one e-mail per notification."
-msgstr ""
-
-msgid "Don't forget to save your settings once you are done editing them!"
-msgstr ""
-
-msgid "I wish to receive notification emails"
-msgstr ""
-
-msgid "Note that you will receive an email notification if someone has invited you to a group/ project in any case."
-msgstr ""
-
-msgid "I would like to receive instant messages by email for RocketChat mentions and direct messages to me"
-msgstr ""
-
-msgid "Receive notification emails in this language"
-msgstr ""
-
-msgid "Moderator Status (Portal-Admins only)"
-msgstr ""
-
-msgid "I wish to be a Moderator for this portal"
-msgstr ""
-
-msgid "As a Moderator, you will receive an instant notification whenever ANY publicly visible content is posted on this portal. Since you are a portal administrator you can then also delete the content if it is offensive or critical. To delete it, visit the content page on the website while logged into this account."
-msgstr ""
-
-msgid "Immediately"
-msgstr ""
-
-msgid "Daily"
-msgstr ""
-
-msgid "Weekly"
-msgstr ""
-
-msgid "Custom"
-msgstr ""
-
-msgid "Reset to default"
-msgstr ""
-
-msgid "This will reset all of your notification preferences to their default setting. Are you sure you wish to do that?"
-msgstr ""
-
-msgid "Set password"
-msgstr ""
-
-#, python-format
-msgid "Edit %(provider)s account "
-msgstr ""
-
-#, python-format
-msgid " You connected your account with your account on %(provider)s. To change %(provider)s account data (e.g. password or email address) you have to visit the account settings on the %(provider)s website. "
-msgstr ""
-
-#, python-format
-msgid "Go to %(provider)s account settings"
-msgstr ""
-
-msgid "Remove Connection"
-msgstr ""
-
-#, python-format
-msgid "When you remove the connection you cannot login to this website via %(provider)s. Instead you have to use your email address and password. "
-msgstr ""
-
-msgid "Disconnect Accounts"
-msgstr ""
-
-#, fuzzy
-#| msgid "Do you really want to decline the invitation?"
-msgid "Do you really want to disconnect your account account ?"
-msgstr "آیا واقعن می‌خواهید دعوت را رد کنید؟"
-
-#, python-format
-msgid "Do you want to remove the connection between %(portal_name)s and %(provider)s? To do that you have to set a password for your %(portal_name)s account first."
-msgstr ""
-
-msgid "Set Password"
-msgstr ""
-
-#, python-format
-msgid "Connect your Account with %(provider)s"
-msgstr ""
-
-#, python-format
-msgid " If you already have an account on %(provider)s you can connect both accounts here. After that you only have to login on %(provider)s and are also logged in here."
-msgstr ""
-
-msgid "Connect Accounts"
-msgstr ""
-
-#, python-format
-msgid "Connect Account with %(provider)s"
-msgstr ""
-
-#, fuzzy, python-format
-#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
-msgid " Do you really want to connect your account with the one on %(provider)s ? "
-msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
-
-#, python-format
-msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"Your %(site_name)s account has been connected with your %(provider)s Account. Now you can login on %(site_name)s with just one click.\n"
-"\n"
-"If you connected your accounts you don't need to do anything. If not please contact the support.\n"
-"\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-
-msgid "Account connected"
-msgstr ""
-
-#, python-format
-msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"The connection with your %(provider)s Account on %(site_name)s has been removed. Now you can't login with your %(provider)s Account on %(site_name)s anymore.\n"
-"\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-
-msgid "Account connection has been removed"
-msgstr ""
-
-#, python-format
-msgid ""
-"Hi %(user_name)s,\n"
-"\n"
-"Someone has just registered on %(site_name)s with your %(provider)s Account. We are sending you this email to make sure that this was you.\n"
-"\n"
-"If it was you, then you don't have to do anything. Otherwise, please contact the support.\n"
-"\n"
-"\n"
-"Your %(site_name)s Team"
-msgstr ""
-
-#, python-format
-msgid "Someone registered on %(site_name)s with your %(provider)s account "
-msgstr ""
-
-msgid "Welcome"
-msgstr ""
-
-msgid "WECHANGE Account connected"
-msgstr ""
-
-msgid " This data we received from your WECHANGE account"
-msgstr ""
-
-#, fuzzy
-#| msgid "Last Name"
-msgid "last name"
-msgstr "نام خانوادگی"
-
-msgid "Your Avatar and other settings from your profile were also copied."
-msgstr ""
-
-#, fuzzy
-#| msgid "You cannot change your application anymore."
-msgid "You can change your this data any time in you profile settings."
-msgstr "شما دیگر نمی‌توانید درخواست‌تان را تغییر دهید."
-
-msgid "Social Network Login Failure"
-msgstr ""
-
-msgid "An error occurred while attempting to login via your social network account."
-msgstr ""
-
-msgid "Account Connections"
-msgstr ""
-
-#, python-format
-msgid " %(provider)s Account "
-msgstr ""
-
-msgid "You can sign in to your account using any of the following third party accounts:"
-msgstr ""
-
-msgid "Remove"
-msgstr ""
-
-msgid "You currently have no social network accounts connected to this account."
-msgstr ""
-
-msgid "Add a 3rd Party Account"
-msgstr ""
-
-msgid "Login Cancelled"
-msgstr ""
-
-#, python-format
-msgid "You decided to cancel logging in to our site using one of your existing accounts. If this was a mistake, please proceed to <a href=\"%(login_url)s\">sign in</a>."
-msgstr ""
-
-msgid "Signup"
-msgstr ""
-
-#, python-format
-msgid "Login with %(provider)s"
-msgstr ""
-
-msgid "Login and Connect"
-msgstr ""
-
-#, python-format
-msgid " %(portal_name)s wants access to the following information of your %(provider_name)s account"
-msgstr ""
-
-msgid "last name (if set)"
-msgstr ""
-
-#, fuzzy
-msgid "Do you also want to copy your profile data?"
-msgstr "آیا واقعن می‌خواهید دعوت را رد کنید؟"
-
-msgid "Yes, allow access to my profile data: (e.g Avatar, Location, Topics, Language Settings)"
-msgstr ""
-
-msgid "Please also fill in the following information:"
-msgstr ""
-
-msgid "Sign up with"
-msgstr ""
-
-#, python-format
-msgid "Sign up with %(provider)s Account"
-msgstr ""
-
-msgid "Log in with"
-msgstr ""
-
-#, python-format
-msgid "Log in with %(provider)s Account"
-msgstr ""
-
-msgid "Register with Social Account"
-msgstr ""
-
-msgid "Login with Social Account"
-msgstr ""
-
-#, python-format
-msgid " %(portal_name)s is part of the %(provider)s community. You can use your %(provider)s account to login on %(portal_name)s."
-msgstr ""
-
-#, python-format
-msgid " %(portal_name)s is part of the following communities. If you have an account on one of these communities you can use it to login on %(portal_name)s. "
-msgstr ""
-
-#, python-format
-msgid "Sign up with %(provider_id)s"
-msgstr ""
-
-#, python-format
-msgid "Login with %(provider_id)s"
-msgstr ""
-
-#, python-format
-msgid "%(team_name)s - Assigned projects/groups"
-msgstr ""
-
-#, fuzzy
-#| msgid "Assigned to"
-msgid "Assigned projects/groups"
-msgstr "واگذار شده به"
-
-msgid "Invite groups/projects..."
-msgstr ""
-
-#, fuzzy
-#| msgid "New link to the moved project/group"
-msgid "Invite project/group"
-msgstr "پیوند نو به گروه/پروژه‌ی جابجا شده"
-
-#, fuzzy
-#| msgid "Enter a user name or email to find users to invite..."
-msgid "Enter a name to find project/groups to invite..."
-msgstr "یک نام کاریری یا ایمیل وارد کنید تا کاربران را دعوت کنید..."
-
-msgid "Invite projects/groups"
-msgstr ""
-
-#, fuzzy
-#| msgid "Invite users"
-msgid "Invited groups/projects"
-msgstr "کاربران را دعوت کن"
-
-#, fuzzy, python-format
-#| msgid "Do you really want to revoke the invitation for member „%(name)s“?"
-msgid "Do you really want to revoke the invitation for „%(name)s“?"
-msgstr "آیا واقعن می‌خواهید دعوت را برای کاریر „%(name)s“ باطل کنید؟"
-
-#, fuzzy
-#| msgid "Revoke Invitation for Member"
-msgid "Revoke invitation for project/group"
-msgstr "دعوت‌نامه را یرای کاربر باطل کن"
-
-msgid "Project/group requests"
-msgstr ""
-
-#, fuzzy
-#| msgid "Decline Invitation"
-msgid "Decline Admin"
-msgstr "دعوت را رد کن"
-
-#, fuzzy
-#| msgid "New link to the moved project/group"
-msgid "Remove project/group"
-msgstr "پیوند نو به گروه/پروژه‌ی جابجا شده"
-
-msgid "Add Organization"
-msgstr ""
-
-msgid "Edit Organization"
-msgstr ""
-
-msgid "Admins"
-msgstr ""
-
-msgid "Joins"
-msgstr ""
-
-msgid "Help about organizations"
-msgstr ""
-
-#, python-format
-msgid "%(team_name)s - Admins"
-msgstr ""
-
-#, fuzzy
-#| msgid "Invited Members"
-msgid "Invited Admins"
-msgstr "کاربران دعوت‌نامه"
-
-#, fuzzy
-#| msgid "Revoke Invitation for Member"
-msgid "Revoke Invitation for Admin"
-msgstr "دعوت‌نامه را یرای کاربر باطل کن"
-
-msgid "Admin requests"
-msgstr ""
-
-msgid "Admin requested"
-msgstr ""
-
-#, fuzzy
-#| msgid "Current File"
-msgid "Current Admins"
-msgstr "پوشه‌ی فعلی"
-
-msgid "Remove Admin"
-msgstr ""
-
-#, fuzzy, python-format
-#| msgid "Edit stream \"%(stream_name)s\""
-msgid "Edit \"%(organization_name)s\""
-msgstr "این جویبار داده‌ی \"%(stream_name)s\" را ویرایش کن"
-
-#, fuzzy
-#| msgid "Delete this Stream"
-msgid "Delete this Organization"
-msgstr "این جویبار داده را پاک کن"
-
-#, fuzzy, python-format
-#| msgid "Do you really want to delete etherpad „%(pad)s“?"
-msgid "Do you really want to delete organization „%(name)s“?"
-msgstr "آیا واقعن می‌خواهید یادداشت „%(pad)s“ را پاک کنید؟"
-
-#, fuzzy
-#| msgid "Decline Invitation"
-msgid "Delete Organization"
-msgstr "دعوت را رد کن"
-
-msgid "Enter the name of your organization"
-msgstr ""
-
-msgid "Type of your organization"
-msgstr ""
-
-msgid "If none of the options apply, specify the type of your organization here"
-msgstr ""
-
-msgid "  Describe the project in a few sentences. This description will be publicly visible."
-msgstr ""
-
-#, fuzzy
-msgid "Social Media Accounts"
-msgstr "حساب‌های کاربری را دوباره فعال کن"
-
-msgid "Remove Social Media Account"
-msgstr ""
-
-msgid "Add Social Media Account"
-msgstr ""
-
-msgid "Phone"
-msgstr ""
-
-msgid "Address(es) of your organization"
-msgstr ""
-
-#, python-format
-msgid "Projects are always transferred to <a href=\"%(url)s\" target=\"_blank\">partner platforms</a> of WECHANGE. These are only organizational data and not personal data."
-msgstr ""
-
-msgid "This organization should be made publicly findable via other platforms."
-msgstr ""
-
-#, python-format
-msgid "Users in organization %(group)s"
 msgstr ""
 
 msgid "Poll choice"
@@ -12141,6 +11678,85 @@ msgstr ""
 msgid "There are no polls yet"
 msgstr ""
 
+#, python-format
+msgid "Poll \"%(title)s\" was edited successfully."
+msgstr ""
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be edited."
+msgstr ""
+
+#, python-format
+msgid "Poll \"%(title)s\" was added successfully."
+msgstr ""
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be added."
+msgstr ""
+
+msgid "You should define at least one poll option!"
+msgstr ""
+
+msgid "This poll is archived and cannot be edited anymore!"
+msgstr ""
+
+#, python-format
+msgid "Poll \"%(title)s\" was deleted successfully."
+msgstr ""
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be deleted."
+msgstr ""
+
+msgid "The voting phase for this poll is over. You cannot vote for it any more."
+msgstr ""
+
+msgid "In this poll you must vote for exactly one item!"
+msgstr ""
+
+msgid "Invalid action for this poll. The request could not be completed!"
+msgstr ""
+
+msgid "This action is not permitted for this poll at this stage!"
+msgstr ""
+
+msgid "The poll was closed successfully."
+msgstr ""
+
+msgid "The poll was re-opened successfully."
+msgstr ""
+
+msgid "The poll was archived successfully."
+msgstr ""
+
+msgid "Stream"
+msgstr "جویبار داده"
+
+msgctxt "the_app"
+msgid "stream"
+msgstr "جویبار داده"
+
+msgid "My Streams"
+msgstr "جویبارهای داده‌ی من"
+
+msgid "Streams"
+msgstr "جویبارهای داده"
+
+msgid "Models"
+msgstr "الگوها"
+
+msgid "Portal IDs"
+msgstr "شناسه‌ی درگاه"
+
+msgid "Last seen"
+msgstr "آخرین بار دیده شده"
+
+msgid "Special Stream"
+msgstr "جویبار داده ویژه"
+
+msgid "Special Group IDs"
+msgstr "شناسه‌های گروه ویژه"
+
 msgid "Public Stream"
 msgstr "جویبار داده‌ی همگانی"
 
@@ -12195,6 +11811,260 @@ msgstr "بر اساس نویسنده، برچسب یا دیگر ویژگی‌ه�
 
 msgid "Filter by item types?"
 msgstr "براساس نوع مورد پالایش کنیم؟"
+
+msgid "You do not have permission to access this stream."
+msgstr "شما اجازه‌ی دسترسی به این جویبار داده ندارید."
+
+msgid "Your stream was added successfully."
+msgstr "جویبار داده‌ی شما با موفقیت افزوده شد."
+
+msgid "Your stream was updated successfully."
+msgstr "جویبار داده‌ی شما با موفقیت به‌روز شد."
+
+msgid "Your stream was deleted successfully."
+msgstr "جویبار داده‌ی شما با موفقیت پاک شد."
+
+msgid "You cannot delete the default stream!"
+msgstr "شما نمی‌توانید جویبار داده‌ی پیش‌فرض را پاک کنید!"
+
+msgctxt "the_app"
+msgid "todo"
+msgstr "کارِبرای‌انجام"
+
+msgid "A user created a new todo"
+msgstr "یک کاربر یک کارِبرای‌انجام ساخته است"
+
+#, python-format
+msgid "%(sender_name)s created the todo %(object_name)s"
+msgstr "%(sender_name)sکارِبرای‌انجام %(object_name)s را ساخته"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d todos"
+msgstr "%(sender_name)s %(count)d کارِبرای‌انجام ساخته"
+
+#, python-format
+msgid "%(sender_name)s created a new todo"
+msgstr "%(sender_name)s یک کارِبرای‌انجام تازه ساخته"
+
+#, python-format
+msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "یک کارِبرای‌انجام تازه‌: \"%(object_name)s\" در %(team_name)s ساخته شد."
+
+msgid "A todo was assigned to me"
+msgstr "بک کارِبرای‌انجام به من واگذار شد"
+
+#, python-format
+msgid "%(sender_name)s assigned the todo %(object_name)s to you"
+msgstr "%(sender_name)s کارِبرای‌انجام %(object_name)s را به شما واگذار کرده"
+
+#, python-format
+msgid "%(sender_name)s assigned %(count)d todos to you"
+msgstr "%(sender_name)s %(count)d کارِبرای‌انجام را به شما واگذار کرده"
+
+#, python-format
+msgid "%(sender_name)s assigned a todo to you"
+msgstr "%(sender_name)s یک کارِبرای‌انجام را به شما واگذار کرده"
+
+msgid "A todo I created was completed"
+msgstr "کارِبرای‌انجامی که من ساخته بودم انجام شده"
+
+#, python-format
+msgid "%(sender_name)s completed the todo %(object_name)s"
+msgstr "%(sender_name)s کارِبرای‌انجام %(object_name)s را انجام داده"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d todos"
+msgstr "%(sender_name)s %(count)d کارِبرای‌انجام را انجام داده"
+
+msgid "You created this todo"
+msgstr "شما این کارِبرای‌انجام را ساخته‌اید"
+
+#, python-format
+msgid "%(sender_name)s completed your todo"
+msgstr "%(sender_name)s کارِبرای‌انجام خودتان را انجام داده‌اید"
+
+#, python-format
+msgid "%(sender_name)s completed one of your todos"
+msgstr "%(sender_name)s کارِبرای‌انجام شما را انجام داده‌"
+
+msgid "A user commented on one of your todos"
+msgstr "یک کاربر در مورد یکی از کارهای‌برای‌انجام شما نظری نوشته است"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo %(object_name)s"
+msgstr "%(sender_name)s در مورد این کارِبرای‌انجام شما نظری نوشته است: %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
+msgstr[0] "%(sender_name)s و %(count_minus_one)d نفر دیگر نظراتی در مورد این کارِبرای‌انجام شما نوشته‌اند: %(object_name)s"
+msgstr[1] "%(sender_name)s و %(count_minus_one)d نفر دیگر نظراتی در مورد این کارِبرای‌انجام شما نوشته‌اند: %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo"
+msgstr "%(sender_name)s در مورد کارِبرای‌انجام شما نظری نوشته است"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your todos"
+msgstr "%(sender_name)s در مورد یکی از کارهای‌برای‌انجام شما نظری نوشته است"
+
+msgid "A user commented on a todo you were tagged in"
+msgstr "یک کاربر در مورد یکی از کارهای‌برای‌انجامی که شما در عنوان شده‌اید نظری نوشته است"
+
+#, python-format
+msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgstr "%(sender_name)s در مورد کارِبرای‌انجام %(object_name)s نظری نوشته است"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
+msgstr[0] "%(sender_name)s و %(count_minus_one)d نفر دیگر نظراتی در مورد این کارِبرای‌انجام نوشته‌اند: %(object_name)s"
+msgstr[1] "%(sender_name)s و %(count_minus_one)d نفر دیگر نظراتی در مورد این کارِبرای‌انجام نوشته‌اند: %(object_name)s"
+
+msgid "You were tagged in this todo"
+msgstr "نام شما در این کارِبرای‌انجام عنوان شده"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in"
+msgstr "%(sender_name)s نظری در مورد کارِبرای‌انجامی که شما در آن عنوان شده‌اید نوشته"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s نظری در مورد کارِبرای‌انجامی که شما در گروه %(team_name)s در آن عنوان شده‌اید نوشته"
+
+msgid "A user commented on a todo you were assigned to"
+msgstr "یک کاربر در مورد یکی از کارهای‌برای‌انجامی که به شما واگذارشده نظری نوشته است"
+
+#, python-format
+msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
+msgstr "%(sender_name)s در مورد این کارِبرای‌انجامی که به شما واگذارشده نظری نوشته است: %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
+msgstr[0] "%(sender_name)s و %(count_minus_one)d نفر دیگر در مورد این کارِبرای‌انجامی که به شما واگذارشده نظری نوشته‌اند: %(object_name)s"
+msgstr[1] "%(sender_name)s و %(count_minus_one)d نفر دیگر در مورد این کارِبرای‌انجامی که به شما واگذارشده نظری نوشته‌اند: %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos"
+msgstr "%(sender_name)s در مورد یکی از کارهای‌برای‌انجامی که شما واگذارکرده‌اید نظری نوشته است"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgstr "%(sender_name)s در مورد یکی از کارهای‌برای‌انجامی که شما در گروه %(team_name)s واگذارکرده‌اید نظری نوشته است"
+
+msgid "A user updated a todo you are following"
+msgstr "یک کاربر یک کارِبرای‌انجامی که شما دنبال می‌کنید را به‌روز کرده"
+
+#, python-format
+msgid "%(sender_name)s updated the todo %(object_name)s"
+msgstr "%(sender_name)s کارِبرای‌انجام روبرو را به‌روز کرده: %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
+msgstr[0] "%(sender_name)s و %(count_minus_one)d نفر دیگر کارِبرای‌انجام روبرو را به‌روز کرده‌اند: %(object_name)s"
+msgstr[1] "%(sender_name)s و %(count_minus_one)d نفر دیگر کارِبرای‌انجام روبرو را به‌روز کرده‌اند: %(object_name)s"
+
+msgid "You are following this todo"
+msgstr "شما این کارِبرای‌انجام را دنبال می‌کنید"
+
+#, python-format
+msgid "%(sender_name)s updated a todo you are following"
+msgstr "%(sender_name)s یک کارِبرای‌انجام که شما دنبال می‌کنید را به‌روز کرده"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "کار‌برای‌انجام \"%(object_name)s\" که شما دنبال می‌کنید در گروه %(team_name)s به‌روز شده."
+
+msgid "A user reassigned a todo you are following"
+msgstr "یک کاربر کارِبرای‌انجامی که دنبال می‌کنید را دوباره واگذار کرده"
+
+#, python-format
+msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgstr "%(sender_name)s کارِبرای‌انجام روبرو را دوباره واگذار کرده: %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s reassigned %(count)d todos"
+msgstr "%(sender_name)s %(count)d کارِبرای‌انجام را واگذارکرده"
+
+#, python-format
+msgid "%(sender_name)s reassigned a todo you are following"
+msgstr "%(sender_name)s یک کارِبرای‌انجام که شما دنبال می‌کنید را دوباره واگذار کرده"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
+msgstr "کار‌برای‌انجام \"%(object_name)s\" که شما دنبال می‌کنید در گروه %(team_name)s دوباره واگذارشده."
+
+msgid "A user completed a todo you are following"
+msgstr "یک کاربر کارِبرای‌انجامی که دنبال می‌کنید را انجام داده"
+
+#, python-format
+msgid "%(sender_name)s completed a todo you are following"
+msgstr "%(sender_name)s یک کارِبرای‌انجام که شما دنبال می‌کنید را انجام داده"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "کار‌برای‌انجام \"%(object_name)s\" که شما دنبال می‌کنید در گروه %(team_name)s انجام شده."
+
+msgid "A user commented on a todo you are following"
+msgstr "یک کاربر در مورد یکی از کارهای‌برای‌انجامی که دنبال می‌کنید نظری نوشته است"
+
+#, python-format
+msgid "%(sender_name)s commented on on a todo you are following"
+msgstr "%(sender_name)s نظری در مورد کارِبرای‌انجامی که شما دنبال می‌کنید نوشته"
+
+msgid "My Todos"
+msgstr "کارهای‌برای‌انجام من"
+
+msgid "No todos"
+msgstr "کارِبرای‌انجامی نیست"
+
+msgid "Open"
+msgstr "باز"
+
+msgid "Completed"
+msgstr "انجام‌شده"
+
+msgid "Assigned To"
+msgstr "واگذار شده به"
+
+msgid "Priority"
+msgstr "اولویت"
+
+msgid "Due date"
+msgstr "مهلت انجام"
+
+msgid "Soonest Due"
+msgstr "نزدیک‌ترین مهلت انجام"
+
+msgid "You are not allowed to assign this Todo entry."
+msgstr "شما اجازه ندارید این کارِبرای‌انجام را به کسی واگذار کنید."
+
+msgid "Later"
+msgstr "بعدن"
+
+msgid "Normal"
+msgstr "ساده"
+
+msgid "Important"
+msgstr "ویژه"
+
+msgid "Due by"
+msgstr "مهلت تا"
+
+msgid "Completed on"
+msgstr "انجام‌شده در تاریخ"
+
+msgid "Completed by"
+msgstr "انجام‌شده به‌دست"
+
+msgid "Assigned to"
+msgstr "واگذار شده به"
+
+#, python-format
+msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
+msgstr "کارِبرای‌انجام \"%(todo_name)s\" به %(assignee_name)s واگذارشده"
 
 #, python-format
 msgid ""
@@ -12505,6 +12375,150 @@ msgstr "کارِبرای‌انجامی یه شما واگذار نشده"
 
 msgid "Tasks are shown only for logged in users"
 msgstr "مسئولیت‌ها تنها به کاربرانی نمایش‌ داده می‌شوند که به سامانه متصل‌اند"
+
+#, python-format
+msgid "Todo \"%(title)s\" was added successfully."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت افزوده شد."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be added."
+msgstr "کارِبرای‌انجام \"%(title)s\" افزوده نشد."
+
+msgid "You were trying to add a todo to a todolist that does not exist!"
+msgstr "شما کوشیدید یک کارِبرای‌انجام به فهرستی بیافزایید که وجود ندارد!"
+
+#, python-format
+msgid "Todo \"%(title)s\" was edited successfully."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت ویرایش شد."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be edited."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت ویرایش نشد."
+
+#, python-format
+msgid "Todo \"%(title)s\" was deleted successfully."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت پاک شد."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be deleted."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت پاک نشد."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned successfully."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت واگذار شد."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت واگذار نشد."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned to You successfully."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت به شما واگذار شد."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned to You."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت به شما واگذار نشد."
+
+#, python-format
+msgid "Todo \"%(title)s\" was unassigned successfully."
+msgstr "مسئولیت کارِبرای‌انجام \"%(title)s\" با موفقیت بازپس‌گرفته شد."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be unassigned."
+msgstr "مسئولیت کارِبرای‌انجام \"%(title)s\" با موفقیت بازپس‌گرفته نشد."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed successfully."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت انجام شد."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت انجام نشد."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed by You successfully."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت از سوی شما انجام شد."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed by You."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت از سوی شما پایان نیافت."
+
+#, python-format
+msgid "Todo \"%(title)s\" was set to incomplete successfully."
+msgstr "کارِبرای‌انجام \"%(title)s\" با موفقیت به عنوان پایان‌نیافته نشانه‌گذاری شد."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be set to incomplete."
+msgstr "کارِبرای‌انجام \"%(title)s\" به عنوان پایان‌نیافته نشانه‌گذاری نشد."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was edited successfully."
+msgstr "فهرست کارهای‌برای‌انجام \"%(title)s\" با موفقیت ویرایش شد."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be edited."
+msgstr "فهرست کارهای‌برای‌انجام \"%(title)s\" ویرایش نشد."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was added successfully."
+msgstr "فهرست کارهای‌برای‌انجام \"%(title)s\" با موفقیت افزوده شد."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be added."
+msgstr "فهرست کارهای‌برای‌انجام \"%(title)s\" افزوده نشد."
+
+msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
+msgstr "شما نمی‌توانید این پوشه را پاک کنید چراکه شما مجوز پاک کردن یک یا چند مورد در آن را ندارید!"
+
+#, fuzzy
+#~| msgid "Additional filters"
+#~ msgid "Additional recipients"
+#~ msgstr "پالایه‌های افزوده"
+
+#, fuzzy
+#~| msgid "Additional filters"
+#~ msgid "Additional recipient"
+#~ msgstr "پالایه‌های افزوده"
+
+#, fuzzy
+#~ msgid "Your message has been rejected"
+#~ msgstr "تغییرات‌تان ذخیره شده‌اند."
+
+#, fuzzy
+#~| msgid "You have no assigned tasks"
+#~ msgid "You have received a message"
+#~ msgstr "کارِبرای‌انجامی یه شما واگذار نشده"
+
+#, fuzzy
+#~| msgid "Restricted"
+#~ msgid "Rejected"
+#~ msgstr "محدودشده"
+
+#, fuzzy
+#~| msgid "Visitor"
+#~ msgid "visitor"
+#~ msgstr "ملاقات‌کننده"
+
+#, fuzzy
+#~| msgid "Please enter a message..."
+#~ msgid "parent message"
+#~ msgstr "لطفن یک پیام وارد کنید..."
+
+#, fuzzy
+#~| msgid "Creator"
+#~ msgid "moderator"
+#~ msgstr "سازنده"
+
+#, fuzzy
+#~| msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+#~| msgid "created a todo"
+#~ msgid "moderated at"
+#~ msgstr "کارِبرای‌انجام ساخته"
+
+#, fuzzy
+#~| msgid "The room was saved successfully."
+#~ msgid "Message successfully sent."
+#~ msgstr "اتاق با موفقیت ذخیره شد."
 
 #~ msgid "Active"
 #~ msgstr "فعال"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 16:02+0200\n"
+"POT-Creation-Date: 2022-06-01 15:58+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -178,6 +178,14 @@ msgstr "%d uživatelů bylo úspěšně deaktivováno."
 msgid "Reactivate user accounts"
 msgstr "Uživatelský účet byl úspěšně aktivován"
 
+#, fuzzy, python-format
+#| msgid "%d Users' rocketchat room memberships were re-done."
+msgid "%(count)d Users' group memberships were refreshed."
+msgstr "%d členství v uživatelské rocketchat místnosti bylo upraveno."
+
+msgid "Refresh user group membership associations (e.g. cache or Nextcloud folder problems)"
+msgstr ""
+
 #, python-format
 msgid "%d Users were synchronized successfully."
 msgstr "%d uživatelů bylo úspěšně synchronizováno."
@@ -282,6 +290,15 @@ msgstr "Seznam záložek"
 
 msgid "Bookmarked Users list"
 msgstr "Seznam uživatelů se záložkou"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Invitations"
+msgstr "Pozvánky"
+
+#, fuzzy
+#| msgid "Conference"
+msgid "Conferences"
+msgstr "Konference"
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
@@ -488,12 +505,12 @@ msgstr "%(sender_name)s vás zve, abyste se připojili k \"%(team_name)s\" na %(
 msgid "Accept invitation"
 msgstr "Přijmout pozvánku"
 
-msgid "View invitation"
-msgstr "Zobrazit pozvánku"
-
 #, python-format
 msgid "%(sender_name)s invited you"
 msgstr "%(sender_name)s vás pozval/a"
+
+msgid "View invitation"
+msgstr "Zobrazit pozvánku"
 
 msgid "New link to the moved project/group"
 msgstr "Nový odkaz na přesunutý projekt/skupinu"
@@ -543,6 +560,32 @@ msgstr "%(sender_name)s právě vytvořil(a) \"%(team_name)s\" na %(portal_name)
 #, python-format
 msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s právě vytvořil/a nový uživatelský účet na %(portal_name)s!"
+
+msgid "A conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference %(object_name)s has been updated"
+msgstr "Nová konference: \"%(object_name)s\" byla oznámena v %(team_name)s."
+
+#, fuzzy
+#| msgid "You are about to deactivate this conference!"
+msgid "You are attending this conference"
+msgstr "Chystáte se deaktivovat tuto konferenci!"
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The conference \"%(object_name)s\" was updated."
+msgstr "Nová konference: \"%(object_name)s\" byla oznámena v %(team_name)s."
+
+msgid "The time of a conference you are attending has been updated"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
+msgid "The time of conference %(object_name)s has been updated"
+msgstr "Nová konference: \"%(object_name)s\" byla oznámena v %(team_name)s."
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -808,6 +851,11 @@ msgstr "Líbilo se"
 
 msgid "Persons"
 msgstr "Osoby"
+
+#, fuzzy
+#| msgid "Last name"
+msgid "last name"
+msgstr "Příjmení"
 
 #, fuzzy
 #| msgid "My location"
@@ -1499,12 +1547,22 @@ msgstr "Mateřská skupina"
 msgid "Related Teams"
 msgstr "Související týmy"
 
+#, fuzzy
+#| msgid "I am open for cooperation requests"
+msgid "Open for cooperation"
+msgstr "Jsem otevřený/á pro žádosti o spolupráci"
+
 msgid "Dynamic extra fields"
 msgstr "Dynamická extra pole"
 
 #, fuzzy
 msgid "If set to true, a contact form will be displayed on the micropage."
 msgstr "Je-li aktivní, na mikrostránce se zobrazí pole Výzva k akci."
+
+#, fuzzy
+#| msgid "User token"
+msgid "Use invite token"
+msgstr "Uživatelský token"
 
 msgid "Cosinnus project"
 msgstr "Cosinnus projekt"
@@ -2223,6 +2281,18 @@ msgstr "Smazat nahlášenou položku..."
 msgid "(The reported item has been deleted.)"
 msgstr "(Nahlášená položka byla odstraněna.)"
 
+msgid "This user profile is scheduled for deletion at: "
+msgstr ""
+
+msgid "However, it will not be deleted, because it is still active."
+msgstr ""
+
+msgid "This user account is disabled. The user cannot log in or use the account."
+msgstr ""
+
+msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
+msgstr ""
+
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Zadejte 4 velká písmena ze zašifrovaného obrázku"
 
@@ -2306,6 +2376,134 @@ msgstr "Správa"
 msgid "Select a page on the left side."
 msgstr "Vyberte stránku na levé straně."
 
+msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
+msgstr "Přehled - konference, místnosti a workshopy s customizovanými nastaveními BBB serveru"
+
+#, fuzzy
+msgid "Overview - Premium Conferences Only"
+msgstr "Přehled - Všechny konference"
+
+msgid "Overview - All Conferences"
+msgstr "Přehled - Všechny konference"
+
+msgid "Overview - Conferences, Rooms and Workshops"
+msgstr "Přehled - konference, místnosti a workshopy"
+
+msgid "Past"
+msgstr "Dřívější"
+
+msgid "View Upcoming"
+msgstr "Zobrazit nastávající"
+
+msgid "Upcoming"
+msgstr "Nastávající"
+
+msgid "View Past"
+msgstr "Zobrazit minulý"
+
+msgid "Premium capacity occupancy overview"
+msgstr ""
+
+msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
+msgstr ""
+
+#, fuzzy
+msgid "Booked"
+msgstr "Se záložkou"
+
+#, fuzzy
+msgid "Permanently Premium"
+msgstr "Konference je trvale v kategorii premium"
+
+msgid "Portal Setting"
+msgstr "Nastavení portálu"
+
+msgid "Conference Settings"
+msgstr "Nastavení konference"
+
+#, fuzzy
+msgid "Premium active"
+msgstr "Premium"
+
+msgid "Premium inactive, but scheduled"
+msgstr ""
+
+msgid "Not premium"
+msgstr "Není premium"
+
+msgid "Rooms"
+msgstr "Místnosti"
+
+msgid "Start"
+msgstr "Start"
+
+msgid "running now!"
+msgstr "probíhá nyní!"
+
+msgid "Conference Setting"
+msgstr "Nastavení konference"
+
+#, fuzzy
+#| msgid "Rooms"
+msgid "Room"
+msgstr "Místnosti"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgctxt "Calendar"
+#| msgid "Event"
+msgid "Event"
+msgstr "Událost"
+
+msgid "Add new premium block"
+msgstr ""
+
+#, fuzzy
+msgid "Make Permanent Premium"
+msgstr "Konference je trvale v kategorii premium"
+
+#, fuzzy
+msgid "Remove Permanent Premium"
+msgstr "Konference je trvale v kategorii premium"
+
+#, fuzzy
+msgid "Do you really want to make this conference premium permanent?"
+msgstr "Opravdu chcete uživatele odebrat?"
+
+#, fuzzy
+msgid "Do you really want to remove premium permanent from this conference?"
+msgstr "Opravdu chcete odebrat člena „%(name)s“ z týmu?"
+
+msgid "There are no items to show."
+msgstr "Nejsou žádné položky pro zobrazení."
+
+msgid "BBB"
+msgstr "BBB"
+
+msgid "BBB Premium"
+msgstr "BBB Premium"
+
+msgid "BBB Recording API"
+msgstr ""
+
+msgid "Not set"
+msgstr "Nenastavený"
+
+#, fuzzy
+msgid "Add Premium Block to Conferences"
+msgstr "BBB server pro Premium konference"
+
+msgid "Save"
+msgstr "Uložit"
+
+#, fuzzy, python-format
+msgid "Do you really want to delete this block from \"%(name)s\"?"
+msgstr "Opravdu chcete odmítnout člena „%(name)s“?"
+
+#, fuzzy
+msgid "Delete Premium Block"
+msgstr "Smazat profil"
+
 msgid "Newsletters"
 msgstr "Bulletiny"
 
@@ -2371,6 +2569,16 @@ msgstr "Oznámení panelu uživatele"
 msgid "User Welcome Email"
 msgstr "Uvítací e-mail uživatele"
 
+msgid "Conference Overview"
+msgstr "Konferenční přehled"
+
+#, fuzzy
+msgid "Premium Conferences Only"
+msgstr "BBB server pro Premium konference"
+
+msgid "Conferences with Custom Settings"
+msgstr "Konference s customizovanými nastaveními"
+
 msgid "Simple Statistics"
 msgstr "Jednoduchá statistika"
 
@@ -2429,9 +2637,6 @@ msgstr "Jméno"
 
 msgid "Lastname"
 msgstr "Příjmení"
-
-msgid "Save"
-msgstr "Uložit"
 
 msgid "User Administration"
 msgstr "Administrace uživatele"
@@ -3174,7 +3379,9 @@ msgstr "Typ místnosti"
 msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
 msgstr "Foyer je hlavním vstupním bodem pro účastníky. Agendu konference naleznete zde."
 
-msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+#, fuzzy
+#| msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+msgid "The Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgstr "Pódium se používá pro zobrazení streamu, kupř. z platforem YouTube nebo Vimeo. Vedle je zobrazen chat."
 
 msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
@@ -3264,6 +3471,9 @@ msgstr "Můžete přímo vytvořit eventy konference z tohoto místa pomocí kon
 
 msgid "There are no rooms yet."
 msgstr "Zatím tu nejsou žádné místnosti."
+
+msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgstr ""
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr ""
@@ -3459,6 +3669,12 @@ msgstr "Označené hvězdičkou"
 msgid "Length"
 msgstr ""
 
+msgid "minute"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
 #, fuzzy
 #| msgid "Delete Account"
 msgid "Delete Recording"
@@ -3472,145 +3688,6 @@ msgstr "Opravdu chcete smazat \"%(title)s\" místnosti?"
 #, fuzzy
 msgid "Delete recorded meeting"
 msgstr "Smazat nahlášenou položku..."
-
-msgid "Overview - Conferences, Rooms and Workshops with custom BBB-Server settings"
-msgstr "Přehled - konference, místnosti a workshopy s customizovanými nastaveními BBB serveru"
-
-#, fuzzy
-msgid "Overview - Premium Conferences Only"
-msgstr "Přehled - Všechny konference"
-
-msgid "Overview - All Conferences"
-msgstr "Přehled - Všechny konference"
-
-#, fuzzy
-msgid "Conference Administration"
-msgstr "Administrace uživatele"
-
-msgid "Overview - Conferences, Rooms and Workshops"
-msgstr "Přehled - konference, místnosti a workshopy"
-
-msgid "Past"
-msgstr "Dřívější"
-
-msgid "View Upcoming"
-msgstr "Zobrazit nastávající"
-
-msgid "Upcoming"
-msgstr "Nastávající"
-
-msgid "View Past"
-msgstr "Zobrazit minulý"
-
-msgid "Premium capacity occupancy overview"
-msgstr ""
-
-msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
-msgstr ""
-
-#, fuzzy
-msgid "Booked"
-msgstr "Se záložkou"
-
-#, fuzzy
-msgid "Permanently Premium"
-msgstr "Konference je trvale v kategorii premium"
-
-msgid "Portal Setting"
-msgstr "Nastavení portálu"
-
-msgid "Conference Settings"
-msgstr "Nastavení konference"
-
-#, fuzzy
-msgid "Premium active"
-msgstr "Premium"
-
-msgid "Premium inactive, but scheduled"
-msgstr ""
-
-msgid "Not premium"
-msgstr "Není premium"
-
-msgid "Rooms"
-msgstr "Místnosti"
-
-msgid "Start"
-msgstr "Start"
-
-msgid "running now!"
-msgstr "probíhá nyní!"
-
-msgid "Conference Setting"
-msgstr "Nastavení konference"
-
-#, fuzzy
-#| msgid "Rooms"
-msgid "Room"
-msgstr "Místnosti"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgctxt "Calendar"
-#| msgid "Event"
-msgid "Event"
-msgstr "Událost"
-
-msgid "Add new premium block"
-msgstr ""
-
-#, fuzzy
-msgid "Make Permanent Premium"
-msgstr "Konference je trvale v kategorii premium"
-
-#, fuzzy
-msgid "Remove Permanent Premium"
-msgstr "Konference je trvale v kategorii premium"
-
-#, fuzzy
-msgid "Do you really want to make this conference premium permanent?"
-msgstr "Opravdu chcete uživatele odebrat?"
-
-#, fuzzy
-msgid "Do you really want to remove premium permanent from this conference?"
-msgstr "Opravdu chcete odebrat člena „%(name)s“ z týmu?"
-
-msgid "There are no items to show."
-msgstr "Nejsou žádné položky pro zobrazení."
-
-msgid "BBB"
-msgstr "BBB"
-
-msgid "BBB Premium"
-msgstr "BBB Premium"
-
-msgid "BBB Recording API"
-msgstr ""
-
-msgid "Not set"
-msgstr "Nenastavený"
-
-#, fuzzy
-msgid "Add Premium Block to Conferences"
-msgstr "BBB server pro Premium konference"
-
-#, fuzzy, python-format
-msgid "Do you really want to delete this block from \"%(name)s\"?"
-msgstr "Opravdu chcete odmítnout člena „%(name)s“?"
-
-#, fuzzy
-msgid "Delete Premium Block"
-msgstr "Smazat profil"
-
-msgid "Conference Overview"
-msgstr "Konferenční přehled"
-
-#, fuzzy
-msgid "Premium Conferences Only"
-msgstr "BBB server pro Premium konference"
-
-msgid "Conferences with Custom Settings"
-msgstr "Konference s customizovanými nastaveními"
 
 msgid "Rearrange"
 msgstr "Uspořádat"
@@ -3645,6 +3722,11 @@ msgstr "začněte zde..."
 
 msgid "Activate Cloud"
 msgstr "Aktivovat cloud"
+
+#, fuzzy
+#| msgid "Members"
+msgid "Members-Map"
+msgstr "Členové"
 
 # cloudová aplikace
 #, fuzzy
@@ -3751,6 +3833,18 @@ msgstr "Nyní budete dostávat oznámení, kdykoli bude v této skupině zveřej
 msgid "No Description set"
 msgstr "Není nastaven žádný popis"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created"
+msgid "Created on: "
+msgstr "Vytvořeno"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Last sent on: "
+msgid "Last updated on: "
+msgstr "Naposledy posláno:"
+
 #, fuzzy
 #| msgid "Show more"
 msgid "more"
@@ -3827,6 +3921,10 @@ msgstr ""
 #| msgid "Dates"
 msgid "Date"
 msgstr "Data"
+
+#, python-format
+msgid "Time zone: %(TIME_ZONE)s"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -3907,6 +4005,14 @@ msgstr "Kontaktní informace"
 msgid "No contact data has been added yet."
 msgstr "Zatím nebyly přidány žádné kontaktní údaje."
 
+msgid "Contact organizers"
+msgstr "Kontaktujte organizátory"
+
+#, fuzzy
+#| msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgid "Here you can send a message to the admins."
+msgstr "Dne %(date)s jste požádali o odeslání zprávy uživateli '%(recipient)s'."
+
 msgid "Your Deactivated Content"
 msgstr "Váš deaktivovaný obsah"
 
@@ -3931,6 +4037,9 @@ msgstr "Opravdu chcete tento tým smazat?"
 #, python-format
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - Členové"
+
+msgid "Invite users directly via the following link: "
+msgstr ""
 
 msgid "Membership requests"
 msgstr "Žádosti o členství"
@@ -4305,6 +4414,43 @@ msgid "Enable the public visibility of your group/project"
 msgstr ""
 
 #, fuzzy
+#| msgid "Delete invitation"
+msgid "Create invite token"
+msgstr "Smazat pozvánku"
+
+msgid "Check this to generate an invite token which allows a user to join the "
+msgstr ""
+
+#, fuzzy
+#| msgid "Groups"
+msgid "group"
+msgstr "Skupiny"
+
+#, fuzzy
+#| msgid "Project"
+msgid "project"
+msgstr "Projekt"
+
+#, fuzzy
+#| msgctxt "the_app"
+#| msgid "conference"
+msgid "conference"
+msgstr "app_konference"
+
+msgid " directly."
+msgstr ""
+
+#, fuzzy
+#| msgid "No current offers"
+msgid "The current token is: "
+msgstr "Žádné aktuální nabídky"
+
+#, fuzzy
+#| msgid "Create content"
+msgid "Create token"
+msgstr "Vytvořit obsah"
+
+#, fuzzy
 #| msgid "Send 1 day before conference"
 msgid "Include a video conference"
 msgstr "Zaslat 1 den před zahájením konference"
@@ -4365,8 +4511,17 @@ msgstr "Zde můžete kontrolovat, zda veřejně viditelné informace o vašem pr
 msgid "This project shall be made publicly findable via other platforms."
 msgstr "Tento projekt bude nastaven jako veřejně viditelný přes jiné platformy."
 
+msgid "Is your project open to other partner organizations?"
+msgstr ""
+
+msgid "Project is open for further partner organizations."
+msgstr ""
+
 msgid "Which apps should be activated?"
 msgstr "Které aplikace by měly být aktivovány?"
+
+msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
+msgstr ""
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Tuto aplikaci lze aktivovat pouze pro skupinu, nikoli však pro projekt!"
@@ -4471,10 +4626,6 @@ msgstr "Integrace s Facebookem je k dispozici po vytvoření projektu!"
 
 msgid "The HTML entered here will be displayed on the group/project dashboard (only for members)"
 msgstr "Zde zadaný kód HTML se zobrazí na panelu skupiny/projektu (pouze pro členy)"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Invitations"
-msgstr "Pozvánky"
 
 msgid "About me"
 msgstr "O mně"
@@ -4605,6 +4756,32 @@ msgstr "Sdílet na Twitteru"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr "Cíle udržitelného rozvoje"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created Projects"
+msgid "Contact Project Admins"
+msgstr "Vytvořené projekty"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Group Admins"
+msgstr "Kontaktní informace"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Contact Conference Admins"
+msgstr "Administrace uživatele"
+
+msgid "If you want to send your message to the project chat, you have to turn directly to the project."
+msgstr ""
+
+msgid "If you want to send your message to the group chat, you have to turn directly to the group."
+msgstr ""
+
+msgid "If you want to send your message to the conference chat, you have to turn directly to the conference."
+msgstr ""
 
 #, fuzzy
 msgid "Email the group administrators"
@@ -5892,6 +6069,11 @@ msgid "CSV Downloads"
 msgstr "Stahování CSV"
 
 #, fuzzy
+#| msgid "Portal Setting"
+msgid "Portal switches and settings"
+msgstr "Nastavení portálu"
+
+#, fuzzy
 msgid "HD space used by conferences"
 msgstr "HD prostor využívaný projekty"
 
@@ -5913,8 +6095,8 @@ msgstr "E-maily všech odběratelů newsletterů"
 msgid "E-Mails of ALL active users"
 msgstr "E-maily VŠECH aktivních uživatelů"
 
-msgid "Ok"
-msgstr "OK"
+msgid "Select the date range for which you would like statistics"
+msgstr ""
 
 msgid "The WE-Cloud is here!"
 msgstr "WE-Cloud je tady!"
@@ -6038,6 +6220,24 @@ msgstr "Vymazat filtry"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+#| msgid "Show detailed steps"
+msgid "Show potential partners"
+msgstr "Zobrazit podrobné kroky"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Here you can search for partner organisations and projects that are open for further partners. The results are sorted so that partners with a lot of overlap in the funding objectives, eligible areas and SDGs you are active on are listed first."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners for ..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You're currently not member of any project, group or organization."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 msgid "Street"
 msgstr "Ulice"
 
@@ -6072,6 +6272,10 @@ msgstr "Hledat při pohybu po mapě"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search this area"
 msgstr "Prohledat tuto oblast"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Find partners"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Membership Requests"
@@ -6249,10 +6453,6 @@ msgid "Participate"
 msgstr "Účastnit se"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Contact organizers"
-msgstr "Kontaktujte organizátory"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications for content posted."
 msgstr "Nyní budete dostávat oznámení o zveřejněném obsahu."
 
@@ -6322,16 +6522,16 @@ msgid "Hidden User"
 msgstr "Skrytý uživatel"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "This group is open for further partner organizations."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are a Member"
 msgstr "Jste členem"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Join Group"
 msgstr "Přidat se ke skupině"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Message Group"
-msgstr "Skupina zpráv"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Author"
@@ -6352,6 +6552,10 @@ msgstr "Jakmile bude vytvořen projekt z vašeho oblíbeného nápadu, obdržít
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"
 msgstr "Projekty - vytvořené z tohoto nápadu"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This organization is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are a Admin"
@@ -6383,12 +6587,12 @@ msgid "To Profile"
 msgstr "Váš profil"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Join Project"
-msgstr "Připojit se k projektu"
+msgid "This project is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Message Project"
-msgstr "Poslat zprávu projektu"
+msgid "Join Project"
+msgstr "Připojit se k projektu"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Move up"
@@ -7555,11 +7759,6 @@ msgstr "Litujeme, pouze správci portálu mohou deaktivovat skupiny! Můžete na
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "Vámi vybraný obsah mohou zobrazit pouze členové skupiny. Podejte si žádost o členství nyní!"
 
-#, fuzzy
-#| msgid "Conference"
-msgid "Conferences"
-msgstr "Konference"
-
 msgid "My Conferences"
 msgstr "Mé konference"
 
@@ -7713,6 +7912,9 @@ msgstr "Poskytněte, prosím, také počáteční datum"
 msgid "Please also provide an end date"
 msgstr "Poskytněte, prosím, také počáteční datum"
 
+msgid "Ensure that your name does not contain any invalid characters."
+msgstr ""
+
 msgid "Test email sent!"
 msgstr "Testovací e-mail odeslán!"
 
@@ -7749,6 +7951,14 @@ msgstr ""
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Jazyk \"%s\" není podporován"
+
+#, fuzzy
+#| msgid "Test email sent!"
+msgid "New verification email sent!"
+msgstr "Testovací e-mail odeslán!"
+
+msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
 
 #, fuzzy
 msgid "Successfully made conference permanent premium"
@@ -8275,6 +8485,15 @@ msgstr "Cloudové soubory"
 msgid "Linked Cloud Files"
 msgstr "Cloudové soubory"
 
+msgid "Cloud Stub"
+msgstr "Cloudový pahýl"
+
+msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
+msgstr ""
+
+msgid "There are no cloud files yet"
+msgstr "Zatím nejsou žádné cloudové soubory"
+
 msgid "Restart"
 msgstr "Restartujte"
 
@@ -8290,6 +8509,12 @@ msgstr ""
 msgctxt "the_app"
 msgid "conference"
 msgstr "app_konference"
+
+msgid "Error message:"
+msgstr ""
+
+msgid "No error message supplied."
+msgstr ""
 
 msgid "Go to conference"
 msgstr "Přejděte do konference"
@@ -8499,8 +8724,91 @@ msgstr "Nejnovější Pady"
 msgid "Pad Type"
 msgstr "Typ padu"
 
+msgid "Pad"
+msgstr "Pad"
+
+msgid "This pad can no longer be edited because its creator has deleted their account."
+msgstr "Tento pad již nelze upravovat, protože jeho autor odstranil svůj účet."
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(pad)s“?"
+msgstr "Opravdu chcete smazat etherpad \"%(pad)s\"?"
+
+msgid "Delete Etherpad"
+msgstr "Smazat Etherpad"
+
 msgid "The document can not be accessed because the etherpad server could not be reached. Please contact an administrator!"
 msgstr "K dokumentu není přístup, protože nefunguje spojení s etherpad serverem. Kontaktujte prosím administrátora!"
+
+msgid "This document is empty"
+msgstr "Tento dokument je prázdný"
+
+msgid "Pads"
+msgstr "Pady"
+
+msgid "Enter a title for the Pad."
+msgstr "Zadejte název Padu."
+
+msgid "Enter the title for a new Document or Table."
+msgstr "Zadejte název nového dokumentu nebo tabulky."
+
+msgid "Enter the title for a new Document."
+msgstr "Zadejte název nového dokumentu."
+
+msgid "Create Etherpad"
+msgstr "Vytvořit Etherpad"
+
+msgid "Create Ethercalc"
+msgstr "Vytvořit Ethercalc"
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(title)s“?"
+msgstr "Opravdu chcete smazat etherpad \"%(title)s\"?"
+
+msgid "No etherpads have been created yet."
+msgstr "Dosud nebyly vytvořeny žádné etherpady."
+
+msgid "Download CSV"
+msgstr "Stáhnout CSV"
+
+msgid "Download Excel"
+msgstr "Stáhnout Excel"
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Ahoj %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s vytvořil nový etherpad \"%(object_name)s\" v %(team_name)s. \n"
+"\n"
+"Najdete jej kliknutím na tento odkaz: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Upravit předvolby oznámení můžete pod tímto odkazem: %(notification_settings_url)s )\n"
+"\n"
+"Váš %(site_name)s tým."
+
+msgid "You created a pad"
+msgstr "Vytvořili jste pad"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a Pad"
+msgstr "vytvořil/a Pad"
+
+msgid "There are no etherpads yet"
+msgstr "Zatím neexistují žádné etherpady"
 
 #, python-format
 msgid "Etherpad \"%(title)s\" was edited successfully."
@@ -8958,1980 +9266,6 @@ msgstr "Konferenční eventy"
 msgid "%(event)s %(type)s"
 msgstr "%(event)s %(type)s"
 
-#, python-format
-msgid "Event \"%(title)s\" was edited successfully."
-msgstr "Událost \"%(title)s\" byla úspěšně upravena."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be edited."
-msgstr "Událost \"%(title)s\" nelze upravit."
-
-msgid "Please use the conference management area to add new workshops!"
-msgstr "Použijte, prosím, řízení konference, abyste přidali nové workshopy!"
-
-msgid "The page you requested is not available for this event at this time."
-msgstr "Požadovaná stránka není pro tuto událost v tuto chvíli k dispozici."
-
-msgid "One of the event suggestions times could not be understood!"
-msgstr "Jednomu z časů návrhů akce nebylo možné porozumět!"
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was edited successfully."
-msgstr "Neplánovaná událost \"%(title)s\" byla úspěšně upravena."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be edited."
-msgstr "Neplánovanou událost \"%(title)s\" nelze upravit."
-
-#, python-format
-msgid "Event \"%(title)s\" was added successfully."
-msgstr "Událost \"%(title)s\" byla úspěšně přidána."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be added."
-msgstr "Událost \"%(title)s\" nelze přidat."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was added successfully."
-msgstr "Neplánovaná událost \"%(title)s\" byla úspěšně přidána."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be added."
-msgstr "Neplánovanou událost \"%(title)s\" nelze přidat."
-
-msgid "You should define at least one date suggestion."
-msgstr "Měli byste definovat alespoň jeden návrh data."
-
-#, python-format
-msgid "Event \"%(title)s\" was deleted successfully."
-msgstr "Událost \"%(title)s\" byla úspěšně smazána."
-
-#, python-format
-msgid "Event \"%(title)s\" could not be deleted."
-msgstr "Událost \"%(title)s\" nelze smazat."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" was deleted successfully."
-msgstr "Neplánovaná událost \"%(title)s\" byla úspěšně smazána."
-
-#, python-format
-msgid "Unscheduled event \"%(title)s\" could not be deleted."
-msgstr "Neplánovanou událost \"%(title)s\" nelze smazat."
-
-#, fuzzy
-#| msgid "Your data was saved successfully!"
-msgid "Your votes were saved successfully."
-msgstr "Vaše data byla úspěšně uložena!"
-
-#, fuzzy
-#| msgid "Poll \"%(title)s\" could not be added."
-msgid "Your votes could not be saved."
-msgstr "Hlasování \"%(title)s\" nelze přidat."
-
-msgid "This is event is already scheduled. You cannot vote for it any more."
-msgstr "Tato událost je již naplánována. Už o ní nemůžete hlasovat."
-
-msgid "The complete request can only be sent via POST!"
-msgstr "Požadavek na dokončení lze zaslat pouze jako PŘÍSPĚVEK!"
-
-msgid "Event cannot be completed: No date was supplied."
-msgstr "Událost nelze dokončit: Nebylo zadáno žádné datum."
-
-msgid "The event was created successfully at the specified date."
-msgstr "Událost byla úspěšně vytvořena k uvedenému datu."
-
-msgid "Upcoming events"
-msgstr "Nadcházející události"
-
-#, fuzzy
-msgid "Upcoming event"
-msgstr "Nadcházející události"
-
-msgid "Your comment was added successfully."
-msgstr "Váš komentář byl úspěšně přidán."
-
-msgid "Your comment was deleted successfully."
-msgstr "Váš komentář byl úspěšně smazán."
-
-msgid "Exchange"
-msgstr ""
-
-msgctxt "the_app"
-msgid "exchange"
-msgstr ""
-
-msgctxt "the_app"
-msgid "file"
-msgstr "soubor"
-
-msgid "A user uploaded a new file"
-msgstr "Uživatel nahrál nový soubor"
-
-#, python-format
-msgid "%(sender_name)s uploaded the file %(object_name)s"
-msgstr "%(sender_name)s nahrál/a soubor %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s uploaded %(count)d files"
-msgstr "%(sender_name)s nahrál/a %(count)d souborů"
-
-#, python-format
-msgid "%(sender_name)s created a new file"
-msgstr "%(sender_name)s vytvořil/a nový soubor"
-
-#, python-format
-msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "V %(team_name)s byl vytvořen nový soubor: \"%(object_name)s\"."
-
-msgid "A user uploaded a new file in a team you are following"
-msgstr "Uživatel vytvořil nový soubor v týmu, který sledujete"
-
-#, python-format
-msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s vytvořil/a nový soubor v %(team_name)s (který sledujete)"
-
-#, python-format
-msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "Nový soubor: \"%(object_name)s\" byl vytvořen v %(team_name)s (který sledujete)."
-
-msgid "Latest Files"
-msgstr "Nejnovější soubory"
-
-msgid "No files"
-msgstr "Žádné soubory"
-
-msgid "Pictures"
-msgstr "Obrázky"
-
-msgid "Documents"
-msgstr "Dokumenty"
-
-msgid "Audio Files"
-msgstr "Audio soubory"
-
-msgid "Videos"
-msgstr "Videa"
-
-msgid "File Type"
-msgstr "Typ souboru"
-
-msgid "File Name"
-msgstr "Název souboru"
-
-msgid "File Name (descending)"
-msgstr "Název souboru (klesající řazení)"
-
-msgid "Smallest Files"
-msgstr "Nejmenší soubory"
-
-msgid "Largest Files"
-msgstr "Největší soubory"
-
-msgid "The given URL does not seem to be valid."
-msgstr "Zdá se, že zadaná adresa URL není platná."
-
-msgid "Must supply either a URL or File"
-msgstr "Musí se zadat adresa URL nebo soubor"
-
-msgid "Is URL Link"
-msgstr "Je odkaz URL"
-
-msgid "Uploaded by"
-msgstr "Nahrál/a"
-
-msgid "Uploaded on"
-msgstr "Nahráno"
-
-msgid "No files selected."
-msgstr "Nejsou vybrány žádné soubory."
-
-msgctxt "special_folder_type"
-msgid "Attachments"
-msgstr "Přílohy"
-
-msgid "File does not exist or you are not allowed to delete it."
-msgstr "Soubor neexistuje nebo jej nesmíte smazat."
-
-#, python-format
-msgid "A problem occurred during export. The following file is missing: %(filename)s."
-msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
-msgstr[0] "Během exportu došlo k problému. Chybí následující soubor: %(filename)s."
-msgstr[1] "Během exportu došlo k problému. Chybí následující soubory: %(filename)s."
-msgstr[2] "Během exportu došlo k problému. Chybí následující soubory: %(filename)s."
-msgstr[3] "Během exportu došlo k problému. Chybí následující soubory: %(filename)s."
-
-msgid "Invalid request."
-msgstr "Neplatný požadavek."
-
-#, python-format
-msgid "File \"%(title)s\" was updated successfully."
-msgstr "Soubor \"%(title)s\" byl úspěšně aktualizován."
-
-#, python-format
-msgid "File \"%(title)s\" could not be updated."
-msgstr "Soubor \"%(title)s\" nelze aktualizovat."
-
-msgid "Downloading failed, the target object was not a folder!"
-msgstr "Stahování se nezdařilo, cílovým objektem nebyla složka!"
-
-msgid "Canceled the download because there seem to be no files in this folder."
-msgstr "Stahování bylo zrušeno, protože se zdá, že v této složce nejsou žádné soubory."
-
-msgid "Internal Error: Group not Found"
-msgstr "Interní chyba: Skupina nenalezena"
-
-msgid "Permission for upload denied"
-msgstr "Povolení pro nahrání odmítnuto"
-
-msgid "The uploaded file was invalid."
-msgstr "Nahraný soubor byl neplatný."
-
-#, python-format
-msgid "%(count)d File was added successfully."
-msgid_plural "%(count)d Files were added successfully."
-msgstr[0] "%(count)d soubor byl úspěšně přidán."
-msgstr[1] "%(count)d soubory byly úspěšně přidány."
-msgstr[2] "%(count)d soubory byly úspěšně přidány."
-msgstr[3] "%(count)d souborů byly úspěšně přidáno."
-
-msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
-msgstr "Soubor, který jste nahrál, byl příliš velký nebo pro tento typ souboru nebylo povoleno nahrání!"
-
-msgctxt "the_app"
-msgid "marketplace"
-msgstr "tržiště"
-
-msgid "A user created a new offer"
-msgstr "Uživatel vytvořil novou nabídku"
-
-#, python-format
-msgid "%(sender_name)s created the offer %(object_name)s"
-msgstr "%(sender_name)s vytvořil/a nabídku %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d offers"
-msgstr "%(sender_name)s vytvořil/a %(count)d nabídek"
-
-#, python-format
-msgid "%(sender_name)s created a new offer"
-msgstr "%(sender_name)s vytvořil/a novou nabídku"
-
-#, python-format
-msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "V %(team_name)s byla vytvořena nová nabídka: \"%(object_name)s\"."
-
-msgid "One of your offers expired"
-msgstr "Platnost jedné z vašich nabídek vypršela"
-
-#, python-format
-msgid "Your offer %(object_name)s expired"
-msgstr "Platnost vaší nabídky %(object_name)s vypršela"
-
-#, python-format
-msgid "%(count)d of your offers expired"
-msgstr "%(count)d z vašich nabídek má vypršelou platnost"
-
-msgid "Your offer has expired"
-msgstr "Platnost vaší nabídky vypršela"
-
-#, python-format
-msgid "Offer \"%(object_name)s\" has expired."
-msgstr "Platnost nabídky \"%(object_name)s\" vypršela."
-
-msgid "A user commented on one of your offers"
-msgstr "Uživatel okomentoval jednu z vašich nabídek"
-
-#, python-format
-msgid "%(sender_name)s commented on your offer %(object_name)s"
-msgstr "%(sender_name)s okomentoval/a vaši nabídku %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
-msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval vaši nabídku %(object_name)s"
-msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali vaši nabídku %(object_name)s"
-msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali vaši nabídku %(object_name)s"
-msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo vaši nabídku %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your offer"
-msgstr "%(sender_name)s okomentoval/a vaši nabídku"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your offers"
-msgstr "%(sender_name)s okomentoval/a jednu z vašich nabídek"
-
-msgid "A user commented on an offer you were tagged in"
-msgstr "Uživatel okomentoval nabídku, na které jste byli označeni"
-
-#, python-format
-msgid "%(sender_name)s commented on the offer %(object_name)s"
-msgstr "%(sender_name)s okomentoval/a nabídku %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
-msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval nabídku %(object_name)s"
-msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali nabídku %(object_name)s"
-msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali nabídku %(object_name)s"
-msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo nabídku %(object_name)s"
-
-msgid "You were tagged in this offer"
-msgstr "Byli jste označeni v této nabídce"
-
-#, python-format
-msgid "%(sender_name)s commented on an offer you were tagged in"
-msgstr "%(sender_name)s okomentoval/a nabídku, na které jste byli označeni"
-
-#, python-format
-msgid "%(sender_name)s commented on an offer you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s okomentoval/a nabídku, na které jste byli označeni, v %(team_name)s"
-
-msgid "A user created a new offer in a team you are following"
-msgstr "Uživatel vytvořil novou nabídku v týmu, který sledujete"
-
-#, python-format
-msgid "%(sender_name)s created a new offer in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s vytvořil/a novou nabídku v týmu %(team_name)s (který sledujete)"
-
-#, python-format
-msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "Nová nabídka: \"%(object_name)s\" byla vytvořena v týmu %(team_name)s (který sledujete)."
-
-msgid "A user updated an offer you are following"
-msgstr "Uživatel aktualizoval nabídku, kterou sledujete"
-
-#, python-format
-msgid "%(sender_name)s updated the offer %(object_name)s"
-msgstr "%(sender_name)s aktualizoval/a nabídku %(object_name)s"
-
-msgid "You are following this offer"
-msgstr "Sledujete tuto nabídku"
-
-#, python-format
-msgid "%(sender_name)s updated an offer you are following"
-msgstr "%(sender_name)s aktualizoval/a nabídku, kterou sledujete"
-
-#, python-format
-msgid "An offer you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "Nabídka, kterou sledujete: \"%(object_name)s\", byla aktualizována v týmu %(team_name)s."
-
-msgid "A user commented on an offer you are following"
-msgstr "Uživatel okomentoval nabídku, kterou sledujete"
-
-#, python-format
-msgid "%(sender_name)s commented on on an offer you are following"
-msgstr "%(sender_name)s okomentoval/a nabídku, kterou sledujete"
-
-msgid "Current Offers"
-msgstr "Aktuální nabídky"
-
-msgid "No current offers"
-msgstr "Žádné aktuální nabídky"
-
-msgid "Order Key"
-msgstr "Klíč řazení"
-
-msgid "Looking for"
-msgstr "Hledáme"
-
-msgid "Offering"
-msgstr "Nabízíme"
-
-msgid "Offer currently active?"
-msgstr "Nabídka aktuálně aktivní?"
-
-msgid "Offer Category"
-msgstr "Kategorie nabídky"
-
-#, python-format
-msgid "Offer: %(offer)s (%(type)s)"
-msgstr "Nabídka: %(offer)s (%(type)s)"
-
-#, python-format
-msgid "Offer \"%(title)s\" was edited successfully."
-msgstr "Nabídka \"%(title)s\" byla úspěšně upravena."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be edited."
-msgstr "Nabídku \"%(title)s\" nelze upravit."
-
-#, python-format
-msgid "Offer \"%(title)s\" was added successfully."
-msgstr "Nabídka \"%(title)s\" byla úspěšně přidána."
-
-#, python-format
-msgid "Offer \"%(title)s\" was saved successfully, but is not active yet."
-msgstr "Nabídka \"%(title)s\" byla úspěšně přidána, ale ještě není aktivní."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be added."
-msgstr "Nabídku \"%(title)s\" nelze přidat."
-
-#, python-format
-msgid "Offer \"%(title)s\" was deleted successfully."
-msgstr "Nabídka \"%(title)s\" byla úspěšně smazána."
-
-#, python-format
-msgid "Offer \"%(title)s\" could not be deleted."
-msgstr "Nabídku \"%(title)s\" nelze smazat."
-
-msgid "The offer you requested is no longer active. Sorry!"
-msgstr "Požadovaná nabídka již není aktivní. Je nám líto!"
-
-msgid "Invalid action for this offer. The request could not be completed!"
-msgstr "Neplatná akce pro tuto nabídku. Požadavek nelze dokončit!"
-
-msgid "The offer is already active"
-msgstr "Nabídka je již aktivní"
-
-msgid "The offer is already deactivated"
-msgstr "Nabídka je již deaktivována"
-
-msgid "The offer was deactivated successfully."
-msgstr "Nabídka \"%(title)s\" byla úspěšně deaktivována."
-
-msgid "The offer was reactivated successfully."
-msgstr "Nabídka \"%(title)s\" byla úspěšně znovu aktivována."
-
-msgid "The offer was activated successfully."
-msgstr "Nabídka \"%(title)s\" byla úspěšně aktivována."
-
-msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
-msgstr ""
-
-msgctxt "the_app"
-msgid "Chat"
-msgstr ""
-
-msgctxt "the_app"
-msgid "message"
-msgstr "zpráva"
-
-msgid "Chat"
-msgstr ""
-
-msgid "Only Administrators may send a message to this project/group!"
-msgstr "Pouze administrátoři mohou poslat zprávu tomuto projektu/skupině!"
-
-msgid "Additional Recipients"
-msgstr "Další příjemci"
-
-msgid "Undefined recipient."
-msgstr "Nedefinovaný příjemce."
-
-msgid "Your reply could not be matched to an existing message."
-msgstr "Vaši odpověď nelze přiřadit k existující zprávě."
-
-msgid "An internal error occured."
-msgstr "Došlo k interní chybě."
-
-msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
-msgstr "E-mailová adresa, ze které jste poslali odpověď, není adresa spojená s vaším uživatelským účtem. Přímé odpovědi prosím zasílejte pouze z e-mailové adresy, pod kterou jste se na webu zaregistrovali!"
-
-msgid "There was an error when processing your message text!"
-msgstr "Při zpracování textu vaší zprávy došlo k chybě!"
-
-msgid "Your direct reply failed!"
-msgstr "Vaše přímá odpověď se nezdařila!"
-
-msgid "Select at least one object."
-msgstr "Vyberte alespoň jeden objekt."
-
-msgid "Messages or conversations successfully archived."
-msgstr "Zprávy nebo konverzace byly úspěšně archivovány."
-
-msgid "Messages or conversations successfully deleted."
-msgstr "Zprávy nebo konverzace byly úspěšně smazány."
-
-msgid "Messages were marked as read."
-msgstr "Zprávy byly označeny jako přečtené."
-
-msgid "Messages or conversations successfully recovered."
-msgstr "Zprávy nebo konverzace byly úspěšně obnoveny."
-
-msgid "Notes"
-msgstr "Poznámky"
-
-msgctxt "the_app"
-msgid "note"
-msgstr "poznámka"
-
-msgid "A user commented on a news post"
-msgstr "Uživatel okomentoval novinku"
-
-#, python-format
-msgid "%(sender_name)s commented on a news post"
-msgstr "%(sender_name)s okomentoval/a novinku"
-
-msgid "A user commented on one of your news posts"
-msgstr "Uživatel okomentoval jednu z vašich novinku"
-
-#, python-format
-msgid "%(sender_name)s commented on your news post %(object_name)s"
-msgstr "%(sender_name)s okomentoval/a vaši novinku %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
-msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval vaši novinku %(object_name)s"
-msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali vaši novinku %(object_name)s"
-msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali vaši novinku %(object_name)s"
-msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo vaši novinku %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your news post"
-msgstr "%(sender_name)s okomentoval/a vaši novinku"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your news posts"
-msgstr "%(sender_name)s okomentoval/a jednu z vašich novinek"
-
-msgid "A user commented on a news posts you commented in"
-msgstr "Uživatel okomentoval novinky, které jste komentovali"
-
-#, python-format
-msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
-msgstr "%(sender_name)s okomentoval/a novinku %(object_name)s, kterou jste komentovali"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
-msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval novinku %(object_name)s, kterou jste komentovali"
-msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali novinku %(object_name)s, kterou jste komentovali"
-msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali novinku %(object_name)s, kterou jste komentovali"
-msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo novinku %(object_name)s, kterou jste komentovali"
-
-#, python-format
-msgid "%(sender_name)s commented on a news post you commented in"
-msgstr "%(sender_name)s okomentoval/a novinku, kterou jste komentovali"
-
-msgid "A user created a news post"
-msgstr "Uživatel vytvořil novinku"
-
-#, python-format
-msgid "%(sender_name)s created the news post %(object_name)s"
-msgstr "%(sender_name)s vytvořil/a novinku %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d news posts"
-msgstr "%(sender_name)s vytvořil/a %(count)d novinek"
-
-#, python-format
-msgid "%(sender_name)s created a new news post"
-msgstr "%(sender_name)s vytvořil/a novou novinku"
-
-#, python-format
-msgid "%(sender_name)s posted in %(team_name)s:"
-msgstr "\"%(sender_name)s\" zveřejnil/a v týmu %(team_name)s:"
-
-msgid "A user created a news post in a team you are following"
-msgstr "Uživatel vytvořil novinku v týmu, který sledujete"
-
-#, python-format
-msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s vytvořil/a novinku v týmu %(team_name)s (který sledujete)"
-
-#, python-format
-msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
-msgstr "%(sender_name)s zveřejnil/a v týmu %(team_name)s: (který sledujete)"
-
-msgid "A user updated a news post"
-msgstr "Uživatel aktualizoval novinku"
-
-#, python-format
-msgid "%(sender_name)s updated the news post %(object_name)s"
-msgstr "%(sender_name)s aktualizoval/a novinku %(object_name)s"
-
-msgid "You are following this news post"
-msgstr "Sledujete tuto novinku"
-
-#, python-format
-msgid "%(sender_name)s updated a news post you are following"
-msgstr "%(sender_name)s aktualizoval/a novinku, kterou sledujete"
-
-#, python-format
-msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
-msgstr "Novinka od %(sender_name)s, kterou sledujete, byla aktualizována %(team_name)s:"
-
-msgid "A user commented on a news post you are following"
-msgstr "Uživatel okomentoval novinku, kterou sledujete"
-
-#, python-format
-msgid "%(sender_name)s commented on the news post %(object_name)s"
-msgstr "%(sender_name)s okomentoval/a novinku %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
-msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval novinku %(object_name)s"
-msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali novinku %(object_name)s"
-msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali novinku %(object_name)s"
-msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo novinku %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on a news posts you are following"
-msgstr "%(sender_name)s okomentoval/a novinku, kterou sledujete"
-
-msgid "No news"
-msgstr "Žádné novinky"
-
-msgid "Write a news post"
-msgstr "Napsat novinku"
-
-msgid "News stream"
-msgstr "Stream novinek"
-
-msgid "Popularity"
-msgstr "Popularita"
-
-msgid "Facebook Share"
-msgstr "Sdílet na Facebooku"
-
-msgid "Note Item"
-msgstr "Položka poznámky"
-
-msgid "Note Items"
-msgstr "Položky poznámky"
-
-msgid "Your news post was added successfully."
-msgstr "Vaše novinka byla úspěšně přidána."
-
-msgid "Your news post was deleted successfully."
-msgstr "Vaše novinka byla úspěšně smazána."
-
-msgid "Your news post was edited successfully."
-msgstr "Vaše novinka byla úspěšně upravena."
-
-msgid "You are seeing this alert because you created this content."
-msgstr "Toto upozornění se vám zobrazuje, protože jste vytvořili tento obsah."
-
-msgid "You are seeing this alert because you are following the item's project or group."
-msgstr "Toto upozornění se vám zobrazuje, protože sledujete projekt nebo skupinu položky."
-
-msgid "You are seeing this alert because you are following this item."
-msgstr "Toto upozornění se vám zobrazuje, protože sledujete tuto položku."
-
-msgctxt "the_app"
-msgid "notifications"
-msgstr "oznámení"
-
-#, python-format
-msgid "Your daily digest for %(portal_name)s"
-msgstr "Váš denní přehled pro %(portal_name)s"
-
-msgid "This is what happened during the last day!"
-msgstr "To se stalo během posledního dne!"
-
-#, python-format
-msgid "Your weekly digest for %(portal_name)s"
-msgstr "Váš týdenní souhrn pro %(portal_name)s"
-
-msgid "This is what happened during the last week!"
-msgstr "To se stalo během minulého týdne!"
-
-msgctxt "notification frequency"
-msgid "Never"
-msgstr "Nikdy"
-
-msgctxt "notification frequency"
-msgid "Immediately"
-msgstr "Okamžitě"
-
-msgctxt "notification frequency"
-msgid "Daily"
-msgstr "Denně"
-
-msgctxt "notification frequency"
-msgid "Weekly"
-msgstr "Týdně"
-
-msgid "Notification Preference for User"
-msgstr "Předvolby oznámení pro uživatele"
-
-msgid "Notification Preference"
-msgstr "Předvolba oznámení"
-
-msgid "Multi Notification ID"
-msgstr "ID multi oznámení"
-
-msgid "Multi Notification Preference"
-msgstr "Předvolba multi oznámení"
-
-msgid "Multi Notification Preferences"
-msgstr "Předvolby multi oznámení"
-
-msgid "User who caused this notification event"
-msgstr "Uživatel, který způsobil tuto událost oznámení"
-
-msgid "Audience"
-msgstr "Publikum"
-
-msgid "Owner of the alert"
-msgstr "Vlastník výstrahy"
-
-msgid "Alert Reason key"
-msgstr "Klíč důvodu výstrahy"
-
-msgid "Last user who caused this notification event"
-msgstr "Poslední uživatel, který způsobil tuto událost oznámení"
-
-msgid "Alert State"
-msgstr "Stav výstrahy"
-
-msgid "You are following this content or its Project or Group"
-msgstr "Sledujete tento obsah nebo jeho projekt nebo skupinu"
-
-msgid "All notifications"
-msgstr "Všechna oznámení"
-
-msgid "No notifications"
-msgstr "Žádná oznámení"
-
-msgid "For content that I am following, I wish to receive notification emails"
-msgstr "U obsahu, který sleduji, si přeji dostávat e-maily s oznámeními"
-
-msgid "You are getting this notification because you are subscribed to these kinds of events in your project or group."
-msgstr "Toto oznámení dostáváte, protože jste přihlášeni k odběru těchto druhů událostí ve vašem projektu nebo skupině."
-
-msgid "You are getting this notification because you are an administrator of this project or group."
-msgstr "Toto oznámení dostáváte, protože jste správcem tohoto projektu nebo skupiny."
-
-msgid "You are getting this notification because you are an administrator of this portal."
-msgstr "Toto oznámení dostáváte, protože jste správcem tohoto portálu."
-
-msgid "You are getting this email because you are subscribed to one or more daily notifications."
-msgstr "Tento e-mail jste obdrželi, protože jste přihlášeni k odběru jednoho nebo více denních oznámení."
-
-msgid "You are getting this email because you are subscribed to one or more weekly notifications."
-msgstr "Tento e-mail jste obdrželi, protože jste přihlášeni k odběru jednoho nebo více týdenních oznámení."
-
-msgid "New item"
-msgstr "Nová položka"
-
-#, python-format
-msgid "View on %(portal_name)s"
-msgstr "Zobrazit na %(portal_name)s"
-
-msgid "Untitled"
-msgstr "Nepojmenované"
-
-msgid "Your notification preferences were updated successfully."
-msgstr "Vaše předvolby oznámení byly úspěšně aktualizovány."
-
-msgid "Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!"
-msgstr ""
-
-msgid "Your notifications preferences were reset to default!"
-msgstr "Vaše předvolby oznámení byly obnoveny na výchozí nastavení!"
-
-msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
-msgstr ""
-
-#, fuzzy
-#| msgid "Successfully deactivated user account"
-msgid "Successfully signed in as {}."
-msgstr "Uživatelský účet byl úspěšně deaktivován"
-
-#, fuzzy
-#| msgid "Successfully deactivated user account"
-msgid "Successfully connected account."
-msgstr "Uživatelský účet byl úspěšně deaktivován"
-
-#, fuzzy
-#| msgid "Successfully removed user"
-msgid "Successfully removed connection."
-msgstr "Uživatel byl úspěšně odebrán"
-
-#, fuzzy
-#| msgid "Organization"
-msgctxt "the_app"
-msgid "organization"
-msgstr "Organizace"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization membership"
-msgstr "Organizace"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization memberships"
-msgstr "Organizace"
-
-#, fuzzy
-#| msgid "Team Invite for Unregistered User"
-msgid "Organization Invite for Unregistered User"
-msgstr "Pozvánka do týmu pro neregistrovaného uživatele"
-
-#, fuzzy
-#| msgid "Team Invites for Unregistered Users"
-msgid "Organization Invites for Unregistered Users"
-msgstr "Pozvánky do týmu pro neregistrované uživatele"
-
-#, fuzzy
-#| msgid "Assigned organizations"
-msgid "Civil society organization"
-msgstr "Přidělené organizace"
-
-msgid "Company (commercial)"
-msgstr ""
-
-#, fuzzy
-#| msgid "Public voting"
-msgid "Public institution"
-msgstr "Veřejné hlasování"
-
-#, fuzzy
-#| msgid "Other teams"
-msgid "Other"
-msgstr "Jiné týmy"
-
-#, fuzzy
-#| msgid "Remove organization"
-msgid "Name of the organization"
-msgstr "Odebrat organizaci"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Organization type"
-msgstr "Organizace"
-
-#, fuzzy
-#| msgid "Logout"
-msgid "Logo"
-msgstr "Odhlásit se"
-
-#, fuzzy
-#| msgid "Email address"
-msgid "Email Address"
-msgstr "E-mailová adresa"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Cosinnus Organization"
-msgstr "Organizace"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Cosinnus Organizations"
-msgstr "Organizace"
-
-msgid "CosinnusOrganizationSocialMedia"
-msgstr ""
-
-#, fuzzy
-#| msgid "CosinnusLocation"
-msgid "CosinnusOrganizationLocation"
-msgstr "CosinnusLocation"
-
-#, fuzzy
-#| msgid "CosinnusLocations"
-msgid "CosinnusOrganizationLocations"
-msgstr "CosinnusLocations"
-
-#, fuzzy
-#| msgid "Organization"
-msgid "Organization group"
-msgstr "Organizace"
-
-#, fuzzy
-#| msgid "Organizations"
-msgid "Organization groups"
-msgstr "Organizace"
-
-#, fuzzy, python-format
-#| msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
-msgid "Project/group %(name)s had already requested and has now been accepted."
-msgstr "Projekt/skupina %(group)s již byl pozván(a) a okamžitě byl(a) přidělen(a)!"
-
-#, fuzzy, python-format
-#| msgid "User %(username)s was successfully invited!"
-msgid "Project/group %(name)s was successfully invited."
-msgstr "Uživatel %(username)s byl úspěšně pozván!"
-
-#, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
-msgid "Your join request was withdrawn from organization “%(name)s” successfully."
-msgstr "Vaše žádost o připojení byla úspěšně stažena z %(team_type)s “%(team_name)s”."
-
-#, fuzzy, python-format
-#| msgid "You have declined the invitation to %(team_type)s “%(team_name)s”."
-msgid "You have declined the invitation to organization “%(name)s”."
-msgstr "Odmítli jste pozvání do %(team_type)s “%(team_name)s”."
-
-#, fuzzy, python-format
-#| msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
-msgid "Your project/group is now assigned to the organization “%(name)s”. Welcome!"
-msgstr "Nyní jste členem %(team_type)s “%(team_name)s”. Vítejte!"
-
-#, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
-msgid "Your request was withdrawn from organization \"%(name)s\" successfully."
-msgstr "Váš požadavek na připojení byl úspěšně stažen z %(team_type)s \"%(team_name)s\"."
-
-#, fuzzy, python-format
-#| msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
-msgid "Your invitation to project/group \"%(name)s\" was withdrawn successfully."
-msgstr "Vaše pozvánka pro uživatele \"%(username)s\" byla úspěšně stažena."
-
-#, fuzzy, python-format
-#| msgid "User \"%(username)s\" is no longer a member."
-msgid "Project/group \"%(name)s\" is no longer assigned."
-msgstr "Uživatel \"%(username)s\" již není členem."
-
-#, fuzzy
-#| msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
-msgid "Sorry, only portal administrators can create Organizations! You can either create a Project, or write a message to one of the administrators to create a Organization for you. Below you can find a listing of all administrators."
-msgstr "Je nám líto, skupiny mohou vytvářet pouze správci portálu! Můžete buď vytvořit projekt, nebo napsat zprávu některému ze správců a vytvořit pro vás skupinu. Níže naleznete seznam všech správců."
-
-#, fuzzy, python-format
-#| msgid "Event \"%(title)s\" was edited successfully."
-msgid "Organization \"%(name)s\" was created successfully."
-msgstr "Událost \"%(title)s\" byla úspěšně upravena."
-
-#, fuzzy
-#| msgid "Your idea was deleted successfully."
-msgid "Your organization was deleted successfully."
-msgstr "Váš nápad byl úspěšně smazán."
-
-msgctxt "the_app"
-msgid "poll"
-msgstr "hlasování"
-
-msgid "A user created a new poll"
-msgstr "Uživatel vytvořil nové hlasování"
-
-#, python-format
-msgid "%(sender_name)s created the poll %(object_name)s"
-msgstr "%(sender_name)s vytvořil/a hlasování %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d polls"
-msgstr "%(sender_name)s vytvořil/a %(count)d hlasování"
-
-#, python-format
-msgid "%(sender_name)s created a new poll"
-msgstr "%(sender_name)s vytvořil/a nové hlasování"
-
-#, python-format
-msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "V %(team_name)s bylo vytvořeno nové hlasování: \"%(object_name)s\"."
-
-msgid "A poll you voted on was completed"
-msgstr "Hlasování, ve kterém jste hlasovali, bylo dokončeno"
-
-#, python-format
-msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
-msgstr "%(sender_name)s dokončil/a hlasování %(object_name)s, ve kterém jste hlasovali"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d polls you voted on"
-msgstr "%(sender_name)s dokončil/a %(count)d hlasování, ve kterých jste hlasovali"
-
-#, python-format
-msgid "%(sender_name)s completed the poll"
-msgstr "%(sender_name)s dokončil/a hlasování"
-
-#, python-format
-msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
-msgstr "Hlasování \"%(object_name)s\" v týmu %(team_name)s bylo dokončeno."
-
-msgid "A user commented on one of your polls"
-msgstr "Uživatel okomentoval jedno z vašich hlasování"
-
-#, python-format
-msgid "%(sender_name)s commented on your poll %(object_name)s"
-msgstr "%(sender_name)s okomentoval/a vaše hlasování %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
-msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval vaše hlasování %(object_name)s"
-msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali vaše hlasování %(object_name)s"
-msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali vaše hlasování %(object_name)s"
-msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo vaše hlasování %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your poll"
-msgstr "%(sender_name)s okomentoval/a vaše hlasování"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your polls"
-msgstr "%(sender_name)s okomentoval/a jedno z vašich hlasování"
-
-msgid "A user commented on a poll you were tagged in"
-msgstr "Uživatel okomentoval hlasování, na kterém jste byli označeni"
-
-#, python-format
-msgid "%(sender_name)s commented on the poll %(object_name)s"
-msgstr "%(sender_name)s okomentoval/a hlasování %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
-msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval hlasování %(object_name)s"
-msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali hlasování %(object_name)s"
-msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali hlasování %(object_name)s"
-msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo hlasování %(object_name)s"
-
-msgid "You were tagged in this poll"
-msgstr "Byli jste označeni v tomto hlasování"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you were tagged in"
-msgstr "%(sender_name)s okomentoval/a hlasování, na kterém jste byli označeni"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s okomentoval/a hlasování, na kterém jste byli označeni, v %(team_name)s"
-
-msgid "A user commented on an poll you voted in"
-msgstr "Uživatel okomentoval hlasování, ve kterém jste hlasovali"
-
-msgid "You voted on this poll"
-msgstr "V tomto hlasování jste hlasovali"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you voted in"
-msgstr "%(sender_name)s okomentoval/a hlasování, ve kterém jste hlasovali"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
-msgstr "%(sender_name)s okomentoval/a hlasování, ve kterém jste hlasovali, v %(team_name)s"
-
-msgid "A user created a new poll in a team you are following"
-msgstr "Uživatel vytvořil nové hlasování v týmu, který sledujete"
-
-#, python-format
-msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
-msgstr "%(sender_name)s vytvořil/a nové hlasování v týmu %(team_name)s (který sledujete)"
-
-#, python-format
-msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
-msgstr "Nové hlasování: \"%(object_name)s\" bylo vytvořeno v týmu %(team_name)s (který sledujete)."
-
-msgid "A user updated a poll you are following"
-msgstr "Uživatel aktualizoval hlasování, které sledujete"
-
-#, python-format
-msgid "%(sender_name)s updated the poll %(object_name)s"
-msgstr "%(sender_name)s aktualizoval/a hlasování %(object_name)s"
-
-msgid "You are following this poll"
-msgstr "Sledujete toto hlasování"
-
-#, python-format
-msgid "%(sender_name)s updated a poll you are following"
-msgstr "%(sender_name)s aktualizoval/a hlasování, které sledujete"
-
-#, python-format
-msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "Hlasování, které sledujete: \"%(object_name)s\", bylo aktualizováno v týmu %(team_name)s."
-
-msgid "A poll you are following was completed"
-msgstr "Hlasování, které sledujete, bylo dokončeno"
-
-#, python-format
-msgid "%(sender_name)s completed the poll %(object_name)s"
-msgstr "%(sender_name)s dokončil/a hlasování %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d polls"
-msgstr "%(sender_name)s dokončil/a %(count)d hlasování"
-
-#, python-format
-msgid "%(sender_name)s completed the poll you are following"
-msgstr "%(sender_name)s dokončil/a hlasování, které sledujete"
-
-#, python-format
-msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
-msgstr "Hlasování \"%(object_name)s\", které sledujete, bylo dokončeno v týmu %(team_name)s."
-
-msgid "A user commented on one a poll you are following"
-msgstr "Uživatel okomentoval hlasování, které sledujete"
-
-#, python-format
-msgid "%(sender_name)s commented on a poll you are following"
-msgstr "%(sender_name)s okomentoval/a hlasování, které sledujete"
-
-msgid "Current Polls"
-msgstr "Aktuální hlasování"
-
-msgid "No current polls"
-msgstr "Žádná aktuální hlasování"
-
-msgid "You must write a description for this poll option!"
-msgstr "K této možnosti hlasování musíte napsat popis!"
-
-msgid "Voting closed"
-msgstr "Hlasování uzavřeno"
-
-msgid "Poll archived"
-msgstr "Hlasování bylo archivováno"
-
-msgid "Multiple options votable"
-msgstr "Je možno zvolit více možností"
-
-msgid "Does this poll allow users to vote on multiple options or just decide for one?"
-msgstr "Umožňuje toto hlasování uživatelům hlasovat pro více možností nebo se jen rozhodnout pro jednu?"
-
-msgid "\"Maybe\" option enabled"
-msgstr "Možnost „Možná“ povolena"
-
-msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
-msgstr "Je možnost možná povolena? Ignorováno a výchozí hodnota je False, pokud je ``multiple_votes==False``"
-
-msgid "Anyone can vote"
-msgstr "Hlasovat může kdokoli"
-
-msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
-msgstr "Je-li nastavena hodnota true, může hlasovat kdokoli, kdo vidí toto hlasování. Pokud je hodnota false, mohou pouze členové skupiny."
-
-msgid "Show voters"
-msgstr "Zobrazit hlasující"
-
-msgid "If true, display a list of which user voted for each option."
-msgstr "Pokud má hodnotu true, zobrazí se seznam uživatelů, kteří hlasovali pro jednotlivé možnosti."
-
-msgid "Winning Option"
-msgstr "Vítězná možnost"
-
-#, python-format
-msgid "Poll: %(poll)s (%(state)s)"
-msgstr "Hlasování: %(poll)s (%(state)s)"
-
-msgid "Poll Option"
-msgstr "Možnost hlasování"
-
-msgid "Poll Options"
-msgstr "Možnosti hlasování"
-
-#, python-format
-msgid "Poll \"%(title)s\" was edited successfully."
-msgstr "Hlasování \"%(title)s\" bylo úspěšně upraveno."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be edited."
-msgstr "Hlasování \"%(title)s\" nelze upravit."
-
-#, python-format
-msgid "Poll \"%(title)s\" was added successfully."
-msgstr "Hlasování \"%(title)s\" bylo úspěšně přidáno."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be added."
-msgstr "Hlasování \"%(title)s\" nelze přidat."
-
-msgid "You should define at least one poll option!"
-msgstr "Měli byste definovat alespoň jednu možnost hlasování!"
-
-msgid "This poll is archived and cannot be edited anymore!"
-msgstr "Toto hlasování je archivováno a již jej nelze upravovat!"
-
-#, python-format
-msgid "Poll \"%(title)s\" was deleted successfully."
-msgstr "Hlasování \"%(title)s\" bylo úspěšně smazáno."
-
-#, python-format
-msgid "Poll \"%(title)s\" could not be deleted."
-msgstr "Hlasování \"%(title)s\" nelze smazat."
-
-msgid "The voting phase for this poll is over. You cannot vote for it any more."
-msgstr "Fáze hlasování pro toto hlasování skončila. Už v něm nemůžete hlasovat."
-
-msgid "In this poll you must vote for exactly one item!"
-msgstr "V tomto hlasování musíte hlasovat přesně pro jednu položku!"
-
-msgid "Invalid action for this poll. The request could not be completed!"
-msgstr "Neplatná akce pro toto hlasování . Požadavek nelze dokončit!"
-
-msgid "This action is not permitted for this poll at this stage!"
-msgstr "V této fázi není tato akce pro toto hlasování povolena!"
-
-msgid "The poll was closed successfully."
-msgstr "Hlasování bylo úspěšně uzavřeno."
-
-msgid "The poll was re-opened successfully."
-msgstr "Hlasování bylo úspěšně znovu otevřeno."
-
-msgid "The poll was archived successfully."
-msgstr "Hlasování bylo úspěšně archivováno."
-
-msgid "Stream"
-msgstr ""
-
-msgctxt "the_app"
-msgid "stream"
-msgstr ""
-
-msgid "My Streams"
-msgstr ""
-
-msgid "Streams"
-msgstr ""
-
-msgid "Models"
-msgstr ""
-
-msgid "Portal IDs"
-msgstr ""
-
-msgid "Last seen"
-msgstr ""
-
-msgid "Special Stream"
-msgstr ""
-
-msgid "Special Group IDs"
-msgstr ""
-
-msgid "You do not have permission to access this stream."
-msgstr ""
-
-msgid "Your stream was added successfully."
-msgstr ""
-
-msgid "Your stream was updated successfully."
-msgstr ""
-
-msgid "Your stream was deleted successfully."
-msgstr ""
-
-msgid "You cannot delete the default stream!"
-msgstr ""
-
-msgctxt "the_app"
-msgid "todo"
-msgstr "úkol"
-
-msgid "A user created a new todo"
-msgstr "Uživatel vytvořil nový úkol"
-
-#, python-format
-msgid "%(sender_name)s created the todo %(object_name)s"
-msgstr "%(sender_name)s vytvořil/a úkol %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s created %(count)d todos"
-msgstr "%(sender_name)s vytvořil/a %(count)d úkolů"
-
-#, python-format
-msgid "%(sender_name)s created a new todo"
-msgstr "%(sender_name)s vytvořil/a nový úkol"
-
-#, python-format
-msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
-msgstr "V %(team_name)s byl vytvořen nový úkol: \"%(object_name)s\"."
-
-msgid "A todo was assigned to me"
-msgstr "Byl mi přidělen úkol"
-
-#, python-format
-msgid "%(sender_name)s assigned the todo %(object_name)s to you"
-msgstr "%(sender_name)s vám přidělil/a úkol %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s assigned %(count)d todos to you"
-msgstr "%(sender_name)s vám přidělil/a %(count)d úkolů"
-
-#, python-format
-msgid "%(sender_name)s assigned a todo to you"
-msgstr "%(sender_name)s vám přidělil/a úkol"
-
-msgid "A todo I created was completed"
-msgstr "Úkol, který jsem vytvořil, byl dokončen"
-
-#, python-format
-msgid "%(sender_name)s completed the todo %(object_name)s"
-msgstr "%(sender_name)s dokončil/a úkol %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s completed %(count)d todos"
-msgstr "%(sender_name)s dokončil/a %(count)d úkolů"
-
-msgid "You created this todo"
-msgstr "Vytvořili jste tento úkol"
-
-#, python-format
-msgid "%(sender_name)s completed your todo"
-msgstr "%(sender_name)s dokončil/a váš úkol"
-
-#, python-format
-msgid "%(sender_name)s completed one of your todos"
-msgstr "%(sender_name)s dokončil/a jeden z vašich úkolů"
-
-msgid "A user commented on one of your todos"
-msgstr "Uživatel okomentoval jeden z vašich úkolů"
-
-#, python-format
-msgid "%(sender_name)s commented on your todo %(object_name)s"
-msgstr "%(sender_name)s okomentoval/a váš úkol %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
-msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval váš úkol %(object_name)s"
-msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali váš úkol %(object_name)s"
-msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali váš úkol %(object_name)s"
-msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo váš úkol %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on your todo"
-msgstr "%(sender_name)s okomentoval/a váš úkol"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your todos"
-msgstr "%(sender_name)s okomentoval/a jeden z vašich úkolů"
-
-msgid "A user commented on a todo you were tagged in"
-msgstr "Uživatel okomentoval úkol, na kterém jste byli označeni"
-
-#, python-format
-msgid "%(sender_name)s commented on the todo %(object_name)s"
-msgstr "%(sender_name)s okomentoval/a úkol %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
-msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval úkol %(object_name)s"
-msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali úkol %(object_name)s"
-msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali úkol %(object_name)s"
-msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo úkol %(object_name)s"
-
-msgid "You were tagged in this todo"
-msgstr "Byli jste označeni v tomto úkolu"
-
-#, python-format
-msgid "%(sender_name)s commented on a todo you were tagged in"
-msgstr "%(sender_name)s okomentoval/a úkol, na kterém jste byli označeni"
-
-#, python-format
-msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
-msgstr "%(sender_name)s okomentoval/a úkol, na kterém jste byli označeni, v %(team_name)s"
-
-msgid "A user commented on a todo you were assigned to"
-msgstr "Uživatel okomentoval úkol, který vám byl přidělen"
-
-#, python-format
-msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
-msgstr "%(sender_name)s okomentoval/a vám přidělený úkol %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
-msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval vám přidělený úkol %(object_name)s"
-msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali vám přidělený úkol %(object_name)s"
-msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali vám přidělený úkol %(object_name)s"
-msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo vám přidělený úkol %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your assigned todos"
-msgstr "%(sender_name)s okomentoval/a jeden z vám přidělených úkolů"
-
-#, python-format
-msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
-msgstr "%(sender_name)s okomentoval/a jeden z vám přidělených úkolů v %(team_name)s"
-
-msgid "A user updated a todo you are following"
-msgstr "Uživatel aktualizoval úkol, který sledujete"
-
-#, python-format
-msgid "%(sender_name)s updated the todo %(object_name)s"
-msgstr "%(sender_name)s aktualizoval/a úkol %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
-msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
-msgstr[0] "%(sender_name)s a %(count_minus_one)d další aktualizoval úkol %(object_name)s"
-msgstr[1] "%(sender_name)s a %(count_minus_one)d další aktualizovali úkol %(object_name)s"
-msgstr[2] "%(sender_name)s a %(count_minus_one)d další aktualizovali úkol %(object_name)s"
-msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších aktualizovalo úkol %(object_name)s"
-
-msgid "You are following this todo"
-msgstr "Sledujete tento úkol"
-
-#, python-format
-msgid "%(sender_name)s updated a todo you are following"
-msgstr "%(sender_name)s aktualizoval/a úkol, který sledujete"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
-msgstr "Úkol, který sledujete: \"%(object_name)s\", byl aktualizován v týmu %(team_name)s."
-
-msgid "A user reassigned a todo you are following"
-msgstr "Uživatel znovu přidělil úkol, který sledujete"
-
-#, python-format
-msgid "%(sender_name)s reassigned the todo %(object_name)s"
-msgstr "%(sender_name)s znovu přidělil/a úkol %(object_name)s"
-
-#, python-format
-msgid "%(sender_name)s reassigned %(count)d todos"
-msgstr "%(sender_name)s znovu přidělil/a %(count)d úkolů"
-
-#, python-format
-msgid "%(sender_name)s reassigned a todo you are following"
-msgstr "%(sender_name)s znovu přidělil/a úkol, který sledujete"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
-msgstr "Úkol, který sledujete: \"%(object_name)s\", byl znovu přidělen v týmu %(team_name)s."
-
-msgid "A user completed a todo you are following"
-msgstr "Uživatel dokončil úkol, který sledujete"
-
-#, python-format
-msgid "%(sender_name)s completed a todo you are following"
-msgstr "%(sender_name)s dokončil/a úkol, který sledujete"
-
-#, python-format
-msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
-msgstr "Úkol, který sledujete: \"%(object_name)s\", byl dokončen v týmu %(team_name)s."
-
-msgid "A user commented on a todo you are following"
-msgstr "Uživatel okomentoval úkol, který sledujete"
-
-#, python-format
-msgid "%(sender_name)s commented on on a todo you are following"
-msgstr "%(sender_name)s okomentoval/a úkol, který sledujete"
-
-msgid "My Todos"
-msgstr "Moje úkoly"
-
-msgid "No todos"
-msgstr "Žádné úkoly"
-
-msgid "Open"
-msgstr "Otevřené"
-
-msgid "Completed"
-msgstr "Dokončené"
-
-msgid "Assigned To"
-msgstr "Přiřazeno komu"
-
-msgid "Priority"
-msgstr "Priority"
-
-msgid "Due date"
-msgstr "Termín do"
-
-msgid "Soonest Due"
-msgstr "S brzkým termínem"
-
-msgid "You are not allowed to assign this Todo entry."
-msgstr "Nemáte oprávnění přidělit tuto položku úkolu."
-
-msgid "Later"
-msgstr "Později"
-
-msgid "Normal"
-msgstr "Normální"
-
-msgid "Important"
-msgstr "Důležité"
-
-msgid "Due by"
-msgstr "Termín do"
-
-msgid "Completed on"
-msgstr "Dokončeno"
-
-msgid "Completed by"
-msgstr "Dokončil/a"
-
-msgid "Assigned to"
-msgstr "Přiřazeno komu"
-
-msgid "List"
-msgstr ""
-
-#, python-format
-msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
-msgstr "Úkol \"%(todo_name)s\" byl přidělen uživateli %(assignee_name)s"
-
-#, python-format
-msgid "Todo \"%(title)s\" was added successfully."
-msgstr "Úkol \"%(title)s\" byl úspěšně přidán."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be added."
-msgstr "Úkol \"%(title)s\" nelze přidat."
-
-msgid "You were trying to add a todo to a todolist that does not exist!"
-msgstr "Pokoušíte se přidat úkol do seznamu úkolů, který neexistuje!"
-
-#, python-format
-msgid "Todo \"%(title)s\" was edited successfully."
-msgstr "Úkol \"%(title)s\" byl úspěšně upraven."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be edited."
-msgstr "Úkol \"%(title)s\" nelze upravit."
-
-#, python-format
-msgid "Todo \"%(title)s\" was deleted successfully."
-msgstr "Úkol \"%(title)s\" byl úspěšně smazán."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be deleted."
-msgstr "Úkol \"%(title)s\" nelze smazat."
-
-#, python-format
-msgid "Todo \"%(title)s\" was assigned successfully."
-msgstr "Úkol \"%(title)s\" byl úspěšně přidělen."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be assigned."
-msgstr "Úkol \"%(title)s\" nelze přidělit."
-
-#, python-format
-msgid "Todo \"%(title)s\" was assigned to You successfully."
-msgstr "Úkol \"%(title)s\" VÁM byl úspěšně přidělen."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be assigned to You."
-msgstr "Úkol \"%(title)s\" VÁM nelze přidělit."
-
-#, python-format
-msgid "Todo \"%(title)s\" was unassigned successfully."
-msgstr "Úkolu \"%(title)s\" bylo úspěšně zrušeno přidělení."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be unassigned."
-msgstr "Úkolu \"%(title)s\" nelze zrušit přidělení."
-
-#, python-format
-msgid "Todo \"%(title)s\" was completed successfully."
-msgstr "Úkol \"%(title)s\" byl úspěšně dokončen."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be completed."
-msgstr "Úkol \"%(title)s\" nelze dokončit."
-
-#, python-format
-msgid "Todo \"%(title)s\" was completed by You successfully."
-msgstr "Úkol \"%(title)s\" byl VÁMI úspěšně dokončen."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be completed by You."
-msgstr "Úkol \"%(title)s\" VÁMI nelze dokončit."
-
-#, python-format
-msgid "Todo \"%(title)s\" was set to incomplete successfully."
-msgstr "Úkol \"%(title)s\" byl úspěšně nastaven jako nedokončený."
-
-#, python-format
-msgid "Todo \"%(title)s\" could not be set to incomplete."
-msgstr "Úkol \"%(title)s\" nelze nastavit jako nedokončený."
-
-#, python-format
-msgid "Todolist \"%(title)s\" was edited successfully."
-msgstr "Seznam úkolů \"%(title)s\" byl úspěšně upraven."
-
-#, python-format
-msgid "Todolist \"%(title)s\" could not be edited."
-msgstr "Seznam úkolů \"%(title)s\" nelze upravit."
-
-#, python-format
-msgid "Todolist \"%(title)s\" was added successfully."
-msgstr "Seznam úkolů \"%(title)s\" byl úspěšně přidán."
-
-#, python-format
-msgid "Todolist \"%(title)s\" could not be added."
-msgstr "Seznam úkolů \"%(title)s\" nelze přidat."
-
-msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
-msgstr "Tuto složku nemůžete smazat, protože nemáte oprávnění smazat jednu nebo více položek, které obsahuje!"
-
-msgid "Sender and Recipient cannot be both undefined."
-msgstr ""
-
-msgid "Visitor's email is in excess."
-msgstr ""
-
-msgid "Visitor's email is missing."
-msgstr ""
-
-msgid "Reading date must be later than sending date."
-msgstr ""
-
-msgid "Deletion date by sender must be later than sending date."
-msgstr ""
-
-msgid "Deletion date by recipient must be later than sending date."
-msgstr ""
-
-msgid "Response date must be later than sending date."
-msgstr ""
-
-msgid "The message cannot be replied without having been read."
-msgstr ""
-
-msgid "Response date must be later than reading date."
-msgstr ""
-
-msgid "Response date cannot be set without at least one reply."
-msgstr ""
-
-#, fuzzy
-#| msgid "This message was sent in a conversation with: "
-msgid "The message cannot be replied without being in a conversation."
-msgstr "Tato zpráva byla odeslána v konverzaci s: "
-
-msgid "Dates"
-msgstr "Data"
-
-#, fuzzy
-#| msgid "Is Moderator"
-msgid "Moderation"
-msgstr "Je moderátor"
-
-#, python-brace-format
-msgid "Some usernames are unknown or no longer active: {users}."
-msgstr ""
-
-#, python-brace-format
-msgid "Ensure this value has at most {limit_value} distinct items (it has {show_value})."
-msgstr ""
-
-#, python-brace-format
-msgid "Ensure this value has at least {limit_value} distinct items (it has {show_value})."
-msgstr ""
-
-#, python-brace-format
-msgid "Some usernames are rejected: {users}."
-msgstr ""
-
-#, fuzzy, python-brace-format
-#| msgid "Your name"
-msgid "{username}"
-msgstr "Vaše jméno"
-
-#, python-brace-format
-msgid "{username} ({reason})"
-msgstr ""
-
-#, python-brace-format
-msgid "Writing to some users is not possible: {users}."
-msgstr ""
-
-msgid "Recipient"
-msgstr "Příjemce"
-
-#, fuzzy
-#| msgid "Additional Recipients"
-msgid "Additional recipients"
-msgstr "Další příjemci"
-
-#, fuzzy
-#| msgid "Additional Recipients"
-msgid "Additional recipient"
-msgstr "Další příjemci"
-
-#, fuzzy
-#| msgid "Message Project"
-msgid "Message Rejected"
-msgstr "Poslat zprávu projektu"
-
-#, fuzzy
-msgid "Your message has been rejected"
-msgstr "Vaše změny byly uloženy."
-
-#, fuzzy
-#| msgid "Message Project"
-msgid "Message Received"
-msgstr "Poslat zprávu projektu"
-
-#, fuzzy
-#| msgid "You have been invited to apply!"
-msgid "You have received a message"
-msgstr "Byli jste pozváni k podání žádosti!"
-
-msgid "Reply Received"
-msgstr ""
-
-#, fuzzy
-#| msgid "You have been invited to apply!"
-msgid "You have received a reply"
-msgstr "Byli jste pozváni k podání žádosti!"
-
-msgid "Pending"
-msgstr ""
-
-#, fuzzy
-#| msgid "Restricted"
-msgid "Rejected"
-msgstr "S omezením"
-
-#, fuzzy
-#| msgid "Everybody"
-msgid "body"
-msgstr "Všichni"
-
-#, fuzzy
-msgid "sender"
-msgstr "Odeslané"
-
-#, fuzzy
-#| msgid "Recipient"
-msgid "recipient"
-msgstr "Příjemce"
-
-#, fuzzy
-#| msgid "Visitor"
-msgid "visitor"
-msgstr "Návštěvník"
-
-#, fuzzy
-msgid "parent message"
-msgstr "Vaše jméno"
-
-#, fuzzy
-#| msgid "No messages"
-msgid "root message"
-msgstr "Žádné zprávy"
-
-#, fuzzy
-#| msgid "Sent at:"
-msgid "sent at"
-msgstr "Posláno na:"
-
-msgid "read at"
-msgstr ""
-
-msgid "replied at"
-msgstr ""
-
-msgid "archived by sender"
-msgstr ""
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "archived by recipient"
-msgstr "Nedefinovaný příjemce."
-
-#, fuzzy
-#| msgid "Delete user account"
-msgid "deleted by sender at"
-msgstr "Smazat uživatelský účet"
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "deleted by recipient at"
-msgstr "Nedefinovaný příjemce."
-
-msgid "status"
-msgstr ""
-
-#, fuzzy
-#| msgid "Is Moderator"
-msgid "moderator"
-msgstr "Je moderátor"
-
-#, fuzzy
-#| msgid "Related to"
-msgid "moderated at"
-msgstr "Souvisí s"
-
-msgid "rejection reason"
-msgstr ""
-
-msgid "Direct Reply Hash"
-msgstr ""
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "message"
-msgstr "zpráva"
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "messages"
-msgstr "zpráva"
-
-#, fuzzy
-#| msgid "Undefined recipient."
-msgid "Undefined sender."
-msgstr "Nedefinovaný příjemce."
-
-#, fuzzy
-#| msgctxt "the_app"
-#| msgid "message"
-msgid "pending message"
-msgstr "zpráva"
-
-#, fuzzy
-msgid "pending messages"
-msgstr "Vaše jméno"
-
-msgid "<me>"
-msgstr ""
-
-msgid "> "
-msgstr ""
-
-#, python-brace-format
-msgid ""
-"\n"
-"\n"
-"{sender} wrote:\n"
-"{body}\n"
-msgstr ""
-
-#, fuzzy, python-brace-format
-msgid "Re: {subject}"
-msgstr "Předmět"
-
-#, fuzzy
-#| msgid "User successfully created!"
-msgid "Message successfully sent."
-msgstr "Uživatel byl úspěšně vytvořen!"
-
-#, fuzzy
-#| msgid "Select at least one object."
-msgid "Message rejected for at least one recipient."
-msgstr "Vyberte alespoň jeden objekt."
-
-msgid "A conference you are attending has been updated"
-msgstr ""
-
-#, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
-msgid "The conference %(object_name)s has been updated"
-msgstr "Nová konference: \"%(object_name)s\" byla oznámena v %(team_name)s."
-
-#, fuzzy
-#| msgid "You are about to deactivate this conference!"
-msgid "You are attending this conference"
-msgstr "Chystáte se deaktivovat tuto konferenci!"
-
-#, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
-msgid "The conference \"%(object_name)s\" was updated."
-msgstr "Nová konference: \"%(object_name)s\" byla oznámena v %(team_name)s."
-
-msgid "The time of a conference you are attending has been updated"
-msgstr ""
-
-#, fuzzy, python-format
-#| msgid "A new conference: \"%(object_name)s\" was announced in %(team_name)s."
-msgid "The time of conference %(object_name)s has been updated"
-msgstr "Nová konference: \"%(object_name)s\" byla oznámena v %(team_name)s."
-
-msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
-msgstr ""
-
-msgid "minute"
-msgstr ""
-
-msgid "minutes"
-msgstr ""
-
-msgid "Select the date range for which you would like statistics"
-msgstr ""
-
-msgid "Cloud Stub"
-msgstr "Cloudový pahýl"
-
-msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
-msgstr ""
-
-msgid "There are no cloud files yet"
-msgstr "Zatím nejsou žádné cloudové soubory"
-
-msgid "Error message:"
-msgstr ""
-
-msgid "No error message supplied."
-msgstr ""
-
-msgid "Pad"
-msgstr "Pad"
-
-msgid "This pad can no longer be edited because its creator has deleted their account."
-msgstr "Tento pad již nelze upravovat, protože jeho autor odstranil svůj účet."
-
-#, python-format
-msgid "Do you really want to delete etherpad „%(pad)s“?"
-msgstr "Opravdu chcete smazat etherpad \"%(pad)s\"?"
-
-msgid "Delete Etherpad"
-msgstr "Smazat Etherpad"
-
-msgid "This document is empty"
-msgstr "Tento dokument je prázdný"
-
-msgid "Pads"
-msgstr "Pady"
-
-msgid "Enter a title for the Pad."
-msgstr "Zadejte název Padu."
-
-msgid "Enter the title for a new Document or Table."
-msgstr "Zadejte název nového dokumentu nebo tabulky."
-
-msgid "Enter the title for a new Document."
-msgstr "Zadejte název nového dokumentu."
-
-msgid "Create Etherpad"
-msgstr "Vytvořit Etherpad"
-
-msgid "Create Ethercalc"
-msgstr "Vytvořit Ethercalc"
-
-#, python-format
-msgid "Do you really want to delete etherpad „%(title)s“?"
-msgstr "Opravdu chcete smazat etherpad \"%(title)s\"?"
-
-msgid "No etherpads have been created yet."
-msgstr "Dosud nebyly vytvořeny žádné etherpady."
-
-msgid "Download CSV"
-msgstr "Stáhnout CSV"
-
-msgid "Download Excel"
-msgstr "Stáhnout Excel"
-
-#, python-format
-msgid ""
-"Hi %(receiver_name)s,\n"
-"\n"
-"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
-"\n"
-"You can find it by following this link: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-"\n"
-"Your %(site_name)s Team."
-msgstr ""
-"Ahoj %(receiver_name)s,\n"
-"\n"
-"%(sender_name)s vytvořil nový etherpad \"%(object_name)s\" v %(team_name)s. \n"
-"\n"
-"Najdete jej kliknutím na tento odkaz: %(object_url)s\n"
-"\n"
-"\n"
-"\n"
-"(Upravit předvolby oznámení můžete pod tímto odkazem: %(notification_settings_url)s )\n"
-"\n"
-"Váš %(site_name)s tým."
-
-msgid "You created a pad"
-msgstr "Vytvořili jste pad"
-
-msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
-msgid "created a Pad"
-msgstr "vytvořil/a Pad"
-
-msgid "There are no etherpads yet"
-msgstr "Zatím neexistují žádné etherpady"
-
 msgid "Would you like to create an event"
 msgstr "Chtěli byste vytvořit událost"
 
@@ -11072,6 +9406,9 @@ msgstr "Hlasování o událostech"
 
 msgid "Enter a title for the new event to be scheduled."
 msgstr "Zadejte název nové události, kterou chcete naplánovat."
+
+msgid "Dates"
+msgstr "Data"
 
 msgid "Please select the available days in the calendar."
 msgstr "Vyberte dostupné dny v kalendáři."
@@ -11216,6 +9553,9 @@ msgstr "Zpět na hlasování o událostech"
 
 msgid "Return to Archived Event Polls"
 msgstr "Zpět na archivovaná hlasování o událostech"
+
+msgid "List"
+msgstr ""
 
 msgid "View"
 msgstr "Náhled"
@@ -11568,6 +9908,197 @@ msgstr "vytvořil/a událost"
 msgid "Show all"
 msgstr "Zobrazit vše"
 
+msgid "Upcoming events"
+msgstr "Nadcházející události"
+
+#, python-format
+msgid "Event \"%(title)s\" was edited successfully."
+msgstr "Událost \"%(title)s\" byla úspěšně upravena."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be edited."
+msgstr "Událost \"%(title)s\" nelze upravit."
+
+msgid "Please use the conference management area to add new workshops!"
+msgstr "Použijte, prosím, řízení konference, abyste přidali nové workshopy!"
+
+msgid "The page you requested is not available for this event at this time."
+msgstr "Požadovaná stránka není pro tuto událost v tuto chvíli k dispozici."
+
+msgid "One of the event suggestions times could not be understood!"
+msgstr "Jednomu z časů návrhů akce nebylo možné porozumět!"
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was edited successfully."
+msgstr "Neplánovaná událost \"%(title)s\" byla úspěšně upravena."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be edited."
+msgstr "Neplánovanou událost \"%(title)s\" nelze upravit."
+
+#, python-format
+msgid "Event \"%(title)s\" was added successfully."
+msgstr "Událost \"%(title)s\" byla úspěšně přidána."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be added."
+msgstr "Událost \"%(title)s\" nelze přidat."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was added successfully."
+msgstr "Neplánovaná událost \"%(title)s\" byla úspěšně přidána."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be added."
+msgstr "Neplánovanou událost \"%(title)s\" nelze přidat."
+
+msgid "You should define at least one date suggestion."
+msgstr "Měli byste definovat alespoň jeden návrh data."
+
+#, python-format
+msgid "Event \"%(title)s\" was deleted successfully."
+msgstr "Událost \"%(title)s\" byla úspěšně smazána."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be deleted."
+msgstr "Událost \"%(title)s\" nelze smazat."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was deleted successfully."
+msgstr "Neplánovaná událost \"%(title)s\" byla úspěšně smazána."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be deleted."
+msgstr "Neplánovanou událost \"%(title)s\" nelze smazat."
+
+#, fuzzy
+#| msgid "Your data was saved successfully!"
+msgid "Your votes were saved successfully."
+msgstr "Vaše data byla úspěšně uložena!"
+
+#, fuzzy
+#| msgid "Poll \"%(title)s\" could not be added."
+msgid "Your votes could not be saved."
+msgstr "Hlasování \"%(title)s\" nelze přidat."
+
+msgid "This is event is already scheduled. You cannot vote for it any more."
+msgstr "Tato událost je již naplánována. Už o ní nemůžete hlasovat."
+
+msgid "The complete request can only be sent via POST!"
+msgstr "Požadavek na dokončení lze zaslat pouze jako PŘÍSPĚVEK!"
+
+msgid "Event cannot be completed: No date was supplied."
+msgstr "Událost nelze dokončit: Nebylo zadáno žádné datum."
+
+msgid "The event was created successfully at the specified date."
+msgstr "Událost byla úspěšně vytvořena k uvedenému datu."
+
+#, fuzzy
+msgid "Upcoming event"
+msgstr "Nadcházející události"
+
+msgid "Your comment was added successfully."
+msgstr "Váš komentář byl úspěšně přidán."
+
+msgid "Your comment was deleted successfully."
+msgstr "Váš komentář byl úspěšně smazán."
+
+msgid "Exchange"
+msgstr ""
+
+msgctxt "the_app"
+msgid "exchange"
+msgstr ""
+
+msgctxt "the_app"
+msgid "file"
+msgstr "soubor"
+
+msgid "A user uploaded a new file"
+msgstr "Uživatel nahrál nový soubor"
+
+#, python-format
+msgid "%(sender_name)s uploaded the file %(object_name)s"
+msgstr "%(sender_name)s nahrál/a soubor %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s uploaded %(count)d files"
+msgstr "%(sender_name)s nahrál/a %(count)d souborů"
+
+#, python-format
+msgid "%(sender_name)s created a new file"
+msgstr "%(sender_name)s vytvořil/a nový soubor"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "V %(team_name)s byl vytvořen nový soubor: \"%(object_name)s\"."
+
+msgid "A user uploaded a new file in a team you are following"
+msgstr "Uživatel vytvořil nový soubor v týmu, který sledujete"
+
+#, python-format
+msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s vytvořil/a nový soubor v %(team_name)s (který sledujete)"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Nový soubor: \"%(object_name)s\" byl vytvořen v %(team_name)s (který sledujete)."
+
+msgid "Latest Files"
+msgstr "Nejnovější soubory"
+
+msgid "No files"
+msgstr "Žádné soubory"
+
+msgid "Pictures"
+msgstr "Obrázky"
+
+msgid "Documents"
+msgstr "Dokumenty"
+
+msgid "Audio Files"
+msgstr "Audio soubory"
+
+msgid "Videos"
+msgstr "Videa"
+
+msgid "File Type"
+msgstr "Typ souboru"
+
+msgid "File Name"
+msgstr "Název souboru"
+
+msgid "File Name (descending)"
+msgstr "Název souboru (klesající řazení)"
+
+msgid "Smallest Files"
+msgstr "Nejmenší soubory"
+
+msgid "Largest Files"
+msgstr "Největší soubory"
+
+msgid "The given URL does not seem to be valid."
+msgstr "Zdá se, že zadaná adresa URL není platná."
+
+msgid "Must supply either a URL or File"
+msgstr "Musí se zadat adresa URL nebo soubor"
+
+msgid "Is URL Link"
+msgstr "Je odkaz URL"
+
+msgid "Uploaded by"
+msgstr "Nahrál/a"
+
+msgid "Uploaded on"
+msgstr "Nahráno"
+
+msgid "No files selected."
+msgstr "Nejsou vybrány žádné soubory."
+
+msgctxt "special_folder_type"
+msgid "Attachments"
+msgstr "Přílohy"
+
 msgid "The URL you have entered does not seem to be valid!"
 msgstr "Zdá se, že URL, které jste zadali, není platné!"
 
@@ -11680,6 +10211,205 @@ msgstr "Nejnovější soubory"
 
 msgid "There are no files  yet"
 msgstr "Zatím nejsou žádné soubory"
+
+msgid "File does not exist or you are not allowed to delete it."
+msgstr "Soubor neexistuje nebo jej nesmíte smazat."
+
+#, python-format
+msgid "A problem occurred during export. The following file is missing: %(filename)s."
+msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
+msgstr[0] "Během exportu došlo k problému. Chybí následující soubor: %(filename)s."
+msgstr[1] "Během exportu došlo k problému. Chybí následující soubory: %(filename)s."
+msgstr[2] "Během exportu došlo k problému. Chybí následující soubory: %(filename)s."
+msgstr[3] "Během exportu došlo k problému. Chybí následující soubory: %(filename)s."
+
+msgid "Invalid request."
+msgstr "Neplatný požadavek."
+
+#, python-format
+msgid "File \"%(title)s\" was updated successfully."
+msgstr "Soubor \"%(title)s\" byl úspěšně aktualizován."
+
+#, python-format
+msgid "File \"%(title)s\" could not be updated."
+msgstr "Soubor \"%(title)s\" nelze aktualizovat."
+
+msgid "Downloading failed, the target object was not a folder!"
+msgstr "Stahování se nezdařilo, cílovým objektem nebyla složka!"
+
+msgid "Canceled the download because there seem to be no files in this folder."
+msgstr "Stahování bylo zrušeno, protože se zdá, že v této složce nejsou žádné soubory."
+
+msgid "Internal Error: Group not Found"
+msgstr "Interní chyba: Skupina nenalezena"
+
+msgid "Permission for upload denied"
+msgstr "Povolení pro nahrání odmítnuto"
+
+msgid "The uploaded file was invalid."
+msgstr "Nahraný soubor byl neplatný."
+
+#, python-format
+msgid "%(count)d File was added successfully."
+msgid_plural "%(count)d Files were added successfully."
+msgstr[0] "%(count)d soubor byl úspěšně přidán."
+msgstr[1] "%(count)d soubory byly úspěšně přidány."
+msgstr[2] "%(count)d soubory byly úspěšně přidány."
+msgstr[3] "%(count)d souborů byly úspěšně přidáno."
+
+msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
+msgstr "Soubor, který jste nahrál, byl příliš velký nebo pro tento typ souboru nebylo povoleno nahrání!"
+
+msgctxt "the_app"
+msgid "marketplace"
+msgstr "tržiště"
+
+msgid "A user created a new offer"
+msgstr "Uživatel vytvořil novou nabídku"
+
+#, python-format
+msgid "%(sender_name)s created the offer %(object_name)s"
+msgstr "%(sender_name)s vytvořil/a nabídku %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d offers"
+msgstr "%(sender_name)s vytvořil/a %(count)d nabídek"
+
+#, python-format
+msgid "%(sender_name)s created a new offer"
+msgstr "%(sender_name)s vytvořil/a novou nabídku"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "V %(team_name)s byla vytvořena nová nabídka: \"%(object_name)s\"."
+
+msgid "One of your offers expired"
+msgstr "Platnost jedné z vašich nabídek vypršela"
+
+#, python-format
+msgid "Your offer %(object_name)s expired"
+msgstr "Platnost vaší nabídky %(object_name)s vypršela"
+
+#, python-format
+msgid "%(count)d of your offers expired"
+msgstr "%(count)d z vašich nabídek má vypršelou platnost"
+
+msgid "Your offer has expired"
+msgstr "Platnost vaší nabídky vypršela"
+
+#, python-format
+msgid "Offer \"%(object_name)s\" has expired."
+msgstr "Platnost nabídky \"%(object_name)s\" vypršela."
+
+msgid "A user commented on one of your offers"
+msgstr "Uživatel okomentoval jednu z vašich nabídek"
+
+#, python-format
+msgid "%(sender_name)s commented on your offer %(object_name)s"
+msgstr "%(sender_name)s okomentoval/a vaši nabídku %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
+msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval vaši nabídku %(object_name)s"
+msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali vaši nabídku %(object_name)s"
+msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali vaši nabídku %(object_name)s"
+msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo vaši nabídku %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your offer"
+msgstr "%(sender_name)s okomentoval/a vaši nabídku"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your offers"
+msgstr "%(sender_name)s okomentoval/a jednu z vašich nabídek"
+
+msgid "A user commented on an offer you were tagged in"
+msgstr "Uživatel okomentoval nabídku, na které jste byli označeni"
+
+#, python-format
+msgid "%(sender_name)s commented on the offer %(object_name)s"
+msgstr "%(sender_name)s okomentoval/a nabídku %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
+msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval nabídku %(object_name)s"
+msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali nabídku %(object_name)s"
+msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali nabídku %(object_name)s"
+msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo nabídku %(object_name)s"
+
+msgid "You were tagged in this offer"
+msgstr "Byli jste označeni v této nabídce"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in"
+msgstr "%(sender_name)s okomentoval/a nabídku, na které jste byli označeni"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s okomentoval/a nabídku, na které jste byli označeni, v %(team_name)s"
+
+msgid "A user created a new offer in a team you are following"
+msgstr "Uživatel vytvořil novou nabídku v týmu, který sledujete"
+
+#, python-format
+msgid "%(sender_name)s created a new offer in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s vytvořil/a novou nabídku v týmu %(team_name)s (který sledujete)"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Nová nabídka: \"%(object_name)s\" byla vytvořena v týmu %(team_name)s (který sledujete)."
+
+msgid "A user updated an offer you are following"
+msgstr "Uživatel aktualizoval nabídku, kterou sledujete"
+
+#, python-format
+msgid "%(sender_name)s updated the offer %(object_name)s"
+msgstr "%(sender_name)s aktualizoval/a nabídku %(object_name)s"
+
+msgid "You are following this offer"
+msgstr "Sledujete tuto nabídku"
+
+#, python-format
+msgid "%(sender_name)s updated an offer you are following"
+msgstr "%(sender_name)s aktualizoval/a nabídku, kterou sledujete"
+
+#, python-format
+msgid "An offer you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Nabídka, kterou sledujete: \"%(object_name)s\", byla aktualizována v týmu %(team_name)s."
+
+msgid "A user commented on an offer you are following"
+msgstr "Uživatel okomentoval nabídku, kterou sledujete"
+
+#, python-format
+msgid "%(sender_name)s commented on on an offer you are following"
+msgstr "%(sender_name)s okomentoval/a nabídku, kterou sledujete"
+
+msgid "Current Offers"
+msgstr "Aktuální nabídky"
+
+msgid "No current offers"
+msgstr "Žádné aktuální nabídky"
+
+msgid "Order Key"
+msgstr "Klíč řazení"
+
+msgid "Looking for"
+msgstr "Hledáme"
+
+msgid "Offering"
+msgstr "Nabízíme"
+
+msgid "Offer currently active?"
+msgstr "Nabídka aktuálně aktivní?"
+
+msgid "Offer Category"
+msgstr "Kategorie nabídky"
+
+#, python-format
+msgid "Offer: %(offer)s (%(type)s)"
+msgstr "Nabídka: %(offer)s (%(type)s)"
 
 msgid "Back to Offers"
 msgstr "Zpět na nabídky"
@@ -11811,11 +10541,102 @@ msgstr "vytvořil/a nabídku"
 msgid "There are no current offers"
 msgstr "Žádné aktuální nabídky"
 
+#, python-format
+msgid "Offer \"%(title)s\" was edited successfully."
+msgstr "Nabídka \"%(title)s\" byla úspěšně upravena."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be edited."
+msgstr "Nabídku \"%(title)s\" nelze upravit."
+
+#, python-format
+msgid "Offer \"%(title)s\" was added successfully."
+msgstr "Nabídka \"%(title)s\" byla úspěšně přidána."
+
+#, python-format
+msgid "Offer \"%(title)s\" was saved successfully, but is not active yet."
+msgstr "Nabídka \"%(title)s\" byla úspěšně přidána, ale ještě není aktivní."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be added."
+msgstr "Nabídku \"%(title)s\" nelze přidat."
+
+#, python-format
+msgid "Offer \"%(title)s\" was deleted successfully."
+msgstr "Nabídka \"%(title)s\" byla úspěšně smazána."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be deleted."
+msgstr "Nabídku \"%(title)s\" nelze smazat."
+
+msgid "The offer you requested is no longer active. Sorry!"
+msgstr "Požadovaná nabídka již není aktivní. Je nám líto!"
+
+msgid "Invalid action for this offer. The request could not be completed!"
+msgstr "Neplatná akce pro tuto nabídku. Požadavek nelze dokončit!"
+
+msgid "The offer is already active"
+msgstr "Nabídka je již aktivní"
+
+msgid "The offer is already deactivated"
+msgstr "Nabídka je již deaktivována"
+
+msgid "The offer was deactivated successfully."
+msgstr "Nabídka \"%(title)s\" byla úspěšně deaktivována."
+
+msgid "The offer was reactivated successfully."
+msgstr "Nabídka \"%(title)s\" byla úspěšně znovu aktivována."
+
+msgid "The offer was activated successfully."
+msgstr "Nabídka \"%(title)s\" byla úspěšně aktivována."
+
+msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
+msgstr ""
+
+msgctxt "the_app"
+msgid "Chat"
+msgstr ""
+
+msgctxt "the_app"
+msgid "message"
+msgstr "zpráva"
+
+msgid "Chat"
+msgstr ""
+
+msgid "Only Administrators may send a message to this project/group!"
+msgstr "Pouze administrátoři mohou poslat zprávu tomuto projektu/skupině!"
+
+msgid "Additional Recipients"
+msgstr "Další příjemci"
+
+msgid "Undefined recipient."
+msgstr "Nedefinovaný příjemce."
+
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
 msgstr "Ke zprávám můžete připojit soubory a obrázky, pouze pokud jste členem fóra. Můžete se k němu připojit zde:"
 
 msgid "The legacy messaging app is no longer in use. You can view all of your old messages, but you cannot write new ones. Please use the new messaging app in the navigation from now on!"
 msgstr "Starší aplikace pro zasílání zpráv se již nepoužívá. Můžete zobrazit všechny své staré zprávy, ale nemůžete psát nové. Od této chvíle prosím používejte v navigaci novou aplikaci pro zasílání zpráv!"
+
+msgid "You can contact the group administration via this form. Write your message in the field below and than you will be redirected to the chat with group admins."
+msgstr ""
+
+msgid "You can contact the project administration via this form. Write your message in the field below and than you will be redirected to the chat with project admins."
+msgstr ""
+
+#, fuzzy
+msgid "What is your message?"
+msgstr "Vaše jméno"
+
+#, fuzzy
+#| msgid "Change it here..."
+msgid "Write it here"
+msgstr "Změňte to zde..."
+
+#, python-format
+msgid "Contact the administration of %(group_name)s:"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -11964,6 +10785,9 @@ msgstr "Napsat"
 msgid "Reply"
 msgstr "Odpovědět"
 
+msgid "Recipient"
+msgstr "Příjemce"
+
 msgid "Conversation"
 msgstr "Konverzace"
 
@@ -11993,6 +10817,180 @@ msgstr "Odpovědět uživateli %(sender_name)s"
 #, python-format
 msgid "Reply to all %(adressee_count)s"
 msgstr "Odpovědět všem %(adressee_count)s"
+
+msgid "Your reply could not be matched to an existing message."
+msgstr "Vaši odpověď nelze přiřadit k existující zprávě."
+
+msgid "An internal error occured."
+msgstr "Došlo k interní chybě."
+
+msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
+msgstr "E-mailová adresa, ze které jste poslali odpověď, není adresa spojená s vaším uživatelským účtem. Přímé odpovědi prosím zasílejte pouze z e-mailové adresy, pod kterou jste se na webu zaregistrovali!"
+
+msgid "There was an error when processing your message text!"
+msgstr "Při zpracování textu vaší zprávy došlo k chybě!"
+
+msgid "Your direct reply failed!"
+msgstr "Vaše přímá odpověď se nezdařila!"
+
+msgid "Select at least one object."
+msgstr "Vyberte alespoň jeden objekt."
+
+msgid "Messages or conversations successfully archived."
+msgstr "Zprávy nebo konverzace byly úspěšně archivovány."
+
+msgid "Messages or conversations successfully deleted."
+msgstr "Zprávy nebo konverzace byly úspěšně smazány."
+
+msgid "Messages were marked as read."
+msgstr "Zprávy byly označeny jako přečtené."
+
+msgid "Messages or conversations successfully recovered."
+msgstr "Zprávy nebo konverzace byly úspěšně obnoveny."
+
+msgid "Notes"
+msgstr "Poznámky"
+
+msgctxt "the_app"
+msgid "note"
+msgstr "poznámka"
+
+msgid "A user commented on a news post"
+msgstr "Uživatel okomentoval novinku"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post"
+msgstr "%(sender_name)s okomentoval/a novinku"
+
+msgid "A user commented on one of your news posts"
+msgstr "Uživatel okomentoval jednu z vašich novinku"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post %(object_name)s"
+msgstr "%(sender_name)s okomentoval/a vaši novinku %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
+msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval vaši novinku %(object_name)s"
+msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali vaši novinku %(object_name)s"
+msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali vaši novinku %(object_name)s"
+msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo vaši novinku %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post"
+msgstr "%(sender_name)s okomentoval/a vaši novinku"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts"
+msgstr "%(sender_name)s okomentoval/a jednu z vašich novinek"
+
+msgid "A user commented on a news posts you commented in"
+msgstr "Uživatel okomentoval novinky, které jste komentovali"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
+msgstr "%(sender_name)s okomentoval/a novinku %(object_name)s, kterou jste komentovali"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
+msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval novinku %(object_name)s, kterou jste komentovali"
+msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali novinku %(object_name)s, kterou jste komentovali"
+msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali novinku %(object_name)s, kterou jste komentovali"
+msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo novinku %(object_name)s, kterou jste komentovali"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in"
+msgstr "%(sender_name)s okomentoval/a novinku, kterou jste komentovali"
+
+msgid "A user created a news post"
+msgstr "Uživatel vytvořil novinku"
+
+#, python-format
+msgid "%(sender_name)s created the news post %(object_name)s"
+msgstr "%(sender_name)s vytvořil/a novinku %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d news posts"
+msgstr "%(sender_name)s vytvořil/a %(count)d novinek"
+
+#, python-format
+msgid "%(sender_name)s created a new news post"
+msgstr "%(sender_name)s vytvořil/a novou novinku"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s:"
+msgstr "\"%(sender_name)s\" zveřejnil/a v týmu %(team_name)s:"
+
+msgid "A user created a news post in a team you are following"
+msgstr "Uživatel vytvořil novinku v týmu, který sledujete"
+
+#, python-format
+msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s vytvořil/a novinku v týmu %(team_name)s (který sledujete)"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
+msgstr "%(sender_name)s zveřejnil/a v týmu %(team_name)s: (který sledujete)"
+
+msgid "A user updated a news post"
+msgstr "Uživatel aktualizoval novinku"
+
+#, python-format
+msgid "%(sender_name)s updated the news post %(object_name)s"
+msgstr "%(sender_name)s aktualizoval/a novinku %(object_name)s"
+
+msgid "You are following this news post"
+msgstr "Sledujete tuto novinku"
+
+#, python-format
+msgid "%(sender_name)s updated a news post you are following"
+msgstr "%(sender_name)s aktualizoval/a novinku, kterou sledujete"
+
+#, python-format
+msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
+msgstr "Novinka od %(sender_name)s, kterou sledujete, byla aktualizována %(team_name)s:"
+
+msgid "A user commented on a news post you are following"
+msgstr "Uživatel okomentoval novinku, kterou sledujete"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s"
+msgstr "%(sender_name)s okomentoval/a novinku %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
+msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval novinku %(object_name)s"
+msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali novinku %(object_name)s"
+msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali novinku %(object_name)s"
+msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo novinku %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on a news posts you are following"
+msgstr "%(sender_name)s okomentoval/a novinku, kterou sledujete"
+
+msgid "No news"
+msgstr "Žádné novinky"
+
+msgid "Write a news post"
+msgstr "Napsat novinku"
+
+msgid "News stream"
+msgstr "Stream novinek"
+
+msgid "Popularity"
+msgstr "Popularita"
+
+msgid "Facebook Share"
+msgstr "Sdílet na Facebooku"
+
+msgid "Note Item"
+msgstr "Položka poznámky"
+
+msgid "Note Items"
+msgstr "Položky poznámky"
 
 msgctxt "the_verb"
 msgid "Comment"
@@ -12168,6 +11166,128 @@ msgctxt "This appears next to new items in the timeline, as in '<Jane> created a
 msgid "added a post"
 msgstr "přidal/a příspěvek"
 
+msgid "Your news post was added successfully."
+msgstr "Vaše novinka byla úspěšně přidána."
+
+msgid "Your news post was deleted successfully."
+msgstr "Vaše novinka byla úspěšně smazána."
+
+msgid "Your news post was edited successfully."
+msgstr "Vaše novinka byla úspěšně upravena."
+
+msgid "You are seeing this alert because you created this content."
+msgstr "Toto upozornění se vám zobrazuje, protože jste vytvořili tento obsah."
+
+msgid "You are seeing this alert because you are following the item's project or group."
+msgstr "Toto upozornění se vám zobrazuje, protože sledujete projekt nebo skupinu položky."
+
+msgid "You are seeing this alert because you are following this item."
+msgstr "Toto upozornění se vám zobrazuje, protože sledujete tuto položku."
+
+msgctxt "the_app"
+msgid "notifications"
+msgstr "oznámení"
+
+#, python-format
+msgid "Your daily digest for %(portal_name)s"
+msgstr "Váš denní přehled pro %(portal_name)s"
+
+msgid "This is what happened during the last day!"
+msgstr "To se stalo během posledního dne!"
+
+#, python-format
+msgid "Your weekly digest for %(portal_name)s"
+msgstr "Váš týdenní souhrn pro %(portal_name)s"
+
+msgid "This is what happened during the last week!"
+msgstr "To se stalo během minulého týdne!"
+
+msgctxt "notification frequency"
+msgid "Never"
+msgstr "Nikdy"
+
+msgctxt "notification frequency"
+msgid "Immediately"
+msgstr "Okamžitě"
+
+msgctxt "notification frequency"
+msgid "Daily"
+msgstr "Denně"
+
+msgctxt "notification frequency"
+msgid "Weekly"
+msgstr "Týdně"
+
+msgid "Notification Preference for User"
+msgstr "Předvolby oznámení pro uživatele"
+
+msgid "Notification Preference"
+msgstr "Předvolba oznámení"
+
+msgid "Multi Notification ID"
+msgstr "ID multi oznámení"
+
+msgid "Multi Notification Preference"
+msgstr "Předvolba multi oznámení"
+
+msgid "Multi Notification Preferences"
+msgstr "Předvolby multi oznámení"
+
+msgid "User who caused this notification event"
+msgstr "Uživatel, který způsobil tuto událost oznámení"
+
+msgid "Audience"
+msgstr "Publikum"
+
+msgid "Owner of the alert"
+msgstr "Vlastník výstrahy"
+
+msgid "Alert Reason key"
+msgstr "Klíč důvodu výstrahy"
+
+msgid "Last user who caused this notification event"
+msgstr "Poslední uživatel, který způsobil tuto událost oznámení"
+
+msgid "Alert State"
+msgstr "Stav výstrahy"
+
+msgid "You are following this content or its Project or Group"
+msgstr "Sledujete tento obsah nebo jeho projekt nebo skupinu"
+
+msgid "All notifications"
+msgstr "Všechna oznámení"
+
+msgid "No notifications"
+msgstr "Žádná oznámení"
+
+msgid "For content that I am following, I wish to receive notification emails"
+msgstr "U obsahu, který sleduji, si přeji dostávat e-maily s oznámeními"
+
+msgid "You are getting this notification because you are subscribed to these kinds of events in your project or group."
+msgstr "Toto oznámení dostáváte, protože jste přihlášeni k odběru těchto druhů událostí ve vašem projektu nebo skupině."
+
+msgid "You are getting this notification because you are an administrator of this project or group."
+msgstr "Toto oznámení dostáváte, protože jste správcem tohoto projektu nebo skupiny."
+
+msgid "You are getting this notification because you are an administrator of this portal."
+msgstr "Toto oznámení dostáváte, protože jste správcem tohoto portálu."
+
+msgid "You are getting this email because you are subscribed to one or more daily notifications."
+msgstr "Tento e-mail jste obdrželi, protože jste přihlášeni k odběru jednoho nebo více denních oznámení."
+
+msgid "You are getting this email because you are subscribed to one or more weekly notifications."
+msgstr "Tento e-mail jste obdrželi, protože jste přihlášeni k odběru jednoho nebo více týdenních oznámení."
+
+msgid "New item"
+msgstr "Nová položka"
+
+#, python-format
+msgid "View on %(portal_name)s"
+msgstr "Zobrazit na %(portal_name)s"
+
+msgid "Untitled"
+msgstr "Nepojmenované"
+
 msgid "Select which notifications you would like to receive for each group or project you are involved in."
 msgstr "Vyberte oznámení, která chcete dostávat pro každou skupinu nebo projekt, do kterého jste zapojeni."
 
@@ -12224,6 +11344,33 @@ msgstr "Obnovit do základního nastavení"
 
 msgid "This will reset all of your notification preferences to their default setting. Are you sure you wish to do that?"
 msgstr "Tím se obnoví výchozí nastavení všech vašich předvoleb oznámení. Opravdu to chcete udělat?"
+
+msgid "Your notification preferences were updated successfully."
+msgstr "Vaše předvolby oznámení byly úspěšně aktualizovány."
+
+msgid "Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!"
+msgstr ""
+
+msgid "Your notifications preferences were reset to default!"
+msgstr "Vaše předvolby oznámení byly obnoveny na výchozí nastavení!"
+
+msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
+msgstr ""
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully signed in as {}."
+msgstr "Uživatelský účet byl úspěšně deaktivován"
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Successfully connected account."
+msgstr "Uživatelský účet byl úspěšně deaktivován"
+
+#, fuzzy
+#| msgid "Successfully removed user"
+msgid "Successfully removed connection."
+msgstr "Uživatel byl úspěšně odebrán"
 
 #, fuzzy
 msgid "Set password"
@@ -12351,11 +11498,6 @@ msgstr ""
 
 msgid " This data we received from your WECHANGE account"
 msgstr ""
-
-#, fuzzy
-#| msgid "Last name"
-msgid "last name"
-msgstr "Příjmení"
 
 msgid "Your Avatar and other settings from your profile were also copied."
 msgstr ""
@@ -12485,6 +11627,103 @@ msgstr ""
 #| msgid "Log in with %(portal_name)s"
 msgid "Login with %(provider_id)s"
 msgstr "Přihlásit se pomocí %(portal_name)s"
+
+#, fuzzy
+#| msgid "Organization"
+msgctxt "the_app"
+msgid "organization"
+msgstr "Organizace"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization membership"
+msgstr "Organizace"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization memberships"
+msgstr "Organizace"
+
+#, fuzzy
+#| msgid "Team Invite for Unregistered User"
+msgid "Organization Invite for Unregistered User"
+msgstr "Pozvánka do týmu pro neregistrovaného uživatele"
+
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Organization Invites for Unregistered Users"
+msgstr "Pozvánky do týmu pro neregistrované uživatele"
+
+#, fuzzy
+#| msgid "Assigned organizations"
+msgid "Civil society organization"
+msgstr "Přidělené organizace"
+
+msgid "Company (commercial)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Public voting"
+msgid "Public institution"
+msgstr "Veřejné hlasování"
+
+#, fuzzy
+#| msgid "Other teams"
+msgid "Other"
+msgstr "Jiné týmy"
+
+#, fuzzy
+#| msgid "Remove organization"
+msgid "Name of the organization"
+msgstr "Odebrat organizaci"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Organization type"
+msgstr "Organizace"
+
+#, fuzzy
+#| msgid "Logout"
+msgid "Logo"
+msgstr "Odhlásit se"
+
+#, fuzzy
+#| msgid "Email address"
+msgid "Email Address"
+msgstr "E-mailová adresa"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Cosinnus Organization"
+msgstr "Organizace"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Cosinnus Organizations"
+msgstr "Organizace"
+
+msgid "CosinnusOrganizationSocialMedia"
+msgstr ""
+
+#, fuzzy
+#| msgid "CosinnusLocation"
+msgid "CosinnusOrganizationLocation"
+msgstr "CosinnusLocation"
+
+#, fuzzy
+#| msgid "CosinnusLocations"
+msgid "CosinnusOrganizationLocations"
+msgstr "CosinnusLocations"
+
+#, fuzzy
+#| msgid "Organization"
+msgid "Organization group"
+msgstr "Organizace"
+
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization groups"
+msgstr "Organizace"
 
 #, fuzzy, python-format
 #| msgid "%(team_name)s - Assigned organizations"
@@ -12673,10 +11912,285 @@ msgstr ""
 msgid "This organization should be made publicly findable via other platforms."
 msgstr "Tento projekt bude nastaven jako veřejně viditelný přes jiné platformy."
 
+msgid "Is your organization open for cooperation in the funding program?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Team Invites for Unregistered Users"
+msgid "Organization is open for future projects."
+msgstr "Pozvánky do týmu pro neregistrované uživatele"
+
 #, fuzzy, python-format
 #| msgid "Users in team %(group)s"
 msgid "Users in organization %(group)s"
 msgstr "Uživatelé v týmu %(group)s"
+
+#, fuzzy, python-format
+#| msgid "Project/group %(group)s had already been invited and has now been assigned immediately!"
+msgid "Project/group %(name)s had already requested and has now been accepted."
+msgstr "Projekt/skupina %(group)s již byl pozván(a) a okamžitě byl(a) přidělen(a)!"
+
+#, fuzzy, python-format
+#| msgid "User %(username)s was successfully invited!"
+msgid "Project/group %(name)s was successfully invited."
+msgstr "Uživatel %(username)s byl úspěšně pozván!"
+
+#, fuzzy, python-format
+#| msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
+msgid "Your join request was withdrawn from organization “%(name)s” successfully."
+msgstr "Vaše žádost o připojení byla úspěšně stažena z %(team_type)s “%(team_name)s”."
+
+#, fuzzy, python-format
+#| msgid "You have declined the invitation to %(team_type)s “%(team_name)s”."
+msgid "You have declined the invitation to organization “%(name)s”."
+msgstr "Odmítli jste pozvání do %(team_type)s “%(team_name)s”."
+
+#, fuzzy, python-format
+#| msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
+msgid "Your project/group is now assigned to the organization “%(name)s”. Welcome!"
+msgstr "Nyní jste členem %(team_type)s “%(team_name)s”. Vítejte!"
+
+#, fuzzy, python-format
+#| msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
+msgid "Your request was withdrawn from organization \"%(name)s\" successfully."
+msgstr "Váš požadavek na připojení byl úspěšně stažen z %(team_type)s \"%(team_name)s\"."
+
+#, fuzzy, python-format
+#| msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
+msgid "Your invitation to project/group \"%(name)s\" was withdrawn successfully."
+msgstr "Vaše pozvánka pro uživatele \"%(username)s\" byla úspěšně stažena."
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Project/group \"%(name)s\" is no longer assigned."
+msgstr "Uživatel \"%(username)s\" již není členem."
+
+#, fuzzy
+#| msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
+msgid "Sorry, only portal administrators can create Organizations! You can either create a Project, or write a message to one of the administrators to create a Organization for you. Below you can find a listing of all administrators."
+msgstr "Je nám líto, skupiny mohou vytvářet pouze správci portálu! Můžete buď vytvořit projekt, nebo napsat zprávu některému ze správců a vytvořit pro vás skupinu. Níže naleznete seznam všech správců."
+
+#, fuzzy, python-format
+#| msgid "Event \"%(title)s\" was edited successfully."
+msgid "Organization \"%(name)s\" was created successfully."
+msgstr "Událost \"%(title)s\" byla úspěšně upravena."
+
+#, fuzzy
+#| msgid "Your idea was deleted successfully."
+msgid "Your organization was deleted successfully."
+msgstr "Váš nápad byl úspěšně smazán."
+
+msgctxt "the_app"
+msgid "poll"
+msgstr "hlasování"
+
+msgid "A user created a new poll"
+msgstr "Uživatel vytvořil nové hlasování"
+
+#, python-format
+msgid "%(sender_name)s created the poll %(object_name)s"
+msgstr "%(sender_name)s vytvořil/a hlasování %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d polls"
+msgstr "%(sender_name)s vytvořil/a %(count)d hlasování"
+
+#, python-format
+msgid "%(sender_name)s created a new poll"
+msgstr "%(sender_name)s vytvořil/a nové hlasování"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "V %(team_name)s bylo vytvořeno nové hlasování: \"%(object_name)s\"."
+
+msgid "A poll you voted on was completed"
+msgstr "Hlasování, ve kterém jste hlasovali, bylo dokončeno"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
+msgstr "%(sender_name)s dokončil/a hlasování %(object_name)s, ve kterém jste hlasovali"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls you voted on"
+msgstr "%(sender_name)s dokončil/a %(count)d hlasování, ve kterých jste hlasovali"
+
+#, python-format
+msgid "%(sender_name)s completed the poll"
+msgstr "%(sender_name)s dokončil/a hlasování"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Hlasování \"%(object_name)s\" v týmu %(team_name)s bylo dokončeno."
+
+msgid "A user commented on one of your polls"
+msgstr "Uživatel okomentoval jedno z vašich hlasování"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll %(object_name)s"
+msgstr "%(sender_name)s okomentoval/a vaše hlasování %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
+msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval vaše hlasování %(object_name)s"
+msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali vaše hlasování %(object_name)s"
+msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali vaše hlasování %(object_name)s"
+msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo vaše hlasování %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll"
+msgstr "%(sender_name)s okomentoval/a vaše hlasování"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls"
+msgstr "%(sender_name)s okomentoval/a jedno z vašich hlasování"
+
+msgid "A user commented on a poll you were tagged in"
+msgstr "Uživatel okomentoval hlasování, na kterém jste byli označeni"
+
+#, python-format
+msgid "%(sender_name)s commented on the poll %(object_name)s"
+msgstr "%(sender_name)s okomentoval/a hlasování %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
+msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval hlasování %(object_name)s"
+msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali hlasování %(object_name)s"
+msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali hlasování %(object_name)s"
+msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo hlasování %(object_name)s"
+
+msgid "You were tagged in this poll"
+msgstr "Byli jste označeni v tomto hlasování"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in"
+msgstr "%(sender_name)s okomentoval/a hlasování, na kterém jste byli označeni"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s okomentoval/a hlasování, na kterém jste byli označeni, v %(team_name)s"
+
+msgid "A user commented on an poll you voted in"
+msgstr "Uživatel okomentoval hlasování, ve kterém jste hlasovali"
+
+msgid "You voted on this poll"
+msgstr "V tomto hlasování jste hlasovali"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in"
+msgstr "%(sender_name)s okomentoval/a hlasování, ve kterém jste hlasovali"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
+msgstr "%(sender_name)s okomentoval/a hlasování, ve kterém jste hlasovali, v %(team_name)s"
+
+msgid "A user created a new poll in a team you are following"
+msgstr "Uživatel vytvořil nové hlasování v týmu, který sledujete"
+
+#, python-format
+msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s vytvořil/a nové hlasování v týmu %(team_name)s (který sledujete)"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Nové hlasování: \"%(object_name)s\" bylo vytvořeno v týmu %(team_name)s (který sledujete)."
+
+msgid "A user updated a poll you are following"
+msgstr "Uživatel aktualizoval hlasování, které sledujete"
+
+#, python-format
+msgid "%(sender_name)s updated the poll %(object_name)s"
+msgstr "%(sender_name)s aktualizoval/a hlasování %(object_name)s"
+
+msgid "You are following this poll"
+msgstr "Sledujete toto hlasování"
+
+#, python-format
+msgid "%(sender_name)s updated a poll you are following"
+msgstr "%(sender_name)s aktualizoval/a hlasování, které sledujete"
+
+#, python-format
+msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Hlasování, které sledujete: \"%(object_name)s\", bylo aktualizováno v týmu %(team_name)s."
+
+msgid "A poll you are following was completed"
+msgstr "Hlasování, které sledujete, bylo dokončeno"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s"
+msgstr "%(sender_name)s dokončil/a hlasování %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls"
+msgstr "%(sender_name)s dokončil/a %(count)d hlasování"
+
+#, python-format
+msgid "%(sender_name)s completed the poll you are following"
+msgstr "%(sender_name)s dokončil/a hlasování, které sledujete"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
+msgstr "Hlasování \"%(object_name)s\", které sledujete, bylo dokončeno v týmu %(team_name)s."
+
+msgid "A user commented on one a poll you are following"
+msgstr "Uživatel okomentoval hlasování, které sledujete"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you are following"
+msgstr "%(sender_name)s okomentoval/a hlasování, které sledujete"
+
+msgid "Current Polls"
+msgstr "Aktuální hlasování"
+
+msgid "No current polls"
+msgstr "Žádná aktuální hlasování"
+
+msgid "You must write a description for this poll option!"
+msgstr "K této možnosti hlasování musíte napsat popis!"
+
+msgid "Voting closed"
+msgstr "Hlasování uzavřeno"
+
+msgid "Poll archived"
+msgstr "Hlasování bylo archivováno"
+
+msgid "Multiple options votable"
+msgstr "Je možno zvolit více možností"
+
+msgid "Does this poll allow users to vote on multiple options or just decide for one?"
+msgstr "Umožňuje toto hlasování uživatelům hlasovat pro více možností nebo se jen rozhodnout pro jednu?"
+
+msgid "\"Maybe\" option enabled"
+msgstr "Možnost „Možná“ povolena"
+
+msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
+msgstr "Je možnost možná povolena? Ignorováno a výchozí hodnota je False, pokud je ``multiple_votes==False``"
+
+msgid "Anyone can vote"
+msgstr "Hlasovat může kdokoli"
+
+msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
+msgstr "Je-li nastavena hodnota true, může hlasovat kdokoli, kdo vidí toto hlasování. Pokud je hodnota false, mohou pouze členové skupiny."
+
+msgid "Show voters"
+msgstr "Zobrazit hlasující"
+
+msgid "If true, display a list of which user voted for each option."
+msgstr "Pokud má hodnotu true, zobrazí se seznam uživatelů, kteří hlasovali pro jednotlivé možnosti."
+
+msgid "Winning Option"
+msgstr "Vítězná možnost"
+
+#, python-format
+msgid "Poll: %(poll)s (%(state)s)"
+msgstr "Hlasování: %(poll)s (%(state)s)"
+
+msgid "Poll Option"
+msgstr "Možnost hlasování"
+
+msgid "Poll Options"
+msgstr "Možnosti hlasování"
 
 msgid "Poll choice"
 msgstr "Volba hlasování"
@@ -13026,6 +12540,85 @@ msgstr "vytvořil/a hlasování"
 msgid "There are no polls yet"
 msgstr "Zatím nejsou žádná hlasování"
 
+#, python-format
+msgid "Poll \"%(title)s\" was edited successfully."
+msgstr "Hlasování \"%(title)s\" bylo úspěšně upraveno."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be edited."
+msgstr "Hlasování \"%(title)s\" nelze upravit."
+
+#, python-format
+msgid "Poll \"%(title)s\" was added successfully."
+msgstr "Hlasování \"%(title)s\" bylo úspěšně přidáno."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be added."
+msgstr "Hlasování \"%(title)s\" nelze přidat."
+
+msgid "You should define at least one poll option!"
+msgstr "Měli byste definovat alespoň jednu možnost hlasování!"
+
+msgid "This poll is archived and cannot be edited anymore!"
+msgstr "Toto hlasování je archivováno a již jej nelze upravovat!"
+
+#, python-format
+msgid "Poll \"%(title)s\" was deleted successfully."
+msgstr "Hlasování \"%(title)s\" bylo úspěšně smazáno."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be deleted."
+msgstr "Hlasování \"%(title)s\" nelze smazat."
+
+msgid "The voting phase for this poll is over. You cannot vote for it any more."
+msgstr "Fáze hlasování pro toto hlasování skončila. Už v něm nemůžete hlasovat."
+
+msgid "In this poll you must vote for exactly one item!"
+msgstr "V tomto hlasování musíte hlasovat přesně pro jednu položku!"
+
+msgid "Invalid action for this poll. The request could not be completed!"
+msgstr "Neplatná akce pro toto hlasování . Požadavek nelze dokončit!"
+
+msgid "This action is not permitted for this poll at this stage!"
+msgstr "V této fázi není tato akce pro toto hlasování povolena!"
+
+msgid "The poll was closed successfully."
+msgstr "Hlasování bylo úspěšně uzavřeno."
+
+msgid "The poll was re-opened successfully."
+msgstr "Hlasování bylo úspěšně znovu otevřeno."
+
+msgid "The poll was archived successfully."
+msgstr "Hlasování bylo úspěšně archivováno."
+
+msgid "Stream"
+msgstr ""
+
+msgctxt "the_app"
+msgid "stream"
+msgstr ""
+
+msgid "My Streams"
+msgstr ""
+
+msgid "Streams"
+msgstr ""
+
+msgid "Models"
+msgstr ""
+
+msgid "Portal IDs"
+msgstr ""
+
+msgid "Last seen"
+msgstr ""
+
+msgid "Special Stream"
+msgstr ""
+
+msgid "Special Group IDs"
+msgstr ""
+
 msgid "Public Stream"
 msgstr ""
 
@@ -13080,6 +12673,268 @@ msgstr ""
 
 msgid "Filter by item types?"
 msgstr ""
+
+msgid "You do not have permission to access this stream."
+msgstr ""
+
+msgid "Your stream was added successfully."
+msgstr ""
+
+msgid "Your stream was updated successfully."
+msgstr ""
+
+msgid "Your stream was deleted successfully."
+msgstr ""
+
+msgid "You cannot delete the default stream!"
+msgstr ""
+
+msgctxt "the_app"
+msgid "todo"
+msgstr "úkol"
+
+msgid "A user created a new todo"
+msgstr "Uživatel vytvořil nový úkol"
+
+#, python-format
+msgid "%(sender_name)s created the todo %(object_name)s"
+msgstr "%(sender_name)s vytvořil/a úkol %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d todos"
+msgstr "%(sender_name)s vytvořil/a %(count)d úkolů"
+
+#, python-format
+msgid "%(sender_name)s created a new todo"
+msgstr "%(sender_name)s vytvořil/a nový úkol"
+
+#, python-format
+msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "V %(team_name)s byl vytvořen nový úkol: \"%(object_name)s\"."
+
+msgid "A todo was assigned to me"
+msgstr "Byl mi přidělen úkol"
+
+#, python-format
+msgid "%(sender_name)s assigned the todo %(object_name)s to you"
+msgstr "%(sender_name)s vám přidělil/a úkol %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s assigned %(count)d todos to you"
+msgstr "%(sender_name)s vám přidělil/a %(count)d úkolů"
+
+#, python-format
+msgid "%(sender_name)s assigned a todo to you"
+msgstr "%(sender_name)s vám přidělil/a úkol"
+
+msgid "A todo I created was completed"
+msgstr "Úkol, který jsem vytvořil, byl dokončen"
+
+#, python-format
+msgid "%(sender_name)s completed the todo %(object_name)s"
+msgstr "%(sender_name)s dokončil/a úkol %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d todos"
+msgstr "%(sender_name)s dokončil/a %(count)d úkolů"
+
+msgid "You created this todo"
+msgstr "Vytvořili jste tento úkol"
+
+#, python-format
+msgid "%(sender_name)s completed your todo"
+msgstr "%(sender_name)s dokončil/a váš úkol"
+
+#, python-format
+msgid "%(sender_name)s completed one of your todos"
+msgstr "%(sender_name)s dokončil/a jeden z vašich úkolů"
+
+msgid "A user commented on one of your todos"
+msgstr "Uživatel okomentoval jeden z vašich úkolů"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo %(object_name)s"
+msgstr "%(sender_name)s okomentoval/a váš úkol %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
+msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval váš úkol %(object_name)s"
+msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali váš úkol %(object_name)s"
+msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali váš úkol %(object_name)s"
+msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo váš úkol %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo"
+msgstr "%(sender_name)s okomentoval/a váš úkol"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your todos"
+msgstr "%(sender_name)s okomentoval/a jeden z vašich úkolů"
+
+msgid "A user commented on a todo you were tagged in"
+msgstr "Uživatel okomentoval úkol, na kterém jste byli označeni"
+
+#, python-format
+msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgstr "%(sender_name)s okomentoval/a úkol %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
+msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval úkol %(object_name)s"
+msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali úkol %(object_name)s"
+msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali úkol %(object_name)s"
+msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo úkol %(object_name)s"
+
+msgid "You were tagged in this todo"
+msgstr "Byli jste označeni v tomto úkolu"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in"
+msgstr "%(sender_name)s okomentoval/a úkol, na kterém jste byli označeni"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s okomentoval/a úkol, na kterém jste byli označeni, v %(team_name)s"
+
+msgid "A user commented on a todo you were assigned to"
+msgstr "Uživatel okomentoval úkol, který vám byl přidělen"
+
+#, python-format
+msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
+msgstr "%(sender_name)s okomentoval/a vám přidělený úkol %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
+msgstr[0] "%(sender_name)s a %(count_minus_one)d další okomentoval vám přidělený úkol %(object_name)s"
+msgstr[1] "%(sender_name)s a %(count_minus_one)d další okomentovali vám přidělený úkol %(object_name)s"
+msgstr[2] "%(sender_name)s a %(count_minus_one)d další okomentovali vám přidělený úkol %(object_name)s"
+msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších okomentovalo vám přidělený úkol %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos"
+msgstr "%(sender_name)s okomentoval/a jeden z vám přidělených úkolů"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgstr "%(sender_name)s okomentoval/a jeden z vám přidělených úkolů v %(team_name)s"
+
+msgid "A user updated a todo you are following"
+msgstr "Uživatel aktualizoval úkol, který sledujete"
+
+#, python-format
+msgid "%(sender_name)s updated the todo %(object_name)s"
+msgstr "%(sender_name)s aktualizoval/a úkol %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
+msgstr[0] "%(sender_name)s a %(count_minus_one)d další aktualizoval úkol %(object_name)s"
+msgstr[1] "%(sender_name)s a %(count_minus_one)d další aktualizovali úkol %(object_name)s"
+msgstr[2] "%(sender_name)s a %(count_minus_one)d další aktualizovali úkol %(object_name)s"
+msgstr[3] "%(sender_name)s a %(count_minus_one)d dalších aktualizovalo úkol %(object_name)s"
+
+msgid "You are following this todo"
+msgstr "Sledujete tento úkol"
+
+#, python-format
+msgid "%(sender_name)s updated a todo you are following"
+msgstr "%(sender_name)s aktualizoval/a úkol, který sledujete"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Úkol, který sledujete: \"%(object_name)s\", byl aktualizován v týmu %(team_name)s."
+
+msgid "A user reassigned a todo you are following"
+msgstr "Uživatel znovu přidělil úkol, který sledujete"
+
+#, python-format
+msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgstr "%(sender_name)s znovu přidělil/a úkol %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s reassigned %(count)d todos"
+msgstr "%(sender_name)s znovu přidělil/a %(count)d úkolů"
+
+#, python-format
+msgid "%(sender_name)s reassigned a todo you are following"
+msgstr "%(sender_name)s znovu přidělil/a úkol, který sledujete"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
+msgstr "Úkol, který sledujete: \"%(object_name)s\", byl znovu přidělen v týmu %(team_name)s."
+
+msgid "A user completed a todo you are following"
+msgstr "Uživatel dokončil úkol, který sledujete"
+
+#, python-format
+msgid "%(sender_name)s completed a todo you are following"
+msgstr "%(sender_name)s dokončil/a úkol, který sledujete"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Úkol, který sledujete: \"%(object_name)s\", byl dokončen v týmu %(team_name)s."
+
+msgid "A user commented on a todo you are following"
+msgstr "Uživatel okomentoval úkol, který sledujete"
+
+#, python-format
+msgid "%(sender_name)s commented on on a todo you are following"
+msgstr "%(sender_name)s okomentoval/a úkol, který sledujete"
+
+msgid "My Todos"
+msgstr "Moje úkoly"
+
+msgid "No todos"
+msgstr "Žádné úkoly"
+
+msgid "Open"
+msgstr "Otevřené"
+
+msgid "Completed"
+msgstr "Dokončené"
+
+msgid "Assigned To"
+msgstr "Přiřazeno komu"
+
+msgid "Priority"
+msgstr "Priority"
+
+msgid "Due date"
+msgstr "Termín do"
+
+msgid "Soonest Due"
+msgstr "S brzkým termínem"
+
+msgid "You are not allowed to assign this Todo entry."
+msgstr "Nemáte oprávnění přidělit tuto položku úkolu."
+
+msgid "Later"
+msgstr "Později"
+
+msgid "Normal"
+msgstr "Normální"
+
+msgid "Important"
+msgstr "Důležité"
+
+msgid "Due by"
+msgstr "Termín do"
+
+msgid "Completed on"
+msgstr "Dokončeno"
+
+msgid "Completed by"
+msgstr "Dokončil/a"
+
+msgid "Assigned to"
+msgstr "Přiřazeno komu"
+
+#, python-format
+msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
+msgstr "Úkol \"%(todo_name)s\" byl přidělen uživateli %(assignee_name)s"
 
 #, python-format
 msgid ""
@@ -13390,6 +13245,262 @@ msgstr "Nemáte žádné vám přidělené úkoly"
 
 msgid "Tasks are shown only for logged in users"
 msgstr "Úkoly se zobrazují pouze pro přihlášené uživatele"
+
+#, python-format
+msgid "Todo \"%(title)s\" was added successfully."
+msgstr "Úkol \"%(title)s\" byl úspěšně přidán."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be added."
+msgstr "Úkol \"%(title)s\" nelze přidat."
+
+msgid "You were trying to add a todo to a todolist that does not exist!"
+msgstr "Pokoušíte se přidat úkol do seznamu úkolů, který neexistuje!"
+
+#, python-format
+msgid "Todo \"%(title)s\" was edited successfully."
+msgstr "Úkol \"%(title)s\" byl úspěšně upraven."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be edited."
+msgstr "Úkol \"%(title)s\" nelze upravit."
+
+#, python-format
+msgid "Todo \"%(title)s\" was deleted successfully."
+msgstr "Úkol \"%(title)s\" byl úspěšně smazán."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be deleted."
+msgstr "Úkol \"%(title)s\" nelze smazat."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned successfully."
+msgstr "Úkol \"%(title)s\" byl úspěšně přidělen."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned."
+msgstr "Úkol \"%(title)s\" nelze přidělit."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned to You successfully."
+msgstr "Úkol \"%(title)s\" VÁM byl úspěšně přidělen."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned to You."
+msgstr "Úkol \"%(title)s\" VÁM nelze přidělit."
+
+#, python-format
+msgid "Todo \"%(title)s\" was unassigned successfully."
+msgstr "Úkolu \"%(title)s\" bylo úspěšně zrušeno přidělení."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be unassigned."
+msgstr "Úkolu \"%(title)s\" nelze zrušit přidělení."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed successfully."
+msgstr "Úkol \"%(title)s\" byl úspěšně dokončen."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed."
+msgstr "Úkol \"%(title)s\" nelze dokončit."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed by You successfully."
+msgstr "Úkol \"%(title)s\" byl VÁMI úspěšně dokončen."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed by You."
+msgstr "Úkol \"%(title)s\" VÁMI nelze dokončit."
+
+#, python-format
+msgid "Todo \"%(title)s\" was set to incomplete successfully."
+msgstr "Úkol \"%(title)s\" byl úspěšně nastaven jako nedokončený."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be set to incomplete."
+msgstr "Úkol \"%(title)s\" nelze nastavit jako nedokončený."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was edited successfully."
+msgstr "Seznam úkolů \"%(title)s\" byl úspěšně upraven."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be edited."
+msgstr "Seznam úkolů \"%(title)s\" nelze upravit."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was added successfully."
+msgstr "Seznam úkolů \"%(title)s\" byl úspěšně přidán."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be added."
+msgstr "Seznam úkolů \"%(title)s\" nelze přidat."
+
+msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
+msgstr "Tuto složku nemůžete smazat, protože nemáte oprávnění smazat jednu nebo více položek, které obsahuje!"
+
+#~ msgid "Ok"
+#~ msgstr "OK"
+
+#~ msgid "Message Group"
+#~ msgstr "Skupina zpráv"
+
+#~ msgid "Message Project"
+#~ msgstr "Poslat zprávu projektu"
+
+#, fuzzy
+#~| msgid "This message was sent in a conversation with: "
+#~ msgid "The message cannot be replied without being in a conversation."
+#~ msgstr "Tato zpráva byla odeslána v konverzaci s: "
+
+#, fuzzy
+#~| msgid "Is Moderator"
+#~ msgid "Moderation"
+#~ msgstr "Je moderátor"
+
+#, fuzzy
+#~| msgid "Your name"
+#~ msgid "{username}"
+#~ msgstr "Vaše jméno"
+
+#, fuzzy
+#~| msgid "Additional Recipients"
+#~ msgid "Additional recipients"
+#~ msgstr "Další příjemci"
+
+#, fuzzy
+#~| msgid "Additional Recipients"
+#~ msgid "Additional recipient"
+#~ msgstr "Další příjemci"
+
+#, fuzzy
+#~| msgid "Message Project"
+#~ msgid "Message Rejected"
+#~ msgstr "Poslat zprávu projektu"
+
+#, fuzzy
+#~ msgid "Your message has been rejected"
+#~ msgstr "Vaše změny byly uloženy."
+
+#, fuzzy
+#~| msgid "Message Project"
+#~ msgid "Message Received"
+#~ msgstr "Poslat zprávu projektu"
+
+#, fuzzy
+#~| msgid "You have been invited to apply!"
+#~ msgid "You have received a message"
+#~ msgstr "Byli jste pozváni k podání žádosti!"
+
+#, fuzzy
+#~| msgid "You have been invited to apply!"
+#~ msgid "You have received a reply"
+#~ msgstr "Byli jste pozváni k podání žádosti!"
+
+#, fuzzy
+#~| msgid "Restricted"
+#~ msgid "Rejected"
+#~ msgstr "S omezením"
+
+#, fuzzy
+#~| msgid "Everybody"
+#~ msgid "body"
+#~ msgstr "Všichni"
+
+#, fuzzy
+#~ msgid "sender"
+#~ msgstr "Odeslané"
+
+#, fuzzy
+#~| msgid "Recipient"
+#~ msgid "recipient"
+#~ msgstr "Příjemce"
+
+#, fuzzy
+#~| msgid "Visitor"
+#~ msgid "visitor"
+#~ msgstr "Návštěvník"
+
+#, fuzzy
+#~ msgid "parent message"
+#~ msgstr "Vaše jméno"
+
+#, fuzzy
+#~| msgid "No messages"
+#~ msgid "root message"
+#~ msgstr "Žádné zprávy"
+
+#, fuzzy
+#~| msgid "Sent at:"
+#~ msgid "sent at"
+#~ msgstr "Posláno na:"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "archived by recipient"
+#~ msgstr "Nedefinovaný příjemce."
+
+#, fuzzy
+#~| msgid "Delete user account"
+#~ msgid "deleted by sender at"
+#~ msgstr "Smazat uživatelský účet"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "deleted by recipient at"
+#~ msgstr "Nedefinovaný příjemce."
+
+#, fuzzy
+#~| msgid "Is Moderator"
+#~ msgid "moderator"
+#~ msgstr "Je moderátor"
+
+#, fuzzy
+#~| msgid "Related to"
+#~ msgid "moderated at"
+#~ msgstr "Souvisí s"
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "message"
+#~ msgstr "zpráva"
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "messages"
+#~ msgstr "zpráva"
+
+#, fuzzy
+#~| msgid "Undefined recipient."
+#~ msgid "Undefined sender."
+#~ msgstr "Nedefinovaný příjemce."
+
+#, fuzzy
+#~| msgctxt "the_app"
+#~| msgid "message"
+#~ msgid "pending message"
+#~ msgstr "zpráva"
+
+#, fuzzy
+#~ msgid "pending messages"
+#~ msgstr "Vaše jméno"
+
+#, fuzzy
+#~ msgid "Re: {subject}"
+#~ msgstr "Předmět"
+
+#, fuzzy
+#~| msgid "User successfully created!"
+#~ msgid "Message successfully sent."
+#~ msgstr "Uživatel byl úspěšně vytvořen!"
+
+#, fuzzy
+#~| msgid "Select at least one object."
+#~ msgid "Message rejected for at least one recipient."
+#~ msgstr "Vyberte alespoň jeden objekt."
 
 #, fuzzy
 #~ msgid "CSV Import Results"
