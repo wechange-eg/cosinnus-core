@@ -1,10 +1,10 @@
 import {configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 
-import AuthReducer from "./reducers/auth";
-import SettingsReducer from "./reducers/settings";
-import TranslationsReducer from "./reducers/translations";
-import UserReducer from "./reducers/user";
+import AuthReducer from "./auth";
+import SettingsReducer from "./settings";
+import TranslationsReducer from "./translations";
+import UserReducer from "./user";
 
 
 export const store = configureStore({

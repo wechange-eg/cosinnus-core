@@ -8,9 +8,9 @@ import {
   Heading
 } from '@chakra-ui/react'
 
-import { fetchUser } from "../../reducers/user"
-import { logout } from "../../reducers/auth"
-import { useAppDispatch, RootState } from "../../rootStore"
+import { fetchUser } from "../../store/user"
+import { logout } from "../../store/auth"
+import { useAppDispatch, RootState } from "../../store"
 import { useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 

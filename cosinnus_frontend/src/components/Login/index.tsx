@@ -23,8 +23,8 @@ import {
 
 import { Redirect, Link as RouterLink } from 'react-router-dom'
 import { LoginTextField } from "./style"
-import { login } from "../../reducers/auth";
-import { useAppDispatch, RootState } from "../../rootStore"
+import { login } from "../../store/auth";
+import { useAppDispatch, RootState } from "../../store"
 import { useSelector } from 'react-redux'
 
 const getForm = ({ isSubmitting }: { isSubmitting: boolean }) => {

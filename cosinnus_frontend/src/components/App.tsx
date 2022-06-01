@@ -5,12 +5,12 @@ import { IntlProvider } from "react-intl"
 
 import { ProtectedRoute, ProtectedRouteProps } from "./routes/ProtectedRoute"
 import { ProfilePage } from "./Profile"
-import { fetchTranslations } from "../reducers/translations"
-import { fetchUser } from "../reducers/user"
+import { fetchTranslations } from "../store/translations"
+import { fetchUser } from "../store/user"
 import { LoginPage } from "./Login"
 import { RegisterPage } from "./Register"
 
-import { useAppDispatch, RootState } from "../rootStore"
+import { useAppDispatch, RootState } from "../store"
 import { useSelector } from 'react-redux'
 
 export default function App() {

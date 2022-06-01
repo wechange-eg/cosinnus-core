@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from "react-redux"
 import {ChakraProvider} from '@chakra-ui/react'
-import {store} from "./rootStore"
+import {store} from "./store"
 import App from "./components/App"
 import Theme from "./themes/themes"
 

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 import authHeader from '../utils/auth-header';
-import { RootState } from "../rootStore";
+import { RootState } from ".";
 
 export interface UserJson {
     id?: number
