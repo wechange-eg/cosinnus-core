@@ -101,7 +101,7 @@ export const fetchSettings = createAsyncThunk(
 );
 
 const settingsSlice = createSlice({
-  name: "Settings",
+  name: "settings",
   initialState: {} as SettingsProps,
   reducers: {},
   extraReducers: (builder) => {
