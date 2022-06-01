@@ -44,6 +44,8 @@ from cosinnus.utils.permissions import check_user_can_receive_emails,\
 import logging
 from cosinnus.templatetags.cosinnus_tags import textfield
 from annoying.functions import get_object_or_None
+from django.utils.safestring import mark_safe
+from django.template.loader import render_to_string
 
 logger = logging.getLogger('cosinnus')
 
@@ -424,6 +426,22 @@ def print_testmail(request):
             content_html = render_digest_item_for_notification_event(notification_event)
         
     html = render_notification_item_html_mail(request.user, subject, content_html)
+    return HttpResponse(html)
+
+
+def print_testdigest(request):
+    """ Displays a HTML email like it would be sent to a user """
+    if not request or not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    from cosinnus_notifications.models import NotificationEvent, UserNotificationPreference # noqa
+    from cosinnus_note.models import Note, Comment # noqa
+    from cosinnus_notifications.digest import send_digest_for_current_portal, _get_digest_email_context # noqa
+    
+    digest_setting = UserNotificationPreference.SETTING_WEEKLY
+    template = '/cosinnus/html_mail/digest.html'
+    digest_html = send_digest_for_current_portal(digest_setting, debug_run_for_user=request.user)
+    context = _get_digest_email_context(request.user, mark_safe(digest_html), now(), digest_setting)
+    html = render_to_string(template, context=context)
     return HttpResponse(html)
 
 

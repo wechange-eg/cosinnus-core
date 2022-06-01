@@ -251,7 +251,9 @@ class SearchQuerySetMixin:
         if not query:
             # order groups, projects and conferences alphabetically
             if any([self.params.get(checktype, None) for checktype in settings.COSINNUS_ALPHABETICAL_ORDER_FOR_SEARCH_MODELS_WHEN_SINGLE]) and len(model_list) == 1:
-                sort_args = ['title']
+                # sort by slug instead of title because haystack doesn't support 
+                # case-insensitive ordering
+                sort_args = ['sort_field', 'title', 'text']
                 self.skip_score_sorting = True
             else:
                 sort_args = ['-local_boost']
@@ -284,6 +286,7 @@ class SearchQuerySetMixin:
             if self.skip_score_sorting:
                 # if we skip score sorting and only rely on the natural ordering, we make up fake high scores
                 result.score = 100000 - (limit*page) - i
+                
             elif not query:
                 # if we hae no query-boosted results, use *only* our custom sorting (haystack's is very random)
                 result.score = result.local_boost

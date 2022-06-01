@@ -850,6 +850,13 @@ class CosinnusConf(AppConf):
     # if True, won't let any user log in before verifying their e-mail 
     USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN = False
     
+    # if True, sends a "please verify your e-mail" mail to the user
+    # instantly after they signed up. if False, the user has to click
+    # the "your email has not been verified - send now" banner on top
+    # the page to trigger the mail
+    # (does not affect mails if USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN is True)
+    USER_SIGNUP_SEND_VERIFICATION_MAIL_INSTANTLY = False
+    
     # if True, hides the portal completey from external visitors.
     # "logged in only" mode for the portal
     USER_EXTERNAL_USERS_FORBIDDEN = False
@@ -1152,6 +1159,36 @@ class CosinnusConf(AppConf):
     # user gets notification if s/he was invited to a group even if his/er notification preferences 
     # are tunrned on 'daily', 'weekly', or even on 'never'
     NOTIFICATIONS_GROUP_INVITATIONS_IGNORE_USER_SETTING = False
+    
+    # determines which cosinnus_notification IDs should be pulled up from
+    # the main digest body into its own category with a header
+    # format: ((<str:category_header>, <list<str:notification_id>>, <str:header_fa_icon>, <str:header_url_reverse>), ...)
+    NOTIFICATIONS_DIGEST_CATEGORIES = [
+        (
+            _('Invitations'), 
+            [
+                'user_group_invited',
+                'user_group_join_accepted',
+                'user_group_join_declined',
+            ], 
+            'fa-group', 
+            'cosinnus:user-dashboard'
+        ),
+        (
+            _('Conferences'), 
+            [
+                'conference_created_in_group',
+                'user_conference_invited_to_apply',
+                'attending_conference_changed',
+                'attending_conference_time_changed',
+                'user_conference_application_accepted',
+                'user_conference_application_declined',
+                'user_conference_application_waitlisted',
+            ], 
+            'fa-television', 
+            'cosinnus:conference__group-list'
+        ),
+    ]
     
     # if set to True group admins can decide if a contact form should be displayed on the groups micropage
     ALLOW_CONTACT_FORM_ON_MICROPAGE = False

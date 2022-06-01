@@ -544,14 +544,9 @@ USER_PROFILE_MODEL = get_user_profile_model()
 USER_MODEL = get_user_model()
 
 
-class UserProfileAdmin(admin.ModelAdmin):
-    pass
-
-admin.site.register(get_user_profile_model(), UserProfileAdmin)
-
-
 class UserProfileInline(admin.StackedInline):
     model = USER_PROFILE_MODEL
+    can_delete = False
     readonly_fields = ('deletion_triggered_by_self',)
 
 class PortalMembershipInline(admin.TabularInline):
@@ -648,6 +643,7 @@ class UserScheduledForDeletionAtFilter(admin.SimpleListFilter):
 
 
 class UserAdmin(DjangoUserAdmin):
+    change_form_template = 'admin/user/change_form.html'
     inlines = (UserProfileInline, PortalMembershipInline)#, GroupMembershipInline)
     actions = ['deactivate_users', 'reactivate_users', 'export_as_csv', 'log_in_as_user', 'refresh_group_memberships',]
     if settings.COSINNUS_ROCKET_ENABLED:
