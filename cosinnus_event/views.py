@@ -219,9 +219,7 @@ class ConferencesListView(EventListView):
 
 
 class SuggestionInlineView(InlineFormSetFactory):
-    factory_kwargs = {
-        'extra': 1,
-    }
+    extra = 1
     form_class = SuggestionForm
     model = Suggestion
 

@@ -10,7 +10,6 @@ from django.http import HttpResponseRedirect
 
 
 from cosinnus.models.group import CosinnusGroup
-from cosinnus.utils.urls import group_aware_reverse
 from cosinnus_message.rocket_chat import RocketChatConnection
 from postman.views import ConversationView, MessageView, csrf_protect_m,\
     login_required_m, _get_referer
@@ -19,11 +18,9 @@ from django.views.generic.base import View
 from postman.models import Message
 from django.http.response import Http404
 from django.contrib import messages
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import redirect
 from cosinnus.utils.urls import safe_redirect
 from django.contrib.auth import get_user_model
-from .forms import ContactMessageForm
-from django.views.generic.edit import FormView
 
 try:
     from django.utils.timezone import now  # Django 1.4 aware datetimes
@@ -182,37 +179,6 @@ class RocketChatWriteView(BaseRocketChatView):
             return self.base_url
 
 
-class RocketChatWriteGroupComposeView(FormView):
-
-    form_class = ContactMessageForm
-    template_name = 'cosinnus_message/contact_message.html'
-
-    def get(self, request, *args, **kwargs):
-        self.group = self.get_group_object()
-        return super().get(request, *args, **kwargs)
-    
-    def get_group_object(self):
-        slug = self.kwargs.get('slug', None)
-        try:
-            return CosinnusGroup.objects.all_in_portal().get(slug=slug)
-        except CosinnusGroup.DoesNotExist:
-            raise Http404
-    
-    def form_valid(self, form):
-        contact_message = form.cleaned_data.get('contact_message')
-        group = self.get_group_object()
-        user = self.request.user
-        rocket = RocketChatConnection()
-        # trigger room creation
-        rocket.groups_request(group, user, first_message=contact_message, force_sync_membership=True, create=True)
-        return redirect(reverse('cosinnus:message-write-group', kwargs={'slug': group.slug}))
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update({'group': self.group})
-        return context
-
-
 class RocketChatWriteGroupView(BaseRocketChatView):
 
     queryset = None # inited as CosinnusGroup.objects.all_in_portal() on __init__
@@ -220,13 +186,6 @@ class RocketChatWriteGroupView(BaseRocketChatView):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.queryset = CosinnusGroup.objects.all_in_portal()
-
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        context = self.get_context_data(object=self.object)
-        if not context.get('url'):
-            return redirect(reverse('cosinnus:message-write-group-compose', kwargs={'slug': self.object.slug}))
-        return self.render_to_response(context)
 
     def get_object(self):
         slug = self.kwargs.get('slug')
@@ -251,4 +210,4 @@ class RocketChatWriteGroupView(BaseRocketChatView):
 
         if group_name:
             return f'{self.base_url}/group/{group_name}/'
-        return None
+        return self.base_url

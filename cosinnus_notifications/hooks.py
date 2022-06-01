@@ -12,7 +12,6 @@ from cosinnus.conf import settings
 @receiver(signals.user_joined_group)
 def assign_default_group_notification_preference_on_group_join(sender, user, group, **kwargs):
     """ Assign each user the default group notification preference when he joins a group """
-    print(f'>>> trigger {user} {group}')
     
     default_setting = settings.COSINNUS_DEFAULT_GROUP_NOTIFICATION_SETTING
     # set the notifications_all setting to the default setting or create it
