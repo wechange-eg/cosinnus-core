@@ -80,7 +80,7 @@ export const fetchUser = createAsyncThunk<UserProps, void, {state: RootState }>(
 );
 
 const userSlice = createSlice({
-  name: "profile",
+  name: "user",
   initialState: {} as UserProps,
   reducers: {},
   extraReducers: (builder) => {
