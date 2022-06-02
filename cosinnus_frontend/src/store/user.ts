@@ -5,8 +5,8 @@ import authHeader from '../utils/auth-header';
 import { RootState } from ".";
 
 export interface UserJson {
-    id?: number
-    username?: string
+    id: number
+    username: string
     first_name?: string
     last_name?: string
     is_admin?: boolean
@@ -87,7 +87,7 @@ const userSlice = createSlice({
     builder
       .addCase(fetchUser.fulfilled, (state, action) => {
         if (!action.payload) return;
-        state = action.payload;
+        state.user = action.payload
       })
   },
 });

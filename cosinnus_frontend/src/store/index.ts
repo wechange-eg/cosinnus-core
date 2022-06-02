@@ -3,6 +3,7 @@ import storage from 'redux-persist/lib/storage';
 import { useDispatch } from "react-redux";
 import {combineReducers} from "redux";
 
+
 import {
   persistReducer,
   FLUSH,
@@ -22,7 +23,7 @@ const reducers = combineReducers({
   auth: AuthReducer,
   settings: SettingsReducer,
   translations: TranslationsReducer,
-  user: UserReducer
+  profile: UserReducer
  });
 
  const persistConfig = {

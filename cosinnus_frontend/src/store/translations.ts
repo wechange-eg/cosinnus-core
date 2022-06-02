@@ -39,7 +39,7 @@ const translationSlice = createSlice({
     builder
       .addCase(fetchTranslations.fulfilled, (state, action) => {
         if (!action.payload) return;
-        state = action.payload;
+        state.translations = action.payload;
       })
   },
 });

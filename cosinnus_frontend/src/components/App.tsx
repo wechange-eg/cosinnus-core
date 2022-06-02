@@ -6,6 +6,7 @@ import { IntlProvider } from "react-intl"
 import { ProtectedRoute, ProtectedRouteProps } from "./routes/ProtectedRoute"
 import { ProfilePage } from "./Profile"
 import { fetchTranslations } from "../store/translations"
+import { fetchSettings } from "../store/settings"
 import { fetchUser } from "../store/user"
 import { LoginPage } from "./Login"
 import { RegisterPage } from "./Register"
@@ -16,11 +17,13 @@ import { useSelector } from 'react-redux'
 export default function App() {
   const accessToken = useSelector((state: RootState) => state.auth.accessToken);
   const translations = useSelector((state: RootState) => state.translations);
-  const user = useSelector((state: RootState) => state.user);
+  const settings = useSelector((state: RootState) => state.settings);
+  const profile = useSelector((state: RootState) => state.profile);
   const dispatch = useAppDispatch();
 
-  if(!translations && !translations.locale) dispatch(fetchTranslations())
-  if(!user && !user.username) dispatch(fetchUser())
+  if(Object.keys(translations).length === 0) dispatch(fetchTranslations())
+  if(Object.keys(settings).length === 0) dispatch(fetchSettings())
+  if(accessToken && Object.keys(profile).length === 0) dispatch(fetchUser())
 
   const routeProps: ProtectedRouteProps = {
     isAuthenticated: !!accessToken,
@@ -31,8 +34,8 @@ export default function App() {
 
   return (
     <IntlProvider
-      locale={translations && translations.locale || "en"}
-      messages={translations && translations.catalog || {}}
+      locale={Object.keys(translations).length !== 0 && translations.translations.locale || "en"}
+      messages={Object.keys(translations).length !== 0 && translations.translations.catalog || {}}
       onError={(err) => {
         if (err.code === "MISSING_TRANSLATION") {
           return;

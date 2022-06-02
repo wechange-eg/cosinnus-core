@@ -108,7 +108,7 @@ const settingsSlice = createSlice({
     builder
       .addCase(fetchSettings.fulfilled, (state, action) => {
         if (!action.payload) return;
-        state = action.payload;
+        state.settings = action.payload;
       })
   },
 });
