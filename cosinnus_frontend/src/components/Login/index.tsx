@@ -9,6 +9,9 @@ import {
   Box,
   Heading,
   Button,
+  HStack,
+  Grid,
+  GridItem,
   VStack,
   Divider,
   Alert,
@@ -41,17 +44,16 @@ const getForm = ({ isSubmitting }: { isSubmitting: boolean }) => {
           <LoginTextField name="password" type="password" />
         </FormControl>
 
+        <Link><FormattedMessage id="Forgot your password?" /></Link>
+
         <Button
           type="submit"
           isLoading={isSubmitting}
-          colorScheme="blue"
           width="100%"
           mb="1"
         >
           <FormattedMessage id="Login" />
         </Button>
-        <Divider />
-        <Link><FormattedMessage id="Forgot your password?" /></Link>
       </VStack>
     </Form>
   )
@@ -66,36 +68,45 @@ export function LoginPage() {
     return <Redirect to="/" />;
   } else {
     return (
-      <Container maxW='2xl'>
-        <Box mt={100} mb={5} px={5} pt={5} pb={100} border='1px' borderColor='gray.200'>
-          <VStack spacing="4" align="start">
-            <Heading>Anmelden</Heading>
-            {errorMessage &&
-              <Alert status='error'>
-                <AlertIcon />
-                <AlertTitle>{errorMessage}</AlertTitle>
-              </Alert>
-            }
-          </VStack>
-          <Formik
-            initialValues={{
-              username: `${process.env.USER_EMAIL || ""}`,
-              password: `${process.env.USER_PASSWORD || ""}`
-            }}
-            onSubmit={(values, { setSubmitting }) => {
-              dispatch(login(values))
-              setSubmitting(false)
-            }}
-          >
-            {getForm}
-          </Formik>
+      <HStack spacing='0px'>
+        <Box bg='gray.50' h='100vh' w='100%'>
+          <Grid templateColumns='repeat(12, 1fr)' gap={0}>
+            <GridItem colStart={4} colEnd={10} h='10'>
+              <VStack spacing="4" align="start">
+              <Center>
+                <Heading>Anmelden</Heading>
+                </Center>
+                {errorMessage &&
+                  <Alert status='error'>
+                    <AlertIcon />
+                    <AlertTitle>{errorMessage}</AlertTitle>
+                  </Alert>
+                }
+              </VStack>
+              <Box p={5} border='1px' bg="white" borderColor='gray.200'>
+                <Formik
+                  initialValues={{
+                    username: `${process.env.USER_EMAIL || ""}`,
+                    password: `${process.env.USER_PASSWORD || ""}`
+                  }}
+                  onSubmit={(values, { setSubmitting }) => {
+                    dispatch(login(values))
+                    setSubmitting(false)
+                  }}
+                >
+                  {getForm}
+                </Formik>
+              </Box>
+              <Box>
+                <Center>
+                  <Text fontSize='xs'>Noch kein Account? <RouterLink to="/register">Registriere dich hier </RouterLink></Text>
+                </Center>
+              </Box>
+            </GridItem>
+          </Grid>
         </Box>
-        <Box>
-          <Center>
-            <Text fontSize='xs'>Noch kein Account? <RouterLink to="/register">Registriere dich hier </RouterLink></Text>
-          </Center>
-        </Box>
-      </Container>
+        <Box bg='plattform.400' h='100vh' w='100%'></Box>
+      </HStack>
     )
   }
 }
