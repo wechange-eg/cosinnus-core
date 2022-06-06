@@ -8,9 +8,6 @@ import {
   Box,
   Heading,
   Button,
-  HStack,
-  Grid,
-  GridItem,
   VStack,
   Text,
   FormControl,
@@ -23,6 +20,7 @@ import { StyledBox } from "../shared/boxes";
 
 import { Redirect, Link as RouterLink } from 'react-router-dom'
 import { InputField } from "../shared/input"
+import { TwoColumnPage } from "../shared/pages"
 import { login } from "../../store/auth";
 import { useAppDispatch, RootState } from "../../store"
 import { useSelector } from 'react-redux'
@@ -33,7 +31,7 @@ const getForm = ({ isSubmitting }: { isSubmitting: boolean }) => {
       <VStack spacing="4" align="start">
         <FormControl isRequired>
           <FormLabel htmlFor='username'>Email address</FormLabel>
-          <InputField name="username" type="email" autoComplete="off"/>
+          <InputField name="username" type="email" autoComplete="off" />
         </FormControl>
 
         <FormControl isRequired>
@@ -67,69 +65,54 @@ export function LoginPage() {
     return <Redirect to="/" />;
   } else {
     return (
-      <HStack spacing='0px'>
-        <StyledBox variant={'fullheightGrayColourBox'} >
-          <Grid templateColumns='repeat(12, 1fr)' gap={0} mt={32}>
-            <GridItem mt={8} colStart={{ base: 1, md: 4 }} colEnd={{ base: 13, md: 10 }}>
-              <VStack spacing="6" align="center">
-
-                <Center w='100%' >
-                  <Heading>
-                    <FormattedMessage id="Log In" />
-                  </Heading>
-                </Center>
-
-                <Center w='100%'>
-                  <Text>
-                    <FormattedMessage id="Welcome to wechange.de" />
-                  </Text>
-                </Center>
-
-                {errorMessage &&
-                  <StyledBox variant={'errorAlert'}>
-                    <Text variant="white" fontWeight={700}>
-                      <FormattedMessage id="Login not possible" />
-                    </Text>
-                    <Text variant="white">{errorMessage}</Text>
-                  </StyledBox>
-                }
-
-                <StyledBox variant={'formBox'}>
-                  <Formik
-                    initialValues={{
-                      username: `${process.env.USER_EMAIL || ""}`,
-                      password: `${process.env.USER_PASSWORD || ""}`
-                    }}
-                    onSubmit={(values, { setSubmitting }) => {
-                      dispatch(login(values))
-                      setSubmitting(false)
-                    }}
-                  >
-                    {getForm}
-                  </Formik>
-                </StyledBox>
-
-                <Box>
-                  <Center>
-                    <Text>
-                      <FormattedMessage id="You don’t have an account?" />
-                    </Text>
-                  </Center>
-                  <Center>
-                    <Text>
-                      <Link as={RouterLink} to="/register">
-                        <FormattedMessage id="Sign Up" />
-                      </Link>
-                    </Text>
-                  </Center>
-                </Box>
-
-              </VStack>
-            </GridItem>
-          </Grid>
+      <TwoColumnPage>
+        <Center w='100%' >
+          <Heading>
+            <FormattedMessage id="Log In" />
+          </Heading>
+        </Center>
+        <Center w='100%'>
+          <Text>
+            <FormattedMessage id="Welcome to wechange.de" />
+          </Text>
+        </Center>
+        {errorMessage &&
+          <StyledBox variant={'errorAlert'}>
+            <Text variant="white" fontWeight={700}>
+              <FormattedMessage id="Login not possible" />
+            </Text>
+            <Text variant="white">{errorMessage}</Text>
+          </StyledBox>
+        }
+        <StyledBox variant={'formBox'}>
+          <Formik
+            initialValues={{
+              username: `${process.env.USER_EMAIL || ""}`,
+              password: `${process.env.USER_PASSWORD || ""}`
+            }}
+            onSubmit={(values, { setSubmitting }) => {
+              dispatch(login(values))
+              setSubmitting(false)
+            }}
+          >
+            {getForm}
+          </Formik>
         </StyledBox>
-        <StyledBox variant={'fullheightMainColourBox'} w={{ base: '0px', lg: '100%'}}></StyledBox>
-      </HStack>
+        <Box>
+          <Center>
+            <Text>
+              <FormattedMessage id="You don’t have an account?" />
+            </Text>
+          </Center>
+          <Center>
+            <Text>
+              <Link as={RouterLink} to="/register">
+                <FormattedMessage id="Sign Up" />
+              </Link>
+            </Text>
+          </Center>
+        </Box>
+      </TwoColumnPage>
     )
   }
 }
