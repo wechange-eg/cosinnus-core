@@ -7,7 +7,7 @@ import {
 
 type Props = ChakraInputProps & FieldHookConfig<"input">;
 
-export const LoginTextField = ({ name, ...props }: Props) => {
+export const InputField = ({ name, ...props }: Props) => {
   const [field] = useField(name)
   return <ChakraInput {...props} {...field} />
 }

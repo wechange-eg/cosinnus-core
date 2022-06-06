@@ -4,56 +4,53 @@ import { connect } from "react-redux"
 import { Link as RouterLink } from 'react-router-dom'
 
 import {
-  Container,
+  HStack,
   Box,
+  Grid,
+  GridItem,
   Heading,
   Button,
   VStack,
   FormControl,
   FormLabel,
   Center,
-  Text
+  Text,
+  Link
 } from '@chakra-ui/react'
 
 import {
   Formik,
-  FormikBag,
-  FormikValues,
-  FormikProps,
   Form
 } from "formik"
 
 import { FormattedMessage } from "react-intl";
-import { LoginTextField } from "../Login/style"
+import { InputField } from "../shared/input"
+import { StyledBox } from "../shared/boxes";
+
+import { RootState } from "../../store"
+import { useSelector } from 'react-redux'
 
 
 export function RegisterPage() {
-
-  const onSubmit = (
-    values: FormikValues,
-    formikBag: FormikBag<FormikProps<FormikValues>, FormikValues>
-  ) => {
-    alert(values)
-  }
+  const errorMessage = useSelector((state: RootState) => state.auth.errorMessage);
 
   const getForm = ({ isSubmitting }: { isSubmitting: boolean }) => {
     return (
       <Form>
           <VStack spacing="4" align="start">
-            <Heading>Register</Heading>
               <FormControl isRequired>
                 <FormLabel htmlFor='email'>Email address</FormLabel>
-                <LoginTextField name="email" type="email" />
+                <InputField name="email" type="email" />
               </FormControl>
 
               <FormControl isRequired>
                 <FormLabel htmlFor='password'>Password</FormLabel>
-                <LoginTextField name="password" type="password"/>
+                <InputField name="password" type="password"/>
               </FormControl>
 
               <FormControl isRequired>
                 <FormLabel htmlFor='passwordrepeat'>Password wiederholen</FormLabel>
-                <LoginTextField name="passwordrepeat" type="password"/>
+                <InputField name="passwordrepeat" type="password"/>
               </FormControl>
 
               <Button
@@ -71,23 +68,61 @@ export function RegisterPage() {
   }
 
   return (
-    <Container maxW='2xl'>
-      <Box mt={100} mb={5} px={5} pt={5} pb={100} border='1px' borderColor='gray.200'>
-      <Formik
-          initialValues={{
-            email: `${process.env.USER_EMAIL || ""}`,
-            password: `${process.env.USER_PASSWORD || ""}`
-          }}
-          onSubmit={onSubmit}
-        >
-          {getForm}
-        </Formik>
-      </Box>
-      <Box>
-        <Center>
-          <Text fontSize='xs'>Schon registiriert? <RouterLink to="/login">Hier anmelden</RouterLink></Text>
-        </Center>
-      </Box>
-    </Container>
+    <HStack spacing='0px'>
+        <StyledBox variant={'fullheightGrayColourBox'} >
+          <Grid templateColumns='repeat(12, 1fr)' gap={0} mt={32}>
+            <GridItem mt={8} colStart={4} colEnd={10} h='10'>
+              <VStack spacing="6" align="center">
+
+                <Center w='100%' >
+                  <Heading>
+                    <FormattedMessage id="Register" />
+                  </Heading>
+                </Center>
+
+                {errorMessage &&
+                  <StyledBox variant={'errorAlert'}>
+                    <Text variant="white" fontWeight={700}>
+                      <FormattedMessage id="Register not possible" />
+                    </Text>
+                    <Text variant="white">{errorMessage}</Text>
+                  </StyledBox>
+                }
+
+                <StyledBox variant={'formBox'}>
+                  <Formik
+                    initialValues={{
+                      username: `${process.env.USER_EMAIL || ""}`,
+                      password: `${process.env.USER_PASSWORD || ""}`
+                    }}
+                    onSubmit={(values, { setSubmitting }) => {
+                      console.log(values)
+                    }}
+                  >
+                    {getForm}
+                  </Formik>
+                </StyledBox>
+
+                <Box>
+                  <Center>
+                    <Text>
+                      <FormattedMessage id="Already registered?" />
+                    </Text>
+                  </Center>
+                  <Center>
+                    <Text>
+                      <Link as={RouterLink} to="/login">
+                        <FormattedMessage id="Log In" />
+                      </Link>
+                    </Text>
+                  </Center>
+                </Box>
+
+              </VStack>
+            </GridItem>
+          </Grid>
+        </StyledBox>
+        <StyledBox variant={'fullheightMainColourBox'}></StyledBox>
+      </HStack>
   )
 }

@@ -14,6 +14,16 @@ import { RegisterPage } from "./Register"
 import { useAppDispatch, RootState } from "../store"
 import { useSelector } from 'react-redux'
 
+import {
+  Container,
+  useColorMode,
+  Button,
+  Heading,
+  Text,
+  Divider,
+} from "@chakra-ui/react"
+
+
 export default function App() {
   const accessToken = useSelector((state: RootState) => state.auth.accessToken);
   const translations = useSelector((state: RootState) => state.translations);
@@ -24,6 +34,8 @@ export default function App() {
   if(Object.keys(translations).length === 0) dispatch(fetchTranslations())
   if(Object.keys(settings).length === 0) dispatch(fetchSettings())
   if(accessToken && Object.keys(profile).length === 0) dispatch(fetchUser())
+
+  const { colorMode, toggleColorMode } = useColorMode()
 
   const routeProps: ProtectedRouteProps = {
     isAuthenticated: !!accessToken,
@@ -47,6 +59,14 @@ export default function App() {
       }}
     >
       <Router>
+      <Button
+        position="fixed"
+        right="1rem"
+        top="1rem"
+        onClick={toggleColorMode}
+      >
+        Toggle {colorMode === "light" ? "Dark" : "Light"}
+      </Button>
         <Switch>
           <Route exact path="/login"><LoginPage /></Route>
           <Route exact path="/register"><RegisterPage /></Route>
