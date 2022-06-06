@@ -70,7 +70,7 @@ export function LoginPage() {
       <HStack spacing='0px'>
         <StyledBox variant={'fullheightGrayColourBox'} >
           <Grid templateColumns='repeat(12, 1fr)' gap={0} mt={32}>
-            <GridItem mt={8} colStart={4} colEnd={10} h='10'>
+            <GridItem mt={8} colStart={{ base: 1, md: 4 }} colEnd={{ base: 13, md: 10 }}>
               <VStack spacing="6" align="center">
 
                 <Center w='100%' >
@@ -128,7 +128,7 @@ export function LoginPage() {
             </GridItem>
           </Grid>
         </StyledBox>
-        <StyledBox variant={'fullheightMainColourBox'}></StyledBox>
+        <StyledBox variant={'fullheightMainColourBox'} w={{ base: '0px', lg: '100%'}}></StyledBox>
       </HStack>
     )
   }

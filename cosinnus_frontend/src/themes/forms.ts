@@ -6,6 +6,6 @@ export const Input: ComponentStyleConfig = {
   },
   defaultProps: {
     variant: "outline",
-    focusBorderColor: 'gray.900',
+    focusBorderColor: 'gray.900'
   },
 }

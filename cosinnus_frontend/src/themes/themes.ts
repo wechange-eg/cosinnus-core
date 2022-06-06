@@ -53,6 +53,14 @@ const fontSizes = {
   "9xl": "8rem",
 }
 
+const breakpoints = {
+  sm: '320px',
+  md: '768px',
+  lg: '960px',
+  xl: '1200px',
+  '2xl': '1536px',
+}
+
 const config: ThemeConfig = {
   initialColorMode: "light",
   useSystemColorMode: true
@@ -68,6 +76,8 @@ const theme = extendTheme({
     Box
   },
   colors: wechangeColours,
+  fontSizes: fontSizes,
+  breakpoints: breakpoints,
   config,
 })
 
