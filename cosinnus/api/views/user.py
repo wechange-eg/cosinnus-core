@@ -2,13 +2,14 @@ import json
 
 import random
 
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate, login
 from django.http import HttpResponse
 from oauth2_provider.decorators import protected_resource
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import serializers, authentication
 
 from cosinnus.conf import settings
 from ..serializers.user import UserCreateUpdateSerializer, UserSerializer
@@ -181,6 +182,40 @@ def current_user(request):
     """
     serializer = UserSerializer(request.user)
     return Response(serializer.data)
+
+
+class LoginSerializer(serializers.Serializer):
+    username = serializers.EmailField()
+    password = serializers.CharField()
+
+    def validate(self, attrs):
+        user = authenticate(
+            username=attrs['username'], password=attrs['password'])
+
+        if not user:
+            raise serializers.ValidationError('Incorrect email or password.')
+
+        if not user.is_active:
+            raise serializers.ValidationError('User is disabled.')
+
+        return {'user': user}
+
+
+class CsrfExemptSessionAuthentication(authentication.SessionAuthentication):
+    def enforce_csrf(self, request):
+        return
+
+
+class LoginView(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+
+    def post(self, request):
+        serializer = LoginSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        login(request, user)
+        return Response(UserSerializer(user).data)
 
 
 oauth_current_user = OAuthUserView.as_view()
