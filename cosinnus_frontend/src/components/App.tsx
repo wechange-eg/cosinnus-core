@@ -4,12 +4,12 @@ import { BrowserRouter as Router, Switch } from "react-router-dom"
 import { IntlProvider } from "react-intl"
 
 import { ProtectedRoute, ProtectedRouteProps } from "./routes/ProtectedRoute"
-import { ProfilePage } from "./Profile"
 import { fetchTranslations } from "../store/translations"
 import { fetchSettings } from "../store/settings"
 import { fetchUser } from "../store/sessionAuth"
-import { LoginPage } from "./Login"
-import { RegisterPage } from "./Register"
+import { LoginPage } from "./auth/Login"
+import { RegisterPage } from "./auth/Register"
+import { PasswordResetPage } from "./auth/PasswordReset"
 
 import { useAppDispatch, RootState } from "../store"
 import { useSelector } from 'react-redux'
@@ -24,7 +24,6 @@ export default function App() {
   const translations = useSelector((state: RootState) => state.translations);
   const settings = useSelector((state: RootState) => state.settings);
   const isLoggedIn = useSelector((state: RootState) => state.sessionAuth.isLoggedIn);
-  const userIsAnonymous = useSelector((state: RootState) => state.sessionAuth.userIsAnonymous);
   const userFetched = useSelector((state: RootState) => state.sessionAuth.userFetched);
   const dispatch = useAppDispatch();
 
@@ -73,6 +72,7 @@ export default function App() {
           <Route exact path="/"><LoginPage /></Route>
           <Route exact path="/login"><LoginPage /></Route>
           <Route exact path="/register"><RegisterPage /></Route>
+          <Route exact path="/password-reset"><PasswordResetPage /></Route>
         </Switch>
       </Router>
     </IntlProvider>

@@ -16,14 +16,14 @@ import {
   Center,
 } from '@chakra-ui/react'
 
-import { StyledBox } from "../shared/boxes";
+import { StyledBox } from "../../shared/boxes";
 
 import { Redirect, Link as RouterLink } from 'react-router-dom'
-import { InputField } from "../shared/input"
-import { TwoColumnPage } from "../shared/pages"
-import { login } from "../../store/sessionAuth"
-import { fetchUser } from "../../store/sessionAuth"
-import { useAppDispatch, RootState } from "../../store"
+import { InputField } from "../../shared/input"
+import { TwoColumnPage } from "../../shared/pages"
+import { login } from "../../../store/sessionAuth"
+import { fetchUser } from "../../../store/sessionAuth"
+import { useAppDispatch, RootState } from "../../../store"
 import { useSelector } from 'react-redux'
 
 const getForm = ({ isSubmitting }: { isSubmitting: boolean }) => {
@@ -40,7 +40,7 @@ const getForm = ({ isSubmitting }: { isSubmitting: boolean }) => {
           <InputField name="password" type="password" />
         </FormControl>
 
-        <Link variant={"gray"}>
+        <Link variant={"gray"} as={RouterLink} to="/password-reset">
           <FormattedMessage id="Forgot your password?" />
         </Link>
 

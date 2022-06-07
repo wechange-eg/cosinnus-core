@@ -21,11 +21,11 @@ import {
 } from "formik"
 
 import { FormattedMessage } from "react-intl";
-import { InputField } from "../shared/input"
-import { TwoColumnPage } from "../shared/pages"
-import { StyledBox } from "../shared/boxes";
+import { InputField } from "../../shared/input"
+import { TwoColumnPage } from "../../shared/pages"
+import { StyledBox } from "../../shared/boxes";
 
-import { RootState } from "../../store"
+import { RootState } from "../../../store"
 import { useSelector } from 'react-redux'
 
 

@@ -2,7 +2,6 @@ export interface SessionAuthState {
   user?: UserProps,
   isLoggedIn: boolean,
   isFetching: boolean,
-  userIsAnonymous: boolean
   userFetched: boolean
 }
 
