@@ -3,17 +3,17 @@
 1. Dotfile
 
 Copy .env.dist to .env and configure settings:
-- BASE_URL: The base URL of the platform, e.g. https://staging.wechange.de
-- API_URL: The absolute API path of the platform, e.g. https://staging.wechange.de/api/v2
+- BASE_URL: The base URL of the platform, http://localhost:8000
+- API_URL: The absolute API path of the platform, http://localhost:8000/api/v2
 - USER_EMAIL and USER_PASSWORD: Initial data for the login form for convenience
 
 2. Install requirements
 
 `npm install`
 
-3. Run development server
+3. Build bundle
 
-`npm run start`
+`npm run watch`
 
 4. Available scripts
 
