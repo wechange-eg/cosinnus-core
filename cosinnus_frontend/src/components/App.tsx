@@ -7,7 +7,7 @@ import { ProtectedRoute, ProtectedRouteProps } from "./routes/ProtectedRoute"
 import { ProfilePage } from "./Profile"
 import { fetchTranslations } from "../store/translations"
 import { fetchSettings } from "../store/settings"
-import { fetchUser } from "../store/user"
+import { fetchUser } from "../store/sessionAuth"
 import { LoginPage } from "./Login"
 import { RegisterPage } from "./Register"
 
@@ -15,33 +15,35 @@ import { useAppDispatch, RootState } from "../store"
 import { useSelector } from 'react-redux'
 
 import {
-  Container,
   useColorMode,
-  Button,
-  Heading,
-  Text,
-  Divider,
+  Button
 } from "@chakra-ui/react"
 
 
 export default function App() {
-  const accessToken = useSelector((state: RootState) => state.auth.accessToken);
   const translations = useSelector((state: RootState) => state.translations);
   const settings = useSelector((state: RootState) => state.settings);
-  const profile = useSelector((state: RootState) => state.profile);
+  const isLoggedIn = useSelector((state: RootState) => state.sessionAuth.isLoggedIn);
+  const userIsAnonymous = useSelector((state: RootState) => state.sessionAuth.userIsAnonymous);
+  const userFetched = useSelector((state: RootState) => state.sessionAuth.userFetched);
   const dispatch = useAppDispatch();
 
-  if(Object.keys(translations).length === 0) dispatch(fetchTranslations())
-  if(Object.keys(settings).length === 0) dispatch(fetchSettings())
-  if(accessToken && Object.keys(profile).length === 0) dispatch(fetchUser())
+  if (Object.keys(translations).length === 0) dispatch(fetchTranslations())
+  if (Object.keys(settings).length === 0) dispatch(fetchSettings())
+  if(! userFetched) dispatch(fetchUser())
 
   const { colorMode, toggleColorMode } = useColorMode()
 
   const routeProps: ProtectedRouteProps = {
-    isAuthenticated: !!accessToken,
+    isAuthenticated: isLoggedIn,
     authPath: "/login",
     exact: true,
     path: "/",
+  }
+
+  if (isLoggedIn) {
+    window.location.replace("/dashboard/");
+    return null;
   }
 
   return (
@@ -59,18 +61,18 @@ export default function App() {
       }}
     >
       <Router>
-      <Button
-        position="fixed"
-        right="1rem"
-        top="1rem"
-        onClick={toggleColorMode}
-      >
-        Toggle {colorMode === "light" ? "Dark" : "Light"}
-      </Button>
+        <Button
+          position="fixed"
+          right="1rem"
+          top="1rem"
+          onClick={toggleColorMode}
+        >
+          Toggle {colorMode === "light" ? "Dark" : "Light"}
+        </Button>
         <Switch>
+          <Route exact path="/"><LoginPage /></Route>
           <Route exact path="/login"><LoginPage /></Route>
           <Route exact path="/register"><RegisterPage /></Route>
-          <ProtectedRoute {...routeProps} component={ProfilePage} />
         </Switch>
       </Router>
     </IntlProvider>

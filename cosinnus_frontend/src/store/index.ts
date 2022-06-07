@@ -14,22 +14,24 @@ import {
   REGISTER,
 } from 'redux-persist'
 
-import AuthReducer from "./auth";
+import TokenAuthReducer from "./tokenAuth";
+import SessionAuthReducer from "./sessionAuth"
 import SettingsReducer from "./settings";
 import TranslationsReducer from "./translations";
-import UserReducer from "./user";
+import MessageReducer from "./messages"
 
 const reducers = combineReducers({
-  auth: AuthReducer,
+  tokenAuth: TokenAuthReducer,
+  sessionAuth: SessionAuthReducer,
   settings: SettingsReducer,
   translations: TranslationsReducer,
-  profile: UserReducer
+  message: MessageReducer
  });
 
  const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth', 'settings'],
+  whitelist: ['tokenAuth', 'settings'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

@@ -20,8 +20,8 @@ interface LoginFormValues {
 
 const API_URL = `${process.env.API_URL}/`;
 
-export const login = createAsyncThunk(
-  "auth/login",
+export const fetchTokens = createAsyncThunk(
+  "auth/fetchToken",
   async (
     values: LoginFormValues | null,
   ): Promise<AuthResponseData | undefined> => {
@@ -37,25 +37,25 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {} as AuthState,
   reducers: {
-    logout(state) {
+    clearTokens(state) {
       state.accessToken = null
       state.refreshToken = null
     }
   },
   extraReducers: (builder) => {
     builder
-      .addCase(login.fulfilled, (state, action) => {
-          if (!action.payload) return;
-          state.accessToken = action.payload.access;
-          state.refreshToken = action.payload.refresh;
+      .addCase(fetchTokens.fulfilled, (state, action) => {
+        if (!action.payload) return;
+        state.accessToken = action.payload.access;
+        state.refreshToken = action.payload.refresh;
       })
-      .addCase(login.rejected, (state, action) => {
+      .addCase(fetchTokens.rejected, (state, action) => {
         state.errorMessage = action.error.message;
       })
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { clearTokens } = authSlice.actions;
 export default authSlice.reducer;
 
 

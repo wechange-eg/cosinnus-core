@@ -30,7 +30,7 @@ import { useSelector } from 'react-redux'
 
 
 export function RegisterPage() {
-  const errorMessage = useSelector((state: RootState) => state.auth.errorMessage);
+  const errorMessage = useSelector((state: RootState) => state.message.text);
 
   const getForm = ({ isSubmitting }: { isSubmitting: boolean }) => {
     return (
