@@ -21,6 +21,7 @@ _old_templates
 # Ignore JavaScript build artifacts.
 cosinnus/static/js/client.js
 # dist
+cosinnus_frontend/dist/main.bundle.js
 
 # Ignore node modules.
 node_modules
