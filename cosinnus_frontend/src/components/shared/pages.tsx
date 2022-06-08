@@ -7,7 +7,13 @@ import {
 } from '@chakra-ui/react'
 import { StyledBox } from "../shared/boxes";
 
-export function TwoColumnPage(props: any) {
+type Props = {
+  children?:
+  | React.ReactChild
+  | React.ReactChild[];
+};
+
+export function TwoColumnPage(props: Props) {
   return (
     <HStack spacing='0px'>
       <StyledBox variant={'fullheightGrayColourBox'} >

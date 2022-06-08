@@ -19,6 +19,10 @@ export interface SettingsProps {
   extraCss: string
 }
 
+export interface SettingsState {
+  settings: SettingsProps
+}
+
 export class Settings {
   props: SettingsProps
 
@@ -102,7 +106,7 @@ export const fetchSettings = createAsyncThunk(
 
 const settingsSlice = createSlice({
   name: "settings",
-  initialState: {} as SettingsProps,
+  initialState: {} as SettingsState,
   reducers: {},
   extraReducers: (builder) => {
     builder

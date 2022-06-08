@@ -11,9 +11,11 @@ export interface TranslationsResponse {
 }
 
 export interface TranslationsState {
-  locale: string
-  catalog: {
-    [s: string]: string
+  translations: {
+    locale: string
+    catalog: {
+      [s: string]: string
+    }
   }
 }
 

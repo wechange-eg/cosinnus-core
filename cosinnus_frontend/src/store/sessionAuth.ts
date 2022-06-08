@@ -34,8 +34,7 @@ export const login = createAsyncThunk(
     } catch (error) {
       const message =
         (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
+          error.response.data) ||
         error.message ||
         error.toString();
       thunkAPI.dispatch(setMessage(message));
@@ -62,7 +61,6 @@ const sessionAuthSlice = createSlice({
           state.isLoggedIn = false
           state.isFetching = false
           state.userFetched = true
-          state.userIsAnonymous = true
         }
       })
       .addCase(fetchUser.pending, (state, action) => {
