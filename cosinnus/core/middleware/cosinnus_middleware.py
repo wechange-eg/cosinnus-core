@@ -255,7 +255,8 @@ class GroupPermanentRedirectMiddleware(MiddlewareMixin, object):
                                 # except for the conference application view and any event views
                                 if len(request_tokens) > 4 and not (is_admin or \
                                                                     (len(request_tokens) >= 6 and request_tokens[5] in ['apply',]) or \
-                                                                    (len(request_tokens) >= 5 and request_tokens[4] in ['members', 'event', 'join', 'decline', 'accept', 'withdraw', 'leave'])):
+                                                                    (len(request_tokens) >= 5 and request_tokens[4] in ['members', 'event', 'join', 'decline', 'accept', 'withdraw', 'leave']) or \
+                                                                    (len(request_tokens) >= 7 and request_tokens[4] in ['file',] and request_tokens[6] in ['save', 'download',])):
                                     return HttpResponseRedirect(target_group.get_absolute_url())
                             elif check_ug_membership(request.user, target_group):
                                 # normal users only have access to the conference page of a conference group (and the management views)
