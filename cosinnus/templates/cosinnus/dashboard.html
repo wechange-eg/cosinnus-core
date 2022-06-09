@@ -114,7 +114,7 @@
 	
 	{% block group_announcements %}
 	    
-	    {% if SETTINGS.COSINNUS_MICROSITES_ENABLED and group.publicly_visible %}
+	    {% if SETTINGS.COSINNUS_MICROSITES_ENABLED and group.publicly_visible and not SETTINGS.COSINNUS_MICROSITES_DISABLE_NEEDS_LOVE_NAG_SCREEN %}
 		    {% comment %} -------    Microsite edit-me message ------------ {% endcomment %}
 		    {% if user.is_authenticated and user.pk in group.admins and not group.description_long %}
 			    <div class="alert alert-warning alert-dismissable">

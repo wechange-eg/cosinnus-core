@@ -600,6 +600,10 @@ class CosinnusConf(AppConf):
     # switch whether non-logged in users may access microsites
     MICROSITES_DISABLE_ANONYMOUS_ACCESS = False
     
+    # switch the "your microsite needs some love" message off for 
+    # group admins
+    MICROSITES_DISABLE_NEEDS_LOVE_NAG_SCREEN = False
+    
     # the default setting used when a group has no microsite_public_apps setting set
     # determines which apps public objects are shown on a microsite
     # e.g: ['cosinnus_file', 'cosinnus_event', ]
