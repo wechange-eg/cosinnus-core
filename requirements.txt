@@ -41,6 +41,7 @@ django-timezone-field==4.2.1
 django-two-factor-auth==1.13.1
 django-widget-tweaks==1.4.9
 djangorestframework==3.12.4
+djangorestframework-csv==2.1.1
 djangorestframework-jwt==1.11.0
 dnspython==1.15.0
 drf-yasg==1.20.0
