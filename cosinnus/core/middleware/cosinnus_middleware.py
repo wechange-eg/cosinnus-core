@@ -321,7 +321,7 @@ class GroupResolvingMiddlewareMixin(object):
                 # get group name from URL, might already fail and except out on short URLs
                 group_name = request.path.split('/')[2] 
                 try:
-                    setattr(request, '_middleware_resolved_group', get_group_for_request(group_name, request))
+                    setattr(request, '_middleware_resolved_group', get_group_for_request(group_name, request, fail_silently=True))
                 except Exception as e:
                     if settings.DEBUG:
                         raise e
