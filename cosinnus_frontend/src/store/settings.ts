@@ -1,6 +1,7 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
 
+// todo: props in the reducer/slice?
 export interface SettingsJson {
   name: string
   background_image: string
@@ -55,7 +56,7 @@ export class Settings {
    * @returns {SettingsJson} - object in JSON format
    */
   toJson(): SettingsJson {
-    const props = this.props
+    const { props } = this
     return {
       name: props.name,
       background_image: props.backgroundImage,
@@ -72,7 +73,7 @@ export class Settings {
    * @returns {string} Color including # or undefined if none
    */
   getThemeColor(): string {
-    return this.props.topColor && '#' + this.props.topColor || undefined
+    return (this.props.topColor && `#${this.props.topColor}`) || undefined
   }
 
   /**
@@ -88,34 +89,34 @@ export class Settings {
   }
 }
 
-const API_URL = `${process.env.API_URL}`;
+const API_URL = `${process.env.API_URL}`
 
 export const fetchSettings = createAsyncThunk(
-  "settings/fetch",
+  'settings/fetch',
   async (
     values: null,
-    { dispatch, getState }
   ): Promise<SettingsProps | undefined> => {
     const { data } = await axios.get<SettingsJson>(
       `${API_URL}/settings/`,
-      values
-    );
-    return Settings.fromJson(data).props;
-  }
-);
+      values,
+    )
+    return Settings.fromJson(data).props
+  },
+)
 
 const settingsSlice = createSlice({
-  name: "settings",
+  name: 'settings',
   initialState: {} as SettingsState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchSettings.fulfilled, (state, action) => {
-        if (!action.payload) return;
-        state.settings = action.payload;
+        if (!action.payload) return
+        // eslint-disable-next-line no-param-reassign
+        state.settings = action.payload
       })
   },
-});
+})
 
-export const {} = settingsSlice.actions;
-export default settingsSlice.reducer;
+export const { actions } = settingsSlice
+export default settingsSlice.reducer

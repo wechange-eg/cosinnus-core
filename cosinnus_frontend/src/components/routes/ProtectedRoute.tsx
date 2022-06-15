@@ -1,6 +1,7 @@
-import * as React from "react"
-import { Redirect, Route, RouteProps } from "react-router-dom"
+import React, { FC } from 'react'
+import { Redirect, Route, RouteProps } from 'react-router-dom'
 
+// todo: set default values for optional props
 export interface ProtectedRouteProps extends RouteProps {
   isAuthenticated: boolean
   authPath?: string
@@ -8,15 +9,21 @@ export interface ProtectedRouteProps extends RouteProps {
   restrictedPath?: string
 }
 
-export const ProtectedRoute: React.FC<ProtectedRouteProps> = props => {
-  let redirectPath = ""
-  if (!props.isAuthenticated) {
-    redirectPath = props.authPath
+const ProtectedRoute: FC<ProtectedRouteProps> = (props) => {
+  const { isAuthenticated, authPath } = props
+
+  let redirectPath = ''
+  if (!isAuthenticated) {
+    redirectPath = authPath
   }
+
+  // todo: fix spread operator. not all props should pass through
   if (redirectPath) {
     const renderComponent = () => <Redirect to={{ pathname: redirectPath }} />
     return <Route {...props} component={renderComponent} render={undefined} />
-  } else {
-    return <Route {...props} />
   }
+  return <Route {...props} />
 }
+
+
+export default ProtectedRoute

@@ -1,7 +1,7 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
 
-const API_URL = `${process.env.API_URL}`;
+const API_URL = `${process.env.API_URL}`
 
 export interface TranslationsResponse {
   locale: string
@@ -20,31 +20,34 @@ export interface TranslationsState {
 }
 
 export const fetchTranslations = createAsyncThunk(
-  "translations/fetch",
+  'translations/fetch',
   async (
     values: null,
-    { dispatch, getState }
   ): Promise<TranslationsResponse | undefined> => {
     const { data } = await axios.get<TranslationsResponse>(
       `${API_URL}/jsi18n/`,
-      values
-    );
-    return data;
-  }
-);
+      values,
+    )
+    return data
+  },
+)
 
 const translationSlice = createSlice({
-  name: "translations",
+  name: 'translations',
   initialState: {} as TranslationsState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchTranslations.fulfilled, (state, action) => {
-        if (!action.payload) return;
-        state.translations = action.payload;
+        if (!action.payload) {
+          return
+        }
+
+        // eslint-disable-next-line no-param-reassign
+        state.translations = action.payload
       })
   },
-});
+})
 
-export const { } = translationSlice.actions;
-export default translationSlice.reducer;
+export const { actions } = translationSlice
+export default translationSlice.reducer

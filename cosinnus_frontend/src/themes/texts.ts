@@ -1,13 +1,15 @@
 import type { ComponentStyleConfig } from '@chakra-ui/theme'
 
-export const Text: ComponentStyleConfig = {
+const Text: ComponentStyleConfig = {
   baseStyle: ({ colorMode }) => ({
-    color: colorMode === "dark" ? "white" : "gray.800",
-    fontSize: "md"
+    color: colorMode === 'dark' ? 'white' : 'gray.800',
+    fontSize: 'md',
   }),
   variants: {
     white: {
-      color: "white"
-    }
-  }
+      color: 'white',
+    },
+  },
 }
+
+export default Text

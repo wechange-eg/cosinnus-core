@@ -1,9 +1,9 @@
-import React from "react"
+import React, { FC } from 'react'
 import {
   Formik,
-  Form
-} from "formik"
-import { FormattedMessage, useIntl } from "react-intl";
+  Form,
+} from 'formik'
+import { FormattedMessage } from 'react-intl'
 import {
   Box,
   Heading,
@@ -16,77 +16,75 @@ import {
   Center,
 } from '@chakra-ui/react'
 
-import { StyledBox } from "../../shared/boxes";
-
-import { Redirect, Link as RouterLink } from 'react-router-dom'
-import { InputField } from "../../shared/input"
-import { TwoColumnPage } from "../../shared/pages"
-import { login } from "../../../store/sessionAuth"
-import { fetchUser } from "../../../store/sessionAuth"
-import { useAppDispatch, RootState } from "../../../store"
+import { Link as RouterLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { StyledBox } from '../../shared/boxes'
 
-const getForm = ({ isSubmitting }: { isSubmitting: boolean }) => {
-  return (
-    <Form>
-      <VStack spacing="4" align="start">
-        <FormControl isRequired>
-          <FormLabel htmlFor='username'>Email address</FormLabel>
-          <InputField name="username" type="email" autoComplete="off" />
-        </FormControl>
+import { InputField } from '../../shared/input'
+import { TwoColumnPage } from '../../shared/pages'
+import { login } from '../../../store/sessionAuth'
+import { useAppDispatch, RootState } from '../../../store'
 
-        <FormControl isRequired>
-          <FormLabel htmlFor='password'>Password</FormLabel>
-          <InputField name="password" type="password" />
-        </FormControl>
+const getForm = ({ isSubmitting }: { isSubmitting: boolean }) => (
+  <Form>
+    <VStack spacing="4" align="start">
+      <FormControl isRequired>
+        <FormLabel htmlFor="username">Email address</FormLabel>
+        <InputField name="username" type="email" autoComplete="off" />
+      </FormControl>
 
-        <Link variant={"gray"} as={RouterLink} to="/password-reset">
-          <FormattedMessage id="Forgot your password?" />
-        </Link>
+      <FormControl isRequired>
+        <FormLabel htmlFor="password">Password</FormLabel>
+        <InputField name="password" type="password" />
+      </FormControl>
 
-        <Button
-          type="submit"
-          isLoading={isSubmitting}
-          width="100%"
-          mb="1"
-        >
-          <FormattedMessage id="Login" />
-        </Button>
-      </VStack>
-    </Form>
-  )
-}
+      <Link variant="gray" as={RouterLink} to="/password-reset">
+        <FormattedMessage id="Forgot your password?" />
+      </Link>
 
-export function LoginPage() {
-  const errorMessage = useSelector((state: RootState) => state.message.text);
-  const isLoggedIn = useSelector((state: RootState) => state.sessionAuth.isLoggedIn);
-  const dispatch = useAppDispatch();
+      <Button
+        type="submit"
+        isLoading={isSubmitting}
+        width="100%"
+        mb="1"
+      >
+        <FormattedMessage id="Login" />
+      </Button>
+    </VStack>
+  </Form>
+)
+
+const LoginPage: FC = () => {
+  const errorMessage = useSelector((state: RootState) => state.message.text)
+  useSelector((state: RootState) => state.sessionAuth.isLoggedIn)
+  const dispatch = useAppDispatch()
 
   return (
     <TwoColumnPage>
-      <Center w='100%' >
+      <Center w="100%">
         <Heading>
           <FormattedMessage id="Log In" />
         </Heading>
       </Center>
-      <Center w='100%'>
+      <Center w="100%">
         <Text>
           <FormattedMessage id="Welcome to wechange.de" />
         </Text>
       </Center>
-      {errorMessage &&
-        <StyledBox variant={'errorAlert'}>
+      {errorMessage
+        && (
+        <StyledBox variant="errorAlert">
           <Text variant="white" fontWeight={700}>
             <FormattedMessage id="Login not possible" />
           </Text>
           <Text variant="white">{errorMessage}</Text>
         </StyledBox>
-      }
-      <StyledBox variant={'formBox'}>
+        )}
+      <StyledBox variant="formBox">
         <Formik
           initialValues={{
-            username: `${process.env.USER_EMAIL || ""}`,
-            password: `${process.env.USER_PASSWORD || ""}`
+            username: `${process.env.USER_EMAIL || ''}`,
+            password: `${process.env.USER_PASSWORD || ''}`,
           }}
           onSubmit={(values, { setSubmitting }) => {
             dispatch(login(values))
@@ -113,3 +111,5 @@ export function LoginPage() {
     </TwoColumnPage>
   )
 }
+
+export default LoginPage
