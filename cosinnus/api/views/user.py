@@ -17,6 +17,7 @@ from ...models import get_user_profile_model, CosinnusGroup, CosinnusGroupMember
 from cosinnus.models.membership import MEMBER_STATUS, MEMBERSHIP_MANAGER,\
     MEMBERSHIP_ADMIN
 from cosinnus.api.views.mixins import CosinnusFilterQuerySetMixin
+from cosinnus.views.common import LoginViewAdditionalLogicMixin
 
 User = get_user_model()
 
@@ -206,16 +207,25 @@ class CsrfExemptSessionAuthentication(authentication.SessionAuthentication):
         return
 
 
-class LoginView(APIView):
+class LoginView(LoginViewAdditionalLogicMixin, APIView):
     permission_classes = (permissions.AllowAny,)
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
+        
+        # deny login if additional validation checks fail
+        additional_checks_error_message = self.additional_user_validation_checks(user)
+        if additional_checks_error_message:
+            raise serializers.ValidationError({'non_field_errors': [additional_checks_error_message]})
+        
+        # user is authenticated correctly, log them in
         login(request, user)
-        return Response(UserSerializer(user).data)
+        
+        response = Response(UserSerializer(user).data)
+        response = self.set_response_cookies(response)
+        return response
 
 
 oauth_current_user = OAuthUserView.as_view()
