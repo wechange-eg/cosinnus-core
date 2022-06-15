@@ -326,8 +326,23 @@ class CosinnusConf(AppConf):
     # Is external content from other platforms enabled?
     EXCHANGE_ENABLED = False
 
-    # Internal portal ID for external content
+    # Internal portal ID for external content. does not usually need to be changed
     EXCHANGE_PORTAL_ID = 99999
+    
+    # Exchange Backends
+    # Defaults:
+    #   backend: 'cosinnus_exchange.backends.ExchangeBackend'
+    #   url: None (required)
+    #   token_url: (url + ../token/)
+    #   username: None (if no login required)
+    #   password: None (if no login required)
+    #   source: (domain from URL)
+    #   model: None (required, e.g. 'cosinnus_exchange.Event')
+    #   serializer: None (required, e.g. 'cosinnus_exchange.serializers.ExchangeEventSerializer')
+    EXCHANGE_BACKENDS = []
+    
+    # default cron run frequency for exchange data pulls
+    EXCHANGE_RUN_EVERY_MINS = 60 * 24 # once a day
 
     #: How long a group should at most stay in cache until it will be removed
     GROUP_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
