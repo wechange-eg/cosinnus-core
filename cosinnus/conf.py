@@ -600,6 +600,10 @@ class CosinnusConf(AppConf):
     # switch whether non-logged in users may access microsites
     MICROSITES_DISABLE_ANONYMOUS_ACCESS = False
     
+    # switch the "your microsite needs some love" message off for 
+    # group admins
+    MICROSITES_DISABLE_NEEDS_LOVE_NAG_SCREEN = False
+    
     # the default setting used when a group has no microsite_public_apps setting set
     # determines which apps public objects are shown on a microsite
     # e.g: ['cosinnus_file', 'cosinnus_event', ]
@@ -1162,18 +1166,15 @@ class CosinnusConf(AppConf):
     
     # determines which cosinnus_notification IDs should be pulled up from
     # the main digest body into its own category with a header
-    # format: ((<str:category_header>, <list<str:notification_id>>, <str:header_fa_icon>, <str:header_url_reverse>), ...)
+    # format: (
+    #     (
+    #         <str:category_header>,
+    #         <list<str:notification_id>>, 
+    #         <str:header_fa_icon>, 
+    #         <str:header_url_reverse>,
+    #         <func:group_condition_function>,
+    #     ), ...)
     NOTIFICATIONS_DIGEST_CATEGORIES = [
-        (
-            _('Invitations'), 
-            [
-                'user_group_invited',
-                'user_group_join_accepted',
-                'user_group_join_declined',
-            ], 
-            'fa-group', 
-            'cosinnus:user-dashboard'
-        ),
         (
             _('Conferences'), 
             [
@@ -1186,7 +1187,30 @@ class CosinnusConf(AppConf):
                 'user_conference_application_waitlisted',
             ], 
             'fa-television', 
-            'cosinnus:conference__group-list'
+            'cosinnus:conference__group-list',
+            None
+        ),
+        (
+            _('Invitations to Conferences'), 
+            [
+                'user_group_invited',
+                'user_group_join_accepted',
+                'user_group_join_declined',
+            ], 
+            'fa-television', 
+            'cosinnus:user-dashboard',
+            lambda group: group.type == 2
+        ),
+        (
+            _('Invitations to Groups and Projects'), 
+            [
+                'user_group_invited',
+                'user_group_join_accepted',
+                'user_group_join_declined',
+            ], 
+            'fa-group', 
+            'cosinnus:user-dashboard',
+            lambda group: group.type != 2
         ),
     ]
     

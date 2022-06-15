@@ -390,8 +390,8 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
             username = str(user.id)
 
         def is_username_free(username):
-            value = f'"{PROFILE_SETTING_ROCKET_CHAT_USERNAME}":"{username}"'
-            queryset = get_user_profile_model().objects.filter(settings__has_key=value)
+            filter_query = {f'settings__{PROFILE_SETTING_ROCKET_CHAT_USERNAME}': username}
+            queryset = get_user_profile_model().objects.filter(**filter_query)
             return queryset.count() == 0
 
         i = 1
