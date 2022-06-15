@@ -28,7 +28,7 @@ from cosinnus.models.map import CloudfileMapCard, HaystackMapResult, \
     SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS, \
     filter_event_searchqueryset_by_upcoming, \
     filter_event_or_conference_starts_after, \
-    filter_event_or_conference_starts_before
+    filter_event_or_conference_starts_before, EXCHANGE_SEARCH_MODEL_NAMES
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.functions import is_number, ensure_list_of_ints
 from cosinnus.utils.permissions import check_object_read_access
@@ -74,7 +74,7 @@ MAP_NON_CONTENT_TYPE_SEARCH_PARAMETERS = {
     'item': None,
     'ignore_location': False, # if True, we completely ignore locs, and even return results without location
     'mine': False, # if True, we only show items of the current user. ignored if user not authenticated
-    'external': False,
+    'external': True,
     'fromDate': None,
     'fromTime': None,
     'toDate': None,
@@ -170,6 +170,8 @@ class SearchQuerySetMixin:
 
         # filter for requested model types
         model_list = [klass for klass, param_name in list(SEARCH_MODEL_NAMES.items()) if self.params.get(param_name, False)]
+        if settings.COSINNUS_EXCHANGE_ENABLED:
+            model_list += [klass for klass, param_name in list(EXCHANGE_SEARCH_MODEL_NAMES.items()) if self.params.get(param_name, False)]
 
         sqs = SearchQuerySet().models(*model_list)
 
@@ -533,7 +535,7 @@ def get_searchresult_by_args(portal, model_type, slug, user=None):
     """ Retrieves a HaystackMapResult just as the API would, for a given shortid
         in the form of `<classid>.<instanceid>` (see `itemid_from_searchresult()`). """
     
-    # monkey-hack: if the portal id is 0, we have an external item, so look up the external models
+    # if the portal id is COSINNUS_EXCHANGE_PORTAL_ID, we have an external item, so look up the external models
     if settings.COSINNUS_EXCHANGE_ENABLED and portal == settings.COSINNUS_EXCHANGE_PORTAL_ID:
         from cosinnus.models.map import EXCHANGE_SEARCH_MODEL_NAMES_REVERSE
         model = EXCHANGE_SEARCH_MODEL_NAMES_REVERSE.get(model_type, None)
@@ -542,7 +544,7 @@ def get_searchresult_by_args(portal, model_type, slug, user=None):
     
     if model_type == 'people':
         sqs = SearchQuerySet().models(model).filter_and(slug=slug)
-    elif model_type == 'events':
+    elif model_type == 'events' and '*' in slug:
         group_slug, slug = slug.split('*', 1)
         sqs = SearchQuerySet().models(model).filter_and(portal=portal, group_slug=group_slug, slug=slug)
     else:

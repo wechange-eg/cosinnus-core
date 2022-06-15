@@ -115,7 +115,7 @@ def filter_searchqueryset_for_portal(sqs, portals=None, restrict_multiportals_to
     if portals is None:
         portals = get_visible_portal_ids()
     if exchange:
-        # if enabled, add the non-existing 0-id portal, for external portals
+        # if enabled, add the non-existing 9999-id portal, for external portals
         portals = [settings.COSINNUS_EXCHANGE_PORTAL_ID] + portals
     
     if portals and restrict_multiportals_to_current:

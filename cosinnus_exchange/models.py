@@ -94,13 +94,20 @@ class ExchangeObjectBaseModel(IndexingUtilsMixin, models.Model):
     class Meta(object):
         managed = False
         
+    @property
+    def pk(self):
+        return self.id
+    
+    def _get_pk_val(self):
+        return self.id
+        
     def __init__(self, **kwargs):
         """ Note:
             - `tags` is passed as an array of strings and then saved as taggit manager
             - `topics` is passed as an array of ints and then saved as comma-separated int string
                 (see `settings.TOPIC_CHOICES`)
         """
-        self.pk = kwargs.get('url')
+        self.id = kwargs.get('url')
         self.slug = kwargs.get('external_id')
         self.source = kwargs.get('source')
         self.title = kwargs.get('title')
@@ -160,6 +167,14 @@ class ExchangeProject(ExchangeBaseGroup):
 class ExchangeSociety(ExchangeBaseGroup):
     
     GROUP_MODEL_TYPE = CosinnusBaseGroup.TYPE_SOCIETY
+    
+    class Meta(object):
+        managed = False
+        
+        
+class ExchangeConference(ExchangeBaseGroup):
+    
+    GROUP_MODEL_TYPE = CosinnusBaseGroup.TYPE_CONFERENCE
     
     class Meta(object):
         managed = False
