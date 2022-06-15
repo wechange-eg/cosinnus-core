@@ -106,6 +106,8 @@ def threaded_execution_and_catch_error(f):
                 logger.error('Could not connect to the ElasticSearch backend for indexing! The search function will not work and saving objects on the site will be terribly slow! Exception in extra.', extra={'exception': force_text(e)})
             except Exception as e:
                 logger.error('An unknown error occured while indexing an object! Exception in extra.', extra={'exception': force_text(e)})
+                if settings.DEBUG:
+                    raise
         
         if getattr(settings, 'COSINNUS_ELASTIC_BACKEND_RUN_THREADED', True):
             class CosinnusElasticsearchExecutionThread(Thread):

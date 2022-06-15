@@ -308,6 +308,9 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
     def prepare_slug(self, obj):
         return obj.user.username
     
+    def prepare_sort_field(self, obj):
+        return obj.user.first_name
+    
     def get_image_field_for_icon(self, obj):
         return obj.get_image_field_for_icon()
     
