@@ -8,15 +8,15 @@ import {
   useColorMode,
   Button,
 } from '@chakra-ui/react'
-import { ProtectedRouteProps } from './routes/ProtectedRoute'
-import { fetchTranslations } from '../store/translations'
-import { fetchSettings } from '../store/settings'
-import { fetchUser } from '../store/sessionAuth'
-import LoginPage from './auth/Login'
-import RegisterPage from './auth/Register'
-import PasswordResetPage from './auth/PasswordReset'
+import { ProtectedRouteProps } from './components/routes/ProtectedRoute'
+import { fetchTranslations } from './store/translations'
+import { fetchSettings } from './store/settings'
+import { fetchUser } from './store/sessionAuth'
+import LoginPage from './pages/login'
+import RegisterPage from './pages/register'
+import PasswordResetPage from './pages/password-reset'
 
-import { useAppDispatch, RootState } from '../store'
+import { useAppDispatch, RootState } from './store'
 
 
 const App: FC = () => {

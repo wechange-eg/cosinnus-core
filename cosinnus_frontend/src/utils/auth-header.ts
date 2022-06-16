@@ -1,7 +1,8 @@
-export default function authHeader(accessToken: string) {
+const authHeader = (accessToken: string) => {
   if (accessToken) {
-    return { Authorization: 'Bearer ' + accessToken};
-  } else {
-    return {};
+    return { Authorization: `Bearer ${accessToken}` }
   }
+  return {}
 }
+
+export default authHeader

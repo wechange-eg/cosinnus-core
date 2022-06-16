@@ -1,13 +1,27 @@
-import React from "react"
-import { FieldHookConfig, useField } from "formik";
+import React, { FC } from 'react'
+import { useField } from 'formik'
 import {
   Input as ChakraInput,
   InputProps as ChakraInputProps,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react'
 
-type Props = ChakraInputProps & FieldHookConfig<"input">;
 
-export const InputField = ({ name, ...props }: Props) => {
-  const [field] = useField(name)
-  return <ChakraInput {...props} {...field} />
+interface InputFieldProps extends ChakraInputProps {}
+
+const InputField: FC<InputFieldProps> = (props) => {
+  const { name } = props
+
+  const [field, _meta, _helpers] = useField(name)
+
+  /* eslint-disable react/jsx-props-no-spreading */
+  return (
+    <ChakraInput
+      {...field}
+      {...props}
+    />
+  )
+  /* eslint-enable react/jsx-props-no-spreading */
 }
+
+
+export default InputField

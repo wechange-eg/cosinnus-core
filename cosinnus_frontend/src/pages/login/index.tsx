@@ -18,12 +18,12 @@ import {
 
 import { Link as RouterLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { StyledBox } from '../../shared/boxes'
+import StyledBox from '../../components/shared/boxes'
 
-import { InputField } from '../../shared/input'
-import { TwoColumnPage } from '../../shared/pages'
-import { login } from '../../../store/sessionAuth'
-import { useAppDispatch, RootState } from '../../../store'
+import InputField from '../../components/shared/input'
+import SplitColumns from '../../layouts/SplitColumns'
+import { login } from '../../store/sessionAuth'
+import { useAppDispatch, RootState } from '../../store'
 
 const getForm = ({ isSubmitting }: { isSubmitting: boolean }) => (
   <Form>
@@ -60,7 +60,7 @@ const LoginPage: FC = () => {
   const dispatch = useAppDispatch()
 
   return (
-    <TwoColumnPage>
+    <SplitColumns>
       <Center w="100%">
         <Heading>
           <FormattedMessage id="Log In" />
@@ -108,7 +108,7 @@ const LoginPage: FC = () => {
           </Text>
         </Center>
       </Box>
-    </TwoColumnPage>
+    </SplitColumns>
   )
 }
 

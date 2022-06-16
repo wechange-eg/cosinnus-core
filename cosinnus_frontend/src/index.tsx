@@ -5,7 +5,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
 import { store } from './store'
-import App from './components/App'
+import App from './App'
 import theme from './themes/themes'
 
 const persistor = persistStore(store)
