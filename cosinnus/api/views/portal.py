@@ -3,7 +3,6 @@ from django.contrib.auth import get_user_model
 from django.templatetags.static import static
 from django.template import Context
 from django.template.loader import render_to_string
-from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.settings import api_settings
@@ -18,10 +17,11 @@ from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject, CosinnusConference
 from cosinnus.templatetags.cosinnus_tags import cosinnus_menu_v2,\
     cosinnus_footer_v2
+from cosinnus.utils.permissions import IsCosinnusAdminUser
 from cosinnus.utils.user import filter_active_users, get_user_id_hash, get_user_tos_accepted_date
 from cosinnus.views.housekeeping import _get_group_storage_space_mb
 
-from itertools import zip_longest
+from operator import itemgetter
 
 
 class StatisticsView(APIView):
@@ -174,111 +174,93 @@ class SimpleStatisticsGroupConferenceStorageReportRenderer(CSVRenderer):
 class SimpleStatisticsGroupStorageReportView(APIView):
     """
     API endpoint for group storage report overview.
-    Basically a refactoring for `group_storage_report_csv` function.
     """
     renderer_classes = (SimpleStatisticsGroupConferenceStorageReportRenderer,) + tuple(api_settings.DEFAULT_RENDERER_CLASSES)
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (IsCosinnusAdminUser,)
 
-    def get_group_urls(self, groups):
-        group_urls = [group.get_absolute_url() for group in groups]
-        return group_urls
-    
-    def get_member_count(self, groups):
-        group_members = [group.member_count for group in groups]
-        return group_members
+    def get_group_storage_report(self, group_model=None):
+        rows = []
+        klass = group_model or CosinnusSociety
+        for group in klass.objects.all_in_portal():
+            projects = group.get_children()
+            group_size = _get_group_storage_space_mb(group)
+            projects_size = 0
+            for project in projects:
+                projects_size += _get_group_storage_space_mb(project)
+            rows.append([group.get_absolute_url(), group.member_count, len(projects), group_size, group_size + projects_size])
+        rows = sorted(rows, key=itemgetter(4), reverse=True)
 
-    def get_number_projects(self, groups):
-        projects = [group.get_children() for group in groups]
-        project_lens = [len(project) for project in projects]
-        return project_lens
-
-    def get_group_size(self, groups):
-        groups_qs = [group for group in groups]
-        group_sizes = [_get_group_storage_space_mb(group) for group in groups_qs]
-        return group_sizes
-  
-    def get_group_and_project_sum_size(self, groups):
-        projects = [group.get_children() for group in groups]
-        projects_sizes = [_get_group_storage_space_mb(val) for sublist in projects for val in sublist]
-        result = [x+y for x, y in zip_longest(projects_sizes, self.get_group_size(groups), fillvalue=0)]
-        return result
+        return rows
 
     def get(self, request, *args, **kwargs):
-        groups = CosinnusSociety.objects.all_in_portal()
 
-        group_urls = self.get_group_urls(groups)
-        member_count = self.get_member_count(groups)
-        number_of_projects = self.get_number_projects(groups)
-        group_storage_mb = self.get_group_size(groups)
-        group_and_projects_sum_mb = self.get_group_and_project_sum_size(groups)
+        group_storage_report = self.get_group_storage_report(group_model=None or CosinnusSociety)
 
         data = [
             {
-                'urls': group_urls[i], 
-                'member_count': member_count[i], 
-                'number_projects': number_of_projects[i],
-                'group_storage_mb': group_storage_mb[i],
-                'group_and_projects_sum_mb': group_and_projects_sum_mb[i],
-            }
-            for i in range(len(group_urls))
-        ]
+            'urls': elem[0],
+            'member_count': elem[1],
+            'number_projects': elem[2],
+            'group_storage_mb': elem[3],
+            'group_and_projects_sum_mb': elem[4],
+            } 
+        for elem in group_storage_report]
 
         return Response(data)
+
+    def finalize_response(self, request, response, *args, **kwargs):
+        """
+        Appends Content-Disposition header to CSV requests and handles the file name.
+        """
+        if request.GET.get('format') == 'csv':
+            response['Content-Disposition'] = 'attachment; filename=group-storage-report.csv'
+        return super().finalize_response(request, response, *args, **kwargs) 
 
 
 class SimpleStatisticsConferenceStorageReportView(APIView):
     """
     API endpoint for conference storage report overview.
-    Basically a refactoring for `conference_storage_report_csv` function.
     """
     renderer_classes = (SimpleStatisticsGroupConferenceStorageReportRenderer, ) + tuple(api_settings.DEFAULT_RENDERER_CLASSES)
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (IsCosinnusAdminUser,)
 
-    def get_conference_urls(self, conferences):
-        conference_urls = [conference.get_absolute_url() for conference in conferences]
-        return conference_urls
-    
-    def get_member_count(self, conferences):
-        conference_members = [conference.member_count for conference in conferences]
-        return conference_members
+    def get_conference_storage_report(self, group_model=None):
+        rows = []
+        klass = group_model or CosinnusConference
+        for group in klass.objects.all_in_portal():
+            projects = group.get_children()
+            group_size = _get_group_storage_space_mb(group)
+            projects_size = 0
+            for project in projects:
+                projects_size += _get_group_storage_space_mb(project)
+            rows.append([group.get_absolute_url(), group.member_count, len(projects), group_size, group_size + projects_size])
+        rows = sorted(rows, key=itemgetter(4), reverse=True)
 
-    def get_number_projects(self, conferences):
-        projects = [conference.get_children() for conference in conferences]
-        project_lens = [len(project) for project in projects]
-        return project_lens
-
-    def get_conference_size(self, conferences):
-        conferences = [conference for conference in conferences]
-        conference_sizes = [_get_group_storage_space_mb(conference) for conference in conferences]
-        return conference_sizes
-
-    def get_group_and_project_sum_size(self, conferences):
-        projects = [conference.get_children() for conference in conferences]
-        projects_sizes = [_get_group_storage_space_mb(val) for sublist in projects for val in sublist]
-        result = [x+y for x, y in zip_longest(projects_sizes, self.get_conference_size(conferences), fillvalue=0)]
-        return result
+        return rows
 
     def get(self, request, *args, **kwargs):
-        conferences = CosinnusConference.objects.all_in_portal()
 
-        conference_urls = self.get_conference_urls(conferences)
-        member_count = self.get_member_count(conferences)
-        number_of_projects = self.get_number_projects(conferences)
-        group_storage_mb = self.get_conference_size(conferences)
-        group_and_projects_sum_mb = self.get_group_and_project_sum_size(conferences)
+        conference_storage_report = self.get_conference_storage_report(group_model=None or CosinnusConference)
 
         data = [
             {
-                'urls': conference_urls[i], 
-                'member_count': member_count[i], 
-                'number_projects': number_of_projects[i],
-                'group_storage_mb': group_storage_mb[i],
-                'group_and_projects_sum_mb': group_and_projects_sum_mb[i],
-            }
-            for i in range(len(conference_urls))
-        ]
+            'urls': elem[0],
+            'member_count': elem[1],
+            'number_projects': elem[2],
+            'group_storage_mb': elem[3],
+            'group_and_projects_sum_mb': elem[4],
+            } 
+        for elem in conference_storage_report]
 
         return Response(data)
+
+    def finalize_response(self, request, response, *args, **kwargs):
+        """
+        Appends Content-Disposition header to CSV requests and handles the file name.
+        """
+        if request.GET.get('format') == 'csv':
+            response['Content-Disposition'] = 'attachment; filename=conference-storage-report.csv'
+        return super().finalize_response(request, response, *args, **kwargs) 
 
 
 class SimpleStatisticsProjectStorageReportRenderer(CSVRenderer):
@@ -290,42 +272,41 @@ class SimpleStatisticsProjectStorageReportRenderer(CSVRenderer):
 
 class SimpleStatisticsProjectStorageReportView(APIView):
     """
-    API endpoint for project storage report overview.
-    Basically a refactoring for `project_storage_report_csv` function.
+    API endpoint for conference project report overview.
     """
     renderer_classes = (SimpleStatisticsProjectStorageReportRenderer,) + tuple(api_settings.DEFAULT_RENDERER_CLASSES)
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (IsCosinnusAdminUser,)
 
-    def get_project_urls(self, projects_in_portal):
-        project_urls = [project.get_absolute_url() for project in projects_in_portal]
-        return project_urls
+    def get_project_storage_report(self):
+        rows = []
+        for project in CosinnusProject.objects.all_in_portal():
+            project_size = _get_group_storage_space_mb(project)
+            rows.append([project.get_absolute_url(), project.member_count, project_size])
+        rows = sorted(rows, key=itemgetter(2), reverse=True)
 
-    def get_member_count(self, projects_in_portal):
-        group_members = [group.member_count for group in projects_in_portal]
-        return group_members
-    
-    def get_project_size(self, projects_in_portal):
-        projects = [project for project in projects_in_portal]
-        project_sizes = [_get_group_storage_space_mb(project) for project in projects]
-        return project_sizes
+        return rows
 
     def get(self, request, *args, **kwargs):
-        projects_in_portal = CosinnusProject.objects.all_in_portal()
 
-        project_urls = self.get_project_urls(projects_in_portal)
-        member_count = self.get_member_count(projects_in_portal)
-        project_storage_mb = self.get_project_size(projects_in_portal)
+        project_storage_report = self.get_project_storage_report()
 
         data = [
             {
-                'urls': project_urls[i], 
-                'member_count': member_count[i],
-                'project_storage_mb': project_storage_mb[i],
-            }
-            for i in range(len(projects_in_portal))
-        ]
+            'urls': elem[0],
+            'member_count': elem[1],
+            'project_storage_mb': elem[2],
+            } 
+        for elem in project_storage_report]
 
         return Response(data)
+
+    def finalize_response(self, request, response, *args, **kwargs):
+        """
+        Renders the csv output with custom headers for project storage report API endpoint
+        """
+        if request.GET.get('format') == 'csv':
+            response['Content-Disposition'] = 'attachment; filename=project-storage-report.csv'
+        return super().finalize_response(request, response, *args, **kwargs) 
 
 
 class SimpleStatisticsUserActivityInfoRenderer(CSVRenderer):
@@ -350,10 +331,9 @@ class SimpleStatisticsUserActivityInfoRenderer(CSVRenderer):
 class SimpleStatisticsUserActivityInfoView(APIView):
     """
     API endpoint for user activity information overview.
-    Basically a refactoring for `user_activity_info` function.
     """
     renderer_classes = (SimpleStatisticsUserActivityInfoRenderer, ) + tuple(api_settings.DEFAULT_RENDERER_CLASSES)
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (IsCosinnusAdminUser,)
 
     def get_user_activity_stats(self):
         users = {}
@@ -465,6 +445,14 @@ class SimpleStatisticsUserActivityInfoView(APIView):
 
         return Response(data)
 
+    def finalize_response(self, request, response, *args, **kwargs):
+        """
+        Renders the csv output with custom headers for project storage report API endpoint
+        """
+        if request.GET.get('format') == 'csv':
+            response['Content-Disposition'] = 'attachment; filename=user_activity_info.csv'
+        return super().finalize_response(request, response, *args, **kwargs) 
+
 
 class SimpleStatisticsBBBRoomVisitsRenderer(CSVRenderer):
     """
@@ -489,101 +477,81 @@ class SimpleStatisticsBBBRoomVisitsRenderer(CSVRenderer):
 class SimpleStatisticsBBBRoomVisitsView(APIView):
     """
     API endpoint for BBB room visit statistics overview.
-    Basically a refactoring for `bbb_room_visit_statistics_download` function.
     """
     renderer_classes = (SimpleStatisticsBBBRoomVisitsRenderer, ) + tuple(api_settings.DEFAULT_RENDERER_CLASSES)
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (IsCosinnusAdminUser,)
 
-    def get_datetime(self, bbb_room_visits):
-        visit_time = [timezone.localtime(visit.visit_datetime).strftime('%Y-%m-%d %H:%M:%S') for visit in bbb_room_visits]
-        return visit_time
+    def get_bbb_room_visit_statistics(self):
+        rows = []
+        # cache for group_id (int) -> user
+        group_admin_cache = {}
+        # cache for user-hash user.id (int) --> hash (str)
+        user_hash_cache = {}
+        for visit in BBBRoomVisitStatistics.objects.all().order_by('visit_datetime').\
+                prefetch_related('user', 'user__cosinnus_profile', 'user__cosinnus_profile__media_tag',
+                                'group', 'bbb_room'):
+            visitor = visit.user or None
+            visitor_mt = visitor and visitor.cosinnus_profile and visitor.cosinnus_profile.media_tag or None
+            # cache the group-admins
+            visited_group_admin = group_admin_cache.get(visit.group_id, None)
+            if visited_group_admin is None:
+                visited_group_admins = visit.group and visit.group.actual_admins or []
+                # only reporting data on the first admin for simplicity
+                visited_group_admin = len(visited_group_admins) > 0 and visited_group_admins[0] or None
+                group_admin_cache[visit.group_id] = visited_group_admin
+            
+            user_hash = user_hash_cache.get(visitor.id) if visitor else '<no-user>'
+            if not user_hash:
+                user_hash = get_user_id_hash(visitor)
+                user_hash_cache[visitor.id] = user_hash
+            
+            rows.append([
+                timezone.localtime(visit.visit_datetime).strftime('%Y-%m-%d %H:%M:%S'), # 'datetime',
+                visit.group and visit.group.name or visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_GROUP_NAME, ''), #'conference_name',
+                visit.group and visit.group.slug or visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_GROUP_SLUG, ''), #'conference_slug',
+                ','.join([str(item) for item in visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_GROUP_MANAGED_TAG_SLUGS, [])]), #'conference_mtag_slugs',
+                visited_group_admin.cosinnus_profile.language if visited_group_admin else '<no-user>', # conference_creator_email_language
+                visit.bbb_room and visit.bbb_room.name or visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_ROOM_NAME, ''), #'room_name',
+                user_hash, #'visitor_id',
+                ','.join([str(item) for item in visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_USER_MANAGED_TAG_SLUGS, [])]), #'visitor_mtag_slugs',
+                visitor.cosinnus_profile.language if visitor else '<no-user>', # visitor_email_language
+                visitor_mt and visitor_mt.location if visitor_mt else '', # visitor_location
+                visitor_mt.location_lat if visitor_mt and visitor_mt.location else '', # visitor_location_lat
+                visitor_mt.location_lon if visitor_mt and visitor_mt.location else '', # visitor_location_lon
+            ])
 
-    def get_conference_name(self, bbb_room_visits):
-        visit_conference_names = [visit.group and visit.group.name or visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_GROUP_NAME, '') for visit in bbb_room_visits]
-        return visit_conference_names
+        return rows
 
-    def get_conference_slug(self, bbb_room_visits):
-        visit_conference_slugs = [visit.group and visit.group.slug or visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_GROUP_SLUG, '') for visit in bbb_room_visits]
-        return visit_conference_slugs
-
-    def get_conference_mtag_slugs(self, bbb_room_visits):
-        visit_managed_tags = [visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_GROUP_MANAGED_TAG_SLUGS, '') for visit in bbb_room_visits]
-        result = [val for sublist in visit_managed_tags for val in sublist]
-        return result
-
-    def get_conference_creator_email_language(self, bbb_room_visits):
-        visited_group_admins = [visit.group and visit.group.actual_admins or [] for visit in bbb_room_visits]
-        result = [visitor[0].cosinnus_profile.language if visitor != [] else '<no-user>' for visitor in visited_group_admins]
-        return result
-
-    def get_room_name(self, bbb_room_visits):
-        visit_room_names = [visit.bbb_room and visit.bbb_room.name or visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_ROOM_NAME, '') for visit in bbb_room_visits]
-        return visit_room_names
-
-    def get_visitor_hashed_id(self, bbb_room_visits):
-        visitor_hashes = [get_user_id_hash(visit.user) for visit in bbb_room_visits]
-        return visitor_hashes
-
-    def get_visitor_mtag_slugs(self, bbb_room_visits):
-        visitor_managed_tags = [visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_USER_MANAGED_TAG_SLUGS, '') for visit in bbb_room_visits]
-        result = [val for sublist in visitor_managed_tags for val in sublist]
-        return result
-
-    def get_visitor_email_language(self, bbb_room_visits):
-        visitors = [visit.user for visit in bbb_room_visits]
-        result = [visitor.cosinnus_profile.language for visitor in visitors]
-        return result
-
-    def get_visitor_location(self, bbb_room_visits):
-        visitors = [visit.user and visit.user.cosinnus_profile and visit.user.cosinnus_profile.media_tag for visit in bbb_room_visits]
-        result = [visitor.location for visitor in visitors]
-        return result
-
-    def get_visitor_location_lat(self, bbb_room_visits):
-        visitors = [visit.user and visit.user.cosinnus_profile and visit.user.cosinnus_profile.media_tag for visit in bbb_room_visits]
-        result = [str(visitor.location_lat) if visitor.location else '' for visitor in visitors]
-        return result
-
-    def get_visitor_location_lon(self, bbb_room_visits):
-        visitors = [visit.user and visit.user.cosinnus_profile and visit.user.cosinnus_profile.media_tag for visit in bbb_room_visits]
-        result = [str(visitor.location_lon) if visitor.location else '' for visitor in visitors]
-        return result
-    
     def get(self, request, *args, **kwargs):
-        bbb_room_visits = BBBRoomVisitStatistics.objects.all().order_by('visit_datetime')
 
-        datetime = self.get_datetime(bbb_room_visits)
-        conference_name = self.get_conference_name(bbb_room_visits)
-        conference_slug = self.get_conference_slug(bbb_room_visits),
-        conference_mtag_slugs = self.get_conference_mtag_slugs(bbb_room_visits),
-        conference_creator_email_language = self.get_conference_creator_email_language(bbb_room_visits),
-        room_name = self.get_room_name(bbb_room_visits),
-        visitor_hashed_id = self.get_visitor_hashed_id(bbb_room_visits),
-        visitor_mtag_slugs = self.get_visitor_mtag_slugs(bbb_room_visits),
-        visitor_email_language = self.get_visitor_email_language(bbb_room_visits),
-        visitor_location = self.get_visitor_location(bbb_room_visits),
-        visitor_location_lat = self.get_visitor_location_lat(bbb_room_visits),
-        visitor_location_lon = self.get_visitor_location_lon(bbb_room_visits),
+        bbb_room_visit_stats = self.get_bbb_room_visit_statistics()
 
         data = [
             {
-                'datetime': datetime[i],
-                'conference_name': conference_name[i],
-                'conference_slug': ','.join([str(elem[i]) for elem in conference_slug]), # nested loop from here onwards as workaround for avoiding `IndexError: tuple index out of range`
-                'conference_mtag_slugs': ','.join([str(elem[i]) for elem in conference_mtag_slugs]),
-                'conference_creator_email_language': ','.join([str(elem[i]) for elem in conference_creator_email_language]),
-                'room_name': ','.join([str(elem[i]) for elem in room_name]),
-                'visitor_hashed_id': ','.join([str(elem[i]) for elem in visitor_hashed_id]),
-                'visitor_mtag_slugs': ','.join([str(elem[i]) for elem in visitor_mtag_slugs]),
-                'visitor_email_language': ','.join([str(elem[i]) for elem in visitor_email_language]),
-                'visitor_location': ','.join([str(elem[i]) for elem in visitor_location]),
-                'visitor_location_lat': ','.join([str(elem[i]) for elem in visitor_location_lat]),
-                'visitor_location_lon': ','.join([str(elem[i]) for elem in visitor_location_lon]),
-            }
-            for i in range(len(bbb_room_visits))
-        ]
+                'datetime': elem[0],
+                'conference_name': elem[1],
+                'conference_slug': elem[2],
+                'conference_mtag_slugs': elem[3],
+                'conference_creator_email_language': elem[4],
+                'room_name': elem[5],
+                'visitor_hashed_id': elem[6],
+                'visitor_mtag_slugs': elem[7],
+                'visitor_email_language': elem[8],
+                'visitor_location': elem[9],
+                'visitor_location_lat': elem[10],
+                'visitor_location_lon': elem[11],
+            } 
+        for elem in bbb_room_visit_stats]
 
         return Response(data)
+
+    def finalize_response(self, request, response, *args, **kwargs):
+        """
+        Renders the csv output with custom headers for project storage report API endpoint
+        """
+        if request.GET.get('format') == 'csv':
+            response['Content-Disposition'] = 'attachment; filename=bbb-room-visits.csv'
+        return super().finalize_response(request, response, *args, **kwargs) 
 
 
 statistics = StatisticsView.as_view()

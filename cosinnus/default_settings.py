@@ -240,6 +240,7 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'django_otp.plugins.otp_static',
         'two_factor',
         'timezone_field',
+        'django_extensions',
         
         # External Apps
         'awesome_avatar',
