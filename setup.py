@@ -74,6 +74,7 @@ setup(
         'django-cron==0.5.0',
         'django-embed-video==0.6',
         'django-el-pagination==2.1.2',
+        'django-extensions==3.1.5',
         'django-extra-views==0.14.0',
         'django-filter==21.1',
         'django-haystack==3.1.1',
