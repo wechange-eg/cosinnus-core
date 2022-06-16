@@ -50,7 +50,7 @@ from django.templatetags.static import static
 from django.template.defaultfilters import linebreaksbr, pprint
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
     CosinnusConference
-from cosinnus.models.conference import CosinnusConferenceApplication
+from cosinnus.models.conference import CosinnusConferenceApplication, ParticipationManagement
 from wagtail.core.templatetags.wagtailcore_tags import richtext
 from uuid import uuid1
 from annoying.functions import get_object_or_None
@@ -362,7 +362,8 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
     })
     return render_to_string(template, context.flatten())
 
-
+from django.utils import timezone
+from datetime import datetime
 @register.simple_tag(takes_context=True)
 def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request=None):
     """ Renders the new style navbar """
@@ -403,9 +404,12 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
         societies_invited = CosinnusSociety.objects.get_for_user_invited(request.user)
         projects_invited = CosinnusProject.objects.get_for_user_invited(request.user)
         conferences_invited = CosinnusConference.objects.get_for_user_invited(request.user)
+        conferences_invited_filtered = [conference for conference in conferences_invited
+                                        if ParticipationManagement.applications_are_active and 
+                                        ParticipationManagement.objects.filter(application_end__gt=timezone.localtime().strftime('%Y-%m-%d %H:%M:%S'))]
         groups_invited = [DashboardItem(group) for group in societies_invited]
         groups_invited += [DashboardItem(group) for group in projects_invited]
-        groups_invited += [DashboardItem(group) for group in conferences_invited]
+        groups_invited += [DashboardItem(group) for group in conferences_invited_filtered]
         context['groups_invited_json_encoded'] = _escape_quotes(_json.dumps(groups_invited))
         context['groups_invited_count'] = len(groups_invited)
 
