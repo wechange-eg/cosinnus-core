@@ -22,8 +22,6 @@ if not is_integrated_portal():
     urlpatterns = [
         url(r'^login/$',
             common.cosinnus_login,
-            {'template_name': 'cosinnus/registration/login.html',
-             'authentication_form': UserEmailLoginForm},
             name='login'),
         url(r'^logout/$',
             common.cosinnus_logout,

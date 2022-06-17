@@ -561,7 +561,7 @@ def _send_user_welcome_email_if_enabled(user, force=False):
     # render the text as markdown
     text = textfield(render_html_with_variables(user, text))
     subj_user = _('Welcome to %(portal_name)s!') % {'portal_name': portal.name}
-    send_html_mail_threaded(user, subj_user, text)
+    send_html_mail_threaded(user, subj_user, text, topic_instead_of_subject="")
     
 
 def approve_user(request, user_id):

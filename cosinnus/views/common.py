@@ -31,6 +31,7 @@ from cosinnus.utils.urls import safe_redirect
 from cosinnus.views.mixins.group import RequireCreateObjectsInMixin
 from django.shortcuts import redirect
 from cosinnus.views.user import send_user_email_to_verify
+from cosinnus.forms.user import UserEmailLoginForm
 
 
 class IndexView(RedirectView):
@@ -116,31 +117,62 @@ class SwitchLanguageView(RedirectView):
 switch_language = SwitchLanguageView.as_view()
 
 
-def cosinnus_login(request, **kwargs):
-    """ Wraps the django login view to set the "wp_user_logged_in" cookie on logins """
+class LoginViewAdditionalLogicMixin(object):
     
-    # use the sso login form on SSO redirect-logins
-    if getattr(settings, 'COSINNUS_IS_OAUTH_PROVIDER', False) \
-            and request.GET.get('next', '').startswith('/o/authorize/'):
-        kwargs['template_name'] = 'cosinnus/registration/login_sso_provider.html'
-    
-    response = LoginView.as_view(**kwargs)(request)  #login(request, **kwargs)
-    
-    if request.method == 'POST' and request.user.is_authenticated:
-        # for email-verified-locked portals, "belatedly" refuse the login for users who haven't got their email verified
+    def additional_user_validation_checks(self, user):
+        """ Does additional validation checks for a user and may have effects like triggering sending a mail.
+            @return None if no errors are found, else a str error message that should be displayed to the user.
+                if this does not return None, the login attempt should be denied! """
         if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN \
-                and CosinnusPortal.get_current().email_needs_verification and not request.user.cosinnus_profile.email_verified:
+                and CosinnusPortal.get_current().email_needs_verification \
+                and not user.cosinnus_profile.email_verified:
             # send user another verification email
-            send_user_email_to_verify(request.user, request.user.email, request)
+            send_user_email_to_verify(user, user.email, self.request)
             msg = _('New verification email sent!')
             msg += '\n\n' + _('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.')
             msg += '\n\n' + _('We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email.')
-            messages.warning(request, msg)
-            logout(request)
+            return msg
+        return None
+    
+    def set_response_cookies(self, response):
+        """ Sets cookies on the response of aa successfully validated login 
+            @return: The response itself """
+        # set wordpress cookie on successful login
+        response.set_cookie('wp_user_logged_in', 1, 60*60*24*30) # 30 day expiry
+        return response
+        
+        
+
+class CosinnusLoginView(LoginViewAdditionalLogicMixin, LoginView):
+    
+    authentication_form = UserEmailLoginForm
+    template_name = 'cosinnus/registration/login.html'
+    
+    def get_template_names(self):
+        """ Use the sso login form on SSO redirect-logins """
+        if getattr(settings, 'COSINNUS_IS_OAUTH_PROVIDER', False) \
+                and self.request.GET.get('next', '').startswith('/o/authorize/'):
+            return ['cosinnus/registration/login_sso_provider.html']
+        return super().get_template_names()
+        
+    def form_valid(self, form, *args, **kwargs):
+        """ Set Wordpress-Cookie.
+            For email-verified-locked portals, refuse the login for users who haven't got their email verified.
+        """
+        user = form.get_user()
+        # deny login if additional validation checks fail
+        additional_checks_error_message = self.additional_user_validation_checks(user)
+        if additional_checks_error_message:
+            messages.warning(self.request, additional_checks_error_message)
             return redirect('login')
         
-        response.set_cookie('wp_user_logged_in', 1, 60*60*24*30) # 30 day expiry
-    return response
+        # set wordpress cookie on successful login
+        response = super().form_valid(form, *args, **kwargs)
+        response = self.set_response_cookies(response)
+        return response
+
+cosinnus_login = CosinnusLoginView.as_view()
+
 
 def cosinnus_logout(request, **kwargs):
     """ Wraps the django logout view to delete the "wp_user_logged_in" cookie on logouts

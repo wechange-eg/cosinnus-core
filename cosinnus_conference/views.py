@@ -273,11 +273,11 @@ class ConferenceTemporaryUserView(SamePortalGroupMixin, RequireWriteMixin, Group
         email_domain = self.get_email_domain()
 
         try:
-            name_string = '"{}":"{}"'.format(PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME, username)
-            profile = UserProfile.objects.get(
-                settings__has_key=name_string,
-                scheduled_for_deletion_at__isnull=True
-            )
+            filter_query = {
+                f'settings__{PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME}': username,
+                'scheduled_for_deletion_at__isnull': True,
+            }
+            profile = UserProfile.objects.get(**filter_query)
             user = profile.user
             user.first_name = first_name
             user.last_name = last_name

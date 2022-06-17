@@ -55,7 +55,7 @@ packages = [
     "cosinnus_poll",
     "cosinnus_stream",
     "cosinnus_todo",
-    "frontend",
+    "cosinnus_frontend",
     "postman",
     "rest_framework_rdf",
     "suit_overextends",

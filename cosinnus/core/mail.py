@@ -169,10 +169,11 @@ def send_html_mail(to_user, subject, html_content, topic_instead_of_subject=None
         The given `html_content` will be placed inside the notification html template,
         and the style will be a "from-portal" style (instead of a "from-group" style.
         @param topic_instead_of_subject: If given, will set the topic line after "Hello, <user", 
-            in the mail body to a different text than the email-subject. """
+            in the mail body to a different text than the email-subject. Set this to "" to completely 
+            remove the header line. """
     
     template = '/cosinnus/html_mail/notification.html'
-    data = get_html_mail_data(to_user, topic_instead_of_subject or subject, html_content)
+    data = get_html_mail_data(to_user, topic_instead_of_subject if topic_instead_of_subject is not None else subject, html_content)
     if threaded:
         send_mail_func = send_mail_or_fail_threaded
     else:

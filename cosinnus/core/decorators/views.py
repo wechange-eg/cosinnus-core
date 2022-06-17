@@ -92,7 +92,7 @@ def redirect_to_not_verified(request, view=None, group=None):
     return redirect_to_error_page(request, view=view, group=group)
 
 
-def get_group_for_request(group_name, request):
+def get_group_for_request(group_name, request, fail_silently=False):
     """ Retrieve the proxy group object depending on the URL path regarding 
         the registered group models.
         A CosinnusGroup will not be returned if it is requested by an URL
@@ -111,10 +111,10 @@ def get_group_for_request(group_name, request):
             if type(group) is group_class:
                 if group.is_active:
                     return group
-                else:
+                elif not fail_silently:
                     logger.warn('Cosinnus.core.decorators: Failed to retrieve group because it is inactive!', 
                      extra={'team_name': group_name, 'url': request.path, 'team_type': type(group), 'group_class': group_class, 'group_slug': group.slug, 'group_pk': group.id, 'refered': request.META.get('HTTP_REFERER', 'N/A')})
-            else:
+            elif not fail_silently:
                 logger.warn('Cosinnus.core.decorators: Failed to retrieve group because its classes didnt match!', 
                      extra={'team_name': group_name, 'url': request.path, 'team_type': type(group), 'group_class': group_class, 'group_slug': group.slug, 'group_pk': group.id, 'refered': request.META.get('HTTP_REFERER', 'N/A')})
         except group_class.DoesNotExist as e:
@@ -122,9 +122,9 @@ def get_group_for_request(group_name, request):
             #         extra={'team_name': group_name, 'url': request.path, 'group_class': group_class, 'refered': request.META.get('HTTP_REFERER', 'N/A')})
             # this happens during a regular 404 when users navigate to a group URL that no longer exists
             pass
-    else:
+    elif not fail_silently:
         logger.warn('Cosinnus.core.decorators: Failed to retrieve group because no group class was found!',
-                     extra={'team_name': group_name, 'url': request.path, 'refered': request.META.get('HTTP_REFERER', 'N/A')})
+                 extra={'team_name': group_name, 'url': request.path, 'refered': request.META.get('HTTP_REFERER', 'N/A')})
     
     raise Http404
 
