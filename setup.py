@@ -66,14 +66,15 @@ for package in packages:
     for dirpath, dirnames, filenames in os.walk(package):
         # Ignore PEP 3147 cache dirs and those whose names start with '.'
         dirnames[:] = [d for d in dirnames if not d.startswith('.') and d != '__pycache__']
-        if '__init__.py' not in filenames:
-            data_files.append([dirpath, [os.path.join(dirpath, f) for f in filenames]])
+        data_files.append([dirpath, [os.path.join(dirpath, f) for f in filenames if not f.endswith(".py")]])
 
 data_files.extend([
     "nunjucks.config.js",
     "package.json",
 ])
 
+import pdb
+pdb.set_trace()
 setup(
     name='cosinnus',
     version=COSINNUS_VERSION,
