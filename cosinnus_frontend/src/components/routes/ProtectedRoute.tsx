@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Redirect, Route, RouteProps } from 'react-router-dom'
+import { Navigate, Route, RouteProps } from 'react-router-dom'
 
 // todo: set default values for optional props
 export interface ProtectedRouteProps extends RouteProps {
@@ -19,8 +19,8 @@ const ProtectedRoute: FC<ProtectedRouteProps> = (props) => {
 
   // todo: fix spread operator. not all props should pass through
   if (redirectPath) {
-    const renderComponent = () => <Redirect to={{ pathname: redirectPath }} />
-    return <Route {...props} component={renderComponent} render={undefined} />
+    const renderComponent = () => <Navigate replace to={{ pathname: redirectPath }} />
+    return <Route {...props} element={renderComponent} />
   }
   return <Route {...props} />
 }

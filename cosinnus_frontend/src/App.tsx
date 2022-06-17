@@ -1,6 +1,9 @@
 import React, { FC } from 'react'
-import { Route } from 'react-router'
-import { BrowserRouter as Router, Switch } from 'react-router-dom'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from 'react-router-dom'
 import { IntlProvider } from 'react-intl'
 
 import { useSelector } from 'react-redux'
@@ -36,7 +39,6 @@ const App: FC = () => {
   const routeProps: ProtectedRouteProps = {
     isAuthenticated: isLoggedIn,
     authPath: '/login',
-    exact: true,
     path: '/',
   }
 
@@ -59,7 +61,7 @@ const App: FC = () => {
         throw err
       }}
     >
-      <Router>
+      <BrowserRouter>
         <Button
           position="fixed"
           right="1rem"
@@ -70,13 +72,13 @@ const App: FC = () => {
           {' '}
           {colorMode === 'light' ? 'Dark' : 'Light'}
         </Button>
-        <Switch>
-          <Route exact path="/"><LoginPage /></Route>
-          <Route exact path="/login"><LoginPage /></Route>
-          <Route exact path="/register"><RegisterPage /></Route>
-          <Route exact path="/password-reset"><PasswordResetPage /></Route>
-        </Switch>
-      </Router>
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/password-reset" element={<PasswordResetPage />} />
+        </Routes>
+      </BrowserRouter>
     </IntlProvider>
   )
 }
