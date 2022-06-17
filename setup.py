@@ -73,8 +73,6 @@ data_files.extend([
     "package.json",
 ])
 
-import pdb
-pdb.set_trace()
 setup(
     name='cosinnus',
     version=COSINNUS_VERSION,
