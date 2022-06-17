@@ -12,7 +12,7 @@
 
 coverage.xml
 build/
-# dist/
+dist/
 docs/_build/
 
 !.coveragerc
