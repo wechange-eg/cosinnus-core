@@ -408,22 +408,26 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
         groups_invited = [DashboardItem(group) for group in societies_invited]
         groups_invited += [DashboardItem(group) for group in projects_invited]
         
-        conferences_invited_filtered = []
-        conferences_invited_non_filtered = []
-
         for conference in conferences_invited:
-            participation_management_apps_are_active = conference.participation_management.get().applications_are_active # boolean 
-            participation_management_app_end = conference.participation_management.get().application_end # datetime
+            participation_management = None
+            if conference.participation_management.exists():
+                participation_management = conference.participation_management.get()
+                participation_management_apps_are_active = participation_management.applications_are_active # boolean 
+                participation_management_app_end = participation_management.application_end # datetime
 
-            if conference.membership_mode != 1: # check if conference's application method does not require participation apllications
-                conferences_invited_non_filtered.append(conference)
-            elif participation_management_apps_are_active and participation_management_app_end > timezone.now() and conference.membership_mode == 1: # in case the participation apllications are required, check if the application is still active and the end time is valid
-                conferences_invited_filtered.append(conference)
+            # check if conference's application method does not require participation apllications
+            # or in case the participation apllications are required, check if the application is still active and the end time is valid
+            if (
+                    conference.membership_mode != conference.MEMBERSHIP_MODE_APPLICATION or 
+                    participation_management is None or \
+                    (
+                        conference.membership_mode == conference.MEMBERSHIP_MODE_APPLICATION and \
+                        participation_management_app_end > timezone.now() and \
+                        participation_management_apps_are_active
+                    )
+                ):
+                groups_invited.append(DashboardItem(conference))
 
-            if conference.membership_mode != 1:
-                groups_invited += [DashboardItem(group) for group in conferences_invited_non_filtered]
-            else:
-                groups_invited += [DashboardItem(group) for group in conferences_invited_filtered]
         context['groups_invited_json_encoded'] = _escape_quotes(_json.dumps(groups_invited))
         context['groups_invited_count'] = len(groups_invited)
 
