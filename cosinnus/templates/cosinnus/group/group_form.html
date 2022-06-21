@@ -448,7 +448,14 @@
 						{% if form.forms.obj.fields.use_invite_token and not form.forms.obj.fields.use_invite_token.disabled == True %}
 							{% trans "Create invite token" as use_invite_token_label %}
 							{% captureas use_invite_token_legend %}
-								{% trans "Check this to generate an invite token which allows a user to join the " %}{% if group_model == "CosinnusSociety" %}{% trans "group" %}{% elif group_model == "CosinnusProject" %}{% trans "project" %}{% else %}{% trans "conference" %}{% endif %}{% trans " directly." %} <br>
+								{% if group_model == "CosinnusSociety" %}
+								    {% trans "Check this to generate an invite token which allows a user to join the group directly." %}
+							    {% elif group_model == "CosinnusProject" %}
+							        {% trans "Check this to generate an invite token which allows a user to join the project directly." %}
+						        {% else %}
+						            {% trans "Check this to generate an invite token which allows a user to join the conference directly." %}
+						        {% endif %}
+						        <br>
 								{% if group.use_invite_token %}
 									{% trans "The current token is: " %}
 									   {% for invite_token in invite_tokens %}

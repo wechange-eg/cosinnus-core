@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-25 14:14+0100\n"
+"POT-Creation-Date: 2022-06-21 18:01+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -136,6 +136,13 @@ msgstr "%d მომხმარებლების დეაქტივა�
 msgid "Reactivate user accounts"
 msgstr "მომხმარებლის ანგარიშის წაშლა"
 
+#, python-format
+msgid "%(count)d Users' group memberships were refreshed."
+msgstr ""
+
+msgid "Refresh user group membership associations (e.g. cache or Nextcloud folder problems)"
+msgstr ""
+
 #, fuzzy, python-format
 msgid "%d Users were synchronized successfully."
 msgstr "%d მომხმარებლების დეაქტივაცია წარმატებით განხორციელდა."
@@ -241,6 +248,19 @@ msgstr ""
 
 msgid "Bookmarked Users list"
 msgstr ""
+
+#, fuzzy
+msgid "Conferences"
+msgstr "ვიდეო კონფერენციის სერვერი"
+
+#, fuzzy
+msgid "Invitations to Conferences"
+msgstr "არჩეული ჯგუფების პროექტებში გადატანა"
+
+#, fuzzy
+#| msgid "In my Groups and Projects"
+msgid "Invitations to Groups and Projects"
+msgstr "ჩემს ჯგუფებში და პროექტებში"
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
@@ -776,6 +796,11 @@ msgstr "მოწონება"
 
 msgid "Persons"
 msgstr "პერსონები"
+
+#, fuzzy
+#| msgid "Last name"
+msgid "last name"
+msgstr "გვარი"
 
 msgid "Location"
 msgstr "ლოკაცია"
@@ -1486,12 +1511,21 @@ msgstr "მშობლის ჯგუფი"
 msgid "Related Teams"
 msgstr "შესაბამის კავშირში მყოფი გუნდები"
 
+#, fuzzy
+#| msgid "I am open for cooperation requests"
+msgid "Open for cooperation"
+msgstr "თანახმა ვარ თანამშრომლობის მოთხოვნებზე"
+
 msgid "Dynamic extra fields"
 msgstr ""
 
 #, fuzzy
 msgid "If set to true, a contact form will be displayed on the micropage."
 msgstr "იმ შემთხვევაში თუ ეს აქტიურია microsite-ზე Call to Action box-ი იქნება ნაჩვენები."
+
+#, fuzzy
+msgid "Use invite token"
+msgstr "შეიყვანეთ ტოკენი:"
 
 msgid "Cosinnus project"
 msgstr "კოსინუს პროექტი"
@@ -2224,6 +2258,18 @@ msgstr "გამოვლენილი საგნის წაშლა..."
 
 msgid "(The reported item has been deleted.)"
 msgstr "(გამოვლენილი საგანი წაშლილ იქნა.)"
+
+msgid "This user profile is scheduled for deletion at: "
+msgstr ""
+
+msgid "However, it will not be deleted, because it is still active."
+msgstr ""
+
+msgid "This user account is disabled. The user cannot log in or use the account."
+msgstr ""
+
+msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
+msgstr ""
 
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "შეიყვანეთ ოთხი დიდი ასო გამოსახულებაში"
@@ -3276,7 +3322,7 @@ msgstr "გუნდის ტიპიდან"
 msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
 msgstr ""
 
-msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+msgid "The Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgstr ""
 
 msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
@@ -3614,6 +3660,11 @@ msgstr "დაწყება აქედან..."
 msgid "Activate Cloud"
 msgstr "აქტივაცია"
 
+#, fuzzy
+#| msgid "Members"
+msgid "Members-Map"
+msgstr "წევრები"
+
 msgid "Cloud"
 msgstr ""
 
@@ -3691,6 +3742,18 @@ msgstr "თქვენ მიიღებთ შეტყობინება�
 msgid "No Description set"
 msgstr "აღწერა არ არის დამატებული"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created"
+msgid "Created on: "
+msgstr "შექმნილი"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Last edited by"
+msgid "Last updated on: "
+msgstr "ბოლო რედაქტირების განხორციელება"
+
 msgid "more"
 msgstr "მეტი"
 
@@ -3761,6 +3824,10 @@ msgstr ""
 
 msgid "Date"
 msgstr "თარიღი"
+
+#, python-format
+msgid "Time zone: %(TIME_ZONE)s"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "From"
@@ -3840,6 +3907,14 @@ msgid "No contact data has been added yet."
 msgstr "საკონტაქტო ბაზა ჯერ დამატებული არ არის."
 
 #, fuzzy
+msgid "Contact organizers"
+msgstr "საკონტაქტო ინფორმაცია"
+
+#, fuzzy
+msgid "Here you can send a message to the admins."
+msgstr "აქ შეგიძლიათ ნახოთ თქვენ მიერ მოწონებული იდეების მიმოხილვა."
+
+#, fuzzy
 msgid "Your Deactivated Content"
 msgstr "დაცული კონტენტი"
 
@@ -3862,6 +3937,9 @@ msgstr "დარწმუნებული ხართ, რომ გსუ�
 #, python-format
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s -წევრები"
+
+msgid "Invite users directly via the following link: "
+msgstr ""
 
 msgid "Membership requests"
 msgstr "მოთხოვნა წევრობაზე"
@@ -4238,6 +4316,28 @@ msgid "Enable the public visibility of your group/project"
 msgstr ""
 
 #, fuzzy
+#| msgid "Delete invitation"
+msgid "Create invite token"
+msgstr "მოწვევის წაშლა"
+
+msgid "Check this to generate an invite token which allows a user to join the group directly."
+msgstr ""
+
+msgid "Check this to generate an invite token which allows a user to join the project directly."
+msgstr ""
+
+msgid "Check this to generate an invite token which allows a user to join the conference directly."
+msgstr ""
+
+msgid "The current token is: "
+msgstr ""
+
+#, fuzzy
+#| msgid "Create content"
+msgid "Create token"
+msgstr "კონტენტის შექმნა"
+
+#, fuzzy
 msgid "Include a video conference"
 msgstr "ვიდეო კონფერენციის სერვერი"
 
@@ -4298,8 +4398,17 @@ msgstr ""
 msgid "This project shall be made publicly findable via other platforms."
 msgstr "ეს პროექტი ხილული იქნება საჯაროდ!"
 
+msgid "Is your project open to other partner organizations?"
+msgstr ""
+
+msgid "Project is open for further partner organizations."
+msgstr ""
+
 msgid "Which apps should be activated?"
 msgstr "რომელი აპლიკაციები უნდა იქნეს გააქტიურებული?"
+
+msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
+msgstr ""
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "ეს აპლიკაცია შეიძლება გააქტიურდეს მხოლოდ ჯგუფისთვის და არა პროექტისთვის!"
@@ -4538,6 +4647,32 @@ msgstr "Facebook-ზე გაზიარება"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created Projects"
+msgid "Contact Project Admins"
+msgstr "შექმნილი პროექტები"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Group Admins"
+msgstr "საკონტაქტო ინფორმაცია"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Contact Conference Admins"
+msgstr "ადმინისტრაცია"
+
+msgid "If you want to send your message to the project chat, you have to turn directly to the project."
+msgstr ""
+
+msgid "If you want to send your message to the group chat, you have to turn directly to the group."
+msgstr ""
+
+msgid "If you want to send your message to the conference chat, you have to turn directly to the conference."
 msgstr ""
 
 #, fuzzy
@@ -5811,6 +5946,10 @@ msgstr "შეიყვანეთ ერთი ან მეტი საძ�
 msgid "CSV Downloads"
 msgstr "გადმოწერა"
 
+#, fuzzy
+msgid "Portal switches and settings"
+msgstr "პირადი პარამეტრები"
+
 msgid "HD space used by conferences"
 msgstr ""
 
@@ -5958,6 +6097,22 @@ msgid "Clear Filters"
 msgstr "ფილტრების გასუფთავება"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Here you can search for partner organisations and projects that are open for further partners. The results are sorted so that partners with a lot of overlap in the funding objectives, eligible areas and SDGs you are active on are listed first."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners for ..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You're currently not member of any project, group or organization."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Street"
 msgstr "ქუჩა"
 
@@ -5993,6 +6148,10 @@ msgstr "ძიება რუკის მოძრაობისას"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search this area"
 msgstr "ძიება ამ ტერიტორიაზე"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Find partners"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Membership Requests"
@@ -6176,11 +6335,6 @@ msgstr "მონაწილეები"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-msgid "Contact organizers"
-msgstr "საკონტაქტო ინფორმაცია"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
 msgid "You will now receive notifications for content posted."
 msgstr "თქვენ მიიღებთ შეტყობინებებს ამ ჯგუფში არსებული კონტენტის შესახებ."
 
@@ -6249,16 +6403,16 @@ msgid "Hidden User"
 msgstr "დაფარული მომხმარებელი"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "This group is open for further partner organizations."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are a Member"
 msgstr "თქვენ ხართ წევრი"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Join Group"
 msgstr "ჯგუფში ჩართვა"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Message Group"
-msgstr "შეტყობინების გაგზავნა ჯგუფისთვის"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Author"
@@ -6279,6 +6433,10 @@ msgstr "თქვენ მიიღებთ შეტყობინება�
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"
 msgstr "პროექტები - შექმნილი ამ იდეისგან"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This organization is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -6314,12 +6472,12 @@ msgid "To Profile"
 msgstr "თქვენი პროფილი"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Join Project"
-msgstr "პროექტში ჩართვა"
+msgid "This project is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Message Project"
-msgstr "შეტყობინების გაგზავნა პროექტისთვის"
+msgid "Join Project"
+msgstr "პროექტში ჩართვა"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Move up"
@@ -7220,98 +7378,6 @@ msgstr "გვიხარია თქვენი დანახვა! %(por
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Jetzt anmelden und mitgestalten"
 
-msgid "Custom Wagtail Page"
-msgstr ""
-
-msgid "Tools"
-msgstr ""
-
-#, fuzzy
-msgid "Import Projects and Groups or Users"
-msgstr "ჩემი პროექტები და ჯგუფები"
-
-#, fuzzy
-msgid "Import from a CSV File"
-msgstr "დახარისხების ველი"
-
-msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-msgstr ""
-
-#, fuzzy
-msgid "Project/group CSV File"
-msgstr "პროექტები/ჯგუფები"
-
-#, fuzzy
-msgid "User CSV File"
-msgstr "პროექტები/ჯგუფები"
-
-#, fuzzy
-msgid "Options"
-msgstr "პროპორციები"
-
-msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-msgstr ""
-
-msgid "Encoding of the CSV file"
-msgstr ""
-
-msgid "Delimiter of the CSV file"
-msgstr ""
-
-#, fuzzy
-msgid "Upload and Import..."
-msgstr "გამოსახულების ატვირთვა."
-
-#, fuzzy
-msgid "Import Projects and Groups"
-msgstr "ჩემი პროექტები და ჯგუფები"
-
-msgid "Clear results and start a new import!"
-msgstr ""
-
-#, fuzzy
-msgid "CSV Import Results"
-msgstr "პაროლის გადაყენება წარმატებით განხორციელდა"
-
-msgid "The import has finished. Here are the results:"
-msgstr ""
-
-#, fuzzy
-msgid "Read errors:"
-msgstr "შეცდომა!"
-
-msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-msgstr ""
-
-msgid "Saved items:"
-msgstr ""
-
-#, fuzzy
-msgid "Important messages:"
-msgstr "შეტყობინებები"
-
-#, fuzzy
-msgid "Errors:"
-msgstr "შეცდომა!"
-
-#, fuzzy
-msgid "Info messages:"
-msgstr "შეტყობინებები"
-
-msgid "The CSV file was read successfully and the import is currently running on the server!"
-msgstr ""
-
-#, python-format
-msgid ""
-"This page will show the results when the import is finished.\n"
-"\t\t\n"
-"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-"\t\t\t"
-msgstr ""
-
-msgid "Progress:"
-msgstr ""
-
 msgid "Show more Projects"
 msgstr "სხვა პროექტების ჩვენება"
 
@@ -7600,10 +7666,6 @@ msgid "Only group members can see the content you requested. Apply to become a m
 msgstr "თქვენ მიერ მოთხოვნილი კონტენტის ნახვა მხოლოდ გუნდის წევრებს შეუძლიათ.  იმისათვის, რომ გახდეთ წევრი, გააკეთეთ განაცხადი ახლა !"
 
 #, fuzzy
-msgid "Conferences"
-msgstr "ვიდეო კონფერენციის სერვერი"
-
-#, fuzzy
 msgid "My Conferences"
 msgstr "ვიდეო კონფერენციის სერვერი"
 
@@ -7778,6 +7840,9 @@ msgstr ""
 msgid "Please also provide an end date"
 msgstr ""
 
+msgid "Ensure that your name does not contain any invalid characters."
+msgstr ""
+
 msgid "Test email sent!"
 msgstr ""
 
@@ -7816,6 +7881,12 @@ msgstr ""
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "\"%s\" ენა არ არის მხარდაჭერილი"
+
+msgid "New verification email sent!"
+msgstr ""
+
+msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
 
 #, fuzzy
 msgid "Successfully made conference permanent premium"
@@ -8172,8 +8243,10 @@ msgstr "მომხმარებელი \"%(user)s\" წარმატე�
 msgid "Thank you for signing up and welcome to the platform! We sent an email to your address \"%(email)s\" - please click the link contained in it to verify your email address!"
 msgstr ""
 
-msgid "The invite token you have used does not exist!"
-msgstr "მოსაწვევეი ტოკენი, რომელიც გამოიყენეთ არ არსებობს!"
+#, fuzzy
+#| msgid "Sorry, but the invite token you have used does not seem to be valid!"
+msgid "The invite token you have used does not exist. Please contact the responsible person to get a valid link!"
+msgstr "სამწუხაროდ, მოსაწვევი ტოკენი, რომელიც თქვენ გამოიყენეთ არ არის მოქმედი!"
 
 msgid "Sorry, but the invite token you have used is not active yet or not active anymore!"
 msgstr "სამწუხაროდ,  მოსაწვევი ტოკენი, რომელიც თქვენ გამოიყენეთ ჯერ არარის აქტიური ან აღარ არის აქტიური!"
@@ -8326,9 +8399,62 @@ msgstr "თქვენ არ ხართ %s-ის წევრი! თუ �
 msgid "Your changes have been saved."
 msgstr "თქვენი ცვლილებები შენახულია."
 
+#~ msgid "Message Group"
+#~ msgstr "შეტყობინების გაგზავნა ჯგუფისთვის"
+
+#~ msgid "Message Project"
+#~ msgstr "შეტყობინების გაგზავნა პროექტისთვის"
+
 #, fuzzy
-#~ msgid "Conference Administration"
-#~ msgstr "ადმინისტრაცია"
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "ჩემი პროექტები და ჯგუფები"
+
+#, fuzzy
+#~ msgid "Import from a CSV File"
+#~ msgstr "დახარისხების ველი"
+
+#, fuzzy
+#~ msgid "Project/group CSV File"
+#~ msgstr "პროექტები/ჯგუფები"
+
+#, fuzzy
+#~ msgid "User CSV File"
+#~ msgstr "პროექტები/ჯგუფები"
+
+#, fuzzy
+#~ msgid "Options"
+#~ msgstr "პროპორციები"
+
+#, fuzzy
+#~ msgid "Upload and Import..."
+#~ msgstr "გამოსახულების ატვირთვა."
+
+#, fuzzy
+#~ msgid "Import Projects and Groups"
+#~ msgstr "ჩემი პროექტები და ჯგუფები"
+
+#, fuzzy
+#~ msgid "CSV Import Results"
+#~ msgstr "პაროლის გადაყენება წარმატებით განხორციელდა"
+
+#, fuzzy
+#~ msgid "Read errors:"
+#~ msgstr "შეცდომა!"
+
+#, fuzzy
+#~ msgid "Important messages:"
+#~ msgstr "შეტყობინებები"
+
+#, fuzzy
+#~ msgid "Errors:"
+#~ msgstr "შეცდომა!"
+
+#, fuzzy
+#~ msgid "Info messages:"
+#~ msgstr "შეტყობინებები"
+
+#~ msgid "The invite token you have used does not exist!"
+#~ msgstr "მოსაწვევეი ტოკენი, რომელიც გამოიყენეთ არ არსებობს!"
 
 #~ msgid "Ok"
 #~ msgstr "კარგი"
@@ -8491,10 +8617,6 @@ msgstr "თქვენი ცვლილებები შენახულ�
 
 #~ msgid "Hebrew--NATIVE-LANGUAGE"
 #~ msgstr "עברית"
-
-#, fuzzy
-#~ msgid "Here you can find an overview of items you follow."
-#~ msgstr "აქ შეგიძლიათ ნახოთ თქვენ მიერ მოწონებული იდეების მიმოხილვა."
 
 #~ msgid ""
 #~ "Hi %(user_name)s,\n"

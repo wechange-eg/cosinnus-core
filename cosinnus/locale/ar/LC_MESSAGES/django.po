@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-25 14:14+0100\n"
+"POT-Creation-Date: 2022-06-21 18:01+0200\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -137,6 +137,14 @@ msgid "Reactivate user accounts"
 msgstr "تم تنشيط حساب المستخدم بنجاح"
 
 #, fuzzy, python-format
+#| msgid "%d Users' rocketchat room memberships were re-done."
+msgid "%(count)d Users' group memberships were refreshed."
+msgstr "%dتمت إعادة عضويات غرفة rocketchat للمستخدمين."
+
+msgid "Refresh user group membership associations (e.g. cache or Nextcloud folder problems)"
+msgstr ""
+
+#, fuzzy, python-format
 msgid "%d Users were synchronized successfully."
 msgstr "%d تم إلغاء تنشيط المستخدمين بنجاح."
 
@@ -240,6 +248,20 @@ msgstr "قائمة المرجعية"
 
 msgid "Bookmarked Users list"
 msgstr "قائمة المستخدمين المرجعية"
+
+#, fuzzy
+msgid "Conferences"
+msgstr "هو مؤتمر"
+
+#, fuzzy
+#| msgid "Convert selected items to Conferences"
+msgid "Invitations to Conferences"
+msgstr "تحويل المجموعات المحددة إلى مشاريع"
+
+#, fuzzy
+#| msgid "In my Groups and Projects"
+msgid "Invitations to Groups and Projects"
+msgstr "في مجموعاتي ومشاريعي"
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
@@ -805,6 +827,11 @@ msgstr "أعجبني"
 
 msgid "Persons"
 msgstr "أشخاص"
+
+#, fuzzy
+#| msgid "Last name"
+msgid "last name"
+msgstr "اسم العائلة"
 
 msgid "Location"
 msgstr "موقع"
@@ -1526,12 +1553,21 @@ msgstr "المجموعة الأم"
 msgid "Related Teams"
 msgstr "الفرق ذات الصلة"
 
+#, fuzzy
+#| msgid "I am open for cooperation requests"
+msgid "Open for cooperation"
+msgstr "أنا منفتح على طلبات التعاون"
+
 msgid "Dynamic extra fields"
 msgstr "الحقول الإضافية الديناميكية"
 
 #, fuzzy
 msgid "If set to true, a contact form will be displayed on the micropage."
 msgstr "ذا كان هذا نشطًا، فسيتم عرض مربع الدعوة للعمل على الموقع المصغر."
+
+#, fuzzy
+msgid "Use invite token"
+msgstr "إدخال رمز:"
 
 msgid "Cosinnus project"
 msgstr "مشروع جار"
@@ -2281,6 +2317,18 @@ msgstr "حذف العنصر المبلغ عنه..."
 
 msgid "(The reported item has been deleted.)"
 msgstr "(تم حذف العنصر المبلغ عنه.)"
+
+msgid "This user profile is scheduled for deletion at: "
+msgstr ""
+
+msgid "However, it will not be deleted, because it is still active."
+msgstr ""
+
+msgid "This user account is disabled. The user cannot log in or use the account."
+msgstr ""
+
+msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
+msgstr ""
 
 #, fuzzy
 msgid "Enter the 4 capital letters in the scrambled image"
@@ -3355,7 +3403,9 @@ msgstr "من نوع الفريق"
 msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
 msgstr "اللوبي هو نقطة الدخول الرئيسية للمشاركين. ستجد أجندة المؤتمر هنا."
 
-msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+#, fuzzy
+#| msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+msgid "The Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgstr "تُستخدم المنصة لعرض تيار ، على سبيل المثال من يوتيوب أو فيميو. دردشة ستظهر بجانبه."
 
 msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
@@ -3688,6 +3738,11 @@ msgstr "ابدأ هنا..."
 msgid "Activate Cloud"
 msgstr "تفعيل السحابة"
 
+#, fuzzy
+#| msgid "Members"
+msgid "Members-Map"
+msgstr "أعضاء"
+
 msgid "Cloud"
 msgstr "السحابة"
 
@@ -3766,6 +3821,17 @@ msgstr "ستتلقى الآن إشعارات كلما تم نشر محتوى ع�
 msgid "No Description set"
 msgstr "لم يتم تعيين وصف"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Created on: "
+msgstr "منشئ"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Last sent on: "
+msgid "Last updated on: "
+msgstr "آخر إرسال في:"
+
 msgid "more"
 msgstr "مزيد"
 
@@ -3836,6 +3902,10 @@ msgstr ""
 
 msgid "Date"
 msgstr "تاريخ"
+
+#, python-format
+msgid "Time zone: %(TIME_ZONE)s"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "From"
@@ -3914,6 +3984,13 @@ msgstr "اتصل"
 msgid "No contact data has been added yet."
 msgstr "لم يتم إضافة بيانات الاتصال حتى الآن."
 
+msgid "Contact organizers"
+msgstr "معلومات التواصل"
+
+#, fuzzy
+msgid "Here you can send a message to the admins."
+msgstr "هنا يمكنك أن تجد نظرة عامة على الأفكار التي أعجبتك."
+
 #, fuzzy
 msgid "Your Deactivated Content"
 msgstr "المحتوى المحمي"
@@ -3938,6 +4015,9 @@ msgstr "هل أنت متأكد أنك تريد حذف هذا الفريق؟"
 #, python-format
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - أعضاء"
+
+msgid "Invite users directly via the following link: "
+msgstr ""
 
 msgid "Membership requests"
 msgstr "طلبات العضوية"
@@ -4318,6 +4398,28 @@ msgid "Enable the public visibility of your group/project"
 msgstr ""
 
 #, fuzzy
+#| msgid "Delete invitation"
+msgid "Create invite token"
+msgstr "حذف الدعوة"
+
+msgid "Check this to generate an invite token which allows a user to join the group directly."
+msgstr ""
+
+msgid "Check this to generate an invite token which allows a user to join the project directly."
+msgstr ""
+
+msgid "Check this to generate an invite token which allows a user to join the conference directly."
+msgstr ""
+
+msgid "The current token is: "
+msgstr ""
+
+#, fuzzy
+#| msgid "Create content"
+msgid "Create token"
+msgstr "إنشاء محتوى"
+
+#, fuzzy
 msgid "Include a video conference"
 msgstr "أرسل قبل يوم واحد من المؤتمر"
 
@@ -4378,8 +4480,17 @@ msgstr "هنا يمكنك التحكم في ما إذا كان سيتم نقل �
 msgid "This project shall be made publicly findable via other platforms."
 msgstr "سيتم تعيين هذا المشروع لتكون مرئية للعامة!"
 
+msgid "Is your project open to other partner organizations?"
+msgstr ""
+
+msgid "Project is open for further partner organizations."
+msgstr ""
+
 msgid "Which apps should be activated?"
 msgstr "ما هي التطبيقات التي يجب تنشيطها؟"
+
+msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
+msgstr ""
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "لا يمكن تنشيط هذا التطبيق إلا لمجموعة، ولكن ليس لمشروع!"
@@ -4620,6 +4731,32 @@ msgstr "شارك على تويتر"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr "أهداف التنمية المستدامة"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created Projects"
+msgid "Contact Project Admins"
+msgstr "مشاريع منشئة"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Group Admins"
+msgstr "معلومات التواصل"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Contact Conference Admins"
+msgstr "إدارة المستخدم"
+
+msgid "If you want to send your message to the project chat, you have to turn directly to the project."
+msgstr ""
+
+msgid "If you want to send your message to the group chat, you have to turn directly to the group."
+msgstr ""
+
+msgid "If you want to send your message to the conference chat, you have to turn directly to the conference."
+msgstr ""
 
 #, fuzzy
 msgid "Email the group administrators"
@@ -5871,6 +6008,10 @@ msgid "CSV Downloads"
 msgstr "تنزيلات CSV"
 
 #, fuzzy
+msgid "Portal switches and settings"
+msgstr "إعدادات الخصوصية"
+
+#, fuzzy
 msgid "HD space used by conferences"
 msgstr "مساحة HD مستخدمة من قبل المشروعات"
 
@@ -6012,6 +6153,22 @@ msgid "Clear Filters"
 msgstr "ازالة أكثر من فيلر"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Here you can search for partner organisations and projects that are open for further partners. The results are sorted so that partners with a lot of overlap in the funding objectives, eligible areas and SDGs you are active on are listed first."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners for ..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You're currently not member of any project, group or organization."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Street"
 msgstr "شارع"
 
@@ -6046,6 +6203,10 @@ msgstr "ابحث عند تحريك الخريطة"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search this area"
 msgstr "ابحث في هذه المنطقة"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Find partners"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Membership Requests"
@@ -6220,10 +6381,6 @@ msgid "Participate"
 msgstr "شارك"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Contact organizers"
-msgstr "معلومات التواصل"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications for content posted."
 msgstr "ستتلقى الآن إشعارات بالمحتوى المنشور في هذه المجموعة."
 
@@ -6292,16 +6449,16 @@ msgid "Hidden User"
 msgstr "المستخدم مخفي"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "This group is open for further partner organizations."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are a Member"
 msgstr "انت عضو"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Join Group"
 msgstr "انضم للمجموعة"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Message Group"
-msgstr "أرسل رسالة إلى المجموعة"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Author"
@@ -6322,6 +6479,10 @@ msgstr "ستتلقى إشعارًا عند إنشاء مشروع من فكرتك
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"
 msgstr "المشاريع - التي تم إنشاؤها من هذه الفكرة"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This organization is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are a Admin"
@@ -6353,12 +6514,12 @@ msgid "To Profile"
 msgstr "صفحتك الشخصية"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Join Project"
-msgstr "انضم إلى المشروع"
+msgid "This project is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Message Project"
-msgstr "أرسل رسالة إلى المجموعة"
+msgid "Join Project"
+msgstr "انضم إلى المشروع"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Move up"
@@ -7278,98 +7439,6 @@ msgstr "تسرنا رؤيتك! في %(portal_name)s يمكنك التعاون م
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "سجل الآن وساعد في التشكيل"
 
-msgid "Custom Wagtail Page"
-msgstr ""
-
-msgid "Tools"
-msgstr ""
-
-#, fuzzy
-msgid "Import Projects and Groups or Users"
-msgstr "مشاريعي ومجموعاتي"
-
-#, fuzzy
-msgid "Import from a CSV File"
-msgstr "تعُذر الاستيراد"
-
-msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-msgstr ""
-
-#, fuzzy
-msgid "Project/group CSV File"
-msgstr "مشاريع/مجموعات"
-
-#, fuzzy
-msgid "User CSV File"
-msgstr "تحميل ملف CSV"
-
-#, fuzzy
-msgid "Options"
-msgstr "النسب"
-
-msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-msgstr ""
-
-msgid "Encoding of the CSV file"
-msgstr ""
-
-msgid "Delimiter of the CSV file"
-msgstr ""
-
-#, fuzzy
-msgid "Upload and Import..."
-msgstr "حمّل صورة."
-
-#, fuzzy
-msgid "Import Projects and Groups"
-msgstr "مشاريعي ومجموعاتي"
-
-msgid "Clear results and start a new import!"
-msgstr ""
-
-#, fuzzy
-msgid "CSV Import Results"
-msgstr "نجح الاستيراد!"
-
-msgid "The import has finished. Here are the results:"
-msgstr ""
-
-#, fuzzy
-msgid "Read errors:"
-msgstr "خطأ!"
-
-msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-msgstr ""
-
-msgid "Saved items:"
-msgstr ""
-
-#, fuzzy
-msgid "Important messages:"
-msgstr "اسمك"
-
-#, fuzzy
-msgid "Errors:"
-msgstr "خطأ!"
-
-#, fuzzy
-msgid "Info messages:"
-msgstr "اسمك"
-
-msgid "The CSV file was read successfully and the import is currently running on the server!"
-msgstr ""
-
-#, python-format
-msgid ""
-"This page will show the results when the import is finished.\n"
-"\t\t\n"
-"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-"\t\t\t"
-msgstr ""
-
-msgid "Progress:"
-msgstr ""
-
 msgid "Show more Projects"
 msgstr "عرض المزيد من المشاريع"
 
@@ -7651,10 +7720,6 @@ msgid "Only group members can see the content you requested. Apply to become a m
 msgstr "يمكن لأعضاء الفريق فقط رؤية المحتوى الذي طلبته. تقدم لتصبح عضوا الآن!"
 
 #, fuzzy
-msgid "Conferences"
-msgstr "هو مؤتمر"
-
-#, fuzzy
 msgid "My Conferences"
 msgstr "هو مؤتمر"
 
@@ -7814,6 +7879,9 @@ msgstr ""
 msgid "Please also provide an end date"
 msgstr ""
 
+msgid "Ensure that your name does not contain any invalid characters."
+msgstr ""
+
 msgid "Test email sent!"
 msgstr "تم إرسال بريد الكتروني تجريبي!"
 
@@ -7850,6 +7918,14 @@ msgstr ""
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "هذه اللغة \"%s\" غير مدعومة"
+
+#, fuzzy
+#| msgid "Test email sent!"
+msgid "New verification email sent!"
+msgstr "تم إرسال بريد الكتروني تجريبي!"
+
+msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
 
 #, fuzzy
 msgid "Successfully made conference permanent premium"
@@ -8207,8 +8283,10 @@ msgstr "تم تسجيل المستخدم \"%(user)s\" بنجاح. يجب الم�
 msgid "Thank you for signing up and welcome to the platform! We sent an email to your address \"%(email)s\" - please click the link contained in it to verify your email address!"
 msgstr ""
 
-msgid "The invite token you have used does not exist!"
-msgstr "رمز الدعوة الذي استخدمته غير موجود!"
+#, fuzzy
+#| msgid "Sorry, but the invite token you have used does not seem to be valid!"
+msgid "The invite token you have used does not exist. Please contact the responsible person to get a valid link!"
+msgstr "عذرًا ، ولكن يبدو أن رمز الدعوة الذي استخدمته غير صالح!"
 
 msgid "Sorry, but the invite token you have used is not active yet or not active anymore!"
 msgstr "عذرًا، ولكن رمز الدعوة الذي استخدمته ليس نشطًا بعد أو لم يعد نشطًا بعد الآن!"
@@ -8359,9 +8437,62 @@ msgstr "أنت لست عضوًا حاليًا في %s! إذا كنت ترغب ف
 msgid "Your changes have been saved."
 msgstr "تم حفظ التغييرات."
 
+#~ msgid "Message Group"
+#~ msgstr "أرسل رسالة إلى المجموعة"
+
+#~ msgid "Message Project"
+#~ msgstr "أرسل رسالة إلى المجموعة"
+
 #, fuzzy
-#~ msgid "Conference Administration"
-#~ msgstr "إدارة المستخدم"
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "مشاريعي ومجموعاتي"
+
+#, fuzzy
+#~ msgid "Import from a CSV File"
+#~ msgstr "تعُذر الاستيراد"
+
+#, fuzzy
+#~ msgid "Project/group CSV File"
+#~ msgstr "مشاريع/مجموعات"
+
+#, fuzzy
+#~ msgid "User CSV File"
+#~ msgstr "تحميل ملف CSV"
+
+#, fuzzy
+#~ msgid "Options"
+#~ msgstr "النسب"
+
+#, fuzzy
+#~ msgid "Upload and Import..."
+#~ msgstr "حمّل صورة."
+
+#, fuzzy
+#~ msgid "Import Projects and Groups"
+#~ msgstr "مشاريعي ومجموعاتي"
+
+#, fuzzy
+#~ msgid "CSV Import Results"
+#~ msgstr "نجح الاستيراد!"
+
+#, fuzzy
+#~ msgid "Read errors:"
+#~ msgstr "خطأ!"
+
+#, fuzzy
+#~ msgid "Important messages:"
+#~ msgstr "اسمك"
+
+#, fuzzy
+#~ msgid "Errors:"
+#~ msgstr "خطأ!"
+
+#, fuzzy
+#~ msgid "Info messages:"
+#~ msgstr "اسمك"
+
+#~ msgid "The invite token you have used does not exist!"
+#~ msgstr "رمز الدعوة الذي استخدمته غير موجود!"
 
 #~ msgid "Ok"
 #~ msgstr "حسناً"
@@ -8530,10 +8661,6 @@ msgstr "تم حفظ التغييرات."
 
 #~ msgid "Hebrew--NATIVE-LANGUAGE"
 #~ msgstr "العبرية - اللغة الأم"
-
-#, fuzzy
-#~ msgid "Here you can find an overview of items you follow."
-#~ msgstr "هنا يمكنك أن تجد نظرة عامة على الأفكار التي أعجبتك."
 
 #~ msgid ""
 #~ "Hi %(user_name)s,\n"
