@@ -6,13 +6,18 @@ from django.conf.urls import url
 from cosinnus.utils.url_patterns import api_patterns
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.views import group, user, common
-from cosinnus.api.views.portal import StatisticsView, StatisticsManagedTagFilteredView
+from cosinnus.api.views.portal import SimpleStatisticsGroupStorageReportView, SimpleStatisticsConferenceStorageReportView, SimpleStatisticsProjectStorageReportView, SimpleStatisticsUserActivityInfoView, SimpleStatisticsBBBRoomVisitsView, StatisticsView, StatisticsManagedTagFilteredView
 
 urlpatterns = api_patterns(1, None, False,
     url(r'^login/$', user.login_api, name='login'),
     url(r'^logout/$', user.logout_api, name='logout'),
     
     url(r'^statistics/general/$', StatisticsView.as_view(),  name='statistics-general'),
+    url(r'^statistics/general/group_storage_info/', SimpleStatisticsGroupStorageReportView.as_view(),  name='statistics-group-storage-info'),
+    url(r'^statistics/general/conference_storage_info/', SimpleStatisticsConferenceStorageReportView.as_view(),  name='statistics-conference-storage-info'),
+    url(r'^statistics/general/project_storage_info/', SimpleStatisticsProjectStorageReportView.as_view(),  name='statistics-project-storage-info'),
+    url(r'^statistics/general/user_activity_info/', SimpleStatisticsUserActivityInfoView.as_view(),  name='user-activity-info'),
+    url(r'^statistics/general/bbb_room_visits/', SimpleStatisticsBBBRoomVisitsView.as_view(),  name='bbb-room-visits'),
     url(r'^statistics/general/managed_tag/(?P<slug>[^/]+)/$', StatisticsManagedTagFilteredView.as_view(),  name='statistics-general-managed-tags'),
     url(r'^user/me/$', user.user_api_me,  name='user-api-me'),
     url(r'^common/get-metadata/$', common.get_metadata_from_url,  name='api-get-metadata'),

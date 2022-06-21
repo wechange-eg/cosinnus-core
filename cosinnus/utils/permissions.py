@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from builtins import str
 from django.db.models import Q
+from django.http import HttpResponseForbidden
 
 from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
 from cosinnus.models import MEMBERSHIP_ADMIN
@@ -17,6 +18,7 @@ from cosinnus.utils.group import get_cosinnus_group_model,\
 from cosinnus.models.idea import CosinnusIdea
 from annoying.functions import get_object_or_None
 from cosinnus_organization.models import CosinnusOrganization
+from rest_framework.permissions import IsAdminUser
 
 
 def check_ug_admin(user, group):
@@ -347,3 +349,9 @@ def check_user_can_create_conferences(user):
         return True
     return False
     
+class IsCosinnusAdminUser(IsAdminUser):
+    """
+    Allows access only to superusers or portal admins
+    """
+    def has_permission(self, request, view):
+        return bool((request.user and request.user.is_superuser) or check_user_portal_admin(request.user))
