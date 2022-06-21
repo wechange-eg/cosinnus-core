@@ -17,7 +17,7 @@
 	    </ul>
 	</button>
 
-	{% if request.user|is_superuser %}
+    {% if request.user.is_superuser %} {% comment %} Only for {% endcomment %}
 		<button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:housekeeping-portal-switches-and-settings' %}">
 			<ul class="media-list">
 				<li class="media">
