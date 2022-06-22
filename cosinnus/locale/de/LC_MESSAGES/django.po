@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-21 18:01+0200\n"
+"POT-Creation-Date: 2022-06-22 09:59+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.1\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -2840,6 +2840,14 @@ msgstr ""
 "*  **Nur Gruppen/Projekt-Mitglieder:** Dein Profil ist nur für Mitglieder deiner Gruppen/Projekte sichtbar. Dein Profil ist nicht öffentich. Du wirst nicht in der Liste „Menschen“ in der oberen Leiste angezeigt.\n"
 "*  **Nur eingeloggte Mitglieder:** Personen, die Mitglied der Plattform sind, können sich dein Profil anschauen. Dein Profil ist nicht öffentich. Du wirst in der Liste „Menschen“ angezeigt.\n"
 "*  **Jeder:** Auch nicht eingeloggte Personen können sich dein Profil anschauen. Dein Profil ist öffentlich sichtbar und kann über Suchmaschinen im Internet gefunden werden"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_50_profileprivacy_external_users_forbidden"
+msgstr ""
+"Sichtbarkeitseinstellungen für dein Profil:\n"
+"\n"
+"*  **Nur Gruppen/Projekt-Mitglieder:** Dein Profil ist nur für Mitglieder deiner Gruppen/Projekte sichtbar. Dein Profil ist nicht öffentich. Du wirst nicht in der Liste „Menschen“ in der oberen Leiste angezeigt.\n"
+"*  **Nur eingeloggte Mitglieder:** Personen, die Mitglied der Plattform sind, können sich dein Profil anschauen. Dein Profil ist nicht öffentich. Du wirst in der Liste „Menschen“ angezeigt."
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_51_objectprivacy"
@@ -7122,6 +7130,90 @@ msgstr "Schön, dass du da bist! Auf %(portal_name)s kannst du in Gruppen und Pr
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Jetzt anmelden und mitgestalten"
 
+msgid "Custom Wagtail Page"
+msgstr "Custom Wagtail Seite"
+
+msgid "Tools"
+msgstr "Werkzeuge"
+
+msgid "Import Projects and Groups or Users"
+msgstr "Projekte und Gruppen oder Benutzer importieren"
+
+msgid "Import from a CSV File"
+msgstr "Aus CSV-Datei importieren"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr "Laden Sie entweder eine CSV-Datei, um Ihre Projekte und Gruppen zu importieren, oder eine CSV-Datei, um die Benutzer zu importieren hoch. Bitte merken Sie, dass es gleichzeitig nur eine Datei importiert werden kann. Die Datei muss über ein entsprechendes Format verfügen. Wenn das Dateiformat geändert wird (mehr/weniger/unterschiedliche Spalten), bitte melden Sie sich bei den Entwicklern!"
+
+msgid "Project/group CSV File"
+msgstr "Projekte/Gruppen CSV-Datei"
+
+msgid "User CSV File"
+msgstr "Benutzer CSV-Datei"
+
+msgid "Options"
+msgstr "Optionen"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr "Die Standardeinstellungen der CSV-Datei. Bitte nur in dem Fall ändern, wenn Sie sich absolut sicher sind, was Sie tun!"
+
+msgid "Encoding of the CSV file"
+msgstr "Enkodierung der CSV-Datei"
+
+msgid "Delimiter of the CSV file"
+msgstr "Trennzeichen der CSV-Datei"
+
+msgid "Upload and Import..."
+msgstr "Hochladen und Import…"
+
+msgid "Import Projects and Groups"
+msgstr "Projekte und Gruppen importieren"
+
+msgid "Clear results and start a new import!"
+msgstr "Ergebnisse löschen und den Import neu starten!"
+
+msgid "CSV Import Results"
+msgstr "Ergebnisse des Imports"
+
+msgid "The import has finished. Here are the results:"
+msgstr "Der Importvorgang ist abgeschloßen. Hier sind die Ergebnisse:"
+
+msgid "Read errors:"
+msgstr "Lesefehler:"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr "Diese Zeilen in Ihrer CSV-Datei hatten Fehler oder eine inkorrekte Anzahl von Spalten und wurden daher IGNORIERT:"
+
+msgid "Saved items:"
+msgstr "Gespeicherte Daten:"
+
+msgid "Important messages:"
+msgstr "Wichtige Nachrichten:"
+
+msgid "Errors:"
+msgstr "Fehler:"
+
+msgid "Info messages:"
+msgstr "Info-Meldungen:"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr "Die CVS-Datei wurde erfolgreich bearbeitet und der Import läuft momentan auf dem Server!"
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+"Diese Seite wird die Ergebnisse anzeigen sobald der Import abgeschloßen ist.\n"
+"\t\t\n"
+"\t\t\t\tDie Bearbeitung kann je nach Anzahl der importierten Daten von wenigen Sekunden bis zu wenigen Minuten dauern. Sie können diese Seite schließen. Sobald der Import abgeschloßen ist, erhalten Sie von uns eine Email and die folgende Email-Adresse: <b>»%(email)s»</b> !\n"
+"\t\t\t"
+
+msgid "Progress:"
+msgstr "Verlauf:"
+
 msgid "Show more Projects"
 msgstr "Weitere Projekte anzeigen"
 
@@ -8093,89 +8185,6 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "conference"
 #~ msgstr "Tagung"
-
-#~ msgid "Custom Wagtail Page"
-#~ msgstr "Custom Wagtail Seite"
-
-#~ msgid "Tools"
-#~ msgstr "Werkzeuge"
-
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Projekte und Gruppen oder Benutzer importieren"
-
-#~ msgid "Import from a CSV File"
-#~ msgstr "Aus CSV-Datei importieren"
-
-#~ msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-#~ msgstr "Laden Sie entweder eine CSV-Datei, um Ihre Projekte und Gruppen zu importieren, oder eine CSV-Datei, um die Benutzer zu importieren hoch. Bitte merken Sie, dass es gleichzeitig nur eine Datei importiert werden kann. Die Datei muss über ein entsprechendes Format verfügen. Wenn das Dateiformat geändert wird (mehr/weniger/unterschiedliche Spalten), bitte melden Sie sich bei den Entwicklern!"
-
-#~ msgid "Project/group CSV File"
-#~ msgstr "Projekte/Gruppen CSV-Datei"
-
-#~ msgid "User CSV File"
-#~ msgstr "Benutzer CSV-Datei"
-
-#~ msgid "Options"
-#~ msgstr "Optionen"
-
-#~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-#~ msgstr "Die Standardeinstellungen der CSV-Datei. Bitte nur in dem Fall ändern, wenn Sie sich absolut sicher sind, was Sie tun!"
-
-#~ msgid "Encoding of the CSV file"
-#~ msgstr "Enkodierung der CSV-Datei"
-
-#~ msgid "Delimiter of the CSV file"
-#~ msgstr "Trennzeichen der CSV-Datei"
-
-#~ msgid "Upload and Import..."
-#~ msgstr "Hochladen und Import…"
-
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Projekte und Gruppen importieren"
-
-#~ msgid "Clear results and start a new import!"
-#~ msgstr "Ergebnisse löschen und den Import neu starten!"
-
-#~ msgid "CSV Import Results"
-#~ msgstr "Ergebnisse des Imports"
-
-#~ msgid "The import has finished. Here are the results:"
-#~ msgstr "Der Importvorgang ist abgeschloßen. Hier sind die Ergebnisse:"
-
-#~ msgid "Read errors:"
-#~ msgstr "Lesefehler:"
-
-#~ msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-#~ msgstr "Diese Zeilen in Ihrer CSV-Datei hatten Fehler oder eine inkorrekte Anzahl von Spalten und wurden daher IGNORIERT:"
-
-#~ msgid "Saved items:"
-#~ msgstr "Gespeicherte Daten:"
-
-#~ msgid "Important messages:"
-#~ msgstr "Wichtige Nachrichten:"
-
-#~ msgid "Errors:"
-#~ msgstr "Fehler:"
-
-#~ msgid "Info messages:"
-#~ msgstr "Info-Meldungen:"
-
-#~ msgid "The CSV file was read successfully and the import is currently running on the server!"
-#~ msgstr "Die CVS-Datei wurde erfolgreich bearbeitet und der Import läuft momentan auf dem Server!"
-
-#~ msgid ""
-#~ "This page will show the results when the import is finished.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-#~ "\t\t\t"
-#~ msgstr ""
-#~ "Diese Seite wird die Ergebnisse anzeigen sobald der Import abgeschloßen ist.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tDie Bearbeitung kann je nach Anzahl der importierten Daten von wenigen Sekunden bis zu wenigen Minuten dauern. Sie können diese Seite schließen. Sobald der Import abgeschloßen ist, erhalten Sie von uns eine Email and die folgende Email-Adresse: <b>»%(email)s»</b> !\n"
-#~ "\t\t\t"
-
-#~ msgid "Progress:"
-#~ msgstr "Verlauf:"
 
 #~ msgid "The invite token you have used does not exist!"
 #~ msgstr "Das Einladungs-Token, das du benutzt hast, existiert nicht!"

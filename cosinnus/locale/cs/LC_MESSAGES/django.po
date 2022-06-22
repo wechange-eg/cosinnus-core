@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-21 18:01+0200\n"
+"POT-Creation-Date: 2022-06-22 09:59+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2918,6 +2918,13 @@ msgstr "helptext_11_document"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
+msgstr "helptext_50_profileprivacy"
+
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_50_profileprivacy"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_50_profileprivacy_external_users_forbidden"
 msgstr "helptext_50_profileprivacy"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
@@ -7286,6 +7293,98 @@ msgstr "Rádi vás vidíme! Na webu %(portal_name)s můžete spolupracovat s ost
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Přihlásit a podílet se teď"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Moje projekty a skupiny"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Import se nezdařil"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Projekt/skupina"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Nahrát CSV soubor"
+
+#, fuzzy
+msgid "Options"
+msgstr "Poměry"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Nahrát obrázek."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Moje projekty a skupiny"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Import byl úspěšný!"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Chyba!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Vaše jméno"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Chyba!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Vaše jméno"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Zobrazit více projektů"
 
@@ -8254,54 +8353,6 @@ msgstr "Vaše změny byly uloženy."
 
 #~ msgid "Message Project"
 #~ msgstr "Poslat zprávu projektu"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Moje projekty a skupiny"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Import se nezdařil"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Projekt/skupina"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Nahrát CSV soubor"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Poměry"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Nahrát obrázek."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Moje projekty a skupiny"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Import byl úspěšný!"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Chyba!"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Vaše jméno"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Chyba!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Vaše jméno"
 
 #~ msgid "The invite token you have used does not exist!"
 #~ msgstr "Použitý token pozvánky neexistuje!"
