@@ -62,6 +62,10 @@
 	        {% include 'cosinnus/user/user_visibility_formfield_options.html' with visibility=object.media_tag.visibility %}
 	    </select>
 	{% endcaptureas %}
-
-    {% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html label=visibility_label legend=visibility_legend extra_html=visibility_warning_html help_popup="helptext_50_profileprivacy" %}
+	
+	{% if not SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+    	{% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html label=visibility_label legend=visibility_legend extra_html=visibility_warning_html help_popup="helptext_50_profileprivacy" %}
+	{% else %}
+		{% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html label=visibility_label legend=visibility_legend extra_html=visibility_warning_html help_popup="helptext_50_profileprivacy_external_users_forbidden" %}
+	{% endif %}
 {% endif %}
