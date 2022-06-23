@@ -362,8 +362,7 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
     })
     return render_to_string(template, context.flatten())
 
-from django.utils import timezone
-from datetime import datetime
+
 @register.simple_tag(takes_context=True)
 def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request=None):
     """ Renders the new style navbar """
@@ -407,26 +406,12 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
         
         groups_invited = [DashboardItem(group) for group in societies_invited]
         groups_invited += [DashboardItem(group) for group in projects_invited]
-        
-        for conference in conferences_invited:
-            participation_management = None
-            if conference.participation_management.exists():
-                participation_management = conference.participation_management.get()
-                participation_management_apps_are_active = participation_management.applications_are_active # boolean 
-                participation_management_app_end = participation_management.application_end # datetime
-
-            # check if conference's application method does not require participation apllications
-            # or in case the participation apllications are required, check if the application is still active and the end time is valid
-            if (
-                    conference.membership_mode != conference.MEMBERSHIP_MODE_APPLICATION or 
-                    participation_management is None or \
-                    (
-                        conference.membership_mode == conference.MEMBERSHIP_MODE_APPLICATION and \
-                        participation_management_app_end > timezone.now() and \
-                        participation_management_apps_are_active
-                    )
-                ):
-                groups_invited.append(DashboardItem(conference))
+        # for conferences, only show invites if becoming a member is currently possible
+        groups_invited += [
+            DashboardItem(conference) 
+            for conference in conferences_invited 
+            if conference.membership_applications_possible
+        ]
 
         context['groups_invited_json_encoded'] = _escape_quotes(_json.dumps(groups_invited))
         context['groups_invited_count'] = len(groups_invited)

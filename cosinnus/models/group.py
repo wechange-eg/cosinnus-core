@@ -1111,6 +1111,17 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         return bool(self.membership_mode == self.MEMBERSHIP_MODE_APPLICATION)
     
     @property
+    def membership_applications_possible(self):
+        """ Shortcut to determine if users can currently apply to become a member, 
+            depending on what type of membership requests are set, and if applicable,
+            if conference applications are currently open. """
+        return bool(
+                not self.use_conference_applications or
+                not self.participation_management.exists() or
+                self.participation_management.get().applications_are_active
+            )
+    
+    @property
     def is_autojoin_group(self):
         """ Shortcut to determine if a user joining this group will be instantly 
             accepted instead of creating a join request for the administrators.
