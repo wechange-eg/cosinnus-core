@@ -64,6 +64,7 @@ PROFILE_SETTING_REDIRECT_NEXT_VISIT = 'redirect_next'
 PROFILE_SETTING_FIRST_LOGIN = 'first_login'
 PROFILE_SETTING_ROCKET_CHAT_ID = 'rocket_chat_id'
 PROFILE_SETTING_ROCKET_CHAT_USERNAME = 'rocket_chat_username'
+PROFILE_SETTING_ROCKET_CHAT_CONTACT_GROUP_ROOM = 'rocket_chat_contact_group_room__%d' # arg %d: group.id
 PROFILE_SETTING_WORKSHOP_PARTICIPANT = 'is_workshop_participant'
 PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME = 'workshop_participant_name'
 PROFILE_SETTING_COSINUS_OAUTH_LOGIN = 'has_logged_in_with_cosinnus_oauth'
@@ -435,7 +436,34 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
         if portal.email_needs_verification and not self.email_verified:
             return f'unverified_rocketchat_{portal.slug}_{portal.id}_{self.user.id}@wechange.de'
         return self.user.email.lower()
-
+    
+    def get_users_rocket_contact_room_name_for_group(self, group):
+        """ If a user has contacted the given group before, return the rocketchat private channel
+            name that was used for the contact.
+            @return: str group name or None """
+        if not group:
+            return None
+        room_settings_key = PROFILE_SETTING_ROCKET_CHAT_CONTACT_GROUP_ROOM % group.id
+        return self.settings.get(room_settings_key, None)
+    
+    def set_users_rocket_contact_room_name_for_group(self, group, room_name):
+        """ Set the rocketchat private channel name used by the user for contacting the given group.
+            @return: str group name or None """
+        if not group or not room_name:
+            return
+        room_settings_key = PROFILE_SETTING_ROCKET_CHAT_CONTACT_GROUP_ROOM % group.id
+        self.settings[room_settings_key] = room_name
+        type(self).objects.filter(pk=self.pk).update(settings=self.settings) # save silently
+    
+    def delete_users_rocket_contact_room_name_for_group(self, group):
+        """ Set the rocketchat private channel name used by the user for contacting the given group.
+            @return: str group name or None """
+        if not group:
+            return
+        room_settings_key = PROFILE_SETTING_ROCKET_CHAT_CONTACT_GROUP_ROOM % group.id
+        del self.settings[room_settings_key]
+        type(self).objects.filter(pk=self.pk).update(settings=self.settings) # save silently
+    
     @property
     def workshop_user_name(self):
         return self.settings.get(PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME)
