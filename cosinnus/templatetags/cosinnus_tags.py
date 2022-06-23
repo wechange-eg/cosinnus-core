@@ -771,9 +771,10 @@ class GroupURLNode(URLNode):
             pass
         
         patched_group_slug_arg = None
-        
+        actual_group = None
         # we accept a group object or a group slug
         if issubclass(group_arg.__class__, get_cosinnus_group_model()):
+            actual_group = group_arg
             # determine the portal from the group
             group_slug = group_arg.slug
             
@@ -805,7 +806,7 @@ class GroupURLNode(URLNode):
 
         try:
             try:
-                view_name = group_aware_url_name(view_name, group_slug, portal_id)
+                view_name = group_aware_url_name(view_name, actual_group or group_slug, portal_id)
             except CosinnusGroup.DoesNotExist:
                 # ignore errors if the group doesn't exist if it is inactive (return empty link)
                 if ignoreErrors or isinstance(group_arg, six.string_types) or (not group_arg.is_active):
