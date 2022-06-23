@@ -74,7 +74,7 @@ MAP_NON_CONTENT_TYPE_SEARCH_PARAMETERS = {
     'item': None,
     'ignore_location': False, # if True, we completely ignore locs, and even return results without location
     'mine': False, # if True, we only show items of the current user. ignored if user not authenticated
-    'external': True,
+    'external': bool(settings.COSINNUS_EXCHANGE_ENABLED),
     'fromDate': None,
     'fromTime': None,
     'toDate': None,
