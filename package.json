@@ -20,8 +20,9 @@
   "license": "ISC",
   "dependencies": {
     "braces": "^2.3.1",
+    "clean-css": "^5.3.0",
     "exports-loader": "^0.6.3",
-    "less": "^4.1.1",
+    "less": "^4.1.3",
     "less-plugin-clean-css": "^1.5.1",
     "lessc": "^1.0.2",
     "lodash": "^4.17.20",
