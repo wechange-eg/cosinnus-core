@@ -17,7 +17,7 @@ class FrontendMiddleware(MiddlewareMixin):
      if COSINNUS_FRONTEND_ENABLED is set and not user didn't opt out
     """
     param_key = "v"
-    param_value = "3"
+    param_value = "2"
 
     def process_request(self, request):
         if settings.COSINNUS_FRONTEND_ENABLED:
