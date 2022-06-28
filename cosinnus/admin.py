@@ -580,7 +580,7 @@ class UserToSAcceptedFilter(admin.SimpleListFilter):
 
     def queryset(self, request, queryset):
         if self.value() == 'yes':
-            return queryset.filter(cosinnus_profile__settings__tos_accepted=True)
+            return queryset.filter(cosinnus_profile__settings__has_key='tos_accepted')
         if self.value() == 'no':
             return queryset.exclude(cosinnus_profile__settings__has_key='tos_accepted')
         
