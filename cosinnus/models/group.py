@@ -1272,7 +1272,6 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
             keys.extend(
                 [CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, s) for s in slugs])
         if group:
-            group._clear_local_cache()
             keys.append(CosinnusGroupManager._GROUP_CHILDREN_PK_CACHE_KEY % (CosinnusPortal.get_current().id, group.id))
             if group.parent_id:
                 keys.append(CosinnusGroupManager._GROUP_CHILDREN_PK_CACHE_KEY % (

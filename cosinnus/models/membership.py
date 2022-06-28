@@ -229,7 +229,7 @@ class BaseMembership(models.Model):
             _MEMBERSHIP_MANAGERS_KEY % (cls.CACHE_KEY_MODEL, group.pk),
         ]
         cache.delete_many(keys)
-        group._clear_local_cache()
+        group.clear_cache()
 
     def user_email(self):
         return self.user.email
@@ -332,6 +332,3 @@ class MembersManagerMixin(object):
     def clear_member_cache(self):
         self.membership_class.clear_member_cache_for_group(self)
 
-    def _clear_local_cache(self):
-        """ Stub, called when memberships change """
-        pass
