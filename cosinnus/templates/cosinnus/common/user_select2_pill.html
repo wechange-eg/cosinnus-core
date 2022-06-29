@@ -4,5 +4,10 @@
     <span class="attachment-icon">
         {% include 'cosinnus/user/user_avatar_image.html' with user=user image_size="mini" show_icon_on_missing=True %}
     </span>
-    {{ user|full_name }}
+    <span>
+        {{ user|full_name }}
+    </span>
+    <span class="pale-text">
+        ({{ user.cosinnus_profile.get_unique_identifier }})
+    </span>
 </span>

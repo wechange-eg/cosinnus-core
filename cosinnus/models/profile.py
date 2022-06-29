@@ -247,6 +247,12 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
 
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:profile-detail', kwargs={'username': self.user.username})
+    
+    def get_unique_identifier(self):
+        """ Returns a string that can be used to uniquely differentiate a user from another, 
+            even if they have the same names and avatars.
+            As a fast solution, will right now simply display the URL fragment to the user's profile. """
+        return self.get_absolute_url().split('/', 3)[-1]
 
     @classmethod
     def get_optional_fieldnames(cls):
