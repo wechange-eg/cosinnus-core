@@ -81,11 +81,22 @@
 	            		<p>
 		            		{% trans "You are logged in as" %}: <b>{{ request.user.email }}</b>
 		            	</p>
-		            	<p>
-		            		{% trans "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!" %} 
-		            		<br/>
-		            		<a href="https://{{ request.get_host }}/admin/otp_totp/totpdevice/">https://{{ request.get_host }}/admin/otp_totp/totpdevice/</a>
-		            	</p>
+	            	    {% if SETTINGS.COSINNUS_USER_2_FACTOR_AUTH_ENABLED %}
+            	            <p>
+		            	        {% trans "It appears that no authentication device is attached to your account, but 2-factor-authentication is required to access the admin area on this portal." %}
+		            	    </p>
+		            	    <p>
+                            {% trans "Please set up 2-factor-authentication in your profile to access the admin area:" %}
+                            <a href="https://{{ request.get_host }}{% url "cosinnus:two-factor-auth-setup" %}">
+                                {% trans "Set up 2-factor-authentication" %}
+                            </a>
+	            	    {% else %}
+			            	<p>
+			            		{% trans "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!" %} 
+			            		<br/>
+			            		<a href="https://{{ request.get_host }}/admin/otp_totp/totpdevice/">https://{{ request.get_host }}/admin/otp_totp/totpdevice/</a>
+    		            	</p>
+	            		{% endif %}
 	            	</div>
 	            	
 	            	<div class="submit-row">

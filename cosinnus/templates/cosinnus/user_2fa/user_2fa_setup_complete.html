@@ -13,16 +13,17 @@
     <div class="content-box">
         <h4>{% block title %}{% trans "2FA Setup Complete" %}{% endblock %}</h4>
         <p class="textfield transparent">{% blocktrans trimmed %}Congratulations, you've successfully enabled 2FA.{% endblocktrans %}</p>
+        <p class="textfield transparent">{% blocktrans trimmed %}We strongly recommend to set up backup tokens in case you lose access to your authentication device!{% endblocktrans %}</p>
     </div>
 
-        <button type="submit" href="{% url 'cosinnus:profile-detail' %}" class="btn btn-emphasized btn-autosize">
+        <button type="submit" href="{% url 'cosinnus:two-factor-auth-backup-tokens' %}" class="btn btn-emphasized btn-autosize">
             <ul class="media-list">
                 <li class="media">
                     <span class="pull-left" tabindex="-1">
-                        <i class="fa fa-arrow-left"></i>
+                        <i class="fa fa-arrow-right"></i>
                     </span>
                     <div class="media-body">
-                        {% trans "Back to your profile" %}
+                        {% trans "Set up backup tokens" %}
                     </div>
                 </li>
             </ul>

@@ -93,7 +93,7 @@ setup(
         'django-suit==0.2.29',
         'django-taggit==1.5.1',
         'django-timezone-field==4.2.1',
-        'django-two-factor-auth==1.13.1',
+        'django-two-factor-auth==1.14.0',
         'django-widget-tweaks==1.4.9',
         'djangorestframework==3.12.4',
         'djangorestframework-csv==2.1.1',
