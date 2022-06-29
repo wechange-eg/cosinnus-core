@@ -640,6 +640,9 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
 
         super(CosinnusPortal, self).save(*args, **kwargs)
         self.compile_custom_stylesheet()
+        self.clear_cache()
+        
+    def clear_cache(self):
         cache.delete(self._CURRENT_PORTAL_CACHE_KEY)
         cache.delete(self._ALL_PORTAL_CACHE_KEY)
 
