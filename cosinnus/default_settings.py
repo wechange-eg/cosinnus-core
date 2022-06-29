@@ -10,59 +10,72 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
-import sys
+# import global settings so we can extend some of them
 from os.path import dirname, join, realpath
-from cosinnus import VERSION as COSINNUS_VERSION
+import random
+import string
+import sys
 
 from django.utils.translation import ugettext_lazy as _
+import environ
+
+from cosinnus import VERSION as COSINNUS_VERSION
+
+from django.conf.global_settings import *
+# `django.core.exceptions.ImproperlyConfigured: PASSWORD_RESET_TIMEOUT_DAYS/PASSWORD_RESET_TIMEOUT are mutually exclusive.`
+# because django.conf.global_settings is being imported directly to be able to modify pre-existing default values.
+# PASSWORD_RESET_TIMEOUT_DAYS is deprecated however and will be deleted in a future django version
+if 'PASSWORD_RESET_TIMEOUT_DAYS' in globals():
+    del globals()['PASSWORD_RESET_TIMEOUT_DAYS']
 
 
-# this is the default portal, and will change the location of the staticfiles
-COSINNUS_PORTAL_NAME = None
+""" --------------- BASE CONFIG ---------------- """
 
 # the suffix of every often-changing JS/CSS staticfile
 # increase this to make sure browsers reload a cached version 
 # after making non-compatible changes to scripts or styles!
 COSINNUS_STATICFILES_VERSION = COSINNUS_VERSION
 
-DEBUG = False
-
-ADMINS = ()
-MANAGERS = ()
-
-# Hosts/domain names that are valid for this site; required if DEBUG is False
-# See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ()
-
-DATABASES = {}
-
-# Default primary key field type to use for models that don’t have a field with primary_key=True.
-# New in Django 3.2.
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
-
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'Europe/Berlin'
-
-# Language code for this installation. All choices can be found here:
-# http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'de'
-
 SITE_ID = 1
+COSINNUS_PORTAL_NAME = None # needs to be configured in project config.base
 
-# If you set this to False, Django will make some optimizations so as not
-# to load the internationalization machinery.
-USE_I18N = True
+WSGI_APPLICATION = "config.wsgi.application"
+ASGI_APPLICATION = "config.routing.application"
 
-# If you set this to False, Django will not format dates, numbers and
-# calendars according to the current locale.
-USE_L10N = True
 
-# If you set this to False, Django will not use timezone-aware datetimes.
-USE_TZ = True
+""" --------------- PATHS ---------------- """
 
+BASE_PATH = environ.Path(__file__) - 3  # type: environ.Path
+BASE_PATH = environ.Path('/home/sascha/pr/neww-redesign') # TODO wrap or pass path
+COSINNUS_BASE_PATH = realpath(join(dirname(__file__), '..'))
+
+print(f'>>> BASE_PATH {BASE_PATH}')
+env = environ.Env()
+env.read_env(BASE_PATH(".env"))
+
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+# Example: "/home/media/media.lawrence.com/media/"
+MEDIA_ROOT = join(BASE_PATH, "media")
+# this might be overridden in an out settings file to match the cosinnus Portal's static dir
+STATIC_ROOT = join(BASE_PATH, "static-collected")
+# Additional locations of static files
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    join(BASE_PATH, "static"),
+)
+LOCALE_PATHS = [
+    join(COSINNUS_BASE_PATH, 'locale'),
+    join(BASE_PATH, "locale"),
+]
+
+print('>> static:')
+print(STATIC_ROOT)
+print(STATICFILES_DIRS)
+
+
+""" --------------- URLS ---------------- """
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -71,26 +84,45 @@ MEDIA_URL = '/media/'
 
 LOGIN_URL = '/login/'
 
-
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
-
-# PATH SETTINGS
-BASE_PATH = realpath(join(dirname(__file__), '..'))
-LOCALE_PATHS = [
-    join(BASE_PATH, 'locale'),
-]
 
 # List of finder classes that know how to find static files in
 # various locations
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
-    
     'compressor.finders.CompressorFinder',
 )
+
+ROOT_URLCONF = "config.urls"
+
+
+""" --------------- DJANGO-SPECIFICS ---------------- """
+
+# DEBUG SETTINGS
+DEBUG = env.bool("DJANGO_DEBUG", default=False)
+THUMBNAIL_DEBUG = DEBUG
+if DEBUG:
+    del LOGGING
+# Extra-aggressive Exception raising
+DEBUG_LOCAL = DEBUG
+
+ADMINS = ()
+MANAGERS = ()
+
+# Hosts/domain names that are valid for this site; required if DEBUG is False
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["localhost"])
+DATABASES = {
+    "default": env.db("DATABASE_URL"),
+}
+ADMIN_URL = env("DJANGO_ADMIN_URL", default="admin/")
+
+# Default primary key field type to use for models that don’t have a field with primary_key=True.
+# New in Django 3.2.
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
 MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
@@ -124,12 +156,11 @@ MIDDLEWARE = [
     'cosinnus.core.middleware.time_zone_middleware.TimezoneMiddleware',
 ]
 
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            # base directory is being put in by the main app's settings file
+        'DIRS': [ 
+            join(BASE_PATH, "templates"),
         ],
         'OPTIONS': {
             'context_processors': [
@@ -160,6 +191,23 @@ TEMPLATES = [
     },
 ]
 
+# Security settings
+try:
+    SECRET_KEY = env("DJANGO_SECRET_KEY")
+except environ.ImproperlyConfigured:
+    SECRET_KEY = "".join(
+        [
+            random.SystemRandom().choice(
+                f"{string.ascii_letters}{string.digits}{'+-:$;<=>?@^_~'}"
+            )
+            for i in range(63)
+        ]
+    )
+    with open(".env", "a") as envfile:
+        envfile.write(f"DJANGO_SECRET_KEY={SECRET_KEY}\n")
+
+
+""" --------------- APP CONFIG  ---------------- """
 
 def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
     """ Supports gathering INSTALLED_APPS with external-project options.
@@ -180,6 +228,8 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'suit',
         'django.contrib.admin',
         'sekizai',
+        'apps.core',
+        'django_countries',  # needed for i18n for the country list
     ]
     
     # Internal Apps (as defined in external project)
@@ -273,6 +323,104 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
     
     return _INSTALLED_APPS
 
+
+""" --------------- SESSION/COOKIES ---------------- """
+
+# use session storage for CSRF instead of cookie
+# can't use this yet, until we fix the jQuery-POST usage of csrf cookies
+CSRF_USE_SESSIONS = False
+# use session based CSRF cookies
+CSRF_COOKIE_AGE = None
+# session cookie name
+SESSION_COOKIE_NAME = 'sessionid'
+
+
+""" --------------- DATE AND TIME ---------------- """
+
+# Local time zone for this installation. Choices can be found here:
+# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# although not all choices may be available on all operating systems.
+# In a Windows environment this must be set to your system time zone.
+TIME_ZONE = 'Europe/Berlin'
+# Language code for this installation. All choices can be found here:
+# http://www.i18nguy.com/unicode/language-identifiers.html
+LANGUAGE_CODE = 'de'
+# If you set this to False, Django will make some optimizations so as not
+# to load the internationalization machinery.
+USE_I18N = True
+# If you set this to False, Django will not format dates, numbers and
+# calendars according to the current locale.
+USE_L10N = True
+# If you set this to False, Django will not use timezone-aware datetimes.
+USE_TZ = True
+
+
+
+""" --------------- SENTRY/RAVEN LOGGING ---------------- """
+
+# todo env extract
+try:
+    # this will bounce us out of the try/catch immediately if no DSN is given
+    _sentry_dsn = env("DJANGO_SENTRY_DSN")
+    import logging
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
+    from sentry_sdk.integrations.logging import LoggingIntegration
+    from raven.processors import SanitizeKeysProcessor, SanitizePasswordsProcessor
+
+    INSTALLED_APPS += ["raven.contrib.django.raven_compat"]
+    MIDDLEWARE = [
+        "raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware"
+    ] + MIDDLEWARE
+    # you can up the event_level to INFO to get detailed event infos for a portal
+    sentry_logging = LoggingIntegration(
+        level=logging.INFO,        # Capture info and above as breadcrumbs
+        event_level=logging.WARNING  # Send warnings as events (default: error)
+    )
+    class FakeRavenClient:
+        sanitize_keys = [
+            'bic',
+            'iban',
+        ]
+    processors = [
+        SanitizePasswordsProcessor(FakeRavenClient),
+        SanitizeKeysProcessor(FakeRavenClient),
+    ]
+    def before_send(event, hint):
+        for processor in processors:
+            event = processor.process(event)
+        return event
+    sentry_sdk.init(
+        dsn=_sentry_dsn,
+        integrations=[sentry_logging, DjangoIntegration()],
+        before_send=before_send,
+        attach_stacktrace=True
+    )
+except environ.ImproperlyConfigured:
+    print("Watch out, there is no sentry dsn defined as 'DJANGO_SENTRY_DSN' in .env, so there is no sentry-support!")
+
+
+
+""" --------------- LOCAL SERVICES  ---------------- """
+
+# If you run into trouble in dev, update your HAYSTACK_CONNECTIONS on your local settings as
+# explained on http://django-haystack.readthedocs.org/en/latest/tutorial.html#modify-your-settings-py
+HAYSTACK_CONNECTIONS = {
+    "default": {
+        "ENGINE": "cosinnus.backends.RobustElasticSearchEngine",  # replaces 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        "URL": "http://127.0.0.1:9200/",
+        "INDEX_NAME": "wechange",
+        "BATCH_SIZE": 10,
+        "TIMEOUT": 60 * 5,
+    },
+}
+# todo .env extract
+
+
+""" --------------- MORE SETTINGS  ---------------- """
+# todo order
+
+
 # for language codes see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 LANGUAGES = [
     ('de', _('Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
@@ -300,51 +448,6 @@ LANGUAGES = [
     ('fa', _('Persian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE')),
 ]
 
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
-
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error when DEBUG=False.
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': True,
-    'root': {
-        'level': 'WARNING',
-        'handlers': ['console'],
-    },
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
-    },
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
-        }
-    },
-    'loggers': {
-        'django.db.backends': {
-            'level': 'ERROR',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'cosinnus': {
-            'level': 'DEBUG',
-            'handlers': ['console',],
-            'propagate': False,
-        },
-        'wechange-payments': {
-            'level': 'DEBUG',
-            'handlers': ['console',],
-            'propagate': False,
-        },
-    },
-}
-
 # allow a lot of POST parameters (notification settings will have many fields)
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
@@ -371,12 +474,6 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 # detect testing mode
 TESTING = 'test' in sys.argv
 
-# use session storage for CSRF instead of cookie
-# can't use this yet, until we fix the jQuery-POST usage of csrf cookies
-CSRF_USE_SESSIONS = False
-
-# use session based CSRF cookies
-CSRF_COOKIE_AGE = None
 
 # leave this on for production, but may want to disable for dev
 #SESSION_COOKIE_SECURE = True
@@ -474,7 +571,7 @@ DKIM_PRIVATE_KEY = None # full private key string, including """-----BEGIN RSA P
 if DKIM_SELECTOR and DKIM_DOMAIN and DKIM_PRIVATE_KEY: 
     EMAIL_BACKEND = 'cosinnus.backends.DKIMEmailBackend'
 
-COSINNUS_SITE_PROTOCOL = 'http'
+COSINNUS_SITE_PROTOCOL = 'https'
 
 # should microsites be enabled per default for all portals?
 # (can be set for each portal individually in their settings.py)
