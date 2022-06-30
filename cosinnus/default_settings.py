@@ -209,10 +209,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         join(BASE_PATH, "locale"),
     ]
     
-    print('>> static:')
-    print(STATIC_ROOT)
-    print(STATICFILES_DIRS)
-    
     
     """ --------------- URLS ---------------- """
     
@@ -353,7 +349,9 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # use session based CSRF cookies
     CSRF_COOKIE_AGE = None
     # session cookie name
-    SESSION_COOKIE_NAME = 'sessionid'
+    SESSION_COOKIE_DOMAIN = project_settings["COSINNUS_PORTAL_URL"]
+    SESSION_COOKIE_NAME = f"project_settings['COSINNUS_PORTAL_NAME']-sessionid"
+    SESSION_COOKIE_NAME = 'sessionid' # todo remove this
     
     
     """ --------------- DATE AND TIME ---------------- """
@@ -428,19 +426,57 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # explained on http://django-haystack.readthedocs.org/en/latest/tutorial.html#modify-your-settings-py
     HAYSTACK_CONNECTIONS = {
         "default": {
-            "ENGINE": "cosinnus.backends.RobustElasticSearchEngine",  # replaces 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-            "URL": "http://127.0.0.1:9200/",
-            "INDEX_NAME": "wechange",
-            "BATCH_SIZE": 10,
-            "TIMEOUT": 60 * 5,
+            "ENGINE": "cosinnus.backends.RobustElasticSearchEngine",
+            # replaces 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+            "URL": env("WECHANGE_HAYSTACK_URL", default="http://127.0.0.1:9200/"),
+            "INDEX_NAME": env("WECHANGE_HAYSTACK_INDEX_NAME", default=project_settings['COSINNUS_PORTAL_NAME']),
         },
     }
-    # todo .env extract
+    
+    # memcached
+    CACHES = {
+        'default': {
+            # todo: Switch to PyMemcache
+            'BACKEND': "django.core.cache.backends.memcached.MemcachedCache",
+            'LOCATION': f"unix:/srv/http/{project_settings['COSINNUS_PORTAL_URL']}/run/memcached.socket",
+        }
+    }
+    
+    # email
+    try:
+        # use the mailjet email configuration directly if
+        # WECHANGE_EMAIL_MAILJET_USER and WECHANGE_EMAIL_MAILJET_PASSWORD are set
+        _mailjet_user = env("WECHANGE_EMAIL_MAILJET_USER")
+        _mailjet_password = env("WECHANGE_EMAIL_MAILJET_PASSWORD")
+        EMAIL_HOST = "in-v3.mailjet.com"
+        EMAIL_PORT = 25
+        EMAIL_HOST_USER = _mailjet_user
+        EMAIL_HOST_PASSWORD = _mailjet_password
+        EMAIL_USE_TLS = True
+    except environ.ImproperlyConfigured:
+        EMAIL_HOST = env("WECHANGE_EMAIL_HOST", default="localhost")
+        EMAIL_PORT = env("WECHANGE_EMAIL_PORT", cast=int, default=25)
+        EMAIL_HOST_USER = env("WECHANGE_EMAIL_HOST_USER", default='')
+        EMAIL_HOST_PASSWORD = env("WECHANGE_EMAIL_HOST_PASSWORD", default='')
+        EMAIL_USE_TLS = env("WECHANGE_EMAIL_USE_TLS", cast=bool, default=False)
+
+    # Etherpad config.
+    COSINNUS_ETHERPAD_BASE_URL = f"https://pad.{project_settings['COSINNUS_PORTAL_URL']}/api"
+    COSINNUS_ETHERPAD_API_KEY = env("WECHANGE_COSINNUS_ETHERPAD_API_KEY", default="")
+    
+    # Ethercalc config
+    COSINNUS_ETHERPAD_ENABLE_ETHERCALC = True
+    COSINNUS_ETHERPAD_ETHERCALC_BASE_URL = f"https://calc.{project_settings['COSINNUS_PORTAL_URL']}"
+    
+    # Rocketchat
+    COSINNUS_ROCKET_ENABLED = False
+    COSINNUS_CHAT_BASE_URL = f"https://chat.{project_settings['COSINNUS_PORTAL_URL']}"
+    COSINNUS_CHAT_USER = f"{project_settings['COSINNUS_PORTAL_NAME']}-bot"
+    COSINNUS_CHAT_PASSWORD = env("WECHANGE_COSINNUS_CHAT_PASSWORD", default='')
+    
     
     
     """ --------------- MORE SETTINGS  ---------------- """
-    # todo order
-    
     
     # for language codes see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
     LANGUAGES = [
@@ -569,16 +605,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     
     # Default title for all pages unless the title block is overwritten. 
     # This is put through a {% trans %} tag. """
-    COSINNUS_BASE_PAGE_TITLE_TRANS = project_settings.get("COSINNUS_BASE_PAGE_TITLE_TRANS", project_settings["COSINNUS_PORTAL_NAME"])
-    
-    # Etherpad config.
-    # Warning: Etherpad URL and KEY are usually overwritten in settings.py on the server! """
-    COSINNUS_ETHERPAD_BASE_URL = None
-    COSINNUS_ETHERPAD_API_KEY = None
-    
-    # Ethercalc config
-    COSINNUS_ETHERPAD_ENABLE_ETHERCALC = True
-    COSINNUS_ETHERPAD_ETHERCALC_BASE_URL = None
+    COSINNUS_BASE_PAGE_TITLE_TRANS = project_settings.get("COSINNUS_BASE_PAGE_TITLE_TRANS", None) or project_settings["COSINNUS_PORTAL_NAME"]
     
     # default from-email:
     DEFAULT_FROM_EMAIL = COSINNUS_DEFAULT_FROM_EMAIL
@@ -597,11 +624,9 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # (can be set for each portal individually in their settings.py)
     COSINNUS_MICROSITES_ENABLED = True
     
-    
-    # CELERY STUFF
-    # set this in each portal's settings.py!
-    #COSINNUS_USE_CELERY = True
-    #BROKER_URL = 'redis://localhost:6379/%d' % SITE_ID
+    # NOTE: CELERY IS NOW DISABLED UNTIL THE SERVICE HAS BEEN UPDATED
+    COSINNUS_USE_CELERY = False
+    BROKER_URL = f"redis://localhost:6379/{project_settings['SITE_ID']}"
     CELERY_RESULT_BACKEND = 'redis://localhost:6379'
     CELERY_ACCEPT_CONTENT = ['application/json']
     CELERY_TASK_SERIALIZER = 'json' 
@@ -711,7 +736,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     }
     
     SUIT_CONFIG = {
-        'ADMIN_NAME': 'Wechange Admin'
+        'ADMIN_NAME': f"{project_settings['COSINNUS_PORTAL_NAME']} Admin",
     }
     
     
@@ -719,10 +744,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     CAPTCHA_CHALLENGE_FUNCT = 'cosinnus.utils.captcha.dissimilar_random_char_challenge'
     CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_dots',)
     CAPTCHA_TIMEOUT = 30
-    
-    # enables rocketchat if True
-    COSINNUS_ROCKET_ENABLED = False
-    COSINNUS_ROCKET_EXPORT_ENABLED = False
     
     # enables the read-only mode for the legacy postman messages system if True
     # and shows an "archived messages button" in the user profile
@@ -767,34 +788,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         "^/password-reset/$",
     ]
     
-    # todo: get this working
-
-    SESSION_COOKIE_DOMAIN = project_settings["COSINNUS_PORTAL_URL"]
-    SESSION_COOKIE_NAME = project_settings["COSINNUS_PORTAL_NAME"]
-    SESSION_COOKIE_NAME = 'sessionid'
-    COSINNUS_ETHERPAD_BASE_URL = f"https://pad.{project_settings['COSINNUS_PORTAL_URL']}/api"
-    COSINNUS_ETHERPAD_ETHERCALC_BASE_URL = f"https://calc.{project_settings['COSINNUS_PORTAL_URL']}"
-    COSINNUS_SITE_PROTOCOL = "https"
-    COSINNUS_DEFAULT_FROM_EMAIL = f"noreply@{project_settings['COSINNUS_PORTAL_URL']}"
-    DEFAULT_FROM_EMAIL = project_settings["COSINNUS_DEFAULT_FROM_EMAIL"]
-    COSINNUS_USE_CELERY = True
-    BROKER_URL = f"redis://localhost:6379/{project_settings['SITE_ID']}"
-    STATIC_ROOT = join(BASE_PATH, f"static-collected-{project_settings['COSINNUS_PORTAL_NAME']}")
-    STATICFILES_DIRS = (join(BASE_PATH, "static_subdomain", project_settings['COSINNUS_PORTAL_NAME']),) + STATICFILES_DIRS
-    HAYSTACK_CONNECTIONS = {
-        "default": {
-            "ENGINE": "cosinnus.backends.RobustElasticSearchEngine",
-            # replaces 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-            "URL": "http://127.0.0.1:9200/",
-            "INDEX_NAME": project_settings['COSINNUS_PORTAL_NAME']
-        },
-    },
     COSINNUS_LOGIN_REDIRECT_URL = "/dashboard/"
-    COSINNUS_IDEAS_ENABLED = True
-    COSINNUS_USE_V2_NAVBAR = True
-    COSINNUS_USE_V2_DASHBOARD = True
-    COSINNUS_V2_DASHBOARD_USE_NAIVE_FETCHING = False
-    COSINNUS_NOTIFICATION_ALERTS_ENABLED = True
     
     return vars()
 
