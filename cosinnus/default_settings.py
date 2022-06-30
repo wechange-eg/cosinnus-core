@@ -185,10 +185,8 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     """ --------------- PATHS ---------------- """
     
     BASE_PATH = project_base_path
-    #BASE_PATH = environ.Path('/home/sascha/pr/neww-redesign') # TODO wrap or pass path
     COSINNUS_BASE_PATH = realpath(join(dirname(__file__), '..'))
     
-    print(f'>>> BASE_PATH {BASE_PATH}')
     env = environ.Env()
     env.read_env(BASE_PATH(".env"))
     
@@ -237,7 +235,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     """ --------------- DJANGO-SPECIFICS ---------------- """
     
     # DEBUG SETTINGS
-    DEBUG = env.bool("DJANGO_DEBUG", default=False)
+    DEBUG = env.bool("WECHANGE_DEBUG", default=False)
     THUMBNAIL_DEBUG = DEBUG
     # Extra-aggressive Exception raising
     DEBUG_LOCAL = DEBUG
@@ -246,11 +244,11 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     MANAGERS = ()
     
     # Hosts/domain names that are valid for this site; required if DEBUG is False
-    ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["localhost"])
+    ALLOWED_HOSTS = env.list("WECHANGE_ALLOWED_HOSTS", default=["localhost"])
     DATABASES = {
-        "default": env.db("DATABASE_URL"),
+        "default": env.db("WECHANGE_DATABASE_URL"),
     }
-    ADMIN_URL = env("DJANGO_ADMIN_URL", default="admin/")
+    ADMIN_URL = env("WECHANGE_ADMIN_URL", default="admin/")
     
     # Default primary key field type to use for models that don’t have a field with primary_key=True.
     # New in Django 3.2.
@@ -326,7 +324,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     
     # Security settings
     try:
-        SECRET_KEY = env("DJANGO_SECRET_KEY")
+        SECRET_KEY = env("WECHANGE_SECRET_KEY")
     except environ.ImproperlyConfigured:
         SECRET_KEY = "".join(
             [
@@ -337,7 +335,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
             ]
         )
         with open(".env", "a") as envfile:
-            envfile.write(f"DJANGO_SECRET_KEY={SECRET_KEY}\n")
+            envfile.write(f"WECHANGE_SECRET_KEY={SECRET_KEY}\n")
     
     
     
@@ -377,10 +375,9 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     
     """ --------------- SENTRY/RAVEN LOGGING ---------------- """
     
-    # todo env extract
     try:
         # this will bounce us out of the try/catch immediately if no DSN is given
-        _sentry_dsn = env("DJANGO_SENTRY_DSN")
+        _sentry_dsn = env("WECHANGE_SENTRY_DSN")
         import logging
         import sentry_sdk
         from sentry_sdk.integrations.django import DjangoIntegration
@@ -416,7 +413,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
             attach_stacktrace=True
         )
     except environ.ImproperlyConfigured:
-        print("Watch out, there is no sentry dsn defined as 'DJANGO_SENTRY_DSN' in .env, so there is no sentry-support!")
+        print("Watch out, there is no sentry dsn defined as 'WECHANGE_SENTRY_DSN' in .env, so there is no sentry-support!")
     
     
     
@@ -438,7 +435,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'default': {
             # todo: Switch to PyMemcache
             'BACKEND': "django.core.cache.backends.memcached.MemcachedCache",
-            'LOCATION': f"unix:/srv/http/{project_settings['COSINNUS_PORTAL_URL']}/run/memcached.socket",
+            'LOCATION':  env("WECHANGE_MEMCACHED_LOCATION", default=f"unix:/srv/http/{project_settings['COSINNUS_PORTAL_URL']}/run/memcached.socket"),
         }
     }
     
