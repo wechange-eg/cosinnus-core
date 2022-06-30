@@ -29,11 +29,147 @@ if 'PASSWORD_RESET_TIMEOUT_DAYS' in globals():
     del globals()['PASSWORD_RESET_TIMEOUT_DAYS']
 
 
+# WARNING: do not add any settings on this level! 
+# all settings added should go within `define_cosinnus_base_settings` 
 
-def define_cosinnus_base_settings(project_base_path, settings):
-    """ This function is called from the base project and is necessary because we need 
+
+""" --------------- APP CONFIG  ---------------- """
+    
+def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
+    """ Supports gathering INSTALLED_APPS with external-project options.
+        Must be called after importing these settings!
+    """
+    
+    _INSTALLED_APPS = [
+        # Django Apps
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.humanize',
+        'django.contrib.messages',
+        'django.contrib.redirects',
+        'django.contrib.sessions',
+        'django.contrib.sites',
+        'django.contrib.staticfiles',
+        'suit_overextends',
+        'suit',
+        'django.contrib.admin',
+        'sekizai',
+        'apps.core',
+        'django_countries',  # needed for i18n for the country list
+    ]
+    
+    # Internal Apps (as defined in external project)
+    _INSTALLED_APPS += internal_apps
+    
+    _INSTALLED_APPS += [
+        'cosinnus',
+        'cosinnus_organization',
+        'cosinnus_oauth_client',
+        'cosinnus_cloud',
+        'cosinnus_etherpad',
+        'cosinnus_event',
+        'cosinnus_file',
+        'cosinnus_marketplace',
+        'cosinnus_message',
+        'cosinnus_note',
+        'cosinnus_notifications',
+        'cosinnus_poll',
+        'cosinnus_stream',
+        'cosinnus_todo',
+        'cosinnus_conference',
+        'cosinnus_exchange',
+    ]
+    
+    # Extra Cosinnus Apps (as defined in external project)
+    _INSTALLED_APPS += extra_cosinnus_apps
+    
+    _INSTALLED_APPS += [
+        
+        # haystack needs to precede wagtail because wagtail idiotically overrides haystack's mmanagement commands
+        'haystack',
+        
+        # wagtail
+        'wagtail_overextends',
+        'compressor',
+        'modelcluster',
+        'wagtail.core',
+        'wagtail.admin',
+        'wagtail.documents',
+        'wagtail.snippets',
+        'wagtail.users',
+        'wagtail.images',
+        'wagtail.embeds',
+        'wagtail.search',
+        'wagtail.sites',
+        'wagtail.contrib.redirects',
+        'wagtail.contrib.forms',
+        
+        
+        'announcements',
+        'ajax_forms',
+      
+        # SSO
+        'allauth',
+        'allauth.account',
+        'allauth.socialaccount',
+        
+        # 'django_extensions',
+        'django_filters',
+        'django_select2',
+        'django_cron',
+        'widget_tweaks',
+        'django_otp',
+        'django_otp.plugins.otp_totp',
+        'django_otp.plugins.otp_static',
+        'two_factor',
+        'timezone_field',
+        
+        # External Apps
+        'awesome_avatar',
+        'bootstrap3',
+        'bootstrap3_datetime',
+        'captcha',
+        'djajax',
+        'django_mailbox',
+        'easy_thumbnails',
+        'embed_video',
+        'el_pagination',
+        'honeypot',
+        'osm_field',
+        'phonenumber_field',
+        'postman',
+        'oauth2_provider',
+        'corsheaders',
+        'rest_framework',
+        'drf_yasg',
+        'taggit',
+        'django_bigbluebutton',
+        'django_clamd',
+    ]
+    
+    return _INSTALLED_APPS
+
+
+
+def define_cosinnus_base_settings(project_settings, project_base_path):
+    """ This function is called from the base project and is used instead of just importing
+        the settings directly, because this way we can reference project_settings like 
+        `COSINNUS_PORTAL_NAME` within settings in this file, even though it was defined in
+        the very first, outer settings file like "config.staging.py".
+    
+        It is also necessary because we need 
         to determine the base path of the main project and pass it to these settings,
         which we couldn't reliably do by checking the module paths from within this file. """
+    
+    """ --------------- WECHANGE REFERENCED PROJECT SETTINGS ---------------- """
+    """ These are the settings that should always be defined before the `vars().update` line
+        in your project settings, as they will be referenced here """
+    
+    SITE_ID = project_settings.get("SITE_ID", 1)
+    #COSINNUS_PORTAL_NAME = project_settings["COSINNUS_PORTAL_NAME"] # needs to be configured in project config.base
+    #COSINNUS_PORTAL_URL = project_settings["COSINNUS_PORTAL_URL"] # needs to be configured in project config.base
+    COSINNUS_DEFAULT_FROM_EMAIL = project_settings.get("COSINNUS_DEFAULT_FROM_EMAIL", f"noreply@{project_settings['COSINNUS_PORTAL_URL']}") # needs to be configured in project config.base
+    
     
     """ --------------- BASE CONFIG ---------------- """
     
@@ -41,9 +177,6 @@ def define_cosinnus_base_settings(project_base_path, settings):
     # increase this to make sure browsers reload a cached version 
     # after making non-compatible changes to scripts or styles!
     COSINNUS_STATICFILES_VERSION = COSINNUS_VERSION
-    
-    SITE_ID = 1
-    COSINNUS_PORTAL_NAME = None # needs to be configured in project config.base
     
     WSGI_APPLICATION = "config.wsgi.application"
     ASGI_APPLICATION = "config.routing.application"
@@ -210,122 +343,6 @@ def define_cosinnus_base_settings(project_base_path, settings):
         with open(".env", "a") as envfile:
             envfile.write(f"DJANGO_SECRET_KEY={SECRET_KEY}\n")
     
-    
-    """ --------------- APP CONFIG  ---------------- """
-    
-    def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
-        """ Supports gathering INSTALLED_APPS with external-project options.
-            Must be called after importing these settings!
-        """
-        
-        _INSTALLED_APPS = [
-            # Django Apps
-            'django.contrib.auth',
-            'django.contrib.contenttypes',
-            'django.contrib.humanize',
-            'django.contrib.messages',
-            'django.contrib.redirects',
-            'django.contrib.sessions',
-            'django.contrib.sites',
-            'django.contrib.staticfiles',
-            'suit_overextends',
-            'suit',
-            'django.contrib.admin',
-            'sekizai',
-            'apps.core',
-            'django_countries',  # needed for i18n for the country list
-        ]
-        
-        # Internal Apps (as defined in external project)
-        _INSTALLED_APPS += internal_apps
-        
-        _INSTALLED_APPS += [
-            'cosinnus',
-            'cosinnus_organization',
-            'cosinnus_oauth_client',
-            'cosinnus_cloud',
-            'cosinnus_etherpad',
-            'cosinnus_event',
-            'cosinnus_file',
-            'cosinnus_marketplace',
-            'cosinnus_message',
-            'cosinnus_note',
-            'cosinnus_notifications',
-            'cosinnus_poll',
-            'cosinnus_stream',
-            'cosinnus_todo',
-            'cosinnus_conference',
-            'cosinnus_exchange',
-        ]
-        
-        # Extra Cosinnus Apps (as defined in external project)
-        _INSTALLED_APPS += extra_cosinnus_apps
-        
-        _INSTALLED_APPS += [
-            
-            # haystack needs to precede wagtail because wagtail idiotically overrides haystack's mmanagement commands
-            'haystack',
-            
-            # wagtail
-            'wagtail_overextends',
-            'compressor',
-            'modelcluster',
-            'wagtail.core',
-            'wagtail.admin',
-            'wagtail.documents',
-            'wagtail.snippets',
-            'wagtail.users',
-            'wagtail.images',
-            'wagtail.embeds',
-            'wagtail.search',
-            'wagtail.sites',
-            'wagtail.contrib.redirects',
-            'wagtail.contrib.forms',
-            
-            
-            'announcements',
-            'ajax_forms',
-          
-            # SSO
-            'allauth',
-            'allauth.account',
-            'allauth.socialaccount',
-            
-            # 'django_extensions',
-            'django_filters',
-            'django_select2',
-            'django_cron',
-            'widget_tweaks',
-            'django_otp',
-            'django_otp.plugins.otp_totp',
-            'django_otp.plugins.otp_static',
-            'two_factor',
-            'timezone_field',
-            
-            # External Apps
-            'awesome_avatar',
-            'bootstrap3',
-            'bootstrap3_datetime',
-            'captcha',
-            'djajax',
-            'django_mailbox',
-            'easy_thumbnails',
-            'embed_video',
-            'el_pagination',
-            'honeypot',
-            'osm_field',
-            'phonenumber_field',
-            'postman',
-            'oauth2_provider',
-            'corsheaders',
-            'rest_framework',
-            'drf_yasg',
-            'taggit',
-            'django_bigbluebutton',
-            'django_clamd',
-        ]
-        
-        return _INSTALLED_APPS
     
     
     """ --------------- SESSION/COOKIES ---------------- """
@@ -552,7 +569,7 @@ def define_cosinnus_base_settings(project_base_path, settings):
     
     # Default title for all pages unless the title block is overwritten. 
     # This is put through a {% trans %} tag. """
-    COSINNUS_BASE_PAGE_TITLE_TRANS = ''
+    COSINNUS_BASE_PAGE_TITLE_TRANS = project_settings.get("COSINNUS_BASE_PAGE_TITLE_TRANS", project_settings["COSINNUS_PORTAL_NAME"])
     
     # Etherpad config.
     # Warning: Etherpad URL and KEY are usually overwritten in settings.py on the server! """
@@ -564,7 +581,6 @@ def define_cosinnus_base_settings(project_base_path, settings):
     COSINNUS_ETHERPAD_ETHERCALC_BASE_URL = None
     
     # default from-email:
-    COSINNUS_DEFAULT_FROM_EMAIL = ''
     DEFAULT_FROM_EMAIL = COSINNUS_DEFAULT_FROM_EMAIL
     
     # settings for email-dkim signing. you can follow this guide for creating a key https://blog.codinghorror.com/so-youd-like-to-send-some-email-through-code/ (point 2)
@@ -698,8 +714,6 @@ def define_cosinnus_base_settings(project_base_path, settings):
         'ADMIN_NAME': 'Wechange Admin'
     }
     
-    # 2-factor authentication issuer name for admin backend
-    OTP_TOTP_ISSUER = 'WECHANGE eG'
     
     # django-simple captcha settings
     CAPTCHA_CHALLENGE_FUNCT = 'cosinnus.utils.captcha.dissimilar_random_char_challenge'
@@ -754,6 +768,35 @@ def define_cosinnus_base_settings(project_base_path, settings):
     ]
     
     # todo: get this working
-    # SESSION_COOKIE_DOMAIN=settings["COSINNUS_PORTAL_URL"]
+
+    SESSION_COOKIE_DOMAIN = project_settings["COSINNUS_PORTAL_URL"]
+    SESSION_COOKIE_NAME = project_settings["COSINNUS_PORTAL_NAME"]
+    SESSION_COOKIE_NAME = 'sessionid'
+    COSINNUS_ETHERPAD_BASE_URL = f"https://pad.{project_settings['COSINNUS_PORTAL_URL']}/api"
+    COSINNUS_ETHERPAD_ETHERCALC_BASE_URL = f"https://calc.{project_settings['COSINNUS_PORTAL_URL']}"
+    COSINNUS_SITE_PROTOCOL = "https"
+    COSINNUS_DEFAULT_FROM_EMAIL = f"noreply@{project_settings['COSINNUS_PORTAL_URL']}"
+    DEFAULT_FROM_EMAIL = project_settings["COSINNUS_DEFAULT_FROM_EMAIL"]
+    COSINNUS_USE_CELERY = True
+    BROKER_URL = f"redis://localhost:6379/{project_settings['SITE_ID']}"
+    STATIC_ROOT = join(BASE_PATH, f"static-collected-{project_settings['COSINNUS_PORTAL_NAME']}")
+    STATICFILES_DIRS = (join(BASE_PATH, "static_subdomain", project_settings['COSINNUS_PORTAL_NAME']),) + STATICFILES_DIRS
+    HAYSTACK_CONNECTIONS = {
+        "default": {
+            "ENGINE": "cosinnus.backends.RobustElasticSearchEngine",
+            # replaces 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+            "URL": "http://127.0.0.1:9200/",
+            "INDEX_NAME": project_settings['COSINNUS_PORTAL_NAME']
+        },
+    },
+    COSINNUS_LOGIN_REDIRECT_URL = "/dashboard/"
+    COSINNUS_IDEAS_ENABLED = True
+    COSINNUS_USE_V2_NAVBAR = True
+    COSINNUS_USE_V2_DASHBOARD = True
+    COSINNUS_V2_DASHBOARD_USE_NAIVE_FETCHING = False
+    COSINNUS_NOTIFICATION_ALERTS_ENABLED = True
     
     return vars()
+
+# WARNING: do not add any settings on this level! 
+# settings added "behind" the last settings should go within `define_cosinnus_base_settings` 
