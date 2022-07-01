@@ -11,7 +11,7 @@ import {
   useColorMode,
   Button,
 } from '@chakra-ui/react'
-import { ProtectedRouteProps } from './components/routes/ProtectedRoute'
+import { ProtectedRouteProps } from './components/shared/ProtectedRoute'
 import { fetchTranslations } from './store/translations'
 import { fetchSettings } from './store/settings'
 import { fetchUser } from './store/sessionAuth'
