@@ -341,7 +341,7 @@ class UserCreateView(CreateView):
         if invite_token:
             invite = get_object_or_None(CosinnusGroupInviteToken, token__iexact=invite_token, portal=CosinnusPortal.get_current())
             if not invite:
-                messages.warning(self.request, _('The invite token you have used does not exist!'))
+                messages.warning(self.request, _('The invite token you have used does not exist. Please contact the responsible person to get a valid link!'))
             elif not invite.is_active:
                 messages.warning(self.request, _('Sorry, but the invite token you have used is not active yet or not active anymore!'))
             else:
@@ -475,7 +475,7 @@ class CosinnusGroupInviteTokenView(TemplateView):
         self.token = kwargs.get('token', None)
         self.invite = get_object_or_None(CosinnusGroupInviteToken, token__iexact=self.token, portal=CosinnusPortal.get_current())
         if not self.token or not self.invite:
-            messages.error(self.request, _('The invite token you have used does not exist!'))
+            messages.error(self.request, _('The invite token you have used does not exist. Please contact the responsible person to get a valid link!'))
             return redirect('cosinnus:group-invite-token-enter')
         self.invite_groups = list(self.invite.invite_groups.all())
         return super(CosinnusGroupInviteTokenView, self).dispatch(request, *args, **kwargs)
@@ -561,7 +561,7 @@ def _send_user_welcome_email_if_enabled(user, force=False):
     # render the text as markdown
     text = textfield(render_html_with_variables(user, text))
     subj_user = _('Welcome to %(portal_name)s!') % {'portal_name': portal.name}
-    send_html_mail_threaded(user, subj_user, text)
+    send_html_mail_threaded(user, subj_user, text, topic_instead_of_subject="")
     
 
 def approve_user(request, user_id):

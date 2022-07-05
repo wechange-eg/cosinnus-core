@@ -549,9 +549,9 @@ class ConferenceRemindersView(SamePortalGroupMixin, RequireWriteMixin, GroupIsCo
         return self.group
 
     def get_last_sent(self):
-        extra_fields = self.group.extra_fields
-        if extra_fields:
-            last_sent = extra_fields.get('reminder_send_immediately_last_sent')
+        dynamic_fields = self.group.dynamic_fields
+        if dynamic_fields:
+            last_sent = dynamic_fields.get('reminder_send_immediately_last_sent')
             if last_sent:
                 return parse_datetime(last_sent)
 

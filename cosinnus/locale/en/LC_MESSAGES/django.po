@@ -1,11 +1,17 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-25 14:14+0100\n"
+"POT-Creation-Date: 2022-06-22 09:59+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -130,6 +136,13 @@ msgid "Reactivate user accounts"
 msgstr "Create Project"
 
 #, python-format
+msgid "%(count)d Users' group memberships were refreshed."
+msgstr ""
+
+msgid "Refresh user group membership associations (e.g. cache or Nextcloud folder problems)"
+msgstr ""
+
+#, python-format
 msgid "%d Users were synchronized successfully."
 msgstr ""
 
@@ -233,6 +246,17 @@ msgstr ""
 
 msgid "Bookmarked Users list"
 msgstr ""
+
+msgid "Conferences"
+msgstr ""
+
+#, fuzzy
+msgid "Invitations to Conferences"
+msgstr "Convert selected Groups to Projects"
+
+#, fuzzy
+msgid "Invitations to Groups and Projects"
+msgstr "My Projects"
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
@@ -799,6 +823,9 @@ msgid "Like"
 msgstr ""
 
 msgid "Persons"
+msgstr ""
+
+msgid "last name"
 msgstr ""
 
 msgid "Location"
@@ -1480,11 +1507,18 @@ msgstr ""
 msgid "Related Teams"
 msgstr ""
 
+msgid "Open for cooperation"
+msgstr ""
+
 msgid "Dynamic extra fields"
 msgstr ""
 
 msgid "If set to true, a contact form will be displayed on the micropage."
 msgstr ""
+
+#, fuzzy
+msgid "Use invite token"
+msgstr "There are no groups."
 
 msgid "Cosinnus project"
 msgstr "Project"
@@ -2222,6 +2256,18 @@ msgstr ""
 msgid "(The reported item has been deleted.)"
 msgstr ""
 
+msgid "This user profile is scheduled for deletion at: "
+msgstr ""
+
+msgid "However, it will not be deleted, because it is still active."
+msgstr ""
+
+msgid "This user account is disabled. The user cannot log in or use the account."
+msgstr ""
+
+msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
+msgstr ""
+
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr ""
 
@@ -2890,6 +2936,14 @@ msgstr ""
 "*  **Everybody:** Even people who are not logged in can see your profile. Your profile is publicly visible and can be found using search engines on the internet."
 
 msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_50_profileprivacy_external_users_forbidden"
+msgstr ""
+"Privacy settings for your profile:\n"
+"\n"
+"*  **Members of your projects and groups only:** Your profile is only visible for members of your projects and groups. You will not be listed in \"People\" in the top navigation bar.\n"
+"*  **Registered users only:** People that have registered a user account on the platform can see your profile. Your profile is not publicly visible. You will be listed in \"People\" in the top navigation bar."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_51_objectprivacy"
 msgstr ""
 "Privacy settings for content:\n"
@@ -3263,7 +3317,7 @@ msgstr "Project Type"
 msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
 msgstr ""
 
-msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+msgid "The Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgstr ""
 
 msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
@@ -3582,6 +3636,9 @@ msgstr ""
 msgid "Activate Cloud"
 msgstr "Create Project"
 
+msgid "Members-Map"
+msgstr ""
+
 msgid "Cloud"
 msgstr ""
 
@@ -3659,6 +3716,15 @@ msgstr ""
 msgid "No Description set"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Created on: "
+msgstr "Create Group"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Last updated on: "
+msgstr ""
+
 msgid "more"
 msgstr ""
 
@@ -3725,6 +3791,10 @@ msgid "If present, the translations below will be shown according to the users' 
 msgstr ""
 
 msgid "Date"
+msgstr ""
+
+#, python-format
+msgid "Time zone: %(TIME_ZONE)s"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -3800,6 +3870,12 @@ msgstr ""
 msgid "No contact data has been added yet."
 msgstr ""
 
+msgid "Contact organizers"
+msgstr ""
+
+msgid "Here you can send a message to the admins."
+msgstr ""
+
 #, fuzzy
 msgid "Your Deactivated Content"
 msgstr "Project Type"
@@ -3823,6 +3899,9 @@ msgstr "Are you sure you want to delete this prject?"
 #, python-format
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - Members"
+
+msgid "Invite users directly via the following link: "
+msgstr ""
 
 msgid "Membership requests"
 msgstr ""
@@ -4197,6 +4276,26 @@ msgid "Enable the public visibility of your group/project"
 msgstr ""
 
 #, fuzzy
+msgid "Create invite token"
+msgstr "There are no groups."
+
+msgid "Check this to generate an invite token which allows a user to join the group directly."
+msgstr ""
+
+msgid "Check this to generate an invite token which allows a user to join the project directly."
+msgstr ""
+
+msgid "Check this to generate an invite token which allows a user to join the conference directly."
+msgstr ""
+
+msgid "The current token is: "
+msgstr ""
+
+#, fuzzy
+msgid "Create token"
+msgstr "Create Project"
+
+#, fuzzy
 msgid "Include a video conference"
 msgstr "Enter a name for the project."
 
@@ -4248,7 +4347,16 @@ msgstr ""
 msgid "This project shall be made publicly findable via other platforms."
 msgstr ""
 
+msgid "Is your project open to other partner organizations?"
+msgstr ""
+
+msgid "Project is open for further partner organizations."
+msgstr ""
+
 msgid "Which apps should be activated?"
+msgstr ""
+
+msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
 msgstr ""
 
 msgid "This App can only be activated for a Group, but not for a Project!"
@@ -4482,6 +4590,29 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Contact Project Admins"
+msgstr "Create Project"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Contact Group Admins"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Contact Conference Admins"
+msgstr "There are no groups."
+
+msgid "If you want to send your message to the project chat, you have to turn directly to the project."
+msgstr ""
+
+msgid "If you want to send your message to the group chat, you have to turn directly to the group."
+msgstr ""
+
+msgid "If you want to send your message to the conference chat, you have to turn directly to the conference."
 msgstr ""
 
 #, fuzzy
@@ -5621,6 +5752,9 @@ msgstr ""
 msgid "CSV Downloads"
 msgstr ""
 
+msgid "Portal switches and settings"
+msgstr ""
+
 msgid "HD space used by conferences"
 msgstr ""
 
@@ -5769,6 +5903,22 @@ msgid "Clear Filters"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Here you can search for partner organisations and projects that are open for further partners. The results are sorted so that partners with a lot of overlap in the funding objectives, eligible areas and SDGs you are active on are listed first."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners for ..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You're currently not member of any project, group or organization."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Street"
 msgstr ""
 
@@ -5803,6 +5953,10 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search this area"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Find partners"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -5995,10 +6149,6 @@ msgid "Participate"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Contact organizers"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications for content posted."
 msgstr ""
 
@@ -6067,6 +6217,10 @@ msgid "Hidden User"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "This group is open for further partner organizations."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are a Member"
 msgstr ""
 
@@ -6074,11 +6228,6 @@ msgstr ""
 #, fuzzy
 msgid "Join Group"
 msgstr "Edit Project"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-msgid "Message Group"
-msgstr "Create Group"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Author"
@@ -6099,6 +6248,10 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This organization is open for further partner organizations."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -6133,14 +6286,13 @@ msgid "To Profile"
 msgstr "Edit Project"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-msgid "Join Project"
-msgstr "Edit Project"
+msgid "This project is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-msgid "Message Project"
-msgstr "Create Project"
+msgid "Join Project"
+msgstr "Edit Project"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Move up"
@@ -7405,9 +7557,6 @@ msgstr ""
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr ""
 
-msgid "Conferences"
-msgstr ""
-
 msgid "My Conferences"
 msgstr ""
 
@@ -7570,6 +7719,9 @@ msgstr ""
 msgid "Please also provide an end date"
 msgstr ""
 
+msgid "Ensure that your name does not contain any invalid characters."
+msgstr ""
+
 msgid "Test email sent!"
 msgstr ""
 
@@ -7605,6 +7757,12 @@ msgstr ""
 
 #, python-format
 msgid "The language \"%s\" is not supported"
+msgstr ""
+
+msgid "New verification email sent!"
+msgstr ""
+
+msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
 msgstr ""
 
 msgid "Successfully made conference permanent premium"
@@ -7955,7 +8113,7 @@ msgstr ""
 msgid "Thank you for signing up and welcome to the platform! We sent an email to your address \"%(email)s\" - please click the link contained in it to verify your email address!"
 msgstr ""
 
-msgid "The invite token you have used does not exist!"
+msgid "The invite token you have used does not exist. Please contact the responsible person to get a valid link!"
 msgstr ""
 
 msgid "Sorry, but the invite token you have used is not active yet or not active anymore!"
@@ -8107,8 +8265,12 @@ msgid "Your changes have been saved."
 msgstr ""
 
 #, fuzzy
-#~ msgid "Conference Administration"
-#~ msgstr "There are no groups."
+#~ msgid "Message Group"
+#~ msgstr "Create Group"
+
+#, fuzzy
+#~ msgid "Message Project"
+#~ msgstr "Create Project"
 
 #, fuzzy
 #~ msgid "Active"

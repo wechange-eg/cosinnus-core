@@ -22,28 +22,27 @@ import json
 import urllib.request, urllib.error, urllib.parse
 from django.utils.encoding import force_text
 import pickle
-from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
-    CosinnusConference
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 import datetime
 from cosinnus.models.tagged import BaseTagObject
 import random
 from django.utils.timezone import now
 from cosinnus.utils.user import filter_active_users, accept_user_tos_for_portal,\
-    get_user_tos_accepted_date, is_user_active, get_user_id_hash
+    get_user_tos_accepted_date, is_user_active
 from cosinnus.models.profile import get_user_profile_model
 from django.core.mail.message import EmailMessage
 from cosinnus.core.mail import send_mail,\
     send_mail_or_fail_threaded, send_html_mail_threaded,\
     render_notification_item_html_mail
-from django.template.defaultfilters import linebreaksbr
-from django.db.models.aggregates import Count
 from cosinnus.utils.http import make_csv_response, make_xlsx_response
 from operator import itemgetter
 from cosinnus.utils.permissions import check_user_can_receive_emails,\
-    check_user_superuser, check_user_portal_manager
+    check_user_superuser
 import logging
 from cosinnus.templatetags.cosinnus_tags import textfield
 from annoying.functions import get_object_or_None
+from django.utils.safestring import mark_safe
+from django.template.loader import render_to_string
 
 logger = logging.getLogger('cosinnus')
 
@@ -427,6 +426,22 @@ def print_testmail(request):
     return HttpResponse(html)
 
 
+def print_testdigest(request):
+    """ Displays a HTML email like it would be sent to a user """
+    if not request or not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    from cosinnus_notifications.models import NotificationEvent, UserNotificationPreference # noqa
+    from cosinnus_note.models import Note, Comment # noqa
+    from cosinnus_notifications.digest import send_digest_for_current_portal, _get_digest_email_context # noqa
+    
+    digest_setting = UserNotificationPreference.SETTING_WEEKLY
+    template = '/cosinnus/html_mail/digest.html'
+    digest_html = send_digest_for_current_portal(digest_setting, debug_run_for_user=request.user)
+    context = _get_digest_email_context(request.user, mark_safe(digest_html), now(), digest_setting)
+    html = render_to_string(template, context=context)
+    return HttpResponse(html)
+
+
 def print_settings(request):
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
@@ -461,156 +476,6 @@ def group_storage_info(request):
             prints += '- %s (%s): %i MB<br/>' % (group.name, group.slug, size)
 
     return HttpResponse(prints)
-
-
-def conference_storage_report_csv(request):
-    """ See ``group_storage_report_csv``, this is the same, just for Conferences and their subprojects. """
-    return group_storage_report_csv(request, group_model=CosinnusConference, filename='conference-storage-report')
-
-def group_storage_report_csv(request, group_model=None, filename='group-storage-report'):
-    """
-        Will return a CSV containing infos about all Groups:
-            URL, Member-count, Number-of-Projects, Storage-Size-in-MB, Storage-Size-of-Group-and-all-Child-Projects-in-MB
-    """
-    if request and not check_user_superuser(request.user) and not check_user_portal_manager(request.user):
-        return HttpResponseForbidden('Not authenticated')
-    
-    rows = []
-    headers = ['url', 'member-count', 'number-projects', 'group-storage-mb', 'group-and-projects-sum-mb']
-    
-    klass = group_model or CosinnusSociety
-    for group in klass.objects.all_in_portal():
-        projects = group.get_children()
-        group_size = _get_group_storage_space_mb(group)
-        projects_size = 0
-        for project in projects:
-            projects_size += _get_group_storage_space_mb(project)
-        rows.append([group.get_absolute_url(), group.member_count, len(projects), group_size, group_size + projects_size])
-    rows = sorted(rows, key=itemgetter(4), reverse=True)
-    return make_csv_response(rows, headers, filename)
-
-
-def project_storage_report_csv(request):
-    """
-        Will return a CSV containing infos about all Projects:
-            URL, Member-count, Storage-Size-in-MB
-    """
-    if request and not check_user_superuser(request.user) and not check_user_portal_manager(request.user):
-        return HttpResponseForbidden('Not authenticated')
-    
-    rows = []
-    headers = ['url', 'member-count', 'project-storage-mb',]
-    
-    for project in CosinnusProject.objects.all_in_portal():
-        project_size = _get_group_storage_space_mb(project)
-        rows.append([project.get_absolute_url(), project.member_count, project_size])
-    rows = sorted(rows, key=itemgetter(2), reverse=True)
-    return make_csv_response(rows, headers, 'project-storage-report')
-
-    
-def user_activity_info(request):
-    if request and not check_user_superuser(request.user) and not check_user_portal_manager(request.user):
-        return HttpResponseForbidden('Not authenticated')
-    
-    prints = '<h1>User activity of users who logged in at least once, in terms of memberships in projects+groups, sorted by highest, one user per row:</h1><br/></br>'
-    users = {}
-    
-    # this filtering simply does not work in django 1.8, the count subfilters are ignored
-#     group_projects = Count('cosinnus_memberships', filter=Q(cosinnus_memberships__group__portal=CosinnusPortal.get_current()))
-#     group_projects_admin = Count('cosinnus_memberships', filter=(Q(cosinnus_memberships__group__portal=CosinnusPortal.get_current()) & Q(cosinnus_memberships__status=MEMBERSHIP_ADMIN)))
-#     projects_only = Count('cosinnus_memberships', filter=(Q(cosinnus_memberships__group__portal=CosinnusPortal.get_current()) & Q(cosinnus_memberships__group__type=CosinnusGroup().TYPE_PROJECT)))
-#     groups_only = Count('cosinnus_memberships', filter=(Q(cosinnus_memberships__group__portal=CosinnusPortal.get_current()) & Q(cosinnus_memberships__group__type=CosinnusGroup().TYPE_SOCIETY)))
-#     for user in get_user_model().objects.filter(is_active=True).exclude(last_login__exact=None).\
-#                 annotate(group_projects=group_projects).annotate(group_projects_admin=group_projects_admin).\
-#                 annotate(projects_only=projects_only).annotate(groups_only=groups_only):
-    portal = CosinnusPortal.get_current()
-    headers = [
-        'user-hashed-id',
-    ]
-    offset = 1
-    if settings.COSINNUS_CONFERENCES_ENABLED:
-        headers += [
-            'conferences-count',
-            'admin-of-conferences-count',
-        ]
-        offset += 2
-    headers += [
-        'projects-and-groups-count',
-        'groups-only-count',
-        'projects-only-count',
-        'admin-of-projects-and-groups-count',
-        'user-last-authentication-login-days',
-        'current-tos-accepted',
-        'registration-date',
-        'events-attended',
-    ]
-    group_type_cache = {} # id (int) --> group type (int)
-    for membership in CosinnusGroupMembership.objects.filter(group__portal=CosinnusPortal.get_current(), user__is_active=True).exclude(user__last_login__exact=None):
-        # get the statistics row for the user of the membership, if there already is one we're aggregating
-        user_row = users.get(membership.user_id, None)
-        if user_row is None:
-            user = membership.user
-            if not hasattr(user, 'cosinnus_profile'):
-                continue
-            initial_row = [
-                get_user_id_hash(user),         # 'user-hashed-id'
-            ]
-            if settings.COSINNUS_CONFERENCES_ENABLED:
-                initial_row += [
-                    0,                          # 'conferences-count',
-                    0,                          # 'admin-of-conferences-count',
-                ]
-            tos_accepted_date = get_user_tos_accepted_date(user)
-            tos_accepted = 1
-            if portal.tos_date.year > 2000 and (tos_accepted_date is None or tos_accepted_date < portal.tos_date):
-                tos_accepted = 0
-            initial_row += [
-                0,                              # 'projects-and-groups-count',
-                0,                              # 'groups-only-count',
-                0,                              # 'projects-only-count',
-                0,                              # 'admin-of-projects-and-groups-count',
-                (now()-user.last_login).days,   # 'user-last-login-days',
-                tos_accepted,                   # 'current-tos-accepted',
-                user.date_joined,               # 'registration-date',
-                0,                              # 'events-attended',
-            ]
-            user_row = initial_row
-        
-        group_type = group_type_cache.get(membership.group_id, None)
-        if group_type is None:
-            group_type = membership.group.type
-            group_type_cache[membership.group_id] = group_type
-            
-        if settings.COSINNUS_CONFERENCES_ENABLED:
-            if group_type == CosinnusGroup.TYPE_CONFERENCE:
-                user_row[1] += 1 # 'conferences-count'
-                if membership.status == MEMBERSHIP_ADMIN:
-                    user_row[2] += 1 # 'admin-of-conferences-count',
-        user_row[offset] += 1 # 'projects-and-groups-count'
-        if group_type == CosinnusGroup.TYPE_PROJECT:
-            user_row[offset+1] += 1 # 'groups-only-count'
-        if group_type == CosinnusGroup.TYPE_SOCIETY:
-            user_row[offset+2] += 1 # 'projects-only-count'
-        if group_type in [CosinnusGroup.TYPE_SOCIETY, CosinnusGroup.TYPE_PROJECT] and membership.status == MEMBERSHIP_ADMIN:
-            user_row[offset+3] += 1 # 'admin-of-projects-and-groups-count'
-        
-        users[membership.user_id] = user_row
-    
-    # add event attendance stats
-    from cosinnus_event.models import EventAttendance # noqa
-    for attendance in EventAttendance.objects.filter(state=EventAttendance.ATTENDANCE_GOING):
-        user_row = users.get(attendance.user_id, None)
-        if user_row is None:
-            continue
-        user_row[offset+7] += 1
-    
-    rows = users.values()
-    rows = sorted(rows, key=lambda row: row[offset], reverse=True)
-
-    #prints += '<br/>'.join([','.join((str(cell) for cell in row)) for row in rows])
-    #return HttpResponse(prints)
-    return make_csv_response(rows, headers, 'user-activity-report')
-
 
 def newsletter_users(request, includeOptedOut=False, never_logged_in_only=False, 
                        all_portal_users=False, file_name='newsletter-user-emails'):

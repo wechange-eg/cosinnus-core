@@ -18,6 +18,7 @@ from django.db import models
 from django.db.models import Q, Max, Min, F
 from django.db.models.functions import Cast
 from django.utils import timezone
+from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
@@ -407,9 +408,9 @@ class CosinnusGroupManager(models.Manager):
         from cosinnus.models.group_extra import CosinnusConference # noqa
         # Prepare query: Mark due conferences
         key = f'reminder_{field_name}'
-        queryset = CosinnusConference.objects.annotate(extra_fields_json=Cast(F('extra_fields'),
-                                                                                      models.JSONField(default={}, encoder=DjangoJSONEncoder)))
-        queryset = queryset.annotate(to_be_reminded=KeyTextTransform(key, 'extra_fields_json'))
+        queryset = CosinnusConference.objects.annotate(dynamic_fields_json=Cast(F('dynamic_fields'),
+                                                                              PostgresJSONField(default={})))
+        queryset = queryset.annotate(to_be_reminded=KeyTextTransform(key, 'dynamic_fields_json'))
         # Prepare query: Mark conferences already notified
         queryset = queryset.annotate(settings_json=Cast(F('settings'), models.JSONField(default={}, encoder=DjangoJSONEncoder)))
         queryset = queryset.annotate(already_reminded=KeyTextTransform(f'{key}_sent', 'settings_json'))
@@ -458,14 +459,14 @@ class CosinnusGroupMembership(BaseMembership):
         super(CosinnusGroupMembership, self).__init__(*args, **kwargs)
         self._status = self.status
 
-    def save(self, *args, **kwargs):
+    def save(self, force_joined_signal=False, *args, **kwargs):
         """ Checks and fires `user_joined_group` signal if a user has hereby joined this group """
         created = bool(self.pk is None)
         super(CosinnusGroupMembership, self).save(*args, **kwargs)
         signals.group_membership_has_changed.send(sender=self, instance=self, deleted=False)
         created_as_membership = bool(created and self.status in MEMBER_STATUS)
         changed_to_membership = bool(not created and self._status not in MEMBER_STATUS and self.status in MEMBER_STATUS)
-        if created_as_membership or changed_to_membership:
+        if created_as_membership or changed_to_membership or force_joined_signal:
             signals.user_joined_group.send(sender=self, user=self.user, group=self.group)
 
     def delete(self, *args, **kwargs):
@@ -639,6 +640,9 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
 
         super(CosinnusPortal, self).save(*args, **kwargs)
         self.compile_custom_stylesheet()
+        self.clear_cache()
+        
+    def clear_cache(self):
         cache.delete(self._CURRENT_PORTAL_CACHE_KEY)
         cache.delete(self._ALL_PORTAL_CACHE_KEY)
 
@@ -884,10 +888,8 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
     # on the platform, no matter their visibility settings, and thus subject to moderation
     cosinnus_always_visible_by_users_moderator_flag = True
 
-    # NOTE: this is the deprecated old extra_field jsonfield, 
-    # but it is still in use for some custom portal code, so cannot yet be removed.
-    # DO NOT USE THIS IN NEW CODE ANYMORE. USE `group.dynamic_fields` or `group.settings` instead!
-    extra_fields = models.JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder)
+    is_open_for_cooperation = models.BooleanField(_('Open for cooperation'), default=False)
+
     settings = models.JSONField(default=dict, blank=True, null=True, encoder=DjangoJSONEncoder)
     
     dynamic_fields = models.JSONField(default=dict, blank=True, verbose_name=_('Dynamic extra fields'),
@@ -895,6 +897,10 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
     sdgs = models.JSONField(default=list, blank=True, null=True, encoder=DjangoJSONEncoder)
     
     show_contact_form = models.BooleanField(default=False, help_text=_('If set to true, a contact form will be displayed on the micropage.'))
+
+    use_invite_token = models.BooleanField(_('Use invite token'),
+                                            default=False, 
+                                            help_text='If enabled, allows the creation of invite tokens in non-admin area')
     
     managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
     
@@ -917,6 +923,7 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         self._type = self.type
         self._slug = self.slug
         self._is_active = self.is_active
+        self._original_name = self.name
 
     def __str__(self):
         # FIXME: better caching for .portal.name
@@ -970,6 +977,25 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         if self.conference_theme_color:
             self.conference_theme_color = self.conference_theme_color.replace('#', '')
 
+        # generate invite token: 
+        try: 
+            CosinnusGroupInviteToken.objects.get(token=self.settings.get('invite_token'))
+            if self.use_invite_token and self.settings.get('invite_token') != None:
+                if self.name != self._original_name:
+                    CosinnusGroupInviteToken.objects.filter(title__startswith=self._original_name).update(title=f"{self.name}")
+                if getattr(CosinnusGroupInviteToken, 'is_active', False):
+                    CosinnusGroupInviteToken.objects.filter(title__startswith=self.name).update(is_active=True)
+            elif not self.use_invite_token and self.settings.get('invite_token') and getattr(CosinnusGroupInviteToken, 'is_active', True):
+                CosinnusGroupInviteToken.objects.filter(title__startswith=self.name).update(is_active=False)
+        except CosinnusGroupInviteToken.DoesNotExist:
+            self.settings.update({'invite_token': None}) 
+            if self.pk and self.use_invite_token and self.settings.get('invite_token') == None:
+                random_string = get_random_string(8)
+                self.settings.update({'invite_token': random_string})
+                token = CosinnusGroupInviteToken.objects.create(token=random_string, title=f"{self.name}")
+                token.invite_groups.add(self)
+                token.save()
+
         super(CosinnusBaseGroup, self).save(*args, **kwargs)
 
         # check if a redirect should be created AFTER SAVING!
@@ -1000,6 +1026,7 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         self._type = self.type
         self._slug = self.slug
         self._is_active = self.is_active
+        self._original_name = self.name
 
         if display_redirect_created_message and hasattr(self, 'request'):
             # possible because of AddRequestToModelSaveMiddleware
@@ -1087,6 +1114,17 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         return bool(self.membership_mode == self.MEMBERSHIP_MODE_APPLICATION)
     
     @property
+    def membership_applications_possible(self):
+        """ Shortcut to determine if users can currently apply to become a member, 
+            depending on what type of membership requests are set, and if applicable,
+            if conference applications are currently open. """
+        return bool(
+                not self.use_conference_applications or
+                not self.participation_management.exists() or
+                self.participation_management.get().applications_are_active
+            )
+    
+    @property
     def is_autojoin_group(self):
         """ Shortcut to determine if a user joining this group will be instantly 
             accepted instead of creating a join request for the administrators.
@@ -1145,6 +1183,16 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         membership = get_object_or_None(CosinnusGroupMembership, group=self, user=user)
         if membership:
             membership.delete()
+    
+    @property
+    def group_is_project(self):
+        """ Check if this is a proper project """
+        return self.type == self.TYPE_PROJECT
+
+    @property
+    def group_is_group(self):
+        """ Check if this is a proper group / society """
+        return self.type == self.TYPE_SOCIETY
     
     @property
     def group_is_conference(self):
@@ -1227,7 +1275,6 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
             keys.extend(
                 [CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, s) for s in slugs])
         if group:
-            group._clear_local_cache()
             keys.append(CosinnusGroupManager._GROUP_CHILDREN_PK_CACHE_KEY % (CosinnusPortal.get_current().id, group.id))
             if group.parent_id:
                 keys.append(CosinnusGroupManager._GROUP_CHILDREN_PK_CACHE_KEY % (
@@ -1583,6 +1630,8 @@ class CosinnusGroupInviteToken(models.Model):
         self._portal_id = self.portal_id
         self._token = self.token
         
+    def get_absolute_url(self):
+        return get_domain_for_portal(self.portal) + reverse('cosinnus:group-invite-token', kwargs={'token': self.token})
 
 class CosinnusPermanentRedirect(models.Model):
     """ Sets up a redirect for all URLs that match the pattern of

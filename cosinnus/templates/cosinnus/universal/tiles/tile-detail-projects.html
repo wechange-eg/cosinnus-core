@@ -1,6 +1,16 @@
 {% extends 'tiles/tile-detail-base-group' %}
 {% import "include/macros.html" as macros %}
 
+{% block additional_top_line %}
+{{ block.super }}
+{% if is_open_for_cooperation %}
+<div class="alert apply-bg-color-projects">
+    <i class="fa fa-puzzle-piece"></i>
+    {# Translators: __INCLUDE_JS_PO__ #}
+    <p>{% trans "This project is open for further partner organizations." %}</p>
+</div>
+{% endif %}
+{% endblock %}
 
 {% block action_buttons %}
     <div class="tile-section tile-section-button-list">
@@ -34,7 +44,7 @@
             <a href="{{ action_url_2 }}" target="_blank" class="rounded-button button-action">
                 <span class="rounded-button-inner">
                     {# Translators: __INCLUDE_JS_PO__ #}
-                    {% trans "Message Project" %}
+                    {% trans "Contact Project Admins" %}
                 </span>
             </a>
         {% endif %}

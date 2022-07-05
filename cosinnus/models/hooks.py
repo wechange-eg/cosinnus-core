@@ -349,7 +349,8 @@ def managed_tag_cache_clear_triggers(sender, instance, created=False, **kwargs):
 @receiver(post_save, sender=CosinnusGroupMembership)
 @receiver(post_delete, sender=CosinnusGroupMembership)
 def group_membership_cache_clear_triggers(sender, instance, created=False, **kwargs):
-    """ Clears the cache for CosinnusGroupMembership when saved/deleted """
+    """ Clears the cache for CosinnusGroupMembership when saved/deleted.
+        TODO: this may be duplicating behaviour from BaseMembership.delete() and BaseMembership.save()! """
     try:
         CosinnusGroupMembership.clear_member_cache_for_group(instance.group)
     except Exception as e:

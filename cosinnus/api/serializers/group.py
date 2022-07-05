@@ -25,6 +25,7 @@ class GroupSimpleSerializer(serializers.ModelSerializer):
 
 
 class CosinnusSocietySerializer(serializers.HyperlinkedModelSerializer):
+    url = serializers.URLField(source='get_absolute_url', read_only=True)
     topics = serializers.SerializerMethodField()
     tags = serializers.SerializerMethodField()
     locations = serializers.SerializerMethodField()
@@ -55,8 +56,8 @@ class CosinnusSocietySerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta(object):
         model = CosinnusSociety
-        fields = ('name', 'slug', 'description', 'description_long', 'contact_info',
-                  'avatar', 'website', 'related', 'topics', 'tags', 'locations', 'created')
+        fields = ('url', 'name', 'slug', 'description', 'description_long', 'contact_info', 'avatar', 'website',
+                  'related', 'topics', 'tags', 'locations', 'created', 'is_open_for_cooperation')
 
 
 class CosinnusProjectSerializer(CosinnusSocietySerializer):

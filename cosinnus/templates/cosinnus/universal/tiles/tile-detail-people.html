@@ -26,6 +26,8 @@
 
 {% endblock topic_line %}
 
+{% block top_line_address %}{% endblock %}
+
 {% block action_buttons %}
 	{% if not is_self %}
 	    <div class="tile-section tile-section-button-list">
@@ -108,3 +110,6 @@
     {% endif %}
     
 {% endblock related_content %}
+
+{% block create_modified_timestamps %}
+{% endblock create_modified_timestamps %}

@@ -158,6 +158,9 @@ class AdminOTPMiddleware(MiddlewareMixin):
             if not user.is_verified():
                 next_url = request.path
                 return redirect(reverse('cosinnus:login-2fa') + (('?next=%s' % next_url) if is_safe_url(next_url, allowed_hosts=[request.get_host()]) else ''))
+        elif user and user.is_authenticated and not check_user_superuser(user) and request.path.startswith(filter_path) and not request.path in EXEMPTED_URLS_FOR_2FA:
+            # normal users will never be redirected to the admin area
+            return redirect('cosinnus:user-dashboard')
 
         return None
 
@@ -255,7 +258,8 @@ class GroupPermanentRedirectMiddleware(MiddlewareMixin, object):
                                 # except for the conference application view and any event views
                                 if len(request_tokens) > 4 and not (is_admin or \
                                                                     (len(request_tokens) >= 6 and request_tokens[5] in ['apply',]) or \
-                                                                    (len(request_tokens) >= 5 and request_tokens[4] in ['members', 'event', 'join', 'decline', 'accept', 'withdraw', 'leave'])):
+                                                                    (len(request_tokens) >= 5 and request_tokens[4] in ['members', 'event', 'join', 'decline', 'accept', 'withdraw', 'leave']) or \
+                                                                    (len(request_tokens) >= 7 and request_tokens[4] in ['file',] and request_tokens[6] in ['save', 'download',])):
                                     return HttpResponseRedirect(target_group.get_absolute_url())
                             elif check_ug_membership(request.user, target_group):
                                 # normal users only have access to the conference page of a conference group (and the management views)
@@ -320,7 +324,7 @@ class GroupResolvingMiddlewareMixin(object):
                 # get group name from URL, might already fail and except out on short URLs
                 group_name = request.path.split('/')[2] 
                 try:
-                    setattr(request, '_middleware_resolved_group', get_group_for_request(group_name, request))
+                    setattr(request, '_middleware_resolved_group', get_group_for_request(group_name, request, fail_silently=True))
                 except Exception as e:
                     if settings.DEBUG:
                         raise e

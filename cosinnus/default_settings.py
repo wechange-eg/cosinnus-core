@@ -22,7 +22,7 @@ COSINNUS_PORTAL_NAME = None
 # the suffix of every often-changing JS/CSS staticfile
 # increase this to make sure browsers reload a cached version 
 # after making non-compatible changes to scripts or styles!
-COSINNUS_STATICFILES_VERSION = '1.15'
+COSINNUS_STATICFILES_VERSION = '1.16'
 
 DEBUG = False
 
@@ -240,6 +240,7 @@ def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
         'django_otp.plugins.otp_static',
         'two_factor',
         'timezone_field',
+        'django_extensions',
         
         # External Apps
         'awesome_avatar',
@@ -635,5 +636,33 @@ COSINNUS_EXCHANGE_RUN_EVERY_MINS = 60 * 24
 #   source: (domain from URL)
 #   model: None (required, e.g. 'cosinnus_exchange.Event')
 #   serializer: None (required, e.g. 'cosinnus_exchange.serializers.ExchangeEventSerializer')
-COSINNUS_EXCHANGE_BACKENDS = []
+"""
+# Example Backends:
+COSINNUS_EXCHANGE_ENABLED = True
+COSINNUS_EXCHANGE_RUN_EVERY_MINS = 60*24
+COSINNUS_EXCHANGE_BACKENDS = [
+    {
+        'backend': 'cosinnus_exchange.backends.ExchangeBackend',
+        'url': 'http://staging.wechange.de/api/v2/events/',
+        'source': 'WECHANGE Staging',
+        'model': 'cosinnus_exchange.ExchangeEvent',
+        'serializer': 'cosinnus_exchange.serializers.ExchangeEventSerializer',
+    },
+    {
+        'backend': 'cosinnus_exchange.backends.ExchangeBackend',
+        'url': 'http://staging.wechange.de/api/v2/organizations/',
+        'source': 'WECHANGE Staging',
+        'model': 'cosinnus_exchange.ExchangeOrganization',
+        'serializer': 'cosinnus_exchange.serializers.ExchangeOrganizationSerializer',
+    },
+    {
+        'backend': 'cosinnus_exchange.backends.ExchangeBackend',
+        'url': 'https://community.civilsocietycooperation.net/api/v2/events/',
+        'source': 'Civilsocietycooperation.net',
+        'model': 'cosinnus_exchange.ExchangeEvent',
+        'serializer': 'cosinnus_exchange.serializers.ExchangeEventSerializer',
+    },
+]
+"""
 
+COSINNUS_EXCHANGE_BACKENDS = []

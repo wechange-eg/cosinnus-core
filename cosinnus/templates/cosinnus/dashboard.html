@@ -114,11 +114,16 @@
 	
 	{% block group_announcements %}
 	    
-	    {% if SETTINGS.COSINNUS_MICROSITES_ENABLED and group.publicly_visible %}
+	    
+	    {% captureas nag_setting %}microsite_hide_nag__{{ group.id }}{% endcaptureas %}
+        {% captureas nag_setting_value %}microsite_hide_nag__{{ group.id }}:true{% endcaptureas %}
+	    {% if SETTINGS.COSINNUS_MICROSITES_ENABLED and group.publicly_visible and not SETTINGS.COSINNUS_MICROSITES_DISABLE_NEEDS_LOVE_NAG_SCREEN and not user|cosinnus_setting:nag_setting %}
 		    {% comment %} -------    Microsite edit-me message ------------ {% endcomment %}
 		    {% if user.is_authenticated and user.pk in group.admins and not group.description_long %}
 			    <div class="alert alert-warning alert-dismissable">
 		            <i class="fa fa-heart fa-3x"></i>
+		            <button id="close_button" type="button" class="close" data-dismiss="alert" aria-hidden="true" {% djajax_connect user.cosinnus_profile.settings trigger_on="click" fixed_value=nag_setting_value %}>&#215;</button>
+            
 		            <h4>{% trans "Your Microsite needs some love!" %}</h4>
 		            <div class="v-offset-s">
 			        <p>
@@ -170,9 +175,9 @@
 
     <div class="dashboard-header">
         <div class="dashboard-header-image">
-            <a href="{% group_url 'cosinnus:group-detail' group=group %}">
+            <a title="{% trans "Members-Map" %}" href="{% group_url 'cosinnus:group-detail' group=group %}">
                 {% include "cosinnus/group/group_avatar_image.html" with group=group %}
-            </a>
+            </a>            
         </div>
         <div class="dashboard-header-text">
             <div class="multiline-ellipsis">
@@ -382,6 +387,12 @@
                         {% endif %}
                     {% endblock group_metadata %}
                     
+					<p class="group-microsite-created-updated-timestamp">
+						<i>{% trans "Created on: " %}</i>{{ group.created|date:"SHORT_DATE_FORMAT" }}
+						<br>
+						<i>{% trans "Last updated on: " %}</i>{{ group.last_modified|date:"SHORT_DATE_FORMAT" }}
+					</p>
+
                     </div>
                 <div class="multiline-ellipsis-realend"><a href="#">....{% trans "more" %}</a></div>
             </div>

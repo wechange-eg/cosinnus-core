@@ -57,7 +57,7 @@ class QuickSearchAPIView(ModelRetrievalMixin, View):
     if settings.COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE:
         content_types.append('offers')
     
-    if settings.COSINNUS_CLOUD_ENABLED:
+    if settings.COSINNUS_CLOUD_ENABLED and settings.COSINNUS_CLOUD_QUICKSEARCH_ENABLED:
         # cloudfiles are a special case in QuicksearchAPIView.get_items
         content_types.append('cloudfiles')
 

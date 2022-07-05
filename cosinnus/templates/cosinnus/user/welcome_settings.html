@@ -18,7 +18,11 @@
 	    {% block visibility_setting %}
 	        <h3>
 	            {% trans "Who is allowed to see you on the platform?" %}
-	            {% include 'cosinnus/common/help_button_for_popup.html' with help_text_id="helptext_50_profileprivacy" %}
+				{% if not SETTINGS.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN %}
+	            	{% include 'cosinnus/common/help_button_for_popup.html' with help_text_id="helptext_50_profileprivacy" %}
+				{% else %}
+					{% include 'cosinnus/common/help_button_for_popup.html' with help_text_id="helptext_50_profileprivacy_external_users_forbidden" %}
+				{% endif %}
 	        </h3>
 	        <select id="id_visibility_setting" name="visibility_setting" class="form-control form-control-heavy">
 	            {% include 'cosinnus/user/user_visibility_formfield_options.html' with visibility=visibility_setting %}

@@ -22,7 +22,7 @@ from django.utils.translation import ugettext_lazy as _, get_language
 
 from cosinnus.conf import settings
 from cosinnus.core.registries import app_registry, attached_object_registry
-from cosinnus.models.group import CosinnusGroup, CosinnusGroupManager,\
+from cosinnus.models.group import CosinnusBaseGroup, CosinnusGroup, CosinnusGroupInviteToken, CosinnusGroupManager,\
     CosinnusPortal, get_cosinnus_group_model, CosinnusGroupMembership
 from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
@@ -50,7 +50,7 @@ from django.templatetags.static import static
 from django.template.defaultfilters import linebreaksbr, pprint
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
     CosinnusConference
-from cosinnus.models.conference import CosinnusConferenceApplication
+from cosinnus.models.conference import CosinnusConferenceApplication, ParticipationManagement
 from wagtail.core.templatetags.wagtailcore_tags import richtext
 from uuid import uuid1
 from annoying.functions import get_object_or_None
@@ -403,9 +403,16 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html", request
         societies_invited = CosinnusSociety.objects.get_for_user_invited(request.user)
         projects_invited = CosinnusProject.objects.get_for_user_invited(request.user)
         conferences_invited = CosinnusConference.objects.get_for_user_invited(request.user)
+        
         groups_invited = [DashboardItem(group) for group in societies_invited]
         groups_invited += [DashboardItem(group) for group in projects_invited]
-        groups_invited += [DashboardItem(group) for group in conferences_invited]
+        # for conferences, only show invites if becoming a member is currently possible
+        groups_invited += [
+            DashboardItem(conference) 
+            for conference in conferences_invited 
+            if conference.membership_applications_possible
+        ]
+
         context['groups_invited_json_encoded'] = _escape_quotes(_json.dumps(groups_invited))
         context['groups_invited_count'] = len(groups_invited)
 
@@ -1457,4 +1464,3 @@ def get_forum_group():
     forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
     forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
     return forum_group
-    

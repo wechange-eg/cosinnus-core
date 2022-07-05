@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-25 14:14+0100\n"
+"POT-Creation-Date: 2022-06-22 09:59+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -137,6 +137,14 @@ msgstr "%d Χρήστες απενεργοποιήθηκαν με επιτυχί
 msgid "Reactivate user accounts"
 msgstr "Ο λογαριασμός χρήστη ενεργοποιήθηκε με επιτυχία"
 
+#, fuzzy, python-format
+#| msgid "%d Users' rocketchat room memberships were re-done."
+msgid "%(count)d Users' group memberships were refreshed."
+msgstr "Έγινε αναδημιουργία %d συνδρομών χρηστών για δωμάτιο rocketchat."
+
+msgid "Refresh user group membership associations (e.g. cache or Nextcloud folder problems)"
+msgstr ""
+
 #, python-format
 msgid "%d Users were synchronized successfully."
 msgstr "%d Χρήστες συγχρονίστηκαν με επιτυχία."
@@ -241,6 +249,19 @@ msgstr "Λίστα Σελιδοδεικτών"
 
 msgid "Bookmarked Users list"
 msgstr "Λίστα Χρηστών με Σελιδοδείκτη"
+
+msgid "Conferences"
+msgstr "Συσκέψεις"
+
+#, fuzzy
+#| msgid "Convert selected items to Conferences"
+msgid "Invitations to Conferences"
+msgstr "Μετατροπή επιλεγμένων στοιχείων σε Συσκέψεις"
+
+#, fuzzy
+#| msgid "In my Groups and Projects"
+msgid "Invitations to Groups and Projects"
+msgstr "Στις Ομάδες και Έργα μου"
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
@@ -777,6 +798,11 @@ msgstr "Μου αρέσει"
 
 msgid "Persons"
 msgstr "Άτομα"
+
+#, fuzzy
+#| msgid "Last name"
+msgid "last name"
+msgstr "Επώνυμο"
 
 msgid "Location"
 msgstr "Τοποθεσία"
@@ -1451,12 +1477,22 @@ msgstr "Κυρίαρχη Ομάδα"
 msgid "Related Teams"
 msgstr "Σχετικές Ομάδες"
 
+#, fuzzy
+#| msgid "I am open for cooperation requests"
+msgid "Open for cooperation"
+msgstr "Είναι διαθέσιμος για αιτήματα συνεργασίας"
+
 msgid "Dynamic extra fields"
 msgstr "Δυναμικά πρόσθετα πεδία"
 
 #, fuzzy
 msgid "If set to true, a contact form will be displayed on the micropage."
 msgstr "Εάν αυτό είναι ενεργό, ένα πλαίσιο Έκκλησης για Δράση θα εμφανιστεί στον μικρότοπο."
+
+#, fuzzy
+#| msgid "User token"
+msgid "Use invite token"
+msgstr "Διακριτικό Χρήστη"
 
 msgid "Cosinnus project"
 msgstr "Έργο Cosinnus"
@@ -2173,6 +2209,18 @@ msgstr "Διαγραφή αναφερόμενου στοιχείου..."
 msgid "(The reported item has been deleted.)"
 msgstr "(Το αναφερόμενο στοιχείο έχει διαγραφεί.)"
 
+msgid "This user profile is scheduled for deletion at: "
+msgstr ""
+
+msgid "However, it will not be deleted, because it is still active."
+msgstr ""
+
+msgid "This user account is disabled. The user cannot log in or use the account."
+msgstr ""
+
+msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
+msgstr ""
+
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Εισάγετε τα 4 κεφαλαία γράμματα στην κωδικοποιημένη εικόνα"
 
@@ -2826,6 +2874,13 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
 msgstr "helptext_50_profileprivacy"
 
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_50_profileprivacy"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_50_profileprivacy_external_users_forbidden"
+msgstr "helptext_50_profileprivacy"
+
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_51_objectprivacy"
 msgstr "helptext_51_objectprivacy"
@@ -3183,7 +3238,9 @@ msgstr "Είδος Δωματίου"
 msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
 msgstr "Το Λόμπι είναι το κύριο σημείο εισόδου για τους συμμετέχοντες. Θα βρείτε εδώ την ατζέντα της σύσκεψης."
 
-msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+#, fuzzy
+#| msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+msgid "The Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgstr "Η Σκηνή χρησιμοποιείται να την παρουσίαση μιας ζωντανής μετάδοσης π.χ. από το YouTube ή Vimeo. Μια συνομιλία εμφανίζεται δίπλα σε αυτή."
 
 msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
@@ -3506,6 +3563,11 @@ msgstr "ξεκινήστε εδώ..."
 msgid "Activate Cloud"
 msgstr "Ενεργοποίηση Cloud"
 
+#, fuzzy
+#| msgid "Members"
+msgid "Members-Map"
+msgstr "Μέλη"
+
 msgid "Cloud"
 msgstr "Cloud"
 
@@ -3583,6 +3645,18 @@ msgstr "Τώρα θα λαμβάνετε ειδοποιήσεις όταν δη�
 msgid "No Description set"
 msgstr "Δεν έχει οριστεί Περιγραφή"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created"
+msgid "Created on: "
+msgstr "Δημιουργήθηκε"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Last sent on: "
+msgid "Last updated on: "
+msgstr "Τελευταία αποστολή στις: "
+
 msgid "more"
 msgstr "περισσότερα"
 
@@ -3654,6 +3728,10 @@ msgstr ""
 msgid "Date"
 msgstr "Ημερομηνία"
 
+#, python-format
+msgid "Time zone: %(TIME_ZONE)s"
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "From"
 msgstr "Από"
@@ -3724,6 +3802,12 @@ msgstr "Επικοινωνία"
 msgid "No contact data has been added yet."
 msgstr "Δεν έχουν προστεθεί ακόμη στοιχεία επικοινωνίας."
 
+msgid "Contact organizers"
+msgstr "Επικοινωνία με διοργανωτές"
+
+msgid "Here you can send a message to the admins."
+msgstr ""
+
 msgid "Your Deactivated Content"
 msgstr "Το Περιεχόμενο που Απενεργοποιήθηκε"
 
@@ -3746,6 +3830,9 @@ msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε 
 #, python-format
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - Μέλη"
+
+msgid "Invite users directly via the following link: "
+msgstr ""
 
 msgid "Membership requests"
 msgstr "Αιτήματα συνδρομής"
@@ -4112,6 +4199,28 @@ msgid "Enable the public visibility of your group/project"
 msgstr ""
 
 #, fuzzy
+#| msgid "Delete invitation"
+msgid "Create invite token"
+msgstr "Διαγραφή πρόσκλησης"
+
+msgid "Check this to generate an invite token which allows a user to join the group directly."
+msgstr ""
+
+msgid "Check this to generate an invite token which allows a user to join the project directly."
+msgstr ""
+
+msgid "Check this to generate an invite token which allows a user to join the conference directly."
+msgstr ""
+
+msgid "The current token is: "
+msgstr ""
+
+#, fuzzy
+#| msgid "Create content"
+msgid "Create token"
+msgstr "Δημιουργία περιεχομένου"
+
+#, fuzzy
 msgid "Include a video conference"
 msgstr "Αποστολή 1 ημέρα πριν από τη σύσκεψη"
 
@@ -4171,8 +4280,17 @@ msgstr "Εδώ μπορείτε να ελέγξετε εάν οι δημόσια
 msgid "This project shall be made publicly findable via other platforms."
 msgstr "Αυτό το έργο θα είναι δυνατόν να βρεθεί δημόσια μέσω άλλης πλατφόρμας."
 
+msgid "Is your project open to other partner organizations?"
+msgstr ""
+
+msgid "Project is open for further partner organizations."
+msgstr ""
+
 msgid "Which apps should be activated?"
 msgstr "Ποιες εφαρμογές πρέπει να ενεργοποιηθούν;"
+
+msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
+msgstr ""
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Αυτή η Εφαρμογή μπορεί να ενεργοποιηθεί μόνο για Ομάδα αλλά όχι για Έργο!"
@@ -4409,6 +4527,32 @@ msgstr "Κοινή χρήση στο Twitter"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr "Στόχοι Βιώσιμης Ανάπτυξης"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created Projects"
+msgid "Contact Project Admins"
+msgstr "Έργα που Δημιουργήθηκαν"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Contact info"
+msgid "Contact Group Admins"
+msgstr "Πληροφορίες Επικοινωνίας"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Contact Conference Admins"
+msgstr "Διαχείριση Χρήστη"
+
+msgid "If you want to send your message to the project chat, you have to turn directly to the project."
+msgstr ""
+
+msgid "If you want to send your message to the group chat, you have to turn directly to the group."
+msgstr ""
+
+msgid "If you want to send your message to the conference chat, you have to turn directly to the conference."
+msgstr ""
 
 #, fuzzy
 msgid "Email the group administrators"
@@ -5677,6 +5821,11 @@ msgid "CSV Downloads"
 msgstr "Λήψεις CSV"
 
 #, fuzzy
+#| msgid "Portal Setting"
+msgid "Portal switches and settings"
+msgstr "Ρύθμιση Πύλης"
+
+#, fuzzy
 msgid "HD space used by conferences"
 msgstr "Χώρος HD που χρησιμοποιείται από έργα"
 
@@ -5818,6 +5967,22 @@ msgid "Clear Filters"
 msgstr "Καθαρισμός Φίλτρων"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Here you can search for partner organisations and projects that are open for further partners. The results are sorted so that partners with a lot of overlap in the funding objectives, eligible areas and SDGs you are active on are listed first."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners for ..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You're currently not member of any project, group or organization."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Street"
 msgstr "Οδός"
 
@@ -5852,6 +6017,10 @@ msgstr "Αναζήτηση κατά τη μετακίνηση του χάρτη"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search this area"
 msgstr "Αναζήτηση αυτής της περιοχής"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Find partners"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Membership Requests"
@@ -6026,10 +6195,6 @@ msgid "Participate"
 msgstr "Συμμετοχή"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Contact organizers"
-msgstr "Επικοινωνία με διοργανωτές"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications for content posted."
 msgstr "Θα λαμβάνετε τώρα ειδοποιήσεις για περιεχόμενο που αναρτάται."
 
@@ -6098,16 +6263,16 @@ msgid "Hidden User"
 msgstr "Κρυφός Χρήστης"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "This group is open for further partner organizations."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are a Member"
 msgstr "Είστε Μέλος"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Join Group"
 msgstr "Συμμετοχή σε Ομάδα"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Message Group"
-msgstr "Αποστολή Μηνύματος σε Ομάδα"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Author"
@@ -6128,6 +6293,10 @@ msgstr "Θα λάβετε ειδοποίηση όταν το έργο δημιο
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"
 msgstr "Έργα που Δημιουργήθηκαν από αυτή την Ιδέα"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This organization is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are a Admin"
@@ -6159,12 +6328,12 @@ msgid "To Profile"
 msgstr "Το Προφίλ Σας"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Join Project"
-msgstr "Συμμετοχή σε Έργο"
+msgid "This project is open for further partner organizations."
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Message Project"
-msgstr "Αποστολή Μηνύματος σε Έργο"
+msgid "Join Project"
+msgstr "Συμμετοχή σε Έργο"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Move up"
@@ -7408,9 +7577,6 @@ msgstr "Λυπούμαστε, μόνο οι διαχειριστές πύλης 
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "Μόνο τα μέλη ομάδας μπορούν να δουν το περιεχόμενο που ζητήσατε. Κάντε αίτηση για να γίνετε μέλος τώρα!"
 
-msgid "Conferences"
-msgstr "Συσκέψεις"
-
 msgid "My Conferences"
 msgstr "Οι Συσκέψεις Μου"
 
@@ -7560,6 +7726,9 @@ msgstr ""
 msgid "Please also provide an end date"
 msgstr ""
 
+msgid "Ensure that your name does not contain any invalid characters."
+msgstr ""
+
 msgid "Test email sent!"
 msgstr "Το δοκιμαστικό email στάλθηκε!"
 
@@ -7596,6 +7765,14 @@ msgstr ""
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Η γλώσσα \"%s\" δεν υποστηρίζεται"
+
+#, fuzzy
+#| msgid "Test email sent!"
+msgid "New verification email sent!"
+msgstr "Το δοκιμαστικό email στάλθηκε!"
+
+msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
 
 #, fuzzy
 msgid "Successfully made conference permanent premium"
@@ -7951,8 +8128,10 @@ msgstr "Ο χρήστης \"%(user)s\" καταχωρήθηκε με επιτυ�
 msgid "Thank you for signing up and welcome to the platform! We sent an email to your address \"%(email)s\" - please click the link contained in it to verify your email address!"
 msgstr ""
 
-msgid "The invite token you have used does not exist!"
-msgstr "Το διακριτικό πρόσκλησης που έχετε χρησιμοποιήσει δεν υπάρχει!"
+#, fuzzy
+#| msgid "Sorry, but the invite token you have used does not seem to be valid!"
+msgid "The invite token you have used does not exist. Please contact the responsible person to get a valid link!"
+msgstr "Λυπούμαστε αλλά το διακριτικό πρόσκλησης που έχετε χρησιμοποιήσει δεν φαίνεται να είναι έγκυρο!"
 
 msgid "Sorry, but the invite token you have used is not active yet or not active anymore!"
 msgstr "Λυπούμαστε αλλά το διακριτικό πρόσκλησης που έχετε χρησιμοποιήσει δεν είναι ενεργό ακόμη ή δεν είναι πλέον ενεργό!"
@@ -8101,9 +8280,14 @@ msgstr "Δεν είστε μέλος του %s αυτή τη στιγμή! Εά�
 msgid "Your changes have been saved."
 msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
 
-#, fuzzy
-#~ msgid "Conference Administration"
-#~ msgstr "Διαχείριση Χρήστη"
+#~ msgid "Message Group"
+#~ msgstr "Αποστολή Μηνύματος σε Ομάδα"
+
+#~ msgid "Message Project"
+#~ msgstr "Αποστολή Μηνύματος σε Έργο"
+
+#~ msgid "The invite token you have used does not exist!"
+#~ msgstr "Το διακριτικό πρόσκλησης που έχετε χρησιμοποιήσει δεν υπάρχει!"
 
 #~ msgid "Ok"
 #~ msgstr "Εντάξει"

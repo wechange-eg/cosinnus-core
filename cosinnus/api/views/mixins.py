@@ -1,5 +1,6 @@
 from django.db.models import Q
 from rest_framework import permissions
+from rest_framework.decorators import action
 
 from cosinnus.models import CosinnusPortal, BaseTagObject
 
@@ -96,4 +97,15 @@ class CosinnusPaginateMixin(object):
 
 class ReadOnlyOrIsAdminUser(permissions.IsAdminUser):
     def has_permission(self, request, view):
-        return view.action in ['list', 'retrieve'] or super().has_permission(request, view)
+        return view.action in ['list', 'retrieve', 'mine'] or super().has_permission(request, view)
+
+
+class GetForUserViewSetMixin(object):
+
+    @action(detail=False, methods=['get'])
+    def mine(self, request):
+        queryset = self.queryset.model
+        queryset = queryset.objects.get_for_user(self.request.user)
+        page = self.paginate_queryset(queryset)
+        serializer = self.get_serializer_class()(page, many=True, context={"request": request})
+        return self.get_paginated_response(serializer.data)

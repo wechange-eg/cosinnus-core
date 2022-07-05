@@ -62,7 +62,7 @@ from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm, Member
     CosinnusGroupGalleryImageForm, CosinnusGroupCallToActionButtonForm, MultiUserSelectForm, MultiGroupSelectForm
 from cosinnus.forms.tagged import get_form
 from cosinnus.models import group  # circular import
-from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
+from cosinnus.models.group import (CosinnusGroup, CosinnusGroupInviteToken, CosinnusGroupMembership,
                                    CosinnusPortal, CosinnusLocation,
                                    CosinnusGroupGalleryImage, CosinnusGroupCallToActionButton,
                                    CosinnusUnregisterdUserGroupInvite)
@@ -121,22 +121,28 @@ class SamePortalGroupMixin(object):
 
 
 class CosinnusLocationInlineFormset(InlineFormSetFactory):
-    extra = 5
-    max_num = 5
+    factory_kwargs = {
+        'extra': 5,
+        'max_num': 5,
+    }    
     form_class = CosinnusLocationForm
     model = CosinnusLocation
 
 
 class CosinnusGroupGalleryImageInlineFormset(InlineFormSetFactory):
-    extra = 6
-    max_num = 6
+    factory_kwargs = {
+        'extra': 6,
+        'max_num': 6,
+    }
     form_class = CosinnusGroupGalleryImageForm
     model = CosinnusGroupGalleryImage
 
 
 class CosinnusGroupCallToActionButtonInlineFormset(InlineFormSetFactory):
-    extra = 10
-    max_num = 10
+    factory_kwargs = {
+        'extra': 10,
+        'max_num': 10,
+    }
     form_class = CosinnusGroupCallToActionButtonForm
     model = CosinnusGroupCallToActionButton
 
@@ -471,11 +477,6 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         pendings = _q.filter(id__in=pending_ids)
         invited = _q.filter(id__in=invited_pending_ids)
         
-        # for adding members, get all users from this portal only  
-        non_members =  _q.exclude(id__in=all_member_ids). \
-            exclude(id__in=invited_pending_ids). \
-            filter(id__in=CosinnusPortal.get_current().members)
-        
         hidden_member_count = 0
         user_count = filter_active_users(members).count()
         # for admins: count the inactive users
@@ -542,6 +543,10 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             group_ids = self.group.settings.get('invited_groups')
             invited_groups = CosinnusGroup.objects.filter(id__in=group_ids)
 
+        invite_tokens = []
+        if 'invite_token' in self.group.settings:
+            token = self.group.settings.get('invite_token')
+            invite_tokens = CosinnusGroupInviteToken.objects.filter(token=token)
 
         context.update({
             'admins': admins,
@@ -549,7 +554,6 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             'pendings': pendings,
             'invited': invited,
             'recruited': recruited,
-            'non_members': non_members,
             'member_count': user_count,
             'inactive_member_count': inactive_member_count,
             'hidden_user_count': hidden_member_count,
@@ -558,6 +562,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             'group_invite_form': MultiGroupSelectForm(group=self.group),
             'invited_groups': invited_groups,
             'user_is_superuser': user_is_superuser,
+            'invite_tokens': invite_tokens,
         })
         return context
 
@@ -771,9 +776,17 @@ class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin,
 
     def get_context_data(self, **kwargs):
         context = super(GroupUpdateView, self).get_context_data(**kwargs)
+
+        invite_tokens = []
+        if 'invite_token' in self.group.settings:
+            token = self.group.settings.get('invite_token')
+            invite_tokens = CosinnusGroupInviteToken.objects.filter(token=token)
+
         context.update({
             'submit_label': _('Save'),
-            'group': self.group}
+            'group': self.group,
+            'invite_tokens': invite_tokens,
+            }
         )
         return context
     

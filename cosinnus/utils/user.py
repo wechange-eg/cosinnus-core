@@ -397,16 +397,21 @@ def get_unread_message_count_for_user(user):
         # for any reason, we impose a 5 minute break on retrieving it again, for this user
         # if the rocketchat service experiences timeouts because of high load, frequent
         # re-requesting on this connection has shown to finish it off for good, so we give it a break
-        cache_key =  'cosinnus/core/alerts/user/%(user_id)s/rocketchatunreadtimeout' % {'user_id': user.id}
-        is_paused = cache.get(cache_key)
+        paused_cache_key =  'cosinnus/core/alerts/user/%(user_id)s/rocketchatunreadtimeout' % {'user_id': user.id}
+        is_paused = cache.get(paused_cache_key)
         if not is_paused:
             from cosinnus_message.rocket_chat import RocketChatConnection # noqa
             try:
-                unread_count = RocketChatConnection().unread_messages(user)
+                # we also use caching for the rocketchat unread count itself
+                unread_cache_key =  'cosinnus/core/alerts/user/%(user_id)s/rocketchatunreadcount' % {'user_id': user.id}
+                unread_count = cache.get(unread_cache_key)
+                if unread_count is None:
+                    unread_count = RocketChatConnection().unread_messages(user)
+                    cache.set(unread_cache_key, unread_count, settings.COSINNUS_NOTIFICATION_ALERTS_CACHE_TIMEOUT)
             except:
                 # we do not care what caused an exception here, but we handle them by returning
                 # 0 unread messages and imposing a break for this user
-                cache.set(cache_key, True, 60*5) # 5 minutes
+                cache.set(paused_cache_key, True, 60*5) # 5 minutes
     else:
         from postman.models import Message
         unread_count = Message.objects.inbox_unread_count(user)

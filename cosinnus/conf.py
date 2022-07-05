@@ -326,8 +326,23 @@ class CosinnusConf(AppConf):
     # Is external content from other platforms enabled?
     EXCHANGE_ENABLED = False
 
-    # Internal portal ID for external content
+    # Internal portal ID for external content. does not usually need to be changed
     EXCHANGE_PORTAL_ID = 99999
+    
+    # Exchange Backends
+    # Defaults:
+    #   backend: 'cosinnus_exchange.backends.ExchangeBackend'
+    #   url: None (required)
+    #   token_url: (url + ../token/)
+    #   username: None (if no login required)
+    #   password: None (if no login required)
+    #   source: (domain from URL)
+    #   model: None (required, e.g. 'cosinnus_exchange.Event')
+    #   serializer: None (required, e.g. 'cosinnus_exchange.serializers.ExchangeEventSerializer')
+    EXCHANGE_BACKENDS = []
+    
+    # default cron run frequency for exchange data pulls
+    EXCHANGE_RUN_EVERY_MINS = 60 * 24 # once a day
 
     #: How long a group should at most stay in cache until it will be removed
     GROUP_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
@@ -536,7 +551,7 @@ class CosinnusConf(AppConf):
     IMPORT_PROJECTS_PERMITTED = False
     
     # shall each individual email be logged as a `CosinnusSentEmailLog`?
-    LOG_SENT_EMAILS = False
+    LOG_SENT_EMAILS = True
     
     # in addition to the django setting, so we can know when this is set to None
     # may be used for specific portals to overwrite login redirect
@@ -599,6 +614,10 @@ class CosinnusConf(AppConf):
     
     # switch whether non-logged in users may access microsites
     MICROSITES_DISABLE_ANONYMOUS_ACCESS = False
+    
+    # switch the "your microsite needs some love" message off for 
+    # group admins
+    MICROSITES_DISABLE_NEEDS_LOVE_NAG_SCREEN = False
     
     # the default setting used when a group has no microsite_public_apps setting set
     # determines which apps public objects are shown on a microsite
@@ -953,6 +972,9 @@ class CosinnusConf(AppConf):
     CLOUD_ENABLED = False
     # whether to show the cosinnus cloud dashboard widget
     CLOUD_DASHBOARD_WIDGET_ENABLED = True 
+    # whether the quicksearch includes cloud results.
+    # comes with a large reduction in search speed as nextcloud is slow
+    CLOUD_QUICKSEARCH_ENABLED = False
     
     # base url of the nextcloud service, without trailing slash
     CLOUD_NEXTCLOUD_URL = None
@@ -1160,6 +1182,56 @@ class CosinnusConf(AppConf):
     # are tunrned on 'daily', 'weekly', or even on 'never'
     NOTIFICATIONS_GROUP_INVITATIONS_IGNORE_USER_SETTING = False
     
+    # determines which cosinnus_notification IDs should be pulled up from
+    # the main digest body into its own category with a header
+    # format: (
+    #     (
+    #         <str:category_header>,
+    #         <list<str:notification_id>>, 
+    #         <str:header_fa_icon>, 
+    #         <str:header_url_reverse>,
+    #         <func:group_condition_function>,
+    #     ), ...)
+    NOTIFICATIONS_DIGEST_CATEGORIES = [
+        (
+            _('Conferences'), 
+            [
+                'conference_created_in_group',
+                'user_conference_invited_to_apply',
+                'attending_conference_changed',
+                'attending_conference_time_changed',
+                'user_conference_application_accepted',
+                'user_conference_application_declined',
+                'user_conference_application_waitlisted',
+            ], 
+            'fa-television', 
+            'cosinnus:conference__group-list',
+            None
+        ),
+        (
+            _('Invitations to Conferences'), 
+            [
+                'user_group_invited',
+                'user_group_join_accepted',
+                'user_group_join_declined',
+            ], 
+            'fa-television', 
+            'cosinnus:user-dashboard',
+            lambda group: group.type == 2
+        ),
+        (
+            _('Invitations to Groups and Projects'), 
+            [
+                'user_group_invited',
+                'user_group_join_accepted',
+                'user_group_join_declined',
+            ], 
+            'fa-group', 
+            'cosinnus:user-dashboard',
+            lambda group: group.type != 2
+        ),
+    ]
+    
     # if set to True group admins can decide if a contact form should be displayed on the groups micropage
     ALLOW_CONTACT_FORM_ON_MICROPAGE = False
     
@@ -1170,6 +1242,15 @@ class CosinnusConf(AppConf):
     # e.g.: ['projects', 'groups', 'conferences']
     ALPHABETICAL_ORDER_FOR_SEARCH_MODELS_WHEN_SINGLE = []
     
+    # Matching
+    MATCHING_ENABLED = False
+    # Fields that will be used for matching ranking, should be present in projects, groups and organizations
+    MATCHING_FIELDS = ()
+    MATCHING_DYNAMIC_FIELDS = ()
+
+    # types of CosinnusBaseGroup which are allowed to use direct join tokens:
+    # 0 for projects; 1 for groups; 2 for conferences
+    ENABLE_USER_JOIN_TOKENS_FOR_GROUP_TYPE = []
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.
@@ -1330,4 +1411,6 @@ class CosinnusDefaultSettings(AppConf):
     
     # limit visit creation for (user, bbb_room) pairs to a time window
     BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60*60
+    
+    
     

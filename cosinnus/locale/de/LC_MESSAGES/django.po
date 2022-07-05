@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-25 14:14+0100\n"
+"POT-Creation-Date: 2022-06-22 09:59+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -132,6 +132,14 @@ msgstr "%(count)d Benutzerkonten wurden erfolgreich reaktiviert."
 msgid "Reactivate user accounts"
 msgstr "Reaktiviere Benutzerkontos"
 
+#, fuzzy, python-format
+#| msgid "%d Users' rocketchat room memberships were re-done."
+msgid "%(count)d Users' group memberships were refreshed."
+msgstr "%d Die Rocketchat-Raummitgliedschaften der Benutzer wurden neu erstellt."
+
+msgid "Refresh user group membership associations (e.g. cache or Nextcloud folder problems)"
+msgstr ""
+
 #, python-format
 msgid "%d Users were synchronized successfully."
 msgstr "%d Benutzer wurden erfolgreich synchronisiert."
@@ -236,6 +244,19 @@ msgstr "Merkliste"
 
 msgid "Bookmarked Users list"
 msgstr "Gemerkte Personen"
+
+msgid "Conferences"
+msgstr "Tagungen"
+
+#, fuzzy
+#| msgid "Convert selected items to Conferences"
+msgid "Invitations to Conferences"
+msgstr "Ausgewählte Elemente in Tagungen umwandeln"
+
+#, fuzzy
+#| msgid "In my Groups and Projects"
+msgid "Invitations to Groups and Projects"
+msgstr "In meinen Gruppen und Projekten"
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr "Um diesen Teil der Webseite zu benutzen, muss deine E-Mail-Adresse erst verifiziert werden! Bitte prüfen deine eingehenden E-Mails und klicke dann auf den Link in der Verifikations-E-Mail, die du von uns erhalten hast. Alternativ kannst du eine neue Verifikations-E-Mail anfordern, indem du den Link unten klickst."
@@ -765,6 +786,11 @@ msgstr "Gefällt mir"
 
 msgid "Persons"
 msgstr "Personen"
+
+#, fuzzy
+#| msgid "Last name"
+msgid "last name"
+msgstr "Nachname"
 
 msgid "Location"
 msgstr "Standort"
@@ -1434,11 +1460,17 @@ msgstr "Übergeordnete Gruppe"
 msgid "Related Teams"
 msgstr "Verwandte Projekte/Gruppen"
 
+msgid "Open for cooperation"
+msgstr "Ich bin offen für Kooperationsanfragen"
+
 msgid "Dynamic extra fields"
 msgstr "Dynamische Zusatzfelder"
 
 msgid "If set to true, a contact form will be displayed on the micropage."
 msgstr "Wenn der Wert auf True festgelegt ist, wird das Kontankformular auf der Microsite aufgezeigt."
+
+msgid "Use invite token"
+msgstr "Einladungstoken verwenden"
 
 msgid "Cosinnus project"
 msgstr "Projekt"
@@ -2153,6 +2185,20 @@ msgstr "Gemeldetes Objekt löschen..."
 msgid "(The reported item has been deleted.)"
 msgstr "(Der gemeldete Inhalt wurde gelöscht.)"
 
+#, fuzzy
+#| msgid "Scheduled for Deletion at"
+msgid "This user profile is scheduled for deletion at: "
+msgstr "Zur Löschung geplant am"
+
+msgid "However, it will not be deleted, because it is still active."
+msgstr ""
+
+msgid "This user account is disabled. The user cannot log in or use the account."
+msgstr ""
+
+msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
+msgstr ""
+
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Gib die 4 Großbuchstaben aus dem Bild ein"
 
@@ -2796,6 +2842,14 @@ msgstr ""
 "*  **Jeder:** Auch nicht eingeloggte Personen können sich dein Profil anschauen. Dein Profil ist öffentlich sichtbar und kann über Suchmaschinen im Internet gefunden werden"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_50_profileprivacy_external_users_forbidden"
+msgstr ""
+"Sichtbarkeitseinstellungen für dein Profil:\n"
+"\n"
+"*  **Nur Gruppen/Projekt-Mitglieder:** Dein Profil ist nur für Mitglieder deiner Gruppen/Projekte sichtbar. Dein Profil ist nicht öffentich. Du wirst nicht in der Liste „Menschen“ in der oberen Leiste angezeigt.\n"
+"*  **Nur eingeloggte Mitglieder:** Personen, die Mitglied der Plattform sind, können sich dein Profil anschauen. Dein Profil ist nicht öffentich. Du wirst in der Liste „Menschen“ angezeigt."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_51_objectprivacy"
 msgstr ""
 "Sichtbarkeitseinstellungen für Inhalte:\n"
@@ -3166,7 +3220,7 @@ msgstr "Raumtyp"
 msgid "The Lobby is the main entrance point for participants. You will find the conference‘s agenda here."
 msgstr "Die Lobby ist der Haupteingang für die Teilnehmenden. Hier finden sie die Agenda der Tagung."
 
-msgid "TThe Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
+msgid "The Stage is used to display a stream, e.g. from YouTube or Vimeo. A chat is shown next to it."
 msgstr "Die Bühne dient zur Anzeige eines Streams, z. B. von YouTube oder Vimeo. Daneben wird ein Chat angezeigt."
 
 msgid "In Workshops each event has a video conference. Presenters are allowed to moderate those."
@@ -3465,6 +3519,12 @@ msgstr "direkt hier..."
 msgid "Activate Cloud"
 msgstr "Cloud aktivieren"
 
+#
+#, fuzzy
+#| msgid "Members"
+msgid "Members-Map"
+msgstr "Mitglieder"
+
 msgid "Cloud"
 msgstr "Cloud"
 
@@ -3542,6 +3602,14 @@ msgstr "Du wirst jetzt Benachrichtigungen erhalten wenn öffentliche Inhalte in 
 msgid "No Description set"
 msgstr "Keine Beschreibung erstellt"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Created on: "
+msgstr "Erstellt am: "
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Last updated on: "
+msgstr "Zuletzt aktualisiert am: "
+
 msgid "more"
 msgstr "mehr"
 
@@ -3609,6 +3677,10 @@ msgstr "Falls vorhanden, werden die unten angegebenen Übersetzungen entsprechen
 
 msgid "Date"
 msgstr "Datum"
+
+#, python-format
+msgid "Time zone: %(TIME_ZONE)s"
+msgstr "Zeitzone: %(TIME_ZONE)s"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "From"
@@ -3680,6 +3752,12 @@ msgstr "Kontakt"
 msgid "No contact data has been added yet."
 msgstr "Es wurden noch keine Kontaktdaten eingetragen."
 
+msgid "Contact organizers"
+msgstr "Veranstalter/innen kontaktieren"
+
+msgid "Here you can send a message to the admins."
+msgstr "Hier kannst du eine Nachricht an die Admins schicken."
+
 msgid "Your Deactivated Content"
 msgstr "Deine deaktivierte Inhalte"
 
@@ -3702,6 +3780,9 @@ msgstr "Bist du sicher dass du dieses Team löschen willst?"
 #, python-format
 msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - Mitglieder"
+
+msgid "Invite users directly via the following link: "
+msgstr "Lade die Benutzer*innen über diesen Link direkt ein: "
 
 msgid "Membership requests"
 msgstr "Mitglieder-Anträge"
@@ -4060,6 +4141,25 @@ msgstr "Soll deine Gruppe / dein Projekt auch für nicht eingeloggte Benutzer au
 msgid "Enable the public visibility of your group/project"
 msgstr "Öffentliche Anzeige aktivieren"
 
+msgid "Create invite token"
+msgstr "Einladungstoken erstellen"
+
+msgid "Check this to generate an invite token which allows a user to join the group directly."
+msgstr "Wähle dies aus, um einen direkten Einladungstoken zu erstellen, mit dem man der Gruppe direkt beitreten kann."
+
+msgid "Check this to generate an invite token which allows a user to join the project directly."
+msgstr "Wähle dies aus, um einen direkten Einladungstoken zu erstellen, mit dem man dem Projekt direkt beitreten kann."
+
+msgid "Check this to generate an invite token which allows a user to join the conference directly."
+msgstr "Wähle dies aus, um einen direkten Einladungstoken zu erstellen, mit dem man der Tagung direkt beitreten kann."
+
+msgid "The current token is: "
+msgstr "Der aktuelle Token ist: "
+
+#
+msgid "Create token"
+msgstr "Token erstellen"
+
 msgid "Include a video conference"
 msgstr "Videokonferenz einbetten"
 
@@ -4111,8 +4211,17 @@ msgstr "Hier kannst du steuern, ob die öffentlich sichtbaren Informationen zu d
 msgid "This project shall be made publicly findable via other platforms."
 msgstr "Dieses Projekt soll über andere Plattformen öffentlich auffindbar gemacht werden."
 
+msgid "Is your project open to other partner organizations?"
+msgstr "Ist dein Projekt für die andere Partnerorganisationen offen?"
+
+msgid "Project is open for further partner organizations."
+msgstr "Projekt ist für die andere Partnerorganisationen offen."
+
 msgid "Which apps should be activated?"
 msgstr "Welche Apps sollen aktiviert sein?"
+
+msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
+msgstr "Wenn eine App deaktiviert wird, bleiben ihr Inhalt und die damit verbundenen Daten erhalten, werden aber nicht mehr angezeigt, bis die App wieder aktiviert wird."
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Diese Anwendung kann nur für eine Gruppe, aber nicht für ein Projekt aktiviert werden!"
@@ -4342,6 +4451,28 @@ msgstr "Auf Twitter teilen"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sustainable Development Goals"
 msgstr "Ziele für nachhaltige Entwicklung"
+
+#
+#. Translators: __INCLUDE_JS_PO__
+msgid "Contact Project Admins"
+msgstr "Projektadministratoren kontaktieren"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Contact Group Admins"
+msgstr "Gruppenadministratoren kontaktieren"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Contact Conference Admins"
+msgstr "Tagungsadministratoren kontaktieren"
+
+msgid "If you want to send your message to the project chat, you have to turn directly to the project."
+msgstr "Wenn du an das gesamte Projekt schreiben möchtest, musst du dich ins Projekt begeben."
+
+msgid "If you want to send your message to the group chat, you have to turn directly to the group."
+msgstr "Wenn du an die gesamte Gruppe schreiben möchtest, musst du dich in die Gruppe begeben."
+
+msgid "If you want to send your message to the conference chat, you have to turn directly to the conference."
+msgstr "Wenn du an die gesamte Tagung schreiben möchtest, musst du dich in die Tagung begeben."
 
 msgid "Email the group administrators"
 msgstr "E-Mail an die Gruppen-Administrator_innen schicken"
@@ -5612,6 +5743,9 @@ msgstr "Gib einen oder mehrere Suchbegriffe ein oder wähle ein Thema aus um zu 
 msgid "CSV Downloads"
 msgstr "CSV Downloads"
 
+msgid "Portal switches and settings"
+msgstr "Portal-Einstellung und Schalter"
+
 msgid "HD space used by conferences"
 msgstr "Festplattenspeicher, der von den Tagungen verwendet wird"
 
@@ -5754,6 +5888,22 @@ msgid "Clear Filters"
 msgstr "Filter zurücksetzen"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners"
+msgstr "Potentielle Partner anzeigen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Here you can search for partner organisations and projects that are open for further partners. The results are sorted so that partners with a lot of overlap in the funding objectives, eligible areas and SDGs you are active on are listed first."
+msgstr "Hier kannst du nach Partnerorganisationen und Projekten suchen, die zur Partnerschaft offen sind. Die Ergebnisse sind so sortiert, dass Partner*innen mit vielen Überschneidungen bei den Finanzierungszielen, förderfähigen Bereichen und SDGs, für die du aktiv bist, zuerst aufgeführt werden."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show potential partners for ..."
+msgstr "Zeige potentielle Partner für …"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You're currently not member of any project, group or organization."
+msgstr "Du bist derzeit kein Mitglied eines Projekts, einer Gruppe oder einer Organisation."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Street"
 msgstr "Straßen"
 
@@ -5788,6 +5938,10 @@ msgstr "Suchen wenn die Karte bewegt wird"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search this area"
 msgstr "In diesem Ausschnitt suchen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Find partners"
+msgstr "Partner finden"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Membership Requests"
@@ -5964,10 +6118,6 @@ msgid "Participate"
 msgstr "Teilnehmen"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Contact organizers"
-msgstr "Veranstalter/innen kontaktieren"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications for content posted."
 msgstr "Du wirst jetzt Benachrichtigungen für neue Inhalte erhalten."
 
@@ -6035,17 +6185,16 @@ msgid "Hidden User"
 msgstr "Versteckter Benutzer"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "This group is open for further partner organizations."
+msgstr "Diese Gruppe ist offen für weitere Partnerorganisationen."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are a Member"
 msgstr "Du bist Mitglied"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Join Group"
 msgstr "Gruppe beitreten"
-
-#
-#. Translators: __INCLUDE_JS_PO__
-msgid "Message Group"
-msgstr "Gruppe anschreiben"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Author"
@@ -6067,6 +6216,10 @@ msgstr "Du erhältst eine Benachrichtigung, wenn ein Projekt aus dieser Idee ers
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"
 msgstr "Projekte - entstanden aus dieser Idee"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This organization is open for further partner organizations."
+msgstr "Diese Organisation ist offen für weitere Partnerorganisationen."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are a Admin"
@@ -6097,13 +6250,12 @@ msgid "To Profile"
 msgstr "Zum Profil"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "This project is open for further partner organizations."
+msgstr "Dieses Projekt ist offen für weitere Partnerorganisationen."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
 msgstr "Projekt beitreten"
-
-#
-#. Translators: __INCLUDE_JS_PO__
-msgid "Message Project"
-msgstr "Projekt anschreiben"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Move up"
@@ -7325,9 +7477,6 @@ msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen deaktiviere
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieser Gruppe können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
 
-msgid "Conferences"
-msgstr "Tagungen"
-
 msgid "My Conferences"
 msgstr "Meine Tagungen"
 
@@ -7478,6 +7627,9 @@ msgstr "Bitte gib auch ein Anfangsdatum an"
 msgid "Please also provide an end date"
 msgstr "Bitte gib auch ein Enddatum an"
 
+msgid "Ensure that your name does not contain any invalid characters."
+msgstr ""
+
 msgid "Test email sent!"
 msgstr "Test email wurde gesendet!"
 
@@ -7514,6 +7666,12 @@ msgstr "Du hast noch keine Sicherungstoken erstellt. Logge die bitte anhand von 
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Die Sprache \"%s\" wird nicht unterstützt"
+
+msgid "New verification email sent!"
+msgstr "Eine neue Verifizierungsmail wurde versandt."
+
+msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr "Wir haben soeben eine weitere E-Mail mit einem neuen Verifizierungslink an dich gesendet. Wenn die E-Mail immer noch nicht angekommen ist, kannst du dich erneut anmelden, um eine weitere neue E-Mail zu erhalten."
 
 msgid "Successfully made conference permanent premium"
 msgstr "Tagung erfolgreich zu durchgehend Premium geändert"
@@ -7869,8 +8027,8 @@ msgstr "Benutzer \"%(user)s\" wurde erfolgreich registriert. Das Benutzerkonto m
 msgid "Thank you for signing up and welcome to the platform! We sent an email to your address \"%(email)s\" - please click the link contained in it to verify your email address!"
 msgstr "Vielen Dank für deine Anmeldung und herzlich willkommen auf der Plattform! Wir haben an deine E-Mail-Adresse \"%(email)s\" eine E-Mail mit dem Verifizierungslink geschickt!"
 
-msgid "The invite token you have used does not exist!"
-msgstr "Das Einladungs-Token, das du benutzt hast, existiert nicht!"
+msgid "The invite token you have used does not exist. Please contact the responsible person to get a valid link!"
+msgstr "Das Einladungs-Token, das du benutzt hast, scheint nicht gültig zu sein. Bitte wende dich an die verantwortliche Person, um einen gültigen Link zu erhalten!"
 
 msgid "Sorry, but the invite token you have used is not active yet or not active anymore!"
 msgstr "Tut uns leid, aber das Einladungs-Token, das du benutzt hast, ist noch nicht oder nicht mehr gültig!"
@@ -8019,8 +8177,25 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
-#~ msgid "Conference Administration"
-#~ msgstr "Tagungsverwaltung"
+#~ msgid "group"
+#~ msgstr "Gruppe"
+
+#~ msgid "project"
+#~ msgstr "Projekt"
+
+#~ msgid "conference"
+#~ msgstr "Tagung"
+
+#~ msgid "The invite token you have used does not exist!"
+#~ msgstr "Das Einladungs-Token, das du benutzt hast, existiert nicht!"
+
+#
+#~ msgid "Message Group"
+#~ msgstr "Gruppe anschreiben"
+
+#
+#~ msgid "Message Project"
+#~ msgstr "Projekt anschreiben"
 
 #~ msgid "Ok"
 #~ msgstr "Ok"
@@ -8515,8 +8690,3 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "status: "
 #~ msgstr "Status: "
-
-msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
-msgstr "Wenn eine App deaktiviert wird, bleiben ihr Inhalt und die damit verbundenen Daten erhalten, werden aber nicht mehr angezeigt, bis die App wieder aktiviert wird."
-
-

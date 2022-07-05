@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from importlib import import_module
 import requests
 import urllib.parse
+from cosinnus.conf import settings
 
 from django.apps import apps
 
@@ -105,7 +106,17 @@ class ExchangeBackend:
                 raise ExchangeError(response.status_code, response.content)
 
             data = json.loads(response.content)
-            page_results = [self.serializer.to_representation(instance=r) for r in data['results']]
+            page_results = []
+            for page_result in data['results']:
+                try:
+                    page_results.append(self.serializer.to_representation(instance=page_result))
+                    if settings.DEBUG:
+                        print(f'>> pulled: {page_result.get("url")}')
+                except Exception as e:
+                    logger.warn('An external data object could not be pulled in for cosinnus exchange!', extra={'page_result': page_result, 'exception': str(e)})
+                    if settings.DEBUG:
+                        print(f'>> Error: {page_result.get("url")}')
+                        raise
             results += page_results
             next_url = data['next']
         return results
@@ -115,8 +126,8 @@ class ExchangeBackend:
         Create objects in ElasticSearch index
         """
         for data in results:
-            object = self.model(**data)
-            object.save()
+            obj = self.model(**data)
+            obj.save()
 
     def _delete(self):
         """

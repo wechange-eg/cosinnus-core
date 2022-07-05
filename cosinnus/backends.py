@@ -106,6 +106,8 @@ def threaded_execution_and_catch_error(f):
                 logger.error('Could not connect to the ElasticSearch backend for indexing! The search function will not work and saving objects on the site will be terribly slow! Exception in extra.', extra={'exception': force_text(e)})
             except Exception as e:
                 logger.error('An unknown error occured while indexing an object! Exception in extra.', extra={'exception': force_text(e)})
+                if settings.DEBUG:
+                    raise
         
         if getattr(settings, 'COSINNUS_ELASTIC_BACKEND_RUN_THREADED', True):
             class CosinnusElasticsearchExecutionThread(Thread):
@@ -145,6 +147,11 @@ class RobustElasticSearchBackend(ElasticsearchSearchBackend):
         for _field_name, field_mapping in mapping.items():
             if "analyzer" in field_mapping and field_mapping["analyzer"] == "ngram_analyzer":
                 field_mapping["search_analyzer"] = "standard"
+            field_class = args[0].get(_field_name)
+            if field_class and field_class.field_type == "nested":
+                field_mapping["type"] = "nested"
+                if hasattr(field_class, "get_properties"):
+                    field_mapping["properties"] = field_class.get_properties()
         return content_field_name, mapping
 
     @threaded_execution_and_catch_error

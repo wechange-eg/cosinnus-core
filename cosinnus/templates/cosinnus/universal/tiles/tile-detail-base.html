@@ -201,7 +201,7 @@
             {% if cosinnus_active_user %}
                 <div class="spacer">&nbsp;</div>
                 <div class="spacer">&nbsp;</div>
-                <a class="pale-color button-report-object">
+                <a class="pale-color button-report-object map-search-report-object">
                     <i class="fa fa-warning"></i>
 {# Translators: __INCLUDE_JS_PO__ #}
 {% trans "Report offensive content" %}
@@ -210,6 +210,15 @@
             {% endif %}
         {% endblock report_object %}
         
+        {% block create_modified_timestamps %}
+            <p class="map-search-created-updated-timestamps">
+                {# Translators: __INCLUDE_JS_PO__ #}
+                <i>{% trans "Created on: " %}</i>{{ created }} <br>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                <i>{% trans "Last updated on: " %}</i>{{ last_modified }}
+            </p>
+        {% endblock create_modified_timestamps %}
+
     {% endblock content %}
     
     {# some more space to scroll over the floating search-buttons on mobile #}

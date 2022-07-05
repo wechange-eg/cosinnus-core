@@ -444,6 +444,29 @@
 							{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.publicly_visible label=groups_projects_public_visibility_label legend=groups_projects_public_visibility_legend checkbox_label=groups_projects_public_visibility_box_label %}
 						{% endif %}
 
+						{# Checkbox field #}
+						{% if form.forms.obj.fields.use_invite_token and not form.forms.obj.fields.use_invite_token.disabled == True %}
+							{% trans "Create invite token" as use_invite_token_label %}
+							{% captureas use_invite_token_legend %}
+								{% if group_model == "CosinnusSociety" %}
+								    {% trans "Check this to generate an invite token which allows a user to join the group directly." %}
+							    {% elif group_model == "CosinnusProject" %}
+							        {% trans "Check this to generate an invite token which allows a user to join the project directly." %}
+						        {% else %}
+						            {% trans "Check this to generate an invite token which allows a user to join the conference directly." %}
+						        {% endif %}
+						        <br>
+								{% if group.use_invite_token %}
+									{% trans "The current token is: " %}
+									   {% for invite_token in invite_tokens %}
+									       <a href="{{ invite_token.get_absolute_url }}" target="_blank">{{ invite_token.get_absolute_url }}</a>
+								       {% endfor %}
+								{% endif %}
+							{% endcaptureas %}
+							{% trans "Create token" as use_invite_token_box_label %}
+							{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.use_invite_token label=use_invite_token_label legend=use_invite_token_legend checkbox_label=use_invite_token_box_label %}
+						{% endif %}
+
 						{# Dropdown field #}
 						{% block video_conference_type_dropdown %}
 						    {% if not group_model == "CosinnusConference" %}
@@ -528,11 +551,18 @@
                         {% endblock visibility_field %}
                         
 						{% if SETTINGS.COSINNUS_EXCHANGE_ENABLED %}
-						{# public Field #}
-						{% trans "Visibility on other platforms" as public_label %}
-						{% blocktrans asvar public_legend with url="/cms/partner-platforms/" %}Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href="#" target="_blank">partner platforms</a> by WECHANGE.{% endblocktrans %}
-						{% trans "This project shall be made publicly findable via other platforms." as public_box_label %}
-						{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.media_tag.public label=public_label legend=public_legend checkbox_label=public_box_label %}
+							{# public Field #}
+							{% trans "Visibility on other platforms" as public_label %}
+							{% blocktrans asvar public_legend with url="/cms/partner-platforms/" %}Here you can control whether the publicly visible information about your project, such as name and address, is transmitted to <a href="#" target="_blank">partner platforms</a> by WECHANGE.{% endblocktrans %}
+							{% trans "This project shall be made publicly findable via other platforms." as public_box_label %}
+							{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.media_tag.public label=public_label legend=public_legend checkbox_label=public_box_label %}
+						{% endif %}
+
+						{% if SETTINGS.COSINNUS_MATCHING_ENABLED %}
+							{# is_open_for_cooperation Field #}
+							{% trans "Is your project open to other partner organizations?" as is_open_for_cooperation_label %}
+							{% trans "Project is open for further partner organizations." as is_open_for_cooperation_box_label %}
+							{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.is_open_for_cooperation label=is_open_for_cooperation_label checkbox_label=is_open_for_cooperation_box_label %}
 						{% endif %}
                         
                         <div {% if group_model == "CosinnusConference" %}style="display: none;"{% endif %}>

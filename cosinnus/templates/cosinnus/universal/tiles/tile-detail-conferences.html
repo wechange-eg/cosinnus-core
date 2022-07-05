@@ -69,7 +69,7 @@
             <a href="{{ action_url_2 }}" target="_blank" class="rounded-button button-action">
                 <span class="rounded-button-inner">
                     {# Translators: __INCLUDE_JS_PO__ #}
-                    {% trans "Contact organizers" %}
+                    {% trans "Contact Conference Admins" %}
                 </span>
             </a>
         {% endif %}
@@ -94,3 +94,8 @@
         </div>
     </div>
 {% endblock action_buttons %}
+
+{% block create_modified_timestamps %}
+    {{ created }}
+    {{ last_modified }}
+{% endblock create_modified_timestamps %}
