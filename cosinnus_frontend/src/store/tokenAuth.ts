@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
 
 export interface AuthState {
   accessToken?: string;
@@ -18,44 +18,50 @@ interface LoginFormValues {
   password: string;
 }
 
-const API_URL = `${process.env.API_URL}/`;
+const API_URL = `${process.env.API_URL}/`
 
 export const fetchTokens = createAsyncThunk(
-  "auth/fetchToken",
+  'auth/fetchToken',
   async (
     values: LoginFormValues | null,
   ): Promise<AuthResponseData | undefined> => {
     const { data } = await axios.post<AuthResponseData>(
       `${API_URL}token/`,
-      values
-    );
-    return data;
-  }
-);
+      values,
+    )
+    return data
+  },
+)
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState: {} as AuthState,
   reducers: {
     clearTokens(state) {
+      /* eslint-disable no-param-reassign */
       state.accessToken = null
       state.refreshToken = null
-    }
+      /* eslint-enable no-param-reassign */
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchTokens.fulfilled, (state, action) => {
-        if (!action.payload) return;
-        state.accessToken = action.payload.access;
-        state.refreshToken = action.payload.refresh;
+        if (!action.payload) {
+          return
+        }
+        /* eslint-disable no-param-reassign */
+        state.accessToken = action.payload.access
+        state.refreshToken = action.payload.refresh
+        /* eslint-enable no-param-reassign */
       })
       .addCase(fetchTokens.rejected, (state, action) => {
-        state.errorMessage = action.error.message;
+        /* eslint-disable no-param-reassign */
+        state.errorMessage = action.error.message
+        /* eslint-enable no-param-reassign */
       })
   },
-});
+})
 
-export const { clearTokens } = authSlice.actions;
-export default authSlice.reducer;
-
-
+export const { clearTokens } = authSlice.actions
+export default authSlice.reducer

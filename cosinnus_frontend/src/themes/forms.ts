@@ -1,11 +1,13 @@
 import type { ComponentStyleConfig } from '@chakra-ui/theme'
 
-export const Input: ComponentStyleConfig = {
+const Input: ComponentStyleConfig = {
   baseStyle: {
-    borderColor: "gray.900",
+    borderColor: 'gray.900',
   },
   defaultProps: {
-    variant: "outline",
-    focusBorderColor: 'gray.900'
+    variant: 'outline',
+    focusBorderColor: 'gray.900',
   },
 }
+
+export default Input

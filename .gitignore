@@ -1,3 +1,5 @@
+.idea
+
 .*
 *.egg-info
 *.pyc
@@ -10,7 +12,7 @@
 
 coverage.xml
 build/
-# dist/
+dist/
 docs/_build/
 
 !.coveragerc
@@ -18,6 +20,8 @@ docs/_build/
 _old_static
 _old_templates
 
+# Ignore JavaScript build artifacts.
+cosinnus/static/js/client.js
 # dist
 cosinnus_frontend/dist/main.bundle.js
 
@@ -27,3 +31,6 @@ node_modules
 
 # ignore dev_settings
 dev_settings.py
+cosinnus_conference/static/conference/
+
+!.eslintrc.json

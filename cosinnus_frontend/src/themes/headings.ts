@@ -1,10 +1,12 @@
 import type { ComponentStyleConfig } from '@chakra-ui/theme'
 
-export const Heading: ComponentStyleConfig = {
+const Heading: ComponentStyleConfig = {
   baseStyle: ({ colorMode }) => ({
-    color: colorMode === "dark" ? "white" : "gray.800",
+    color: colorMode === 'dark' ? 'white' : 'gray.800',
   }),
   defaultProps: {
-    size: "md"
-  }
+    size: 'md',
+  },
 }
+
+export default Heading
