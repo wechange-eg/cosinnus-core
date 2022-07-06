@@ -1,6 +1,6 @@
 # this file must contain a mirror of all requirements as seen in setup.py!
 # (excepted the ones loaded via -e from github or similar, these are contained in the main project's requirements.txt)
-Django==>=3.2,<3.3
+Django==>=3.2.14,<3.3
 MarkupSafe==1.1
 Pillow==6.2.0
 Celery==4.2.0
