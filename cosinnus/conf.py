@@ -607,7 +607,13 @@ class CosinnusConf(AppConf):
     # the default setting used when a group has no microsite_public_apps setting set
     # determines which apps public objects are shown on a microsite
     # e.g: ['cosinnus_file', 'cosinnus_event', ]
-    MICROSITE_DEFAULT_PUBLIC_APPS = []
+    MICROSITE_DEFAULT_PUBLIC_APPS = [
+        "cosinnus_file",
+        "cosinnus_event",
+        "cosinnus_etherpad",
+        "cosinnus_poll",
+        "cosinnus_marketplace",
+    ]
     
     # --- for the old microsites ---
     # which apps objects as object lists will be listed on the microsite? 
@@ -672,17 +678,19 @@ class CosinnusConf(AppConf):
     # the default choices for topics for tagged objects
     # WARNING: do NOT change remove/change these without a data migration! pure adding is ok.
     TOPIC_CHOICES = (
-        (0, _('Mobilität')),
-        (1, _('Energie')),
-        (2, _('Umwelt')),
-        (3, _('Bildung')),
-        (4, _('Gesundheit')),
-        (5, _('Ernährung und Konsum')),
-        (6, _('Kunst und Kultur')),
-        (7, _('Geld und Finanzen')),
-        (8, _('Arbeit und Recht')),
-        (9, _('Bauen und Wohnen')),
-        (10, _('Klimaschutz')),
+        (0, _("Mobility")),
+        (1, _("Energy")),
+        (2, _("Environment and Nature Protection")),
+        (3, _("Education and Communication")),
+        (4, _("Health")),
+        (5, _("Nutrition, Consumption, and Agriculture")),
+        (6, _("Art, Culture und Leisure Activities")),
+        (7, _("Money and Finance")),
+        (8, _("Business and Law")),
+        (9, _("Construction and Living")),
+        (10, _("Climate Protection")),
+        (11, _("Democracy and Participation")),
+        (12, _("Digitalisation")),
     )
     # whether or not to show the topics as filter-buttons on the map
     TOPICS_SHOW_AS_MAP_FILTERS = True
