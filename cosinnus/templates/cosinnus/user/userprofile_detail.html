@@ -47,74 +47,76 @@
 	    </div>
 	    <div class="col-sm-9 bottom-align large-space">
 			<legend class="large-space userprofile-title ">{{ this_user.cosinnus_profile.get_extended_full_name }}</legend>
-
+            
 			{% block buttons %}
-			{% if not this_user == request.user %}
-			{% include 'cosinnus/common/likefollowstar/star_button_btn.html' with user=request.user object=this_user.cosinnus_profile %}
-			{% endif %}
-
-	        {% if request.user.is_authenticated and request.user == this_user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
-	        	{# Buttons for my userprofile #}
-	        	
-                {% if SETTINGS.COSINNUS_IS_SSO_PORTAL %}
-                	{# need this here because usually it shows in the profile form, but sso portals don't have that #}
-                    <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" href="{% url 'cosinnus:profile-delete' %}">
-                        <ul class="media-list">
-                            <li class="media">
-                                <span class="pull-left">
-                                    <i class="fa fa-times"></i>
-                                </span>
-                                <div class="media-body">
-                                    {% trans "Delete profile" %}
-                                </div>
-                            </li>
-                        </ul>
-                    </button>
-                {% endif %}
-                
-	        {% else %}
-	        	{# Buttons for other users' profiles #}
-	        
-	            {% comment %} Abonnieren is out for now 
-	            <button type="button" class="btn btn-default">
-	                <ul class="media-list">
-	                    <li class="media">
-	                        <span class="pull-left">
-	                            <i class="fa fa-hand-o-right "></i>
-	                        </span>
-	                        <div class="media-body">
-	                            <!-- <a href="#"> -->
-	                                {% trans "Abonnieren" %}
-	                            <!-- </a> -->
-	                        </div>
-	                    </li>
-	                </ul>
-	            </button>
-	             {% endcomment %}
-	            {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
-                {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
-	            <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" 
-	                    {% if SETTINGS.COSINNUS_ROCKET_ENABLED and SETTINGS.COSINNUS_ROCKET_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}
-	                    href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=this_user.username %}{% else %}{% url 'postman:write' recipients=this_user.username %}?next={% url 'postman:sent' %}{% endif %}">
-	                    
-	                <ul class="media-list">
-	                    <li class="media">
-	                        <span class="pull-left">
-	                            <i class="fa fa-envelope"></i>
-	                        </span>
-	                        <div class="media-body">
-	                            {% trans "Send Message" %}
-	                        </div>
-	                    </li>
-	                </ul>
-	            </button>
-	            {% endif %}
-                {% endif %}
-	            
-	            {% include 'cosinnus/feedback/report_button_btn.html' with object=this_user %}
-	            
-			{% endif %}
-			{% endblock %}
+				{% if request.user.is_authenticated and not this_user == request.user %}
+				    {% include 'cosinnus/common/likefollowstar/star_button_btn.html' with user=request.user object=this_user.cosinnus_profile %}
+				{% endif %}
+	
+		        {% if request.user.is_authenticated and request.user == this_user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+		        	{# Buttons for my userprofile #}
+		        	
+	                {% if SETTINGS.COSINNUS_IS_SSO_PORTAL %}
+	                	{# need this here because usually it shows in the profile form, but sso portals don't have that #}
+	                    <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" href="{% url 'cosinnus:profile-delete' %}">
+	                        <ul class="media-list">
+	                            <li class="media">
+	                                <span class="pull-left">
+	                                    <i class="fa fa-times"></i>
+	                                </span>
+	                                <div class="media-body">
+	                                    {% trans "Delete profile" %}
+	                                </div>
+	                            </li>
+	                        </ul>
+	                    </button>
+	                {% endif %}
+	                
+		        {% else %}
+		        	{# Buttons for other users' profiles #}
+		        
+		            {% comment %} Abonnieren is out for now 
+		            <button type="button" class="btn btn-default">
+		                <ul class="media-list">
+		                    <li class="media">
+		                        <span class="pull-left">
+		                            <i class="fa fa-hand-o-right "></i>
+		                        </span>
+		                        <div class="media-body">
+		                            <!-- <a href="#"> -->
+		                                {% trans "Abonnieren" %}
+		                            <!-- </a> -->
+		                        </div>
+		                    </li>
+		                </ul>
+		            </button>
+		             {% endcomment %}
+		            {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+		                {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
+				            <button type="button" class="btn btn-emphasized btn-autosize v-offset-s" 
+				                    {% if SETTINGS.COSINNUS_ROCKET_ENABLED and SETTINGS.COSINNUS_ROCKET_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}
+				                    href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=this_user.username %}{% else %}{% url 'postman:write' recipients=this_user.username %}?next={% url 'postman:sent' %}{% endif %}">
+				                    
+				                <ul class="media-list">
+				                    <li class="media">
+				                        <span class="pull-left">
+				                            <i class="fa fa-envelope"></i>
+				                        </span>
+				                        <div class="media-body">
+				                            {% trans "Send Message" %}
+				                        </div>
+				                    </li>
+				                </ul>
+				            </button>
+			            {% endif %}
+	                {% endif %}
+		            
+		            {% if request.user.is_authenticated %}
+		                {% include 'cosinnus/feedback/report_button_btn.html' with object=this_user extra_classes="v-offset-s" %}
+		            {% endif %}
+		            
+				{% endif %}
+			{% endblock buttons %}
 	    </div>
 	
 	
