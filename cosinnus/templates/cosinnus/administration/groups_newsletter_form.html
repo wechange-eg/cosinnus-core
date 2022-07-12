@@ -18,20 +18,16 @@
 
 {% block recipient_formfield %}
     <div class="cosinnus-field">
-        <label>{% trans 'Recipients' %}</label>
-        <div class="field-description no-select {{ legend_class }}">
-            {% blocktrans count counter=receipients|length %}With the current selection the newsletter will be sent to {{ counter }} recipients.{% plural %}With the current selection the newsletter will be sent to {{ counter }} recipients.{% endblocktrans %}
-            {% if SETTINGS.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN %}
-                {% trans "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter." %}
-            {% endif %}
+        {% trans "Recipients" as recipients_label %}
+        <div id="recipients-field"> 
+            {% captureas recipients_legend %}
+                {% blocktrans count counter=receipients|length %}With the current selection the newsletter will be sent to {{ counter }} recipients.{% plural %}With the current selection the newsletter will be sent to {{ counter }} recipients.{% endblocktrans %}
+                {% if SETTINGS.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN %}
+                    {% trans "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter." %}
+                {% endif %}
+            {% endcaptureas %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.groups label=recipients_label placeholder=recipients_label legend=recipients_legend large_field=True %}
         </div>
-        {{ form.groups.errors }}
-        <div class="checkbox-multiple">
-            {{ form.groups }}
-            {% if form.instance.id and not form.groups.errors %}
-            {% endif %}
-        </div>
-
     </div>
 {% endblock recipient_formfield %}
 
