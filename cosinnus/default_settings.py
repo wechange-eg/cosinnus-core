@@ -22,7 +22,7 @@ COSINNUS_PORTAL_NAME = None
 # the suffix of every often-changing JS/CSS staticfile
 # increase this to make sure browsers reload a cached version 
 # after making non-compatible changes to scripts or styles!
-COSINNUS_STATICFILES_VERSION = '1.16'
+COSINNUS_STATICFILES_VERSION = '1.17'
 
 DEBUG = False
 
