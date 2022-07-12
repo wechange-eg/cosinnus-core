@@ -229,7 +229,6 @@ class MapEmbedView(TemplateView):
         context.update({
             'map_settings': map_settings
         })
-        print(map_settings)
         return context
 
 map_embed_view = MapEmbedView.as_view()

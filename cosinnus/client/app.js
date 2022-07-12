@@ -192,6 +192,7 @@ var App = function App () {
                 showMine: self.settings.showMine,
                 fullscreen: self.displayOptions.fullscreen,
                 splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles,
+                mapShown: self.displayOptions.showMap,
                 searchResultLimit: self.settings.searchResultLimit || 20,
                 hideTopics: self.settings.hideTopics || false,
             },

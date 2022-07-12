@@ -1,6 +1,6 @@
 {% load i18n cosinnus_tags %}
 
-<button type="button" style="width: auto !important;" class="btn btn-emphasized" title="{% trans "Report offensive content" %}" {% if request.user.is_authenticated %}href="#" {% cosinnus_report_object_action object %}{% else %}href="{% url 'login' %}{% if request.path != "/" %}?next={{ request.path }}{% endif %}"{% endif %}>
+<button type="button" style="width: auto !important;" class="btn btn-emphasized {% if extra_classes %}{{ extra_classes}}{% endif %}" title="{% trans "Report offensive content" %}" {% if request.user.is_authenticated %}href="#" {% cosinnus_report_object_action object %}{% else %}href="{% url 'login' %}{% if request.path != "/" %}?next={{ request.path }}{% endif %}"{% endif %}>
     <ul class="media-list">
         <li class="media">
             <span class="pull-left" style="cursor: pointer;" >

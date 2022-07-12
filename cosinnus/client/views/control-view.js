@@ -147,7 +147,7 @@ module.exports = ContentControlView.extend({
         if (COSINNUS_MAP_OPTIONS['filter_panel_default_visible']) {
             self.state.filterPanelVisible = true;
         }
-        if (COSINNUS_MAP_OPTIONS['ignore_location_default_activated']) {
+        if (!self.options.mapShown || COSINNUS_MAP_OPTIONS['ignore_location_default_activated']) {
             self.state.ignoreLocation = true;
         }
         if (COSINNUS_MAP_OPTIONS['exchange_default_activated']) {
@@ -1568,8 +1568,8 @@ module.exports = ContentControlView.extend({
             },
             q: util.ifundef(urlParams.q, this.state.q),
             ignoreLocation: util.ifundef(urlParams.ignore_location, this.state.ignoreLocation),
-            exchange: util.ifundef(urlParams.exchange, this.state.exchange),
-            matching: util.ifundef(urlParams.matching, this.state.matching),
+            exchange: COSINNUS_EXCHANGE_ENABLED && util.ifundef(urlParams.exchange, this.state.exchange),
+            matching: COSINNUS_MATCHING_ENABLED && util.ifundef(urlParams.matching, this.state.matching),
             searchResultLimit: util.ifundef(urlParams.limit, this.state.searchResultLimit),
             activeTopicIds: util.ifundef(urlParams.topics, this.state.activeTopicIds),
             activeTextTopicIds: util.ifundef(urlParams.text_topics, this.state.activeTextTopicIds),
@@ -1738,12 +1738,12 @@ module.exports = ContentControlView.extend({
                 ignore_location: 1
             });
         }
-        if (this.state.exchange) {
+        if (COSINNUS_EXCHANGE_ENABLED && this.state.exchange) {
             _.extend(searchParams, {
                 exchange: 1
             });
         }
-        if (this.state.matching) {
+        if (COSINNUS_MATCHING_ENABLED && this.state.matching) {
             _.extend(searchParams, {
                 matching: this.state.matching
             });

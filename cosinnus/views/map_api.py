@@ -122,6 +122,7 @@ MAP_SEARCH_PARAMETERS.update(MAP_CONTENT_TYPE_SEARCH_PARAMETERS)
 
 
 class SearchQuerySetMixin:
+    
     search_parameters = MAP_SEARCH_PARAMETERS
 
     def dispatch(self, request, *args, **kwargs):
@@ -165,6 +166,8 @@ class SearchQuerySetMixin:
 
         if not settings.COSINNUS_EXCHANGE_ENABLED:
             self.params['exchange'] = False
+        if not settings.COSINNUS_MATCHING_ENABLED:
+            self.params['matching'] = False
 
         prefer_own_portal = getattr(settings, 'MAP_API_HACKS_PREFER_OWN_PORTAL', False)
 
@@ -335,7 +338,7 @@ class MapSearchView(SearchQuerySetMixin, APIView):
         if self.params.get('cloudfiles', False):
             return MapCloudfilesView.as_view()(request._request)
 
-        if self.params.get('matching', False):
+        if settings.COSINNUS_MATCHING_ENABLED and self.params.get('matching', False):
             return MapMatchingView.as_view()(request._request)
 
         sqs = self.get_queryset(filter_group_id=filter_group_id)
