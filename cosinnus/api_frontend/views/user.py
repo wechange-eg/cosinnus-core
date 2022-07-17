@@ -5,8 +5,10 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from cosinnus.api.serializers.user import UserSerializer
-from cosinnus.api_frontend.serializers.user import LoginSerializer
+from cosinnus.api_frontend.serializers.user import CosinnusUserLoginSerializer
 from cosinnus.views.common import LoginViewAdditionalLogicMixin
+from cosinnus.utils.jwt import get_tokens_for_user
+from django.urls.base import reverse
 
 
 class LoginView(LoginViewAdditionalLogicMixin, APIView):
@@ -14,7 +16,7 @@ class LoginView(LoginViewAdditionalLogicMixin, APIView):
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request):
-        serializer = LoginSerializer(data=request.data)
+        serializer = CosinnusUserLoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         
@@ -26,7 +28,14 @@ class LoginView(LoginViewAdditionalLogicMixin, APIView):
         # user is authenticated correctly, log them in
         login(request, user)
         
-        response = Response(UserSerializer(user).data)
+        user_tokens = get_tokens_for_user(user)
+        data = {
+            'refresh': user_tokens['refresh'],
+            'access': user_tokens['access'],
+            'user': UserSerializer(user, context={'request': request}).data,
+            'next': reverse('cosinnus:user-dashboard'),
+        }
+        response = Response(data)
         response = self.set_response_cookies(response)
         return response
 

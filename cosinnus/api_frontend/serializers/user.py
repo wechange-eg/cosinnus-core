@@ -5,7 +5,7 @@ from cosinnus.api_frontend.handlers.error_codes import ERROR_LOGIN_INCORRECT_CRE
     ERROR_LOGIN_USER_DISABLED
 
 
-class LoginSerializer(serializers.Serializer):
+class CosinnusUserLoginSerializer(serializers.Serializer):
     
     username = serializers.EmailField()
     password = serializers.CharField()
