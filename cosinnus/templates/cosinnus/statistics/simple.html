@@ -17,7 +17,7 @@
 	    </ul>
 	</button>
 
-	{% if request.user|is_superuser %}
+    {% if request.user.is_superuser %} {% comment %} Only for {% endcomment %}
 		<button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:housekeeping-portal-switches-and-settings' %}">
 			<ul class="media-list">
 				<li class="media">
@@ -33,7 +33,7 @@
 	{% endif %}
 
 	{% if SETTINGS.COSINNUS_CONFERENCES_ENABLED %}
-	    <button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:housekeeping-conference-storage-report' %}">
+	    <button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus-api:statistics-conference-storage-info' %}?format=csv">
 	        <ul class="media-list">
 	            <li class="media">
 	               <span class="pull-left">
@@ -48,7 +48,7 @@
 	
 	{% endif %}
 	
-	<button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:housekeeping-group-storage-report' %}">
+	<button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus-api:statistics-group-storage-info' %}?format=csv">
 	    <ul class="media-list">
 	        <li class="media">
 	           <span class="pull-left">
@@ -61,7 +61,7 @@
 	    </ul>
 	</button>
 	
-	<button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:housekeeping-project-storage-report' %}">
+	<button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus-api:statistics-project-storage-info' %}?format=csv">
 	    <ul class="media-list">
 	        <li class="media">
 	           <span class="pull-left">
@@ -74,7 +74,7 @@
 	    </ul>
 	</button>
 	
-	<button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:housekeeping-user-activity-info' %}">
+	<button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus-api:user-activity-info' %}?format=csv">
         <ul class="media-list">
             <li class="media">
                <span class="pull-left">
@@ -88,7 +88,7 @@
     </button>
     
     {% if SETTINGS.COSINNUS_CONFERENCES_ENABLED and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
-	    <button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus:simple-statistics-bbb-room-visits' %}">
+	    <button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus-api:bbb-room-visits' %}?format=csv">
 	        <ul class="media-list">
 	            <li class="media">
 	               <span class="pull-left">

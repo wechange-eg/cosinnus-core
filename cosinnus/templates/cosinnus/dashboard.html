@@ -114,11 +114,16 @@
 	
 	{% block group_announcements %}
 	    
-	    {% if SETTINGS.COSINNUS_MICROSITES_ENABLED and group.publicly_visible and not SETTINGS.COSINNUS_MICROSITES_DISABLE_NEEDS_LOVE_NAG_SCREEN %}
+	    
+	    {% captureas nag_setting %}microsite_hide_nag__{{ group.id }}{% endcaptureas %}
+        {% captureas nag_setting_value %}microsite_hide_nag__{{ group.id }}:true{% endcaptureas %}
+	    {% if SETTINGS.COSINNUS_MICROSITES_ENABLED and group.publicly_visible and not SETTINGS.COSINNUS_MICROSITES_DISABLE_NEEDS_LOVE_NAG_SCREEN and not user|cosinnus_setting:nag_setting %}
 		    {% comment %} -------    Microsite edit-me message ------------ {% endcomment %}
 		    {% if user.is_authenticated and user.pk in group.admins and not group.description_long %}
 			    <div class="alert alert-warning alert-dismissable">
 		            <i class="fa fa-heart fa-3x"></i>
+		            <button id="close_button" type="button" class="close" data-dismiss="alert" aria-hidden="true" {% djajax_connect user.cosinnus_profile.settings trigger_on="click" fixed_value=nag_setting_value %}>&#215;</button>
+            
 		            <h4>{% trans "Your Microsite needs some love!" %}</h4>
 		            <div class="v-offset-s">
 			        <p>

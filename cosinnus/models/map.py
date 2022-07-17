@@ -30,7 +30,8 @@ from cosinnus.utils.permissions import check_ug_membership, check_ug_pending, \
     check_ug_invited_pending, check_user_superuser
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus_event.models import Event
-from cosinnus_exchange.models import ExchangeProject, ExchangeSociety, ExchangeOrganization, ExchangeEvent
+from cosinnus_exchange.models import ExchangeProject, ExchangeSociety, ExchangeOrganization, ExchangeEvent,\
+    ExchangeConference
 from cosinnus.utils.dates import HumanizedEventTimeObject
 from cosinnus_organization.models import CosinnusOrganization
 
@@ -224,9 +225,13 @@ class HaystackMapResult(BaseMapResult):
         else:
             portal = result.portal
         
+        if result.portal == settings.COSINNUS_EXCHANGE_PORTAL_ID:
+            model_name = EXCHANGE_SEARCH_MODEL_NAMES[result.model]
+        else:  
+            model_name = SEARCH_MODEL_NAMES[result.model]
         fields = {
             'id': itemid_from_searchresult(result),
-            'type': SEARCH_MODEL_NAMES[result.model],
+            'type': model_name,
             'title': result.title, 
             'slug': result.slug,
             'lat': result.mt_location_lat,
@@ -251,6 +256,11 @@ class HaystackMapResult(BaseMapResult):
             'dynamic_fields': result.dynamic_fields,
             'is_open_for_cooperation': result.is_open_for_cooperation,
         }
+        if getattr(result, 'from_date', None) and getattr(result, 'to_date', None):
+            humanized_datetime_obj = HumanizedEventTimeObject(result.from_date, result.to_date)
+            kwargs.update({
+                'time_html': humanized_datetime_obj.get_humanized_event_time_html(),
+            })
         if settings.COSINNUS_ENABLE_SDGS:
             fields.update({
                 'sdgs': result.sdgs,
@@ -840,11 +850,10 @@ SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS = [
 EXCHANGE_SEARCH_MODEL_NAMES = {
     ExchangeProject: 'projects',
     ExchangeSociety: 'groups',
+    ExchangeConference: 'conferences',
     ExchangeOrganization: 'organizations',
     ExchangeEvent: 'events'
 }
-if settings.COSINNUS_EXCHANGE_ENABLED:
-    SEARCH_MODEL_NAMES.update(EXCHANGE_SEARCH_MODEL_NAMES)
     
 SHORTENED_ID_MAP_REVERSE = dict([(val, key) for key, val in list(SHORTENED_ID_MAP.items())])
 SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(SEARCH_MODEL_NAMES.items())])
@@ -856,7 +865,10 @@ def itemid_from_searchresult(result):
     """ Returns a unique long id for a haystack result without revealing any DB ids. 
         itemid: <portal_id>.<modeltype>.<slug>
         Example:  `1.people.saschanarr` """
-    model_name = SEARCH_MODEL_NAMES[result.model]
+    if result.portal == settings.COSINNUS_EXCHANGE_PORTAL_ID:
+        model_name = EXCHANGE_SEARCH_MODEL_NAMES[result.model]
+    else:  
+        model_name = SEARCH_MODEL_NAMES[result.model]
     slug = result.slug
     if model_name == 'events':
         slug = '%s*%s' % (result.group_slug, slug)

@@ -190,7 +190,7 @@ module.exports = BaseView.extend({
             // wait a short time before issuing a HTTP request, 
             // in case the user types more stuff in the meantime;
             // in that case, the timeout will be cleared/cancelled.
-            self.state.fireQuicksearchTimeout = setTimeout(self.loadQuickResults, 300, self, self.state.query);
+            self.state.fireQuicksearchTimeout = setTimeout(self.loadQuickResults, 1, self, self.state.query);
         }
     },
 

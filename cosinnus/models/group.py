@@ -640,6 +640,9 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
 
         super(CosinnusPortal, self).save(*args, **kwargs)
         self.compile_custom_stylesheet()
+        self.clear_cache()
+        
+    def clear_cache(self):
         cache.delete(self._CURRENT_PORTAL_CACHE_KEY)
         cache.delete(self._ALL_PORTAL_CACHE_KEY)
 
@@ -1111,6 +1114,17 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         return bool(self.membership_mode == self.MEMBERSHIP_MODE_APPLICATION)
     
     @property
+    def membership_applications_possible(self):
+        """ Shortcut to determine if users can currently apply to become a member, 
+            depending on what type of membership requests are set, and if applicable,
+            if conference applications are currently open. """
+        return bool(
+                not self.use_conference_applications or
+                not self.participation_management.exists() or
+                self.participation_management.get().applications_are_active
+            )
+    
+    @property
     def is_autojoin_group(self):
         """ Shortcut to determine if a user joining this group will be instantly 
             accepted instead of creating a join request for the administrators.
@@ -1261,7 +1275,6 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
             keys.extend(
                 [CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, s) for s in slugs])
         if group:
-            group._clear_local_cache()
             keys.append(CosinnusGroupManager._GROUP_CHILDREN_PK_CACHE_KEY % (CosinnusPortal.get_current().id, group.id))
             if group.parent_id:
                 keys.append(CosinnusGroupManager._GROUP_CHILDREN_PK_CACHE_KEY % (

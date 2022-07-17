@@ -181,11 +181,11 @@ class CosinnusConf(AppConf):
     # if True, the entire /admin/ area is protected by 2-factor-authentication
     # and no user that hasn't got a device set up can gain access.
     # Set up at least one device at <host>/admin/otp_totp/totpdevice/ before activating this setting!
-    ADMIN_2_FACTOR_AUTH_ENABLED = False
+    ADMIN_2_FACTOR_AUTH_ENABLED = True
     
     # if True while `ADMIN_2_FACTOR_AUTH_ENABLED` is enabled,
     # the 2fa-check will extend to the /administration/ area, which it doesn't usually
-    ADMIN_2_FACTOR_AUTH_INCLUDE_ADMINISTRATION_AREA = False
+    ADMIN_2_FACTOR_AUTH_INCLUDE_ADMINISTRATION_AREA = True
     
     # if True while `ADMIN_2_FACTOR_AUTH_ENABLED` is enabled, will force 2-factor-authentication
     # for superusers and portal on the ENTIRE site, and not only on the /admin/ backend
@@ -193,7 +193,7 @@ class CosinnusConf(AppConf):
 
     # if True, users may activate the 2-factor-authentication for
     # their user profiles within the portal
-    USER_2_FACTOR_AUTH_ENABLED = False
+    USER_2_FACTOR_AUTH_ENABLED = True
     
     # enable this to sign up new members to a cleverreach newsletter group
     CLEVERREACH_AUTO_SIGNUP_ENABLED = False
@@ -326,8 +326,23 @@ class CosinnusConf(AppConf):
     # Is external content from other platforms enabled?
     EXCHANGE_ENABLED = False
 
-    # Internal portal ID for external content
+    # Internal portal ID for external content. does not usually need to be changed
     EXCHANGE_PORTAL_ID = 99999
+    
+    # Exchange Backends
+    # Defaults:
+    #   backend: 'cosinnus_exchange.backends.ExchangeBackend'
+    #   url: None (required)
+    #   token_url: (url + ../token/)
+    #   username: None (if no login required)
+    #   password: None (if no login required)
+    #   source: (domain from URL)
+    #   model: None (required, e.g. 'cosinnus_exchange.Event')
+    #   serializer: None (required, e.g. 'cosinnus_exchange.serializers.ExchangeEventSerializer')
+    EXCHANGE_BACKENDS = []
+    
+    # default cron run frequency for exchange data pulls
+    EXCHANGE_RUN_EVERY_MINS = 60 * 24 # once a day
 
     #: How long a group should at most stay in cache until it will be removed
     GROUP_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
@@ -965,6 +980,9 @@ class CosinnusConf(AppConf):
     CLOUD_ENABLED = False
     # whether to show the cosinnus cloud dashboard widget
     CLOUD_DASHBOARD_WIDGET_ENABLED = True 
+    # whether the quicksearch includes cloud results.
+    # comes with a large reduction in search speed as nextcloud is slow
+    CLOUD_QUICKSEARCH_ENABLED = False
     
     # base url of the nextcloud service, without trailing slash
     CLOUD_NEXTCLOUD_URL = None

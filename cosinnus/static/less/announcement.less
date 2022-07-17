@@ -3,16 +3,20 @@
     margin-top: 105px;
 }
 .announcement ~.v2-dashboard {
-    margin-top: 85px;
+    margin-top: 50px;
 }
 .announcement ~ .container {
+    margin-top: 70px;
     .app-root:not(.app-embed), .app-fullscreen, .map-fullscreen, .tile-list-fullscreen {
         top: 85px; /** Navbar compensation with announcement */
         height: ~"calc(100% - 50px - 35px)"; /** Navbar compensation with announcement */
     }    
 }
+body.conference-body .announcement {
+    margin-top: -50px;
+}
 .announcement + .conference {
-    margin-top: 35px;
+    margin-top: unset;
     
     .MuiDrawer-paper.MuiDrawer-paperAnchorDockedLeft {
         height: ~"calc(100% - 50px - 35px)";
@@ -28,7 +32,7 @@
     
     border-width: 0;
     padding: 5px 5px 5px 44px;
-    position: fixed;
+    position: relative;
     top: 50px;
     left: 0;
     right: 0;
@@ -78,5 +82,17 @@
         background-color: transparent;
         padding: 0;
         color: inherit;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .v2-dashboard-body .announcement {
+      margin-top: 50px;
+    }
+    body.v2-dashboard-body .announcement + .v2-dashboard {
+        margin-top: 50px;
+    }
+    .announcement + .conference {
+        margin-top: -50px;
     }
 }

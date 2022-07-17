@@ -158,6 +158,9 @@ class AdminOTPMiddleware(MiddlewareMixin):
             if not user.is_verified():
                 next_url = request.path
                 return redirect(reverse('cosinnus:login-2fa') + (('?next=%s' % next_url) if is_safe_url(next_url, allowed_hosts=[request.get_host()]) else ''))
+        elif user and user.is_authenticated and not check_user_superuser(user) and request.path.startswith('/admin/') and not request.path in EXEMPTED_URLS_FOR_2FA:
+            # normal users will never be redirected to the admin area
+            return redirect('cosinnus:user-dashboard')
 
         return None
 

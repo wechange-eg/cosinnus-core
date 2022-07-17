@@ -132,12 +132,12 @@ def filter_active_users(user_model_qs, filter_on_user_profile_model=False):
         return user_model_qs.exclude(user__is_active=False).\
             exclude(user__last_login__exact=None).\
             exclude(user__email__icontains='__unverified__').\
-            filter(settings__tos_accepted=True)
+            filter(settings__has_key='tos_accepted')
     else:
         return user_model_qs.exclude(is_active=False).\
             exclude(last_login__exact=None).\
             exclude(email__icontains='__unverified__').\
-            filter(cosinnus_profile__settings__tos_accepted=True)
+            filter(cosinnus_profile__settings__has_key='tos_accepted')
             
 def filter_portal_users(user_model_qs, portal=None):
     """ Filters a QS of ``get_user_model()`` so that only users of this portal remain. """

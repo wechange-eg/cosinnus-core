@@ -134,7 +134,6 @@ urlpatterns = [
     url(r'^administration/conference/block/(?P<block_id>\d+)/edit/$', conference_administration.conference_edit_premium_block, name='conference-administration-edit-premium-block'),
     
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
-    url(r'^statistics/simple/bbb_room_visits/$', statistics.bbb_room_visit_statistics_download, name='simple-statistics-bbb-room-visits'),
     
     url(r'^housekeeping/ensure_group_widgets/$', housekeeping.ensure_group_widgets, name='housekeeping-ensure-group-widgets'),
     url(r'^housekeeping/newsletterusers/$', housekeeping.newsletter_users, name='housekeeping-newsletter-user-emails'),
@@ -161,11 +160,6 @@ urlpatterns = [
     url(r'^housekeeping/print_testmail/', housekeeping.print_testmail, name='housekeeping-print-testmail'),
     url(r'^housekeeping/print_testdigest/', housekeeping.print_testdigest, name='housekeeping-print-testdigest'),
     url(r'^housekeeping/print_settings/', housekeeping.print_settings, name='housekeeping-print-settings'),
-    url(r'^housekeeping/group_storage_info/', housekeeping.group_storage_info, name='housekeeping-group-storage-info'),
-    url(r'^housekeeping/conference_storage_report/', housekeeping.conference_storage_report_csv, name='housekeeping-conference-storage-report'),
-    url(r'^housekeeping/group_storage_report/', housekeeping.group_storage_report_csv, name='housekeeping-group-storage-report'),
-    url(r'^housekeeping/project_storage_report/', housekeeping.project_storage_report_csv, name='housekeeping-project-storage-report'),
-    url(r'^housekeeping/user_activity_info/', housekeeping.user_activity_info, name='housekeeping-user-activity-info'),
     url(r'^housekeeping/conf_settings_info/', housekeeping.portal_switches_and_settings, name='housekeeping-portal-switches-and-settings'),
     url(r'^housekeeping/group_admin_emails/(?P<slugs>[^/]+)/', housekeeping.group_admin_emails, name='housekeeping-group-admin-emails'),
     

@@ -342,6 +342,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'django_otp.plugins.otp_static',
         'two_factor',
         'timezone_field',
+        'django_extensions',
         
         # External Apps
         'awesome_avatar',

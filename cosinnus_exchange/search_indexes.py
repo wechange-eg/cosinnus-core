@@ -7,6 +7,7 @@ from cosinnus.conf import settings
 from cosinnus.utils.search import CommaSeperatedIntegerMultiValueField, TemplateResolveNgramField, \
     TemplateResolveCharField, TimezoneAwareHaystackDateTimeField
 from .models import ExchangeProject, ExchangeSociety, ExchangeEvent, ExchangeOrganization
+from cosinnus_exchange.models import ExchangeConference
 
 
 class ExchangeIndexMixin(indexes.SearchIndex):
@@ -76,6 +77,12 @@ class ExchangeSocietyIndex(ExchangeIndexMixin, ExchangeFilterIndex, indexes.Inde
     
     def get_model(self):
         return ExchangeSociety
+    
+    
+class ExchangeConferenceIndex(ExchangeIndexMixin, ExchangeFilterIndex, indexes.Indexable):
+    
+    def get_model(self):
+        return ExchangeConference
 
 
 class ExchangeOrganizationIndex(ExchangeIndexMixin, ExchangeFilterIndex, indexes.Indexable):

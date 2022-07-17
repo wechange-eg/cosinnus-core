@@ -477,11 +477,6 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         pendings = _q.filter(id__in=pending_ids)
         invited = _q.filter(id__in=invited_pending_ids)
         
-        # for adding members, get all users from this portal only  
-        non_members =  _q.exclude(id__in=all_member_ids). \
-            exclude(id__in=invited_pending_ids). \
-            filter(id__in=CosinnusPortal.get_current().members)
-        
         hidden_member_count = 0
         user_count = filter_active_users(members).count()
         # for admins: count the inactive users
@@ -559,7 +554,6 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             'pendings': pendings,
             'invited': invited,
             'recruited': recruited,
-            'non_members': non_members,
             'member_count': user_count,
             'inactive_member_count': inactive_member_count,
             'hidden_user_count': hidden_member_count,

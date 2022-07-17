@@ -84,7 +84,7 @@ setup(
     data_files=data_files,
     install_requires=[
         # please mirror all changes in the requirements.txt for local installs!
-        'Django>=3.2,<3.3',
+        'Django>=3.2.14,<3.3',
         'MarkupSafe==1.1',
         'Pillow==6.2.0',
         'Celery==4.2.0',
@@ -102,6 +102,7 @@ setup(
         'django-cron==0.5.0',
         'django-embed-video==0.6',
         'django-el-pagination==2.1.2',
+        'django-extensions==3.1.5',
         'django-extra-views==0.14.0',
         'django-filter==21.1',
         'django-haystack==3.1.1',
@@ -120,9 +121,10 @@ setup(
         'django-simple-captcha==0.5.14',
         'django-taggit==1.5.1',
         'django-timezone-field==4.2.1',
-        'django-two-factor-auth==1.13.1',
+        'django-two-factor-auth==1.14.0',
         'django-widget-tweaks==1.4.9',
         'djangorestframework==3.12.4',
+        'djangorestframework-csv==2.1.1',
         'djangorestframework-jwt==1.11.0',
         'dnspython==1.15.0',
         'drf-yasg==1.20.0',
