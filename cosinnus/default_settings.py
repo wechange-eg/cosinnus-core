@@ -774,6 +774,34 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     #   source: (domain from URL)
     #   model: None (required, e.g. 'cosinnus_exchange.Event')
     #   serializer: None (required, e.g. 'cosinnus_exchange.serializers.ExchangeEventSerializer')
+    """
+    # Example Backends:
+    COSINNUS_EXCHANGE_ENABLED = True
+    COSINNUS_EXCHANGE_RUN_EVERY_MINS = 60*24
+    COSINNUS_EXCHANGE_BACKENDS = [
+        {
+            'backend': 'cosinnus_exchange.backends.ExchangeBackend',
+            'url': 'http://staging.wechange.de/api/v2/events/',
+            'source': 'WECHANGE Staging',
+            'model': 'cosinnus_exchange.ExchangeEvent',
+            'serializer': 'cosinnus_exchange.serializers.ExchangeEventSerializer',
+        },
+        {
+            'backend': 'cosinnus_exchange.backends.ExchangeBackend',
+            'url': 'http://staging.wechange.de/api/v2/organizations/',
+            'source': 'WECHANGE Staging',
+            'model': 'cosinnus_exchange.ExchangeOrganization',
+            'serializer': 'cosinnus_exchange.serializers.ExchangeOrganizationSerializer',
+        },
+        {
+            'backend': 'cosinnus_exchange.backends.ExchangeBackend',
+            'url': 'https://community.civilsocietycooperation.net/api/v2/events/',
+            'source': 'Civilsocietycooperation.net',
+            'model': 'cosinnus_exchange.ExchangeEvent',
+            'serializer': 'cosinnus_exchange.serializers.ExchangeEventSerializer',
+        },
+    ]
+    """
     COSINNUS_EXCHANGE_BACKENDS = []
     
     # Frontend

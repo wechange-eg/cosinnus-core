@@ -10,6 +10,8 @@ from cosinnus.views.common import LoginViewAdditionalLogicMixin
 from cosinnus.utils.jwt import get_tokens_for_user
 from django.urls.base import reverse
 
+from cosinnus.conf import settings
+
 
 class LoginView(LoginViewAdditionalLogicMixin, APIView):
     
@@ -33,7 +35,7 @@ class LoginView(LoginViewAdditionalLogicMixin, APIView):
             'refresh': user_tokens['refresh'],
             'access': user_tokens['access'],
             'user': UserSerializer(user, context={'request': request}).data,
-            'next': reverse('cosinnus:user-dashboard'),
+            'next': settings.get('COSINNUS_LOGIN_REDIRECT_URL', reverse('cosinnus:user-dashboard')),
         }
         response = Response(data)
         response = self.set_response_cookies(response)
