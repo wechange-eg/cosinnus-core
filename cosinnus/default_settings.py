@@ -33,121 +33,7 @@ if 'PASSWORD_RESET_TIMEOUT_DAYS' in globals():
 # all settings added should go within `define_cosinnus_base_settings` 
 
 
-""" --------------- APP CONFIG  ---------------- """
     
-def compile_installed_apps(internal_apps=[], extra_cosinnus_apps=[]):
-    """ Supports gathering INSTALLED_APPS with external-project options.
-        Must be called after importing these settings!
-    """
-    
-    _INSTALLED_APPS = [
-        # Django Apps
-        'django.contrib.auth',
-        'django.contrib.contenttypes',
-        'django.contrib.humanize',
-        'django.contrib.messages',
-        'django.contrib.redirects',
-        'django.contrib.sessions',
-        'django.contrib.sites',
-        'django.contrib.staticfiles',
-        'suit_overextends',
-        'suit',
-        'django.contrib.admin',
-        'sekizai',
-        'apps.core',
-        'django_countries',  # needed for i18n for the country list
-    ]
-    
-    # Internal Apps (as defined in external project)
-    _INSTALLED_APPS += internal_apps
-    
-    _INSTALLED_APPS += [
-        'cosinnus',
-        'cosinnus_organization',
-        'cosinnus_oauth_client',
-        'cosinnus_cloud',
-        'cosinnus_etherpad',
-        'cosinnus_event',
-        'cosinnus_file',
-        'cosinnus_marketplace',
-        'cosinnus_message',
-        'cosinnus_note',
-        'cosinnus_notifications',
-        'cosinnus_poll',
-        'cosinnus_stream',
-        'cosinnus_todo',
-        'cosinnus_conference',
-        'cosinnus_exchange',
-    ]
-    
-    # Extra Cosinnus Apps (as defined in external project)
-    _INSTALLED_APPS += extra_cosinnus_apps
-    
-    _INSTALLED_APPS += [
-        
-        # haystack needs to precede wagtail because wagtail idiotically overrides haystack's mmanagement commands
-        'haystack',
-        
-        # wagtail
-        'wagtail_overextends',
-        'compressor',
-        'modelcluster',
-        'wagtail.core',
-        'wagtail.admin',
-        'wagtail.documents',
-        'wagtail.snippets',
-        'wagtail.users',
-        'wagtail.images',
-        'wagtail.embeds',
-        'wagtail.search',
-        'wagtail.sites',
-        'wagtail.contrib.redirects',
-        'wagtail.contrib.forms',
-        
-        
-        'announcements',
-        'ajax_forms',
-      
-        # SSO
-        'allauth',
-        'allauth.account',
-        'allauth.socialaccount',
-        
-        # 'django_extensions',
-        'django_filters',
-        'django_select2',
-        'django_cron',
-        'widget_tweaks',
-        'django_otp',
-        'django_otp.plugins.otp_totp',
-        'django_otp.plugins.otp_static',
-        'two_factor',
-        'timezone_field',
-        
-        # External Apps
-        'awesome_avatar',
-        'bootstrap3',
-        'bootstrap3_datetime',
-        'captcha',
-        'djajax',
-        'django_mailbox',
-        'easy_thumbnails',
-        'embed_video',
-        'el_pagination',
-        'honeypot',
-        'osm_field',
-        'phonenumber_field',
-        'postman',
-        'oauth2_provider',
-        'corsheaders',
-        'rest_framework',
-        'drf_yasg',
-        'taggit',
-        'django_bigbluebutton',
-        'django_clamd',
-    ]
-    
-    return _INSTALLED_APPS
 
 
 
@@ -348,7 +234,8 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     CSRF_COOKIE_AGE = None
     # session cookie name
     SESSION_COOKIE_DOMAIN = project_settings["COSINNUS_PORTAL_URL"]
-    SESSION_COOKIE_NAME = f"project_settings['COSINNUS_PORTAL_NAME']-sessionid"
+    SESSION_COOKIE_NAME = f"{project_settings['COSINNUS_PORTAL_NAME']}-sessionid"
+    
     
     """ --------------- DATE AND TIME ---------------- """
     
@@ -369,6 +256,115 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # If you set this to False, Django will not use timezone-aware datetimes.
     USE_TZ = True
     
+    
+    """ --------------- APP CONFIG  ---------------- """
+    
+    INSTALLED_APPS = [
+        # Django Apps
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.humanize',
+        'django.contrib.messages',
+        'django.contrib.redirects',
+        'django.contrib.sessions',
+        'django.contrib.sites',
+        'django.contrib.staticfiles',
+        'suit_overextends',
+        'suit',
+        'django.contrib.admin',
+        'sekizai',
+        'apps.core',
+        'django_countries',  # needed for i18n for the country list
+    ]
+    
+    # Internal Apps (as defined in external project)
+    INSTALLED_APPS += project_settings.get("INTERNAL_INSTALLED_APPS", [])
+    
+    INSTALLED_APPS += [
+        'cosinnus',
+        'cosinnus_organization',
+        'cosinnus_oauth_client',
+        'cosinnus_cloud',
+        'cosinnus_etherpad',
+        'cosinnus_event',
+        'cosinnus_file',
+        'cosinnus_marketplace',
+        'cosinnus_message',
+        'cosinnus_note',
+        'cosinnus_notifications',
+        'cosinnus_poll',
+        'cosinnus_stream',
+        'cosinnus_todo',
+        'cosinnus_conference',
+        'cosinnus_exchange',
+    ]
+    
+    # Extra Cosinnus Apps (as defined in external project)
+    INSTALLED_APPS += project_settings.get("EXTRA_COSINNUS_APPS", [])
+    
+    INSTALLED_APPS += [
+        
+        # haystack needs to precede wagtail because wagtail idiotically overrides haystack's mmanagement commands
+        'haystack',
+        
+        # wagtail
+        'wagtail_overextends',
+        'compressor',
+        'modelcluster',
+        'wagtail.core',
+        'wagtail.admin',
+        'wagtail.documents',
+        'wagtail.snippets',
+        'wagtail.users',
+        'wagtail.images',
+        'wagtail.embeds',
+        'wagtail.search',
+        'wagtail.sites',
+        'wagtail.contrib.redirects',
+        'wagtail.contrib.forms',
+        
+        
+        'announcements',
+        'ajax_forms',
+      
+        # SSO
+        'allauth',
+        'allauth.account',
+        'allauth.socialaccount',
+        
+        # 'django_extensions',
+        'django_filters',
+        'django_select2',
+        'django_cron',
+        'widget_tweaks',
+        'django_otp',
+        'django_otp.plugins.otp_totp',
+        'django_otp.plugins.otp_static',
+        'two_factor',
+        'timezone_field',
+        
+        # External Apps
+        'awesome_avatar',
+        'bootstrap3',
+        'bootstrap3_datetime',
+        'captcha',
+        'djajax',
+        'django_mailbox',
+        'easy_thumbnails',
+        'embed_video',
+        'el_pagination',
+        'honeypot',
+        'osm_field',
+        'phonenumber_field',
+        'postman',
+        'oauth2_provider',
+        'corsheaders',
+        'rest_framework',
+        'drf_yasg',
+        'taggit',
+        'django_bigbluebutton',
+        'django_clamd',
+    ]    
     
     
     """ --------------- SENTRY/RAVEN LOGGING ---------------- """
