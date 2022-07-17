@@ -185,47 +185,4 @@ def current_user(request):
     return Response(serializer.data)
 
 
-class LoginSerializer(serializers.Serializer):
-    username = serializers.EmailField()
-    password = serializers.CharField()
-
-    def validate(self, attrs):
-        user = authenticate(
-            username=attrs['username'], password=attrs['password'])
-
-        if not user:
-            raise serializers.ValidationError('Incorrect email or password.')
-
-        if not user.is_active:
-            raise serializers.ValidationError('User is disabled.')
-
-        return {'user': user}
-
-
-class CsrfExemptSessionAuthentication(authentication.SessionAuthentication):
-    def enforce_csrf(self, request):
-        return
-
-
-class LoginView(LoginViewAdditionalLogicMixin, APIView):
-    permission_classes = (permissions.AllowAny,)
-
-    def post(self, request):
-        serializer = LoginSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        
-        # deny login if additional validation checks fail
-        additional_checks_error_message = self.additional_user_validation_checks(user)
-        if additional_checks_error_message:
-            raise serializers.ValidationError({'non_field_errors': [additional_checks_error_message]})
-        
-        # user is authenticated correctly, log them in
-        login(request, user)
-        
-        response = Response(UserSerializer(user).data)
-        response = self.set_response_cookies(response)
-        return response
-
-
 oauth_current_user = OAuthUserView.as_view()

@@ -17,7 +17,7 @@ from rest_framework_simplejwt.views import (
 from cosinnus.api.views.group import CosinnusSocietyViewSet, CosinnusProjectViewSet
 from cosinnus.api.views.i18n import translations
 from cosinnus.api.views.portal import statistics as api_statistics, header, footer, settings as api_settings
-from cosinnus.api.views.user import oauth_user, oauth_profile, current_user, oauth_current_user, UserViewSet, LoginView
+from cosinnus.api.views.user import oauth_user, oauth_profile, current_user, oauth_current_user, UserViewSet
 from cosinnus.conf import settings
 from cosinnus.core.registries import url_registry
 from cosinnus.core.registries.group_models import group_model_registry
@@ -371,17 +371,21 @@ urlpatterns += [
     url(r'^o/profile/', oauth_profile),
 ]
 
-schema_url_patterns = [
+
+api_v2_url_patterns = [
     url(r'^api/v2/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     url(r'^api/v2/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    url(r'^api/v2/login/', LoginView.as_view(), name='api-login'),
     url(r'^api/v2/current_user/', current_user, name='api-current-user'),
     url(r'^api/v2/settings/$', api_settings, name='api-settings'),
     url(r'^api/v2/statistics/', api_statistics, name='api-statistics'),
     url(r'^api/v2/jsi18n/$', translations, name='api-jsi18n'),
     url(r'^api/v2/', include((router.urls, 'api'), namespace='api')),
 ]
+api_v3_url_patterns = [
+    url(r"^", include(("cosinnus.urls_api_frontend", "cosinnus"), namespace="cosinnus-frontend-api")),
+]
 
+schema_url_patterns = api_v2_url_patterns + api_v3_url_patterns
 urlpatterns += schema_url_patterns
 
 schema_view = get_schema_view(
