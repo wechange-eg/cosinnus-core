@@ -712,7 +712,8 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
             'rest_framework.authentication.SessionAuthentication',
             'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
             'rest_framework_simplejwt.authentication.JWTAuthentication'
-        )
+        ),
+        'EXCEPTION_HANDLER': 'cosinnus.api_frontend.handlers.exception_handlers.cosinnus_error_code_exception_handler',
     }
     
     COSINNUS_API_SETTINGS = {
