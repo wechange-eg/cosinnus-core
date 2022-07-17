@@ -7,4 +7,8 @@
 ERROR_LOGIN_USER_DISABLED = (1001, "User is disabled")
 ERROR_LOGIN_INCORRECT_CREDENTIALS = (1002, "Incorrect email or password")
 
+ERROR_SIGNUP_EMAIL_IN_USE = (2001, "Email is already in use")
+ERROR_SIGNUP_CAPTCHA_INVALID = (2002, "The captcha was not filled or was invalid")
+ERROR_SIGNUP_CAPTCHA_SERVICE_DOWN = (2003, "The captcha service could not be reached")
+ERROR_SIGNUP_NAME_NOT_ACCEPTABLE = (2004, "This first_name is not acceptable")
 

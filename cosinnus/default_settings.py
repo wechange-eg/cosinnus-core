@@ -473,6 +473,11 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     COSINNUS_CLOUD_NEXTCLOUD_AUTH = (COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME, env("WECHANGE_COSINNUS_CLOUD_NEXTCLOUD_AUTH", default=''))
     
     
+    """ --------------- EXTERNAL SERVICES  ---------------- """
+    
+    COSINNUS_HCAPTCHA_SECRET_KEY = env("WECHANGE_COSINNUS_HCAPTCHA_SECRET_KEY", default=None)
+    
+    
     """ --------------- MORE SETTINGS  ---------------- """
     
     # for language codes see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes

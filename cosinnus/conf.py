@@ -1259,7 +1259,11 @@ class CosinnusConf(AppConf):
     # types of CosinnusBaseGroup which are allowed to use direct join tokens:
     # 0 for projects; 1 for groups; 2 for conferences
     ENABLE_USER_JOIN_TOKENS_FOR_GROUP_TYPE = []
-
+    
+    # the secret key for the hcaptcha. set in .env
+    HCAPTCHA_SECRET_KEY = None
+    
+    
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.
         These are settings used by default in cosinnus apps, such as avatar dimensions, etc.

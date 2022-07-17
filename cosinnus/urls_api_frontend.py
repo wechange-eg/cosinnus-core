@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.conf.urls import url
 
-from cosinnus.api_frontend.views.user import LoginView
+from cosinnus.api_frontend.views.user import LoginView, SignupView
 from cosinnus.core.registries.group_models import group_model_registry
 
 
@@ -18,4 +18,5 @@ for url_key in group_model_registry:
 
 urlpatterns += [
     url(r'^api/v3/login/', LoginView.as_view(), name='api-login'),
+    url(r'^api/v3/signup/', SignupView.as_view(), name='api-signup'),
 ]
