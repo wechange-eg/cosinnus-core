@@ -15,6 +15,7 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus_cloud.utils.text import utf8_encode
 from cosinnus.models.group import CosinnusPortal
 from oauth2_provider.models import Application
+from django.db.utils import DatabaseError
 
 
 logger = logging.getLogger("cosinnus")
@@ -223,12 +224,25 @@ def create_group(groupid: str) -> Optional[OCSResponse]:
             return None
         raise
 
+def delete_group(groupid: str) -> Optional[OCSResponse]:
+    try:
+        return _response_or_raise(
+            requests.delete(
+                f"{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}/ocs/v1.php/cloud/groups/{groupid}",
+                auth=settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH,
+                headers=HEADERS,
+            )
+        )
+    except OCSException as e:
+        raise
+
 
 def create_group_folder(
     name: str, group_id: str, group, raise_on_existing_name=True
 ) -> Optional[OCSResponse]:
     """Creates a nextcloud groupfolder for the given group, sets its quota, and returns its
-    nextcloud DB id."""
+    nextcloud DB id.
+    This method saves the group if the folder creation was successful. """
     # First, check whether the name is already taken (workaround for bug in groupfolders)
     response = _response_or_raise(
         requests.get(
@@ -237,28 +251,32 @@ def create_group_folder(
             auth=settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH,
         )
     )
-    
+    if not response.data:
+        logger.error(
+            "Nextcloud folder creation could not check for existing folder, cancelling!",
+            extra={
+                "group": group,
+                "folder_name": name,
+            },
+        )
+        return
+        
     # if a group folder with that name exists already in the NC, do nothing, as this is already our target folder
-    same_name_entries = (
-        []
-        if not response.data
-        else [
-            folder for folder in response.data.values() if folder["mount_point"] == name
-        ]
-    )
+    same_name_entries = [
+        folder for folder in response.data.values() if folder["mount_point"] == name
+    ]
     if len(same_name_entries) > 0:
-        # we do however, check if the folder id is set in the cosinnus group!
-        if not group.nextcloud_groupfolder_id:
-            logger.info(
-                "Group had its nextcloud groupfolder id missing - corrected it with matched folder!"
-            )
-            group.nextcloud_groupfolder_id = int(same_name_entries[0].get("id"))
-            group.save()
-
         if raise_on_existing_name:
             raise ValueError("A groupfolder with that name already exists")
         else:
             logger.info("group folder [%s] already exists, doing nothing", name)
+            # we do however, check if the folder id is set in the cosinnus group!
+            if not group.nextcloud_groupfolder_id:
+                logger.info(
+                    "Group had its nextcloud groupfolder id missing - corrected it with matched folder!"
+                )
+                group.nextcloud_groupfolder_id = int(same_name_entries[0].get("id"))
+                group.save(update_fields=['nextcloud_groupfolder_id'])
             # doing nothing except making sure the group has access to the folder
             add_group_access_for_folder(group_id, group.nextcloud_groupfolder_id)
             return
@@ -273,12 +291,10 @@ def create_group_folder(
         )
     )
     
-    # save the groupfolder id (not the name,
-    # that has been saved at group id generation time in `generate_group_nextcloud_groupfolder_name`)
+    # save the groupfolder id and the group name
     folder_id = response.data["id"]
     if folder_id:
         group.nextcloud_groupfolder_id = int(folder_id)
-        group.save()
     else:
         logger.error(
             "Nextcloud folder creation did not return a folder id!",
@@ -287,6 +303,15 @@ def create_group_folder(
                 "folder_id": folder_id,
             },
         )
+    group.nextcloud_groupfolder_name = name
+    try:
+        # we need to only update these fields, as otherwise we could get save conflicts
+        # if this method is called during group creation (m2m race conditions)
+        group.save(update_fields=['nextcloud_group_id', 'nextcloud_groupfolder_name'])
+    except DatabaseError as e:
+        # we ignore save errors if the field values were unchanged
+        if not 'did not affect any rows' in str(e):
+            raise
         
     # assign our group access to the groupfolder
     add_group_access_for_folder(group_id, folder_id)

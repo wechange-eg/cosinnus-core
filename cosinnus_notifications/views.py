@@ -329,8 +329,11 @@ class AlertsRetrievalView(BasePagedOffsetWidgetView):
     def get_data(self, **kwargs):
         # we cache this data, even if polling is slower than the cache timeout, to prevent
         # high load on many open tabs by the same user
+        data = None
         cache_key = ALERTS_USER_DATA_CACHE_KEY % {'user_id': self.request.user.id}
-        data = cache.get(cache_key)
+        # only cache initial full-data retrieves, not the polled requests from a specific timestamp
+        if not self.newer_than_timestamp:
+            data = cache.get(cache_key)
         if not data:
             data = super(AlertsRetrievalView, self).get_data(**kwargs)
             data.update({
@@ -347,7 +350,9 @@ class AlertsRetrievalView(BasePagedOffsetWidgetView):
                 data.update({
                     'unread_messages_count': get_unread_message_count_for_user(self.request.user),
                 })
-            cache.set(cache_key, data, settings.COSINNUS_NOTIFICATION_ALERTS_CACHE_TIMEOUT)
+            # only cache initial full-data retrieves, not the polled requests from a specific timestamp
+            if not self.newer_than_timestamp:
+                cache.set(cache_key, data, settings.COSINNUS_NOTIFICATION_ALERTS_CACHE_TIMEOUT)
         return data
     
 alerts_retrieval_view = AlertsRetrievalView.as_view()

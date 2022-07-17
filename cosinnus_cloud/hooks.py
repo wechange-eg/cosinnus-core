@@ -21,7 +21,6 @@ from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety, \
 from cosinnus.utils.functions import is_number
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.db.models.signals import post_save
-from cosinnus_cloud.utils.nextcloud import rename_group_and_group_folder
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from django.db.utils import DatabaseError
 from cosinnus_cloud.utils.cosinnus import is_cloud_enabled_for_group
@@ -198,7 +197,7 @@ def generate_group_nextcloud_field(group, field, save=True, force_generate=False
     
     setattr(group, field, unique_name)
     if save == True:
-        group.save()
+        group.save(update_fields=['field'])
     return unique_name
 
 
@@ -208,33 +207,68 @@ def initialize_nextcloud_for_group(group):
         "disabled" (group has no more access to it), the group's access will be re-enabled for the folder. """
     if not is_cloud_enabled_for_group(group):
         return
-    # generate group and groupfolder name if the group doesn't have one yet, or use the existing one
-    generate_group_nextcloud_id(group, save=False)
-    generate_group_nextcloud_groupfolder_name(group, save=False)
-    try:
-        # we need to only update these fields, as otherwise we could get save conflicts
-        # if this method is called during group creation (m2m race conditions)
-        group.save(update_fields=['nextcloud_group_id', 'nextcloud_groupfolder_name'])
-    except DatabaseError as e:
-        # we ignore save errors if the field values were unchanged
-        if not 'did not affect any rows' in str(e):
-            raise
-    
     logger.debug(
         "Creating new group [%s] in Nextcloud (wechange group name [%s])",
         group.nextcloud_groupfolder_name,
         group.nextcloud_group_id,
     )
     
-    # create nextcloud group
-    nextcloud.create_group(group.nextcloud_group_id)
-    # create nextcloud group folder
-    nextcloud.create_group_folder(
-        group.nextcloud_groupfolder_name,
-        group.nextcloud_group_id,
-        group,
-        raise_on_existing_name=False,
-    )
+    # generate group if the group doesn't have one yet, or use the existing one
+    if not group.nextcloud_group_id:
+        generate_group_nextcloud_id(group, save=False)
+        # create nextcloud group and save it if successfull
+        if not group.nextcloud_group_id:
+            logger.error(
+                "Nextcloud group could not be created because a name could not be set for group",
+                extra={'group.id': group.id, 'NC-group-id': group.nextcloud_group_id}
+            )
+            return
+        success_response = nextcloud.create_group(group.nextcloud_group_id)
+        if not success_response:
+            # do not save the 'nextcloud_group_id' field if the group creation was not successful
+            logger.error(
+                "Nextcloud group could not be created for group",
+                extra={'group.id': group.id, 'NC-group-id': group.nextcloud_group_id}
+            )
+            group.nextcloud_group_id = None
+            return
+        try:
+            # we need to only update these fields, as otherwise we could get save conflicts
+            # if this method is called during group creation (m2m race conditions)
+            group.save(update_fields=['nextcloud_group_id'])
+        except DatabaseError as e:
+            # we ignore save errors if the field values were unchanged
+            if not 'did not affect any rows' in str(e):
+                raise
+            
+    # generate groupfolder name if the group doesn't have one yet, or use the existing one and re-grant access to it
+    if not group.nextcloud_groupfolder_name:
+        # generate new group folder and only save if it was created
+        generate_group_nextcloud_groupfolder_name(group, save=False)
+        if not group.nextcloud_group_id or not group.nextcloud_groupfolder_name:
+            logger.error(
+                "Nextcloud group could not be created because a name for the groupfolder could not be set for group",
+                extra={'group.id': group.id, 'NC-group-id': group.nextcloud_group_id, 'NC-groupfolder-id': group.nextcloud_groupfolder_name}
+            )
+            return
+        # create nextcloud group folder and save group it if successful
+        # this method actually saves the group again!
+        nextcloud.create_group_folder(
+            group.nextcloud_groupfolder_name,
+            group.nextcloud_group_id,
+            group,
+            raise_on_existing_name=True,
+        )
+    else:
+        # re-create nextcloud group folder if it was missing or re-enable it if it was deactivated
+        # the difference in this else block is the raise_on_existing_name=False of `create_group_folder`
+        nextcloud.create_group_folder(
+            group.nextcloud_groupfolder_name,
+            group.nextcloud_group_id,
+            group,
+            raise_on_existing_name=False, 
+        )
+            
     # add admin user to group
     nextcloud.add_user_to_group(
         settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME,
@@ -439,9 +473,13 @@ if settings.COSINNUS_CLOUD_ENABLED:
                 'nc_group_id': group.nextcloud_group_id, 
                 'nc_groupfolder_name': group.nextcloud_groupfolder_name,
             }
-            logger.info('Nextcloud: Log: Deleted a groupfolder on group deletion.', extra=extra)
+            logger.info('Nextcloud: Log: Deleting a groupfolder on group deletion.', extra=extra)
             submit_with_retry(
                 nextcloud.delete_groupfolder, 
                 group.nextcloud_groupfolder_id
             )
-    
+            submit_with_retry(
+                nextcloud.delete_group, 
+                group.nextcloud_group_id
+            )
+            logger.info('Nextcloud: Log: Deleted a groupfolder on group deletion.', extra=extra)

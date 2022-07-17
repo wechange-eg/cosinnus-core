@@ -33,11 +33,20 @@ import traceback
 from django.templatetags.static import static
 from cosinnus.models.profile import GlobalUserNotificationSetting
 from cosinnus.utils.functions import resolve_attributes
+from cosinnus.utils.files import get_image_url_for_icon
+from cosinnus.utils.user import is_user_active
+import copy
 
 logger = logging.getLogger('cosinnus')
 
+# this category header will only be shown if there is at least one other category defined in
+# COSINNUS_NOTIFICATIONS_DIGEST_CATEGORIES
+DEFAULT_DIGEST_CATEGORY = [
+    (_('Groups and Projects'), [], 'fa-sitemap', 'cosinnus:user-dashboard', None),
+]
 
-def send_digest_for_current_portal(digest_setting):
+
+def send_digest_for_current_portal(digest_setting, debug_run_for_user=None):
     """ Sends out a daily/weekly digest email to all users *IN THE CURRENT PORTAL*
              who have any notification preferences set to that frequency.
         We will send all events that happened within this
@@ -47,6 +56,8 @@ def send_digest_for_current_portal(digest_setting):
               to balance loads better.
     
         @param digest_setting: UserNotificationPreference.SETTING_DAILY or UserNotificationPreference.SETTING_WEEKLY
+        @param debug_run_for_user: if set to a User object, this will only generate a test digest for the given user
+            and return it as html string. no portal modifications will be made
     """
     portal = CosinnusPortal.get_current()
     portal_group_ids = portal.groups.all().filter(is_active=True).values_list('id', flat=True)
@@ -60,49 +71,55 @@ def send_digest_for_current_portal(digest_setting):
     
     # the main Notification Events QS. anything not in here did not happen in the digest's time span
     timescope_notification_events = NotificationEvent.objects.filter(date__gte=TIME_DIGEST_START, date__lt=TIME_DIGEST_END)
-    users = get_user_model().objects.all().filter(id__in=portal.members)
+    if debug_run_for_user:
+        users = [debug_run_for_user]
+    else:
+        users = get_user_model().objects.all().filter(id__in=portal.members)
+        extra_info = {
+            'notification_event_count': timescope_notification_events.count(),
+            'potential_user_count': users.count(), 
+        }
+        logger.info('Now starting to sending out digests of SETTING=%s in Portal "%s". Data in extra.' % \
+                    (UserNotificationPreference.SETTING_CHOICES[digest_setting][1], portal.slug), extra=extra_info)
+        if settings.DEBUG:
+            print((">> ", extra_info))
     
-    extra_info = {
-        'notification_event_count': timescope_notification_events.count(),
-        'potential_user_count': users.count(), 
-    }
-    logger.info('Now starting to sending out digests of SETTING=%s in Portal "%s". Data in extra.' % \
-                (UserNotificationPreference.SETTING_CHOICES[digest_setting][1], portal.slug), extra=extra_info)
-    if settings.DEBUG:
-        print((">> ", extra_info))
     
     emailed = 0
     for user in users:
-        if getattr(settings, 'COSINNUS_DIGEST_ONLY_FOR_ADMINS', False) and not user.is_superuser:
-            continue
-        if not check_user_can_receive_emails(user):
-            continue
+        if debug_run_for_user:
+            global_wanted = True
+            multi_prefs = list(UserMultiNotificationPreference.objects.filter(user=user, portal=CosinnusPortal.get_current(), setting=digest_setting)\
+                    .values_list('multi_notification_id', flat=True))
+        else:
+            if getattr(settings, 'COSINNUS_DIGEST_ONLY_FOR_ADMINS', False) and not user.is_superuser:
+                continue
+            if not check_user_can_receive_emails(user):
+                continue
         
-        # get all of user's multi prefs for this digest setting 
-        only_multi_prefs_wanted = False
-        multi_prefs = list(UserMultiNotificationPreference.objects.filter(user=user, portal=CosinnusPortal.get_current(), setting=digest_setting)\
-                .values_list('multi_notification_id', flat=True))
-        # check global blanket settings
-        global_wanted = False # flag to allow all events
-        global_setting = GlobalUserNotificationSetting.objects.get_for_user(user)
-        
-        # check if global blanketing settings allow for sending this digest to the user
-        if global_setting != digest_setting and global_setting != GlobalUserNotificationSetting.SETTING_GROUP_INDIVIDUAL:
-            if not multi_prefs:
-                # users who don't have the global setting AND the multi pref setting set to this digest never get an email
-                continue 
-            else:
-                # user still has a multi pref setting for this digest_setting, so go on and check
-                only_multi_prefs_wanted = True 
-        
-        if (digest_setting == UserNotificationPreference.SETTING_DAILY and global_setting == GlobalUserNotificationSetting.SETTING_DAILY) \
-                or (digest_setting == UserNotificationPreference.SETTING_WEEKLY and global_setting == GlobalUserNotificationSetting.SETTING_WEEKLY):
-            global_wanted = True # user wants ALL events in his digest for this digest setting
-
+            # get all of user's multi prefs for this digest setting 
+            only_multi_prefs_wanted = False
+            multi_prefs = list(UserMultiNotificationPreference.objects.filter(user=user, portal=CosinnusPortal.get_current(), setting=digest_setting)\
+                    .values_list('multi_notification_id', flat=True))
+            # check global blanket settings
+            global_wanted = False # flag to allow all events
+            global_setting = GlobalUserNotificationSetting.objects.get_for_user(user)
+            
+            # check if global blanketing settings allow for sending this digest to the user
+            if global_setting != digest_setting and global_setting != GlobalUserNotificationSetting.SETTING_GROUP_INDIVIDUAL:
+                if not multi_prefs:
+                    # users who don't have the global setting AND the multi pref setting set to this digest never get an email
+                    continue 
+                else:
+                    # user still has a multi pref setting for this digest_setting, so go on and check
+                    only_multi_prefs_wanted = True 
+            
+            if (digest_setting == UserNotificationPreference.SETTING_DAILY and global_setting == GlobalUserNotificationSetting.SETTING_DAILY) \
+                    or (digest_setting == UserNotificationPreference.SETTING_WEEKLY and global_setting == GlobalUserNotificationSetting.SETTING_WEEKLY):
+                global_wanted = True # user wants ALL events in his digest for this digest setting
 
         cur_time_zone = timezone.get_current_timezone()
         user_time_zone = user.cosinnus_profile.timezone.zone
-
         cur_language = translation.get_language()
         try:
             # only active users that have logged in before accepted the TOS get notifications
@@ -169,61 +186,111 @@ def send_digest_for_current_portal(digest_setting):
                     'notification_id': pref.notification_id,
                 } for pref in prefs]
             
-            # cluster event messages by group. from here on, the user will almost definitely get an email.
+            # cluster event messages by categories and then by group. 
+            # from here on, the user will almost definitely get an email.
+            categories = copy.deepcopy(settings.COSINNUS_NOTIFICATIONS_DIGEST_CATEGORIES) or []
+            categories += DEFAULT_DIGEST_CATEGORY
             body_html = ''
-            for group in list(set(events.values_list('group', flat=True))): 
-                group_events = events.filter(group=group).order_by('-id') # id faster than ordering by created date 
-                
-                # filter only those events that the user actually has in his prefs, for this group and also
-                # check for target object existing, being visible to user, and other sanity checks if the user should see this object
-                wanted_group_events = []
-                for event in group_events:
-                    is_multipref = is_notification_multipref(event.notification_id)
-                    statecheck = get_requires_object_state_check(event.notification_id)
-                    if user == event.user:
-                        continue  # users don't receive infos about events they caused
-                    if not is_multipref and not global_wanted and not only_multi_prefs_wanted: # skip finegrained preference check on blanket YES
-                        if not (('%d__%s' % (event.group_id, ALL_NOTIFICATIONS_ID) in wanted_group_notifications) or \
-                                ('%d__%s' % (event.group_id, event.notification_id) in wanted_group_notifications)):
-                            continue  # must have an actual subscription to that event type
-                    if event.target_object is None:
-                        continue  # referenced object has been deleted by now
-                    if not check_object_read_access(event.target_object, user):
-                        continue  # user must be able to even see referenced object 
-                    # statecheck if defined, for example for checking if the user is still following the object
-                    if statecheck:
-                        if not resolve_attributes(event.target_object, statecheck, func_args=[user]):
-                            continue
-                    wanted_group_events.append(event)
-                
-                wanted_group_events = sorted(wanted_group_events,  key=lambda e: e.date)
-                
-                # Throw out duplicate events (eg "X was updated" multiple times) for the same object and superceded events. 
-                # The most recent event is always kept.
-                # - follow-events have a supercede list of events that are always less important than the follow-event
-                # - this means that a "created" event would be thrown out by a later "an item you followed was updated" on the same object
-                for this_event in wanted_group_events[:]:
-                    for other_event in wanted_group_events[:]:
-                        if not other_event == this_event:
-                            unprefixed_this_notification_id = this_event.notification_id.split('__')[1]
-                            if this_event.target_object == other_event.target_object and \
-                                    (this_event.notification_id == other_event.notification_id or \
-                                     unprefixed_this_notification_id in get_superceded_multi_preferences(other_event.notification_id)):
-                                wanted_group_events.remove(this_event)
-                                break
-                
-                if wanted_group_events:
-                    group = wanted_group_events[0].group # needs to be resolved, values_list returns only id ints
-                    group_body_html = '\n'.join([render_digest_item_for_notification_event(event) for event in wanted_group_events])
-                    group_template_context = {
-                        'group_body_html': mark_safe(group_body_html),
-                        'group_image_url': CosinnusPortal.get_current().get_domain() + group.get_avatar_thumbnail_url(),
-                        'group_url': group.get_absolute_url(),
-                        'group_name': group['name'],
+            categorized_notification_ids = [nid for __,nids,__,__,__ in categories for nid in nids]
+            for cat_label, cat_notification_ids, cat_icon, cat_url_rev, cat_group_func in categories:
+                # add category header if there is more than one category
+                category_header_html = ''
+                category_html = ''
+                if len(categories) > 1:
+                    header_context = {
+                        'group_body_html': '', # empty on purpose as a header has no body
+                        'group_image_url': portal.get_domain() + get_image_url_for_icon(cat_icon, large=True),
+                        'group_url': reverse(cat_url_rev),
+                        'group_name': cat_label,
                     }
-                    group_html = render_to_string('cosinnus/html_mail/summary_group.html', context=group_template_context)
-                    body_html += group_html + '\n'
+                    category_header_html = render_to_string('cosinnus/html_mail/summary_group.html', context=header_context)
+                
+                for group in list(set(events.values_list('group', flat=True))): 
+                    group_events = events.filter(group=group).order_by('-id') # id faster than ordering by created date 
+                    
+                    # filter only those events that the user actually has in his prefs, for this group and also
+                    # check for target object existing, being visible to user, and other sanity checks if the user should see this object
+                    wanted_group_events = []
+                    for event in group_events:
+                        # include the event only if it belongs to the right category,
+                        # i.e. it is either in the current list of category-ids or 
+                        # the current list is empty ("all ids") and the id does not 
+                        # appear in any other category
+                        _app_label, current_notification_id = event.notification_id.split('__')
+                        if not (current_notification_id in cat_notification_ids or \
+                                (len(cat_notification_ids) == 0 and current_notification_id not in categorized_notification_ids)):
+                            continue
+                        if cat_group_func is not None and hasattr(event, 'group') and event.group and not cat_group_func(event.group):
+                            continue
+                        
+                        is_multipref = is_notification_multipref(event.notification_id)
+                        statecheck = get_requires_object_state_check(event.notification_id)
+                        if user == event.user:
+                            continue  # users don't receive infos about events they caused
+                        if not is_user_active(event.user):
+                            continue # users who are inactive by now are probably banned, so ignore their content
+                        if not is_multipref and not global_wanted and not only_multi_prefs_wanted: # skip finegrained preference check on blanket YES
+                            if not (('%d__%s' % (event.group_id, ALL_NOTIFICATIONS_ID) in wanted_group_notifications) or \
+                                    ('%d__%s' % (event.group_id, event.notification_id) in wanted_group_notifications)):
+                                continue  # must have an actual subscription to that event type
+                        if event.target_object is None:
+                            continue  # referenced object has been deleted by now
+                        if not check_object_read_access(event.target_object, user):
+                            continue  # user must be able to even see referenced object 
+                        # statecheck if defined, for example for checking if the user is still following the object
+                        if statecheck:
+                            if not resolve_attributes(event.target_object, statecheck, func_args=[user]):
+                                continue
+                        wanted_group_events.append(event)
+                    
+                    wanted_group_events = sorted(wanted_group_events,  key=lambda e: e.date)
+                    
+                    # Throw out duplicate events (eg "X was updated" multiple times) for the same object and superceded events. 
+                    # The most recent event is always kept.
+                    # - follow-events have a supercede list of events that are always less important than the follow-event
+                    # - this means that a "created" event would be thrown out by a later "an item you followed was updated" on the same object
+                    for this_event in wanted_group_events[:]:
+                        for other_event in wanted_group_events[:]:
+                            if not other_event == this_event:
+                                unprefixed_this_notification_id = this_event.notification_id.split('__')[1]
+                                if this_event.target_object == other_event.target_object and \
+                                        (this_event.notification_id == other_event.notification_id or \
+                                         unprefixed_this_notification_id in get_superceded_multi_preferences(other_event.notification_id)):
+                                    wanted_group_events.remove(this_event)
+                                    break
+                    
+                    if wanted_group_events:
+                        group = wanted_group_events[0].group # needs to be resolved, values_list returns only id ints
+                        group_body_html = '\n'.join([render_digest_item_for_notification_event(event) for event in wanted_group_events])
+                        # categories may display their items in a condensed list directly under their header
+                        # and the default category displays in a clustered form within a header for each group
+                        # note: currently disabled and not extracted into a conf setting until it is wished for
+                        condense_categories = False
+                        if condense_categories and len(cat_notification_ids) > 0:
+                            category_html += group_body_html + '\n'
+                        else:
+                            group_template_context = {
+                                'group_body_html': mark_safe(group_body_html),
+                                'group_image_url': CosinnusPortal.get_current().get_domain() + group.get_avatar_thumbnail_url(),
+                                'group_url': group.get_absolute_url(),
+                                'group_name': group['name'],
+                            }
+                            group_html = render_to_string('cosinnus/html_mail/summary_group.html', context=group_template_context)
+                            category_html += group_html + '\n'
+                # end for group
+                
+                if category_html:
+                    category_html = category_header_html + '\n' + category_html
+                    body_html += category_html + '\n'
+                    # we currently don't have a proper category header, so add a larger space in-between categories, except for the last
+                    if len(cat_notification_ids) > 0:
+                        body_html += '<br/><br/>\n'
+            # end for category
+                    
+                    
             
+            if debug_run_for_user:
+                return body_html
             # send actual email with full frame template
             if body_html:
                 _send_digest_email(user, mark_safe(body_html), TIME_DIGEST_END, digest_setting)
@@ -257,12 +324,11 @@ def send_digest_for_current_portal(digest_setting):
     logger.info('Finished sending out digests of SETTING=%s in Portal "%s". Data in extra.' % (UserNotificationPreference.SETTING_CHOICES[digest_setting][1], portal.slug), extra=extra_log)
     if settings.DEBUG:
         print(extra_log)
-    
 
-def _send_digest_email(receiver, body_html, digest_generation_time, digest_setting):
-    """ Prepares the actual digest mail and sends it """
-    
-    template = '/cosinnus/html_mail/digest.html'
+
+def _get_digest_email_context(receiver, body_html, digest_generation_time, digest_setting):
+    """ Gets the context for rendering the template for the actual digest mail.
+        Used for `_send_digest_email()` """
     portal_name =  _(settings.COSINNUS_BASE_PAGE_TITLE_TRANS)
     if digest_setting == UserNotificationPreference.SETTING_DAILY:
         subject = _('Your daily digest for %(portal_name)s') % {'portal_name': portal_name}
@@ -292,8 +358,16 @@ def _send_digest_email(receiver, body_html, digest_generation_time, digest_setti
         'prefs_url': mark_safe(preference_url),
         'notification_reason': reason,
         'digest_setting': digest_setting,
+        'subject': subject,
     }
-    send_mail_or_fail(receiver.email, subject, template, context, is_html=True)
+    return context
+
+
+def _send_digest_email(receiver, body_html, digest_generation_time, digest_setting):
+    """ Prepares the actual digest mail and sends it """
+    template = '/cosinnus/html_mail/digest.html'
+    context = _get_digest_email_context(receiver, body_html, digest_generation_time, digest_setting)
+    send_mail_or_fail(receiver.email, context['subject'], template, context, is_html=True)
 
 
 def cleanup_stale_notifications():

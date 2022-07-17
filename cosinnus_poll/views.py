@@ -99,8 +99,10 @@ poll_list_view = PollListView.as_view()
 
 
 class OptionInlineFormset(InlineFormSetFactory):
-    extra = 25
-    max_num = 25
+    factory_kwargs = {
+        'extra': 25,
+        'max_num': 25,
+    }
     form_class = OptionForm
     model = Option
     

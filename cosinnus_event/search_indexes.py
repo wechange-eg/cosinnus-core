@@ -75,7 +75,7 @@ class EventIndex(BaseTaggableObjectIndex, StoredDataIndexMixin, indexes.Indexabl
     def index_queryset(self, using=None):
         qs = super(EventIndex, self).index_queryset(using=using)
         # exclude hidden proxy from search index
-        qs = qs.exclude(is_hidden_group_proxy=True)
+        qs = qs.exclude(is_hidden_group_proxy=True).filter(conferenceevent__isnull=True)
         return qs
     
     def should_update(self, instance, **kwargs):

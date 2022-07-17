@@ -119,3 +119,7 @@ class CustomReplyForm(CustomWriteForm):
     def save(self, *args, **kwargs):
         return super(CustomReplyForm, self).save(
             self.recipient, *args, **kwargs)
+
+
+class ContactMessageForm(forms.Form):
+    contact_message = forms.CharField(widget=forms.Textarea)

@@ -12,6 +12,7 @@ if settings.COSINNUS_ROCKET_ENABLED:
         url(r'^messages/$', RocketChatIndexView.as_view(), name='message-global'),
         url(r'^messages/write/(?P<username>[^/]+)/$', RocketChatWriteView.as_view(), name='message-write'),
         url(r'^messages/write/group/(?P<slug>[^/]+)/$', RocketChatWriteGroupView.as_view(), name='message-write-group'),
+        url(r'^messages/write/group/(?P<slug>[^/]+)/compose/$', RocketChatWriteGroupComposeView.as_view(), name='message-write-group-compose'),
     ]
     cosinnus_group_patterns = []
 else:
