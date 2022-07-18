@@ -9,11 +9,11 @@ from cosinnus.api_frontend.handlers.error_codes import ERROR_LOGIN_INCORRECT_CRE
     ERROR_LOGIN_USER_DISABLED, ERROR_SIGNUP_EMAIL_IN_USE, \
     ERROR_SIGNUP_CAPTCHA_SERVICE_DOWN, ERROR_SIGNUP_CAPTCHA_INVALID, \
     ERROR_SIGNUP_NAME_NOT_ACCEPTABLE
-from cosinnus.api_frontend.handlers.exceptions import CosinnusValidationError
 from cosinnus.conf import settings
 from cosinnus.forms.user import USER_NAME_FIELDS_MAX_LENGTH, \
     UserSignupFinalizeMixin
 from cosinnus.utils.validators import validate_username
+from rest_framework.exceptions import ValidationError
 
 
 class CosinnusUserLoginSerializer(serializers.Serializer):
@@ -26,9 +26,9 @@ class CosinnusUserLoginSerializer(serializers.Serializer):
         user = authenticate(
             username=attrs['username'], password=attrs['password'])
         if not user:
-            raise CosinnusValidationError(ERROR_LOGIN_INCORRECT_CREDENTIALS)
+            raise ValidationError(ERROR_LOGIN_INCORRECT_CREDENTIALS)
         if not user.is_active:
-            raise CosinnusValidationError(ERROR_LOGIN_USER_DISABLED)
+            raise ValidationError(ERROR_LOGIN_USER_DISABLED)
         return {'user': user}
     
 
@@ -69,20 +69,20 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
             }
             captcha_response = requests.post(settings.VERIFY_URL, data=data)
             if not captcha_response.status_code == 200:
-                raise CosinnusValidationError(ERROR_SIGNUP_CAPTCHA_SERVICE_DOWN)
+                raise ValidationError(ERROR_SIGNUP_CAPTCHA_SERVICE_DOWN)
             captcha_success =  captcha_response.json().get('success', False)
             if not captcha_success:
-                raise CosinnusValidationError(ERROR_SIGNUP_CAPTCHA_INVALID)
+                raise ValidationError(ERROR_SIGNUP_CAPTCHA_INVALID)
         
         # email
         email = attrs['email'].lower().strip()
         if get_user_model().objects.filter(email__iexact=email):
-            raise CosinnusValidationError(ERROR_SIGNUP_EMAIL_IN_USE)
+            raise ValidationError(ERROR_SIGNUP_EMAIL_IN_USE)
         
         # first name shenanigans
         first_name = attrs['first_name'].lower().strip()
         if not first_name or len(first_name) < 2:
-            raise CosinnusValidationError(ERROR_SIGNUP_NAME_NOT_ACCEPTABLE)
+            raise ValidationError(ERROR_SIGNUP_NAME_NOT_ACCEPTABLE)
         return attrs
 
     def create(self, validated_data):

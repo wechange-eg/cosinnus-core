@@ -74,10 +74,9 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
             data.update({
                 'refresh': user_tokens['refresh'],
                 'access': user_tokens['access'],
-                'next': '/signup/welcome/' # TODO redirect where
             })
         else:
             data.update({
-                'next': '/signup/welcome/' # TODO: show a message for a user if they arent authenticated
+                'next': '/signup/notloggedinyet/' # TODO: show a message for a user if they arent authenticated
             })
         return Response(data)
