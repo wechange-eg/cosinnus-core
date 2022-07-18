@@ -14,6 +14,8 @@ from django.urls.base import reverse
 from cosinnus.conf import settings
 from cosinnus.utils.permissions import IsNotAuthenticated
 from cosinnus.views.user import UserSignupTriggerEventsMixin
+from rest_framework.renderers import BrowsableAPIRenderer
+from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 
 
 class LoginView(LoginViewAdditionalLogicMixin, APIView):
@@ -21,6 +23,7 @@ class LoginView(LoginViewAdditionalLogicMixin, APIView):
         
     # disallow logged in users
     permission_classes = (IsNotAuthenticated,)
+    renderer_classes = (BrowsableAPIRenderer, CosinnusAPIFrontendJSONResponseRenderer,)
 
     def post(self, request):
         serializer = CosinnusUserLoginSerializer(data=request.data)
@@ -52,6 +55,7 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
     
     # disallow logged in users
     permission_classes = (IsNotAuthenticated,)
+    renderer_classes = (BrowsableAPIRenderer, CosinnusAPIFrontendJSONResponseRenderer,)
 
     def post(self, request):
         serializer = CosinnusUserSignupSerializer(data=request.data)
