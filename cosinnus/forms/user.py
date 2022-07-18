@@ -90,9 +90,72 @@ class UserCreationFormDynamicFieldsMixin(_DynamicFieldsBaseFormMixin):
                     profile.dynamic_fields[field_name] = self.cleaned_data.get(field_name, None)
                     profile.save()
         return ret
+
+
+class UserSignupFinalizeMixin(object):
+    """ Mixin for `finalize_user_object_after_signup`,
+        used by `UserCreationForm` and `CosinnusUserSignupSerializer` """
+    
+    def finalize_user_object_after_signup(self, user, cleaned_data):
+        """ Performs extra initialization logic after a user object has just been created
+            after a fresh user signup.
+            This should be called before 
+            `UserSignupTriggerEventsMixin.trigger_events_after_user_signup` """
+        
+        user.username = str(user.id)
+        user.save()
+        
+        # create a portal membership for the new user for the current portal
+        CosinnusPortalMembership.objects.get_or_create(group=CosinnusPortal.get_current(), user=user, defaults={
+            'status': 1,
+        })
+        
+        media_tag = user.cosinnus_profile.media_tag
+        media_tag_needs_saving = False
+        
+        # set media_tag visibility
+        default_visibility = None
+        # set the user's visibility to public if the setting says so
+        if settings.COSINNUS_USER_DEFAULT_VISIBLE_WHEN_CREATED:
+            default_visibility = BaseTagObject.VISIBILITY_ALL
+        # set the user's visibility to the locked value if the setting says so
+        if settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None:
+            default_visibility = settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED
+        if default_visibility is not None:
+            media_tag.visibility = default_visibility
+            media_tag_needs_saving = True
+        
+        # set user location field if included in signup
+        if settings.COSINNUS_USER_SIGNUP_INCLUDES_LOCATION_FIELD:
+            if cleaned_data.get('location', None) and \
+                        cleaned_data.get('location_lat', None) and \
+                        cleaned_data.get('location_lon', None):
+                media_tag.location = cleaned_data.get('location')
+                media_tag.location_lat = cleaned_data.get('location_lat')
+                media_tag.location_lon = cleaned_data.get('location_lon')
+                media_tag_needs_saving = True
+        
+        # set user topic field if included in signup
+        if settings.COSINNUS_USER_SIGNUP_INCLUDES_TOPIC_FIELD:
+            if cleaned_data.get('topics', None):
+                media_tag.topics = cleaned_data.get('topics')
+            media_tag_needs_saving = True
+            
+        if media_tag_needs_saving:
+            media_tag.save()
+        
+        # set the user's tos_accepted flag to true and date to now
+        accept_user_tos_for_portal(user, save=False)
+        
+        # set the newsletter opt-in
+        if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
+            user.cosinnus_profile.settings['newsletter_opt_in'] = cleaned_data.get('newsletter_opt_in')
+                
+        user.cosinnus_profile.save()
     
 
-class UserCreationForm(UserCreationFormDynamicFieldsMixin, TermsOfServiceFormFields, ManagedTagFormMixin, DjUserCreationForm):
+class UserCreationForm(UserSignupFinalizeMixin, UserCreationFormDynamicFieldsMixin, TermsOfServiceFormFields, 
+        ManagedTagFormMixin, DjUserCreationForm):
     # Inherit from UserCreationForm for proper password hashing!
     
     class Meta(object):
@@ -140,7 +203,7 @@ class UserCreationForm(UserCreationFormDynamicFieldsMixin, TermsOfServiceFormFie
                 self.fields['location_lon'].required = True
         
         # if the topic field is to be shown in signup, show it here
-        if settings.COSINNUS_USER_SIGNUP_INCLUDES_LOCATION_FIELD:
+        if settings.COSINNUS_USER_SIGNUP_INCLUDES_TOPIC_FIELD:
             TagObject = get_tag_object_model()
             self.fields['topics'] = CommaSeparatedSelect2MultipleChoiceField(choices=TagObject.TOPIC_CHOICES, required=False)
     
@@ -171,57 +234,7 @@ class UserCreationForm(UserCreationFormDynamicFieldsMixin, TermsOfServiceFormFie
                 # if user was saved, but a hook caused an exception, carry on
                 logger.error('Non-critical error during user creation, continuing.', e)
         
-        user.username = str(user.id)
-        user.save()
-        
-        # create a portal membership for the new user for the current portal
-        CosinnusPortalMembership.objects.get_or_create(group=CosinnusPortal.get_current(), user=user, defaults={
-            'status': 1,
-        })
-        
-        media_tag = user.cosinnus_profile.media_tag
-        media_tag_needs_saving = False
-        
-        # set media_tag visibility
-        default_visibility = None
-        # set the user's visibility to public if the setting says so
-        if settings.COSINNUS_USER_DEFAULT_VISIBLE_WHEN_CREATED:
-            default_visibility = BaseTagObject.VISIBILITY_ALL
-        # set the user's visibility to the locked value if the setting says so
-        if settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED is not None:
-            default_visibility = settings.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED
-        if default_visibility is not None:
-            media_tag.visibility = default_visibility
-            media_tag_needs_saving = True
-        
-        # set user location field if included in signup
-        if settings.COSINNUS_USER_SIGNUP_INCLUDES_LOCATION_FIELD:
-            if self.cleaned_data.get('location', None) and \
-                        self.cleaned_data.get('location_lat', None) and \
-                        self.cleaned_data.get('location_lon', None):
-                media_tag.location = self.cleaned_data.get('location')
-                media_tag.location_lat = self.cleaned_data.get('location_lat')
-                media_tag.location_lon = self.cleaned_data.get('location_lon')
-                media_tag_needs_saving = True
-        
-        # set user topic field if included in signup
-        if settings.COSINNUS_USER_SIGNUP_INCLUDES_LOCATION_FIELD:
-            if self.cleaned_data.get('topics', None):
-                media_tag.topics = self.cleaned_data.get('topics')
-            media_tag_needs_saving = True
-            
-        if media_tag_needs_saving:
-            media_tag.save()
-        
-        # set the user's tos_accepted flag to true and date to now
-        accept_user_tos_for_portal(user, save=False)
-        
-        # set the newsletter opt-in
-        if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
-            user.cosinnus_profile.settings['newsletter_opt_in'] = self.cleaned_data.get('newsletter_opt_in')
-                
-        user.cosinnus_profile.save()
-        
+        self.finalize_user_object_after_signup(user, self.cleaned_data)
         return user
 
 

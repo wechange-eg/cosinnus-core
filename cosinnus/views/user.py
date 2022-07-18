@@ -237,16 +237,126 @@ class SetInitialPasswordView(TemplateView):
             raise PermissionDenied()
 
 
-class UserCreateView(CreateView):
+class UserSignupTriggerEventsMixin(object):
+    """ Mixin for`trigger_events_after_user_signup`,
+        used by `UserCreateView` and `SignupView` """
+        
+    message_success = _('Your account "%(user)s" was registered successfully. Welcome to the community!')
+    message_success_inactive = _('User "%(user)s" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address "%(email)s" when this happens.')
+    message_success_email_verification = _('Thank you for signing up and welcome to the platform! We sent an email to your address "%(email)s" - please click the link contained in it to verify your email address!')
+    
+    def trigger_events_after_user_signup(self, user, request): 
+        """ Triggers all kinds of events and signals after a user has signed up and their profile creation
+            has been completed. Should be called after 
+            `UserSignupFinalizeMixin.finalize_user_object_after_signup`
+            @return: None or an alternate return redirect URL  """
+        
+        # sanity check, retrieve the user's profile (will create it if it doesnt exist)
+        if not user.cosinnus_profile:
+            get_user_profile_model()._default_manager.get_for_user(user)
+        
+        # set current django language during signup as user's profile language
+        lang = get_language()
+        if not user.cosinnus_profile.language == lang:
+            user.cosinnus_profile.language = lang
+            user.cosinnus_profile.save(update_fields=['language']) 
+        
+        # set user inactive if this portal needs user approval and send an email to portal admins
+        if CosinnusPortal.get_current().users_need_activation:
+            user.is_active = False
+            user.save()
+            data = get_common_mail_context(request)
+            data.update({
+                'user': user,
+            })
+            # message portal admins of request
+            subject = render_to_string('cosinnus/mail/user_register_notification_subj.txt', data)
+            email_portal_admins(subject, 'cosinnus/mail/user_register_notification.html', data)
+            # message user for pending request
+            subj_user = render_to_string('cosinnus/mail/user_registration_pending_subj.txt', data)
+            text = textfield(render_to_string('cosinnus/mail/user_registration_pending.html', data))
+            send_html_mail_threaded(user, subj_user, text)
+            # TODO enable for API
+            messages.success(request, self.message_success_inactive % {'user': user.email, 'email': user.email})
+            # since anonymous users have no session, show the success message in the template via a flag
+            return redirect_with_next(reverse('login'), request)
+        else:
+            # if registrations are open, the user may log in immediately. set the email_verified flag depending
+            # on portal settings
+            do_login = True
+            if CosinnusPortal.get_current().email_needs_verification:
+                # send out an instant "please verifiy your e-mail" mail after the user registers,
+                # if this is enabled, or the portal locks signups behind verifying the mail
+                # if this is not set, users have to manually click the "send verification mail" site header to verify
+                if (settings.COSINNUS_USER_SIGNUP_SEND_VERIFICATION_MAIL_INSTANTLY or \
+                         settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN):
+                    send_user_email_to_verify(user, user.email, request)
+                    messages.success(request, self.message_success_email_verification % {'email': user.email})
+                else:
+                    messages.success(request, self.message_success % {'user': user.email})
+                if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
+                    # show message to tell the user they need to register on this portal
+                    messages.warning(request, _('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.'))
+                    do_login = False
+            else:
+                user_profile = user.cosinnus_profile
+                user_profile.email_verified = True
+                user_profile.save()
+                _send_user_welcome_email_if_enabled(user)
+                messages.success(request, self.message_success % {'user': user.email})
+            
+            if do_login:
+                # log the user in
+                user.backend = 'cosinnus.backends.EmailAuthBackend'
+                login(request, user)
+            
+            # send user account creation signal, the audience is empty because this is a moderator-only notification
+            user_profile = user.cosinnus_profile
+            # need to attach a group to notification objects
+            forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+            forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
+            setattr(user_profile, 'group', forum_group) 
+            cosinnus_notifications.user_account_created.send(sender=self, user=user, obj=user_profile, audience=[])
+            
+        
+        # send user registration signal
+        signals.user_registered.send(sender=self, user=user)
+        
+        # check if there was a token group invite associated with the signup
+        invite_token = request.POST.get('invite_token', None)
+        if invite_token:
+            invite = get_object_or_None(CosinnusGroupInviteToken, token__iexact=invite_token, portal=CosinnusPortal.get_current())
+            if not invite:
+                messages.warning(request, _('The invite token you have used does not exist. Please contact the responsible person to get a valid link!'))
+            elif not invite.is_active:
+                messages.warning(request, _('Sorry, but the invite token you have used is not active yet or not active anymore!'))
+            else:
+                success = apply_group_invite_token_for_user(invite, user)
+                if success:
+                    messages.success(request, _('Token invitations applied. You are now a member of the associated projects/groups!'))
+                else:
+                    messages.error(request, _('There was an error while processing your invites. Some of your invites may not have been applied.'))
+                # also add a welcome-redirect to the first invite group for the user
+                # (non-prio so the welcome page shows first!)
+                try:
+                    first_invite_group = invite.invite_groups.first()
+                    user.cosinnus_profile.add_redirect_on_next_page(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': first_invite_group}), message=None, priority=False)
+                except Exception as e:
+                    logger.error('Error while applying a welcome-redirect from invite token to a freshly signed up user profile', 
+                                 extra={'exception': e, 'reason': str(e)})
+        
+        if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
+            # add redirect to the welcome-settings page, with priority so that it is shown as first one
+            user.cosinnus_profile.add_redirect_on_next_page(redirect_with_next(reverse('cosinnus:welcome-settings'), request), message=None, priority=True)
+        return None
+
+
+class UserCreateView(UserSignupTriggerEventsMixin, CreateView):
 
     form_class = UserCreationForm
     model = USER_MODEL
     template_name = 'cosinnus/registration/signup.html'
 
-    message_success = _('Your account "%(user)s" was registered successfully. Welcome to the community!')
-    message_success_inactive = _('User "%(user)s" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address "%(email)s" when this happens.')
-    message_success_email_verification = _('Thank you for signing up and welcome to the platform! We sent an email to your address "%(email)s" - please click the link contained in it to verify your email address!')
-    
     def get_initial(self):
         """ Allow pre-populating managed tags on signup using URL params /signup/?mtag=tag1,tag2 """
         initial = super().get_initial()
@@ -265,103 +375,9 @@ class UserCreateView(CreateView):
     def form_valid(self, form):
         ret = super(UserCreateView, self).form_valid(form)
         user = self.object
-        
-        # sanity check, retrieve the user's profile (will create it if it doesnt exist)
-        if not user.cosinnus_profile:
-            get_user_profile_model()._default_manager.get_for_user(user)
-        
-        # set current django language during signup as user's profile language
-        lang = get_language()
-        if not user.cosinnus_profile.language == lang:
-            user.cosinnus_profile.language = lang
-            user.cosinnus_profile.save(update_fields=['language']) 
-        
-        # set user inactive if this portal needs user approval and send an email to portal admins
-        if CosinnusPortal.get_current().users_need_activation:
-            user.is_active = False
-            user.save()
-            data = get_common_mail_context(self.request)
-            data.update({
-                'user': user,
-            })
-            # message portal admins of request
-            subject = render_to_string('cosinnus/mail/user_register_notification_subj.txt', data)
-            email_portal_admins(subject, 'cosinnus/mail/user_register_notification.html', data)
-            # message user for pending request
-            subj_user = render_to_string('cosinnus/mail/user_registration_pending_subj.txt', data)
-            text = textfield(render_to_string('cosinnus/mail/user_registration_pending.html', data))
-            send_html_mail_threaded(user, subj_user, text)
-            messages.success(self.request, self.message_success_inactive % {'user': user.email, 'email': user.email})
-            # since anonymous users have no session, show the success message in the template via a flag
-            ret = HttpResponseRedirect(redirect_with_next(reverse('login'), self.request))
-        else:
-            # if registrations are open, the user may log in immediately. set the email_verified flag depending
-            # on portal settings
-            do_login = True
-            if CosinnusPortal.get_current().email_needs_verification:
-                # send out an instant "please verifiy your e-mail" mail after the user registers,
-                # if this is enabled, or the portal locks signups behind verifying the mail
-                # if this is not set, users have to manually click the "send verification mail" site header to verify
-                if (settings.COSINNUS_USER_SIGNUP_SEND_VERIFICATION_MAIL_INSTANTLY or \
-                         settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN):
-                    send_user_email_to_verify(user, user.email, self.request)
-                    messages.success(self.request, self.message_success_email_verification % {'email': user.email})
-                else:
-                    messages.success(self.request, self.message_success % {'user': user.email})
-                if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
-                    # show message to tell the user they need to register on this portal
-                    messages.warning(self.request, _('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.'))
-                    do_login = False
-            else:
-                user_profile = user.cosinnus_profile
-                user_profile.email_verified = True
-                user_profile.save()
-                _send_user_welcome_email_if_enabled(user)
-                messages.success(self.request, self.message_success % {'user': user.email})
-            
-            if do_login:
-                # log the user in
-                user.backend = 'cosinnus.backends.EmailAuthBackend'
-                login(self.request, user)
-            
-            # send user account creation signal, the audience is empty because this is a moderator-only notification
-            user_profile = user.cosinnus_profile
-            # need to attach a group to notification objects
-            forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
-            forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
-            setattr(user_profile, 'group', forum_group) 
-            cosinnus_notifications.user_account_created.send(sender=self, user=user, obj=user_profile, audience=[])
-            
-        
-        # send user registration signal
-        signals.user_registered.send(sender=self, user=user)
-        
-        # check if there was a token group invite associated with the signup
-        invite_token = self.request.POST.get('invite_token', None)
-        if invite_token:
-            invite = get_object_or_None(CosinnusGroupInviteToken, token__iexact=invite_token, portal=CosinnusPortal.get_current())
-            if not invite:
-                messages.warning(self.request, _('The invite token you have used does not exist. Please contact the responsible person to get a valid link!'))
-            elif not invite.is_active:
-                messages.warning(self.request, _('Sorry, but the invite token you have used is not active yet or not active anymore!'))
-            else:
-                success = apply_group_invite_token_for_user(invite, user)
-                if success:
-                    messages.success(self.request, _('Token invitations applied. You are now a member of the associated projects/groups!'))
-                else:
-                    messages.error(self.request, _('There was an error while processing your invites. Some of your invites may not have been applied.'))
-                # also add a welcome-redirect to the first invite group for the user
-                # (non-prio so the welcome page shows first!)
-                try:
-                    first_invite_group = invite.invite_groups.first()
-                    user.cosinnus_profile.add_redirect_on_next_page(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': first_invite_group}), message=None, priority=False)
-                except Exception as e:
-                    logger.error('Error while applying a welcome-redirect from invite token to a freshly signed up user profile', 
-                                 extra={'exception': e, 'reason': str(e)})
-        
-        if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
-            # add redirect to the welcome-settings page, with priority so that it is shown as first one
-            user.cosinnus_profile.add_redirect_on_next_page(redirect_with_next(reverse('cosinnus:welcome-settings'), self.request), message=None, priority=True)
+        redirect = self.trigger_events_after_user_signup(user, self.request)
+        if redirect:
+            ret = HttpResponseRedirect(redirect)
         return ret
     
     def dispatch(self, *args, **kwargs):

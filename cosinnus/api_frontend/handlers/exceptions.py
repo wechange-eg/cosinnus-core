@@ -1,8 +1,9 @@
 from rest_framework import serializers
 
-
+# deprecated/unused
 class CosinnusValidationError(serializers.ValidationError):
-    """ A validation error that builds its error messages from a cosinnus error code tuple 
+    """ Deprecated:
+        A validation error that builds its error messages from a cosinnus error code tuple 
         from `cosinnus.api_frontend.handlers.error_objs`.
         
         Sadly we cannot attach the error code to either the ValidationError itself 
