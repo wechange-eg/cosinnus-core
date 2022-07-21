@@ -1260,8 +1260,14 @@ class CosinnusConf(AppConf):
     # 0 for projects; 1 for groups; 2 for conferences
     ENABLE_USER_JOIN_TOKENS_FOR_GROUP_TYPE = []
     
+    # whether to enable enforcing hcaptcha
+    USE_HCAPTCHA = False
+    
     # the secret key for the hcaptcha. set in .env
     HCAPTCHA_SECRET_KEY = None
+    
+    # the URL at which to verify the hcaptcha response
+    HCAPTCHA_VERIFY_URL = 'https://hcaptcha.com/siteverify'
     
     
 class CosinnusDefaultSettings(AppConf):

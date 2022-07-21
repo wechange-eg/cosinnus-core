@@ -1,9 +1,11 @@
+import logging
 import random
 
 from django.contrib.auth import authenticate, get_user_model
 from django.core.validators import MaxLengthValidator, MinLengthValidator
 import requests
 from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
 
 from cosinnus.api_frontend.handlers.error_codes import ERROR_LOGIN_INCORRECT_CREDENTIALS, \
     ERROR_LOGIN_USER_DISABLED, ERROR_SIGNUP_EMAIL_IN_USE, \
@@ -13,7 +15,9 @@ from cosinnus.conf import settings
 from cosinnus.forms.user import USER_NAME_FIELDS_MAX_LENGTH, \
     UserSignupFinalizeMixin
 from cosinnus.utils.validators import validate_username
-from rest_framework.exceptions import ValidationError
+
+
+logger = logging.getLogger('cosinnus')
 
 
 class CosinnusUserLoginSerializer(serializers.Serializer):
@@ -49,9 +53,8 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
     )
     if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
         newsletter_opt_in = serializers.BooleanField(required=False, default=False)
-    # hcaptcha, disabled in DEBUG mode
-    if not settings.DEBUG:
-        hcaptcha_response = serializers.CharField(required=True)
+    # hcaptcha, required if enabled for this portal
+    hcaptcha_response = serializers.CharField(required=settings.COSINNUS_USE_HCAPTCHA)
     
     # missing/not-yet-supported fields for the signup endpoint:
     
@@ -62,13 +65,20 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
 
     def validate(self, attrs):
         # hcaptcha. do not validate the email before the captcha has been processed as valid!
-        if not settings.DEBUG:
+        if 'hcaptcha_response' in attrs or settings.COSINNUS_USE_HCAPTCHA:
+            # for debugging, we allow processing hcaptcha if the param is sent in POST,
+            # even if COSINNUS_USE_HCAPTCHA is not activated
             data = {
-                'secret': settings.HCAPTCHA_SECRET_KEY,
+                'secret': settings.COSINNUS_HCAPTCHA_SECRET_KEY,
                 'response': attrs['hcaptcha_response']
             }
-            captcha_response = requests.post(settings.VERIFY_URL, data=data)
+            captcha_response = requests.post(settings.COSINNUS_HCAPTCHA_VERIFY_URL, data=data)
             if not captcha_response.status_code == 200:
+                extra = {
+                    'status': captcha_response.status_code,
+                    'details': captcha_response.json(),
+                }
+                logger.error('User Signup could not be completed because hCaptcha could not be verified at the provider, response was not 200.', extra=extra)
                 raise ValidationError(ERROR_SIGNUP_CAPTCHA_SERVICE_DOWN)
             captcha_success =  captcha_response.json().get('success', False)
             if not captcha_success:
