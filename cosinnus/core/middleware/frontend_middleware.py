@@ -20,13 +20,13 @@ class FrontendMiddleware(MiddlewareMixin):
     param_value = "3"
 
     def process_request(self, request):
-        if settings.COSINNUS_FRONTEND_ENABLED:
+        if settings.COSINNUS_V3_FRONTEND_ENABLED:
             if request.user.is_authenticated and \
                 request.user.cosinnus_profile.settings.get(
                     USERPROFILE_SETTING_FRONTEND_DISABLED, False):
                 return
             matched = False
-            for url_pattern in settings.COSINNUS_FRONTEND_URL_PATTERNS:
+            for url_pattern in settings.COSINNUS_V3_FRONTEND_URL_PATTERNS:
                 if re.match(url_pattern, request.path):
                     matched = True
             if matched:

@@ -871,6 +871,18 @@ class CosinnusConf(AppConf):
     # in v2, the footer is disabled by default. set this to True to enable it!
     V2_FORCE_SITE_FOOTER = False
     
+    # whether or not to use redirects to the v3 frontend
+    # by appending a '?v=3' GET param for certain URL paths
+    # paths are defined in 
+    V3_FRONTEND_ENABLED = False
+    
+    # URL paths that get redirected to the new frontend
+    # if V3_FRONTEND_ENABLED==True
+    V3_FRONTEND_URL_PATTERNS = [
+        "^/login/$",
+        "^/signup/$", 
+    ]
+    
     # whether the regular user signup method is enabled for this portal
     USER_SIGNUP_ENABLED = True
     
