@@ -92,13 +92,15 @@ class BaseTagObject(models.Model):
     VISIBILITY_ALL = 2 # for Users, this setting means: "Everyone can see me"
 
     #: Choices for :attr:`visibility`: ``(int, str)``
-    # Empty first choice must be included for select2 placeholder compatibility!
-    VISIBILITY_CHOICES = (
-        ('', ''),
+    _VISIBILITY_CHOICES = (
         (VISIBILITY_USER, _('Only me')),  
         (VISIBILITY_GROUP, _('Team members only')), 
         (VISIBILITY_ALL, (_('Platform-wide (visible for all portal members)') if settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN == True else _('Public (visible without login)'))), 
     )
+    # Empty first choice must be included for select2 placeholder compatibility!
+    VISIBILITY_CHOICES = (
+        ('', ''),
+    ) + _VISIBILITY_CHOICES
     VISIBILITY_VALID_VALUES = (
         VISIBILITY_USER,
         VISIBILITY_GROUP,

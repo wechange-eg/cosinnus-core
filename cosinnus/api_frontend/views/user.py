@@ -157,7 +157,7 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
 
 
 
-@swagger_auto_schema(request_body=CosinnusUserSignupSerializer)
+@swagger_auto_schema(request_body=CosinnusHybridUserSerializer)
 class UserProfileView(UserSignupTriggerEventsMixin, APIView):
     """ For GETs, returns the logged in user's profile information.
         For POSTs, allows changing the logged in user's own profile fields, 
@@ -166,13 +166,17 @@ class UserProfileView(UserSignupTriggerEventsMixin, APIView):
     permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     
+    def get_data(self, user_serializer):
+        return {
+            'user': user_serializer.data,
+        }
+    
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
     #       Note: Also needs docs on our custom data/timestamp/version wrapper!
     # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
     # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
     @swagger_auto_schema(
-        request_body=CosinnusUserSignupSerializer,
         responses={'200': openapi.Response(
             description='WIP: Response info missing. Short example included',
             examples={
@@ -192,18 +196,38 @@ class UserProfileView(UserSignupTriggerEventsMixin, APIView):
             }
         )}
     )
-    
-    def get_data(self, user_serializer):
-        return {
-            'user': user_serializer.data,
-        }
-    
     def get(self, request):
         user = request.user
         user_serializer = CosinnusHybridUserSerializer(user, context={'request': request})
         data = self.get_data(user_serializer)
         return Response(data)
     
+    # todo: generate proper response, by either putting the entire response into a
+    #       Serializer, or defining it by hand
+    #       Note: Also needs docs on our custom data/timestamp/version wrapper!
+    # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
+    # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
+    @swagger_auto_schema(
+        request_body=CosinnusHybridUserSerializer,
+        responses={'200': openapi.Response(
+            description='WIP: Response info missing. Short example included',
+            examples={
+                "application/json": {
+                    "data": {
+                        "user": {
+                            "first_name": "NewUser",
+                            "last_name": "Usre",
+                            "description": "my bio",
+                            "email": "newuser@gmail.com",
+                            "visibility": 1
+                        }
+                    },
+                    "version": "1.0.4",
+                    "timestamp": 1658415026.545203
+                }
+            }
+        )}
+    )
     def post(self, request):
         user = request.user
         user_serializer = CosinnusHybridUserSerializer(user, data=request.data, partial=True)

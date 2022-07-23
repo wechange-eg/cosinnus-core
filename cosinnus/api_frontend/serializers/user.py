@@ -121,16 +121,23 @@ class CosinnusHybridUserSerializer(serializers.Serializer):
         profile values. """
     
     first_name = serializers.CharField(
+        required=False,
         validators=[MinLengthValidator(2), MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username]
     )
     last_name = serializers.CharField(
+        required=False,
         default='',
         allow_blank=bool(settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED),
         validators=[MinLengthValidator(2), MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username]
     )
-    description = serializers.CharField(allow_blank=True, source='cosinnus_profile.description')
-    email = serializers.EmailField(validators=[MaxLengthValidator(220)])
-    visibility = serializers.ChoiceField(choices=get_tag_object_model().VISIBILITY_CHOICES, source='cosinnus_profile.media_tag.visibility')
+    description = serializers.CharField(required=False, allow_blank=True, source='cosinnus_profile.description')
+    email = serializers.EmailField(required=False, validators=[MaxLengthValidator(220)])
+    visibility = serializers.ChoiceField(
+        required=False, 
+        allow_blank=False, 
+        choices=get_tag_object_model()._VISIBILITY_CHOICES,
+        source='cosinnus_profile.media_tag.visibility'
+    )
     
     def get_visibility(self, instance):
         return instance.cosinnus_profile.media_tag.visibility
