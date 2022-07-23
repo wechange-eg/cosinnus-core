@@ -1,6 +1,8 @@
-from rest_framework.test import APITestCase, APIClient
-from django.urls import reverse
+import json
+
 from django.contrib.auth.models import User
+from django.urls import reverse
+from rest_framework.test import APITestCase, APIClient
 
 
 class LoginViewTest(APITestCase):
@@ -8,7 +10,7 @@ class LoginViewTest(APITestCase):
     def setUp(self):
         self.client = APIClient()
 
-        self.login_url = '/api/v2/login/'
+        self.login_url = reverse('cosinnus:frontend-api:api-login')
 
         self.user_data = {
             'username': 'testuser@mail.io',
@@ -28,32 +30,14 @@ class LoginViewTest(APITestCase):
 
         return super().setUp()
 
-
     def test_login_successful(self):
         """
         Ensure we can login with given user data and the user gets authenticated after all
         """
         response = self.client.post(self.login_url, self.user_data, format='json')
         self.assertEqual(response.status_code, 200)
-
-        loggged_in = self.client.login(username=self.user_data.get('username'), password=self.user_data.get('password'))
-        self.assertTrue(loggged_in, 'client is not logged in')
-
         s = self.client.session.get('_auth_user_id') # get the user's auth id
         self.assertEqual(int(s), self.user.pk) # check if user's auth id and user's pk are equal -> in case they are, user is authenticated
-
-    
-    def test_login_unseccessful(self):
-        """
-        Ensure we cannot login with given user data and the user does't get authenticated after all
-        """
-
-        loggged_in = self.client.login(username='false_username@mail.io', password='false_passeord')
-        self.assertFalse(loggged_in, 'Client should not be able to log in!')
-
-        # s = self.client.session.get('_auth_user_id') # THIS SESSION DOES NOT EXIST, SO IT FAILS!
-        # self.assertNotEqual(int(s), self.user.pk)
-
 
     def test_login_with_empty_data(self):
         """
@@ -62,18 +46,22 @@ class LoginViewTest(APITestCase):
         self.client.get('/language/en/') # set language to english so the strings can be compared
         response = self.client.post(self.login_url, {"username": "", "password": ""}, format='json')
         self.assertEqual(response.status_code, 400)
-        self.assertIn("This field may not be blank.", response.data.get('username'))
-        self.assertIn("This field may not be blank.", response.data.get('password'))
-
-    
-    def test_login_with_false_password(self):
-        """
-        Ensure user cannot login using false password
-        """
-        response = self.client.post(self.login_url, {'username': self.user_data['username'], 'password': 'false_passeord'}, format='json')
-        self.assertEqual(response.status_code, 400)
-        self.assertIn('Incorrect email or password.', response.data.get('non_field_errors'))
+        response_json = json.loads(response.content)
+        self.assertIn("This field may not be blank.", response_json.get('data', {}).get('username'))
+        self.assertIn("This field may not be blank.", response_json.get('data', {}).get('password'))
+        s = self.client.session.get('_auth_user_id') # get the user's auth id, should be None because non authenticated
+        self.assertEqual(s, None, 'user should not be logged in with no authentication')
         
+    def test_login_with_incorrect_password(self):
+        """
+        Ensure user cannot login using incorrect password
+        """
+        response = self.client.post(self.login_url, {'username': self.user_data['username'], 'password': 'incorrect_passeord'}, format='json')
+        self.assertEqual(response.status_code, 400)
+        response_json = json.loads(response.content)
+        self.assertIn('Incorrect email or password', response_json.get('data', {}).get('non_field_errors'))
+        s = self.client.session.get('_auth_user_id') # get the user's auth id, should be None because non authenticated
+        self.assertEqual(s, None, 'user should not be logged in with an incorrect password')
 
     def test_login_with_false_username(self):
         """
@@ -81,9 +69,11 @@ class LoginViewTest(APITestCase):
         """
         response = self.client.post(self.login_url, {'username': 'false_username@mail.io', 'password': self.user_data['password']}, format='json')
         self.assertEqual(response.status_code, 400)
-        self.assertIn('Incorrect email or password.', response.data.get('non_field_errors'))
-
-    
+        response_json = json.loads(response.content)
+        self.assertIn('Incorrect email or password', response_json.get('data', {}).get('non_field_errors'))
+        s = self.client.session.get('_auth_user_id') # get the user's auth id, should be None because non authenticated
+        self.assertEqual(s, None, 'user should not be logged in with an incorrect username')
+        
     def test_login_with_non_email_like_username(self):
         """
         Ensure user cannot login using false username which is not an email
@@ -91,8 +81,10 @@ class LoginViewTest(APITestCase):
         self.client.get('/language/en/')
         response = self.client.post(self.login_url, {'username': 'false_username', 'password': self.user_data['password']}, format='json')
         self.assertEqual(response.status_code, 400)
-        self.assertIn('Enter a valid email address.', response.data.get('username'))
-
+        response_json = json.loads(response.content)
+        self.assertIn('Enter a valid email address.', response_json.get('data', {}).get('username'))
+        s = self.client.session.get('_auth_user_id') # get the user's auth id, should be None because non authenticated
+        self.assertEqual(s, None, 'user should not be logged in with an invalid email')
 
     def test_deactivated_user_cannot_login(self):
         """
@@ -103,24 +95,19 @@ class LoginViewTest(APITestCase):
 
         response = self.client.post(self.login_url, self.user_data, format='json')
         self.assertEqual(response.status_code, 400)
-        self.assertIn('Incorrect email or password.', response.data.get('non_field_errors'))
-
+        response_json = json.loads(response.content)
+        self.assertIn('Incorrect email or password', response_json.get('data', {}).get('non_field_errors'))
+        s = self.client.session.get('_auth_user_id') # get the user's auth id, should be None because non authenticated
+        self.assertEqual(s, None, 'deactivated user should not be logged in')
+        
     def test_another_user_cannot_login_with_first_user_logged_in(self):
         """
         Ensure that no user can login with another user being already logged in
         """
-
-        
-        user = self.client.login(username=self.user_data.get('username'), password=self.user_data.get('password'))
-        #print(user) # True
         response_user = self.client.post(self.login_url, self.user_data, format='json')
         self.assertEqual(response_user.status_code, 200)
-
-        another_user = self.client.login(username=self.another_user_data.get('username'), password=self.another_user_data.get('password'))
-        #print(another_user) # also True!
         response_another_user = self.client.post(self.login_url, self.another_user_data, format='json')
-        self.assertEqual(response_another_user.status_code, 200)
-
+        self.assertEqual(response_another_user.status_code, 403, "a second log in during an active session should not be possible")
         s = self.client.session.get('_auth_user_id')
-        self.assertNotEqual(int(s), self.user.pk)
-        self.assertEqual(int(s), self.another_user.pk) # ok if `another_user` follows the `user` but fails if vice versa
+        self.assertEqual(int(s), self.user.pk, "this user should be logged in")
+        self.assertNotEqual(int(s), self.another_user.pk, "this user should not be logged in")
