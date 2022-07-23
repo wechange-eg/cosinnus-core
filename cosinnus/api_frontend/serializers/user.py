@@ -15,6 +15,7 @@ from cosinnus.conf import settings
 from cosinnus.forms.user import USER_NAME_FIELDS_MAX_LENGTH, \
     UserSignupFinalizeMixin
 from cosinnus.utils.validators import validate_username
+from cosinnus.models.tagged import get_tag_object_model
 
 
 logger = logging.getLogger('cosinnus')
@@ -27,8 +28,8 @@ class CosinnusUserLoginSerializer(serializers.Serializer):
     password = serializers.CharField(required=True)
 
     def validate(self, attrs):
-        user = authenticate(
-            username=attrs['username'], password=attrs['password'])
+        email = attrs['username'].lower().strip()
+        user = authenticate(username=email, password=attrs['password'])
         if not user:
             raise ValidationError(ERROR_LOGIN_INCORRECT_CREDENTIALS)
         if not user.is_active:
@@ -64,6 +65,8 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
     # TODO: dynamic fields (see `UserCreationFormDynamicFieldsMixin`)
 
     def validate(self, attrs):
+        """ We run validation all in one method, because we do not want to
+            give out any further validation details if the captcha is incorrect """
         # hcaptcha. do not validate the email before the captcha has been processed as valid!
         if 'hcaptcha_response' in attrs or settings.COSINNUS_USE_HCAPTCHA:
             # for debugging, we allow processing hcaptcha if the param is sent in POST,
@@ -88,11 +91,13 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
         email = attrs['email'].lower().strip()
         if get_user_model().objects.filter(email__iexact=email):
             raise ValidationError(ERROR_SIGNUP_EMAIL_IN_USE)
+        attrs['email'] = email
         
         # first name shenanigans
         first_name = attrs['first_name'].lower().strip()
         if not first_name or len(first_name) < 2:
             raise ValidationError(ERROR_SIGNUP_NAME_NOT_ACCEPTABLE)
+        attrs['first_name'] = first_name
         return attrs
 
     def create(self, validated_data):
@@ -108,3 +113,53 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
         self.finalize_user_object_after_signup(user, validated_data)
         return user
         
+
+class CosinnusHybridUserSerializer(serializers.Serializer):
+    """ A serializer that accepts and returns user fields as unprefixed fields,
+        no matter if they are in the User, UserProfile or CosinnusTagObject models,
+        so that one doesn't have to worry about database structures when changing user 
+        profile values. """
+    
+    first_name = serializers.CharField(
+        validators=[MinLengthValidator(2), MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username]
+    )
+    last_name = serializers.CharField(
+        default='',
+        allow_blank=bool(settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED),
+        validators=[MinLengthValidator(2), MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username]
+    )
+    description = serializers.CharField(allow_blank=True, source='cosinnus_profile.description')
+    email = serializers.EmailField(validators=[MaxLengthValidator(220)])
+    visibility = serializers.ChoiceField(choices=get_tag_object_model().VISIBILITY_CHOICES, source='cosinnus_profile.media_tag.visibility')
+    
+    def get_visibility(self, instance):
+        return instance.cosinnus_profile.media_tag.visibility
+    
+    def validate_email(self, value):
+        email = value.lower().strip()
+        if get_user_model().objects.filter(email__iexact=email):
+            raise ValidationError(ERROR_SIGNUP_EMAIL_IN_USE)
+        return email
+    
+    def update(self, instance, validated_data):
+        user_data = validated_data
+        profile_data = validated_data.get('cosinnus_profile', {})
+        media_tag_data = profile_data.get('media_tag', {})
+        user = instance
+        profile = user.cosinnus_profile
+        media_tag = profile.media_tag
+        
+        # TODO: the email may not be changed directly, but instead triggers a "change my mail" confirmation email
+        #instance.email = user_data.get('email', instance.email)
+        instance.first_name = user_data.get('first_name', instance.first_name)
+        instance.last_name = user_data.get('last_name', instance.last_name)
+        profile.description = profile_data.get('description', profile.description)
+        media_tag.visibility = media_tag_data.get('visibility', media_tag.visibility)
+        
+        # TODO: all validation/profile-update view side effects, triggers, and additional 
+        #       code from the userprofileform and userprofileupdateview need to be used here as well!
+        media_tag.save()
+        profile.save()
+        instance.save()
+        return instance
+    
