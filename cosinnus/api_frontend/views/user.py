@@ -25,7 +25,7 @@ class LoginView(LoginViewAdditionalLogicMixin, APIView):
         
     # disallow logged in users
     permission_classes = (IsNotAuthenticated,)
-    renderer_classes = (BrowsableAPIRenderer, CosinnusAPIFrontendJSONResponseRenderer,)
+    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -93,7 +93,7 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
     
     # disallow logged in users
     permission_classes = (IsNotAuthenticated,)
-    renderer_classes = (BrowsableAPIRenderer, CosinnusAPIFrontendJSONResponseRenderer,)
+    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand

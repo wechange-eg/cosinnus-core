@@ -376,7 +376,7 @@ api_v2_url_patterns = [
     url(r'^api/v2/', include((router.urls, 'api'), namespace='api')),
 ]
 api_v3_url_patterns = [
-    url(r"^", include(("cosinnus.urls_api_frontend", "cosinnus"), namespace="cosinnus-frontend-api")),
+    url(r"^", include(("cosinnus.urls_api_frontend", "cosinnus"), namespace="frontend-api")),
 ]
 
 schema_url_patterns = api_v2_url_patterns + api_v3_url_patterns
