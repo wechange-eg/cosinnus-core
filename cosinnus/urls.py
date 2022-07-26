@@ -353,7 +353,15 @@ if settings.COSINNUS_ROCKET_EXPORT_ENABLED:
         ]
     except:
         pass
-    
+
+
+if settings.COSINNUS_V3_FRONTEND_ENABLED:
+    # frontend only URLs. these URLs do not have real views, because the frontend server will catch the paths
+    # and serve a different page
+    urlpatterns += [
+        url(r'^setup/profile/', TemplateView.as_view(template_name='premium_info_page.html'), name='v3-frontend-setup-profile'),
+    ]
+
 if getattr(settings, 'COSINNUS_EMPTY_FILE_DOWNLOAD_NAME', None):
     urlpatterns += [
         url(f'{settings.COSINNUS_EMPTY_FILE_DOWNLOAD_NAME}', common.empty_file_download),

@@ -187,7 +187,7 @@ class CosinnusHybridUserSerializer(TaggitSerializer, serializers.Serializer):
     last_name = serializers.CharField(
         required=False,
         default='',
-        allow_blank=bool(settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED),
+        allow_blank=not bool(settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED),
         validators=[MinLengthValidator(2), MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username],
         help_text='Last name of the user. Optional on most portals.'
     )

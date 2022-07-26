@@ -881,6 +881,7 @@ class CosinnusConf(AppConf):
     V3_FRONTEND_URL_PATTERNS = [
         "^/login/$",
         "^/signup/$", 
+        "^/setup/profile/$",
     ]
     
     # whether the regular user signup method is enabled for this portal

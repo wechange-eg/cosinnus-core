@@ -372,6 +372,15 @@
 				    		</div>
 						</a>
 					</li>
+					{% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED %}
+					   <li>
+	                        <a href="{% url 'cosinnus:v3-frontend-setup-profile' %}" class="list-item" role="button" titledby=".item-text">
+	                            <div class="item-text">
+	                                <b>(New!)</b> {% trans "Set up your Profile" %}
+	                            </div>
+	                        </a>
+	                    </li>
+					{% endif %}
 					<li>
 						<a href="{% url 'cosinnus:profile-edit' %}" class="list-item" role="button" titledby=".item-text">
 				    		<div class="item-text">
