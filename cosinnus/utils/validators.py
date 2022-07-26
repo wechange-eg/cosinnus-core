@@ -7,6 +7,7 @@ from django_clamd.validators import validate_file_infection as clamd_validate_fi
 
 from cosinnus.conf import settings
 from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
 
 logger = logging.getLogger('cosinnus')
 
@@ -113,3 +114,10 @@ def validate_username(value):
             _('Ensure that your name does not contain any invalid characters.'),
             code='invalid_username',
         )
+
+
+class HexColorValidator(RegexValidator):
+    """ Validator that checks for a proper hex code, with optional "#" prefix. """
+    
+    def __init__(self):
+        super().__init__('^#?(?:[0-9a-fA-F]{3}){1,2}$')

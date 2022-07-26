@@ -185,6 +185,11 @@ class BaseTagObject(models.Model):
                 translation.activate(cur_language)
         return ', '.join([topic_str for topic_str in renders if topic_str])
     
+    def get_topic_ids(self):
+        if self.topics:
+            return [int(x.strip()) for x in [topic for topic in self.topics.split(',') if topic]]
+        return []
+    
     def get_topics_rendered(self):
         ret = ', '.join([force_text(t) for t in self.get_topics()])
         return ret 

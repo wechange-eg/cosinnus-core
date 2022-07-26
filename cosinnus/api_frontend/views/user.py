@@ -19,6 +19,7 @@ from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResp
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 
 
 class LoginView(LoginViewAdditionalLogicMixin, APIView):
@@ -161,10 +162,11 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
 class UserProfileView(UserSignupTriggerEventsMixin, APIView):
     """ For GETs, returns the logged in user's profile information.
         For POSTs, allows changing the logged in user's own profile fields, 
-            one or many fields at a time. Succe """
+            one or many fields at a time. """
     
     permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    parser_classes = (JSONParser, MultiPartParser, FormParser)
     
     def get_data(self, user_serializer):
         return {
@@ -177,24 +179,7 @@ class UserProfileView(UserSignupTriggerEventsMixin, APIView):
     # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
     # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
     @swagger_auto_schema(
-        responses={'200': openapi.Response(
-            description='WIP: Response info missing. Short example included',
-            examples={
-                "application/json": {
-                    "data": {
-                        "user": {
-                            "first_name": "NewUser",
-                            "last_name": "Usre",
-                            "description": "my bio",
-                            "email": "newuser@gmail.com",
-                            "visibility": 1
-                        }
-                    },
-                    "version": "1.0.4",
-                    "timestamp": 1658415026.545203
-                }
-            }
-        )}
+        responses={'200': CosinnusHybridUserSerializer}
     )
     def get(self, request):
         user = request.user
@@ -215,11 +200,22 @@ class UserProfileView(UserSignupTriggerEventsMixin, APIView):
                 "application/json": {
                     "data": {
                         "user": {
-                            "first_name": "NewUser",
-                            "last_name": "Usre",
+                            "avatar": "http://127.0.0.1:8000/media/cosinnus_portals/portal_wechange/avatars/user/b59566c332f95fa6b010ab42e2ab66f5d51cd2e6.png",
+                            "avatar_color": "ffaa22",
+                            "contact_infos": [
+                                {"type": "email","value": "test@mail.com"},
+                                {"type": "url","value": "https://openstreetmap.org"}
+                            ],
                             "description": "my bio",
                             "email": "newuser@gmail.com",
-                            "visibility": 1
+                            "first_name": "NewUser",
+                            "last_name": "Usre",
+                            "location": "Amsterdam",
+                            "locatition_lat": 52.3727598,
+                            "locatition_lon": 4.8936041,
+                            "tags": ["testtag", "anothertag"],
+                            "topics": [2,5,6],
+                            "visibility": 2
                         }
                     },
                     "version": "1.0.4",

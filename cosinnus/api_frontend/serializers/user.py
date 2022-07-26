@@ -2,7 +2,8 @@ import logging
 import random
 
 from django.contrib.auth import authenticate, get_user_model
-from django.core.validators import MaxLengthValidator, MinLengthValidator
+from django.core.validators import MaxLengthValidator, MinLengthValidator,\
+    EmailValidator, URLValidator
 import requests
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
@@ -14,8 +15,13 @@ from cosinnus.api_frontend.handlers.error_codes import ERROR_LOGIN_INCORRECT_CRE
 from cosinnus.conf import settings
 from cosinnus.forms.user import USER_NAME_FIELDS_MAX_LENGTH, \
     UserSignupFinalizeMixin
-from cosinnus.utils.validators import validate_username
+from cosinnus.utils.validators import validate_username, HexColorValidator
 from cosinnus.models.tagged import get_tag_object_model
+from cosinnus.models.profile import PROFILE_SETTINGS_AVATAR_COLOR,\
+    PROFILE_DYNAMIC_FIELDS_CONTACTS
+from taggit.serializers import TaggitSerializer, TagListSerializerField
+from django.core.exceptions import ValidationError as DjangoValidationError
+from geopy.geocoders.osm import Nominatim
 
 
 logger = logging.getLogger('cosinnus')
@@ -112,31 +118,110 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
         user.save()
         self.finalize_user_object_after_signup(user, validated_data)
         return user
-        
+    
 
-class CosinnusHybridUserSerializer(serializers.Serializer):
+def validate_contact_info_pairs(pairs_array):
+    """
+        Validates contact info JSON pairs for the frontend API.
+        Used in field `UserProfile.dynamic_fields[PROFILE_DYNAMIC_FIELDS_CONTACTS]`
+        example: [{type: "email|phone_number|url", value: "mail@mail.com"}, ...]
+    """
+    ACCEPTABLE_TYPES = ['email', 'phone_number', 'url']
+    if pairs_array:
+        for pair_dict in pairs_array:
+            if 'type' not in pair_dict or 'value' not in pair_dict:
+                raise ValidationError(f'Could not parse malformed contact_info! A pair ({str(pair_dict)}) did not contain "type" or "value"!')
+            if not pair_dict['type'] or pair_dict['type'].lower() not in ACCEPTABLE_TYPES:
+                raise ValidationError(f'Contact_infos: A pair ({str(pair_dict)}) had a type not present in [{ACCEPTABLE_TYPES}]!')
+            if not pair_dict['value']:
+                raise ValidationError(f'Contact_infos: A pair ({str(pair_dict)}) had a falsy value!')
+            if pair_dict['type'] == 'email':
+                try:
+                    EmailValidator()(pair_dict['value'])
+                except DjangoValidationError:
+                    raise ValidationError(f'Contact_infos: A pair ({str(pair_dict)}) had an invalid email!')
+            elif pair_dict['type'] == 'url':
+                try:
+                    URLValidator()(pair_dict['value'])
+                except DjangoValidationError:
+                    raise ValidationError(f'Contact_infos: A pair ({str(pair_dict)}) had an invalid URL!')
+            
+
+class CosinnusHybridUserSerializer(TaggitSerializer, serializers.Serializer):
     """ A serializer that accepts and returns user fields as unprefixed fields,
         no matter if they are in the User, UserProfile or CosinnusTagObject models,
         so that one doesn't have to worry about database structures when changing user 
         profile values. """
     
+    # TODO: saving this correctly may need some work (file path?)
+    avatar = serializers.ImageField(
+        source='cosinnus_profile.avatar', 
+        required=False,
+        help_text='Image file. "multipart/form-data" or "application/x-www-form-urlencoded" may be used to POST this'
+    )
+    # hex color code will be saved without the "#", but allows it to be supplied
+    avatar_color = serializers.CharField(
+        source=f'cosinnus_profile.settings.{PROFILE_SETTINGS_AVATAR_COLOR}', 
+        required=False,
+        validators=[HexColorValidator()],
+        help_text='A hex color string. Represented without a leading "#", but can be input with one.'
+    )
+    contact_infos = serializers.JSONField(
+        source=f'cosinnus_profile.dynamic_fields.{PROFILE_DYNAMIC_FIELDS_CONTACTS}',
+        required=False,
+        validators=[validate_contact_info_pairs],
+        help_text='Array of objects in the format "[{type: "email|phone_number|url", value: "mail@mail.com"}, ...]"'
+    )
+    description = serializers.CharField(source='cosinnus_profile.description', required=False, allow_blank=True)
+    email = serializers.EmailField(
+        required=False, 
+        validators=[MaxLengthValidator(220)],
+        read_only=True,
+        help_text='Currently read-only.'
+    )
     first_name = serializers.CharField(
         required=False,
-        validators=[MinLengthValidator(2), MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username]
+        validators=[MinLengthValidator(2), MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username],
+        help_text='The display name of the user'
     )
     last_name = serializers.CharField(
         required=False,
         default='',
         allow_blank=bool(settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED),
-        validators=[MinLengthValidator(2), MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username]
+        validators=[MinLengthValidator(2), MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username],
+        help_text='Last name of the user. Optional on most portals.'
     )
-    description = serializers.CharField(required=False, allow_blank=True, source='cosinnus_profile.description')
-    email = serializers.EmailField(required=False, validators=[MaxLengthValidator(220)])
+    location = serializers.CharField(
+        source='cosinnus_profile.media_tag.location', 
+        required=False, allow_blank=True,
+        help_text='On input, this string is used to determine the lat/lon fields using a nominatim service')
+    locatition_lat = serializers.FloatField(
+        source='cosinnus_profile.media_tag.location_lat',
+        read_only=True,
+        help_text='read-only, lat/lon determined from "location" field')
+    locatition_lon = serializers.FloatField(
+        source='cosinnus_profile.media_tag.location_lon', 
+        read_only=True, 
+        help_text='read-only, lat/lon determined from "location" field'
+    )
+    tags = TagListSerializerField(
+        required=False, 
+        source='cosinnus_profile.media_tag.tags',
+        help_text='An array of string tags'
+    )
+    topics = serializers.MultipleChoiceField(
+        required=False, 
+        allow_blank=True, 
+        choices=get_tag_object_model().TOPIC_CHOICES,
+        source='cosinnus_profile.media_tag.get_topic_ids',
+        help_text=f'Array of ints for corresponding topics: {str(get_tag_object_model().TOPIC_CHOICES)}'
+    )
     visibility = serializers.ChoiceField(
         required=False, 
         allow_blank=False, 
         choices=get_tag_object_model()._VISIBILITY_CHOICES,
-        source='cosinnus_profile.media_tag.visibility'
+        source='cosinnus_profile.media_tag.visibility',
+        help_text=f'Int for corresponding visibility setting: {str(get_tag_object_model()._VISIBILITY_CHOICES)}'
     )
     
     def get_visibility(self, instance):
@@ -162,6 +247,36 @@ class CosinnusHybridUserSerializer(serializers.Serializer):
         instance.last_name = user_data.get('last_name', instance.last_name)
         profile.description = profile_data.get('description', profile.description)
         media_tag.visibility = media_tag_data.get('visibility', media_tag.visibility)
+        profile.avatar = profile_data.get('avatar', profile.avatar)
+        avatar_color = profile_data.get('settings', {}).get(PROFILE_SETTINGS_AVATAR_COLOR, None)
+        if avatar_color:
+            profile.settings[PROFILE_SETTINGS_AVATAR_COLOR] = avatar_color.strip('#')
+        topics = media_tag_data.get('get_topic_ids', None)
+        if topics:
+            media_tag.topics = ','.join([str(topic) for topic in topics])
+        tags = media_tag_data.get('tags', None)
+        if tags:
+            media_tag.tags.set(*tags, clear=True)
+        # allow resetting the field if an empty value is given
+        if PROFILE_DYNAMIC_FIELDS_CONTACTS in profile_data.get('dynamic_fields', {}):
+            contact_infos = profile_data.get('dynamic_fields', {}).get(PROFILE_DYNAMIC_FIELDS_CONTACTS, []) or []
+            profile.dynamic_fields[PROFILE_DYNAMIC_FIELDS_CONTACTS] = contact_infos
+        if 'location' in media_tag_data:
+            location_str = media_tag_data['location']
+            if not location_str or not location_str.strip():
+                # reset location
+                media_tag.location = None
+                media_tag.location_lat = None
+                media_tag.location_lon = None
+            else:
+                # use nominatim service to determine an actual location from the given string
+                # TODO: extract nominatim URL and use ours for production!
+                geolocator = Nominatim(domain="nominatim.openstreetmap.org", user_agent="wechange")
+                location = geolocator.geocode(location_str, timeout=5)
+                if location:
+                    media_tag.location = location_str
+                    media_tag.location_lat = location.latitude
+                    media_tag.location_lon = location.longitude
         
         # TODO: all validation/profile-update view side effects, triggers, and additional 
         #       code from the userprofileform and userprofileupdateview need to be used here as well!

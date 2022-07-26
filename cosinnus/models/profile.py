@@ -68,6 +68,11 @@ PROFILE_SETTING_ROCKET_CHAT_CONTACT_GROUP_ROOM = 'rocket_chat_contact_group_room
 PROFILE_SETTING_WORKSHOP_PARTICIPANT = 'is_workshop_participant'
 PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME = 'workshop_participant_name'
 PROFILE_SETTING_COSINUS_OAUTH_LOGIN = 'has_logged_in_with_cosinnus_oauth'
+# hex color code for user's chosen avatar background color
+PROFILE_SETTINGS_AVATAR_COLOR = 'avatar_color'
+# contact info JSON pairs for the frontend API
+# example: [{type: "email|phone_number|url", value: "mail@mail.com"}, ...]
+PROFILE_DYNAMIC_FIELDS_CONTACTS = 'contact_infos'
 
 
 class BaseUserProfileManager(models.Manager):
