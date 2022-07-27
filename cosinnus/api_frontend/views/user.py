@@ -1,6 +1,6 @@
 from django.contrib.auth import login
 from rest_framework import permissions
-from rest_framework import serializers
+from rest_framework import serializers, authentication
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -22,12 +22,19 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 
 
+class CsrfExemptSessionAuthentication(authentication.SessionAuthentication):
+    
+    def enforce_csrf(self, request):
+        return
+
+
 class LoginView(LoginViewAdditionalLogicMixin, APIView):
     """ A proper User Login API endpoint """
         
     # disallow logged in users
     permission_classes = (IsNotAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
     
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -96,6 +103,7 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
     # disallow logged in users
     permission_classes = (IsNotAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
     
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -167,6 +175,7 @@ class UserProfileView(UserSignupTriggerEventsMixin, APIView):
     permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     parser_classes = (JSONParser, MultiPartParser, FormParser)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
     
     def get_data(self, user_serializer):
         return {
