@@ -20,6 +20,7 @@ from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 class CsrfExemptSessionAuthentication(authentication.SessionAuthentication):
@@ -175,7 +176,7 @@ class UserProfileView(UserSignupTriggerEventsMixin, APIView):
     permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     parser_classes = (JSONParser, MultiPartParser, FormParser)
-    authentication_classes = (CsrfExemptSessionAuthentication,)
+    authentication_classes = (CsrfExemptSessionAuthentication, JWTAuthentication)
     
     def get_data(self, user_serializer):
         return {
