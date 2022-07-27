@@ -1,26 +1,28 @@
-from django.contrib.auth import login
-from rest_framework import permissions
+from django.contrib.auth import login, logout
+from django.urls.base import reverse
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework import permissions, status
 from rest_framework import serializers, authentication
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api.serializers.user import UserSerializer
-from cosinnus.api_frontend.serializers.user import CosinnusUserLoginSerializer,\
-    CosinnusUserSignupSerializer, CosinnusHybridUserSerializer
-from cosinnus.views.common import LoginViewAdditionalLogicMixin
-from cosinnus.utils.jwt import get_tokens_for_user
-from django.urls.base import reverse
-
-from cosinnus.conf import settings
-from cosinnus.utils.permissions import IsNotAuthenticated
-from cosinnus.views.user import UserSignupTriggerEventsMixin
-from rest_framework.renderers import BrowsableAPIRenderer
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
-from drf_yasg.utils import swagger_auto_schema
-from drf_yasg import openapi
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
+from cosinnus.api_frontend.serializers.user import CosinnusUserLoginSerializer, \
+    CosinnusUserSignupSerializer, CosinnusHybridUserSerializer
+from cosinnus.conf import settings
+from cosinnus.utils.jwt import get_tokens_for_user
+from cosinnus.utils.permissions import IsNotAuthenticated
+from cosinnus.views.common import LoginViewAdditionalLogicMixin
+from cosinnus.views.user import UserSignupTriggerEventsMixin
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_simplejwt.exceptions import TokenError
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class CsrfExemptSessionAuthentication(authentication.SessionAuthentication):
@@ -66,7 +68,7 @@ class LoginView(LoginViewAdditionalLogicMixin, APIView):
                         },
                         "next": "/dashboard/"
                     },
-                    "version": "1.0.4",
+                    "version": COSINNUS_VERSION,
                     "timestamp": 1658414865.057476
                 }
             }
@@ -95,6 +97,55 @@ class LoginView(LoginViewAdditionalLogicMixin, APIView):
         response = Response(data)
         response = self.set_response_cookies(response)
         return response
+
+
+
+class LogoutView(APIView):
+    """ A logout endpoint for JWT token access that invalidates the user's JWT token.
+        Can be POSTed to without parameters or optionally with a specific "refresh_token"
+        that should be invalidated along with the logout. """
+        
+    permission_classes = (IsAuthenticated,)
+    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    authentication_classes = (CsrfExemptSessionAuthentication, JWTAuthentication)
+    
+    # todo: generate proper response, by either putting the entire response into a
+    #       Serializer, or defining it by hand
+    #       Note: Also needs docs on our custom data/timestamp/version wrapper!
+    # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
+    # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
+    @swagger_auto_schema(
+        responses={'200': openapi.Response(
+            description='WIP: Response info missing. Short example included',
+            examples={
+                "application/json": {
+                    "data": {
+                        "success": "logged out and invalidated refresh token",
+                    },
+                    "version": COSINNUS_VERSION,
+                    "timestamp": 1658414865.057476
+                }
+            }
+        )}
+    )
+    def post(self, request):
+        success_msg = 'logged out'
+        if 'refresh_token' in request.data:
+            refresh_token = request.data["refresh_token"]
+            try:
+                token = RefreshToken(refresh_token)
+                token.blacklist()
+            except TokenError:
+                pass # token was either already blacklisted or didn't exist anymore
+            success_msg = 'logged out and invalidated refresh token'
+        # session logout
+        logout(request)
+        
+        data = {
+            'success': success_msg,
+        }
+        return Response(data, status=status.HTTP_205_RESET_CONTENT)
+
 
 
 @swagger_auto_schema(request_body=CosinnusUserSignupSerializer)
@@ -135,7 +186,7 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
                         "refresh": "eyJ...",
                         "access": "eyJ..."
                     },
-                    "version": "1.0.4",
+                    "version": COSINNUS_VERSION,
                     "timestamp": 1658415026.545203
                 }
             }
@@ -228,7 +279,7 @@ class UserProfileView(UserSignupTriggerEventsMixin, APIView):
                             "visibility": 2
                         }
                     },
-                    "version": "1.0.4",
+                    "version": COSINNUS_VERSION,
                     "timestamp": 1658415026.545203
                 }
             }

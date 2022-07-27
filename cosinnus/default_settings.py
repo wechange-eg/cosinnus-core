@@ -365,6 +365,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'taggit',
         'django_bigbluebutton',
         'django_clamd',
+        'rest_framework_simplejwt.token_blacklist',
     ]    
     
     
@@ -745,6 +746,13 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     CAPTCHA_CHALLENGE_FUNCT = 'cosinnus.utils.captcha.dissimilar_random_char_challenge'
     CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_dots',)
     CAPTCHA_TIMEOUT = 30
+    
+    # django-rest-framework-simplejwt, see https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
+    from datetime import timedelta
+    SIMPLE_JWT = {
+        'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+        'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    }
     
     # enables the read-only mode for the legacy postman messages system if True
     # and shows an "archived messages button" in the user profile
