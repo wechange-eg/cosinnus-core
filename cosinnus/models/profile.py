@@ -252,7 +252,8 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
         """ Returns a string that can be used to uniquely differentiate a user from another, 
             even if they have the same names and avatars.
             As a fast solution, will right now simply display the URL fragment to the user's profile. """
-        return self.get_absolute_url().split('/', 3)[-1]
+        user_id_fragment = self.get_absolute_url().split('/', 3)[-1]
+        return f"@{user_id_fragment.replace('/', '-', 1)[:-1]}" # -> @user-6 etc.
 
     @classmethod
     def get_optional_fieldnames(cls):

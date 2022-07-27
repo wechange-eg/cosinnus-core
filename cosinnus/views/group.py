@@ -80,7 +80,7 @@ from cosinnus.search_indexes import CosinnusProjectIndex, CosinnusSocietyIndex
 from cosinnus.templatetags.cosinnus_tags import is_superuser, full_name
 from cosinnus.utils.compat import atomic
 from cosinnus.utils.functions import resolve_class
-from cosinnus.utils.group import get_group_query_filter_for_search_terms, get_cosinnus_group_model
+from cosinnus.utils.group import get_group_query_filter_for_search_terms, get_cosinnus_group_model, prioritize_suggestions_output
 from cosinnus.utils.permissions import check_ug_admin, check_user_superuser, \
     check_object_read_access, check_ug_membership, check_object_write_access, \
     check_user_can_see_user, check_user_can_create_conferences
@@ -1810,11 +1810,7 @@ class UserGroupMemberInviteSelect2View(RequireReadMixin, Select2View):
         
         users = self.get_user_queryset(terms)
 
-        # filter to prioritize the suggestion's output: users with the greater number of group/project/conferences connections 
-        # in relation to `request.user`` will appear first
-        current_user_groups_ids = CosinnusGroupMembership.objects.filter(group__is_active=True).filter(user=request.user).values_list('group_id', flat=True)
-        users = users.annotate(matching_memberships=Count('cosinnus_memberships', filter=Q(cosinnus_memberships__status__in=MEMBER_STATUS, cosinnus_memberships__group_id__in=current_user_groups_ids))) 
-        users = users.order_by('-matching_memberships', 'first_name')
+        users = prioritize_suggestions_output(request, users)
         
         # as a last filter, remove all users that that have their privacy setting to "only members of groups i am in",
         # if they aren't in a group with the user
