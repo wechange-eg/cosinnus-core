@@ -10,7 +10,7 @@ from taggit.models import Tag
 
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.views.mixins.select2 import RequireGroupMember, RequireLoggedIn
-from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.group import get_cosinnus_group_model, prioritize_suggestions_output
 from cosinnus.utils.user import filter_active_users,\
     get_user_query_filter_for_search_terms, get_user_select2_pills
 from cosinnus.views.user import UserSelect2View
@@ -41,6 +41,8 @@ class GroupMembersView(RequireGroupMember, Select2View):
         q = get_user_query_filter_for_search_terms(terms)
         
         user_qs = filter_active_users(User.objects.filter(id__in=uids).filter(q))
+
+        user_qs = prioritize_suggestions_output(request, user_qs)
         
         count = user_qs.count()
         if count < start:
