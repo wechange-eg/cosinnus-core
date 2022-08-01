@@ -23,6 +23,7 @@ from django.views.generic.edit import FormView, CreateView, UpdateView,\
 from django.utils.dateparse import parse_datetime
 import six
 from cosinnus.core import signals
+from django.db.models import Q
 
 from cosinnus.forms.group import CosinusWorkshopParticipantCSVImportForm
 from cosinnus.models.conference import CosinnusConferenceRoom,\
@@ -35,7 +36,8 @@ from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
 from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME
 from cosinnus.models.profile import UserProfile
 from cosinnus.models.profile import get_user_profile_model
-from cosinnus.utils.user import create_base_user
+from cosinnus.utils.functions import is_number
+from cosinnus.utils.user import create_base_user, filter_active_users
 from cosinnus.views.group import SamePortalGroupMixin
 from cosinnus.views.mixins.group import GroupIsConferenceMixin, FilterGroupMixin,\
     RequireAdminMixin, RequireLoggedInMixin, GroupFormKwargsMixin,\
@@ -50,7 +52,8 @@ from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
 from django.http.response import Http404, HttpResponseForbidden,\
     HttpResponseNotFound
 
-from cosinnus_conference.forms import (ConferenceRemindersForm,
+from cosinnus_conference.forms import (CHOICE_ALL_APPLICANTS, CHOICE_ALL_MEMBERS, CHOICE_APPLICANTS_AND_MEMBERS, CHOICE_INDIVIDUAL, 
+                                       ConferenceRemindersForm,
                                        ConferenceConfirmSendRemindersForm,
                                        ConferenceParticipationManagement,
                                        ConferenceApplicationForm,
@@ -635,6 +638,13 @@ class ConferenceRecordedMeetingDeleteView(ConferenceRecordedMeetingsView):
         return redirect(redirect_url)
 
 
+class NoRecipientsDefinedException(Exception):
+    """
+    Workaround exception to throw in case the `Recipients` field was left empty.
+    """
+    pass
+
+
 class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
                                          RequireWriteMixin,
                                          GroupIsConferenceMixin,
@@ -645,8 +655,52 @@ class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
     message_success = _('Conference reminder settings '
                         'have been successfully updated.')
 
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            return super().dispatch(request, *args, **kwargs)
+        except NoRecipientsDefinedException:
+            messages.error(self.request, _('Please supply one ore more recipients.'))
+            return redirect(group_aware_reverse('cosinnus:conference:reminders',
+                                   kwargs={'group': self.group}))
+
     def get_members(self):
-        return self.group.actual_members
+        recipient_choice = self.group.dynamic_fields.get('reminder_recipients_choices', None)
+
+        if recipient_choice is None or not is_number(recipient_choice):
+            logger.error('Invalid value for recipients in ConferenceConfirmSendRemindersView:get_members() function', extra={'recipient_choice': recipient_choice})
+            raise NoRecipientsDefinedException()
+        recipient_choice = int(recipient_choice)
+
+        # handle diverse cases in accordance with the `recipients_choices` choice field
+        if recipient_choice == CHOICE_APPLICANTS_AND_MEMBERS:
+            pending_application_qs = CosinnusConferenceApplication.objects.filter(conference=self.group).filter(may_be_contacted=True).pending_and_accepted()
+            all_user_ids = pending_application_qs.values_list('user', flat=True)
+            members_user_ids = self.group.actual_members # covers the current members of the group incl. admins
+            recipients_applicants_and_members = filter_active_users(get_user_model().objects.filter(Q(id__in=all_user_ids) | Q(id__in=members_user_ids)))
+            return recipients_applicants_and_members 
+        elif recipient_choice == CHOICE_ALL_APPLICANTS:
+            pending_application_qs = CosinnusConferenceApplication.objects.filter(conference=self.group).filter(may_be_contacted=True).pending()
+            all_user_ids = pending_application_qs.values_list('user', flat=True)
+            recipients_all_applicants = filter_active_users(get_user_model().objects.filter(id__in=all_user_ids))
+            return recipients_all_applicants
+        elif recipient_choice == CHOICE_ALL_MEMBERS:
+            members_qs = CosinnusConferenceApplication.objects.filter(conference=self.group).filter(may_be_contacted=True).accepted_in_past()
+            all_user_ids = members_qs.values_list('user', flat=True)
+            members_user_ids = self.group.actual_members
+            participants_all_members = filter_active_users(get_user_model().objects.filter(Q(id__in=all_user_ids) | Q(id__in=members_user_ids)))
+            return participants_all_members
+        elif recipient_choice == CHOICE_INDIVIDUAL:
+            pending_application_qs = CosinnusConferenceApplication.objects.filter(conference=self.group).filter(may_be_contacted=True).pending_and_accepted()
+            all_user_ids = pending_application_qs.values_list('user', flat=True)
+            active_users_qs = filter_active_users(get_user_model().objects.filter(id__in=all_user_ids))
+            required_user_ids = self.group.dynamic_fields.get('reminder_send_immediately_users', [])
+            if not required_user_ids:
+                raise NoRecipientsDefinedException()
+            recipients_individual = get_user_model().objects.filter(id__in=required_user_ids).filter(id__in=active_users_qs)
+            return recipients_individual
+        else:
+            logger.error('Unknown choice for recipients in ConferenceConfirmSendRemindersView:get_members() function', extra={'recipient_choice': recipient_choice})
+            raise NoRecipientsDefinedException()
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -664,11 +718,12 @@ class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
 
     def form_valid(self, form):
         if 'send' in form.data:
-            send_conference_reminder(self.group, recipients=self.get_members(),
+            members = self.get_members()
+            send_conference_reminder(self.group, recipients=members,
                                      field_name='send_immediately',
                                      update_setting=False)
             messages.success(self.request,
-                             _('The message was sent to all participants.'))
+                             _('The message was sent to the chosen participants.'))
             form.save()
         return super().form_valid(form)
 
