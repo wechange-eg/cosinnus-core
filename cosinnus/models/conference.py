@@ -711,6 +711,10 @@ class ParticipationManagement(models.Model):
     
     information_field_enabled = models.BooleanField(_('Request user information'), default=True)
     information_field_initial_text = models.TextField(_('Pre-filled content for the information field'), blank=True, null=True)
+
+    may_be_contacted_field_enabled = models.BooleanField(_('Request contact option'), 
+        help_text='If active, conference applicants will be required to enable the option to be contacted by conference admins', 
+        default=True)
     
     priority_choice_enabled = models.BooleanField(_('Priority choice enabled'), 
                                                   default=settings.COSINNUS_CONFERENCE_PRIORITY_CHOICE_DEFAULT)
@@ -811,6 +815,10 @@ class CosinnusConferenceApplicationQuerySet(models.QuerySet):
     def accepted_in_past(self):
         now = timezone.now()
         return self.active().filter(conference__to_date__lte=now, status=APPLICATION_ACCEPTED)
+
+    def pending_and_accepted(self):
+        pending_and_accepted = [APPLICATION_SUBMITTED, APPLICATION_WAITLIST, APPLICATION_ACCEPTED]
+        return self.active().filter(status__in=pending_and_accepted)
     
     def declined_in_past(self):
         now = timezone.now()
@@ -824,7 +832,7 @@ class CosinnusConferenceApplicationQuerySet(models.QuerySet):
         return self.active().filter(status__in=pending)
 
 
-class CosinnusConferenceApplication(models.Model):
+class CosinnusConferenceApplication(models.Model): # new checkbox goes here in!
     """ A model for an application to attend a conference, submitted by a user. """
 
     conference = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
@@ -840,6 +848,9 @@ class CosinnusConferenceApplication(models.Model):
     information = models.TextField(_('Motivation for applying'), blank=True)
     contact_email = models.EmailField(_('Contact E-Mail Address'), blank=True, null=True)
     contact_phone = PhoneNumberField(('Contact Phone Number'), blank=True, null=True)
+    may_be_contacted = models.BooleanField(_('Applicant may be contacted'), 
+        help_text='If active, conference applicant may be contacted by conference admins via email', 
+        default=True)
     
     reason_for_rejection = models.TextField(blank=True)
     
