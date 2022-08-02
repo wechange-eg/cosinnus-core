@@ -468,10 +468,12 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         # we DON'T filter for current portal here, as pending join requests can come from
         # users in other portals
         # we also exclude users who have never logged in
+        
         _q = get_user_model().objects.all()
+        _q = _q.select_related('cosinnus_profile')
         if not user_is_superuser:
             _q = filter_active_users(_q)
-        _q = _q.order_by('first_name', 'last_name').select_related('cosinnus_profile')
+        _q = _q.order_by('first_name', 'last_name')
         
         admins = _q.filter(id__in=admin_ids)
         members = _q.filter(id__in=member_ids)
@@ -479,7 +481,10 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         invited = _q.filter(id__in=invited_pending_ids)
         
         hidden_member_count = 0
-        user_count = filter_active_users(members).count()
+        if user_is_superuser:
+            user_count = filter_active_users(members).count()
+        else:
+            user_count = members.count() # do not filter again as we did it before higher up
         # for admins: count the inactive users
         inactive_member_count = 0
         if user_is_superuser:
