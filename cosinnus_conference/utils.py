@@ -21,8 +21,6 @@ from cosinnus.utils.html import render_html_with_variables
 from cosinnus.models.group_extra import CosinnusConference
 from django.utils.timezone import now
 
-from cosinnus_notifications.notifications import NOTIFICATION_REASONS
-
 
 def get_initial_template(field_name):
     """
@@ -71,7 +69,6 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
 
             portal_url = group.portal.get_domain()
             group_icon_url = portal_url + (group.get_avatar_thumbnail_url() or get_image_url_for_icon(group.get_icon()))
-            notification_reason = NOTIFICATION_REASONS['conference_member_or_pending']
             context = {
                 'action_user_url': group.get_absolute_url(),
                 'user_image_url': group_icon_url,
@@ -82,7 +79,6 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
                 'show_action_buttons': True,
                 'action_button_1_text': _('Go to conference'),
                 'action_button_1_url': group.get_absolute_url(),
-                'notification_reason': notification_reason,
             }
             send_notification_item_html(recipient, subject, context)
         finally:

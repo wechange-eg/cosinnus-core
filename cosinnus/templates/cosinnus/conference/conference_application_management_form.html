@@ -152,13 +152,13 @@
 		                                        <b>{% trans 'Application submitted' %}:</b>
 		                                        {{ application.created|date:"DATETIME_FORMAT" }}
                                         	</div>
-                                        	{% if application.instance.contact_email and not 'contact_email' in SETTINGS.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS %}
+                                        	{% if application.instance.contact_email %}
                                                 <div>
                                                     <b>{% trans 'Contact E-Mail Address' %}:</b>
                                                     {{ application.instance.contact_email }}
                                                 </div>
                                             {% endif %}
-                                            {% if application.instance.contact_phone and not 'contact_phone' in SETTINGS.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS %}
+                                            {% if application.instance.contact_phone %}
                                                 <div>
                                                     <b>{% trans 'Contact Phone Number' %}:</b>
                                                     {{ application.instance.contact_phone }}
