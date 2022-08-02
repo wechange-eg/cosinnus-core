@@ -169,7 +169,8 @@ def email_verified(request):
             target_date = user.date_joined + timedelta(days=SETTINGS.COSINNUS_USER_SHOW_EMAIL_VERIFIED_POPUP_AFTER_DAYS)
             msg = _('Please verify your email address by %(date_string)s.') % {'date_string': date(timezone.localtime(target_date), 'SHORT_DATE_FORMAT')}
         
-        link_label = _('Click here to send the verification link again.')
+        msg += ' ' + _('Make sure your email address "%(email_address)s" is correct.') % {'email_address': user.email}
+        link_label = _('Click here to receive an email with a verification link.')
         context['email_not_verified_announcement'] = {
             'level': 'warning',
             'text': f'{msg} <a href="{url}">{link_label}</a>'

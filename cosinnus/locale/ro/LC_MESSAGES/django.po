@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-12 14:45+0200\n"
+"POT-Creation-Date: 2022-08-02 17:09+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -7836,7 +7836,11 @@ msgstr "Verificați adresa de e-mail pentru %(site_name)s!"
 msgid "Please verify your email address by %(date_string)s."
 msgstr "Verificați adresa de e-mail pentru %(site_name)s!"
 
-msgid "Click here to send the verification link again."
+#, fuzzy, python-format
+msgid "Make sure your email address \"%(email_address)s\" is correct."
+msgstr "Adresa ta de e-mail %(email)s a fost confirmată cu succes! Bun venit în comunitate!"
+
+msgid "Click here to receive an email with a verification link."
 msgstr ""
 
 msgid "Team Description"

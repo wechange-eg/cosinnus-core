@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-12 14:45+0200\n"
+"POT-Creation-Date: 2022-08-02 17:09+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -7828,7 +7828,11 @@ msgstr "გთხოვთ დაადასტუროთ თქვენი 
 msgid "Please verify your email address by %(date_string)s."
 msgstr "გთხოვთ დაადასტუროთ თქვენი ელ-ფოსტის მისამართის ნამდვილობა %(site_name)s-თვის!"
 
-msgid "Click here to send the verification link again."
+#, fuzzy, python-format
+msgid "Make sure your email address \"%(email_address)s\" is correct."
+msgstr "თქვენი ელ-ფოსტა %(email)s წარმატებით დადასტურდა! კეთილი იყოს თქვენი მობრძანება საზოგადოებაში!"
+
+msgid "Click here to receive an email with a verification link."
 msgstr ""
 
 msgid "Team Description"
