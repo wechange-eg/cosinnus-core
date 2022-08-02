@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-12 14:45+0200\n"
+"POT-Creation-Date: 2022-08-02 17:09+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -7833,7 +7833,11 @@ msgstr "Խնդրում ենք հաստատել ձեր էլ. փոստի հասց�
 msgid "Please verify your email address by %(date_string)s."
 msgstr "Խնդրում ենք հաստատել ձեր էլ. փոստի հասցեն %(site_name)s - ի համար!"
 
-msgid "Click here to send the verification link again."
+#, fuzzy, python-format
+msgid "Make sure your email address \"%(email_address)s\" is correct."
+msgstr "Ձեր էլ. հասցեն %(email)s հաջողությամբ հաստատվեց։ Բարի գալուստ համայնք!"
+
+msgid "Click here to receive an email with a verification link."
 msgstr ""
 
 msgid "Team Description"
