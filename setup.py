@@ -58,7 +58,7 @@ setup(
         'Django>=3.2.14,<3.3',
         'MarkupSafe==1.1',
         'Pillow==6.2.0',
-        'Celery==4.2.0',
+        'Celery==5.2.2',
         'dataclasses',
         
         'beautifulsoup4==4.8.1',
