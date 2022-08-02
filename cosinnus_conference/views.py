@@ -693,10 +693,11 @@ class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
             pending_application_qs = CosinnusConferenceApplication.objects.filter(conference=self.group).filter(may_be_contacted=True).pending_and_accepted()
             all_user_ids = pending_application_qs.values_list('user', flat=True)
             active_users_qs = filter_active_users(get_user_model().objects.filter(id__in=all_user_ids))
+            members_user_ids = self.group.actual_members
             required_user_ids = self.group.dynamic_fields.get('reminder_send_immediately_users', [])
             if not required_user_ids:
                 raise NoRecipientsDefinedException()
-            recipients_individual = get_user_model().objects.filter(id__in=required_user_ids).filter(id__in=active_users_qs)
+            recipients_individual = get_user_model().objects.filter(id__in=required_user_ids).filter(Q(id__in=active_users_qs) | Q(id__in=members_user_ids))
             return recipients_individual
         else:
             logger.error('Unknown choice for recipients in ConferenceConfirmSendRemindersView:get_members() function', extra={'recipient_choice': recipient_choice})

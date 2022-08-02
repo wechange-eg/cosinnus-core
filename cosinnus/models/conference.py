@@ -832,7 +832,7 @@ class CosinnusConferenceApplicationQuerySet(models.QuerySet):
         return self.active().filter(status__in=pending)
 
 
-class CosinnusConferenceApplication(models.Model): # new checkbox goes here in!
+class CosinnusConferenceApplication(models.Model):
     """ A model for an application to attend a conference, submitted by a user. """
 
     conference = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,

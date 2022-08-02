@@ -74,7 +74,6 @@ class ConferenceRemindersForm(forms.ModelForm):
     def __init__(self, instance, *args, **kwargs):
         super().__init__(instance=instance, *args, **kwargs)
         if 'send_immediately_users' in self.fields:
-            # TODO: clean up the bug with `may_be_contacted` checkbox getting `False` when user's application status is being handled via 'Manage participation applications' form 
             pending_application_qs = CosinnusConferenceApplication.objects.filter(conference=instance).filter(may_be_contacted=True).pending_and_accepted() # instance = self.group
             all_user_ids = list(pending_application_qs.values_list('user', flat=True))
             members_user_ids = instance.actual_members # covers the current members of the group incl. admins
@@ -296,7 +295,7 @@ class ConferenceApplicationManagementForm(forms.ModelForm):
 
     class Meta:
         model = CosinnusConferenceApplication
-        exclude = ['options', 'priorities']
+        exclude = ['options', 'priorities', 'may_be_contacted']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
