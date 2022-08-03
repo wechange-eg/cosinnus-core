@@ -21,8 +21,6 @@ from cosinnus.utils.html import render_html_with_variables
 from cosinnus.models.group_extra import CosinnusConference
 from django.utils.timezone import now
 
-from cosinnus_notifications.notifications import NOTIFICATION_REASONS
-
 
 def get_initial_template(field_name):
     """

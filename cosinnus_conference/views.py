@@ -675,7 +675,7 @@ class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
         if recipient_choice == CHOICE_APPLICANTS_AND_MEMBERS:
             pending_application_qs = CosinnusConferenceApplication.objects.filter(conference=self.group).filter(may_be_contacted=True).pending_and_accepted()
             all_user_ids = pending_application_qs.values_list('user', flat=True)
-            members_user_ids = self.group.actual_members # covers the current members of the group incl. admins
+            members_user_ids = self.group.members # covers the current members of the group incl. admins
             recipients_applicants_and_members = filter_active_users(get_user_model().objects.filter(Q(id__in=all_user_ids) | Q(id__in=members_user_ids)))
             return recipients_applicants_and_members 
         elif recipient_choice == CHOICE_ALL_APPLICANTS:
@@ -686,18 +686,17 @@ class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
         elif recipient_choice == CHOICE_ALL_MEMBERS:
             members_qs = CosinnusConferenceApplication.objects.filter(conference=self.group).filter(may_be_contacted=True).accepted_in_past()
             all_user_ids = members_qs.values_list('user', flat=True)
-            members_user_ids = self.group.actual_members
+            members_user_ids = self.group.members
             participants_all_members = filter_active_users(get_user_model().objects.filter(Q(id__in=all_user_ids) | Q(id__in=members_user_ids)))
             return participants_all_members
         elif recipient_choice == CHOICE_INDIVIDUAL:
             pending_application_qs = CosinnusConferenceApplication.objects.filter(conference=self.group).filter(may_be_contacted=True).pending_and_accepted()
             all_user_ids = pending_application_qs.values_list('user', flat=True)
-            active_users_qs = filter_active_users(get_user_model().objects.filter(id__in=all_user_ids))
-            members_user_ids = self.group.actual_members
+            members_user_ids = self.group.members
             required_user_ids = self.group.dynamic_fields.get('reminder_send_immediately_users', [])
             if not required_user_ids:
                 raise NoRecipientsDefinedException()
-            recipients_individual = get_user_model().objects.filter(id__in=required_user_ids).filter(Q(id__in=active_users_qs) | Q(id__in=members_user_ids))
+            recipients_individual = filter_active_users(get_user_model().objects.filter(id__in=required_user_ids).filter(Q(id__in=all_user_ids) | Q(id__in=members_user_ids)))
             return recipients_individual
         else:
             logger.error('Unknown choice for recipients in ConferenceConfirmSendRemindersView:get_members() function', extra={'recipient_choice': recipient_choice})
