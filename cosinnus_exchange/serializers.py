@@ -45,17 +45,17 @@ class ExchangeGroupSerializer(ExchangeSerializerMixin, serializers.Serializer):
 
     def get_mt_location(self, obj):
         if len(obj.get('locations', [])) > 1:
-            return obj['locations'][0]['description']
+            return obj['locations'][0].get('location', None)
         return None
 
     def get_mt_location_lat(self, obj):
         if len(obj.get('locations', [])) > 1:
-            return obj['locations'][0].get('geo', {}).get('latitude')
+            return obj['locations'][0].get('lat', None)
         return None
 
     def get_mt_location_lon(self, obj):
         if len(obj.get('locations', [])) > 1:
-            return obj['locations'][0].get('geo', {}).get('longitude')
+            return obj['locations'][0].get('lon', None)
         return None
 
 class ExchangeOrganizationSerializer(ExchangeGroupSerializer):
