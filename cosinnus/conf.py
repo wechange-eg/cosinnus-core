@@ -585,7 +585,7 @@ class CosinnusConf(AppConf):
     
     # how many results per map results page are shown,
     # if not modified by the get request
-    MAP_DEFAULT_RESULTS_PER_PAGE = 20
+    MAP_DEFAULT_RESULTS_PER_PAGE = 50
     
     # Only for the dashboard map widget view if the user has no custom location set
     # If not set, will attempt to use what is given in COSINNUS_MAP_OPTIONS
