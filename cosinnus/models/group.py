@@ -408,8 +408,9 @@ class CosinnusGroupManager(models.Manager):
         from cosinnus.models.group_extra import CosinnusConference # noqa
         # Prepare query: Mark due conferences
         key = f'reminder_{field_name}'
-        queryset = CosinnusConference.objects.annotate(dynamic_fields_json=Cast(F('dynamic_fields'),
-                                                                              PostgresJSONField(default={})))
+        queryset = CosinnusConference.objects.annotate(
+            dynamic_fields_json=Cast(F('dynamic_fields'), models.JSONField(default={}, encoder=DjangoJSONEncoder))
+        )
         queryset = queryset.annotate(to_be_reminded=KeyTextTransform(key, 'dynamic_fields_json'))
         # Prepare query: Mark conferences already notified
         queryset = queryset.annotate(settings_json=Cast(F('settings'), models.JSONField(default={}, encoder=DjangoJSONEncoder)))
