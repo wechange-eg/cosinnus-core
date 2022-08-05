@@ -741,6 +741,9 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'ADMIN_NAME': f"{project_settings['COSINNUS_PORTAL_NAME']} Admin",
     }
     
+    # django-otp settings
+    # if set to None, will use the portal domain, which is fine
+    OTP_TOTP_ISSUER = None
     
     # django-simple captcha settings
     CAPTCHA_CHALLENGE_FUNCT = 'cosinnus.utils.captcha.dissimilar_random_char_challenge'

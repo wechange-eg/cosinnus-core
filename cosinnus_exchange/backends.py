@@ -103,7 +103,7 @@ class ExchangeBackend:
             try:
                 response.raise_for_status()
             except requests.HTTPError:
-                raise ExchangeError(response.status_code, response.content)
+                raise ExchangeError(response.status_code, next_url, response.content)
 
             data = json.loads(response.content)
             page_results = []
