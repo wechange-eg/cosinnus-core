@@ -357,6 +357,10 @@ class CosinnusManagedTag(models.Model):
     def image_url(self):
         return self.image.url if self.image else None
     
+    @property
+    def paired_group_url(self):
+        return self.paired_group.get_absolute_url() if self.paired_group else None
+    
     def get_image_thumbnail(self, size=(0, 80)):
         return image_thumbnail(self.image, size)
 
