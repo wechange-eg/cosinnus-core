@@ -4,6 +4,10 @@ from django_cron import Schedule
 from cosinnus.conf import settings
 from cosinnus.cron import CosinnusCronJobBase
 from cosinnus_exchange.backends import ExchangeBackend
+import logging
+from django.utils.encoding import force_text
+
+logger = logging.getLogger(__name__)
 
 
 class PullData(CosinnusCronJobBase):
@@ -28,4 +32,15 @@ class PullData(CosinnusCronJobBase):
             else:
                 backend_model = ExchangeBackend
             backend = backend_model(**backend_params)
-            backend.pull()
+            
+            # we run this import non-threaded on elastisearch to not overload the service
+            orig_setting = getattr(settings, 'COSINNUS_ELASTIC_BACKEND_RUN_THREADED', True)
+            try:
+                setattr(settings, 'COSINNUS_ELASTIC_BACKEND_RUN_THREADED', False)
+                backend.pull()
+            except Exception as e:
+                logger.error('An error occured during pulling data from an exchange backend! Exception in extra.', extra={'backend': str(backend), 'exc_str': force_text(e), 'exception': e})
+                if settings.DEBUG:
+                    raise
+            finally:
+                setattr(settings, 'COSINNUS_ELASTIC_BACKEND_RUN_THREADED', orig_setting)
