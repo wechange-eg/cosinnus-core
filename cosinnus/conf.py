@@ -245,9 +245,9 @@ class CosinnusConf(AppConf):
     # the global notification setting for users on the plattform (3: weekly)
     DEFAULT_GLOBAL_NOTIFICATION_SETTING = 3
     
-    # default rocketchat notification mails are off
+    # default rocketchat notification mails are on
     # (see `GlobalUserNotificationSetting.ROCKETCHAT_SETTING_CHOICES`)
-    DEFAULT_ROCKETCHAT_NOTIFICATION_SETTING = 0
+    DEFAULT_ROCKETCHAT_NOTIFICATION_SETTING = 1
     
     # default setting for notifications for followed objects
     DEFAULT_FOLLOWED_OBJECT_NOTIFICATION_SETTING = 2 # SETTING_DAILY = 2
