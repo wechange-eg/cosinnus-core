@@ -32,10 +32,16 @@ class CosinnusSocietySerializer(serializers.HyperlinkedModelSerializer):
     related = serializers.SerializerMethodField()
 
     def get_topics(self, obj):
-        return obj.media_tag.get_topics()
+        topics = []
+        if hasattr(obj, 'media_tag'):
+            topics = obj.media_tag.get_topics()
+        return topics
 
     def get_tags(self, obj):
-        return obj.media_tag.tags.values_list('name', flat=True)
+        tags = []
+        if hasattr(obj, 'media_tag'):
+            tags = obj.media_tag.tags.values_list('name', flat=True)
+        return tags
 
     def get_locations(self, obj):
         locations = []
