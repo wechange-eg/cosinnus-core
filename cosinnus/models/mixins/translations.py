@@ -72,6 +72,7 @@ class TranslateableFieldsModelMixin(models.Model):
         Gets dynamic_fields from object and merges them
         with translations from translations json field
         """
+
         if self.translatable_dynamic_fields:
             dynamic_fields = copy(getattr(self, 'dynamic_fields'))
             dynamic_fields_translations = self.translations.get(
@@ -80,7 +81,8 @@ class TranslateableFieldsModelMixin(models.Model):
                 translation = dynamic_fields_translations.get(
                     language)
                 if translation:
-                    dynamic_fields.update(translation)
+                    clean_translation = {k:v for k,v in translation.items() if v != ''}
+                    dynamic_fields.update(clean_translation)
                     return dynamic_fields
 
     def get_translateable_fields(self):
