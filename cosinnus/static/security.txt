@@ -1,0 +1,3 @@
+Contact: mailto:security@wechange.de
+Expires: 2023-08-09T10:00:00.000Z
+Preferred-Languages: en,de
