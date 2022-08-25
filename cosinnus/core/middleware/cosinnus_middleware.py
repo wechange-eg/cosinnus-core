@@ -427,6 +427,10 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
         if request.user.is_authenticated:
             # hiding login and signup pages for logged in users
             if request.path in ['/login/', '/signup/']:
+                # catch redirect loop for superusers trying to access the admin area but someone forgot to make them staff as well
+                if request.GET.get('next', '').startswith('/admin/') and request.user.is_superuser and not request.user.is_staff:
+                    messages.warning(request, _('You cannot access the admin area because you are missing the "Staff" permission even though you are a superuser. Please ask another admin to grant it to you.'))
+                    return redirect('cosinnus:profile-detail')
                 redirect_url = redirect_next_or(request, getattr(settings, 'COSINNUS_LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET', None))
                 if redirect_url:
                     return HttpResponseRedirect(redirect_url)
