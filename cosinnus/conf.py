@@ -642,6 +642,8 @@ class CosinnusConf(AppConf):
     # should twitter and flickr embed fields and display be active for microsites?
     MICROSITE_SOCIAL_MEDIA_FIELDS_ACTIVE = False
     
+    # should the social media share buttons (Facebook, Twitter) be shown on group / project microsites?
+    MICROSITE_SHOW_SOCIAL_MEDIA_BUTTONS = True
     
     
     #: A list of app_names (``'cosinnus_note'`` rather than ``note``) that will

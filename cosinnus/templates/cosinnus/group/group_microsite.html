@@ -293,17 +293,21 @@
                         {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=group %}
 	        	    </div>
 					
-					<p class="group-microsite-share-buttons">
-						<b>{% trans "Share" %}:</b>&nbsp;
-						<a href="https://www.facebook.com/sharer/sharer.php?u={{ group.get_absolute_url|escape }}" target="_blank"
-						           title="{% trans "Share on Facebook" %}">
-							<i class="fa fa-2x fa-facebook-square"></i
-						></a>&nbsp;
-						<a href="https://twitter.com/intent/tweet?text=Check out {{ group.get_absolute_url|escape }}" target="_blank"
-						           title="{% trans "Share on Twitter" %}">
-							<i class="fa fa-2x fa-twitter-square"></i
-						></a>&nbsp;
-					</p>
+					{% block social_media_buttons %}
+						{% if SETTINGS.COSINNUS_MICROSITE_SHOW_SOCIAL_MEDIA_BUTTONS %}
+							<p class="group-microsite-share-buttons">
+								<b>{% trans "Share" %}:</b>&nbsp;
+								<a href="https://www.facebook.com/sharer/sharer.php?u={{ group.get_absolute_url|escape }}" target="_blank"
+										title="{% trans "Share on Facebook" %}">
+									<i class="fa fa-2x fa-facebook-square"></i
+								></a>&nbsp;
+								<a href="https://twitter.com/intent/tweet?text=Check out {{ group.get_absolute_url|escape }}" target="_blank"
+										title="{% trans "Share on Twitter" %}">
+									<i class="fa fa-2x fa-twitter-square"></i
+								></a>&nbsp;
+							</p>
+						{% endif %}
+					{% endblock social_media_buttons %}
 					
 					<p class="group-microsite-created-updated-timestamp">
 						<i>{% trans "Created on: " %}</i>{{ group.created|date:"SHORT_DATE_FORMAT" }}
@@ -311,19 +315,6 @@
 						<i>{% trans "Last updated on: " %}</i>{{ group.last_modified|date:"SHORT_DATE_FORMAT" }}
 					</p>
 					<div class="clearfix"></div>
-
-					{% comment %}
-
-					{% get_project as projects %}
-					{% for project in projects %}
-						{% if project.name == group.name %}
-							<i>{% trans "Created on: " %}</i>{{ project.created|date:"SHORT_DATE_FORMAT" }}
-							<br>
-							<i>{% trans "Last updated on: " %}</i>{{ project.last_modified|date:"SHORT_DATE_FORMAT" }}
-						{% endif %}
-					{% endfor %}
-
-					{% endcomment %}
 
 					{% if SETTINGS.COSINNUS_ENABLE_SDGS %}
 					<p>
