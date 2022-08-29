@@ -30,6 +30,10 @@ class CosinnusSocietySerializer(serializers.HyperlinkedModelSerializer):
     tags = serializers.SerializerMethodField()
     locations = serializers.SerializerMethodField()
     related = serializers.SerializerMethodField()
+    description = serializers.SerializerMethodField()
+    
+    def get_description(self, obj):
+        return obj.description_long or obj.description
 
     def get_topics(self, obj):
         topics = []
