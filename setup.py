@@ -57,7 +57,7 @@ setup(
         # please mirror all changes in the requirements.txt for local installs!
         'Django>=3.2.14,<3.3',
         'MarkupSafe==1.1',
-        'Pillow==6.2.0',
+        'Pillow==8.4.0',
         'Celery==4.2.0',
         'dataclasses',
         
@@ -104,6 +104,7 @@ setup(
         'ecdsa==0.13.3',
         'geopy==1.11.0',
         'jsonfield==3.1.0',
+        'lxml==4.9.1',
         'html5lib',
         'html2text==2016.9.19',
         'numpy==1.14.5',
