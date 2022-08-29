@@ -74,11 +74,6 @@
             
             {% trans "Workshop selection: Enable applicants to choose preferred workshops to attend" as priority_checkbox_label %}
             {% include 'cosinnus/fields/checkbox_field.html' with field=form.priority_choice_enabled label=priority_checkbox_label checkbox_label=priority_checkbox_label %}
-
-            {% if form.may_be_contacted_field_enabled %}
-                {% trans "Applicants have to give their permission to be contacted per email" as may_be_contacted_field_enabled_checkbox_label %}
-                {% include 'cosinnus/fields/checkbox_field.html' with field=form.may_be_contacted_field_enabled label=may_be_contacted_field_enabled_checkbox_label checkbox_label=may_be_contacted_field_enabled_checkbox_label %}
-            {% endif %}
             
             <div class="regular-space"></div>
             <div class="cosinnus-field ">
