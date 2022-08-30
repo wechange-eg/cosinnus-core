@@ -66,12 +66,41 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
     # managed tag field (see `COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM` and `_ManagedTagFormMixin`)
     if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF and settings.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM:
         managed_tags = serializers.ListField(child=serializers.SlugField(allow_blank=False), allow_empty=True)
+        
+    # TODO: dynamic fields (see `UserCreationFormDynamicFieldsMixin`)
+    #     use the base names for the fields as they appear in COSINNUS_USERPROFILE_EXTRA_FIELDS
+    #     generate them by doing this in init:
+    """
+    # we need our own version of _DynamicFieldsBaseFormMixin for Serializers
+    # it needs its own prepare_extra_fields_FORSERIALIZER that does this:
+    # (like _DynamicFieldsBaseFormMixin.prepare_extra_fields)
+    for field_name, field_options in self.DYNAMIC_FIELD_SETTINGS.items():
+        # (you can ignore the field initials, always)
+        # then it gets the field generator like
+        dynamic_field_generator = EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS[field_options.type]()
+        # but instead of
+        formfield = dynamic_field_generator.get_formfield(
+        # it does
+        serializer_field = dynamic_field_generator.get_serializer_field(
+        # so we just add a method to each generator to support the serializer field generation
+        # and we add a serializerfield_class vice-versa to formfield_class in each generator like TextDynamicFieldFormFieldGenerator
+        # 
+        # also we pray that DRF doesn't require hardcoded sieralizer fields in the class head,
+        # but will let us add them at the end of the __init__() method
+        # this all needs to work for the signup AND user profile endpoint.
+        
+    """
+    # and this on save:
+    """
+    # (???) we might not need to do anything if we add the right serializerfield_class and
+    # built DynamicFieldFormFieldGenerator.get_serializer_field correctly so it works like 
+    #       DynamicFieldFormFieldGenerator.get_formfield (especially with the options)
+    """
     
     # missing/not-yet-supported fields for the signup endpoint:
     
     # TODO: location field (see `COSINNUS_USER_SIGNUP_INCLUDES_LOCATION_FIELD`)
     # TODO: topic field (see `COSINNUS_USER_SIGNUP_INCLUDES_TOPIC_FIELD`)
-    # TODO: dynamic fields (see `UserCreationFormDynamicFieldsMixin`)
 
     def validate(self, attrs):
         """ We run validation all in one method, because we do not want to
