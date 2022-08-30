@@ -10,4 +10,11 @@
     <span class="pale-text">
         ({{ user.cosinnus_profile.get_unique_identifier }})
     </span>
+    {% comment %} Annotated sometimes during user selects, when sorting for commong group members {% endcomment %}
+    {% if user.matching_memberships and user.matching_memberships > 1 %}
+        <span class="pale-text">
+	        (<i class="fa fa-users"></i>:
+	        {{ user.matching_memberships }})
+	    </span>
+    {% endif %}
 </span>

@@ -23,6 +23,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
 from django.core.validators import validate_email
 from django.db import transaction
+from django.db.models import Q, Count
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.http.response import Http404, HttpResponseNotAllowed, \
@@ -79,7 +80,7 @@ from cosinnus.search_indexes import CosinnusProjectIndex, CosinnusSocietyIndex
 from cosinnus.templatetags.cosinnus_tags import is_superuser, full_name
 from cosinnus.utils.compat import atomic
 from cosinnus.utils.functions import resolve_class
-from cosinnus.utils.group import get_group_query_filter_for_search_terms, get_cosinnus_group_model
+from cosinnus.utils.group import get_group_query_filter_for_search_terms, get_cosinnus_group_model, prioritize_suggestions_output
 from cosinnus.utils.permissions import check_ug_admin, check_user_superuser, \
     check_object_read_access, check_ug_membership, check_object_write_access, \
     check_user_can_see_user, check_user_can_create_conferences
@@ -1799,9 +1800,7 @@ class UserGroupMemberInviteSelect2View(RequireReadMixin, Select2View):
         if not user.is_authenticated:
             raise PermissionDenied
 
-    def get_results(self, request, term, page, context):
-        terms = term.strip().lower().split(' ')
-        
+    def get_user_queryset(self, terms):
         # filter for active portal members that are not group members
         users = filter_active_users(get_user_model().objects.all())\
                 .exclude(id__in=self.group.members)\
@@ -1809,12 +1808,18 @@ class UserGroupMemberInviteSelect2View(RequireReadMixin, Select2View):
         # filter for query terms
         q = get_user_query_filter_for_search_terms(terms)
         users = users.filter(q)
+        return users
+
+    def get_results(self, request, term, page, context):
+        terms = term.strip().lower().split(' ')
+        
+        users = self.get_user_queryset(terms)
+
+        users = prioritize_suggestions_output(request, users)
         
         # as a last filter, remove all users that that have their privacy setting to "only members of groups i am in",
         # if they aren't in a group with the user
         users = [user for user in users if check_user_can_see_user(request.user, user)]
-        
-        users = sorted(users, key=lambda useritem: full_name(useritem).lower())
         
         # check for a direct email match
         direct_email_user = get_user_by_email_safe(term)

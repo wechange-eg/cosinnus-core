@@ -5,7 +5,7 @@ from __future__ import print_function
 from urllib.parse import quote as urlquote
 
 from django.apps import apps
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import force_text
@@ -108,3 +108,18 @@ def get_group_query_filter_for_search_terms(terms):
         q &= add_q
 
     return q
+
+
+def prioritize_suggestions_output(request, users):
+    from cosinnus.models.group import CosinnusGroupMembership
+    from cosinnus.models.membership import MEMBER_STATUS
+
+    """
+    Returns a QS of users with the number of group/project/conferences connections in relation to `request.user`.
+    @param request: request to get the request.user
+    @return: A django QS
+    """
+    current_user_groups_ids = CosinnusGroupMembership.objects.filter(group__is_active=True).filter(status__in=MEMBER_STATUS).filter(user=request.user).values_list('group_id', flat=True)
+    users = users.annotate(matching_memberships=Count('cosinnus_memberships', filter=Q(cosinnus_memberships__status__in=MEMBER_STATUS, cosinnus_memberships__group_id__in=current_user_groups_ids))) 
+    users = users.order_by('-matching_memberships', 'first_name')
+    return users
