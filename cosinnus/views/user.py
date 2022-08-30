@@ -1169,7 +1169,9 @@ def convert_email_group_invites(sender, profile, **kwargs):
                     continue
                 # check if the inviting user may invite directly
                 if invite.invited_by_id in invite.group.admins:
-                    CosinnusGroupMembership.objects.create(group=invite.group, user=user, status=MEMBERSHIP_INVITED_PENDING)
+                    CosinnusGroupMembership.objects.get_or_create(group=invite.group, user=user, defaults={
+                        'status': MEMBERSHIP_INVITED_PENDING,
+                    })
                 else:
                     other_invites.append(invite.group.id)
             # trigger translation indexing
