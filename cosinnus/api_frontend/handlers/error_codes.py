@@ -11,4 +11,5 @@ ERROR_SIGNUP_EMAIL_IN_USE = "Email is already in use"
 ERROR_SIGNUP_CAPTCHA_INVALID = "The captcha was not filled or was invalid"
 ERROR_SIGNUP_CAPTCHA_SERVICE_DOWN = "The captcha service could not be reached"
 ERROR_SIGNUP_NAME_NOT_ACCEPTABLE = "This first_name is not acceptable"
+ERROR_SIGNUP_ONLY_ONE_MTAG_ALLOWED = "Only one managed tag can be assigned on this portal!"
 

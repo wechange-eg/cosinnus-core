@@ -11,7 +11,7 @@ from rest_framework.exceptions import ValidationError
 from cosinnus.api_frontend.handlers.error_codes import ERROR_LOGIN_INCORRECT_CREDENTIALS, \
     ERROR_LOGIN_USER_DISABLED, ERROR_SIGNUP_EMAIL_IN_USE, \
     ERROR_SIGNUP_CAPTCHA_SERVICE_DOWN, ERROR_SIGNUP_CAPTCHA_INVALID, \
-    ERROR_SIGNUP_NAME_NOT_ACCEPTABLE
+    ERROR_SIGNUP_NAME_NOT_ACCEPTABLE, ERROR_SIGNUP_ONLY_ONE_MTAG_ALLOWED
 from cosinnus.conf import settings
 from cosinnus.forms.user import USER_NAME_FIELDS_MAX_LENGTH, \
     UserSignupFinalizeMixin
@@ -22,6 +22,7 @@ from cosinnus.models.profile import PROFILE_SETTINGS_AVATAR_COLOR,\
 from taggit.serializers import TaggitSerializer, TagListSerializerField
 from django.core.exceptions import ValidationError as DjangoValidationError
 from geopy.geocoders.osm import Nominatim
+from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 
 
 logger = logging.getLogger('cosinnus')
@@ -55,7 +56,6 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
     )
     last_name = serializers.CharField(
         required=bool(settings.COSINNUS_USER_FORM_LAST_NAME_REQUIRED),
-        default='',
         validators=[MinLengthValidator(2), MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username]
     )
     if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
@@ -63,9 +63,12 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
     # hcaptcha, required if enabled for this portal
     hcaptcha_response = serializers.CharField(required=settings.COSINNUS_USE_HCAPTCHA)
     
+    # managed tag field (see `COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM` and `_ManagedTagFormMixin`)
+    if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF and settings.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM:
+        managed_tags = serializers.ListField(child=serializers.SlugField(allow_blank=False), allow_empty=True)
+    
     # missing/not-yet-supported fields for the signup endpoint:
     
-    # TODO: managed tag field (see `COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM` and `_ManagedTagFormMixin`)
     # TODO: location field (see `COSINNUS_USER_SIGNUP_INCLUDES_LOCATION_FIELD`)
     # TODO: topic field (see `COSINNUS_USER_SIGNUP_INCLUDES_TOPIC_FIELD`)
     # TODO: dynamic fields (see `UserCreationFormDynamicFieldsMixin`)
@@ -104,9 +107,19 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
         if not first_name or len(first_name) < 2:
             raise ValidationError(ERROR_SIGNUP_NAME_NOT_ACCEPTABLE)
         attrs['first_name'] = first_name
+        
+        # set last_name default to empty string (can't set default in field in class header)
+        attrs['last_name'] = attrs.get('last_name', '')
+        
+        # managed tags
+        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF and settings.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM:        
+            if len(attrs.get('managed_tags', [])) > 1 and not settings.COSINNUS_MANAGED_TAGS_ASSIGN_MULTIPLE_ENABLED:
+                raise ValidationError(ERROR_SIGNUP_ONLY_ONE_MTAG_ALLOWED)
         return attrs
 
     def create(self, validated_data):
+        """ Create a new user as a signup via the API.
+            TODO: should this all run in an atomic block? """
         # add fake username first before we know the user id
         user = get_user_model().objects.create(
             username=str(random.randint(100000000000, 999999999999)),
@@ -117,6 +130,9 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
         user.set_password(validated_data['password'])
         user.save()
         self.finalize_user_object_after_signup(user, validated_data)
+        # TODO: better try/catch this, or run in atomic?
+        if validated_data.get('managed_tags', []):
+            CosinnusManagedTagAssignment.update_assignments_for_object(user.cosinnus_profile, validated_data.get('managed_tags', []))
         return user
     
 
