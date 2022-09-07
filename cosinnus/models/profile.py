@@ -45,6 +45,7 @@ from cosinnus.utils.user import get_newly_registered_user_email, is_user_active
 from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
 
 from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
+from django.utils import translation
 
 
 logger = logging.getLogger('cosinnus')
@@ -359,6 +360,46 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     def get_dynamic_fields_rendered_plaintext(self, request=None):
         """ Returns a text-only version of the dynamic profile fields for this userprofile """
         return convert_html_to_plaintext(self.get_dynamic_fields_rendered(request=request))
+    
+    def get_dynamic_fields_rendered_plaintext_for_index(self, request=None):
+        """ Returns a text-only version of the dynamic profile fields for this userprofile
+            for use in search indexes.
+            Will include all rendered versions of all languages, so that both translated fields
+            and also their translated labels are included in each language. """
+        cur_language = translation.get_language()
+        if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
+            languages = [lang_tuple[0] for lang_tuple in settings.LANGUAGES]
+        else:
+            languages = [cur_language]
+        plaintext = ''
+        try:
+            for language in languages:
+                translation.activate(language)
+                plaintext += ' \n ' + convert_html_to_plaintext(self.get_dynamic_fields_rendered(request=request))
+        finally:
+            translation.activate(cur_language)
+        return plaintext
+    
+    def get_description_plaintext_for_index(self):
+        """ Returns a text-only version of the description of this userprofile
+            for use in search indexes.
+            Will include all rendered versions of all languages, so that all language versions are
+            included. """
+        cur_language = translation.get_language()
+        if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
+            languages = [lang_tuple[0] for lang_tuple in settings.LANGUAGES]
+        else:
+            languages = [cur_language]
+        plaintext = ''
+        try:
+            for language in languages:
+                translation.activate(language)
+                # this triggers retrieving the translated field
+                plaintext += ' \n ' + str(self['description'])
+        finally:
+            translation.activate(cur_language)
+        return plaintext
+        
     
     def add_redirect_on_next_page(self, resolved_url, message=None, priority=False):
         """ Adds a redirect-page to the user's settings redirect list.
