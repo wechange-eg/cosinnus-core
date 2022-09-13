@@ -2,11 +2,14 @@ import logging
 import random
 
 from django.contrib.auth import authenticate, get_user_model
-from django.core.validators import MaxLengthValidator, MinLengthValidator,\
+from django.core.exceptions import ValidationError as DjangoValidationError
+from django.core.validators import MaxLengthValidator, MinLengthValidator, \
     EmailValidator, URLValidator
+from geopy.geocoders.osm import Nominatim
 import requests
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
+from taggit.serializers import TaggitSerializer, TagListSerializerField
 
 from cosinnus.api_frontend.handlers.error_codes import ERROR_LOGIN_INCORRECT_CREDENTIALS, \
     ERROR_LOGIN_USER_DISABLED, ERROR_SIGNUP_EMAIL_IN_USE, \
@@ -15,14 +18,12 @@ from cosinnus.api_frontend.handlers.error_codes import ERROR_LOGIN_INCORRECT_CRE
 from cosinnus.conf import settings
 from cosinnus.forms.user import USER_NAME_FIELDS_MAX_LENGTH, \
     UserSignupFinalizeMixin
-from cosinnus.utils.validators import validate_username, HexColorValidator
-from cosinnus.models.tagged import get_tag_object_model
-from cosinnus.models.profile import PROFILE_SETTINGS_AVATAR_COLOR,\
-    PROFILE_DYNAMIC_FIELDS_CONTACTS
-from taggit.serializers import TaggitSerializer, TagListSerializerField
-from django.core.exceptions import ValidationError as DjangoValidationError
-from geopy.geocoders.osm import Nominatim
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
+from cosinnus.models.profile import PROFILE_SETTINGS_AVATAR_COLOR, \
+    PROFILE_DYNAMIC_FIELDS_CONTACTS
+from cosinnus.models.tagged import get_tag_object_model
+from cosinnus.utils.validators import validate_username, HexColorValidator
+from drf_extra_fields.fields import Base64ImageField
 
 
 logger = logging.getLogger('cosinnus')
@@ -170,10 +171,10 @@ class CosinnusHybridUserSerializer(TaggitSerializer, serializers.Serializer):
         profile values. """
     
     # TODO: saving this correctly may need some work (file path?)
-    avatar = serializers.ImageField(
+    avatar = Base64ImageField(
         source='cosinnus_profile.avatar', 
         required=False,
-        help_text='Image file. "multipart/form-data" or "application/x-www-form-urlencoded" may be used to POST this'
+        help_text='Image file that handles Base64 image data'
     )
     # hex color code will be saved without the "#", but allows it to be supplied
     avatar_color = serializers.CharField(
