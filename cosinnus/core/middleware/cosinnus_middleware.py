@@ -72,6 +72,7 @@ NEVER_REDIRECT_URLS = [
     '/api/v2/statistics/',
     '/o/',
     '/group/forum/cloud/oauth2/',
+    f'/group/{settings.NEWW_FORUM_GROUP_SLUG}/cloud/oauth2/',
     '/account/verify_email/',
     # these deprecated URLs can be removed from the filter list once the URLs are removed
     # and their /account/ URL-path equivalents are the only remaining version of the view URL
