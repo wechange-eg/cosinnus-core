@@ -37,13 +37,13 @@ class CosinnusSocietySerializer(serializers.HyperlinkedModelSerializer):
 
     def get_topics(self, obj):
         topics = []
-        if hasattr(obj, 'media_tag'):
+        if hasattr(obj, 'media_tag') and obj.media_tag:
             topics = obj.media_tag.get_topics()
         return topics
 
     def get_tags(self, obj):
         tags = []
-        if hasattr(obj, 'media_tag'):
+        if hasattr(obj, 'media_tag') and obj.media_tag and obj.media_tag.tags:
             tags = obj.media_tag.tags.values_list('name', flat=True)
         return tags
 
@@ -53,7 +53,7 @@ class CosinnusSocietySerializer(serializers.HyperlinkedModelSerializer):
             locations.append({
                 'location': location.location,
                 'lat': location.location_lat,
-                'lon': location.location_lat,
+                'lon': location.location_lon,
                 'url': location.location_url
             })
         return locations
@@ -145,13 +145,13 @@ class CosinnusProjectGoodDBSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_tags(self, obj):
         tags = []
-        if hasattr(obj, 'media_tag'):
+        if hasattr(obj, 'media_tag') and obj.media_tag:
             tags = [t.name for t in obj.media_tag.tags.all()]
         return tags
 
     def get_categories(self, obj):
         categories = []
-        if hasattr(obj, 'media_tag'):
+        if hasattr(obj, 'media_tag') and obj.media_tag:
             categories = obj.media_tag.get_topics()
         return categories
 

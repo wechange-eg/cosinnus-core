@@ -452,6 +452,8 @@ def print_settings(request):
                 'secret' in key.lower() or 'secret' in val.lower():
             val = '***'
         setts += '%s = %s<br/>' % (key, val)
+    if not request:
+        return setts
     return HttpResponse('Settings are:<br/>' + setts)
 
 def _get_group_storage_space_mb(group):
