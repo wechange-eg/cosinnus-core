@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 # import global settings so we can extend some of them
 from os.path import dirname, join, realpath
+import ast
 import random
 import string
 import sys
@@ -475,6 +476,43 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     
     
     """ --------------- EXTERNAL SERVICES  ---------------- """
+    
+    # BBB Video conferences for groups and conferences configured in the local .env.
+    # 
+    # Example for both settings that go together:
+    #     COSINNUS_BBB_SERVER_CHOICES = (
+    #         (0, 'default bbb server'),
+    #         (1, 'premium bbb server'),
+    #     )
+    #     COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS = {
+    #         0: (
+    #             'https://bbb1.myserver.com/bigbluebutton/api/',
+    #             'secret123',
+    #         ),
+    #         1: (
+    #             'https://bbb2.myserver.com/bigbluebutton/api/',
+    #             'secret123',
+    #         ),
+    #     }
+    try:
+        # import pythonic objects from the .env file
+        bbb_str = env(
+            "WECHANGE_COSINNUS_BBB_SERVER_CHOICES",
+            default="((0, '(None)'),)"
+        )
+        COSINNUS_BBB_SERVER_CHOICES = ast.literal_eval(bbb_str)
+        bbb_str = env(
+            "WECHANGE_COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS", 
+            default="{0: (None, None),}"
+        )
+        COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS = ast.literal_eval(bbb_str)
+    except Exception as e:
+        import logging
+        logger = logging.getLogger('cosinnus')
+        logger.error(f'Exception: Malformed BBB .env variable input! Exception: {e}', extra={'bbb_str': bbb_str})
+        print(f'Exception: Malformed BBB .env variable input! Exception: {e}. Input string was: {bbb_str}')
+        COSINNUS_BBB_SERVER_CHOICES = ((0, '(None)'),)
+        COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS = {0: (None, None),}
     
     COSINNUS_HCAPTCHA_SECRET_KEY = env("WECHANGE_COSINNUS_HCAPTCHA_SECRET_KEY", default=None)
     
