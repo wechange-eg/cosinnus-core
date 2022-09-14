@@ -2,8 +2,7 @@
 from django.db.models import Q
 from rest_framework import viewsets
 
-from cosinnus.api.views.mixins import PublicTaggableObjectFilterMixin, CosinnusFilterQuerySetMixin, \
-    CosinnusPaginateMixin
+from cosinnus.api.views.mixins import PublicTaggableObjectFilterMixin, CosinnusFilterQuerySetMixin
 from cosinnus_event.models import Event
 from cosinnus_event.api.serializers import EventListSerializer, EventRetrieveSerializer
 from django.utils.timezone import now
@@ -22,8 +21,7 @@ class ScheduledFilterMixin(object):
         return queryset
 
 
-class EventViewSet(CosinnusPaginateMixin,
-                   ScheduledFilterMixin,
+class EventViewSet(ScheduledFilterMixin,
                    CosinnusFilterQuerySetMixin,
                    PublicTaggableObjectFilterMixin,
                    viewsets.ReadOnlyModelViewSet):

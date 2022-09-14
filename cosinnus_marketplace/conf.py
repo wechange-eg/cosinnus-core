@@ -12,7 +12,7 @@ class CosinnusMarketplaceConf(AppConf):
     
     
     # default number of days offers in the Marketplace stay active
-    OFFER_ACTIVITY_DURATION_DAYS = 30
+    OFFER_ACTIVITY_DURATION_DAYS = 180
     
     # if False, offers will expire after `COSINNUS_MARKETPLACE_OFFER_ACTIVITY_DURATION_DAYS`
     # (set to inactive by a cronjob)

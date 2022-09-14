@@ -114,17 +114,24 @@ class Event(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, LikeableObje
 
     video_conference_type = models.PositiveIntegerField(
         _('Type of video conference available for the event'), blank=False, null=False, choices=VIDEO_CONFERENCE_TYPE_CHOICES, default=NO_VIDEO_CONFERENCE,)
-
+    
+    # DEPRECATED: use `media_tag.location` instead!
     location = OSMField(_('Location'), blank=True, null=True)
+    # DEPRECATED: use `media_tag.location` instead!
     location_lat = LatitudeField(_('Latitude'), blank=True, null=True)
+    # DEPRECATED: use `media_tag.location` instead!
     location_lon = LongitudeField(_('Longitude'), blank=True, null=True)
-
+    
+    # DEPRECATED: use `media_tag.location` instead!
     street = models.CharField(_('Street'), blank=True, max_length=50, null=True)
-
+    
+    # DEPRECATED: use `media_tag.location` instead!
     zipcode = models.PositiveIntegerField(_('ZIP code'), blank=True, null=True)
 
+    # DEPRECATED: use `media_tag.location` instead!
     city = models.CharField(_('City'), blank=True, max_length=50, null=True)
-
+    
+    # DEPRECATED: use `media_tag.visibility` instead!
     public = models.BooleanField(_('Is public (on website)'), default=False)
     
     image = models.ImageField(
