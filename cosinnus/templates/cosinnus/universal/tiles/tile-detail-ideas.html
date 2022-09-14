@@ -90,7 +90,7 @@
                 </a>
             {% endif %}
         {% endif %}
-        <a href="{{ action_url_1 }}" target="_blank" class="rounded-button button-action">
+        <a href="{% if action_url_1 %}{{ action_url_1 }}{% else %}{{ url }}{% endif %}" target="_blank" class="rounded-button button-action">
             <span class="rounded-button-inner">
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Create Project from Idea" %}

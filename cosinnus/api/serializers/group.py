@@ -53,7 +53,7 @@ class CosinnusSocietySerializer(serializers.HyperlinkedModelSerializer):
             locations.append({
                 'location': location.location,
                 'lat': location.location_lat,
-                'lon': location.location_lat,
+                'lon': location.location_lon,
                 'url': location.location_url
             })
         return locations

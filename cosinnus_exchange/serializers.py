@@ -44,17 +44,17 @@ class ExchangeGroupSerializer(ExchangeSerializerMixin, serializers.Serializer):
     icon_image_url = serializers.URLField(source='avatar')
 
     def get_mt_location(self, obj):
-        if len(obj.get('locations', [])) > 1:
+        if len(obj.get('locations', [])) > 0:
             return obj['locations'][0].get('location', None)
         return None
 
     def get_mt_location_lat(self, obj):
-        if len(obj.get('locations', [])) > 1:
+        if len(obj.get('locations', [])) > 0:
             return obj['locations'][0].get('lat', None)
         return None
 
     def get_mt_location_lon(self, obj):
-        if len(obj.get('locations', [])) > 1:
+        if len(obj.get('locations', [])) > 0:
             return obj['locations'][0].get('lon', None)
         return None
 
