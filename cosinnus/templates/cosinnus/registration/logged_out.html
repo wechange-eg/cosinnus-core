@@ -1,8 +1,96 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n %}
+{% load i18n cosinnus_tags %}
 
 {% block page_title %}{% trans "Logged out" %}{% endblock %}
 
+{% block leftnav %}
+    {% if not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
+        {% include "cosinnus/registration/leftnav.html"  with current_page="login" %}
+    {% endif %}
+{% endblock leftnav %}
+
+
 {% block content %}
-  {% trans "Logged out" %}
+    
+    {% include 'cosinnus/messages.html' %}
+    
+    <!-- a box with semi transparent background -->
+    <div class="content-box white-content">
+        
+        
+        <div class="frame-logged-out" {% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED %}style="display: none;"{% endif %}>
+            <h2>{% trans "Logged out" %}</h2>
+            <p>{% trans "You have been logged out. See you again soon!" %}</p>
+        </div>
+        
+        {% comment %} Additional logout logic via JS for services. {% endcomment %}
+        {% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED %}
+            <div class="frame-logout-error" style="display: none;">
+	            <h2>{% trans "Error while logging out" %}</h2>
+	            <p>{% trans "Your logout may be incomplete in parts of the site due to a server error. If this is not a device you trust, please delete your cookies for this site!" %}</p>
+	        </div>
+            
+            <div class="frame-logout-progress">
+                <h2>{% trans "Logging you out..." %} <span class="fa fa-fw fa-spin fa-cog"></span></h2>
+            </div>
+            
+            <script type="text/javascript">
+                {% comment %}Logs user out of the v3 frontend by calling the NextAuth.js API signout endpoint (see https://next-auth.js.org/getting-started/rest-api#post-apiauthsignout){% endcomment %}
+                
+                var url_csrf = '/api/auth/csrf?v=3';
+                var url_logout = '/api/auth/signout?v=3';
+                
+                function logoutSuccess(success) {
+                    $('.frame-logout-progress').hide();
+                    if (success) {
+                        $('.frame-logged-out').show();
+                    } else {
+                        $('.frame-logout-error').show();
+                    }
+                }
+                
+                function _callFrontendLogout(csrfToken) {
+                    /* Does the logout using the csrftoken. */
+                    $.ajax(url_logout, {
+                        type: 'POST',
+                        data: {
+                            'csrfToken': csrfToken
+                        },
+                        success: function (response, textStatus, xhr) {
+                            console.log('# # Did logout');
+                            console.log(response);
+                            logoutSuccess(true);
+                        },
+                        error: function (xhr, textStatus) {
+                            console.log('# # Error while logging out');
+                            console.log(xhr);
+                            console.log(textStatus);
+                            logoutSuccess(false);
+                        }
+                    });
+                }
+                function doFrontendLogout() {
+                    /* Get CSRFtoken and POST to logout endpoint. */
+                    $.ajax(url_csrf, {
+                        type: 'GET',
+                        success: function (response, textStatus, xhr) {
+                            console.log('# # Fetched csrf');
+                            console.log(response);
+                            _callFrontendLogout(response['csrfToken']);
+                        },
+                        error: function (xhr, textStatus) {
+                            console.log('# # Error while fetching csrf');
+                            console.log(xhr);
+                            console.log(textStatus);
+                            logoutSuccess(false);
+                        }
+                    });
+                }
+	            
+                doFrontendLogout();
+            </script>
+		{% endif %}
+        
+    </div>
+    
 {% endblock content %}

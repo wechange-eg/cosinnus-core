@@ -29,7 +29,7 @@ from cosinnus.utils.permissions import check_object_write_access, \
     check_object_likefollowstar_access
 from cosinnus.utils.urls import safe_redirect
 from cosinnus.views.mixins.group import RequireCreateObjectsInMixin
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from cosinnus.views.user import send_user_email_to_verify
 from cosinnus.forms.user import UserEmailLoginForm
 
@@ -176,11 +176,13 @@ cosinnus_login = CosinnusLoginView.as_view()
 
 def cosinnus_logout(request, **kwargs):
     """ Wraps the django logout view to delete the "wp_user_logged_in" cookie on logouts
-        (this seems to only clear the value of the cookie and not completely delete it!) """
+        (this seems to only clear the value of the cookie and not completely delete it!).
+        Will redirect to a "you have been logged out" page, that may perform additional 
+        JS queries or redirects to log out from other services. """
     response = LogoutView.as_view(**kwargs)(request) # logout(request, **kwargs)
     if not request.user.is_authenticated:
         response.delete_cookie('wp_user_logged_in')
-    return response
+    return render(request, 'cosinnus/registration/logged_out.html')
 
 
 UNSPECIFIED = object()
