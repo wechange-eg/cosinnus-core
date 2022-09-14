@@ -127,7 +127,7 @@ setup(
         'djangorestframework-csv==2.1.1',
         'djangorestframework-jwt==1.11.0',
         'dnspython==1.15.0',
-        'drf-extra-fields=="3.4.0',
+        'drf-extra-fields==3.4.0',
         'drf-yasg==1.20.0',
         'easy-thumbnails==2.8',
         'ecdsa==0.13.3',
