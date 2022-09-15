@@ -749,3 +749,42 @@ def _make_country_formfield(**kwargs):
     ).formfield(**kwargs)
 
 
+
+DISLIKE = 0
+LIKE = 1
+IGNORED = 2
+
+TYPE_CHOICES = (
+    (DISLIKE, _('dislike')),
+    (LIKE, _('like')),
+    (IGNORED, _('ignored')),
+)
+
+class UserMatchObject(models.Model):
+    """
+    An object to serve as a "Match" building match connection between users.
+    """
+
+    from_user = models.ForeignKey(settings.AUTH_USER_MODEL,
+        verbose_name=_('User'),
+        help_text=_('Match subject'),
+        on_delete=models.CASCADE,
+        null=True,
+        related_name='match_from_user')
+    to_user = models.ForeignKey(settings.AUTH_USER_MODEL,
+        verbose_name=_('User'),
+        help_text=_('Match object'),
+        on_delete=models.CASCADE,
+        null=True,
+        related_name='match_to_user')
+    type = models.PositiveSmallIntegerField(verbose_name=_('Match type'),
+        blank=False, choices=TYPE_CHOICES, default=IGNORED)
+
+    class Meta(object):
+        app_label = 'cosinnus'
+        verbose_name = _('Match')
+        verbose_name_plural = _('Matches')
+        unique_together = (('from_user', 'to_user'),)
+
+    def __str__(self):
+        return f'match: {self.from_user}::{self.to_user}::{self.type}'

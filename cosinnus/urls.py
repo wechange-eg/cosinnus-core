@@ -211,6 +211,13 @@ if getattr(settings, 'COSINNUS_USE_V2_NAVBAR', False) or getattr(settings, 'COSI
         url(r'^search/api/quicksearch/$', search.api_quicksearch, name='quicksearch-api'),
     ]
 
+from cosinnus.views.profile import UserProfileDirectContactListView
+if getattr(settings, 'COSINNUS_ENABLE_DIRECT_CONTACT', True):
+    urlpatterns += [
+        url(r'^direct_contact/$', UserProfileDirectContactListView.as_view(), name='direct-contact'),
+        url(r'^direct_contact_match/$', profile.match_create_view, name='direct-contact-match'),
+    ]
+
 if settings.COSINNUS_USER_2_FACTOR_AUTH_ENABLED:
     urlpatterns += [
         url(r'^two_factor_auth/token_login/$', authentication.user_otp_token_validation, name='two-factor-auth-token'),

@@ -2,7 +2,8 @@
 from __future__ import unicode_literals
 
 from builtins import str
-from datetime import timedelta
+import datetime
+from dateutil.relativedelta import relativedelta
 import logging
 from uuid import uuid1
 
@@ -12,13 +13,15 @@ from django.contrib.auth import logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist, ValidationError, \
     PermissionDenied
+from django.db.models import Q
 from django.forms.fields import CharField
-from django.http.response import Http404, HttpResponseRedirect
+from django.http.response import Http404, HttpResponseRedirect, HttpResponseNotAllowed, HttpResponseForbidden
+from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, UpdateView
+from django.views.generic import DetailView, UpdateView, ListView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import DeleteView
 
@@ -27,10 +30,11 @@ from cosinnus.core.decorators.views import redirect_to_not_logged_in
 from cosinnus.forms.profile import UserProfileForm
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, \
     CosinnusPortal
-from cosinnus.models.profile import get_user_profile_model
-from cosinnus.models.tagged import BaseTagObject, get_tag_object_model
+from cosinnus.models.profile import UserMatchObject, get_user_profile_model, DISLIKE, LIKE, IGNORED
+from cosinnus.models.tagged import BaseTagObject, get_tag_object_model, LikeObject
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.templatetags.cosinnus_tags import cosinnus_setting, textfield
+from cosinnus.utils import user
 from cosinnus.utils.permissions import check_user_integrated_portal_member, \
     check_user_can_see_user, check_user_superuser
 from cosinnus.utils.urls import safe_redirect
@@ -40,6 +44,7 @@ from django.utils.crypto import get_random_string
 from oauth2_provider import models as oauth2_provider_models
 from cosinnus.core.mail import send_html_mail
 from cosinnus.utils.user import filter_active_users
+from cosinnus.utils.functions import is_number
 
 
 logger = logging.getLogger('cosinnus')
@@ -422,6 +427,116 @@ class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, DeleteView)
         messages.success(self.request, self.message_success)
         
         return HttpResponseRedirect(self.get_success_url())
+
+
+class UserProfileDirectContactListView(ListView):
+    model = get_user_profile_model()
+    template_name = 'cosinnus/user/user_profile_direct_contact.html'
+
+    def get_hashset_likes_for_user(self, user=None):
+        values_liked = LikeObject.objects.filter(user=self.request.user, liked=True).values_list('content_type', 'object_id')
+        user_liked_set = set(f'{liketuple[0]}::{liketuple[1]}' for liketuple in values_liked)
+        return user_liked_set
+
+    def get_context_data(self, **kwargs): # TODO: cache after!
+        context = super().get_context_data(**kwargs)
+
+        disliked_users = UserMatchObject.objects.filter(type=DISLIKE).values_list('to_user_id', flat=True)
+        liked_users = UserMatchObject.objects.filter(type=LIKE).values_list('to_user_id', flat=True)
+
+        user_profiles = self.model.objects.exclude(user=self.request.user).exclude(user_id__in=disliked_users).exclude(user_id__in=liked_users)
+
+        request_user_liked_set = self.get_hashset_likes_for_user(self.request.user)
+        score_dict = {}
+        
+        for profile in user_profiles:
+            score = 0
+            # profile fields score
+            if profile.description and len(profile.description) > 10:
+                score += 1
+            if profile.avatar:
+                score += 1
+            if profile.website:
+                score += 1
+            if profile.email_verified:
+                score += 1
+            if profile.dynamic_fields:
+                for value in profile.dynamic_fields.values():
+                    if value:
+                        score += 1
+            # mutual likes score
+            this_user_liked_set = self.get_hashset_likes_for_user(profile) 
+            set_union = this_user_liked_set.union(request_user_liked_set) 
+            shared_like_count = len(set_union)
+            score += shared_like_count
+            
+            score_dict[profile.id] = score
+
+
+        score_dict = sorted(score_dict.items(), key=lambda score: score[1], reverse=True)
+        result_score = {k: v for k, v in score_dict}
+
+        selected_user_profiles = list(result_score.keys())[:3] # get first 3 user profiles with the highest counted score
+        active_users = filter_active_users(get_user_model().objects.select_related('cosinnus_profile').filter(id__in=selected_user_profiles)) # all active users related to the selected user profiles
+
+        last_year = datetime.date.today() - relativedelta(years=+1) # timedelta to pass users who have logged in at least once within the last year; TODO: as prio?
+
+        scored_user_profiles = self.model.objects.filter(Q(user__in=active_users) & Q(user__last_login__gte=last_year))
+
+        context.update(
+            {
+                'scored_user_profiles': scored_user_profiles,
+            }
+        )
+
+        return context
+
+
+def match_create_view(request):
+    if not request.method == 'POST':
+        return HttpResponseNotAllowed(['POST'])
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden('Not authenticated.')
+
+    # check if `user_id` is a number
+    user_id = request.POST.get('user_id')
+    if user_id is None or not is_number(user_id):
+        raise ValidationError(message=_('User id should be an integer and it should not be None.'))
     
+    # check if `action` matches the given ones
+    action = request.POST.get('action')
+    action_types = [DISLIKE, LIKE, IGNORED]
+    if action is None or not int(action) in action_types:
+        raise ValueError(f'Action should be either "like", "dislike" or "ignore" and it should not be None.')
+
+    # check if certain user exists
+    user = get_user_model().objects.get(id=user_id)
+    if not user or user is None:
+        raise ObjectDoesNotExist('User matching query does not exist')
+    
+    # check if request.user can interact with a certain user
+    if not check_user_can_see_user(request.user, user):
+        raise ValidationError(message=_('Privacy settings of the user you would like to interact with do not allow this action.'))
+
+    # create UserMatchObject
+    match_object, created = UserMatchObject.objects.get_or_create(from_user=request.user, to_user=user, defaults={'type': action})
+    if not created and not match_object.type == action:
+        match_object.type = action
+        match_object.save()
+
+    # check if reverse match exists
+    print(match_object)
+
+    try:
+        match_case = UserMatchObject.objects.get(from_user=user, to_user=request.user, type=LIKE)
+        if settings.COSINNUS_ROCKET_ENABLED:
+            return reverse('cosinnus:message-write', kwargs={'username': user.username})
+        else:
+            logger.info('RocketChat is not enabled on this portal!')
+    except UserMatchObject.DoesNotExist:
+        match_case = None
+
+    return redirect('cosinnus:direct-contact')
+
 
 delete_view = UserProfileDeleteView.as_view()

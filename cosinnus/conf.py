@@ -1254,6 +1254,9 @@ class CosinnusConf(AppConf):
     # 0 for projects; 1 for groups; 2 for conferences
     ENABLE_USER_JOIN_TOKENS_FOR_GROUP_TYPE = []
 
+    # if True, the DirectContact feature will be enabled
+    ENABLE_DIRECT_CONTACT = False
+
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.
         These are settings used by default in cosinnus apps, such as avatar dimensions, etc.
