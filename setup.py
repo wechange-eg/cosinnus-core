@@ -119,7 +119,7 @@ setup(
         'six==1.12.0',
         'sqlparse==0.2.2',
         'python-dateutil==2.4.1',
-        'urllib3==1.24.2',
+        'urllib3==1.26.5',
         'pytz==2018.5',
         'PyJWT==1.7.1',
         'rdflib==5.0.0',
