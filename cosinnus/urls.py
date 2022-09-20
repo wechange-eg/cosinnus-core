@@ -18,7 +18,7 @@ from cosinnus.conf import settings
 from cosinnus.core.registries import url_registry
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_portal
-from cosinnus.views import bbb_room, user_import
+from cosinnus.views import bbb_room, user_import, user_match
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group, \
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication, \
     user_dashboard, ui_prefs, administration, user_dashboard_announcement, dynamic_fields, \
@@ -211,11 +211,10 @@ if getattr(settings, 'COSINNUS_USE_V2_NAVBAR', False) or getattr(settings, 'COSI
         url(r'^search/api/quicksearch/$', search.api_quicksearch, name='quicksearch-api'),
     ]
 
-from cosinnus.views.profile import UserProfileDirectContactListView
-if getattr(settings, 'COSINNUS_ENABLE_DIRECT_CONTACT', True):
+if getattr(settings, 'COSINNUS_ENABLE_USER_MATCH', True):
     urlpatterns += [
-        url(r'^direct_contact/$', UserProfileDirectContactListView.as_view(), name='direct-contact'),
-        url(r'^direct_contact_match/$', profile.match_create_view, name='direct-contact-match'),
+        url(r'^user_match/$', user_match.user_match_list_view, name='user-match'),
+        url(r'^user_match_assign/$', user_match.match_create_view, name='user-match-match'),
     ]
 
 if settings.COSINNUS_USER_2_FACTOR_AUTH_ENABLED:

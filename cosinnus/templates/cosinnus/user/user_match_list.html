@@ -48,7 +48,7 @@
                                 Something here maybe?
                             </div>
                             <hr class="invisible"/>
-                            <form action="{% url 'cosinnus:direct-contact-match' %}" method="POST">
+                            <form action="{% url 'cosinnus:user-match-match' %}" method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" name="user_id" value="{{ scored_user_profile.user.id }}">
                                 <button type="submit" class="btn btn-primary btn-lg btn-success" style="margin-right: 35%;" name="action" value="1">Like</button>

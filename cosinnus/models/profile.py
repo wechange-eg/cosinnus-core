@@ -46,6 +46,7 @@ from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMi
 
 from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
 from django.utils import translation
+from django.utils.crypto import get_random_string
 
 
 logger = logging.getLogger('cosinnus')
@@ -750,21 +751,23 @@ def _make_country_formfield(**kwargs):
 
 
 
-DISLIKE = 0
-LIKE = 1
-IGNORED = 2
 
-TYPE_CHOICES = (
-    (DISLIKE, _('dislike')),
-    (LIKE, _('like')),
-    (IGNORED, _('ignored')),
-)
 
 class UserMatchObject(models.Model):
     """
     An object to serve as a "Match" building match connection between users.
     """
 
+    DISLIKE = 0
+    LIKE = 1
+    IGNORED = 2
+    
+    TYPE_CHOICES = (
+        (DISLIKE, _('dislike')),
+        (LIKE, _('like')),
+        (IGNORED, _('ignored')),
+    )
+    
     from_user = models.ForeignKey(settings.AUTH_USER_MODEL,
         verbose_name=_('User'),
         help_text=_('Match subject'),
@@ -779,6 +782,11 @@ class UserMatchObject(models.Model):
         related_name='match_to_user')
     type = models.PositiveSmallIntegerField(verbose_name=_('Match type'),
         blank=False, choices=TYPE_CHOICES, default=IGNORED)
+    
+    # connected rocketchat room to this room. 
+    rocket_chat_room_id = models.CharField(_('RocketChat room id'), max_length=250, null=True, blank=True)
+    rocket_chat_room_name = models.CharField(_('RocketChat room name'), max_length=250, null=True, blank=True,
+            help_text='The verbose room name for linking URLs')
 
     class Meta(object):
         app_label = 'cosinnus'
@@ -788,3 +796,43 @@ class UserMatchObject(models.Model):
 
     def __str__(self):
         return f'match: {self.from_user}::{self.to_user}::{self.type}'
+    
+    def get_absolute_url(self):
+        return self.get_rocketchat_room_url()
+    
+    def get_rocketchat_room_url(self):
+        if not settings.COSINNUS_ROCKET_ENABLED:
+            return ''
+        if not self.rocket_chat_room_id or not self.rocket_chat_room_name:
+            self.sync_rocketchat_room()
+        if not self.rocket_chat_room_id or not self.rocket_chat_room_name:
+            return ''
+        room_id = self.rocket_chat_room_name
+        return f'{settings.COSINNUS_CHAT_BASE_URL}/group/{room_id}/'
+    
+    def sync_rocketchat_room(self, force=False):
+        """ Can be safely called with force=False without re-creating rooms """
+        if settings.COSINNUS_ROCKET_ENABLED:
+            if not self.rocket_chat_room_id or force:
+                from cosinnus_message.rocket_chat import RocketChatConnection # noqa
+                rocket = RocketChatConnection()
+                
+                short_from_user = slugify(self.from_user.get_full_name()).replace('-', '')[:6]
+                short_to_user = slugify(self.to_user.get_full_name()).replace('-', '')[:6]
+                room_name = f'match-{short_from_user}-{short_to_user}-{get_random_string(4)}'
+                
+                room_topic = _('TODO: Youve matched!')
+                greeting_message = _('TODO: Matched chat room greeting message')
+                internal_room_id = rocket.create_private_room(room_name, self.from_user, 
+                      additional_admin_users=[self.to_user], room_topic=room_topic, greeting_message=greeting_message)
+                if internal_room_id:
+                    self.rocket_chat_room_id = internal_room_id
+                    self.rocket_chat_room_name = room_name
+                    self.save()
+                else:
+                    logger.error('Could not create a match chat rocketchat room!', 
+                                 extra={'match-id': self.id, 'from_user_id': self.from_user_id, 'to_user_id': self.to_user_id})
+    
+    
+    
+    
