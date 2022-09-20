@@ -272,8 +272,8 @@ class UserProfileView(UserSignupTriggerEventsMixin, APIView):
                             "first_name": "NewUser",
                             "last_name": "Usre",
                             "location": "Amsterdam",
-                            "locatition_lat": 52.3727598,
-                            "locatition_lon": 4.8936041,
+                            "location_lat": 52.3727598,
+                            "location_lon": 4.8936041,
                             "tags": ["testtag", "anothertag"],
                             "topics": [2,5,6],
                             "visibility": 2

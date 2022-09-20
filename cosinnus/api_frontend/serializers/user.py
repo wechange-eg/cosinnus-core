@@ -212,11 +212,11 @@ class CosinnusHybridUserSerializer(TaggitSerializer, serializers.Serializer):
         source='cosinnus_profile.media_tag.location', 
         required=False, allow_blank=True,
         help_text='On input, this string is used to determine the lat/lon fields using a nominatim service')
-    locatition_lat = serializers.FloatField(
+    location_lat = serializers.FloatField(
         source='cosinnus_profile.media_tag.location_lat',
         read_only=True,
         help_text='read-only, lat/lon determined from "location" field')
-    locatition_lon = serializers.FloatField(
+    location_lon = serializers.FloatField(
         source='cosinnus_profile.media_tag.location_lon', 
         read_only=True, 
         help_text='read-only, lat/lon determined from "location" field'
