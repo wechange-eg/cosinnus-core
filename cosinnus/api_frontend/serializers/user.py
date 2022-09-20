@@ -238,7 +238,7 @@ class CosinnusHybridUserSerializer(TaggitSerializer, serializers.Serializer):
         allow_blank=False, 
         choices=get_tag_object_model()._VISIBILITY_CHOICES,
         source='cosinnus_profile.media_tag.visibility',
-        help_text=f'Int for corresponding visibility setting: {str(get_tag_object_model()._VISIBILITY_CHOICES)}'
+        help_text=f'(optional) Int for corresponding visibility setting: {str(get_tag_object_model()._VISIBILITY_CHOICES)}. Default when omitted is different for each portal.'
     )
     
     def get_visibility(self, instance):
