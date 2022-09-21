@@ -13,8 +13,8 @@ module.exports = {
                 // we try to read the cosinnus-core po file and the main server project po file 
                 // (which is copied to the cosinnus-core directory during deploy)
                 var paths = [
-                    './cosinnus/locale/' + lang + '/LC_MESSAGES/django.po',
-                    './cosinnus/locale_extra/' + lang + '/LC_MESSAGES/django.po',
+                    './locale/' + lang + '/LC_MESSAGES/django.po',
+                    './locale_extra/' + lang + '/LC_MESSAGES/django.po',
                 ];
                 var langdict = {};
                 _.each(paths, function(path){
