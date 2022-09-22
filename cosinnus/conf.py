@@ -753,7 +753,7 @@ class CosinnusConf(AppConf):
     USER_PROFILE_DELETION_SCHEDULE_DAYS = 30
     
     # when users newly register, are their profiles marked as visible rather than private on the site?
-    USER_DEFAULT_VISIBLE_WHEN_CREATED = True
+    USER_DEFAULT_VISIBLE_WHEN_CREATED = False
     
     # for portals with `email_needs_verification` active, how many days after registration
     # should the user get a full-screen popup to "please verify your email now" on every
@@ -842,14 +842,14 @@ class CosinnusConf(AppConf):
     USE_CELERY = False
     
     # whether to use the new style navbar
-    USE_V2_NAVBAR = False
+    USE_V2_NAVBAR = True
     
     # whether to use the new style navbar ONLY for admins
     # does not need `USE_V2_NAVBAR` to be enabled
     USE_V2_NAVBAR_ADMIN_ONLY = False
     
     # whether to use the new style user-dashboard
-    USE_V2_DASHBOARD = False    
+    USE_V2_DASHBOARD = True    
     
     # the URL fragment for the user-dashboard on this portal
     V2_DASHBOARD_URL_FRAGMENT = 'dashboard'
