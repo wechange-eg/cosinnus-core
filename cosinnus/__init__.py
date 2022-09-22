@@ -2,7 +2,7 @@
 from __future__ import absolute_import, unicode_literals
 
 # The cosinnus version
-VERSION = '1.0.18'
+VERSION = '1.0.19'
 
 celery_app = None
 

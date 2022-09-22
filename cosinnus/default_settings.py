@@ -92,6 +92,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     LOCALE_PATHS = [
         join(COSINNUS_BASE_PATH, 'locale'),
         join(BASE_PATH, "locale"),
+        join(BASE_PATH, "apps", "core", "locale"),
     ]
     
     
@@ -179,6 +180,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
             'BACKEND': 'django.template.backends.django.DjangoTemplates',
             'DIRS': [ 
                 join(BASE_PATH, "templates"),
+                join(BASE_PATH, "apps", "core", "templates"),
             ],
             'OPTIONS': {
                 'context_processors': [
