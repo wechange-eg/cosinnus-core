@@ -446,10 +446,12 @@ def print_settings(request):
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
     setts = ''
+    KEY_BLACKLIST = ['COSINNUS_CLOUD_NEXTCLOUD_AUTH',]
     for key in dir(settings):
         val = force_text(getattr(settings, key))
         if 'password' in key.lower() or 'password' in val.lower() or  \
-                'secret' in key.lower() or 'secret' in val.lower():
+                'secret' in key.lower() or 'secret' in val.lower() or \
+                'key' in key.lower() or key in KEY_BLACKLIST:
             val = '***'
         setts += '%s = %s<br/>' % (key, val)
     if not request:
