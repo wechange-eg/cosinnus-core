@@ -60,6 +60,7 @@ packages = [
     "rest_framework_rdf",
     "suit_overextends",
     "wagtail_overextends",
+    "locale",
 ]
 
 for package in packages:
