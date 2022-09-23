@@ -1,0 +1,65 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags widget_tweaks static thumbnail %}
+
+{% block page_title %}{% trans 'Direct Contact' %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% for scored_user_profile in scored_user_profiles %}
+                <!-- card -->
+                <div class="col-sm-4">
+                    <div class="card h-100">
+                            <div class="card-img-top d-flex flex-column">
+                                <!-- <img {% if scored_user_profile.avatar_url %}src="{{ scored_user_profile.avatar_url }}" {% else %} src="{% static 'images/jane-doe.png' %}" {% endif %}> -->
+                                {% include 'cosinnus/user/user_avatar_image.html' with user=scored_user_profile.user image_size="large" %}
+                            </div>
+                            <div class="card-body" style="width: 74%;">
+                                <h4 class="card-title">{{ scored_user_profile.get_full_name }}</h4>
+                                {% if scored_user_profile.description %}
+                                    <p class="card-text">{{ scored_user_profile.description }}</p>
+                                {% endif %}
+                                {% if scored_user_profile.dynamic_fields.type_of_educational_institution %}
+                                    <h5>{% trans "Type of educational institution" %}</h5>
+                                    <p class="transparent">
+                                        {{ scored_user_profile.dynamic_fields.type_of_educational_institution }} 
+                                    </p>
+                                {% endif %}
+                                {% if scored_user_profile.dynamic_fields.function %}
+                                    <h5>{% trans "Function" %}</h5>
+                                    <p class="transparent">
+                                        {{ SETTINGS.GOETHE_FUNCTION_CHOICES|get_item:scored_user_profile.dynamic_fields.function }}
+                                    </p>
+                                {% endif %}
+                                {% if scored_user_profile.dynamic_fields.position %}
+                                    <h5>{% trans "Position" %}</h5>
+                                    <p class="transparent">
+                                        {{ scored_user_profile.dynamic_fields.position }} 
+                                    </p>
+                                {% endif %}
+                                {% if scored_user_profile.dynamic_fields.name_of_educational_institution %}
+                                    <h5>{% trans "Name of educational institution" %}</h5>
+                                    <p class="transparent">
+                                        {{ scored_user_profile.dynamic_fields.name_of_educational_institution }} 
+                                    </p>
+                                {% endif %}
+                            </div>
+                            <div class="card-footer">
+                                Something here maybe?
+                            </div>
+                            <hr class="invisible"/>
+                            <form action="{% url 'cosinnus:user-match-match' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="user_id" value="{{ scored_user_profile.user.id }}">
+                                <button type="submit" class="btn btn-primary btn-lg btn-success" style="margin-right: 35%;" name="action" value="1">Like</button>
+                                <hr class="invisible"/>
+                                <hr class="invisible"/>
+                                <button type="submit" class="btn btn-primary btn-lg btn-danger" style="margin-right: 35%;" name="action" value="0">Dislike</button>
+                            </form>
+                    </div>        
+                </div>
+                <!-- card -->
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
