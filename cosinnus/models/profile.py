@@ -750,9 +750,7 @@ def _make_country_formfield(**kwargs):
     ).formfield(**kwargs)
 
 
-
-
-
+from cosinnus.utils.permissions import check_user_superuser
 class UserMatchObject(models.Model):
     """
     An object to serve as a "Match" building match connection between users.
@@ -797,6 +795,33 @@ class UserMatchObject(models.Model):
     def __str__(self):
         return f'match: {self.from_user}::{self.to_user}::{self.type}'
     
+    @property
+    def group(self):
+        """
+        Group property attribut which establishes conection to the notification signal `user_match_established`
+        for the `UserMatchObject`
+
+        Returns:
+            Object: Forum Group
+        """
+        forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+        forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
+        return forum_group
+
+    @property
+    def description(self):
+        return _(f'Match between {self.from_user} and {self.to_user} has been successfully established.')
+
+    @property
+    def name(self):
+        return _(f'You and {self.from_user.get_full_name()} matched!')
+
+    def grant_extra_read_permissions(self, user):
+        return check_user_superuser(user) or user == self.from_user or user == self.to_user
+
+    def special_alert_check(self, user):
+        return user == self.from_user or user == self.to_user
+
     def get_absolute_url(self):
         return self.get_rocketchat_room_url()
     

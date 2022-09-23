@@ -9,6 +9,7 @@ from django.http.response import HttpResponseNotAllowed, HttpResponseForbidden
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.list import ListView
+from cosinnus import cosinnus_notifications
 
 from cosinnus.conf import settings
 from cosinnus.models.profile import get_user_profile_model, UserMatchObject
@@ -26,12 +27,21 @@ class UserMatchListView(ListView):
     template_name = 'cosinnus/user/user_match_list.html'
 
     def get_hashset_likes_for_user(self, user=None):
-        """ todo: comment what this does """
+        """
+        Get all the objects liked by a certain user.
+
+        Args:
+            user: UserObject. Defaults to None.
+
+        Returns:
+            set(): Set of objects liked by the given user in form {content_type: object_id}
+        """
         values_liked = LikeObject.objects.filter(user=self.request.user, liked=True).values_list('content_type', 'object_id')
         user_liked_set = set(f'{liketuple[0]}::{liketuple[1]}' for liketuple in values_liked)
         return user_liked_set
 
-    def get_context_data(self, **kwargs): # TODO: cache after!
+    # TODO: cache after!
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
         already_liked_users = UserMatchObject.objects.filter(type__in=[UserMatchObject.LIKE, UserMatchObject.DISLIKE])\
@@ -41,11 +51,12 @@ class UserMatchListView(ListView):
                 exclude(user_id__in=already_liked_users)
         # filter active users
         user_profiles = filter_active_users(user_profiles, filter_on_user_profile_model=True)
-        
-        # TODO: also filter users for their profile visibility (like `check_user_can_see_user` but for the entire QS)
-        
+        # filter users for their profile visibility
+        users = get_user_model().objects.filter(cosinnus_profile__in=user_profiles)
+        checked_for_visibility_users = [user for user in users if check_user_can_see_user(self.request.user, user)]
+        user_profiles = get_user_profile_model().objects.filter(user_id__in=checked_for_visibility_users)
         # filter user to be active within the last year
-        last_year = datetime.date.today() - relativedelta(years=+1) # timedelta to pass users who have logged in at least once within the last year; TODO: as prio?
+        last_year = datetime.date.today() - relativedelta(years=+1) # timedelta to pass users who have logged in at least once within the last year;
         user_profiles = user_profiles.filter(user__last_login__gte=last_year)
 
         request_user_liked_set = self.get_hashset_likes_for_user(self.request.user)
@@ -66,8 +77,10 @@ class UserMatchListView(ListView):
                 for value in profile.dynamic_fields.values():
                     if value:
                         score += 1
-            
-            # TODO: add score for topics (only for same topics?)            
+            if profile.media_tag.topics:
+                score += 1
+                if profile.media_tag.topics == self.request.user.cosinnus_profile.media_tag.topics:
+                    score += 1
             
             # mutual likes score
             this_user_liked_set = self.get_hashset_likes_for_user(profile) 
@@ -96,16 +109,26 @@ class UserMatchListView(ListView):
 def check_for_user_match(from_user, to_user):
     """ Checks if between two users, a MatchObject exists, in a way that both users
         "like" each other, and if so, triggers different effects. """
-    print(f'>> checking user match {from_user} {to_user}')
     try:
         match_case_from = UserMatchObject.objects.get(from_user=from_user, to_user=to_user, type=UserMatchObject.LIKE)
         match_case_to = UserMatchObject.objects.get(from_user=to_user, to_user=from_user, type=UserMatchObject.LIKE)
+
+        # Create email notifications
+        cosinnus_notifications.user_match_established.send(
+                    sender=from_user,
+                    obj=match_case_from,
+                    user=from_user,
+                    audience=[to_user,]
+                )
         
-        # TODO: create NotificationAlert
-        # TODO: create email notification
-        print('We matched, create notifications!')
+        cosinnus_notifications.user_match_established.send(
+                    sender=to_user,
+                    obj=match_case_to,
+                    user=to_user,
+                    audience=[from_user,]
+                )
+        
         # open rocketchat
-        
         if settings.COSINNUS_ROCKET_ENABLED:
             room_url = match_case_from.get_rocketchat_room_url()
             if match_case_from.rocket_chat_room_id and match_case_from.rocket_chat_room_name:
@@ -119,6 +142,22 @@ def check_for_user_match(from_user, to_user):
 
 
 def match_create_view(request):
+    """ 
+    Creates an `UserMatchObject` where the `from_user` represents the current user, 
+    `to_user` is certain user who got 'liked' or 'disliked', 
+    and `action` is certain type of reaction which `to_user` got from `from_user`. 
+
+    Args:
+        request
+
+    Raises:
+        ValidationError: if `user_id` from POST.data is not an integer or is None;
+        ValueError: if `action` from POST.data is not 'like', 'dislike' or 'ignore' or is None;
+        ObjectDoesNotExist: if UserObject does not match the one with the given id;
+
+    Returns:
+        redirect: UserMatchListView
+    """
     if not request.method == 'POST':
         return HttpResponseNotAllowed(['POST'])
     if not request.user.is_authenticated:
@@ -139,18 +178,11 @@ def match_create_view(request):
     if not user or user is None:
         raise ObjectDoesNotExist('User matching query does not exist')
     
-    # check if request.user can interact with a certain user
-    if not check_user_can_see_user(request.user, user):
-        raise ValidationError(message=_('Privacy settings of the user you would like to interact with do not allow this action.'))
-    
-    # TODO: current user can not like themselves!
-    
-    # create UserMatchObject
+    # create `UserMatchObject`
     match_object, created = UserMatchObject.objects.get_or_create(from_user=request.user, to_user=user, defaults={'type': action})
     if not created and not match_object.type == action:
         match_object.type = action
         match_object.save()
-    print(f'>> created ma {match_object} {created}')
 
     check_for_user_match(request.user, user)
     
