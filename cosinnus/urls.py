@@ -18,7 +18,7 @@ from cosinnus.conf import settings
 from cosinnus.core.registries import url_registry
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_portal
-from cosinnus.views import bbb_room, user_import
+from cosinnus.views import bbb_room, user_import, user_match
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group, \
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication, \
     user_dashboard, ui_prefs, administration, user_dashboard_announcement, dynamic_fields, \
@@ -209,6 +209,12 @@ if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(settings, 'C
 if getattr(settings, 'COSINNUS_USE_V2_NAVBAR', False) or getattr(settings, 'COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY', False):
     urlpatterns += [
         url(r'^search/api/quicksearch/$', search.api_quicksearch, name='quicksearch-api'),
+    ]
+
+if getattr(settings, 'COSINNUS_ENABLE_USER_MATCH', True):
+    urlpatterns += [
+        url(r'^user_match/$', user_match.user_match_list_view, name='user-match'),
+        url(r'^user_match_assign/$', user_match.match_create_view, name='user-match-match'),
     ]
 
 if settings.COSINNUS_USER_2_FACTOR_AUTH_ENABLED:

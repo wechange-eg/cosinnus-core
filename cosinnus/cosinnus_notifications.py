@@ -34,6 +34,7 @@ conference_created_in_group_alert = dispatch.Signal(providing_args=["user", "obj
 attending_conference_changed = dispatch.Signal(providing_args=["user", "obj", "audience"])
 attending_conference_time_changed = dispatch.Signal(providing_args=["user", "obj", "audience"])
 user_conference_invited_to_apply = dispatch.Signal(providing_args=["user", "obj", "audience"])
+user_match_established = dispatch.Signal(providing_args=["from_user", "to_user", "audience"])
 
 
 """ Notification definitions.
@@ -587,6 +588,34 @@ if settings.COSINNUS_IDEAS_ENABLED:
                 'sub_object_text': '_sender.cosinnus_profile.description',
                 'sub_object_url': '_sender.cosinnus_profile.get_absolute_url',
                 'sub_object_icon': '_sender.cosinnus_profile.get_icon',
+            },
+            'notification_reason': 'none',
+        },
+    })
+
+if settings.COSINNUS_ENABLE_USER_MATCH:
+    notifications.update({
+        'user_match_established': {
+            'label': '<hidden-user_match_established>', 
+            'signals': [user_match_established],
+            'default': True,
+            'hidden': True,
+            
+            'alert_text': _('Your match with %(sender_name)s has just been established!'),
+            'alert_reason': '',
+            
+            'is_html': True,
+            'event_text': _('Your match with %(sender_name)s has just been established!'),
+            'topic': _('Your match with %(sender_name)s has just been established!'),
+            'subject_text': _('Your match with %(sender_name)s has just been established!'),
+            'data_attributes': {
+                'object_name': 'name',
+                # 'object_url': 'get_absolute_url',
+                # 'object_text': 'none',
+                # 'sub_object_name': '_sender_name', 
+                # 'sub_object_text': '_sender.cosinnus_profile.description',
+                # 'sub_object_url': '_sender.cosinnus_profile.get_absolute_url',
+                # 'sub_object_icon': '_sender.cosinnus_profile.get_icon',
             },
             'notification_reason': 'none',
         },
