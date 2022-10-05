@@ -12,6 +12,10 @@ from cosinnus.api_frontend.serializers.portal import CosinnusManagedTagSerialize
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.conf import settings
 from cosinnus.models.managed_tags import MANAGED_TAG_LABELS, CosinnusManagedTag
+from django.db.models.query_utils import Q
+from taggit.models import Tag
+from django.http.response import Http404
+from cosinnus.utils.functions import is_number
 
 
 class PortalTopicsView(APIView):
@@ -52,7 +56,57 @@ class PortalTopicsView(APIView):
                 'title': force_text(topic_label)
             })
         return Response(topic_data)
+
+
+class PortalTagsView(APIView):
+    """ An endpoint that returns tags matched for the given "q" parameter. """
     
+    # disallow anonymous users if signup is disabled
+    if settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN or not settings.COSINNUS_USER_SIGNUP_ENABLED:
+        permission_classes = (IsAuthenticated,)
+    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    
+    
+    # todo: generate proper response, by either putting the entire response into a
+    #       Serializer, or defining it by hand
+    #       Note: Also needs docs on our custom data/timestamp/version wrapper!
+    # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
+    # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
+    @swagger_auto_schema(
+        responses={'200': openapi.Response(
+            description='A list of strings as the tags matched for the given "q" parameter.',
+            examples={
+                "application/json": {
+                    "data": [
+                        "tag1",
+                        "tag2",
+                    ],
+                    "version": COSINNUS_VERSION,
+                    "timestamp": 1658414865.057476
+                }
+            }
+        )}
+    )
+    def get(self, request):
+        tag_data = []
+        term = request.GET.get('q', '').lower()
+        limit = request.GET.get('limit', 'invalid')
+        if not is_number(limit): 
+            limit = 10
+        limit = int(limit)
+        if limit < 0 or limit > 50:
+            limit = 10
+        print(limit)
+        page = 1
+        start = (page - 1) * limit
+        end = page * limit
+        q = Q(name__icontains=term)
+        qs = Tag.objects.filter(q)
+        count = qs.count()
+        if count >= start:
+            tag_data = qs[start:end].values_list('name', flat=True)
+        return Response(tag_data)
 
 class PortalManagedTagsView(APIView):
     """ An endpoint that returns the managed tags for this portal """

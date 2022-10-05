@@ -7,7 +7,7 @@ from cosinnus.api_frontend.views.user import LoginView, SignupView, UserProfileV
     LogoutView
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.api_frontend.views.portal import PortalTopicsView,\
-    PortalManagedTagsView
+    PortalManagedTagsView, PortalTagsView
 
 
 urlpatterns = []
@@ -26,6 +26,7 @@ urlpatterns += [
     url(r'^api/v3/user/profile/', UserProfileView.as_view(), name='api-user-profile'),
     
     url(r'^api/v3/portal/topics/', PortalTopicsView.as_view(), name='api-portal-topics'),
+    url(r'^api/v3/portal/tags/', PortalTagsView.as_view(), name='api-portal-tags'),
     url(r'^api/v3/portal/managed_tags/', PortalManagedTagsView.as_view(), name='api-portal-managed-tags'),
     
 ]
