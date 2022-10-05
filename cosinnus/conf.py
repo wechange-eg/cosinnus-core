@@ -885,6 +885,7 @@ class CosinnusConf(AppConf):
         "^/signup/$", 
         "^/signup/profile",
         "^/setup/",
+        "^api/auth/",
     ]
     
     # whether the regular user signup method is enabled for this portal
