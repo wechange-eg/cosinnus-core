@@ -37,9 +37,7 @@ from cosinnus_notifications.notifications import notifications, \
 from django.core.cache import cache
 from cosinnus_notifications.alerts import ALERTS_USER_DATA_CACHE_KEY
 
-from cosinnus.models.group_extra import CosinnusConference
-from cosinnus.models.conference import CosinnusConferenceApplication
-from django.db.models import Q
+
 
 
 class NotificationPreferenceView(ListView):
@@ -233,12 +231,6 @@ class NotificationPreferenceView(ListView):
                 'multi_preference_setting': UserMultiNotificationPreference.get_setting_for_user(self.request.user, multi_notification_id),
             })
         
-        # get conferences user is pending for or is a member of
-        user = self.request.user
-        user_conferences = CosinnusConference.objects.get_for_user_pks(user)
-        pending_application_qs = CosinnusConferenceApplication.objects.filter(user=user).pending().filter(may_be_contacted=True)
-        subscribed_conferences = list(set(CosinnusConference.objects.filter(Q(conference_applications__in=pending_application_qs) | Q(id__in=user_conferences))))
-        
         context.update({
             #'object_list': self.queryset,
             'grouped_notifications': group_rows,
@@ -254,7 +246,6 @@ class NotificationPreferenceView(ListView):
             'rocketchat_setting_selected': rocketchat_setting_selected,
             'multi_notification_preferences': multi_notification_preferences,
             'notification_choices': UserNotificationPreference.SETTING_CHOICES,
-            'subscribed_conferences': subscribed_conferences,
         })
         return context
     

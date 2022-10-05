@@ -169,28 +169,6 @@
                 </div>
             </div>
         {% endif %}
-
-        {% if subscribed_conferences|length > 0 %}
-            <div class="content-box large-space">
-                <div class="row">
-                    <div class="col-md-12"><!-- right column -->
-                        <div class="row">
-                            <div class="col-md-4">
-                                <legend style="margin: 0;">{% trans "Additionally, you have opted in to receive emails from organizers from these conferences. <br/> You may opt out by revoking your application or by leaving the conference:" %}</legend>
-                            </div>
-                                <div class="col-md-8">
-                                    {% for conference in subscribed_conferences %}
-                                    <p class="no-horizontal-padding no-vertical-padding">
-                                        {{ conference.name }}: 
-                                        <a href="{% group_url 'cosinnus:group-detail' group=conference %}">{% group_url 'cosinnus:group-detail' group=conference %}</a>
-                                    </p>
-                                    {% endfor %}
-                                </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% endif %}
     
 		<!-- a box with semi transparent background -->
 	    <div id="custom_settings_frame" class="content-box" style="display: none;"> {# toggled visible on load by JS, depending on global setting #}

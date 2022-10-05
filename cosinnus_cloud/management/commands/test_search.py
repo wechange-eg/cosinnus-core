@@ -14,6 +14,7 @@ from cosinnus.core.middleware.cosinnus_middleware import (
 from django.contrib.auth import get_user_model
 from cosinnus_cloud.hooks import (
     create_user_from_obj,
+    generate_group_nextcloud_id,
     get_nc_user_id,
 )
 from cosinnus_cloud.utils.nextcloud import OCSException
