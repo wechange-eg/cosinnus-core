@@ -69,7 +69,6 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
 
             portal_url = group.portal.get_domain()
             group_icon_url = portal_url + (group.get_avatar_thumbnail_url() or get_image_url_for_icon(group.get_icon()))
-            notification_reason = _('You are getting this notification because you are a member of this conference or have applied for membership.')
             context = {
                 'action_user_url': group.get_absolute_url(),
                 'user_image_url': group_icon_url,
@@ -81,7 +80,7 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
                 'action_button_1_text': _('Go to conference'),
                 'action_button_1_url': group.get_absolute_url(),
             }
-            send_notification_item_html(recipient, subject, context, notification_reason)
+            send_notification_item_html(recipient, subject, context)
         finally:
             translation.activate(cur_language)
 
