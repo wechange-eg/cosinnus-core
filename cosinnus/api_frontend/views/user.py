@@ -23,13 +23,26 @@ from cosinnus.views.user import UserSignupTriggerEventsMixin
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.exceptions import TokenError
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.throttling import UserRateThrottle
 
 
 class CsrfExemptSessionAuthentication(authentication.SessionAuthentication):
     
     def enforce_csrf(self, request):
         return
+    
 
+class UserSignupThrottleBurst(UserRateThrottle):
+    
+    scope = 'signup'
+    rate = '5/hour'
+    
+
+class UserSignupThrottleSustained(UserRateThrottle):
+    
+    scope = 'signup'
+    rate = '15/day'
+    
 
 class LoginView(LoginViewAdditionalLogicMixin, APIView):
     """ A proper User Login API endpoint """
@@ -156,6 +169,7 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
     permission_classes = (IsNotAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
+    throttle_classes = [UserSignupThrottleBurst, UserSignupThrottleSustained]
     
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
