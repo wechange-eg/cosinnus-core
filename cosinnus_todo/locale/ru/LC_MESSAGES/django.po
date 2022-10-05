@@ -1,0 +1,770 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: wechange RU\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 14:56+0200\n"
+"PO-Revision-Date: 2021-03-12 17:42+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.0.6\n"
+
+msgid "Todos"
+msgstr "Задачи"
+
+msgctxt "the_app"
+msgid "todo"
+msgstr "задачи"
+
+msgid "A user created a new todo"
+msgstr "Пользователь создал новую задачу"
+
+#, python-format
+msgid "%(sender_name)s created the todo %(object_name)s"
+msgstr "%(sender_name)s создал задачу %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d todos"
+msgstr "%(sender_name)s создал %(count)d задач"
+
+#, python-format
+msgid "%(sender_name)s created a new todo"
+msgstr "%(sender_name)s создал новую задачу"
+
+#, python-format
+msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Новая задача: \"%(object_name)s\" была создана в %(team_name)s."
+
+msgid "A todo was assigned to me"
+msgstr "Мне было поручено задание"
+
+#, python-format
+msgid "%(sender_name)s assigned the todo %(object_name)s to you"
+msgstr "%(sender_name)s назначил Вам задачу %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s assigned %(count)d todos to you"
+msgstr "%(sender_name)s назначил Вам %(count)d задач"
+
+#, python-format
+msgid "%(sender_name)s assigned a todo to you"
+msgstr "Пользователь %(sender_name)s назначил Вам задачу"
+
+msgid "A todo I created was completed"
+msgstr "Созданная мной задача выполнена"
+
+#, python-format
+msgid "%(sender_name)s completed the todo %(object_name)s"
+msgstr "%(sender_name)s выполнил(а) задачу %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d todos"
+msgstr "%(sender_name)s выполнил(а) %(count)d задач"
+
+msgid "You created this todo"
+msgstr "Вы создали эту задачу"
+
+#, python-format
+msgid "%(sender_name)s completed your todo"
+msgstr "Пользователь %(sender_name)s выполнил Вашу задачу"
+
+#, python-format
+msgid "%(sender_name)s completed one of your todos"
+msgstr "Пользователь %(sender_name)s выполнил одну из Ваших задач"
+
+msgid "A user commented on one of your todos"
+msgstr "Пользователь прокомментировал одну из Ваших задач"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo %(object_name)s"
+msgstr "%(sender_name)s прокомментировал(а) Вашу задачу %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
+msgstr[0] "%(sender_name)s и %(count_minus_one)d прокомментировал(а) Вашу задачу %(object_name)s"
+msgstr[1] "%(sender_name)s и %(count_minus_one)d прокомментировали Вашу задачу %(object_name)s"
+msgstr[2] "%(sender_name)s и %(count_minus_one)d прокомментировали Вашу задачу %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo"
+msgstr "Пользователь %(sender_name)s прокомментировал Вашу задачу"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your todos"
+msgstr "Пользователь %(sender_name)s прокомментировал одну из Ваших задач"
+
+msgid "A user commented on a todo you were tagged in"
+msgstr "Пользователь прокомментировал одну из задач, в которой Вы были отмечены"
+
+#, python-format
+msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgstr "%(sender_name)s прокомментировал(а) задачу %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
+msgstr[0] "%(sender_name)s и %(count_minus_one)d прокомментировал(а) задачу %(object_name)s"
+msgstr[1] "%(sender_name)s и %(count_minus_one)d прокомментировали задачу %(object_name)s"
+msgstr[2] "%(sender_name)s и %(count_minus_one)d прокомментировали задачу %(object_name)s"
+
+msgid "You were tagged in this todo"
+msgstr "Вы были отмечены в этой задаче"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in"
+msgstr "Пользователь %(sender_name)s прокомментировал задачу, в которой Вы были отмечены"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
+msgstr "Пользователь %(sender_name)s прокомментировал задачу, в которой Вы были отмечены в %(team_name)s"
+
+msgid "A user commented on a todo you were assigned to"
+msgstr "Пользователь прокомментировал порученное Вам задание"
+
+#, python-format
+msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
+msgstr "%(sender_name)s прокомментировал(а) задачу %(object_name)s, которая назначена Вам"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
+msgstr[0] "%(sender_name)s и %(count_minus_one)d прокомментировал(а) задачу %(object_name)s, назначенную Вам"
+msgstr[1] "%(sender_name)s и %(count_minus_one)d прокомментировали задачу %(object_name)s, назначенную Вам"
+msgstr[2] "%(sender_name)s и %(count_minus_one)d прокомментировали задачу %(object_name)s, назначенную Вам"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos"
+msgstr "Пользователь %(sender_name)s прокомментировал одну из назначенных Вам задач"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgstr "Пользователь %(sender_name)s прокомментировал одну из задач, назначенных Вам в %(team_name)s"
+
+msgid "A user updated a todo you are following"
+msgstr "Пользователь обновил задачу, за которой ты следишь"
+
+#, python-format
+msgid "%(sender_name)s updated the todo %(object_name)s"
+msgstr "%(sender_name)s обновил задачу %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
+msgstr[0] "%(sender_name)s и %(count_minus_one)d обновил(а) задачу %(object_name)s"
+msgstr[1] "%(sender_name)s и %(count_minus_one)d обновили задачу %(object_name)s"
+msgstr[2] "%(sender_name)s и %(count_minus_one)d обновили задачу %(object_name)s"
+
+msgid "You are following this todo"
+msgstr "Вы следите за этой задачей"
+
+#, python-format
+msgid "%(sender_name)s updated a todo you are following"
+msgstr "%(sender_name)s обновил задачу, за которой ты следишь"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Задачу, за которой ты следишь: \"%(object_name)s\" было обновлено в %(team_name)s."
+
+msgid "A user reassigned a todo you are following"
+msgstr "Пользователь переназначил задачу, за которой ты следишь"
+
+#, python-format
+msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgstr "%(sender_name)s назначил(а) задачу %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s reassigned %(count)d todos"
+msgstr "%(sender_name)s назначил %(count)d задач"
+
+#, python-format
+msgid "%(sender_name)s reassigned a todo you are following"
+msgstr "%(sender_name)s переназначил задачу, за которой ты следишь"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
+msgstr "Задачу, за которой ты следишь: \"%(object_name)s\" было перезначено в %(team_name)s."
+
+msgid "A user completed a todo you are following"
+msgstr "Пользователь завершил задачу, за которой ты следишь"
+
+#, python-format
+msgid "%(sender_name)s completed a todo you are following"
+msgstr "%(sender_name)s завершил задачу, за которой ты следишь"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Задачу, за которой ты следишь: \"%(object_name)s\" было завершено в %(team_name)s."
+
+msgid "A user commented on a todo you are following"
+msgstr "Пользователь прокомментировал задачу, за которой ты следишь"
+
+#, python-format
+msgid "%(sender_name)s commented on on a todo you are following"
+msgstr "%(sender_name)s прокомментировал задачу, за которой Вы следите"
+
+msgid "My Todos"
+msgstr "Мои задачи"
+
+msgid "No todos"
+msgstr "Задач нет"
+
+msgid "Open"
+msgstr "В обработке"
+
+msgid "Completed"
+msgstr "Выполненные"
+
+msgid "All"
+msgstr "Все"
+
+msgid "Created By"
+msgstr "Создатель"
+
+msgid "Assigned To"
+msgstr "Кому поручено"
+
+msgid "Priority"
+msgstr "Приоритет"
+
+msgid "Due date"
+msgstr "Срок выполнения"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Newest Created"
+msgstr "Новейшие задачи"
+
+msgid "Title"
+msgstr "Название"
+
+msgid "Soonest Due"
+msgstr "Ближайшая по срокам задача"
+
+msgid "You are not allowed to assign this Todo entry."
+msgstr "У Вас нет полномочий для того, чтобы поручить выполнение этого задания."
+
+msgid "Later"
+msgstr "Позже"
+
+msgid "Normal"
+msgstr "Обычно"
+
+msgid "Important"
+msgstr "Важно"
+
+msgid "Due by"
+msgstr "Срок выполнения"
+
+msgid "Completed on"
+msgstr "Завершено"
+
+msgid "Completed by"
+msgstr "Исполнитель"
+
+msgid "Assigned to"
+msgstr "Кому поручено"
+
+msgid "Note"
+msgstr "Примечание"
+
+msgid "List"
+msgstr "Список"
+
+msgid "Todo"
+msgstr "Задача"
+
+msgid "Group"
+msgstr "Группа"
+
+msgid "Creator"
+msgstr "Создатель"
+
+msgid "Created"
+msgstr "Создано"
+
+msgid "Last modified"
+msgstr "Последние изменения"
+
+msgid "Text"
+msgstr "Текст"
+
+msgid "Comment"
+msgstr "Комментарий"
+
+msgid "Comments"
+msgstr "Комментарии"
+
+#, python-format
+msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
+msgstr "Задание \"%(todo_name)s\" было поручено %(assignee_name)s"
+
+msgid "Back to"
+msgstr "Вернуться к"
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the task \"%(object_name)s\" in %(team_name)s was assigned to you by %(sender_name)s. \n"
+msgstr ""
+"Здравствуйте, %(receiver_name)s,\n"
+"\n"
+"пользователь %(sender_name)s поручил Вам задачу \"%(object_name)s\" в %(team_name)s. \n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"\n"
+"\n"
+"Вы можете найти её по следующей ссылке: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Перейдите по этой ссылке, чтобы изменить настройки уведомлений: %(notification_settings_url)s )\n"
+"\n"
+"Ваша команда %(site_name)s."
+
+#, python-format
+msgid "Task: \"%(object_name)s\" in %(team_name)s was assigned to you."
+msgstr "Вам была поручена задача: \"%(object_name)s\" в %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a todo assigned to you in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the todo:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Здравствуйте, %(receiver_name)s!\n"
+"\n"
+"Пользователь %(sender_name)s оставил комментарий к порученной Вам задаче в группе %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"к задаче:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Перейдите по этой ссылке, чтобы увидеть комментарий:\n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Перейдите по этой ссылке, чтобы изменить настройки уведомлений: %(notification_settings_url)s )\n"
+"\n"
+"Ваша команда %(site_name)s\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo assigned to you in %(team_name)s."
+msgstr "Пользователь %(sender_name)s прокомментировал задачу, порученную Вам в %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a todo you were tagged in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the todo:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Здравствуйте, %(receiver_name)s!\n"
+"\n"
+"Пользователь %(sender_name)s оставил комментарий к задаче, в которой Вы отмечены, в группе %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"к задаче:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Перейдите по этой ссылке, чтобы увидеть комментарий:\n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Перейдите по этой ссылке, чтобы изменить настройки уведомлений: %(notification_settings_url)s )\n"
+"\n"
+"Ваша команда %(site_name)s\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in %(team_name)s."
+msgstr "Пользователь %(sender_name)s прокомментировал задачу, в которой Вы были отмечены в %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a todo you created in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your todo:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Здравствуйте, %(receiver_name)s!\n"
+"\n"
+"Пользователь %(sender_name)s оставил комментарий к задаче, созданной Вами в группе %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"к Вашей задаче:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Перейдите по этой ссылке, чтобы увидеть комментарий:\n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Перейдите по этой ссылке, чтобы изменить настройки уведомлений: %(notification_settings_url)s )\n"
+"\n"
+"Ваша команда %(site_name)s\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgstr "Пользователь %(sender_name)s прокомментировал одну из Ваших задач в %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new task \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+msgstr ""
+"Здравствуйте, %(receiver_name)s,\n"
+"\n"
+"пользователь %(sender_name)s создал новую задачу \"%(object_name)s\" в %(team_name)s.\n"
+
+#, python-format
+msgid "A new task: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Новая задача: \"%(object_name)s\" была создана в %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the task \"%(object_name)s\" you created in %(team_name)s was completed by %(sender_name)s. \n"
+msgstr ""
+"Здравствуйте, %(receiver_name)s,\n"
+"\n"
+"задача \"%(object_name)s\", которую Вы создали в %(team_name)s, завершена %(sender_name)s. \n"
+
+#, python-format
+msgid "Task completed: \"%(object_name)s\" in %(team_name)s."
+msgstr "Задача выполнена: \"%(object_name)s\" в %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"you were tagged in the task \"%(object_name)s\" in %(team_name)s by %(sender_name)s. \n"
+msgstr ""
+"Здравствуйте, %(receiver_name)s,\n"
+"\n"
+"пользователь %(sender_name)s отметил Вас в задаче \"%(object_name)s\" в %(team_name)s. \n"
+
+#, python-format
+msgid "You were tagged in the task \"%(object_name)s\" in %(team_name)s"
+msgstr "Вас отметили в задаче \"%(object_name)s\" в %(team_name)s"
+
+msgid "Not important"
+msgstr "Неважно"
+
+msgid "Delete todo"
+msgstr "Удалить задачу"
+
+msgid "Do you really want to delete this todo?"
+msgstr "Вы действительно хотите удалить эту задачу?"
+
+msgid "Not assigned"
+msgstr "Поручений нет"
+
+msgid "Following"
+msgstr "Слежу"
+
+msgid "Reopen todo"
+msgstr "Заново открыть задачу"
+
+msgid "Close todo"
+msgstr "Закрыть задачу"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "Write comment..."
+msgstr "Написать комментарий…"
+
+msgid "Post"
+msgstr "Отправить"
+
+msgid "This todo was completed:"
+msgstr "Эта задача завершена:"
+
+msgid "by"
+msgstr "создатель"
+
+msgid "TodoEntries"
+msgstr "Задачи"
+
+msgid "There are no todolists yet."
+msgstr "Пока списков задач здесь нет."
+
+msgid "New List Name"
+msgstr "Название нового списка"
+
+msgid "Create"
+msgstr "Создать"
+
+msgid "Create a new Todo"
+msgstr "Создать новую задачу"
+
+msgid "Only the owner and assignee of a todo can finish it!"
+msgstr "Только автор задачи и её адресат могут пометить её как завершенную!"
+
+msgid "Mark as finished"
+msgstr "Отметить как завершенную"
+
+msgid "Move to another Folder"
+msgstr "Переместить в другую папку"
+
+msgid "Enter the title for this todo"
+msgstr "Введите название для этой задачи"
+
+msgid "There are no todos in this list."
+msgstr "В этом списке задач нет."
+
+msgid "Please select or create a todo list."
+msgstr "Пожалуйста, выберите или создайте список задач."
+
+msgid "Add Todo"
+msgstr "Добавить задачу"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "Произошла ошибка при заполнении одного из полей. Пожалуйста, исправь её перед сохранением!"
+
+msgid "Enter a title for the todo."
+msgstr "Введите название этой задачи."
+
+msgid "Description"
+msgstr "Описание"
+
+msgid "Enter a description for the todo"
+msgstr "Введите описание задачи"
+
+msgid "No date chosen"
+msgstr "Дата не выбрана"
+
+msgid "Choose due date"
+msgstr "Выберите срок исполнения"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Choose day"
+msgstr "Выберите дату"
+
+msgid "Until when should the task be completed?"
+msgstr "К какому числу необходимо выполнить задачу?"
+
+msgid "OK"
+msgstr "ОК"
+
+msgid "Todo lists"
+msgstr "Списки задач"
+
+msgid "Cancel"
+msgstr "Удалить"
+
+msgid "You created a todo"
+msgstr "Ты создал(а) новую задачу"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a todo"
+msgstr "созданная задача"
+
+msgid "You have no assigned tasks"
+msgstr "У Вас нет порученных вам заданий"
+
+msgid "Tasks are shown only for logged in users"
+msgstr "Задачи отображаются только для зарегистрированных пользователей"
+
+#, python-format
+msgid "Todo \"%(title)s\" was added successfully."
+msgstr "Задача \"%(title)s\" добавлена."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be added."
+msgstr "Невозможно добавить задачу \"%(title)s“."
+
+msgid "You were trying to add a todo to a todolist that does not exist!"
+msgstr "Вы пытались внести задание в несуществующий список!"
+
+#, python-format
+msgid "Todo \"%(title)s\" was edited successfully."
+msgstr "Задача \"%(title)s\" успешно отредактирована."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be edited."
+msgstr "Невозможно изменить задачу \"%(title)s“."
+
+#, python-format
+msgid "Todo \"%(title)s\" was deleted successfully."
+msgstr "Задача “%(title)s\" удалена."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be deleted."
+msgstr "Невозможно удалить задачу \"%(title)s“."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned successfully."
+msgstr "Задание “%(title)s\" поручено."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned."
+msgstr "Невозможно поручить задание \"%(title)s“."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned to You successfully."
+msgstr "Вам поручено задание “%(title)s“."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned to You."
+msgstr "Невозможно поручить Вам задание \"%(title)s“."
+
+#, python-format
+msgid "Todo \"%(title)s\" was unassigned successfully."
+msgstr "Поручение задания “%(title)s\" снято."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be unassigned."
+msgstr "Невозможно отменить поручение задания \"%(title)s“."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed successfully."
+msgstr "Задача \"%(title)s\" выполнена."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed."
+msgstr "Невозможно завершить выполнение задачи \"%(title)s“."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed by You successfully."
+msgstr "Вы успешно завершили задачу \"%(title)s“."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed by You."
+msgstr "Вы не смогли выполнить задачу \"%(title)s“."
+
+#, python-format
+msgid "Todo \"%(title)s\" was set to incomplete successfully."
+msgstr "Задача \"%(title)s\" была помечена как незавершенная."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be set to incomplete."
+msgstr "Невозможно отметить задачу \"%(title)s\" как незавершенную."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was edited successfully."
+msgstr "Список задач \"%(title)s\" успешно отредактирован."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be edited."
+msgstr "Невозможно отредактировать список задач \"%(title)s“."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was added successfully."
+msgstr "Список задач \"%(title)s\" добавлен."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be added."
+msgstr "Невозможно добавить список задач \"%(title)s“."
+
+msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
+msgstr "Вы не можете удалить эту папку, так как у Вас нет полномочий для удаления одного или более элементов, которые в ней содержатся!"
+
+msgid "Your comment was added successfully."
+msgstr "Ваш комментарий добавлен."
+
+msgid "Your comment was deleted successfully."
+msgstr "Ваш комментарий удален."
+
+#~ msgid "New todo by %(sender_name)s"
+#~ msgstr "Новая задача от %(sender_name)s"
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
+
+#~ msgid "Tasks"
+#~ msgstr "Задачи"
+
+#~ msgid "more Tasks"
+#~ msgstr "Больше задач"

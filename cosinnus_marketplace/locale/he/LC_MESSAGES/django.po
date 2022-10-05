@@ -1,0 +1,444 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-18 09:12+0100\n"
+"PO-Revision-Date: 2021-03-11 16:36+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.2\n"
+
+msgid "Marketplace"
+msgstr "מרקט-פלייס"
+
+msgctxt "the_app"
+msgid "marketplace"
+msgstr "זירת המסחר"
+
+msgid "A user created a new offer"
+msgstr "משתמש יצר/ה הצעה חדשה"
+
+#, python-format
+msgid "%(sender_name)s created the offer %(object_name)s"
+msgstr "%(sender_name)s יצר/ה את ההצעה %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d offers"
+msgstr "%(sender_name)s יצר/ה %(count)d events"
+
+#, python-format
+msgid "%(sender_name)s created a new offer"
+msgstr "%(sender_name)s יצר/ה קובץ חדש"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "הצעה חדשה: \"%(object_name)s\" נוצרה ב-%(team_name)s."
+
+msgid "One of your offers expired"
+msgstr "פג תוקפה של אחת ההצעות שלך"
+
+#, python-format
+msgid "Your offer %(object_name)s expired"
+msgstr "פג תוקפה של ההצעה %(object_name)s"
+
+#, python-format
+msgid "%(count)d of your offers expired"
+msgstr "פג תוקפן של %(count)d מהצעותיך"
+
+msgid "Your offer has expired"
+msgstr "פג תוקפה של ההצעה שלך"
+
+#, python-format
+msgid "Offer \"%(object_name)s\" has expired."
+msgstr "פג תוקפה של ההצעה \"%(object_name)s\"."
+
+msgid "A user commented on one of your offers"
+msgstr "משתמש הגיב על אחת מההצעות שלך"
+
+#, python-format
+msgid "%(sender_name)s commented on your offer %(object_name)s"
+msgstr "%(sender_name)s הגיב/ה על אחת מההצעות שלך %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
+msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר הגיבו על ההצעה שלך %(object_name)s"
+msgstr[1] "%(sender_name)s ו-%(count_minus_one)d הגיבו על הצעה שלך %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your offer"
+msgstr "%(sender_name)s הגיב/ה על הצעה שלך"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your offers"
+msgstr "%(sender_name)s הגיב/ה על אחד מהפוסטים שלך"
+
+msgid "A user commented on an offer you were tagged in"
+msgstr "משתמש הגיב על הצעה שתויגת בה"
+
+#, python-format
+msgid "%(sender_name)s commented on the offer %(object_name)s"
+msgstr "%(sender_name)s הגיב/ה על אחת מההצעות שלך %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
+msgstr[0] "%(sender_name)s ו-%(count_minus_one)d אחר הגיבו על ההצעה %(object_name)s"
+msgstr[1] "%(sender_name)s ו-(%(count_minus_one)d אחרים הגיבו על ההצעה %(object_name)s"
+
+msgid "You were tagged in this offer"
+msgstr "תויגת בהצעה זו"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in"
+msgstr "%(sender_name)s הגיב/ה על הצעה שתויגת בה"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s הגיב/ה על אירוע שתויגתם בו ב-%(team_name)s"
+
+msgid "A user created a new offer in a team you are following"
+msgstr "משתמש יצר הצעה חדשה בצוות שאתם עוקבים אחריו"
+
+#, python-format
+msgid "%(sender_name)s created a new offer in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s יצר/ה הצעה חדשה ב-%(team_name)s (שאתם עוקבים אחריו)"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "הצעה חדשה: \"%(object_name)s\" נוצרה ב-%(team_name)s (שאתם עוקבים אחריו)"
+
+msgid "A user updated an offer you are following"
+msgstr "משתמש עדכן הצעה שאת/ה עוקב אחריה"
+
+#, python-format
+msgid "%(sender_name)s updated the offer %(object_name)s"
+msgstr "%(sender_name)s עדכן/ה את ההצעה %(object_name)s"
+
+msgid "You are following this offer"
+msgstr "אתם עוקבים אחר הצעה זו"
+
+#, python-format
+msgid "%(sender_name)s updated an offer you are following"
+msgstr "%(sender_name)s עדכן/ה הצעה שאתם עוקבים אחריה"
+
+#, python-format
+msgid "An offer you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "ההצעה שאתם עוקבים אחריה: \"%(object_name)s\" עודכנה ב-%(team_name)s."
+
+msgid "A user commented on an offer you are following"
+msgstr "משתמש הגיב/ה על הצעה שאתם עוקבים אחריה"
+
+#, python-format
+msgid "%(sender_name)s commented on on an offer you are following"
+msgstr "%(sender_name)s הגיב/ה על הצעה שאתם עוקבים אחריה"
+
+msgid "Current Offers"
+msgstr "הצעות נוכחיות"
+
+msgid "No current offers"
+msgstr "אין הצעות נוכחיות"
+
+msgid "Created By"
+msgstr "נוצר על ידי"
+
+msgid "Type"
+msgstr "סוג"
+
+msgid "Newest Created"
+msgstr "החדש ביותר שנוצר"
+
+msgid "Title"
+msgstr "כותרת"
+
+msgid "Order Key"
+msgstr "מפתח סדר"
+
+msgid "Looking for"
+msgstr "מחפש/ת"
+
+msgid "Offering"
+msgstr "מציע/ה"
+
+msgid "Offer currently active?"
+msgstr "ההצעה פעילה כעת?"
+
+msgid "Description"
+msgstr "תיאור"
+
+msgid "Offer Category"
+msgstr "קטגוריית הצעה"
+
+msgid "Offer"
+msgstr "הצעה"
+
+msgid "Offers"
+msgstr "הצעות"
+
+#, python-format
+msgid "Offer: %(offer)s (%(type)s)"
+msgstr "הצעה: (%(type)s) %(offer)s"
+
+msgid "Creator"
+msgstr "יוצר/ת"
+
+msgid "Created"
+msgstr "נוצר"
+
+msgid "Last modified"
+msgstr "שונה לאחרונה"
+
+msgid "Text"
+msgstr "טקסט"
+
+msgid "Comment"
+msgstr "תגובה"
+
+msgid "Comments"
+msgstr "תגובות"
+
+msgid "Back to Offers"
+msgstr "חזרה להצעות"
+
+msgid "My Offers"
+msgstr "ההצעות שלי"
+
+msgid "Add Offer"
+msgstr "הוסף הצעה"
+
+msgid "Misc"
+msgstr "שונות"
+
+msgid "Filter"
+msgstr "סינון"
+
+#, python-format
+msgid "%(link_start)s%(username)s%(link_end)s is looking for"
+msgstr "%(link_start)s%(username)s%(link_end)s מחפש אחר"
+
+#, python-format
+msgid "%(link_start)s%(username)s%(link_end)s is offering"
+msgstr "%(link_start)s%(username)s%(link_end)s מציע"
+
+msgid "Inactive"
+msgstr "לא פעיל"
+
+msgid "Delete"
+msgstr "מחק"
+
+msgid "Edit"
+msgstr "ערוך"
+
+msgid "Deactivate"
+msgstr "השהה"
+
+msgid "Reactivate"
+msgstr "הפוך לפעיל מחדש"
+
+msgid "Activate"
+msgstr "הפעל"
+
+#, python-format
+msgid "Do you really want to delete offer „%(title)s“?"
+msgstr "האם אתם בטוחים שברצונכם למחוק את ההצעה „%(title)s“?"
+
+msgid "Delete offer"
+msgstr "מחק הצעה"
+
+#, python-format
+msgid "Do you really want to deactivate offer „%(title)s“?"
+msgstr "האם אתם בטוחים שברצונכם להשהות את ההצעה „%(title)s“?"
+
+msgid "Deactivate offer"
+msgstr "השהה הצעה"
+
+#, python-format
+msgid "Do you really want to reactivate offer „%(title)s“?"
+msgstr "האם אתם בטוחים שברצונכם להפעיל מחדש את ההצעה „%(title)s“?"
+
+#, python-format
+msgid "Do you really want to activate offer „%(title)s“?"
+msgstr "האם אתם בטוחים שברצונכם להפעיל את ההצעה „%(title)s“?"
+
+msgid "Reactivate offer"
+msgstr "הפעל מחדש הצעה"
+
+msgid "Activate offer"
+msgstr "הפוך הצעה לפעילה"
+
+msgid "Write comment..."
+msgstr "כתוב/י תגובה..."
+
+msgid "Post"
+msgstr "פרסם"
+
+msgid "This offer is inactive. It is only visible to you and not listed in the marketplace. You can reactivate it below."
+msgstr "הצעה זו אינה פעילה. היא רק גלויה לך ואינה זמינה בזירת המסחר. אתם יכולים להפעילה מחדש להלן."
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "אירעה שגיאה באחד השדות שהזנתם. אנא תקנו זאת לפני השמירה!"
+
+#, python-format
+msgid ""
+"\n"
+"                        Note: after this offer will be posted, each user of %(forum_name)s may be able to see it.<br>\n"
+"                        If you do not want this, please, use another group or project of your choice.\n"
+"                        "
+msgstr ""
+
+msgid "Offer type"
+msgstr "סוג ההצעה"
+
+msgid "Offer Title"
+msgstr "כותרת ההצעה"
+
+msgid "Enter a description for your offer."
+msgstr "הזינו תיאור עבור הצעתכם."
+
+msgid "Phone number"
+msgstr "מספר טלפון"
+
+msgid "Your phone number is only visible for registered users"
+msgstr "מספר הטלפון שלך גלוי רק עבור משתמשים רשומים"
+
+msgid "Categories"
+msgstr "קטגוריות"
+
+msgid "Check all categories that fit your offer"
+msgstr "בדקו את כל הקטגוריות המתאימות להצעה שלכם"
+
+msgid "Upload a file or image or attach an existing one"
+msgstr "העלאת קובץ או תמונה או צירוף קובץ קיים"
+
+msgid "The first uploaded image will be displayed as a wallpaper"
+msgstr "התמונה הראשונה שהועלתה תוצג כטפט"
+
+msgid "Offer is active"
+msgstr "ההצעה פעילה"
+
+msgid "Only active offers will be listed in the Marketplace."
+msgstr "רק הצעות פעילות יופיעו בזירת המסחר."
+
+msgid "Only active offers will be listed in the Marketplace. Your offer will stay active for 4 weeks. After that, you can reactivate it at any time."
+msgstr "רק הצעות פעילות יופיעו בזירת המסחר. ההצעה שלכם תישאר פעילה במשך 4 שבועות. לאחר מכן, אתם יכולים להפעיל אותה מחדש בכל עת."
+
+msgid "Create"
+msgstr "צור"
+
+msgid "Save"
+msgstr "שמור"
+
+msgid "All"
+msgstr "הכל"
+
+msgid "Wanted"
+msgstr "מבוקש"
+
+msgid "No offers"
+msgstr "אין הצעות"
+
+msgid "There are no offers"
+msgstr "אין הצעות"
+
+msgid "(No description set)"
+msgstr "(לא הוגדר תיאור)"
+
+msgid "offered in"
+msgstr "מוצע ב"
+
+#, python-format
+msgid "Contact %(username)s directly"
+msgstr "צרו קשר עם %(username)s ישירות"
+
+msgid "Only shown for registered users"
+msgstr "מוצג רק עבור משתמשים רשומים"
+
+msgid "Send Message"
+msgstr "שלח הודעה"
+
+msgid "expires on"
+msgstr "פג תוקף ב"
+
+msgid "expired on"
+msgstr "פג תוקפו ב-"
+
+msgid "You created an offer"
+msgstr "יצרת הצעה"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created an offer"
+msgstr "יצר/ה הצעה חדשה"
+
+msgid "Contact"
+msgstr "פרטי יצירת קשר"
+
+msgid "There are no current offers"
+msgstr "אין הצעות נוכחיות"
+
+#, python-format
+msgid "Offer \"%(title)s\" was edited successfully."
+msgstr "ההצעה \"%(title)s\" נערכה בהצלחה."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be edited."
+msgstr "לא היתה אפשרות לערוך את ההצעה \"%(title)s\"."
+
+#, python-format
+msgid "Offer \"%(title)s\" was added successfully."
+msgstr "ההצעה \"%(title)s\" נוספה בהצלחה."
+
+#, python-format
+msgid "Offer \"%(title)s\" was saved successfully, but is not active yet."
+msgstr "ההצעה \"%(title)s\" נשמרה בהצלחה, אך עדיין אינה פעילה."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be added."
+msgstr "לא היתה אפשרות להוסיף את ההצעה \"%(title)s\"."
+
+#, python-format
+msgid "Offer \"%(title)s\" was deleted successfully."
+msgstr "ההצעה \"%(title)s\" נמחקה בהצלחה."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be deleted."
+msgstr "לא היתה אפשרות למחוק את ההצעה \"%(title)s\"."
+
+msgid "The offer you requested is no longer active. Sorry!"
+msgstr "ההצעה שביקשת אינה פעילה עוד. מצטערים!"
+
+msgid "The complete request can only be sent via POST!"
+msgstr "ניתן לשלוח את הבקשה המלאה רק באמצעות POST!"
+
+msgid "Invalid action for this offer. The request could not be completed!"
+msgstr "פעולה לא חוקית עבור הצעה זו. לא היתה דרך להשלים את הבקשה!"
+
+msgid "The offer is already active"
+msgstr "הצעה זו כבר פעילה"
+
+msgid "The offer is already deactivated"
+msgstr "הצעה זו כבר בהשהיה"
+
+msgid "The offer was deactivated successfully."
+msgstr "ההצעה הושהתה בהצלחה."
+
+msgid "The offer was reactivated successfully."
+msgstr "ההצעה הופעלה מחדש בהצלחה."
+
+msgid "The offer was activated successfully."
+msgstr "ההצעה הופעלה בהצלחה."
+
+msgid "Your comment was added successfully."
+msgstr "תגובתך נוספה בהצלחה."
+
+msgid "Your comment was deleted successfully."
+msgstr "תגובתך נמחקה בהצלחה."

@@ -1,0 +1,277 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 14:51+0200\n"
+"PO-Revision-Date: 2019-05-08 01:15+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: be\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.2.1\n"
+
+msgid "The following Pads were re-initialized:"
+msgstr "Наступныя нататнікі паўторна ініцыялізаваныя:"
+
+msgid "Reinit Pads (do not use if you don't know what this is!)"
+msgstr "Паўторна ініцыялізаваць нататнікі (не выкарыстоўвайце, калі не ведаеце, што гэта такое!)"
+
+msgid "Etherpads"
+msgstr "Нататнікі Etherpad"
+
+msgctxt "the_app"
+msgid "etherpad"
+msgstr "нататнік"
+
+msgid "A user created a new etherpad"
+msgstr "Карыстальнік(-ца) стварыў(-ла) новы нататнік Etherpad"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new etherpad"
+msgid "%(sender_name)s created the pad %(object_name)s"
+msgstr "%(sender_name)s стварыў(-ла) новы нататнік Etherpad"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new etherpad"
+msgid "%(sender_name)s created %(count)d pads"
+msgstr "%(sender_name)s стварыў(-ла) новы нататнік Etherpad"
+
+#, python-format
+msgid "%(sender_name)s created a new etherpad"
+msgstr "%(sender_name)s стварыў(-ла) новы нататнік Etherpad"
+
+#, python-format
+msgid "A new etherpad: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Новы нататнік Etherpad: \"%(object_name)s\" створаны ў %(team_name)s."
+
+msgid "A user created a new etherpad in a team you are following"
+msgstr "Карыстальнік(-ца) стварыў(-ла) новы нататнік Etherpad у камандзе, за якой вы сочыце"
+
+#, python-format
+msgid "%(sender_name)s created a new etherpad in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s стварыў(-ла) новы нататнік Etherpad у %(team_name)s (за якой вы сочыце)"
+
+#, python-format
+msgid "A new etherpad: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Новы нататнік Etherpad: \"%(object_name)s\" створаны ў %(team_name)s (за якой вы сочыце)."
+
+msgid "Last accessed Etherpads"
+msgstr "Нядаўна адкрываныя нататнікі Etherpad"
+
+msgid "No etherpads"
+msgstr "Няма нататнікаў Etherpad"
+
+msgid "Created By"
+msgstr "Створаны карыстальнікам(-цай)"
+
+msgid "Type"
+msgstr "Тып"
+
+msgid "Etherpad"
+msgstr "Etherpad"
+
+msgid "Ethercalc"
+msgstr "Ethercalc"
+
+msgid "Last accessed"
+msgstr "Нядаўна адкрываныя"
+
+msgid "Newest Pads"
+msgstr "Найноўшыя нататнікі"
+
+msgid "Title"
+msgstr "Назва"
+
+msgid "Description"
+msgstr "Апісанне"
+
+msgid "Pad Type"
+msgstr "Тып нататніка"
+
+msgid "Ethercalcs"
+msgstr "Нататнікі Ethercalc"
+
+#, fuzzy
+#| msgid "Pads"
+msgid "Pad"
+msgstr "Нататнікі"
+
+msgid "This pad can no longer be edited because its creator has deleted their account."
+msgstr "Гэты нататнік больш нельга рэдагаваць, таму што яго стваральнік(-ца) выдаліў(-ла) свой акаўнт."
+
+msgid "by"
+msgstr "Стваральнік(-ца):"
+
+msgid "Edit"
+msgstr "Рэдагаваць"
+
+msgid "Settings"
+msgstr "Налады"
+
+msgid "Delete"
+msgstr "Выдаліць"
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(pad)s“?"
+msgstr "Вы сапраўды хочаце выдаліць нататнік \"%(pad)s\"?"
+
+msgid "Delete Etherpad"
+msgstr "Выдаліць нататнік Etherpad"
+
+msgid "The document can not be accessed because the etherpad server could not be reached. Please contact an administrator!"
+msgstr "Гэты дакумент нельга адкрыць, таму што сервер Etherpad недасяжны. Калі ласка, звяжыцеся з адміністратарам!"
+
+msgid "This document is empty"
+msgstr "Гэты дакумент пусты"
+
+msgid "Pads"
+msgstr "Нататнікі"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "У адным з палёў, якія вы запоўнілі, ёсць памылка. Калі ласка, выпраўце яе перш чым захаваць старонку!"
+
+msgid "Enter a title for the Pad."
+msgstr "Увядзіце назву нататніка."
+
+msgid "Save"
+msgstr "Захаваць"
+
+msgid "Move"
+msgstr "Перамясціць"
+
+msgid "Enter the title for a new Document or Table."
+msgstr "Увядзіце назву новага дакумента або табліцы."
+
+msgid "Enter the title for a new Document."
+msgstr "Увядзіце назву новага дакумента."
+
+msgid "Create Etherpad"
+msgstr "Стварыць нататнік Etherpad"
+
+msgid "Create Ethercalc"
+msgstr "Стварыць табліцу Ethercalc"
+
+msgid "Move to another Folder"
+msgstr "Перамясціць у іншую папку"
+
+#, python-format
+msgid "Do you really want to delete etherpad „%(title)s“?"
+msgstr "Вы сапраўды хочаце выдаліць нататнік „%(title)s“?"
+
+msgid "No etherpads have been created yet."
+msgstr "Створаных нататнікаў Etherpad пакуль няма."
+
+msgid "Fullscreen"
+msgstr "На ўвесь экран"
+
+msgid "Leave Fullscreen"
+msgstr "Выйсці з поўнаэкраннага рэжыму"
+
+msgid "Back"
+msgstr "Вярнуцца"
+
+msgid "Help and Assistance for this page"
+msgstr "Дапамога і падтрымка для гэтай старонкі"
+
+msgid "Help"
+msgstr "Дапамога"
+
+msgid "Download CSV"
+msgstr "Сцягнуць CSV"
+
+#, fuzzy
+#| msgid "Download CSV"
+msgid "Download Excel"
+msgstr "Сцягнуць CSV"
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new etherpad \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Вітаем, %(receiver_name)s,\n"
+"\n"
+"новы нататнік Etherpad \"%(object_name)s\" у %(team_name)s быў створаны карыстальнікам(-цай) %(sender_name)s.\n"
+"\n"
+"Вы можаце знайсці яго па наступнай спасылцы: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"Перайдзіце па гэтай спасылцы, каб змяніць свае налады апавяшчэнняў: %(notification_settings_url)s )\n"
+"\n"
+"Ваша каманда %(site_name)s."
+
+#, fuzzy
+#| msgid "A user created a new etherpad"
+msgid "You created a pad"
+msgstr "Карыстальнік(-ца) стварыў(-ла) новы нататнік Etherpad"
+
+#, fuzzy
+#| msgid "Created By"
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a Pad"
+msgstr "Створаны карыстальнікам(-цай)"
+
+msgid "There are no etherpads yet"
+msgstr "Нататнікаў Etherpad пакуль няма"
+
+#, python-format
+msgid "Etherpad \"%(title)s\" was edited successfully."
+msgstr "Нататнік Etherpad \"%(title)s\" паспяхова адрэдагаваны."
+
+#, python-format
+msgid "Etherpad \"%(title)s\" could not be edited."
+msgstr "Не атрымалася адрэдагаваць нататнік Etherpad \"%(title)s\"."
+
+#, python-format
+msgid "Etherpad \"%(title)s\" was added successfully."
+msgstr "Нататнік Etherpad \"%(title)s\" паспяхова дададзены."
+
+#, python-format
+msgid "Etherpad \"%(title)s\" could not be added."
+msgstr "Не атрымалася дадаць нататнік Etherpad \"%(title)s\"."
+
+#, python-format
+msgid "Folder \"%(title)s\" was created successfully."
+msgstr "Папка \"%(title)s\" паспяхова створаная."
+
+#, python-format
+msgid "Etherpad with name \"%(name)s\" already exists on pad server. Please use another name."
+msgstr "Нататнік Etherpad з іменем \"%(name)s\" ужо існуе на серверы нататнікаў. Калі ласка, выберыце іншае імя."
+
+msgid "The document could not be created because the etherpad service is misconfigured. Please contact an administrator!"
+msgstr "Дакумент не атрымалася стварыць, таму што сервіс Etherpad хібна сканфігураваны. Калі ласка, звяжыцеся з адміністратарам!"
+
+msgid "The document could not be created because the etherpad server could not be reached. Please contact an administrator!"
+msgstr "Дакумент не атрымалася стварыць, таму што сервер Etherpad недасяжны. Калі ласка, звяжыцеся з адміністратарам!"
+
+#, python-format
+msgid "Pad has been archived as Document: <a class=\"alert-link\" href=\"%(href)s\">%(title)s</a>"
+msgstr "Нататнік адпраўлены ў архіў як дакумент: <a class=\"alert-link\" href=\"%(href)s\">%(title)s</a>"
+
+#, python-format
+msgid "Pad has been archived as File entry: <a class=\"alert-link\" href=\"%(href)s\">%(title)s</a>"
+msgstr "Нататнік адпраўлены ў архіў як файлавы запіс: <a class=\"alert-link\" href=\"%(href)s\">%(title)s</a>"
+
+#~ msgid "New etherpad by %(sender_name)s"
+#~ msgstr "Новы нататнік Etherpad ад %(sender_name)s"
+
+#~ msgid "New etherpad by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Новы нататнік Etherpad ад %(sender_name)s у %(team_name)s (за якой вы сочыце)"

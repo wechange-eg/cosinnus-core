@@ -1,0 +1,768 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:06+0200\n"
+"PO-Revision-Date: 2020-04-01 11:46+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.3\n"
+
+msgid "Polls"
+msgstr "Հարցումներ"
+
+msgctxt "the_app"
+msgid "poll"
+msgstr "խնդրել"
+
+msgid "A user created a new poll"
+msgstr "Օգտատերը ստեղծել է նոր հարցում"
+
+#, python-format
+msgid "%(sender_name)s created the poll %(object_name)s"
+msgstr "%(sender_name)s -ը ստեղծել է %(object_name)s հարցումը"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d polls"
+msgstr "%(sender_name)s -ը ստեղծել է %(count)d հարցում"
+
+#, python-format
+msgid "%(sender_name)s created a new poll"
+msgstr "%(sender_name)s -ը ստեղծել է նոր հարցում"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Նոր հարցում՝ \"%(object_name)s\" -ը ստեղծվել է %(team_name)s -ում."
+
+msgid "A poll you voted on was completed"
+msgstr "Ձեր քվեարկած հարցումն ավարտվել է"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
+msgstr "%(sender_name)s -ը լրացրել է %(object_name)s հարցումը, որին դուք քվեարկել եք"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls you voted on"
+msgstr "%(sender_name)s -ը լրացրել է %(count)d հարցումներ, որոնց դուք քվեարկել եք"
+
+#, python-format
+msgid "%(sender_name)s completed the poll"
+msgstr "%(sender_name)s -ը լրացրել է հարցումը"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "\"%(object_name)s\" հարցումը ավարտվել է %(team_name)s -ում."
+
+msgid "A user commented on one of your polls"
+msgstr "Օգտատերը մեկնաբանել է ձեր հարցումներից մեկը"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll %(object_name)s"
+msgstr "%(sender_name)s -ը մեկնաբանել է ձեր %(object_name)s հարցումը"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
+msgstr[0] "%(sender_name)s -ը և %(count_minus_one)d ուրիշը մեկնաբանել է ձեր %(object_name)s հարցումը"
+msgstr[1] "%(sender_name)s -ը և %(count_minus_one)d ուրիշները մեկնաբանել են ձեր %(object_name)s հարցումը"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll"
+msgstr "%(sender_name)s -ը մեկնաբանել է ձեր հարցումը"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls"
+msgstr "%(sender_name)s -ը մեկնաբանել է ձեր հարցումներից մեկը"
+
+msgid "A user commented on a poll you were tagged in"
+msgstr "Օգտատերը մեկնաբանել է այն հարցումը, որում դուք նշված եք"
+
+#, python-format
+msgid "%(sender_name)s commented on the poll %(object_name)s"
+msgstr "%(sender_name)s -ը մեկնաբանել է %(object_name)s հարցումը"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
+msgstr[0] "%(sender_name)s -ը և %(count_minus_one)d ուրիշը մեկնաբանել է %(object_name)s հարցումը"
+msgstr[1] "%(sender_name)s -ը և %(count_minus_one)d ուրիշները մեկնաբանել են %(object_name)s հարցումը"
+
+msgid "You were tagged in this poll"
+msgstr "Ձեզ նշել են այս հարցման մեջ"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in"
+msgstr "%(sender_name)s -ը մեկնաբանել է հարցումը, որում դուք նշված եք"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s -ը մեկնաբանել է հարցումը, որում դուք նշված եք %(team_name)s -ում"
+
+msgid "A user commented on an poll you voted in"
+msgstr "Օգտատերը մեկնաբանել է ձեր այն հարցումը, որին դուք քվեարկել եք"
+
+msgid "You voted on this poll"
+msgstr "Դուք քվեարկել եք այս հարցմանը"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in"
+msgstr "%(sender_name)s-ը մեկնաբանել է այն հարցումը, որին դուք քվեարկել եք"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
+msgstr "%(sender_name)s-ը մեկնաբանել է այն հարցումը, որին դուք քվեարկել եք %(team_name)s -ում"
+
+msgid "A user created a new poll in a team you are following"
+msgstr "Օգտատերը նոր հարցում է ստեղծել թիմում, որին դուք հետևում եք"
+
+#, python-format
+msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s-ը ստեղծել է նոր հարցում %(team_name)s -ում, որին դուք հետևում եք"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Նոր հարցում ՝ \"%(object_name)s\" -ը ստեղծվել է %(team_name)s -ում, որին դուք հետևում եք."
+
+msgid "A user updated a poll you are following"
+msgstr "Օգտատերը թարմացրել է հարցումը, որին դուք հետևում եք"
+
+#, python-format
+msgid "%(sender_name)s updated the poll %(object_name)s"
+msgstr "%(sender_name)s -ը թարմացրել է %(object_name)s հարցումը"
+
+msgid "You are following this poll"
+msgstr "Դուք հետևում եք այս հարցմանը"
+
+#, python-format
+msgid "%(sender_name)s updated a poll you are following"
+msgstr "%(sender_name)s -ը թարմացրել է հարցումը, որին դուք հետևում եք"
+
+#, python-format
+msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Հարցումը, որին դուք հետևում եք՝ \"%(object_name)s\" թարմացվել է %(team_name)s-ում."
+
+msgid "A poll you are following was completed"
+msgstr "Հարցումը, որին դուք հետևում եք, ավարտվել է"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s"
+msgstr "%(sender_name)s -ը ավարտել է %(object_name)s հարցումը"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls"
+msgstr "%(sender_name)s -ը ավարտել է %(count)d հարցում"
+
+#, python-format
+msgid "%(sender_name)s completed the poll you are following"
+msgstr "%(sender_name)s -ը ավարտել է հարցումը, որին հետևում եք"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
+msgstr "Ձեր հետևած \"%(object_name)s\" հարցումը ավարտվել է %(team_name)s - ում."
+
+msgid "A user commented on one a poll you are following"
+msgstr "Օգտատերը մեկնաբանել է հարցումը, որին դուք հետևում եք"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you are following"
+msgstr "%(sender_name)s - ը մեկնաբանել է ձեր կողմից հետևած հարցումը"
+
+msgid "Current Polls"
+msgstr "Ընթացիկ հարցումներ"
+
+msgid "No current polls"
+msgstr "Ներկայիս հարցում չկա"
+
+msgid "Created By"
+msgstr "Ստեղծել է"
+
+msgid "Newest Created"
+msgstr "Վերջին ստեղծած"
+
+msgid "Title"
+msgstr "Վերնագիր"
+
+msgid "You must write a description for this poll option!"
+msgstr "Այս հարցման տարբերակի համար պետք է նկարագրություն գրել!"
+
+msgid "Voting open"
+msgstr "Քվեարկությունը բաց է"
+
+msgid "Voting closed"
+msgstr "Քվեարկությունը փակ է"
+
+msgid "Poll archived"
+msgstr "Հարցումը արխիվացված է"
+
+msgid "State"
+msgstr "Վիճակ"
+
+msgid "Description"
+msgstr "Նկարագրություն"
+
+msgid "Multiple options votable"
+msgstr "Բազմակի ընտրանքներ քվեարկելի են"
+
+msgid "Does this poll allow users to vote on multiple options or just decide for one?"
+msgstr "Արդյո՞ք այս հարցումը թույլ է տալիս օգտատերերին քվեարկել բազմաթիվ տարբերակների, թե պարզապես ընտրել մեկը?"
+
+msgid "\"Maybe\" option enabled"
+msgstr "«Հնարավոր է» տարբերակը միացված է"
+
+msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
+msgstr "«Հնարավոր է» տարբերակը միացվա՞ծ է: Անտեսվում և ընդունվում է որպես սխալ, եթե ``multiple_votes==False``"
+
+msgid "Anyone can vote"
+msgstr "Յուրաքանչյուրը կարող է քվեարկել"
+
+msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
+msgstr "Եթե ճշմարիտ է, յուրաքանչյուր ոք, ով կարող է տեսնել այս հարցումը, կարող է քվեարկել: Եթե սխալ է, միայն խմբի անդամներն են կարող."
+
+msgid "Show voters"
+msgstr "Ցույց տալ քվեարկողներին"
+
+msgid "If true, display a list of which user voted for each option."
+msgstr "Եթե ճշմարիտ է, ցուցադրել ցուցակը, թե որ օգտատերը որ տարբերակի օգտին է քվեարկել."
+
+msgid "Start"
+msgstr "Սկսել"
+
+msgid "Winning Option"
+msgstr "Հաղթող տարբերակ"
+
+msgid "Poll"
+msgstr "Հարցում"
+
+#, python-format
+msgid "Poll: %(poll)s (%(state)s)"
+msgstr "Հարցում: %(poll)s (%(state)s)"
+
+msgid "Image"
+msgstr "Պատկեր"
+
+msgctxt "the subject"
+msgid "Votes"
+msgstr "Քվեներ"
+
+msgid "Poll Option"
+msgstr "Հարցման տարբերակ"
+
+msgid "Poll Options"
+msgstr "Հարցման տարբերակներ"
+
+msgid "Yes"
+msgstr "Այօ"
+
+msgid "Maybe"
+msgstr "Հնարավոր է"
+
+msgid "No"
+msgstr "Ոչ"
+
+msgid "Option"
+msgstr "Տարբերակ"
+
+msgid "Voter"
+msgstr "Քվեարկող"
+
+msgid "Vote"
+msgstr "Քվեարկել"
+
+msgctxt "the subject"
+msgid "Vote"
+msgstr "Քվեարկություն"
+
+msgid "Creator"
+msgstr "Ստեղծող"
+
+msgid "Created"
+msgstr "Ստեղծված է"
+
+msgid "Last modified"
+msgstr "Վերջին փոփոխությունը"
+
+msgid "Text"
+msgstr "Տեկստ"
+
+msgid "Comment"
+msgstr "Մեկնաբանություն"
+
+msgid "Comments"
+msgstr "Մեկնաբանություններ"
+
+msgid "Poll choice"
+msgstr "Հարցման ընտրություն"
+
+msgid "Back to Polls"
+msgstr "Վերադառնալ հարցումներին"
+
+msgid "Past Polls"
+msgstr "Անցյալ հարցումները"
+
+msgid "by"
+msgstr "կողմից"
+
+msgid "Delete"
+msgstr "Ջնջել"
+
+msgid "Edit"
+msgstr "Խմբագրել"
+
+msgid "Re-open"
+msgstr "Վերաբացել"
+
+msgid "Archive"
+msgstr "Արխիվացնել"
+
+#, python-format
+msgid "Do you really want to delete poll „%(title)s“?"
+msgstr "Ցանկանու՞մ եք արդյոք ջնջել „%(title)s“ հարցումը?"
+
+msgid "Delete poll"
+msgstr "Ջնջել հարցումը"
+
+#, python-format
+msgid "Do you really want to re-open poll „%(title)s“?"
+msgstr "Ցանկանու՞մ եք արդյոք վերաբացել „%(title)s“ հարցումը?"
+
+msgid "Re-open poll"
+msgstr "Վերաբացել հարցումը"
+
+#, python-format
+msgid "Do you really want to archive poll „%(title)s“?"
+msgstr "Ցանկանու՞մ եք արդյոք արխիվացնել „%(title)s“ հարցումը?"
+
+msgid "Archive poll"
+msgstr "Արխիվացնել հարցումը"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you created in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Ողջույն %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s-ը տեղադրել է մեկնաբանություն ձեր ստեղծած հարցման վերաբերյալ %(team_name)s -ում:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"ձեր հարցմանը:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Անցեք այս հղումով ՝ մեկնաբանությունը տեսնելու համար: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Անցեք այս հղումով ՝ ձեր ծանուցման նախասիրությունները խմբագրելու համար: %(notification_settings_url)s )\n"
+"\n"
+"Ձեր %(site_name)s թիմ.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls in %(team_name)s."
+msgstr "%(sender_name)s -ը մեկնաբանել է ձեր հարցումների մեկը %(team_name)s -ում."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the poll \"%(object_name)s\", was completed in %(team_name)s by %(sender_name)s!\n"
+msgstr ""
+"Ողջույն %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s -ը ավարտել է \"%(object_name)s\" հարցումը %(team_name)s -ում։\n"
+
+msgid "The winning option was:"
+msgstr "Հաղթող տարբերակն էր:"
+
+msgid "There was no winning option."
+msgstr "Հաղթող տարբերակ չկար."
+
+#, python-format
+msgid ""
+"\n"
+"You can find the poll by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"\n"
+"Հարցումը կարող եք տեսնել ՝ անցնելով այս հղումով: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Անցեք այս հղումով ՝ ձեր ծանուցման նախասիրությունները խմբագրելու համար: %(notification_settings_url)s )\n"
+"\n"
+"Ձեր %(site_name)s թիմ."
+
+#, python-format
+msgid "Poll: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Հարցում: \"%(object_name)s\"-ը ավարտվել է %(team_name)s -ում."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new poll \"%(object_name)s\", was created in %(team_name)s by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Ողջույն %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s ստեղծել է \"%(object_name)s\" նոր հարցումը %(team_name)s -ում։ \n"
+"\n"
+"Կարող եք տեսնել այն՝ անցնելով այս հղումով: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Անցեք այս հղումով ՝ ձեր ծանուցման նախասիրությունները խմբագրելու համար: %(notification_settings_url)s )\n"
+"\n"
+"Ձեր %(site_name)s թիմ."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you were tagged in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Ողջույն, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s-ը տեղադրել է մեկնաբանություն այն հարցման վերաբերյալ, որում դուք նշված եք %(team_name)s -ում:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Անցեք այս հղումով մեկնաբանությունը տեսնելու համար: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"Անցեք այս հղումով ՝ ձեր ծանուցման նախասիրությունները խմբագրելու համար: %(notification_settings_url)s )\n"
+"\n"
+"Ձեր %(site_name)s թիմ.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in %(team_name)s."
+msgstr "%(sender_name)s մեկնաբանել է այն հարցումը, որում դուք նշված եք %(team_name)s -ում."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you voted in in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Ողջույն, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s մեկնաբանել է այն հարցումը, որում դուք քվեարկել եք %(team_name)s -ում:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"այն հարցումը:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Անցեք այս հղումով մեկնաբանությունը տեսնելու համար: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Անցեք այս հղումով ՝ ձեր ծանուցման նախասիրությունները խմբագրելու համար: %(notification_settings_url)s )\n"
+"\n"
+"Ձեր %(site_name)s թիմ.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s."
+msgstr "%(sender_name)s մեկնաբանել է այն հարցումը, որում դուք քվեարկել եք %(team_name)s -ում."
+
+msgid "Write comment..."
+msgstr "Գրել մեկնաբանություն ..."
+
+msgid "Post"
+msgstr "Տեղադրել"
+
+msgid "Add poll"
+msgstr "Ավելացնել հարցում"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "Ձեր մուտքագրած դաշտերից մեկում առկա է սխալ: Խնդրում ենք ուղղել այն նախքան պահպանելը!"
+
+msgid "Enter a title for the new poll."
+msgstr "Մուտքագրեք վերնագիր նոր հարցման համար."
+
+msgid "Description and Infos"
+msgstr "Նկարագրություն և տեղեկություն"
+
+msgid "Enter a description for the poll"
+msgstr "Մուտքագրեք հարցման համար նկարագրություն"
+
+msgid "Note: You cannot edit the options for this poll because someone has already cast their vote or the poll has been completed!"
+msgstr "Նշում. Դուք չեք կարող խմբագրել այս հարցման ընտրանքները, քանի որ ինչ-որ մեկը արդեն քվեարկել է, կամ հարցումն ավարտվել է!"
+
+msgid "Poll Choices"
+msgstr "Հարցումների ընտրանքներ"
+
+msgid "Remove choice"
+msgstr "Հեռացրել ընտրությունը"
+
+msgid "Add choice"
+msgstr "Ավելացնել ընտրությունը"
+
+msgid "Multiple Votes"
+msgstr "Բազմաթիվ քվեներ"
+
+msgid "If disabled, users can only vote for one option"
+msgstr "Եթե համակարգում չէ, օգտատերերը կարող են քվեարկել միայն մեկ տարբերակի"
+
+msgid "In addition to \"Yes\" and \"No\""
+msgstr "«Այո» -ից և «ոչ» -ից բացի"
+
+msgid "Lists how every voter voted for each option."
+msgstr "Թվարկվում է, թե ինչպես յուրաքանչյուր ընտրող քվեարկել է յուրաքանչյուր տարբերակին."
+
+msgid "Public voting"
+msgstr "Հասարակական քվեարկություն"
+
+msgid "Any logged in user who can see this poll can vote on it. If disabled, only group/project members can vote on it."
+msgstr "Ցանկացած մուտք գործած օգտատեր, ով կարող է տեսնել այս հարցումը, կարող է քվեարկել: Եթե համակարգում չէ, միայն խմբի / ծրագրի անդամները կարող են քվեարկել."
+
+msgid "Create"
+msgstr "Ստեղծել"
+
+msgid "Save"
+msgstr "Պահպանել"
+
+msgid "Archived Polls"
+msgstr "Արխիվացված հարցումներ"
+
+msgid "Enter the title to create a new poll."
+msgstr "Մուտքագրեք վերնագիրը `նոր հարցում անցկացնելու համար."
+
+msgid "There are no archived polls."
+msgstr "Արխիվացված հարցումներ չկան."
+
+msgid "There are no running polls."
+msgstr "Ընդացիկ հարցումներ չկան."
+
+msgid "There are no upcoming polls"
+msgstr "Սպասվող հարցումներ չկան"
+
+msgctxt "the_verb"
+msgid "Vote"
+msgstr "Քվեարկել"
+
+#, python-format
+msgid "Vote for %(title)s"
+msgstr "Քվեարկել %(title)s օգտին"
+
+msgid "This poll has been completed. Voting is closed."
+msgstr "Այս հարցումն ավարտվել է: Քվեարկությունը փակ է."
+
+msgid "This is an archived poll."
+msgstr "Սա արխիվացված հարցում է."
+
+msgid "Complete without winner"
+msgstr "Ավարտել առանց հաղթողի"
+
+#, python-format
+msgid "Do you really want to complete poll \"%(title)s\" with no winning option?"
+msgstr "Ցանկանու՞մ եք արդյոք ավարտել \"%(title)s\" հարցումը՝ առանց հաղթող տարբերակի?"
+
+msgid "Complete poll without winner"
+msgstr "Ավարտել հարցումը՝ առանց հաղթողի"
+
+msgid "(No description set)"
+msgstr "(Նկարագրություն սահմանված չէ)"
+
+msgid "The Winner is"
+msgstr "Հաղթողն է"
+
+msgid "Available options were"
+msgstr "Առկա ընտրանքներն էին"
+
+msgid "There are no options for this poll yet!"
+msgstr "Այս հարցման համար տարբերակներ առայժմ չկան!"
+
+msgid "Make winner and complete poll"
+msgstr "Դարձնել հաղթող և ավարտել հարցումը"
+
+msgid "Votes"
+msgstr "Քվեներ"
+
+#, python-format
+msgid "Do you really want to complete the poll and select \"%(description)s\" as winner?"
+msgstr "Ցանկանու՞մ եք արդյոք ավարտել հարցումը և ընտրել \"%(description)s\" որպես հաղթող?"
+
+msgid "Complete poll"
+msgstr "Ավարտել հարցումը"
+
+msgid "You created a poll"
+msgstr "Դուք ստեղծել եք հարցում"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a poll"
+msgstr "ստեղծել է հարցում"
+
+msgid "There are no polls yet"
+msgstr "Դեռ հարցումներ չկան"
+
+#, python-format
+msgid "Poll \"%(title)s\" was edited successfully."
+msgstr "\"%(title)s\" հարցումը հաջողությամբ խմբագրվել է."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be edited."
+msgstr "\"%(title)s\" հարցումը հնարավոր չէ խմբագրել."
+
+#, python-format
+msgid "Poll \"%(title)s\" was added successfully."
+msgstr "\"%(title)s\" հարցումը հաջողությամբ ավելացվել է."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be added."
+msgstr "\"%(title)s\" հարցումը հնարավոր չէ ավելացնել."
+
+msgid "You should define at least one poll option!"
+msgstr "Դուք պետք է սահմանեք առնվազն մեկ հարցման տարբերակ!"
+
+msgid "This poll is archived and cannot be edited anymore!"
+msgstr "Այս հարցումը արխիվացված է և այլևս չի կարող խմբագրվել!"
+
+#, python-format
+msgid "Poll \"%(title)s\" was deleted successfully."
+msgstr "\"%(title)s\" հարցումը հաջողությամբ ջնջվել է."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be deleted."
+msgstr "\"%(title)s\" հարցումը հնարավոր չէ ջնջել."
+
+msgid "Your votes were saved successfully."
+msgstr "Ձեր ձայները հաջողությամբ պահպանվել են."
+
+msgid "Your votes could not be saved."
+msgstr "Ձեր ձայները հնարավոր չէ պահպանել."
+
+msgid "The voting phase for this poll is over. You cannot vote for it any more."
+msgstr "Այս հարցման քվեարկության փուլը ավարտվել է: Դուք այլևս չեք կարող քվեարկել այստեղ."
+
+msgid "In this poll you must vote for exactly one item!"
+msgstr "Այս հարցմանը դուք պետք է քվեարկեք միայն մեկ կետի օգտին!"
+
+msgid "The complete request can only be sent via POST!"
+msgstr "Ամբողջական հարցումը կարող է ուղարկվել միայն ՓՈՍՏԻ միջոցով!"
+
+msgid "Invalid action for this poll. The request could not be completed!"
+msgstr "Այս հարցման համար անվավեր գործողություն է: Հայտը չի կարող ավարտվել!"
+
+msgid "This action is not permitted for this poll at this stage!"
+msgstr "Այս գործողությունը այս փուլում թույլատրված չէ այս հարցման համար!"
+
+msgid "The poll was closed successfully."
+msgstr "Հարցումը հաջողությամբ փակվել է."
+
+msgid "The poll was re-opened successfully."
+msgstr "Հարցումը հաջողությամբ վերաբացվել է."
+
+msgid "The poll was archived successfully."
+msgstr "Հարցումը հաջողությամբ արխիվացվել է."
+
+msgid "Your comment was added successfully."
+msgstr "Ձեր մեկնաբանությունը հաջողությամբ ավելացվել է."
+
+msgid "Your comment was deleted successfully."
+msgstr "Ձեր մեկնաբանությունը հաջողությամբ ջնջվել է."
+
+#~ msgid "New poll by %(sender_name)s"
+#~ msgstr "Նոր հարցում %(sender_name)s -ից"
+
+#~ msgid "%(sender_name)s completed a poll"
+#~ msgstr "%(sender_name)s -ը լրացրել է հարցում"
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
+
+#~ msgid "New poll by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Նոր հարցում %(sender_name)s -ից %(team_name)s -ում, որին դուք հետևում եք"
+
+#~ msgid "%(sender_name)s completed a poll you are following"
+#~ msgstr "%(sender_name)s -ը ավարտել է հարցում, որին հետևում եք"

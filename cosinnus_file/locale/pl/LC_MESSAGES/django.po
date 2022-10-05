@@ -1,0 +1,358 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:20+0200\n"
+"PO-Revision-Date: 2021-04-01 14:45+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.4.2\n"
+
+msgid "Files"
+msgstr "Pliki"
+
+msgctxt "the_app"
+msgid "file"
+msgstr "plik"
+
+msgid "A user uploaded a new file"
+msgstr "Użytkownik przesłał nowy plik"
+
+#, python-format
+msgid "%(sender_name)s uploaded the file %(object_name)s"
+msgstr "%(sender_name)s przesłał/a plik %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s uploaded %(count)d files"
+msgstr "%(sender_name)s przesłał/a pliki %(count)d"
+
+#, python-format
+msgid "%(sender_name)s created a new file"
+msgstr "%(sender_name)s utworzył nowy plik"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Nowy plik: \"%(object_name)s\" został utworzony w %(team_name)s."
+
+msgid "A user uploaded a new file in a team you are following"
+msgstr "Użytkownik wgrał nowy plik w zespole, który śledzisz"
+
+#, python-format
+msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s stworzył nowy plik w %(team_name)s (który śledzisz)"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Nowa kartoteka: \"%(object_name)s\" został utworzony w %(team_name)s (który śledzisz)."
+
+msgid "Latest Files"
+msgstr "Najnowsze Pliki"
+
+msgid "No files"
+msgstr "Brak plików"
+
+msgid "Pictures"
+msgstr "Zdjęcia"
+
+msgid "Documents"
+msgstr "Dokumenty"
+
+msgid "Audio Files"
+msgstr "Pliki Audio"
+
+msgid "Videos"
+msgstr "Filmy"
+
+msgid "Created By"
+msgstr "Utworzone Przez"
+
+msgid "File Type"
+msgstr "Rodzaj Pliku"
+
+msgid "File Name"
+msgstr "Nazwa Pliku"
+
+msgid "File Name (descending)"
+msgstr "Nazwa Pliku (malejąco)"
+
+msgid "Newest Created"
+msgstr "Ostatnio Utworzone"
+
+msgid "Smallest Files"
+msgstr "Najmniejsze Pliki"
+
+msgid "Largest Files"
+msgstr "Największe Pliki"
+
+msgid "The given URL does not seem to be valid."
+msgstr "Podany adres URL wydaje się być nieważny."
+
+msgid "Must supply either a URL or File"
+msgstr "Musi zawierać adres URL lub plik"
+
+msgid "Note"
+msgstr "Uwaga"
+
+msgid "File"
+msgstr "Plik"
+
+msgid "Is URL Link"
+msgstr "Czy URL Link"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Path"
+msgstr "Ścieżka"
+
+msgid "Uploaded by"
+msgstr "Wysłany przez"
+
+msgid "Uploaded on"
+msgstr "Wysłany w dniu"
+
+msgid "No files selected."
+msgstr "Nie ma wybranych plików."
+
+msgctxt "special_folder_type"
+msgid "Attachments"
+msgstr "Załączniki"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "W jednym z wypełnionych pól jest błąd. Popraw go przed zapisaniem!"
+
+msgid "The URL you have entered does not seem to be valid!"
+msgstr "Wprowadzony adres URL wydaje się być nieważny!"
+
+msgid "URL Link"
+msgstr "URL Link"
+
+msgid "Paste or type the link's URL here"
+msgstr "Wklej lub wpisz adres URL odnośnika tutaj"
+
+msgid "Title"
+msgstr "Tytuł"
+
+msgid "Description"
+msgstr "Opis"
+
+msgid "Preview"
+msgstr "Podgląd"
+
+msgid "Original filename"
+msgstr "Oryginalna nazwa pliku"
+
+msgid "Save"
+msgstr "Zapisz"
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "Show detailed steps"
+msgstr "Pokaż szczegółowe kroki"
+
+msgid "Move your files to the Cloud"
+msgstr "Przenieś swoje pliki do Chmury"
+
+msgid "Delete"
+msgstr "Usuń"
+
+msgid "Move"
+msgstr "Przenieś"
+
+msgid "Download"
+msgstr "Pobierz"
+
+msgid "Download this folder"
+msgstr "Pobierz ten folder"
+
+msgid "Add URL link"
+msgstr "Dodaj link URL"
+
+msgid "No files have been uploaded yet."
+msgstr "Żadne pliki nie zostały jeszcze wysłane."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new file \"%(object_name)s\" in %(team_name)s was uploaded by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Cześć %(receiver_name)s,\n"
+"\n"
+"nowy plik \"%(object_name)s\" w zespole %(team_name)s został wysłany przez %(sender_name)s.\n"
+"\n"
+"Dostępny jest pod następującym adresem: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Kliknij tutaj, aby edytować swoje ustawienia powiadomień: %(notification_settings_url)s )\n"
+"\n"
+"Twój Zespół %(site_name)s."
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was uploaded in %(team_name)s."
+msgstr "Nowy plik: \"%(object_name)s\" został wysłany w %(team_name)s."
+
+msgid "Move to another Folder"
+msgstr "Przenieś do innego Folderu"
+
+msgid "Link to this Image"
+msgstr "Link do tego obrazu"
+
+msgid "by"
+msgstr "przez"
+
+msgid "Created"
+msgstr "Utworzył/-a"
+
+msgid "Edit"
+msgstr "Edytuj"
+
+#, python-format
+msgid "Do you really want to delete file „%(title)s“?"
+msgstr "Czy na pewno chcesz usunąć plik „%(title)s”?"
+
+msgid "Delete file"
+msgstr "Usuń plik"
+
+msgid "Close"
+msgstr "Zamknij"
+
+msgid "To move your files to the Cloud, follow these steps:"
+msgstr "Aby przenieść swoje pliki do Chmury, postępuj zgodnie z instrukcją:"
+
+msgid "Navigate to the folder you wish to move to the Cloud, or to the root folder of the Files app if you wish to move all of the files"
+msgstr "Przejdź do folderu, który chcesz przenieść do chmury lub do głównego folderu aplikacji pliku, jeśli chcesz przenieść wszystkie pliki"
+
+msgid "Root folder"
+msgstr "Folder źródłowy"
+
+#, python-format
+msgid "Click \"%(download_label)s\" to download the file archive"
+msgstr "Kliknij \"%(download_label)s\", aby pobrać archiwum plików"
+
+msgid "Unzip the file archive to a local folder on your hard drive"
+msgstr "Wyodrębnij archiwum plików do lokalnego folderu na swoim dysku twardym"
+
+#, python-format
+msgid "Open the Cloud folder for \"%(group_name)s\":"
+msgstr "Otwórz w Chmurze folder dla \"%(group_name)s\":"
+
+msgid "Cloud app"
+msgstr "Aplikacja Chmura"
+
+msgid "Drag & drop the entire content of the unzipped folder from your local hard drive to the Cloud folder"
+msgstr "Przeciągnij i upuść całą zawartość niewyodrębnionego folderu ze swojego lokalnego dysku twardego do folderu Chmury"
+
+#, python-format
+msgid "Your files will now upload to the Cloud and can be accessed by all members of \"%(group_name)s\". Your files will remain here in the Files app as well. If you are satisfied with how they look in the Cloud, you may delete them here."
+msgstr "Twoje pliki zostaną teraz przesłane do Chmury i mogą być dostępne dla wszystkich członków \"%(group_name)s\". Twoje pliki pozostaną także w tej aplikacji plików. Jeśli jesteś zadowolony/a z ich wyglądu w Chmurze, to możesz je usunąć z aplikacji."
+
+msgid "If you wish to access your files from multiple devices, you may want to consider moving them to the Cloud. The process is easy, and you can still keep your files here until you are satisfied with the Cloud."
+msgstr "Jeśli chcesz mieć dostęp do swoich plików z różnych urządzeń, możesz przemyśleć przeniesienie ich do Chmury. Proces jest łatwy i możesz trzymać pliki tak długo, jak jesteś zadowolony/a z Chmury."
+
+msgid "You uploaded a file"
+msgstr "Wysłałeś plik"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "uploaded a file"
+msgstr "załadowany plik"
+
+msgid "More"
+msgstr "Więcej"
+
+msgid "Latest files"
+msgstr "Najnowsze pliki"
+
+msgid "There are no files  yet"
+msgstr "Jeszcze brak plików"
+
+#, python-format
+msgid "Folder \"%(title)s\" was created successfully."
+msgstr "Folder \"%(title)s\" został pomyślnie utworzony."
+
+msgid "File does not exist or you are not allowed to delete it."
+msgstr "Plik nie istnieje lub nie masz uprawnień, aby go usunąć."
+
+#, python-format
+msgid "A problem occurred during export. The following file is missing: %(filename)s."
+msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
+msgstr[0] "Podczas eksportu wystąpił problem. Brakuje następującego pliku: %(filename)s."
+msgstr[1] "Podczas eksportu wystąpił problem. Brakuje następujących plików: %(filename)s."
+msgstr[2] "Podczas eksportu wystąpił problem. Brakuje następujących plików: %(filename)s."
+
+msgid "Invalid request."
+msgstr "Nieprawidłowe żądanie."
+
+#, python-format
+msgid "File \"%(title)s\" was updated successfully."
+msgstr "Plik \"%(title)s\" zaktualizowano pomyślnie."
+
+#, python-format
+msgid "File \"%(title)s\" could not be updated."
+msgstr "Plik \"%(title)s\" nie mógł zostać zaktualizowany."
+
+msgid "Downloading failed, the target object was not a folder!"
+msgstr "Pobieranie zakończone niepowodzeniem, obiekt docelowy nie jest folderem!"
+
+msgid "Canceled the download because there seem to be no files in this folder."
+msgstr "Pobieranie anulowano, w folderze nie ma plików."
+
+msgid "Internal Error: Group not Found"
+msgstr "Błąd wewnętrzny: nie znaleziono Grupy"
+
+msgid "Permission for upload denied"
+msgstr "Odmowa zezwolenia na przesyłanie"
+
+msgid "The uploaded file was invalid."
+msgstr "Przesłany plik był nieprawidłowy."
+
+#, python-format
+msgid "%(count)d File was added successfully."
+msgid_plural "%(count)d Files were added successfully."
+msgstr[0] "%(count)d Plik dodano pomyślnie."
+msgstr[1] "%(count)d Pliki dodano pomyślnie."
+msgstr[2] "%(count)d Pliki dodano pomyślnie."
+
+msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
+msgstr "Przesłany plik był zbyt duży lub typ pliku nie został dopuszczony do przesłania!"
+
+#~ msgid "New file by %(sender_name)s"
+#~ msgstr "Nowy plik wysłany przez %(sender_name)s"
+
+#~ msgid "New file by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Nowy plik przez %(sender_name)s w %(team_name)s (który śledzisz)"
+
+#~ msgid "File title"
+#~ msgstr "Tytuł pliku"
+
+#~ msgid "File description"
+#~ msgstr "Opis pliku"
+
+#~ msgid "File \"%(title)s\" was uploaded successfully."
+#~ msgstr "Plik \"%(title)s\" wysłano pomyślnie."
+
+#~ msgid "File \"%(title)s\" could not be uploaded."
+#~ msgstr "Plik \"%(title)s\" nie mógł zostać wysłany."
+
+#~ msgid "File \"%(title)s\" could not be added."
+#~ msgstr "Plik \"%(title)s\" nie mógł zostać dodany."

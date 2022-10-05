@@ -1,0 +1,239 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:43+0200\n"
+"PO-Revision-Date: 2019-05-07 13:19+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: be\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.2.1\n"
+
+#, fuzzy
+#| msgid "You are getting this notification because you are an administrator of this portal."
+msgid "You are seeing this alert because you created this content."
+msgstr "Вы атрымліваеце гэта апавяшчэнне, таму што з'яўляецеся адміністратарам гэтага партала."
+
+#, fuzzy
+#| msgid "You are getting this notification because you are an administrator of this project or group."
+msgid "You are seeing this alert because you are following the item's project or group."
+msgstr "Вы атрымліваеце гэта апавяшчэнне, таму што з'яўляецеся адміністратарам гэтага праекта ці групы."
+
+#, fuzzy
+#| msgid "You are getting this notification because you are an administrator of this portal."
+msgid "You are seeing this alert because you are following this item."
+msgstr "Вы атрымліваеце гэта апавяшчэнне, таму што з'яўляецеся адміністратарам гэтага партала."
+
+msgid "Notifications"
+msgstr "Апавяшчэнні"
+
+msgctxt "the_app"
+msgid "notifications"
+msgstr "апавяшчэнні"
+
+#, python-format
+msgid "Your daily digest for %(portal_name)s"
+msgstr "Ваша штодзённая зводка навін для %(portal_name)s"
+
+msgid "This is what happened during the last day!"
+msgstr "Вось што адбылося за апошні дзень!"
+
+#, python-format
+msgid "Your weekly digest for %(portal_name)s"
+msgstr "Ваша штотыднёвая зводка навін для %(portal_name)s"
+
+msgid "This is what happened during the last week!"
+msgstr "Вось што адбылося за апошні тыдзень!"
+
+msgctxt "notification frequency"
+msgid "Never"
+msgstr "Ніколі"
+
+msgctxt "notification frequency"
+msgid "Immediately"
+msgstr "Імгненна"
+
+msgctxt "notification frequency"
+msgid "Daily"
+msgstr "Штодзень"
+
+msgctxt "notification frequency"
+msgid "Weekly"
+msgstr "Штотыдзень"
+
+msgid "Notification Preference for User"
+msgstr "Параметры апавяшчэнняў для карыстальніка(-цы)"
+
+msgid "Notification ID"
+msgstr "Ідэнтыфікатар апавяшчэння"
+
+msgid "Notification Preference"
+msgstr "Параметр апавяшчэнняў"
+
+msgid "Notification Preferences"
+msgstr "Параметры апавяшчэнняў"
+
+msgid "Portal"
+msgstr "Партал"
+
+msgid "Multi Notification ID"
+msgstr "Ідэнтыфікатар множных апавяшчэнняў"
+
+msgid "Multi Notification Preference"
+msgstr "Параметр множных апавяшчэнняў"
+
+msgid "Multi Notification Preferences"
+msgstr "Параметры множных апавяшчэнняў"
+
+msgid "User who caused this notification event"
+msgstr "Карыстальнік, які спрычыніўся да гэтага апавяшчэння"
+
+msgid "Audience"
+msgstr "Аўдыторыя"
+
+msgid "Owner of the alert"
+msgstr ""
+
+msgid "Alert Reason key"
+msgstr ""
+
+#, fuzzy
+#| msgid "User who caused this notification event"
+msgid "Last user who caused this notification event"
+msgstr "Карыстальнік, які спрычыніўся да гэтага апавяшчэння"
+
+msgid "Alert State"
+msgstr ""
+
+msgid "You are following this content or its Project or Group"
+msgstr ""
+
+msgid "All notifications"
+msgstr "Усе апавяшчэнні"
+
+msgid "No notifications"
+msgstr "Ніякіх апавяшчэнняў"
+
+msgid "For content that I am following, I wish to receive notification emails"
+msgstr "Я жадаю атрымліваць электронныя лісты с апавяшчэннямі пра змесціва, за якім я сачу"
+
+msgid "You are getting this notification because you are subscribed to these kinds of events in your project or group."
+msgstr "Вы атрымліваеце гэта апавяшчэнне, таму што падпісаліся на гэты тып падзей у сваім праекце ці групе."
+
+msgid "You are getting this notification because you are an administrator of this project or group."
+msgstr "Вы атрымліваеце гэта апавяшчэнне, таму што з'яўляецеся адміністратарам гэтага праекта ці групы."
+
+msgid "You are getting this notification because you are an administrator of this portal."
+msgstr "Вы атрымліваеце гэта апавяшчэнне, таму што з'яўляецеся адміністратарам гэтага партала."
+
+msgid "You are getting this email because you are subscribed to one or more daily notifications."
+msgstr "Вы атрымліваеце гэты электронны ліст, таму што падпісаліся на адно ці некалькі штодзёных апавяшчэнняў."
+
+msgid "You are getting this email because you are subscribed to one or more weekly notifications."
+msgstr "Вы атрымліваеце гэты электронны ліст, таму што падпісаліся на адно ці некалькі штотыднёвых апавяшчэнняў."
+
+msgid "New item"
+msgstr "Новы элемент"
+
+msgid "Like"
+msgstr "Упадабаць"
+
+msgid "Follow"
+msgstr "Сачыць"
+
+#, fuzzy, python-format
+#| msgid "Your daily digest for %(portal_name)s"
+msgid "View on %(portal_name)s"
+msgstr "Ваша штодзённая зводка навін для %(portal_name)s"
+
+msgid "Untitled"
+msgstr "Без назвы"
+
+msgid "Your Profile"
+msgstr "Ваш профіль"
+
+msgid "Select which notifications you would like to receive for each group or project you are involved in."
+msgstr "Адзначце, якія апавяшчэнні Вы хочаце атрымліваць для кожнай групы або праекта, у якіх Вы ўдзельнічаеце."
+
+msgid "These notifications will be sent to your configured email address:"
+msgstr "Гэтыя апавяшчэнні будуць дасылацца на вызначаны электронны адрас:"
+
+msgid "You can choose to receive notifications as soon as they happen, or you can receive a daily (or weekly) e-mail digest."
+msgstr "Вы можаце выбраць: атрымліваць апавяшчэнні як толькі адбываецца падзея, або ў выглядзе штодзённай (штотыднёвай) зводкі па электроннай пошце."
+
+msgid "The digest will aggregate all notifications with the \"Daily\" (or \"Weekly\") setting from all groups and projects. So you will receive only a single e-mail per day (or week) containing everything interesting that happend."
+msgstr "Зводка будзе абагульняць усе апавяшчэнні з наладай \"Штодзень\" (або \"Штотыдзень\") з усіх груп і праектаў. Вы будзеце атрымліваць толькі адзін электронны ліст штодзень (або штотыдзень), які змяшчае ўсе цікавыя падзеі."
+
+msgid "Notifications you set to \"Immediately\" will be e-mailed to you as soon as they happen, with one e-mail per notification."
+msgstr "Апавяшчэнні, якія Вы пазначыце \"Імгненна\", будуць дасылацца электронным лістом адразу пасля з'яўлення падзеі (кожнае апавяшчэнне асобным лістом)."
+
+msgid "Don't forget to save your settings once you are done editing them!"
+msgstr "Не забудзьцеся захаваць свае налады пасля рэдагавання!"
+
+msgid "more"
+msgstr "больш"
+
+msgid "I wish to receive notification emails"
+msgstr "Я жадаю атрымліваць электронныя лісты с апавяшчэннямі"
+
+msgid "Note that you will receive an email notification if someone has invited you to a group/ project in any case."
+msgstr ""
+
+msgid "I would like to receive instant messages by email for RocketChat mentions and direct messages to me"
+msgstr ""
+
+msgid "Receive notification emails in this language"
+msgstr "Атрымліваць электронныя лісты с апавяшчэннямі на гэтай мове"
+
+msgid "Moderator Status (Portal-Admins only)"
+msgstr "Статус мадэратара (толькі для адміністратараў партала)"
+
+msgid "I wish to be a Moderator for this portal"
+msgstr "Я жадаю быть мадэратарам гэтага партала"
+
+msgid "As a Moderator, you will receive an instant notification whenever ANY publicly visible content is posted on this portal. Since you are a portal administrator you can then also delete the content if it is offensive or critical. To delete it, visit the content page on the website while logged into this account."
+msgstr "Як мадэратар, Вы будзеце атрымліваць імгненныя апавяшчэнні пра публікацыю ЛЮБОГА публічнага змесціва на гэтым партале. Паколькі Вы з'яўляецеся адміністратарам партала, Вы зможаце таксама выдаляць гэтае змесціва, калі яно акажацца зняважлівым ці крытычным. Каб яго выдаліць, увайдзіце ў гэты ўліковы запіс і перайдзіце на старонку са змесцівам на сайце."
+
+msgid "Immediately"
+msgstr "Імгненна"
+
+msgid "Daily"
+msgstr "Штодзень"
+
+msgid "Weekly"
+msgstr "Штотыдзень"
+
+msgid "Custom"
+msgstr "Індывідуальныя налады"
+
+msgid "Reset to default"
+msgstr "Вярнуць прадвызначаныя налады"
+
+msgid "Save"
+msgstr "Захаваць"
+
+msgid "This will reset all of your notification preferences to their default setting. Are you sure you wish to do that?"
+msgstr "Гэта дзеянне скіне ўсе Вашыя параметры апавяшчэнняў да прадвызначаных. Вы ўпэўнены, што хочаце гэта зрабіць?"
+
+msgid "Your notification preferences were updated successfully."
+msgstr "Вашы параметры апавяшчэнняў паспяхова абноўленыя."
+
+msgid "Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!"
+msgstr ""
+
+msgid "Your notifications preferences were reset to default!"
+msgstr "Вашы параметры апавяшчэнняў скінутыя да прадвызначаных!"
+
+#, fuzzy
+#~| msgid "I wish to receive notification emails"
+#~ msgid "I wish to receive RocketChat notification emails"
+#~ msgstr "Я жадаю атрымліваць электронныя лісты с апавяшчэннямі"

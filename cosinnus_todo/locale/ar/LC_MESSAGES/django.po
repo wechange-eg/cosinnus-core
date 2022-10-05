@@ -1,0 +1,787 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 14:56+0200\n"
+"PO-Revision-Date: 2021-03-08 11:39+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Poedit 2.4.1\n"
+
+msgid "Todos"
+msgstr "مهام"
+
+msgctxt "the_app"
+msgid "todo"
+msgstr "the_app مهمة"
+
+msgid "A user created a new todo"
+msgstr "قام مستخدم بإنشاء مهمة جديدة"
+
+#, python-format
+msgid "%(sender_name)s created the todo %(object_name)s"
+msgstr "%(sender_name)s انشاء المهمة %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d todos"
+msgstr "%(sender_name)s تم انشاء %(count)d المهام"
+
+#, python-format
+msgid "%(sender_name)s created a new todo"
+msgstr "%(sender_name)s تم انشاء مهمة جديدة"
+
+#, python-format
+msgid "A new todo: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "المهمة الجديدة: \"%(object_name)s\" أنشئت بواسطة%(team_name)s."
+
+msgid "A todo was assigned to me"
+msgstr "مهمة أوكلت إلي"
+
+#, python-format
+msgid "%(sender_name)s assigned the todo %(object_name)s to you"
+msgstr "%(sender_name)sعُينت المهمة%(object_name)s لي"
+
+#, python-format
+msgid "%(sender_name)s assigned %(count)d todos to you"
+msgstr "%(sender_name)s تم تعيين%(count)d مهمة لك"
+
+#, python-format
+msgid "%(sender_name)s assigned a todo to you"
+msgstr "%(sender_name)sتعيين مهمة لك"
+
+msgid "A todo I created was completed"
+msgstr "المهمة التي أُنشئت تم إنجازها"
+
+#, python-format
+msgid "%(sender_name)s completed the todo %(object_name)s"
+msgstr "%(sender_name)s انجز المهمة%(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d todos"
+msgstr "%(sender_name)s انجزوا %(count)d من المهام"
+
+msgid "You created this todo"
+msgstr "أنت أنشئت هذه المهمة"
+
+#, python-format
+msgid "%(sender_name)s completed your todo"
+msgstr "%(sender_name)s أنجز مهمتك"
+
+#, python-format
+msgid "%(sender_name)s completed one of your todos"
+msgstr "%(sender_name)s أنجزوا واحدة من المهام"
+
+msgid "A user commented on one of your todos"
+msgstr "المتسخدم علق على واحدة من مهامك"
+
+#, python-format
+msgid "%(sender_name)s commented on your todo %(object_name)s"
+msgstr "%(sender_name)s تم التعليق على مهمتك %(object_name)s"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your todo %(object_name)s"
+msgstr[0] ""
+"% (sender_name)s و% (count_minus_one)d آخر علقوا على ما يجب القيام به% (object_name)s\n"
+"\n"
+"\n"
+"% (sender_name)s و% (count_minus_one)d آخر علقوا على ما يجب القيام به% (object_name)s"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#, python-format
+msgid "%(sender_name)s commented on your todo"
+msgstr "%(sender_name)s تم التعليق على مهمتك"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your todos"
+msgstr "%(sender_name)s تم التعليق على واحدة من مهامك"
+
+msgid "A user commented on a todo you were tagged in"
+msgstr "مستخدم علق على مهمة أشير إليك بها"
+
+#, python-format
+msgid "%(sender_name)s commented on the todo %(object_name)s"
+msgstr "%(sender_name)s تم التعليق على المهمة %(object_name)s"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the todo %(object_name)s"
+msgstr[0] ""
+"%(sender_name)s و% (count_minus_one)d آخر علق على المهام% (object_name)s\n"
+"\n"
+"\n"
+"% (sender_name)s و% (count_minus_one)d آخرون علقوا على المهام% (object_name)s"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+msgid "You were tagged in this todo"
+msgstr "تم الإشارة إليك في هذه المهمة"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in"
+msgstr "%(sender_name)s علق على مهمة أشير إليك بها"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s علق على مهمة أشير اليك بها %(team_name)s"
+
+msgid "A user commented on a todo you were assigned to"
+msgstr "المتسخدم علق على مهمة أوكلت إليك"
+
+#, python-format
+msgid "%(sender_name)s commented on your assigned todo %(object_name)s"
+msgstr "%(sender_name)sتم التعليق على المهمة الموكلة اليك%(object_name)s"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your assigned todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your assigned todo %(object_name)s"
+msgstr[0] ""
+"% (sender_name)s و% (count_minus_one)d آخر علق على المهام المعينة لك% (object_name)s\n"
+"\n"
+"\n"
+"% (sender_name)s و% (count_minus_one)d آخرون علقوا على المهام المعينة لك% (object_name)s"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos"
+msgstr "%(sender_name)s علقوا على واحدة من المهام التي أوكلت إليك"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your assigned todos in %(team_name)s"
+msgstr "%(sender_name)s  علقوا على واحدة من المهام التي أوكلت إليك ضمن%(team_name)s"
+
+msgid "A user updated a todo you are following"
+msgstr "مستخدم قام بتحديث مهمة أنت تتابعها"
+
+#, python-format
+msgid "%(sender_name)s updated the todo %(object_name)s"
+msgstr "%(sender_name)s  حدث المهمة%(object_name)s"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other updated the todo %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(object_name)s"
+msgstr[0] ""
+"% (sender_name)s و% (count_minus_one)d قام أخر بتحديث المهام% (object_name)s\n"
+"\n"
+"% (sender_name)s و% (count_minus_one)d قام أخرون بتحديث المهام% (object_name)s"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+msgid "You are following this todo"
+msgstr "انت تتابع هذه المهمة"
+
+#, python-format
+msgid "%(sender_name)s updated a todo you are following"
+msgstr "%(sender_name)s قاموا بتحديث مهمة أنت تتابعها"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "المهمة التي انت تتابعها\"%(object_name)s\" تم تحديثها ضمن الفريق%(team_name)s."
+
+msgid "A user reassigned a todo you are following"
+msgstr "مستخدم قام بإعادة تعين مهمة أنت تتابعها"
+
+#, python-format
+msgid "%(sender_name)s reassigned the todo %(object_name)s"
+msgstr "%(sender_name)s قام بإعادة تعيين المهمة%(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s reassigned %(count)d todos"
+msgstr "%(sender_name)s قام بإعادة تعيين %(count)d من المهام"
+
+#, python-format
+msgid "%(sender_name)s reassigned a todo you are following"
+msgstr "%(sender_name)s قام بتعيين مهمة أنت تتابعها"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was reassigned in %(team_name)s."
+msgstr "المهمة التي أنت تتابعها \"%(object_name)s\"  تم إعادة تعيينها ضمن %(team_name)s."
+
+msgid "A user completed a todo you are following"
+msgstr "مستخدم أنجز مهمة انت تتابعها"
+
+#, python-format
+msgid "%(sender_name)s completed a todo you are following"
+msgstr "%(sender_name)s أنجز مهمة أنت تتابعها"
+
+#, python-format
+msgid "A todo you are following: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "المهمة التي أنت تتابعها\"%(object_name)s\" تم إنجازها في %(team_name)s."
+
+msgid "A user commented on a todo you are following"
+msgstr "مستخدم علق على مهمة أنت تتابعها"
+
+#, python-format
+msgid "%(sender_name)s commented on on a todo you are following"
+msgstr "%(sender_name)s تم التعليق على مهمة أنت تتابعها"
+
+msgid "My Todos"
+msgstr "قائمة مهامي"
+
+msgid "No todos"
+msgstr "لا يوجد مهام"
+
+msgid "Open"
+msgstr "مفتوحة"
+
+msgid "Completed"
+msgstr "منجزة"
+
+msgid "All"
+msgstr "كل/جميع"
+
+msgid "Created By"
+msgstr "تم الإنشاء بواسطة"
+
+msgid "Assigned To"
+msgstr "عينت لـ"
+
+msgid "Priority"
+msgstr "أولولية"
+
+msgid "Due date"
+msgstr "حتى تاريخ"
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "Newest Created"
+msgstr "حديث الانشاء"
+
+msgid "Title"
+msgstr "عنوان"
+
+msgid "Soonest Due"
+msgstr "في أقرب وقت ممكن"
+
+msgid "You are not allowed to assign this Todo entry."
+msgstr "غير مسموح لك الدخول لهذه المهمة."
+
+msgid "Later"
+msgstr "لاحقا"
+
+msgid "Normal"
+msgstr "عادي"
+
+msgid "Important"
+msgstr "مهم"
+
+msgid "Due by"
+msgstr "مقرر"
+
+msgid "Completed on"
+msgstr "أنجز في"
+
+msgid "Completed by"
+msgstr "اكتمل بواسطة/ من قبل"
+
+msgid "Assigned to"
+msgstr "معين لـ"
+
+msgid "Note"
+msgstr "ملاحظة"
+
+msgid "List"
+msgstr "قائمة"
+
+msgid "Todo"
+msgstr "مهمة"
+
+msgid "Group"
+msgstr "مجموعة"
+
+msgid "Creator"
+msgstr "مبتكر"
+
+msgid "Created"
+msgstr "مبتكر/منشئ"
+
+msgid "Last modified"
+msgstr "آخر تعديل"
+
+msgid "Text"
+msgstr "نص"
+
+msgid "Comment"
+msgstr "تعليق"
+
+msgid "Comments"
+msgstr "تعليقات"
+
+#, python-format
+msgid "Todo \"%(todo_name)s\" was assigned to %(assignee_name)s"
+msgstr "المهمة \"%(todo_name)s\" عينت ل %(assignee_name)s"
+
+msgid "Back to"
+msgstr "العودة إلى"
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the task \"%(object_name)s\" in %(team_name)s was assigned to you by %(sender_name)s. \n"
+msgstr ""
+"مرحبا%(receiver_name)s,\n"
+"\n"
+" المهمة\"%(object_name)s\" في%(team_name)s تم تعينها إليك بواسطة%(sender_name)s.\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"\n"
+"يمكنك العثور عليه من خلال تتبع هذا الرابط %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"اتبع الرابط التالي لتحرير الاشعارات المفضلة لديك: %(notification_settings_url)s )n\n"
+"\n"
+" %(site_name)s فريقك."
+
+#, python-format
+msgid "Task: \"%(object_name)s\" in %(team_name)s was assigned to you."
+msgstr "المهمة \"%(object_name)s\" ضمن الفريق%(team_name)s التي تم تعينها لك."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a todo assigned to you in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the todo:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"مرحبا ,%(receiver_name)s!\n"
+"\n"
+"%(sender_name)sقام بنشر تعليق لمهمة معينة متعلقة بك ضمن %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"في المهمة\n"
+"\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"اتبع الرابط التالي لمشاهدة التعليقات \n"
+"%(object_url)s \n"
+"\n"
+"\n"
+"(اتبع الرابط التالي لتعديل اشعاراتك المفضلة: %(notification_settings_url)s )\n"
+"\n"
+"فريقك%(site_name)s\n"
+".\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo assigned to you in %(team_name)s."
+msgstr "%(sender_name)s علق على مهمة أوكلت إليك ضمن %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a todo you were tagged in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the todo:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"مرحبا ,%(receiver_name)s!\n"
+"\n"
+"%(sender_name)sقام بنشر تعليق على المهام المشار بها اليكفي %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"في المهمة\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"اتبع الرابط التالي لمشاهدة التعليق: \n"
+"%(object_url)s \n"
+"\n"
+"\n"
+"(اتبع الرابط التالي لتعديل اشعاراتك المفضلة: %(notification_settings_url)s )\n"
+"\n"
+"%(site_name)s فريقك\n"
+".\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a todo you were tagged in %(team_name)s."
+msgstr "%(sender_name)sقام بنشر تعليق على المهمة المشار بها اليك في%(team_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a todo you created in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your todo:\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"مرحبا , %(receiver_name)s!\n"
+"\n"
+"%(sender_name)sقام بنشر تعليق على المهمة يشير بها اليك في%(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"في المهمة\n"
+"\n"
+"\"%(todo_title)s\"\n"
+"\n"
+"\n"
+"اتبع الرابط التالي لمشاهدة التعليقات \n"
+"%(object_url)s \n"
+"\n"
+"\n"
+"(اتبع الرابط التالي لتعديل اشعاراتك المفضلة: %(notification_settings_url)s )\n"
+"\n"
+"فريقك %(site_name)s \n"
+".\n"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your todos in %(team_name)s."
+msgstr "%(sender_name)s تم التعليق على واحدة من المهام  الخاصة بك في%(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new task \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+msgstr ""
+"مرحبا ,%(receiver_name)s,\n"
+"\n"
+"مهمة جديدة\"%(object_name)s\"في%(team_name)s التي تم انشاءها من قبل %(sender_name)s. \n"
+"\n"
+
+#, python-format
+msgid "A new task: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "مهمة جديدة\"%(object_name)s\" التي تم انشاءها في %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the task \"%(object_name)s\" you created in %(team_name)s was completed by %(sender_name)s. \n"
+msgstr ""
+"مرحبا , %(receiver_name)s,\n"
+" المهمة\"%(object_name)s\"التي أنشئتها في %(team_name)s اكتملت بواسطة %(sender_name)s.\n"
+
+#, python-format
+msgid "Task completed: \"%(object_name)s\" in %(team_name)s."
+msgstr "تم اكتمال المهمة\"%(object_name)s\" في %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"you were tagged in the task \"%(object_name)s\" in %(team_name)s by %(sender_name)s. \n"
+msgstr ""
+"مرحبا ,%(receiver_name)s,\n"
+"\n"
+"لقد أشير إليك\"%(object_name)s\"في%(team_name)s بواسطة %(sender_name)s.\n"
+"\n"
+
+#, python-format
+msgid "You were tagged in the task \"%(object_name)s\" in %(team_name)s"
+msgstr "لقد أشير إليك في المهمة \"%(object_name)s\" في%(team_name)s"
+
+msgid "Not important"
+msgstr "غير هام"
+
+msgid "Delete todo"
+msgstr "احذف المهمة"
+
+msgid "Do you really want to delete this todo?"
+msgstr "هل فعلا تريد حذف المهمة؟"
+
+msgid "Not assigned"
+msgstr "غير معتمد"
+
+msgid "Following"
+msgstr "التالي / التالية"
+
+msgid "Reopen todo"
+msgstr "إعادة فتح المهمة"
+
+msgid "Close todo"
+msgstr "اغلق المهمة"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Edit"
+msgstr "تعديل"
+
+msgid "Write comment..."
+msgstr "اكتب تعليق..."
+
+msgid "Post"
+msgstr "انشر"
+
+msgid "This todo was completed:"
+msgstr "لقد اكتملت المهمة:"
+
+msgid "by"
+msgstr "بواسطة/من قبل"
+
+msgid "TodoEntries"
+msgstr "ادخال المهمة"
+
+msgid "There are no todolists yet."
+msgstr "قوائم مهام غير متوافرة بعد."
+
+msgid "New List Name"
+msgstr "اسم قائمة جديدة"
+
+msgid "Create"
+msgstr "انشاء"
+
+msgid "Create a new Todo"
+msgstr "انشاء مهمة جديدة"
+
+msgid "Only the owner and assignee of a todo can finish it!"
+msgstr "يحق للمالك و الوكيل المعتمد للمهمة بإنهاء ذلك!"
+
+msgid "Mark as finished"
+msgstr "ضع علامة كمتم/كمنتهي"
+
+msgid "Move to another Folder"
+msgstr "انتقل لملف أخر"
+
+msgid "Enter the title for this todo"
+msgstr "ادخل العنوان لهذه المهمة"
+
+msgid "There are no todos in this list."
+msgstr "لا يوجد مهمة في هذه القائمة."
+
+msgid "Please select or create a todo list."
+msgstr "الرجاء اختر أو أنشئ قائمة مهام."
+
+msgid "Add Todo"
+msgstr "اضف مهمة"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "حدث خطأ في أحد الحقول التي أدخلتها. يرجى تصحيحها قبل الحفظ!"
+
+msgid "Enter a title for the todo."
+msgstr "أدخل عنوانا لمهمة."
+
+msgid "Description"
+msgstr "وصف"
+
+msgid "Enter a description for the todo"
+msgstr "ادخل وصفا لمهمة"
+
+msgid "No date chosen"
+msgstr "لم يتم اختيار التاريخ"
+
+msgid "Choose due date"
+msgstr "اختر تاريخ الاستحقاق"
+
+msgid "Save"
+msgstr "حفظ"
+
+msgid "Choose day"
+msgstr "اختر يوم"
+
+msgid "Until when should the task be completed?"
+msgstr "إلى متى يجب أن تكتمل المهمة؟"
+
+msgid "OK"
+msgstr "موافق"
+
+msgid "Todo lists"
+msgstr "قائمة المهام"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "You created a todo"
+msgstr "قمت بإنشاء مهمة"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a todo"
+msgstr "قمت بإنشاء مهمة"
+
+msgid "You have no assigned tasks"
+msgstr "لا يوجد لك أي مهام معتمدة"
+
+msgid "Tasks are shown only for logged in users"
+msgstr "تظهر المهام فقط للمستخدمين الذين قاموا بتسجيل الدخول"
+
+#, python-format
+msgid "Todo \"%(title)s\" was added successfully."
+msgstr "تمت إضافة \"%(title)s\" المهمة بنجاح."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be added."
+msgstr "لا يمكن إضافة المهمة\"%(title)s\"."
+
+msgid "You were trying to add a todo to a todolist that does not exist!"
+msgstr "كنت تحاول إضافة مهمة غير موجودة إلى قائمة المهام!"
+
+#, python-format
+msgid "Todo \"%(title)s\" was edited successfully."
+msgstr "تم تعديل \"%(title)s\" المهام بنجاح."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be edited."
+msgstr "تعذر تعديل\"%(title)s\" المهام."
+
+#, python-format
+msgid "Todo \"%(title)s\" was deleted successfully."
+msgstr "لقد تم حذف\"%(title)s\" المهام بنجاح."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be deleted."
+msgstr "تعذر حذف\"%(title)s\" المهام."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned successfully."
+msgstr "تم تعيين\"%(title)s\" المهام بنجاح."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned."
+msgstr "تعذر تعيين \"%(title)s\" المهام."
+
+#, python-format
+msgid "Todo \"%(title)s\" was assigned to You successfully."
+msgstr "تم تعيين\"%(title)s\" المهمة لك بنجاح."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be assigned to You."
+msgstr "تعذر لك تعيين\"%(title)s\" المهمة."
+
+#, python-format
+msgid "Todo \"%(title)s\" was unassigned successfully."
+msgstr "تم إلغاء تعيين\"%(title)s\" المهمة بنجاح."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be unassigned."
+msgstr "تعذر إلغاء تعيين\"%(title)s\"المهمة."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed successfully."
+msgstr "تم انجاز\"%(title)s\"المهمة بنجاح."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed."
+msgstr "تعذر انجاز\"%(title)s\" المهمة."
+
+#, python-format
+msgid "Todo \"%(title)s\" was completed by You successfully."
+msgstr "تم انجاز\"%(title)s\" المهام بواسطتك بنجاح."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be completed by You."
+msgstr "تعذّر عليك إكمال\"%(title)s\" المهام."
+
+#, python-format
+msgid "Todo \"%(title)s\" was set to incomplete successfully."
+msgstr "لم يتم اكمال \"%(title)s\"المهمة بنجاح."
+
+#, python-format
+msgid "Todo \"%(title)s\" could not be set to incomplete."
+msgstr "قد لا يتم انجاز \"%(title)s\"\" قائمة المهمة."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was edited successfully."
+msgstr "تم تعديل \"%(title)s\" قائمة المهام بنجاح."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be edited."
+msgstr "قد لا يتم تعديل \"%(title)s\" قائمة المهام."
+
+#, python-format
+msgid "Todolist \"%(title)s\" was added successfully."
+msgstr "تم إضافة \"%(title)s\" قائمة المهام بنجاح."
+
+#, python-format
+msgid "Todolist \"%(title)s\" could not be added."
+msgstr "قد لا يمكن إضافة \"%(title)s\" قائمة/قوائم المهام."
+
+msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
+msgstr "لا يمكنك حذف هذا المجلد لأنه ليس لديك إذن بحذف عنصر أو أكثر من محتواه!"
+
+msgid "Your comment was added successfully."
+msgstr "تم إضافة تعليقك بنجاح."
+
+msgid "Your comment was deleted successfully."
+msgstr "تم حذق تعليقك بنجاح."

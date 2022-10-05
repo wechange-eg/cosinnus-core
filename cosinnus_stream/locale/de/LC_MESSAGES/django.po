@@ -1,0 +1,147 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:39+0200\n"
+"PO-Revision-Date: 2021-10-01 15:40+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0\n"
+
+msgid "Stream"
+msgstr "Aktivitäten"
+
+msgctxt "the_app"
+msgid "stream"
+msgstr "Aktivitäten"
+
+msgid "My Streams"
+msgstr "Aktivitäten"
+
+msgid "Streams"
+msgstr "Aktivitäten"
+
+msgid "Models"
+msgstr "Datentypen"
+
+msgid "Portal IDs"
+msgstr "Portal IDs"
+
+msgid "Last seen"
+msgstr "Zuletzt angesehen"
+
+msgid "Special Stream"
+msgstr "Spezial-Stream"
+
+msgid "Special Group IDs"
+msgstr "Special Group IDs"
+
+msgid "My Stream"
+msgstr "Aktivitäten"
+
+msgid "Public Stream"
+msgstr "Öffentliche Aktivitäten"
+
+msgid "My Stream in all Portals"
+msgstr "Aktivitäten in allen Portalen"
+
+msgid "Public Stream in all Portals"
+msgstr "Öffentliche Aktivitäten in allen Portalen"
+
+msgid "Edit this Stream"
+msgstr "Diesen Aktivitäten-Feed bearbeiten"
+
+msgid "Delete this Stream"
+msgstr "Diesen Aktivitäten-Feed löschen"
+
+msgid "Do you really want to delete this stream?"
+msgstr "Willst du diesen Aktivitäten-Feed wirklich löschen?"
+
+msgid "Delete Stream"
+msgstr "Aktivitäten-Feed löschen"
+
+msgid "Create Stream"
+msgstr "Aktivitäten-Feed erstellen"
+
+msgid "Hide public items outside of your groups"
+msgstr "Öffentliche Posts von außerhalb deiner Projekte/Gruppen ausblenden"
+
+msgid "Show public items outside of your groups"
+msgstr "Öffentliche Posts von außerhalb deiner Projekte/Gruppen anzeigen"
+
+msgid "There are no news posts yet"
+msgstr "Es gibt noch keine Posts"
+
+#, python-format
+msgid "Edit stream \"%(stream_name)s\""
+msgstr "\"%(stream_name)s\" bearbeiten"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "In einem der eingegebenen Felder trat ein Fehler auf. Bitte korrigiere ihn vor dem Speichern!"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Enter a title for the stream."
+msgstr "Gib einen Titel für den Aktivitäten-Feed ein."
+
+msgid "Apply filters for the stream"
+msgstr "Filter für den Aktivitäten-Feed auswählen"
+
+msgid "Filter by Team?"
+msgstr "Nach Gruppe oder Projekt filtern?"
+
+msgid "Select Team"
+msgstr "Gruppe oder Projekt auswählen"
+
+msgid "Public"
+msgstr "Öffentlich"
+
+msgid "Additional filters"
+msgstr "Zusätzliche Filter"
+
+msgid "Filter by authors, tags or other tagged properties?"
+msgstr "Nach Ersteller, Tags oder anderen Eigenschaften filtern?"
+
+msgid "Filter by item types?"
+msgstr "Nach Objekttyp filtern?"
+
+msgid "Create"
+msgstr "Erstellen"
+
+msgid "Edit"
+msgstr "Bearbeiten"
+
+msgid "You do not have permission to access this stream."
+msgstr "Du hast keine Berechtigung diesen Aktivitäten-Feed anzuschauen."
+
+msgid "Your stream was added successfully."
+msgstr "Dein Aktivitäten-Feed wurde erfolgreich hinzugefügt."
+
+msgid "Please log in to access this page."
+msgstr "Bitte log dich ein um diese Seite aufzurufen."
+
+msgid "Your stream was updated successfully."
+msgstr "Dein Aktivitäten-Feed wurde erfolgreich geändert."
+
+msgid "Your stream was deleted successfully."
+msgstr "Dein Aktivitäten-Feed wurde erfolgreich gelöscht."
+
+msgid "You cannot delete the default stream!"
+msgstr "Du kannst den Standard-Aktivitäten-Feed nicht löschen!"
+
+#~ msgid "Your Aktivitätenstream was deleted successfully."
+#~ msgstr "Der Stream wurde erfolgreich gelöscht."
+
+#~ msgid "Stream löschen"
+#~ msgstr "Aktivitäten-Feed löschen"

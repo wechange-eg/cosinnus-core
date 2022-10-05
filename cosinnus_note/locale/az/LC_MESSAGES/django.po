@@ -1,0 +1,414 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-01 16:06+0100\n"
+"PO-Revision-Date: 2020-05-04 02:38+0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: az\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.3\n"
+
+msgid "Notes"
+msgstr "Qeydlər"
+
+msgctxt "the_app"
+msgid "note"
+msgstr "qeyd"
+
+msgid "A user commented on a news post"
+msgstr "Bir istifadəçi xəbər yazısına şərh yazdı"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post"
+msgstr "%(sender_name)s xəbər yazısına şərh yazdı"
+
+msgid "A user commented on one of your news posts"
+msgstr "Bir istifadəçi xəbər yazılarınızdan birinə şərh yazdı"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post %(object_name)s"
+msgstr "%(sender_name)s %(object_name)s xəbər yazısına şərh yazdı"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
+msgstr[0] "%(sender_name)s və %(count_minus_one)d digəri %(object_name)s xəbər yazısına şərh yazdı"
+msgstr[1] "%(sender_name)s və %(count_minus_one)d digərləri %(object_name)s xəbər yazısına şərh yazdı"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post"
+msgstr "%(sender_name)s Sizin xəbər yazınıza şərh yazdı"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts"
+msgstr "%(sender_name)s xəbər yazılarınızdan birinə şərh yazdı"
+
+msgid "A user commented on a news posts you commented in"
+msgstr "Bir istifadəçi sizin şərh yazdığınız bir xəbər mesajına şərh yazdı"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
+msgstr "%(sender_name)s şərh yazdığınız %(object_name)s xəbər postuna şərh yazdı"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
+msgstr[0] "%(sender_name)s və %(count_minus_one)d digəri şərh yazdığınız %(object_name)s xəbər yazısına şərh yazdı"
+msgstr[1] "%(sender_name)s və %(count_minus_one)d digərləri şərh yazdığınız %(object_name)s xəbər yazısına şərh yazdı"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in"
+msgstr "%(sender_name)s şərh yazdığınız xəbər yazısına şərh yazdı"
+
+msgid "A user created a news post"
+msgstr "İstifadəçi bir xəbər yazısı yaratdı"
+
+#, python-format
+msgid "%(sender_name)s created the news post %(object_name)s"
+msgstr "%(sender_name)s %(object_name)s xəbər yazısı yaratdı"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d news posts"
+msgstr "%(sender_name)s %(count)d xəbər yazısını yaratdı"
+
+#, python-format
+msgid "%(sender_name)s created a new news post"
+msgstr "%(sender_name)s yeni xəbər yazısı yaratdı"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s:"
+msgstr "%(sender_name)s  %(team_name)s komandasında yerləşdirdi:"
+
+msgid "A user created a news post in a team you are following"
+msgstr "Bir istifadəçi izlədiyiniz komandada bir xəbər yazısı yaratdı"
+
+#, python-format
+msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s %(team_name)s komandasında (izlədiyiniz) yeni xəbər yazısı yaratdılar"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
+msgstr "%(sender_name)s %(team_name)s komandasında (izlədiyiniz) yerləşdirdi"
+
+msgid "A user updated a news post"
+msgstr "Bir istifadəçi xəbər yazısını yenilədi"
+
+#, python-format
+msgid "%(sender_name)s updated the news post %(object_name)s"
+msgstr "%(sender_name)s %(object_name)s xəbər yazısını yenilədi"
+
+msgid "You are following this news post"
+msgstr "Bu xəbər postunu izləyirsiniz"
+
+#, python-format
+msgid "%(sender_name)s updated a news post you are following"
+msgstr "%(sender_name)s izlədiyiniz xəbər yazısını yenilədi"
+
+#, python-format
+msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
+msgstr "%(sender_name)s tərəfindən izlədiyiniz xəbər yazısı %(team_name)s yeniləndi:"
+
+msgid "A user commented on a news post you are following"
+msgstr "Bir istifadəçi izlədiyiniz bir xəbər postuna şərh yazdı"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s"
+msgstr "%(sender_name)s %(object_name)s xəbər yazısına şərh yazdı"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
+msgstr[0] "%(sender_name)s və %(count_minus_one)d digəri %(object_name)s xəbər yazısına şərh yazdı"
+msgstr[1] "%(sender_name)s və %(count_minus_one)d digərləri %(object_name)s xəbər yazısına şərh yazdı"
+
+#, python-format
+msgid "%(sender_name)s commented on a news posts you are following"
+msgstr "%(sender_name)s izlədiyiniz xəbər yazılarına şərh yazdı"
+
+msgid "No news"
+msgstr "Xəbər yoxdu"
+
+msgid "Write a news post"
+msgstr "Xəbər yazısı yaz"
+
+msgid "News stream"
+msgstr "Xəbər axışı"
+
+msgid "Created By"
+msgstr "Yaradıldı"
+
+msgid "Newest Created"
+msgstr "Ən Son Yaradılan"
+
+msgid "Popularity"
+msgstr "Məşhurluq"
+
+msgid "Text"
+msgstr "Mətn"
+
+msgid "Facebook Share"
+msgstr "Feysbuk paylaşımı"
+
+msgid "Note Item"
+msgstr "Qeyd məlumat"
+
+msgid "Note Items"
+msgstr "Qeyd məlumatları"
+
+msgid "Author"
+msgstr "Müəllif"
+
+msgid "Creator"
+msgstr "Yaradıcı"
+
+msgid "Created"
+msgstr "Yaradıldı"
+
+msgid "Comment"
+msgstr "Şərh"
+
+msgid "Comments"
+msgstr "Şərhlər"
+
+msgid "News"
+msgstr "Xəbər"
+
+msgctxt "the_verb"
+msgid "Comment"
+msgstr "Şərh yazın"
+
+msgid "Delete"
+msgstr "Silmək"
+
+msgid "Write comment..."
+msgstr "Şərh yazın ..."
+
+msgid "Post"
+msgstr "Yazı"
+
+msgid "There are no public news posts"
+msgstr "Heç bir ictimai xəbər yazısı yoxdur"
+
+msgid "There are no news posts yet"
+msgstr "Heç bir xəbər yazısı yoxdur"
+
+msgid "Edit news post"
+msgstr "Xəbər yazısını düzəldin"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "Girdiyiniz xanalardan birində səhv oldu. Xahiş edirəm yaddaşda saxlamazdan əvvəl düzəldin!"
+
+msgid "Save changes"
+msgstr "Dəyişiklikləri yadda saxla"
+
+msgid "Title (optional)"
+msgstr "Titul (ixtiyari)"
+
+msgid "Title"
+msgstr "Titul"
+
+msgctxt "label for the form text input"
+msgid "News text"
+msgstr "Növbəti mətn"
+
+msgid "Please enter a message..."
+msgstr "Zəhmət olmasa bir mesaj daxil edin ..."
+
+msgid "To post in this team you need to"
+msgstr "Bu komandada yazmaq üçün gərək"
+
+msgid "request to join"
+msgstr "qoşulmağı tələb et"
+
+msgid "Cancel"
+msgstr "Təxirə sal"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a news post you wrote in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your post:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Salam, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s %(team_name)s komandasında yazdığınız xəbər yazısına bir xəbər postuna şərh yazdı:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"sənin xəbər yazısında:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"Şərhi görmək üçün bu linki izləyin: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"Bildiriş seçimlərinizi düzəltmək üçün bu linki izləyin: %(notification_settings_url)s )\n"
+"\n"
+"Sizin %(site_name)s komandası.\n"
+"\n"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a news post you a commented in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the post:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Salam, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s %(team_name)s komandasında yazdığınız xəbər yazısına bir xəbər postuna şərh yazdı:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"sənin xəbər yazısında:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"Şərhi görmək üçün bu linki izləyin: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"Bildiriş seçimlərinizi düzəltmək üçün bu linki izləyin: %(notification_settings_url)s )\n"
+"\n"
+"Sizin %(site_name)s komandası.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in, in %(team_name)s."
+msgstr "%(sender_name)s  %(team_name)s. komandasında şərh yazdığınız xəbər yazısına şərh yazdı."
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
+msgstr "Xəbər yazılarınızdan birində %(sender_name)s %(team_name)s komandasında şərh yazdı."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s just posted an update in %(team_name)s:\n"
+msgstr ""
+"Salam %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s  %(team_name)s yenilənmə yerləşdirdi.:\n"
+
+#, python-format
+msgid ""
+"%(note_text)s\n"
+"\n"
+"\n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"%(note_text)s\n"
+"\n"
+"\n"
+"\n"
+"Bunu bu linki izləyərək tapa bilərsiniz: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Bildiriş seçimlərinizi düzəltmək üçün bu linki izləyin\n"
+" \n"
+": %(notification_settings_url)s )\n"
+"\n"
+"Sizin %(site_name)s Komandanız."
+
+msgid "Show in my projects..."
+msgstr "Layihələrimizdə göstər ..."
+
+msgid "Edit"
+msgstr "Redaktə edin"
+
+msgid "Delete note"
+msgstr "Qeydi silin"
+
+msgid "View on Facebook"
+msgstr "Facebookda bax"
+
+msgid "Do you really want to delete this note?"
+msgstr "Siz həqiqətən \"%(title)s\" qeydi silmək istəyirsiniz?"
+
+msgid "You added a post"
+msgstr "Yazı əlavə etdiniz"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "added a post"
+msgstr "yazı əlavə etdi"
+
+msgid "Your news post was added successfully."
+msgstr "Xəbəriniz uğurla əlavə edildi."
+
+msgid "Your news post was deleted successfully."
+msgstr "Xəbəriniz uğurla silindi."
+
+msgid "Your news post was edited successfully."
+msgstr "Xəbəriniz uğurla redaktə edildi."
+
+msgid "Your comment was added successfully."
+msgstr "Şərhiniz uğurla əlavə edildi."
+
+msgid "Your comment was deleted successfully."
+msgstr "Şərhiniz uğurla silindi."
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
+
+#~ msgid "New news post by %(sender_name)s"
+#~ msgstr "%(sender_name)s tərəfindən yeni xəbər yazısı"
+
+#~ msgid "New news post by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "%(team_name)s komandasında (izlədiyiniz) %(sender_name)s tərəfindən yeni xəbər yazısı"

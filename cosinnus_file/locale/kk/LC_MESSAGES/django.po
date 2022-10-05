@@ -1,0 +1,363 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:20+0200\n"
+"PO-Revision-Date: 2020-04-14 11:50+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: kk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 2.3\n"
+
+msgid "Files"
+msgstr "Файлдар"
+
+msgctxt "the_app"
+msgid "file"
+msgstr "файл"
+
+msgid "A user uploaded a new file"
+msgstr "Пайдаланушы жаңа файл жүктеді"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new file"
+msgid "%(sender_name)s uploaded the file %(object_name)s"
+msgstr "%(sender_name)s жаңа файл жасады"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new file"
+msgid "%(sender_name)s uploaded %(count)d files"
+msgstr "%(sender_name)s жаңа файл жасады"
+
+#, python-format
+msgid "%(sender_name)s created a new file"
+msgstr "%(sender_name)s жаңа файл жасады"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Жаңа файл: „%(object_name)s“ %(team_name)s ішінде жасалды."
+
+msgid "A user uploaded a new file in a team you are following"
+msgstr "Пайдаланушы сіз бақылайтын командаға жаңа файл жүктеді"
+
+#, python-format
+msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s %(team_name)s ішінде жаңа файл жасады (сіз бақылайтын)"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Жаңа файл: „%(object_name)s“ %(team_name)s ішінде жасалды (сіз бақылайтын)."
+
+msgid "Latest Files"
+msgstr "Соңғы файлдар"
+
+msgid "No files"
+msgstr "Файлдар жоқ"
+
+msgid "Pictures"
+msgstr "Суреттер"
+
+msgid "Documents"
+msgstr "Құжаттар"
+
+msgid "Audio Files"
+msgstr "Аудио файлдар"
+
+msgid "Videos"
+msgstr "Бейне"
+
+msgid "Created By"
+msgstr "Құрған"
+
+msgid "File Type"
+msgstr "Файл түрі"
+
+msgid "File Name"
+msgstr "Файл атауы"
+
+msgid "File Name (descending)"
+msgstr "Файл атауы (әдепкі)"
+
+msgid "Newest Created"
+msgstr "Ең жаңа жасалған"
+
+msgid "Smallest Files"
+msgstr "Ең кіші файлдар"
+
+msgid "Largest Files"
+msgstr "Ең үлкен файлдар"
+
+msgid "The given URL does not seem to be valid."
+msgstr ""
+
+msgid "Must supply either a URL or File"
+msgstr ""
+
+msgid "Note"
+msgstr "Ескерту"
+
+msgid "File"
+msgstr "Файл"
+
+msgid "Is URL Link"
+msgstr ""
+
+msgid "URL"
+msgstr ""
+
+msgid "Path"
+msgstr "Бағыт"
+
+msgid "Uploaded by"
+msgstr "Жүктеген"
+
+msgid "Uploaded on"
+msgstr "Жүктелген"
+
+msgid "No files selected."
+msgstr "Файлдар таңдалмады."
+
+msgctxt "special_folder_type"
+msgid "Attachments"
+msgstr "Акциялар"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "Өрістердің бірінде қате пайда болды. Мұны сақтамас бұрын жөндеңіз!"
+
+msgid "The URL you have entered does not seem to be valid!"
+msgstr ""
+
+msgid "URL Link"
+msgstr ""
+
+msgid "Paste or type the link's URL here"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Description"
+msgstr "Сипаттамасы"
+
+msgid "Preview"
+msgstr "Суретті алдын-ала қарау"
+
+msgid "Original filename"
+msgstr "Түпнұсқа файл атауы"
+
+msgid "Save"
+msgstr "Сақтау"
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Show detailed steps"
+msgstr ""
+
+msgid "Move your files to the Cloud"
+msgstr ""
+
+msgid "Delete"
+msgstr "Жою"
+
+msgid "Move"
+msgstr "Жылжу"
+
+msgid "Download"
+msgstr "Жүктеу"
+
+msgid "Download this folder"
+msgstr "Бұл қалтаны жүктеңіз"
+
+msgid "Add URL link"
+msgstr ""
+
+msgid "No files have been uploaded yet."
+msgstr "Әлі файлдар жүктелмеген."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new file \"%(object_name)s\" in %(team_name)s was uploaded by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Сәлем %(receiver_name)s,\n"
+"\n"
+"Жаңа файл “%(object_name)s” %(team_name)s ішінде %(sender_name)s жаңартылды. \n"
+"\n"
+"Оны сіз мына сілтемеге өтіп қарай аласыз: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Хабарландыру параметрлерін өзгерту: %(notification_settings_url)s )\n"
+"\n"
+"Сіздің %(site_name)s командаңыз."
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was uploaded in %(team_name)s."
+msgstr "Жаңа файл: „%(object_name)s“ %(team_name)s файлына жүктелді."
+
+msgid "Move to another Folder"
+msgstr "Басқа қалтаға жылжу"
+
+msgid "Link to this Image"
+msgstr ""
+
+msgid "by"
+msgstr "бастап"
+
+msgid "Created"
+msgstr "Құрған"
+
+msgid "Edit"
+msgstr "Өңдеу"
+
+#, python-format
+msgid "Do you really want to delete file „%(title)s“?"
+msgstr "„%(title)s“ файлын шынымен жойғыңыз келе ме?"
+
+msgid "Delete file"
+msgstr "Файлды жою"
+
+msgid "Close"
+msgstr ""
+
+msgid "To move your files to the Cloud, follow these steps:"
+msgstr ""
+
+msgid "Navigate to the folder you wish to move to the Cloud, or to the root folder of the Files app if you wish to move all of the files"
+msgstr ""
+
+#, fuzzy
+#| msgid "Download this folder"
+msgid "Root folder"
+msgstr "Бұл қалтаны жүктеңіз"
+
+#, python-format
+msgid "Click \"%(download_label)s\" to download the file archive"
+msgstr ""
+
+msgid "Unzip the file archive to a local folder on your hard drive"
+msgstr ""
+
+#, python-format
+msgid "Open the Cloud folder for \"%(group_name)s\":"
+msgstr ""
+
+msgid "Cloud app"
+msgstr ""
+
+msgid "Drag & drop the entire content of the unzipped folder from your local hard drive to the Cloud folder"
+msgstr ""
+
+#, python-format
+msgid "Your files will now upload to the Cloud and can be accessed by all members of \"%(group_name)s\". Your files will remain here in the Files app as well. If you are satisfied with how they look in the Cloud, you may delete them here."
+msgstr ""
+
+msgid "If you wish to access your files from multiple devices, you may want to consider moving them to the Cloud. The process is easy, and you can still keep your files here until you are satisfied with the Cloud."
+msgstr ""
+
+msgid "You uploaded a file"
+msgstr "Сіз файл жүктедіңіз"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "uploaded a file"
+msgstr "сіз файл жүктедіңіз"
+
+msgid "More"
+msgstr "Тағы"
+
+msgid "Latest files"
+msgstr "Соңғы файлдар"
+
+msgid "There are no files  yet"
+msgstr "Әлі файлдар жоқ"
+
+#, python-format
+msgid "Folder \"%(title)s\" was created successfully."
+msgstr "„%(title)s“ қалта сәтті жасалды."
+
+msgid "File does not exist or you are not allowed to delete it."
+msgstr "Файл жоқ немесе сіз оны жоюға құқығыңыз жоқ."
+
+#, python-format
+msgid "A problem occurred during export. The following file is missing: %(filename)s."
+msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
+msgstr[0] ""
+"Экспорттау кезінде мәселе туындады. Келесі файл жоқ: %(filename)s.\n"
+"Экспорттау кезінде мәселе туындады. Келесі файлдар жоқ: %(filename)s."
+
+msgid "Invalid request."
+msgstr "Жарамсыз сұрау."
+
+#, python-format
+msgid "File \"%(title)s\" was updated successfully."
+msgstr "„%(title)s“ файлы сәтті жаңартылды."
+
+#, python-format
+msgid "File \"%(title)s\" could not be updated."
+msgstr "„%(title)s“ файлын жаңарту мүмкін емес."
+
+msgid "Downloading failed, the target object was not a folder!"
+msgstr "Жүктеу сәтсіз аяқталды, мақсат қапшық емес!"
+
+msgid "Canceled the download because there seem to be no files in this folder."
+msgstr "Жүктеуді болдырмаңыз, себебі бұл қалтада файл жоқ сияқты."
+
+msgid "Internal Error: Group not Found"
+msgstr ""
+
+msgid "Permission for upload denied"
+msgstr ""
+
+msgid "The uploaded file was invalid."
+msgstr ""
+
+#, python-format
+msgid "%(count)d File was added successfully."
+msgid_plural "%(count)d Files were added successfully."
+msgstr[0] ""
+"%(count)d Файл сәтті қосылды.\n"
+"\n"
+"%(count)d Файлдар сәтті қосылды."
+
+msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
+msgstr ""
+
+#~ msgid "New file by %(sender_name)s"
+#~ msgstr "%(sender_name)s жаңа файл"
+
+#~ msgid "New file by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "%(sender_name)s %(team_name)s ішінде жаңа файл құрылды"
+
+#~ msgid "File title"
+#~ msgstr "Файл атауы"
+
+#~ msgid "File description"
+#~ msgstr "Файл сипаттамасы"
+
+#~ msgid "File \"%(title)s\" was uploaded successfully."
+#~ msgstr "„%(title)s“ файл сәтті жүктелді."
+
+#~ msgid "File \"%(title)s\" could not be uploaded."
+#~ msgstr "„%(title)s“ файлы жүктелуі мүмкін емес."
+
+#~ msgid "File \"%(title)s\" could not be added."
+#~ msgstr "„%(title)s“ файлын қосу мүмкін емес."

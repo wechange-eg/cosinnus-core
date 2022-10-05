@@ -1,0 +1,56 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-07 15:25+0100\n"
+"PO-Revision-Date: 2022-02-07 15:26+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgid "Cloud"
+msgstr "Chmura"
+
+msgctxt "the_app"
+msgid "cloud"
+msgstr "chmura"
+
+msgid "Latest Cloud files"
+msgstr "Najnowsze pliki w chmurze"
+
+msgid "No cloud files yet"
+msgstr "Brak plików w chmurze"
+
+msgid "Path"
+msgstr ""
+
+msgid "URL"
+msgstr ""
+
+msgid "Linked Cloud File"
+msgstr "Pliki w chmurze"
+
+msgid "Linked Cloud Files"
+msgstr "Pliki w chmurze"
+
+msgid "Cloud Stub"
+msgstr "Stub chmury"
+
+msgid "We could not retrieve file information from Nextcloud at this moment. Click here to view the files directly in the cloud."
+msgstr ""
+
+msgid "There are no cloud files yet"
+msgstr "Nie masz jeszcze żadnych plików w chmurze."
+
+msgid "Cloud Files"
+msgstr "Pliki w chmurze"

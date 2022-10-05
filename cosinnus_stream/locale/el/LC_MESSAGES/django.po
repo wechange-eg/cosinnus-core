@@ -1,0 +1,141 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:39+0200\n"
+"PO-Revision-Date: 2021-04-26 15:16+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.2\n"
+
+msgid "Stream"
+msgstr "Ζωντανή Μετάδοση"
+
+msgctxt "the_app"
+msgid "stream"
+msgstr "ζωντανή μετάδοση"
+
+msgid "My Streams"
+msgstr "Οι Ζωντανές Μεταδόσεις Μου"
+
+msgid "Streams"
+msgstr "Ζωντανές Μεταδόσεις"
+
+msgid "Models"
+msgstr "Πρότυπα"
+
+msgid "Portal IDs"
+msgstr "Ταυτότητες Πύλης"
+
+msgid "Last seen"
+msgstr "Τελευταία προβολή"
+
+msgid "Special Stream"
+msgstr "Ειδική Ζωντανή Μετάδοση"
+
+msgid "Special Group IDs"
+msgstr "Ταυτότητες Ειδικής Ομάδας"
+
+msgid "My Stream"
+msgstr "Η Ζωντανή Μετάδοσή Μου"
+
+msgid "Public Stream"
+msgstr "Δημόσια Ζωντανή Μετάδοση"
+
+msgid "My Stream in all Portals"
+msgstr "Η Ζωντανή Μετάδοσή Μου σε όλες τις Πύλες"
+
+msgid "Public Stream in all Portals"
+msgstr "Δημόσια Ζωντανή Μετάδοσ σε όλες τις Πύλες"
+
+msgid "Edit this Stream"
+msgstr "Επεξεργασία αυτής της Ζωντανής Μετάδοσης"
+
+msgid "Delete this Stream"
+msgstr "Διαγραφή αυτής της Ζωντανής Μετάδοσης"
+
+msgid "Do you really want to delete this stream?"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή τη ζωντανή μετάδοση;"
+
+msgid "Delete Stream"
+msgstr "Διαγραφή Ζωντανής Μετάδοσης"
+
+msgid "Create Stream"
+msgstr "Δημιουργία Ζωντανής Μετάδοσης"
+
+msgid "Hide public items outside of your groups"
+msgstr "Αποκρύψτε δημόσια στοιχεία εκτός των ομάδων σας"
+
+msgid "Show public items outside of your groups"
+msgstr "Εμφανίστε δημόσια στοιχεία εκτός των ομάδων σας"
+
+msgid "There are no news posts yet"
+msgstr "Δεν υπάρχουν ακόμη αναρτήσεις ειδήσεων"
+
+#, python-format
+msgid "Edit stream \"%(stream_name)s\""
+msgstr "Επεξεργαστείτε τη ζωντανή μετάδοση \"%(stream_name)s\""
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "Υπήρξε σφάλμα σε ένα από τα πεδία που εισήλθατε. Παρακαλούμε διορθώστε το πριν από την αποθήκευση!"
+
+msgid "Title"
+msgstr "Τίτλος"
+
+msgid "Enter a title for the stream."
+msgstr "Εισάγετε τίτλο για τη ζωντανή μετάδοση"
+
+msgid "Apply filters for the stream"
+msgstr "Ορίστε φίλτρα για αυτή τη ζωντανή μετάδοση"
+
+msgid "Filter by Team?"
+msgstr "Φίλτρο ανά Ομάδα;"
+
+msgid "Select Team"
+msgstr "Επιλογή Ομάδας"
+
+msgid "Public"
+msgstr "Δημόσιος"
+
+msgid "Additional filters"
+msgstr "Πρόσθετα φίλτρα"
+
+msgid "Filter by authors, tags or other tagged properties?"
+msgstr "Φίλτρο ανά συντάκτη, ετικέτες ή άλλα χαρακτηριστικά με ετικέτα;"
+
+msgid "Filter by item types?"
+msgstr "Φίλτρο ανά είδος στοιχείου;"
+
+msgid "Create"
+msgstr "Δημιουργία"
+
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+msgid "You do not have permission to access this stream."
+msgstr "Δεν έχετε άδεια για να αποκτήσετε πρόσβαση σε αυτή τη ζωντανή μετάδοση."
+
+msgid "Your stream was added successfully."
+msgstr "Η ζωντανή μετάδοσή σας προστέθηκε με επιτυχία."
+
+msgid "Please log in to access this page."
+msgstr "Παρακαλούμε συνδεθείτε για να εισέλθετε σε αυτή την σελίδα."
+
+msgid "Your stream was updated successfully."
+msgstr "Η ζωντανή μετάδοσή σας ενημερώθηκε με επιτυχία."
+
+msgid "Your stream was deleted successfully."
+msgstr "Η ζωντανή μετάδοσή σας διαγράφηκε με επιτυχία."
+
+msgid "You cannot delete the default stream!"
+msgstr "Δεν μπορείτε να διαγράψετε την προεπιλεγμένη ζωντανή μετάδοση!"

@@ -1,0 +1,364 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:20+0200\n"
+"PO-Revision-Date: 2020-04-22 12:37+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+
+msgid "Files"
+msgstr "Archivos"
+
+msgctxt "the_app"
+msgid "file"
+msgstr "archivo"
+
+msgid "A user uploaded a new file"
+msgstr "Un usuario subió un archivo nuevo"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new file"
+msgid "%(sender_name)s uploaded the file %(object_name)s"
+msgstr "%(sender_name)s creó un nuevo archivo"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s created a new file"
+msgid "%(sender_name)s uploaded %(count)d files"
+msgstr "%(sender_name)s creó un nuevo archivo"
+
+#, python-format
+msgid "%(sender_name)s created a new file"
+msgstr "%(sender_name)s creó un nuevo archivo"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Archivo neuvo: \"%(object_name)s\" fue creado en %(team_name)s."
+
+msgid "A user uploaded a new file in a team you are following"
+msgstr "Un usario creó un archivo nuevo en un equipo que estas siguiendo"
+
+#, python-format
+msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s creó un archivo nuevo en %(team_name)s (que estas siguiendo)"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Archivo neuvo: \"%(object_name)s\" fue creado en %(team_name)s (que sigues)."
+
+msgid "Latest Files"
+msgstr "Ultimos archivos"
+
+msgid "No files"
+msgstr "Ningúnos Archivos"
+
+msgid "Pictures"
+msgstr "Imágenes"
+
+msgid "Documents"
+msgstr "Documentos"
+
+msgid "Audio Files"
+msgstr "Archivos de sonido"
+
+msgid "Videos"
+msgstr "Videos"
+
+msgid "Created By"
+msgstr "Creado por"
+
+msgid "File Type"
+msgstr "Tipo de archivo"
+
+msgid "File Name"
+msgstr "Nombre de archivo"
+
+msgid "File Name (descending)"
+msgstr "Nombre de archivo (descendente)"
+
+msgid "Newest Created"
+msgstr "Creados más nuevos"
+
+msgid "Smallest Files"
+msgstr "Archivos más pequeños"
+
+msgid "Largest Files"
+msgstr "Archivos más grandes"
+
+msgid "The given URL does not seem to be valid."
+msgstr ""
+
+msgid "Must supply either a URL or File"
+msgstr ""
+
+msgid "Note"
+msgstr "Ten encuenta"
+
+msgid "File"
+msgstr "Archivo"
+
+msgid "Is URL Link"
+msgstr ""
+
+msgid "URL"
+msgstr ""
+
+msgid "Path"
+msgstr "Camino"
+
+msgid "Uploaded by"
+msgstr "Subido por"
+
+msgid "Uploaded on"
+msgstr "Subido en"
+
+msgid "No files selected."
+msgstr "Ningúnos archivos seleccionados."
+
+msgctxt "special_folder_type"
+msgid "Attachments"
+msgstr "Documento adjunto"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "Se ha producido un error en uno de las casillas insertadas. ¡Por favor, corrígelo antes de guardar!"
+
+msgid "The URL you have entered does not seem to be valid!"
+msgstr ""
+
+msgid "URL Link"
+msgstr ""
+
+msgid "Paste or type the link's URL here"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Description"
+msgstr "Descripción"
+
+msgid "Preview"
+msgstr "VIsta anticipada"
+
+msgid "Original filename"
+msgstr "Nombre original del archivo"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Show detailed steps"
+msgstr ""
+
+msgid "Move your files to the Cloud"
+msgstr ""
+
+msgid "Delete"
+msgstr "Borrar"
+
+msgid "Move"
+msgstr "Trasladar"
+
+msgid "Download"
+msgstr "Descargar"
+
+msgid "Download this folder"
+msgstr "Descargar esta carpeta"
+
+msgid "Add URL link"
+msgstr ""
+
+msgid "No files have been uploaded yet."
+msgstr "No hay archivo subidos hasta ahora."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new file \"%(object_name)s\" in %(team_name)s was uploaded by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Hola %(receiver_name)s,\n"
+"\n"
+"un nuevo archivo \"%(object_name)s\" en %(team_name)s fue subido por %(sender_name)s. \n"
+"\n"
+"Puedes encontrarlo siguiendo este enlace: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Sigue este enlace para editar tus preferencias de notificación: %(notification_settings_url)s )\n"
+"\n"
+"Tu equipo de %(site_name)s ."
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was uploaded in %(team_name)s."
+msgstr "Un nuevo archivo: \"%(object_name)s\" fue subido en %(team_name)s."
+
+msgid "Move to another Folder"
+msgstr "Trasladar a otra carpeta"
+
+msgid "Link to this Image"
+msgstr ""
+
+msgid "by"
+msgstr "por"
+
+msgid "Created"
+msgstr "Creado"
+
+msgid "Edit"
+msgstr "Editar"
+
+#, python-format
+msgid "Do you really want to delete file „%(title)s“?"
+msgstr "Estas seguro de que quieres eliminar el archivo „%(title)s“?"
+
+msgid "Delete file"
+msgstr "Eliminar el Archivo"
+
+msgid "Close"
+msgstr ""
+
+msgid "To move your files to the Cloud, follow these steps:"
+msgstr ""
+
+msgid "Navigate to the folder you wish to move to the Cloud, or to the root folder of the Files app if you wish to move all of the files"
+msgstr ""
+
+#, fuzzy
+#| msgid "Download this folder"
+msgid "Root folder"
+msgstr "Descargar esta carpeta"
+
+#, python-format
+msgid "Click \"%(download_label)s\" to download the file archive"
+msgstr ""
+
+msgid "Unzip the file archive to a local folder on your hard drive"
+msgstr ""
+
+#, python-format
+msgid "Open the Cloud folder for \"%(group_name)s\":"
+msgstr ""
+
+msgid "Cloud app"
+msgstr ""
+
+msgid "Drag & drop the entire content of the unzipped folder from your local hard drive to the Cloud folder"
+msgstr ""
+
+#, python-format
+msgid "Your files will now upload to the Cloud and can be accessed by all members of \"%(group_name)s\". Your files will remain here in the Files app as well. If you are satisfied with how they look in the Cloud, you may delete them here."
+msgstr ""
+
+msgid "If you wish to access your files from multiple devices, you may want to consider moving them to the Cloud. The process is easy, and you can still keep your files here until you are satisfied with the Cloud."
+msgstr ""
+
+#, fuzzy
+#| msgid "A user uploaded a new file"
+msgid "You uploaded a file"
+msgstr "Un usuario subió un archivo nuevo"
+
+#, fuzzy
+#| msgid "A user uploaded a new file"
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "uploaded a file"
+msgstr "Un usuario subió un archivo nuevo"
+
+msgid "More"
+msgstr "Más"
+
+msgid "Latest files"
+msgstr "Ultimos archivos"
+
+msgid "There are no files  yet"
+msgstr "No hay archivos hasta ahora"
+
+#, python-format
+msgid "Folder \"%(title)s\" was created successfully."
+msgstr "Carpeta \"%(title)s\" ha sido creada con éxito."
+
+msgid "File does not exist or you are not allowed to delete it."
+msgstr "El archivo no existe o no tienes permiso para eliminarlo."
+
+#, python-format
+msgid "A problem occurred during export. The following file is missing: %(filename)s."
+msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
+msgstr[0] "Se produjo un problema durante la exportación. Falta el siguiente archivo: %(filename)s."
+msgstr[1] "Se produjo un problema durante la exportación. Faltan los siguientes archivos: %(filename)s."
+
+msgid "Invalid request."
+msgstr "Solicitud no válida."
+
+#, python-format
+msgid "File \"%(title)s\" was updated successfully."
+msgstr "Archivo \"%(title)s\" fue actualizado con éxito."
+
+#, python-format
+msgid "File \"%(title)s\" could not be updated."
+msgstr "Archivo\"%(title)s\" no pudo ser actualizado."
+
+msgid "Downloading failed, the target object was not a folder!"
+msgstr "Error al descargar, ¡el objeto de destino no era una carpeta!"
+
+msgid "Canceled the download because there seem to be no files in this folder."
+msgstr "Se canceló la descarga porque parece que no hay archivos en esta carpeta."
+
+msgid "Internal Error: Group not Found"
+msgstr ""
+
+msgid "Permission for upload denied"
+msgstr ""
+
+msgid "The uploaded file was invalid."
+msgstr ""
+
+#, python-format
+msgid "%(count)d File was added successfully."
+msgid_plural "%(count)d Files were added successfully."
+msgstr[0] "%(count)d Archivo se añadió correctamente."
+msgstr[1] "%(count)d Archivos se añadieron correctamente."
+
+msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
+msgstr ""
+
+#~ msgid "New file by %(sender_name)s"
+#~ msgstr "Archivo neuvo de %(sender_name)s"
+
+#~ msgid "New file by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Archivo neuvo de %(sender_name)s en %(team_name)s (que sigues)"
+
+#~ msgid "File title"
+#~ msgstr "Título del archivo"
+
+#~ msgid "File description"
+#~ msgstr "Descripción del archivo"
+
+#~ msgid "File \"%(title)s\" was uploaded successfully."
+#~ msgstr "Archivo \"%(title)s\" fue subido con éxito."
+
+#~ msgid "File \"%(title)s\" could not be uploaded."
+#~ msgstr "Archivo \"%(title)s\" no se pudo subir."
+
+#~ msgid "File \"%(title)s\" could not be added."
+#~ msgstr "Archivo \"%(title)s\" no pudo ser añadido."

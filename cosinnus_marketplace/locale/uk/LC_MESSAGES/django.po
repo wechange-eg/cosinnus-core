@@ -1,0 +1,463 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-18 09:12+0100\n"
+"PO-Revision-Date: 2020-10-13 18:36+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.4.1\n"
+
+msgid "Marketplace"
+msgstr "Дошка оголошень"
+
+msgctxt "the_app"
+msgid "marketplace"
+msgstr "дошка оголошень"
+
+msgid "A user created a new offer"
+msgstr "Користувач(ка) створив(ла) нову пропозицію"
+
+#, python-format
+msgid "%(sender_name)s created the offer %(object_name)s"
+msgstr "%(sender_name)s створив(-ла) оголошення %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d offers"
+msgstr "%(sender_name)s створив(-ла) %(count)d пропозиції"
+
+#, python-format
+msgid "%(sender_name)s created a new offer"
+msgstr "%(sender_name)s створив(ла) нову пропозицію"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Нове оголошення: \"%(object_name)s\" було створено в %(team_name)s."
+
+msgid "One of your offers expired"
+msgstr "Закінчився термін дії однієї з Ваших пропозицій"
+
+#, python-format
+msgid "Your offer %(object_name)s expired"
+msgstr "Термін дії пропозиції \"%(object_name)s\" минув"
+
+#, python-format
+msgid "%(count)d of your offers expired"
+msgstr "%(count) d ваших пропозицій минули"
+
+msgid "Your offer has expired"
+msgstr "Термін дії вашої пропозиції минув"
+
+#, python-format
+msgid "Offer \"%(object_name)s\" has expired."
+msgstr "Термін дії пропозиції \"%(object_name)s\" минув."
+
+msgid "A user commented on one of your offers"
+msgstr "Користувач прокоментував одну з Ваших пропозицій"
+
+#, python-format
+msgid "%(sender_name)s commented on your offer %(object_name)s"
+msgstr "%(sender_name)s прокоментував Вашу пропозицію %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your offer %(object_name)s"
+msgstr[0] "%(sender_name)s і %(count_minus_one)d інший(-а) прокоментували Вашу пропозицію %(object_name)s"
+msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували Ваше оголошення %(object_name)s"
+msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували Ваше оголошення %(object_name)s"
+msgstr[3] ""
+
+#, python-format
+msgid "%(sender_name)s commented on your offer"
+msgstr "%(sender_name)s прокоментував Вашу пропозицію"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your offers"
+msgstr "%(sender_name)s прокоментував оду з Ваших пропозицій"
+
+msgid "A user commented on an offer you were tagged in"
+msgstr "Користувач прокоментував пропозицію, в якій Ви були позначені"
+
+#, python-format
+msgid "%(sender_name)s commented on the offer %(object_name)s"
+msgstr "%(sender_name)s прокоментував(-ла) Вашу пропозицію %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the offer %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the offer %(object_name)s"
+msgstr[0] "%(sender_name)s і %(count_minus_one)d інший(-а) прокоментували Вашу пропозицію %(object_name)s"
+msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували Ваше оголошення %(object_name)s"
+msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували Ваше оголошення %(object_name)s"
+msgstr[3] ""
+
+msgid "You were tagged in this offer"
+msgstr "Вас було позначено в цій пропозиції"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in"
+msgstr "%(sender_name)s прокоментував пропозицію, в якій Ви були позначені"
+
+#, python-format
+msgid "%(sender_name)s commented on an offer you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s прокоментував пропозицію, в якій Ви були відзначені в %(team_name)s"
+
+msgid "A user created a new offer in a team you are following"
+msgstr "Користувач створив(ла) нову пропозицію в команді, за якою Ви слідкуєте"
+
+#, python-format
+msgid "%(sender_name)s created a new offer in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s створив(ла) нову пропозицію в %(team_name)s (за якою Ви слідкуєте)"
+
+#, python-format
+msgid "A new offer: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Нова пропозіція: \"%(object_name)s\" була створена в %(team_name)s (за якою Ви слідкуєте)."
+
+msgid "A user updated an offer you are following"
+msgstr "Користувач оновив пропозицію, за якою Ви слідкуєте"
+
+#, python-format
+msgid "%(sender_name)s updated the offer %(object_name)s"
+msgstr "%(sender_name)s оновив(-ла) пропозицію %(object_name)s"
+
+msgid "You are following this offer"
+msgstr "Ви відстежуєте цю пропозицію"
+
+#, python-format
+msgid "%(sender_name)s updated an offer you are following"
+msgstr "%(sender_name)s оновив(ла) пропозицію, за якою Ви слідкуєте"
+
+#, python-format
+msgid "An offer you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Пропозицію, за якою Ви слідкуєте: \"%(object_name)s\" було оновлено в %(team_name)s."
+
+msgid "A user commented on an offer you are following"
+msgstr "Користувач прокоментував пропозицію, за якою Ви слідкуєте"
+
+#, python-format
+msgid "%(sender_name)s commented on on an offer you are following"
+msgstr "%(sender_name)s прокоментував пропозицію, за якою Ви слідкуєте"
+
+msgid "Current Offers"
+msgstr "Актуальні пропозиції"
+
+msgid "No current offers"
+msgstr "Актуальних пропозицій немає"
+
+msgid "Created By"
+msgstr "Автор"
+
+msgid "Type"
+msgstr "Тип"
+
+msgid "Newest Created"
+msgstr "Найновіші створені"
+
+msgid "Title"
+msgstr "Назва"
+
+msgid "Order Key"
+msgstr "Ключ сортування"
+
+msgid "Looking for"
+msgstr "Шукаю"
+
+msgid "Offering"
+msgstr "Пропоную"
+
+msgid "Offer currently active?"
+msgstr "Пропозиція активна на даний момент?"
+
+msgid "Description"
+msgstr "Опис"
+
+msgid "Offer Category"
+msgstr "Категорія пропозиції"
+
+msgid "Offer"
+msgstr "Пропозиція"
+
+msgid "Offers"
+msgstr "Пропозиції"
+
+#, python-format
+msgid "Offer: %(offer)s (%(type)s)"
+msgstr "Пропозиція: %(offer)s (%(type)s)"
+
+msgid "Creator"
+msgstr "Творець"
+
+msgid "Created"
+msgstr "Створено"
+
+msgid "Last modified"
+msgstr "Востаннє змінено"
+
+msgid "Text"
+msgstr "Текст"
+
+msgid "Comment"
+msgstr "Коментар"
+
+msgid "Comments"
+msgstr "Коментарі"
+
+msgid "Back to Offers"
+msgstr "Повернутися до пропозицій"
+
+msgid "My Offers"
+msgstr "Мої пропозиції"
+
+msgid "Add Offer"
+msgstr "Додати пропозицію"
+
+msgid "Misc"
+msgstr "Різне"
+
+msgid "Filter"
+msgstr "Застосувати фільтри"
+
+#, python-format
+msgid "%(link_start)s%(username)s%(link_end)s is looking for"
+msgstr "%(link_start)s%(username)s%(link_end)s шукає"
+
+#, python-format
+msgid "%(link_start)s%(username)s%(link_end)s is offering"
+msgstr "%(link_start)s%(username)s%(link_end)s пропонує"
+
+msgid "Inactive"
+msgstr "Неактивно"
+
+msgid "Delete"
+msgstr "Видалити"
+
+msgid "Edit"
+msgstr "Змінити"
+
+msgid "Deactivate"
+msgstr "Деактивувати"
+
+msgid "Reactivate"
+msgstr "Відновити"
+
+msgid "Activate"
+msgstr "Активувати"
+
+#, python-format
+msgid "Do you really want to delete offer „%(title)s“?"
+msgstr "Ви дійсно бажаєте видалити пропозицію „%(title)s“?"
+
+msgid "Delete offer"
+msgstr "Видалити пропозицію"
+
+#, python-format
+msgid "Do you really want to deactivate offer „%(title)s“?"
+msgstr "Ви дійсно бажаєте деактивувати пропозицію „%(title)s“?"
+
+msgid "Deactivate offer"
+msgstr "Деактивувати пропозицію"
+
+#, python-format
+msgid "Do you really want to reactivate offer „%(title)s“?"
+msgstr "Ви дійсно бажаєте відновити пропозицію „%(title)s“?"
+
+#, python-format
+msgid "Do you really want to activate offer „%(title)s“?"
+msgstr "Ви дійсно бажаєте активувати пропозицію „%(title)s“?"
+
+msgid "Reactivate offer"
+msgstr "Відновити пропозицію"
+
+msgid "Activate offer"
+msgstr "Активувати пропозицію"
+
+msgid "Write comment..."
+msgstr "Написати коментар..."
+
+msgid "Post"
+msgstr "Опублікувати"
+
+msgid "This offer is inactive. It is only visible to you and not listed in the marketplace. You can reactivate it below."
+msgstr "Ця пропозиція неактивна. Її бачите тільки Ви і вона не відображається на «Дошці оголошень». Ви можете відновити її нижче."
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "В одному із заповнюваних Вами полів сталася помилка. Будь ласка, виправте це перед збереженням!"
+
+#, python-format
+msgid ""
+"\n"
+"                        Note: after this offer will be posted, each user of %(forum_name)s may be able to see it.<br>\n"
+"                        If you do not want this, please, use another group or project of your choice.\n"
+"                        "
+msgstr ""
+
+msgid "Offer type"
+msgstr "Тип пропозиції"
+
+msgid "Offer Title"
+msgstr "Назва пропозиції"
+
+msgid "Enter a description for your offer."
+msgstr "Введіть опис Вашої пропозиції."
+
+msgid "Phone number"
+msgstr "Номер телефону"
+
+msgid "Your phone number is only visible for registered users"
+msgstr "Ваш номер телефону відображається тільки для зареєстрованих користувачів"
+
+msgid "Categories"
+msgstr "Категорії"
+
+msgid "Check all categories that fit your offer"
+msgstr "Перевірте всі категорії, що підходять під Ваш запит"
+
+msgid "Upload a file or image or attach an existing one"
+msgstr "Завантажити файл або зображення або вкласти уже наявні"
+
+msgid "The first uploaded image will be displayed as a wallpaper"
+msgstr "Перше фото, яке Ви завантажете, буде відображатися як фон"
+
+msgid "Offer is active"
+msgstr "Пропозиція активна"
+
+msgid "Only active offers will be listed in the Marketplace."
+msgstr "На Дошці оголошень будуть відображені лише активні пропозиції."
+
+msgid "Only active offers will be listed in the Marketplace. Your offer will stay active for 4 weeks. After that, you can reactivate it at any time."
+msgstr "На «Дошці оголошень» будуть відображені тільки активні пропозиції. Ваша пропозиція залишається активною протягом 4-х тижнів. Пізніше Ви зможете відновити пропозицію в будь-який момент."
+
+msgid "Create"
+msgstr "Створити"
+
+msgid "Save"
+msgstr "Зберегти"
+
+msgid "All"
+msgstr "Всі"
+
+msgid "Wanted"
+msgstr "Розшукується"
+
+msgid "No offers"
+msgstr "Пропозиції відсутні"
+
+msgid "There are no offers"
+msgstr "Немає пропозицій"
+
+msgid "(No description set)"
+msgstr "(Опис не надано)"
+
+msgid "offered in"
+msgstr "пропонується в"
+
+#, python-format
+msgid "Contact %(username)s directly"
+msgstr "Контактувати безпосередньо з %(username)s"
+
+msgid "Only shown for registered users"
+msgstr "Показано тільки для зареєстрованих користувачів"
+
+msgid "Send Message"
+msgstr "Відправити повідомлення"
+
+msgid "expires on"
+msgstr "закінчується"
+
+msgid "expired on"
+msgstr "закінчився"
+
+msgid "You created an offer"
+msgstr "Ви створили пропозицію"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created an offer"
+msgstr "cтворено пропозицію"
+
+msgid "Contact"
+msgstr "Контакт"
+
+msgid "There are no current offers"
+msgstr "Немає актуальних пропозицій"
+
+#, python-format
+msgid "Offer \"%(title)s\" was edited successfully."
+msgstr "Пропозицію \"%(title)s\" було успішно змінено."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be edited."
+msgstr "Пропозиція \"%(title)s\" не може бути змінена."
+
+#, python-format
+msgid "Offer \"%(title)s\" was added successfully."
+msgstr "Пропозицію \"%(title)s\" було успішно додано."
+
+#, python-format
+msgid "Offer \"%(title)s\" was saved successfully, but is not active yet."
+msgstr "Пропозиція \"%(title)s\" було успішно збережена, але ще не активна."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be added."
+msgstr "Пропозицію \"%(title)s\" не можна додати."
+
+#, python-format
+msgid "Offer \"%(title)s\" was deleted successfully."
+msgstr "Пропозицію \"%(title)s\" було успішно видалено."
+
+#, python-format
+msgid "Offer \"%(title)s\" could not be deleted."
+msgstr "Пропозиція \"%(title)s\" не може бути видалена."
+
+msgid "The offer you requested is no longer active. Sorry!"
+msgstr "Вибачте, пропозиція, на яку Ви надіслали запит, більше неактивна!"
+
+msgid "The complete request can only be sent via POST!"
+msgstr "Повний запит може бути відправлений тільки ПОШТОЮ!"
+
+msgid "Invalid action for this offer. The request could not be completed!"
+msgstr "Неприпустимі дії для цієї пропозиції. Запит не може бути завершеним!"
+
+msgid "The offer is already active"
+msgstr "Пропозиція вже активована"
+
+msgid "The offer is already deactivated"
+msgstr "Пропозиція вже деактивоване"
+
+msgid "The offer was deactivated successfully."
+msgstr "Пропозицію було успішно деактивовано."
+
+msgid "The offer was reactivated successfully."
+msgstr "Пропозицію було успішно відновлено."
+
+msgid "The offer was activated successfully."
+msgstr "Пропозицію було успішно активовано."
+
+msgid "Your comment was added successfully."
+msgstr "Ваш коментар було успішно додано."
+
+msgid "Your comment was deleted successfully."
+msgstr "Ваш коментар успішно видалено."
+
+#~ msgid "New offer by %(sender_name)s"
+#~ msgstr "Нове оголошення від %(sender_name)s"
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
+
+#~ msgid "New offer by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Нова пропозиція від %(sender_name)s в %(team_name)s (за якою Ви слідкуєте)"
+
+#~ msgid "Phone number (optional)"
+#~ msgstr "Телефонний номер (необов’язково)"
+
+#~ msgid "Add Photos or Files"
+#~ msgstr "Додати зображення чи файли"

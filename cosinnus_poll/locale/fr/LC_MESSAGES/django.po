@@ -1,0 +1,770 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:06+0200\n"
+"PO-Revision-Date: 2021-03-16 07:28+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.4.2\n"
+
+msgid "Polls"
+msgstr "Sondages"
+
+msgctxt "the_app"
+msgid "poll"
+msgstr "sondage"
+
+msgid "A user created a new poll"
+msgstr "Un utilisateur a créé un nouveau sondage"
+
+#, python-format
+msgid "%(sender_name)s created the poll %(object_name)s"
+msgstr "%(sender_name)s a créé le sondage %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d polls"
+msgstr "%(sender_name) sondages %(count)d créés"
+
+#, python-format
+msgid "%(sender_name)s created a new poll"
+msgstr "%(sender_name)s a créé un nouveau sondage"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Un nouveau sondage : \"%(object_name)s\" a été créé dans %(team_name)s."
+
+msgid "A poll you voted on was completed"
+msgstr "Un sondage pour lequel tu as voté a été rempli"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s you voted on"
+msgstr "%(sender_name)s a rempli le sondage %(object_name)s sur lequel tu as voté"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls you voted on"
+msgstr "%(sender_name)s a rempli %(count)d sondages sur lesquels tu as voté"
+
+#, python-format
+msgid "%(sender_name)s completed the poll"
+msgstr "%(sender_name)s a rempli le sondage"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Le sondage \"%(object_name)s\" a été rempli dans %(team_name)s."
+
+msgid "A user commented on one of your polls"
+msgstr "Un utilisateur a commenté l'un de tes sondages"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll %(object_name)s"
+msgstr "%(sender_name)s a commenté ton sondage %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your poll %(object_name)s"
+msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté ton sondage %(object_name)s"
+msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté ton sondage %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s commented on your poll"
+msgstr "%(sender_name)s a commenté ton sondage"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls"
+msgstr "%(sender_name)s a commenté un de tes sondages"
+
+msgid "A user commented on a poll you were tagged in"
+msgstr "Un utilisateur a commenté un sondage sur lequel tu es tagué"
+
+#, python-format
+msgid "%(sender_name)s commented on the poll %(object_name)s"
+msgstr "%(sender_name)s a commenté le sondage %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the poll %(object_name)s"
+msgstr[0] "%(sender_name)s et %(count_minus_one)d autre ont commenté le sondage %(object_name)s"
+msgstr[1] "%(sender_name)s et %(count_minus_one)d autres ont commenté le sondage %(object_name)s"
+
+msgid "You were tagged in this poll"
+msgstr "Tu as été marqué dans ce sondage"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in"
+msgstr "%(sender_name)s a commenté un sondage sur lequel tu es tagué"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s a commenté un sondage sur lequel tu es tagué dans %(team_name)s"
+
+msgid "A user commented on an poll you voted in"
+msgstr "Un utilisateur a commenté un sondage à propos duquel tu as voté"
+
+msgid "You voted on this poll"
+msgstr "Tu as voté sur ce sondage"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in"
+msgstr "%(sender_name)s a commenté un sondage pour lequel tu as voté"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s"
+msgstr "%(sender_name)s a commenté un sondage pour lequel tu as voté dans %(team_name)s"
+
+msgid "A user created a new poll in a team you are following"
+msgstr "Un utilisateur a créé un nouveau sondage dans une équipe que tu suis"
+
+#, python-format
+msgid "%(sender_name)s created a new poll in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s a créé un nouveau sondage dans %(team_name)s (que tu suis)"
+
+#, python-format
+msgid "A new poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Un nouveau sondage : \"%(object_name)s\" a été créé dans %(team_name)s (que tu suis)."
+
+msgid "A user updated a poll you are following"
+msgstr "Un utilisateur a mis à jour un sondage que tu suis"
+
+#, python-format
+msgid "%(sender_name)s updated the poll %(object_name)s"
+msgstr "%(sender_name)s a mis à jour le sondage %(object_name)s"
+
+msgid "You are following this poll"
+msgstr "Tu suis ce sondage"
+
+#, python-format
+msgid "%(sender_name)s updated a poll you are following"
+msgstr "%(sender_name)s mis à jour un sondage que tu suis"
+
+#, python-format
+msgid "A poll you are following: \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Un sondage que tu suis : \"%(object_name)s\" a été mis à jour en %(team_name)s."
+
+msgid "A poll you are following was completed"
+msgstr "Un sondage que tu suis a été réalisé"
+
+#, python-format
+msgid "%(sender_name)s completed the poll %(object_name)s"
+msgstr "%(sender_name)s a réalisé le sondage %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s completed %(count)d polls"
+msgstr "%(sender_name)s sondages %(count)d réalisés"
+
+#, python-format
+msgid "%(sender_name)s completed the poll you are following"
+msgstr "%(sender_name)s a réalisé le sondage"
+
+#, python-format
+msgid "Poll \"%(object_name)s\" you are following was completed in %(team_name)s."
+msgstr "Le sondage \"%(object_name)s\" que tu suis a été réalisé dans %(team_name)s."
+
+msgid "A user commented on one a poll you are following"
+msgstr "Un utilisateur a commenté un sondage que tu suis"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you are following"
+msgstr "%(sender_name)s a commenté un sondage que tu suis"
+
+msgid "Current Polls"
+msgstr "Sondages actuels"
+
+msgid "No current polls"
+msgstr "Pas de sondages actuels"
+
+msgid "Created By"
+msgstr "Créé par"
+
+msgid "Newest Created"
+msgstr "Créé le plus récemment"
+
+msgid "Title"
+msgstr "Titre"
+
+msgid "You must write a description for this poll option!"
+msgstr "Tu dois écrire une description pour cette option de sondage !"
+
+msgid "Voting open"
+msgstr "Vote ouvert"
+
+msgid "Voting closed"
+msgstr "Vote clos"
+
+msgid "Poll archived"
+msgstr "Sondage archivé"
+
+msgid "State"
+msgstr "Etat"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Multiple options votable"
+msgstr "Plusieurs réponses possibles"
+
+msgid "Does this poll allow users to vote on multiple options or just decide for one?"
+msgstr "Ce sondage permet-il aux utilisateurs de voter pour de multiples options ou seulement d'en choisir une ?"
+
+msgid "\"Maybe\" option enabled"
+msgstr "Option \"Peut-être\" activée"
+
+msgid "Is the maybe option enabled? Ignored and defaulting to False if ``multiple_votes==False``"
+msgstr "L'option \"peut-être\" est-elle activée ? Ignorer et mettre Faux par défaut si ``votes_multiples==Faux``"
+
+msgid "Anyone can vote"
+msgstr "Tout le monde peut voter"
+
+msgid "If true, anyone who can see this poll can vote on it. If false, only group members can."
+msgstr "Si vrai, n'importe qui voyant ce sondage peut vote. Si faux, uniquement les membres du groupe le peuvent."
+
+msgid "Show voters"
+msgstr "Afficher les votants"
+
+msgid "If true, display a list of which user voted for each option."
+msgstr "Si vrai, afficher une liste décrivant quel utilisateur a voté pour chaque option."
+
+msgid "Start"
+msgstr "Début"
+
+msgid "Winning Option"
+msgstr "Option gagnante"
+
+msgid "Poll"
+msgstr "Sondage"
+
+#, python-format
+msgid "Poll: %(poll)s (%(state)s)"
+msgstr "Sondage : %(poll)s (%(state)s)"
+
+msgid "Image"
+msgstr "Image"
+
+msgctxt "the subject"
+msgid "Votes"
+msgstr "Votes"
+
+msgid "Poll Option"
+msgstr "Option du sondage"
+
+msgid "Poll Options"
+msgstr "Options du sondage"
+
+msgid "Yes"
+msgstr "Oui"
+
+msgid "Maybe"
+msgstr "Peut-être"
+
+msgid "No"
+msgstr "Non"
+
+msgid "Option"
+msgstr "Option"
+
+msgid "Voter"
+msgstr "Votant"
+
+msgid "Vote"
+msgstr "Vote"
+
+msgctxt "the subject"
+msgid "Vote"
+msgstr "Vote"
+
+msgid "Creator"
+msgstr "Créateur"
+
+msgid "Created"
+msgstr "Créé"
+
+msgid "Last modified"
+msgstr "Modifié pour la dernière fois"
+
+msgid "Text"
+msgstr "Texte"
+
+msgid "Comment"
+msgstr "Commentaire"
+
+msgid "Comments"
+msgstr "Commentaires"
+
+msgid "Poll choice"
+msgstr "Choix du sondage"
+
+msgid "Back to Polls"
+msgstr "Retour aux sondages"
+
+msgid "Past Polls"
+msgstr "Sondages passés"
+
+msgid "by"
+msgstr "par"
+
+msgid "Delete"
+msgstr "Supprimer"
+
+msgid "Edit"
+msgstr "Modifier"
+
+msgid "Re-open"
+msgstr "Rouvrir"
+
+msgid "Archive"
+msgstr "Archiver"
+
+#, python-format
+msgid "Do you really want to delete poll „%(title)s“?"
+msgstr "Souhaites-tu vraiment supprimer le sondage „%(title)s“ ?"
+
+msgid "Delete poll"
+msgstr "Supprimer le sondage"
+
+#, python-format
+msgid "Do you really want to re-open poll „%(title)s“?"
+msgstr "Souhaites-tu vraiment rouvrir le sondage „%(title)s“ ?"
+
+msgid "Re-open poll"
+msgstr "Rouvrir le sondage"
+
+#, python-format
+msgid "Do you really want to archive poll „%(title)s“?"
+msgstr "Souhaites-tu vraiment archiver le sondage „%(title)s“ ?"
+
+msgid "Archive poll"
+msgstr "Sondage archivé"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you created in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Salut %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s a posté un commentaire sur un sondage que tu as créé dans %(team_name)s :\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"sur ton sondage :\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Suis ce lien pour voir le commentaire: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Suis ce lien pour modifier tes préférences de notification : %(notification_settings_url)s )\n"
+"\n"
+"L'équipe %(site_name)s.\n"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your polls in %(team_name)s."
+msgstr "%(sender_name)s a commenté un de tes sondages dans %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"the poll \"%(object_name)s\", was completed in %(team_name)s by %(sender_name)s!\n"
+msgstr ""
+"Salut %(receiver_name)s,\n"
+"\n"
+"le sondage \"%(object_name)s\" a été réalisé dans %(team_name)s par %(sender_name)s!\n"
+
+msgid "The winning option was:"
+msgstr "L'option gagnante est :"
+
+msgid "There was no winning option."
+msgstr "Il n'y avait aucune option gagnante."
+
+#, python-format
+msgid ""
+"\n"
+"You can find the poll by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"\n"
+"Tu peux trouver le sondage en suivant ce lien : %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Suis ce lien pour modifier tes préférences de notification : %(notification_settings_url)s )\n"
+"\n"
+"L'équipe%(site_name)s."
+
+#, python-format
+msgid "Poll: \"%(object_name)s\" was completed in %(team_name)s."
+msgstr "Le sondage \"%(object_name)s\" a été réalisé dans %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new poll \"%(object_name)s\", was created in %(team_name)s by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Salut %(receiver_name)s,\n"
+"\n"
+"un nouveau sondage \"%(object_name)s\" dans %(team_name)s a été créé par %(sender_name)s. \n"
+"\n"
+"Tu peux le trouver en suivant le lien suivant : %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Suis ce lien pour modifier tes préférences de notification : %(notification_settings_url)s )\n"
+"\n"
+"L'équipe %(site_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you were tagged in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Salut %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s a posté un commentaire sur un sondage dans lequel tu es identifié, dans %(team_name)s :\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"sur le sondage :\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Suis ce lien pour voir le commentaire: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Suis ce lien pour modifier tes préférences de notification : %(notification_settings_url)s )\n"
+"\n"
+"L'équipe %(site_name)s.\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you were tagged in %(team_name)s."
+msgstr "%(sender_name)s a commenté un sondage sur lequel tu es identifié dans %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a poll you voted in in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the poll:\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Salut %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s a posté un commentaire sur un sondage pour lequel tu as voté dans %(team_name)s :\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"sur le sondage :\n"
+"\n"
+"\"%(poll_title)s\"\n"
+"\n"
+"\n"
+"Suis ce lien pour voir le commentaire: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Suis ce lien pour modifier tes préférences de notification : %(notification_settings_url)s )\n"
+"\n"
+"L'équipe %(site_name)s.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a poll you voted in in %(team_name)s."
+msgstr "%(sender_name)s a commenté un sondage pour lequel tu as voté dans %(team_name)s."
+
+msgid "Write comment..."
+msgstr "Ecrire un commentaire..."
+
+msgid "Post"
+msgstr "Post"
+
+msgid "Add poll"
+msgstr "Ajouter un sondage"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "Il y a une erreur dans l'un des champs que tu as saisis. Corrige-la avant d'enregistrer !"
+
+msgid "Enter a title for the new poll."
+msgstr "Entrer un titre pour le nouveau sondage."
+
+msgid "Description and Infos"
+msgstr "Description et informations"
+
+msgid "Enter a description for the poll"
+msgstr "Saisir une description pour le sondage"
+
+msgid "Note: You cannot edit the options for this poll because someone has already cast their vote or the poll has been completed!"
+msgstr "Note : tu ne peux pas modifier les options pour ce sondage car quelqu'un a déjà voté ou le sondage a été réalisé !"
+
+msgid "Poll Choices"
+msgstr "Choix du sondage"
+
+msgid "Remove choice"
+msgstr "Enlever choix"
+
+msgid "Add choice"
+msgstr "Ajouter choix"
+
+msgid "Multiple Votes"
+msgstr "Votes multiples"
+
+msgid "If disabled, users can only vote for one option"
+msgstr "Si désactivé, les utilisateurs ne peuvent voter que pour une option"
+
+msgid "In addition to \"Yes\" and \"No\""
+msgstr "En plus de \"Oui\" et \"Non\""
+
+msgid "Lists how every voter voted for each option."
+msgstr "Liste comment chaque votant a voté pour chaque option."
+
+msgid "Public voting"
+msgstr "Vote public"
+
+msgid "Any logged in user who can see this poll can vote on it. If disabled, only group/project members can vote on it."
+msgstr "Tous les utilisateurs connectés peuvent voir ce sondage et voter. Si désactivé, seulement les membres du projet / groupe pourront voter."
+
+msgid "Create"
+msgstr "Créer"
+
+msgid "Save"
+msgstr "Enregistrer"
+
+msgid "Archived Polls"
+msgstr "Sondages archivés"
+
+msgid "Enter the title to create a new poll."
+msgstr "Saisir un titre pour créer un nouveau sondage."
+
+msgid "There are no archived polls."
+msgstr "Il n'y a pas de sondages archivés."
+
+msgid "There are no running polls."
+msgstr "Il n'y a pas de sondages en cours."
+
+msgid "There are no upcoming polls"
+msgstr "Il n'y a pas de sondages à venir"
+
+msgctxt "the_verb"
+msgid "Vote"
+msgstr "Voter"
+
+#, python-format
+msgid "Vote for %(title)s"
+msgstr "Voter pour %(title)s"
+
+msgid "This poll has been completed. Voting is closed."
+msgstr "Ce sondage a été rempli. Le vote est clos."
+
+msgid "This is an archived poll."
+msgstr "Ceci est un sondage archivé."
+
+msgid "Complete without winner"
+msgstr "Remplir sans option gagnante"
+
+#, python-format
+msgid "Do you really want to complete poll \"%(title)s\" with no winning option?"
+msgstr "Souhaites-tu vraiment remplir le sondage\"%(title)s\" sans choisir d'option gagnante ?"
+
+msgid "Complete poll without winner"
+msgstr "Remplir le sondage sans option gagnante"
+
+msgid "(No description set)"
+msgstr "(Pas de descriptions définie)"
+
+msgid "The Winner is"
+msgstr "Le gagnant est"
+
+msgid "Available options were"
+msgstr "Les options possibles étaient"
+
+msgid "There are no options for this poll yet!"
+msgstr "Il n'y a pas encore d'options pour ce sondage !"
+
+msgid "Make winner and complete poll"
+msgstr "Choisis un gagnant et remplis le sondage"
+
+msgid "Votes"
+msgstr "Votes"
+
+#, python-format
+msgid "Do you really want to complete the poll and select \"%(description)s\" as winner?"
+msgstr "Souhaites-tu vraiment remplir le sondage et choisir \"%(description)s\" comme gagnant ?"
+
+msgid "Complete poll"
+msgstr "Remplir le sondage"
+
+msgid "You created a poll"
+msgstr "Tu as créé un sondage"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created a poll"
+msgstr "a créé un sondage"
+
+msgid "There are no polls yet"
+msgstr "Il n'y a pas encore de sondages"
+
+#, python-format
+msgid "Poll \"%(title)s\" was edited successfully."
+msgstr "Le sondage \"%(title)s\" a été modifié."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be edited."
+msgstr "Le sondage \"%(title)s\" n'a pas pu être modifié."
+
+#, python-format
+msgid "Poll \"%(title)s\" was added successfully."
+msgstr "Le sondage \"%(title)s\" a été ajouté."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be added."
+msgstr "Le sondage \"%(title)s\" n'a pas pu être ajouté."
+
+msgid "You should define at least one poll option!"
+msgstr "Tu devrais définir au moins une option de sondage !"
+
+msgid "This poll is archived and cannot be edited anymore!"
+msgstr "Ce sondage est archivé et ne peut plus être modifié !"
+
+#, python-format
+msgid "Poll \"%(title)s\" was deleted successfully."
+msgstr "Le sondage \"%(title)s\" a été supprimé."
+
+#, python-format
+msgid "Poll \"%(title)s\" could not be deleted."
+msgstr "Le sondage \"%(title)s\" n'a pas pu être supprimé."
+
+msgid "Your votes were saved successfully."
+msgstr "Tes votes ont été enregistrés."
+
+msgid "Your votes could not be saved."
+msgstr "Tes votes n'ont pas pu être enregistrés."
+
+msgid "The voting phase for this poll is over. You cannot vote for it any more."
+msgstr "Le vote pour ce sondage est clos. Tu ne peux plus voter."
+
+msgid "In this poll you must vote for exactly one item!"
+msgstr "Dans ce sondage, tu dois voter pour une seule option !"
+
+msgid "The complete request can only be sent via POST!"
+msgstr "La requête complète ne peut être envoyée que par un POST !"
+
+msgid "Invalid action for this poll. The request could not be completed!"
+msgstr "Action invalide pour ce sondage. La demande n'a pas pu être complétée !"
+
+msgid "This action is not permitted for this poll at this stage!"
+msgstr "Cette action n'est pas permise à ce stade pour ce sondage !"
+
+msgid "The poll was closed successfully."
+msgstr "Le sondage a été fermé."
+
+msgid "The poll was re-opened successfully."
+msgstr "Le sondage a été rouvert."
+
+msgid "The poll was archived successfully."
+msgstr "Le sondage a été archivé."
+
+msgid "Your comment was added successfully."
+msgstr "Ton commentaire a été ajouté."
+
+msgid "Your comment was deleted successfully."
+msgstr "Ton commentaire a été supprimé."
+
+#~ msgid "New poll by %(sender_name)s"
+#~ msgstr "Nouveau sondage par %(sender_name)s"
+
+#~ msgid "%(sender_name)s completed a poll"
+#~ msgstr "%(sender_name)s a rempli un sondage"
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
+
+#, fuzzy
+#~| msgid "New poll by %(sender_name)s"
+#~ msgid "New poll by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Nouveau sondage par %(sender_name)s"
+
+#, fuzzy
+#~| msgid "%(sender_name)s commented on a poll you voted in"
+#~ msgid "%(sender_name)s completed a poll you are following"
+#~ msgstr "%(sender_name)s a commenté un sondage pour lequel tu as voté"

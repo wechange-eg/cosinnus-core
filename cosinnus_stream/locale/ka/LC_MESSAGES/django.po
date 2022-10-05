@@ -1,0 +1,141 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:39+0200\n"
+"PO-Revision-Date: 2020-04-05 01:03+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 2.3\n"
+
+msgid "Stream"
+msgstr "ეთერი"
+
+msgctxt "the_app"
+msgid "stream"
+msgstr "ეთერი"
+
+msgid "My Streams"
+msgstr "ჩემი ეთერი"
+
+msgid "Streams"
+msgstr "ეთერები"
+
+msgid "Models"
+msgstr "მოდელები"
+
+msgid "Portal IDs"
+msgstr "პორტალი ID -ები"
+
+msgid "Last seen"
+msgstr "ბოლოს ნახა"
+
+msgid "Special Stream"
+msgstr "სპეციალური ეთერი"
+
+msgid "Special Group IDs"
+msgstr "სპეციალური ჯგუფის ID -ები"
+
+msgid "My Stream"
+msgstr "ჩემი ეთერი"
+
+msgid "Public Stream"
+msgstr "საჯარო ეთერი"
+
+msgid "My Stream in all Portals"
+msgstr "ჩემი ეთერი ყველა პორტალზე"
+
+msgid "Public Stream in all Portals"
+msgstr "საჯარო ეთერი ყველა პორტალზე"
+
+msgid "Edit this Stream"
+msgstr "ეთერის რედაქტირება"
+
+msgid "Delete this Stream"
+msgstr "ეთერის წაშლა"
+
+msgid "Do you really want to delete this stream?"
+msgstr "ნამდვილად გსურთ ეთერის წაშლა?"
+
+msgid "Delete Stream"
+msgstr "ეთერის წაშლა"
+
+msgid "Create Stream"
+msgstr "ეთერის შექმნა"
+
+msgid "Hide public items outside of your groups"
+msgstr "ჯგუფის გარეთ საჯარო საგნების დაფარვა"
+
+msgid "Show public items outside of your groups"
+msgstr "ჯგუფის გარეთ საჯარო საგნების ჩვენება"
+
+msgid "There are no news posts yet"
+msgstr "ახალი პოსტები ჯერ არ არის"
+
+#, python-format
+msgid "Edit stream \"%(stream_name)s\""
+msgstr "ეთერის \"%(stream_name)s\" რედაქტირება"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "შეცდომა დაფიქსირდა ერთ-ერთ გრაფაში, რომელშიც ინფორმაცია შეიყვანეთ. გთხოვთ შეასწოროთ შენახვამდე!"
+
+msgid "Title"
+msgstr "სათაური"
+
+msgid "Enter a title for the stream."
+msgstr "შეიყვანეთ სათაური თქვენი ეთერისთვის."
+
+msgid "Apply filters for the stream"
+msgstr "დაურთეთ ფილტრები თქვენს ეთერს"
+
+msgid "Filter by Team?"
+msgstr "ფილტრი გუნდის მიხედვით?"
+
+msgid "Select Team"
+msgstr "გუნდის არჩევა"
+
+msgid "Public"
+msgstr "საჯარო"
+
+msgid "Additional filters"
+msgstr "დამატებითი ფილტრები"
+
+msgid "Filter by authors, tags or other tagged properties?"
+msgstr "ფილტრი ავტორების, მონიშვნების ან სხვა მონიშნული პრიორიტეტების მიხედვით?"
+
+msgid "Filter by item types?"
+msgstr "ფილტრი საგნის ტიპის მიხედვით?"
+
+msgid "Create"
+msgstr "შექმნა"
+
+msgid "Edit"
+msgstr "რედაქტირება"
+
+msgid "You do not have permission to access this stream."
+msgstr "თქვენ არ გაქვთ უფლება ამ ეთერის წვდომაზე."
+
+msgid "Your stream was added successfully."
+msgstr "თქვენი ეთერი წარმატებით იქნა დამატებული."
+
+msgid "Please log in to access this page."
+msgstr "გთხოვთ, გვერდზე წვდომისათვის შეხვიდეთ."
+
+msgid "Your stream was updated successfully."
+msgstr "თქვენი ეთერი წარმატებით იქნა განახლებული."
+
+msgid "Your stream was deleted successfully."
+msgstr "თქვენი ეთერი წარმატებით წაიშალა."
+
+msgid "You cannot delete the default stream!"
+msgstr "თქვენ არ შეგიძლიათ ნაგულისხმები ეთერის წაშლა!"

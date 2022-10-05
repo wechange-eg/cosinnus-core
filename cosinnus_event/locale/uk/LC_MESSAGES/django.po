@@ -1,0 +1,1391 @@
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-09 16:30+0100\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Restart BBB rooms"
+msgstr "Перезапустити кімнати BBB"
+
+msgid "Events"
+msgstr "Події"
+
+msgctxt "the_app"
+msgid "event"
+msgstr "подія"
+
+msgid "A user created a new event"
+msgstr "Користувач створив нову подію"
+
+#, python-format
+msgid "%(sender_name)s created the event %(object_name)s"
+msgstr "%(sender_name)s створив(-ла) подію %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d events"
+msgstr "%(sender_name)s створив(-ла) %(count)d подій"
+
+#, python-format
+msgid "%(sender_name)s created a new event"
+msgstr "%(sender_name)s створив(-ла) нову подію"
+
+#, python-format
+msgid "A new event: \"%(object_name)s\" was announced in %(team_name)s."
+msgstr "Анонсовано нову подію: «%(object_name)s» у %(team_name)s."
+
+msgid "A user created a new event poll"
+msgstr "Користувач створив(-ла) нове опитування для події"
+
+#, python-format
+msgid "%(sender_name)s created the event poll %(object_name)s"
+msgstr "%(sender_name)s створив(-ла) опитування %(object_name)s для події"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d event polls"
+msgstr "%(sender_name)s створив(-ла) %(count)d опитувань для подій"
+
+#, python-format
+msgid "%(sender_name)s created a new event poll"
+msgstr "%(sender_name)s створив(ла) нове опитування для події"
+
+#, python-format
+msgid "A new event poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Нове опитування для події «%(object_name)s» було створено у %(team_name)s."
+
+msgid "A user commented on one of your events"
+msgstr "Користувач прокоментував/-ла одну з ваших подій"
+
+#, python-format
+msgid "%(sender_name)s commented on your event %(object_name)s"
+msgstr "%(sender_name)s прокоментував(-ла) вашу подію %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your event %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your event %(object_name)s"
+msgstr[0] "%(sender_name)s і %(count_minus_one)d інший(-а) прокоментували вашу подію %(object_name)s"
+msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували ваш захід %(object_name)s"
+msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували ваш захід у %(object_name)s"
+msgstr[3] ""
+
+#, python-format
+msgid "%(sender_name)s commented on your event"
+msgstr "%(sender_name)s прокоментував(ла) Вашу подію"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your events"
+msgstr "%(sender_name)s прокоментував(ла) одну з Ваших подій"
+
+msgid "A user commented on a event you were tagged in"
+msgstr "Користувач прокоментував/-ла подію, в якій Вас позначено"
+
+#, python-format
+msgid "%(sender_name)s commented on the event %(object_name)s"
+msgstr "%(sender_name)s прокоментував(-ла) подію %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the event %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the event %(object_name)s"
+msgstr[0] "%(sender_name)s і %(count_minus_one)d інший(-а) прокоментували подію %(object_name)s"
+msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували ваш захід у %(object_name)s"
+msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували ваш захід у %(object_name)s"
+msgstr[3] ""
+
+msgid "You were tagged in this event"
+msgstr "Вас позначили в цій події"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you were tagged in"
+msgstr "%(sender_name)s прокоментував(ла) подію, в якій Ви були позначені"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s прокоментував(ла) подію, у якій Ви були позначені, у команді %(team_name)s"
+
+msgid "A user commented on an event you voted in"
+msgstr "Користувач прокоментував подію, у якій Ви голосували"
+
+msgid "You voted on this event"
+msgstr "Ви проголосували на цій події"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you voted in"
+msgstr "%(sender_name)s  прокоментува(ла) подію, в якій Ви голосували"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you voted in in %(team_name)s"
+msgstr "%(sender_name)s прокоментував(ла) подію, за яку ви проголосували у команді %(team_name)s"
+
+msgid "A user commented on an event you are attending"
+msgstr "Користувач прокоментував подію, в якій Ви берете участь"
+
+msgid "You are attending this event"
+msgstr "Ви берете участь у цій події"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending"
+msgstr "%(sender_name)s прокоментував/-ла подію, в якій Ви берете участь"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending in %(team_name)s"
+msgstr "%(sender_name)s прокоментував(ла) подію, у якій Ви берете участь у команді %(team_name)s"
+
+msgid "A user created a new event in a team you are following"
+msgstr "Користувач створив/-ла нову подію в команді, за якою Ви слідкуєте"
+
+#, python-format
+msgid "%(sender_name)s created a new event in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s створив/-ла нову подію у команді %(team_name)s (яку Ви відслідковуєте)"
+
+#, python-format
+msgid "A new event: \"%(object_name)s\" was announced in %(team_name)s (which you follow)."
+msgstr "Нова подія: «%(object_name)s» була оголошена у %(team_name)s (за якою Ви стежите)."
+
+msgid "A user created a new event poll in a team you are following"
+msgstr "Користувач створив/-ла нове опитування події в команді, яку Ви відслідковуєте"
+
+#, python-format
+msgid "%(sender_name)s created a new event pollin %(team_name)s (which you follow)"
+msgstr "%(sender_name)s створив(ла) нове опитування події в %(team_name)s (за якою Ви стежите)"
+
+#, python-format
+msgid "A new event poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Нове опитування події: «%(object_name)s» було створено у %(team_name)s (яку Ви відстежуєте)"
+
+msgid "A user commented on an event you are following"
+msgstr "Користувач прокоментував подію, який Ви відстежуєте"
+
+msgid "You are following this event"
+msgstr "Ви стежите за цією подією"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are following"
+msgstr "%(sender_name)s прокоментував/-ла подію, яку Ви відстежуєте"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are following in %(team_name)s"
+msgstr "%(sender_name)s прокоментував(ла) подію, яку Ви відстежуєте в команді %(team_name)s"
+
+msgid "A user updated an event"
+msgstr "Користувач актуалізував подію"
+
+#, python-format
+msgid "%(sender_name)s updated the event %(object_name)s"
+msgstr "%(sender_name)s актуалізував подію %(object_name)s"
+
+#, python-format
+msgid "%(sender_name)s updated an event you are following"
+msgstr "%(sender_name)s оновив подію, яку Ви відслідковуєте"
+
+#, python-format
+msgid "The event \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Захід «%(object_name)s» було актуалізовано у %(team_name)s."
+
+msgid "A user updated an event you are attending"
+msgstr "Користувач оновив подію, в якій Ви берете участь"
+
+#, python-format
+msgid "%(sender_name)s updated an event you are attending"
+msgstr "%(sender_name)s оновив подію, яку Ви відвідуєте"
+
+msgid "A user updated an event poll"
+msgstr "Користувач оновив/-ла опитування події"
+
+#, python-format
+msgid "%(sender_name)s changed the event poll %(object_name)s"
+msgstr "%(sender_name)s змінив опитування події %(object_name)s "
+
+msgid "You are following this event poll"
+msgstr "Ви стежите за цим опитуванням події"
+
+#, python-format
+msgid "%(sender_name)s updated an event poll you are following"
+msgstr "%(sender_name)s оновив/-ла опитування події, яку Ви відстежуєте"
+
+#, python-format
+msgid "The event poll \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Опитування події «%(object_name)s» було оновлено у %(team_name)s."
+
+msgid "A user voted in an event poll"
+msgstr "Користувач проголосував у опитуванні події"
+
+#, python-format
+msgid "%(sender_name)s voted in the event poll %(object_name)s"
+msgstr "%(sender_name)s проголосував(-ла) в опитуванні події %(object_name)s "
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other voted in the event poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others voted in the event poll %(object_name)s"
+msgstr[0] "%(sender_name)s і %(count_minus_one)d інший(-а) проголосували в опитуванні події %(object_name)s "
+msgstr[1] "%(sender_name)s і %(count_minus_one)d інших проголосували в опитуванні %(object_name)s події"
+msgstr[2] "%(sender_name)s і %(count_minus_one)d інших проголосували в опитуванні %(object_name)s події"
+msgstr[3] ""
+
+#, python-format
+msgid "%(sender_name)s voted in an event poll you are following"
+msgstr "%(sender_name)s проголосував в опитуванні події, за якою Ви стежите"
+
+#, python-format
+msgid "%(sender_name)s voted in the event poll \"%(object_name)s\" in %(team_name)s."
+msgstr "%(sender_name)s проголосував/-ла в опитуванні щодо події „%(object_name)s“ у %(team_name)s."
+
+msgid "Upcoming Events"
+msgstr "Майбутні події"
+
+msgid "No upcoming events"
+msgstr "Немає майбутніх подій"
+
+msgid "Created By"
+msgstr "Автор"
+
+msgid "Soonest Upcoming"
+msgstr "Найближчі події"
+
+msgid "Newest Created"
+msgstr "Найновіші створені"
+
+msgid "Title"
+msgstr "Назва"
+
+msgid "No video conference"
+msgstr ""
+
+msgid "BBB-Meeting"
+msgstr ""
+
+msgid "Fairmeeting"
+msgstr ""
+
+msgid "Presenters"
+msgstr "Ведучі"
+
+msgid "Scheduled"
+msgstr "Заплановані"
+
+msgid "Voting open"
+msgstr "Відкрите голосування"
+
+msgid "Canceled"
+msgstr "Скасовані"
+
+msgid "Archived Event Poll"
+msgstr "Архівоване опитування події"
+
+msgid "Start"
+msgstr "Початок"
+
+msgid "End"
+msgstr "Кінець"
+
+msgid "State"
+msgstr "Регіон"
+
+msgid "Is hidden proxy"
+msgstr "Прихований proxy"
+
+msgid "Note"
+msgstr "Примітка"
+
+msgid "Event date"
+msgstr "Дата проведення події"
+
+msgid "Type of video conference available for the event"
+msgstr ""
+
+msgid "Location"
+msgstr "Розташування"
+
+msgid "Latitude"
+msgstr "Широта"
+
+msgid "Longitude"
+msgstr "Довгота"
+
+msgid "Street"
+msgstr "Вулиця"
+
+msgid "ZIP code"
+msgstr "Поштовий індекс"
+
+msgid "City"
+msgstr "Місто"
+
+msgid "Is public (on website)"
+msgstr "Публічний (на веб-сайті)"
+
+msgid "Image"
+msgstr "Зображення"
+
+msgid "URL"
+msgstr "URL-адреса"
+
+msgid "Original Event Poll"
+msgstr "Оригінальне опитування події"
+
+msgid "Event"
+msgstr "Подія"
+
+#, python-format
+msgid "%(event)s (hidden proxy)"
+msgstr "%(event)s (прихований proxy)"
+
+#, python-format
+msgid "%(event)s (%(date)s - %(end)s)"
+msgstr "%(event)s (%(date)s - %(end)s)"
+
+#, python-format
+msgid "%(event)s (%(from)s - %(to)s)"
+msgstr "%(event)s (%(from)s - %(to)s)"
+
+#, python-format
+msgid "%(event)s (canceled)"
+msgstr "%(event)s (скасовано)"
+
+#, python-format
+msgid "%(event)s (pending)"
+msgstr "%(event)s (в очікуванні)"
+
+#, python-format
+msgid "%(event)s (archived)"
+msgstr "%(event)s (заархівовано)"
+
+#, python-format
+msgid "%(event)s (state unknown)"
+msgstr "%(event)s (стан невідомий)"
+
+msgctxt "the subject"
+msgid "Votes"
+msgstr "Голоси"
+
+msgid "Suggestion"
+msgstr "Пропозиція "
+
+msgid "Suggestions"
+msgstr "Пропозиції "
+
+msgid "Yes"
+msgstr "Так"
+
+msgid "Maybe"
+msgstr "Можливо"
+
+msgid "No"
+msgstr "Ні"
+
+msgid "Voter"
+msgstr "Учасник(-ця) голосування"
+
+msgid "Vote"
+msgstr "Голос"
+
+msgctxt "the subject"
+msgid "Vote"
+msgstr "Голос"
+
+msgid "Creator"
+msgstr "Творець"
+
+msgid "Created"
+msgstr "Створено"
+
+msgid "Last modified"
+msgstr "Востаннє змінено"
+
+msgid "Text"
+msgstr "Текст"
+
+msgid "Comment"
+msgstr "Коментар"
+
+msgid "Comments"
+msgstr "Коментарі"
+
+msgid "Lobby Check-in Event"
+msgstr "Лобі Check-in події"
+
+msgid "Stage Stream"
+msgstr "Стрім зі сцени"
+
+msgid "Workshop"
+msgstr "Воркшопи"
+
+msgid "Discussion"
+msgstr "Дискусія"
+
+msgid "Coffee Table"
+msgstr "Coffee Table"
+
+msgid "Room"
+msgstr "Кімната"
+
+msgid "Conference Event Type"
+msgstr "Тип конференційного заходу"
+
+msgid "Is a Break"
+msgstr "Триває перерва"
+
+#, fuzzy
+#| msgid "Enter a title for the conference event."
+msgid "Event is visible on the conference microsite"
+msgstr "Введіть назву події конференції."
+
+#, fuzzy
+#| msgid "Event\\'s description is confidencial (Not visible on microsite)"
+msgid "Event's description is visible on the conference microsite"
+msgstr "Опис події є конфіденційним (не видно на мікросайті)"
+
+msgid "Maximum Event Participants"
+msgstr "Максимальна кількість учасників події"
+
+msgid "Embed code (HTML)"
+msgstr "Код для вставлення (HTML)"
+
+msgid "Presentation file"
+msgstr "Файл презентації"
+
+msgid "Show chat"
+msgstr "Показати чат"
+
+msgid "Enable Streaming"
+msgstr "Увімкнути стрімінг"
+
+msgid "Stream URL"
+msgstr "Стрім URL"
+
+msgid "The URL of your streaming provider to receive the incoming stream"
+msgstr "URL -адреса вашого стрімінг провайдера для отримання вхідного стріму"
+
+msgid "Stream Key"
+msgstr "Ключ стріму"
+
+msgid "The key for this specific stream session you created at your streaming provider"
+msgstr "Ключ для цього конкретного сеансу стріму, який ви створили у свого стрімінг провайдера"
+
+msgid "Conference Event"
+msgstr "Подія конференції"
+
+msgid "Conference Events"
+msgstr "Події конференції"
+
+#, python-format
+msgid "%(event)s %(type)s"
+msgstr "%(event)s %(type)s"
+
+msgid "Create Event"
+msgstr "Створити подію"
+
+msgid "Would you like to create an event"
+msgstr "Бажаєте створити подію"
+
+msgid "on"
+msgstr "у день"
+
+msgid "from"
+msgstr "з"
+
+msgid "until"
+msgstr "до"
+
+msgid "Cancel"
+msgstr "Скасувати"
+
+msgid "OK"
+msgstr "OK"
+
+msgctxt "time"
+msgid "all day"
+msgstr "весь день"
+
+msgctxt "time"
+msgid "at"
+msgstr "о/об"
+
+msgctxt "time"
+msgid "o'clock"
+msgstr "о годині"
+
+msgctxt "time"
+msgid "from"
+msgstr "з"
+
+msgctxt "time"
+msgid "until"
+msgstr "до"
+
+#, python-format
+msgid "Add %(event_type_verbose)s in Room %(room_name)s"
+msgstr "Додати %(event_type_verbose)s у Кімнаті %(room_name)s"
+
+#, python-format
+msgid "Edit %(event_type_verbose)s \"%(event_title)s\" in Room %(room_name)s"
+msgstr "Відредагувати %(event_type_verbose)s \"%(event_title)s\" у Кімнаті %(room_name)s"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "В одному із заповнюваних Вами полів сталася помилка. Будь ласка, виправте це перед збереженням!"
+
+msgid "Enter a title for the conference event."
+msgstr "Введіть назву події конференції."
+
+msgid "Event is a break"
+msgstr "Подія є перервою"
+
+msgid "Check this to create an empty break event that shows up in the agenda and timeline"
+msgstr "Поставте цю галочку, щоб створити порожню подію перерви, яка відображається у порядку денному та на часовій шкалі"
+
+msgid "Description and Infos"
+msgstr "Опис та інформація"
+
+msgid "Description"
+msgstr "Опис"
+
+msgid "Enter a description for the event"
+msgstr "Введіть опис заходу"
+
+msgid "Show this event on microsite"
+msgstr ""
+
+msgid "Uncheck this to hide the event on microsite"
+msgstr ""
+
+#, fuzzy
+#| msgid "Event\\'s description is confidencial (Not visible on microsite)"
+msgid "Show the event's description on microsite"
+msgstr "Опис події є конфіденційним (не видно на мікросайті)"
+
+#, fuzzy
+#| msgid "Check this to prevent public viewing of the event\\'s description"
+msgid "Uncheck this to disable platform-wide viewing of the event's description"
+msgstr "Поставте галочку, щоб запобігти публічному перегляду опису події/подій"
+
+#, fuzzy
+#| msgid "Check this to prevent public viewing of the event\\'s description"
+msgid "Uncheck this to disable public viewing of the event's description"
+msgstr "Поставте галочку, щоб запобігти публічному перегляду опису події/подій"
+
+msgid "Example:"
+msgstr "Приклад:"
+
+msgid "Stream URL for the Event"
+msgstr "Стрім URL для події"
+
+msgid "Custom embed code (HTML)"
+msgstr "Спеціальний код для вбудовування (HTML)"
+
+msgid "How many participants can join the video call before it is full."
+msgstr "Скільки учасників може приєднатися до одного coffee table, допоки він не заповниться"
+
+msgid "Note that changing this setting will have no effect while an event is running."
+msgstr "Зверніть увагу, що зміна цього параметра не матиме ефекту під час виконання події."
+
+#, fuzzy
+msgid "BBB video conference options"
+msgstr "Тип конференційного заходу"
+
+msgid "Upload a preview image for the Conference Event"
+msgstr "Завантажте зображення попереднього перегляду для події конференції"
+
+msgid "Will be shown on the event card in the conference room."
+msgstr "Буде показано на картці події в конференц-залі."
+
+msgid "The presenters will be shown in order in the event and will receive Moderator permissions for the BBB-Room"
+msgstr "Доповідачі будуть показані по порядку під час події та отримають права Модератора для Кімнати ВВВ"
+
+msgid "The presentation file (e.g. PDF) will be pre-uploaded to the BBB room."
+msgstr "Файл презентації (наприклад, PDF) буде попередньо завантажено до кімнати BBB."
+
+msgid "Note: If a slide is subsequently added to an existing event, it does not automatically appear in the event if this event was recently attended and is therefore active. This requires an active ending of the event or a 5-minute idle time without participants until the event is automatically ended. "
+msgstr "Примітка: Якщо слайд пізніше буде додано до наявної події, він автоматично не з’явиться у події, якщо ця подія була нещодавно відвідана і тому є активна. Це вимагає активного завершення події або 5-хвилинного простою без учасників, поки подія не буде автоматично завершена."
+
+msgid "You can actively end an existing event room by clicking on \"End Meeting\" in the top right-hand corner of the room in the \"Three-Dot Menu\"."
+msgstr "Ви можете активно завершити існуючу кімнату подій, натиснувши \"Завершити зустріч\" у верхньому правому куті кімнати в \"Меню з трьома крапками\"."
+
+msgid "Show room chat in the event"
+msgstr "Показувати кімнатний чат у події"
+
+msgid "Check this to show rocket chat in the sidebar."
+msgstr "Поставити галочку, щоб показати rocket чат на бічній панелі."
+
+msgid "Stream this event"
+msgstr "Стрім цієї події"
+
+msgid "Please note: Streaming is only available for premium conferences. If you would like to use streaming, please request it explicitly when booking. Otherwise, these settings have no function."
+msgstr "Зверніть увагу: стрімінг доступний лише для конференцій преміум-класу. Якщо ви хочете використовувати стрімінг, будь ласка, подайте запит під час бронювання. В іншому випадку ці налаштування не функціонуватимуть."
+
+msgid "You can set up the BBB event to be streamed to a streaming provider (e.g. YouTube)."
+msgstr "Ви можете налаштувати трансляцію події BBB для стрімінг провайдера (напр., YouTube)."
+
+#, python-format
+msgid ""
+"Once set up and activated, a streaming-bot will enter the event and stream all video and audio to the selected stream endpoint.\n"
+"The bot will enter and start streaming %(start_minutes)s minutes before the event start time and stop streaming and leave %(end_minutes)s minutes after the event end time.\n"
+"You can adjust the meeting times on-the-fly to allow for longer streaming if the event runs longer than expected."
+msgstr ""
+"Після налаштування та активації стрімінг-бот увійде у подію та передасть усі відео та аудіо до вибраної кінцевої точки стріму.\n"
+" Бот увійде та почне стрімінгове передавання %(start_minutes) s хвилин до початку події б ф також припинить стрімінг і вийде %(end_minutes) s хвилин після часу завершення події.\n"
+" Ви можете налаштувати час зустрічі на льоту, щоб забезпечити більш тривалий стрімінг, якщо подія триватиме довше, ніж очікувалося."
+
+msgid "If you are using the maximum participant limit, please allow for the streaming bot's additional participant spot."
+msgstr "Якщо ви використовуєте максимальну кількість учасників, будь ласка, надайте додаткове місце учасникам стрімінг бота."
+
+msgid "Enable Streaming this BBB meeting"
+msgstr "Увімкнути стрімінг для цієї зустрічі BBB"
+
+msgid "Create"
+msgstr "Створити"
+
+msgid "Save"
+msgstr "Зберегти"
+
+msgid "Create and create another"
+msgstr "Створити та створити інший"
+
+#, fuzzy
+#| msgid "Create and create another"
+msgid "Save and create another"
+msgstr "Створити та створити інший"
+
+msgid "Add unscheduled event"
+msgstr "Додати незаплановану подію"
+
+msgid "Edit"
+msgstr "Редагувати"
+
+msgid "Event Polls"
+msgstr "Опитування у подіях"
+
+msgid "Enter a title for the new event to be scheduled."
+msgstr "Ведіть назву нового заходу, що планується."
+
+msgid "Dates"
+msgstr "Дати"
+
+msgid "Please select the available days in the calendar."
+msgstr "Будь ласка, виберіть запропоновані дні у календарі."
+
+msgid "You can select the same day more than once."
+msgstr "Ви можете вибирати один і цей же день кілька разів."
+
+msgid "Time: e.g. 10 or 10:30."
+msgstr "Час: напр., 10 або 10:30."
+
+msgid "Time"
+msgstr "Час"
+
+msgid "Note: You cannot edit the dates for this event poll because someone has already cast their vote!"
+msgstr "Примітка: Ви більше не можете змінювати дату проведення цієї події, бо хтось вже проголосував!"
+
+msgid "Example: http://mywebsite.com"
+msgstr "Приклад: http://mywebsite.com"
+
+msgid "External Link for the event"
+msgstr "Зовнішнє посилання для подію"
+
+msgid "Delete"
+msgstr "Видалити"
+
+msgid "There are no open event polls."
+msgstr "Відкритих опитувань у події немає."
+
+msgid "Planned Events"
+msgstr "Заплановані заходи"
+
+msgid "Past Events"
+msgstr "Минулі заходи"
+
+msgid "Archived Event Polls"
+msgstr "Заархівовані опитування в події"
+
+msgid "There are no archived event polls."
+msgstr "Немає заархівованих опитувань в події"
+
+#, python-format
+msgid "Vote for %(title)s"
+msgstr "Голосувати за %(title)s"
+
+#, python-format
+msgid "Archived: %(title)s"
+msgstr "Заархівовано: %(title)s"
+
+msgid "This event has already been scheduled. Voting is closed."
+msgstr "Ця подія вже запланована. Голосування закрите."
+
+msgid "This event has been canceled. Voting is closed."
+msgstr "Цю подію було скасовано. Опитування закрито."
+
+msgid "Nobody has voted for this event poll yet."
+msgstr "Ніхто ще не проголосував у цьому опитуванні події."
+
+msgid "Create an event from one of the suggestions"
+msgstr "Створити подію з однієї з пропозицій"
+
+#, python-format
+msgid "Set the date to %(suggestion)s."
+msgstr "Встановити дату для %(suggestion)s."
+
+msgid "When do you have time?"
+msgstr "Коли у вас є час?"
+
+msgid "There are no date suggestions for this event poll yet!"
+msgstr "В опитуванні цієї події ще немає пропозицій щодо дати!"
+
+#, python-format
+msgid "Do you really want to delete unscheduled event „%(title)s“?"
+msgstr "Ви справді бажаєте видалити незаплановану подію «%(title)s»?"
+
+msgid "Delete unscheduled event"
+msgstr "Видалити незаплановий захід"
+
+msgid "You will now receive notifications for comments or when this event poll is changed and whenever somebody casts their vote."
+msgstr "Тепер Ви будете отримувати сповіщення у випадку коментарів або, коли опитування щодо події буде змінено чи хтось віддасть голос."
+
+msgid "Write comment..."
+msgstr "Написати коментар..."
+
+msgid "Post"
+msgstr "Опублікувати"
+
+msgid "Add event"
+msgstr "Додати подію"
+
+#, python-format
+msgid ""
+"\n"
+"                            Note: After this event will be posted, each user of %(forum_name)s may be able to see it.<br>\n"
+"                            If you do not want this, please, use another group or project of your choice.\n"
+"                            "
+msgstr ""
+
+msgid "Enter a title for the new event."
+msgstr "Введіть назву для нового заходу."
+
+#, fuzzy
+msgid "Include a video conference"
+msgstr "Тип конференційного заходу"
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
+
+msgid "The first uploaded image will be displayed as a wallpaper."
+msgstr "Перше зображення, що буде завантажене, відображатиметься як фоновий малюнок."
+
+msgid "If you set this, your event will be shown on the map! (if permitted by its visibility settings)"
+msgstr "Якщо Ви це встановите, Ваш захід буде показано на карті! (якщо дозволено налаштуваннями видимості)"
+
+msgid "Calendar"
+msgstr "Календар"
+
+msgid "Copy this iCal-link into your calendar application to import current events:"
+msgstr "Скопіюйте це посилання iCal у ваш календар, щоб імпортувати поточні заходи:"
+
+msgid "Also include all events from projects within this group in feed"
+msgstr "Також включати до потоку всі заходи з проєктів в цій групі"
+
+msgid "iCal Feed"
+msgstr "Завантаження iCal"
+
+msgid "Enter the title for a new event or select a day in the Calendar."
+msgstr "Введіть назву нового заходу або виберіть день у календарі."
+
+msgid "Export event feed"
+msgstr "Експортувати вихідний файл подій"
+
+msgid "Create Conference Event"
+msgstr "Створити подію конференції"
+
+msgid "Conference events can be created directly from the rooms themselves of the conference interface or in a central place here"
+msgstr "Події конференції можна створювати безпосередньо з самих кімнат інтерфейсу конференції або в центральному місці тут"
+
+msgid "Conference Room Management"
+msgstr "Управління кімнатою Конференції"
+
+msgid "There are no conference events."
+msgstr "Немає жодних конференційних подій."
+
+msgid "There are no current or future events."
+msgstr "Немає поточних або майбутніх подій."
+
+msgid "There are no past events."
+msgstr "Немає минулих подій."
+
+msgid "There are no upcoming events"
+msgstr "Немає запланованих подій"
+
+msgid "Back to Events"
+msgstr "Назад до подій"
+
+msgid "Return to Event Polls"
+msgstr "Повернутися до опитування подій"
+
+msgid "Return to Archived Event Polls"
+msgstr "Повернутися до опитувань заархівованих подій"
+
+msgid "List"
+msgstr "Список"
+
+msgid "by"
+msgstr "здійснено <username>"
+
+msgid "View"
+msgstr "Вигляд"
+
+msgid "Created Event"
+msgstr "Створити подію"
+
+#, python-format
+msgid "Do you really want to delete event „%(title)s“?"
+msgstr "Ви дійсно бажаєте видалити подію «%(title)s»?"
+
+msgid "Delete event"
+msgstr "Видалити подію"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you are attending in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Вітаємо, %(receiver_name)s!\n"
+"\n"
+"Користувач %(sender_name)s прокоментував(ла) подію, в якій Ви були відмічені, в групі %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"до події :\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Ви можете знайти її за цим посиланням: %(object_url)s\n"
+"\n"
+"\n"
+"(Перейдіть за цим посиланням, аби змінити налаштування сповіщень: %(notification_settings_url)s )\n"
+"\n"
+"Ваша команда %(site_name)s\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending in %(team_name)s."
+msgstr "%(sender_name)s прокоментував(ла) подію, у якій Ви берете участь, у %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new event \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Вітаємо, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s створив/-ла нову подію «%(object_name)s» у %(team_name)s.\n"
+"\n"
+"Ви можете переглянути її за наступним посиланням: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Перейдіть за цим посиланням, щоб редагувати ваші налаштування сповіщення: %(notification_settings_url)s )\n"
+"\n"
+"З повагою, команда %(site_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you created in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Вітаємо, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s прокоментував/-ла захід, створену вами у спільноті %(team_name)s:\n"
+"\n"
+"«%(comment_text)s»\n"
+"\n"
+"\n"
+"щодо вашого заходу:\n"
+"\n"
+"«%(event_title)s»\n"
+"\n"
+"\n"
+"Перейдіть за цим посиланням, щоб побачити коментар: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Перейдіть за цим посиланням, щоб редагувати ваші налаштування сповіщення: %(notification_settings_url)s )\n"
+"\n"
+"З повагою, команда %(site_name)s.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your events in %(team_name)s."
+msgstr "%(sender_name)s прокоментував/-ла один з ваших заходів у %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new event \"%(object_name)s\", on %(event_date)s, was announced in %(team_name)s by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Вітаємо, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s анонсував/-ла нову подію «%(object_name)s» %(event_date)s у %(team_name)s.\n"
+"\n"
+"Ви можете переглянути її за наступним посиланням: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Перейдіть за цим посиланням, щоб редагувати ваші налаштування сповіщення: %(notification_settings_url)s )\n"
+"\n"
+"З повагою, команда %(site_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you were tagged in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Вітаємо, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s прокоментував/-ла захід, в якому ви були позначені, у спільноті %(team_name)s:\n"
+"\n"
+"«%(comment_text)s»\n"
+"\n"
+"\n"
+"щодо заходу:\n"
+"\n"
+"«%(event_title)s»\n"
+"\n"
+"\n"
+"Перейдіть за цим посиланням, щоб побачити коментар:\n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Перейдіть за цим посиланням, щоб редагувати ваші налаштування сповіщення: %(notification_settings_url)s )\n"
+"\n"
+"З повагою, команда %(site_name)s.\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a event you were tagged in %(team_name)s."
+msgstr "%(sender_name)s прокоментував/-ла подію, у якій Ви були позначені, у %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event poll you voted in in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event poll:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Вітаємо, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s прокоментував/-ла пропозицію дати, за яку Ви проголосували у спільноті %(team_name)s:\n"
+"\n"
+"«%(comment_text)s»\n"
+"\n"
+"\n"
+"щодо пропозиції дати:\n"
+"\n"
+"«%(event_title)s»\n"
+"\n"
+"\n"
+"Перейдіть за цим посиланням, щоб побачити коментар:\n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Перейдіть за цим посиланням, щоб редагувати ваші налаштування сповіщення: %(notification_settings_url)s )\n"
+"\n"
+"З повагою, команда %(site_name)s.\n"
+
+#, python-format
+msgid "%(sender_name)s commented on an event poll you voted in in %(team_name)s."
+msgstr "%(sender_name)s прокоментував/-ла пропозицію дати, за яку ви проголосували у %(team_name)s."
+
+msgid "Delete Event"
+msgstr "Видалити подію"
+
+msgid "(Canceled!)"
+msgstr "(Скасовано!)"
+
+msgid "This is an archived event poll."
+msgstr "Це заархівоване опитування події."
+
+msgid "The event that was created after the poll can be viewed here:"
+msgstr "Подію, яку було створено після опитування, можна переглянути тут:"
+
+msgid "(No description set)"
+msgstr "(Опис не створено)"
+
+msgctxt "someone else is going"
+msgid "Going"
+msgstr "Братиму участь"
+
+msgctxt "someone else is maybe going"
+msgid "Maybe going"
+msgstr "Можливо братиму участь"
+
+msgctxt "someone else can't go"
+msgid "Can't go"
+msgstr "Не можу взяти участі"
+
+msgctxt "one or many people are going"
+msgid "Going"
+msgid_plural "Going"
+msgstr[0] "Братиму участь"
+msgstr[1] "Будуть брати участь"
+msgstr[2] "Будуть брати участь"
+msgstr[3] ""
+
+msgctxt "one or many people are maybe going"
+msgid "Maybe going"
+msgid_plural "Maybe going"
+msgstr[0] "Можливо братиму участь"
+msgstr[1] "Можливо братимуть участь"
+msgstr[2] "Можливо братимуть участь"
+msgstr[3] ""
+
+msgctxt "one or many people are not going"
+msgid "Can't go"
+msgid_plural "Can't go"
+msgstr[0] "Не можу взяти участі"
+msgstr[1] "Не можуть взяти участь"
+msgstr[2] "Не можуть взяти участь"
+msgstr[3] ""
+
+msgid "Going"
+msgstr "Братиму участь"
+
+msgid "Maybe going"
+msgstr "Можливо братиму участь"
+
+msgid "Can't go"
+msgstr "Не можу взяти участі"
+
+msgid "Are you going?"
+msgstr "Ви берете участь?"
+
+msgid "No Choice"
+msgstr "Немає вибору"
+
+msgid "Add event to your calendar"
+msgstr ""
+
+#, fuzzy
+msgid "Copy this iCal-link into your calendar application to import this event:"
+msgstr "Скопіюйте це посилання iCal у ваш календар, щоб імпортувати поточні заходи:"
+
+#, fuzzy
+msgid "Please register or login to join the video conference for this event"
+msgstr "Почати/приєднатися до відеочату цієї події"
+
+#, fuzzy
+msgid "Start/join video conference for this event"
+msgstr "Почати/приєднатися до відеочату цієї події"
+
+msgid "Popout"
+msgstr ""
+
+msgid "Fullscreen"
+msgstr "Повний екран"
+
+#, fuzzy
+msgid "Video conference"
+msgstr "Тип конференційного заходу"
+
+msgid "Leave Fullscreen"
+msgstr "Вийти з повноекранного режиму"
+
+msgid "Back"
+msgstr "Назад"
+
+#, fuzzy
+msgid "Leave video conference"
+msgstr "Тип конференційного заходу"
+
+msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
+msgstr ""
+
+msgid "You will now receive notifications for comments or when this event is updated or its details change."
+msgstr "Ви тепер будете отримувати сповіщення, якщо буде додано коментар або подія буде оновлена чи її деталі будуть змінені."
+
+msgid "You created an event"
+msgstr "Ти створи(-ла)в подію"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created an event"
+msgstr "cтворено подію"
+
+msgid "Show all"
+msgstr "Відобразити все"
+
+msgid "Upcoming events"
+msgstr "Майбутні події"
+
+#, python-format
+msgid "Event \"%(title)s\" was edited successfully."
+msgstr "Подія «%(title)s» успішно відредагована."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be edited."
+msgstr "Неможливо редагувати подію «%(title)s»."
+
+msgid "Please use the conference management area to add new workshops!"
+msgstr "Будь ласка, використовуйте область управління конференцією, щоб додати нові воркшопи!"
+
+msgid "The page you requested is not available for this event at this time."
+msgstr "Сторінка, яку Ви запитуєте, на даний момент не доступна для цієї події."
+
+msgid "One of the event suggestions times could not be understood!"
+msgstr "Неможливо зрозуміти одну з часових пропозицій для події! "
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was edited successfully."
+msgstr "Незапланована подія \"%(title)s\" була успішно відредагована. "
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be edited."
+msgstr "Неможливо відредагувати позапланову подію \"%(title) s\". "
+
+#, python-format
+msgid "Event \"%(title)s\" was added successfully."
+msgstr "Захід «%(title)s» успішно додано."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be added."
+msgstr "Неможливо додати захід «%(title)s»."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was added successfully."
+msgstr "Позапланову подію «%(title)s» успішно додано."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be added."
+msgstr "Неможливо додати позапланову подію \"%(title)s\"."
+
+msgid "You should define at least one date suggestion."
+msgstr "Необхідно запропонувати принаймні одну дату."
+
+#, python-format
+msgid "Event \"%(title)s\" was deleted successfully."
+msgstr "Захід «%(title)s» успішно видалено."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be deleted."
+msgstr "Не можливо видалити захід «%(title)s»."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was deleted successfully."
+msgstr "Позапланову подію \"%(title)s\" успішно видалено."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be deleted."
+msgstr "Неможливо видалити позапланову подію \"%(title)s\"."
+
+msgid "Your votes were saved successfully."
+msgstr "Ваші голоси успішно збережено."
+
+msgid "Your votes could not be saved."
+msgstr "Не вдалося зберегти ваших голосів."
+
+msgid "This is event is already scheduled. You cannot vote for it any more."
+msgstr "Ця подія вже запланована. Ви більше не зможете проголосувати за це."
+
+msgid "The complete request can only be sent via POST!"
+msgstr "Повний запит можна надіслати лише ПОШТОЮ!"
+
+msgid "Event cannot be completed: No date was supplied."
+msgstr "Подія не може бути завершена: не вказана дата."
+
+msgid "The event was created successfully at the specified date."
+msgstr "Захід успішно створено із вказаною датою."
+
+#, fuzzy
+msgid "Upcoming event"
+msgstr "Майбутні події"
+
+msgid "Your comment was added successfully."
+msgstr "Ваш коментар успішно додано."
+
+msgid "Your comment was deleted successfully."
+msgstr "Ваш коментар успішно видалено."
+
+#~ msgid "Now"
+#~ msgstr "Зараз"
+
+#, fuzzy
+#~ msgid "Check this to prevent public viewing of the event's description"
+#~ msgstr "Поставте галочку, щоб запобігти публічному перегляду опису події/подій"
+
+#~ msgid "Event is confidential"
+#~ msgstr "Подія є конфіденційною"
+
+#, fuzzy
+#~ msgid "Event's description is confidencial (Not visible on microsite)"
+#~ msgstr "Опис події є конфіденційним (не видно на мікросайті)"
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
+
+#~ msgid "%(sender_name)s voted in"
+#~ msgstr "%(sender_name)s проголосував у"
+
+#~ msgid "Add Photos or Files"
+#~ msgstr "Додати фото чи файли"
+
+#~ msgid "Date"
+#~ msgstr "Дата"
+
+#~ msgid "End date."
+#~ msgstr "Дата завершення."
+
+#~ msgid "Event poll updated by %(sender_name)s"
+#~ msgstr "Опитування щодо події було нововлено %(sender_name)s"
+
+#~ msgid "Example: https://www.youtube.com/watch?v=12345"
+#~ msgstr "Приклад: https://www.youtube.com/watch?v=12345"
+
+#~ msgid "From"
+#~ msgstr "З"
+
+#~ msgid "Kalender"
+#~ msgstr "Календар"
+
+#~ msgid "Location (optional)."
+#~ msgstr "Місце (додатково)."
+
+#~ msgid "Maximum Coffee Table Participants"
+#~ msgstr "Максимум учасників за Coffee Table"
+
+#~ msgid "More"
+#~ msgstr "Більше"
+
+#~ msgid "New event by %(sender_name)s"
+#~ msgstr "Нова подія від %(sender_name)s"
+
+#~ msgid "New event by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Нова подія від %(sender_name)s в %(team_name)s (яку Ви відслідковуєте)"
+
+#~ msgid "New event poll by %(sender_name)s"
+#~ msgstr "Нова пропозиція дати заходу від %(sender_name)s"
+
+#~ msgid "New event poll by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Нове опитування щодо заходу від %(sender_name)s в %(team_name)s (яку Ви відслідковуєте)"
+
+#~ msgid "Schedule an event"
+#~ msgstr "Визначити дату"
+
+#~ msgid "Show in my projects..."
+#~ msgstr "Показати в моїх проектах..."
+
+#~ msgid "Shown in my projects..."
+#~ msgstr ""
+#~ "Plural Показані в моїх проектах...\n"
+#~ "Maskulinum Показаний в моїх проектах...\n"
+#~ "Femininum Показана в моїх проектах...\n"
+#~ "Neutrum Показано в моїх проектах..."
+
+#~ msgid "Start date."
+#~ msgstr "Дата початку."
+
+#, fuzzy
+#~ msgid "Start/join BBB video conference for this event"
+#~ msgstr "Почати/приєднатися до відеочату цієї події"
+
+#~ msgid "Start/join video chat for this event"
+#~ msgstr "Почати/приєднатися до відеочату цієї події"
+
+#~ msgid "Stop Video Chat"
+#~ msgstr "Зупинити відеочат"
+
+#~ msgid "Until"
+#~ msgstr "До"
+
+#~ msgid "Upcoming events in"
+#~ msgstr "Прийдешні заходи через"
+
+#~ msgid "Video Chat"
+#~ msgstr "Відеочат"
+
+#~ msgctxt "the_verb"
+#~ msgid "Vote"
+#~ msgstr "Голосувати"

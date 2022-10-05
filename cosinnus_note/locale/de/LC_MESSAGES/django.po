@@ -1,0 +1,448 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Markus Holtermann <info@markusholtermann.eu>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-01 16:06+0100\n"
+"PO-Revision-Date: 2021-10-01 15:36+0200\n"
+"Last-Translator: Markus Holtermann <info@markusholtermann.eu>\n"
+"Language-Team: German <>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0\n"
+
+msgid "Notes"
+msgstr "Neuigkeiten"
+
+# The Cosinnus App Name
+msgctxt "the_app"
+msgid "note"
+msgstr "Neuigkeiten"
+
+msgid "A user commented on a news post"
+msgstr "Ein Mitglied hat einen Beitag kommentiert"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post"
+msgstr "%(sender_name)s hat eine Neuigkeit kommentiert"
+
+msgid "A user commented on one of your news posts"
+msgstr "Ein Mitglied hat einen deiner Beiträge kommentiert"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post %(object_name)s"
+msgstr "%(sender_name)s hat deine Neuigkeit %(object_name)s kommentiert"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your news post %(object_name)s"
+msgstr[0] "%(sender_name)s und %(count_minus_one)d weiterer Benutzer haben deine Neuigkeit %(object_name)s kommentiert"
+msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer haben deine Neuigkeit %(object_name)s kommentiert"
+
+#, python-format
+msgid "%(sender_name)s commented on your news post"
+msgstr "%(sender_name)s hat deine Neuigkeit kommentiert"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts"
+msgstr "%(sender_name)s hat eine Neuigkeit von dir kommentiert"
+
+msgid "A user commented on a news posts you commented in"
+msgstr "Ein Mitglied hat eine Neuigkeit kommentiert die du kommentiert hast"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s you commented in"
+msgstr "%(sender_name)s hat die Neuigkeit %(object_name)s kommentiert, die du kommentiert hast"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s you commented in"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s you commented in"
+msgstr[0] "%(sender_name)s und %(count_minus_one)d weiterer Benutzer haben die Neuigkeit %(object_name)s kommentiert, die du kommentiert hast"
+msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer haben die Neuigkiet %(object_name)s kommentiert, die du kommentiert hast"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in"
+msgstr "%(sender_name)s hat eine Neuigkeit kommentiert, die du kommentiert hast"
+
+msgid "A user created a news post"
+msgstr "Ein Mitglied hat eine Neuigkeit in der Gruppe gepostet"
+
+#, python-format
+msgid "%(sender_name)s created the news post %(object_name)s"
+msgstr "%(sender_name)s hat die Neuigkeit %(object_name)s gepostet"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d news posts"
+msgstr "%(sender_name)s hat %(count)d Neuigkeiten gepostet"
+
+#, python-format
+msgid "%(sender_name)s created a new news post"
+msgstr "%(sender_name)s hat eine Neuigkeit gepostet"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s:"
+msgstr "%(sender_name)s hat in %(team_name)s gepostet:"
+
+msgid "A user created a news post in a team you are following"
+msgstr "Ein Mitglied hat eine Neuigkeit in einem Projekt oder Gruppe (dem du folgst) gepostet"
+
+#, python-format
+msgid "%(sender_name)s created a new news post in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s hat eine Neuigkeit erstellt in %(team_name)s (dem du folgst)"
+
+#, python-format
+msgid "%(sender_name)s posted in %(team_name)s: (which you follow)"
+msgstr "%(sender_name)s hat in %(team_name)s (dem du folgst) gepostet"
+
+msgid "A user updated a news post"
+msgstr "Ein Mitglied hat eine Neuigkeit geändert"
+
+#, python-format
+msgid "%(sender_name)s updated the news post %(object_name)s"
+msgstr "%(sender_name)s hat die Neuigkeit %(object_name)s geändert"
+
+msgid "You are following this news post"
+msgstr "Du folgst dieser Neuigkeit"
+
+#, python-format
+msgid "%(sender_name)s updated a news post you are following"
+msgstr "%(sender_name)s hat eine Neuigkeit geändert (der du folgst)"
+
+#, python-format
+msgid "A news post you follow by %(sender_name)s was updated %(team_name)s:"
+msgstr "%(sender_name)s hat eine Neuigkeit (der du folgst) in %(team_name)s geändert:"
+
+msgid "A user commented on a news post you are following"
+msgstr "Ein Mitglied hat eine Neuigkeit kommentiert, der du folgst"
+
+#, python-format
+msgid "%(sender_name)s commented on the news post %(object_name)s"
+msgstr "%(sender_name)s hat die Neuigkeit %(object_name)s kommentiert"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the news post %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the news post %(object_name)s"
+msgstr[0] "%(sender_name)s und %(count_minus_one)d weiterer Benutzer haben die Neuigkeit %(object_name)s kommentiert"
+msgstr[1] "%(sender_name)s und %(count_minus_one)d weitere Benutzer haben die Neuigkeit %(object_name)s kommentiert"
+
+#, python-format
+msgid "%(sender_name)s commented on a news posts you are following"
+msgstr "%(sender_name)s hat eine Neuigkeit (der du folgst) kommentiert"
+
+msgid "No news"
+msgstr "Keine Neuigkeiten vorhanden"
+
+msgid "Write a news post"
+msgstr "Was gibt es Neues?"
+
+msgid "News stream"
+msgstr "Mein Stream"
+
+msgid "Created By"
+msgstr "Erstellt von"
+
+msgid "Newest Created"
+msgstr "Zuletzt erstellt"
+
+msgid "Popularity"
+msgstr "Meist kommentiert"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Facebook Share"
+msgstr "Facebook-Share-Id"
+
+msgid "Note Item"
+msgstr "Neuigkeit"
+
+msgid "Note Items"
+msgstr "Neuigkeiten"
+
+msgid "Author"
+msgstr "Autor"
+
+msgid "Creator"
+msgstr "Ersteller"
+
+msgid "Created"
+msgstr "Erstellt"
+
+msgid "Comment"
+msgstr "Kommentar"
+
+msgid "Comments"
+msgstr "Kommentare"
+
+msgid "News"
+msgstr "Neuigkeiten"
+
+msgctxt "the_verb"
+msgid "Comment"
+msgstr "Kommentieren"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Write comment..."
+msgstr "Kommentar schreiben..."
+
+msgid "Post"
+msgstr "Posten"
+
+msgid "There are no public news posts"
+msgstr "Bisher gibt es keine öffentliche Neuigkeiten"
+
+msgid "There are no news posts yet"
+msgstr "Es gibt keine Neuigkeiten"
+
+msgid "Edit news post"
+msgstr "Neuigkeit bearbeiten"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "In einem der eingegebenen Felder trat ein Fehler auf. Bitte korrigiere ihn vor dem Speichern!"
+
+msgid "Save changes"
+msgstr "Übernehmen"
+
+msgid "Title (optional)"
+msgstr "Titel (optional)"
+
+msgid "Title"
+msgstr "Titel"
+
+msgctxt "label for the form text input"
+msgid "News text"
+msgstr "Neuigkeitentext"
+
+msgid "Please enter a message..."
+msgstr "Gib bitte einen Neuigkeitentext ein..."
+
+msgid "To post in this team you need to"
+msgstr "Um hier Beiträge zu erstellen musst du"
+
+msgid "request to join"
+msgstr "beantragen, Mitglied zu werden"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a news post you wrote in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your post:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s hat einen Kommentar auf eine Neuigkeit von dir in der Gruppe %(team_name)s geschrieben:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"zu deinem Beitrag:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"Folge diesem Link um den Kommentar zu sehen: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Folge diesem Link um deine Benachrichtigungseinstellungen zu ändern: %(notification_settings_url)s )\n"
+"\n"
+"Dein %(site_name)s team.\n"
+"\n"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on a news post you a commented in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the post:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s hat einen Kommentar auf eine Neuigkeit, die du kommentiert hast, in der Gruppe %(team_name)s geschrieben:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"zum Beitrag:\n"
+"\n"
+"\"%(note_text)s\"\n"
+"\n"
+"\n"
+"Folge diesem Link um den Kommentar zu sehen: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Folge diesem Link um deine Benachrichtigungseinstellungen zu ändern: %(notification_settings_url)s )\n"
+"\n"
+"Dein %(site_name)s team.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a news post you commented in, in %(team_name)s."
+msgstr "%(sender_name)s hat eine Neuigkeit kommentiert, die du kommentiert hast in %(team_name)s."
+
+#, python-format
+msgid "%(sender_name)s commented on one of your news posts in %(team_name)s."
+msgstr "%(sender_name)s hat eine Neuigkeit von dir kommentiert in %(team_name)s."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s just posted an update in %(team_name)s:\n"
+msgstr ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s hat im Projekt %(team_name)s gepostet:\n"
+
+#, python-format
+msgid ""
+"%(note_text)s\n"
+"\n"
+"\n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"%(note_text)s\n"
+"\n"
+"\n"
+"\n"
+"Hier kommst du zur ganzen Neuigkeit: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Folge diesem Link um deine Benachrichtigungseinstellungen zu ändern: %(notification_settings_url)s )\n"
+"\n"
+"Dein %(site_name)s Team."
+
+msgid "Show in my projects..."
+msgstr "In meinen Projekten anzeigen..."
+
+msgid "Edit"
+msgstr "Bearbeiten"
+
+msgid "Delete note"
+msgstr "Neuigkeit löschen"
+
+msgid "View on Facebook"
+msgstr "Auf Facebook ansehen"
+
+msgid "Do you really want to delete this note?"
+msgstr "Willst du diese Neuigkeit wirklich löschen?"
+
+msgid "You added a post"
+msgstr "Du hast eine Neuigkeit gepostet"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "added a post"
+msgstr "hat eine Neuigkeit gepostet"
+
+msgid "Your news post was added successfully."
+msgstr "Deine Neuigkeit wurde erfolgreich erstellt."
+
+msgid "Your news post was deleted successfully."
+msgstr "Deine Neuigkeit wurde erfolgreich gelöscht.."
+
+msgid "Your news post was edited successfully."
+msgstr "Deine Neuigkeit wurde erfolgreich bearbeitet."
+
+msgid "Your comment was added successfully."
+msgstr "Dein Kommentar wurde erfolgreich erstellt."
+
+msgid "Your comment was deleted successfully."
+msgstr "Dein Kommentar wurde gelöscht."
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
+
+#~ msgid "New news post by %(sender_name)s"
+#~ msgstr "Neue Neuigkeit von %(sender_name)s"
+
+#~ msgid "New news post by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Neue Neuigkeit von %(sender_name)s in %(team_name)s (dem du folgst)"
+
+#~ msgid "Read more..."
+#~ msgstr "Mehr anzeigen..."
+
+#~ msgid "Your news post was also posted on your Facebook timeline."
+#~ msgstr "Deine Neuigkeit wurde auch auf deinem Facebook-Profil veröffentlicht."
+
+#~ msgid "We could not post this news post on your Facebook timeline. If this problem persists, please make sure you have granted us all required Facebook permissions, or try disconnecting and re-connecting your Facebook account!"
+#~ msgstr "Wir konnten deine Neuigkeit nicht auf deinem Facebook-Profil posten. Wenn dieses Problem bestehen bleibt, stell bitte sicher dass du uns alle benötigten Facebook-Zugriffsrechte erteilt hast, oder versuche dein Facebook-Konto zu trennen und erneut zu verbinden!"
+
+#~ msgid "Your news post was also posted on the Facebook Group/Fan-Page."
+#~ msgstr "Deine Neuigkeit wurde auch auf der Facebook Gruppe/Fan-Seite veröffentlicht."
+
+#~ msgid "We could not post this news post on your Facebook Group/Fan-Page. If this problem persists, please try disconnecting and re-connecting your Facebook account and make sure you allow us to post with a visibility of at least \"Friends\". If this doesn't work, contact this project/group's administrator!"
+#~ msgstr "Wir konnten deine Neuigkeit nicht auf der Facebook Gruppe/Fan-Seite posten. Wenn dieses Problem bestehen bleibt, versuche dein Facebook-Konto zu trennen und erneut zu verbinden und stelle sicher dass du uns die Post-Berechtigung mit Sichtbarkeit von mindestens \"Freunde\" erteilst! Wenn dass nicht funktioniert, kontaktiere bitte den Administrator dieses Projekts/Gruppe!"
+
+#~ msgid "Your news post was not posted on your Facebook timeline because of an unexpected problem."
+#~ msgstr "Deine Neuigkeit wurde nicht auf deinem Facebook-Profil veröffentlicht weil ein unerwarteter Fehler aufgetreten ist."
+
+#~ msgid "Your news post could not be posted on your Facebook timeline because of a problem. You can use the Facebook-Button under your post to try again."
+#~ msgstr "Es gab ein Pro"
+
+#~ msgid "Write a news post..."
+#~ msgstr "Neue Nachricht..."
+
+#~ msgid "Follow this link to see the comment:"
+#~ msgstr "Folge diesem Link um zum Kommentar zu gelangen:"
+
+#~ msgid "The %(site_name)s team"
+#~ msgstr "Das Team von %(site_name)s"
+
+#~ msgid "Posten"
+#~ msgstr "Posten"
+
+#~ msgid "Create"
+#~ msgstr "Erstellen"

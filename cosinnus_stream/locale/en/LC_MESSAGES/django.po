@@ -1,0 +1,145 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:39+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Stream"
+msgstr "Activities"
+
+msgctxt "the_app"
+msgid "stream"
+msgstr "Activities"
+
+msgid "My Streams"
+msgstr "Activities"
+
+msgid "Streams"
+msgstr "Activities"
+
+msgid "Models"
+msgstr ""
+
+msgid "Portal IDs"
+msgstr ""
+
+msgid "Last seen"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete Stream"
+msgid "Special Stream"
+msgstr "Delete activity feed"
+
+msgid "Special Group IDs"
+msgstr ""
+
+msgid "My Stream"
+msgstr "Activities"
+
+msgid "Public Stream"
+msgstr "Public Activities"
+
+msgid "My Stream in all Portals"
+msgstr ""
+
+#, fuzzy
+msgid "Public Stream in all Portals"
+msgstr "Public Activities"
+
+msgid "Edit this Stream"
+msgstr "Edit this activity feed"
+
+msgid "Delete this Stream"
+msgstr "Delete this activity feed"
+
+msgid "Do you really want to delete this stream?"
+msgstr "Do you really want to delete this activity feed?"
+
+msgid "Delete Stream"
+msgstr "Delete activity feed"
+
+msgid "Create Stream"
+msgstr "Create activity feed"
+
+msgid "Hide public items outside of your groups"
+msgstr ""
+
+msgid "Show public items outside of your groups"
+msgstr ""
+
+msgid "There are no news posts yet"
+msgstr ""
+
+#, python-format
+msgid "Edit stream \"%(stream_name)s\""
+msgstr "Edit activity feed \"%(stream_name)s\""
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Enter a title for the stream."
+msgstr "Enter a title for the activity feed."
+
+msgid "Apply filters for the stream"
+msgstr "Apply filters for the activity feed"
+
+msgid "Filter by Team?"
+msgstr ""
+
+msgid "Select Team"
+msgstr ""
+
+#, fuzzy
+#| msgid "Public Stream"
+msgid "Public"
+msgstr "Public Activities"
+
+msgid "Additional filters"
+msgstr ""
+
+msgid "Filter by authors, tags or other tagged properties?"
+msgstr ""
+
+msgid "Filter by item types?"
+msgstr ""
+
+msgid "Create"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "You do not have permission to access this stream."
+msgstr "You do not have permission to access this activity feed."
+
+msgid "Your stream was added successfully."
+msgstr "Your activity feed was added successfully."
+
+msgid "Please log in to access this page."
+msgstr ""
+
+msgid "Your stream was updated successfully."
+msgstr "Your activity feed was updated successfully."
+
+msgid "Your stream was deleted successfully."
+msgstr "Your activity feed was deleted successfully."
+
+msgid "You cannot delete the default stream!"
+msgstr "You cannot delete the default activity feed!"

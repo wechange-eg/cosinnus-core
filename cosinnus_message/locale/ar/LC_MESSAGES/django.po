@@ -1,0 +1,288 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 11:18+0200\n"
+"PO-Revision-Date: 2020-11-26 09:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Poedit 2.0.6\n"
+
+msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
+msgstr ""
+
+msgctxt "the_app"
+msgid "Chat"
+msgstr ""
+
+msgid "Message"
+msgstr "الرسالة"
+
+msgctxt "the_app"
+msgid "message"
+msgstr "الرسالة"
+
+msgid "Chat"
+msgstr ""
+
+msgid "Recipients"
+msgstr "المستلمون"
+
+msgid "Only Administrators may send a message to this project/group!"
+msgstr "يمكن للمسؤولين فقط إرسال رسالة إلى هذا المشروع / المجموعة!"
+
+msgid "Additional Recipients"
+msgstr "مستلمين إضافيين"
+
+msgid "Undefined recipient."
+msgstr "مستلم غير محدد."
+
+msgid "Portal"
+msgstr "بوابة"
+
+msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
+msgstr "يمكنك فقط إرفاق ملفات وصور للرسائل إذا كنت عضوًا في المنتدى. يمكنك الانضمام هنا:"
+
+msgid "Forum"
+msgstr "المنتدى"
+
+msgid "Messages"
+msgstr "رسائل"
+
+msgid "Legacy Messages Archive"
+msgstr "أرشيف الرسائل القديمة"
+
+msgid "The legacy messaging app is no longer in use. You can view all of your old messages, but you cannot write new ones. Please use the new messaging app in the navigation from now on!"
+msgstr "لم يعد تطبيق المراسلة القديم قيد الاستخدام. يمكنك عرض جميع رسائلك القديمة ، ولكن لا يمكنك كتابة رسائل جديدة. الرجاء استخدام تطبيق المراسلة الجديد في التنقل من الآن فصاعدًا!"
+
+#, python-format
+msgid ""
+"Your direct reply could not be processed!\n"
+"\n"
+"The reason was: %(reason)s\n"
+"\n"
+"\n"
+"Your message text was: \n"
+"--------------------------------\n"
+"%(text)s\n"
+"--------------------------------\n"
+"\n"
+"\n"
+"If this keeps happening, consider logging in and sending the reply directly on the site.\n"
+msgstr ""
+"قد لا يمكن معالجة ردك المباشر!\n"
+"\n"
+"السبب :%(reason)s\n"
+"\n"
+"\n"
+"كان نص رسالتك:\n"
+"--------------------------------\n"
+"%(text)s\n"
+"--------------------------------\n"
+"\n"
+"\n"
+"إذا تكرر هذا ، ففكر في تسجيل الدخول وإرسال الرد مباشرة على الموقع.\n"
+
+msgid ""
+"Note: This message is issued by an automated system.\n"
+"Do not reply, this would not be taken into account."
+msgstr ""
+"ملاحظة: هذه الرسالة صادرة عن نظام آلي.\n"
+"لا تفن بالرد ، هذا لن يؤخذ بعين الاعتبار."
+
+msgid "Only group members can see the content you requested. Apply to become a member now!"
+msgstr ""
+
+msgid "Go to chat"
+msgstr ""
+
+msgid "Archived Messages"
+msgstr "الرسائل المؤرشفة"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Archive"
+msgstr "أرشيف"
+
+msgid "Undelete"
+msgstr "لا يمكن الحدف"
+
+msgid "Mark as Read"
+msgstr "وضع علامةكمقروء"
+
+msgid "No messages"
+msgstr "لا يوجد رسائل"
+
+msgid "Please enter message..."
+msgstr "الرجاء إدخال الرسالة ..."
+
+msgid "Send"
+msgstr "ارسال"
+
+msgid "Dear user,"
+msgstr "عزيزي المستخدم،"
+
+#, python-format
+msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgstr "في%(date)s, (التاريخ) s ، لقدطلبت إرسال رسالة إلى المستخدم'%(recipient)s'.."
+
+msgid "Your message has been rejected by the moderator"
+msgstr "تم رفض رسالتك من قبل الوسيط"
+
+msgid ", for the following reason:"
+msgstr "ذلك للسبب التالي:"
+
+#, python-format
+msgid "'%(sender_first)s %(sender_last)s' has replied to your message from %(date)s:"
+msgstr "رد %(sender_last)s'%(sender_first)s' على رسالتك من%(date)s:"
+
+#, python-format
+msgid "'%(sender_first)s %(sender_last)s' has posted a message in one of your conversations."
+msgstr "قام '%(sender_first)s %(sender_last)s' ' بنشر رسالة في إحدى محادثاتك."
+
+#, python-format
+msgid "You have received a message from the user '%(sender_first)s %(sender_last)s'."
+msgstr "لقد تلقيت رسالة من المستخدم ' '%(sender_first)s %(sender_last)s'."
+
+msgid "This message was sent in a conversation with: "
+msgstr "تم إرسال هذه الرسالة في محادثة مع: "
+
+msgid "Project/Group"
+msgstr "المشروع / المجموعة"
+
+msgid "Follow this link to view the message on the site"
+msgstr "اتبع هذا الرابط لعرض الرسالة على الموقع"
+
+msgid "If you do not wish to receive any more emails from us, click here to unsubscribe:"
+msgstr "إذا كنت لا ترغب في تلقي المزيد من رسائل البريد الإلكتروني منا ، فانقر هنا لإلغاء الاشتراك:"
+
+msgid "You can also reply to this message directly by replying to this email. When you do, please leave the subject and addressee as it is. The email you reply from *must* be the one you are registered with on the site."
+msgstr "يمكنك أيضًا الرد مباشرةًعلى هذه الرسالة من خلال الرد على هذا البريد الإلكتروني. عند القيام بذلك ، يرجى ترك الموضوع والمرسل إليه كما هو. البريد الإلكتروني الذي ترد منه * يجب * أن يكون هو البريد الإلكتروني الذي قمت بالتسجيل فيه  على الموقع."
+
+msgid "WARNING: Your reply will be sent to all participants of this conversation!"
+msgstr "تحذير: سيتم إرسال ردك إلى جميع المشاركين في هذه المحادثة!"
+
+#, python-format
+msgid "Message \"%(subject)s\" on the site %(sitename)s"
+msgstr "رسالة\"%(subject)s\" على الموقع %(sitename)s"
+
+msgid "Dear visitor,"
+msgstr "عزيزي الزائر ،"
+
+msgid "As a reminder, please find below the content of your message."
+msgstr "للتذكير ، يرجى الاطلاع أدناه على محتوى رسالتك."
+
+#, python-format
+msgid "On %(date)s, you sent a message to the user '%(sender_first)s %(sender_last)s'."
+msgstr "على%(date)s, ، قمت بإرسال رسالة إلى المستخدم '%(sender_first)s %(sender_last)s'."
+
+msgid "Please find below the answer from your correspondent."
+msgstr "يرجى الاطلاع أدناه على إجابة مراسلاتك."
+
+msgid "Thank you again for your interest in our services."
+msgstr "شكرا لك مرة أخرى على اهتمامك بخدماتنا."
+
+msgid "For more comfort, we encourage you to open an account on the site."
+msgstr "لمزيد من الراحة ، نحثك على فتح حساب على الموقع."
+
+msgid "The site administrator"
+msgstr "مدير الموقع"
+
+msgid "Inbox"
+msgstr "صندوق الوارد"
+
+msgid "Sent"
+msgstr "أرسل"
+
+msgctxt "the noun for an Archive"
+msgid "Archive"
+msgstr "أرشيف"
+
+msgid "Trash"
+msgstr "محذوفات"
+
+msgid "Write"
+msgstr "كتابة"
+
+msgid "Reply"
+msgstr "الرد"
+
+msgid "Recipient"
+msgstr "المُستقبل"
+
+msgid "Conversation"
+msgstr "محادثة"
+
+msgid "Conversation with members from"
+msgstr "محادثة مع أعضاء من"
+
+msgid "Conversation with"
+msgstr "محادثة مع"
+
+#, python-format
+msgid "Show all %(count)s participants"
+msgstr "إظهار كافة%(count)s المشاركين"
+
+msgid "Me"
+msgstr "أنا"
+
+msgid "Answer"
+msgstr "اجابة"
+
+msgid "Reply..."
+msgstr "الرد..."
+
+#, python-format
+msgid "Reply to %(sender_name)s"
+msgstr "الرد على%(sender_name)s"
+
+#, python-format
+msgid "Reply to all %(adressee_count)s"
+msgstr "الرد على الجميع%(adressee_count)s"
+
+msgid "Your reply could not be matched to an existing message."
+msgstr "لا يمكن مطابقة ردك برسالة موجودة."
+
+msgid "An internal error occured."
+msgstr "حدث خطأ داخلي."
+
+msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
+msgstr "عنوان البريد الإلكتروني الذي أرسلت منه الرد ليس مرتبطا بحسابك الشخصي. يرجى إرسال الردود المباشرة فقط من عنوان البريد الإلكتروني الذي قمت بالتسجيل به على الموقع!"
+
+msgid "There was an error when processing your message text!"
+msgstr "كان هناك خطأ أثناء معالجة نص رسالتك!"
+
+msgid "Your direct reply failed!"
+msgstr "فشل ارسال رد مباشر!"
+
+msgid "Select at least one object."
+msgstr "حدد موضوع واحد على الأقل."
+
+msgid "Messages or conversations successfully archived."
+msgstr "تمت أرشفة الرسائل أو المحادثات بنجاح."
+
+msgid "Messages or conversations successfully deleted."
+msgstr "تم حذف الرسائل أو المحادثات بنجاح."
+
+msgid "Messages were marked as read."
+msgstr "تم وضع علامة على هذه الرسائل كمقروءة."
+
+msgid "Messages or conversations successfully recovered."
+msgstr "تم استعادة الرسائل أو المحادثات بنجاح."
+
+#~ msgid "Request about your project \"%(group_name)s\""
+#~ msgstr "طلب حول مشروعك \"%(group_name)s\""
+
+#~ msgid "Request about your group \"%(group_name)s\""
+#~ msgstr "تساؤل حول مجموعتك \"%(group_name)s\""

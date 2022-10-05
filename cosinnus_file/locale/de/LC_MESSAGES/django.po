@@ -1,0 +1,384 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Markus Holtermann <info@markusholtermann.eu>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:20+0200\n"
+"PO-Revision-Date: 2021-10-01 15:27+0200\n"
+"Last-Translator: Markus Holtermann <info@markusholtermann.eu>\n"
+"Language-Team: German <>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0\n"
+
+msgid "Files"
+msgstr "Dateien"
+
+# The Cosinnus App Name
+msgctxt "the_app"
+msgid "file"
+msgstr "Dateien"
+
+msgid "A user uploaded a new file"
+msgstr "Ein Mitglied hat eine neue Datei hochgeladen"
+
+#, python-format
+msgid "%(sender_name)s uploaded the file %(object_name)s"
+msgstr "%(sender_name)s hat die Datei %(object_name)s hochgeladen"
+
+#, python-format
+msgid "%(sender_name)s uploaded %(count)d files"
+msgstr "%(sender_name)s hat %(count)d Dateien hochgeladen"
+
+#, python-format
+msgid "%(sender_name)s created a new file"
+msgstr "%(sender_name)s hat eine neue Datei hochgeladen"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Eine neue Datei: \"%(object_name)s\" wurde hochgeladen in %(team_name)s."
+
+msgid "A user uploaded a new file in a team you are following"
+msgstr "Ein Mitglied hat eine neue Datei hochgeladen in einem Projekt oder Gruppe (dem du folgst)"
+
+#, python-format
+msgid "%(sender_name)s created a new file in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s hat eine neue Datei hochgeladen in %(team_name)s (dem du folgst)"
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Eine neue Datei: \"%(object_name)s\" wurde hochgeladen in %(team_name)s (dem du folgst)."
+
+msgid "Latest Files"
+msgstr "Neueste Dateien"
+
+msgid "No files"
+msgstr "Keine Dateien vorhanden"
+
+msgid "Pictures"
+msgstr "Bilder"
+
+msgid "Documents"
+msgstr "Dokumente"
+
+msgid "Audio Files"
+msgstr "Audiodateien"
+
+msgid "Videos"
+msgstr "Videos"
+
+msgid "Created By"
+msgstr "Erstellt von"
+
+msgid "File Type"
+msgstr "Dateityp"
+
+msgid "File Name"
+msgstr "Dateiname"
+
+msgid "File Name (descending)"
+msgstr "Dateiname (absteigend)"
+
+msgid "Newest Created"
+msgstr "Zuletzt hochgeladen"
+
+msgid "Smallest Files"
+msgstr "Kleinste Dateien"
+
+msgid "Largest Files"
+msgstr "Größte Dateien"
+
+msgid "The given URL does not seem to be valid."
+msgstr "Die eingegebe URL scheint nicht gültig zu sein."
+
+msgid "Must supply either a URL or File"
+msgstr "Eine URL oder Datei muss angegeben sein"
+
+msgid "Note"
+msgstr "Bemerkung"
+
+msgid "File"
+msgstr "Datei"
+
+msgid "Is URL Link"
+msgstr "Ist URL Link"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Path"
+msgstr "Verzeichnis"
+
+msgid "Uploaded by"
+msgstr "Hochgeladen von"
+
+msgid "Uploaded on"
+msgstr "Hochgeladen am"
+
+msgid "No files selected."
+msgstr "Keine Dateien ausgewählt."
+
+msgctxt "special_folder_type"
+msgid "Attachments"
+msgstr "Hochgeladene Anhänge"
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "In einem der eingegebenen Felder trat ein Fehler auf. Bitte korrigiere ihn vor dem Speichern!"
+
+msgid "The URL you have entered does not seem to be valid!"
+msgstr "Die eingegebe URL scheint nicht gültig zu sein!"
+
+msgid "URL Link"
+msgstr "URL Link"
+
+msgid "Paste or type the link's URL here"
+msgstr "Füge oder tippe die URL des Links hier ein"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Description"
+msgstr "Beschreibung"
+
+msgid "Preview"
+msgstr "Vorschau"
+
+msgid "Original filename"
+msgstr "Ursprünglicher Dateiname"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Show detailed steps"
+msgstr "Detaillierte Schritte anzeigen"
+
+msgid "Move your files to the Cloud"
+msgstr "Verschiebe deine Dateien in die Cloud"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Move"
+msgstr "Verschieben"
+
+msgid "Download"
+msgstr "Herunterladen"
+
+msgid "Download this folder"
+msgstr "Diesen Ordner herunterladen"
+
+msgid "Add URL link"
+msgstr "URL Link hinzufügen"
+
+msgid "No files have been uploaded yet."
+msgstr "Es wurden noch keine Dateien hochgeladen."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new file \"%(object_name)s\" in %(team_name)s was uploaded by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"eine neue Datei \"%(object_name)s\" in %(team_name)s wurde von %(sender_name)s hochgeladen. \n"
+"\n"
+"Du kannst es finden indem du folgenden Link aufrufst: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Folge diesem Link um deine Benachrichtigungseinstellungen zu ändern: %(notification_settings_url)s )\n"
+"\n"
+"Dein %(site_name)s Team."
+
+#, python-format
+msgid "A new file: \"%(object_name)s\" was uploaded in %(team_name)s."
+msgstr "Neue Datei: \"%(object_name)s\" wurde hochgeladen in %(team_name)s."
+
+msgid "Move to another Folder"
+msgstr "In anderen Ordner verschieben"
+
+msgid "Link to this Image"
+msgstr "Zu diesem Bild verlinken"
+
+msgid "by"
+msgstr "von"
+
+msgid "Created"
+msgstr "Hat erstellt"
+
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#
+#, python-format
+msgid "Do you really want to delete file „%(title)s“?"
+msgstr "Sind Sie sich sicher, dass Sie die Datei „%(title)s“ löschen wollen?"
+
+msgid "Delete file"
+msgstr "Datei löschen"
+
+msgid "Close"
+msgstr "Schließen"
+
+msgid "To move your files to the Cloud, follow these steps:"
+msgstr "Um deine Dateien in die Cloud zu verschieben, befolge diese Schritte:"
+
+msgid "Navigate to the folder you wish to move to the Cloud, or to the root folder of the Files app if you wish to move all of the files"
+msgstr "Navigiere zu dem Ordner, den du in die Cloud verschieben möchtest, oder zum Stammverzeichnis der Dateien-App, wenn du alle Dateien verschieben möchtest"
+
+msgid "Root folder"
+msgstr "Stammverzeichnis"
+
+#, python-format
+msgid "Click \"%(download_label)s\" to download the file archive"
+msgstr "Klicke auf \"%(download_label)s\", um die Dateien als Archiv herunterzuladen"
+
+msgid "Unzip the file archive to a local folder on your hard drive"
+msgstr "Entpacke das Archiv in ein lokales Verzeichnis auf deiner Festplatte"
+
+#, python-format
+msgid "Open the Cloud folder for \"%(group_name)s\":"
+msgstr "Öffne den Cloud-Ordner für \"%(group_name)s\":"
+
+msgid "Cloud app"
+msgstr "Cloud-App"
+
+msgid "Drag & drop the entire content of the unzipped folder from your local hard drive to the Cloud folder"
+msgstr "Markiere und ziehe den gesamten Inhalt des entpackten Ordners auf deiner Festplatte in den Cloud-Ordner"
+
+#, python-format
+msgid "Your files will now upload to the Cloud and can be accessed by all members of \"%(group_name)s\". Your files will remain here in the Files app as well. If you are satisfied with how they look in the Cloud, you may delete them here."
+msgstr "Deine Dateien werden jetzt in die Cloud hochgeladen und können danach von allen Mitgliedern von \"%(group_name)s\" benutzt werden. Deine Dateien bleiben weiterhin ebenfalls hier in der Dateien-App. Wenn du mit den Dateien in der Cloud-App zufrieden bist, kannst du sie dann hier löschen."
+
+msgid "If you wish to access your files from multiple devices, you may want to consider moving them to the Cloud. The process is easy, and you can still keep your files here until you are satisfied with the Cloud."
+msgstr "Wenn du auf deine Dateien von mehreren Geräten zugreifen möchtest, kannst du dir überlegen, sie in die Cloud zu verschieben. Das Verfahren ist einfach und du kannst deine Dateien hier behalten, bis du mit der Cloud-App zufrieden bist."
+
+msgid "You uploaded a file"
+msgstr "Du hast eine Datei hochgeladen"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "uploaded a file"
+msgstr "hat eine Datei hochgeladen"
+
+msgid "More"
+msgstr "Mehr"
+
+msgid "Latest files"
+msgstr "Neueste Dateien"
+
+msgid "There are no files  yet"
+msgstr "Es wurden noch keine Dateien hochgeladen"
+
+#, python-format
+msgid "Folder \"%(title)s\" was created successfully."
+msgstr "Datei \"%(title)s\" wurde erfolgreich erstellt."
+
+msgid "File does not exist or you are not allowed to delete it."
+msgstr "Entweder existiert diese Datei nicht oder Ihnen fehlen die Rechte um die Datei zu bearbeiten."
+
+#, python-format
+msgid "A problem occurred during export. The following file is missing: %(filename)s."
+msgid_plural "A problem occurred during export. The following files are missing: %(filename)s."
+msgstr[0] "Beim Exportieren ist ein Fehler aufgetreten. Die folgende Datei existiert nicht: %(filename)s."
+msgstr[1] "Beim Exportieren ist ein Fehler aufgetreten. Die folgenden Dateien existieren nicht: %(filename)s."
+
+msgid "Invalid request."
+msgstr "Ungültiger Seitenaufruf."
+
+#, python-format
+msgid "File \"%(title)s\" was updated successfully."
+msgstr "Datei \"%(title)s\" wurde erfolgreich geändert."
+
+#, python-format
+msgid "File \"%(title)s\" could not be updated."
+msgstr "Datei \"%(title)s\" konnte nicht geändert werden."
+
+msgid "Downloading failed, the target object was not a folder!"
+msgstr "Der Download konnte nicht durchgeführt werden, weil das Zielobjekt kein Ordner ist!"
+
+msgid "Canceled the download because there seem to be no files in this folder."
+msgstr "Der Downloadvorgang wurde abgebrochen, weil es in diesem Ordner keine Dateien gibt."
+
+msgid "Internal Error: Group not Found"
+msgstr "Interner Fehler: Gruppe nicht gefunden"
+
+msgid "Permission for upload denied"
+msgstr "Zugriff fürs Upload verweigert"
+
+msgid "The uploaded file was invalid."
+msgstr "Die hochgeladene Datei war ungültig."
+
+#, python-format
+msgid "%(count)d File was added successfully."
+msgid_plural "%(count)d Files were added successfully."
+msgstr[0] "%(count)d Datei wurde erfolgreich hochgeladen."
+msgstr[1] "%(count)d Dateien wurden erfolgreich hochgeladen."
+
+msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
+msgstr "Die von Ihnen hochgeladene Datei war zu groß und der Dateityp war ungültig fürs Upload!"
+
+#~ msgid "New file by %(sender_name)s"
+#~ msgstr "Neue Datei von %(sender_name)s"
+
+#~ msgid "New file by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Neue Datei von %(sender_name)s in %(team_name)s (dem du folgst)"
+
+#~ msgid "File title"
+#~ msgstr "Dateititel"
+
+#~ msgid "File description"
+#~ msgstr "Dateibeschreibung"
+
+#~ msgid "File \"%(title)s\" was uploaded successfully."
+#~ msgstr "Datei \"%(title)s\" wurde erfolgreich hochgeladen."
+
+#~ msgid "File \"%(title)s\" could not be uploaded."
+#~ msgstr "Datei \"%(title)s\" konnte nicht hochgeladen werden."
+
+#~ msgid "File \"%(title)s\" could not be added."
+#~ msgstr "Datei \"%(title)s\" konnte nicht hinzugefügt werden."
+
+#~ msgid "Enter the title for the file."
+#~ msgstr "Gib einen Titel für die Datei ein."
+
+#~ msgid "Upload a file or document."
+#~ msgstr "Lade ein Bild oder Dokument hoch"
+
+#~ msgid "Folder \"%(filename)s\" could not be deleted because it contained files that could not be deleted."
+#~ msgstr "Ordner \"%(filename)s\" konnte nicht gelöscht werden da er noch Dateien enthällt die nicht gelöscht werden konnten."
+
+#~ msgid "File \"%(filename)s\" could not be deleted."
+#~ msgstr "Datei \"%(filename)s\" konnte nicht gelöscht werden."
+
+#~ msgid "%(numfiles)d files were deleted successfully."
+#~ msgstr "%(numfiles)d Dateien wurden erfolgreich gelöscht."
+
+#~ msgid "File \"%(filename)s\" was deleted successfully."
+#~ msgstr "Datei \"%(filename)s\" wurde erfolgreich gelöscht."
+
+#~ msgid "%(numfiles)d other files were deleted."
+#~ msgstr "%(numfiles)d weitere Dateien wurden gelöscht."
+
+#~ msgid "attached__cosinnus_file__FileEntry"
+#~ msgstr "Angehängte Dateien"
+
+#~ msgid "Are you sure you want to delete this folder and all files in it?"
+#~ msgstr "Wollen sie diesen Ordner und alle Dateien darin wirklich löschen?"

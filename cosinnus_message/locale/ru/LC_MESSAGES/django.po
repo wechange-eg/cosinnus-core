@@ -1,0 +1,296 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: wechange RU\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 11:18+0200\n"
+"PO-Revision-Date: 2021-10-01 11:33+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0\n"
+
+msgid "Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel."
+msgstr "Пожалуйста, опубликуйте Ваш запрос или вопрос здесь. Вы можете увидеть участников канала, кликнув на иконку группы выше."
+
+msgctxt "the_app"
+msgid "Chat"
+msgstr "Чат"
+
+msgid "Message"
+msgstr "Сообщение"
+
+msgctxt "the_app"
+msgid "message"
+msgstr "сообщение"
+
+msgid "Chat"
+msgstr "Чат"
+
+msgid "Recipients"
+msgstr "Адресаты"
+
+msgid "Only Administrators may send a message to this project/group!"
+msgstr "Только администраторы могут отправлять сообщение этому проекту/группе!"
+
+msgid "Additional Recipients"
+msgstr "Дополнительные адресаты"
+
+msgid "Undefined recipient."
+msgstr "Неопределенный адресат."
+
+msgid "Portal"
+msgstr "Портал"
+
+msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
+msgstr "Вы можете прикладывать файлы и изображения к сообщениям, если вы член форума. Вы можете присоединиться здесь:"
+
+msgid "Forum"
+msgstr "Форум"
+
+msgid "Messages"
+msgstr "Сообщения"
+
+msgid "Legacy Messages Archive"
+msgstr "Архив сообщений прежних версий"
+
+msgid "The legacy messaging app is no longer in use. You can view all of your old messages, but you cannot write new ones. Please use the new messaging app in the navigation from now on!"
+msgstr "Предыдущее приложение для обмена сообщениями больше не используется. Вы можете просмотреть все старые сообщения, но не можете писать новые. Пожалуйста, используйте новое приложение для отправки сообщений в навигации!"
+
+#, python-format
+msgid ""
+"Your direct reply could not be processed!\n"
+"\n"
+"The reason was: %(reason)s\n"
+"\n"
+"\n"
+"Your message text was: \n"
+"--------------------------------\n"
+"%(text)s\n"
+"--------------------------------\n"
+"\n"
+"\n"
+"If this keeps happening, consider logging in and sending the reply directly on the site.\n"
+msgstr ""
+"Ваш ответ напрямую не может быть доставлен!\n"
+"\n"
+"Причина: %(reason)s\n"
+"\n"
+"\n"
+"Текст вашого сообщения:\n"
+"--------------------------------\n"
+"%(text)s\n"
+"--------------------------------\n"
+"\n"
+"\n"
+"Если это продолжится, выйдите из аккаунта и отправьте ответ напрямую на сайт.\n"
+
+msgid ""
+"Note: This message is issued by an automated system.\n"
+"Do not reply, this would not be taken into account."
+msgstr ""
+"Примечание: Это автоматическое сообщение.\n"
+"Не отвечайте на него, Ваш ответ не будет прочитан."
+
+msgid "Only group members can see the content you requested. Apply to become a member now!"
+msgstr "Только участники группы могут видеть запрошенный Вами контакт. Отправьте заявку сейчас, чтобы стать участником!"
+
+msgid "Go to chat"
+msgstr "Перейти к чату"
+
+msgid "Archived Messages"
+msgstr "Архивированные сообщения"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Archive"
+msgstr "В архив"
+
+msgid "Undelete"
+msgstr "Восстановить"
+
+msgid "Mark as Read"
+msgstr "Отметить как прочитанные"
+
+msgid "No messages"
+msgstr "Сообщений нет"
+
+msgid "Please enter message..."
+msgstr "Пожалуйста, введите сообщение..."
+
+msgid "Send"
+msgstr "Отправить"
+
+msgid "Dear user,"
+msgstr "Уважаемый пользователь,"
+
+#, python-format
+msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgstr "%(date)s, Вы просили отправить сообщение пользователю '%(recipient)s'."
+
+msgid "Your message has been rejected by the moderator"
+msgstr "Ваше сообщение отклонено модератором"
+
+msgid ", for the following reason:"
+msgstr ", по следующей причине:"
+
+#, python-format
+msgid "'%(sender_first)s %(sender_last)s' has replied to your message from %(date)s:"
+msgstr "’%(sender_first)s %(sender_last)s' ответил(а) на Ваше сообщение от %(date)s:"
+
+#, python-format
+msgid "'%(sender_first)s %(sender_last)s' has posted a message in one of your conversations."
+msgstr "’%(sender_first)s %(sender_last)s' отправил(а) на сообщение в один из Ваших диалогов."
+
+#, python-format
+msgid "You have received a message from the user '%(sender_first)s %(sender_last)s'."
+msgstr "Вы получили сообщение от пользователя '%(sender_first)s %(sender_last)s‘."
+
+msgid "This message was sent in a conversation with: "
+msgstr "Сообщение было отправлено в диалог с: "
+
+msgid "Project/Group"
+msgstr "Проект/Группа"
+
+msgid "Follow this link to view the message on the site"
+msgstr "Перейдите по этой ссылке для просмотра сообщения на сайте"
+
+msgid "If you do not wish to receive any more emails from us, click here to unsubscribe:"
+msgstr "Если Вы больше не хотите получать от нас электронных писем, кликните здесть, чтобы отписаться:"
+
+msgid "You can also reply to this message directly by replying to this email. When you do, please leave the subject and addressee as it is. The email you reply from *must* be the one you are registered with on the site."
+msgstr "Вы так же можете напрямую ответить на сообщение, ответив на это письмо. Если вы так делаете, пожалуйста, оставьте тему и адресатов в инходном виде. Почтовый ящик, с которого вы отвечаете, должен быть зарегистрирован на сайте."
+
+msgid "WARNING: Your reply will be sent to all participants of this conversation!"
+msgstr "ПРЕДУПРЕЖДЕНИЕ: Ваш ответ будет отправлен всем участникам этого диалога!"
+
+#, python-format
+msgid "Message \"%(subject)s\" on the site %(sitename)s"
+msgstr "Сообщение \"%(subject)s\" на сайте %(sitename)s"
+
+msgid "Dear visitor,"
+msgstr "Уважаемый посетитель,"
+
+msgid "As a reminder, please find below the content of your message."
+msgstr "В качестве напоминания ниже Вы найдете содержание Вашего сообщения."
+
+#, python-format
+msgid "On %(date)s, you sent a message to the user '%(sender_first)s %(sender_last)s'."
+msgstr "%(date)s Вы отправили сообщение пользователю '%(sender_first)s %(sender_last)s‘."
+
+msgid "Please find below the answer from your correspondent."
+msgstr "Ниже Вы найдете ответ Вашего собеседника."
+
+msgid "Thank you again for your interest in our services."
+msgstr "Еще раз благодарим за интерес, проявленный к нашей работе."
+
+msgid "For more comfort, we encourage you to open an account on the site."
+msgstr "Чтобы Вам было еще удобнее, рекомендуем открыть аккаунт на этой странице."
+
+msgid "The site administrator"
+msgstr "Администратор сайта"
+
+msgid "Inbox"
+msgstr "Входящие"
+
+msgid "Sent"
+msgstr "Отправленные"
+
+msgctxt "the noun for an Archive"
+msgid "Archive"
+msgstr "Архив"
+
+msgid "Trash"
+msgstr "Корзина"
+
+msgid "Write"
+msgstr "Написать"
+
+msgid "Reply"
+msgstr "Ответить"
+
+msgid "Recipient"
+msgstr "Адресат"
+
+msgid "Conversation"
+msgstr "Диалог"
+
+msgid "Conversation with members from"
+msgstr "Диалог с членами из"
+
+msgid "Conversation with"
+msgstr "Диалог с"
+
+#, python-format
+msgid "Show all %(count)s participants"
+msgstr "Пказать всех %(count)s участников"
+
+msgid "Me"
+msgstr "Я"
+
+msgid "Answer"
+msgstr "Ответ"
+
+msgid "Reply..."
+msgstr "Ответить..."
+
+#, python-format
+msgid "Reply to %(sender_name)s"
+msgstr "Ответить %(sender_name)s"
+
+#, python-format
+msgid "Reply to all %(adressee_count)s"
+msgstr "Ответить всем %(adressee_count)s"
+
+msgid "Your reply could not be matched to an existing message."
+msgstr "Ваш ответ не может быть соотнесен с существующим сообщением."
+
+msgid "An internal error occured."
+msgstr "Случилась внутренняя ошибка."
+
+msgid "The email adress you sent the reply from is not the one associated with your user account. Please send direct replies only from the email adress you are registered with on the site!"
+msgstr "Электронный адрес, с которого Вы отправляете ответ, не связан с Вашим аккаунтом. Пожалуйста, отправляйте ответы только с тех электронных адресов, которые Вы зарегистрировали на сайте!"
+
+msgid "There was an error when processing your message text!"
+msgstr "Случилась ошибка при обработке текста Вашего сообщения!"
+
+msgid "Your direct reply failed!"
+msgstr "Ваш прямой ответ не доставлен!"
+
+msgid "Select at least one object."
+msgstr "Выберите хотя бы один объект."
+
+msgid "Messages or conversations successfully archived."
+msgstr "Сообщения или диалоги архивированы."
+
+msgid "Messages or conversations successfully deleted."
+msgstr "Сообщения или диалоги удалены."
+
+msgid "Messages were marked as read."
+msgstr "Сообщения отмечены как прочитанные."
+
+msgid "Messages or conversations successfully recovered."
+msgstr "Сообщения или диалоги восстановлены."
+
+#~ msgid "Request about your project \"%(group_name)s\""
+#~ msgstr "Запрос о Вашем проекте \"%(group_name)s\""
+
+#~ msgid "Request about your group \"%(group_name)s\""
+#~ msgstr "Запрос о Вашей группе \"%(group_name)s\""
+
+#~ msgid "Mark All"
+#~ msgstr "Отметить все"
+
+#~ msgid "Deselect All"
+#~ msgstr "Отменить все отметки"
+
+#~ msgid "You have received a copy of a response from the user '%(sender_first)s %(sender_last)s'."
+#~ msgstr "Вы получили копию ответа от пользователя '%(sender_first)s %(sender_last)s'"

@@ -1,0 +1,1336 @@
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-09 16:30+0100\n"
+"Language: kk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Restart BBB rooms"
+msgstr ""
+
+msgid "Events"
+msgstr "Шаралар"
+
+msgctxt "the_app"
+msgid "event"
+msgstr "the_app event"
+
+msgid "A user created a new event"
+msgstr "Пайдаланушы жаңа шара құрды"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s created the event %(object_name)s"
+msgstr "%(sender_name)s жаңа шара сауалнамасын жасады"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s created %(count)d events"
+msgstr "%(sender_name)s жаңа шара құрды"
+
+#, python-format
+msgid "%(sender_name)s created a new event"
+msgstr "%(sender_name)s жаңа шара құрды"
+
+#, python-format
+msgid "A new event: \"%(object_name)s\" was announced in %(team_name)s."
+msgstr "Жаңа шара: „%(object_name)s“ %(team_name)s ішінде жарияланды."
+
+msgid "A user created a new event poll"
+msgstr "Пайдаланушы жаңа шара сауалнамасын жасады"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s created the event poll %(object_name)s"
+msgstr "„%(object_name)s“ %(team_name)s шара сауалнамасында %(sender_name)s дауыс берді."
+
+#, fuzzy, python-format
+msgid "%(sender_name)s created %(count)d event polls"
+msgstr "%(sender_name)s жаңа шара сауалнамасын жасады"
+
+#, python-format
+msgid "%(sender_name)s created a new event poll"
+msgstr "%(sender_name)s жаңа шара сауалнамасын жасады"
+
+#, python-format
+msgid "A new event poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Жаңа шара сауалнамасы: „%(object_name)s“ %(team_name)s ішінде жасалды."
+
+msgid "A user commented on one of your events"
+msgstr "Пайдаланушы сіздің шараларыңыздың біріне комментарий қалдырды"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s commented on your event %(object_name)s"
+msgstr "%(team_name)s шараларыңызға %(sender_name)s пікір жазды."
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your event %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your event %(object_name)s"
+msgstr[0] "%(team_name)s шараларыңызға %(sender_name)s пікір жазды."
+
+#, python-format
+msgid "%(sender_name)s commented on your event"
+msgstr "%(sender_name)s сіздің шараңызға комментарий қалдырды"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your events"
+msgstr "%(sender_name)s сіздің шараңыздың біріне комментарий қалдырды"
+
+msgid "A user commented on a event you were tagged in"
+msgstr "Пайдаланушы сіз белгіленген шаралардың біріне комментарий қалдырды"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s commented on the event %(object_name)s"
+msgstr "%(team_name)s шараларыңызға %(sender_name)s пікір жазды."
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the event %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the event %(object_name)s"
+msgstr[0] "%(team_name)s шараларыңызға %(sender_name)s пікір жазды."
+
+#, fuzzy
+msgid "You were tagged in this event"
+msgstr "Сіз шара жасадыңыз"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you were tagged in"
+msgstr "%(sender_name)s сіз белгіленген шаралардың біріне комментарий қалдырды"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you were tagged in in %(team_name)s"
+msgstr "%(team_name)s сіз %(sender_name)s те белгіленген шараға комментарий қалдырды"
+
+msgid "A user commented on an event you voted in"
+msgstr "Пайдаланушы сіз дауыс берген шараға комментарий қалдырды"
+
+#, fuzzy
+msgid "You voted on this event"
+msgstr "Сіз шара жасадыңыз"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you voted in"
+msgstr "%(sender_name)s сіз дауыс берген шараға комментарий қалдырды"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you voted in in %(team_name)s"
+msgstr "%(team_name)s сіз %(sender_name)s да дауыс берген шараға комментарий қалдырды"
+
+msgid "A user commented on an event you are attending"
+msgstr "Пайдаланушы сіз қатысып тұратын шараға түсініктеме берді"
+
+#, fuzzy
+msgid "You are attending this event"
+msgstr "Сіз шара жасадыңыз"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending"
+msgstr "%(sender_name)s сіз қатысып тұратын шараға түсініктеме берді"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending in %(team_name)s"
+msgstr "%(team_name)s сіз %(sender_name)s қатысатын шараға түсініктеме берді"
+
+msgid "A user created a new event in a team you are following"
+msgstr "Пайдаланушы сіз бақылайтын топта жаңа шара жасады"
+
+#, python-format
+msgid "%(sender_name)s created a new event in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s %(team_name)s де жаңа шара құрды (сіз бақылап отырған)"
+
+#, python-format
+msgid "A new event: \"%(object_name)s\" was announced in %(team_name)s (which you follow)."
+msgstr "Жаңа шара: „%(object_name)s“ %(team_name)s ішінде жарияланған (сіз бақылап отырған)."
+
+msgid "A user created a new event poll in a team you are following"
+msgstr "Пайдаланушы сіз бақылап отырған топтағы жаңа шара сауалнамасын жасады"
+
+#, python-format
+msgid "%(sender_name)s created a new event pollin %(team_name)s (which you follow)"
+msgstr "%(sender_name)s шараның %(team_name)s жаңа сауалнамасын жасады (сіз бақылап отырған)"
+
+#, python-format
+msgid "A new event poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Жаңа сауалнама шарасы: „%(object_name)s“ %(team_name)s де (сіз бақылап отырған) жасалды."
+
+msgid "A user commented on an event you are following"
+msgstr "Пайдаланушы сіз бақылайтын шараға комментарий қалдырды"
+
+msgid "You are following this event"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are following"
+msgstr "Сіз бақылайтын шараға %(sender_name)s комментарий қалдырды"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are following in %(team_name)s"
+msgstr "%(team_name)s де сіз бақылап жатқан шараға %(sender_name)s комментарий қалдырды"
+
+msgid "A user updated an event"
+msgstr "Пайдаланушы шараны жаңартты"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s updated the event %(object_name)s"
+msgstr "„%(object_name)s“ %(team_name)s шара сауалнамасында %(sender_name)s дауыс берді."
+
+#, python-format
+msgid "%(sender_name)s updated an event you are following"
+msgstr "%(sender_name)s сіз қатысатын шараны жаңартты"
+
+#, python-format
+msgid "The event \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "„%(object_name)s“ шарасы %(team_name)s-ге жаңартылды."
+
+#, fuzzy
+msgid "A user updated an event you are attending"
+msgstr "Пайдаланушы сіз қатысып тұратын шараға түсініктеме берді"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s updated an event you are attending"
+msgstr "%(sender_name)s сіз қатысатын шараны жаңартты"
+
+msgid "A user updated an event poll"
+msgstr "Пайдаланушы шара сауалнамасын жаңартты"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s changed the event poll %(object_name)s"
+msgstr "„%(object_name)s“ %(team_name)s шара сауалнамасында %(sender_name)s дауыс берді."
+
+#, fuzzy
+msgid "You are following this event poll"
+msgstr "Бұл сауалнамаға әлі ешкім дауыс берген жоқ."
+
+#, python-format
+msgid "%(sender_name)s updated an event poll you are following"
+msgstr "Сіз бақылап жатқан шараны %(sender_name)s жаңартты"
+
+#, python-format
+msgid "The event poll \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "Жаңа шара: „%(object_name)s“ %(team_name)s ішінде жарияланды."
+
+#, fuzzy
+msgid "A user voted in an event poll"
+msgstr "Пайдаланушы шара сауалнамасын жаңартты"
+
+#, fuzzy, python-format
+msgid "%(sender_name)s voted in the event poll %(object_name)s"
+msgstr "„%(object_name)s“ %(team_name)s шара сауалнамасында %(sender_name)s дауыс берді."
+
+#, fuzzy, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other voted in the event poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others voted in the event poll %(object_name)s"
+msgstr[0] "„%(object_name)s“ %(team_name)s шара сауалнамасында %(sender_name)s дауыс берді."
+
+#, python-format
+msgid "%(sender_name)s voted in an event poll you are following"
+msgstr "%(sender_name)s сіз бақылайтын шарада дауыс берді"
+
+#, python-format
+msgid "%(sender_name)s voted in the event poll \"%(object_name)s\" in %(team_name)s."
+msgstr "„%(object_name)s“ %(team_name)s шара сауалнамасында %(sender_name)s дауыс берді."
+
+msgid "Upcoming Events"
+msgstr "Алдағы шаралар"
+
+msgid "No upcoming events"
+msgstr "Алда шаралар жоқ"
+
+msgid "Created By"
+msgstr "Құрған"
+
+msgid "Soonest Upcoming"
+msgstr "Жақында болатын"
+
+msgid "Newest Created"
+msgstr "Ең жаңа жасалғандар"
+
+msgid "Title"
+msgstr "Атауы"
+
+msgid "No video conference"
+msgstr ""
+
+msgid "BBB-Meeting"
+msgstr ""
+
+msgid "Fairmeeting"
+msgstr ""
+
+msgid "Presenters"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "Жоспарланған"
+
+msgid "Voting open"
+msgstr "Дауыс беру ашық"
+
+msgid "Canceled"
+msgstr "Жойылды"
+
+msgid "Archived Event Poll"
+msgstr "Мұрағатталған шаралық сауалнамалар"
+
+msgid "Start"
+msgstr "Старт"
+
+msgid "End"
+msgstr "Финиш"
+
+msgid "State"
+msgstr "Жай-күйі"
+
+msgid "Is hidden proxy"
+msgstr ""
+
+msgid "Note"
+msgstr "Жазба"
+
+msgid "Event date"
+msgstr "Шара күні"
+
+msgid "Type of video conference available for the event"
+msgstr ""
+
+msgid "Location"
+msgstr "Орналасуы"
+
+msgid "Latitude"
+msgstr "Ендік"
+
+msgid "Longitude"
+msgstr "Ұзындық"
+
+msgid "Street"
+msgstr "Көше"
+
+msgid "ZIP code"
+msgstr "Пошта индексі"
+
+msgid "City"
+msgstr "Қала"
+
+msgid "Is public (on website)"
+msgstr "Жалпыға ашық (сайтта)"
+
+msgid "Image"
+msgstr "Сурет"
+
+msgid "URL"
+msgstr "URL мекен-жайы"
+
+msgid "Original Event Poll"
+msgstr "Шараның бастапқы сауалнамасы"
+
+msgid "Event"
+msgstr "Оқиға"
+
+#, fuzzy, python-format
+msgid "%(event)s (hidden proxy)"
+msgstr "%(event)s (мұрағатталған)"
+
+#, python-format
+msgid "%(event)s (%(date)s - %(end)s)"
+msgstr "%(event)s (%(date)s - %(end)s)"
+
+#, python-format
+msgid "%(event)s (%(from)s - %(to)s)"
+msgstr "%(event)s (%(from)s - %(to)s)"
+
+#, python-format
+msgid "%(event)s (canceled)"
+msgstr "%(event)s (жойылды)"
+
+#, python-format
+msgid "%(event)s (pending)"
+msgstr "%(event)s (күтілуде)"
+
+#, python-format
+msgid "%(event)s (archived)"
+msgstr "%(event)s (мұрағатталған)"
+
+#, fuzzy, python-format
+msgid "%(event)s (state unknown)"
+msgstr "%(event)s (күтілуде)"
+
+msgctxt "the subject"
+msgid "Votes"
+msgstr "Дауыстар"
+
+msgid "Suggestion"
+msgstr "Ұсыныс"
+
+msgid "Suggestions"
+msgstr "Ұсыныстар"
+
+msgid "Yes"
+msgstr "Иә"
+
+msgid "Maybe"
+msgstr "Мүмкін"
+
+msgid "No"
+msgstr "Жоқ"
+
+msgid "Voter"
+msgstr "Дауыс беруші"
+
+msgid "Vote"
+msgstr "Дауыс беру"
+
+msgctxt "the subject"
+msgid "Vote"
+msgstr "Дауыс"
+
+msgid "Creator"
+msgstr "Жасаушы"
+
+msgid "Created"
+msgstr "Жасалған"
+
+msgid "Last modified"
+msgstr "Соңғы өзгерген"
+
+msgid "Text"
+msgstr "Мәтін"
+
+msgid "Comment"
+msgstr "Комментарий"
+
+msgid "Comments"
+msgstr "Комментарийлер"
+
+msgid "Lobby Check-in Event"
+msgstr ""
+
+msgid "Stage Stream"
+msgstr ""
+
+msgid "Workshop"
+msgstr ""
+
+msgid "Discussion"
+msgstr ""
+
+msgid "Coffee Table"
+msgstr ""
+
+msgid "Room"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Event Type"
+msgstr "Шара құру"
+
+msgid "Is a Break"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a title for the new event."
+msgid "Event is visible on the conference microsite"
+msgstr "Жаңа шараға атау енгізіңіз."
+
+msgid "Event's description is visible on the conference microsite"
+msgstr ""
+
+msgid "Maximum Event Participants"
+msgstr ""
+
+msgid "Embed code (HTML)"
+msgstr ""
+
+msgid "Presentation file"
+msgstr ""
+
+#, fuzzy
+msgid "Show chat"
+msgstr "Барлығын көрсету"
+
+msgid "Enable Streaming"
+msgstr ""
+
+msgid "Stream URL"
+msgstr ""
+
+msgid "The URL of your streaming provider to receive the incoming stream"
+msgstr ""
+
+#, fuzzy
+msgid "Stream Key"
+msgstr "Көше"
+
+msgid "The key for this specific stream session you created at your streaming provider"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Event"
+msgstr "Шара құру"
+
+#, fuzzy
+msgid "Conference Events"
+msgstr "Шара құру"
+
+#, fuzzy, python-format
+msgid "%(event)s %(type)s"
+msgstr "%(event)s (күтілуде)"
+
+msgid "Create Event"
+msgstr "Шара құру"
+
+msgid "Would you like to create an event"
+msgstr "Шара құрғыңыз келеді ме"
+
+msgid "on"
+msgstr "ішінде"
+
+msgid "from"
+msgstr "кейін"
+
+msgid "until"
+msgstr "дейін"
+
+msgid "Cancel"
+msgstr "Жою"
+
+msgid "OK"
+msgstr "ОК"
+
+msgctxt "time"
+msgid "all day"
+msgstr "тәулік бойы"
+
+msgctxt "time"
+msgid "at"
+msgstr "уақыт"
+
+msgctxt "time"
+msgid "o'clock"
+msgstr "сағат"
+
+msgctxt "time"
+msgid "from"
+msgstr "кейін"
+
+msgctxt "time"
+msgid "until"
+msgstr "дейін"
+
+#, python-format
+msgid "Add %(event_type_verbose)s in Room %(room_name)s"
+msgstr ""
+
+#, python-format
+msgid "Edit %(event_type_verbose)s \"%(event_title)s\" in Room %(room_name)s"
+msgstr ""
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "Өрістердің бірінде қате пайда болды. Мұны сақтаудан бұрын жөндеңіз!"
+
+#, fuzzy
+msgid "Enter a title for the conference event."
+msgstr "Жаңа шараға атау енгізіңіз."
+
+#, fuzzy
+msgid "Event is a break"
+msgstr "Шара күні"
+
+msgid "Check this to create an empty break event that shows up in the agenda and timeline"
+msgstr ""
+
+msgid "Description and Infos"
+msgstr "Сипаттама және ақпарат"
+
+msgid "Description"
+msgstr "Сипаттамасы"
+
+msgid "Enter a description for the event"
+msgstr "Шараның сипаттамасын енгізіңіз"
+
+msgid "Show this event on microsite"
+msgstr ""
+
+msgid "Uncheck this to hide the event on microsite"
+msgstr ""
+
+msgid "Show the event's description on microsite"
+msgstr ""
+
+msgid "Uncheck this to disable platform-wide viewing of the event's description"
+msgstr ""
+
+msgid "Uncheck this to disable public viewing of the event's description"
+msgstr ""
+
+msgid "Example:"
+msgstr ""
+
+#, fuzzy
+msgid "Stream URL for the Event"
+msgstr "Шараға сыртқы сілтеме"
+
+msgid "Custom embed code (HTML)"
+msgstr ""
+
+msgid "How many participants can join the video call before it is full."
+msgstr ""
+
+msgid "Note that changing this setting will have no effect while an event is running."
+msgstr ""
+
+#, fuzzy
+msgid "BBB video conference options"
+msgstr "Шара құру"
+
+msgid "Upload a preview image for the Conference Event"
+msgstr ""
+
+msgid "Will be shown on the event card in the conference room."
+msgstr ""
+
+msgid "The presenters will be shown in order in the event and will receive Moderator permissions for the BBB-Room"
+msgstr ""
+
+msgid "The presentation file (e.g. PDF) will be pre-uploaded to the BBB room."
+msgstr ""
+
+msgid "Note: If a slide is subsequently added to an existing event, it does not automatically appear in the event if this event was recently attended and is therefore active. This requires an active ending of the event or a 5-minute idle time without participants until the event is automatically ended. "
+msgstr ""
+
+msgid "You can actively end an existing event room by clicking on \"End Meeting\" in the top right-hand corner of the room in the \"Three-Dot Menu\"."
+msgstr ""
+
+#, fuzzy
+msgid "Show room chat in the event"
+msgstr "Сіз шара жасадыңыз"
+
+msgid "Check this to show rocket chat in the sidebar."
+msgstr ""
+
+#, fuzzy
+msgid "Stream this event"
+msgstr "Шараға сыртқы сілтеме"
+
+msgid "Please note: Streaming is only available for premium conferences. If you would like to use streaming, please request it explicitly when booking. Otherwise, these settings have no function."
+msgstr ""
+
+msgid "You can set up the BBB event to be streamed to a streaming provider (e.g. YouTube)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Once set up and activated, a streaming-bot will enter the event and stream all video and audio to the selected stream endpoint.\n"
+"The bot will enter and start streaming %(start_minutes)s minutes before the event start time and stop streaming and leave %(end_minutes)s minutes after the event end time.\n"
+"You can adjust the meeting times on-the-fly to allow for longer streaming if the event runs longer than expected."
+msgstr ""
+
+msgid "If you are using the maximum participant limit, please allow for the streaming bot's additional participant spot."
+msgstr ""
+
+msgid "Enable Streaming this BBB meeting"
+msgstr ""
+
+msgid "Create"
+msgstr "Жасау"
+
+msgid "Save"
+msgstr "Сақтау"
+
+#, fuzzy
+msgid "Create and create another"
+msgstr "сіз шара жасадыңыз"
+
+#, fuzzy
+msgid "Save and create another"
+msgstr "сіз шара жасадыңыз"
+
+msgid "Add unscheduled event"
+msgstr "Жоспардан тыс шараны қосу"
+
+msgid "Edit"
+msgstr "Өңдеу"
+
+msgid "Event Polls"
+msgstr "Шаралар сауалнамалары"
+
+msgid "Enter a title for the new event to be scheduled."
+msgstr "Жоспарланатын жаңа шараның атын енгізіңіз."
+
+msgid "Dates"
+msgstr "Мерзімдері"
+
+msgid "Please select the available days in the calendar."
+msgstr "Күнтізбедегі бос күндерді таңдаңыз."
+
+msgid "You can select the same day more than once."
+msgstr "Бір күнді бірнеше рет таңдауыңызға болады."
+
+msgid "Time: e.g. 10 or 10:30."
+msgstr "Уақыты: мысалы, 10 немесе 10:30."
+
+msgid "Time"
+msgstr "Уақыт"
+
+msgid "Note: You cannot edit the dates for this event poll because someone has already cast their vote!"
+msgstr "Ескерту: Сіз бұл шаралық сауалнаманың мерзімін өзгерте алмайсыз, өйткені біреу дауыс беріп қойған!"
+
+msgid "Example: http://mywebsite.com"
+msgstr "Мысал: http://mywebsite.com"
+
+msgid "External Link for the event"
+msgstr "Шараға сыртқы сілтеме"
+
+msgid "Delete"
+msgstr "Жою"
+
+msgid "There are no open event polls."
+msgstr "Ашық сауалнамалар жоқ."
+
+msgid "Planned Events"
+msgstr "Жоспарланған іс-шаралар"
+
+msgid "Past Events"
+msgstr "Өткен шаралар"
+
+msgid "Archived Event Polls"
+msgstr "Мұрағатталған сауалнамалар"
+
+msgid "There are no archived event polls."
+msgstr "Мұрағатталған сауалнамалар жоқ."
+
+#, python-format
+msgid "Vote for %(title)s"
+msgstr "%(title)s үшін дауыс беру"
+
+#, python-format
+msgid "Archived: %(title)s"
+msgstr "Мұрағатталған: %(title)s"
+
+msgid "This event has already been scheduled. Voting is closed."
+msgstr "Бұл шара бұрыннан жоспарланған. Дауыс беру жабық."
+
+msgid "This event has been canceled. Voting is closed."
+msgstr "Бұл шара тоқтатылды. Дауыс беру жабық."
+
+msgid "Nobody has voted for this event poll yet."
+msgstr "Бұл сауалнамаға әлі ешкім дауыс берген жоқ."
+
+msgid "Create an event from one of the suggestions"
+msgstr "Ұсынылған нұсқалардың бірінен шара жасаңыз"
+
+#, python-format
+msgid "Set the date to %(suggestion)s."
+msgstr "%(suggestion)s өту күнін белгілеңіз."
+
+msgid "When do you have time?"
+msgstr "Сізде қашан уақыт болады?"
+
+msgid "There are no date suggestions for this event poll yet!"
+msgstr "Бұл шара сауалнамасына әлі күні бойынша ұсыныс жоқ!"
+
+#, python-format
+msgid "Do you really want to delete unscheduled event „%(title)s“?"
+msgstr "Жоспарланбаған „%(title)s“ шараны шынымен жойғыңыз келе ме?"
+
+msgid "Delete unscheduled event"
+msgstr "Жоспарланбаған шараны жою"
+
+msgid "You will now receive notifications for comments or when this event poll is changed and whenever somebody casts their vote."
+msgstr "Енді сіз ескертулер немесе шара туралы сауалнамадағы өзгерістер туралы, сондай-ақ біреудің дауыс бергені туралы хабарландырулар аласыз."
+
+msgid "Write comment..."
+msgstr "Пікір жазыңыз."
+
+msgid "Post"
+msgstr "Пошта"
+
+msgid "Add event"
+msgstr "Шара қосу"
+
+#, python-format
+msgid ""
+"\n"
+"                            Note: After this event will be posted, each user of %(forum_name)s may be able to see it.<br>\n"
+"                            If you do not want this, please, use another group or project of your choice.\n"
+"                            "
+msgstr ""
+
+msgid "Enter a title for the new event."
+msgstr "Жаңа шараға атау енгізіңіз."
+
+#, fuzzy
+msgid "Include a video conference"
+msgstr "Шара құру"
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
+
+msgid "The first uploaded image will be displayed as a wallpaper."
+msgstr "Алғашқы жүктелген сурет тұсқағаз ретінде көрсетіледі."
+
+msgid "If you set this, your event will be shown on the map! (if permitted by its visibility settings)"
+msgstr "Егер сіз осы параметрді орнатсаңыз, шараңыз картада көрсетіледі! (егер көріну параметрлері рұқсат етсе)"
+
+msgid "Calendar"
+msgstr "Күнтізбе"
+
+msgid "Copy this iCal-link into your calendar application to import current events:"
+msgstr "Ағымдағы шараларды жүктеу үшін осы iCal сілтемені күнтізбелік бағдарламаңызға көшіріңіз:"
+
+msgid "Also include all events from projects within this group in feed"
+msgstr "Ақпараттық материалдарға осы топқа кіретін жобалардың барлық шараларын қосыңыз"
+
+msgid "iCal Feed"
+msgstr "iCal арнасы"
+
+msgid "Enter the title for a new event or select a day in the Calendar."
+msgstr "Жаңа шараның атын енгізіңіз немесе күнтізбеге күн таңдаңыз."
+
+msgid "Export event feed"
+msgstr "Оқиға туралы ақпаратты жіберу"
+
+#, fuzzy
+msgid "Create Conference Event"
+msgstr "Шара құру"
+
+msgid "Conference events can be created directly from the rooms themselves of the conference interface or in a central place here"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Room Management"
+msgstr "Шара құру"
+
+#, fuzzy
+msgid "There are no conference events."
+msgstr "Ашық сауалнамалар жоқ."
+
+msgid "There are no current or future events."
+msgstr "Ағымдағы және болашақ шаралар жоқ."
+
+msgid "There are no past events."
+msgstr "Өткен шаралар жоқ."
+
+msgid "There are no upcoming events"
+msgstr "Келе жатқан шаралар жоқ"
+
+msgid "Back to Events"
+msgstr "Шараларға оралу"
+
+msgid "Return to Event Polls"
+msgstr "Сауалнамаларға оралу"
+
+msgid "Return to Archived Event Polls"
+msgstr "Мұрағатталған шара сауалнамаларына оралу"
+
+msgid "List"
+msgstr "Тізім"
+
+msgid "by"
+msgstr "кімнен"
+
+msgid "View"
+msgstr ""
+
+msgid "Created Event"
+msgstr "Құрылған шара"
+
+#, python-format
+msgid "Do you really want to delete event „%(title)s“?"
+msgstr "„%(title)s“ шарасын шынымен жойғыңыз келе ме?"
+
+msgid "Delete event"
+msgstr "Шараны жою"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you are attending in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Сәлем, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s сіз қатысқан шараға түсініктеме жіберді %(team_name)s:\n"
+"\n"
+"„%(comment_text)s“\n"
+"\n"
+"\n"
+"іс-шарада:\n"
+"\n"
+"„%(event_title)s“\n"
+"\n"
+"\n"
+"Пікірді көру үшін мына сілтемеге өтіңіз:\n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"Хабарландыру параметрлерін өзгерту үшін мына сілтемені қараңыз: %(notification_settings_url)s )\n"
+"\n"
+"Сіздің командаңыз %(site_name)s.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending in %(team_name)s."
+msgstr "%(team_name)s сіз қатысып жатқан шараға %(sender_name)s түсініктеме берді."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new event \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Сәлем %(receiver_name)s,\n"
+"\n"
+"%(team_name)s ішінде „%(object_name)s“ жаңа шара %(sender_name)s құрылды.\n"
+"\n"
+"Оны мына сілтемені басу арқылы табуға болады:%(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Хабарландыру параметрлерін өзгерту үшін мына сілтемені қараңыз: %(notification_settings_url)s )\n"
+"\n"
+"Сіздің командаңыз %(site_name)s."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you created in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Сәлем, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s сіз құрған шара %(team_name)s ішінде пікір қалдырды:\n"
+"\n"
+"“%(comment_text)s”\n"
+"\n"
+"\n"
+"сіздің шараңызда:\n"
+"\n"
+"“%(event_title)s”\n"
+"\n"
+"\n"
+"Пікірді қарау үшін сілтемені басыңыз: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Хабарламаларды алуды редакциялау үшін сілтемеге басыңыз: %(notification_settings_url)s )\n"
+"\n"
+"Сіздің %(site_name)s командаңыз.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your events in %(team_name)s."
+msgstr "%(team_name)s шараларыңызға %(sender_name)s пікір жазды."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new event \"%(object_name)s\", on %(event_date)s, was announced in %(team_name)s by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Сәлем %(receiver_name)s,\n"
+"\n"
+"Жаңа шара “%(object_name)s”, %(event_date)s, %(team_name)s ішінде %(sender_name)s жарияланды. \n"
+"\n"
+"Оны мына сілтеме арқылы таба аласыз: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Хабарламаларды редакциялау үшін мына сілтемені басыңыз: %(notification_settings_url)s )\n"
+"\n"
+"Сіздің %(site_name)s командаңыз."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you were tagged in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Сәлем, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s сіз белгіленген шарада %(team_name)s пікір қалдырды:\n"
+"\n"
+"“%(comment_text)s”\n"
+"\n"
+"\n"
+"шараңызда:\n"
+"\n"
+"“%(event_title)s”\n"
+"\n"
+"\n"
+"Пікірді қарау үшін сілтемені басыңыз: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Хабарламаларды редакциялау үшін сілтемені басыңыз: %(notification_settings_url)s )\n"
+"\n"
+"Сіздің %(site_name)s командаңыз.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a event you were tagged in %(team_name)s."
+msgstr "%(team_name)s сіз белгілеген шараға %(sender_name)s түсініктеме берді."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event poll you voted in in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event poll:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Сәлем, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s сіз дауыс берген шараға пікір қалдырды %(team_name)s:\n"
+"\n"
+"“%(comment_text)s”\n"
+"\n"
+"\n"
+"шара сауалнамасында:\n"
+"\n"
+"“%(event_title)s”\n"
+"\n"
+"\n"
+"Пікірді қарау үшін сілтемені басыңыз: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Хабарламаларды редакциялау үшін сілетемені басыңыз: %(notification_settings_url)s )\n"
+"\n"
+"Сіздің %(site_name)s командаңыз.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on an event poll you voted in in %(team_name)s."
+msgstr "%(sender_name)s шара туралы сауалнамаға пікір білдірді, сіз дауыс берген %(team_name)s."
+
+msgid "Delete Event"
+msgstr "Шараны жою"
+
+msgid "(Canceled!)"
+msgstr "(Болдырмау!)"
+
+msgid "This is an archived event poll."
+msgstr "Бұл шараларды мұрағаттық шолу."
+
+msgid "The event that was created after the poll can be viewed here:"
+msgstr "Сауалнамадан кейін құрылған шараны мына жерден көруге болады:"
+
+msgid "(No description set)"
+msgstr "(Сипаттама жоқ)"
+
+msgctxt "someone else is going"
+msgid "Going"
+msgstr "Тағы біреу бармақ"
+
+msgctxt "someone else is maybe going"
+msgid "Maybe going"
+msgstr "Мүмкін басқа біреу барады"
+
+msgctxt "someone else can't go"
+msgid "Can't go"
+msgstr "Бару мүмкін емес"
+
+msgctxt "one or many people are going"
+msgid "Going"
+msgid_plural "Going"
+msgstr[0] ""
+"Бара жатыр\n"
+"Бара жатыр"
+
+msgctxt "one or many people are maybe going"
+msgid "Maybe going"
+msgid_plural "Maybe going"
+msgstr[0] ""
+"Мүмкін, барады\n"
+"\n"
+"Мүмкін, барады"
+
+msgctxt "one or many people are not going"
+msgid "Can't go"
+msgid_plural "Can't go"
+msgstr[0] ""
+"Басқа біреу бара алмайды \n"
+"\n"
+"Бару мүмкін емес"
+
+msgid "Going"
+msgstr "Бара жатырмын"
+
+msgid "Maybe going"
+msgstr "Мүмкін, барайын"
+
+msgid "Can't go"
+msgstr "Бара алмаймын"
+
+msgid "Are you going?"
+msgstr "Сен келе жатырсың ба?"
+
+msgid "No Choice"
+msgstr "Таңдау жоқ"
+
+msgid "Add event to your calendar"
+msgstr ""
+
+#, fuzzy
+msgid "Copy this iCal-link into your calendar application to import this event:"
+msgstr "Ағымдағы шараларды жүктеу үшін осы iCal сілтемені күнтізбелік бағдарламаңызға көшіріңіз:"
+
+msgid "Please register or login to join the video conference for this event"
+msgstr ""
+
+msgid "Start/join video conference for this event"
+msgstr ""
+
+msgid "Popout"
+msgstr ""
+
+msgid "Fullscreen"
+msgstr ""
+
+#, fuzzy
+msgid "Video conference"
+msgstr "Шара құру"
+
+msgid "Leave Fullscreen"
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
+#, fuzzy
+msgid "Leave video conference"
+msgstr "Шара құру"
+
+msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
+msgstr ""
+
+msgid "You will now receive notifications for comments or when this event is updated or its details change."
+msgstr "Енді сіз ескертулер туралы хабарландырулар аласыз, сондай-ақ осы шара қашан жаңартылады немесе оның деректері өзгертілетіні жөнінде."
+
+msgid "You created an event"
+msgstr "Сіз шара жасадыңыз"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created an event"
+msgstr "сіз шара жасадыңыз"
+
+msgid "Show all"
+msgstr "Барлығын көрсету"
+
+msgid "Upcoming events"
+msgstr "Алдағы шаралар"
+
+#, python-format
+msgid "Event \"%(title)s\" was edited successfully."
+msgstr "„%(title)s“ шарасы сәтті өңделді."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be edited."
+msgstr "„%(title)s“ шарасын өңдеу мүмкін емес."
+
+msgid "Please use the conference management area to add new workshops!"
+msgstr ""
+
+msgid "The page you requested is not available for this event at this time."
+msgstr "Сіз сұраған бет бұл шара үшін қазір қол жетімді емес."
+
+msgid "One of the event suggestions times could not be understood!"
+msgstr "Іс-шараға арналған ұсыныстардың біреуін түсіну мүмкін емес!"
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was edited successfully."
+msgstr "Жоспардан тыс „%(title)s“ шара сәтті өңделді."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be edited."
+msgstr "Жоспарланбаған „%(title)s“ шарасын өзгерту мүмкін емес."
+
+#, python-format
+msgid "Event \"%(title)s\" was added successfully."
+msgstr "„%(title)s“ шарасы сәтті қосылды."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be added."
+msgstr "„%(title)s“ шарасын қосу мүмкін емес."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was added successfully."
+msgstr "Жоспардан тыс „%(title)s“ шара сәтті қосылды."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be added."
+msgstr "Жоспарланбаған шараны „%(title)s“ қосу мүмкін емес."
+
+msgid "You should define at least one date suggestion."
+msgstr "Жоспарланбаған шараны «% (тақырып) s» қосу мүмкін емес."
+
+#, python-format
+msgid "Event \"%(title)s\" was deleted successfully."
+msgstr "„%(title)s“ шарасы сәтті жойылды."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be deleted."
+msgstr "„%(title)s“ шарасын жою мүмкін емес."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was deleted successfully."
+msgstr "Жоспардан тыс „%(title)s“ шара сәтті жойылды."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be deleted."
+msgstr "Жоспарланбаған „%(title)s“ шарасын жою мүмкін емес."
+
+msgid "Your votes were saved successfully."
+msgstr "Сіздің дауысыңыз сәтті сақталды."
+
+msgid "Your votes could not be saved."
+msgstr "Сіздің дауысыңыз сақталмады."
+
+msgid "This is event is already scheduled. You cannot vote for it any more."
+msgstr "Бұл шара бұрыннан жоспарланған. Енді оған дауыс бере алмайсыз."
+
+msgid "The complete request can only be sent via POST!"
+msgstr "Толық сұранымды тек POST арқылы жіберуге болады!"
+
+msgid "Event cannot be completed: No date was supplied."
+msgstr "Шараны аяқтау мүмкін емес: күні көрсетілмеген."
+
+msgid "The event was created successfully at the specified date."
+msgstr "Іс-шара көрсетілген күні сәтті жасалды."
+
+#, fuzzy
+msgid "Upcoming event"
+msgstr "Алдағы шаралар"
+
+msgid "Your comment was added successfully."
+msgstr "Сіздің пікіріңіз сәтті қосылды."
+
+msgid "Your comment was deleted successfully."
+msgstr "Пікіріңіз сәтті жойылды."
+
+#, fuzzy
+#~ msgid "Now"
+#~ msgstr "Жоқ"
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
+
+#~ msgid "%(sender_name)s voted in"
+#~ msgstr "%(sender_name)s дауыс берді"
+
+#~ msgid "Date"
+#~ msgstr "Күні"
+
+#~ msgid "End date."
+#~ msgstr "Мерзімнің аяқталуы."
+
+#~ msgid "Event poll updated by %(sender_name)s"
+#~ msgstr "%(sender_name)s сауалнаманы жаңартты"
+
+#, fuzzy
+#~ msgid "Example: https://www.youtube.com/watch?v=12345"
+#~ msgstr "Мысал: http://mywebsite.com"
+
+#~ msgid "From"
+#~ msgstr "Кімнен"
+
+#~ msgid "Kalender"
+#~ msgstr "Күнтізбе"
+
+#~ msgid "New event by %(sender_name)s"
+#~ msgstr "%(sender_name)s тен жаңа шара"
+
+#~ msgid "New event by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "%(sender_name)s дан жаңа шара %(team_name)s (сіз бақылап отырған)"
+
+#~ msgid "New event poll by %(sender_name)s"
+#~ msgstr "%(sender_name)s жасаған жаңа шара сауалнамасы"
+
+#~ msgid "New event poll by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "%(sender_name)s %(team_name) s ішінде (сіз бақылап отырған) шаралар туралы жаңа сауалнама"
+
+#~ msgid "Start date."
+#~ msgstr "Басталу күні."
+
+#~ msgid "Until"
+#~ msgstr "Дейін"

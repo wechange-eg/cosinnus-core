@@ -1,0 +1,1343 @@
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-09 16:30+0100\n"
+"Language: hy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Restart BBB rooms"
+msgstr ""
+
+msgid "Events"
+msgstr "Իրադարձություններ"
+
+msgctxt "the_app"
+msgid "event"
+msgstr "իրադարձություն"
+
+msgid "A user created a new event"
+msgstr "Օգտատերը ստեղծել է նոր իրադարձություն"
+
+#, python-format
+msgid "%(sender_name)s created the event %(object_name)s"
+msgstr "%(sender_name)s ստեղծել է %(object_name)s իրադարձությունը"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d events"
+msgstr "%(sender_name)s ստեղծել է %(count)d իրադարձություն"
+
+#, python-format
+msgid "%(sender_name)s created a new event"
+msgstr "%(sender_name)s ստեղծել է նոր իրադարձություն"
+
+#, python-format
+msgid "A new event: \"%(object_name)s\" was announced in %(team_name)s."
+msgstr "Նոր իրադարձություն։ \"%(object_name)s\" հայտարարվել է %(team_name)s -ում."
+
+msgid "A user created a new event poll"
+msgstr "Օգտատերը ստեղծել է նոր իրադարձության հարցում"
+
+#, python-format
+msgid "%(sender_name)s created the event poll %(object_name)s"
+msgstr "%(sender_name)s-ը ստեղծել է %(object_name)s իրադարձության հարցում"
+
+#, python-format
+msgid "%(sender_name)s created %(count)d event polls"
+msgstr "%(sender_name)s-ը ստեղծել է %(count)d իրադարձության հարցումներ"
+
+#, python-format
+msgid "%(sender_name)s created a new event poll"
+msgstr "%(sender_name)s-ը ստեղծել է նոր իրադարձության հարցում"
+
+#, python-format
+msgid "A new event poll: \"%(object_name)s\" was created in %(team_name)s."
+msgstr "Նոր իրադարձության հարցում։ \"%(object_name)s\" ստեղծվել է %(team_name)s -ում."
+
+msgid "A user commented on one of your events"
+msgstr "Օգտատերը մեկնաբանել է ձեր իրադարձություններից մեկը"
+
+#, python-format
+msgid "%(sender_name)s commented on your event %(object_name)s"
+msgstr "%(sender_name)s-ը մեկնաբանել է ձեր %(object_name)s իրադարձությունը"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on your event %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your event %(object_name)s"
+msgstr[0] "%(sender_name)s-ը և %(count_minus_one)d ուրիշը մեկնաբանել է ձեր %(object_name)s իրադարձությունը"
+msgstr[1] "%(sender_name)s-ը և %(count_minus_one)d ուրիշները մեկնաբանել են ձեր %(object_name)s իրադարձությունը"
+
+#, python-format
+msgid "%(sender_name)s commented on your event"
+msgstr "%(sender_name)s - ը մեկնաբանել է ձեր իրադարձությունը"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your events"
+msgstr "%(sender_name)s-ը մեկնաբանել է ձեր իրադարձություններից մեկը"
+
+msgid "A user commented on a event you were tagged in"
+msgstr "Օգտատերը մեկնաբանել է իրադարձությունը, որի մեջ դուք նշված եք"
+
+#, python-format
+msgid "%(sender_name)s commented on the event %(object_name)s"
+msgstr "%(sender_name)s- ը մեկնաբանել է %(object_name)s իրադարձությունը"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other commented on the event %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the event %(object_name)s"
+msgstr[0] "%(sender_name)s-ը և %(count_minus_one)d ուրիշը մեկնաբանել է %(object_name)s իրադարձությունը"
+msgstr[1] "%(sender_name)s -ը և %(count_minus_one)d ուրիշները մեկնաբանել են %(object_name)s իրադարձությունը"
+
+msgid "You were tagged in this event"
+msgstr "Դուք նշված եք այս իրադարձության մեջ"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you were tagged in"
+msgstr "%(sender_name)s -ը մեկնաբանել է իրադարձությունը, որի մեջ դուք նշված եք"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you were tagged in in %(team_name)s"
+msgstr "%(sender_name)s -ը մեկնաբանել է իրադարձությունը %(team_name)s-ում, որի մեջ դուք նշված եք"
+
+msgid "A user commented on an event you voted in"
+msgstr "Օգտատերը մեկնաբանել է ձեր քվեարկած իրադարձությունը"
+
+msgid "You voted on this event"
+msgstr "Դուք մեկնաբանել էք այս իրադարձությունը"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you voted in"
+msgstr "%(sender_name)s -ը մեկնաբանել է ձեր քվեարկած իրադարձությունը"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you voted in in %(team_name)s"
+msgstr "%(sender_name)s -ը մեկնաբանել է ձեր քվեարած իրադարձությունը %(team_name)s -ում"
+
+msgid "A user commented on an event you are attending"
+msgstr "Օգտատերը մեկնաբանել է այն իրադարձությունը, որին դուք մասնակցում եք"
+
+msgid "You are attending this event"
+msgstr "Դուք մասնակցում եք այս իրադարձությանը"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending"
+msgstr "%(sender_name)s -ը մեկնաբանել է այն իրադարձությունը, որին դուք մասնակցում եք"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending in %(team_name)s"
+msgstr "%(sender_name)s -ը մեկնաբանել է այն իրադարձությունը, որին դուք մասնակցում եք %(team_name)s -ում"
+
+msgid "A user created a new event in a team you are following"
+msgstr "Օգտատերը ստեղծել է նոր իրադարձություն թիմում, որին դուք հետևում եք"
+
+#, python-format
+msgid "%(sender_name)s created a new event in %(team_name)s (which you follow)"
+msgstr "%(sender_name)s -ը ստեղծել է նոր իրադարձություն %(team_name)s -ում (որին դուք հետևում եք)"
+
+#, python-format
+msgid "A new event: \"%(object_name)s\" was announced in %(team_name)s (which you follow)."
+msgstr "Նոր իրադարձություն ՝ \"%(object_name)s\"- ը հայտարարվել է %(team_name)s- ում (որին հետևում եք)."
+
+msgid "A user created a new event poll in a team you are following"
+msgstr "Օգտատերը ստեղծել է նոր իրադարձությունների հարցում այն թիմում, որին դուք հետևում եք"
+
+#, python-format
+msgid "%(sender_name)s created a new event pollin %(team_name)s (which you follow)"
+msgstr "%(sender_name)s -ը ստեղծել է նոր իրադարձություն %(team_name)s -ում (որին դուք հետևում եք)"
+
+#, python-format
+msgid "A new event poll: \"%(object_name)s\" was created in %(team_name)s (which you follow)."
+msgstr "Նոր իրադարձությունների հարցում ՝ \"%(object_name)s\" ստեղծվել է %(team_name)s -ում (որին դուք հետևում եք)"
+
+msgid "A user commented on an event you are following"
+msgstr "Օգտատերը մեկնաբանել է իրադարձությունը, որին դուք հետևում եք"
+
+msgid "You are following this event"
+msgstr "Դուք հետևում եք այս իրադարձությանը"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are following"
+msgstr "%(sender_name)s -ը մեկնաբանել է իրադարձությունը, որին դուք հետևում եք"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are following in %(team_name)s"
+msgstr "%(sender_name)s -ը մեկնաբանել է իրադարձությունը, որին դուք հետևում եք %(team_name)s -ում"
+
+msgid "A user updated an event"
+msgstr "Օգտատերը թարմացրել է իրադարձությունը"
+
+#, python-format
+msgid "%(sender_name)s updated the event %(object_name)s"
+msgstr "%(sender_name)s -ը թարմացրել է %(object_name)s իրադարձությունը"
+
+#, python-format
+msgid "%(sender_name)s updated an event you are following"
+msgstr "%(sender_name)s -ը թարմացրել է իրադարձությունը, որին դուք հետևում եք"
+
+#, python-format
+msgid "The event \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "\"%(object_name)s\" իրադարձությունը %(team_name)s -ում թարմացվել է."
+
+msgid "A user updated an event you are attending"
+msgstr "Օգտատերը թարմացրել է իրադարձությունը, որին դուք մասնակցում եք"
+
+#, python-format
+msgid "%(sender_name)s updated an event you are attending"
+msgstr "%(sender_name)s -ը թարմացրել է իրադարձությունը, որին դուք մասնակցում եք"
+
+msgid "A user updated an event poll"
+msgstr "Օգտատերը թարմացրել է իրադարձության հարցումը"
+
+#, python-format
+msgid "%(sender_name)s changed the event poll %(object_name)s"
+msgstr "%(sender_name)s -ը փոխել է %(object_name)s իրադարձության հարցումը"
+
+msgid "You are following this event poll"
+msgstr "Դուք հետևում եք այս իրադարձության հարցմանը"
+
+#, python-format
+msgid "%(sender_name)s updated an event poll you are following"
+msgstr "%(sender_name)s -ը թարմացրել է իրադարձության հարցումը, որին դուք հետևում եք"
+
+#, python-format
+msgid "The event poll \"%(object_name)s\" was updated in %(team_name)s."
+msgstr "\"%(object_name)s\" իրադարձության հարցումը թարմացվել է %(team_name)s -ում."
+
+msgid "A user voted in an event poll"
+msgstr "Օգտատերը քվեարկել է իրադարձության հարցմանը"
+
+#, python-format
+msgid "%(sender_name)s voted in the event poll %(object_name)s"
+msgstr "%(sender_name)s -ը քվեարկել է %(object_name)s իրադարձության հարցմանը"
+
+#, python-format
+msgid "%(sender_name)s and %(count_minus_one)d other voted in the event poll %(object_name)s"
+msgid_plural "%(sender_name)s and %(count_minus_one)d others voted in the event poll %(object_name)s"
+msgstr[0] "%(sender_name)s -ը և %(count_minus_one)d ուրիշը քվեարկել է %(object_name)s իրադարձության հարցմանը"
+msgstr[1] "%(sender_name)s -ը և %(count_minus_one)d ուրիշները քվեարկել են %(object_name)s իրադարձության հարցմանը"
+
+#, python-format
+msgid "%(sender_name)s voted in an event poll you are following"
+msgstr "%(sender_name)s -ը քվեարկել է իրադարձության հարցմանը, որին դուք հետևում եք"
+
+#, python-format
+msgid "%(sender_name)s voted in the event poll \"%(object_name)s\" in %(team_name)s."
+msgstr "%(sender_name)s -ը քվեարկել է \"%(object_name)s\" իրադարձության հարցմանը %(team_name)s -ում."
+
+msgid "Upcoming Events"
+msgstr "Սպասվող իրադարձություններ"
+
+msgid "No upcoming events"
+msgstr "Առաջիկա իրադարձություններ չկան"
+
+msgid "Created By"
+msgstr "Ստեղծել է"
+
+msgid "Soonest Upcoming"
+msgstr "Շուտով սպասվող"
+
+msgid "Newest Created"
+msgstr "Նորագույն ստեղծված"
+
+msgid "Title"
+msgstr "Վերնագիր"
+
+msgid "No video conference"
+msgstr ""
+
+msgid "BBB-Meeting"
+msgstr ""
+
+msgid "Fairmeeting"
+msgstr ""
+
+msgid "Presenters"
+msgstr ""
+
+msgid "Scheduled"
+msgstr "Պլանավորված"
+
+msgid "Voting open"
+msgstr "Քվեարկությունը բաց է"
+
+msgid "Canceled"
+msgstr "Չեղարկված"
+
+msgid "Archived Event Poll"
+msgstr "Արխիվացված իրադարձությունների հարցում"
+
+msgid "Start"
+msgstr "Սկիզբ"
+
+msgid "End"
+msgstr "Վերջ"
+
+msgid "State"
+msgstr "Կարգավիճակ"
+
+msgid "Is hidden proxy"
+msgstr ""
+
+msgid "Note"
+msgstr "Նշում"
+
+msgid "Event date"
+msgstr "Իրադարձության ամսաթիվը"
+
+msgid "Type of video conference available for the event"
+msgstr ""
+
+msgid "Location"
+msgstr "Գտնվելու վայրը"
+
+msgid "Latitude"
+msgstr "Լայնություն"
+
+msgid "Longitude"
+msgstr "Երկայնություն"
+
+msgid "Street"
+msgstr "Փողոց"
+
+msgid "ZIP code"
+msgstr "Փոստային ինդեքս"
+
+msgid "City"
+msgstr "Քաղաք"
+
+msgid "Is public (on website)"
+msgstr "Հասարակական է (կայքում)"
+
+msgid "Image"
+msgstr "Պատկեր"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Original Event Poll"
+msgstr "Իրադարձությունների հարցման Բնօրինակը"
+
+msgid "Event"
+msgstr "Իրադարձություն"
+
+#, fuzzy, python-format
+msgid "%(event)s (hidden proxy)"
+msgstr "%(event)s (արխիվացված)"
+
+#, python-format
+msgid "%(event)s (%(date)s - %(end)s)"
+msgstr "%(event)s (%(date)s - %(end)s)"
+
+#, python-format
+msgid "%(event)s (%(from)s - %(to)s)"
+msgstr "%(event)s (%(from)s - %(to)s)"
+
+#, python-format
+msgid "%(event)s (canceled)"
+msgstr "%(event)s (ջնջված)"
+
+#, python-format
+msgid "%(event)s (pending)"
+msgstr "%(event)s (սպասվող)"
+
+#, python-format
+msgid "%(event)s (archived)"
+msgstr "%(event)s (արխիվացված)"
+
+#, fuzzy, python-format
+msgid "%(event)s (state unknown)"
+msgstr "%(event)s (սպասվող)"
+
+msgctxt "the subject"
+msgid "Votes"
+msgstr "Քվեներ"
+
+msgid "Suggestion"
+msgstr "Առաջարկություն"
+
+msgid "Suggestions"
+msgstr "Առաջարկություններ"
+
+msgid "Yes"
+msgstr "Այո"
+
+msgid "Maybe"
+msgstr "Հնարավոր է"
+
+msgid "No"
+msgstr "Ոչ"
+
+msgid "Voter"
+msgstr "Քվեարկող"
+
+msgid "Vote"
+msgstr "Քվեարկել"
+
+msgctxt "the subject"
+msgid "Vote"
+msgstr "Քվեարկություն"
+
+msgid "Creator"
+msgstr "Ստեղծող"
+
+msgid "Created"
+msgstr "Ստեղծված"
+
+msgid "Last modified"
+msgstr "Վերջին փոփոխությունը"
+
+msgid "Text"
+msgstr "Տեքստ"
+
+msgid "Comment"
+msgstr "Մեկնաբանություն"
+
+msgid "Comments"
+msgstr "Մեկնաբանություններ"
+
+msgid "Lobby Check-in Event"
+msgstr ""
+
+msgid "Stage Stream"
+msgstr ""
+
+msgid "Workshop"
+msgstr ""
+
+msgid "Discussion"
+msgstr ""
+
+msgid "Coffee Table"
+msgstr ""
+
+msgid "Room"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Event Type"
+msgstr "Ստեղծել Իրադարձություն"
+
+msgid "Is a Break"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a title for the new event."
+msgid "Event is visible on the conference microsite"
+msgstr "Մուտքագրեք վերնագիր նոր իրադարձության համար."
+
+msgid "Event's description is visible on the conference microsite"
+msgstr ""
+
+msgid "Maximum Event Participants"
+msgstr ""
+
+msgid "Embed code (HTML)"
+msgstr ""
+
+msgid "Presentation file"
+msgstr ""
+
+#, fuzzy
+msgid "Show chat"
+msgstr "Ցուցադրել բոլորը"
+
+msgid "Enable Streaming"
+msgstr ""
+
+msgid "Stream URL"
+msgstr ""
+
+msgid "The URL of your streaming provider to receive the incoming stream"
+msgstr ""
+
+#, fuzzy
+msgid "Stream Key"
+msgstr "Փողոց"
+
+msgid "The key for this specific stream session you created at your streaming provider"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Event"
+msgstr "Ստեղծել Իրադարձություն"
+
+#, fuzzy
+msgid "Conference Events"
+msgstr "Ստեղծել Իրադարձություն"
+
+#, fuzzy, python-format
+msgid "%(event)s %(type)s"
+msgstr "%(event)s (սպասվող)"
+
+msgid "Create Event"
+msgstr "Ստեղծել Իրադարձություն"
+
+msgid "Would you like to create an event"
+msgstr "Ցանկանում՞մ եք ստեղծել իրադարձություն"
+
+msgid "on"
+msgstr "վրա"
+
+msgid "from"
+msgstr "սկսած"
+
+msgid "until"
+msgstr "մինչև"
+
+msgid "Cancel"
+msgstr "Չեղարկել"
+
+msgid "OK"
+msgstr "OK"
+
+msgctxt "time"
+msgid "all day"
+msgstr "ամբողջ օրը"
+
+msgctxt "time"
+msgid "at"
+msgstr "-ին"
+
+msgctxt "time"
+msgid "o'clock"
+msgstr "ժամը"
+
+msgctxt "time"
+msgid "from"
+msgstr "սկսած"
+
+msgctxt "time"
+msgid "until"
+msgstr "մինչև"
+
+#, python-format
+msgid "Add %(event_type_verbose)s in Room %(room_name)s"
+msgstr ""
+
+#, python-format
+msgid "Edit %(event_type_verbose)s \"%(event_title)s\" in Room %(room_name)s"
+msgstr ""
+
+msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgstr "Ձեր մուտքագրած դաշտերից մեկում առկա է սխալ: Խնդրում ենք ուղղել այն նախքան պահպանելը!"
+
+#, fuzzy
+msgid "Enter a title for the conference event."
+msgstr "Մուտքագրեք վերնագիր նոր իրադարձության համար."
+
+#, fuzzy
+msgid "Event is a break"
+msgstr "Իրադարձության ամսաթիվը"
+
+msgid "Check this to create an empty break event that shows up in the agenda and timeline"
+msgstr ""
+
+msgid "Description and Infos"
+msgstr "Նկարագրություն և տեղեկատվություն"
+
+msgid "Description"
+msgstr "Նկարագրություն"
+
+msgid "Enter a description for the event"
+msgstr "Մուտքագրեք իրադարձության նկարագրություն"
+
+msgid "Show this event on microsite"
+msgstr ""
+
+msgid "Uncheck this to hide the event on microsite"
+msgstr ""
+
+msgid "Show the event's description on microsite"
+msgstr ""
+
+msgid "Uncheck this to disable platform-wide viewing of the event's description"
+msgstr ""
+
+msgid "Uncheck this to disable public viewing of the event's description"
+msgstr ""
+
+msgid "Example:"
+msgstr ""
+
+#, fuzzy
+msgid "Stream URL for the Event"
+msgstr "Արտաքին Հղում միջոցառման համար"
+
+msgid "Custom embed code (HTML)"
+msgstr ""
+
+msgid "How many participants can join the video call before it is full."
+msgstr ""
+
+msgid "Note that changing this setting will have no effect while an event is running."
+msgstr ""
+
+#, fuzzy
+msgid "BBB video conference options"
+msgstr "Ստեղծել Իրադարձություն"
+
+msgid "Upload a preview image for the Conference Event"
+msgstr ""
+
+msgid "Will be shown on the event card in the conference room."
+msgstr ""
+
+msgid "The presenters will be shown in order in the event and will receive Moderator permissions for the BBB-Room"
+msgstr ""
+
+msgid "The presentation file (e.g. PDF) will be pre-uploaded to the BBB room."
+msgstr ""
+
+msgid "Note: If a slide is subsequently added to an existing event, it does not automatically appear in the event if this event was recently attended and is therefore active. This requires an active ending of the event or a 5-minute idle time without participants until the event is automatically ended. "
+msgstr ""
+
+msgid "You can actively end an existing event room by clicking on \"End Meeting\" in the top right-hand corner of the room in the \"Three-Dot Menu\"."
+msgstr ""
+
+#, fuzzy
+msgid "Show room chat in the event"
+msgstr "Դուք մասնակցում եք այս իրադարձությանը"
+
+msgid "Check this to show rocket chat in the sidebar."
+msgstr ""
+
+#, fuzzy
+msgid "Stream this event"
+msgstr "Արտաքին Հղում միջոցառման համար"
+
+msgid "Please note: Streaming is only available for premium conferences. If you would like to use streaming, please request it explicitly when booking. Otherwise, these settings have no function."
+msgstr ""
+
+msgid "You can set up the BBB event to be streamed to a streaming provider (e.g. YouTube)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Once set up and activated, a streaming-bot will enter the event and stream all video and audio to the selected stream endpoint.\n"
+"The bot will enter and start streaming %(start_minutes)s minutes before the event start time and stop streaming and leave %(end_minutes)s minutes after the event end time.\n"
+"You can adjust the meeting times on-the-fly to allow for longer streaming if the event runs longer than expected."
+msgstr ""
+
+msgid "If you are using the maximum participant limit, please allow for the streaming bot's additional participant spot."
+msgstr ""
+
+msgid "Enable Streaming this BBB meeting"
+msgstr ""
+
+msgid "Create"
+msgstr "Ստեղծել"
+
+msgid "Save"
+msgstr "Պահպանել"
+
+#, fuzzy
+msgid "Create and create another"
+msgstr "ստեղծել է իրադարձություն"
+
+#, fuzzy
+msgid "Save and create another"
+msgstr "ստեղծել է իրադարձություն"
+
+msgid "Add unscheduled event"
+msgstr "Ավելացնել չնախատեսված իրադարձություն"
+
+msgid "Edit"
+msgstr "Խմբագրել"
+
+msgid "Event Polls"
+msgstr "Իրադարձութունների հարցումներ"
+
+msgid "Enter a title for the new event to be scheduled."
+msgstr "Մուտքագրեք վերնագիր նախատեսված նոր միջոցառման համար."
+
+msgid "Dates"
+msgstr "Ամսաթվերը"
+
+msgid "Please select the available days in the calendar."
+msgstr "Խնդրում ենք ընտրեք օրացույցում հասանելի օրերը."
+
+msgid "You can select the same day more than once."
+msgstr "Դուք կարող եք ընտրել նույն օրը ավելի քան մեկ անգամ."
+
+msgid "Time: e.g. 10 or 10:30."
+msgstr "Ժամը ՝ օր. 10 կամ 10:30."
+
+msgid "Time"
+msgstr "Ժամը"
+
+msgid "Note: You cannot edit the dates for this event poll because someone has already cast their vote!"
+msgstr "Նշում. Դուք չեք կարող խմբագրել այս իրադարձության հարցման ամսաթվերը, քանի որ ինչ-որ մեկը արդեն քվեարկել է!"
+
+msgid "Example: http://mywebsite.com"
+msgstr "Օրինակ: http://mywebsite.com"
+
+msgid "External Link for the event"
+msgstr "Արտաքին Հղում միջոցառման համար"
+
+msgid "Delete"
+msgstr "Ջնջել"
+
+msgid "There are no open event polls."
+msgstr "Բաց միջոցառումների հարցում չկա."
+
+msgid "Planned Events"
+msgstr "Պլանավորված իրադարձություններ"
+
+msgid "Past Events"
+msgstr "Անցյալ իրադարձություններ"
+
+msgid "Archived Event Polls"
+msgstr "Իրադարձությունների արխիվացված հարցումներ"
+
+msgid "There are no archived event polls."
+msgstr "Իրադարձությունների արխիվացված հարցումներ չկան."
+
+#, python-format
+msgid "Vote for %(title)s"
+msgstr "Քվեարկել %(title)s -ի համար"
+
+#, python-format
+msgid "Archived: %(title)s"
+msgstr "Արխիվացված։ %(title)s"
+
+msgid "This event has already been scheduled. Voting is closed."
+msgstr "Այս իրադարձությունն արդեն պլանավորված է: Քվեարկությունը փակ է."
+
+msgid "This event has been canceled. Voting is closed."
+msgstr "Այս իրադարձությունը չեղարկվել է: Քվեարկությունը փակ է."
+
+msgid "Nobody has voted for this event poll yet."
+msgstr "Դեռ ոչ ոք չի քվեարկել այս իրադարձության հարցմանը."
+
+msgid "Create an event from one of the suggestions"
+msgstr "Ստեղծել միջոցառում առաջարկներից մեկից"
+
+#, python-format
+msgid "Set the date to %(suggestion)s."
+msgstr "Սահմանել ամսաթիվը %(suggestion)s -ին."
+
+msgid "When do you have time?"
+msgstr "Դուք ե՞րբ ունեք ժամանակ?"
+
+msgid "There are no date suggestions for this event poll yet!"
+msgstr "Այս իրադարձության հարցումի համար ամսաթվի առաջարկներ առայժմ չկան!"
+
+#, python-format
+msgid "Do you really want to delete unscheduled event „%(title)s“?"
+msgstr "Ցանկանու՞մ եք ջնջել „%(title)s“ չնախատեսված իրադարձությունը?"
+
+msgid "Delete unscheduled event"
+msgstr "Ջնջել չնախատեսված իրադարձությունը"
+
+msgid "You will now receive notifications for comments or when this event poll is changed and whenever somebody casts their vote."
+msgstr "Այժմ դուք կստանաք ծանուցումներ մեկնաբանությունների համար, կամ երբ այս իրադարձության հարցումը փոփոխվի, և երբ ինչ-որ մեկը քվեարկի."
+
+msgid "Write comment..."
+msgstr "Գրել մեկնաբանություն ..."
+
+msgid "Post"
+msgstr "Հրապարակել"
+
+msgid "Add event"
+msgstr "Ավելացնել իրադարձություն"
+
+#, python-format
+msgid ""
+"\n"
+"                            Note: After this event will be posted, each user of %(forum_name)s may be able to see it.<br>\n"
+"                            If you do not want this, please, use another group or project of your choice.\n"
+"                            "
+msgstr ""
+
+msgid "Enter a title for the new event."
+msgstr "Մուտքագրեք վերնագիր նոր իրադարձության համար."
+
+#, fuzzy
+msgid "Include a video conference"
+msgstr "Ստեղծել Իրադարձություն"
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
+
+msgid "The first uploaded image will be displayed as a wallpaper."
+msgstr "Առաջին վերբեռնված պատկերը կցուցադրվի որպես էջի գլխավոր պաստառ."
+
+msgid "If you set this, your event will be shown on the map! (if permitted by its visibility settings)"
+msgstr "Եթե ընտրեք սա, ձեր իրադարձությունը կցուցադրվի քարտեզի վրա: (եթե դա թույլատրվում է իր տեսանելիության պարամետրերում)"
+
+msgid "Calendar"
+msgstr "Օրացույց"
+
+msgid "Copy this iCal-link into your calendar application to import current events:"
+msgstr "Պատճենեք այս iCal- ի հղումը ձեր օրացուցի ծրագրում ընթացիկ իրադարձությունները ներմուծելու համար:"
+
+msgid "Also include all events from projects within this group in feed"
+msgstr "Ներառեք նաև այս խմբի շրջանակներում իրականացվող բոլոր իրադարձությունները ցանկի մեջ"
+
+msgid "iCal Feed"
+msgstr "iCal Ցանկ"
+
+msgid "Enter the title for a new event or select a day in the Calendar."
+msgstr "Մուտքագրեք վերնագիր նոր իրադարձության համար կամ Օրացույցում ընտրեք օր."
+
+msgid "Export event feed"
+msgstr "Արտահանել իրադարձության ցանկը"
+
+#, fuzzy
+msgid "Create Conference Event"
+msgstr "Ստեղծել Իրադարձություն"
+
+msgid "Conference events can be created directly from the rooms themselves of the conference interface or in a central place here"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Room Management"
+msgstr "Ստեղծել Իրադարձություն"
+
+#, fuzzy
+msgid "There are no conference events."
+msgstr "Բաց միջոցառումների հարցում չկա."
+
+msgid "There are no current or future events."
+msgstr "Ընթացիկ կամ ապագա իրադարձություններ չկան."
+
+msgid "There are no past events."
+msgstr "Նախկին իրադարձություններ չկան."
+
+msgid "There are no upcoming events"
+msgstr "Սպասվող իրադարձություններ չկան"
+
+msgid "Back to Events"
+msgstr "Վերադառնալ Իրադարձություններին"
+
+msgid "Return to Event Polls"
+msgstr "Վերադարնալ իրադարձությունների հարցումներին"
+
+msgid "Return to Archived Event Polls"
+msgstr "Վերադարնալ արխիվացված իրադարձությունների հարցումներին"
+
+msgid "List"
+msgstr "Ցուցակ"
+
+msgid "by"
+msgstr "կողմից"
+
+msgid "View"
+msgstr ""
+
+msgid "Created Event"
+msgstr "Ստեղծված իրադարձություն"
+
+#, python-format
+msgid "Do you really want to delete event „%(title)s“?"
+msgstr "Ցանկանու՞մ եք ջնջել „%(title)s“ իրադարձությունը?"
+
+msgid "Delete event"
+msgstr "Ջնջել իրադարձությունը"
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you are attending in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Ողջույն, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s տեղադրել է մեկնաբանություն այն իրադարձության վերաբերյալ, որին մասնակցում եք %(team_name)s -ում:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"իրադարձության վերաբերյալ:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Անցեք այս հղումով մեկնաբանությունը տեսնելու համար. \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Անցեք այս հղումով ձեր ծանուցման նախասիրությունները խմբագրելու համար: %(notification_settings_url)s )\n"
+"\n"
+"Ձեր %(site_name)s թիմ.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on an event you are attending in %(team_name)s."
+msgstr "%(sender_name)s - ը մեկնաբանել է այն իրադարձությունը, որին դուք մասնակցում եք %(team_name)s- ում."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new event \"%(object_name)s\" in %(team_name)s was created by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Ողջույն %(receiver_name)s,\n"
+"\n"
+"%(sender_name)s -ը ստեղծել է \"%(object_name)s\" նոր իրադարձությունը %(team_name)s -ում։ \n"
+"\n"
+"Դուք կարող եք տեսնել այն ՝ անցնելով հետևյալ հղումով: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Անցեք այս հղումով ձեր ծանուցման նախասիրությունները խմբագրելու համար: %(notification_settings_url)s )\n"
+"\n"
+"Ձեր %(site_name)s թիմ."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you created in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on your event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Ողջույն, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s -ը տեղադրել է մեկնաբանություն ձեր ստեղծած իրադարձության վերաբերյալ %(team_name)s -ում:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"իրադարձության վերաբերյալ:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Անցեք այս հղումով մեկնաբանությունը տեսնելու համար։ \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Անցեք այս հղումով ձեր ծանուցման նախասիրությունները խմբագրելու համար: %(notification_settings_url)s )\n"
+"\n"
+"Ձեր %(site_name)s թիմ.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on one of your events in %(team_name)s."
+msgstr "%(sender_name)s -ը մեկնաբանել է ձեր իրադարձություններից մեկը %(team_name)s -ում."
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"a new event \"%(object_name)s\", on %(event_date)s, was announced in %(team_name)s by %(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Ողջույն %(receiver_name)s,\n"
+"\n"
+"\"%(object_name)s\" նոր իրադարձությունը, %(event_date)s -ին, հայտարարվել է %(team_name)s -ում %(sender_name)s -ի կողմից. \n"
+"\n"
+"Դուք կարող եք տեսնել այն ՝ անցնելով հետևյալ հղումով: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Անցեք այս հղումով ձեր ծանուցման նախասիրությունները խմբագրելու համար։ %(notification_settings_url)s )\n"
+"\n"
+"Ձեր %(site_name)s թիմ."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event you were tagged in, in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Ողջույն, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s տեղադրել է մեկնաբանություն այն իրադարձության վերաբերյալ, որում դուք նշված եք, %(team_name)s -ում:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"իրադարձության վերաբերյալ:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Անցեք այս հղումով մեկնաբանությունը տեսնելու համար: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Անցեք այս հղումով ձեր ծանուցման նախասիրությունները խմբագրելու համար: %(notification_settings_url)s )\n"
+"\n"
+"Ձեր %(site_name)s թիմ.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on a event you were tagged in %(team_name)s."
+msgstr "%(sender_name)s -ը մեկնաբանել է այն իրադարձությունը, որում դուք նշված եք %(team_name)s -ում."
+
+#, python-format
+msgid ""
+"Hi, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s has posted a comment on an event poll you voted in in %(team_name)s:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"on the event poll:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Follow this link to see the comment: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s team.\n"
+"\n"
+msgstr ""
+"Ողջույն, %(receiver_name)s!\n"
+"\n"
+"%(sender_name)s -ը հրապարակել է մեկնաբանություն իրադարձության հարցման վերաբերյալ, որը քվեարկել եք %(team_name)s -ում:\n"
+"\n"
+"\"%(comment_text)s\"\n"
+"\n"
+"\n"
+"իրադարձության հարցման վերաբերյալ:\n"
+"\n"
+"\"%(event_title)s\"\n"
+"\n"
+"\n"
+"Անցեք այս հղումով մեկնաբանությունը տեսնելու համար: \n"
+"%(object_url)s\n"
+"\n"
+"\n"
+"(Անցեք այս հղումով ձեր ծանուցման նախասիրությունները խմբագրելու համար: %(notification_settings_url)s )\n"
+"\n"
+"Ձեր %(site_name)s թիմ.\n"
+"\n"
+
+#, python-format
+msgid "%(sender_name)s commented on an event poll you voted in in %(team_name)s."
+msgstr "%(sender_name)s -ը հրապարակել է մեկնաբանություն իրադարձության հարցման վերաբերյալ, որին քվեարկել եք %(team_name)s -ում."
+
+msgid "Delete Event"
+msgstr "Ջնջել իրադարձությունը"
+
+msgid "(Canceled!)"
+msgstr "(Չեղարկվել է)"
+
+msgid "This is an archived event poll."
+msgstr "Սա արխիվացված իրադարձության հարցում է."
+
+msgid "The event that was created after the poll can be viewed here:"
+msgstr "Իրադարձությունը, որը ստեղծվել է հարցումից հետո, կարող եք դիտել այստեղ ՝:"
+
+msgid "(No description set)"
+msgstr "(Նկարագրություն սահմանված չէ)"
+
+msgctxt "someone else is going"
+msgid "Going"
+msgstr "Գնում է"
+
+msgctxt "someone else is maybe going"
+msgid "Maybe going"
+msgstr "Գուցե գնում է"
+
+msgctxt "someone else can't go"
+msgid "Can't go"
+msgstr "Չի կարող գնալ"
+
+msgctxt "one or many people are going"
+msgid "Going"
+msgid_plural "Going"
+msgstr[0] "Գնում է"
+msgstr[1] "Գնում են"
+
+msgctxt "one or many people are maybe going"
+msgid "Maybe going"
+msgid_plural "Maybe going"
+msgstr[0] "Գուցե գնում է"
+msgstr[1] "Գուցե գնում են"
+
+msgctxt "one or many people are not going"
+msgid "Can't go"
+msgid_plural "Can't go"
+msgstr[0] "Չի կարող գնալ"
+msgstr[1] "Չեն կարող գնալ"
+
+msgid "Going"
+msgstr "Գնում է"
+
+msgid "Maybe going"
+msgstr "Գուցե գնում է"
+
+msgid "Can't go"
+msgstr "Չի կարող գնալ"
+
+msgid "Are you going?"
+msgstr "Դուք գնալու եք?"
+
+msgid "No Choice"
+msgstr "Ոչ մի ընտրություն"
+
+msgid "Add event to your calendar"
+msgstr ""
+
+#, fuzzy
+msgid "Copy this iCal-link into your calendar application to import this event:"
+msgstr "Պատճենեք այս iCal- ի հղումը ձեր օրացուցի ծրագրում ընթացիկ իրադարձությունները ներմուծելու համար:"
+
+#, fuzzy
+msgid "Please register or login to join the video conference for this event"
+msgstr "Սկսել/միանալ վիդեո զրույցին այս իրադարձության համար"
+
+#, fuzzy
+msgid "Start/join video conference for this event"
+msgstr "Սկսել/միանալ վիդեո զրույցին այս իրադարձության համար"
+
+msgid "Popout"
+msgstr ""
+
+msgid "Fullscreen"
+msgstr "Ամբողջ էկրանով"
+
+#, fuzzy
+msgid "Video conference"
+msgstr "Ստեղծել Իրադարձություն"
+
+msgid "Leave Fullscreen"
+msgstr "Փոքրացնել էկրանը"
+
+msgid "Back"
+msgstr "Հետ"
+
+#, fuzzy
+msgid "Leave video conference"
+msgstr "Ստեղծել Իրադարձություն"
+
+msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
+msgstr ""
+
+msgid "You will now receive notifications for comments or when this event is updated or its details change."
+msgstr "Այժմ դուք կստանաք ծանուցումներ մեկնաբանությունների համար, կամ երբ այս իրադարձությունը թարմացվի կամ դրա մանրամասները փոփոխվեն."
+
+msgid "You created an event"
+msgstr "Դուք ստեղծել եք իրադարձություն"
+
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created an event"
+msgstr "ստեղծել է իրադարձություն"
+
+msgid "Show all"
+msgstr "Ցուցադրել բոլորը"
+
+msgid "Upcoming events"
+msgstr "Սպասվող իրադարձությունները"
+
+#, python-format
+msgid "Event \"%(title)s\" was edited successfully."
+msgstr "\"%(title)s\" իրադարձությունը հաջողությամբ խմբագրվել է."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be edited."
+msgstr "\"%(title)s\" իրադարձությունը հնարավոր չէ խմբագրել."
+
+msgid "Please use the conference management area to add new workshops!"
+msgstr ""
+
+msgid "The page you requested is not available for this event at this time."
+msgstr "Ձեր հայցված էջն այս պահին հասանելի չէ այս իրադարձության համար."
+
+msgid "One of the event suggestions times could not be understood!"
+msgstr "Միջոցառման առաջարկությունների ժամերից մեկը հասկանալի չէ!"
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was edited successfully."
+msgstr "\"%(title)s\" չնախատեսված իրադարձությունը հաջողությամբ խմբագրվել է."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be edited."
+msgstr "\"%(title)s\" չնախատեսված իրադարձությունը հնարավոր չէ խմբագրել."
+
+#, python-format
+msgid "Event \"%(title)s\" was added successfully."
+msgstr "\"%(title)s\" իրադարձությունը հաջողությամբ ավելացվել է."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be added."
+msgstr "\"%(title)s\" իրադարձությունը հնարավոր չէ ավելացնել."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was added successfully."
+msgstr "\"%(title)s\" չնախատեսված իրադարձությունը հաջողությամբ ավելացվել է."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be added."
+msgstr "\"%(title)s\" չնախատեսված իրադարձությունը հնարավոր չէ ավելացնել."
+
+msgid "You should define at least one date suggestion."
+msgstr "Դուք պետք է սահմանեք առնվազն մեկ ամսաթվի առաջարկ."
+
+#, python-format
+msgid "Event \"%(title)s\" was deleted successfully."
+msgstr "\"%(title)s\" իրադարձությունը հաջողությամբ ջնջվել է."
+
+#, python-format
+msgid "Event \"%(title)s\" could not be deleted."
+msgstr "\"%(title)s\" իրադարձությունը հնարավոր չէ ջնջել."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" was deleted successfully."
+msgstr "\"%(title)s\" չնախատեսված իրադարձությունը հաջողությամբ ջնջվել է."
+
+#, python-format
+msgid "Unscheduled event \"%(title)s\" could not be deleted."
+msgstr "\"%(title)s\" չնախատեսված իրադարձությունը հնարավոր չէ ջնջել."
+
+msgid "Your votes were saved successfully."
+msgstr "Ձեր քվեարկումները հաջողությամբ պահպանվել են."
+
+msgid "Your votes could not be saved."
+msgstr "Ձեր քվեարկումները չհաջողվեց պահպանել."
+
+msgid "This is event is already scheduled. You cannot vote for it any more."
+msgstr "Այս իրադարձությունն արդեն պլանավորված է: Դուք այլևս չեք կարող քվեարկել դրա օգտին."
+
+msgid "The complete request can only be sent via POST!"
+msgstr "Ամբողջական հարցումը կարող է ուղարկվել միայն ՊՈՍՏԻ միջոցով!"
+
+msgid "Event cannot be completed: No date was supplied."
+msgstr "Իրադարձությունը հնարավոր չէ ավարտել. Ամսաթիվ չի տրամադրվել."
+
+msgid "The event was created successfully at the specified date."
+msgstr "Միջոցառումը հաջողությամբ ստեղծվել է նշված ամսաթվին."
+
+#, fuzzy
+msgid "Upcoming event"
+msgstr "Սպասվող իրադարձությունները"
+
+msgid "Your comment was added successfully."
+msgstr "Ձեր մեկնաբանությունը հաջողությամբ ավելացվել է."
+
+msgid "Your comment was deleted successfully."
+msgstr "Ձեր մեկնաբանությունը հաջողությամբ ջնջվել է."
+
+#, fuzzy
+#~ msgid "Now"
+#~ msgstr "Ոչ"
+
+#~ msgid "%(sender_name)s"
+#~ msgstr "%(sender_name)s"
+
+#~ msgid "%(sender_name)s voted in"
+#~ msgstr "%(sender_name)s -ը քվեարկել է"
+
+#~ msgid "Date"
+#~ msgstr "Ամսաթիվ"
+
+#~ msgid "End date."
+#~ msgstr "Ավարտի ամսաթիվ."
+
+#~ msgid "Event poll updated by %(sender_name)s"
+#~ msgstr "%(sender_name)s -ը թարմացրել է իրադարձության հարցումը"
+
+#, fuzzy
+#~ msgid "Example: https://www.youtube.com/watch?v=12345"
+#~ msgstr "Օրինակ: http://mywebsite.com"
+
+#~ msgid "From"
+#~ msgstr "Սկսած"
+
+#~ msgid "Kalender"
+#~ msgstr "Օրացույց"
+
+#~ msgid "New event by %(sender_name)s"
+#~ msgstr "Նոր իրադարձություն %(sender_name)s-ի կողմից"
+
+#~ msgid "New event by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Նոր իրադարձություն %(sender_name)s -ից %(team_name)s -ում (որին հետևում եք)"
+
+#~ msgid "New event poll by %(sender_name)s"
+#~ msgstr "Նոր իրադարձության հարցում %(sender_name)s -ից"
+
+#~ msgid "New event poll by %(sender_name)s in %(team_name)s (which you follow)"
+#~ msgstr "Նոր իրադարձությունների հարցում %(sender_name)s -ից %(team_name)s -ում (որին դուք հետևում եք)"
+
+#~ msgid "Start date."
+#~ msgstr "Մեկնարկի ամսաթիվ."
+
+#, fuzzy
+#~ msgid "Start/join BBB video conference for this event"
+#~ msgstr "Սկսել/միանալ վիդեո զրույցին այս իրադարձության համար"
+
+#~ msgid "Start/join video chat for this event"
+#~ msgstr "Սկսել/միանալ վիդեո զրույցին այս իրադարձության համար"
+
+#~ msgid "Stop Video Chat"
+#~ msgstr "Դադարեցրել տեսազրույցը"
+
+#~ msgid "Until"
+#~ msgstr "Մինչև"
+
+#~ msgid "Video Chat"
+#~ msgstr "Տեսազրույց"

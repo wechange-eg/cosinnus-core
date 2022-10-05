@@ -1,0 +1,230 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 15:43+0200\n"
+"PO-Revision-Date: 2020-10-14 09:38+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.4.1\n"
+
+msgid "You are seeing this alert because you created this content."
+msgstr "Ви бачите це сповіщення, оскільки ви створили цей контент."
+
+msgid "You are seeing this alert because you are following the item's project or group."
+msgstr "Ви бачите це сповіщення, оскільки Ви стежите за відповідним проєктом або групою."
+
+msgid "You are seeing this alert because you are following this item."
+msgstr "Ви бачите це сповіщення, оскільки Ви стежите за цим елементом."
+
+msgid "Notifications"
+msgstr "Сповіщення"
+
+msgctxt "the_app"
+msgid "notifications"
+msgstr "сповіщення"
+
+#, python-format
+msgid "Your daily digest for %(portal_name)s"
+msgstr "Ваш щоденний дайджест %(portal_name)s"
+
+msgid "This is what happened during the last day!"
+msgstr "Все, що відбулося протягом вчора!"
+
+#, python-format
+msgid "Your weekly digest for %(portal_name)s"
+msgstr "Ваш дайджест за тиждень на %(portal_name)s"
+
+msgid "This is what happened during the last week!"
+msgstr "Все, що відбулося за минулий тиждень!"
+
+msgctxt "notification frequency"
+msgid "Never"
+msgstr "Ніколи"
+
+msgctxt "notification frequency"
+msgid "Immediately"
+msgstr "Негайно"
+
+msgctxt "notification frequency"
+msgid "Daily"
+msgstr "Щоденно"
+
+msgctxt "notification frequency"
+msgid "Weekly"
+msgstr "Щотижнево"
+
+msgid "Notification Preference for User"
+msgstr "Налаштування сповіщення для користувача/-ки"
+
+msgid "Notification ID"
+msgstr "ІН сповіщення"
+
+msgid "Notification Preference"
+msgstr "Налаштування сповіщення"
+
+msgid "Notification Preferences"
+msgstr "Налаштування сповіщень"
+
+msgid "Portal"
+msgstr "Портал"
+
+msgid "Multi Notification ID"
+msgstr "Мульти сповіщення ID"
+
+msgid "Multi Notification Preference"
+msgstr "Преференція мульти сповіщень"
+
+msgid "Multi Notification Preferences"
+msgstr "Преференції мульти сповіщень"
+
+msgid "User who caused this notification event"
+msgstr "Користувач, який створив це сповіщення"
+
+msgid "Audience"
+msgstr "Аудиторія"
+
+msgid "Owner of the alert"
+msgstr "Власник сповіщення"
+
+msgid "Alert Reason key"
+msgstr "Основна причина сповіщення"
+
+msgid "Last user who caused this notification event"
+msgstr "Останній користувач, який спричинив це сповіщення "
+
+msgid "Alert State"
+msgstr "Стан сповіщення"
+
+msgid "You are following this content or its Project or Group"
+msgstr "Ви стежите за цим контентом або його проєктом чи групою"
+
+msgid "All notifications"
+msgstr "Усі сповіщення"
+
+msgid "No notifications"
+msgstr "Немає сповіщень"
+
+msgid "For content that I am following, I wish to receive notification emails"
+msgstr "Я хочу отримувати електронні листи-сповіщення щодо контенту, який я відстежую"
+
+msgid "You are getting this notification because you are subscribed to these kinds of events in your project or group."
+msgstr "Ви отримали це сповіщення, тому що Ви підписалися на ці види подій у Вашому проекті чи групі."
+
+msgid "You are getting this notification because you are an administrator of this project or group."
+msgstr "Ви отримали це сповіщення, тому що Ви є адміністратором цього проєкту чи групи."
+
+msgid "You are getting this notification because you are an administrator of this portal."
+msgstr "Ви отримали це сповіщення, тому що Ви є адміністратором цього порталу."
+
+msgid "You are getting this email because you are subscribed to one or more daily notifications."
+msgstr "Ви отримали це сповіщення, тому що Ви підписалися на одне чи кілька щоденних сповіщень."
+
+msgid "You are getting this email because you are subscribed to one or more weekly notifications."
+msgstr "Ви отримали це сповіщення, тому що Ви підписалися на одне чи кілька щотижневих сповіщень."
+
+msgid "New item"
+msgstr "Новий елемент"
+
+msgid "Like"
+msgstr "Вподобати"
+
+msgid "Follow"
+msgstr "Відстежувати"
+
+#, python-format
+msgid "View on %(portal_name)s"
+msgstr "Переглянути на %(portal_name)s"
+
+msgid "Untitled"
+msgstr "Без назви"
+
+msgid "Your Profile"
+msgstr "Ваш Профіль"
+
+msgid "Select which notifications you would like to receive for each group or project you are involved in."
+msgstr "Виберіть, які сповіщення ви бажаєте отримувати для кожної спільноти або проєкту, до яких ви залучені."
+
+msgid "These notifications will be sent to your configured email address:"
+msgstr "Ці сповіщення будуть надсилатися на вказану вами адресу електронної скриньки:"
+
+msgid "You can choose to receive notifications as soon as they happen, or you can receive a daily (or weekly) e-mail digest."
+msgstr "Ви можете обирати, чи отримувати сповіщення на Вашу електронну скриньку відразу як тільки події відбулися, чи в щоденному (щотижневому) дайджесті."
+
+msgid "The digest will aggregate all notifications with the \"Daily\" (or \"Weekly\") setting from all groups and projects. So you will receive only a single e-mail per day (or week) containing everything interesting that happend."
+msgstr "Дайджест на електронну пошту вміщує всі сповіщення разом, зі всіх проєктів та груп, з поміткою «щоденний» або «щотижневий». Так Ви отримаєте тільки один єдиний лист в день чи в тиждень, який уміщує все найцікавіше, що відбулося."
+
+msgid "Notifications you set to \"Immediately\" will be e-mailed to you as soon as they happen, with one e-mail per notification."
+msgstr "Сповіщення, які Ви встановили з позначкою «Негайно», будуть вам надіслані миттєво, відповідно: в одному листі - одне сповіщення."
+
+msgid "Don't forget to save your settings once you are done editing them!"
+msgstr "Будь ласка, збережіть зміни в налаштуваннях, коли Ви завершите їх редагування!"
+
+msgid "more"
+msgstr "більше"
+
+msgid "I wish to receive notification emails"
+msgstr "Я хочу отримувати електронні листи-сповіщення"
+
+msgid "Note that you will receive an email notification if someone has invited you to a group/ project in any case."
+msgstr ""
+
+msgid "I would like to receive instant messages by email for RocketChat mentions and direct messages to me"
+msgstr "Я хотів би отримувати миттєві повідомлення електронною поштою для RocketChat згадок і прямих повідомлень для мене"
+
+msgid "Receive notification emails in this language"
+msgstr "Електронні листи-сповіщення отримувати цією мовою"
+
+msgid "Moderator Status (Portal-Admins only)"
+msgstr "Статус модератора (тільки адміністратори порталу)"
+
+msgid "I wish to be a Moderator for this portal"
+msgstr "Я хочу бути модератором цього порталу"
+
+msgid "As a Moderator, you will receive an instant notification whenever ANY publicly visible content is posted on this portal. Since you are a portal administrator you can then also delete the content if it is offensive or critical. To delete it, visit the content page on the website while logged into this account."
+msgstr "Як модератор Ви будете отримувати негайні сповіщення, якщо будь-який публічно видимий контент буде опубліковано на цьому порталі. Оскільки Ви є адміністратором, Ви можете видалити контент, якщо він є принизливим чи містить критику. Для видалення відвідайте сторінку контенту на сайті, зайшовши під цим акаунтом."
+
+msgid "Immediately"
+msgstr "Негайно"
+
+msgid "Daily"
+msgstr "Щоденно"
+
+msgid "Weekly"
+msgstr "Щотижня"
+
+msgid "Custom"
+msgstr "Індивідуальні налаштування"
+
+msgid "Reset to default"
+msgstr "Скинути налаштування за замовчуванням"
+
+msgid "Save"
+msgstr "Зберегти"
+
+msgid "This will reset all of your notification preferences to their default setting. Are you sure you wish to do that?"
+msgstr "Це змінить усі ваші налаштування сповіщення на стандартні налаштування. Ви впевнені, що хочете зробити це?"
+
+msgid "Your notification preferences were updated successfully."
+msgstr "Ваші нові налаштування сповіщення були успішно збережені."
+
+msgid "Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!"
+msgstr "Не вдалося зберегти налаштування rocketchat. Якщо ця помилка не зникне, будь ласка, налаштуйте параметри у rocketchat налаштуваннях користувача вручну!"
+
+msgid "Your notifications preferences were reset to default!"
+msgstr "Ваші налаштування сповіщення було змінено на стандартні!"
+
+#, fuzzy
+#~| msgid "I wish to receive notification emails"
+#~ msgid "I wish to receive RocketChat notification emails"
+#~ msgstr "Я хочу отримувати електронні листи-сповіщення"
