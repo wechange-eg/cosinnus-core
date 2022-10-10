@@ -19,6 +19,7 @@ from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 from cosinnus.conf import settings
 from cosinnus.utils.permissions import check_user_superuser
+from django.db.models.aggregates import Count
 
 
 class GroupMembersView(RequireGroupMember, Select2View):
@@ -115,8 +116,10 @@ class TagsView(Select2View):
         if count < start:
             raise Http404
         has_more = count > end
-
-        tags = list(Tag.objects.filter(q).values_list('name', 'name').all()[start:end])
+        
+        qs = Tag.objects.filter(q)
+        qs = qs.annotate(num_tagged=Count('taggit_taggeditem_items')).order_by('-num_tagged')
+        tags = list(qs.values_list('name', 'name').all()[start:end])
         return (NO_ERR_RESP, has_more, tags)
 
 

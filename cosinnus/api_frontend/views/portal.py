@@ -13,9 +13,10 @@ from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.conf import settings
 from cosinnus.models.managed_tags import MANAGED_TAG_LABELS, CosinnusManagedTag
 from django.db.models.query_utils import Q
-from taggit.models import Tag
+from taggit.models import Tag, TaggedItem
 from django.http.response import Http404
 from cosinnus.utils.functions import is_number
+from django.db.models.aggregates import Count
 
 
 class PortalTopicsView(APIView):
@@ -90,7 +91,7 @@ class PortalTagsView(APIView):
     )
     def get(self, request):
         tag_data = []
-        term = request.GET.get('q', '').lower()
+        term = request.GET.get('q', '').lower().strip()
         limit = request.GET.get('limit', 'invalid')
         if not is_number(limit): 
             limit = 10
@@ -101,8 +102,13 @@ class PortalTagsView(APIView):
         page = 1
         start = (page - 1) * limit
         end = page * limit
-        q = Q(name__icontains=term)
-        qs = Tag.objects.filter(q)
+        qs = Tag.objects.all()
+        TaggedItem
+        # TaggedItem.tag
+        if term:
+            q = Q(name__icontains=term)
+            qs = qs.filter(q)
+        qs = qs.annotate(num_tagged=Count('taggit_taggeditem_items')).order_by('-num_tagged')
         count = qs.count()
         if count >= start:
             tag_data = qs[start:end].values_list('name', flat=True)
