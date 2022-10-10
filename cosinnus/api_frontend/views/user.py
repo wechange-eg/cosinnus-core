@@ -30,18 +30,43 @@ class CsrfExemptSessionAuthentication(authentication.SessionAuthentication):
     
     def enforce_csrf(self, request):
         return
-    
 
-class UserSignupThrottleBurst(UserRateThrottle):
+class UserSignupBaseThrottle(UserRateThrottle):
+    """ Will only add throttle points when called manually, not on every request. """
     
     scope = 'signup'
-    rate = '5/hour'
+    
+    def get_cache_key(self, request, view):
+        return self.cache_format % {
+            'scope': self.scope,
+            'ident': self.get_ident(request)
+        }
+    
+    def throttle_success(self, really_throttle=False, request=None, view=None):
+        """
+        Inserts the current request's timestamp along with the key
+        into the cache.
+        Overridden so we can decide when to actually put in a throttle point
+        (so we don't throttle non-successful signups).
+        """
+        if really_throttle:
+            if request and view and not getattr(self, 'key', None):
+                self.key = self.get_cache_key(request, view)
+                self.history = self.cache.get(self.key, [])
+                self.now = self.timer()
+            self.history.insert(0, self.now)
+            self.cache.set(self.key, self.history, self.duration)
+        return True
+
+
+class UserSignupThrottleBurst(UserSignupBaseThrottle):
+    
+    rate = '2/hour' # note: these are successful signup throttles!
     
 
-class UserSignupThrottleSustained(UserRateThrottle):
+class UserSignupThrottleSustained(UserSignupBaseThrottle):
     
-    scope = 'signup'
-    rate = '15/day'
+    rate = '5/day' # note: these are successful signup throttles!
     
 
 class LoginView(LoginViewAdditionalLogicMixin, APIView):
@@ -169,7 +194,8 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
     permission_classes = (IsNotAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
-    throttle_classes = [UserSignupThrottleBurst, UserSignupThrottleSustained]
+    if not settings.DEBUG:
+        throttle_classes = [UserSignupThrottleBurst, UserSignupThrottleSustained]
     
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -209,8 +235,10 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
     def post(self, request):
         serializer = CosinnusUserSignupSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = serializer.create(serializer.validated_data)
+        # add a throttle point for a successful signup
+        UserSignupThrottleBurst().throttle_success(really_throttle=True, request=request, view=self)
         
+        user = serializer.create(serializer.validated_data)
         redirect_url = self.trigger_events_after_user_signup(user, self.request)
         data = {
             'user': UserSerializer(user, context={'request': request}).data,
