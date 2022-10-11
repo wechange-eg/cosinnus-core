@@ -516,7 +516,15 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         COSINNUS_BBB_SERVER_CHOICES = ((0, '(None)'),)
         COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS = {0: (None, None),}
     
+    # hCaptcha
     COSINNUS_HCAPTCHA_SECRET_KEY = env("WECHANGE_COSINNUS_HCAPTCHA_SECRET_KEY", default=None)
+    
+    # Wechange Payments
+    PAYMENTS_BETTERPAYMENT_API_KEY = env("WECHANGE_PAYMENTS_BETTERPAYMENT_API_KEY", default='')
+    PAYMENTS_BETTERPAYMENT_INCOMING_KEY = env("WECHANGE_PAYMENTS_BETTERPAYMENT_INCOMING_KEY", default='')
+    PAYMENTS_BETTERPAYMENT_OUTGOING_KEY = env("WECHANGE_PAYMENTS_BETTERPAYMENT_OUTGOING_KEY", default='')
+    PAYMENTS_LEXOFFICE_API_KEY = env("WECHANGE_PAYMENTS_LEXOFFICE_API_KEY", default='')
+    
     
     
     """ --------------- MORE SETTINGS  ---------------- """
