@@ -61,12 +61,12 @@ class UserSignupBaseThrottle(UserRateThrottle):
 
 class UserSignupThrottleBurst(UserSignupBaseThrottle):
     
-    rate = '2/hour' # note: these are successful signup throttles!
+    rate = '10/hour' # note: these are successful signup throttles!
     
 
 class UserSignupThrottleSustained(UserSignupBaseThrottle):
     
-    rate = '5/day' # note: these are successful signup throttles!
+    rate = '50/day' # note: these are successful signup throttles!
     
 
 class LoginView(LoginViewAdditionalLogicMixin, APIView):
@@ -194,7 +194,7 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
     permission_classes = (IsNotAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
-    if not settings.DEBUG:
+    if False: # TODO: re-implement on release
         throttle_classes = [UserSignupThrottleBurst, UserSignupThrottleSustained]
     
     # todo: generate proper response, by either putting the entire response into a
