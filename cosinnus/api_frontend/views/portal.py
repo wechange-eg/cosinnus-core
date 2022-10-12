@@ -108,10 +108,11 @@ class PortalTagsView(APIView):
         if term:
             q = Q(name__icontains=term)
             qs = qs.filter(q)
-        qs = qs.annotate(num_tagged=Count('taggit_taggeditem_items')).order_by('-num_tagged')
+        qs = qs.annotate(num_tagged=Count('taggit_taggeditem_items')).exclude(num_tagged__exact=0).order_by('-num_tagged')
         count = qs.count()
         if count >= start:
-            tag_data = qs[start:end].values_list('name', flat=True)
+            tag_data = qs[start:end].values_list('name', 'num_tagged')
+            tag_data = [dict(zip(['value', 'frequency'], data_tup)) for data_tup in tag_data]
         return Response(tag_data)
 
 class PortalManagedTagsView(APIView):

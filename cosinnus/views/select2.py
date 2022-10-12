@@ -118,7 +118,7 @@ class TagsView(Select2View):
         has_more = count > end
         
         qs = Tag.objects.filter(q)
-        qs = qs.annotate(num_tagged=Count('taggit_taggeditem_items')).order_by('-num_tagged')
+        qs = qs.annotate(num_tagged=Count('taggit_taggeditem_items')).exclude(num_tagged__exact=0).order_by('-num_tagged')
         tags = list(qs.values_list('name', 'name').all()[start:end])
         return (NO_ERR_RESP, has_more, tags)
 
