@@ -878,6 +878,12 @@ class CosinnusConf(AppConf):
     # paths are defined in 
     V3_FRONTEND_ENABLED = False
     
+    # a workaround for the frontend using languages as URL prefix
+    # instead of as cookie setting, any request with a language in this list
+    # will be redirected to a prefixed url with the language slug,
+    # in addition to the ?v=3 param
+    V3_LANGUAGE_REDIRECT_PREFIXES = ['de',]
+    
     # URL paths that get redirected to the new frontend
     # if V3_FRONTEND_ENABLED==True
     V3_FRONTEND_URL_PATTERNS = [

@@ -1,9 +1,8 @@
 import re
-from os.path import join, sep
 from urllib.parse import parse_qsl, urlencode
 
 from django.shortcuts import redirect
-from django.views import static
+from django.utils import translation
 from django.utils.deprecation import MiddlewareMixin
 
 from cosinnus.conf import settings
@@ -21,6 +20,15 @@ class FrontendMiddleware(MiddlewareMixin):
 
     def process_request(self, request):
         if settings.COSINNUS_V3_FRONTEND_ENABLED:
+            request_tokens = request.build_absolute_uri().split('/')
+            if not request.GET.get(self.param_key, None) == self.param_value:
+                # if the workaround language-prefix request from the frontend has arrived at the server, 
+                # strip the prefixed language
+                if settings.COSINNUS_V3_LANGUAGE_REDIRECT_PREFIXES and request_tokens[3] in settings.COSINNUS_V3_LANGUAGE_REDIRECT_PREFIXES:
+                    del request_tokens[3]
+                    redirect_unprefixed = '/'.join(request_tokens)
+                    return redirect(redirect_unprefixed)
+            
             if request.user.is_authenticated and \
                 request.user.cosinnus_profile.settings.get(
                     USERPROFILE_SETTING_FRONTEND_DISABLED, False):
@@ -34,4 +42,9 @@ class FrontendMiddleware(MiddlewareMixin):
                 if params.get(self.param_key) != self.param_value:
                     params[self.param_key] = self.param_value
                     request.META["QUERY_STRING"] = urlencode(params)
-                    return redirect(request.get_full_path())
+                    cur_lang = translation.get_language()
+                    redirect_to = request.get_full_path()
+                    # redirect to a prefixed language version of the v3 frontend if workaround is active
+                    if settings.COSINNUS_V3_LANGUAGE_REDIRECT_PREFIXES and cur_lang in settings.COSINNUS_V3_LANGUAGE_REDIRECT_PREFIXES:
+                        redirect_to = f'/{cur_lang}{redirect_to}'
+                    return redirect(redirect_to)
