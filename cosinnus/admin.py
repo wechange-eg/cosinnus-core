@@ -548,15 +548,26 @@ class UserProfileInline(admin.StackedInline):
     model = USER_PROFILE_MODEL
     can_delete = False
     readonly_fields = ('deletion_triggered_by_self',)
+    show_change_link = True
+    view_on_site = False
 
 class PortalMembershipInline(admin.TabularInline):
     model = CosinnusPortalMembership
     extra = 0
+    can_delete = False
+    
+    def has_add_permission(self, request, obj=None):
+        return False
     
 class GroupMembershipInline(admin.TabularInline):
     model = CosinnusGroupMembership
     extra = 0
-
+    fields = ('group', 'status',)
+    readonly_fields = ('group',)
+    
+    def has_add_permission(self, request, obj=None):
+        return False
+    
 
 class UserToSAcceptedFilter(admin.SimpleListFilter):
     """ Will show users that have ever logged in (or not) """
@@ -651,7 +662,7 @@ class UserAdmin(DjangoUserAdmin):
     )
     readonly_fields = ('last_login', 'date_joined',)
     change_form_template = 'admin/user/change_form.html'
-    inlines = (UserProfileInline, PortalMembershipInline)#, GroupMembershipInline)
+    inlines = (UserProfileInline, PortalMembershipInline, GroupMembershipInline,)
     actions = ['deactivate_users', 'reactivate_users', 'export_as_csv', 'log_in_as_user', 'refresh_group_memberships',]
     if settings.COSINNUS_ROCKET_ENABLED:
         actions += ['force_sync_rocket_user', 'make_user_rocket_admin', 'force_redo_user_room_memberships',
