@@ -29,7 +29,8 @@ from cosinnus.models.group import CosinnusGroupMembership, \
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety, \
     CosinnusConference
 from cosinnus.models.idea import CosinnusIdea
-from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagType
+from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagType,\
+    CosinnusManagedTagAssignment
 from cosinnus.models.membership import MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN, \
     MEMBER_STATUS
 from cosinnus.models.newsletter import Newsletter, GroupsNewsletter
@@ -544,19 +545,47 @@ USER_PROFILE_MODEL = get_user_profile_model()
 USER_MODEL = get_user_model()
 
 
+class CosinnusManagedTagAssignmentInline(GenericStackedInline):
+    model = CosinnusManagedTagAssignment
+    can_delete = True
+    extra = 0
+
+
+class CosinnusUserProfileAdmin(admin.ModelAdmin):
+    list_display = ('user',)
+    inlines = (CosinnusManagedTagAssignmentInline, )
+
+    def get_model_perms(self, request):
+        """ Return empty perms dict thus hiding the model from admin index. """
+        return {}
+    
+admin.site.register(USER_PROFILE_MODEL, CosinnusUserProfileAdmin)
+
+
 class UserProfileInline(admin.StackedInline):
     model = USER_PROFILE_MODEL
     can_delete = False
     readonly_fields = ('deletion_triggered_by_self',)
+    show_change_link = True
+    view_on_site = False
 
 class PortalMembershipInline(admin.TabularInline):
     model = CosinnusPortalMembership
     extra = 0
+    can_delete = False
+    
+    def has_add_permission(self, request, obj=None):
+        return False
     
 class GroupMembershipInline(admin.TabularInline):
     model = CosinnusGroupMembership
     extra = 0
-
+    fields = ('group', 'status',)
+    readonly_fields = ('group',)
+    
+    def has_add_permission(self, request, obj=None):
+        return False
+    
 
 class UserToSAcceptedFilter(admin.SimpleListFilter):
     """ Will show users that have ever logged in (or not) """
@@ -643,8 +672,15 @@ class UserScheduledForDeletionAtFilter(admin.SimpleListFilter):
 
 
 class UserAdmin(DjangoUserAdmin):
+    fieldsets = (
+        (_('Personal info'), {'fields': ('email','first_name', 'last_name',  'username', 'password', 'last_login', 'date_joined')}),
+        (_('Permissions'), {
+            'fields': ('is_active', 'is_staff', 'is_superuser',),
+        }),
+    )
+    readonly_fields = ('last_login', 'date_joined',)
     change_form_template = 'admin/user/change_form.html'
-    inlines = (UserProfileInline, PortalMembershipInline)#, GroupMembershipInline)
+    inlines = (UserProfileInline, PortalMembershipInline, GroupMembershipInline,)
     actions = ['deactivate_users', 'reactivate_users', 'export_as_csv', 'log_in_as_user', 'refresh_group_memberships',]
     if settings.COSINNUS_ROCKET_ENABLED:
         actions += ['force_sync_rocket_user', 'make_user_rocket_admin', 'force_redo_user_room_memberships',
@@ -789,7 +825,7 @@ class BaseTaggableAdmin(ReverseModelAdmin):
     list_display = ['title', 'group', 'creator', 'created']
     list_filter = ['group__portal',]
     search_fields = ['title', 'slug', 'creator__first_name', 'creator__last_name', 'creator__email', 'group__name']
-    readonly_fields = ['media_tag', 'attached_objects']
+    readonly_fields = ['media_tag', 'attached_objects', 'last_action_user', 'group']
     inlines = []
     raw_id_fields = ['group', 'creator']
     inline_type = 'stacked'
