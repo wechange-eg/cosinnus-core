@@ -579,29 +579,29 @@ def create_social_login_apps():
         provider_arg_legacy = "custom_oauth2_providers[0][%s]"
         data = {}
         for provider_arg in [provider_arg_modern, provider_arg_legacy]:
-            data.update(
-                {
-                    "update_profile_on_login": 1,
-                    provider_arg % "name": nextcloud_app_name,
-                    provider_arg % "title": nextcloud_app_name,
-                    provider_arg % "apiBaseUrl": f"{portal_domain}/o",
-                    provider_arg % "authorizeUrl": f"{portal_domain}/o/authorize/",
-                    provider_arg % "tokenUrl": f"{portal_domain}/o/token/",
-                    provider_arg
-                    % "profileUrl": f"{portal_domain}/group/forum/cloud/oauth2/",
-                    provider_arg % "logoutUrl": "",
-                    provider_arg % "clientId": client_id,
-                    provider_arg % "clientSecret": client_secret,
-                    provider_arg % "scope": "read",
-                    provider_arg % "profileFields": "",
-                    provider_arg % "groupsClaim": "",
-                    provider_arg % "style": "",
-                    provider_arg % "defaultGroup": "",
-                    provider_arg % "tg_bot": None,
-                    provider_arg % "tg_token": None,
-                    provider_arg % "tg_group": None,
-                }
-            )
+            # at least one providers/options array entry must be given!
+            data.update({
+                "update_profile_on_login": 1, # legacy options format
+                "options[update_profile_on_login]": 1, # v24 format, one of this array is needed!
+                "providers[twitter][appid]": "", # v24 format, one of this array is needed!
+                provider_arg % "name": nextcloud_app_name,
+                provider_arg % "title": nextcloud_app_name,
+                provider_arg % "apiBaseUrl": f"{portal_domain}/o",
+                provider_arg % "authorizeUrl": f"{portal_domain}/o/authorize/",
+                provider_arg % "tokenUrl": f"{portal_domain}/o/token/",
+                provider_arg % "profileUrl": f"{portal_domain}/group/forum/cloud/oauth2/",
+                provider_arg % "logoutUrl": "",
+                provider_arg % "clientId": client_id,
+                provider_arg % "clientSecret": client_secret,
+                provider_arg % "scope": "read",
+                provider_arg % "profileFields": "",
+                provider_arg % "groupsClaim": "",
+                provider_arg % "style": "",
+                provider_arg % "defaultGroup": "",
+                provider_arg % "tg_bot": None,
+                provider_arg % "tg_token": None,
+                provider_arg % "tg_group": None,
+            })
         session_headers = dict(HEADERS)
         session_headers["requesttoken"] = requesttoken
 
