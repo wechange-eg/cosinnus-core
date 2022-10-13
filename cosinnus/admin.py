@@ -29,7 +29,8 @@ from cosinnus.models.group import CosinnusGroupMembership, \
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety, \
     CosinnusConference
 from cosinnus.models.idea import CosinnusIdea
-from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagType
+from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagType,\
+    CosinnusManagedTagAssignment
 from cosinnus.models.membership import MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN, \
     MEMBER_STATUS
 from cosinnus.models.newsletter import Newsletter, GroupsNewsletter
@@ -542,6 +543,23 @@ admin.site.register(AttachedObject)
 
 USER_PROFILE_MODEL = get_user_profile_model()
 USER_MODEL = get_user_model()
+
+
+class CosinnusManagedTagAssignmentInline(GenericStackedInline):
+    model = CosinnusManagedTagAssignment
+    can_delete = True
+    extra = 0
+
+
+class CosinnusUserProfileAdmin(admin.ModelAdmin):
+    list_display = ('user',)
+    inlines = (CosinnusManagedTagAssignmentInline, )
+
+    def get_model_perms(self, request):
+        """ Return empty perms dict thus hiding the model from admin index. """
+        return {}
+    
+admin.site.register(USER_PROFILE_MODEL, CosinnusUserProfileAdmin)
 
 
 class UserProfileInline(admin.StackedInline):
