@@ -209,17 +209,18 @@ class ManagedTagsNewsletterUpdateView(ManagedTagsNewsletterMixin, BaseNewsletter
         tags = self.object.managed_tags.all()
         assignments = CosinnusManagedTagAssignment.objects.filter(managed_tag__in=tags)
         
-        group_type = ContentType.objects.get(
-            app_label='cosinnus', model='cosinnusgroup')
         profile_type = ContentType.objects.get(
             app_label='cosinnus', model='userprofile')
-        group_ids = assignments.filter(
-            content_type=group_type).values_list('object_id', flat=True)
         profile_ids = assignments.filter(
             content_type=profile_type).values_list('object_id', flat=True)
-        
-        tag_users = get_user_model().objects.filter(
-            Q(cosinnus_groups__id__in=group_ids) | Q(cosinnus_profile__id__in=profile_ids)).distinct()
+        q_filter = Q(cosinnus_profile__id__in=profile_ids)
+        if settings.COSINNUS_ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_INCLUDE_TAGGED_GROUP_MEMBERS:
+            group_type = ContentType.objects.get(
+                app_label='cosinnus', model='cosinnusgroup')
+            group_ids = assignments.filter(
+                content_type=group_type).values_list('object_id', flat=True)
+            q_filter = q_filter | Q(cosinnus_groups__id__in=group_ids)
+        tag_users = get_user_model().objects.filter(q_filter).distinct()
         return tag_users
     
     def _copy_newsletter(self):

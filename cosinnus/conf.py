@@ -1068,6 +1068,12 @@ class CosinnusConf(AppConf):
     # should the "send newsletter to managed tags" admin view be enabled?
     ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_ENABLED = False
     
+    # if True, managed tag newsletters will also be sent to users 
+    # who are member of a group that has the managed tag assigned
+    # if False, newsletters will only be sent to users who are tagged
+    # with the managed tag themselves.
+    ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_INCLUDE_TAGGED_GROUP_MEMBERS = False
+    
     # if True administration newsletters ignore check_user_can_receive_emails`
     # (will ignore any blacklisting, but will still not send to inactive accounts)
     NEWSLETTER_SENDING_IGNORES_NOTIFICATION_SETTINGS = False
