@@ -643,6 +643,13 @@ class UserScheduledForDeletionAtFilter(admin.SimpleListFilter):
 
 
 class UserAdmin(DjangoUserAdmin):
+    fieldsets = (
+        (_('Personal info'), {'fields': ('email','first_name', 'last_name',  'username', 'password', 'last_login', 'date_joined')}),
+        (_('Permissions'), {
+            'fields': ('is_active', 'is_staff', 'is_superuser',),
+        }),
+    )
+    readonly_fields = ('last_login', 'date_joined',)
     change_form_template = 'admin/user/change_form.html'
     inlines = (UserProfileInline, PortalMembershipInline)#, GroupMembershipInline)
     actions = ['deactivate_users', 'reactivate_users', 'export_as_csv', 'log_in_as_user', 'refresh_group_memberships',]
@@ -789,7 +796,7 @@ class BaseTaggableAdmin(ReverseModelAdmin):
     list_display = ['title', 'group', 'creator', 'created']
     list_filter = ['group__portal',]
     search_fields = ['title', 'slug', 'creator__first_name', 'creator__last_name', 'creator__email', 'group__name']
-    readonly_fields = ['media_tag', 'attached_objects']
+    readonly_fields = ['media_tag', 'attached_objects', 'last_action_user', 'group']
     inlines = []
     raw_id_fields = ['group', 'creator']
     inline_type = 'stacked'
