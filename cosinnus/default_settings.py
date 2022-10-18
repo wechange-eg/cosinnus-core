@@ -132,7 +132,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     MANAGERS = ()
     
     # Hosts/domain names that are valid for this site; required if DEBUG is False
-    ALLOWED_HOSTS = env.list("WECHANGE_ALLOWED_HOSTS", default=["localhost"])
+    ALLOWED_HOSTS = env.list("WECHANGE_ALLOWED_HOSTS", default=['.' + project_settings["COSINNUS_PORTAL_URL"]])
     DATABASES = {
         "default": env.db("WECHANGE_DATABASE_URL"),
     }
@@ -467,14 +467,14 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # Rocketchat
     COSINNUS_ROCKET_ENABLED = False
     COSINNUS_CHAT_BASE_URL = f"https://chat.{project_settings['COSINNUS_PORTAL_URL']}"
-    COSINNUS_CHAT_USER = f"{project_settings['COSINNUS_PORTAL_NAME']}-bot"
+    COSINNUS_CHAT_USER = env("WECHANGE_COSINNUS_CHAT_USER", default=f"{project_settings['COSINNUS_PORTAL_NAME']}-bot")
     COSINNUS_CHAT_PASSWORD = env("WECHANGE_COSINNUS_CHAT_PASSWORD", default='')
     
     # Nextcloud
     COSINNUS_CLOUD_ENABLED = False
     COSINNUS_CLOUD_NEXTCLOUD_URL = f"https://cloud.{project_settings['COSINNUS_PORTAL_URL']}"
-    COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME = project_settings.get('COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME', 'admin')
-    COSINNUS_CLOUD_NEXTCLOUD_AUTH = (COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME, env("WECHANGE_COSINNUS_CLOUD_NEXTCLOUD_AUTH", default=''))
+    COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME = env("WECHANGE_COSINNUS_CLOUD_USER", default='admin')
+    COSINNUS_CLOUD_NEXTCLOUD_AUTH = (COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME, env("WECHANGE_COSINNUS_CLOUD_PASSWORD", default=''))
     
     
     """ --------------- EXTERNAL SERVICES  ---------------- """
