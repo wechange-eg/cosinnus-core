@@ -28,7 +28,6 @@
     {% csrf_token %}
     {% render_honeypot_field %}
     
-    <input type="hidden" name="next" value="/">
     {% if request.GET.invite_token %}
         <input type="hidden" name="invite_token" value="{{ request.GET.invite_token }}">
     {% endif %}

@@ -30,7 +30,6 @@
 		<div class="ultra-space clearfix">
 		    <form action="" method="post" class="cosinnus-form form-horizontal " role="form">
 		        {% csrf_token %}
-		        <input type="hidden" name="next" value="{% if request.GET.next %}{{ request.GET.next }}{% else %}{% url 'cosinnus:my_stream' %}{% endif %}">
 		        {{ form.non_field_errors }}
 		        
 		        <!-- a box with semi transparent background -->
