@@ -132,13 +132,12 @@ msgstr "%(count)d Benutzerkonten wurden erfolgreich reaktiviert."
 msgid "Reactivate user accounts"
 msgstr "Reaktiviere Benutzerkontos"
 
-#, fuzzy, python-format
-#| msgid "%d Users' rocketchat room memberships were re-done."
+#, python-format
 msgid "%(count)d Users' group memberships were refreshed."
-msgstr "%d Die Rocketchat-Raummitgliedschaften der Benutzer wurden neu erstellt."
+msgstr ""
 
 msgid "Refresh user group membership associations (e.g. cache or Nextcloud folder problems)"
-msgstr "ter the Secret "
+msgstr ""
 
 #, python-format
 msgid "%d Users were synchronized successfully."
@@ -7020,7 +7019,7 @@ msgid "We could not retrieve your groups from Facebook because of an error. Plea
 msgstr "Wir konnten aufgrund eines Fehlers deine Gruppen nicht von Facebook lesen. Bitte kontaktiere einen Administrator!"
 
 msgid "Are you sure you want to delete the item?"
-msgstr "Bist du sicher dass du diesen Inhalt löschen willt?"
+msgstr "Bist du sicher dass du diesen Inhalt löschen willst?"
 
 #
 msgid "Delete comment"
