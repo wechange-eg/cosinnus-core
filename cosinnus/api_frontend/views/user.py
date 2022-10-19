@@ -194,8 +194,10 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
     permission_classes = (IsNotAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
-    if False: # TODO: re-implement on release
-        throttle_classes = [UserSignupThrottleBurst, UserSignupThrottleSustained]
+    
+    # Throttle classes to be used if server configuration allows.
+    #    right now, nginx reverse proxy prevents IP info from reaching django
+    throttle_classes = [UserSignupThrottleBurst, UserSignupThrottleSustained]
     
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -235,9 +237,10 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
     def post(self, request):
         serializer = CosinnusUserSignupSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        # add a throttle point for a successful signup
-        UserSignupThrottleBurst().throttle_success(really_throttle=True, request=request, view=self)
-        
+        if UserSignupThrottleBurst in self.throttle_classes:
+            # add a throttle point for a successful signup
+            UserSignupThrottleBurst().throttle_success(really_throttle=True, request=request, view=self)
+            
         user = serializer.create(serializer.validated_data)
         redirect_url = self.trigger_events_after_user_signup(user, self.request)
         data = {

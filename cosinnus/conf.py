@@ -1289,8 +1289,8 @@ class CosinnusConf(AppConf):
     # 0 for projects; 1 for groups; 2 for conferences
     ENABLE_USER_JOIN_TOKENS_FOR_GROUP_TYPE = []
     
-    # whether to enable enforcing hcaptcha
-    USE_HCAPTCHA = False
+    # whether to require a valid hcaptcha on the signup API endpoint
+    USE_HCAPTCHA = True
     
     # the secret key for the hcaptcha. set in .env
     HCAPTCHA_SECRET_KEY = None

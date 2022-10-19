@@ -77,7 +77,7 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
     def validate(self, attrs):
         """ We run validation all in one method, because we do not want to
             give out any further validation details if the captcha is incorrect """
-        # hcaptcha. do not validate the email before the captcha has been processed as valid!
+        # hcaptcha. do not validate the email before the captcha has been processed as valid.
         if 'hcaptcha_response' in attrs or settings.COSINNUS_USE_HCAPTCHA:
             # for debugging, we allow processing hcaptcha if the param is sent in POST,
             # even if COSINNUS_USE_HCAPTCHA is not activated
