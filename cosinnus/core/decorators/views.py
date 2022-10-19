@@ -72,10 +72,7 @@ def redirect_to_not_logged_in(request, view=None, group=None):
     if view and getattr(view, 'is_ajax_request_url', False):
         return HttpResponseForbidden('Not authenticated')
     # redirect to group's micropage and give login required error message
-    next_arg = request.path
-    if request.GET.keys():
-        next_arg += '?' + '&'.join(["%s=%s" % (k,v) for k,v in request.GET.items()])
-    next_arg = urlencode(next_arg)
+    next_arg = request.get_full_path()
     if group is not None:
         messages.warning(request, _('Only registered members can see the content you requested! Log in or create an account now!'))
     else:

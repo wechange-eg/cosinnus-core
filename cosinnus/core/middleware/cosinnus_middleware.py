@@ -157,7 +157,7 @@ class AdminOTPMiddleware(MiddlewareMixin):
         if user and check_user_superuser(user) and request.path.startswith(filter_path) and not request.path in EXEMPTED_URLS_FOR_2FA:
             # check if the user is not yet 2fa verified, if so send them to the verification view
             if not user.is_verified():
-                next_url = request.path
+                next_url = request.get_full_path()
                 return redirect(reverse('cosinnus:login-2fa') + (('?next=%s' % next_url) if is_safe_url(next_url, allowed_hosts=[request.get_host()]) else ''))
         elif user and user.is_authenticated and not check_user_superuser(user) and request.path.startswith('/admin/') and not request.path in EXEMPTED_URLS_FOR_2FA:
             # normal users will never be redirected to the admin area
@@ -185,7 +185,7 @@ class UserOTPMiddleware(MiddlewareMixin):
         if user and user.is_authenticated and request.path.startswith(filter_path) and not request.path in EXEMPTED_URLS_FOR_2FA:
             # check if the user is not yet 2fa verified, if so send them to the verification view
             if user_has_device(user) and not user.is_verified():
-                next_url = request.path
+                next_url = request.get_full_path()
                 return redirect(reverse('cosinnus:two-factor-auth-token') + (('?next=%s' % next_url) if is_safe_url(next_url, allowed_hosts=[request.get_host()]) else ''))
 
         return None
