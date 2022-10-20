@@ -553,10 +553,6 @@ class CosinnusConf(AppConf):
     # shall each individual email be logged as a `CosinnusSentEmailLog`?
     LOG_SENT_EMAILS = True
     
-    # in addition to the django setting, so we can know when this is set to None
-    # may be used for specific portals to overwrite login redirect
-    LOGIN_REDIRECT_URL = None
-    
     # if set to anything but None, logged-in users will be redirected to this
     # URL if they try to visit the register or login pages
     LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET = '/map/'

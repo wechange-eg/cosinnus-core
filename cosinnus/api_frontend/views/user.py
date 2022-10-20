@@ -130,7 +130,7 @@ class LoginView(LoginViewAdditionalLogicMixin, APIView):
             'refresh': user_tokens['refresh'],
             'access': user_tokens['access'],
             'user': UserSerializer(user, context={'request': request}).data,
-            'next': getattr(settings, 'COSINNUS_LOGIN_REDIRECT_URL', reverse('cosinnus:user-dashboard')),
+            'next': getattr(settings, 'LOGIN_REDIRECT_URL', reverse('cosinnus:user-dashboard')),
         }
         response = Response(data)
         response = self.set_response_cookies(response)
@@ -245,7 +245,7 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
         redirect_url = self.trigger_events_after_user_signup(user, self.request)
         data = {
             'user': UserSerializer(user, context={'request': request}).data,
-            'next': redirect_url or getattr(settings, 'COSINNUS_LOGIN_REDIRECT_URL', reverse('cosinnus:user-dashboard')),
+            'next': redirect_url or getattr(settings, 'LOGIN_REDIRECT_URL', reverse('cosinnus:user-dashboard')),
         }
         
         # if the user has been logged in immediately, return the auth tokens
