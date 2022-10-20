@@ -143,7 +143,7 @@ setup(
         'pycountry==20.7.3',
         'pycrypto==2.6.1',
         'raven==6.9.0',
-        'redis==2.10.6',
+        'redis==4.3.4',
         'requests==2.20.0',
         'requests-oauthlib==0.8.0',
         'rocketchat-API==0.6.26',
