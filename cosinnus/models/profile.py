@@ -348,6 +348,17 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
             setattr(self, key, self.media_tag)
         return getattr(self, key)
     
+    def get_media_tag_fields_rendered(self, request=None):
+        """ Returns the rendered HTML of the userprofile's media tag fields detail template snippet """ 
+        data = {
+            'object': self,
+        }
+        return render_to_string(
+            'cosinnus/media_tags_userprofile_readonly.html',
+            data, 
+            request=request
+        )
+    
     def get_dynamic_fields_rendered(self, request=None):
         """ Returns the rendered HTML of the userprofile's dynamic fields detail template snippet """ 
         data = {

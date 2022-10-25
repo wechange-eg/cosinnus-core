@@ -475,9 +475,11 @@ class DetailedUserMapResult(DetailedMapResult):
         #sqs = filter_searchqueryset_for_read_access(sqs, user)
         sqs = sqs.order_by('title')
         
-        extra_html = ''
+        # render the user's media tags
+        extra_html = obj.get_media_tag_fields_rendered() + '\n'
+        # render the user's dynamic profile fields
         if settings.COSINNUS_USERPROFILE_EXTRA_FIELDS_SHOW_ON_MAP:
-            extra_html = obj.get_dynamic_fields_rendered()
+            extra_html += obj.get_dynamic_fields_rendered()
              
         kwargs.update({
             'projects': [],
