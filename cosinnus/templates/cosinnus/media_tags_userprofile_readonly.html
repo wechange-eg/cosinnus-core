@@ -36,6 +36,27 @@
     {% endif %}
 {% endwith %}
 
+{% comment %} The new redesign "Contact infos" {% endcomment %}
+{% if object.dynamic_fields.contact_infos %}
+    <legend>{% trans "Contact Infos" %}</legend>
+    {% for contact_entry in object.dynamic_fields.contact_infos %}
+        {% if contact_entry.type and contact_entry.value %}
+            <p class="transparent">
+                {% if contact_entry.type == "email" %}
+		            <i class="fa fa-fw fa-envelope"></i> 
+		            <a href="mailto:{{ contact_entry.value }}" target="_blank">{{ contact_entry.value }}</a>
+                {% elif contact_entry.type == "url" %}
+                    <i class="fa fa-fw fa-globe"></i> 
+                    <a href="{{ contact_entry.value }}" target="_blank">{{ contact_entry.value }}</a>
+                {% elif contact_entry.type == "phonenumber" %}
+                    <i class="fa fa-fw fa-phone"></i> 
+                    <a href="phone:{{ contact_entry.value }}" target="_blank">{{ contact_entry.value }}</a>
+                {% endif %}
+	        </p>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
 {% comment %} Faked to 'all' {% endcomment %}
 <legend>{% trans "Visibility" %}</legend>
 <p class="transparent">

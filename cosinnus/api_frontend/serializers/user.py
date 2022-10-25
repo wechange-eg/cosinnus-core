@@ -170,7 +170,6 @@ class CosinnusHybridUserSerializer(TaggitSerializer, serializers.Serializer):
         so that one doesn't have to worry about database structures when changing user 
         profile values. """
     
-    # TODO: saving this correctly may need some work (file path?)
     avatar = Base64ImageField(
         source='cosinnus_profile.avatar', 
         required=False,
