@@ -50,7 +50,7 @@
                     <a href="{{ contact_entry.value }}" target="_blank">{{ contact_entry.value }}</a>
                 {% elif contact_entry.type == "phone_number" %}
                     <i class="fa fa-fw fa-phone"></i> 
-                    <a href="phone:{{ contact_entry.value }}" target="_blank">{{ contact_entry.value }}</a>
+                    <a href="tel:{{ contact_entry.value }}" target="_blank">{{ contact_entry.value }}</a>
                 {% endif %}
 	        </p>
         {% endif %}
