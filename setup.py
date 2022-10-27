@@ -139,7 +139,7 @@ setup(
         'html2text==2016.9.19',
         'numpy==1.14.5',
         'oauthlib==3.0.1',
-        'paramiko==2.4.2',
+        'paramiko==2.11.0',
         'pycountry==20.7.3',
         'pycrypto==2.6.1',
         'raven==6.9.0',
