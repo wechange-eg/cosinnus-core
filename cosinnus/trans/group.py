@@ -59,6 +59,8 @@ class CosinnusProjectTransBase(object):
     MESSAGE_ONLY_ADMINS_MAY_DEACTIVATE = _('Sorry, only portal administrators can deactivate Projects! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.')
     MESSAGE_MEMBERS_ONLY = _('Only project members can see the content you requested. Apply to become a member now!')
     
+    MESSAGE_RECORDINGS_ONLY_FOR_PREMIUM = _('Note: New recordings can only be made if you have booked premium features for this project.')
+
 
 class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     """ A class containing all type-specific translation strings for the abstract typed
@@ -112,7 +114,9 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     MESSAGE_ONLY_ADMINS_MAY_DEACTIVATE = _('Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.')
     MESSAGE_MEMBERS_ONLY = _('Only group members can see the content you requested. Apply to become a member now!')
     
+    MESSAGE_RECORDINGS_ONLY_FOR_PREMIUM = _('Note: New recordings can only be made if you have booked premium features for this group.')
     
+
 class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     """ A class containing all type-specific translation strings for the abstract typed
         CosinnusBaseGroup variations.
@@ -164,6 +168,7 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     MESSAGE_ONLY_ADMINS_MAY_DEACTIVATE = _('Sorry, only portal administrators can deactivate Conferences! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.')
     MESSAGE_MEMBERS_ONLY = _('Only conference members can see the content you requested. Apply to become a member now!')
     
+    MESSAGE_RECORDINGS_ONLY_FOR_PREMIUM = _('Note: New recordings can only be made if you have booked premium features for this conference.')
     
 # allow dropin of trans classes
 CosinnusProjectTrans = CosinnusProjectTransBase

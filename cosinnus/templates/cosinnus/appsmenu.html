@@ -62,7 +62,7 @@
             </li>
         {% endif %}
 		
-		{% if not group.group_is_conference and group.video_conference_type == 1 and user|has_read_access:group %}
+		{% if not group.group_is_conference and group.video_conference_type == 1 and user|has_write_access:group %}
 			<li class="app-main appnavi-listelement fine-space">
 				<a href="{{ conference_recorded_meetings_page }}">
 					<i class="fa fa-fw fa-video"></i>
