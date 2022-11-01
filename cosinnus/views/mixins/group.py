@@ -11,6 +11,7 @@ from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user,\
     check_object_write_access, check_object_read_access
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.models.tagged import BaseTaggableObjectModel
+from cosinnus.models.group import CosinnusBaseGroup
 from django.core.exceptions import PermissionDenied, ImproperlyConfigured
 from django.shortcuts import redirect
 from django.http.response import Http404
@@ -391,6 +392,16 @@ class GroupIsConferenceMixin(object):
 
     def dispatch(self, request, *args, **kwargs):
         if not self.group.group_is_conference:
+            return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
+        return super().dispatch(request, *args, **kwargs)
+
+
+class GroupHasBBBActivatedMixin(object):
+    """ View mixin that makes it required for the view's group to have a BBB video conferences activated.
+        If not, redirects to the group dashboard. """
+    
+    def dispatch(self, request, *args, **kwargs):
+        if not self.group.group_is_conference and not self.group.video_conference_type == CosinnusBaseGroup.BBB_MEETING:
             return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
         return super().dispatch(request, *args, **kwargs)
     
