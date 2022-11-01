@@ -448,12 +448,20 @@ class EntryDetailView(ReflectedObjectRedirectNoticeMixin, ReflectedObjectSelectM
         attendants_going = all_attendants.filter(state=EventAttendance.ATTENDANCE_GOING)
         attendants_maybe = all_attendants.filter(state=EventAttendance.ATTENDANCE_MAYBE_GOING)
         attendants_not_going = all_attendants.filter(state=EventAttendance.ATTENDANCE_NOT_GOING)
+        
+        # check if this has a bbb room to display 
+        bbb_room = None
+        has_bbb_video = settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and \
+            event.video_conference_type == event.BBB_MEETING
+        if has_bbb_video:
+            bbb_room = getattr(event.media_tag, 'bbb_room')
 
         context.update({
             'user_attendance': user_attendance,
             'attendants_going': attendants_going,
             'attendants_maybe': attendants_maybe,
             'attendants_not_going': attendants_not_going,
+            'recording_prompt_required': bbb_room and bbb_room.is_recorded_meeting or False,
         })
         
         return context

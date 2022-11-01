@@ -525,6 +525,8 @@
 		</script>
 	{% elif SETTINGS.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and event.video_conference_type == 1 %}
 		<script type="text/javascript">
+			var recordingConsentText = '{% trans "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers." %}';
+			var recordingRequiresConsent = {% if recording_prompt_required %}true{% else %}false{% endif %};
 			$(function() {
 				/** Video conference fullscreen toggle */
 				$('.fullscreen-toggle').click(function() {
@@ -537,9 +539,11 @@
                     $('.video-conference-iframe').html('<p class="textfield">{% trans "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page." %}</p>');
                 });
 				$('.start-video-conference').click(function(){
-					$('.start-video-conference').hide();
-					$('.video-conference-container').show();
-					$('.video-conference-iframe').html(embed_video_conf);
+				    if (recordingRequiresConsent == false || confirm(recordingConsentText)) {
+						$('.start-video-conference').hide();
+						$('.video-conference-container').show();
+						$('.video-conference-iframe').html(embed_video_conf);
+				    }
 				});
 				$('.stop-video-conference').click(function(){
 					$('.start-video-conference').show();
