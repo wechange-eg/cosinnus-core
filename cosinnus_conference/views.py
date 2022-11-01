@@ -41,7 +41,7 @@ from cosinnus.utils.user import create_base_user, filter_active_users
 from cosinnus.views.group import SamePortalGroupMixin
 from cosinnus.views.mixins.group import GroupIsConferenceMixin, FilterGroupMixin,\
     RequireAdminMixin, RequireLoggedInMixin, GroupFormKwargsMixin,\
-    DipatchGroupURLMixin, RequireExtraDispatchCheckMixin
+    DipatchGroupURLMixin, RequireExtraDispatchCheckMixin, GroupHasBBBActivatedMixin
 from cosinnus.views.mixins.group import RequireReadMixin, RequireWriteMixin
 from cosinnus.views.profile import delete_userprofile
 from cosinnus.utils.urls import group_aware_reverse, redirect_with_next
@@ -585,7 +585,7 @@ class ConferenceRemindersView(SamePortalGroupMixin, RequireWriteMixin, GroupIsCo
         return group_aware_reverse('cosinnus:conference:reminders', kwargs={'group': self.group})
 
 
-class ConferenceRecordedMeetingsView(SamePortalGroupMixin, RequireWriteMixin, GroupIsConferenceMixin, TemplateView):
+class ConferenceRecordedMeetingsView(SamePortalGroupMixin, RequireWriteMixin, GroupHasBBBActivatedMixin, TemplateView):
     """ A list view that retrieves the recorded BBB meetings for this conference """
 
     template_name = 'cosinnus/conference/conference_recorded_meetings.html'

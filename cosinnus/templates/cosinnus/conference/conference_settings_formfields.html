@@ -45,7 +45,9 @@
                     {% if premium_label %}{{ premium_label }}{% endif %}
 		            ({% trans "Default" %}: <b>{{ form.inherited_field_value_labels.record_meeting }})</b>
 					<br/>
-		            {% trans "Note: New recordings can only be made if you have booked premium features for this conference." %}
+					{% if not field_name in SETTINGS.BBB_PRESET_USER_FORM_FIELDS and field_name in SETTINGS.BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY or field_name in SETTINGS.BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY %}
+						{% trans "Note: New recordings can only be made if you have booked premium features for this conference." %}
+					{% endif %}
 		        {% endcaptureas %}
 		        {% include 'cosinnus/fields/condensed_radio_field.html' with field=form.record_meeting label=record_meeting_label %}
 		        
