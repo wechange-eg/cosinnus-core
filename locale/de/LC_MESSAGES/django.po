@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-26 13:42+0200\n"
+"POT-Creation-Date: 2022-11-03 17:18+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1425,6 +1425,14 @@ msgstr "Art des Teilnahmeantrags"
 msgid "Type of video conference available for a group / a project"
 msgstr "Typ der Videokonferenz die für Gruppen / Projekte verfügbar sind"
 
+#, fuzzy
+#| msgid "Enable Streaming this BBB meeting"
+msgid "Enable premium user choices (BBB) until"
+msgstr "Streamen dieser BBB-Veranstaltung aktivieren"
+
+msgid "Enter the date until group admins may make premium choices here (only if group/project and event BBB rooms require a premium booking)"
+msgstr ""
+
 msgid "Microsite Video"
 msgstr "Microsite Video"
 
@@ -2629,6 +2637,9 @@ msgstr "Aktueller Willkommens-E-Mail Text"
 msgid "Video conference"
 msgstr "Videokonferenz"
 
+msgid "Recorded Meetings"
+msgstr "Aufgezeichnete Meetings"
+
 msgid "Conference Room Management"
 msgstr "Tagungsräume verwalten"
 
@@ -2643,9 +2654,6 @@ msgstr "Teilnahmeanträge bearbeiten"
 
 msgid "Manage Temporary User Accounts"
 msgstr "Temporäre Benutzerkonten verwalten"
-
-msgid "Recorded Meetings"
-msgstr "Aufgezeichnete Meetings"
 
 #
 #. Translators: __INCLUDE_JS_PO__
@@ -3176,11 +3184,8 @@ msgstr "Wenn eine Datei mit Bedingungen hochgeladen wird, müssen diese von alle
 msgid "Unfortunately recorded meetings are currently not yet available for this server!"
 msgstr "Die Meetings- Aufzeichnungen sind für diesen Server momentan leider nicht verfügbar!"
 
-msgid "Recording of meetings is only available for premium conferences!"
-msgstr "Aufzeichnung von Meetings ist nur für Premium-Tagungen verfügbar!"
-
 msgid "Make a premium booking here"
-msgstr "Hier deine Premium-Buchung machen"
+msgstr "Nimm deine Premium-Buchung hier vor"
 
 msgid "Conference Bookings"
 msgstr "Tagungsbuchungen"
@@ -3359,9 +3364,6 @@ msgstr "Kamera beim Betreten aktivieren"
 
 msgid "Allow recording"
 msgstr "Aufnahme erlauben"
-
-msgid "Note: New recordings can only be made if you have booked premium features for this conference."
-msgstr "Achtung: Neue Aufzeichnungen können nur gemacht werden, wenn der Premium-Status für diese Tagung gebucht wurde."
 
 msgid "Temporary Users"
 msgstr "Temporäre Benutzerkonten"
@@ -3761,6 +3763,18 @@ msgstr "Diese Adresse entfernen"
 
 msgid "Add an Address"
 msgstr "Adresse hinzufügen"
+
+msgid "Include a video conference"
+msgstr "Videokonferenz einbetten"
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr "Wähle den Typ der Videokonferenz, die in der Veranstaltung verwendet werden soll"
+
+msgid "BBB-Meetings are a premium feature."
+msgstr "BBB-Meetings sind ein Premium-Feature."
+
+msgid "Premium Bookings"
+msgstr "Premium-Buchungen"
 
 msgid "Maximum Number of Participants"
 msgstr "Maximale Anzahl von Teilnehmenden"
@@ -4191,12 +4205,6 @@ msgstr "Der aktuelle Token ist: "
 #
 msgid "Create token"
 msgstr "Token erstellen"
-
-msgid "Include a video conference"
-msgstr "Videokonferenz einbetten"
-
-msgid "Choose the type of the video conference you would like to include in the dashboard"
-msgstr "Wähle den Typ der Videokonferenz, die im Dashboard angezeigt werden soll"
 
 msgid "Privacy settings"
 msgstr "Sichtbarkeits-Einstellungen"
@@ -7384,6 +7392,11 @@ msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen deaktiviere
 msgid "Only project members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieses Projekts können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
 
+#, fuzzy
+#| msgid "Note: New recordings can only be made if you have booked premium features for this conference."
+msgid "Note: New recordings can only be made if you have booked premium features for this project."
+msgstr "Achtung: Neue Aufzeichnungen können nur gemacht werden, wenn der Premium-Status für diese Tagung gebucht wurde."
+
 msgid "You are not currently in any Groups"
 msgstr "Du bist noch in keinen Gruppen Mitglied"
 
@@ -7464,6 +7477,11 @@ msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen deaktiviere
 
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieser Gruppe können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
+
+#, fuzzy
+#| msgid "Note: New recordings can only be made if you have booked premium features for this conference."
+msgid "Note: New recordings can only be made if you have booked premium features for this group."
+msgstr "Achtung: Neue Aufzeichnungen können nur gemacht werden, wenn der Premium-Status für diese Tagung gebucht wurde."
 
 msgid "My Conferences"
 msgstr "Meine Tagungen"
@@ -7567,6 +7585,9 @@ msgstr "Entschuldige, nur Portal-Administrator_innen können Tagungen deaktivier
 
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieser Tagung können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
+
+msgid "Note: New recordings can only be made if you have booked premium features for this conference."
+msgstr "Achtung: Neue Aufzeichnungen können nur gemacht werden, wenn der Premium-Status für diese Tagung gebucht wurde."
 
 msgid "Please verify your email address."
 msgstr "Bitte bestätige deine E-Mail-Adresse."
@@ -9144,9 +9165,6 @@ msgstr ""
 
 msgid "Enter a title for the new event."
 msgstr "Gib einen Titel für die Veranstaltung an."
-
-msgid "Choose the type of the video conference you would like for the event"
-msgstr "Wähle den Typ der Videokonferenz, die in der Veranstaltung verwendet werden soll"
 
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "Das erste hochgeladene Bild wird als Hintergrundbild angezeigt."
@@ -12841,6 +12859,12 @@ msgstr "Aufgabenliste „%(title)s“ konnte nicht hinzugefügt werden."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte hast eins oder mehrere der noch enthaltenen Objekte zu löschen!"
+
+#~ msgid "Recording of meetings is only available for premium conferences!"
+#~ msgstr "Aufzeichnung von Meetings ist nur für Premium-Tagungen verfügbar!"
+
+#~ msgid "Choose the type of the video conference you would like to include in the dashboard"
+#~ msgstr "Wähle den Typ der Videokonferenz, die im Dashboard angezeigt werden soll"
 
 #~ msgid "Umwelt"
 #~ msgstr "Umwelt"

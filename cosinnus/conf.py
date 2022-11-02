@@ -1191,7 +1191,14 @@ class CosinnusConf(AppConf):
     
     BBB_RESOLVE_CLUSTER_REDIRECTS_IF_URL_MATCHES = lambda url: url.startswith('https://bbbatscale')
     
+    # whether to enable BBB conferences in legacy groups/projects and events itself,
+    # independent of a conference
     BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS = False
+    
+    # if `BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS` is set to True,
+    # and this is set to True, admins need to enable groups/projects
+    # using field `???` before the group admins can enable the BBB option
+    BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED = False
     
     STARRED_STAR_LABEL = _('Bookmark')
     STARRED_STARRING_LABEL = _('Bookmarked')

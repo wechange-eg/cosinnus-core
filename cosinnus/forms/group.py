@@ -197,9 +197,10 @@ class CosinnusBaseGroupForm(TranslatedFieldsFormMixin, FacebookIntegrationGroupF
                 (CosinnusBaseGroup.NO_VIDEO_CONFERENCE, _('No video conference')),
             ]
             if settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS:
-                custom_choices += [
-                    (CosinnusBaseGroup.BBB_MEETING, _('BBB-Meeting')),
-                ]
+                if not settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED or (instance and instance.group_can_be_bbb_enabled):
+                    custom_choices += [
+                        (CosinnusBaseGroup.BBB_MEETING, _('BBB-Meeting')),
+                    ]
             if CosinnusPortal.get_current().video_conference_server:
                 custom_choices += [
                     (CosinnusBaseGroup.FAIRMEETING, _('Fairmeeting')),

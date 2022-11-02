@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-26 13:42+0200\n"
+"POT-Creation-Date: 2022-11-03 17:18+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1472,6 +1472,12 @@ msgstr "Metoda podání žádosti"
 msgid "Type of video conference available for a group / a project"
 msgstr ""
 
+msgid "Enable premium user choices (BBB) until"
+msgstr ""
+
+msgid "Enter the date until group admins may make premium choices here (only if group/project and event BBB rooms require a premium booking)"
+msgstr ""
+
 msgid "Microsite Video"
 msgstr "Video mikrostránky"
 
@@ -2734,6 +2740,9 @@ msgstr "Aktuálně nastavený uvítací e-mail"
 msgid "Video conference"
 msgstr "Prohlédněte si konferenci"
 
+msgid "Recorded Meetings"
+msgstr ""
+
 msgid "Conference Room Management"
 msgstr "Řízení konferenční místnosti"
 
@@ -2749,9 +2758,6 @@ msgstr "Řiďte žádosti o účast"
 #, fuzzy
 msgid "Manage Temporary User Accounts"
 msgstr "Dočasné uživatelské účty"
-
-msgid "Recorded Meetings"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -3272,9 +3278,6 @@ msgstr "Pokud je soubor nahrán, žadatelé musí s těmito podmínkami v tomto 
 msgid "Unfortunately recorded meetings are currently not yet available for this server!"
 msgstr ""
 
-msgid "Recording of meetings is only available for premium conferences!"
-msgstr ""
-
 msgid "Make a premium booking here"
 msgstr ""
 
@@ -3461,9 +3464,6 @@ msgid "Turn on camera on entering"
 msgstr ""
 
 msgid "Allow recording"
-msgstr ""
-
-msgid "Note: New recordings can only be made if you have booked premium features for this conference."
 msgstr ""
 
 #, fuzzy
@@ -3893,6 +3893,20 @@ msgstr "Odstraňte tuto adresa"
 
 msgid "Add an Address"
 msgstr "Přidejte adresu"
+
+#, fuzzy
+msgid "Include a video conference"
+msgstr "Zaslat 1 den před zahájením konference"
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
+
+msgid "BBB-Meetings are a premium feature."
+msgstr ""
+
+#, fuzzy
+msgid "Premium Bookings"
+msgstr "Premium"
 
 msgid "Maximum Number of Participants"
 msgstr "Maximální počet účastníků"
@@ -4333,13 +4347,6 @@ msgstr ""
 #| msgid "Create content"
 msgid "Create token"
 msgstr "Vytvořit obsah"
-
-#, fuzzy
-msgid "Include a video conference"
-msgstr "Zaslat 1 den před zahájením konference"
-
-msgid "Choose the type of the video conference you would like to include in the dashboard"
-msgstr ""
 
 msgid "Privacy settings"
 msgstr "Nastavení ochrany osobních údajů"
@@ -7568,6 +7575,9 @@ msgstr "Litujeme, pouze administrátoři portálu mohou deaktivovat projekty! M�
 msgid "Only project members can see the content you requested. Apply to become a member now!"
 msgstr "Vámi vybraný obsah mohou zobrazit pouze členové projektu. Podejte si ádost o členství nyní!"
 
+msgid "Note: New recordings can only be made if you have booked premium features for this project."
+msgstr ""
+
 msgid "You are not currently in any Groups"
 msgstr "Zatím nejste v žádné skupině"
 
@@ -7647,6 +7657,9 @@ msgstr "Litujeme, pouze správci portálu mohou deaktivovat skupiny! Můžete na
 
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "Vámi vybraný obsah mohou zobrazit pouze členové skupiny. Podejte si žádost o členství nyní!"
+
+msgid "Note: New recordings can only be made if you have booked premium features for this group."
+msgstr ""
 
 msgid "My Conferences"
 msgstr "Mé konference"
@@ -7747,6 +7760,9 @@ msgstr "Litujeme, pouze administrátoři portálu mohou deaktivovat konference! 
 
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "Vámi vybraný obsah mohou zobrazit pouze účastníci konference. Podejte si žádost o členství nyní!"
+
+msgid "Note: New recordings can only be made if you have booked premium features for this conference."
+msgstr ""
 
 #, fuzzy
 msgid "Please verify your email address."
@@ -9349,9 +9365,6 @@ msgstr ""
 
 msgid "Enter a title for the new event."
 msgstr "Zadejte název nové události."
-
-msgid "Choose the type of the video conference you would like for the event"
-msgstr ""
 
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "První nahraný obrázek se zobrazí jako tapeta."

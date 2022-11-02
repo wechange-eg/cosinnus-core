@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-26 13:42+0200\n"
+"POT-Creation-Date: 2022-11-03 17:18+0100\n"
 "PO-Revision-Date: 2022-08-02 17:16+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1459,6 +1459,14 @@ msgstr "Название приложения"
 msgid "Type of video conference available for a group / a project"
 msgstr "Тип видео-конференции, доступной для группы / проекта"
 
+#, fuzzy
+#| msgid "Enable Streaming this BBB meeting"
+msgid "Enable premium user choices (BBB) until"
+msgstr "Включить трансляцию данного BBB-события"
+
+msgid "Enter the date until group admins may make premium choices here (only if group/project and event BBB rooms require a premium booking)"
+msgstr ""
+
 msgid "Microsite Video"
 msgstr "Микросайт Видео"
 
@@ -2671,6 +2679,9 @@ msgstr "Текущая настройка текста приветственн�
 msgid "Video conference"
 msgstr "Видео-конференция"
 
+msgid "Recorded Meetings"
+msgstr "Записанные сессии"
+
 msgid "Conference Room Management"
 msgstr "Управление комнатой конференции"
 
@@ -2685,9 +2696,6 @@ msgstr "Управлять заявками на участие"
 
 msgid "Manage Temporary User Accounts"
 msgstr "Настройки временных аккаунтов пользователей"
-
-msgid "Recorded Meetings"
-msgstr "Записанные сессии"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -3208,9 +3216,6 @@ msgstr "Если файл загружен, заявители должны со
 msgid "Unfortunately recorded meetings are currently not yet available for this server!"
 msgstr "К сожалению, записанные сессии в данный момент недоступны для этого сервера!"
 
-msgid "Recording of meetings is only available for premium conferences!"
-msgstr "Запись сессий доступна только для премиум- конференций!"
-
 msgid "Make a premium booking here"
 msgstr "Сделать премиум-бронирование"
 
@@ -3394,9 +3399,6 @@ msgstr "Включить камеру при подключении"
 
 msgid "Allow recording"
 msgstr "Разрешить запись"
-
-msgid "Note: New recordings can only be made if you have booked premium features for this conference."
-msgstr ""
 
 msgid "Temporary Users"
 msgstr "Временные пользовательские аккаунты"
@@ -3798,6 +3800,20 @@ msgstr "Удалите этот адрес"
 
 msgid "Add an Address"
 msgstr "Адрес электронной почты"
+
+msgid "Include a video conference"
+msgstr "Включить видео-конференцию"
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr "Выберите тип видеоконференции"
+
+msgid "BBB-Meetings are a premium feature."
+msgstr ""
+
+#, fuzzy
+#| msgid "Premium only"
+msgid "Premium Bookings"
+msgstr "Только премиум"
 
 msgid "Maximum Number of Participants"
 msgstr "Максимум участников за кофейным столиком"
@@ -4234,12 +4250,6 @@ msgstr ""
 #| msgid "Create content"
 msgid "Create token"
 msgstr "Создать контент"
-
-msgid "Include a video conference"
-msgstr "Включить видео-конференцию"
-
-msgid "Choose the type of the video conference you would like to include in the dashboard"
-msgstr "Выберите тип видео-конференции, которая будет отражена в дашборде"
 
 msgid "Privacy settings"
 msgstr "Настройки приватности"
@@ -7433,6 +7443,9 @@ msgstr "Извините, но только администраторы пор�
 msgid "Only project members can see the content you requested. Apply to become a member now!"
 msgstr "Данный контент доступен только для членов группы. Подайте заявку на вступление прямо сейчас!"
 
+msgid "Note: New recordings can only be made if you have booked premium features for this project."
+msgstr ""
+
 msgid "You are not currently in any Groups"
 msgstr "Тебя пока нет ни в одной группе"
 
@@ -7513,6 +7526,9 @@ msgstr "Извините, но только администраторы пор�
 
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "Данный контент доступен только для членов группы. Подайте заявку на вступление прямо сейчас!"
+
+msgid "Note: New recordings can only be made if you have booked premium features for this group."
+msgstr ""
 
 msgid "My Conferences"
 msgstr "Конференция"
@@ -7616,6 +7632,9 @@ msgstr "Извините, но только администраторы пор�
 
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "Данный контент доступен только для членов группы. Подайте заявку на вступление прямо сейчас!"
+
+msgid "Note: New recordings can only be made if you have booked premium features for this conference."
+msgstr ""
 
 msgid "Please verify your email address."
 msgstr "Пожалуйста, подтвердите Вашу электронную почту."
@@ -9210,9 +9229,6 @@ msgstr ""
 
 msgid "Enter a title for the new event."
 msgstr "Введите название нового события."
-
-msgid "Choose the type of the video conference you would like for the event"
-msgstr "Выберите тип видеоконференции"
 
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "Первое загруженное изображение будет отображаться в качестве фонового рисунка."
@@ -13048,6 +13064,12 @@ msgstr "Невозможно добавить список задач \"%(title)
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Вы не можете удалить эту папку, так как у Вас нет полномочий для удаления одного или более элементов, которые в ней содержатся!"
+
+#~ msgid "Recording of meetings is only available for premium conferences!"
+#~ msgstr "Запись сессий доступна только для премиум- конференций!"
+
+#~ msgid "Choose the type of the video conference you would like to include in the dashboard"
+#~ msgstr "Выберите тип видео-конференции, которая будет отражена в дашборде"
 
 #~ msgid "Umwelt"
 #~ msgstr "Окружающая среда"

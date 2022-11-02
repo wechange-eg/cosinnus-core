@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-26 13:42+0200\n"
+"POT-Creation-Date: 2022-11-03 17:18+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1456,6 +1456,14 @@ msgstr "Спосіб застосунку"
 msgid "Type of video conference available for a group / a project"
 msgstr ""
 
+#, fuzzy
+#| msgid "Enable Streaming this BBB meeting"
+msgid "Enable premium user choices (BBB) until"
+msgstr "Увімкнути стрімінг для цієї зустрічі BBB"
+
+msgid "Enter the date until group admins may make premium choices here (only if group/project and event BBB rooms require a premium booking)"
+msgstr ""
+
 msgid "Microsite Video"
 msgstr "Відео Мікросайту"
 
@@ -2675,6 +2683,9 @@ msgstr "Поточний встановлений текст вітальног�
 msgid "Video conference"
 msgstr "Переглянути конференцію"
 
+msgid "Recorded Meetings"
+msgstr ""
+
 msgid "Conference Room Management"
 msgstr "Управління кімнатою Конференції"
 
@@ -2690,9 +2701,6 @@ msgstr "Керувати заявками на участь"
 #, fuzzy
 msgid "Manage Temporary User Accounts"
 msgstr "Тимчасовий обліковий запис користувача"
-
-msgid "Recorded Meetings"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -3202,9 +3210,6 @@ msgstr "Якщо файл завантажено, заявники повинн�
 msgid "Unfortunately recorded meetings are currently not yet available for this server!"
 msgstr ""
 
-msgid "Recording of meetings is only available for premium conferences!"
-msgstr ""
-
 msgid "Make a premium booking here"
 msgstr ""
 
@@ -3391,9 +3396,6 @@ msgid "Turn on camera on entering"
 msgstr ""
 
 msgid "Allow recording"
-msgstr ""
-
-msgid "Note: New recordings can only be made if you have booked premium features for this conference."
 msgstr ""
 
 #, fuzzy
@@ -3822,6 +3824,20 @@ msgstr "Видалити цю адресу"
 
 msgid "Add an Address"
 msgstr "Додати адресу"
+
+#, fuzzy
+msgid "Include a video conference"
+msgstr "Надіслати за 1 день до конференції"
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
+
+msgid "BBB-Meetings are a premium feature."
+msgstr ""
+
+#, fuzzy
+msgid "Premium Bookings"
+msgstr "Преміум"
 
 msgid "Maximum Number of Participants"
 msgstr "Максимальна кількість учасників "
@@ -4262,13 +4278,6 @@ msgstr ""
 #| msgid "Create content"
 msgid "Create token"
 msgstr "Створити контент"
-
-#, fuzzy
-msgid "Include a video conference"
-msgstr "Надіслати за 1 день до конференції"
-
-msgid "Choose the type of the video conference you would like to include in the dashboard"
-msgstr ""
 
 msgid "Privacy settings"
 msgstr "Налаштування конфіденційності"
@@ -7487,6 +7496,9 @@ msgstr "Вибачте, лише адміністратори порталу м�
 msgid "Only project members can see the content you requested. Apply to become a member now!"
 msgstr "Тільки члени проєкту можуть бачити цей контент, про який Ви просили. Надішліть запит щодо членства зараз!"
 
+msgid "Note: New recordings can only be made if you have booked premium features for this project."
+msgstr ""
+
 msgid "You are not currently in any Groups"
 msgstr "Тебе ще немає в жодній Групі "
 
@@ -7567,6 +7579,9 @@ msgstr "Вибачте, лише адміністратори порталу м�
 
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "Тільки учасники групи можуть бачити контент, про який Ви просили. Подайте заявку, щоб стати учасником зараз!"
+
+msgid "Note: New recordings can only be made if you have booked premium features for this group."
+msgstr ""
 
 msgid "My Conferences"
 msgstr "Мої конференції"
@@ -7670,6 +7685,9 @@ msgstr "Вибачте, лише адміністратори порталу м�
 
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "Тільки учасники конференції можуть бачити потрібний вам контент. Подайте заявку, щоб стати учасником зараз!"
+
+msgid "Note: New recordings can only be made if you have booked premium features for this conference."
+msgstr ""
 
 #, fuzzy
 msgid "Please verify your email address."
@@ -9276,9 +9294,6 @@ msgstr ""
 
 msgid "Enter a title for the new event."
 msgstr "Введіть назву для нового заходу."
-
-msgid "Choose the type of the video conference you would like for the event"
-msgstr ""
 
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "Перше зображення, що буде завантажене, відображатиметься як фоновий малюнок."

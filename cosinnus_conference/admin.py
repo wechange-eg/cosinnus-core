@@ -81,6 +81,7 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
         ]
         readonly_fields = ('created', 'last_modified', 'is_premium_currently',
                            'attached_objects')
+        exclude = CosinnusProjectAdmin.exclude + ['enable_user_premium_choices_until',]
         
         def get_actions(self, request):
             actions = super(CosinnusConferenceAdmin, self).get_actions(request)

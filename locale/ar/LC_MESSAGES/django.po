@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-26 13:42+0200\n"
+"POT-Creation-Date: 2022-11-03 17:18+0100\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1524,6 +1524,12 @@ msgstr "إسم التطبيق"
 msgid "Type of video conference available for a group / a project"
 msgstr ""
 
+msgid "Enable premium user choices (BBB) until"
+msgstr ""
+
+msgid "Enter the date until group admins may make premium choices here (only if group/project and event BBB rooms require a premium booking)"
+msgstr ""
+
 msgid "Microsite Video"
 msgstr "فيديو الموقع المصغر"
 
@@ -2820,6 +2826,9 @@ msgstr "نص البريد الإلكتروني الترحيبي المعين ح�
 msgid "Video conference"
 msgstr "عرض المؤتمر"
 
+msgid "Recorded Meetings"
+msgstr ""
+
 msgid "Conference Room Management"
 msgstr "إدارة غرفة الاجتماعات"
 
@@ -2836,9 +2845,6 @@ msgstr "إدارة طلبات المشاركة"
 #, fuzzy
 msgid "Manage Temporary User Accounts"
 msgstr "حسابات المستخدمين المؤقتة"
-
-msgid "Recorded Meetings"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -3370,9 +3376,6 @@ msgstr "إذا تم تحميل ملف ، فسيتعين على المتقدمي�
 msgid "Unfortunately recorded meetings are currently not yet available for this server!"
 msgstr ""
 
-msgid "Recording of meetings is only available for premium conferences!"
-msgstr ""
-
 msgid "Make a premium booking here"
 msgstr ""
 
@@ -3568,9 +3571,6 @@ msgid "Turn on camera on entering"
 msgstr ""
 
 msgid "Allow recording"
-msgstr ""
-
-msgid "Note: New recordings can only be made if you have booked premium features for this conference."
 msgstr ""
 
 #, fuzzy
@@ -4007,6 +4007,20 @@ msgstr "البريد الالكتروني"
 #, fuzzy
 msgid "Add an Address"
 msgstr "عناوين البريد الإلكتروني"
+
+#, fuzzy
+msgid "Include a video conference"
+msgstr "أرسل قبل يوم واحد من المؤتمر"
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
+
+msgid "BBB-Meetings are a premium feature."
+msgstr ""
+
+#, fuzzy
+msgid "Premium Bookings"
+msgstr "مميز"
 
 msgid "Maximum Number of Participants"
 msgstr "الحد الأقصى لعدد المشاركين"
@@ -4467,13 +4481,6 @@ msgstr ""
 #| msgid "Create content"
 msgid "Create token"
 msgstr "إنشاء محتوى"
-
-#, fuzzy
-msgid "Include a video conference"
-msgstr "أرسل قبل يوم واحد من المؤتمر"
-
-msgid "Choose the type of the video conference you would like to include in the dashboard"
-msgstr ""
 
 msgid "Privacy settings"
 msgstr "إعدادات الخصوصية"
@@ -7716,6 +7723,9 @@ msgstr "عذرًا ، يمكن فقط لمسؤولي البوابة إلغاء �
 msgid "Only project members can see the content you requested. Apply to become a member now!"
 msgstr "يمكن لأعضاء الفريق فقط رؤية المحتوى الذي طلبته. تقدم لتصبح عضوا الآن!"
 
+msgid "Note: New recordings can only be made if you have booked premium features for this project."
+msgstr ""
+
 #, fuzzy
 msgid "You are not currently in any Groups"
 msgstr "أنت لست في أي مجموعات أو مشاريع حتى الآن"
@@ -7806,6 +7816,9 @@ msgstr "عذرًا ، يمكن فقط لمسؤولي البوابة إلغاء �
 #, fuzzy
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "يمكن لأعضاء الفريق فقط رؤية المحتوى الذي طلبته. تقدم لتصبح عضوا الآن!"
+
+msgid "Note: New recordings can only be made if you have booked premium features for this group."
+msgstr ""
 
 #, fuzzy
 msgid "My Conferences"
@@ -7917,6 +7930,9 @@ msgstr "عذرًا ، يمكن فقط لمسؤولي البوابة إلغاء �
 
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "يمكن لأعضاء الفريق فقط رؤية المحتوى الذي طلبته. تقدم لتصبح عضوا الآن!"
+
+msgid "Note: New recordings can only be made if you have booked premium features for this conference."
+msgstr ""
 
 #, fuzzy
 msgid "Please verify your email address."
@@ -9553,9 +9569,6 @@ msgstr ""
 
 msgid "Enter a title for the new event."
 msgstr "ادخل عنوانا لمناسبة جديدة."
-
-msgid "Choose the type of the video conference you would like for the event"
-msgstr ""
 
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "سيتم عرض أول صورة تم تحميلها كخلفية."

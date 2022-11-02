@@ -229,9 +229,9 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     list_filter = ('portal', 'public', 'is_active',)
     search_fields = ('name', 'slug', 'id',)
     prepopulated_fields = {'slug': ('name', )}
-    readonly_fields = ('created', 'last_modified', 'is_premium_currently', 'attached_objects',)
+    readonly_fields = ['created', 'last_modified', 'is_premium_currently', 'attached_objects',]
     raw_id_fields = ('parent',)
-    exclude = ('is_conference',)
+    exclude = ['is_conference',]
     inlines = [CosinnusConferenceSettingsInline]
     
     ALL_TYPES_CLASSES = [CosinnusProject, CosinnusSociety, CosinnusConference]
@@ -473,27 +473,6 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
         return super(CosinnusSocietyAdmin, self).get_form(request, obj, **kwargs)
 
 admin.site.register(CosinnusSociety, CosinnusSocietyAdmin)
-
-
-class CosinnusConferenceAdmin(CosinnusProjectAdmin):
-    
-    actions = CosinnusProjectAdmin.actions + ['convert_to_project', 'convert_to_society',]
-    exclude = None
-    
-    def get_actions(self, request):
-        actions = super(CosinnusConferenceAdmin, self).get_actions(request)
-        del actions['convert_to_conference']
-        return actions
-    
-    def activate_groups(self, request, queryset):
-        """ Deactivates groups """
-        super(CosinnusConferenceAdmin, self).activate_groups(request, queryset)
-    activate_groups.short_description = CosinnusConference.get_trans().ACTIVATE
-    
-    def deactivate_groups(self, request, queryset):
-        """ Deactivates groups """
-        super(CosinnusConferenceAdmin, self).deactivate_groups(request, queryset)
-    deactivate_groups.short_description = CosinnusConference.get_trans().DEACTIVATE
 
 
 class CosinnusConferencePremiumCapacityInfoInline(admin.StackedInline):

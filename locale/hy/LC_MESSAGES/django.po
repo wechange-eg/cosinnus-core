@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-26 13:42+0200\n"
+"POT-Creation-Date: 2022-11-03 17:18+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1485,6 +1485,12 @@ msgstr "Հավելվածի անվանումը"
 msgid "Type of video conference available for a group / a project"
 msgstr ""
 
+msgid "Enable premium user choices (BBB) until"
+msgstr ""
+
+msgid "Enter the date until group admins may make premium choices here (only if group/project and event BBB rooms require a premium booking)"
+msgstr ""
+
 msgid "Microsite Video"
 msgstr "Միկրոկայքի տեսանյութ"
 
@@ -2759,6 +2765,9 @@ msgstr "Ներկայումս սահմանված Ողջույնի նամակի տ
 msgid "Video conference"
 msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
+msgid "Recorded Meetings"
+msgstr ""
+
 msgid "Conference Room Management"
 msgstr ""
 
@@ -2774,9 +2783,6 @@ msgstr ""
 #, fuzzy
 msgid "Manage Temporary User Accounts"
 msgstr "Թիմի նկարագրություն"
-
-msgid "Recorded Meetings"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -3298,9 +3304,6 @@ msgstr ""
 msgid "Unfortunately recorded meetings are currently not yet available for this server!"
 msgstr ""
 
-msgid "Recording of meetings is only available for premium conferences!"
-msgstr ""
-
 msgid "Make a premium booking here"
 msgstr ""
 
@@ -3496,9 +3499,6 @@ msgid "Turn on camera on entering"
 msgstr ""
 
 msgid "Allow recording"
-msgstr ""
-
-msgid "Note: New recordings can only be made if you have booked premium features for this conference."
 msgstr ""
 
 #, fuzzy
@@ -3942,6 +3942,20 @@ msgstr "էլեկտրոնային հասցե"
 #, fuzzy
 msgid "Add an Address"
 msgstr "Էլ. Փոստի հասցեներ"
+
+#, fuzzy
+msgid "Include a video conference"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
+
+msgid "BBB-Meetings are a premium feature."
+msgstr ""
+
+#, fuzzy
+msgid "Premium Bookings"
+msgstr "Ստեղծել Իրադարձություն"
 
 msgid "Maximum Number of Participants"
 msgstr ""
@@ -4398,13 +4412,6 @@ msgstr ""
 #| msgid "Create content"
 msgid "Create token"
 msgstr "Ստեղծել բովանդակություն"
-
-#, fuzzy
-msgid "Include a video conference"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-msgid "Choose the type of the video conference you would like to include in the dashboard"
-msgstr ""
 
 msgid "Privacy settings"
 msgstr "Գաղտնիության կարգավորումներ"
@@ -7675,6 +7682,9 @@ msgstr "Ներեցեք, միայն պորտալի ադմինիստրատորնե
 msgid "Only project members can see the content you requested. Apply to become a member now!"
 msgstr "Միայն թիմի անդամները կարող են տեսնել ձեր կողմից հայցվող բովանդակությունը. Դիմեք ՝ այժմ անդամագրվելու համար!"
 
+msgid "Note: New recordings can only be made if you have booked premium features for this project."
+msgstr ""
+
 #, fuzzy
 msgid "You are not currently in any Groups"
 msgstr "Դուք որևէ խմբում կամ նախագծում դեռ կայացած չեք"
@@ -7767,6 +7777,9 @@ msgstr "Ներեցեք, միայն պորտալի ադմինիստրատորնե
 #, fuzzy
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "Միայն թիմի անդամները կարող են տեսնել ձեր կողմից հայցվող բովանդակությունը. Դիմեք ՝ այժմ անդամագրվելու համար!"
+
+msgid "Note: New recordings can only be made if you have booked premium features for this group."
+msgstr ""
 
 #, fuzzy
 msgid "My Conferences"
@@ -7893,6 +7906,9 @@ msgstr "Ներեցեք, միայն պորտալի ադմինիստրատորնե
 #, fuzzy
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "Միայն թիմի անդամները կարող են տեսնել ձեր կողմից հայցվող բովանդակությունը. Դիմեք ՝ այժմ անդամագրվելու համար!"
+
+msgid "Note: New recordings can only be made if you have booked premium features for this conference."
+msgstr ""
 
 #, fuzzy
 msgid "Please verify your email address."
@@ -9519,9 +9535,6 @@ msgstr ""
 
 msgid "Enter a title for the new event."
 msgstr "Մուտքագրեք վերնագիր նոր իրադարձության համար."
-
-msgid "Choose the type of the video conference you would like for the event"
-msgstr ""
 
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "Առաջին վերբեռնված պատկերը կցուցադրվի որպես էջի գլխավոր պաստառ."

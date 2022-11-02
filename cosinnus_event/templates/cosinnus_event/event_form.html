@@ -85,7 +85,7 @@
 	    
         {% block video_conference_type_dropdown %}
             {% trans "Choose the type of the video conference you would like for the event" as video_conference_type_legend %}
-            {% include 'cosinnus/fields/video_conference_type_field.html' with video_conference_type_legend=video_conference_type_legend %}
+            {% include 'cosinnus/fields/video_conference_type_field.html' with group_object=group video_conference_type_legend=video_conference_type_legend %}
         {% endblock video_conference_type_dropdown %}
 	                    
         {% trans "Example: http://mywebsite.com" as url_placeholder %}

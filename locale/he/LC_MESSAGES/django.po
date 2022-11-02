@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-26 13:42+0200\n"
+"POT-Creation-Date: 2022-11-03 17:18+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1462,6 +1462,12 @@ msgstr "סוג טופס הבקשה"
 msgid "Type of video conference available for a group / a project"
 msgstr ""
 
+msgid "Enable premium user choices (BBB) until"
+msgstr ""
+
+msgid "Enter the date until group admins may make premium choices here (only if group/project and event BBB rooms require a premium booking)"
+msgstr ""
+
 msgid "Microsite Video"
 msgstr "סרטון Microsite"
 
@@ -2690,6 +2696,9 @@ msgstr "טקסט ברכת הצטרפות שמוגדר כרגע"
 msgid "Video conference"
 msgstr "הצג ועידה"
 
+msgid "Recorded Meetings"
+msgstr ""
+
 msgid "Conference Room Management"
 msgstr "ניהול חדר ועידה"
 
@@ -2705,9 +2714,6 @@ msgstr "נהל בקשות השתתפות"
 #, fuzzy
 msgid "Manage Temporary User Accounts"
 msgstr "חשבונות משתמשים זמניים"
-
-msgid "Recorded Meetings"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -3214,9 +3220,6 @@ msgstr "אם קובץ מועלה, המועמדים יצטרכו להסכים ל�
 msgid "Unfortunately recorded meetings are currently not yet available for this server!"
 msgstr ""
 
-msgid "Recording of meetings is only available for premium conferences!"
-msgstr ""
-
 msgid "Make a premium booking here"
 msgstr ""
 
@@ -3403,9 +3406,6 @@ msgid "Turn on camera on entering"
 msgstr ""
 
 msgid "Allow recording"
-msgstr ""
-
-msgid "Note: New recordings can only be made if you have booked premium features for this conference."
 msgstr ""
 
 #, fuzzy
@@ -3839,6 +3839,20 @@ msgstr "הסר כתובת זו"
 
 msgid "Add an Address"
 msgstr "הוספת כתובת"
+
+#, fuzzy
+msgid "Include a video conference"
+msgstr "שלח יום אחד לפני הוועידה"
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
+
+msgid "BBB-Meetings are a premium feature."
+msgstr ""
+
+#, fuzzy
+msgid "Premium Bookings"
+msgstr "פרמיום"
 
 msgid "Maximum Number of Participants"
 msgstr "מספר משתתפים מרבי"
@@ -4280,13 +4294,6 @@ msgstr ""
 #| msgid "Create content"
 msgid "Create token"
 msgstr "יצירת תוכן"
-
-#, fuzzy
-msgid "Include a video conference"
-msgstr "שלח יום אחד לפני הוועידה"
-
-msgid "Choose the type of the video conference you would like to include in the dashboard"
-msgstr ""
 
 msgid "Privacy settings"
 msgstr "הגדרות פרטיות"
@@ -7510,6 +7517,9 @@ msgstr "מצטערים, רק מנהלי פורטל יכולים לבטל הפע�
 msgid "Only project members can see the content you requested. Apply to become a member now!"
 msgstr "רק חברי פרוייקט יכולים לראות את התוכן שביקשת. הגש בקשה להיות חבר עכשיו!"
 
+msgid "Note: New recordings can only be made if you have booked premium features for this project."
+msgstr ""
+
 msgid "You are not currently in any Groups"
 msgstr "אינך נמצא כעת באף קבוצה"
 
@@ -7589,6 +7599,9 @@ msgstr "מצטערים, רק מנהלי מערכת פורטל יכולים לה�
 
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "רק חברי קבוצה יכולים לראות את התוכן שביקשת. הגש בקשה להיות חבר עכשיו!"
+
+msgid "Note: New recordings can only be made if you have booked premium features for this group."
+msgstr ""
 
 msgid "My Conferences"
 msgstr "שיחות הועידה שלי"
@@ -7689,6 +7702,9 @@ msgstr "מצטערים, רק מנהלי פורטל יכולים לבטל את ה
 
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "רק חברי הועידה יכולים לראות את התוכן המבוקש. הגש בקשת חברות כעת!"
+
+msgid "Note: New recordings can only be made if you have booked premium features for this conference."
+msgstr ""
 
 #, fuzzy
 msgid "Please verify your email address."
@@ -9287,9 +9303,6 @@ msgstr ""
 
 msgid "Enter a title for the new event."
 msgstr "הזינו כותרת עבור האירוע החדש."
-
-msgid "Choose the type of the video conference you would like for the event"
-msgstr ""
 
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "התמונה הראשונה שהועלתה תוצג כטפט."

@@ -470,7 +470,7 @@
                         {# Dropdown field #}
                         {% block video_conference_type_dropdown %}
                             {% if not group_model == "CosinnusConference" %}
-                                {% include 'cosinnus/fields/video_conference_type_field.html' %}
+                                {% include 'cosinnus/fields/video_conference_type_field.html' with group_object=object %}
                             {% endif %}
                         {% endblock %}
                         

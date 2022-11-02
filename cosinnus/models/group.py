@@ -796,6 +796,13 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
     
     video_conference_type = models.PositiveIntegerField(_('Type of video conference available for a group / a project'), blank=False, null=False, choices=VIDEO_CONFERENCE_TYPE_CHOICES, default=NO_VIDEO_CONFERENCE)
     
+    enable_user_premium_choices_until = models.DateField(
+        _('Enable premium user choices (BBB) until'),
+        blank=True, null=True,
+        editable=settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED,
+        help_text=_('Enter the date until group admins may make premium choices here (only if group/project and event BBB rooms require a premium booking)'),
+    )
+    
     # microsite-embeds:
     video = models.URLField(_('Microsite Video'), max_length=200, blank=True, null=True,
                             validators=[MaxLengthValidator(200)])
@@ -1199,7 +1206,35 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
     def group_is_conference(self):
         """ Check if this is a proper conference (a type society with conference flag) """
         return self.type == self.TYPE_CONFERENCE
-
+    
+    @property
+    def group_could_be_bbb_enabled_ever(self):
+        """ Check if this group may potentially enable BBB meetings or could do so in the past. """
+        if self.group_is_conference:
+            return True
+        if settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS:
+            if not settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED:
+                return True
+            elif self.enable_user_premium_choices_until:
+                return True
+        return False
+    
+    @property
+    def group_can_be_bbb_enabled(self):
+        """ Check if this group may potentially enable BBB meetings right now. """
+        if self.group_could_be_bbb_enabled_ever:
+            if now().date() <= self.enable_user_premium_choices_until:
+                return True
+        return False
+    
+    @property
+    def group_is_bbb_enabled(self):
+        """ Check if BBB meetings are currently enabled for this group because their admins have chosen
+            the video conference type option to be BBB. """ 
+        if self.group_can_be_bbb_enabled and self.video_conference_type == self.BBB_MEETING:
+            return True
+        return False
+        
     @property
     def conference_members(self):
         """ Returns a User QS of *AUTO-INVITED* (!) conference member accounts of this group if it is a conference, an empty QS else """

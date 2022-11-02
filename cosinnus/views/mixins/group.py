@@ -401,7 +401,7 @@ class GroupHasBBBActivatedMixin(object):
         If not, redirects to the group dashboard. """
     
     def dispatch(self, request, *args, **kwargs):
-        if not self.group.group_is_conference and not self.group.video_conference_type == CosinnusBaseGroup.BBB_MEETING:
+        if not self.group.group_is_bbb_enabled:
             return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
         return super().dispatch(request, *args, **kwargs)
     
