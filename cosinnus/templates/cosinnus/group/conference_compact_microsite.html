@@ -140,12 +140,16 @@
                     <br>
                     <i>{% trans "Last updated on: " %}</i>{{ group.last_modified|date:"SHORT_DATE_FORMAT" }}
                 </p>
-
-                {% trans "You will now receive notifications for content posted in this conference." as follow_success_message %}
-                {% include 'cosinnus/common/likefollowstar/like_button.html' with object=group %}
-                {% include 'cosinnus/common/likefollowstar/star_button.html' with object=group %}
-                {% include 'cosinnus/common/likefollowstar/follow_button.html' with object=group success_message=follow_success_message %}
-                {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=group %}
+                
+                {% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+                    <div>
+                        {% trans "You will now receive notifications for content posted in this conference." as follow_success_message %}
+                        {% include 'cosinnus/common/likefollowstar/like_button.html' with object=group %}
+                        {% include 'cosinnus/common/likefollowstar/star_button.html' with object=group %}
+                        {% include 'cosinnus/common/likefollowstar/follow_button.html' with object=group success_message=follow_success_message %}
+                        {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=group %}
+                    </div>
+                {% endif %}
             </div>
             
         </div>

@@ -284,16 +284,18 @@
                     {% endblock %}
 		        	
 	        	    <br/>
-	        	    <div>
-	        	        {% if group.type == 0 %}
-	        	            {% trans "You will now receive notifications for content posted in this project." as follow_success_message %}
-	        	        {% else %}
-	        	            {% trans "You will now receive notifications for content posted in this group." as follow_success_message %}
-						{% endif %}
-						{% include 'cosinnus/common/likefollowstar/star_button.html' with object=group %}
-						{% include 'cosinnus/common/likefollowstar/follow_button.html' with object=group success_message=follow_success_message %}
-                        {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=group %}
-	        	    </div>
+					{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+						<div>
+							{% if group.type == 0 %}
+								{% trans "You will now receive notifications for content posted in this project." as follow_success_message %}
+							{% else %}
+								{% trans "You will now receive notifications for content posted in this group." as follow_success_message %}
+							{% endif %}
+							{% include 'cosinnus/common/likefollowstar/star_button.html' with object=group %}
+							{% include 'cosinnus/common/likefollowstar/follow_button.html' with object=group success_message=follow_success_message %}
+							{% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=group %}
+						</div>
+					{% endif %}
 					
 					{% block social_media_buttons %}
 						{% if SETTINGS.COSINNUS_MICROSITE_SHOW_SOCIAL_MEDIA_BUTTONS %}

@@ -1258,6 +1258,9 @@ class CosinnusConf(AppConf):
     # 0 for projects; 1 for groups; 2 for conferences
     ENABLE_USER_JOIN_TOKENS_FOR_GROUP_TYPE = []
 
+    # should the LIKE, BOOKMARK, FOLLOW buttons be shown on the entire portal (microsite, groups/projects, events, etc.)?
+    SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS = True
+
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.
         These are settings used by default in cosinnus apps, such as avatar dimensions, etc.

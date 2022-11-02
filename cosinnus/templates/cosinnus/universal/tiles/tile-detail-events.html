@@ -36,46 +36,48 @@
             </span>
         </a>
     {% else %}
-        {% if controlView.portalInfo.current == portal %}
-            <a class="rounded-button button-action 
-                    {% if cosinnus_active_user %}button-like" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
-                <span class="rounded-button-inner">
-                    {% if liked %}
-                        <i clasS="fas fa-heart"></i>
-                        {# Translators: __INCLUDE_JS_PO__ #}
-                        {% trans "Liked" %}
-                    {% else %}
-                        <i clasS="far fa-heart"></i>
-                        {# Translators: __INCLUDE_JS_PO__ #}
-                        {% trans "Like" %}
-                    {% endif %}
-                </span>
-            </a>
-            <a class="rounded-button button-action button-star">
-                <span class="rounded-button-inner">
-                    {% if starred %}
-                        <i class="fas fa-star"></i>
-                        {{ starringLabel }}
-                    {% else %}
-                        <i class="far fa-star"></i>
-                        {{ starLabel }}
-                    {% endif %}
-                </span>
-            </a>
-            <a class="rounded-button button-action
-                    {% if cosinnus_active_user %}button-follow" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
-                <span class="rounded-button-inner">
-                    {% if followed %}
-                        <i clasS="fas fa-bell"></i>
-                        {# Translators: __INCLUDE_JS_PO__ #}
-                        {% trans "Following" %}
-                    {% else %}
-                        <i clasS="far fa-bell"></i>
-                        {# Translators: __INCLUDE_JS_PO__ #}
-                        {% trans "Follow" %}
-                    {% endif %}
-                </span>
-            </a>
+        {% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+            {% if controlView.portalInfo.current == portal %}
+                <a class="rounded-button button-action 
+                        {% if cosinnus_active_user %}button-like" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
+                    <span class="rounded-button-inner">
+                        {% if liked %}
+                            <i clasS="fas fa-heart"></i>
+                            {# Translators: __INCLUDE_JS_PO__ #}
+                            {% trans "Liked" %}
+                        {% else %}
+                            <i clasS="far fa-heart"></i>
+                            {# Translators: __INCLUDE_JS_PO__ #}
+                            {% trans "Like" %}
+                        {% endif %}
+                    </span>
+                </a>
+                <a class="rounded-button button-action button-star">
+                    <span class="rounded-button-inner">
+                        {% if starred %}
+                            <i class="fas fa-star"></i>
+                            {{ starringLabel }}
+                        {% else %}
+                            <i class="far fa-star"></i>
+                            {{ starLabel }}
+                        {% endif %}
+                    </span>
+                </a>
+                <a class="rounded-button button-action
+                        {% if cosinnus_active_user %}button-follow" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
+                    <span class="rounded-button-inner">
+                        {% if followed %}
+                            <i clasS="fas fa-bell"></i>
+                            {# Translators: __INCLUDE_JS_PO__ #}
+                            {% trans "Following" %}
+                        {% else %}
+                            <i clasS="far fa-bell"></i>
+                            {# Translators: __INCLUDE_JS_PO__ #}
+                            {% trans "Follow" %}
+                        {% endif %}
+                    </span>
+                </a>
+            {% endif %}
         {% endif %}
 
         <a class="rounded-button button-action" href="{{ url }}" target="_blank">
