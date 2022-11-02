@@ -467,38 +467,12 @@
 							{% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.use_invite_token label=use_invite_token_label legend=use_invite_token_legend checkbox_label=use_invite_token_box_label %}
 						{% endif %}
 
-						{# Dropdown field #}
-						{% block video_conference_type_dropdown %}
-						    {% if not group_model == "CosinnusConference" %}
-								{% if not SETTINGS.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and not COSINNUS_CURRENT_PORTAL.video_conference_server %}
-									<input type="hidden" name="video_conference_type" id="id_video_conference_type" value="0">
-								{% else %}
-									{% trans "Include a video conference" as video_conference_type_label %}
-									{% trans "Choose the type of the video conference you would like to include in the dashboard" as video_conference_type_legend %}
-									{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.video_conference_type label=video_conference_type_label legend=video_conference_type_legend %}
-									
-									{% if form.forms.conference_settings_assignments and SETTINGS.BBB_PRESET_USER_FORM_FIELDS and SETTINGS.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS %}
-					                    <script type="text/javascript">
-					                        {# show or hide a visibility warning #}
-					                        $(function(){
-					                            $('#id_video_conference_type').on('change', function(){
-					                                if ($(this).val() == "1") {
-					                                    $('#bbb-settings-advanced').show();
-					                                } else {
-					                                    $('#bbb-settings-advanced').hide();
-					                                } 
-					                            });
-					                        });
-					                    </script>
-					                    <div class="cosinnus-field ">
-						                    <div id="bbb-settings-advanced" style="margin-top: 20px; {% if form.forms.obj.initial.video_conference_type != 1 %}display: none;{% endif %}">
-						                        {% include 'cosinnus/conference/conference_settings_formfields.html' with form=form.forms.conference_settings_assignments %}
-						                    </div>
-					                    </div>
-					                {% endif %}
-								{% endif %}
-							{% endif %}
-						{% endblock %}
+                        {# Dropdown field #}
+                        {% block video_conference_type_dropdown %}
+                            {% if not group_model == "CosinnusConference" %}
+                                {% include 'cosinnus/fields/video_conference_type_field.html' %}
+                            {% endif %}
+                        {% endblock %}
                         
                         {% block visibility_field %}
                             {% if not group_model == "CosinnusConference" %}
