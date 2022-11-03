@@ -70,7 +70,7 @@ widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.GroupDescriptionW
 widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.GroupMembersWidget')
 widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.InfoWidget')
 widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.MetaAttributeWidget')
+widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.GroupProjectsWidget')
 
 if settings.COSINNUS_RELATED_GROUPS_PROJECTS_ENABLED:
-    widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.GroupProjectsWidget')
     widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.RelatedGroupsWidget')
