@@ -630,6 +630,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     CRON_CLASSES = [
         'cosinnus.cron.DeleteScheduledUserProfiles',
         'cosinnus.cron.UpdateConferencePremiumStatus',
+        'cosinnus.cron.SwitchGroupPremiumFeatures',
         'cosinnus_conference.cron.SendConferenceReminders',
         'cosinnus_event.cron.TriggerBBBStreamers',
         'cosinnus_exchange.cron.PullData',

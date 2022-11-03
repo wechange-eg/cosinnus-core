@@ -14,6 +14,8 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.views.profile import delete_userprofile
 from cosinnus_conference.utils import update_conference_premium_status
+from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus_event.models import Event
 
 
 logger = logging.getLogger('cosinnus')
@@ -75,3 +77,44 @@ class UpdateConferencePremiumStatus(CosinnusCronJobBase):
             update_conference_premium_status()
 
 
+class SwitchGroupPremiumFeatures(CosinnusCronJobBase):
+    """ Switches premium group features off for groups whose premium time signified by
+        `enable_user_premium_choices_until` has expired. Will set 
+        `enable_user_premium_choices_until` to empty afterwards and add a key
+        'premium_features_expired_on' with the current date to the group['settings'].
+        Will only run if relevant premium features for groups are enabled on this portal. """
+    
+    RUN_EVERY_MINS = 60 # every 1 hour
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+    
+    cosinnus_code = 'cosinnus.switch_group_premium_features'
+    
+    def do(self):
+        # currently the only setting that signifies premium features for groups.
+        # may need to add a better check in the future if more are to come
+        if settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED:
+            portal_groups = get_cosinnus_group_model().objects.all_in_portal()
+            today = now().date()
+            groups_to_expire = portal_groups.filter(enable_user_premium_choices_until__lt=today)
+            
+            count = 0
+            for group in groups_to_expire:
+                group_events = Event.objects.filter(group=group)
+                objects_to_reset = [group] + list(group_events)
+                # reset video conferences for group and all of its events                
+                for obj in objects_to_reset:
+                    # reset bbb viceo conference setting if set (fallback to fairmeeting server if active)
+                    if obj.video_conference_type == obj.BBB_MEETING:
+                        if CosinnusPortal.get_current().video_conference_server:
+                            obj.video_conference_type = obj.FAIRMEETING
+                        else:
+                            obj.video_conference_type = obj.NO_VIDEO_CONFERENCE
+                        obj.save()
+                # reset `enable_user_premium_choices_until` field
+                group.enable_user_premium_choices_until = None
+                # add marker field for expired premium features
+                group.settings['premium_features_expired_on'] = today
+                group.save()
+                count += 1
+            return f'Expired {count} premium groups.'
+        return 'Never ran, premium features are not enabled.'
