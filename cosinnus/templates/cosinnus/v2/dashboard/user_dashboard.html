@@ -107,14 +107,16 @@
                         </div>
                     {% endif %}
                 {% endblock %}
-
-				{% block starred_objects_widget %}
-                    <div class="starred-objects-widget-root"></div>
-                {% endblock %}
-
-				{% block starred_users_widget %}
-                    <div class="starred-users-widget-root"></div>
-				{% endblock %}
+				
+				{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}					
+					{% block starred_objects_widget %}
+						<div class="starred-objects-widget-root"></div>
+					{% endblock %}
+					
+					{% block starred_users_widget %}
+						<div class="starred-users-widget-root"></div>
+					{% endblock %}
+				{% endif %}
 
                 {% block idea_widget %}
 				    <div class="ideas-widget-root"></div>
@@ -123,10 +125,12 @@
 				{% block group_widget %}
                     <div class="group-widget-root"></div>
                 {% endblock %}
-
-				{% block followed_objects_widget %}
-                    <div class="followed-objects-widget-root"></div>
-                {% endblock %}
+				
+				{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+					{% block followed_objects_widget %}
+						<div class="followed-objects-widget-root"></div>
+					{% endblock %}
+				{% endif %}
 
                 {% block matching %}
     				{% if SETTINGS.COSINNUS_MATCHING_ENABLED %}

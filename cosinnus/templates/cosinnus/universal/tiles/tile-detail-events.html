@@ -36,7 +36,7 @@
             </span>
         </a>
     {% else %}
-        {% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+        {% if COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
             {% if controlView.portalInfo.current == portal %}
                 <a class="rounded-button button-action 
                         {% if cosinnus_active_user %}button-like" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>

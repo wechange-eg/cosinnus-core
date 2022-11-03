@@ -31,17 +31,19 @@
 {% block action_buttons %}
 	{% if not is_self %}
 	    <div class="tile-section tile-section-button-list">
-            <a class="rounded-button button-action button-star">
-                <span class="rounded-button-inner">
-                    {% if starred %}
-                        <i class="fas fa-star"></i>
-                        {{ starringLabel }}
-                    {% else %}
-                        <i class="far fa-star"></i>
-                        {{ starLabel }}
-                    {% endif %}
-                </span>
-            </a>
+            {% if COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+                <a class="rounded-button button-action button-star">
+                    <span class="rounded-button-inner">
+                        {% if starred %}
+                            <i class="fas fa-star"></i>
+                            {{ starringLabel }}
+                        {% else %}
+                            <i class="far fa-star"></i>
+                            {{ starLabel }}
+                        {% endif %}
+                    </span>
+                </a>
+            {% endif %}
 	        {% if action_url_1 %}
 		        <a href="{% if action_url_1 %}{{ action_url_1 }}{% else %}{{ url }}{% endif %}" target="_blank" class="rounded-button button-action">
 		            <span class="rounded-button-inner">
