@@ -465,6 +465,7 @@ class SimpleStatisticsBBBRoomVisitsRenderer(CSVRenderer):
         'conference_mtag_slugs',
         'conference_creator_email_language',
         'room_name',
+        'room_source_type',
         'visitor_hashed_id',
         'visitor_mtag_slugs',
         'visitor_email_language',
@@ -512,6 +513,7 @@ class SimpleStatisticsBBBRoomVisitsView(APIView):
                 ','.join([str(item) for item in visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_GROUP_MANAGED_TAG_SLUGS, [])]), #'conference_mtag_slugs',
                 visited_group_admin.cosinnus_profile.language if visited_group_admin else '<no-user>', # conference_creator_email_language
                 visit.bbb_room and visit.bbb_room.name or visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_ROOM_NAME, ''), #'room_name',
+                visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_ROOM_SOURCE_TYPE, '?'), # room_source_type
                 user_hash, #'visitor_id',
                 ','.join([str(item) for item in visit.data.get(BBBRoomVisitStatistics.DATA_DATA_SETTING_USER_MANAGED_TAG_SLUGS, [])]), #'visitor_mtag_slugs',
                 visitor.cosinnus_profile.language if visitor else '<no-user>', # visitor_email_language
@@ -534,12 +536,13 @@ class SimpleStatisticsBBBRoomVisitsView(APIView):
                 'conference_mtag_slugs': elem[3],
                 'conference_creator_email_language': elem[4],
                 'room_name': elem[5],
-                'visitor_hashed_id': elem[6],
-                'visitor_mtag_slugs': elem[7],
-                'visitor_email_language': elem[8],
-                'visitor_location': elem[9],
-                'visitor_location_lat': elem[10],
-                'visitor_location_lon': elem[11],
+                'room_source_type': elem[6],
+                'visitor_hashed_id': elem[7],
+                'visitor_mtag_slugs': elem[8],
+                'visitor_email_language': elem[9],
+                'visitor_location': elem[10],
+                'visitor_location_lat': elem[11],
+                'visitor_location_lon': elem[12],
             } 
         for elem in bbb_room_visit_stats]
 

@@ -539,6 +539,7 @@ class BBBRoomVisitStatistics(models.Model):
     data = models.JSONField(default=dict, encoder=DjangoJSONEncoder, blank=True, null=True)
     
     DATA_DATA_SETTING_ROOM_NAME = 'room_name'
+    DATA_DATA_SETTING_ROOM_SOURCE_TYPE = 'room_source_type'
     DATA_DATA_SETTING_GROUP_NAME = 'group_name'
     DATA_DATA_SETTING_GROUP_SLUG = 'group_slug'
     DATA_DATA_SETTING_GROUP_MANAGED_TAG_IDS = 'group_managed_tag_ids'
@@ -548,6 +549,7 @@ class BBBRoomVisitStatistics(models.Model):
     
     ALL_DATA_SETTINGS = [
         DATA_DATA_SETTING_ROOM_NAME,
+        DATA_DATA_SETTING_ROOM_SOURCE_TYPE,
         DATA_DATA_SETTING_GROUP_NAME,
         DATA_DATA_SETTING_GROUP_SLUG,
         DATA_DATA_SETTING_GROUP_MANAGED_TAG_IDS,
@@ -584,6 +586,13 @@ class BBBRoomVisitStatistics(models.Model):
         data = {
             cls.DATA_DATA_SETTING_ROOM_NAME: bbb_room.name,
         }
+        # get the name of the type of the source object the bbb room is in
+        src_obj = bbb_room.source_object
+        src_name = type(src_obj).__name__ # safe even for NoneType
+        data.update({
+            cls.DATA_DATA_SETTING_ROOM_SOURCE_TYPE: src_name,
+        })
+        
         if user:
             user_managed_tags = user.cosinnus_profile.get_managed_tags()
             if user_managed_tags:
