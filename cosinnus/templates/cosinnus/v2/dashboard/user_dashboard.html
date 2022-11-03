@@ -108,15 +108,17 @@
                     {% endif %}
                 {% endblock %}
 				
-				{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}					
-					{% block starred_objects_widget %}
+				{% block starred_objects_widget %}
+					{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}					
 						<div class="starred-objects-widget-root"></div>
-					{% endblock %}
+				    {% endif %}
+				{% endblock %}
 					
-					{% block starred_users_widget %}
-						<div class="starred-users-widget-root"></div>
-					{% endblock %}
-				{% endif %}
+				{% block starred_users_widget %}
+	                {% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}         
+    					<div class="starred-users-widget-root"></div>
+					{% endif %}
+				{% endblock %}
 
                 {% block idea_widget %}
 				    <div class="ideas-widget-root"></div>
@@ -126,11 +128,11 @@
                     <div class="group-widget-root"></div>
                 {% endblock %}
 				
-				{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
-					{% block followed_objects_widget %}
-						<div class="followed-objects-widget-root"></div>
-					{% endblock %}
-				{% endif %}
+				{% block followed_objects_widget %}
+					{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+					    <div class="followed-objects-widget-root"></div>
+					{% endif %}
+				{% endblock %}
 
                 {% block matching %}
     				{% if SETTINGS.COSINNUS_MATCHING_ENABLED %}
