@@ -462,6 +462,10 @@ class CosinnusConf(AppConf):
     # Note! this is reflected in migration 0113! If the setting is changed afte the migration
     # has been run, previous values of all existing groups will remain unchanged!
     GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE = True
+
+    # if True, enables an option to choose related groups/projects in the groups/projects 
+    # settings showing the chosen ones on microsite and dashboard
+    RELATED_GROUPS_PROJECTS_ENABLED = True
     
     # this is the thumbnail size for small image previews
     IMAGE_THUMBNAIL_SIZE_SCALE = (80, 80)

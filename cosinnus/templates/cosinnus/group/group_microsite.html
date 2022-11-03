@@ -254,16 +254,18 @@
 						{% endblock microsite_metadata %}
 					</p>
 					
-	                {% with related_groups=group.related_groups.all %}
-		        		{% if related_groups %}
-		        			<p class="transparent">
-			        			{% trans "Related Projects/Groups" %}: 
-			        			{% for related_group in related_groups %}
-			        				<a href="{{ related_group.get_absolute_url }}">{{ related_group.name }}</a>{% if not forloop.last %}, {% endif %}
-			        			{% endfor %}
-		        			</p>
-		        		{% endif %}
-		        	{% endwith %}
+					{% if SETTINGS.COSINNUS_RELATED_GROUPS_PROJECTS_ENABLED %}
+						{% with related_groups=group.related_groups.all %}
+							{% if related_groups %}
+								<p class="transparent">
+									{% trans "Related Projects/Groups" %}: 
+									{% for related_group in related_groups %}
+										<a href="{{ related_group.get_absolute_url }}">{{ related_group.name }}</a>{% if not forloop.last %}, {% endif %}
+									{% endfor %}
+								</p>
+							{% endif %}
+						{% endwith %}
+					{% endif %}
 		        	
 		        	{% comment %}  
                         For portals that have COSINNUS_MANAGED_TAGS_ENABLED enabled, show the tags here

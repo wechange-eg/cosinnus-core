@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 import six
 
+from cosinnus.conf import settings
+
 from collections import defaultdict, OrderedDict
 
 from importlib import import_module
@@ -66,7 +68,9 @@ __all__ = ('widget_registry', )
 
 widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.GroupDescriptionWidget')
 widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.GroupMembersWidget')
-widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.GroupProjectsWidget')
-widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.RelatedGroupsWidget')
 widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.InfoWidget')
 widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.MetaAttributeWidget')
+
+if settings.COSINNUS_RELATED_GROUPS_PROJECTS_ENABLED:
+    widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.GroupProjectsWidget')
+    widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.RelatedGroupsWidget')
