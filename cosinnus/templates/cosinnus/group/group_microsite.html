@@ -237,7 +237,7 @@
 					<p>
 						{% block microsite_metadata %}
 					        {% with tags=group.media_tag_object.tags.all topics=group.media_tag_object.topics %}
-						        {% if tags %}
+						        {% if SETTINGS.COSINNUS_TAGS_ENABLED and tags %}
 						        	<b>{% trans "Tags" %}:</b>
 									{% for tag in tags %}
 									    {{ tag }}{% if not forloop.last %}, {% endif %}

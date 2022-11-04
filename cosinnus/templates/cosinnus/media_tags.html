@@ -31,15 +31,15 @@
 	</div>
 {% endif %}
 
-
-{% if not disable_tags %}
-    <div class="media_tag_initial_hidden" {% if not show_tags == True and not show_all == True and not form.forms.media_tag.tags.errors %}style="display: none;"{% endif %}>
-        {% if not tags_label %}{% trans "Select tags" as tags_label %}{% endif %}
-        {% trans "Select tags" as tags_placeholder %}
-        {% include 'cosinnus/fields/media_tag_field.html' with field=form.forms.media_tag.tags label=tags_label icon="fa-tags" placeholder=tags_placeholder %}
-    </div>
+{% if SETTINGS.COSINNUS_TAGS_ENABLED %}
+    {% if not disable_tags %}
+        <div class="media_tag_initial_hidden" {% if not show_tags == True and not show_all == True and not form.forms.media_tag.tags.errors %}style="display: none;"{% endif %}>
+            {% if not tags_label %}{% trans "Select tags" as tags_label %}{% endif %}
+            {% trans "Select tags" as tags_placeholder %}
+            {% include 'cosinnus/fields/media_tag_field.html' with field=form.forms.media_tag.tags label=tags_label icon="fa-tags" placeholder=tags_placeholder %}
+        </div>
+    {% endif %}
 {% endif %}
-
 
 {% if not disable_location %}
     {% captureas loc_html %}

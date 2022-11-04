@@ -10,15 +10,18 @@
 	{% endif %}
 {% endwith %}
 
-{% for tag in object.media_tag_object.tags.all %}
-    {% if forloop.first %} 
-    <p class="">
-    <b>{% trans "Activities and interests" %}</b>
-        <i class="fa fa-fw fa-bolt"></i> 
-    {% endif %}
-    {% if not forloop.first %}, {% endif %}
-    {{ tag }}
-    {% if forloop.last %}
-    </p>
-    {% endif %}
-{% endfor %}
+
+{% if SETTING.COSINNUS_TAGS_ENABLED %}
+    {% for tag in object.media_tag_object.tags.all %}
+        {% if forloop.first %} 
+        <p class="">
+        <b>{% trans "Activities and interests" %}</b>
+            <i class="fa fa-fw fa-bolt"></i> 
+        {% endif %}
+        {% if not forloop.first %}, {% endif %}
+        {{ tag }}
+        {% if forloop.last %}
+        </p>
+        {% endif %}
+    {% endfor %}
+{% endif %}

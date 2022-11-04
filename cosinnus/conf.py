@@ -1133,6 +1133,9 @@ class CosinnusConf(AppConf):
     # map content types
     MANAGED_TAGS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = []
 
+    # if True, enables `tag` function in the group/project settins, files, todos, events, etc.
+    TAGS_ENABLED = True
+
     # text topic filters will only be shown on the map for these
     # map content types (and if any text topics even exist)
     TEXT_TOPICS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = []
