@@ -25,6 +25,90 @@
 
         <div class="panel panel-default large-space">
             <div class="panel-heading">
+                <label for="id_send_immediately" class="cursor-pointer">
+                    <h4 class="panel-title">
+                        {% trans "Send immediately" %}
+                    </h4>
+                </label>
+            </div>
+            <div id="collapseSendImmediately" class="panel-collapse">
+                <div class="panel-body">
+                    <label>
+                        {% trans "This email will be sent immediately." %}
+                    </label>
+                    <div class="alert alert-info">
+                        <i class="fa fa-info fa-2x"></i>
+                        {% if immediately_message_last_sent %}
+                        <p>{% blocktrans with date=immediately_message_last_sent %}last instant email was sent on {{ date }} {% endblocktrans %}</p>
+                        {% else %}
+                        <p>{% trans 'no instant email has been sent yet.' %}</p>
+                        {% endif %}
+                    </div>
+
+                    {# recipients options #}
+                    {% for choice in form.recipients_choices %}
+                        <div id="id_recipients_choices" name="recipients_choices" onclick="toggleRecipientsChoicesFrame();">
+                            {{ choice }}
+                        </div>
+                    {% endfor %}
+
+                    {# send immediately recipients #}
+                    <div id="id_recipients_field" {% if not form.recipients_choices.value == 4 %}style="display: none;"{% endif %}>
+                        {% trans "Recipients" as send_immediately_users_label %}
+                        {% include 'cosinnus/fields/default_field.html' with field=form.send_immediately_users label=send_immediately_users_label %}
+                    </div>
+                    
+                    <script type="text/javascript">
+                        $('#id_recipients_field').hide()
+                        var toggleRecipientsChoicesFrame = function() {
+                            var $custom_frame = $('#id_recipients_field');
+                            if ($('input[id="id_recipients_choices_3"]:checked').val()) {
+                                $custom_frame.slideDown();
+                            } else {
+                                $custom_frame.slideUp();
+                            }
+                        };
+                        $(function(){
+                            toggleRecipientsChoicesFrame();
+                        });
+                    </script>
+
+                    {# send immediately subject #}
+                    {% trans "Mail subject" as subject_label %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.send_immediately_subject label=subject_label %}
+
+                    {# send immediately email text #}
+                    {% trans "Mail text" as content_label %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.send_immediately_content label=content_label legend_selectable=True legend=content_legend large_field=True %}
+                    <button type="submit" class="btn btn-default btn-autosize" name="send" value="send_immediately">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left" href="#" tabindex="-1">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans 'Send (show preview)' %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                    <button type="submit" class="btn btn-default btn-autosize" name="test" value="send_immediately">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left" tabindex="-1">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans 'Send test to myself' %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default large-space">
+            <div class="panel-heading">
                 <label for="id_week_before" class="cursor-pointer">
                     <h4 class="panel-title">
                         {{ form.week_before }}&nbsp;
@@ -134,91 +218,6 @@
                         <ul class="media-list">
                             <li class="media">
                                 <span class="pull-left" href="#" tabindex="-1">
-                                    <i class="fa fa-envelope"></i>
-                                </span>
-                                <div class="media-body">
-                                    {% trans 'Send test to myself' %}
-                                </div>
-                            </li>
-                        </ul>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="panel panel-default large-space">
-            <div class="panel-heading">
-                <label for="id_send_immediately" class="cursor-pointer">
-                    <h4 class="panel-title">
-                        {% trans "send immediately" %}
-                    </h4>
-                </label>
-            </div>
-            <div id="collapseSendImmediately" class="panel-collapse">
-                <div class="panel-body">
-                    <label>
-                        {% trans "This email will be sent immediately." %}
-                    </label>
-                    <div class="alert alert-info">
-                        <i class="fa fa-info fa-2x"></i>
-                        {% if immediately_message_last_sent %}
-                        <p>{% blocktrans with date=immediately_message_last_sent %}last instant email was sent on {{ date }} {% endblocktrans %}</p>
-                        {% else %}
-                        <p>{% trans 'no instant email has been sent yet.' %}</p>
-                        {% endif %}
-                    </div>
-
-                    {# recipients options #}
-                    {% for choice in form.recipients_choices %}
-                        <div id="id_recipients_choices" name="recipients_choices" onclick="toggleRecipientsChoicesFrame();">
-                            {{ choice }}
-                        </div>
-                    {% endfor %}
-
-                    {# send immediately recipients #}
-                    <div id="id_recipients_field" {% if not form.recipients_choices.value == 4 %}style="display: none;"{% endif %}>
-                        {% trans "Recipients" as send_immediately_users_label %}
-                        {% include 'cosinnus/fields/default_field.html' with field=form.send_immediately_users label=send_immediately_users_label %}
-                    </div>
-                    
-                    <script type="text/javascript">
-                        $('#id_recipients_field').hide()
-                        var toggleRecipientsChoicesFrame = function() {
-                            var $custom_frame = $('#id_recipients_field');
-                            if ($('input[id="id_recipients_choices_3"]:checked').val()) {
-                                $custom_frame.slideDown();
-                            } else {
-                                $custom_frame.slideUp();
-                            }
-                        };
-                        $(function(){
-                            toggleRecipientsChoicesFrame();
-                        });
-                    </script>
-
-                    {# send immediately subject #}
-                    {% trans "Mail subject" as subject_label %}
-                    {% include 'cosinnus/fields/default_field.html' with field=form.send_immediately_subject label=subject_label %}
-
-                    {# send immediately email text #}
-                    {% trans "Mail text" as content_label %}
-                    {% include 'cosinnus/fields/default_field.html' with field=form.send_immediately_content label=content_label legend_selectable=True legend=content_legend large_field=True %}
-                    <button type="submit" class="btn btn-default btn-autosize" name="send" value="send_immediately">
-                        <ul class="media-list">
-                            <li class="media">
-                                <span class="pull-left" href="#" tabindex="-1">
-                                    <i class="fa fa-envelope"></i>
-                                </span>
-                                <div class="media-body">
-                                    {% trans 'Send (show preview)' %}
-                                </div>
-                            </li>
-                        </ul>
-                    </button>
-                    <button type="submit" class="btn btn-default btn-autosize" name="test" value="send_immediately">
-                        <ul class="media-list">
-                            <li class="media">
-                                <span class="pull-left" tabindex="-1">
                                     <i class="fa fa-envelope"></i>
                                 </span>
                                 <div class="media-body">

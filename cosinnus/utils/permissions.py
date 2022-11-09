@@ -253,16 +253,26 @@ def check_user_integrated_portal_member(user):
     return any([portal_id in settings.COSINNUS_INTEGRATED_PORTAL_IDS for portal_id in portal_memberships])
 
 
-def check_user_can_receive_emails(user):
+def check_user_can_receive_emails(user, notification_setting_never_disabled=False):
     """ Checks if a user can receive emails *at all*, ignoring any frequency settings.
         This checks the global notification setting for authenticated users,
-        and the email blacklist for anonymous users. """
+        and the email blacklist for anonymous users. 
+
+        @param: user: an User object to check on
+        @param: notification_setting_never_disabled: an optional paramether which serves to bring more
+                flexibility in case if `GlobalUserNotificationSetting.SETTING_NEVER` setting has to be
+                get ingnored somehow
+    """
     if not user.is_authenticated:
         return not GlobalBlacklistedEmail.is_email_blacklisted(user.email)
     else:
         verified_check = (CosinnusPortal.get_current().email_needs_verification == False) or check_user_verified(user)
-        return (user.is_active and verified_check and
-                GlobalUserNotificationSetting.objects.get_for_user(user) > GlobalUserNotificationSetting.SETTING_NEVER)
+        if not notification_setting_never_disabled:
+            return (user.is_active and verified_check and
+                    GlobalUserNotificationSetting.objects.get_for_user(user) > GlobalUserNotificationSetting.SETTING_NEVER)
+        else:
+            return (user.is_active and verified_check and
+                    GlobalUserNotificationSetting.objects.get_for_user(user) >= GlobalUserNotificationSetting.SETTING_NEVER)
 
 def check_user_verified(user):
     """ Checks if the user is logged in and has a verified email address """
