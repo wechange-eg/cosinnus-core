@@ -55,7 +55,7 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
         recipients = group.actual_members
     
     for recipient in recipients:
-        if not check_user_can_receive_emails(recipient, notification_setting_never_disabled=True):
+        if not check_user_can_receive_emails(recipient, ignore_user_notification_settings=True):
             continue
         
         # switch language to user's preference language
