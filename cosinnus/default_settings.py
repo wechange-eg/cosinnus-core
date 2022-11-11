@@ -678,7 +678,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     
     # NOTE: CELERY IS NOW DISABLED UNTIL THE SERVICE HAS BEEN UPDATED
     COSINNUS_USE_CELERY = False
-    BROKER_URL = f"redis://localhost:6379/{project_settings['SITE_ID']}"
+    BROKER_URL = f"redis://localhost:6379/{SITE_ID}"
     CELERY_RESULT_BACKEND = 'redis://localhost:6379'
     CELERY_ACCEPT_CONTENT = ['application/json']
     CELERY_TASK_SERIALIZER = 'json' 
