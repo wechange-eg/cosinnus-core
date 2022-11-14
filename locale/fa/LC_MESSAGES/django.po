@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-03 17:18+0100\n"
+"POT-Creation-Date: 2022-11-14 10:28+0100\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -7007,6 +7007,9 @@ msgid "Offer"
 msgstr ""
 
 msgid "Post new Offer in "
+msgstr ""
+
+msgid "New!"
 msgstr ""
 
 msgid "Set up your Profile"

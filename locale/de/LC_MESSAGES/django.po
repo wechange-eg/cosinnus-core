@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-03 17:18+0100\n"
+"POT-Creation-Date: 2022-11-14 10:28+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -5501,16 +5501,16 @@ msgid "Logged out"
 msgstr "Abgemeldet"
 
 msgid "You have been logged out. See you again soon!"
-msgstr ""
+msgstr "Du wurdest ausgeloggt. Bis bald!"
 
 msgid "Error while logging out"
-msgstr ""
+msgstr "Es gab einen Fehler bei der Abmeldung"
 
 msgid "Your logout may be incomplete in parts of the site due to a server error. If this is not a device you trust, please delete your cookies for this site!"
-msgstr ""
+msgstr "Dein Logout wurde aufgrund eines Serverfehlers in Teilen der Website möglicherweise nicht vollständig durchgeführt. Wenn dies ein Gerät ist, dem du nicht vertraust, lösche bitte deine Cookies für diese Seite!"
 
 msgid "Logging you out..."
-msgstr ""
+msgstr "Du wirst ausgeloggt..."
 
 #, python-format
 msgid "In order to use your %(portal_name)s account to login to another platform you need to login on %(portal_name)s first."
@@ -7177,10 +7177,11 @@ msgstr "Inserat"
 msgid "Post new Offer in "
 msgstr "Neues Inserat eintragen in "
 
-#, fuzzy
-#| msgid "Edit Your Profile"
+msgid "New!"
+msgstr "Neu!"
+
 msgid "Set up your Profile"
-msgstr "Profil bearbeiten"
+msgstr "Richte dein Profil ein"
 
 msgid "Edit My Profile"
 msgstr "Profil-Einstellungen"

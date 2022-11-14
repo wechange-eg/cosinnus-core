@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-03 17:18+0100\n"
+"POT-Creation-Date: 2022-11-14 10:28+0100\n"
 "PO-Revision-Date: 2022-08-02 17:16+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -7226,6 +7226,9 @@ msgstr "Предложение"
 
 msgid "Post new Offer in "
 msgstr "Опубликовать новое предложение в "
+
+msgid "New!"
+msgstr ""
 
 #, fuzzy
 #| msgid "Edit Your Profile"
