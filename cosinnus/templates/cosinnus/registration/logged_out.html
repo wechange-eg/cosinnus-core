@@ -37,8 +37,8 @@
             <script type="text/javascript">
                 {% comment %}Logs user out of the v3 frontend by calling the NextAuth.js API signout endpoint (see https://next-auth.js.org/getting-started/rest-api#post-apiauthsignout){% endcomment %}
                 
-                var url_csrf = '/api/auth/csrf?v=3';
-                var url_logout = '/api/auth/signout?v=3';
+                var url_csrf = '/api/frontend/auth/csrf?v=3';
+                var url_logout = '/api/frontend/auth/signout?v=3';
                 
                 function logoutSuccess(success) {
                     $('.frame-logout-progress').hide();
