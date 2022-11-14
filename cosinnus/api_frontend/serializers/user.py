@@ -260,7 +260,14 @@ class CosinnusHybridUserSerializer(TaggitSerializer, serializers.Serializer):
         # TODO: the email may not be changed directly, but instead triggers a "change my mail" confirmation email
         #instance.email = user_data.get('email', instance.email)
         instance.first_name = user_data.get('first_name', instance.first_name)
-        instance.last_name = user_data.get('last_name', instance.last_name)
+        # if the first name is being replaced with something new,
+        # and the last name is not given, we set the last name to empty
+        # (this is for portals who only have one display name)
+        if user_data.get('first_name', None):
+            last_name_fallback = ''
+        else:
+            last_name_fallback = instance.last_name
+        instance.last_name = user_data.get('last_name', last_name_fallback)
         profile.description = profile_data.get('description', profile.description)
         media_tag.visibility = media_tag_data.get('visibility', media_tag.visibility)
         profile.avatar = profile_data.get('avatar', profile.avatar)
