@@ -140,6 +140,17 @@
 		        {% if participation_management %}
                     {% include 'cosinnus/fields/mandatory_field_legend.html' with no_spacer=True %}
                 {% endif %}
+
+				{% if not user.cosinnus_profile.email_verified %}
+					<div class="alert alert-warning alert-dismissable">
+						<i class="fa fa-exclamation-circle fa-3x"></i>
+						<div class="v-offset-s">
+							<p>
+								{% trans 'Please verify your email address first. Otherweise you may miss some important conference notifications.' %}
+							</p>
+						</div>
+					</div>
+				{% endif %}
 		    </div>
 		
 		    <button type="submit" class="btn btn-emphasized btn-autosize">

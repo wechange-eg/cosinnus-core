@@ -645,6 +645,13 @@ class NoRecipientsDefinedException(Exception):
     pass
 
 
+class NoConferenceApplicantsFoundException(Exception):
+    """
+    Workaround exeption to throw in case there are no pending applications found. 
+    """
+    pass
+
+
 class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
                                          RequireWriteMixin,
                                          GroupIsConferenceMixin,
@@ -660,6 +667,10 @@ class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
             return super().dispatch(request, *args, **kwargs)
         except NoRecipientsDefinedException:
             messages.error(self.request, _('Please supply one ore more recipients.'))
+            return redirect(group_aware_reverse('cosinnus:conference:reminders',
+                                   kwargs={'group': self.group}))
+        except NoConferenceApplicantsFoundException:
+            messages.error(self.request, _('No conference applicants found at the moment.'))
             return redirect(group_aware_reverse('cosinnus:conference:reminders',
                                    kwargs={'group': self.group}))
 
@@ -682,6 +693,8 @@ class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
             pending_application_qs = CosinnusConferenceApplication.objects.filter(conference=self.group).filter(may_be_contacted=True).pending()
             all_user_ids = pending_application_qs.values_list('user', flat=True)
             recipients_all_applicants = filter_active_users(get_user_model().objects.filter(id__in=all_user_ids))
+            if not recipients_all_applicants:
+                raise NoConferenceApplicantsFoundException()
             return recipients_all_applicants
         elif recipient_choice == CHOICE_ALL_MEMBERS:
             members_qs = CosinnusConferenceApplication.objects.filter(conference=self.group).filter(may_be_contacted=True).accepted_in_past()

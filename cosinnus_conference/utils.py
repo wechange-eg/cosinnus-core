@@ -33,7 +33,7 @@ def get_initial_template(field_name):
 
 def send_conference_reminder(group, recipients=None, field_name="week_before", update_setting=True):
     """
-    Send conference reminder email a week/day/hour before start
+    Send conference reminder email a week/day/hour/immediately before start
     """
     # set these here, as they should always be in the translation of the sending user
     # as they saw it before sending, and not in the language of the receiving user that we set later
@@ -50,11 +50,12 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
         }
         return render_html_with_variables(user, template, variables)
     
+    # does not apply for `Send immediately`-`All applicants` case -> see the usage of `NoConferenceApplicantsFoundException` for further details
     if not recipients:
         recipients = group.actual_members
     
     for recipient in recipients:
-        if not check_user_can_receive_emails(recipient):
+        if not check_user_can_receive_emails(recipient, ignore_user_notification_settings=True):
             continue
         
         # switch language to user's preference language
