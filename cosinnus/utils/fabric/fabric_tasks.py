@@ -120,6 +120,14 @@ def fastpull(_ctx):
     with c.cd(env.path):
         c.run(f'git checkout {env.pull_branch}')
         c.run(f'git pull')
+        
+        
+@task
+def deployfrontend(_ctx):
+    """ Only does a git pull on the base project repository """
+    check_confirmation()
+    _pull_and_update_frontend()
+    restart(_ctx)
 
 
 """ ----------- Single helper tasks. Used in deploy tasks, but can also be called solo ----------- """
@@ -325,6 +333,7 @@ def _pull_and_update(full_update=True):
     env = get_env()
     c = CosinnusFabricConnection(host=env.host)
     with c.cd(env.path):
+        c.run(f'git fetch')
         c.run(f'git checkout {env.pull_branch}')
         c.run(f'git pull')
         with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
@@ -336,3 +345,19 @@ def _pull_and_update(full_update=True):
                 else:
                     c.run('poetry update cosinnus')
 
+def _pull_and_update_frontend():
+    """ 
+        Does a git pull on the frontend repository, then performs 
+        a poetry update to update dependencies.
+        (Not a task, this is a helper function called from other tasks.) 
+    """
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(env.frontend_path):
+        c.run(f'git fetch')
+        c.run(f'git checkout {env.frontend_pull_branch}')
+        c.run(f'git pull')
+        c.run(f'pnpm install')
+        c.run(f'pnpm run build')
+        # make newly built next dist files that will be served as static accessible by nginx
+        c.run(f'chown {env.username}:www-data -R .next/')
