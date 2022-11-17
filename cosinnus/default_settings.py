@@ -150,8 +150,9 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
          # language switching while not logged in!
          #'cosinnus.core.middleware.cosinnus_middleware.PreventAnonymousUserCookieSessionMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
-        'cosinnus.core.middleware.cosinnus_middleware.MovedTemporarilyRedirectFallbackMiddleware',
+        'django.middleware.locale.LocaleMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
+        'cosinnus.core.middleware.cosinnus_middleware.MovedTemporarilyRedirectFallbackMiddleware',
         
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'cosinnus.core.middleware.frontend_middleware.FrontendMiddleware',
@@ -159,11 +160,8 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus.core.middleware.cosinnus_middleware.AdminOTPMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.UserOTPMiddleware',
         
-        'django.middleware.locale.LocaleMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
-        
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
         'wagtail.contrib.redirects.middleware.RedirectMiddleware',
         
         'cosinnus.core.middleware.cosinnus_middleware.StartupMiddleware',
