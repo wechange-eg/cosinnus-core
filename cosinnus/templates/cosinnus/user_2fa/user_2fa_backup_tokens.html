@@ -3,7 +3,7 @@
 
 {% block breadcrumb %}
         <li class="active"><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Your Profile" %}</a></li>
-        <li class="active"><a href="{% url 'cosinnus:two-factor-auth-settings' %}">{% trans "2FA Settings" %}</a></li>
+        <li class="active"><a href="{% url 'cosinnus:two-factor-auth-settings' %}">{% trans "Two-Factor Authentication Settings" %}</a></li>
         <li class="active">{% trans "Backup Tokens" %}</li>
 {% endblock %}
 
@@ -52,7 +52,7 @@
                     <i class="fa fa-arrow-left"></i>
                 </span>
                 <div class="media-body">
-                    {% trans "Back to 2FA Settings" %}
+                    {% trans "Back to Two-Factor Authentication Settings" %}
                 </div>
             </li>
         </ul>
