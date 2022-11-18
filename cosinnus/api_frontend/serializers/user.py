@@ -104,7 +104,7 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
         attrs['email'] = email
         
         # first name shenanigans
-        first_name = attrs['first_name'].lower().strip()
+        first_name = attrs['first_name'].strip()
         if not first_name or len(first_name) < 2:
             raise ValidationError(ERROR_SIGNUP_NAME_NOT_ACCEPTABLE)
         attrs['first_name'] = first_name
