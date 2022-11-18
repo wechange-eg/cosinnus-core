@@ -120,9 +120,14 @@ def setup_env(portal_name, domain, pull_branch, confirm=False,
     env.pull_remote = pull_remote
     env.frontend_pull_branch = frontend_pull_branch
     env.frontend_pull_remote = frontend_pull_remote
-    env.reload_command = f'sudo /bin/systemctl restart django-{portal_name}.service'
-    env.stop_command = f'sudo /bin/systemctl stop django-{portal_name}.service'
-    env.start_command = f'sudo /bin/systemctl start django-{portal_name}.service'
+    if legacy_mode:
+        env.reload_command = f'sudo /bin/systemctl restart django-{portal_name}.service'
+        env.stop_command = f'sudo /bin/systemctl stop django-{portal_name}.service'
+        env.start_command = f'sudo /bin/systemctl start django-{portal_name}.service'
+    else:
+        env.reload_command = f'sudo systemctl restart django-{portal_name}-unit.service'
+        env.stop_command = f'sudo systemctl stop django-{portal_name}-unit.service'
+        env.start_command = f'sudo systemctl start django-{portal_name}-unit.service'
     env.memcached_restart_command = f'sudo /bin/systemctl restart django-{portal_name}-memcached.service'
     env.portal_additional_less_to_compile = [] # a list of django apps for which to compile extra less
     env.db_name = portal_name
