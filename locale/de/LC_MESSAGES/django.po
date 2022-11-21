@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-14 10:28+0100\n"
+"POT-Creation-Date: 2022-11-18 10:19+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.2\n"
 
 msgid "Debug"
 msgstr ""
@@ -6432,8 +6432,8 @@ msgstr "Facebook-Konto trennen"
 msgid "Disconnect Facebook"
 msgstr "Facebook trennen"
 
-msgid "2FA Settings"
-msgstr "2FA-Einstellungen"
+msgid "Two-Factor Authentication Settings"
+msgstr "Zwei-Faktor Authentifizierung"
 
 #, python-format
 msgid "%(provider)s-Account"
@@ -6630,11 +6630,11 @@ msgstr "Du hast noch keine Sicherungstoken."
 msgid "Generate Tokens"
 msgstr "Tokens generieren"
 
-msgid "Back to 2FA Settings"
-msgstr "Zurück zur 2FA-Einrichtung"
+msgid "Back to Two-Factor Authentication Settings"
+msgstr "Zurück zur Zwei-Faktor-Authentisierung"
 
-msgid "Disable 2FA"
-msgstr "2FA deaktivieren"
+msgid "Disable Two-Factor Authentication"
+msgstr "Zwei-Faktor-Authentifizierung deaktivieren"
 
 msgid "You are about to disable two-factor authentication. This weakens your account security, are you sure?"
 msgstr "Du bist im Begriff, die Zwei-Faktor-Authentifizierung zu deaktivieren. Dies schwächt die Sicherheit deines Kontos, bist du sicher?"
@@ -6690,17 +6690,19 @@ msgstr "Wir raten davor dringend ab, aber du kannst die Zwei-Faktor-Authentifizi
 msgid "Two-factor authentication is not enabled for your account. <br> Enable two-factor authentication for enhanced account security."
 msgstr "Die Zwei-Faktor Authentifizierung ist für deinen Benutzerprofil noch nicht aktiviert. <br> Aktiviere die Zwei-Faktor Authentifizierung, um die Sicherheit des Benutzerkontos zu erhöhen."
 
-msgid "Enable 2FA"
-msgstr "2FA aktivieren"
+msgid "Enable Two-Factor Authentication"
+msgstr "Zwei-Faktor-Authentifizierung aktivieren"
 
-msgid "2FA Setup"
-msgstr "2FA-Einrichtung"
+#, fuzzy
+#| msgid "Set up 2-factor-authentication"
+msgid "Two-Factor Authentication Setup"
+msgstr "Zwei-Faktor-Authentifizierung einrichten"
 
 msgid "You are about to take your account security to the next level."
 msgstr "Du bist im Begriff, dein Sicherheitsniveau auf die nächste Ebene zu bringen."
 
-msgid "To use 2FA, you need a one-time password (OTP) app. For example, there is \"Free OTP\" for your Android phone or \"OpenOTP\" for iOS. With these apps you can scan the QR code and then log in with the generated codes."
-msgstr "Um 2FA zu nutzen, benötigst du eine One-Time-Password (OTP) App. Es gibt z.B. \"Free OTP\" für dein Android Handy oder \"OpenOTP\" für iOS. Mit diesen Apps kannst du den QR Code scannen und dich anschließend mit den generierten Codes anmelden."
+msgid "To use Two-Factor Authentication, you need a one-time password (OTP) app. For example, there is \"Free OTP\" for your Android phone or \"OpenOTP\" for iOS. With these apps you can scan the QR code and then log in with the generated codes."
+msgstr "Um die Zwei-Faktor-Authentisierung zu nutzen, benötigst du eine One-Time-Password (OTP) App. Es gibt z.B. \"Free OTP\" für dein Android Handy oder \"OpenOTP\" für iOS. Mit diesen Apps kannst du den QR Code scannen und dich anschließend mit den generierten Codes anmelden."
 
 msgid "Scan the QR code below."
 msgstr "Scanne den unten stehenden QR-Code."
@@ -6714,11 +6716,11 @@ msgstr "Gib den von der App generierten Code ein:"
 msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
 msgstr "Bei der Auswahl der Authentifizierungsmethode ist ein Problem aufgetreten. Gehe bitte zurück und überprüfe, ob die eingegebene Daten korrekt sind. Versuche dann bitte erneut oder benutze eine andere Authentifizierungsmethode. Wenn das Problem weiterhin besteht, kontaktiere die Portaladministratoren."
 
-msgid "2FA Setup Complete"
-msgstr "2FA-Einrichtung abgeschlossen"
+msgid "Two-Factor Authentication Setup Complete"
+msgstr "Zwei-Faktor-Authentisierung Setup abgeschlossen"
 
-msgid "Congratulations, you've successfully enabled 2FA."
-msgstr "Glückwunsch, du hast die 2FA-Einstellung erfolgreich aktiviert."
+msgid "Congratulations, you've successfully enabled Two-Factor Authentication."
+msgstr "Glückwunsch, du hast die Zwei-Faktor-Authentisierung-Einstellung erfolgreich aktiviert."
 
 msgid "We strongly recommend to set up backup tokens in case you lose access to your authentication device!"
 msgstr "Wir empfehlen dringend, Backup-Token für den Fall einzurichten, dass du den Zugang zu deinem Authentifizierungsgerät verlierst!"
@@ -7210,6 +7212,90 @@ msgstr "Schön, dass du da bist! Auf %(portal_name)s kannst du in Gruppen und Pr
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Jetzt anmelden und mitgestalten"
+
+msgid "Custom Wagtail Page"
+msgstr "Custom Wagtail Seite"
+
+msgid "Tools"
+msgstr "Werkzeuge"
+
+msgid "Import Projects and Groups or Users"
+msgstr "Projekte und Gruppen oder Benutzer importieren"
+
+msgid "Import from a CSV File"
+msgstr "Aus CSV-Datei importieren"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr "Laden Sie entweder eine CSV-Datei, um Ihre Projekte und Gruppen zu importieren, oder eine CSV-Datei, um die Benutzer zu importieren hoch. Bitte merken Sie, dass es gleichzeitig nur eine Datei importiert werden kann. Die Datei muss über ein entsprechendes Format verfügen. Wenn das Dateiformat geändert wird (mehr/weniger/unterschiedliche Spalten), bitte melden Sie sich bei den Entwicklern!"
+
+msgid "Project/group CSV File"
+msgstr "Projekte/Gruppen CSV-Datei"
+
+msgid "User CSV File"
+msgstr "Benutzer CSV-Datei"
+
+msgid "Options"
+msgstr "Optionen"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr "Die Standardeinstellungen der CSV-Datei. Bitte nur in dem Fall ändern, wenn Sie sich absolut sicher sind, was Sie tun!"
+
+msgid "Encoding of the CSV file"
+msgstr "Enkodierung der CSV-Datei"
+
+msgid "Delimiter of the CSV file"
+msgstr "Trennzeichen der CSV-Datei"
+
+msgid "Upload and Import..."
+msgstr "Hochladen und Import…"
+
+msgid "Import Projects and Groups"
+msgstr "Projekte und Gruppen importieren"
+
+msgid "Clear results and start a new import!"
+msgstr "Ergebnisse löschen und den Import neu starten!"
+
+msgid "CSV Import Results"
+msgstr "Ergebnisse des Imports"
+
+msgid "The import has finished. Here are the results:"
+msgstr "Der Importvorgang ist abgeschloßen. Hier sind die Ergebnisse:"
+
+msgid "Read errors:"
+msgstr "Lesefehler:"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr "Diese Zeilen in Ihrer CSV-Datei hatten Fehler oder eine inkorrekte Anzahl von Spalten und wurden daher IGNORIERT:"
+
+msgid "Saved items:"
+msgstr "Gespeicherte Daten:"
+
+msgid "Important messages:"
+msgstr "Wichtige Nachrichten:"
+
+msgid "Errors:"
+msgstr "Fehler:"
+
+msgid "Info messages:"
+msgstr "Info-Meldungen:"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr "Die CVS-Datei wurde erfolgreich bearbeitet und der Import läuft momentan auf dem Server!"
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+"Diese Seite wird die Ergebnisse anzeigen sobald der Import abgeschloßen ist.\n"
+"\t\t\n"
+"\t\t\t\tDie Bearbeitung kann je nach Anzahl der importierten Daten von wenigen Sekunden bis zu wenigen Minuten dauern. Sie können diese Seite schließen. Sobald der Import abgeschloßen ist, erhalten Sie von uns eine Email and die folgende Email-Adresse: <b>»%(email)s»</b> !\n"
+"\t\t\t"
+
+msgid "Progress:"
+msgstr "Verlauf:"
 
 msgid "Show more Projects"
 msgstr "Weitere Projekte anzeigen"
@@ -12861,6 +12947,24 @@ msgstr "Aufgabenliste „%(title)s“ konnte nicht hinzugefügt werden."
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte hast eins oder mehrere der noch enthaltenen Objekte zu löschen!"
 
+msgid "Drag"
+msgstr ""
+
+#~ msgid "2FA Settings"
+#~ msgstr "2FA-Einstellungen"
+
+#~ msgid "Disable 2FA"
+#~ msgstr "2FA deaktivieren"
+
+#~ msgid "Enable 2FA"
+#~ msgstr "2FA aktivieren"
+
+#~ msgid "2FA Setup"
+#~ msgstr "2FA-Einrichtung"
+
+#~ msgid "2FA Setup Complete"
+#~ msgstr "2FA-Einrichtung abgeschlossen"
+
 #~ msgid "Recording of meetings is only available for premium conferences!"
 #~ msgstr "Aufzeichnung von Meetings ist nur für Premium-Tagungen verfügbar!"
 
@@ -12899,89 +13003,6 @@ msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte
 
 #~ msgid "Back to your profile"
 #~ msgstr "Zurück zu deinem Profil"
-
-#~ msgid "Custom Wagtail Page"
-#~ msgstr "Custom Wagtail Seite"
-
-#~ msgid "Tools"
-#~ msgstr "Werkzeuge"
-
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Projekte und Gruppen oder Benutzer importieren"
-
-#~ msgid "Import from a CSV File"
-#~ msgstr "Aus CSV-Datei importieren"
-
-#~ msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-#~ msgstr "Laden Sie entweder eine CSV-Datei, um Ihre Projekte und Gruppen zu importieren, oder eine CSV-Datei, um die Benutzer zu importieren hoch. Bitte merken Sie, dass es gleichzeitig nur eine Datei importiert werden kann. Die Datei muss über ein entsprechendes Format verfügen. Wenn das Dateiformat geändert wird (mehr/weniger/unterschiedliche Spalten), bitte melden Sie sich bei den Entwicklern!"
-
-#~ msgid "Project/group CSV File"
-#~ msgstr "Projekte/Gruppen CSV-Datei"
-
-#~ msgid "User CSV File"
-#~ msgstr "Benutzer CSV-Datei"
-
-#~ msgid "Options"
-#~ msgstr "Optionen"
-
-#~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-#~ msgstr "Die Standardeinstellungen der CSV-Datei. Bitte nur in dem Fall ändern, wenn Sie sich absolut sicher sind, was Sie tun!"
-
-#~ msgid "Encoding of the CSV file"
-#~ msgstr "Enkodierung der CSV-Datei"
-
-#~ msgid "Delimiter of the CSV file"
-#~ msgstr "Trennzeichen der CSV-Datei"
-
-#~ msgid "Upload and Import..."
-#~ msgstr "Hochladen und Import…"
-
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Projekte und Gruppen importieren"
-
-#~ msgid "Clear results and start a new import!"
-#~ msgstr "Ergebnisse löschen und den Import neu starten!"
-
-#~ msgid "CSV Import Results"
-#~ msgstr "Ergebnisse des Imports"
-
-#~ msgid "The import has finished. Here are the results:"
-#~ msgstr "Der Importvorgang ist abgeschloßen. Hier sind die Ergebnisse:"
-
-#~ msgid "Read errors:"
-#~ msgstr "Lesefehler:"
-
-#~ msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-#~ msgstr "Diese Zeilen in Ihrer CSV-Datei hatten Fehler oder eine inkorrekte Anzahl von Spalten und wurden daher IGNORIERT:"
-
-#~ msgid "Saved items:"
-#~ msgstr "Gespeicherte Daten:"
-
-#~ msgid "Important messages:"
-#~ msgstr "Wichtige Nachrichten:"
-
-#~ msgid "Errors:"
-#~ msgstr "Fehler:"
-
-#~ msgid "Info messages:"
-#~ msgstr "Info-Meldungen:"
-
-#~ msgid "The CSV file was read successfully and the import is currently running on the server!"
-#~ msgstr "Die CVS-Datei wurde erfolgreich bearbeitet und der Import läuft momentan auf dem Server!"
-
-#~ msgid ""
-#~ "This page will show the results when the import is finished.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-#~ "\t\t\t"
-#~ msgstr ""
-#~ "Diese Seite wird die Ergebnisse anzeigen sobald der Import abgeschloßen ist.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tDie Bearbeitung kann je nach Anzahl der importierten Daten von wenigen Sekunden bis zu wenigen Minuten dauern. Sie können diese Seite schließen. Sobald der Import abgeschloßen ist, erhalten Sie von uns eine Email and die folgende Email-Adresse: <b>»%(email)s»</b> !\n"
-#~ "\t\t\t"
-
-#~ msgid "Progress:"
-#~ msgstr "Verlauf:"
 
 #~ msgid "group"
 #~ msgstr "Gruppe"

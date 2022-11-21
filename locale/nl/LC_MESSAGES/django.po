@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-14 10:28+0100\n"
+"POT-Creation-Date: 2022-11-18 10:19+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -6674,9 +6674,8 @@ msgstr "Facebook account ontkoppelen"
 msgid "Disconnect Facebook"
 msgstr "Facebook ontkoppelen"
 
-#, fuzzy
-msgid "2FA Settings"
-msgstr "Instellingen"
+msgid "Two-Factor Authentication Settings"
+msgstr ""
 
 #, python-format
 msgid "%(provider)s-Account"
@@ -6880,12 +6879,11 @@ msgstr "Heb je nog geen %(portal_name)s account?"
 msgid "Generate Tokens"
 msgstr "Voer een token in:"
 
-msgid "Back to 2FA Settings"
+msgid "Back to Two-Factor Authentication Settings"
 msgstr ""
 
-#, fuzzy
-msgid "Disable 2FA"
-msgstr "Editor uitschakelen"
+msgid "Disable Two-Factor Authentication"
+msgstr ""
 
 msgid "You are about to disable two-factor authentication. This weakens your account security, are you sure?"
 msgstr ""
@@ -6946,10 +6944,10 @@ msgstr ""
 msgid "Two-factor authentication is not enabled for your account. <br> Enable two-factor authentication for enhanced account security."
 msgstr ""
 
-msgid "Enable 2FA"
+msgid "Enable Two-Factor Authentication"
 msgstr ""
 
-msgid "2FA Setup"
+msgid "Two-Factor Authentication Setup"
 msgstr ""
 
 #, fuzzy
@@ -6957,7 +6955,7 @@ msgstr ""
 msgid "You are about to take your account security to the next level."
 msgstr "Je staat op het punt je gebruikersaccount van de site te verwijderen!"
 
-msgid "To use 2FA, you need a one-time password (OTP) app. For example, there is \"Free OTP\" for your Android phone or \"OpenOTP\" for iOS. With these apps you can scan the QR code and then log in with the generated codes."
+msgid "To use Two-Factor Authentication, you need a one-time password (OTP) app. For example, there is \"Free OTP\" for your Android phone or \"OpenOTP\" for iOS. With these apps you can scan the QR code and then log in with the generated codes."
 msgstr ""
 
 msgid "Scan the QR code below."
@@ -6972,11 +6970,11 @@ msgstr ""
 msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
 msgstr ""
 
-msgid "2FA Setup Complete"
+msgid "Two-Factor Authentication Setup Complete"
 msgstr ""
 
 #, fuzzy
-msgid "Congratulations, you've successfully enabled 2FA."
+msgid "Congratulations, you've successfully enabled Two-Factor Authentication."
 msgstr "De uitnodiging is succesvol verwijderd."
 
 msgid "We strongly recommend to set up backup tokens in case you lose access to your authentication device!"
@@ -7481,6 +7479,102 @@ msgstr "Goed om je te zien! Bij %(portal_name)s kun je samenwerken met anderen i
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Nu registreren en help mee vorm te geven"
+
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Mijn Projecten en Groepen"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Soorteerveld"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Projecten/Groepen"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Projecten/Groepen"
+
+#, fuzzy
+msgid "Options"
+msgstr "Proporties"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete file"
+msgid "Delimiter of the CSV file"
+msgstr "Bestand verwijderen"
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Upload een afbeelding."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Mijn Projecten en Groepen"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Wachtwoord reset succesvol"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Foutmelding!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+#, fuzzy
+#| msgid "New item"
+msgid "Saved items:"
+msgstr "Nieuw item"
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Berichten"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Foutmelding!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Berichten"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
 
 msgid "Show more Projects"
 msgstr "Toon meerdere projecten"
@@ -13316,6 +13410,17 @@ msgstr "Takenlijst “%(title)s” kon niet worden toegevoegd."
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Je kunt deze map niet verwijderen, omdat je geen toestemming hebt om een of meer van de items te verwijderen!"
 
+msgid "Drag"
+msgstr ""
+
+#, fuzzy
+#~ msgid "2FA Settings"
+#~ msgstr "Instellingen"
+
+#, fuzzy
+#~ msgid "Disable 2FA"
+#~ msgstr "Editor uitschakelen"
+
 #~ msgid "Umwelt"
 #~ msgstr "Milieu"
 
@@ -13343,54 +13448,6 @@ msgstr "Je kunt deze map niet verwijderen, omdat je geen toestemming hebt om een
 #, fuzzy
 #~ msgid "Back to your profile"
 #~ msgstr "Jouw profiel"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Mijn Projecten en Groepen"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Soorteerveld"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Projecten/Groepen"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Projecten/Groepen"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Proporties"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Upload een afbeelding."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Mijn Projecten en Groepen"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Wachtwoord reset succesvol"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Foutmelding!"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Berichten"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Foutmelding!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Berichten"
 
 #~ msgid "Message Group"
 #~ msgstr "Bericht sturen aan groep"

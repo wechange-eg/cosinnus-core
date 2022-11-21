@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-14 10:28+0100\n"
-"PO-Revision-Date: 2022-08-02 17:16+0200\n"
+"POT-Creation-Date: 2022-11-18 10:19+0100\n"
+"PO-Revision-Date: 2022-11-18 10:40+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.2\n"
 
 msgid "Debug"
 msgstr ""
@@ -371,6 +371,7 @@ msgid "%(sender_name)s and %(count_minus_one)d other requested to become a membe
 msgid_plural "%(sender_name)s and %(count_minus_one)d others requested to become a member"
 msgstr[0] "%(sender_name)s и %(count_minus_one)d отправил(a) заявку на членство"
 msgstr[1] "%(sender_name)s и %(count_minus_one)d отправили заявку на членство"
+msgstr[2] ""
 
 msgid "You are an admin of this team"
 msgstr "Вы администратор этой команды"
@@ -415,6 +416,7 @@ msgid "%(sender_name)s and %(count_minus_one)d other accepted the invitation"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others accepted the invitation"
 msgstr[0] "%(sender_name)s и %(count_minus_one)d принял(a) приглашение"
 msgstr[1] "%(sender_name)s и %(count_minus_one)d приняли приглашение"
+msgstr[2] ""
 
 #, python-format
 msgid "\"%(sender_name)s\" has accepted the invitation to %(team_name)s."
@@ -432,6 +434,7 @@ msgid "%(sender_name)s and %(count_minus_one)d other declined the invitation"
 msgid_plural "%(sender_name)s and %(count_minus_one)d others declined the invitation"
 msgstr[0] "%(sender_name)s и %(count_minus_one)d  отклонил(а) приглашение"
 msgstr[1] "%(sender_name)s и %(count_minus_one)d отклонили приглашение"
+msgstr[2] ""
 
 #, python-format
 msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
@@ -2494,6 +2497,7 @@ msgid "With the current selection the newsletter will be sent to %(counter)s rec
 msgid_plural "With the current selection the newsletter will be sent to %(counter)s recipients."
 msgstr[0] "Согласно выбранным параметрам информационное письмо будет отправлено %(counter)s адресатам."
 msgstr[1] "Согласно выбранным параметрам информационное письмо будет отправлено %(counter)s адресатам."
+msgstr[2] ""
 
 msgid "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter."
 msgstr "Только пользователи, подписавшиеся на рассылку в своем профиле, будут получать информационные письма."
@@ -2622,6 +2626,7 @@ msgstr[0] ""
 msgstr[1] ""
 "\n"
 "Найдено %(total)s пользователя/-ей с электронным письмом, содержащим: ‘%(search_string)s’                "
+msgstr[2] ""
 
 msgid "clear search"
 msgstr "сбросить результаты поиска"
@@ -3068,6 +3073,7 @@ msgid " 1 place left "
 msgid_plural " %(counter)s places left "
 msgstr[0] " осталось 1 место "
 msgstr[1] " осталось %(counter)s мест/-а "
+msgstr[2] ""
 
 msgid "Collapse all processed applications"
 msgstr "Свернуть все обработанные запросы"
@@ -3128,6 +3134,7 @@ msgstr[1] ""
 "\n"
 "                    Это сообщение будет отправлено %(count)s пользователям.\n"
 "                    "
+msgstr[2] ""
 
 msgid "Are you sure? Please check your entries beforehand with the help of a test email."
 msgstr "Вы уверены? Пожалуйста, проверьте Ваши записи с помощью тестового электронного письма заранее."
@@ -3149,6 +3156,7 @@ msgstr[1] ""
 "\n"
 "                        Да, отправить %(count)s пользователям.\n"
 "                        "
+msgstr[2] ""
 
 msgid "No, don\\"
 msgstr "Нет, отменить"
@@ -6480,7 +6488,7 @@ msgstr "Отключить Фейсбук-аккаунт"
 msgid "Disconnect Facebook"
 msgstr "Отключить Фейсбук"
 
-msgid "2FA Settings"
+msgid "Two-Factor Authentication Settings"
 msgstr "Настройки двухфакторной аутентификации"
 
 #, python-format
@@ -6629,6 +6637,7 @@ msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
 msgstr[0] "Пожалуйста, исправь ошибку ниже."
 msgstr[1] "Пожалуйста, исправь ошибки ниже."
+msgstr[2] ""
 
 msgid "2-factor access only"
 msgstr "Только 2-факторный вход"
@@ -6680,11 +6689,11 @@ msgstr "У вас еще нет резервных токенов."
 msgid "Generate Tokens"
 msgstr "Сгенерировать токены"
 
-msgid "Back to 2FA Settings"
-msgstr "Назад к настройкам двухфакторной аутентификации"
+msgid "Back to Two-Factor Authentication Settings"
+msgstr "Вернуться к настройкам двухфакторной аутентификации"
 
-msgid "Disable 2FA"
-msgstr "Деактивировать двухфакторную аутентификацию"
+msgid "Disable Two-Factor Authentication"
+msgstr "Отключить двухфакторную аутентификацию"
 
 msgid "You are about to disable two-factor authentication. This weakens your account security, are you sure?"
 msgstr "Вы собираетесь выключить двухфакторную аутентификацию. Это ослабит безопасность вашего аккаунта. Вы уверены в своем решении?"
@@ -6730,6 +6739,7 @@ msgid "You have only one backup token remaining."
 msgid_plural "<br> You have %(counter)s backup tokens remaining."
 msgstr[0] "У вас остался один резервный токен."
 msgstr[1] "<br> У вас осталось %(counter)s резервных токенов."
+msgstr[2] ""
 
 msgid "Show Tokens"
 msgstr "Показать токены"
@@ -6740,10 +6750,10 @@ msgstr "Отключение двухфакторной аутентификац
 msgid "Two-factor authentication is not enabled for your account. <br> Enable two-factor authentication for enhanced account security."
 msgstr "Двухфакторная аутентификация не включена для этого аккаунта. <br> Активируйте двухфакторную аутентификацию для обеспечения большей безопасности аккаунта."
 
-msgid "Enable 2FA"
+msgid "Enable Two-Factor Authentication"
 msgstr "Включить двухфакторную аутентификацию"
 
-msgid "2FA Setup"
+msgid "Two-Factor Authentication Setup"
 msgstr "Настройка двухфакторной аутентификации"
 
 #, fuzzy
@@ -6751,8 +6761,8 @@ msgstr "Настройка двухфакторной аутентификаци
 msgid "You are about to take your account security to the next level."
 msgstr "Вы собираетесь удалить Ваш пользовательский аккаунт с сайта!"
 
-msgid "To use 2FA, you need a one-time password (OTP) app. For example, there is \"Free OTP\" for your Android phone or \"OpenOTP\" for iOS. With these apps you can scan the QR code and then log in with the generated codes."
-msgstr ""
+msgid "To use Two-Factor Authentication, you need a one-time password (OTP) app. For example, there is \"Free OTP\" for your Android phone or \"OpenOTP\" for iOS. With these apps you can scan the QR code and then log in with the generated codes."
+msgstr "Чтобы использовать двухфакторную аутентификацию вам потребуется приложение для создания одноразовых паролей (т.н. OTP). Можно воспользоваться приложением “Free OTP” для вашего устройства на Android или же приложением “OpenOTP”, если вы пользуетесь устройством iOS. С помощью этих приложений вы можете отсканировать QR-код двухфакторной аутентификации и затем войти на сайт, используя сгенерированные пароли."
 
 msgid "Scan the QR code below."
 msgstr "Отсканируйте QR."
@@ -6766,10 +6776,12 @@ msgstr "Теперь введите токен, сгенерированный �
 msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
 msgstr "Мы зарегистрировали ошибку в выбранном методе аутентификации. Пожалуйста, вернитесь назад и удостоверьтесь, что введенная информация корректна. Попробуйте снова или же используйте иной метод аутентификации. Если проблема сохраняется, свяжитесь с администрацией."
 
-msgid "2FA Setup Complete"
+msgid "Two-Factor Authentication Setup Complete"
 msgstr "Настройка двухфакторной аутентификации завершена"
 
-msgid "Congratulations, you've successfully enabled 2FA."
+#, fuzzy
+#| msgid "Congratulations, you've successfully enabled 2FA."
+msgid "Congratulations, you've successfully enabled Two-Factor Authentication."
 msgstr "Поздравляем, вы успешно активировали двухфакторную аутентификацию."
 
 msgid "We strongly recommend to set up backup tokens in case you lose access to your authentication device!"
@@ -7262,6 +7274,92 @@ msgstr "Рады видеть тебя! На %(portal_name)s ты можешь �
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Зарегистрироваться"
+
+msgid "Custom Wagtail Page"
+msgstr "Индивидуальная страница Wagtail"
+
+msgid "Tools"
+msgstr "Инструменты"
+
+msgid "Import Projects and Groups or Users"
+msgstr "Импортировать Проекты и Группы или Пользователей"
+
+# ???
+msgid "Import from a CSV File"
+msgstr "Импортировать из CSV файла"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr "Загрузите либо один CSV файл, чтобы импортировать Проекты и Группы, либо другой, чтобы импортировать Пользователей. Обратите внимание, что быть импортированным может только один файл за раз. Файл должен установленного формата. Если формат будет изменен (количество столбцов станет больше/меньше/изменится иначе), пожалуйста, обратитесь к разработчикам!"
+
+msgid "Project/group CSV File"
+msgstr "CSV файл для импорта Проекта/Группы"
+
+msgid "User CSV File"
+msgstr "CSV файл для импорта Пользователей"
+
+msgid "Options"
+msgstr "Дополнительные опции"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr "Дополнительные настройки CSV файла. Изменяйте их только в случае абсолютной уверенности в том, что Вы делаете!"
+
+msgid "Encoding of the CSV file"
+msgstr "Шифрование файла CSV"
+
+msgid "Delimiter of the CSV file"
+msgstr "Определение CSV файла"
+
+msgid "Upload and Import..."
+msgstr "Загрузка и импорт…"
+
+msgid "Import Projects and Groups"
+msgstr "Импорт Проектов и Групп"
+
+msgid "Clear results and start a new import!"
+msgstr "Отчистить результаты и начать новый импорт!"
+
+msgid "CSV Import Results"
+msgstr "Результаты импорта CSV файла"
+
+msgid "The import has finished. Here are the results:"
+msgstr "Импорт был завершен. Получены следующие результаты:"
+
+msgid "Read errors:"
+msgstr "Ошибки чтения:"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr "Следующие ряды в Вашем CSV файле имели ошибки или некорректное количество столбцов, а потому были игнорированы:"
+
+msgid "Saved items:"
+msgstr "Сохраненные элементы:"
+
+msgid "Important messages:"
+msgstr "Важные сообщения:"
+
+msgid "Errors:"
+msgstr "Ошибки:"
+
+msgid "Info messages:"
+msgstr "Информационные сообщения:"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr "Файл CSV был прочтен успешно. В данный момент импорт работает на сервере!"
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+"По окончании импорта результаты отобразятся на этой странице.\n"
+"\t\t\n"
+"\t\t\t\tВ зависимости от количества импортированных элементов, процесс импорта может занять от нескольких секунд до нескольких минут. Вы можете закрыть страницу. \n"
+"Уведомление об окончании импорта будет выслано на адрес Вашей электронной почты <b>»%(email)s»</b> !\n"
+"\t\t\t"
+
+msgid "Progress:"
+msgstr "Прогресс:"
 
 msgid "Show more Projects"
 msgstr "Показать больше проектов"
@@ -8337,7 +8435,6 @@ msgid_plural "Successfully created  %(created_count)d accounts. "
 msgstr[0] "Пользовательский аккаунт успешно деактивирован"
 msgstr[1] "Пользовательский аккаунт успешно деактивирован"
 msgstr[2] "Пользовательский аккаунт успешно деактивирован"
-msgstr[3] "Пользовательский аккаунт успешно деактивирован"
 
 #, fuzzy
 #| msgid "Successfully deactivated user account"
@@ -13068,6 +13165,24 @@ msgstr "Невозможно добавить список задач \"%(title)
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Вы не можете удалить эту папку, так как у Вас нет полномочий для удаления одного или более элементов, которые в ней содержатся!"
 
+msgid "Drag"
+msgstr ""
+
+#~ msgid "2FA Settings"
+#~ msgstr "Настройки двухфакторной аутентификации"
+
+#~ msgid "Disable 2FA"
+#~ msgstr "Деактивировать двухфакторную аутентификацию"
+
+#~ msgid "Enable 2FA"
+#~ msgstr "Включить двухфакторную аутентификацию"
+
+#~ msgid "2FA Setup"
+#~ msgstr "Настройка двухфакторной аутентификации"
+
+#~ msgid "2FA Setup Complete"
+#~ msgstr "Настройка двухфакторной аутентификации завершена"
+
 #~ msgid "Recording of meetings is only available for premium conferences!"
 #~ msgstr "Запись сессий доступна только для премиум- конференций!"
 
@@ -13103,91 +13218,6 @@ msgstr "Вы не можете удалить эту папку, так как �
 
 #~ msgid "Back to your profile"
 #~ msgstr "Назад к профилю"
-
-#~ msgid "Custom Wagtail Page"
-#~ msgstr "Индивидуальная страница Wagtail"
-
-#~ msgid "Tools"
-#~ msgstr "Инструменты"
-
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Импортировать Проекты и Группы или Пользователей"
-
-# ???
-#~ msgid "Import from a CSV File"
-#~ msgstr "Импортировать из CSV файла"
-
-#~ msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-#~ msgstr "Загрузите либо один CSV файл, чтобы импортировать Проекты и Группы, либо другой, чтобы импортировать Пользователей. Обратите внимание, что быть импортированным может только один файл за раз. Файл должен установленного формата. Если формат будет изменен (количество столбцов станет больше/меньше/изменится иначе), пожалуйста, обратитесь к разработчикам!"
-
-#~ msgid "Project/group CSV File"
-#~ msgstr "CSV файл для импорта Проекта/Группы"
-
-#~ msgid "User CSV File"
-#~ msgstr "CSV файл для импорта Пользователей"
-
-#~ msgid "Options"
-#~ msgstr "Дополнительные опции"
-
-#~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-#~ msgstr "Дополнительные настройки CSV файла. Изменяйте их только в случае абсолютной уверенности в том, что Вы делаете!"
-
-#~ msgid "Encoding of the CSV file"
-#~ msgstr "Шифрование файла CSV"
-
-#~ msgid "Delimiter of the CSV file"
-#~ msgstr "Определение CSV файла"
-
-#~ msgid "Upload and Import..."
-#~ msgstr "Загрузка и импорт…"
-
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Импорт Проектов и Групп"
-
-#~ msgid "Clear results and start a new import!"
-#~ msgstr "Отчистить результаты и начать новый импорт!"
-
-#~ msgid "CSV Import Results"
-#~ msgstr "Результаты импорта CSV файла"
-
-#~ msgid "The import has finished. Here are the results:"
-#~ msgstr "Импорт был завершен. Получены следующие результаты:"
-
-#~ msgid "Read errors:"
-#~ msgstr "Ошибки чтения:"
-
-#~ msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-#~ msgstr "Следующие ряды в Вашем CSV файле имели ошибки или некорректное количество столбцов, а потому были игнорированы:"
-
-#~ msgid "Saved items:"
-#~ msgstr "Сохраненные элементы:"
-
-#~ msgid "Important messages:"
-#~ msgstr "Важные сообщения:"
-
-#~ msgid "Errors:"
-#~ msgstr "Ошибки:"
-
-#~ msgid "Info messages:"
-#~ msgstr "Информационные сообщения:"
-
-#~ msgid "The CSV file was read successfully and the import is currently running on the server!"
-#~ msgstr "Файл CSV был прочтен успешно. В данный момент импорт работает на сервере!"
-
-#~ msgid ""
-#~ "This page will show the results when the import is finished.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-#~ "\t\t\t"
-#~ msgstr ""
-#~ "По окончании импорта результаты отобразятся на этой странице.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tВ зависимости от количества импортированных элементов, процесс импорта может занять от нескольких секунд до нескольких минут. Вы можете закрыть страницу. \n"
-#~ "Уведомление об окончании импорта будет выслано на адрес Вашей электронной почты <b>»%(email)s»</b> !\n"
-#~ "\t\t\t"
-
-#~ msgid "Progress:"
-#~ msgstr "Прогресс:"
 
 #~ msgid "Message Group"
 #~ msgstr "Отправить сообщение группе"
@@ -13574,11 +13604,13 @@ msgstr "Вы не можете удалить эту папку, так как �
 #~ "\n"
 #~ "Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das Portallogo links oben.\n"
 #~ "\n"
-#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
+#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails "
+#~ "bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
 #~ "\n"
 #~ "Für alle Gruppen und Projekte, denen du selbstständig beitrittst, ist die Standardeinstellung bei dieser Option \"alle Benachrichtigungen\". Das kannst du dann natürlich ebenso anpassen.\n"
 #~ "\n"
-#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
+#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen "
+#~ "wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
 #~ "\n"
 #~ "Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, melde dich gern den Portaladministrator_innen. \n"
 #~ "\n"
@@ -13593,7 +13625,8 @@ msgstr "Вы не можете удалить эту папку, так как �
 #~ "\n"
 #~ "Заранее сообщаем, что зарегистрировавшись здесь, Вы автоматически стали членом группы „Блог“, в которую поступает вся информация портала. Чтобы Вам легче было понять, что здесь происходит, в настройках уведомлений по умолчанию включена настройка „Все новости“. Настройки можно очень просто изменить в соответствии с вашими индивидуальными потребностями (нажать на свое имя в правой верхней части экрана), чтобы не получать нежелательных сообщений на электронную почту.\n"
 #~ "\n"
-#~ "Еще полезно знать следующее: данный портал - один из многих на wechange.de. Если Вам хочется познакомиться с другими порталами, это можно сделать с помощью вашего логина. Если Вы зарегистрированы на нескольких порталах, то в рубрике „Лента“ (в левом верхнем углу меню) вы будете получать все обновления групп и проектов, членами которых Вы являетесь. Перемещаться с одного портала на другой можно нажимая на их логотипы. Если Вы хотите стать членом группы „Блог“ на другом портале, вам надо будет просто подать заявку на членство.\n"
+#~ "Еще полезно знать следующее: данный портал - один из многих на wechange.de. Если Вам хочется познакомиться с другими порталами, это можно сделать с помощью вашего логина. Если Вы зарегистрированы на нескольких порталах, то в рубрике „Лента“ (в левом верхнем углу меню) вы будете получать все обновления групп и проектов, членами которых Вы являетесь. Перемещаться с одного портала на другой можно нажимая на их логотипы. Если Вы хотите стать членом группы „Блог“ на другом портале, вам "
+#~ "надо будет просто подать заявку на членство.\n"
 #~ "\n"
 #~ "Если у Вас появятся вопросы, технические рекомендации, Вы захотите сообщить об ошибке или поделиться своими пожеланиями, обращайтесь к администраторам портала.\n"
 #~ "\n"
