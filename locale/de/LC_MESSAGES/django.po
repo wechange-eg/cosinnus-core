@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 2.0.6\n"
 
 msgid "Debug"
 msgstr ""
@@ -6693,8 +6693,6 @@ msgstr "Die Zwei-Faktor Authentifizierung ist für deinen Benutzerprofil noch ni
 msgid "Enable Two-Factor Authentication"
 msgstr "Zwei-Faktor-Authentifizierung aktivieren"
 
-#, fuzzy
-#| msgid "Set up 2-factor-authentication"
 msgid "Two-Factor Authentication Setup"
 msgstr "Zwei-Faktor-Authentifizierung einrichten"
 
