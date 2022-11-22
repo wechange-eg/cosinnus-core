@@ -1,5 +1,5 @@
 import re
-from urllib.parse import parse_qsl, urlencode
+from urllib.parse import parse_qsl, urlencode, unquote
 
 from django.shortcuts import redirect
 from django.utils import translation
@@ -29,10 +29,17 @@ class FrontendMiddleware(MiddlewareMixin):
                     redirect_unprefixed = '/'.join(request_tokens)
                     return redirect(redirect_unprefixed)
             
+            # currently do not affect login requests within the oauth flow
+            if any(['/o/authorize' in unquote(request_token) for request_token in request_tokens]):
+                return
+            
+            # check if v3 redirects are disabled specifically for this user
             if request.user.is_authenticated and \
                 request.user.cosinnus_profile.settings.get(
                     USERPROFILE_SETTING_FRONTEND_DISABLED, False):
                 return
+            
+            # check if the URL matches any of the v3 redirectable URLs
             matched = False
             for url_pattern in settings.COSINNUS_V3_FRONTEND_URL_PATTERNS:
                 if re.match(url_pattern, request.path):
