@@ -30,7 +30,7 @@ class FrontendMiddleware(MiddlewareMixin):
                     return redirect(redirect_unprefixed)
             
             # currently do not affect login requests within the oauth flow
-            if any(['/o/authorize' in unquote(request_token) for request_token in request_tokens]):
+            if '/o/authorize' in request.build_absolute_uri() or any(['/o/authorize' in unquote(request_token) for request_token in request_tokens]) :
                 return
             
             # check if v3 redirects are disabled specifically for this user
