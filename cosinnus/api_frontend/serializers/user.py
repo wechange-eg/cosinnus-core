@@ -32,8 +32,17 @@ logger = logging.getLogger('cosinnus')
 class CosinnusUserLoginSerializer(serializers.Serializer):
     """ Serializer for the User Login API endpoint """
     
-    username = serializers.EmailField(required=True)
+    username = serializers.EmailField(
+        required=True, 
+        help_text='E-Mail of the user account to log in (since we do not accept user names for login)'
+    )
     password = serializers.CharField(required=True)
+    # the next field is in the serializer only for documentation purposes
+    # but is actually used by the `LoginView` directly from request data
+    next = serializers.CharField(
+        required=False,
+        help_text='Next URL parameter, that should be passed through if the user has arrived on the login page with a next param. Depending on the state of the user account, the login endpoint may return this parameter value or a different redirect URL as `next` in its response.'
+    )
 
     def validate(self, attrs):
         email = attrs['username'].lower().strip()

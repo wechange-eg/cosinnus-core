@@ -24,6 +24,8 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.exceptions import TokenError
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.throttling import UserRateThrottle
+from django.utils.http import is_safe_url
+from urllib.parse import unquote
 
 
 class CsrfExemptSessionAuthentication(authentication.SessionAuthentication):
@@ -125,12 +127,20 @@ class LoginView(LoginViewAdditionalLogicMixin, APIView):
         # user is authenticated correctly, log them in
         login(request, user)
         
+        # channel through next token
+        next_url = getattr(settings, 'LOGIN_REDIRECT_URL', reverse('cosinnus:user-dashboard'))
+        next_token = request.data.get('next', None)
+        if next_token:
+            next_token = unquote(next_token)
+            if is_safe_url(next_token, allowed_hosts=[request.get_host()]):
+                next_url = next_token
+        
         user_tokens = get_tokens_for_user(user)
         data = {
             'refresh': user_tokens['refresh'],
             'access': user_tokens['access'],
             'user': UserSerializer(user, context={'request': request}).data,
-            'next': getattr(settings, 'LOGIN_REDIRECT_URL', reverse('cosinnus:user-dashboard')),
+            'next': next_url,
         }
         response = Response(data)
         response = self.set_response_cookies(response)
