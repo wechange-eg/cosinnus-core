@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-14 10:28+0100\n"
+"POT-Creation-Date: 2022-11-18 10:19+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -6729,9 +6729,8 @@ msgstr "Decontectar cuenta de Facebook"
 msgid "Disconnect Facebook"
 msgstr "Decontectar Facebook"
 
-#, fuzzy
-msgid "2FA Settings"
-msgstr "Ajustes"
+msgid "Two-Factor Authentication Settings"
+msgstr ""
 
 #, python-format
 msgid "%(provider)s-Account"
@@ -6937,12 +6936,11 @@ msgstr "No tienes permiso para el accesso de esta página."
 msgid "Generate Tokens"
 msgstr "Inserta un token:"
 
-msgid "Back to 2FA Settings"
+msgid "Back to Two-Factor Authentication Settings"
 msgstr ""
 
-#, fuzzy
-msgid "Disable 2FA"
-msgstr "Deshabilitar el editor"
+msgid "Disable Two-Factor Authentication"
+msgstr ""
 
 msgid "You are about to disable two-factor authentication. This weakens your account security, are you sure?"
 msgstr ""
@@ -7003,10 +7001,10 @@ msgstr ""
 msgid "Two-factor authentication is not enabled for your account. <br> Enable two-factor authentication for enhanced account security."
 msgstr ""
 
-msgid "Enable 2FA"
+msgid "Enable Two-Factor Authentication"
 msgstr ""
 
-msgid "2FA Setup"
+msgid "Two-Factor Authentication Setup"
 msgstr ""
 
 #, fuzzy
@@ -7014,7 +7012,7 @@ msgstr ""
 msgid "You are about to take your account security to the next level."
 msgstr "¡Estás a punto de eliminar tu cuenta de usuario del sitio!"
 
-msgid "To use 2FA, you need a one-time password (OTP) app. For example, there is \"Free OTP\" for your Android phone or \"OpenOTP\" for iOS. With these apps you can scan the QR code and then log in with the generated codes."
+msgid "To use Two-Factor Authentication, you need a one-time password (OTP) app. For example, there is \"Free OTP\" for your Android phone or \"OpenOTP\" for iOS. With these apps you can scan the QR code and then log in with the generated codes."
 msgstr ""
 
 msgid "Scan the QR code below."
@@ -7029,11 +7027,11 @@ msgstr ""
 msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
 msgstr ""
 
-msgid "2FA Setup Complete"
+msgid "Two-Factor Authentication Setup Complete"
 msgstr ""
 
 #, fuzzy
-msgid "Congratulations, you've successfully enabled 2FA."
+msgid "Congratulations, you've successfully enabled Two-Factor Authentication."
 msgstr "Tu inivtacuón fue eliminada con éxito."
 
 msgid "We strongly recommend to set up backup tokens in case you lose access to your authentication device!"
@@ -7556,6 +7554,102 @@ msgstr ""
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Regístrate ahora y participa"
+
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Mis proyectos y grupos"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Ordenar casilla"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Proyectos/grupos"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Proyectos/grupos"
+
+#, fuzzy
+msgid "Options"
+msgstr "Proporciónes"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete file"
+msgid "Delimiter of the CSV file"
+msgstr "Eliminar el Archivo"
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Sube una imagen."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Mis proyectos y grupos"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Reinicio de contraseña con éxito"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "¡Error!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+#, fuzzy
+#| msgid "New item"
+msgid "Saved items:"
+msgstr "Item nuevo"
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Mensajes"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "¡Error!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Mensajes"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
 
 msgid "Show more Projects"
 msgstr "Mostrar más proyectos"
@@ -13445,6 +13539,17 @@ msgstr "La lista de tareas \"%(title)s\" no pudo ser agregada."
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "No se puede eliminar la carpeta porque no tiene permiso para eliminar uno o más elementos que contiene!"
 
+msgid "Drag"
+msgstr ""
+
+#, fuzzy
+#~ msgid "2FA Settings"
+#~ msgstr "Ajustes"
+
+#, fuzzy
+#~ msgid "Disable 2FA"
+#~ msgstr "Deshabilitar el editor"
+
 #~ msgid "Umwelt"
 #~ msgstr "Medio ambiente"
 
@@ -13472,54 +13577,6 @@ msgstr "No se puede eliminar la carpeta porque no tiene permiso para eliminar un
 #, fuzzy
 #~ msgid "Back to your profile"
 #~ msgstr "Tu perfil"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Mis proyectos y grupos"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Ordenar casilla"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Proyectos/grupos"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Proyectos/grupos"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Proporciónes"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Sube una imagen."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Mis proyectos y grupos"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Reinicio de contraseña con éxito"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "¡Error!"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Mensajes"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "¡Error!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Mensajes"
 
 #~ msgid "Message Group"
 #~ msgstr "Mandar un mensaje al grupo"

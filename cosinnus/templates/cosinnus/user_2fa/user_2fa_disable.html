@@ -3,14 +3,14 @@
 
 {% block breadcrumb %}
         <li class="active"><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Your Profile" %}</a></li>
-        <li class="active"><a href="{% url 'cosinnus:two-factor-auth-settings' %}">{% trans "2FA Settings" %}</a></li>
-        <li class="active">{% trans "Disable 2FA" %}</li>
+        <li class="active"><a href="{% url 'cosinnus:two-factor-auth-settings' %}">{% trans "Two-Factor Authentication Settings" %}</a></li>
+        <li class="active">{% trans "Disable Two-Factor Authentication" %}</li>
 {% endblock %}
 
 {% block content %}
 
     <div class="content-box">
-        <h4>{% block title %}{% trans "Disable 2FA" %}{% endblock %}</h4>
+        <h4>{% block title %}{% trans "Disable Two-Factor Authentication" %}{% endblock %}</h4>
         <p class="textfield transparent">{% blocktrans trimmed %}You are about to disable two-factor authentication. This
         weakens your account security, are you sure?{% endblocktrans %}</p>
         <form method="post" class="cosinnus-form">

@@ -3,16 +3,16 @@
 
 {% block breadcrumb %}
         <li class="active"><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Your Profile" %}</a></li>
-        <li class="active"><a href="{% url 'cosinnus:two-factor-auth-settings' %}">{% trans "2FA Settings" %}</a></li>
-        <li class="active"><a href="{% url 'cosinnus:two-factor-auth-setup' %}">{% trans "2FA Setup" %}</a></li>
-        <li class="active">{% trans "2FA Setup Complete" %}</li>
+        <li class="active"><a href="{% url 'cosinnus:two-factor-auth-settings' %}">{% trans "Two-Factor Authentication Settings" %}</a></li>
+        <li class="active"><a href="{% url 'cosinnus:two-factor-auth-setup' %}">{% trans "Two-Factor Authentication Setup" %}</a></li>
+        <li class="active">{% trans "Two-Factor Authentication Setup Complete" %}</li>
 {% endblock %}
 
 {% block content %}
 
     <div class="content-box">
-        <h4>{% block title %}{% trans "2FA Setup Complete" %}{% endblock %}</h4>
-        <p class="textfield transparent">{% blocktrans trimmed %}Congratulations, you've successfully enabled 2FA.{% endblocktrans %}</p>
+        <h4>{% block title %}{% trans "Two-Factor Authentication Setup Complete" %}{% endblock %}</h4>
+        <p class="textfield transparent">{% blocktrans trimmed %}Congratulations, you've successfully enabled Two-Factor Authentication.{% endblocktrans %}</p>
         <p class="textfield transparent">{% blocktrans trimmed %}We strongly recommend to set up backup tokens in case you lose access to your authentication device!{% endblocktrans %}</p>
     </div>
 

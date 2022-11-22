@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-14 10:28+0100\n"
+"POT-Creation-Date: 2022-11-18 10:19+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -6682,9 +6682,8 @@ msgstr "Facebook есептік жазбасын ажыратыңыз"
 msgid "Disconnect Facebook"
 msgstr "Facebookті ажыратыңыз"
 
-#, fuzzy
-msgid "2FA Settings"
-msgstr "Параметрлер"
+msgid "Two-Factor Authentication Settings"
+msgstr ""
 
 #, python-format
 msgid "%(provider)s-Account"
@@ -6888,12 +6887,11 @@ msgstr "Бұл сайтқа кіруге рұқсатыңыз жоқ."
 msgid "Generate Tokens"
 msgstr "Токенді енгізіңіз:"
 
-msgid "Back to 2FA Settings"
+msgid "Back to Two-Factor Authentication Settings"
 msgstr ""
 
-#, fuzzy
-msgid "Disable 2FA"
-msgstr "редакторды өшіріңіз"
+msgid "Disable Two-Factor Authentication"
+msgstr ""
 
 msgid "You are about to disable two-factor authentication. This weakens your account security, are you sure?"
 msgstr ""
@@ -6954,10 +6952,10 @@ msgstr ""
 msgid "Two-factor authentication is not enabled for your account. <br> Enable two-factor authentication for enhanced account security."
 msgstr ""
 
-msgid "Enable 2FA"
+msgid "Enable Two-Factor Authentication"
 msgstr ""
 
-msgid "2FA Setup"
+msgid "Two-Factor Authentication Setup"
 msgstr ""
 
 #, fuzzy
@@ -6965,7 +6963,7 @@ msgstr ""
 msgid "You are about to take your account security to the next level."
 msgstr "Сіз өзіңіздің есептік жазбаңызды сайттан жойғыңыз келеді!"
 
-msgid "To use 2FA, you need a one-time password (OTP) app. For example, there is \"Free OTP\" for your Android phone or \"OpenOTP\" for iOS. With these apps you can scan the QR code and then log in with the generated codes."
+msgid "To use Two-Factor Authentication, you need a one-time password (OTP) app. For example, there is \"Free OTP\" for your Android phone or \"OpenOTP\" for iOS. With these apps you can scan the QR code and then log in with the generated codes."
 msgstr ""
 
 msgid "Scan the QR code below."
@@ -6980,11 +6978,11 @@ msgstr ""
 msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
 msgstr ""
 
-msgid "2FA Setup Complete"
+msgid "Two-Factor Authentication Setup Complete"
 msgstr ""
 
 #, fuzzy
-msgid "Congratulations, you've successfully enabled 2FA."
+msgid "Congratulations, you've successfully enabled Two-Factor Authentication."
 msgstr "Шақыру сәтті жойылды."
 
 msgid "We strongly recommend to set up backup tokens in case you lose access to your authentication device!"
@@ -7490,6 +7488,102 @@ msgstr "Сені көруге қуаныштымыз! %(portal_name)s-те сі�
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Қазір тіркеліп, оны қалыптастыруға көмектесіңіз"
+
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Менің Жобаларым мен Топтары"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Cұрыптау өрісі"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Жобалар/Топтар"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Жобалар/Топтар"
+
+#, fuzzy
+msgid "Options"
+msgstr "Пропорциялар"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete file"
+msgid "Delimiter of the CSV file"
+msgstr "Файлды жою"
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Суретті жүктеу."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Менің Жобаларым мен Топтары"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Парольді қалпына келтіру сәтті өтті"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Қате!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+#, fuzzy
+#| msgid "New item"
+msgid "Saved items:"
+msgstr "Жаңа элемент"
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Хабарламалар"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Қате!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Хабарламалар"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
 
 msgid "Show more Projects"
 msgstr "Басқа Жобаларды көрсету"
@@ -13363,6 +13457,17 @@ msgstr "Todolist „%(title)s“ қосу мүмкін емес."
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Сіз бұл қалтаны жоя алмайсыз, өйткені онда бір немесе бірнеше элементті жоюға рұқсатыңыз жоқ!"
 
+msgid "Drag"
+msgstr ""
+
+#, fuzzy
+#~ msgid "2FA Settings"
+#~ msgstr "Параметрлер"
+
+#, fuzzy
+#~ msgid "Disable 2FA"
+#~ msgstr "редакторды өшіріңіз"
+
 #~ msgid "Umwelt"
 #~ msgstr "Қоршаған орта"
 
@@ -13390,54 +13495,6 @@ msgstr "Сіз бұл қалтаны жоя алмайсыз, өйткені о�
 #, fuzzy
 #~ msgid "Back to your profile"
 #~ msgstr "Сіздің профиліңіз"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Менің Жобаларым мен Топтары"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Cұрыптау өрісі"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Жобалар/Топтар"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Жобалар/Топтар"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Пропорциялар"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Суретті жүктеу."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Менің Жобаларым мен Топтары"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Парольді қалпына келтіру сәтті өтті"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Қате!"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Хабарламалар"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Қате!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Хабарламалар"
 
 #~ msgid "Message Group"
 #~ msgstr "Топқа хабарлама жазу"
