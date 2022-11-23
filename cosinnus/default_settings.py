@@ -515,6 +515,14 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         COSINNUS_BBB_SERVER_CHOICES = ((0, '(None)'),)
         COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS = {0: (None, None),}
     
+    # BBB Streaming
+    # whether or not BBB-streaming is enabled for this portal
+    # COSINNUS_CONFERENCES_STREAMING_ENABLED = True # configured in portal settings
+    # COSINNUS_CONFERENCES_STREAMING_API_URL = 'https://bbblive.wechange.de/api' # configured in portal settings
+    # COSINNUS_CONFERENCES_STREAMING_API_AUTH_USER = 'wechange' # configured in portal settings
+    COSINNUS_CONFERENCES_STREAMING_API_AUTH_PASSWORD = env("WECHANGE_COSINNUS_CONFERENCES_STREAMING_API_AUTH_PASSWORD", default=None)
+
+    
     # hCaptcha
     COSINNUS_HCAPTCHA_SECRET_KEY = env("WECHANGE_COSINNUS_HCAPTCHA_SECRET_KEY", default=None)
     
