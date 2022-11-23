@@ -182,22 +182,30 @@ class CosinnusHybridUserSerializer(TaggitSerializer, serializers.Serializer):
     avatar = Base64ImageField(
         source='cosinnus_profile.avatar', 
         required=False,
+        default=None,
         help_text='Image file that handles Base64 image data'
     )
     # hex color code will be saved without the "#", but allows it to be supplied
     avatar_color = serializers.CharField(
         source=f'cosinnus_profile.settings.{PROFILE_SETTINGS_AVATAR_COLOR}', 
         required=False,
+        default=None,
         validators=[HexColorValidator()],
         help_text='A hex color string. Represented without a leading "#", but can be input with one.'
     )
     contact_infos = serializers.JSONField(
         source=f'cosinnus_profile.dynamic_fields.{PROFILE_DYNAMIC_FIELDS_CONTACTS}',
         required=False,
+        default=list,
         validators=[validate_contact_info_pairs],
         help_text='Array of objects in the format "[{type: "email|phone_number|url", value: "mail@mail.com"}, ...]"'
     )
-    description = serializers.CharField(source='cosinnus_profile.description', required=False, allow_blank=True)
+    description = serializers.CharField(
+        source='cosinnus_profile.description',
+        required=False,
+        default=None,
+        allow_blank=True
+    )
     email = serializers.EmailField(
         required=False, 
         validators=[MaxLengthValidator(220)],
@@ -206,6 +214,7 @@ class CosinnusHybridUserSerializer(TaggitSerializer, serializers.Serializer):
     )
     first_name = serializers.CharField(
         required=False,
+        default='',
         validators=[MinLengthValidator(2), MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username],
         help_text='The display name of the user'
     )
@@ -219,31 +228,37 @@ class CosinnusHybridUserSerializer(TaggitSerializer, serializers.Serializer):
     location = serializers.CharField(
         source='cosinnus_profile.media_tag.location', 
         required=False, allow_blank=True,
+        default=None,
         help_text='On input, this string is used to determine the lat/lon fields using a nominatim service')
     location_lat = serializers.FloatField(
         source='cosinnus_profile.media_tag.location_lat',
         read_only=True,
+        default=None,
         help_text='read-only, lat/lon determined from "location" field')
     location_lon = serializers.FloatField(
         source='cosinnus_profile.media_tag.location_lon', 
         read_only=True, 
+        default=None,
         help_text='read-only, lat/lon determined from "location" field'
     )
     tags = TagListSerializerField(
         required=False, 
+        default=list,
         source='cosinnus_profile.media_tag.tags',
         help_text='An array of string tags'
     )
     topics = serializers.MultipleChoiceField(
         required=False, 
         allow_blank=True, 
+        default=list,
         choices=get_tag_object_model().TOPIC_CHOICES,
         source='cosinnus_profile.media_tag.get_topic_ids',
         help_text=f'Array of ints for corresponding topics: {str(get_tag_object_model().TOPIC_CHOICES)}'
     )
     visibility = serializers.ChoiceField(
         required=False, 
-        allow_blank=False, 
+        allow_blank=False,
+        default=None,
         choices=get_tag_object_model()._VISIBILITY_CHOICES,
         source='cosinnus_profile.media_tag.visibility',
         help_text=f'(optional) Int for corresponding visibility setting: {str(get_tag_object_model()._VISIBILITY_CHOICES)}. Default when omitted is different for each portal.'
