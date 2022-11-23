@@ -619,8 +619,7 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
         portal = cache.get(CosinnusPortal._CURRENT_PORTAL_CACHE_KEY)
         if portal is None:
             portal = CosinnusPortal.objects.select_related('site').get(site=settings.SITE_ID)
-            # cache indefinetly unless portal changes
-            cache.set(CosinnusPortal._CURRENT_PORTAL_CACHE_KEY, portal, 60 * 60 * 24 * 365)
+            cache.set(CosinnusPortal._CURRENT_PORTAL_CACHE_KEY, portal, 60 * 60)
         return portal
 
     @classmethod
