@@ -555,7 +555,7 @@ class CosinnusConf(AppConf):
     
     # if set to anything but None, logged-in users will be redirected to this
     # URL if they try to visit the register or login pages
-    LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET = '/map/'
+    LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET = '/dashboard/'
     
     # if True, form fields will show a Required label for required fields
     # instead of showing an Optional label for optional fields

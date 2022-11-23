@@ -39,6 +39,10 @@ class FrontendMiddleware(MiddlewareMixin):
                     USERPROFILE_SETTING_FRONTEND_DISABLED, False):
                 return
             
+            # do not redirect the user to the login page if they are already logged in
+            if request_tokens[3] == 'login' and request.user.is_authenticated:
+                return
+            
             # check if the URL matches any of the v3 redirectable URLs
             matched = False
             for url_pattern in settings.COSINNUS_V3_FRONTEND_URL_PATTERNS:
