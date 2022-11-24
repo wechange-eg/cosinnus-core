@@ -506,7 +506,7 @@
 					$('.video-conference-iframe').toggleClass('fullscreen');
 				});
 				var src_url = "{{ COSINNUS_CURRENT_PORTAL.video_conference_server_url }}-{{ event.slug }}-{{ event.group.id }}-{{ event.secret_from_created }}";
-				var embed_video_conf = '<iframe src="' + src_url + '" allow="display-capture *; geolocation *; microphone *; camera *; fullscreen *;" width="100%" height="100%"></iframe>';
+				var embed_video_conf = '<iframe src="' + src_url + '" allow="{% include "cosinnus/common/iframe_allow_attribute.html" with url=COSINNUS_CURRENT_PORTAL.video_conference_server_url|filter_domain %}" width="100%" height="100%"></iframe>';
 				$('.fullscreen-popout').attr('href', src_url);
 				$('.fullscreen-popout').click(function() {
                     $('.video-conference-iframe').html('<p class="textfield">{% trans "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page." %}</p>');
@@ -532,18 +532,51 @@
 				$('.fullscreen-toggle').click(function() {
 					$('.video-conference-iframe').toggleClass('fullscreen');
 				});
-				var src_url = "{{ event.get_bbb_room_url }}";
-				var embed_video_conf = '<iframe src="' + src_url + '" allow="display-capture *; geolocation *; microphone *; camera *; fullscreen *;" width="100%" height="100%"></iframe>';
-				$('.fullscreen-popout').attr('href', src_url);
 				$('.fullscreen-popout').click(function() {
                     $('.video-conference-iframe').html('<p class="textfield">{% trans "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page." %}</p>');
                 });
-				$('.start-video-conference').click(function(){
+                function startVideoConference(src_url) {
 				    if (recordingRequiresConsent == false || confirm(recordingConsentText)) {
+				        {% comment %} Adjusts the allow attribute to the specific BBB server {% endcomment %}
+				        var src_domain = 'https://' + src_url.split('/')[2];
+				        var allowAttribute = '{% include "cosinnus/common/iframe_allow_attribute.html" with url="{0}" %}';
+				        allowAttribute = allowAttribute.format(src_domain);
+						var embed_video_conf = '<iframe src="' + src_url + '" allow="' + allowAttribute + '" width="100%" height="100%"></iframe>';
 						$('.start-video-conference').hide();
 						$('.video-conference-container').show();
+						$('.fullscreen-popout').attr('href', src_url);
 						$('.video-conference-iframe').html(embed_video_conf);
 				    }
+                };
+                function showLoading() {
+                    $('.start-video-conference').hide();
+                    $('.video-conference-container').show();
+                    $('.video-conference-iframe').html('<div><span class="fa fa-fw fa-spin fa-cog fa-3x"></span></div>');
+                }
+                function showError() {
+                    $('.start-video-conference').show();
+                    $('.video-conference-container').show();
+                    $('.video-conference-iframe').html('<div>{% trans "Sorry! Something went wrong..." %}</div>');
+                }
+                function loadBBBUrl() {
+	                $.ajax(bbb_queue_url, {
+                        type: 'GET',
+                        success: function (response, textStatus, xhr) {
+                            if (response && response.url) {
+                                startVideoConference(response.url);
+                            } else if (response && response.status && response.status == 'WAITING') {
+                                setTimeout(loadBBBUrl, 2000);
+                            } else {
+                                showError();
+                            }
+                        },
+                        error: showError
+                    });
+                }
+				var bbb_queue_url = '{{ event.get_bbb_room_queue_api_url }}';
+				$('.start-video-conference').click(function(){
+				    showLoading();
+				    loadBBBUrl();
 				});
 				$('.stop-video-conference').click(function(){
 					$('.start-video-conference').show();
