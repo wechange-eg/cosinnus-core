@@ -80,7 +80,7 @@ module.exports = {
         data = {
             portal: data[0],
             type: data[1],
-            slug: data[2],
+            slug: data.slice(2).join('.'), // the rest of the split string
         };
         return data;
     },
