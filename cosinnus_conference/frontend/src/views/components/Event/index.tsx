@@ -33,15 +33,27 @@ interface EventProps {
 export function Event(props: EventProps) {
   const {events, event} = props
   const [url, setUrl] = useState('')
+  const [allow, setAllow] = useState('')
   const [loadFinished, setLoadFinished] = useState(false)
   const [fetching, setFetching] = useState(false)
   const [consentOpen, setConsentOpen] = useState(false)
   const [consentGiven, setConsentGiven] = useState(false)
   const classes = useStyles()
-
+  
+  function adjustAllowBasedOnUrl(url) {
+    /** Set the allow property of the iframe to the domain of the target URL */
+    try {
+      var domain = 'https://' + url.split('/')[2];
+      var allowStr = "display-capture {0}; geolocation {0}; microphone {0}; camera {0}; fullscreen {0};"
+      setAllow(allowStr.format(domain));
+    } catch (error) {
+      console.error('Error during IFrame allow property adjustment' + error);
+    }
+  }
   function fetchEventUrl(skipConsentPopup) {
     if (!url) {
       if (!event.props.isQueueUrl) {
+        adjustAllowBasedOnUrl(event.props.url);
         setUrl(event.props.url);
       } else if (!url && !fetching) {
         setFetching(true);
@@ -59,7 +71,8 @@ export function Event(props: EventProps) {
                   // otherwise the join url might be stale if a user takes a long time to answer the popup
                   setConsentOpen(true);
                   return;
-                } 
+                }
+                adjustAllowBasedOnUrl(data.url);
                 setUrl(data.url);
                 
               } else if (data.status === 'ERROR') {
@@ -102,7 +115,7 @@ export function Event(props: EventProps) {
           {event.props.noteHtml && (
             <div className="description" dangerouslySetInnerHTML={{__html: event.props.noteHtml}} />
           )}
-          <IframeContent url={url} html={event.props.rawHtml} />
+          <IframeContent url={url} html={event.props.rawHtml} allow={allow} />
           <EventButtons event={event} />
         </Content>
       ))

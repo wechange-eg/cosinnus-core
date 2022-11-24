@@ -19,10 +19,11 @@ import {useStyles} from "./style"
 interface IframeProps {
   url?: string
   html?: string
+  allow?: string
 }
 
 export function IframeContent(props: IframeProps) {
-  const { url, html } = props
+  const { url, html, allow } = props
   const [ fullscreen, setFullscreen ] = useState(false)
   const [leaveOpen, setLeaveOpen] = useState(false)
   const [leaveUrl, setLeaveUrl] = useState("")
@@ -91,7 +92,7 @@ export function IframeContent(props: IframeProps) {
           url={url}
           width="100%"
           height="100%"
-          allow="display-capture *; geolocation *; microphone *; camera *; fullscreen *;"
+          allow={allow || "display-capture *; geolocation *; microphone *; camera *; fullscreen *;"}
         />
       )}
       <Dialog

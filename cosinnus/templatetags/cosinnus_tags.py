@@ -982,6 +982,16 @@ def add_domain(url):
 
 
 @register.filter
+def filter_domain(url):
+    """ Returns only the domain part of the given URL, with leading "https" but no path """
+    try:
+        url = 'https://' + url.split('/')[2]
+    except:
+        pass
+    return url
+
+
+@register.filter
 def tag_group_filtered(tag_object, group="None"):
     """
     Filters a media_tag for its group to not show attributes that are inherited from the group.
