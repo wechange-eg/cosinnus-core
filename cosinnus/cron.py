@@ -28,7 +28,7 @@ class CosinnusCronJobBase(CronJobBase):
         """ Unique cron id, must contain CosinnusPortal slug, or different portal crons will overlap """
         if not self.cosinnus_code:
             raise ImproperlyConfigured('Must define a ``cosinnus_code`` property for your cron object!')
-        return 'p_%s_%s' % (CosinnusPortal.get_current().slug, self.cosinnus_code)
+        return ('p_%s_%s' % (CosinnusPortal.get_current().slug, self.cosinnus_code))[:63]
     
     def __init__(self, *args, **kwargs):
         super(CosinnusCronJobBase, self).__init__(*args, **kwargs)

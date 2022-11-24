@@ -38,6 +38,12 @@
                 </a>
             </li>
         {% endif %}
+        <li>
+            <a class="viewsitelink" href="{{ profile.get_absolute_url }}" target="_blank">
+                <i class="icon-eye-open icon-alpha75"></i> 
+                {% trans "View on site" %}
+            </a>
+        </li>
     {% endwith %}
     {{ block.super }}
 {% endblock %}

@@ -19,6 +19,7 @@ from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.views.mixins.group import RequireLoggedInMixin
 import requests
+from cosinnus.utils.group import get_cosinnus_group_model
 
 
 logger = logging.getLogger('cosinnus')
@@ -131,11 +132,15 @@ class BBBRoomMeetingQueueAPIView(RequireLoggedInMixin, View):
         elif media_tag.bbb_room is None and settings.COSINNUS_TRIGGER_BBB_ROOM_CREATION_IN_QUEUE:
             # if the media_tag is attached to a conference event, but no room has been created yet,
             # create one
-            from cosinnus_event.models import ConferenceEvent #noqa
-            conference_event = get_object_or_None(ConferenceEvent, media_tag__id=media_tag_id)
-            if conference_event and conference_event.can_have_bbb_room() and not conference_event.media_tag.bbb_room:
-                conference_event.check_and_create_bbb_room(threaded=True)
-            
+            from cosinnus_event.models import ConferenceEvent, Event #noqa
+            parent_event = get_object_or_None(ConferenceEvent, media_tag__id=media_tag_id)
+            if not parent_event:
+                parent_event = get_object_or_None(Event, media_tag__id=media_tag_id)
+            if not parent_event:
+                parent_event = get_object_or_None(get_cosinnus_group_model(), media_tag__id=media_tag_id)
+                
+            if parent_event and parent_event.can_have_bbb_room() and not parent_event.media_tag.bbb_room:
+                parent_event.check_and_create_bbb_room(threaded=True)
         return JsonResponse(data)
     
 bbb_room_meeting_queue_api = BBBRoomMeetingQueueAPIView.as_view()
