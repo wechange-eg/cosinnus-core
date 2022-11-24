@@ -1189,7 +1189,7 @@ class CosinnusConf(AppConf):
         0: (None, None),
     }
     
-    BBB_RESOLVE_CLUSTER_REDIRECTS_IF_URL_MATCHES = lambda url: url.startswith('https://bbbatscale')
+    BBB_RESOLVE_CLUSTER_REDIRECTS_IF_URL_MATCHES = lambda url: url.startswith('https://bbbatscale') or url.startswith('https://scalelite')
     
     # whether to enable BBB conferences in legacy groups/projects and events itself,
     # independent of a conference
