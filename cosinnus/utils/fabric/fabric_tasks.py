@@ -213,6 +213,10 @@ def collectstatic(_ctx):
     with c.cd(env.path):
         with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
             c.run('./manage.py collectstatic --noinput')
+            # workaround for the JS files compiled with `compilewebpack` for poetry not adding the correct .venv/src/ staticfile dirs
+            if not env.legacy_mode:
+                c.run(f'cp -R {env.virtualenv_path}/src/cosinnus/cosinnus/static/js/client.js {env.path}/static-collected/js/client.js')
+                c.run(f'cp -R {env.virtualenv_path}/src/cosinnus/cosinnus_conference/static/conference/* {env.path}/static-collected/conference/')
 
 @task
 def staticown(_ctx):
