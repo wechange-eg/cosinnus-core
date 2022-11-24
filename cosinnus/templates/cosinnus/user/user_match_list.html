@@ -4,6 +4,7 @@
 {% block page_title %}{% trans 'Direct Contact' %}{% endblock %}
 
 {% block content %}
+<body class="user-match">
     <div class="container">
         <div class="row">
             {% for scored_user_profile in scored_user_profiles %}
@@ -11,10 +12,15 @@
                 <div class="col-sm-4">
                     <div class="card h-100">
                             <div class="card-img-top d-flex flex-column">
-                                <!-- <img {% if scored_user_profile.avatar_url %}src="{{ scored_user_profile.avatar_url }}" {% else %} src="{% static 'images/jane-doe.png' %}" {% endif %}> -->
-                                {% include 'cosinnus/user/user_avatar_image.html' with user=scored_user_profile.user image_size="large" %}
+                                {% with avatar=scored_user_profile.avatar %}
+                                    {% if avatar %}
+                                        {% include 'cosinnus/user/user_avatar_image.html' with user=scored_user_profile.user image_size="large" %}
+                                    {% else %}
+                                        <img src="{{ COSINNUS_CURRENT_PORTAL.get_domain }}{% static 'images/jane-doe.png' %}" title="{{ scored_user_profile.user|full_name }}{% if extra_title %} - {{ extra_title }}{% endif %}" {% if extra_classes %}class="{{ extra_classes }}"{% endif %} {% if extra_style %}style="{{ extra_style }}" {% endif %} width="264" height="264"></img>
+                                    {% endif %}
+                                {% endwith %}
                             </div>
-                            <div class="card-body" style="width: 74%;">
+                            <div class="card-body" style="width: 74%; margin-left: 37px">
                                 <h4 class="card-title">{{ scored_user_profile.get_full_name }}</h4>
                                 {% if scored_user_profile.description %}
                                     <p class="card-text">{{ scored_user_profile.description }}</p>
@@ -44,22 +50,30 @@
                                     </p>
                                 {% endif %}
                             </div>
-                            <div class="card-footer">
-                                Something here maybe?
+                            <div class="card-footer">   
+                                {% comment %}
+                                    Some additional information if needed
+                                {% endcomment %}
                             </div>
                             <hr class="invisible"/>
-                            <form action="{% url 'cosinnus:user-match-match' %}" method="POST">
+                            <form action="{% url 'cosinnus:user-match-match' %}" method="POST" style="margin-left: 37px">
                                 {% csrf_token %}
                                 <input type="hidden" name="user_id" value="{{ scored_user_profile.user.id }}">
-                                <button type="submit" class="btn btn-primary btn-lg btn-success" style="margin-right: 35%;" name="action" value="1">Like</button>
-                                <hr class="invisible"/>
-                                <hr class="invisible"/>
-                                <button type="submit" class="btn btn-primary btn-lg btn-danger" style="margin-right: 35%;" name="action" value="0">Dislike</button>
+                                <button type="submit" class="rounded-button button-action button-star button-like-dislike-liked" style="margin-right: 35%;" name="action" value="1">
+                                    <i class="far fa-star"></i>
+                                    {% trans 'Wonderful, we definetely have so much to discuss!' %}
+                                </button>
+                                <button type="submit" class="rounded-button button-action button-star" style="margin-right: 35%;" name="action" value="0">
+                                    {% trans 'Looks like we share no common interests' %}
+                                </button>
                             </form>
+                            <hr class="invisible"/>
+                            <hr class="invisible"/>
                     </div>        
                 </div>
                 <!-- card -->
             {% endfor %}
         </div>
     </div>
+</body>
 {% endblock content %}

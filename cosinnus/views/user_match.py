@@ -3,6 +3,7 @@ import logging
 
 from dateutil.relativedelta import relativedelta
 from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.db.models.query_utils import Q
 from django.http.response import HttpResponseNotAllowed, HttpResponseForbidden
@@ -12,6 +13,7 @@ from django.views.generic.list import ListView
 from cosinnus import cosinnus_notifications
 
 from cosinnus.conf import settings
+from cosinnus.default_settings import LOGIN_URL
 from cosinnus.models.profile import get_user_profile_model, UserMatchObject
 from cosinnus.models.tagged import LikeObject
 from cosinnus.utils.functions import is_number
@@ -22,9 +24,10 @@ from cosinnus.utils.user import filter_active_users
 logger = logging.getLogger('cosinnus')
 
 
-class UserMatchListView(ListView):
+class UserMatchListView(LoginRequiredMixin, ListView):
     model = get_user_profile_model()
     template_name = 'cosinnus/user/user_match_list.html'
+    login_url = LOGIN_URL
 
     def get_hashset_likes_for_user(self, user=None):
         """
