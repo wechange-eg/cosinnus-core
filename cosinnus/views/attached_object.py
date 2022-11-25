@@ -5,6 +5,7 @@ from builtins import str
 from builtins import object
 from django.apps import apps
 from django.views.generic.edit import CreateView, UpdateView
+import logging
 
 from cosinnus.core.registries import attached_object_registry
 from django_select2.views import Select2View, NO_ERR_RESP
@@ -17,6 +18,8 @@ from cosinnus.models.tagged import BaseHierarchicalTaggableObjectModel
 from django.template.loader import render_to_string
 from django.utils.html import escape
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
+
+logger = logging.getLogger('cosinnus')
 
 
 def build_attachment_field_result(obj_type, obj):
@@ -100,15 +103,18 @@ class AttachableObjectSelect2View(RequireReadMixin, Select2View):
         else:
             attach_models = attached_object_registry.get_attachable_to(self.kwargs.get('model', None))
        
-        result_items = []
         for attach_model_id in attach_models:
+            result_items = []
             aliases = aliases_dict.get(attach_model_id, [])
             aliases = '||'.join(aliases)
             
             app_label, model_name = attach_model_id.split('.')
             attach_model_class = apps.get_model(app_label, model_name)
             if hasattr(attach_model_class, 'get_attachable_objects_query_results'):
-                result_items = attach_model_class.get_attachable_objects_query_results(self.group, request, term, page)
+                try:
+                    result_items = attach_model_class.get_attachable_objects_query_results(self.group, request, term, page)
+                except Exception as e:
+                    logger.error('AttachableObjectSelect2View: Caught an exception while collecting attachable object results !', extra={'exception': e})
             else:
                 if BaseHierarchicalTaggableObjectModel in attach_model_class.__bases__:
                     queryset = attach_model_class._default_manager.filter(group__slug=self.kwargs.get('group', None), is_container=False)
