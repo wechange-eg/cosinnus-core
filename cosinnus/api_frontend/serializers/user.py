@@ -197,6 +197,22 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
         # TODO: better try/catch this, or run in atomic?
         if validated_data.get('managed_tags', []):
             CosinnusManagedTagAssignment.update_assignments_for_object(user.cosinnus_profile, validated_data.get('managed_tags', []))
+        
+        profile_changed = False
+        profile = user.cosinnus_profile
+        # save dynamic fields
+        for field_name, field_options in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.items():
+            if field_options.in_signup:
+                dynamic_field_attr_dict = validated_data.get('cosinnus_profile', {}).get('dynamic_fields', {})
+                if not field_name in dynamic_field_attr_dict:
+                    continue
+                # if the field key is actually in the data here, we can be sure that it needs to be saved
+                field_value = dynamic_field_attr_dict.get(field_name, '')
+                profile.dynamic_fields[field_name] = field_value
+                profile_changed = True
+        
+        if profile_changed:
+            profile.save()
         return user
     
 
