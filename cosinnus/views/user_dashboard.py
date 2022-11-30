@@ -499,6 +499,9 @@ class BasePagedOffsetWidgetView(BaseUserDashboardWidgetView):
         }
 
 
+from cosinnus.models.group import CosinnusGroupMembership
+from cosinnus.models.membership import MEMBER_STATUS
+from django.db.models import Q
 class TypedContentWidgetView(ModelRetrievalMixin, BasePagedOffsetWidgetView):
     """ Shows BaseTaggable content for the user """
 
@@ -528,7 +531,16 @@ class TypedContentWidgetView(ModelRetrievalMixin, BasePagedOffsetWidgetView):
             # showing "last-visited" content, ordering by visit datetime
             ct = ContentType.objects.get_for_model(self.model)
             queryset = LastVisitedObject.objects.filter(content_type=ct, user=self.request.user, portal=CosinnusPortal.get_current())
-            queryset = queryset.order_by('-visited')
+
+            # filter data in the way it shows only those entries which are related to the current user via his/her `CosinnusGroupMembership`
+            if issubclass(self.model, BaseTaggableObjectModel): # consider only those objects which have `group` FK-relation (i.e. not `messages`)
+                user_group_ids = CosinnusGroupMembership.objects.filter(
+                    Q(group__is_active=True) &
+                    Q(status__in=MEMBER_STATUS) &
+                    Q(user=self.request.user)
+                ).values_list('group', flat=True)
+                last_visited_objects_ids = self.model.objects.filter(group_id__in=user_group_ids).values_list('id', flat=True)
+                queryset = queryset.filter(object_id__in=last_visited_objects_ids).order_by('-visited') # filtration via `id` shows only events; `object_id` covers all entries
         else:
             # all content, ordered by creation date
             only_mine = True
