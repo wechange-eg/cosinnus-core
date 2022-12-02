@@ -157,7 +157,7 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, CosinnusUserDynamicF
             CosinnusManagedTagAssignment.update_assignments_for_object(user.cosinnus_profile, validated_data.get('managed_tags', []))
         
         # for `CosinnusUserDynamicFieldsSerializerMixin`
-        self.save_dynamic_fields(validated_data, user)
+        self.save_dynamic_fields(validated_data, user.cosinnus_profile, save=True)
         return user
     
 
@@ -281,6 +281,7 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
     )
     
     # for `CosinnusUserDynamicFieldsSerializerMixin`
+    all_fields_optional = True
     DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
     
     def get_visibility(self, instance):
@@ -343,6 +344,9 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
                     media_tag.location = location_str
                     media_tag.location_lat = location.latitude
                     media_tag.location_lon = location.longitude
+        
+        # for `CosinnusUserDynamicFieldsSerializerMixin`
+        self.save_dynamic_fields(validated_data, profile, save=False)
         
         # TODO: all validation/profile-update view side effects, triggers, and additional 
         #       code from the userprofileform and userprofileupdateview need to be used here as well!
