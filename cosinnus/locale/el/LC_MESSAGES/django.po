@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-02 17:09+0200\n"
+"POT-Creation-Date: 2022-12-02 13:15+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -115,6 +115,14 @@ msgstr "Ναι"
 #, fuzzy
 msgid "No"
 msgstr "Τώρα"
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "Personal info"
+msgstr "Πληροφορίες Επικοινωνίας"
+
+msgid "Permissions"
+msgstr "Άδειες"
 
 msgid "Has Logged In"
 msgstr "Έχει Συνδεθεί"
@@ -292,6 +300,9 @@ msgid "You have been redirected here because you clicked a link in one of our ma
 msgstr ""
 
 msgid "Sorry, only admin accounts may log in at this time."
+msgstr ""
+
+msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -1050,6 +1061,11 @@ msgstr "Αίτημα πληροφοριών χρήστη"
 msgid "Pre-filled content for the information field"
 msgstr "Περιεχόμενο εκ των προτέρων συμπληρωμένο για το πεδίο πληροφοριών"
 
+#, fuzzy
+#| msgid "Request organization"
+msgid "Request contact option"
+msgstr "Αίτημα οργανισμού"
+
 msgid "Priority choice enabled"
 msgstr "Ενεργοποιήθηκε η επιλογή προτεραιότητας"
 
@@ -1117,6 +1133,11 @@ msgstr "Κίνητρο αίτησης"
 
 msgid "Contact E-Mail Address"
 msgstr "Email Επικοινωνίας"
+
+#, fuzzy
+#| msgid "May be contacted"
+msgid "Applicant may be contacted"
+msgstr "Μπορεί να έρθει σε επικοινωνία"
 
 msgid "Cosinnus conference application"
 msgstr "Αίτηση Σύσκεψης Cosinnus"
@@ -1726,9 +1747,6 @@ msgstr "Δημόσια (ορατά χωρίς σύνδεση)"
 msgid "Tags"
 msgstr "Ετικέτες"
 
-msgid "Permissions"
-msgstr "Άδειες"
-
 msgid "Publicly available via other platforms"
 msgstr "Δημόσια διαθέσιμο μέσω άλλης πλατφόρμας"
 
@@ -2221,6 +2239,11 @@ msgstr ""
 msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
 msgstr ""
 
+#, fuzzy
+#| msgid "View on page"
+msgid "View on site"
+msgstr "Προβολή στη σελίδα"
+
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Εισάγετε τα 4 κεφαλαία γράμματα στην κωδικοποιημένη εικόνα"
 
@@ -2634,6 +2657,9 @@ msgstr "Τρέχον Κείμενο Email Καλωσορίσματος"
 msgid "Video conference"
 msgstr "Προβολή σύσκεψης"
 
+msgid "Recorded Meetings"
+msgstr ""
+
 msgid "Conference Room Management"
 msgstr "Διαχείριση Αίθουσας Σύσκεψης"
 
@@ -2649,9 +2675,6 @@ msgstr "Διαχείριση Αιτήσεων Συμμετοχής"
 #, fuzzy
 msgid "Manage Temporary User Accounts"
 msgstr "Προσωρινοί Λογαριασμοί Χρήστη"
-
-msgid "Recorded Meetings"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -2977,6 +3000,13 @@ msgstr "Λήψη των όρων"
 msgid "I accept the conditions in order to submit my application"
 msgstr "Αποδέχομαι του όρους προκειμένου να υποβάλλω την αίτησή μου"
 
+msgid "I can be contacted via email by conference administration regardless of my notification settings"
+msgstr ""
+
+#, fuzzy
+msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
+msgstr "Παρακαλούμε επαληθεύστε τη διεύθυνση email για %(site_name)s!"
+
 msgid "Save changes"
 msgstr "Αποθήκευση αλλαγών"
 
@@ -3068,11 +3098,11 @@ msgstr "Περιεχόμενο"
 #, python-format
 msgid ""
 "\n"
-"                    This message will be sent to one participant.\n"
+"                    This message will be sent to one user.\n"
 "                    "
 msgid_plural ""
 "\n"
-"                    This message will be sent to %(count)s participants.\n"
+"                    This message will be sent to %(count)s users.\n"
 "                    "
 msgstr[0] ""
 msgstr[1] ""
@@ -3092,7 +3122,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "No, don\\"
+msgid "No, do not send"
 msgstr ""
 
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
@@ -3143,6 +3173,9 @@ msgstr "Επιλέξτε μία ή περισσότερες επιλογές π�
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
 msgstr "Επιλογή σεμιναρίου: Παρέχετε τη δυνατότητα στους υποψηφίους να επιλέξουν σεμινάρια που προτιμούν να παρακολουθήσουν"
 
+msgid "Applicants have to give their permission to be contacted per email"
+msgstr ""
+
 msgid "Conditions for participation"
 msgstr "Όροι συμμετοχής"
 
@@ -3156,9 +3189,6 @@ msgid "If a file is uploaded, applicants will have to agree to these conditions 
 msgstr "Εάν φορτωθεί ένα αρχείο, οι υποψήφιοι θα πρέπει να συμφωνήσουν με αυτούς τους όρους σε αυτό το αρχείο επιλέγοντας ένα πλαίσιο"
 
 msgid "Unfortunately recorded meetings are currently not yet available for this server!"
-msgstr ""
-
-msgid "Recording of meetings is only available for premium conferences!"
 msgstr ""
 
 msgid "Make a premium booking here"
@@ -3177,6 +3207,33 @@ msgstr "Δεν υπάρχουν ακόμη δωμάτια."
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr "Εδώ έχετε τη δυνατότητα να προετοιμάσετε ένα κείμενο με πληροφορίες για όλα τα μέλη της σύσκεψης. Αυτό θα σταλεί αυτόματα 1 εβδομάδα, 1 ημέρα και/ή 1 ώρα πριν από την έναρξη της σύσκεψης. Το email ειδοποίησης πάντα περιέχει ένα σύνδεσμο για τη σύσκεψη"
 
+msgid "Send immediately"
+msgstr ""
+
+msgid "This email will be sent immediately."
+msgstr ""
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr ""
+
+#, fuzzy
+msgid "no instant email has been sent yet."
+msgstr "Δεν έχουν προστεθεί ακόμη στοιχεία επικοινωνίας."
+
+#, fuzzy
+msgid "Mail subject"
+msgstr "Θέμα"
+
+msgid "Mail text"
+msgstr ""
+
+msgid "Send (show preview)"
+msgstr ""
+
+msgid "Send test to myself"
+msgstr "Αποστολή τεστ σε μένα"
+
 msgid "Send 1 week before conference"
 msgstr "Αποστολή 1 εβδομάδα πριν από τη σύσκεψη"
 
@@ -3193,9 +3250,6 @@ msgstr "Θέμα πρόσκλησης"
 msgid "Invitation text"
 msgstr "Κείμενο πρόσκλησης"
 
-msgid "Send test to myself"
-msgstr "Αποστολή τεστ σε μένα"
-
 msgid "Send 1 day before conference"
 msgstr "Αποστολή 1 ημέρα πριν από τη σύσκεψη"
 
@@ -3204,23 +3258,6 @@ msgstr "Αυτό το email θα σταλεί 24 ώρες πριν από την
 
 msgid "Send 1 hour before conference"
 msgstr "Αποστολή 1 ώρα πριν από τη σύσκεψη"
-
-msgid "send immediately"
-msgstr ""
-
-msgid "This email will be sent immediately."
-msgstr ""
-
-#, python-format
-msgid "last instant email was sent on %(date)s "
-msgstr ""
-
-#, fuzzy
-msgid "no instant email has been sent yet."
-msgstr "Δεν έχουν προστεθεί ακόμη στοιχεία επικοινωνίας."
-
-msgid "Send immediately"
-msgstr ""
 
 #, python-format
 msgid "Edit Room “%(title)s”"
@@ -3347,9 +3384,6 @@ msgid "Turn on camera on entering"
 msgstr ""
 
 msgid "Allow recording"
-msgstr ""
-
-msgid "Note: New recordings can only be made if you have booked premium features for this conference."
 msgstr ""
 
 #, fuzzy
@@ -7248,6 +7282,98 @@ msgstr ""
 msgid "Jetzt anmelden und mitgestalten"
 msgstr ""
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Τα Έργα και οι Ομάδες Μου"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Η εισαγωγή απέτυχε"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Έργο/ομάδα"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Φόρτωση Αρχείου CSV"
+
+#, fuzzy
+msgid "Options"
+msgstr "Αναλογίες"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Ανεβάστε μια εικόνα."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Τα Έργα και οι Ομάδες Μου"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Επιτυχής εισαγωγή!"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Σφάλμα!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Το όνομά σας"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Σφάλμα!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Το όνομά σας"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Εμφάνιση περισσότερων Έργων"
 
@@ -7428,6 +7554,9 @@ msgstr "Λυπούμαστε, μόνο οι διαχειριστές πύλης 
 msgid "Only project members can see the content you requested. Apply to become a member now!"
 msgstr "Μόνο τα μέλη έργου μπορούν να δουν το περιεχόμενο που ζητήσατε. Κάντε αίτηση για να γίνετε μέλος τώρα!"
 
+msgid "Note: New recordings can only be made if you have booked premium features for this project."
+msgstr ""
+
 msgid "You are not currently in any Groups"
 msgstr "Δεν είστε αυτή τη στιγμή σε κάποια Ομάδα"
 
@@ -7506,6 +7635,9 @@ msgstr "Λυπούμαστε, μόνο οι διαχειριστές πύλης 
 
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "Μόνο τα μέλη ομάδας μπορούν να δουν το περιεχόμενο που ζητήσατε. Κάντε αίτηση για να γίνετε μέλος τώρα!"
+
+msgid "Note: New recordings can only be made if you have booked premium features for this group."
+msgstr ""
 
 msgid "My Conferences"
 msgstr "Οι Συσκέψεις Μου"
@@ -7606,6 +7738,9 @@ msgstr "Λυπούμαστε, μόνο οι διαχειριστές πύλης 
 
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "Μόνο τα μέλη της σύσκεψης μπορούν να δουν το περιεχόμενο που ζητήσατε. Κάντε αίτηση για να γίνετε μέλος τώρα!"
+
+msgid "Note: New recordings can only be made if you have booked premium features for this conference."
+msgstr ""
 
 #, fuzzy
 msgid "Please verify your email address."
@@ -8217,54 +8352,6 @@ msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
 #, fuzzy
 #~ msgid "Back to your profile"
 #~ msgstr "Το προφίλ σας"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Τα Έργα και οι Ομάδες Μου"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Η εισαγωγή απέτυχε"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Έργο/ομάδα"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Φόρτωση Αρχείου CSV"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Αναλογίες"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Ανεβάστε μια εικόνα."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Τα Έργα και οι Ομάδες Μου"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Επιτυχής εισαγωγή!"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Σφάλμα!"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Το όνομά σας"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Σφάλμα!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Το όνομά σας"
 
 #~ msgid "Message Group"
 #~ msgstr "Αποστολή Μηνύματος σε Ομάδα"
