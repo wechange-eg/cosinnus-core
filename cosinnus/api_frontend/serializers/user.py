@@ -24,9 +24,8 @@ from cosinnus.models.profile import PROFILE_SETTINGS_AVATAR_COLOR, \
 from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.utils.validators import validate_username, HexColorValidator
 from drf_extra_fields.fields import Base64ImageField
-from cosinnus.dynamic_fields import dynamic_fields
-from cosinnus.dynamic_fields.dynamic_formfields import EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS
-from rest_framework.fields import get_error_detail
+
+from cosinnus.api_frontend.serializers.dynamic_fields import CosinnusUserDynamicFieldsSerializerMixin
 
 
 logger = logging.getLogger('cosinnus')
@@ -57,7 +56,8 @@ class CosinnusUserLoginSerializer(serializers.Serializer):
         return {'user': user}
     
 
-class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializer):
+class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, CosinnusUserDynamicFieldsSerializerMixin,
+        serializers.Serializer):
     """ Serializer for the User Registration API endpoint """
     
     # email maxlength 220 instead of 254, to accomodate hashes to scramble them 
@@ -84,25 +84,14 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
             allow_empty=not bool(settings.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED)
         )
     
+    # for `CosinnusUserDynamicFieldsSerializerMixin`
+    filter_included_fields_by_option_name = 'in_signup'
+    DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
     
     # missing/not-yet-supported fields for the signup endpoint:
     
     # TODO: location field (see `COSINNUS_USER_SIGNUP_INCLUDES_LOCATION_FIELD`)
     # TODO: topic field (see `COSINNUS_USER_SIGNUP_INCLUDES_TOPIC_FIELD`)
-    # TODO: dynamic fields (see `UserCreationFormDynamicFieldsMixin`)
-    def __init__(self, *args, **kwargs):
-        for field_name, field_options in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.items():
-            if field_options.in_signup:
-                # all dynamic fields are of type (drf serializer) CharField, validation will take place manually
-                field = serializers.CharField(
-                    required=field_options.required,
-                    source=f'cosinnus_profile.dynamic_fields.{field_name}',
-                    help_text=f'This is a dynamic field of data type: {field_options.type}'
-                )
-                setattr(self, field_name, field)
-                self._declared_fields[field_name] = field
-        super().__init__(*args, **kwargs)
-    
 
     def validate(self, attrs):
         """ We run validation all in one method, because we do not want to
@@ -146,39 +135,8 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
         if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF and settings.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM:        
             if len(attrs.get('managed_tags', [])) > 1 and not settings.COSINNUS_MANAGED_TAGS_ASSIGN_MULTIPLE_ENABLED:
                 raise ValidationError(ERROR_SIGNUP_ONLY_ONE_MTAG_ALLOWED)
-            
-        # dynamic fields: we build a temporary formfield and use it to run validation with the given data
-        for field_name, field_options in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.items():
-            if field_options.in_signup:
-                errors = {}
-                dynamic_field_attr_dict = attrs.get('cosinnus_profile', {}).get('dynamic_fields', {})
-                field_value = dynamic_field_attr_dict.get(field_name, '')
-                # create a formfield from the dynamic field definitions to validate, since all dynamic fields are CharField
-                dynamic_field_generator = EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS[field_options.type]()
-                formfield = dynamic_field_generator.get_formfield(
-                    field_name,
-                    field_options,
-                    data=field_value,
-                )
-                # validate and convert data type
-                try:
-                    field_value = formfield.to_python(field_value)
-                    # skip non-required, empty fields
-                    if not field_value and not type(field_value) is bool and not field_options.required:
-                        # remove its value if present in the data
-                        if field_name in dynamic_field_attr_dict:
-                            del dynamic_field_attr_dict[field_name]
-                        continue
-                    formfield.validate(field_value)
-                    formfield.run_validators(field_value)
-                except ValidationError as exc:
-                    errors[field_name] = exc.detail
-                except DjangoValidationError as exc:
-                    errors[field_name] = get_error_detail(exc)
-                if errors:
-                    raise ValidationError(errors)
-                dynamic_field_attr_dict[field_name] = field_value
-        
+          
+        attrs = super().validate(attrs)
         return attrs
 
     def create(self, validated_data):
@@ -198,21 +156,8 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
         if validated_data.get('managed_tags', []):
             CosinnusManagedTagAssignment.update_assignments_for_object(user.cosinnus_profile, validated_data.get('managed_tags', []))
         
-        profile_changed = False
-        profile = user.cosinnus_profile
-        # save dynamic fields
-        for field_name, field_options in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS.items():
-            if field_options.in_signup:
-                dynamic_field_attr_dict = validated_data.get('cosinnus_profile', {}).get('dynamic_fields', {})
-                if not field_name in dynamic_field_attr_dict:
-                    continue
-                # if the field key is actually in the data here, we can be sure that it needs to be saved
-                field_value = dynamic_field_attr_dict.get(field_name, '')
-                profile.dynamic_fields[field_name] = field_value
-                profile_changed = True
-        
-        if profile_changed:
-            profile.save()
+        # for `CosinnusUserDynamicFieldsSerializerMixin`
+        self.save_dynamic_fields(validated_data, user)
         return user
     
 
@@ -243,7 +188,8 @@ def validate_contact_info_pairs(pairs_array):
                     raise ValidationError(f'Contact_infos: A pair ({str(pair_dict)}) had an invalid URL!')
             
 
-class CosinnusHybridUserSerializer(TaggitSerializer, serializers.Serializer):
+class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSerializerMixin,
+        serializers.Serializer):
     """ A serializer that accepts and returns user fields as unprefixed fields,
         no matter if they are in the User, UserProfile or CosinnusTagObject models,
         so that one doesn't have to worry about database structures when changing user 
@@ -333,6 +279,9 @@ class CosinnusHybridUserSerializer(TaggitSerializer, serializers.Serializer):
         source='cosinnus_profile.media_tag.visibility',
         help_text=f'(optional) Int for corresponding visibility setting: {str(get_tag_object_model()._VISIBILITY_CHOICES)}. Default when omitted is different for each portal.'
     )
+    
+    # for `CosinnusUserDynamicFieldsSerializerMixin`
+    DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
     
     def get_visibility(self, instance):
         return instance.cosinnus_profile.media_tag.visibility

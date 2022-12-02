@@ -92,7 +92,7 @@ class CosinnusDynamicField(object):
     # the choices for this field's values
     choices = ()
     # default value
-    default = None,
+    default = None
     # bool, whether to be required in forms
     required = False
     # for choice fields, if multiple choices are allowed. ignored for other types
