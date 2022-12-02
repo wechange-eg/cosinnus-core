@@ -202,6 +202,7 @@ def render_notification_item_html_mail(to_user, subject, notification_item_html)
 
 
 def get_html_mail_data(to_user, subject, html_content, use_notification_item_html=False):
+    from cosinnus.models.conference import CosinnusConferenceApplication
     """ Collects all data needed to fill the HTML email template """
     portal = CosinnusPortal.get_current()
     domain = portal.get_domain()
@@ -222,6 +223,10 @@ def get_html_mail_data(to_user, subject, html_content, use_notification_item_htm
         'origin_name': portal.name,
         'origin_url': domain,
         'origin_image_url': portal_image_url,
+
+        # remove `Unsubscribe` option from the email template in case if user may be contacted 
+        # -> see '/cosinnus/html_mail/notification.html' for further details
+        'may_be_contacted': CosinnusConferenceApplication.objects.filter(may_be_contacted=True),
         
         'notification_raw_html': None, # this is raw-html pastable section
         'notification_item_html': None,
