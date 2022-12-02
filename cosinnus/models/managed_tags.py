@@ -434,6 +434,10 @@ class CosinnusManagedTagAssignmentModelMixin(object):
         """ Returns all ids of approved assigned managed tags for this object """
         return list(self.managed_tag_assignments.all().filter(approved=True).values_list('managed_tag', flat=True))
     
+    def get_managed_tag_slugs(self):
+        """ Returns all slugs of approved assigned managed tags for this object """
+        return list(self.managed_tag_assignments.all().filter(approved=True).values_list('managed_tag__slug', flat=True))
+    
     def get_managed_tags(self):
         """ Returns all approved assigned managed tags for this object """
         tag_ids = self.get_managed_tag_ids()
