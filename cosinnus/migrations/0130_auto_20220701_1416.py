@@ -22,6 +22,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='participationmanagement',
             name='may_be_contacted_field_enabled',
-            field=models.BooleanField(default=True, help_text='If active, conference applicants will be required to enable the option to be contacted by conference admins', verbose_name='Request contact option'),
+            field=models.BooleanField(default=False, help_text='If active, conference applicants will be required to enable the option to be contacted by conference admins', verbose_name='Request contact option'),
         ),
     ]

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-02 17:09+0200\n"
+"POT-Creation-Date: 2022-12-02 13:15+0100\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -113,6 +113,15 @@ msgstr "نعم"
 #, fuzzy
 msgid "No"
 msgstr "الآن"
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "Personal info"
+msgstr "معلومات التواصل"
+
+#, fuzzy
+msgid "Permissions"
+msgstr "أذونات"
 
 msgid "Has Logged In"
 msgstr "قام المستخدم بتسجيل الدخول"
@@ -293,6 +302,9 @@ msgid "You have been redirected here because you clicked a link in one of our ma
 msgstr ""
 
 msgid "Sorry, only admin accounts may log in at this time."
+msgstr ""
+
+msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -1097,6 +1109,11 @@ msgstr "حذف الدعوة"
 msgid "Pre-filled content for the information field"
 msgstr "المحتوى المعبأ مسبقًا لحقل المعلومات"
 
+#, fuzzy
+#| msgid "Request organization"
+msgid "Request contact option"
+msgstr "طلب تنظيم"
+
 msgid "Priority choice enabled"
 msgstr "تم تمكين اختيار الأولوية"
 
@@ -1173,6 +1190,11 @@ msgstr "الدافع للتقديم"
 #, fuzzy
 msgid "Contact E-Mail Address"
 msgstr "عناوين البريد الإلكتروني"
+
+#, fuzzy
+#| msgid "May be contacted"
+msgid "Applicant may be contacted"
+msgstr "قد يتم الاتصال"
 
 #, fuzzy
 msgid "Cosinnus conference application"
@@ -1816,10 +1838,6 @@ msgstr "عام (مرئي بدون تسجيل الدخول)"
 msgid "Tags"
 msgstr "إشارات"
 
-#, fuzzy
-msgid "Permissions"
-msgstr "أذونات"
-
 msgid "Publicly available via other platforms"
 msgstr "متاح للجمهور عبر منصات أخرى"
 
@@ -2331,6 +2349,11 @@ msgid "To delete this user account, please go back to the user account list, fin
 msgstr ""
 
 #, fuzzy
+#| msgid "View on page"
+msgid "View on site"
+msgstr "عرض على الصفحة"
+
+#, fuzzy
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "أدخل الأحرف الأربعة الكبيرة في الصورة المشوشة"
 
@@ -2775,6 +2798,9 @@ msgstr "نص البريد الإلكتروني الترحيبي المعين ح�
 msgid "Video conference"
 msgstr "عرض المؤتمر"
 
+msgid "Recorded Meetings"
+msgstr ""
+
 #, fuzzy
 msgid "Conference Room Management"
 msgstr "إدارة المؤتمرات"
@@ -2792,9 +2818,6 @@ msgstr "إدارة طلبات المشاركة"
 #, fuzzy
 msgid "Manage Temporary User Accounts"
 msgstr "حسابات المستخدمين المؤقتة"
-
-msgid "Recorded Meetings"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -3130,6 +3153,13 @@ msgstr "قم بتنزيل الشروط"
 msgid "I accept the conditions in order to submit my application"
 msgstr "أوافق على الشروط من أجل تقديم طلبي"
 
+msgid "I can be contacted via email by conference administration regardless of my notification settings"
+msgstr ""
+
+#, fuzzy
+msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
+msgstr "يرجى التحقق من عنوان بريدك الإلكتروني لـ %(site_name)s!"
+
 msgid "Save changes"
 msgstr "حفظ التغيرات"
 
@@ -3227,11 +3257,11 @@ msgstr "محتوى"
 #, python-format
 msgid ""
 "\n"
-"                    This message will be sent to one participant.\n"
+"                    This message will be sent to one user.\n"
 "                    "
 msgid_plural ""
 "\n"
-"                    This message will be sent to %(count)s participants.\n"
+"                    This message will be sent to %(count)s users.\n"
 "                    "
 msgstr[0] ""
 msgstr[1] ""
@@ -3259,7 +3289,7 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
-msgid "No, don\\"
+msgid "No, do not send"
 msgstr ""
 
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
@@ -3311,6 +3341,9 @@ msgstr "اختر خيارًا واحدًا أو أكثر حيث يتم عرضه 
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
 msgstr "اختيار ورشة العمل: تمكين المتقدمين من اختيار ورش العمل المفضلة للحضور"
 
+msgid "Applicants have to give their permission to be contacted per email"
+msgstr ""
+
 msgid "Conditions for participation"
 msgstr "شروط المشاركة"
 
@@ -3324,9 +3357,6 @@ msgid "If a file is uploaded, applicants will have to agree to these conditions 
 msgstr "إذا تم تحميل ملف ، فسيتعين على المتقدمين الموافقة على هذه الشروط في هذا الملف عن طريق تحديد خانة الاختيار"
 
 msgid "Unfortunately recorded meetings are currently not yet available for this server!"
-msgstr ""
-
-msgid "Recording of meetings is only available for premium conferences!"
 msgstr ""
 
 msgid "Make a premium booking here"
@@ -3346,6 +3376,33 @@ msgstr "لا توجد عناصر حتى الآن"
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr "هنا لديك إمكانية إعداد نص إعلامي لجميع أعضاء المؤتمر. سيتم إرسال هذا تلقائيًا قبل أسبوع واحد / أو يوم واحد/ أو ساعة واحدة قبل بدء المؤتمر. يتضمن بريد الإعلام دائمًا على رابط إلى المؤتمر"
 
+msgid "Send immediately"
+msgstr ""
+
+msgid "This email will be sent immediately."
+msgstr ""
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr ""
+
+#, fuzzy
+msgid "no instant email has been sent yet."
+msgstr "لم يتم إضافة بيانات الاتصال حتى الآن."
+
+#, fuzzy
+msgid "Mail subject"
+msgstr "موضوع"
+
+msgid "Mail text"
+msgstr ""
+
+msgid "Send (show preview)"
+msgstr ""
+
+msgid "Send test to myself"
+msgstr "أرسل الاختبار إلى نفسي"
+
 msgid "Send 1 week before conference"
 msgstr "إرسال قبل أسبوع واحد من المؤتمر"
 
@@ -3362,9 +3419,6 @@ msgstr "موضوع الدعوة"
 msgid "Invitation text"
 msgstr "نص الدعوة"
 
-msgid "Send test to myself"
-msgstr "أرسل الاختبار إلى نفسي"
-
 msgid "Send 1 day before conference"
 msgstr "أرسل قبل يوم واحد من المؤتمر"
 
@@ -3373,23 +3427,6 @@ msgstr "سيتم إرسال هذا البريد الإلكتروني قبل 24 �
 
 msgid "Send 1 hour before conference"
 msgstr "إرسال قبل ساعة من المؤتمر"
-
-msgid "send immediately"
-msgstr ""
-
-msgid "This email will be sent immediately."
-msgstr ""
-
-#, python-format
-msgid "last instant email was sent on %(date)s "
-msgstr ""
-
-#, fuzzy
-msgid "no instant email has been sent yet."
-msgstr "لم يتم إضافة بيانات الاتصال حتى الآن."
-
-msgid "Send immediately"
-msgstr ""
 
 #, fuzzy, python-format
 msgid "Edit Room “%(title)s”"
@@ -3524,9 +3561,6 @@ msgid "Turn on camera on entering"
 msgstr ""
 
 msgid "Allow recording"
-msgstr ""
-
-msgid "Note: New recordings can only be made if you have booked premium features for this conference."
 msgstr ""
 
 #, fuzzy
@@ -7468,6 +7502,98 @@ msgstr "تسرنا رؤيتك! في %(portal_name)s يمكنك التعاون م
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "سجل الآن وساعد في التشكيل"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "مشاريعي ومجموعاتي"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "تعُذر الاستيراد"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "مشاريع/مجموعات"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "تحميل ملف CSV"
+
+#, fuzzy
+msgid "Options"
+msgstr "النسب"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "حمّل صورة."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "مشاريعي ومجموعاتي"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "نجح الاستيراد!"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "خطأ!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "اسمك"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "خطأ!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "اسمك"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "عرض المزيد من المشاريع"
 
@@ -7657,6 +7783,9 @@ msgstr "عذرًا ، يمكن فقط لمسؤولي البوابة إلغاء �
 msgid "Only project members can see the content you requested. Apply to become a member now!"
 msgstr "يمكن لأعضاء الفريق فقط رؤية المحتوى الذي طلبته. تقدم لتصبح عضوا الآن!"
 
+msgid "Note: New recordings can only be made if you have booked premium features for this project."
+msgstr ""
+
 #, fuzzy
 msgid "You are not currently in any Groups"
 msgstr "أنت لست في أي مجموعات أو مشاريع حتى الآن"
@@ -7747,6 +7876,9 @@ msgstr "عذرًا ، يمكن فقط لمسؤولي البوابة إلغاء �
 #, fuzzy
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "يمكن لأعضاء الفريق فقط رؤية المحتوى الذي طلبته. تقدم لتصبح عضوا الآن!"
+
+msgid "Note: New recordings can only be made if you have booked premium features for this group."
+msgstr ""
 
 #, fuzzy
 msgid "My Conferences"
@@ -7858,6 +7990,9 @@ msgstr "عذرًا ، يمكن فقط لمسؤولي البوابة إلغاء �
 
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "يمكن لأعضاء الفريق فقط رؤية المحتوى الذي طلبته. تقدم لتصبح عضوا الآن!"
+
+msgid "Note: New recordings can only be made if you have booked premium features for this conference."
+msgstr ""
 
 #, fuzzy
 msgid "Please verify your email address."
@@ -8473,54 +8608,6 @@ msgstr "تم حفظ التغييرات."
 #, fuzzy
 #~ msgid "Back to your profile"
 #~ msgstr "صفحتك الشخصية"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "مشاريعي ومجموعاتي"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "تعُذر الاستيراد"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "مشاريع/مجموعات"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "تحميل ملف CSV"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "النسب"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "حمّل صورة."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "مشاريعي ومجموعاتي"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "نجح الاستيراد!"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "خطأ!"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "اسمك"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "خطأ!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "اسمك"
 
 #~ msgid "Message Group"
 #~ msgstr "أرسل رسالة إلى المجموعة"

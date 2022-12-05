@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-02 17:09+0200\n"
+"POT-Creation-Date: 2022-12-02 13:15+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -111,6 +111,12 @@ msgstr "Ja"
 msgid "No"
 msgstr "Nein"
 
+msgid "Personal info"
+msgstr "Persönliche Daten"
+
+msgid "Permissions"
+msgstr "Berechtigungen"
+
 msgid "Has Logged In"
 msgstr "Jemals eingeloggt"
 
@@ -138,7 +144,7 @@ msgid "%(count)d Users' group memberships were refreshed."
 msgstr "%d Die Rocketchat-Raummitgliedschaften der Benutzer wurden neu erstellt."
 
 msgid "Refresh user group membership associations (e.g. cache or Nextcloud folder problems)"
-msgstr "ter the Secret "
+msgstr "Zugehörigkeit zu Benutzergruppen (z. B. bei Problemen mit dem Cache oder Nextcloud) aktualisieren"
 
 #, python-format
 msgid "%d Users were synchronized successfully."
@@ -284,6 +290,9 @@ msgstr "Du wurdest hierhin weitergeleitet, weil du einen Link in einer unserer E
 
 msgid "Sorry, only admin accounts may log in at this time."
 msgstr "Zurzeit können sich nur die Portal-Administrator_innen einloggen."
+
+msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
+msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Du wurdest automatisch abgemeldet, nachdem du für einige Zeit inaktiv warst."
@@ -1033,6 +1042,9 @@ msgstr "Benutzerinfos anfragen"
 msgid "Pre-filled content for the information field"
 msgstr "Vorausgefüllter Inhalt für das Informationsfeld"
 
+msgid "Request contact option"
+msgstr "Kontaktoption anfordern"
+
 msgid "Priority choice enabled"
 msgstr "Prioritätswahl aktiviert"
 
@@ -1100,6 +1112,9 @@ msgstr "Motivation für die Teilnahme"
 
 msgid "Contact E-Mail Address"
 msgstr "Kontakt-E-Mail Adresse"
+
+msgid "Applicant may be contacted"
+msgstr "Antragsteller kann kontaktiert werden"
 
 msgid "Cosinnus conference application"
 msgstr "Cosinnus Tagungs-Teilnahmeantrag"
@@ -1698,9 +1713,6 @@ msgstr "Öffentlich (sichtbar ohne Anmeldung)"
 msgid "Tags"
 msgstr "Schlagworte"
 
-msgid "Permissions"
-msgstr "Berechtigungen"
-
 msgid "Publicly available via other platforms"
 msgstr "Öffentlich verfügbar über andere Plattformen"
 
@@ -2183,13 +2195,16 @@ msgid "This user profile is scheduled for deletion at: "
 msgstr "Dieses Nutzerprofil ist zur Löschung geplant am: "
 
 msgid "However, it will not be deleted, because it is still active."
-msgstr ""
+msgstr "Es wird jedoch nicht gelöscht, da es noch aktiv ist."
 
 msgid "This user account is disabled. The user cannot log in or use the account."
-msgstr ""
+msgstr "Dieses Benutzerkonto ist deaktiviert. Der Benutzer kann sich nicht anmelden oder das Konto verwenden."
 
 msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
 msgstr ""
+
+msgid "View on site"
+msgstr "Auf der Seite anschauen"
 
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Gib die 4 Großbuchstaben aus dem Bild ein"
@@ -2587,6 +2602,9 @@ msgstr "Aktueller Willkommens-E-Mail Text"
 msgid "Video conference"
 msgstr "Videokonferenz"
 
+msgid "Recorded Meetings"
+msgstr "Aufgezeichnete Meetings"
+
 msgid "Conference Room Management"
 msgstr "Tagungsräume verwalten"
 
@@ -2601,9 +2619,6 @@ msgstr "Teilnahmeanträge bearbeiten"
 
 msgid "Manage Temporary User Accounts"
 msgstr "Temporäre Benutzerkonten verwalten"
-
-msgid "Recorded Meetings"
-msgstr "Aufgezeichnete Meetings"
 
 #
 #. Translators: __INCLUDE_JS_PO__
@@ -2944,6 +2959,12 @@ msgstr "Bedingungen herunterladen"
 msgid "I accept the conditions in order to submit my application"
 msgstr "Ich akzeptiere die Bedingungen, um Teilnahme zu beantragen"
 
+msgid "I can be contacted via email by conference administration regardless of my notification settings"
+msgstr "Ich kann von der Konferenzverwaltung per E-Mail kontaktiert werden, unabhängig von meinen Benachrichtigungseinstellungen"
+
+msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
+msgstr "Bitte verifiziere zunächst deine E-Mail Adresse. Andernfalls kannst du einige wichtige Tagungsbenachrichtigungen verpassen."
+
 msgid "Save changes"
 msgstr "Änderungen speichern"
 
@@ -3032,19 +3053,19 @@ msgstr "Inhalt"
 #, python-format
 msgid ""
 "\n"
-"                    This message will be sent to one participant.\n"
+"                    This message will be sent to one user.\n"
 "                    "
 msgid_plural ""
 "\n"
-"                    This message will be sent to %(count)s participants.\n"
+"                    This message will be sent to %(count)s users.\n"
 "                    "
 msgstr[0] ""
 "\n"
-"Diese Nachricht wird an eine_n Tagungsteilnehmer_in geschickt.\n"
+"Diese Nachricht wird an eine_n Benutzer_in geschickt.\n"
 "                "
 msgstr[1] ""
 "\n"
-"Diese Nachricht wird an %(count)s Tagungsteilnehmer geschickt.\n"
+"Diese Nachricht wird an %(count)s Benutzer_innen geschickt.\n"
 "                "
 
 msgid "Are you sure? Please check your entries beforehand with the help of a test email."
@@ -3068,8 +3089,8 @@ msgstr[1] ""
 "                        Ja, sofort an %(count)s Benutzer_innen schicken.\n"
 "                        "
 
-msgid "No, don\\"
-msgstr "Nein"
+msgid "No, do not send"
+msgstr "Nicht abschicken"
 
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
 msgstr "Hier kannst du das Anmeldeformular konfigurieren, das die Teilnehmenden ausfüllen müssen, um sich zu bewerben."
@@ -3119,6 +3140,9 @@ msgstr "Wähle eine oder mehr Bedingungen die auf dem Anmeldeformular angezeigt 
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
 msgstr "Workshopauswahl: Antragssteller/innen können Workshops priorisieren, an denen sie teilnehmen möchten"
 
+msgid "Applicants have to give their permission to be contacted per email"
+msgstr "Die Bewerber müssen ihr Einverständnis geben, per E-Mail kontaktiert zu werden"
+
 msgid "Conditions for participation"
 msgstr "Bedingungen für die Teilnahme"
 
@@ -3134,9 +3158,6 @@ msgstr "Wenn eine Datei mit Bedingungen hochgeladen wird, müssen diese von alle
 msgid "Unfortunately recorded meetings are currently not yet available for this server!"
 msgstr "Die Meetings- Aufzeichnungen sind für diesen Server momentan leider nicht verfügbar!"
 
-msgid "Recording of meetings is only available for premium conferences!"
-msgstr "Aufzeichnung von Meetings ist nur für Premium-Tagungen verfügbar!"
-
 msgid "Make a premium booking here"
 msgstr "Hier deine Premium-Buchung machen"
 
@@ -3151,6 +3172,31 @@ msgstr "Es sind noch keine aufgezeichnete Meetings vorhanden."
 
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr "Hier gibt es die Möglichkeit, einen Informationstext für alle Mitglieder der Tagung vorzubereiten. Dieser wird automatisch 1 Woche, 1 Tag und / oder 1 Stunde vor Tagungsbeginn automatisch versendet. Die Benachrichtigungsmail enthält immer einen Link auf die Tagung"
+
+msgid "Send immediately"
+msgstr "Sofort schicken"
+
+msgid "This email will be sent immediately."
+msgstr "Diese E-Mail wird sofort geschickt."
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr "letzte E-Mail wurde am %(date)s geschickt "
+
+msgid "no instant email has been sent yet."
+msgstr "Es wurden noch keine E-Mails geschickt."
+
+msgid "Mail subject"
+msgstr "Betreff"
+
+msgid "Mail text"
+msgstr "Nachricht"
+
+msgid "Send (show preview)"
+msgstr "Abschicken (Vorschau öffnen)"
+
+msgid "Send test to myself"
+msgstr "Test-Mail an mich"
 
 msgid "Send 1 week before conference"
 msgstr "1 Woche vor Tagung versenden"
@@ -3168,9 +3214,6 @@ msgstr "Einladungsbetreff"
 msgid "Invitation text"
 msgstr "Einladungstext"
 
-msgid "Send test to myself"
-msgstr "Test-Mail an mich"
-
 msgid "Send 1 day before conference"
 msgstr "1 Tag vor Tagung versenden"
 
@@ -3179,22 +3222,6 @@ msgstr "Diese E-Mail wird 24 Stunden vor dem Tagungs-Startdatum verschickt."
 
 msgid "Send 1 hour before conference"
 msgstr "1 Stunde vor Tagung versenden"
-
-msgid "send immediately"
-msgstr "sofort schicken"
-
-msgid "This email will be sent immediately."
-msgstr "Diese E-Mail wird sofort geschickt."
-
-#, python-format
-msgid "last instant email was sent on %(date)s "
-msgstr "letzte E-Mail wurde am %(date)s geschickt "
-
-msgid "no instant email has been sent yet."
-msgstr "Es wurden noch keine E-Mails geschickt."
-
-msgid "Send immediately"
-msgstr "Sofort schicken"
 
 #, python-format
 msgid "Edit Room “%(title)s”"
@@ -3317,9 +3344,6 @@ msgstr "Kamera beim Betreten aktivieren"
 
 msgid "Allow recording"
 msgstr "Aufnahme erlauben"
-
-msgid "Note: New recordings can only be made if you have booked premium features for this conference."
-msgstr "Achtung: Neue Aufzeichnungen können nur gemacht werden, wenn der Premium-Status für diese Tagung gebucht wurde."
 
 msgid "Temporary Users"
 msgstr "Temporäre Benutzerkonten"
@@ -7138,6 +7162,90 @@ msgstr "Schön, dass du da bist! Auf %(portal_name)s kannst du in Gruppen und Pr
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Jetzt anmelden und mitgestalten"
 
+msgid "Custom Wagtail Page"
+msgstr "Custom Wagtail Seite"
+
+msgid "Tools"
+msgstr "Werkzeuge"
+
+msgid "Import Projects and Groups or Users"
+msgstr "Projekte und Gruppen oder Benutzer importieren"
+
+msgid "Import from a CSV File"
+msgstr "Aus CSV-Datei importieren"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr "Laden Sie entweder eine CSV-Datei, um Ihre Projekte und Gruppen zu importieren, oder eine CSV-Datei, um die Benutzer zu importieren hoch. Bitte merken Sie, dass es gleichzeitig nur eine Datei importiert werden kann. Die Datei muss über ein entsprechendes Format verfügen. Wenn das Dateiformat geändert wird (mehr/weniger/unterschiedliche Spalten), bitte melden Sie sich bei den Entwicklern!"
+
+msgid "Project/group CSV File"
+msgstr "Projekte/Gruppen CSV-Datei"
+
+msgid "User CSV File"
+msgstr "Benutzer CSV-Datei"
+
+msgid "Options"
+msgstr "Optionen"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr "Die Standardeinstellungen der CSV-Datei. Bitte nur in dem Fall ändern, wenn Sie sich absolut sicher sind, was Sie tun!"
+
+msgid "Encoding of the CSV file"
+msgstr "Enkodierung der CSV-Datei"
+
+msgid "Delimiter of the CSV file"
+msgstr "Trennzeichen der CSV-Datei"
+
+msgid "Upload and Import..."
+msgstr "Hochladen und Import…"
+
+msgid "Import Projects and Groups"
+msgstr "Projekte und Gruppen importieren"
+
+msgid "Clear results and start a new import!"
+msgstr "Ergebnisse löschen und den Import neu starten!"
+
+msgid "CSV Import Results"
+msgstr "Ergebnisse des Imports"
+
+msgid "The import has finished. Here are the results:"
+msgstr "Der Importvorgang ist abgeschloßen. Hier sind die Ergebnisse:"
+
+msgid "Read errors:"
+msgstr "Lesefehler:"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr "Diese Zeilen in Ihrer CSV-Datei hatten Fehler oder eine inkorrekte Anzahl von Spalten und wurden daher IGNORIERT:"
+
+msgid "Saved items:"
+msgstr "Gespeicherte Daten:"
+
+msgid "Important messages:"
+msgstr "Wichtige Nachrichten:"
+
+msgid "Errors:"
+msgstr "Fehler:"
+
+msgid "Info messages:"
+msgstr "Info-Meldungen:"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr "Die CVS-Datei wurde erfolgreich bearbeitet und der Import läuft momentan auf dem Server!"
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+"Diese Seite wird die Ergebnisse anzeigen sobald der Import abgeschloßen ist.\n"
+"\t\t\n"
+"\t\t\t\tDie Bearbeitung kann je nach Anzahl der importierten Daten von wenigen Sekunden bis zu wenigen Minuten dauern. Sie können diese Seite schließen. Sobald der Import abgeschloßen ist, erhalten Sie von uns eine Email and die folgende Email-Adresse: <b>»%(email)s»</b> !\n"
+"\t\t\t"
+
+msgid "Progress:"
+msgstr "Verlauf:"
+
 msgid "Show more Projects"
 msgstr "Weitere Projekte anzeigen"
 
@@ -7166,7 +7274,16 @@ msgid "(This widget has no additional options)"
 msgstr "(Dieses Widget hat keine weiteren Konfigurationsoptionen)"
 
 msgid "All members"
-msgstr "Alle anzeigen"
+msgstr "Alle Teilnehmer"
+
+msgid "Applicants and members"
+msgstr "Bewerber und Teilnehmer"
+
+msgid "All applicants"
+msgstr "Alle Bewerber"
+
+msgid "Individual choice"
+msgstr "Individuelle Wahl"
 
 msgid "There are no projects in this group yet."
 msgstr "Es gibt keine Projekte in dieser Gruppe."
@@ -7320,6 +7437,9 @@ msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen deaktiviere
 msgid "Only project members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieses Projekts können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
 
+msgid "Note: New recordings can only be made if you have booked premium features for this project."
+msgstr "Achtung: Neue Aufzeichnungen können nur gemacht werden, wenn der Premium-Status für dieses Projekt gebucht wurde."
+
 msgid "You are not currently in any Groups"
 msgstr "Du bist noch in keinen Gruppen Mitglied"
 
@@ -7400,6 +7520,9 @@ msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen deaktiviere
 
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieser Gruppe können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
+
+msgid "Note: New recordings can only be made if you have booked premium features for this group."
+msgstr "Achtung: Neue Aufzeichnungen können nur gemacht werden, wenn der Premium-Status für diese Gruppe gebucht wurde."
 
 msgid "My Conferences"
 msgstr "Meine Tagungen"
@@ -7504,6 +7627,9 @@ msgstr "Entschuldige, nur Portal-Administrator_innen können Tagungen deaktivier
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieser Tagung können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
 
+msgid "Note: New recordings can only be made if you have booked premium features for this conference."
+msgstr "Achtung: Neue Aufzeichnungen können nur gemacht werden, wenn der Premium-Status für diese Tagung gebucht wurde."
+
 msgid "Please verify your email address."
 msgstr "Bitte bestätige deine E-Mail-Adresse."
 
@@ -7556,7 +7682,7 @@ msgid "Please also provide an end date"
 msgstr "Bitte gib auch ein Enddatum an"
 
 msgid "Ensure that your name does not contain any invalid characters."
-msgstr ""
+msgstr "Stelle dich sicher, dass dein Name keine ungültigen Zeichen enthält."
 
 msgid "Test email sent!"
 msgstr "Test email wurde gesendet!"
@@ -8105,94 +8231,17 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest, kannst du unten
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
+#~ msgid "Recording of meetings is only available for premium conferences!"
+#~ msgstr "Aufzeichnung von Meetings ist nur für Premium-Tagungen verfügbar!"
+
+#~ msgid "send immediately"
+#~ msgstr "sofort schicken"
+
 #~ msgid "You are about to take your account security to the next level. <br> To use the 2FA-Feature you need to install the ´free otp´ app on your smartphone and then scan the QR-code. We do not have another 2FA option at the moment and will inform you if there are changes in this regard."
 #~ msgstr "Du bist im Begriff, dein Sicherheitsniveau auf die nächste Ebene zu bringen. <br> Um die 2FA-Einstellung zu benutzen, brauchst du die ´free otp´ App auf dein Handy zu installieren und danach den QR- Code einzuscannen. Wir haben momentan keine weitere 2FA-Optionen, aber werden dich über eventuelle Änderungen informieren."
 
 #~ msgid "Back to your profile"
 #~ msgstr "Zurück zu deinem Profil"
-
-#~ msgid "Custom Wagtail Page"
-#~ msgstr "Custom Wagtail Seite"
-
-#~ msgid "Tools"
-#~ msgstr "Werkzeuge"
-
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Projekte und Gruppen oder Benutzer importieren"
-
-#~ msgid "Import from a CSV File"
-#~ msgstr "Aus CSV-Datei importieren"
-
-#~ msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-#~ msgstr "Laden Sie entweder eine CSV-Datei, um Ihre Projekte und Gruppen zu importieren, oder eine CSV-Datei, um die Benutzer zu importieren hoch. Bitte merken Sie, dass es gleichzeitig nur eine Datei importiert werden kann. Die Datei muss über ein entsprechendes Format verfügen. Wenn das Dateiformat geändert wird (mehr/weniger/unterschiedliche Spalten), bitte melden Sie sich bei den Entwicklern!"
-
-#~ msgid "Project/group CSV File"
-#~ msgstr "Projekte/Gruppen CSV-Datei"
-
-#~ msgid "User CSV File"
-#~ msgstr "Benutzer CSV-Datei"
-
-#~ msgid "Options"
-#~ msgstr "Optionen"
-
-#~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-#~ msgstr "Die Standardeinstellungen der CSV-Datei. Bitte nur in dem Fall ändern, wenn Sie sich absolut sicher sind, was Sie tun!"
-
-#~ msgid "Encoding of the CSV file"
-#~ msgstr "Enkodierung der CSV-Datei"
-
-#~ msgid "Delimiter of the CSV file"
-#~ msgstr "Trennzeichen der CSV-Datei"
-
-#~ msgid "Upload and Import..."
-#~ msgstr "Hochladen und Import…"
-
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Projekte und Gruppen importieren"
-
-#~ msgid "Clear results and start a new import!"
-#~ msgstr "Ergebnisse löschen und den Import neu starten!"
-
-#~ msgid "CSV Import Results"
-#~ msgstr "Ergebnisse des Imports"
-
-#~ msgid "The import has finished. Here are the results:"
-#~ msgstr "Der Importvorgang ist abgeschloßen. Hier sind die Ergebnisse:"
-
-#~ msgid "Read errors:"
-#~ msgstr "Lesefehler:"
-
-#~ msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-#~ msgstr "Diese Zeilen in Ihrer CSV-Datei hatten Fehler oder eine inkorrekte Anzahl von Spalten und wurden daher IGNORIERT:"
-
-#~ msgid "Saved items:"
-#~ msgstr "Gespeicherte Daten:"
-
-#~ msgid "Important messages:"
-#~ msgstr "Wichtige Nachrichten:"
-
-#~ msgid "Errors:"
-#~ msgstr "Fehler:"
-
-#~ msgid "Info messages:"
-#~ msgstr "Info-Meldungen:"
-
-#~ msgid "The CSV file was read successfully and the import is currently running on the server!"
-#~ msgstr "Die CVS-Datei wurde erfolgreich bearbeitet und der Import läuft momentan auf dem Server!"
-
-#~ msgid ""
-#~ "This page will show the results when the import is finished.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-#~ "\t\t\t"
-#~ msgstr ""
-#~ "Diese Seite wird die Ergebnisse anzeigen sobald der Import abgeschloßen ist.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tDie Bearbeitung kann je nach Anzahl der importierten Daten von wenigen Sekunden bis zu wenigen Minuten dauern. Sie können diese Seite schließen. Sobald der Import abgeschloßen ist, erhalten Sie von uns eine Email and die folgende Email-Adresse: <b>»%(email)s»</b> !\n"
-#~ "\t\t\t"
-
-#~ msgid "Progress:"
-#~ msgstr "Verlauf:"
 
 #~ msgid "group"
 #~ msgstr "Gruppe"

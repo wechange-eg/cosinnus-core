@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-02 17:09+0200\n"
+"POT-Creation-Date: 2022-12-02 13:15+0100\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -104,6 +104,14 @@ msgstr "بله"
 
 msgid "No"
 msgstr "نه"
+
+#, fuzzy
+#| msgid "Persons"
+msgid "Personal info"
+msgstr "افراد"
+
+msgid "Permissions"
+msgstr ""
 
 msgid "Has Logged In"
 msgstr "وارد شده است"
@@ -282,6 +290,9 @@ msgid "You have been redirected here because you clicked a link in one of our ma
 msgstr "از آن‌جا که روی لینکی که در یکی از ایمیل‌های ما بوده کلیک کرده‌اید به این‌جا فرستاده‌شده‌اید. به دلیل مسائل امنیتی ما نشانی وب‌سایت‌های بیرونی را در ایمیل‌هایم قرار نمی‌دهیم. اگر مایلید به این نشانی بروید پیوند آن در زیر آمده است."
 
 msgid "Sorry, only admin accounts may log in at this time."
+msgstr ""
+
+msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -1042,6 +1053,11 @@ msgstr "درخواست اطلاعات کاربر"
 msgid "Pre-filled content for the information field"
 msgstr ""
 
+#, fuzzy
+#| msgid "Request user information"
+msgid "Request contact option"
+msgstr "درخواست اطلاعات کاربر"
+
 msgid "Priority choice enabled"
 msgstr ""
 
@@ -1108,6 +1124,9 @@ msgid "Motivation for applying"
 msgstr ""
 
 msgid "Contact E-Mail Address"
+msgstr ""
+
+msgid "Applicant may be contacted"
 msgstr ""
 
 msgid "Cosinnus conference application"
@@ -1714,9 +1733,6 @@ msgstr ""
 msgid "Tags"
 msgstr ""
 
-msgid "Permissions"
-msgstr ""
-
 msgid "Publicly available via other platforms"
 msgstr ""
 
@@ -2209,6 +2225,11 @@ msgstr ""
 msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
 msgstr ""
 
+#, fuzzy
+#| msgid "View on page"
+msgid "View on site"
+msgstr "روی برگه نشان بده"
+
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr ""
 
@@ -2609,6 +2630,9 @@ msgstr ""
 msgid "Video conference"
 msgstr "کنفرانس را ببینید"
 
+msgid "Recorded Meetings"
+msgstr ""
+
 msgid "Conference Room Management"
 msgstr ""
 
@@ -2622,9 +2646,6 @@ msgid "Manage Participation Applications"
 msgstr ""
 
 msgid "Manage Temporary User Accounts"
-msgstr ""
-
-msgid "Recorded Meetings"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -2947,6 +2968,12 @@ msgstr ""
 msgid "I accept the conditions in order to submit my application"
 msgstr ""
 
+msgid "I can be contacted via email by conference administration regardless of my notification settings"
+msgstr ""
+
+msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
+msgstr ""
+
 msgid "Save changes"
 msgstr ""
 
@@ -3036,11 +3063,11 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"                    This message will be sent to one participant.\n"
+"                    This message will be sent to one user.\n"
 "                    "
 msgid_plural ""
 "\n"
-"                    This message will be sent to %(count)s participants.\n"
+"                    This message will be sent to %(count)s users.\n"
 "                    "
 msgstr[0] ""
 msgstr[1] ""
@@ -3060,7 +3087,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "No, don\\"
+msgid "No, do not send"
 msgstr ""
 
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
@@ -3111,6 +3138,9 @@ msgstr ""
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
 msgstr ""
 
+msgid "Applicants have to give their permission to be contacted per email"
+msgstr ""
+
 msgid "Conditions for participation"
 msgstr ""
 
@@ -3124,9 +3154,6 @@ msgid "If a file is uploaded, applicants will have to agree to these conditions 
 msgstr ""
 
 msgid "Unfortunately recorded meetings are currently not yet available for this server!"
-msgstr ""
-
-msgid "Recording of meetings is only available for premium conferences!"
 msgstr ""
 
 msgid "Make a premium booking here"
@@ -3145,6 +3172,32 @@ msgstr "هیچ دعوت‌نامه‌ی معوقی وجود ندارد."
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr ""
 
+msgid "Send immediately"
+msgstr ""
+
+msgid "This email will be sent immediately."
+msgstr ""
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr ""
+
+#, fuzzy
+msgid "no instant email has been sent yet."
+msgstr "تغییرات‌تان ذخیره شده‌اند."
+
+msgid "Mail subject"
+msgstr ""
+
+msgid "Mail text"
+msgstr ""
+
+msgid "Send (show preview)"
+msgstr ""
+
+msgid "Send test to myself"
+msgstr ""
+
 msgid "Send 1 week before conference"
 msgstr ""
 
@@ -3161,9 +3214,6 @@ msgstr ""
 msgid "Invitation text"
 msgstr ""
 
-msgid "Send test to myself"
-msgstr ""
-
 msgid "Send 1 day before conference"
 msgstr ""
 
@@ -3171,23 +3221,6 @@ msgid "This e-mail will be sent out 24 hours before the conference start date."
 msgstr ""
 
 msgid "Send 1 hour before conference"
-msgstr ""
-
-msgid "send immediately"
-msgstr ""
-
-msgid "This email will be sent immediately."
-msgstr ""
-
-#, python-format
-msgid "last instant email was sent on %(date)s "
-msgstr ""
-
-#, fuzzy
-msgid "no instant email has been sent yet."
-msgstr "تغییرات‌تان ذخیره شده‌اند."
-
-msgid "Send immediately"
 msgstr ""
 
 #, python-format
@@ -3312,9 +3345,6 @@ msgid "Turn on camera on entering"
 msgstr ""
 
 msgid "Allow recording"
-msgstr ""
-
-msgid "Note: New recordings can only be made if you have booked premium features for this conference."
 msgstr ""
 
 msgid "Temporary Users"
@@ -6975,6 +7005,86 @@ msgstr ""
 msgid "Jetzt anmelden und mitgestalten"
 msgstr ""
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+msgid "Import Projects and Groups or Users"
+msgstr ""
+
+msgid "Import from a CSV File"
+msgstr ""
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+msgid "Project/group CSV File"
+msgstr ""
+
+msgid "User CSV File"
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+msgid "Upload and Import..."
+msgstr ""
+
+msgid "Import Projects and Groups"
+msgstr ""
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+msgid "CSV Import Results"
+msgstr ""
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+msgid "Read errors:"
+msgstr ""
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+msgid "Important messages:"
+msgstr ""
+
+msgid "Errors:"
+msgstr ""
+
+msgid "Info messages:"
+msgstr ""
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr ""
 
@@ -7151,6 +7261,9 @@ msgstr ""
 msgid "Only project members can see the content you requested. Apply to become a member now!"
 msgstr ""
 
+msgid "Note: New recordings can only be made if you have booked premium features for this project."
+msgstr ""
+
 msgid "You are not currently in any Groups"
 msgstr ""
 
@@ -7227,6 +7340,9 @@ msgid "Sorry, only portal administrators can deactivate Groups! You can write a 
 msgstr ""
 
 msgid "Only group members can see the content you requested. Apply to become a member now!"
+msgstr ""
+
+msgid "Note: New recordings can only be made if you have booked premium features for this group."
 msgstr ""
 
 msgid "My Conferences"
@@ -7327,6 +7443,9 @@ msgid "Sorry, only portal administrators can deactivate Conferences! You can wri
 msgstr ""
 
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
+msgstr ""
+
+msgid "Note: New recordings can only be made if you have booked premium features for this conference."
 msgstr ""
 
 #, fuzzy

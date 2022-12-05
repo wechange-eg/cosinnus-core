@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-02 17:09+0200\n"
+"POT-Creation-Date: 2022-12-02 13:15+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -114,6 +114,14 @@ msgstr "Иә"
 #, fuzzy
 msgid "No"
 msgstr "Енді"
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "Personal info"
+msgstr "Байланыс ақпараты"
+
+msgid "Permissions"
+msgstr "Рұқсаттар"
 
 msgid "Has Logged In"
 msgstr "Жүйеге кірді"
@@ -291,6 +299,9 @@ msgid "You have been redirected here because you clicked a link in one of our ma
 msgstr ""
 
 msgid "Sorry, only admin accounts may log in at this time."
+msgstr ""
+
+msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
 msgstr ""
 
 msgid "You have been automatically logged out after being inactive for some time."
@@ -1059,6 +1070,10 @@ msgstr "Шақыруды жою"
 msgid "Pre-filled content for the information field"
 msgstr ""
 
+#, fuzzy
+msgid "Request contact option"
+msgstr "Шақыруды жою"
+
 msgid "Priority choice enabled"
 msgstr ""
 
@@ -1135,6 +1150,11 @@ msgstr ""
 #, fuzzy
 msgid "Contact E-Mail Address"
 msgstr "Электрондық пошта мекенжайлары"
+
+#, fuzzy
+#| msgid "May be contacted"
+msgid "Applicant may be contacted"
+msgstr "Байланысуға болады"
 
 #, fuzzy
 msgid "Cosinnus conference application"
@@ -1768,9 +1788,6 @@ msgstr "Жалпыға қол жетімді (жүйеге кірусіз көр
 msgid "Tags"
 msgstr "Тегтер"
 
-msgid "Permissions"
-msgstr "Рұқсаттар"
-
 msgid "Publicly available via other platforms"
 msgstr ""
 
@@ -2271,6 +2288,11 @@ msgstr ""
 msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
 msgstr ""
 
+#, fuzzy
+#| msgid "View on page"
+msgid "View on site"
+msgstr "Бетте қарау"
+
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Шифрланған кескінге 4 бас әріп енгізіңіз"
 
@@ -2709,6 +2731,9 @@ msgstr "Электрондық пошта мәтіні қазір орнатыл
 msgid "Video conference"
 msgstr "Бейне конференциялар сервері"
 
+msgid "Recorded Meetings"
+msgstr ""
+
 msgid "Conference Room Management"
 msgstr ""
 
@@ -2724,9 +2749,6 @@ msgstr ""
 #, fuzzy
 msgid "Manage Temporary User Accounts"
 msgstr "Топ сипаттамасы"
-
-msgid "Recorded Meetings"
-msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Members"
@@ -3060,6 +3082,13 @@ msgstr "Қарапайым статистика"
 msgid "I accept the conditions in order to submit my application"
 msgstr ""
 
+msgid "I can be contacted via email by conference administration regardless of my notification settings"
+msgstr ""
+
+#, fuzzy
+msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
+msgstr "Электрондық пошта мекенжайыңызды %(site_name)s үшін растаңыз!"
+
 msgid "Save changes"
 msgstr ""
 
@@ -3157,11 +3186,11 @@ msgstr "Мазмұны"
 #, python-format
 msgid ""
 "\n"
-"                    This message will be sent to one participant.\n"
+"                    This message will be sent to one user.\n"
 "                    "
 msgid_plural ""
 "\n"
-"                    This message will be sent to %(count)s participants.\n"
+"                    This message will be sent to %(count)s users.\n"
 "                    "
 msgstr[0] ""
 msgstr[1] ""
@@ -3181,7 +3210,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "No, don\\"
+msgid "No, do not send"
 msgstr ""
 
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
@@ -3233,6 +3262,9 @@ msgstr ""
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
 msgstr ""
 
+msgid "Applicants have to give their permission to be contacted per email"
+msgstr ""
+
 msgid "Conditions for participation"
 msgstr ""
 
@@ -3246,9 +3278,6 @@ msgid "If a file is uploaded, applicants will have to agree to these conditions 
 msgstr ""
 
 msgid "Unfortunately recorded meetings are currently not yet available for this server!"
-msgstr ""
-
-msgid "Recording of meetings is only available for premium conferences!"
 msgstr ""
 
 msgid "Make a premium booking here"
@@ -3266,6 +3295,33 @@ msgid "There are no recorded meetings yet."
 msgstr "Әзірге бұл жерде ештеңе жоқ"
 
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
+msgstr ""
+
+msgid "Send immediately"
+msgstr ""
+
+msgid "This email will be sent immediately."
+msgstr ""
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr ""
+
+#, fuzzy
+msgid "no instant email has been sent yet."
+msgstr "Контакт мәліметтері әлі қосылмаған."
+
+#, fuzzy
+msgid "Mail subject"
+msgstr "Шақырулар"
+
+msgid "Mail text"
+msgstr ""
+
+msgid "Send (show preview)"
+msgstr ""
+
+msgid "Send test to myself"
 msgstr ""
 
 msgid "Send 1 week before conference"
@@ -3286,9 +3342,6 @@ msgstr "Шақырулар"
 msgid "Invitation text"
 msgstr "Шақырулар"
 
-msgid "Send test to myself"
-msgstr ""
-
 msgid "Send 1 day before conference"
 msgstr ""
 
@@ -3296,23 +3349,6 @@ msgid "This e-mail will be sent out 24 hours before the conference start date."
 msgstr ""
 
 msgid "Send 1 hour before conference"
-msgstr ""
-
-msgid "send immediately"
-msgstr ""
-
-msgid "This email will be sent immediately."
-msgstr ""
-
-#, python-format
-msgid "last instant email was sent on %(date)s "
-msgstr ""
-
-#, fuzzy
-msgid "no instant email has been sent yet."
-msgstr "Контакт мәліметтері әлі қосылмаған."
-
-msgid "Send immediately"
 msgstr ""
 
 #, fuzzy, python-format
@@ -3446,9 +3482,6 @@ msgid "Turn on camera on entering"
 msgstr ""
 
 msgid "Allow recording"
-msgstr ""
-
-msgid "Note: New recordings can only be made if you have booked premium features for this conference."
 msgstr ""
 
 #, fuzzy
@@ -7412,6 +7445,98 @@ msgstr "Сені көруге қуаныштымыз! %(portal_name)s-те сі�
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Қазір тіркеліп, оны қалыптастыруға көмектесіңіз"
 
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Менің Жобаларым мен Топтары"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Cұрыптау өрісі"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Жобалар/Топтар"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Жобалар/Топтар"
+
+#, fuzzy
+msgid "Options"
+msgstr "Пропорциялар"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+#, fuzzy
+msgid "Upload and Import..."
+msgstr "Суретті жүктеу."
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Менің Жобаларым мен Топтары"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+#, fuzzy
+msgid "CSV Import Results"
+msgstr "Парольді қалпына келтіру сәтті өтті"
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+#, fuzzy
+msgid "Read errors:"
+msgstr "Қате!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Хабарламалар"
+
+#, fuzzy
+msgid "Errors:"
+msgstr "Қате!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Хабарламалар"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
+
 msgid "Show more Projects"
 msgstr "Басқа Жобаларды көрсету"
 
@@ -7606,6 +7731,9 @@ msgstr "Кешіріңіз, тек портал әкімшілері Топта�
 msgid "Only project members can see the content you requested. Apply to become a member now!"
 msgstr "Сіз сұраған мазмұнды тек топ мүшелері көре алады. Қазір мүшелікке өтініш бер!"
 
+msgid "Note: New recordings can only be made if you have booked premium features for this project."
+msgstr ""
+
 #, fuzzy
 msgid "You are not currently in any Groups"
 msgstr "Сіз әлі ешқандай топта немесе жобада емессіз"
@@ -7698,6 +7826,9 @@ msgstr "Кешіріңіз, тек портал әкімшілері Топта�
 #, fuzzy
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "Сіз сұраған мазмұнды тек топ мүшелері көре алады. Қазір мүшелікке өтініш бер!"
+
+msgid "Note: New recordings can only be made if you have booked premium features for this group."
+msgstr ""
 
 #, fuzzy
 msgid "My Conferences"
@@ -7824,6 +7955,9 @@ msgstr "Кешіріңіз, тек портал әкімшілері Топта�
 #, fuzzy
 msgid "Only conference members can see the content you requested. Apply to become a member now!"
 msgstr "Сіз сұраған мазмұнды тек топ мүшелері көре алады. Қазір мүшелікке өтініш бер!"
+
+msgid "Note: New recordings can only be made if you have booked premium features for this conference."
+msgstr ""
 
 #, fuzzy
 msgid "Please verify your email address."
@@ -8440,54 +8574,6 @@ msgstr "Сіздің өзгертулеріңіз сақталды."
 #, fuzzy
 #~ msgid "Back to your profile"
 #~ msgstr "Сіздің профиліңіз"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Менің Жобаларым мен Топтары"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Cұрыптау өрісі"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Жобалар/Топтар"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Жобалар/Топтар"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Пропорциялар"
-
-#, fuzzy
-#~ msgid "Upload and Import..."
-#~ msgstr "Суретті жүктеу."
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Менің Жобаларым мен Топтары"
-
-#, fuzzy
-#~ msgid "CSV Import Results"
-#~ msgstr "Парольді қалпына келтіру сәтті өтті"
-
-#, fuzzy
-#~ msgid "Read errors:"
-#~ msgstr "Қате!"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Хабарламалар"
-
-#, fuzzy
-#~ msgid "Errors:"
-#~ msgstr "Қате!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Хабарламалар"
 
 #~ msgid "Message Group"
 #~ msgstr "Топқа хабарлама жазу"
