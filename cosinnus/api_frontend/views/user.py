@@ -347,6 +347,7 @@ class UserProfileView(UserSignupTriggerEventsMixin, APIView):
         # this save() will update the existing user, user.cosinnus_profile, 
         #     and cosinnus_profile.media_tag instances.
         user = user_serializer.save()
-        data = self.get_data(user_serializer)
+        # return data from a freshly serialized user object so all fields show up
+        data = self.get_data(CosinnusHybridUserSerializer(user, context={'request': request}))
         return Response(data)
 
