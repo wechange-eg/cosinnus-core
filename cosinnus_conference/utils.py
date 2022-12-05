@@ -20,6 +20,7 @@ from django.template.defaultfilters import date
 from cosinnus.utils.html import render_html_with_variables
 from cosinnus.models.group_extra import CosinnusConference
 from django.utils.timezone import now
+from cosinnus.utils.urls import group_aware_reverse
 
 
 def get_initial_template(field_name):
@@ -82,7 +83,13 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
                 'action_button_1_text': _('Go to conference'),
                 'action_button_1_url': group.get_absolute_url(),
             }
-            send_notification_item_html(recipient, subject, context, notification_reason)
+            # do not show the regular "Unsubscribe" link but instead show a link to the member page
+            extra_data = {
+                'notification_reason': notification_reason,
+                'prefs_url': group_aware_reverse('cosinnus:group-detail', kwargs={'group': group}),
+                'unsubscribe_url': '',
+            }
+            send_notification_item_html(recipient, subject, context, notification_reason, extra_data=extra_data)
         finally:
             translation.activate(cur_language)
 

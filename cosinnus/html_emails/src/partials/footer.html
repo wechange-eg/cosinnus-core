@@ -25,6 +25,7 @@
                     </p>
                     {{/rwif}}
                     
+                    {{#rwif notification_reason raw_if="unsubscribe_url"}}
                     <p>
                         {{#if raw}}
                             {{{{raw}}}}{% trans "Click the following link to never receive any more emails from us:" %}{{{{/raw}}}}
@@ -40,6 +41,7 @@
                             {{/if}}
                         </a>
                     </p>
+                    {{/rwif}}
                 </columns>
             </row>
         </columns>

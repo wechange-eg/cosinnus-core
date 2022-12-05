@@ -714,7 +714,7 @@ class ParticipationManagement(models.Model):
 
     may_be_contacted_field_enabled = models.BooleanField(_('Request contact option'), 
         help_text='If active, conference applicants will be required to enable the option to be contacted by conference admins', 
-        default=True)
+        default=False)
     
     priority_choice_enabled = models.BooleanField(_('Priority choice enabled'), 
                                                   default=settings.COSINNUS_CONFERENCE_PRIORITY_CHOICE_DEFAULT)
