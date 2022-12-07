@@ -153,7 +153,7 @@ setup(
         'sentry-sdk==1.4.2',
         'python-dateutil==2.4.1',
         'urllib3==1.24.2',
-        'pytz==2020.1',
+        'pytz==2022.6',
         'PyJWT==1.7.1',
         'rdflib==5.0.0',
         'python-memcached==1.59',
