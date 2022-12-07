@@ -5,21 +5,24 @@ import logging
 import time
 
 from annoying.functions import get_object_or_None
+from django.contrib import messages
 from django.http.response import HttpResponseNotFound, \
     HttpResponse, JsonResponse, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic.base import RedirectView, View
+from django.utils.translation import ugettext as _
+from django.views.generic.base import RedirectView, View, TemplateView
+import requests
 
 from cosinnus.conf import settings
 from cosinnus.core.decorators.views import redirect_to_not_logged_in, \
-    redirect_to_403
+    redirect_to_403, redirect_to_error_page
 from cosinnus.models.bbb_room import BBBRoom, BBBRoomVisitStatistics
+from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.templatetags.cosinnus_tags import full_name
+from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.views.mixins.group import RequireLoggedInMixin
-import requests
-from cosinnus.utils.group import get_cosinnus_group_model
 
 
 logger = logging.getLogger('cosinnus')
@@ -144,3 +147,42 @@ class BBBRoomMeetingQueueAPIView(RequireLoggedInMixin, View):
         return JsonResponse(data)
     
 bbb_room_meeting_queue_api = BBBRoomMeetingQueueAPIView.as_view()
+
+
+class BBBRoomGuesAccessView(TemplateView):
+    """ Guest access for a specific BBB room where kwarg `guest_token` corresponds to
+        a `BBBRoom.guest_token`.
+        Will redirect to the direct BBB join URL if the user is logged in, or all GET
+        params are filled. Will show a form where the user can enter their details,
+        which redirects to this same view with filled GET params. """
+    
+    msg_invalid_token = _('Invalid guest token.')
+    
+    def get(self, request, *args, **kwargs):
+        guest_token = kwargs.pop('guest_token', '').strip()
+        if not guest_token:
+            messages.warning(request, self.msg_invalid_token)
+            return redirect_to_error_page(request, view=self)
+        current_portal = CosinnusPortal.get_current()
+        bbb_room = get_object_or_None(BBBRoom, portal=current_portal, guest_token=guest_token)
+        if not bbb_room:
+            messages.warning(request, self.msg_invalid_token)
+            return redirect_to_error_page(request, view=self)
+        # TODO: 
+        # - resolve join param
+        # - set flag for guest policy as default settings and inheritable in json
+        # - create new guest_token for rooms that don't have it on access
+        # - set moderatorOnlyMessage to guest token on room create
+        # - redirect found token accessor to join url with ?guest=true
+        # - check GET params on view, redirect to form template if not all (including ?confirm=True) are set
+        # - fill in GET params for non-anymous users
+        # - add template with inputs from signup and text boxes
+        # - add recording checkbox if record==True
+        # - save GET params to session, retrieve them for template form
+        # - skip ?confirm=True on logged-in-users if no recording is present
+        # - show guest token/url in room/table/event/group settings
+        return HttpResponse(f'ROOM FOUND! {guest_token}')
+    
+bbb_room_guest_access = BBBRoomGuesAccessView.as_view()
+
+

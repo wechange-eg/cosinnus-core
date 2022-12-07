@@ -33,7 +33,7 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
         list_display = ('meeting_id', 'name', 'ended', 'portal')
         list_filter = ('ended', 'portal')
         search_fields = ('meeting_id', 'internal_meeting_id', 'name')
-        readonly_fields = ('last_create_params',)
+        readonly_fields = ('last_create_params', 'guest_token')
         actions = (restart_bbb_rooms, )
         change_form_template = 'admin/bbbroom/change_form.html'
         

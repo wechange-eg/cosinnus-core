@@ -8,6 +8,17 @@
 </p>
 
 {% with parent_obj=original.get_parent_bbb_chain_object %}
+    <h4>{% trans "BBB Guest Token" %}</h4>
+    <p>
+         {% if not original.media_tag.bbb_room or not original.media_tag.bbb_room.guest_token %}
+             <i>{% trans "(none)" %}
+         {% else %}
+             <code>{{ original.media_tag.bbb_room.guest_token }}</code>:
+             {% url 'cosinnus:bbb-room-guest-access' guest_token=original.media_tag.bbb_room.guest_token as guest_url %}
+             <a href="{{ guest_url }}" target="_blank">{{ guest_url }}</a>
+         {% endif %}
+    </p>
+
 	<h4>{% trans "Inherited BBB-Parameters" %}</h4>
 	<p>
 	    {% trans "These parameters are the ones this object inherits from higher up settings or the portal defaults. These are the ones that will be used if this object or deeper objects do not define any further parameters." %}

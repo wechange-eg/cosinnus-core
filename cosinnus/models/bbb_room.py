@@ -100,6 +100,9 @@ class BBBRoom(models.Model):
     parent_meeting_id = models.CharField(max_length=100, blank=True, null=True)
     ended = models.BooleanField(default=False)
     
+    guest_token = models.CharField(max_length=100, null=True, blank=True, unique=True, editable=False,
+                                   help_text='Token for guest access to this room via https://SERVER.COM/bbb/<token>')
+    
     last_create_params = models.JSONField( verbose_name=_('Last create-call parameters'),
         blank=True, null=True, default=dict, editable=False, encoder=DjangoJSONEncoder,
         help_text="The parameters used for the last create call. Serves as a record only, new create params are derived from the source object's options!")
