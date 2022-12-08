@@ -169,8 +169,8 @@ class BBBRoomGuesAccessView(TemplateView):
             messages.warning(request, self.msg_invalid_token)
             return redirect_to_error_page(request, view=self)
         # TODO: 
-        # - resolve join param
-        # - set flag for guest policy as default settings and inheritable in json
+        # ! resolve join param
+        # ! set flag for guest policy as default settings and inheritable in json
         # - create new guest_token for rooms that don't have it on access
         # - set moderatorOnlyMessage to guest token on room create
         # - redirect found token accessor to join url with ?guest=true

@@ -32,6 +32,8 @@ from cosinnus.models.membership import MEMBERSHIP_MEMBER, MANAGER_STATUS
 from cosinnus.models.conference import CosinnusConferenceSettings
 from copy import copy
 from cosinnus.utils.group import get_cosinnus_group_model
+from builtins import issubclass
+from cosinnus.utils.urls import group_aware_reverse
 
 
 # from cosinnus.models import MEMBERSHIP_ADMIN
@@ -285,6 +287,12 @@ class BBBRoom(models.Model):
             presentation_url = source_obj.get_presentation_url()
         
         create_params = self.build_extra_create_parameters()
+        
+        # BBB guest access: append the `moderatorOnlyMessage` param by this BBB room's guest_token URL, if the message param exists
+        guest_token = self.get_guest_token()
+        if guest_token and create_params.get('moderatorOnlyMessage', '').strip():
+            create_params['moderatorOnlyMessage'] += ' ' + group_aware_reverse('cosinnus:bbb-room-guest-access', kwargs={'guest_token': guest_token})
+            
         m_xml = self.bbb_api.start(
             name=self.name,
             meeting_id=self.meeting_id,
@@ -354,6 +362,12 @@ class BBBRoom(models.Model):
 
         bbb_api = BigBlueButtonAPI(source_object=source_object)
         create_params = cls.build_extra_create_parameters_for_object(source_object, meeting_id=meeting_id, meeting_name=name)
+        
+        # BBB guest access: append the `moderatorOnlyMessage` param by this BBB room's guest_token URL, if the message param exists
+        guest_token = cls._generate_guest_token(source_object)
+        if guest_token and create_params.get('moderatorOnlyMessage', '').strip():
+            create_params['moderatorOnlyMessage'] += ' ' + group_aware_reverse('cosinnus:bbb-room-guest-access', kwargs={'guest_token': guest_token})
+        
         m_xml = bbb_api.start(
             name=name,
             meeting_id=meeting_id,
@@ -377,6 +391,7 @@ class BBBRoom(models.Model):
         meeting.voice_bridge = meeting_json['voiceBridge']
         meeting.dial_number = meeting_json['dialNumber']
         meeting.last_create_params = create_params
+        meeting.guest_token = guest_token
 
         if not meeting_json:
             meeting.ended = True
@@ -487,6 +502,48 @@ class BBBRoom(models.Model):
             extra_join_parameters = self.build_extra_join_parameters(user)
             return self.bbb_api.join_url(self.meeting_id, username, password, extra_parameter_dict=extra_join_parameters)
         return ''
+    
+    @classmethod
+    def _generate_guest_token(cls, source_obj=None, max_tries=10):
+        """ Generate a token for `get_guest_token()` """
+        # create a 3-letter part from the slug of the source objects group/conference
+        slug_part = None
+        if source_obj:
+            # try Group
+            if type(source_obj) is get_cosinnus_group_model() or issubclass(source_obj.__class__, get_cosinnus_group_model()):
+                slug_part = source_obj.slug
+            elif getattr(source_obj, 'group', None):
+                slug_part = source_obj.group.slug
+        if slug_part:
+            slug_part = slug_part.replace('-', '').replace('_', '').lower().ljust(3, 'x')[:3]
+        if not slug_part:
+            slug_part = 'bbb'
+        
+        random_string = get_random_string(9, allowed_chars='abcdefghijklmnopqrstuvwxyz0123456789')
+        new_token = f'{slug_part}-{random_string[:3]}-{random_string[3:6]}-{random_string[6:9]}'
+        # check for duplicate tokens
+        if BBBRoom.objects.filter(guest_token__iexact=new_token).count() > 0:
+            if max_tries <= 0:
+                return None
+            return cls._generate_guest_token(source_obj, max_tries=max_tries-1)
+        return new_token
+    
+    def get_guest_token(self):
+        """ Will generate a unique guest token to use with url 'cosinnus:bbb-guest-room-access' for this room
+            if one doesn't exist and return it.
+            Tokens will be generated in the form "sss-xxx-xxx-xxx" where "sss" are the first 3 alphanumeric letters of
+            the conference slug and "xxx" are random alphanumeric chars. """
+        if not self.guest_token:
+            try:
+                new_token = self.__class__._generate_guest_token(self.source_object)
+                if new_token is None:
+                    return None
+                self.guest_token = new_token
+                self.save(update_fields=['guest_token'])
+            except Exception as e:
+                logger.warning('BBB: Error trying to generate a guest token for BBB room.', extra={'bbb-room-id': self.id, 'exception': str(e)})
+                self.guest_token = None
+        return self.guest_token
 
     def get_absolute_url(self):
         """ Returns an on-portal-server URL that returns a redirect to the BBB-server URL """
