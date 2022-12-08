@@ -1385,6 +1385,7 @@ class CosinnusDefaultSettings(AppConf):
         'create': {
             'muteOnStart': 'true', # default preset for 'mic_starts_on': False
             'record': 'false', # default preset for 'record_meeting'
+            'guestPolicy': 'ALWAYS_ACCEPT', # always by default allow guest access
         },
         'join': {
             'userdata-bbb_auto_share_webcam': 'false', # default preset for 'cam_starts_on': False
@@ -1392,6 +1393,7 @@ class CosinnusDefaultSettings(AppConf):
         },
         'create__coffee': {
             'muteOnStart': 'false', # coffee tables insta-join on microphone (overwritten by userdata-bbb_auto_join_audio 'true' anyways, so we show this to be clear)
+            'guestPolicy': 'ALWAYS_ACCEPT', # always by default allow guest access
         },
         'join__coffee': {
             'userdata-bbb_skip_check_audio': 'true', # coffee table insta-join

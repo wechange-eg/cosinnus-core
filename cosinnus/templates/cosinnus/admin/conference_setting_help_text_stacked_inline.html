@@ -11,7 +11,7 @@
     <h4>{% trans "BBB Guest Token" %}</h4>
     <p>
          {% if not original.media_tag.bbb_room or not original.media_tag.bbb_room.guest_token %}
-             <i>{% trans "(none)" %}
+             <i>{% trans "None yet. Join the room to generate a guest token. It will also be shown in the moderator-only message." %}</i>
          {% else %}
              <code>{{ original.media_tag.bbb_room.guest_token }}</code>:
              {% url 'cosinnus:bbb-room-guest-access' guest_token=original.media_tag.bbb_room.guest_token as guest_url %}
