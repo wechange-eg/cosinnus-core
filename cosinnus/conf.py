@@ -1171,7 +1171,7 @@ class CosinnusConf(AppConf):
         0: (None, None),
     }
     
-    BBB_RESOLVE_CLUSTER_REDIRECTS_IF_URL_MATCHES = lambda url: url.startswith('https://bbbatscale') or url.startswith('https://scalelite')
+    BBB_RESOLVE_CLUSTER_REDIRECTS_IF_URL_MATCHES = lambda url: True
     
     BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS = False
     
@@ -1303,7 +1303,9 @@ class CosinnusDefaultSettings(AppConf):
     BBB_DEFAULT_CREATE_PARAMETERS = {
         "record": False,
         "autoStartRecording": False,
-        "allowStartStopRecording": True
+        "allowStartStopRecording": True,
+        "guestPolicy": 'ALWAYS_ACCEPT', # always by default allow guest access
+        "moderatorOnlyMessage": _('To invite external guests, share this link:'),
     }
     
     """

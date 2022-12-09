@@ -21,6 +21,7 @@ from cosinnus.utils.html import render_html_with_variables
 from cosinnus.models.group_extra import CosinnusConference
 from django.utils.timezone import now
 from cosinnus.utils.urls import group_aware_reverse
+from django.contrib.auth.models import AnonymousUser
 
 
 def get_initial_template(field_name):
@@ -124,5 +125,14 @@ def update_conference_premium_status(conferences=None):
     
     non_premium_to_activate.update(is_premium_currently=True)
     premium_to_deactivate.update(is_premium_currently=False)
-    
 
+
+class BBBGuestTokenAnonymousUser(AnonymousUser):
+    """ An anonymous user class that is used while an anonymous user
+        is accessing a BBB room via a guest_token URL link. """
+    
+    is_bbb_guest_token_user = True
+    bbb_user_name = 'BBB Guest User'
+    
+    def get_full_name(self):
+        return self.bbb_user_name
