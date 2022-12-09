@@ -1305,7 +1305,7 @@ class CosinnusDefaultSettings(AppConf):
         "autoStartRecording": False,
         "allowStartStopRecording": True,
         "guestPolicy": 'ALWAYS_ACCEPT', # always by default allow guest access
-        "moderatorOnlyMessage": _('To invite external Guests, share this link:'),
+        "moderatorOnlyMessage": _('To invite external guests, share this link:'),
     }
     
     """

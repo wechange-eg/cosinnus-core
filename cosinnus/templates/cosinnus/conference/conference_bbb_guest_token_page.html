@@ -1,0 +1,48 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
+
+{% block page_title %}{% trans "Join BBB Meeting as guest" %} {{ block.super }}{% endblock page_title %}
+
+{% block leftnav %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+{% endblock %}
+
+{% block content %}
+    <form method="POST" action="" class="cosinnus-form">
+        {% csrf_token %}
+        <div class="content-box">
+            <h2>{% trans "Join BBB Meeting as guest" %}</h2>
+            
+            <div class="cosinnus-field ">
+		        <label for="id_user-email">
+		            Username
+		        </label>
+		        <div class="field-description no-select ">Enter your name to join the BBB meeting!</div>
+		        <div class="cosinnus-field-input regular-field ">
+                    <input type="text" name="username" value="" maxlength="254" autocomplete="off" placeholder="Your Name" id="id_username" />
+		        </div>
+		    </div>
+        </div>
+        
+        <script type="text/javascript">
+            function redirectToBBB() {
+                window.location.href = '?username=' + $('input[name="username"]').val();
+            }
+        </script>
+
+        <button type="button" class="btn btn-emphasized btn-autosize" onclick="redirectToBBB();">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left" href="#" tabindex="-1">
+                        <i class="fa fa-check"></i>
+                    </span>
+                    <div class="media-body">
+                        {% trans "Join Meeting" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+    </form>
+{% endblock %}

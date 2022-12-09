@@ -7,7 +7,7 @@ import time
 from annoying.functions import get_object_or_None
 from django.contrib import messages
 from django.http.response import HttpResponseNotFound, \
-    HttpResponse, JsonResponse, HttpResponseBadRequest
+    HttpResponse, JsonResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.translation import ugettext as _
 from django.views.generic.base import RedirectView, View, TemplateView
@@ -23,6 +23,7 @@ from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.views.mixins.group import RequireLoggedInMixin
+from cosinnus_conference.utils import BBBGuestTokenAnonymousUser
 
 
 logger = logging.getLogger('cosinnus')
@@ -149,7 +150,7 @@ class BBBRoomMeetingQueueAPIView(RequireLoggedInMixin, View):
 bbb_room_meeting_queue_api = BBBRoomMeetingQueueAPIView.as_view()
 
 
-class BBBRoomGuesAccessView(TemplateView):
+class BBBRoomGuestAccessView(TemplateView):
     """ Guest access for a specific BBB room where kwarg `guest_token` corresponds to
         a `BBBRoom.guest_token`.
         Will redirect to the direct BBB join URL if the user is logged in, or all GET
@@ -157,6 +158,8 @@ class BBBRoomGuesAccessView(TemplateView):
         which redirects to this same view with filled GET params. """
     
     msg_invalid_token = _('Invalid guest token.')
+    msg_error_redirecting = _('There was an error when trying to redirect you to the BBB room. Please contact an administrator!')
+    template_name = 'cosinnus/conference/conference_bbb_guest_token_page.html'
     
     def get(self, request, *args, **kwargs):
         guest_token = kwargs.pop('guest_token', '').strip()
@@ -171,9 +174,11 @@ class BBBRoomGuesAccessView(TemplateView):
         # TODO: 
         # ! resolve join param
         # ! set flag for guest policy as default settings and inheritable in json
-        # - create new guest_token for rooms that don't have it on access
-        # - set moderatorOnlyMessage to guest token on room create
-        # - redirect found token accessor to join url with ?guest=true
+        # ! create new guest_token for rooms that don't have it on access
+        # ! set moderatorOnlyMessage to guest token on room create
+        # ! redirect found token accessor to join url with ?guest=true
+        # - refactor view: resolve into own function, user attribs getting into own function
+        # - add Form class to view
         # - check GET params on view, redirect to form template if not all (including ?confirm=True) are set
         # - fill in GET params for non-anymous users
         # - add template with inputs from signup and text boxes
@@ -181,8 +186,52 @@ class BBBRoomGuesAccessView(TemplateView):
         # - save GET params to session, retrieve them for template form
         # - skip ?confirm=True on logged-in-users if no recording is present
         # - show guest token/url in room/table/event/group settings
-        return HttpResponse(f'ROOM FOUND! {guest_token}')
+        # - check if resolving and iframe attrs really work in the group BBB iframe where the non queue URL is used and a resolve doesn't happen?
+        user = self.request.user
+        resolved_room_url = None
+        if user.is_authenticated:
+            # set the temporary BBB user guest token for this join process
+            setattr(user, BBBRoom.BBB_USER_GUEST_TOKEN_ATTR, guest_token)
+        else:
+            username = request.GET.get('username', '').strip()
+            if not username:
+                return super().get(request, *args, **kwargs)
+            user = BBBGuestTokenAnonymousUser()
+            # set the temporary BBB user guest token for this join process
+            setattr(user, BBBRoom.BBB_USER_GUEST_TOKEN_ATTR, guest_token)
+            setattr(user, 'bbb_user_name', username)
+            
+        direct_room_url = bbb_room.get_direct_room_url_for_user(user)
+        class BBBErrorException(Exception):
+            pass
+        def _resolve_url(_room_url, retry=True):
+            response = requests.get(_room_url, allow_redirects=False)
+            if response.status_code == 302 and 'Location' in response.headers:
+                return response.headers['Location']
+            elif not response.status_code == 200:
+                # this can happen when a room is still being created on the BBB server and 
+                # we quickly ask BBBAtScale for its URL; it will return a "Room is still being created" error
+                if retry:
+                    time.sleep(3)
+                    return _resolve_url(_room_url, retry=False)
+            elif response.status_code == 200:
+                logger.error(
+                    'BBB guest URL resolver: resolving URL response unexpected, cannot rediredt the user to their room!',
+                    extra={'response': response, 'response_text': response.text, 'guest_token': guest_token, 'user': user, 'room_id': bbb_room.id}
+                )
+                messages.error(request, self.msg_error_redirecting)
+                raise BBBErrorException()
+        
+        try:
+            resolved_room_url = _resolve_url(direct_room_url)
+        except BBBErrorException:
+            return redirect_to_error_page(request, view=self)
+        
+        if not resolved_room_url:
+            return HttpResponse('<html><head><meta http-equiv="refresh" content="5" ></head><body>Connnecting you to your room...</body></html>')
+        
+        return HttpResponseRedirect(resolved_room_url)
     
-bbb_room_guest_access = BBBRoomGuesAccessView.as_view()
+bbb_room_guest_access = BBBRoomGuestAccessView.as_view()
 
 

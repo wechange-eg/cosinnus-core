@@ -34,6 +34,7 @@ from copy import copy
 from cosinnus.utils.group import get_cosinnus_group_model
 from builtins import issubclass
 from cosinnus.utils.urls import group_aware_reverse
+from cosinnus_conference.utils import BBBGuestTokenAnonymousUser
 
 
 # from cosinnus.models import MEMBERSHIP_ADMIN
@@ -115,6 +116,9 @@ class BBBRoom(models.Model):
     # cache key for each rooms participants
     PARTICIPANT_COUNT_CACHE_KEY = 'cosinnus/core/bbbroom/%d/participants' # bbb-room-id
     
+    # the attr name on the User object that signifies the user is entering a bbb room via guest_token
+    BBB_USER_GUEST_TOKEN_ATTR = 'bbb_guest_token'
+    
     # the BigBlueButtonAPI instance for this room
     _bbb_api = None
     
@@ -177,21 +181,24 @@ class BBBRoom(models.Model):
 
     def get_password_for_user(self, user):
         """ returns the room password according to the permission of a given user.
+            If the user object has a temporary bbb guest token attached that matches this room,
+            attendee access is also given.
         Returns empty string, if user is no member of the room
 
         :return: password for the user to join the room
         :rtype: str
         """
+        user_bbb_guest_token = getattr(user, self.BBB_USER_GUEST_TOKEN_ATTR, None)
         if check_user_superuser(user) or user in self.moderators.all():
             return self.moderator_password
-        elif user in self.attendees.all():
+        elif (user_bbb_guest_token and user_bbb_guest_token == self.guest_token) or user in self.attendees.all():
             return self.attendee_password
         else:
             return ''
     
     def check_user_can_enter_room(self, user):
         """ Checks if a user has the neccessary permissions to enter this room """
-        return bool(user.is_authenticated and self.get_password_for_user(user))
+        return bool((user.is_authenticated or type(user) is BBBGuestTokenAnonymousUser) and self.get_password_for_user(user))
 
     def remove_user(self, user):
         self.moderators.remove(user)
@@ -291,7 +298,8 @@ class BBBRoom(models.Model):
         # BBB guest access: append the `moderatorOnlyMessage` param by this BBB room's guest_token URL, if the message param exists
         guest_token = self.get_guest_token()
         if guest_token and create_params.get('moderatorOnlyMessage', '').strip():
-            create_params['moderatorOnlyMessage'] += ' ' + group_aware_reverse('cosinnus:bbb-room-guest-access', kwargs={'guest_token': guest_token})
+            guest_url = group_aware_reverse('cosinnus:bbb-room-guest-access', kwargs={'guest_token': guest_token})
+            create_params['moderatorOnlyMessage'] += f' <a href="{guest_url}" target="_blank">{guest_url}</a> '
             
         m_xml = self.bbb_api.start(
             name=self.name,
@@ -451,12 +459,13 @@ class BBBRoom(models.Model):
         # add the source object's options from all inherited settings objects
         params.update(self._meta.model._get_bbb_extra_params_for_api_call('join', self.source_object))
         # add the user's avatar from their profile
-        if user.cosinnus_profile.avatar:
+        profile = getattr(user, 'cosinnus_profile', None)
+        if profile and profile.avatar:
             domain = CosinnusPortal.get_current().get_domain()
             params.update({
-                'avatarURL': domain + user.cosinnus_profile.get_avatar_thumbnail_url(size=(800,800))
+                'avatarURL': domain + profile.get_avatar_thumbnail_url(size=(800,800))
             })
-        if user.cosinnus_profile.language:
+        if profile and profile.language:
             cur_language = translation.get_language()
             params.update({
                 'userdata-bbb_override_default_locale': cur_language
@@ -492,14 +501,24 @@ class BBBRoom(models.Model):
         """ Returns the actual BBB-Server URL with tokens for a given user
             to join this room """
         password = self.get_password_for_user(user)
-        display_name_func = settings.COSINNUS_CONFERENCES_USER_DISPLAY_NAME_FUNC
-        if display_name_func is not None and callable(display_name_func):
-            username = display_name_func(user)
+        username = 'Unnamed User'
+        if type(user) is BBBGuestTokenAnonymousUser:
+            username = user.bbb_user_name
         else:
-            username = full_name(user)
+            display_name_func = settings.COSINNUS_CONFERENCES_USER_DISPLAY_NAME_FUNC
+            if display_name_func is not None and callable(display_name_func):
+                username = display_name_func(user)
+            else:
+                username = full_name(user)
         
         if self.meeting_id and password:
             extra_join_parameters = self.build_extra_join_parameters(user)
+            # if the user is joining via a guest link, set the password to empty string and add `guest=true` to params
+            user_bbb_guest_token = getattr(user, self.BBB_USER_GUEST_TOKEN_ATTR, None)
+            if user_bbb_guest_token and user_bbb_guest_token == self.guest_token:
+                extra_join_parameters.update({
+                    'guest': 'true',
+                })
             return self.bbb_api.join_url(self.meeting_id, username, password, extra_parameter_dict=extra_join_parameters)
         return ''
     
@@ -571,7 +590,7 @@ class BBBRoom(models.Model):
         # add statistics visit
         try:
             source_obj = self.source_object
-            if source_obj:
+            if source_obj and user.is_authenticated:
                 BBBRoomVisitStatistics.create_user_visit_for_bbb_room(user, self, group=source_obj.get_group_for_bbb_room())
         except Exception as e:
             if settings.DEBUG:
