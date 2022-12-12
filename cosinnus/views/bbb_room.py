@@ -161,6 +161,19 @@ class BBBRoomGuestAccessView(TemplateView):
     msg_error_redirecting = _('There was an error when trying to redirect you to the BBB room. Please contact an administrator!')
     template_name = 'cosinnus/conference/conference_bbb_guest_token_page.html'
     
+    def get_source_group(self, source_obj):
+        """ Returns the parent group of the bbb-room's source object,
+            whether it is a group itself or the conference of the conference event
+            or the group of the Event with a bbb room.
+            Returns None if none apply """
+        if source_obj:
+            # try Group
+            if type(source_obj) is get_cosinnus_group_model() or issubclass(source_obj.__class__, get_cosinnus_group_model()):
+                return source_obj
+            elif getattr(source_obj, 'group', None):
+                return source_obj.group
+        return None
+    
     def get(self, request, *args, **kwargs):
         guest_token = kwargs.pop('guest_token', '').strip()
         if not guest_token:
@@ -188,8 +201,14 @@ class BBBRoomGuestAccessView(TemplateView):
         # - show guest token/url in room/table/event/group settings
         # - check if resolving and iframe attrs really work in the group BBB iframe where the non queue URL is used and a resolve doesn't happen?
         user = self.request.user
+        source_obj = bbb_room.source_object
         resolved_room_url = None
         if user.is_authenticated:
+            # check if user is member of the bbb-room's source object and if so, redirect them to the room directly
+            source_group = self.get_source_group(source_obj)
+            if source_group and source_group.is_member(user) and hasattr(source_obj, 'get_absolute_url'):
+                return redirect(source_obj.get_absolute_url())
+            
             # set the temporary BBB user guest token for this join process
             setattr(user, BBBRoom.BBB_USER_GUEST_TOKEN_ATTR, guest_token)
         else:
