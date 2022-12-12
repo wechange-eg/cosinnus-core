@@ -310,11 +310,12 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
         # validate managed tags
         if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:        
             profile_data = attrs.get('cosinnus_profile', {})
-            managed_tag_slugs = profile_data.get('get_managed_tag_slugs', [])
-            validate_managed_tag_slugs(
-                managed_tag_slugs,
-                settings.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED
-            )
+            if 'get_managed_tag_slugs' in profile_data:
+                managed_tag_slugs = profile_data.get('get_managed_tag_slugs', [])
+                validate_managed_tag_slugs(
+                    managed_tag_slugs,
+                    settings.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED
+                )
           
         attrs = super().validate(attrs)
         return attrs
