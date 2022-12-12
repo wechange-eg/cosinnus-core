@@ -575,15 +575,17 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
 class GroupMeetingView(SamePortalGroupMixin, RequireReadMixin, DetailView):
 
     template_name = 'cosinnus/group/group_meeting.html'
+    has_bbb_video = False
+    has_fairmeeting_video = False
     
     def dispatch(self, request, *args, **kwargs):
         """ Make sure the group has an active video conference configured. """
         ret = super().dispatch(request, *args, **kwargs)
-        has_bbb_video = settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and \
+        self.has_bbb_video = settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and \
             self.group.video_conference_type == self.group.BBB_MEETING
-        has_fairmeeting_video = CosinnusPortal.get_current().video_conference_server and \
+        self.has_fairmeeting_video = CosinnusPortal.get_current().video_conference_server and \
             self.group.video_conference_type == self.group.FAIRMEETING
-        if not has_bbb_video and not has_fairmeeting_video:
+        if not self.has_bbb_video and not self.has_fairmeeting_video:
             messages.error(request, _('This team does not have a video conference configured.'))
             return redirect_to_403(request, view=self, group=self.group)
         return ret
@@ -593,14 +595,23 @@ class GroupMeetingView(SamePortalGroupMixin, RequireReadMixin, DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        has_bbb_video = settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and \
-            self.group.video_conference_type == self.group.BBB_MEETING
-        if has_bbb_video:
+        meeting_url = None
+        recording_prompt_required = False
+        if self.has_bbb_video:
+            meeting_url = self.group.get_bbb_room_queue_api_url()
             bbb_room = getattr(self.group.media_tag, 'bbb_room')
-            context.update({
-                'bbb_room': bbb_room,
-                'recording_prompt_required': bbb_room and bbb_room.is_recorded_meeting or False,
-            })
+            recording_prompt_required = bbb_room and bbb_room.is_recorded_meeting or False
+        elif self.has_fairmeeting_video:
+            meeting_url = f'{CosinnusPortal.get_current().video_conference_server_url}-{self.group.id}-{self.group.secret_from_created}'
+        context.update({
+            'recording_prompt_required': recording_prompt_required,
+            'has_bbb_video': self.has_bbb_video,
+            'has_fairmeeting_video': self.has_fairmeeting_video,
+            'meeting_url': meeting_url,
+            'meeting_name': self.group.name,
+            'group': self.group,
+        })
+        print(f'>< context {context}')
         return context
 
 
