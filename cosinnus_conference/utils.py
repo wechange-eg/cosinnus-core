@@ -18,8 +18,10 @@ from cosinnus.utils.permissions import check_user_can_receive_emails
 from uritemplate.api import variables
 from django.template.defaultfilters import date
 from cosinnus.utils.html import render_html_with_variables
+from cosinnus.models.conference import CosinnusConferenceApplication
 from cosinnus.models.group_extra import CosinnusConference
 from django.utils.timezone import now
+from django.db.models import Q
 from cosinnus.utils.urls import group_aware_reverse
 
 
@@ -55,8 +57,14 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
     if not recipients:
         recipients = group.actual_members
     
+    # check if conference has the `Request application` method: 
+    # only in this case the email notification is allowed to ignore the `never` notification setting
     for recipient in recipients:
-        if not check_user_can_receive_emails(recipient, ignore_user_notification_settings=True):
+        ignore = False
+        if group.membership_mode == CosinnusConference.MEMBERSHIP_MODE_APPLICATION \
+            and CosinnusConferenceApplication.objects.filter(conference=group, may_be_contacted=True, user=recipient):
+            ignore = True
+        if not check_user_can_receive_emails(recipient, ignore_user_notification_settings=ignore):
             continue
         
         # switch language to user's preference language
