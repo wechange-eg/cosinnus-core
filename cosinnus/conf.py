@@ -1299,13 +1299,16 @@ class CosinnusDefaultSettings(AppConf):
     # than provided in max_participants during room creation
     BBB_ROOM_FIX_PARTICIPANT_COUNT_PLUS_ONE = False
     
+    # text that gets appended to the create `moderatorOnlyMessage`
+    # along with the guest invite url appended to its end
+    BBB_MODERATOR_MESSAGE_GUEST_LINK_TEXT = _('To invite external guests, share this link:')
+    
     # the default BBB create-call parameters for all room types
     BBB_DEFAULT_CREATE_PARAMETERS = {
         "record": False,
         "autoStartRecording": False,
         "allowStartStopRecording": True,
         "guestPolicy": 'ALWAYS_ACCEPT', # always by default allow guest access
-        "moderatorOnlyMessage": _('To invite external guests, share this link:'),
     }
     
     """

@@ -581,10 +581,6 @@ class GroupMeetingView(SamePortalGroupMixin, RequireReadMixin, DetailView):
     def dispatch(self, request, *args, **kwargs):
         """ Make sure the group has an active video conference configured. """
         ret = super().dispatch(request, *args, **kwargs)
-        self.has_bbb_video = settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and \
-            self.group.video_conference_type == self.group.BBB_MEETING
-        self.has_fairmeeting_video = CosinnusPortal.get_current().video_conference_server and \
-            self.group.video_conference_type == self.group.FAIRMEETING
         if not self.has_bbb_video and not self.has_fairmeeting_video:
             messages.error(request, _('This team does not have a video conference configured.'))
             return redirect_to_403(request, view=self, group=self.group)
@@ -595,6 +591,10 @@ class GroupMeetingView(SamePortalGroupMixin, RequireReadMixin, DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        self.has_bbb_video = settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and \
+            self.group.video_conference_type == self.group.BBB_MEETING
+        self.has_fairmeeting_video = CosinnusPortal.get_current().video_conference_server and \
+            self.group.video_conference_type == self.group.FAIRMEETING
         meeting_url = None
         recording_prompt_required = False
         if self.has_bbb_video:

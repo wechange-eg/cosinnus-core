@@ -1,5 +1,7 @@
-{% extends "cosinnus/base.html" %}
+{% extends "cosinnus_event/base.html" %}
 {% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
+
+{% block html_attributes %}class="mobile-noscroll"{% endblock html_attributes %}
 
 {% block page_title %}{% trans "Join BBB Meeting as guest" %} {{ block.super }}{% endblock page_title %}
 

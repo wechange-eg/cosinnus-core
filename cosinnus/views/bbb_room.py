@@ -26,6 +26,7 @@ from cosinnus.views.mixins.group import RequireLoggedInMixin
 from cosinnus_conference.utils import BBBGuestTokenAnonymousUser
 from django.urls.base import reverse
 from cosinnus_conference.forms import BBBGuestAccessForm
+from cosinnus.utils.urls import group_aware_reverse
 
 
 logger = logging.getLogger('cosinnus')
@@ -85,7 +86,7 @@ class BBBRoomMeetingQueueView(RequireLoggedInMixin, RedirectView):
 bbb_room_meeting_queue = BBBRoomMeetingQueueView.as_view()
 
 
-class BBBRoomMeetingQueueAPIView(RequireLoggedInMixin, View):
+class BBBRoomMeetingQueueAPIView(View):
     """ An intermediate view that can be visited for a BBB-Room that 
         is in the process of being created, without blocking the code.
         The target object is the media_tag id. As long as the media_tag
@@ -93,26 +94,54 @@ class BBBRoomMeetingQueueAPIView(RequireLoggedInMixin, View):
         room, it will redirect to the room URL.
         Very useful as a waiting-function to retrieve the final BBB room URL
         to insert into an iFrame (instead of relying on in-iframe redirects that
-        break permission functionality in browsers). """
+        break permission functionality in browsers).
+        
+        This view will require the session user to be logged in, or the following
+        GET params to be provided and valid:
+            - `guest_token`: str. a BBB guest_token matching the one from this
+                media-tag's attached `BBBRoom` exactly
+            - `username`: str. a non-empty username used for the BBB session
+    """
         
     def get(self, *args, **kwargs):
-        media_tag_id = kwargs.get('mt_id')
         user = self.request.user
-        if not user.is_authenticated:
-            return HttpResponseBadRequest('User is not logged in.')
+        guest_token = self.request.GET.get('guest_token', None)
+        # allow anonymous access with a guest token
+        if not user.is_authenticated and not guest_token:
+            return HttpResponseBadRequest('Anonymous access is not permitted without a guest token.')
+        
+        media_tag_id = kwargs.get('mt_id')
         media_tag = get_object_or_404(get_tag_object_model(), id=media_tag_id)
         
         data = {
             'status': "WAITING",
         }
+        bbb_room = media_tag.bbb_room
+        
         # return a waiting status or the concrete room URL on the BBB server wrapped in a result object
-        if media_tag.bbb_room is not None:
-            room = media_tag.bbb_room
-            if not user in room.attendees.all() and not user in room.moderators.all() \
+        if bbb_room is not None:
+            if guest_token:
+                if not bbb_room or not bbb_room.guest_token == guest_token:
+                    # deny anonymous access to the bbb room if the token is not correct
+                    return HttpResponseBadRequest('Invalid guest token.')
+                
+                if user.is_authenticated:
+                    # set the temporary BBB user guest token for this join process
+                    setattr(user, BBBRoom.BBB_USER_GUEST_TOKEN_ATTR, guest_token)
+                else:
+                    # set the temporary BBB user with name and guest token for this join process
+                    username = self.request.GET.get('username', '').strip()
+                    if not username:
+                        return HttpResponseBadRequest('Username missing.')
+                    user = BBBGuestTokenAnonymousUser()
+                    setattr(user, BBBRoom.BBB_USER_GUEST_TOKEN_ATTR, guest_token)
+                    setattr(user, 'bbb_user_name', username)
+            elif not user in bbb_room.attendees.all() and not user in bbb_room.moderators.all() \
                     and not check_user_superuser(user):
+                # deny logged in users without a guest token if they have no permission to enter the room
                 return HttpResponseBadRequest('User is not allowed to enter this room.')
             
-            room_url = room.get_direct_room_url_for_user(user=user)
+            room_url = bbb_room.get_direct_room_url_for_user(user=user)
             if not room_url:
                 return HttpResponseBadRequest('Room membership for this user could not be established.')
             # if the URL matches a cluster URL, we check if the room_url returns a http redirect
@@ -133,9 +162,9 @@ class BBBRoomMeetingQueueAPIView(RequireLoggedInMixin, View):
             data = {
                 'status': "DONE", 
                 'url': room_url,
-                'recorded_meeting': room.is_recorded_meeting,
+                'recorded_meeting': bbb_room.is_recorded_meeting,
             }
-        elif media_tag.bbb_room is None and settings.COSINNUS_TRIGGER_BBB_ROOM_CREATION_IN_QUEUE:
+        elif bbb_room is None and settings.COSINNUS_TRIGGER_BBB_ROOM_CREATION_IN_QUEUE:
             # if the media_tag is attached to a conference event, but no room has been created yet,
             # create one
             from cosinnus_event.models import ConferenceEvent, Event #noqa
@@ -240,8 +269,8 @@ class BBBRoomGuestAccessView(TemplateView):
         # ! check GET params on view, redirect to form template if not all (including ?confirm=True) are set
         # ! fill in GET params for non-anymous users
         # - pass guest_token through to BBB API Queue
-        # - add template with inputs from signup and text boxes
-        # - add recording checkbox if record==True
+        # ! add template with inputs from signup and text boxes
+        # ! add recording checkbox if record==True
         # - check that group meeting is still usable
         # - URLS
             # join guest http://localhost:8000/bbb/aat-880-u6c-ygp/?username=
@@ -260,10 +289,13 @@ class BBBRoomGuestAccessView(TemplateView):
             # check if user is member of the bbb-room's source object and if so, redirect them to the room directly
             source_group = self.get_source_group(self.source_obj)
             if source_group and source_group.is_member(user) and hasattr(self.source_obj, 'get_absolute_url'):
+                if source_group == self.source_obj:
+                    return redirect(group_aware_reverse('cosinnus:group-meeting', kwargs={'group': source_group}))
                 return redirect(self.source_obj.get_absolute_url())
             
             # set the temporary BBB user guest token for this join process
             setattr(user, BBBRoom.BBB_USER_GUEST_TOKEN_ATTR, self.guest_token)
+            self.all_data_filled = True
         else:
             # if the anonymous user didn't fill out all the data required, sho
             self.username = request.GET.get('username', '').strip()
@@ -272,12 +304,13 @@ class BBBRoomGuestAccessView(TemplateView):
                 return super().get(request, *args, **kwargs)
             self.all_data_filled = True
             
+            # set the temporary BBB user with name and guest token for this join process
             user = BBBGuestTokenAnonymousUser()
-            # set the temporary BBB user guest token for this join process
             setattr(user, BBBRoom.BBB_USER_GUEST_TOKEN_ATTR, self.guest_token)
             setattr(user, 'bbb_user_name', self.username)
         
         self.media_tag = self.source_obj and getattr(self.source_obj, 'media_tag', None) or None
+        # without a media tag we cannot use the BBB queue API, so resolve the url and redirect directly
         if not self.media_tag:
             return self.resolve_bbb_room_url_and_redirect(user)
         return super().get(request, *args, **kwargs)
@@ -292,6 +325,9 @@ class BBBRoomGuestAccessView(TemplateView):
         })
         if self.all_data_filled: 
             meeting_url = reverse('cosinnus:bbb-room-queue-api', kwargs={'mt_id': self.media_tag.id})
+            meeting_url = f'{meeting_url}?guest_token={self.guest_token}'
+            if self.username:
+                meeting_url += f'&username={self.username}'
             context.update({
                 'meeting_url': meeting_url,
             })

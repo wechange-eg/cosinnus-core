@@ -17,7 +17,8 @@
         </p>
     {% endcaptureas %}
     {% captureas title %}{% trans "This session is being recorded" %}{% endcaptureas %}
-    {% captureas action %}.?consent=1{% endcaptureas %}
+    {% captureas current_params %}{% add_current_params %}{% endcaptureas %}
+    {% captureas action %}{% if current_params %}.{{ current_params }}&{% else %}.?{% endif %}consent=1{% endcaptureas %}
     {% trans "Continue" as continue_label %}
     {% include "cosinnus/modal_box.html" with id="consent_modal" label=label title=title submit_button_label=continue_label form_action=action action_as_href=True title_icon='fa fa-camera' %}
     <script type="text/javascript">
@@ -124,7 +125,7 @@
                 $('.error-frame').show();
             }
             {% if has_bbb_video %}
-                var bbb_queue_url = '{{ meeting_url }}';
+                var bbb_queue_url = '{{ meeting_url|safe }}';
                 function loadBBBUrl() {
                     $.ajax(bbb_queue_url, {
                         type: 'GET',
@@ -142,7 +143,7 @@
                 }
                 loadBBBUrl();
             {% elif has_fairmeeting_video %}
-                startVideoConference("{{ meeting_url }}");
+                startVideoConference("{{ meeting_url|safe }}");
             {% endif %}
         });
     </script>

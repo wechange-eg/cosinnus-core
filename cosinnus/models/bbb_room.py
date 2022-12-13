@@ -286,7 +286,7 @@ class BBBRoom(models.Model):
                 raise ImproperlyConfigured("NYI: This bbb room source object type for BBBRooms is not yet supported!")
             self._source_obj = None
         return self._source_obj
-
+    
     def restart(self):
         presentation_url = None
         source_obj = self.source_object
@@ -297,9 +297,7 @@ class BBBRoom(models.Model):
         
         # BBB guest access: append the `moderatorOnlyMessage` param by this BBB room's guest_token URL, if the message param exists
         guest_token = self.get_guest_token()
-        if guest_token and create_params.get('moderatorOnlyMessage', '').strip():
-            guest_url = group_aware_reverse('cosinnus:bbb-room-guest-access', kwargs={'guest_token': guest_token})
-            create_params['moderatorOnlyMessage'] += f' <a href="{guest_url}" target="_blank">{guest_url}</a> '
+        create_params = self.__class__.add_guest_link_moderator_only_message_to_params(create_params, guest_token)
             
         m_xml = self.bbb_api.start(
             name=self.name,
@@ -373,8 +371,7 @@ class BBBRoom(models.Model):
         
         # BBB guest access: append the `moderatorOnlyMessage` param by this BBB room's guest_token URL, if the message param exists
         guest_token = cls._generate_guest_token(source_object)
-        if guest_token and create_params.get('moderatorOnlyMessage', '').strip():
-            create_params['moderatorOnlyMessage'] += ' ' + group_aware_reverse('cosinnus:bbb-room-guest-access', kwargs={'guest_token': guest_token})
+        create_params = cls.add_guest_link_moderator_only_message_to_params(create_params, guest_token)
         
         m_xml = bbb_api.start(
             name=name,
@@ -496,6 +493,18 @@ class BBBRoom(models.Model):
                     portal_default_value = settings.BBB_PARAM_PORTAL_DEFAULTS.get(api_call_method, {}).get(blocked_param_name)
                     call_params[blocked_param_name] = portal_default_value
         return call_params
+    
+    @classmethod
+    def add_guest_link_moderator_only_message_to_params(cls, params, guest_token=None):
+        """ Adds a moderator message with a guest invite link to the create/join parameters of a BBB call """
+        if guest_token:
+            message = params.get('moderatorOnlyMessage', '').strip()
+            if message:
+                message += ' '
+            guest_link_text = settings.BBB_MODERATOR_MESSAGE_GUEST_LINK_TEXT
+            guest_url = group_aware_reverse('cosinnus:bbb-room-guest-access', kwargs={'guest_token': guest_token})
+            params['moderatorOnlyMessage'] = f'{message}{guest_link_text} <a href="{guest_url}" target="_blank">{guest_url}</a>'
+        return params
     
     def get_join_url(self, user):
         """ Returns the actual BBB-Server URL with tokens for a given user
