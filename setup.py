@@ -138,7 +138,7 @@ setup(
         'lxml==4.9.1',
         'html5lib',
         'html2text==2016.9.19',
-        'numpy==1.14.5',
+        'numpy==1.22.4',
         'oauthlib==3.0.1',
         'paramiko==2.11.0',
         'pycountry==20.7.3',
