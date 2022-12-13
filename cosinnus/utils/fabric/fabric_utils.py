@@ -85,6 +85,7 @@ def get_env():
 
 def setup_env(portal_name, domain, pull_branch, confirm=False, 
               base_path=None, pull_remote='origin',
+              frontend_pull_branch='main', frontend_pull_remote='origin',
               legacy_mode=False, special_requirements='requirements-production.txt'):
     """ 
         Sets up the env with all variables needed to run cosinnus 
@@ -111,14 +112,22 @@ def setup_env(portal_name, domain, pull_branch, confirm=False,
     env.username = portal_name
     env.host = f'{portal_name}@{domain}'
     env.path = f'{base_path}/htdocs'
+    env.frontend_path = f'{base_path}/frontend'
     env.virtualenv_path = f'{env.path}/.venv'
     env.backup_path = f'{base_path}/backups'
     env.maintenance_mode_path = base_path
     env.pull_branch = pull_branch
     env.pull_remote = pull_remote
-    env.reload_command = f'sudo /bin/systemctl restart django-{portal_name}.service'
-    env.stop_command = f'sudo /bin/systemctl stop django-{portal_name}.service'
-    env.start_command = f'sudo /bin/systemctl start django-{portal_name}.service'
+    env.frontend_pull_branch = frontend_pull_branch
+    env.frontend_pull_remote = frontend_pull_remote
+    if legacy_mode:
+        env.reload_command = f'sudo /bin/systemctl restart django-{portal_name}.service'
+        env.stop_command = f'sudo /bin/systemctl stop django-{portal_name}.service'
+        env.start_command = f'sudo /bin/systemctl start django-{portal_name}.service'
+    else:
+        env.reload_command = f'sudo systemctl restart django-{portal_name}-unit.service'
+        env.stop_command = f'sudo systemctl stop django-{portal_name}-unit.service'
+        env.start_command = f'sudo systemctl start django-{portal_name}-unit.service'
     env.memcached_restart_command = f'sudo /bin/systemctl restart django-{portal_name}-memcached.service'
     env.portal_additional_less_to_compile = [] # a list of django apps for which to compile extra less
     env.db_name = portal_name
