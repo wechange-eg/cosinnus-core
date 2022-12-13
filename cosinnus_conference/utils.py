@@ -61,8 +61,8 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
     # only in this case the email notification is allowed to ignore the `never` notification setting
     for recipient in recipients:
         ignore = False
-        if CosinnusConference.objects.filter(membership_mode=CosinnusConference.MEMBERSHIP_MODE_APPLICATION) \
-            and CosinnusConferenceApplication.objects.filter(Q(conference=group) & Q(may_be_contacted=True) & Q(user=recipient)):
+        if group.membership_mode == CosinnusConference.MEMBERSHIP_MODE_APPLICATION \
+            and CosinnusConferenceApplication.objects.filter(conference=group, may_be_contacted=True, user=recipient):
             ignore = True
         if not check_user_can_receive_emails(recipient, ignore_user_notification_settings=ignore):
             continue
