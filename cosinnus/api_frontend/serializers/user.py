@@ -15,10 +15,13 @@ from cosinnus.api_frontend.handlers.error_codes import ERROR_LOGIN_INCORRECT_CRE
     ERROR_LOGIN_USER_DISABLED, ERROR_SIGNUP_EMAIL_IN_USE, \
     ERROR_SIGNUP_CAPTCHA_SERVICE_DOWN, ERROR_SIGNUP_CAPTCHA_INVALID, \
     ERROR_SIGNUP_NAME_NOT_ACCEPTABLE, ERROR_SIGNUP_ONLY_ONE_MTAG_ALLOWED
+from cosinnus.api_frontend.serializers.dynamic_fields import CosinnusUserDynamicFieldsSerializerMixin
+from cosinnus.api_frontend.serializers.utils import validate_managed_tag_slugs
 from cosinnus.conf import settings
 from cosinnus.forms.user import USER_NAME_FIELDS_MAX_LENGTH, \
     UserSignupFinalizeMixin
-from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
+from cosinnus.models.managed_tags import CosinnusManagedTagAssignment, \
+    CosinnusManagedTag
 from cosinnus.models.profile import PROFILE_SETTINGS_AVATAR_COLOR, \
     PROFILE_DYNAMIC_FIELDS_CONTACTS
 from cosinnus.models.tagged import get_tag_object_model
@@ -54,7 +57,8 @@ class CosinnusUserLoginSerializer(serializers.Serializer):
         return {'user': user}
     
 
-class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializer):
+class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, CosinnusUserDynamicFieldsSerializerMixin,
+        serializers.Serializer):
     """ Serializer for the User Registration API endpoint """
     
     # email maxlength 220 instead of 254, to accomodate hashes to scramble them 
@@ -75,13 +79,20 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
     
     # managed tag field (see `COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM` and `_ManagedTagFormMixin`)
     if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF and settings.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM:
-        managed_tags = serializers.ListField(child=serializers.SlugField(allow_blank=False), allow_empty=True)
+        managed_tags = serializers.ListField(
+            required=settings.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED,
+            child=serializers.SlugField(allow_blank=False),
+            allow_empty=not bool(settings.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED)
+        )
+    
+    # for `CosinnusUserDynamicFieldsSerializerMixin`
+    filter_included_fields_by_option_name = 'in_signup'
+    DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
     
     # missing/not-yet-supported fields for the signup endpoint:
     
     # TODO: location field (see `COSINNUS_USER_SIGNUP_INCLUDES_LOCATION_FIELD`)
     # TODO: topic field (see `COSINNUS_USER_SIGNUP_INCLUDES_TOPIC_FIELD`)
-    # TODO: dynamic fields (see `UserCreationFormDynamicFieldsMixin`)
 
     def validate(self, attrs):
         """ We run validation all in one method, because we do not want to
@@ -121,10 +132,15 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
         # set last_name default to empty string (can't set default in field in class header)
         attrs['last_name'] = attrs.get('last_name', '')
         
-        # managed tags
+        # validate managed tags
         if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF and settings.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM:        
-            if len(attrs.get('managed_tags', [])) > 1 and not settings.COSINNUS_MANAGED_TAGS_ASSIGN_MULTIPLE_ENABLED:
-                raise ValidationError(ERROR_SIGNUP_ONLY_ONE_MTAG_ALLOWED)
+            managed_tag_slugs = attrs.get('managed_tags', [])
+            validate_managed_tag_slugs(
+                managed_tag_slugs,
+                settings.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED
+            )
+          
+        attrs = super().validate(attrs)
         return attrs
 
     def create(self, validated_data):
@@ -140,9 +156,13 @@ class CosinnusUserSignupSerializer(UserSignupFinalizeMixin, serializers.Serializ
         user.set_password(validated_data['password'])
         user.save()
         self.finalize_user_object_after_signup(user, validated_data)
-        # TODO: better try/catch this, or run in atomic?
-        if validated_data.get('managed_tags', []):
-            CosinnusManagedTagAssignment.update_assignments_for_object(user.cosinnus_profile, validated_data.get('managed_tags', []))
+        
+        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF and settings.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM: 
+            if validated_data.get('managed_tags', []):
+                CosinnusManagedTagAssignment.update_assignments_for_object(user.cosinnus_profile, validated_data.get('managed_tags', []))
+        
+        # for `CosinnusUserDynamicFieldsSerializerMixin`
+        self.save_dynamic_fields(validated_data, user.cosinnus_profile, save=True)
         return user
     
 
@@ -173,7 +193,8 @@ def validate_contact_info_pairs(pairs_array):
                     raise ValidationError(f'Contact_infos: A pair ({str(pair_dict)}) had an invalid URL!')
             
 
-class CosinnusHybridUserSerializer(TaggitSerializer, serializers.Serializer):
+class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSerializerMixin,
+        serializers.Serializer):
     """ A serializer that accepts and returns user fields as unprefixed fields,
         no matter if they are in the User, UserProfile or CosinnusTagObject models,
         so that one doesn't have to worry about database structures when changing user 
@@ -182,22 +203,30 @@ class CosinnusHybridUserSerializer(TaggitSerializer, serializers.Serializer):
     avatar = Base64ImageField(
         source='cosinnus_profile.avatar', 
         required=False,
+        default=None,
         help_text='Image file that handles Base64 image data'
     )
     # hex color code will be saved without the "#", but allows it to be supplied
     avatar_color = serializers.CharField(
         source=f'cosinnus_profile.settings.{PROFILE_SETTINGS_AVATAR_COLOR}', 
         required=False,
+        default=None,
         validators=[HexColorValidator()],
         help_text='A hex color string. Represented without a leading "#", but can be input with one.'
     )
     contact_infos = serializers.JSONField(
         source=f'cosinnus_profile.dynamic_fields.{PROFILE_DYNAMIC_FIELDS_CONTACTS}',
         required=False,
+        default=list,
         validators=[validate_contact_info_pairs],
         help_text='Array of objects in the format "[{type: "email|phone_number|url", value: "mail@mail.com"}, ...]"'
     )
-    description = serializers.CharField(source='cosinnus_profile.description', required=False, allow_blank=True)
+    description = serializers.CharField(
+        source='cosinnus_profile.description',
+        required=False,
+        default=None,
+        allow_blank=True
+    )
     email = serializers.EmailField(
         required=False, 
         validators=[MaxLengthValidator(220)],
@@ -206,6 +235,7 @@ class CosinnusHybridUserSerializer(TaggitSerializer, serializers.Serializer):
     )
     first_name = serializers.CharField(
         required=False,
+        default='',
         validators=[MinLengthValidator(2), MaxLengthValidator(USER_NAME_FIELDS_MAX_LENGTH), validate_username],
         help_text='The display name of the user'
     )
@@ -219,35 +249,53 @@ class CosinnusHybridUserSerializer(TaggitSerializer, serializers.Serializer):
     location = serializers.CharField(
         source='cosinnus_profile.media_tag.location', 
         required=False, allow_blank=True,
+        default=None,
         help_text='On input, this string is used to determine the lat/lon fields using a nominatim service')
     location_lat = serializers.FloatField(
         source='cosinnus_profile.media_tag.location_lat',
         read_only=True,
+        default=None,
         help_text='read-only, lat/lon determined from "location" field')
     location_lon = serializers.FloatField(
         source='cosinnus_profile.media_tag.location_lon', 
         read_only=True, 
+        default=None,
         help_text='read-only, lat/lon determined from "location" field'
     )
+    # managed tag field (see `COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM` and `_ManagedTagFormMixin`)
+    if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:
+        managed_tags = serializers.ListField(
+            required=settings.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED,
+            child=serializers.SlugField(allow_blank=False),
+            allow_empty=not bool(settings.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED),
+            source='cosinnus_profile.get_managed_tag_slugs'
+        )
     tags = TagListSerializerField(
         required=False, 
+        default=list,
         source='cosinnus_profile.media_tag.tags',
         help_text='An array of string tags'
     )
     topics = serializers.MultipleChoiceField(
         required=False, 
         allow_blank=True, 
+        default=list,
         choices=get_tag_object_model().TOPIC_CHOICES,
         source='cosinnus_profile.media_tag.get_topic_ids',
         help_text=f'Array of ints for corresponding topics: {str(get_tag_object_model().TOPIC_CHOICES)}'
     )
     visibility = serializers.ChoiceField(
         required=False, 
-        allow_blank=False, 
+        allow_blank=False,
+        default=None,
         choices=get_tag_object_model()._VISIBILITY_CHOICES,
         source='cosinnus_profile.media_tag.visibility',
         help_text=f'(optional) Int for corresponding visibility setting: {str(get_tag_object_model()._VISIBILITY_CHOICES)}. Default when omitted is different for each portal.'
     )
+    
+    # for `CosinnusUserDynamicFieldsSerializerMixin`
+    all_fields_optional = True
+    DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
     
     def get_visibility(self, instance):
         return instance.cosinnus_profile.media_tag.visibility
@@ -257,6 +305,20 @@ class CosinnusHybridUserSerializer(TaggitSerializer, serializers.Serializer):
         if get_user_model().objects.filter(email__iexact=email):
             raise ValidationError(ERROR_SIGNUP_EMAIL_IN_USE)
         return email
+    
+    def validate(self, attrs):
+        # validate managed tags
+        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:        
+            profile_data = attrs.get('cosinnus_profile', {})
+            if 'get_managed_tag_slugs' in profile_data:
+                managed_tag_slugs = profile_data.get('get_managed_tag_slugs', [])
+                validate_managed_tag_slugs(
+                    managed_tag_slugs,
+                    settings.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED
+                )
+          
+        attrs = super().validate(attrs)
+        return attrs
     
     def update(self, instance, validated_data):
         user_data = validated_data
@@ -310,10 +372,17 @@ class CosinnusHybridUserSerializer(TaggitSerializer, serializers.Serializer):
                     media_tag.location_lat = location.latitude
                     media_tag.location_lon = location.longitude
         
+        # for `CosinnusUserDynamicFieldsSerializerMixin`
+        self.save_dynamic_fields(validated_data, profile, save=False)
+        
         # TODO: all validation/profile-update view side effects, triggers, and additional 
         #       code from the userprofileform and userprofileupdateview need to be used here as well!
         media_tag.save()
         profile.save()
         instance.save()
+        if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:
+            if 'get_managed_tag_slugs' in profile_data:
+                managed_tag_ids = profile_data.get('get_managed_tag_slugs', [])
+                CosinnusManagedTagAssignment.update_assignments_for_object(user.cosinnus_profile, managed_tag_ids)
         return instance
     

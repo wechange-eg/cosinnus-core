@@ -171,8 +171,7 @@ class CosinnusConferenceSettingsInline(GenericStackedInline):
 
 class PermanentRedirectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
     list_display = ('to_group', 'from_slug', 'from_type', 'from_portal',)
-    list_filter = ('from_portal', 'from_slug', 'to_group')
-    search_fields = ('to_group__name', )
+    search_fields = ('from_slug', 'from_type', 'to_group__name', )
     
     def queryset(self, request):
         """ For non-admins, only show the routepoints from their caravan """

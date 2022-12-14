@@ -12,4 +12,6 @@ ERROR_SIGNUP_CAPTCHA_INVALID = "The captcha was not filled or was invalid"
 ERROR_SIGNUP_CAPTCHA_SERVICE_DOWN = "The captcha service could not be reached"
 ERROR_SIGNUP_NAME_NOT_ACCEPTABLE = "This first_name is not acceptable"
 ERROR_SIGNUP_ONLY_ONE_MTAG_ALLOWED = "Only one managed tag can be assigned on this portal!"
+ERROR_SIGNUP_MTAG_REQUIRED = "A managed tag is required to be assigned!"
+ERROR_SIGNUP_MTAG_UNKNOWN = "The supplied managed tags do not exist: %s"
 
