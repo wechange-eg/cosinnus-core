@@ -24,10 +24,13 @@
 {% include 'cosinnus/fields/default_field.html' with field=form.forms.media_tag.topics label=topics_label placeholder=topics_placeholder large_field=True %}
 
 
-{# Tags Field #}
-{% trans "What would you like to learn?" as tags_label %}
-{% trans "Select or create tags" as tags_placeholder %}
-{% include 'cosinnus/fields/default_field.html' with field=form.forms.media_tag.tags label=tags_label placeholder=tags_placeholder large_field=True %}
+{% if SETTINGS.COSINNUS_TAGS_ENABLED %}
+	{# Tags Field #}
+	{% trans "What would you like to learn?" as tags_label %}
+	{% trans "Select or create tags" as tags_placeholder %}
+	{% include 'cosinnus/fields/default_field.html' with field=form.forms.media_tag.tags label=tags_label placeholder=tags_placeholder large_field=True %}
+{% endif %}
+
 
 {% if SETTINGS.COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED == None %}
 	{# Visibility Field #}

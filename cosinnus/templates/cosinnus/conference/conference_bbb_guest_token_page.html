@@ -1,0 +1,87 @@
+{% extends "cosinnus_event/base.html" %}
+{% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
+
+{% block html_attributes %}class="mobile-noscroll"{% endblock html_attributes %}
+
+{% block page_title %}{% trans "Join BBB Meeting as guest" %} {{ block.super }}{% endblock page_title %}
+
+{% block leftnav %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+{% endblock %}
+
+{% block main_page %}
+    {{ block.super }}
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12"> 
+            {% captureas meeting_header %}
+                <h2>
+                    <p class="navi-explanation">
+		                {% if source_group %}
+		                    <a href="{{ source_group.get_absolute_url }}" target="_blank" >{{ source_group.name }}</a>:
+		                {% endif %}
+	                    {{ meeting_name }}
+	                <p>
+                </h2>
+            {% endcaptureas %}   
+            
+            {% if meeting_url %}
+                {{ meeting_header }}
+                <div class="content-box"> <!-- a box with semi transparent background -->
+	                {% include 'cosinnus/conference/conference_meeting_single.html' %}
+	            </div><!-- content-box -->
+            {% else %}
+                <div class="row">
+                    <div class="col-lg-2 col-md-2">  
+                    </div>
+                    <div class="col-lg-8 col-md-8">  
+                        {{ meeting_header }}
+                            
+			            <div class="content-box"> <!-- a box with semi transparent background -->
+				            <h3>{% trans "You are joining a meeting as a guest" %}</h3>
+				            
+				            <form>
+							    {% if request.GET.username %}
+			                        {% captureas name_val %}{{ request.GET.username }}{% endcaptureas %}
+			                    {% elif request.session.bbb_guest_username %}
+			                        {% captureas name_val %}{{ request.session.bbb_guest_username }}{% endcaptureas %}
+			                    {% endif %}
+			                    {% trans "Your name" as your_name_trans %}
+			                    {% trans "Please enter your name" as enter_your_name %}
+			                    {% include 'cosinnus/fields/default_field.html' with field=form.username label=enter_your_name placeholder=your_name_trans field_value=name_val %}
+			                    
+							    {% include 'cosinnus/registration/extra_signup_fields.html' %}
+						    </form>
+				        </div>
+				        <script type="text/javascript">
+				            function redirectToBBB() {
+				                try {
+		                            var form = document.querySelector('form');
+		                            if (!form.reportValidity()) {
+		                                return;
+		                            }
+		                        } catch (e) {}
+				                var tos_check = $('input[name="tos_check"]').is(':checked') ? "true" : "false";
+				                window.location.href = '?username=' + $('input[name="username"]').val() + '&tos_check=' + tos_check;
+				            }
+				        </script>
+				        <button type="button" class="btn btn-emphasized btn-autosize" onclick="redirectToBBB();">
+				            <ul class="media-list">
+				                <li class="media">
+				                    <span class="pull-left" href="#" tabindex="-1">
+				                        <i class="fa fa-check"></i>
+				                    </span>
+				                    <div class="media-body">
+				                        {% trans "Join Meeting" %}
+				                    </div>
+				                </li>
+				            </ul>
+				        </button>
+                    </div>
+                </div>
+		    {% endif %}
+        </div>
+    </div>
+{% endblock %}

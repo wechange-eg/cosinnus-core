@@ -26,18 +26,20 @@
 	{% endif %}
 {% endwith %}
 
-{% for tag in object.media_tag_object.tags.all %}
-    {% if forloop.first %} 
-    <legend>{% trans "Tags" %}</legend>
-    <p class="transparent">
-        <i class="fa fa-fw fa-bolt"></i> 
-    {% endif %}
-    {% if not forloop.first %}, {% endif %}
-    {{ tag }}
-    {% if forloop.last %}
-    </p>
-    {% endif %}
-{% endfor %}
+{% if SETTINGS.COSINNUS_TAGS_ENABLED %}
+	{% for tag in object.media_tag_object.tags.all %}
+		{% if forloop.first %} 
+			<legend>{% trans "Tags" %}</legend>
+			<p class="transparent">
+				<i class="fa fa-fw fa-bolt"></i> 
+		{% endif %}
+		{% if not forloop.first %}, {% endif %}
+		{{ tag }}
+		{% if forloop.last %}
+		</p>
+		{% endif %}
+	{% endfor %}
+{% endif %}
 
 {% if object.website %}
     <legend>{% trans "Website" %}</legend>

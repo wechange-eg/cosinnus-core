@@ -462,6 +462,10 @@ class CosinnusConf(AppConf):
     # Note! this is reflected in migration 0113! If the setting is changed afte the migration
     # has been run, previous values of all existing groups will remain unchanged!
     GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE = True
+
+    # if True, enables an option to choose related groups/projects in the groups/projects 
+    # settings showing the chosen ones on microsite and dashboard
+    RELATED_GROUPS_PROJECTS_ENABLED = True
     
     # this is the thumbnail size for small image previews
     IMAGE_THUMBNAIL_SIZE_SCALE = (80, 80)
@@ -1160,6 +1164,9 @@ class CosinnusConf(AppConf):
     # map content types
     MANAGED_TAGS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = []
 
+    # if True, enables `tag` function in the group/project settins, files, todos, events, etc.
+    TAGS_ENABLED = True
+
     # text topic filters will only be shown on the map for these
     # map content types (and if any text topics even exist)
     TEXT_TOPICS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED = []
@@ -1189,7 +1196,7 @@ class CosinnusConf(AppConf):
         0: (None, None),
     }
     
-    BBB_RESOLVE_CLUSTER_REDIRECTS_IF_URL_MATCHES = lambda url: url.startswith('https://bbbatscale') or url.startswith('https://scalelite')
+    BBB_RESOLVE_CLUSTER_REDIRECTS_IF_URL_MATCHES = lambda url: True
     
     # whether to enable BBB conferences in legacy groups/projects and events itself,
     # independent of a conference
@@ -1291,6 +1298,14 @@ class CosinnusConf(AppConf):
     # types of CosinnusBaseGroup which are allowed to use direct join tokens:
     # 0 for projects; 1 for groups; 2 for conferences
     ENABLE_USER_JOIN_TOKENS_FOR_GROUP_TYPE = []
+
+    # should the LIKE, BOOKMARK, FOLLOW buttons be shown on the entire portal (microsite, groups/projects, events, etc.)?
+    SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS = True
+
+    # if True, the User Match feature will be enabled
+    ENABLE_USER_MATCH = False
+
+
     
     # whether to require a valid hcaptcha on the signup API endpoint
     USE_HCAPTCHA = True
@@ -1331,11 +1346,16 @@ class CosinnusDefaultSettings(AppConf):
     # than provided in max_participants during room creation
     BBB_ROOM_FIX_PARTICIPANT_COUNT_PLUS_ONE = False
     
+    # text that gets appended to the create `moderatorOnlyMessage`
+    # along with the guest invite url appended to its end
+    BBB_MODERATOR_MESSAGE_GUEST_LINK_TEXT = _('To invite external guests, share this link:')
+    
     # the default BBB create-call parameters for all room types
     BBB_DEFAULT_CREATE_PARAMETERS = {
         "record": False,
         "autoStartRecording": False,
-        "allowStartStopRecording": True
+        "allowStartStopRecording": True,
+        "guestPolicy": 'ALWAYS_ACCEPT', # always by default allow guest access
     }
     
     """

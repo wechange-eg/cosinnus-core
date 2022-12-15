@@ -18,8 +18,12 @@ from cosinnus.utils.permissions import check_user_can_receive_emails
 from uritemplate.api import variables
 from django.template.defaultfilters import date
 from cosinnus.utils.html import render_html_with_variables
+from cosinnus.models.conference import CosinnusConferenceApplication
 from cosinnus.models.group_extra import CosinnusConference
 from django.utils.timezone import now
+from django.db.models import Q
+from cosinnus.utils.urls import group_aware_reverse
+from django.contrib.auth.models import AnonymousUser
 
 
 def get_initial_template(field_name):
@@ -33,7 +37,7 @@ def get_initial_template(field_name):
 
 def send_conference_reminder(group, recipients=None, field_name="week_before", update_setting=True):
     """
-    Send conference reminder email a week/day/hour before start
+    Send conference reminder email a week/day/hour/immediately before start
     """
     # set these here, as they should always be in the translation of the sending user
     # as they saw it before sending, and not in the language of the receiving user that we set later
@@ -50,11 +54,18 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
         }
         return render_html_with_variables(user, template, variables)
     
+    # does not apply for `Send immediately`-`All applicants` case -> see the usage of `NoConferenceApplicantsFoundException` for further details
     if not recipients:
         recipients = group.actual_members
     
+    # check if conference has the `Request application` method: 
+    # only in this case the email notification is allowed to ignore the `never` notification setting
     for recipient in recipients:
-        if not check_user_can_receive_emails(recipient):
+        ignore = False
+        if group.membership_mode == CosinnusConference.MEMBERSHIP_MODE_APPLICATION \
+            and CosinnusConferenceApplication.objects.filter(conference=group, may_be_contacted=True, user=recipient):
+            ignore = True
+        if not check_user_can_receive_emails(recipient, ignore_user_notification_settings=ignore):
             continue
         
         # switch language to user's preference language
@@ -80,7 +91,13 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
                 'action_button_1_text': _('Go to conference'),
                 'action_button_1_url': group.get_absolute_url(),
             }
-            send_notification_item_html(recipient, subject, context)
+            # do not show the regular "Unsubscribe" link but instead show a link to the member page
+            extra_data = {
+                'notification_reason': notification_reason,
+                'prefs_url': group_aware_reverse('cosinnus:group-detail', kwargs={'group': group}),
+                'unsubscribe_url': '',
+            }
+            send_notification_item_html(recipient, subject, context, notification_reason, extra_data=extra_data)
         finally:
             translation.activate(cur_language)
 
@@ -115,5 +132,14 @@ def update_conference_premium_status(conferences=None):
     
     non_premium_to_activate.update(is_premium_currently=True)
     premium_to_deactivate.update(is_premium_currently=False)
-    
 
+
+class BBBGuestTokenAnonymousUser(AnonymousUser):
+    """ An anonymous user class that is used while an anonymous user
+        is accessing a BBB room via a guest_token URL link. """
+    
+    is_bbb_guest_token_user = True
+    bbb_user_name = 'BBB Guest User'
+    
+    def get_full_name(self):
+        return self.bbb_user_name

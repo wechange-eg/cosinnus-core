@@ -13,9 +13,9 @@
 {% endblock media_tag_topics_field %}
 
 
-{# Tags Field #}
-{% trans "Which tags further describe your activities?" as tags_label %}
-{% trans "Select or create tags" as tags_placeholder %}
-{% include 'cosinnus/fields/default_field.html' with field=form.forms.media_tag.tags label=tags_label placeholder=tags_placeholder large_field=True %}
-
-
+{% if SETTINGS.COSINNUS_TAGS_ENABLED %}
+	{# Tags Field #}
+	{% trans "Which tags further describe your activities?" as tags_label %}
+	{% trans "Select or create tags" as tags_placeholder %}
+	{% include 'cosinnus/fields/default_field.html' with field=form.forms.media_tag.tags label=tags_label placeholder=tags_placeholder large_field=True %}
+{% endif %}

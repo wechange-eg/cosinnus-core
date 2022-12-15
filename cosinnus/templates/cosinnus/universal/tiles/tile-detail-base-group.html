@@ -48,33 +48,35 @@
 {% endblock related_content %}
 
 {% block action_buttons %}
-    {% if controlView.portalInfo.current == portal %}
-        <a class="rounded-button button-action
-                {% if cosinnus_active_user %}button-follow" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
-            <span class="rounded-button-inner">
-                {% if followed %}
-                    <i clasS="fas fa-bell"></i>
-                    {# Translators: __INCLUDE_JS_PO__ #}
-                    {% trans "Following" %}
-                {% else %}
-                    <i clasS="far fa-bell"></i>
-                    {# Translators: __INCLUDE_JS_PO__ #}
-                    {% trans "Follow" %}
-                {% endif %}
-            </span>
-        </a>
+    {% if COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+        {% if controlView.portalInfo.current == portal %}
+            <a class="rounded-button button-action
+                    {% if cosinnus_active_user %}button-follow" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
+                <span class="rounded-button-inner">
+                    {% if followed %}
+                        <i clasS="fas fa-bell"></i>
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Following" %}
+                    {% else %}
+                        <i clasS="far fa-bell"></i>
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Follow" %}
+                    {% endif %}
+                </span>
+            </a>
 
-        <a class="rounded-button button-action {% if cosinnus_active_user %} button-star {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}">
-            <span class="rounded-button-inner">
-                {% if starred %}
-                    <i class="fas fa-star"></i>
-                    {{ starringLabel }}
-                {% else %}
-                    <i class="far fa-star"></i>
-                    {{ starLabel }}
-                {% endif %}
-            </span>
-        </a>
+            <a class="rounded-button button-action {% if cosinnus_active_user %} button-star {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}">
+                <span class="rounded-button-inner">
+                    {% if starred %}
+                        <i class="fas fa-star"></i>
+                        {{ starringLabel }}
+                    {% else %}
+                        <i class="far fa-star"></i>
+                        {{ starLabel }}
+                    {% endif %}
+                </span>
+            </a>
+        {% endif %}
     {% endif %}
 {% endblock action_buttons %}
 

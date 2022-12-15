@@ -403,7 +403,7 @@
                             {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.parent label=parent_label placeholder=parent_placeholder %}
                         {% endif %}
                         
-                        {% if not group_model == "CosinnusConference" %}
+                        {% if not group_model == "CosinnusConference" and SETTINGS.COSINNUS_RELATED_GROUPS_PROJECTS_ENABLED %}
 	                        {% if form.forms.obj.related_groups %}
 	                            {# Related Groups Field #}
                                 {% trans "Are there any projects/groups related to this one?" as related_label %}

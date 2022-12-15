@@ -49,8 +49,10 @@
 			<legend class="large-space userprofile-title ">{{ this_user.cosinnus_profile.get_extended_full_name }}</legend>
             
 			{% block buttons %}
-				{% if request.user.is_authenticated and not this_user == request.user %}
-				    {% include 'cosinnus/common/likefollowstar/star_button_btn.html' with user=request.user object=this_user.cosinnus_profile %}
+				{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+					{% if request.user.is_authenticated and not this_user == request.user %}
+						{% include 'cosinnus/common/likefollowstar/star_button_btn.html' with user=request.user object=this_user.cosinnus_profile %}
+					{% endif %}
 				{% endif %}
 	
 		        {% if request.user.is_authenticated and request.user == this_user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}

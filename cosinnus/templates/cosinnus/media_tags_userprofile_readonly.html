@@ -25,7 +25,7 @@
 {% endwith %}
 
 {% with tags=object.media_tag_object.tags.all %}
-    {% if tags %}
+    {% if SETTINGS.COSINNUS_TAGS_ENABLED and tags %}
         <legend>{% trans "What I wish to learn" %}</legend>
         <p class="transparent">
             <i class="fa fa-fw fa-bolt"></i> 

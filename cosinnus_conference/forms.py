@@ -275,3 +275,11 @@ class ConferencePremiumBlockForm(CleanFromToDateFieldsMixin, forms.ModelForm):
     class Meta:
         model = CosinnusConferencePremiumBlock
         fields = ['from_date', 'to_date', 'participants']
+
+
+class BBBGuestAccessForm(forms.Form):
+    """ Used for having guests enter their username and ToS accept """
+    
+    username = forms.CharField(max_length=50)
+    tos_check = forms.BooleanField(label='tos_check', required=True)
+    

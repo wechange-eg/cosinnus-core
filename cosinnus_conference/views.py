@@ -635,6 +635,20 @@ class ConferenceRecordedMeetingDeleteView(ConferenceRecordedMeetingsView):
         return redirect(redirect_url)
 
 
+class NoRecipientsDefinedException(Exception):
+    """
+    Workaround exception to throw in case the `Recipients` field was left empty.
+    """
+    pass
+
+
+class NoConferenceApplicantsFoundException(Exception):
+    """
+    Workaround exeption to throw in case there are no pending applications found. 
+    """
+    pass
+
+
 class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
                                          RequireWriteMixin,
                                          GroupIsConferenceMixin,
@@ -645,8 +659,58 @@ class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
     message_success = _('Conference reminder settings '
                         'have been successfully updated.')
 
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            return super().dispatch(request, *args, **kwargs)
+        except NoRecipientsDefinedException:
+            messages.error(self.request, _('Please supply one ore more recipients.'))
+            return redirect(group_aware_reverse('cosinnus:conference:reminders',
+                                   kwargs={'group': self.group}))
+        except NoConferenceApplicantsFoundException:
+            messages.error(self.request, _('No conference applicants found at the moment.'))
+            return redirect(group_aware_reverse('cosinnus:conference:reminders',
+                                   kwargs={'group': self.group}))
+
     def get_members(self):
         return self.group.actual_members
+
+        if recipient_choice is None or not is_number(recipient_choice):
+            logger.error('Invalid value for recipients in ConferenceConfirmSendRemindersView:get_members() function', extra={'recipient_choice': recipient_choice})
+            raise NoRecipientsDefinedException()
+        recipient_choice = int(recipient_choice)
+
+        # handle diverse cases in accordance with the `recipients_choices` choice field
+        if recipient_choice == CHOICE_APPLICANTS_AND_MEMBERS:
+            pending_application_qs = CosinnusConferenceApplication.objects.filter(conference=self.group).filter(may_be_contacted=True).pending_and_accepted()
+            all_user_ids = pending_application_qs.values_list('user', flat=True)
+            members_user_ids = self.group.members # covers the current members of the group incl. admins
+            recipients_applicants_and_members = filter_active_users(get_user_model().objects.filter(Q(id__in=all_user_ids) | Q(id__in=members_user_ids)))
+            return recipients_applicants_and_members 
+        elif recipient_choice == CHOICE_ALL_APPLICANTS:
+            pending_application_qs = CosinnusConferenceApplication.objects.filter(conference=self.group).filter(may_be_contacted=True).pending()
+            all_user_ids = pending_application_qs.values_list('user', flat=True)
+            recipients_all_applicants = filter_active_users(get_user_model().objects.filter(id__in=all_user_ids))
+            if not recipients_all_applicants:
+                raise NoConferenceApplicantsFoundException()
+            return recipients_all_applicants
+        elif recipient_choice == CHOICE_ALL_MEMBERS:
+            members_qs = CosinnusConferenceApplication.objects.filter(conference=self.group).filter(may_be_contacted=True).accepted_in_past()
+            all_user_ids = members_qs.values_list('user', flat=True)
+            members_user_ids = self.group.members
+            participants_all_members = filter_active_users(get_user_model().objects.filter(Q(id__in=all_user_ids) | Q(id__in=members_user_ids)))
+            return participants_all_members
+        elif recipient_choice == CHOICE_INDIVIDUAL:
+            pending_application_qs = CosinnusConferenceApplication.objects.filter(conference=self.group).filter(may_be_contacted=True).pending_and_accepted()
+            all_user_ids = pending_application_qs.values_list('user', flat=True)
+            members_user_ids = self.group.members
+            required_user_ids = self.group.dynamic_fields.get('reminder_send_immediately_users', [])
+            if not required_user_ids:
+                raise NoRecipientsDefinedException()
+            recipients_individual = filter_active_users(get_user_model().objects.filter(id__in=required_user_ids).filter(Q(id__in=all_user_ids) | Q(id__in=members_user_ids)))
+            return recipients_individual
+        else:
+            logger.error('Unknown choice for recipients in ConferenceConfirmSendRemindersView:get_members() function', extra={'recipient_choice': recipient_choice})
+            raise NoRecipientsDefinedException()
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()

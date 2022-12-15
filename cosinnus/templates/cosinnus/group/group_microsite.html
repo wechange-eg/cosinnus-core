@@ -237,7 +237,7 @@
 					<p>
 						{% block microsite_metadata %}
 					        {% with tags=group.media_tag_object.tags.all topics=group.media_tag_object.topics %}
-						        {% if tags %}
+						        {% if SETTINGS.COSINNUS_TAGS_ENABLED and tags %}
 						        	<b>{% trans "Tags" %}:</b>
 									{% for tag in tags %}
 									    {{ tag }}{% if not forloop.last %}, {% endif %}
@@ -254,16 +254,18 @@
 						{% endblock microsite_metadata %}
 					</p>
 					
-	                {% with related_groups=group.related_groups.all %}
-		        		{% if related_groups %}
-		        			<p class="transparent">
-			        			{% trans "Related Projects/Groups" %}: 
-			        			{% for related_group in related_groups %}
-			        				<a href="{{ related_group.get_absolute_url }}">{{ related_group.name }}</a>{% if not forloop.last %}, {% endif %}
-			        			{% endfor %}
-		        			</p>
-		        		{% endif %}
-		        	{% endwith %}
+					{% if SETTINGS.COSINNUS_RELATED_GROUPS_PROJECTS_ENABLED %}
+						{% with related_groups=group.related_groups.all %}
+							{% if related_groups %}
+								<p class="transparent">
+									{% trans "Related Projects/Groups" %}: 
+									{% for related_group in related_groups %}
+										<a href="{{ related_group.get_absolute_url }}">{{ related_group.name }}</a>{% if not forloop.last %}, {% endif %}
+									{% endfor %}
+								</p>
+							{% endif %}
+						{% endwith %}
+					{% endif %}
 		        	
 		        	{% comment %}  
                         For portals that have COSINNUS_MANAGED_TAGS_ENABLED enabled, show the tags here
@@ -282,16 +284,18 @@
                     {% endblock %}
 		        	
 	        	    <br/>
-	        	    <div>
-	        	        {% if group.type == 0 %}
-	        	            {% trans "You will now receive notifications for content posted in this project." as follow_success_message %}
-	        	        {% else %}
-	        	            {% trans "You will now receive notifications for content posted in this group." as follow_success_message %}
-						{% endif %}
-						{% include 'cosinnus/common/likefollowstar/star_button.html' with object=group %}
-						{% include 'cosinnus/common/likefollowstar/follow_button.html' with object=group success_message=follow_success_message %}
-                        {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=group %}
-	        	    </div>
+					{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+						<div>
+							{% if group.type == 0 %}
+								{% trans "You will now receive notifications for content posted in this project." as follow_success_message %}
+							{% else %}
+								{% trans "You will now receive notifications for content posted in this group." as follow_success_message %}
+							{% endif %}
+							{% include 'cosinnus/common/likefollowstar/star_button.html' with object=group %}
+							{% include 'cosinnus/common/likefollowstar/follow_button.html' with object=group success_message=follow_success_message %}
+							{% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=group %}
+						</div>
+					{% endif %}
 					
 					{% block social_media_buttons %}
 						{% if SETTINGS.COSINNUS_MICROSITE_SHOW_SOCIAL_MEDIA_BUTTONS %}

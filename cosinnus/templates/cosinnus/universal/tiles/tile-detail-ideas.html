@@ -48,46 +48,48 @@
 
 {% block action_buttons %}
     <div class="tile-section tile-section-button-list">
-        {% if controlView.portalInfo.current == portal %}
-            <a class="rounded-button button-action 
-                    {% if cosinnus_active_user %}button-like" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
-                <span class="rounded-button-inner">
-                    {% if liked %}
-                        <i clasS="fas fa-heart"></i>
-                        {# Translators: __INCLUDE_JS_PO__ #}
-                        {% trans "Liked" %}
-                    {% else %}
-                        <i clasS="far fa-heart"></i>
-                        {# Translators: __INCLUDE_JS_PO__ #}
-                        {% trans "Like" %}
-                    {% endif %}
-                </span>
-            </a>
-            {% if liked %}
-                <a class="rounded-button button-action button-star">
+        {% if COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}  
+            {% if controlView.portalInfo.current == portal %}
+                <a class="rounded-button button-action 
+                        {% if cosinnus_active_user %}button-like" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
                     <span class="rounded-button-inner">
-                        {% if starred %}
-                            <i class="fas fa-star"></i>
-                            {{ starringLabel }}
+                        {% if liked %}
+                            <i clasS="fas fa-heart"></i>
+                            {# Translators: __INCLUDE_JS_PO__ #}
+                            {% trans "Liked" %}
                         {% else %}
-                            <i class="far fa-star"></i>
-                            {{ starLabel }}
+                            <i clasS="far fa-heart"></i>
+                            {# Translators: __INCLUDE_JS_PO__ #}
+                            {% trans "Like" %}
                         {% endif %}
                     </span>
                 </a>
-                <a class="rounded-button button-action button-follow">
-                    <span class="rounded-button-inner">
-                        {% if followed %}
-                            <i clasS="fas fa-bell"></i>
-                            {# Translators: __INCLUDE_JS_PO__ #}
-                            {% trans "Following" %}
-                        {% else %}
-                            <i clasS="far fa-bell"></i>
-                            {# Translators: __INCLUDE_JS_PO__ #}
-                            {% trans "Follow" %}
-                        {% endif %}
-                    </span>
-                </a>
+                {% if liked %}
+                    <a class="rounded-button button-action button-star">
+                        <span class="rounded-button-inner">
+                            {% if starred %}
+                                <i class="fas fa-star"></i>
+                                {{ starringLabel }}
+                            {% else %}
+                                <i class="far fa-star"></i>
+                                {{ starLabel }}
+                            {% endif %}
+                        </span>
+                    </a>
+                    <a class="rounded-button button-action button-follow">
+                        <span class="rounded-button-inner">
+                            {% if followed %}
+                                <i clasS="fas fa-bell"></i>
+                                {# Translators: __INCLUDE_JS_PO__ #}
+                                {% trans "Following" %}
+                            {% else %}
+                                <i clasS="far fa-bell"></i>
+                                {# Translators: __INCLUDE_JS_PO__ #}
+                                {% trans "Follow" %}
+                            {% endif %}
+                        </span>
+                    </a>
+                {% endif %}
             {% endif %}
         {% endif %}
         <a href="{% if action_url_1 %}{{ action_url_1 }}{% else %}{{ url }}{% endif %}" target="_blank" class="rounded-button button-action">

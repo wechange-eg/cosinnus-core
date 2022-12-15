@@ -222,7 +222,7 @@ def get_html_mail_data(to_user, subject, html_content, use_notification_item_htm
         'origin_name': portal.name,
         'origin_url': domain,
         'origin_image_url': portal_image_url,
-        
+
         'notification_raw_html': None, # this is raw-html pastable section
         'notification_item_html': None,
     }

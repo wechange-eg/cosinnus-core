@@ -162,9 +162,11 @@
 							{% endif %}
 						{% endblock %}
 					</div>
-					<div class="action-buttons">
-						{% block action_buttons %}{% endblock %}
-					</div>
+					{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+						<div class="action-buttons">
+							{% block action_buttons %}{% endblock %}
+						</div>
+					{% endif %}
 				</div>
 				
 				<hr class="seperator {% if not comments %}remove-if-prev-empty{% endif %}" />
