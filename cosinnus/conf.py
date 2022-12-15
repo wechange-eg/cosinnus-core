@@ -1270,6 +1270,10 @@ class CosinnusConf(AppConf):
     # should the LIKE, BOOKMARK, FOLLOW buttons be shown on the entire portal (microsite, groups/projects, events, etc.)?
     SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS = True
 
+    # if True, the User Match feature will be enabled
+    ENABLE_USER_MATCH = False
+
+
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.
         These are settings used by default in cosinnus apps, such as avatar dimensions, etc.

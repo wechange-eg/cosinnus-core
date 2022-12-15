@@ -4,42 +4,38 @@ from __future__ import unicode_literals
 from builtins import str
 from datetime import timedelta
 import logging
-from uuid import uuid1
 
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import logout, get_user_model
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import ObjectDoesNotExist, ValidationError, \
-    PermissionDenied
-from django.forms.fields import CharField
+from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
 from django.http.response import Http404, HttpResponseRedirect
 from django.urls import reverse
+from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, UpdateView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import DeleteView
+from oauth2_provider import models as oauth2_provider_models
 
 from cosinnus.core import signals
 from cosinnus.core.decorators.views import redirect_to_not_logged_in
+from cosinnus.core.mail import send_html_mail
 from cosinnus.forms.profile import UserProfileForm
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, \
     CosinnusPortal
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import BaseTagObject, get_tag_object_model
 from cosinnus.models.widget import WidgetConfig
-from cosinnus.templatetags.cosinnus_tags import cosinnus_setting, textfield
+from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.permissions import check_user_integrated_portal_member, \
     check_user_can_see_user, check_user_superuser
-from cosinnus.utils.urls import safe_redirect
+from cosinnus.utils.user import filter_active_users
 from cosinnus.views.mixins.avatar import AvatarFormMixin
 from cosinnus.views.user import send_user_email_to_verify
-from django.utils.crypto import get_random_string
-from oauth2_provider import models as oauth2_provider_models
-from cosinnus.core.mail import send_html_mail
-from cosinnus.utils.user import filter_active_users
 
 
 logger = logging.getLogger('cosinnus')
@@ -422,6 +418,7 @@ class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, DeleteView)
         messages.success(self.request, self.message_success)
         
         return HttpResponseRedirect(self.get_success_url())
-    
+
+
 
 delete_view = UserProfileDeleteView.as_view()
