@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-15 15:34+0100\n"
+"POT-Creation-Date: 2022-12-15 17:00+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1201,6 +1201,9 @@ msgstr ""
 #, fuzzy
 msgid "Contact E-Mail Address"
 msgstr "Адрасы электроннай пошты"
+
+msgid "Applicant may be contacted"
+msgstr ""
 
 #, fuzzy
 msgid "Cosinnus conference application"
@@ -3185,6 +3188,9 @@ msgstr "Простая статыстыка"
 msgid "I accept the conditions in order to submit my application"
 msgstr ""
 
+msgid "I can be contacted via email by conference administration regardless of my notification settings"
+msgstr ""
+
 #, fuzzy
 msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
 msgstr "Калі ласка, пацвердзіце свой адрас электроннай пошты для %(site_name)s!"
@@ -3406,6 +3412,9 @@ msgid "Choose one or more options that will be displayed on the application form
 msgstr ""
 
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
+msgstr ""
+
+msgid "Applicants have to give their permission to be contacted per email"
 msgstr ""
 
 msgid "Conditions for participation"
@@ -8762,11 +8771,30 @@ msgid "conference"
 msgstr "Сканфігураваць"
 
 #, fuzzy
+#| msgid "Application name"
+msgid "Applicants and members"
+msgstr "Імя прыкладання"
+
+#, fuzzy
+msgid "All applicants"
+msgstr "Імя прыкладання"
+
+#, fuzzy
+#| msgid "Add choice"
+msgid "Individual choice"
+msgstr "Дадаць альтэрнатыву"
+
+#, fuzzy
 msgid "Error message:"
 msgstr "Паведамленні"
 
 msgid "No error message supplied."
 msgstr ""
+
+#, fuzzy
+#| msgid "You are getting this notification because you are an administrator of this project or group."
+msgid "You are getting this notification because you are a member of this conference or have applied for membership."
+msgstr "Вы атрымліваеце гэта апавяшчэнне, таму што з'яўляецеся адміністратарам гэтага праекта ці групы."
 
 #, fuzzy
 msgid "Go to conference"
@@ -8876,7 +8904,7 @@ msgstr "CosinnusМесцазнаходжанне"
 
 #, fuzzy
 #| msgid "This message was sent in a conversation with: "
-msgid "The message was sent to all participants."
+msgid "The message was sent to the chosen participants."
 msgstr "Гэта паведамленне адпраўлена ў размове з: "
 
 msgid "Participation configurations have been updated."

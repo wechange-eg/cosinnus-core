@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-15 15:34+0100\n"
+"POT-Creation-Date: 2022-12-15 17:00+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1202,6 +1202,11 @@ msgstr ""
 #, fuzzy
 msgid "Contact E-Mail Address"
 msgstr "Adrese de e-mail"
+
+#, fuzzy
+#| msgid "May be contacted"
+msgid "Applicant may be contacted"
+msgstr "Poate fi contactat"
 
 #, fuzzy
 msgid "Cosinnus conference application"
@@ -3175,6 +3180,9 @@ msgstr "Statistici Simple"
 msgid "I accept the conditions in order to submit my application"
 msgstr ""
 
+msgid "I can be contacted via email by conference administration regardless of my notification settings"
+msgstr ""
+
 #, fuzzy
 msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
 msgstr "Verificați adresa de e-mail pentru %(site_name)s!"
@@ -3399,6 +3407,9 @@ msgid "Choose one or more options that will be displayed on the application form
 msgstr ""
 
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
+msgstr ""
+
+msgid "Applicants have to give their permission to be contacted per email"
 msgstr ""
 
 msgid "Conditions for participation"
@@ -8707,11 +8718,30 @@ msgid "conference"
 msgstr "Este conferință"
 
 #, fuzzy
+#| msgid "Application name"
+msgid "Applicants and members"
+msgstr "Numele Aplicației"
+
+#, fuzzy
+msgid "All applicants"
+msgstr "Numele Aplicației"
+
+#, fuzzy
+#| msgid "Add choice"
+msgid "Individual choice"
+msgstr "Adăugați alegerea"
+
+#, fuzzy
 msgid "Error message:"
 msgstr "Mesaje"
 
 msgid "No error message supplied."
 msgstr ""
+
+#, fuzzy
+#| msgid "You are getting this notification because you are an administrator of this project or group."
+msgid "You are getting this notification because you are a member of this conference or have applied for membership."
+msgstr "Primiți această notificare deoarece sunteți administrator al acestui proiect sau grup."
 
 #, fuzzy
 msgid "Go to conference"
@@ -8818,7 +8848,7 @@ msgid "No conference applicants found at the moment."
 msgstr "Cosinnus Locație"
 
 #, fuzzy
-msgid "The message was sent to all participants."
+msgid "The message was sent to the chosen participants."
 msgstr "Participanți Maximum la Masa de Cafea"
 
 msgid "Participation configurations have been updated."

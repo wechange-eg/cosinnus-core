@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-15 15:34+0100\n"
+"POT-Creation-Date: 2022-12-15 17:00+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1188,6 +1188,11 @@ msgstr "Мотивація для подання заявки"
 
 msgid "Contact E-Mail Address"
 msgstr "Контактна адреса електронної пошти"
+
+#, fuzzy
+#| msgid "May be contacted"
+msgid "Applicant may be contacted"
+msgstr "Можна зв'язатись"
 
 msgid "Cosinnus conference application"
 msgstr "Заявка на конференцію Cosinnus "
@@ -3087,6 +3092,9 @@ msgstr "Завантажити умови"
 msgid "I accept the conditions in order to submit my application"
 msgstr "Я приймаю умови подання своєї заявки"
 
+msgid "I can be contacted via email by conference administration regardless of my notification settings"
+msgstr ""
+
 #, fuzzy
 msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
 msgstr "Будь ласка, підтвердіть свою адресу електронної пошти для %(site_name)s!"
@@ -3303,6 +3311,9 @@ msgstr "Вибрати один або кілька варіантів, які �
 
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
 msgstr "Вибір воркшопів: надання можливості особам, які подають заявку, обрати бажані воркшопи, в яких братимуть участь"
+
+msgid "Applicants have to give their permission to be contacted per email"
+msgstr ""
 
 msgid "Conditions for participation"
 msgstr "Умови участі"
@@ -8473,11 +8484,31 @@ msgctxt "the_app"
 msgid "conference"
 msgstr "конференція"
 
+#, fuzzy
+#| msgid "Application name"
+msgid "Applicants and members"
+msgstr "Назва застосунку"
+
+#, fuzzy
+#| msgid "Application"
+msgid "All applicants"
+msgstr "Застосунок"
+
+#, fuzzy
+#| msgid "Add choice"
+msgid "Individual choice"
+msgstr "Додати відповідь"
+
 msgid "Error message:"
 msgstr "Повідомлення про помилку:"
 
 msgid "No error message supplied."
 msgstr "Повідомлення про помилку не отримано"
+
+#, fuzzy
+#| msgid "You are getting this notification because you are an administrator of this project or group."
+msgid "You are getting this notification because you are a member of this conference or have applied for membership."
+msgstr "Ви отримали це сповіщення, тому що Ви є адміністратором цього проєкту чи групи."
 
 msgid "Go to conference"
 msgstr "Перейти до конференції"
@@ -8575,8 +8606,9 @@ msgstr ""
 msgid "No conference applicants found at the moment."
 msgstr "Заявка на конференцію Cosinnus "
 
-msgid "The message was sent to all participants."
-msgstr ""
+#, fuzzy
+msgid "The message was sent to the chosen participants."
+msgstr "Учасники конференції"
 
 msgid "Participation configurations have been updated."
 msgstr "Конфігурації участі були оновлені"

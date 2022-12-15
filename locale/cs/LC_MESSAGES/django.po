@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-15 15:34+0100\n"
+"POT-Creation-Date: 2022-12-15 17:00+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1199,6 +1199,11 @@ msgstr "Motivace pro podání žádosti"
 
 msgid "Contact E-Mail Address"
 msgstr "Kontaktní e-mailová adresa"
+
+#, fuzzy
+#| msgid "May be contacted"
+msgid "Applicant may be contacted"
+msgstr "Může být kontaktován/a"
 
 msgid "Cosinnus conference application"
 msgstr "Cosinnus žádosti o účast v konferenci"
@@ -3144,6 +3149,9 @@ msgstr "Stáhněte si podmínky"
 msgid "I accept the conditions in order to submit my application"
 msgstr "Souhlasím s podmínkami, abych mohl poslat svou žádost"
 
+msgid "I can be contacted via email by conference administration regardless of my notification settings"
+msgstr ""
+
 #, fuzzy
 msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
 msgstr "Ověřte prosím svou e-mailovou adresu pro %(site_name)s!"
@@ -3371,6 +3379,9 @@ msgstr "Vyberte jednu nebo více možností, které budou zobrazeny na formulá�
 
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
 msgstr "Výběr workshopu: Umožněte účastníkům, aby si vybrali preferované workshopy, které chtějí navštěvovat"
+
+msgid "Applicants have to give their permission to be contacted per email"
+msgstr ""
 
 msgid "Conditions for participation"
 msgstr "Podmínky účasti"
@@ -8551,11 +8562,31 @@ msgctxt "the_app"
 msgid "conference"
 msgstr "app_konference"
 
+#, fuzzy
+#| msgid "Application name"
+msgid "Applicants and members"
+msgstr "Název aplikace"
+
+#, fuzzy
+#| msgid "Application"
+msgid "All applicants"
+msgstr "Žádost"
+
+#, fuzzy
+#| msgid "Add choice"
+msgid "Individual choice"
+msgstr "Přidat možnost"
+
 msgid "Error message:"
 msgstr ""
 
 msgid "No error message supplied."
 msgstr ""
+
+#, fuzzy
+#| msgid "You are getting this notification because you are an administrator of this project or group."
+msgid "You are getting this notification because you are a member of this conference or have applied for membership."
+msgstr "Toto oznámení dostáváte, protože jste správcem tohoto projektu nebo skupiny."
 
 msgid "Go to conference"
 msgstr "Přejděte do konference"
@@ -8652,8 +8683,9 @@ msgstr ""
 msgid "No conference applicants found at the moment."
 msgstr "Cosinnus žádosti o účast v konferenci"
 
-msgid "The message was sent to all participants."
-msgstr ""
+#, fuzzy
+msgid "The message was sent to the chosen participants."
+msgstr "Žádost o účast v konferenci"
 
 msgid "Participation configurations have been updated."
 msgstr "Účastnické konfigurace byly aktualizovány."

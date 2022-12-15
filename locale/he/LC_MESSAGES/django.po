@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-15 15:34+0100\n"
+"POT-Creation-Date: 2022-12-15 17:00+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1189,6 +1189,11 @@ msgstr "מוטיבצייה להגשת מועמדות"
 
 msgid "Contact E-Mail Address"
 msgstr "כתובות דואר אלקטרוני ליצירת קשר"
+
+#, fuzzy
+#| msgid "May be contacted"
+msgid "Applicant may be contacted"
+msgstr "ניתן ליצור קשר"
 
 msgid "Cosinnus conference application"
 msgstr "בקשה לועידת קוסינוס"
@@ -3100,6 +3105,9 @@ msgstr "הורד את התנאים"
 msgid "I accept the conditions in order to submit my application"
 msgstr "אני מקבל את התנאים כדי להגיש את הבקשה שלי"
 
+msgid "I can be contacted via email by conference administration regardless of my notification settings"
+msgstr ""
+
 #, fuzzy
 msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
 msgstr "נא אמת את כתובת הדוא\"ל שלך עבור %(site_name)s!"
@@ -3313,6 +3321,9 @@ msgstr "בחר אפשרות אחת או יותר שיוצגו בטופס הבק�
 
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
 msgstr "בחירת סדנאות: אפשר למועמדים לבחור סדנאות מועדפות להשתתפות בהן"
+
+msgid "Applicants have to give their permission to be contacted per email"
+msgstr ""
 
 msgid "Conditions for participation"
 msgstr "תנאי השתתפות"
@@ -8492,11 +8503,31 @@ msgctxt "the_app"
 msgid "conference"
 msgstr "שרת ועידות וידאו"
 
+#, fuzzy
+#| msgid "Application name"
+msgid "Applicants and members"
+msgstr "שם יישום"
+
+#, fuzzy
+#| msgid "Application"
+msgid "All applicants"
+msgstr "בקשה"
+
+#, fuzzy
+#| msgid "Add choice"
+msgid "Individual choice"
+msgstr "הוסף אפשרות"
+
 msgid "Error message:"
 msgstr ""
 
 msgid "No error message supplied."
 msgstr ""
+
+#, fuzzy
+#| msgid "You are getting this notification because you are an administrator of this project or group."
+msgid "You are getting this notification because you are a member of this conference or have applied for membership."
+msgstr "אתם מקבלים התראה זו מכיוון שאתם מנהלי מערכת של פרויקט או קבוצה זו."
 
 msgid "Go to conference"
 msgstr "עבור לוועידה"
@@ -8592,8 +8623,9 @@ msgstr ""
 msgid "No conference applicants found at the moment."
 msgstr "בקשה לועידת קוסינוס"
 
-msgid "The message was sent to all participants."
-msgstr ""
+#, fuzzy
+msgid "The message was sent to the chosen participants."
+msgstr "בקשות השתתפות לועידה"
 
 msgid "Participation configurations have been updated."
 msgstr "תצורות ההשתתפות עודכנו."

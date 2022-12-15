@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-15 15:34+0100\n"
+"POT-Creation-Date: 2022-12-15 17:00+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1204,6 +1204,9 @@ msgid "Motivation for applying"
 msgstr ""
 
 msgid "Contact E-Mail Address"
+msgstr ""
+
+msgid "Applicant may be contacted"
 msgstr ""
 
 #, fuzzy
@@ -3155,6 +3158,9 @@ msgstr ""
 msgid "I accept the conditions in order to submit my application"
 msgstr ""
 
+msgid "I can be contacted via email by conference administration regardless of my notification settings"
+msgstr ""
+
 msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
 msgstr ""
 
@@ -3363,6 +3369,9 @@ msgid "Choose one or more options that will be displayed on the application form
 msgstr ""
 
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
+msgstr ""
+
+msgid "Applicants have to give their permission to be contacted per email"
 msgstr ""
 
 msgid "Conditions for participation"
@@ -8432,10 +8441,24 @@ msgctxt "the_app"
 msgid "conference"
 msgstr ""
 
+msgid "Applicants and members"
+msgstr ""
+
+#, fuzzy
+#| msgid "All projects"
+msgid "All applicants"
+msgstr "All projects"
+
+msgid "Individual choice"
+msgstr ""
+
 msgid "Error message:"
 msgstr ""
 
 msgid "No error message supplied."
+msgstr ""
+
+msgid "You are getting this notification because you are a member of this conference or have applied for membership."
 msgstr ""
 
 msgid "Go to conference"
@@ -8521,8 +8544,9 @@ msgstr ""
 msgid "No conference applicants found at the moment."
 msgstr "Groups"
 
-msgid "The message was sent to all participants."
-msgstr ""
+#, fuzzy
+msgid "The message was sent to the chosen participants."
+msgstr "Projects"
 
 msgid "Participation configurations have been updated."
 msgstr ""
@@ -12884,9 +12908,6 @@ msgstr ""
 #~ msgstr "Project Type"
 
 #~ msgid "All groups"
-#~ msgstr "All projects"
-
-#~ msgid "All projects"
 #~ msgstr "All projects"
 
 #, fuzzy

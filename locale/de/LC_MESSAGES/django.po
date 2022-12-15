@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-15 15:34+0100\n"
+"POT-Creation-Date: 2022-12-15 17:00+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -298,7 +298,7 @@ msgid "Invitations to Groups and Projects"
 msgstr "Einladungen zu Gruppen und Projekten"
 
 msgid "To invite external guests, share this link:"
-msgstr ""
+msgstr "Um externe Gäste einzuladen, teile diesen Link:"
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr "Um diesen Teil der Webseite zu benutzen, muss deine E-Mail-Adresse erst verifiziert werden! Bitte prüfen deine eingehenden E-Mails und klicke dann auf den Link in der Verifikations-E-Mail, die du von uns erhalten hast. Alternativ kannst du eine neue Verifikations-E-Mail anfordern, indem du den Link unten klickst."
@@ -1158,6 +1158,11 @@ msgstr "Motivation für die Teilnahme"
 
 msgid "Contact E-Mail Address"
 msgstr "Kontakt-E-Mail Adresse"
+
+#, fuzzy
+#| msgid "May be contacted"
+msgid "Applicant may be contacted"
+msgstr "Darf kontaktiert werden"
 
 msgid "Cosinnus conference application"
 msgstr "Cosinnus Tagungs-Teilnahmeantrag"
@@ -3057,6 +3062,9 @@ msgstr "Bedingungen herunterladen"
 msgid "I accept the conditions in order to submit my application"
 msgstr "Ich akzeptiere die Bedingungen, um Teilnahme zu beantragen"
 
+msgid "I can be contacted via email by conference administration regardless of my notification settings"
+msgstr "Ich kann von den Tagungsorganisator/innen per E-Mail kontaktiert werden, unabhängig von meinen Benachrichtigungseinstellungen"
+
 #, fuzzy
 #| msgid "Please verify your email address to continue using your account."
 msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
@@ -3168,15 +3176,7 @@ msgstr "Betreff"
 msgid "content"
 msgstr "Inhalt"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                    This message will be sent to one participant.\n"
-#| "                    "
-#| msgid_plural ""
-#| "\n"
-#| "                    This message will be sent to %(count)s participants.\n"
-#| "                    "
+#, python-format
 msgid ""
 "\n"
 "                    This message will be sent to one user.\n"
@@ -3187,11 +3187,11 @@ msgid_plural ""
 "                    "
 msgstr[0] ""
 "\n"
-"Diese Nachricht wird an eine_n Tagungsteilnehmer_in geschickt.\n"
+"Diese Nachricht wird an eine/n Benutzer/in geschickt.\n"
 "                "
 msgstr[1] ""
 "\n"
-"Diese Nachricht wird an %(count)s Tagungsteilnehmer geschickt.\n"
+"Diese Nachricht wird an %(count)s Benutzer/innen geschickt.\n"
 "                "
 
 msgid "Are you sure? Please check your entries beforehand with the help of a test email."
@@ -3215,10 +3215,8 @@ msgstr[1] ""
 "                        Ja, sofort an %(count)s Benutzer_innen schicken.\n"
 "                        "
 
-#, fuzzy
-#| msgid "No, don\\"
 msgid "No, do not send"
-msgstr "Nein"
+msgstr "Nein, nicht senden"
 
 msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
 msgstr "Diese Sitzung kann von den Veranstaltern aufgezeichnet werden. Indem du fortfährst, erklärst du dich damit einverstanden, aufgezeichnet zu werden. Dazu gehören Audio, Video, Chat, gemeinsame Notizen und Whiteboard-Aktivitäten. Die Aufzeichnung kann durch die Veranstalter weitergegeben werden."
@@ -3292,6 +3290,9 @@ msgstr "Wähle eine oder mehr Bedingungen die auf dem Anmeldeformular angezeigt 
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
 msgstr "Workshopauswahl: Antragssteller/innen können Workshops priorisieren, an denen sie teilnehmen möchten"
 
+msgid "Applicants have to give their permission to be contacted per email"
+msgstr "Antragssteller/innen müssen ihr Einverständnis geben, per E-Mail kontaktiert zu werden."
+
 msgid "Conditions for participation"
 msgstr "Bedingungen für die Teilnahme"
 
@@ -3335,16 +3336,14 @@ msgstr "letzte E-Mail wurde am %(date)s geschickt "
 msgid "no instant email has been sent yet."
 msgstr "Es wurden noch keine E-Mails geschickt."
 
-#, fuzzy
-#| msgid "subject"
 msgid "Mail subject"
-msgstr "Betreff"
+msgstr "E-Mail-Betreff"
 
 msgid "Mail text"
-msgstr ""
+msgstr "E-Mail-Text"
 
 msgid "Send (show preview)"
-msgstr ""
+msgstr "Senden (Vorschau anzeigen)"
 
 msgid "Send test to myself"
 msgstr "Test-Mail an mich"
@@ -3476,7 +3475,7 @@ msgid "There are no rooms yet."
 msgstr "Es sind noch keine Räume vorhanden."
 
 msgid "BBB-Meetings can be joined directly by guests, both registered and unregistered users. The guest link will be shown to all moderators in the greeting message of the BBB meeting."
-msgstr ""
+msgstr "BBB-Meetings können direkt von Gästen besucht werden - sowohl von registrierten als auch von nicht registrierten Benutzern. Der Gast-Link wird allen Moderator/innen in der Begrüßungsnachricht des BBB-Meetings angezeigt."
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
 msgstr "Beachte: Änderung an einigen dieser Einstellungen kann den Neustart des Meetings fordern bevor die Änderung wirksam wird!"
@@ -8380,11 +8379,25 @@ msgctxt "the_app"
 msgid "conference"
 msgstr "Tagung"
 
+msgid "Applicants and members"
+msgstr "Antragssteller/innen und Mitglieder"
+
+msgid "All applicants"
+msgstr "Alle Antragssteller/innen"
+
+msgid "Individual choice"
+msgstr "Indivuduelle Auswahl"
+
 msgid "Error message:"
 msgstr "Inhalt des Fehlers:"
 
 msgid "No error message supplied."
 msgstr "Im Fehler ist kein Inhalt vorhanden."
+
+#, fuzzy
+#| msgid "You are getting this notification because you are an administrator of this project or group."
+msgid "You are getting this notification because you are a member of this conference or have applied for membership."
+msgstr "Du erhältst diese Benachrichtigung, weil du ein Administrator dieses Projektes oder dieser Gruppe bist."
 
 msgid "Go to conference"
 msgstr "Zur Tagung"
@@ -8472,8 +8485,8 @@ msgstr ""
 msgid "No conference applicants found at the moment."
 msgstr "Tagungs-Teilnahmeanträge"
 
-msgid "The message was sent to all participants."
-msgstr "Die Nachricht wurde an alle Tagungsteilnehmer geschickt."
+msgid "The message was sent to the chosen participants."
+msgstr "Die Nachricht wurde an die gewählten Tagungsteilnehmer geschickt."
 
 msgid "Participation configurations have been updated."
 msgstr "Die Teilnahmekonfigurationen wurden aktualisiert."

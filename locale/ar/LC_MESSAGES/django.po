@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-15 15:34+0100\n"
+"POT-Creation-Date: 2022-12-15 17:00+0100\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1237,6 +1237,11 @@ msgstr "الدافع للتقديم"
 
 msgid "Contact E-Mail Address"
 msgstr "عنوان البريد الإلكتروني للاتصال"
+
+#, fuzzy
+#| msgid "May be contacted"
+msgid "Applicant may be contacted"
+msgstr "قد يتم الاتصال"
 
 #, fuzzy
 msgid "Cosinnus conference application"
@@ -3240,6 +3245,9 @@ msgstr "قم بتنزيل الشروط"
 msgid "I accept the conditions in order to submit my application"
 msgstr "أوافق على الشروط من أجل تقديم طلبي"
 
+msgid "I can be contacted via email by conference administration regardless of my notification settings"
+msgstr ""
+
 #, fuzzy
 msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
 msgstr "يرجى التحقق من عنوان بريدك الإلكتروني لـ %(site_name)s!"
@@ -3468,6 +3476,9 @@ msgstr "اختر خيارًا واحدًا أو أكثر حيث يتم عرضه 
 
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
 msgstr "اختيار ورشة العمل: تمكين المتقدمين من اختيار ورش العمل المفضلة للحضور"
+
+msgid "Applicants have to give their permission to be contacted per email"
+msgstr ""
 
 msgid "Conditions for participation"
 msgstr "شروط المشاركة"
@@ -8723,11 +8734,30 @@ msgctxt "the_app"
 msgid "conference"
 msgstr "مؤتمر"
 
+#, fuzzy
+#| msgid "Application name"
+msgid "Applicants and members"
+msgstr "إسم التطبيق"
+
+#, fuzzy
+msgid "All applicants"
+msgstr "إسم التطبيق"
+
+#, fuzzy
+#| msgid "Add choice"
+msgid "Individual choice"
+msgstr "إضافة خيار"
+
 msgid "Error message:"
 msgstr ""
 
 msgid "No error message supplied."
 msgstr ""
+
+#, fuzzy
+#| msgid "You are getting this notification because you are an administrator of this project or group."
+msgid "You are getting this notification because you are a member of this conference or have applied for membership."
+msgstr "أنت تتلقى هذا الإشعار لأنك مسؤول عن هذا المشروع أو المجموعة."
 
 msgid "Go to conference"
 msgstr "اذهب إلى المؤتمر"
@@ -8827,8 +8857,9 @@ msgstr ""
 msgid "No conference applicants found at the moment."
 msgstr "موقع Cosinnus"
 
-msgid "The message was sent to all participants."
-msgstr ""
+#, fuzzy
+msgid "The message was sent to the chosen participants."
+msgstr "تطبيقات المؤتمر"
 
 #, fuzzy
 msgid "Participation configurations have been updated."

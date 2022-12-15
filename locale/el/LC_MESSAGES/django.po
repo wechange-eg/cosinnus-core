@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-15 15:34+0100\n"
+"POT-Creation-Date: 2022-12-15 17:00+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1183,6 +1183,11 @@ msgstr "Κίνητρο αίτησης"
 
 msgid "Contact E-Mail Address"
 msgstr "Email Επικοινωνίας"
+
+#, fuzzy
+#| msgid "May be contacted"
+msgid "Applicant may be contacted"
+msgstr "Μπορεί να έρθει σε επικοινωνία"
 
 msgid "Cosinnus conference application"
 msgstr "Αίτηση Σύσκεψης Cosinnus"
@@ -3094,6 +3099,9 @@ msgstr "Λήψη των όρων"
 msgid "I accept the conditions in order to submit my application"
 msgstr "Αποδέχομαι του όρους προκειμένου να υποβάλλω την αίτησή μου"
 
+msgid "I can be contacted via email by conference administration regardless of my notification settings"
+msgstr ""
+
 #, fuzzy
 msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
 msgstr "Παρακαλούμε επαληθεύστε τη διεύθυνση email για %(site_name)s!"
@@ -3307,6 +3315,9 @@ msgstr "Επιλέξτε μία ή περισσότερες επιλογές π�
 
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
 msgstr "Επιλογή σεμιναρίου: Παρέχετε τη δυνατότητα στους υποψηφίους να επιλέξουν σεμινάρια που προτιμούν να παρακολουθήσουν"
+
+msgid "Applicants have to give their permission to be contacted per email"
+msgstr ""
 
 msgid "Conditions for participation"
 msgstr "Όροι συμμετοχής"
@@ -8478,11 +8489,31 @@ msgctxt "the_app"
 msgid "conference"
 msgstr "σύσκεψη"
 
+#, fuzzy
+#| msgid "Application name"
+msgid "Applicants and members"
+msgstr "Όνομα αίτησης"
+
+#, fuzzy
+#| msgid "Application"
+msgid "All applicants"
+msgstr "Αίτηση"
+
+#, fuzzy
+#| msgid "Add choice"
+msgid "Individual choice"
+msgstr "Προσθήκη επιλογής"
+
 msgid "Error message:"
 msgstr ""
 
 msgid "No error message supplied."
 msgstr ""
+
+#, fuzzy
+#| msgid "You are getting this notification because you are an administrator of this project or group."
+msgid "You are getting this notification because you are a member of this conference or have applied for membership."
+msgstr "Λαμβάνετε αυτή την ειδοποίηση επειδή είστε ο διαχειριστής αυτού του έργου ή της ομάδας."
 
 msgid "Go to conference"
 msgstr "Μετάβαση στη σύσκεψη"
@@ -8578,8 +8609,9 @@ msgstr ""
 msgid "No conference applicants found at the moment."
 msgstr "Αίτηση Σύσκεψης Cosinnus"
 
-msgid "The message was sent to all participants."
-msgstr ""
+#, fuzzy
+msgid "The message was sent to the chosen participants."
+msgstr "Εφαρμογές Σύσκεψης"
 
 msgid "Participation configurations have been updated."
 msgstr "Η διαμόρφωση συμμετοχής έχει ενημερωθεί."
