@@ -185,11 +185,13 @@
         
     </div> <!-- buttons and content box -->
     
-    <div class="white-content">
+    {% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+      <div class="white-content">
         {% include 'cosinnus/common/likefollowstar/star_button.html' with object=poll %}
         {% include 'cosinnus/common/likefollowstar/follow_button.html' with object=poll %}        
         {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=poll %}
-    </div>
+      </div>
+    {% endif %}
     
     {% include 'cosinnus_poll/poll_comments.html' with poll=poll full_view="True" no_indent="True" comments_expanded="True" %}
     

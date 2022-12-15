@@ -591,14 +591,17 @@
 
 
 {# ***********  Like/follow buttons *************** #}
-{% if not hide_follow_button %}
-    <div class="white-content">
-        {% trans "You will now receive notifications for comments or when this event is updated or its details change." as follow_success_message %}
-		{% include 'cosinnus/common/likefollowstar/like_button.html' with object=event %}
-		{% include 'cosinnus/common/likefollowstar/star_button.html' with object=event %}
-        {% include 'cosinnus/common/likefollowstar/follow_button.html' with object=event success_message=follow_success_message %}
-        {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=event %}
-	</div>
+
+{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+	{% if not hide_follow_button %}
+		<div class="white-content">
+			{% trans "You will now receive notifications for comments or when this event is updated or its details change." as follow_success_message %}
+			{% include 'cosinnus/common/likefollowstar/like_button.html' with object=event %}
+			{% include 'cosinnus/common/likefollowstar/star_button.html' with object=event %}
+			{% include 'cosinnus/common/likefollowstar/follow_button.html' with object=event success_message=follow_success_message %}
+			{% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=event %}
+		</div>
+	{% endif %}
 {% endif %}
 
 

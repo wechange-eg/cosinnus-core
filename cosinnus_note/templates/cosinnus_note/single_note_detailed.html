@@ -115,14 +115,16 @@
 	    </div>
 	    {% endcomment %}
 	    
-	    <div class=" indented">
-		    <div class="white-content">
-				{% include 'cosinnus/common/likefollowstar/like_button.html' with object=note %}
-				{% include 'cosinnus/common/likefollowstar/star_button.html' with object=note %}
-		        {% include 'cosinnus/common/likefollowstar/follow_button.html' with object=note %}
-		        {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=note %}
-		    </div>
-	    </div>
+		{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+			<div class=" indented">
+				<div class="white-content">
+					{% include 'cosinnus/common/likefollowstar/like_button.html' with object=note %}
+					{% include 'cosinnus/common/likefollowstar/star_button.html' with object=note %}
+					{% include 'cosinnus/common/likefollowstar/follow_button.html' with object=note %}
+					{% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=note %}
+				</div>
+			</div>
+		{% endif %}
 	    
 	    {% include 'cosinnus_note/note_comments.html' with note=note full_view="True" comments_expanded="True" %}
 	    

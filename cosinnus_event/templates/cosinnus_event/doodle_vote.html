@@ -257,12 +257,14 @@
 	</div> <!-- buttons and content box -->
 	
 	
-    <div class="white-content">
-        {% trans "You will now receive notifications for comments or when this event poll is changed and whenever somebody casts their vote." as follow_success_message %}
-		{% include 'cosinnus/common/likefollowstar/star_button.html' with object=event %}
-		{% include 'cosinnus/common/likefollowstar/follow_button.html' with object=event success_message=follow_success_message %}
-        {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=event %}
-    </div>
+	{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+		<div class="white-content">
+			{% trans "You will now receive notifications for comments or when this event poll is changed and whenever somebody casts their vote." as follow_success_message %}
+			{% include 'cosinnus/common/likefollowstar/star_button.html' with object=event %}
+			{% include 'cosinnus/common/likefollowstar/follow_button.html' with object=event success_message=follow_success_message %}
+			{% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=event %}
+		</div>
+	{% endif %}
 	
 	{% include 'cosinnus_event/event_comments.html' with event=event full_view="True" no_indent="True" comments_expanded="True" %}
 	

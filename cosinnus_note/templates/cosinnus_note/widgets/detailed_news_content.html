@@ -98,20 +98,22 @@
         
         {% include 'cosinnus/media_tags_readonly.html' with object=note %}
         
-        <div class="btn btn-default dashboard-appwidget-contentline-indented">
-            <ul class="media-list fine-space">
-                <li class="media">
-                    <div class="media-body no-vertical-padding">
-                        <ol class="input-area">
-                            <li class="w100 font11px no-vertical-padding no-horizontal-padding">
-                                {% include 'cosinnus/common/likefollowstar/like_button.html' with object=note %}
-                                {% include 'cosinnus/common/likefollowstar/follow_button.html' with object=note %}
-                            </li>
-                        </ol>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        {% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+            <div class="btn btn-default dashboard-appwidget-contentline-indented">
+                <ul class="media-list fine-space">
+                    <li class="media">
+                        <div class="media-body no-vertical-padding">
+                            <ol class="input-area">
+                                <li class="w100 font11px no-vertical-padding no-horizontal-padding">
+                                    {% include 'cosinnus/common/likefollowstar/like_button.html' with object=note %}
+                                    {% include 'cosinnus/common/likefollowstar/follow_button.html' with object=note %}
+                                </li>
+                            </ol>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
         
         {% include 'cosinnus_note/note_comments.html' with note=note %}
 

@@ -99,13 +99,15 @@
             </div>
         </div>
         
-        <div class="indented">
-		    <div class="white-content">
-                {% include 'cosinnus/common/likefollowstar/star_button.html' with object=todo %}
-                {% include 'cosinnus/common/likefollowstar/follow_button.html' with object=todo %}
-		        {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=todo %}
-		    </div>
-	    </div>
+        {% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+            <div class="indented">
+                <div class="white-content">
+                    {% include 'cosinnus/common/likefollowstar/star_button.html' with object=todo %}
+                    {% include 'cosinnus/common/likefollowstar/follow_button.html' with object=todo %}
+                    {% include 'cosinnus/common/likefollowstar/confirm_likefollowstar_modal.html' with object=todo %}
+                </div>
+            </div>
+        {% endif %}
         
         {% include 'cosinnus/media_tags_readonly.html' with object=todo list_view="True" %}
             

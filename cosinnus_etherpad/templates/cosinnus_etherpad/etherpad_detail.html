@@ -123,10 +123,11 @@
             {% include 'cosinnus/common/attached_images_gallery.html' with object=object max_images=3 %}
         {% endif %}
         
-        <div class="white-content">
-            {% include 'cosinnus/common/likefollowstar/star_button.html' with object=object %}
-        </div>
-        
+		{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+			<div class="white-content">
+				{% include 'cosinnus/common/likefollowstar/star_button.html' with object=object %}
+			</div>
+		{% endif %}
         
         <div style="clear: both; margin-top: 10px;">
             <div class="well well-document" {% if object.type == 1 %}style="overflow: scroll; max-height: 600px;"{% endif %}>

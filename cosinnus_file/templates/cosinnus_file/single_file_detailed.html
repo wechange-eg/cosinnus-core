@@ -105,8 +105,10 @@
 		            </ul>
 		        </button> 
 		    {% endif %}
-	    
-			{% include 'cosinnus/common/likefollowstar/star_button_btn.html' with user=request.user object=file no_margin=True %}
+			
+			{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+				{% include 'cosinnus/common/likefollowstar/star_button_btn.html' with user=request.user object=file no_margin=True %}
+			{% endif %}
 			{% include 'cosinnus/feedback/report_button_btn.html' with object=file %}
 		    
 			{% if user|has_write_access:file %}
