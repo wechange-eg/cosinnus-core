@@ -195,6 +195,7 @@ class BBBRoomGuestAccessView(TemplateView):
     guest_token = None
     bbb_room = None
     source_obj = None
+    source_group = None
     
     # data that has to be filled out if the user isn't authenticated
     username = None
@@ -268,7 +269,7 @@ class BBBRoomGuestAccessView(TemplateView):
         # ! add Form class to view
         # ! check GET params on view, redirect to form template if not all (including ?confirm=True) are set
         # ! fill in GET params for non-anymous users
-        # - pass guest_token through to BBB API Queue
+        # ! pass guest_token through to BBB API Queue
         # ! add template with inputs from signup and text boxes
         # ! add recording checkbox if record==True
         # - check that group meeting is still usable
@@ -279,18 +280,20 @@ class BBBRoomGuestAccessView(TemplateView):
             # fairmeeting: http://localhost:8000/group/asd/meeting/
             # recorded: http://localhost:8000/group/boinky/meeting/
         # - save GET params to session, retrieve them for template form
-        # - skip ?confirm=True on logged-in-users if no recording is present
+        # ! show name in meeting above Iframe!
+        # - translations (only redesign)
+        # ! skip ?confirm=True on logged-in-users if no recording is present
         # - show guest token/url in room/table/event/group settings
-        # - check if resolving and iframe attrs really work in the group BBB iframe where the non queue URL is used and a resolve doesn't happen?
+        # ! check if resolving and iframe attrs really work in the group BBB iframe where the non queue URL is used and a resolve doesn't happen?
         
         user = self.request.user
         self.source_obj = self.bbb_room.source_object
+        self.source_group = self.get_source_group(self.source_obj)
         if user.is_authenticated:
             # check if user is member of the bbb-room's source object and if so, redirect them to the room directly
-            source_group = self.get_source_group(self.source_obj)
-            if source_group and source_group.is_member(user) and hasattr(self.source_obj, 'get_absolute_url'):
-                if source_group == self.source_obj:
-                    return redirect(group_aware_reverse('cosinnus:group-meeting', kwargs={'group': source_group}))
+            if self.source_group and self.source_group.is_member(user) and hasattr(self.source_obj, 'get_absolute_url'):
+                if self.source_group == self.source_obj:
+                    return redirect(group_aware_reverse('cosinnus:group-meeting', kwargs={'group': self.source_group}))
                 return redirect(self.source_obj.get_absolute_url())
             
             # set the temporary BBB user guest token for this join process
@@ -302,6 +305,8 @@ class BBBRoomGuestAccessView(TemplateView):
             tos_check = request.GET.get('tos_check', False) == 'true'
             if not self.username or not tos_check:
                 return super().get(request, *args, **kwargs)
+            # save username to session to autocomplete the username field next time for this user
+            self.request.session['bbb_guest_username'] = self.username
             self.all_data_filled = True
             
             # set the temporary BBB user with name and guest token for this join process
@@ -322,6 +327,7 @@ class BBBRoomGuestAccessView(TemplateView):
             'has_bbb_video': True,
             'meeting_name': self.bbb_room.name,
             'all_data_filled': self.all_data_filled,
+            'source_group': self.source_group or None,
         })
         if self.all_data_filled: 
             meeting_url = reverse('cosinnus:bbb-room-queue-api', kwargs={'mt_id': self.media_tag.id})
