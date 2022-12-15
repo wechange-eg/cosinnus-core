@@ -815,6 +815,10 @@ class CosinnusConferenceApplicationQuerySet(models.QuerySet):
     def accepted_in_past(self):
         now = timezone.now()
         return self.active().filter(conference__to_date__lte=now, status=APPLICATION_ACCEPTED)
+
+    def pending_and_accepted(self):
+        pending_and_accepted = [APPLICATION_SUBMITTED, APPLICATION_WAITLIST, APPLICATION_ACCEPTED]
+        return self.active().filter(status__in=pending_and_accepted)
     
     def declined_in_past(self):
         now = timezone.now()
@@ -844,6 +848,9 @@ class CosinnusConferenceApplication(models.Model):
     information = models.TextField(_('Motivation for applying'), blank=True)
     contact_email = models.EmailField(_('Contact E-Mail Address'), blank=True, null=True)
     contact_phone = PhoneNumberField(('Contact Phone Number'), blank=True, null=True)
+    may_be_contacted = models.BooleanField(_('Applicant may be contacted'), 
+        help_text='If active, conference applicant may be contacted by conference admins via email', 
+        default=True)
     
     reason_for_rejection = models.TextField(blank=True)
     

@@ -60,25 +60,29 @@
 	                {% trans "Describe why you wish to participate" as information_placeholder %}
 			        {% include 'cosinnus/fields/default_field.html' with field=form.information label=information_label placeholder=information_placeholder large_field=True %}
 			    {% endif %}
-			    
-			    {% if form.contact_email or form.contact_phone %}
-                    <h3>{% trans "Optional contact information" %}</h3>                    
-                    <p class="textfield transparent">
-                        {% trans "We recommend you to provide at least one contact option for the organizers to contact you directly. This information can be seen by all organizers of the conference." %}
-                    </p>
-                    <div class="row">
-                        <div class="col-md-6">
-		                    {% trans "Contact E-Mail Address" as email_label %}
-                            {% trans "Contact E-Mail Address" as email_placeholder %}
-		                    {% include 'cosinnus/fields/default_field.html' with field=form.contact_email label=email_label placeholder=email_placeholder %}
-                        </div>
-                        <div class="col-md-6">
-                            {% trans "Contact Phone Number" as phone_label %}
-                            {% trans "Contact Phone Number" as phone_placeholder %}
-                            {% include 'cosinnus/fields/default_field.html' with field=form.contact_phone label=phone_label placeholder=phone_placeholder %}
-                        </div>
-                    </div>
-                {% endif %}
+
+				{% if form.contact_email or form.contact_phone %}
+					<h3>{% trans "Optional contact information" %}</h3>                                     
+					<p class="textfield transparent">
+						{% trans "We recommend you to provide at least one contact option for the organizers to contact you directly. This information can be seen by all organizers of the conference." %}
+					</p>
+					<div class="row">
+						{% if not 'contact_email' in SETTINGS.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS %}
+							<div class="col-md-6">
+								{% trans "Contact E-Mail Address" as email_label %}
+								{% trans "Contact E-Mail Address" as email_placeholder %}
+								{% include 'cosinnus/fields/default_field.html' with field=form.contact_email label=email_label placeholder=email_placeholder %}
+							</div>
+						{% endif %}
+						{% if not 'contact_phone' in SETTINGS.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS %}
+							<div class="col-md-6">
+								{% trans "Contact Phone Number" as phone_label %}
+								{% trans "Contact Phone Number" as phone_placeholder %}
+								{% include 'cosinnus/fields/default_field.html' with field=form.contact_phone label=phone_label placeholder=phone_placeholder %}
+							</div>
+						{% endif %}
+					</div>
+				{% endif %}
 		
 		        {% if priority_formset.forms %}
 			        <table class="table table-striped white-content priority-form">
@@ -126,6 +130,11 @@
 					{% trans "I accept the conditions in order to submit my application" as conditions_checkbox_label %}
 			        {% include 'cosinnus/fields/checkbox_field.html' with field=form.conditions_accepted label=conditions_checkbox_label legend=legend checkbox_label=conditions_checkbox_label %}
 		        {% endif %}
+
+				{% if form.may_be_contacted %}
+					{% trans "I can be contacted via email by conference administration regardless of my notification settings" as applicant_may_be_contacted_checkbox_label %}
+					{% include 'cosinnus/fields/checkbox_field.html' with field=form.may_be_contacted label=applicant_may_be_contacted_checkbox_label checkbox_label=applicant_may_be_contacted_checkbox_label %}
+				{% endif %}
 		        
 		        <div class="ultra-space"> </div>
 		        {% if participation_management %}

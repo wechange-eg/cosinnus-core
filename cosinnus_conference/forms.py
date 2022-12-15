@@ -2,6 +2,8 @@ from django import forms
 from django.utils import timezone
 
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.model_fields import UserNameModelMultipleChoiceField
+from cosinnus.utils.user import filter_active_users
 from cosinnus_conference.utils import get_initial_template
 from cosinnus.models.conference import ParticipationManagement
 from cosinnus.models.conference import CosinnusConferenceApplication
@@ -9,11 +11,11 @@ from cosinnus.models.conference import APPLICATION_STATES_VISIBLE
 from cosinnus.models.conference import CosinnusConferencePremiumBlock
 from cosinnus.utils.html import render_html_with_variables
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 
 from django.forms.widgets import SelectMultiple
-from django.forms import formset_factory, modelformset_factory
-from django.forms import BaseFormSet
+from django.forms import RadioSelect, formset_factory, modelformset_factory
 from django.template.defaultfilters import date
 from django_select2.widgets import Select2MultipleWidget
 from cosinnus.forms.widgets import SplitHiddenDateWidget
@@ -21,6 +23,20 @@ from cosinnus.forms.widgets import SplitHiddenDateWidget
 from cosinnus.utils.validators import validate_file_infection,\
     CleanFromToDateFieldsMixin
 from uritemplate.api import variables
+from django.db.models import Q
+
+
+CHOICE_APPLICANTS_AND_MEMBERS = 1
+CHOICE_ALL_APPLICANTS = 2
+CHOICE_ALL_MEMBERS = 3
+CHOICE_INDIVIDUAL = 4
+
+recipient_choices = (
+        (CHOICE_APPLICANTS_AND_MEMBERS, _('Applicants and members')), 
+        (CHOICE_ALL_APPLICANTS, _('All applicants')), 
+        (CHOICE_ALL_MEMBERS, _('All members')), 
+        (CHOICE_INDIVIDUAL, _('Individual choice'))
+    )
 
 
 class ConferenceRemindersForm(forms.ModelForm):
@@ -40,9 +56,38 @@ class ConferenceRemindersForm(forms.ModelForm):
     send_immediately_subject = forms.CharField(required=False)
     send_immediately_content = forms.CharField(widget=forms.Textarea, required=False)
 
+    send_immediately_users = UserNameModelMultipleChoiceField(
+        queryset=filter_active_users(get_user_model().objects.none()),
+        widget=Select2MultipleWidget,
+        required=False)
+
+    recipients_choices = forms.ChoiceField(
+        choices = recipient_choices,
+        initial=3,
+        widget=RadioSelect,
+        required=False)
+
     class Meta:
         model = get_cosinnus_group_model()
         fields = ('dynamic_fields', )
+
+    def __init__(self, instance, *args, **kwargs):
+        super().__init__(instance=instance, *args, **kwargs)
+        if 'send_immediately_users' in self.fields:
+            pending_application_qs = CosinnusConferenceApplication.objects.filter(conference=instance).filter(may_be_contacted=True).pending_and_accepted() # instance = self.group
+            all_user_ids = list(pending_application_qs.values_list('user', flat=True))
+            members_user_ids = instance.actual_members # covers the current members of the group incl. admins
+            pending_and_accepted_users = get_user_model().objects.filter(Q(id__in=all_user_ids) | Q(id__in=members_user_ids))
+            active_users = filter_active_users(pending_and_accepted_users)
+
+            self.fields['send_immediately_users'] = UserNameModelMultipleChoiceField(
+                queryset=active_users,
+                widget=Select2MultipleWidget,
+                initial=self.fields['send_immediately_users'].initial,
+                required=False
+            )
+            if kwargs.get("data", {}).get("send", None) == "send_immediately":
+                self.fields['send_immediately_users'].required == True
 
     def get_initial_for_field(self, field, field_name):
         dynamic_fields = self.instance.dynamic_fields
@@ -60,10 +105,14 @@ class ConferenceRemindersForm(forms.ModelForm):
             if 'subject' in field_name or 'content' in field_name:
                 if value.replace('\r', '') == get_initial_template(field_name):
                     value = None
-            if value:
+            if value is not None:
                 if not self.instance.dynamic_fields:
                     self.instance.dynamic_fields = {}
-                self.instance.dynamic_fields[key] = value
+                if field_name == 'send_immediately_users':
+                    field_value = [user.id for user in value]
+                else:
+                    field_value = value
+                self.instance.dynamic_fields[key] = field_value
             elif self.instance.dynamic_fields and key in self.instance.dynamic_fields:
                 del self.instance.dynamic_fields[key]
         return super(ConferenceRemindersForm, self).save(commit)
@@ -195,6 +244,12 @@ class ConferenceApplicationForm(CleanFromToDateFieldsMixin, forms.ModelForm):
             del self.fields['information']
         else:
             self.fields['information'].required = True
+        if (not hasattr(self, 'participation_management')
+            or not self.participation_management.may_be_contacted_field_enabled):
+            self.fields['may_be_contacted'].required = False
+        else:
+            self.fields['may_be_contacted'].required = True
+            self.fields['may_be_contacted'].disabled = True
         
         if ('information' in self.fields and hasattr(self, 'participation_management')
             and self.participation_management.information_field_initial_text):
@@ -240,7 +295,7 @@ class ConferenceApplicationManagementForm(forms.ModelForm):
 
     class Meta:
         model = CosinnusConferenceApplication
-        exclude = ['options', 'priorities']
+        exclude = ['options', 'priorities', 'may_be_contacted']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
