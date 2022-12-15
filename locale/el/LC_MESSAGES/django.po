@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-14 10:28+0100\n"
+"POT-Creation-Date: 2022-12-15 15:34+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -314,6 +314,9 @@ msgstr "Μετατροπή επιλεγμένων στοιχείων σε Συσ
 msgid "Invitations to Groups and Projects"
 msgstr "Στις Ομάδες και Έργα μου"
 
+msgid "To invite external guests, share this link:"
+msgstr ""
+
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
 
@@ -610,6 +613,10 @@ msgstr "Ο/η %(sender_name)s μόλις δημιούργησε το έργο \"
 #, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
 msgstr "Ο/η %(sender_name)s μόλις δημιούργησε το έργο \"%(team_name)s\" σε %(portal_name)s από μια ιδέα που ακολουθείτε! <br/><br/> Για να το ελέγξετε, παρακαλούμε κάντε κλικ στον παρακάτω σύνδεσμο. Εκεί μπορείτε να δείτε εάν θα θέλατε να συμμετάσχετε στο έργο."
+
+#, python-format
+msgid "Your match with %(sender_name)s has just been established!"
+msgstr ""
 
 msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
@@ -1103,6 +1110,11 @@ msgstr "Αίτημα πληροφοριών χρήστη"
 
 msgid "Pre-filled content for the information field"
 msgstr "Περιεχόμενο εκ των προτέρων συμπληρωμένο για το πεδίο πληροφοριών"
+
+#, fuzzy
+#| msgid "Request organization"
+msgid "Request contact option"
+msgstr "Αίτημα οργανισμού"
 
 msgid "Priority choice enabled"
 msgstr "Ενεργοποιήθηκε η επιλογή προτεραιότητας"
@@ -1759,6 +1771,52 @@ msgstr ""
 msgid "--- No country selected ---"
 msgstr "--- Δεν έχει επιλεγεί χώρα ---"
 
+#, fuzzy
+#| msgid "Ideas I like"
+msgid "dislike"
+msgstr "Ιδέες που μου αρέσουν"
+
+msgid "like"
+msgstr ""
+
+msgid "ignored"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Χρήστης"
+
+#, fuzzy
+msgid "Match subject"
+msgstr "Θέμα"
+
+#, fuzzy
+#| msgid "Attached object"
+msgid "Match object"
+msgstr "Συνημμένο αντικείμενο"
+
+msgid "Match type"
+msgstr ""
+
+msgid "Match"
+msgstr ""
+
+msgid "Matches"
+msgstr ""
+
+#, python-brace-format
+msgid "Match between {self.from_user} and {self.to_user} has been successfully established."
+msgstr ""
+
+msgid "You and {self.from_user.get_full_name()} matched!"
+msgstr ""
+
+msgid "TODO: Youve matched!"
+msgstr ""
+
+msgid "TODO: Matched chat room greeting message"
+msgstr ""
+
 msgid "Name (EN)"
 msgstr "Όνομα (ΕΝ)"
 
@@ -1817,10 +1875,6 @@ msgstr "Συνημμένο αντικείμενο"
 
 msgid "Attached objects"
 msgstr "Συνημμένα αντικείμενα"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Χρήστης"
 
 msgid "Visited"
 msgstr "Επισκέφθηκε"
@@ -2330,6 +2384,13 @@ msgstr "Ρυθμίσεις"
 
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr "Μπορείτε να ορίσετε τις ρυθμίσεις σύσκεψης σε αυτό το επίπεδο. Όλα τα αντικείμενα κάτω από αυτό το επίπεδο στην ιεραρχία θα έχουν αυτές τις ρυθμίσεις, εκτός εάν έχουν ορίσει τα ίδια ρυθμίσεις σύσκεψης."
+
+#, fuzzy
+msgid "BBB Guest Token"
+msgstr "Εισάγετε διακριτικό:"
+
+msgid "None yet. Join the room to generate a guest token. It will also be shown in the moderator-only message."
+msgstr ""
 
 #, fuzzy
 msgid "Inherited BBB-Parameters"
@@ -3033,6 +3094,10 @@ msgstr "Λήψη των όρων"
 msgid "I accept the conditions in order to submit my application"
 msgstr "Αποδέχομαι του όρους προκειμένου να υποβάλλω την αίτησή μου"
 
+#, fuzzy
+msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
+msgstr "Παρακαλούμε επαληθεύστε τη διεύθυνση email για %(site_name)s!"
+
 msgid "Save changes"
 msgstr "Αποθήκευση αλλαγών"
 
@@ -3109,6 +3174,24 @@ msgstr "Επιλέξτε χρήστες για ανάθεση σε αυτό το
 msgid "List of Applicants"
 msgstr "Λίστα Υποψηφίων"
 
+msgid "Join BBB Meeting as guest"
+msgstr ""
+
+msgid "You are joining a meeting as a guest"
+msgstr ""
+
+msgid "Your name"
+msgstr "Το όνομά σας"
+
+#, fuzzy
+#| msgid "Please enter a token!"
+msgid "Please enter your name"
+msgstr "Παρακαλούμε εισάγετε ένα διακριτικό!"
+
+#, fuzzy
+msgid "Join Meeting"
+msgstr "Διαγραφή..."
+
 #, fuzzy
 msgid "Emails to conference participants"
 msgstr "Εφαρμογές Σύσκεψης"
@@ -3124,11 +3207,11 @@ msgstr "Περιεχόμενο"
 #, python-format
 msgid ""
 "\n"
-"                    This message will be sent to one participant.\n"
+"                    This message will be sent to one user.\n"
 "                    "
 msgid_plural ""
 "\n"
-"                    This message will be sent to %(count)s participants.\n"
+"                    This message will be sent to %(count)s users.\n"
 "                    "
 msgstr[0] ""
 msgstr[1] ""
@@ -3148,7 +3231,33 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "No, don\\"
+msgid "No, do not send"
+msgstr ""
+
+msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
+msgstr ""
+
+msgid "This session is being recorded"
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue reading"
+msgid "Continue"
+msgstr "Συνεχίστε να διαβάζετε"
+
+msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
+msgstr ""
+
+msgid "Popout"
+msgstr ""
+
+msgid "Fullscreen"
+msgstr "Πλήρης Οθόνη"
+
+msgid "Leave Fullscreen"
+msgstr "Αφήστε Πλήρη Οθόνη"
+
+msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
 msgstr ""
 
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
@@ -3230,6 +3339,33 @@ msgstr "Δεν υπάρχουν ακόμη δωμάτια."
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr "Εδώ έχετε τη δυνατότητα να προετοιμάσετε ένα κείμενο με πληροφορίες για όλα τα μέλη της σύσκεψης. Αυτό θα σταλεί αυτόματα 1 εβδομάδα, 1 ημέρα και/ή 1 ώρα πριν από την έναρξη της σύσκεψης. Το email ειδοποίησης πάντα περιέχει ένα σύνδεσμο για τη σύσκεψη"
 
+msgid "Send immediately"
+msgstr ""
+
+msgid "This email will be sent immediately."
+msgstr ""
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr ""
+
+#, fuzzy
+msgid "no instant email has been sent yet."
+msgstr "Δεν έχουν προστεθεί ακόμη στοιχεία επικοινωνίας."
+
+#, fuzzy
+msgid "Mail subject"
+msgstr "Θέμα"
+
+msgid "Mail text"
+msgstr ""
+
+msgid "Send (show preview)"
+msgstr ""
+
+msgid "Send test to myself"
+msgstr "Αποστολή τεστ σε μένα"
+
 msgid "Send 1 week before conference"
 msgstr "Αποστολή 1 εβδομάδα πριν από τη σύσκεψη"
 
@@ -3246,9 +3382,6 @@ msgstr "Θέμα πρόσκλησης"
 msgid "Invitation text"
 msgstr "Κείμενο πρόσκλησης"
 
-msgid "Send test to myself"
-msgstr "Αποστολή τεστ σε μένα"
-
 msgid "Send 1 day before conference"
 msgstr "Αποστολή 1 ημέρα πριν από τη σύσκεψη"
 
@@ -3257,23 +3390,6 @@ msgstr "Αυτό το email θα σταλεί 24 ώρες πριν από την
 
 msgid "Send 1 hour before conference"
 msgstr "Αποστολή 1 ώρα πριν από τη σύσκεψη"
-
-msgid "send immediately"
-msgstr ""
-
-msgid "This email will be sent immediately."
-msgstr ""
-
-#, python-format
-msgid "last instant email was sent on %(date)s "
-msgstr ""
-
-#, fuzzy
-msgid "no instant email has been sent yet."
-msgstr "Δεν έχουν προστεθεί ακόμη στοιχεία επικοινωνίας."
-
-msgid "Send immediately"
-msgstr ""
 
 #, python-format
 msgid "Edit Room “%(title)s”"
@@ -3380,7 +3496,7 @@ msgstr "Μπορείτε άμεσα να δημιουργήσετε εκδηλώ
 msgid "There are no rooms yet."
 msgstr "Δεν υπάρχουν ακόμη δωμάτια."
 
-msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgid "BBB-Meetings can be joined directly by guests, both registered and unregistered users. The guest link will be shown to all moderators in the greeting message of the BBB meeting."
 msgstr ""
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
@@ -4512,32 +4628,6 @@ msgstr "Χάρτης"
 #, fuzzy
 msgid "Meeting"
 msgstr "Διαγραφή..."
-
-msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
-msgstr ""
-
-msgid "This session is being recorded"
-msgstr ""
-
-#, fuzzy
-#| msgid "Continue reading"
-msgid "Continue"
-msgstr "Συνεχίστε να διαβάζετε"
-
-msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
-msgstr ""
-
-msgid "Popout"
-msgstr ""
-
-msgid "Fullscreen"
-msgstr "Πλήρης Οθόνη"
-
-msgid "Leave Fullscreen"
-msgstr "Αφήστε Πλήρη Οθόνη"
-
-msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
-msgstr ""
 
 msgid "Not happy with how your Microsite looks?"
 msgstr "Δεν είστε ευχαριστημένος με την εμφάνιση του Μικρότοπού σας;"
@@ -5793,9 +5883,6 @@ msgstr "Αυτή θα χρησιμοποιηθεί για τη σύνδεσή σ
 msgid "Repeat Password"
 msgstr "Επανάληψη Κωδικού Πρόσβασης"
 
-msgid "Your name"
-msgstr "Το όνομά σας"
-
 msgid "This name will be displayed to other users on the site"
 msgstr "Αυτό το όνομα θα εμφανίζεται σε άλλους χρήστες στον ιστότοπο"
 
@@ -6540,6 +6627,37 @@ msgstr "Διαγραφή προφίλ"
 
 msgid "User overview"
 msgstr "Επισκόπηση χρήστη"
+
+#, fuzzy
+#| msgid "Contact"
+msgid "Direct Contact"
+msgstr "Επικοινωνία"
+
+#, fuzzy
+#| msgid "Search for Organizations"
+msgid "Type of educational institution"
+msgstr "Αναζήτηση για Όργανισμούς"
+
+#, fuzzy
+#| msgid "Location"
+msgid "Function"
+msgstr "Τοποθεσία"
+
+#, fuzzy
+#| msgid "Description"
+msgid "Position"
+msgstr "Περιγραφή"
+
+#, fuzzy
+#| msgid "Remove organization"
+msgid "Name of educational institution"
+msgstr "Αφαίρεση οργανισμού"
+
+msgid "Wonderful, we definetely have so much to discuss!"
+msgstr ""
+
+msgid "Looks like we share no common interests"
+msgstr ""
 
 msgid "Members of your projects and groups only"
 msgstr "Μέλη των έργων και των ομάδων σας μόνο"
@@ -7784,6 +7902,16 @@ msgstr "Ο χρήστης δημιουργήθηκε με επιτυχία!"
 msgid "You do not have any backup tokens set up. Please log in using your OTP tokens."
 msgstr ""
 
+#, fuzzy
+#| msgid "Invalid request."
+msgid "Invalid guest token."
+msgstr "Μη έγκυρο αίτημα."
+
+#, fuzzy
+#| msgid "An error occured when trying to disconnect your facebook account! Please contact an administrator!"
+msgid "There was an error when trying to redirect you to the BBB room. Please contact an administrator!"
+msgstr "Συνέβη ένα σφάλμα κατά την προσπάθειά σας να αποσυνδεθείτε από τον λογαριασμό σας στο facebook! Παρακαλούμε επικοινωνήστε με ένα διαχειριστή!"
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Η γλώσσα \"%s\" δεν υποστηρίζεται"
@@ -8295,6 +8423,9 @@ msgstr "Οι παρακάτω στήλες δεν αναγνωρίστηκαν �
 msgid "The import was successfully archived."
 msgstr "Η εισαγωγή αρχειοθετήθηκε με επιτυχία."
 
+msgid "User id should be an integer and it should not be None."
+msgstr ""
+
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
 msgstr "Δεν είστε μέλος του %s αυτή τη στιγμή! Εάν επιθυμείτε μπορείτε να ζητήσετε να γίνετε μέλος παρακάτω."
@@ -8438,6 +8569,14 @@ msgstr "Η πρόσκληση διαγράφηκε με επιτυχία."
 #| msgid "Could not save your like setting because of an error."
 msgid "Recording %s could not be deleted because of a server error."
 msgstr "Δεν ήταν δυνατή η αποθήκευση της ρύθμισης \"Μου αρέσει\" λόγω σφάλματος."
+
+msgid "Please supply one ore more recipients."
+msgstr ""
+
+#, fuzzy
+#| msgid "Cosinnus conference application"
+msgid "No conference applicants found at the moment."
+msgstr "Αίτηση Σύσκεψης Cosinnus"
 
 msgid "The message was sent to all participants."
 msgstr ""
@@ -11092,6 +11231,9 @@ msgstr "Επιθυμώ να είμαι ο Συντονιστής αυτής τη
 
 msgid "As a Moderator, you will receive an instant notification whenever ANY publicly visible content is posted on this portal. Since you are a portal administrator you can then also delete the content if it is offensive or critical. To delete it, visit the content page on the website while logged into this account."
 msgstr "Ως Συντονιστής θα λαμβάνετε μια άμεση ειδοποίηση όταν αναρτάται ΟΠΟΙΟΔΗΠΟΤΕ περιεχόμενο προβάλλεται δημόσια σε αυτή την πύλη. Εφόσον είστε διαχειριστής πύλης μπορείτε επίσης να διαγράφετε το περιεχόμενο σε περίπτωση που είναι προσβλητικό ή επικριτικό. Για να το διαγράψετε, επισκεφτείτε την σελίδα του περιεχομένου στην ιστοσελίδα εφόσον έχετε συνδεθεί σε αυτόν τον λογαριασμό."
+
+msgid "Additionally, you have opted in to receive emails from organizers from these conferences. <br/> You may opt out by revoking your application or by leaving the conference:"
+msgstr ""
 
 msgid "Immediately"
 msgstr "Άμεσα"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-14 10:28+0100\n"
+"POT-Creation-Date: 2022-12-15 15:34+0100\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -312,6 +312,9 @@ msgstr "Convertir les éléments sélectionnés en conférences"
 msgid "Invitations to Groups and Projects"
 msgstr "Dans mes groupes et projets"
 
+msgid "To invite external guests, share this link:"
+msgstr ""
+
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
 
@@ -608,6 +611,10 @@ msgstr "%(sender_name)s vient de créer le projet %(team_name)s à partir d'une 
 #, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
 msgstr "%(sender_name)s vient de créer le projet \"%(team_name)s\" sur %(portal_name)s à partir d'une idée que tu suis ! <br/><br/> Pour aller le voir, clique sur le lien ci-dessous. Tu pourras voir si tu souhaites rejoindre le projet."
+
+#, python-format
+msgid "Your match with %(sender_name)s has just been established!"
+msgstr ""
 
 msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
@@ -1101,6 +1108,11 @@ msgstr "Demander des informations sur l'utilisateur"
 
 msgid "Pre-filled content for the information field"
 msgstr "Contenu pré-rempli pour le domaine de l’information"
+
+#, fuzzy
+#| msgid "Request organization"
+msgid "Request contact option"
+msgstr "Demander une organisation"
 
 msgid "Priority choice enabled"
 msgstr "Choix prioritaire activé"
@@ -1756,6 +1768,52 @@ msgstr ""
 msgid "--- No country selected ---"
 msgstr "--- Aucun pays sélectionné ---"
 
+#, fuzzy
+#| msgid "Ideas I like"
+msgid "dislike"
+msgstr "Idées que j'aime"
+
+msgid "like"
+msgstr ""
+
+msgid "ignored"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Utilisateur"
+
+#, fuzzy
+msgid "Match subject"
+msgstr "Sujet"
+
+#, fuzzy
+#| msgid "Attached object"
+msgid "Match object"
+msgstr "Objet attaché"
+
+msgid "Match type"
+msgstr ""
+
+msgid "Match"
+msgstr ""
+
+msgid "Matches"
+msgstr ""
+
+#, python-brace-format
+msgid "Match between {self.from_user} and {self.to_user} has been successfully established."
+msgstr ""
+
+msgid "You and {self.from_user.get_full_name()} matched!"
+msgstr ""
+
+msgid "TODO: Youve matched!"
+msgstr ""
+
+msgid "TODO: Matched chat room greeting message"
+msgstr ""
+
 msgid "Name (EN)"
 msgstr "Nom (EN)"
 
@@ -1814,10 +1872,6 @@ msgstr "Objet attaché"
 
 msgid "Attached objects"
 msgstr "Objets attachés"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Utilisateur"
 
 msgid "Visited"
 msgstr "Visité"
@@ -2327,6 +2381,13 @@ msgstr "Paramètres"
 
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr "Vous pouvez définir les paramètres de conférence à ce niveau. Tous les objets situés à ce niveau de la hiérarchie hériteront de ces paramètres, sauf s'ils ont eux-mêmes défini des paramètres de conférence."
+
+#, fuzzy
+msgid "BBB Guest Token"
+msgstr "Entrer un jeton :"
+
+msgid "None yet. Join the room to generate a guest token. It will also be shown in the moderator-only message."
+msgstr ""
 
 #, fuzzy
 msgid "Inherited BBB-Parameters"
@@ -3030,6 +3091,10 @@ msgstr "Télécharger les conditions"
 msgid "I accept the conditions in order to submit my application"
 msgstr "J’accepte les conditions pour soumettre ma demande"
 
+#, fuzzy
+msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
+msgstr "Vérifie ton adresse e-mail pour %(site_name)s !"
+
 msgid "Save changes"
 msgstr "Enregistrer les changements"
 
@@ -3106,6 +3171,24 @@ msgstr "Choisis les utilisateurs à affecter à cet atelier"
 msgid "List of Applicants"
 msgstr "Liste des candidats"
 
+msgid "Join BBB Meeting as guest"
+msgstr ""
+
+msgid "You are joining a meeting as a guest"
+msgstr ""
+
+msgid "Your name"
+msgstr "Ton nom"
+
+#, fuzzy
+#| msgid "Please enter a token!"
+msgid "Please enter your name"
+msgstr "Veuillez insérer un jeton !"
+
+#, fuzzy
+msgid "Join Meeting"
+msgstr "En cours de suppression..."
+
 #, fuzzy
 msgid "Emails to conference participants"
 msgstr "Demandes de conférence"
@@ -3121,11 +3204,11 @@ msgstr "Contenu"
 #, python-format
 msgid ""
 "\n"
-"                    This message will be sent to one participant.\n"
+"                    This message will be sent to one user.\n"
 "                    "
 msgid_plural ""
 "\n"
-"                    This message will be sent to %(count)s participants.\n"
+"                    This message will be sent to %(count)s users.\n"
 "                    "
 msgstr[0] ""
 msgstr[1] ""
@@ -3145,7 +3228,33 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "No, don\\"
+msgid "No, do not send"
+msgstr ""
+
+msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
+msgstr ""
+
+msgid "This session is being recorded"
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue reading"
+msgid "Continue"
+msgstr "Continuer à lire"
+
+msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
+msgstr ""
+
+msgid "Popout"
+msgstr ""
+
+msgid "Fullscreen"
+msgstr "Plein écran"
+
+msgid "Leave Fullscreen"
+msgstr "Quitter le mode plein écran"
+
+msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
 msgstr ""
 
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
@@ -3227,6 +3336,33 @@ msgstr "Il n’y a pas encore de salles."
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr "Ici, vous avez la possibilité de préparer un texte d’information pour tous les membres de la conférence. Celui-ci sera envoyé automatiquement 1 semaine, 1 jour et/ou 1 heure avant le début de la conférence. Le message de notification contient toujours un lien vers la conférence"
 
+msgid "Send immediately"
+msgstr ""
+
+msgid "This email will be sent immediately."
+msgstr ""
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr ""
+
+#, fuzzy
+msgid "no instant email has been sent yet."
+msgstr "Aucune données de contact n'ont été ajoutées."
+
+#, fuzzy
+msgid "Mail subject"
+msgstr "Sujet"
+
+msgid "Mail text"
+msgstr ""
+
+msgid "Send (show preview)"
+msgstr ""
+
+msgid "Send test to myself"
+msgstr "Envoyer le test à moi-même"
+
 msgid "Send 1 week before conference"
 msgstr "Envoyer 1 semaine avant la conférence"
 
@@ -3243,9 +3379,6 @@ msgstr "Sujet d’invitation"
 msgid "Invitation text"
 msgstr "Texte d’invitation"
 
-msgid "Send test to myself"
-msgstr "Envoyer le test à moi-même"
-
 msgid "Send 1 day before conference"
 msgstr "Envoyer 1 jour avant la conférence"
 
@@ -3254,23 +3387,6 @@ msgstr "Cet e-mail sera envoyé 24 heures avant la date de début de la confére
 
 msgid "Send 1 hour before conference"
 msgstr "Envoyer 1 heure avant la conférence"
-
-msgid "send immediately"
-msgstr ""
-
-msgid "This email will be sent immediately."
-msgstr ""
-
-#, python-format
-msgid "last instant email was sent on %(date)s "
-msgstr ""
-
-#, fuzzy
-msgid "no instant email has been sent yet."
-msgstr "Aucune données de contact n'ont été ajoutées."
-
-msgid "Send immediately"
-msgstr ""
 
 #, python-format
 msgid "Edit Room “%(title)s”"
@@ -3377,7 +3493,7 @@ msgstr "Tu peux créer directement des événements de conférence pour les sall
 msgid "There are no rooms yet."
 msgstr "Il n’y a pas encore de salles."
 
-msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgid "BBB-Meetings can be joined directly by guests, both registered and unregistered users. The guest link will be shown to all moderators in the greeting message of the BBB meeting."
 msgstr ""
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
@@ -4507,32 +4623,6 @@ msgstr "Plan"
 #, fuzzy
 msgid "Meeting"
 msgstr "En cours de suppression..."
-
-msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
-msgstr ""
-
-msgid "This session is being recorded"
-msgstr ""
-
-#, fuzzy
-#| msgid "Continue reading"
-msgid "Continue"
-msgstr "Continuer à lire"
-
-msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
-msgstr ""
-
-msgid "Popout"
-msgstr ""
-
-msgid "Fullscreen"
-msgstr "Plein écran"
-
-msgid "Leave Fullscreen"
-msgstr "Quitter le mode plein écran"
-
-msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
-msgstr ""
 
 msgid "Not happy with how your Microsite looks?"
 msgstr "Pas satisfait de l'apparence du microsite ?"
@@ -5796,9 +5886,6 @@ msgstr "Elle sera utilisée comme identifiant. Les e-mails de notification seron
 msgid "Repeat Password"
 msgstr "Répéter mot de passe"
 
-msgid "Your name"
-msgstr "Ton nom"
-
 msgid "This name will be displayed to other users on the site"
 msgstr "Ce nom sera affiché aux autres utilisateurs sur le site"
 
@@ -6543,6 +6630,37 @@ msgstr "Supprimer profil"
 
 msgid "User overview"
 msgstr "Vue d'ensemble de l'utilisateur"
+
+#, fuzzy
+#| msgid "Contact"
+msgid "Direct Contact"
+msgstr "Contact"
+
+#, fuzzy
+#| msgid "Search for Organizations"
+msgid "Type of educational institution"
+msgstr "Rechercher des organisations"
+
+#, fuzzy
+#| msgid "Location"
+msgid "Function"
+msgstr "Lieu"
+
+#, fuzzy
+#| msgid "Description"
+msgid "Position"
+msgstr "Description"
+
+#, fuzzy
+#| msgid "Remove organization"
+msgid "Name of educational institution"
+msgstr "Enlever l’organisation"
+
+msgid "Wonderful, we definetely have so much to discuss!"
+msgstr ""
+
+msgid "Looks like we share no common interests"
+msgstr ""
 
 msgid "Members of your projects and groups only"
 msgstr "Seulement les membres de tes projets et groupes"
@@ -7789,6 +7907,16 @@ msgstr "Utilisateur créé avec succès !"
 msgid "You do not have any backup tokens set up. Please log in using your OTP tokens."
 msgstr ""
 
+#, fuzzy
+#| msgid "Invalid request."
+msgid "Invalid guest token."
+msgstr "Demande invalide."
+
+#, fuzzy
+#| msgid "An error occured when trying to disconnect your facebook account! Please contact an administrator!"
+msgid "There was an error when trying to redirect you to the BBB room. Please contact an administrator!"
+msgstr "Une erreur est survenue durant la tentative de déconnexion de ton compte Facebook ! Contacte un admin !"
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Le langage \"%s\" n'est pas supporté"
@@ -8299,6 +8427,9 @@ msgstr "Les colonnes suivantes n’ont pas été reconnues et ont été ignorée
 msgid "The import was successfully archived."
 msgstr "L’importation a été archivée avec succès."
 
+msgid "User id should be an integer and it should not be None."
+msgstr ""
+
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
 msgstr "Tu n'es pas membre de %s ! Si tu souhaites, tu peux demander à le devenir ci-dessous."
@@ -8442,6 +8573,14 @@ msgstr "L’invitation a été supprimée avec succès."
 #| msgid "Could not save your like setting because of an error."
 msgid "Recording %s could not be deleted because of a server error."
 msgstr "Ton paramètre \"j'aime\" n'a pas pu être enregistré à cause d'une erreur."
+
+msgid "Please supply one ore more recipients."
+msgstr ""
+
+#, fuzzy
+#| msgid "Cosinnus conference application"
+msgid "No conference applicants found at the moment."
+msgstr "Demande de participation à la conférence Cosinnus"
 
 msgid "The message was sent to all participants."
 msgstr ""
@@ -11096,6 +11235,9 @@ msgstr "Je souhaite être modérateur pour ce portail"
 
 msgid "As a Moderator, you will receive an instant notification whenever ANY publicly visible content is posted on this portal. Since you are a portal administrator you can then also delete the content if it is offensive or critical. To delete it, visit the content page on the website while logged into this account."
 msgstr "En tant que modérateur, vous recevrez une notification instantanée chaque fois qu'un contenu visible publiquement est publié sur ce portail. En tant qu'administrateur du portail, vous pouvez également supprimer le contenu s'il est offensant ou critique. Pour le supprimer, visitez la page de contenu sur le site Web lorsque vous êtes connecté à ce compte."
+
+msgid "Additionally, you have opted in to receive emails from organizers from these conferences. <br/> You may opt out by revoking your application or by leaving the conference:"
+msgstr ""
 
 msgid "Immediately"
 msgstr "Immédiatement"

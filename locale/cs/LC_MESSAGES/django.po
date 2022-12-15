@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-14 10:28+0100\n"
+"POT-Creation-Date: 2022-12-15 15:34+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -321,6 +321,9 @@ msgstr "Převést vybrané položky do konferencí"
 msgid "Invitations to Groups and Projects"
 msgstr "V mých skupinách a projektech"
 
+msgid "To invite external guests, share this link:"
+msgstr ""
+
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
 
@@ -626,6 +629,10 @@ msgstr "%(sender_name)s právě vytvořil/a projekt \"%(team_name)s\" z nápadu,
 #, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
 msgstr "%(sender_name)s právě vytvořil/a projekt \"%(team_name)s\" na %(portal_name)s z nápadu, který sledujete! <br/><br/> Chcete-li si ho prohlédnout, klikněte na odkaz níže. Zde uvidíte, zda se chcete k projektu připojit."
+
+#, python-format
+msgid "Your match with %(sender_name)s has just been established!"
+msgstr ""
 
 msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
@@ -1119,6 +1126,11 @@ msgstr "Vyžádejte si informace o uživateli"
 
 msgid "Pre-filled content for the information field"
 msgstr "Předvyplněný obsah pro informační pole"
+
+#, fuzzy
+#| msgid "Request organization"
+msgid "Request contact option"
+msgstr "Požádat organizaci"
 
 msgid "Priority choice enabled"
 msgstr "Umožněn výběr priorit"
@@ -1775,6 +1787,52 @@ msgstr ""
 msgid "--- No country selected ---"
 msgstr "--- Nebyla vybrána žádná země ---"
 
+#, fuzzy
+#| msgid "Ideas I like"
+msgid "dislike"
+msgstr "Nápady, které se mi líbí"
+
+msgid "like"
+msgstr ""
+
+msgid "ignored"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Uživatel"
+
+#, fuzzy
+msgid "Match subject"
+msgstr "Předmět"
+
+#, fuzzy
+#| msgid "Attached object"
+msgid "Match object"
+msgstr "Přiložený objekt"
+
+msgid "Match type"
+msgstr ""
+
+msgid "Match"
+msgstr ""
+
+msgid "Matches"
+msgstr ""
+
+#, python-brace-format
+msgid "Match between {self.from_user} and {self.to_user} has been successfully established."
+msgstr ""
+
+msgid "You and {self.from_user.get_full_name()} matched!"
+msgstr ""
+
+msgid "TODO: Youve matched!"
+msgstr ""
+
+msgid "TODO: Matched chat room greeting message"
+msgstr ""
+
 msgid "Name (EN)"
 msgstr "Jméno (EN)"
 
@@ -1833,10 +1891,6 @@ msgstr "Přiložený objekt"
 
 msgid "Attached objects"
 msgstr "Přiložené objekty"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Uživatel"
 
 msgid "Visited"
 msgstr "Navštíveno"
@@ -2346,6 +2400,13 @@ msgstr "Nastavení"
 
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr "Můžete nastavit nastavení konference na této úrovni. Všechny předměty pod touto úrovní hierarchie budou obsahovat tato nastavení, pokud nemají nastavená vlastní nastavení konference."
+
+#, fuzzy
+msgid "BBB Guest Token"
+msgstr "Zadejte token:"
+
+msgid "None yet. Join the room to generate a guest token. It will also be shown in the moderator-only message."
+msgstr ""
 
 #, fuzzy
 msgid "Inherited BBB-Parameters"
@@ -3083,6 +3144,10 @@ msgstr "Stáhněte si podmínky"
 msgid "I accept the conditions in order to submit my application"
 msgstr "Souhlasím s podmínkami, abych mohl poslat svou žádost"
 
+#, fuzzy
+msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
+msgstr "Ověřte prosím svou e-mailovou adresu pro %(site_name)s!"
+
 msgid "Save changes"
 msgstr "Uložte změny"
 
@@ -3169,6 +3234,24 @@ msgstr "Vyberte uživatele, kteří budou přiděleni k tomuto workshopu"
 msgid "List of Applicants"
 msgstr "Seznam žadatelů"
 
+msgid "Join BBB Meeting as guest"
+msgstr ""
+
+msgid "You are joining a meeting as a guest"
+msgstr ""
+
+msgid "Your name"
+msgstr "Vaše jméno"
+
+#, fuzzy
+#| msgid "Please enter a token!"
+msgid "Please enter your name"
+msgstr "Zadejte prosím token!"
+
+#, fuzzy
+msgid "Join Meeting"
+msgstr "Mazání..."
+
 #, fuzzy
 msgid "Emails to conference participants"
 msgstr "Žádost o účast v konferenci"
@@ -3184,11 +3267,11 @@ msgstr "Obsah"
 #, python-format
 msgid ""
 "\n"
-"                    This message will be sent to one participant.\n"
+"                    This message will be sent to one user.\n"
 "                    "
 msgid_plural ""
 "\n"
-"                    This message will be sent to %(count)s participants.\n"
+"                    This message will be sent to %(count)s users.\n"
 "                    "
 msgstr[0] ""
 msgstr[1] ""
@@ -3212,7 +3295,33 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-msgid "No, don\\"
+msgid "No, do not send"
+msgstr ""
+
+msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
+msgstr ""
+
+msgid "This session is being recorded"
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue reading"
+msgid "Continue"
+msgstr "Pokračovat ve čtení"
+
+msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
+msgstr ""
+
+msgid "Popout"
+msgstr ""
+
+msgid "Fullscreen"
+msgstr "Celá obrazovka"
+
+msgid "Leave Fullscreen"
+msgstr "Opustit celou obrazovku"
+
+msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
 msgstr ""
 
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
@@ -3294,6 +3403,33 @@ msgstr "Zatím tu nejsou žádné místnosti."
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr "Zde máte možnost připravit informační text pro všechny účastníky konference. Bude odeslán automaticky 1 týden, 1 den a / nebo 1 hodinu před zahájením konference. E-maily s upozorněním vždy obsahují link na konferenci"
 
+msgid "Send immediately"
+msgstr ""
+
+msgid "This email will be sent immediately."
+msgstr ""
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr ""
+
+#, fuzzy
+msgid "no instant email has been sent yet."
+msgstr "Zatím nebyly přidány žádné kontaktní údaje."
+
+#, fuzzy
+msgid "Mail subject"
+msgstr "Předmět"
+
+msgid "Mail text"
+msgstr ""
+
+msgid "Send (show preview)"
+msgstr ""
+
+msgid "Send test to myself"
+msgstr "Zaslat test sobě samému"
+
 msgid "Send 1 week before conference"
 msgstr "Poslat 1 týden před zahájením konference"
 
@@ -3310,9 +3446,6 @@ msgstr "Předmět pozvání"
 msgid "Invitation text"
 msgstr "Text pozvání"
 
-msgid "Send test to myself"
-msgstr "Zaslat test sobě samému"
-
 msgid "Send 1 day before conference"
 msgstr "Zaslat 1 den před zahájením konference"
 
@@ -3321,23 +3454,6 @@ msgstr "Tento e-mail bude poslán 24 hodin před zahájením konference."
 
 msgid "Send 1 hour before conference"
 msgstr "Poslat 1 hodinu před zahájením konference"
-
-msgid "send immediately"
-msgstr ""
-
-msgid "This email will be sent immediately."
-msgstr ""
-
-#, python-format
-msgid "last instant email was sent on %(date)s "
-msgstr ""
-
-#, fuzzy
-msgid "no instant email has been sent yet."
-msgstr "Zatím nebyly přidány žádné kontaktní údaje."
-
-msgid "Send immediately"
-msgstr ""
 
 #, python-format
 msgid "Edit Room “%(title)s”"
@@ -3444,7 +3560,7 @@ msgstr "Můžete přímo vytvořit eventy konference z tohoto místa pomocí kon
 msgid "There are no rooms yet."
 msgstr "Zatím tu nejsou žádné místnosti."
 
-msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgid "BBB-Meetings can be joined directly by guests, both registered and unregistered users. The guest link will be shown to all moderators in the greeting message of the BBB meeting."
 msgstr ""
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
@@ -4577,32 +4693,6 @@ msgstr "Mapa"
 #, fuzzy
 msgid "Meeting"
 msgstr "Mazání..."
-
-msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
-msgstr ""
-
-msgid "This session is being recorded"
-msgstr ""
-
-#, fuzzy
-#| msgid "Continue reading"
-msgid "Continue"
-msgstr "Pokračovat ve čtení"
-
-msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
-msgstr ""
-
-msgid "Popout"
-msgstr ""
-
-msgid "Fullscreen"
-msgstr "Celá obrazovka"
-
-msgid "Leave Fullscreen"
-msgstr "Opustit celou obrazovku"
-
-msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
-msgstr ""
 
 msgid "Not happy with how your Microsite looks?"
 msgstr "Nejste spokojeni s tím, jak vypadá vaše mikrostránka?"
@@ -5859,9 +5949,6 @@ msgstr "Bude používána jako vaše přihlašovací jméno. Na tuto adresu budo
 msgid "Repeat Password"
 msgstr "Zopakovat heslo"
 
-msgid "Your name"
-msgstr "Vaše jméno"
-
 msgid "This name will be displayed to other users on the site"
 msgstr "Toto jméno se zobrazí ostatním uživatelům na webu"
 
@@ -6606,6 +6693,37 @@ msgstr "Smazat profil"
 
 msgid "User overview"
 msgstr "Přehled uživatelů"
+
+#, fuzzy
+#| msgid "Contact"
+msgid "Direct Contact"
+msgstr "Kontakt"
+
+#, fuzzy
+#| msgid "Search for Organizations"
+msgid "Type of educational institution"
+msgstr "Hledat organizace"
+
+#, fuzzy
+#| msgid "Location"
+msgid "Function"
+msgstr "Umístění"
+
+#, fuzzy
+#| msgid "Description"
+msgid "Position"
+msgstr "Popis"
+
+#, fuzzy
+#| msgid "Remove organization"
+msgid "Name of educational institution"
+msgstr "Odebrat organizaci"
+
+msgid "Wonderful, we definetely have so much to discuss!"
+msgstr ""
+
+msgid "Looks like we share no common interests"
+msgstr ""
 
 msgid "Members of your projects and groups only"
 msgstr "Pouze členové vašich projektů a skupin"
@@ -7856,6 +7974,16 @@ msgstr "Uživatel byl úspěšně vytvořen!"
 msgid "You do not have any backup tokens set up. Please log in using your OTP tokens."
 msgstr ""
 
+#, fuzzy
+#| msgid "Invalid request."
+msgid "Invalid guest token."
+msgstr "Neplatný požadavek."
+
+#, fuzzy
+#| msgid "An error occured when trying to disconnect your facebook account! Please contact an administrator!"
+msgid "There was an error when trying to redirect you to the BBB room. Please contact an administrator!"
+msgstr "Při pokusu o odpojení účtu na Facebooku došlo k chybě! Kontaktujte prosím správce!"
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Jazyk \"%s\" není podporován"
@@ -8367,6 +8495,9 @@ msgstr "Následující sloupce nebylo rozpoznány a byly ignorovány"
 msgid "The import was successfully archived."
 msgstr "Import byl úspěšně vložen do archivu."
 
+msgid "User id should be an integer and it should not be None."
+msgstr ""
+
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
 msgstr "Momentálně nejste členem %s! Pokud si přejete, můžete požádat o členství níže."
@@ -8512,6 +8643,14 @@ msgstr "Pozvánka byla úspěšně smazána."
 #| msgid "Could not save your like setting because of an error."
 msgid "Recording %s could not be deleted because of a server error."
 msgstr "Vaše nastavení Like se nepodařilo uložit z důvodu chyby."
+
+msgid "Please supply one ore more recipients."
+msgstr ""
+
+#, fuzzy
+#| msgid "Cosinnus conference application"
+msgid "No conference applicants found at the moment."
+msgstr "Cosinnus žádosti o účast v konferenci"
 
 msgid "The message was sent to all participants."
 msgstr ""
@@ -11190,6 +11329,9 @@ msgstr "Chtěl bych být moderátorem tohoto portálu"
 
 msgid "As a Moderator, you will receive an instant notification whenever ANY publicly visible content is posted on this portal. Since you are a portal administrator you can then also delete the content if it is offensive or critical. To delete it, visit the content page on the website while logged into this account."
 msgstr "Jako moderátor obdržíte okamžité oznámení, kdykoli se na tomto portálu zveřejní JAKÝKOLI veřejně viditelný obsah. Jelikož jste správcem portálu, můžete také odstranit obsah, pokud je urážlivý nebo kritický. Chcete-li jej smazat, přihlaste se k tomuto účtu na stránce s obsahem na webu."
+
+msgid "Additionally, you have opted in to receive emails from organizers from these conferences. <br/> You may opt out by revoking your application or by leaving the conference:"
+msgstr ""
 
 msgid "Immediately"
 msgstr "Okamžitě"

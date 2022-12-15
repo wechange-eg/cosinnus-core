@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-14 10:28+0100\n"
+"POT-Creation-Date: 2022-12-15 15:34+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -317,6 +317,9 @@ msgstr "Convertiți Grupuri selectate în Proiecte"
 msgid "Invitations to Groups and Projects"
 msgstr "În Grupurile și Proiectele mele"
 
+msgid "To invite external guests, share this link:"
+msgstr ""
+
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
 
@@ -615,6 +618,10 @@ msgstr "%(sender_name)s tocmai a creat proiectul ”%(team_name)s” dintr-o ide
 #, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
 msgstr "%(sender_name)s tocmai a creat proiectul ”%(team_name)s” pe %(portal_name)s dintr-o idee pe care o urmezi! <br/><br/> Pentru a-l verifica, faceți clic pe linkul de mai jos. Acolo puteți vedea dacă doriți să vă alăturați proiectului."
+
+#, python-format
+msgid "Your match with %(sender_name)s has just been established!"
+msgstr ""
 
 msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
@@ -1114,6 +1121,10 @@ msgstr "Creează Organizarea"
 
 msgid "Pre-filled content for the information field"
 msgstr ""
+
+#, fuzzy
+msgid "Request contact option"
+msgstr "Creează Organizarea"
 
 msgid "Priority choice enabled"
 msgstr ""
@@ -1797,6 +1808,52 @@ msgstr ""
 msgid "--- No country selected ---"
 msgstr "--- Nici o țară selectată ---"
 
+#, fuzzy
+#| msgid "Ideas I like"
+msgid "dislike"
+msgstr "Idei îmi plac"
+
+msgid "like"
+msgstr ""
+
+msgid "ignored"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Utilizator"
+
+#, fuzzy
+msgid "Match subject"
+msgstr "Invitații"
+
+#, fuzzy
+#| msgid "Attached object"
+msgid "Match object"
+msgstr "Obiect atașat"
+
+msgid "Match type"
+msgstr ""
+
+msgid "Match"
+msgstr ""
+
+msgid "Matches"
+msgstr ""
+
+#, python-brace-format
+msgid "Match between {self.from_user} and {self.to_user} has been successfully established."
+msgstr ""
+
+msgid "You and {self.from_user.get_full_name()} matched!"
+msgstr ""
+
+msgid "TODO: Youve matched!"
+msgstr ""
+
+msgid "TODO: Matched chat room greeting message"
+msgstr ""
+
 msgid "Name (EN)"
 msgstr "Nume (EN)"
 
@@ -1855,10 +1912,6 @@ msgstr "Obiect atașat"
 
 msgid "Attached objects"
 msgstr "Obiecte atașate"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Utilizator"
 
 msgid "Visited"
 msgstr "Vizitat"
@@ -2375,6 +2428,13 @@ msgid "BBB-Room Settings"
 msgstr "Setări"
 
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
+msgstr ""
+
+#, fuzzy
+msgid "BBB Guest Token"
+msgstr "Intră în jeton:"
+
+msgid "None yet. Join the room to generate a guest token. It will also be shown in the moderator-only message."
 msgstr ""
 
 #, fuzzy
@@ -3115,6 +3175,10 @@ msgstr "Statistici Simple"
 msgid "I accept the conditions in order to submit my application"
 msgstr ""
 
+#, fuzzy
+msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
+msgstr "Verificați adresa de e-mail pentru %(site_name)s!"
+
 msgid "Save changes"
 msgstr "Salvează modificările"
 
@@ -3200,6 +3264,24 @@ msgstr ""
 msgid "List of Applicants"
 msgstr ""
 
+msgid "Join BBB Meeting as guest"
+msgstr ""
+
+msgid "You are joining a meeting as a guest"
+msgstr ""
+
+msgid "Your name"
+msgstr "Numele dumneavoastră"
+
+#, fuzzy
+#| msgid "Please enter a token!"
+msgid "Please enter your name"
+msgstr "Vă rog introduceți un jeton!"
+
+#, fuzzy
+msgid "Join Meeting"
+msgstr "Ștergerea..."
+
 #, fuzzy
 msgid "Emails to conference participants"
 msgstr "Setările Conferinței"
@@ -3214,11 +3296,11 @@ msgstr "Conținut"
 #, python-format
 msgid ""
 "\n"
-"                    This message will be sent to one participant.\n"
+"                    This message will be sent to one user.\n"
 "                    "
 msgid_plural ""
 "\n"
-"                    This message will be sent to %(count)s participants.\n"
+"                    This message will be sent to %(count)s users.\n"
 "                    "
 msgstr[0] ""
 msgstr[1] ""
@@ -3240,7 +3322,33 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-msgid "No, don\\"
+msgid "No, do not send"
+msgstr ""
+
+msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
+msgstr ""
+
+msgid "This session is being recorded"
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue reading"
+msgid "Continue"
+msgstr "Continuați lectura"
+
+msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
+msgstr ""
+
+msgid "Popout"
+msgstr ""
+
+msgid "Fullscreen"
+msgstr "Ecran complet"
+
+msgid "Leave Fullscreen"
+msgstr "Lăsați pe ecran complet"
+
+msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
 msgstr ""
 
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
@@ -3325,6 +3433,33 @@ msgstr "Nu există articole încă"
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr ""
 
+msgid "Send immediately"
+msgstr ""
+
+msgid "This email will be sent immediately."
+msgstr ""
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr ""
+
+#, fuzzy
+msgid "no instant email has been sent yet."
+msgstr "Nu au fost adăugate încă date de contact."
+
+#, fuzzy
+msgid "Mail subject"
+msgstr "Invitații"
+
+msgid "Mail text"
+msgstr ""
+
+msgid "Send (show preview)"
+msgstr ""
+
+msgid "Send test to myself"
+msgstr ""
+
 msgid "Send 1 week before conference"
 msgstr ""
 
@@ -3343,9 +3478,6 @@ msgstr "Invitații"
 msgid "Invitation text"
 msgstr "Invitații"
 
-msgid "Send test to myself"
-msgstr ""
-
 msgid "Send 1 day before conference"
 msgstr ""
 
@@ -3353,23 +3485,6 @@ msgid "This e-mail will be sent out 24 hours before the conference start date."
 msgstr ""
 
 msgid "Send 1 hour before conference"
-msgstr ""
-
-msgid "send immediately"
-msgstr ""
-
-msgid "This email will be sent immediately."
-msgstr ""
-
-#, python-format
-msgid "last instant email was sent on %(date)s "
-msgstr ""
-
-#, fuzzy
-msgid "no instant email has been sent yet."
-msgstr "Nu au fost adăugate încă date de contact."
-
-msgid "Send immediately"
 msgstr ""
 
 #, fuzzy, python-format
@@ -3485,7 +3600,7 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr "Nu există articole încă"
 
-msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgid "BBB-Meetings can be joined directly by guests, both registered and unregistered users. The guest link will be shown to all moderators in the greeting message of the BBB meeting."
 msgstr ""
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
@@ -4650,32 +4765,6 @@ msgstr "Hartă"
 #, fuzzy
 msgid "Meeting"
 msgstr "Ștergerea..."
-
-msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
-msgstr ""
-
-msgid "This session is being recorded"
-msgstr ""
-
-#, fuzzy
-#| msgid "Continue reading"
-msgid "Continue"
-msgstr "Continuați lectura"
-
-msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
-msgstr ""
-
-msgid "Popout"
-msgstr ""
-
-msgid "Fullscreen"
-msgstr "Ecran complet"
-
-msgid "Leave Fullscreen"
-msgstr "Lăsați pe ecran complet"
-
-msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
-msgstr ""
 
 msgid "Not happy with how your Microsite looks?"
 msgstr "Nu ești mulțumit de aspectul Microsite-lui tău?"
@@ -5941,9 +6030,6 @@ msgstr "Aceasta va fi folosită ca autentificare. E-mailurile de notificare vor 
 msgid "Repeat Password"
 msgstr "Repetă Parola"
 
-msgid "Your name"
-msgstr "Numele dumneavoastră"
-
 msgid "This name will be displayed to other users on the site"
 msgstr "Acest nume va fi afișat altor utilizatori de pe site"
 
@@ -6699,6 +6785,36 @@ msgstr "Șterge profilul"
 
 msgid "User overview"
 msgstr "Prezentarea generală a utilizatorului"
+
+#, fuzzy
+#| msgid "Contact"
+msgid "Direct Contact"
+msgstr "Contact"
+
+#, fuzzy
+#| msgid "Search for Organizations"
+msgid "Type of educational institution"
+msgstr "Căutați organizații"
+
+#, fuzzy
+#| msgid "Location"
+msgid "Function"
+msgstr "Locație"
+
+#, fuzzy
+#| msgid "Description"
+msgid "Position"
+msgstr "Descriere"
+
+#, fuzzy
+msgid "Name of educational institution"
+msgstr "Eliminați locația"
+
+msgid "Wonderful, we definetely have so much to discuss!"
+msgstr ""
+
+msgid "Looks like we share no common interests"
+msgstr ""
 
 msgid "Members of your projects and groups only"
 msgstr "Numai membrii proiectelor și grupurilor dvs"
@@ -8007,6 +8123,16 @@ msgstr "Utilizatorul %(username)s trebuia invitat!"
 msgid "You do not have any backup tokens set up. Please log in using your OTP tokens."
 msgstr ""
 
+#, fuzzy
+#| msgid "Invalid request."
+msgid "Invalid guest token."
+msgstr "Cerere invalidă."
+
+#, fuzzy
+#| msgid "An error occured when trying to disconnect your facebook account! Please contact an administrator!"
+msgid "There was an error when trying to redirect you to the BBB room. Please contact an administrator!"
+msgstr "A apărut o eroare când încercați să vă deconectați contul de Facebook! Vă rugăm să contactați un administrator!"
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Limba ”%s” nu este acceptat"
@@ -8523,6 +8649,9 @@ msgstr "Următoarele Grupuri au fost transformate în Proiecte:"
 msgid "The import was successfully archived."
 msgstr "Invitația a fost ștearsă cu succes."
 
+msgid "User id should be an integer and it should not be None."
+msgstr ""
+
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
 msgstr "În prezent nu sunteți membru %s! Dacă doriți, puteți solicita să deveniți membru mai jos."
@@ -8680,6 +8809,13 @@ msgstr "Invitația a fost ștearsă cu succes."
 #| msgid "Could not save your like setting because of an error."
 msgid "Recording %s could not be deleted because of a server error."
 msgstr "Nu s-a putut salva setarea dvs. similară din cauza unei erori."
+
+msgid "Please supply one ore more recipients."
+msgstr ""
+
+#, fuzzy
+msgid "No conference applicants found at the moment."
+msgstr "Cosinnus Locație"
 
 #, fuzzy
 msgid "The message was sent to all participants."
@@ -11355,6 +11491,9 @@ msgstr "Doresc să fiu Moderator pentru acest portal"
 
 msgid "As a Moderator, you will receive an instant notification whenever ANY publicly visible content is posted on this portal. Since you are a portal administrator you can then also delete the content if it is offensive or critical. To delete it, visit the content page on the website while logged into this account."
 msgstr "Ca Moderator, veți primi o notificare instantanee ori de câte ori ORICE conținut vizibil public este publicat pe acest portal. Deoarece sunteți administrator de portal, puteți șterge conținutul, de asemenea, dacă acesta este ofensiv sau critic. Pentru a o șterge, vizitați pagina de conținut de pe site-ul web în timp ce vă conectați la acest cont."
+
+msgid "Additionally, you have opted in to receive emails from organizers from these conferences. <br/> You may opt out by revoking your application or by leaving the conference:"
+msgstr ""
 
 msgid "Immediately"
 msgstr "Imediat"

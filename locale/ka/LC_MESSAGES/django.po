@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-14 10:28+0100\n"
+"POT-Creation-Date: 2022-12-15 15:34+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -314,6 +314,9 @@ msgstr "არჩეული ჯგუფების პროექტებ�
 msgid "Invitations to Groups and Projects"
 msgstr "ჩემს ჯგუფებში და პროექტებში"
 
+msgid "To invite external guests, share this link:"
+msgstr ""
+
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr ""
 
@@ -608,6 +611,10 @@ msgstr "%(sender_name)s-მა ახალხან შექმნა პრ�
 #, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
 msgstr "%(sender_name)s ახალხან შექმნა პროექტი \"%(team_name)s\" %(portal_name)s-ზე იდეისგან, რომელსაც თქვენ თვალს ადევნებთ ! <br/><br/> შესამოწმებლად, გთხოვთ დააკლიკოთ ქვემოთ მოცემულ ბმულს. ბმულის მეშვეობით, თქვენ შეძლებთ ნახოთ გსურთ თუ არა შეუერთდეთ პროექტს."
+
+#, python-format
+msgid "Your match with %(sender_name)s has just been established!"
+msgstr ""
 
 msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
@@ -1113,6 +1120,10 @@ msgstr "მოწვევის წაშლა"
 
 msgid "Pre-filled content for the information field"
 msgstr ""
+
+#, fuzzy
+msgid "Request contact option"
+msgstr "მოწვევის წაშლა"
 
 msgid "Priority choice enabled"
 msgstr ""
@@ -1802,6 +1813,52 @@ msgstr ""
 msgid "--- No country selected ---"
 msgstr ""
 
+#, fuzzy
+#| msgid "Ideas I like"
+msgid "dislike"
+msgstr "იდეები, რომლებიც მე მომწონს"
+
+msgid "like"
+msgstr ""
+
+msgid "ignored"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "მომხმარებელი"
+
+#, fuzzy
+msgid "Match subject"
+msgstr "მოწვევები"
+
+#, fuzzy
+#| msgid "Attached object"
+msgid "Match object"
+msgstr "მიმაგრებული ობიექტი"
+
+msgid "Match type"
+msgstr ""
+
+msgid "Match"
+msgstr ""
+
+msgid "Matches"
+msgstr ""
+
+#, python-brace-format
+msgid "Match between {self.from_user} and {self.to_user} has been successfully established."
+msgstr ""
+
+msgid "You and {self.from_user.get_full_name()} matched!"
+msgstr ""
+
+msgid "TODO: Youve matched!"
+msgstr ""
+
+msgid "TODO: Matched chat room greeting message"
+msgstr ""
+
 msgid "Name (EN)"
 msgstr "სახელი (ინგლისურად)"
 
@@ -1860,10 +1917,6 @@ msgstr "მიმაგრებული ობიექტი"
 
 msgid "Attached objects"
 msgstr "მიმაგრებული ობიექტები"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "მომხმარებელი"
 
 msgid "Visited"
 msgstr "ეწვია"
@@ -2380,6 +2433,13 @@ msgid "BBB-Room Settings"
 msgstr "პარამეტრები"
 
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
+msgstr ""
+
+#, fuzzy
+msgid "BBB Guest Token"
+msgstr "შეიყვანეთ ტოკენი:"
+
+msgid "None yet. Join the room to generate a guest token. It will also be shown in the moderator-only message."
 msgstr ""
 
 #, fuzzy
@@ -3114,6 +3174,10 @@ msgstr "უბრალო სტატისტიკა"
 msgid "I accept the conditions in order to submit my application"
 msgstr ""
 
+#, fuzzy
+msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
+msgstr "გთხოვთ დაადასტუროთ თქვენი ელ-ფოსტის მისამართის ნამდვილობა %(site_name)s-თვის!"
+
 msgid "Save changes"
 msgstr "ცვლილებების შენახვა"
 
@@ -3196,6 +3260,24 @@ msgstr ""
 msgid "List of Applicants"
 msgstr ""
 
+msgid "Join BBB Meeting as guest"
+msgstr ""
+
+msgid "You are joining a meeting as a guest"
+msgstr ""
+
+msgid "Your name"
+msgstr "თქვენი სახელი"
+
+#, fuzzy
+#| msgid "Please enter a token!"
+msgid "Please enter your name"
+msgstr "გთხოვთ შეიყვანოთ ტოკენი!"
+
+#, fuzzy
+msgid "Join Meeting"
+msgstr "მიმდინარეობს წაშლა..."
+
 #, fuzzy
 msgid "Emails to conference participants"
 msgstr "ვიდეო კონფერენციის სერვერი"
@@ -3210,11 +3292,11 @@ msgstr "შინაარსი"
 #, python-format
 msgid ""
 "\n"
-"                    This message will be sent to one participant.\n"
+"                    This message will be sent to one user.\n"
 "                    "
 msgid_plural ""
 "\n"
-"                    This message will be sent to %(count)s participants.\n"
+"                    This message will be sent to %(count)s users.\n"
 "                    "
 msgstr[0] ""
 
@@ -3232,7 +3314,33 @@ msgid_plural ""
 "                        "
 msgstr[0] ""
 
-msgid "No, don\\"
+msgid "No, do not send"
+msgstr ""
+
+msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
+msgstr ""
+
+msgid "This session is being recorded"
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue reading"
+msgid "Continue"
+msgstr "კითხვის გაგრძელება"
+
+msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
+msgstr ""
+
+msgid "Popout"
+msgstr ""
+
+msgid "Fullscreen"
+msgstr "სრული ეკრანი"
+
+msgid "Leave Fullscreen"
+msgstr "სრული ეკრანის დატოვება"
+
+msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
 msgstr ""
 
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
@@ -3316,6 +3424,33 @@ msgstr "საგნები ჯერ არ არის"
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr ""
 
+msgid "Send immediately"
+msgstr ""
+
+msgid "This email will be sent immediately."
+msgstr ""
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr ""
+
+#, fuzzy
+msgid "no instant email has been sent yet."
+msgstr "საკონტაქტო ბაზა ჯერ დამატებული არ არის."
+
+#, fuzzy
+msgid "Mail subject"
+msgstr "მოწვევები"
+
+msgid "Mail text"
+msgstr ""
+
+msgid "Send (show preview)"
+msgstr ""
+
+msgid "Send test to myself"
+msgstr ""
+
 msgid "Send 1 week before conference"
 msgstr ""
 
@@ -3334,9 +3469,6 @@ msgstr "მოწვევები"
 msgid "Invitation text"
 msgstr "მოწვევები"
 
-msgid "Send test to myself"
-msgstr ""
-
 msgid "Send 1 day before conference"
 msgstr ""
 
@@ -3344,23 +3476,6 @@ msgid "This e-mail will be sent out 24 hours before the conference start date."
 msgstr ""
 
 msgid "Send 1 hour before conference"
-msgstr ""
-
-msgid "send immediately"
-msgstr ""
-
-msgid "This email will be sent immediately."
-msgstr ""
-
-#, python-format
-msgid "last instant email was sent on %(date)s "
-msgstr ""
-
-#, fuzzy
-msgid "no instant email has been sent yet."
-msgstr "საკონტაქტო ბაზა ჯერ დამატებული არ არის."
-
-msgid "Send immediately"
 msgstr ""
 
 #, fuzzy, python-format
@@ -3474,7 +3589,7 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr "საგნები ჯერ არ არის"
 
-msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgid "BBB-Meetings can be joined directly by guests, both registered and unregistered users. The guest link will be shown to all moderators in the greeting message of the BBB meeting."
 msgstr ""
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
@@ -4640,32 +4755,6 @@ msgstr "რუკა"
 #, fuzzy
 msgid "Meeting"
 msgstr "მიმდინარეობს წაშლა..."
-
-msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
-msgstr ""
-
-msgid "This session is being recorded"
-msgstr ""
-
-#, fuzzy
-#| msgid "Continue reading"
-msgid "Continue"
-msgstr "კითხვის გაგრძელება"
-
-msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
-msgstr ""
-
-msgid "Popout"
-msgstr ""
-
-msgid "Fullscreen"
-msgstr "სრული ეკრანი"
-
-msgid "Leave Fullscreen"
-msgstr "სრული ეკრანის დატოვება"
-
-msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
-msgstr ""
 
 msgid "Not happy with how your Microsite looks?"
 msgstr "არ მოგწონთ თქვენი მიკრო საიტი როგორ გამოიყურება?"
@@ -5924,9 +6013,6 @@ msgstr "ეს გამოყენებული იქნება, რო�
 msgid "Repeat Password"
 msgstr "გაიმეორეთ პაროლი"
 
-msgid "Your name"
-msgstr "თქვენი სახელი"
-
 msgid "This name will be displayed to other users on the site"
 msgstr "ეს ნაჩვენები იქნება სხვა მომხმარებლების საიტზე"
 
@@ -6692,6 +6778,35 @@ msgstr "პროფილის წაშლა"
 
 msgid "User overview"
 msgstr "მომხმარებლის მიმოხილვა"
+
+#, fuzzy
+#| msgid "Contact"
+msgid "Direct Contact"
+msgstr "კონტაქტი"
+
+#, fuzzy
+msgid "Type of educational institution"
+msgstr "ძიება მომხმარებლებში"
+
+#, fuzzy
+#| msgid "Location"
+msgid "Function"
+msgstr "ლოკაცია"
+
+#, fuzzy
+#| msgid "Description"
+msgid "Position"
+msgstr "აღწერა"
+
+#, fuzzy
+msgid "Name of educational institution"
+msgstr "ლოკაციის ამოშლა"
+
+msgid "Wonderful, we definetely have so much to discuss!"
+msgstr ""
+
+msgid "Looks like we share no common interests"
+msgstr ""
 
 msgid "Members of your projects and groups only"
 msgstr "მხოლოდ თქვენი პროექტების ან ჯგუფების წევრები"
@@ -7999,6 +8114,16 @@ msgstr "მოხმარებელი %(username)s წარმატებ�
 msgid "You do not have any backup tokens set up. Please log in using your OTP tokens."
 msgstr ""
 
+#, fuzzy
+#| msgid "Invalid request."
+msgid "Invalid guest token."
+msgstr "არასწორი მოთხოვნა."
+
+#, fuzzy
+#| msgid "An error occured when trying to disconnect your facebook account! Please contact an administrator!"
+msgid "There was an error when trying to redirect you to the BBB room. Please contact an administrator!"
+msgstr "შეცდომა დაფიქსირდა Facebook ანგარიშის კავშირის გაუქმებისას! გთხოვთ დაუკავშირდეთ ადმინისტრატორს!"
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "\"%s\" ენა არ არის მხარდაჭერილი"
@@ -8513,6 +8638,9 @@ msgstr "შემდეგი ჯგუფები გადატანილ 
 msgid "The import was successfully archived."
 msgstr "მოწვევა წარმატებით წაიშალა."
 
+msgid "User id should be an integer and it should not be None."
+msgstr ""
+
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
 msgstr "თქვენ არ ხართ %s-ის წევრი! თუ გსურთ, მოითხოვეთ წევრობა ქვემოთ."
@@ -8667,6 +8795,13 @@ msgstr "მოწვევა წარმატებით წაიშალ�
 #| msgid "Could not save your like setting because of an error."
 msgid "Recording %s could not be deleted because of a server error."
 msgstr "შეცდომის გამო, თქვენი მოწონების პარამეტრის დამახსოვრება ვერ ხერხდება."
+
+msgid "Please supply one ore more recipients."
+msgstr ""
+
+#, fuzzy
+msgid "No conference applicants found at the moment."
+msgstr "CosinnusLocation"
 
 #, fuzzy
 #| msgid "This message was sent in a conversation with: "
@@ -11336,6 +11471,9 @@ msgstr "მსურს გავხდე ამ პორტალის მ�
 
 msgid "As a Moderator, you will receive an instant notification whenever ANY publicly visible content is posted on this portal. Since you are a portal administrator you can then also delete the content if it is offensive or critical. To delete it, visit the content page on the website while logged into this account."
 msgstr "როგორც მოდერატორი, თქვენ მიიღებთ მყისიერ შეტყობინებას ყოველთვის, როცა ნებისმიერი საჯაროდ ხილული კონტენტი დაიდება პორტალზე. როგორც, პორტალის ადმინისტრატორი თქვენ შეგიძლიათ წაშალოთ შეურაცხმყოფელი ან კრიტიკული კონტენტები. წასაშლელად, გთხოვთ ეწვიოთ კონტენტის გვერდს ვებ-საიტზე, სანამ მოახდენთ ანგარიშში შესვლას."
+
+msgid "Additionally, you have opted in to receive emails from organizers from these conferences. <br/> You may opt out by revoking your application or by leaving the conference:"
+msgstr ""
 
 msgid "Immediately"
 msgstr "დაუყონებლივ"

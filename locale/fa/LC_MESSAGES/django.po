@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-14 10:28+0100\n"
+"POT-Creation-Date: 2022-12-15 15:34+0100\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -291,6 +291,9 @@ msgid "Invitations to Conferences"
 msgstr "ترجیحات آگاه‌سازی"
 
 msgid "Invitations to Groups and Projects"
+msgstr ""
+
+msgid "To invite external guests, share this link:"
 msgstr ""
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
@@ -590,6 +593,10 @@ msgstr "%(sender_name)s همین الان پروژه‌ی \"%(team_name)s\" را
 #, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
 msgstr "%(sender_name)s همین الان پروژه‌ی \"%(team_name)s را از ایده‌ای که شما دنبال می‌کنید روی %(portal_name)s ساخته! <br/><br/> برای این‌که یک نگاهی بیاندازید، لطفن روی پیوند زیر کلیک کنید. آن‌جا می‌توانید ببینید که آیا می‌خواهید به پروژه بپیوندید یا نه."
+
+#, python-format
+msgid "Your match with %(sender_name)s has just been established!"
+msgstr ""
 
 msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr ""
@@ -1085,6 +1092,11 @@ msgstr "درخواست اطلاعات کاربر"
 
 msgid "Pre-filled content for the information field"
 msgstr ""
+
+#, fuzzy
+#| msgid "request to join"
+msgid "Request contact option"
+msgstr "درخواست عضویت بدهید"
 
 msgid "Priority choice enabled"
 msgstr ""
@@ -1737,6 +1749,47 @@ msgstr ""
 msgid "--- No country selected ---"
 msgstr ""
 
+msgid "dislike"
+msgstr ""
+
+msgid "like"
+msgstr ""
+
+msgid "ignored"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr ""
+
+msgid "Match subject"
+msgstr ""
+
+msgid "Match object"
+msgstr ""
+
+msgid "Match type"
+msgstr ""
+
+msgid "Match"
+msgstr ""
+
+msgid "Matches"
+msgstr ""
+
+#, python-brace-format
+msgid "Match between {self.from_user} and {self.to_user} has been successfully established."
+msgstr ""
+
+msgid "You and {self.from_user.get_full_name()} matched!"
+msgstr ""
+
+msgid "TODO: Youve matched!"
+msgstr ""
+
+msgid "TODO: Matched chat room greeting message"
+msgstr ""
+
 msgid "Name (EN)"
 msgstr ""
 
@@ -1794,10 +1847,6 @@ msgid "Attached object"
 msgstr ""
 
 msgid "Attached objects"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
 msgstr ""
 
 msgid "Visited"
@@ -2306,6 +2355,12 @@ msgid "BBB-Room Settings"
 msgstr ""
 
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
+msgstr ""
+
+msgid "BBB Guest Token"
+msgstr ""
+
+msgid "None yet. Join the room to generate a guest token. It will also be shown in the moderator-only message."
 msgstr ""
 
 msgid "Inherited BBB-Parameters"
@@ -2993,6 +3048,9 @@ msgstr ""
 msgid "I accept the conditions in order to submit my application"
 msgstr ""
 
+msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
+msgstr ""
+
 msgid "Save changes"
 msgstr "تغییرات را ذخیره کن"
 
@@ -3069,6 +3127,23 @@ msgstr ""
 msgid "List of Applicants"
 msgstr "فهرست درخواست‌دهنده‌ها"
 
+msgid "Join BBB Meeting as guest"
+msgstr ""
+
+msgid "You are joining a meeting as a guest"
+msgstr ""
+
+msgid "Your name"
+msgstr ""
+
+#, fuzzy
+#| msgid "Please enter a message..."
+msgid "Please enter your name"
+msgstr "لطفن یک پیام وارد کنید..."
+
+msgid "Join Meeting"
+msgstr ""
+
 #, fuzzy
 msgid "Emails to conference participants"
 msgstr "گذرواژه برای شرکت‌کننده‌هایی که با تلفن وارد می‌شوند"
@@ -3082,11 +3157,11 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"                    This message will be sent to one participant.\n"
+"                    This message will be sent to one user.\n"
 "                    "
 msgid_plural ""
 "\n"
-"                    This message will be sent to %(count)s participants.\n"
+"                    This message will be sent to %(count)s users.\n"
 "                    "
 msgstr[0] ""
 msgstr[1] ""
@@ -3106,7 +3181,31 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "No, don\\"
+msgid "No, do not send"
+msgstr ""
+
+msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
+msgstr ""
+
+msgid "This session is being recorded"
+msgstr ""
+
+msgid "Continue"
+msgstr ""
+
+msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
+msgstr ""
+
+msgid "Popout"
+msgstr ""
+
+msgid "Fullscreen"
+msgstr "نمایش در تمام صفحه"
+
+msgid "Leave Fullscreen"
+msgstr "از نمایش در تمام صفحه برو بیرون"
+
+msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
 msgstr ""
 
 msgid "Here you can configure the application form that participants have to fill out in order to apply."
@@ -3188,6 +3287,32 @@ msgstr "هیچ دعوت‌نامه‌ی معوقی وجود ندارد."
 msgid "Here you have the possibility to prepare an information text for all members of the conference. This will be sent automatically 1 week, 1 day and / or 1 hour before the conference starts. The notification mail always contains a link to the conference"
 msgstr ""
 
+msgid "Send immediately"
+msgstr ""
+
+msgid "This email will be sent immediately."
+msgstr ""
+
+#, python-format
+msgid "last instant email was sent on %(date)s "
+msgstr ""
+
+#, fuzzy
+msgid "no instant email has been sent yet."
+msgstr "تغییرات‌تان ذخیره شده‌اند."
+
+msgid "Mail subject"
+msgstr ""
+
+msgid "Mail text"
+msgstr ""
+
+msgid "Send (show preview)"
+msgstr ""
+
+msgid "Send test to myself"
+msgstr ""
+
 msgid "Send 1 week before conference"
 msgstr ""
 
@@ -3204,9 +3329,6 @@ msgstr ""
 msgid "Invitation text"
 msgstr ""
 
-msgid "Send test to myself"
-msgstr ""
-
 msgid "Send 1 day before conference"
 msgstr ""
 
@@ -3214,23 +3336,6 @@ msgid "This e-mail will be sent out 24 hours before the conference start date."
 msgstr ""
 
 msgid "Send 1 hour before conference"
-msgstr ""
-
-msgid "send immediately"
-msgstr ""
-
-msgid "This email will be sent immediately."
-msgstr ""
-
-#, python-format
-msgid "last instant email was sent on %(date)s "
-msgstr ""
-
-#, fuzzy
-msgid "no instant email has been sent yet."
-msgstr "تغییرات‌تان ذخیره شده‌اند."
-
-msgid "Send immediately"
 msgstr ""
 
 #, python-format
@@ -3335,7 +3440,7 @@ msgstr ""
 msgid "There are no rooms yet."
 msgstr ""
 
-msgid "BBB-Meetings cannot be used by non-authenticated users, registration or login is required to join."
+msgid "BBB-Meetings can be joined directly by guests, both registered and unregistered users. The guest link will be shown to all moderators in the greeting message of the BBB meeting."
 msgstr ""
 
 msgid "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!"
@@ -4431,30 +4536,6 @@ msgstr ""
 msgid "Meeting"
 msgstr ""
 
-msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
-msgstr ""
-
-msgid "This session is being recorded"
-msgstr ""
-
-msgid "Continue"
-msgstr ""
-
-msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
-msgstr ""
-
-msgid "Popout"
-msgstr ""
-
-msgid "Fullscreen"
-msgstr "نمایش در تمام صفحه"
-
-msgid "Leave Fullscreen"
-msgstr "از نمایش در تمام صفحه برو بیرون"
-
-msgid "The video conference has been opened in a new tab. To rejoin the video conference, please reload the page."
-msgstr ""
-
 msgid "Not happy with how your Microsite looks?"
 msgstr ""
 
@@ -5541,9 +5622,6 @@ msgstr ""
 msgid "Repeat Password"
 msgstr ""
 
-msgid "Your name"
-msgstr ""
-
 msgid "This name will be displayed to other users on the site"
 msgstr ""
 
@@ -6277,6 +6355,29 @@ msgid "Delete profile"
 msgstr ""
 
 msgid "User overview"
+msgstr ""
+
+msgid "Direct Contact"
+msgstr ""
+
+msgid "Type of educational institution"
+msgstr ""
+
+msgid "Function"
+msgstr ""
+
+#, fuzzy
+#| msgid "Description"
+msgid "Position"
+msgstr "تعریف"
+
+msgid "Name of educational institution"
+msgstr ""
+
+msgid "Wonderful, we definetely have so much to discuss!"
+msgstr ""
+
+msgid "Looks like we share no common interests"
 msgstr ""
 
 msgid "Members of your projects and groups only"
@@ -7494,6 +7595,14 @@ msgstr ""
 msgid "You do not have any backup tokens set up. Please log in using your OTP tokens."
 msgstr ""
 
+msgid "Invalid guest token."
+msgstr ""
+
+#, fuzzy
+#| msgid "There was an error in one of the fields you entered. Please correct it before saving!"
+msgid "There was an error when trying to redirect you to the BBB room. Please contact an administrator!"
+msgstr "یک خطا در یکی از زمینه‌هایی که وارد کرده‌اید هست. لطفن پیش از ذخیره کردن آن را برطرف کنید!"
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr ""
@@ -7994,6 +8103,9 @@ msgstr "ستون‌های پیش رو تشخیص داده نشده و نادید
 msgid "The import was successfully archived."
 msgstr "آن‌چه وارد شده با موفقیت بایگانی شد."
 
+msgid "User id should be an integer and it should not be None."
+msgstr ""
+
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
 msgstr "در حال حاضر شما عضو %s نیستید! اگر مایلید می‌توانید در زیر درخواست عضویت بفرستید."
@@ -8131,6 +8243,12 @@ msgstr "آن‌چه وارد شده با موفقیت بایگانی شد."
 
 #, python-format
 msgid "Recording %s could not be deleted because of a server error."
+msgstr ""
+
+msgid "Please supply one ore more recipients."
+msgstr ""
+
+msgid "No conference applicants found at the moment."
 msgstr ""
 
 msgid "The message was sent to all participants."
@@ -10648,6 +10766,9 @@ msgid "I wish to be a Moderator for this portal"
 msgstr ""
 
 msgid "As a Moderator, you will receive an instant notification whenever ANY publicly visible content is posted on this portal. Since you are a portal administrator you can then also delete the content if it is offensive or critical. To delete it, visit the content page on the website while logged into this account."
+msgstr ""
+
+msgid "Additionally, you have opted in to receive emails from organizers from these conferences. <br/> You may opt out by revoking your application or by leaving the conference:"
 msgstr ""
 
 msgid "Immediately"
