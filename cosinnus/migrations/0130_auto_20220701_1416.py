@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='cosinnusconferenceapplication',
             name='may_be_contacted',
-            field=models.BooleanField(default=True, help_text='If active, conference applicant may be contacted by conference admins via email', verbose_name='Applicant may be contacted'),
+            field=models.BooleanField(default=False, help_text='If active, conference applicant may be contacted by conference admins via email', verbose_name='Applicant may be contacted'),
         ),
         migrations.AddField(
             model_name='participationmanagement',

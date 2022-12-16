@@ -850,7 +850,7 @@ class CosinnusConferenceApplication(models.Model):
     contact_phone = PhoneNumberField(('Contact Phone Number'), blank=True, null=True)
     may_be_contacted = models.BooleanField(_('Applicant may be contacted'), 
         help_text='If active, conference applicant may be contacted by conference admins via email', 
-        default=True)
+        default=False)
     
     reason_for_rejection = models.TextField(blank=True)
     

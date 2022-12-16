@@ -250,6 +250,8 @@ class ConferenceApplicationForm(CleanFromToDateFieldsMixin, forms.ModelForm):
         else:
             self.fields['may_be_contacted'].required = True
             self.fields['may_be_contacted'].disabled = True
+        # even though the model field `may_be_contacted` is default=False, the formfield is default=True 
+        self.fields['may_be_contacted'].initial = True
         
         if ('information' in self.fields and hasattr(self, 'participation_management')
             and self.participation_management.information_field_initial_text):
