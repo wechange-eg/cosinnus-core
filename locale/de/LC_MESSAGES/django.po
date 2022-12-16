@@ -3152,20 +3152,16 @@ msgid "Join BBB Meeting as guest"
 msgstr "Meeting direkt betreten"
 
 msgid "You are joining a meeting as a guest"
-msgstr ""
+msgstr "Du betrittst eine Videokonferenz als Gast"
 
 msgid "Your name"
 msgstr "Dein Name"
 
-#, fuzzy
-#| msgid "Please enter a token!"
 msgid "Please enter your name"
-msgstr "Bitte gib ein Einladungs-Token ein!"
+msgstr "Bitte gib deinen Namen ein"
 
-#, fuzzy
-#| msgid "Meeting"
 msgid "Join Meeting"
-msgstr "Meeting"
+msgstr "Beitreten"
 
 msgid "Emails to conference participants"
 msgstr "E-Mails an Tagungsteilnehmer"
