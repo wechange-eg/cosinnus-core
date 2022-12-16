@@ -210,7 +210,6 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
     avatar_color = serializers.CharField(
         source=f'cosinnus_profile.settings.{PROFILE_SETTINGS_AVATAR_COLOR}', 
         required=False,
-        default=None,
         validators=[HexColorValidator()],
         help_text='A hex color string. Represented without a leading "#", but can be input with one.'
     )
