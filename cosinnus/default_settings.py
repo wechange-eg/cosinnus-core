@@ -177,10 +177,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     TEMPLATES = [
         {
             'BACKEND': 'django.template.backends.django.DjangoTemplates',
-            'DIRS': [ 
-                join(BASE_PATH, "templates"),
-                join(BASE_PATH, "apps", "core", "templates"),
-            ],
+            'DIRS': [], # keep this empty, as template folders are only contained in app's directories
             'OPTIONS': {
                 'context_processors': [
                     'django.contrib.auth.context_processors.auth',
