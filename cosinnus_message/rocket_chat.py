@@ -158,6 +158,10 @@ class RocketChatConnection:
                 self.stderr.write('ERROR! ' + str(setting) + ': ' + str(value) + ':: ' + str(response))
             else:
                 self.stdout.write('OK! ' + str(setting) + ': ' + str(value)) 
+                
+        # see TODO in `cosinnus_message.conf.COSINNUS_CHAT_SETTINGS!
+        self.stderr.write('The following settings have not been added to automatic setup and need to be changed in the UI:')
+        self.stderr.write("'authorization:removeRoleFromPermission': ['add-user-to-joined-room','moderator'],")
     
     def create_missing_users(self, skip_inactive=False, force_group_membership_sync=False):
         """ 

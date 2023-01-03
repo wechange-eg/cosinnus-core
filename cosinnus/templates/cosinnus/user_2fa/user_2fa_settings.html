@@ -2,7 +2,7 @@
 {% load i18n cosinnus_tags widget_tweaks %}
 
 
-{% block page_title %}{% trans '2FA Settings' %}{% endblock %}
+{% block page_title %}{% trans 'Two-Factor Authentication Settings' %}{% endblock %}
 
 {% block leftnav %}
     {% include "cosinnus/user/leftnav.html"  with view="two-factor-auth" %}
@@ -11,7 +11,7 @@
 
 {% block breadcrumb %}
         <li class="active"><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Your Profile" %}</a></li>
-        <li class="active">{% trans "2FA Settings" %}</li>
+        <li class="active">{% trans "Two-Factor Authentication Settings" %}</li>
 {% endblock %}
 
 
@@ -49,7 +49,7 @@
             {% endcomment %}
 
             <div class="content-box">
-                    <h4>{% trans "Disable 2FA" %}</h4>
+                    <h4>{% trans "Disable Two-Factor Authentication" %}</h4>
                     <p class="textfield transparent">{% blocktrans trimmed %}
                         However we strongly discourage you to do so, you can
                         also disable two-factor authentication for your account.
@@ -63,7 +63,7 @@
                                     <i class="fa fa-hand-o-right"></i>
                                 </span>
                                 <div class="media-body">
-                                    {% trans 'Disable 2FA' %}
+                                    {% trans 'Disable Two-Factor Authentication' %}
                                 </div>
                             </li>
                         </ul>
@@ -73,7 +73,7 @@
 
             <div class="content-box">
 
-                    <h4>{% trans "2FA Settings" %}</h4>
+                    <h4>{% trans "Two-Factor Authentication Settings" %}</h4>
                     <p class="textfield transparent">{% blocktrans trimmed %}Two-factor authentication is not enabled for your
                         account. <br> Enable two-factor authentication for enhanced account security.
                         {% endblocktrans %}
@@ -86,7 +86,7 @@
                                     <i class="fa fa-hand-o-right"></i>
                                 </span>
                                 <div class="media-body">
-                                    {% trans 'Enable 2FA' %}
+                                    {% trans 'Enable Two-Factor Authentication' %}
                                 </div>
                             </li>
                         </ul>

@@ -6614,9 +6614,8 @@ msgstr "Від'єднати Facebook Профіль"
 msgid "Disconnect Facebook"
 msgstr "Від'єднати Facebook"
 
-#, fuzzy
-msgid "2FA Settings"
-msgstr "Налаштування"
+msgid "Two-Factor Authentication Settings"
+msgstr ""
 
 #, python-format
 msgid "%(provider)s-Account"
@@ -6852,12 +6851,11 @@ msgstr "Ви ще не маєте облікового запису на %(porta
 msgid "Generate Tokens"
 msgstr "Введіть токен:"
 
-msgid "Back to 2FA Settings"
+msgid "Back to Two-Factor Authentication Settings"
 msgstr ""
 
-#, fuzzy
-msgid "Disable 2FA"
-msgstr "Вимкнути редактор"
+msgid "Disable Two-Factor Authentication"
+msgstr ""
 
 msgid "You are about to disable two-factor authentication. This weakens your account security, are you sure?"
 msgstr ""
@@ -6919,10 +6917,10 @@ msgstr ""
 msgid "Two-factor authentication is not enabled for your account. <br> Enable two-factor authentication for enhanced account security."
 msgstr ""
 
-msgid "Enable 2FA"
+msgid "Enable Two-Factor Authentication"
 msgstr ""
 
-msgid "2FA Setup"
+msgid "Two-Factor Authentication Setup"
 msgstr ""
 
 #, fuzzy
@@ -6930,7 +6928,7 @@ msgstr ""
 msgid "You are about to take your account security to the next level."
 msgstr "Ви збираєтеся видалити ваш обліковий запис з вебсайту!"
 
-msgid "To use 2FA, you need a one-time password (OTP) app. For example, there is \"Free OTP\" for your Android phone or \"OpenOTP\" for iOS. With these apps you can scan the QR code and then log in with the generated codes."
+msgid "To use Two-Factor Authentication, you need a one-time password (OTP) app. For example, there is \"Free OTP\" for your Android phone or \"OpenOTP\" for iOS. With these apps you can scan the QR code and then log in with the generated codes."
 msgstr ""
 
 msgid "Scan the QR code below."
@@ -6945,11 +6943,11 @@ msgstr ""
 msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
 msgstr ""
 
-msgid "2FA Setup Complete"
+msgid "Two-Factor Authentication Setup Complete"
 msgstr ""
 
 #, fuzzy
-msgid "Congratulations, you've successfully enabled 2FA."
+msgid "Congratulations, you've successfully enabled Two-Factor Authentication."
 msgstr "Запрошення успішно видалено."
 
 msgid "We strongly recommend to set up backup tokens in case you lose access to your authentication device!"
@@ -7445,6 +7443,91 @@ msgstr "Раді бачити Вас На %(portal_name)s Ви можете сп
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Зареєструватися та долучитися"
+
+msgid "Custom Wagtail Page"
+msgstr "Custom Wagtail Page"
+
+msgid "Tools"
+msgstr "Інструменти "
+
+msgid "Import Projects and Groups or Users"
+msgstr "Імпортувати проєкти та групи або користувачів"
+
+msgid "Import from a CSV File"
+msgstr "Імпорт із файлу CSV"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr "Завантажте або CSV-файл для імпортування проектів та груп, або CSV-файл для імпорту користувачів. Одночасно може відбуватися лише один імпорт. Формат повинен бути таким, який був узгоджений. Якщо формат зміниться (більше/менше/різні колонки), зверніться до розробників!"
+
+msgid "Project/group CSV File"
+msgstr "CSV файл проєкту/групи"
+
+msgid "User CSV File"
+msgstr "CSV файл користувача"
+
+msgid "Options"
+msgstr "Варіанти"
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr "Налаштування за замовчуванням для файлу CSV. Змініть їх, тільки якщо ви абсолютно знаєте, що робите!"
+
+msgid "Encoding of the CSV file"
+msgstr "Кодування файлу CSV"
+
+msgid "Delimiter of the CSV file"
+msgstr "Розділювач файлу CSV"
+
+msgid "Upload and Import..."
+msgstr "Завантажити та імпортувати ..."
+
+msgid "Import Projects and Groups"
+msgstr "Імпортувати проєкти та групи"
+
+msgid "Clear results and start a new import!"
+msgstr "Очистіть результати та почніть новий імпорт!"
+
+msgid "CSV Import Results"
+msgstr "Результати імпорту CSV"
+
+msgid "The import has finished. Here are the results:"
+msgstr "Імпорт завершено. Ось результати:"
+
+msgid "Read errors:"
+msgstr "Помилка!"
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr "Ці рядки у вашому файлі CSV мали помилки або неправильну кількість колонок і були ПРОІГНОРОВАНІ:"
+
+msgid "Saved items:"
+msgstr "Збережені елементи:"
+
+msgid "Important messages:"
+msgstr "Важливі повідомлення:"
+
+msgid "Errors:"
+msgstr "Помилка!"
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Важливі повідомлення:"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr "Файл CSV було успішно прочитано, і зараз імпорт виконується на сервері!"
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+"На цій сторінці відображатимуться результати після завершення імпорту.\n"
+"\t\t\n"
+"\t\t\t\t Залежно від кількості імпортованих елементів цей процес може зайняти від кількох секунд до кількох хвилин. Вам не потрібно тримати цю сторінку відкритою. Ми надішлемо вам електронного листа на вашу адресу   <b>\"%(email) s\" </b>, як тільки імпорт завершиться!\n"
+"\t\t\t"
+
+msgid "Progress:"
+msgstr "Прогрес:"
 
 msgid "Show more Projects"
 msgstr "Показати більше Проєктів"
@@ -13304,6 +13387,17 @@ msgstr "Неможливо додати список завдань «%(title)s�
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Ви не можете видалити цю папку, оскільки у вас немає прав на видалення одного або декількох елементів, які вона містить!"
 
+msgid "Drag"
+msgstr ""
+
+#, fuzzy
+#~ msgid "2FA Settings"
+#~ msgstr "Налаштування"
+
+#, fuzzy
+#~ msgid "Disable 2FA"
+#~ msgstr "Вимкнути редактор"
+
 #~ msgid "Umwelt"
 #~ msgstr "Навколишнє середовище"
 
@@ -13331,90 +13425,6 @@ msgstr "Ви не можете видалити цю папку, оскільк�
 #, fuzzy
 #~ msgid "Back to your profile"
 #~ msgstr "Ваш Профіль"
-
-#~ msgid "Custom Wagtail Page"
-#~ msgstr "Custom Wagtail Page"
-
-#~ msgid "Tools"
-#~ msgstr "Інструменти "
-
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Імпортувати проєкти та групи або користувачів"
-
-#~ msgid "Import from a CSV File"
-#~ msgstr "Імпорт із файлу CSV"
-
-#~ msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-#~ msgstr "Завантажте або CSV-файл для імпортування проектів та груп, або CSV-файл для імпорту користувачів. Одночасно може відбуватися лише один імпорт. Формат повинен бути таким, який був узгоджений. Якщо формат зміниться (більше/менше/різні колонки), зверніться до розробників!"
-
-#~ msgid "Project/group CSV File"
-#~ msgstr "CSV файл проєкту/групи"
-
-#~ msgid "User CSV File"
-#~ msgstr "CSV файл користувача"
-
-#~ msgid "Options"
-#~ msgstr "Варіанти"
-
-#~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-#~ msgstr "Налаштування за замовчуванням для файлу CSV. Змініть їх, тільки якщо ви абсолютно знаєте, що робите!"
-
-#~ msgid "Encoding of the CSV file"
-#~ msgstr "Кодування файлу CSV"
-
-#~ msgid "Delimiter of the CSV file"
-#~ msgstr "Розділювач файлу CSV"
-
-#~ msgid "Upload and Import..."
-#~ msgstr "Завантажити та імпортувати ..."
-
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Імпортувати проєкти та групи"
-
-#~ msgid "Clear results and start a new import!"
-#~ msgstr "Очистіть результати та почніть новий імпорт!"
-
-#~ msgid "CSV Import Results"
-#~ msgstr "Результати імпорту CSV"
-
-#~ msgid "The import has finished. Here are the results:"
-#~ msgstr "Імпорт завершено. Ось результати:"
-
-#~ msgid "Read errors:"
-#~ msgstr "Помилка!"
-
-#~ msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-#~ msgstr "Ці рядки у вашому файлі CSV мали помилки або неправильну кількість колонок і були ПРОІГНОРОВАНІ:"
-
-#~ msgid "Saved items:"
-#~ msgstr "Збережені елементи:"
-
-#~ msgid "Important messages:"
-#~ msgstr "Важливі повідомлення:"
-
-#~ msgid "Errors:"
-#~ msgstr "Помилка!"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Важливі повідомлення:"
-
-#~ msgid "The CSV file was read successfully and the import is currently running on the server!"
-#~ msgstr "Файл CSV було успішно прочитано, і зараз імпорт виконується на сервері!"
-
-#~ msgid ""
-#~ "This page will show the results when the import is finished.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-#~ "\t\t\t"
-#~ msgstr ""
-#~ "На цій сторінці відображатимуться результати після завершення імпорту.\n"
-#~ "\t\t\n"
-#~ "\t\t\t\t Залежно від кількості імпортованих елементів цей процес може зайняти від кількох секунд до кількох хвилин. Вам не потрібно тримати цю сторінку відкритою. Ми надішлемо вам електронного листа на вашу адресу   <b>\"%(email) s\" </b>, як тільки імпорт завершиться!\n"
-#~ "\t\t\t"
-
-#~ msgid "Progress:"
-#~ msgstr "Прогрес:"
 
 #~ msgid "Message Group"
 #~ msgstr "Написати Групі"

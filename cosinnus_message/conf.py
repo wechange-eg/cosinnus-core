@@ -125,7 +125,12 @@ class CosinnusMessageDefaultSettings(AppConf):
         
         # User Surveys
         'NPS_survey_enabled': False,
+        
+        # TODO: this setting needs to be added, but under API url:
+        #    https://chat.<server>/api/v1/method.call/authorization:removeRoleFromPermission
+        # 'authorization:removeRoleFromPermission': ["add-user-to-joined-room","moderator"],
     }
+    
     
     COSINNUS_CHAT_SYNC_OAUTH_SETTINGS = {
         'Accounts_OAuth_Custom-%(portal_name_cap)s': True,

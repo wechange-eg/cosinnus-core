@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.2\n"
 
 msgid "Debug"
 msgstr ""
@@ -3032,7 +3032,7 @@ msgstr "The administration of Groups begins with managing its membership. Here y
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_16_twofactorauth"
-msgstr "Here you can activate the Two-Factor-Authentication for your user profile. To do so, prepare your smartphone by installing the ‘free otp’ app on your phone and then scan the QR-code. Additionally, you can generate 10 backup tokens to be able to log in even without having your phone at hand. You can always deactivate the 2FA for your account, though we recommend having it enabled."
+msgstr "Here you can activate the Two-Factor-Authentication for your user profile. To do so, prepare your smartphone by installing the ‘free otp’ app on your phone and then scan the QR-code. Additionally, you can generate 10 backup tokens to be able to log in even without having your phone at hand. You can always deactivate the Two-Factor-Authentication for your account, though we recommend having it enabled."
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
@@ -6568,7 +6568,7 @@ msgstr ""
 msgid "Disconnect Facebook"
 msgstr ""
 
-msgid "2FA Settings"
+msgid "Two-Factor Authentication Settings"
 msgstr ""
 
 #, python-format
@@ -6790,10 +6790,10 @@ msgstr ""
 msgid "Generate Tokens"
 msgstr ""
 
-msgid "Back to 2FA Settings"
+msgid "Back to Two-Factor Authentication Settings"
 msgstr ""
 
-msgid "Disable 2FA"
+msgid "Disable Two-Factor Authentication"
 msgstr ""
 
 msgid "You are about to disable two-factor authentication. This weakens your account security, are you sure?"
@@ -6851,16 +6851,16 @@ msgstr ""
 msgid "Two-factor authentication is not enabled for your account. <br> Enable two-factor authentication for enhanced account security."
 msgstr ""
 
-msgid "Enable 2FA"
+msgid "Enable Two-Factor Authentication"
 msgstr ""
 
-msgid "2FA Setup"
+msgid "Two-Factor Authentication Setup"
 msgstr ""
 
 msgid "You are about to take your account security to the next level."
 msgstr ""
 
-msgid "To use 2FA, you need a one-time password (OTP) app. For example, there is \"Free OTP\" for your Android phone or \"OpenOTP\" for iOS. With these apps you can scan the QR code and then log in with the generated codes."
+msgid "To use Two-Factor Authentication, you need a one-time password (OTP) app. For example, there is \"Free OTP\" for your Android phone or \"OpenOTP\" for iOS. With these apps you can scan the QR code and then log in with the generated codes."
 msgstr ""
 
 msgid "Scan the QR code below."
@@ -6875,10 +6875,10 @@ msgstr ""
 msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
 msgstr ""
 
-msgid "2FA Setup Complete"
+msgid "Two-Factor Authentication Setup Complete"
 msgstr ""
 
-msgid "Congratulations, you've successfully enabled 2FA."
+msgid "Congratulations, you've successfully enabled Two-Factor Authentication."
 msgstr ""
 
 msgid "We strongly recommend to set up backup tokens in case you lose access to your authentication device!"
@@ -7386,6 +7386,93 @@ msgstr ""
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Join now and collaborate"
+
+msgid "Custom Wagtail Page"
+msgstr ""
+
+msgid "Tools"
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups or Users"
+msgstr "Convert selected Projects to Groups"
+
+#, fuzzy
+msgid "Import from a CSV File"
+msgstr "Convert selected Projects to Groups"
+
+msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+msgstr ""
+
+#, fuzzy
+msgid "Project/group CSV File"
+msgstr "Convert selected Projects to Groups"
+
+#, fuzzy
+msgid "User CSV File"
+msgstr "Convert selected Projects to Groups"
+
+msgid "Options"
+msgstr ""
+
+msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+msgstr ""
+
+msgid "Encoding of the CSV file"
+msgstr ""
+
+msgid "Delimiter of the CSV file"
+msgstr ""
+
+msgid "Upload and Import..."
+msgstr ""
+
+#, fuzzy
+msgid "Import Projects and Groups"
+msgstr "Convert selected Projects to Groups"
+
+msgid "Clear results and start a new import!"
+msgstr ""
+
+msgid "CSV Import Results"
+msgstr ""
+
+msgid "The import has finished. Here are the results:"
+msgstr ""
+
+msgid "Read errors:"
+msgstr ""
+
+msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+msgstr ""
+
+msgid "Saved items:"
+msgstr ""
+
+#, fuzzy
+msgid "Important messages:"
+msgstr "Create Group"
+
+msgid "Errors:"
+msgstr ""
+
+#, fuzzy
+msgid "Info messages:"
+msgstr "Create Group"
+
+msgid "The CSV file was read successfully and the import is currently running on the server!"
+msgstr ""
+
+#, python-format
+msgid ""
+"This page will show the results when the import is finished.\n"
+"\t\t\n"
+"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+"\t\t\t"
+msgstr ""
+
+msgid "Progress:"
+msgstr ""
 
 #, fuzzy
 msgid "Show more Projects"
@@ -12835,6 +12922,9 @@ msgstr ""
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr ""
 
+msgid "Drag"
+msgstr ""
+
 #~ msgid "Umwelt"
 #~ msgstr "Environment"
 
@@ -12858,34 +12948,6 @@ msgstr ""
 
 #~ msgid "Klimaschutz"
 #~ msgstr "Climate Protection"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups or Users"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "Import from a CSV File"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "Project/group CSV File"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "User CSV File"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "Import Projects and Groups"
-#~ msgstr "Convert selected Projects to Groups"
-
-#, fuzzy
-#~ msgid "Important messages:"
-#~ msgstr "Create Group"
-
-#, fuzzy
-#~ msgid "Info messages:"
-#~ msgstr "Create Group"
 
 #, fuzzy
 #~ msgid "Message Group"
