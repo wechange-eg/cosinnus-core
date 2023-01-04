@@ -86,7 +86,8 @@ def get_env():
 def setup_env(portal_name, domain, pull_branch, confirm=False, 
               base_path=None, pull_remote='origin',
               frontend_pull_branch='main', frontend_pull_remote='origin',
-              legacy_mode=False, special_requirements='requirements-production.txt'):
+              legacy_mode=False, special_requirements='requirements-production.txt',
+              new_unit_commands=False):
     """ 
         Sets up the env with all variables needed to run cosinnus 
         fabric commands.
@@ -101,6 +102,8 @@ def setup_env(portal_name, domain, pull_branch, confirm=False,
             do not have the v3 redesign devops architecture yet (pip instead of poetry, etc)
         @param special_requirements: if run in `legacy_mode == True`, this can be used to change
             the requirements file
+        @param new_unit_commands: uses the newer configuration for unit commands, soon to become
+            the default for the redesign architecture
     """
     if not base_path and domain:
         base_path = f'/srv/http/{domain}'
@@ -124,11 +127,16 @@ def setup_env(portal_name, domain, pull_branch, confirm=False,
         env.reload_command = f'sudo /bin/systemctl restart django-{portal_name}.service'
         env.stop_command = f'sudo /bin/systemctl stop django-{portal_name}.service'
         env.start_command = f'sudo /bin/systemctl start django-{portal_name}.service'
+    elif new_unit_commands:
+        env.reload_command = f'sudo systemctl restart django-{portal_name}.service'
+        env.stop_command = f'sudo systemctl stop django-{portal_name}.service'
+        env.start_command = f'sudo systemctl start django-{portal_name}.service'
     else:
         env.reload_command = f'sudo systemctl restart django-{portal_name}-unit.service'
         env.stop_command = f'sudo systemctl stop django-{portal_name}-unit.service'
         env.start_command = f'sudo systemctl start django-{portal_name}-unit.service'
     env.memcached_restart_command = f'sudo /bin/systemctl restart django-{portal_name}-memcached.service'
+    env.frontend_restart_command = f'sudo systemctl restart django-{portal_name}-node-frontend.service'
     env.portal_additional_less_to_compile = [] # a list of django apps for which to compile extra less
     env.db_name = portal_name
     env.db_username = portal_name

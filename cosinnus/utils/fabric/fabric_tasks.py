@@ -127,7 +127,7 @@ def deployfrontend(_ctx):
     """ Only does a git pull on the base project repository """
     check_confirmation()
     _pull_and_update_frontend()
-    restart(_ctx)
+    restartfrontend(_ctx)
 
 
 """ ----------- Single helper tasks. Used in deploy tasks, but can also be called solo ----------- """
@@ -149,6 +149,13 @@ def restart(_ctx):
     env = get_env()
     c = CosinnusFabricConnection(host=env.host)
     c.run(env.reload_command)
+    
+@task
+def restartfrontend(_ctx):
+    """ Restart the frontend node service """
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    c.run(env.frontend_restart_command)
 
 @task
 def stop(_ctx):
