@@ -155,18 +155,13 @@ class SignupTestView(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertIn('Enter a valid email address.', response_json.get('data', {}).get('email'))
 
-# def test_user_cannot_signup_with_user_signup_disabled(self):
-    #     """
-    #     Ensure user cannot signup if `COSINNUS_USER_SIGNUP_ENABLED` setting is turned off
-
-    #     TODO: get after the note will no longer be relevant for this test ->
-    #     `note: this test will fail for now, and rightly so, because the blocked access is still a todo in #82 and hasn't been implemented`
-    #     """
-
-    #     print(f'SIGNUP ENABLED -> {settings.COSINNUS_USER_SIGNUP_ENABLED}')
-
-    #     response = self.client.post(self.signup_url, self.user_data, format="json")
-    #     if settings.COSINNUS_USER_SIGNUP_ENABLED: 
-    #         self.assertEqual(response.status_code, 200)
-    #     else:
-    #         self.assertEqual(response.status_code, 404)
+    def test_user_cannot_signup_with_user_signup_disabled(self):
+            """
+            Ensure user cannot signup if `COSINNUS_USER_SIGNUP_ENABLED` setting is turned off
+            """
+            response = self.client.post(self.signup_url, self.user_data, format="json")
+            print(f'PPP -> {settings.COSINNUS_USER_SIGNUP_ENABLED}')
+            if settings.COSINNUS_USER_SIGNUP_ENABLED: 
+                self.assertEqual(response.status_code, 200)
+            else:
+                self.assertEqual(response.status_code, 404) # throws an error 404 on localhost + signup still possible via drf!
