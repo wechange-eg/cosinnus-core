@@ -1222,7 +1222,7 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
     def group_can_be_bbb_enabled(self):
         """ Check if this group may potentially enable BBB meetings right now. """
         if self.group_could_be_bbb_enabled_ever:
-            if now().date() <= self.enable_user_premium_choices_until:
+            if not self.enable_user_premium_choices_until or now().date() <= self.enable_user_premium_choices_until:
                 return True
         return False
     
