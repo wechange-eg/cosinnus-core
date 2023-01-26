@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-15 17:00+0100\n"
+"POT-Creation-Date: 2023-01-26 09:15+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,26 +11,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.2.2\n"
 
 msgid "Debug"
-msgstr ""
+msgstr "Fehlersuche"
 
 msgid "Info"
-msgstr ""
+msgstr "Information"
 
 msgid "Success"
-msgstr ""
+msgstr "Erfolgreich"
 
 #, fuzzy
 #| msgid "Warning!"
 msgid "Warning"
 msgstr "Achtung!"
 
-#, fuzzy
-#| msgid "Error!"
 msgid "Error"
-msgstr "Fehler!"
+msgstr "Fehler"
 
 msgid "Is active"
 msgstr "Ist aktiv"
@@ -38,8 +36,6 @@ msgstr "Ist aktiv"
 msgid "Announcement"
 msgstr "Ankündigung"
 
-#, fuzzy
-#| msgid "Announcement"
 msgid "Announcements"
 msgstr "Ankündigung"
 
@@ -141,10 +137,8 @@ msgstr "Ja"
 msgid "No"
 msgstr "Nein"
 
-#, fuzzy
-#| msgid "Contact info"
 msgid "Personal info"
-msgstr "Kontaktinfos"
+msgstr "Persönliche Informationen"
 
 msgid "Permissions"
 msgstr "Berechtigungen"
@@ -172,10 +166,10 @@ msgstr "Reaktiviere Benutzerkontos"
 
 #, python-format
 msgid "%(count)d Users' group memberships were refreshed."
-msgstr ""
+msgstr "%(count)d Gruppenmitgliedschaften der Benutzer wurden aktualisiert."
 
 msgid "Refresh user group membership associations (e.g. cache or Nextcloud folder problems)"
-msgstr ""
+msgstr "Die Zugehörigkeit zu Benutzergruppen (z. B. bei Problemen mit dem Cache oder Nextcloud-Ordnern) aktualisieren"
 
 #, python-format
 msgid "%d Users were synchronized successfully."
@@ -238,7 +232,7 @@ msgid "Art, Culture und Leisure Activities"
 msgstr "Kunst, Kultur und Freizeitgestaltung"
 
 msgid "Money and Finance"
-msgstr "Geld und Finanzen "
+msgstr "Geld und Finanzen"
 
 msgid "Business and Law"
 msgstr "Arbeit und Recht"
@@ -332,7 +326,7 @@ msgid "Sorry, only admin accounts may log in at this time."
 msgstr "Zurzeit können sich nur die Portal-Administrator_innen einloggen."
 
 msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
-msgstr ""
+msgstr "Du kannst nicht auf den Admin-Bereich zugreifen, weil dir die Berechtigung “Mitarbeiter” fehlt, obwohl du ein Superuser bist. Bitte einen anderen Administrator, dir dieses Recht zu erteilen."
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Du wurdest automatisch abgemeldet, nachdem du für einige Zeit inaktiv warst."
@@ -556,11 +550,11 @@ msgid "%(sender_name)s has just created a new user account on %(portal_name)s!"
 msgstr "%(sender_name)s hat gerade einen neuen Benutzeraccount auf %(portal_name)s erstellt!"
 
 msgid "A conference you are attending has been updated"
-msgstr "Eine Tagung, an der Sie teilnehmen, wurde aktualisiert."
+msgstr "Eine Tagung, an der Sie teilnehmen, wurde aktualisiert"
 
 #, python-format
 msgid "The conference %(object_name)s has been updated"
-msgstr "Die Tagung “%(object_name)s” wurde aktualisiert."
+msgstr "Die Tagung “%(object_name)s” wurde aktualisiert"
 
 msgid "You are attending this conference"
 msgstr "Sie nehmen an dieser Tagung teil"
@@ -574,7 +568,7 @@ msgstr "Die Uhrzeit einer Tagung, an der Sie teilnehmen, wurde aktualisiert"
 
 #, python-format
 msgid "The time of conference %(object_name)s has been updated"
-msgstr "Die Uhrzeit der Tagung \"%(object_name)s\" wurde aktualisiert."
+msgstr "Die Uhrzeit der Tagung \"%(object_name)s\" wurde aktualisiert"
 
 #, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
@@ -594,7 +588,7 @@ msgstr "%(sender_name)s hat gerade aus einer Idee, der du folgst, das Projekt \"
 
 #, python-format
 msgid "Your match with %(sender_name)s has just been established!"
-msgstr ""
+msgstr "Deine Übereinstimmung mit %(sender_name)s wurde soeben festgestellt!"
 
 msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Deutsch"
@@ -1086,10 +1080,8 @@ msgstr "Benutzerinfos anfragen"
 msgid "Pre-filled content for the information field"
 msgstr "Vorausgefüllter Inhalt für das Informationsfeld"
 
-#, fuzzy
-#| msgid "Request organization"
 msgid "Request contact option"
-msgstr "Organisation anfragen"
+msgstr "Kontaktoption anfordern"
 
 msgid "Priority choice enabled"
 msgstr "Prioritätswahl aktiviert"
@@ -1159,10 +1151,8 @@ msgstr "Motivation für die Teilnahme"
 msgid "Contact E-Mail Address"
 msgstr "Kontakt-E-Mail Adresse"
 
-#, fuzzy
-#| msgid "May be contacted"
 msgid "Applicant may be contacted"
-msgstr "Darf kontaktiert werden"
+msgstr "Der Antragsteller darf kontaktiert werden"
 
 msgid "Cosinnus conference application"
 msgstr "Cosinnus Tagungs-Teilnahmeantrag"
@@ -1442,13 +1432,11 @@ msgstr "Art des Teilnahmeantrags"
 msgid "Type of video conference available for a group / a project"
 msgstr "Typ der Videokonferenz die für Gruppen / Projekte verfügbar sind"
 
-#, fuzzy
-#| msgid "Enable Streaming this BBB meeting"
 msgid "Enable premium user choices (BBB) until"
-msgstr "Streamen dieser BBB-Veranstaltung aktivieren"
+msgstr "Die Premium-Benutzerauswahl (BBB) bis aktivieren"
 
 msgid "Enter the date until group admins may make premium choices here (only if group/project and event BBB rooms require a premium booking)"
-msgstr ""
+msgstr "Gebe hier das Datum ein, bis zu dem Gruppenadministratoren Premium-Auswahlen treffen können (nur wenn Gruppen-/Projekt- und Veranstaltungs-BBB Räume eine Premium-Buchung erfordern)"
 
 msgid "Microsite Video"
 msgstr "Microsite Video"
@@ -1742,46 +1730,40 @@ msgstr "E-Mails für alle Direktnachrichten und Erwähnungen"
 msgid "--- No country selected ---"
 msgstr "--- Kein Land ausgewählt ---"
 
-#, fuzzy
-#| msgid "Ideas I like"
 msgid "dislike"
-msgstr "Ideen, die mir gefallen"
+msgstr "Dislike"
 
 msgid "like"
-msgstr ""
+msgstr "Like"
 
 msgid "ignored"
-msgstr ""
+msgstr "ignoriert"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "User"
 msgstr "Benutzer_in"
 
-#, fuzzy
-#| msgid "subject"
 msgid "Match subject"
 msgstr "Betreff"
 
-#, fuzzy
-#| msgid "Attached object"
 msgid "Match object"
 msgstr "Verknüpftes Objekt"
 
 msgid "Match type"
-msgstr ""
+msgstr "Art der Übereinstimmung"
 
 msgid "Match"
-msgstr ""
+msgstr "Übereinstimmung"
 
 msgid "Matches"
-msgstr ""
+msgstr "Übereinstimmungen"
 
 #, python-brace-format
 msgid "Match between {self.from_user} and {self.to_user} has been successfully established."
-msgstr ""
+msgstr "Die Übereinstimmung zwischen {self.from_user} und {self.to_user} wurde erfolgreich hergestellt."
 
 msgid "You and {self.from_user.get_full_name()} matched!"
-msgstr ""
+msgstr "Du und {self.from_user.get_full_name()} stimmen überein!"
 
 msgid "TODO: Youve matched!"
 msgstr ""
@@ -2288,18 +2270,16 @@ msgid "This user profile is scheduled for deletion at: "
 msgstr "Dieses Nutzerprofil ist zur Löschung geplant am: "
 
 msgid "However, it will not be deleted, because it is still active."
-msgstr ""
+msgstr "Es wird jedoch nicht gelöscht, da es noch aktiv ist."
 
 msgid "This user account is disabled. The user cannot log in or use the account."
-msgstr ""
+msgstr "Dieses Benutzerkonto ist deaktiviert. Der Benutzer kann sich nicht anmelden oder das Konto verwenden."
 
 msgid "To delete this user account, please go back to the user account list, find the account by searching for its name or email, and check the entry in the list. Then use the action from the actions dropdown:"
-msgstr ""
+msgstr "Um dieses Benutzerkonto zu löschen, gehe bitte zurück zur Liste der Benutzerkonten, suche nach dem Namen oder der E-Mail-Adresse des Kontos, und überprüfe den Eintrag in der Liste. Verwende dann die Aktion aus dem Dropdown-Menü:"
 
-#, fuzzy
-#| msgid "View on page"
 msgid "View on site"
-msgstr "View on page"
+msgstr "Auf der Website anschauen"
 
 msgid "Enter the 4 capital letters in the scrambled image"
 msgstr "Gib die 4 Großbuchstaben aus dem Bild ein"
@@ -2354,13 +2334,11 @@ msgstr "BBB-Raumeinstellungen"
 msgid "You can set conference settings on this level. All objects under this level on the hierarchy will inherit these settings, unless they have set conference settings on themselves."
 msgstr "Du kannst Tagungseinstellungen auf dieser Ebene festlegen. Alle Inhalte in der Hierarchie unter dieser Ebene werden die Einstellungen erben, falls für sie keine eigenen Einstellungen festgelegt sind."
 
-#, fuzzy
-#| msgid "Generate Tokens"
 msgid "BBB Guest Token"
-msgstr "Tokens generieren"
+msgstr "BBB Gast-Token"
 
 msgid "None yet. Join the room to generate a guest token. It will also be shown in the moderator-only message."
-msgstr ""
+msgstr "Noch keine. Trete dem Raum bei, um ein Gast-Token zu generieren. Er wird auch in der Nachricht for Moderatoren angezeigt."
 
 msgid "Inherited BBB-Parameters"
 msgstr "Übernommene BBB-Parameter"
@@ -3065,10 +3043,8 @@ msgstr "Ich akzeptiere die Bedingungen, um Teilnahme zu beantragen"
 msgid "I can be contacted via email by conference administration regardless of my notification settings"
 msgstr "Ich kann von den Tagungsorganisator/innen per E-Mail kontaktiert werden, unabhängig von meinen Benachrichtigungseinstellungen"
 
-#, fuzzy
-#| msgid "Please verify your email address to continue using your account."
 msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
-msgstr "Bitte bestätige deine E-Mail-Adresse, um dein Konto weiter zu benutzen."
+msgstr "Bitte verifiziere zunächst deine E-Mail Adresse. Andernfalls kannst du einige wichtige Konferenzbenachrichtigungen verpassen."
 
 msgid "Save changes"
 msgstr "Änderungen speichern"
@@ -3146,10 +3122,8 @@ msgstr "Wähle Benutzer/innen für diesen Workshop"
 msgid "List of Applicants"
 msgstr "Liste der Antragssteller/innen"
 
-#, fuzzy
-#| msgid "Join meeting directly"
 msgid "Join BBB Meeting as guest"
-msgstr "Meeting direkt betreten"
+msgstr "Als Gast am BBB Meeting teilnehmen"
 
 msgid "You are joining a meeting as a guest"
 msgstr "Du betrittst eine Videokonferenz als Gast"
@@ -3287,7 +3261,7 @@ msgid "Workshop selection: Enable applicants to choose preferred workshops to at
 msgstr "Workshopauswahl: Antragssteller/innen können Workshops priorisieren, an denen sie teilnehmen möchten"
 
 msgid "Applicants have to give their permission to be contacted per email"
-msgstr "Antragssteller/innen müssen ihr Einverständnis geben, per E-Mail kontaktiert zu werden."
+msgstr "Antragssteller/innen müssen ihr Einverständnis geben, per E-Mail kontaktiert zu werden"
 
 msgid "Conditions for participation"
 msgstr "Bedingungen für die Teilnahme"
@@ -5498,8 +5472,6 @@ msgstr "Themen die mich interessieren"
 msgid "What I wish to learn"
 msgstr "Was ich lernen möchte"
 
-#, fuzzy
-#| msgid "Contact info"
 msgid "Contact Infos"
 msgstr "Kontaktinfos"
 
@@ -6544,36 +6516,26 @@ msgstr "Profil löschen"
 msgid "User overview"
 msgstr "Benutzer_innen-Übersicht"
 
-#, fuzzy
-#| msgid "Contact"
 msgid "Direct Contact"
-msgstr "Kontakt"
+msgstr "Direktkontakt"
 
-#, fuzzy
-#| msgid "Type of your organization"
 msgid "Type of educational institution"
-msgstr "Art der Organisation"
+msgstr "Art der Bildungseinrichtung"
 
-#, fuzzy
-#| msgid "Actions"
 msgid "Function"
-msgstr "Aktionen"
+msgstr "Funktion"
 
-#, fuzzy
-#| msgid "Conditions"
 msgid "Position"
-msgstr "Nutzungsbedingungen"
+msgstr "Stellung"
 
-#, fuzzy
-#| msgid "Name of the organization"
 msgid "Name of educational institution"
-msgstr "Name der Organisation"
+msgstr "Name der Bildungseinrichtung"
 
 msgid "Wonderful, we definetely have so much to discuss!"
-msgstr ""
+msgstr "Wunderbar, wir haben auf jeden Fall so viel zu besprechen!"
 
 msgid "Looks like we share no common interests"
-msgstr ""
+msgstr "Sieht so aus, als hätten wir keine gemeinsamen Interessen"
 
 msgid "Members of your projects and groups only"
 msgstr "Nur Mitglieder deiner Projekte und Gruppen"
@@ -7607,10 +7569,8 @@ msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen deaktiviere
 msgid "Only project members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieses Projekts können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
 
-#, fuzzy
-#| msgid "Note: New recordings can only be made if you have booked premium features for this conference."
 msgid "Note: New recordings can only be made if you have booked premium features for this project."
-msgstr "Achtung: Neue Aufzeichnungen können nur gemacht werden, wenn der Premium-Status für diese Tagung gebucht wurde."
+msgstr "Achtung: Neue Aufzeichnungen können nur gemacht werden, wenn der Premium-Status für dieses Project gebucht wurde."
 
 msgid "You are not currently in any Groups"
 msgstr "Du bist noch in keinen Gruppen Mitglied"
@@ -7693,10 +7653,8 @@ msgstr "Entschuldige, nur Portal-Administrator_innen können Gruppen deaktiviere
 msgid "Only group members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieser Gruppe können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
 
-#, fuzzy
-#| msgid "Note: New recordings can only be made if you have booked premium features for this conference."
 msgid "Note: New recordings can only be made if you have booked premium features for this group."
-msgstr "Achtung: Neue Aufzeichnungen können nur gemacht werden, wenn der Premium-Status für diese Tagung gebucht wurde."
+msgstr "Achtung: Neue Aufzeichnungen können nur gemacht werden, wenn der Premium-Status für diese Gruppe gebucht wurde."
 
 msgid "My Conferences"
 msgstr "Meine Tagungen"
@@ -7856,7 +7814,7 @@ msgid "Please also provide an end date"
 msgstr "Bitte gib auch ein Enddatum an"
 
 msgid "Ensure that your name does not contain any invalid characters."
-msgstr ""
+msgstr "Stelle dich sicher, dass dein Name keine ungültigen Zeichen enthält."
 
 msgid "Test email sent!"
 msgstr "Test email wurde gesendet!"
@@ -7891,22 +7849,18 @@ msgstr "Benutzerkonto wurde erfolgreich erstellt!"
 msgid "You do not have any backup tokens set up. Please log in using your OTP tokens."
 msgstr "Du hast noch keine Sicherungstoken erstellt. Logge die bitte anhand von deinen OTP Tokens ein."
 
-#, fuzzy
-#| msgid "Invalid request."
 msgid "Invalid guest token."
-msgstr "Ungültiger Seitenaufruf."
+msgstr "Ungültiges Gast-Token."
 
-#, fuzzy
-#| msgid "An error occured when trying to disconnect your facebook account! Please contact an administrator!"
 msgid "There was an error when trying to redirect you to the BBB room. Please contact an administrator!"
-msgstr "Beim Versuch dein Facebook-Konto zu trennen ist ein Fehler aufgetreten. Bitte kontaktiere einen Administrator!"
+msgstr "Beim Versuch, dich zum BBB-Raum weiterzuleiten, ist ein Fehler aufgetreten. Bitte kontaktiere einen Administrator!"
 
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Die Sprache \"%s\" wird nicht unterstützt"
 
 msgid "New verification email sent!"
-msgstr "Eine neue Verifizierungsmail wurde versandt."
+msgstr "Eine neue Verifizierungsmail wurde versandt!"
 
 msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
 msgstr "Wir haben soeben eine weitere E-Mail mit einem neuen Verifizierungslink an dich gesendet. Wenn die E-Mail immer noch nicht angekommen ist, kannst du dich erneut anmelden, um eine weitere neue E-Mail zu erhalten."
@@ -8409,7 +8363,7 @@ msgid "The import was successfully archived."
 msgstr "Der Import wurde erfolgreich archiviert."
 
 msgid "User id should be an integer and it should not be None."
-msgstr ""
+msgstr "Die Benutzer-ID muss eine ganze Zahl sein und darf nicht None sein."
 
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
@@ -8474,10 +8428,8 @@ msgstr "Inhalt des Fehlers:"
 msgid "No error message supplied."
 msgstr "Im Fehler ist kein Inhalt vorhanden."
 
-#, fuzzy
-#| msgid "You are getting this notification because you are an administrator of this project or group."
 msgid "You are getting this notification because you are a member of this conference or have applied for membership."
-msgstr "Du erhältst diese Benachrichtigung, weil du ein Administrator dieses Projektes oder dieser Gruppe bist."
+msgstr "Du erhältst diese Benachrichtigung, weil du Mitglied dieser Konferenz bist oder eine Mitgliedschaft beantragt hast."
 
 msgid "Go to conference"
 msgstr "Zur Tagung"
@@ -8486,10 +8438,10 @@ msgid "This function is not enabled for this conference."
 msgstr "Diese Funktion ist für diese Tagung nicht aktiviert."
 
 msgid "successfully activated all user accounts."
-msgstr "Nutzerkonten erfolgreich aktiviert"
+msgstr "Nutzerkonten erfolgreich aktiviert."
 
 msgid "successfully deactivated all user accounts."
-msgstr "Nutzerkonten erfolgreich deaktiviert"
+msgstr "Nutzerkonten erfolgreich deaktiviert."
 
 #
 msgid "Successfully deactivated user account"
@@ -8546,24 +8498,21 @@ msgstr "Es wurde eine Test-E-Mail an deine E-Mail-Adresse gesendet."
 
 #, python-format
 msgid "Recording %s was not found, has already been deleted, or you do not have permission to delete it."
-msgstr ""
+msgstr "Die Aufzeichnung %s wurde nicht gefunden, wurde bereits gelöscht oder du hast keine Berechtigung, sie zu löschen."
 
-#, fuzzy, python-format
-#| msgid "The invitation was successfully deleted."
+#, python-format
 msgid "Recording %s was successfully deleted."
-msgstr "Die Einladung wurde erfolgreich gelöscht."
+msgstr "Die Aufzeichnung %s wurde erfolgreich gelöscht."
 
-#, fuzzy, python-format
-#| msgid "Could not save your like setting because of an error."
+#, python-format
 msgid "Recording %s could not be deleted because of a server error."
-msgstr "Konnte deine \"Gefällt mir\"-Angabe aufgrund eines Fehlers nicht speichern."
+msgstr "Die Aufzeichnung %s konnte aufgrund eines Serverfehlers nicht gelöscht werden."
 
 msgid "Please supply one ore more recipients."
-msgstr ""
+msgstr "Bitte einen oder mehrere Empfänger angeben."
 
-#, fuzzy
 msgid "No conference applicants found at the moment."
-msgstr "Tagungs-Teilnahmeanträge"
+msgstr "Zurzeit sind keine Bewerber für die Tagung gefunden worden."
 
 msgid "The message was sent to the chosen participants."
 msgstr "Die Nachricht wurde an die gewählten Tagungsteilnehmer geschickt."
@@ -9898,16 +9847,12 @@ msgstr "Dein Kommentar wurde erfolgreich hinzugefügt."
 msgid "Your comment was deleted successfully."
 msgstr "Dein Kommentar wurde erfolgreich gelöscht."
 
-#, fuzzy
-#| msgid "Save changes"
 msgid "Exchange"
-msgstr "Änderungen speichern"
+msgstr "Austausch"
 
-#, fuzzy
-#| msgid "Save changes"
 msgctxt "the_app"
 msgid "exchange"
-msgstr "Änderungen speichern"
+msgstr "Austausch"
 
 # The Cosinnus App Name
 msgctxt "the_app"
@@ -11216,7 +11161,7 @@ msgid "As a Moderator, you will receive an instant notification whenever ANY pub
 msgstr "Als Moderator erhältst du eine sofortige Email-Benachrichtigung für JEDEN öffentlich sichtbaren Inhalt, der auf diesem Portal erstellt wird. Da du auch Portal-Administrator bist, kannst du den Inhalt dann löschen, falls er offensiv oder bedenklich ist. Um ihn zu löschen, besuche die Inhaltsseite auf der Webseite, während du mit diesem Benutzerkonto eingeloggt bist."
 
 msgid "Additionally, you have opted in to receive emails from organizers from these conferences. <br/> You may opt out by revoking your application or by leaving the conference:"
-msgstr ""
+msgstr "Außerdem hast du dich dafür entschieden, E-Mails von den Organisatoren dieser Konferenzen zu erhalten. Du kannst dich abmelden, indem du deine Anmeldung widerrufst oder die Konferenz verlässt:"
 
 msgid "Immediately"
 msgstr "Sofort"
@@ -11246,89 +11191,70 @@ msgid "Your notifications preferences were reset to default!"
 msgstr "Deine Benachrichtigungseinstellungen wurden erfolgreich zurückgesetzt!"
 
 msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
-msgstr ""
+msgstr "Es existiert bereits ein Konto mit dieser E-Mail-Adresse. Um sicherzustellen, dass du der Eigentümer dieses Kontos bist, melde dich bitte zuerst bei diesem Konto an und verbinde dann dein Konto."
 
-#, fuzzy
-#| msgid "Successfully updated accounts."
 msgid "Successfully signed in as {}."
-msgstr "Nutzerkonten erfolgreich aktualisiert."
+msgstr "Erfolgreich angemeldet als {}."
 
-#, fuzzy
-#| msgid "Successfully updated accounts."
 msgid "Successfully connected account."
-msgstr "Nutzerkonten erfolgreich aktualisiert."
+msgstr "Das Konto wurde erfolgreich verbunden."
 
-#, fuzzy
-#| msgid "Successfully removed user"
 msgid "Successfully removed connection."
-msgstr "Nutzer erfolgreich entfernt"
+msgstr "Die Verbindung wurde erfolgreich entfernt."
 
 msgid "Set password"
 msgstr "Passwort setzen"
 
-#, fuzzy, python-format
-#| msgid "%(provider)s-Account"
+#, python-format
 msgid "Edit %(provider)s account "
-msgstr "%(provider)s-Konto"
+msgstr "Konto von %(provider)s bearbeiten "
 
 #, python-format
 msgid " You connected your account with your account on %(provider)s. To change %(provider)s account data (e.g. password or email address) you have to visit the account settings on the %(provider)s website. "
-msgstr ""
+msgstr " Du hast dein Konto mit deinem Konto bei %(provider)s verbunden. Um %(provider)s Kontodaten (z. B. Passwort oder E-Mail-Adresse) zu ändern, musst du die Kontoeinstellungen auf der Website des %(provider)sbesuchen. "
 
-#, fuzzy, python-format
-#| msgid "%(provider)s-Account"
+#, python-format
 msgid "Go to %(provider)s account settings"
-msgstr "%(provider)s-Konto"
+msgstr "Zu den %(provider)s Kontoeinstellungen"
 
-#, fuzzy
-#| msgid "Remove location"
 msgid "Remove Connection"
-msgstr "Ort entfernen"
+msgstr "Verbindung entfernen"
 
 #, python-format
 msgid "When you remove the connection you cannot login to this website via %(provider)s. Instead you have to use your email address and password. "
-msgstr ""
+msgstr "Wenn du die Verbindung trennst, kannst du dich nicht mehr über %(provider)s auf dieser Website anmelden. Stattdessen musst du deine E-Mail-Adresse und dein Passwort verwenden. "
 
-#, fuzzy
-#| msgid "Disconnect Facebook Account"
 msgid "Disconnect Accounts"
-msgstr "Facebook-Konto trennen"
+msgstr "Konten abtrennen"
 
-#, fuzzy
-#| msgid "Do you really want to deactivate the member's user account ?"
 msgid "Do you really want to disconnect your account account ?"
 msgstr "Möchten sie wirkich dieses Nutzerkonto deaktivieren?"
 
 #, python-format
 msgid "Do you want to remove the connection between %(portal_name)s and %(provider)s? To do that you have to set a password for your %(portal_name)s account first."
-msgstr ""
+msgstr "Möchtest du die Verbindung zwischen %(portal_name)s und %(provider)s aufheben? Dazu musst du zunächst ein Passwort für dein %(portal_name)s-Konto festlegen."
 
-#, fuzzy
-#| msgid "Set password"
 msgid "Set Password"
 msgstr "Passwort setzen"
 
 #, python-format
 msgid "Connect your Account with %(provider)s"
-msgstr ""
+msgstr "Verbinde dein Konto mit %(provider)s"
 
 #, python-format
 msgid " If you already have an account on %(provider)s you can connect both accounts here. After that you only have to login on %(provider)s and are also logged in here."
-msgstr ""
+msgstr " Wenn du bereits ein Konto bei %(provider)s hast, kannst du hier beide Konten verbinden. Danach musst du dich nur noch bei %(provider)s anmelden und wirst dich auch hier eingeloggt."
 
-#, fuzzy
-#| msgid "Connect Facebook Account"
 msgid "Connect Accounts"
-msgstr "Facebook-Konto verbinden"
+msgstr "Konten verbinden"
 
 #, python-format
 msgid "Connect Account with %(provider)s"
-msgstr ""
+msgstr "Konto mit %(provider)s verbinden"
 
-#, fuzzy, python-format
-#| msgid "Do you really want to delete the invitation for \"%(title)s\"?"
+#, python-format
 msgid " Do you really want to connect your account with the one on %(provider)s ? "
-msgstr "Möchtest du die Einladung für \"%(title)s\" wirklich löschen?"
+msgstr " Willst du dein Konto wirklich mit dem Konto von %(provider)s verbinden? "
 
 #, python-format
 msgid ""
@@ -11341,11 +11267,17 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
+"Hallo %(user_name)s,\n"
+"\n"
+"Dein %(site_name)s Konto wurde mit deinem %(provider)s Konto verbunden. Jetzt kannst du dich mit nur einem Klick auf %(site_name)s einloggen.\n"
+"\n"
+"Wenn du deine Konten verbunden hast, musst du nichts weiter tun. Falls nicht, kontaktiere bitte den Support.\n"
+"\n"
+"\n"
+"Dein %(site_name)s Team"
 
-#, fuzzy
-#| msgid "Account deactivated"
 msgid "Account connected"
-msgstr "Account deaktiviert"
+msgstr "Konto verbindet"
 
 #, python-format
 msgid ""
@@ -11356,11 +11288,15 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
+"Hallo %(user_name)s,\n"
+"\n"
+"Die Verbindung mit deinem %(provider)s Konto auf %(site_name)s wurde entfernt. Du kannst dich nun nicht mehr mit deinem %(provider)s Konto auf %(site_name)s einloggen.\n"
+"\n"
+"\n"
+"Dein %(site_name)s Team"
 
-#, fuzzy
-#| msgid "Your application has been accepted!"
 msgid "Account connection has been removed"
-msgstr "Dein Teilnahmeantrag wurde angenommen!"
+msgstr "Die Kontoverbindung wurde entfernt"
 
 #, python-format
 msgid ""
@@ -11373,155 +11309,127 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
+"Hallo %(user_name)s,\n"
+"\n"
+"Jemand hat sich soeben auf %(site_name)s mit deinem %(provider)s Account registriert. Wir senden dir diese E-Mail, um sicherzustellen, dass es sich um dich handelt.\n"
+"\n"
+"Wenn du es warst, brauchst du nichts zu tun. Andernfalls wende dich bitte an den Support.\n"
+"\n"
+"\n"
+"Dein %(site_name)s Team"
 
 #, python-format
 msgid "Someone registered on %(site_name)s with your %(provider)s account "
-msgstr ""
+msgstr "Jemand hat sich auf %(site_name)s mit deinem %(provider)s-Konto registriert "
 
-#, fuzzy
-#| msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
-#| msgid "Welcome"
 msgid "Welcome"
 msgstr "Willkommen"
 
 msgid "WECHANGE Account connected"
-msgstr ""
+msgstr "WECHANGE Konto verbunden"
 
 msgid " This data we received from your WECHANGE account"
-msgstr ""
+msgstr " Diese Daten haben wir von deinem WECHANGE-Konto erhalten"
 
 msgid "Your Avatar and other settings from your profile were also copied."
-msgstr ""
+msgstr "Dein Avatar und andere Einstellungen aus deinem Profil wurden ebenfalls kopiert."
 
-#, fuzzy
-#| msgid "You can change this setting later in your profile settings"
 msgid "You can change your this data any time in you profile settings."
-msgstr "Du kannst diese Einstellung später in deinen Profileinstellungen ändern"
+msgstr "Du kannst diese Daten jederzeit in deinen Profileinstellungen ändern."
 
 msgid "Social Network Login Failure"
-msgstr ""
+msgstr "Anmeldung bei einem sozialen Netzwerk fehlgeschlagen"
 
 msgid "An error occurred while attempting to login via your social network account."
-msgstr ""
+msgstr "Beim Versuch, sich über dein soziales Netzwerkkonto anzumelden, ist ein Fehler aufgetreten."
 
-#, fuzzy
-#| msgid "Account deactivated"
 msgid "Account Connections"
-msgstr "Account deaktiviert"
+msgstr "Kontoverbindungen"
 
-#, fuzzy, python-format
-#| msgid "%(provider)s-Account"
+#, python-format
 msgid " %(provider)s Account "
-msgstr "%(provider)s-Konto"
+msgstr "%(provider)s-Konto "
 
 msgid "You can sign in to your account using any of the following third party accounts:"
-msgstr ""
+msgstr "Du kannst dich mit einem der folgenden Drittanbieterkonten bei deinem Konto anmelden:"
 
-#, fuzzy
-#| msgid "Remove User"
 msgid "Remove"
-msgstr "Teilnehmer entfernen"
+msgstr "Entfernen"
 
-#, fuzzy
-#| msgid "Your Facebook account was successfully disconnected from this account."
 msgid "You currently have no social network accounts connected to this account."
-msgstr "Dein Facebook-Konto wurde erfolgreich von deinem Benutzerprofil getrennt."
+msgstr "Du hast derzeit keine Sozial-Netzwerkkonten, die mit diesem Konto verbunden sind."
 
-#, fuzzy
-#| msgid "Add Social Media Account"
 msgid "Add a 3rd Party Account"
-msgstr "Social Media Konto hinzufügen"
+msgstr "Ein Drittanbieterkonto hinzufügen"
 
-#, fuzzy
-#| msgid "Canceled"
 msgid "Login Cancelled"
-msgstr "Abgebrochen"
+msgstr "Anmeldung abgebrochen"
 
 #, python-format
 msgid "You decided to cancel logging in to our site using one of your existing accounts. If this was a mistake, please proceed to <a href=\"%(login_url)s\">sign in</a>."
-msgstr ""
+msgstr "Du hast dich entschieden, die Anmeldung auf unserer Website mit einem deinem bestehenden Konten abzubrechen. Wenn dies ein Fehler war, fahre bitte fort mit <a href=“%(login_url)s”>sign in</a>."
 
-#, fuzzy
-#| msgid "Sign up"
 msgid "Signup"
 msgstr "Registrieren"
 
-#, fuzzy, python-format
-#| msgid "Log in with %(portal_name)s"
+#, python-format
 msgid "Login with %(provider)s"
-msgstr "Anmelden mit %(portal_name)s"
+msgstr "Anmelden mit %(provider)s"
 
 msgid "Login and Connect"
-msgstr ""
+msgstr "Anmeldung und Verbindung"
 
 #, python-format
 msgid " %(portal_name)s wants access to the following information of your %(provider_name)s account"
-msgstr ""
+msgstr " %(portal_name)s möchte Zugang zu den folgenden Daten deines %(provider_name)s Kontos"
 
-#, fuzzy
-#| msgid "last name"
 msgid "last name (if set)"
-msgstr "Nachname"
+msgstr "Nachname (wenn da)"
 
-#, fuzzy
-#| msgid "Do you really want to perform the import of the shown data?"
 msgid "Do you also want to copy your profile data?"
-msgstr "Möchtest du den Import der angezeigten Daten wirklich durchführen?"
+msgstr "Möchtest du auch deine Profildaten kopieren?"
 
 msgid "Yes, allow access to my profile data: (e.g Avatar, Location, Topics, Language Settings)"
-msgstr ""
+msgstr "Ja, Zugriff auf meine Profildaten erlauben: (z.B. Avatar, Standort, Themen, Spracheinstellungen)"
 
-#, fuzzy
-#| msgid ", for the following reason:"
 msgid "Please also fill in the following information:"
-msgstr "aus folgendem Grund:"
+msgstr "Bitte auch die folgenden Informationen angeben:"
 
-#, fuzzy
-#| msgid "Sign up"
 msgid "Sign up with"
-msgstr "Registrieren"
+msgstr "Registrieren mit"
 
-#, fuzzy, python-format
-#| msgid "%(provider)s-Account"
+#, python-format
 msgid "Sign up with %(provider)s Account"
-msgstr "%(provider)s-Konto"
+msgstr "Mit %(provider)s-Konto registrieren"
 
-#, fuzzy
-#| msgid "Log in here"
 msgid "Log in with"
-msgstr "Hier einloggen"
+msgstr "Einloggen mit"
 
-#, fuzzy, python-format
-#| msgid "%(provider)s-Account"
+#, python-format
 msgid "Log in with %(provider)s Account"
-msgstr "%(provider)s-Konto"
+msgstr "Einloggen mit %(provider)s-Konto"
 
-#, fuzzy
-#| msgid "Register a new account"
 msgid "Register with Social Account"
-msgstr "Neues Konto registrieren"
+msgstr "Registrierung mit Social Media Konto"
 
-#, fuzzy
-#| msgid "Log in with Facebook"
 msgid "Login with Social Account"
 msgstr "Mit Facebook einloggen"
 
 #, python-format
 msgid " %(portal_name)s is part of the %(provider)s community. You can use your %(provider)s account to login on %(portal_name)s."
-msgstr ""
+msgstr " %(portal_name)s ist Teil der %(provider)s Gemeinde. Du kannst sich mit deinem %(provider)s-Konto bei %(portal_name)s anmelden."
 
 #, python-format
 msgid " %(portal_name)s is part of the following communities. If you have an account on one of these communities you can use it to login on %(portal_name)s. "
-msgstr ""
+msgstr " %(portal_name)s ist Teil der folgenden Gemeinden. Wenn du einen Account in einer dieser Gemeinden hast, kannst du dich damit auf %(portal_name)s anmelden. "
 
 #, python-format
 msgid "Sign up with %(provider_id)s"
-msgstr ""
+msgstr "Anmelden bei %(provider_id)s"
 
-#, fuzzy, python-format
-#| msgid "Log in with %(portal_name)s"
+#, python-format
 msgid "Login with %(provider_id)s"
-msgstr "Anmelden mit %(portal_name)s"
+msgstr "Anmelden mit %(provider_id)s"
 
 msgctxt "the_app"
 msgid "organization"
@@ -11558,7 +11466,7 @@ msgid "Organization type"
 msgstr "Organisations-Art"
 
 msgid "Logo"
-msgstr ""
+msgstr "Bild"
 
 msgid "Email Address"
 msgstr "E-Mail-Adresse"
@@ -11680,7 +11588,7 @@ msgid "Type of your organization"
 msgstr "Art der Organisation"
 
 msgid "If none of the options apply, specify the type of your organization here"
-msgstr "Wenn keine der Optionen zutrifft, gib hier die Art deiner Organisation an."
+msgstr "Wenn keine der Optionen zutrifft, gib hier die Art deiner Organisation an"
 
 msgid "  Describe the project in a few sentences. This description will be publicly visible."
 msgstr "  Beschreibe das Projekt in ein paar Sätzen. Diese Beschreibung wird öffentlich sichtbar."
@@ -11708,12 +11616,10 @@ msgid "This organization should be made publicly findable via other platforms."
 msgstr "Diese Organisation soll über andere Plattformen öffentlich auffindbar gemacht werden."
 
 msgid "Is your organization open for cooperation in the funding program?"
-msgstr ""
+msgstr "Ist deine Organisation offen für eine Zusammenarbeit im Rahmen des Förderprogramms?"
 
-#, fuzzy
-#| msgid "This organization is open for further partner organizations."
 msgid "Organization is open for future projects."
-msgstr "Diese Organisation ist offen für weitere Partnerorganisationen."
+msgstr "Diese Organisation ist offen für weitere Projekte."
 
 #, python-format
 msgid "Users in organization %(group)s"
@@ -11731,10 +11637,9 @@ msgstr "Projekt/Gruppe %(name)s wurde eingeladen."
 msgid "Your join request was withdrawn from organization “%(name)s” successfully."
 msgstr "Deine Anfrage zu Organisation “%(name)s” wurde erfolgreich zurückgezogen."
 
-#, fuzzy, python-format
-#| msgid "You have declined the invitation to %(team_type)s “%(team_name)s”."
+#, python-format
 msgid "You have declined the invitation to organization “%(name)s”."
-msgstr "Du hast die Einladung zu %(team_type)s \"%(team_name)s\" abgelehnt."
+msgstr "Du hast die Einladung zur Organisation “%(name)s” abgelehnt."
 
 #, python-format
 msgid "Your project/group is now assigned to the organization “%(name)s”. Welcome!"
@@ -13111,6 +13016,9 @@ msgstr "Aufgabenliste „%(title)s“ konnte nicht hinzugefügt werden."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte hast eins oder mehrere der noch enthaltenen Objekte zu löschen!"
+
+msgid "Drag"
+msgstr ""
 
 #~ msgid "send immediately"
 #~ msgstr "sofort schicken"
