@@ -67,7 +67,6 @@ function LobbyConnector (props: LobbyProps & RouteComponentProps) {
         <ManageRoomButtons />
       </Content>
       {room.props.showChat && room.props.url && <Sidebar url={room.props.url} />}
-      <Sidebar url={"https://google.com"} />
     </Grid>
   )
 }

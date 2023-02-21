@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import clsx from "clsx"
-import {Button, Drawer, Grid} from "@material-ui/core"
+import {Button, Drawer} from "@material-ui/core"
 import {FormattedMessage} from "react-intl"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faChevronRight, faChevronLeft} from "@fortawesome/free-solid-svg-icons"
@@ -16,6 +16,12 @@ export function Sidebar(props: SidebarProps) {
   const {url} = props
   const [open, setOpen] = useState(true)
   const classes = useStyles()
+
+  const direction = getComputedStyle(document.body).direction
+  let icon = faChevronRight
+  if ((!open && direction === 'ltr') || (open && direction === 'rtl')) {
+    icon = faChevronLeft
+  }
 
   return (
     <Drawer
@@ -33,7 +39,7 @@ export function Sidebar(props: SidebarProps) {
       }}
     >
       <Button onClick={() => setOpen(!open)} className={classes.button}>
-        <FontAwesomeIcon icon={open && faChevronRight || faChevronLeft} />&nbsp;
+        <FontAwesomeIcon icon={icon} />&nbsp;
         <FormattedMessage id="Chats" />
       </Button>
       <Iframe
