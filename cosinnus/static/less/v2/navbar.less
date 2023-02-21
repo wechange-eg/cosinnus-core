@@ -6,18 +6,18 @@
 	box-sizing: border-box;
 	line-height: 50px;
 	white-space: nowrap;
-	
+
 	/** Fixation to top */
 	position: fixed;
 	top: 0;
 	right: 0;
 	left: 0;
 	z-index: 5;
-	
+
 	/** Flexbox */
 	display: flex;
 	flex-direction: row;
-	
+
 	/** Colors and font */
 	background-color: @background-color;
 	color: @navbar-text-color;
@@ -34,7 +34,7 @@
 	i.fas {
 		font-size: 15px;
 	}
-	
+
 	.nav-content {
 	    max-width: 80%;
 	    overflow: hidden;
@@ -43,18 +43,18 @@
 		height: 49px;
 		margin: auto;
 		padding: 0 10px;
-	} 
+	}
 	.nav-search {
 		flex-grow: 2;
 		display: flex;
 		align-content: center;
 		position: relative;
-		
+
 		/** Focused search box with open result dropdown */
 		&.active {
 			border-right: 1px solid @border-color;
 			border-left: 1px solid @border-color;
-			
+
 			&, & input {
 				background-color: @background-color-secondary;
 			}
@@ -64,18 +64,18 @@
 			padding-right: 0;
 			margin-right: -5px;
 		}
-		
+
 		&.active .show-inactive,
 		&:not(.active) .show-active {
 			display: none;
 		}
-		
+
 		/** Highlight search button on hover and when active */
 		&.active .nav-button-search i.fas,
 		.nav-search-box:hover + div .nav-button-search i.fas {
-			color: @text-highlight-color; 	
+			color: @text-highlight-color;
 		}
-		
+
 		input.nav-search-box {
 			flex-grow: 2;
 			height: 49px;
@@ -86,7 +86,7 @@
 			border: none;
 			outline: none;
 			padding: 0 12px;
-			
+
 			&:active, &:focus {
 				color: @navbar-active-text-color;
 			}
@@ -94,7 +94,7 @@
 		&:not(.active) input.nav-search-box {
 			color: @background-color;
 		}
-		
+
 		/** The dropdown frame of search results shown as the user is typing */
 		.dropdown-underdrop {
 			position: fixed;
@@ -118,7 +118,7 @@
 			background-color: @background-color-secondary;
 			display: none;
 			padding: 10px 0 5px 0;
-			
+
 			.list-item .item-icon {
 				margin-left: 1px;
 			}
@@ -126,19 +126,19 @@
 			    padding: 0 15px;
 			    white-space: normal;
 			    display: flex;
-			    
+
 			    .nav-quicksearch-button-label {
 			        white-space: nowrap;
 			        margin-right: 10px;
 			    }
 			}
-			
+
 		}
 		&.active .nav-quicksearch-results {
 			display: inherit;
 		}
-		
-		
+
+
 	}
 	.nav-buttons {
 		.user-menu-button {
@@ -149,7 +149,7 @@
 			}
 		}
 	}
-	
+
 	.nav-collapse-button {
 	    &:not(.collapsed) {
 	        i.fas {
@@ -197,13 +197,13 @@
 		display: inline;
 		margin-left: 3px;
 	}
-	
-    
-	
+
+
+
 	.nav-button {
 		cursor: pointer;
 		padding: 10px 7px;
-		
+
 		img:hover {
 			-webkit-filter: brightness(85%);
 		}
@@ -218,7 +218,7 @@
 		font-weight: bold;
 		letter-spacing: 1px;
 	}
-	
+
 	/** The left-side flyout containing a user's items of interest */
 	.nav-flyout {
 		position: absolute;
@@ -227,7 +227,7 @@
 		z-index: 9;
 		width: 100%;
 		background-color: @background-color-secondary;
-		
+
 		.nav-flyout-section {
 			position: relative;
 		    z-index: 9;
@@ -240,7 +240,7 @@
 		&.nav-flyout-half-side {
 		    width: 50%;
 		    background-color: transparent;
-		    
+
             .nav-flyout-section {
                 background: transparent;
                 border-bottom: none;
@@ -257,11 +257,11 @@
 		position: fixed;
 		top: 50px;
 		left: 0;
-		z-index: 4; 
+		z-index: 4;
 		background-color: #000;
 		opacity: .5;
 		width: 100%;
-		height: ~"calc(100% - 50px)"; 
+		height: ~"calc(100% - 50px)";
 	}
 	.nav-flyout.collapsing .nav-flyout-backdrop,
 	.nav-flyout.in .nav-flyout-backdrop,
@@ -283,18 +283,18 @@
         }
 	}
 	.nav-flyout.in {
-		max-height: ~"calc(100vh - 50px)"; 
+		max-height: ~"calc(100vh - 50px)";
 		overflow-y: auto;
 		&.nav-flyout-part-height {
-		    max-height: ~"calc(80vh - 50px)"; 
+		    max-height: ~"calc(80vh - 50px)";
 		}
 	}
-	
+
 	.main-menu {
 		display: flex;
 		flex-direction: row;
 		background-color: @background-color-secondary;
-		
+
 		.main-menu-links {
 		    font-size: 14px;
 			line-height: 20px;
@@ -309,7 +309,7 @@
 				}
 			}
 		}
-		
+
 		hr {
 			border-top: 1px solid @pale-border-color;
 		}
@@ -323,7 +323,7 @@
 	}
 	.create-menu {
 		cursor: pointer;
-		
+
 		.nav-flyout-section {
 			padding: 0;
 		}
@@ -338,7 +338,7 @@
 			font-size: 14px;
 			line-height: 18px;
 			white-space: normal;
-			
+
 			&:not(:last-of-type) {
 				border-right: 1px solid @border-color;
 			}
@@ -360,7 +360,7 @@
 	&.search-open .hidden-during-search {
 		display: none;
 	}
-	
+
 }
 
 
@@ -374,9 +374,9 @@
 
 /** Mobile only */
 @media (max-width: 767px) {
-	
+
 	.v2-navbar {
-	
+
 		.main-menu {
 			display: flex;
 			flex-direction: column;
@@ -394,7 +394,7 @@
 			    width: 100%;
 			}
 		}
-		
+
 		.nav-search {
 			.nav-search-box {
 				width: 10px;
@@ -406,13 +406,13 @@
 			    width: 100%;
 			    border-left: none;
 			    border-right: none;
-			    
+
 			    .nav-search-box {
 			    	width: inherit;
 			    }
 			}
 		}
-		
+
 		.create-menu {
 			.create-menu-link {
 				&:not(:last-of-type) {
@@ -421,7 +421,7 @@
 				}
 			}
 		}
-		
+
 		.nav-mobile-triple-dots  .nav-button {
 			padding-top: 0;
 		}
@@ -432,7 +432,7 @@
 		    width: 100%;
 		    text-align: right;
 		    border-bottom: 1px solid @border-color;
-		    
+
 		    /** Nav-buttons transition hiding */
 		    max-height: 0;
 			opacity: 0;
@@ -447,7 +447,7 @@
             }
 		}
 	}
-	
+
 	body:not(.mobile-triple-dots-active) .mobile-triple-dots-only {
 	    display: none;
 	}
@@ -455,7 +455,7 @@
 		&:not(.v2-dashboard-body) {
 			padding-top: 120px;
 		}
-		
+
 		.v2-navbar {
 			.nav-mobile-triple-dots  .nav-button {
 				i.fas {
@@ -467,7 +467,7 @@
 				opacity: 1;
 				max-height: 50px;
 				height: 50px;
-				
+
 				& + .nav-buttons {
 				    /** This supports two-line mobile nav triple-dot flyouts */
 				    top: 100px;
@@ -482,14 +482,14 @@
                 width: 100%;
                 max-width: 100%;
                 border-bottom: 1px solid @border-color;
-                
+
                 a {
                     display: block;
                     padding-top: 0;
                     padding-bottom: 0;
                 }
             }
-			.nav-flyout, 
+			.nav-flyout,
 			.nav-flyout-backdrop,
 			.nav-search-backdrop {
 				top: 100px;
@@ -498,7 +498,7 @@
 				max-height: ~"calc(100vh - 100px)";
 			}
 		}
-	} 
-	
-	
+	}
+
+
 }
