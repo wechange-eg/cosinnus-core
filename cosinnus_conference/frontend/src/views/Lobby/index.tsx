@@ -11,7 +11,6 @@ import {FormattedMessage} from "react-intl";
 import {RootState} from "../../stores/rootReducer"
 import {fetchEvents} from "../../stores/events/effects"
 import {DispatchedReduxThunkActionCreator} from "../../utils/types"
-import {Event} from "../../stores/events/models"
 import {Content} from "../components/Content/style"
 import {EventList} from "../components/EventList"
 import {Sidebar} from "../components/Sidebar"

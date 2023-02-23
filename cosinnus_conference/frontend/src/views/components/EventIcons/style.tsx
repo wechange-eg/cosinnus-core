@@ -1,8 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles'
 
-import {miniSidebarWidth, sidebarWidth} from "../../../themes/themes"
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((_theme) => ({
   icons: {
     position: "absolute",
     right: "2rem",

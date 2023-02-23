@@ -1,4 +1,4 @@
-import { createMuiTheme, lighten } from "@material-ui/core"
+import {createMuiTheme, Direction, lighten} from '@material-ui/core'
 var tinycolor = require("tinycolor2");
 
 import BrandonTextRegular from "./fonts/brandon-text-regular.ttf"
@@ -93,6 +93,7 @@ export const getTheme = (primaryColor= "#7062b3") => {
   }
 
   return createMuiTheme({
+    direction: getComputedStyle(document.body).direction as Direction,
     palette: {
       type: "light",
       primary: {

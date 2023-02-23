@@ -22,7 +22,6 @@ html[dir="rtl"] {
 
     .MuiDrawer-paperAnchorDockedLeft {
         left: auto;
-        right: 0;
     }
 
     .MuiListItem-root {
@@ -139,8 +138,15 @@ html[dir="rtl"] {
     }
 
     .v2-navbar {
+        text-align: right;
+
         .text-right {
             text-align: left;
         }
+    }
+
+    .v2-navbar .nav-flyout.nav-flyout-right {
+        left: inherit;
+        right: initial;
     }
 }

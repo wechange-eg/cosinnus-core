@@ -15,13 +15,13 @@
         <meta name="referrer" content="no-referrer-when-downgrade">
 
         {% captureas page_title %}{% block page_title %}{% endblock page_title %}{% block base_page_title %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %} - {% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% endif %}{% endblock base_page_title %}{% endcaptureas %}
-        
+
         {% block og_meta_attributes %}
 	        {% captureas page_description %}{% block og_description %}{% endblock og_description %}{% endcaptureas %}
-	        
+
 	        <meta name="title" content="{{ page_title }}">
 	        <meta name="description" content="{{ page_description }}">
-	        
+
 	        <meta property="og:url"           content="{% block og_url %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ request.path }}{% endblock og_url %}" />
 	        <meta property="og:title"         content="{% block og_title %}{{ page_title }}{% endblock og_title %}" />
 	        <meta property="og:image"         content="{% block og_image %}{{ COSINNUS_CURRENT_PORTAL.get_logo_image_url }}{% endblock og_image %}" />
@@ -39,7 +39,7 @@
 	        {% import_django_select2_css %}
 
 	        <link href="{% static 'css/bootstrap3-cosinnus.css' %}" rel="stylesheet">
-	        
+
 	        <link href="{% static 'css/vendor/font-awesome-5/css/all.css' %}" rel="stylesheet"><!-- fa5 -->
 	        <link href="{% static 'css/vendor/font-awesome.min.css' %}" rel="stylesheet"><!-- fa4 -->
 	        <link href="{% static 'css/vendor/select2.css' %}" rel="stylesheet">
@@ -82,12 +82,12 @@
 	        <script src="{% static 'js/lightbox.js' %}"></script>
 	        {% comment %} Statics for Select2, always loaded, but only once {% endcomment %}
 	        {% import_django_select2_js %}
-	        
+
 	        {% comment %} Import any select2 locale we have {% endcomment %}
 	        {% if COSINNUS_CURRENT_LANGUAGE == 'de' %}
 	        	<script src="{% static 'js/vendor/select2_locale_de.js' %}"></script>
 	        {% endif %}
-	        
+
 	        {% if request.GET.report == "1" %}
 	            {% if object or group %}
 		            <script>$(function(){
@@ -125,10 +125,10 @@
 	        <script src="{% static 'js/locale/en/cosinnus_formats.js' %}?lang=en&v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
 	        {% endif %}
             <script src="{% static 'js/cosinnus.feedback.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
-            
+
             {% include 'cosinnus/common/simplemde_dependencies.html' with lazy=True %}
         {% endblock cosinnus_jshead %}
-        
+
         {% block js_app_dependencies %}
 			{% if SETTINGS.COSINNUS_USE_V2_NAVBAR or SETTINGS.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and user.is_superuser %}
 				{% include 'cosinnus/map/static_dependencies.html' %}
@@ -172,21 +172,9 @@
             {% block main_page_header %}{% endblock main_page_header %}
 
             {% block main_page %}
-                <div class="row">
-                    <!-- start with left navigation -->
-
-                    <!-- now the content -->
-                    <div class="col-lg-9 col-md-9 pull-right"><!-- right column -->
-                        {% block override_breadcrumb %}
-                            <ol class="breadcrumb">
-                                {% block breadcrumb %}
-                                    {% include 'cosinnus/breadcrumb.html' %}
-                                {% endblock breadcrumb %}
-                            </ol>
-                        {% endblock override_breadcrumb %}
-                    </div>
+                <div class="row flex">
                     {# this fixes the breadcrumb being unclickable in mobile views #}
-                    <div class="visible-xs visible-sm clearfix"></div>
+<!--                    <div class="visible-xs visible-sm clearfix"></div>-->
 
                     {% block override_leftnav %}
                     <div class="col-lg-3 col-md-3"><!-- left column -->
@@ -194,18 +182,30 @@
                             {% cosinnus_menu "cosinnus/appsmenu.html" %}
                         {% endif %}
                         {% block leftnav %}{% endblock leftnav %}
-                        <div class="clearfix regular-space"></div>
+<!--                        <div class="clearfix regular-space"></div>-->
                     </div><!-- left column -->
                     {% endblock override_leftnav %}
 
-                    <div {% block content_class %}class="col-lg-9 col-md-9"{% endblock content_class %}><!-- right column -->
+                    <div class="col-lg-9 col-md-9">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                {% block override_breadcrumb %}
+                                <ol class="breadcrumb">
+                                    {% block breadcrumb %}
+                                    {% include 'cosinnus/breadcrumb.html' %}
+                                    {% endblock breadcrumb %}
+                                </ol>
+                                {% endblock override_breadcrumb %}
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-xs-12">
                                 {% include 'cosinnus/messages.html' %}
                                 {% block content %}{% endblock content %}
                             </div><!-- col -->
                         </div><!-- row -->
-                    </div><!-- right column -->
+                    </div>
 
                 </div><!-- row -->
             {% endblock main_page %}

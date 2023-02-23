@@ -1,10 +1,15 @@
-import React, {Component, useRef} from "react"
-import { ThemeProvider } from "@material-ui/core/styles"
+import React, {Component} from "react"
+import { ThemeProvider, StylesProvider, jssPreset } from "@material-ui/core/styles"
 import { hot } from "react-hot-loader"
 import { connect } from "react-redux"
 import { HashRouter as Router, Switch } from "react-router-dom"
 import {CssBaseline, Grid, Typography} from "@material-ui/core"
 import {FormattedMessage, IntlProvider} from "react-intl"
+import { create } from "jss"
+import rtl from "jss-rtl"
+
+// Configure JSS
+const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 import { RootState } from "../stores/rootReducer"
 import { ProtectedRoute, ProtectedRouteProps } from "./routes/ProtectedRoute"
@@ -35,11 +40,11 @@ import {StageEvent} from "./Stage/detail"
 import {Results} from "./Results"
 import {Room} from "../stores/room/models"
 import {Loading} from "./components/Loading"
-import {fetchParticipants} from "../stores/participants/effects"
 import {Participant} from "../stores/participants/models"
 import {Participants} from "./Participants/list"
 import {Participant as ParticipantView} from "./Participants/detail"
 import {Content} from "./components/Content/style"
+
 
 interface AppProps {
   conference: Conference
@@ -167,22 +172,24 @@ class AppConnector extends Component<AppProps> {
       >
         <Router>
           <ThemeProvider theme={getTheme(conference && conference.getThemeColor() || undefined)}>
-            <CssBaseline/>
-            <Nav/>
-            {(room && this.getRoutes())
-            || (window.conferenceRoomId && <Loading/>)
-            || (
-              <Grid container>
-                <Content>
-                  <Typography component="h1">
-                    <FormattedMessage id="Conference is being prepared"/>
-                  </Typography>
-                  <Typography component="p">
-                    <FormattedMessage id="The conference is being prepared, please try again at a later date."/>
-                  </Typography>
-                </Content>
-              </Grid>
-            )}
+            <StylesProvider jss={jss}>
+              <CssBaseline/>
+              <Nav/>
+              {(room && this.getRoutes())
+              || (window.conferenceRoomId && <Loading/>)
+              || (
+                <Grid container>
+                  <Content>
+                    <Typography component="h1">
+                      <FormattedMessage id="Conference is being prepared"/>
+                    </Typography>
+                    <Typography component="p">
+                      <FormattedMessage id="The conference is being prepared, please try again at a later date."/>
+                    </Typography>
+                  </Content>
+                </Grid>
+              )}
+            </StylesProvider>
           </ThemeProvider>
         </Router>
       </IntlProvider>
