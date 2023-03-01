@@ -128,9 +128,9 @@ def setup_env(portal_name, domain, pull_branch, confirm=False,
         env.stop_command = f'sudo /bin/systemctl stop django-{portal_name}.service'
         env.start_command = f'sudo /bin/systemctl start django-{portal_name}.service'
     elif new_unit_commands:
-        env.reload_command = f'sudo systemctl restart django-{portal_name}.service'
-        env.stop_command = f'sudo systemctl stop django-{portal_name}.service'
-        env.start_command = f'sudo systemctl start django-{portal_name}.service'
+        env.reload_command = f'sudo systemctl restart unit-config.service'
+        env.stop_command = f'sudo systemctl stop unit-config.service'
+        env.start_command = f'sudo systemctl start unit-config.service'
     else:
         env.reload_command = f'sudo systemctl restart django-{portal_name}-unit.service'
         env.stop_command = f'sudo systemctl stop django-{portal_name}-unit.service'
