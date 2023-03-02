@@ -396,12 +396,12 @@ class GroupIsConferenceMixin(object):
         return super().dispatch(request, *args, **kwargs)
 
 
-class GroupHasBBBActivatedMixin(object):
-    """ View mixin that makes it required for the view's group to have a BBB video conferences activated.
+class GroupCanAccessRecordedMeetingsMixin(object):
+    """ View mixin that makes it required for the view's group to be able to show the recorded meetings page.
         If not, redirects to the group dashboard. """
     
     def dispatch(self, request, *args, **kwargs):
-        if not self.group.group_is_bbb_enabled:
+        if not self.group.group_can_access_recorded_meetings:
             return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group}))
         return super().dispatch(request, *args, **kwargs)
     

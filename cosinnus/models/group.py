@@ -1221,7 +1221,11 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
     @property
     def group_can_be_bbb_enabled(self):
         """ Check if this group may potentially enable BBB meetings right now. """
+        if self.group_is_conference:
+            return True
         if self.group_could_be_bbb_enabled_ever:
+            if not settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED:
+                return True
             if now().date() <= self.enable_user_premium_choices_until:
                 return True
         return False
@@ -1230,10 +1234,24 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
     def group_is_bbb_enabled(self):
         """ Check if BBB meetings are currently enabled for this group because their admins have chosen
             the video conference type option to be BBB. """ 
+        if self.group_is_conference:
+            return True
         if self.group_can_be_bbb_enabled and self.video_conference_type == self.BBB_MEETING:
             return True
         return False
-        
+    
+    @property
+    def group_can_access_recorded_meetings(self):
+        """ Check if the recorded meetings page should be shown and be accessible for this group, due to having
+            BBB enabled (and being premium if this portal requires ist) or being a conference. """
+        if self.group_is_conference:
+            return True
+        if self.group_is_bbb_enabled:
+            return True
+        if settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and 'premium_features_expired_on' in self.settings:
+            return True
+        return False
+    
     @property
     def conference_members(self):
         """ Returns a User QS of *AUTO-INVITED* (!) conference member accounts of this group if it is a conference, an empty QS else """

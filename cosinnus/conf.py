@@ -1473,7 +1473,8 @@ class CosinnusDefaultSettings(AppConf):
     #]
     
     # a list of field names from `BBB_PRESET_USER_FORM_FIELDS` that can only
-    # be changed by users if a conference is premium at some point
+    # be changed by users if a conference is premium at some point.
+    # NOTE: the field names appearing here must also appear in `BBB_PRESET_USER_FORM_FIELDS`!
     BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY = [
         'record_meeting',
     ]
