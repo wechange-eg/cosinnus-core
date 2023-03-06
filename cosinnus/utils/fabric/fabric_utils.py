@@ -123,6 +123,7 @@ def setup_env(portal_name, domain, pull_branch, confirm=False,
     env.pull_remote = pull_remote
     env.frontend_pull_branch = frontend_pull_branch
     env.frontend_pull_remote = frontend_pull_remote
+    env.lessc_binary = f'~/node_modules/.bin/lessc'
     if legacy_mode:
         env.reload_command = f'sudo /bin/systemctl restart django-{portal_name}.service'
         env.stop_command = f'sudo /bin/systemctl stop django-{portal_name}.service'
@@ -131,6 +132,7 @@ def setup_env(portal_name, domain, pull_branch, confirm=False,
         env.reload_command = f'sudo systemctl restart unit-config.service'
         env.stop_command = f'sudo systemctl stop unit-config.service'
         env.start_command = f'sudo systemctl start unit-config.service'
+        env.lessc_binary = f'{env.virtualenv_path}/src/cosinnus/node_modules/.bin/lessc'
     else:
         env.reload_command = f'sudo systemctl restart django-{portal_name}-unit.service'
         env.stop_command = f'sudo systemctl stop django-{portal_name}-unit.service'

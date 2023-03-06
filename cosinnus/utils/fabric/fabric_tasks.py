@@ -241,10 +241,10 @@ def compileless(_ctx):
     c = CosinnusFabricConnection(host=env.host)
     with c.cd(env.path):
         c.run(
-            '~/node_modules/.bin/lessc --clean-css ./static-collected/less/cosinnus.less ./static-collected/css/cosinnus.css'
+            f'{env.lessc_binary} --clean-css ./static-collected/less/cosinnus.less ./static-collected/css/cosinnus.css'
         )
         for less_file in env.portal_additional_less_to_compile:
-            c.run(f'~/node_modules/.bin/lessc --clean-css ./static-collected/less/{less_file}.less ./static-collected/css/{less_file}.css')
+            c.run(f'{env.lessc_binary} --clean-css ./static-collected/less/{less_file}.less ./static-collected/css/{less_file}.css')
 
 @task
 def compilewebpack(_ctx):
