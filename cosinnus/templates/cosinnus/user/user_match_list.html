@@ -10,7 +10,7 @@
             {% for scored_user_profile in scored_user_profiles %}
                 <!-- card -->
                 <div class="col-sm-4">
-                    <div class="card h-100">
+                    <div class="card h-100 white-content" style="margin: 0 20px; padding: 25px;">
                             <div class="card-img-top d-flex flex-column">
                                 {% with avatar=scored_user_profile.avatar %}
                                     {% if avatar %}
@@ -20,7 +20,7 @@
                                     {% endif %}
                                 {% endwith %}
                             </div>
-                            <div class="card-body" style="width: 74%; margin-left: 37px">
+                            <div class="card-body">
                                 <h4 class="card-title">{{ scored_user_profile.get_full_name }}</h4>
                                 {% if scored_user_profile.description %}
                                     <p class="card-text">{{ scored_user_profile.description }}</p>
@@ -56,14 +56,14 @@
                                 {% endcomment %}
                             </div>
                             <hr class="invisible"/>
-                            <form action="{% url 'cosinnus:user-match-match' %}" method="POST" style="margin-left: 37px">
+                            <form action="{% url 'cosinnus:user-match-match' %}" method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" name="user_id" value="{{ scored_user_profile.user.id }}">
-                                <button type="submit" class="rounded-button button-action button-star button-like-dislike-liked" style="margin-right: 35%;" name="action" value="1">
+                                <button type="submit" class="rounded-button button-action button-star button-like-dislike-liked w100 regular-space" name="action" value="1">
                                     <i class="far fa-star"></i>
                                     {% trans 'Wonderful, we definetely have so much to discuss!' %}
                                 </button>
-                                <button type="submit" class="rounded-button button-action button-star" style="margin-right: 35%;" name="action" value="0">
+                                <button type="submit" class="rounded-button button-action button-star w100 regular-space" name="action" value="0">
                                     {% trans 'Looks like we share no common interests' %}
                                 </button>
                             </form>
