@@ -1,7 +1,5 @@
-import datetime
 import logging
 
-from dateutil.relativedelta import relativedelta
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
@@ -19,6 +17,8 @@ from cosinnus.models.tagged import LikeObject
 from cosinnus.utils.functions import is_number
 from cosinnus.utils.permissions import check_user_can_see_user
 from cosinnus.utils.user import filter_active_users
+from datetime import timedelta
+from django.utils.timezone import now
 
 
 logger = logging.getLogger('cosinnus')
@@ -59,7 +59,7 @@ class UserMatchListView(LoginRequiredMixin, ListView):
         checked_for_visibility_users = [user for user in users if check_user_can_see_user(self.request.user, user)]
         user_profiles = get_user_profile_model().objects.filter(user_id__in=checked_for_visibility_users)
         # filter user to be active within the last year
-        last_year = datetime.date.today() - relativedelta(years=+1) # timedelta to pass users who have logged in at least once within the last year;
+        last_year = now() - timedelta(days=365) # timedelta to pass users who have logged in at least once within the last year;
         user_profiles = user_profiles.filter(user__last_login__gte=last_year)
 
         request_user_liked_set = self.get_hashset_likes_for_user(self.request.user)
