@@ -27,6 +27,7 @@ from cosinnus.models.profile import PROFILE_SETTINGS_AVATAR_COLOR, \
 from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.utils.validators import validate_username, HexColorValidator
 from drf_extra_fields.fields import Base64ImageField
+from cosinnus.utils.functions import is_number
 
 
 logger = logging.getLogger('cosinnus')
@@ -252,14 +253,14 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
         help_text='On input, this string is used to determine the lat/lon fields using a nominatim service')
     location_lat = serializers.FloatField(
         source='cosinnus_profile.media_tag.location_lat',
-        read_only=True,
+        required=False,
         default=None,
-        help_text='read-only, lat/lon determined from "location" field')
+        help_text='If not supplied, but `location` is supplied, this will be determined automatically via nominatim from the string in `location`. If supplied, will only be saved if `location` is also supplied.')
     location_lon = serializers.FloatField(
         source='cosinnus_profile.media_tag.location_lon', 
-        read_only=True, 
+        required=False,
         default=None,
-        help_text='read-only, lat/lon determined from "location" field'
+        help_text='If not supplied, but `location` is supplied, this will be determined automatically via nominatim from the string in `location`. If supplied, will only be saved if `location` is also supplied.'
     )
     # managed tag field (see `COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM` and `_ManagedTagFormMixin`)
     if settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF:
@@ -356,16 +357,23 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
             profile.dynamic_fields[PROFILE_DYNAMIC_FIELDS_CONTACTS] = contact_infos
         if 'location' in media_tag_data:
             location_str = media_tag_data['location']
+            location_lat = media_tag_data.get('location_lat', None)
+            location_lon = media_tag_data.get('location_lon', None)
             if not location_str or not location_str.strip():
                 # reset location
                 media_tag.location = None
                 media_tag.location_lat = None
                 media_tag.location_lon = None
+            elif location_lat and location_lon and is_number(location_lat) and is_number(location_lon):
+                # if the location string and location_lat and location_lon coordinates are given, simply save them
+                media_tag.location = location_str.strip()
+                media_tag.location_lat = float(location_lat)
+                media_tag.location_lon = float(location_lon)
             else:
                 # use nominatim service to determine an actual location from the given string
                 # TODO: extract nominatim URL and use ours for production!
                 geolocator = Nominatim(domain="nominatim.openstreetmap.org", user_agent="wechange")
-                location = geolocator.geocode(location_str, timeout=5)
+                location = geolocator.geocode(location_str.strip(), timeout=5)
                 if location:
                     media_tag.location = location_str
                     media_tag.location_lat = location.latitude
