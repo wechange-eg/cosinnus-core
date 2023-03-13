@@ -93,7 +93,7 @@ if settings.COSINNUS_ROCKET_ENABLED:
     def handle_cosinnus_society_updated(sender, instance, **kwargs):
         try:
             rocket = RocketChatConnection()
-            if instance.id:
+            if instance.id and rocket.get_group_id(instance, create_if_not_exists=False):
                 old_instance = get_object_or_None(CosinnusSociety, pk=instance.id)
                 if old_instance and instance.slug != old_instance.slug:
                     rocket.groups_rename(instance)
@@ -106,7 +106,7 @@ if settings.COSINNUS_ROCKET_ENABLED:
     def handle_cosinnus_project_updated(sender, instance, **kwargs):
         try:
             rocket = RocketChatConnection()
-            if instance.id:
+            if instance.id and rocket.get_group_id(instance, create_if_not_exists=False):
                 old_instance = get_object_or_None(CosinnusProject, pk=instance.id)
                 if old_instance and instance.slug != old_instance.slug:
                     rocket.groups_rename(instance)
@@ -119,7 +119,7 @@ if settings.COSINNUS_ROCKET_ENABLED:
     def handle_cosinnus_conference_updated(sender, instance, **kwargs):
         try:
             rocket = RocketChatConnection()
-            if instance.id:
+            if instance.id and rocket.get_group_id(instance, create_if_not_exists=False):
                 old_instance = get_object_or_None(CosinnusConference, pk=instance.id)
                 if old_instance and instance.slug != old_instance.slug:
                     rocket.groups_rename(instance)

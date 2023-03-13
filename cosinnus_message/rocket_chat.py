@@ -310,7 +310,7 @@ class RocketChatConnection:
             type(profile).objects.filter(pk=profile.pk).update(settings=profile.settings)
         return profile.settings.get(PROFILE_SETTING_ROCKET_CHAT_ID)
 
-    def get_group_id(self, group, room_key=None):
+    def get_group_id(self, group, room_key=None, create_if_not_exists=True):
         """
         Returns Rocket.Chat ID from group settings or Rocket.Chat API
         :param user:
@@ -321,6 +321,8 @@ class RocketChatConnection:
         # if the group doesn't have a room id in its settings, try to find the room by name
         key = f'{PROFILE_SETTING_ROCKET_CHAT_ID}_{room_key}'
         if not group.settings.get(key):
+            if not create_if_not_exists:
+                return None
             group_name = room_name_code % group.slug
             response = self.rocket.groups_info(room_name=group_name).json()
             if not response.get('success'):
