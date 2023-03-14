@@ -59,7 +59,9 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     group = indexes.IntegerField(model_attr='id')
     from_date = TimezoneAwareHaystackDateTimeField(model_attr='from_date', null=True)
     to_date = TimezoneAwareHaystackDateTimeField(model_attr='to_date', null=True)
-    dynamic_fields = NestedField(model_attr='dynamic_fields', stored=True, indexed=False)
+    # this fails when indexing; it is a self-made implementation for JSON fields (?)
+    # it's used for finding organizations for cosinnus matching
+    #dynamic_fields = NestedField(model_attr='dynamic_fields', stored=True, indexed=False)
     is_open_for_cooperation = indexes.BooleanField(model_attr='is_open_for_cooperation')
     
     # for filtering on this model
