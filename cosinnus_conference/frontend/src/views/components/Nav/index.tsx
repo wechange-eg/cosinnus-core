@@ -132,6 +132,7 @@ function NavConnector(props: NavProps) {
         {conference.props.managementUrls.manageConference && (
         <ListItem
           button
+          component="a"
           href={conference.props.managementUrls.manageConference}
           className={classes.listItem}
         >
@@ -144,6 +145,7 @@ function NavConnector(props: NavProps) {
         {conference.props.managementUrls.manageRooms && (
         <ListItem
           button
+          component="a"
           href={conference.props.managementUrls.manageRooms}
           className={classes.listItem}
         >
@@ -154,6 +156,7 @@ function NavConnector(props: NavProps) {
         {conference.props.managementUrls.manageEvents && (
         <ListItem
           button
+          component="a"
           href={conference.props.managementUrls.manageEvents}
           className={classes.listItem}
         >
@@ -164,6 +167,7 @@ function NavConnector(props: NavProps) {
         {conference.props.managementUrls.manageMemberships && (
         <ListItem
           button
+          component="a"
           href={conference.props.managementUrls.manageMemberships}
           className={classes.listItem}
         >
