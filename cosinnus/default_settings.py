@@ -418,7 +418,9 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # explained on http://django-haystack.readthedocs.org/en/latest/tutorial.html#modify-your-settings-py
     HAYSTACK_CONNECTIONS = {
         "default": {
-            "ENGINE": "cosinnus.backends.RobustElasticSearchEngine",
+            #"ENGINE": "cosinnus.backends.RobustElasticSearchEngine",
+            "ENGINE": "haystack.backends.elasticsearch7_backend.Elasticsearch7SearchEngine",
+            
             # replaces 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
             "URL": env("WECHANGE_HAYSTACK_URL", default="http://127.0.0.1:9200/"),
             "INDEX_NAME": env("WECHANGE_HAYSTACK_INDEX_NAME", default=project_settings['COSINNUS_PORTAL_NAME']),
