@@ -249,7 +249,7 @@ class SearchQuerySetMixin:
 
         # filter all default user groups if the new dashboard is being used (they count as "on plattform" and aren't shown)
         if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False):
-            sqs = sqs.exclude(is_group_model=True, slug__in=get_default_user_group_slugs())
+            sqs = sqs.exclude(is_group_model="true", slug__in=get_default_user_group_slugs())
 
         prefer_own_portal = getattr(settings, 'MAP_API_HACKS_PREFER_OWN_PORTAL', False)
         # if we have no query-boosted results, use *only* our custom sorting (haystack's is very random)
@@ -405,7 +405,7 @@ class MapMatchingView(SearchQuerySetMixin, APIView):
             'cosinnus_organization.cosinnusorganization',
         ))
         # filter only candidates which are open for cooperation
-        sqs = sqs.filter(is_open_for_cooperation=True)
+        sqs = sqs.filter(is_open_for_cooperation="true")
         # exclude matching candidate itself
         sqs = sqs.exclude(_id=matching_result.id)
         return sqs

@@ -49,9 +49,9 @@ def filter_searchqueryset_for_read_access(sqs, user):
     result set to only include elements with read access.
     """
     public_node = (
-        SQ(public__exact=True) |  # public on the object itself (applicable for groups)
+        SQ(public__exact="true") |  # public on the object itself (applicable for groups)
         SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_ALL) |  # public via "everyone can see me" visibility meta attribute
-        SQ(always_visible__exact=True) # special marker for indexed objects that should always show up in search
+        SQ(always_visible__exact="true") # special marker for indexed objects that should always show up in search
     )
 
     if user.is_authenticated:
@@ -59,14 +59,14 @@ def filter_searchqueryset_for_read_access(sqs, user):
             pass
         else:
             logged_in_user_visibility = (
-                SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
+                SQ(user_visibility_mode__exact="true") & # for UserProfile search index objects
                 SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP) # logged in users can see users who are visible           
             )
             my_item = (
                  SQ(creator__exact=user.id)
             )
             visible_for_all_authenticated_users = (
-                SQ(visible_for_all_authenticated_users=True)
+                SQ(visible_for_all_authenticated_users="true")
             )
             # FIXME: known problem: ``group_members`` is a stale indexed representation of the members
             # of an items group. New members of a group won't be able to find old indexed items if the index
@@ -82,7 +82,7 @@ def filter_searchqueryset_for_read_access(sqs, user):
             users_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
             if True:
                 group_member_user_visibility = (
-                    SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
+                    SQ(user_visibility_mode__exact="true") & # for UserProfile search index objects
                     SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_USER) & # team mambers can see this user 
                     SQ(membership_groups__in=users_group_ids)
                 )
