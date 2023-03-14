@@ -883,7 +883,7 @@ def filter_event_searchqueryset_by_upcoming(sqs):
     event_horizon = datetime.datetime(_now.year, _now.month, _now.day)
     sqs = sqs.exclude(Q(to_date__lt=event_horizon) | (Q(_missing_='to_date') & Q(from_date__lt=event_horizon)))
     # only actual events, no doodles
-    sqs = sqs.filter_and(Q(_missing_='event_state') | Q(event_state=1))
+    sqs = sqs.exclude(Q(event_state__lt=1) | Q(event_state__gt=1))
     return sqs
 
 def build_date_time(date_string, time_string):

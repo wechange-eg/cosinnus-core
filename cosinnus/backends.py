@@ -14,7 +14,7 @@ import dkim
 import smtplib
 from django.core.mail.message import sanitize_address
 
-from haystack.backends.elasticsearch_backend import ElasticsearchSearchBackend, ElasticsearchSearchEngine
+from haystack.backends.elasticsearch7_backend import Elasticsearch7SearchEngine, Elasticsearch7SearchBackend
 from urllib3.exceptions import ProtocolError, ConnectionError
 from elasticsearch.exceptions import TransportError
 
@@ -119,7 +119,7 @@ def threaded_execution_and_catch_error(f):
     return error_wrapper
 
 
-class RobustElasticSearchBackend(ElasticsearchSearchBackend):
+class RobustElasticSearchBackend(Elasticsearch7SearchBackend):
     """A robust backend that doesn't crash when no connection is available"""
     
     MIN_GRAM = 2
@@ -128,17 +128,45 @@ class RobustElasticSearchBackend(ElasticsearchSearchBackend):
 
     def __init__(self, *args, **options):
         """ Add custom default options """
-        tokenizer_settings = self.DEFAULT_SETTINGS['settings']['analysis']['tokenizer']
-        filter_settings = self.DEFAULT_SETTINGS['settings']['analysis']['filter']
         
-        tokenizer_settings['haystack_ngram_tokenizer']['min_gram'] = self.MIN_GRAM
-        tokenizer_settings['haystack_ngram_tokenizer']['max_gram'] = self.MAX_NGRAM
-        tokenizer_settings['haystack_edgengram_tokenizer']['min_gram'] = self.MIN_GRAM
-        tokenizer_settings['haystack_edgengram_tokenizer']['max_gram'] = self.MAX_NGRAM
-        filter_settings['haystack_ngram']['min_gram'] = self.MIN_GRAM
-        filter_settings['haystack_ngram']['max_gram'] = self.MAX_NGRAM
-        filter_settings['haystack_edgengram']['min_gram'] = self.MIN_GRAM
-        filter_settings['haystack_edgengram']['max_gram'] = self.MAX_NGRAM
+        self.DEFAULT_SETTINGS = {
+            "settings": {
+                "index": {
+                    "max_ngram_diff": self.MAX_NGRAM - self.MIN_GRAM + 1,
+                },
+                "analysis": {
+                    "analyzer": {
+                        "ngram_analyzer": {
+                            "tokenizer": "standard",
+                            "filter": [
+                                "haystack_ngram",
+                                "lowercase",
+                            ],
+                        },
+                        "edgengram_analyzer": {
+                            "tokenizer": "standard",
+                            "filter": [
+                                "haystack_edgengram",
+                                "lowercase",
+                            ],
+                        },
+                    },
+                    "filter": {
+                        "haystack_ngram": {
+                            "type": "ngram",
+                            "min_gram": self.MIN_GRAM,
+                            "max_gram": self.MAX_NGRAM,
+                        },
+                        "haystack_edgengram": {
+                            "type": "edge_ngram",
+                            "min_gram": self.MIN_GRAM,
+                            "max_gram": self.MAX_NGRAM,
+                        },
+                    },
+                },
+            },
+        }
+        
         super(RobustElasticSearchBackend, self).__init__(*args, **options)
 
     def build_schema(self, *args, **kwargs):
@@ -152,7 +180,7 @@ class RobustElasticSearchBackend(ElasticsearchSearchBackend):
                 field_mapping["type"] = "nested"
                 if hasattr(field_class, "get_properties"):
                     field_mapping["properties"] = field_class.get_properties()
-        return content_field_name, mapping
+        return (content_field_name, mapping)
 
     @threaded_execution_and_catch_error
     def update(self, *args, **kwargs):
@@ -167,5 +195,5 @@ class RobustElasticSearchBackend(ElasticsearchSearchBackend):
         super(RobustElasticSearchBackend, self).clear(*args, **kwargs)
 
 
-class RobustElasticSearchEngine(ElasticsearchSearchEngine):
+class RobustElasticSearchEngine(Elasticsearch7SearchEngine):
     backend = RobustElasticSearchBackend
