@@ -32,7 +32,7 @@
                             {% endwith %}
                         </div>
                         
-                        {% include "cosinnus/user/user_match_card.html" with profile=scored_user_profile %}
+                        {% include "cosinnus/user/user_match_card.html" with scored_user_profile=scored_user_profile %}
                         
                         <hr class="invisible"/>
                         <form action="{% url 'cosinnus:user-match-match' %}" method="POST">
