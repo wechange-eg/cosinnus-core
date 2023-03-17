@@ -1,0 +1,20 @@
+{% load i18n cosinnus_tags widget_tweaks static thumbnail %}
+
+<div class="card-body well textfield">
+    <h3 class="card-title">{{ scored_user_profile.get_full_name }}</h3>
+    <div class="truncated-textfield">
+        {% block card_content %}
+	        {% if scored_user_profile.description %}
+	            <p class="card-text">{{ scored_user_profile.description }}</p>
+	        {% endif %}
+        {% endblock %}
+    </div>
+    <script type="text/javascript">
+        $.cosinnus.truncatedTextfield();
+    </script>
+</div>
+<div class="card-footer">   
+    {% comment %}
+        Some additional information if needed
+    {% endcomment %}
+</div>

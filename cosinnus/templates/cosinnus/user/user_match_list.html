@@ -3,77 +3,64 @@
 
 {% block page_title %}{% trans 'Direct Contact' %}{% endblock %}
 
-{% block content %}
-<body class="user-match">
-    <div class="container">
+{% block main_page %}
+    <div class="container user-match">
         <div class="row">
+            
+            <div class="col-xs-12">
+                <div class="textfield transparent">
+                    <p>
+                        {% comment %} Sending this through |textfield allows markdown formatting {% endcomment %}
+                        {% trans "**User-Matching** is your tool for communicating and sharing experiences with like-minded people from all over the world. If you have much to discuss and your chosen person considers it the same, your dialogue will start automatically." as trans_header %}
+                        {{ trans_header|textfield }}
+                    </p>
+                </div>
+                <hr class="invisible"/>
+            </div>
+        
             {% for scored_user_profile in scored_user_profiles %}
                 <!-- card -->
                 <div class="col-sm-4">
                     <div class="card h-100 white-content" style="margin: 0 20px; padding: 25px;">
-                            <div class="card-img-top d-flex flex-column">
-                                {% with avatar=scored_user_profile.avatar %}
-                                    {% if avatar %}
-                                        {% include 'cosinnus/user/user_avatar_image.html' with user=scored_user_profile.user image_size="large" %}
-                                    {% else %}
-                                        <img src="{{ COSINNUS_CURRENT_PORTAL.get_domain }}{% static 'images/jane-doe.png' %}" title="{{ scored_user_profile.user|full_name }}{% if extra_title %} - {{ extra_title }}{% endif %}" {% if extra_classes %}class="{{ extra_classes }}"{% endif %} {% if extra_style %}style="{{ extra_style }}" {% endif %} width="264" height="264"></img>
-                                    {% endif %}
-                                {% endwith %}
-                            </div>
-                            <div class="card-body">
-                                <h4 class="card-title">{{ scored_user_profile.get_full_name }}</h4>
-                                {% if scored_user_profile.description %}
-                                    <p class="card-text">{{ scored_user_profile.description }}</p>
+                        <div class="card-img-top d-flex flex-column">
+                            {% with avatar=scored_user_profile.avatar %}
+                                {% if avatar %}
+                                    {% include 'cosinnus/user/user_avatar_image.html' with user=scored_user_profile.user image_size="large" %}
+                                {% else %}
+                                    <img src="{{ COSINNUS_CURRENT_PORTAL.get_domain }}{% static 'images/jane-doe.png' %}" title="{{ scored_user_profile.user|full_name }}{% if extra_title %} - {{ extra_title }}{% endif %}" {% if extra_classes %}class="{{ extra_classes }}"{% endif %} {% if extra_style %}style="{{ extra_style }}" {% endif %} width="264" height="264"></img>
                                 {% endif %}
-                                {% if scored_user_profile.dynamic_fields.type_of_educational_institution %}
-                                    <h5>{% trans "Type of educational institution" %}</h5>
-                                    <p class="transparent">
-                                        {{ scored_user_profile.dynamic_fields.type_of_educational_institution }} 
-                                    </p>
-                                {% endif %}
-                                {% if scored_user_profile.dynamic_fields.function %}
-                                    <h5>{% trans "Function" %}</h5>
-                                    <p class="transparent">
-                                        {{ SETTINGS.GOETHE_FUNCTION_CHOICES|get_item:scored_user_profile.dynamic_fields.function }}
-                                    </p>
-                                {% endif %}
-                                {% if scored_user_profile.dynamic_fields.position %}
-                                    <h5>{% trans "Position" %}</h5>
-                                    <p class="transparent">
-                                        {{ scored_user_profile.dynamic_fields.position }} 
-                                    </p>
-                                {% endif %}
-                                {% if scored_user_profile.dynamic_fields.name_of_educational_institution %}
-                                    <h5>{% trans "Name of educational institution" %}</h5>
-                                    <p class="transparent">
-                                        {{ scored_user_profile.dynamic_fields.name_of_educational_institution }} 
-                                    </p>
-                                {% endif %}
-                            </div>
-                            <div class="card-footer">   
-                                {% comment %}
-                                    Some additional information if needed
-                                {% endcomment %}
-                            </div>
-                            <hr class="invisible"/>
-                            <form action="{% url 'cosinnus:user-match-match' %}" method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" name="user_id" value="{{ scored_user_profile.user.id }}">
-                                <button type="submit" class="rounded-button button-action button-star button-like-dislike-liked w100 regular-space" name="action" value="1">
-                                    <i class="far fa-star"></i>
-                                    {% trans 'Wonderful, we definetely have so much to discuss!' %}
-                                </button>
-                                <button type="submit" class="rounded-button button-action button-star w100 regular-space" name="action" value="0">
-                                    {% trans 'Looks like we share no common interests' %}
-                                </button>
-                            </form>
-                            <hr class="invisible"/>
-                            <hr class="invisible"/>
+                            {% endwith %}
+                        </div>
+                        
+                        {% include "cosinnus/user/user_match_card.html" with profile=scored_user_profile %}
+                        
+                        <hr class="invisible"/>
+                        <form action="{% url 'cosinnus:user-match-match' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="user_id" value="{{ scored_user_profile.user.id }}">
+                            <button type="submit" class="rounded-button button-action button-star button-like-dislike-liked w100 regular-space" name="action" value="1">
+                                <i class="far fa-star"></i>
+                                {% trans 'Wonderful, we definitely have so much to discuss!' %}
+                            </button>
+                            <button type="submit" class="rounded-button button-action button-star w100 regular-space" name="action" value="0">
+                                {% trans 'Looks like we share no common interests' %}
+                            </button>
+                        </form>
                     </div>        
                 </div>
                 <!-- card -->
+            {% empty %}
+                <div class="col-xs-12">
+                    <hr class="invisible"/>
+                    <div class="textfield transparent">
+                        <p>
+                            {% comment %} Sending this through |textfield allows markdown formatting {% endcomment %}
+                            {% trans "Sorry, but currently, there are no more profiles to show you. Please come back later!" as trans_footer %}
+                            {{ trans_footer|textfield }}
+                        </p>
+                    </div>
+                </div>
             {% endfor %}
         </div>
     </div>
-</body>
-{% endblock content %}
+{% endblock main_page %}
