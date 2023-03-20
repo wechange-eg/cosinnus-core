@@ -17,7 +17,7 @@ from cosinnus.api_frontend.serializers.user import CosinnusUserLoginSerializer, 
     CosinnusUserSignupSerializer, CosinnusHybridUserSerializer
 from cosinnus.conf import settings
 from cosinnus.utils.jwt import get_tokens_for_user
-from cosinnus.utils.permissions import IsNotAuthenticated
+from cosinnus.utils.permissions import IsNotAuthenticated, AllowNone
 from cosinnus.views.common import LoginViewAdditionalLogicMixin
 from cosinnus.views.user import UserSignupTriggerEventsMixin
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -200,8 +200,11 @@ class LogoutView(APIView):
 class SignupView(UserSignupTriggerEventsMixin, APIView):
     """ A proper User Registration API endpoint """
     
-    # disallow logged in users
-    permission_classes = (IsNotAuthenticated,)
+    if not settings.COSINNUS_USER_SIGNUP_ENABLED:
+        permission_classes = (AllowNone,)
+    else:
+        # disallow logged in users
+        permission_classes = (IsNotAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
     

@@ -21,16 +21,16 @@ for url_key in group_model_registry:
     ]
 
 urlpatterns += [
-    url(r'^api/v3/login/', LoginView.as_view(), name='api-login'),
-    url(r'^api/v3/logout/', LogoutView.as_view(), name='api-logout'),
-    url(r'^api/v3/signup/', SignupView.as_view(), name='api-signup'),
-    url(r'^api/v3/user/profile/', UserProfileView.as_view(), name='api-user-profile'),
+    url(r'^api/v3/login/$', LoginView.as_view(), name='api-login'),
+    url(r'^api/v3/logout/$', LogoutView.as_view(), name='api-logout'),
+    url(r'^api/v3/signup/$', SignupView.as_view(), name='api-signup'),
+    url(r'^api/v3/user/profile/$', UserProfileView.as_view(), name='api-user-profile'),
     
-    url(r'^api/v3/portal/topics/', PortalTopicsView.as_view(), name='api-portal-topics'),
-    url(r'^api/v3/portal/tags/', PortalTagsView.as_view(), name='api-portal-tags'),
-    url(r'^api/v3/portal/managed_tags/', PortalManagedTagsView.as_view(), name='api-portal-managed-tags'),
-    url(r'^api/v3/portal/userprofile_dynamicfields/signup/', PortalUserprofileDynamicFieldsSignupView.as_view(), name='api-portal-userprofile-dynamicfields-signup'),
-    url(r'^api/v3/portal/userprofile_dynamicfields/', PortalUserprofileDynamicFieldsView.as_view(), name='api-portal-userprofile-dynamicfields'),
+    url(r'^api/v3/portal/topics/$', PortalTopicsView.as_view(), name='api-portal-topics'),
+    url(r'^api/v3/portal/tags/$', PortalTagsView.as_view(), name='api-portal-tags'),
+    url(r'^api/v3/portal/managed_tags/$', PortalManagedTagsView.as_view(), name='api-portal-managed-tags'),
+    url(r'^api/v3/portal/userprofile_dynamicfields/signup/$', PortalUserprofileDynamicFieldsSignupView.as_view(), name='api-portal-userprofile-dynamicfields-signup'),
+    url(r'^api/v3/portal/userprofile_dynamicfields/$', PortalUserprofileDynamicFieldsView.as_view(), name='api-portal-userprofile-dynamicfields'),
     
     
     

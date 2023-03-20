@@ -377,4 +377,12 @@ class IsNotAuthenticated(BasePermission):
 
     def has_permission(self, request, view):
         return bool(request.user and not request.user.is_authenticated)
-    
+
+
+class AllowNone(BasePermission):
+    """
+    Allow no access at all.
+    """
+
+    def has_permission(self, request, view):
+        return False

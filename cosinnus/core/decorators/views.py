@@ -71,6 +71,8 @@ def redirect_to_not_logged_in(request, view=None, group=None):
     # support for the ajaxable view mixin
     if view and getattr(view, 'is_ajax_request_url', False):
         return HttpResponseForbidden('Not authenticated')
+    if request.is_ajax() or request.path.startswith('/api/'):
+        return HttpResponseForbidden('Not authenticated')
     # redirect to group's micropage and give login required error message
     next_arg = urlencode(request.get_full_path())
     if group is not None:

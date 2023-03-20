@@ -301,6 +301,10 @@ class PortalUserprofileDynamicFieldsView(APIView):
 
 class PortalUserprofileDynamicFieldsSignupView(PortalUserprofileDynamicFieldsView):
     
+    if settings.COSINNUS_USER_SIGNUP_ENABLED:
+        # anyone can access this, as it is required for signup
+        permission_classes = ()
+    
     # if set on the view, show only dynamic fields that appear in the signup form
     field_option_filter = 'in_signup'
     description = PortalUserprofileDynamicFieldsView.description + ' This view shows only dynamic fields that appear in the signup form.'
