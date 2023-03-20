@@ -10,7 +10,9 @@
     <div class="truncated-textfield">
         {% block card_content %}
 	        {% if scored_user_profile.description %}
-	            <p class="card-text">{{ scored_user_profile.description }}</p>
+	            <div class="card-text textfield no-padding">
+	                {{ scored_user_profile.description|textfield }}
+                </div>
 	        {% endif %}
         {% endblock %}
     </div>
