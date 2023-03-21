@@ -47,8 +47,10 @@ class UserMatchListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        already_liked_users = UserMatchObject.objects.filter(type__in=[UserMatchObject.LIKE, UserMatchObject.DISLIKE])\
-            .values_list('to_user_id', flat=True)
+        already_liked_users = UserMatchObject.objects.filter(
+            from_user=self.request.user, 
+            type__in=[UserMatchObject.LIKE, UserMatchObject.DISLIKE]
+        ).values_list('to_user_id', flat=True)
         # filter only users I haven't liked or disliked yet
         user_profiles = self.model.objects.exclude(user=self.request.user).\
                 exclude(user_id__in=already_liked_users)

@@ -104,6 +104,7 @@ LOGIN_URLS = NEVER_REDIRECT_URLS + [
     '/two_factor_auth/token_login/',
     '/two_factor_auth/token_login/backup/',
     '/two_factor_auth/qrcode/',
+    '/two_factor_auth/settings/setup/',
 ]
 
 EXEMPTED_URLS_FOR_2FA = [url for url in LOGIN_URLS if url != '/admin/']
