@@ -14,7 +14,7 @@ module.exports = {
         filename: 'client.js'
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.html$/,
                 loader: 'nunjucks-loader',
