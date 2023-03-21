@@ -85,10 +85,10 @@ setup(
     data_files=data_files,
     install_requires=[
         # please mirror all changes in the requirements.txt for local installs!
-        'Django>=3.2.14,<3.3',
+        'Django>=3.2.18,<3.3',
         'MarkupSafe==1.1',
-        'Pillow==8.4.0',
-        'Celery==4.2.0',
+        'Pillow==9.4.0',
+        'celery==5.2.7',
         'dataclasses',
         
         'beautifulsoup4==4.8.1',
@@ -139,23 +139,21 @@ setup(
         'lxml==4.9.1',
         'html5lib',
         'html2text==2016.9.19',
-        'numpy==1.22.4',
+        'numpy==1.24.2',
         'oauthlib==3.0.1',
         'paramiko==2.11.0',
         'pycountry==20.7.3',
-        'pycrypto==2.6.1',
         'raven==6.9.0',
         'redis==2.10.6',
-        'requests==2.20.0',
+        'requests==2.28.2',
         'requests-oauthlib==0.8.0',
         'rocketchat-API==0.6.26',
         'six==1.12.0',
         'sqlparse==0.2.2',
         'sentry-sdk==1.4.2',
         'python-dateutil==2.4.1',
-        'urllib3==1.24.2',
+        'urllib3==1.26.15',
         'pytz==2022.6',
-        'PyJWT==1.7.1',
         'rdflib==5.0.0',
         'python-memcached==1.59',
         'qrcode==6.1',
@@ -164,7 +162,7 @@ setup(
         'django-cors-headers<3.11.0',
 
         # wagtail
-        'wagtail==2.15.1',
+        'wagtail==2.15.2',
         'django-compressor==3.1',
         
         # virus file scan validator
