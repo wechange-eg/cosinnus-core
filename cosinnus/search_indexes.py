@@ -46,7 +46,7 @@ class NestedField(SearchField):
 class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataIndexMixin, indexes.SearchIndex):
     
     location = indexes.LocationField(null=True)
-    boosted = indexes.CharField(model_attr='name', boost=BOOSTED_FIELD_BOOST)
+    boosted = indexes.NgramField(model_attr='name', boost=BOOSTED_FIELD_BOOST)
     
     portal = indexes.IntegerField(model_attr='portal_id')
     group_members = indexes.MultiValueField(indexed=False)
@@ -281,7 +281,7 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
     text = TemplateResolveNgramField(document=True, use_template=True, template_name='search/indexes/cosinnus/userprofile_{field_name}.txt')
     rendered = TemplateResolveCharField(use_template=True, indexed=False, template_name='search/indexes/cosinnus/userprofile_{field_name}.txt')
     
-    boosted = indexes.CharField(model_attr='get_full_name', boost=BOOSTED_FIELD_BOOST)
+    boosted = indexes.NgramField(model_attr='get_full_name', boost=BOOSTED_FIELD_BOOST)
     
     user_visibility_mode = indexes.BooleanField(default=True) # switch to filter differently on mt_visibility
     membership_groups = indexes.MultiValueField() # ids of all groups the user is member/admin of

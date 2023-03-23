@@ -12,6 +12,8 @@ from django.db.models import Q
 from django.http.response import HttpResponseBadRequest, HttpResponseNotFound, HttpResponseForbidden
 from django.utils.encoding import force_text
 from haystack.query import SearchQuerySet
+from haystack.inputs import AutoQuery
+from haystack.backends import SQ
 from django.contrib.gis.geos import Point
 import six
 from rest_framework.response import Response
@@ -188,7 +190,9 @@ class SearchQuerySetMixin:
             sqs = sqs.filter_and(Q(creator=user_id) | Q(user_id=user_id) | Q(group_members=user_id))
         # filter for search terms
         if query:
-            sqs = sqs.auto_query(query)
+            # specifically include the boosted field into the autoquery so that results 
+            # matching a query word in the boost field get assigned a higher result.score
+            sqs = sqs.filter(SQ(boosted=AutoQuery(query)) | SQ(text=AutoQuery(query)))
 
         # group-filtered-map view for on-group pages
         if filter_group_id:
