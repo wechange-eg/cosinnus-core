@@ -1062,6 +1062,9 @@ class CosinnusConf(AppConf):
     # *VERY* risky, so use cautiously
     ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS = False
     
+    # enables a CSV/API endpoint for downloading user's anonymized email domain infos
+    ENABLE_ADMIN_USER_DOMAIN_INFO_CSV_DOWNLOADS = False
+    
     # should the "send newsletter to groups" admin view be enabled?
     ADMINISTRATION_GROUPS_NEWSLETTER_ENABLED = True
     

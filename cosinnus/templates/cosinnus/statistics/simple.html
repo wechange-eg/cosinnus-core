@@ -74,7 +74,7 @@
 	    </ul>
 	</button>
 	
-	<button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus-api:user-activity-info' %}?format=csv">
+	<button type="button" class="btn w100 btn-emphasized {% if SETTINGS.COSINNUS_ENABLE_ADMIN_USER_DOMAIN_INFO_CSV_DOWNLOADS %}fine-space{% else %}large-space{% endif %}" href="{% url 'cosinnus-api:user-activity-info' %}?format=csv">
         <ul class="media-list">
             <li class="media">
                <span class="pull-left">
@@ -86,6 +86,21 @@
             </li>
         </ul>
     </button>
+    
+    {% if SETTINGS.COSINNUS_ENABLE_ADMIN_USER_DOMAIN_INFO_CSV_DOWNLOADS and request.user|is_superuser %}
+	    <button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus-api:user-domain-info' %}?format=csv">
+	        <ul class="media-list">
+	            <li class="media">
+	               <span class="pull-left">
+	                    <i class="fa fa-download"></i>
+	                </span>
+	                <div class="media-body">
+	                    {% trans "User domains (min 1x logged in)" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+    {% endif %}
     
     {% if SETTINGS.COSINNUS_CONFERENCES_ENABLED and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
 	    <button type="button" class="btn w100 btn-emphasized large-space" href="{% url 'cosinnus-api:bbb-room-visits' %}?format=csv">

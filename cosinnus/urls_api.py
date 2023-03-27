@@ -3,10 +3,12 @@ from __future__ import unicode_literals
 
 from django.conf.urls import url
 
+from cosinnus.conf import settings
 from cosinnus.utils.url_patterns import api_patterns
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.views import group, user, common
 from cosinnus.api.views.portal import SimpleStatisticsGroupStorageReportView, SimpleStatisticsConferenceStorageReportView, SimpleStatisticsProjectStorageReportView, SimpleStatisticsUserActivityInfoView, SimpleStatisticsBBBRoomVisitsView, StatisticsView, StatisticsManagedTagFilteredView
+import cosinnus.api.views.portal as portal_views
 
 urlpatterns = api_patterns(1, None, False,
     url(r'^login/$', user.login_api, name='login'),
@@ -23,6 +25,10 @@ urlpatterns = api_patterns(1, None, False,
     url(r'^common/get-metadata/$', common.get_metadata_from_url,  name='api-get-metadata'),
 )
 
+if settings.COSINNUS_ENABLE_ADMIN_USER_DOMAIN_INFO_CSV_DOWNLOADS:
+    urlpatterns += api_patterns(1, None, False,
+       url(r'^statistics/general/user_domain_info/', portal_views.SimpleStatisticsUserDomainInfoView.as_view(),  name='user-domain-info'),
+    )
 
 for url_key in group_model_registry:
     prefix = group_model_registry.get_url_name_prefix(url_key, '')

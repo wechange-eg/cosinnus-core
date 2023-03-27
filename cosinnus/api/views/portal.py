@@ -22,6 +22,7 @@ from cosinnus.utils.user import filter_active_users, get_user_id_hash, get_user_
 from cosinnus.views.housekeeping import _get_group_storage_space_mb
 
 from operator import itemgetter
+from copy import copy
 
 
 class StatisticsView(APIView):
@@ -314,9 +315,14 @@ class SimpleStatisticsUserActivityInfoRenderer(CSVRenderer):
     Renders the csv output with custom headers for user activity information API endpoint
     """
     header = [
-        'user-hashed-id', 
-        'conferences-count',
-        'admin-of-conferences-count',
+        'user-hashed-id',
+    ]
+    if cosinnus_settings.COSINNUS_CONFERENCES_ENABLED:
+        header += [
+            'conferences-count',
+            'admin-of-conferences-count',
+        ]
+    header += [
         'projects-and-groups-count',
         'groups-only-count',
         'projects-only-count',
@@ -338,26 +344,9 @@ class SimpleStatisticsUserActivityInfoView(APIView):
     def get_user_activity_stats(self):
         users = {}
         portal = CosinnusPortal.get_current()
-        headers = [
-            'user-hashed-id',
-        ]
         offset = 1
         if cosinnus_settings.COSINNUS_CONFERENCES_ENABLED:
-            headers += [
-                'conferences-count',
-                'admin-of-conferences-count',
-            ]
-            offset += 2
-        headers += [
-            'projects-and-groups-count',
-            'groups-only-count',
-            'projects-only-count',
-            'admin-of-projects-and-groups-count',
-            'user-last-authentication-login-days',
-            'current-tos-accepted',
-            'registration-date',
-            'events-attended',
-        ]
+            offset += 2 # for the header defined in `SimpleStatisticsUserActivityInfoRenderer`
         group_type_cache = {} # id (int) --> group type (int)
         for membership in CosinnusGroupMembership.objects.filter(group__portal=CosinnusPortal.get_current(), user__is_active=True).exclude(user__last_login__exact=None):
             # get the statistics row for the user of the membership, if there already is one we're aggregating
@@ -385,7 +374,7 @@ class SimpleStatisticsUserActivityInfoView(APIView):
                     0,                              # 'admin-of-projects-and-groups-count',
                     (now()-user.last_login).days,   # 'user-last-login-days',
                     tos_accepted,                   # 'current-tos-accepted',
-                    user.date_joined,               # 'registration-date',
+                    timezone.localtime(user.date_joined).strftime('%Y-%m-%d'), # 'registration-date',
                     0,                              # 'events-attended',
                 ]
                 user_row = initial_row
@@ -424,25 +413,11 @@ class SimpleStatisticsUserActivityInfoView(APIView):
         return rows
 
     def get(self, request, *args, **kwargs):
-
         user_activity_stats = self.get_user_activity_stats()
-
         data = [
-            {
-            'user-hashed-id': elem[0],
-            'conferences-count': elem[1],
-            'admin-of-conferences-count': elem[2],
-            'projects-and-groups-count': elem[3],
-            'groups-only-count': elem[4],
-            'projects-only-count': elem[5],
-            'admin-of-projects-and-groups-count': elem[6],
-            'user-last-authentication-login-days': elem[7],
-            'current-tos-accepted': elem[8],
-            'registration-date': timezone.localtime(elem[9]).strftime('%Y-%m-%d %H:%M:%S'),
-            'events-attended': elem[10],
-            } 
-        for elem in user_activity_stats]
-
+            dict(zip(SimpleStatisticsUserActivityInfoRenderer.header, row))
+            for row in user_activity_stats
+        ]
         return Response(data)
 
     def finalize_response(self, request, response, *args, **kwargs):
@@ -452,6 +427,72 @@ class SimpleStatisticsUserActivityInfoView(APIView):
         if request.GET.get('format') == 'csv':
             response['Content-Disposition'] = 'attachment; filename=user_activity_info.csv'
         return super().finalize_response(request, response, *args, **kwargs) 
+
+
+if cosinnus_settings.COSINNUS_ENABLE_ADMIN_USER_DOMAIN_INFO_CSV_DOWNLOADS:
+    
+    class SimpleStatisticsUserDomainInfoRenderer(CSVRenderer):
+            """
+            Renders the csv output with custom headers for user activity information API endpoint
+            """
+            header = [
+                'user-email-domain',
+                'user-registration-date',
+                'user-last-authentication-login-days',
+                'user-profile-language',
+                'user-mtag-slugs',
+            ]
+    
+    class SimpleStatisticsUserDomainInfoView(APIView):
+        """
+        API endpoint for user activity information overview.
+        """
+        renderer_classes = (SimpleStatisticsUserDomainInfoRenderer, ) + tuple(api_settings.DEFAULT_RENDERER_CLASSES)
+        permission_classes = (IsCosinnusAdminUser,)
+        
+        def get_user_domain_stats(self):
+            rows = []
+            
+            """
+            user_managed_tags = user.cosinnus_profile.get_managed_tags()
+            if user_managed_tags:
+                data.update({
+                    cls.DATA_DATA_SETTING_USER_MANAGED_TAG_IDS: [tag.id for tag in user_managed_tags],
+                    cls.DATA_DATA_SETTING_USER_MANAGED_TAG_SLUGS: [tag.slug for tag in user_managed_tags],
+            # visitor.cosinnus_profile.language if visitor else '<no-user>', # visitor_email_language
+            """
+            portal_users = get_user_model().objects\
+                .filter(id__in=CosinnusPortal.get_current().members)\
+                .prefetch_related('cosinnus_profile')
+            active_portal_users = filter_active_users(portal_users)
+            
+            for user in active_portal_users:
+                profile = user.cosinnus_profile
+                row = [
+                    user.email.split('@')[1], # 'email-domain'
+                    timezone.localtime(user.date_joined).strftime('%Y-%m-%d'), # 'registration-date',
+                    (now()-user.last_login).days, # 'user-last-authentication-login-days',
+                    profile.language, # 'profile-language',
+                    ','.join([tag.slug for tag in profile.get_managed_tags()])  # 'user-mtag-slugs',
+                ]
+                rows.append(row)
+            return rows
+    
+        def get(self, request, *args, **kwargs):
+            user_domain_stats = self.get_user_domain_stats()
+            data = [
+                dict(zip(SimpleStatisticsUserDomainInfoRenderer.header, row))
+                for row in user_domain_stats
+            ]
+            return Response(data)
+    
+        def finalize_response(self, request, response, *args, **kwargs):
+            """
+            Renders the csv output with custom headers for project storage report API endpoint
+            """
+            if request.GET.get('format') == 'csv':
+                response['Content-Disposition'] = 'attachment; filename=user_domain_info.csv'
+            return super().finalize_response(request, response, *args, **kwargs) 
 
 
 class SimpleStatisticsBBBRoomVisitsRenderer(CSVRenderer):
