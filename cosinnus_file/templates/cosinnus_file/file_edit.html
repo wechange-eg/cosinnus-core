@@ -1,6 +1,12 @@
 {% extends "cosinnus_file/base.html" %}
 {% load i18n static cosinnus_tags widget_tweaks %}
 
+{% block extrahead %}
+    {{ block.super }}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.note.id_for_label %}
+{% endblock %}
+
+
 {% block page_title %}
 {{object.title}} {% trans "Files" %} {{ block.super }}
 {% endblock page_title %}
