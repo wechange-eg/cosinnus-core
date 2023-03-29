@@ -31,7 +31,7 @@
     "pofile": "^1.0.10",
     "script-loader": "^0.7.0",
     "set-value": "^2.0.1",
-    "underscore": "^1.8.3",
+    "underscore": "^1.12.1",
     "webpack": "^1.13.0"
   }
 }
