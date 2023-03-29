@@ -258,7 +258,7 @@ def compilewebpack(_ctx):
         if env.legacy_mode:
             c.run(f'cp -R {env.path}/wechange/locale/* {env.virtualenv_path}/src/cosinnus/cosinnus/locale_extra/')
         else:
-            c.run(f'cp -R {env.path}/apps/core/locale/* {env.virtualenv_path}/src/cosinnus/cosinnus/locale_extra/')
+            c.run(f'cp -R {env.path}/locale/* {env.virtualenv_path}/src/cosinnus/cosinnus/locale_extra/')
         with c.cd(f'{env.virtualenv_path}/src/cosinnus/'):
             c.run('npm install')
             c.run('npm run production')  # -->can also run 'npm run dev', but it stays in watch mode
