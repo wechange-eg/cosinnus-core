@@ -96,7 +96,6 @@ setup(
         'django-allauth==0.42.0',
         'django-annoying==0.7.6',
         'django-appconf==1.0.3',
-        'django-bootstrap3-datetimepicker-3==2.6.0',
         'django-bootstrap3==21.1',
         'django-classy-tags==2.0.0',
         'django-countries==7.2.1',
@@ -183,6 +182,7 @@ setup(
         'markdown2 @ git+https://github.com/wechange-eg/python-markdown2.git@2.4.8-WE#egg=markdown2',
         'pydkim @ git+https://github.com/wechange-eg/pydkim.git@master#egg=pydkim',
         'django-suit @ git+https://github.com/wechange-eg/django-suit.git@main#egg=django-suit',
+        'django-bootstrap3-datetimepicker-3 @ git+https://github.com/wechange-eg/django-bootstrap3-datetimepicker-3.git@master#egg=django-bootstrap3-datetimepicker-3',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
