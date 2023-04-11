@@ -14,7 +14,6 @@ module.exports = {
                 // (which is copied to the cosinnus-core directory during deploy)
                 var paths = [
                     './locale/' + lang + '/LC_MESSAGES/django.po', // TODO: switch path once PO files are merged into one!
-                    './locale_extra/' + lang + '/LC_MESSAGES/django.po', // TODO: switch path once PO files are merged into one!
                 ];
                 var langdict = {};
                 _.each(paths, function(path){
