@@ -60,6 +60,8 @@ class CosinnusMessageDefaultSettings(AppConf):
     
     # the introductory emote for news post relays by the bot
     COSINNUS_ROCKET_NEWS_BOT_EMOTE = ':loud_sound:'
+    # the introductory emote for event post relays by the bot
+    COSINNUS_ROCKET_NEWS_BOT_EMOTE_EVENT = ':date:'
     # the introductory explanation message for the users in a "Contact Group" room
     COSINNUS_ROCKET_GROUP_CONTACT_ROOM_INFO_MESSAGE = _('Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel.')
     

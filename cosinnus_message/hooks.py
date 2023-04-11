@@ -10,6 +10,7 @@ from cosinnus.models import UserProfile, CosinnusGroupMembership, MEMBERSHIP_PEN
     MEMBERSHIP_ADMIN
 from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject,\
     CosinnusConference
+from cosinnus_event.models import Event
 from cosinnus_note.models import Note
 from cosinnus.core import signals
 
@@ -243,6 +244,7 @@ if settings.COSINNUS_ROCKET_ENABLED:
         except Exception as e:
             logger.exception(e)
 
+    @receiver(post_save, sender=Event)
     @receiver(post_save, sender=Note)
     def handle_relay_message_updated(sender, instance, created, **kwargs):
         try:
@@ -254,6 +256,7 @@ if settings.COSINNUS_ROCKET_ENABLED:
         except Exception as e:
             logger.exception(e)
 
+    @receiver(post_delete, sender=Event)
     @receiver(post_delete, sender=Note)
     def handle_relay_message_deleted(sender, instance, **kwargs):
         rocket = RocketChatConnection()
