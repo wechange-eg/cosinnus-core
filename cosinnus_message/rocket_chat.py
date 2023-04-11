@@ -29,7 +29,6 @@ import six
 from annoying.functions import get_object_or_None
 from cosinnus_message.utils.utils import save_rocketchat_mail_notification_preference_for_user_setting
 from cosinnus.templatetags.cosinnus_tags import full_name
-from django.template.defaultfilters import truncatewords
 
 logger = logging.getLogger(__name__)
 
@@ -1087,13 +1086,22 @@ class RocketChatConnection:
         text = re.sub(r'~~', '~', text)
         return text
 
+    def _truncate_formatted_message(self, text, word_count):
+        """ Truncate a message by words while keeping linebreaks """
+        words = list(re.finditer(r'\w+', text))
+        if len(words) <= word_count:
+            return text
+        last_word = words[word_count - 1]
+        truncated_text = f'{text[:last_word.end()]} …'
+        return truncated_text
+
     def _format_relay_message(self, instance):
         """ Creates a readable chat message for an instance implementing the RelayMessageMixin """
         url = instance.get_absolute_url()
         message_text = instance.get_message_text()
         text = self.format_message(message_text)
         if settings.COSINNUS_ROCKET_NOTE_POST_RELAY_TRUNCATE_WORD_COUNT:
-            text = truncatewords(text, settings.COSINNUS_ROCKET_NOTE_POST_RELAY_TRUNCATE_WORD_COUNT)
+            text = self._truncate_formatted_message(text, settings.COSINNUS_ROCKET_NOTE_POST_RELAY_TRUNCATE_WORD_COUNT)
         emote = instance.get_message_emote()
         author_name = full_name(instance.creator)
         message_title = instance.get_message_title()
