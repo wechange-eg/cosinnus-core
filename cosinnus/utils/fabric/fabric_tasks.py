@@ -376,11 +376,25 @@ def pipfreeze(_ctx):
         with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
             c.run('pip freeze')
 
-def _pull_and_update(full_update=True, fresh_install=True):
+def _pull_and_update(use_poetry_update=False, fresh_install=False):
     """ 
         Does a git pull on the main project repository, then performs 
         a poetry update to update dependencies.
         (Not a task, this is a helper function called from other tasks.) 
+        
+        Currently, `poetry update` doesn't work on editable dependencies, 
+        see issue https://github.com/python-poetry/poetry/issues/7113.
+        So we can either only do:
+            - a fresh install **on a non-existing venv** 
+                (because the name mismatch won't even let us reinstall without 
+                deleting the venv)
+                Use tas `deployresetvirtualenv()` for this.
+            - or a manual update from git in the editable cosinnus repo. this
+                is fine als long as no dependencies in cosinnus's setup.py 
+                have changed. it does however require us to know which 
+                upstream branch cosinnus-core is using, as poetry creates its
+                own, disconnected 'master' branch instead of a locally named
+                version of the branch it checked out.
     """
     env = get_env()
     c = CosinnusFabricConnection(host=env.host)
@@ -394,11 +408,17 @@ def _pull_and_update(full_update=True, fresh_install=True):
             with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
                 if env.legacy_mode:
                     c.run(f'pip install -Ur {env.special_requirements}')
+                elif use_poetry_update:
+                    c.run('poetry update')
                 else:
-                    if full_update:
-                        c.run('poetry update')
-                    else:
-                        c.run('poetry update cosinnus')
+                    with c.cd(f'{env.cosinnus_src_path}'):
+                        # this is neccessary because poetry doesn't configures remote.origin.fetch in the editable repos
+                        c.run(f'git config --local --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*')
+                        c.run(f'git fetch --all')
+                        c.run(f'git stash')
+                        c.run(f'git checkout -B {env.cosinnus_pull_branch} {env.cosinnus_pull_remote}/{env.cosinnus_pull_branch}')
+                        c.run(f'git pull')
+                        
 
 def _pull_and_update_frontend():
     """ 

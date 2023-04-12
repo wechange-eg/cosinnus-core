@@ -83,8 +83,10 @@ def get_env():
     return _env
 
 
-def setup_env(portal_name, domain, pull_branch, confirm=False, 
+def setup_env(portal_name, domain, pull_branch, 
+              cosinnus_pull_branch, confirm=False, 
               base_path=None, pull_remote='origin',
+              cosinnus_pull_remote='origin',
               frontend_pull_branch='main', frontend_pull_remote='origin',
               legacy_mode=False, special_requirements='requirements-production.txt',
               new_unit_commands=False):
@@ -95,9 +97,12 @@ def setup_env(portal_name, domain, pull_branch, confirm=False,
         @param domain: the URL domain for the portal, for SSH connections and 
             on-server paths
         @param pull_branch: the branch that the main repo will be pulled from
+        @param cosinnus_pull_branch: the branch that the cosinnus repo will be pulled from on updates
+            (see `hotdeploy()` for further explanations)
         @param base_path: if the on-server file location path for the portal
             is non-default, use this argument to override it
         @param pull_remote: used to override non-origin git pulls
+        @param cosinnus_pull_remote: used to override non-origin git pulls for the cosinnus-core repo
         @param legacy_mode: set this to True for deploys on portals that 
             do not have the v3 redesign devops architecture yet (pip instead of poetry, etc)
         @param special_requirements: if run in `legacy_mode == True`, this can be used to change
@@ -124,6 +129,8 @@ def setup_env(portal_name, domain, pull_branch, confirm=False,
     env.maintenance_mode_path = base_path
     env.pull_branch = pull_branch
     env.pull_remote = pull_remote
+    env.cosinnus_pull_branch = cosinnus_pull_branch
+    env.cosinnus_pull_remote = cosinnus_pull_remote
     env.frontend_pull_branch = frontend_pull_branch
     env.frontend_pull_remote = frontend_pull_remote
     env.lessc_binary = f'~/node_modules/.bin/lessc'
