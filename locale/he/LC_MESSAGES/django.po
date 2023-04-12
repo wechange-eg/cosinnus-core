@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-15 17:00+0100\n"
+"POT-Creation-Date: 2023-04-12 15:14+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4484,6 +4484,9 @@ msgstr ""
 msgid "Which apps should be activated?"
 msgstr "אילו אפליקציות יש להפעיל?"
 
+msgid "It is up to you: You can change this setting any time to activate/deactivate the apps you want to use."
+msgstr ""
+
 msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
 msgstr ""
 
@@ -6021,6 +6024,11 @@ msgstr "שטח HD המשמש פרוייקטים"
 msgid "User statistics (min 1x logged in)"
 msgstr "סטטיסטיקת משתמשים (מינימום 1x מחובר)"
 
+#, fuzzy
+#| msgid "User statistics (min 1x logged in)"
+msgid "User domains (min 1x logged in)"
+msgstr "סטטיסטיקת משתמשים (מינימום 1x מחובר)"
+
 msgid "BBB Room Visits"
 msgstr "ביקורים בחדר BBB"
 
@@ -6655,30 +6663,16 @@ msgstr "סקירה כללית של המשתמש"
 msgid "Direct Contact"
 msgstr "פרטי יצירת קשר"
 
-#, fuzzy
-#| msgid "Search for Organizations"
-msgid "Type of educational institution"
-msgstr "חיפוש ארגונים"
+msgid "**User-Matching** is your tool for communicating and sharing experiences with like-minded people from all over the world. If you have much to discuss and your chosen person considers it the same, your dialogue will start automatically."
+msgstr ""
 
-#, fuzzy
-#| msgid "Location"
-msgid "Function"
-msgstr "מיקום"
-
-#, fuzzy
-#| msgid "Description"
-msgid "Position"
-msgstr "תיאור"
-
-#, fuzzy
-#| msgid "Remove organization"
-msgid "Name of educational institution"
-msgstr "הסר ארגון"
-
-msgid "Wonderful, we definetely have so much to discuss!"
+msgid "Wonderful, we definitely have so much to discuss!"
 msgstr ""
 
 msgid "Looks like we share no common interests"
+msgstr ""
+
+msgid "Sorry, but currently, there are no more profiles to show you. Please come back later!"
 msgstr ""
 
 msgid "Members of your projects and groups only"
@@ -7466,102 +7460,6 @@ msgstr "טוב לראותך! ב-%(portal_name)s אתה יכול ליצור שי�
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "הירשמו עכשיו ועזרו לעצב אותו"
-
-msgid "Custom Wagtail Page"
-msgstr ""
-
-msgid "Tools"
-msgstr ""
-
-#, fuzzy
-msgid "Import Projects and Groups or Users"
-msgstr "הפרויקטים והקבוצות שלי"
-
-#, fuzzy
-msgid "Import from a CSV File"
-msgstr "הייבוא נכשל"
-
-msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-msgstr ""
-
-#, fuzzy
-msgid "Project/group CSV File"
-msgstr "פרוייקט/קבוצה"
-
-#, fuzzy
-msgid "User CSV File"
-msgstr "העלאת קובץ CSV"
-
-#, fuzzy
-msgid "Options"
-msgstr "פרופורציות"
-
-msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-msgstr ""
-
-msgid "Encoding of the CSV file"
-msgstr ""
-
-#, fuzzy
-#| msgid "Delete file"
-msgid "Delimiter of the CSV file"
-msgstr "מחק קובץ"
-
-#, fuzzy
-msgid "Upload and Import..."
-msgstr "העלה תמונה."
-
-#, fuzzy
-msgid "Import Projects and Groups"
-msgstr "הפרויקטים והקבוצות שלי"
-
-msgid "Clear results and start a new import!"
-msgstr ""
-
-#, fuzzy
-msgid "CSV Import Results"
-msgstr "הייבוא הצליח!"
-
-msgid "The import has finished. Here are the results:"
-msgstr ""
-
-#, fuzzy
-msgid "Read errors:"
-msgstr "שגיאה!"
-
-msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-msgstr ""
-
-#, fuzzy
-#| msgid "New item"
-msgid "Saved items:"
-msgstr "פריט חדש"
-
-#, fuzzy
-msgid "Important messages:"
-msgstr "השם שלך"
-
-#, fuzzy
-msgid "Errors:"
-msgstr "שגיאה!"
-
-#, fuzzy
-msgid "Info messages:"
-msgstr "השם שלך"
-
-msgid "The CSV file was read successfully and the import is currently running on the server!"
-msgstr ""
-
-#, python-format
-msgid ""
-"This page will show the results when the import is finished.\n"
-"\t\t\n"
-"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-"\t\t\t"
-msgstr ""
-
-msgid "Progress:"
-msgstr ""
 
 msgid "Show more Projects"
 msgstr "הצג פרוייקטים נוספים"
@@ -13378,8 +13276,83 @@ msgstr "לא ניתן להוסיף את רשימת המשימות \"%(title)s\".
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "אינך יכול למחוק תיקיה זו מכיוון שאין לך הרשאה למחוק פריט אחד או יותר שהיא מכילה!"
 
-msgid "Drag"
-msgstr ""
+#, fuzzy
+#~| msgid "Search for Organizations"
+#~ msgid "Type of educational institution"
+#~ msgstr "חיפוש ארגונים"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgid "Function"
+#~ msgstr "מיקום"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgid "Position"
+#~ msgstr "תיאור"
+
+#, fuzzy
+#~| msgid "Remove organization"
+#~ msgid "Name of educational institution"
+#~ msgstr "הסר ארגון"
+
+#, fuzzy
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "הפרויקטים והקבוצות שלי"
+
+#, fuzzy
+#~ msgid "Import from a CSV File"
+#~ msgstr "הייבוא נכשל"
+
+#, fuzzy
+#~ msgid "Project/group CSV File"
+#~ msgstr "פרוייקט/קבוצה"
+
+#, fuzzy
+#~ msgid "User CSV File"
+#~ msgstr "העלאת קובץ CSV"
+
+#, fuzzy
+#~ msgid "Options"
+#~ msgstr "פרופורציות"
+
+#, fuzzy
+#~| msgid "Delete file"
+#~ msgid "Delimiter of the CSV file"
+#~ msgstr "מחק קובץ"
+
+#, fuzzy
+#~ msgid "Upload and Import..."
+#~ msgstr "העלה תמונה."
+
+#, fuzzy
+#~ msgid "Import Projects and Groups"
+#~ msgstr "הפרויקטים והקבוצות שלי"
+
+#, fuzzy
+#~ msgid "CSV Import Results"
+#~ msgstr "הייבוא הצליח!"
+
+#, fuzzy
+#~ msgid "Read errors:"
+#~ msgstr "שגיאה!"
+
+#, fuzzy
+#~| msgid "New item"
+#~ msgid "Saved items:"
+#~ msgstr "פריט חדש"
+
+#, fuzzy
+#~ msgid "Important messages:"
+#~ msgstr "השם שלך"
+
+#, fuzzy
+#~ msgid "Errors:"
+#~ msgstr "שגיאה!"
+
+#, fuzzy
+#~ msgid "Info messages:"
+#~ msgstr "השם שלך"
 
 #, fuzzy
 #~ msgid "2FA Settings"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-15 17:00+0100\n"
+"POT-Creation-Date: 2023-04-12 15:14+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4602,6 +4602,9 @@ msgstr ""
 msgid "Which apps should be activated?"
 msgstr "Қандай қосымшаларды іске қосу керек?"
 
+msgid "It is up to you: You can change this setting any time to activate/deactivate the apps you want to use."
+msgstr ""
+
 msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
 msgstr ""
 
@@ -6143,6 +6146,9 @@ msgstr ""
 msgid "User statistics (min 1x logged in)"
 msgstr ""
 
+msgid "User domains (min 1x logged in)"
+msgstr ""
+
 msgid "BBB Room Visits"
 msgstr ""
 
@@ -6797,28 +6803,16 @@ msgstr "Қолданушыға шолу"
 msgid "Direct Contact"
 msgstr "Байланыс"
 
-#, fuzzy
-msgid "Type of educational institution"
-msgstr "Пайдаланушыларды іздеу"
+msgid "**User-Matching** is your tool for communicating and sharing experiences with like-minded people from all over the world. If you have much to discuss and your chosen person considers it the same, your dialogue will start automatically."
+msgstr ""
 
-#, fuzzy
-#| msgid "Actions"
-msgid "Function"
-msgstr "Aktionen"
-
-#, fuzzy
-#| msgid "Description"
-msgid "Position"
-msgstr "Сипаттамасы"
-
-#, fuzzy
-msgid "Name of educational institution"
-msgstr "Орынды жою"
-
-msgid "Wonderful, we definetely have so much to discuss!"
+msgid "Wonderful, we definitely have so much to discuss!"
 msgstr ""
 
 msgid "Looks like we share no common interests"
+msgstr ""
+
+msgid "Sorry, but currently, there are no more profiles to show you. Please come back later!"
 msgstr ""
 
 msgid "Members of your projects and groups only"
@@ -7614,102 +7608,6 @@ msgstr "Сені көруге қуаныштымыз! %(portal_name)s-те сі�
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Қазір тіркеліп, оны қалыптастыруға көмектесіңіз"
-
-msgid "Custom Wagtail Page"
-msgstr ""
-
-msgid "Tools"
-msgstr ""
-
-#, fuzzy
-msgid "Import Projects and Groups or Users"
-msgstr "Менің Жобаларым мен Топтары"
-
-#, fuzzy
-msgid "Import from a CSV File"
-msgstr "Cұрыптау өрісі"
-
-msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-msgstr ""
-
-#, fuzzy
-msgid "Project/group CSV File"
-msgstr "Жобалар/Топтар"
-
-#, fuzzy
-msgid "User CSV File"
-msgstr "Жобалар/Топтар"
-
-#, fuzzy
-msgid "Options"
-msgstr "Пропорциялар"
-
-msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-msgstr ""
-
-msgid "Encoding of the CSV file"
-msgstr ""
-
-#, fuzzy
-#| msgid "Delete file"
-msgid "Delimiter of the CSV file"
-msgstr "Файлды жою"
-
-#, fuzzy
-msgid "Upload and Import..."
-msgstr "Суретті жүктеу."
-
-#, fuzzy
-msgid "Import Projects and Groups"
-msgstr "Менің Жобаларым мен Топтары"
-
-msgid "Clear results and start a new import!"
-msgstr ""
-
-#, fuzzy
-msgid "CSV Import Results"
-msgstr "Парольді қалпына келтіру сәтті өтті"
-
-msgid "The import has finished. Here are the results:"
-msgstr ""
-
-#, fuzzy
-msgid "Read errors:"
-msgstr "Қате!"
-
-msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-msgstr ""
-
-#, fuzzy
-#| msgid "New item"
-msgid "Saved items:"
-msgstr "Жаңа элемент"
-
-#, fuzzy
-msgid "Important messages:"
-msgstr "Хабарламалар"
-
-#, fuzzy
-msgid "Errors:"
-msgstr "Қате!"
-
-#, fuzzy
-msgid "Info messages:"
-msgstr "Хабарламалар"
-
-msgid "The CSV file was read successfully and the import is currently running on the server!"
-msgstr ""
-
-#, python-format
-msgid ""
-"This page will show the results when the import is finished.\n"
-"\t\t\n"
-"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-"\t\t\t"
-msgstr ""
-
-msgid "Progress:"
-msgstr ""
 
 msgid "Show more Projects"
 msgstr "Басқа Жобаларды көрсету"
@@ -13625,8 +13523,81 @@ msgstr "Todolist „%(title)s“ қосу мүмкін емес."
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Сіз бұл қалтаны жоя алмайсыз, өйткені онда бір немесе бірнеше элементті жоюға рұқсатыңыз жоқ!"
 
-msgid "Drag"
-msgstr ""
+#, fuzzy
+#~ msgid "Type of educational institution"
+#~ msgstr "Пайдаланушыларды іздеу"
+
+#, fuzzy
+#~| msgid "Actions"
+#~ msgid "Function"
+#~ msgstr "Aktionen"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgid "Position"
+#~ msgstr "Сипаттамасы"
+
+#, fuzzy
+#~ msgid "Name of educational institution"
+#~ msgstr "Орынды жою"
+
+#, fuzzy
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "Менің Жобаларым мен Топтары"
+
+#, fuzzy
+#~ msgid "Import from a CSV File"
+#~ msgstr "Cұрыптау өрісі"
+
+#, fuzzy
+#~ msgid "Project/group CSV File"
+#~ msgstr "Жобалар/Топтар"
+
+#, fuzzy
+#~ msgid "User CSV File"
+#~ msgstr "Жобалар/Топтар"
+
+#, fuzzy
+#~ msgid "Options"
+#~ msgstr "Пропорциялар"
+
+#, fuzzy
+#~| msgid "Delete file"
+#~ msgid "Delimiter of the CSV file"
+#~ msgstr "Файлды жою"
+
+#, fuzzy
+#~ msgid "Upload and Import..."
+#~ msgstr "Суретті жүктеу."
+
+#, fuzzy
+#~ msgid "Import Projects and Groups"
+#~ msgstr "Менің Жобаларым мен Топтары"
+
+#, fuzzy
+#~ msgid "CSV Import Results"
+#~ msgstr "Парольді қалпына келтіру сәтті өтті"
+
+#, fuzzy
+#~ msgid "Read errors:"
+#~ msgstr "Қате!"
+
+#, fuzzy
+#~| msgid "New item"
+#~ msgid "Saved items:"
+#~ msgstr "Жаңа элемент"
+
+#, fuzzy
+#~ msgid "Important messages:"
+#~ msgstr "Хабарламалар"
+
+#, fuzzy
+#~ msgid "Errors:"
+#~ msgstr "Қате!"
+
+#, fuzzy
+#~ msgid "Info messages:"
+#~ msgstr "Хабарламалар"
 
 #, fuzzy
 #~ msgid "2FA Settings"

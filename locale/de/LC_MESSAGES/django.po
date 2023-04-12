@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-26 09:15+0100\n"
+"POT-Creation-Date: 2023-04-12 15:14+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 2.0.6\n"
 
 msgid "Debug"
 msgstr "Fehlersuche"
@@ -4360,6 +4360,9 @@ msgstr "Projekt ist für die andere Partnerorganisationen offen."
 msgid "Which apps should be activated?"
 msgstr "Welche Apps sollen aktiviert sein?"
 
+msgid "It is up to you: You can change this setting any time to activate/deactivate the apps you want to use."
+msgstr "Du kannst entscheiden: Du kannst jederzeit diese Einstellung ändern um Apps, die du verwenden möchtest, zu aktivieren oder deaktivieren."
+
 msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
 msgstr "Wenn eine App deaktiviert wird, bleiben ihr Inhalt und die damit verbundenen Daten erhalten, werden aber nicht mehr angezeigt, bis die App wieder aktiviert wird."
 
@@ -5886,6 +5889,11 @@ msgstr "Speicherbedarf Projekte"
 msgid "User statistics (min 1x logged in)"
 msgstr "Benutzerstatistiken (mind. 1x eingeloggt)"
 
+#, fuzzy
+#| msgid "User statistics (min 1x logged in)"
+msgid "User domains (min 1x logged in)"
+msgstr "Benutzerstatistiken (mind. 1x eingeloggt)"
+
 msgid "BBB Room Visits"
 msgstr "BBB Raumbesuche"
 
@@ -6519,23 +6527,19 @@ msgstr "Benutzer_innen-Übersicht"
 msgid "Direct Contact"
 msgstr "Direktkontakt"
 
-msgid "Type of educational institution"
-msgstr "Art der Bildungseinrichtung"
+msgid "**User-Matching** is your tool for communicating and sharing experiences with like-minded people from all over the world. If you have much to discuss and your chosen person considers it the same, your dialogue will start automatically."
+msgstr ""
 
-msgid "Function"
-msgstr "Funktion"
-
-msgid "Position"
-msgstr "Stellung"
-
-msgid "Name of educational institution"
-msgstr "Name der Bildungseinrichtung"
-
-msgid "Wonderful, we definetely have so much to discuss!"
+#, fuzzy
+#| msgid "Wonderful, we definetely have so much to discuss!"
+msgid "Wonderful, we definitely have so much to discuss!"
 msgstr "Wunderbar, wir haben auf jeden Fall so viel zu besprechen!"
 
 msgid "Looks like we share no common interests"
 msgstr "Sieht so aus, als hätten wir keine gemeinsamen Interessen"
+
+msgid "Sorry, but currently, there are no more profiles to show you. Please come back later!"
+msgstr ""
 
 msgid "Members of your projects and groups only"
 msgstr "Nur Mitglieder deiner Projekte und Gruppen"
@@ -7302,90 +7306,6 @@ msgstr "Schön, dass du da bist! Auf %(portal_name)s kannst du in Gruppen und Pr
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Jetzt anmelden und mitgestalten"
-
-msgid "Custom Wagtail Page"
-msgstr "Custom Wagtail Seite"
-
-msgid "Tools"
-msgstr "Werkzeuge"
-
-msgid "Import Projects and Groups or Users"
-msgstr "Projekte und Gruppen oder Benutzer importieren"
-
-msgid "Import from a CSV File"
-msgstr "Aus CSV-Datei importieren"
-
-msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-msgstr "Laden Sie entweder eine CSV-Datei, um Ihre Projekte und Gruppen zu importieren, oder eine CSV-Datei, um die Benutzer zu importieren hoch. Bitte merken Sie, dass es gleichzeitig nur eine Datei importiert werden kann. Die Datei muss über ein entsprechendes Format verfügen. Wenn das Dateiformat geändert wird (mehr/weniger/unterschiedliche Spalten), bitte melden Sie sich bei den Entwicklern!"
-
-msgid "Project/group CSV File"
-msgstr "Projekte/Gruppen CSV-Datei"
-
-msgid "User CSV File"
-msgstr "Benutzer CSV-Datei"
-
-msgid "Options"
-msgstr "Optionen"
-
-msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-msgstr "Die Standardeinstellungen der CSV-Datei. Bitte nur in dem Fall ändern, wenn Sie sich absolut sicher sind, was Sie tun!"
-
-msgid "Encoding of the CSV file"
-msgstr "Enkodierung der CSV-Datei"
-
-msgid "Delimiter of the CSV file"
-msgstr "Trennzeichen der CSV-Datei"
-
-msgid "Upload and Import..."
-msgstr "Hochladen und Import…"
-
-msgid "Import Projects and Groups"
-msgstr "Projekte und Gruppen importieren"
-
-msgid "Clear results and start a new import!"
-msgstr "Ergebnisse löschen und den Import neu starten!"
-
-msgid "CSV Import Results"
-msgstr "Ergebnisse des Imports"
-
-msgid "The import has finished. Here are the results:"
-msgstr "Der Importvorgang ist abgeschloßen. Hier sind die Ergebnisse:"
-
-msgid "Read errors:"
-msgstr "Lesefehler:"
-
-msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-msgstr "Diese Zeilen in Ihrer CSV-Datei hatten Fehler oder eine inkorrekte Anzahl von Spalten und wurden daher IGNORIERT:"
-
-msgid "Saved items:"
-msgstr "Gespeicherte Daten:"
-
-msgid "Important messages:"
-msgstr "Wichtige Nachrichten:"
-
-msgid "Errors:"
-msgstr "Fehler:"
-
-msgid "Info messages:"
-msgstr "Info-Meldungen:"
-
-msgid "The CSV file was read successfully and the import is currently running on the server!"
-msgstr "Die CVS-Datei wurde erfolgreich bearbeitet und der Import läuft momentan auf dem Server!"
-
-#, python-format
-msgid ""
-"This page will show the results when the import is finished.\n"
-"\t\t\n"
-"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-"\t\t\t"
-msgstr ""
-"Diese Seite wird die Ergebnisse anzeigen sobald der Import abgeschloßen ist.\n"
-"\t\t\n"
-"\t\t\t\tDie Bearbeitung kann je nach Anzahl der importierten Daten von wenigen Sekunden bis zu wenigen Minuten dauern. Sie können diese Seite schließen. Sobald der Import abgeschloßen ist, erhalten Sie von uns eine Email and die folgende Email-Adresse: <b>»%(email)s»</b> !\n"
-"\t\t\t"
-
-msgid "Progress:"
-msgstr "Verlauf:"
 
 msgid "Show more Projects"
 msgstr "Weitere Projekte anzeigen"
@@ -13017,8 +12937,100 @@ msgstr "Aufgabenliste „%(title)s“ konnte nicht hinzugefügt werden."
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte hast eins oder mehrere der noch enthaltenen Objekte zu löschen!"
 
-msgid "Drag"
-msgstr ""
+#~ msgid "Type of educational institution"
+#~ msgstr "Art der Bildungseinrichtung"
+
+#~ msgid "Function"
+#~ msgstr "Funktion"
+
+#~ msgid "Position"
+#~ msgstr "Stellung"
+
+#~ msgid "Name of educational institution"
+#~ msgstr "Name der Bildungseinrichtung"
+
+#~ msgid "Custom Wagtail Page"
+#~ msgstr "Custom Wagtail Seite"
+
+#~ msgid "Tools"
+#~ msgstr "Werkzeuge"
+
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "Projekte und Gruppen oder Benutzer importieren"
+
+#~ msgid "Import from a CSV File"
+#~ msgstr "Aus CSV-Datei importieren"
+
+#~ msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
+#~ msgstr "Laden Sie entweder eine CSV-Datei, um Ihre Projekte und Gruppen zu importieren, oder eine CSV-Datei, um die Benutzer zu importieren hoch. Bitte merken Sie, dass es gleichzeitig nur eine Datei importiert werden kann. Die Datei muss über ein entsprechendes Format verfügen. Wenn das Dateiformat geändert wird (mehr/weniger/unterschiedliche Spalten), bitte melden Sie sich bei den Entwicklern!"
+
+#~ msgid "Project/group CSV File"
+#~ msgstr "Projekte/Gruppen CSV-Datei"
+
+#~ msgid "User CSV File"
+#~ msgstr "Benutzer CSV-Datei"
+
+#~ msgid "Options"
+#~ msgstr "Optionen"
+
+#~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
+#~ msgstr "Die Standardeinstellungen der CSV-Datei. Bitte nur in dem Fall ändern, wenn Sie sich absolut sicher sind, was Sie tun!"
+
+#~ msgid "Encoding of the CSV file"
+#~ msgstr "Enkodierung der CSV-Datei"
+
+#~ msgid "Delimiter of the CSV file"
+#~ msgstr "Trennzeichen der CSV-Datei"
+
+#~ msgid "Upload and Import..."
+#~ msgstr "Hochladen und Import…"
+
+#~ msgid "Import Projects and Groups"
+#~ msgstr "Projekte und Gruppen importieren"
+
+#~ msgid "Clear results and start a new import!"
+#~ msgstr "Ergebnisse löschen und den Import neu starten!"
+
+#~ msgid "CSV Import Results"
+#~ msgstr "Ergebnisse des Imports"
+
+#~ msgid "The import has finished. Here are the results:"
+#~ msgstr "Der Importvorgang ist abgeschloßen. Hier sind die Ergebnisse:"
+
+#~ msgid "Read errors:"
+#~ msgstr "Lesefehler:"
+
+#~ msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
+#~ msgstr "Diese Zeilen in Ihrer CSV-Datei hatten Fehler oder eine inkorrekte Anzahl von Spalten und wurden daher IGNORIERT:"
+
+#~ msgid "Saved items:"
+#~ msgstr "Gespeicherte Daten:"
+
+#~ msgid "Important messages:"
+#~ msgstr "Wichtige Nachrichten:"
+
+#~ msgid "Errors:"
+#~ msgstr "Fehler:"
+
+#~ msgid "Info messages:"
+#~ msgstr "Info-Meldungen:"
+
+#~ msgid "The CSV file was read successfully and the import is currently running on the server!"
+#~ msgstr "Die CVS-Datei wurde erfolgreich bearbeitet und der Import läuft momentan auf dem Server!"
+
+#~ msgid ""
+#~ "This page will show the results when the import is finished.\n"
+#~ "\t\t\n"
+#~ "\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
+#~ "\t\t\t"
+#~ msgstr ""
+#~ "Diese Seite wird die Ergebnisse anzeigen sobald der Import abgeschloßen ist.\n"
+#~ "\t\t\n"
+#~ "\t\t\t\tDie Bearbeitung kann je nach Anzahl der importierten Daten von wenigen Sekunden bis zu wenigen Minuten dauern. Sie können diese Seite schließen. Sobald der Import abgeschloßen ist, erhalten Sie von uns eine Email and die folgende Email-Adresse: <b>»%(email)s»</b> !\n"
+#~ "\t\t\t"
+
+#~ msgid "Progress:"
+#~ msgstr "Verlauf:"
 
 #~ msgid "send immediately"
 #~ msgstr "sofort schicken"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-15 17:00+0100\n"
+"POT-Creation-Date: 2023-04-12 15:14+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4537,6 +4537,9 @@ msgstr ""
 msgid "Which apps should be activated?"
 msgstr "Které aplikace by měly být aktivovány?"
 
+msgid "It is up to you: You can change this setting any time to activate/deactivate the apps you want to use."
+msgstr ""
+
 msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
 msgstr ""
 
@@ -6075,6 +6078,11 @@ msgstr "HD prostor využívaný projekty"
 msgid "User statistics (min 1x logged in)"
 msgstr "Statistiky uživatelů (min. 1x přihlášen)"
 
+#, fuzzy
+#| msgid "User statistics (min 1x logged in)"
+msgid "User domains (min 1x logged in)"
+msgstr "Statistiky uživatelů (min. 1x přihlášen)"
+
 msgid "BBB Room Visits"
 msgstr "Návštěvy BBB místnosti"
 
@@ -6709,30 +6717,16 @@ msgstr "Přehled uživatelů"
 msgid "Direct Contact"
 msgstr "Kontakt"
 
-#, fuzzy
-#| msgid "Search for Organizations"
-msgid "Type of educational institution"
-msgstr "Hledat organizace"
+msgid "**User-Matching** is your tool for communicating and sharing experiences with like-minded people from all over the world. If you have much to discuss and your chosen person considers it the same, your dialogue will start automatically."
+msgstr ""
 
-#, fuzzy
-#| msgid "Location"
-msgid "Function"
-msgstr "Umístění"
-
-#, fuzzy
-#| msgid "Description"
-msgid "Position"
-msgstr "Popis"
-
-#, fuzzy
-#| msgid "Remove organization"
-msgid "Name of educational institution"
-msgstr "Odebrat organizaci"
-
-msgid "Wonderful, we definetely have so much to discuss!"
+msgid "Wonderful, we definitely have so much to discuss!"
 msgstr ""
 
 msgid "Looks like we share no common interests"
+msgstr ""
+
+msgid "Sorry, but currently, there are no more profiles to show you. Please come back later!"
 msgstr ""
 
 msgid "Members of your projects and groups only"
@@ -7524,102 +7518,6 @@ msgstr "Rádi vás vidíme! Na webu %(portal_name)s můžete spolupracovat s ost
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Přihlásit a podílet se teď"
-
-msgid "Custom Wagtail Page"
-msgstr ""
-
-msgid "Tools"
-msgstr ""
-
-#, fuzzy
-msgid "Import Projects and Groups or Users"
-msgstr "Moje projekty a skupiny"
-
-#, fuzzy
-msgid "Import from a CSV File"
-msgstr "Import se nezdařil"
-
-msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-msgstr ""
-
-#, fuzzy
-msgid "Project/group CSV File"
-msgstr "Projekt/skupina"
-
-#, fuzzy
-msgid "User CSV File"
-msgstr "Nahrát CSV soubor"
-
-#, fuzzy
-msgid "Options"
-msgstr "Poměry"
-
-msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-msgstr ""
-
-msgid "Encoding of the CSV file"
-msgstr ""
-
-#, fuzzy
-#| msgid "Delete file"
-msgid "Delimiter of the CSV file"
-msgstr "Smazat soubor"
-
-#, fuzzy
-msgid "Upload and Import..."
-msgstr "Nahrát obrázek."
-
-#, fuzzy
-msgid "Import Projects and Groups"
-msgstr "Moje projekty a skupiny"
-
-msgid "Clear results and start a new import!"
-msgstr ""
-
-#, fuzzy
-msgid "CSV Import Results"
-msgstr "Import byl úspěšný!"
-
-msgid "The import has finished. Here are the results:"
-msgstr ""
-
-#, fuzzy
-msgid "Read errors:"
-msgstr "Chyba!"
-
-msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-msgstr ""
-
-#, fuzzy
-#| msgid "New item"
-msgid "Saved items:"
-msgstr "Nová položka"
-
-#, fuzzy
-msgid "Important messages:"
-msgstr "Vaše jméno"
-
-#, fuzzy
-msgid "Errors:"
-msgstr "Chyba!"
-
-#, fuzzy
-msgid "Info messages:"
-msgstr "Vaše jméno"
-
-msgid "The CSV file was read successfully and the import is currently running on the server!"
-msgstr ""
-
-#, python-format
-msgid ""
-"This page will show the results when the import is finished.\n"
-"\t\t\n"
-"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-"\t\t\t"
-msgstr ""
-
-msgid "Progress:"
-msgstr ""
 
 msgid "Show more Projects"
 msgstr "Zobrazit více projektů"
@@ -13474,8 +13372,83 @@ msgstr "Seznam úkolů \"%(title)s\" nelze přidat."
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Tuto složku nemůžete smazat, protože nemáte oprávnění smazat jednu nebo více položek, které obsahuje!"
 
-msgid "Drag"
-msgstr ""
+#, fuzzy
+#~| msgid "Search for Organizations"
+#~ msgid "Type of educational institution"
+#~ msgstr "Hledat organizace"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgid "Function"
+#~ msgstr "Umístění"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgid "Position"
+#~ msgstr "Popis"
+
+#, fuzzy
+#~| msgid "Remove organization"
+#~ msgid "Name of educational institution"
+#~ msgstr "Odebrat organizaci"
+
+#, fuzzy
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "Moje projekty a skupiny"
+
+#, fuzzy
+#~ msgid "Import from a CSV File"
+#~ msgstr "Import se nezdařil"
+
+#, fuzzy
+#~ msgid "Project/group CSV File"
+#~ msgstr "Projekt/skupina"
+
+#, fuzzy
+#~ msgid "User CSV File"
+#~ msgstr "Nahrát CSV soubor"
+
+#, fuzzy
+#~ msgid "Options"
+#~ msgstr "Poměry"
+
+#, fuzzy
+#~| msgid "Delete file"
+#~ msgid "Delimiter of the CSV file"
+#~ msgstr "Smazat soubor"
+
+#, fuzzy
+#~ msgid "Upload and Import..."
+#~ msgstr "Nahrát obrázek."
+
+#, fuzzy
+#~ msgid "Import Projects and Groups"
+#~ msgstr "Moje projekty a skupiny"
+
+#, fuzzy
+#~ msgid "CSV Import Results"
+#~ msgstr "Import byl úspěšný!"
+
+#, fuzzy
+#~ msgid "Read errors:"
+#~ msgstr "Chyba!"
+
+#, fuzzy
+#~| msgid "New item"
+#~ msgid "Saved items:"
+#~ msgstr "Nová položka"
+
+#, fuzzy
+#~ msgid "Important messages:"
+#~ msgstr "Vaše jméno"
+
+#, fuzzy
+#~ msgid "Errors:"
+#~ msgstr "Chyba!"
+
+#, fuzzy
+#~ msgid "Info messages:"
+#~ msgstr "Vaše jméno"
 
 #, fuzzy
 #~ msgid "2FA Settings"

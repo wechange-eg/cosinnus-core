@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-15 17:00+0100\n"
+"POT-Creation-Date: 2023-04-12 15:14+0200\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4469,6 +4469,9 @@ msgstr ""
 msgid "Which apps should be activated?"
 msgstr "Quelles applications doivent être activées ?"
 
+msgid "It is up to you: You can change this setting any time to activate/deactivate the apps you want to use."
+msgstr ""
+
 msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
 msgstr ""
 
@@ -6012,6 +6015,11 @@ msgstr "Espace HD utilisé par les projets"
 msgid "User statistics (min 1x logged in)"
 msgstr "Statistiques concernant les utilisateurs (min 1x connecté)"
 
+#, fuzzy
+#| msgid "User statistics (min 1x logged in)"
+msgid "User domains (min 1x logged in)"
+msgstr "Statistiques concernant les utilisateurs (min 1x connecté)"
+
 msgid "BBB Room Visits"
 msgstr "Visites de la salle BBB"
 
@@ -6646,30 +6654,16 @@ msgstr "Vue d'ensemble de l'utilisateur"
 msgid "Direct Contact"
 msgstr "Contact"
 
-#, fuzzy
-#| msgid "Search for Organizations"
-msgid "Type of educational institution"
-msgstr "Rechercher des organisations"
+msgid "**User-Matching** is your tool for communicating and sharing experiences with like-minded people from all over the world. If you have much to discuss and your chosen person considers it the same, your dialogue will start automatically."
+msgstr ""
 
-#, fuzzy
-#| msgid "Location"
-msgid "Function"
-msgstr "Lieu"
-
-#, fuzzy
-#| msgid "Description"
-msgid "Position"
-msgstr "Description"
-
-#, fuzzy
-#| msgid "Remove organization"
-msgid "Name of educational institution"
-msgstr "Enlever l’organisation"
-
-msgid "Wonderful, we definetely have so much to discuss!"
+msgid "Wonderful, we definitely have so much to discuss!"
 msgstr ""
 
 msgid "Looks like we share no common interests"
+msgstr ""
+
+msgid "Sorry, but currently, there are no more profiles to show you. Please come back later!"
 msgstr ""
 
 msgid "Members of your projects and groups only"
@@ -7457,102 +7451,6 @@ msgstr "Ravi de te voir ! Sur %(portal_name)s, tu peux collaborer avec d'autres 
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "S'inscrire et co-administrer"
-
-msgid "Custom Wagtail Page"
-msgstr ""
-
-msgid "Tools"
-msgstr ""
-
-#, fuzzy
-msgid "Import Projects and Groups or Users"
-msgstr "Mes projets et groupes"
-
-#, fuzzy
-msgid "Import from a CSV File"
-msgstr "Échec de l’importation"
-
-msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-msgstr ""
-
-#, fuzzy
-msgid "Project/group CSV File"
-msgstr "Projet / groupe"
-
-#, fuzzy
-msgid "User CSV File"
-msgstr "Téléverser un fichier CSV"
-
-#, fuzzy
-msgid "Options"
-msgstr "Proportions"
-
-msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-msgstr ""
-
-msgid "Encoding of the CSV file"
-msgstr ""
-
-#, fuzzy
-#| msgid "Delete file"
-msgid "Delimiter of the CSV file"
-msgstr "Supprimer le fichier"
-
-#, fuzzy
-msgid "Upload and Import..."
-msgstr "Télécharger une image."
-
-#, fuzzy
-msgid "Import Projects and Groups"
-msgstr "Mes projets et groupes"
-
-msgid "Clear results and start a new import!"
-msgstr ""
-
-#, fuzzy
-msgid "CSV Import Results"
-msgstr "Importation réussie !"
-
-msgid "The import has finished. Here are the results:"
-msgstr ""
-
-#, fuzzy
-msgid "Read errors:"
-msgstr "Erreur !"
-
-msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-msgstr ""
-
-#, fuzzy
-#| msgid "New item"
-msgid "Saved items:"
-msgstr "Nouvel item"
-
-#, fuzzy
-msgid "Important messages:"
-msgstr "État d’importation"
-
-#, fuzzy
-msgid "Errors:"
-msgstr "Erreur !"
-
-#, fuzzy
-msgid "Info messages:"
-msgstr "Messages"
-
-msgid "The CSV file was read successfully and the import is currently running on the server!"
-msgstr ""
-
-#, python-format
-msgid ""
-"This page will show the results when the import is finished.\n"
-"\t\t\n"
-"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-"\t\t\t"
-msgstr ""
-
-msgid "Progress:"
-msgstr ""
 
 msgid "Show more Projects"
 msgstr "Afficher plus de projets"
@@ -13367,8 +13265,83 @@ msgstr "La liste de tâches \"%(title)s\" n'a pas pu être ajoutée."
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Tu ne peux supprimer ce dossier car tu n'as pas la permission de supprimer un ou plusieurs items qu'il contient !"
 
-msgid "Drag"
-msgstr ""
+#, fuzzy
+#~| msgid "Search for Organizations"
+#~ msgid "Type of educational institution"
+#~ msgstr "Rechercher des organisations"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgid "Function"
+#~ msgstr "Lieu"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgid "Position"
+#~ msgstr "Description"
+
+#, fuzzy
+#~| msgid "Remove organization"
+#~ msgid "Name of educational institution"
+#~ msgstr "Enlever l’organisation"
+
+#, fuzzy
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "Mes projets et groupes"
+
+#, fuzzy
+#~ msgid "Import from a CSV File"
+#~ msgstr "Échec de l’importation"
+
+#, fuzzy
+#~ msgid "Project/group CSV File"
+#~ msgstr "Projet / groupe"
+
+#, fuzzy
+#~ msgid "User CSV File"
+#~ msgstr "Téléverser un fichier CSV"
+
+#, fuzzy
+#~ msgid "Options"
+#~ msgstr "Proportions"
+
+#, fuzzy
+#~| msgid "Delete file"
+#~ msgid "Delimiter of the CSV file"
+#~ msgstr "Supprimer le fichier"
+
+#, fuzzy
+#~ msgid "Upload and Import..."
+#~ msgstr "Télécharger une image."
+
+#, fuzzy
+#~ msgid "Import Projects and Groups"
+#~ msgstr "Mes projets et groupes"
+
+#, fuzzy
+#~ msgid "CSV Import Results"
+#~ msgstr "Importation réussie !"
+
+#, fuzzy
+#~ msgid "Read errors:"
+#~ msgstr "Erreur !"
+
+#, fuzzy
+#~| msgid "New item"
+#~ msgid "Saved items:"
+#~ msgstr "Nouvel item"
+
+#, fuzzy
+#~ msgid "Important messages:"
+#~ msgstr "État d’importation"
+
+#, fuzzy
+#~ msgid "Errors:"
+#~ msgstr "Erreur !"
+
+#, fuzzy
+#~ msgid "Info messages:"
+#~ msgstr "Messages"
 
 #, fuzzy
 #~ msgid "2FA Settings"

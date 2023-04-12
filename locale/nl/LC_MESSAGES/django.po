@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-15 17:00+0100\n"
+"POT-Creation-Date: 2023-04-12 15:14+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4591,6 +4591,9 @@ msgstr ""
 msgid "Which apps should be activated?"
 msgstr "Welke apps moeten worden geactiveerd?"
 
+msgid "It is up to you: You can change this setting any time to activate/deactivate the apps you want to use."
+msgstr ""
+
 msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
 msgstr ""
 
@@ -6143,6 +6146,11 @@ msgstr "HD space gebruikt door projecten"
 msgid "User statistics (min 1x logged in)"
 msgstr "Gebruikersstatistieken (min. 1x ingelogd)"
 
+#, fuzzy
+#| msgid "User statistics (min 1x logged in)"
+msgid "User domains (min 1x logged in)"
+msgstr "Gebruikersstatistieken (min. 1x ingelogd)"
+
 msgid "BBB Room Visits"
 msgstr ""
 
@@ -6789,29 +6797,16 @@ msgstr "Gebruikersoverzicht"
 msgid "Direct Contact"
 msgstr "Contact"
 
-#, fuzzy
-#| msgid "Search for Organizations"
-msgid "Type of educational institution"
-msgstr "Zoek naar organisaties"
+msgid "**User-Matching** is your tool for communicating and sharing experiences with like-minded people from all over the world. If you have much to discuss and your chosen person considers it the same, your dialogue will start automatically."
+msgstr ""
 
-#, fuzzy
-#| msgid "Location"
-msgid "Function"
-msgstr "Locatie"
-
-#, fuzzy
-#| msgid "Description"
-msgid "Position"
-msgstr "Beschrijving"
-
-#, fuzzy
-msgid "Name of educational institution"
-msgstr "Locatie verwijderen"
-
-msgid "Wonderful, we definetely have so much to discuss!"
+msgid "Wonderful, we definitely have so much to discuss!"
 msgstr ""
 
 msgid "Looks like we share no common interests"
+msgstr ""
+
+msgid "Sorry, but currently, there are no more profiles to show you. Please come back later!"
 msgstr ""
 
 msgid "Members of your projects and groups only"
@@ -7606,102 +7601,6 @@ msgstr "Goed om je te zien! Bij %(portal_name)s kun je samenwerken met anderen i
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Nu registreren en help mee vorm te geven"
-
-msgid "Custom Wagtail Page"
-msgstr ""
-
-msgid "Tools"
-msgstr ""
-
-#, fuzzy
-msgid "Import Projects and Groups or Users"
-msgstr "Mijn Projecten en Groepen"
-
-#, fuzzy
-msgid "Import from a CSV File"
-msgstr "Soorteerveld"
-
-msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-msgstr ""
-
-#, fuzzy
-msgid "Project/group CSV File"
-msgstr "Projecten/Groepen"
-
-#, fuzzy
-msgid "User CSV File"
-msgstr "Projecten/Groepen"
-
-#, fuzzy
-msgid "Options"
-msgstr "Proporties"
-
-msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-msgstr ""
-
-msgid "Encoding of the CSV file"
-msgstr ""
-
-#, fuzzy
-#| msgid "Delete file"
-msgid "Delimiter of the CSV file"
-msgstr "Bestand verwijderen"
-
-#, fuzzy
-msgid "Upload and Import..."
-msgstr "Upload een afbeelding."
-
-#, fuzzy
-msgid "Import Projects and Groups"
-msgstr "Mijn Projecten en Groepen"
-
-msgid "Clear results and start a new import!"
-msgstr ""
-
-#, fuzzy
-msgid "CSV Import Results"
-msgstr "Wachtwoord reset succesvol"
-
-msgid "The import has finished. Here are the results:"
-msgstr ""
-
-#, fuzzy
-msgid "Read errors:"
-msgstr "Foutmelding!"
-
-msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-msgstr ""
-
-#, fuzzy
-#| msgid "New item"
-msgid "Saved items:"
-msgstr "Nieuw item"
-
-#, fuzzy
-msgid "Important messages:"
-msgstr "Berichten"
-
-#, fuzzy
-msgid "Errors:"
-msgstr "Foutmelding!"
-
-#, fuzzy
-msgid "Info messages:"
-msgstr "Berichten"
-
-msgid "The CSV file was read successfully and the import is currently running on the server!"
-msgstr ""
-
-#, python-format
-msgid ""
-"This page will show the results when the import is finished.\n"
-"\t\t\n"
-"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-"\t\t\t"
-msgstr ""
-
-msgid "Progress:"
-msgstr ""
 
 msgid "Show more Projects"
 msgstr "Toon meerdere projecten"
@@ -13579,8 +13478,82 @@ msgstr "Takenlijst “%(title)s” kon niet worden toegevoegd."
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Je kunt deze map niet verwijderen, omdat je geen toestemming hebt om een of meer van de items te verwijderen!"
 
-msgid "Drag"
-msgstr ""
+#, fuzzy
+#~| msgid "Search for Organizations"
+#~ msgid "Type of educational institution"
+#~ msgstr "Zoek naar organisaties"
+
+#, fuzzy
+#~| msgid "Location"
+#~ msgid "Function"
+#~ msgstr "Locatie"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgid "Position"
+#~ msgstr "Beschrijving"
+
+#, fuzzy
+#~ msgid "Name of educational institution"
+#~ msgstr "Locatie verwijderen"
+
+#, fuzzy
+#~ msgid "Import Projects and Groups or Users"
+#~ msgstr "Mijn Projecten en Groepen"
+
+#, fuzzy
+#~ msgid "Import from a CSV File"
+#~ msgstr "Soorteerveld"
+
+#, fuzzy
+#~ msgid "Project/group CSV File"
+#~ msgstr "Projecten/Groepen"
+
+#, fuzzy
+#~ msgid "User CSV File"
+#~ msgstr "Projecten/Groepen"
+
+#, fuzzy
+#~ msgid "Options"
+#~ msgstr "Proporties"
+
+#, fuzzy
+#~| msgid "Delete file"
+#~ msgid "Delimiter of the CSV file"
+#~ msgstr "Bestand verwijderen"
+
+#, fuzzy
+#~ msgid "Upload and Import..."
+#~ msgstr "Upload een afbeelding."
+
+#, fuzzy
+#~ msgid "Import Projects and Groups"
+#~ msgstr "Mijn Projecten en Groepen"
+
+#, fuzzy
+#~ msgid "CSV Import Results"
+#~ msgstr "Wachtwoord reset succesvol"
+
+#, fuzzy
+#~ msgid "Read errors:"
+#~ msgstr "Foutmelding!"
+
+#, fuzzy
+#~| msgid "New item"
+#~ msgid "Saved items:"
+#~ msgstr "Nieuw item"
+
+#, fuzzy
+#~ msgid "Important messages:"
+#~ msgstr "Berichten"
+
+#, fuzzy
+#~ msgid "Errors:"
+#~ msgstr "Foutmelding!"
+
+#, fuzzy
+#~ msgid "Info messages:"
+#~ msgstr "Berichten"
 
 #, fuzzy
 #~ msgid "2FA Settings"
