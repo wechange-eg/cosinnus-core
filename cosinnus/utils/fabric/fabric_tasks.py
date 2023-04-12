@@ -32,6 +32,7 @@
 
 from cosinnus.utils.fabric.fabric_utils import cosinnus_fabric_task as task
 from cosinnus.utils.fabric.fabric_utils import get_env, CosinnusFabricConnection
+from django.utils.crypto import get_random_string
 
 # Sudo cd context https://stackoverflow.com/questions/50834162/in-fabric-2-invoke-change-directory-and-use-sudo
 """
@@ -125,9 +126,47 @@ def fastpull(_ctx):
 @task
 def deployfrontend(_ctx):
     """ Only does a git pull on the base project repository """
-    check_confirmation()
-    _pull_and_update_frontend()
+    check_confirmation(_ctx)
+    _pull_and_update_frontend(_ctx)
     restartfrontend(_ctx)
+    
+
+@task
+def deployresetvirtualenv(_ctx):
+    """ Deploys and forces a complete recreation of the virtual env. 
+        This will require a complete django unit stop and will pull up a maintenance banner on the server.
+        This will take longer and can be risky if the new build doesn't work. 
+        
+        This should only be done if some drastic architecture changes for poetry have happened or the 
+        old environment is irrevocably broken (or also probably if poetry is again 
+        just not updating its dependencies no matter what you try)."""
+    
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    text = input(
+        f'\n     **************   \n\n\tEXTRA\n\n\tWARNING!!!\n\n   ************* \n\nThis will do a complete deploy to the Server """{env.host}""", including a server stop, maintenance banner and DESTROY the poetry virtual env and CREATE IT FROM SCRATCH.\nIf you are sure you want this, type "YES" to continue: '
+    )
+    if not text == 'YES':
+        print('Canceled deploy with resetting the virtualenv.')
+        exit()
+    
+    check_confirmation()
+    backup(_ctx)
+    maintenanceon(_ctx)
+    stop(_ctx)
+    # move the old poetry.lock and virtualenv, forcing poetry to create them from scratch on install
+    foldername = f'_DELETEME_moved_old_env_{get_random_string(length=6).lower()}'
+    with c.cd(env.path):
+        c.run(f'mkdir ~/{foldername}')
+        c.run(f'mv .venv ~/{foldername}/movedvenv.venv')
+        c.run(f'mv poetry.lock ~/{foldername}/movedpoetry.lock')
+    _pull_and_update(fresh_install=True)
+    migrate(_ctx)
+    restart(_ctx)
+    compilewebpack(_ctx)
+    collectstatic(_ctx)
+    compileless(_ctx)
+    maintenanceoff(_ctx)
 
 
 """ ----------- Single helper tasks. Used in deploy tasks, but can also be called solo ----------- """
@@ -137,7 +176,7 @@ def check_confirmation():
     env = get_env()
     if env.confirm:
         text = input(
-            f'\n     **************   WARNING!   ************* \n\nYou are about to deploy to the Server {env.username}@{env.host}.\nIf you are sure you want this, type "YES" to continue: '
+            f'\n     **************   WARNING!   ************* \n\nYou are about to deploy to the Server """{env.host}""".\nIf you are sure you want this, type "YES" to continue: '
         )
         if not text == 'YES':
             print('Canceled deploy.')
@@ -222,8 +261,8 @@ def collectstatic(_ctx):
             c.run('./manage.py collectstatic --noinput')
             # workaround for the JS files compiled with `compilewebpack` for poetry not adding the correct .venv/src/ staticfile dirs
             if not env.legacy_mode:
-                c.run(f'cp -R {env.virtualenv_path}/src/cosinnus/cosinnus/static/js/client.js {env.path}/static-collected/js/client.js')
-                c.run(f'cp -R {env.virtualenv_path}/src/cosinnus/cosinnus_conference/static/conference/* {env.path}/static-collected/conference/')
+                c.run(f'cp -R {env.cosinnus_src_path}/cosinnus/static/js/client.js {env.path}/static-collected/js/client.js')
+                c.run(f'cp -R {env.cosinnus_src_path}/cosinnus_conference/static/conference/* {env.path}/static-collected/conference/')
 
 @task
 def staticown(_ctx):
@@ -253,11 +292,11 @@ def compilewebpack(_ctx):
     c = CosinnusFabricConnection(host=env.host)
     with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
         # for compilation of the JS app translations
-        with c.cd(f'{env.virtualenv_path}/src/cosinnus/'):
+        with c.cd(f'{env.cosinnus_src_path}'):
             c.run('npm install')
             c.run('npm run production')  # -->can also run 'npm run dev', but it stays in watch mode
         # build conference frontend
-        with c.cd(f'{env.virtualenv_path}/src/cosinnus/cosinnus_conference/frontend/'):
+        with c.cd(f'{env.cosinnus_src_path}/cosinnus_conference/frontend/'):
             c.run('npm install')
             c.run('npm run build')
 
@@ -276,7 +315,7 @@ def compilehtmlemails(_ctx):
         c.run(f'mkdir -p {env.path}/html_emails_collected')
         c.run(f'mkdir -p {env.path}/wechange/templates/cosinnus/html_mail')
         # copy cosinnus-core html emails npm project
-        c.run(f'cp -R {env.virtualenv_path}/src/cosinnus/cosinnus/html_emails/* {env.path}/html_emails_collected/')
+        c.run(f'cp -R {env.cosinnus_src_path}/cosinnus/html_emails/* {env.path}/html_emails_collected/')
         # copy local repo overriding files for html emails npm project, overwriting files
         result = c.run(f'cp -R {env.path}/wechange/html_emails/* {env.path}/html_emails_collected/', warn=True)
         if result.failed: 
@@ -329,7 +368,7 @@ def pipfreeze(_ctx):
         with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
             c.run('pip freeze')
 
-def _pull_and_update(full_update=True):
+def _pull_and_update(full_update=True, fresh_install=True):
     """ 
         Does a git pull on the main project repository, then performs 
         a poetry update to update dependencies.
@@ -341,14 +380,17 @@ def _pull_and_update(full_update=True):
         c.run(f'git fetch')
         c.run(f'git checkout {env.pull_branch}')
         c.run(f'git pull')
-        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
-            if env.legacy_mode:
-                c.run(f'pip install -Ur {env.special_requirements}')
-            else:
-                if full_update:
-                    c.run('poetry update')
+        if fresh_install:
+            c.run('poetry install')
+        else:
+            with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
+                if env.legacy_mode:
+                    c.run(f'pip install -Ur {env.special_requirements}')
                 else:
-                    c.run('poetry update cosinnus')
+                    if full_update:
+                        c.run('poetry update')
+                    else:
+                        c.run('poetry update cosinnus')
 
 def _pull_and_update_frontend():
     """ 

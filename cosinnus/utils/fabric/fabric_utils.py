@@ -103,7 +103,7 @@ def setup_env(portal_name, domain, pull_branch, confirm=False,
         @param special_requirements: if run in `legacy_mode == True`, this can be used to change
             the requirements file
         @param new_unit_commands: uses the newer configuration for unit commands, soon to become
-            the default for the redesign architecture
+            the default for the redesign architecture.
     """
     if not base_path and domain:
         base_path = f'/srv/http/{domain}'
@@ -117,6 +117,9 @@ def setup_env(portal_name, domain, pull_branch, confirm=False,
     env.path = f'{base_path}/htdocs'
     env.frontend_path = f'{base_path}/frontend'
     env.virtualenv_path = f'{env.path}/.venv'
+    env.cosinnus_src_path = f'{env.virtualenv_path}/src/cosinnus'
+    if new_unit_commands:
+        env.cosinnus_src_path = f'{env.virtualenv_path}/src/cosinnus-core'
     env.backup_path = f'{base_path}/backups'
     env.maintenance_mode_path = base_path
     env.pull_branch = pull_branch
@@ -124,15 +127,16 @@ def setup_env(portal_name, domain, pull_branch, confirm=False,
     env.frontend_pull_branch = frontend_pull_branch
     env.frontend_pull_remote = frontend_pull_remote
     env.lessc_binary = f'~/node_modules/.bin/lessc'
+    if new_unit_commands:
+        env.lessc_binary = f'{env.cosinnus_src_path}/node_modules/.bin/lessc'
     if legacy_mode:
         env.reload_command = f'sudo /bin/systemctl restart django-{portal_name}.service'
         env.stop_command = f'sudo /bin/systemctl stop django-{portal_name}.service'
         env.start_command = f'sudo /bin/systemctl start django-{portal_name}.service'
     elif new_unit_commands:
         env.reload_command = f'sudo systemctl restart unit-config.service'
-        env.stop_command = f'sudo systemctl stop unit-config.service'
-        env.start_command = f'sudo systemctl start unit-config.service'
-        env.lessc_binary = f'{env.virtualenv_path}/src/cosinnus/node_modules/.bin/lessc'
+        env.stop_command = f'sudo systemctl stop django-{portal_name}.service' # there is no stop for the unit-config, only for the config-service
+        env.start_command = f'sudo systemctl restart unit-config.service' # this is why here we restart the unit config, so all gets restarted after stopping
     else:
         env.reload_command = f'sudo systemctl restart django-{portal_name}-unit.service'
         env.stop_command = f'sudo systemctl stop django-{portal_name}-unit.service'
