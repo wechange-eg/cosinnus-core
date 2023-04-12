@@ -259,10 +259,6 @@ def collectstatic(_ctx):
     with c.cd(env.path):
         with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
             c.run('./manage.py collectstatic --noinput')
-            # workaround for the JS files compiled with `compilewebpack` for poetry not adding the correct .venv/src/ staticfile dirs
-            if not env.legacy_mode:
-                c.run(f'cp -R {env.cosinnus_src_path}/cosinnus/static/js/client.js {env.path}/static-collected/js/client.js')
-                c.run(f'cp -R {env.cosinnus_src_path}/cosinnus_conference/static/conference/* {env.path}/static-collected/conference/')
 
 @task
 def staticown(_ctx):
@@ -278,6 +274,13 @@ def compileless(_ctx):
     """ Compiles all LESS files and adds the resulting CSS file to the collected-static folder """
     env = get_env()
     c = CosinnusFabricConnection(host=env.host)
+    
+    if env.skip_compile_webpack:
+        # This is a workaround, as not needing to compile JS bundles anymore means no lessc is installed.
+        print('Installing lessc node_modules in cosinnus-core.')
+        with c.cd(f'{env.cosinnus_src_path}'):
+            c.run('npm install less lessc clean-css')
+            
     with c.cd(env.path):
         c.run(
             f'{env.lessc_binary} --clean-css ./static-collected/less/cosinnus.less ./static-collected/css/cosinnus.css'
@@ -290,6 +293,11 @@ def compilewebpack(_ctx):
     """ Compiles the map/conferences JS clients using webpack """
     env = get_env()
     c = CosinnusFabricConnection(host=env.host)
+    
+    if env.skip_compile_webpack:
+        print('Skipping webpack compile as the JS bundles now are supplied in cosinnus-core!')
+        return
+    
     with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
         # for compilation of the JS app translations
         with c.cd(f'{env.cosinnus_src_path}'):

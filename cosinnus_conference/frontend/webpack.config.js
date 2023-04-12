@@ -1,4 +1,5 @@
 const path = require('path')
+var base = path.resolve('.');
 
 module.exports = {
   /**
@@ -8,8 +9,8 @@ module.exports = {
   mode: 'production',
   entry: './src/index.tsx',
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, '../static/conference')
+    path: path.resolve(__dirname, '../../cosinnus/static/conference'),
+    filename: 'conference.js'
   },
   module: {
     rules: require('./webpack.rules')

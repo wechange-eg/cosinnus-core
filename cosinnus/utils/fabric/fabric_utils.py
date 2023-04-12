@@ -127,6 +127,7 @@ def setup_env(portal_name, domain, pull_branch, confirm=False,
     env.frontend_pull_branch = frontend_pull_branch
     env.frontend_pull_remote = frontend_pull_remote
     env.lessc_binary = f'~/node_modules/.bin/lessc'
+    env.skip_compile_webpack = new_unit_commands
     if new_unit_commands:
         env.lessc_binary = f'{env.cosinnus_src_path}/node_modules/.bin/lessc'
     if legacy_mode:
