@@ -135,7 +135,7 @@ class Note(LikeableObjectMixin, TranslateableFieldsModelMixin, BaseTaggableObjec
             # remove a single trailing space, that can exist because of markdown, and is never used in an actual URL
             if video.endswith(')'):
                 video = video[:-1]
-            match = re.search(r'[?&]v=([a-zA-Z0-9-_]+)[^a-zA-Z0-9-_]', video)
+            match = re.search(r'[?&]v=([a-zA-Z0-9-_]+)([^a-zA-Z0-9-_]|$)', video)
             if not match:
                 match = re.search(r'youtu.be/([a-zA-Z0-9-_]+)(&|$)', video)
             if match:
