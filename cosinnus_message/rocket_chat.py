@@ -1297,7 +1297,15 @@ class RocketChatConnection:
             logger.error('RocketChat: set_user_email_preference did not receive a success response: ' + response.get('errorType', '<No Error Type>'), extra={'response': response})
             return False
         return True
-        
+
+    def logout_user_session(self, user_id, user_token):
+        """ Logges out a user from an active session using the users user_id and auth_token """
+        user_session_connection = RocketChat(
+            user_id=user_id, auth_token=user_token, server_url=settings.COSINNUS_CHAT_BASE_URL,
+            timeout=settings.COSINNUS_CHAT_USER_CONNECTION_TIMEOUT
+        )
+        user_session_connection.logout()
+
     def _get_user_connection(self, user):
         """ Returns a user-specific rocketchat connection for the given user, 
             or None if this fails for any reason """

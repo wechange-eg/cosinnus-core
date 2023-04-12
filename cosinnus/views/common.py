@@ -21,6 +21,7 @@ from django.views.generic.base import View, TemplateView
 import requests
 
 from cosinnus.conf import settings
+from cosinnus_message.rocket_chat import RocketChatConnection
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import LikeObject
 from cosinnus.utils.context_processors import cosinnus as cosinnus_context
@@ -179,6 +180,12 @@ def cosinnus_logout(request, **kwargs):
         (this seems to only clear the value of the cookie and not completely delete it!).
         Will redirect to a "you have been logged out" page, that may perform additional 
         JS queries or redirects to log out from other services. """
+    if settings.COSINNUS_ROCKET_ENABLED:
+        user_rc_uid = request.COOKIES.get('rc_session_uid')
+        user_rc_token = request.COOKIES.get('rc_session_token')
+        if user_rc_uid and user_rc_token:
+            rocket = RocketChatConnection()
+            rocket.logout_user_session(user_rc_uid, user_rc_token)
     response = LogoutView.as_view(**kwargs)(request) # logout(request, **kwargs)
     if not request.user.is_authenticated:
         response.delete_cookie('wp_user_logged_in')
