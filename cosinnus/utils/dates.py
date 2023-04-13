@@ -123,7 +123,15 @@ class HumanizedEventTimeMixin(object):
             return localize(self.from_date, "d.m.Y")
         else:
             return "%s - %s" % (localize(self.from_date, "d.m."), localize(self.to_date, "d.m.Y"))
-    
+
+    def get_period_with_time(self):
+        if self.is_all_day:
+            return self.get_period()
+        if self.single_day:
+            return f'{localize(self.from_date, "d.m.Y H:i")} - {localize(self.to_date, "H:i")}'
+        else:
+            return f'{localize(self.from_date, "d.m.Y H:i")} - {localize(self.to_date, "d.m.Y H:i")}'
+
     def get_humanized_event_time_html(self):
         if not self.from_date:
             return ''

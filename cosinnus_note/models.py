@@ -26,13 +26,14 @@ from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
 from uuid import uuid1
 
 from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
+from cosinnus.views.mixins.tagged import RelayMessageMixin
 
 logger = logging.getLogger('cosinnus')
 
 FACEBOOK_POST_URL = 'https://www.facebook.com/%s/posts/%s' # %s, %s :  user_id, post_id
 
 
-class Note(LikeableObjectMixin, TranslateableFieldsModelMixin, BaseTaggableObjectModel):
+class Note(LikeableObjectMixin, TranslateableFieldsModelMixin, RelayMessageMixin, BaseTaggableObjectModel):
     
     if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
         translateable_fields = ['title', 'text']
@@ -162,7 +163,15 @@ class Note(LikeableObjectMixin, TranslateableFieldsModelMixin, BaseTaggableObjec
     
     def get_comment_post_url(self):
         return group_aware_reverse('cosinnus:note:comment', kwargs={'group': self.group, 'note_slug': self.slug})
-    
+
+    def get_message_title(self):
+        """ Implementing `RelayMessageMixin` """
+        return self.title if not self.title == self.EMPTY_TITLE_PLACEHOLDER else ''
+
+    def get_message_text(self):
+        """ Implementing `RelayMessageMixin` """
+        return self.text
+
 
 @six.python_2_unicode_compatible
 class Comment(models.Model):
