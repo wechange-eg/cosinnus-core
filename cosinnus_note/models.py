@@ -26,7 +26,7 @@ from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
 from uuid import uuid1
 
 from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
-from cosinnus.views.mixins.tagged import RelayMessageMixin
+from cosinnus.models.mixins.tagged import RelayMessageMixin
 
 logger = logging.getLogger('cosinnus')
 

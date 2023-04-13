@@ -39,7 +39,7 @@ from cosinnus_event.fields import RTMPURLField
 from cosinnus_event.managers import EventQuerySet
 from cosinnus_event.mixins import BBBRoomMixin
 from cosinnus_event.utils.bbb_streaming import trigger_streamer_status_changes
-from cosinnus.views.mixins.tagged import RelayMessageMixin
+from cosinnus.models.mixins.tagged import RelayMessageMixin
 
 
 logger = logging.getLogger('cosinnus')
