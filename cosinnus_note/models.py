@@ -16,7 +16,6 @@ from django.utils.functional import cached_property
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user,\
     check_object_read_access
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus_message.mixins import RelayMessageMixin
 from cosinnus_note import cosinnus_notifications
 from django.contrib.auth import get_user_model
 
@@ -27,6 +26,7 @@ from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
 from uuid import uuid1
 
 from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
+from cosinnus.views.mixins.tagged import RelayMessageMixin
 
 logger = logging.getLogger('cosinnus')
 
@@ -165,9 +165,11 @@ class Note(LikeableObjectMixin, TranslateableFieldsModelMixin, RelayMessageMixin
         return group_aware_reverse('cosinnus:note:comment', kwargs={'group': self.group, 'note_slug': self.slug})
 
     def get_message_title(self):
+        """ Implementing `RelayMessageMixin` """
         return self.title if not self.title == self.EMPTY_TITLE_PLACEHOLDER else ''
 
     def get_message_text(self):
+        """ Implementing `RelayMessageMixin` """
         return self.text
 
 

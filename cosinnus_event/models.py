@@ -39,7 +39,7 @@ from cosinnus_event.fields import RTMPURLField
 from cosinnus_event.managers import EventQuerySet
 from cosinnus_event.mixins import BBBRoomMixin
 from cosinnus_event.utils.bbb_streaming import trigger_streamer_status_changes
-from cosinnus_message.mixins import RelayMessageMixin
+from cosinnus.views.mixins.tagged import RelayMessageMixin
 
 
 logger = logging.getLogger('cosinnus')
@@ -361,12 +361,15 @@ class Event(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, LikeableObje
         return reverse('admin:cosinnus_event_event_change', kwargs={'object_id': self.id})
 
     def get_message_emote(self):
+        """ Implementing `RelayMessageMixin` """
         return settings.COSINNUS_ROCKET_NEWS_BOT_EMOTE_EVENT
 
     def get_message_title(self):
+        """ Implementing `RelayMessageMixin` """
         return self.title
 
     def get_message_text(self):
+        """ Implementing `RelayMessageMixin` """
         text = self.get_period_with_time()
         if self.media_tag.location:
             text += f', {self.media_tag.location}'
