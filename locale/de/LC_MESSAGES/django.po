@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-18 18:04+0200\n"
+"POT-Creation-Date: 2023-04-18 19:05+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3932,6 +3932,9 @@ msgstr "%(team_name)s - Mitglieder"
 
 msgid "Invite users directly via the following link: "
 msgstr "Lade die Benutzer*innen über diesen Link direkt ein: "
+
+msgid "Note: Detailed member lists for platform-wide content are not displayed."
+msgstr "Hinweis: Detaillierte Mitgliederlisten für plattformweite Inhalte werden nicht angezeigt."
 
 msgid "Membership requests"
 msgstr "Mitglieder-Anträge"

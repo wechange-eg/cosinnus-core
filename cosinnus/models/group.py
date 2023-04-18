@@ -1424,6 +1424,16 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         return self.slug == getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
     
     @property
+    def is_events_group(self):
+        return self.slug == getattr(settings, 'NEWW_EVENTS_GROUP_SLUG', None)
+    
+    @property
+    def is_mass_invite_group(self):
+        """ Convenience function to determine if this is a group with very many users
+            such as the auto-invite or the forum groups """
+        return self.is_default_user_group or self.is_forum_group or self.is_events_group
+    
+    @property
     def is_publicly_visible(self):
         """ Checks if this group can be viewed (from the outside) for non-logged-in users. """
         if not settings.COSINNUS_GROUP_PUBLICY_VISIBLE_OPTION_SHOWN:
