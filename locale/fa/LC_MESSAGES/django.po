@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 15:14+0200\n"
+"POT-Creation-Date: 2023-04-18 18:04+0200\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -891,6 +891,9 @@ msgstr "پایان دادن به اشتراک"
 
 msgid "My Dashboard"
 msgstr "داشبورد من"
+
+msgid "Wrong file format. Try .jpg, .jpeg, .png, or .gif instead."
+msgstr ""
 
 msgid "Tiny (50 x *)"
 msgstr "ریز (۵۰ x *)"

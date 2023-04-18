@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 15:14+0200\n"
+"POT-Creation-Date: 2023-04-18 18:04+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 2.0.6\n"
 
 msgid "Debug"
 msgstr ""
@@ -915,6 +915,9 @@ msgstr "Відписатися"
 
 msgid "My Dashboard"
 msgstr "Моя інформаційна панель"
+
+msgid "Wrong file format. Try .jpg, .jpeg, .png, or .gif instead."
+msgstr "Неправильний формат файлу. Підтримуються лише .jpg, .jpeg, .png або .gif."
 
 msgid "Tiny (50 x *)"
 msgstr "Мікро (50 x *)"
@@ -8548,7 +8551,6 @@ msgid_plural "Successfully created  %(created_count)d accounts. "
 msgstr[0] "Профіль користувача успішно деактивований "
 msgstr[1] "Профіль користувача успішно деактивований "
 msgstr[2] "Профіль користувача успішно деактивований "
-msgstr[3] "Профіль користувача успішно деактивований "
 
 #, fuzzy
 #| msgid "Successfully deactivated user account"
@@ -8884,7 +8886,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your e
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інший(-а) прокоментували вашу подію %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували ваш захід %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували ваш захід у %(object_name)s"
-msgstr[3] ""
 
 #, python-format
 msgid "%(sender_name)s commented on your event"
@@ -8907,7 +8908,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the ev
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інший(-а) прокоментували подію %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували ваш захід у %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували ваш захід у %(object_name)s"
-msgstr[3] ""
 
 msgid "You were tagged in this event"
 msgstr "Вас позначили в цій події"
@@ -9037,7 +9037,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others voted in the event 
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інший(-а) проголосували в опитуванні події %(object_name)s "
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших проголосували в опитуванні %(object_name)s події"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших проголосували в опитуванні %(object_name)s події"
-msgstr[3] ""
 
 #, python-format
 msgid "%(sender_name)s voted in an event poll you are following"
@@ -9799,7 +9798,6 @@ msgid_plural "Going"
 msgstr[0] "Братиму участь"
 msgstr[1] "Будуть брати участь"
 msgstr[2] "Будуть брати участь"
-msgstr[3] ""
 
 msgctxt "one or many people are maybe going"
 msgid "Maybe going"
@@ -9807,7 +9805,6 @@ msgid_plural "Maybe going"
 msgstr[0] "Можливо братиму участь"
 msgstr[1] "Можливо братимуть участь"
 msgstr[2] "Можливо братимуть участь"
-msgstr[3] ""
 
 msgctxt "one or many people are not going"
 msgid "Can't go"
@@ -9815,7 +9812,6 @@ msgid_plural "Can't go"
 msgstr[0] "Не можу взяти участі"
 msgstr[1] "Не можуть взяти участь"
 msgstr[2] "Не можуть взяти участь"
-msgstr[3] ""
 
 msgid "Going"
 msgstr "Братиму участь"
@@ -10174,7 +10170,6 @@ msgid_plural "A problem occurred during export. The following files are missing:
 msgstr[0] "Під час експортування виникла проблема. Наступного файлу не існує: %(filename)s."
 msgstr[1] "Під час експортування виникла проблема. Наступних файлів не існує: %(filename)s."
 msgstr[2] "Під час експортування виникла проблема. Наступних файлів не існує: %(filename)s."
-msgstr[3] ""
 
 msgid "Invalid request."
 msgstr "Недійсний запит."
@@ -10208,7 +10203,6 @@ msgid_plural "%(count)d Files were added successfully."
 msgstr[0] "%(count)d файл було успішно додано."
 msgstr[1] "%(count)d файли було успішно додано."
 msgstr[2] "%(count)d файлів було успішно додано."
-msgstr[3] ""
 
 msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
 msgstr "Файл, який ви завантажили, був занадто великим або тип файлу заборонено завантажувати!"
@@ -10267,7 +10261,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your o
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інший(-а) прокоментували Вашу пропозицію %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували Ваше оголошення %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували Ваше оголошення %(object_name)s"
-msgstr[3] ""
 
 #, python-format
 msgid "%(sender_name)s commented on your offer"
@@ -10290,7 +10283,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the of
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інший(-а) прокоментували Вашу пропозицію %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували Ваше оголошення %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували Ваше оголошення %(object_name)s"
-msgstr[3] ""
 
 msgid "You were tagged in this offer"
 msgstr "Вас було позначено в цій пропозиції"
@@ -10828,7 +10820,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your n
 msgstr[0] "%(sender_name) s та %(count_minus_one)d інші прокоментували Вашу новину %(object_name) s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували вашу новину %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували вашу новину %(object_name)s"
-msgstr[3] ""
 
 #, python-format
 msgid "%(sender_name)s commented on your news post"
@@ -10851,7 +10842,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the ne
 msgstr[0] "%(sender_name)s та %(count_minus_one)d інші прокоментували новий допис %(object_name)s, який Ви також коментували"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували) новину %(object_name)s, яку ви також коментували"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували) новину %(object_name)s, яку ви також коментували"
-msgstr[3] ""
 
 #, python-format
 msgid "%(sender_name)s commented on a news post you commented in"
@@ -10918,7 +10908,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the ne
 msgstr[0] "%(sender_name)s та %(count_minus_one)d інші прокоментували новий допис %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували новину %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували новину %(object_name)s"
-msgstr[3] ""
 
 #, python-format
 msgid "%(sender_name)s commented on a news posts you are following"
@@ -11992,7 +11981,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your p
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інші прокоментували Ваше опитування %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували Ваше опитування %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували Ваше опитування %(object_name)s"
-msgstr[3] ""
 
 #, python-format
 msgid "%(sender_name)s commented on your poll"
@@ -12015,7 +12003,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the po
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інші прокоментували опитування %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували опитування %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували опитування %(object_name)s"
-msgstr[3] ""
 
 msgid "You were tagged in this poll"
 msgstr "Вас відмітили в цьому опитуванні"
@@ -12718,7 +12705,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your t
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інші прокоментували ваше завдання %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували ваше завдання %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували ваше завдання %(object_name)s"
-msgstr[3] ""
 
 #, python-format
 msgid "%(sender_name)s commented on your todo"
@@ -12741,7 +12727,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the to
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інший(-а) прокоментували завдання %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували завдання %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували завдання %(object_name)s"
-msgstr[3] ""
 
 msgid "You were tagged in this todo"
 msgstr "Вас відмітили в цьому завданні"
@@ -12767,7 +12752,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your a
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інші прокоментувавали доручене Вам завдання %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментувавали доручене Вам завдання %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментувавали доручене Вам завдання %(object_name)s"
-msgstr[3] ""
 
 #, python-format
 msgid "%(sender_name)s commented on one of your assigned todos"
@@ -12790,7 +12774,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інші) актуалізували завдання %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших актуалізували завдання %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших актуалізували завдання %(object_name)s"
-msgstr[3] ""
 
 msgid "You are following this todo"
 msgstr "Ви відстежуєте це завдання"
@@ -13606,11 +13589,13 @@ msgstr "Ви не можете видалити цю папку, оскільк�
 #~ "\n"
 #~ "Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das Portallogo links oben.\n"
 #~ "\n"
-#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
+#~ "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die "
+#~ "Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
 #~ "\n"
 #~ "Für alle Gruppen und Projekte, denen du selbstständig beitrittst, ist die Standardeinstellung bei dieser Option \"alle Benachrichtigungen\". Das kannst du dann natürlich ebenso anpassen.\n"
 #~ "\n"
-#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
+#~ "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren "
+#~ "Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
 #~ "\n"
 #~ "Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, melde dich gern den Portaladministrator_innen. \n"
 #~ "\n"
@@ -13623,7 +13608,8 @@ msgstr "Ви не можете видалити цю папку, оскільк�
 #~ "\n"
 #~ "Ми раді тому, що ви бажаєте користуватися платформою. Щоб ознайомитися з найважливішими функціями, перегляньте відео (якщо ще не переглядали) на нашій головній сторінці. Щоб перейти на головну сторінку натисніть на логотип порталу зверху зліва.\n"
 #~ "\n"
-#~ "Спершу деяка інформація: зареєструвавшись, ви автоматично стаєте членом спільноти «Форум» де міститься уся інформація порталу. Щоб мати уявлення про те, що тут відбувається, у стандартних налаштуваннях функції «Налаштування сповіщення» у цій спільноті вибрано «Усі сповіщення». Цю функцію ви можете легко налаштувати відповідно до ваших особистих потреб (натисніть у правому верхньому кутку на ваше ім'я). Для того, щоб Ви не отримувати надто багато небажаних сповіщень, стандартні налаштування передбачають \"Жодних сповіщень\".\n"
+#~ "Спершу деяка інформація: зареєструвавшись, ви автоматично стаєте членом спільноти «Форум» де міститься уся інформація порталу. Щоб мати уявлення про те, що тут відбувається, у стандартних налаштуваннях функції «Налаштування сповіщення» у цій спільноті вибрано «Усі сповіщення». Цю функцію ви можете легко налаштувати відповідно до ваших особистих потреб (натисніть у правому верхньому кутку на ваше ім'я). Для того, щоб Ви не отримувати надто багато небажаних сповіщень, стандартні налаштування передбачають \"Жодних "
+#~ "сповіщень\".\n"
 #~ "\n"
 #~ "Для всіх спільнот та проектів, до яких Ви бажаєте долучитися, стандартні налаштування передбачають \"всі сповіщення\". Це Ви також можете змінити потім.\n"
 #~ "\n"
