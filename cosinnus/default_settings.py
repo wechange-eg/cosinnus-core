@@ -466,7 +466,8 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     COSINNUS_CHAT_BASE_URL = f"https://chat.{project_settings['COSINNUS_PORTAL_URL']}"
     COSINNUS_CHAT_USER = env("WECHANGE_COSINNUS_CHAT_USER", default=f"{project_settings['COSINNUS_PORTAL_NAME']}-bot")
     COSINNUS_CHAT_PASSWORD = env("WECHANGE_COSINNUS_CHAT_PASSWORD", default='')
-    
+    COSINNUS_CHAT_SESSION_COOKIE_DOMAIN = project_settings['COSINNUS_PORTAL_URL']
+
     # Nextcloud
     COSINNUS_CLOUD_ENABLED = False
     COSINNUS_CLOUD_NEXTCLOUD_URL = f"https://cloud.{project_settings['COSINNUS_PORTAL_URL']}"
