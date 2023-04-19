@@ -101,6 +101,7 @@ class CosinnusMessageDefaultSettings(AppConf):
         'Accounts_TwoFactorAuthentication_Enabled': False,
 
         # Layout
+        'Layout_Home_Custom_Block_Visible': True,
         'Layout_Home_Body': '''<p>Willkommen beim %(COSINNUS_BASE_PAGE_TITLE_TRANS)s Rocket.Chat!</p>
 
         <p>Schreibt private Nachrichten im Browser, per Smartphone- oder Desktop-App in Echtzeit an andere, in Projekten und Gruppen oder in eigenen Kanälen.</p>
