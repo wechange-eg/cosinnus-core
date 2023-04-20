@@ -12,6 +12,7 @@ from two_factor.views import (ProfileView, SetupView, SetupCompleteView,
 
 from cosinnus.utils.urls import get_non_cms_root_url, safe_redirect
 from cosinnus.views.mixins.group import RequireLoggedInMixin
+from cosinnus.forms.authentication import DisableFormWithPasswordValidation
 
 
 class AdminOnlyOTPTokenValidationView(auth_views.LoginView):
@@ -140,6 +141,17 @@ class Cosinnus2FADisableView(DisableView):
 
     template_name = 'cosinnus/user_2fa/user_2fa_disable.html'
     success_url = 'cosinnus:two-factor-auth-settings'
+    form_class = DisableFormWithPasswordValidation
+    
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+    
+    def form_valid(self, form):
+        ret = super().form_valid(form)
+        messages.success(self.request, _('You have successfully disabled two-factor authentication for your account.'))
+        return ret
 
 two_factor_auth_disable = Cosinnus2FADisableView.as_view()
 
