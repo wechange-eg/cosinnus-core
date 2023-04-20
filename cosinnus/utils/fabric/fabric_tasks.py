@@ -151,7 +151,6 @@ def deployresetvirtualenv(_ctx):
         exit()
     
     check_confirmation()
-    backup(_ctx)
     maintenanceon(_ctx)
     stop(_ctx)
     # move the old poetry.lock and virtualenv, forcing poetry to create them from scratch on install
@@ -167,6 +166,8 @@ def deployresetvirtualenv(_ctx):
     collectstatic(_ctx)
     compileless(_ctx)
     maintenanceoff(_ctx)
+    print('Note: this may fail if no redesign frontend is present yet for this portal. In that case, this is fine!')
+    restartfrontend(_ctx)
 
 
 """ ----------- Single helper tasks. Used in deploy tasks, but can also be called solo ----------- """
