@@ -7,7 +7,7 @@
                 {% include "cosinnus/group/group_avatar_image.html" with group=group %}
             </a>
             <div class="media-body">
-                <a {% if not disabled %}href="{{ group.get_absolute_url }}"{% endif %}>{{ group.name }}</a>
+                <a {% if not disabled %}href="{{ group.get_absolute_url }}"{% endif %} {% if target_blank %}target="_blank"{% endif %}>{{ group.name }}</a>
                 <div class="group-annotation">
                         <i class="fa fa-users"></i>
                         {{ group.members|length }} {% if group.members|length == 1 %}{% trans "Member" %}{% else %}{% trans "Members" %}{% endif %}

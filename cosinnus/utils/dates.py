@@ -114,7 +114,7 @@ class HumanizedEventTimeMixin(object):
             with is_date=False date as string "Now" if the event is running, 
             else is_date=True and date as the moment-usable datetime of the from_date. """
         _now = now()
-        if self.from_date and self.from_date < _now and self.to_date > _now:
+        if self.from_date and self.to_date and self.from_date < _now and self.to_date > _now:
             return {'is_date': False, 'date': str(_("Now"))}
         return {'is_date': True, 'date': django_date_filter(self.from_date, 'c')}
     

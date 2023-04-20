@@ -149,9 +149,9 @@ class CosinnusGroupInviteTokenAdminForm(forms.ModelForm):
 class CosinnusGroupInviteTokenAdmin(admin.ModelAdmin):
     form = CosinnusGroupInviteTokenAdminForm
     
-    list_display = ('token', 'portal', 'is_active', 'title', 'created',)
+    list_display = ('token', 'portal', 'is_active', 'title', 'created')
     list_filter = ('created', 'portal')
-    search_fields = ('token', 'title', 'creator__first_name', 'creator__last_name', 'creator__email') 
+    search_fields = ('token', 'title', 'invite_groups__name', 'invite_groups__slug') 
     readonly_fields = ('created', 'valid_until') # valid_until is unused as of now
     filter_horizontal = ('invite_groups',)
 

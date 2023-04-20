@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 15:14+0200\n"
+"POT-Creation-Date: 2023-04-18 19:05+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -910,6 +910,9 @@ msgstr "გამოწერის გაუქმება"
 #, fuzzy
 msgid "My Dashboard"
 msgstr "ხელსაწყოთა პანელი"
+
+msgid "Wrong file format. Try .jpg, .jpeg, .png, or .gif instead."
+msgstr ""
 
 msgid "Tiny (50 x *)"
 msgstr "უმცირესი (50 x *)"
@@ -4136,6 +4139,9 @@ msgid "%(team_name)s - Members"
 msgstr "%(team_name)s -წევრები"
 
 msgid "Invite users directly via the following link: "
+msgstr ""
+
+msgid "Note: Detailed member lists for platform-wide content are not displayed."
 msgstr ""
 
 msgid "Membership requests"

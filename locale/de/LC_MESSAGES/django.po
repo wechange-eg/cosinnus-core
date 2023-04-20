@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 15:14+0200\n"
+"POT-Creation-Date: 2023-04-18 19:05+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -878,6 +878,9 @@ msgstr "Abbestellen"
 
 msgid "My Dashboard"
 msgstr "Mein Dashboard"
+
+msgid "Wrong file format. Try .jpg, .jpeg, .png, or .gif instead."
+msgstr "Falsches Dateiformat. Es werden nur .jpg, .jpeg, .png oder .gif unterstützt."
 
 msgid "Tiny (50 x *)"
 msgstr "Tiny (50 x *)"
@@ -3929,6 +3932,9 @@ msgstr "%(team_name)s - Mitglieder"
 
 msgid "Invite users directly via the following link: "
 msgstr "Lade die Benutzer*innen über diesen Link direkt ein: "
+
+msgid "Note: Detailed member lists for platform-wide content are not displayed."
+msgstr "Hinweis: Detaillierte Mitgliederlisten für plattformweite Inhalte werden nicht angezeigt."
 
 msgid "Membership requests"
 msgstr "Mitglieder-Anträge"
@@ -8140,7 +8146,7 @@ msgid "Thank you for signing up and welcome to the platform! We sent an email to
 msgstr "Vielen Dank für deine Anmeldung und herzlich willkommen auf der Plattform! Wir haben an deine E-Mail-Adresse \"%(email)s\" eine E-Mail mit dem Verifizierungslink geschickt!"
 
 msgid "The invite token you have used does not exist. Please contact the responsible person to get a valid link!"
-msgstr "Das Einladungs-Token, das du benutzt hast, scheint nicht gültig zu sein. Bitte wende dich an die verantwortliche Person, um einen gültigen Link zu erhalten!"
+msgstr "Das Einladungs-Token, das du benutzt hast, scheint nicht zu existieren. Bitte wende dich an die verantwortliche Person, um einen gültigen Link zu erhalten!"
 
 msgid "Sorry, but the invite token you have used is not active yet or not active anymore!"
 msgstr "Tut uns leid, aber das Einladungs-Token, das du benutzt hast, ist noch nicht oder nicht mehr gültig!"
