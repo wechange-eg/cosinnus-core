@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-18 19:05+0200\n"
+"POT-Creation-Date: 2023-04-21 17:42+0200\n"
 "PO-Revision-Date: 2023-04-18 18:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -818,6 +818,14 @@ msgstr "Название"
 msgid "The selected choice was not found or invalid! Please choose a different value!"
 msgstr "Выбранный вариант не найден или недействителен! Выберите другое значение!"
 
+#, fuzzy
+#| msgid "Set your password"
+msgid "Your password"
+msgstr "Переустановить пароль"
+
+msgid "Your password was entered incorrectly. Please enter it again."
+msgstr ""
+
 msgid "Limit to teams"
 msgstr "Только для проектов"
 
@@ -854,6 +862,16 @@ msgstr "Скорее всего, в Вашем браузере выключен
 
 msgid "This account is inactive."
 msgstr "Неактивный аккаунт."
+
+msgid "This email is already currently associated with your account!"
+msgstr ""
+
+msgid "This email is blacklisted and cannot be used. You may have opted out of receiving any emails before. Please contact support to use this email address."
+msgstr ""
+
+#, fuzzy
+msgid "New email"
+msgstr "Адрес электронной почты"
 
 #, python-brace-format
 msgid "Some required columns are not present in the CSV: {missing_headers}!"
@@ -3809,6 +3827,16 @@ msgstr "Содержимое поля выше будет доступно в в
 msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
 msgstr "Если заполнено, перевод ниже будет показан в соответствии с локальными языковыми настройками пользователя. Они не отражаются в поиске."
 
+#, fuzzy
+#| msgid "You have just changed your email address at %(site_name)s."
+msgid "If you would like to change your email address, you can do it here:"
+msgstr "Вы только что изменили адрес электронной почты на %(site_name)s."
+
+#, fuzzy
+#| msgid "email address"
+msgid "Change email address"
+msgstr "адрес электронной почты"
+
 msgid "Date"
 msgstr "Дата"
 
@@ -6522,6 +6550,78 @@ msgstr "Удалить профиль"
 msgid "User overview"
 msgstr "Обзор пользователей"
 
+#, fuzzy
+#| msgid "Your email address"
+msgid "Change your email address"
+msgstr "Ваш адрес электронной почты"
+
+msgid "Step 1 of 2"
+msgstr ""
+
+msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
+msgstr "Изменения Вашего адреса электронной почты должны быть верифицированы посредством перехода по ссылке в письме, отправленном Вам на Ваш новый адрес."
+
+#, fuzzy
+#| msgid "Your email address"
+msgid "Enter new email address"
+msgstr "Ваш адрес электронной почты"
+
+#, fuzzy
+#| msgid "email address"
+msgid "New email address"
+msgstr "адрес электронной почты"
+
+msgid "This email address serves as login for your user account and notifications and newsletters are sent to this address."
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter old password"
+msgid "Enter your password"
+msgstr "Введите старый пароль"
+
+msgid "It seems you do not currently have an email change pending!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Success"
+msgid "Success!"
+msgstr "Успешно"
+
+#, fuzzy
+#| msgid "Your email address %(email)s was successfully confirmed!"
+msgid "Your email address was successfully changed to:"
+msgstr "Адрес Вашей электронной почты %(email)s успешно подтверждён! Добро пожаловать в сообщество!"
+
+msgid "Keep in mind that this email address is used to log in to your account from now on!"
+msgstr ""
+
+msgid "Confirm your new email address: Check your Inbox!"
+msgstr ""
+
+msgid "Step 2 of 2"
+msgstr ""
+
+msgid "We have just sent a validation email to:"
+msgstr ""
+
+msgid "Please check the inbox of your new address and click on the link in the validation email."
+msgstr ""
+
+msgid "Keep in mind that the email might have been filtered by your email provider or marked as spam, so please also check your spam folder if you do not see the email."
+msgstr ""
+
+msgid "Troubleshooting"
+msgstr ""
+
+msgid "If you do not want to change your email address after all, you can simply close this page. Your old email address will be kept as your active one."
+msgstr ""
+
+msgid "If you have made a mistake and wish to change your new email address, you can go back and change it again:"
+msgstr ""
+
+msgid "If the validation email does not arrive, please check your spam folder and re-check the spelling of your email address. If everything seems ok but you still have not received an email from us, please repeat the email change again to receive a new validation email:"
+msgstr ""
+
 msgid "Direct Contact"
 msgstr "Прямой контакт"
 
@@ -6614,9 +6714,6 @@ msgstr "Основные данные"
 
 msgid "E-Mail"
 msgstr "Электронная почта"
-
-msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
-msgstr "Изменения Вашего адреса электронной почты должны быть верифицированы посредством перехода по ссылке в письме, отправленном Вам на Ваш новый адрес."
 
 msgid "Profile avatar"
 msgstr "Аватар"
@@ -6802,6 +6899,9 @@ msgstr "Также можно ввести секретный ключи неп�
 
 msgid "Now, enter the token generated by the app:"
 msgstr "Теперь введите токен, сгенерированный приложением:"
+
+msgid "The generated 6-digit code (for example: 123456)"
+msgstr ""
 
 msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
 msgstr "Мы зарегистрировали ошибку в выбранном методе аутентификации. Пожалуйста, вернитесь назад и удостоверьтесь, что введенная информация корректна. Попробуйте снова или же используйте иной метод аутентификации. Если проблема сохраняется, свяжитесь с администрацией."
@@ -7762,6 +7862,11 @@ msgstr "Пользователь %(username)s успешно приглашен!
 msgid "You do not have any backup tokens set up. Please log in using your OTP tokens."
 msgstr "Вы еще не сгенерировали резервные токены. Войдите, используя одноразовый пароль."
 
+#, fuzzy
+#| msgid "However we strongly discourage you to do so, you can also disable two-factor authentication for your account."
+msgid "You have successfully disabled two-factor authentication for your account."
+msgstr "Отключение двухфакторной аутентификации настоятельно не рекомендуется, однако при желании вы можете отключить ее для своего аккаунта."
+
 msgid "Invalid guest token."
 msgstr "Недействительный гостевой токен."
 
@@ -8077,9 +8182,6 @@ msgstr "Ваш профиль отредактирован."
 
 msgid "Your user account is associated with an integrated Portal. This account's email address is fixed and therefore was left unchanged."
 msgstr "Ваша учётная запись была создана в интегрированном портале. Поэтому адрес электронной почты учётной записи остаётся неизменным и Ваши изменения не были учтены."
-
-msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
-msgstr "Вы изменили адрес электронной почты. Мы вышлем Вам на этот адрес письмо, содержащее ссылку на подтверждение адреса. До тех пор, пока Вы не нажмёте на ссылку, в Вашем профиле будет сохранён старый адрес электронной почты!"
 
 msgid "Sorry, your profile could not be saved because there was an error while processing the avatar!"
 msgstr "К сожалению, Ваш профиль не был сохранен, так как произошла ошибка при обработке аватара!"
@@ -12940,6 +13042,9 @@ msgstr "Невозможно добавить список задач \"%(title)
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Вы не можете удалить эту папку, так как у Вас нет полномочий для удаления одного или более элементов, которые в ней содержатся!"
 
+#~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
+#~ msgstr "Вы изменили адрес электронной почты. Мы вышлем Вам на этот адрес письмо, содержащее ссылку на подтверждение адреса. До тех пор, пока Вы не нажмёте на ссылку, в Вашем профиле будет сохранён старый адрес электронной почты!"
+
 #~ msgid "Type of educational institution"
 #~ msgstr "Тип образовательной организации"
 
@@ -13520,10 +13625,6 @@ msgstr "Вы не можете удалить эту папку, так как �
 
 #~ msgid "Your privacy settings were saved. Welcome!"
 #~ msgstr "Ваши настройки приватности сохранены. Добро пожаловать!"
-
-#, fuzzy
-#~ msgid "email"
-#~ msgstr "Адрес электронной почты"
 
 #, fuzzy
 #~ msgid "has logged in"
