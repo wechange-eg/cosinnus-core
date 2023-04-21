@@ -1,0 +1,82 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block page_title %}
+    {% trans "Change your email address" %}
+{% endblock %}
+
+{% block breadcrumb %}
+        <li class="active"><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Your Profile" %}</a></li>
+        <li class="active">{% trans "Change your email address" %}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include 'cosinnus/user/leftnav.html' with view="edit_profile" %}
+    {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_4_profile" %}
+{% endblock leftnav %}
+
+
+{% block content %}
+
+    {% if form.errors %}
+        <div class="alert alert-danger alert-dismissable">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+            <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+        </div>
+    {% endif %}
+    
+    <form action="" method="post" enctype="multipart/form-data" class="cosinnus-form form-horizontal" role="form">
+        {% csrf_token %}
+    
+        <!-- a box with semi transparent background -->
+        <div class="content-box">
+	        {{ form.non_field_errors }}
+	        
+	        <h2>
+	            {% trans "Change your email address" %}
+	            ({% trans "Step 1 of 2" %})
+	        </h2>
+	        
+	        <p class="textfield transparent">
+	            <i class="fa fa-info-circle"></i>
+	            {% trans "Changes to your email address need to be verified by clicking a link in an email we send to the new address." %}
+	        </p>
+
+            {% block email %}
+                {# email Field #}
+				{% trans "Enter new email address" as email_label %}
+				{% trans "New email address" as  email_placeholder %}
+				{% captureas email_legend %}{% trans "This email address serves as login for your user account and notifications and newsletters are sent to this address." %}{% endcaptureas %}
+				{% include 'cosinnus/fields/default_field.html' with field=form.email label=email_label placeholder=email_placeholder legend=email_legend %}
+            {% endblock %}
+            
+            {% block password %}
+	            {# Regular Field #}
+	            {% trans "Enter your password" as password_label %}
+	            {% trans "We need to make sure it's really you" as password_legend %}
+	            {% trans "Your password" as password_placeholder %}
+	            {% include 'cosinnus/fields/default_field.html' with field=form.password legend=password_legend label=password_label placeholder=password_placeholder first=True %}
+            {% endblock %}
+	    </div>
+	    
+	    <button type="submit" class="btn btn-emphasized">
+	        <ul class="media-list">
+	            <li class="media">
+	                <span class="pull-left">
+	                    <i class="fa fa-check"></i>
+	                </span>
+	                <div class="media-body">
+                        {% trans "Continue" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+    
+    </form>
+    
+    <div class="clearfix"></div>
+    
+{% endblock %}
+
+
+
