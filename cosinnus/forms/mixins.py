@@ -49,7 +49,7 @@ class PasswordValidationFormMixin(forms.Form):
     password correctly.
     """
     password = forms.CharField(
-        label=_("Old password"),
+        label=_("Your password"),
         strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'autofocus': True}),
     )

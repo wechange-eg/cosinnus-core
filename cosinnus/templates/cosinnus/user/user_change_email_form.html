@@ -49,6 +49,14 @@
 				{% captureas email_legend %}{% trans "This email address serves as login for your user account and notifications and newsletters are sent to this address." %}{% endcaptureas %}
 				{% include 'cosinnus/fields/default_field.html' with field=form.email label=email_label placeholder=email_placeholder legend=email_legend %}
             {% endblock %}
+            
+            {% block password %}
+	            {# Regular Field #}
+	            {% trans "Enter your password" as password_label %}
+	            {% trans "We need to make sure it's really you" as password_legend %}
+	            {% trans "Your password" as password_placeholder %}
+	            {% include 'cosinnus/fields/default_field.html' with field=form.password legend=password_legend label=password_label placeholder=password_placeholder first=True %}
+            {% endblock %}
 	    </div>
 	    
 	    <button type="submit" class="btn btn-emphasized">

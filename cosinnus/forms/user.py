@@ -28,6 +28,7 @@ from osm_field.fields import OSMField, LatitudeField, LongitudeField
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField
 from cosinnus.utils.validators import validate_username
 from django.core.exceptions import ValidationError
+from cosinnus.forms.mixins import PasswordValidationFormMixin
 
 
 logger = logging.getLogger('cosinnus')
@@ -311,8 +312,9 @@ class UserChangeEmailForm(forms.Form):
         label=_("New email"),
     )
 
-    def __init__(self, user, *args, **kwargs):
-        self.user = user
+    def __init__(self, user=None, *args, **kwargs):
+        # support user kwarg already been set (by `PasswordValidationFormMixin` for example), or not
+        self.user = getattr(self, 'user', None) 
         super().__init__(*args, **kwargs)
 
     def clean_email(self):
@@ -335,4 +337,8 @@ class UserChangeEmailForm(forms.Form):
             )
         return email
 
+
+class UserChangeEmailFormWithPasswordValidation(PasswordValidationFormMixin, UserChangeEmailForm):
+    """ The user email change form, with added password validation logic """
+    pass
 

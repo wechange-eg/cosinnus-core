@@ -19,7 +19,8 @@ from django.views.generic.edit import FormView
 from cosinnus.core.decorators.views import staff_required, superuser_required,\
     redirect_to_not_logged_in, redirect_to_403
 from cosinnus.forms.user import UserCreationForm, UserChangeForm,\
-    TermsOfServiceFormFields, ValidatedPasswordChangeForm, UserChangeEmailForm
+    TermsOfServiceFormFields, ValidatedPasswordChangeForm, \
+    UserChangeEmailFormWithPasswordValidation
 from cosinnus.views.mixins.ajax import patch_body_json_data
 from cosinnus.utils.http import JSONResponse
 from django.contrib import messages
@@ -1167,7 +1168,7 @@ class UserSelect2View(Select2View):
 class UserChangeEmailView(RequireLoggedInMixin, FormView):
     """ A view that lets the user change their email and guides them through the validation """
     
-    form_class = UserChangeEmailForm
+    form_class = UserChangeEmailFormWithPasswordValidation
     template_name = 'cosinnus/user/user_change_email_form.html'
     
     def get_success_url(self):
