@@ -299,15 +299,12 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
             messages.warning(request, _('Your user account is associated with an integrated Portal. This account\'s email address is fixed and therefore was left unchanged.'))
             request.POST._mutable = True
             request.POST['user-email'] = user.email
-        elif not self.is_admin_elevated_view and request.POST.get('user-email', user.email) != user.email and CosinnusPortal.get_current().email_needs_verification:
-            email = request.POST['user-email'].strip().lower()
-            # email is supposed to be changed. if the email is a duplicate, let form validation (in clean_email) take its course
-            if not get_user_model().objects.filter(email__iexact=email).exclude(username=user.username).count():
-                # otherwise set flags for an email-change-verification mail to be sent if form submit is successful
-                self.target_email_to_confirm = request.POST['user-email']
-                self.user = user
-                request.POST._mutable = True
-                request.POST['user-email'] = user.email
+        elif not self.is_admin_elevated_view and request.POST.get('user-email', user.email) != user.email:
+            # do not accept any e-mail changes (from fudged forms) on this form for regular users,
+            # only for the admin elevated view!
+            request.POST._mutable = True
+            request.POST['user-email'] = user.email
+
         return super(UserProfileUpdateView, self).post(request, *args, **kwargs)
     
     def form_valid(self, form):
@@ -360,7 +357,21 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
                         field.disabled = True
                         field.required = False
         
+        # disable the email field for any normal views, 
+        # but keep it enabled for the elevated admin view
+        if not self.is_admin_elevated_view:
+            field = form.forms['user'].fields['email']
+            field.disabled = True
+            field.required = False
+            
         return form
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context.update({
+            'is_admin_elevated_view': self.is_admin_elevated_view,
+        })
+        return context
     
 
 update_view = UserProfileUpdateView.as_view()
