@@ -1,0 +1,85 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block page_title %}
+    {% trans "Change your email address" %}
+{% endblock %}
+
+{% block breadcrumb %}
+        <li class="active"><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Your Profile" %}</a></li>
+        <li class="active">{% trans "Change your email address" %}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include 'cosinnus/user/leftnav.html' with view="edit_profile" %}
+    {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_4_profile" %}
+{% endblock leftnav %}
+
+{% block content %}
+
+    {% if not pending_email and not request.GET.error and not request.GET.success %}
+        <div class="alert alert-danger alert-dismissable">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+            <p>
+                {% trans "It seems you do not currently have an email change pending!" %}
+            </p>
+        </div>
+        {% include 'cosinnus/fields/email_field_change_link_snippet.html' %}
+    {% elif request.GET.success %}
+        <!-- a box with semi transparent background -->
+        <div class="content-box">
+            <h2>
+                {% trans "Change your email address" %}: {% trans "Success!" %}
+            </h2>
+            
+            <p class="textfield transparent">
+                {% trans "Your email address was successfully changed to:" %}
+                <b>{{ request.user.email }}</b>
+            </p>
+            <p class="textfield transparent">
+                {% trans "Keep in mind that this email address is used to log in to your account from now on!" %}
+            </p>
+        </div>
+    {% elif not request.GET.error %}
+        <!-- a box with semi transparent background -->
+        <div class="content-box">
+            <h2>
+                {% trans "Confirm your new email address: Check your Inbox!" %}
+                ({% trans "Step 2 of 2" %})
+            </h2>
+            
+            <p class="textfield transparent">
+                {% trans "We have just sent a validation email to:" %}
+                <b>{{ pending_email }}</b>
+            </p>
+            <p class="textfield transparent">
+                {% trans "Please check the inbox of your new address and click on the link in the validation email." %}
+                <br/>
+                {% trans "Keep in mind that the email might have been filtered by your email provider or marked as spam, so please also check your spam folder if you do not see the email." %}
+            </p>
+            <hr/>
+            <h4>{% trans "Troubleshooting" %}</h4>
+            <p class="textfield transparent">
+                {% trans "If you do not want to change your email address after all, you can simply close this page. Your old email address will be kept as your active one." %}
+            </p>
+            <p class="textfield transparent">
+                {% trans "If you have made a mistake and wish to change your new email address, you can go back and change it again:" %}
+                <a href="{% url 'cosinnus:user-change-email' %}">
+			        {% trans "Change email address" %}
+			    </a>    
+            </p>
+            <p class="textfield transparent">
+                {% trans "If the validation email does not arrive, please check your spam folder and re-check the spelling of your email address. If everything seems ok but you still have not received an email from us, please repeat the email change again to receive a new validation email:" %}
+                <a href="{% url 'cosinnus:user-change-email' %}">
+                    {% trans "Change email address" %}
+                </a> 
+            </p>
+	    </div>
+    {% endif %}
+    
+    <div class="clearfix"></div>
+    
+{% endblock %}
+
+
+

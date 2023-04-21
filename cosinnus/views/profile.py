@@ -18,7 +18,7 @@ from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, UpdateView
 from django.views.generic.detail import SingleObjectMixin
-from django.views.generic.edit import DeleteView
+from django.views.generic.edit import DeleteView, FormView
 from oauth2_provider import models as oauth2_provider_models
 
 from cosinnus.core import signals
@@ -36,6 +36,7 @@ from cosinnus.utils.permissions import check_user_integrated_portal_member, \
 from cosinnus.utils.user import filter_active_users
 from cosinnus.views.mixins.avatar import AvatarFormMixin
 from cosinnus.views.user import send_user_email_to_verify
+from cosinnus.views.mixins.group import RequireLoggedInMixin
 
 
 logger = logging.getLogger('cosinnus')
@@ -294,7 +295,6 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
             set a new email-to-be-verified and send user a confirmation email. """
         self.object = self.get_object()
         user = self.object.user
-        self.target_email_to_confirm = None
         if request.POST.get('user-email', user.email) != user.email and check_user_integrated_portal_member(user):
             messages.warning(request, _('Your user account is associated with an integrated Portal. This account\'s email address is fixed and therefore was left unchanged.'))
             request.POST._mutable = True
@@ -310,13 +310,7 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
     def form_valid(self, form):
         try:
             ret = super(UserProfileUpdateView, self).form_valid(form)
-            
-            # send out email confirmation email
-            if getattr(self, 'target_email_to_confirm', None):
-                send_user_email_to_verify(self.user, self.target_email_to_confirm, self.request, user_has_just_registered=False)
-                messages.warning(self.request, _('You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!'))
-            else:
-                messages.success(self.request, self.message_success)
+            messages.success(self.request, self.message_success)
         except AttributeError as e:
             if str(e) == "'dict' object has no attribute '_committed'":
                 # here we couldn't save the avatar
@@ -429,7 +423,5 @@ class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, DeleteView)
         messages.success(self.request, self.message_success)
         
         return HttpResponseRedirect(self.get_success_url())
-
-
 
 delete_view = UserProfileDeleteView.as_view()

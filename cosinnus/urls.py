@@ -238,6 +238,8 @@ if settings.COSINNUS_USER_2_FACTOR_AUTH_ENABLED:
 if not is_integrated_portal() and not is_sso_portal():
     urlpatterns += [
         url(r'^profile/edit/$', profile.update_view, name='profile-edit'),
+        url(r'^profile/change_email/$', user.change_email_view, name='user-change-email'),
+        url(r'^profile/change_email/pending/$', user.change_email_pending_view, name='user-change-email-pending'),
         url(r'^signup/$', user.user_create, name='user-add'),
     ]
 

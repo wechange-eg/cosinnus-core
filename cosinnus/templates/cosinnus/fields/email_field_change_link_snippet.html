@@ -1,0 +1,8 @@
+{% load i18n cosinnus_tags %}
+
+<div class="textfield transparent">
+    {% trans "If you would like to change your email address, you can do it here:" %}
+    <div href="{% url 'cosinnus:user-change-email' %}" target="_blank" type="button" class="btn btn-emphasized btn-small btn-autosize regular-space">
+        {% trans "Change email address" %}
+    </div>                
+</div>
