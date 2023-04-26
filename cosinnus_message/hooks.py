@@ -91,37 +91,13 @@ if settings.COSINNUS_ROCKET_ENABLED:
             logger.exception(e)
 
     @receiver(pre_save, sender=CosinnusSociety)
-    def handle_cosinnus_society_updated(sender, instance, **kwargs):
-        try:
-            rocket = RocketChatConnection()
-            if instance.id and rocket.get_group_id(instance, create_if_not_exists=False):
-                old_instance = get_object_or_None(CosinnusSociety, pk=instance.id)
-                if old_instance and instance.slug != old_instance.slug:
-                    rocket.groups_rename(instance)
-            else:
-                rocket.groups_create(instance)
-        except Exception as e:
-            logger.exception(e)
-
     @receiver(pre_save, sender=CosinnusProject)
-    def handle_cosinnus_project_updated(sender, instance, **kwargs):
-        try:
-            rocket = RocketChatConnection()
-            if instance.id and rocket.get_group_id(instance, create_if_not_exists=False):
-                old_instance = get_object_or_None(CosinnusProject, pk=instance.id)
-                if old_instance and instance.slug != old_instance.slug:
-                    rocket.groups_rename(instance)
-            else:
-                rocket.groups_create(instance)
-        except Exception as e:
-            logger.exception(e)
-            
     @receiver(pre_save, sender=CosinnusConference)
-    def handle_cosinnus_conference_updated(sender, instance, **kwargs):
+    def handle_cosinnus_group_updated(sender, instance, **kwargs):
         try:
             rocket = RocketChatConnection()
             if instance.id and rocket.get_group_id(instance, create_if_not_exists=False):
-                old_instance = get_object_or_None(CosinnusConference, pk=instance.id)
+                old_instance = get_object_or_None(type(instance), pk=instance.id)
                 if old_instance and instance.slug != old_instance.slug:
                     rocket.groups_rename(instance)
             else:
@@ -130,29 +106,15 @@ if settings.COSINNUS_ROCKET_ENABLED:
             logger.exception(e)
 
     @receiver(post_delete, sender=CosinnusSociety)
-    def handle_cosinnus_society_deleted(sender, instance, **kwargs):
-        try:
-            rocket = RocketChatConnection()
-            rocket.groups_delete(instance)
-        except Exception as e:
-            logger.exception(e)
-            
     @receiver(post_delete, sender=CosinnusProject)
-    def handle_cosinnus_project_deleted(sender, instance, **kwargs):
+    @receiver(post_delete, sender=CosinnusConference)
+    def handle_cosinnus_group_deleted(sender, instance, **kwargs):
         try:
             rocket = RocketChatConnection()
             rocket.groups_delete(instance)
         except Exception as e:
             logger.exception(e)
             
-    @receiver(post_delete, sender=CosinnusConference)
-    def handle_cosinnus_conference_deleted(sender, instance, **kwargs):
-        try:
-            rocket = RocketChatConnection()
-            rocket.groups_delete(instance)
-        except Exception as e:
-            logger.exception(e)
-
     @receiver(signals.group_deactivated)
     def handle_cosinnus_group_deactivated(sender, group, **kwargs):
         """ Archive a group that gets deactivated """
