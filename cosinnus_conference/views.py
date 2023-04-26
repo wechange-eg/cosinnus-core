@@ -681,7 +681,15 @@ class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
             logger.error('Invalid value for recipients in ConferenceConfirmSendRemindersView:get_members() function', extra={'recipient_choice': recipient_choice})
             raise NoRecipientsDefinedException()
         recipient_choice = int(recipient_choice)
-
+        
+        # TODO: each of these needs to actually display the REAL amount of users
+        # who will get the email! so factoring in their email settings and if applicable their 'may_be_contacted' status
+        # ALSO: if a conference has acquired members normally and was THEN set to "application mode",
+        #     the members without application must not be filtered out as recipients for the mail just because they 
+        #     do not have an application. those would default to "yes" for 'may_be_contacted'!
+        # ALSO: explain to the user why some users may not receive an email (mail not validated, setting not activated,
+        #       consent not given!
+        
         # handle diverse cases in accordance with the `recipients_choices` choice field
         if recipient_choice == CHOICE_APPLICANTS_AND_MEMBERS:
             pending_application_qs = CosinnusConferenceApplication.objects.filter(conference=self.group).filter(may_be_contacted=True).pending_and_accepted()
@@ -732,11 +740,12 @@ class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
     def form_valid(self, form):
         if 'send' in form.data:
             members = self.get_members()
+            # TODO: this needs to happen in a thread!
             send_conference_reminder(self.group, recipients=members,
                                      field_name='send_immediately',
                                      update_setting=False)
             messages.success(self.request,
-                             _('The message was sent to the chosen participants.'))
+                             _('The message is now being sent to the chosen participants.'))
             form.save()
         return super().form_valid(form)
 
