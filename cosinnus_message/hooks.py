@@ -34,7 +34,6 @@ if settings.COSINNUS_ROCKET_ENABLED:
         # this handles the user update, it is not in post_save!
         if instance.id and hasattr(instance, 'cosinnus_profile'):
             try:
-                rocket = RocketChatConnection()
                 old_instance = get_user_model().objects.get(pk=instance.id)
                 force = any([getattr(instance, fname) != getattr(old_instance, fname) \
                                 for fname in ('password', 'first_name', 'last_name', 'email')])
@@ -42,6 +41,7 @@ if settings.COSINNUS_ROCKET_ENABLED:
                 # do a threaded call
                 class CosinnusRocketUpdateThread(Thread):
                     def run(self):
+                        rocket = RocketChatConnection()
                         rocket.users_update(instance, force_user_update=force, update_password=password_updated)
                 CosinnusRocketUpdateThread().start()
             except Exception as e:
@@ -155,27 +155,27 @@ if settings.COSINNUS_ROCKET_ENABLED:
     @receiver(pre_save, sender=CosinnusGroupMembership)
     def handle_membership_updated(sender, instance, **kwargs):
         try:
-            rocket = RocketChatConnection()
             is_pending = instance.status in (MEMBERSHIP_PENDING, MEMBERSHIP_INVITED_PENDING)
-            # do a threaded call
-            class CosinnusRocketMembershipUpdateThread(Thread):
-                def run(self):
-                    if instance.id:
-                        old_instance = CosinnusGroupMembership.objects.get(pk=instance.id)
-                        was_pending = old_instance.status in (MEMBERSHIP_PENDING, MEMBERSHIP_INVITED_PENDING)
-                        user_changed = instance.user_id != old_instance.user_id
-                        group_changed = instance.group_id != old_instance.group_id
-                        is_moderator_changed = instance.status != old_instance.status and \
-                                (instance.status == MEMBERSHIP_ADMIN or old_instance.status == MEMBERSHIP_ADMIN)
-            
+            if instance.id:
+                old_instance = CosinnusGroupMembership.objects.get(pk=instance.id)  # Could be None
+                was_pending = old_instance.status in (MEMBERSHIP_PENDING, MEMBERSHIP_INVITED_PENDING)
+                user_changed = instance.user_id != old_instance.user_id
+                group_changed = instance.group_id != old_instance.group_id
+                is_moderator_changed = instance.status != old_instance.status and \
+                                       (instance.status == MEMBERSHIP_ADMIN or old_instance.status == MEMBERSHIP_ADMIN)
+
+                # do a threaded call
+                class CosinnusRocketMembershipUpdateThread(Thread):
+                    def run(self):
+                        rocket = RocketChatConnection()
                         # Invalidate old membership
                         if (is_pending and not was_pending) or user_changed or group_changed:
                             rocket.groups_kick(old_instance)
-            
+
                         # Create new membership
                         if (was_pending and not is_pending) or user_changed or group_changed:
                             rocket.groups_invite(instance)
-            
+
                         # Update membership
                         if not is_pending and is_moderator_changed:
                             # Upgrade
@@ -184,23 +184,27 @@ if settings.COSINNUS_ROCKET_ENABLED:
                             # Downgrade
                             elif old_instance.status == MEMBERSHIP_ADMIN and not instance.status == MEMBERSHIP_ADMIN:
                                 rocket.groups_remove_moderator(instance)
-                    elif not is_pending:
+                CosinnusRocketMembershipUpdateThread().start()
+            elif not is_pending:
+                # do a threaded call
+                class CosinnusRocketMembershipCreateThread(Thread):
+                    def run(self):
+                        rocket = RocketChatConnection()
                         # Create new membership
                         rocket.groups_invite(instance)
                         if instance.status == MEMBERSHIP_ADMIN:
                             rocket.groups_add_moderator(instance)
-            CosinnusRocketMembershipUpdateThread().start()
-            
+                CosinnusRocketMembershipCreateThread().start()
         except Exception as e:
             logger.exception(e)
 
     @receiver(post_delete, sender=CosinnusGroupMembership)
     def handle_membership_deleted(sender, instance, **kwargs):
         try:
-            rocket = RocketChatConnection()
             # do a threaded call
             class CosinnusRocketMembershipDeletedThread(Thread):
                 def run(self):
+                    rocket = RocketChatConnection()
                     rocket.groups_kick(instance)
             CosinnusRocketMembershipDeletedThread().start()
         except Exception as e:
