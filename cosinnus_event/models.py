@@ -371,7 +371,7 @@ class Event(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, LikeableObje
     def get_message_text(self):
         """ Implementing `RelayMessageMixin` """
         text = self.get_period_with_time()
-        if self.media_tag.location:
+        if hasattr(self, 'media_tag') and self.media_tag and self.media_tag.location:
             text += f', {self.media_tag.location}'
         if self.note:
             text += f'\n{self.note}'
