@@ -456,36 +456,38 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
 
     def get_context_data(self, **kwargs):
         context = super(GroupDetailView, self).get_context_data(**kwargs)
+        admin_ids = self.membership_class.objects.get_admins(group=self.group)
+
         user_is_superuser = check_user_superuser(self.request.user)
-        
-        hide_members = self.group.is_mass_invite_group and not user_is_superuser
+        user_is_group_admin = self.request.user.id in admin_ids
+        hide_members = settings.COSINNUS_FORUM_HIDE_MEMBER_LIST_FOR_NON_ADMINS and \
+                       self.group.is_mass_invite_group and not user_is_superuser and not user_is_group_admin
         context.update({
             'hide_members': hide_members,
         })
-        
+
         if not hide_members:
-            admin_ids = self.membership_class.objects.get_admins(group=self.group)
             all_member_ids = self.membership_class.objects.get_members(group=self.group)
             pending_ids = self.membership_class.objects.get_pendings(group=self.group)
             invited_pending_ids = self.membership_class.objects.get_invited_pendings(group=self.group)
-            
+
             member_ids = [id for id in all_member_ids if not id in admin_ids]
-            
+
             # we DON'T filter for current portal here, as pending join requests can come from
             # users in other portals
             # we also exclude users who have never logged in
-            
+
             _q = get_user_model().objects.all()
             _q = _q.select_related('cosinnus_profile')
             if not user_is_superuser:
                 _q = filter_active_users(_q)
             _q = _q.order_by('first_name', 'last_name')
-            
+
             admins = _q.filter(id__in=admin_ids)
             members = _q.filter(id__in=member_ids)
             pendings = _q.filter(id__in=pending_ids)
             invited = _q.filter(id__in=invited_pending_ids)
-            
+
             hidden_member_count = 0
             if user_is_superuser:
                 user_count = filter_active_users(members).count()
@@ -496,8 +498,8 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             if user_is_superuser:
                 inactive_member_count = members.count() - user_count
             is_member_of_this_group = self.request.user.pk in admin_ids or self.request.user.pk in member_ids or \
-                     check_user_superuser(self.request.user)
-                     
+                                      check_user_superuser(self.request.user)
+
             # for public groups if user not a member of the group, show only public users in widget
             if not self.request.user.is_authenticated:
                 visibility_level = BaseTagObject.VISIBILITY_ALL
@@ -505,7 +507,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
                 visibility_level = BaseTagObject.VISIBILITY_GROUP
             else:
                 visibility_level = -1
-            
+
             if visibility_level != -1:
                 # admins are always visible in this view, because a they should be contactable
                 members = members.filter(cosinnus_profile__media_tag__visibility__gte=visibility_level)
@@ -515,10 +517,10 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
                 # and the template iterates only over members to display people
                 # members = list(set(chain(members, admins)))
                 hidden_member_count = user_count - members.count()
-            
+
             # add admins to user count now, because they are shown even if hidden visibility
             user_count += admins.count()
-            
+
             # cut off members list to not let the page explode for groups with tons of members
             if not self.request.GET.get('show', '') == 'all':
                 more_user_count = members.count()
@@ -531,14 +533,14 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             # always include current user in list if member, and at top
             if self.request.user.is_authenticated and check_ug_membership(self.request.user, self.group):
                 members = [self.request.user] + [member for member in members if member != self.request.user]
-            
+
             # collect recruited users
             user = self.request.user
             recruited = self.invite_class.objects.filter(group=self.group)
             if not (check_user_superuser(user) or check_ug_admin(user, self.group)):
                 # only admins or group admins may see email adresses they haven't invited themselves
                 recruited = recruited.filter(invited_by=user)
-                
+
             # attach invitation/request date from Membership to user objects
             membership_object_user_ids = [user.id for user in invited] + [user.id for user in pendings]
             membership_objects = self.membership_class.objects.filter(user_id__in=membership_object_user_ids, group=self.group)
@@ -549,17 +551,17 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
                 setattr(user, 'membership_status_date', dates_dict[user.id])
             invited = sorted(invited, key=lambda u: u.membership_status_date, reverse=True)
             pendings = sorted(pendings, key=lambda u: u.membership_status_date, reverse=True)
-    
+
             invited_groups = []
             if 'invited_groups' in self.group.settings:
                 group_ids = self.group.settings.get('invited_groups')
                 invited_groups = CosinnusGroup.objects.filter(id__in=group_ids)
-    
+
             invite_tokens = []
             if 'invite_token' in self.group.settings:
                 token = self.group.settings.get('invite_token')
                 invite_tokens = CosinnusGroupInviteToken.objects.filter(token=token)
-    
+
             context.update({
                 'admins': admins,
                 'members': members,
