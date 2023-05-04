@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import logging
+
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.db import transaction
@@ -91,6 +93,7 @@ class NotificationPreferenceView(ListView):
                 
                 # save rocketchat notification setting
                 if settings.COSINNUS_ROCKET_ENABLED:
+                    from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException
                     from cosinnus_message.utils.utils import save_rocketchat_mail_notification_preference_for_user_setting #noqa
                     if global_setting == GlobalUserNotificationSetting.SETTING_NEVER:
                         # on a global "never", we always set the rocketchat setting to "off"
@@ -99,7 +102,11 @@ class NotificationPreferenceView(ListView):
                         rocketchat_setting = int(request.POST.get('rocketchat_setting', '-1'))
                         if rocketchat_setting >= 0 and rocketchat_setting in (sett for sett, label in GlobalUserNotificationSetting.ROCKETCHAT_SETTING_CHOICES):
                             setting_obj.rocketchat_setting = rocketchat_setting
-                    success = save_rocketchat_mail_notification_preference_for_user_setting(request.user, setting_obj.rocketchat_setting)
+                    try:
+                        success = save_rocketchat_mail_notification_preference_for_user_setting(request.user, setting_obj.rocketchat_setting)
+                    except RocketChatDownException:
+                        logging.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+                        success = False
                     if not success:
                         messages.warning(request, _('Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!'))
                 setting_obj.save()
@@ -213,16 +220,21 @@ class NotificationPreferenceView(ListView):
         
         # get rocketchat email setting
         if settings.COSINNUS_ROCKET_ENABLED:
+            from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException
             from cosinnus_message.utils.utils import get_rocketchat_mail_notification_setting_from_user_preference #noqa
             rocketchat_setting_choices = GlobalUserNotificationSetting.ROCKETCHAT_SETTING_CHOICES
             rocketchat_setting_selected = GlobalUserNotificationSetting.objects.get_rocketchat_setting_for_user(self.request.user) 
             # refresh the setting from the rocketchat API, and if it differs, save it to our DB
-            external_setting = get_rocketchat_mail_notification_setting_from_user_preference(self.request.user)
-            if external_setting != rocketchat_setting_selected:
-                setting_obj = GlobalUserNotificationSetting.objects.get_object_for_user(self.request.user)
-                setting_obj.rocketchat_setting = external_setting
-                setting_obj.save(update_fields=['rocketchat_setting'])
-                rocketchat_setting_selected = external_setting
+            try:
+                external_setting = get_rocketchat_mail_notification_setting_from_user_preference(self.request.user)
+                if external_setting != rocketchat_setting_selected:
+                    setting_obj = GlobalUserNotificationSetting.objects.get_object_for_user(self.request.user)
+                    setting_obj.rocketchat_setting = external_setting
+                    setting_obj.save(update_fields=['rocketchat_setting'])
+                    rocketchat_setting_selected = external_setting
+            except RocketChatDownException:
+                logging.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+                messages.warning(self.request, RocketChatConnection.ROCKET_CHAT_DOWN_USER_MESSAGE)
             
         multi_notification_preferences = []
         for multi_notification_id, __ in MULTI_NOTIFICATION_IDS.items():

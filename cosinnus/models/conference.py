@@ -665,11 +665,15 @@ class CosinnusConferenceRoom(TranslateableFieldsModelMixin, BBBRoomMixin,
         if settings.COSINNUS_ROCKET_ENABLED and self.type in self.ROCKETCHAT_ROOM_TYPES \
                 and not settings.COSINNUS_CONFERENCES_USE_COMPACT_MODE:
             if not self.rocket_chat_room_id or force:
-                from cosinnus_message.rocket_chat import RocketChatConnection # noqa
-                rocket = RocketChatConnection()
-                room_name = f'{self.slug}-{self.group.slug}-{get_random_string(7)}'
-                internal_room_id = rocket.create_private_room(room_name, self.creator, 
-                      member_users=self.group.actual_members, additional_admin_users=self.group.actual_admins)
+                from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException # noqa
+                try:
+                    rocket = RocketChatConnection()
+                    room_name = f'{self.slug}-{self.group.slug}-{get_random_string(7)}'
+                    internal_room_id = rocket.create_private_room(room_name, self.creator,
+                          member_users=self.group.actual_members, additional_admin_users=self.group.actual_admins)
+                except RocketChatDownException:
+                    logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+                    internal_room_id = None
                 if internal_room_id:
                     self.rocket_chat_room_id = internal_room_id
                     self.rocket_chat_room_name = room_name

@@ -258,10 +258,10 @@ def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
                         if len(rocket_rooms) > 0:
 
                             from cosinnus_message.rocket_chat import RocketChatConnection
-                            rocket = RocketChatConnection()
-                            # add/remove member from each rocketchat room for each conference room
-                            for room in rocket_rooms:
-                                try:
+                            try:
+                                rocket = RocketChatConnection()
+                                # add/remove member from each rocketchat room for each conference room
+                                for room in rocket_rooms:
                                     room.sync_rocketchat_room()
                                     if not room.rocket_chat_room_id:
                                         logger.error('Wanted to sync a user membership to a conference room, but a rocketchat room for it could not be created!',
@@ -279,8 +279,8 @@ def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
                                         else:
                                             # Downgrade
                                             rocket.remove_moderator_from_room(user, room.rocket_chat_room_id)
-                                except Exception as e:
-                                    logger.exception(e)
+                            except Exception as e:
+                                logger.exception(e)
 
     MembershipUpdateHookThread().start()
 

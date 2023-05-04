@@ -855,17 +855,21 @@ class UserMatchObject(models.Model):
         """ Can be safely called with force=False without re-creating rooms """
         if settings.COSINNUS_ROCKET_ENABLED:
             if not self.rocket_chat_room_id or force:
-                from cosinnus_message.rocket_chat import RocketChatConnection # noqa
-                rocket = RocketChatConnection()
-                
+                from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException  # noqa
+
                 short_from_user = slugify(self.from_user.get_full_name()).replace('-', '')[:6]
                 short_to_user = slugify(self.to_user.get_full_name()).replace('-', '')[:6]
                 room_name = f'match-{short_from_user}-{short_to_user}-{get_random_string(4)}'
                 
                 room_topic = _('TODO: Youve matched!')
                 greeting_message = _('TODO: Matched chat room greeting message')
-                internal_room_id = rocket.create_private_room(room_name, self.from_user, 
-                      additional_admin_users=[self.to_user], room_topic=room_topic, greeting_message=greeting_message)
+                try:
+                    rocket = RocketChatConnection()
+                    internal_room_id = rocket.create_private_room(room_name, self.from_user,
+                          additional_admin_users=[self.to_user], room_topic=room_topic, greeting_message=greeting_message)
+                except RocketChatDownException:
+                    logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+                    internal_room_id = None
                 if internal_room_id:
                     self.rocket_chat_room_id = internal_room_id
                     self.rocket_chat_room_name = room_name
