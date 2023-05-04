@@ -2,6 +2,7 @@ import logging
 import mimetypes
 import os
 import re
+import requests
 import secrets
 
 from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject,\
@@ -88,7 +89,10 @@ def get_cached_rocket_connection(rocket_username, password, server_url, reset=Fa
 
     if rocket_connection is None:
         try:
-            rocket_connection = RocketChat(user=rocket_username, password=password, server_url=server_url, timeout=timeout)
+            session = requests.Session()
+            # Note: passing session to rocketchat connection makes the connection cachable.
+            rocket_connection = RocketChat(user=rocket_username, password=password, server_url=server_url,
+                timeout=timeout, session=session)
             cache.set(cache_key, rocket_connection, settings.COSINNUS_CHAT_CONNECTION_CACHE_TIMEOUT)
         except ConnectionError as e:
             # When a connection error occurred disable rocketchat connections for 5 minutes to avoid overloading our
