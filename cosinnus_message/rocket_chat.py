@@ -14,6 +14,7 @@ from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 from oauth2_provider.models import Application
 
+from requests.exceptions import ConnectionError
 from rocketchat_API.APIExceptions.RocketExceptions import RocketAuthenticationException,\
     RocketConnectionException
 from rocketchat_API.rocketchat import RocketChat as RocketChatAPI
@@ -34,6 +35,9 @@ logger = logging.getLogger(__name__)
 
 ROCKETCHAT_USER_CONNECTION_CACHE_KEY = 'cosinnus/core/portal/%d/rocketchat-user-connection/%s/'
 
+ROCKETCHAT_DOWN_CACHE_KEY = 'cosinnus/core/portal/%d/rocketchat-down/'
+ROCKETCHAT_DOWN_CACHE_TIMEOUT = 5 * 60  # 5 minutes
+
 ROCKETCHAT_MESSAGE_ID_SETTINGS_KEY = 'rocket_chat_message_id'
 
 ROCKETCHAT_PREFERENCE_EMAIL_NOTIFICATION_OFF = 'nothing'
@@ -45,9 +49,26 @@ ROCKETCHAT_PREFERENCES_EMAIL_NOTIFICATION = (
     ROCKETCHAT_PREFERENCE_EMAIL_NOTIFICATION_MENTIONS
 )
 
+
+def is_rocket_down():
+    """ Check in the cached value, if rocketchat is considered down. """
+    cache_key = ROCKETCHAT_DOWN_CACHE_KEY % (CosinnusPortal.get_current().id)
+    return cache.get(cache_key)
+
+
+def set_rocket_down():
+    """ Store in cache that rocketchat is considered down. """
+    cache_key = ROCKETCHAT_DOWN_CACHE_KEY % (CosinnusPortal.get_current().id)
+    cache.set(cache_key, True, ROCKETCHAT_DOWN_CACHE_TIMEOUT)
+
+
 def get_cached_rocket_connection(rocket_username, password, server_url, reset=False, timeout=30):
     """ Retrieves a cached rocketchat connection or creates a new one and caches it.
         @param reset: Resets the cached connection and connects a fresh one immediately """
+    if is_rocket_down():
+        # Rocketchat is considered down until the cache expires.
+        raise RocketChatDownException()
+
     cache_key = ROCKETCHAT_USER_CONNECTION_CACHE_KEY % (CosinnusPortal.get_current().id, rocket_username)
 
     if reset:
@@ -66,8 +87,15 @@ def get_cached_rocket_connection(rocket_username, password, server_url, reset=Fa
             rocket_connection = None
 
     if rocket_connection is None:
-        rocket_connection = RocketChat(user=rocket_username, password=password, server_url=server_url, timeout=timeout)
-        cache.set(cache_key, rocket_connection, settings.COSINNUS_CHAT_CONNECTION_CACHE_TIMEOUT)
+        try:
+            rocket_connection = RocketChat(user=rocket_username, password=password, server_url=server_url, timeout=timeout)
+            cache.set(cache_key, rocket_connection, settings.COSINNUS_CHAT_CONNECTION_CACHE_TIMEOUT)
+        except ConnectionError as e:
+            # When a connection error occurred disable rocketchat connections for 5 minutes to avoid overloading our
+            # webserver with pending requests.
+            set_rocket_down()
+            logger.exception(e)
+            raise RocketChatDownException()
     return rocket_connection
 
 
@@ -75,6 +103,11 @@ def delete_cached_rocket_connection(rocket_username):
     """ Deletes a cached rocketchat connection or creates a new one and caches it """
     cache_key = ROCKETCHAT_USER_CONNECTION_CACHE_KEY % (CosinnusPortal.get_current().id, rocket_username)
     cache.delete(cache_key)
+
+
+class RocketChatDownException(Exception):
+    """ Exception to indicate that rocketchat is considered down. """
+    pass
 
 
 class RocketChat(RocketChatAPI):
@@ -100,7 +133,15 @@ class RocketChatConnection:
 
     rocket = None
     stdout, stderr = None, None
-    
+
+    # Reusable user message when rocketchat is considered down
+    ROCKET_CHAT_DOWN_USER_MESSAGE = _('RocketChat integration is currently not working. Please try again later.')
+
+    # Reusable error message when rocketchat is considered down
+    ROCKET_CHAT_DOWN_ERROR = (
+        'RocketChatDownException: a user action was canceled because the rocketchat service is unreachable.'
+    )
+
     def __init__(self, user=settings.COSINNUS_CHAT_USER, password=settings.COSINNUS_CHAT_PASSWORD,
                  url=settings.COSINNUS_CHAT_BASE_URL, stdout=None, stderr=None):
         # get a cached version of the rocket connection
