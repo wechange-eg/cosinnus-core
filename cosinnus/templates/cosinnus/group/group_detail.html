@@ -321,6 +321,7 @@
                                                                 <a href="{% url 'cosinnus:profile-detail' username=member.username %}">
                                                                     {{ member|full_name }}
                                                                 </a>
+                                                                {% include 'cosinnus/user/member_list_name_snippet.html' with user=member %}
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -568,6 +569,7 @@
                                                                 <a href="{% url 'cosinnus:profile-detail' username=member.username %}">
                                                                     {{ member|full_name }}
                                                                 </a>
+                                                                {% include 'cosinnus/user/member_list_name_snippet.html' with user=member %}
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -677,11 +679,12 @@
                                                             {% endif %}
                                                         </span>
                                                     <a href="{% url 'cosinnus:profile-detail' username=member.username %}">
-                                                        {{ member|full_name }}
                                                         {% if not member_active %}
                                                             <i>({% trans "User account inactive" %})</i>
                                                         {% endif %}
+                                                        {{ member|full_name }}
                                                     </a>
+                                                    {% include 'cosinnus/user/member_list_name_snippet.html' with user=member %}
                                                 </div>
                                             </li>
                                         </ul>
