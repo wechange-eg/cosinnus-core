@@ -117,6 +117,16 @@ class CosinnusMessageDefaultSettings(AppConf):
         'Layout_Terms_of_Service': '<a href="https://wechange.de/cms/datenschutz/">Nutzungsbedingungen</a><br><a href="https://wechange.de/cms/datenschutz/">Datenschutz</a>',
         'Layout_Login_Terms': '',
         'Layout_Privacy_Policy': '<a href="https://wechange.de/cms/datenschutz/">Datenschutz</a>',
+
+        # Disable default block on home page
+        'theme-custom-css': '''
+            h2[data-qa-id="homepage-welcome-text"],
+            h2[data-qa-id="homepage-welcome-text"] + h3,
+            h2[data-qa-id="homepage-welcome-text"] + h3 + div.rcx-grid__wrapper  {
+                display: none;
+            }
+        ''',
+                            
         # 'UI_Group_Channels_By_Type': False,
         'UI_Use_Real_Name': True,
 
