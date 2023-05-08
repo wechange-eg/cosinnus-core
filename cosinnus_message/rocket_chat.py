@@ -148,8 +148,14 @@ class RocketChatConnection:
                 self.stdout.write('OK! ' + str(setting) + ': ' + str(value)) 
         
 
-    def settings_update(self):
+    def settings_update(self, only_settings=None):
+        """
+        Sync COSINNUS_CHAT_SETTINGS with rocketchat.
+        @param only_settings: If set only these settings are synced.
+        """
         for setting, value in settings.COSINNUS_CHAT_SETTINGS.items():
+            if only_settings and setting not in only_settings:
+                continue
             if type(value) in six.string_types:
                 value = value % settings.__dict__['_wrapped'].__dict__
             response = self.rocket.settings_update(setting, value).json()
