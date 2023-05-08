@@ -35,9 +35,7 @@ from cosinnus.templatetags.cosinnus_tags import full_name
 logger = logging.getLogger(__name__)
 
 ROCKETCHAT_USER_CONNECTION_CACHE_KEY = 'cosinnus/core/portal/%d/rocketchat-user-connection/%s/'
-
 ROCKETCHAT_DOWN_CACHE_KEY = 'cosinnus/core/portal/%d/rocketchat-down/'
-ROCKETCHAT_DOWN_CACHE_TIMEOUT = 5 * 60  # 5 minutes
 
 ROCKETCHAT_MESSAGE_ID_SETTINGS_KEY = 'rocket_chat_message_id'
 
@@ -60,7 +58,7 @@ def is_rocket_down():
 def set_rocket_down():
     """ Store in cache that rocketchat is considered down. """
     cache_key = ROCKETCHAT_DOWN_CACHE_KEY % (CosinnusPortal.get_current().id)
-    cache.set(cache_key, True, ROCKETCHAT_DOWN_CACHE_TIMEOUT)
+    cache.set(cache_key, True, settings.COSINNUS_CHAT_CONSIDER_DOWN_TIMEOUT)
 
 
 def get_cached_rocket_connection(rocket_username, password, server_url, reset=False, timeout=30):

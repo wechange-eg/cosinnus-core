@@ -39,6 +39,9 @@ class CosinnusMessageDefaultSettings(AppConf):
     # as some requests using user connections are blocking requests, they could clog up
     # the platform's connections if the rocket service is slow
     COSINNUS_CHAT_USER_CONNECTION_TIMEOUT = 5
+
+    # timeout to retry accessing rocketchat after a connection error occurred
+    COSINNUS_CHAT_CONSIDER_DOWN_TIMEOUT = 60 * 5  # 5 minutes
     
     # the keys for the CosinnusGroup.setting object to save the room's id in. 
     # will be prefixed as such: "{cosinnus.models.profile.PROFILE_SETTING_ROCKET_CHAT_ID}_{room_key}"
