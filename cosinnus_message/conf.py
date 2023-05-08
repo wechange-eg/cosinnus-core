@@ -94,7 +94,7 @@ class CosinnusMessageDefaultSettings(AppConf):
         'Accounts_TwoFactorAuthentication_By_Email_Enabled': False,
         'Email_Changed_Email_Subject': 'Your email address has been changed',
         'Email_Changed_Email': 'You have successfully changed your email address to [email]. If this change wasn\'t made by you or you think this was an error, please contact our support!',
-        'Email_Footer': '</td></tr></table></div></td></tr></table><!-- /BODY --></td></tr><tr style="margin: 0; padding: 0;"><td style="margin: 0; padding: 0;"><!-- FOOTER --><table class="wrap"><tr><td class="container"><!-- content --><div class="content"><table width="100%"><tr><td align="center"><h6>This email was sent to you from <a href="[Site_URL]">[Site_URL]</a></h6></td></tr></table></div><!-- /content --></td></tr></table><!-- /FOOTER --></td></tr></table></body></html>',
+        'Email_Footer': '</td></tr></table></div></td></tr></table><!-- /BODY --></td></tr><tr style="margin: 0; padding: 0;"><td style="margin: 0; padding: 0;"><!-- FOOTER --><table class="wrap"><tr><td class="container"><!-- content --><div class="content"><table width="100%%"><tr><td align="center"><h6>This email was sent to you from <a href="https://%(COSINNUS_PORTAL_URL)s">https://%(COSINNUS_PORTAL_URL)s</a></h6></td></tr></table></div><!-- /content --></td></tr></table><!-- /FOOTER --></td></tr></table></body></html>',
         'Accounts_Send_Email_When_Activating': False,
         'Accounts_Send_Email_When_Deactivating': False,
         'Accounts_Registration_AuthenticationServices_Enabled': False,
