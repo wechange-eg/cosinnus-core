@@ -1304,7 +1304,7 @@ class CosinnusConf(AppConf):
 
     # types of CosinnusBaseGroup which are allowed to use direct join tokens:
     # 0 for projects; 1 for groups; 2 for conferences
-    ENABLE_USER_JOIN_TOKENS_FOR_GROUP_TYPE = []
+    ENABLE_USER_JOIN_TOKENS_FOR_GROUP_TYPE = [2]
 
     # should the LIKE, BOOKMARK, FOLLOW buttons be shown on the entire portal (microsite, groups/projects, events, etc.)?
     SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS = True
