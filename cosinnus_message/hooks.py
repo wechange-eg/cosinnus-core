@@ -247,6 +247,9 @@ if settings.COSINNUS_ROCKET_ENABLED:
     @receiver(post_save, sender=Event)
     @receiver(post_save, sender=Note)
     def handle_relay_message_updated(sender, instance, created, **kwargs):
+        if instance.is_hidden_group_proxy:
+            # Don't relay conference proxy events.
+            return
         try:
             rocket = RocketChatConnection()
             if created:
@@ -259,6 +262,9 @@ if settings.COSINNUS_ROCKET_ENABLED:
     @receiver(post_delete, sender=Event)
     @receiver(post_delete, sender=Note)
     def handle_relay_message_deleted(sender, instance, **kwargs):
+        if instance.is_hidden_group_proxy:
+            # Conference proxy events are not relayed.
+            return
         rocket = RocketChatConnection()
         rocket.relay_message_delete(instance)
 
