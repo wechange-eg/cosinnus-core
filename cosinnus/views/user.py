@@ -423,6 +423,8 @@ class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):
                         save_rocketchat_mail_notification_preference_for_user_setting(self.request.user, self.notification_setting.rocketchat_setting)
                     except RocketChatDownException:
                         logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+                    except Exception as e:
+                        logger.exception(e)
                 self.notification_setting.save()
             # save visibility setting:
             visibility_setting = request.POST.get('visibility_setting', None)

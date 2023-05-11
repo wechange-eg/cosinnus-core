@@ -107,6 +107,9 @@ class NotificationPreferenceView(ListView):
                     except RocketChatDownException:
                         logging.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
                         success = False
+                    except Exception as e:
+                        logging.exception(e)
+                        success = False
                     if not success:
                         messages.warning(request, _('Your rocketchat setting could not be saved. If this error persists, please configure the setting in the rocketchat user preferences manually!'))
                 setting_obj.save()
@@ -235,7 +238,10 @@ class NotificationPreferenceView(ListView):
             except RocketChatDownException:
                 logging.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
                 messages.warning(self.request, RocketChatConnection.ROCKET_CHAT_DOWN_USER_MESSAGE)
-            
+            except Exception as e:
+                logging.exception(e)
+                messages.warning(self.request, RocketChatConnection.ROCKET_CHAT_EXCEPTION_USER_MESSAGE)
+
         multi_notification_preferences = []
         for multi_notification_id, __ in MULTI_NOTIFICATION_IDS.items():
             multi_notification_preferences.append({

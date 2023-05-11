@@ -196,6 +196,13 @@ def cosinnus_logout(request, **kwargs):
                     'service is available again.'
                 )
                 messages.warning(request, msg)
+            except Exception as e:
+                logging.exception(e)
+                msg = _(
+                    'A problem occurred when logging out from RocketChat. You might want to logout manually when the '
+                    'service is available again.'
+                )
+                messages.warning(request, msg)
     response = LogoutView.as_view(**kwargs)(request) # logout(request, **kwargs)
     if not request.user.is_authenticated:
         response.delete_cookie('wp_user_logged_in')

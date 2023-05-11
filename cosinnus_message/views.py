@@ -211,6 +211,10 @@ class RocketChatWriteGroupComposeView(FormView):
             logging.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
             messages.error(self.request, RocketChatConnection.ROCKET_CHAT_DOWN_USER_MESSAGE)
             return redirect(group_aware_reverse('cosinnus:group-detail', kwargs={'group': group.slug}))
+        except Exception as e:
+            logging.exception(e)
+            messages.error(self.request, RocketChatConnection.ROCKET_CHAT_EXCEPTION_USER_MESSAGE)
+            return redirect(group_aware_reverse('cosinnus:group-detail', kwargs={'group': group.slug}))
         return redirect(reverse('cosinnus:message-write-group', kwargs={'slug': group.slug}))
 
     def get_context_data(self, **kwargs):
@@ -260,6 +264,9 @@ class RocketChatWriteGroupView(BaseRocketChatView):
             except RocketChatDownException:
                 logging.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
                 messages.error(self.request, RocketChatConnection.ROCKET_CHAT_DOWN_USER_MESSAGE)
+            except Exception as e:
+                logging.exception(e)
+                messages.error(self.request, RocketChatConnection.ROCKET_CHAT_EXCEPTION_USER_MESSAGE)
         if group_name:
             return f'{self.base_url}/group/{group_name}/'
         return None

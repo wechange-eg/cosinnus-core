@@ -674,6 +674,9 @@ class CosinnusConferenceRoom(TranslateableFieldsModelMixin, BBBRoomMixin,
                 except RocketChatDownException:
                     logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
                     internal_room_id = None
+                except Exception as e:
+                    logger.exception(e)
+                    internal_room_id = None
                 if internal_room_id:
                     self.rocket_chat_room_id = internal_room_id
                     self.rocket_chat_room_name = room_name

@@ -142,6 +142,12 @@ class RocketChatConnection:
         'actions may not have had an effect. Please try again later. We apologize for the inconveniences!'
     )
 
+    # Reusable user message when an unexpected rocketchat exception occurred
+    ROCKET_CHAT_EXCEPTION_USER_MESSAGE = _(
+        'A technical error occurred in the RocketChat service. Some of your actions may not have had an effect. '
+        'We are working on resolving the issue. Please try again later. We apologize for the inconveniences!'
+    )
+
     # Reusable error message when rocketchat is considered down
     ROCKET_CHAT_DOWN_ERROR = (
         'RocketChatDownException: a user action was canceled because the rocketchat service is unreachable.'

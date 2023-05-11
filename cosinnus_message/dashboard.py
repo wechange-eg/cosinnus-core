@@ -40,6 +40,10 @@ class EmbeddedRocketchatDashboardWidget(DashboardWidget):
             logging.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
             rocketchat_room_embed_url = None
             rocketchat_down_msg = RocketChatConnection.ROCKET_CHAT_DOWN_USER_MESSAGE
+        except Exception as e:
+            logging.exception(e)
+            rocketchat_room_embed_url = None
+            rocketchat_down_msg = RocketChatConnection.ROCKET_CHAT_EXCEPTION_USER_MESSAGE
         data = {
             'rocketchat_room_embed_url': rocketchat_room_embed_url,
             'rocket_down_msg': rocketchat_down_msg,
