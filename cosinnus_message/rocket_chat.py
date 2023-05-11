@@ -137,7 +137,10 @@ class RocketChatConnection:
     stdout, stderr = None, None
 
     # Reusable user message when rocketchat is considered down
-    ROCKET_CHAT_DOWN_USER_MESSAGE = _('RocketChat integration is currently not working. Please try again later.')
+    ROCKET_CHAT_DOWN_USER_MESSAGE = _(
+        'We are currently experiencing some technical difficulties with the RocketChat service and some of your '
+        'actions may not have had an effect. Please try again later. We apologize for the inconveniences!'
+    )
 
     # Reusable error message when rocketchat is considered down
     ROCKET_CHAT_DOWN_ERROR = (
