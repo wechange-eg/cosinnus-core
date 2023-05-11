@@ -49,6 +49,25 @@ ROCKETCHAT_PREFERENCES_EMAIL_NOTIFICATION = (
 )
 
 
+# Global requests session used in all rocket chat connections
+rocket_chat_session = None
+
+
+def get_rocket_chat_session():
+    """Returns the global requests session and initializes it, if it does not exist."""
+    global rocket_chat_session
+    if not rocket_chat_session:
+        rocket_chat_session = requests.Session()
+    return rocket_chat_session
+
+
+def close_rocket_chat_session():
+    """Close the global rocket chat session. Closing the session resets its internal state."""
+    global rocket_chat_session
+    if rocket_chat_session:
+        rocket_chat_session.close()
+
+
 def is_rocket_down():
     """ Check in the cached value, if rocketchat is considered down. """
     cache_key = ROCKETCHAT_DOWN_CACHE_KEY % (CosinnusPortal.get_current().id)
@@ -87,7 +106,7 @@ def get_cached_rocket_connection(rocket_username, password, server_url, reset=Fa
 
     if rocket_connection is None:
         try:
-            session = requests.Session()
+            session = get_rocket_chat_session()
             # Note: passing session to rocketchat connection makes the connection cachable.
             rocket_connection = RocketChat(user=rocket_username, password=password, server_url=server_url,
                 timeout=timeout, session=session)
@@ -96,6 +115,7 @@ def get_cached_rocket_connection(rocket_username, password, server_url, reset=Fa
             # When a connection error occurred disable rocketchat connections for 5 minutes to avoid overloading our
             # webserver with pending requests.
             set_rocket_down()
+            close_rocket_chat_session()
             logger.exception(e)
             raise RocketChatDownException()
     return rocket_connection
