@@ -406,12 +406,15 @@ ul.appnavi-dropdown-menu {
 			display: inline-block;
 		}
 		.username-name {
-			min-width: 40%;
-			max-width: 40%;
+			min-width: 35%;
+			max-width: 35%;
 		}
 		.username-extra {
 			opacity: 0.75;
 			width: auto;
+			min-width: 50%;
+			max-width: 50%;
+			text-overflow: clip; /* ellipsis doesn't work for these width parameters */
 			&, span {
 				padding-left: 10px;
 			}
