@@ -60,6 +60,8 @@ class CosinnusMessageDefaultSettings(AppConf):
     
     # the introductory emote for news post relays by the bot
     COSINNUS_ROCKET_NEWS_BOT_EMOTE = ':loud_sound:'
+    # the introductory emote for event post relays by the bot
+    COSINNUS_ROCKET_NEWS_BOT_EMOTE_EVENT = ':date:'
     # the introductory explanation message for the users in a "Contact Group" room
     COSINNUS_ROCKET_GROUP_CONTACT_ROOM_INFO_MESSAGE = _('Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel.')
     
@@ -90,8 +92,9 @@ class CosinnusMessageDefaultSettings(AppConf):
         'Accounts_RegistrationForm': 'Disabled',
         'Accounts_RegistrationForm_LinkReplacementText': '',
         'Accounts_TwoFactorAuthentication_By_Email_Enabled': False,
-        'Email_Changed_Email_Subject': 'Your Registration has been received',
-        'Email_Changed_Email': 'Thank you for signing up. Your E-Mail validation link will arrive shortly.',
+        'Email_Changed_Email_Subject': 'Your email address has been changed',
+        'Email_Changed_Email': 'You have successfully changed your email address to [email]. If this change wasn\'t made by you or you think this was an error, please contact our support!',
+        'Email_Footer': '</td></tr></table></div></td></tr></table><!-- /BODY --></td></tr><tr style="margin: 0; padding: 0;"><td style="margin: 0; padding: 0;"><!-- FOOTER --><table class="wrap"><tr><td class="container"><!-- content --><div class="content"><table width="100%%"><tr><td align="center"><h6>This email was sent to you from <a href="https://%(COSINNUS_PORTAL_URL)s">https://%(COSINNUS_PORTAL_URL)s</a></h6></td></tr></table></div><!-- /content --></td></tr></table><!-- /FOOTER --></td></tr></table></body></html>',
         'Accounts_Send_Email_When_Activating': False,
         'Accounts_Send_Email_When_Deactivating': False,
         'Accounts_Registration_AuthenticationServices_Enabled': False,
@@ -99,6 +102,7 @@ class CosinnusMessageDefaultSettings(AppConf):
         'Accounts_TwoFactorAuthentication_Enabled': False,
 
         # Layout
+        'Layout_Home_Custom_Block_Visible': True,
         'Layout_Home_Body': '''<p>Willkommen beim %(COSINNUS_BASE_PAGE_TITLE_TRANS)s Rocket.Chat!</p>
 
         <p>Schreibt private Nachrichten im Browser, per Smartphone- oder Desktop-App in Echtzeit an andere, in Projekten und Gruppen oder in eigenen Kanälen.</p>
@@ -113,6 +117,16 @@ class CosinnusMessageDefaultSettings(AppConf):
         'Layout_Terms_of_Service': '<a href="https://wechange.de/cms/datenschutz/">Nutzungsbedingungen</a><br><a href="https://wechange.de/cms/datenschutz/">Datenschutz</a>',
         'Layout_Login_Terms': '',
         'Layout_Privacy_Policy': '<a href="https://wechange.de/cms/datenschutz/">Datenschutz</a>',
+
+        # Disable default block on home page
+        'theme-custom-css': '''
+            h2[data-qa-id="homepage-welcome-text"],
+            h2[data-qa-id="homepage-welcome-text"] + h3,
+            h2[data-qa-id="homepage-welcome-text"] + h3 + div.rcx-grid__wrapper  {
+                display: none;
+            }
+        ''',
+                            
         # 'UI_Group_Channels_By_Type': False,
         'UI_Use_Real_Name': True,
 
@@ -125,7 +139,16 @@ class CosinnusMessageDefaultSettings(AppConf):
         
         # User Surveys
         'NPS_survey_enabled': False,
-        
+
+        # Custom login script copying the Rocketchat session cookies to the top level domain. This makes the cookies
+        # available in the logout view and is used to log out the user from the Rocketchat session.
+        'Custom_Script_Logged_In': '''
+            const rcUid = document.cookie.split("; ").find((row) => row.startsWith("rc_uid="))?.split("=")[1];
+            const rcToken = document.cookie.split("; ").find((row) => row.startsWith("rc_token="))?.split("=")[1];
+            document.cookie = 'rc_session_uid=' + rcUid + ';domain=%(COSINNUS_CHAT_SESSION_COOKIE_DOMAIN)s;path=/';
+            document.cookie = 'rc_session_token=' + rcToken + ';domain=%(COSINNUS_CHAT_SESSION_COOKIE_DOMAIN)s;path=/';
+        ''',
+
         # TODO: this setting needs to be added, but under API url:
         #    https://chat.<server>/api/v1/method.call/authorization:removeRoleFromPermission
         # 'authorization:removeRoleFromPermission': ["add-user-to-joined-room","moderator"],

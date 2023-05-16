@@ -57,6 +57,7 @@
           {% comment %} We are using the jQuery attribute selector to hide the original form label since it is hardly removable from the source form. {% endcomment %}
           <script>
             $('label[for="id_generator-token"]').hide();
+            $('input#id_generator-token').attr('placeholder','{% trans "The generated 6-digit code (for example: 123456)" %}');
           </script>
         </div>
       </div>

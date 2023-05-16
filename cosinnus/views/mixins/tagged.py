@@ -521,4 +521,3 @@ class RecordLastVisitedMixin(object):
                 'was trying to log a LastVisit, but no `self.object` could be found!')
         if self.request.user.is_authenticated and getattr(self, 'object', None) is not None:
             self.object.mark_visited(self.request.user)
-    

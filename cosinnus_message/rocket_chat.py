@@ -29,13 +29,12 @@ import six
 from annoying.functions import get_object_or_None
 from cosinnus_message.utils.utils import save_rocketchat_mail_notification_preference_for_user_setting
 from cosinnus.templatetags.cosinnus_tags import full_name
-from django.template.defaultfilters import truncatewords
 
 logger = logging.getLogger(__name__)
 
 ROCKETCHAT_USER_CONNECTION_CACHE_KEY = 'cosinnus/core/portal/%d/rocketchat-user-connection/%s/'
 
-ROCKETCHAT_NOTE_ID_SETTINGS_KEY = 'rocket_chat_message_id'
+ROCKETCHAT_MESSAGE_ID_SETTINGS_KEY = 'rocket_chat_message_id'
 
 ROCKETCHAT_PREFERENCE_EMAIL_NOTIFICATION_OFF = 'nothing'
 ROCKETCHAT_PREFERENCE_EMAIL_NOTIFICATION_DEFAULT = 'default'
@@ -149,8 +148,14 @@ class RocketChatConnection:
                 self.stdout.write('OK! ' + str(setting) + ': ' + str(value)) 
         
 
-    def settings_update(self):
+    def settings_update(self, only_settings=None):
+        """
+        Sync COSINNUS_CHAT_SETTINGS with rocketchat.
+        @param only_settings: If set only these settings are synced.
+        """
         for setting, value in settings.COSINNUS_CHAT_SETTINGS.items():
+            if only_settings and setting not in only_settings:
+                continue
             if type(value) in six.string_types:
                 value = value % settings.__dict__['_wrapped'].__dict__
             response = self.rocket.settings_update(setting, value).json()
@@ -1086,56 +1091,59 @@ class RocketChatConnection:
         # Strike: ~~ to ~
         text = re.sub(r'~~', '~', text)
         return text
-    
-    def _format_note_message(self, note):
-        """ Formats a Note to a readable chat message """
-        url = note.get_absolute_url()
-        text = self.format_message(note.text)
+
+    def _truncate_formatted_message(self, text, word_count):
+        """ Truncate a message by words while keeping linebreaks """
+        words = list(re.finditer(r'\w+', text))
+        if len(words) <= word_count:
+            return text
+        last_word = words[word_count - 1]
+        truncated_text = f'{text[:last_word.end()]} …'
+        return truncated_text
+
+    def _format_relay_message(self, instance):
+        """ Creates a readable chat message for an instance implementing the RelayMessageMixin """
+        url = instance.get_absolute_url()
+        message_text = instance.get_message_text()
+        text = self.format_message(message_text)
         if settings.COSINNUS_ROCKET_NOTE_POST_RELAY_TRUNCATE_WORD_COUNT:
-            text = truncatewords(text, settings.COSINNUS_ROCKET_NOTE_POST_RELAY_TRUNCATE_WORD_COUNT)
-        author_name = full_name(note.creator)
-        note_title = note.title if not note.title == note.EMPTY_TITLE_PLACEHOLDER else ''
-        title = f'{settings.COSINNUS_ROCKET_NEWS_BOT_EMOTE} *{author_name}: {note_title}*\n' 
+            text = self._truncate_formatted_message(text, settings.COSINNUS_ROCKET_NOTE_POST_RELAY_TRUNCATE_WORD_COUNT)
+        emote = instance.get_message_emote()
+        author_name = full_name(instance.creator)
+        message_title = instance.get_message_title()
+        title = f'{emote} *{author_name}: {message_title}*\n'
         message = f'{title}{text}\n[{url}]({url})'
         return message
     
-    def notes_create(self, note):
-        """
-        Create message for new note in default channel of group/project
-        :param group:
-        :return:
-        """
+    def relay_message_create(self, instance):
+        """ Create message for new objects implementing the RelayMessageMixin in default channel of group/project """
         room_key = settings.COSINNUS_ROCKET_NOTE_POST_RELAY_ROOM_KEY
         if not room_key:
             return
-        room_id = self.get_group_id(note.group, room_key=room_key)
+        room_id = self.get_group_id(instance.group, room_key=room_key)
         if not room_id:
             return
-        message = self._format_note_message(note)
+        message = self._format_relay_message(instance)
         response = self.rocket.chat_post_message(text=message, room_id=room_id).json()
         if not response.get('success'):
             logger.error('RocketChat: notes_create did not return a success response', extra={'response': response})
         msg_id = response.get('message', {}).get('_id')
 
-        # Save Rocket.Chat message ID to note instance
-        note.settings[ROCKETCHAT_NOTE_ID_SETTINGS_KEY] = msg_id
+        # Save Rocket.Chat message ID to instance
+        instance.settings[ROCKETCHAT_MESSAGE_ID_SETTINGS_KEY] = msg_id
         # Update note settings without triggering signals to prevent cycles
-        type(note).objects.filter(pk=note.pk).update(settings=note.settings)
+        type(instance).objects.filter(pk=instance.pk).update(settings=instance.settings)
 
-    def notes_update(self, note):
-        """
-        Update message for note in default channel of group/project
-        :param group:
-        :return:
-        """
+    def relay_message_update(self, instance):
+        """ Update message for objects implementing the RelayMessageMixin in default channel of group/project """
         room_key = settings.COSINNUS_ROCKET_NOTE_POST_RELAY_ROOM_KEY
         if not room_key:
             return
-        room_id = self.get_group_id(note.group, room_key=room_key)
-        msg_id = note.settings.get(ROCKETCHAT_NOTE_ID_SETTINGS_KEY, None)
+        room_id = self.get_group_id(instance.group, room_key=room_key)
+        msg_id = instance.settings.get(ROCKETCHAT_MESSAGE_ID_SETTINGS_KEY, None)
         if not msg_id or not room_id:
             return
-        message = self._format_note_message(note)
+        message = self._format_relay_message(instance)
         response = self.rocket.chat_update(msg_id=msg_id, room_id=room_id, text=message).json()
         if not response.get('success'):
             if response.get('error', None) == 'The room id provided does not match where the message is from.':
@@ -1155,7 +1163,7 @@ class RocketChatConnection:
         if not room_key:
             return
         room_id = self.get_group_id(note.group, room_key=room_key)
-        msg_id = note.settings.get(ROCKETCHAT_NOTE_ID_SETTINGS_KEY)
+        msg_id = note.settings.get(ROCKETCHAT_MESSAGE_ID_SETTINGS_KEY)
         if not msg_id or not room_id:
             return
 
@@ -1182,17 +1190,13 @@ class RocketChatConnection:
         # Update note settings without triggering signals to prevent cycles
         # type(note).objects.filter(pk=note.pk).update(settings=note.settings)
 
-    def notes_delete(self, note):
-        """
-        Delete message for note in default channel of group/project
-        :param group:
-        :return:
-        """
+    def relay_message_delete(self, instance):
+        """ Delete message for objects implementing the RelayMessageMixin in default channel of group/project """
         room_key = settings.COSINNUS_ROCKET_NOTE_POST_RELAY_ROOM_KEY
         if not room_key:
             return
-        msg_id = note.settings.get(ROCKETCHAT_NOTE_ID_SETTINGS_KEY)
-        room_id = self.get_group_id(note.group, room_key=room_key)
+        msg_id = instance.settings.get(ROCKETCHAT_MESSAGE_ID_SETTINGS_KEY)
+        room_id = self.get_group_id(instance.group, room_key=room_key)
         if not msg_id or not room_id:
             return
         response = self.rocket.chat_delete(room_id=room_id, msg_id=msg_id).json()
@@ -1299,7 +1303,15 @@ class RocketChatConnection:
             logger.error('RocketChat: set_user_email_preference did not receive a success response: ' + response.get('errorType', '<No Error Type>'), extra={'response': response})
             return False
         return True
-        
+
+    def logout_user_session(self, user_id, user_token):
+        """ Logges out a user from an active session using the users user_id and auth_token """
+        user_session_connection = RocketChat(
+            user_id=user_id, auth_token=user_token, server_url=settings.COSINNUS_CHAT_BASE_URL,
+            timeout=settings.COSINNUS_CHAT_USER_CONNECTION_TIMEOUT
+        )
+        user_session_connection.logout()
+
     def _get_user_connection(self, user):
         """ Returns a user-specific rocketchat connection for the given user, 
             or None if this fails for any reason """

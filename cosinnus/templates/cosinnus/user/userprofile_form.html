@@ -44,8 +44,8 @@
             {{ form.forms.media_tag.non_field_errors }}
 
                 {% block title %}
-                {% trans "Basic data" as basic_label %}
-                {% include 'cosinnus/fields/default_field.html' with label=basic_label first=True %}
+	                {% trans "Basic data" as basic_label %}
+	                {% include 'cosinnus/fields/default_field.html' with label=basic_label first=True %}
                 {% endblock %}
 
                 {% block user_info %}
@@ -70,24 +70,25 @@
                 {% endblock user_info %}
 
                 {% block email %}
-                {# email Field #}
-				{% trans "E-Mail" as email_label %}
-				{% trans "E-Mail" as  email_placeholder %}
-				{% captureas email_legend %}{% if COSINNUS_CURRENT_PORTAL.email_needs_verification %}{% trans "Changes to your email address need to be verified by clicking a link in an email we send to the new address." %}{% endif %}{% endcaptureas %}
-				{% include 'cosinnus/fields/default_field.html' with field=form.forms.user.email label=email_label placeholder=email_placeholder legend=email_legend %}
+	                {# email Field #}
+					{% trans "E-Mail" as email_label %}
+					{% trans "E-Mail" as  email_placeholder %}
+					{% captureas email_legend %}{% trans "This email address serves as login for your user account and notifications and newsletters are sent to this address." %}{% endcaptureas %}
+					{% include 'cosinnus/fields/default_field.html' with field=form.forms.user.email label=email_label placeholder=email_placeholder legend=email_legend %}
+					{% include 'cosinnus/fields/email_field_change_link_snippet.html' %}
                 {% endblock %}
 
                 {% block avatar %}
-                {# Avatar Field #}
-				{% trans "Profile avatar" as avatar_label %}
-				{% captureas avatar_legend %}{% trans "A picture for better recognition." %} {% trans "File Size" %}: {% trans "max. 10 MB" %}{% endcaptureas %}
-				{% captureas preview_html %}
-				    {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.select_area_width}}px;height:{{SETTINGS.AWESOME_AVATAR.select_area_height}}px{% endcaptureas %}
-                    <div id="id_avatar-preview" class="awesome-avatar-preview" style="{{ preview_style }}">
-                        {% include "cosinnus/user/user_avatar_image.html" with user=object.user extra_style=preview_style image_size="large" %}
-                    </div>
-				{% endcaptureas %}
-				{% include 'cosinnus/fields/avatar_field.html' with avatar_field=form.forms.obj.avatar label=avatar_label legend=avatar_legend preview_html=preview_html %}
+	                {# Avatar Field #}
+					{% trans "Profile avatar" as avatar_label %}
+					{% captureas avatar_legend %}{% trans "A picture for better recognition." %} {% trans "File Size" %}: {% trans "max. 10 MB" %}{% endcaptureas %}
+					{% captureas preview_html %}
+					    {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.select_area_width}}px;height:{{SETTINGS.AWESOME_AVATAR.select_area_height}}px{% endcaptureas %}
+	                    <div id="id_avatar-preview" class="awesome-avatar-preview" style="{{ preview_style }}">
+	                        {% include "cosinnus/user/user_avatar_image.html" with user=object.user extra_style=preview_style image_size="large" %}
+	                    </div>
+					{% endcaptureas %}
+					{% include 'cosinnus/fields/avatar_field.html' with avatar_field=form.forms.obj.avatar label=avatar_label legend=avatar_legend preview_html=preview_html %}
                 {% endblock %}
 
                 {% block userprofile_about_fields %}
@@ -112,7 +113,7 @@
                {% endblock userprofile_about_fields %}
 
                {% block media_tags %}
-               {% include "cosinnus/media_tags_userprofile.html" %}
+                   {% include "cosinnus/media_tags_userprofile.html" %}
                {% endblock %}
 
 				{% if SETTINGS.COSINNUS_USER_SHOW_MAY_BE_CONTACTED_FIELD %}

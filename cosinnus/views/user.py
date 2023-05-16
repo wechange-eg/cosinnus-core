@@ -19,7 +19,8 @@ from django.views.generic.edit import FormView
 from cosinnus.core.decorators.views import staff_required, superuser_required,\
     redirect_to_not_logged_in, redirect_to_403
 from cosinnus.forms.user import UserCreationForm, UserChangeForm,\
-    TermsOfServiceFormFields, ValidatedPasswordChangeForm
+    TermsOfServiceFormFields, ValidatedPasswordChangeForm, \
+    UserChangeEmailFormWithPasswordValidation
 from cosinnus.views.mixins.ajax import patch_body_json_data
 from cosinnus.utils.http import JSONResponse
 from django.contrib import messages
@@ -675,19 +676,27 @@ def verifiy_user_email(request, email_verification_param):
         messages.error(request, _('The user account you were looking for does not exist! Your registration was probably already denied or the email token has expired.'))
         return redirect(redirect_url)
     
-    if request.user.is_authenticated and request.user.id != user.id:
-        messages.error(request, _('The email you are trying to verify belongs to a different user account than the one you are logged in with! Please log out before clicking the verification link again!'))
-        return redirect(redirect_url) 
-    
     profile = user.cosinnus_profile
+    user_was_verified_before = profile.email_verified
     target_email = profile.settings.get(PROFILE_SETTING_EMAIL_TO_VERIFY, None)
     target_token = profile.settings.get(PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN, None)
+    
+    if request.user.is_authenticated and request.user.id != user.id:
+        messages.error(request, _('The email you are trying to verify belongs to a different user account than the one you are logged in with! Please log out before clicking the verification link again!'))
+        if user_was_verified_before:
+            redirect_url = reverse('cosinnus:user-change-email-pending') + '?error=1'
+        return redirect(redirect_url) 
+    
     if not target_email or not target_token:
         messages.error(request, _('The email for this account seems to already have been confirmed!'))
+        if user_was_verified_before:
+            redirect_url = reverse('cosinnus:user-change-email-pending') + '?error=1'
         return redirect(redirect_url)    
     
     if not token == target_token:
         messages.error(request, _('The link you supplied for the email confirmation is no longer valid!'))
+        if user_was_verified_before:
+            redirect_url = reverse('cosinnus:user-change-email-pending') + '?error=1'
         return redirect(redirect_url)
     
     # check if target email doesn't already exist in another user instance:
@@ -696,7 +705,6 @@ def verifiy_user_email(request, email_verification_param):
         messages.error(request, _('The email you are trying to confirm has already been confirmed or belongs to another user!'))
         return redirect(redirect_url)
     
-    user_was_verified_before = profile.email_verified
     # everything seems to be in order, swap the old with the real email
     with transaction.atomic():
         user.email = target_email
@@ -708,7 +716,11 @@ def verifiy_user_email(request, email_verification_param):
     
     if user.is_active:
         messages.success(request, _('Your email address %(email)s was successfully confirmed!') % {'email': user.email})
-        if not user_was_verified_before:
+        if user_was_verified_before:
+            # after an email change, redirect the user to the success page for email changes
+            redirect_url = reverse('cosinnus:user-change-email-pending') + '?success=1'
+        else:
+            # else, welcome the user
             _send_user_welcome_email_if_enabled(user)
         if not request.user.is_authenticated and settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
             # log the user in for portals that require a verification first 
@@ -1151,6 +1163,51 @@ class UserSelect2View(Select2View):
 
         # Any error response, Has more results, options list
         return (NO_ERR_RESP, False, results)
+
+
+class UserChangeEmailView(RequireLoggedInMixin, FormView):
+    """ A view that lets the user change their email and guides them through the validation """
+    
+    form_class = UserChangeEmailFormWithPasswordValidation
+    template_name = 'cosinnus/user/user_change_email_form.html'
+    
+    def get_success_url(self):
+        return reverse('cosinnus:user-change-email-pending')
+    
+    def form_valid(self, form):
+        ret = super(UserChangeEmailView, self).form_valid(form)
+        new_email = form.cleaned_data.get('email')
+        # send out email-change-verification mail
+        send_user_email_to_verify(self.request.user, new_email, self.request, user_has_just_registered=False)
+        return ret
+    
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context.update({
+        })
+        return context
+
+change_email_view = UserChangeEmailView.as_view()
+
+
+class UserChangeEmailPendingView(RequireLoggedInMixin, TemplateView):
+    """ Pending and confirm pages for `UserChangeEmailView`. """
+    
+    template_name = 'cosinnus/user/user_change_email_pending.html'
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context.update({
+            'pending_email': self.request.user.cosinnus_profile.settings.get(PROFILE_SETTING_EMAIL_TO_VERIFY, None)
+        })
+        return context
+
+change_email_pending_view = UserChangeEmailPendingView.as_view()
 
 
 @receiver(userprofile_created)

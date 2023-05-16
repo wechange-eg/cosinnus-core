@@ -984,26 +984,25 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         if self.conference_theme_color:
             self.conference_theme_color = self.conference_theme_color.replace('#', '')
 
-        # generate invite token: 
+        super(CosinnusBaseGroup, self).save(*args, **kwargs)
+        
+        # generate/update invite token: 
         try: 
-            CosinnusGroupInviteToken.objects.get(token=self.settings.get('invite_token'))
-            if self.use_invite_token and self.settings.get('invite_token') != None:
-                if self.name != self._original_name:
-                    CosinnusGroupInviteToken.objects.filter(title__startswith=self._original_name).update(title=f"{self.name}")
-                if getattr(CosinnusGroupInviteToken, 'is_active', False):
-                    CosinnusGroupInviteToken.objects.filter(title__startswith=self.name).update(is_active=True)
-            elif not self.use_invite_token and self.settings.get('invite_token') and getattr(CosinnusGroupInviteToken, 'is_active', True):
-                CosinnusGroupInviteToken.objects.filter(title__startswith=self.name).update(is_active=False)
+            invite_token = CosinnusGroupInviteToken.objects.get(token=self.settings.get('invite_token'))
+            # if token exists and the token's state (active/inactive, name)
+            # is stale compared to the group settings, update it
+            if invite_token.title != self.name or invite_token.is_active != self.use_invite_token:
+                invite_token.title = self.name
+                invite_token.is_active = self.use_invite_token
+                invite_token.save()
         except CosinnusGroupInviteToken.DoesNotExist:
-            self.settings.update({'invite_token': None}) 
-            if self.pk and self.use_invite_token and self.settings.get('invite_token') == None:
-                random_string = get_random_string(8)
-                self.settings.update({'invite_token': random_string})
-                token = CosinnusGroupInviteToken.objects.create(token=random_string, title=f"{self.name}")
+            # create a new token
+            if self.pk and self.use_invite_token:
+                token_chars = self.settings.get('invite_token', get_random_string(8))
+                self.settings.update({'invite_token': token_chars})
+                token = CosinnusGroupInviteToken.objects.create(token=token_chars, title=self.name)
                 token.invite_groups.add(self)
                 token.save()
-
-        super(CosinnusBaseGroup, self).save(*args, **kwargs)
 
         # check if a redirect should be created AFTER SAVING!
         display_redirect_created_message = False
@@ -1422,6 +1421,16 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
     @property
     def is_forum_group(self):
         return self.slug == getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+    
+    @property
+    def is_events_group(self):
+        return self.slug == getattr(settings, 'NEWW_EVENTS_GROUP_SLUG', None)
+    
+    @property
+    def is_mass_invite_group(self):
+        """ Convenience function to determine if this is a group with very many users
+            such as the auto-invite or the forum groups """
+        return self.is_default_user_group or self.is_forum_group or self.is_events_group
     
     @property
     def is_publicly_visible(self):

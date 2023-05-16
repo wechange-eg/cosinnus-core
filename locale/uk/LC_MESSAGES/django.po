@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 15:14+0200\n"
+"POT-Creation-Date: 2023-04-21 17:42+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 2.0.6\n"
 
 msgid "Debug"
 msgstr ""
@@ -849,6 +849,14 @@ msgstr "Ім'я"
 msgid "The selected choice was not found or invalid! Please choose a different value!"
 msgstr "Зазначений вибір не знайдений або недійсний! Виберіть інше значення!"
 
+#, fuzzy
+#| msgid "Set your password"
+msgid "Your password"
+msgstr "Встановіть свій пароль"
+
+msgid "Your password was entered incorrectly. Please enter it again."
+msgstr ""
+
 msgid "Limit to teams"
 msgstr "Ліміт команд"
 
@@ -888,6 +896,16 @@ msgstr "Здається, у вашому веб-браузері не увім�
 msgid "This account is inactive."
 msgstr "Цей обліковий запис було деактивовано."
 
+msgid "This email is already currently associated with your account!"
+msgstr ""
+
+msgid "This email is blacklisted and cannot be used. You may have opted out of receiving any emails before. Please contact support to use this email address."
+msgstr ""
+
+#, fuzzy
+msgid "New email"
+msgstr "Адреса електронної скриньки"
+
 #, python-brace-format
 msgid "Some required columns are not present in the CSV: {missing_headers}!"
 msgstr "Деякі обов’язкові стовпці відсутні у файлі CSV: {missing_headers}!"
@@ -915,6 +933,9 @@ msgstr "Відписатися"
 
 msgid "My Dashboard"
 msgstr "Моя інформаційна панель"
+
+msgid "Wrong file format. Try .jpg, .jpeg, .png, or .gif instead."
+msgstr "Неправильний формат файлу. Підтримуються лише .jpg, .jpeg, .png або .gif."
 
 msgid "Tiny (50 x *)"
 msgstr "Мікро (50 x *)"
@@ -3897,6 +3918,15 @@ msgstr "За вмістом поля вище можна буде здійсню
 msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
 msgstr "Якщо вони є, переклади нижче будуть показані відповідно до налаштувань локальної мови користувачів. Можливість пошуку відсутня."
 
+#, fuzzy
+msgid "If you would like to change your email address, you can do it here:"
+msgstr "Будь ласка, підтвердіть свою адресу електронної пошти для %(site_name)s!"
+
+#, fuzzy
+#| msgid "email address"
+msgid "Change email address"
+msgstr "адреса електронної скриньки"
+
 msgid "Date"
 msgstr "Дата"
 
@@ -4019,6 +4049,9 @@ msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - Члени"
 
 msgid "Invite users directly via the following link: "
+msgstr ""
+
+msgid "Note: Detailed member lists for platform-wide content are not displayed."
 msgstr ""
 
 msgid "Membership requests"
@@ -6636,6 +6669,73 @@ msgid "User overview"
 msgstr "Огляд користувачів"
 
 #, fuzzy
+msgid "Change your email address"
+msgstr "адреса електронної скриньки"
+
+msgid "Step 1 of 2"
+msgstr ""
+
+msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
+msgstr ""
+
+#, fuzzy
+msgid "Enter new email address"
+msgstr "адреса електронної скриньки"
+
+#, fuzzy
+#| msgid "email address"
+msgid "New email address"
+msgstr "адреса електронної скриньки"
+
+msgid "This email address serves as login for your user account and notifications and newsletters are sent to this address."
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter old password"
+msgid "Enter your password"
+msgstr "Введіть старий пароль"
+
+msgid "It seems you do not currently have an email change pending!"
+msgstr ""
+
+msgid "Success!"
+msgstr ""
+
+#, fuzzy
+msgid "Your email address was successfully changed to:"
+msgstr "Ваша електронна адреса %(email)s була успішно підтверджена! Вітаємо в спільноті!"
+
+msgid "Keep in mind that this email address is used to log in to your account from now on!"
+msgstr ""
+
+msgid "Confirm your new email address: Check your Inbox!"
+msgstr ""
+
+msgid "Step 2 of 2"
+msgstr ""
+
+msgid "We have just sent a validation email to:"
+msgstr ""
+
+msgid "Please check the inbox of your new address and click on the link in the validation email."
+msgstr ""
+
+msgid "Keep in mind that the email might have been filtered by your email provider or marked as spam, so please also check your spam folder if you do not see the email."
+msgstr ""
+
+msgid "Troubleshooting"
+msgstr ""
+
+msgid "If you do not want to change your email address after all, you can simply close this page. Your old email address will be kept as your active one."
+msgstr ""
+
+msgid "If you have made a mistake and wish to change your new email address, you can go back and change it again:"
+msgstr ""
+
+msgid "If the validation email does not arrive, please check your spam folder and re-check the spelling of your email address. If everything seems ok but you still have not received an email from us, please repeat the email change again to receive a new validation email:"
+msgstr ""
+
+#, fuzzy
 #| msgid "Contact"
 msgid "Direct Contact"
 msgstr "Контакт"
@@ -6729,9 +6829,6 @@ msgstr "Основні дані"
 
 msgid "E-Mail"
 msgstr "Адреса електронної скриньки"
-
-msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
-msgstr ""
 
 msgid "Profile avatar"
 msgstr "Аватар профілю"
@@ -6932,6 +7029,9 @@ msgid "You may also enter the Secret Key code directly in your app"
 msgstr ""
 
 msgid "Now, enter the token generated by the app:"
+msgstr ""
+
+msgid "The generated 6-digit code (for example: 123456)"
 msgstr ""
 
 msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
@@ -7902,6 +8002,10 @@ msgid "You do not have any backup tokens set up. Please log in using your OTP to
 msgstr ""
 
 #, fuzzy
+msgid "You have successfully disabled two-factor authentication for your account."
+msgstr "Запрошення успішно видалено."
+
+#, fuzzy
 #| msgid "Invalid request."
 msgid "Invalid guest token."
 msgstr "Недійсний запит."
@@ -8226,9 +8330,6 @@ msgstr "Ваш профіль успішно відредаговано."
 msgid "Your user account is associated with an integrated Portal. This account's email address is fixed and therefore was left unchanged."
 msgstr "Ваш обліковий запис було пов’язано з інтегрованим порталом. Електронна адреса цього облікового запису є фіксованою, тому її залишено без змін."
 
-msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
-msgstr "Ви змінили свою електронну адресу. Незабаром ми надішлемо вам електронний лист на цю адресу з посиланням для підтвердження. Поки ви не натиснете на це посилання, Ваш профіль залишиться за старою електронною адресою!"
-
 msgid "Sorry, your profile could not be saved because there was an error while processing the avatar!"
 msgstr "Вибачте, не вдалося зберегти Ваш профіль. Під час обробки основного фото виникла помилка!"
 
@@ -8548,7 +8649,6 @@ msgid_plural "Successfully created  %(created_count)d accounts. "
 msgstr[0] "Профіль користувача успішно деактивований "
 msgstr[1] "Профіль користувача успішно деактивований "
 msgstr[2] "Профіль користувача успішно деактивований "
-msgstr[3] "Профіль користувача успішно деактивований "
 
 #, fuzzy
 #| msgid "Successfully deactivated user account"
@@ -8884,7 +8984,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your e
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інший(-а) прокоментували вашу подію %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували ваш захід %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували ваш захід у %(object_name)s"
-msgstr[3] ""
 
 #, python-format
 msgid "%(sender_name)s commented on your event"
@@ -8907,7 +9006,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the ev
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інший(-а) прокоментували подію %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували ваш захід у %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували ваш захід у %(object_name)s"
-msgstr[3] ""
 
 msgid "You were tagged in this event"
 msgstr "Вас позначили в цій події"
@@ -9037,7 +9135,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others voted in the event 
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інший(-а) проголосували в опитуванні події %(object_name)s "
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших проголосували в опитуванні %(object_name)s події"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших проголосували в опитуванні %(object_name)s події"
-msgstr[3] ""
 
 #, python-format
 msgid "%(sender_name)s voted in an event poll you are following"
@@ -9799,7 +9896,6 @@ msgid_plural "Going"
 msgstr[0] "Братиму участь"
 msgstr[1] "Будуть брати участь"
 msgstr[2] "Будуть брати участь"
-msgstr[3] ""
 
 msgctxt "one or many people are maybe going"
 msgid "Maybe going"
@@ -9807,7 +9903,6 @@ msgid_plural "Maybe going"
 msgstr[0] "Можливо братиму участь"
 msgstr[1] "Можливо братимуть участь"
 msgstr[2] "Можливо братимуть участь"
-msgstr[3] ""
 
 msgctxt "one or many people are not going"
 msgid "Can't go"
@@ -9815,7 +9910,6 @@ msgid_plural "Can't go"
 msgstr[0] "Не можу взяти участі"
 msgstr[1] "Не можуть взяти участь"
 msgstr[2] "Не можуть взяти участь"
-msgstr[3] ""
 
 msgid "Going"
 msgstr "Братиму участь"
@@ -10174,7 +10268,6 @@ msgid_plural "A problem occurred during export. The following files are missing:
 msgstr[0] "Під час експортування виникла проблема. Наступного файлу не існує: %(filename)s."
 msgstr[1] "Під час експортування виникла проблема. Наступних файлів не існує: %(filename)s."
 msgstr[2] "Під час експортування виникла проблема. Наступних файлів не існує: %(filename)s."
-msgstr[3] ""
 
 msgid "Invalid request."
 msgstr "Недійсний запит."
@@ -10208,7 +10301,6 @@ msgid_plural "%(count)d Files were added successfully."
 msgstr[0] "%(count)d файл було успішно додано."
 msgstr[1] "%(count)d файли було успішно додано."
 msgstr[2] "%(count)d файлів було успішно додано."
-msgstr[3] ""
 
 msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
 msgstr "Файл, який ви завантажили, був занадто великим або тип файлу заборонено завантажувати!"
@@ -10267,7 +10359,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your o
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інший(-а) прокоментували Вашу пропозицію %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували Ваше оголошення %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували Ваше оголошення %(object_name)s"
-msgstr[3] ""
 
 #, python-format
 msgid "%(sender_name)s commented on your offer"
@@ -10290,7 +10381,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the of
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інший(-а) прокоментували Вашу пропозицію %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували Ваше оголошення %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували Ваше оголошення %(object_name)s"
-msgstr[3] ""
 
 msgid "You were tagged in this offer"
 msgstr "Вас було позначено в цій пропозиції"
@@ -10828,7 +10918,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your n
 msgstr[0] "%(sender_name) s та %(count_minus_one)d інші прокоментували Вашу новину %(object_name) s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували вашу новину %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували вашу новину %(object_name)s"
-msgstr[3] ""
 
 #, python-format
 msgid "%(sender_name)s commented on your news post"
@@ -10851,7 +10940,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the ne
 msgstr[0] "%(sender_name)s та %(count_minus_one)d інші прокоментували новий допис %(object_name)s, який Ви також коментували"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували) новину %(object_name)s, яку ви також коментували"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували) новину %(object_name)s, яку ви також коментували"
-msgstr[3] ""
 
 #, python-format
 msgid "%(sender_name)s commented on a news post you commented in"
@@ -10918,7 +11006,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the ne
 msgstr[0] "%(sender_name)s та %(count_minus_one)d інші прокоментували новий допис %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували новину %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували новину %(object_name)s"
-msgstr[3] ""
 
 #, python-format
 msgid "%(sender_name)s commented on a news posts you are following"
@@ -11992,7 +12079,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your p
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інші прокоментували Ваше опитування %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували Ваше опитування %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували Ваше опитування %(object_name)s"
-msgstr[3] ""
 
 #, python-format
 msgid "%(sender_name)s commented on your poll"
@@ -12015,7 +12101,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the po
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інші прокоментували опитування %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували опитування %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували опитування %(object_name)s"
-msgstr[3] ""
 
 msgid "You were tagged in this poll"
 msgstr "Вас відмітили в цьому опитуванні"
@@ -12718,7 +12803,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your t
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інші прокоментували ваше завдання %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували ваше завдання %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували ваше завдання %(object_name)s"
-msgstr[3] ""
 
 #, python-format
 msgid "%(sender_name)s commented on your todo"
@@ -12741,7 +12825,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on the to
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інший(-а) прокоментували завдання %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментували завдання %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментували завдання %(object_name)s"
-msgstr[3] ""
 
 msgid "You were tagged in this todo"
 msgstr "Вас відмітили в цьому завданні"
@@ -12767,7 +12850,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others commented on your a
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інші прокоментувавали доручене Вам завдання %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших прокоментувавали доручене Вам завдання %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших прокоментувавали доручене Вам завдання %(object_name)s"
-msgstr[3] ""
 
 #, python-format
 msgid "%(sender_name)s commented on one of your assigned todos"
@@ -12790,7 +12872,6 @@ msgid_plural "%(sender_name)s and %(count_minus_one)d others updated the todo %(
 msgstr[0] "%(sender_name)s і %(count_minus_one)d інші) актуалізували завдання %(object_name)s"
 msgstr[1] "%(sender_name)s і %(count_minus_one)d інших актуалізували завдання %(object_name)s"
 msgstr[2] "%(sender_name)s і %(count_minus_one)d інших актуалізували завдання %(object_name)s"
-msgstr[3] ""
 
 msgid "You are following this todo"
 msgstr "Ви відстежуєте це завдання"
@@ -13295,6 +13376,9 @@ msgstr "Неможливо додати список завдань «%(title)s�
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Ви не можете видалити цю папку, оскільки у вас немає прав на видалення одного або декількох елементів, які вона містить!"
+
+#~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
+#~ msgstr "Ви змінили свою електронну адресу. Незабаром ми надішлемо вам електронний лист на цю адресу з посиланням для підтвердження. Поки ви не натиснете на це посилання, Ваш профіль залишиться за старою електронною адресою!"
 
 #, fuzzy
 #~| msgid "Search for Organizations"
@@ -13856,10 +13940,6 @@ msgstr "Ви не можете видалити цю папку, оскільк�
 
 #~ msgid "deactivate member"
 #~ msgstr "деактивувати учасника"
-
-#, fuzzy
-#~ msgid "email"
-#~ msgstr "Адреса електронної скриньки"
 
 #, fuzzy
 #~ msgid "has logged in"

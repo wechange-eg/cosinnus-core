@@ -20,12 +20,15 @@ from cosinnus.conf import settings
 from cosinnus.forms.dynamic_fields import _DynamicFieldsBaseFormMixin
 from cosinnus.forms.managed_tags import ManagedTagFormMixin
 from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal
-from cosinnus.models.profile import get_user_profile_model
+from cosinnus.models.profile import get_user_profile_model,\
+    GlobalBlacklistedEmail
 from cosinnus.models.tagged import BaseTagObject, get_tag_object_model
 from cosinnus.utils.user import accept_user_tos_for_portal
 from osm_field.fields import OSMField, LatitudeField, LongitudeField
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField
 from cosinnus.utils.validators import validate_username
+from django.core.exceptions import ValidationError
+from cosinnus.forms.mixins import PasswordValidationFormMixin
 
 
 logger = logging.getLogger('cosinnus')
@@ -294,3 +297,48 @@ class ValidatedPasswordChangeForm(PasswordChangeForm):
         validators = password_validation.get_default_password_validators()
         password_validation.validate_password(password2, self.user, password_validators=validators)
         return password2
+    
+
+class UserChangeEmailForm(forms.Form):
+    """
+    A form that lets the user change their email
+    """
+    error_messages = {
+        'email_already_taken': _('This email address already has a registered user!'),
+        'email_same': _('This email is already currently associated with your account!'),
+        'email_blacklisted': _('This email is blacklisted and cannot be used. You may have opted out of receiving any emails before. Please contact support to use this email address.'),
+    }
+    email = forms.EmailField(
+        label=_("New email"),
+    )
+
+    def __init__(self, user=None, *args, **kwargs):
+        # support user kwarg already been set (by `PasswordValidationFormMixin` for example), or not
+        self.user = getattr(self, 'user', None) 
+        super().__init__(*args, **kwargs)
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        email = email.strip().lower()
+        if email == self.user.email:
+            raise ValidationError(
+                self.error_messages['email_same'],
+                code='email_same',
+            )
+        if get_user_model().objects.filter(email__iexact=email).count():
+            raise ValidationError(
+                self.error_messages['email_already_taken'],
+                code='email_already_taken',
+            )
+        if GlobalBlacklistedEmail.is_email_blacklisted(email):
+            raise ValidationError(
+                self.error_messages['email_blacklisted'],
+                code='email_blacklisted',
+            )
+        return email
+
+
+class UserChangeEmailFormWithPasswordValidation(PasswordValidationFormMixin, UserChangeEmailForm):
+    """ The user email change form, with added password validation logic """
+    pass
+

@@ -1044,6 +1044,10 @@ class CosinnusConf(AppConf):
     
     # if set to True, will hide some UI elements in navbar and dashboard and change some redirects
     FORUM_DISABLED = False
+
+    # if set to True, only admins/superusers of a Forum group will be allowed to see the member list.
+    # all other users will see blocker message that the list is hidden
+    FORUM_HIDE_MEMBER_LIST_FOR_NON_ADMINS = True
     
     # if`InactiveLogoutMiddleware` is active, this is the time after which a user is logged out
     INACTIVE_LOGOUT_TIME_SECONDS = 60 * 60
@@ -1300,7 +1304,7 @@ class CosinnusConf(AppConf):
 
     # types of CosinnusBaseGroup which are allowed to use direct join tokens:
     # 0 for projects; 1 for groups; 2 for conferences
-    ENABLE_USER_JOIN_TOKENS_FOR_GROUP_TYPE = []
+    ENABLE_USER_JOIN_TOKENS_FOR_GROUP_TYPE = [2]
 
     # should the LIKE, BOOKMARK, FOLLOW buttons be shown on the entire portal (microsite, groups/projects, events, etc.)?
     SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS = True
