@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 15:14+0200\n"
+"POT-Creation-Date: 2023-04-21 17:42+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -844,6 +844,14 @@ msgstr "Όνομα"
 msgid "The selected choice was not found or invalid! Please choose a different value!"
 msgstr "Η επιλογή που έγινε δεν βρέθηκε ή δεν ήταν έγκυρη! Παρακαλούμε επιλέξτε μια διαφορετική τιμή!"
 
+#, fuzzy
+#| msgid "Set your password"
+msgid "Your password"
+msgstr "Ορίστε τον κωδικό πρόσβασής σας"
+
+msgid "Your password was entered incorrectly. Please enter it again."
+msgstr ""
+
 msgid "Limit to teams"
 msgstr "Όριο στις ομάδες"
 
@@ -883,6 +891,17 @@ msgstr "Το Πρόγραμμα περιήγησης δεν φαίνεται ν�
 msgid "This account is inactive."
 msgstr "Ο λογαριασμός είναι ανενεργός."
 
+msgid "This email is already currently associated with your account!"
+msgstr ""
+
+msgid "This email is blacklisted and cannot be used. You may have opted out of receiving any emails before. Please contact support to use this email address."
+msgstr ""
+
+#, fuzzy
+#| msgid "New item"
+msgid "New email"
+msgstr "Νέο στοιχείο"
+
 #, python-brace-format
 msgid "Some required columns are not present in the CSV: {missing_headers}!"
 msgstr "Ορισμένες απαραίτητες στήλες δεν υπάρχουν στο CSV: {missing_headers}!"
@@ -910,6 +929,9 @@ msgstr "Διαγραφή"
 
 msgid "My Dashboard"
 msgstr "Ο Πίνακάς Μου"
+
+msgid "Wrong file format. Try .jpg, .jpeg, .png, or .gif instead."
+msgstr ""
 
 msgid "Tiny (50 x *)"
 msgstr "Μικροσκοπικός (50 x *)"
@@ -3901,6 +3923,15 @@ msgstr ""
 msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
 msgstr ""
 
+#, fuzzy
+msgid "If you would like to change your email address, you can do it here:"
+msgstr "Παρακαλούμε επαληθεύστε τη διεύθυνση email για %(site_name)s!"
+
+#, fuzzy
+#| msgid "email address"
+msgid "Change email address"
+msgstr "διεύθυνση email"
+
 msgid "Date"
 msgstr "Ημερομηνία"
 
@@ -4022,6 +4053,9 @@ msgid "%(team_name)s - Members"
 msgstr "%(team_name)s - Μέλη"
 
 msgid "Invite users directly via the following link: "
+msgstr ""
+
+msgid "Note: Detailed member lists for platform-wide content are not displayed."
 msgstr ""
 
 msgid "Membership requests"
@@ -6647,6 +6681,73 @@ msgid "User overview"
 msgstr "Επισκόπηση χρήστη"
 
 #, fuzzy
+msgid "Change your email address"
+msgstr "διεύθυνση email"
+
+msgid "Step 1 of 2"
+msgstr ""
+
+msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
+msgstr ""
+
+#, fuzzy
+msgid "Enter new email address"
+msgstr "διεύθυνση email"
+
+#, fuzzy
+#| msgid "email address"
+msgid "New email address"
+msgstr "διεύθυνση email"
+
+msgid "This email address serves as login for your user account and notifications and newsletters are sent to this address."
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter old password"
+msgid "Enter your password"
+msgstr "Εισάγετε τον παλιό κωδικό πρόσβασης"
+
+msgid "It seems you do not currently have an email change pending!"
+msgstr ""
+
+msgid "Success!"
+msgstr ""
+
+#, fuzzy
+msgid "Your email address was successfully changed to:"
+msgstr "Η διεύθυνση email %(email)s επιβεβαιώθηκε με επιτυχία! Καλώς ήρθατε στην κοινότητα!"
+
+msgid "Keep in mind that this email address is used to log in to your account from now on!"
+msgstr ""
+
+msgid "Confirm your new email address: Check your Inbox!"
+msgstr ""
+
+msgid "Step 2 of 2"
+msgstr ""
+
+msgid "We have just sent a validation email to:"
+msgstr ""
+
+msgid "Please check the inbox of your new address and click on the link in the validation email."
+msgstr ""
+
+msgid "Keep in mind that the email might have been filtered by your email provider or marked as spam, so please also check your spam folder if you do not see the email."
+msgstr ""
+
+msgid "Troubleshooting"
+msgstr ""
+
+msgid "If you do not want to change your email address after all, you can simply close this page. Your old email address will be kept as your active one."
+msgstr ""
+
+msgid "If you have made a mistake and wish to change your new email address, you can go back and change it again:"
+msgstr ""
+
+msgid "If the validation email does not arrive, please check your spam folder and re-check the spelling of your email address. If everything seems ok but you still have not received an email from us, please repeat the email change again to receive a new validation email:"
+msgstr ""
+
+#, fuzzy
 #| msgid "Contact"
 msgid "Direct Contact"
 msgstr "Επικοινωνία"
@@ -6739,9 +6840,6 @@ msgstr "Βασικά δεδομένα"
 
 msgid "E-Mail"
 msgstr "E-Mail"
-
-msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
-msgstr ""
 
 msgid "Profile avatar"
 msgstr "Avatar του προφίλ"
@@ -6940,6 +7038,9 @@ msgid "You may also enter the Secret Key code directly in your app"
 msgstr ""
 
 msgid "Now, enter the token generated by the app:"
+msgstr ""
+
+msgid "The generated 6-digit code (for example: 123456)"
 msgstr ""
 
 msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
@@ -7906,6 +8007,10 @@ msgid "You do not have any backup tokens set up. Please log in using your OTP to
 msgstr ""
 
 #, fuzzy
+msgid "You have successfully disabled two-factor authentication for your account."
+msgstr "Η πρόσκληση διαγράφηκε με επιτυχία."
+
+#, fuzzy
 #| msgid "Invalid request."
 msgid "Invalid guest token."
 msgstr "Μη έγκυρο αίτημα."
@@ -8226,9 +8331,6 @@ msgstr "Το προφίλ σας υποβλήθηκε σε επεξεργασί�
 
 msgid "Your user account is associated with an integrated Portal. This account's email address is fixed and therefore was left unchanged."
 msgstr "Ο λογαριασμός χρήστη σας συνδέεται με μια ενσωματωμένη Πύλη. Η διεύθυνση email αυτού του λογαριασμού είναι σταθερή και επομένως δεν μεταβλήθηκε."
-
-msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
-msgstr "Έχετε αλλάξει την διεύθυνση email σας. Σύντομα θα σας στείλουμε ένα email σε αυτή την διεύθυνση με ένα σύνδεσμο επιβεβαίωσης. Μέχρι να κάνετε κλικ σε αυτό τον σύνδεσμο, το προφίλ θα κρατήσει την παλιά διεύθυνση email!"
 
 msgid "Sorry, your profile could not be saved because there was an error while processing the avatar!"
 msgstr "Λυπούμαστε, δεν ήταν δυνατή η αποθήκευση του προφίλ σας επειδή υπήρξε σφάλμα κατά την επεξεργασία του avatar!"
@@ -13262,6 +13364,9 @@ msgstr "Δεν ήταν δυνατή η προσθήκη της λίστας κ�
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Δεν μπορείτε να διαγράψετε αυτόν τον φάκελο διότι δεν έχετε άδεια να διαγράψετε ένα ή περισσότερα στοιχεία που περιέχει!"
+
+#~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
+#~ msgstr "Έχετε αλλάξει την διεύθυνση email σας. Σύντομα θα σας στείλουμε ένα email σε αυτή την διεύθυνση με ένα σύνδεσμο επιβεβαίωσης. Μέχρι να κάνετε κλικ σε αυτό τον σύνδεσμο, το προφίλ θα κρατήσει την παλιά διεύθυνση email!"
 
 #, fuzzy
 #~| msgid "Search for Organizations"

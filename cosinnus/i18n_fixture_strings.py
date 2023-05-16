@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 _('My Dashboard')
+_('Wrong file format. Try .jpg, .jpeg, .png, or .gif instead.')
 
 
 # use the following pattern to have the strings be included as JS translations:

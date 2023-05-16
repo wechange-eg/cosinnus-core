@@ -39,6 +39,7 @@ from cosinnus_event.fields import RTMPURLField
 from cosinnus_event.managers import EventQuerySet
 from cosinnus_event.mixins import BBBRoomMixin
 from cosinnus_event.utils.bbb_streaming import trigger_streamer_status_changes
+from cosinnus.models.mixins.tagged import RelayMessageMixin
 
 
 logger = logging.getLogger('cosinnus')
@@ -49,7 +50,7 @@ def get_event_image_filename(instance, filename):
 
 @six.python_2_unicode_compatible
 class Event(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, LikeableObjectMixin, 
-            BBBRoomMixin, BaseTaggableObjectModel):
+            BBBRoomMixin, RelayMessageMixin, BaseTaggableObjectModel):
 
     SORT_FIELDS_ALIASES = [
         ('title', 'title'),
@@ -358,7 +359,24 @@ class Event(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, LikeableObje
     def get_admin_change_url(self):
         """ Returns the django admin edit page for this object. """
         return reverse('admin:cosinnus_event_event_change', kwargs={'object_id': self.id})
-    
+
+    def get_message_emote(self):
+        """ Implementing `RelayMessageMixin` """
+        return settings.COSINNUS_ROCKET_NEWS_BOT_EMOTE_EVENT
+
+    def get_message_title(self):
+        """ Implementing `RelayMessageMixin` """
+        return self.title
+
+    def get_message_text(self):
+        """ Implementing `RelayMessageMixin` """
+        text = self.get_period_with_time()
+        if hasattr(self, 'media_tag') and self.media_tag and self.media_tag.location:
+            text += f', {self.media_tag.location}'
+        if self.note:
+            text += f'\n{self.note}'
+        return text
+
 
 @six.python_2_unicode_compatible
 class Suggestion(models.Model):

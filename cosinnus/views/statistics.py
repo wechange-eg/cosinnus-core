@@ -63,21 +63,21 @@ class SimpleStatisticsView(RequirePortalManagerMixin, FormView):
         
         
         statistics = {
-            '01. New Registered Users': created_users,
-            '02. Active Users': active_users,
-            '03. New Created Projects': created_projects,
-            '04. Active Projects': active_projects,
-            '05. New Created Groups': created_groups,
-            '06. Active Groups': active_groups,
-            '07. New Created Conferences': created_conferences,
-            '08. Active Conferences': active_conferences,
-            '09. Running (scheduled) Conferences': running_conferences,
+            '01. New Registered User Accounts in this period': created_users,
+            '02. Total Enabled User Accounts (at least 1x logged in)': active_users,
+            '03. Newly Created Projects in this period': created_projects,
+            '04. Total Enabled Projects': active_projects,
+            '05. Newly Created Groups in this period': created_groups,
+            '06. Total Enabled Groups': active_groups,
+            '07. Newly Created Conferences in this period': created_conferences,
+            '08. Total Enabled Conferences': active_conferences,
+            '09. Running (scheduled) Conferences in this period': running_conferences,
         }
         try:
             from cosinnus_event.models import Event
             created_event_count = Event.objects.filter(group__portal=CosinnusPortal.get_current(), created__gte=from_date, created__lte=to_date).count()
             statistics.update({
-                '10. Created Events': created_event_count,      
+                '10. Newly Created Events in this period': created_event_count,      
             })
         except:
             pass
@@ -86,7 +86,7 @@ class SimpleStatisticsView(RequirePortalManagerMixin, FormView):
             from cosinnus_note.models import Note
             created_note_count = Note.objects.filter(group__portal=CosinnusPortal.get_current(), created__gte=from_date, created__lte=to_date).count()
             statistics.update({
-                '11. Created News': created_note_count,      
+                '11. Newly Created News in this period': created_note_count,      
             })
         except:
             pass

@@ -201,12 +201,12 @@
             <h3>Showing data for Portal <b>{{ COSINNUS_CURRENT_PORTAL.name }}</b> from {{ form.from_date.value|date:"d.m.Y" }} to {{ form.to_date.value|date:"d.m.Y" }}</h3>
             <br/>
             
-            <div class="row">
-	            {% for key, val in statistics %}
-                   <div class="col-xs-4">{{ key }}</div>
-                   <div class="col-xs-8">{{ val }}</div>
-	            {% endfor %}
-            </div>
+            {% for key, val in statistics %}
+	            <div class="row regular-space">
+                   <div class="col-xs-8">{{ key }}</div>
+                   <div class="col-xs-4">{{ val }}</div>
+	            </div>
+            {% endfor %}
         </div>
     {% endif %}
     

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 15:14+0200\n"
+"POT-Creation-Date: 2023-04-21 17:42+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,8 +22,6 @@ msgstr "Information"
 msgid "Success"
 msgstr "Erfolgreich"
 
-#, fuzzy
-#| msgid "Warning!"
 msgid "Warning"
 msgstr "Achtung!"
 
@@ -814,6 +812,12 @@ msgstr "Name"
 msgid "The selected choice was not found or invalid! Please choose a different value!"
 msgstr "Die gewählte Auswahl wurde nicht gefunden oder ist ungültig! Bitte wähle einen anderen Wert!"
 
+msgid "Your password"
+msgstr "Dein Passwort"
+
+msgid "Your password was entered incorrectly. Please enter it again."
+msgstr "Dein Passwort wurde falsch eingegeben. Bitte gib es erneut ein."
+
 msgid "Limit to teams"
 msgstr "Auf Projekte beschränken"
 
@@ -851,6 +855,15 @@ msgstr "Anscheinend sind Cookies in deinem Browser deaktiviert. Diese werden zum
 msgid "This account is inactive."
 msgstr "Dieses Benutzerkonto ist deaktiviert worden."
 
+msgid "This email is already currently associated with your account!"
+msgstr "Diese E-Mail ist bereits mit einem anderen Benutzerkonto assoziiert!"
+
+msgid "This email is blacklisted and cannot be used. You may have opted out of receiving any emails before. Please contact support to use this email address."
+msgstr "Diese E-Mail Adresse ist in unserem System als Empfängeradresse gesperrt worden. Du hast eventuell bereits früher angeklickt, dass du an diese Adresse keine E-Mails gesendet bekommen möchtest. Bitte kontaktiere unseren Support, falls du diese E-Mail Adresse benutzen möchtest."
+
+msgid "New email"
+msgstr "Neue E-Mail Adresse"
+
 #, python-brace-format
 msgid "Some required columns are not present in the CSV: {missing_headers}!"
 msgstr "Einige erforderliche Spalten sind in der CSV nicht vorhanden: {missing_headers}!"
@@ -878,6 +891,9 @@ msgstr "Abbestellen"
 
 msgid "My Dashboard"
 msgstr "Mein Dashboard"
+
+msgid "Wrong file format. Try .jpg, .jpeg, .png, or .gif instead."
+msgstr "Falsches Dateiformat. Es werden nur .jpg, .jpeg, .png oder .gif unterstützt."
 
 msgid "Tiny (50 x *)"
 msgstr "Tiny (50 x *)"
@@ -3809,6 +3825,12 @@ msgstr "Der Inhalt des obigen Feldes wird im Rahmen der Plattform-Suche auffindb
 msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
 msgstr "Falls vorhanden, werden die unten angegebenen Übersetzungen entsprechend der lokalen Spracheinstellungen des Benutzers angezeigt. Sie sind nicht in der Suche auffindbar."
 
+msgid "If you would like to change your email address, you can do it here:"
+msgstr "Falls du deine E-Mail Adresse ändern möchtest, kannst du es hier tun:"
+
+msgid "Change email address"
+msgstr "E-Mail Adresse ändern"
+
 msgid "Date"
 msgstr "Datum"
 
@@ -3929,6 +3951,9 @@ msgstr "%(team_name)s - Mitglieder"
 
 msgid "Invite users directly via the following link: "
 msgstr "Lade die Benutzer*innen über diesen Link direkt ein: "
+
+msgid "Note: Detailed member lists for platform-wide content are not displayed."
+msgstr "Hinweis: Detaillierte Mitgliederlisten für plattformweite Inhalte werden nicht angezeigt."
 
 msgid "Membership requests"
 msgstr "Mitglieder-Anträge"
@@ -5889,10 +5914,8 @@ msgstr "Speicherbedarf Projekte"
 msgid "User statistics (min 1x logged in)"
 msgstr "Benutzerstatistiken (mind. 1x eingeloggt)"
 
-#, fuzzy
-#| msgid "User statistics (min 1x logged in)"
 msgid "User domains (min 1x logged in)"
-msgstr "Benutzerstatistiken (mind. 1x eingeloggt)"
+msgstr "Benutzer-Domains (mind. 1x eingeloggt)"
 
 msgid "BBB Room Visits"
 msgstr "BBB Raumbesuche"
@@ -6524,22 +6547,80 @@ msgstr "Profil löschen"
 msgid "User overview"
 msgstr "Benutzer_innen-Übersicht"
 
+msgid "Change your email address"
+msgstr "Deine E-Mail Adresse ändern"
+
+msgid "Step 1 of 2"
+msgstr "Schritt 1 von 2"
+
+msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
+msgstr "Die Änderung deiner E-Mail-Adresse muss erst mit dem Verifizierungslink, den wir an deine neue E-Mail-Adresse geschickt haben, verifiziert werden."
+
+msgid "Enter new email address"
+msgstr "Gib deine neue E-Mail-Adresse ein"
+
+msgid "New email address"
+msgstr "Neue E-Mail Adresse"
+
+msgid "This email address serves as login for your user account and notifications and newsletters are sent to this address."
+msgstr "Diese E-Mail Adresse wird zum Einloggen in deinen Benutzeraccount benutzt und sie wird als Empfangsadresse für deine Benachrichtigungs-E-Mails benutzt."
+
+msgid "Enter your password"
+msgstr "Gib dein Passwort ein"
+
+msgid "It seems you do not currently have an email change pending!"
+msgstr "Es scheint, als gibt es gerade keine E-Mail Adressenänderung, die bestätigt werden kann."
+
+msgid "Success!"
+msgstr "Erfolg!"
+
+msgid "Your email address was successfully changed to:"
+msgstr "Deine E-Mail Adresse wurde erfolgreich geändert:"
+
+msgid "Keep in mind that this email address is used to log in to your account from now on!"
+msgstr "Bitte beachte, dass diese E-Mail Adresse ab sofort zum Einloggen in dein Benutzerkonto benutzt wird!"
+
+msgid "Confirm your new email address: Check your Inbox!"
+msgstr "Bestätige deine neue E-Mail Adresse: Überprüfe deinen Posteingang!"
+
+msgid "Step 2 of 2"
+msgstr "Schritt 2 von 2"
+
+msgid "We have just sent a validation email to:"
+msgstr "Wir haben gerade eine Bestätigungsmail verschickt an:"
+
+msgid "Please check the inbox of your new address and click on the link in the validation email."
+msgstr "Bitte überprüfe den Posteingang deiner neuen E-Mail Adresse und klicke auf den Link in der Bestätigungsmail."
+
+msgid "Keep in mind that the email might have been filtered by your email provider or marked as spam, so please also check your spam folder if you do not see the email."
+msgstr "Beachte, dass die E-Mail von deinem E-Mail-Provider gefiltert oder als Spam markiert worden sein könnte, also bitte überpdfe auch deinen Spamordner, falls du die E-Mail nicht findest!"
+
+msgid "Troubleshooting"
+msgstr "Problemlösungen"
+
+msgid "If you do not want to change your email address after all, you can simply close this page. Your old email address will be kept as your active one."
+msgstr "Falls du deine E-Mail Adresse doch nicht ändern möchtest, schließe einfach diese Seite. Deine alte E-Mail Adresse bleibt dann aktuell."
+
+msgid "If you have made a mistake and wish to change your new email address, you can go back and change it again:"
+msgstr "Falls du einen Fehler gemacht hast und die E-Mail Adresse erneut ändern willst, gehe einfach zurück und ändere sie erneut."
+
+msgid "If the validation email does not arrive, please check your spam folder and re-check the spelling of your email address. If everything seems ok but you still have not received an email from us, please repeat the email change again to receive a new validation email:"
+msgstr "Falls die Bestätigungsmail nicht ankommt, überprüfe bitte deinen Spamordner und überprüfe die korrekte Schreibweise deiner E-Mail Adresse erneut. Wenn alles ok zu sein scheint, aber die E-Mail immer noch nicht angekommen ist, wiederhole bitte die E-Mail Adressenänderung um eine neue Bestätigungsmail zu erhalten."
+
 msgid "Direct Contact"
 msgstr "Direktkontakt"
 
 msgid "**User-Matching** is your tool for communicating and sharing experiences with like-minded people from all over the world. If you have much to discuss and your chosen person considers it the same, your dialogue will start automatically."
-msgstr ""
+msgstr "**Mitglieder-Matching** ist deine Möglichkeit, mit gleichgesinnten Menschen auf der ganzen Welt zu kommunizieren und Erfahrungen auszutauschen. Wenn du vieles zu diskutieren hast und deine gewählten Menschen von dir das gleiche denken, wird automatisch ein Dialog zum Austausch gestartet.."
 
-#, fuzzy
-#| msgid "Wonderful, we definetely have so much to discuss!"
 msgid "Wonderful, we definitely have so much to discuss!"
-msgstr "Wunderbar, wir haben auf jeden Fall so viel zu besprechen!"
+msgstr "Wunderbar, wir haben so viel zu besprechen!"
 
 msgid "Looks like we share no common interests"
 msgstr "Sieht so aus, als hätten wir keine gemeinsamen Interessen"
 
 msgid "Sorry, but currently, there are no more profiles to show you. Please come back later!"
-msgstr ""
+msgstr "Entschuldige, aber es gibt aktuell keine weiteren Profile, die wir dir anzeigen können. Bitte schau später noch einmal vorbei!"
 
 msgid "Members of your projects and groups only"
 msgstr "Nur Mitglieder deiner Projekte und Gruppen"
@@ -6618,9 +6699,6 @@ msgstr "Basisdaten"
 
 msgid "E-Mail"
 msgstr "E-Mail"
-
-msgid "Changes to your email address need to be verified by clicking a link in an email we send to the new address."
-msgstr "Die Änderung deiner E-Mail-Adresse muss erst mit dem Verifizierungslink, den wir an deine neue E-Mail-Adresse geschickt haben, verifiziert werden."
 
 msgid "Profile avatar"
 msgstr "Avatar"
@@ -6806,6 +6884,9 @@ msgstr "Du kannst den Geheimen Schlüssel auch direkt in deiner App eingeben"
 
 msgid "Now, enter the token generated by the app:"
 msgstr "Gib den von der App generierten Code ein:"
+
+msgid "The generated 6-digit code (for example: 123456)"
+msgstr "Der generierte 6-stellige Code (zum Beispiel: 123456)"
 
 msgid "We've encountered an issue with the selected authentication method. Please go back and verify that you entered your information correctly, try again, or use a different authentication method instead. If the issue persists, contact the site administrator."
 msgstr "Bei der Auswahl der Authentifizierungsmethode ist ein Problem aufgetreten. Gehe bitte zurück und überprüfe, ob die eingegebene Daten korrekt sind. Versuche dann bitte erneut oder benutze eine andere Authentifizierungsmethode. Wenn das Problem weiterhin besteht, kontaktiere die Portaladministratoren."
@@ -7769,6 +7850,9 @@ msgstr "Benutzerkonto wurde erfolgreich erstellt!"
 msgid "You do not have any backup tokens set up. Please log in using your OTP tokens."
 msgstr "Du hast noch keine Sicherungstoken erstellt. Logge die bitte anhand von deinen OTP Tokens ein."
 
+msgid "You have successfully disabled two-factor authentication for your account."
+msgstr "Du hast die Zwei-Faktor-Authentifizierung für dein Benutzerkonto deaktiviert."
+
 msgid "Invalid guest token."
 msgstr "Ungültiges Gast-Token."
 
@@ -8085,9 +8169,6 @@ msgstr "Dein Profil wurde erfolgreich bearbeitet."
 msgid "Your user account is associated with an integrated Portal. This account's email address is fixed and therefore was left unchanged."
 msgstr "Dein Benuterkonto wurde über ein integriertes Portal erstellt. Die E-Mail-Adresse dieses Kontos ist deshalb unveränderbar und deine Änderungen daran wurden nicht übernommen."
 
-msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
-msgstr "Du hast deine E-Mail-Adresse geändert. Wir schicken dir eine E-Mail an diese Adresse, die einen Bestätigungslink enthält. Bis du diesen Link klickst wird dein Profil weiter unter der alten E-Mail-Adresse geführt!"
-
 msgid "Sorry, your profile could not be saved because there was an error while processing the avatar!"
 msgstr "Entschuldigung, dein Profil konnte nicht gespeichert werden weil es einen Fehler beim Speichern des Avatars gab!"
 
@@ -8140,7 +8221,7 @@ msgid "Thank you for signing up and welcome to the platform! We sent an email to
 msgstr "Vielen Dank für deine Anmeldung und herzlich willkommen auf der Plattform! Wir haben an deine E-Mail-Adresse \"%(email)s\" eine E-Mail mit dem Verifizierungslink geschickt!"
 
 msgid "The invite token you have used does not exist. Please contact the responsible person to get a valid link!"
-msgstr "Das Einladungs-Token, das du benutzt hast, scheint nicht gültig zu sein. Bitte wende dich an die verantwortliche Person, um einen gültigen Link zu erhalten!"
+msgstr "Das Einladungs-Token, das du benutzt hast, scheint nicht zu existieren. Bitte wende dich an die verantwortliche Person, um einen gültigen Link zu erhalten!"
 
 msgid "Sorry, but the invite token you have used is not active yet or not active anymore!"
 msgstr "Tut uns leid, aber das Einladungs-Token, das du benutzt hast, ist noch nicht oder nicht mehr gültig!"
@@ -12936,6 +13017,9 @@ msgstr "Aufgabenliste „%(title)s“ konnte nicht hinzugefügt werden."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte hast eins oder mehrere der noch enthaltenen Objekte zu löschen!"
+
+#~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
+#~ msgstr "Du hast deine E-Mail-Adresse geändert. Wir schicken dir eine E-Mail an diese Adresse, die einen Bestätigungslink enthält. Bis du diesen Link klickst wird dein Profil weiter unter der alten E-Mail-Adresse geführt!"
 
 #~ msgid "Type of educational institution"
 #~ msgstr "Art der Bildungseinrichtung"

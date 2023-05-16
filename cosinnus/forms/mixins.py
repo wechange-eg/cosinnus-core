@@ -1,5 +1,7 @@
+from django import forms
 from django.conf import settings
-from django.forms import all_valid
+from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.utils.functions import resolve_class
 
@@ -25,7 +27,7 @@ class AdditionalFormsMixin(object):
     def is_valid(self):
         is_valid = super(AdditionalFormsMixin, self).is_valid()
         if len(self.extra_forms) > 0:
-            return is_valid and all_valid(self.extra_forms)
+            return is_valid and forms.all_valid(self.extra_forms)
         else:
             return is_valid
 
@@ -39,3 +41,31 @@ class AdditionalFormsMixin(object):
             self.instance.save()
             self.save_m2m()
         return self.instance
+    
+
+class PasswordValidationFormMixin(forms.Form):
+    """
+    A form mixin that improves security by only validating if the user enters their
+    password correctly.
+    """
+    password = forms.CharField(
+        label=_("Your password"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'autofocus': True}),
+    )
+    
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+
+    def clean_password(self):
+        """
+        Validate that the password field is correct.
+        """
+        password = self.cleaned_data["password"]
+        if not self.user.check_password(password):
+            raise ValidationError(
+                _("Your password was entered incorrectly. Please enter it again."),
+                code='password_incorrect',
+            )
+        return password
