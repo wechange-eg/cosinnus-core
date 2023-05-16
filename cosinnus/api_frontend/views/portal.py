@@ -150,6 +150,7 @@ class PortalManagedTagsView(APIView):
                             {
                                 "slug": "mtag1",
                                 "name": "A fully filled Mtag",
+                                "default": True,
                                 "type": {
                                     "id": 1,
                                     "name": "A type of tag",
@@ -165,6 +166,7 @@ class PortalManagedTagsView(APIView):
                             {
                                 "slug": "mtag2",
                                 "name": "Mtag two quite empty",
+                                "default": False,
                                 "type": None,
                                 "description": "",
                                 "image": None,
@@ -186,6 +188,7 @@ class PortalManagedTagsView(APIView):
             for mtag 
             in CosinnusManagedTag.objects.all_in_portal_cached()
         ]
+        managed_tag_data = sorted(managed_tag_data, key=lambda tag: tag['default'], reverse=True)
         data = {
             'enabled': settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF,
             'in_signup': settings.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM,
@@ -276,9 +279,10 @@ class PortalUserprofileDynamicFieldsView(APIView):
                 continue
             choices = field_options.choices
             if not choices:
-                if field_options.type == dynamic_fields.DYNAMIC_FIELD_TYPE_DYNAMIC_CHOICES:
+                if False and field_options.type == dynamic_fields.DYNAMIC_FIELD_TYPE_DYNAMIC_CHOICES:
                     # TODO: for dynamic fields with dynamic choices, an extra select2-style 
-                    # autocomplete endpoint must be created, if they are ever needed in the v3 API!
+                    # autocomplete endpoint should be created, both in the v3 API and in the formfields!
+                    # as this doesn't scale well for portals with large numbers of groups!
                     choices = '<dynamic-NYI>'
                 else:
                     formfield = EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS.get(field_options.type)().get_formfield(
@@ -286,6 +290,9 @@ class PortalUserprofileDynamicFieldsView(APIView):
                         field_options
                     )
                     choices = getattr(formfield, 'choices', None)
+                    # remove the empty choice from choices for multiple fields, as our frontend doesn't need it
+                    if choices and field_options.multiple == True:
+                        choices = [(k, v) for (k, v) in choices if k]
             field_data.append({
                 'name': field_name,
                 'in_signup': field_options.in_signup,
