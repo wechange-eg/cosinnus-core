@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.db.models import prefetch_related_objects
 from django.db.models.signals import pre_save, post_save, post_delete
 from django.dispatch import receiver
 from oauth2_provider.signals import app_authorized
@@ -66,7 +67,8 @@ if settings.COSINNUS_ROCKET_ENABLED:
     
     @receiver(signals.user_password_changed)
     def handle_user_password_updated(sender, user, **kwargs):
-        # do a threaded call
+        # prefetch related objects and do a threaded call
+        prefetch_related_objects([user], 'cosinnus_profile')
         class CosinnusRocketPasswordUpdateThread(Thread):
             def run(self):
                 try:
@@ -95,7 +97,8 @@ if settings.COSINNUS_ROCKET_ENABLED:
             except Exception as e:
                 logger.exception(e)
         else:
-            # do a threaded call
+            # prefetch related objects and do a threaded call
+            prefetch_related_objects([instance.user], 'cosinnus_profile')
             class CosinnusRocketProfileUpdateThread(Thread):
                 def run(self):
                     try:
@@ -112,22 +115,28 @@ if settings.COSINNUS_ROCKET_ENABLED:
     @receiver(pre_save, sender=CosinnusConference)
     def handle_cosinnus_group_updated(sender, instance, **kwargs):
         old_instance = get_object_or_None(type(instance), pk=instance.id) if instance.id else None
+        try:
+            rocket = RocketChatConnection()
+            if old_instance and rocket.get_group_id(instance, create_if_not_exists=False):
+                if instance.slug != old_instance.slug:
+                    # do a threaded call
+                    class CosinnusRocketGroupUpdateThread(Thread):
+                        def run(self):
+                            try:
+                                rocket.groups_rename(instance)
+                            except RocketChatDownException:
+                                logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+                            except Exception as e:
+                                logger.exception(e)
+                    CosinnusRocketGroupUpdateThread().start()
+            else:
+                # Not a threaded call as group settings are updated
+                rocket.groups_create(instance)
+        except RocketChatDownException:
+            logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+        except Exception as e:
+            logger.exception(e)
 
-        # do a threaded call
-        class CosinnusRocketGroupUpdateThread(Thread):
-            def run(self):
-                try:
-                    rocket = RocketChatConnection()
-                    if old_instance and rocket.get_group_id(instance, create_if_not_exists=False):
-                        if instance.slug != old_instance.slug:
-                            rocket.groups_rename(instance)
-                    else:
-                        rocket.groups_create(instance)
-                except RocketChatDownException:
-                    logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
-                except Exception as e:
-                    logger.exception(e)
-        CosinnusRocketGroupUpdateThread().start()
 
     @receiver(post_delete, sender=CosinnusSociety)
     @receiver(post_delete, sender=CosinnusProject)
@@ -178,7 +187,8 @@ if settings.COSINNUS_ROCKET_ENABLED:
     @receiver(signals.user_deactivated)
     def user_deactivated(sender, user, **kwargs):
         """ Deactivate a rocketchat user account """
-        # do a threaded call
+        # prefetch related objects and do a threaded call
+        prefetch_related_objects([user], 'cosinnus_profile')
         class CosinnusRocketUserDeactivateThread(Thread):
             def run(self):
                 try:
@@ -193,7 +203,8 @@ if settings.COSINNUS_ROCKET_ENABLED:
     @receiver(signals.user_activated)
     def user_activated(sender, user, **kwargs):
         """ Activate a rocketchat user account """
-        # do a threaded call
+        # prefetch related objects and do a threaded call
+        prefetch_related_objects([user], 'cosinnus_profile')
         class CosinnusRocketUserActivateThread(Thread):
             def run(self):
                 try:
@@ -216,7 +227,9 @@ if settings.COSINNUS_ROCKET_ENABLED:
             is_moderator_changed = instance.status != old_instance.status and \
                                    (instance.status == MEMBERSHIP_ADMIN or old_instance.status == MEMBERSHIP_ADMIN)
 
-            # do a threaded call
+            # prefetch related objects and do a threaded call
+            prefetch_related_objects([instance], 'group')
+            prefetch_related_objects([instance], 'user__cosinnus_profile')
             class CosinnusRocketMembershipUpdateThread(Thread):
                 def run(self):
                     try:
@@ -243,7 +256,9 @@ if settings.COSINNUS_ROCKET_ENABLED:
                         logger.exception(e)
             CosinnusRocketMembershipUpdateThread().start()
         elif not is_pending:
-            # do a threaded call
+            # prefetch related objects and do a threaded call
+            prefetch_related_objects([instance], 'group')
+            prefetch_related_objects([instance], 'user__cosinnus_profile')
             class CosinnusRocketMembershipCreateThread(Thread):
                 def run(self):
                     try:
@@ -261,7 +276,9 @@ if settings.COSINNUS_ROCKET_ENABLED:
     @receiver(post_delete, sender=CosinnusGroupMembership)
     def handle_membership_deleted(sender, instance, **kwargs):
         try:
-            # do a threaded call
+            # prefetch related objects and do a threaded call
+            prefetch_related_objects([instance], 'group')
+            prefetch_related_objects([instance], 'user__cosinnus_profile')
             class CosinnusRocketMembershipDeletedThread(Thread):
                 def run(self):
                     rocket = RocketChatConnection()
@@ -275,20 +292,28 @@ if settings.COSINNUS_ROCKET_ENABLED:
     @receiver(post_save, sender=Event)
     @receiver(post_save, sender=Note)
     def handle_relay_message_updated(sender, instance, created, **kwargs):
-        # do a threaded call
-        class CosinnusRocketRelayMessageUpdateThread(Thread):
-            def run(self):
-                try:
-                    rocket = RocketChatConnection()
-                    if created:
-                        rocket.relay_message_create(instance)
-                    else:
+        if created:
+            # Not a threaded call as event and note settings are updated
+            try:
+                rocket = RocketChatConnection()
+                rocket.relay_message_create(instance)
+            except RocketChatDownException:
+                logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+            except Exception as e:
+                logger.exception(e)
+        else:
+            # prefetch related objects and do a threaded call
+            prefetch_related_objects([instance], 'group__portal')
+            class CosinnusRocketRelayMessageUpdateThread(Thread):
+                def run(self):
+                    try:
+                        rocket = RocketChatConnection()
                         rocket.relay_message_update(instance)
-                except RocketChatDownException:
-                    logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
-                except Exception as e:
-                    logger.exception(e)
-        CosinnusRocketRelayMessageUpdateThread().start()
+                    except RocketChatDownException:
+                        logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+                    except Exception as e:
+                        logger.exception(e)
+            CosinnusRocketRelayMessageUpdateThread().start()
 
     @receiver(post_delete, sender=Event)
     @receiver(post_delete, sender=Note)
@@ -308,14 +333,11 @@ if settings.COSINNUS_ROCKET_ENABLED:
     @receiver(signals.pre_userprofile_delete)
     def handle_user_deleted(sender, profile, **kwargs):
         """ Called when a user deletes their account. Completely deletes the user's rocket profile """
-        # do a threaded call
-        class CosinnusRocketUserDeleteThread(Thread):
-            def run(self):
-                try:
-                    rocket = RocketChatConnection()
-                    rocket.users_delete(profile.user)
-                except RocketChatDownException:
-                    logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
-                except Exception as e:
-                    logger.exception(e)
-        CosinnusRocketUserDeleteThread().start()
+        # Not a threaded call as run with management command
+        try:
+            rocket = RocketChatConnection()
+            rocket.users_delete(profile.user)
+        except RocketChatDownException:
+            logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+        except Exception as e:
+            logger.exception(e)
