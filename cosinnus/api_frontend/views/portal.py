@@ -213,7 +213,27 @@ class PortalUserprofileDynamicFieldsView(APIView):
     
     # if set on the view, show only dynamic fields that appear in the signup form
     field_option_filter = None
-    description = 'A list of objects containing the field name, meta info and "choices": a list of tuples of acceptable key/value pairs (or null if all values are acceptable) for each dynamic userprofile field for this portal.'
+    description = """
+        A list of objects containing the field name, meta info and "choices":
+        a list of tuples of acceptable key/value pairs (or null if all values are acceptable)
+        for each dynamic userprofile field for this portal.
+        
+        Field attributes:
+        - "name": str, field name
+        - "in_signup": bool, whether to show up in the signup form
+        - "required": bool, whether to be required in forms
+        - "multiple": bool, for choice fields, if multiple choices are allowed. ignored for other types
+        - "type": type of the dynamic field (affects both model and form), see <str type of `DYNAMIC_FIELD_TYPES`>,
+        - "label":  i18n str
+        - "placeholder": i18n str
+        - "is_group_header": whether the field is a checkbox field shown as a group header, that shows/hides a field \
+                group if checked/unchecked
+        - "parent_group_field_name": if this field belongs to a checkbox group, this refers to the parent checkbox \
+                field of that group, which needs to have `is_group_header=True`
+        - "display_required_field_names": if this field should only be shown if either one of a list of checkbox \
+                fields is checked, this is the list field names of checkbox fields of which one is required to be checked
+        - "choices": list or null, the choice tuples of (value, label) for choice fields
+    """
     DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
     
     # todo: generate proper response, by either putting the entire response into a
@@ -297,6 +317,9 @@ class PortalUserprofileDynamicFieldsView(APIView):
                 'type': field_options.type,
                 'label': field_options.label,
                 'placeholder': field_options.placeholder,
+                'is_group_header': field_options.is_group_header,
+                'parent_group_field_name': field_options.parent_group_field_name,
+                'display_required_field_names': field_options.display_required_field_names,
                 'choices': choices,
             })
         return Response(field_data)
