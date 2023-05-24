@@ -247,10 +247,6 @@ class PortalUserprofileDynamicFieldsView(APIView):
                             "placeholder": "Mehrere Auswahlen sind möglich",
                             "choices": [
                                 [
-                                    "",
-                                    "Keine Auswahl"
-                                ],
-                                [
                                     "aa",
                                     "Afar"
                                 ],
@@ -290,9 +286,9 @@ class PortalUserprofileDynamicFieldsView(APIView):
                         field_options
                     )
                     choices = getattr(formfield, 'choices', None)
-                    # remove the empty choice from choices for multiple fields, as our frontend doesn't need it
-                    if choices and field_options.multiple == True:
-                        choices = [(k, v) for (k, v) in choices if k]
+            # remove the empty choice from choices for multiple fields, as our frontend doesn't need it
+            if choices and field_options.multiple == True:
+                choices = [(k, v) for (k, v) in choices if k]
             field_data.append({
                 'name': field_name,
                 'in_signup': field_options.in_signup,
