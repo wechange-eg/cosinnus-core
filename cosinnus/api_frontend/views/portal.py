@@ -25,7 +25,7 @@ class PortalTopicsView(APIView):
     """ An endpoint that returns the configured topic choices for this portal """
     
     # disallow anonymous users if signup is disabled
-    if settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN or not settings.COSINNUS_USER_SIGNUP_ENABLED:
+    if not settings.COSINNUS_USER_SIGNUP_ENABLED:
         permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
@@ -65,7 +65,7 @@ class PortalTagsView(APIView):
     """ An endpoint that returns tags matched for the given "q" parameter. """
     
     # disallow anonymous users if signup is disabled
-    if settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN or not settings.COSINNUS_USER_SIGNUP_ENABLED:
+    if not settings.COSINNUS_USER_SIGNUP_ENABLED:
         permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
@@ -122,7 +122,7 @@ class PortalManagedTagsView(APIView):
     """ An endpoint that returns the managed tags for this portal """
     
     # disallow anonymous users if signup is disabled
-    if settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN or not settings.COSINNUS_USER_SIGNUP_ENABLED:
+    if not settings.COSINNUS_USER_SIGNUP_ENABLED:
         permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
@@ -206,7 +206,7 @@ class PortalUserprofileDynamicFieldsView(APIView):
     """ An endpoint that returns the configured topic choices for this portal """
     
     # disallow anonymous users if signup is disabled
-    if settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN or not settings.COSINNUS_USER_SIGNUP_ENABLED:
+    if not settings.COSINNUS_USER_SIGNUP_ENABLED:
         permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
