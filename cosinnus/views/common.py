@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import logging
+
 from annoying.functions import get_object_or_None
 from bs4 import BeautifulSoup
 from django.apps import apps
@@ -21,7 +23,7 @@ from django.views.generic.base import View, TemplateView
 import requests
 
 from cosinnus.conf import settings
-from cosinnus_message.rocket_chat import RocketChatConnection
+from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import LikeObject
 from cosinnus.utils.context_processors import cosinnus as cosinnus_context
@@ -184,8 +186,23 @@ def cosinnus_logout(request, **kwargs):
         user_rc_uid = request.COOKIES.get('rc_session_uid')
         user_rc_token = request.COOKIES.get('rc_session_token')
         if user_rc_uid and user_rc_token:
-            rocket = RocketChatConnection()
-            rocket.logout_user_session(user_rc_uid, user_rc_token)
+            try:
+                rocket = RocketChatConnection()
+                rocket.logout_user_session(user_rc_uid, user_rc_token)
+            except RocketChatDownException:
+                logging.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+                msg = _(
+                    'A problem occurred when logging out from RocketChat. You might want to logout manually when the '
+                    'service is available again.'
+                )
+                messages.warning(request, msg)
+            except Exception as e:
+                logging.exception(e)
+                msg = _(
+                    'A problem occurred when logging out from RocketChat. You might want to logout manually when the '
+                    'service is available again.'
+                )
+                messages.warning(request, msg)
     response = LogoutView.as_view(**kwargs)(request) # logout(request, **kwargs)
     if not request.user.is_authenticated:
         response.delete_cookie('wp_user_logged_in')

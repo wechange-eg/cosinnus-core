@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import logging
 from builtins import object
 import six
 
@@ -11,7 +12,7 @@ from django.http import HttpResponseRedirect
 
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus_message.rocket_chat import RocketChatConnection
+from cosinnus_message.rocket_chat import is_rocket_down, RocketChatConnection, RocketChatDownException
 from postman.views import ConversationView, MessageView, csrf_protect_m,\
     login_required_m, _get_referer
 from django.views.generic import TemplateView
@@ -190,7 +191,7 @@ class RocketChatWriteGroupComposeView(FormView):
     def get(self, request, *args, **kwargs):
         self.group = self.get_group_object()
         return super().get(request, *args, **kwargs)
-    
+
     def get_group_object(self):
         slug = self.kwargs.get('slug', None)
         try:
@@ -202,9 +203,18 @@ class RocketChatWriteGroupComposeView(FormView):
         contact_message = form.cleaned_data.get('contact_message')
         group = self.get_group_object()
         user = self.request.user
-        rocket = RocketChatConnection()
-        # trigger room creation
-        rocket.groups_request(group, user, first_message=contact_message, force_sync_membership=True, create=True)
+        try:
+            rocket = RocketChatConnection()
+            # trigger room creation
+            rocket.groups_request(group, user, first_message=contact_message, force_sync_membership=True, create=True)
+        except RocketChatDownException:
+            logging.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+            messages.error(self.request, RocketChatConnection.ROCKET_CHAT_DOWN_USER_MESSAGE)
+            return redirect(group_aware_reverse('cosinnus:group-detail', kwargs={'group': group.slug}))
+        except Exception as e:
+            logging.exception(e)
+            messages.error(self.request, RocketChatConnection.ROCKET_CHAT_EXCEPTION_USER_MESSAGE)
+            return redirect(group_aware_reverse('cosinnus:group-detail', kwargs={'group': group.slug}))
         return redirect(reverse('cosinnus:message-write-group', kwargs={'slug': group.slug}))
 
     def get_context_data(self, **kwargs):
@@ -224,6 +234,8 @@ class RocketChatWriteGroupView(BaseRocketChatView):
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
         context = self.get_context_data(object=self.object)
+        if is_rocket_down():
+            return redirect(group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.object.slug}))
         if not context.get('url'):
             return redirect(reverse('cosinnus:message-write-group-compose', kwargs={'slug': self.object.slug}))
         return self.render_to_response(context)
@@ -246,9 +258,15 @@ class RocketChatWriteGroupView(BaseRocketChatView):
         user = self.request.user
         group_name = ''
         if user and user.is_authenticated:
-            rocket = RocketChatConnection()
-            group_name = rocket.groups_request(group, user, force_sync_membership=True)
-
+            try:
+                rocket = RocketChatConnection()
+                group_name = rocket.groups_request(group, user, force_sync_membership=True)
+            except RocketChatDownException:
+                logging.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+                messages.error(self.request, RocketChatConnection.ROCKET_CHAT_DOWN_USER_MESSAGE)
+            except Exception as e:
+                logging.exception(e)
+                messages.error(self.request, RocketChatConnection.ROCKET_CHAT_EXCEPTION_USER_MESSAGE)
         if group_name:
             return f'{self.base_url}/group/{group_name}/'
         return None

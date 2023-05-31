@@ -416,9 +416,15 @@ class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):
                 self.notification_setting.setting = int(notification_setting)
                 # rocketchat: on a global "never", we always set the rocketchat setting to "off"
                 if settings.COSINNUS_ROCKET_ENABLED and self.notification_setting.setting == GlobalUserNotificationSetting.SETTING_NEVER:
+                    from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException
                     from cosinnus_message.utils.utils import save_rocketchat_mail_notification_preference_for_user_setting #noqa
                     self.notification_setting.rocketchat_setting = GlobalUserNotificationSetting.ROCKETCHAT_SETTING_OFF
-                    save_rocketchat_mail_notification_preference_for_user_setting(self.request.user, self.notification_setting.rocketchat_setting)
+                    try:
+                        save_rocketchat_mail_notification_preference_for_user_setting(self.request.user, self.notification_setting.rocketchat_setting)
+                    except RocketChatDownException:
+                        logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+                    except Exception as e:
+                        logger.exception(e)
                 self.notification_setting.save()
             # save visibility setting:
             visibility_setting = request.POST.get('visibility_setting', None)

@@ -2,6 +2,7 @@ import logging
 import mimetypes
 import os
 import re
+import requests
 import secrets
 
 from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject,\
@@ -14,6 +15,7 @@ from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 from oauth2_provider.models import Application
 
+from requests.exceptions import ConnectionError
 from rocketchat_API.APIExceptions.RocketExceptions import RocketAuthenticationException,\
     RocketConnectionException
 from rocketchat_API.rocketchat import RocketChat as RocketChatAPI
@@ -33,6 +35,7 @@ from cosinnus.templatetags.cosinnus_tags import full_name
 logger = logging.getLogger(__name__)
 
 ROCKETCHAT_USER_CONNECTION_CACHE_KEY = 'cosinnus/core/portal/%d/rocketchat-user-connection/%s/'
+ROCKETCHAT_DOWN_CACHE_KEY = 'cosinnus/core/portal/%d/rocketchat-down/'
 
 ROCKETCHAT_MESSAGE_ID_SETTINGS_KEY = 'rocket_chat_message_id'
 
@@ -45,9 +48,45 @@ ROCKETCHAT_PREFERENCES_EMAIL_NOTIFICATION = (
     ROCKETCHAT_PREFERENCE_EMAIL_NOTIFICATION_MENTIONS
 )
 
+
+# Global requests session used in all rocket chat connections
+rocket_chat_session = None
+
+
+def get_rocket_chat_session():
+    """Returns the global requests session and initializes it, if it does not exist."""
+    global rocket_chat_session
+    if not rocket_chat_session:
+        rocket_chat_session = requests.Session()
+    return rocket_chat_session
+
+
+def close_rocket_chat_session():
+    """Close the global rocket chat session. Closing the session resets its internal state."""
+    global rocket_chat_session
+    if rocket_chat_session:
+        rocket_chat_session.close()
+
+
+def is_rocket_down():
+    """ Check in the cached value, if rocketchat is considered down. """
+    cache_key = ROCKETCHAT_DOWN_CACHE_KEY % (CosinnusPortal.get_current().id)
+    return cache.get(cache_key)
+
+
+def set_rocket_down():
+    """ Store in cache that rocketchat is considered down. """
+    cache_key = ROCKETCHAT_DOWN_CACHE_KEY % (CosinnusPortal.get_current().id)
+    cache.set(cache_key, True, settings.COSINNUS_CHAT_CONSIDER_DOWN_TIMEOUT)
+
+
 def get_cached_rocket_connection(rocket_username, password, server_url, reset=False, timeout=30):
     """ Retrieves a cached rocketchat connection or creates a new one and caches it.
         @param reset: Resets the cached connection and connects a fresh one immediately """
+    if is_rocket_down():
+        # Rocketchat is considered down until the cache expires.
+        raise RocketChatDownException()
+
     cache_key = ROCKETCHAT_USER_CONNECTION_CACHE_KEY % (CosinnusPortal.get_current().id, rocket_username)
 
     if reset:
@@ -66,8 +105,19 @@ def get_cached_rocket_connection(rocket_username, password, server_url, reset=Fa
             rocket_connection = None
 
     if rocket_connection is None:
-        rocket_connection = RocketChat(user=rocket_username, password=password, server_url=server_url, timeout=timeout)
-        cache.set(cache_key, rocket_connection, settings.COSINNUS_CHAT_CONNECTION_CACHE_TIMEOUT)
+        try:
+            session = get_rocket_chat_session()
+            # Note: passing session to rocketchat connection makes the connection cachable.
+            rocket_connection = RocketChat(user=rocket_username, password=password, server_url=server_url,
+                timeout=timeout, session=session)
+            cache.set(cache_key, rocket_connection, settings.COSINNUS_CHAT_CONNECTION_CACHE_TIMEOUT)
+        except ConnectionError as e:
+            # When a connection error occurred disable rocketchat connections for 5 minutes to avoid overloading our
+            # webserver with pending requests.
+            set_rocket_down()
+            close_rocket_chat_session()
+            logger.exception(e)
+            raise RocketChatDownException()
     return rocket_connection
 
 
@@ -75,6 +125,11 @@ def delete_cached_rocket_connection(rocket_username):
     """ Deletes a cached rocketchat connection or creates a new one and caches it """
     cache_key = ROCKETCHAT_USER_CONNECTION_CACHE_KEY % (CosinnusPortal.get_current().id, rocket_username)
     cache.delete(cache_key)
+
+
+class RocketChatDownException(Exception):
+    """ Exception to indicate that rocketchat is considered down. """
+    pass
 
 
 class RocketChat(RocketChatAPI):
@@ -100,7 +155,24 @@ class RocketChatConnection:
 
     rocket = None
     stdout, stderr = None, None
-    
+
+    # Reusable user message when rocketchat is considered down
+    ROCKET_CHAT_DOWN_USER_MESSAGE = _(
+        'We are currently experiencing some technical difficulties with the RocketChat service and some of your '
+        'actions may not have had an effect. Please try again later. We apologize for the inconveniences!'
+    )
+
+    # Reusable user message when an unexpected rocketchat exception occurred
+    ROCKET_CHAT_EXCEPTION_USER_MESSAGE = _(
+        'A technical error occurred in the RocketChat service. Some of your actions may not have had an effect. '
+        'We are working on resolving the issue. Please try again later. We apologize for the inconveniences!'
+    )
+
+    # Reusable error message when rocketchat is considered down
+    ROCKET_CHAT_DOWN_ERROR = (
+        'RocketChatDownException: a user action was canceled because the rocketchat service is unreachable.'
+    )
+
     def __init__(self, user=settings.COSINNUS_CHAT_USER, password=settings.COSINNUS_CHAT_PASSWORD,
                  url=settings.COSINNUS_CHAT_BASE_URL, stdout=None, stderr=None):
         # get a cached version of the rocket connection
