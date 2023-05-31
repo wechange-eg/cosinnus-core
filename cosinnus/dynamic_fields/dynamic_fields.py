@@ -105,6 +105,15 @@ class CosinnusDynamicField(object):
     readonly = False
     # int, max length for the text field
     max_length = None
+    # whether the field is a checkbox field shown as a group header,
+    # that shows/hides a field group if checked/unchecked
+    is_group_header = False
+    # if this field belongs to a checkbox group, this refers to the
+    # parent checkbox field of that group, which needs to have `is_group_header=True`
+    parent_group_field_name = None
+    # if this field should only be shown if either one of a list of checkbox fields is checked,
+    # this is the list field names of checkbox fields of which one is required to be checked
+    display_required_field_names = None
     # settings for how this field behaves for the search
     # see <str type of `DYNAMIC_FIELD_SEARCH_FIELD_TYPES`>
     search_field_type = DYNAMIC_FIELD_SEARCH_FIELD_TYPE_NONE

@@ -25,7 +25,7 @@ class PortalTopicsView(APIView):
     """ An endpoint that returns the configured topic choices for this portal """
     
     # disallow anonymous users if signup is disabled
-    if settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN or not settings.COSINNUS_USER_SIGNUP_ENABLED:
+    if not settings.COSINNUS_USER_SIGNUP_ENABLED:
         permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
@@ -65,7 +65,7 @@ class PortalTagsView(APIView):
     """ An endpoint that returns tags matched for the given "q" parameter. """
     
     # disallow anonymous users if signup is disabled
-    if settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN or not settings.COSINNUS_USER_SIGNUP_ENABLED:
+    if not settings.COSINNUS_USER_SIGNUP_ENABLED:
         permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
@@ -122,7 +122,7 @@ class PortalManagedTagsView(APIView):
     """ An endpoint that returns the managed tags for this portal """
     
     # disallow anonymous users if signup is disabled
-    if settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN or not settings.COSINNUS_USER_SIGNUP_ENABLED:
+    if not settings.COSINNUS_USER_SIGNUP_ENABLED:
         permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
@@ -150,6 +150,7 @@ class PortalManagedTagsView(APIView):
                             {
                                 "slug": "mtag1",
                                 "name": "A fully filled Mtag",
+                                "default": True,
                                 "type": {
                                     "id": 1,
                                     "name": "A type of tag",
@@ -165,6 +166,7 @@ class PortalManagedTagsView(APIView):
                             {
                                 "slug": "mtag2",
                                 "name": "Mtag two quite empty",
+                                "default": False,
                                 "type": None,
                                 "description": "",
                                 "image": None,
@@ -186,6 +188,7 @@ class PortalManagedTagsView(APIView):
             for mtag 
             in CosinnusManagedTag.objects.all_in_portal_cached()
         ]
+        managed_tag_data = sorted(managed_tag_data, key=lambda tag: tag['default'], reverse=True)
         data = {
             'enabled': settings.COSINNUS_MANAGED_TAGS_ENABLED and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF,
             'in_signup': settings.COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM,
@@ -203,14 +206,34 @@ class PortalUserprofileDynamicFieldsView(APIView):
     """ An endpoint that returns the configured topic choices for this portal """
     
     # disallow anonymous users if signup is disabled
-    if settings.COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN or not settings.COSINNUS_USER_SIGNUP_ENABLED:
+    if not settings.COSINNUS_USER_SIGNUP_ENABLED:
         permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
     
     # if set on the view, show only dynamic fields that appear in the signup form
     field_option_filter = None
-    description = 'A list of objects containing the field name, meta info and "choices": a list of tuples of acceptable key/value pairs (or null if all values are acceptable) for each dynamic userprofile field for this portal.'
+    description = """
+        A list of objects containing the field name, meta info and "choices":
+        a list of tuples of acceptable key/value pairs (or null if all values are acceptable)
+        for each dynamic userprofile field for this portal.
+        
+        Field attributes:
+        - "name": str, field name
+        - "in_signup": bool, whether to show up in the signup form
+        - "required": bool, whether to be required in forms
+        - "multiple": bool, for choice fields, if multiple choices are allowed. ignored for other types
+        - "type": type of the dynamic field (affects both model and form), see <str type of `DYNAMIC_FIELD_TYPES`>,
+        - "label":  i18n str
+        - "placeholder": i18n str
+        - "is_group_header": whether the field is a checkbox field shown as a group header, that shows/hides a field \
+                group if checked/unchecked
+        - "parent_group_field_name": if this field belongs to a checkbox group, this refers to the parent checkbox \
+                field of that group, which needs to have `is_group_header=True`
+        - "display_required_field_names": if this field should only be shown if either one of a list of checkbox \
+                fields is checked, this is the list field names of checkbox fields of which one is required to be checked
+        - "choices": list or null, the choice tuples of (value, label) for choice fields
+    """
     DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
     
     # todo: generate proper response, by either putting the entire response into a
@@ -244,10 +267,6 @@ class PortalUserprofileDynamicFieldsView(APIView):
                             "placeholder": "Mehrere Auswahlen sind möglich",
                             "choices": [
                                 [
-                                    "",
-                                    "Keine Auswahl"
-                                ],
-                                [
                                     "aa",
                                     "Afar"
                                 ],
@@ -276,9 +295,10 @@ class PortalUserprofileDynamicFieldsView(APIView):
                 continue
             choices = field_options.choices
             if not choices:
-                if field_options.type == dynamic_fields.DYNAMIC_FIELD_TYPE_DYNAMIC_CHOICES:
+                if False and field_options.type == dynamic_fields.DYNAMIC_FIELD_TYPE_DYNAMIC_CHOICES:
                     # TODO: for dynamic fields with dynamic choices, an extra select2-style 
-                    # autocomplete endpoint must be created, if they are ever needed in the v3 API!
+                    # autocomplete endpoint should be created, both in the v3 API and in the formfields!
+                    # as this doesn't scale well for portals with large numbers of groups!
                     choices = '<dynamic-NYI>'
                 else:
                     formfield = EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS.get(field_options.type)().get_formfield(
@@ -286,6 +306,9 @@ class PortalUserprofileDynamicFieldsView(APIView):
                         field_options
                     )
                     choices = getattr(formfield, 'choices', None)
+            # remove the empty choice from choices for multiple fields, as our frontend doesn't need it
+            if choices and field_options.multiple == True:
+                choices = [(k, v) for (k, v) in choices if k]
             field_data.append({
                 'name': field_name,
                 'in_signup': field_options.in_signup,
@@ -294,6 +317,9 @@ class PortalUserprofileDynamicFieldsView(APIView):
                 'type': field_options.type,
                 'label': field_options.label,
                 'placeholder': field_options.placeholder,
+                'is_group_header': field_options.is_group_header,
+                'parent_group_field_name': field_options.parent_group_field_name,
+                'display_required_field_names': field_options.display_required_field_names,
                 'choices': choices,
             })
         return Response(field_data)

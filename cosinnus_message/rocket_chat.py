@@ -619,6 +619,11 @@ class RocketChatConnection:
             response = self.rocket.users_set_avatar(avatar_url, userId=user_id).json()
             if not response.get('success'):
                 logger.error(f'users_update (force={force_user_update}) avatar: ' + response.get('errorType', '<No Error Type>'), extra={'response': response})
+        else:
+            response = self.rocket.users_reset_avatar(user_id=user_id).json()
+            if not response.get('success'):
+                logger.error(f'users_update (force={force_user_update}) reset_avatar: ' + response.get('errorType', '<No Error Type>'), extra={'response': response})
+
 
     def users_disable(self, user):
         """

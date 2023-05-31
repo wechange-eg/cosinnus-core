@@ -126,8 +126,8 @@ def fastpull(_ctx):
 @task
 def deployfrontend(_ctx):
     """ Only does a git pull on the base project repository """
-    check_confirmation(_ctx)
-    _pull_and_update_frontend(_ctx)
+    check_confirmation()
+    _pull_and_update_frontend()
     restartfrontend(_ctx)
     
 

@@ -2,10 +2,10 @@ import logging
 
 from rest_framework import serializers
 
+from cosinnus.conf import settings
+from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.managed_tags import CosinnusManagedTag, \
     CosinnusManagedTagType
-from cosinnus.models.group import CosinnusPortal
-
 
 logger = logging.getLogger('cosinnus')
 
@@ -28,12 +28,16 @@ class CosinnusManagedTagSerializer(serializers.ModelSerializer):
     
     class Meta(object):
         model = CosinnusManagedTag
-        fields = ('slug', 'name', 'type', 'description', 'image', 'url', 'search_synonyms', 
+        fields = ('slug', 'name', 'default', 'type', 'description', 'image', 'url', 'search_synonyms',
                   'group_url')
         read_only_fields = fields
     
+    default = serializers.SerializerMethodField()
     image = serializers.SerializerMethodField()
-
+    
+    def get_default(self, obj):
+        return bool(obj.slug == settings.COSINNUS_MANAGED_TAGS_DEFAULT_INITIAL_SLUG)
+    
     def get_image(self, obj):
         return f'{CosinnusPortal.get_current().get_domain()}{obj.image.url}' if obj.image else None
         
