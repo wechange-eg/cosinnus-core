@@ -9,6 +9,7 @@ from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownExc
     delete_cached_rocket_connection
 from cosinnus.models import UserProfile, CosinnusGroupMembership, MEMBERSHIP_PENDING, MEMBERSHIP_INVITED_PENDING, \
     MEMBERSHIP_ADMIN
+from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject,\
     CosinnusConference
 from cosinnus_event.models import Event
@@ -112,7 +113,6 @@ if settings.COSINNUS_ROCKET_ENABLED:
 
     @receiver(pre_save, sender=CosinnusSociety)
     @receiver(pre_save, sender=CosinnusProject)
-    @receiver(pre_save, sender=CosinnusConference)
     def handle_cosinnus_group_updated(sender, instance, **kwargs):
         old_instance = get_object_or_None(type(instance), pk=instance.id) if instance.id else None
         try:
@@ -137,6 +137,16 @@ if settings.COSINNUS_ROCKET_ENABLED:
         except Exception as e:
             logger.exception(e)
 
+    def _group_is_conference_without_default_channel(rocket, group):
+        """
+        Helper to check if group is a conference without a default channel. We disabled default channel creation for
+        conferences but still need to handle conferences created before this that still have a default channel.
+        """
+        if group.group_is_conference:
+            default_room_id = rocket.get_group_id(group, create_if_not_exists=False)
+            if not default_room_id:
+                return True
+        return False
 
     @receiver(post_delete, sender=CosinnusSociety)
     @receiver(post_delete, sender=CosinnusProject)
@@ -147,6 +157,9 @@ if settings.COSINNUS_ROCKET_ENABLED:
             def run(self):
                 try:
                     rocket = RocketChatConnection()
+                    # Check if a default channel exists for a conference. If not there is nothing to be done.
+                    if _group_is_conference_without_default_channel(rocket, instance):
+                        return
                     rocket.groups_delete(instance)
                 except RocketChatDownException:
                     logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
@@ -157,12 +170,21 @@ if settings.COSINNUS_ROCKET_ENABLED:
     @receiver(signals.group_deactivated)
     def handle_cosinnus_group_deactivated(sender, group, **kwargs):
         """ Archive a group that gets deactivated """
+        specific_room_ids = None
+        if group.group_is_conference:
+            # Deactivate workshop rooms for conference groups.
+            specific_room_ids = [room.rocket_chat_room_id for room in group.rooms.all() if room.rocket_chat_room_name]
         # do a threaded call
         class CosinnusRocketGroupDeactivateThread(Thread):
             def run(self):
                 try:
                     rocket = RocketChatConnection()
-                    rocket.groups_archive(group)
+                    if group.group_is_conference:
+                        # Deactivate default room, if exists.
+                        default_room_id = rocket.get_group_id(group, create_if_not_exists=False)
+                        if default_room_id:
+                            specific_room_ids.append(default_room_id)
+                    rocket.groups_archive(group, specific_room_ids=specific_room_ids)
                 except RocketChatDownException:
                     logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
                 except Exception as e:
@@ -172,12 +194,22 @@ if settings.COSINNUS_ROCKET_ENABLED:
     @receiver(signals.group_reactivated)
     def handle_cosinnus_group_reactivated(sender, group, **kwargs):
         """ Unarchive a group that gets reactivated """
+        specific_room_ids = None
+        if group.group_is_conference:
+            # Reactivate workshop rooms for conferences.
+            specific_room_ids = [room.rocket_chat_room_id for room in group.rooms.all() if room.rocket_chat_room_name]
+
         # do a threaded call
         class CosinnusRocketGroupReactivateThread(Thread):
             def run(self):
                 try:
                     rocket = RocketChatConnection()
-                    rocket.groups_unarchive(group)
+                    if group.group_is_conference:
+                        # Deactivate default room, if exists.
+                        default_room_id = rocket.get_group_id(group, create_if_not_exists=False)
+                        if default_room_id:
+                            specific_room_ids.append(default_room_id)
+                    rocket.groups_unarchive(group, specific_room_ids=specific_room_ids)
                 except RocketChatDownException:
                     logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
                 except Exception as e:
@@ -234,6 +266,10 @@ if settings.COSINNUS_ROCKET_ENABLED:
                 def run(self):
                     try:
                         rocket = RocketChatConnection()
+                        # Check if a default channel exists for a conference. If not there is nothing to be done.
+                        if _group_is_conference_without_default_channel(rocket, instance.group):
+                            return
+
                         # Invalidate old membership
                         if (is_pending and not was_pending) or user_changed or group_changed:
                             rocket.groups_kick(old_instance)
@@ -263,6 +299,9 @@ if settings.COSINNUS_ROCKET_ENABLED:
                 def run(self):
                     try:
                         rocket = RocketChatConnection()
+                        # Check if a default channel exists for a conference. If not there is nothing to be done.
+                        if _group_is_conference_without_default_channel(rocket, instance.group):
+                            return
                         # Create new membership
                         rocket.groups_invite(instance)
                         if instance.status == MEMBERSHIP_ADMIN:
@@ -282,6 +321,9 @@ if settings.COSINNUS_ROCKET_ENABLED:
             class CosinnusRocketMembershipDeletedThread(Thread):
                 def run(self):
                     rocket = RocketChatConnection()
+                    # Check if a default channel exists for a conference. If not there is nothing to be done.
+                    if _group_is_conference_without_default_channel(rocket, instance.group):
+                        return
                     rocket.groups_kick(instance)
             CosinnusRocketMembershipDeletedThread().start()
         except RocketChatDownException:
@@ -347,3 +389,19 @@ if settings.COSINNUS_ROCKET_ENABLED:
             logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
         except Exception as e:
             logger.exception(e)
+
+    @receiver(post_delete, sender=CosinnusConferenceRoom)
+    def handle_conference_room_deleted(sender, instance, **kwargs):
+        """ Called when a conference room is deleted. Delete the corresponding group. """
+        if instance.rocket_chat_room_id:
+            # do a threaded call
+            class CosinnusRocketConferenceRoomDeleteThread(Thread):
+                def run(self):
+                    try:
+                        rocket = RocketChatConnection()
+                        rocket.delete_private_room(instance.rocket_chat_room_id)
+                    except RocketChatDownException:
+                        logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+                    except Exception as e:
+                        logger.exception(e)
+            CosinnusRocketConferenceRoomDeleteThread().start()

@@ -848,9 +848,17 @@ class RocketChatConnection:
         
         return room_id
 
+    def delete_private_room(self, room_id):
+        """ Delete a private room by room_id.
+            @param room_id: rocket chat room id
+        """
+        response = self.rocket.groups_delete(room_id=room_id).json()
+        if not response.get('success'):
+            logger.error('RocketChat: Direct delete_private_group groups_delete', extra={'response': response})
+
     def groups_create(self, group):
         """
-        Create default channels for group or project or conference, if they doesn't exist yet:
+        Create default channels for group or project, if they doesn't exist yet:
         1. #slug-general: Private group with all members
         2. #slug-news: Private ready-only group with all members, new notes appear here.
         :param group:
