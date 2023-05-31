@@ -292,6 +292,9 @@ if settings.COSINNUS_ROCKET_ENABLED:
     @receiver(post_save, sender=Event)
     @receiver(post_save, sender=Note)
     def handle_relay_message_updated(sender, instance, created, **kwargs):
+        if hasattr(instance, 'is_hidden_group_proxy') and instance.is_hidden_group_proxy:
+            # Don't relay conference proxy events.
+            return
         if created:
             # Not a threaded call as event and note settings are updated
             try:
@@ -318,6 +321,9 @@ if settings.COSINNUS_ROCKET_ENABLED:
     @receiver(post_delete, sender=Event)
     @receiver(post_delete, sender=Note)
     def handle_relay_message_deleted(sender, instance, **kwargs):
+        if hasattr(instance, 'is_hidden_group_proxy') and instance.is_hidden_group_proxy:
+            # Conference proxy events are not relayed.
+            return
         # do a threaded call
         class CosinnusRocketRelayMessageDeleteThread(Thread):
             def run(self):

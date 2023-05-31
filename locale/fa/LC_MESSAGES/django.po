@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-21 17:42+0200\n"
+"POT-Creation-Date: 2023-05-31 10:48+0200\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -10236,8 +10236,10 @@ msgid ""
 "Do not reply, this would not be taken into account."
 msgstr ""
 
-msgid "Go to chat"
-msgstr ""
+#, fuzzy
+#| msgid "Show chat"
+msgid "Reload chat"
+msgstr "گفتگو را نشان دهید"
 
 msgid "Archived Messages"
 msgstr ""

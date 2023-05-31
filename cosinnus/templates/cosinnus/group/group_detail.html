@@ -257,7 +257,7 @@
                                        {% comment %} In public groups, we enable the logged in user to see himself as pending user {% endcomment %}
                                        {% if user|has_write_access:object or user == member %}
                                             <div class="regular-space">
-                                                <div class="btn btn-default w100">
+                                                <div class="btn btn-default w100 user-list-button">
                                                     <ul class="media-list">
                                                         <li class="media">
                                                             <a class="pull-left" href="{{ member|profile_url }}">
@@ -318,7 +318,7 @@
                                                                     &nbsp;
                                                                     <span class="moment-data-date" data-date="{{ member.membership_status_date|date:'c' }}"></span>
                                                                 </span>
-                                                                <a href="{% url 'cosinnus:profile-detail' username=member.username %}">
+                                                                <a class="username-name" href="{% url 'cosinnus:profile-detail' username=member.username %}">
                                                                     {{ member|full_name }}
                                                                 </a>
                                                                 {% include 'cosinnus/user/member_list_name_snippet.html' with user=member %}
@@ -527,7 +527,7 @@
                                        {% comment %} In public groups, we enable the logged in user to see himself as pending user {% endcomment %}
                                        {% if not user in pendings or user == member %}
                                             <div class="regular-space">
-                                                <div class="btn btn-default w100">
+                                                <div class="btn btn-default w100 user-list-button">
                                                     <ul class="media-list">
                                                         <li class="media">
                                                             <a class="pull-left" href="{{ member|profile_url }}">
@@ -566,7 +566,7 @@
                                                                     &nbsp;
                                                                     <span class="moment-data-date" data-date="{{ member.membership_status_date|date:'c' }}"></span>
                                                                 </span>
-                                                                <a href="{% url 'cosinnus:profile-detail' username=member.username %}">
+                                                                <a class="username-name" href="{% url 'cosinnus:profile-detail' username=member.username %}">
                                                                     {{ member|full_name }}
                                                                 </a>
                                                                 {% include 'cosinnus/user/member_list_name_snippet.html' with user=member %}
@@ -652,7 +652,7 @@
                             {% with member_active=member|is_user_active %}
                                 
                                 <div class="fadedown {% if not forloop.last or hidden_user_count > 0 %}regular-space{% endif %}">
-                                    <div class="btn btn-{% if member_active %}emphasized{% else %}default{% endif %} w100">
+                                    <div class="btn btn-{% if member_active %}emphasized{% else %}default{% endif %} w100 user-list-button">
                                         <ul class="media-list">
                                             <li class="media">
                                                 <a class="pull-left" href="{{ member|profile_url }}">
@@ -670,21 +670,22 @@
                                                 </a>
                                                 {% endif %}
                                                 {% endif %}
-                                                <div class="media-body">
-                                                        <span class="annotation">
-                                                            {% if member in admins %}
-                                                                {% trans "Admin" %}
-                                                            {% elif member in members %}
-                                                                {% trans "Member" %}
-                                                            {% endif %}
-                                                        </span>
-                                                    <a href="{% url 'cosinnus:profile-detail' username=member.username %}">
+                                                <div class="media-body username-body">
+                                                    <span class="annotation">
+                                                        {% if member in admins %}
+                                                            {% trans "Admin" %}
+                                                        {% elif member in members %}
+                                                            {% trans "Member" %}
+                                                        {% endif %}
+                                                    </span>
+                                                    <a class="username-name" href="{% url 'cosinnus:profile-detail' username=member.username %}">
                                                         {% if not member_active %}
                                                             <i>({% trans "User account inactive" %})</i>
                                                         {% endif %}
                                                         {{ member|full_name }}
                                                     </a>
                                                     {% include 'cosinnus/user/member_list_name_snippet.html' with user=member %}
+
                                                 </div>
                                             </li>
                                         </ul>
