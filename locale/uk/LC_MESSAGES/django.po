@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-21 17:42+0200\n"
+"POT-Creation-Date: 2023-05-31 10:48+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -10719,8 +10719,10 @@ msgstr ""
 "Примітка: це повідомлення надсилається системою автоматично.\n"
 "Будь ласка, не відповідайте на нього."
 
-msgid "Go to chat"
-msgstr "Перейти до чату"
+#, fuzzy
+#| msgid "Show chat"
+msgid "Reload chat"
+msgstr "Показати чат"
 
 msgid "Archived Messages"
 msgstr "Заархівовані повідомлення"
@@ -13376,6 +13378,9 @@ msgstr "Неможливо додати список завдань «%(title)s�
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Ви не можете видалити цю папку, оскільки у вас немає прав на видалення одного або декількох елементів, які вона містить!"
+
+#~ msgid "Go to chat"
+#~ msgstr "Перейти до чату"
 
 #~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
 #~ msgstr "Ви змінили свою електронну адресу. Незабаром ми надішлемо вам електронний лист на цю адресу з посиланням для підтвердження. Поки ви не натиснете на це посилання, Ваш профіль залишиться за старою електронною адресою!"

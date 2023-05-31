@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-21 17:42+0200\n"
+"POT-Creation-Date: 2023-05-31 10:48+0200\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -11062,8 +11062,10 @@ msgstr ""
 "ملاحظة: هذه الرسالة صادرة عن نظام آلي.\n"
 "لا تفن بالرد ، هذا لن يؤخذ بعين الاعتبار."
 
-msgid "Go to chat"
-msgstr ""
+#, fuzzy
+#| msgid "Show chat"
+msgid "Reload chat"
+msgstr "إظهار الدردشة"
 
 msgid "Archived Messages"
 msgstr "الرسائل المؤرشفة"

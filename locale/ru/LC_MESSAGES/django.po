@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-21 17:42+0200\n"
+"POT-Creation-Date: 2023-05-31 10:48+0200\n"
 "PO-Revision-Date: 2023-04-18 18:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -10531,8 +10531,8 @@ msgstr ""
 "Примечание: Это автоматическое сообщение.\n"
 "Не отвечайте на него, Ваш ответ не будет прочитан."
 
-msgid "Go to chat"
-msgstr "Перейти к чату"
+msgid "Reload chat"
+msgstr "Перезагрузить чат"
 
 msgid "Archived Messages"
 msgstr "Архивированные сообщения"
@@ -13041,6 +13041,9 @@ msgstr "Невозможно добавить список задач \"%(title)
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Вы не можете удалить эту папку, так как у Вас нет полномочий для удаления одного или более элементов, которые в ней содержатся!"
+
+#~ msgid "Go to chat"
+#~ msgstr "Перейти к чату"
 
 #~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
 #~ msgstr "Вы изменили адрес электронной почты. Мы вышлем Вам на этот адрес письмо, содержащее ссылку на подтверждение адреса. До тех пор, пока Вы не нажмёте на ссылку, в Вашем профиле будет сохранён старый адрес электронной почты!"
