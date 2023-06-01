@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-31 10:48+0200\n"
+"POT-Creation-Date: 2023-06-01 13:04+0200\n"
 "PO-Revision-Date: 2023-04-18 18:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -7883,6 +7883,9 @@ msgstr "Новое сообщение с ссылкой на верификац�
 msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
 msgstr "На твой адрес электронной почты только что была отправлена новая ссылка для верификации. Если письмо всё ещё не пришло, ты можешь войти ещё раз, чтобы запросить новое."
 
+msgid "A problem occurred when logging out from RocketChat. You might want to logout manually when the service is available again."
+msgstr "При выходе из RocketChat возникла проблема. Возможно, вы захотите выйти вручную, когда сервис снова станет доступен"
+
 msgid "Successfully made conference permanent premium"
 msgstr "Перманентный премиум-режим для конференции успешно включен"
 
@@ -10470,6 +10473,12 @@ msgstr "Дополнительные адресаты"
 
 msgid "Undefined recipient."
 msgstr "Неопределенный адресат."
+
+msgid "We are currently experiencing some technical difficulties with the RocketChat service and some of your actions may not have had an effect. Please try again later. We apologize for the inconveniences!"
+msgstr "В настоящее время мы испытываем некоторые технические трудности с сервисом RocketChat, и некоторые из ваших действий могли не иметь эффекта. Пожалуйста, повторите попытку позже. Приносим извинения за доставленные неудобства!"
+
+msgid "A technical error occurred in the RocketChat service. Some of your actions may not have had an effect. We are working on resolving the issue. Please try again later. We apologize for the inconveniences!"
+msgstr "В службе RocketChat произошла техническая ошибка. Некоторые из ваших действий могли не иметь эффекта. Мы работаем над решением этой проблемы. Пожалуйста, повторите попытку позже. Приносим извинения за доставленные неудобства!"
 
 msgid "Contact request"
 msgstr "Контактный запрос"

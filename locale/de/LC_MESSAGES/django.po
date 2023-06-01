@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-31 10:48+0200\n"
+"POT-Creation-Date: 2023-06-01 13:04+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -7869,6 +7869,9 @@ msgstr "Eine neue Verifizierungsmail wurde versandt!"
 msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
 msgstr "Wir haben soeben eine weitere E-Mail mit einem neuen Verifizierungslink an dich gesendet. Wenn die E-Mail immer noch nicht angekommen ist, kannst du dich erneut anmelden, um eine weitere neue E-Mail zu erhalten."
 
+msgid "A problem occurred when logging out from RocketChat. You might want to logout manually when the service is available again."
+msgstr "Beim Logout aus RocketChat ist ein Problem aufgetreten. Du kannst dich aus RocketChat abmelden sobald der Dienst wieder verfügbar ist."
+
 msgid "Successfully made conference permanent premium"
 msgstr "Tagung erfolgreich zu durchgehend Premium geändert"
 
@@ -10456,6 +10459,12 @@ msgstr "Zusätzliche Empfänger"
 
 msgid "Undefined recipient."
 msgstr "Kein Empfänger angegeben."
+
+msgid "We are currently experiencing some technical difficulties with the RocketChat service and some of your actions may not have had an effect. Please try again later. We apologize for the inconveniences!"
+msgstr "Momentan gibt es technische Probleme mit dem RocketChat Dienst. Einige deiner Aktionen könnten keinen Effekt haben. Bitte versuche es später noch einmal. Wir entschuldigen uns für die Unannehmlichkeiten!"
+
+msgid "A technical error occurred in the RocketChat service. Some of your actions may not have had an effect. We are working on resolving the issue. Please try again later. We apologize for the inconveniences!"
+msgstr "Es ist ein technischer Fehler beim RocketChat Dienst aufgetreten. Einige deiner Aktionen könnten keinen Effekt haben. Wir arbeiten an einer Lösung des Problems.  Bitte versuche es später noch einmal. Wir entschuldigen uns für die Unannehmlichkeiten!"
 
 msgid "Contact request"
 msgstr "Kontaktanfrage"
