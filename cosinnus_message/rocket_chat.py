@@ -15,7 +15,7 @@ from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 from oauth2_provider.models import Application
 
-from requests.exceptions import ConnectionError
+from requests.exceptions import ConnectionError, Timeout
 from rocketchat_API.APIExceptions.RocketExceptions import RocketAuthenticationException,\
     RocketConnectionException
 from rocketchat_API.rocketchat import RocketChat as RocketChatAPI
@@ -111,10 +111,15 @@ def get_cached_rocket_connection(rocket_username, password, server_url, reset=Fa
             rocket_connection = RocketChat(user=rocket_username, password=password, server_url=server_url,
                 timeout=timeout, session=session)
             cache.set(cache_key, rocket_connection, settings.COSINNUS_CHAT_CONNECTION_CACHE_TIMEOUT)
-        except ConnectionError as e:
-            # When a connection error occurred disable rocketchat connections for 5 minutes to avoid overloading our
+        except Timeout as e:
+            # When a timeout error occurred disable rocketchat connections for 5 minutes to avoid overloading our
             # webserver with pending requests.
             set_rocket_down()
+            close_rocket_chat_session()
+            logger.exception(e)
+            raise RocketChatDownException()
+        except ConnectionError as e:
+            # When a connection error occurred raise RocketChatDownException.
             close_rocket_chat_session()
             logger.exception(e)
             raise RocketChatDownException()
