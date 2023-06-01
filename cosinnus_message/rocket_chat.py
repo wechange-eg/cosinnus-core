@@ -98,6 +98,13 @@ def get_cached_rocket_connection(rocket_username, password, server_url, reset=Fa
         alive = False
         try:
             alive = rocket_connection.me().status_code == 200
+        except Timeout as e:
+            # When a timeout error occurred disable rocketchat connections for 5 minutes to avoid overloading our
+            # webserver with pending requests.
+            set_rocket_down()
+            close_rocket_chat_session()
+            logger.exception(e)
+            raise RocketChatDownException()
         except:
             pass
         if not alive:
