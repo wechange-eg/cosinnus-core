@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-31 10:48+0200\n"
+"POT-Creation-Date: 2023-06-01 13:04+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -8307,6 +8307,9 @@ msgstr ""
 msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
 msgstr ""
 
+msgid "A problem occurred when logging out from RocketChat. You might want to logout manually when the service is available again."
+msgstr ""
+
 #, fuzzy
 msgid "Successfully made conference permanent premium"
 msgstr "Solo miembros del grupo"
@@ -10978,6 +10981,12 @@ msgstr "Receptores adicionales"
 
 msgid "Undefined recipient."
 msgstr "Receptores indefinidos."
+
+msgid "We are currently experiencing some technical difficulties with the RocketChat service and some of your actions may not have had an effect. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
+msgid "A technical error occurred in the RocketChat service. Some of your actions may not have had an effect. We are working on resolving the issue. Please try again later. We apologize for the inconveniences!"
+msgstr ""
 
 #, fuzzy
 msgid "Contact request"
