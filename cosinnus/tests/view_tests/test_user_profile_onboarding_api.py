@@ -3,8 +3,6 @@ import json
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from rest_framework.test import APITestCase, APIClient
-from cosinnus.conf import settings
-from cosinnus.models.profile import create_user_profile, get_user_profile_model
 
 
 class UserProfileTestView(APITestCase):
@@ -24,7 +22,7 @@ class UserProfileTestView(APITestCase):
         self.user = get_user_model().objects.create_user(username=self.user_data["username"], email=self.user_data["email"], password=self.user_data["password"], is_active=True)
         self.user.save()
 
-        self.user_profile = get_user_profile_model()
+        self.user_profile = self.user.cosinnus_profile
 
         self.client.login(username=self.user_data["username"], password=self.user_data["password"])
 
@@ -56,85 +54,82 @@ class UserProfileTestView(APITestCase):
 
     # checking main fields one by one
     def test_user_profile_avatar(self):
-        self.user_data.update(
-            {"avatar": ""}
-        )
+        pass  # TODO: test file upload.
 
-        response = self.client.post(self.user_profile_url, self.user_data, format='json')
-        response_json = json.loads(response.content)
-
-        user_avatar = response_json.get('data', {}).get('user').get('avatar')
-        #self.assertEqual(self.user_profile.avatar, user_avatar) # TODO: getting `<ImageFieldFile: None> != None`
-    
     def test_user_profile_description(self):
+        user_description = "some new profile description"
         self.user_data.update(
-            {"description": "some new profile description"}
+            {'description': user_description}
         )
 
         response = self.client.post(self.user_profile_url, self.user_data, format='json')
         response_json = json.loads(response.content)
+        self.user_profile.refresh_from_db()
 
-        user_description = response_json.get('data', {}).get('user').get('description')
-        #self.assertEqual(self.user_profile.description, user_description) # AssertionError: None != 'some new profile description' -> WHY?
+        self.assertEqual(response_json['data']['user']['description'], user_description)
+        self.assertEqual(self.user_profile.description, user_description)
 
     def test_user_contact_infos(self):
+        user_contact_infos = [{"type": "email", "value": "test@mail.com"}]
         self.user_data.update(
-            {"contact_infos": [{"type": "email", "value": "test@mail.com"}]}
+            {"contact_infos": user_contact_infos}
         )
 
         response = self.client.post(self.user_profile_url, self.user_data, format='json')
         response_json = json.loads(response.content)
+        self.user_profile.refresh_from_db()
 
-        user_contact_infos = response_json.get('data', {}).get('user').get('contact_infos')
-        # self.assertEqual(self.user_profile.contact_infos, user_contact_infos) # AttributeError: type object 'UserProfile' has no attribute 'contact_infos'
-        # self.assertEqual(self.user.contact_infos, user_contact_infos) # AttributeError: 'User' object has no attribute 'contact_infos'
+        self.assertEqual(response_json['data']['user']['contact_infos'], user_contact_infos)
+        self.assertEqual(self.user_profile.dynamic_fields['contact_infos'], user_contact_infos)
 
     def test_user_location(self):
+        user_location = "Alabama"
         self.user_data.update(
-            {"location": "Alabama"}
+            {"location": user_location}
         )
 
         response = self.client.post(self.user_profile_url, self.user_data, format='json')
         response_json = json.loads(response.content)
+        self.user_profile.refresh_from_db()
 
-        user_location = response_json.get('data', {}).get('user').get('location')
-
-        # self.assertEqual(self.user_profile.location, user_location) # AttributeError: type object 'UserProfile' has no attribute 'location'
-        # self.assertEqual(self.user.location, user_location) # AttributeError: 'User' object has no attribute 'location'
-
+        self.assertEqual(response_json['data']['user']['location'], user_location)
+        self.assertEqual(self.user_profile.media_tag.location, user_location)
 
     def test_user_tags(self):
+        user_tags = ["Alabama", "Buenos Aires"]
         self.user_data.update(
-            {"tags": ["Alabama", "Buenos Aires"]}
+            {"tags": user_tags}
         )
 
         response = self.client.post(self.user_profile_url, self.user_data, format='json')
         response_json = json.loads(response.content)
+        self.user_profile.refresh_from_db()
 
-        user_tags = response_json.get('data', {}).get('user').get('tags')
-        #self.assertEqual(self.user.tags, user_tags) # AttributeError: 'User' object has no attribute 'tags'
-
+        self.assertEqual(sorted(response_json['data']['user']['tags']), sorted(user_tags))
+        self.assertListEqual(sorted(list(self.user_profile.media_tag.tags.names())), sorted(user_tags))
 
     def test_user_topics(self):
+        user_topics = [1, 2, 3]
         self.user_data.update(
-            {"topics": [1, 2, 3]}
+            {"topics": user_topics}
         )
 
         response = self.client.post(self.user_profile_url, self.user_data, format='json')
         response_json = json.loads(response.content)
+        self.user_profile.refresh_from_db()
 
-        user_topics = response_json.get('data', {}).get('user').get('topics')
-        #self.assertEqual(self.user.topics, user_topics) # AttributeError: 'User' object has no attribute 'topics'
-        #self.assertEqual(self.user_profile.topics, user_topics) # AttributeError: type object 'UserProfile' has no attribute 'topics'
+        self.assertEqual(response_json['data']['user']['topics'], user_topics)
+        self.assertEqual(self.user_profile.media_tag.get_topic_ids(), user_topics)
 
     def test_user_visibility(self):
+        user_visibility = 1
         self.user_data.update(
-            {"visibility": 1}
+            {"visibility": user_visibility}
         )
 
         response = self.client.post(self.user_profile_url, self.user_data, format='json')
         response_json = json.loads(response.content)
+        self.user_profile.refresh_from_db()
 
-        user_visibility = response_json.get('data', {}).get('user').get('visibility')
-        self.assertEqual(self.user.visibility, user_visibility) # AttributeError: 'User' object has no attribute 'visibility'
-        self.assertEqual(self.user_profile.visibility, user_visibility) # AttributeError: type object 'UserProfile' has no attribute 'visibility'
+        self.assertEqual(response_json['data']['user']['visibility'], user_visibility)
+        self.assertEqual(self.user_profile.media_tag.visibility, user_visibility)
