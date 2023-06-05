@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
-from django.test import TestCase
+from django.core.cache import cache
+from django.test import TestCase, override_settings
 from django.urls import reverse
 from rest_framework.test import APITestCase
 from threading import Thread
@@ -35,6 +36,7 @@ class RocketChatBaseTest(TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cache.clear()
         cls.rocket_connection = RocketChatConnection()
         cls.portal = CosinnusPortal.get_current()
         cls.portal.email_needs_verification = False
@@ -83,7 +85,7 @@ class RocketChatConnectionTest(RocketChatBaseTest):
 
 
 class RocketChatUserCreateTest(RocketChatBaseTest):
-    """ Test user cration. """
+    """ Test user creation. """
 
     test_user = None
 
@@ -302,10 +304,12 @@ class RocketChatAPITest(APITestCase):
     portal = None
     rocket_connection = None
     test_user = None
+    test_forum = None
 
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cache.clear()
         cls.rocket_connection = RocketChatConnection()
         cls.portal = CosinnusPortal.get_current()
         cls.portal.email_needs_verification = False
@@ -314,6 +318,8 @@ class RocketChatAPITest(APITestCase):
     def tearDown(self):
         if self.test_user:
             self.rocket_connection.users_delete(self.test_user)
+        if self.test_forum:
+            self.rocket_connection.groups_delete(self.test_forum)
 
     def test_user_create(self):
         response = self.client.post(self.signup_url, self.test_user_signup_data, format="json")
@@ -341,9 +347,13 @@ class RocketChatAPITest(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(self.test_user_update_data['first_name'], user_info['name'])
 
+    @override_settings(NEWW_FORUM_GROUP_SLUG='test-forum')
+    @override_settings(NEWW_DEFAULT_USER_GROUPS=['test-forum'])
     def test_forum_group_membership(self):
-        forum = CosinnusSociety.objects.create(slug=settings.NEWW_FORUM_GROUP_SLUG, name='forum')
-        room_id = forum.settings[f'{PROFILE_SETTING_ROCKET_CHAT_ID}_{settings.COSINNUS_ROCKET_GROUP_ROOM_KEYS[0]}']
+        self.test_forum = CosinnusSociety.objects.create(slug='test-forum', name='test-forum')
+        room_id = self.test_forum.settings[
+            f'{PROFILE_SETTING_ROCKET_CHAT_ID}_{settings.COSINNUS_ROCKET_GROUP_ROOM_KEYS[0]}'
+        ]
         group_members = self.rocket_connection.rocket.groups_members(room_id=room_id).json()
         group_members_count = len(group_members['members'])
         response = self.client.post(self.signup_url, self.test_user_signup_data, format="json")
@@ -351,5 +361,3 @@ class RocketChatAPITest(APITestCase):
         expected_members_count = group_members_count + 1
         group_members = self.rocket_connection.rocket.groups_members(room_id=room_id).json()
         self.assertEqual(len(group_members['members']), expected_members_count)
-
-
