@@ -5,7 +5,7 @@ from django.conf.urls import url
 
 from cosinnus.api_frontend.views.user import LoginView, SignupView, UserProfileView,\
     LogoutView
-from cosinnus.api_frontend.views.navigation import BookmarksView, SpacesView
+from cosinnus.api_frontend.views.navigation import BookmarksView, SpacesView, UnreadMessagesView
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.api_frontend.views.portal import PortalTopicsView,\
     PortalManagedTagsView, PortalTagsView, PortalUserprofileDynamicFieldsView,\
@@ -35,4 +35,5 @@ urlpatterns += [
 
     url(r'^api/v3/navigation/spaces/$', SpacesView.as_view(), name='api-navigation-spaces'),
     url(r'^api/v3/navigation/bookmarks/$', BookmarksView.as_view(), name='api-navigation-bookmarks'),
+    url(r'^api/v3/navigation/unread_messages/$', UnreadMessagesView.as_view(), name='api-navigation-unread-messages'),
 ]

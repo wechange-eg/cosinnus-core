@@ -1,3 +1,4 @@
+from unittest.mock import patch
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from rest_framework.test import APITestCase
@@ -131,3 +132,24 @@ class BookmarksTestView(APITestCase):
             response.data['content'],
             [{'icon': 'fa-lightbulb-o', 'label': 'Test Idea', 'url': 'http://default domain/map/?item=1.ideas.test-idea'}]
         )
+
+
+class UnreadMessagesTestView(APITestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.unread_messages_url = reverse("cosinnus:frontend-api:api-navigation-unread-messages")
+        cls.test_user = User.objects.create(**TEST_USER_DATA)
+
+    def test_login_required(self):
+        response = self.client.get(self.unread_messages_url)
+        self.assertEqual(response.status_code, 403)
+
+    @patch('cosinnus.api_frontend.views.navigation.get_unread_message_count_for_user', return_value=10)
+    def test_unread_messages_count(self, mock):
+        self.client.force_login(self.test_user)
+        response = self.client.get(self.unread_messages_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertDictEqual(response.data, {'count': 10})
+
