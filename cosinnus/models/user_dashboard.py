@@ -11,7 +11,7 @@ from cosinnus.models.tagged import BaseTaggableObjectModel
 from cosinnus.utils.group import get_cosinnus_group_model, \
     get_default_user_group_slugs
 
-import logging
+from cosinnus.models import CosinnusPortal, get_domain_for_portal
 from cosinnus.models.idea import CosinnusIdea
 from django.urls.base import reverse
 from cosinnus.models.profile import BaseUserProfile
@@ -89,3 +89,17 @@ class DashboardItem(dict):
                             self['subtext'] = date_dict
                         else:
                             self['subtext'] = date_dict.get('date')
+
+    def as_menu_item(self):
+        return MenuItem(self['text'], self['url'], self['icon'])
+
+
+class MenuItem(dict):
+
+    def __init__(self, label, url, icon=""):
+        if url and url[0] == '/':
+            domain = get_domain_for_portal(CosinnusPortal.get_current())
+            url = domain + url
+        self['icon'] = icon
+        self['label'] = label
+        self['url'] = url
