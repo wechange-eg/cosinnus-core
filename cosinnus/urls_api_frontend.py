@@ -5,6 +5,7 @@ from django.conf.urls import url
 
 from cosinnus.api_frontend.views.user import LoginView, SignupView, UserProfileView,\
     LogoutView
+from cosinnus.api_frontend.views.navigation import BookmarksView, SpacesView
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.api_frontend.views.portal import PortalTopicsView,\
     PortalManagedTagsView, PortalTagsView, PortalUserprofileDynamicFieldsView,\
@@ -25,13 +26,13 @@ urlpatterns += [
     url(r'^api/v3/logout/$', LogoutView.as_view(), name='api-logout'),
     url(r'^api/v3/signup/$', SignupView.as_view(), name='api-signup'),
     url(r'^api/v3/user/profile/$', UserProfileView.as_view(), name='api-user-profile'),
-    
+
     url(r'^api/v3/portal/topics/$', PortalTopicsView.as_view(), name='api-portal-topics'),
     url(r'^api/v3/portal/tags/$', PortalTagsView.as_view(), name='api-portal-tags'),
     url(r'^api/v3/portal/managed_tags/$', PortalManagedTagsView.as_view(), name='api-portal-managed-tags'),
     url(r'^api/v3/portal/userprofile_dynamicfields/signup/$', PortalUserprofileDynamicFieldsSignupView.as_view(), name='api-portal-userprofile-dynamicfields-signup'),
     url(r'^api/v3/portal/userprofile_dynamicfields/$', PortalUserprofileDynamicFieldsView.as_view(), name='api-portal-userprofile-dynamicfields'),
-    
-    
-    
+
+    url(r'^api/v3/navigation/spaces/$', SpacesView.as_view(), name='api-navigation-spaces'),
+    url(r'^api/v3/navigation/bookmarks/$', BookmarksView.as_view(), name='api-navigation-bookmarks'),
 ]
