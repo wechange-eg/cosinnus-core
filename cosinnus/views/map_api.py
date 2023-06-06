@@ -132,10 +132,13 @@ class SearchQuerySetMixin:
         self.skip_score_sorting = False
         if 'q' in self.params:
             self.params['q'] = force_text(self.params['q'])
+        # An argument can be passed to the view when calling it internally to bypass the server side search limit.
+        skip_limit_backend = kwargs.pop('skip_limit_backend', False)
         if 'limit' in self.params:
             if not is_number(self.params['limit']) or self.params['limit'] < 0:
                 return HttpResponseBadRequest('``limit`` param must be a positive number or 0!')
-            self.params['limit'] = min(self.params['limit'], SERVER_SIDE_SEARCH_LIMIT)
+            if not skip_limit_backend:
+                self.params['limit'] = min(self.params['limit'], SERVER_SIDE_SEARCH_LIMIT)
         if 'page' in self.params:
             if not is_number(self.params['page']) or self.params['page'] < 0:
                 return HttpResponseBadRequest('``page`` param must be a positive number or 0!')
