@@ -166,3 +166,68 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
             spaces['conference'] = conference_space
 
         return Response(spaces)
+
+
+class BookmarksView(MyGroupsClusteredMixin, APIView):
+    """ An endpoint that returns the user bookmarks for the main navigation. """
+
+    permission_classes = (IsAuthenticated,)
+    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+
+    # todo: generate proper response, by either putting the entire response into a
+    #       Serializer, or defining it by hand
+    #       Note: Also needs docs on our custom data/timestamp/version wrapper!
+    # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
+    # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
+    @swagger_auto_schema(
+        responses={'200': openapi.Response(
+            description='WIP: Response info missing. Short example included',
+            examples={
+                "application/json": {
+                    "data": {
+                        "groups": [
+                            {
+                                "icon": "fa-sitemap",
+                                "label": "Test Group",
+                                "url": "http://localhost:8000/group/test-group/"
+                            }
+                        ],
+                        "users": [
+                            {
+                                "icon": "fa-user",
+                                "label": "Test User",
+                                "url": "http://localhost:8000/user/2/"
+                            }
+                        ],
+                        "content": [
+                            {
+                                "icon": "fa-lightbulb-o",
+                                "label": "Test Idea",
+                                "url": "http://localhost:8000/map/?item=1.ideas.test-idea"
+                            }
+                        ]
+                    },
+                    "version": COSINNUS_VERSION,
+                    "timestamp": 1658414865.057476
+                }
+            }
+        )}
+    )
+    def get(self, request):
+        liked_users = self.request.user.cosinnus_profile.get_user_starred_users()
+        user_items = [DashboardItem(user).as_menu_item() for user in liked_users]
+        liked_objects = self.request.user.cosinnus_profile.get_user_starred_objects()
+        group_items = []
+        content_items = []
+        for liked_object in liked_objects:
+            if isinstance(liked_object, get_cosinnus_group_model()):
+                group_items.append(DashboardItem(liked_object).as_menu_item())
+            else:
+                content_items.append(DashboardItem(liked_object).as_menu_item())
+        bookmarks = {
+            'groups': group_items,
+            'users': user_items,
+            'content': content_items,
+        }
+        return Response(bookmarks)
