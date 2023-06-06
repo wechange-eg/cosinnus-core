@@ -10,6 +10,7 @@ from annoying.functions import get_object_or_None
 import django
 from django.apps import apps
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.models import ContentType
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models import JSONField
 from django.templatetags.static import static
@@ -36,7 +37,7 @@ from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin,\
     CosinnusManagedTag
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
-from cosinnus.models.tagged import LikeableObjectMixin
+from cosinnus.models.tagged import LikeableObjectMixin, LikeObject
 from cosinnus.utils.files import get_avatar_filename, image_thumbnail, \
     image_thumbnail_url
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -562,6 +563,35 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
         content_display = "&people=false&ideas=false&conferences=false"
         return '{}?location_lat={}&location_lon={}&zoom={}{}'.format(
             url, lat, lon, zoom, content_display)
+
+    def get_user_starred_users(self):
+        """ Return other users that have beed starred by the profile user. """
+        profile_ct = ContentType.objects.get_for_model(get_user_profile_model())
+        likeobjects = LikeObject.objects.filter(user=self.user, content_type=profile_ct, starred=True)
+        liked_users_ids = likeobjects.values_list('object_id', flat=True)
+        liked_users = get_user_profile_model().objects.filter(id__in=liked_users_ids, user__is_active=True)
+        return liked_users
+
+    def get_user_starred_objects(self):
+        """Return non-user objects liked by the profile user. """
+        profile_ct = ContentType.objects.get_for_model(get_user_profile_model())
+        exclude_ids = [profile_ct.id]
+        liked = LikeObject.objects.filter(user=self.user, starred=True).exclude(content_type_id__in=exclude_ids)
+        objects = []
+        for like in liked:
+            ct = ContentType.objects.get_for_id(like.content_type.id)
+            obj = ct.get_object_for_this_type(pk=like.object_id)
+
+            # filter inactive groups
+            if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
+                if not obj.is_active:
+                    continue
+            elif hasattr(obj, 'group'):
+                # also filter inactive parent groups
+                if not getattr(obj.group, 'is_active', False):
+                    continue
+            objects.append(obj)
+        return objects
 
 
 class UserProfile(BaseUserProfile):
