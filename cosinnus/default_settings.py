@@ -90,10 +90,10 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         join(BASE_PATH, "static"),
     )
     LOCALE_PATHS = [
-        join(COSINNUS_BASE_PATH, 'locale'),
         join(BASE_PATH, "locale"),
-        join(BASE_PATH, ".venv", "locale"),
         join(BASE_PATH, "apps", "core", "locale"),
+        join(COSINNUS_BASE_PATH, 'locale'),
+        join(BASE_PATH, ".venv", "locale"),
     ]
     
     
