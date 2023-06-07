@@ -1,0 +1,385 @@
+/** 
+This is an additional LESS file for wechange only.
+*/
+
+
+/* BEGIN Temp changes for new design */
+
+body {
+    color: #4A4A4A;
+    background-image: none !important;
+    background-color: #F5F5F5;
+    font-family: 'Brandon Text', -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+}
+body a, 
+body a:hover,
+body a:active,
+body a:focus {
+    color: #4A4A4A;
+}
+.dropdown-menu,
+.btn,
+.dashboard-header .dashboard-header-text p {
+    font-size: 14px;
+}
+.btn .pull-left i.fa,
+.btn .pull-right i.fa {
+    font-size: 18px;
+}
+
+.content-box  {
+    background-color: #EDEDED;
+}
+
+.dashboard-widget .btn-headline, 
+.dashboard-widget > div > .btn {
+    background-color: #FFFFFF;
+}
+.white-content {
+    background-color: #FFFFFF !important;
+}
+
+.btn-headline {
+    text-transform: uppercase;
+    color: #34B4B5 !important;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.nav-tabs > li > a,
+.nav-tabs > li.active > a,
+.white-content,
+.white-content a,
+.CodeMirror .editor-preview a,
+.CodeMirror .cm-link,
+.textfield a,
+.vote-controls-wrapper {
+    &, &:hover, &:focus {
+        color: #4A4A4A !important;
+
+        &:not(.likefollowstar-button:hover):not(.transparent) {
+            background-color: #FFFFFF !important;
+        }
+    }
+}
+.textfield a {
+    &, &:hover, &:focus {
+        color: @color-primary !important;
+    }
+}
+
+.breadcrumb,
+.breadcrumb a,
+.breadcrumb a:hover,
+.breadcrumb .active,
+.breadcrumb > li + li:before,
+p.navi-explanation {
+    color: #4A4A4A !important;
+}
+.footer-icon-frame,
+.footer-icon-frame a {
+    color: #FFFFFF;
+    &:hover {
+        color: darken(#FFFFFF, 10%);
+    }
+}
+
+.white-content,
+.cosinnus-field-input {
+    .awesome-avatar-widget {
+        background-color: transparent !important;
+    }
+    .awesome-avatar-select-area {
+        background-color: #FFFFFF !important;
+    }
+}
+
+
+
+@special-app-main-color: #F5BB7B;
+@special-app-calendar-color: #BAD183;
+@special-app-todos-color: #CD70A7;
+@special-app-etherpad-color: #E79D7A;
+@special-app-files-color: #858AB8;
+@special-app-poll-color: #9A7EAF;
+@special-app-marketplace-color: #80B395;
+@special-app-cloud-color: #80A1C7;
+@special-app-message-color: #E17C76;
+@special-app-main-color-dark: darken(@special-app-main-color, 10%);
+@special-app-main-color-light: lighten(@special-app-main-color, 10%);
+@special-app-calendar-color-dark: darken(@special-app-calendar-color, 10%);
+@special-app-calendar-color-light: lighten(@special-app-calendar-color, 10%);
+@special-app-todos-color-dark: darken(@special-app-todos-color, 10%);
+@special-app-todos-color-light: lighten(@special-app-todos-color, 10%);
+@special-app-etherpad-color-dark: darken(@special-app-etherpad-color, 10%);
+@special-app-etherpad-color-light: lighten(@special-app-etherpad-color, 10%);
+@special-app-files-color-dark: darken(@special-app-files-color, 10%);
+@special-app-files-color-light: lighten(@special-app-files-color, 10%);
+@special-app-poll-color-dark: darken(@special-app-poll-color, 10%);
+@special-app-poll-color-light: lighten(@special-app-poll-color, 10%);
+@special-app-marketplace-color-dark: darken(@special-app-marketplace-color, 10%);
+@special-app-marketplace-color-light: lighten(@special-app-marketplace-color, 10%);
+@special-app-cloud-color-dark: darken(@special-app-cloud-color, 10%);
+@special-app-cloud-color-light: lighten(@special-app-cloud-color, 10%);
+@special-app-message-color-dark: darken(@special-app-message-color, 10%);
+@special-app-message-color-light: lighten(@special-app-message-color, 10%);
+
+
+/* Group dashboard header tiles */
+.dashboard-header {
+    margin-bottom: 30px;
+    background-color: transparent;
+
+    .dashboard-header-link {
+        font-size: 14px;
+        font-weight: bold;
+        margin: 15px 0 15px 5px;
+        
+        &, a, a:hover {
+            color: #FFFFFF;
+        }
+
+        &.app-main {
+            background-color: @special-app-main-color;
+        }
+        &.app-calendar {
+            background-color: @special-app-calendar-color;
+        }
+        &.app-files {
+            background-color: @special-app-files-color;
+        }
+        &.app-poll {
+            background-color: @special-app-poll-color;
+        }
+        &.app-marketplace {
+            background-color: @special-app-marketplace-color;
+        }
+        &.app-message {
+            background-color: @special-app-message-color;
+        }
+        &.app-todos {
+            background-color: @special-app-todos-color;
+        }
+        &.app-etherpad {
+            background-color: @special-app-etherpad-color;
+        }
+        &.app-cloud {
+            background-color: @special-app-cloud-color;
+        }
+    }
+}
+
+
+/* Underline clickable action buttons */
+.btn:not(.w100):not(.dashboard-appwidget-contentline):not(.dashboard-appwidget-contentline-indented):not(.btn-headline):not(.btn-default) {
+    &, & span, & .media-body {
+        color: #FFFFFF;
+        background-color: @color-primary;
+        transition-duration: 200ms;
+        transition-property: background-color, color, border-color, fill, stroke;
+    }
+    &:hover {
+        &, & span, & .media-body {
+            background-color: @color-highlight;
+        }
+    }
+    border: 1px solid @color-primary;
+    border-radius: 6px;
+    &:hover {
+        border: 1px solid @color-highlight;
+    }
+}
+
+
+/* Make all app button colors white */
+.special-btn-app-colors(@light,@normal,@dark) {
+    .btn-emphasized:hover .media,
+    .btn-appnavi:hover .media,
+    .btn-appnavi:hover .media  > .media-body,
+    .btn-emphasized:hover .media  > .media-body,
+    .btn-emphasized:hover .media > .pull-left,
+    .btn-appnavi:hover .media > .pull-left,
+    .btn-emphasized:hover .media > .pull-right,
+    .btn-appnavi:hover .media > .pull-right,
+    .btn-extra-emphasized:hover .media > .pull-left,
+    .btn-extra-emphasized:hover .media > .pull-right,
+    .btn-default:hover:not(.btn-icon-only) .media > .pull-left,
+    .btn-default:hover .media > .media-body,
+    .btn-default:hover .media-list > .media > .pull-left.btn-extra-emphasized,
+    .btn-default:hover .media-list > .media > .pull-left.btn-extra-emphasized:empty,
+    .btn-emphasized:hover:not(.btn-icon-only) .media > .pull-left,
+    .btn-emphasized:hover .media-list > .media > .pull-left.btn-extra-emphasized,
+    .btn-emphasized:hover .media-list > .media > .pull-left.btn-extra-emphasized:empty,
+    .fadedown .btn-emphasized:hover .media > .pull-right {
+        background-color: darken(@app-color, 10%);
+        color: #4A4A4A;
+    }
+    
+    .btn-extra-emphasized .media,
+    .fadedown.open .btn-emphasized.w100 .media,
+    .fadedown.open .btn-emphasized.w100 .media  > .media-body,
+    .btn-extra-emphasized .media  > .media-body,
+    .btn-default:not(.btn-icon-only) .media > .pull-left,
+    .btn-emphasized:not(.btn-icon-only) .media > .pull-left,
+    .media > .pull-left.btn-emphasized,
+    .btn-appnavi .media > .pull-left:first-child,
+    .btn-extra-emphasized .media > .pull-left,
+    .media-list > .media > .pull-left.btn-extra-emphasized,
+    .media-list > .media > .pull-left.btn-extra-emphasized:empty,
+    .btn-extra-emphasized .media > .pull-right,
+    .media-list > .media > .btn-extra-emphasized.pull-right,
+    .fadedown.open .btn-extra-emphasized.w100 .media > .pull-right,
+    .fadedown .btn-extra-emphasized .media > .pull-right,
+    .fadedown.open .btn-emphasized.w100 .media > .pull-right {
+        background-color: @app-color;
+        color: #4A4A4A;
+    }
+    .appnavi-listelement:hover a {
+        color: #4A4A4A;
+    }
+    
+    .btn-headline {
+        border-bottom: 2px solid @normal;
+    }
+}
+
+/* Stop hover-highlighting widget headlines */
+.btn-headline,
+.btn-headline:hover {
+    &, & .media-body, & .pull-left, & .media, & .media-list {
+        cursor: default !important;
+        background-color: @app-color !important;
+        .cursor-text {
+            cursor: text !important;
+        }
+    }
+}
+.cursor-text,
+.btn-headline .cursor-text .media-body, 
+.btn-headline:hover .cursor-text .media-body {
+    cursor: text !important;
+}
+
+.app-main {
+    .special-btn-app-colors(@special-app-main-color-light,@special-app-main-color,@special-app-main-color-dark);
+}
+.app-calendar {
+    .special-btn-app-colors(@special-app-calendar-color-light,@special-app-calendar-color,@special-app-calendar-color-dark);
+}
+.app-cloud {
+    .special-btn-app-colors(@special-app-cloud-color-light,@special-app-cloud-color,@special-app-cloud-color-dark);
+}
+.app-files {
+    .special-btn-app-colors(@special-app-files-color-light,@special-app-files-color,@special-app-files-color-dark);
+}
+.app-poll {
+    .special-btn-app-colors(@special-app-poll-color-light,@special-app-poll-color,@special-app-poll-color-dark);
+}
+.app-marketplace {
+    .special-btn-app-colors(@special-app-marketplace-color-light,@special-app-marketplace-color,@special-app-marketplace-color-dark);
+}
+.app-message {
+    .special-btn-app-colors(@special-app-message-color-light,@special-app-message-color,@special-app-message-color-dark);
+}
+.app-todos {
+    .special-btn-app-colors(@special-app-todos-color-light,@special-app-todos-color,@special-app-todos-color-dark);
+}
+.app-etherpad {
+    .special-btn-app-colors(@special-app-etherpad-color-light,@special-app-etherpad-color,@special-app-etherpad-color-dark);
+}
+.app-main-force {
+    .special-btn-app-colors(@special-app-main-color-light,@special-app-main-color,@special-app-main-color-dark);
+}
+
+.alert:not(.alert-black-white):not(.alert-info) {
+    &, p, a, p a, h1, h2, h3, h4, i.fa {
+        color: #FFFFFF;
+    }
+}
+
+
+/* Condensed radio input fixes */
+.condensed-radio-input {
+    label {
+        input {
+            + span {
+                border: 1px solid @app-main-color;
+                background-color: @app-main-color;
+                color: @text-color;
+                &:hover, &:focus, &:active {
+                    color: @text-color;
+                    border-color: @app-main-color;
+                    background-color: @app-main-color-dark;
+                }
+            }
+            &:checked + span {
+                background-color: @app-main-color-dark;
+                border-color: @app-main-color-dark;
+                color: @text-color;
+                &:hover, &:focus, &:active {
+                    border-color: @app-main-color-dark;
+                }
+            }
+        }
+
+        &:first-child {
+            input {
+                + span {
+                    border-left-width: 1px;
+                    border-top-left-radius: 3px;
+                    border-bottom-left-radius: 3px;
+                }
+            }
+        }
+        &:last-child {
+            input {
+                + span {
+                    border-top-right-radius: 3px;
+                    border-bottom-right-radius: 3px;
+                }
+            }
+        }
+
+    }
+}
+
+.fc-event,
+.fc-h-event, 
+.fc-event-main {
+    color: @text-color;
+    background-color: #EDEDED;
+    .fc-event-title {
+        color: @text-color;
+    }
+}
+.app-calendar .small-calendar .fc-day.selected {
+    background-color: @color-primary;
+}
+
+/* buttons unterstrichen
+ * font size
+ */
+/*  END temp changes for new design */
+
+
+#nav-support-items .list-item-group {
+    line-height: 25px;
+}
+#support-widget-collapse {
+    width: 30%;
+}
+@media (max-width:767px) {
+    #support-widget-collapse {
+        width: 100%
+    }
+}
+
+.map-fullscreen, .map-embed {
+    .leaflet-bottom {
+        .leaflet-control-attribution {
+            left: unset;
+            right: 0;
+        }
+    }
+}
