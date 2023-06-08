@@ -264,17 +264,14 @@ class CosinnusConf(AppConf):
     DISABLED_COSINNUS_APPS = []
     
     # a list of which app checkboxes should be default-active on the create group form
-    DEFAULT_ACTIVE_GROUP_APPS = [
+    # Deactivating several group apps by default
+    COSINNUS_DEFAULT_ACTIVE_GROUP_APPS = [
+        'cosinnus_cloud',
         'cosinnus_conference',
         'cosinnus_exchange',
         'cosinnus_etherpad',
         'cosinnus_event',
-        'cosinnus_file',
-        'cosinnus_marketplace',
         'cosinnus_message',
-        'cosinnus_note',
-        'cosinnus_poll',
-        'cosinnus_todo',
     ]
     
     # If set, will enable a download under / of an empty text file with the given name.
@@ -570,6 +567,7 @@ class CosinnusConf(AppConf):
     
     # Default starting map coordinates if no coordinates have been specified
     # currently: central europe with germany centered
+    # GeoJSON can be generated using http://opendatalab.de/projects/geojson-utilities/
     COSINNUS_MAP_OPTIONS = {
         'default_coordinates': {
             'ne_lat': 55.32, # north,
