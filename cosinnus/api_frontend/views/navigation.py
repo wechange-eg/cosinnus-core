@@ -48,7 +48,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                     "icon": "fa-user",
                                     "label": "Personal Dashboard",
                                     "url": "http://localhost:8000/dashboard/",
-                                    "image": None,
+                                    "image": "http://localhost:8000/media/cosinnus_portals/portal_default/avatars/user/0e9e945efe3d60bf807d56e336b677f193675fd8.png",
                                 }
                             ],
                             "actions": []
@@ -59,7 +59,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                     "icon": "fa-sitemap",
                                     "label": "Test Group",
                                     "url": "http://localhost:8000/group/test-group/",
-                                    "image": None,
+                                    "image": "http://localhost:8000/media/cosinnus_portals/portal_default/avatars/group/be5636c7955c1fd370514c26ffd4b0902dd5232a.png",
                                 }
                             ],
                             "actions": [
@@ -206,7 +206,7 @@ class BookmarksView(APIView):
                                 "icon": "fa-sitemap",
                                 "label": "Test Group",
                                 "url": "http://localhost:8000/group/test-group/",
-                                "image": None,
+                                "image": "http://localhost:8000/media/cosinnus_portals/portal_default/avatars/group/be5636c7955c1fd370514c26ffd4b0902dd5232a.png",
                             }
                         ],
                         "users": [
