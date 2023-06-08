@@ -30,6 +30,7 @@ class DashboardItem(dict):
     is_emphasized = False
     group = None # group name of item if it has one
     group_icon = None # group type icon
+    avatar = None
 
     def __init__(self, obj=None, is_emphasized=False, user=None):
         if obj:
@@ -45,6 +46,7 @@ class DashboardItem(dict):
                 self['icon'] = obj.get_icon()
                 self['text'] = escape(obj.name)
                 self['url'] = obj.get_absolute_url()
+                self['avatar'] = obj.avatar_url
             elif type(obj) is CosinnusIdea:
                 self['icon'] = obj.get_icon()
                 self['text'] = escape(obj.title)
@@ -67,6 +69,7 @@ class DashboardItem(dict):
                 self['icon'] = obj.get_icon()
                 self['text'] = escape(full_name(obj.user))
                 self['url'] = obj.get_absolute_url()
+                self['avatar'] = obj.avatar_url
             elif BaseTaggableObjectModel in inspect.getmro(obj.__class__):
                 
                 
@@ -91,15 +94,18 @@ class DashboardItem(dict):
                             self['subtext'] = date_dict.get('date')
 
     def as_menu_item(self):
-        return MenuItem(self['text'], self['url'], self['icon'])
+        return MenuItem(self['text'], self['url'], self['icon'], self['avatar'] if 'avatar' in self else None)
 
 
 class MenuItem(dict):
 
-    def __init__(self, label, url, icon=""):
+    def __init__(self, label, url, icon=None, image=None):
+        domain = get_domain_for_portal(CosinnusPortal.get_current())
         if url and url[0] == '/':
-            domain = get_domain_for_portal(CosinnusPortal.get_current())
             url = domain + url
         self['icon'] = icon
         self['label'] = label
         self['url'] = url
+        if image and image[0] == '/':
+            image = domain + image
+        self['image'] = image

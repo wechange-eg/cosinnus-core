@@ -45,7 +45,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 {
                                     "icon": "fa-user",
                                     "label": "Personal Dashboard",
-                                    "url": "http://localhost:8000/dashboard/"
+                                    "url": "http://localhost:8000/dashboard/",
+                                    "image": None,
                                 }
                             ],
                             "actions": []
@@ -55,19 +56,22 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 {
                                     "icon": "fa-sitemap",
                                     "label": "Test Group",
-                                    "url": "http://localhost:8000/group/test-group/"
+                                    "url": "http://localhost:8000/group/test-group/",
+                                    "image": None,
                                 }
                             ],
                             "actions": [
                                 {
-                                    "icon": "",
-                                    "label": "create a new group",
-                                    "url": "http://localhost:8000/groups/add/"
+                                    "icon": None,
+                                    "label": "Create a Group",
+                                    "url": "http://localhost:8000/groups/add/",
+                                    "image": None,
                                 },
                                 {
-                                    "icon": "",
-                                    "label": "create a new project",
-                                    "url": "http://localhost:8000/projects/add/"
+                                    "icon": None,
+                                    "label": "Create a Project",
+                                    "url": "http://localhost:8000/projects/add/",
+                                    "image": None,
                                 }
                             ]
                         },
@@ -76,12 +80,14 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 {
                                     "icon": "fa-sitemap",
                                     "label": "Forum",
-                                    "url": "http://localhost:8000/group/forum/"
+                                    "url": "http://localhost:8000/group/forum/",
+                                    "image": None,
                                 },
                                 {
                                     "icon": "fa-group",
                                     "label": "Map",
-                                    "url": "http://localhost:8000/map/"
+                                    "url": "http://localhost:8000/map/",
+                                    "image": None,
                                 }
                             ],
                             "actions": []
@@ -91,14 +97,16 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 {
                                     "icon": "fa-television",
                                     "label": "Test Conference",
-                                    "url": "http://localhost:8000/conference/test-conference/"
+                                    "url": "http://localhost:8000/conference/test-conference/",
+                                    "image": None,
                                 }
                             ],
                             "actions": [
                                 {
-                                    "icon": "",
-                                    "label": "create a new conference",
-                                    "url": "http://localhost:8000/conferences/add/"
+                                    "icon": None,
+                                    "label": "Create a Conference",
+                                    "url": "http://localhost:8000/conferences/add/",
+                                    "image": None,
                                 }
                             ]
                         }
@@ -113,8 +121,12 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         spaces = {}
 
         # personal space
+        dashboard_item = MenuItem(
+            'Personal Dashboard', reverse('cosinnus:user-dashboard'), 'fa-user',
+            request.user.cosinnus_profile.avatar_url
+        )
         personal_space = {
-            'items': [MenuItem('Personal Dashboard', reverse('cosinnus:user-dashboard'), 'fa-user')],
+            'items': [dashboard_item],
             'actions': [],
         }
         spaces['personal'] = personal_space
@@ -191,21 +203,24 @@ class BookmarksView(APIView):
                             {
                                 "icon": "fa-sitemap",
                                 "label": "Test Group",
-                                "url": "http://localhost:8000/group/test-group/"
+                                "url": "http://localhost:8000/group/test-group/",
+                                "image": None,
                             }
                         ],
                         "users": [
                             {
                                 "icon": "fa-user",
                                 "label": "Test User",
-                                "url": "http://localhost:8000/user/2/"
+                                "url": "http://localhost:8000/user/2/",
+                                "image": None,
                             }
                         ],
                         "content": [
                             {
                                 "icon": "fa-lightbulb-o",
                                 "label": "Test Idea",
-                                "url": "http://localhost:8000/map/?item=1.ideas.test-idea"
+                                "url": "http://localhost:8000/map/?item=1.ideas.test-idea",
+                                "image": None,
                             }
                         ]
                     },

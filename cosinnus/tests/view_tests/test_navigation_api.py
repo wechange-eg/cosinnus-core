@@ -44,7 +44,8 @@ class SpacesTestView(APITestCase):
                     {
                         'icon': 'fa-user',
                         'label': 'Personal Dashboard',
-                        'url': 'http://default domain/dashboard/'
+                        'url': 'http://default domain/dashboard/',
+                        'image': None,
                     }
                 ],
                 'actions': []
@@ -61,11 +62,14 @@ class SpacesTestView(APITestCase):
             response.data['groups'],
             {
                 'items': [
-                    {'icon': 'fa-sitemap', 'label': 'Test Group', 'url': 'http://default domain/group/test-group/'}
+                    {'icon': 'fa-sitemap', 'label': 'Test Group', 'url': 'http://default domain/group/test-group/',
+                     'image': None}
                 ],
                 'actions': [
-                     {'icon': '', 'label': 'Create new Group', 'url': 'http://default domain/groups/add/'},
-                     {'icon': '', 'label': 'Create new Project', 'url': 'http://default domain/projects/add/'}
+                     {'icon': None, 'label': 'Create new Group', 'url': 'http://default domain/groups/add/',
+                      'image': None},
+                     {'icon': None, 'label': 'Create new Project', 'url': 'http://default domain/projects/add/',
+                      'image': None}
                  ]
             }
         )
@@ -79,8 +83,9 @@ class SpacesTestView(APITestCase):
             response.data['community'],
             {
                 'items': [
-                    {'icon': 'fa-sitemap', 'label': 'Forum', 'url': 'http://default domain/group/forum/'},
-                    {'icon': 'fa-group', 'label': 'Map', 'url': 'http://default domain/map/'}
+                    {'icon': 'fa-sitemap', 'label': 'Forum', 'url': 'http://default domain/group/forum/',
+                     'image': None},
+                    {'icon': 'fa-group', 'label': 'Map', 'url': 'http://default domain/map/', 'image': None}
                 ],
                 'actions': []
             }
@@ -88,6 +93,7 @@ class SpacesTestView(APITestCase):
 
 
 class BookmarksTestView(APITestCase):
+
 
     @classmethod
     def setUpClass(cls):
@@ -107,7 +113,10 @@ class BookmarksTestView(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertListEqual(
             response.data['groups'],
-            [{'icon': 'fa-sitemap', 'label': 'Test Group', 'url': 'http://default domain/group/test-group/'}]
+            [
+                {'icon': 'fa-sitemap', 'label': 'Test Group', 'url': 'http://default domain/group/test-group/',
+                 'image': None}
+            ]
         )
 
     def test_user_bookmarks(self):
@@ -119,7 +128,7 @@ class BookmarksTestView(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertListEqual(
             response.data['users'],
-            [{'icon': 'fa-user', 'label': 'Test User2', 'url': 'http://default domain/user/2/'}]
+            [{'icon': 'fa-user', 'label': 'Test User2', 'url': 'http://default domain/user/2/', 'image': None}]
         )
 
     def test_content_bookmarks(self):
@@ -130,7 +139,8 @@ class BookmarksTestView(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertListEqual(
             response.data['content'],
-            [{'icon': 'fa-lightbulb-o', 'label': 'Test Idea', 'url': 'http://default domain/map/?item=1.ideas.test-idea'}]
+            [{'icon': 'fa-lightbulb-o', 'label': 'Test Idea',
+              'url': 'http://default domain/map/?item=1.ideas.test-idea', 'image': None}]
         )
 
 
