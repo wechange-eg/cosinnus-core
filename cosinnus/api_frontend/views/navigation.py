@@ -1,4 +1,5 @@
 from annoying.functions import get_object_or_None
+from django.db.models import Case, Count, When
 from django.urls.base import reverse
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
@@ -16,7 +17,9 @@ from cosinnus.models.group_extra import CosinnusConference
 from cosinnus.models.user_dashboard import DashboardItem, MenuItem
 from cosinnus.trans.group import CosinnusConferenceTrans, CosinnusProjectTrans, CosinnusSocietyTrans
 from cosinnus.utils.permissions import check_user_can_create_conferences, check_user_can_create_groups
+from cosinnus.utils.user import get_unread_message_count_for_user
 from cosinnus.views.user_dashboard import MyGroupsClusteredMixin
+from cosinnus_notifications.models import NotificationAlert
 
 
 class SpacesView(MyGroupsClusteredMixin, APIView):
@@ -44,7 +47,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 {
                                     "icon": "fa-user",
                                     "label": "Personal Dashboard",
-                                    "url": "http://localhost:8000/dashboard/"
+                                    "url": "http://localhost:8000/dashboard/",
+                                    "image": None,
                                 }
                             ],
                             "actions": []
@@ -54,19 +58,22 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 {
                                     "icon": "fa-sitemap",
                                     "label": "Test Group",
-                                    "url": "http://localhost:8000/group/test-group/"
+                                    "url": "http://localhost:8000/group/test-group/",
+                                    "image": None,
                                 }
                             ],
                             "actions": [
                                 {
-                                    "icon": "",
-                                    "label": "create a new group",
-                                    "url": "http://localhost:8000/groups/add/"
+                                    "icon": None,
+                                    "label": "Create a Group",
+                                    "url": "http://localhost:8000/groups/add/",
+                                    "image": None,
                                 },
                                 {
-                                    "icon": "",
-                                    "label": "create a new project",
-                                    "url": "http://localhost:8000/projects/add/"
+                                    "icon": None,
+                                    "label": "Create a Project",
+                                    "url": "http://localhost:8000/projects/add/",
+                                    "image": None,
                                 }
                             ]
                         },
@@ -75,12 +82,14 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 {
                                     "icon": "fa-sitemap",
                                     "label": "Forum",
-                                    "url": "http://localhost:8000/group/forum/"
+                                    "url": "http://localhost:8000/group/forum/",
+                                    "image": None,
                                 },
                                 {
                                     "icon": "fa-group",
                                     "label": "Map",
-                                    "url": "http://localhost:8000/map/"
+                                    "url": "http://localhost:8000/map/",
+                                    "image": None,
                                 }
                             ],
                             "actions": []
@@ -90,14 +99,16 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 {
                                     "icon": "fa-television",
                                     "label": "Test Conference",
-                                    "url": "http://localhost:8000/conference/test-conference/"
+                                    "url": "http://localhost:8000/conference/test-conference/",
+                                    "image": None,
                                 }
                             ],
                             "actions": [
                                 {
-                                    "icon": "",
-                                    "label": "create a new conference",
-                                    "url": "http://localhost:8000/conferences/add/"
+                                    "icon": None,
+                                    "label": "Create a Conference",
+                                    "url": "http://localhost:8000/conferences/add/",
+                                    "image": None,
                                 }
                             ]
                         }
@@ -112,8 +123,12 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         spaces = {}
 
         # personal space
+        dashboard_item = MenuItem(
+            'Personal Dashboard', reverse('cosinnus:user-dashboard'), 'fa-user',
+            request.user.cosinnus_profile.avatar_url
+        )
         personal_space = {
-            'items': [MenuItem('Personal Dashboard', reverse('cosinnus:user-dashboard'), 'fa-user')],
+            'items': [dashboard_item],
             'actions': [],
         }
         spaces['personal'] = personal_space
@@ -168,7 +183,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         return Response(spaces)
 
 
-class BookmarksView(MyGroupsClusteredMixin, APIView):
+class BookmarksView(APIView):
     """ An endpoint that returns the user bookmarks for the main navigation. """
 
     permission_classes = (IsAuthenticated,)
@@ -190,21 +205,24 @@ class BookmarksView(MyGroupsClusteredMixin, APIView):
                             {
                                 "icon": "fa-sitemap",
                                 "label": "Test Group",
-                                "url": "http://localhost:8000/group/test-group/"
+                                "url": "http://localhost:8000/group/test-group/",
+                                "image": None,
                             }
                         ],
                         "users": [
                             {
                                 "icon": "fa-user",
                                 "label": "Test User",
-                                "url": "http://localhost:8000/user/2/"
+                                "url": "http://localhost:8000/user/2/",
+                                "image": None,
                             }
                         ],
                         "content": [
                             {
                                 "icon": "fa-lightbulb-o",
                                 "label": "Test Idea",
-                                "url": "http://localhost:8000/map/?item=1.ideas.test-idea"
+                                "url": "http://localhost:8000/map/?item=1.ideas.test-idea",
+                                "image": None,
                             }
                         ]
                     },
@@ -231,3 +249,72 @@ class BookmarksView(MyGroupsClusteredMixin, APIView):
             'content': content_items,
         }
         return Response(bookmarks)
+
+
+class UnreadMessagesView(APIView):
+    """ An endpoint that returns the user unread messages for the main navigation. """
+
+    permission_classes = (IsAuthenticated,)
+    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+
+    # todo: generate proper response, by either putting the entire response into a
+    #       Serializer, or defining it by hand
+    #       Note: Also needs docs on our custom data/timestamp/version wrapper!
+    # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
+    # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
+    @swagger_auto_schema(
+        responses={'200': openapi.Response(
+            description='WIP: Response info missing. Short example included',
+            examples={
+                "application/json": {
+                    "data": {
+                        "count": 10
+                    },
+                    "version": COSINNUS_VERSION,
+                    "timestamp": 1658414865.057476
+                }
+            }
+        )}
+    )
+    def get(self, request):
+        unread_message_count = get_unread_message_count_for_user(request.user)
+        unread_messages = {
+            'count': unread_message_count,
+        }
+        return Response(unread_messages)
+
+
+class UnreadAlertsView(APIView):
+    """ An endpoint that returns the user unseen alerts for the main navigation. """
+
+    permission_classes = (IsAuthenticated,)
+    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+
+    # todo: generate proper response, by either putting the entire response into a
+    #       Serializer, or defining it by hand
+    #       Note: Also needs docs on our custom data/timestamp/version wrapper!
+    # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
+    # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
+    @swagger_auto_schema(
+        responses={'200': openapi.Response(
+            description='WIP: Response info missing. Short example included',
+            examples={
+                "application/json": {
+                    "data": {
+                        "count": 10
+                    },
+                    "version": COSINNUS_VERSION,
+                    "timestamp": 1658414865.057476
+                }
+            }
+        )}
+    )
+    def get(self, request):
+        alerts_qs = NotificationAlert.objects.filter(portal=CosinnusPortal.get_current(), user=self.request.user)
+        unseen_aggr = alerts_qs.aggregate(seen_count=Count(Case(When(seen=False, then=1))))
+        unread_alerts = {
+            'count': unseen_aggr.get('seen_count', 0)
+        }
+        return Response(unread_alerts)
