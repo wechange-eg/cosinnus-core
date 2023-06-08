@@ -277,7 +277,6 @@ class UserSignupTriggerEventsMixin(object):
             subj_user = render_to_string('cosinnus/mail/user_registration_pending_subj.txt', data)
             text = textfield(render_to_string('cosinnus/mail/user_registration_pending.html', data))
             send_html_mail_threaded(user, subj_user, text)
-            # TODO enable for API
             messages.success(request, self.message_success_inactive % {'user': user.email, 'email': user.email})
             # since anonymous users have no session, show the success message in the template via a flag
             return redirect_with_next(reverse('login'), request)
