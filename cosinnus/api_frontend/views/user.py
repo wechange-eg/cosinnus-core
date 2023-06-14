@@ -9,6 +9,7 @@ from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import serializers, authentication
 from rest_framework import status
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
@@ -254,6 +255,9 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
         )}
     )
     def post(self, request):
+        # even though `AllowNone` permission classes are set for this case, raise again for dynamic setting test cases
+        if not settings.COSINNUS_USER_SIGNUP_ENABLED:
+            raise PermissionDenied('Signup is disabled')
         serializer = CosinnusUserSignupSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         if UserSignupThrottleBurst in self.throttle_classes:
@@ -280,12 +284,12 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
             message = force_text(_('User "%(user)s" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address "%(email)s" when this happens.'))
             message += ' '
             do_login = False
-        if CosinnusPortal.get_current().email_needs_verification and settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
+        if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
             message = (message or '') + force_text(_('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.'))
             do_login = False
         if do_login:
             next_url = redirect_url or getattr(settings, 'LOGIN_REDIRECT_URL', reverse('cosinnus:user-dashboard'))
-            
+        
         data.update({
             'refresh': refresh,
             'access': access,
