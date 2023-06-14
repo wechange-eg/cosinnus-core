@@ -6,6 +6,7 @@ from rest_framework.test import APITestCase
 from threading import Thread
 
 from cosinnus.conf import settings
+from cosinnus.core.middleware.cosinnus_middleware import initialize_cosinnus_after_startup
 import cosinnus_event
 import cosinnus_message
 from cosinnus.models.group import CosinnusGroupMembership, CosinnusPortal
@@ -16,6 +17,7 @@ from cosinnus.views.profile import deactivate_user_and_mark_for_deletion, delete
 from cosinnus_message.rocket_chat import RocketChatConnection
 
 
+initialize_cosinnus_after_startup()
 User = get_user_model()
 
 
