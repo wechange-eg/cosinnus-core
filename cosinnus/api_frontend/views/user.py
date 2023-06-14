@@ -283,6 +283,8 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
         if CosinnusPortal.get_current().email_needs_verification and settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
             message = (message or '') + force_text(_('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.'))
             do_login = False
+        if do_login:
+            next_url = redirect_url or getattr(settings, 'LOGIN_REDIRECT_URL', reverse('cosinnus:user-dashboard'))
             
         data.update({
             'refresh': refresh,

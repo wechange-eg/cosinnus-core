@@ -96,11 +96,11 @@ class SwitchLanguageView(RedirectView):
 
     def get(self, request, *args, **kwargs):
         language = kwargs.pop('language', None)
-
+        response = super(SwitchLanguageView, self).get(request, *args, **kwargs)
+        
         if not language or language not in list(dict(settings.LANGUAGES).keys()):
             messages.error(request, _('The language "%s" is not supported' % language))
         else:
-            response = super(SwitchLanguageView, self).get(request, *args, **kwargs)
             response.set_cookie(
                 settings.LANGUAGE_COOKIE_NAME,
                 language,

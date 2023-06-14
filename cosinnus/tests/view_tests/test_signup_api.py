@@ -1,14 +1,18 @@
 import json
 
 from django.contrib.auth import get_user_model
+from django.core.cache import cache
+from django.test import override_settings
 from django.urls import reverse
 from rest_framework.test import APITestCase, APIClient
+
 from cosinnus.conf import settings
 
 
 class SignupTestView(APITestCase):
 
     def setUp(self):
+        cache.clear()
         self.client = APIClient()
 
         self.signup_url = reverse("cosinnus:frontend-api:api-signup")
@@ -62,7 +66,8 @@ class SignupTestView(APITestCase):
 
         user_exists = get_user_model().objects.filter(email=self.user_data["email"]).exists()
         self.assertTrue(user_exists)
-
+    
+    @override_settings(COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN=False)
     def test_dashboard_redirect_after_signup(self):
         """
         Ensure user will be redirected correctly to the dashboard page
@@ -70,7 +75,7 @@ class SignupTestView(APITestCase):
         response = self.client.post(self.signup_url, self.user_data, format="json")
         response_json = json.loads(response.content)
         redirect_url = response_json.get('data', {}).get('next')
-        self.assertEqual(redirect_url, "/dashboard/")
+        self.assertEqual(redirect_url, settings.LOGIN_REDIRECT_URL)
 
     def test_user_cannot_signup_with_same_email_twice(self):
         """
@@ -155,18 +160,13 @@ class SignupTestView(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertIn('Enter a valid email address.', response_json.get('data', {}).get('email'))
 
-# def test_user_cannot_signup_with_user_signup_disabled(self):
-    #     """
-    #     Ensure user cannot signup if `COSINNUS_USER_SIGNUP_ENABLED` setting is turned off
-
-    #     TODO: get after the note will no longer be relevant for this test ->
-    #     `note: this test will fail for now, and rightly so, because the blocked access is still a todo in #82 and hasn't been implemented`
-    #     """
-
-    #     print(f'SIGNUP ENABLED -> {settings.COSINNUS_USER_SIGNUP_ENABLED}')
-
-    #     response = self.client.post(self.signup_url, self.user_data, format="json")
-    #     if settings.COSINNUS_USER_SIGNUP_ENABLED: 
-    #         self.assertEqual(response.status_code, 200)
-    #     else:
-    #         self.assertEqual(response.status_code, 404)
+    def test_user_cannot_signup_with_user_signup_disabled(self):
+            """
+            Ensure user cannot signup if `COSINNUS_USER_SIGNUP_ENABLED` setting is turned off
+            """
+            response = self.client.post(self.signup_url, self.user_data, format="json")
+            print(f'PPP -> {settings.COSINNUS_USER_SIGNUP_ENABLED}')
+            if settings.COSINNUS_USER_SIGNUP_ENABLED: 
+                self.assertEqual(response.status_code, 200)
+            else:
+                self.assertEqual(response.status_code, 404) # throws an error 404 on localhost + signup still possible via drf!
