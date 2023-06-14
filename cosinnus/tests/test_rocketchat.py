@@ -69,10 +69,7 @@ class RocketChatTestUserMixin:
 
     def _get_test_user_info(self):
         """ Helper to get the test user info from the user list API endpoint. """
-        user_list = self.rocket_connection.rocket.users_list().json()
-        for user in user_list['users']:
-            if user['_id'] == self.test_user_id:
-                return user
+        return self.rocket_connection.rocket.users_info(user_id=self.test_user_id).json().get('user', None)
 
 
 class RocketChatConnectionTest(RocketChatBaseTest):
@@ -169,6 +166,7 @@ class RocketChatUserTest(RocketChatTestUserMixin, RocketChatBaseTest):
 
     def test_create_user_with_same_name(self):
         """ Test that if a new user is created with the same name as an existing user a new RC user is created. """
+        original_test_data = self.test_user_data
         self.test_user_data.update({'username': 2, 'email': 'rockettest2@example.com'})
         test_user2 = User.objects.create(**self.test_user_data)
         profile1 = self.test_user.cosinnus_profile
@@ -180,6 +178,7 @@ class RocketChatUserTest(RocketChatTestUserMixin, RocketChatBaseTest):
         self.assertNotEqual(user_info['_id'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
         self.assertNotEqual(user_info['username'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
         self.rocket_connection.users_delete(test_user2)
+        self.test_user_data = original_test_data
 
 
 class RocketChatGroupTest(RocketChatTestUserMixin, RocketChatBaseTest):
