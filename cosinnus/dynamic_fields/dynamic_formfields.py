@@ -161,6 +161,9 @@ class MultiAddressDynamicField(forms.Field):
     
     def to_python(self, value):
         """ Build a python dictionary from all address subfields """
+        # for unbound fields with no initial, the value is returned as none
+        if not self.form and not value:
+            return None
         # stupidly check if we contain each field set from 0 to 99
         addresses = {}
         for i in range(100):
@@ -170,14 +173,14 @@ class MultiAddressDynamicField(forms.Field):
                 address[subfield_name] = self.form.data.get(f'{self.field_name}-{subfield_name}-{i}', '').strip()
             if any( (bool(val) for val in address.values()) ):
                 addresses[str(i)] = address
-            
+        
         # make sure the selected value is an existing key of the address dict
         selected_value = self.form.data.get(f'{self.field_name}-selector', None)
         try:
             addresses[selected_value]
         except Exception:
             selected_value = None
-            
+        
         field_value = {
             'current_address': selected_value,
             'addresses': addresses,

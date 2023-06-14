@@ -76,7 +76,8 @@ class SignupTestView(APITestCase):
         response_json = json.loads(response.content)
         redirect_url = response_json.get('data', {}).get('next')
         self.assertEqual(redirect_url, settings.LOGIN_REDIRECT_URL)
-
+    
+    @override_settings(LANGUAGES=[('de', "Testdeutsch"), ('en', "Testenglish"),])
     def test_user_cannot_signup_with_same_email_twice(self):
         """
         Ensure user cannot signup using an email which is already in use
@@ -94,7 +95,8 @@ class SignupTestView(APITestCase):
         response_json = json.loads(response.content)
         self.assertEqual(response.status_code, 400)
         self.assertIn('Email is already in use', response_json.get('data', {}).get('non_field_errors'))
-
+    
+    @override_settings(LANGUAGES=[('de', "Testdeutsch"), ('en', "Testenglish"), ])
     def test_signed_up_users_cannot_signup(self):
         """
         Ensure that user who has already signed up cannot use signup once again
@@ -107,7 +109,8 @@ class SignupTestView(APITestCase):
         another_response_json = json.loads(another_response.content)
         self.assertEqual(another_response.status_code, 403)
         self.assertIn('You do not have permission to perform this action', another_response_json.get('data', {}).get('detail'))
-
+    
+    @override_settings(LANGUAGES=[('de', "Testdeutsch"), ('en', "Testenglish"), ])
     def test_user_cannot_signup_with_missing_data(self):
         """
         Ensure user cannot signup with missing data: `email`, `password` or `first_name`
@@ -145,7 +148,8 @@ class SignupTestView(APITestCase):
         response_json = json.loads(response.content)
         self.assertEqual(response.status_code, 400)
         self.assertIn('This field is required.', response_json.get('data', {}).get('first_name'))
-
+    
+    @override_settings(LANGUAGES=[('de', "Testdeutsch"), ('en', "Testenglish"), ])
     def test_signup_with_valid_email(self):
         """
         Ensure user uses a valid email to signup
