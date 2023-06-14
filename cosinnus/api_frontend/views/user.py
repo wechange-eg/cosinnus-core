@@ -29,6 +29,7 @@ from cosinnus.conf import settings
 from cosinnus.models import CosinnusPortal
 from cosinnus.utils.jwt import get_tokens_for_user
 from cosinnus.utils.permissions import IsNotAuthenticated, AllowNone
+from cosinnus.utils.urls import redirect_with_next
 from cosinnus.views.common import LoginViewAdditionalLogicMixin
 from cosinnus.views.user import UserSignupTriggerEventsMixin
 
@@ -265,7 +266,7 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
             UserSignupThrottleBurst().throttle_success(really_throttle=True, request=request, view=self)
             
         user = serializer.create(serializer.validated_data)
-        redirect_url = self.trigger_events_after_user_signup(user, self.request)
+        redirect_url = self.trigger_events_after_user_signup(user, self.request, skip_messages=True)
         
         # if the user has been logged in immediately, return the auth tokens
         data = {
@@ -281,14 +282,23 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
             refresh = user_tokens['refresh']
             access = user_tokens['access']
         if CosinnusPortal.get_current().users_need_activation:
-            message = force_text(_('User "%(user)s" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address "%(email)s" when this happens.'))
+            str_dict = {
+                'user': user.get_full_name(),
+                'email': user.email,
+            }
+            message = force_text(_('User "%(user)s" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address "%(email)s" when this happens.')) % str_dict
             message += ' '
             do_login = False
         if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
             message = (message or '') + force_text(_('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.'))
             do_login = False
+        
         if do_login:
             next_url = redirect_url or getattr(settings, 'LOGIN_REDIRECT_URL', reverse('cosinnus:user-dashboard'))
+        elif settings.COSINNUS_V3_FRONTEND_ENABLED:
+            user.cosinnus_profile.add_redirect_on_next_page(
+                redirect_with_next(settings.COSINNUS_V3_FRONTEND_SIGNUP_VERIFICATION_WELCOME_PAGE, self.request),
+                message=None, priority=True)
         
         data.update({
             'refresh': refresh,
