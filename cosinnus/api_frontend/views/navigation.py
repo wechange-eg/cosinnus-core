@@ -2,6 +2,7 @@ from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 from django.db.models import Case, Count, When
 from django.urls.base import reverse
+from django.utils.translation import ugettext_lazy as _
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.exceptions import ValidationError
@@ -128,7 +129,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
 
         # personal space
         dashboard_item = MenuItem(
-            'Personal Dashboard', reverse('cosinnus:user-dashboard'), 'fa-user',
+            _('Personal Dashboard'), reverse('cosinnus:user-dashboard'), 'fa-user',
             request.user.cosinnus_profile.avatar_url
         )
         personal_space = {
@@ -560,17 +561,17 @@ class ProfileView(APIView):
 
         # profile page
         profile_menu_items = [
-            MenuItem('My Profile', reverse('cosinnus:profile-detail'), 'fa-circle-user'),
-            MenuItem('Set up my Profile', reverse('cosinnus:v3-frontend-setup-profile'), 'fa-pen'),
-            MenuItem('Edit my Profile', reverse('cosinnus:profile-edit'), 'fa-gear'),
-            MenuItem('Notification Preferences', reverse('cosinnus:notifications'), 'fa-envelope'),
+            MenuItem(_('My Profile'), reverse('cosinnus:profile-detail'), 'fa-circle-user'),
+            MenuItem(_('Set up my Profile'), reverse('cosinnus:v3-frontend-setup-profile'), 'fa-pen'),
+            MenuItem(_('Edit my Profile'), reverse('cosinnus:profile-edit'), 'fa-gear'),
+            MenuItem(_('Notification Preferences'), reverse('cosinnus:notifications'), 'fa-envelope'),
 
         ]
         profile_menu.extend(profile_menu_items)
 
         # language
         if not settings.COSINNUS_LANGUAGE_SELECT_DISABLED:
-            language_item = MenuItem('Change Language', None, 'fa-language')
+            language_item = MenuItem(_('Change Language'), None, 'fa-language')
             language_subitems = [
                 MenuItem(language, reverse('cosinnus:switch-language', kwargs={'language': code}))
                 for code, language in settings.LANGUAGES
@@ -582,18 +583,18 @@ class ProfileView(APIView):
         # TODO: consider my_contribution_badge
         if settings.COSINNUS_PAYMENTS_ENABLED or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY \
                 and request.user.is_superuser:
-            payments_item = MenuItem('Your Contribution', reverse('wechange-payments:overview'), 'fa-hand-holding-hart')
+            payments_item = MenuItem(_('Your Contribution'), reverse('wechange-payments:overview'), 'fa-hand-holding-hart')
             profile_menu.append(payments_item)
 
         # administration
         if request.user.is_superuser or check_user_portal_manager(request.user):
             administration_item = MenuItem(
-                'Administration', reverse('cosinnus:administration'), 'fa-screwdriver-wrench'
+                _('Administration'), reverse('cosinnus:administration'), 'fa-screwdriver-wrench'
             )
             profile_menu.append(administration_item)
 
         # logout
-        logout_item = MenuItem('Logout', reverse('logout'), 'fa-right-from-bracket')
+        logout_item = MenuItem(_('Logout'), reverse('logout'), 'fa-right-from-bracket')
         profile_menu.append(logout_item)
 
         return Response(profile_menu)
