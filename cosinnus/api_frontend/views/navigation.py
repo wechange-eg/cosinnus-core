@@ -549,6 +549,32 @@ class ProfileView(APIView):
             examples={
                 "application/json": {
                     "data": [
+                        {
+                            "icon": "fa-circle-user",
+                            "label": "My Profile",
+                            "url": "http://localhost:8000/profile/",
+                            "image": None
+                        },
+                        {
+                            "icon": "fa-language",
+                            "label": "Change Language",
+                            "url": None,
+                            "image": None,
+                            "sub_items": [
+                                {
+                                    "icon": None,
+                                    "label": "Deutsch",
+                                    "url": "http://localhost:8000/language/de/",
+                                    "image": None
+                                },
+                                {
+                                    "icon": None,
+                                    "label": "English",
+                                    "url": "http://localhost:8000/language/en/",
+                                    "image": None
+                                }
+                            ]
+                        }
                     ],
                     "version": COSINNUS_VERSION,
                     "timestamp": 1658414865.057476
@@ -567,7 +593,7 @@ class ProfileView(APIView):
             profile_menu_items.append(
                 MenuItem(_('Set up my Profile'), reverse('cosinnus:v3-frontend-setup-profile'), 'fa-pen'),
             )
-        profile_menu_items.append([
+        profile_menu_items.extend([
             MenuItem(_('Edit my Profile'), reverse('cosinnus:profile-edit'), 'fa-gear'),
             MenuItem(_('Notification Preferences'), reverse('cosinnus:notifications'), 'fa-envelope'),
 
