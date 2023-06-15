@@ -562,11 +562,16 @@ class ProfileView(APIView):
         # profile page
         profile_menu_items = [
             MenuItem(_('My Profile'), reverse('cosinnus:profile-detail'), 'fa-circle-user'),
-            MenuItem(_('Set up my Profile'), reverse('cosinnus:v3-frontend-setup-profile'), 'fa-pen'),
+        ]
+        if settings.COSINNUS_V3_FRONTEND_ENABLED:
+            profile_menu_items.append(
+                MenuItem(_('Set up my Profile'), reverse('cosinnus:v3-frontend-setup-profile'), 'fa-pen'),
+            )
+        profile_menu_items.append([
             MenuItem(_('Edit my Profile'), reverse('cosinnus:profile-edit'), 'fa-gear'),
             MenuItem(_('Notification Preferences'), reverse('cosinnus:notifications'), 'fa-envelope'),
 
-        ]
+        ])
         profile_menu.extend(profile_menu_items)
 
         # language
