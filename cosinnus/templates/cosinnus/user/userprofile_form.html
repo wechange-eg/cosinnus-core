@@ -142,6 +142,15 @@
                 {% endblock %}
 
                 {% block extra_fields %}{% endblock%}
+
+                {% block newsletter_opt_in_field %}
+                    {% if SETTINGS.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN and form.forms.obj.newsletter_opt_in %}
+                        {# Newsletter opt-in checkbox #}
+                        {% trans "News via the newsletter" as newsletter_label %}
+                        {% trans "Yes, I want to be involved in what is going on and receive a newsletter about news and events." as newsletter_box_label %}
+                        {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.newsletter_opt_in label=newsletter_label legend=newsletter_legend checkbox_label=newsletter_box_label %}
+                    {% endif %}
+                {% endblock%}
                 
 	    </div>
 	    
