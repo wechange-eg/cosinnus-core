@@ -891,6 +891,16 @@ class CosinnusConf(AppConf):
         "^/setup/",
         "^api/auth/",
     ]
+
+    # Forum space label in the v3 main navigation.
+    V3_MENU_SPACES_FORUM_LABEL = _('Forum')
+
+    # Map space label in the v3 main navigation.
+    V3_MENU_SPACES_MAP_LABEL = _('Map')
+
+    # List of help items to be included in the v3 main navigation.
+    # Format: (<label>, <url>, <icon>), e.g.: (_('FAQ'), 'https://wechange.de/cms/help/', 'fa-question-circle'),
+    V3_MENU_HELP_LINKS = []
     
     # whether the regular user signup method is enabled for this portal
     USER_SIGNUP_ENABLED = True
