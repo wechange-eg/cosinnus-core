@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-21 17:42+0200\n"
+"POT-Creation-Date: 2023-06-22 14:01+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -206,6 +206,13 @@ msgstr "Rocket: Napraw/utwórz konta użytkowników rocketchat"
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Obsadź brakujące członkostwa w pokoju RocketChat dla użytkowników"
 
+#, python-format
+msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
+msgstr ""
+
+msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+msgstr ""
+
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "Adres E-mail dla konta, które chcesz użyć wymaga aktywacji zanim będziesz mógł/mogła się zalogować."
 
@@ -342,9 +349,6 @@ msgstr "Ten zespół nie istnieje już pod wpisanym przez Ciebie URL. Zostałeś
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "To konto nie jest już aktywne. Zostałeś/-aś wylogowany/-a."
-
-msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
-msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
@@ -5429,13 +5433,24 @@ msgstr ""
 msgid "New user request: %(user_name)s wants to join %(site_name)s!"
 msgstr "Nowa prośba o dołączenie: %(user_name)s chce dołączyć do %(site_name)s!"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Hello, %(user_name)s! \n"
+#| "\n"
+#| "Welcome to %(site_name)s! Your user account was approved.\n"
+#| "\n"
+#| "You can now log in at %(domain_url)s.\n"
+#| "\n"
+#| "\n"
+#| "Best regards,\n"
+#| "\n"
+#| "the %(site_name)s Team"
 msgid ""
 "Hello, %(user_name)s! \n"
 "\n"
 "Welcome to %(site_name)s! Your user account was approved.\n"
 "\n"
-"You can now log in at %(domain_url)s.\n"
+"You can now log in at %(domain_url)s/login/.\n"
 "\n"
 "\n"
 "Best regards,\n"
@@ -5475,21 +5490,15 @@ msgstr ""
 msgid "Your request to join %(site_name)s was denied."
 msgstr "Twoja prośba o dołączenie do %(site_name)s została odrzucona."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
-"Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+"Hello %(user_name)s! Your registration was successful.\n"
 "\n"
-"Our administrators will review your request and approve your user account soon!\n"
+"Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at %(user_mail)s.\n"
 "\n"
-"Until then, with warm greetings, \n"
+"Best regards,\n"
 "your %(site_name)s Team"
 msgstr ""
-"Cześć! Cieszymy się, że chcesz zostać członkiem %(site_name)s.\n"
-"\n"
-"Nasi administratorzy wkrótce zweryfikują Twoją prośbę i zatwierdzą Twoje konto!\n"
-"\n"
-"Pozdrawiamy,\n"
-"Twój Zespół %(site_name)s"
 
 #, python-format
 msgid "You have requested to become a member of %(site_name)s!"
@@ -13411,6 +13420,22 @@ msgstr "Lista zadań do wykonania  \"%(title)s” nie mogła zostać dodana."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Nie możesz usunąć tego folderu, ponieważ nie posiadasz uprawnień do usunięcia jednego lub więcej elementów zawartych w tym folderze!"
+
+#, fuzzy
+#~ msgid ""
+#~ "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+#~ "\n"
+#~ "Our administrators will review your request and approve your user account soon!\n"
+#~ "\n"
+#~ "Until then, with warm greetings, \n"
+#~ "your %(site_name)s Team"
+#~ msgstr ""
+#~ "Cześć! Cieszymy się, że chcesz zostać członkiem %(site_name)s.\n"
+#~ "\n"
+#~ "Nasi administratorzy wkrótce zweryfikują Twoją prośbę i zatwierdzą Twoje konto!\n"
+#~ "\n"
+#~ "Pozdrawiamy,\n"
+#~ "Twój Zespół %(site_name)s"
 
 #~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
 #~ msgstr "Zmieniłeś/-aś swój adres e-mail. Wkrótce wyślemy Ci e-mail na podany adres z linkiem aktywacyjnym. Do momentu zatwierdzenia tego adresu, aktywny będzie Twój stary adres e-mail!"

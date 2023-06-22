@@ -286,7 +286,7 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
                 'user': user.get_full_name(),
                 'email': user.email,
             }
-            message = force_text(_('User "%(user)s" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address "%(email)s" when this happens.')) % str_dict
+            message = force_text(_('Hello "%(user)s"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at "%(email)s".')) % str_dict
             message += ' '
             do_login = False
         if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:

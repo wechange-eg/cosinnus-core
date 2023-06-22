@@ -1,6 +1,6 @@
-{% load i18n cosinnus_tags %}{% autoescape off %}{% blocktrans with user_name=user|full_name_force user_mail=user.email %}Hi! We're happy to know you wish to become a member of {{ site_name }}. 
+{% load i18n cosinnus_tags %}{% autoescape off %}{% blocktrans with user_name=user|full_name_force user_mail=user.email %}Hello {{ user_name }}! Your registration was successful.
 
-Our administrators will review your request and approve your user account soon!
+Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at {{ user_mail }}.
 
-Until then, with warm greetings, 
+Best regards,
 your {{ site_name }} Team{% endblocktrans %}{% endautoescape %}
