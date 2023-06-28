@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-06-28 15:17+0200\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -189,6 +189,35 @@ msgstr "Rocket: حساب‌های راکت‌چت ناپیدا ساخته/مرم
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: مشکل عضویت اتاق ناپیدای کاربران را حل کن"
 
+#, fuzzy
+#| msgid "My Dashboard"
+msgid "Personal Dashboard"
+msgstr "داشبورد من"
+
+msgid "My Profile"
+msgstr ""
+
+msgid "Set up my Profile"
+msgstr ""
+
+msgid "Edit my Profile"
+msgstr ""
+
+msgid "Notification Preferences"
+msgstr "ترجیحات آگاه‌سازی"
+
+msgid "Change Language"
+msgstr ""
+
+msgid "Your Contribution"
+msgstr ""
+
+msgid "Administration"
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -254,6 +283,12 @@ msgid "Democracy and Participation"
 msgstr ""
 
 msgid "Digitalisation"
+msgstr ""
+
+msgid "Forum"
+msgstr ""
+
+msgid "Map"
 msgstr ""
 
 msgid "Overnight stay required"
@@ -898,9 +933,6 @@ msgstr "درود"
 
 msgid "Click the following link to change which emails you receive:"
 msgstr "روی پیوند زیر کلیک کنید تا ایمیل‌هایی که دریافت می‌کنید را تغییر دهید:"
-
-msgid "Notification Preferences"
-msgstr "ترجیحات آگاه‌سازی"
 
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "روی پیوند زیر کلیک کنید تا دیگر هیچ ایمیلی از سوی ما دریافت نکنید:"
@@ -2409,9 +2441,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "اتاق BBB"
-
-msgid "Administration"
-msgstr ""
 
 msgid "Select a page on the left side."
 msgstr ""
@@ -4575,9 +4604,6 @@ msgstr ""
 msgid "There are no invitations."
 msgstr ""
 
-msgid "Map"
-msgstr ""
-
 msgid "Meeting"
 msgstr ""
 
@@ -5380,18 +5406,6 @@ msgstr "باشه"
 msgid "Toggle navigation"
 msgstr ""
 
-msgid "My Profile"
-msgstr ""
-
-msgid "Your Contribution"
-msgstr ""
-
-msgid "Logout"
-msgstr ""
-
-msgid "Forum"
-msgstr ""
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr ""
@@ -5459,6 +5473,9 @@ msgid "I have read and accept the"
 msgstr ""
 
 msgid "Terms and Services"
+msgstr ""
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
 msgstr ""
 
 msgid "Forgot password?"
@@ -6587,6 +6604,9 @@ msgid "Signals your willingness to be contacted by other users who wish to colla
 msgstr ""
 
 msgid "I am open for cooperation requests"
+msgstr ""
+
+msgid "News via the newsletter"
 msgstr ""
 
 msgid "Welcome!"

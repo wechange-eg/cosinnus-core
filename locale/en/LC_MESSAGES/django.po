@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-06-28 15:17+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -197,6 +197,37 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
+#, fuzzy
+msgid "Personal Dashboard"
+msgstr "Project Type"
+
+msgid "My Profile"
+msgstr ""
+
+#, fuzzy
+msgid "Set up my Profile"
+msgstr "Edit Project"
+
+#, fuzzy
+msgid "Edit my Profile"
+msgstr "Edit Project"
+
+msgid "Notification Preferences"
+msgstr ""
+
+msgid "Change Language"
+msgstr ""
+
+msgid "Your Contribution"
+msgstr ""
+
+#, fuzzy
+msgid "Administration"
+msgstr "There are no groups."
+
+msgid "Logout"
+msgstr ""
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -264,6 +295,12 @@ msgid "Democracy and Participation"
 msgstr ""
 
 msgid "Digitalisation"
+msgstr ""
+
+msgid "Forum"
+msgstr ""
+
+msgid "Map"
 msgstr ""
 
 msgid "Overnight stay required"
@@ -935,9 +972,6 @@ msgid "Hello"
 msgstr ""
 
 msgid "Click the following link to change which emails you receive:"
-msgstr ""
-
-msgid "Notification Preferences"
 msgstr ""
 
 msgid "Click the following link to never receive any more emails from us:"
@@ -2474,10 +2508,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "Project Type"
-
-#, fuzzy
-msgid "Administration"
-msgstr "There are no groups."
 
 msgid "Select a page on the left side."
 msgstr ""
@@ -4713,9 +4743,6 @@ msgstr ""
 msgid "There are no invitations."
 msgstr "There are no groups."
 
-msgid "Map"
-msgstr ""
-
 msgid "Meeting"
 msgstr ""
 
@@ -5549,18 +5576,6 @@ msgstr ""
 msgid "Toggle navigation"
 msgstr ""
 
-msgid "My Profile"
-msgstr ""
-
-msgid "Your Contribution"
-msgstr ""
-
-msgid "Logout"
-msgstr ""
-
-msgid "Forum"
-msgstr ""
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr ""
@@ -5631,6 +5646,9 @@ msgid "I have read and accept the"
 msgstr ""
 
 msgid "Terms and Services"
+msgstr ""
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
 msgstr ""
 
 msgid "Forgot password?"
@@ -6805,6 +6823,10 @@ msgstr ""
 
 msgid "I am open for cooperation requests"
 msgstr ""
+
+#, fuzzy
+msgid "News via the newsletter"
+msgstr "Create Project"
 
 msgid "Welcome!"
 msgstr ""

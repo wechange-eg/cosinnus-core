@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-06-28 15:17+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -209,6 +209,41 @@ msgstr "Rocket: Opravte/vytvořte chybějící RocketChat účty"
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Zařiďte chybějící členství v RocketChat místnosti pro uživatele"
 
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "Personal Dashboard"
+msgstr "Panel projektu"
+
+msgid "My Profile"
+msgstr "Můj profil"
+
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Upravit váš profil"
+
+#, fuzzy
+#| msgid "Edit My Profile"
+msgid "Edit my Profile"
+msgstr "Upravit můj profil"
+
+msgid "Notification Preferences"
+msgstr "Předvolby oznámení"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "Změnit jazyk"
+
+msgid "Your Contribution"
+msgstr "Váš příspěvek"
+
+msgid "Administration"
+msgstr "Správa"
+
+msgid "Logout"
+msgstr "Odhlásit se"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -281,6 +316,12 @@ msgstr "Podejte si žádost o účast"
 #| msgid "Organization"
 msgid "Digitalisation"
 msgstr "Organizace"
+
+msgid "Forum"
+msgstr "Fórum"
+
+msgid "Map"
+msgstr "Mapa"
 
 msgid "Overnight stay required"
 msgstr "Vyžadován nocleh"
@@ -937,9 +978,6 @@ msgstr "Ahoj"
 
 msgid "Click the following link to change which emails you receive:"
 msgstr "Kliknutím na následující odkaz můžete změnit, které e-maily budete dostávat:"
-
-msgid "Notification Preferences"
-msgstr "Předvolby oznámení"
 
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "Kliknutím na následující odkaz od nás už nikdy nebudete dostávat žádné další e-maily:"
@@ -2461,9 +2499,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "Návštěvy BBB místnosti"
-
-msgid "Administration"
-msgstr "Správa"
 
 msgid "Select a page on the left side."
 msgstr "Vyberte stránku na levé straně."
@@ -4739,9 +4774,6 @@ msgstr "Nejsou žádné projekty."
 msgid "There are no invitations."
 msgstr "Nejsou žádné pozvánky."
 
-msgid "Map"
-msgstr "Mapa"
-
 #, fuzzy
 msgid "Meeting"
 msgstr "Mazání..."
@@ -5718,18 +5750,6 @@ msgstr "OK"
 msgid "Toggle navigation"
 msgstr "Přepnout navigaci"
 
-msgid "My Profile"
-msgstr "Můj profil"
-
-msgid "Your Contribution"
-msgstr "Váš příspěvek"
-
-msgid "Logout"
-msgstr "Odhlásit se"
-
-msgid "Forum"
-msgstr "Fórum"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Lidé"
@@ -5798,6 +5818,9 @@ msgstr "Přečetl/a jsem si a přijímám"
 
 msgid "Terms and Services"
 msgstr "Podmínky a služby"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "Zapomenuté heslo?"
@@ -6945,6 +6968,11 @@ msgstr "Signalizuje vaši ochotu být kontaktován/a ostatními uživateli, kte�
 
 msgid "I am open for cooperation requests"
 msgstr "Jsem otevřený/á pro žádosti o spolupráci"
+
+#, fuzzy
+#| msgid "Create Newsletter"
+msgid "News via the newsletter"
+msgstr "Vytvořit bulletin"
 
 msgid "Welcome!"
 msgstr "Vítejte!"

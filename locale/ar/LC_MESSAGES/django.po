@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-06-28 15:17+0200\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -206,6 +206,41 @@ msgstr "روكيت: إصلاح / إنشاء حسابات الدردشة الصا
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "روكيت: إصلاح عضويات غرفة الدردشة المفقودة للمستخدمين"
 
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "Personal Dashboard"
+msgstr "لوحة تحكم المشروع"
+
+msgid "My Profile"
+msgstr "ملفي الشخصي"
+
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "تعديل ملفك الشخصي"
+
+#, fuzzy
+#| msgid "Edit My Profile"
+msgid "Edit my Profile"
+msgstr "تعديل ملفي الشخصي"
+
+msgid "Notification Preferences"
+msgstr "تفضيلات الإخطار"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "تغيير اللغة"
+
+msgid "Your Contribution"
+msgstr "مساهمتك"
+
+msgid "Administration"
+msgstr "الإدارة"
+
+msgid "Logout"
+msgstr "نسجيل خروج"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -277,6 +312,12 @@ msgstr "تحميل المشاركين"
 #| msgid "Organization"
 msgid "Digitalisation"
 msgstr "منظمات"
+
+msgid "Forum"
+msgstr "المنتدى"
+
+msgid "Map"
+msgstr "خارطة"
 
 msgid "Overnight stay required"
 msgstr "مطلوب البقاء طوال الليل"
@@ -951,9 +992,6 @@ msgstr "مرحباً"
 
 msgid "Click the following link to change which emails you receive:"
 msgstr "انقر الرابط التالي لتغيير رسائل البريد الإلكتروني التي تتلقاها:"
-
-msgid "Notification Preferences"
-msgstr "تفضيلات الإخطار"
 
 #, fuzzy
 msgid "Click the following link to never receive any more emails from us:"
@@ -2551,9 +2589,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "زيارات غرفة BBB"
-
-msgid "Administration"
-msgstr "الإدارة"
 
 msgid "Select a page on the left side."
 msgstr "حدد صفحة على الجانب الأيسر."
@@ -4875,9 +4910,6 @@ msgstr "لا توجد مشاريع."
 msgid "There are no invitations."
 msgstr "لا توجد دعوات."
 
-msgid "Map"
-msgstr "خارطة"
-
 #, fuzzy
 msgid "Meeting"
 msgstr "جارٍ الحذف..."
@@ -5836,18 +5868,6 @@ msgstr "حسناً"
 msgid "Toggle navigation"
 msgstr "تبديل التنقل"
 
-msgid "My Profile"
-msgstr "ملفي الشخصي"
-
-msgid "Your Contribution"
-msgstr "مساهمتك"
-
-msgid "Logout"
-msgstr "نسجيل خروج"
-
-msgid "Forum"
-msgstr "المنتدى"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "أشخاص"
@@ -5916,6 +5936,9 @@ msgstr "قرأت وأقبل ب"
 
 msgid "Terms and Services"
 msgstr "الشروط والخدمات"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "هل نسيت كلمة السر؟"
@@ -7063,6 +7086,11 @@ msgstr "يشير إلى رغبتك في أن يتم الاتصال بك من ق�
 
 msgid "I am open for cooperation requests"
 msgstr "أنا منفتح على طلبات التعاون"
+
+#, fuzzy
+#| msgid "Create Newsletter"
+msgid "News via the newsletter"
+msgstr "إنشاء رسالة إخبارية"
 
 msgid "Welcome!"
 msgstr "أهلاً بك!"

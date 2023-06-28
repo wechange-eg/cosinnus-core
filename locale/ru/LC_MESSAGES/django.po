@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-06-28 15:17+0200\n"
 "PO-Revision-Date: 2023-04-18 18:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -197,6 +197,41 @@ msgstr "Rocket: Исправить/создать недостающие пол�
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Исправить недостающие членства для пользователей комнат RocketChat"
 
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "Personal Dashboard"
+msgstr "Панель управления проекта"
+
+msgid "My Profile"
+msgstr "Мой профиль"
+
+#, fuzzy
+#| msgid "Set up your Profile"
+msgid "Set up my Profile"
+msgstr "Создать профиль"
+
+#, fuzzy
+#| msgid "Edit My Profile"
+msgid "Edit my Profile"
+msgstr "Редактировать мой профиль"
+
+msgid "Notification Preferences"
+msgstr "Настройки уведомлений"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "Изменить язык"
+
+msgid "Your Contribution"
+msgstr "Ваш вклад"
+
+msgid "Administration"
+msgstr "Администрирование"
+
+msgid "Logout"
+msgstr "Выход из системы"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -257,6 +292,12 @@ msgstr "Демократия и Участие"
 
 msgid "Digitalisation"
 msgstr "Диджитализация"
+
+msgid "Forum"
+msgstr "Форум"
+
+msgid "Map"
+msgstr "Карта"
 
 msgid "Overnight stay required"
 msgstr "Требуется жилье"
@@ -892,9 +933,6 @@ msgstr "Привет"
 
 msgid "Click the following link to change which emails you receive:"
 msgstr "Нажмите на ссылку, чтобы изменить уведомления, которые Вы будете получать:"
-
-msgid "Notification Preferences"
-msgstr "Настройки уведомлений"
 
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "Пройдите по ссылке, чтобы изменить уведомления, которые Вы будете получать:"
@@ -2395,9 +2433,6 @@ msgstr "Вы найдете объекты ВВВ- сессии для этог�
 
 msgid "BBB Room"
 msgstr "BBB-сессии"
-
-msgid "Administration"
-msgstr "Администрирование"
 
 msgid "Select a page on the left side."
 msgstr "Выбрать страницу слева."
@@ -4555,9 +4590,6 @@ msgstr "Проектов нет."
 msgid "There are no invitations."
 msgstr "Приглашений нет."
 
-msgid "Map"
-msgstr "Карта"
-
 msgid "Meeting"
 msgstr "Сессия"
 
@@ -5532,18 +5564,6 @@ msgstr "OK"
 msgid "Toggle navigation"
 msgstr "Включить/выключить навигацию"
 
-msgid "My Profile"
-msgstr "Мой профиль"
-
-msgid "Your Contribution"
-msgstr "Ваш вклад"
-
-msgid "Logout"
-msgstr "Выход из системы"
-
-msgid "Forum"
-msgstr "Форум"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Люди"
@@ -5612,6 +5632,9 @@ msgstr "Я ознакомился и согласен с условиями по
 
 msgid "Terms and Services"
 msgstr "Условия пользования сайтом"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "Забыли пароль?"
@@ -6750,6 +6773,11 @@ msgstr "Покажи свою открытость к контактам нас�
 
 msgid "I am open for cooperation requests"
 msgstr "Я открыт(а) к заявкам насчет сотрудничества"
+
+#, fuzzy
+#| msgid "Create Newsletter"
+msgid "News via the newsletter"
+msgstr "Создать пользователя"
 
 msgid "Welcome!"
 msgstr "Добро пожаловать!"

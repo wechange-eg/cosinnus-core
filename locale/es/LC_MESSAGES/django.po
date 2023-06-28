@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-06-28 15:17+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -205,6 +205,39 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
+#, fuzzy
+msgid "Personal Dashboard"
+msgstr "Tablero"
+
+msgid "My Profile"
+msgstr "Mi perfil"
+
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Editar tu perfil"
+
+#, fuzzy
+msgid "Edit my Profile"
+msgstr "Editar perfil"
+
+msgid "Notification Preferences"
+msgstr "Preferencias de notificación"
+
+#, fuzzy
+msgid "Change Language"
+msgstr "Idioma"
+
+msgid "Your Contribution"
+msgstr ""
+
+#, fuzzy
+msgid "Administration"
+msgstr "Administrador"
+
+msgid "Logout"
+msgstr "Cerrar seción"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -274,6 +307,12 @@ msgstr "Participantes"
 #, fuzzy
 msgid "Digitalisation"
 msgstr "Invitaciones"
+
+msgid "Forum"
+msgstr "Foro"
+
+msgid "Map"
+msgstr "Mapa"
 
 msgid "Overnight stay required"
 msgstr ""
@@ -923,9 +962,6 @@ msgstr ""
 
 msgid "Click the following link to change which emails you receive:"
 msgstr "Haz clic en el enlace siguiente para cambiar los correos electrónicos que recibes:"
-
-msgid "Notification Preferences"
-msgstr "Preferencias de notificación"
 
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "Haz clic en el enlace siguiente para terminar de recibir correos electrónicos de nosotros:"
@@ -2496,10 +2532,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "Del tipo de equipo"
-
-#, fuzzy
-msgid "Administration"
-msgstr "Administrador"
 
 msgid "Select a page on the left side."
 msgstr ""
@@ -4815,9 +4847,6 @@ msgstr "No hay proyectos."
 msgid "There are no invitations."
 msgstr "No hay invitaciones."
 
-msgid "Map"
-msgstr "Mapa"
-
 #, fuzzy
 msgid "Meeting"
 msgstr "Eliminando..."
@@ -5786,18 +5815,6 @@ msgstr "OK"
 msgid "Toggle navigation"
 msgstr "Alterna navigación"
 
-msgid "My Profile"
-msgstr "Mi perfil"
-
-msgid "Your Contribution"
-msgstr ""
-
-msgid "Logout"
-msgstr "Cerrar seción"
-
-msgid "Forum"
-msgstr "Foro"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Personas"
@@ -5866,6 +5883,9 @@ msgstr "He leído y aceptado los"
 
 msgid "Terms and Services"
 msgstr "Términos y servicios"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "Se te olvidó tu contraseña?"
@@ -7063,6 +7083,10 @@ msgstr ""
 
 msgid "I am open for cooperation requests"
 msgstr ""
+
+#, fuzzy
+msgid "News via the newsletter"
+msgstr "Crear usario"
 
 msgid "Welcome!"
 msgstr "Bienvenido!"

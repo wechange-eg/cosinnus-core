@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-06-28 15:17+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -205,6 +205,40 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
+#, fuzzy
+msgid "Personal Dashboard"
+msgstr "Կառավարման վահանակ"
+
+msgid "My Profile"
+msgstr "Իմ էջը"
+
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Խմբագրել ձեր էջը"
+
+#, fuzzy
+#| msgid "Edit My Profile"
+msgid "Edit my Profile"
+msgstr "Խմբագրել Իմ Անձնական Էջը"
+
+msgid "Notification Preferences"
+msgstr "Ծանուցման նախապատվություններ"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "Փոխել լեզուն"
+
+msgid "Your Contribution"
+msgstr "Ձեր ներդրումը"
+
+msgid "Administration"
+msgstr "Ադմինիստրացիա"
+
+msgid "Logout"
+msgstr "Ելք"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -274,6 +308,12 @@ msgstr "Մասնակիցներ"
 #, fuzzy
 msgid "Digitalisation"
 msgstr "Հրավերներ"
+
+msgid "Forum"
+msgstr "Ֆորում"
+
+msgid "Map"
+msgstr "Քարտեզ"
 
 msgid "Overnight stay required"
 msgstr ""
@@ -918,9 +958,6 @@ msgstr ""
 
 msgid "Click the following link to change which emails you receive:"
 msgstr "Անցեք հետևյալ հղումով ՝ ձեր կողմից ստացվող էլեկտրոնային փոստերը փոխելու համար:"
-
-msgid "Notification Preferences"
-msgstr "Ծանուցման նախապատվություններ"
 
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "Անցեք հետևյալ հղումով՝ այլևս մեզանից էլ-նամակներ չստանալու համար:"
@@ -2493,9 +2530,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "Թիմի տեսակից"
-
-msgid "Administration"
-msgstr "Ադմինիստրացիա"
 
 msgid "Select a page on the left side."
 msgstr "Ընտրեք էջը ձախ կողմում."
@@ -4804,9 +4838,6 @@ msgstr "Նախագծեր չկան."
 msgid "There are no invitations."
 msgstr "Հրավերներ չկան."
 
-msgid "Map"
-msgstr "Քարտեզ"
-
 #, fuzzy
 msgid "Meeting"
 msgstr "Ջնջվում է ..."
@@ -5764,18 +5795,6 @@ msgstr "OK"
 msgid "Toggle navigation"
 msgstr "Նավիգացիայի փոփոխում"
 
-msgid "My Profile"
-msgstr "Իմ էջը"
-
-msgid "Your Contribution"
-msgstr "Ձեր ներդրումը"
-
-msgid "Logout"
-msgstr "Ելք"
-
-msgid "Forum"
-msgstr "Ֆորում"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Մարդիկ"
@@ -5844,6 +5863,9 @@ msgstr "Ես կարդացել և ընդունում եմ"
 
 msgid "Terms and Services"
 msgstr "Պայմաններ և Ծառայություններ"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "Մոռացե՞լ եք գաղտնաբառը?"
@@ -7018,6 +7040,10 @@ msgstr "Ազդանշան է տալիս ձեր հետ կապնվելու պատր
 
 msgid "I am open for cooperation requests"
 msgstr "Ես պատրաստ եմ համագործակցության հարցումների"
+
+#, fuzzy
+msgid "News via the newsletter"
+msgstr "Ստեղծել Օգտատեր"
 
 msgid "Welcome!"
 msgstr "Բարի Գալուստ!"

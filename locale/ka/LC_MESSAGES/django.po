@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-06-28 15:17+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -205,6 +205,40 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
+#, fuzzy
+msgid "Personal Dashboard"
+msgstr "ხელსაწყოთა პანელი"
+
+msgid "My Profile"
+msgstr "ჩემი პროფილი"
+
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "ჩემი პროფილის რედაქტირება"
+
+#, fuzzy
+#| msgid "Edit My Profile"
+msgid "Edit my Profile"
+msgstr "ჩემი პროფილის რედაქტირება"
+
+msgid "Notification Preferences"
+msgstr "უპირატესი შეტყობინებები"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "ენის შეცვლა"
+
+msgid "Your Contribution"
+msgstr "ჩემი წვლილი"
+
+msgid "Administration"
+msgstr "ადმინისტრაცია"
+
+msgid "Logout"
+msgstr "გამოსვლა"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -274,6 +308,12 @@ msgstr "მონაწილეები"
 #, fuzzy
 msgid "Digitalisation"
 msgstr "მოწვევები"
+
+msgid "Forum"
+msgstr "ფორუმი"
+
+msgid "Map"
+msgstr "რუკა"
 
 msgid "Overnight stay required"
 msgstr ""
@@ -918,9 +958,6 @@ msgstr ""
 
 msgid "Click the following link to change which emails you receive:"
 msgstr "დააკლიკეთ შემდეგ ბმულს იმისათვის, რომ აარჩიოთ რომელი ტექსტური შეტყობინებები მიიღოთ:"
-
-msgid "Notification Preferences"
-msgstr "უპირატესი შეტყობინებები"
 
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "დააკლიკეთ შემდეგ ბმულს, რომ აღარ მიიღოთ ჩვენგან ტექსტური შეტყობინებები:"
@@ -2493,9 +2530,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "გუნდის ტიპიდან"
-
-msgid "Administration"
-msgstr "ადმინისტრაცია"
 
 msgid "Select a page on the left side."
 msgstr "მარცხენა მხარეს გვერდის მონიშვნა."
@@ -4799,9 +4833,6 @@ msgstr "პროექტები არ არის."
 msgid "There are no invitations."
 msgstr "მოწვევები არ არის."
 
-msgid "Map"
-msgstr "რუკა"
-
 #, fuzzy
 msgid "Meeting"
 msgstr "მიმდინარეობს წაშლა..."
@@ -5760,18 +5791,6 @@ msgstr "კარგი"
 msgid "Toggle navigation"
 msgstr "Toggle navigation"
 
-msgid "My Profile"
-msgstr "ჩემი პროფილი"
-
-msgid "Your Contribution"
-msgstr "ჩემი წვლილი"
-
-msgid "Logout"
-msgstr "გამოსვლა"
-
-msgid "Forum"
-msgstr "ფორუმი"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "ხალხი"
@@ -5840,6 +5859,9 @@ msgstr "წავიკითხე და ვეთანხმები"
 
 msgid "Terms and Services"
 msgstr "სერვისის განმარტებები"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "დაგავიწყდათ პაროლი?"
@@ -7015,6 +7037,10 @@ msgstr "ნიშანი თქვენს სურვილზე, რო�
 
 msgid "I am open for cooperation requests"
 msgstr "თანახმა ვარ თანამშრომლობის მოთხოვნებზე"
+
+#, fuzzy
+msgid "News via the newsletter"
+msgstr "მომხმარებლის შექმნა"
 
 msgid "Welcome!"
 msgstr "კეთილი იყოს თქვენი მობრძანება!"

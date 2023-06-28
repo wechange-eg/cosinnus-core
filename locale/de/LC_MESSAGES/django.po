@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-06-28 15:17+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -193,6 +193,41 @@ msgstr "Rocket: Reparieren/Erstellen von fehlenden Rocketchat-Konten von Benutze
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Fehlende RocketChat-Raummitgliedschaften für Benutzer beheben"
 
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "Personal Dashboard"
+msgstr "Projektdashboard"
+
+msgid "My Profile"
+msgstr "Mein Profil"
+
+#, fuzzy
+#| msgid "Set up your Profile"
+msgid "Set up my Profile"
+msgstr "Richte dein Profil ein"
+
+#, fuzzy
+#| msgid "Edit My Profile"
+msgid "Edit my Profile"
+msgstr "Profil-Einstellungen"
+
+msgid "Notification Preferences"
+msgstr "Benachrichtigungseinstellungen"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "Sprache ändern"
+
+msgid "Your Contribution"
+msgstr "Dein Beitrag"
+
+msgid "Administration"
+msgstr "Administration"
+
+msgid "Logout"
+msgstr "Abmelden"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr "Hallo %(user)s! Deine Registrierung war erfolgreich. Du wirst in den nächsten Tagen von unseren Administrator_innen freigeschaltet. Wenn dein Account freigeschaltet ist, erhältst du eine E-Mail auf %(email)s."
@@ -253,6 +288,12 @@ msgstr "Demokratie und Beteiligung"
 
 msgid "Digitalisation"
 msgstr "Digitalisierung"
+
+msgid "Forum"
+msgstr "Forum"
+
+msgid "Map"
+msgstr "Karte"
 
 msgid "Overnight stay required"
 msgstr "Übernachtung benötigt"
@@ -883,9 +924,6 @@ msgstr "Hallo"
 
 msgid "Click the following link to change which emails you receive:"
 msgstr "Klicke den folgenden Link, um einzustellen welche E-Mails du erhältst:"
-
-msgid "Notification Preferences"
-msgstr "Benachrichtigungseinstellungen"
 
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "Klicke den folgenden Link, um keine E-Mails mehr von uns zu erhalten:"
@@ -2380,9 +2418,6 @@ msgstr "Du kannst das BBB-Raum Objekt für dieses Quellobjekt hier finden"
 
 msgid "BBB Room"
 msgstr "BBB Raum"
-
-msgid "Administration"
-msgstr "Administration"
 
 msgid "Select a page on the left side."
 msgstr "Wähle links eine Seite aus."
@@ -4549,9 +4584,6 @@ msgstr "Es gibt keine sichtbaren Projekte."
 msgid "There are no invitations."
 msgstr "Es gibt aktuell keine Einladungen."
 
-msgid "Map"
-msgstr "Karte"
-
 msgid "Meeting"
 msgstr "Meeting"
 
@@ -5519,18 +5551,6 @@ msgstr "OK"
 msgid "Toggle navigation"
 msgstr "Navigation ab-/abschalten"
 
-msgid "My Profile"
-msgstr "Mein Profil"
-
-msgid "Your Contribution"
-msgstr "Dein Beitrag"
-
-msgid "Logout"
-msgstr "Abmelden"
-
-msgid "Forum"
-msgstr "Forum"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Menschen"
@@ -5599,6 +5619,9 @@ msgstr "Ich habe die Nutzungsbedingungen gelesen und akzeptiere sie"
 
 msgid "Terms and Services"
 msgstr "Nutzungsbedingungen"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "Passwort vergessen?"
@@ -6730,6 +6753,11 @@ msgstr "Signalisiert deine Bereitschaft, von anderen Benutzern kontaktiert zu we
 
 msgid "I am open for cooperation requests"
 msgstr "Ich bin offen für Kooperationsanfragen"
+
+#, fuzzy
+#| msgid "Create Newsletter"
+msgid "News via the newsletter"
+msgstr "Newsletter erstellen"
 
 msgid "Welcome!"
 msgstr "Willkommen!"

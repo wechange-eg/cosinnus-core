@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-06-28 15:17+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -205,6 +205,40 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
+#, fuzzy
+msgid "Personal Dashboard"
+msgstr "Прибор панелі"
+
+msgid "My Profile"
+msgstr "Менің профилім"
+
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Профильді редакциялаңыз"
+
+#, fuzzy
+#| msgid "Edit My Profile"
+msgid "Edit my Profile"
+msgstr "Профилімді редакциялау"
+
+msgid "Notification Preferences"
+msgstr "Хабарландыру теңшелімдері"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "Тілді өзгерту"
+
+msgid "Your Contribution"
+msgstr "Сіздің үлесіңіз"
+
+msgid "Administration"
+msgstr "Әкімшілік"
+
+msgid "Logout"
+msgstr "Шығу"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -274,6 +308,12 @@ msgstr "Мүшелер"
 #, fuzzy
 msgid "Digitalisation"
 msgstr "Шақырулар"
+
+msgid "Forum"
+msgstr "Форум"
+
+msgid "Map"
+msgstr "Карта"
 
 msgid "Overnight stay required"
 msgstr ""
@@ -918,9 +958,6 @@ msgstr ""
 
 msgid "Click the following link to change which emails you receive:"
 msgstr "Қандай хаттарды алуды өзгерту үшін келесі сілтемені нұқыңыз:"
-
-msgid "Notification Preferences"
-msgstr "Хабарландыру теңшелімдері"
 
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "Бізден ешқашан электрондық хатарды енді алмау үшін келесі сілтемені басыңыз:"
@@ -2493,9 +2530,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "Команда түрінен"
-
-msgid "Administration"
-msgstr "Әкімшілік"
 
 msgid "Select a page on the left side."
 msgstr "Сол жақтағы бетті таңдаңыз."
@@ -4804,9 +4838,6 @@ msgstr "Жобалар жоқ."
 msgid "There are no invitations."
 msgstr "Шақырулар жоқ."
 
-msgid "Map"
-msgstr "Карта"
-
 #, fuzzy
 msgid "Meeting"
 msgstr "Өшіріліп жатыр."
@@ -5764,18 +5795,6 @@ msgstr "ОК"
 msgid "Toggle navigation"
 msgstr "Жылжуды қосу"
 
-msgid "My Profile"
-msgstr "Менің профилім"
-
-msgid "Your Contribution"
-msgstr "Сіздің үлесіңіз"
-
-msgid "Logout"
-msgstr "Шығу"
-
-msgid "Forum"
-msgstr "Форум"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Адамдар"
@@ -5844,6 +5863,9 @@ msgstr "Мен оқып, қабылдадым"
 
 msgid "Terms and Services"
 msgstr "Шарттар мен қызметтер"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "Парольді ұмыттыңыз ба?"
@@ -7018,6 +7040,10 @@ msgstr "Сізбен бірге жұмыс жасағысы келетін ба�
 
 msgid "I am open for cooperation requests"
 msgstr "Мен ынтымақтастық туралы өтініштерге дайынмын"
+
+#, fuzzy
+msgid "News via the newsletter"
+msgstr "Қолданушыны құру"
 
 msgid "Welcome!"
 msgstr "Қош келдіңіз!"

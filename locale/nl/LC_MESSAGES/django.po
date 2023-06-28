@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-06-28 15:17+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -206,6 +206,41 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "Personal Dashboard"
+msgstr "Project dashboard"
+
+msgid "My Profile"
+msgstr "Mijn profiel"
+
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Je profiel bewerken"
+
+#, fuzzy
+#| msgid "Edit My Profile"
+msgid "Edit my Profile"
+msgstr "Wijzig mijn profiel"
+
+msgid "Notification Preferences"
+msgstr "Meldingsvoorkeuren"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "Taal wijzigen"
+
+msgid "Your Contribution"
+msgstr "Mijn bijdrage"
+
+msgid "Administration"
+msgstr "Administratie"
+
+msgid "Logout"
+msgstr "Uitloggen"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -277,6 +312,12 @@ msgstr "Deelnemers"
 #| msgid "Organization"
 msgid "Digitalisation"
 msgstr "Organisatie"
+
+msgid "Forum"
+msgstr "Forum"
+
+msgid "Map"
+msgstr "Kaart"
 
 msgid "Overnight stay required"
 msgstr ""
@@ -923,9 +964,6 @@ msgstr "Hallo"
 
 msgid "Click the following link to change which emails you receive:"
 msgstr "Klik op de volgende link om te wijzigen welke e-mails je ontvangt:"
-
-msgid "Notification Preferences"
-msgstr "Meldingsvoorkeuren"
 
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "Klik op de volgende link om nooit meer e-mails van ons te ontvangen:"
@@ -2484,9 +2522,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "Ruimte type"
-
-msgid "Administration"
-msgstr "Administratie"
 
 msgid "Select a page on the left side."
 msgstr "Selecteer een pagina aan de linker kant."
@@ -4793,9 +4828,6 @@ msgstr "Er zijn geen projecten."
 msgid "There are no invitations."
 msgstr "Er zijn geen uitnodigingen."
 
-msgid "Map"
-msgstr "Kaart"
-
 #, fuzzy
 msgid "Meeting"
 msgstr "Verwijderen…"
@@ -5776,18 +5808,6 @@ msgstr "OK"
 msgid "Toggle navigation"
 msgstr "Schakelnavigatie"
 
-msgid "My Profile"
-msgstr "Mijn profiel"
-
-msgid "Your Contribution"
-msgstr "Mijn bijdrage"
-
-msgid "Logout"
-msgstr "Uitloggen"
-
-msgid "Forum"
-msgstr "Forum"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Mensen"
@@ -5856,6 +5876,9 @@ msgstr "Ik heb de algemene voorwaarden gelezen en accepteer deze"
 
 msgid "Terms and Services"
 msgstr "Algemene voorwaarden"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "Wachtwoord vergeten?"
@@ -7023,6 +7046,10 @@ msgstr "Geeft aan dat je bereid bent gecontacteerd te worden door andere gebruik
 
 msgid "I am open for cooperation requests"
 msgstr "Ik sta open voor samenwerkingsverzoeken"
+
+#, fuzzy
+msgid "News via the newsletter"
+msgstr "Gebruiker aanmaken"
 
 msgid "Welcome!"
 msgstr "Welkom!"

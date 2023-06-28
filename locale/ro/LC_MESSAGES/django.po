@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-06-28 15:17+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -206,6 +206,41 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "Personal Dashboard"
+msgstr "Proiectul Bordului de Tablou"
+
+msgid "My Profile"
+msgstr "Profilul Meu"
+
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Editează-ți Profilul"
+
+#, fuzzy
+#| msgid "Edit My Profile"
+msgid "Edit my Profile"
+msgstr "Editează Profilul Meu"
+
+msgid "Notification Preferences"
+msgstr "Preferințe de notificare"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "Schimbă limba"
+
+msgid "Your Contribution"
+msgstr "Contribuția Ta"
+
+msgid "Administration"
+msgstr "Administrare"
+
+msgid "Logout"
+msgstr "Deconectare"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -277,6 +312,12 @@ msgstr "Participanți"
 #| msgid "Organization"
 msgid "Digitalisation"
 msgstr "Organizare"
+
+msgid "Forum"
+msgstr "Forum"
+
+msgid "Map"
+msgstr "Hartă"
 
 msgid "Overnight stay required"
 msgstr ""
@@ -925,9 +966,6 @@ msgstr "Salut"
 
 msgid "Click the following link to change which emails you receive:"
 msgstr "Faceți clic pe linkul următor pentru a modifica ce e-mailuri primiți:"
-
-msgid "Notification Preferences"
-msgstr "Preferințe de notificare"
 
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "Faceți clic pe linkul următor pentru a nu primi niciodată mai multe e-mailuri de la noi:"
@@ -2488,9 +2526,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "Tipul Camerei"
-
-msgid "Administration"
-msgstr "Administrare"
 
 msgid "Select a page on the left side."
 msgstr "Selectați o pagină din partea stângă."
@@ -4809,9 +4844,6 @@ msgstr "Nu există proiecte."
 msgid "There are no invitations."
 msgstr "Nu există invitații."
 
-msgid "Map"
-msgstr "Hartă"
-
 #, fuzzy
 msgid "Meeting"
 msgstr "Ștergerea..."
@@ -5788,18 +5820,6 @@ msgstr "OK"
 msgid "Toggle navigation"
 msgstr "Comutare navigare"
 
-msgid "My Profile"
-msgstr "Profilul Meu"
-
-msgid "Your Contribution"
-msgstr "Contribuția Ta"
-
-msgid "Logout"
-msgstr "Deconectare"
-
-msgid "Forum"
-msgstr "Forum"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Oameni"
@@ -5868,6 +5888,9 @@ msgstr "Am citit și accept"
 
 msgid "Terms and Services"
 msgstr "Termeni și Servicii"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "Ai uitat?"
@@ -7035,6 +7058,10 @@ msgstr "Semnalează disponibilitatea dvs. de a fi contactat de alți utilizatori
 
 msgid "I am open for cooperation requests"
 msgstr "Sunt deschis pentru cereri de cooperare"
+
+#, fuzzy
+msgid "News via the newsletter"
+msgstr "Creează Utilizator"
 
 msgid "Welcome!"
 msgstr "Bine ați venit!"

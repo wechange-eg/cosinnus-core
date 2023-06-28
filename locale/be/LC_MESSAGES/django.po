@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-06-28 15:17+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -204,6 +204,39 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
+#, fuzzy
+msgid "Personal Dashboard"
+msgstr "Панэль кіравання"
+
+msgid "My Profile"
+msgstr "Мой профіль"
+
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Рэдагаваць Ваш профіль"
+
+#, fuzzy
+msgid "Edit my Profile"
+msgstr "Рэдагаваць профіль"
+
+msgid "Notification Preferences"
+msgstr "Налады апавяшчэнняў"
+
+#, fuzzy
+msgid "Change Language"
+msgstr "Мова"
+
+msgid "Your Contribution"
+msgstr ""
+
+#, fuzzy
+msgid "Administration"
+msgstr "Адміністратар"
+
+msgid "Logout"
+msgstr "Выйсці"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -273,6 +306,12 @@ msgstr "Удзельнікі(-цы)"
 #, fuzzy
 msgid "Digitalisation"
 msgstr "Запрашэнні"
+
+msgid "Forum"
+msgstr "Форум"
+
+msgid "Map"
+msgstr "Карта"
 
 msgid "Overnight stay required"
 msgstr ""
@@ -921,9 +960,6 @@ msgstr ""
 
 msgid "Click the following link to change which emails you receive:"
 msgstr "Перайдзіце па наступнай спасылцы, каб наладзіць, якія электронныя лісты Вы атрымліваеце:"
-
-msgid "Notification Preferences"
-msgstr "Налады апавяшчэнняў"
 
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "Націсніце на спасылку, каб ніколі больш атрымліваць ад нас лістоў:"
@@ -2492,10 +2528,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "З тыпу каманды"
-
-#, fuzzy
-msgid "Administration"
-msgstr "Адміністратар"
 
 msgid "Select a page on the left side."
 msgstr ""
@@ -4816,9 +4848,6 @@ msgstr "Праектаў няма."
 msgid "There are no invitations."
 msgstr "Запрашэнняў няма."
 
-msgid "Map"
-msgstr "Карта"
-
 #, fuzzy
 msgid "Meeting"
 msgstr "Выдаляецца..."
@@ -5782,18 +5811,6 @@ msgstr "ОК"
 msgid "Toggle navigation"
 msgstr "Пераключыць навігацыю"
 
-msgid "My Profile"
-msgstr "Мой профіль"
-
-msgid "Your Contribution"
-msgstr ""
-
-msgid "Logout"
-msgstr "Выйсці"
-
-msgid "Forum"
-msgstr "Форум"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Людзі"
@@ -5862,6 +5879,9 @@ msgstr "Я прачытаў(-ла) і прымаю"
 
 msgid "Terms and Services"
 msgstr "Умовы карыстання"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "Забылі пароль?"
@@ -7056,6 +7076,10 @@ msgstr ""
 
 msgid "I am open for cooperation requests"
 msgstr ""
+
+#, fuzzy
+msgid "News via the newsletter"
+msgstr "Стварыць карыстальніка(-цу)"
 
 msgid "Welcome!"
 msgstr "Сардэчна вітаем!"
