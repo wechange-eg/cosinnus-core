@@ -224,8 +224,10 @@ class PortalUserprofileDynamicFieldsView(APIView):
         - "required": bool, whether to be required in forms
         - "multiple": bool, for choice fields, if multiple choices are allowed. ignored for other types
         - "type": type of the dynamic field (affects both model and form), see <str type of `DYNAMIC_FIELD_TYPES`>,
-        - "label":  i18n str
-        - "placeholder": i18n str
+        - "label":  i18n str, formfield label
+        - "legend": i18n str, legend, a descriptive explanatory text added to the field
+        - "header": i18n str, if given, should display a new seperator and header above this field
+        - "placeholder": i18n str, formfield placeholder
         - "is_group_header": whether the field is a checkbox field shown as a group header, that shows/hides a field \
                 group if checked/unchecked
         - "parent_group_field_name": if this field belongs to a checkbox group, this refers to the parent checkbox \
@@ -316,6 +318,8 @@ class PortalUserprofileDynamicFieldsView(APIView):
                 'multiple': field_options.multiple,
                 'type': field_options.type,
                 'label': field_options.label,
+                'legend': field_options.legend,
+                'header': field_options.header,
                 'placeholder': field_options.placeholder,
                 'is_group_header': field_options.is_group_header,
                 'parent_group_field_name': field_options.parent_group_field_name,

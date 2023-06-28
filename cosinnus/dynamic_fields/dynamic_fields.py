@@ -82,11 +82,13 @@ class CosinnusDynamicField(object):
     # type of the dynamic field (affects both model and form)
     # see <str type of `DYNAMIC_FIELD_TYPES`>,
     type = None
-    # i18n str
+    # i18n str, formfield label
     label = None
-    # i18n str
+    # i18n str, legend, a descriptive explanatory text added to the field
     legend = None
-    # i18n str
+    # i18n str, if given, should display a new seperator and header above this field
+    header = None
+    # i18n str, formfield placeholder
     placeholder = None
     # only for type `DYNAMIC_FIELD_TYPE_PREDEFINED_CHOICES_TEXT`, ignored otherwise
     # the choices for this field's values

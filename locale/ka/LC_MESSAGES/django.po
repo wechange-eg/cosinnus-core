@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-01 13:04+0200\n"
+"POT-Creation-Date: 2023-06-22 14:01+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -205,6 +205,13 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
+#, python-format
+msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
+msgstr ""
+
+msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+msgstr ""
+
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "ელექტრონული ფოსტა, რომელსაც ანგარიშში შესასვლელად იყენებთ, შესვლამდე უნდა გააქტიუროთ."
 
@@ -338,9 +345,6 @@ msgstr "ეს გუნდი შეყვანილი URL-ს ქვეშ 
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "ეს ანგარიში აქტიური აღარ არის. თქვენ გამოსული ხართ."
-
-msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
-msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
@@ -5540,7 +5544,7 @@ msgid ""
 "\n"
 "Welcome to %(site_name)s! Your user account was approved.\n"
 "\n"
-"You can now log in at %(domain_url)s.\n"
+"You can now log in at %(domain_url)s/login/.\n"
 "\n"
 "\n"
 "Best regards,\n"
@@ -5570,21 +5574,15 @@ msgstr ""
 msgid "Your request to join %(site_name)s was denied."
 msgstr "თქვენი მოთხოვნა %(site_name)s-ზე შეერთებასთან დაკავშირებით უარყოფილ იქნა."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
-"Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+"Hello %(user_name)s! Your registration was successful.\n"
 "\n"
-"Our administrators will review your request and approve your user account soon!\n"
+"Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at %(user_mail)s.\n"
 "\n"
-"Until then, with warm greetings, \n"
+"Best regards,\n"
 "your %(site_name)s Team"
 msgstr ""
-"გამარჯობა! მოხარულები ვართ, რომ გსურთ გახდეთ %(site_name)s-ის წევრი.\n"
-"\n"
-"გარე ადმინსიტრატორები, მალე, განიხილავენ თქვენს მოთხოვნას და დაადასტურებენ თქვენი მომხმარებლის ანგარიშს!\n"
-"\n"
-"მანამდე კი, საუკეთესო სურვილებით, \n"
-"თქვენი %(site_name)s-ის გუნდი"
 
 #, python-format
 msgid "You have requested to become a member of %(site_name)s!"
@@ -13561,6 +13559,22 @@ msgstr "შესასრულებელ დავალებათა ს�
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "თქვენ არ შეგიძლიათ წაშალოთ საქაღალდე, რადგან არ გაქვთ მასში შემავალი საგნების წაშლის უფლება!"
+
+#, fuzzy
+#~ msgid ""
+#~ "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+#~ "\n"
+#~ "Our administrators will review your request and approve your user account soon!\n"
+#~ "\n"
+#~ "Until then, with warm greetings, \n"
+#~ "your %(site_name)s Team"
+#~ msgstr ""
+#~ "გამარჯობა! მოხარულები ვართ, რომ გსურთ გახდეთ %(site_name)s-ის წევრი.\n"
+#~ "\n"
+#~ "გარე ადმინსიტრატორები, მალე, განიხილავენ თქვენს მოთხოვნას და დაადასტურებენ თქვენი მომხმარებლის ანგარიშს!\n"
+#~ "\n"
+#~ "მანამდე კი, საუკეთესო სურვილებით, \n"
+#~ "თქვენი %(site_name)s-ის გუნდი"
 
 #~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
 #~ msgstr "თქვენ შეცვალეთ თქვენი ელ-ფოსტის მისამართი. ჩვენ გამოგიგზავნით შეტყობინებას ამ მისამართზე, დათანხმების ბმულით. სანამ არ დააკლიკებთ მას, თქვენი პროფილი შეინარჩუნებს ძველ ელ-ფოსტის მისამართს!"
