@@ -172,9 +172,7 @@
             {% block main_page_header %}{% endblock main_page_header %}
 
             {% block main_page %}
-                <div class="row flex">
-                    {# this fixes the breadcrumb being unclickable in mobile views #}
-<!--                    <div class="visible-xs visible-sm clearfix"></div>-->
+                <div class="row d-sm-flex">
 
                     {% block override_leftnav %}
                     <div class="col-lg-3 col-md-3"><!-- left column -->
@@ -185,6 +183,9 @@
 <!--                        <div class="clearfix regular-space"></div>-->
                     </div><!-- left column -->
                     {% endblock override_leftnav %}
+
+                    {# this fixes the breadcrumb being unclickable in mobile views #}
+                    <div class="visible-xs visible-sm clearfix"></div>
 
                     <div class="col-lg-9 col-md-9">
                         <div class="row">

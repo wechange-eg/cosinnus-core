@@ -884,12 +884,16 @@ class CosinnusConf(AppConf):
     # in addition to the ?v=3 param
     V3_LANGUAGE_REDIRECT_PREFIXES = ['de',]
     
+    V3_FRONTEND_SIGNUP_VERIFICATION_WELCOME_PAGE = '/signup/verified'
+    
     # URL paths that get redirected to the new frontend
     # if V3_FRONTEND_ENABLED==True
     V3_FRONTEND_URL_PATTERNS = [
         "^/login/$",
-        "^/signup/$", 
+        "^/signup/$",
         "^/signup/profile",
+        "^/signup/welcome",
+        f"^{V3_FRONTEND_SIGNUP_VERIFICATION_WELCOME_PAGE}",
         "^/setup/",
         "^api/auth/",
     ]

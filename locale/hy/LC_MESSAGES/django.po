@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-21 17:42+0200\n"
+"POT-Creation-Date: 2023-06-22 14:01+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -205,6 +205,13 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
+#, python-format
+msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
+msgstr ""
+
+msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+msgstr ""
+
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "Անձնական էջի էլեկտրոնային փոստը, որը դուք փորձում եք օգտագործել, պետք է ակտիվացվի, նախքան մուտք գործելը."
 
@@ -338,9 +345,6 @@ msgstr "Այս թիմն այլևս ներկայացված չէ ձեր մուտք
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "Այս անձնական էջյ այլևս ակտիվ չէ: Դուք դուրս եք եկել համակարգից."
-
-msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
-msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
@@ -5544,7 +5548,7 @@ msgid ""
 "\n"
 "Welcome to %(site_name)s! Your user account was approved.\n"
 "\n"
-"You can now log in at %(domain_url)s.\n"
+"You can now log in at %(domain_url)s/login/.\n"
 "\n"
 "\n"
 "Best regards,\n"
@@ -5574,21 +5578,15 @@ msgstr ""
 msgid "Your request to join %(site_name)s was denied."
 msgstr "%(site_name)s- ին միանալու ձեր հայցը մերժվել է."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
-"Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+"Hello %(user_name)s! Your registration was successful.\n"
 "\n"
-"Our administrators will review your request and approve your user account soon!\n"
+"Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at %(user_mail)s.\n"
 "\n"
-"Until then, with warm greetings, \n"
+"Best regards,\n"
 "your %(site_name)s Team"
 msgstr ""
-"Ողջույն! Մենք ուրախ ենք, որ ցանկանում եք %(site_name)s -ի անդամ դառնալ. \n"
-"\n"
-"Մեր ադմինիստրատորները շուտով կվերանայեն ձեր հայցը և կհաստատեն ձեր օգտատիրոջ անձնական էջը։\n"
-"\n"
-"Մինչ այդ ՝ ջերմ ողջույններով, \n"
-"Ձեր %(site_name)s թիմ"
 
 #, python-format
 msgid "You have requested to become a member of %(site_name)s!"
@@ -13563,6 +13561,22 @@ msgstr "\"%(title)s\" անելիքների ցանկը հնարավոր չէ ավ
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Դուք չեք կարող ջնջել այս թղթապանակը, քանի որ թույլտվություն չունեք ջնջել նրա միջի մեկ կամ մի քանի նյութերը!"
+
+#, fuzzy
+#~ msgid ""
+#~ "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+#~ "\n"
+#~ "Our administrators will review your request and approve your user account soon!\n"
+#~ "\n"
+#~ "Until then, with warm greetings, \n"
+#~ "your %(site_name)s Team"
+#~ msgstr ""
+#~ "Ողջույն! Մենք ուրախ ենք, որ ցանկանում եք %(site_name)s -ի անդամ դառնալ. \n"
+#~ "\n"
+#~ "Մեր ադմինիստրատորները շուտով կվերանայեն ձեր հայցը և կհաստատեն ձեր օգտատիրոջ անձնական էջը։\n"
+#~ "\n"
+#~ "Մինչ այդ ՝ ջերմ ողջույններով, \n"
+#~ "Ձեր %(site_name)s թիմ"
 
 #~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
 #~ msgstr "Դուք փոխել եք ձեր էլ. փոստի հասցեն: Մենք շուտով ձեր էլ․հասցեյին կուղարկենք հաստատման հղումը։ Մինչ այդ հղումով անցնելը, ձեր պրոֆիլը կպահպանի ձեր հին էլ. փոստի հասցեն!"

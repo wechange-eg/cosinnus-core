@@ -1,4 +1,17 @@
-{% load i18n %}
+{% load i18n cosinnus_tags %}
+
+{% if user.is_authenticated %}
+    <a class="nav-button nav-header-textlink hidden-during-search" href="{% url "cosinnus:user-dashboard" %}" title="{% trans "Dashboard" %}">
+        {% trans "My Dashboard" %}
+    </a>
+{% endif %}
+
+{% group_url 'cosinnus:group-dashboard' group=SETTINGS.NEWW_FORUM_GROUP_SLUG ignoreErrors=True as blog_url %}
+{% if blog_url %}
+    <a class="nav-button nav-header-textlink hidden-during-search" href="{{ blog_url }}" title="{% trans "Forum" %}">
+        {% trans "Forum" %}
+    </a>
+{% endif %}
 
 <a class="nav-button nav-header-textlink hidden-during-search" href="{% url "cosinnus:map" %}" title="{% trans "Discover" %}">
 	{% trans "Discover" %}

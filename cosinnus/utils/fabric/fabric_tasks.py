@@ -132,7 +132,7 @@ def deployfrontend(_ctx):
     
 
 @task
-def deployresetvirtualenv(_ctx):
+def fulldeploy(_ctx):
     """ Deploys and forces a complete recreation of the virtual env. 
         This will require a complete django unit stop and will pull up a maintenance banner on the server.
         This will take longer and can be risky if the new build doesn't work. 
@@ -157,7 +157,9 @@ def deployresetvirtualenv(_ctx):
     foldername = f'_DELETEME_moved_old_env_{get_random_string(length=6).lower()}'
     with c.cd(env.path):
         c.run(f'mkdir ~/{foldername}')
+        c.run(f'mkdir -p .venv') # create if not exists
         c.run(f'mv .venv ~/{foldername}/movedvenv.venv')
+        c.run(f'touch poetry.lock') # create if not exists
         c.run(f'mv poetry.lock ~/{foldername}/movedpoetry.lock')
     _pull_and_update(fresh_install=True)
     migrate(_ctx)

@@ -1,14 +1,24 @@
+from urllib.parse import unquote
+
 from django.contrib.auth import login, logout
 from django.urls.base import reverse
+from django.utils.encoding import force_text
+from django.utils.http import is_safe_url
+from django.utils.translation import ugettext_lazy as _
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework import permissions, status
 from rest_framework import serializers, authentication
+from rest_framework import status
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
+from rest_framework.throttling import UserRateThrottle
 from rest_framework.views import APIView
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_simplejwt.exceptions import TokenError
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api.serializers.user import UserSerializer
@@ -16,16 +26,12 @@ from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResp
 from cosinnus.api_frontend.serializers.user import CosinnusUserLoginSerializer, \
     CosinnusUserSignupSerializer, CosinnusHybridUserSerializer
 from cosinnus.conf import settings
+from cosinnus.models import CosinnusPortal
 from cosinnus.utils.jwt import get_tokens_for_user
 from cosinnus.utils.permissions import IsNotAuthenticated, AllowNone
+from cosinnus.utils.urls import redirect_with_next
 from cosinnus.views.common import LoginViewAdditionalLogicMixin
 from cosinnus.views.user import UserSignupTriggerEventsMixin
-from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework_simplejwt.exceptions import TokenError
-from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.throttling import UserRateThrottle
-from django.utils.http import is_safe_url
-from urllib.parse import unquote
 
 
 class CsrfExemptSessionAuthentication(authentication.SessionAuthentication):
@@ -239,7 +245,9 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
                         },
                         "next": "/dashboard/",
                         "refresh": "eyJ...",
-                        "access": "eyJ..."
+                        "access": "eyJ...",
+                        'do_login': 'true',
+                        'message': 'null',
                     },
                     "version": COSINNUS_VERSION,
                     "timestamp": 1658415026.545203
@@ -248,6 +256,9 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
         )}
     )
     def post(self, request):
+        # even though `AllowNone` permission classes are set for this case, raise again for dynamic setting test cases
+        if not settings.COSINNUS_USER_SIGNUP_ENABLED:
+            raise PermissionDenied('Signup is disabled')
         serializer = CosinnusUserSignupSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         if UserSignupThrottleBurst in self.throttle_classes:
@@ -255,25 +266,48 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
             UserSignupThrottleBurst().throttle_success(really_throttle=True, request=request, view=self)
             
         user = serializer.create(serializer.validated_data)
-        redirect_url = self.trigger_events_after_user_signup(user, self.request)
-        data = {
-            'user': UserSerializer(user, context={'request': request}).data,
-            'next': redirect_url or getattr(settings, 'LOGIN_REDIRECT_URL', reverse('cosinnus:user-dashboard')),
-        }
+        redirect_url = self.trigger_events_after_user_signup(user, self.request, skip_messages=True)
         
         # if the user has been logged in immediately, return the auth tokens
+        data = {
+            'user': UserSerializer(user, context={'request': request}).data,
+        }
+        next_url = None
+        refresh = None
+        access = None
+        message = None
+        do_login = True
         if user.is_authenticated:
             user_tokens = get_tokens_for_user(user)
-            data.update({
-                'refresh': user_tokens['refresh'],
-                'access': user_tokens['access'],
-            })
-        else:
-            data.update({
-                'next': '/signup/notloggedinyet/' # TODO: show a message for a user if they arent authenticated
-            })
+            refresh = user_tokens['refresh']
+            access = user_tokens['access']
+        if CosinnusPortal.get_current().users_need_activation:
+            str_dict = {
+                'user': user.get_full_name(),
+                'email': user.email,
+            }
+            message = force_text(_('Hello "%(user)s"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at "%(email)s".')) % str_dict
+            message += ' '
+            do_login = False
+        if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
+            message = (message or '') + force_text(_('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.'))
+            do_login = False
+        
+        if do_login:
+            next_url = redirect_url or getattr(settings, 'LOGIN_REDIRECT_URL', reverse('cosinnus:user-dashboard'))
+        elif settings.COSINNUS_V3_FRONTEND_ENABLED:
+            user.cosinnus_profile.add_redirect_on_next_page(
+                redirect_with_next(settings.COSINNUS_V3_FRONTEND_SIGNUP_VERIFICATION_WELCOME_PAGE, self.request),
+                message=None, priority=True)
+        
+        data.update({
+            'refresh': refresh,
+            'access': access,
+            'next': next_url,
+            'do_login': do_login,
+            'message': message,
+        })
         return Response(data)
-
 
 
 @swagger_auto_schema(request_body=CosinnusHybridUserSerializer)

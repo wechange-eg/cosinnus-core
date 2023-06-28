@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-21 17:42+0200\n"
+"POT-Creation-Date: 2023-06-22 14:01+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -193,6 +193,13 @@ msgstr "Rocket: Reparieren/Erstellen von fehlenden Rocketchat-Konten von Benutze
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Fehlende RocketChat-Raummitgliedschaften für Benutzer beheben"
 
+#, python-format
+msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
+msgstr "Hallo %(user)s! Deine Registrierung war erfolgreich. Du wirst in den nächsten Tagen von unseren Administrator_innen freigeschaltet. Wenn dein Account freigeschaltet ist, erhältst du eine E-Mail auf %(email)s."
+
+msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+msgstr "Du musst deine Email-Adresse verifizieren bevor du dich einloggen kannst. Eine Email mit dem Verifizierungslink wurde dir gerade geschickt. Überprüfe bitte deinen Posteingang: wenn du keine Email von uns erhalten hast, überprüfe bitte deinen Spamordner."
+
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "Die E-Mail-Adresse des Accounts, mit dem du versuchst einzuloggen, muss erst bestätigt werden."
 
@@ -313,9 +320,6 @@ msgstr "Die Gruppe oder das Projekt liegt nicht länger unter der URL die du ein
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "Sie wurden ausgeloggt, weil dieses Benutzerkonto nicht mehr aktiv ist."
-
-msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
-msgstr "Du musst deine Email-Adresse verifizieren bevor du dich einloggen kannst. Eine Email mit dem Verifizierungslink wurde dir gerade geschickt. Überprüfe bitte deinen Posteingang: wenn du keine Email von uns erhalten hast, überprüfe bitte deinen Spamordner."
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr "Du wurdest hierhin weitergeleitet, weil du einen Link in einer unserer E-Mails geklickt hast. Als Vorsichtsmaßnahme verlinken wir nicht direkt auf externe Webseiten aus unseren E-Mails. Bitte klicke den Link unten erneut wenn du die Seite besuchen möchtest."
@@ -5285,7 +5289,7 @@ msgid ""
 "\n"
 "Welcome to %(site_name)s! Your user account was approved.\n"
 "\n"
-"You can now log in at %(domain_url)s.\n"
+"You can now log in at %(domain_url)s/login/.\n"
 "\n"
 "\n"
 "Best regards,\n"
@@ -5296,7 +5300,7 @@ msgstr ""
 "\n"
 "Willkommen auf %(site_name)s! Dein Benutzerkonto wurde freigeschaltet.\n"
 "\n"
-"Du kannst dich jetzt auf %(domain_url)s einloggen.\n"
+"Du kannst dich jetzt auf %(domain_url)s/login/ einloggen.\n"
 "\n"
 "\n"
 "Viele Grüße,\n"
@@ -5327,19 +5331,19 @@ msgstr "Deine Registrierung bei %(site_name)s wurde abgelehnt."
 
 #, python-format
 msgid ""
-"Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+"Hello %(user_name)s! Your registration was successful.\n"
 "\n"
-"Our administrators will review your request and approve your user account soon!\n"
+"Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at %(user_mail)s.\n"
 "\n"
-"Until then, with warm greetings, \n"
+"Best regards,\n"
 "your %(site_name)s Team"
 msgstr ""
-"Hallo! Wir freuen uns, dass du dich bei %(site_name)s registrieren möchtest. \n"
+"Hallo %(user_name)s! Deine Registrierung war erfolgreich. \n"
 "\n"
-"Du wirst die nächsten Tage von unseren Administrator_innen freigeschaltet. \n"
+"Du wirst in den nächsten Tagen von unseren Administrator_innen freigeschaltet. Wenn dein Account freigeschaltet ist, erhältst du eine E-Mail auf %(user_mail)s.\n"
 "\n"
-"Liebe Grüße und bis dahin, \n"
-"dein %(site_name)s Team"
+"Mit besten Grüßen\n"
+"das Team von %(site_name)s"
 
 #, python-format
 msgid "You have requested to become a member of %(site_name)s!"
@@ -8295,11 +8299,11 @@ msgstr "Bitte bestätige deine E-Mail-Adresse für %(site_name)s!"
 
 #, python-format
 msgid "You have just registered an account at %(site_name)s. We're happy to see you!"
-msgstr "Sie haben gerade einen Account auf %(site_name)s erstellt. Wir freuen uns, Sie zu sehen!"
+msgstr "Du hast gerade einen Account auf %(site_name)s erstellt. Wir freuen uns, dich zu sehen!"
 
 #, python-format
 msgid "You have just changed your email address at %(site_name)s."
-msgstr "Sie haben Ihre E-Mail-Adresse auf dem %(site_name)s gerade geändert."
+msgstr "Du hast deine E-Mail-Adresse bei %(site_name)s gerade geändert."
 
 msgid "Please verify your email address by clicking on the following link (or copy and paste the link it in your browser):"
 msgstr "Bitte verifiziere deine E-Mail-Adresse, indem du den folgenden Link klickst (oder ihn kopierst und ihn in deinem Browser einfügst):"
@@ -13017,6 +13021,21 @@ msgstr "Aufgabenliste „%(title)s“ konnte nicht hinzugefügt werden."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte hast eins oder mehrere der noch enthaltenen Objekte zu löschen!"
+
+#~ msgid ""
+#~ "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+#~ "\n"
+#~ "Our administrators will review your request and approve your user account soon!\n"
+#~ "\n"
+#~ "Until then, with warm greetings, \n"
+#~ "your %(site_name)s Team"
+#~ msgstr ""
+#~ "Hallo! Wir freuen uns, dass du dich bei %(site_name)s registrieren möchtest. \n"
+#~ "\n"
+#~ "Du wirst die nächsten Tage von unseren Administrator_innen freigeschaltet. \n"
+#~ "\n"
+#~ "Liebe Grüße und bis dahin, \n"
+#~ "dein %(site_name)s Team"
 
 #~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
 #~ msgstr "Du hast deine E-Mail-Adresse geändert. Wir schicken dir eine E-Mail an diese Adresse, die einen Bestätigungslink enthält. Bis du diesen Link klickst wird dein Profil weiter unter der alten E-Mail-Adresse geführt!"
