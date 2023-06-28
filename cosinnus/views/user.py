@@ -246,10 +246,12 @@ class UserSignupTriggerEventsMixin(object):
     message_success_inactive = _('User "%(user)s" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address "%(email)s" when this happens.')
     message_success_email_verification = _('Thank you for signing up and welcome to the platform! We sent an email to your address "%(email)s" - please click the link contained in it to verify your email address!')
     
-    def trigger_events_after_user_signup(self, user, request): 
+    def trigger_events_after_user_signup(self, user, request, skip_messages=False):
         """ Triggers all kinds of events and signals after a user has signed up and their profile creation
             has been completed. Should be called after 
             `UserSignupFinalizeMixin.finalize_user_object_after_signup`
+            @param skip_messages: if True, will not trigger any user messages. used when this s
+                called via API.
             @return: None or an alternate return redirect URL  """
         
         # sanity check, retrieve the user's profile (will create it if it doesnt exist)
@@ -277,8 +279,8 @@ class UserSignupTriggerEventsMixin(object):
             subj_user = render_to_string('cosinnus/mail/user_registration_pending_subj.txt', data)
             text = textfield(render_to_string('cosinnus/mail/user_registration_pending.html', data))
             send_html_mail_threaded(user, subj_user, text)
-            # TODO enable for API
-            messages.success(request, self.message_success_inactive % {'user': user.email, 'email': user.email})
+            if not skip_messages:
+                messages.success(request, self.message_success_inactive % {'user': user.email, 'email': user.email})
             # since anonymous users have no session, show the success message in the template via a flag
             return redirect_with_next(reverse('login'), request)
         else:
@@ -292,19 +294,23 @@ class UserSignupTriggerEventsMixin(object):
                 if (settings.COSINNUS_USER_SIGNUP_SEND_VERIFICATION_MAIL_INSTANTLY or \
                          settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN):
                     send_user_email_to_verify(user, user.email, request)
-                    messages.success(request, self.message_success_email_verification % {'email': user.email})
+                    if not skip_messages:
+                        messages.success(request, self.message_success_email_verification % {'email': user.email})
                 else:
-                    messages.success(request, self.message_success % {'user': user.email})
+                    if not skip_messages:
+                        messages.success(request, self.message_success % {'user': user.email})
                 if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
                     # show message to tell the user they need to register on this portal
-                    messages.warning(request, _('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.'))
+                    if not skip_messages:
+                        messages.warning(request, _('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.'))
                     do_login = False
             else:
                 user_profile = user.cosinnus_profile
                 user_profile.email_verified = True
                 user_profile.save()
                 _send_user_welcome_email_if_enabled(user)
-                messages.success(request, self.message_success % {'user': user.email})
+                if not skip_messages:
+                    messages.success(request, self.message_success % {'user': user.email})
             
             if do_login:
                 # log the user in
@@ -319,10 +325,10 @@ class UserSignupTriggerEventsMixin(object):
             setattr(user_profile, 'group', forum_group) 
             cosinnus_notifications.user_account_created.send(sender=self, user=user, obj=user_profile, audience=[])
             
-        
         # send user registration signal
         signals.user_registered.send(sender=self, user=user)
         
+        # FIXME: this may be broken with the API v3 signup
         # check if there was a token group invite associated with the signup
         invite_token = request.POST.get('invite_token', None)
         if invite_token:

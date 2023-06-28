@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-21 17:42+0200\n"
+"POT-Creation-Date: 2023-06-22 14:01+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -202,6 +202,13 @@ msgstr "Rocket: Відновити/створити облікові запис�
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Виправити відсутнє членство в кабінеті RocketChat для користувачів"
 
+#, python-format
+msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
+msgstr ""
+
+msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
+msgstr ""
+
 msgid "The email address for the account you are trying to use needs to be activated before you can log in."
 msgstr "Електронну адресу облікового запису, яку Ви використовуєте для входу, необхідно активувати, перш ніж ви зможете увійти"
 
@@ -338,9 +345,6 @@ msgstr "Ця команда більше не існує за вказаною �
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "Цей обліковий запис більше не активний. Ви вийшли з системи"
-
-msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
-msgstr ""
 
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr "Вас було перенаправлено сюди, тому що Ви натиснули посилання в одному з наших листів. З міркувань безпеки ми не посилаємось безпосередньо на зовнішні веб-сайти зі своєї пошти. Будь ласка, перейдіть за посиланням нижче, якщо хочете його відвідати."
@@ -5396,13 +5400,24 @@ msgstr ""
 msgid "New user request: %(user_name)s wants to join %(site_name)s!"
 msgstr "Новий запит користувача: %(user_name)s хоче долучитися до %(site_name)s!"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Hello, %(user_name)s! \n"
+#| "\n"
+#| "Welcome to %(site_name)s! Your user account was approved.\n"
+#| "\n"
+#| "You can now log in at %(domain_url)s.\n"
+#| "\n"
+#| "\n"
+#| "Best regards,\n"
+#| "\n"
+#| "the %(site_name)s Team"
 msgid ""
 "Hello, %(user_name)s! \n"
 "\n"
 "Welcome to %(site_name)s! Your user account was approved.\n"
 "\n"
-"You can now log in at %(domain_url)s.\n"
+"You can now log in at %(domain_url)s/login/.\n"
 "\n"
 "\n"
 "Best regards,\n"
@@ -5442,21 +5457,15 @@ msgstr ""
 msgid "Your request to join %(site_name)s was denied."
 msgstr "Вашу реєстрацію на %(site_name)s було відхилено."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
-"Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+"Hello %(user_name)s! Your registration was successful.\n"
 "\n"
-"Our administrators will review your request and approve your user account soon!\n"
+"Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at %(user_mail)s.\n"
 "\n"
-"Until then, with warm greetings, \n"
+"Best regards,\n"
 "your %(site_name)s Team"
 msgstr ""
-"Привіт! Ми раді дізнатися, що Ви бажаєте стати учасником %(site_name)s.\n"
-"\n"
-" Найближчим часом наші адміністратори переглянуть Ваш запит та підтвердять Ваш обліковий запис!\n"
-"\n"
-"З найкращими побажаннями, \n"
-"Ваша команда %(site_name)s"
 
 #, python-format
 msgid "You have requested to become a member of %(site_name)s!"
@@ -13376,6 +13385,22 @@ msgstr "Неможливо додати список завдань «%(title)s�
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Ви не можете видалити цю папку, оскільки у вас немає прав на видалення одного або декількох елементів, які вона містить!"
+
+#, fuzzy
+#~ msgid ""
+#~ "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+#~ "\n"
+#~ "Our administrators will review your request and approve your user account soon!\n"
+#~ "\n"
+#~ "Until then, with warm greetings, \n"
+#~ "your %(site_name)s Team"
+#~ msgstr ""
+#~ "Привіт! Ми раді дізнатися, що Ви бажаєте стати учасником %(site_name)s.\n"
+#~ "\n"
+#~ " Найближчим часом наші адміністратори переглянуть Ваш запит та підтвердять Ваш обліковий запис!\n"
+#~ "\n"
+#~ "З найкращими побажаннями, \n"
+#~ "Ваша команда %(site_name)s"
 
 #~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
 #~ msgstr "Ви змінили свою електронну адресу. Незабаром ми надішлемо вам електронний лист на цю адресу з посиланням для підтвердження. Поки ви не натиснете на це посилання, Ваш профіль залишиться за старою електронною адресою!"
