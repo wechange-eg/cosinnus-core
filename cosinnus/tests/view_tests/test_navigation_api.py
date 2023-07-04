@@ -77,7 +77,7 @@ class SpacesViewTest(APITestCase):
         )
 
     def test_community_space(self):
-        CosinnusSociety.objects.create(slug=settings.NEWW_FORUM_GROUP_SLUG, name='Forum')
+        forum = CosinnusSociety.objects.create(slug=settings.NEWW_FORUM_GROUP_SLUG, name=settings.NEWW_FORUM_GROUP_SLUG)
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
@@ -86,7 +86,7 @@ class SpacesViewTest(APITestCase):
             {
                 'items': [
                     {'icon': 'fa-sitemap', 'label': settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL,
-                     'url': 'http://default domain/group/forum/', 'image': None},
+                     'url': forum.get_absolute_url(), 'image': None},
                     {'icon': 'fa-group', 'label': settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL,
                      'url': 'http://default domain/map/', 'image': None}
                 ],
