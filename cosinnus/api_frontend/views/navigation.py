@@ -144,7 +144,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
             for cluster in self.get_group_clusters(request.user) for dashboard_item in cluster
         ]
         group_space_actions = []
-        if check_user_can_create_groups(request.user):
+        if not settings.COSINNUS_SHOW_MAIN_MENU_GROUP_CREATE_BUTTON_ONLY_FOR_PERMITTED \
+                or check_user_can_create_groups(request.user):
             group_space_actions = [
                 MenuItem(CosinnusSocietyTrans.CREATE_NEW, reverse('cosinnus:group__group-add')),
                 MenuItem(CosinnusProjectTrans.CREATE_NEW, reverse('cosinnus:group-add')),
@@ -178,7 +179,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         if settings.COSINNUS_CONFERENCES_ENABLED:
             conferences = CosinnusConference.objects.get_for_user(request.user)
             conference_space_actions = []
-            if check_user_can_create_conferences(request.user):
+            if not settings.COSINNUS_SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON_ONLY_FOR_PERMITTED \
+                    or check_user_can_create_conferences(request.user):
                 conference_space_actions = [
                     MenuItem(CosinnusConferenceTrans.CREATE_NEW, reverse('cosinnus:conference__group-add')),
                 ]
