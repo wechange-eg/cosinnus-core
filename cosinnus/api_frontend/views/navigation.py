@@ -368,14 +368,55 @@ class AlertsView(APIView):
                     "data": {
                         "items": [
                             {
+                                "text": "<b>User 2</b> requested to become a member.",
+                                "id": 3,
+                                "url": "http://localhost:8000/group/test-group/members/",
+                                "item_icon_or_image_url": "fa-sitemap",
+                                "user_icon_or_image_url": "/static/images/jane-doe-small.png",
+                                "group": "Test Group",
+                                "group_icon": "fa-sitemap",
+                                "action_datetime": "2023-06-08T08:49:49.965634+00:00",
+                                "is_emphasized": True,
+                                "alert_reason": "You are an admin of this team",
+                                "sub_items": [],
+                                "is_multi_user_alert": False,
+                                "is_bundle_alert": False
+                            },
+                            {
+                                "text": "<b>User 3</b> und 1 other requested to become a member.",
+                                "id": 2,
+                                "url": "http://localhost:8000/group/test-project/members/",
+                                "item_icon_or_image_url": "fa-group",
+                                "user_icon_or_image_url": "/static/images/jane-doe-small.png",
+                                "group": "Test Project",
+                                "group_icon": "fa-group",
+                                "action_datetime": "2023-05-20T16:04:36.501003+00:00",
+                                "is_emphasized": False,
+                                "alert_reason": "You are an admin of this team",
+                                "sub_items": [
+                                    {
+                                        "title": "User 3",
+                                        "url": "http://localhost:8000/user/4/",
+                                        "icon_or_image_url": "/static/images/jane-doe-small.png"
+                                    },
+                                    {
+                                        "title": "User 4",
+                                        "url": "http://localhost:8000/user/5/",
+                                        "icon_or_image_url": "/static/images/jane-doe-small.png"
+                                    }
+                                ],
+                                "is_multi_user_alert": True,
+                                "is_bundle_alert": False
+                            },
+                            {
                                 "text": "<b>User 2</b> created 2 news posts.",
-                                "id": 80,
+                                "id": 1,
                                 "url": "http://localhost:8000/group/test-group/note/1401481714/",
                                 "item_icon_or_image_url": "fa-quote-right",
                                 "user_icon_or_image_url": "/static/images/jane-doe-small.png",
                                 "group": "Test Group",
                                 "group_icon": "fa-sitemap",
-                                "action_datetime": "2023-06-08T08:49:49.965634+00:00",
+                                "action_datetime": "2023-05-24T08:44:50.570918+00:00",
                                 "is_emphasized": True,
                                 "alert_reason": "You are following this content or its Project or Group",
                                 "sub_items": [
@@ -392,21 +433,6 @@ class AlertsView(APIView):
                                 ],
                                 "is_multi_user_alert": False,
                                 "is_bundle_alert": True
-                            },
-                            {
-                                "text": "<b>User 2</b> requested to become a member.",
-                                "id": 47,
-                                "url": "http://localhost:8000/group/test-group/members/",
-                                "item_icon_or_image_url": "fa-sitemap",
-                                "user_icon_or_image_url": "/static/images/jane-doe-small.png",
-                                "group": "Test Group",
-                                "group_icon": "fa-sitemap",
-                                "action_datetime": "2023-05-24T08:44:50.570918+00:00",
-                                "is_emphasized": False,
-                                "alert_reason": "You are an admin of this team",
-                                "sub_items": [],
-                                "is_multi_user_alert": False,
-                                "is_bundle_alert": False
                             }
                         ],
                         "has_more": False,
