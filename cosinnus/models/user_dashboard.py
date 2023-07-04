@@ -22,6 +22,12 @@ logger = logging.getLogger('cosinnus')
 
 
 class DashboardItem(dict):
+    """
+    Dictionary representation and API serializer of various cosinnus objects containing at least an icon, text and url.
+    Is automatically initialized for the following objects: CosinnusGroup, CosinusIdea, CosinnusOrganization,
+    NextcloudFileProxy, postman.Message, UserProfile and BaseTaggableObjectModel.
+    Used by DashboardWidgets and in the v3 navigation API.
+    """
     
     icon = None
     text = None
@@ -98,6 +104,10 @@ class DashboardItem(dict):
 
 
 class MenuItem(dict):
+    """
+    Dictionary used as a representation and API serializer of menu links consisting of a label, url, icon (optional)
+    and image-url (optional). Used in the v3 navigation API.
+    """
 
     def __init__(self, label, url, icon=None, image=None):
         domain = get_domain_for_portal(CosinnusPortal.get_current())
