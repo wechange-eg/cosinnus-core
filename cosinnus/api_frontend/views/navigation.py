@@ -531,8 +531,6 @@ class AlertsView(APIView):
         elif self.offset_timestamp:
             before_datetime = datetime_from_timestamp(self.offset_timestamp)
             alerts_qs = alerts_qs.filter(last_event_at__lt=before_datetime)
-        if not self.newer_than_timestamp:
-            alerts_qs = alerts_qs
         return alerts_qs
 
     def get_user_cache(self, alerts):
