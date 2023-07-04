@@ -28,9 +28,15 @@ from cosinnus_notifications.models import NotificationAlert, SerializedNotificat
 
 
 class SpacesView(MyGroupsClusteredMixin, APIView):
-    """ An endpoint that returns the user spaces for the main navigation. """
-    # TODO: Make names translateble, consider adding to cosinnus.trans.group.
-    # TODO: Allow to configure community space names, e.g. using "discover" instead of "map".
+    """
+    An endpoint that provides the user spaces for the main navigation.
+    Returns items (menu item list) and actions (menu item list) for the different spaces:
+    - Personal-Space: users personal dashboard
+    - Projects and Groups: users projects and groups
+    - Community: Forum and Map
+    - Conferences: users conferences
+    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional) and image url (optional).
+    """
 
     permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
@@ -194,7 +200,11 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
 
 
 class BookmarksView(APIView):
-    """ An endpoint that returns the user bookmarks for the main navigation. """
+    """
+    An endpoint that provides the user bookmarks for the main navigation.
+    Returns menu items for liked groups and projects, liked users and liked content (e.g. ideas).
+    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional) and image url (optional).
+    """
 
     permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
@@ -331,7 +341,20 @@ class UnreadAlertsView(APIView):
 
 
 class AlertsView(APIView):
-    """ An endpoint that returns the user alerts for the main navigation. """
+    """
+    An endpoint that provides the user alerts for the main navigation.
+    Returns a list of alert items, consisting of a text (label), url, icon_or_image_url, action_datetime and additional
+    alert details. Unread alerts are marked via "is_emphasized".
+
+    Multiple related alerts are bundled in a single alert item as sub_items:
+    - is_multi_user_alert: is for events happening on a single content object, but with multiple users acting on it.
+    - is_bundle_alert: is a single alert object bundled for multiple content objects causing events in a short
+      time frame, all by the same user in the same group.
+
+    Each sub alert contains text (label), url and icon_or_image_url elements.
+    The response list is paginated by 10 items. For pagination the "offset_timestamp" parameter should be used.
+    To receive new alerts the "newer_than_timestamp" should be used.
+    """
     # TODO: consider caching.
     # TODO: discuss pagination, newer_than_timestamp, offset_timestamp.
     # TODO: discuss limiting the fields to data needed by the frontend.
@@ -354,11 +377,12 @@ class AlertsView(APIView):
         manual_parameters=[
             openapi.Parameter(
                 'newer_than_timestamp', openapi.IN_QUERY, required=False,
-                description='Return alerts newer then this timestamp.', type=openapi.FORMAT_FLOAT
+                description='Return alerts newer then this timestamp. Used to receive new alerts since the last poll',
+                type=openapi.FORMAT_FLOAT
             ),
             openapi.Parameter(
                 'offset_timestamp', openapi.IN_QUERY, required=False,
-                description='Return alerts older then this timestamp.', type=openapi.FORMAT_FLOAT
+                description='Return alerts older then this timestamp. Used for pagination.', type=openapi.FORMAT_FLOAT
             ),
         ],
         responses={'200': openapi.Response(
@@ -519,7 +543,10 @@ class AlertsView(APIView):
 
 
 class HelpView(APIView):
-    """ An endpoint that returns help menu items for the main navigation. """
+    """
+    An endpoint that returns a list of help menu items for the main navigation.
+    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional) and image url (optional).
+    """
 
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
@@ -560,7 +587,12 @@ class HelpView(APIView):
 
 
 class ProfileView(APIView):
-    """ An endpoint that returns user profile menu items for the main navigation. """
+    """
+    An endpoint that provides user profile menu items for the main navigation.
+    Returns a list of menu items for user profile and notification settings, contribution, administration, logout and a
+    language switcher item. The language switcher item contains a list of menu items for the available languages.
+    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional) and image url (optional).
+    """
 
     permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
