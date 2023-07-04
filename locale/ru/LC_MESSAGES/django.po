@@ -197,29 +197,21 @@ msgstr "Rocket: Исправить/создать недостающие пол�
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Исправить недостающие членства для пользователей комнат RocketChat"
 
-#, fuzzy
-#| msgid "Project Dashboard"
 msgid "Personal Dashboard"
-msgstr "Панель управления проекта"
+msgstr "Персональная приборная панель"
 
 msgid "My Profile"
 msgstr "Мой профиль"
 
-#, fuzzy
-#| msgid "Set up your Profile"
 msgid "Set up my Profile"
 msgstr "Создать профиль"
 
-#, fuzzy
-#| msgid "Edit My Profile"
 msgid "Edit my Profile"
 msgstr "Редактировать мой профиль"
 
 msgid "Notification Preferences"
 msgstr "Настройки уведомлений"
 
-#, fuzzy
-#| msgid "Change language"
 msgid "Change Language"
 msgstr "Изменить язык"
 

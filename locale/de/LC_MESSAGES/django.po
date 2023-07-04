@@ -193,29 +193,21 @@ msgstr "Rocket: Reparieren/Erstellen von fehlenden Rocketchat-Konten von Benutze
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Fehlende RocketChat-Raummitgliedschaften für Benutzer beheben"
 
-#, fuzzy
-#| msgid "Project Dashboard"
 msgid "Personal Dashboard"
-msgstr "Projektdashboard"
+msgstr "Persönliches Dashboard"
 
 msgid "My Profile"
 msgstr "Mein Profil"
 
-#, fuzzy
-#| msgid "Set up your Profile"
 msgid "Set up my Profile"
 msgstr "Richte dein Profil ein"
 
-#, fuzzy
-#| msgid "Edit My Profile"
 msgid "Edit my Profile"
 msgstr "Profil-Einstellungen"
 
 msgid "Notification Preferences"
 msgstr "Benachrichtigungseinstellungen"
 
-#, fuzzy
-#| msgid "Change language"
 msgid "Change Language"
 msgstr "Sprache ändern"
 
