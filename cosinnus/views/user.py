@@ -729,6 +729,9 @@ def verifiy_user_email(request, email_verification_param):
             # else, welcome the user
             _send_user_welcome_email_if_enabled(user)
         if not request.user.is_authenticated and settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
+            # if the v3 frontend is enabled, as a temporary solution do not log in the user directly, but redirect to the verified page instead
+            if settings.COSINNUS_V3_FRONTEND_ENABLED:
+                return redirect(settings.COSINNUS_V3_FRONTEND_SIGNUP_VERIFICATION_WELCOME_PAGE)
             # log the user in for portals that require a verification first 
             user.backend = 'cosinnus.backends.EmailAuthBackend'
             login(request, user)
