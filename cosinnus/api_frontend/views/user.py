@@ -296,9 +296,15 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
         if do_login:
             next_url = redirect_url or getattr(settings, 'LOGIN_REDIRECT_URL', reverse('cosinnus:user-dashboard'))
         elif settings.COSINNUS_V3_FRONTEND_ENABLED:
-            user.cosinnus_profile.add_redirect_on_next_page(
-                redirect_with_next(settings.COSINNUS_V3_FRONTEND_SIGNUP_VERIFICATION_WELCOME_PAGE, self.request),
-                message=None, priority=True)
+            if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
+                # temporary solution: since user isn't logged in after verification, redirect directly to onboarding!
+                user.cosinnus_profile.add_redirect_on_next_page(
+                    redirect_with_next('/setup/profile', self.request),
+                    message=None, priority=True)
+            else:
+                user.cosinnus_profile.add_redirect_on_next_page(
+                    redirect_with_next(settings.COSINNUS_V3_FRONTEND_SIGNUP_VERIFICATION_WELCOME_PAGE, self.request),
+                    message=None, priority=True)
         
         data.update({
             'refresh': refresh,
