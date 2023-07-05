@@ -28,9 +28,15 @@ from cosinnus_notifications.models import NotificationAlert, SerializedNotificat
 
 
 class SpacesView(MyGroupsClusteredMixin, APIView):
-    """ An endpoint that returns the user spaces for the main navigation. """
-    # TODO: Make names translateble, consider adding to cosinnus.trans.group.
-    # TODO: Allow to configure community space names, e.g. using "discover" instead of "map".
+    """
+    An endpoint that provides the user spaces for the main navigation.
+    Returns items (menu item list) and actions (menu item list) for the different spaces:
+    - Personal-Space: users personal dashboard
+    - Projects and Groups: users projects and groups
+    - Community: Forum and Map
+    - Conferences: users conferences
+    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional) and image url (optional).
+    """
 
     permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
@@ -144,7 +150,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
             for cluster in self.get_group_clusters(request.user) for dashboard_item in cluster
         ]
         group_space_actions = []
-        if check_user_can_create_groups(request.user):
+        if not settings.COSINNUS_SHOW_MAIN_MENU_GROUP_CREATE_BUTTON_ONLY_FOR_PERMITTED \
+                or check_user_can_create_groups(request.user):
             group_space_actions = [
                 MenuItem(CosinnusSocietyTrans.CREATE_NEW, reverse('cosinnus:group__group-add')),
                 MenuItem(CosinnusProjectTrans.CREATE_NEW, reverse('cosinnus:group-add')),
@@ -178,7 +185,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         if settings.COSINNUS_CONFERENCES_ENABLED:
             conferences = CosinnusConference.objects.get_for_user(request.user)
             conference_space_actions = []
-            if check_user_can_create_conferences(request.user):
+            if not settings.COSINNUS_SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON_ONLY_FOR_PERMITTED \
+                    or check_user_can_create_conferences(request.user):
                 conference_space_actions = [
                     MenuItem(CosinnusConferenceTrans.CREATE_NEW, reverse('cosinnus:conference__group-add')),
                 ]
@@ -192,7 +200,11 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
 
 
 class BookmarksView(APIView):
-    """ An endpoint that returns the user bookmarks for the main navigation. """
+    """
+    An endpoint that provides the user bookmarks for the main navigation.
+    Returns menu items for liked groups and projects, liked users and liked content (e.g. ideas).
+    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional) and image url (optional).
+    """
 
     permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
@@ -329,7 +341,20 @@ class UnreadAlertsView(APIView):
 
 
 class AlertsView(APIView):
-    """ An endpoint that returns the user alerts for the main navigation. """
+    """
+    An endpoint that provides the user alerts for the main navigation.
+    Returns a list of alert items, consisting of a text (label), url, icon_or_image_url, action_datetime and additional
+    alert details. Unread alerts are marked via "is_emphasized".
+
+    Multiple related alerts are bundled in a single alert item as sub_items:
+    - is_multi_user_alert: is for events happening on a single content object, but with multiple users acting on it.
+    - is_bundle_alert: is a single alert object bundled for multiple content objects causing events in a short
+      time frame, all by the same user in the same group.
+
+    Each sub alert contains text (label), url and icon_or_image_url elements.
+    The response list is paginated by 10 items. For pagination the "offset_timestamp" parameter should be used.
+    To receive new alerts the "newer_than_timestamp" should be used.
+    """
     # TODO: consider caching.
     # TODO: discuss pagination, newer_than_timestamp, offset_timestamp.
     # TODO: discuss limiting the fields to data needed by the frontend.
@@ -352,11 +377,12 @@ class AlertsView(APIView):
         manual_parameters=[
             openapi.Parameter(
                 'newer_than_timestamp', openapi.IN_QUERY, required=False,
-                description='Return alerts newer then this timestamp.', type=openapi.FORMAT_FLOAT
+                description='Return alerts newer then this timestamp. Used to receive new alerts since the last poll',
+                type=openapi.FORMAT_FLOAT
             ),
             openapi.Parameter(
                 'offset_timestamp', openapi.IN_QUERY, required=False,
-                description='Return alerts older then this timestamp.', type=openapi.FORMAT_FLOAT
+                description='Return alerts older then this timestamp. Used for pagination.', type=openapi.FORMAT_FLOAT
             ),
         ],
         responses={'200': openapi.Response(
@@ -366,14 +392,55 @@ class AlertsView(APIView):
                     "data": {
                         "items": [
                             {
+                                "text": "<b>User 2</b> requested to become a member.",
+                                "id": 3,
+                                "url": "http://localhost:8000/group/test-group/members/",
+                                "item_icon_or_image_url": "fa-sitemap",
+                                "user_icon_or_image_url": "/static/images/jane-doe-small.png",
+                                "group": "Test Group",
+                                "group_icon": "fa-sitemap",
+                                "action_datetime": "2023-06-08T08:49:49.965634+00:00",
+                                "is_emphasized": True,
+                                "alert_reason": "You are an admin of this team",
+                                "sub_items": [],
+                                "is_multi_user_alert": False,
+                                "is_bundle_alert": False
+                            },
+                            {
+                                "text": "<b>User 3</b> und 1 other requested to become a member.",
+                                "id": 2,
+                                "url": "http://localhost:8000/group/test-project/members/",
+                                "item_icon_or_image_url": "fa-group",
+                                "user_icon_or_image_url": "/static/images/jane-doe-small.png",
+                                "group": "Test Project",
+                                "group_icon": "fa-group",
+                                "action_datetime": "2023-05-20T16:04:36.501003+00:00",
+                                "is_emphasized": False,
+                                "alert_reason": "You are an admin of this team",
+                                "sub_items": [
+                                    {
+                                        "title": "User 3",
+                                        "url": "http://localhost:8000/user/4/",
+                                        "icon_or_image_url": "/static/images/jane-doe-small.png"
+                                    },
+                                    {
+                                        "title": "User 4",
+                                        "url": "http://localhost:8000/user/5/",
+                                        "icon_or_image_url": "/static/images/jane-doe-small.png"
+                                    }
+                                ],
+                                "is_multi_user_alert": True,
+                                "is_bundle_alert": False
+                            },
+                            {
                                 "text": "<b>User 2</b> created 2 news posts.",
-                                "id": 80,
+                                "id": 1,
                                 "url": "http://localhost:8000/group/test-group/note/1401481714/",
                                 "item_icon_or_image_url": "fa-quote-right",
                                 "user_icon_or_image_url": "/static/images/jane-doe-small.png",
                                 "group": "Test Group",
                                 "group_icon": "fa-sitemap",
-                                "action_datetime": "2023-06-08T08:49:49.965634+00:00",
+                                "action_datetime": "2023-05-24T08:44:50.570918+00:00",
                                 "is_emphasized": True,
                                 "alert_reason": "You are following this content or its Project or Group",
                                 "sub_items": [
@@ -390,21 +457,6 @@ class AlertsView(APIView):
                                 ],
                                 "is_multi_user_alert": False,
                                 "is_bundle_alert": True
-                            },
-                            {
-                                "text": "<b>User 2</b> requested to become a member.",
-                                "id": 47,
-                                "url": "http://localhost:8000/group/test-group/members/",
-                                "item_icon_or_image_url": "fa-sitemap",
-                                "user_icon_or_image_url": "/static/images/jane-doe-small.png",
-                                "group": "Test Group",
-                                "group_icon": "fa-sitemap",
-                                "action_datetime": "2023-05-24T08:44:50.570918+00:00",
-                                "is_emphasized": False,
-                                "alert_reason": "You are an admin of this team",
-                                "sub_items": [],
-                                "is_multi_user_alert": False,
-                                "is_bundle_alert": False
                             }
                         ],
                         "has_more": False,
@@ -479,8 +531,6 @@ class AlertsView(APIView):
         elif self.offset_timestamp:
             before_datetime = datetime_from_timestamp(self.offset_timestamp)
             alerts_qs = alerts_qs.filter(last_event_at__lt=before_datetime)
-        if not self.newer_than_timestamp:
-            alerts_qs = alerts_qs
         return alerts_qs
 
     def get_user_cache(self, alerts):
@@ -491,7 +541,10 @@ class AlertsView(APIView):
 
 
 class HelpView(APIView):
-    """ An endpoint that returns help menu items for the main navigation. """
+    """
+    An endpoint that returns a list of help menu items for the main navigation.
+    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional) and image url (optional).
+    """
 
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
@@ -532,7 +585,12 @@ class HelpView(APIView):
 
 
 class ProfileView(APIView):
-    """ An endpoint that returns user profile menu items for the main navigation. """
+    """
+    An endpoint that provides user profile menu items for the main navigation.
+    Returns a list of menu items for user profile and notification settings, contribution, administration, logout and a
+    language switcher item. The language switcher item contains a list of menu items for the available languages.
+    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional) and image url (optional).
+    """
 
     permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
