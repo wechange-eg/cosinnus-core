@@ -22,7 +22,7 @@ from cosinnus.conf import settings
 from cosinnus.core.registries import url_registry
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_portal
-from cosinnus.views import bbb_room, user_import, user_match
+from cosinnus.views import bbb_room, user_export, user_import, user_match
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group, \
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication, \
     user_dashboard, ui_prefs, administration, user_dashboard_announcement, dynamic_fields, \
@@ -175,7 +175,12 @@ if getattr(settings, 'COSINNUS_USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED', False)
         url(r'^administration/user_import/archived/$', user_import.archived_user_import_list_view, name='administration-archived-user-import-list'),
         url(r'^administration/user_import/archived/(?P<pk>\d+)/$', user_import.archived_user_import_detail_view, name='administration-archived-user-import-detail'),
         url(r'^administration/user_import/archived/(?P<pk>\d+)/delete/$', user_import.archived_user_import_delete_view, name='administration-archived-user-import-delete'),
-    
+    ]
+
+if getattr(settings, 'COSINNUS_USER_EXPORT_ADMINISTRATION_VIEWS_ENABLED', False):
+    urlpatterns += [
+        url(r'^administration/user_export/$', user_export.user_export_view, name='administration-user-export'),
+        url(r'^administration/user_export/download/$', user_export.user_export_download_view, name='administration-user-export-download'),
     ]
 
 if getattr(settings, 'COSINNUS_DYNAMIC_FIELD_ADMINISTRATION_VIEWS_ENABLED', False): 
