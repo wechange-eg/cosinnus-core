@@ -15,13 +15,14 @@
 	    {% if video_conference_type_legend %}
 	        {{ video_conference_type_legend }}
 	    {% else %}
-	        {% trans "Choose the type of the video conference you would like for the event" %}
+	        {% trans "Choose the type of video conference you would like." %}
 	    {% endif %}
 	    {% if bbb_restricted %}
 	        <br/>
-	        {% trans "BBB-Meetings are a premium feature." %}
-	        {% trans "Make a premium booking here" %}:
-	        <a href="{% include "cosinnus/v2/urls/conference_premium_booking_url.html" %}" target="_blank">{% trans "Premium Bookings" %}</a>
+	        {% trans "Professional video conferences with BigBlueButton require activation." %}
+            <b>
+	            <a href="{% include "cosinnus/v2/urls/conference_premium_booking_url.html" %}" target="_blank">{% trans "Make the activation here." %}</a>
+            </b>
 	    {% endif %}
     {% endcaptureas %}
     {% captureas video_type_field_html %}
@@ -35,7 +36,7 @@
                 {% if value == 0 and bbb_restricted %}
 	                {% comment %} For the BBB-Meeting Option, add a fake, disabled option {% endcomment %}
 	                <option disabled="disabled" value="1">
-	                    {% trans "BBB-Meeting" %} ({% trans "Premium only" %})
+	                    {% trans "BigBlueButton" %} ({% trans "Activation required" %})
 	                </option>
                 {% endif %}
             {% endfor %}

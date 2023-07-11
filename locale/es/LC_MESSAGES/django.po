@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-28 15:17+0200\n"
+"POT-Creation-Date: 2023-07-11 15:13+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4149,15 +4149,21 @@ msgstr "Direcciónes de correo electrónico"
 msgid "Include a video conference"
 msgstr "Inserta un nombre para el proyecto."
 
-msgid "Choose the type of the video conference you would like for the event"
+msgid "Choose the type of video conference you would like."
 msgstr ""
 
-msgid "BBB-Meetings are a premium feature."
+msgid "Professional video conferences with BigBlueButton require activation."
+msgstr ""
+
+msgid "Make the activation here."
+msgstr ""
+
+msgid "BigBlueButton"
 msgstr ""
 
 #, fuzzy
-msgid "Premium Bookings"
-msgstr "Crear evento"
+msgid "Activation required"
+msgstr "Activar proyecto"
 
 msgid "Maximum Number of Participants"
 msgstr ""
@@ -9899,6 +9905,9 @@ msgstr ""
 msgid "Enter a title for the new event."
 msgstr "Inserta un título para el nuevo evento."
 
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
+
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "La primera imagen subida será el fondo de pantalla."
 
@@ -13733,6 +13742,10 @@ msgstr "La lista de tareas \"%(title)s\" no pudo ser agregada."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "No se puede eliminar la carpeta porque no tiene permiso para eliminar uno o más elementos que contiene!"
+
+#, fuzzy
+#~ msgid "Premium Bookings"
+#~ msgstr "Crear evento"
 
 #, fuzzy
 #~ msgid ""

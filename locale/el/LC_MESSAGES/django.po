@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-28 15:17+0200\n"
+"POT-Creation-Date: 2023-07-11 15:13+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4030,15 +4030,22 @@ msgstr "Προσθήκη Διεύθυνσης"
 msgid "Include a video conference"
 msgstr "Αποστολή 1 ημέρα πριν από τη σύσκεψη"
 
-msgid "Choose the type of the video conference you would like for the event"
+msgid "Choose the type of video conference you would like."
 msgstr ""
 
-msgid "BBB-Meetings are a premium feature."
+msgid "Professional video conferences with BigBlueButton require activation."
+msgstr ""
+
+msgid "Make the activation here."
+msgstr ""
+
+msgid "BigBlueButton"
 msgstr ""
 
 #, fuzzy
-msgid "Premium Bookings"
-msgstr "Premium"
+#| msgid "Activate Conference"
+msgid "Activation required"
+msgstr "Ενεργοποίηση Σύσκεψης"
 
 msgid "Maximum Number of Participants"
 msgstr "Μέγιστος Αριθμός Συμμετεχόντων"
@@ -9594,6 +9601,9 @@ msgstr ""
 msgid "Enter a title for the new event."
 msgstr "Εισάγετε τίτλο για τη νέα εκδήλωση."
 
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
+
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "Η εικόνα που ανέβηκε πρώτη θα εμφανιστεί ως ταπετσαρία."
 
@@ -13412,6 +13422,10 @@ msgstr "Δεν ήταν δυνατή η προσθήκη της λίστας κ�
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Δεν μπορείτε να διαγράψετε αυτόν τον φάκελο διότι δεν έχετε άδεια να διαγράψετε ένα ή περισσότερα στοιχεία που περιέχει!"
+
+#, fuzzy
+#~ msgid "Premium Bookings"
+#~ msgstr "Premium"
 
 #, fuzzy
 #~ msgid ""

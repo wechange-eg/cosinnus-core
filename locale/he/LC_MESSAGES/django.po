@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-28 15:17+0200\n"
+"POT-Creation-Date: 2023-07-11 15:13+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4041,15 +4041,22 @@ msgstr "הוספת כתובת"
 msgid "Include a video conference"
 msgstr "שלח יום אחד לפני הוועידה"
 
-msgid "Choose the type of the video conference you would like for the event"
+msgid "Choose the type of video conference you would like."
 msgstr ""
 
-msgid "BBB-Meetings are a premium feature."
+msgid "Professional video conferences with BigBlueButton require activation."
+msgstr ""
+
+msgid "Make the activation here."
+msgstr ""
+
+msgid "BigBlueButton"
 msgstr ""
 
 #, fuzzy
-msgid "Premium Bookings"
-msgstr "פרמיום"
+#| msgid "Activate Conference"
+msgid "Activation required"
+msgstr "הפעל ועידה"
 
 msgid "Maximum Number of Participants"
 msgstr "מספר משתתפים מרבי"
@@ -9612,6 +9619,9 @@ msgstr ""
 msgid "Enter a title for the new event."
 msgstr "הזינו כותרת עבור האירוע החדש."
 
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
+
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "התמונה הראשונה שהועלתה תוצג כטפט."
 
@@ -13425,6 +13435,10 @@ msgstr "לא ניתן להוסיף את רשימת המשימות \"%(title)s\".
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "אינך יכול למחוק תיקיה זו מכיוון שאין לך הרשאה למחוק פריט אחד או יותר שהיא מכילה!"
+
+#, fuzzy
+#~ msgid "Premium Bookings"
+#~ msgstr "פרמיום"
 
 #, fuzzy
 #~ msgid ""

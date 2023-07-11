@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-28 15:17+0200\n"
+"POT-Creation-Date: 2023-07-11 15:13+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4146,15 +4146,21 @@ msgstr "Adrese de e-mail"
 msgid "Include a video conference"
 msgstr "Este conferință"
 
-msgid "Choose the type of the video conference you would like for the event"
+msgid "Choose the type of video conference you would like."
 msgstr ""
 
-msgid "BBB-Meetings are a premium feature."
+msgid "Professional video conferences with BigBlueButton require activation."
+msgstr ""
+
+msgid "Make the activation here."
+msgstr ""
+
+msgid "BigBlueButton"
 msgstr ""
 
 #, fuzzy
-msgid "Premium Bookings"
-msgstr "Premium"
+msgid "Activation required"
+msgstr "Activează Proiectul"
 
 #, fuzzy
 msgid "Maximum Number of Participants"
@@ -9840,6 +9846,9 @@ msgstr ""
 msgid "Enter a title for the new event."
 msgstr "Introduceți un titlu pentru noul eveniment."
 
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
+
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "Prima imagine încărcată va fi afișată ca tapet."
 
@@ -13650,6 +13659,10 @@ msgstr "Lista tuturor ”%(title)s” nu a putut fi adăugată."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Nu puteți șterge acest dosar, deoarece nu aveți permisiunea da a șterge unul sau ma multe elemente pe are le conține!"
+
+#, fuzzy
+#~ msgid "Premium Bookings"
+#~ msgstr "Premium"
 
 #, fuzzy
 #~ msgid ""

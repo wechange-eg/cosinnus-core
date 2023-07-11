@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-28 15:17+0200\n"
+"POT-Creation-Date: 2023-07-11 15:13+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3920,14 +3920,20 @@ msgstr "Adresse hinzufügen"
 msgid "Include a video conference"
 msgstr "Videokonferenz einbetten"
 
-msgid "Choose the type of the video conference you would like for the event"
-msgstr "Wähle den Typ der Videokonferenz, die in der Veranstaltung verwendet werden soll"
+msgid "Choose the type of video conference you would like."
+msgstr "Wähle den Typ der Videokonferenz, die verwendet werden soll."
 
-msgid "BBB-Meetings are a premium feature."
-msgstr "BBB-Meetings sind ein Premium-Feature."
+msgid "Professional video conferences with BigBlueButton require activation."
+msgstr "Professionelle Videokonferenzen mit BigBlueButton erfordern eine Aktivierung."
 
-msgid "Premium Bookings"
-msgstr "Premium-Buchungen"
+msgid "Make the activation here."
+msgstr "Nimm die Aktivierung hier vor."
+
+msgid "BigBlueButton"
+msgstr "BigBlueButton"
+
+msgid "Activation required"
+msgstr "Aktivierung erforderlich"
 
 msgid "Maximum Number of Participants"
 msgstr "Maximale Anzahl von Teilnehmenden"
@@ -5613,7 +5619,7 @@ msgid "Terms and Services"
 msgstr "Nutzungsbedingungen"
 
 msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
-msgstr ""
+msgstr "Ja, ich möchte am Geschehen beteiligt werden und einen Newsletter über Neuigkeiten und Veranstaltungen erhalten."
 
 msgid "Forgot password?"
 msgstr "Passwort vergessen?"
@@ -6746,10 +6752,8 @@ msgstr "Signalisiert deine Bereitschaft, von anderen Benutzern kontaktiert zu we
 msgid "I am open for cooperation requests"
 msgstr "Ich bin offen für Kooperationsanfragen"
 
-#, fuzzy
-#| msgid "Create Newsletter"
 msgid "News via the newsletter"
-msgstr "Newsletter erstellen"
+msgstr "Nachrichten über den Newsletter"
 
 msgid "Welcome!"
 msgstr "Willkommen!"
@@ -9391,6 +9395,9 @@ msgstr ""
 
 msgid "Enter a title for the new event."
 msgstr "Gib einen Titel für die Veranstaltung an."
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr "Wähle den Typ der Videokonferenz, die in der Veranstaltung verwendet werden soll"
 
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "Das erste hochgeladene Bild wird als Hintergrundbild angezeigt."
@@ -13050,6 +13057,12 @@ msgstr "Aufgabenliste „%(title)s“ konnte nicht hinzugefügt werden."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte hast eins oder mehrere der noch enthaltenen Objekte zu löschen!"
+
+#~ msgid "BBB-Meetings are a premium feature."
+#~ msgstr "BBB-Meetings sind ein Premium-Feature."
+
+#~ msgid "Premium Bookings"
+#~ msgstr "Premium-Buchungen"
 
 #~ msgid ""
 #~ "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"

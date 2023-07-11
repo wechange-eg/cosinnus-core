@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-28 15:17+0200\n"
+"POT-Creation-Date: 2023-07-11 15:13+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4034,15 +4034,22 @@ msgstr "Ajouter une adresse"
 msgid "Include a video conference"
 msgstr "Envoyer 1 jour avant la conférence"
 
-msgid "Choose the type of the video conference you would like for the event"
+msgid "Choose the type of video conference you would like."
 msgstr ""
 
-msgid "BBB-Meetings are a premium feature."
+msgid "Professional video conferences with BigBlueButton require activation."
+msgstr ""
+
+msgid "Make the activation here."
+msgstr ""
+
+msgid "BigBlueButton"
 msgstr ""
 
 #, fuzzy
-msgid "Premium Bookings"
-msgstr "Premium"
+#| msgid "Activate Conference"
+msgid "Activation required"
+msgstr "Activer la conférence"
 
 msgid "Maximum Number of Participants"
 msgstr "Nombre maximal de participants"
@@ -9606,6 +9613,9 @@ msgstr ""
 msgid "Enter a title for the new event."
 msgstr "Entrer un titre pour le nouvel événement."
 
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
+
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "La première image téléchargée sera affichée en fond d'écran."
 
@@ -13422,6 +13432,10 @@ msgstr "La liste de tâches \"%(title)s\" n'a pas pu être ajoutée."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Tu ne peux supprimer ce dossier car tu n'as pas la permission de supprimer un ou plusieurs items qu'il contient !"
+
+#, fuzzy
+#~ msgid "Premium Bookings"
+#~ msgstr "Premium"
 
 #, fuzzy
 #~ msgid ""

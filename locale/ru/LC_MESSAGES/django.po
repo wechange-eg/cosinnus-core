@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-28 15:17+0200\n"
+"POT-Creation-Date: 2023-07-11 15:13+0200\n"
 "PO-Revision-Date: 2023-04-18 18:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3926,14 +3926,24 @@ msgstr "Адрес электронной почты"
 msgid "Include a video conference"
 msgstr "Включить видео-конференцию"
 
-msgid "Choose the type of the video conference you would like for the event"
+#, fuzzy
+#| msgid "Choose the type of the video conference you would like for the event"
+msgid "Choose the type of video conference you would like."
 msgstr "Выберите тип видеоконференции"
 
-msgid "BBB-Meetings are a premium feature."
-msgstr "BBB-сессии являются премиальными."
+msgid "Professional video conferences with BigBlueButton require activation."
+msgstr ""
 
-msgid "Premium Bookings"
-msgstr "Премиум статус"
+msgid "Make the activation here."
+msgstr ""
+
+msgid "BigBlueButton"
+msgstr ""
+
+#, fuzzy
+#| msgid "Activate Conference"
+msgid "Activation required"
+msgstr "Активировать проект"
 
 msgid "Maximum Number of Participants"
 msgstr "Максимум участников за кофейным столиком"
@@ -9410,6 +9420,9 @@ msgstr ""
 msgid "Enter a title for the new event."
 msgstr "Введите название нового события."
 
+msgid "Choose the type of the video conference you would like for the event"
+msgstr "Выберите тип видеоконференции"
+
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "Первое загруженное изображение будет отображаться в качестве фонового рисунка."
 
@@ -13079,6 +13092,12 @@ msgstr "Невозможно добавить список задач \"%(title)
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Вы не можете удалить эту папку, так как у Вас нет полномочий для удаления одного или более элементов, которые в ней содержатся!"
+
+#~ msgid "BBB-Meetings are a premium feature."
+#~ msgstr "BBB-сессии являются премиальными."
+
+#~ msgid "Premium Bookings"
+#~ msgstr "Премиум статус"
 
 #~ msgid ""
 #~ "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
