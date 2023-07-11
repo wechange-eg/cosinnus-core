@@ -2566,6 +2566,9 @@ msgstr "Benutzermanagement"
 msgid "User Import"
 msgstr "Benutzer-Import"
 
+msgid "User Export"
+msgstr "Benutzer-Export"
+
 msgid "User Profile Field Choices"
 msgstr "Benutzerprofil-Feldwerte"
 
@@ -7024,6 +7027,42 @@ msgstr "Benutzer kann eine Ankündigungen wegklicken, woraufhin sie verschwindet
 msgid "There are no announcements yet."
 msgstr "Noch keine Ankündigungen vorhanden."
 
+msgid "Start user export"
+msgstr "Benutzer-Export starten"
+
+msgid "You can start a user export. As soon as the export is finished it will be available here."
+msgstr "Benutzer-Export kann gestartet werden. Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
+
+msgid "The export is currently running..."
+msgstr "Benutzer-Export läuft gerade..."
+
+msgid "A user export is in progress. As soon as the export is finished it will be available here."
+msgstr "Der Benutzer-Export wird gerade erstellt.  Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
+
+msgid "User export finished"
+msgstr "Benutzer-Export abgeschlossen"
+
+msgid "You can download the latest user export file."
+msgstr "Der zuletzt erstellte Benutzer-Export kann heruntergeladen werden."
+
+msgid "Timestamp of user export"
+msgstr "Zeitstempel des Benutzer-Exports"
+
+msgid "Please note that for security reasons the export file will be only available temporarily and will be automatically deleted after some time."
+msgstr "Achtung: Aus Sicherheitsgründen ist die Export-Datei nur temporär verfügbar und wird automatisch gelöscht nach einer gewissen Zeit."
+
+msgid "An error has occurred"
+msgstr "Ein Fehler ist aufgetreten."
+
+msgid "Sorry, an error occurred during the user export. Please try again later."
+msgstr "Leider ist bei dem Benutzer-Export ein Fehler aufgetreten. Bitte versuch es später erneut."
+
+msgid "Delete current export file and start new user export"
+msgstr "Aktuelle Export-Datei löschen und neuen Benutzer-Export starten"
+
+msgid "Download user export CSV"
+msgstr "Benutzer-Export CSV herunterladen"
+
 msgid "User Import Archive"
 msgstr "User Import Archiv"
 
@@ -8378,6 +8417,9 @@ msgstr "Deine Ankündigung wurde erfolgreich bearbeitet."
 
 msgid "Your Announcement was deactivated successfully."
 msgstr "Deine Ankündigung wurde erfolgreich bearbeitet."
+
+msgid "Another export is currently running!"
+msgstr "Ein anderer Emport läuft gerade!"
 
 msgid "The Archived User Import Entry was deleted successfully."
 msgstr "Der archivierte Benutzerimport-Eintrag wurde erfolgreich gelöscht."

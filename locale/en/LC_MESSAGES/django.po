@@ -2680,6 +2680,9 @@ msgstr ""
 msgid "User Import"
 msgstr ""
 
+msgid "User Export"
+msgstr ""
+
 msgid "User Profile Field Choices"
 msgstr ""
 
@@ -7105,6 +7108,42 @@ msgstr ""
 msgid "There are no announcements yet."
 msgstr "There are no groups."
 
+msgid "Start user export"
+msgstr ""
+
+msgid "You can start a user export. As soon as the export is finished it will be available here."
+msgstr ""
+
+msgid "The export is currently running..."
+msgstr ""
+
+msgid "A user export is in progress. As soon as the export is finished it will be available here."
+msgstr ""
+
+msgid "User export finished"
+msgstr ""
+
+msgid "You can download the latest user export file."
+msgstr ""
+
+msgid "Timestamp of user export"
+msgstr ""
+
+msgid "Please note that for security reasons the export file will be only available temporarily and will be automatically deleted after some time."
+msgstr ""
+
+msgid "An error has occurred"
+msgstr ""
+
+msgid "Sorry, an error occurred during the user export. Please try again later."
+msgstr ""
+
+msgid "Delete current export file and start new user export"
+msgstr ""
+
+msgid "Download user export CSV"
+msgstr ""
+
 msgid "User Import Archive"
 msgstr ""
 
@@ -8499,6 +8538,9 @@ msgid "Your Announcement was activated successfully."
 msgstr ""
 
 msgid "Your Announcement was deactivated successfully."
+msgstr ""
+
+msgid "Another export is currently running!"
 msgstr ""
 
 msgid "The Archived User Import Entry was deleted successfully."
