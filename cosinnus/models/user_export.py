@@ -49,15 +49,14 @@ class CosinnusUserExportProcessorBase(object):
     # Current export state
     EXPORT_STATE_CACHE_KEY = 'cosinnus/core/portal/%d/export/state'
 
-    # Latest finished csv export file
+    # Latest finished csv export data
     EXPORT_CSV_CACHE_KEY = 'cosinnus/core/portal/%d/export/csv'
 
     # Timestamp of the latest finished csv export
     EXPORT_TIMESTAMP_CACHE_KEY = 'cosinnus/core/portal/%d/export/timestamp'
 
-    def set_current_export_state(self, progress_string):
-        cache.set(self.EXPORT_STATE_CACHE_KEY % CosinnusPortal.get_current().id, progress_string,
-                  self.EXPORT_CACHE_TIMEOUT)
+    def set_current_export_state(self, state):
+        cache.set(self.EXPORT_STATE_CACHE_KEY % CosinnusPortal.get_current().id, state, self.EXPORT_CACHE_TIMEOUT)
 
     def get_current_export_state(self):
         return cache.get(self.EXPORT_STATE_CACHE_KEY % CosinnusPortal.get_current().id)
@@ -68,11 +67,17 @@ class CosinnusUserExportProcessorBase(object):
     def get_current_export_csv(self):
         return cache.get(self.EXPORT_CSV_CACHE_KEY % CosinnusPortal.get_current().id)
 
-    def set_current_export_timestamp(self, csv):
-        cache.set(self.EXPORT_TIMESTAMP_CACHE_KEY % CosinnusPortal.get_current().id, csv, self.EXPORT_CACHE_TIMEOUT)
+    def set_current_export_timestamp(self, timestamp):
+        cache.set(self.EXPORT_TIMESTAMP_CACHE_KEY % CosinnusPortal.get_current().id, timestamp, self.EXPORT_CACHE_TIMEOUT)
 
     def get_current_export_timestamp(self):
         return cache.get(self.EXPORT_TIMESTAMP_CACHE_KEY % CosinnusPortal.get_current().id)
+
+    def delete_export_cache(self):
+        portal = CosinnusPortal.get_current().id
+        cache.delete(self.EXPORT_STATE_CACHE_KEY % portal)
+        cache.delete(self.EXPORT_CSV_CACHE_KEY % portal)
+        cache.delete(self.EXPORT_TIMESTAMP_CACHE_KEY % portal)
 
     def get_state(self):
         """ Returns the current processor state. """
@@ -142,42 +147,33 @@ class CosinnusUserExportProcessorBase(object):
             row.append(value)
         return row
 
-    def get_csv_filename(self, timestamp):
-        """ Returns the CSV file name used in the cached CSV response file. """
-        return 'user export - {}.csv'.format(timestamp.strftime('%Y%m%d %H%M%S'))
+    def get_filename(self):
+        """ Returns the file name used in the cached CSV/XLSX response file. """
+        return 'user export'
 
     def _start_export(self, users):
         """
         Main export function that can be called in a thread. Creates a CSV response file object and populates it with
         user data. Sets the state cache and csv file cache values according to the progress.
         """
+        data = []
         timestamp = now()
         self.set_current_export_state(self.STATE_EXPORT_RUNNING)
         self.set_current_export_timestamp(timestamp)
         try:
-            filename = self.get_csv_filename(timestamp)
-            file = HttpResponse(content_type='text/csv')
-            file['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
-
-            writer = csv.writer(file, delimiter=',')
-
-            header = self.get_header()
-            if header:
-                writer.writerow(header)
-
             for user in users:
                 user_row = self.export_single_user_row(user)
-                writer.writerow(user_row)
+                data.append(user_row)
 
-            self.set_current_export_csv(file)
+            self.set_current_export_csv(data)
             self.set_current_export_state(self.STATE_EXPORT_FINISHED)
 
         except Exception as e:
             logging.exception(e)
-            self.set_current_export_csv(None)
+            self.delete_export_cache()
             self.set_current_export_state(self.STATE_EXPORT_ERROR)
 
-    def do_csv_export(self, threaded=True):
+    def do_export(self, threaded=True):
         """ Does a threaded user export. Threading can be disabled via the threaded parameter. """
         users = self.get_user_queryset()
         if threaded:
@@ -189,6 +185,10 @@ class CosinnusUserExportProcessorBase(object):
             CosinnusUserExportProcessThread().start()
         else:
             self._start_export(users)
+
+    def delete_export(self):
+        """ Deletes all export data. """
+        self.delete_export_cache()
 
 
 # allow dropin of export processor

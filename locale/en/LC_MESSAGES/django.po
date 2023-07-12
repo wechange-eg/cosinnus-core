@@ -7123,13 +7123,16 @@ msgstr ""
 msgid "User export finished"
 msgstr ""
 
-msgid "You can download the latest user export file."
+msgid "You can download the latest user export data."
 msgstr ""
 
-msgid "Timestamp of user export"
+msgid "Download user exports from"
 msgstr ""
 
-msgid "Please note that for security reasons the export file will be only available temporarily and will be automatically deleted after some time."
+msgid "Download user export as"
+msgstr ""
+
+msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
 msgstr ""
 
 msgid "An error has occurred"
@@ -7138,11 +7141,15 @@ msgstr ""
 msgid "Sorry, an error occurred during the user export. Please try again later."
 msgstr ""
 
-msgid "Delete current export file and start new user export"
+msgid "Delete current export data and start new user export"
 msgstr ""
 
-msgid "Download user export CSV"
+msgid "Retry user export"
 msgstr ""
+
+#, fuzzy
+msgid "Delete exported data"
+msgstr "There are no groups."
 
 msgid "User Import Archive"
 msgstr ""

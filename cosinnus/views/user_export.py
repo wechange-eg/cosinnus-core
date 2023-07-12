@@ -11,6 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic.base import TemplateView, View
 
 from cosinnus.models.user_export import CosinnusUserExportProcessor
+from cosinnus.utils.http import make_csv_response, make_xlsx_response
 from cosinnus.views.mixins.group import RequireSuperuserMixin
 
 
@@ -43,7 +44,9 @@ class CosinnusUserExportView(RequireSuperuserMixin, TemplateView):
             return redirect(self.redirect_view)
 
         if action == 'start':
-            self.export_processor.do_csv_export()
+            self.export_processor.do_export()
+        elif action == 'delete':
+            self.export_processor.delete_export()
 
         return redirect(self.redirect_view)
     
@@ -58,15 +61,35 @@ class CosinnusUserExportView(RequireSuperuserMixin, TemplateView):
 user_export_view = CosinnusUserExportView.as_view()
 
 
-class CosinnusUserExportDownloadView(RequireSuperuserMixin, View):
+class CosinnusUserExportCSVDownloadView(RequireSuperuserMixin, View):
 
     http_method_names = ['get']
     export_processor = CosinnusUserExportProcessor()
 
     def get(self, request, *args, **kwargs):
-        file = self.export_processor.get_current_export_csv()
-        if not file:
+        data = self.export_processor.get_current_export_csv()
+        if not data:
             raise Http404
-        return file
+        header = self.export_processor.get_header()
+        filename = self.export_processor.get_filename()
+        response = make_csv_response(data, header, filename)
+        return response
 
-user_export_download_view = CosinnusUserExportDownloadView.as_view()
+user_export_csv_download_view = CosinnusUserExportCSVDownloadView.as_view()
+
+
+class CosinnusUserExportXLSXDownloadView(RequireSuperuserMixin, View):
+
+    http_method_names = ['get']
+    export_processor = CosinnusUserExportProcessor()
+
+    def get(self, request, *args, **kwargs):
+        data = self.export_processor.get_current_export_csv()
+        if not data:
+            raise Http404
+        header = self.export_processor.get_header()
+        filename = self.export_processor.get_filename()
+        response = make_xlsx_response(data, header, filename)
+        return response
+
+user_export_xlsx_download_view = CosinnusUserExportXLSXDownloadView.as_view()

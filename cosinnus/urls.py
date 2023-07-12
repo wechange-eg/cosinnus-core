@@ -180,7 +180,8 @@ if getattr(settings, 'COSINNUS_USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED', False)
 if getattr(settings, 'COSINNUS_USER_EXPORT_ADMINISTRATION_VIEWS_ENABLED', False):
     urlpatterns += [
         url(r'^administration/user_export/$', user_export.user_export_view, name='administration-user-export'),
-        url(r'^administration/user_export/download/$', user_export.user_export_download_view, name='administration-user-export-download'),
+        url(r'^administration/user_export/download/csv/$', user_export.user_export_csv_download_view, name='administration-user-export-csv-download'),
+        url(r'^administration/user_export/download/xlsx/$', user_export.user_export_xlsx_download_view, name='administration-user-export-xlsx-download'),
     ]
 
 if getattr(settings, 'COSINNUS_DYNAMIC_FIELD_ADMINISTRATION_VIEWS_ENABLED', False): 

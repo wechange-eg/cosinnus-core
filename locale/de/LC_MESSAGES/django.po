@@ -7042,14 +7042,17 @@ msgstr "Der Benutzer-Export wird gerade erstellt.  Sobald der Export abgeschloss
 msgid "User export finished"
 msgstr "Benutzer-Export abgeschlossen"
 
-msgid "You can download the latest user export file."
+msgid "You can download the latest user export data."
 msgstr "Der zuletzt erstellte Benutzer-Export kann heruntergeladen werden."
 
-msgid "Timestamp of user export"
-msgstr "Zeitstempel des Benutzer-Exports"
+msgid "Download user exports from"
+msgstr "Benutzer-Export herunterladen vom"
 
-msgid "Please note that for security reasons the export file will be only available temporarily and will be automatically deleted after some time."
-msgstr "Achtung: Aus Sicherheitsgründen ist die Export-Datei nur temporär verfügbar und wird automatisch gelöscht nach einer gewissen Zeit."
+msgid "Download user export as"
+msgstr "Benutzer-Export herunterladen als"
+
+msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
+msgstr "Achtung: Aus Sicherheitsgründen sind die Export-Daten nur temporär verfügbar und werden automatisch nach einer gewissen Zeit gelöscht."
 
 msgid "An error has occurred"
 msgstr "Ein Fehler ist aufgetreten."
@@ -7057,11 +7060,14 @@ msgstr "Ein Fehler ist aufgetreten."
 msgid "Sorry, an error occurred during the user export. Please try again later."
 msgstr "Leider ist bei dem Benutzer-Export ein Fehler aufgetreten. Bitte versuch es später erneut."
 
-msgid "Delete current export file and start new user export"
-msgstr "Aktuelle Export-Datei löschen und neuen Benutzer-Export starten"
+msgid "Delete export data and start new user export"
+msgstr "Export-Daten löschen und neuen Benutzer-Export starten"
 
-msgid "Download user export CSV"
-msgstr "Benutzer-Export CSV herunterladen"
+msgid "Retry user export"
+msgstr "Benutzer-Export erneut starten"
+
+msgid "Delete exported data"
+msgstr "Export-Daten löschen"
 
 msgid "User Import Archive"
 msgstr "User Import Archiv"
@@ -13102,6 +13108,9 @@ msgstr "Aufgabenliste „%(title)s“ konnte nicht hinzugefügt werden."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte hast eins oder mehrere der noch enthaltenen Objekte zu löschen!"
+
+#~ msgid "Timestamp of user export"
+#~ msgstr "Zeitstempel des Benutzer-Exports"
 
 #~ msgid "BBB-Meetings are a premium feature."
 #~ msgstr "BBB-Meetings sind ein Premium-Feature."
