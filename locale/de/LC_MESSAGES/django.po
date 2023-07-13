@@ -8425,7 +8425,7 @@ msgid "Your Announcement was deactivated successfully."
 msgstr "Deine Ankündigung wurde erfolgreich bearbeitet."
 
 msgid "Another export is currently running!"
-msgstr "Ein anderer Emport läuft gerade!"
+msgstr "Ein anderer Export läuft gerade!"
 
 msgid "The Archived User Import Entry was deleted successfully."
 msgstr "Der archivierte Benutzerimport-Eintrag wurde erfolgreich gelöscht."

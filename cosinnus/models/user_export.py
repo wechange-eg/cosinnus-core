@@ -22,7 +22,7 @@ class CosinnusUserExportProcessorBase(object):
     """
 
     # Export processor states
-    STATE_EMPORT_READY = 'ready'
+    STATE_EXPORT_READY = 'ready'
     STATE_EXPORT_RUNNING = 'running'
     STATE_EXPORT_FINISHED = 'finished'
     STATE_EXPORT_ERROR = 'error'
@@ -82,7 +82,7 @@ class CosinnusUserExportProcessorBase(object):
     def get_state(self):
         """ Returns the current processor state. """
         export_state = self.get_current_export_state()
-        state = export_state if export_state else self.STATE_EMPORT_READY
+        state = export_state if export_state else self.STATE_EXPORT_READY
         return state
 
     def get_user_queryset(self):
