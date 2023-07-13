@@ -833,7 +833,7 @@ admin.site.register(GlobalUserNotificationSetting, GlobalUserNotificationSetting
 
 class GlobalBlacklistedEmailAdmin(admin.ModelAdmin):
     list_display = ('email', 'created', 'portal',)
-    search_fields = ('email', 'portal',) 
+    search_fields = ('email', 'portal__name')
     
 admin.site.register(GlobalBlacklistedEmail, GlobalBlacklistedEmailAdmin)
 
