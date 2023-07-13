@@ -24,9 +24,10 @@ import six
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import get_tag_object_model
+from cosinnus.utils.validators import validate_file_infection
 from cosinnus_event.mixins import BBBRoomMixin # noqa
 from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
-from cosinnus.utils.files import get_conference_conditions_filename
+from cosinnus.utils.files import get_conference_conditions_filename, get_presentation_filename
 from cosinnus.utils.functions import clean_single_line_text, \
     unique_aware_slugify, update_dict_recursive
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -122,6 +123,11 @@ class CosinnusConferenceSettings(models.Model):
     bbb_server_choice_recording_api = models.PositiveSmallIntegerField(_('BBB Recording API server'), blank=False,
         default=SETTING_INHERIT, choices=BBB_SERVER_CHOICES_WITH_INHERIT,
         help_text='The chosen BBB-Server/Cluster setting for connections to the recording API server. WARNING: changing this will cause new meeting connections to use the new server, even for ongoing meetings on the old server, essentially splitting a running meeting in two!')
+    
+    bbb_presentation_file = models.FileField(_('Presentation file'),
+        help_text='The presentation file (e.g. PDF) will be pre-uploaded to the BBB rooms inherited in this object\'s chain.',
+        null=True, blank=True, upload_to=get_presentation_filename,
+        validators=[validate_file_infection])
     
     bbb_params = models.JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder, verbose_name=_('BBB API Parameters'),
             help_text='Custom parameters for API calls like join/create for all BBB rooms for this object and in its inherited objects.')
@@ -430,7 +436,8 @@ class CosinnusConferenceSettings(models.Model):
     def save(self, ignore_inherit_condition=False, *args, **kwargs):
         """ If the instance has no actual overwritten settings (all are set to inherited), 
             discard it if it hasn't been created yet, and delete it if it already existed """
-        if not self.has_changed_inherited_fields() and not ignore_inherit_condition:
+        has_filled_extra_fields = bool(self.bbb_params) or bool(self.bbb_presentation_file)
+        if not self.has_changed_inherited_fields() and not has_filled_extra_fields and not ignore_inherit_condition:
             if self.pk:
                 self.delete()
                 self.pk = None

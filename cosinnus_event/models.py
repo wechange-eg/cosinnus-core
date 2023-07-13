@@ -794,8 +794,8 @@ class ConferenceEvent(Event):
         return max_participants
     
     def get_presentation_url(self):
-        """ For BBBRoomMixin. the presentation URL used in create calls """ 
-        return self.presentation_file.url if self.presentation_file else None
+        """ For BBBRoomMixin. the presentation URL used in create calls """
+        return self.presentation_file.url if self.presentation_file else super().get_presentation_url()
     
     def get_meeting_id_for_bbb_room(self):
         """ For BBBRoomMixin, this one uses the group id as well as the event """
