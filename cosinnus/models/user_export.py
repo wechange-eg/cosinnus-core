@@ -1,11 +1,9 @@
-import csv
 import logging
 
 from threading import Thread
 
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
-from django.http import HttpResponse
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
