@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-11 15:13+0200\n"
+"POT-Creation-Date: 2023-07-13 13:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1072,6 +1072,9 @@ msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
 
 msgid "BBB Recording API server"
 msgstr ""
+
+msgid "Presentation file"
+msgstr "Αρχείο Παρουσίασης"
 
 msgid "BBB API Parameters"
 msgstr ""
@@ -4877,6 +4880,9 @@ msgstr "Έχετε προσκληθεί για να υποβάλλετε αίτ�
 
 msgid "Edit Application"
 msgstr "Επεξεργασία Αίτησης"
+
+msgid "You are an admin, but because you created this conference you have not yet officially applied for participation. If you wish to do this to make your attendance official, you may fill out an application by clicking here"
+msgstr ""
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -9338,9 +9344,6 @@ msgstr "Μέγιστος Αριθμός Συμμετεχόντων στην Εκ
 
 msgid "Embed code (HTML)"
 msgstr "Ενσωματωμένος Κώδικας (HTML)"
-
-msgid "Presentation file"
-msgstr "Αρχείο Παρουσίασης"
 
 #, fuzzy
 msgid "Enable Streaming"

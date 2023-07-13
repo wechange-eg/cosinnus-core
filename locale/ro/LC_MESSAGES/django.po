@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-11 15:13+0200\n"
+"POT-Creation-Date: 2023-07-13 13:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1076,6 +1076,9 @@ msgid "BBB Server for Premium Conferences"
 msgstr ""
 
 msgid "BBB Recording API server"
+msgstr ""
+
+msgid "Presentation file"
 msgstr ""
 
 msgid "BBB API Parameters"
@@ -5015,6 +5018,9 @@ msgstr "Ai fost invitat să colaborezi!"
 #, fuzzy
 msgid "Edit Application"
 msgstr "Numele Aplicației"
+
+msgid "You are an admin, but because you created this conference you have not yet officially applied for participation. If you wish to do this to make your attendance official, you may fill out an application by clicking here"
+msgstr ""
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -9582,9 +9588,6 @@ msgid "Maximum Event Participants"
 msgstr "Maximum Eveniment Participanții"
 
 msgid "Embed code (HTML)"
-msgstr ""
-
-msgid "Presentation file"
 msgstr ""
 
 #, fuzzy

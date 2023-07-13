@@ -100,6 +100,13 @@
                     </ul>
                 </a>
             {% elif not application %}
+                {% if user|is_group_admin:group %}
+                    <div class="textfield transparent">
+                        <p>
+                            {% trans "You are an admin, but because you created this conference you have not yet officially applied for participation. If you wish to do this to make your attendance official, you may fill out an application by clicking here" %}:
+                        </p>
+                    </div>
+                {% endif %}
                 <a href="{% group_url 'cosinnus:conference:application' group=group.slug %}" class="btn btn-emphasized btn-autosize">
                     <ul class="media-list">
                         <li class="media">

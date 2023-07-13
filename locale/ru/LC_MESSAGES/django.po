@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-11 15:13+0200\n"
+"POT-Creation-Date: 2023-07-13 13:31+0200\n"
 "PO-Revision-Date: 2023-04-18 18:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1035,6 +1035,9 @@ msgstr "Сервер BBB для премиум-конференций"
 
 msgid "BBB Recording API server"
 msgstr "Записывающий API сервер BBB"
+
+msgid "Presentation file"
+msgstr "Файл презентации"
 
 msgid "BBB API Parameters"
 msgstr "API параметры BBB"
@@ -4744,6 +4747,9 @@ msgstr "Вас пригласили сотрудничать!"
 
 msgid "Edit Application"
 msgstr "Название приложения"
+
+msgid "You are an admin, but because you created this conference you have not yet officially applied for participation. If you wish to do this to make your attendance official, you may fill out an application by clicking here"
+msgstr ""
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -9156,9 +9162,6 @@ msgstr "Максимальное число участников"
 
 msgid "Embed code (HTML)"
 msgstr "Код для вставки (HTML)"
-
-msgid "Presentation file"
-msgstr "Файл презентации"
 
 msgid "Enable Streaming"
 msgstr "Запустить трансляцию"

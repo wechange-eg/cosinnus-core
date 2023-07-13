@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-11 15:13+0200\n"
+"POT-Creation-Date: 2023-07-13 13:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1026,6 +1026,9 @@ msgstr "BBB-Server für Premium-Tagungen"
 
 msgid "BBB Recording API server"
 msgstr "BBB API Aufnahmeserver"
+
+msgid "Presentation file"
+msgstr "Präsentation"
 
 msgid "BBB API Parameters"
 msgstr "BBB API Parameter"
@@ -4735,6 +4738,9 @@ msgstr "Du wurdest eingeladen, die Teilnahme zu beantragen!"
 
 msgid "Edit Application"
 msgstr "Anmeldung bearbeiten"
+
+msgid "You are an admin, but because you created this conference you have not yet officially applied for participation. If you wish to do this to make your attendance official, you may fill out an application by clicking here"
+msgstr "Du bist Administrator/in, aber da du diese Tagung erstellt hast, hast du dich noch nicht offiziell zur Teilnahme angemeldet. Wenn du dies tun möchtest, um deine Teilnahme offiziell zu machen, kannst du einen Teilnahmeantrag ausfüllen, indem du hier klickst"
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -9133,9 +9139,6 @@ msgstr "Max. Teilnehmendenzahl"
 
 msgid "Embed code (HTML)"
 msgstr "Einbettungscode (HTML)"
-
-msgid "Presentation file"
-msgstr "Präsentation"
 
 msgid "Enable Streaming"
 msgstr "Streamen aktivieren"
