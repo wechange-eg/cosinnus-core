@@ -283,8 +283,8 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             if converted_typed_group:
                 converted_typed_group.update_index()
             else:
-                message_error = f'There seems to have been a problem converting: "{group.slug}". Please check if it has been converted in the admin. If it has, it may not appear converted until the cache is refreshed. You can do this by saving it in the admin again now.'
-                self.message_error(request, message_error, messages.ERROR)
+                message_error = f'There seems to have been a problem converting: "{group.slug}" from "{type(group)}" to "{to_group_klass}". Please check if it has been converted in the admin. If it has, it may not appear converted until the cache is refreshed. You can do this by saving it in the admin again now.'
+                self.message_user(request, message_error, messages.ERROR)
         
         if converted_names:
             message = _('The following items were converted to %s:') % to_group_klass.get_trans().VERBOSE_NAME_PLURAL + '\n' + ", ".join(converted_names)
