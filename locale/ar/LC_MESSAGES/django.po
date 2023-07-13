@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-07-13 13:31+0200\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -206,6 +206,41 @@ msgstr "روكيت: إصلاح / إنشاء حسابات الدردشة الصا
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "روكيت: إصلاح عضويات غرفة الدردشة المفقودة للمستخدمين"
 
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "Personal Dashboard"
+msgstr "لوحة تحكم المشروع"
+
+msgid "My Profile"
+msgstr "ملفي الشخصي"
+
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "تعديل ملفك الشخصي"
+
+#, fuzzy
+#| msgid "Edit My Profile"
+msgid "Edit my Profile"
+msgstr "تعديل ملفي الشخصي"
+
+msgid "Notification Preferences"
+msgstr "تفضيلات الإخطار"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "تغيير اللغة"
+
+msgid "Your Contribution"
+msgstr "مساهمتك"
+
+msgid "Administration"
+msgstr "الإدارة"
+
+msgid "Logout"
+msgstr "نسجيل خروج"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -277,6 +312,12 @@ msgstr "تحميل المشاركين"
 #| msgid "Organization"
 msgid "Digitalisation"
 msgstr "منظمات"
+
+msgid "Forum"
+msgstr "المنتدى"
+
+msgid "Map"
+msgstr "خارطة"
 
 msgid "Overnight stay required"
 msgstr "مطلوب البقاء طوال الليل"
@@ -952,9 +993,6 @@ msgstr "مرحباً"
 msgid "Click the following link to change which emails you receive:"
 msgstr "انقر الرابط التالي لتغيير رسائل البريد الإلكتروني التي تتلقاها:"
 
-msgid "Notification Preferences"
-msgstr "تفضيلات الإخطار"
-
 #, fuzzy
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "انقر الرابط التالي حتى لعدم تلقي أي رسائل بريد إلكتروني أخرى منا:"
@@ -1070,6 +1108,9 @@ msgstr "خادم BBB للمؤتمرات المتميزة"
 
 msgid "BBB Recording API server"
 msgstr ""
+
+msgid "Presentation file"
+msgstr "ملف العرض التقديمي"
 
 msgid "BBB API Parameters"
 msgstr ""
@@ -2551,9 +2592,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "زيارات غرفة BBB"
-
-msgid "Administration"
-msgstr "الإدارة"
 
 msgid "Select a page on the left side."
 msgstr "حدد صفحة على الجانب الأيسر."
@@ -4173,15 +4211,22 @@ msgstr "عناوين البريد الإلكتروني"
 msgid "Include a video conference"
 msgstr "أرسل قبل يوم واحد من المؤتمر"
 
-msgid "Choose the type of the video conference you would like for the event"
+msgid "Choose the type of video conference you would like."
 msgstr ""
 
-msgid "BBB-Meetings are a premium feature."
+msgid "Professional video conferences with BigBlueButton require activation."
+msgstr ""
+
+msgid "Make the activation here."
+msgstr ""
+
+msgid "BigBlueButton"
 msgstr ""
 
 #, fuzzy
-msgid "Premium Bookings"
-msgstr "مميز"
+#| msgid "Activate Conference"
+msgid "Activation required"
+msgstr "تفعيل المشروع"
 
 msgid "Maximum Number of Participants"
 msgstr "الحد الأقصى لعدد المشاركين"
@@ -4875,9 +4920,6 @@ msgstr "لا توجد مشاريع."
 msgid "There are no invitations."
 msgstr "لا توجد دعوات."
 
-msgid "Map"
-msgstr "خارطة"
-
 #, fuzzy
 msgid "Meeting"
 msgstr "جارٍ الحذف..."
@@ -5041,6 +5083,9 @@ msgstr "لقد تمت دعوتك للتقديم!"
 #, fuzzy
 msgid "Edit Application"
 msgstr "إسم التطبيق"
+
+msgid "You are an admin, but because you created this conference you have not yet officially applied for participation. If you wish to do this to make your attendance official, you may fill out an application by clicking here"
+msgstr ""
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -5836,18 +5881,6 @@ msgstr "حسناً"
 msgid "Toggle navigation"
 msgstr "تبديل التنقل"
 
-msgid "My Profile"
-msgstr "ملفي الشخصي"
-
-msgid "Your Contribution"
-msgstr "مساهمتك"
-
-msgid "Logout"
-msgstr "نسجيل خروج"
-
-msgid "Forum"
-msgstr "المنتدى"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "أشخاص"
@@ -5916,6 +5949,9 @@ msgstr "قرأت وأقبل ب"
 
 msgid "Terms and Services"
 msgstr "الشروط والخدمات"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "هل نسيت كلمة السر؟"
@@ -7063,6 +7099,11 @@ msgstr "يشير إلى رغبتك في أن يتم الاتصال بك من ق�
 
 msgid "I am open for cooperation requests"
 msgstr "أنا منفتح على طلبات التعاون"
+
+#, fuzzy
+#| msgid "Create Newsletter"
+msgid "News via the newsletter"
+msgstr "إنشاء رسالة إخبارية"
 
 msgid "Welcome!"
 msgstr "أهلاً بك!"
@@ -8280,6 +8321,9 @@ msgid "New verification email sent!"
 msgstr "تم إرسال بريد الكتروني تجريبي!"
 
 msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
+
+msgid "A problem occurred when logging out from RocketChat. You might want to logout manually when the service is available again."
 msgstr ""
 
 #, fuzzy
@@ -9577,9 +9621,6 @@ msgstr "أقصى عدد من المشاركين في الحدث"
 msgid "Embed code (HTML)"
 msgstr "كود التضمين (HTML)"
 
-msgid "Presentation file"
-msgstr "ملف العرض التقديمي"
-
 #, fuzzy
 msgid "Enable Streaming"
 msgstr "منصة العرض"
@@ -9843,6 +9884,9 @@ msgstr ""
 
 msgid "Enter a title for the new event."
 msgstr "ادخل عنوانا لمناسبة جديدة."
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
 
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "سيتم عرض أول صورة تم تحميلها كخلفية."
@@ -11006,6 +11050,12 @@ msgstr "مستلمين إضافيين"
 msgid "Undefined recipient."
 msgstr "مستلم غير محدد."
 
+msgid "We are currently experiencing some technical difficulties with the RocketChat service and some of your actions may not have had an effect. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
+msgid "A technical error occurred in the RocketChat service. Some of your actions may not have had an effect. We are working on resolving the issue. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
 #, fuzzy
 #| msgid "Accept request"
 msgid "Contact request"
@@ -11071,8 +11121,10 @@ msgstr ""
 "ملاحظة: هذه الرسالة صادرة عن نظام آلي.\n"
 "لا تفن بالرد ، هذا لن يؤخذ بعين الاعتبار."
 
-msgid "Go to chat"
-msgstr ""
+#, fuzzy
+#| msgid "Show chat"
+msgid "Reload chat"
+msgstr "إظهار الدردشة"
 
 msgid "Archived Messages"
 msgstr "الرسائل المؤرشفة"
@@ -13758,6 +13810,10 @@ msgstr "قد لا يمكن إضافة \"%(title)s\" قائمة/قوائم الم
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "لا يمكنك حذف هذا المجلد لأنه ليس لديك إذن بحذف عنصر أو أكثر من محتواه!"
+
+#, fuzzy
+#~ msgid "Premium Bookings"
+#~ msgstr "مميز"
 
 #, fuzzy
 #~ msgid ""

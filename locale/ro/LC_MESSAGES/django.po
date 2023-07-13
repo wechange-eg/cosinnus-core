@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-07-13 13:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -206,6 +206,41 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "Personal Dashboard"
+msgstr "Proiectul Bordului de Tablou"
+
+msgid "My Profile"
+msgstr "Profilul Meu"
+
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Editează-ți Profilul"
+
+#, fuzzy
+#| msgid "Edit My Profile"
+msgid "Edit my Profile"
+msgstr "Editează Profilul Meu"
+
+msgid "Notification Preferences"
+msgstr "Preferințe de notificare"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "Schimbă limba"
+
+msgid "Your Contribution"
+msgstr "Contribuția Ta"
+
+msgid "Administration"
+msgstr "Administrare"
+
+msgid "Logout"
+msgstr "Deconectare"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -277,6 +312,12 @@ msgstr "Participanți"
 #| msgid "Organization"
 msgid "Digitalisation"
 msgstr "Organizare"
+
+msgid "Forum"
+msgstr "Forum"
+
+msgid "Map"
+msgstr "Hartă"
 
 msgid "Overnight stay required"
 msgstr ""
@@ -926,9 +967,6 @@ msgstr "Salut"
 msgid "Click the following link to change which emails you receive:"
 msgstr "Faceți clic pe linkul următor pentru a modifica ce e-mailuri primiți:"
 
-msgid "Notification Preferences"
-msgstr "Preferințe de notificare"
-
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "Faceți clic pe linkul următor pentru a nu primi niciodată mai multe e-mailuri de la noi:"
 
@@ -1038,6 +1076,9 @@ msgid "BBB Server for Premium Conferences"
 msgstr ""
 
 msgid "BBB Recording API server"
+msgstr ""
+
+msgid "Presentation file"
 msgstr ""
 
 msgid "BBB API Parameters"
@@ -2488,9 +2529,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "Tipul Camerei"
-
-msgid "Administration"
-msgstr "Administrare"
 
 msgid "Select a page on the left side."
 msgstr "Selectați o pagină din partea stângă."
@@ -4111,15 +4149,21 @@ msgstr "Adrese de e-mail"
 msgid "Include a video conference"
 msgstr "Este conferință"
 
-msgid "Choose the type of the video conference you would like for the event"
+msgid "Choose the type of video conference you would like."
 msgstr ""
 
-msgid "BBB-Meetings are a premium feature."
+msgid "Professional video conferences with BigBlueButton require activation."
+msgstr ""
+
+msgid "Make the activation here."
+msgstr ""
+
+msgid "BigBlueButton"
 msgstr ""
 
 #, fuzzy
-msgid "Premium Bookings"
-msgstr "Premium"
+msgid "Activation required"
+msgstr "Activează Proiectul"
 
 #, fuzzy
 msgid "Maximum Number of Participants"
@@ -4809,9 +4853,6 @@ msgstr "Nu există proiecte."
 msgid "There are no invitations."
 msgstr "Nu există invitații."
 
-msgid "Map"
-msgstr "Hartă"
-
 #, fuzzy
 msgid "Meeting"
 msgstr "Ștergerea..."
@@ -4977,6 +5018,9 @@ msgstr "Ai fost invitat să colaborezi!"
 #, fuzzy
 msgid "Edit Application"
 msgstr "Numele Aplicației"
+
+msgid "You are an admin, but because you created this conference you have not yet officially applied for participation. If you wish to do this to make your attendance official, you may fill out an application by clicking here"
+msgstr ""
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -5788,18 +5832,6 @@ msgstr "OK"
 msgid "Toggle navigation"
 msgstr "Comutare navigare"
 
-msgid "My Profile"
-msgstr "Profilul Meu"
-
-msgid "Your Contribution"
-msgstr "Contribuția Ta"
-
-msgid "Logout"
-msgstr "Deconectare"
-
-msgid "Forum"
-msgstr "Forum"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Oameni"
@@ -5868,6 +5900,9 @@ msgstr "Am citit și accept"
 
 msgid "Terms and Services"
 msgstr "Termeni și Servicii"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "Ai uitat?"
@@ -7035,6 +7070,10 @@ msgstr "Semnalează disponibilitatea dvs. de a fi contactat de alți utilizatori
 
 msgid "I am open for cooperation requests"
 msgstr "Sunt deschis pentru cereri de cooperare"
+
+#, fuzzy
+msgid "News via the newsletter"
+msgstr "Creează Utilizator"
 
 msgid "Welcome!"
 msgstr "Bine ați venit!"
@@ -8259,6 +8298,9 @@ msgid "New verification email sent!"
 msgstr "Test de e-mail trimis!"
 
 msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
+
+msgid "A problem occurred when logging out from RocketChat. You might want to logout manually when the service is available again."
 msgstr ""
 
 #, fuzzy
@@ -9548,9 +9590,6 @@ msgstr "Maximum Eveniment Participanții"
 msgid "Embed code (HTML)"
 msgstr ""
 
-msgid "Presentation file"
-msgstr ""
-
 #, fuzzy
 msgid "Enable Streaming"
 msgstr "Flux de Scenă"
@@ -9809,6 +9848,9 @@ msgstr ""
 
 msgid "Enter a title for the new event."
 msgstr "Introduceți un titlu pentru noul eveniment."
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
 
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "Prima imagine încărcată va fi afișată ca tapet."
@@ -10912,6 +10954,12 @@ msgstr "Recipienții suplimentari"
 msgid "Undefined recipient."
 msgstr "Recipient nedefinit."
 
+msgid "We are currently experiencing some technical difficulties with the RocketChat service and some of your actions may not have had an effect. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
+msgid "A technical error occurred in the RocketChat service. Some of your actions may not have had an effect. We are working on resolving the issue. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
 #, fuzzy
 msgid "Contact request"
 msgstr "Accept membru"
@@ -10976,7 +11024,7 @@ msgstr ""
 "Notă: Acest mesaj este emis de un sistem automat.\n"
 "Nu răspundeți, acest lucru nu poate fi luat în considerare."
 
-msgid "Go to chat"
+msgid "Reload chat"
 msgstr ""
 
 msgid "Archived Messages"
@@ -13614,6 +13662,10 @@ msgstr "Lista tuturor ”%(title)s” nu a putut fi adăugată."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Nu puteți șterge acest dosar, deoarece nu aveți permisiunea da a șterge unul sau ma multe elemente pe are le conține!"
+
+#, fuzzy
+#~ msgid "Premium Bookings"
+#~ msgstr "Premium"
 
 #, fuzzy
 #~ msgid ""

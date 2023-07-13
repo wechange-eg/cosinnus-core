@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-07-13 13:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -205,6 +205,40 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
+#, fuzzy
+msgid "Personal Dashboard"
+msgstr "ხელსაწყოთა პანელი"
+
+msgid "My Profile"
+msgstr "ჩემი პროფილი"
+
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "ჩემი პროფილის რედაქტირება"
+
+#, fuzzy
+#| msgid "Edit My Profile"
+msgid "Edit my Profile"
+msgstr "ჩემი პროფილის რედაქტირება"
+
+msgid "Notification Preferences"
+msgstr "უპირატესი შეტყობინებები"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "ენის შეცვლა"
+
+msgid "Your Contribution"
+msgstr "ჩემი წვლილი"
+
+msgid "Administration"
+msgstr "ადმინისტრაცია"
+
+msgid "Logout"
+msgstr "გამოსვლა"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -274,6 +308,12 @@ msgstr "მონაწილეები"
 #, fuzzy
 msgid "Digitalisation"
 msgstr "მოწვევები"
+
+msgid "Forum"
+msgstr "ფორუმი"
+
+msgid "Map"
+msgstr "რუკა"
 
 msgid "Overnight stay required"
 msgstr ""
@@ -919,9 +959,6 @@ msgstr ""
 msgid "Click the following link to change which emails you receive:"
 msgstr "დააკლიკეთ შემდეგ ბმულს იმისათვის, რომ აარჩიოთ რომელი ტექსტური შეტყობინებები მიიღოთ:"
 
-msgid "Notification Preferences"
-msgstr "უპირატესი შეტყობინებები"
-
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "დააკლიკეთ შემდეგ ბმულს, რომ აღარ მიიღოთ ჩვენგან ტექსტური შეტყობინებები:"
 
@@ -1032,6 +1069,9 @@ msgid "BBB Server for Premium Conferences"
 msgstr ""
 
 msgid "BBB Recording API server"
+msgstr ""
+
+msgid "Presentation file"
 msgstr ""
 
 msgid "BBB API Parameters"
@@ -2493,9 +2533,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "გუნდის ტიპიდან"
-
-msgid "Administration"
-msgstr "ადმინისტრაცია"
 
 msgid "Select a page on the left side."
 msgstr "მარცხენა მხარეს გვერდის მონიშვნა."
@@ -4101,15 +4138,21 @@ msgstr "ელ-ფოსტის მისამართები"
 msgid "Include a video conference"
 msgstr "ვიდეო კონფერენციის სერვერი"
 
-msgid "Choose the type of the video conference you would like for the event"
+msgid "Choose the type of video conference you would like."
 msgstr ""
 
-msgid "BBB-Meetings are a premium feature."
+msgid "Professional video conferences with BigBlueButton require activation."
+msgstr ""
+
+msgid "Make the activation here."
+msgstr ""
+
+msgid "BigBlueButton"
 msgstr ""
 
 #, fuzzy
-msgid "Premium Bookings"
-msgstr "ღონისძიების შექმნა"
+msgid "Activation required"
+msgstr "პროექტის აქტივაცია"
 
 msgid "Maximum Number of Participants"
 msgstr ""
@@ -4799,9 +4842,6 @@ msgstr "პროექტები არ არის."
 msgid "There are no invitations."
 msgstr "მოწვევები არ არის."
 
-msgid "Map"
-msgstr "რუკა"
-
 #, fuzzy
 msgid "Meeting"
 msgstr "მიმდინარეობს წაშლა..."
@@ -4968,6 +5008,9 @@ msgstr "თქვენ მოგიწვიეს თანამშრომ�
 #, fuzzy
 msgid "Edit Application"
 msgstr "განცხადების სახელი"
+
+msgid "You are an admin, but because you created this conference you have not yet officially applied for participation. If you wish to do this to make your attendance official, you may fill out an application by clicking here"
+msgstr ""
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -5760,18 +5803,6 @@ msgstr "კარგი"
 msgid "Toggle navigation"
 msgstr "Toggle navigation"
 
-msgid "My Profile"
-msgstr "ჩემი პროფილი"
-
-msgid "Your Contribution"
-msgstr "ჩემი წვლილი"
-
-msgid "Logout"
-msgstr "გამოსვლა"
-
-msgid "Forum"
-msgstr "ფორუმი"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "ხალხი"
@@ -5840,6 +5871,9 @@ msgstr "წავიკითხე და ვეთანხმები"
 
 msgid "Terms and Services"
 msgstr "სერვისის განმარტებები"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "დაგავიწყდათ პაროლი?"
@@ -7015,6 +7049,10 @@ msgstr "ნიშანი თქვენს სურვილზე, რო�
 
 msgid "I am open for cooperation requests"
 msgstr "თანახმა ვარ თანამშრომლობის მოთხოვნებზე"
+
+#, fuzzy
+msgid "News via the newsletter"
+msgstr "მომხმარებლის შექმნა"
 
 msgid "Welcome!"
 msgstr "კეთილი იყოს თქვენი მობრძანება!"
@@ -8236,6 +8274,9 @@ msgid "New verification email sent!"
 msgstr ""
 
 msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
+
+msgid "A problem occurred when logging out from RocketChat. You might want to logout manually when the service is available again."
 msgstr ""
 
 #, fuzzy
@@ -9520,9 +9561,6 @@ msgstr ""
 msgid "Embed code (HTML)"
 msgstr ""
 
-msgid "Presentation file"
-msgstr ""
-
 msgid "Enable Streaming"
 msgstr ""
 
@@ -9784,6 +9822,9 @@ msgstr ""
 
 msgid "Enter a title for the new event."
 msgstr "შეიყვანეთ სათაური ახალი ღონისძიებისათვის."
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
 
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "პირველი ატვირთული გამოსახულება ნაჩვენები იქნება, როგორც კედლის ფონი."
@@ -10879,6 +10920,12 @@ msgstr "დამატებითი მიმღებები"
 msgid "Undefined recipient."
 msgstr "არაიდენტიფიცირებული მიმღები."
 
+msgid "We are currently experiencing some technical difficulties with the RocketChat service and some of your actions may not have had an effect. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
+msgid "A technical error occurred in the RocketChat service. Some of your actions may not have had an effect. We are working on resolving the issue. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
 #, fuzzy
 msgid "Contact request"
 msgstr "წევრისათვის დათანხმება"
@@ -10943,7 +10990,7 @@ msgstr ""
 "შენიშვნა: შეტყობინების გამოგზავნა ავტომატურად მოხდა.\n"
 "არ უპასუხოთ, რადგან პასუხი არ იქნება გათვალისწინებული."
 
-msgid "Go to chat"
+msgid "Reload chat"
 msgstr ""
 
 msgid "Archived Messages"
@@ -13550,6 +13597,10 @@ msgstr "შესასრულებელ დავალებათა ს�
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "თქვენ არ შეგიძლიათ წაშალოთ საქაღალდე, რადგან არ გაქვთ მასში შემავალი საგნების წაშლის უფლება!"
+
+#, fuzzy
+#~ msgid "Premium Bookings"
+#~ msgstr "ღონისძიების შექმნა"
 
 #, fuzzy
 #~ msgid ""

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-07-13 13:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -202,6 +202,41 @@ msgstr "Rocket: Відновити/створити облікові запис�
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Виправити відсутнє членство в кабінеті RocketChat для користувачів"
 
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "Personal Dashboard"
+msgstr "Інформаційна панель Проєкту"
+
+msgid "My Profile"
+msgstr "Мій профіль"
+
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Редагувати Ваш Профіль"
+
+#, fuzzy
+#| msgid "Edit My Profile"
+msgid "Edit my Profile"
+msgstr "Редагувати мій обліковий запис"
+
+msgid "Notification Preferences"
+msgstr "Налаштування сповіщень"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "Змінити мову"
+
+msgid "Your Contribution"
+msgstr "Ваш Внесок"
+
+msgid "Administration"
+msgstr "Адміністрація"
+
+msgid "Logout"
+msgstr "Вихід"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -274,6 +309,12 @@ msgstr "Подати заявку на участь"
 #| msgid "Organization"
 msgid "Digitalisation"
 msgstr "Організація"
+
+msgid "Forum"
+msgstr "Форум"
+
+msgid "Map"
+msgstr "Карта"
 
 msgid "Overnight stay required"
 msgstr "Потрібен нічліг"
@@ -926,9 +967,6 @@ msgstr "Привіт"
 msgid "Click the following link to change which emails you receive:"
 msgstr "Натисність на це посилання, щоб змінити налаштування електронних листів, які ви отримуєте:"
 
-msgid "Notification Preferences"
-msgstr "Налаштування сповіщень"
-
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "Натисніть на це посилання, щоб ніколи більше не отримувати електронних листів від нас:"
 
@@ -1038,6 +1076,9 @@ msgstr "BBB Server для Преміум Конференції"
 
 msgid "BBB Recording API server"
 msgstr ""
+
+msgid "Presentation file"
+msgstr "Файл презентації"
 
 msgid "BBB API Parameters"
 msgstr ""
@@ -2447,9 +2488,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "Відвідування кімнати BBB"
-
-msgid "Administration"
-msgstr "Адміністрація"
 
 msgid "Select a page on the left side."
 msgstr "Виберіть сторінку зліва."
@@ -3990,15 +4028,22 @@ msgstr "Додати адресу"
 msgid "Include a video conference"
 msgstr "Надіслати за 1 день до конференції"
 
-msgid "Choose the type of the video conference you would like for the event"
+msgid "Choose the type of video conference you would like."
 msgstr ""
 
-msgid "BBB-Meetings are a premium feature."
+msgid "Professional video conferences with BigBlueButton require activation."
+msgstr ""
+
+msgid "Make the activation here."
+msgstr ""
+
+msgid "BigBlueButton"
 msgstr ""
 
 #, fuzzy
-msgid "Premium Bookings"
-msgstr "Преміум"
+#| msgid "Activate Conference"
+msgid "Activation required"
+msgstr "Активувати Конференцію"
 
 msgid "Maximum Number of Participants"
 msgstr "Максимальна кількість учасників "
@@ -4669,9 +4714,6 @@ msgstr "Немає жодного проєкту."
 msgid "There are no invitations."
 msgstr "Немає запрошень."
 
-msgid "Map"
-msgstr "Карта"
-
 #, fuzzy
 msgid "Meeting"
 msgstr "Видалення…"
@@ -4833,6 +4875,9 @@ msgstr "Вас запросили подати заявку!"
 
 msgid "Edit Application"
 msgstr "Редагувати застосунок"
+
+msgid "You are an admin, but because you created this conference you have not yet officially applied for participation. If you wish to do this to make your attendance official, you may fill out an application by clicking here"
+msgstr ""
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -5645,18 +5690,6 @@ msgstr "OK"
 msgid "Toggle navigation"
 msgstr "Переключення навігації"
 
-msgid "My Profile"
-msgstr "Мій профіль"
-
-msgid "Your Contribution"
-msgstr "Ваш Внесок"
-
-msgid "Logout"
-msgstr "Вихід"
-
-msgid "Forum"
-msgstr "Форум"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Люди"
@@ -5725,6 +5758,9 @@ msgstr "Я прочитав (-ла) і приймаю"
 
 msgid "Terms and Services"
 msgstr "Умови та послуги"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "Забули пароль?"
@@ -6867,6 +6903,11 @@ msgstr "Сигналізує про Ваше бажання контакту щ�
 
 msgid "I am open for cooperation requests"
 msgstr "Я відкритий(-а) до запитів щодо співпраці"
+
+#, fuzzy
+#| msgid "Create Newsletter"
+msgid "News via the newsletter"
+msgstr "Створити інформаційний бюлетень"
 
 msgid "Welcome!"
 msgstr "Вітаємо!"
@@ -8034,6 +8075,9 @@ msgid "New verification email sent!"
 msgstr "Тестовий лист було відправлено!"
 
 msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
+
+msgid "A problem occurred when logging out from RocketChat. You might want to logout manually when the service is available again."
 msgstr ""
 
 #, fuzzy
@@ -9301,9 +9345,6 @@ msgstr "Максимальна кількість учасників події"
 msgid "Embed code (HTML)"
 msgstr "Код для вставлення (HTML)"
 
-msgid "Presentation file"
-msgstr "Файл презентації"
-
 msgid "Enable Streaming"
 msgstr "Увімкнути стрімінг"
 
@@ -9566,6 +9607,9 @@ msgstr ""
 
 msgid "Enter a title for the new event."
 msgstr "Введіть назву для нового заходу."
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
 
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "Перше зображення, що буде завантажене, відображатиметься як фоновий малюнок."
@@ -10665,6 +10709,12 @@ msgstr "Додаткові адресати"
 msgid "Undefined recipient."
 msgstr "Не вказано адресата."
 
+msgid "We are currently experiencing some technical difficulties with the RocketChat service and some of your actions may not have had an effect. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
+msgid "A technical error occurred in the RocketChat service. Some of your actions may not have had an effect. We are working on resolving the issue. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
 #, fuzzy
 #| msgid "Accept request"
 msgid "Contact request"
@@ -10728,8 +10778,10 @@ msgstr ""
 "Примітка: це повідомлення надсилається системою автоматично.\n"
 "Будь ласка, не відповідайте на нього."
 
-msgid "Go to chat"
-msgstr "Перейти до чату"
+#, fuzzy
+#| msgid "Show chat"
+msgid "Reload chat"
+msgstr "Показати чат"
 
 msgid "Archived Messages"
 msgstr "Заархівовані повідомлення"
@@ -13385,6 +13437,13 @@ msgstr "Неможливо додати список завдань «%(title)s�
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Ви не можете видалити цю папку, оскільки у вас немає прав на видалення одного або декількох елементів, які вона містить!"
+
+#, fuzzy
+#~ msgid "Premium Bookings"
+#~ msgstr "Преміум"
+
+#~ msgid "Go to chat"
+#~ msgstr "Перейти до чату"
 
 #, fuzzy
 #~ msgid ""

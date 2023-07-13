@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-07-13 13:31+0200\n"
 "PO-Revision-Date: 2023-04-18 18:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -197,6 +197,33 @@ msgstr "Rocket: Исправить/создать недостающие пол�
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Исправить недостающие членства для пользователей комнат RocketChat"
 
+msgid "Personal Dashboard"
+msgstr "Персональная приборная панель"
+
+msgid "My Profile"
+msgstr "Мой профиль"
+
+msgid "Set up my Profile"
+msgstr "Создать профиль"
+
+msgid "Edit my Profile"
+msgstr "Редактировать мой профиль"
+
+msgid "Notification Preferences"
+msgstr "Настройки уведомлений"
+
+msgid "Change Language"
+msgstr "Изменить язык"
+
+msgid "Your Contribution"
+msgstr "Ваш вклад"
+
+msgid "Administration"
+msgstr "Администрирование"
+
+msgid "Logout"
+msgstr "Выход из системы"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -257,6 +284,12 @@ msgstr "Демократия и Участие"
 
 msgid "Digitalisation"
 msgstr "Диджитализация"
+
+msgid "Forum"
+msgstr "Форум"
+
+msgid "Map"
+msgstr "Карта"
 
 msgid "Overnight stay required"
 msgstr "Требуется жилье"
@@ -893,9 +926,6 @@ msgstr "Привет"
 msgid "Click the following link to change which emails you receive:"
 msgstr "Нажмите на ссылку, чтобы изменить уведомления, которые Вы будете получать:"
 
-msgid "Notification Preferences"
-msgstr "Настройки уведомлений"
-
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "Пройдите по ссылке, чтобы изменить уведомления, которые Вы будете получать:"
 
@@ -1005,6 +1035,9 @@ msgstr "Сервер BBB для премиум-конференций"
 
 msgid "BBB Recording API server"
 msgstr "Записывающий API сервер BBB"
+
+msgid "Presentation file"
+msgstr "Файл презентации"
 
 msgid "BBB API Parameters"
 msgstr "API параметры BBB"
@@ -2395,9 +2428,6 @@ msgstr "Вы найдете объекты ВВВ- сессии для этог�
 
 msgid "BBB Room"
 msgstr "BBB-сессии"
-
-msgid "Administration"
-msgstr "Администрирование"
 
 msgid "Select a page on the left side."
 msgstr "Выбрать страницу слева."
@@ -3899,14 +3929,24 @@ msgstr "Адрес электронной почты"
 msgid "Include a video conference"
 msgstr "Включить видео-конференцию"
 
-msgid "Choose the type of the video conference you would like for the event"
+#, fuzzy
+#| msgid "Choose the type of the video conference you would like for the event"
+msgid "Choose the type of video conference you would like."
 msgstr "Выберите тип видеоконференции"
 
-msgid "BBB-Meetings are a premium feature."
-msgstr "BBB-сессии являются премиальными."
+msgid "Professional video conferences with BigBlueButton require activation."
+msgstr ""
 
-msgid "Premium Bookings"
-msgstr "Премиум статус"
+msgid "Make the activation here."
+msgstr ""
+
+msgid "BigBlueButton"
+msgstr ""
+
+#, fuzzy
+#| msgid "Activate Conference"
+msgid "Activation required"
+msgstr "Активировать проект"
 
 msgid "Maximum Number of Participants"
 msgstr "Максимум участников за кофейным столиком"
@@ -4555,9 +4595,6 @@ msgstr "Проектов нет."
 msgid "There are no invitations."
 msgstr "Приглашений нет."
 
-msgid "Map"
-msgstr "Карта"
-
 msgid "Meeting"
 msgstr "Сессия"
 
@@ -4710,6 +4747,9 @@ msgstr "Вас пригласили сотрудничать!"
 
 msgid "Edit Application"
 msgstr "Название приложения"
+
+msgid "You are an admin, but because you created this conference you have not yet officially applied for participation. If you wish to do this to make your attendance official, you may fill out an application by clicking here"
+msgstr ""
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -5532,18 +5572,6 @@ msgstr "OK"
 msgid "Toggle navigation"
 msgstr "Включить/выключить навигацию"
 
-msgid "My Profile"
-msgstr "Мой профиль"
-
-msgid "Your Contribution"
-msgstr "Ваш вклад"
-
-msgid "Logout"
-msgstr "Выход из системы"
-
-msgid "Forum"
-msgstr "Форум"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Люди"
@@ -5612,6 +5640,9 @@ msgstr "Я ознакомился и согласен с условиями по
 
 msgid "Terms and Services"
 msgstr "Условия пользования сайтом"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "Забыли пароль?"
@@ -6750,6 +6781,11 @@ msgstr "Покажи свою открытость к контактам нас�
 
 msgid "I am open for cooperation requests"
 msgstr "Я открыт(а) к заявкам насчет сотрудничества"
+
+#, fuzzy
+#| msgid "Create Newsletter"
+msgid "News via the newsletter"
+msgstr "Создать пользователя"
 
 msgid "Welcome!"
 msgstr "Добро пожаловать!"
@@ -7891,6 +7927,9 @@ msgstr "Новое сообщение с ссылкой на верификац�
 
 msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
 msgstr "На твой адрес электронной почты только что была отправлена новая ссылка для верификации. Если письмо всё ещё не пришло, ты можешь войти ещё раз, чтобы запросить новое."
+
+msgid "A problem occurred when logging out from RocketChat. You might want to logout manually when the service is available again."
+msgstr "При выходе из RocketChat возникла проблема. Возможно, вы захотите выйти вручную, когда сервис снова станет доступен"
 
 msgid "Successfully made conference permanent premium"
 msgstr "Перманентный премиум-режим для конференции успешно включен"
@@ -9124,9 +9163,6 @@ msgstr "Максимальное число участников"
 msgid "Embed code (HTML)"
 msgstr "Код для вставки (HTML)"
 
-msgid "Presentation file"
-msgstr "Файл презентации"
-
 msgid "Enable Streaming"
 msgstr "Запустить трансляцию"
 
@@ -9386,6 +9422,9 @@ msgstr ""
 
 msgid "Enter a title for the new event."
 msgstr "Введите название нового события."
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr "Выберите тип видеоконференции"
 
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "Первое загруженное изображение будет отображаться в качестве фонового рисунка."
@@ -10480,6 +10519,12 @@ msgstr "Дополнительные адресаты"
 msgid "Undefined recipient."
 msgstr "Неопределенный адресат."
 
+msgid "We are currently experiencing some technical difficulties with the RocketChat service and some of your actions may not have had an effect. Please try again later. We apologize for the inconveniences!"
+msgstr "В настоящее время мы испытываем некоторые технические трудности с сервисом RocketChat, и некоторые из ваших действий могли не иметь эффекта. Пожалуйста, повторите попытку позже. Приносим извинения за доставленные неудобства!"
+
+msgid "A technical error occurred in the RocketChat service. Some of your actions may not have had an effect. We are working on resolving the issue. Please try again later. We apologize for the inconveniences!"
+msgstr "В службе RocketChat произошла техническая ошибка. Некоторые из ваших действий могли не иметь эффекта. Мы работаем над решением этой проблемы. Пожалуйста, повторите попытку позже. Приносим извинения за доставленные неудобства!"
+
 msgid "Contact request"
 msgstr "Контактный запрос"
 
@@ -10540,8 +10585,8 @@ msgstr ""
 "Примечание: Это автоматическое сообщение.\n"
 "Не отвечайте на него, Ваш ответ не будет прочитан."
 
-msgid "Go to chat"
-msgstr "Перейти к чату"
+msgid "Reload chat"
+msgstr "Перезагрузить чат"
 
 msgid "Archived Messages"
 msgstr "Архивированные сообщения"
@@ -13051,6 +13096,12 @@ msgstr "Невозможно добавить список задач \"%(title)
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Вы не можете удалить эту папку, так как у Вас нет полномочий для удаления одного или более элементов, которые в ней содержатся!"
 
+#~ msgid "BBB-Meetings are a premium feature."
+#~ msgstr "BBB-сессии являются премиальными."
+
+#~ msgid "Premium Bookings"
+#~ msgstr "Премиум статус"
+
 #~ msgid ""
 #~ "Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
 #~ "\n"
@@ -13065,6 +13116,9 @@ msgstr "Вы не можете удалить эту папку, так как �
 #~ "\n"
 #~ "До скорого, \n"
 #~ "Ваша команда %(site_name)s"
+
+#~ msgid "Go to chat"
+#~ msgstr "Перейти к чату"
 
 #~ msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
 #~ msgstr "Вы изменили адрес электронной почты. Мы вышлем Вам на этот адрес письмо, содержащее ссылку на подтверждение адреса. До тех пор, пока Вы не нажмёте на ссылку, в Вашем профиле будет сохранён старый адрес электронной почты!"

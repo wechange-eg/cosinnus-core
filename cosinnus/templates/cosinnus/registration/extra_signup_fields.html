@@ -13,5 +13,21 @@
         </span>
         <a class="nowrap" href="/nutzungsbedingungen/" target="_blank">{% trans "Terms and Services" %} <i class="fa fa-external-link"></i></a>
     </p>
+
+
+    {% if SETTINGS.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN and form.newsletter_opt_in %}
+        <div>
+            {{ form.newsletter_opt_in.errors }}
+            <p class="inline-list transparent">
+                <span class="cursor-pointer-input inline-list-input">
+                    {% render_field form.newsletter_opt_in %}
+                </span>
+                <span class="cursor-pointer-input" onclick="$('#{{ form.newsletter_opt_in.id_for_label }}').prop('checked', !($('#{{ form.newsletter_opt_in.id_for_label }}').prop('checked'))).trigger('change');">
+                    {% trans "Yes, I want to be involved in what is going on and receive a newsletter about news and events." %}
+                    ({% trans "optional" %})
+                </span>
+            </p>
+        </div>
+    {% endif %}
 </div>
 

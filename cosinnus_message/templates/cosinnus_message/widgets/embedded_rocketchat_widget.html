@@ -11,7 +11,13 @@
         <ul class="media-list">
             <li class="media">
                 <div class="media-body">
-                    <div style="white-space: normal;">{% trans "Only group members can see the content you requested. Apply to become a member now!" %}</div>
+                    <div style="white-space: normal;">
+                        {% if rocket_down_msg %}
+                            {{ rocket_down_msg }}
+                        {% else %}
+                            {% trans "Only group members can see the content you requested. Apply to become a member now!" %}
+                        {% endif %}
+                    </div>
                 </div>
             </li>
         </ul>

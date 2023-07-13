@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-07-13 13:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -206,6 +206,41 @@ msgstr "Rocket: Επιδιορθώστε/δημιουργήστε λογαρια
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Επιδιορθώστε τις συνδρομές χρηστών για δωμάτιο RocketChat"
 
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "Personal Dashboard"
+msgstr "Πίνακας Έργου"
+
+msgid "My Profile"
+msgstr "Το Προφίλ Μου"
+
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Επεξεργασία του Προφίλ Σας"
+
+#, fuzzy
+#| msgid "Edit My Profile"
+msgid "Edit my Profile"
+msgstr "Επεξεργασία του Προφίλ Μου"
+
+msgid "Notification Preferences"
+msgstr "Προτιμήσεις Ειδοποίησης"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "Αλλαγή γλώσσας"
+
+msgid "Your Contribution"
+msgstr "Η Συμβολή σας"
+
+msgid "Administration"
+msgstr "Διαχείριση"
+
+msgid "Logout"
+msgstr "Αποσύνδεση"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -274,6 +309,12 @@ msgstr "Αίτηση για Συμμετοχή"
 #| msgid "Organization"
 msgid "Digitalisation"
 msgstr "Οργανισμός"
+
+msgid "Forum"
+msgstr "Φόρουμ"
+
+msgid "Map"
+msgstr "Χάρτης"
 
 msgid "Overnight stay required"
 msgstr "Απαιτείται διανυκτέρευση"
@@ -922,9 +963,6 @@ msgstr "Γεια"
 msgid "Click the following link to change which emails you receive:"
 msgstr "Κάντε κλικ στον παρακάτω σύνδεσμο για να αλλάξετε τα emails που λαμβάνετε:"
 
-msgid "Notification Preferences"
-msgstr "Προτιμήσεις Ειδοποίησης"
-
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "Κάντε κλικ στον παρακάτω σύνδεσμο για να μην λαμβάνετε ποτέ πια email από εμάς:"
 
@@ -1034,6 +1072,9 @@ msgstr "Εξυπηρετητής BBB για Premium Συσκέψεις"
 
 msgid "BBB Recording API server"
 msgstr ""
+
+msgid "Presentation file"
+msgstr "Αρχείο Παρουσίασης"
 
 msgid "BBB API Parameters"
 msgstr ""
@@ -2445,9 +2486,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "Επισκέψεις σε Δωμάτιο BBB"
-
-msgid "Administration"
-msgstr "Διαχείριση"
 
 msgid "Select a page on the left side."
 msgstr "Επιλέξτε μια σελίδα στην αριστερή πλευρά."
@@ -3995,15 +4033,22 @@ msgstr "Προσθήκη Διεύθυνσης"
 msgid "Include a video conference"
 msgstr "Αποστολή 1 ημέρα πριν από τη σύσκεψη"
 
-msgid "Choose the type of the video conference you would like for the event"
+msgid "Choose the type of video conference you would like."
 msgstr ""
 
-msgid "BBB-Meetings are a premium feature."
+msgid "Professional video conferences with BigBlueButton require activation."
+msgstr ""
+
+msgid "Make the activation here."
+msgstr ""
+
+msgid "BigBlueButton"
 msgstr ""
 
 #, fuzzy
-msgid "Premium Bookings"
-msgstr "Premium"
+#| msgid "Activate Conference"
+msgid "Activation required"
+msgstr "Ενεργοποίηση Σύσκεψης"
 
 msgid "Maximum Number of Participants"
 msgstr "Μέγιστος Αριθμός Συμμετεχόντων"
@@ -4674,9 +4719,6 @@ msgstr "Δεν υπάρχουν έργα."
 msgid "There are no invitations."
 msgstr "Δεν υπάρχουν προσκλήσεις."
 
-msgid "Map"
-msgstr "Χάρτης"
-
 #, fuzzy
 msgid "Meeting"
 msgstr "Διαγραφή..."
@@ -4838,6 +4880,9 @@ msgstr "Έχετε προσκληθεί για να υποβάλλετε αίτ�
 
 msgid "Edit Application"
 msgstr "Επεξεργασία Αίτησης"
+
+msgid "You are an admin, but because you created this conference you have not yet officially applied for participation. If you wish to do this to make your attendance official, you may fill out an application by clicking here"
+msgstr ""
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -5652,18 +5697,6 @@ msgstr "Εντάξει"
 msgid "Toggle navigation"
 msgstr "Μετακίνηση πλοήγησης"
 
-msgid "My Profile"
-msgstr "Το Προφίλ Μου"
-
-msgid "Your Contribution"
-msgstr "Η Συμβολή σας"
-
-msgid "Logout"
-msgstr "Αποσύνδεση"
-
-msgid "Forum"
-msgstr "Φόρουμ"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Άτομα"
@@ -5732,6 +5765,9 @@ msgstr "Έχω διαβάσει και δεχτεί τους"
 
 msgid "Terms and Services"
 msgstr "Όροι και Υπηρεσίες"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "Ξεχάσατε τον κωδικό πρόσβασης;"
@@ -6878,6 +6914,11 @@ msgstr "Σηματοδοτεί την επιθυμία σας να επικοι�
 
 msgid "I am open for cooperation requests"
 msgstr "Είναι διαθέσιμος για αιτήματα συνεργασίας"
+
+#, fuzzy
+#| msgid "Create Newsletter"
+msgid "News via the newsletter"
+msgstr "Δημιουργία Newsletter"
 
 msgid "Welcome!"
 msgstr "Καλώς ήρθατε!"
@@ -8039,6 +8080,9 @@ msgid "New verification email sent!"
 msgstr "Το δοκιμαστικό email στάλθηκε!"
 
 msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
+
+msgid "A problem occurred when logging out from RocketChat. You might want to logout manually when the service is available again."
 msgstr ""
 
 #, fuzzy
@@ -9301,9 +9345,6 @@ msgstr "Μέγιστος Αριθμός Συμμετεχόντων στην Εκ
 msgid "Embed code (HTML)"
 msgstr "Ενσωματωμένος Κώδικας (HTML)"
 
-msgid "Presentation file"
-msgstr "Αρχείο Παρουσίασης"
-
 #, fuzzy
 msgid "Enable Streaming"
 msgstr "Ζωντανή Μετάδοση σε Σκηνή"
@@ -9562,6 +9603,9 @@ msgstr ""
 
 msgid "Enter a title for the new event."
 msgstr "Εισάγετε τίτλο για τη νέα εκδήλωση."
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
 
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "Η εικόνα που ανέβηκε πρώτη θα εμφανιστεί ως ταπετσαρία."
@@ -10657,6 +10701,12 @@ msgstr "Επιπλέον Παραλήπτες"
 msgid "Undefined recipient."
 msgstr "Μη καθορισμένος παραλήπτης."
 
+msgid "We are currently experiencing some technical difficulties with the RocketChat service and some of your actions may not have had an effect. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
+msgid "A technical error occurred in the RocketChat service. Some of your actions may not have had an effect. We are working on resolving the issue. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
 #, fuzzy
 #| msgid "Accept request"
 msgid "Contact request"
@@ -10722,8 +10772,10 @@ msgstr ""
 "Σημείωση: Αυτό το μήνυμα εκδίδεται από αυτοματοποιημένο σύστημα.\n"
 "Μην απαντήσετε διότι η απάντησή σας δε θα ληφθεί υπόψη."
 
-msgid "Go to chat"
-msgstr ""
+#, fuzzy
+#| msgid "Show chat"
+msgid "Reload chat"
+msgstr "Εμφάνιση συνομιλίας"
 
 msgid "Archived Messages"
 msgstr "Αρχειοθετημένα Μηνύματα"
@@ -13373,6 +13425,10 @@ msgstr "Δεν ήταν δυνατή η προσθήκη της λίστας κ�
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Δεν μπορείτε να διαγράψετε αυτόν τον φάκελο διότι δεν έχετε άδεια να διαγράψετε ένα ή περισσότερα στοιχεία που περιέχει!"
+
+#, fuzzy
+#~ msgid "Premium Bookings"
+#~ msgstr "Premium"
 
 #, fuzzy
 #~ msgid ""

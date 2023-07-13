@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-07-13 13:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -206,6 +206,41 @@ msgstr "Rocket : réparer/créer les comptes rocketchat des utilisateurs manquan
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket : correction de l'absence d'adhésion à la salle RocketChat pour les utilisateurs"
 
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "Personal Dashboard"
+msgstr "Tableau de bord du projet"
+
+msgid "My Profile"
+msgstr "Mon profil"
+
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Modifier ton profil"
+
+#, fuzzy
+#| msgid "Edit My Profile"
+msgid "Edit my Profile"
+msgstr "Modifier mon profil"
+
+msgid "Notification Preferences"
+msgstr "Préférences de notification"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "Changer la langue"
+
+msgid "Your Contribution"
+msgstr "Ta contribution"
+
+msgid "Administration"
+msgstr "Administration"
+
+msgid "Logout"
+msgstr "Déconnexion"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -278,6 +313,12 @@ msgstr "Fais une demande de participation"
 #| msgid "Organization"
 msgid "Digitalisation"
 msgstr "Organisation"
+
+msgid "Forum"
+msgstr "Forum"
+
+msgid "Map"
+msgstr "Plan"
 
 msgid "Overnight stay required"
 msgstr "Nuitée requise"
@@ -926,9 +967,6 @@ msgstr "Bonjour"
 msgid "Click the following link to change which emails you receive:"
 msgstr "Clique sur le lien suivant pour changer le type d'emails que tu reçois :"
 
-msgid "Notification Preferences"
-msgstr "Préférences de notification"
-
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "Clique sur le lien suivant pour ne plus recevoir d'e-mails de notre part :"
 
@@ -1038,6 +1076,9 @@ msgstr "Serveur BBB pour les conférences premium"
 
 msgid "BBB Recording API server"
 msgstr ""
+
+msgid "Presentation file"
+msgstr "Dossier de présentation"
 
 msgid "BBB API Parameters"
 msgstr ""
@@ -2448,9 +2489,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "Visites de la salle BBB"
-
-msgid "Administration"
-msgstr "Administration"
 
 msgid "Select a page on the left side."
 msgstr "Sélectionnez une page sur le côté gauche."
@@ -3999,15 +4037,22 @@ msgstr "Ajouter une adresse"
 msgid "Include a video conference"
 msgstr "Envoyer 1 jour avant la conférence"
 
-msgid "Choose the type of the video conference you would like for the event"
+msgid "Choose the type of video conference you would like."
 msgstr ""
 
-msgid "BBB-Meetings are a premium feature."
+msgid "Professional video conferences with BigBlueButton require activation."
+msgstr ""
+
+msgid "Make the activation here."
+msgstr ""
+
+msgid "BigBlueButton"
 msgstr ""
 
 #, fuzzy
-msgid "Premium Bookings"
-msgstr "Premium"
+#| msgid "Activate Conference"
+msgid "Activation required"
+msgstr "Activer la conférence"
 
 msgid "Maximum Number of Participants"
 msgstr "Nombre maximal de participants"
@@ -4675,9 +4720,6 @@ msgstr "Il n'y a pas de projets."
 msgid "There are no invitations."
 msgstr "Il n'y a pas d'invitations."
 
-msgid "Map"
-msgstr "Plan"
-
 #, fuzzy
 msgid "Meeting"
 msgstr "En cours de suppression..."
@@ -4836,6 +4878,9 @@ msgstr "Tu as été invité à postuler !"
 
 msgid "Edit Application"
 msgstr "Modifier la candidature"
+
+msgid "You are an admin, but because you created this conference you have not yet officially applied for participation. If you wish to do this to make your attendance official, you may fill out an application by clicking here"
+msgstr ""
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -5661,18 +5706,6 @@ msgstr "D'accord"
 msgid "Toggle navigation"
 msgstr "Faire basculer la navigation"
 
-msgid "My Profile"
-msgstr "Mon profil"
-
-msgid "Your Contribution"
-msgstr "Ta contribution"
-
-msgid "Logout"
-msgstr "Déconnexion"
-
-msgid "Forum"
-msgstr "Forum"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Personnes"
@@ -5741,6 +5774,9 @@ msgstr "J'ai lu et accepte les"
 
 msgid "Terms and Services"
 msgstr "Conditions d'utilisation"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "Mot de passe oublié ?"
@@ -6890,6 +6926,11 @@ msgstr "Signale ta volonté d'être contacté (e) par d'autres utilisateurs qui 
 
 msgid "I am open for cooperation requests"
 msgstr "Je suis ouvert ( e ) aux demandes de coopération"
+
+#, fuzzy
+#| msgid "Create Newsletter"
+msgid "News via the newsletter"
+msgstr "Créer une newsletter"
 
 msgid "Welcome!"
 msgstr "Bienvenue !"
@@ -8052,6 +8093,9 @@ msgid "New verification email sent!"
 msgstr "Envoi d'un e-mail de test !\t"
 
 msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
+
+msgid "A problem occurred when logging out from RocketChat. You might want to logout manually when the service is available again."
 msgstr ""
 
 #, fuzzy
@@ -9313,9 +9357,6 @@ msgstr "Nombre maximum de participants à l'événement"
 msgid "Embed code (HTML)"
 msgstr "Code d'intégration (HTML)"
 
-msgid "Presentation file"
-msgstr "Dossier de présentation"
-
 #, fuzzy
 msgid "Enable Streaming"
 msgstr "Flux de scène"
@@ -9574,6 +9615,9 @@ msgstr ""
 
 msgid "Enter a title for the new event."
 msgstr "Entrer un titre pour le nouvel événement."
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
 
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "La première image téléchargée sera affichée en fond d'écran."
@@ -10668,6 +10712,12 @@ msgstr "Destinataires supplémentaires"
 msgid "Undefined recipient."
 msgstr "Destinataire non défini."
 
+msgid "We are currently experiencing some technical difficulties with the RocketChat service and some of your actions may not have had an effect. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
+msgid "A technical error occurred in the RocketChat service. Some of your actions may not have had an effect. We are working on resolving the issue. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
 #, fuzzy
 #| msgid "Accept request"
 msgid "Contact request"
@@ -10734,8 +10784,10 @@ msgstr ""
 "Note : ce message est généré par un système automatique.\n"
 "Ne réponds pas, cela ne serait pas pris en compte."
 
-msgid "Go to chat"
-msgstr ""
+#, fuzzy
+#| msgid "Show chat"
+msgid "Reload chat"
+msgstr "Afficher le chat"
 
 msgid "Archived Messages"
 msgstr "Messages archivés"
@@ -13383,6 +13435,10 @@ msgstr "La liste de tâches \"%(title)s\" n'a pas pu être ajoutée."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Tu ne peux supprimer ce dossier car tu n'as pas la permission de supprimer un ou plusieurs items qu'il contient !"
+
+#, fuzzy
+#~ msgid "Premium Bookings"
+#~ msgstr "Premium"
 
 #, fuzzy
 #~ msgid ""

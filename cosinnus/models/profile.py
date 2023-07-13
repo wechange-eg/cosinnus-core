@@ -10,6 +10,7 @@ from annoying.functions import get_object_or_None
 import django
 from django.apps import apps
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.models import ContentType
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models import JSONField
 from django.templatetags.static import static
@@ -36,7 +37,7 @@ from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignmentModelMixin,\
     CosinnusManagedTag
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
-from cosinnus.models.tagged import LikeableObjectMixin
+from cosinnus.models.tagged import LikeableObjectMixin, LikeObject
 from cosinnus.utils.files import get_avatar_filename, image_thumbnail, \
     image_thumbnail_url
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -563,6 +564,35 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
         return '{}?location_lat={}&location_lon={}&zoom={}{}'.format(
             url, lat, lon, zoom, content_display)
 
+    def get_user_starred_users(self):
+        """ Return other users that have beed starred by the profile user. """
+        profile_ct = ContentType.objects.get_for_model(get_user_profile_model())
+        likeobjects = LikeObject.objects.filter(user=self.user, content_type=profile_ct, starred=True)
+        liked_users_ids = likeobjects.values_list('object_id', flat=True)
+        liked_users = get_user_profile_model().objects.filter(id__in=liked_users_ids, user__is_active=True)
+        return liked_users
+
+    def get_user_starred_objects(self):
+        """Return non-user objects liked by the profile user. """
+        profile_ct = ContentType.objects.get_for_model(get_user_profile_model())
+        exclude_ids = [profile_ct.id]
+        liked = LikeObject.objects.filter(user=self.user, starred=True).exclude(content_type_id__in=exclude_ids)
+        objects = []
+        for like in liked:
+            ct = ContentType.objects.get_for_id(like.content_type.id)
+            obj = ct.get_object_for_this_type(pk=like.object_id)
+
+            # filter inactive groups
+            if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
+                if not obj.is_active:
+                    continue
+            elif hasattr(obj, 'group'):
+                # also filter inactive parent groups
+                if not getattr(obj.group, 'is_active', False):
+                    continue
+            objects.append(obj)
+        return objects
+
 
 class UserProfile(BaseUserProfile):
     timezone = TimeZoneField(default='Europe/Berlin')
@@ -855,17 +885,24 @@ class UserMatchObject(models.Model):
         """ Can be safely called with force=False without re-creating rooms """
         if settings.COSINNUS_ROCKET_ENABLED:
             if not self.rocket_chat_room_id or force:
-                from cosinnus_message.rocket_chat import RocketChatConnection # noqa
-                rocket = RocketChatConnection()
-                
+                from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException  # noqa
+
                 short_from_user = slugify(self.from_user.get_full_name()).replace('-', '')[:6]
                 short_to_user = slugify(self.to_user.get_full_name()).replace('-', '')[:6]
                 room_name = f'match-{short_from_user}-{short_to_user}-{get_random_string(4)}'
                 
                 room_topic = _('TODO: Youve matched!')
                 greeting_message = _('TODO: Matched chat room greeting message')
-                internal_room_id = rocket.create_private_room(room_name, self.from_user, 
-                      additional_admin_users=[self.to_user], room_topic=room_topic, greeting_message=greeting_message)
+                try:
+                    rocket = RocketChatConnection()
+                    internal_room_id = rocket.create_private_room(room_name, self.from_user,
+                          additional_admin_users=[self.to_user], room_topic=room_topic, greeting_message=greeting_message)
+                except RocketChatDownException:
+                    logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+                    internal_room_id = None
+                except Exception as e:
+                    logger.exception(e)
+                    internal_room_id = None
                 if internal_room_id:
                     self.rocket_chat_room_id = internal_room_id
                     self.rocket_chat_room_name = room_name

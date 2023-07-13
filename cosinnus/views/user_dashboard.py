@@ -222,10 +222,7 @@ class StarredUsersWidgetView(BaseUserDashboardWidgetView):
     """ Shows all unlimited (for now) ideas the user likes. """
 
     def get_data(self, *kwargs):
-        profile_ct = ContentType.objects.get_for_model(get_user_profile_model())
-        likeobjects = LikeObject.objects.filter(user=self.request.user, content_type=profile_ct, starred=True)
-        liked_users_ids = likeobjects.values_list('object_id', flat=True)
-        liked_users = get_user_profile_model().objects.filter(id__in=liked_users_ids, user__is_active=True)
+        liked_users = self.request.user.cosinnus_profile.get_user_starred_users()
         users = []
         for user in liked_users:
             dashboard_item = DashboardItem(user)
@@ -241,23 +238,9 @@ class StarredObjectsWidgetView(BaseUserDashboardWidgetView):
     """ Shows all unlimited (for now) ideas the user likes. """
 
     def get_data(self, *kwargs):
-        profile_ct = ContentType.objects.get_for_model(get_user_profile_model())
-        exclude_ids = [profile_ct.id]
-        liked = LikeObject.objects.filter(user=self.request.user, starred=True).exclude(content_type_id__in=exclude_ids)
+        liked_objects = self.request.user.cosinnus_profile.get_user_starred_objects()
         objects = []
-        for like in liked:
-            ct = ContentType.objects.get_for_id(like.content_type.id)
-            obj = ct.get_object_for_this_type(pk=like.object_id)
-            
-            # filter inactive groups
-            if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
-                if not obj.is_active:
-                    continue
-            elif hasattr(obj, 'group'):
-                # also filter inactive parent groups
-                if not getattr(obj.group, 'is_active', False):
-                    continue
-            
+        for obj in liked_objects:
             dashboard_item = DashboardItem(obj)
             dashboard_item['id'] = obj.id
             dashboard_item['ct'] = obj.get_content_type()

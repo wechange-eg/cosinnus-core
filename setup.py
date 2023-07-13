@@ -146,7 +146,7 @@ setup(
         'redis==2.10.6',
         'requests==2.28.2',
         'requests-oauthlib==0.8.0',
-        'rocketchat-API==0.6.26',
+        'rocketchat-API==1.30.0',
         'six==1.12.0',
         'sqlparse==0.2.2',
         'sentry-sdk==1.4.2',

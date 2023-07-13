@@ -11,7 +11,7 @@ from cosinnus.models.tagged import BaseTaggableObjectModel
 from cosinnus.utils.group import get_cosinnus_group_model, \
     get_default_user_group_slugs
 
-import logging
+from cosinnus.models import CosinnusPortal, get_domain_for_portal
 from cosinnus.models.idea import CosinnusIdea
 from django.urls.base import reverse
 from cosinnus.models.profile import BaseUserProfile
@@ -22,6 +22,12 @@ logger = logging.getLogger('cosinnus')
 
 
 class DashboardItem(dict):
+    """
+    Dictionary representation and API serializer of various cosinnus objects containing at least an icon, text and url.
+    Is automatically initialized for the following objects: CosinnusGroup, CosinusIdea, CosinnusOrganization,
+    NextcloudFileProxy, postman.Message, UserProfile and BaseTaggableObjectModel.
+    Used by DashboardWidgets and in the v3 navigation API.
+    """
     
     icon = None
     text = None
@@ -30,6 +36,7 @@ class DashboardItem(dict):
     is_emphasized = False
     group = None # group name of item if it has one
     group_icon = None # group type icon
+    avatar = None
 
     def __init__(self, obj=None, is_emphasized=False, user=None):
         if obj:
@@ -45,6 +52,7 @@ class DashboardItem(dict):
                 self['icon'] = obj.get_icon()
                 self['text'] = escape(obj.name)
                 self['url'] = obj.get_absolute_url()
+                self['avatar'] = obj.avatar_url
             elif type(obj) is CosinnusIdea:
                 self['icon'] = obj.get_icon()
                 self['text'] = escape(obj.title)
@@ -67,6 +75,7 @@ class DashboardItem(dict):
                 self['icon'] = obj.get_icon()
                 self['text'] = escape(full_name(obj.user))
                 self['url'] = obj.get_absolute_url()
+                self['avatar'] = obj.avatar_url
             elif BaseTaggableObjectModel in inspect.getmro(obj.__class__):
                 
                 
@@ -89,3 +98,24 @@ class DashboardItem(dict):
                             self['subtext'] = date_dict
                         else:
                             self['subtext'] = date_dict.get('date')
+
+    def as_menu_item(self):
+        return MenuItem(self['text'], self['url'], self['icon'], self['avatar'] if 'avatar' in self else None)
+
+
+class MenuItem(dict):
+    """
+    Dictionary used as a representation and API serializer of menu links consisting of a label, url, icon (optional)
+    and image-url (optional). Used in the v3 navigation API.
+    """
+
+    def __init__(self, label, url, icon=None, image=None):
+        domain = get_domain_for_portal(CosinnusPortal.get_current())
+        if url and url[0] == '/':
+            url = domain + url
+        self['icon'] = icon
+        self['label'] = label
+        self['url'] = url
+        if image and image[0] == '/':
+            image = domain + image
+        self['image'] = image
