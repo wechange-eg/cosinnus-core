@@ -983,26 +983,10 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         # clean color fields
         if self.conference_theme_color:
             self.conference_theme_color = self.conference_theme_color.replace('#', '')
-
-        super(CosinnusBaseGroup, self).save(*args, **kwargs)
         
-        # generate/update invite token: 
-        try: 
-            invite_token = CosinnusGroupInviteToken.objects.get(token=self.settings.get('invite_token'))
-            # if token exists and the token's state (active/inactive, name)
-            # is stale compared to the group settings, update it
-            if invite_token.title != self.name or invite_token.is_active != self.use_invite_token:
-                invite_token.title = self.name
-                invite_token.is_active = self.use_invite_token
-                invite_token.save()
-        except CosinnusGroupInviteToken.DoesNotExist:
-            # create a new token
-            if self.pk and self.use_invite_token:
-                token_chars = self.settings.get('invite_token', get_random_string(8))
-                self.settings.update({'invite_token': token_chars})
-                token = CosinnusGroupInviteToken.objects.create(token=token_chars, title=self.name)
-                token.invite_groups.add(self)
-                token.save()
+        self.generate_or_update_invite_token(save_group=False)
+        
+        super(CosinnusBaseGroup, self).save(*args, **kwargs)
 
         # check if a redirect should be created AFTER SAVING!
         display_redirect_created_message = False
@@ -1622,6 +1606,51 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         """ For BBBRoomMixin, overridable function to the group for this BBB room. Can be None. """
         return self
     
+    def generate_or_update_invite_token(self, save_group=True):
+        """
+            If `self.use_invite_token` is checked, create a new CosinnusGroupInviteToken if it doesn't exist.
+            If an 'invite_token' property is set to the group's settings, update the invite token in case
+            it got deactivated.
+            Run this before `group.save()`!
+        """
+        current_portal = self.portal or CosinnusPortal.get_current()
+        
+        # generate/update existing invite token:
+        existing_invite_token = None
+        invite_token_string = self.settings.get('invite_token', None)
+        if invite_token_string and not invite_token_string.lower().strip() == 'null':
+            try:
+                existing_invite_token = get_object_or_None(CosinnusGroupInviteToken, portal=current_portal,
+                                                           token__iexact=invite_token_string)
+                # if token exists and the token's state (active/inactive, name)
+                # is stale compared to the group settings, update it
+                if existing_invite_token and existing_invite_token.title != self.name or existing_invite_token.is_active != self.use_invite_token:
+                    existing_invite_token.title = self.name
+                    existing_invite_token.is_active = self.use_invite_token
+                    existing_invite_token.save()
+            except Exception as e:
+                logger.error('An eror occurred while updating an invite token for a group! Exception in extra.',
+                             extra={'exception': e, 'group_id': self.id, 'group_slug': self.slug,
+                                    'token': self.settings.get('invite_token', None)})
+                
+        
+        # generate/update existing invite token:
+        if not existing_invite_token and self.pk and self.use_invite_token:
+            try:
+                token_chars = self.settings.get('invite_token', None)
+                if not token_chars or token_chars.lower().strip() == 'null':
+                    token_chars = get_random_string(8).lower().strip()
+                new_token = CosinnusGroupInviteToken.objects.create(portal=current_portal, token=token_chars, title=self.name)
+                new_token.invite_groups.add(self)
+                new_token.save()
+                self.settings.update({'invite_token': token_chars})
+                if save_group:
+                    self.save(update_fields=['settings'])
+            except Exception as e:
+                logger.error('An eror occurred while creating an invite token for a group! Exception in extra.',
+                             extra={'exception': e, 'group_id': self.id, 'group_slug': self.slug,
+                                    'token': self.settings.get('invite_token', None)})
+
 
 class CosinnusGroup(CosinnusBaseGroup):
     class Meta(CosinnusBaseGroup.Meta):

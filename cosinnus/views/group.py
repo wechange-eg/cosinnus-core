@@ -559,8 +559,8 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
 
             invite_tokens = []
             if 'invite_token' in self.group.settings:
-                token = self.group.settings.get('invite_token')
-                invite_tokens = CosinnusGroupInviteToken.objects.filter(token=token)
+                token = self.group.settings.get('invite_token', None)
+                invite_tokens = token and CosinnusGroupInviteToken.objects.filter(portal=self.group.portal, token__iexact=token) or []
 
             context.update({
                 'admins': admins,
@@ -804,8 +804,8 @@ class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin,
 
         invite_tokens = []
         if 'invite_token' in self.group.settings:
-            token = self.group.settings.get('invite_token')
-            invite_tokens = CosinnusGroupInviteToken.objects.filter(token=token)
+            token = self.group.settings.get('invite_token', None)
+            invite_tokens = token and CosinnusGroupInviteToken.objects.filter(portal=self.group.portal, token__iexact=token) or []
 
         context.update({
             'submit_label': _('Save'),
