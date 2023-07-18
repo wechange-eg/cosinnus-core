@@ -449,14 +449,17 @@ def print_settings(request):
     KEY_BLACKLIST = ['COSINNUS_CLOUD_NEXTCLOUD_AUTH',]
     for key in dir(settings):
         val = force_text(getattr(settings, key))
+        # obfuscate passwords. for long ones, show the first few chars
         if 'password' in key.lower() or 'password' in val.lower() or  \
                 'secret' in key.lower() or 'secret' in val.lower() or \
                 'key' in key.lower() or key in KEY_BLACKLIST:
-            val = '***'
+            if val.strip() and val.strip() not in ('None', 'null', '0', '[]', '{}'):
+                val = str(val)
+                val = (len(val) > 3 and val[:3] or '') + '***'
         setts += '%s = %s<br/>' % (key, val)
     if not request:
         return setts
-    return HttpResponse('Settings are:<br/>' + setts)
+    return HttpResponse(f'Portal {settings.COSINNUS_PORTAL_NAME} is running cosinnus version {settings.COSINNUS_VERSION}. Configured settings are:<br/><br/>' + setts)
 
 def _get_group_storage_space_mb(group):
     size = 0
