@@ -130,8 +130,8 @@ class CosinnusMessageDefaultSettings(AppConf):
             }
             
             /* Increase logo size on login page */
-            img[src="https://chat.%(COSINNUS_CHAT_BASE_URL)s/assets/logo.png"],
-            img[src="https://chat.%(COSINNUS_CHAT_BASE_URL)s/assets/logo_dark.png"] {
+            img[src="%(COSINNUS_CHAT_BASE_URL)s/assets/logo.png"],
+            img[src="%(COSINNUS_CHAT_BASE_URL)s/assets/logo_dark.png"] {
                 max-height: 6rem !important;
             }
             
