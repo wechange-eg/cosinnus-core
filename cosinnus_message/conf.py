@@ -128,6 +128,17 @@ class CosinnusMessageDefaultSettings(AppConf):
             h2[data-qa-id="homepage-welcome-text"] + h3 + div.rcx-grid__wrapper  {
                 display: none;
             }
+            
+            /* Increase logo size on login page */
+            img[src="https://chat.%(COSINNUS_CHAT_BASE_URL)s/assets/logo.png"],
+            img[src="https://chat.%(COSINNUS_CHAT_BASE_URL)s/assets/logo_dark.png"] {
+                max-height: 6rem !important;
+            }
+            
+            /* Hide "Welcome to XYZ workspace" and "By proceeding you are agreeing to our Terms of Service, Privacy Policy and Legal Notice. - Switch to en" on login page */
+            #react-root > div > div > div > h1, #react-root > div > div > div > form + div {
+                display: none !important;
+            }
         ''',
                             
         # 'UI_Group_Channels_By_Type': False,
