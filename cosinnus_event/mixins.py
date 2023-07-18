@@ -75,7 +75,12 @@ class BBBRoomMixin(models.Model):
         return settings.COSINNUS_CONFERENCE_COFFEETABLES_MAX_PARTICIPANTS_DEFAULT
     
     def get_presentation_url(self):
-        """ Stub for the presentation URL used in create calls """ 
+        """ Base function to return the inherited presentation URL used in create calls.
+            May be overwritten in other models to use a non-inherited version
+            (e.g. in `cosinnus_events.models.ConferenceEvent`). """
+        settings_object = self.get_conference_settings_object()
+        if settings_object and settings_object.bbb_presentation_file:
+            return settings_object.bbb_presentation_file.url
         return None
     
     def get_name_for_bbb_room(self):

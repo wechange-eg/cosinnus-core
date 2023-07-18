@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-07-13 13:31+0200\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -189,6 +189,35 @@ msgstr "Rocket: حساب‌های راکت‌چت ناپیدا ساخته/مرم
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: مشکل عضویت اتاق ناپیدای کاربران را حل کن"
 
+#, fuzzy
+#| msgid "My Dashboard"
+msgid "Personal Dashboard"
+msgstr "داشبورد من"
+
+msgid "My Profile"
+msgstr ""
+
+msgid "Set up my Profile"
+msgstr ""
+
+msgid "Edit my Profile"
+msgstr ""
+
+msgid "Notification Preferences"
+msgstr "ترجیحات آگاه‌سازی"
+
+msgid "Change Language"
+msgstr ""
+
+msgid "Your Contribution"
+msgstr ""
+
+msgid "Administration"
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -254,6 +283,12 @@ msgid "Democracy and Participation"
 msgstr ""
 
 msgid "Digitalisation"
+msgstr ""
+
+msgid "Forum"
+msgstr ""
+
+msgid "Map"
 msgstr ""
 
 msgid "Overnight stay required"
@@ -899,9 +934,6 @@ msgstr "درود"
 msgid "Click the following link to change which emails you receive:"
 msgstr "روی پیوند زیر کلیک کنید تا ایمیل‌هایی که دریافت می‌کنید را تغییر دهید:"
 
-msgid "Notification Preferences"
-msgstr "ترجیحات آگاه‌سازی"
-
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "روی پیوند زیر کلیک کنید تا دیگر هیچ ایمیلی از سوی ما دریافت نکنید:"
 
@@ -1010,6 +1042,9 @@ msgid "BBB Server for Premium Conferences"
 msgstr "سرور BBB برای کنفرانس‌های اعلا‌ء"
 
 msgid "BBB Recording API server"
+msgstr ""
+
+msgid "Presentation file"
 msgstr ""
 
 msgid "BBB API Parameters"
@@ -2409,9 +2444,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "اتاق BBB"
-
-msgid "Administration"
-msgstr ""
 
 msgid "Select a page on the left side."
 msgstr ""
@@ -3916,15 +3948,20 @@ msgstr ""
 msgid "Include a video conference"
 msgstr "کنفرانس را ببینید"
 
-msgid "Choose the type of the video conference you would like for the event"
+msgid "Choose the type of video conference you would like."
 msgstr ""
 
-msgid "BBB-Meetings are a premium feature."
+msgid "Professional video conferences with BigBlueButton require activation."
 msgstr ""
 
-#, fuzzy
-msgid "Premium Bookings"
-msgstr "اعلاء"
+msgid "Make the activation here."
+msgstr ""
+
+msgid "BigBlueButton"
+msgstr ""
+
+msgid "Activation required"
+msgstr ""
 
 msgid "Maximum Number of Participants"
 msgstr ""
@@ -4575,9 +4612,6 @@ msgstr ""
 msgid "There are no invitations."
 msgstr ""
 
-msgid "Map"
-msgstr ""
-
 msgid "Meeting"
 msgstr ""
 
@@ -4731,6 +4765,9 @@ msgid "You have been invited to apply!"
 msgstr ""
 
 msgid "Edit Application"
+msgstr ""
+
+msgid "You are an admin, but because you created this conference you have not yet officially applied for participation. If you wish to do this to make your attendance official, you may fill out an application by clicking here"
 msgstr ""
 
 #, python-format
@@ -5380,18 +5417,6 @@ msgstr "باشه"
 msgid "Toggle navigation"
 msgstr ""
 
-msgid "My Profile"
-msgstr ""
-
-msgid "Your Contribution"
-msgstr ""
-
-msgid "Logout"
-msgstr ""
-
-msgid "Forum"
-msgstr ""
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr ""
@@ -5459,6 +5484,9 @@ msgid "I have read and accept the"
 msgstr ""
 
 msgid "Terms and Services"
+msgstr ""
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
 msgstr ""
 
 msgid "Forgot password?"
@@ -6587,6 +6615,9 @@ msgid "Signals your willingness to be contacted by other users who wish to colla
 msgstr ""
 
 msgid "I am open for cooperation requests"
+msgstr ""
+
+msgid "News via the newsletter"
 msgstr ""
 
 msgid "Welcome!"
@@ -7719,6 +7750,9 @@ msgid "New verification email sent!"
 msgstr ""
 
 msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
+
+msgid "A problem occurred when logging out from RocketChat. You might want to logout manually when the service is available again."
 msgstr ""
 
 msgid "Successfully made conference permanent premium"
@@ -8960,9 +8994,6 @@ msgstr ""
 msgid "Embed code (HTML)"
 msgstr ""
 
-msgid "Presentation file"
-msgstr ""
-
 msgid "Enable Streaming"
 msgstr ""
 
@@ -9213,6 +9244,9 @@ msgid ""
 msgstr ""
 
 msgid "Enter a title for the new event."
+msgstr ""
+
+msgid "Choose the type of the video conference you would like for the event"
 msgstr ""
 
 msgid "The first uploaded image will be displayed as a wallpaper."
@@ -10192,6 +10226,12 @@ msgstr ""
 msgid "Undefined recipient."
 msgstr ""
 
+msgid "We are currently experiencing some technical difficulties with the RocketChat service and some of your actions may not have had an effect. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
+msgid "A technical error occurred in the RocketChat service. Some of your actions may not have had an effect. We are working on resolving the issue. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
 #, fuzzy
 #| msgid "Contact Phone Number"
 msgid "Contact request"
@@ -10240,8 +10280,10 @@ msgid ""
 "Do not reply, this would not be taken into account."
 msgstr ""
 
-msgid "Go to chat"
-msgstr ""
+#, fuzzy
+#| msgid "Show chat"
+msgid "Reload chat"
+msgstr "گفتگو را نشان دهید"
 
 msgid "Archived Messages"
 msgstr ""
@@ -12703,6 +12745,10 @@ msgstr "فهرست کارهای‌برای‌انجام \"%(title)s\" افزود
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "شما نمی‌توانید این پوشه را پاک کنید چراکه شما مجوز پاک کردن یک یا چند مورد در آن را ندارید!"
+
+#, fuzzy
+#~ msgid "Premium Bookings"
+#~ msgstr "اعلاء"
 
 #, fuzzy
 #~| msgid "Description"

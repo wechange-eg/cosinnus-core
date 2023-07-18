@@ -264,17 +264,14 @@ class CosinnusConf(AppConf):
     DISABLED_COSINNUS_APPS = []
     
     # a list of which app checkboxes should be default-active on the create group form
-    DEFAULT_ACTIVE_GROUP_APPS = [
+    # Deactivating several group apps by default
+    COSINNUS_DEFAULT_ACTIVE_GROUP_APPS = [
+        'cosinnus_cloud',
         'cosinnus_conference',
         'cosinnus_exchange',
         'cosinnus_etherpad',
         'cosinnus_event',
-        'cosinnus_file',
-        'cosinnus_marketplace',
         'cosinnus_message',
-        'cosinnus_note',
-        'cosinnus_poll',
-        'cosinnus_todo',
     ]
     
     # If set, will enable a download under / of an empty text file with the given name.
@@ -570,6 +567,7 @@ class CosinnusConf(AppConf):
     
     # Default starting map coordinates if no coordinates have been specified
     # currently: central europe with germany centered
+    # GeoJSON can be generated using http://opendatalab.de/projects/geojson-utilities/
     COSINNUS_MAP_OPTIONS = {
         'default_coordinates': {
             'ne_lat': 55.32, # north,
@@ -897,6 +895,16 @@ class CosinnusConf(AppConf):
         "^/setup/",
         "^api/auth/",
     ]
+
+    # Forum space label in the v3 main navigation.
+    V3_MENU_SPACES_FORUM_LABEL = _('Forum')
+
+    # Map space label in the v3 main navigation.
+    V3_MENU_SPACES_MAP_LABEL = _('Map')
+
+    # List of help items to be included in the v3 main navigation.
+    # Format: (<label>, <url>, <icon>), e.g.: (_('FAQ'), 'https://wechange.de/cms/help/', 'fa-question-circle'),
+    V3_MENU_HELP_LINKS = []
     
     # whether the regular user signup method is enabled for this portal
     USER_SIGNUP_ENABLED = True

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-07-13 13:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -209,6 +209,41 @@ msgstr "Rocket: Opravte/vytvořte chybějící RocketChat účty"
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Zařiďte chybějící členství v RocketChat místnosti pro uživatele"
 
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "Personal Dashboard"
+msgstr "Panel projektu"
+
+msgid "My Profile"
+msgstr "Můj profil"
+
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Upravit váš profil"
+
+#, fuzzy
+#| msgid "Edit My Profile"
+msgid "Edit my Profile"
+msgstr "Upravit můj profil"
+
+msgid "Notification Preferences"
+msgstr "Předvolby oznámení"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "Změnit jazyk"
+
+msgid "Your Contribution"
+msgstr "Váš příspěvek"
+
+msgid "Administration"
+msgstr "Správa"
+
+msgid "Logout"
+msgstr "Odhlásit se"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -281,6 +316,12 @@ msgstr "Podejte si žádost o účast"
 #| msgid "Organization"
 msgid "Digitalisation"
 msgstr "Organizace"
+
+msgid "Forum"
+msgstr "Fórum"
+
+msgid "Map"
+msgstr "Mapa"
 
 msgid "Overnight stay required"
 msgstr "Vyžadován nocleh"
@@ -938,9 +979,6 @@ msgstr "Ahoj"
 msgid "Click the following link to change which emails you receive:"
 msgstr "Kliknutím na následující odkaz můžete změnit, které e-maily budete dostávat:"
 
-msgid "Notification Preferences"
-msgstr "Předvolby oznámení"
-
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "Kliknutím na následující odkaz od nás už nikdy nebudete dostávat žádné další e-maily:"
 
@@ -1050,6 +1088,9 @@ msgstr "BBB server pro Premium konference"
 
 msgid "BBB Recording API server"
 msgstr ""
+
+msgid "Presentation file"
+msgstr "Prezentační soubor"
 
 msgid "BBB API Parameters"
 msgstr ""
@@ -2461,9 +2502,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "Návštěvy BBB místnosti"
-
-msgid "Administration"
-msgstr "Správa"
 
 msgid "Select a page on the left side."
 msgstr "Vyberte stránku na levé straně."
@@ -4060,15 +4098,22 @@ msgstr "Přidejte adresu"
 msgid "Include a video conference"
 msgstr "Zaslat 1 den před zahájením konference"
 
-msgid "Choose the type of the video conference you would like for the event"
+msgid "Choose the type of video conference you would like."
 msgstr ""
 
-msgid "BBB-Meetings are a premium feature."
+msgid "Professional video conferences with BigBlueButton require activation."
+msgstr ""
+
+msgid "Make the activation here."
+msgstr ""
+
+msgid "BigBlueButton"
 msgstr ""
 
 #, fuzzy
-msgid "Premium Bookings"
-msgstr "Premium"
+#| msgid "Activate Conference"
+msgid "Activation required"
+msgstr "Aktivujte konferenci"
 
 msgid "Maximum Number of Participants"
 msgstr "Maximální počet účastníků"
@@ -4739,9 +4784,6 @@ msgstr "Nejsou žádné projekty."
 msgid "There are no invitations."
 msgstr "Nejsou žádné pozvánky."
 
-msgid "Map"
-msgstr "Mapa"
-
 #, fuzzy
 msgid "Meeting"
 msgstr "Mazání..."
@@ -4903,6 +4945,9 @@ msgstr "Byli jste pozváni k podání žádosti!"
 
 msgid "Edit Application"
 msgstr "Editujte žádost o účast"
+
+msgid "You are an admin, but because you created this conference you have not yet officially applied for participation. If you wish to do this to make your attendance official, you may fill out an application by clicking here"
+msgstr ""
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -5718,18 +5763,6 @@ msgstr "OK"
 msgid "Toggle navigation"
 msgstr "Přepnout navigaci"
 
-msgid "My Profile"
-msgstr "Můj profil"
-
-msgid "Your Contribution"
-msgstr "Váš příspěvek"
-
-msgid "Logout"
-msgstr "Odhlásit se"
-
-msgid "Forum"
-msgstr "Fórum"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Lidé"
@@ -5798,6 +5831,9 @@ msgstr "Přečetl/a jsem si a přijímám"
 
 msgid "Terms and Services"
 msgstr "Podmínky a služby"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "Zapomenuté heslo?"
@@ -6945,6 +6981,11 @@ msgstr "Signalizuje vaši ochotu být kontaktován/a ostatními uživateli, kte�
 
 msgid "I am open for cooperation requests"
 msgstr "Jsem otevřený/á pro žádosti o spolupráci"
+
+#, fuzzy
+#| msgid "Create Newsletter"
+msgid "News via the newsletter"
+msgstr "Vytvořit bulletin"
 
 msgid "Welcome!"
 msgstr "Vítejte!"
@@ -8111,6 +8152,9 @@ msgid "New verification email sent!"
 msgstr "Testovací e-mail odeslán!"
 
 msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
+
+msgid "A problem occurred when logging out from RocketChat. You might want to logout manually when the service is available again."
 msgstr ""
 
 #, fuzzy
@@ -9381,9 +9425,6 @@ msgstr "Maximum účastníků eventu"
 msgid "Embed code (HTML)"
 msgstr "Embedovaný kód (HTML)"
 
-msgid "Presentation file"
-msgstr "Prezentační soubor"
-
 #, fuzzy
 msgid "Enable Streaming"
 msgstr "Stage stream"
@@ -9642,6 +9683,9 @@ msgstr ""
 
 msgid "Enter a title for the new event."
 msgstr "Zadejte název nové události."
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
 
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "První nahraný obrázek se zobrazí jako tapeta."
@@ -10749,6 +10793,12 @@ msgstr "Další příjemci"
 msgid "Undefined recipient."
 msgstr "Nedefinovaný příjemce."
 
+msgid "We are currently experiencing some technical difficulties with the RocketChat service and some of your actions may not have had an effect. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
+msgid "A technical error occurred in the RocketChat service. Some of your actions may not have had an effect. We are working on resolving the issue. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
 #, fuzzy
 #| msgid "Accept request"
 msgid "Contact request"
@@ -10814,8 +10864,10 @@ msgstr ""
 "Poznámka: Tuto zprávu posílá automatizovaný systém.\n"
 "Neodpovídejte na ni, schránka je bez dozoru."
 
-msgid "Go to chat"
-msgstr ""
+#, fuzzy
+#| msgid "Show chat"
+msgid "Reload chat"
+msgstr "Ukázat chat"
 
 msgid "Archived Messages"
 msgstr "Archivované zprávy"
@@ -13482,6 +13534,10 @@ msgstr "Seznam úkolů \"%(title)s\" nelze přidat."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Tuto složku nemůžete smazat, protože nemáte oprávnění smazat jednu nebo více položek, které obsahuje!"
+
+#, fuzzy
+#~ msgid "Premium Bookings"
+#~ msgstr "Premium"
 
 #, fuzzy
 #~ msgid ""

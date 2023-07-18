@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from cosinnus.core import signals
 from cosinnus.models.bbb_room import BBBRoom
 from django.dispatch.dispatcher import receiver
+from cosinnus.conf import settings
 from cosinnus_event.models import Event, ConferenceEvent
 from threading import Thread
 from cosinnus.models.group import MEMBER_STATUS, MEMBERSHIP_ADMIN
@@ -40,11 +41,11 @@ def update_bbb_room_memberships(group_membership, deleted):
 def group_membership_has_changed_sub(sender, instance, deleted, **kwargs):
     """ Called after a CosinusGroupMembership is changed, to threaded apply membership permission
         changes to BBBRoom of all events in this group """
-    
-    class CreateBBBRoomUpdateThread(Thread):
-        def run(self):
-            update_bbb_room_memberships(instance, deleted)
-    CreateBBBRoomUpdateThread().start()
+    if settings.COSINNUS_CONFERENCES_ENABLED:
+        class CreateBBBRoomUpdateThread(Thread):
+            def run(self):
+                update_bbb_room_memberships(instance, deleted)
+        CreateBBBRoomUpdateThread().start()
 
 
 @receiver(signals.group_saved_in_form)

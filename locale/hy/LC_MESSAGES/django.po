@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-07-13 13:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -205,6 +205,40 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
+#, fuzzy
+msgid "Personal Dashboard"
+msgstr "Կառավարման վահանակ"
+
+msgid "My Profile"
+msgstr "Իմ էջը"
+
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Խմբագրել ձեր էջը"
+
+#, fuzzy
+#| msgid "Edit My Profile"
+msgid "Edit my Profile"
+msgstr "Խմբագրել Իմ Անձնական Էջը"
+
+msgid "Notification Preferences"
+msgstr "Ծանուցման նախապատվություններ"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "Փոխել լեզուն"
+
+msgid "Your Contribution"
+msgstr "Ձեր ներդրումը"
+
+msgid "Administration"
+msgstr "Ադմինիստրացիա"
+
+msgid "Logout"
+msgstr "Ելք"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -274,6 +308,12 @@ msgstr "Մասնակիցներ"
 #, fuzzy
 msgid "Digitalisation"
 msgstr "Հրավերներ"
+
+msgid "Forum"
+msgstr "Ֆորում"
+
+msgid "Map"
+msgstr "Քարտեզ"
 
 msgid "Overnight stay required"
 msgstr ""
@@ -919,9 +959,6 @@ msgstr ""
 msgid "Click the following link to change which emails you receive:"
 msgstr "Անցեք հետևյալ հղումով ՝ ձեր կողմից ստացվող էլեկտրոնային փոստերը փոխելու համար:"
 
-msgid "Notification Preferences"
-msgstr "Ծանուցման նախապատվություններ"
-
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "Անցեք հետևյալ հղումով՝ այլևս մեզանից էլ-նամակներ չստանալու համար:"
 
@@ -1032,6 +1069,9 @@ msgid "BBB Server for Premium Conferences"
 msgstr ""
 
 msgid "BBB Recording API server"
+msgstr ""
+
+msgid "Presentation file"
 msgstr ""
 
 msgid "BBB API Parameters"
@@ -2493,9 +2533,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "Թիմի տեսակից"
-
-msgid "Administration"
-msgstr "Ադմինիստրացիա"
 
 msgid "Select a page on the left side."
 msgstr "Ընտրեք էջը ձախ կողմում."
@@ -4106,15 +4143,21 @@ msgstr "Էլ. Փոստի հասցեներ"
 msgid "Include a video conference"
 msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
-msgid "Choose the type of the video conference you would like for the event"
+msgid "Choose the type of video conference you would like."
 msgstr ""
 
-msgid "BBB-Meetings are a premium feature."
+msgid "Professional video conferences with BigBlueButton require activation."
+msgstr ""
+
+msgid "Make the activation here."
+msgstr ""
+
+msgid "BigBlueButton"
 msgstr ""
 
 #, fuzzy
-msgid "Premium Bookings"
-msgstr "Ստեղծել Իրադարձություն"
+msgid "Activation required"
+msgstr "Ակտիվացնել նախագիծը"
 
 msgid "Maximum Number of Participants"
 msgstr ""
@@ -4804,9 +4847,6 @@ msgstr "Նախագծեր չկան."
 msgid "There are no invitations."
 msgstr "Հրավերներ չկան."
 
-msgid "Map"
-msgstr "Քարտեզ"
-
 #, fuzzy
 msgid "Meeting"
 msgstr "Ջնջվում է ..."
@@ -4973,6 +5013,9 @@ msgstr "Ձե՜զ հրավիրվել են համագործակցության!"
 #, fuzzy
 msgid "Edit Application"
 msgstr "Հավելվածի անվանումը"
+
+msgid "You are an admin, but because you created this conference you have not yet officially applied for participation. If you wish to do this to make your attendance official, you may fill out an application by clicking here"
+msgstr ""
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -5764,18 +5807,6 @@ msgstr "OK"
 msgid "Toggle navigation"
 msgstr "Նավիգացիայի փոփոխում"
 
-msgid "My Profile"
-msgstr "Իմ էջը"
-
-msgid "Your Contribution"
-msgstr "Ձեր ներդրումը"
-
-msgid "Logout"
-msgstr "Ելք"
-
-msgid "Forum"
-msgstr "Ֆորում"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Մարդիկ"
@@ -5844,6 +5875,9 @@ msgstr "Ես կարդացել և ընդունում եմ"
 
 msgid "Terms and Services"
 msgstr "Պայմաններ և Ծառայություններ"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "Մոռացե՞լ եք գաղտնաբառը?"
@@ -7018,6 +7052,10 @@ msgstr "Ազդանշան է տալիս ձեր հետ կապնվելու պատր
 
 msgid "I am open for cooperation requests"
 msgstr "Ես պատրաստ եմ համագործակցության հարցումների"
+
+#, fuzzy
+msgid "News via the newsletter"
+msgstr "Ստեղծել Օգտատեր"
 
 msgid "Welcome!"
 msgstr "Բարի Գալուստ!"
@@ -8241,6 +8279,9 @@ msgid "New verification email sent!"
 msgstr ""
 
 msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
+
+msgid "A problem occurred when logging out from RocketChat. You might want to logout manually when the service is available again."
 msgstr ""
 
 #, fuzzy
@@ -9529,9 +9570,6 @@ msgstr ""
 msgid "Embed code (HTML)"
 msgstr ""
 
-msgid "Presentation file"
-msgstr ""
-
 msgid "Enable Streaming"
 msgstr ""
 
@@ -9793,6 +9831,9 @@ msgstr ""
 
 msgid "Enter a title for the new event."
 msgstr "Մուտքագրեք վերնագիր նոր իրադարձության համար."
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
 
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "Առաջին վերբեռնված պատկերը կցուցադրվի որպես էջի գլխավոր պաստառ."
@@ -10891,6 +10932,12 @@ msgstr "Լրացուցիչ ստացողներ"
 msgid "Undefined recipient."
 msgstr "Անորոշ ստացող."
 
+msgid "We are currently experiencing some technical difficulties with the RocketChat service and some of your actions may not have had an effect. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
+msgid "A technical error occurred in the RocketChat service. Some of your actions may not have had an effect. We are working on resolving the issue. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
 #, fuzzy
 msgid "Contact request"
 msgstr "Ընդունել Անդամ"
@@ -10955,7 +11002,7 @@ msgstr ""
 "Նշում. Այս հաղորդագրությունը թողարկվում է ավտոմատացված համակարգով:\n"
 "Մի պատասխանեք, այն չի դիտարկվելու."
 
-msgid "Go to chat"
+msgid "Reload chat"
 msgstr ""
 
 msgid "Archived Messages"
@@ -13561,6 +13608,10 @@ msgstr "\"%(title)s\" անելիքների ցանկը հնարավոր չէ ավ
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Դուք չեք կարող ջնջել այս թղթապանակը, քանի որ թույլտվություն չունեք ջնջել նրա միջի մեկ կամ մի քանի նյութերը!"
+
+#, fuzzy
+#~ msgid "Premium Bookings"
+#~ msgstr "Ստեղծել Իրադարձություն"
 
 #, fuzzy
 #~ msgid ""

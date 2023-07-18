@@ -559,8 +559,8 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
 
             invite_tokens = []
             if 'invite_token' in self.group.settings:
-                token = self.group.settings.get('invite_token')
-                invite_tokens = CosinnusGroupInviteToken.objects.filter(token=token)
+                token = self.group.settings.get('invite_token', None)
+                invite_tokens = token and CosinnusGroupInviteToken.objects.filter(portal=self.group.portal, token__iexact=token) or []
 
             context.update({
                 'admins': admins,
@@ -804,8 +804,8 @@ class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin,
 
         invite_tokens = []
         if 'invite_token' in self.group.settings:
-            token = self.group.settings.get('invite_token')
-            invite_tokens = CosinnusGroupInviteToken.objects.filter(token=token)
+            token = self.group.settings.get('invite_token', None)
+            invite_tokens = token and CosinnusGroupInviteToken.objects.filter(portal=self.group.portal, token__iexact=token) or []
 
         context.update({
             'submit_label': _('Save'),
@@ -1563,7 +1563,7 @@ def group_user_recruit(request, group,
     prev_invites_to_refresh = []
     
     # format and validate emails
-    emails = emails.replace(';', ',').replace('\n', ',').replace('\r', ',').split(',')
+    emails = emails.lower().replace(';', ',').replace('\n', ',').replace('\r', ',').split(',')
     emails = list(set([email.strip(' \t\n\r') for email in emails]))
     
     for email in emails:
@@ -1582,7 +1582,7 @@ def group_user_recruit(request, group,
             continue
         
         # from here on, we have a real email. check if a user with that email exists
-        existing_user = get_object_or_None(get_user_model(), email=email)
+        existing_user = get_object_or_None(get_user_model(), email__iexact=email)
         if existing_user:
             # check if there is already a group membership for this user
             membership = get_object_or_None(membership_class, group=group, user=existing_user)
@@ -1611,11 +1611,16 @@ def group_user_recruit(request, group,
                 existing_already_invited.append(email)
             else:
                 logger.error('Group member recruit: An unreachable else case was reached. Were the membership statuses expanded?')
+            # since we handled this invite, delete all previous recruit-invitations
+            prev_invites = invite_class.objects.filter(email__iexact=email, group=group)
+            if prev_invites.count() > 0:
+                prev_invites.delete()
             continue
         
         
         # check if the user has been invited recently (if so, we don't send another mail)
-        prev_invite = get_object_or_None(invite_class, email=email, group=group)
+        prev_invites = invite_class.objects.filter(email__iexact=email, group=group).order_by('-last_modified')
+        prev_invite = prev_invites[0] if len(prev_invites) > 0 else None
         if prev_invite and prev_invite.last_modified > (now() - datetime.timedelta(days=1)):
             spam_protected.append(email)
             continue
@@ -1646,7 +1651,7 @@ def group_user_recruit(request, group,
     # create invite objects
     with transaction.atomic():
         for email in success:
-            just_refresh_invites = [inv for inv in prev_invites_to_refresh if inv.email == email]
+            just_refresh_invites = [inv for inv in prev_invites_to_refresh if inv.email.lower() == email]
             if just_refresh_invites:
                 if is_group_admin:
                     just_refresh_invites[0].invited_by = user

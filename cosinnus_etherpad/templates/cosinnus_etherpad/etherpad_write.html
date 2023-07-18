@@ -134,25 +134,27 @@
 	    </div><!-- content-box -->
 	    
 	    <div class="mobile-hidden">
-		    {% captureas help_text_id %}helptext_11_document{% endcaptureas %}
-		    {% captureas help_modal_id %}modal-{{ help_text_id }}{% endcaptureas %}
-			{% include 'cosinnus/common/modal_box_help_popup.html' with help_text_id=help_text_id help_title=help_title help_modal_id=help_modal_id %}
-			<button type="button" class="btn btn-emphasized pull-left" style="margin: 0px;" data-toggle="modal" data-target="#{{ help_modal_id }}" title="{% trans "Help and Assistance for this page" %}">
-	            <ul class="media-list">
-	                <li class="media">
-	                    <span class="pull-left">
-	                        <i class="fa fa-question-circle-o"></i>
-	                    </span>
-	                    <div class="media-body">
-	                        {% trans "Help" %}
-	                    </div>
-	                </li>
-	            </ul>
-	        </button>
+            {% if object.type == 0 %}
+                {% captureas help_text_id %}helptext_11_document{% endcaptureas %}
+                {% captureas help_modal_id %}modal-{{ help_text_id }}{% endcaptureas %}
+                {% include 'cosinnus/common/modal_box_help_popup.html' with help_text_id=help_text_id help_title=help_title help_modal_id=help_modal_id %}
+                <button type="button" class="btn btn-emphasized pull-left" style="margin: 0px;" data-toggle="modal" data-target="#{{ help_modal_id }}" title="{% trans "Help and Assistance for this page" %}">
+                    <ul class="media-list">
+                        <li class="media">
+                            <span class="pull-left">
+                                <i class="fa fa-question-circle-o"></i>
+                            </span>
+                            <div class="media-body">
+                                {% trans "Help" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+            {% endif %}
 		    
 		    
 		    {% if user|has_write_access:object %}   
-			    <button type="button" class="btn btn-emphasized pull-left" data-toggle="modal" data-target="#deleteModal">
+			    <button type="button" class="btn btn-emphasized pull-left" {% if object.type > 0 %}style="margin: 0px;"{% endif %} data-toggle="modal" data-target="#deleteModal">
 		            <ul class="media-list">
 		                <li class="media">
 		                    <span class="pull-left">

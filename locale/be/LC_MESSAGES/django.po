@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-07-13 13:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -204,6 +204,39 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
+#, fuzzy
+msgid "Personal Dashboard"
+msgstr "Панэль кіравання"
+
+msgid "My Profile"
+msgstr "Мой профіль"
+
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Рэдагаваць Ваш профіль"
+
+#, fuzzy
+msgid "Edit my Profile"
+msgstr "Рэдагаваць профіль"
+
+msgid "Notification Preferences"
+msgstr "Налады апавяшчэнняў"
+
+#, fuzzy
+msgid "Change Language"
+msgstr "Мова"
+
+msgid "Your Contribution"
+msgstr ""
+
+#, fuzzy
+msgid "Administration"
+msgstr "Адміністратар"
+
+msgid "Logout"
+msgstr "Выйсці"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -273,6 +306,12 @@ msgstr "Удзельнікі(-цы)"
 #, fuzzy
 msgid "Digitalisation"
 msgstr "Запрашэнні"
+
+msgid "Forum"
+msgstr "Форум"
+
+msgid "Map"
+msgstr "Карта"
 
 msgid "Overnight stay required"
 msgstr ""
@@ -922,9 +961,6 @@ msgstr ""
 msgid "Click the following link to change which emails you receive:"
 msgstr "Перайдзіце па наступнай спасылцы, каб наладзіць, якія электронныя лісты Вы атрымліваеце:"
 
-msgid "Notification Preferences"
-msgstr "Налады апавяшчэнняў"
-
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "Націсніце на спасылку, каб ніколі больш атрымліваць ад нас лістоў:"
 
@@ -1035,6 +1071,9 @@ msgid "BBB Server for Premium Conferences"
 msgstr ""
 
 msgid "BBB Recording API server"
+msgstr ""
+
+msgid "Presentation file"
 msgstr ""
 
 msgid "BBB API Parameters"
@@ -2492,10 +2531,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "З тыпу каманды"
-
-#, fuzzy
-msgid "Administration"
-msgstr "Адміністратар"
 
 msgid "Select a page on the left side."
 msgstr ""
@@ -4115,15 +4150,21 @@ msgstr "Адрасы электроннай пошты"
 msgid "Include a video conference"
 msgstr "Увядзіце назву праекта."
 
-msgid "Choose the type of the video conference you would like for the event"
+msgid "Choose the type of video conference you would like."
 msgstr ""
 
-msgid "BBB-Meetings are a premium feature."
+msgid "Professional video conferences with BigBlueButton require activation."
+msgstr ""
+
+msgid "Make the activation here."
+msgstr ""
+
+msgid "BigBlueButton"
 msgstr ""
 
 #, fuzzy
-msgid "Premium Bookings"
-msgstr "Стварыць падзею"
+msgid "Activation required"
+msgstr "Актываваць праект"
 
 msgid "Maximum Number of Participants"
 msgstr ""
@@ -4816,9 +4857,6 @@ msgstr "Праектаў няма."
 msgid "There are no invitations."
 msgstr "Запрашэнняў няма."
 
-msgid "Map"
-msgstr "Карта"
-
 #, fuzzy
 msgid "Meeting"
 msgstr "Выдаляецца..."
@@ -4987,6 +5025,9 @@ msgstr "Вас запрасілі да супрацоўніцтва!"
 #, fuzzy
 msgid "Edit Application"
 msgstr "Імя прыкладання"
+
+msgid "You are an admin, but because you created this conference you have not yet officially applied for participation. If you wish to do this to make your attendance official, you may fill out an application by clicking here"
+msgstr ""
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -5782,18 +5823,6 @@ msgstr "ОК"
 msgid "Toggle navigation"
 msgstr "Пераключыць навігацыю"
 
-msgid "My Profile"
-msgstr "Мой профіль"
-
-msgid "Your Contribution"
-msgstr ""
-
-msgid "Logout"
-msgstr "Выйсці"
-
-msgid "Forum"
-msgstr "Форум"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Людзі"
@@ -5862,6 +5891,9 @@ msgstr "Я прачытаў(-ла) і прымаю"
 
 msgid "Terms and Services"
 msgstr "Умовы карыстання"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "Забылі пароль?"
@@ -7056,6 +7088,10 @@ msgstr ""
 
 msgid "I am open for cooperation requests"
 msgstr ""
+
+#, fuzzy
+msgid "News via the newsletter"
+msgstr "Стварыць карыстальніка(-цу)"
 
 msgid "Welcome!"
 msgstr "Сардэчна вітаем!"
@@ -8297,6 +8333,9 @@ msgid "New verification email sent!"
 msgstr ""
 
 msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
+
+msgid "A problem occurred when logging out from RocketChat. You might want to logout manually when the service is available again."
 msgstr ""
 
 #, fuzzy
@@ -9612,9 +9651,6 @@ msgstr ""
 msgid "Embed code (HTML)"
 msgstr ""
 
-msgid "Presentation file"
-msgstr ""
-
 msgid "Enable Streaming"
 msgstr ""
 
@@ -9876,6 +9912,9 @@ msgstr ""
 
 msgid "Enter a title for the new event."
 msgstr "Увядзіце назву новай падзеі."
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
 
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "Першая зацягнутая выява будзе адлюстроўвацца ў якасці фонавай."
@@ -11011,6 +11050,12 @@ msgstr "Дадатковыя атрымальнікі(-цы)"
 msgid "Undefined recipient."
 msgstr "Нявызначаны атрымальнік."
 
+msgid "We are currently experiencing some technical difficulties with the RocketChat service and some of your actions may not have had an effect. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
+msgid "A technical error occurred in the RocketChat service. Some of your actions may not have had an effect. We are working on resolving the issue. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
 #, fuzzy
 msgid "Contact request"
 msgstr "Прыняць чальца"
@@ -11075,7 +11120,7 @@ msgstr ""
 "Увага: Гэтае паведамленне перададзена аўтаматызаванай сістэмай.\n"
 "Не адказвайте, Ваш адказ не будзе разгледжаны."
 
-msgid "Go to chat"
+msgid "Reload chat"
 msgstr ""
 
 msgid "Archived Messages"
@@ -13776,6 +13821,10 @@ msgstr "Спіс задач \"%(title)s\" не атрымалася дадаць
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Вы не можаце выдаліць гэтую папку, таму что ў Вас няма дазволу выдаляць адзін або некалькі матэрыялаў, якія ў ёй змяшчаюцца!"
+
+#, fuzzy
+#~ msgid "Premium Bookings"
+#~ msgstr "Стварыць падзею"
 
 # EN > Our
 #, fuzzy

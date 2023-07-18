@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-07-13 13:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -206,6 +206,41 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
+#, fuzzy
+#| msgid "Project Dashboard"
+msgid "Personal Dashboard"
+msgstr "Project dashboard"
+
+msgid "My Profile"
+msgstr "Mijn profiel"
+
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Je profiel bewerken"
+
+#, fuzzy
+#| msgid "Edit My Profile"
+msgid "Edit my Profile"
+msgstr "Wijzig mijn profiel"
+
+msgid "Notification Preferences"
+msgstr "Meldingsvoorkeuren"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "Taal wijzigen"
+
+msgid "Your Contribution"
+msgstr "Mijn bijdrage"
+
+msgid "Administration"
+msgstr "Administratie"
+
+msgid "Logout"
+msgstr "Uitloggen"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -277,6 +312,12 @@ msgstr "Deelnemers"
 #| msgid "Organization"
 msgid "Digitalisation"
 msgstr "Organisatie"
+
+msgid "Forum"
+msgstr "Forum"
+
+msgid "Map"
+msgstr "Kaart"
 
 msgid "Overnight stay required"
 msgstr ""
@@ -924,9 +965,6 @@ msgstr "Hallo"
 msgid "Click the following link to change which emails you receive:"
 msgstr "Klik op de volgende link om te wijzigen welke e-mails je ontvangt:"
 
-msgid "Notification Preferences"
-msgstr "Meldingsvoorkeuren"
-
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "Klik op de volgende link om nooit meer e-mails van ons te ontvangen:"
 
@@ -1036,6 +1074,9 @@ msgid "BBB Server for Premium Conferences"
 msgstr ""
 
 msgid "BBB Recording API server"
+msgstr ""
+
+msgid "Presentation file"
 msgstr ""
 
 msgid "BBB API Parameters"
@@ -2484,9 +2525,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "Ruimte type"
-
-msgid "Administration"
-msgstr "Administratie"
 
 msgid "Select a page on the left side."
 msgstr "Selecteer een pagina aan de linker kant."
@@ -4096,15 +4134,21 @@ msgstr "E-mailadressen"
 msgid "Include a video conference"
 msgstr "Is conferentie"
 
-msgid "Choose the type of the video conference you would like for the event"
+msgid "Choose the type of video conference you would like."
 msgstr ""
 
-msgid "BBB-Meetings are a premium feature."
+msgid "Professional video conferences with BigBlueButton require activation."
+msgstr ""
+
+msgid "Make the activation here."
+msgstr ""
+
+msgid "BigBlueButton"
 msgstr ""
 
 #, fuzzy
-msgid "Premium Bookings"
-msgstr "Premium"
+msgid "Activation required"
+msgstr "Project activeren"
 
 #, fuzzy
 msgid "Maximum Number of Participants"
@@ -4793,9 +4837,6 @@ msgstr "Er zijn geen projecten."
 msgid "There are no invitations."
 msgstr "Er zijn geen uitnodigingen."
 
-msgid "Map"
-msgstr "Kaart"
-
 #, fuzzy
 msgid "Meeting"
 msgstr "Verwijderen…"
@@ -4961,6 +5002,9 @@ msgstr "Je bent uitgenodigd om samen te werken!"
 #, fuzzy
 msgid "Edit Application"
 msgstr "Applicatienaam"
+
+msgid "You are an admin, but because you created this conference you have not yet officially applied for participation. If you wish to do this to make your attendance official, you may fill out an application by clicking here"
+msgstr ""
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -5776,18 +5820,6 @@ msgstr "OK"
 msgid "Toggle navigation"
 msgstr "Schakelnavigatie"
 
-msgid "My Profile"
-msgstr "Mijn profiel"
-
-msgid "Your Contribution"
-msgstr "Mijn bijdrage"
-
-msgid "Logout"
-msgstr "Uitloggen"
-
-msgid "Forum"
-msgstr "Forum"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Mensen"
@@ -5856,6 +5888,9 @@ msgstr "Ik heb de algemene voorwaarden gelezen en accepteer deze"
 
 msgid "Terms and Services"
 msgstr "Algemene voorwaarden"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "Wachtwoord vergeten?"
@@ -7023,6 +7058,10 @@ msgstr "Geeft aan dat je bereid bent gecontacteerd te worden door andere gebruik
 
 msgid "I am open for cooperation requests"
 msgstr "Ik sta open voor samenwerkingsverzoeken"
+
+#, fuzzy
+msgid "News via the newsletter"
+msgstr "Gebruiker aanmaken"
 
 msgid "Welcome!"
 msgstr "Welkom!"
@@ -8244,6 +8283,9 @@ msgid "New verification email sent!"
 msgstr "Testmail verstuurd!"
 
 msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
+
+msgid "A problem occurred when logging out from RocketChat. You might want to logout manually when the service is available again."
 msgstr ""
 
 #, fuzzy
@@ -9529,9 +9571,6 @@ msgstr "Max. aantal deelnemers"
 msgid "Embed code (HTML)"
 msgstr ""
 
-msgid "Presentation file"
-msgstr ""
-
 #, fuzzy
 msgid "Enable Streaming"
 msgstr "Podiumstream"
@@ -9790,6 +9829,9 @@ msgstr ""
 
 msgid "Enter a title for the new event."
 msgstr "Voer een titel in voor het nieuwe evenement."
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
 
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "De eerste geüploade afbeelding wordt als achtergrond weergegeven."
@@ -10886,6 +10928,12 @@ msgstr "Verdere ontvangers"
 msgid "Undefined recipient."
 msgstr "Ongedefinieerde ontvanger."
 
+msgid "We are currently experiencing some technical difficulties with the RocketChat service and some of your actions may not have had an effect. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
+msgid "A technical error occurred in the RocketChat service. Some of your actions may not have had an effect. We are working on resolving the issue. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
 #, fuzzy
 msgid "Contact request"
 msgstr "Lid accepteren"
@@ -10950,7 +10998,7 @@ msgstr ""
 "Opmerking: dit is een automatisch gegenereerd bericht.\n"
 "Antwoord hierop niet."
 
-msgid "Go to chat"
+msgid "Reload chat"
 msgstr ""
 
 msgid "Archived Messages"
@@ -13586,6 +13634,10 @@ msgstr "Takenlijst “%(title)s” kon niet worden toegevoegd."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Je kunt deze map niet verwijderen, omdat je geen toestemming hebt om een of meer van de items te verwijderen!"
+
+#, fuzzy
+#~ msgid "Premium Bookings"
+#~ msgstr "Premium"
 
 #, fuzzy
 #~ msgid ""

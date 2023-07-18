@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import logging
+
 from django import forms
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
@@ -12,6 +14,7 @@ from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 
 from cosinnus.conf import settings
 from django.urls.base import reverse
+from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException
 from cosinnus_message.utils.utils import get_rocketchat_group_embed_url_for_user
 
 
@@ -30,9 +33,20 @@ class EmbeddedRocketchatDashboardWidget(DashboardWidget):
         """ Returns a tuple (data, rows_returned, has_more) of the rendered data and how many items were returned.
             if has_more == False, the receiving widget will assume no further data can be loaded.
          """
-        rocketchat_room_embed_url = get_rocketchat_group_embed_url_for_user(self.config.group, self.request.user)
+        try:
+            rocketchat_room_embed_url = get_rocketchat_group_embed_url_for_user(self.config.group, self.request.user)
+            rocketchat_down_msg = None
+        except RocketChatDownException:
+            logging.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
+            rocketchat_room_embed_url = None
+            rocketchat_down_msg = RocketChatConnection.ROCKET_CHAT_DOWN_USER_MESSAGE
+        except Exception as e:
+            logging.exception(e)
+            rocketchat_room_embed_url = None
+            rocketchat_down_msg = RocketChatConnection.ROCKET_CHAT_EXCEPTION_USER_MESSAGE
         data = {
             'rocketchat_room_embed_url': rocketchat_room_embed_url,
+            'rocket_down_msg': rocketchat_down_msg,
             'group': self.config.group,
         }
         return (render_to_string(self.template_name, data), 0, 0)

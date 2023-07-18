@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 14:01+0200\n"
+"POT-Creation-Date: 2023-07-13 13:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -205,6 +205,40 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
+#, fuzzy
+msgid "Personal Dashboard"
+msgstr "İdarə paneli"
+
+msgid "My Profile"
+msgstr "Mənim Hesabım"
+
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Set up my Profile"
+msgstr "Profilinizi redaktə edin"
+
+#, fuzzy
+#| msgid "Edit My Profile"
+msgid "Edit my Profile"
+msgstr "Profilimi Redaktə edin"
+
+msgid "Notification Preferences"
+msgstr "Bildiriş Seçimləri"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "Dili dəyişdirin"
+
+msgid "Your Contribution"
+msgstr "Sizin töhfəniz"
+
+msgid "Administration"
+msgstr "İdarəetmə"
+
+msgid "Logout"
+msgstr "Çıxış"
+
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
 msgstr ""
@@ -274,6 +308,12 @@ msgstr "İştirakçılar"
 #, fuzzy
 msgid "Digitalisation"
 msgstr "Dəvətlər"
+
+msgid "Forum"
+msgstr "Forum"
+
+msgid "Map"
+msgstr "Xəritə"
 
 msgid "Overnight stay required"
 msgstr ""
@@ -919,9 +959,6 @@ msgstr ""
 msgid "Click the following link to change which emails you receive:"
 msgstr "E-poçtlar aldığınız e-poçtları dəyişdirmək üçün aşağıdakı linkə klik edin:"
 
-msgid "Notification Preferences"
-msgstr "Bildiriş Seçimləri"
-
 msgid "Click the following link to never receive any more emails from us:"
 msgstr "Heç bir başqa elektron poçtumuzu heç vaxt qəbul etməmək üçün aşağıdakı linkə klik edin:"
 
@@ -1032,6 +1069,9 @@ msgid "BBB Server for Premium Conferences"
 msgstr ""
 
 msgid "BBB Recording API server"
+msgstr ""
+
+msgid "Presentation file"
 msgstr ""
 
 msgid "BBB API Parameters"
@@ -2493,9 +2533,6 @@ msgstr ""
 #, fuzzy
 msgid "BBB Room"
 msgstr "Komanda Tipindən"
-
-msgid "Administration"
-msgstr "İdarəetmə"
 
 msgid "Select a page on the left side."
 msgstr "Sol tərəfdə bir səhifə seçin."
@@ -4106,15 +4143,21 @@ msgstr "E-Poçt Ünvanları"
 msgid "Include a video conference"
 msgstr "Video konfrans Serveri"
 
-msgid "Choose the type of the video conference you would like for the event"
+msgid "Choose the type of video conference you would like."
 msgstr ""
 
-msgid "BBB-Meetings are a premium feature."
+msgid "Professional video conferences with BigBlueButton require activation."
+msgstr ""
+
+msgid "Make the activation here."
+msgstr ""
+
+msgid "BigBlueButton"
 msgstr ""
 
 #, fuzzy
-msgid "Premium Bookings"
-msgstr "Tədbir Yaradın"
+msgid "Activation required"
+msgstr "Layihəni aktivləşdirin"
 
 msgid "Maximum Number of Participants"
 msgstr ""
@@ -4804,9 +4847,6 @@ msgstr "Heç bir layihə yoxdur."
 msgid "There are no invitations."
 msgstr "Heç bir dəvət yoxdur."
 
-msgid "Map"
-msgstr "Xəritə"
-
 #, fuzzy
 msgid "Meeting"
 msgstr "Silinir..."
@@ -4973,6 +5013,9 @@ msgstr "Siz əməkdaşlığa dəvət edilinirsiniz!"
 #, fuzzy
 msgid "Edit Application"
 msgstr "Tətbiqin adı"
+
+msgid "You are an admin, but because you created this conference you have not yet officially applied for participation. If you wish to do this to make your attendance official, you may fill out an application by clicking here"
+msgstr ""
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -5766,18 +5809,6 @@ msgstr "Tamam"
 msgid "Toggle navigation"
 msgstr "Naviqasiyanı keçirin"
 
-msgid "My Profile"
-msgstr "Mənim Hesabım"
-
-msgid "Your Contribution"
-msgstr "Sizin töhfəniz"
-
-msgid "Logout"
-msgstr "Çıxış"
-
-msgid "Forum"
-msgstr "Forum"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "İnsanlar"
@@ -5846,6 +5877,9 @@ msgstr "Oxudum və qəbul etdim"
 
 msgid "Terms and Services"
 msgstr "Şərtlər və Xidmətlər"
+
+msgid "Yes, I want to be involved in what is going on and receive a newsletter about news and events."
+msgstr ""
 
 msgid "Forgot password?"
 msgstr "Şifrəni unutmusunuz?"
@@ -7020,6 +7054,10 @@ msgstr "Sizinlə əməkdaşlıq etmək istəyən digər istifadəçilərlə əla
 
 msgid "I am open for cooperation requests"
 msgstr "Əməkdaşlıq tələbləri üçün açığam"
+
+#, fuzzy
+msgid "News via the newsletter"
+msgstr "İstifadəçi Yaradın"
 
 msgid "Welcome!"
 msgstr "Xoş gəlmişiniz!"
@@ -8242,6 +8280,9 @@ msgid "New verification email sent!"
 msgstr ""
 
 msgid "We have just now sent another email with a new verification link to you. If the email still has not arrived, you may log in again to receive yet another new email."
+msgstr ""
+
+msgid "A problem occurred when logging out from RocketChat. You might want to logout manually when the service is available again."
 msgstr ""
 
 #, fuzzy
@@ -9530,9 +9571,6 @@ msgstr ""
 msgid "Embed code (HTML)"
 msgstr ""
 
-msgid "Presentation file"
-msgstr ""
-
 msgid "Enable Streaming"
 msgstr ""
 
@@ -9794,6 +9832,9 @@ msgstr ""
 
 msgid "Enter a title for the new event."
 msgstr "Yeni tədbir üçün başlıq daxil edin."
+
+msgid "Choose the type of the video conference you would like for the event"
+msgstr ""
 
 msgid "The first uploaded image will be displayed as a wallpaper."
 msgstr "İlk yüklənən şəkil divar kağızı şəklində göstəriləcək."
@@ -10892,6 +10933,12 @@ msgstr "Əlavə Alıcılar"
 msgid "Undefined recipient."
 msgstr "Müəyyən edilməmiş alıcı."
 
+msgid "We are currently experiencing some technical difficulties with the RocketChat service and some of your actions may not have had an effect. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
+msgid "A technical error occurred in the RocketChat service. Some of your actions may not have had an effect. We are working on resolving the issue. Please try again later. We apologize for the inconveniences!"
+msgstr ""
+
 #, fuzzy
 msgid "Contact request"
 msgstr "İstifadəçini qəbul edin"
@@ -10958,7 +11005,7 @@ msgstr ""
 "Qeyd: Bu mesaj avtomatlaşdırılmış sistemi tərəfindən verilmişdir. \n"
 "Cavab yazmayın, bu nəzər alınmayacaq."
 
-msgid "Go to chat"
+msgid "Reload chat"
 msgstr ""
 
 msgid "Archived Messages"
@@ -13569,6 +13616,10 @@ msgstr "\"%(title)s\" görüləsi işi əlavə edilə bilmədi."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Bu qovluğu silə bilməzsiniz, çünki tərkibindəki bir və ya daha çox elementi silmək icazəniz yoxdur!"
+
+#, fuzzy
+#~ msgid "Premium Bookings"
+#~ msgstr "Tədbir Yaradın"
 
 #, fuzzy
 #~ msgid ""
