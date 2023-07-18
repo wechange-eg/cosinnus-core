@@ -3967,7 +3967,7 @@ msgid "Here you can send a message to the admins."
 msgstr "Hier kannst du eine Nachricht an die Admins schicken."
 
 msgid "Your Deactivated Content"
-msgstr "Deine deaktivierte Inhalte"
+msgstr "Deine deaktivierten Inhalte"
 
 msgid "Warning!"
 msgstr "Achtung!"
