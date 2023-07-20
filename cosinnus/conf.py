@@ -1142,7 +1142,15 @@ class CosinnusConf(AppConf):
     ]
     
     CONFERENCE_USE_PARTICIPATION_FIELD_HIDDEN = False
-    
+
+    # Settings for portal specific user data used for the conference statistics.
+    # Contains a list of dynamic_fields field names and optional a name for the cosinnus_profile managed tags value.
+    CONFERENCE_STATISTICS_USER_DATA_FIELDS = []
+
+    # Optionally define which field of the CONFERENCE_STATISTICS_USER_DATA_FIELDS if populated from the cosinnus_profile
+    # managed tags value.
+    CONFERENCE_STATISTICS_USER_DATA_MANAGED_TAGS_FIELD = None
+
     # enable display and forms for managed tags
     MANAGED_TAGS_ENABLED = False
     # allows assigning multiple managed tags to objects

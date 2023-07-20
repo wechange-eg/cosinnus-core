@@ -1,0 +1,135 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block page_title %}
+    {% trans "Conference Statistics" %} {{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="active">{% trans "Conference Statistics" %}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus/group/leftnav_group.html"  with current_page="conferenceroommanagement" %}
+{% endblock leftnav %}
+
+{% block content %}
+    <p class="large-space">
+        <i class="fa fa-info-circle"></i> {% trans 'Note: Attendance statistics might not include all attendees, as users may block tracking.' %}
+    </p>
+    <div class="content-box">
+        <h2>{% trans "Conference Statistics" %}</h2>
+        <table class="table table-striped white-content">
+            <thead>
+                <tr>
+                    <td>{% trans "Conference Name" %}</td>
+                    <td>{% trans "Num. Invitations" %}</td>
+                    <td>{% trans "Num. Registrations" %}</td>
+                    <td>{% trans "Num. Attendees" %}</td>
+                    <td>{% trans "Avg. Time per Attendee" %}</td>
+                </tr>
+            </thead>
+            {% if conference_stats %}
+                <tr>
+                    <td>{{ conference_stats.conference_name }}</td>
+                    <td>{{ conference_stats.number_invitations }}</td>
+                    <td>{{ conference_stats.number_registrations }}</td>
+                    <td>{{ conference_stats.number_of_attendees }}</td>
+                    <td>{{ conference_stats.average_time_spent_per_attendee }} min</td>
+                </tr>
+            {% endif %}
+        </table>
+    </div><!-- content-box -->
+    <button type="button" class="btn btn-emphasized large-space" href="{% group_url 'cosinnus:conference:statistics-download' group=group %}">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left btn-extra-emphasized">
+                    <i class="fa fa-download"></i>
+                </span>
+                <div class="media-body">
+                    {% trans "Download" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    <div class="clearfix"></div>
+    <div class="content-box">
+        <h2>{% trans "Conference Event Statistics" %}</h2>
+        <table class="table table-striped white-content">
+            <thead>
+            <tr>
+                <td>{% trans "Event Name" %}</td>
+                <td>{% trans "Room Type" %}</td>
+                <td>{% trans "Duration" %}</td>
+                <td>{% trans "Num. Attendees" %}</td>
+                <td>{% trans "Avg. Time per Attendee" %}</td>
+                <td>{% trans "Attendance Percentage" %}</td>
+            </tr>
+            </thead>
+            {% for event in event_stats %}
+                <tr>
+                    <td>{{ event.name }}</td>
+                    <td>{{ event.room_type }}</td>
+                    <td>{{ event.duration }} min</td>
+                    <td>{{ event.number_of_attendees }}</td>
+                    <td>{{ event.average_time_spent_per_attendee }} min</td>
+                    <td>{{ event.average_time_spent_per_attendee_percent }}%</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div><!-- content-box -->
+    <button type="button" class="btn btn-emphasized large-space" href="{% group_url 'cosinnus:conference:event-statistics-download' group=group %}">
+        <ul class="media-list">
+            <li class="media">
+                <span class="pull-left btn-extra-emphasized">
+                    <i class="fa fa-download"></i>
+                </span>
+                <div class="media-body">
+                    {% trans "Download" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+    {% if user_data_fields and user_data %}
+        <div class="clearfix"></div>
+        <div class="content-box">
+            <h2>{% trans "Registered User Data Statistics" %}</h2>
+            <table class="table table-striped white-content">
+                <thead>
+                <tr>
+                    {% for user_data_field in user_data_fields %}
+                        <td colspan="2">{{ user_data_field }}</td>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tr>
+                    {% for field_data in user_data %}
+                        <td>
+                            {% for field_value, _ in field_data %}
+                                {{ field_value }}{% if not forloop.last %}<br>{% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for _, field_value_percent in field_data %}
+                                {{ field_value_percent }} %{% if not forloop.last %}<br>{% endif %}
+                            {% endfor %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </div><!-- content-box -->
+        <button type="button" class="btn btn-emphasized large-space" href="{% group_url 'cosinnus:conference:user-data-download' group=group %}">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left btn-extra-emphasized">
+                        <i class="fa fa-download"></i>
+                    </span>
+                    <div class="media-body">
+                        {% trans "Download" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+    {% endif %}
+{% endblock content %}
