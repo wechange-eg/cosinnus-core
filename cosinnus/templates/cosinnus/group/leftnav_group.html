@@ -24,6 +24,8 @@
     {% captureas is_conference_applications %}True{% endcaptureas %}
 {% elif current_page == "conferenceeventmanagement" %}
     {% captureas is_conferenceeventmanagement %}True{% endcaptureas %}
+{% elif current_page == "conferencestatistics" %}
+    {% captureas is_conferencestatistics %}True{% endcaptureas %}
 {% endif %}
 
 {% if user|has_write_access:object %}
@@ -54,7 +56,11 @@
     {% captureas href %}{% group_url 'cosinnus:conference:recorded-meetings' group=group %}{% endcaptureas %}
     {% captureas label %}{% trans "Recorded Meetings" %}{% endcaptureas %}
     {% include "cosinnus/leftnav_button.html" with active=is_recordedmeetings extra_classes="fine-space" icon_full_class="fas fa-video" label=label href=href  %}
-    
+
+    {% captureas href %}{% group_url 'cosinnus:conference:statistics' group=group %}{% endcaptureas %}
+    {% captureas label %}{% trans "Statistics" %}{% endcaptureas %}
+    {% include "cosinnus/leftnav_button.html" with active=is_conferencestatistics extra_classes="fine-space" icon_full_class="fas fa-table" label=label href=href  %}
+
     <div class="small-space">&nbsp;</div>
     
     {% if group.use_conference_applications %}

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-13 17:07+0200\n"
+"POT-Creation-Date: 2023-07-24 15:46+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3646,6 +3646,54 @@ msgid "Allow recording"
 msgstr ""
 
 #, fuzzy
+msgid "Conference Statistics"
+msgstr "Projects"
+
+msgid "Note: Attendance statistics might not include all attendees, as users may block tracking."
+msgstr ""
+
+#, fuzzy
+msgid "Conference Name"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Num. Invitations"
+msgstr "There are no groups."
+
+#, fuzzy
+msgid "Num. Registrations"
+msgstr "There are no groups."
+
+msgid "Num. Attendees"
+msgstr ""
+
+msgid "Avg. Time per Attendee"
+msgstr ""
+
+msgid "Download"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Event Statistics"
+msgstr "%s - Events"
+
+msgid "Event Name"
+msgstr ""
+
+#, fuzzy
+msgid "Room Type"
+msgstr "Project Type"
+
+msgid "Duration"
+msgstr ""
+
+msgid "Attendance Percentage"
+msgstr ""
+
+msgid "Registered User Data Statistics"
+msgstr ""
+
+#, fuzzy
 msgid "Temporary Users"
 msgstr "Create Project"
 
@@ -4947,6 +4995,9 @@ msgstr "All Groups"
 msgid "All Projects"
 msgstr "All Projects"
 
+msgid "Statistics"
+msgstr ""
+
 msgid "Temporary User Accounts"
 msgstr ""
 
@@ -5120,9 +5171,6 @@ msgid "Folder name"
 msgstr ""
 
 msgid "Delete folder"
-msgstr ""
-
-msgid "Download"
 msgstr ""
 
 msgid "Do you really want to delete this folder and ALL folders and items it contains? This actions CANNOT be reversed!"
@@ -8764,6 +8812,15 @@ msgid "Option"
 msgstr ""
 
 msgid "Status"
+msgstr ""
+
+msgid "An error occurred while connecting to the analytics server. Please try again later."
+msgstr ""
+
+msgid "PIWIK configuration incomplete for tracking."
+msgstr ""
+
+msgid "Statistics are only available for conferences with a start- and end-date."
 msgstr ""
 
 msgid "The following Pads were re-initialized:"
@@ -13102,10 +13159,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
 #~ msgstr "Do you really want to leave project „%(title)s“?"
-
-#, fuzzy
-#~ msgid "Room Type"
-#~ msgstr "Project Type"
 
 #~ msgid "All groups"
 #~ msgstr "All projects"

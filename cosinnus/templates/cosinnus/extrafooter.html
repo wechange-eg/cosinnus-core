@@ -1,25 +1,28 @@
 {% if request.user.is_authenticated and not request.GET.disableextrascripts %}
 
-	{% if SETTINGS.PIWIK_SERVER_URL and SETTINGS.PIWIK_SITE_ID and not SETTINGS.DEBUG %}
-	<!-- Piwik -->
-	<script type="text/javascript">
-	  var _paq = _paq || [];
-	  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-	  {% if not user.is_authenticated %}
-	  _paq.push(['disableCookies']);
-	  {% endif %}
-	  _paq.push(['trackPageView']);
-	  _paq.push(['enableLinkTracking']);
-	  (function() {
-	    var u="{{ SETTINGS.PIWIK_SERVER_URL }}";
-	    _paq.push(['setTrackerUrl', u+'piwik.php']);
-	    _paq.push(['setSiteId', '{{ SETTINGS.PIWIK_SITE_ID }}']);
-	    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-	    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-	  })();
-	</script>
-	<!-- End Piwik Code -->
-	{% endif %}
+    {% if SETTINGS.PIWIK_SERVER_URL and SETTINGS.PIWIK_SITE_ID and not SETTINGS.DEBUG %}
+        <!-- Matomo -->
+        <script>
+            var _paq = window._paq = window._paq || [];
+            /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+            {% if not user.is_authenticated %}
+            _paq.push(['disableCookies']);
+            {% else %}
+            _paq.push(['setUserId', '{{user.id}}']);
+            {% endif %}
+            _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function() {
+                var u="{{ SETTINGS.PIWIK_SERVER_URL }}";
+                _paq.push(['setTrackerUrl', u+'matomo.php']);
+                _paq.push(['setSiteId', '{{ SETTINGS.PIWIK_SITE_ID }}']);
+                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+                g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+            })();
+        </script>
+        <!-- End Matomo Code -->
+    {% endif %}
 
 {% endif %}
 

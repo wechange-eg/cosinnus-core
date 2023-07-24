@@ -43,6 +43,10 @@ cosinnus_group_patterns = [
     url(r'^apply/$', views.conference_application,
         name='application'),
 
+    url(r'^statistics/$', views.conference_statistics, name='statistics'),
+    url(r'^statistics/download/$', views.conference_statistics_download, name='statistics-download'),
+    url(r'^statistics/download/events/$', views.conference_event_statistics_download, name='event-statistics-download'),
+    url(r'^statistics/download/users/$', views.conference_user_data_download, name='user-data-download'),
 
     url(r'^$', views.conference_page,
         name='index'),
