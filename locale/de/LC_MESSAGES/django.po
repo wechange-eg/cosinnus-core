@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-24 13:37+0200\n"
+"POT-Creation-Date: 2023-07-24 15:46+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3518,6 +3518,48 @@ msgstr "Kamera beim Betreten aktivieren"
 msgid "Allow recording"
 msgstr "Aufnahme erlauben"
 
+msgid "Conference Statistics"
+msgstr "Tagungs-Statistiken"
+
+msgid "Note: Attendance statistics might not include all attendees, as users may block tracking."
+msgstr "Hinweis: Teilnahme-Statistiken könnten unvollständig sein, weil Teilnehmende Tracking blockieren können."
+
+msgid "Conference Name"
+msgstr "Tagungsname"
+
+msgid "Num. Invitations"
+msgstr "Anzahl Einladungen"
+
+msgid "Num. Registrations"
+msgstr "Anzahl Registrierungen"
+
+msgid "Num. Attendees"
+msgstr "Anzahl Teilnehmende"
+
+msgid "Avg. Time per Attendee"
+msgstr "Durchschnittliche Teilnahmedauer"
+
+msgid "Download"
+msgstr "Download"
+
+msgid "Conference Event Statistics"
+msgstr "Veranstaltungs-Statistiken"
+
+msgid "Event Name"
+msgstr "Veranstaltungsname"
+
+msgid "Room Type"
+msgstr "Raumtyp"
+
+msgid "Duration"
+msgstr "Dauer"
+
+msgid "Attendance Percentage"
+msgstr "Durchschnittliche Teilnahme"
+
+msgid "Registered User Data Statistics"
+msgstr "Statistiken zu Daten registrierter Teilnehmender"
+
 msgid "Temporary Users"
 msgstr "Temporäre Benutzerkonten"
 
@@ -4769,6 +4811,9 @@ msgstr "Alle Gruppen"
 msgid "All Projects"
 msgstr "Alle Projekte"
 
+msgid "Statistics"
+msgstr "Statistiken"
+
 msgid "Temporary User Accounts"
 msgstr "Temporäre Benutzerkonten"
 
@@ -4926,9 +4971,6 @@ msgstr "Ordnername"
 
 msgid "Delete folder"
 msgstr "Ordner löschen"
-
-msgid "Download"
-msgstr "Download"
 
 msgid "Do you really want to delete this folder and ALL folders and items it contains? This actions CANNOT be reversed!"
 msgstr "Willst du diesen Ordner und ALLE Unterordner und Elemente die er enthält endgültig löschen? Dies kann nicht rückgängig gemacht werden!"
@@ -8638,6 +8680,15 @@ msgstr "Option"
 
 msgid "Status"
 msgstr "Status"
+
+msgid "An error occurred while connecting to the analytics server. Please try again later."
+msgstr "Leider ist bei der Verbindung zum Analytics-Server ein Fehler aufgetreten. Bitte versuch es später erneut."
+
+msgid "PIWIK configuration incomplete for tracking."
+msgstr "PIWIK Konfiguration ist unvollständig zum Tracking."
+
+msgid "Statistics are only available for conferences with a start- and end-date."
+msgstr "Statistiken sind nur für Konferenzen mit Start- und Enddatum verfügbar."
 
 msgid "The following Pads were re-initialized:"
 msgstr "The following Pads were re-initialized:"
@@ -13316,9 +13367,6 @@ msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte
 
 #~ msgid "the rooms welcome message"
 #~ msgstr "Die Begrüßungsnachricht der Räume"
-
-#~ msgid "Room Type"
-#~ msgstr "Raumtyp"
 
 #~ msgid "Whether the microphone is active when entering the BBB room"
 #~ msgstr "Ob das Mikrofon aktiviert ist, wenn man den BBB-Raum betritt"
