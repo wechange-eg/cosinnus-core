@@ -68,6 +68,21 @@
         </div>
     {% endif %}
 
+    {% if SETTINGS.COSINNUS_USER_EXPORT_ADMINISTRATION_VIEWS_ENABLED %}
+        <div type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:administration-user-export' %}">
+            <ul class="media-list">
+                <li class="media">
+                <span class="pull-left">
+                        <i class="fa fa-download"></i>
+                    </span>
+                    <div class="media-body">
+                        {% trans "User Export" %}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+
 
     {% if SETTINGS.COSINNUS_DYNAMIC_FIELD_ADMINISTRATION_VIEWS_ENABLED %}
     <div type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:administration-dynamic-fields' %}">

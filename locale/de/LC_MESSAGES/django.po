@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-13 13:31+0200\n"
+"POT-Creation-Date: 2023-07-24 13:37+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2565,6 +2565,9 @@ msgstr "Benutzermanagement"
 
 msgid "User Import"
 msgstr "Benutzer-Import"
+
+msgid "User Export"
+msgstr "Benutzer-Export"
 
 msgid "User Profile Field Choices"
 msgstr "Benutzerprofil-Feldwerte"
@@ -7024,6 +7027,48 @@ msgstr "Benutzer kann eine Ankündigungen wegklicken, woraufhin sie verschwindet
 msgid "There are no announcements yet."
 msgstr "Noch keine Ankündigungen vorhanden."
 
+msgid "Start user export"
+msgstr "Benutzer-Export starten"
+
+msgid "You can start a user export. As soon as the export is finished it will be available here."
+msgstr "Benutzer-Export kann gestartet werden. Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
+
+msgid "The export is currently running..."
+msgstr "Benutzer-Export läuft gerade..."
+
+msgid "A user export is in progress. As soon as the export is finished it will be available here."
+msgstr "Der Benutzer-Export wird gerade erstellt.  Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
+
+msgid "User export finished"
+msgstr "Benutzer-Export abgeschlossen"
+
+msgid "You can download the latest user export data."
+msgstr "Der zuletzt erstellte Benutzer-Export kann heruntergeladen werden."
+
+msgid "Download user exports from"
+msgstr "Benutzer-Export herunterladen vom"
+
+msgid "Download user export as"
+msgstr "Benutzer-Export herunterladen als"
+
+msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
+msgstr "Achtung: Aus Sicherheitsgründen sind die Export-Daten nur temporär verfügbar und werden automatisch nach einer gewissen Zeit gelöscht."
+
+msgid "An error has occurred"
+msgstr "Ein Fehler ist aufgetreten."
+
+msgid "Sorry, an error occurred during the user export. Please try again later."
+msgstr "Leider ist bei dem Benutzer-Export ein Fehler aufgetreten. Bitte versuch es später erneut."
+
+msgid "Delete export data and start new user export"
+msgstr "Export-Daten löschen und neuen Benutzer-Export starten"
+
+msgid "Retry user export"
+msgstr "Benutzer-Export erneut starten"
+
+msgid "Delete exported data"
+msgstr "Export-Daten löschen"
+
 msgid "User Import Archive"
 msgstr "User Import Archiv"
 
@@ -8378,6 +8423,9 @@ msgstr "Deine Ankündigung wurde erfolgreich bearbeitet."
 
 msgid "Your Announcement was deactivated successfully."
 msgstr "Deine Ankündigung wurde erfolgreich bearbeitet."
+
+msgid "Another export is currently running!"
+msgstr "Ein anderer Export läuft gerade!"
 
 msgid "The Archived User Import Entry was deleted successfully."
 msgstr "Der archivierte Benutzerimport-Eintrag wurde erfolgreich gelöscht."
@@ -13060,6 +13108,9 @@ msgstr "Aufgabenliste „%(title)s“ konnte nicht hinzugefügt werden."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte hast eins oder mehrere der noch enthaltenen Objekte zu löschen!"
+
+#~ msgid "Timestamp of user export"
+#~ msgstr "Zeitstempel des Benutzer-Exports"
 
 #~ msgid "BBB-Meetings are a premium feature."
 #~ msgstr "BBB-Meetings sind ein Premium-Feature."

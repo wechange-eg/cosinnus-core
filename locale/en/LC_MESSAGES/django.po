@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-13 13:31+0200\n"
+"POT-Creation-Date: 2023-07-13 17:07+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2678,6 +2678,9 @@ msgid "User Management"
 msgstr ""
 
 msgid "User Import"
+msgstr ""
+
+msgid "User Export"
 msgstr ""
 
 msgid "User Profile Field Choices"
@@ -7105,6 +7108,49 @@ msgstr ""
 msgid "There are no announcements yet."
 msgstr "There are no groups."
 
+msgid "Start user export"
+msgstr ""
+
+msgid "You can start a user export. As soon as the export is finished it will be available here."
+msgstr ""
+
+msgid "The export is currently running..."
+msgstr ""
+
+msgid "A user export is in progress. As soon as the export is finished it will be available here."
+msgstr ""
+
+msgid "User export finished"
+msgstr ""
+
+msgid "You can download the latest user export data."
+msgstr ""
+
+msgid "Download user exports from"
+msgstr ""
+
+msgid "Download user export as"
+msgstr ""
+
+msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
+msgstr ""
+
+msgid "An error has occurred"
+msgstr ""
+
+msgid "Sorry, an error occurred during the user export. Please try again later."
+msgstr ""
+
+msgid "Delete export data and start new user export"
+msgstr ""
+
+msgid "Retry user export"
+msgstr ""
+
+#, fuzzy
+msgid "Delete exported data"
+msgstr "There are no groups."
+
 msgid "User Import Archive"
 msgstr ""
 
@@ -8499,6 +8545,9 @@ msgid "Your Announcement was activated successfully."
 msgstr ""
 
 msgid "Your Announcement was deactivated successfully."
+msgstr ""
+
+msgid "Another export is currently running!"
 msgstr ""
 
 msgid "The Archived User Import Entry was deleted successfully."
