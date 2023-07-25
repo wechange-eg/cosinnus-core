@@ -200,6 +200,20 @@ class UnreadAlertsViewTest(TestAlertsMixin, APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertDictEqual(response.data, {'count': 1})
 
+    def test_mark_as_read(self):
+        self.create_test_alert(seen=False)
+        self.client.force_login(self.test_user)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertDictEqual(response.data, {'count': 1})
+
+        mark_as_readr_url = reverse("cosinnus:frontend-api:api-navigation-alerts") + '?mark_as_read=true'
+        response = self.client.get(mark_as_readr_url)
+        self.assertEqual(response.status_code, 200)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertDictEqual(response.data, {'count': 0})
+
 
 class AlertsViewTest(TestAlertsMixin, APITestCase):
 
@@ -282,6 +296,14 @@ class AlertsViewTest(TestAlertsMixin, APITestCase):
         self.assertEqual(len(response.data['items']), 1)
         self.assertEqual(response.data['items'][0]['id'], alert2.pk)
         self.assertEqual(response.data['newest_timestamp'], alert2_timestamp)
+
+    def test_alerts_mark_as_read(self):
+        self.client.force_login(self.test_user)
+        alert = self.create_test_alert()
+        response = self.client.get(self.api_url)
+        self.assertTrue(response.data['items'][0]['is_emphasized'])
+        response = self.client.get(self.api_url + '?mark_as_read=true')
+        self.assertFalse(response.data['items'][0]['is_emphasized'])
 
 
 class HelpViewTest(APITestCase):
