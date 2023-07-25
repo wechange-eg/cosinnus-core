@@ -35,7 +35,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
     - Projects and Groups: users projects and groups
     - Community: Forum and Map
     - Conferences: users conferences
-    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional) and image url (optional).
+    Each menu item consists of a label (Markdown), url, icon (Font Awesome class, optional), image url (optional) and
+    badge (optional).
     """
 
     permission_classes = (IsAuthenticated,)
@@ -203,7 +204,8 @@ class BookmarksView(APIView):
     """
     An endpoint that provides the user bookmarks for the main navigation.
     Returns menu items for liked groups and projects, liked users and liked content (e.g. ideas).
-    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional) and image url (optional).
+    Each menu item consists of a label (Markdown), url, icon (Font Awesome class, optional), image url (optional) and
+    badge (optional).
     """
 
     permission_classes = (IsAuthenticated,)
@@ -554,7 +556,8 @@ class AlertsView(APIView):
 class HelpView(APIView):
     """
     An endpoint that returns a list of help menu items for the main navigation.
-    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional) and image url (optional).
+    Each menu item consists of a label (Markdown), url, icon (Font Awesome class, optional), image url (optional) and
+    badge (optional).
     """
 
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
@@ -600,7 +603,8 @@ class ProfileView(APIView):
     An endpoint that provides user profile menu items for the main navigation.
     Returns a list of menu items for user profile and notification settings, contribution, administration, logout and a
     language switcher item. The language switcher item contains a list of menu items for the available languages.
-    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional) and image url (optional).
+    Each menu item consists of a label (Markdown), url, icon (Font Awesome class, optional), image url (optional) and
+    badge (optional).
     """
 
     permission_classes = (IsAuthenticated,)
@@ -680,10 +684,14 @@ class ProfileView(APIView):
             profile_menu.append(language_item)
 
         # payments
-        # TODO: consider my_contribution_badge
         if settings.COSINNUS_PAYMENTS_ENABLED or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY \
                 and request.user.is_superuser:
-            payments_item = MenuItem(_('Your Contribution'), reverse('wechange-payments:overview'), 'fa-hand-holding-hart')
+            from wechange_payments.models import Subscription
+            current_subscription = Subscription.get_current_for_user(request.user)
+            contribution = int(current_subscription.amount) if current_subscription else 0
+            contribution_badge = f'{contribution} €'
+            payments_item = MenuItem(_('Your Contribution'), reverse('wechange-payments:overview'),
+                                     'fa-hand-holding-hart', badge=contribution_badge)
             profile_menu.append(payments_item)
 
         # administration
