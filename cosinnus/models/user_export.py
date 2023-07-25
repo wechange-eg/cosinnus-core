@@ -142,6 +142,8 @@ class CosinnusUserExportProcessorBase(object):
                 field_value = user.cosinnus_profile.dynamic_fields[field]
                 if field_value is not None:
                     value = self.format_dynamic_field_value(field, field_value)
+            if value is None:
+                value = ''
             row.append(value)
         return row
 
