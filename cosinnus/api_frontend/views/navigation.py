@@ -168,14 +168,29 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
         if forum_slug:
             forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
-            if forum_group and settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL:
-                community_space_items.append(
-                    MenuItem(settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL, forum_group.get_absolute_url(), 'fa-sitemap')
-                )
+            if forum_group:
+                if settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS:
+                    # Add paired_groups of managed tags to community space.
+                    managed_tags = self.request.user.cosinnus_profile.get_managed_tags()
+                    if managed_tags:
+                        for tag in managed_tags:
+                            if tag.paired_group and tag.paired_group != forum_group:
+                                community_space_items.append(
+                                    MenuItem(tag.paired_group.name, tag.paired_group.get_absolute_url(), 'fa-group')
+                                )
+                if settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL:
+                    community_space_items.append(
+                        MenuItem(settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL, forum_group.get_absolute_url(), 'fa-sitemap')
+                    )
         if settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL:
             community_space_items.append(
                 MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, reverse('cosinnus:map'), 'fa-group')
             )
+        if settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS:
+            community_space_items.extend([
+                MenuItem(label, url, icon)
+                for label, url, icon in settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS
+            ])
         community_space = {
             'items': community_space_items,
             'actions': [],

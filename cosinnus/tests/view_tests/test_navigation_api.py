@@ -10,6 +10,7 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
+from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignment
 from cosinnus.models.tagged import LikeObject
 from cosinnus.models.user_dashboard import MenuItem
 from cosinnus.tests.utils import reload_urlconf
@@ -87,6 +88,31 @@ class SpacesViewTest(APITestCase):
                 ],
                 'actions': []
             }
+        )
+
+    @override_settings(COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS=[('External', 'https://example.com/', 'fa-group')])
+    def test_community_space_additional_links(self):
+        self.client.force_login(self.test_user)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.data['community']['items'][1],
+            MenuItem('External', 'https://example.com/', 'fa-group')
+        )
+
+    @override_settings(COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS=True)
+    def test_community_space_from_managed_tags(self):
+        CosinnusSociety.objects.create(slug=settings.NEWW_FORUM_GROUP_SLUG, name=settings.NEWW_FORUM_GROUP_SLUG)
+        tag_group = CosinnusSociety.objects.create(name='Test Group')
+        tag_slug = 'test_tag'
+        CosinnusManagedTag.objects.create(slug=tag_slug, paired_group=tag_group)
+        CosinnusManagedTagAssignment.assign_managed_tag_to_object(self.test_user.cosinnus_profile, tag_slug)
+        self.client.force_login(self.test_user)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.data['community']['items'][0],
+            MenuItem(tag_group.name, tag_group.get_absolute_url(), 'fa-group')
         )
 
 

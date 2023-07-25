@@ -896,11 +896,18 @@ class CosinnusConf(AppConf):
         "^api/auth/",
     ]
 
-    # Forum space label in the v3 main navigation.
+    # Forum space label in the v3 main navigation. Set to None to exclude forum from the community space.
     V3_MENU_SPACES_FORUM_LABEL = _('Forum')
 
-    # Map space label in the v3 main navigation.
+    # Map space label in the v3 main navigation. Set to None to exclude the map from the community space.
     V3_MENU_SPACES_MAP_LABEL = _('Map')
+
+    # Enable to add links to paired groups of managed tags of the user cosinnus_profile as community links.
+    V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS = False
+
+    # Additional menu items for the community space in the v3 main navigation.
+    # Format: List of (<label>, <url>, <icon>), e.g.: [('External Forum', 'https://custom-forum.com', 'fa-group')]
+    V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS = []
 
     # List of help items to be included in the v3 main navigation.
     # Format: (<label>, <url>, <icon>), e.g.: (_('FAQ'), 'https://wechange.de/cms/help/', 'fa-question-circle'),
