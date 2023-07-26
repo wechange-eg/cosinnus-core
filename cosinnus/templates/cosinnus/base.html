@@ -187,7 +187,7 @@
                     {# this fixes the breadcrumb being unclickable in mobile views #}
                     <div class="visible-xs visible-sm clearfix"></div>
 
-                    <div class="col-lg-9 col-md-9">
+                    <div {% block content_class %}class="col-lg-9 col-md-9"{% endblock content_class %}>
                         <div class="row">
                             <div class="col-xs-12">
                                 {% block override_breadcrumb %}
