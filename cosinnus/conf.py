@@ -265,7 +265,7 @@ class CosinnusConf(AppConf):
     
     # a list of which app checkboxes should be default-active on the create group form
     # Deactivating several group apps by default
-    COSINNUS_DEFAULT_ACTIVE_GROUP_APPS = [
+    DEFAULT_ACTIVE_GROUP_APPS = [
         'cosinnus_cloud',
         'cosinnus_conference',
         'cosinnus_exchange',
