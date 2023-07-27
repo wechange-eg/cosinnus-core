@@ -1242,15 +1242,16 @@ class ConferencePiwikAttendanceTrackingMixin:
         site_id = str(settings.PIWIK_SITE_ID)
         token = settings.PIWIK_API_TOKEN
         date_string = self.group.from_date.strftime("%Y-%m-%d") + ',' + self.group.to_date.strftime("%Y-%m-%d")
-        response = requests.get('https:' + piwik_url + 'index.php?date=' + date_string + '&expanded=1&filter_limit=-1&flat=1&force_api_session=1&format=JSON&format_metrics=1&idSite=' + site_id + '&method=Events.getName&module=API&period=range&segment=eventAction%3D%3Dattendance&token_auth=' + token)
+        response = requests.get('https:' + piwik_url + 'index.php?date=' + date_string + '&expanded=1&filter_limit=-1&flat=1&force_api_session=1&format=JSON&format_metrics=1&idSite=' + site_id + '&method=Events.getName&module=API&period=range&segment=eventCategory%3D%3DConferenceEvent&token_auth=' + token)
         piwik_attendance_tracking = response.json()
         return piwik_attendance_tracking
 
     def compute_attendance(self, piwik_event_data, piwik_event_name):
         """
         Computes basic attendance stats:
-          - number_of_attendees: equals "sum_daily_nb_uniq_visitors"
-          - average_time_spend_per_attendee: "sum_event_value" (overall time) / "sum_daily_nb_uniq_visitors"
+          - number_of_attendees: equals "nb_uniq_visitors" or "sum_daily_nb_uniq_visitors" depending on the conference
+                                 date range.
+          - average_time_spend_per_attendee: "sum_event_value" (overall time) / number_of_attendees.
         """
         piwik_event_attendance = {
             'number_of_attendees': 0,
@@ -1258,9 +1259,13 @@ class ConferencePiwikAttendanceTrackingMixin:
         }
         attendance = next((att for att in piwik_event_data if att['Events_EventName'] == piwik_event_name), {})
         if attendance:
-            avg_time_per_attendee = round(attendance.get("sum_event_value", 0) / attendance.get("sum_daily_nb_uniq_visitors", 1))
+            if "nb_uniq_visitors" in attendance:
+                number_of_attendees = attendance.get("nb_uniq_visitors", 0)
+            else:
+                number_of_attendees = attendance.get("sum_daily_nb_uniq_visitors", 0)
+            avg_time_per_attendee = round(attendance.get("sum_event_value", 0) / max(number_of_attendees, 1))
             piwik_event_attendance.update({
-                'number_of_attendees': attendance.get("sum_daily_nb_uniq_visitors", 0),
+                'number_of_attendees': number_of_attendees,
                 'average_time_spent_per_attendee': avg_time_per_attendee,
             })
         return piwik_event_attendance
