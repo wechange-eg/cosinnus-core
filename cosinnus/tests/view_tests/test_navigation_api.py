@@ -225,8 +225,8 @@ class UnreadAlertsViewTest(TestAlertsMixin, APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertDictEqual(response.data, {'count': 1})
 
-        mark_as_readr_url = reverse("cosinnus:frontend-api:api-navigation-alerts") + '?mark_as_read=true'
-        response = self.client.get(mark_as_readr_url)
+        mark_as_read_url = reverse("cosinnus:frontend-api:api-navigation-alerts") + '?mark_as_read=true'
+        response = self.client.get(mark_as_read_url)
         self.assertEqual(response.status_code, 200)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
@@ -344,6 +344,8 @@ class HelpViewTest(APITestCase):
 
 
 class ProfileViewTest(APITestCase):
+    
+    maxDiff = None
 
     @classmethod
     def setUpClass(cls):
