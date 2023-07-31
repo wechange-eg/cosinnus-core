@@ -61,10 +61,11 @@ class CosinnusUserExportView(RequireSuperuserMixin, TemplateView):
 user_export_view = CosinnusUserExportView.as_view()
 
 
-class CosinnusUserExportCSVDownloadView(RequireSuperuserMixin, View):
+class CosinnusUserExportDownloadBaseView(RequireSuperuserMixin, View):
 
     http_method_names = ['get']
     export_processor = CosinnusUserExportProcessor()
+    export_response_function = None
 
     def get(self, request, *args, **kwargs):
         data = self.export_processor.get_current_export_csv()
@@ -72,24 +73,21 @@ class CosinnusUserExportCSVDownloadView(RequireSuperuserMixin, View):
             raise Http404
         header = self.export_processor.get_header()
         filename = self.export_processor.get_filename()
-        response = make_csv_response(data, header, filename)
+        response = self.__class__.export_response_function(data, header, filename)
         return response
+
+
+class CosinnusUserExportCSVDownloadView(CosinnusUserExportDownloadBaseView):
+
+    export_response_function = make_csv_response
+
 
 user_export_csv_download_view = CosinnusUserExportCSVDownloadView.as_view()
 
 
-class CosinnusUserExportXLSXDownloadView(RequireSuperuserMixin, View):
+class CosinnusUserExportXLSXDownloadView(CosinnusUserExportDownloadBaseView):
 
-    http_method_names = ['get']
-    export_processor = CosinnusUserExportProcessor()
+    export_response_function = make_xlsx_response
 
-    def get(self, request, *args, **kwargs):
-        data = self.export_processor.get_current_export_csv()
-        if not data:
-            raise Http404
-        header = self.export_processor.get_header()
-        filename = self.export_processor.get_filename()
-        response = make_xlsx_response(data, header, filename)
-        return response
 
 user_export_xlsx_download_view = CosinnusUserExportXLSXDownloadView.as_view()
