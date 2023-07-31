@@ -10,7 +10,10 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
+from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignment
 from cosinnus.models.tagged import LikeObject
+from cosinnus.models.user_dashboard import MenuItem
+from cosinnus.tests.utils import reload_urlconf
 from cosinnus.utils.dates import timestamp_from_datetime
 from cosinnus_notifications.models import NotificationAlert
 
@@ -46,12 +49,7 @@ class SpacesViewTest(APITestCase):
             response.data['personal'],
             {
                 'items': [
-                    {
-                        'icon': 'fa-user',
-                        'label': 'Personal Dashboard',
-                        'url': 'http://default domain/dashboard/',
-                        'image': None,
-                    }
+                    MenuItem('Personal Dashboard', '/dashboard/', 'fa-user')
                 ],
                 'actions': []
             }
@@ -67,11 +65,11 @@ class SpacesViewTest(APITestCase):
             response.data['groups'],
             {
                 'items': [
-                    {'icon': 'fa-sitemap', 'label': 'Test Group', 'url': 'http://default domain/group/test-group/', 'image': None}
+                    MenuItem('Test Group', '/group/test-group/', 'fa-sitemap')
                 ],
                 'actions': [
-                     {'icon': None, 'label': 'Create new Group', 'url': 'http://default domain/groups/add/', 'image': None},
-                     {'icon': None, 'label': 'Create new Project', 'url': 'http://default domain/projects/add/', 'image': None}
+                    MenuItem('Create new Group', '/groups/add/'),
+                    MenuItem('Create new Project', '/projects/add/')
                  ]
             }
         )
@@ -85,13 +83,36 @@ class SpacesViewTest(APITestCase):
             response.data['community'],
             {
                 'items': [
-                    {'icon': 'fa-sitemap', 'label': settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL,
-                     'url': forum.get_absolute_url(), 'image': None},
-                    {'icon': 'fa-group', 'label': settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL,
-                     'url': 'http://default domain/map/', 'image': None}
+                    MenuItem(settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL, forum.get_absolute_url(), 'fa-sitemap'),
+                    MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, '/map/', 'fa-group'),
                 ],
                 'actions': []
             }
+        )
+
+    @override_settings(COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS=[('External', 'https://example.com/', 'fa-group')])
+    def test_community_space_additional_links(self):
+        self.client.force_login(self.test_user)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.data['community']['items'][1],
+            MenuItem('External', 'https://example.com/', 'fa-group')
+        )
+
+    @override_settings(COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS=True)
+    def test_community_space_from_managed_tags(self):
+        CosinnusSociety.objects.create(slug=settings.NEWW_FORUM_GROUP_SLUG, name=settings.NEWW_FORUM_GROUP_SLUG)
+        tag_group = CosinnusSociety.objects.create(name='Test Group')
+        tag_slug = 'test_tag'
+        CosinnusManagedTag.objects.create(slug=tag_slug, paired_group=tag_group)
+        CosinnusManagedTagAssignment.assign_managed_tag_to_object(self.test_user.cosinnus_profile, tag_slug)
+        self.client.force_login(self.test_user)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.data['community']['items'][0],
+            MenuItem(tag_group.name, tag_group.get_absolute_url(), 'fa-group')
         )
 
 
@@ -116,9 +137,7 @@ class BookmarksViewTest(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertListEqual(
             response.data['groups'],
-            [
-                {'icon': 'fa-sitemap', 'label': 'Test Group', 'url': 'http://default domain/group/test-group/', 'image': None}
-            ]
+            [MenuItem('Test Group', '/group/test-group/', 'fa-sitemap')]
         )
 
     def test_user_bookmarks(self):
@@ -130,7 +149,7 @@ class BookmarksViewTest(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertListEqual(
             response.data['users'],
-            [{'icon': 'fa-user', 'label': 'Test User2', 'url': 'http://default domain/user/2/', 'image': None}]
+            [MenuItem('Test User2', '/user/2/', 'fa-user')]
         )
 
     def test_content_bookmarks(self):
@@ -141,8 +160,7 @@ class BookmarksViewTest(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertListEqual(
             response.data['content'],
-            [{'icon': 'fa-lightbulb-o', 'label': 'Test Idea',
-              'url': 'http://default domain/map/?item=1.ideas.test-idea', 'image': None}]
+            [MenuItem('Test Idea', '/map/?item=1.ideas.test-idea', 'fa-lightbulb-o')]
         )
 
 
@@ -199,6 +217,20 @@ class UnreadAlertsViewTest(TestAlertsMixin, APITestCase):
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
         self.assertDictEqual(response.data, {'count': 1})
+
+    def test_mark_as_read(self):
+        self.create_test_alert(seen=False)
+        self.client.force_login(self.test_user)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertDictEqual(response.data, {'count': 1})
+
+        mark_as_read_url = reverse("cosinnus:frontend-api:api-navigation-alerts") + '?mark_as_read=true'
+        response = self.client.get(mark_as_read_url)
+        self.assertEqual(response.status_code, 200)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertDictEqual(response.data, {'count': 0})
 
 
 class AlertsViewTest(TestAlertsMixin, APITestCase):
@@ -283,6 +315,14 @@ class AlertsViewTest(TestAlertsMixin, APITestCase):
         self.assertEqual(response.data['items'][0]['id'], alert2.pk)
         self.assertEqual(response.data['newest_timestamp'], alert2_timestamp)
 
+    def test_alerts_mark_as_read(self):
+        self.client.force_login(self.test_user)
+        alert = self.create_test_alert()
+        response = self.client.get(self.api_url)
+        self.assertTrue(response.data['items'][0]['is_emphasized'])
+        response = self.client.get(self.api_url + '?mark_as_read=true')
+        self.assertFalse(response.data['items'][0]['is_emphasized'])
+
 
 class HelpViewTest(APITestCase):
 
@@ -299,11 +339,13 @@ class HelpViewTest(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertListEqual(
             response.data,
-            [{'icon': 'fa-question-circle', 'label': 'FAQ', 'url': 'https://example.com/faq/', 'image': None}]
+            [MenuItem('FAQ', 'https://example.com/faq/', 'fa-question-circle')]
         )
 
 
 class ProfileViewTest(APITestCase):
+    
+    maxDiff = None
 
     @classmethod
     def setUpClass(cls):
@@ -321,18 +363,19 @@ class ProfileViewTest(APITestCase):
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
         expected_language_items = [
-            {'icon': None, 'label': language, 'url': f'http://default domain/language/{code}/', 'image': None}
-            for code, language in settings.LANGUAGES
+            MenuItem(language, f'/language/{code}/') for code, language in settings.LANGUAGES
         ]
+        expected_language_menu_item = MenuItem('Change Language', None, 'fa-language')
+        expected_language_menu_item['sub_items'] = expected_language_items
         self.assertListEqual(
             response.data,
             [
-                {'icon': 'fa-circle-user', 'label': 'My Profile', 'url': 'http://default domain/profile/', 'image': None},
-                {'icon': 'fa-pen', 'label': 'Set up my Profile', 'url': 'http://default domain/setup/profile/', 'image': None},
-                {'icon': 'fa-gear', 'label': 'Edit my Profile', 'url': 'http://default domain/profile/edit/', 'image': None},
-                {'icon': 'fa-envelope', 'label': 'Notification Preferences', 'url': 'http://default domain/profile/notifications/', 'image': None},
-                {'icon': 'fa-language', 'label': 'Change Language', 'url': None, 'image': None, 'sub_items': expected_language_items},
-                {'icon': 'fa-right-from-bracket', 'label': 'Logout', 'url': 'http://default domain/logout/', 'image': None},
+                MenuItem('My Profile', '/profile/', 'fa-circle-user'),
+                MenuItem('Set up my Profile', '/setup/profile/', 'fa-pen'),
+                MenuItem('Edit my Profile', '/profile/edit/', 'fa-gear'),
+                MenuItem('Notification Preferences', '/profile/notifications/', 'fa-envelope'),
+                expected_language_menu_item,
+                MenuItem('Logout', '/logout/', 'fa-right-from-bracket')
             ]
         )
 
@@ -343,6 +386,22 @@ class ProfileViewTest(APITestCase):
         response = self.client.get(self.api_url)
         self.assertEqual(
             response.data[5],
-            {'icon': 'fa-screwdriver-wrench', 'label': 'Administration', 'url': 'http://default domain/administration/', 'image': None}
+            MenuItem('Administration', '/administration/', 'fa-screwdriver-wrench')
+        )
+
+    @override_settings(COSINNUS_PAYMENTS_ENABLED=True)
+    def test_contribution(self):
+        from wechange_payments.models import Subscription, Payment
+        payment = Payment.objects.create(user=self.test_user)
+        Subscription.objects.create(
+            user=self.test_user, amount=100, state=Subscription.STATE_2_ACTIVE, last_payment=payment,
+            reference_payment=payment
+        )
+        reload_urlconf()
+        self.client.force_login(self.test_user)
+        response = self.client.get(self.api_url)
+        self.assertEqual(
+            response.data[5],
+            MenuItem('Your Contribution', '/account/contribution/', 'fa-hand-holding-hart', badge='100 €')
         )
 

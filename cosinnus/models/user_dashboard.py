@@ -105,11 +105,11 @@ class DashboardItem(dict):
 
 class MenuItem(dict):
     """
-    Dictionary used as a representation and API serializer of menu links consisting of a label, url, icon (optional)
-    and image-url (optional). Used in the v3 navigation API.
+    Dictionary used as a representation and API serializer of menu links consisting of a label, url, icon (optional),
+    image-url (optional) and badge (optional). Used in the v3 navigation API.
     """
 
-    def __init__(self, label, url, icon=None, image=None):
+    def __init__(self, label, url, icon=None, image=None, badge=None):
         domain = get_domain_for_portal(CosinnusPortal.get_current())
         if url and url[0] == '/':
             url = domain + url
@@ -119,3 +119,4 @@ class MenuItem(dict):
         if image and image[0] == '/':
             image = domain + image
         self['image'] = image
+        self['badge'] = badge

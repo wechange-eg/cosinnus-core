@@ -35,7 +35,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
     - Projects and Groups: users projects and groups
     - Community: Forum and Map
     - Conferences: users conferences
-    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional) and image url (optional).
+    Each menu item consists of a label (Markdown), url, icon (Font Awesome class, optional), image url (optional) and
+    badge (optional).
     """
 
     permission_classes = (IsAuthenticated,)
@@ -167,14 +168,29 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
         if forum_slug:
             forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
-            if forum_group and settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL:
-                community_space_items.append(
-                    MenuItem(settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL, forum_group.get_absolute_url(), 'fa-sitemap')
-                )
+            if forum_group:
+                if settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS:
+                    # Add paired_groups of managed tags to community space.
+                    managed_tags = self.request.user.cosinnus_profile.get_managed_tags()
+                    if managed_tags:
+                        for tag in managed_tags:
+                            if tag.paired_group and tag.paired_group != forum_group:
+                                community_space_items.append(
+                                    MenuItem(tag.paired_group.name, tag.paired_group.get_absolute_url(), 'fa-group')
+                                )
+                if settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL:
+                    community_space_items.append(
+                        MenuItem(settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL, forum_group.get_absolute_url(), 'fa-sitemap')
+                    )
         if settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL:
             community_space_items.append(
                 MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, reverse('cosinnus:map'), 'fa-group')
             )
+        if settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS:
+            community_space_items.extend([
+                MenuItem(label, url, icon)
+                for label, url, icon in settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS
+            ])
         community_space = {
             'items': community_space_items,
             'actions': [],
@@ -203,7 +219,8 @@ class BookmarksView(APIView):
     """
     An endpoint that provides the user bookmarks for the main navigation.
     Returns menu items for liked groups and projects, liked users and liked content (e.g. ideas).
-    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional) and image url (optional).
+    Each menu item consists of a label (Markdown), url, icon (Font Awesome class, optional), image url (optional) and
+    badge (optional).
     """
 
     permission_classes = (IsAuthenticated,)
@@ -354,10 +371,9 @@ class AlertsView(APIView):
     Each sub alert contains text (label), url and icon_or_image_url elements.
     The response list is paginated by 10 items. For pagination the "offset_timestamp" parameter should be used.
     To receive new alerts the "newer_than_timestamp" should be used.
+
+    Additionally, the retrieved alerts can be marked as read/seen using the "mark_as_read=true" query parameter.
     """
-    # TODO: consider caching.
-    # TODO: discuss pagination, newer_than_timestamp, offset_timestamp.
-    # TODO: discuss limiting the fields to data needed by the frontend.
 
     permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
@@ -372,6 +388,7 @@ class AlertsView(APIView):
     page_size = 10
     newer_than_timestamp = None
     offset_timestamp = None
+    mark_as_read = False
 
     @swagger_auto_schema(
         manual_parameters=[
@@ -383,6 +400,10 @@ class AlertsView(APIView):
             openapi.Parameter(
                 'offset_timestamp', openapi.IN_QUERY, required=False,
                 description='Return alerts older then this timestamp. Used for pagination.', type=openapi.FORMAT_FLOAT
+            ),
+            openapi.Parameter(
+                'mark_as_read', openapi.IN_QUERY, required=False,
+                description='Mark unread alerts as read.', type=openapi.TYPE_BOOLEAN
             ),
         ],
         responses={'200': openapi.Response(
@@ -486,6 +507,12 @@ class AlertsView(APIView):
         queryset = queryset[:self.page_size]
         alerts = list(queryset)
 
+        # mark as read
+        if self.mark_as_read:
+            for alert in alerts:
+                alert.seen = True
+            NotificationAlert.objects.bulk_update(alerts, ['seen'])
+
         # alert items
         user_cache = self.get_user_cache(alerts)
         items = [
@@ -522,6 +549,7 @@ class AlertsView(APIView):
                 self.offset_timestamp= float(self.offset_timestamp)
             except Exception:
                 raise ValidationError({'offset_timestamp': 'Float timestamp expected'})
+        self.mark_as_read = request.query_params.get('mark_as_read') == 'true'
 
     def get_queryset(self):
         alerts_qs = NotificationAlert.objects.filter(portal=CosinnusPortal.get_current(), user=self.request.user)
@@ -543,7 +571,8 @@ class AlertsView(APIView):
 class HelpView(APIView):
     """
     An endpoint that returns a list of help menu items for the main navigation.
-    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional) and image url (optional).
+    Each menu item consists of a label (Markdown), url, icon (Font Awesome class, optional), image url (optional) and
+    badge (optional).
     """
 
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
@@ -589,7 +618,8 @@ class ProfileView(APIView):
     An endpoint that provides user profile menu items for the main navigation.
     Returns a list of menu items for user profile and notification settings, contribution, administration, logout and a
     language switcher item. The language switcher item contains a list of menu items for the available languages.
-    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional) and image url (optional).
+    Each menu item consists of a label (Markdown), url, icon (Font Awesome class, optional), image url (optional) and
+    badge (optional).
     """
 
     permission_classes = (IsAuthenticated,)
@@ -669,10 +699,14 @@ class ProfileView(APIView):
             profile_menu.append(language_item)
 
         # payments
-        # TODO: consider my_contribution_badge
         if settings.COSINNUS_PAYMENTS_ENABLED or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY \
                 and request.user.is_superuser:
-            payments_item = MenuItem(_('Your Contribution'), reverse('wechange-payments:overview'), 'fa-hand-holding-hart')
+            from wechange_payments.models import Subscription
+            current_subscription = Subscription.get_current_for_user(request.user)
+            contribution = int(current_subscription.amount) if current_subscription else 0
+            contribution_badge = f'{contribution} €'
+            payments_item = MenuItem(_('Your Contribution'), reverse('wechange-payments:overview'),
+                                     'fa-hand-holding-hart', badge=contribution_badge)
             profile_menu.append(payments_item)
 
         # administration
