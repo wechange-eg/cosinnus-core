@@ -175,7 +175,7 @@ class CosinnusUserExportProcessorBase(object):
 
     def do_export(self, threaded=True):
         """ Does a threaded user export. Threading can be disabled via the threaded parameter. """
-        users = self.get_user_queryset()
+        users = list(self.get_user_queryset())
         if threaded:
             my_self = self
 
