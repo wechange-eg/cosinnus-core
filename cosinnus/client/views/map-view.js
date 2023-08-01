@@ -547,7 +547,7 @@ module.exports = ContentControlView.extend({
                         district_boundary.addData(data);
                     });
                 }
-            }).error(function() {});
+            }).fail(function() {});
             
         }
         
