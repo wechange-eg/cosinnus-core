@@ -426,7 +426,7 @@ def print_testmail(request):
     return HttpResponse(html)
 
 
-def print_testdigest(request):
+def _print_testdigest(request, digest_setting=None):
     """ Displays a HTML email like it would be sent to a user """
     if not request or not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
@@ -434,12 +434,25 @@ def print_testdigest(request):
     from cosinnus_note.models import Note, Comment # noqa
     from cosinnus_notifications.digest import send_digest_for_current_portal, _get_digest_email_context # noqa
     
-    digest_setting = UserNotificationPreference.SETTING_WEEKLY
+    if not digest_setting:
+        digest_setting = UserNotificationPreference.SETTING_DAILY
     template = '/cosinnus/html_mail/digest.html'
     digest_html = send_digest_for_current_portal(digest_setting, debug_run_for_user=request.user)
     context = _get_digest_email_context(request.user, mark_safe(digest_html), now(), digest_setting)
     html = render_to_string(template, context=context)
     return HttpResponse(html)
+
+
+def print_testdigest_daily(request):
+    """ Displays a HTML email like it would be sent to a user """
+    from cosinnus_notifications.models import UserNotificationPreference # noqa
+    return _print_testdigest(request, digest_setting=UserNotificationPreference.SETTING_DAILY)
+
+
+def print_testdigest_weekly(request):
+    """ Displays a HTML email like it would be sent to a user """
+    from cosinnus_notifications.models import UserNotificationPreference # noqa
+    return _print_testdigest(request, digest_setting=UserNotificationPreference.SETTING_WEEKLY)
 
 
 def print_settings(request):

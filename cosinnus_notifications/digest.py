@@ -46,7 +46,7 @@ DEFAULT_DIGEST_CATEGORY = [
 ]
 
 
-def send_digest_for_current_portal(digest_setting, debug_run_for_user=None):
+def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debug_force_show_all=False):
     """ Sends out a daily/weekly digest email to all users *IN THE CURRENT PORTAL*
              who have any notification preferences set to that frequency.
         We will send all events that happened within this
@@ -87,7 +87,7 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None):
     
     emailed = 0
     for user in users:
-        if debug_run_for_user:
+        if debug_run_for_user and debug_force_show_all:
             global_wanted = True
             multi_prefs = list(UserMultiNotificationPreference.objects.filter(user=user, portal=CosinnusPortal.get_current(), setting=digest_setting)\
                     .values_list('multi_notification_id', flat=True))
@@ -307,7 +307,10 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None):
             # switch language back
             translation.activate(cur_language)
             timezone.activate(cur_time_zone)
-        
+    
+    # if we do a debug run and the user had no notifications to show, return empty HTML
+    if debug_run_for_user:
+        return ''
             
     # save the end time of the digest period as last digest time for this type
     portal.saved_infos[CosinnusPortal.SAVED_INFO_LAST_DIGEST_SENT % digest_setting] = TIME_DIGEST_END
