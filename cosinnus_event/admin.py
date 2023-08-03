@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
-from cosinnus_event.models import Event, Suggestion, Vote, ConferenceEvent
+from cosinnus_event.models import Event, Suggestion, Vote, ConferenceEvent, ConferenceEventAttendanceTracking
 from cosinnus.admin import BaseTaggableAdmin, CosinnusConferenceSettingsInline
 
 
@@ -65,3 +65,21 @@ class ConferenceEventAdmin(BaseTaggableAdmin):
     inline_reverse = []
 
 admin.site.register(ConferenceEvent, ConferenceEventAdmin)
+
+
+class ConferenceEventAttendanceTrackingAdmin(admin.ModelAdmin):
+    list_display = ['start', 'conference', 'event', 'user']
+    list_select_related = ['event__group', 'user']
+    fields = ['user', 'conference', 'event', 'start', 'end']
+
+    def conference(self, obj):
+        return obj.event.group
+    conference.short_description = _('Conference')
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+admin.site.register(ConferenceEventAttendanceTracking, ConferenceEventAttendanceTrackingAdmin)
