@@ -15,9 +15,6 @@
 {% endblock leftnav %}
 
 {% block content %}
-    <p class="large-space">
-        <i class="fa fa-info-circle"></i> {% trans 'Note: Attendance statistics might not include all attendees, as users may block tracking.' %}
-    </p>
     <div class="content-box">
         <h2>{% trans "Conference Statistics" %}</h2>
         <table class="table table-striped white-content">
@@ -94,7 +91,7 @@
     {% if user_data_fields and user_data %}
         <div class="clearfix"></div>
         <div class="content-box">
-            <h2>{% trans "Registered User Data Statistics" %}</h2>
+            <h2>{% trans "Attendee Data Statistics" %}</h2>
             <table class="table table-striped white-content">
                 <thead>
                 <tr>
