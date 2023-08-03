@@ -7,8 +7,6 @@
             /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
             {% if not user.is_authenticated %}
             _paq.push(['disableCookies']);
-            {% else %}
-            _paq.push(['setUserId', '{{user.id}}']);
             {% endif %}
             _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
             _paq.push(['trackPageView']);
