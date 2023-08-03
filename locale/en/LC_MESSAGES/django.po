@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-24 15:46+0200\n"
+"POT-Creation-Date: 2023-08-03 14:04+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3649,9 +3649,6 @@ msgstr ""
 msgid "Conference Statistics"
 msgstr "Projects"
 
-msgid "Note: Attendance statistics might not include all attendees, as users may block tracking."
-msgstr ""
-
 #, fuzzy
 msgid "Conference Name"
 msgstr "Create Project"
@@ -3690,8 +3687,9 @@ msgstr ""
 msgid "Attendance Percentage"
 msgstr ""
 
-msgid "Registered User Data Statistics"
-msgstr ""
+#, fuzzy
+msgid "Attendee Data Statistics"
+msgstr "%s - Events"
 
 #, fuzzy
 msgid "Temporary Users"
@@ -8814,14 +8812,9 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-msgid "An error occurred while connecting to the analytics server. Please try again later."
-msgstr ""
-
-msgid "PIWIK configuration incomplete for tracking."
-msgstr ""
-
-msgid "Statistics are only available for conferences with a start- and end-date."
-msgstr ""
+#, fuzzy
+msgid "Attendance data is not availbale for this conference."
+msgstr "Enter a name for the project."
 
 msgid "The following Pads were re-initialized:"
 msgstr ""
@@ -9409,6 +9402,20 @@ msgstr "%s - Events"
 #, python-format
 msgid "%(event)s %(type)s"
 msgstr ""
+
+msgid "Start-Time"
+msgstr ""
+
+msgid "End-Time"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Event Attendance Tracking"
+msgstr "%s - Events"
+
+#, fuzzy
+msgid "Conference Event Attendance Trackings"
+msgstr "%s - Events"
 
 msgid "Would you like to create an event"
 msgstr ""

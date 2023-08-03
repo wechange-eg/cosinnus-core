@@ -52,6 +52,7 @@ from django.db import transaction
 from cosinnus.forms.conference import CosinnusConferenceRoomForm
 from django.contrib.contenttypes.models import ContentType
 from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
+from cosinnus_event.models import ConferenceEventAttendanceTracking
 from django.http.response import Http404, HttpResponseForbidden,\
     HttpResponseNotFound
 
@@ -1215,99 +1216,27 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
         return '{} - {}.xlsx'.format(_('List of Applicants'), self.group.slug)
 
 
-class ConferencePiwikAttendanceTrackingMixin:
-    """
-    Mixin providing attendance statistics for a conference and conference-events using PIWIKs/Matomos Event Tracking
-    feature.
-    EventTracking data is provided by the Tracker component in the conference frontend, which sends the value "1" every
-    minute, leading to the time spend in minutes being stored in the TrackingEvent value.
-    """
+class ConferenceAttendanceTrackingMixin:
+    """ Provide conference and event info and statistics using ConferenceEventAttendanceTracking. """
 
-    @property
-    def is_piwik_configured(self):
-        """ Check if required settings are set. """
-        piwik_url = getattr(settings, 'PIWIK_SERVER_URL', None)
-        site_id = str(getattr(settings, 'PIWIK_SITE_ID', None))
-        token = getattr(settings, 'PIWIK_API_TOKEN', None)
-        return piwik_url and site_id and token
-
-    @property
-    def conference_has_dates(self):
-        """ Check that conference has dates set. Needed to limit the tracking data range when calling the piwik API."""
-        return self.group.from_date and self.group.to_date
-
-    def get_piwik_attendance_tracking(self):
-        """ Fetches the attendance event tracking data from piwik for the time of the conference. """
-        piwik_url = settings.PIWIK_SERVER_URL
-        site_id = str(settings.PIWIK_SITE_ID)
-        token = settings.PIWIK_API_TOKEN
-        date_string = self.group.from_date.strftime("%Y-%m-%d") + ',' + self.group.to_date.strftime("%Y-%m-%d")
-        response = requests.get('https:' + piwik_url + 'index.php?date=' + date_string + '&expanded=1&filter_limit=-1&flat=1&force_api_session=1&format=JSON&format_metrics=1&idSite=' + site_id + '&method=Events.getName&module=API&period=range&segment=eventCategory%3D%3DConferenceEvent&token_auth=' + token)
-        piwik_attendance_tracking = response.json()
-        return piwik_attendance_tracking
-
-    def compute_attendance(self, piwik_event_data, piwik_event_name):
-        """
-        Computes basic attendance stats:
-          - number_of_attendees: equals "nb_uniq_visitors" or "sum_daily_nb_uniq_visitors" depending on the conference
-                                 date range.
-          - average_time_spend_per_attendee: "sum_event_value" (overall time) / number_of_attendees.
-        """
-        piwik_event_attendance = {
-            'number_of_attendees': 0,
-            'average_time_spent_per_attendee': 0,
-        }
-        attendance = next((att for att in piwik_event_data if att['Events_EventName'] == piwik_event_name), {})
-        if attendance:
-            if "nb_uniq_visitors" in attendance:
-                number_of_attendees = attendance.get("nb_uniq_visitors", 0)
-            else:
-                number_of_attendees = attendance.get("sum_daily_nb_uniq_visitors", 0)
-            avg_time_per_attendee = round(attendance.get("sum_event_value", 0) / max(number_of_attendees, 1))
-            piwik_event_attendance.update({
-                'number_of_attendees': number_of_attendees,
-                'average_time_spent_per_attendee': avg_time_per_attendee,
-            })
-        return piwik_event_attendance
-
-    def get_event_attendance_stats(self, piwik_attendance_tracking):
-        """
-        Provides attendance stats for each conference event using the data from piwik_attendance_tracking.
-        Event stats include:
-        - event infos: name, room-type, duration
-        - attendance tracking stats from "compute_attendance" function
-        - average_time_spent_per_attendee_percent: as "average_time_spent_per_attendee" / duration * 100
-        """
+    def get_event_attendance_stats(self):
+        """Provides attendance stats for each conference event using ConferenceEventAttendanceTracking."""
         stats = []
         for event in self.events:
-            tracking_event_name = 'conference-event_' + str(event.id)
-            event_attendance = self.compute_attendance(piwik_attendance_tracking, tracking_event_name)
+            attendance = ConferenceEventAttendanceTracking.get_attendance(self.group, event)
             event_stats = {
                 'name': event.title,
                 'room_type': event.get_type_verbose(),
-                'duration': '-',
-                'number_of_attendees': event_attendance['number_of_attendees'],
-                'average_time_spent_per_attendee': event_attendance['average_time_spent_per_attendee'],
-                'average_time_spent_per_attendee_percent': '-',
+                'duration': attendance.get('event_duration', '-'),
+                'number_of_attendees': attendance.get('num_attendees'),
+                'average_time_spent_per_attendee': attendance.get('avg_time_attendee'),
+                'average_time_spent_per_attendee_percent': attendance.get('avg_time_attendee_percent', '-'),
             }
-
-            if event.to_date and event.from_date:
-                duration = round(abs(event.to_date - event.from_date).seconds / 60)
-                event_stats['duration'] = duration
-                average_time_spent_per_attendee_percent = round(
-                    event_attendance['average_time_spent_per_attendee'] / duration * 100
-                )
-                event_stats['average_time_spent_per_attendee_percent'] = average_time_spent_per_attendee_percent
             stats.append(event_stats)
         return stats
 
-    def get_conference_attendance_stats(self, piwik_attendance_tracking):
-        """
-        Provides attendance stats for the overall conference event using the data from piwik_attendance_tracking.
-        Conference stats include:
-        - conference infos: name, number of invitation, number of registrations
-        - attendance tracking stats from "compute_attendance" function
-        """
+    def get_conference_attendance_stats(self):
+        """Provides attendance stats for the overall conference event using ConferenceEventAttendanceTracking."""
         stats = {
             'conference_name': self.group.name,
         }
@@ -1319,10 +1248,11 @@ class ConferencePiwikAttendanceTrackingMixin:
         stats['number_registrations'] = self.group.member_count
 
         # attendance
-        tracking_event_name = f'conference_{self.group.id}'
-        conference_attendance = self.compute_attendance(piwik_attendance_tracking, tracking_event_name)
-        stats.update(**conference_attendance)
-
+        attendance = ConferenceEventAttendanceTracking.get_attendance(self.group)
+        stats.update({
+            'number_of_attendees': attendance.get('num_attendees'),
+            'average_time_spent_per_attendee': attendance.get('avg_time_attendee'),
+        })
         return stats
 
 
@@ -1337,11 +1267,10 @@ class ConferenceUserDataStatisticsMixin:
 
         data = []
 
-        for user in self.group.actual_members.all():
+        for user in ConferenceEventAttendanceTracking.get_attendees(self.group):
             field_data = []
             for field in settings.COSINNUS_CONFERENCE_STATISTICS_USER_DATA_FIELDS:
                 if field == settings.COSINNUS_CONFERENCE_STATISTICS_USER_DATA_MANAGED_TAGS_FIELD:
-                    # TODO: only one managed tag? Need to specify with one? how?
                     managed_tags = user.cosinnus_profile.get_managed_tags()
                     value = managed_tags[0].name if managed_tags else None
                 else:
@@ -1376,12 +1305,12 @@ class ConferenceUserDataStatisticsMixin:
 class ConferenceStatisticsDashboardView(RequireWriteMixin,
                                         GroupIsConferenceMixin,
                                         ConferencePropertiesMixin,
-                                        ConferencePiwikAttendanceTrackingMixin,
+                                        ConferenceAttendanceTrackingMixin,
                                         ConferenceUserDataStatisticsMixin,
                                         TemplateView):
     """
     Implements a simple conference statistics dashboard showing the data provided by the
-    ConferencePiwikAttendanceTrackingMixin and ConferenceUserDataStatisticsMixin as tables.
+    ConferenceAttendanceTrackingMixin and ConferenceUserDataStatisticsMixin as tables.
     """
 
     template_name = 'cosinnus/conference/conference_statistics.html'
@@ -1398,17 +1327,12 @@ class ConferenceStatisticsDashboardView(RequireWriteMixin,
 
     def get_dashboard_stats(self):
         stats = {}
-        try:
-            piwik_attendance_tracking = self.get_piwik_attendance_tracking()
-            conference_stats = self.get_conference_attendance_stats(piwik_attendance_tracking)
-            event_stats = self.get_event_attendance_stats(piwik_attendance_tracking)
-            stats.update({
-                'conference_stats': conference_stats,
-                'event_stats': event_stats,
-            })
-        except requests.RequestException as e:
-            logger.exception(e)
-            messages.error(self.request, _('An error occurred while connecting to the analytics server. Please try again later.'))
+        conference_stats = self.get_conference_attendance_stats()
+        event_stats = self.get_event_attendance_stats()
+        stats.update({
+            'conference_stats': conference_stats,
+            'event_stats': event_stats,
+        })
         if settings.COSINNUS_CONFERENCE_STATISTICS_USER_DATA_FIELDS:
             user_data = self.get_aggregated_portal_specific_user_data()
             user_data_fields = self.get_portal_specific_user_data_labels()
@@ -1423,26 +1347,21 @@ class ConferenceStatisticsDashboardView(RequireWriteMixin,
         context.update({
             'object': self.group,
         })
-        if not self.is_piwik_configured:
-            messages.warning(self.request, _('PIWIK configuration incomplete for tracking.'))
-        elif not self.conference_has_dates:
-            messages.warning(self.request, _('Statistics are only available for conferences with a start- and end-date.'))
-        else:
+        if ConferenceEventAttendanceTracking.has_tracking(self.group):
             dashboard_stats = self.get_dashboard_stats()
             context.update(**dashboard_stats)
+        else:
+            messages.info(self.request, _('Attendance data is not available for this conference.'))
         return context
 
 
 class ConferenceStatisticsDownloadView(RequireWriteMixin,
                                        GroupIsConferenceMixin,
-                                       ConferencePiwikAttendanceTrackingMixin,
+                                       ConferenceAttendanceTrackingMixin,
                                        View):
-    """ Provide conference statistic from the ConferencePiwikAttendanceTrackingMixin as XLSX download. """
+    """ Provide conference statistic from the ConferenceAttendanceTrackingMixin as XLSX download. """
 
     def get(self, request, *args, **kwars):
-
-        if not self.is_piwik_configured or not self.conference_has_dates:
-            raise Http404
 
         header = [
             'conference_name',
@@ -1453,17 +1372,8 @@ class ConferenceStatisticsDownloadView(RequireWriteMixin,
         ]
 
         filename = '{}_conference_statistics'.format(self.group.slug)
-
-        try:
-            piwik_attendance_tracking = self.get_piwik_attendance_tracking()
-            conference_stats = self.get_conference_attendance_stats(piwik_attendance_tracking)
-            rows = [
-                conference_stats.values()
-            ]
-        except requests.RequestException as e:
-            logger.exception(e)
-            rows = []
-
+        conference_stats = self.get_conference_attendance_stats()
+        rows = [conference_stats.values()]
         response = make_xlsx_response(rows, row_names=header, file_name=filename)
         return response
 
@@ -1471,14 +1381,11 @@ class ConferenceStatisticsDownloadView(RequireWriteMixin,
 class ConferenceEventStatisticsDownloadView(RequireWriteMixin,
                                             GroupIsConferenceMixin,
                                             ConferencePropertiesMixin,
-                                            ConferencePiwikAttendanceTrackingMixin,
+                                            ConferenceAttendanceTrackingMixin,
                                             View):
-    """ Provide conference event statistic from the ConferencePiwikAttendanceTrackingMixin as XLSX download. """
+    """ Provide conference event statistic from the ConferenceAttendanceTrackingMixin as XLSX download. """
 
     def get(self, request, *args, **kwars):
-
-        if not self.is_piwik_configured or not self.conference_has_dates:
-            raise Http404
 
         header = [
             'single_event_name',
@@ -1490,15 +1397,8 @@ class ConferenceEventStatisticsDownloadView(RequireWriteMixin,
         ]
 
         filename = '{}_conference_event_statistics'.format(self.group.slug)
-
-        try:
-            piwik_attendance_tracking = self.get_piwik_attendance_tracking()
-            conference_event_stats = self.get_event_attendance_stats(piwik_attendance_tracking)
-            rows = [event_stats.values() for event_stats in conference_event_stats]
-        except requests.RequestException as e:
-            logger.exception(e)
-            rows = []
-
+        conference_event_stats = self.get_event_attendance_stats()
+        rows = [event_stats.values() for event_stats in conference_event_stats]
         response = make_xlsx_response(rows, row_names=header, file_name=filename)
         return response
 

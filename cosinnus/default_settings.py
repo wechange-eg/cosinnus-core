@@ -758,7 +758,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # PIWIK settings. set individually for each portal. won't load if PIWIK_SITE_ID is not set
     PIWIK_SERVER_URL = '//stats.wechange.de/'
     PIWIK_SITE_ID = None
-    PIWIK_API_TOKEN = env("WECHANGE_PIWIK_API_TOKEN", default=None)
 
     # Cookie settings. We will let cookies expire browser-session-based for anonymous users, and keep them
     # for 30 days for logged in users

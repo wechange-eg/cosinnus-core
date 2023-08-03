@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.conf.urls import url
 
+from cosinnus.conf import settings
 from cosinnus_conference import views
 
 app_name = 'conference'
@@ -42,20 +43,21 @@ cosinnus_group_patterns = [
         name='confirm_send_reminder'),
     url(r'^apply/$', views.conference_application,
         name='application'),
-
-    url(r'^statistics/$', views.conference_statistics, name='statistics'),
-    url(r'^statistics/download/$', views.conference_statistics_download, name='statistics-download'),
-    url(r'^statistics/download/events/$', views.conference_event_statistics_download, name='event-statistics-download'),
-    url(r'^statistics/download/users/$', views.conference_user_data_download, name='user-data-download'),
-
     url(r'^$', views.conference_page,
         name='index'),
     url(r'^(?P<slug>[^/]+)/$', views.conference_page,
         name='room'),
     url(r'^(?P<slug>[^/]+)/#/(?P<event_id>[^/]+)$', views.conference_page,
         name='room-event'),
-
 ]
+
+if settings.COSINNUS_CONFERENCE_STATISTICS_ENABLED:
+    cosinnus_group_patterns = [
+        url(r'^statistics/$', views.conference_statistics, name='statistics'),
+        url(r'^statistics/download/$', views.conference_statistics_download, name='statistics-download'),
+        url(r'^statistics/download/events/$', views.conference_event_statistics_download, name='event-statistics-download'),
+        url(r'^statistics/download/users/$', views.conference_user_data_download, name='user-data-download'),
+    ] + cosinnus_group_patterns
 
 cosinnus_root_patterns = [
 ]

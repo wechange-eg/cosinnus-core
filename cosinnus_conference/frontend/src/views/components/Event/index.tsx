@@ -118,7 +118,9 @@ export function Event(props: EventProps) {
           )}
           <IframeContent url={url} html={event.props.rawHtml} allow={allow} />
           <EventButtons event={event} />
-          <Tracker id={event.props.id} />
+          {window.conferenceTrackingEnabled  && (
+              <Tracker id={event.props.id} />
+          )}
         </Content>
       ))
       || ((events && events.loading) || (events && !events.loading && events.events && event && event.props.url)) && (

@@ -1150,6 +1150,12 @@ class CosinnusConf(AppConf):
     
     CONFERENCE_USE_PARTICIPATION_FIELD_HIDDEN = False
 
+    # Enable conference statistics view and user tracking via ConferenceEventAttendanceTracking.
+    CONFERENCE_STATISTICS_ENABLED = False
+
+    # Interval used for the conference attendance tracking in minutes.
+    CONFERENCE_STATISTICS_TRACKING_INTERVAL = 1
+
     # Settings for portal specific user data used for the conference statistics.
     # Contains a list of dynamic_fields field names and optional a name for the cosinnus_profile managed tags value.
     CONFERENCE_STATISTICS_USER_DATA_FIELDS = []

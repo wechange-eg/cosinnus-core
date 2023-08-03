@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-24 15:46+0200\n"
+"POT-Creation-Date: 2023-08-03 14:04+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3521,9 +3521,6 @@ msgstr "Aufnahme erlauben"
 msgid "Conference Statistics"
 msgstr "Tagungs-Statistiken"
 
-msgid "Note: Attendance statistics might not include all attendees, as users may block tracking."
-msgstr "Hinweis: Teilnahme-Statistiken könnten unvollständig sein, weil Teilnehmende Tracking blockieren können."
-
 msgid "Conference Name"
 msgstr "Tagungsname"
 
@@ -3557,8 +3554,8 @@ msgstr "Dauer"
 msgid "Attendance Percentage"
 msgstr "Durchschnittliche Teilnahme"
 
-msgid "Registered User Data Statistics"
-msgstr "Statistiken zu Daten registrierter Teilnehmender"
+msgid "Attendee Data Statistics"
+msgstr "Teilnehmer-Daten-Statistiken"
 
 msgid "Temporary Users"
 msgstr "Temporäre Benutzerkonten"
@@ -8681,14 +8678,8 @@ msgstr "Option"
 msgid "Status"
 msgstr "Status"
 
-msgid "An error occurred while connecting to the analytics server. Please try again later."
-msgstr "Leider ist bei der Verbindung zum Analytics-Server ein Fehler aufgetreten. Bitte versuch es später erneut."
-
-msgid "PIWIK configuration incomplete for tracking."
-msgstr "PIWIK Konfiguration ist unvollständig zum Tracking."
-
-msgid "Statistics are only available for conferences with a start- and end-date."
-msgstr "Statistiken sind nur für Konferenzen mit Start- und Enddatum verfügbar."
+msgid "Attendance data is not available for this conference."
+msgstr "Es stehen keine Teilnahme-Daten für diese Konferenz zur verfügung."
 
 msgid "The following Pads were re-initialized:"
 msgstr "The following Pads were re-initialized:"
@@ -9263,6 +9254,18 @@ msgstr "Tagungsveranstaltungen"
 #, python-format
 msgid "%(event)s %(type)s"
 msgstr "%(event)s %(type)s"
+
+msgid "Start-Time"
+msgstr "Start-Zeit"
+
+msgid "End-Time"
+msgstr "End-Zeit"
+
+msgid "Conference Event Attendance Tracking"
+msgstr "Tagungsveranstaltungs-Teilname-Tracking"
+
+msgid "Conference Event Attendance Trackings"
+msgstr "Tagungsveranstaltungs-Teilname-Tracking"
 
 msgid "Would you like to create an event"
 msgstr "Möchtest du eine Veranstaltung anlegen"
@@ -13159,6 +13162,18 @@ msgstr "Aufgabenliste „%(title)s“ konnte nicht hinzugefügt werden."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte hast eins oder mehrere der noch enthaltenen Objekte zu löschen!"
+
+#~ msgid "Note: Attendance statistics might not include all attendees, as users may block tracking."
+#~ msgstr "Hinweis: Teilnahme-Statistiken könnten unvollständig sein, weil Teilnehmende Tracking blockieren können."
+
+#~ msgid "An error occurred while connecting to the analytics server. Please try again later."
+#~ msgstr "Leider ist bei der Verbindung zum Analytics-Server ein Fehler aufgetreten. Bitte versuch es später erneut."
+
+#~ msgid "PIWIK configuration incomplete for tracking."
+#~ msgstr "PIWIK Konfiguration ist unvollständig zum Tracking."
+
+#~ msgid "Statistics are only available for conferences with a start- and end-date."
+#~ msgstr "Statistiken sind nur für Konferenzen mit Start- und Enddatum verfügbar."
 
 #~ msgid "Timestamp of user export"
 #~ msgstr "Zeitstempel des Benutzer-Exports"
