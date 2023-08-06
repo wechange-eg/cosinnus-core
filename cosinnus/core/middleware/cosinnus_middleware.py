@@ -74,6 +74,7 @@ NEVER_REDIRECT_URLS = [
     
     '/api/v3/login',
     '/api/v3/logout',
+    '/api/v3/authinfo',
     '/api/v3/portal/topics',
     '/api/v3/portal/tags',
     '/api/v3/portal/managed_tags',

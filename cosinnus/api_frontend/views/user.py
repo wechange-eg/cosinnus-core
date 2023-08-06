@@ -201,6 +201,65 @@ class LogoutView(APIView):
         return Response(data, status=status.HTTP_205_RESET_CONTENT)
 
 
+class UserAuthInfoView(LoginViewAdditionalLogicMixin, APIView):
+    """ An endpoint that for can always be accessed to check if a user is logged in
+        in the backend. Will return the same session auth and user data if a user is
+        logged in, or only `"authenticated": false` in the response data,
+        as info that the user is not authenticated else. """
+    
+    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    
+    # todo: generate proper response, by either putting the entire response into a
+    #       Serializer, or defining it by hand
+    #       Note: Also needs docs on our custom data/timestamp/version wrapper!
+    # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
+    # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
+    @swagger_auto_schema(
+        responses={'200': openapi.Response(
+            description='WIP: Response info missing. Short example included',
+            examples={
+                "application/json": {
+                    "data": {
+                        "authenticated": True,
+                        "refresh": "eyJ...",
+                        "access": "eyJ...",
+                        "user": {
+                            "id": 77,
+                            "username": "77",
+                            "first_name": "NewUser",
+                            "last_name": "",
+                            "profile": {
+                                "id": 82,
+                                "avatar": None,
+                                "avatar_80x80": None,
+                                "avatar_50x50": None,
+                                "avatar_40x40": None
+                            }
+                        },
+                    },
+                    "version": COSINNUS_VERSION,
+                    "timestamp": 1658414865.057476
+                }
+            }
+        )}
+    )
+    def get(self, request):
+        user = request.user
+        data = {
+            'authenticated': user.is_authenticated,
+        }
+        if user.is_authenticated:
+            user_tokens = get_tokens_for_user(user)
+            data.update({
+                'refresh': user_tokens['refresh'],
+                'access': user_tokens['access'],
+                'user': UserSerializer(user, context={'request': request}).data,
+            })
+        response = Response(data)
+        response = self.set_response_cookies(response)
+        return response
+    
 
 @swagger_auto_schema(request_body=CosinnusUserSignupSerializer)
 class SignupView(UserSignupTriggerEventsMixin, APIView):
