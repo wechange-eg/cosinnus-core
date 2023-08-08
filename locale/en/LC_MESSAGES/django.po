@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-03 14:04+0200\n"
+"POT-Creation-Date: 2023-08-08 09:34+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3685,6 +3685,9 @@ msgid "Duration"
 msgstr ""
 
 msgid "Attendance Percentage"
+msgstr ""
+
+msgid "In order to better assess how long participants actually attended an event, we calculate here the relation between the configured event duration and the average time per attendee."
 msgstr ""
 
 #, fuzzy
@@ -8813,7 +8816,7 @@ msgid "Status"
 msgstr ""
 
 #, fuzzy
-msgid "Attendance data is not availbale for this conference."
+msgid "Attendance data is not available for this conference."
 msgstr "Enter a name for the project."
 
 msgid "The following Pads were re-initialized:"
