@@ -6,7 +6,6 @@
             $.ajaxSetup({
                 // From the Django documentation:
                 // https://docs.djangoproject.com/en/1.6/ref/contrib/csrf/
-                crossDomain: false,
                 beforeSend: function(xhr, settings) {
                     if (!Cosinnus.csrfSafeMethod(settings.type)) {
                         xhr.setRequestHeader("X-CSRFToken", Cosinnus.getCookie('csrftoken'));
