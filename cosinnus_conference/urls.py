@@ -33,10 +33,6 @@ cosinnus_group_patterns = [
         name='workshop-participants-download'),
     url(r'^participation-manangement/applicants-details-download/$', views.conference_applicant_details_download ,
         name='applicants-details-download'),
-    url(r'^recorded_meetings/$', views.conference_recorded_meetings,
-        name='recorded-meetings'),
-    url(r'^recorded_meetings/delete/(?P<recording_id>[^/]+)/$', views.conference_recorded_meeting_delete,
-        name='delete-recorded-meeting'),
     url(r'^reminders/$', views.conference_reminders,
         name='reminders'),
     url(r'^confirm_send_reminder/$', views.conference_confirm_send_reminder,
@@ -51,7 +47,15 @@ cosinnus_group_patterns = [
         name='room-event'),
 ]
 
-if settings.COSINNUS_CONFERENCE_STATISTICS_ENABLED:
+if not settings.COSINNUS_CONFERENCES_USE_COMPACT_MODE:
+    cosinnus_group_patterns = [
+        url(r'^recorded_meetings/$', views.conference_recorded_meetings, name='recorded-meetings'),
+        url(r'^recorded_meetings/delete/(?P<recording_id>[^/]+)/$', views.conference_recorded_meeting_delete,
+            name='delete-recorded-meeting'),
+    ] + cosinnus_group_patterns
+
+
+if not settings.COSINNUS_CONFERENCES_USE_COMPACT_MODE and settings.COSINNUS_CONFERENCE_STATISTICS_ENABLED:
     cosinnus_group_patterns = [
         url(r'^statistics/$', views.conference_statistics, name='statistics'),
         url(r'^statistics/download/$', views.conference_statistics_download, name='statistics-download'),
