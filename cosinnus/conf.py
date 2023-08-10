@@ -1160,7 +1160,7 @@ class CosinnusConf(AppConf):
     # Contains a list of dynamic_fields field names and optional a name for the cosinnus_profile managed tags value.
     CONFERENCE_STATISTICS_USER_DATA_FIELDS = []
 
-    # Optionally define which field of the CONFERENCE_STATISTICS_USER_DATA_FIELDS if populated from the cosinnus_profile
+    # Optionally define which field of the CONFERENCE_STATISTICS_USER_DATA_FIELDS is populated from the cosinnus_profile
     # managed tags value.
     CONFERENCE_STATISTICS_USER_DATA_MANAGED_TAGS_FIELD = None
 
