@@ -839,9 +839,6 @@ class ConferenceEvent(Event):
 class ConferenceEventAttendanceTracking(models.Model):
     """ Used to track conference event attendance. """
 
-    # Interval used by the Tracker (NOTE: when changing update the Tracker interval in the frontend Tracker).
-    TRACKING_INTERVAL_MINUTES = 1
-
     # Consider update as new attendance after this interval is passed since the last update.
     TRACKING_CONTINUATION_MINUTES = 5
 
@@ -849,6 +846,8 @@ class ConferenceEventAttendanceTracking(models.Model):
                              verbose_name=_('User'))
     event = models.ForeignKey(ConferenceEvent, on_delete=models.CASCADE, related_name='attendance_tracking',
                               verbose_name=_('Conference Event'))
+
+    # start and end are initialized in save() with end=now and start=end-settings.COSINNUS_CONFERENCE_STATISTICS_TRACKING_INTERVAL
     start = models.DateTimeField(verbose_name=_('Start-Time'))
     end = models.DateTimeField(verbose_name=_('End-Time'))
 
@@ -861,8 +860,8 @@ class ConferenceEventAttendanceTracking(models.Model):
         created = self.pk is None
         if created:
             self.end = now()
-            tracing_interval = settings.COSINNUS_CONFERENCE_STATISTICS_TRACKING_INTERVAL
-            self.start = self.end - datetime.timedelta(minutes=tracing_interval)
+            tracking_interval = settings.COSINNUS_CONFERENCE_STATISTICS_TRACKING_INTERVAL
+            self.start = self.end - datetime.timedelta(minutes=tracking_interval)
         super(ConferenceEventAttendanceTracking, self).save(*args, **kwargs)
 
     def __str__(self):

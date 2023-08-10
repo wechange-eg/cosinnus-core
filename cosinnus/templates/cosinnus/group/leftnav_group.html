@@ -52,15 +52,17 @@
     {% captureas href %}{% group_url 'cosinnus:event:conference-event-list' group=group %}{% endcaptureas %}
     {% captureas label %}{% trans "Conference Event Management" %}{% endcaptureas %}
     {% include "cosinnus/leftnav_button.html" with active=is_conferenceeventmanagement extra_classes="fine-space" icon_full_class="fas fa-calendar" label=label href=href  %}
-    
-    {% captureas href %}{% group_url 'cosinnus:conference:recorded-meetings' group=group %}{% endcaptureas %}
-    {% captureas label %}{% trans "Recorded Meetings" %}{% endcaptureas %}
-    {% include "cosinnus/leftnav_button.html" with active=is_recordedmeetings extra_classes="fine-space" icon_full_class="fas fa-video" label=label href=href  %}
 
-    {% if SETTINGS.COSINNUS_CONFERENCE_STATISTICS_ENABLED %}
-        {% captureas href %}{% group_url 'cosinnus:conference:statistics' group=group %}{% endcaptureas %}
-        {% captureas label %}{% trans "Statistics" %}{% endcaptureas %}
-        {% include "cosinnus/leftnav_button.html" with active=is_conferencestatistics extra_classes="fine-space" icon_full_class="fas fa-table" label=label href=href  %}
+    {% if not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+        {% captureas href %}{% group_url 'cosinnus:conference:recorded-meetings' group=group %}{% endcaptureas %}
+        {% captureas label %}{% trans "Recorded Meetings" %}{% endcaptureas %}
+        {% include "cosinnus/leftnav_button.html" with active=is_recordedmeetings extra_classes="fine-space" icon_full_class="fas fa-video" label=label href=href  %}
+
+        {% if SETTINGS.COSINNUS_CONFERENCE_STATISTICS_ENABLED %}
+            {% captureas href %}{% group_url 'cosinnus:conference:statistics' group=group %}{% endcaptureas %}
+            {% captureas label %}{% trans "Statistics" %}{% endcaptureas %}
+            {% include "cosinnus/leftnav_button.html" with active=is_conferencestatistics extra_classes="fine-space" icon_full_class="fas fa-table" label=label href=href  %}
+        {% endif %}
     {% endif %}
 
     <div class="small-space">&nbsp;</div>
