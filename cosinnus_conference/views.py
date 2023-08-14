@@ -1177,6 +1177,17 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
                 result.append('')
         return result
 
+    def get_motivation_question_strings(self):
+        return ['{}: {}'.format(_('Motivation'), question.get('question')) for question in self.management.motivation_questions]
+
+    def get_motivation_answers(self, application):
+        answers = []
+        for question in self.management.motivation_questions:
+            for answer in application.motivation_answers:
+                if answer.get('question') == question.get('question'):
+                    answers.append(answer.get('answer', ''))
+        return answers
+
     @cached_property
     def conditions_check(self):
         if self.management and self.management.has_conditions:
@@ -1188,9 +1199,13 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
         header = [
             _('First Name'), 
             _('Last Name'),
-            _('Motivation for applying'),
-            _('Status'),
         ]
+
+        if self.management.information_field_enabled and self.management.information_field_initial_text:
+            header += [_('Motivation for applying')]
+
+        header += [_('Status')]
+
         if not 'contact_email' in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
             header += [
                 _('Contact E-Mail Address')
@@ -1204,7 +1219,9 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
                 _('First Choice'),
                 _('Second Choice'),
             ]
-        header += self.get_extra_header() 
+        header += self.get_extra_header()
+        if self.management.information_field_enabled and self.management.motivation_questions:
+            header += self.get_motivation_question_strings()
         header += self.get_options_strings()
         return header
     
@@ -1217,9 +1234,13 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
         row = [
             user.first_name if user.first_name else '',
             user.last_name if user.last_name else '',
-            application.information,
-            str(dict(APPLICATION_STATES).get(application.status)),
         ]
+
+        if self.management.information_field_enabled and self.management.information_field_initial_text:
+            row += [application.information]
+
+        row += [str(dict(APPLICATION_STATES).get(application.status))]
+
         if not 'contact_email' in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
             row += [
                 application.contact_email
@@ -1233,7 +1254,9 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
                 application.first_priorities_string,
                 application.second_priorities_string,
             ]
-        row += self.get_extra_application_row(application) 
+        row += self.get_extra_application_row(application)
+        if self.management.information_field_enabled and application.motivation_answers:
+            row += self.get_motivation_answers(application)
         row += self.get_application_options(application)
         return row
     
