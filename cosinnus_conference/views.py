@@ -56,14 +56,17 @@ from cosinnus_event.models import ConferenceEventAttendanceTracking
 from django.http.response import Http404, HttpResponseForbidden,\
     HttpResponseNotFound
 
-from cosinnus_conference.forms import (CHOICE_ALL_APPLICANTS, CHOICE_ALL_MEMBERS, CHOICE_APPLICANTS_AND_MEMBERS, CHOICE_INDIVIDUAL, 
+from cosinnus_conference.forms import (CHOICE_ALL_APPLICANTS, CHOICE_ALL_MEMBERS, CHOICE_APPLICANTS_AND_MEMBERS, CHOICE_INDIVIDUAL,
                                        ConferenceRemindersForm,
                                        ConferenceConfirmSendRemindersForm,
                                        ConferenceParticipationManagement,
                                        ConferenceApplicationForm,
                                        PriorityFormSet,
                                        ConferenceApplicationManagementFormSet,
-                                       AsignUserToEventForm)
+                                       AsignUserToEventForm,
+                                       MotivationQuestionFormSet,
+                                       MotivationAnswerFormSet,
+                                       )
 from cosinnus_conference.utils import send_conference_reminder
 from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus import cosinnus_notifications
@@ -72,6 +75,7 @@ import xlsxwriter
 from cosinnus.utils.http import make_xlsx_response
 from cosinnus.views.profile import deactivate_user_and_mark_for_deletion
 from cosinnus.core.decorators.views import redirect_to_error_page
+from cosinnus.views.mixins.formsets import JsonFieldFormsetMixin
 from cosinnus.apis.bigbluebutton import BigBlueButtonAPI
 
 logger = logging.getLogger('cosinnus')
@@ -752,9 +756,13 @@ class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
 class ConferenceParticipationManagementView(SamePortalGroupMixin,
                                             RequireWriteMixin,
                                             GroupIsConferenceMixin,
+                                            JsonFieldFormsetMixin,
                                             FormView):
     form_class = ConferenceParticipationManagement
     template_name = 'cosinnus/conference/conference_participation_management_form.html'
+    json_field_formsets = {'motivation_questions': MotivationQuestionFormSet}
+    json_field_formsets_allow_add = {'motivation_questions': True}
+    instance = None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -763,19 +771,29 @@ class ConferenceParticipationManagementView(SamePortalGroupMixin,
         })
         return context
 
+    def get_instance(self):
+        if self.instance:
+            return self.instance
+        if self.group.participation_management:
+            self.instance = self.group.participation_management.first()
+        return self.instance
+
     def get_form_kwargs(self):
         form_kwargs = super().get_form_kwargs()
-        if self.group.participation_management:
-            form_kwargs['instance'] = self.group.participation_management.first()
+        instance = self.get_instance()
+        if instance:
+            form_kwargs['instance'] = instance
         return form_kwargs
 
     def form_valid(self, form):
+        json_field_formsets_valid = self.json_field_formset_form_valid_hook()
+        if not json_field_formsets_valid:
+            return self.form_invalid(form)
+        management = form.save(commit=False)
         if not form.instance.id:
-            management = form.save(commit=False)
             management.conference = self.group
-            management.save()
-        else:
-            form.save()
+        self.json_field_formset_pre_save_hook(management)
+        management.save()
         messages.success(self.request, _('Participation configurations have been updated.'))
         return HttpResponseRedirect(self.get_success_url())
 
