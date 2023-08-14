@@ -822,10 +822,12 @@ class ConferenceApplicationView(SamePortalGroupMixin,
                                 GroupIsConferenceMixin,
                                 RequireExtraDispatchCheckMixin,
                                 ConferencePropertiesMixin,
+                                JsonFieldFormsetMixin,
                                 FormView):
     form_class = ConferenceApplicationForm
     template_name = 'cosinnus/conference/conference_application_form.html'
-    
+    json_field_formsets = {'motivation_answers': MotivationAnswerFormSet}
+
     def extra_dispatch_check(self):
         if not self.group.use_conference_applications:
             messages.warning(self.request, _('This function is not enabled for this conference.'))
@@ -835,6 +837,9 @@ class ConferenceApplicationView(SamePortalGroupMixin,
     def application(self):
         user = self.request.user
         return self.group.conference_applications.all().filter(user=user).first()
+
+    def get_instance(self):
+        return self.application
 
     def get_form_kwargs(self):
         form_kwargs = super().get_form_kwargs()
@@ -856,14 +861,16 @@ class ConferenceApplicationView(SamePortalGroupMixin,
             return self.render_to_response(self.get_context_data(form=form))
 
     def form_valid(self, form):
+        json_field_formsets_valid = self.json_field_formset_form_valid_hook()
         formset = PriorityFormSet(self.request.POST)
-        if formset.is_valid():
+        if json_field_formsets_valid and formset.is_valid():
             priorities = self._get_prioritydict(form)
             if not form.instance.id:
                 application = form.save(commit=False)
                 application.conference = self.group
                 application.user = self.request.user
                 application.priorities = priorities
+                self.json_field_formset_pre_save_hook(application)
                 application.save()
 
                 signals.user_group_join_requested.send(sender=self, obj=self.group, user=self.request.user, 
@@ -872,6 +879,7 @@ class ConferenceApplicationView(SamePortalGroupMixin,
             else:
                 application = form.save()
                 application.priorities = priorities
+                self.json_field_formset_pre_save_hook(application)
                 application.save()
                 messages.success(self.request, _('Your application has been updated.'))
             
@@ -930,6 +938,9 @@ class ConferenceApplicationView(SamePortalGroupMixin,
         if not self.application:
             return True
         return self.application.status == 2
+
+    def json_field_formset_initial(self):
+        return {'motivation_answers': self.participation_management.motivation_questions}
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

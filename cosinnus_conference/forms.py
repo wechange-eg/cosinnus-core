@@ -245,11 +245,6 @@ class ConferenceApplicationForm(CleanFromToDateFieldsMixin, forms.ModelForm):
             or not self.participation_management.application_options):
             del self.fields['options']
         if (not hasattr(self, 'participation_management')
-            or not self.participation_management.information_field_enabled):
-            del self.fields['information']
-        else:
-            self.fields['information'].required = True
-        if (not hasattr(self, 'participation_management')
             or not self.participation_management.may_be_contacted_field_enabled):
             self.fields['may_be_contacted'].required = False
         else:
@@ -257,11 +252,7 @@ class ConferenceApplicationForm(CleanFromToDateFieldsMixin, forms.ModelForm):
             self.fields['may_be_contacted'].disabled = True
         # even though the model field `may_be_contacted` is default=False, the formfield is default=True 
         self.fields['may_be_contacted'].initial = True
-        
-        if ('information' in self.fields and hasattr(self, 'participation_management')
-            and self.participation_management.information_field_initial_text):
-            self.fields['information'].initial = self.participation_management.information_field_initial_text
-        
+
         # exclude some optional fields for this portal
         for field_name in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
             if field_name in self.fields:
@@ -296,6 +287,17 @@ class ConferenceApplicationEventPrioForm(forms.Form):
 
 
 PriorityFormSet = formset_factory(ConferenceApplicationEventPrioForm, extra=0)
+
+
+class MotivationAnswerForm(forms.Form):
+    question = forms.CharField(widget=forms.HiddenInput)
+    answer = forms.CharField(widget=forms.Textarea)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['question'].widget.attrs['readonly'] = True
+
+MotivationAnswerFormSet = formset_factory(MotivationAnswerForm, extra=0)
 
 
 class ConferenceApplicationManagementForm(forms.ModelForm):
