@@ -1,0 +1,5 @@
+{% load i18n widget_tweaks %}
+
+<em>{{ inlineform.question.value|linebreaks }}</em>
+{% include 'cosinnus/fields/default_field.html' with field=inlineform.answer label=None large_field=True %}
+{{ inlineform.question }}

@@ -1,13 +1,6 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
 
-{% block extrahead %}
-    {{ block.super }}
-    {% if form.information %}
-        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.information.id_for_label %}
-    {% endif %}
-{% endblock %}
-
 {% block leftnav %}{% endblock %}
 
 {% block page_title %}{% trans "Application" %} - {{ group.name }} {{ block.super }}{% endblock page_title %}
@@ -55,11 +48,10 @@
 	                <div class="large-space"></div>
 		        {% endblock notice_text %}
 		        
-		        {% if form.information %}
-			        {% trans "Please provide your motivation for applying" as information_label %}
-	                {% trans "Describe why you wish to participate" as information_placeholder %}
-			        {% include 'cosinnus/fields/default_field.html' with field=form.information label=information_label placeholder=information_placeholder large_field=True %}
-			    {% endif %}
+                {% if participation_management and participation_management.information_field_enabled %}
+                    {% trans "Please provide your motivation for applying" as motivation_label %}
+                    {% include 'cosinnus/fields/inlineform_field.html' with inline_form=motivation_answers_formset label=motivation_label content_template='cosinnus/conference/motivation_answer_inline.html' unique_id='answers' %}
+                {% endif %}
 
 				{% if form.contact_email or form.contact_phone %}
 					<h3>{% trans "Optional contact information" %}</h3>                                     
@@ -100,6 +92,7 @@
 				        <tr>
 				            <td>{{ form.event_name.value }}</td>
 				            {{ form.priority }}
+                            {{ form.event_name }}
 				        </tr>
 				
 			        {% endfor %}

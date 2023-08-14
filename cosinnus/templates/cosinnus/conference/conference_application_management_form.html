@@ -171,7 +171,15 @@
 			                    <div class="row application-row">
                                     {% comment %} Message to organizers {% endcomment %}
                                     <div class="col-xs-12 textfield flat-h transparent">
-                                        {% if application.information.value %}
+                                        {% if application.motivation_answers %}
+                                            <p>
+                                                <b>{% trans 'Motivation for applying' %}:</b>
+                                            </p>
+                                            {%  for answer in application.instance.motivation_answers %}
+                                                <strong></y><em>{{ answer.question|linebreaks }}</em></strong>
+                                                {{ answer.answer|linebreaks }}
+                                            {% endfor %}
+                                        {% elif application.information.value %}
                                             <b>{% trans 'Motivation for applying' %}:</b>
                                             <br/>
                                             {{ application.information.value|textfield }}

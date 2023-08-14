@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-08 09:34+0200\n"
+"POT-Creation-Date: 2023-08-14 15:37+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1133,6 +1133,9 @@ msgstr "Benutzerinfos anfragen"
 msgid "Pre-filled content for the information field"
 msgstr "Vorausgefüllter Inhalt für das Informationsfeld"
 
+msgid "User motivation questions"
+msgstr "Teilnahme-Motivations-Fragen"
+
 msgid "Request contact option"
 msgstr "Kontaktoption anfordern"
 
@@ -1200,6 +1203,9 @@ msgstr "Prioritäten"
 
 msgid "Motivation for applying"
 msgstr "Motivation für die Teilnahme"
+
+msgid "User motivation answers"
+msgstr "Teilnahme-Motivations-Antworten"
 
 msgid "Contact E-Mail Address"
 msgstr "Kontakt-E-Mail Adresse"
@@ -3063,9 +3069,6 @@ msgstr "Du erhältst eine Benachrichtigungs-E-Mail und eine Benachrichtigung auf
 msgid "Please provide your motivation for applying"
 msgstr "Bitte gib deine Motivation für die Teilnahme an"
 
-msgid "Describe why you wish to participate"
-msgstr "Beschreibe, warum du teilnehmen möchtest"
-
 msgid "Optional contact information"
 msgstr "Optionale Kontaktinformationen"
 
@@ -3291,18 +3294,21 @@ msgstr "Dies ist kein forciertes Limit, sondern dient nur zur Orientierung für 
 msgid "(no limit selected)"
 msgstr "(keine Begrenzung ausgewählt)"
 
-msgid "Require applicants to submit a text about their motivation for applying"
-msgstr "Antragssteller/innen müssen einen Text über ihre Motiviation für die Teilnahme angeben"
+msgid "Require applicants to answer questions about their motivation for applying"
+msgstr "Antragssteller/innen müssen Fragen über ihre Motiviation für die Teilnahme beantworten"
 
-msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
-msgstr "Das Motivations-Textfeld wird mit dem Text vorausgefüllt, den du hier eingibst. Du kannst dies nutzen, um einen Hilfetext für das Verfassen des Motivationstextes zu hinterlegen oder eine Frageliste angeben, die die Antragssteller/innen beantworten sollen."
+msgid "Provide a list of questions that the applicants should answer."
+msgstr "Gib Fragen an, die Antragssteller/innen beantworten müssen."
 
 #, python-format
 msgid "Only applicable if \"%(other_option)s\" is enabled."
 msgstr "Nur relevant, wenn \"%(other_option)s\" aktiviert ist."
 
-msgid "Enter text to pre-fill or leave empty"
-msgstr "Text zum Vorausfüllen eingeben oder frei lassen"
+msgid "Remove question"
+msgstr "Frage entfernen"
+
+msgid "Add question"
+msgstr "Frage hinzufügen"
 
 msgid "Options for participation"
 msgstr "Möglichkeiten zur Teilnahme"
@@ -8678,6 +8684,9 @@ msgstr "Deine Änderungen wurden übernommen."
 msgid "Option"
 msgstr "Option"
 
+msgid "Motivation"
+msgstr "Motivation"
+
 msgid "Status"
 msgstr "Status"
 
@@ -13166,6 +13175,15 @@ msgstr "Aufgabenliste „%(title)s“ konnte nicht hinzugefügt werden."
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte hast eins oder mehrere der noch enthaltenen Objekte zu löschen!"
 
+#~ msgid "Describe why you wish to participate"
+#~ msgstr "Beschreibe, warum du teilnehmen möchtest"
+
+#~ msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
+#~ msgstr "Das Motivations-Textfeld wird mit dem Text vorausgefüllt, den du hier eingibst. Du kannst dies nutzen, um einen Hilfetext für das Verfassen des Motivationstextes zu hinterlegen oder eine Frageliste angeben, die die Antragssteller/innen beantworten sollen."
+
+#~ msgid "Enter text to pre-fill or leave empty"
+#~ msgstr "Text zum Vorausfüllen eingeben oder frei lassen"
+
 #~ msgid "Note: Attendance statistics might not include all attendees, as users may block tracking."
 #~ msgstr "Hinweis: Teilnahme-Statistiken könnten unvollständig sein, weil Teilnehmende Tracking blockieren können."
 
@@ -13913,9 +13931,6 @@ msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte
 
 #~ msgid "%s - Events"
 #~ msgstr "%s - Veranstaltungen"
-
-#~ msgid "Add suggestion"
-#~ msgstr "Terminabstimmung hinzufügen"
 
 #~ msgid "Are you sure to remove this event with all its suggestions and votes?"
 #~ msgstr "Sind Sie sicher, dass Sie diese Veranstaltung mit den dazugehörigen Vorschlägen und Abstimmungen löschen möchten?"

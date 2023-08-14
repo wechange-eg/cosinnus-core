@@ -56,14 +56,17 @@ from cosinnus_event.models import ConferenceEventAttendanceTracking
 from django.http.response import Http404, HttpResponseForbidden,\
     HttpResponseNotFound
 
-from cosinnus_conference.forms import (CHOICE_ALL_APPLICANTS, CHOICE_ALL_MEMBERS, CHOICE_APPLICANTS_AND_MEMBERS, CHOICE_INDIVIDUAL, 
+from cosinnus_conference.forms import (CHOICE_ALL_APPLICANTS, CHOICE_ALL_MEMBERS, CHOICE_APPLICANTS_AND_MEMBERS, CHOICE_INDIVIDUAL,
                                        ConferenceRemindersForm,
                                        ConferenceConfirmSendRemindersForm,
                                        ConferenceParticipationManagement,
                                        ConferenceApplicationForm,
                                        PriorityFormSet,
                                        ConferenceApplicationManagementFormSet,
-                                       AsignUserToEventForm)
+                                       AsignUserToEventForm,
+                                       MotivationQuestionFormSet,
+                                       MotivationAnswerFormSet,
+                                       )
 from cosinnus_conference.utils import send_conference_reminder
 from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus import cosinnus_notifications
@@ -72,6 +75,7 @@ import xlsxwriter
 from cosinnus.utils.http import make_xlsx_response
 from cosinnus.views.profile import deactivate_user_and_mark_for_deletion
 from cosinnus.core.decorators.views import redirect_to_error_page
+from cosinnus.views.mixins.formsets import JsonFieldFormsetMixin
 from cosinnus.apis.bigbluebutton import BigBlueButtonAPI
 
 logger = logging.getLogger('cosinnus')
@@ -752,9 +756,13 @@ class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
 class ConferenceParticipationManagementView(SamePortalGroupMixin,
                                             RequireWriteMixin,
                                             GroupIsConferenceMixin,
+                                            JsonFieldFormsetMixin,
                                             FormView):
     form_class = ConferenceParticipationManagement
     template_name = 'cosinnus/conference/conference_participation_management_form.html'
+    json_field_formsets = {'motivation_questions': MotivationQuestionFormSet}
+    json_field_formsets_allow_add = {'motivation_questions': True}
+    instance = None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -763,19 +771,29 @@ class ConferenceParticipationManagementView(SamePortalGroupMixin,
         })
         return context
 
+    def get_instance(self):
+        if self.instance:
+            return self.instance
+        if self.group.participation_management:
+            self.instance = self.group.participation_management.first()
+        return self.instance
+
     def get_form_kwargs(self):
         form_kwargs = super().get_form_kwargs()
-        if self.group.participation_management:
-            form_kwargs['instance'] = self.group.participation_management.first()
+        instance = self.get_instance()
+        if instance:
+            form_kwargs['instance'] = instance
         return form_kwargs
 
     def form_valid(self, form):
+        json_field_formsets_valid = self.json_field_formset_form_valid_hook()
+        if not json_field_formsets_valid:
+            return self.form_invalid(form)
+        management = form.save(commit=False)
         if not form.instance.id:
-            management = form.save(commit=False)
             management.conference = self.group
-            management.save()
-        else:
-            form.save()
+        self.json_field_formset_pre_save_hook(management)
+        management.save()
         messages.success(self.request, _('Participation configurations have been updated.'))
         return HttpResponseRedirect(self.get_success_url())
 
@@ -804,10 +822,12 @@ class ConferenceApplicationView(SamePortalGroupMixin,
                                 GroupIsConferenceMixin,
                                 RequireExtraDispatchCheckMixin,
                                 ConferencePropertiesMixin,
+                                JsonFieldFormsetMixin,
                                 FormView):
     form_class = ConferenceApplicationForm
     template_name = 'cosinnus/conference/conference_application_form.html'
-    
+    json_field_formsets = {'motivation_answers': MotivationAnswerFormSet}
+
     def extra_dispatch_check(self):
         if not self.group.use_conference_applications:
             messages.warning(self.request, _('This function is not enabled for this conference.'))
@@ -817,6 +837,9 @@ class ConferenceApplicationView(SamePortalGroupMixin,
     def application(self):
         user = self.request.user
         return self.group.conference_applications.all().filter(user=user).first()
+
+    def get_instance(self):
+        return self.application
 
     def get_form_kwargs(self):
         form_kwargs = super().get_form_kwargs()
@@ -838,14 +861,16 @@ class ConferenceApplicationView(SamePortalGroupMixin,
             return self.render_to_response(self.get_context_data(form=form))
 
     def form_valid(self, form):
+        json_field_formsets_valid = self.json_field_formset_form_valid_hook()
         formset = PriorityFormSet(self.request.POST)
-        if formset.is_valid():
+        if json_field_formsets_valid and formset.is_valid():
             priorities = self._get_prioritydict(form)
             if not form.instance.id:
                 application = form.save(commit=False)
                 application.conference = self.group
                 application.user = self.request.user
                 application.priorities = priorities
+                self.json_field_formset_pre_save_hook(application)
                 application.save()
 
                 signals.user_group_join_requested.send(sender=self, obj=self.group, user=self.request.user, 
@@ -854,6 +879,7 @@ class ConferenceApplicationView(SamePortalGroupMixin,
             else:
                 application = form.save()
                 application.priorities = priorities
+                self.json_field_formset_pre_save_hook(application)
                 application.save()
                 messages.success(self.request, _('Your application has been updated.'))
             
@@ -912,6 +938,9 @@ class ConferenceApplicationView(SamePortalGroupMixin,
         if not self.application:
             return True
         return self.application.status == 2
+
+    def json_field_formset_initial(self):
+        return {'motivation_answers': self.participation_management.motivation_questions}
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1148,6 +1177,17 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
                 result.append('')
         return result
 
+    def get_motivation_question_strings(self):
+        return ['{}: {}'.format(_('Motivation'), question.get('question')) for question in self.management.motivation_questions]
+
+    def get_motivation_answers(self, application):
+        answers = []
+        for question in self.management.motivation_questions:
+            for answer in application.motivation_answers:
+                if answer.get('question') == question.get('question'):
+                    answers.append(answer.get('answer', ''))
+        return answers
+
     @cached_property
     def conditions_check(self):
         if self.management and self.management.has_conditions:
@@ -1159,9 +1199,13 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
         header = [
             _('First Name'), 
             _('Last Name'),
-            _('Motivation for applying'),
-            _('Status'),
         ]
+
+        if self.management.information_field_enabled and self.management.information_field_initial_text:
+            header += [_('Motivation for applying')]
+
+        header += [_('Status')]
+
         if not 'contact_email' in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
             header += [
                 _('Contact E-Mail Address')
@@ -1175,7 +1219,9 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
                 _('First Choice'),
                 _('Second Choice'),
             ]
-        header += self.get_extra_header() 
+        header += self.get_extra_header()
+        if self.management.information_field_enabled and self.management.motivation_questions:
+            header += self.get_motivation_question_strings()
         header += self.get_options_strings()
         return header
     
@@ -1188,9 +1234,13 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
         row = [
             user.first_name if user.first_name else '',
             user.last_name if user.last_name else '',
-            application.information,
-            str(dict(APPLICATION_STATES).get(application.status)),
         ]
+
+        if self.management.information_field_enabled and self.management.information_field_initial_text:
+            row += [application.information]
+
+        row += [str(dict(APPLICATION_STATES).get(application.status))]
+
         if not 'contact_email' in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
             row += [
                 application.contact_email
@@ -1204,7 +1254,9 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
                 application.first_priorities_string,
                 application.second_priorities_string,
             ]
-        row += self.get_extra_application_row(application) 
+        row += self.get_extra_application_row(application)
+        if self.management.information_field_enabled and application.motivation_answers:
+            row += self.get_motivation_answers(application)
         row += self.get_application_options(application)
         return row
     

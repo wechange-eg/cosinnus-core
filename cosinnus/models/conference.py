@@ -724,7 +724,9 @@ class ParticipationManagement(models.Model):
                                            on_delete=models.CASCADE)
     
     information_field_enabled = models.BooleanField(_('Request user information'), default=True)
+    # DEPRECATED and replaced by motivation_questions.
     information_field_initial_text = models.TextField(_('Pre-filled content for the information field'), blank=True, null=True)
+    motivation_questions = models.JSONField(default=list, encoder=DjangoJSONEncoder,  blank=True, null=True, verbose_name=_('User motivation questions'))
 
     may_be_contacted_field_enabled = models.BooleanField(_('Request contact option'), 
         help_text='If active, conference applicants will be required to enable the option to be contacted by conference admins', 
@@ -859,7 +861,9 @@ class CosinnusConferenceApplication(models.Model):
                                               default=APPLICATION_SUBMITTED)
     options = models.JSONField(default=list, blank=True, null=True, encoder=DjangoJSONEncoder)
     priorities = models.JSONField(_('Priorities'), default=dict, blank=True, null=True, encoder=DjangoJSONEncoder)
+    # DEPRECATED and replaced by motivation_answers.
     information = models.TextField(_('Motivation for applying'), blank=True)
+    motivation_answers = models.JSONField(default=list, encoder=DjangoJSONEncoder, blank=True, null=True, verbose_name=_('User motivation answers'))
     contact_email = models.EmailField(_('Contact E-Mail Address'), blank=True, null=True)
     contact_phone = PhoneNumberField(('Contact Phone Number'), blank=True, null=True)
     may_be_contacted = models.BooleanField(_('Applicant may be contacted'), 

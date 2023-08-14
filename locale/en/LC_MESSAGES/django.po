@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-08 09:34+0200\n"
+"POT-Creation-Date: 2023-08-14 15:37+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1194,6 +1194,9 @@ msgstr "There are no groups."
 msgid "Pre-filled content for the information field"
 msgstr ""
 
+msgid "User motivation questions"
+msgstr ""
+
 #, fuzzy
 msgid "Request contact option"
 msgstr "There are no groups."
@@ -1261,6 +1264,9 @@ msgid "Priorities"
 msgstr ""
 
 msgid "Motivation for applying"
+msgstr ""
+
+msgid "User motivation answers"
 msgstr ""
 
 msgid "Contact E-Mail Address"
@@ -3186,9 +3192,6 @@ msgstr ""
 msgid "Please provide your motivation for applying"
 msgstr ""
 
-msgid "Describe why you wish to participate"
-msgstr ""
-
 msgid "Optional contact information"
 msgstr ""
 
@@ -3408,17 +3411,21 @@ msgstr ""
 msgid "(no limit selected)"
 msgstr ""
 
-msgid "Require applicants to submit a text about their motivation for applying"
+msgid "Require applicants to answer questions about their motivation for applying"
 msgstr ""
 
-msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
+msgid "Provide a list of questions that the applicants should answer."
 msgstr ""
 
 #, python-format
 msgid "Only applicable if \"%(other_option)s\" is enabled."
 msgstr ""
 
-msgid "Enter text to pre-fill or leave empty"
+#, fuzzy
+msgid "Remove question"
+msgstr "There are no groups."
+
+msgid "Add question"
 msgstr ""
 
 msgid "Options for participation"
@@ -8811,6 +8818,10 @@ msgstr ""
 
 msgid "Option"
 msgstr ""
+
+#, fuzzy
+msgid "Motivation"
+msgstr "Groups"
 
 msgid "Status"
 msgstr ""
