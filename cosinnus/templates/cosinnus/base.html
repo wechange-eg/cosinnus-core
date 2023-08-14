@@ -60,7 +60,12 @@
 
         {% block base_jshead %}
             {% comment %} Bare JS required for the site. Only this is loaded on auth pages {% endcomment %}
-	        <script src="{% static 'js/vendor/jquery-2.1.0.min.js' %}"></script>
+	        <script src="{% static 'js/vendor/jquery-3.7.0.min.js' %}"></script>
+            {% if SETTINGS.DEBUG %}
+            <script src="{% static 'js/vendor/jquery-migrate-3.4.1.js' %}"></script>
+            {% else %}
+            <script src="{% static 'js/vendor/jquery-migrate-3.4.1.min.js' %}"></script>
+            {% endif %}
 	        <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
         {% endblock base_jshead %}
 

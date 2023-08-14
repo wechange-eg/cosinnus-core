@@ -132,7 +132,8 @@ class HeaderView(APIView):
             ],
             'js_settings': render_to_string('cosinnus/v2/navbar/js_settings.html', context.flatten(), request=request),
             'js': [
-                static('js/vendor/jquery-2.1.0.min.js'),
+                static('js/vendor/jquery-3.7.0.min.js'),
+                static('js/vendor/jquery-migrate-3.4.1.min.js'),
                 static('js/vendor/bootstrap.min.js'),
                 static('js/vendor/moment-with-locales-2.29.4.min.js'),
                 static('js/vendor/moment-timezone-with-data.min-0.5.43.js'),
