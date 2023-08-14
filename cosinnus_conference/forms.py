@@ -274,7 +274,7 @@ class RadioSelectInRowWidget(forms.RadioSelect):
 
 class ConferenceApplicationEventPrioForm(forms.Form):
     event_id = forms.CharField(widget=forms.HiddenInput())
-    event_name = forms.CharField(required=False)
+    event_name = forms.CharField(required=False, widget=forms.HiddenInput())
     priority = forms.ChoiceField(
         required=True,
         initial=2,
