@@ -3058,13 +3058,13 @@ msgid "Edit your application for"
 msgstr "Deine Anmeldung bearbeiten für"
 
 msgid "Please fill out the fields below to submit your application. Be aware that the organizers may take your profile into consideration when processing your application, so make sure that your profile page is well maintained. You can view and edit your profile page here:"
-msgstr "Bitte fülle die folgenden Felder aus, um deine Anmeldung einzureichen. Bitte beachte, dass die Organisator/innen dein Profil bei der Bearbeitung deiner Bewerbung berücksichtigen können. Stelle also sicher, dass deine Profilseite gut gepflegt ist. Du kannst deine Profilseite hier einsehen und bearbeiten:"
+msgstr "Bitte fülle die folgenden Felder aus, um deine Anmeldung einzureichen. Bitte beachte, dass die Organisator:innen dein Profil bei der Bearbeitung deiner Bewerbung berücksichtigen können. Stelle also sicher, dass deine Profilseite gut gepflegt ist. Du kannst deine Profilseite hier einsehen und bearbeiten:"
 
 msgid "Your profile"
 msgstr "Dein Profil"
 
 msgid "You will receive a notification e-mail and on-site notification when the organizers have processed your application. Make sure your notification settings are set up correctly to receive e-mails from us!"
-msgstr "Du erhältst eine Benachrichtigungs-E-Mail und eine Benachrichtigung auf der Webseite, wenn wir deine Anmeldung bearbeitet haben. Stelle also bitte sicher, dass du unter deinen Benachrichtigungseinstellungen an der Stelle \"Ich möchte Benachrichtigungs-E-Mails erhalten\" die richtige Auswahl getroffen hast, um E-Mails von uns zu erhalten!"
+msgstr "Du erhältst eine Benachrichtigungs-E-Mail und eine Benachrichtigung auf der Webseite, wenn deine Anmeldung bearbeitet wurde. Stelle also bitte sicher, dass du unter deinen Benachrichtigungseinstellungen an der Stelle \"Ich möchte Benachrichtigungs-E-Mails erhalten\" die richtige Auswahl getroffen hast, um E-Mails von uns zu erhalten!"
 
 msgid "Please provide your motivation for applying"
 msgstr "Bitte gib deine Motivation für die Teilnahme an"
@@ -3097,7 +3097,7 @@ msgid "I accept the conditions in order to submit my application"
 msgstr "Ich akzeptiere die Bedingungen, um Teilnahme zu beantragen"
 
 msgid "I can be contacted via email by conference administration regardless of my notification settings"
-msgstr "Ich kann von den Tagungsorganisator/innen per E-Mail kontaktiert werden, unabhängig von meinen Benachrichtigungseinstellungen"
+msgstr "Ich kann von den Tagungsorganisator:innen per E-Mail kontaktiert werden, unabhängig von meinen Benachrichtigungseinstellungen"
 
 msgid "Please verify your email address first. Otherweise you may miss some important conference notifications."
 msgstr "Bitte verifiziere zunächst deine E-Mail Adresse. Andernfalls kannst du einige wichtige Konferenzbenachrichtigungen verpassen."
@@ -3125,13 +3125,13 @@ msgid "Here you and all other organizers can process all applications. Check eac
 msgstr "Hier kannst du und alle anderen Organisatoren alle Teilnahmeanträge bearbeiten. Prüfe jede Bewerbung sorgfältig und wähle aus, ob du einen Antrag ablehnen, annehmen oder auf die Warteliste setzen möchtest. Du kannst einen Grund für auf die Warteliste gesetzte oder abgelehnte Teilnahmeanträge hinzufügen, der dem/der Antragsteller/in angezeigt wird."
 
 msgid "Once you are done, click \"Save\" on the bottom of the page. All applicants will receive an on-site notification and an e-mail (depending on their e-mail notification settings)."
-msgstr "Wenn du fertig bist, klicke unten auf der Seite auf \"Sichern\". Alle Antragssteller/innen erhalten eine Benachrichtigung auf der Webseite und eine E-Mail (abhängig von ihren E-Mail-Benachrichtigungseinstellungen)."
+msgstr "Wenn du fertig bist, klicke unten auf der Seite auf \"Sichern\". Alle Antragsstellende erhalten eine Benachrichtigung auf der Webseite und eine E-Mail (abhängig von ihren E-Mail-Benachrichtigungseinstellungen)."
 
 msgid "Accepted applicants will be granted membership status of the conference and they can enter the conference area immediately."
-msgstr "Angenommene Antragssteller/innen erhalten Mitgliedsstatus bei der Tagung und können den Tagungsbereich sofort betreten."
+msgstr "Angenommene Antragsstellende erhalten Mitgliedsstatus bei der Tagung und können den Tagungsbereich sofort betreten."
 
 msgid "If you have changed your mind for some applications later on, you can simply select a different option for those you want to change, and click \"Save\" again. Only the applicants whose application status changed will be notified of the change."
-msgstr "Wenn du es dir später bei einigen Teilnahmeanträgen anders überlegt hast, kannst du einfach eine andere Option für die zu ändernden Teilnahmeanträge auswählen und erneut auf \"Sichern\" klicken. Nur die Antragssteller/innen, deren Teilnameantragsstatus sich geändert hat, werden über die Änderung informiert."
+msgstr "Wenn du es dir später bei einigen Teilnahmeanträgen anders überlegt hast, kannst du einfach eine andere Option für die zu ändernden Teilnahmeanträge auswählen und erneut auf \"Sichern\" klicken. Nur Antragsstellende, deren Teilnameantragsstatus sich geändert hat, werden über die Änderung informiert."
 
 msgid "You may also leave some applications unselected at first and process them at a later time."
 msgstr "Du kannst auch einige Teilnahmeanträge zunächst unausgewählt lassen und sie zu einem späteren Zeitpunkt bearbeiten."
@@ -3176,7 +3176,7 @@ msgid "Choose users to assign to this workshop"
 msgstr "Wähle Benutzer/innen für diesen Workshop"
 
 msgid "List of Applicants"
-msgstr "Liste der Antragssteller/innen"
+msgstr "Liste der Antragsstellenden"
 
 msgid "Join BBB Meeting as guest"
 msgstr "Als Gast am BBB Meeting teilnehmen"
@@ -3295,10 +3295,10 @@ msgid "(no limit selected)"
 msgstr "(keine Begrenzung ausgewählt)"
 
 msgid "Require applicants to answer questions about their motivation for applying"
-msgstr "Antragssteller/innen müssen Fragen über ihre Motiviation für die Teilnahme beantworten"
+msgstr "Antragsstellende müssen Fragen über ihre Motiviation für die Teilnahme beantworten"
 
 msgid "Provide a list of questions that the applicants should answer."
-msgstr "Gib Fragen an, die Antragssteller/innen beantworten müssen."
+msgstr "Gib Fragen an, die Antragsstellende beantworten müssen."
 
 #, python-format
 msgid "Only applicable if \"%(other_option)s\" is enabled."
@@ -3317,10 +3317,10 @@ msgid "Choose one or more options that will be displayed on the application form
 msgstr "Wähle eine oder mehr Bedingungen die auf dem Anmeldeformular angezeigt werden sollen. Benutzer können bei der Antragsstellung aus diesen Optionen Beliebige auswählen."
 
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
-msgstr "Workshopauswahl: Antragssteller/innen können Workshops priorisieren, an denen sie teilnehmen möchten"
+msgstr "Workshopauswahl: Antragsstellende können Workshops priorisieren, an denen sie teilnehmen möchten"
 
 msgid "Applicants have to give their permission to be contacted per email"
-msgstr "Antragssteller/innen müssen ihr Einverständnis geben, per E-Mail kontaktiert zu werden"
+msgstr "Antragsstellende müssen ihr Einverständnis geben, per E-Mail kontaktiert zu werden"
 
 msgid "Conditions for participation"
 msgstr "Bedingungen für die Teilnahme"
@@ -8548,10 +8548,10 @@ msgid "conference"
 msgstr "Tagung"
 
 msgid "Applicants and members"
-msgstr "Antragssteller/innen und Mitglieder"
+msgstr "Antragsstellende und Mitglieder"
 
 msgid "All applicants"
-msgstr "Alle Antragssteller/innen"
+msgstr "Alle Antragsstellende"
 
 msgid "Individual choice"
 msgstr "Indivuduelle Auswahl"
