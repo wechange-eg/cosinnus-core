@@ -86,7 +86,12 @@ class UserMatchListView(LoginRequiredMixin, ListView):
                 score += 1
                 if profile.media_tag.topics == self.request.user.cosinnus_profile.media_tag.topics:
                     score += 1
-            
+
+            # score users active in the last month
+            last_month = now() - timedelta(days=31)
+            if profile.user.last_login > last_month:
+                score += 1
+
             # mutual likes score
             this_user_liked_set = self.get_hashset_likes_for_user(profile.user)
             set_intersection = this_user_liked_set.intersection(request_user_liked_set)
