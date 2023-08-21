@@ -1178,7 +1178,7 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
         return result
 
     def get_motivation_question_strings(self):
-        return ['{}: {}'.format(_('Motivation'), question.get('question')) for question in self.management.motivation_questions]
+        return [question.get('question', '') for question in self.management.motivation_questions]
 
     def get_motivation_answers(self, application):
         answers = []
