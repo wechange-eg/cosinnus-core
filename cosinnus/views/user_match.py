@@ -29,17 +29,17 @@ class UserMatchListView(LoginRequiredMixin, ListView):
     template_name = 'cosinnus/user/user_match_list.html'
     login_url = LOGIN_URL
 
-    def get_hashset_likes_for_user(self, user=None):
+    def get_hashset_likes_for_user(self, user):
         """
         Get all the objects liked by a certain user.
 
         Args:
-            user: UserObject. Defaults to None.
+            user: UserObject.
 
         Returns:
             set(): Set of objects liked by the given user in form {content_type: object_id}
         """
-        values_liked = LikeObject.objects.filter(user=self.request.user, liked=True).values_list('content_type', 'object_id')
+        values_liked = LikeObject.objects.filter(user=user, liked=True).values_list('content_type', 'object_id')
         user_liked_set = set(f'{liketuple[0]}::{liketuple[1]}' for liketuple in values_liked)
         return user_liked_set
 
@@ -88,9 +88,9 @@ class UserMatchListView(LoginRequiredMixin, ListView):
                     score += 1
             
             # mutual likes score
-            this_user_liked_set = self.get_hashset_likes_for_user(profile) 
-            set_union = this_user_liked_set.union(request_user_liked_set) 
-            shared_like_count = len(set_union)
+            this_user_liked_set = self.get_hashset_likes_for_user(profile.user)
+            set_intersection = this_user_liked_set.intersection(request_user_liked_set)
+            shared_like_count = len(set_intersection)
             score += shared_like_count
             
             score_dict[profile.id] = score
