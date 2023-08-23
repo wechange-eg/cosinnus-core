@@ -101,8 +101,8 @@ class UserMatchListView(LoginRequiredMixin, ListView):
                                 score += 1
             if profile.media_tag.topics:
                 score += 1
-                if profile.media_tag.topics == self.request.user.cosinnus_profile.media_tag.topics:
-                    score += 1
+                user_topics = self.request.user.cosinnus_profile.media_tag.get_topics()
+                score += len(set(profile.media_tag.get_topics()).intersection(set(user_topics)))
 
             # score users active in the last month
             last_month = now() - timedelta(days=31)
