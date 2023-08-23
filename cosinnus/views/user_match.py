@@ -46,20 +46,31 @@ class UserMatchListView(LoginRequiredMixin, ListView):
     # TODO: cache after!
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+
+        # exclude self
+        user_profiles = self.model.objects.exclude(user=self.request.user)
+
+        # filter only users I haven't liked or disliked yet
         already_liked_users = UserMatchObject.objects.filter(
             from_user=self.request.user, 
             type__in=[UserMatchObject.LIKE, UserMatchObject.DISLIKE]
         ).values_list('to_user_id', flat=True)
-        # filter only users I haven't liked or disliked yet
-        user_profiles = self.model.objects.exclude(user=self.request.user).\
-                exclude(user_id__in=already_liked_users)
+        user_profiles = user_profiles.exclude(user_id__in=already_liked_users)
+
+        # filter out users that did not like me
+        disliked_by_users = UserMatchObject.objects.filter(
+            to_user=self.request.user, type=UserMatchObject.DISLIKE
+        ).values_list('from_user_id', flat=True)
+        user_profiles = user_profiles.exclude(user_id__in=disliked_by_users)
+
         # filter active users
         user_profiles = filter_active_users(user_profiles, filter_on_user_profile_model=True)
+
         # filter users for their profile visibility
         users = get_user_model().objects.filter(cosinnus_profile__in=user_profiles)
         checked_for_visibility_users = [user for user in users if check_user_can_see_user(self.request.user, user)]
         user_profiles = get_user_profile_model().objects.filter(user_id__in=checked_for_visibility_users)
+
         # filter user to be active within the last year
         last_year = now() - timedelta(days=365) # timedelta to pass users who have logged in at least once within the last year;
         user_profiles = user_profiles.filter(user__last_login__gte=last_year)
