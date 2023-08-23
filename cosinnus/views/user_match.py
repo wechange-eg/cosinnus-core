@@ -90,9 +90,15 @@ class UserMatchListView(LoginRequiredMixin, ListView):
             if profile.email_verified:
                 score += 1
             if profile.dynamic_fields:
-                for value in profile.dynamic_fields.values():
+                for field, value in profile.dynamic_fields.items():
                     if value:
                         score += 1
+                        user_value = self.request.user.cosinnus_profile.dynamic_fields.get(field)
+                        if user_value:
+                            if isinstance(value, list):
+                                score += len(set(user_value).intersection(set(value)))
+                            elif user_value == value:
+                                score += 1
             if profile.media_tag.topics:
                 score += 1
                 if profile.media_tag.topics == self.request.user.cosinnus_profile.media_tag.topics:
