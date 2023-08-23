@@ -89,6 +89,8 @@ class UserMatchListView(LoginRequiredMixin, ListView):
                 score += 1
             if profile.email_verified:
                 score += 1
+
+            # Score dynamic fields
             if profile.dynamic_fields:
                 for field, value in profile.dynamic_fields.items():
                     if value:
@@ -99,10 +101,18 @@ class UserMatchListView(LoginRequiredMixin, ListView):
                                 score += len(set(user_value).intersection(set(value)))
                             elif user_value == value:
                                 score += 1
+
+            # Score topics
             if profile.media_tag.topics:
                 score += 1
                 user_topics = self.request.user.cosinnus_profile.media_tag.get_topics()
                 score += len(set(profile.media_tag.get_topics()).intersection(set(user_topics)))
+
+            # Score tags
+            if profile.media_tag.tags.exists():
+                score += 1
+                user_tags = self.request.user.cosinnus_profile.media_tag.tags.names()
+                score += len(set(profile.media_tag.tags.names()).intersection(set(user_tags)))
 
             # score users active in the last month
             last_month = now() - timedelta(days=31)
