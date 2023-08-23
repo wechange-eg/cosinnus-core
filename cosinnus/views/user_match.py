@@ -1,4 +1,5 @@
 import logging
+import random
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -135,6 +136,23 @@ class UserMatchListView(LoginRequiredMixin, ListView):
         # all active users related to the selected user profiles
         scored_user_profiles = list(self.model.objects.select_related('user').filter(id__in=selected_user_profiles))
         scored_user_profiles = sorted(scored_user_profiles, key=lambda p: result_score[p.id], reverse=True)
+
+        # Include one user that liked me in the selection
+        liked_by_users = UserMatchObject.objects.filter(
+            to_user=self.request.user, type=UserMatchObject.LIKE
+        ).values_list('from_user_id', flat=True)
+        selected_include_liked = set(liked_by_users).intersection(set(selected_user_profiles))
+        if not selected_include_liked:
+            # Get the user that liked me with the best matching score
+            liked_by_user_profiles = user_profiles.filter(user_id__in=liked_by_users).all()
+            liked_by_user_profiles = sorted(liked_by_user_profiles, key=lambda p: result_score[p.id], reverse=True)
+            liked_by_user_profile = liked_by_user_profiles[0] if liked_by_user_profiles else None
+            if liked_by_user_profile:
+                # Add the user at a random position
+                scored_user_profiles = scored_user_profiles[:2]
+                random.seed()
+                random_pos = random.randrange(3)
+                scored_user_profiles.insert(random_pos, liked_by_user_profile)
 
         context.update({
             'scored_user_profiles': scored_user_profiles,
