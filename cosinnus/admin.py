@@ -956,6 +956,6 @@ if settings.COSINNUS_ENABLE_USER_MATCH:
             return False
 
         def has_delete_permission(self, request, obj=None):
-            return False
+            return True  # TODO: set to false after testing
 
     admin.site.register(UserMatchObject, UserMatchAdmin)
