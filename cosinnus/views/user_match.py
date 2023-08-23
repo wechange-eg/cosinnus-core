@@ -131,10 +131,10 @@ class UserMatchListView(LoginRequiredMixin, ListView):
         result_score = {k: v for k, v in score_dict}
 
         selected_user_profiles = list(result_score.keys())[:3] # get first 3 user profiles with the highest counted score
-        
-        
-        scored_user_profiles = self.model.objects.select_related('user').\
-               filter(id__in=selected_user_profiles) # all active users related to the selected user profiles
+
+        # all active users related to the selected user profiles
+        scored_user_profiles = list(self.model.objects.select_related('user').filter(id__in=selected_user_profiles))
+        scored_user_profiles = sorted(scored_user_profiles, key=lambda p: result_score[p.id], reverse=True)
 
         context.update({
             'scored_user_profiles': scored_user_profiles,
