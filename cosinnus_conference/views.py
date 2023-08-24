@@ -66,6 +66,7 @@ from cosinnus_conference.forms import (CHOICE_ALL_APPLICANTS, CHOICE_ALL_MEMBERS
                                        AsignUserToEventForm,
                                        MotivationQuestionFormSet,
                                        MotivationAnswerFormSet,
+                                       AdditionalApplicationOptionsFormSet,
                                        )
 from cosinnus_conference.utils import send_conference_reminder
 from cosinnus.templatetags.cosinnus_tags import full_name
@@ -760,8 +761,10 @@ class ConferenceParticipationManagementView(SamePortalGroupMixin,
                                             FormView):
     form_class = ConferenceParticipationManagement
     template_name = 'cosinnus/conference/conference_participation_management_form.html'
-    json_field_formsets = {'motivation_questions': MotivationQuestionFormSet}
-    json_field_formsets_allow_add = {'motivation_questions': True}
+    json_field_formsets = {
+        'motivation_questions': MotivationQuestionFormSet,
+        'additional_application_options': AdditionalApplicationOptionsFormSet,
+    }
     instance = None
 
     def get_context_data(self, **kwargs):

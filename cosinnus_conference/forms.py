@@ -182,7 +182,7 @@ class ConferenceParticipationManagement(forms.ModelForm):
 
     class Meta:
         model = ParticipationManagement
-        exclude = ['conference', 'information_questions ', 'information_field_initial_text']
+        exclude = ['conference', 'information_questions ', 'information_field_initial_text', 'additional_application_options']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -203,6 +203,12 @@ class MotivationQuestionForm(forms.Form):
     question = forms.CharField(widget=forms.Textarea)
 
 MotivationQuestionFormSet = formset_factory(MotivationQuestionForm, extra=20, can_delete=True)
+
+
+class AdditionalApplicationOptionsForm(forms.Form):
+    option = forms.CharField()
+
+AdditionalApplicationOptionsFormSet = formset_factory(AdditionalApplicationOptionsForm, extra=20, can_delete=True)
 
 
 class ConferenceApplicationForm(CleanFromToDateFieldsMixin, forms.ModelForm):

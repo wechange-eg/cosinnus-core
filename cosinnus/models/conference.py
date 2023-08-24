@@ -767,6 +767,15 @@ class ParticipationManagement(models.Model):
     def to_date(self):
         return self.application_end
 
+    def get_additional_application_options_choices(self):
+        """ Using the option string as model value and human-readable value. """
+        choices = []
+        for additional_option in self.additional_application_options:
+            option = additional_option.get('option')
+            if option:
+                choices.append((option, option))
+        return choices
+
 
 APPLICATION_INVALID = 1
 APPLICATION_SUBMITTED = 2
