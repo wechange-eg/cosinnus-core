@@ -222,11 +222,16 @@ class ConferenceApplicationForm(CleanFromToDateFieldsMixin, forms.ModelForm):
         exclude = ['conference', 'user', 'status', 'priorities']
 
     def get_options(self):
-        if (hasattr(self, 'participation_management') and
-            self.participation_management.application_options):
-            all_options = settings.COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS
-            picked_options = self.participation_management.application_options
-            result = [option for option in all_options if option[0] in picked_options]
+        if hasattr(self, 'participation_management'):
+            result = []
+            if self.participation_management.application_options:
+                # Add predefined participation options
+                all_options = settings.COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS
+                picked_options = self.participation_management.application_options
+                result.extend([option for option in all_options if option[0] in picked_options])
+            # Add additional participation options
+            if self.participation_management.additional_application_options:
+                result.extend(self.participation_management.get_additional_application_options_choices())
             return result
         return []
 
@@ -247,8 +252,9 @@ class ConferenceApplicationForm(CleanFromToDateFieldsMixin, forms.ModelForm):
             and not self.participation_management.application_conditions_upload) or
             self.instance.id):
             del self.fields['conditions_accepted']
-        if (not hasattr(self, 'participation_management')
-            or not self.participation_management.application_options):
+        if (not hasattr(self, 'participation_management') or not (
+                self.participation_management.application_options
+                or self.participation_management.additional_application_options)):
             del self.fields['options']
         if (not hasattr(self, 'participation_management')
             or not self.participation_management.may_be_contacted_field_enabled):
@@ -266,7 +272,15 @@ class ConferenceApplicationForm(CleanFromToDateFieldsMixin, forms.ModelForm):
         
     def clean_options(self):
         if self.cleaned_data['options'] and len(self.cleaned_data) > 0:
-            return [int(option) for option in self.cleaned_data['options']]
+            options = []
+            for option in self.cleaned_data['options']:
+                try:
+                    predefined_option = int(option)
+                    options.append(predefined_option)
+                except ValueError:
+                    # Additional options from dynamic additional_application_options are added directly as strings.
+                    options.append(option)
+            return options
 
 class RadioSelectInTableRowWidget(forms.RadioSelect):
     input_type = 'radio'
