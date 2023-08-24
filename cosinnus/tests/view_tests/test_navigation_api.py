@@ -258,11 +258,21 @@ class AlertsViewTest(TestAlertsMixin, APITestCase):
             {
                 'items': [
                     {
-                        'text': '<b>Test User</b> created the news post <b></b>.', 'id': alert.pk, 'url': None,
-                        'item_icon_or_image_url': None, 'user_icon_or_image_url': '/static/images/jane-doe-small.png',
-                        'group': None, 'group_icon': None, 'action_datetime': alert_action_datetime,
-                        'is_emphasized': True, 'alert_reason': 'You are following this content or its Project or Group',
-                        'sub_items': [], 'is_multi_user_alert': False, 'is_bundle_alert': False
+                        'text': '<b>Test User</b> created the news post <b></b>.',
+                        'id': alert.pk,
+                        'url': None,
+                        'item_icon': None,
+                        'item_image': None,
+                        'user_icon': None,
+                        'user_image': '/static/images/jane-doe-small.png',
+                        'group': None,
+                        'group_icon': None,
+                        'action_datetime': alert_action_datetime,
+                        'is_emphasized': True,
+                        'alert_reason': 'You are following this content or its Project or Group',
+                        'sub_items': [],
+                        'is_multi_user_alert': False,
+                        'is_bundle_alert': False
                      }
                 ],
                 'has_more': False,
@@ -339,7 +349,7 @@ class HelpViewTest(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertListEqual(
             response.data,
-            [MenuItem('FAQ', 'https://example.com/faq/', 'fa-question-circle')]
+            [MenuItem('FAQ', 'https://example.com/faq/', 'fa-question-circle', is_external=True)]
         )
 
 

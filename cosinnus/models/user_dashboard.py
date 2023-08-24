@@ -109,14 +109,15 @@ class MenuItem(dict):
     image-url (optional) and badge (optional). Used in the v3 navigation API.
     """
 
-    def __init__(self, label, url, icon=None, image=None, badge=None):
+    def __init__(self, label, url, icon=None, image=None, badge=None, is_external=False):
         domain = get_domain_for_portal(CosinnusPortal.get_current())
-        if url and url[0] == '/':
-            url = domain + url
+        if not is_external and url and url.startswith(domain):
+            url = url.replace(domain, '')
         self['icon'] = icon
         self['label'] = label
         self['url'] = url
-        if image and image[0] == '/':
-            image = domain + image
+        self['is_external'] = is_external
+        if image and image.startswith(domain):
+            image = image.replace(domain, '')
         self['image'] = image
         self['badge'] = badge

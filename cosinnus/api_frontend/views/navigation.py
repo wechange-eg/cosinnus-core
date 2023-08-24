@@ -15,7 +15,7 @@ from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.conf import settings
-from cosinnus.models.group import get_cosinnus_group_model, CosinnusPortal
+from cosinnus.models.group import get_cosinnus_group_model, CosinnusPortal, get_domain_for_portal
 from cosinnus.models.group_extra import CosinnusConference
 from cosinnus.models.user_dashboard import DashboardItem, MenuItem
 from cosinnus.trans.group import CosinnusConferenceTrans, CosinnusProjectTrans, CosinnusSocietyTrans
@@ -35,7 +35,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
     - Projects and Groups: users projects and groups
     - Community: Forum and Map
     - Conferences: users conferences
-    Each menu item consists of a label (Markdown), url, icon (Font Awesome class, optional), image url (optional) and
+    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional), image url (optional) and
     badge (optional).
     """
 
@@ -59,8 +59,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 {
                                     "icon": "fa-user",
                                     "label": "Personal Dashboard",
-                                    "url": "http://localhost:8000/dashboard/",
-                                    "image": "http://localhost:8000/media/cosinnus_portals/portal_default/avatars/user/0e9e945efe3d60bf807d56e336b677f193675fd8.png",
+                                    "url": "/dashboard/",
+                                    "image": "/media/cosinnus_portals/portal_default/avatars/user/0e9e945efe3d60bf807d56e336b677f193675fd8.png",
                                 }
                             ],
                             "actions": []
@@ -70,21 +70,21 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 {
                                     "icon": "fa-sitemap",
                                     "label": "Test Group",
-                                    "url": "http://localhost:8000/group/test-group/",
-                                    "image": "http://localhost:8000/media/cosinnus_portals/portal_default/avatars/group/be5636c7955c1fd370514c26ffd4b0902dd5232a.png",
+                                    "url": "/group/test-group/",
+                                    "image": "/media/cosinnus_portals/portal_default/avatars/group/be5636c7955c1fd370514c26ffd4b0902dd5232a.png",
                                 }
                             ],
                             "actions": [
                                 {
                                     "icon": None,
                                     "label": "Create a Group",
-                                    "url": "http://localhost:8000/groups/add/",
+                                    "url": "/groups/add/",
                                     "image": None,
                                 },
                                 {
                                     "icon": None,
                                     "label": "Create a Project",
-                                    "url": "http://localhost:8000/projects/add/",
+                                    "url": "/projects/add/",
                                     "image": None,
                                 }
                             ]
@@ -94,13 +94,13 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 {
                                     "icon": "fa-sitemap",
                                     "label": "Forum",
-                                    "url": "http://localhost:8000/group/forum/",
+                                    "url": "/group/forum/",
                                     "image": None,
                                 },
                                 {
                                     "icon": "fa-group",
                                     "label": "Map",
-                                    "url": "http://localhost:8000/map/",
+                                    "url": "/map/",
                                     "image": None,
                                 }
                             ],
@@ -111,7 +111,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 {
                                     "icon": "fa-television",
                                     "label": "Test Conference",
-                                    "url": "http://localhost:8000/conference/test-conference/",
+                                    "url": "/conference/test-conference/",
                                     "image": None,
                                 }
                             ],
@@ -119,7 +119,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 {
                                     "icon": None,
                                     "label": "Create a Conference",
-                                    "url": "http://localhost:8000/conferences/add/",
+                                    "url": "/conferences/add/",
                                     "image": None,
                                 }
                             ]
@@ -219,7 +219,7 @@ class BookmarksView(APIView):
     """
     An endpoint that provides the user bookmarks for the main navigation.
     Returns menu items for liked groups and projects, liked users and liked content (e.g. ideas).
-    Each menu item consists of a label (Markdown), url, icon (Font Awesome class, optional), image url (optional) and
+    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional), image url (optional) and
     badge (optional).
     """
 
@@ -242,15 +242,15 @@ class BookmarksView(APIView):
                             {
                                 "icon": "fa-sitemap",
                                 "label": "Test Group",
-                                "url": "http://localhost:8000/group/test-group/",
-                                "image": "http://localhost:8000/media/cosinnus_portals/portal_default/avatars/group/be5636c7955c1fd370514c26ffd4b0902dd5232a.png",
+                                "url": "/group/test-group/",
+                                "image": "/media/cosinnus_portals/portal_default/avatars/group/be5636c7955c1fd370514c26ffd4b0902dd5232a.png",
                             }
                         ],
                         "users": [
                             {
                                 "icon": "fa-user",
                                 "label": "Test User",
-                                "url": "http://localhost:8000/user/2/",
+                                "url": "/user/2/",
                                 "image": None,
                             }
                         ],
@@ -258,7 +258,7 @@ class BookmarksView(APIView):
                             {
                                 "icon": "fa-lightbulb-o",
                                 "label": "Test Idea",
-                                "url": "http://localhost:8000/map/?item=1.ideas.test-idea",
+                                "url": "/map/?item=1.ideas.test-idea",
                                 "image": None,
                             }
                         ]
@@ -360,7 +360,7 @@ class UnreadAlertsView(APIView):
 class AlertsView(APIView):
     """
     An endpoint that provides the user alerts for the main navigation.
-    Returns a list of alert items, consisting of a text (label), url, icon_or_image_url, action_datetime and additional
+    Returns a list of alert items, consisting of a text (label), url, icon, image, action_datetime and additional
     alert details. Unread alerts are marked via "is_emphasized".
 
     Multiple related alerts are bundled in a single alert item as sub_items:
@@ -368,7 +368,7 @@ class AlertsView(APIView):
     - is_bundle_alert: is a single alert object bundled for multiple content objects causing events in a short
       time frame, all by the same user in the same group.
 
-    Each sub alert contains text (label), url and icon_or_image_url elements.
+    Each sub alert contains text (label), url, icon and image elements.
     The response list is paginated by 10 items. For pagination the "offset_timestamp" parameter should be used.
     To receive new alerts the "newer_than_timestamp" should be used.
 
@@ -415,9 +415,11 @@ class AlertsView(APIView):
                             {
                                 "text": "<b>User 2</b> requested to become a member.",
                                 "id": 3,
-                                "url": "http://localhost:8000/group/test-group/members/",
-                                "item_icon_or_image_url": "fa-sitemap",
-                                "user_icon_or_image_url": "/static/images/jane-doe-small.png",
+                                "url": "/group/test-group/members/",
+                                "item_icon": "fa-sitemap",
+                                "item_image": None,
+                                "user_icon": None,
+                                "user_image": "/static/images/jane-doe-small.png",
                                 "group": "Test Group",
                                 "group_icon": "fa-sitemap",
                                 "action_datetime": "2023-06-08T08:49:49.965634+00:00",
@@ -430,9 +432,11 @@ class AlertsView(APIView):
                             {
                                 "text": "<b>User 3</b> und 1 other requested to become a member.",
                                 "id": 2,
-                                "url": "http://localhost:8000/group/test-project/members/",
-                                "item_icon_or_image_url": "fa-group",
-                                "user_icon_or_image_url": "/static/images/jane-doe-small.png",
+                                "url": "/group/test-project/members/",
+                                "item_icon": "fa-group",
+                                "item_image": None,
+                                "user_icon": None,
+                                "user_image": "/static/images/jane-doe-small.png",
                                 "group": "Test Project",
                                 "group_icon": "fa-group",
                                 "action_datetime": "2023-05-20T16:04:36.501003+00:00",
@@ -441,13 +445,15 @@ class AlertsView(APIView):
                                 "sub_items": [
                                     {
                                         "title": "User 3",
-                                        "url": "http://localhost:8000/user/4/",
-                                        "icon_or_image_url": "/static/images/jane-doe-small.png"
+                                        "url": "/user/4/",
+                                        "icon": None,
+                                        "image": "/static/images/jane-doe-small.png",
                                     },
                                     {
                                         "title": "User 4",
-                                        "url": "http://localhost:8000/user/5/",
-                                        "icon_or_image_url": "/static/images/jane-doe-small.png"
+                                        "url": "/user/5/",
+                                        "icon": None,
+                                        "image": "/static/images/jane-doe-small.png",
                                     }
                                 ],
                                 "is_multi_user_alert": True,
@@ -456,9 +462,11 @@ class AlertsView(APIView):
                             {
                                 "text": "<b>User 2</b> created 2 news posts.",
                                 "id": 1,
-                                "url": "http://localhost:8000/group/test-group/note/1401481714/",
-                                "item_icon_or_image_url": "fa-quote-right",
-                                "user_icon_or_image_url": "/static/images/jane-doe-small.png",
+                                "url": "/group/test-group/note/1401481714/",
+                                "item_icon": "fa-quote-right",
+                                "item_image": None,
+                                "user_icon": None,
+                                "user_image": "/static/images/jane-doe-small.png",
                                 "group": "Test Group",
                                 "group_icon": "fa-sitemap",
                                 "action_datetime": "2023-05-24T08:44:50.570918+00:00",
@@ -467,13 +475,15 @@ class AlertsView(APIView):
                                 "sub_items": [
                                     {
                                         "title": "test2",
-                                        "url": "http://localhost:8000/group/test-group/note/1455745550/",
-                                        "icon_or_image_url": "fa-quote-right"
+                                        "url": "/group/test-group/note/1455745550/",
+                                        "icon": "fa-quote-right",
+                                        "image": None,
                                     },
                                     {
                                         "title": "test",
-                                        "url": "http://localhost:8000/group/test-group/note/1401481714/",
-                                        "icon_or_image_url": "fa-quote-right"
+                                        "url": "/group/test-group/note/1401481714/",
+                                        "icon": "fa-quote-right",
+                                        "image": None,
                                     }
                                 ],
                                 "is_multi_user_alert": False,
@@ -515,13 +525,23 @@ class AlertsView(APIView):
 
         # alert items
         user_cache = self.get_user_cache(alerts)
-        items = [
-            SerializedNotificationAlert(
+        items = []
+        for alert in alerts:
+            serialized_alert = SerializedNotificationAlert(
                 alert,
                 action_user=user_cache[alert.action_user_id][0],
                 action_user_profile=user_cache[alert.action_user_id][1],
-            ) for alert in alerts
-        ]
+            )
+            # split "icon_or_image_url"
+            self._split_icon_or_image_url(serialized_alert, 'item_')
+            self._split_icon_or_image_url(serialized_alert, 'user_')
+            for sub_item in serialized_alert.get('sub_items', []):
+                self._split_icon_or_image_url(sub_item)
+            # use relative urls
+            self._use_relative_url(serialized_alert)
+            for sub_item in serialized_alert.get('sub_items', []):
+                self._use_relative_url(sub_item)
+            items.append(serialized_alert)
         response['items'] = items
 
         # newest timestamp
@@ -567,11 +587,32 @@ class AlertsView(APIView):
         user_cache = dict(((user.id, (user, user.cosinnus_profile)) for user in users))
         return user_cache
 
+    def _use_relative_url(self, serialized_alert):
+        """ Replace url with relative url. """
+        url = serialized_alert.get('url')
+        if url:
+            domain = get_domain_for_portal(CosinnusPortal.get_current())
+            if url.startswith(domain):
+                serialized_alert['url'] = url.replace(domain, '')
+
+    def _split_icon_or_image_url(self, serialized_alert, key_prefix=''):
+        """ Replace icon_or_image_url items with separate icon and image items. """
+        icon_or_image_url = serialized_alert.pop(key_prefix + 'icon_or_image_url')
+        if not icon_or_image_url:
+            serialized_alert[key_prefix + 'icon'] = None
+            serialized_alert[key_prefix + 'image'] = None
+        elif icon_or_image_url.startswith('fa-'):
+            serialized_alert[key_prefix + 'icon'] = icon_or_image_url
+            serialized_alert[key_prefix + 'image'] = None
+        else:
+            serialized_alert[key_prefix + 'image'] = icon_or_image_url
+            serialized_alert[key_prefix + 'icon'] = None
+
 
 class HelpView(APIView):
     """
     An endpoint that returns a list of help menu items for the main navigation.
-    Each menu item consists of a label (Markdown), url, icon (Font Awesome class, optional), image url (optional) and
+    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional), image url (optional) and
     badge (optional).
     """
 
@@ -592,13 +633,15 @@ class HelpView(APIView):
                         {
                             "icon": "fa-question-circle",
                             "label": "<b>FAQ</b> (Frequently asked questions)",
-                            "url": "https://localhost:8000/faq/",
+                            "url": "https://localhost:8000/cms/faq/",
+                            "is_external": True,
                             "image": None
                         },
                         {
                             "icon": "fa-life-ring",
                             "label": "<b>Support-Channel</b> (Chat)",
-                            "url": "https://localhost:8000/support/",
+                            "url": "https://localhost:8000/cms/support/",
+                            "is_external": True,
                             "image": None
                         }
                     ],
@@ -609,7 +652,10 @@ class HelpView(APIView):
         )}
     )
     def get(self, request):
-        help_items = [MenuItem(label, url, icon) for label, url, icon in settings.COSINNUS_V3_MENU_HELP_LINKS]
+        help_items = [
+            MenuItem(label, url, icon, is_external=True)
+            for label, url, icon in settings.COSINNUS_V3_MENU_HELP_LINKS
+        ]
         return Response(help_items)
 
 
@@ -618,7 +664,7 @@ class ProfileView(APIView):
     An endpoint that provides user profile menu items for the main navigation.
     Returns a list of menu items for user profile and notification settings, contribution, administration, logout and a
     language switcher item. The language switcher item contains a list of menu items for the available languages.
-    Each menu item consists of a label (Markdown), url, icon (Font Awesome class, optional), image url (optional) and
+    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional), image url (optional) and
     badge (optional).
     """
 
@@ -640,7 +686,7 @@ class ProfileView(APIView):
                         {
                             "icon": "fa-circle-user",
                             "label": "My Profile",
-                            "url": "http://localhost:8000/profile/",
+                            "url": "/profile/",
                             "image": None
                         },
                         {
@@ -652,13 +698,13 @@ class ProfileView(APIView):
                                 {
                                     "icon": None,
                                     "label": "Deutsch",
-                                    "url": "http://localhost:8000/language/de/",
+                                    "url": "/language/de/",
                                     "image": None
                                 },
                                 {
                                     "icon": None,
                                     "label": "English",
-                                    "url": "http://localhost:8000/language/en/",
+                                    "url": "/language/en/",
                                     "image": None
                                 }
                             ]
