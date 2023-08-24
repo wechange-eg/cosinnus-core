@@ -360,7 +360,7 @@ class UnreadAlertsView(APIView):
 class AlertsView(APIView):
     """
     An endpoint that provides the user alerts for the main navigation.
-    Returns a list of alert items, consisting of a text (label), url, icon_or_image_url, action_datetime and additional
+    Returns a list of alert items, consisting of a text (label), url, icon, image, action_datetime and additional
     alert details. Unread alerts are marked via "is_emphasized".
 
     Multiple related alerts are bundled in a single alert item as sub_items:
@@ -368,7 +368,7 @@ class AlertsView(APIView):
     - is_bundle_alert: is a single alert object bundled for multiple content objects causing events in a short
       time frame, all by the same user in the same group.
 
-    Each sub alert contains text (label), url and icon_or_image_url elements.
+    Each sub alert contains text (label), url, icon and image elements.
     The response list is paginated by 10 items. For pagination the "offset_timestamp" parameter should be used.
     To receive new alerts the "newer_than_timestamp" should be used.
 
@@ -416,8 +416,10 @@ class AlertsView(APIView):
                                 "text": "<b>User 2</b> requested to become a member.",
                                 "id": 3,
                                 "url": "http://localhost:8000/group/test-group/members/",
-                                "item_icon_or_image_url": "fa-sitemap",
-                                "user_icon_or_image_url": "/static/images/jane-doe-small.png",
+                                "item_icon": "fa-sitemap",
+                                "item_image": None,
+                                "user_icon": None,
+                                "user_image": "/static/images/jane-doe-small.png",
                                 "group": "Test Group",
                                 "group_icon": "fa-sitemap",
                                 "action_datetime": "2023-06-08T08:49:49.965634+00:00",
@@ -431,8 +433,10 @@ class AlertsView(APIView):
                                 "text": "<b>User 3</b> und 1 other requested to become a member.",
                                 "id": 2,
                                 "url": "http://localhost:8000/group/test-project/members/",
-                                "item_icon_or_image_url": "fa-group",
-                                "user_icon_or_image_url": "/static/images/jane-doe-small.png",
+                                "item_icon": "fa-group",
+                                "item_image": None,
+                                "user_icon": None,
+                                "user_image": "/static/images/jane-doe-small.png",
                                 "group": "Test Project",
                                 "group_icon": "fa-group",
                                 "action_datetime": "2023-05-20T16:04:36.501003+00:00",
@@ -442,12 +446,14 @@ class AlertsView(APIView):
                                     {
                                         "title": "User 3",
                                         "url": "http://localhost:8000/user/4/",
-                                        "icon_or_image_url": "/static/images/jane-doe-small.png"
+                                        "icon": None,
+                                        "image": "/static/images/jane-doe-small.png",
                                     },
                                     {
                                         "title": "User 4",
                                         "url": "http://localhost:8000/user/5/",
-                                        "icon_or_image_url": "/static/images/jane-doe-small.png"
+                                        "icon": None,
+                                        "image": "/static/images/jane-doe-small.png",
                                     }
                                 ],
                                 "is_multi_user_alert": True,
@@ -457,8 +463,10 @@ class AlertsView(APIView):
                                 "text": "<b>User 2</b> created 2 news posts.",
                                 "id": 1,
                                 "url": "http://localhost:8000/group/test-group/note/1401481714/",
-                                "item_icon_or_image_url": "fa-quote-right",
-                                "user_icon_or_image_url": "/static/images/jane-doe-small.png",
+                                "item_icon": "fa-quote-right",
+                                "item_image": None,
+                                "user_icon": None,
+                                "user_image": "/static/images/jane-doe-small.png",
                                 "group": "Test Group",
                                 "group_icon": "fa-sitemap",
                                 "action_datetime": "2023-05-24T08:44:50.570918+00:00",
@@ -468,12 +476,14 @@ class AlertsView(APIView):
                                     {
                                         "title": "test2",
                                         "url": "http://localhost:8000/group/test-group/note/1455745550/",
-                                        "icon_or_image_url": "fa-quote-right"
+                                        "icon": "fa-quote-right",
+                                        "image": None,
                                     },
                                     {
                                         "title": "test",
                                         "url": "http://localhost:8000/group/test-group/note/1401481714/",
-                                        "icon_or_image_url": "fa-quote-right"
+                                        "icon": "fa-quote-right",
+                                        "image": None,
                                     }
                                 ],
                                 "is_multi_user_alert": False,
@@ -515,13 +525,18 @@ class AlertsView(APIView):
 
         # alert items
         user_cache = self.get_user_cache(alerts)
-        items = [
-            SerializedNotificationAlert(
+        items = []
+        for alert in alerts:
+            serialized_alert = SerializedNotificationAlert(
                 alert,
                 action_user=user_cache[alert.action_user_id][0],
                 action_user_profile=user_cache[alert.action_user_id][1],
-            ) for alert in alerts
-        ]
+            )
+            # split "icon_or_image_url"
+            self._split_icon_or_image_url(serialized_alert, 'item_')
+            self._split_icon_or_image_url(serialized_alert, 'user_')
+            for sub_item in serialized_alert.get('sub_items', []):
+                self._split_icon_or_image_url(sub_item)
         response['items'] = items
 
         # newest timestamp
@@ -566,6 +581,19 @@ class AlertsView(APIView):
         users = get_user_model().objects.filter(id__in=user_ids).prefetch_related('cosinnus_profile')
         user_cache = dict(((user.id, (user, user.cosinnus_profile)) for user in users))
         return user_cache
+
+    def _split_icon_or_image_url(self, serialized_alert, key_prefix=''):
+        """ Replace icon_or_image_url items with separate icon and image items. """
+        icon_or_image_url = serialized_alert.pop(key_prefix + 'icon_or_image_url')
+        if not icon_or_image_url:
+            serialized_alert[key_prefix + 'icon'] = None
+            serialized_alert[key_prefix + 'image'] = None
+        elif icon_or_image_url.startswith('fa-'):
+            serialized_alert[key_prefix + 'icon'] = icon_or_image_url
+            serialized_alert[key_prefix + 'image'] = None
+        else:
+            serialized_alert[key_prefix + 'image'] = icon_or_image_url
+            serialized_alert[key_prefix + 'icon'] = None
 
 
 class HelpView(APIView):
