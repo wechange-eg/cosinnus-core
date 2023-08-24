@@ -15,7 +15,7 @@ from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.conf import settings
-from cosinnus.models.group import get_cosinnus_group_model, CosinnusPortal
+from cosinnus.models.group import get_cosinnus_group_model, CosinnusPortal, get_domain_for_portal
 from cosinnus.models.group_extra import CosinnusConference
 from cosinnus.models.user_dashboard import DashboardItem, MenuItem
 from cosinnus.trans.group import CosinnusConferenceTrans, CosinnusProjectTrans, CosinnusSocietyTrans
@@ -59,8 +59,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 {
                                     "icon": "fa-user",
                                     "label": "Personal Dashboard",
-                                    "url": "http://localhost:8000/dashboard/",
-                                    "image": "http://localhost:8000/media/cosinnus_portals/portal_default/avatars/user/0e9e945efe3d60bf807d56e336b677f193675fd8.png",
+                                    "url": "/dashboard/",
+                                    "image": "/media/cosinnus_portals/portal_default/avatars/user/0e9e945efe3d60bf807d56e336b677f193675fd8.png",
                                 }
                             ],
                             "actions": []
@@ -70,21 +70,21 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 {
                                     "icon": "fa-sitemap",
                                     "label": "Test Group",
-                                    "url": "http://localhost:8000/group/test-group/",
-                                    "image": "http://localhost:8000/media/cosinnus_portals/portal_default/avatars/group/be5636c7955c1fd370514c26ffd4b0902dd5232a.png",
+                                    "url": "/group/test-group/",
+                                    "image": "/media/cosinnus_portals/portal_default/avatars/group/be5636c7955c1fd370514c26ffd4b0902dd5232a.png",
                                 }
                             ],
                             "actions": [
                                 {
                                     "icon": None,
                                     "label": "Create a Group",
-                                    "url": "http://localhost:8000/groups/add/",
+                                    "url": "/groups/add/",
                                     "image": None,
                                 },
                                 {
                                     "icon": None,
                                     "label": "Create a Project",
-                                    "url": "http://localhost:8000/projects/add/",
+                                    "url": "/projects/add/",
                                     "image": None,
                                 }
                             ]
@@ -94,13 +94,13 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 {
                                     "icon": "fa-sitemap",
                                     "label": "Forum",
-                                    "url": "http://localhost:8000/group/forum/",
+                                    "url": "/group/forum/",
                                     "image": None,
                                 },
                                 {
                                     "icon": "fa-group",
                                     "label": "Map",
-                                    "url": "http://localhost:8000/map/",
+                                    "url": "/map/",
                                     "image": None,
                                 }
                             ],
@@ -111,7 +111,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 {
                                     "icon": "fa-television",
                                     "label": "Test Conference",
-                                    "url": "http://localhost:8000/conference/test-conference/",
+                                    "url": "/conference/test-conference/",
                                     "image": None,
                                 }
                             ],
@@ -119,7 +119,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                                 {
                                     "icon": None,
                                     "label": "Create a Conference",
-                                    "url": "http://localhost:8000/conferences/add/",
+                                    "url": "/conferences/add/",
                                     "image": None,
                                 }
                             ]
@@ -242,15 +242,15 @@ class BookmarksView(APIView):
                             {
                                 "icon": "fa-sitemap",
                                 "label": "Test Group",
-                                "url": "http://localhost:8000/group/test-group/",
-                                "image": "http://localhost:8000/media/cosinnus_portals/portal_default/avatars/group/be5636c7955c1fd370514c26ffd4b0902dd5232a.png",
+                                "url": "/group/test-group/",
+                                "image": "/media/cosinnus_portals/portal_default/avatars/group/be5636c7955c1fd370514c26ffd4b0902dd5232a.png",
                             }
                         ],
                         "users": [
                             {
                                 "icon": "fa-user",
                                 "label": "Test User",
-                                "url": "http://localhost:8000/user/2/",
+                                "url": "/user/2/",
                                 "image": None,
                             }
                         ],
@@ -258,7 +258,7 @@ class BookmarksView(APIView):
                             {
                                 "icon": "fa-lightbulb-o",
                                 "label": "Test Idea",
-                                "url": "http://localhost:8000/map/?item=1.ideas.test-idea",
+                                "url": "/map/?item=1.ideas.test-idea",
                                 "image": None,
                             }
                         ]
@@ -415,7 +415,7 @@ class AlertsView(APIView):
                             {
                                 "text": "<b>User 2</b> requested to become a member.",
                                 "id": 3,
-                                "url": "http://localhost:8000/group/test-group/members/",
+                                "url": "/group/test-group/members/",
                                 "item_icon": "fa-sitemap",
                                 "item_image": None,
                                 "user_icon": None,
@@ -432,7 +432,7 @@ class AlertsView(APIView):
                             {
                                 "text": "<b>User 3</b> und 1 other requested to become a member.",
                                 "id": 2,
-                                "url": "http://localhost:8000/group/test-project/members/",
+                                "url": "/group/test-project/members/",
                                 "item_icon": "fa-group",
                                 "item_image": None,
                                 "user_icon": None,
@@ -445,13 +445,13 @@ class AlertsView(APIView):
                                 "sub_items": [
                                     {
                                         "title": "User 3",
-                                        "url": "http://localhost:8000/user/4/",
+                                        "url": "/user/4/",
                                         "icon": None,
                                         "image": "/static/images/jane-doe-small.png",
                                     },
                                     {
                                         "title": "User 4",
-                                        "url": "http://localhost:8000/user/5/",
+                                        "url": "/user/5/",
                                         "icon": None,
                                         "image": "/static/images/jane-doe-small.png",
                                     }
@@ -462,7 +462,7 @@ class AlertsView(APIView):
                             {
                                 "text": "<b>User 2</b> created 2 news posts.",
                                 "id": 1,
-                                "url": "http://localhost:8000/group/test-group/note/1401481714/",
+                                "url": "/group/test-group/note/1401481714/",
                                 "item_icon": "fa-quote-right",
                                 "item_image": None,
                                 "user_icon": None,
@@ -475,13 +475,13 @@ class AlertsView(APIView):
                                 "sub_items": [
                                     {
                                         "title": "test2",
-                                        "url": "http://localhost:8000/group/test-group/note/1455745550/",
+                                        "url": "/group/test-group/note/1455745550/",
                                         "icon": "fa-quote-right",
                                         "image": None,
                                     },
                                     {
                                         "title": "test",
-                                        "url": "http://localhost:8000/group/test-group/note/1401481714/",
+                                        "url": "/group/test-group/note/1401481714/",
                                         "icon": "fa-quote-right",
                                         "image": None,
                                     }
@@ -537,6 +537,11 @@ class AlertsView(APIView):
             self._split_icon_or_image_url(serialized_alert, 'user_')
             for sub_item in serialized_alert.get('sub_items', []):
                 self._split_icon_or_image_url(sub_item)
+            # use relative urls
+            self._use_relative_url(serialized_alert)
+            for sub_item in serialized_alert.get('sub_items', []):
+                self._use_relative_url(sub_item)
+            items.append(serialized_alert)
         response['items'] = items
 
         # newest timestamp
@@ -581,6 +586,14 @@ class AlertsView(APIView):
         users = get_user_model().objects.filter(id__in=user_ids).prefetch_related('cosinnus_profile')
         user_cache = dict(((user.id, (user, user.cosinnus_profile)) for user in users))
         return user_cache
+
+    def _use_relative_url(self, serialized_alert):
+        """ Replace url with relative url. """
+        url = serialized_alert.get('url')
+        if url:
+            domain = get_domain_for_portal(CosinnusPortal.get_current())
+            if url.startswith(domain):
+                serialized_alert['url'] = url.replace(domain, '')
 
     def _split_icon_or_image_url(self, serialized_alert, key_prefix=''):
         """ Replace icon_or_image_url items with separate icon and image items. """
@@ -668,7 +681,7 @@ class ProfileView(APIView):
                         {
                             "icon": "fa-circle-user",
                             "label": "My Profile",
-                            "url": "http://localhost:8000/profile/",
+                            "url": "/profile/",
                             "image": None
                         },
                         {
@@ -680,13 +693,13 @@ class ProfileView(APIView):
                                 {
                                     "icon": None,
                                     "label": "Deutsch",
-                                    "url": "http://localhost:8000/language/de/",
+                                    "url": "/language/de/",
                                     "image": None
                                 },
                                 {
                                     "icon": None,
                                     "label": "English",
-                                    "url": "http://localhost:8000/language/en/",
+                                    "url": "/language/en/",
                                     "image": None
                                 }
                             ]

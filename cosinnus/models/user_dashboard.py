@@ -111,12 +111,12 @@ class MenuItem(dict):
 
     def __init__(self, label, url, icon=None, image=None, badge=None):
         domain = get_domain_for_portal(CosinnusPortal.get_current())
-        if url and url[0] == '/':
-            url = domain + url
+        if url and url.startswith(domain):
+            url = url.replace(domain, '')
         self['icon'] = icon
         self['label'] = label
         self['url'] = url
-        if image and image[0] == '/':
-            image = domain + image
+        if image and image.startswith(domain):
+            image = image.replace(domain, '')
         self['image'] = image
         self['badge'] = badge
