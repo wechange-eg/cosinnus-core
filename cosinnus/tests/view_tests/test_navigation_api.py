@@ -349,7 +349,7 @@ class HelpViewTest(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertListEqual(
             response.data,
-            [MenuItem('FAQ', 'https://example.com/faq/', 'fa-question-circle')]
+            [MenuItem('FAQ', 'https://example.com/faq/', 'fa-question-circle', is_external=True)]
         )
 
 

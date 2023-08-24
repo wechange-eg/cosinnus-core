@@ -633,13 +633,15 @@ class HelpView(APIView):
                         {
                             "icon": "fa-question-circle",
                             "label": "<b>FAQ</b> (Frequently asked questions)",
-                            "url": "https://localhost:8000/faq/",
+                            "url": "https://localhost:8000/cms/faq/",
+                            "is_external": True,
                             "image": None
                         },
                         {
                             "icon": "fa-life-ring",
                             "label": "<b>Support-Channel</b> (Chat)",
-                            "url": "https://localhost:8000/support/",
+                            "url": "https://localhost:8000/cms/support/",
+                            "is_external": True,
                             "image": None
                         }
                     ],
@@ -650,7 +652,10 @@ class HelpView(APIView):
         )}
     )
     def get(self, request):
-        help_items = [MenuItem(label, url, icon) for label, url, icon in settings.COSINNUS_V3_MENU_HELP_LINKS]
+        help_items = [
+            MenuItem(label, url, icon, is_external=True)
+            for label, url, icon in settings.COSINNUS_V3_MENU_HELP_LINKS
+        ]
         return Response(help_items)
 
 
