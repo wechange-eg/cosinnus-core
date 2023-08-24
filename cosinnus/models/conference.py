@@ -718,6 +718,7 @@ class ParticipationManagement(models.Model):
                                   upload_to=get_conference_conditions_filename,
                                   max_length=250)
     application_options = models.JSONField(default=list, encoder=DjangoJSONEncoder, blank=True, null=True)
+    additional_application_options = models.JSONField(default=list, blank=True, null=True, encoder=DjangoJSONEncoder)
     conference = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
                                            verbose_name=_('Participation Management'),
                                            related_name='participation_management',
