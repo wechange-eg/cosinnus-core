@@ -1156,11 +1156,13 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
     @cached_property
     def conference_options(self):
         selected_options = []
-        if self.management and self.management.application_options:
-            if hasattr(settings, 'COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS'):
+        if self.management:
+            if self.management.application_options and hasattr(settings, 'COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS'):
                 for option in settings.COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS:
                     if option[0] in self.management.application_options:
                         selected_options.append(option)
+            if self.management.additional_application_options:
+                selected_options.extend(self.management.get_additional_application_options_choices())
         return selected_options
 
     @cached_property
