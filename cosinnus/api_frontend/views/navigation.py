@@ -35,7 +35,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
     - Projects and Groups: users projects and groups
     - Community: Forum and Map
     - Conferences: users conferences
-    Each menu item consists of a label (Markdown), url, icon (Font Awesome class, optional), image url (optional) and
+    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional), image url (optional) and
     badge (optional).
     """
 
@@ -219,7 +219,7 @@ class BookmarksView(APIView):
     """
     An endpoint that provides the user bookmarks for the main navigation.
     Returns menu items for liked groups and projects, liked users and liked content (e.g. ideas).
-    Each menu item consists of a label (Markdown), url, icon (Font Awesome class, optional), image url (optional) and
+    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional), image url (optional) and
     badge (optional).
     """
 
@@ -612,7 +612,7 @@ class AlertsView(APIView):
 class HelpView(APIView):
     """
     An endpoint that returns a list of help menu items for the main navigation.
-    Each menu item consists of a label (Markdown), url, icon (Font Awesome class, optional), image url (optional) and
+    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional), image url (optional) and
     badge (optional).
     """
 
@@ -664,7 +664,7 @@ class ProfileView(APIView):
     An endpoint that provides user profile menu items for the main navigation.
     Returns a list of menu items for user profile and notification settings, contribution, administration, logout and a
     language switcher item. The language switcher item contains a list of menu items for the available languages.
-    Each menu item consists of a label (Markdown), url, icon (Font Awesome class, optional), image url (optional) and
+    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional), image url (optional) and
     badge (optional).
     """
 
