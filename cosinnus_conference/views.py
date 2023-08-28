@@ -66,6 +66,7 @@ from cosinnus_conference.forms import (CHOICE_ALL_APPLICANTS, CHOICE_ALL_MEMBERS
                                        AsignUserToEventForm,
                                        MotivationQuestionFormSet,
                                        MotivationAnswerFormSet,
+                                       AdditionalApplicationOptionsFormSet,
                                        )
 from cosinnus_conference.utils import send_conference_reminder
 from cosinnus.templatetags.cosinnus_tags import full_name
@@ -760,8 +761,10 @@ class ConferenceParticipationManagementView(SamePortalGroupMixin,
                                             FormView):
     form_class = ConferenceParticipationManagement
     template_name = 'cosinnus/conference/conference_participation_management_form.html'
-    json_field_formsets = {'motivation_questions': MotivationQuestionFormSet}
-    json_field_formsets_allow_add = {'motivation_questions': True}
+    json_field_formsets = {
+        'motivation_questions': MotivationQuestionFormSet,
+        'additional_application_options': AdditionalApplicationOptionsFormSet,
+    }
     instance = None
 
     def get_context_data(self, **kwargs):
@@ -826,7 +829,6 @@ class ConferenceApplicationView(SamePortalGroupMixin,
                                 FormView):
     form_class = ConferenceApplicationForm
     template_name = 'cosinnus/conference/conference_application_form.html'
-    json_field_formsets = {'motivation_answers': MotivationAnswerFormSet}
 
     def extra_dispatch_check(self):
         if not self.group.use_conference_applications:
@@ -938,6 +940,12 @@ class ConferenceApplicationView(SamePortalGroupMixin,
         if not self.application:
             return True
         return self.application.status == 2
+
+    def get_json_field_formsets(self):
+        formsets = {}
+        if self.participation_management.information_field_enabled and self.participation_management.motivation_questions:
+            formsets['motivation_answers'] = MotivationAnswerFormSet
+        return formsets
 
     def json_field_formset_initial(self):
         return {'motivation_answers': self.participation_management.motivation_questions}
@@ -1153,11 +1161,13 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
     @cached_property
     def conference_options(self):
         selected_options = []
-        if self.management and self.management.application_options:
-            if hasattr(settings, 'COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS'):
+        if self.management:
+            if self.management.application_options and hasattr(settings, 'COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS'):
                 for option in settings.COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS:
                     if option[0] in self.management.application_options:
                         selected_options.append(option)
+            if self.management.additional_application_options:
+                selected_options.extend(self.management.get_additional_application_options_choices())
         return selected_options
 
     @cached_property

@@ -64,7 +64,12 @@
                 {% trans "(no options chosen)" as options_placeholder %}
                 {% include 'cosinnus/fields/default_field.html' with field=form.application_options label=options_label legend=options_legend placeholder=options_placeholder large_field=True %}
             {% endif %}
-            
+
+            {% trans "Define additional custom options." as additional_options_legend %}
+            {% trans "Remove option" as  option_rm_label %}
+            {% trans "Add option" as option_add_label %}
+            {% include 'cosinnus/fields/inlineform_field.html' with inline_form=additional_application_options_formset legend=additional_options_legend content_template='cosinnus/conference/additional_application_options_inline.html' unique_id='additional-options' add_button_label=option_add_label remove_button_label=option_rm_label %}
+
             {% trans "Workshop selection: Enable applicants to choose preferred workshops to attend" as priority_checkbox_label %}
             {% include 'cosinnus/fields/checkbox_field.html' with field=form.priority_choice_enabled label=priority_checkbox_label checkbox_label=priority_checkbox_label %}
 

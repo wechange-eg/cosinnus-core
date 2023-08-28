@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-14 15:37+0200\n"
+"POT-Creation-Date: 2023-08-24 15:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3434,6 +3434,17 @@ msgstr ""
 msgid "Choose one or more options that will be displayed on the application form. Applicants can select any of these options along with their application."
 msgstr ""
 
+msgid "Define additional custom options."
+msgstr ""
+
+#, fuzzy
+msgid "Remove option"
+msgstr "There are no groups."
+
+#, fuzzy
+msgid "Add option"
+msgstr "There are no groups."
+
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
 msgstr ""
 
@@ -3691,10 +3702,10 @@ msgstr "Project Type"
 msgid "Duration"
 msgstr ""
 
-msgid "Attendance Percentage"
+msgid "In order to better assess how long participants actually attended an event, we calculate here the relation between the configured event duration and the average time per attendee."
 msgstr ""
 
-msgid "In order to better assess how long participants actually attended an event, we calculate here the relation between the configured event duration and the average time per attendee."
+msgid "Attendance Percentage"
 msgstr ""
 
 #, fuzzy
@@ -8819,10 +8830,6 @@ msgstr ""
 msgid "Option"
 msgstr ""
 
-#, fuzzy
-msgid "Motivation"
-msgstr "Groups"
-
 msgid "Status"
 msgstr ""
 
@@ -13100,6 +13107,10 @@ msgstr ""
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Motivation"
+#~ msgstr "Groups"
 
 #, fuzzy
 #~ msgid "Premium Bookings"

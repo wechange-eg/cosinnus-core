@@ -48,7 +48,7 @@
 	                <div class="large-space"></div>
 		        {% endblock notice_text %}
 		        
-                {% if participation_management and participation_management.information_field_enabled %}
+                {% if participation_management and participation_management.information_field_enabled and participation_management.motivation_questions %}
                     {% trans "Please provide your motivation for applying" as motivation_label %}
                     {% include 'cosinnus/fields/inlineform_field.html' with inline_form=motivation_answers_formset label=motivation_label content_template='cosinnus/conference/motivation_answer_inline.html' unique_id='answers' %}
                 {% endif %}

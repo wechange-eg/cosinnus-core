@@ -27,6 +27,8 @@ class JsonFieldFormsetMixin:
                     'example_json_field2': ExampleFormSet2,
                 }
 
+        For dynamic formsets get_get_json_field_formsets() can be used to return the definition.
+
     4. Implement interface functions.
 
         The interface function 'get_instance' is required and should return the form instance if exists.
@@ -81,6 +83,10 @@ class JsonFieldFormsetMixin:
     json_field_formsets = None
     _json_field_formset_instances = None
 
+    def get_json_field_formsets(self):
+        """ Returns the formsets dict. Can be overwritten for dynamic formsets. """
+        return self.json_field_formsets
+
     def get_instance(self):
         """ Returns the instance with the json fields if available. Used for initialization. """
         raise NotImplementedError
@@ -123,13 +129,14 @@ class JsonFieldFormsetMixin:
         if instance:
             # Initialize from instance
             initial = {
-                json_field_name: getattr(instance, json_field_name) for json_field_name in self.json_field_formsets
+                json_field_name: getattr(instance, json_field_name)
+                for json_field_name in self.get_json_field_formsets()
             }
         else:
             # Initialize with values provided by interface function
             initial = self.json_field_formset_initial()
         self._json_field_formset_instances = {}
-        for json_field_name, formset in self.json_field_formsets.items():
+        for json_field_name, formset in self.get_json_field_formsets().items():
             formset_instance = formset(prefix=json_field_name)
             if initial and json_field_name in initial:
                 formset_instance.initial = initial[json_field_name]
@@ -141,7 +148,7 @@ class JsonFieldFormsetMixin:
     def _init_formsets_on_post(self):
         """ Initialize formsets on POST. """
         self._json_field_formset_instances = {}
-        for json_field_name, formset in self.json_field_formsets.items():
+        for json_field_name, formset in self.get_json_field_formsets().items():
             formset_instance = formset(self.request.POST, self.request.FILES, prefix=json_field_name)
             self._json_field_formset_instances[json_field_name] = formset_instance
 
