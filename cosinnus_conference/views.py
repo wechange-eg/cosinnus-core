@@ -829,7 +829,6 @@ class ConferenceApplicationView(SamePortalGroupMixin,
                                 FormView):
     form_class = ConferenceApplicationForm
     template_name = 'cosinnus/conference/conference_application_form.html'
-    json_field_formsets = {'motivation_answers': MotivationAnswerFormSet}
 
     def extra_dispatch_check(self):
         if not self.group.use_conference_applications:
@@ -941,6 +940,12 @@ class ConferenceApplicationView(SamePortalGroupMixin,
         if not self.application:
             return True
         return self.application.status == 2
+
+    def get_json_field_formsets(self):
+        formsets = {}
+        if self.participation_management.information_field_enabled and self.participation_management.motivation_questions:
+            formsets['motivation_answers'] = MotivationAnswerFormSet
+        return formsets
 
     def json_field_formset_initial(self):
         return {'motivation_answers': self.participation_management.motivation_questions}

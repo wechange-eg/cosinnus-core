@@ -219,7 +219,7 @@ class ConferenceApplicationForm(CleanFromToDateFieldsMixin, forms.ModelForm):
     
     class Meta:
         model = CosinnusConferenceApplication
-        exclude = ['conference', 'user', 'status', 'priorities']
+        exclude = ['conference', 'user', 'status', 'priorities', 'motivation_answers']
 
     def get_options(self):
         if hasattr(self, 'participation_management'):
