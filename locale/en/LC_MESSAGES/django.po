@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-24 15:31+0200\n"
+"POT-Creation-Date: 2023-08-29 16:39+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1914,10 +1914,10 @@ msgstr ""
 msgid "You and {self.from_user.get_full_name()} matched!"
 msgstr ""
 
-msgid "TODO: Youve matched!"
+msgid "You've matched!"
 msgstr ""
 
-msgid "TODO: Matched chat room greeting message"
+msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr ""
 
 msgid "Name (EN)"
@@ -6785,11 +6785,10 @@ msgstr ""
 msgid "If the validation email does not arrive, please check your spam folder and re-check the spelling of your email address. If everything seems ok but you still have not received an email from us, please repeat the email change again to receive a new validation email:"
 msgstr ""
 
-#, fuzzy
-msgid "Direct Contact"
-msgstr "Project Type"
+msgid "User Matching"
+msgstr ""
 
-msgid "**User-Matching** is your tool for communicating and sharing experiences with like-minded people from all over the world. If you have much to discuss and your chosen person considers it the same, your dialogue will start automatically."
+msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
 msgstr ""
 
 msgid "Wonderful, we definitely have so much to discuss!"
@@ -13107,6 +13106,10 @@ msgstr ""
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Direct Contact"
+#~ msgstr "Project Type"
 
 #, fuzzy
 #~ msgid "Motivation"

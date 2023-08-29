@@ -1,4 +1,5 @@
 import logging
+import random
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -29,37 +30,48 @@ class UserMatchListView(LoginRequiredMixin, ListView):
     template_name = 'cosinnus/user/user_match_list.html'
     login_url = LOGIN_URL
 
-    def get_hashset_likes_for_user(self, user=None):
+    def get_hashset_likes_for_user(self, user):
         """
         Get all the objects liked by a certain user.
 
         Args:
-            user: UserObject. Defaults to None.
+            user: UserObject.
 
         Returns:
             set(): Set of objects liked by the given user in form {content_type: object_id}
         """
-        values_liked = LikeObject.objects.filter(user=self.request.user, liked=True).values_list('content_type', 'object_id')
+        values_liked = LikeObject.objects.filter(user=user, liked=True).values_list('content_type', 'object_id')
         user_liked_set = set(f'{liketuple[0]}::{liketuple[1]}' for liketuple in values_liked)
         return user_liked_set
 
     # TODO: cache after!
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+
+        # exclude self
+        user_profiles = self.model.objects.exclude(user=self.request.user)
+
+        # filter only users I haven't liked or disliked yet
         already_liked_users = UserMatchObject.objects.filter(
             from_user=self.request.user, 
             type__in=[UserMatchObject.LIKE, UserMatchObject.DISLIKE]
         ).values_list('to_user_id', flat=True)
-        # filter only users I haven't liked or disliked yet
-        user_profiles = self.model.objects.exclude(user=self.request.user).\
-                exclude(user_id__in=already_liked_users)
+        user_profiles = user_profiles.exclude(user_id__in=already_liked_users)
+
+        # filter out users that did not like me
+        disliked_by_users = UserMatchObject.objects.filter(
+            to_user=self.request.user, type=UserMatchObject.DISLIKE
+        ).values_list('from_user_id', flat=True)
+        user_profiles = user_profiles.exclude(user_id__in=disliked_by_users)
+
         # filter active users
         user_profiles = filter_active_users(user_profiles, filter_on_user_profile_model=True)
+
         # filter users for their profile visibility
         users = get_user_model().objects.filter(cosinnus_profile__in=user_profiles)
         checked_for_visibility_users = [user for user in users if check_user_can_see_user(self.request.user, user)]
         user_profiles = get_user_profile_model().objects.filter(user_id__in=checked_for_visibility_users)
+
         # filter user to be active within the last year
         last_year = now() - timedelta(days=365) # timedelta to pass users who have logged in at least once within the last year;
         user_profiles = user_profiles.filter(user__last_login__gte=last_year)
@@ -78,19 +90,40 @@ class UserMatchListView(LoginRequiredMixin, ListView):
                 score += 1
             if profile.email_verified:
                 score += 1
+
+            # Score dynamic fields
             if profile.dynamic_fields:
-                for value in profile.dynamic_fields.values():
+                for field, value in profile.dynamic_fields.items():
                     if value:
                         score += 1
+                        user_value = self.request.user.cosinnus_profile.dynamic_fields.get(field)
+                        if user_value:
+                            if isinstance(value, list):
+                                score += len(set(user_value).intersection(set(value)))
+                            elif user_value == value:
+                                score += 1
+
+            # Score topics
             if profile.media_tag.topics:
                 score += 1
-                if profile.media_tag.topics == self.request.user.cosinnus_profile.media_tag.topics:
-                    score += 1
-            
+                user_topics = self.request.user.cosinnus_profile.media_tag.get_topics()
+                score += len(set(profile.media_tag.get_topics()).intersection(set(user_topics)))
+
+            # Score tags
+            if profile.media_tag.tags.exists():
+                score += 1
+                user_tags = self.request.user.cosinnus_profile.media_tag.tags.names()
+                score += len(set(profile.media_tag.tags.names()).intersection(set(user_tags)))
+
+            # score users active in the last month
+            last_month = now() - timedelta(days=31)
+            if profile.user.last_login > last_month:
+                score += 1
+
             # mutual likes score
-            this_user_liked_set = self.get_hashset_likes_for_user(profile) 
-            set_union = this_user_liked_set.union(request_user_liked_set) 
-            shared_like_count = len(set_union)
+            this_user_liked_set = self.get_hashset_likes_for_user(profile.user)
+            set_intersection = this_user_liked_set.intersection(request_user_liked_set)
+            shared_like_count = len(set_intersection)
             score += shared_like_count
             
             score_dict[profile.id] = score
@@ -99,10 +132,27 @@ class UserMatchListView(LoginRequiredMixin, ListView):
         result_score = {k: v for k, v in score_dict}
 
         selected_user_profiles = list(result_score.keys())[:3] # get first 3 user profiles with the highest counted score
-        
-        
-        scored_user_profiles = self.model.objects.select_related('user').\
-               filter(id__in=selected_user_profiles) # all active users related to the selected user profiles
+
+        # all active users related to the selected user profiles
+        scored_user_profiles = list(self.model.objects.select_related('user').filter(id__in=selected_user_profiles))
+        scored_user_profiles = sorted(scored_user_profiles, key=lambda p: result_score[p.id], reverse=True)
+
+        # Include one user that liked me in the selection
+        liked_by_users = UserMatchObject.objects.filter(
+            to_user=self.request.user, type=UserMatchObject.LIKE
+        ).values_list('from_user_id', flat=True)
+        selected_include_liked = set(liked_by_users).intersection(set(selected_user_profiles))
+        if not selected_include_liked:
+            # Get the user that liked me with the best matching score
+            liked_by_user_profiles = user_profiles.filter(user_id__in=liked_by_users).all()
+            liked_by_user_profiles = sorted(liked_by_user_profiles, key=lambda p: result_score[p.id], reverse=True)
+            liked_by_user_profile = liked_by_user_profiles[0] if liked_by_user_profiles else None
+            if liked_by_user_profile:
+                # Add the user at a random position
+                scored_user_profiles = scored_user_profiles[:2]
+                random.seed()
+                random_pos = random.randrange(3)
+                scored_user_profiles.insert(random_pos, liked_by_user_profile)
 
         context.update({
             'scored_user_profiles': scored_user_profiles,
