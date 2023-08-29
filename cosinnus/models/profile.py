@@ -891,8 +891,11 @@ class UserMatchObject(models.Model):
                 short_to_user = slugify(self.to_user.get_full_name()).replace('-', '')[:6]
                 room_name = f'match-{short_from_user}-{short_to_user}-{get_random_string(4)}'
                 
-                room_topic = _('TODO: Youve matched!')
-                greeting_message = _('TODO: Matched chat room greeting message')
+                room_topic = _('You\'ve matched!')
+                greeting_message = _(
+                    'You both have similar interests and were matched, very nice! What appealed to you about the other '
+                    'person\'s profile? What are you working on right now? What are your current topics of interest?'
+                )
                 try:
                     rocket = RocketChatConnection()
                     internal_room_id = rocket.create_private_room(room_name, self.from_user,

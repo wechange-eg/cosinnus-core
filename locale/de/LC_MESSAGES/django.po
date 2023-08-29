@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-14 15:37+0200\n"
+"POT-Creation-Date: 2023-08-29 15:50+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1824,11 +1824,11 @@ msgstr "Die Übereinstimmung zwischen {self.from_user} und {self.to_user} wurde 
 msgid "You and {self.from_user.get_full_name()} matched!"
 msgstr "Du und {self.from_user.get_full_name()} stimmen überein!"
 
-msgid "TODO: Youve matched!"
-msgstr ""
+msgid "You've matched!"
+msgstr "Ihr wurdet gematcht"
 
-msgid "TODO: Matched chat room greeting message"
-msgstr ""
+msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
+msgstr "Ihr beide habt ähnliche Interessen und wurdet gematcht, sehr schön! Was hat dich an dem Profil der anderen Person angesprochen? Woran arbeitet ihr gerade? Welche Themen beschäftigen euch aktuell?"
 
 msgid "Name (EN)"
 msgstr "Name (EN)"
@@ -3557,11 +3557,11 @@ msgstr "Raumtyp"
 msgid "Duration"
 msgstr "Dauer"
 
-msgid "Attendance Percentage"
-msgstr "Durchschnittliche Teilnahme"
-
 msgid "In order to better assess how long participants actually attended an event, we calculate here the relation between the configured event duration and the average time per attendee."
 msgstr "Um besser beurteilen zu können, wie lange die Teilnehmenden tatsächlich an der Veranstaltung teilgenommen haben, berechnen wir hier die Relation zwischen der angegebenen Veranstaltungsdauer und der durchschnittlichen Teilnahmedauer."
+
+msgid "Attendance Percentage"
+msgstr "Durchschnittliche Teilnahme"
 
 msgid "Attendee Data Statistics"
 msgstr "Teilnehmenden-Daten-Statistiken"
@@ -6689,11 +6689,11 @@ msgstr "Falls du einen Fehler gemacht hast und die E-Mail Adresse erneut ändern
 msgid "If the validation email does not arrive, please check your spam folder and re-check the spelling of your email address. If everything seems ok but you still have not received an email from us, please repeat the email change again to receive a new validation email:"
 msgstr "Falls die Bestätigungsmail nicht ankommt, überprüfe bitte deinen Spamordner und überprüfe die korrekte Schreibweise deiner E-Mail Adresse erneut. Wenn alles ok zu sein scheint, aber die E-Mail immer noch nicht angekommen ist, wiederhole bitte die E-Mail Adressenänderung um eine neue Bestätigungsmail zu erhalten."
 
-msgid "Direct Contact"
-msgstr "Direktkontakt"
+msgid "User Matching"
+msgstr "Mitglieder-Matching"
 
-msgid "**User-Matching** is your tool for communicating and sharing experiences with like-minded people from all over the world. If you have much to discuss and your chosen person considers it the same, your dialogue will start automatically."
-msgstr "**Mitglieder-Matching** ist deine Möglichkeit, mit gleichgesinnten Menschen auf der ganzen Welt zu kommunizieren und Erfahrungen auszutauschen. Wenn du vieles zu diskutieren hast und deine gewählten Menschen von dir das gleiche denken, wird automatisch ein Dialog zum Austausch gestartet.."
+msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
+msgstr "Das **Matching Feature** bietet dir die Möglichkeit mit gleichgesinnten Nutzer:innen der Plattform in Austausch zu treten. Auf Basis der von dir eingepflegten Profilinformationen machen wir dir Vorschläge, wer interessante Austauschpartner:innen für dich sein könnten. Wenn du an dem Austausch mit Nutzer:innen interessiert bist und sie auch, dann werdet ihr gematcht und es öffnet sich automatisch ein Rocket.Chat Kanal, über den ihr in Austausch treten könnt."
 
 msgid "Wonderful, we definitely have so much to discuss!"
 msgstr "Wunderbar, wir haben so viel zu besprechen!"
@@ -13174,6 +13174,12 @@ msgstr "Aufgabenliste „%(title)s“ konnte nicht hinzugefügt werden."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte hast eins oder mehrere der noch enthaltenen Objekte zu löschen!"
+
+#~ msgid "Direct Contact"
+#~ msgstr "Direktkontakt"
+
+#~ msgid "**User-Matching** is your tool for communicating and sharing experiences with like-minded people from all over the world. If you have much to discuss and your chosen person considers it the same, your dialogue will start automatically."
+#~ msgstr "**Mitglieder-Matching** ist deine Möglichkeit, mit gleichgesinnten Menschen auf der ganzen Welt zu kommunizieren und Erfahrungen auszutauschen. Wenn du vieles zu diskutieren hast und deine gewählten Menschen von dir das gleiche denken, wird automatisch ein Dialog zum Austausch gestartet.."
 
 #~ msgid "Describe why you wish to participate"
 #~ msgstr "Beschreibe, warum du teilnehmen möchtest"
