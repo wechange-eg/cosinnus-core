@@ -57,6 +57,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                         "personal": {
                             "items": [
                                 {
+                                    "id": "PersonalDashboard",
                                     "icon": "fa-user",
                                     "label": "Personal Dashboard",
                                     "url": "/dashboard/",
@@ -68,6 +69,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                         "groups": {
                             "items": [
                                 {
+                                    "id": "CosinnusSociety70",
                                     "icon": "fa-sitemap",
                                     "label": "Test Group",
                                     "url": "/group/test-group/",
@@ -76,12 +78,14 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                             ],
                             "actions": [
                                 {
+                                    "id": "CreateGroup",
                                     "icon": None,
                                     "label": "Create a Group",
                                     "url": "/groups/add/",
                                     "image": None,
                                 },
                                 {
+                                    "id": "CreateProject",
                                     "icon": None,
                                     "label": "Create a Project",
                                     "url": "/projects/add/",
@@ -92,12 +96,14 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                         "community": {
                             "items": [
                                 {
+                                    "id": "Forum",
                                     "icon": "fa-sitemap",
                                     "label": "Forum",
                                     "url": "/group/forum/",
                                     "image": None,
                                 },
                                 {
+                                    "id": "Map",
                                     "icon": "fa-group",
                                     "label": "Map",
                                     "url": "/map/",
@@ -109,6 +115,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                         "conference": {
                             "items": [
                                 {
+                                    "id": "CosinnusSociety70",
                                     "icon": "fa-television",
                                     "label": "Test Conference",
                                     "url": "/conference/test-conference/",
@@ -117,6 +124,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                             ],
                             "actions": [
                                 {
+                                    "id": "CreateConference",
                                     "icon": None,
                                     "label": "Create a Conference",
                                     "url": "/conferences/add/",
@@ -137,7 +145,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         # personal space
         dashboard_item = MenuItem(
             _('Personal Dashboard'), reverse('cosinnus:user-dashboard'), 'fa-user',
-            request.user.cosinnus_profile.avatar_url
+            request.user.cosinnus_profile.avatar_url, id='PersonalDashboard',
         )
         personal_space = {
             'items': [dashboard_item],
@@ -154,8 +162,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         if not settings.COSINNUS_SHOW_MAIN_MENU_GROUP_CREATE_BUTTON_ONLY_FOR_PERMITTED \
                 or check_user_can_create_groups(request.user):
             group_space_actions = [
-                MenuItem(CosinnusSocietyTrans.CREATE_NEW, reverse('cosinnus:group__group-add')),
-                MenuItem(CosinnusProjectTrans.CREATE_NEW, reverse('cosinnus:group-add')),
+                MenuItem(CosinnusSocietyTrans.CREATE_NEW, reverse('cosinnus:group__group-add'), id="CreateGroup"),
+                MenuItem(CosinnusProjectTrans.CREATE_NEW, reverse('cosinnus:group-add'), id="CreateProject"),
             ]
         groups_space = {
             'items': group_space_items,
@@ -176,20 +184,22 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                         for tag in managed_tags:
                             if tag.paired_group and tag.paired_group != forum_group:
                                 community_space_items.append(
-                                    MenuItem(tag.paired_group.name, tag.paired_group.get_absolute_url(), 'fa-group')
+                                    MenuItem(tag.paired_group.name, tag.paired_group.get_absolute_url(),
+                                             'fa-group', id=f'Forum{tag.paired_group.id}')
                                 )
                 if settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL:
                     community_space_items.append(
-                        MenuItem(settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL, forum_group.get_absolute_url(), 'fa-sitemap')
+                        MenuItem(settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL, forum_group.get_absolute_url(),
+                                 'fa-sitemap', id='Forum')
                     )
         if settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL:
             community_space_items.append(
-                MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, reverse('cosinnus:map'), 'fa-group')
+                MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, reverse('cosinnus:map'), 'fa-group', id='Map')
             )
         if settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS:
             community_space_items.extend([
-                MenuItem(label, url, icon)
-                for label, url, icon in settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS
+                MenuItem(label, url, icon, id=id)
+                for id, label, url, icon in settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS
             ])
         community_space = {
             'items': community_space_items,
@@ -204,7 +214,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
             if not settings.COSINNUS_SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON_ONLY_FOR_PERMITTED \
                     or check_user_can_create_conferences(request.user):
                 conference_space_actions = [
-                    MenuItem(CosinnusConferenceTrans.CREATE_NEW, reverse('cosinnus:conference__group-add')),
+                    MenuItem(CosinnusConferenceTrans.CREATE_NEW, reverse('cosinnus:conference__group-add'),
+                             id='CreateConference'),
                 ]
             conference_space = {
                 'items': [DashboardItem(conference).as_menu_item() for conference in conferences],
@@ -240,6 +251,7 @@ class BookmarksView(APIView):
                     "data": {
                         "groups": [
                             {
+                                "id": "CosinnusGroup70",
                                 "icon": "fa-sitemap",
                                 "label": "Test Group",
                                 "url": "/group/test-group/",
@@ -248,6 +260,7 @@ class BookmarksView(APIView):
                         ],
                         "users": [
                             {
+                                "id": "UserProfile4",
                                 "icon": "fa-user",
                                 "label": "Test User",
                                 "url": "/user/2/",
@@ -256,6 +269,7 @@ class BookmarksView(APIView):
                         ],
                         "content": [
                             {
+                                "id": "CosinnusIdea2",
                                 "icon": "fa-lightbulb-o",
                                 "label": "Test Idea",
                                 "url": "/map/?item=1.ideas.test-idea",
@@ -414,7 +428,7 @@ class AlertsView(APIView):
                         "items": [
                             {
                                 "text": "<b>User 2</b> requested to become a member.",
-                                "id": 3,
+                                "id": "Alert3",
                                 "url": "/group/test-group/members/",
                                 "item_icon": "fa-sitemap",
                                 "item_image": None,
@@ -431,7 +445,7 @@ class AlertsView(APIView):
                             },
                             {
                                 "text": "<b>User 3</b> und 1 other requested to become a member.",
-                                "id": 2,
+                                "id": "Alert2",
                                 "url": "/group/test-project/members/",
                                 "item_icon": "fa-group",
                                 "item_image": None,
@@ -461,7 +475,7 @@ class AlertsView(APIView):
                             },
                             {
                                 "text": "<b>User 2</b> created 2 news posts.",
-                                "id": 1,
+                                "id": "Alert1",
                                 "url": "/group/test-group/note/1401481714/",
                                 "item_icon": "fa-quote-right",
                                 "item_image": None,
@@ -541,6 +555,8 @@ class AlertsView(APIView):
             self._use_relative_url(serialized_alert)
             for sub_item in serialized_alert.get('sub_items', []):
                 self._use_relative_url(sub_item)
+            # Use string identifier
+            serialized_alert['id'] = f'Alert{serialized_alert["id"]}'
             items.append(serialized_alert)
         response['items'] = items
 
@@ -631,6 +647,7 @@ class HelpView(APIView):
                 "application/json": {
                     "data": [
                         {
+                            "id": "FAQ",
                             "icon": "fa-question-circle",
                             "label": "<b>FAQ</b> (Frequently asked questions)",
                             "url": "https://localhost:8000/cms/faq/",
@@ -638,6 +655,7 @@ class HelpView(APIView):
                             "image": None
                         },
                         {
+                            "id": "Support",
                             "icon": "fa-life-ring",
                             "label": "<b>Support-Channel</b> (Chat)",
                             "url": "https://localhost:8000/cms/support/",
@@ -653,8 +671,8 @@ class HelpView(APIView):
     )
     def get(self, request):
         help_items = [
-            MenuItem(label, url, icon, is_external=True)
-            for label, url, icon in settings.COSINNUS_V3_MENU_HELP_LINKS
+            MenuItem(label, url, icon, is_external=True, id=id)
+            for id, label, url, icon in settings.COSINNUS_V3_MENU_HELP_LINKS
         ]
         return Response(help_items)
 
@@ -684,24 +702,28 @@ class ProfileView(APIView):
                 "application/json": {
                     "data": [
                         {
+                            "id": "Profile",
                             "icon": "fa-circle-user",
                             "label": "My Profile",
                             "url": "/profile/",
                             "image": None
                         },
                         {
+                            "id": "ChangeLanguage",
                             "icon": "fa-language",
                             "label": "Change Language",
                             "url": None,
                             "image": None,
                             "sub_items": [
                                 {
+                                    "id": "de",
                                     "icon": None,
                                     "label": "Deutsch",
                                     "url": "/language/de/",
                                     "image": None
                                 },
                                 {
+                                    "id": "en",
                                     "icon": None,
                                     "label": "English",
                                     "url": "/language/en/",
@@ -721,24 +743,26 @@ class ProfileView(APIView):
 
         # profile page
         profile_menu_items = [
-            MenuItem(_('My Profile'), reverse('cosinnus:profile-detail'), 'fa-circle-user'),
+            MenuItem(_('My Profile'), reverse('cosinnus:profile-detail'), 'fa-circle-user', id='Profile'),
         ]
         if settings.COSINNUS_V3_FRONTEND_ENABLED:
             profile_menu_items.append(
-                MenuItem(_('Set up my Profile'), reverse('cosinnus:v3-frontend-setup-profile'), 'fa-pen'),
+                MenuItem(_('Set up my Profile'), reverse('cosinnus:v3-frontend-setup-profile'), 'fa-pen',
+                         id='SetupProfile'),
             )
         profile_menu_items.extend([
-            MenuItem(_('Edit my Profile'), reverse('cosinnus:profile-edit'), 'fa-gear'),
-            MenuItem(_('Notification Preferences'), reverse('cosinnus:notifications'), 'fa-envelope'),
+            MenuItem(_('Edit my Profile'), reverse('cosinnus:profile-edit'), 'fa-gear', id='EditProfile'),
+            MenuItem(_('Notification Preferences'), reverse('cosinnus:notifications'), 'fa-envelope',
+                     id='NotificationPreferences'),
 
         ])
         profile_menu.extend(profile_menu_items)
 
         # language
         if not settings.COSINNUS_LANGUAGE_SELECT_DISABLED:
-            language_item = MenuItem(_('Change Language'), None, 'fa-language')
+            language_item = MenuItem(_('Change Language'), None, 'fa-language', id='ChangeLanguage')
             language_subitems = [
-                MenuItem(language, reverse('cosinnus:switch-language', kwargs={'language': code}))
+                MenuItem(language, reverse('cosinnus:switch-language', kwargs={'language': code}), id=code)
                 for code, language in settings.LANGUAGES
             ]
             language_item['sub_items'] = language_subitems
@@ -752,18 +776,17 @@ class ProfileView(APIView):
             contribution = int(current_subscription.amount) if current_subscription else 0
             contribution_badge = f'{contribution} €'
             payments_item = MenuItem(_('Your Contribution'), reverse('wechange-payments:overview'),
-                                     'fa-hand-holding-hart', badge=contribution_badge)
+                                     'fa-hand-holding-hart', badge=contribution_badge, id='Contribution')
             profile_menu.append(payments_item)
 
         # administration
         if request.user.is_superuser or check_user_portal_manager(request.user):
-            administration_item = MenuItem(
-                _('Administration'), reverse('cosinnus:administration'), 'fa-screwdriver-wrench'
-            )
+            administration_item = MenuItem(_('Administration'), reverse('cosinnus:administration'),
+                                           'fa-screwdriver-wrench', id='Administration')
             profile_menu.append(administration_item)
 
         # logout
-        logout_item = MenuItem(_('Logout'), reverse('logout'), 'fa-right-from-bracket')
+        logout_item = MenuItem(_('Logout'), reverse('logout'), 'fa-right-from-bracket', id='Logout')
         profile_menu.append(logout_item)
 
         return Response(profile_menu)
