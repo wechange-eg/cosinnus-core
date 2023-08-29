@@ -45,6 +45,8 @@ class DashboardItem(dict):
                 obj = obj.get_translated_readonly_instance()
             
             from cosinnus.templatetags.cosinnus_tags import full_name
+            if hasattr(obj, 'id'):
+                self['id'] = f'{obj.__class__.__name__}{obj.id}'
             if is_emphasized:
                 self['is_emphasized'] = is_emphasized
             # smart conversion by known models
@@ -100,7 +102,9 @@ class DashboardItem(dict):
                             self['subtext'] = date_dict.get('date')
 
     def as_menu_item(self):
-        return MenuItem(self['text'], self['url'], self['icon'], self['avatar'] if 'avatar' in self else None)
+        image = self['avatar'] if 'avatar' in self else None
+        id = self['id'] if 'id' in self else None
+        return MenuItem(self['text'], self['url'], self['icon'], image, id=id)
 
 
 class MenuItem(dict):
@@ -109,10 +113,11 @@ class MenuItem(dict):
     image-url (optional) and badge (optional). Used in the v3 navigation API.
     """
 
-    def __init__(self, label, url, icon=None, image=None, badge=None, is_external=False):
+    def __init__(self, label, url, icon=None, image=None, badge=None, is_external=False, id=None):
         domain = get_domain_for_portal(CosinnusPortal.get_current())
         if not is_external and url and url.startswith(domain):
             url = url.replace(domain, '')
+        self['id'] = id
         self['icon'] = icon
         self['label'] = label
         self['url'] = url

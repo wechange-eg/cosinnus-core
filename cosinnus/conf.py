@@ -906,7 +906,7 @@ class CosinnusConf(AppConf):
     V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS = False
 
     # Additional menu items for the community space in the v3 main navigation.
-    # Format: List of (<label>, <url>, <icon>), e.g.: [('External Forum', 'https://custom-forum.com', 'fa-group')]
+    # Format: List of (<id-string>, <label>, <url>, <icon>), e.g.: [('ExternalLink', 'External Link', 'https://external-link.com', 'fa-group')]
     V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS = []
 
     # List of help items to be included in the v3 main navigation.
