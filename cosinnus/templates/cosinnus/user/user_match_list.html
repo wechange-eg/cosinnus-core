@@ -1,7 +1,7 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n cosinnus_tags widget_tweaks static thumbnail %}
 
-{% block page_title %}{% trans 'Direct Contact' %}{% endblock %}
+{% block page_title %}{% trans 'User Matching' %}{% endblock %}
 
 {% block main_page %}
     <div class="container user-match">
@@ -11,7 +11,7 @@
                 <div class="textfield transparent">
                     <p>
                         {% comment %} Sending this through |textfield allows markdown formatting {% endcomment %}
-                        {% trans "**User-Matching** is your tool for communicating and sharing experiences with like-minded people from all over the world. If you have much to discuss and your chosen person considers it the same, your dialogue will start automatically." as trans_header %}
+                        {% trans "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange." as trans_header %}
                         {{ trans_header|textfield }}
                     </p>
                 </div>
