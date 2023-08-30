@@ -1324,6 +1324,18 @@ class ConferenceUserDataStatisticsMixin:
     statistics.
     """
 
+    def _get_field_value_display(self, field, value):
+        """ Returns the display name of a field value if defined in choices. """
+        display_value = value
+        field_choices = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS[field].choices
+        if field_choices:
+            choices_dict = {choice[0]: choice[1] for choice in field_choices}
+            if isinstance(value, list):
+                display_value = [choices_dict.get(subvalue) for subvalue in value]
+            else:
+                display_value = choices_dict.get(value)
+        return display_value
+
     def get_portal_specific_user_data(self):
         """ Returns a table of user data for each conference member. """
 
@@ -1337,6 +1349,7 @@ class ConferenceUserDataStatisticsMixin:
                     value = managed_tags[0].name if managed_tags else None
                 else:
                     value = user.cosinnus_profile.dynamic_fields.get(field, None)
+                    value = self._get_field_value_display(field, value)
                 if value is None or value == '':
                     value = '-'
                 field_data.append(value)
@@ -1353,11 +1366,17 @@ class ConferenceUserDataStatisticsMixin:
         aggregated_data = []
         number_of_fields = len(settings.COSINNUS_CONFERENCE_STATISTICS_USER_DATA_FIELDS)
         for field_num in range(number_of_fields):
-            field_values = [user_data[field_num] for user_data in data]
+            field_values = []
+            for user_data in data:
+                field_value = user_data[field_num]
+                if isinstance(field_value, list):
+                    field_values.extend(field_value)
+                else:
+                    field_values.append(field_value)
             unique_field_values = set(field_values)
             aggregated_field_data = []
             for field_value in unique_field_values:
-                field_value_percent = round(field_values.count(field_value) / len(field_values) * 100)
+                field_value_percent = round(field_values.count(field_value) / len(data) * 100)
                 aggregated_field_data.append((field_value, field_value_percent))
             aggregated_field_data.sort(key=lambda t: t[1], reverse=True)
             aggregated_data.append(aggregated_field_data)
@@ -1476,7 +1495,20 @@ class ConferenceUserDataDownloadView(RequireWriteMixin,
 
         header = settings.COSINNUS_CONFERENCE_STATISTICS_USER_DATA_FIELDS
         filename = '{}_conference_user_data'.format(self.group.slug)
-        rows = self.get_portal_specific_user_data()
+        rows = []
+        data = self.get_portal_specific_user_data()
+        for data_row in data:
+            row = []
+            for value in data_row:
+                if isinstance(value, list):
+                    # convert list-values into comma-separated values
+                    if len(value) > 1:
+                        value = [f'"{subvalue}"' for subvalue in value]
+                    # convert to string to handle translations proxies
+                    value = ', '.join(str(subvalue) for subvalue in value)
+                row.append(value)
+            rows.append(row)
+
 
         response = make_xlsx_response(rows, row_names=header, file_name=filename)
         return response
