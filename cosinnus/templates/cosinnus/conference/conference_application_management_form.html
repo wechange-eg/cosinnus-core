@@ -186,7 +186,20 @@
                                         {% endif %}
                                     </div>
                                 </div>
-			                    
+
+                                <div class="row application-row">
+                                    {% comment %} Application options {% endcomment %}
+                                    <div class="col-xs-12 textfield flat-h transparent">
+                                        {% if application.instance.options %}
+                                            <p>
+                                                <b>{% trans 'Options' %}:</b>
+                                                <br/>
+                                                {{ application.instance.options_strings|join:", " }}
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
                             </div> <!-- end details-collapse -->
 		                </div> <!-- end application -->
 		                    

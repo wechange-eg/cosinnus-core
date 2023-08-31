@@ -951,6 +951,15 @@ class CosinnusConferenceApplication(models.Model):
         """ Needed for django-admin """
         return self.user.email
 
+    @property
+    def options_strings(self):
+        options = []
+        participation_options_dict = {opt[0]: opt[1] for opt in settings.COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS}
+        for option in self.options:
+            options.append(participation_options_dict.get(option, option))
+        print(options)
+        return options
+
 
 
 class CosinnusConferencePremiumBlock(models.Model):
