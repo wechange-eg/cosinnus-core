@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-29 16:39+0200\n"
+"POT-Creation-Date: 2023-08-31 17:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3167,6 +3167,9 @@ msgstr "Other Projects"
 msgid "Disable editor"
 msgstr ""
 
+msgid "Option"
+msgstr ""
+
 #, fuzzy
 msgid "Current File"
 msgstr "Convert selected Projects to Groups"
@@ -3294,6 +3297,9 @@ msgid "Second Choice"
 msgstr ""
 
 msgid "Application submitted"
+msgstr ""
+
+msgid "Options"
 msgstr ""
 
 msgid "Workshop Assignments"
@@ -3854,6 +3860,13 @@ msgstr ""
 
 msgid "New password"
 msgstr ""
+
+msgid "Answer"
+msgstr ""
+
+#, fuzzy
+msgid "Question"
+msgstr "There are no groups."
 
 msgid "Accept"
 msgstr ""
@@ -8826,9 +8839,6 @@ msgstr ""
 msgid "Your changes were saved."
 msgstr ""
 
-msgid "Option"
-msgstr ""
-
 msgid "Status"
 msgstr ""
 
@@ -10830,9 +10840,6 @@ msgid "Show all %(count)s participants"
 msgstr ""
 
 msgid "Me"
-msgstr ""
-
-msgid "Answer"
 msgstr ""
 
 msgid "Reply..."
