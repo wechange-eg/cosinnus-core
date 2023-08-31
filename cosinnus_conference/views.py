@@ -1088,18 +1088,21 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
             'assignment_formset': assignment_formset
         })
 
-        if self.participation_management and self.participation_management.participants_limit:
-
-            places_left = 0
-            accepted_applications = self.applications.filter(status=4).count()
-            if accepted_applications < self.participation_management.participants_limit:
-                places_left = self.participation_management.participants_limit - accepted_applications
-
+        if self.participation_management:
             context.update({
-                'max_number': self.participation_management.participants_limit,
-                'places_left': places_left,
                 'priority_choice_enabled': self.participation_management.priority_choice_enabled,
             })
+
+            if self.participation_management.participants_limit:
+                places_left = 0
+                accepted_applications = self.applications.filter(status=4).count()
+                if accepted_applications < self.participation_management.participants_limit:
+                    places_left = self.participation_management.participants_limit - accepted_applications
+
+                context.update({
+                    'max_number': self.participation_management.participants_limit,
+                    'places_left': places_left,
+                })
         return context
 
     def get_success_url(self):
