@@ -1,3 +1,4 @@
 {% load i18n %}
 
-{% include 'cosinnus/fields/default_field.html' with field=inlineform.question legend=None large_field=True %}
+{% trans "Question" as question_placeholder %}
+{% include 'cosinnus/fields/default_field.html' with field=inlineform.question legend=None large_field=True placeholder=question_placeholder %}
