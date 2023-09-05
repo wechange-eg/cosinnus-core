@@ -6,7 +6,7 @@ from django.conf.urls import url
 from cosinnus.api_frontend.views.user import LoginView, SignupView, UserProfileView, \
     LogoutView, UserAuthInfoView
 from cosinnus.api_frontend.views.navigation import BookmarksView, SpacesView, UnreadMessagesView, UnreadAlertsView, \
-    AlertsView, HelpView, ProfileView
+    AlertsView, HelpView, ProfileView, ServicesView
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.api_frontend.views.portal import PortalTopicsView,\
     PortalManagedTagsView, PortalTagsView, PortalUserprofileDynamicFieldsView,\
@@ -42,4 +42,5 @@ urlpatterns += [
     url(r'^api/v3/navigation/alerts/$', AlertsView.as_view(), name='api-navigation-alerts'),
     url(r'^api/v3/navigation/help/$', HelpView.as_view(), name='api-navigation-help'),
     url(r'^api/v3/navigation/profile/$', ProfileView.as_view(), name='api-navigation-profile'),
+    url(r'^api/v3/navigation/services/$', ServicesView.as_view(), name='api-navigation-services'),
 ]

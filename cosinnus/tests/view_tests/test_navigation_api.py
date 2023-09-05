@@ -372,7 +372,8 @@ class ProfileViewTest(APITestCase):
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
         expected_language_items = [
-            MenuItem(language, f'/language/{code}/', id=code) for code, language in settings.LANGUAGES
+            MenuItem(language, f'/language/{code}/', id=f'ChangeLanguageItem{code.upper()}')
+            for code, language in settings.LANGUAGES
         ]
         expected_language_menu_item = MenuItem('Change Language', None, 'fa-language', id='ChangeLanguage')
         expected_language_menu_item['sub_items'] = expected_language_items
@@ -414,3 +415,31 @@ class ProfileViewTest(APITestCase):
             MenuItem('Your Contribution', '/account/contribution/', 'fa-hand-holding-hart', badge='100 €', id='Contribution')
         )
 
+
+class ServicesViewTest(APITestCase):
+    """
+    Note: Were not able to test with override_settings(COSINNUS_ROCKET_ENABLED=True). The util function reload_urlconf
+    seems not to work as expected there. Will need to look into it in more detail.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.api_url = reverse("cosinnus:frontend-api:api-navigation-services")
+        cls.test_user = User.objects.create(**TEST_USER_DATA)
+        cls.portal = CosinnusPortal.get_current()
+
+    @override_settings(COSINNUS_CLOUD_ENABLED=True)
+    @override_settings(COSINNUS_CLOUD_NEXTCLOUD_URL='http://cloud.example.com')
+    def test_services(self):
+
+        self.client.force_login(self.test_user)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertListEqual(
+            response.data,
+            [
+                MenuItem('Cloud', 'http://cloud.example.com', 'cloud', is_external=True, id='Cloud'),
+                MenuItem('Messages', reverse('postman:inbox'), 'messages', id='Messages'),
+            ]
+        )
