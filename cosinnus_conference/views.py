@@ -1191,14 +1191,27 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
         return result
 
     def get_motivation_question_strings(self):
-        return [question.get('question', '') for question in self.management.motivation_questions]
+        current_questions = [question.get('question', '') for question in self.management.motivation_questions]
+        previous_questions = []
+        for application in self.applications:
+            for answer in application.motivation_answers:
+                question = answer.get('question', '')
+                if question and question not in current_questions:
+                    previous_questions.append(question)
+        questions = current_questions + previous_questions
+        return questions
 
     def get_motivation_answers(self, application):
         answers = []
-        for question in self.management.motivation_questions:
+        for question in self.get_motivation_question_strings():
+            question_answered = False
             for answer in application.motivation_answers:
-                if answer.get('question') == question.get('question'):
+                if answer.get('question') == question:
                     answers.append(answer.get('answer', ''))
+                    question_answered = True
+                    break
+            if not question_answered:
+                answers.append('')
         return answers
 
     @cached_property
