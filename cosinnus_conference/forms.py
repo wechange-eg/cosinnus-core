@@ -182,7 +182,7 @@ class ConferenceParticipationManagement(forms.ModelForm):
 
     class Meta:
         model = ParticipationManagement
-        exclude = ['conference', 'information_questions ', 'information_field_initial_text', 'additional_application_options']
+        exclude = ['conference', 'motivation_questions ', 'additional_application_options']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -332,7 +332,6 @@ class ConferenceApplicationManagementForm(forms.ModelForm):
         self.fields['status'].required = False
         self.fields['user'].widget = forms.HiddenInput()
         self.fields['conference'].widget = forms.HiddenInput()
-        self.fields['information'].widget = forms.HiddenInput()
         self.fields['reason_for_rejection'].widget = forms.TextInput()
         if 'instance' in kwargs:
             setattr(self, 'created', kwargs['instance'].created)

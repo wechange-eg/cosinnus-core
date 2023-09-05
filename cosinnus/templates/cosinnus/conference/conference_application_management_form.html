@@ -75,8 +75,7 @@
 			                {{ application.conference }}
 			                {{ application.user }}
 			                {{ application.id }}
-			                {{ application.information }}
-			                
+
 		                    <div class="row application-row first">
 		                        {% comment %} Name {% endcomment %}
 		                        <div class="col-md-3 textfield transparent no-margin">
@@ -179,10 +178,6 @@
                                                 <strong></y><em>{{ answer.question|linebreaks }}</em></strong>
                                                 {{ answer.answer|linebreaks }}
                                             {% endfor %}
-                                        {% elif application.information.value %}
-                                            <b>{% trans 'Motivation for applying' %}:</b>
-                                            <br/>
-                                            {{ application.information.value|textfield }}
                                         {% endif %}
                                     </div>
                                 </div>

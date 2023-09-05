@@ -1227,9 +1227,6 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
             _('Last Name'),
         ]
 
-        if self.management.information_field_enabled and self.management.information_field_initial_text:
-            header += [_('Motivation for applying')]
-
         header += [_('Status')]
 
         if not 'contact_email' in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
@@ -1261,9 +1258,6 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
             user.first_name if user.first_name else '',
             user.last_name if user.last_name else '',
         ]
-
-        if self.management.information_field_enabled and self.management.information_field_initial_text:
-            row += [application.information]
 
         row += [str(dict(APPLICATION_STATES).get(application.status))]
 
