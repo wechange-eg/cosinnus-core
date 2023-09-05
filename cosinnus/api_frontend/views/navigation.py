@@ -791,3 +791,74 @@ class ProfileView(APIView):
         profile_menu.append(logout_item)
 
         return Response(profile_menu)
+
+
+class ServicesView(APIView):
+    """
+    An endpoint that provides menu items for services.
+    Returns the following items for an authenticated user depending on the configuration:
+
+    -  Cloud if NextCloud is enabled
+    - Rocket.Chat if RocketChat is enabled
+    - Messages (postman) if Rocket.Chat is disabled
+    """
+
+    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+
+    # todo: generate proper response, by either putting the entire response into a
+    #       Serializer, or defining it by hand
+    #       Note: Also needs docs on our custom data/timestamp/version wrapper!
+    # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
+    # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
+    @swagger_auto_schema(
+        responses={'200': openapi.Response(
+            description='WIP: Response info missing. Short example included',
+            examples={
+                "application/json": {
+                    "data": [
+                        {
+                            "id": "Cloud",
+                            "icon": "cloud",
+                            "label": "Cloud",
+                            "url": "https://cloud.localhost/",
+                            "is_external": True,
+                            "image": None,
+                            "badge": None
+                        },
+                        {
+                            "id": "Chat",
+                            "icon": "chat",
+                            "label": "Rocket.Chat",
+                            "url": "/messages/",
+                            "is_external": False,
+                            "image": None,
+                            "badge": None
+                        }
+                    ],
+                    "version": COSINNUS_VERSION,
+                    "timestamp": 1658414865.057476
+                }
+            }
+        )}
+    )
+    def get(self, request):
+        service_items = []
+        if request.user.is_authenticated:
+            if settings.COSINNUS_CLOUD_ENABLED:
+                service_items.append(
+                    MenuItem('Cloud', settings.COSINNUS_CLOUD_NEXTCLOUD_URL, icon='cloud',
+                             is_external=settings.COSINNUS_CLOUD_OPEN_IN_NEW_TAB, id='Cloud')
+                )
+
+            if 'cosinnus_message' not in settings.COSINNUS_DISABLED_COSINNUS_APPS:
+                if settings.COSINNUS_ROCKET_ENABLED:
+                    service_items.append(
+                        MenuItem('Rocket.Chat', reverse('cosinnus:message-global'), icon='chat',
+                                 is_external=settings.COSINNUS_ROCKET_OPEN_IN_NEW_TAB, id='Chat')
+                    )
+                else:
+                    service_items.append(
+                        MenuItem( 'Messages', reverse('postman:inbox'), icon='messages', id='Messages')
+                    )
+        return Response(service_items)
