@@ -3,5 +3,6 @@
 <div class="small-padding background-light-fadeout transparent-p">
     <em>{{ inlineform.question.value|linebreaks }}</em>
 </div>
-{% include 'cosinnus/fields/default_field.html' with field=inlineform.answer label=None large_field=True %}
+{% trans "Answer" as answer_placeholder %}
+{% include 'cosinnus/fields/default_field.html' with field=inlineform.answer label=None large_field=True placeholder=answer_placeholder %}
 {{ inlineform.question }}

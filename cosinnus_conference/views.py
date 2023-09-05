@@ -1088,18 +1088,21 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
             'assignment_formset': assignment_formset
         })
 
-        if self.participation_management and self.participation_management.participants_limit:
-
-            places_left = 0
-            accepted_applications = self.applications.filter(status=4).count()
-            if accepted_applications < self.participation_management.participants_limit:
-                places_left = self.participation_management.participants_limit - accepted_applications
-
+        if self.participation_management:
             context.update({
-                'max_number': self.participation_management.participants_limit,
-                'places_left': places_left,
                 'priority_choice_enabled': self.participation_management.priority_choice_enabled,
             })
+
+            if self.participation_management.participants_limit:
+                places_left = 0
+                accepted_applications = self.applications.filter(status=4).count()
+                if accepted_applications < self.participation_management.participants_limit:
+                    places_left = self.participation_management.participants_limit - accepted_applications
+
+                context.update({
+                    'max_number': self.participation_management.participants_limit,
+                    'places_left': places_left,
+                })
         return context
 
     def get_success_url(self):
@@ -1188,14 +1191,27 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
         return result
 
     def get_motivation_question_strings(self):
-        return [question.get('question', '') for question in self.management.motivation_questions]
+        current_questions = [question.get('question', '') for question in self.management.motivation_questions]
+        previous_questions = []
+        for application in self.applications:
+            for answer in application.motivation_answers:
+                question = answer.get('question', '')
+                if question and question not in current_questions:
+                    previous_questions.append(question)
+        questions = current_questions + previous_questions
+        return questions
 
     def get_motivation_answers(self, application):
         answers = []
-        for question in self.management.motivation_questions:
+        for question in self.get_motivation_question_strings():
+            question_answered = False
             for answer in application.motivation_answers:
-                if answer.get('question') == question.get('question'):
+                if answer.get('question') == question:
                     answers.append(answer.get('answer', ''))
+                    question_answered = True
+                    break
+            if not question_answered:
+                answers.append('')
         return answers
 
     @cached_property
@@ -1210,9 +1226,6 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
             _('First Name'), 
             _('Last Name'),
         ]
-
-        if self.management.information_field_enabled and self.management.information_field_initial_text:
-            header += [_('Motivation for applying')]
 
         header += [_('Status')]
 
@@ -1245,9 +1258,6 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
             user.first_name if user.first_name else '',
             user.last_name if user.last_name else '',
         ]
-
-        if self.management.information_field_enabled and self.management.information_field_initial_text:
-            row += [application.information]
 
         row += [str(dict(APPLICATION_STATES).get(application.status))]
 

@@ -75,8 +75,7 @@
 			                {{ application.conference }}
 			                {{ application.user }}
 			                {{ application.id }}
-			                {{ application.information }}
-			                
+
 		                    <div class="row application-row first">
 		                        {% comment %} Name {% endcomment %}
 		                        <div class="col-md-3 textfield transparent no-margin">
@@ -179,14 +178,23 @@
                                                 <strong></y><em>{{ answer.question|linebreaks }}</em></strong>
                                                 {{ answer.answer|linebreaks }}
                                             {% endfor %}
-                                        {% elif application.information.value %}
-                                            <b>{% trans 'Motivation for applying' %}:</b>
-                                            <br/>
-                                            {{ application.information.value|textfield }}
                                         {% endif %}
                                     </div>
                                 </div>
-			                    
+
+                                <div class="row application-row">
+                                    {% comment %} Application options {% endcomment %}
+                                    <div class="col-xs-12 textfield flat-h transparent">
+                                        {% if application.instance.options %}
+                                            <p>
+                                                <b>{% trans 'Options' %}:</b>
+                                                <br/>
+                                                {{ application.instance.options_strings|join:", " }}
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
                             </div> <!-- end details-collapse -->
 		                </div> <!-- end application -->
 		                    

@@ -50,7 +50,7 @@ class JsonFieldFormsetMixin:
     5. Include the mixin hooks in your view logic.
 
         Include the json_field_formset_form_valid_hook() and json_field_formset_pre_save_hook() in the form_valid
-        function.
+        function. Also make sure, if you overwrite the form_invalid function to call super().
 
             class ExampleView(..., JsonFieldFormsetMixin, FormView):
                 ...
@@ -123,6 +123,12 @@ class JsonFieldFormsetMixin:
             formset_as_json = self._formset_as_json(formset_instance)
             setattr(instance, json_field_name, formset_as_json)
 
+    def form_invalid(self, form):
+        """ Overwrites form_invalid to re-initialize formsets with submitted data. """
+        self._init_formsets_on_post()
+        self._reinit_formsets_from_post_data()
+        return super(JsonFieldFormsetMixin, self).form_invalid(form)
+
     def _init_formsets_on_get(self):
         """ Initialize the formsets on GET. """
         instance = self.get_instance()
@@ -151,6 +157,19 @@ class JsonFieldFormsetMixin:
         for json_field_name, formset in self.get_json_field_formsets().items():
             formset_instance = formset(self.request.POST, self.request.FILES, prefix=json_field_name)
             self._json_field_formset_instances[json_field_name] = formset_instance
+
+    def _reinit_formsets_from_post_data(self):
+        """
+        Re-initializes the formset from submitted data. Needed as the inlineform_field template shows initial forms and
+        hides all extra forms.
+        """
+        for json_field_name, formset in self.get_json_field_formsets().items():
+            if formset.extra:
+                formset_instance = self._json_field_formset_instances[json_field_name]
+                initial = self._formset_as_json(formset_instance)
+                formset_instance = formset(prefix=json_field_name)
+                formset_instance.initial = initial
+                self._json_field_formset_instances[json_field_name] = formset_instance
 
     def _validate_formsets(self):
         """ Validates all formsets. """

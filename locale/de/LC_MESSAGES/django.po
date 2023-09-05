@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-29 16:39+0200\n"
+"POT-Creation-Date: 2023-08-31 17:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3045,6 +3045,9 @@ msgstr "In Projekten anzeigen..."
 msgid "Disable editor"
 msgstr "Editor deaktivieren"
 
+msgid "Option"
+msgstr "Option"
+
 msgid "Current File"
 msgstr "Aktuelle Datei"
 
@@ -3168,6 +3171,9 @@ msgstr "Zweite Wahl"
 
 msgid "Application submitted"
 msgstr "Teilnahmeantrag eingereicht"
+
+msgid "Options"
+msgstr "Optionen"
 
 msgid "Workshop Assignments"
 msgstr "Workshop-Zuweisungen"
@@ -3701,6 +3707,12 @@ msgstr "Statistiken herunterladen"
 
 msgid "New password"
 msgstr "Neues Passwort"
+
+msgid "Answer"
+msgstr "Antworten"
+
+msgid "Question"
+msgstr "Frage"
 
 msgid "Accept"
 msgstr "Akzeptieren"
@@ -8690,9 +8702,6 @@ msgstr "Die folgenden Nutzer/innen wurden abgelehnt: %s"
 msgid "Your changes were saved."
 msgstr "Deine Änderungen wurden übernommen."
 
-msgid "Option"
-msgstr "Option"
-
 msgid "Status"
 msgstr "Status"
 
@@ -10805,9 +10814,6 @@ msgstr "Zeige alle %(count)s Teilnehmer"
 
 msgid "Me"
 msgstr "Ich"
-
-msgid "Answer"
-msgstr "Antworten"
 
 msgid "Reply..."
 msgstr "Antworten..."
@@ -13273,9 +13279,6 @@ msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte
 
 #~ msgid "User CSV File"
 #~ msgstr "Benutzer CSV-Datei"
-
-#~ msgid "Options"
-#~ msgstr "Optionen"
 
 #~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
 #~ msgstr "Die Standardeinstellungen der CSV-Datei. Bitte nur in dem Fall ändern, wenn Sie sich absolut sicher sind, was Sie tun!"
