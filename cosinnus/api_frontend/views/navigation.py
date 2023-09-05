@@ -716,14 +716,14 @@ class ProfileView(APIView):
                             "image": None,
                             "sub_items": [
                                 {
-                                    "id": "de",
+                                    "id": "ChangeLanguageItemDE",
                                     "icon": None,
                                     "label": "Deutsch",
                                     "url": "/language/de/",
                                     "image": None
                                 },
                                 {
-                                    "id": "en",
+                                    "id": "ChangeLanguageItemEN",
                                     "icon": None,
                                     "label": "English",
                                     "url": "/language/en/",
@@ -762,7 +762,8 @@ class ProfileView(APIView):
         if not settings.COSINNUS_LANGUAGE_SELECT_DISABLED:
             language_item = MenuItem(_('Change Language'), None, 'fa-language', id='ChangeLanguage')
             language_subitems = [
-                MenuItem(language, reverse('cosinnus:switch-language', kwargs={'language': code}), id=code)
+                MenuItem(language, reverse('cosinnus:switch-language', kwargs={'language': code}),
+                         id=f'ChangeLanguageItem{code.upper()}')
                 for code, language in settings.LANGUAGES
             ]
             language_item['sub_items'] = language_subitems
