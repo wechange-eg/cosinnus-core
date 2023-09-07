@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-31 17:31+0200\n"
+"POT-Creation-Date: 2023-09-07 14:11+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -622,8 +622,8 @@ msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_na
 msgstr "%(sender_name)s hat gerade aus einer Idee, der du folgst, das Projekt \"%(team_name)s\" auf %(portal_name)s erstellt! <br/><br/> Um es dir anzuschauen, klicke bitte auf den unten stehenden Link. Dort kannst du auch dem Projekt beitreten wenn du möchtest."
 
 #, python-format
-msgid "Your match with %(sender_name)s has just been established!"
-msgstr "Deine Übereinstimmung mit %(sender_name)s wurde soeben festgestellt!"
+msgid "You have a match with %(sender_name)s. Get to know your match in Rocket.Chat"
+msgstr "Du hast ein erfolgreiches Match mit %(sender_name)s. Lerne jetzt dein Match über Rocket.Chat kennen"
 
 msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Deutsch"
@@ -1130,9 +1130,6 @@ msgstr "Teilnehmendenmanagement"
 msgid "Request user information"
 msgstr "Benutzerinfos anfragen"
 
-msgid "Pre-filled content for the information field"
-msgstr "Vorausgefüllter Inhalt für das Informationsfeld"
-
 msgid "User motivation questions"
 msgstr "Teilnahme-Motivations-Fragen"
 
@@ -1200,9 +1197,6 @@ msgstr "Tagung Anmeldung"
 
 msgid "Priorities"
 msgstr "Prioritäten"
-
-msgid "Motivation for applying"
-msgstr "Motivation für die Teilnahme"
 
 msgid "User motivation answers"
 msgstr "Teilnahme-Motivations-Antworten"
@@ -1811,11 +1805,11 @@ msgstr "Verknüpftes Objekt"
 msgid "Match type"
 msgstr "Art der Übereinstimmung"
 
-msgid "Match"
-msgstr "Übereinstimmung"
+msgid "User-Match"
+msgstr "User-Match"
 
-msgid "Matches"
-msgstr "Übereinstimmungen"
+msgid "User-Matches"
+msgstr "User-Matches"
 
 #, python-brace-format
 msgid "Match between {self.from_user} and {self.to_user} has been successfully established."
@@ -3171,6 +3165,9 @@ msgstr "Zweite Wahl"
 
 msgid "Application submitted"
 msgstr "Teilnahmeantrag eingereicht"
+
+msgid "Motivation for applying"
+msgstr "Motivation für die Teilnahme"
 
 msgid "Options"
 msgstr "Optionen"
@@ -6710,8 +6707,8 @@ msgstr "Falls du einen Fehler gemacht hast und die E-Mail Adresse erneut ändern
 msgid "If the validation email does not arrive, please check your spam folder and re-check the spelling of your email address. If everything seems ok but you still have not received an email from us, please repeat the email change again to receive a new validation email:"
 msgstr "Falls die Bestätigungsmail nicht ankommt, überprüfe bitte deinen Spamordner und überprüfe die korrekte Schreibweise deiner E-Mail Adresse erneut. Wenn alles ok zu sein scheint, aber die E-Mail immer noch nicht angekommen ist, wiederhole bitte die E-Mail Adressenänderung um eine neue Bestätigungsmail zu erhalten."
 
-msgid "User Matching"
-msgstr "Mitglieder-Matching"
+msgid "Find a Match"
+msgstr "Finde einen Match"
 
 msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
 msgstr "Das **Matching Feature** bietet dir die Möglichkeit mit gleichgesinnten Nutzer:innen der Plattform in Austausch zu treten. Auf Basis der von dir eingepflegten Profilinformationen machen wir dir Vorschläge, wer interessante Austauschpartner:innen für dich sein könnten. Wenn du an dem Austausch mit Nutzer:innen interessiert bist und sie auch, dann werdet ihr gematcht und es öffnet sich automatisch ein Rocket.Chat Kanal, über den ihr in Austausch treten könnt."
@@ -13186,6 +13183,16 @@ msgstr "Aufgabenliste „%(title)s“ konnte nicht hinzugefügt werden."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte hast eins oder mehrere der noch enthaltenen Objekte zu löschen!"
+
+#, python-format
+#~ msgid "Your match with %(sender_name)s has just been established!"
+#~ msgstr "Deine Übereinstimmung mit %(sender_name)s wurde soeben festgestellt!"
+
+#~ msgid "Pre-filled content for the information field"
+#~ msgstr "Vorausgefüllter Inhalt für das Informationsfeld"
+
+#~ msgid "Match"
+#~ msgstr "Übereinstimmung"
 
 #~ msgid "Direct Contact"
 #~ msgstr "Direktkontakt"
