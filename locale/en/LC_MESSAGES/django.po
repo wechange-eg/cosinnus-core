@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-31 17:31+0200\n"
+"POT-Creation-Date: 2023-09-07 14:11+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -677,7 +677,7 @@ msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_na
 msgstr ""
 
 #, python-format
-msgid "Your match with %(sender_name)s has just been established!"
+msgid "You have a match with %(sender_name)s. Get to know your match in Rocket.Chat"
 msgstr ""
 
 msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
@@ -1191,9 +1191,6 @@ msgstr ""
 msgid "Request user information"
 msgstr "There are no groups."
 
-msgid "Pre-filled content for the information field"
-msgstr ""
-
 msgid "User motivation questions"
 msgstr ""
 
@@ -1261,9 +1258,6 @@ msgid "Confernence Application"
 msgstr ""
 
 msgid "Priorities"
-msgstr ""
-
-msgid "Motivation for applying"
 msgstr ""
 
 msgid "User motivation answers"
@@ -1901,10 +1895,10 @@ msgstr "Create Project"
 msgid "Match type"
 msgstr ""
 
-msgid "Match"
+msgid "User-Match"
 msgstr ""
 
-msgid "Matches"
+msgid "User-Matches"
 msgstr ""
 
 #, python-brace-format
@@ -3297,6 +3291,9 @@ msgid "Second Choice"
 msgstr ""
 
 msgid "Application submitted"
+msgstr ""
+
+msgid "Motivation for applying"
 msgstr ""
 
 msgid "Options"
@@ -6798,7 +6795,7 @@ msgstr ""
 msgid "If the validation email does not arrive, please check your spam folder and re-check the spelling of your email address. If everything seems ok but you still have not received an email from us, please repeat the email change again to receive a new validation email:"
 msgstr ""
 
-msgid "User Matching"
+msgid "Find a Match"
 msgstr ""
 
 msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
