@@ -18,14 +18,14 @@
                 
                 <div class="cosinnus-inlinefied-actions regular-space clearfix">
                     {% if inlineform.DELETE %}
-                        <div class="btn btn-emphasized btn-small pull-right">
+                        <div class="btn btn-default btn-small pull-right">
                             <ul class="media-list">
                                 <li class="media">
                                     <span class="pull-left">
                                         <i class="fa fa-square-o"></i>
                                         <input type="hidden" id="{{ inlineform.DELETE.id_for_label }}" name="{{ inlineform.DELETE.html_name }}">
                                     </span>
-                                    <div class="media-body click-previous-a">
+                                    <div class="media-body click-previous-input">
                                         {{ remove_button_label }}
                                     </div>
                                 </li>

@@ -961,6 +961,11 @@
                 $(this).prev('a').click();
             });
             
+            // add a click-proxy on media-body buttons that have .click-previous-input
+            $('.click-previous-input').on('click',function(e) {
+                $(this).prev().find('input').click();
+            });
+            
         },
 
 
