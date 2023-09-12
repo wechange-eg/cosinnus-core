@@ -122,6 +122,27 @@
                                 </div> <!-- end rejection-reason collapse row-->
 		                    
 			                    <div class="row application-row">
+			                        {% comment %} Full Details {% endcomment %}
+			                        <div class="col-md-6 textfield transparent application-details">
+			                            {% block application_info_row %}
+		                                    <div>
+		                                        <b>{% trans 'Application submitted' %}:</b>
+		                                        {{ application.created|date:"DATETIME_FORMAT" }}
+                                        	</div>
+                                        	{% if application.instance.contact_email and not 'contact_email' in SETTINGS.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS %}
+                                                <div>
+                                                    <b>{% trans 'Contact E-Mail Address' %}:</b>
+                                                    {{ application.instance.contact_email }}
+                                                </div>
+                                            {% endif %}
+                                            {% if application.instance.contact_phone and not 'contact_phone' in SETTINGS.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS %}
+                                                <div>
+                                                    <b>{% trans 'Contact Phone Number' %}:</b>
+                                                    {{ application.instance.contact_phone }}
+                                                </div>
+                                            {% endif %}
+		                                {% endblock %}
+			                        </div>
 			                        {% if priority_choice_enabled %}
 				                        {% comment %} First Choice {% endcomment %}
 				                        <div class="col-md-3 textfield transparent">
@@ -144,27 +165,6 @@
 				                            {% endif %}
 				                        </div>
 				                    {% endif %}
-			                        {% comment %} Full Details {% endcomment %}
-			                        <div class="col-md-6 textfield transparent application-details">
-			                            {% block application_info_row %}
-		                                    <div>
-		                                        <b>{% trans 'Application submitted' %}:</b>
-		                                        {{ application.created|date:"DATETIME_FORMAT" }}
-                                        	</div>
-                                        	{% if application.instance.contact_email and not 'contact_email' in SETTINGS.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS %}
-                                                <div>
-                                                    <b>{% trans 'Contact E-Mail Address' %}:</b>
-                                                    {{ application.instance.contact_email }}
-                                                </div>
-                                            {% endif %}
-                                            {% if application.instance.contact_phone and not 'contact_phone' in SETTINGS.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS %}
-                                                <div>
-                                                    <b>{% trans 'Contact Phone Number' %}:</b>
-                                                    {{ application.instance.contact_phone }}
-                                                </div>
-                                            {% endif %}
-		                                {% endblock %}
-			                        </div>
 			                    </div> <!-- end row 2 -->
 			                    
 			                    <div class="row application-row">
