@@ -6,7 +6,6 @@ from django.utils.translation import ugettext_lazy as _
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.exceptions import ValidationError
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -39,7 +38,6 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
     badge (optional).
     """
 
-    permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
@@ -143,22 +141,28 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         spaces = {}
 
         # personal space
-        dashboard_item = MenuItem(
-            _('Personal Dashboard'), reverse('cosinnus:user-dashboard'), 'fa-user',
-            request.user.cosinnus_profile.avatar_url, id='PersonalDashboard',
-        )
-        personal_space = {
-            'items': [dashboard_item],
-            'actions': [],
-        }
+        personal_space = None
+        if request.user.is_authenticated:
+            personal_space_items = [
+                MenuItem(
+                    _('Personal Dashboard'), reverse('cosinnus:user-dashboard'), 'fa-user',
+                    request.user.cosinnus_profile.avatar_url, id='PersonalDashboard',
+                )
+            ]
+            personal_space = {
+                'items': personal_space_items,
+                'actions': [],
+            }
         spaces['personal'] = personal_space
 
         # projects and groups
-        group_space_items = [
-            dashboard_item.as_menu_item()
-            for cluster in self.get_group_clusters(request.user) for dashboard_item in cluster
-        ]
+        group_space_items = []
         group_space_actions = []
+        if request.user.is_authenticated:
+            group_space_items = [
+                dashboard_item.as_menu_item()
+                for cluster in self.get_group_clusters(request.user) for dashboard_item in cluster
+            ]
         if not settings.COSINNUS_SHOW_MAIN_MENU_GROUP_CREATE_BUTTON_ONLY_FOR_PERMITTED \
                 or check_user_can_create_groups(request.user):
             group_space_actions = [
@@ -177,7 +181,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         if forum_slug:
             forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
             if forum_group:
-                if settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS:
+                if (settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS
+                        and request.user.is_authenticated):
                     # Add paired_groups of managed tags to community space.
                     managed_tags = self.request.user.cosinnus_profile.get_managed_tags()
                     if managed_tags:
@@ -209,8 +214,11 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
 
         # conferences
         if settings.COSINNUS_CONFERENCES_ENABLED:
-            conferences = CosinnusConference.objects.get_for_user(request.user)
+            conference_space_items = []
             conference_space_actions = []
+            if request.user.is_authenticated:
+                conferences = CosinnusConference.objects.get_for_user(request.user)
+                conference_space_items = [DashboardItem(conference).as_menu_item() for conference in conferences]
             if not settings.COSINNUS_SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON_ONLY_FOR_PERMITTED \
                     or check_user_can_create_conferences(request.user):
                 conference_space_actions = [
@@ -218,7 +226,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                              id='CreateConference'),
                 ]
             conference_space = {
-                'items': [DashboardItem(conference).as_menu_item() for conference in conferences],
+                'items': conference_space_items,
                 'actions': conference_space_actions,
             }
             spaces['conference'] = conference_space
@@ -234,7 +242,6 @@ class BookmarksView(APIView):
     badge (optional).
     """
 
-    permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
@@ -284,16 +291,18 @@ class BookmarksView(APIView):
         )}
     )
     def get(self, request):
-        liked_users = self.request.user.cosinnus_profile.get_user_starred_users()
-        user_items = [DashboardItem(user).as_menu_item() for user in liked_users]
-        liked_objects = self.request.user.cosinnus_profile.get_user_starred_objects()
         group_items = []
+        user_items = []
         content_items = []
-        for liked_object in liked_objects:
-            if isinstance(liked_object, get_cosinnus_group_model()):
-                group_items.append(DashboardItem(liked_object).as_menu_item())
-            else:
-                content_items.append(DashboardItem(liked_object).as_menu_item())
+        if request.user.is_authenticated:
+            liked_users = request.user.cosinnus_profile.get_user_starred_users()
+            user_items = [DashboardItem(user).as_menu_item() for user in liked_users]
+            liked_objects = request.user.cosinnus_profile.get_user_starred_objects()
+            for liked_object in liked_objects:
+                if isinstance(liked_object, get_cosinnus_group_model()):
+                    group_items.append(DashboardItem(liked_object).as_menu_item())
+                else:
+                    content_items.append(DashboardItem(liked_object).as_menu_item())
         bookmarks = {
             'groups': group_items,
             'users': user_items,
@@ -305,7 +314,6 @@ class BookmarksView(APIView):
 class UnreadMessagesView(APIView):
     """ An endpoint that returns the user unread message count for the main navigation. """
 
-    permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
@@ -329,7 +337,9 @@ class UnreadMessagesView(APIView):
         )}
     )
     def get(self, request):
-        unread_message_count = get_unread_message_count_for_user(request.user)
+        unread_message_count = 0
+        if request.user.is_authenticated:
+            unread_message_count = get_unread_message_count_for_user(request.user)
         unread_messages = {
             'count': unread_message_count,
         }
@@ -339,7 +349,6 @@ class UnreadMessagesView(APIView):
 class UnreadAlertsView(APIView):
     """ An endpoint that returns the user unseen alerts count for the main navigation. """
 
-    permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
@@ -363,10 +372,13 @@ class UnreadAlertsView(APIView):
         )}
     )
     def get(self, request):
-        alerts_qs = NotificationAlert.objects.filter(portal=CosinnusPortal.get_current(), user=self.request.user)
-        unseen_aggr = alerts_qs.aggregate(seen_count=Count(Case(When(seen=False, then=1))))
+        alerts_count = 0
+        if request.user.is_authenticated:
+            alerts_qs = NotificationAlert.objects.filter(portal=CosinnusPortal.get_current(), user=self.request.user)
+            unseen_aggr = alerts_qs.aggregate(seen_count=Count(Case(When(seen=False, then=1))))
+            alerts_count = unseen_aggr.get('seen_count', 0)
         unread_alerts = {
-            'count': unseen_aggr.get('seen_count', 0)
+            'count': alerts_count
         }
         return Response(unread_alerts)
 
@@ -389,7 +401,6 @@ class AlertsView(APIView):
     Additionally, the retrieved alerts can be marked as read/seen using the "mark_as_read=true" query parameter.
     """
 
-    permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
@@ -515,60 +526,61 @@ class AlertsView(APIView):
         )},
     )
     def get(self, request):
-        self.read_query_params(request)
         response = {
-            'items': None,
+            'items': [],
             'has_more': False,
             'offset_timestamp': None,
             'newest_timestamp': None,
         }
-        queryset = self.get_queryset()
+        if request.user.is_authenticated:
+            self.read_query_params(request)
+            queryset = self.get_queryset()
 
-        # has_more
-        response['has_more'] = queryset.count() > self.page_size
+            # has_more
+            response['has_more'] = queryset.count() > self.page_size
 
-        # paginate
-        queryset = queryset[:self.page_size]
-        alerts = list(queryset)
+            # paginate
+            queryset = queryset[:self.page_size]
+            alerts = list(queryset)
 
-        # mark as read
-        if self.mark_as_read:
+            # mark as read
+            if self.mark_as_read:
+                for alert in alerts:
+                    alert.seen = True
+                NotificationAlert.objects.bulk_update(alerts, ['seen'])
+
+            # alert items
+            user_cache = self.get_user_cache(alerts)
+            items = []
             for alert in alerts:
-                alert.seen = True
-            NotificationAlert.objects.bulk_update(alerts, ['seen'])
+                serialized_alert = SerializedNotificationAlert(
+                    alert,
+                    action_user=user_cache[alert.action_user_id][0],
+                    action_user_profile=user_cache[alert.action_user_id][1],
+                )
+                # split "icon_or_image_url"
+                self._split_icon_or_image_url(serialized_alert, 'item_')
+                self._split_icon_or_image_url(serialized_alert, 'user_')
+                for sub_item in serialized_alert.get('sub_items', []):
+                    self._split_icon_or_image_url(sub_item)
+                # use relative urls
+                self._use_relative_url(serialized_alert)
+                for sub_item in serialized_alert.get('sub_items', []):
+                    self._use_relative_url(sub_item)
+                # Use string identifier
+                serialized_alert['id'] = f'Alert{serialized_alert["id"]}'
+                items.append(serialized_alert)
+            response['items'] = items
 
-        # alert items
-        user_cache = self.get_user_cache(alerts)
-        items = []
-        for alert in alerts:
-            serialized_alert = SerializedNotificationAlert(
-                alert,
-                action_user=user_cache[alert.action_user_id][0],
-                action_user_profile=user_cache[alert.action_user_id][1],
-            )
-            # split "icon_or_image_url"
-            self._split_icon_or_image_url(serialized_alert, 'item_')
-            self._split_icon_or_image_url(serialized_alert, 'user_')
-            for sub_item in serialized_alert.get('sub_items', []):
-                self._split_icon_or_image_url(sub_item)
-            # use relative urls
-            self._use_relative_url(serialized_alert)
-            for sub_item in serialized_alert.get('sub_items', []):
-                self._use_relative_url(sub_item)
-            # Use string identifier
-            serialized_alert['id'] = f'Alert{serialized_alert["id"]}'
-            items.append(serialized_alert)
-        response['items'] = items
+            # newest timestamp
+            if not self.offset_timestamp and len(alerts) > 0:
+                newest_timestamp = timestamp_from_datetime(alerts[0].last_event_at)
+                response['newest_timestamp'] = newest_timestamp
 
-        # newest timestamp
-        if not self.offset_timestamp and len(alerts) > 0:
-            newest_timestamp = timestamp_from_datetime(alerts[0].last_event_at)
-            response['newest_timestamp'] = newest_timestamp
-
-        # offset timestamp
-        if len(alerts) > 0:
-            offset_timestamp = timestamp_from_datetime(alerts[-1].last_event_at)
-            response['offset_timestamp'] = offset_timestamp
+            # offset timestamp
+            if len(alerts) > 0:
+                offset_timestamp = timestamp_from_datetime(alerts[-1].last_event_at)
+                response['offset_timestamp'] = offset_timestamp
 
         return Response(response)
 
@@ -686,7 +698,6 @@ class ProfileView(APIView):
     badge (optional).
     """
 
-    permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
@@ -741,54 +752,55 @@ class ProfileView(APIView):
     def get(self, request):
         profile_menu = []
 
-        # profile page
-        profile_menu_items = [
-            MenuItem(_('My Profile'), reverse('cosinnus:profile-detail'), 'fa-circle-user', id='Profile'),
-        ]
-        if settings.COSINNUS_V3_FRONTEND_ENABLED:
-            profile_menu_items.append(
-                MenuItem(_('Set up my Profile'), reverse('cosinnus:v3-frontend-setup-profile'), 'fa-pen',
-                         id='SetupProfile'),
-            )
-        profile_menu_items.extend([
-            MenuItem(_('Edit my Profile'), reverse('cosinnus:profile-edit'), 'fa-gear', id='EditProfile'),
-            MenuItem(_('Notification Preferences'), reverse('cosinnus:notifications'), 'fa-envelope',
-                     id='NotificationPreferences'),
-
-        ])
-        profile_menu.extend(profile_menu_items)
-
-        # language
-        if not settings.COSINNUS_LANGUAGE_SELECT_DISABLED:
-            language_item = MenuItem(_('Change Language'), None, 'fa-language', id='ChangeLanguage')
-            language_subitems = [
-                MenuItem(language, reverse('cosinnus:switch-language', kwargs={'language': code}),
-                         id=f'ChangeLanguageItem{code.upper()}')
-                for code, language in settings.LANGUAGES
+        if request.user.is_authenticated:
+            # profile page
+            profile_menu_items = [
+                MenuItem(_('My Profile'), reverse('cosinnus:profile-detail'), 'fa-circle-user', id='Profile'),
             ]
-            language_item['sub_items'] = language_subitems
-            profile_menu.append(language_item)
+            if settings.COSINNUS_V3_FRONTEND_ENABLED:
+                profile_menu_items.append(
+                    MenuItem(_('Set up my Profile'), reverse('cosinnus:v3-frontend-setup-profile'), 'fa-pen',
+                             id='SetupProfile'),
+                )
+            profile_menu_items.extend([
+                MenuItem(_('Edit my Profile'), reverse('cosinnus:profile-edit'), 'fa-gear', id='EditProfile'),
+                MenuItem(_('Notification Preferences'), reverse('cosinnus:notifications'), 'fa-envelope',
+                         id='NotificationPreferences'),
 
-        # payments
-        if settings.COSINNUS_PAYMENTS_ENABLED or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY \
-                and request.user.is_superuser:
-            from wechange_payments.models import Subscription
-            current_subscription = Subscription.get_current_for_user(request.user)
-            contribution = int(current_subscription.amount) if current_subscription else 0
-            contribution_badge = f'{contribution} €'
-            payments_item = MenuItem(_('Your Contribution'), reverse('wechange-payments:overview'),
-                                     'fa-hand-holding-hart', badge=contribution_badge, id='Contribution')
-            profile_menu.append(payments_item)
+            ])
+            profile_menu.extend(profile_menu_items)
 
-        # administration
-        if request.user.is_superuser or check_user_portal_manager(request.user):
-            administration_item = MenuItem(_('Administration'), reverse('cosinnus:administration'),
-                                           'fa-screwdriver-wrench', id='Administration')
-            profile_menu.append(administration_item)
+            # language
+            if not settings.COSINNUS_LANGUAGE_SELECT_DISABLED:
+                language_item = MenuItem(_('Change Language'), None, 'fa-language', id='ChangeLanguage')
+                language_subitems = [
+                    MenuItem(language, reverse('cosinnus:switch-language', kwargs={'language': code}),
+                             id=f'ChangeLanguageItem{code.upper()}')
+                    for code, language in settings.LANGUAGES
+                ]
+                language_item['sub_items'] = language_subitems
+                profile_menu.append(language_item)
 
-        # logout
-        logout_item = MenuItem(_('Logout'), reverse('logout'), 'fa-right-from-bracket', id='Logout')
-        profile_menu.append(logout_item)
+            # payments
+            if settings.COSINNUS_PAYMENTS_ENABLED or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY \
+                    and request.user.is_superuser:
+                from wechange_payments.models import Subscription
+                current_subscription = Subscription.get_current_for_user(request.user)
+                contribution = int(current_subscription.amount) if current_subscription else 0
+                contribution_badge = f'{contribution} €'
+                payments_item = MenuItem(_('Your Contribution'), reverse('wechange-payments:overview'),
+                                         'fa-hand-holding-hart', badge=contribution_badge, id='Contribution')
+                profile_menu.append(payments_item)
+
+            # administration
+            if request.user.is_superuser or check_user_portal_manager(request.user):
+                administration_item = MenuItem(_('Administration'), reverse('cosinnus:administration'),
+                                               'fa-screwdriver-wrench', id='Administration')
+                profile_menu.append(administration_item)
+
+            # logout
+            logout_item = MenuItem(_('Logout'), reverse('logout'), 'fa-right-from-bracket', id='Logout')
+            profile_menu.append(logout_item)
 
         return Response(profile_menu)
 

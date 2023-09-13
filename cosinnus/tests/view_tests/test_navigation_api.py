@@ -37,10 +37,6 @@ class SpacesViewTest(APITestCase):
         cls.api_url = reverse("cosinnus:frontend-api:api-navigation-spaces")
         cls.test_user = User.objects.create(**TEST_USER_DATA)
 
-    def test_login_required(self):
-        response = self.client.get(self.api_url)
-        self.assertEqual(response.status_code, 403)
-
     def test_personal_space(self):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
@@ -54,6 +50,11 @@ class SpacesViewTest(APITestCase):
                 'actions': []
             }
         )
+
+    def test_personal_space_anonymous(self):
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNone(response.data['personal'])
 
     def test_group_space(self):
         group = CosinnusSociety.objects.create(name='Test Group')
@@ -74,9 +75,24 @@ class SpacesViewTest(APITestCase):
             }
         )
 
+    def test_group_space_anonymous(self):
+        group = CosinnusSociety.objects.create(name='Test Group')
+        group.memberships.create(user=self.test_user, status=MEMBERSHIP_MEMBER)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertDictEqual(
+            response.data['groups'],
+            {
+                'items': [],
+                'actions': [
+                    MenuItem('Create new Group', '/groups/add/', id='CreateGroup'),
+                    MenuItem('Create new Project', '/projects/add/', id='CreateProject')
+                ]
+            }
+        )
+
     def test_community_space(self):
         forum = CosinnusSociety.objects.create(slug=settings.NEWW_FORUM_GROUP_SLUG, name=settings.NEWW_FORUM_GROUP_SLUG)
-        self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
         self.assertDictEqual(
@@ -92,7 +108,6 @@ class SpacesViewTest(APITestCase):
 
     @override_settings(COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS=[('ExternalID', 'External', 'https://example.com/', 'fa-group')])
     def test_community_space_additional_links(self):
-        self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
@@ -123,10 +138,6 @@ class BookmarksViewTest(APITestCase):
         super().setUpClass()
         cls.api_url = reverse("cosinnus:frontend-api:api-navigation-bookmarks")
         cls.test_user = User.objects.create(**TEST_USER_DATA)
-
-    def test_login_required(self):
-        response = self.client.get(self.api_url)
-        self.assertEqual(response.status_code, 403)
 
     def test_group_bookmarks(self):
         group = CosinnusSociety.objects.create(name='Test Group')
@@ -162,6 +173,18 @@ class BookmarksViewTest(APITestCase):
             [MenuItem('Test Idea', '/map/?item=1.ideas.test-idea', 'fa-lightbulb-o', id=f'CosinnusIdea{idea.pk}')]
         )
 
+    def test_bookmarks_anonymous(self):
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.data,
+            {
+                'groups': [],
+                'users': [],
+                'content': [],
+            }
+        )
+
 
 class UnreadMessagesViewTest(APITestCase):
 
@@ -171,16 +194,17 @@ class UnreadMessagesViewTest(APITestCase):
         cls.api_url = reverse("cosinnus:frontend-api:api-navigation-unread-messages")
         cls.test_user = User.objects.create(**TEST_USER_DATA)
 
-    def test_login_required(self):
-        response = self.client.get(self.api_url)
-        self.assertEqual(response.status_code, 403)
-
     @patch('cosinnus.api_frontend.views.navigation.get_unread_message_count_for_user', return_value=10)
     def test_unread_messages_count(self, get_unread_message_count_for_user_patch):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
         self.assertDictEqual(response.data, {'count': 10})
+
+    def test_unread_messages_count_anonymous(self):
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, {'count': 0})
 
 
 class TestAlertsMixin:
@@ -205,10 +229,6 @@ class UnreadAlertsViewTest(TestAlertsMixin, APITestCase):
         cls.test_user = User.objects.create(**TEST_USER_DATA)
         cls.portal = CosinnusPortal.get_current()
 
-    def test_login_required(self):
-        response = self.client.get(self.api_url)
-        self.assertEqual(response.status_code, 403)
-
     def test_unread_alerts_count(self):
         self.create_test_alert(seen=True)
         self.create_test_alert(seen=False)
@@ -216,6 +236,11 @@ class UnreadAlertsViewTest(TestAlertsMixin, APITestCase):
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
         self.assertDictEqual(response.data, {'count': 1})
+
+    def test_unread_alerts_count_anonymous(self):
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertDictEqual(response.data, {'count': 0})
 
     def test_mark_as_read(self):
         self.create_test_alert(seen=False)
@@ -240,10 +265,6 @@ class AlertsViewTest(TestAlertsMixin, APITestCase):
         cls.api_url = reverse("cosinnus:frontend-api:api-navigation-alerts")
         cls.test_user = User.objects.create(**TEST_USER_DATA)
         cls.portal = CosinnusPortal.get_current()
-
-    def test_login_required(self):
-        response = self.client.get(self.api_url)
-        self.assertEqual(response.status_code, 403)
 
     def test_alerts(self):
         self.client.force_login(self.test_user)
@@ -332,6 +353,19 @@ class AlertsViewTest(TestAlertsMixin, APITestCase):
         response = self.client.get(self.api_url + '?mark_as_read=true')
         self.assertFalse(response.data['items'][0]['is_emphasized'])
 
+    def test_alerts_anonymous(self):
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertDictEqual(
+            response.data,
+            {
+                'items': [],
+                'has_more': False,
+                'offset_timestamp': None,
+                'newest_timestamp': None,
+            }
+        )
+
 
 class HelpViewTest(APITestCase):
 
@@ -362,10 +396,6 @@ class ProfileViewTest(APITestCase):
         cls.api_url = reverse("cosinnus:frontend-api:api-navigation-profile")
         cls.test_user = User.objects.create(**TEST_USER_DATA)
         cls.portal = CosinnusPortal.get_current()
-
-    def test_login_required(self):
-        response = self.client.get(self.api_url)
-        self.assertEqual(response.status_code, 403)
 
     def test_profile(self):
         self.client.force_login(self.test_user)
@@ -415,6 +445,11 @@ class ProfileViewTest(APITestCase):
             MenuItem('Your Contribution', '/account/contribution/', 'fa-hand-holding-hart', badge='100 €', id='Contribution')
         )
 
+    def test_profile_anoymous(self):
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertListEqual(response.data, [])
+
 
 class ServicesViewTest(APITestCase):
     """
@@ -443,3 +478,10 @@ class ServicesViewTest(APITestCase):
                 MenuItem('Messages', reverse('postman:inbox'), 'messages', id='Messages'),
             ]
         )
+
+    @override_settings(COSINNUS_CLOUD_ENABLED=True)
+    @override_settings(COSINNUS_CLOUD_NEXTCLOUD_URL='http://cloud.example.com')
+    def test_services_anonymous(self):
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertListEqual(response.data, [])
