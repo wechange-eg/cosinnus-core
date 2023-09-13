@@ -529,7 +529,25 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     PAYMENTS_BETTERPAYMENT_API_KEY = env("WECHANGE_PAYMENTS_BETTERPAYMENT_API_KEY", default='')
     PAYMENTS_BETTERPAYMENT_INCOMING_KEY = env("WECHANGE_PAYMENTS_BETTERPAYMENT_INCOMING_KEY", default='')
     PAYMENTS_BETTERPAYMENT_OUTGOING_KEY = env("WECHANGE_PAYMENTS_BETTERPAYMENT_OUTGOING_KEY", default='')
-    PAYMENTS_LEXOFFICE_API_KEY = env("WECHANGE_PAYMENTS_LEXOFFICE_API_KEY", default='')
+    try:
+        # import pythonic objects from the .env file
+        invoice_str = env(
+            "WECHANGE_PAYMENTS_INVOICE_BACKEND_AUTH_DATA",
+            default="{}"
+        )
+        PAYMENTS_INVOICE_BACKEND_AUTH_DATA = ast.literal_eval(invoice_str)
+        invoices_str = env(
+            "WECHANGE_PAYMENTS_ADDITIONAL_INVOICES_BACKENDS",
+            default="[]"
+        )
+        PAYMENTS_ADDITIONAL_INVOICES_BACKENDS = ast.literal_eval(invoices_str)
+    except Exception as e:
+        import logging
+        logger = logging.getLogger('cosinnus')
+        logger.error(f'Exception: Malformed PAYMENTS_ADDITIONAL_INVOICES_BACKENDS .env variable input! Exception: {e}', extra={'bbb_str': bbb_str})
+        print(f'Exception: Malformed PAYMENTS_ADDITIONAL_INVOICES_BACKENDS .env variable input! Exception: {e}. Input string was: {bbb_str}')
+        PAYMENTS_INVOICE_BACKEND_AUTH_DATA = {}
+        PAYMENTS_ADDITIONAL_INVOICES_BACKENDS = []
     
     
     
