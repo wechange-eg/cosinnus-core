@@ -67,7 +67,7 @@ export function EventButtons(props: EventButtonsProps) {
               <FormattedMessage id="Delete event" />
             </DialogTitle>
             <DialogContent>
-              <DialogContentText>
+              <DialogContentText classes={{root: classes.dialogText}}>
                 <FormattedMessage id="Are you sure you want to delete this event?" />
               </DialogContentText>
             </DialogContent>

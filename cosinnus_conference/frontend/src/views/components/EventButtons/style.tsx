@@ -7,5 +7,8 @@ export const useStyles = makeStyles((theme) => ({
     '& > *': {
       margin: theme.spacing(1),
     }
-  }
+  },
+  dialogText: {
+    color: theme.palette.text.primary
+  },
 }))
