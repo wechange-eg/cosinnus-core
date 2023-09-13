@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 import csv
 import logging
+import requests
+from urllib.parse import quote
 
 from annoying.functions import get_object_or_None
 from django.conf import settings
@@ -30,6 +32,7 @@ from cosinnus.models.conference import CosinnusConferenceRoom,\
     CosinnusConferenceApplication, APPLICATION_ACCEPTED, APPLICATION_WAITLIST,\
     APPLICATION_STATES
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, MEMBERSHIP_ADMIN
+from cosinnus.models.managed_tags import MANAGED_TAG_LABELS
 from cosinnus.models.membership import MEMBERSHIP_MEMBER,\
     MEMBERSHIP_INVITED_PENDING
 from cosinnus.models.profile import PROFILE_SETTING_WORKSHOP_PARTICIPANT
@@ -49,17 +52,22 @@ from django.db import transaction
 from cosinnus.forms.conference import CosinnusConferenceRoomForm
 from django.contrib.contenttypes.models import ContentType
 from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
+from cosinnus_event.models import ConferenceEventAttendanceTracking
 from django.http.response import Http404, HttpResponseForbidden,\
     HttpResponseNotFound
 
-from cosinnus_conference.forms import (CHOICE_ALL_APPLICANTS, CHOICE_ALL_MEMBERS, CHOICE_APPLICANTS_AND_MEMBERS, CHOICE_INDIVIDUAL, 
+from cosinnus_conference.forms import (CHOICE_ALL_APPLICANTS, CHOICE_ALL_MEMBERS, CHOICE_APPLICANTS_AND_MEMBERS, CHOICE_INDIVIDUAL,
                                        ConferenceRemindersForm,
                                        ConferenceConfirmSendRemindersForm,
                                        ConferenceParticipationManagement,
                                        ConferenceApplicationForm,
                                        PriorityFormSet,
                                        ConferenceApplicationManagementFormSet,
-                                       AsignUserToEventForm)
+                                       AsignUserToEventForm,
+                                       MotivationQuestionFormSet,
+                                       MotivationAnswerFormSet,
+                                       AdditionalApplicationOptionsFormSet,
+                                       )
 from cosinnus_conference.utils import send_conference_reminder
 from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus import cosinnus_notifications
@@ -68,6 +76,7 @@ import xlsxwriter
 from cosinnus.utils.http import make_xlsx_response
 from cosinnus.views.profile import deactivate_user_and_mark_for_deletion
 from cosinnus.core.decorators.views import redirect_to_error_page
+from cosinnus.views.mixins.formsets import JsonFieldFormsetMixin
 from cosinnus.apis.bigbluebutton import BigBlueButtonAPI
 
 logger = logging.getLogger('cosinnus')
@@ -748,9 +757,15 @@ class ConferenceConfirmSendRemindersView(SamePortalGroupMixin,
 class ConferenceParticipationManagementView(SamePortalGroupMixin,
                                             RequireWriteMixin,
                                             GroupIsConferenceMixin,
+                                            JsonFieldFormsetMixin,
                                             FormView):
     form_class = ConferenceParticipationManagement
     template_name = 'cosinnus/conference/conference_participation_management_form.html'
+    json_field_formsets = {
+        'motivation_questions': MotivationQuestionFormSet,
+        'additional_application_options': AdditionalApplicationOptionsFormSet,
+    }
+    instance = None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -759,19 +774,29 @@ class ConferenceParticipationManagementView(SamePortalGroupMixin,
         })
         return context
 
+    def get_instance(self):
+        if self.instance:
+            return self.instance
+        if self.group.participation_management:
+            self.instance = self.group.participation_management.first()
+        return self.instance
+
     def get_form_kwargs(self):
         form_kwargs = super().get_form_kwargs()
-        if self.group.participation_management:
-            form_kwargs['instance'] = self.group.participation_management.first()
+        instance = self.get_instance()
+        if instance:
+            form_kwargs['instance'] = instance
         return form_kwargs
 
     def form_valid(self, form):
+        json_field_formsets_valid = self.json_field_formset_form_valid_hook()
+        if not json_field_formsets_valid:
+            return self.form_invalid(form)
+        management = form.save(commit=False)
         if not form.instance.id:
-            management = form.save(commit=False)
             management.conference = self.group
-            management.save()
-        else:
-            form.save()
+        self.json_field_formset_pre_save_hook(management)
+        management.save()
         messages.success(self.request, _('Participation configurations have been updated.'))
         return HttpResponseRedirect(self.get_success_url())
 
@@ -800,10 +825,11 @@ class ConferenceApplicationView(SamePortalGroupMixin,
                                 GroupIsConferenceMixin,
                                 RequireExtraDispatchCheckMixin,
                                 ConferencePropertiesMixin,
+                                JsonFieldFormsetMixin,
                                 FormView):
     form_class = ConferenceApplicationForm
     template_name = 'cosinnus/conference/conference_application_form.html'
-    
+
     def extra_dispatch_check(self):
         if not self.group.use_conference_applications:
             messages.warning(self.request, _('This function is not enabled for this conference.'))
@@ -813,6 +839,9 @@ class ConferenceApplicationView(SamePortalGroupMixin,
     def application(self):
         user = self.request.user
         return self.group.conference_applications.all().filter(user=user).first()
+
+    def get_instance(self):
+        return self.application
 
     def get_form_kwargs(self):
         form_kwargs = super().get_form_kwargs()
@@ -834,14 +863,16 @@ class ConferenceApplicationView(SamePortalGroupMixin,
             return self.render_to_response(self.get_context_data(form=form))
 
     def form_valid(self, form):
+        json_field_formsets_valid = self.json_field_formset_form_valid_hook()
         formset = PriorityFormSet(self.request.POST)
-        if formset.is_valid():
+        if json_field_formsets_valid and formset.is_valid():
             priorities = self._get_prioritydict(form)
             if not form.instance.id:
                 application = form.save(commit=False)
                 application.conference = self.group
                 application.user = self.request.user
                 application.priorities = priorities
+                self.json_field_formset_pre_save_hook(application)
                 application.save()
 
                 signals.user_group_join_requested.send(sender=self, obj=self.group, user=self.request.user, 
@@ -850,6 +881,7 @@ class ConferenceApplicationView(SamePortalGroupMixin,
             else:
                 application = form.save()
                 application.priorities = priorities
+                self.json_field_formset_pre_save_hook(application)
                 application.save()
                 messages.success(self.request, _('Your application has been updated.'))
             
@@ -908,6 +940,15 @@ class ConferenceApplicationView(SamePortalGroupMixin,
         if not self.application:
             return True
         return self.application.status == 2
+
+    def get_json_field_formsets(self):
+        formsets = {}
+        if self.participation_management.information_field_enabled and self.participation_management.motivation_questions:
+            formsets['motivation_answers'] = MotivationAnswerFormSet
+        return formsets
+
+    def json_field_formset_initial(self):
+        return {'motivation_answers': self.participation_management.motivation_questions}
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1047,18 +1088,21 @@ class ConferenceParticipationManagementApplicationsView(SamePortalGroupMixin,
             'assignment_formset': assignment_formset
         })
 
-        if self.participation_management and self.participation_management.participants_limit:
-
-            places_left = 0
-            accepted_applications = self.applications.filter(status=4).count()
-            if accepted_applications < self.participation_management.participants_limit:
-                places_left = self.participation_management.participants_limit - accepted_applications
-
+        if self.participation_management:
             context.update({
-                'max_number': self.participation_management.participants_limit,
-                'places_left': places_left,
                 'priority_choice_enabled': self.participation_management.priority_choice_enabled,
             })
+
+            if self.participation_management.participants_limit:
+                places_left = 0
+                accepted_applications = self.applications.filter(status=4).count()
+                if accepted_applications < self.participation_management.participants_limit:
+                    places_left = self.participation_management.participants_limit - accepted_applications
+
+                context.update({
+                    'max_number': self.participation_management.participants_limit,
+                    'places_left': places_left,
+                })
         return context
 
     def get_success_url(self):
@@ -1120,11 +1164,13 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
     @cached_property
     def conference_options(self):
         selected_options = []
-        if self.management and self.management.application_options:
-            if hasattr(settings, 'COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS'):
+        if self.management:
+            if self.management.application_options and hasattr(settings, 'COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS'):
                 for option in settings.COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS:
                     if option[0] in self.management.application_options:
                         selected_options.append(option)
+            if self.management.additional_application_options:
+                selected_options.extend(self.management.get_additional_application_options_choices())
         return selected_options
 
     @cached_property
@@ -1144,6 +1190,30 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
                 result.append('')
         return result
 
+    def get_motivation_question_strings(self):
+        current_questions = [question.get('question', '') for question in self.management.motivation_questions]
+        previous_questions = []
+        for application in self.applications:
+            for answer in application.motivation_answers:
+                question = answer.get('question', '')
+                if question and question not in current_questions:
+                    previous_questions.append(question)
+        questions = current_questions + previous_questions
+        return questions
+
+    def get_motivation_answers(self, application):
+        answers = []
+        for question in self.get_motivation_question_strings():
+            question_answered = False
+            for answer in application.motivation_answers:
+                if answer.get('question') == question:
+                    answers.append(answer.get('answer', ''))
+                    question_answered = True
+                    break
+            if not question_answered:
+                answers.append('')
+        return answers
+
     @cached_property
     def conditions_check(self):
         if self.management and self.management.has_conditions:
@@ -1155,9 +1225,10 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
         header = [
             _('First Name'), 
             _('Last Name'),
-            _('Motivation for applying'),
-            _('Status'),
         ]
+
+        header += [_('Status')]
+
         if not 'contact_email' in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
             header += [
                 _('Contact E-Mail Address')
@@ -1171,7 +1242,9 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
                 _('First Choice'),
                 _('Second Choice'),
             ]
-        header += self.get_extra_header() 
+        header += self.get_extra_header()
+        if self.management.information_field_enabled and self.management.motivation_questions:
+            header += self.get_motivation_question_strings()
         header += self.get_options_strings()
         return header
     
@@ -1184,9 +1257,10 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
         row = [
             user.first_name if user.first_name else '',
             user.last_name if user.last_name else '',
-            application.information,
-            str(dict(APPLICATION_STATES).get(application.status)),
         ]
+
+        row += [str(dict(APPLICATION_STATES).get(application.status))]
+
         if not 'contact_email' in settings.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS:
             row += [
                 application.contact_email
@@ -1200,7 +1274,9 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
                 application.first_priorities_string,
                 application.second_priorities_string,
             ]
-        row += self.get_extra_application_row(application) 
+        row += self.get_extra_application_row(application)
+        if self.management.information_field_enabled and application.motivation_answers:
+            row += self.get_motivation_answers(application)
         row += self.get_application_options(application)
         return row
     
@@ -1212,7 +1288,246 @@ class ConferenceApplicantsDetailsDownloadView(SamePortalGroupMixin,
         return '{} - {}.xlsx'.format(_('List of Applicants'), self.group.slug)
 
 
+class ConferenceAttendanceTrackingMixin:
+    """ Provide conference and event info and statistics using ConferenceEventAttendanceTracking. """
 
+    def get_event_attendance_stats(self):
+        """Provides attendance stats for each conference event using ConferenceEventAttendanceTracking."""
+        stats = []
+        for event in self.events:
+            attendance = ConferenceEventAttendanceTracking.get_attendance(self.group, event)
+            event_stats = {
+                'name': event.title,
+                'room_type': event.get_type_verbose(),
+                'duration': attendance.get('event_duration', '-'),
+                'number_of_attendees': attendance.get('num_attendees'),
+                'average_time_spent_per_attendee': attendance.get('avg_time_attendee'),
+                'average_time_spent_per_attendee_percent': attendance.get('avg_time_attendee_percent', '-'),
+            }
+            stats.append(event_stats)
+        return stats
+
+    def get_conference_attendance_stats(self):
+        """Provides attendance stats for the overall conference event using ConferenceEventAttendanceTracking."""
+        stats = {
+            'conference_name': self.group.name,
+        }
+
+        # num. invitations
+        stats['number_invitations'] = len(self.group.invited_pendings) + self.group.conference_applications.count()
+
+        # num. registrations
+        stats['number_registrations'] = self.group.member_count
+
+        # attendance
+        attendance = ConferenceEventAttendanceTracking.get_attendance(self.group)
+        stats.update({
+            'number_of_attendees': attendance.get('num_attendees'),
+            'average_time_spent_per_attendee': attendance.get('avg_time_attendee'),
+        })
+        return stats
+
+
+class ConferenceUserDataStatisticsMixin:
+    """
+    Provides portal specific user data as defined in COSINNUS_CONFERENCE_STATISTICS_USER_DATA_FIELDS for the conference
+    statistics.
+    """
+
+    def _get_field_value_display(self, field, value):
+        """ Returns the display name of a field value if defined in choices. """
+        display_value = value
+        field_choices = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS[field].choices
+        if field_choices:
+            choices_dict = {choice[0]: choice[1] for choice in field_choices}
+            if isinstance(value, list):
+                display_value = [choices_dict.get(subvalue) for subvalue in value]
+            else:
+                display_value = choices_dict.get(value)
+        return display_value
+
+    def get_portal_specific_user_data(self):
+        """ Returns a table of user data for each conference member. """
+
+        data = []
+
+        for user in ConferenceEventAttendanceTracking.get_attendees(self.group):
+            field_data = []
+            for field in settings.COSINNUS_CONFERENCE_STATISTICS_USER_DATA_FIELDS:
+                if field == settings.COSINNUS_CONFERENCE_STATISTICS_USER_DATA_MANAGED_TAGS_FIELD:
+                    managed_tags = user.cosinnus_profile.get_managed_tags()
+                    value = managed_tags[0].name if managed_tags else None
+                else:
+                    value = user.cosinnus_profile.dynamic_fields.get(field, None)
+                    value = self._get_field_value_display(field, value)
+                if value is None or value == '':
+                    value = '-'
+                field_data.append(value)
+            data.append(field_data)
+        return data
+
+    def get_aggregated_portal_specific_user_data(self):
+        """
+        Provides aggregated user data with its occurrence percentage.
+        Returns a table with each line containing the aggregated user field values and the percentage as tuple.
+        Example for country and organization fields: [[('DE', 50), ('UA', 25), ('-', 25)], [('WECHANGE eG', 100)]
+        """
+        data = self.get_portal_specific_user_data()
+        aggregated_data = []
+        number_of_fields = len(settings.COSINNUS_CONFERENCE_STATISTICS_USER_DATA_FIELDS)
+        for field_num in range(number_of_fields):
+            field_values = []
+            for user_data in data:
+                field_value = user_data[field_num]
+                if isinstance(field_value, list):
+                    field_values.extend(field_value)
+                else:
+                    field_values.append(field_value)
+            unique_field_values = set(field_values)
+            aggregated_field_data = []
+            for field_value in unique_field_values:
+                field_value_percent = round(field_values.count(field_value) / len(data) * 100)
+                aggregated_field_data.append((field_value, field_value_percent))
+            aggregated_field_data.sort(key=lambda t: t[1], reverse=True)
+            aggregated_data.append(aggregated_field_data)
+        return aggregated_data
+
+
+class ConferenceStatisticsDashboardView(RequireWriteMixin,
+                                        GroupIsConferenceMixin,
+                                        ConferencePropertiesMixin,
+                                        ConferenceAttendanceTrackingMixin,
+                                        ConferenceUserDataStatisticsMixin,
+                                        TemplateView):
+    """
+    Implements a simple conference statistics dashboard showing the data provided by the
+    ConferenceAttendanceTrackingMixin and ConferenceUserDataStatisticsMixin as tables.
+    """
+
+    template_name = 'cosinnus/conference/conference_statistics.html'
+
+    def get_portal_specific_user_data_labels(self):
+        labels = []
+        for field in settings.COSINNUS_CONFERENCE_STATISTICS_USER_DATA_FIELDS:
+            if field == settings.COSINNUS_CONFERENCE_STATISTICS_USER_DATA_MANAGED_TAGS_FIELD:
+                label = MANAGED_TAG_LABELS.MANAGED_TAG_NAME
+            else:
+                label = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS[field].label
+            labels.append(label)
+        return labels
+
+    def get_dashboard_stats(self):
+        stats = {}
+        conference_stats = self.get_conference_attendance_stats()
+        event_stats = self.get_event_attendance_stats()
+        stats.update({
+            'conference_stats': conference_stats,
+            'event_stats': event_stats,
+        })
+        if settings.COSINNUS_CONFERENCE_STATISTICS_USER_DATA_FIELDS:
+            user_data = self.get_aggregated_portal_specific_user_data()
+            user_data_fields = self.get_portal_specific_user_data_labels()
+            stats.update({
+                'user_data_fields': user_data_fields,
+                'user_data': user_data,
+            })
+        return stats
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'object': self.group,
+        })
+        if ConferenceEventAttendanceTracking.has_tracking(self.group):
+            dashboard_stats = self.get_dashboard_stats()
+            context.update(**dashboard_stats)
+        else:
+            messages.info(self.request, _('Attendance data is not available for this conference.'))
+        return context
+
+
+class ConferenceStatisticsDownloadView(RequireWriteMixin,
+                                       GroupIsConferenceMixin,
+                                       ConferenceAttendanceTrackingMixin,
+                                       View):
+    """ Provide conference statistic from the ConferenceAttendanceTrackingMixin as XLSX download. """
+
+    def get(self, request, *args, **kwars):
+
+        header = [
+            'conference_name',
+            'number_invitations',
+            'number_registrations',
+            'number_of_attendees',
+            'average_time_spent_per_attendee'
+        ]
+
+        filename = '{}_conference_statistics'.format(self.group.slug)
+        conference_stats = self.get_conference_attendance_stats()
+        rows = [conference_stats.values()]
+        response = make_xlsx_response(rows, row_names=header, file_name=filename)
+        return response
+
+
+class ConferenceEventStatisticsDownloadView(RequireWriteMixin,
+                                            GroupIsConferenceMixin,
+                                            ConferencePropertiesMixin,
+                                            ConferenceAttendanceTrackingMixin,
+                                            View):
+    """ Provide conference event statistic from the ConferenceAttendanceTrackingMixin as XLSX download. """
+
+    def get(self, request, *args, **kwars):
+
+        header = [
+            'single_event_name',
+            'single_event_room_type',
+            'single_event_duration_minutes',
+            'single_event_number_of_attendees',
+            'single_event_average_time_spent_per_attendee_minutes',
+            'single_event_average_time_spent_per_attendee_percent',
+        ]
+
+        filename = '{}_conference_event_statistics'.format(self.group.slug)
+        conference_event_stats = self.get_event_attendance_stats()
+        rows = [event_stats.values() for event_stats in conference_event_stats]
+        response = make_xlsx_response(rows, row_names=header, file_name=filename)
+        return response
+
+
+class ConferenceUserDataDownloadView(RequireWriteMixin,
+                                     GroupIsConferenceMixin,
+                                     ConferencePropertiesMixin,
+                                     ConferenceUserDataStatisticsMixin,
+                                     View):
+    """ Provide conference user data from the ConferenceUserDataStatisticsMixin as XLSX download. """
+
+    def get(self, request, *args, **kwars):
+
+        header = settings.COSINNUS_CONFERENCE_STATISTICS_USER_DATA_FIELDS
+        filename = '{}_conference_user_data'.format(self.group.slug)
+        rows = []
+        data = self.get_portal_specific_user_data()
+        for data_row in data:
+            row = []
+            for value in data_row:
+                if isinstance(value, list):
+                    # convert list-values into comma-separated values
+                    if len(value) > 1:
+                        value = [f'"{subvalue}"' for subvalue in value]
+                    # convert to string to handle translations proxies
+                    value = ', '.join(str(subvalue) for subvalue in value)
+                row.append(value)
+            rows.append(row)
+
+
+        response = make_xlsx_response(rows, row_names=header, file_name=filename)
+        return response
+
+
+conference_user_data_download = ConferenceUserDataDownloadView.as_view()
+conference_event_statistics_download = ConferenceEventStatisticsDownloadView.as_view()
+conference_statistics_download = ConferenceStatisticsDownloadView.as_view()
+conference_statistics = ConferenceStatisticsDashboardView.as_view()
 conference_applicant_details_download = ConferenceApplicantsDetailsDownloadView.as_view()
 conference_applications = ConferenceParticipationManagementApplicationsView.as_view()
 conference_application = ConferenceApplicationView.as_view()

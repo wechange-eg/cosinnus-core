@@ -835,6 +835,95 @@ class ConferenceEvent(Event):
         return group.has_premium_rights and settings_allow_streaming
 
 
+@six.python_2_unicode_compatible
+class ConferenceEventAttendanceTracking(models.Model):
+    """ Used to track conference event attendance. """
+
+    # Consider update as new attendance after this interval is passed since the last update.
+    TRACKING_CONTINUATION_MINUTES = 5
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+', on_delete=models.CASCADE,
+                             verbose_name=_('User'))
+    event = models.ForeignKey(ConferenceEvent, on_delete=models.CASCADE, related_name='attendance_tracking',
+                              verbose_name=_('Conference Event'))
+
+    # start and end are initialized in save() with end=now and start=end-settings.COSINNUS_CONFERENCE_STATISTICS_TRACKING_INTERVAL
+    start = models.DateTimeField(verbose_name=_('Start-Time'))
+    end = models.DateTimeField(verbose_name=_('End-Time'))
+
+    class Meta:
+        ordering = ['-start']
+        verbose_name = _('Conference Event Attendance Tracking')
+        verbose_name_plural = _('Conference Event Attendance Trackings')
+
+    def save(self, *args, **kwargs):
+        created = self.pk is None
+        if created:
+            self.end = now()
+            tracking_interval = settings.COSINNUS_CONFERENCE_STATISTICS_TRACKING_INTERVAL
+            self.start = self.end - datetime.timedelta(minutes=tracking_interval)
+        super(ConferenceEventAttendanceTracking, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return f'Conference Event Attendance Tracking <user: {self.user}, event: {self.event}, start: {self.start}>'
+
+    def continue_attendance(self):
+        self.end = now()
+        self.save()
+
+    @classmethod
+    def track_attendance(cls, user, event):
+        """ Create new attendance-tracking or update the current one. """
+        continue_tracking_time = now() - datetime.timedelta(minutes=cls.TRACKING_CONTINUATION_MINUTES)
+        event_tracking = cls.objects.filter(user=user, event=event, end__gte=continue_tracking_time).first()
+        if not event_tracking:
+            cls.objects.create(user=user, event=event)
+        else:
+            event_tracking.continue_attendance()
+
+    @classmethod
+    def get_attendance(cls, conference, event=None):
+        """ Compute basic attendacne stats for the whole conference or event. """
+        attendance_time = 0
+        attendees = set()
+        if event:
+            attendance_tracking = cls.objects.filter(event=event)
+        else:
+            attendance_tracking = cls.objects.filter(event__group=conference)
+        for tracking in attendance_tracking:
+            attendance_time += round((tracking.end - tracking.start).seconds / 60)
+            attendees.add(tracking.user_id)
+        num_attendees = len(attendees)
+        attendance = {
+            'attendance_time': attendance_time,
+            'num_attendees': num_attendees,
+            'avg_time_attendee': round(attendance_time / max(num_attendees, 1)),
+        }
+        if event and event.from_date and event.to_date:
+            duration = round(abs(event.to_date - event.from_date).seconds / 60)
+            attendance['event_duration'] = duration
+            attendance['avg_time_attendee_percent'] = round(attendance['avg_time_attendee'] / duration * 100)
+        return attendance
+
+    @classmethod
+    def get_attendees(cls, conference, event=None):
+        """ Get the attendees of the whole conference or event. """
+        attendees = set()
+        attendance_tracking = cls.objects.prefetch_related('user')
+        if event:
+            attendance_tracking = attendance_tracking.filter(event=event)
+        else:
+            attendance_tracking = attendance_tracking.filter(event__group=conference)
+        for tracking in attendance_tracking:
+            attendees.add(tracking.user)
+        return list(attendees)
+
+    @classmethod
+    def has_tracking(cls, conference):
+        """ Checks if attendance-tracking data is available for a conference. """
+        return cls.objects.filter(event__group=conference).exists()
+
+
 @receiver(post_delete, sender=Vote)
 def post_vote_delete(sender, **kwargs):
     try:

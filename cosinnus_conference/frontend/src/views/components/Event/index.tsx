@@ -19,6 +19,7 @@ import {Loading} from "../Loading"
 import {Sidebar} from "../Sidebar"
 import {EventRoomState} from "../../../stores/events/reducer"
 import {useStyles} from "./style"
+import {Tracker} from "../Tracker"
 
 interface EventResponse {
   status: string
@@ -117,6 +118,9 @@ export function Event(props: EventProps) {
           )}
           <IframeContent url={url} html={event.props.rawHtml} allow={allow} />
           <EventButtons event={event} />
+          {window.conferenceTrackingEnabled  && (
+              <Tracker id={event.props.id} />
+          )}
         </Content>
       ))
       || ((events && events.loading) || (events && !events.loading && events.events && event && event.props.url)) && (

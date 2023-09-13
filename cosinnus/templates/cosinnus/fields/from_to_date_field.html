@@ -50,7 +50,7 @@
                     value="{{ request.GET.starttime }}"
                 {% endif %}
             >
-            <div class="small-calendar" data-initial-date="{% if from_date_field.value and from_date_field.value|date:'Y-m-d' %}{{ from_date_field.value|date:'Y-m-d' }}{% elif from_date_field.value and from_date_field.value|length == 2 %}{{ from_date_field.value.0 }}{% elif form_view == 'add' and request.GET.start %} {{ request.GET.start }} {% else %} {% now 'Y-m-d' %} {% endif %}"></div>
+            <div class="small-calendar" data-initial-date="{% if from_date_field.value and from_date_field.value|date:'Y-m-d' %}{{ from_date_field.value|date:'Y-m-d' }}{% elif from_date_field.value and from_date_field.value|length == 2 and form_date_field.value.0 %}{{ from_date_field.value.0 }}{% elif form_view == 'add' and request.GET.start %} {{ request.GET.start }} {% else %} {% now 'Y-m-d' %} {% endif %}"></div>
         </li>
         <li class="calendar-date-time-chooser">
             {% trans "Until" %} <i class="fa fa-calendar"></i>
@@ -80,7 +80,7 @@
                     value="{{ request.GET.endtime  }}"
                 {% endif %}
             >    
-            <div class="small-calendar" data-initial-date="{% if to_date_field.value and to_date_field.value|date:'Y-m-d' %}{{ to_date_field.value|date:'Y-m-d' }}{% elif to_date_field.value and to_date_field.value|length == 2 %}{{ to_date_field.value.0 }}{% elif form_view == 'add' and request.GET.start %} {{ request.GET.start }} {% else %} {% now 'Y-m-d' %} {% endif %}"></div>
+            <div class="small-calendar" data-initial-date="{% if to_date_field.value and to_date_field.value|date:'Y-m-d' %}{{ to_date_field.value|date:'Y-m-d' }}{% elif to_date_field.value and to_date_field.value|length == 2 and form_date_field.value.0 %}{{ to_date_field.value.0 }}{% elif form_view == 'add' and request.GET.start %} {{ request.GET.start }} {% else %} {% now 'Y-m-d' %} {% endif %}"></div>
         </li>
         
 	    {% if date_nullable %}

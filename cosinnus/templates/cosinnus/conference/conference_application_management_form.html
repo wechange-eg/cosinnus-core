@@ -75,8 +75,7 @@
 			                {{ application.conference }}
 			                {{ application.user }}
 			                {{ application.id }}
-			                {{ application.information }}
-			                
+
 		                    <div class="row application-row first">
 		                        {% comment %} Name {% endcomment %}
 		                        <div class="col-md-3 textfield transparent no-margin">
@@ -123,6 +122,27 @@
                                 </div> <!-- end rejection-reason collapse row-->
 		                    
 			                    <div class="row application-row">
+			                        {% comment %} Full Details {% endcomment %}
+			                        <div class="col-md-6 textfield transparent application-details">
+			                            {% block application_info_row %}
+		                                    <div>
+		                                        <b>{% trans 'Application submitted' %}:</b>
+		                                        {{ application.created|date:"DATETIME_FORMAT" }}
+                                        	</div>
+                                        	{% if application.instance.contact_email and not 'contact_email' in SETTINGS.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS %}
+                                                <div>
+                                                    <b>{% trans 'Contact E-Mail Address' %}:</b>
+                                                    {{ application.instance.contact_email }}
+                                                </div>
+                                            {% endif %}
+                                            {% if application.instance.contact_phone and not 'contact_phone' in SETTINGS.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS %}
+                                                <div>
+                                                    <b>{% trans 'Contact Phone Number' %}:</b>
+                                                    {{ application.instance.contact_phone }}
+                                                </div>
+                                            {% endif %}
+		                                {% endblock %}
+			                        </div>
 			                        {% if priority_choice_enabled %}
 				                        {% comment %} First Choice {% endcomment %}
 				                        <div class="col-md-3 textfield transparent">
@@ -145,40 +165,36 @@
 				                            {% endif %}
 				                        </div>
 				                    {% endif %}
-			                        {% comment %} Full Details {% endcomment %}
-			                        <div class="col-md-6 textfield transparent application-details">
-			                            {% block application_info_row %}
-		                                    <div>
-		                                        <b>{% trans 'Application submitted' %}:</b>
-		                                        {{ application.created|date:"DATETIME_FORMAT" }}
-                                        	</div>
-                                        	{% if application.instance.contact_email and not 'contact_email' in SETTINGS.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS %}
-                                                <div>
-                                                    <b>{% trans 'Contact E-Mail Address' %}:</b>
-                                                    {{ application.instance.contact_email }}
-                                                </div>
-                                            {% endif %}
-                                            {% if application.instance.contact_phone and not 'contact_phone' in SETTINGS.COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS %}
-                                                <div>
-                                                    <b>{% trans 'Contact Phone Number' %}:</b>
-                                                    {{ application.instance.contact_phone }}
-                                                </div>
-                                            {% endif %}
-		                                {% endblock %}
-			                        </div>
 			                    </div> <!-- end row 2 -->
 			                    
 			                    <div class="row application-row">
                                     {% comment %} Message to organizers {% endcomment %}
                                     <div class="col-xs-12 textfield flat-h transparent">
-                                        {% if application.information.value %}
-                                            <b>{% trans 'Motivation for applying' %}:</b>
-                                            <br/>
-                                            {{ application.information.value|textfield }}
+                                        {% if application.instance.motivation_answers %}
+                                            <p>
+                                                <b>{% trans 'Motivation for applying' %}:</b>
+                                            </p>
+                                            {%  for answer in application.instance.motivation_answers %}
+                                                <strong></y><em>{{ answer.question|linebreaks }}</em></strong>
+                                                {{ answer.answer|linebreaks }}
+                                            {% endfor %}
                                         {% endif %}
                                     </div>
                                 </div>
-			                    
+
+                                <div class="row application-row">
+                                    {% comment %} Application options {% endcomment %}
+                                    <div class="col-xs-12 textfield flat-h transparent">
+                                        {% if application.instance.options %}
+                                            <p>
+                                                <b>{% trans 'Options' %}:</b>
+                                                <br/>
+                                                {{ application.instance.options_strings|join:", " }}
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
                             </div> <!-- end details-collapse -->
 		                </div> <!-- end application -->
 		                    

@@ -134,8 +134,8 @@ class HeaderView(APIView):
             'js': [
                 static('js/vendor/jquery-2.1.0.min.js'),
                 static('js/vendor/bootstrap.min.js'),
-                static('js/vendor/moment-with-locales.min.js'),
-                static('js/vendor/moment-timezone-with-data.min.js'),
+                static('js/vendor/moment-with-locales-2.29.4.min.js'),
+                static('js/vendor/moment-timezone-with-data.min-0.5.43.js'),
                 static('js/cosinnus.js') + '?v=0.47',
                 static('js/vendor/underscore-1.8.3.js'),
                 static('js/vendor/backbone-1.3.3.js'),

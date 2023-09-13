@@ -834,8 +834,8 @@ class UserMatchObject(models.Model):
 
     class Meta(object):
         app_label = 'cosinnus'
-        verbose_name = _('Match')
-        verbose_name_plural = _('Matches')
+        verbose_name = _('User-Match')
+        verbose_name_plural = _('User-Matches')
         unique_together = (('from_user', 'to_user'),)
 
     def __str__(self):
@@ -857,6 +857,9 @@ class UserMatchObject(models.Model):
     @property
     def description(self):
         return _(f'Match between {self.from_user} and {self.to_user} has been successfully established.')
+
+    def get_icon(self):
+        return 'fa-user'
 
     @property
     def name(self):
@@ -891,8 +894,15 @@ class UserMatchObject(models.Model):
                 short_to_user = slugify(self.to_user.get_full_name()).replace('-', '')[:6]
                 room_name = f'match-{short_from_user}-{short_to_user}-{get_random_string(4)}'
                 
-                room_topic = _('TODO: Youve matched!')
-                greeting_message = _('TODO: Matched chat room greeting message')
+                room_topic = _('You\'ve matched!')
+                greeting_message = _(
+                    'You both have similar interests and were matched, very nice! What appealed to you about the other '
+                    'person\'s profile? What are you working on right now? What are your current topics of interest?'
+                )
+                greeting_message += (
+                    f'\n{self.from_user.get_full_name()} {_("Profile")}: {self.from_user.cosinnus_profile.get_absolute_url()}'
+                    f'\n{self.to_user.get_full_name()} {_("Profile")}: {self.to_user.cosinnus_profile.get_absolute_url()}'
+                )
                 try:
                     rocket = RocketChatConnection()
                     internal_room_id = rocket.create_private_room(room_name, self.from_user,
@@ -910,7 +920,3 @@ class UserMatchObject(models.Model):
                 else:
                     logger.error('Could not create a match chat rocketchat room!', 
                                  extra={'match-id': self.id, 'from_user_id': self.from_user_id, 'to_user_id': self.to_user_id})
-    
-    
-    
-    

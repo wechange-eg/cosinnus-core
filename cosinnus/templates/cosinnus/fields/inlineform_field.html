@@ -17,20 +17,22 @@
                 {% endif %}
                 
                 <div class="cosinnus-inlinefied-actions regular-space clearfix">
-                    <div class="btn btn-emphasized btn-small pull-right">
-		                <ul class="media-list">
-		                    <li class="media">
-		                        <span class="pull-left">
-		                            <i class="fa fa-square-o"></i>
-		                            <input type="hidden" id="{{ inlineform.DELETE.id_for_label }}" name="{{ inlineform.DELETE.html_name }}">
-		                        </span>
-		                        <div class="media-body click-previous-a">
-                                    {{ remove_button_label }}
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    
+                    {% if inlineform.DELETE %}
+                        <div class="btn btn-default btn-small pull-right">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <span class="pull-left">
+                                        <i class="fa fa-square-o"></i>
+                                        <input type="hidden" id="{{ inlineform.DELETE.id_for_label }}" name="{{ inlineform.DELETE.html_name }}">
+                                    </span>
+                                    <div class="media-body click-previous-input">
+                                        {{ remove_button_label }}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endif %}
+
                     {% if forloop.counter >= formset.management_form.INITIAL_FORMS.value|intify and forloop.counter < formset.management_form.MAX_NUM_FORMS.value|intify %}
                         <div id="{{ unique_id }}-more-{{ forloop.counter0 }}">
                         

@@ -265,7 +265,7 @@ class CosinnusConf(AppConf):
     
     # a list of which app checkboxes should be default-active on the create group form
     # Deactivating several group apps by default
-    COSINNUS_DEFAULT_ACTIVE_GROUP_APPS = [
+    DEFAULT_ACTIVE_GROUP_APPS = [
         'cosinnus_cloud',
         'cosinnus_conference',
         'cosinnus_exchange',
@@ -896,11 +896,18 @@ class CosinnusConf(AppConf):
         "^api/auth/",
     ]
 
-    # Forum space label in the v3 main navigation.
+    # Forum space label in the v3 main navigation. Set to None to exclude forum from the community space.
     V3_MENU_SPACES_FORUM_LABEL = _('Forum')
 
-    # Map space label in the v3 main navigation.
+    # Map space label in the v3 main navigation. Set to None to exclude the map from the community space.
     V3_MENU_SPACES_MAP_LABEL = _('Map')
+
+    # Enable to add links to paired groups of managed tags of the user cosinnus_profile as community links.
+    V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS = False
+
+    # Additional menu items for the community space in the v3 main navigation.
+    # Format: List of (<id-string>, <label>, <url>, <icon>), e.g.: [('ExternalLink', 'External Link', 'https://external-link.com', 'fa-group')]
+    V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS = []
 
     # List of help items to be included in the v3 main navigation.
     # Format: (<label>, <url>, <icon>), e.g.: (_('FAQ'), 'https://wechange.de/cms/help/', 'fa-question-circle'),
@@ -940,11 +947,19 @@ class CosinnusConf(AppConf):
     # if True, the modern user import views will be shown
     # they require a per-portal implementation of the importer class
     USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED = False
-    
+
     # a class dropin to replace CosinnusUserImportProcessorBase as user import processor
     # (str classpath)
     USER_IMPORT_PROCESSOR_CLASS_DROPIN = None
-    
+
+    # if True, the user export views will be shown
+    # they require a per-portal implementation of the importer class
+    USER_EXPORT_ADMINISTRATION_VIEWS_ENABLED = False
+
+    # a class dropin to replace CosinnusUserExportProcessorBase as user export processor
+    # (str classpath)
+    USER_EXPORT_PROCESSOR_CLASS_DROPIN = None
+
     # if true, during signup and in the user profile, an additional
     # opt-in checkbox will be shown to let the user choose if they wish to 
     # receive a newsletter
@@ -1134,7 +1149,21 @@ class CosinnusConf(AppConf):
     ]
     
     CONFERENCE_USE_PARTICIPATION_FIELD_HIDDEN = False
-    
+
+    # Enable conference statistics view and user tracking via ConferenceEventAttendanceTracking.
+    CONFERENCE_STATISTICS_ENABLED = False
+
+    # Interval used for the conference attendance tracking in minutes.
+    CONFERENCE_STATISTICS_TRACKING_INTERVAL = 1
+
+    # Settings for portal specific user data used for the conference statistics.
+    # Contains a list of dynamic_fields field names and optional a name for the cosinnus_profile managed tags value.
+    CONFERENCE_STATISTICS_USER_DATA_FIELDS = []
+
+    # Optionally define which field of the CONFERENCE_STATISTICS_USER_DATA_FIELDS is populated from the cosinnus_profile
+    # managed tags value.
+    CONFERENCE_STATISTICS_USER_DATA_MANAGED_TAGS_FIELD = None
+
     # enable display and forms for managed tags
     MANAGED_TAGS_ENABLED = False
     # allows assigning multiple managed tags to objects

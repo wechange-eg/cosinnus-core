@@ -26,6 +26,8 @@
     <script type="text/javascript">
 	    window.conferenceId = {{ group.id }};
 	    window.conferenceRoomId = {% if room %}{{ room.id }}{% else %}null{% endif %};
+        window.conferenceTrackingEnabled = {{ SETTINGS.COSINNUS_CONFERENCE_STATISTICS_ENABLED|yesno:"true,false" }};
+        window.conferenceTrackingInterval = {{ SETTINGS.COSINNUS_CONFERENCE_STATISTICS_TRACKING_INTERVAL|yesno:"true,false" }};
     </script>
     <script src="{% static "conference/conference.js" %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
 {% endblock %}
