@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-07 14:11+0200\n"
+"POT-Creation-Date: 2023-09-13 16:32+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1042,6 +1042,21 @@ msgid "pin to enter for telephone participants"
 msgstr ""
 
 msgid "Last create-call parameters"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Join \"%(name)s\"!"
+msgstr "Edit project “%(team_name)s”"
+
+#, python-format
+msgid "To join the conference in the browser visit %(url)s."
+msgstr ""
+
+#, python-format
+msgid "To join the conference by phone dial \"%(number)s\" and enter the following PIN \"%(pin)s#\". Use the 0-key on your phone to toggle mute on/off."
+msgstr ""
+
+msgid "Invitation copied to clipboard."
 msgstr ""
 
 msgid "BBB ROOM"
@@ -3363,6 +3378,14 @@ msgstr[1] ""
 
 msgid "No, do not send"
 msgstr ""
+
+#, fuzzy
+msgid "Copy invitation"
+msgstr "There are no groups."
+
+#, fuzzy
+msgid "Copy guest invitation"
+msgstr "There are no groups."
 
 msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
 msgstr ""
