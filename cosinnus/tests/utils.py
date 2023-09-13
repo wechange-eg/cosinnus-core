@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
-from django.utils.unittest import skipIf, skipUnless
+import sys
+from importlib import reload, import_module
+from django.urls import clear_url_caches
+from unittest import skipIf, skipUnless
 
 from cosinnus.conf import settings
 
@@ -44,3 +46,17 @@ def skipUnlessCustomUserProfileSerializer(test_func):
     """
     return skipUnless(_is_custom_userprofileserializer(),
         'No custom cosinnus user profile serializer model in use')(test_func)
+
+
+def reload_urlconf(urlconf=None):
+    """
+    Reload the url config. Useful when testing with override_settings that enables new urls.
+    Source: https://stackoverflow.com/a/46034755
+    """
+    clear_url_caches()
+    if urlconf is None:
+        urlconf = settings.ROOT_URLCONF
+    if urlconf in sys.modules:
+        reload(sys.modules[urlconf])
+    else:
+        import_module(urlconf)

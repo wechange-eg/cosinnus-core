@@ -1,14 +1,6 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
 
-{% block extrahead %}
-    {{ block.super }}
-    {% if form.information_field_initial_text %}
-        {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.information_field_initial_text.id_for_label %}
-    {% endif %}
-{% endblock %}
-
-
 {% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
 
 {% block breadcrumb %}
@@ -55,23 +47,29 @@
             {% include 'cosinnus/fields/default_field.html' with field=form.participants_limit label=limits_label legend=limits_legend placeholder=limits_placeholder large_field=True %}
             
             <div class="regular-space"></div>
-            {% trans "Require applicants to submit a text about their motivation for applying" as information_checkbox_label %}
+            {% trans "Require applicants to answer questions about their motivation for applying" as information_checkbox_label %}
             {% include 'cosinnus/fields/checkbox_field.html' with field=form.information_field_enabled label=information_checkbox_label checkbox_label=information_checkbox_label %}
-            
-            {% captureas infotemplate_legend %}
-                {% trans "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer." %}
+
+            {% captureas motivation_questions_legend %}
+                {% trans "Provide a list of questions that the applicants should answer." %}
                 {% blocktrans with other_option=information_checkbox_label %}Only applicable if "{{ other_option }}" is enabled.{% endblocktrans %}
             {% endcaptureas %}
-            {% trans "Enter text to pre-fill or leave empty" as infotemplate_placeholder %}
-            {% include 'cosinnus/fields/default_field.html' with field=form.information_field_initial_text legend=infotemplate_legend placeholder=infotemplate_placeholder large_field=True %}
-        
+            {% trans "Remove question" as  question_rm_label %}
+            {% trans "Add question" as question_add_label %}
+            {% include 'cosinnus/fields/inlineform_field.html' with inline_form=motivation_questions_formset legend=motivation_questions_legend content_template='cosinnus/conference/motivation_question_inline.html' unique_id='motivation-questions' add_button_label=question_add_label remove_button_label=question_rm_label %}
+
             {% if form.application_options %}
                 {% trans "Options for participation" as options_label %}
                 {% trans "Choose one or more options that will be displayed on the application form. Applicants can select any of these options along with their application." as options_legend %}
                 {% trans "(no options chosen)" as options_placeholder %}
                 {% include 'cosinnus/fields/default_field.html' with field=form.application_options label=options_label legend=options_legend placeholder=options_placeholder large_field=True %}
             {% endif %}
-            
+
+            {% trans "Define additional custom options." as additional_options_legend %}
+            {% trans "Remove option" as  option_rm_label %}
+            {% trans "Add option" as option_add_label %}
+            {% include 'cosinnus/fields/inlineform_field.html' with inline_form=additional_application_options_formset legend=additional_options_legend content_template='cosinnus/conference/additional_application_options_inline.html' unique_id='additional-options' add_button_label=option_add_label remove_button_label=option_rm_label %}
+
             {% trans "Workshop selection: Enable applicants to choose preferred workshops to attend" as priority_checkbox_label %}
             {% include 'cosinnus/fields/checkbox_field.html' with field=form.priority_choice_enabled label=priority_checkbox_label checkbox_label=priority_checkbox_label %}
 

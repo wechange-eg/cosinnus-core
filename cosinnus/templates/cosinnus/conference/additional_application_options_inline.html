@@ -1,0 +1,4 @@
+{% load i18n %}
+
+{% trans "Option" as option_placeholder %}
+{% include 'cosinnus/fields/default_field.html' with field=inlineform.option legend=None large_field=True placeholder=option_placeholder %}

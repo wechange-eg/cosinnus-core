@@ -35,7 +35,7 @@ from cosinnus.models.membership import MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER, ME
     MEMBER_STATUS
 from cosinnus.models.newsletter import Newsletter, GroupsNewsletter
 from cosinnus.models.profile import get_user_profile_model, \
-    GlobalBlacklistedEmail, GlobalUserNotificationSetting
+    GlobalBlacklistedEmail, GlobalUserNotificationSetting, UserMatchObject
 from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory
 from cosinnus.models.tagged import TagObject
 from cosinnus.models.user_import import CosinnusUserImport
@@ -901,6 +901,7 @@ class CosinnusManagedTagTypeAdmin(admin.ModelAdmin):
 
 admin.site.register(CosinnusManagedTagType, CosinnusManagedTagTypeAdmin)
 
+
 """
 # Disabled for now, unusable and confusing for customers
 class CosinnusManagedTagAssignmentAdmin(admin.ModelAdmin):
@@ -944,3 +945,14 @@ admin.site.register(CosinnusUserImport, CosinnusUserImportAdmin)
 #
 #admin.site.register(SpamUserModel, SpamUserAdmin)
 
+
+if settings.COSINNUS_ENABLE_USER_MATCH:
+    class UserMatchAdmin(admin.ModelAdmin):
+
+        def has_change_permission(self, request, obj=None):
+            return False
+
+        def has_add_permission(self, request):
+            return False
+
+    admin.site.register(UserMatchObject, UserMatchAdmin)

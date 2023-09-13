@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-13 13:31+0200\n"
+"POT-Creation-Date: 2023-09-07 14:11+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -677,7 +677,7 @@ msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_na
 msgstr ""
 
 #, python-format
-msgid "Your match with %(sender_name)s has just been established!"
+msgid "You have a match with %(sender_name)s. Get to know your match in Rocket.Chat"
 msgstr ""
 
 msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
@@ -1191,7 +1191,7 @@ msgstr ""
 msgid "Request user information"
 msgstr "There are no groups."
 
-msgid "Pre-filled content for the information field"
+msgid "User motivation questions"
 msgstr ""
 
 #, fuzzy
@@ -1260,7 +1260,7 @@ msgstr ""
 msgid "Priorities"
 msgstr ""
 
-msgid "Motivation for applying"
+msgid "User motivation answers"
 msgstr ""
 
 msgid "Contact E-Mail Address"
@@ -1895,10 +1895,10 @@ msgstr "Create Project"
 msgid "Match type"
 msgstr ""
 
-msgid "Match"
+msgid "User-Match"
 msgstr ""
 
-msgid "Matches"
+msgid "User-Matches"
 msgstr ""
 
 #, python-brace-format
@@ -1908,10 +1908,10 @@ msgstr ""
 msgid "You and {self.from_user.get_full_name()} matched!"
 msgstr ""
 
-msgid "TODO: Youve matched!"
+msgid "You've matched!"
 msgstr ""
 
-msgid "TODO: Matched chat room greeting message"
+msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr ""
 
 msgid "Name (EN)"
@@ -2680,6 +2680,9 @@ msgstr ""
 msgid "User Import"
 msgstr ""
 
+msgid "User Export"
+msgstr ""
+
 msgid "User Profile Field Choices"
 msgstr ""
 
@@ -3158,6 +3161,9 @@ msgstr "Other Projects"
 msgid "Disable editor"
 msgstr ""
 
+msgid "Option"
+msgstr ""
+
 #, fuzzy
 msgid "Current File"
 msgstr "Convert selected Projects to Groups"
@@ -3181,9 +3187,6 @@ msgid "You will receive a notification e-mail and on-site notification when the 
 msgstr ""
 
 msgid "Please provide your motivation for applying"
-msgstr ""
-
-msgid "Describe why you wish to participate"
 msgstr ""
 
 msgid "Optional contact information"
@@ -3288,6 +3291,12 @@ msgid "Second Choice"
 msgstr ""
 
 msgid "Application submitted"
+msgstr ""
+
+msgid "Motivation for applying"
+msgstr ""
+
+msgid "Options"
 msgstr ""
 
 msgid "Workshop Assignments"
@@ -3405,17 +3414,21 @@ msgstr ""
 msgid "(no limit selected)"
 msgstr ""
 
-msgid "Require applicants to submit a text about their motivation for applying"
+msgid "Require applicants to answer questions about their motivation for applying"
 msgstr ""
 
-msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
+msgid "Provide a list of questions that the applicants should answer."
 msgstr ""
 
 #, python-format
 msgid "Only applicable if \"%(other_option)s\" is enabled."
 msgstr ""
 
-msgid "Enter text to pre-fill or leave empty"
+#, fuzzy
+msgid "Remove question"
+msgstr "There are no groups."
+
+msgid "Add question"
 msgstr ""
 
 msgid "Options for participation"
@@ -3423,6 +3436,17 @@ msgstr ""
 
 msgid "Choose one or more options that will be displayed on the application form. Applicants can select any of these options along with their application."
 msgstr ""
+
+msgid "Define additional custom options."
+msgstr ""
+
+#, fuzzy
+msgid "Remove option"
+msgstr "There are no groups."
+
+#, fuzzy
+msgid "Add option"
+msgstr "There are no groups."
 
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
 msgstr ""
@@ -3643,6 +3667,55 @@ msgid "Allow recording"
 msgstr ""
 
 #, fuzzy
+msgid "Conference Statistics"
+msgstr "Projects"
+
+#, fuzzy
+msgid "Conference Name"
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Num. Invitations"
+msgstr "There are no groups."
+
+#, fuzzy
+msgid "Num. Registrations"
+msgstr "There are no groups."
+
+msgid "Num. Attendees"
+msgstr ""
+
+msgid "Avg. Time per Attendee"
+msgstr ""
+
+msgid "Download"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Event Statistics"
+msgstr "%s - Events"
+
+msgid "Event Name"
+msgstr ""
+
+#, fuzzy
+msgid "Room Type"
+msgstr "Project Type"
+
+msgid "Duration"
+msgstr ""
+
+msgid "In order to better assess how long participants actually attended an event, we calculate here the relation between the configured event duration and the average time per attendee."
+msgstr ""
+
+msgid "Attendance Percentage"
+msgstr ""
+
+#, fuzzy
+msgid "Attendee Data Statistics"
+msgstr "%s - Events"
+
+#, fuzzy
 msgid "Temporary Users"
 msgstr "Create Project"
 
@@ -3784,6 +3857,13 @@ msgstr ""
 
 msgid "New password"
 msgstr ""
+
+msgid "Answer"
+msgstr ""
+
+#, fuzzy
+msgid "Question"
+msgstr "There are no groups."
 
 msgid "Accept"
 msgstr ""
@@ -4944,6 +5024,9 @@ msgstr "All Groups"
 msgid "All Projects"
 msgstr "All Projects"
 
+msgid "Statistics"
+msgstr ""
+
 msgid "Temporary User Accounts"
 msgstr ""
 
@@ -5117,9 +5200,6 @@ msgid "Folder name"
 msgstr ""
 
 msgid "Delete folder"
-msgstr ""
-
-msgid "Download"
 msgstr ""
 
 msgid "Do you really want to delete this folder and ALL folders and items it contains? This actions CANNOT be reversed!"
@@ -6715,11 +6795,10 @@ msgstr ""
 msgid "If the validation email does not arrive, please check your spam folder and re-check the spelling of your email address. If everything seems ok but you still have not received an email from us, please repeat the email change again to receive a new validation email:"
 msgstr ""
 
-#, fuzzy
-msgid "Direct Contact"
-msgstr "Project Type"
+msgid "Find a Match"
+msgstr ""
 
-msgid "**User-Matching** is your tool for communicating and sharing experiences with like-minded people from all over the world. If you have much to discuss and your chosen person considers it the same, your dialogue will start automatically."
+msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
 msgstr ""
 
 msgid "Wonderful, we definitely have so much to discuss!"
@@ -7103,6 +7182,49 @@ msgstr ""
 
 #, fuzzy
 msgid "There are no announcements yet."
+msgstr "There are no groups."
+
+msgid "Start user export"
+msgstr ""
+
+msgid "You can start a user export. As soon as the export is finished it will be available here."
+msgstr ""
+
+msgid "The export is currently running..."
+msgstr ""
+
+msgid "A user export is in progress. As soon as the export is finished it will be available here."
+msgstr ""
+
+msgid "User export finished"
+msgstr ""
+
+msgid "You can download the latest user export data."
+msgstr ""
+
+msgid "Download user exports from"
+msgstr ""
+
+msgid "Download user export as"
+msgstr ""
+
+msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
+msgstr ""
+
+msgid "An error has occurred"
+msgstr ""
+
+msgid "Sorry, an error occurred during the user export. Please try again later."
+msgstr ""
+
+msgid "Delete export data and start new user export"
+msgstr ""
+
+msgid "Retry user export"
+msgstr ""
+
+#, fuzzy
+msgid "Delete exported data"
 msgstr "There are no groups."
 
 msgid "User Import Archive"
@@ -8501,6 +8623,9 @@ msgstr ""
 msgid "Your Announcement was deactivated successfully."
 msgstr ""
 
+msgid "Another export is currently running!"
+msgstr ""
+
 msgid "The Archived User Import Entry was deleted successfully."
 msgstr ""
 
@@ -8711,11 +8836,12 @@ msgstr ""
 msgid "Your changes were saved."
 msgstr ""
 
-msgid "Option"
-msgstr ""
-
 msgid "Status"
 msgstr ""
+
+#, fuzzy
+msgid "Attendance data is not available for this conference."
+msgstr "Enter a name for the project."
 
 msgid "The following Pads were re-initialized:"
 msgstr ""
@@ -9303,6 +9429,20 @@ msgstr "%s - Events"
 #, python-format
 msgid "%(event)s %(type)s"
 msgstr ""
+
+msgid "Start-Time"
+msgstr ""
+
+msgid "End-Time"
+msgstr ""
+
+#, fuzzy
+msgid "Conference Event Attendance Tracking"
+msgstr "%s - Events"
+
+#, fuzzy
+msgid "Conference Event Attendance Trackings"
+msgstr "%s - Events"
 
 msgid "Would you like to create an event"
 msgstr ""
@@ -10697,9 +10837,6 @@ msgid "Show all %(count)s participants"
 msgstr ""
 
 msgid "Me"
-msgstr ""
-
-msgid "Answer"
 msgstr ""
 
 msgid "Reply..."
@@ -12975,6 +13112,14 @@ msgid "You cannot delete this folder because you do not have permission to delet
 msgstr ""
 
 #, fuzzy
+#~ msgid "Direct Contact"
+#~ msgstr "Project Type"
+
+#, fuzzy
+#~ msgid "Motivation"
+#~ msgstr "Groups"
+
+#, fuzzy
 #~ msgid "Premium Bookings"
 #~ msgstr "Create Project"
 
@@ -13053,10 +13198,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
 #~ msgstr "Do you really want to leave project „%(title)s“?"
-
-#, fuzzy
-#~ msgid "Room Type"
-#~ msgstr "Project Type"
 
 #~ msgid "All groups"
 #~ msgstr "All projects"

@@ -718,13 +718,14 @@ class ParticipationManagement(models.Model):
                                   upload_to=get_conference_conditions_filename,
                                   max_length=250)
     application_options = models.JSONField(default=list, encoder=DjangoJSONEncoder, blank=True, null=True)
+    additional_application_options = models.JSONField(default=list, blank=True, null=True, encoder=DjangoJSONEncoder)
     conference = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
                                            verbose_name=_('Participation Management'),
                                            related_name='participation_management',
                                            on_delete=models.CASCADE)
     
     information_field_enabled = models.BooleanField(_('Request user information'), default=True)
-    information_field_initial_text = models.TextField(_('Pre-filled content for the information field'), blank=True, null=True)
+    motivation_questions = models.JSONField(default=list, encoder=DjangoJSONEncoder,  blank=True, null=True, verbose_name=_('User motivation questions'))
 
     may_be_contacted_field_enabled = models.BooleanField(_('Request contact option'), 
         help_text='If active, conference applicants will be required to enable the option to be contacted by conference admins', 
@@ -763,6 +764,15 @@ class ParticipationManagement(models.Model):
     @property
     def to_date(self):
         return self.application_end
+
+    def get_additional_application_options_choices(self):
+        """ Using the option string as model value and human-readable value. """
+        choices = []
+        for additional_option in self.additional_application_options:
+            option = additional_option.get('option')
+            if option:
+                choices.append((option, option))
+        return choices
 
 
 APPLICATION_INVALID = 1
@@ -859,7 +869,7 @@ class CosinnusConferenceApplication(models.Model):
                                               default=APPLICATION_SUBMITTED)
     options = models.JSONField(default=list, blank=True, null=True, encoder=DjangoJSONEncoder)
     priorities = models.JSONField(_('Priorities'), default=dict, blank=True, null=True, encoder=DjangoJSONEncoder)
-    information = models.TextField(_('Motivation for applying'), blank=True)
+    motivation_answers = models.JSONField(default=list, encoder=DjangoJSONEncoder, blank=True, null=True, verbose_name=_('User motivation answers'))
     contact_email = models.EmailField(_('Contact E-Mail Address'), blank=True, null=True)
     contact_phone = PhoneNumberField(('Contact Phone Number'), blank=True, null=True)
     may_be_contacted = models.BooleanField(_('Applicant may be contacted'), 
@@ -936,6 +946,15 @@ class CosinnusConferenceApplication(models.Model):
     def user_email(self):
         """ Needed for django-admin """
         return self.user.email
+
+    @property
+    def options_strings(self):
+        options = []
+        participation_options_dict = {opt[0]: opt[1] for opt in settings.COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS}
+        for option in self.options:
+            options.append(participation_options_dict.get(option, option))
+        print(options)
+        return options
 
 
 

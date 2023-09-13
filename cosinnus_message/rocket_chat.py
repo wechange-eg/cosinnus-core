@@ -205,7 +205,7 @@ class RocketChatConnection:
         app, __ = Application.objects.get_or_create(name=f"rocketchat_{portal_id}")
         app.client_id = client_id
         app.client_secret = client_secret
-        app.redirect_uris = f"{self.rocket.server_url}/_oauth/{settings.COSINNUS_PORTAL_NAME}"
+        app.redirect_uris = f"{self.rocket.server_url}/_oauth/{settings.COSINNUS_PORTAL_NAME.lower()}"
         app.client_type = Application.CLIENT_CONFIDENTIAL
         app.authorization_grant_type = Application.GRANT_AUTHORIZATION_CODE
         app.skip_authorization = True
@@ -218,7 +218,7 @@ class RocketChatConnection:
             'oauth_secret': client_secret,
         }
         # create oauth endpoint
-        response = self.rocket._RocketChat__call_api_post('settings.addCustomOAuth', name=values_dict['portal_name_cap'])
+        response = self.rocket.call_api_post('settings.addCustomOAuth', name=values_dict['portal_name_cap'])
         # set endpoint attributes
         for setting, value in settings.COSINNUS_CHAT_SYNC_OAUTH_SETTINGS.items():
             if type(value) in six.string_types:

@@ -1,10 +1,11 @@
 from django.contrib.auth import get_user_model
 from rest_framework import viewsets, pagination
+from rest_framework.response import Response
 
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus_conference.api.serializers import ConferenceSerializer, ConferenceEventSerializer, \
     ConferenceParticipantSerializer, ConferenceEventParticipantsSerializer
-from cosinnus_event.models import ConferenceEvent
+from cosinnus_event.models import ConferenceEvent, ConferenceEventAttendanceTracking
 
 
 # FIXME: Make this pagination class default in REST_FRAMEWORK setting
@@ -99,6 +100,16 @@ class ConferenceViewSet(RequireGroupReadMixin, BaseConferenceViewSet):
         page = self.paginate_queryset(queryset)
         serializer = ConferenceEventParticipantsSerializer(page, many=True, context={"request": request})
         return self.get_paginated_response({p['id']: p['participants_count'] for p in serializer.data})
+
+    @action(detail=True, methods=['get'])
+    def attend_event(self, request, pk=None):
+        """ Track user attendance via ConferenceEventAttendanceTracking. """
+        event_id = self.request.GET.get('event_id')
+        event = ConferenceEvent.objects.get(id=event_id)
+        if not event:
+            return Response(status=404)
+        ConferenceEventAttendanceTracking.track_attendance(request.user, event)
+        return Response(status=200)
 
 """
     @action(detail=True, methods=['get'])
