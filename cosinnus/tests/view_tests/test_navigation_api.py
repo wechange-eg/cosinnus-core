@@ -401,9 +401,10 @@ class ProfileViewTest(APITestCase):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
+        languages = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES, settings.LANGUAGES)
         expected_language_items = [
             MenuItem(language, f'/language/{code}/', id=f'ChangeLanguageItem{code.upper()}')
-            for code, language in settings.LANGUAGES
+            for code, language in languages
         ]
         expected_language_menu_item = MenuItem('Change Language', None, 'fa-language', id='ChangeLanguage')
         expected_language_menu_item['sub_items'] = expected_language_items

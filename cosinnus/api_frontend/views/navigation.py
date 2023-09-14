@@ -773,10 +773,11 @@ class ProfileView(APIView):
             # language
             if not settings.COSINNUS_LANGUAGE_SELECT_DISABLED:
                 language_item = MenuItem(_('Change Language'), None, 'fa-language', id='ChangeLanguage')
+                language_selection = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES, settings.LANGUAGES)
                 language_subitems = [
                     MenuItem(language, reverse('cosinnus:switch-language', kwargs={'language': code}),
                              id=f'ChangeLanguageItem{code.upper()}')
-                    for code, language in settings.LANGUAGES
+                    for code, language in language_selection
                 ]
                 language_item['sub_items'] = language_subitems
                 profile_menu.append(language_item)
