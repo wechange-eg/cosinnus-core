@@ -388,8 +388,6 @@ class HelpViewTest(APITestCase):
 
 class ProfileViewTest(APITestCase):
     
-    maxDiff = None
-
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -452,7 +450,7 @@ class ProfileViewTest(APITestCase):
         self.assertListEqual(response.data, [])
 
 
-class ServicesViewTest(APITestCase):
+class MainNavigationViewTest(APITestCase):
     """
     Note: Were not able to test with override_settings(COSINNUS_ROCKET_ENABLED=True). The util function reload_urlconf
     seems not to work as expected there. Will need to look into it in more detail.
@@ -467,7 +465,7 @@ class ServicesViewTest(APITestCase):
 
     @override_settings(COSINNUS_CLOUD_ENABLED=True)
     @override_settings(COSINNUS_CLOUD_NEXTCLOUD_URL='http://cloud.example.com')
-    def test_services(self):
+    def test_main_navigation_authenticated(self):
 
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
@@ -475,14 +473,37 @@ class ServicesViewTest(APITestCase):
         self.assertListEqual(
             response.data,
             [
+                MenuItem('Spaces', id='Spaces'),
+                MenuItem('Search', id='Search'),
+                MenuItem('Bookmarks', icon='bookmarks', id='Bookmarks'),
                 MenuItem('Cloud', 'http://cloud.example.com', 'cloud', is_external=True, id='Cloud'),
                 MenuItem('Messages', reverse('postman:inbox'), 'messages', id='Messages'),
+                MenuItem('Help', icon='help', id='Help'),
+                MenuItem('Alerts', icon='alerts', id='Alerts'),
+                MenuItem('Profile', icon='profile', id='Profile'),
             ]
         )
 
     @override_settings(COSINNUS_CLOUD_ENABLED=True)
     @override_settings(COSINNUS_CLOUD_NEXTCLOUD_URL='http://cloud.example.com')
-    def test_services_anonymous(self):
+    def test_main_navigation_anonymous(self):
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
-        self.assertListEqual(response.data, [])
+        languages = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES, settings.LANGUAGES)
+        expected_language_sub_items = [
+            MenuItem(language, f'/language/{code}/', id=f'ChangeLanguageItem{code.upper()}')
+            for code, language in languages
+        ]
+        expected_language_menu_item = MenuItem('EN', id='ChangeLanguage')
+        expected_language_menu_item['sub_items'] = expected_language_sub_items
+        self.assertListEqual(
+            response.data,
+            [
+                MenuItem('Spaces', id='Spaces'),
+                MenuItem('Search', id='Search'),
+                MenuItem('Help', icon='help', id='Help'),
+                expected_language_menu_item,
+                MenuItem('Login', '/login/', id='Login'),
+                MenuItem('Register', '/signup/', id='Register'),
+            ]
+        )

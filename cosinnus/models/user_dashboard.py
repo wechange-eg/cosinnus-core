@@ -118,7 +118,7 @@ class MenuItem(dict):
     image-url (optional) and badge (optional). Used in the v3 navigation API.
     """
 
-    def __init__(self, label, url, icon=None, image=None, badge=None, is_external=False, id=None):
+    def __init__(self, label, url=None, icon=None, image=None, badge=None, is_external=False, id=None):
         domain = get_domain_for_portal(CosinnusPortal.get_current())
         if not is_external and url and url.startswith(domain):
             url = url.replace(domain, '')

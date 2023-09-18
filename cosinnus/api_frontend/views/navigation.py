@@ -689,7 +689,23 @@ class HelpView(APIView):
         return Response(help_items)
 
 
-class ProfileView(APIView):
+class LanguageMenuItemMixin:
+
+    def get_language_menu_item(self, request, current_language_as_label=False):
+        language_item_label = request.LANGUAGE_CODE.upper() if current_language_as_label else _('Change Language')
+        language_item_icon = None if current_language_as_label else 'fa-language'
+        language_item = MenuItem(language_item_label, None, language_item_icon, id='ChangeLanguage')
+        language_selection = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES,
+                                    settings.LANGUAGES)
+        language_subitems = [
+            MenuItem(language, reverse('cosinnus:switch-language', kwargs={'language': code}),
+                     id=f'ChangeLanguageItem{code.upper()}')
+            for code, language in language_selection
+        ]
+        language_item['sub_items'] = language_subitems
+        return language_item
+
+class ProfileView(LanguageMenuItemMixin, APIView):
     """
     An endpoint that provides user profile menu items for the main navigation.
     Returns a list of menu items for user profile and notification settings, contribution, administration, logout and a
@@ -772,14 +788,7 @@ class ProfileView(APIView):
 
             # language
             if not settings.COSINNUS_LANGUAGE_SELECT_DISABLED:
-                language_item = MenuItem(_('Change Language'), None, 'fa-language', id='ChangeLanguage')
-                language_selection = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES, settings.LANGUAGES)
-                language_subitems = [
-                    MenuItem(language, reverse('cosinnus:switch-language', kwargs={'language': code}),
-                             id=f'ChangeLanguageItem{code.upper()}')
-                    for code, language in language_selection
-                ]
-                language_item['sub_items'] = language_subitems
+                language_item = self.get_language_menu_item(request)
                 profile_menu.append(language_item)
 
             # payments
@@ -806,14 +815,12 @@ class ProfileView(APIView):
         return Response(profile_menu)
 
 
-class ServicesView(APIView):
+class MainNavigationView(LanguageMenuItemMixin, APIView):
     """
-    An endpoint that provides menu items for services.
-    Returns the following items for an authenticated user depending on the configuration:
-
-    -  Cloud if NextCloud is enabled
-    - Rocket.Chat if RocketChat is enabled
-    - Messages (postman) if Rocket.Chat is disabled
+    An endpoint that provides menu items for main navigation.
+    It contains pseudo menu items just to indicate the availability of a menu-item (e.g. for spaces and search) or
+    actual menu items (e.g. cloud, login). The content of the main navigation differs for authenticated and
+    non-authenticated users.
     """
 
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
@@ -831,10 +838,37 @@ class ServicesView(APIView):
                 "application/json": {
                     "data": [
                         {
+                            "id": "Spaces",
+                            "icon": None,
+                            "label": "spaces",
+                            "url": None,
+                            "is_external": False,
+                            "image": None,
+                            "badge": None
+                        },
+                        {
+                            "id": "Search",
+                            "icon": None,
+                            "label": "search",
+                            "url": None,
+                            "is_external": False,
+                            "image": None,
+                            "badge": None
+                        },
+                        {
+                            "id": "Bookmarks",
+                            "icon": "bookmarks",
+                            "label": "bookmarks",
+                            "url": None,
+                            "is_external": False,
+                            "image": None,
+                            "badge": None
+                        },
+                        {
                             "id": "Cloud",
                             "icon": "cloud",
                             "label": "Cloud",
-                            "url": "https://cloud.localhost/",
+                            "url": "https://cloud.localhost",
                             "is_external": True,
                             "image": None,
                             "badge": None
@@ -847,6 +881,33 @@ class ServicesView(APIView):
                             "is_external": False,
                             "image": None,
                             "badge": None
+                        },
+                        {
+                            "id": "Help",
+                            "icon": "help",
+                            "label": "help",
+                            "url": None,
+                            "is_external": False,
+                            "image": None,
+                            "badge": None
+                        },
+                        {
+                            "id": "Alerts",
+                            "icon": "alerts",
+                            "label": "alerts",
+                            "url": None,
+                            "is_external": False,
+                            "image": None,
+                            "badge": None
+                        },
+                        {
+                            "id": "Profile",
+                            "icon": "profile",
+                            "label": "profile",
+                            "url": None,
+                            "is_external": False,
+                            "image": None,
+                            "badge": None
                         }
                     ],
                     "version": COSINNUS_VERSION,
@@ -856,22 +917,61 @@ class ServicesView(APIView):
         )}
     )
     def get(self, request):
-        service_items = []
+        main_navigation_items = []
+
+        # spaces
+        main_navigation_items.append(MenuItem('Spaces', id='Spaces'))
+
+        # search
+        main_navigation_items.append(MenuItem('Search', id='Search'))
+
         if request.user.is_authenticated:
+            # bookmarks
+            main_navigation_items.append(MenuItem('Bookmarks', icon='bookmarks', id='Bookmarks'))
+
+            # cloud
             if settings.COSINNUS_CLOUD_ENABLED:
-                service_items.append(
+                main_navigation_items.append(
                     MenuItem('Cloud', settings.COSINNUS_CLOUD_NEXTCLOUD_URL, icon='cloud',
                              is_external=settings.COSINNUS_CLOUD_OPEN_IN_NEW_TAB, id='Cloud')
                 )
 
+            # messages
             if 'cosinnus_message' not in settings.COSINNUS_DISABLED_COSINNUS_APPS:
                 if settings.COSINNUS_ROCKET_ENABLED:
-                    service_items.append(
+                    main_navigation_items.append(
                         MenuItem('Rocket.Chat', reverse('cosinnus:message-global'), icon='chat',
                                  is_external=settings.COSINNUS_ROCKET_OPEN_IN_NEW_TAB, id='Chat')
                     )
                 else:
-                    service_items.append(
+                    main_navigation_items.append(
                         MenuItem( 'Messages', reverse('postman:inbox'), icon='messages', id='Messages')
                     )
-        return Response(service_items)
+
+        # help
+        main_navigation_items.append(MenuItem('Help', icon='help', id='Help'))
+
+        if request.user.is_authenticated:
+
+            # alerts
+            main_navigation_items.append(MenuItem('Alerts', icon='alerts', id='Alerts'))
+
+            # profile
+            main_navigation_items.append(MenuItem('Profile', icon='profile', id='Profile'))
+        else:
+
+            # language
+            if not settings.COSINNUS_LANGUAGE_SELECT_DISABLED:
+                language_item = self.get_language_menu_item(request, current_language_as_label=True)
+                main_navigation_items.append(language_item)
+
+            # login
+            main_navigation_items.append(MenuItem(_('Login'), reverse('login'), id='Login'))
+
+            # register
+            if settings.COSINNUS_USER_SIGNUP_ENABLED:
+                main_navigation_items.append(
+                    MenuItem(_('Register'), reverse('cosinnus:user-add'),  id='Register')
+                )
+
+        return Response(main_navigation_items)
