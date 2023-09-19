@@ -123,9 +123,9 @@ class MenuItem(dict):
         if not is_external and url and url.startswith(domain):
             url = url.replace(domain, '')
         self['id'] = id
-        self['icon'] = icon
         self['label'] = label
         self['url'] = url
+        self['icon'] = icon
         self['is_external'] = is_external
         if image and image.startswith(domain):
             image = image.replace(domain, '')

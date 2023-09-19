@@ -54,80 +54,34 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                     "data": {
                         "personal": {
                             "items": [
-                                {
-                                    "id": "PersonalDashboard",
-                                    "icon": "fa-user",
-                                    "label": "Personal Dashboard",
-                                    "url": "/dashboard/",
-                                    "image": "/media/cosinnus_portals/portal_default/avatars/user/0e9e945efe3d60bf807d56e336b677f193675fd8.png",
-                                }
+                                MenuItem("Personal Dashboard", "/dashboard/", "fa-user", "/media/image.png",
+                                         id="PersonalDashboard"),
                             ],
                             "actions": []
                         },
                         "groups": {
                             "items": [
-                                {
-                                    "id": "CosinnusSociety70",
-                                    "icon": "fa-sitemap",
-                                    "label": "Test Group",
-                                    "url": "/group/test-group/",
-                                    "image": "/media/cosinnus_portals/portal_default/avatars/group/be5636c7955c1fd370514c26ffd4b0902dd5232a.png",
-                                }
+                                MenuItem("Test Group", "/group/test-group/", "fa-sitemap", "/media/image.png",
+                                         id="CosinnusSociety70")
                             ],
                             "actions": [
-                                {
-                                    "id": "CreateGroup",
-                                    "icon": None,
-                                    "label": "Create a Group",
-                                    "url": "/groups/add/",
-                                    "image": None,
-                                },
-                                {
-                                    "id": "CreateProject",
-                                    "icon": None,
-                                    "label": "Create a Project",
-                                    "url": "/projects/add/",
-                                    "image": None,
-                                }
+                                MenuItem("Create a Group", "/groups/add/", id="CreateGroup"),
+                                MenuItem("Create a Project", "/projects/add/", id="CreateProject"),
                             ]
                         },
                         "community": {
                             "items": [
-                                {
-                                    "id": "Forum",
-                                    "icon": "fa-sitemap",
-                                    "label": "Forum",
-                                    "url": "/group/forum/",
-                                    "image": None,
-                                },
-                                {
-                                    "id": "Map",
-                                    "icon": "fa-group",
-                                    "label": "Map",
-                                    "url": "/map/",
-                                    "image": None,
-                                }
+                                MenuItem("Forum", "/group/forum/", "fa-sitemap", id="Forum"),
+                                MenuItem("Map", "/map/", "fa-group", id="Map"),
                             ],
                             "actions": []
                         },
                         "conference": {
                             "items": [
-                                {
-                                    "id": "CosinnusSociety70",
-                                    "icon": "fa-television",
-                                    "label": "Test Conference",
-                                    "url": "/conference/test-conference/",
-                                    "image": None,
-                                }
+                                MenuItem("Test Conference", "/conference/test-conference/", "fa-television", id="CosinnusSociety70"),
                             ],
                             "actions": [
-                                {
-                                    "id": "CreateConference",
-                                    "icon": None,
-                                    "label": "Create a Conference",
-                                    "url": "/conferences/add/",
-                                    "image": None,
-                                }
+                                MenuItem("Create a Conference", "/conferences/add/", id="CreateConference"),
                             ]
                         }
                     },
@@ -179,7 +133,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         community_space_items = []
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
         if forum_slug:
-            forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
+            forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug,
+                                             portal=CosinnusPortal.get_current())
             if forum_group:
                 if (settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS
                         and request.user.is_authenticated):
@@ -257,31 +212,14 @@ class BookmarksView(APIView):
                 "application/json": {
                     "data": {
                         "groups": [
-                            {
-                                "id": "CosinnusGroup70",
-                                "icon": "fa-sitemap",
-                                "label": "Test Group",
-                                "url": "/group/test-group/",
-                                "image": "/media/cosinnus_portals/portal_default/avatars/group/be5636c7955c1fd370514c26ffd4b0902dd5232a.png",
-                            }
+                            MenuItem("Test Group", "/group/test-group/", "fa-sitemap", "/media/image.png",
+                                     id="CosinnusGroup70"),
                         ],
                         "users": [
-                            {
-                                "id": "UserProfile4",
-                                "icon": "fa-user",
-                                "label": "Test User",
-                                "url": "/user/2/",
-                                "image": None,
-                            }
+                            MenuItem("Test User", "/user/2/", "fa-user", id="UserProfile4"),
                         ],
                         "content": [
-                            {
-                                "id": "CosinnusIdea2",
-                                "icon": "fa-lightbulb-o",
-                                "label": "Test Idea",
-                                "url": "/map/?item=1.ideas.test-idea",
-                                "image": None,
-                            }
+                            MenuItem("Test Idea", "/map/?item=1.ideas.test-idea", "fa-lightbulb-o", id="CosinnusIdea2"),
                         ]
                     },
                     "version": COSINNUS_VERSION,
@@ -658,22 +596,10 @@ class HelpView(APIView):
             examples={
                 "application/json": {
                     "data": [
-                        {
-                            "id": "FAQ",
-                            "icon": "fa-question-circle",
-                            "label": "<b>FAQ</b> (Frequently asked questions)",
-                            "url": "https://localhost:8000/cms/faq/",
-                            "is_external": True,
-                            "image": None
-                        },
-                        {
-                            "id": "Support",
-                            "icon": "fa-life-ring",
-                            "label": "<b>Support-Channel</b> (Chat)",
-                            "url": "https://localhost:8000/cms/support/",
-                            "is_external": True,
-                            "image": None
-                        }
+                        MenuItem("<b>FAQ</b> (Frequently asked questions)", "https://localhost/cms/faq/",
+                                 "fa-question-circle", is_external=True, id="FAQ"),
+                        MenuItem("<b>Support-Channel</b> (Chat)", "https://localhost/cms/support/",
+                                 "fa-life-ring", is_external=True, id="Support"),
                     ],
                     "version": COSINNUS_VERSION,
                     "timestamp": 1658414865.057476
@@ -705,6 +631,7 @@ class LanguageMenuItemMixin:
         language_item['sub_items'] = language_subitems
         return language_item
 
+
 class ProfileView(LanguageMenuItemMixin, APIView):
     """
     An endpoint that provides user profile menu items for the main navigation.
@@ -728,36 +655,43 @@ class ProfileView(LanguageMenuItemMixin, APIView):
             examples={
                 "application/json": {
                     "data": [
-                        {
-                            "id": "Profile",
-                            "icon": "fa-circle-user",
-                            "label": "My Profile",
-                            "url": "/profile/",
-                            "image": None
-                        },
+                        MenuItem("My Profile", "/profile/", "fa-circle-user", id="Profile"),
+                        MenuItem("Set up my Profile", "/profile/edit/", "fa-pen", id="SetupProfile"),
+                        MenuItem("Edit my Profile", "/profile/edit/", "fa-gear", id="EditProfile"),
+                        MenuItem("Notification Preferences", "/profile/notifications/", "fa-envelope",
+                                 id="NotificationPreferences"),
                         {
                             "id": "ChangeLanguage",
                             "icon": "fa-language",
                             "label": "Change Language",
                             "url": None,
                             "image": None,
+                            "is_external": False,
+                            "badge": None,
                             "sub_items": [
                                 {
                                     "id": "ChangeLanguageItemDE",
                                     "icon": None,
                                     "label": "Deutsch",
                                     "url": "/language/de/",
-                                    "image": None
+                                    "image": None,
+                                    "is_external": False,
+                                    "badge": None,
                                 },
                                 {
                                     "id": "ChangeLanguageItemEN",
                                     "icon": None,
                                     "label": "English",
                                     "url": "/language/en/",
-                                    "image": None
-                                }
-                            ]
-                        }
+                                    "image": None,
+                                    "is_external": False,
+                                    "badge": None,
+                                },
+                            ],
+                        },
+                        MenuItem("Your Contribution", "/account/contribution/", "fa-hand-holding-hart",
+                                 id="Contribution"),
+                        MenuItem("Logout", "/logout/", "fa-right-from-bracket", id="Logout"),
                     ],
                     "version": COSINNUS_VERSION,
                     "timestamp": 1658414865.057476
@@ -837,78 +771,14 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
             examples={
                 "application/json": {
                     "data": [
-                        {
-                            "id": "Spaces",
-                            "icon": None,
-                            "label": "spaces",
-                            "url": None,
-                            "is_external": False,
-                            "image": None,
-                            "badge": None
-                        },
-                        {
-                            "id": "Search",
-                            "icon": None,
-                            "label": "search",
-                            "url": None,
-                            "is_external": False,
-                            "image": None,
-                            "badge": None
-                        },
-                        {
-                            "id": "Bookmarks",
-                            "icon": "bookmarks",
-                            "label": "bookmarks",
-                            "url": None,
-                            "is_external": False,
-                            "image": None,
-                            "badge": None
-                        },
-                        {
-                            "id": "Cloud",
-                            "icon": "cloud",
-                            "label": "Cloud",
-                            "url": "https://cloud.localhost",
-                            "is_external": True,
-                            "image": None,
-                            "badge": None
-                        },
-                        {
-                            "id": "Chat",
-                            "icon": "chat",
-                            "label": "Rocket.Chat",
-                            "url": "/messages/",
-                            "is_external": False,
-                            "image": None,
-                            "badge": None
-                        },
-                        {
-                            "id": "Help",
-                            "icon": "help",
-                            "label": "help",
-                            "url": None,
-                            "is_external": False,
-                            "image": None,
-                            "badge": None
-                        },
-                        {
-                            "id": "Alerts",
-                            "icon": "alerts",
-                            "label": "alerts",
-                            "url": None,
-                            "is_external": False,
-                            "image": None,
-                            "badge": None
-                        },
-                        {
-                            "id": "Profile",
-                            "icon": "profile",
-                            "label": "profile",
-                            "url": None,
-                            "is_external": False,
-                            "image": None,
-                            "badge": None
-                        }
+                        MenuItem("Spaces", id="Spaces"),
+                        MenuItem("Search", id="Search"),
+                        MenuItem("Bookmarks", icon="bookmarks", id="Bookmarks"),
+                        MenuItem("Cloud", "https://cloud.localhost/", "cloud", is_external=True, id="Cloud"),
+                        MenuItem("Rocket.Chat", "/messages/", "chat", id="Chat"),
+                        MenuItem("Help", icon="help", id="Help"),
+                        MenuItem("Alerts", icon="alerts", id="Alerts"),
+                        MenuItem("Profile", icon="profile", id="Profile"),
                     ],
                     "version": COSINNUS_VERSION,
                     "timestamp": 1658414865.057476
