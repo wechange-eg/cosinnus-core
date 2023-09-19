@@ -474,7 +474,7 @@ class MainNavigationViewTest(APITestCase):
             response.data,
             [
                 MenuItem('Spaces', id='Spaces'),
-                MenuItem('Search', id='Search'),
+                MenuItem('Search', '/search/', 'search', id='Search'),
                 MenuItem('Bookmarks', icon='bookmarks', id='Bookmarks'),
                 MenuItem('Cloud', 'http://cloud.example.com', 'cloud', is_external=True, id='Cloud'),
                 MenuItem('Messages', reverse('postman:inbox'), 'messages', id='Messages'),
@@ -500,7 +500,7 @@ class MainNavigationViewTest(APITestCase):
             response.data,
             [
                 MenuItem('Spaces', id='Spaces'),
-                MenuItem('Search', id='Search'),
+                MenuItem('Search', '/map/', 'search', id='Search'),
                 MenuItem('Help', icon='help', id='Help'),
                 expected_language_menu_item,
                 MenuItem('Login', '/login/', id='Login'),
