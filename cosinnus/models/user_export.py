@@ -136,9 +136,9 @@ class CosinnusUserExportProcessorBase(object):
                 value = getattr(self, field)(user)
             elif hasattr(user, field):
                 value = getattr(user, field)
-            elif hasattr(user.cosinnus_profile, field):
+            elif hasattr(user, 'cosinnus_profile') and hasattr(user.cosinnus_profile, field):
                 value = getattr(user.cosinnus_profile, field)
-            elif field in user.cosinnus_profile.dynamic_fields:
+            elif hasattr(user, 'cosinnus_profile') and field in user.cosinnus_profile.dynamic_fields:
                 field_value = user.cosinnus_profile.dynamic_fields[field]
                 if field_value is not None:
                     value = self.format_dynamic_field_value(field, field_value)
