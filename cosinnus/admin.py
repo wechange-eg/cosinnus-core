@@ -224,6 +224,8 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     actions = ['convert_to_society', 'convert_to_conference', 'add_members_to_current_portal', 'move_members_to_current_portal',
                 'move_groups_to_current_portal', 'move_groups_to_current_portal_and_message_users',
                 'activate_groups', 'deactivate_groups']
+    if settings.COSINNUS_CLOUD_ENABLED:
+        actions += ['force_redo_cloud_user_room_memberships',]
     list_display = ('name', 'slug', 'portal', 'public', 'is_active',)
     list_filter = ('portal', 'public', 'is_active',)
     search_fields = ('name', 'slug', 'id',)
@@ -429,7 +431,22 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
         message = _('In addition, the members were removed from all other Portals.')
         self.message_user(request, message)
     move_members_to_current_portal.short_description = _("Move all members to current Portal (removes all other memberships!)")
-    
+
+    if settings.COSINNUS_CLOUD_ENABLED:
+        def force_redo_cloud_user_room_memberships(self, request, queryset):
+            count = 0
+            from cosinnus_cloud.hooks import user_joined_group_receiver_sub # noqa
+            for group in queryset:
+                group_memberships = CosinnusGroupMembership.objects.filter(
+                    group__portal=CosinnusPortal.get_current(), group=group, status__in=MEMBER_STATUS,
+                )
+                for membership in group_memberships:
+                    user_joined_group_receiver_sub(None, membership.user, membership.group)
+                    count += 1
+            message = _('%d Users\' nextcloud folder memberships were re-done.') % count
+            self.message_user(request, message)
+        force_redo_cloud_user_room_memberships.short_description = _('Nextcloud: Fix missing Nextcloud folder membership for users')
+
 admin.site.register(CosinnusProject, CosinnusProjectAdmin)
 
 
