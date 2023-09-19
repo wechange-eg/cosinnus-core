@@ -772,13 +772,13 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                 "application/json": {
                     "data": [
                         MenuItem("Spaces", id="Spaces"),
-                        MenuItem("Search", id="Search"),
-                        MenuItem("Bookmarks", icon="bookmarks", id="Bookmarks"),
-                        MenuItem("Cloud", "https://cloud.localhost/", "cloud", is_external=True, id="Cloud"),
-                        MenuItem("Rocket.Chat", "/messages/", "chat", id="Chat"),
-                        MenuItem("Help", icon="help", id="Help"),
-                        MenuItem("Alerts", icon="alerts", id="Alerts"),
-                        MenuItem("Profile", icon="profile", id="Profile"),
+                        MenuItem("Search", "/search/", "fa-magnifying-glass", id="Search"),
+                        MenuItem("Bookmarks", icon="fa-bookmark", id="Bookmarks"),
+                        MenuItem("Cloud", "https://cloud.localhost/", "fa-cloud", is_external=True, id="Cloud"),
+                        MenuItem("Rocket.Chat", "/messages/", "fa-envelope", id="Chat"),
+                        MenuItem("Help", icon="fa-question", id="Help"),
+                        MenuItem("Alerts", icon="fa-bell", id="Alerts"),
+                        MenuItem("Profile", icon="fa-user", id="Profile"),
                     ],
                     "version": COSINNUS_VERSION,
                     "timestamp": 1658414865.057476
@@ -794,16 +794,16 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
 
         # search
         search_url_name = 'cosinnus:search' if request.user.is_authenticated else 'cosinnus:map'
-        main_navigation_items.append(MenuItem('Search', reverse(search_url_name), 'search', id='Search'))
+        main_navigation_items.append(MenuItem('Search', reverse(search_url_name), 'fa-magnifying-glass', id='Search'))
 
         if request.user.is_authenticated:
             # bookmarks
-            main_navigation_items.append(MenuItem('Bookmarks', icon='bookmarks', id='Bookmarks'))
+            main_navigation_items.append(MenuItem('Bookmarks', icon='fa-bookmark', id='Bookmarks'))
 
             # cloud
             if settings.COSINNUS_CLOUD_ENABLED:
                 main_navigation_items.append(
-                    MenuItem('Cloud', settings.COSINNUS_CLOUD_NEXTCLOUD_URL, icon='cloud',
+                    MenuItem('Cloud', settings.COSINNUS_CLOUD_NEXTCLOUD_URL, icon='fa-cloud',
                              is_external=settings.COSINNUS_CLOUD_OPEN_IN_NEW_TAB, id='Cloud')
                 )
 
@@ -811,24 +811,24 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
             if 'cosinnus_message' not in settings.COSINNUS_DISABLED_COSINNUS_APPS:
                 if settings.COSINNUS_ROCKET_ENABLED:
                     main_navigation_items.append(
-                        MenuItem('Rocket.Chat', reverse('cosinnus:message-global'), icon='chat',
+                        MenuItem('Rocket.Chat', reverse('cosinnus:message-global'), icon='fa-envelope',
                                  is_external=settings.COSINNUS_ROCKET_OPEN_IN_NEW_TAB, id='Chat')
                     )
                 else:
                     main_navigation_items.append(
-                        MenuItem( 'Messages', reverse('postman:inbox'), icon='messages', id='Messages')
+                        MenuItem( 'Messages', reverse('postman:inbox'), icon='fa-envelope', id='Messages')
                     )
 
         # help
-        main_navigation_items.append(MenuItem('Help', icon='help', id='Help'))
+        main_navigation_items.append(MenuItem('Help', icon='fa-question', id='Help'))
 
         if request.user.is_authenticated:
 
             # alerts
-            main_navigation_items.append(MenuItem('Alerts', icon='alerts', id='Alerts'))
+            main_navigation_items.append(MenuItem('Alerts', icon='fa-bell', id='Alerts'))
 
             # profile
-            main_navigation_items.append(MenuItem('Profile', icon='profile', id='Profile'))
+            main_navigation_items.append(MenuItem('Profile', icon='fa-user', id='Profile'))
         else:
 
             # language

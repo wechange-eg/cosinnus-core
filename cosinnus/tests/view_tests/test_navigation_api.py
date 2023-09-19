@@ -474,13 +474,13 @@ class MainNavigationViewTest(APITestCase):
             response.data,
             [
                 MenuItem('Spaces', id='Spaces'),
-                MenuItem('Search', '/search/', 'search', id='Search'),
-                MenuItem('Bookmarks', icon='bookmarks', id='Bookmarks'),
-                MenuItem('Cloud', 'http://cloud.example.com', 'cloud', is_external=True, id='Cloud'),
-                MenuItem('Messages', reverse('postman:inbox'), 'messages', id='Messages'),
-                MenuItem('Help', icon='help', id='Help'),
-                MenuItem('Alerts', icon='alerts', id='Alerts'),
-                MenuItem('Profile', icon='profile', id='Profile'),
+                MenuItem('Search', '/search/', 'fa-magnifying-glass', id='Search'),
+                MenuItem('Bookmarks', icon='fa-bookmark', id='Bookmarks'),
+                MenuItem('Cloud', 'http://cloud.example.com', 'fa-cloud', is_external=True, id='Cloud'),
+                MenuItem('Messages', reverse('postman:inbox'), 'fa-envelope', id='Messages'),
+                MenuItem('Help', icon='fa-question', id='Help'),
+                MenuItem('Alerts', icon='fa-bell', id='Alerts'),
+                MenuItem('Profile', icon='fa-user', id='Profile'),
             ]
         )
 
@@ -500,8 +500,8 @@ class MainNavigationViewTest(APITestCase):
             response.data,
             [
                 MenuItem('Spaces', id='Spaces'),
-                MenuItem('Search', '/map/', 'search', id='Search'),
-                MenuItem('Help', icon='help', id='Help'),
+                MenuItem('Search', '/map/', 'fa-magnifying-glass', id='Search'),
+                MenuItem('Help', icon='fa-question', id='Help'),
                 expected_language_menu_item,
                 MenuItem('Login', '/login/', id='Login'),
                 MenuItem('Register', '/signup/', id='Register'),
