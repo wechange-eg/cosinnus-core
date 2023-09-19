@@ -367,3 +367,9 @@ msgid ""
 "whiteboard activities. The recording may be shared according to the "
 "organizers."
 msgstr ""
+
+msgid "Copy invitation"
+msgstr ""
+
+msgid "Copy guest invitation"
+msgstr ""

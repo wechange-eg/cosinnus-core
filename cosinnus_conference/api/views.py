@@ -5,13 +5,13 @@ from rest_framework.response import Response
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus_conference.api.serializers import ConferenceSerializer, ConferenceEventSerializer, \
     ConferenceParticipantSerializer, ConferenceEventParticipantsSerializer
-from cosinnus_event.models import ConferenceEvent, ConferenceEventAttendanceTracking
+from cosinnus_event.models import ConferenceEvent, ConferenceEventAttendanceTracking, Event
 
 
 # FIXME: Make this pagination class default in REST_FRAMEWORK setting
 from rest_framework.decorators import action
-from cosinnus.utils.permissions import check_user_superuser
-from cosinnus.models.group_extra import CosinnusConference
+from cosinnus.utils.permissions import check_user_superuser, check_object_write_access
+from cosinnus.models.group_extra import CosinnusConference, CosinnusGroup
 from cosinnus.api.views.mixins import CosinnusFilterQuerySetMixin,\
     PublicCosinnusGroupFilterMixin, CosinnusPaginateMixin
 from copy import copy
@@ -100,6 +100,50 @@ class ConferenceViewSet(RequireGroupReadMixin, BaseConferenceViewSet):
         page = self.paginate_queryset(queryset)
         serializer = ConferenceEventParticipantsSerializer(page, many=True, context={"request": request})
         return self.get_paginated_response({p['id']: p['participants_count'] for p in serializer.data})
+
+    @action(detail=False, methods=['get'])
+    def invitation(self, request):
+        """
+        Returns conference invitation text and alert text.
+        Uses the "object_type" and "object_id" parameters to get the object containing the BBB room. If the "guest"
+        parameter is "true" returns the invitation text with the BBB guest join URL, otherwise the URL of the
+        object is used.
+        """
+        response = {
+            'alert_text': None,
+            'invitation': None,
+        }
+
+        # Get the object containing the BBB room.
+        object_type = self.request.GET.get('object_type')
+        object_id = self.request.GET.get('object_id')
+        guest_invitation = self.request.GET.get('guest') == 'true'
+        object_class = None
+        obj = None
+        if object_type == 'group':
+            object_class = CosinnusGroup
+        elif object_type == 'event':
+            object_class = Event
+        if object_class and object_id:
+            obj = object_class.objects.filter(id=object_id).first()
+        if not obj:
+            return Response(status=404)
+
+        bbb_room = getattr(obj.media_tag, 'bbb_room', None)
+        if bbb_room:
+            # Get invitation text.
+            if guest_invitation and check_object_write_access(obj, request.user):
+                # Use guest invitation text.
+                invitation = bbb_room.get_invitation_text()
+            else:
+                # Use platform-user invitation text.
+                invitation = bbb_room.get_invitation_text(obj.get_absolute_url())
+            response['invitation'] = invitation
+
+            # Get the alert message.
+            response['alert_text'] = bbb_room.get_invitation_alert_text()
+
+        return Response(response)
 
     @action(detail=True, methods=['get'])
     def attend_event(self, request, pk=None):

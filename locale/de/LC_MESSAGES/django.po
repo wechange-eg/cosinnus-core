@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-07 14:11+0200\n"
+"POT-Creation-Date: 2023-09-13 16:32+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -985,6 +985,21 @@ msgstr "Pin zur Eingabe für Telefonteilnehmende"
 
 msgid "Last create-call parameters"
 msgstr "Letzte Create-Call Parameter"
+
+#, python-format
+msgid "Join \"%(name)s\"!"
+msgstr "Tritt \"%(name)s\" bei!"
+
+#, python-format
+msgid "To join the conference in the browser visit %(url)s."
+msgstr "Um der Tagung im Browser beizutreten, besuche %(url)s."
+
+#, python-format
+msgid "To join the conference by phone dial \"%(number)s\" and enter the following PIN: \"%(pin)s#\". Use the 0-key on your phone to toggle mute on/off."
+msgstr "Um der Tagung per Telefon beizutreten, wähle \"%(number)s\" und gib die folgende PIN ein: \"%(pin)s\". Nutze die 0-Taste des Telefons um die Stummschaltung ein-/auszuschalten."
+
+msgid "Invitation copied to clipboard."
+msgstr "Einladung wurde in die Zwischenablage kopiert."
 
 msgid "BBB ROOM"
 msgstr "BBB Raum"
@@ -3246,6 +3261,12 @@ msgstr[1] ""
 
 msgid "No, do not send"
 msgstr "Nein, nicht senden"
+
+msgid "Copy invitation"
+msgstr "Einladung kopieren"
+
+msgid "Copy guest invitation"
+msgstr "Gäste-Einladung kopieren"
 
 msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
 msgstr "Diese Sitzung kann von den Veranstaltern aufgezeichnet werden. Indem du fortfährst, erklärst du dich damit einverstanden, aufgezeichnet zu werden. Dazu gehören Audio, Video, Chat, gemeinsame Notizen und Whiteboard-Aktivitäten. Die Aufzeichnung kann durch die Veranstalter weitergegeben werden."

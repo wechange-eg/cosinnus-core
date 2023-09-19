@@ -31,6 +31,7 @@ export interface EventJson {
     update_event: string
     delete_event: string
   }
+  user_is_admin: boolean
 }
 
 export interface EventProps {
@@ -55,6 +56,7 @@ export interface EventProps {
     updateEvent: string
     deleteEvent: string
   }
+  userIsAdmin: boolean
 }
 
 export class Event {
@@ -95,6 +97,7 @@ export class Event {
         updateEvent: json.management_urls.update_event,
         deleteEvent: json.management_urls.delete_event,
       },
+      userIsAdmin: json.user_is_admin,
     }
 
     return new Event(props)
@@ -131,6 +134,7 @@ export class Event {
         update_event: props.managementUrls.updateEvent,
         delete_event: props.managementUrls.deleteEvent,
       },
+      user_is_admin: this.props.userIsAdmin,
     }
   }
 
