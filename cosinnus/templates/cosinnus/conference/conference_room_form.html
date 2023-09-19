@@ -147,11 +147,13 @@
             {% include 'cosinnus/fields/checkbox_field.html' with field=form.is_visible label=vis_label legend=vis_legend checkbox_label=vis_label %}
             
             {% if SETTINGS.COSINNUS_ROCKET_ENABLED %}
-	            {% comment %} Show chat {% endcomment %}
-		        {% trans "Show chat" as show_chat_label %}
-		        {% trans "Check this to show rocket chat in the sidebar." as show_chat_legend %}
-	            {% include 'cosinnus/fields/checkbox_field.html' with field=form.show_chat label=show_chat_label legend=show_chat_legend checkbox_label=show_chat_label %}
-	        {% endif %}
+                <div class="room-type-selector room-type-selector-0 room-type-selector-1 room-type-selector-2 room-type-selector-3 room-type-selector-4">
+                    {% comment %} Show chat {% endcomment %}
+                    {% trans "Show chat" as show_chat_label %}
+                    {% trans "Check this to show rocket chat in the sidebar." as show_chat_legend %}
+                    {% include 'cosinnus/fields/checkbox_field.html' with field=form.show_chat label=show_chat_label legend=show_chat_legend checkbox_label=show_chat_label %}
+                </div>
+            {% endif %}
 	        
 	        {% if SETTINGS.BBB_PRESET_USER_FORM_FIELDS %}
 		        <div class="room-type-selector room-type-selector-2 room-type-selector-3 room-type-selector-4">
