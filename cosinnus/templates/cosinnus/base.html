@@ -167,7 +167,7 @@
         {% include 'announcements/announcement.html' with announcement=email_not_verified_announcement %}
         {% endif %}
 
-        <div class="{% block container_classes %}container {{ cosinnus_css_class }}{% endblock container_classes %}" {% block container_attributes %}{% endblock container_attributes %}>
+        <div class="x-v3-container {% block container_classes %}container {{ cosinnus_css_class }}{% endblock container_classes %}" {% block container_attributes %}{% endblock container_attributes %}>
 
             {% block main_page_header %}{% endblock main_page_header %}
 
@@ -175,7 +175,7 @@
                 <div class="row d-sm-flex">
 
                     {% block override_leftnav %}
-                    <div class="col-lg-3 col-md-3"><!-- left column -->
+                    <div class="x-v3-leftnav col-lg-3 col-md-3"><!-- left column -->
                         {% if group %}
                             {% cosinnus_menu "cosinnus/appsmenu.html" %}
                         {% endif %}
@@ -201,7 +201,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-xs-12">
+                            <div class="x-v3-content col-xs-12">
                                 {% include 'cosinnus/messages.html' %}
                                 {% block content %}{% endblock content %}
                             </div><!-- col -->

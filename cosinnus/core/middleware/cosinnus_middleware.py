@@ -82,6 +82,8 @@ NEVER_REDIRECT_URLS = [
     '/api/v3/user/profile',
     '/api/v3/signup',
     
+    '/api/v3/content/main',
+    
     '/o/',
     '/group/forum/cloud/oauth2/',
     f'/group/{settings.NEWW_FORUM_GROUP_SLUG}/cloud/oauth2/',

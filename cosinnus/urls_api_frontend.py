@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.conf.urls import url
 
+from cosinnus.api_frontend.views.content import MainContentView
 from cosinnus.api_frontend.views.user import LoginView, SignupView, UserProfileView, \
     LogoutView, UserAuthInfoView
 from cosinnus.api_frontend.views.navigation import BookmarksView, SpacesView, UnreadMessagesView, UnreadAlertsView, \
@@ -34,7 +35,9 @@ urlpatterns += [
     url(r'^api/v3/portal/managed_tags/$', PortalManagedTagsView.as_view(), name='api-portal-managed-tags'),
     url(r'^api/v3/portal/userprofile_dynamicfields/signup/$', PortalUserprofileDynamicFieldsSignupView.as_view(), name='api-portal-userprofile-dynamicfields-signup'),
     url(r'^api/v3/portal/userprofile_dynamicfields/$', PortalUserprofileDynamicFieldsView.as_view(), name='api-portal-userprofile-dynamicfields'),
-
+    
+    url(r'^api/v3/content/main/$', MainContentView.as_view(), name='api-content-main'),
+    
     url(r'^api/v3/navigation/spaces/$', SpacesView.as_view(), name='api-navigation-spaces'),
     url(r'^api/v3/navigation/bookmarks/$', BookmarksView.as_view(), name='api-navigation-bookmarks'),
     url(r'^api/v3/navigation/unread_messages/$', UnreadMessagesView.as_view(), name='api-navigation-unread-messages'),

@@ -21,6 +21,11 @@ from cosinnus_organization.models import CosinnusOrganization
 logger = logging.getLogger('cosinnus')
 
 
+# a list of font-awesome class names that are not actual icons,
+# useful for filtering them out of a class string
+FONT_AWESOME_CLASS_FILTER = ['fa', 'fas', 'fa-fw', 'fa-2x', 'fa-3x', 'fa--spin', 'fa-cog']
+
+
 class DashboardItem(dict):
     """
     Dictionary representation and API serializer of various cosinnus objects containing at least an icon, text and url.
