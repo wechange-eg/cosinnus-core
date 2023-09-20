@@ -6,7 +6,6 @@ from django.utils.translation import ugettext_lazy as _
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.exceptions import ValidationError
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -39,7 +38,6 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
     badge (optional).
     """
 
-    permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
@@ -56,80 +54,34 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                     "data": {
                         "personal": {
                             "items": [
-                                {
-                                    "id": "PersonalDashboard",
-                                    "icon": "fa-user",
-                                    "label": "Personal Dashboard",
-                                    "url": "/dashboard/",
-                                    "image": "/media/cosinnus_portals/portal_default/avatars/user/0e9e945efe3d60bf807d56e336b677f193675fd8.png",
-                                }
+                                MenuItem("Personal Dashboard", "/dashboard/", "fa-user", "/media/image.png",
+                                         id="PersonalDashboard"),
                             ],
                             "actions": []
                         },
                         "groups": {
                             "items": [
-                                {
-                                    "id": "CosinnusSociety70",
-                                    "icon": "fa-sitemap",
-                                    "label": "Test Group",
-                                    "url": "/group/test-group/",
-                                    "image": "/media/cosinnus_portals/portal_default/avatars/group/be5636c7955c1fd370514c26ffd4b0902dd5232a.png",
-                                }
+                                MenuItem("Test Group", "/group/test-group/", "fa-sitemap", "/media/image.png",
+                                         id="CosinnusSociety70")
                             ],
                             "actions": [
-                                {
-                                    "id": "CreateGroup",
-                                    "icon": None,
-                                    "label": "Create a Group",
-                                    "url": "/groups/add/",
-                                    "image": None,
-                                },
-                                {
-                                    "id": "CreateProject",
-                                    "icon": None,
-                                    "label": "Create a Project",
-                                    "url": "/projects/add/",
-                                    "image": None,
-                                }
+                                MenuItem("Create a Group", "/groups/add/", id="CreateGroup"),
+                                MenuItem("Create a Project", "/projects/add/", id="CreateProject"),
                             ]
                         },
                         "community": {
                             "items": [
-                                {
-                                    "id": "Forum",
-                                    "icon": "fa-sitemap",
-                                    "label": "Forum",
-                                    "url": "/group/forum/",
-                                    "image": None,
-                                },
-                                {
-                                    "id": "Map",
-                                    "icon": "fa-group",
-                                    "label": "Map",
-                                    "url": "/map/",
-                                    "image": None,
-                                }
+                                MenuItem("Forum", "/group/forum/", "fa-sitemap", id="Forum"),
+                                MenuItem("Map", "/map/", "fa-group", id="Map"),
                             ],
                             "actions": []
                         },
                         "conference": {
                             "items": [
-                                {
-                                    "id": "CosinnusSociety70",
-                                    "icon": "fa-television",
-                                    "label": "Test Conference",
-                                    "url": "/conference/test-conference/",
-                                    "image": None,
-                                }
+                                MenuItem("Test Conference", "/conference/test-conference/", "fa-television", id="CosinnusSociety70"),
                             ],
                             "actions": [
-                                {
-                                    "id": "CreateConference",
-                                    "icon": None,
-                                    "label": "Create a Conference",
-                                    "url": "/conferences/add/",
-                                    "image": None,
-                                }
+                                MenuItem("Create a Conference", "/conferences/add/", id="CreateConference"),
                             ]
                         }
                     },
@@ -143,22 +95,28 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         spaces = {}
 
         # personal space
-        dashboard_item = MenuItem(
-            _('Personal Dashboard'), reverse('cosinnus:user-dashboard'), 'fa-user',
-            request.user.cosinnus_profile.avatar_url, id='PersonalDashboard',
-        )
-        personal_space = {
-            'items': [dashboard_item],
-            'actions': [],
-        }
+        personal_space = None
+        if request.user.is_authenticated:
+            personal_space_items = [
+                MenuItem(
+                    _('Personal Dashboard'), reverse('cosinnus:user-dashboard'), 'fa-user',
+                    request.user.cosinnus_profile.avatar_url, id='PersonalDashboard',
+                )
+            ]
+            personal_space = {
+                'items': personal_space_items,
+                'actions': [],
+            }
         spaces['personal'] = personal_space
 
         # projects and groups
-        group_space_items = [
-            dashboard_item.as_menu_item()
-            for cluster in self.get_group_clusters(request.user) for dashboard_item in cluster
-        ]
+        group_space_items = []
         group_space_actions = []
+        if request.user.is_authenticated:
+            group_space_items = [
+                dashboard_item.as_menu_item()
+                for cluster in self.get_group_clusters(request.user) for dashboard_item in cluster
+            ]
         if not settings.COSINNUS_SHOW_MAIN_MENU_GROUP_CREATE_BUTTON_ONLY_FOR_PERMITTED \
                 or check_user_can_create_groups(request.user):
             group_space_actions = [
@@ -175,9 +133,11 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         community_space_items = []
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
         if forum_slug:
-            forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
+            forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug,
+                                             portal=CosinnusPortal.get_current())
             if forum_group:
-                if settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS:
+                if (settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS
+                        and request.user.is_authenticated):
                     # Add paired_groups of managed tags to community space.
                     managed_tags = self.request.user.cosinnus_profile.get_managed_tags()
                     if managed_tags:
@@ -209,8 +169,11 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
 
         # conferences
         if settings.COSINNUS_CONFERENCES_ENABLED:
-            conferences = CosinnusConference.objects.get_for_user(request.user)
+            conference_space_items = []
             conference_space_actions = []
+            if request.user.is_authenticated:
+                conferences = CosinnusConference.objects.get_for_user(request.user)
+                conference_space_items = [DashboardItem(conference).as_menu_item() for conference in conferences]
             if not settings.COSINNUS_SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON_ONLY_FOR_PERMITTED \
                     or check_user_can_create_conferences(request.user):
                 conference_space_actions = [
@@ -218,7 +181,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                              id='CreateConference'),
                 ]
             conference_space = {
-                'items': [DashboardItem(conference).as_menu_item() for conference in conferences],
+                'items': conference_space_items,
                 'actions': conference_space_actions,
             }
             spaces['conference'] = conference_space
@@ -234,7 +197,6 @@ class BookmarksView(APIView):
     badge (optional).
     """
 
-    permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
@@ -250,31 +212,14 @@ class BookmarksView(APIView):
                 "application/json": {
                     "data": {
                         "groups": [
-                            {
-                                "id": "CosinnusGroup70",
-                                "icon": "fa-sitemap",
-                                "label": "Test Group",
-                                "url": "/group/test-group/",
-                                "image": "/media/cosinnus_portals/portal_default/avatars/group/be5636c7955c1fd370514c26ffd4b0902dd5232a.png",
-                            }
+                            MenuItem("Test Group", "/group/test-group/", "fa-sitemap", "/media/image.png",
+                                     id="CosinnusGroup70"),
                         ],
                         "users": [
-                            {
-                                "id": "UserProfile4",
-                                "icon": "fa-user",
-                                "label": "Test User",
-                                "url": "/user/2/",
-                                "image": None,
-                            }
+                            MenuItem("Test User", "/user/2/", "fa-user", id="UserProfile4"),
                         ],
                         "content": [
-                            {
-                                "id": "CosinnusIdea2",
-                                "icon": "fa-lightbulb-o",
-                                "label": "Test Idea",
-                                "url": "/map/?item=1.ideas.test-idea",
-                                "image": None,
-                            }
+                            MenuItem("Test Idea", "/map/?item=1.ideas.test-idea", "fa-lightbulb-o", id="CosinnusIdea2"),
                         ]
                     },
                     "version": COSINNUS_VERSION,
@@ -284,16 +229,18 @@ class BookmarksView(APIView):
         )}
     )
     def get(self, request):
-        liked_users = self.request.user.cosinnus_profile.get_user_starred_users()
-        user_items = [DashboardItem(user).as_menu_item() for user in liked_users]
-        liked_objects = self.request.user.cosinnus_profile.get_user_starred_objects()
         group_items = []
+        user_items = []
         content_items = []
-        for liked_object in liked_objects:
-            if isinstance(liked_object, get_cosinnus_group_model()):
-                group_items.append(DashboardItem(liked_object).as_menu_item())
-            else:
-                content_items.append(DashboardItem(liked_object).as_menu_item())
+        if request.user.is_authenticated:
+            liked_users = request.user.cosinnus_profile.get_user_starred_users()
+            user_items = [DashboardItem(user).as_menu_item() for user in liked_users]
+            liked_objects = request.user.cosinnus_profile.get_user_starred_objects()
+            for liked_object in liked_objects:
+                if isinstance(liked_object, get_cosinnus_group_model()):
+                    group_items.append(DashboardItem(liked_object).as_menu_item())
+                else:
+                    content_items.append(DashboardItem(liked_object).as_menu_item())
         bookmarks = {
             'groups': group_items,
             'users': user_items,
@@ -305,7 +252,6 @@ class BookmarksView(APIView):
 class UnreadMessagesView(APIView):
     """ An endpoint that returns the user unread message count for the main navigation. """
 
-    permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
@@ -329,7 +275,9 @@ class UnreadMessagesView(APIView):
         )}
     )
     def get(self, request):
-        unread_message_count = get_unread_message_count_for_user(request.user)
+        unread_message_count = 0
+        if request.user.is_authenticated:
+            unread_message_count = get_unread_message_count_for_user(request.user)
         unread_messages = {
             'count': unread_message_count,
         }
@@ -339,7 +287,6 @@ class UnreadMessagesView(APIView):
 class UnreadAlertsView(APIView):
     """ An endpoint that returns the user unseen alerts count for the main navigation. """
 
-    permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
@@ -363,10 +310,13 @@ class UnreadAlertsView(APIView):
         )}
     )
     def get(self, request):
-        alerts_qs = NotificationAlert.objects.filter(portal=CosinnusPortal.get_current(), user=self.request.user)
-        unseen_aggr = alerts_qs.aggregate(seen_count=Count(Case(When(seen=False, then=1))))
+        alerts_count = 0
+        if request.user.is_authenticated:
+            alerts_qs = NotificationAlert.objects.filter(portal=CosinnusPortal.get_current(), user=self.request.user)
+            unseen_aggr = alerts_qs.aggregate(seen_count=Count(Case(When(seen=False, then=1))))
+            alerts_count = unseen_aggr.get('seen_count', 0)
         unread_alerts = {
-            'count': unseen_aggr.get('seen_count', 0)
+            'count': alerts_count
         }
         return Response(unread_alerts)
 
@@ -389,7 +339,6 @@ class AlertsView(APIView):
     Additionally, the retrieved alerts can be marked as read/seen using the "mark_as_read=true" query parameter.
     """
 
-    permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
@@ -515,60 +464,61 @@ class AlertsView(APIView):
         )},
     )
     def get(self, request):
-        self.read_query_params(request)
         response = {
-            'items': None,
+            'items': [],
             'has_more': False,
             'offset_timestamp': None,
             'newest_timestamp': None,
         }
-        queryset = self.get_queryset()
+        if request.user.is_authenticated:
+            self.read_query_params(request)
+            queryset = self.get_queryset()
 
-        # has_more
-        response['has_more'] = queryset.count() > self.page_size
+            # has_more
+            response['has_more'] = queryset.count() > self.page_size
 
-        # paginate
-        queryset = queryset[:self.page_size]
-        alerts = list(queryset)
+            # paginate
+            queryset = queryset[:self.page_size]
+            alerts = list(queryset)
 
-        # mark as read
-        if self.mark_as_read:
+            # mark as read
+            if self.mark_as_read:
+                for alert in alerts:
+                    alert.seen = True
+                NotificationAlert.objects.bulk_update(alerts, ['seen'])
+
+            # alert items
+            user_cache = self.get_user_cache(alerts)
+            items = []
             for alert in alerts:
-                alert.seen = True
-            NotificationAlert.objects.bulk_update(alerts, ['seen'])
+                serialized_alert = SerializedNotificationAlert(
+                    alert,
+                    action_user=user_cache[alert.action_user_id][0],
+                    action_user_profile=user_cache[alert.action_user_id][1],
+                )
+                # split "icon_or_image_url"
+                self._split_icon_or_image_url(serialized_alert, 'item_')
+                self._split_icon_or_image_url(serialized_alert, 'user_')
+                for sub_item in serialized_alert.get('sub_items', []):
+                    self._split_icon_or_image_url(sub_item)
+                # use relative urls
+                self._use_relative_url(serialized_alert)
+                for sub_item in serialized_alert.get('sub_items', []):
+                    self._use_relative_url(sub_item)
+                # Use string identifier
+                serialized_alert['id'] = f'Alert{serialized_alert["id"]}'
+                items.append(serialized_alert)
+            response['items'] = items
 
-        # alert items
-        user_cache = self.get_user_cache(alerts)
-        items = []
-        for alert in alerts:
-            serialized_alert = SerializedNotificationAlert(
-                alert,
-                action_user=user_cache[alert.action_user_id][0],
-                action_user_profile=user_cache[alert.action_user_id][1],
-            )
-            # split "icon_or_image_url"
-            self._split_icon_or_image_url(serialized_alert, 'item_')
-            self._split_icon_or_image_url(serialized_alert, 'user_')
-            for sub_item in serialized_alert.get('sub_items', []):
-                self._split_icon_or_image_url(sub_item)
-            # use relative urls
-            self._use_relative_url(serialized_alert)
-            for sub_item in serialized_alert.get('sub_items', []):
-                self._use_relative_url(sub_item)
-            # Use string identifier
-            serialized_alert['id'] = f'Alert{serialized_alert["id"]}'
-            items.append(serialized_alert)
-        response['items'] = items
+            # newest timestamp
+            if not self.offset_timestamp and len(alerts) > 0:
+                newest_timestamp = timestamp_from_datetime(alerts[0].last_event_at)
+                response['newest_timestamp'] = newest_timestamp
 
-        # newest timestamp
-        if not self.offset_timestamp and len(alerts) > 0:
-            newest_timestamp = timestamp_from_datetime(alerts[0].last_event_at)
-            response['newest_timestamp'] = newest_timestamp
-
-        # offset timestamp
-        if len(alerts) > 0:
-            offset_timestamp = timestamp_from_datetime(alerts[-1].last_event_at)
-            response['offset_timestamp'] = offset_timestamp
+            # offset timestamp
+            if len(alerts) > 0:
+                offset_timestamp = timestamp_from_datetime(alerts[-1].last_event_at)
+                response['offset_timestamp'] = offset_timestamp
 
         return Response(response)
 
@@ -646,22 +596,10 @@ class HelpView(APIView):
             examples={
                 "application/json": {
                     "data": [
-                        {
-                            "id": "FAQ",
-                            "icon": "fa-question-circle",
-                            "label": "<b>FAQ</b> (Frequently asked questions)",
-                            "url": "https://localhost:8000/cms/faq/",
-                            "is_external": True,
-                            "image": None
-                        },
-                        {
-                            "id": "Support",
-                            "icon": "fa-life-ring",
-                            "label": "<b>Support-Channel</b> (Chat)",
-                            "url": "https://localhost:8000/cms/support/",
-                            "is_external": True,
-                            "image": None
-                        }
+                        MenuItem("<b>FAQ</b> (Frequently asked questions)", "https://localhost/cms/faq/",
+                                 "fa-question-circle", is_external=True, id="FAQ"),
+                        MenuItem("<b>Support-Channel</b> (Chat)", "https://localhost/cms/support/",
+                                 "fa-life-ring", is_external=True, id="Support"),
                     ],
                     "version": COSINNUS_VERSION,
                     "timestamp": 1658414865.057476
@@ -677,7 +615,24 @@ class HelpView(APIView):
         return Response(help_items)
 
 
-class ProfileView(APIView):
+class LanguageMenuItemMixin:
+
+    def get_language_menu_item(self, request, current_language_as_label=False):
+        language_item_label = request.LANGUAGE_CODE.upper() if current_language_as_label else _('Change Language')
+        language_item_icon = None if current_language_as_label else 'fa-language'
+        language_item = MenuItem(language_item_label, None, language_item_icon, id='ChangeLanguage')
+        language_selection = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES,
+                                    settings.LANGUAGES)
+        language_subitems = [
+            MenuItem(language, reverse('cosinnus:switch-language', kwargs={'language': code}),
+                     id=f'ChangeLanguageItem{code.upper()}')
+            for code, language in language_selection
+        ]
+        language_item['sub_items'] = language_subitems
+        return language_item
+
+
+class ProfileView(LanguageMenuItemMixin, APIView):
     """
     An endpoint that provides user profile menu items for the main navigation.
     Returns a list of menu items for user profile and notification settings, contribution, administration, logout and a
@@ -686,7 +641,6 @@ class ProfileView(APIView):
     badge (optional).
     """
 
-    permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
@@ -701,36 +655,43 @@ class ProfileView(APIView):
             examples={
                 "application/json": {
                     "data": [
-                        {
-                            "id": "Profile",
-                            "icon": "fa-circle-user",
-                            "label": "My Profile",
-                            "url": "/profile/",
-                            "image": None
-                        },
+                        MenuItem("My Profile", "/profile/", "fa-circle-user", id="Profile"),
+                        MenuItem("Set up my Profile", "/profile/edit/", "fa-pen", id="SetupProfile"),
+                        MenuItem("Edit my Profile", "/profile/edit/", "fa-gear", id="EditProfile"),
+                        MenuItem("Notification Preferences", "/profile/notifications/", "fa-envelope",
+                                 id="NotificationPreferences"),
                         {
                             "id": "ChangeLanguage",
                             "icon": "fa-language",
                             "label": "Change Language",
                             "url": None,
                             "image": None,
+                            "is_external": False,
+                            "badge": None,
                             "sub_items": [
                                 {
                                     "id": "ChangeLanguageItemDE",
                                     "icon": None,
                                     "label": "Deutsch",
                                     "url": "/language/de/",
-                                    "image": None
+                                    "image": None,
+                                    "is_external": False,
+                                    "badge": None,
                                 },
                                 {
                                     "id": "ChangeLanguageItemEN",
                                     "icon": None,
                                     "label": "English",
                                     "url": "/language/en/",
-                                    "image": None
-                                }
-                            ]
-                        }
+                                    "image": None,
+                                    "is_external": False,
+                                    "badge": None,
+                                },
+                            ],
+                        },
+                        MenuItem("Your Contribution", "/account/contribution/", "fa-hand-holding-hart",
+                                 id="Contribution"),
+                        MenuItem("Logout", "/logout/", "fa-right-from-bracket", id="Logout"),
                     ],
                     "version": COSINNUS_VERSION,
                     "timestamp": 1658414865.057476
@@ -741,66 +702,59 @@ class ProfileView(APIView):
     def get(self, request):
         profile_menu = []
 
-        # profile page
-        profile_menu_items = [
-            MenuItem(_('My Profile'), reverse('cosinnus:profile-detail'), 'fa-circle-user', id='Profile'),
-        ]
-        if settings.COSINNUS_V3_FRONTEND_ENABLED:
-            profile_menu_items.append(
-                MenuItem(_('Set up my Profile'), reverse('cosinnus:v3-frontend-setup-profile'), 'fa-pen',
-                         id='SetupProfile'),
-            )
-        profile_menu_items.extend([
-            MenuItem(_('Edit my Profile'), reverse('cosinnus:profile-edit'), 'fa-gear', id='EditProfile'),
-            MenuItem(_('Notification Preferences'), reverse('cosinnus:notifications'), 'fa-envelope',
-                     id='NotificationPreferences'),
-
-        ])
-        profile_menu.extend(profile_menu_items)
-
-        # language
-        if not settings.COSINNUS_LANGUAGE_SELECT_DISABLED:
-            language_item = MenuItem(_('Change Language'), None, 'fa-language', id='ChangeLanguage')
-            language_subitems = [
-                MenuItem(language, reverse('cosinnus:switch-language', kwargs={'language': code}),
-                         id=f'ChangeLanguageItem{code.upper()}')
-                for code, language in settings.LANGUAGES
+        if request.user.is_authenticated:
+            # profile page
+            profile_menu_items = [
+                MenuItem(_('My Profile'), reverse('cosinnus:profile-detail'), 'fa-circle-user', id='Profile'),
             ]
-            language_item['sub_items'] = language_subitems
-            profile_menu.append(language_item)
+            if settings.COSINNUS_V3_FRONTEND_ENABLED:
+                profile_menu_items.append(
+                    MenuItem(_('Set up my Profile'), reverse('cosinnus:v3-frontend-setup-profile'), 'fa-pen',
+                             id='SetupProfile'),
+                )
+            profile_menu_items.extend([
+                MenuItem(_('Edit my Profile'), reverse('cosinnus:profile-edit'), 'fa-gear', id='EditProfile'),
+                MenuItem(_('Notification Preferences'), reverse('cosinnus:notifications'), 'fa-envelope',
+                         id='NotificationPreferences'),
 
-        # payments
-        if settings.COSINNUS_PAYMENTS_ENABLED or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY \
-                and request.user.is_superuser:
-            from wechange_payments.models import Subscription
-            current_subscription = Subscription.get_current_for_user(request.user)
-            contribution = int(current_subscription.amount) if current_subscription else 0
-            contribution_badge = f'{contribution} €'
-            payments_item = MenuItem(_('Your Contribution'), reverse('wechange-payments:overview'),
-                                     'fa-hand-holding-hart', badge=contribution_badge, id='Contribution')
-            profile_menu.append(payments_item)
+            ])
+            profile_menu.extend(profile_menu_items)
 
-        # administration
-        if request.user.is_superuser or check_user_portal_manager(request.user):
-            administration_item = MenuItem(_('Administration'), reverse('cosinnus:administration'),
-                                           'fa-screwdriver-wrench', id='Administration')
-            profile_menu.append(administration_item)
+            # language
+            if not settings.COSINNUS_LANGUAGE_SELECT_DISABLED:
+                language_item = self.get_language_menu_item(request)
+                profile_menu.append(language_item)
 
-        # logout
-        logout_item = MenuItem(_('Logout'), reverse('logout'), 'fa-right-from-bracket', id='Logout')
-        profile_menu.append(logout_item)
+            # payments
+            if settings.COSINNUS_PAYMENTS_ENABLED or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY \
+                    and request.user.is_superuser:
+                from wechange_payments.models import Subscription
+                current_subscription = Subscription.get_current_for_user(request.user)
+                contribution = int(current_subscription.amount) if current_subscription else 0
+                contribution_badge = f'{contribution} €'
+                payments_item = MenuItem(_('Your Contribution'), reverse('wechange-payments:overview'),
+                                         'fa-hand-holding-hart', badge=contribution_badge, id='Contribution')
+                profile_menu.append(payments_item)
+
+            # administration
+            if request.user.is_superuser or check_user_portal_manager(request.user):
+                administration_item = MenuItem(_('Administration'), reverse('cosinnus:administration'),
+                                               'fa-screwdriver-wrench', id='Administration')
+                profile_menu.append(administration_item)
+
+            # logout
+            logout_item = MenuItem(_('Logout'), reverse('logout'), 'fa-right-from-bracket', id='Logout')
+            profile_menu.append(logout_item)
 
         return Response(profile_menu)
 
 
-class ServicesView(APIView):
+class MainNavigationView(LanguageMenuItemMixin, APIView):
     """
-    An endpoint that provides menu items for services.
-    Returns the following items for an authenticated user depending on the configuration:
-
-    -  Cloud if NextCloud is enabled
-    - Rocket.Chat if RocketChat is enabled
-    - Messages (postman) if Rocket.Chat is disabled
+    An endpoint that provides menu items for main navigation.
+    It contains pseudo menu items just to indicate the availability of a menu-item (e.g. for spaces and search) or
+    actual menu items (e.g. cloud, login). The content of the main navigation differs for authenticated and
+    non-authenticated users.
     """
 
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
@@ -817,24 +771,14 @@ class ServicesView(APIView):
             examples={
                 "application/json": {
                     "data": [
-                        {
-                            "id": "Cloud",
-                            "icon": "cloud",
-                            "label": "Cloud",
-                            "url": "https://cloud.localhost/",
-                            "is_external": True,
-                            "image": None,
-                            "badge": None
-                        },
-                        {
-                            "id": "Chat",
-                            "icon": "chat",
-                            "label": "Rocket.Chat",
-                            "url": "/messages/",
-                            "is_external": False,
-                            "image": None,
-                            "badge": None
-                        }
+                        MenuItem("Spaces", id="Spaces"),
+                        MenuItem("Search", "/search/", "fa-magnifying-glass", id="Search"),
+                        MenuItem("Bookmarks", icon="fa-bookmark", id="Bookmarks"),
+                        MenuItem("Cloud", "https://cloud.localhost/", "fa-cloud", is_external=True, id="Cloud"),
+                        MenuItem("Rocket.Chat", "/messages/", "fa-envelope", id="Chat"),
+                        MenuItem("Help", icon="fa-question", id="Help"),
+                        MenuItem("Alerts", icon="fa-bell", id="Alerts"),
+                        MenuItem("Profile", icon="fa-user", id="Profile"),
                     ],
                     "version": COSINNUS_VERSION,
                     "timestamp": 1658414865.057476
@@ -843,22 +787,62 @@ class ServicesView(APIView):
         )}
     )
     def get(self, request):
-        service_items = []
+        main_navigation_items = []
+
+        # spaces
+        main_navigation_items.append(MenuItem('Spaces', id='Spaces'))
+
+        # search
+        search_url_name = 'cosinnus:search' if request.user.is_authenticated else 'cosinnus:map'
+        main_navigation_items.append(MenuItem('Search', reverse(search_url_name), 'fa-magnifying-glass', id='Search'))
+
         if request.user.is_authenticated:
+            # bookmarks
+            main_navigation_items.append(MenuItem('Bookmarks', icon='fa-bookmark', id='Bookmarks'))
+
+            # cloud
             if settings.COSINNUS_CLOUD_ENABLED:
-                service_items.append(
-                    MenuItem('Cloud', settings.COSINNUS_CLOUD_NEXTCLOUD_URL, icon='cloud',
+                main_navigation_items.append(
+                    MenuItem('Cloud', settings.COSINNUS_CLOUD_NEXTCLOUD_URL, icon='fa-cloud',
                              is_external=settings.COSINNUS_CLOUD_OPEN_IN_NEW_TAB, id='Cloud')
                 )
 
+            # messages
             if 'cosinnus_message' not in settings.COSINNUS_DISABLED_COSINNUS_APPS:
                 if settings.COSINNUS_ROCKET_ENABLED:
-                    service_items.append(
-                        MenuItem('Rocket.Chat', reverse('cosinnus:message-global'), icon='chat',
+                    main_navigation_items.append(
+                        MenuItem('Rocket.Chat', reverse('cosinnus:message-global'), icon='fa-envelope',
                                  is_external=settings.COSINNUS_ROCKET_OPEN_IN_NEW_TAB, id='Chat')
                     )
                 else:
-                    service_items.append(
-                        MenuItem( 'Messages', reverse('postman:inbox'), icon='messages', id='Messages')
+                    main_navigation_items.append(
+                        MenuItem( 'Messages', reverse('postman:inbox'), icon='fa-envelope', id='Messages')
                     )
-        return Response(service_items)
+
+        # help
+        main_navigation_items.append(MenuItem('Help', icon='fa-question', id='Help'))
+
+        if request.user.is_authenticated:
+
+            # alerts
+            main_navigation_items.append(MenuItem('Alerts', icon='fa-bell', id='Alerts'))
+
+            # profile
+            main_navigation_items.append(MenuItem('Profile', icon='fa-user', id='Profile'))
+        else:
+
+            # language
+            if not settings.COSINNUS_LANGUAGE_SELECT_DISABLED:
+                language_item = self.get_language_menu_item(request, current_language_as_label=True)
+                main_navigation_items.append(language_item)
+
+            # login
+            main_navigation_items.append(MenuItem(_('Login'), reverse('login'), id='Login'))
+
+            # register
+            if settings.COSINNUS_USER_SIGNUP_ENABLED:
+                main_navigation_items.append(
+                    MenuItem(_('Register'), reverse('cosinnus:user-add'),  id='Register')
+                )
+
+        return Response(main_navigation_items)
