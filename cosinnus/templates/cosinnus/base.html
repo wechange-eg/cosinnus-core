@@ -214,14 +214,16 @@
             {% include 'cosinnus/feedback/report_modal.html' %}
         </div><!-- main container -->
 
-        {% block footer %}
-            {% include 'cosinnus/v2/footer.html' %}
-        {% endblock footer %}
+        <div class="x-v3-footer">
+            {% block footer %}
+                {% include 'cosinnus/v2/footer.html' %}
+            {% endblock footer %}
 
-    {% block extrafooter %}
-	    {% include 'cosinnus/extrafooter.html' %}
-        {% djajax generate %}
-    {% endblock extrafooter %}
+            {% block extrafooter %}
+                {% include 'cosinnus/extrafooter.html' %}
+                {% djajax generate %}
+            {% endblock extrafooter %}
+        </div>
 
-  </body>
+    </body>
 </html>

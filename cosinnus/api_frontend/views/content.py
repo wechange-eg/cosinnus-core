@@ -5,6 +5,7 @@ from urllib.parse import urlparse, urlunparse
 import requests
 from bs4 import BeautifulSoup
 from django.http import QueryDict, Http404
+from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
@@ -47,12 +48,19 @@ class MainContentView(APIView):
 
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     
+    # endpoint param
     url = None
+    
+    # set during processing
     group = None
+    has_leftnav = True  # can be toggled during HTML parsing to determine that this page has no leftnav
+    
+    # some return values
+    content_html = None
+    footer_html = None
     main_menu_label = None
     main_menu_icon = None
     main_menu_image = None
-    has_leftnav = True  # can be toggled during HTML parsing to determine that this page has no leftnav
     
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -103,22 +111,26 @@ class MainContentView(APIView):
         self._resolve_request_group(resolved_url, django_request)
         # parse the response's html
         html = self._clean_response_html(str(response.text))
+        self._parse_html_content(html)
         
         # TODO compress html? or do server-side request compression?
         
         data = {
             "resolved_url": resolved_url,
             "status_code": response.status_code,
-            "content_html": self._parse_content_html(html),
+            "content_html": self.content_html,
+            "footer_html": self.footer_html,
             "js_urls": self._parse_js_urls(html),
             "css_urls": self._parse_css_urls(html),
             "scripts": self._parse_inline_tag_contents(html, 'script'),
             "meta": self._parse_tags(html, 'meta'),
             "styles": self._parse_inline_tag_contents(html, 'style'),
             "sub_navigation": self._parse_leftnav_menu(html),  # can be None if no left navigation should be shown
-            "main_menu_label": self.main_menu_label,  # either <name of group>, "personal space", or "community"
-            "main_menu_icon": self.main_menu_icon,  # exclusive with `main_menu_image`, only one can be non-None!
-            "main_menu_image": self.main_menu_image,  # exclusive with `main_menu_icon`, only one can be non-None!
+            "main_menu": {
+                "label": self.main_menu_label,  # either <name of group>, "personal space", or "community"
+                "icon": self.main_menu_icon,  # exclusive with `main_menu_image`, only one can be non-None!
+                "image": self.main_menu_image,  # exclusive with `main_menu_icon`, only one can be non-None!
+            },
             "announcements": self._get_announcements(),
         }
         
@@ -197,15 +209,15 @@ class MainContentView(APIView):
             self.main_menu_icon = 'fa-sitemap'  # TODO: icon for Community space?
         else:
             self.main_menu_label = _('Personal')
-            self.main_menu_icon = 'fa-user'  # TODO: icon for Personal space?
+            self.main_menu_icon = 'fa-user'  # TODO: icon for Personal space? use user avatar if they have one instead?
         
-    def _parse_content_html(self, html):
-        """ Parses only the content frame of the full html that can be put into any other part of the site.
-            May do some reformatting for full-page views to transform the body tag into a div. """
-        # TODO: resolve view to check view parameters if this is a full content or inner content view!
+    def _parse_html_content(self, html):
+        """ Parses the content frame of the full html that can be put into any other part of the site.
+            May do some reformatting for full-page views to transform the body tag into a div.
+            Also parses the footer html content. """
         soup = BeautifulSoup(html, 'html.parser')
         # remove all tags we never want to see in the content, like inline scripts and styles
-        for bad_tag_literal in ['nav', 'scripst', 'style']:
+        for bad_tag_literal in ['nav', 'script', 'style']:
             for bad_tag in soup.find_all(bad_tag_literal):
                 bad_tag.decompose()
         # try to extract our page's inner container, below the breadcrumb
@@ -218,7 +230,10 @@ class MainContentView(APIView):
             content = soup.find('body')
             content = content.decode_contents()
             self.has_leftnav = False
-        return str(content or '').strip()
+        self.content_html = str(content or '').strip()
+        footer = soup.find('div', class_='x-v3-footer')
+        if footer:
+            self.footer_html = str(footer.decode_contents()).strip()
     
     def _extract_fa_icon(self, tag):
         """ Extracts the actual font-awesome icon class name from the first i tag within the given tag tree """
@@ -255,6 +270,7 @@ class MainContentView(APIView):
                 leftnav_link.text.strip(),
                 href,
                 icon=self._extract_fa_icon(leftnav_link),  # TODO. filter/map-convert these icons to frontend icons?
+                id='Sidebar-' + get_random_string(8),
             )
             # select the proper subnav for this menu to go to, by type of URL
             target_subnav = middle
