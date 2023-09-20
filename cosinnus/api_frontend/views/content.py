@@ -44,6 +44,33 @@ V3_CONTENT_BOTTOM_SIDEBAR_URL_SUFFIXES = [
 class MainContentView(APIView):
     """
     An endpoint that returns HTML content for any legacy view on the portal.
+    
+    Return values:
+      * `resolved_url`: the resolved URL after following all redirects the queried `url` parameter might have caused, and the actual URL from which the content HTML is delivered
+      * `status_code`: (int), HTTP status code of the response for the request sent to the `resolved_url`
+      * `content_html`: html from the `<div class="container">` frame to be inserted
+      * `footer_html`: html from the footer, to be inserted after the content html
+      * `head`: object with sub-entries for all content belonging in the head:
+        * `js_urls`: list of JS file URLs to be loaded in, basically all `<script src="..."` from the `<head>` tag of that page
+        * `css_urls`: list of CSS file URLs to be loaded in, basically all stylesheets from the `<head>` tag of that page
+        * `meta`: add all meta tags from the head
+        * `styles`: a list of strings of literal inline styles to be inserted before the HTML content is inserted
+      * `scripts`: a list of strings of literal inline JS script code to be executed before (after?) the HTML content is inserted
+      * `sub_navigation`: sidebar content, includes 3 lists: `"sub_navigation" {"top": [...], "middle": [...], "bottom": [...]}`
+        * middle is list of the apps that are enabled for the current space
+        * each list contains the usual menu items
+          * title (will be in current language)
+          * url link
+          * icon
+          * external (bool flag for `target="_blank"`)
+        * `sub_navigation` can be `null`, in that case the entire left sidebar is hidden
+      * `main_menu`: object with the following sub-entries, signifying how the main dropdown button looks like:
+        * `label`: title of the main menu dropdown
+        * `icon`: icon of the main menu dropdown, exclusive vs. `main_menu_image`
+        * `image`: image of the main menu dropdown, exclusive vs. `main_menu_icon`
+      * `announcements`: list of objects that contain data for the announcement banner, if one is active
+        * `[]` if None active, else a list `[{"text": "'"<str> Announcement text", "level": "<str> level-code"}, ...]`
+        * `level` can take the following values: "debug", "info", "success", "warning", "error". these levels are usually reflected in the color of the announcement background
     """
 
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
@@ -80,7 +107,65 @@ class MainContentView(APIView):
             examples={
                 "application/json": {
                     "data": {
-                        "TODO": "DONT FORGET",
+                        "resolved_url": "/project/a-mein-bbb-projekt/?force_payment_popup=1",
+                        "status_code": 200,
+                        "content_html": "<div class=\"x-v3-container container\"> <div class=\"row app-main\"> ... </div></div>",
+                        "footer_html": "<div class=\"footer\"> ... </div>",
+                        "js_urls": [
+                            "/static/js/vendor/less.min.js",
+                            "/static/js/vendor/jquery-2.1.0.min.js",
+                        ],
+                        "css_urls": [
+                            "/static/css/select2.css",
+                            "/static/css/extra.css",
+                        ],
+                        "scripts": "var cosinnus_base_url = \"http://localhost:8000/\"; var cosinnus_active_group = \"a-mein-bbb-projekt\";  ...",
+                        "meta": "<meta charset=\"utf-8\"/><meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\"/><meta content=\"width=device-width, initial-scale=1\" name=\"viewport\"/> ...",
+                        "styles": ".my-contribution-badge {min-width: 50px;border-radius: 20px;color: #FFF;font-size: 12px;padding: 2px 6px; margin-left: 5px;}.my-contribution-badge.red {background-color: rgb(245, 85, 0);} ...",
+                        "sub_navigation": {
+                            "top": [
+                                {
+                                    "id": "Sidebar-pws2dgLA",
+                                    "icon": "fa-lightbulb-o",
+                                    "label": "Microsite",
+                                    "url": "/project/a-mein-bbb-projekt/microsite/",
+                                    "is_external": FONT_AWESOME_CLASS_FILTER,
+                                    "image": None,
+                                    "badge": None
+                                }
+                            ],
+                            "middle": [
+                                {
+                                    "id": "Sidebar-FTZD61ZZ",
+                                    "icon": "fa-th-large",
+                                    "label": "Projektdashboard",
+                                    "url": "/project/a-mein-bbb-projekt/?browse=true",
+                                    "is_external": False,
+                                    "image": None,
+                                    "badge": None
+                                },
+                            ],
+                            "bottom": [
+                                {
+                                    "id": "Sidebar-6vcO7aYp",
+                                    "icon": "fa-cogs",
+                                    "label": "Einstellungen",
+                                    "url": "/project/a-mein-bbb-projekt/edit/",
+                                    "is_external": False,
+                                    "image": None,
+                                    "badge": None
+                                },
+                            ]
+                        },
+                        "main_menu": {
+                            "label": "A Mein BBB Projekt",
+                            "icon": None,
+                            "image": "/media/cosinnus_portals/portal_saschas_local_dev/avatars/group/xj1VxzF3viA4.jpg"
+                        },
+                        "announcements": [{
+                            "text": "This is an example announcement",
+                            "level": "warning"
+                        }],
                     },
                     "version": COSINNUS_VERSION,
                     "timestamp": 1658414865.057476
