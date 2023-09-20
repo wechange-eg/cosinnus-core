@@ -176,14 +176,7 @@ class BookmarksViewTest(APITestCase):
     def test_bookmarks_anonymous(self):
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(
-            response.data,
-            {
-                'groups': [],
-                'users': [],
-                'content': [],
-            }
-        )
+        self.assertEqual(response.data, {})
 
 
 class UnreadMessagesViewTest(APITestCase):

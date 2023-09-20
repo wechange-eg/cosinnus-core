@@ -229,8 +229,8 @@ class BookmarksView(APIView):
         )}
     )
     def get(self, request):
+        bookmarks = {}
         group_items = []
-        user_items = []
         content_items = []
         if request.user.is_authenticated:
             liked_users = request.user.cosinnus_profile.get_user_starred_users()
@@ -241,11 +241,12 @@ class BookmarksView(APIView):
                     group_items.append(DashboardItem(liked_object).as_menu_item())
                 else:
                     content_items.append(DashboardItem(liked_object).as_menu_item())
-        bookmarks = {
-            'groups': group_items,
-            'users': user_items,
-            'content': content_items,
-        }
+            if group_items or user_items or content_items:
+                bookmarks = {
+                    'groups': group_items,
+                    'users': user_items,
+                    'content': content_items,
+                }
         return Response(bookmarks)
 
 
