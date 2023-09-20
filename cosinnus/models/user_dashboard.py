@@ -122,12 +122,14 @@ class MenuItem(dict):
         domain = get_domain_for_portal(CosinnusPortal.get_current())
         if not is_external and url and url.startswith(domain):
             url = url.replace(domain, '')
+        if image and image.startswith(domain):
+            image = image.replace(domain, '')
+        if image and icon:
+            icon=None
         self['id'] = id
         self['label'] = label
         self['url'] = url
         self['icon'] = icon
         self['is_external'] = is_external
-        if image and image.startswith(domain):
-            image = image.replace(domain, '')
         self['image'] = image
         self['badge'] = badge
