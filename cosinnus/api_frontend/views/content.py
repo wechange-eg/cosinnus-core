@@ -20,6 +20,7 @@ from cosinnus.conf import settings
 from cosinnus.core.decorators.views import get_group_for_request
 from cosinnus.models import CosinnusPortal
 from cosinnus.models.user_dashboard import MenuItem, FONT_AWESOME_CLASS_FILTER
+from cosinnus.utils.http import remove_url_param
 
 # url prefixes that make the requested url be considered to belong in the "community" space
 V3_CONTENT_COMMUNITY_URL_PREFIXES = [
@@ -81,6 +82,7 @@ class MainContentView(APIView):
     )
     def get(self, request):
         self.url = request.query_params.get('url', '').strip()
+        self.url = remove_url_param(self.url, 'v', '3')
         django_request = copy(request._request)
         if not self.url:
             raise ValidationError('Missing required parameter: url')
@@ -137,24 +139,6 @@ class MainContentView(APIView):
         session = requests.Session()
         session.headers.update(dict(request.headers))
         session.cookies.update(request.COOKIES)
-        
-        # TODO refactor this v=3 param deletion!
-        parsed = urlparse(url)
-        query = parsed.query
-        dic = QueryDict(query)
-        dic._mutable = True
-        if dic.get('v', None) == '3':
-            del dic['v']
-            query = dic.urlencode()
-        url = urlunparse(
-            (parsed.scheme,
-            parsed.netloc,
-            parsed.path,
-            parsed.params,
-            query,
-            parsed.fragment)
-        )
-        
         response = session.get(url)
         for history_response in response.history:
             response.cookies.update(history_response.cookies)

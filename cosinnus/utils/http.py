@@ -5,10 +5,12 @@ from builtins import object
 import json
 import csv
 import codecs
+from urllib.parse import urlparse, urlunparse
+
 import six
 
 from django.core.serializers.json import DjangoJSONEncoder
-from django.http import HttpResponse
+from django.http import HttpResponse, QueryDict
 
 from cosinnus.conf import settings
 from django.utils.timezone import now
@@ -150,3 +152,23 @@ def make_xlsx_response(rows, row_names=[], file_name=None):
     workbook.close()
     return response
 
+
+def remove_url_param(url, param_key, param_value=None):
+    """ Given a full URL, this returns the same url without the given GET parameter, if present.
+        If a `param_value` is given, will only remove the param if `param_value` matches its value. """
+    parsed = urlparse(url)
+    query = parsed.query
+    dic = QueryDict(query)
+    dic._mutable = True
+    if dic.get(param_key, None) and (not param_value or dic.get(param_key, None) == '3'):
+        del dic[param_key]
+        query = dic.urlencode()
+    url = urlunparse((
+        parsed.scheme,
+        parsed.netloc,
+        parsed.path,
+        parsed.params,
+        query,
+        parsed.fragment
+    ))
+    return url
