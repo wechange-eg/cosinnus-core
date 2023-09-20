@@ -22,11 +22,11 @@
 	        <meta name="title" content="{{ page_title }}">
 	        <meta name="description" content="{{ page_description }}">
 
-	        <meta property="og:url"           content="{% block og_url %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ request.path }}{% endblock og_url %}" />
-	        <meta property="og:title"         content="{% block og_title %}{{ page_title }}{% endblock og_title %}" />
-	        <meta property="og:image"         content="{% block og_image %}{{ COSINNUS_CURRENT_PORTAL.get_logo_image_url }}{% endblock og_image %}" />
-	        <meta property="og:site_name"     content="{% block og_site_name %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% else %}{{ COSINNUS_CURRENT_PORTAL.name }}{% endif %}{% endblock og_site_name %}" />
-	        <meta property="og:description"   content="{{ page_description }}" />
+	        <meta name="lol" property="og:url"           content="{% block og_url %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ request.path }}{% endblock og_url %}">
+	        <meta property="og:title"         content="{% block og_title %}{{ page_title }}{% endblock og_title %}">
+	        <meta property="og:image"         content="{% block og_image %}{{ COSINNUS_CURRENT_PORTAL.get_logo_image_url }}{% endblock og_image %}">
+	        <meta property="og:site_name"     content="{% block og_site_name %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% else %}{{ COSINNUS_CURRENT_PORTAL.name }}{% endif %}{% endblock og_site_name %}">
+	        <meta property="og:description"   content="{{ page_description }}">
         {% endblock og_meta_attributes %}
 
         <!-- TODO: override main title that can be extended from (in main app!) -->
@@ -214,14 +214,16 @@
             {% include 'cosinnus/feedback/report_modal.html' %}
         </div><!-- main container -->
 
-        {% block footer %}
-            {% include 'cosinnus/v2/footer.html' %}
-        {% endblock footer %}
+        <div class="x-v3-footer">
+            {% block footer %}
+                {% include 'cosinnus/v2/footer.html' %}
+            {% endblock footer %}
 
-    {% block extrafooter %}
-	    {% include 'cosinnus/extrafooter.html' %}
-        {% djajax generate %}
-    {% endblock extrafooter %}
+            {% block extrafooter %}
+                {% include 'cosinnus/extrafooter.html' %}
+                {% djajax generate %}
+            {% endblock extrafooter %}
+        </div>
 
-  </body>
+    </body>
 </html>
