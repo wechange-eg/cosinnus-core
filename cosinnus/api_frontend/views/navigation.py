@@ -794,8 +794,11 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
         main_navigation_items.append(MenuItem('Spaces', id='Spaces'))
 
         # search
-        search_url_name = 'cosinnus:search' if request.user.is_authenticated else 'cosinnus:map'
-        main_navigation_items.append(MenuItem('Search', reverse(search_url_name), 'fa-magnifying-glass', id='Search'))
+        if request.user.is_authenticated:
+            search_item = MenuItem('Search', reverse('cosinnus:search'), 'fa-magnifying-glass', id='Search')
+        else:
+            search_item = MenuItem('Search', reverse('cosinnus:map'), 'fa-magnifying-glass', id='MapSearch')
+        main_navigation_items.append(search_item)
 
         if request.user.is_authenticated:
             # bookmarks

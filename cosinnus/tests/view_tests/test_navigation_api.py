@@ -493,7 +493,7 @@ class MainNavigationViewTest(APITestCase):
             response.data,
             [
                 MenuItem('Spaces', id='Spaces'),
-                MenuItem('Search', '/map/', 'fa-magnifying-glass', id='Search'),
+                MenuItem('Search', '/map/', 'fa-magnifying-glass', id='MapSearch'),
                 MenuItem('Help', icon='fa-question', id='Help'),
                 expected_language_menu_item,
                 MenuItem('Login', '/login/', id='Login'),
