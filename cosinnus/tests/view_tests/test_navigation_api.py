@@ -379,7 +379,21 @@ class HelpViewTest(APITestCase):
         )
 
 
-class ProfileViewTest(APITestCase):
+class LanguageMenuTestMixin:
+
+    def expected_language_menu_item(self, expected_label='Change Language', expected_icon='fa-language'):
+        languages = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES, settings.LANGUAGES)
+        expected_language_sub_items = []
+        for code, language in languages:
+            language_sub_item = MenuItem(language, f'/language/{code}/', id=f'ChangeLanguageItem{code.upper()}')
+            language_sub_item['selected'] = code == 'en'
+            expected_language_sub_items.append(language_sub_item)
+        expected_language_menu_item = MenuItem(expected_label, icon=expected_icon, id='ChangeLanguage')
+        expected_language_menu_item['sub_items'] = expected_language_sub_items
+        return expected_language_menu_item
+
+
+class ProfileViewTest(LanguageMenuTestMixin, APITestCase):
     
     @classmethod
     def setUpClass(cls):
@@ -392,13 +406,6 @@ class ProfileViewTest(APITestCase):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
-        languages = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES, settings.LANGUAGES)
-        expected_language_items = [
-            MenuItem(language, f'/language/{code}/', id=f'ChangeLanguageItem{code.upper()}')
-            for code, language in languages
-        ]
-        expected_language_menu_item = MenuItem('Change Language', None, 'fa-language', id='ChangeLanguage')
-        expected_language_menu_item['sub_items'] = expected_language_items
         self.assertListEqual(
             response.data,
             [
@@ -406,7 +413,7 @@ class ProfileViewTest(APITestCase):
                 MenuItem('Set up my Profile', '/setup/profile/', 'fa-pen', id='SetupProfile'),
                 MenuItem('Edit my Profile', '/profile/edit/', 'fa-gear', id='EditProfile'),
                 MenuItem('Notification Preferences', '/profile/notifications/', 'fa-envelope', id='NotificationPreferences'),
-                expected_language_menu_item,
+                self.expected_language_menu_item(),
                 MenuItem('Logout', '/logout/', 'fa-right-from-bracket', id='Logout')
             ]
         )
@@ -443,7 +450,7 @@ class ProfileViewTest(APITestCase):
         self.assertListEqual(response.data, [])
 
 
-class MainNavigationViewTest(APITestCase):
+class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
     """
     Note: Were not able to test with override_settings(COSINNUS_ROCKET_ENABLED=True). The util function reload_urlconf
     seems not to work as expected there. Will need to look into it in more detail.
@@ -491,13 +498,6 @@ class MainNavigationViewTest(APITestCase):
     def test_main_navigation_anonymous(self):
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
-        languages = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES, settings.LANGUAGES)
-        expected_language_sub_items = [
-            MenuItem(language, f'/language/{code}/', id=f'ChangeLanguageItem{code.upper()}')
-            for code, language in languages
-        ]
-        expected_language_menu_item = MenuItem('EN', id='ChangeLanguage')
-        expected_language_menu_item['sub_items'] = expected_language_sub_items
         self.assertEqual(
             response.data,
             {
@@ -511,7 +511,7 @@ class MainNavigationViewTest(APITestCase):
                 'services': [],
                 'right': [
                     MenuItem('Help', icon='fa-question', id='Help'),
-                    expected_language_menu_item,
+                    self.expected_language_menu_item(expected_label='EN', expected_icon=None),
                     MenuItem('Login', '/login/', id='Login'),
                     MenuItem('Register', '/signup/', id='Register'),
                 ]
