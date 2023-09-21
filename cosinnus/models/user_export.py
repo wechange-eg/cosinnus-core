@@ -1,4 +1,6 @@
 import logging
+import pickle
+import zlib
 
 from threading import Thread
 
@@ -60,10 +62,20 @@ class CosinnusUserExportProcessorBase(object):
         return cache.get(self.EXPORT_STATE_CACHE_KEY % CosinnusPortal.get_current().id)
 
     def set_current_export_csv(self, csv):
-        cache.set(self.EXPORT_CSV_CACHE_KEY % CosinnusPortal.get_current().id, csv, self.EXPORT_CACHE_TIMEOUT)
+        """
+        Compress and store the export CSV data in the cache.
+        Compression is needed as the data size might exceed the memcache limit (1MB default).
+        """
+        picked_csv = pickle.dumps(csv)
+        compressed_csv = zlib.compress(picked_csv, level=9)
+        cache.set(self.EXPORT_CSV_CACHE_KEY % CosinnusPortal.get_current().id, compressed_csv, self.EXPORT_CACHE_TIMEOUT)
 
     def get_current_export_csv(self):
-        return cache.get(self.EXPORT_CSV_CACHE_KEY % CosinnusPortal.get_current().id)
+        """ Get and decompress the exporeted CSV data. """
+        compressed_csv = cache.get(self.EXPORT_CSV_CACHE_KEY % CosinnusPortal.get_current().id)
+        pickled_csv = zlib.decompress(compressed_csv)
+        csv = pickle.loads(pickled_csv)
+        return csv
 
     def set_current_export_timestamp(self, timestamp):
         cache.set(self.EXPORT_TIMESTAMP_CACHE_KEY % CosinnusPortal.get_current().id, timestamp, self.EXPORT_CACHE_TIMEOUT)
