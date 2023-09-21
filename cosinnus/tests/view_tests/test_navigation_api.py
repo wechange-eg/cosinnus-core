@@ -466,6 +466,7 @@ class MainNavigationViewTest(APITestCase):
         self.assertListEqual(
             response.data,
             [
+                MenuItem('Home', settings.COSINNUS_V3_MENU_HOME_LINK, image='/static/img/logo-icon.png', id='Home'),
                 MenuItem('Spaces', id='Spaces'),
                 MenuItem('Search', '/search/', 'fa-magnifying-glass', id='Search'),
                 MenuItem('Bookmarks', icon='fa-bookmark', id='Bookmarks'),
@@ -492,6 +493,7 @@ class MainNavigationViewTest(APITestCase):
         self.assertListEqual(
             response.data,
             [
+                MenuItem('Home', settings.COSINNUS_V3_MENU_HOME_LINK, image='/static/img/logo-icon.png', id='Home'),
                 MenuItem('Spaces', id='Spaces'),
                 MenuItem('Search', '/map/', 'fa-magnifying-glass', id='MapSearch'),
                 MenuItem('Help', icon='fa-question', id='Help'),

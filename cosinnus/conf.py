@@ -899,6 +899,9 @@ class CosinnusConf(AppConf):
     # Languages supported by the v3 frontend. The portal language selection from LANGUAGES is restricted to these.
     V3_FRONTEND_SUPPORTED_LANGUAGES = ['en', 'de']
 
+    # Link of the brand / home button in the main navigation. If set to None personal-dashboard is used.
+    V3_MENU_HOME_LINK = '/cms/?noredir=1'
+
     # Forum space label in the v3 main navigation. Set to None to exclude forum from the community space.
     V3_MENU_SPACES_FORUM_LABEL = _('Forum')
 

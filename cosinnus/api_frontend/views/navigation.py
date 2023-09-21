@@ -790,6 +790,18 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
     def get(self, request):
         main_navigation_items = []
 
+        # home
+        current_portal = CosinnusPortal.get_current()
+        home_image = current_portal.get_logo_image_url()
+        if settings.COSINNUS_V3_MENU_HOME_LINK:
+            home_item = MenuItem(_('Home'), settings.COSINNUS_V3_MENU_HOME_LINK, icon='fa-home', image=home_image,
+                                 id='Home')
+        else:
+            home_item = MenuItem(_('Dashboard'), reverse('cosinnus:user-dashboard'), icon='fa-home', image=home_image,
+                                 id='HomeDashboard')
+        main_navigation_items.append(home_item)
+
+
         # spaces
         main_navigation_items.append(MenuItem('Spaces', id='Spaces'))
 
