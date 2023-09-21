@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-13 16:32+0200\n"
+"POT-Creation-Date: 2023-09-21 14:54+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -197,9 +197,19 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
+msgid "Community"
+msgstr ""
+
+#, fuzzy
+msgid "Personal"
+msgstr "Project Type"
+
 #, fuzzy
 msgid "Personal Dashboard"
 msgstr "Project Type"
+
+msgid "Change Language"
+msgstr ""
 
 msgid "My Profile"
 msgstr ""
@@ -215,9 +225,6 @@ msgstr "Edit Project"
 msgid "Notification Preferences"
 msgstr ""
 
-msgid "Change Language"
-msgstr ""
-
 msgid "Your Contribution"
 msgstr ""
 
@@ -226,6 +233,40 @@ msgid "Administration"
 msgstr "There are no groups."
 
 msgid "Logout"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Bookmarks"
+msgstr ""
+
+msgid "Cloud"
+msgstr ""
+
+msgid "Messages"
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
+msgid "Alerts"
+msgstr ""
+
+#, fuzzy
+msgid "Profile"
+msgstr "Edit Project"
+
+msgid "Login"
+msgstr ""
+
+msgid "Register"
 msgstr ""
 
 #, python-format
@@ -1053,7 +1094,7 @@ msgid "To join the conference in the browser visit %(url)s."
 msgstr ""
 
 #, python-format
-msgid "To join the conference by phone dial \"%(number)s\" and enter the following PIN \"%(pin)s#\". Use the 0-key on your phone to toggle mute on/off."
+msgid "To join the conference by phone dial \"%(number)s\" and enter the following PIN: \"%(pin)s#\". Use the 0-key on your phone to toggle mute on/off."
 msgstr ""
 
 msgid "Invitation copied to clipboard."
@@ -2276,9 +2317,6 @@ msgstr ""
 msgid "Bottom content (gray background)"
 msgstr ""
 
-msgid "Dashboard"
-msgstr ""
-
 msgid "Microsite"
 msgstr ""
 
@@ -2787,9 +2825,6 @@ msgstr "There are no groups."
 msgid "send login token to all inactive users"
 msgstr ""
 
-msgid "Search"
-msgstr ""
-
 msgid "Search for email, firstname or lastname"
 msgstr ""
 
@@ -2992,9 +3027,6 @@ msgid "Error embedding a video"
 msgstr ""
 
 msgid "Help and Assistance for this page"
-msgstr ""
-
-msgid "Help"
 msgstr ""
 
 msgid "Help for this page"
@@ -3299,13 +3331,13 @@ msgstr ""
 msgid "optional"
 msgstr ""
 
+msgid "Application submitted"
+msgstr ""
+
 msgid "First Choice"
 msgstr ""
 
 msgid "Second Choice"
-msgstr ""
-
-msgid "Application submitted"
 msgstr ""
 
 msgid "Motivation for applying"
@@ -3952,9 +3984,6 @@ msgid "Activate Cloud"
 msgstr "Create Project"
 
 msgid "Members-Map"
-msgstr ""
-
-msgid "Cloud"
 msgstr ""
 
 msgid "File"
@@ -4965,9 +4994,6 @@ msgstr ""
 msgid "Register and join!"
 msgstr ""
 
-msgid "Register"
-msgstr ""
-
 msgid "Log in"
 msgstr ""
 
@@ -5735,9 +5761,6 @@ msgstr ""
 msgid "Search..."
 msgstr ""
 
-msgid "Messages"
-msgstr ""
-
 msgid "My Stream"
 msgstr "Activities"
 
@@ -5858,9 +5881,6 @@ msgid "Reset password"
 msgstr ""
 
 msgid "Your password has been set.  You may go ahead and log in now."
-msgstr ""
-
-msgid "Login"
 msgstr ""
 
 msgid "Enter new password"
@@ -6880,10 +6900,6 @@ msgstr ""
 msgid "User profile: %(username)s"
 msgstr ""
 
-#, fuzzy
-msgid "Profile"
-msgstr "Edit Project"
-
 msgid "Cooperation requests"
 msgstr ""
 
@@ -7602,9 +7618,6 @@ msgstr ""
 #, fuzzy
 msgid "Create content"
 msgstr "Create Project"
-
-msgid "Home"
-msgstr ""
 
 msgid "Rocket.Chat"
 msgstr ""

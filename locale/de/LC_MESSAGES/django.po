@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-13 16:32+0200\n"
+"POT-Creation-Date: 2023-09-21 14:54+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -193,8 +193,17 @@ msgstr "Rocket: Reparieren/Erstellen von fehlenden Rocketchat-Konten von Benutze
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Fehlende RocketChat-Raummitgliedschaften für Benutzer beheben"
 
+msgid "Community"
+msgstr "Community"
+
+msgid "Personal"
+msgstr "Persönlich"
+
 msgid "Personal Dashboard"
 msgstr "Persönliches Dashboard"
+
+msgid "Change Language"
+msgstr "Sprache ändern"
 
 msgid "My Profile"
 msgstr "Mein Profil"
@@ -208,9 +217,6 @@ msgstr "Profil-Einstellungen"
 msgid "Notification Preferences"
 msgstr "Benachrichtigungseinstellungen"
 
-msgid "Change Language"
-msgstr "Sprache ändern"
-
 msgid "Your Contribution"
 msgstr "Dein Beitrag"
 
@@ -219,6 +225,39 @@ msgstr "Administration"
 
 msgid "Logout"
 msgstr "Abmelden"
+
+msgid "Home"
+msgstr "Startseite"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Search"
+msgstr "Suche"
+
+msgid "Bookmarks"
+msgstr "Merkliste"
+
+msgid "Cloud"
+msgstr "Cloud"
+
+msgid "Messages"
+msgstr "Nachrichten"
+
+msgid "Help"
+msgstr "Hilfe"
+
+msgid "Alerts"
+msgstr "Meldungen"
+
+msgid "Profile"
+msgstr "Mein Profil"
+
+msgid "Login"
+msgstr "Anmelden"
+
+msgid "Register"
+msgstr "Registrieren"
 
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
@@ -2183,9 +2222,6 @@ msgstr "Site Widgets"
 msgid "Bottom content (gray background)"
 msgstr "Bottom content (gray background)"
 
-msgid "Dashboard"
-msgstr "Dashboard"
-
 msgid "Microsite"
 msgstr "Microsite"
 
@@ -2666,9 +2702,6 @@ msgstr "Benutzerverwaltung"
 msgid "send login token to all inactive users"
 msgstr "Login-Token an alle uneingeladenen Benutzer verschicken"
 
-msgid "Search"
-msgstr "Suche"
-
 msgid "Search for email, firstname or lastname"
 msgstr "Suche nach E-Mail, Vorname oder Nachname"
 
@@ -2873,9 +2906,6 @@ msgstr "Fehler beim Einbetten eines Videos"
 
 msgid "Help and Assistance for this page"
 msgstr "Hilfe und Erklärungen zu dieser Seite"
-
-msgid "Help"
-msgstr "Hilfe"
 
 msgid "Help for this page"
 msgstr "Hilfe zu dieser Seite"
@@ -3172,14 +3202,14 @@ msgstr "Ablehnungsgrund"
 msgid "optional"
 msgstr "optional"
 
+msgid "Application submitted"
+msgstr "Teilnahmeantrag eingereicht"
+
 msgid "First Choice"
 msgstr "Erste Wahl"
 
 msgid "Second Choice"
 msgstr "Zweite Wahl"
-
-msgid "Application submitted"
-msgstr "Teilnahmeantrag eingereicht"
 
 msgid "Motivation for applying"
 msgstr "Motivation für die Teilnahme"
@@ -3798,9 +3828,6 @@ msgstr "Cloud aktivieren"
 #
 msgid "Members-Map"
 msgstr "Mitglieder-Karte"
-
-msgid "Cloud"
-msgstr "Cloud"
 
 msgid "File"
 msgstr "Datei"
@@ -4778,9 +4805,6 @@ msgstr "Aufruf zum Handeln"
 msgid "Register and join!"
 msgstr "Registrieren und beitreten!"
 
-msgid "Register"
-msgstr "Registrieren"
-
 msgid "Log in"
 msgstr "Einloggen"
 
@@ -5686,9 +5710,6 @@ msgstr "Alle Organisationen"
 msgid "Search..."
 msgstr "Suchen..."
 
-msgid "Messages"
-msgstr "Nachrichten"
-
 msgid "My Stream"
 msgstr "Aktivitäten"
 
@@ -5810,9 +5831,6 @@ msgstr "Passwort zurücksetzen"
 
 msgid "Your password has been set.  You may go ahead and log in now."
 msgstr "Ihr Passwort wurde geändert. Sie können sich jetzt damit einloggen."
-
-msgid "Login"
-msgstr "Anmelden"
 
 msgid "Enter new password"
 msgstr "Neues Passwort eingeben"
@@ -6791,9 +6809,6 @@ msgstr "Benutzer_innen-Konto löschen"
 msgid "User profile: %(username)s"
 msgstr "Benutzer_innen-Profil: %(username)s"
 
-msgid "Profile"
-msgstr "Mein Profil"
-
 msgid "Cooperation requests"
 msgstr "Kooperationsanfragen"
 
@@ -7498,9 +7513,6 @@ msgstr "Schnellsuche"
 #
 msgid "Create content"
 msgstr "Inhalt erstellen"
-
-msgid "Home"
-msgstr "Startseite"
 
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
