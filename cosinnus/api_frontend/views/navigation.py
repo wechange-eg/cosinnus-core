@@ -771,16 +771,25 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
             description='WIP: Response info missing. Short example included',
             examples={
                 "application/json": {
-                    "data": [
-                        MenuItem("Spaces", id="Spaces"),
-                        MenuItem("Search", "/search/", "fa-magnifying-glass", id="Search"),
-                        MenuItem("Bookmarks", icon="fa-bookmark", id="Bookmarks"),
-                        MenuItem("Cloud", "https://cloud.localhost/", "fa-cloud", is_external=True, id="Cloud"),
-                        MenuItem("Rocket.Chat", "/messages/", "fa-envelope", id="Chat"),
-                        MenuItem("Help", icon="fa-question", id="Help"),
-                        MenuItem("Alerts", icon="fa-bell", id="Alerts"),
-                        MenuItem("Profile", icon="fa-user", id="Profile"),
-                    ],
+                    "data": {
+                        'left': [
+                            MenuItem("Home", "/cms/?noredir=1", image='/static/img/logo-icon.png', id='Home'),
+                            MenuItem("Spaces", id="Spaces"),
+                        ],
+                        'middle': [
+                            MenuItem("Search", "/search/", "fa-magnifying-glass", id="Search"),
+                            MenuItem("Bookmarks", icon="fa-bookmark", id="Bookmarks"),
+                        ],
+                        'services': [
+                            MenuItem("Cloud", "https://cloud.localhost/", "fa-cloud", is_external=True, id="Cloud"),
+                            MenuItem("Rocket.Chat", "/messages/", "fa-envelope", id="Chat"),
+                        ],
+                        'right': [
+                            MenuItem("Help", icon="fa-question", id="Help"),
+                            MenuItem("Alerts", icon="fa-bell", id="Alerts"),
+                            MenuItem("Profile", icon="fa-user", id="Profile"),
+                        ]
+                    },
                     "version": COSINNUS_VERSION,
                     "timestamp": 1658414865.057476
                 }
@@ -788,7 +797,15 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
         )}
     )
     def get(self, request):
-        main_navigation_items = []
+        main_navigation_items = {
+            'left': None,
+            'middle': None,
+            'services': None,
+            'right': None,
+        }
+
+        # left part
+        left_navigation_items = []
 
         # home
         current_portal = CosinnusPortal.get_current()
@@ -799,66 +816,82 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
         else:
             home_item = MenuItem(_('Dashboard'), reverse('cosinnus:user-dashboard'), icon='fa-home', image=home_image,
                                  id='HomeDashboard')
-        main_navigation_items.append(home_item)
-
+        left_navigation_items.append(home_item)
 
         # spaces
-        main_navigation_items.append(MenuItem('Spaces', id='Spaces'))
+        left_navigation_items.append(MenuItem('Spaces', id='Spaces'))
+
+        main_navigation_items['left'] = left_navigation_items
+
+        # middle part
+        middle_navigation_items = []
 
         # search
         if request.user.is_authenticated:
-            search_item = MenuItem('Search', reverse('cosinnus:search'), 'fa-magnifying-glass', id='Search')
+            search_item = MenuItem(_('Search'), reverse('cosinnus:search'), 'fa-magnifying-glass', id='Search')
         else:
-            search_item = MenuItem('Search', reverse('cosinnus:map'), 'fa-magnifying-glass', id='MapSearch')
-        main_navigation_items.append(search_item)
+            search_item = MenuItem(_('Search'), reverse('cosinnus:map'), 'fa-magnifying-glass', id='MapSearch')
+        middle_navigation_items.append(search_item)
 
         if request.user.is_authenticated:
             # bookmarks
-            main_navigation_items.append(MenuItem('Bookmarks', icon='fa-bookmark', id='Bookmarks'))
+            middle_navigation_items.append(MenuItem(_('Bookmarks'), icon='fa-bookmark', id='Bookmarks'))
 
+        main_navigation_items['middle'] = middle_navigation_items
+
+        # services part
+        services_navigation_items = []
+
+        if request.user.is_authenticated:
             # cloud
             if settings.COSINNUS_CLOUD_ENABLED:
-                main_navigation_items.append(
-                    MenuItem('Cloud', settings.COSINNUS_CLOUD_NEXTCLOUD_URL, icon='fa-cloud',
+                services_navigation_items.append(
+                    MenuItem(_('Cloud'), settings.COSINNUS_CLOUD_NEXTCLOUD_URL, icon='fa-cloud',
                              is_external=settings.COSINNUS_CLOUD_OPEN_IN_NEW_TAB, id='Cloud')
                 )
 
             # messages
             if 'cosinnus_message' not in settings.COSINNUS_DISABLED_COSINNUS_APPS:
                 if settings.COSINNUS_ROCKET_ENABLED:
-                    main_navigation_items.append(
+                    services_navigation_items.append(
                         MenuItem('Rocket.Chat', reverse('cosinnus:message-global'), icon='fa-envelope',
                                  is_external=settings.COSINNUS_ROCKET_OPEN_IN_NEW_TAB, id='Chat')
                     )
                 else:
-                    main_navigation_items.append(
-                        MenuItem( 'Messages', reverse('postman:inbox'), icon='fa-envelope', id='Messages')
+                    services_navigation_items.append(
+                        MenuItem( _('Messages'), reverse('postman:inbox'), icon='fa-envelope', id='Messages')
                     )
+        main_navigation_items['services'] = services_navigation_items
+
+        # right part
+        right_navigation_items = []
 
         # help
-        main_navigation_items.append(MenuItem('Help', icon='fa-question', id='Help'))
+        right_navigation_items.append(MenuItem(_('Help'), icon='fa-question', id='Help'))
 
         if request.user.is_authenticated:
 
             # alerts
-            main_navigation_items.append(MenuItem('Alerts', icon='fa-bell', id='Alerts'))
+            right_navigation_items.append(MenuItem(_('Alerts'), icon='fa-bell', id='Alerts'))
 
             # profile
-            main_navigation_items.append(MenuItem('Profile', icon='fa-user', id='Profile'))
+            right_navigation_items.append(MenuItem(_('Profile'), icon='fa-user', id='Profile'))
         else:
 
             # language
             if not settings.COSINNUS_LANGUAGE_SELECT_DISABLED:
                 language_item = self.get_language_menu_item(request, current_language_as_label=True)
-                main_navigation_items.append(language_item)
+                right_navigation_items.append(language_item)
 
             # login
-            main_navigation_items.append(MenuItem(_('Login'), reverse('login'), id='Login'))
+            right_navigation_items.append(MenuItem(_('Login'), reverse('login'), id='Login'))
 
             # register
             if settings.COSINNUS_USER_SIGNUP_ENABLED:
-                main_navigation_items.append(
+                right_navigation_items.append(
                     MenuItem(_('Register'), reverse('cosinnus:user-add'),  id='Register')
                 )
+
+        main_navigation_items['right'] = right_navigation_items
 
         return Response(main_navigation_items)

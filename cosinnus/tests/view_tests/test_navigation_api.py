@@ -463,19 +463,27 @@ class MainNavigationViewTest(APITestCase):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
-        self.assertListEqual(
+        self.assertEqual(
             response.data,
-            [
-                MenuItem('Home', settings.COSINNUS_V3_MENU_HOME_LINK, image='/static/img/logo-icon.png', id='Home'),
-                MenuItem('Spaces', id='Spaces'),
-                MenuItem('Search', '/search/', 'fa-magnifying-glass', id='Search'),
-                MenuItem('Bookmarks', icon='fa-bookmark', id='Bookmarks'),
-                MenuItem('Cloud', 'http://cloud.example.com', 'fa-cloud', is_external=True, id='Cloud'),
-                MenuItem('Messages', reverse('postman:inbox'), 'fa-envelope', id='Messages'),
-                MenuItem('Help', icon='fa-question', id='Help'),
-                MenuItem('Alerts', icon='fa-bell', id='Alerts'),
-                MenuItem('Profile', icon='fa-user', id='Profile'),
-            ]
+            {
+                'left': [
+                    MenuItem('Home', settings.COSINNUS_V3_MENU_HOME_LINK, image='/static/img/logo-icon.png', id='Home'),
+                    MenuItem('Spaces', id='Spaces'),
+                ],
+                'middle': [
+                    MenuItem('Search', '/search/', 'fa-magnifying-glass', id='Search'),
+                    MenuItem('Bookmarks', icon='fa-bookmark', id='Bookmarks'),
+                ],
+                'services': [
+                    MenuItem('Cloud', 'http://cloud.example.com', 'fa-cloud', is_external=True, id='Cloud'),
+                    MenuItem('Messages', reverse('postman:inbox'), 'fa-envelope', id='Messages'),
+                ],
+                'right': [
+                    MenuItem('Help', icon='fa-question', id='Help'),
+                    MenuItem('Alerts', icon='fa-bell', id='Alerts'),
+                    MenuItem('Profile', icon='fa-user', id='Profile'),
+                ]
+            }
         )
 
     @override_settings(COSINNUS_CLOUD_ENABLED=True)
@@ -490,15 +498,22 @@ class MainNavigationViewTest(APITestCase):
         ]
         expected_language_menu_item = MenuItem('EN', id='ChangeLanguage')
         expected_language_menu_item['sub_items'] = expected_language_sub_items
-        self.assertListEqual(
+        self.assertEqual(
             response.data,
-            [
-                MenuItem('Home', settings.COSINNUS_V3_MENU_HOME_LINK, image='/static/img/logo-icon.png', id='Home'),
-                MenuItem('Spaces', id='Spaces'),
-                MenuItem('Search', '/map/', 'fa-magnifying-glass', id='MapSearch'),
-                MenuItem('Help', icon='fa-question', id='Help'),
-                expected_language_menu_item,
-                MenuItem('Login', '/login/', id='Login'),
-                MenuItem('Register', '/signup/', id='Register'),
-            ]
+            {
+                'left': [
+                    MenuItem('Home', settings.COSINNUS_V3_MENU_HOME_LINK, image='/static/img/logo-icon.png', id='Home'),
+                    MenuItem('Spaces', id='Spaces'),
+                ],
+                'middle': [
+                    MenuItem('Search', '/map/', 'fa-magnifying-glass', id='MapSearch'),
+                ],
+                'services': [],
+                'right': [
+                    MenuItem('Help', icon='fa-question', id='Help'),
+                    expected_language_menu_item,
+                    MenuItem('Login', '/login/', id='Login'),
+                    MenuItem('Register', '/signup/', id='Register'),
+                ]
+            }
         )
