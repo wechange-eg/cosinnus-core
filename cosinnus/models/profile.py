@@ -200,7 +200,11 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
         return 'fa-user'
     
     def get_full_name(self):
-        return self.user.get_full_name()
+        user = self.user
+        if not user.is_active:
+            return str(_("(Deleted User)"))
+        full_name = '%s %s' % (user.first_name, user.last_name)
+        return full_name.strip()
     
     def get_extended_full_name(self):
         """ Stub extended username, including possible titles, middle names, etc """
