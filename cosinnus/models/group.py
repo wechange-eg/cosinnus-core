@@ -33,7 +33,7 @@ from cosinnus.utils.files import get_group_avatar_filename,\
     image_thumbnail, image_thumbnail_url, get_image_url_for_icon
 from django.urls import reverse
 from django.utils.functional import cached_property
-from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
+from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal, _PORTAL_PROTOCOL_CACHE_KEY
 from cosinnus.utils.compat import atomic
 from cosinnus.core import signals
 from cosinnus.core.registries.group_models import group_model_registry
@@ -645,6 +645,7 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
     def clear_cache(self):
         cache.delete(self._CURRENT_PORTAL_CACHE_KEY)
         cache.delete(self._ALL_PORTAL_CACHE_KEY)
+        cache.delete(_PORTAL_PROTOCOL_CACHE_KEY % self.id)
 
     def get_domain(self):
         """ Gets the http/https protocol aware domain for this portal """
