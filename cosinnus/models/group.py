@@ -1952,6 +1952,45 @@ class CosinnusGroupCallToActionButton(models.Model):
         verbose_name_plural = _('CosinnusGroup CallToAction Buttons')
 
 
+class UserGroupGuestAccess(models.Model):
+    """ A model that signifies that guest users can enter the portal using the token
+        of this object and gain read access to the related group, without signup up.
+        Deleting this for a group will mean all users will lose their guest access.
+        
+        A token for this object is generated automatically when saving the object,
+        if it hasn't been supplied. """
+    
+    group = models.ForeignKey(
+        settings.COSINNUS_GROUP_OBJECT_MODEL,
+        related_name='user_group_guest_access',
+        on_delete=models.CASCADE,
+        unique=True
+    )
+    creator = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name=_('Creator'),
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='+'
+    )
+    token = models.SlugField(
+        _('Token'),
+        help_text=_('The token string. It will be displayed as it is, but when users enter it, upper/lower-case do not matter. Can contain letters and numbers, but no spaces, and can be as long or short as you want.'),
+        max_length=50,
+        null=False, blank=False,
+        unique=True
+    )
+    created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
+    
+    class Meta(object):
+        ordering = ('-created',)
+        
+    def save(self, *args, **kwargs):
+        if not self.token:
+            self.token = get_random_string(8).lower().strip()
+        super().save(*args, **kwargs)
+
+
 def replace_swapped_group_model():
     """ Permanently replace cosinnus.models.CosinnusGroup with the final Swapped-in Model
         

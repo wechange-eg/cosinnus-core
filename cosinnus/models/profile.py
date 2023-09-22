@@ -169,6 +169,17 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
                                                help_text=_('The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)'))
     deletion_triggered_by_self = models.BooleanField(_('Deletion triggered by self'), default=False, editable=False)
     
+    # guest user account relations, should be in auth.User but since we're not extending that, it's here
+    # a user with `is_guest=True` has very restricted site access, has no email and their account is destroyed
+    # when they end the session by logging out, or their guest_access_object relation has been set to null
+    # (no matter whether the relation has been set to null manually or the object was deleted)
+    is_guest = models.BooleanField(_('May be contacted'), default=False, editable=False)
+    guest_access_object = models.ForeignKey(
+        'cosinnus.group.UserGroupGuestAccess',
+        related_name='guest_users',
+        on_delete=models.SET_NULL
+    )
+    
     managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
     
     objects = BaseUserProfileManager()

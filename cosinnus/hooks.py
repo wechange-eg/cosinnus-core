@@ -16,3 +16,19 @@ def get_full_name_extended(self):
 
 
 setattr(get_user_model(), 'get_full_name', get_full_name_extended)
+
+
+def get_is_guest(self):
+    """
+        Extend the user model with an `is_guest` property, that gets the state from `BaseUserProfile.is_guest`.
+        This property cannot be set.
+        
+        A user without a cosinnus_profile defaults to is_guest=False.
+    """
+    if hasattr(self, 'cosinnus_profile') and self.cosinnus_profile:
+        self.cosinnus_profile.is_guest
+    return False
+
+
+setattr(get_user_model(), 'is_guest', property(get_is_guest))
+
