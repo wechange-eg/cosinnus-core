@@ -873,8 +873,18 @@ class CosinnusConf(AppConf):
     
     # whether or not to use redirects to the v3 frontend
     # by appending a '?v=3' GET param for certain URL paths
-    # paths are defined in 
+    # paths are defined in `V3_FRONTEND_URL_PATTERNS`
     V3_FRONTEND_ENABLED = False
+    
+    # with `V3_FRONTEND_ENABLED=True` together, whether or not
+    # to redirect *almost any* direct view request to the v3 frontend
+    # by appending a '?v=3' GET param to the requested URL path
+    # exemptions:
+    #   - this logic is overriden if the parameter `v3exempt=1`
+    # is supplied
+    #   - all URLs in `V3_FRONTEND_BLACKLIST_URL_PATTERNS` are exempted
+    #   - all URLs starting with a path in `cosinnus_middleware.LOGIN_URLS` are exempt
+    V3_FRONTENT_ALL_CONTENT_ENABLED = False
     
     # a workaround for the frontend using languages as URL prefix
     # instead of as cookie setting, any request with a language in this list
@@ -894,6 +904,14 @@ class CosinnusConf(AppConf):
         f"^{V3_FRONTEND_SIGNUP_VERIFICATION_WELCOME_PAGE}",
         "^/setup/",
         "^api/auth/",
+    ]
+    
+    # URL patterns that *never* get redirected to the new frontend
+    # even if V3_FRONTEND_ENABLED==True and V3_FRONTENT_ALL_CONTENT_ENABLED==True
+    V3_FRONTEND_BLACKLIST_URL_PATTERNS = [
+        "^/api/v",  # any of *our* api URLs (not that ^api/auth/ is next.JS for example
+        "^/bbb/room",  # BBB redirect pages
+        "^/bbb/queue",  # BBB queue (direct and API)
     ]
 
     # Languages supported by the v3 frontend. The portal language selection from LANGUAGES is restricted to these.

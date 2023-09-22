@@ -21,7 +21,7 @@ from cosinnus.conf import settings
 from cosinnus.core.decorators.views import get_group_for_request
 from cosinnus.models import CosinnusPortal
 from cosinnus.models.user_dashboard import MenuItem, FONT_AWESOME_CLASS_FILTER
-from cosinnus.utils.http import remove_url_param
+from cosinnus.utils.http import remove_url_param, add_url_param
 
 # url prefixes that make the requested url be considered to belong in the "community" space
 V3_CONTENT_COMMUNITY_URL_PREFIXES = [
@@ -175,7 +175,10 @@ class MainContentView(APIView):
     )
     def get(self, request):
         self.url = request.query_params.get('url', '').strip()
+        # remove v=3 param and add v3exempt=1 param so that our request will be resolved by the django server
+        # and not get redirected to the next server by nginx
         self.url = remove_url_param(self.url, 'v', '3')
+        self.url = add_url_param(self.url, 'v3exempt', '1')
         django_request = copy(request._request)
         if not self.url:
             raise ValidationError('Missing required parameter: url')
@@ -192,6 +195,8 @@ class MainContentView(APIView):
         resolved_url = django_request.path
         if django_request.GET:
             resolved_url += '?' + django_request.GET.urlencode()
+        # strip the v3exempt param from the resolved URL again
+        resolved_url = remove_url_param(resolved_url, 'v3exempt', '1')
         # determine group for request
         self._resolve_request_group(resolved_url, django_request)
         # parse the response's html
