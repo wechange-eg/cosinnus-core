@@ -914,10 +914,14 @@ class CosinnusConf(AppConf):
     # Additional menu items for the community space in the v3 main navigation.
     # Format: List of (<id-string>, <label>, <url>, <icon>), e.g.: [('ExternalLink', 'External Link', 'https://external-link.com', 'fa-group')]
     V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS = []
-
+    
     # List of help items to be included in the v3 main navigation.
     # Format: (<label>, <url>, <icon>), e.g.: (_('FAQ'), 'https://wechange.de/cms/help/', 'fa-question-circle'),
     V3_MENU_HELP_LINKS = []
+
+    # List of menu items to be included in the v3 sidebar navigation for the forum group only.
+    # Format: (<label>, <url>, <icon>), e.g.: (_('FAQ'), 'https://wechange.de/cms/help/', 'fa-question-circle'),
+    V3_MENU_SIDEBAR_FORUM_LINKS = []
     
     # whether the regular user signup method is enabled for this portal
     USER_SIGNUP_ENABLED = True

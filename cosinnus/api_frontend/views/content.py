@@ -364,7 +364,14 @@ class MainContentView(APIView):
             elif any(menu_item['url'].endswith(suffix) for suffix in V3_CONTENT_TOP_SIDEBAR_URL_SUFFIXES):
                 target_subnav = top
             target_subnav.append(menu_item)
-            
+        
+        # add special-case leftnav menu items: Forum group
+        if self.group and self.group.is_forum_group and settings.COSINNUS_V3_MENU_SIDEBAR_FORUM_LINKS:
+            middle.extend([
+                MenuItem(label, url, icon, is_external=True, id=f'Sidebar-{id}')
+                for id, label, url, icon in settings.COSINNUS_V3_MENU_SIDEBAR_FORUM_LINKS
+            ])
+        
         sub_nav = {
             "top": top,
             "middle": middle,

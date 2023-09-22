@@ -610,7 +610,7 @@ class HelpView(APIView):
     )
     def get(self, request):
         help_items = [
-            MenuItem(label, url, icon, is_external=True, id=id)
+            MenuItem(label, url, icon, is_external=True, id=f'HelpMenu-{id}')
             for id, label, url, icon in settings.COSINNUS_V3_MENU_HELP_LINKS
         ]
         return Response(help_items)
