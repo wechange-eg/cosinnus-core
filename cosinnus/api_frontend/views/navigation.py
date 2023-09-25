@@ -34,8 +34,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
     - Projects and Groups: users projects and groups
     - Community: Forum and Map
     - Conferences: users conferences
-    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional), image url (optional) and
-    badge (optional).
+    Each menu item contains: id, label (HTML), url, is_external, icon (Font Awesome class, optional),
+    image url (optional), badge (optional), selected.
     """
 
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
@@ -110,6 +110,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         spaces['personal'] = personal_space
 
         # projects and groups
+        group_space = None
         group_space_items = []
         group_space_actions = []
         if request.user.is_authenticated:
@@ -123,13 +124,15 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                 MenuItem(CosinnusSocietyTrans.CREATE_NEW, reverse('cosinnus:group__group-add'), id="CreateGroup"),
                 MenuItem(CosinnusProjectTrans.CREATE_NEW, reverse('cosinnus:group-add'), id="CreateProject"),
             ]
-        groups_space = {
-            'items': group_space_items,
-            'actions': group_space_actions,
-        }
-        spaces['groups'] = groups_space
+        if group_space_items or group_space_actions:
+            group_space = {
+                'items': group_space_items,
+                'actions': group_space_actions,
+            }
+        spaces['groups'] = group_space
 
         # community
+        community_space = None
         community_space_items = []
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
         if forum_slug:
@@ -161,14 +164,16 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                 MenuItem(label, url, icon, id=id)
                 for id, label, url, icon in settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS
             ])
-        community_space = {
-            'items': community_space_items,
-            'actions': [],
-        }
+        if community_space_items:
+            community_space = {
+                'items': community_space_items,
+                'actions': [],
+            }
         spaces['community'] = community_space
 
         # conferences
         if settings.COSINNUS_CONFERENCES_ENABLED:
+            conference_space = None
             conference_space_items = []
             conference_space_actions = []
             if request.user.is_authenticated:
@@ -180,10 +185,11 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                     MenuItem(CosinnusConferenceTrans.CREATE_NEW, reverse('cosinnus:conference__group-add'),
                              id='CreateConference'),
                 ]
-            conference_space = {
-                'items': conference_space_items,
-                'actions': conference_space_actions,
-            }
+            if conference_space_items or conference_space_actions:
+                conference_space = {
+                    'items': conference_space_items,
+                    'actions': conference_space_actions,
+                }
             spaces['conference'] = conference_space
 
         return Response(spaces)
@@ -193,8 +199,8 @@ class BookmarksView(APIView):
     """
     An endpoint that provides the user bookmarks for the main navigation.
     Returns menu items for liked groups and projects, liked users and liked content (e.g. ideas).
-    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional), image url (optional) and
-    badge (optional).
+    Each menu item contains: id, label (HTML), url, is_external, icon (Font Awesome class, optional),
+    image url (optional), badge (optional), selected.
     """
 
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
@@ -229,7 +235,7 @@ class BookmarksView(APIView):
         )}
     )
     def get(self, request):
-        bookmarks = {}
+        bookmarks = None
         group_items = []
         content_items = []
         if request.user.is_authenticated:
@@ -579,8 +585,8 @@ class AlertsView(APIView):
 class HelpView(APIView):
     """
     An endpoint that returns a list of help menu items for the main navigation.
-    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional), image url (optional) and
-    badge (optional).
+    Each menu item contains: id, label (HTML), url, is_external, icon (Font Awesome class, optional),
+    image url (optional), badge (optional), selected.
     """
 
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
@@ -626,9 +632,9 @@ class LanguageMenuItemMixin:
                                     settings.LANGUAGES)
         language_subitems = []
         for code, language in language_selection:
+            selected = code == request.LANGUAGE_CODE
             language_subitem = MenuItem(language, reverse('cosinnus:switch-language', kwargs={'language': code}),
-                                        id=f'ChangeLanguageItem{code.upper()}')
-            language_subitem['selected'] = code == request.LANGUAGE_CODE
+                                        id=f'ChangeLanguageItem{code.upper()}', selected=selected)
             language_subitems.append(language_subitem)
         language_item['sub_items'] = language_subitems
         return language_item
@@ -639,8 +645,8 @@ class ProfileView(LanguageMenuItemMixin, APIView):
     An endpoint that provides user profile menu items for the main navigation.
     Returns a list of menu items for user profile and notification settings, contribution, administration, logout and a
     language switcher item. The language switcher item contains a list of menu items for the available languages.
-    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional), image url (optional) and
-    badge (optional).
+    Each menu item contains: id, label (HTML), url, is_external, icon (Font Awesome class, optional),
+    image url (optional), badge (optional), selected.
     """
 
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
@@ -671,24 +677,8 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                             "is_external": False,
                             "badge": None,
                             "sub_items": [
-                                {
-                                    "id": "ChangeLanguageItemDE",
-                                    "icon": None,
-                                    "label": "Deutsch",
-                                    "url": "/language/de/",
-                                    "image": None,
-                                    "is_external": False,
-                                    "badge": None,
-                                },
-                                {
-                                    "id": "ChangeLanguageItemEN",
-                                    "icon": None,
-                                    "label": "English",
-                                    "url": "/language/en/",
-                                    "image": None,
-                                    "is_external": False,
-                                    "badge": None,
-                                },
+                                MenuItem("Deutsch", "/language/de/", id="ChangeLanguageItemDE"),
+                                MenuItem("English", "/language/en/", id="ChangeLanguageItemEN", selected=True),
                             ],
                         },
                         MenuItem("Your Contribution", "/account/contribution/", "fa-hand-holding-hart",
@@ -702,10 +692,12 @@ class ProfileView(LanguageMenuItemMixin, APIView):
         )}
     )
     def get(self, request):
-        profile_menu = []
+        profile_menu = None
 
         if request.user.is_authenticated:
-            # profile page
+            profile_menu = []
+
+            # profile pages
             profile_menu_items = [
                 MenuItem(_('My Profile'), reverse('cosinnus:profile-detail'), 'fa-circle-user', id='Profile'),
             ]
@@ -788,7 +780,7 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                         'right': [
                             MenuItem("Help", icon="fa-question", id="Help"),
                             MenuItem("Alerts", icon="fa-bell", id="Alerts"),
-                            MenuItem("Profile", icon="fa-user", id="Profile"),
+                            MenuItem("Profile", icon="fa-user", id="Profile", image='/media/image.png'),
                         ]
                     },
                     "version": COSINNUS_VERSION,
@@ -876,7 +868,9 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
             right_navigation_items.append(MenuItem(_('Alerts'), icon='fa-bell', id='Alerts'))
 
             # profile
-            right_navigation_items.append(MenuItem(_('Profile'), icon='fa-user', id='Profile'))
+            right_navigation_items.append(
+                MenuItem(_('Profile'), icon='fa-user', image=request.user.cosinnus_profile.avatar_url, id='Profile')
+            )
         else:
 
             # language
