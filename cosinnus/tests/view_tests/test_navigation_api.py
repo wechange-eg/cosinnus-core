@@ -385,8 +385,8 @@ class LanguageMenuTestMixin:
         languages = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES, settings.LANGUAGES)
         expected_language_sub_items = []
         for code, language in languages:
-            language_sub_item = MenuItem(language, f'/language/{code}/', id=f'ChangeLanguageItem{code.upper()}')
-            language_sub_item['selected'] = code == 'en'
+            language_sub_item = MenuItem(language, f'/language/{code}/', id=f'ChangeLanguageItem{code.upper()}',
+                                         selected=(code == 'en'))
             expected_language_sub_items.append(language_sub_item)
         expected_language_menu_item = MenuItem(expected_label, icon=expected_icon, id='ChangeLanguage')
         expected_language_menu_item['sub_items'] = expected_language_sub_items

@@ -34,8 +34,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
     - Projects and Groups: users projects and groups
     - Community: Forum and Map
     - Conferences: users conferences
-    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional), image url (optional) and
-    badge (optional).
+    Each menu item contains: id, label (HTML), url, is_external, icon (Font Awesome class, optional),
+    image url (optional), badge (optional), selected.
     """
 
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
@@ -193,8 +193,8 @@ class BookmarksView(APIView):
     """
     An endpoint that provides the user bookmarks for the main navigation.
     Returns menu items for liked groups and projects, liked users and liked content (e.g. ideas).
-    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional), image url (optional) and
-    badge (optional).
+    Each menu item contains: id, label (HTML), url, is_external, icon (Font Awesome class, optional),
+    image url (optional), badge (optional), selected.
     """
 
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
@@ -579,8 +579,8 @@ class AlertsView(APIView):
 class HelpView(APIView):
     """
     An endpoint that returns a list of help menu items for the main navigation.
-    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional), image url (optional) and
-    badge (optional).
+    Each menu item contains: id, label (HTML), url, is_external, icon (Font Awesome class, optional),
+    image url (optional), badge (optional), selected.
     """
 
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
@@ -626,9 +626,9 @@ class LanguageMenuItemMixin:
                                     settings.LANGUAGES)
         language_subitems = []
         for code, language in language_selection:
+            selected = code == request.LANGUAGE_CODE
             language_subitem = MenuItem(language, reverse('cosinnus:switch-language', kwargs={'language': code}),
-                                        id=f'ChangeLanguageItem{code.upper()}')
-            language_subitem['selected'] = code == request.LANGUAGE_CODE
+                                        id=f'ChangeLanguageItem{code.upper()}', selected=selected)
             language_subitems.append(language_subitem)
         language_item['sub_items'] = language_subitems
         return language_item
@@ -639,8 +639,8 @@ class ProfileView(LanguageMenuItemMixin, APIView):
     An endpoint that provides user profile menu items for the main navigation.
     Returns a list of menu items for user profile and notification settings, contribution, administration, logout and a
     language switcher item. The language switcher item contains a list of menu items for the available languages.
-    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional), image url (optional) and
-    badge (optional).
+    Each menu item contains: id, label (HTML), url, is_external, icon (Font Awesome class, optional),
+    image url (optional), badge (optional), selected.
     """
 
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
@@ -671,24 +671,8 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                             "is_external": False,
                             "badge": None,
                             "sub_items": [
-                                {
-                                    "id": "ChangeLanguageItemDE",
-                                    "icon": None,
-                                    "label": "Deutsch",
-                                    "url": "/language/de/",
-                                    "image": None,
-                                    "is_external": False,
-                                    "badge": None,
-                                },
-                                {
-                                    "id": "ChangeLanguageItemEN",
-                                    "icon": None,
-                                    "label": "English",
-                                    "url": "/language/en/",
-                                    "image": None,
-                                    "is_external": False,
-                                    "badge": None,
-                                },
+                                MenuItem("Deutsch", "/language/de/", id="ChangeLanguageItemDE"),
+                                MenuItem("English", "/language/en/", id="ChangeLanguageItemEN", selected=True),
                             ],
                         },
                         MenuItem("Your Contribution", "/account/contribution/", "fa-hand-holding-hart",
