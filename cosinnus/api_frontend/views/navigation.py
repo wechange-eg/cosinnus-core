@@ -780,7 +780,7 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                         'right': [
                             MenuItem("Help", icon="fa-question", id="Help"),
                             MenuItem("Alerts", icon="fa-bell", id="Alerts"),
-                            MenuItem("Profile", icon="fa-user", id="Profile"),
+                            MenuItem("Profile", icon="fa-user", id="Profile", image='/media/image.png'),
                         ]
                     },
                     "version": COSINNUS_VERSION,
@@ -868,7 +868,9 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
             right_navigation_items.append(MenuItem(_('Alerts'), icon='fa-bell', id='Alerts'))
 
             # profile
-            right_navigation_items.append(MenuItem(_('Profile'), icon='fa-user', id='Profile'))
+            right_navigation_items.append(
+                MenuItem(_('Profile'), icon='fa-user', image=request.user.cosinnus_profile.avatar_url, id='Profile')
+            )
         else:
 
             # language
