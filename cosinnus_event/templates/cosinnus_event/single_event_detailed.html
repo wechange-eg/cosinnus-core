@@ -495,7 +495,9 @@
                 </ul>
             </button>
 
-            {% include "cosinnus/conference/conference_invitation_text_buttons.html" with object_type="event" %}
+            {% if SETTINGS.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS and event.video_conference_type == 1 %}
+                {% include "cosinnus/conference/conference_invitation_text_buttons.html" with object_type="event" %}
+            {% endif %}
 
             <div class="clearfix"></div>
 	    </div>
