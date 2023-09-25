@@ -10,7 +10,7 @@ from cosinnus_event.models import ConferenceEvent, ConferenceEventAttendanceTrac
 
 # FIXME: Make this pagination class default in REST_FRAMEWORK setting
 from rest_framework.decorators import action
-from cosinnus.utils.permissions import check_user_superuser, check_object_write_access
+from cosinnus.utils.permissions import check_user_superuser, check_object_write_access, check_object_read_access
 from cosinnus.models.group_extra import CosinnusConference, CosinnusGroup
 from cosinnus.api.views.mixins import CosinnusFilterQuerySetMixin,\
     PublicCosinnusGroupFilterMixin, CosinnusPaginateMixin
@@ -128,6 +128,10 @@ class ConferenceViewSet(RequireGroupReadMixin, BaseConferenceViewSet):
             obj = object_class.objects.filter(id=object_id).first()
         if not obj:
             return Response(status=404)
+
+        # Check access permissions
+        if not check_object_read_access(obj, request.user):
+            return Response(status=403)
 
         bbb_room = getattr(obj.media_tag, 'bbb_room', None)
         if bbb_room:
