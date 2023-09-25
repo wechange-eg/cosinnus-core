@@ -176,7 +176,7 @@ class BookmarksViewTest(APITestCase):
     def test_bookmarks_anonymous(self):
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data, {})
+        self.assertIsNone(response.data)
 
 
 class UnreadMessagesViewTest(APITestCase):
@@ -447,7 +447,7 @@ class ProfileViewTest(LanguageMenuTestMixin, APITestCase):
     def test_profile_anoymous(self):
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
-        self.assertListEqual(response.data, [])
+        self.assertIsNone(response.data)
 
 
 class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):

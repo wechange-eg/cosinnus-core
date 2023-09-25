@@ -110,6 +110,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         spaces['personal'] = personal_space
 
         # projects and groups
+        group_space = None
         group_space_items = []
         group_space_actions = []
         if request.user.is_authenticated:
@@ -123,13 +124,15 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                 MenuItem(CosinnusSocietyTrans.CREATE_NEW, reverse('cosinnus:group__group-add'), id="CreateGroup"),
                 MenuItem(CosinnusProjectTrans.CREATE_NEW, reverse('cosinnus:group-add'), id="CreateProject"),
             ]
-        groups_space = {
-            'items': group_space_items,
-            'actions': group_space_actions,
-        }
-        spaces['groups'] = groups_space
+        if group_space_items or group_space_actions:
+            group_space = {
+                'items': group_space_items,
+                'actions': group_space_actions,
+            }
+        spaces['groups'] = group_space
 
         # community
+        community_space = None
         community_space_items = []
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
         if forum_slug:
@@ -161,14 +164,16 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                 MenuItem(label, url, icon, id=id)
                 for id, label, url, icon in settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS
             ])
-        community_space = {
-            'items': community_space_items,
-            'actions': [],
-        }
+        if community_space_items:
+            community_space = {
+                'items': community_space_items,
+                'actions': [],
+            }
         spaces['community'] = community_space
 
         # conferences
         if settings.COSINNUS_CONFERENCES_ENABLED:
+            conference_space = None
             conference_space_items = []
             conference_space_actions = []
             if request.user.is_authenticated:
@@ -180,10 +185,11 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                     MenuItem(CosinnusConferenceTrans.CREATE_NEW, reverse('cosinnus:conference__group-add'),
                              id='CreateConference'),
                 ]
-            conference_space = {
-                'items': conference_space_items,
-                'actions': conference_space_actions,
-            }
+            if conference_space_items or conference_space_actions:
+                conference_space = {
+                    'items': conference_space_items,
+                    'actions': conference_space_actions,
+                }
             spaces['conference'] = conference_space
 
         return Response(spaces)
@@ -229,7 +235,7 @@ class BookmarksView(APIView):
         )}
     )
     def get(self, request):
-        bookmarks = {}
+        bookmarks = None
         group_items = []
         content_items = []
         if request.user.is_authenticated:
@@ -686,10 +692,12 @@ class ProfileView(LanguageMenuItemMixin, APIView):
         )}
     )
     def get(self, request):
-        profile_menu = []
+        profile_menu = None
 
         if request.user.is_authenticated:
-            # profile page
+            profile_menu = []
+
+            # profile pages
             profile_menu_items = [
                 MenuItem(_('My Profile'), reverse('cosinnus:profile-detail'), 'fa-circle-user', id='Profile'),
             ]
