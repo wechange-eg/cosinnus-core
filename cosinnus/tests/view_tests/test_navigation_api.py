@@ -277,7 +277,7 @@ class AlertsViewTest(TestAlertsMixin, APITestCase):
                         'item_icon': None,
                         'item_image': None,
                         'user_icon': None,
-                        'user_image': '/static/images/jane-doe-small.png',
+                        'user_image': self.portal.get_domain() + '/static/images/jane-doe-small.png',
                         'group': None,
                         'group_icon': None,
                         'action_datetime': alert_action_datetime,

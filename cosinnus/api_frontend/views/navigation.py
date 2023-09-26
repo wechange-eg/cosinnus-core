@@ -569,7 +569,7 @@ class AlertsView(APIView):
                 serialized_alert['url'] = url.replace(domain, '')
 
     def _split_icon_or_image_url(self, serialized_alert, key_prefix=''):
-        """ Replace icon_or_image_url items with separate icon and image items. """
+        """ Replace icon_or_image_url items with separate icon and image items. Use absolute url for images. """
         icon_or_image_url = serialized_alert.pop(key_prefix + 'icon_or_image_url')
         if not icon_or_image_url:
             serialized_alert[key_prefix + 'icon'] = None
@@ -578,6 +578,9 @@ class AlertsView(APIView):
             serialized_alert[key_prefix + 'icon'] = icon_or_image_url
             serialized_alert[key_prefix + 'image'] = None
         else:
+            domain = get_domain_for_portal(CosinnusPortal.get_current())
+            if icon_or_image_url.startswith('/'):
+                icon_or_image_url = domain + icon_or_image_url
             serialized_alert[key_prefix + 'image'] = icon_or_image_url
             serialized_alert[key_prefix + 'icon'] = None
 
