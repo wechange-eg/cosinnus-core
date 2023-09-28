@@ -22,6 +22,7 @@ from cosinnus.utils.dates import datetime_from_timestamp, timestamp_from_datetim
 from cosinnus.utils.permissions import check_user_can_create_conferences, check_user_can_create_groups, \
     check_user_portal_manager
 from cosinnus.utils.user import get_unread_message_count_for_user
+from cosinnus.utils.version_history import get_version_history_for_user, mark_version_history_as_read
 from cosinnus.views.user_dashboard import MyGroupsClusteredMixin
 from cosinnus_notifications.models import NotificationAlert, SerializedNotificationAlert
 
@@ -893,3 +894,117 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
         main_navigation_items['right'] = right_navigation_items
 
         return Response(main_navigation_items)
+
+
+class VersionHistoryView(APIView):
+    """
+    An endpoint that provides version history for the user.
+    It returns a list of information for the latest version, each containing the following fields: id, version title,
+    text, url and read. It also returns a menu item for the "show all" link.
+    The parameter "mark_as_read=true" can be passed to mark the unread version notes as read.
+    """
+
+    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+
+    # todo: generate proper response, by either putting the entire response into a
+    #       Serializer, or defining it by hand
+    #       Note: Also needs docs on our custom data/timestamp/version wrapper!
+    # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
+    # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter(
+                'mark_as_read', openapi.IN_QUERY, required=False,
+                description='Mark unread versions as read.', type=openapi.TYPE_BOOLEAN
+            ),
+        ],
+        responses={'200': openapi.Response(
+            description='WIP: Response info missing. Short example included',
+            examples={
+                "application/json": {
+                    "data": {
+                        "versions": [
+                            {
+                                "id": "Version123",
+                                "version": "1.2.3",
+                                "title": "Version 1.2.3 released",
+                                "text": "Adds some nice features.",
+                                "url": "/whats_new/#123",
+                                "read": False,
+                            },
+                        ],
+                        "show_all": MenuItem('Show all', '/whats_new/', id='ShowAll')
+                    },
+                    "version": COSINNUS_VERSION,
+                    "timestamp": 1658414865.057476
+                }
+            }
+        )}
+    )
+
+    def get(self, request):
+        version_history = None
+        if request.user.is_authenticated:
+            version_history = {}
+
+            # get versions
+            versions = []
+            user_versions, unread_count = get_version_history_for_user(request.user)
+            for version in user_versions:
+                # serialize version data for the navigation dropdown.
+                version_for_api = {
+                    'id': 'Version' + version['anchor'].replace('-', ''),
+                    'version': version['version'],
+                    'title': version['title'],
+                    'text': version['short_text'],
+                    'url': version['url'],
+                    'read': version['read'],
+                }
+                versions.append(version_for_api)
+            version_history['versions'] = versions
+
+            # mark as read
+            mark_as_read = request.query_params.get('mark_as_read') == 'true'
+            if mark_as_read:
+                mark_version_history_as_read(request.user)
+
+            # add show all link
+            version_history['show_all'] = MenuItem(_('Show all'), reverse('cosinnus:version-history'), id='ShowAll')
+
+        return Response(version_history)
+
+
+class VersionHistoryUnreadCountView(APIView):
+    """ An endpoint that returns the user unseen version history elements count for the main navigation. """
+
+    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+
+    # todo: generate proper response, by either putting the entire response into a
+    #       Serializer, or defining it by hand
+    #       Note: Also needs docs on our custom data/timestamp/version wrapper!
+    # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
+    # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
+    @swagger_auto_schema(
+        responses={'200': openapi.Response(
+            description='WIP: Response info missing. Short example included',
+            examples={
+                "application/json": {
+                    "data": {
+                        "count": 2
+                    },
+                    "version": COSINNUS_VERSION,
+                    "timestamp": 1658414865.057476
+                }
+            }
+        )}
+    )
+    def get(self, request):
+        unread_versions_count = 0
+        if request.user.is_authenticated:
+            versions, unread_versions_count = get_version_history_for_user(request.user)
+        unread_versions = {
+            'count': unread_versions_count,
+        }
+        return Response(unread_versions)

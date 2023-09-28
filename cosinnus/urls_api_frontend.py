@@ -7,7 +7,7 @@ from cosinnus.api_frontend.views.content import MainContentView
 from cosinnus.api_frontend.views.user import LoginView, SignupView, UserProfileView, \
     LogoutView, UserAuthInfoView
 from cosinnus.api_frontend.views.navigation import BookmarksView, SpacesView, UnreadMessagesView, UnreadAlertsView, \
-    AlertsView, HelpView, ProfileView, MainNavigationView
+    AlertsView, HelpView, ProfileView, MainNavigationView, VersionHistoryView, VersionHistoryUnreadCountView
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.api_frontend.views.portal import PortalTopicsView,\
     PortalManagedTagsView, PortalTagsView, PortalUserprofileDynamicFieldsView,\
@@ -39,7 +39,7 @@ urlpatterns += [
     url(r'^api/v3/content/main/$', MainContentView.as_view(), name='api-content-main'),
     
 
-    url(r'^api/v3/navigation/main/$', MainNavigationView.as_view(), name='api-navigation-services'),
+    url(r'^api/v3/navigation/main/$', MainNavigationView.as_view(), name='api-navigation-main'),
     url(r'^api/v3/navigation/spaces/$', SpacesView.as_view(), name='api-navigation-spaces'),
     url(r'^api/v3/navigation/bookmarks/$', BookmarksView.as_view(), name='api-navigation-bookmarks'),
     url(r'^api/v3/navigation/unread_messages/$', UnreadMessagesView.as_view(), name='api-navigation-unread-messages'),
@@ -47,4 +47,6 @@ urlpatterns += [
     url(r'^api/v3/navigation/alerts/$', AlertsView.as_view(), name='api-navigation-alerts'),
     url(r'^api/v3/navigation/help/$', HelpView.as_view(), name='api-navigation-help'),
     url(r'^api/v3/navigation/profile/$', ProfileView.as_view(), name='api-navigation-profile'),
+    url(r'^api/v3/navigation/version_history/$', VersionHistoryView.as_view(), name='api-navigation-version-history'),
+    url(r'^api/v3/navigation/unread_version_history/$', VersionHistoryUnreadCountView.as_view(), name='api-navigation-unread-version-history'),
 ]
