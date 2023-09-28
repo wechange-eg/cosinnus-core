@@ -223,6 +223,7 @@ if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(settings, 'C
 if getattr(settings, 'COSINNUS_USE_V2_NAVBAR', False) or getattr(settings, 'COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY', False):
     urlpatterns += [
         url(r'^search/api/quicksearch/$', search.api_quicksearch, name='quicksearch-api'),
+        url(r'^version_history/api/markread/$', version_history.version_history_mark_read, name='version-history-api-mark-read'),
     ]
 
 if getattr(settings, 'COSINNUS_ENABLE_USER_MATCH', True):

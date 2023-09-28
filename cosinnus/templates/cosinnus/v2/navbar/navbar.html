@@ -91,6 +91,17 @@
 	    		<i class="fas fa-fw fa-home"></i>
 			</a>
 			{% endblock %}
+            {% block whats_new_button %}
+                <a class="nav-button nav-button-with-message-counter nav-collapse-button collapsed" rel="toggle"
+                   role="button" title="{% trans "What's New" %}" aria-expanded="false"
+                   aria-controls="whats-new-widget-collapse" data-toggle="collapse"
+                   data-target="#whats-new-widget-collapse" id="navbar-whats-new-button" >
+                    <i class="fas fa-fw fa-newspaper"></i>
+                    {% if COSINNUS_VERSION_HISTORY_UNREAD_COUNT > 0 %}
+                        <span class="message-counter"> {{ COSINNUS_VERSION_HISTORY_UNREAD_COUNT }}</span>
+                    {% endif %}
+                </a>
+            {% endblock %}
 			{% block cloud_icon_button %}
 				{% if SETTINGS.COSINNUS_CLOUD_ENABLED and request.user.is_authenticated %}
 			        <a class="nav-button" href="{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}" role="button"
@@ -450,6 +461,47 @@
 		</div>
 		<div class="nav-flyout-backdrop"></div>
 	</div>
+
+    <div class="collapse nav-flyout nav-flyout-half-side nav-flyout-right nav-flyout-part-height notification-widget"
+         id="whats-new-widget-collapse" data-simplebar>
+        <div class="nav-flyout-section flex-row mobile-flex-column" id="whats-new-items">
+            <div class="nav-column nav-column-fullwidth">
+                <h2 class="headline headline-condensed">{% trans "What's New" %}</h2>
+                <ul class="item-list item-list-divided bordered">
+                    {% for version in COSINNUS_VERSION_HISTORY %}
+                        <li class="list-item-group">
+                            <div class="main-item">
+                                <a class="list-item list-item-extended {% if not version.read %}list-item-emphasized{% endif %}"
+                                   role="button" titledby=".item-text-primary" href="{{ version.url }}"
+                                >
+                                    <div class="item-text item-text-dual">
+                                        <div class="item-text-primary title">
+                                            <strong>{{ version.title }}</strong>
+                                        </div>
+                                        <div class="item-text-secondary">
+                                            {{ version.short_text|textfield:"simple" }}
+                                        </div>
+                                    </div>
+                                    <div class="right-side-annotation">
+                                        <i>{{ version.version }}</i>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    <li>
+                        <a href="{% url 'cosinnus:version-history' %}" class="list-item list-item-link show-more"
+                           role="button" titledby=".item-text">
+                            <div class="item-text">
+                                {% trans "Show all" %}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="nav-flyout-backdrop"></div>
+    </div>
 </nav>
 
 {% comment %} Hide navbar if we're in an iframe for a conference project {% endcomment %}
