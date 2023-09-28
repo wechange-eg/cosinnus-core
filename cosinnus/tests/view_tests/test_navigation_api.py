@@ -1,3 +1,5 @@
+import pytz
+from datetime import datetime
 from unittest.mock import patch
 from django.contrib.auth import get_user_model
 from django.template.defaultfilters import date
@@ -459,14 +461,13 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.api_url = reverse("cosinnus:frontend-api:api-navigation-services")
+        cls.api_url = reverse("cosinnus:frontend-api:api-navigation-main")
         cls.test_user = User.objects.create(**TEST_USER_DATA)
         cls.portal = CosinnusPortal.get_current()
 
     @override_settings(COSINNUS_CLOUD_ENABLED=True)
     @override_settings(COSINNUS_CLOUD_NEXTCLOUD_URL='http://cloud.example.com')
     def test_main_navigation_authenticated(self):
-
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
@@ -517,3 +518,120 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
                 ]
             }
         )
+
+
+class VersionHistoryPatchMixin:
+
+    PATCHED_CORE_UPDATES = {
+        '1': {
+            'datetime': datetime(2000, 1, 1, tzinfo=pytz.utc),
+            'title': 'Test Title',
+            'short_text': 'Test Short Description',
+            'full_text': 'Test Full Description',
+        },
+    }
+
+    PATCHED_PORTAL_UPDATES = {
+        '1 (portal)': {
+            'datetime': datetime(2000, 1, 2, tzinfo=pytz.utc),
+            'title': 'Test Portal Title',
+            'short_text': 'Test Portal Short Description',
+            'full_text': 'Test Portal Full Description',
+        },
+    }
+
+    @classmethod
+    def patch_version_history(cls):
+        from importlib import import_module
+        from cosinnus.utils import version_history
+        version_history.version_history.UPDATES = cls.PATCHED_CORE_UPDATES
+        portal_version_history = import_module('apps.core.version_history')
+        portal_version_history.UPDATES = cls.PATCHED_PORTAL_UPDATES
+
+
+class VersionHistoryViewTest(VersionHistoryPatchMixin, APITestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.api_url = reverse("cosinnus:frontend-api:api-navigation-version-history")
+        cls.test_user = User.objects.create(**TEST_USER_DATA)
+        cls.portal = CosinnusPortal.get_current()
+        cls.patch_version_history()
+
+    def test_version_history(self):
+        self.client.force_login(self.test_user)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        version_history_page_url = reverse('cosinnus:version-history')
+        self.assertEqual(
+            response.data,
+            {
+                'versions': [
+                    {
+                        'id': 'Version1portal',
+                        'version': '1 (portal)',
+                        'url': f'{version_history_page_url}#1-portal',
+                        'title': 'Test Portal Title',
+                        'text': 'Test Portal Short Description',
+                        'read': False,
+                    },
+                    {
+                        'id': 'Version1',
+                        'version': '1',
+                        'url': f'{version_history_page_url}#1',
+                        'title': 'Test Title',
+                        'text': 'Test Short Description',
+                        'read': False,
+                    },
+                ],
+                'show_all': MenuItem('Show all', version_history_page_url, id='ShowAll'),
+            }
+        )
+
+    def test_version_history_anonymous(self):
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNone(response.data)
+
+    def test_version_history_mark_read(self):
+        self.client.force_login(self.test_user)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.data['versions'][0]['read'])
+        self.assertFalse(response.data['versions'][1]['read'])
+        mark_read_url = self.api_url + '?mark_as_read=true'
+        response = self.client.get(mark_read_url)
+        self.assertEqual(response.status_code, 200)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.data['versions'][0]['read'])
+        self.assertTrue(response.data['versions'][1]['read'])
+
+
+class VersionHistoryUnreadCountViewTest(VersionHistoryPatchMixin, APITestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.api_url = reverse("cosinnus:frontend-api:api-navigation-unread-version-history")
+        cls.test_user = User.objects.create(**TEST_USER_DATA)
+        cls.portal = CosinnusPortal.get_current()
+        cls.patch_version_history()
+
+    def test_version_history_unread_count(self):
+        self.client.force_login(self.test_user)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, {'count': 2})
+        mark_read_url = reverse('cosinnus:frontend-api:api-navigation-version-history') + '?mark_as_read=true'
+        response = self.client.get(mark_read_url)
+        self.assertEqual(response.status_code, 200)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.data, {'count': 0})
+
+    def test_version_history_unread_count_anonymous(self):
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, {'count': 0})
+
