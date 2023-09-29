@@ -248,6 +248,8 @@ if settings.COSINNUS_CLOUD_ENABLED:
     def user_joined_group_receiver_sub(sender, user, group, **kwargs):
         """ Triggers when a user properly joined (not only requested to join) a group """
         # only initialize if the cosinnus-app is actually activated
+        if user.is_guest:
+            return
         if is_cloud_enabled_for_group(group):
             if group.nextcloud_group_id is not None:
                 logger.debug(
@@ -266,6 +268,8 @@ if settings.COSINNUS_CLOUD_ENABLED:
             Note: this can trigger on groups that do not have the cloud app activated, 
                   so that it removes users properly while the app is just disabled for 
                   a short period of time. """
+        if user.is_guest:
+            return
         if group.nextcloud_group_id is not None:
             logger.debug(
                 "User [%s] left group [%s], removing him from Nextcloud",
@@ -282,6 +286,8 @@ if settings.COSINNUS_CLOUD_ENABLED:
     @receiver(signals.userprofile_created)
     def userprofile_created_sub(sender, profile, **kwargs):
         user = profile.user
+        if user.is_guest:
+            return
         logger.debug(
             "User profile created, adding user [%s] to nextcloud ", get_user_display_name(user)
         )
@@ -299,6 +305,8 @@ if settings.COSINNUS_CLOUD_ENABLED:
         if created or not instance.id:
             return
         user = instance.user
+        if user.is_guest:
+            return
         if not is_user_active(user):
             return
         # run the update threaded because it is a very slow endpoint
@@ -384,6 +392,8 @@ if settings.COSINNUS_CLOUD_ENABLED:
     
     @receiver(signals.user_deactivated)
     def user_deactivated(sender, user, **kwargs):
+        if user.is_guest:
+            return
         submit_with_retry(
             nextcloud.disable_user, 
             get_nc_user_id(user)
@@ -391,6 +401,8 @@ if settings.COSINNUS_CLOUD_ENABLED:
     
     @receiver(signals.user_activated)
     def user_activated(sender, user, **kwargs):
+        if user.is_guest:
+            return
         submit_with_retry(
             nextcloud.enable_user, 
             get_nc_user_id(user)
@@ -399,6 +411,9 @@ if settings.COSINNUS_CLOUD_ENABLED:
     @receiver(signals.pre_userprofile_delete)
     def user_deleted(sender, profile, **kwargs):
         """ Called when a user deletes their account. Completely deletes the user's nextcloud account """
+        user = profile.user
+        if user.is_guest:
+            return
         submit_with_retry(
             nextcloud.delete_user, 
             get_nc_user_id(profile.user)

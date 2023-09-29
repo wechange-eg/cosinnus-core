@@ -484,6 +484,8 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     @property
     def rocket_username(self):
         """ Retrieves rocket username from profile settings. """
+        if self.user.is_guest:
+            return ''
         return self.settings.get(PROFILE_SETTING_ROCKET_CHAT_USERNAME, '')
 
     @rocket_username.setter

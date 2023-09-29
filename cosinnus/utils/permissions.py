@@ -256,7 +256,7 @@ def check_user_integrated_portal_member(user):
 def check_user_can_receive_emails(user, ignore_user_notification_settings=False):
     """ Checks if a user can receive emails *at all*, ignoring any frequency settings.
         This checks the global notification setting for authenticated users,
-        and the email blacklist for anonymous users. 
+        and the email blacklist for anonymous users and whether a user is a guest account.
 
         @param: user: an User object to check on
         @param: ignore_user_notification_settings: an optional parameter which serves to bring more
@@ -273,7 +273,7 @@ def check_user_can_receive_emails(user, ignore_user_notification_settings=False)
                 return False
             
         verified_check = (CosinnusPortal.get_current().email_needs_verification == False) or check_user_verified(user)
-        return user.is_active and verified_check
+        return user.is_active and verified_check and not user.is_guest
 
 
 def check_user_verified(user):

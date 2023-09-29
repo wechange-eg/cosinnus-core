@@ -955,7 +955,7 @@ class RocketChatConnection:
         admin_ids = [self.get_user_id(m.user) for m in admin_qs]
         members_qs = memberships.filter_membership_status(MEMBER_STATUS)
         member_usernames = [str(m.user.cosinnus_profile.rocket_username)
-                            for m in members_qs if hasattr(m.user, 'cosinnus_profile') and m.user.cosinnus_profile]
+                            for m in members_qs if hasattr(m.user, 'cosinnus_profile') and m.user.cosinnus_profile and not m.user.is_guest]
         member_usernames.append(settings.COSINNUS_CHAT_USER)
 
         # Createconfigured channels
