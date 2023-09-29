@@ -3,7 +3,7 @@
 
 {% block html_attributes %}class="mobile-noscroll"{% endblock html_attributes %}
 
-{% block page_title %}{% trans "Guest User Signup" %}: {{ group.name }} {{ block.super }}{% endblock page_title %}
+{% block page_title %}{% trans "Guest User Signup" %}: {{ guest_group.name }} {{ block.super }}{% endblock page_title %}
 
 {% block leftnav %}
 {% endblock leftnav %}
@@ -12,32 +12,32 @@
 {% endblock %}
 
 {% block main_page %}
-    {{ block.super }}
 
     <div class="row">
         <div class="col-lg-12 col-md-12"> 
-            {% captureas meeting_header %}
-                <h2>
-                    <p class="navi-explanation">
-                        {% trans "Guest User Signup" %}:
-                        <a href="{{ group.get_absolute_url }}" target="_blank" >{{ group.name }}</a>
-	                </p>
-                </h2>
-            {% endcaptureas %}   
 
-            {% if form %}
-                <form class="cosinnus-form form-horizontal" role="form">
-                    {% csrf_token %}
-                    <div class="row">
-                        <div class="col-lg-2 col-md-2">
-                        </div>
-                        <div class="col-lg-8 col-md-8">
+            <div class="row">
+                <div class="col-lg-2 col-md-2">
+                </div>
+                <div class="col-lg-8 col-md-8">
+                    <h2>
+                        <p class="navi-explanation">
+                            <a href="{{ guest_group.get_absolute_url }}" target="_blank" >{{ guest_group.name }}</a>:
+                            {% trans "Guest User Signup" %}
+                        </p>
+                    </h2>
+
+                    {% include 'cosinnus/messages.html' %}
+
+                    {% if form %}
+                        <form action="" method="post" class="cosinnus-form form-horizontal"  role="form">
+                            {% csrf_token %}
                             <div class="content-box"> <!-- a box with semi transparent background -->
                                 <h3>{% trans "You are joining as a guest and will get read-only access to the group." %}</h3>
 
                                 <h3>TODO: more explanation</h3>
 
-                                <p>
+                                <p class="textfield transparent">
                                     TODO: explanation text
                                 </p>
 
@@ -59,10 +59,10 @@
                                     </li>
                                 </ul>
                             </button>
-                        </div>
-                    </div>
-                </form>
-            {% endif %}
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

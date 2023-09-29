@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 import logging
 import random
 
+from django.http import QueryDict
+
 from cosinnus.conf import settings
 from cosinnus.core.registries.widgets import widget_registry
 from cosinnus.utils.group import get_cosinnus_group_model,\
@@ -247,20 +249,18 @@ def create_base_user(email, username=None, password=None, first_name=None, last_
     return user
 
 
-def create_user(email, username=None, first_name=None, last_name=None, tos_checked=True, additional_user_attr_map=dict):
+def create_user(email, username=None, first_name=None, last_name=None, tos_checked=True):
     """ Creates a user with a random password, and adds proper PortalMemberships for this portal.
         @param email: Email is required because it's basically our pk
         @param username: Can be left blank and will then be set to the user's id after creation.
         @param tos_checked: Set to False if the user should have to check the Terms of Services upon first login.
-        @param additional_user_attr_map: if a dict is given, each key,val pair will be patched onto the newly created
-            user instance as attribute,value *before* the User instance is being saved.
         @return: A <USER_MODEL> instance if creation successful, False if failed to create (was the username taken?)
     """
     from cosinnus.forms.user import UserCreationForm
     from cosinnus.models.profile import get_user_profile_model # leave here because of cyclic imports
     
     pwd = get_random_string(length=12)
-    data = {
+    data_dict = {
         'username': username or get_random_string(length=12),
         'email': email,
         'password1': pwd,
@@ -269,12 +269,15 @@ def create_user(email, username=None, first_name=None, last_name=None, tos_check
         'last_name': last_name,
         'tos_check': True, # needs to be True for form validation, may be reset later
     }
+    data = QueryDict('', mutable=True)
+    data.update(data_dict)
     # use Cosinnus' UserCreationForm to apply all usual user-creation-related effects
     form = UserCreationForm(data)
     if form.is_valid():
-        user = form.save(additional_attr_map=additional_user_attr_map)
+        user = form.save()
     else:
         logger.warning('Manual user creation failed because of form errors!', extra={'data': data, 'form-errors': form.errors})
+        print(form.errors)
         return False
     # always retrieve this to make sure the profile was created, we had a Heisenbug here
     profile = get_user_profile_model()._default_manager.get_for_user(user)
@@ -471,22 +474,35 @@ def create_guest_user_and_login(guest_access: 'UserGroupGuestAccess', username, 
     
     # TODO: probably inject special user property already so that hooks dont create RC profiles!
     
-    email = f'guestuser_{group.id}_{guest_access.id}_{group.portal.slug}@wechange.de'
-    # patch `user.is_guest=True` onto the new user object before it is saved to prevent
-    # hooks from happening that are blocked for guest users
-    user = create_user(
-        email,
-        first_name=username,
-        last_name=None,
-        tos_checked=True,
-        additional_user_attr_map={
-            'is_guest': True,
-        }
-    )
-    if not user:
+    rnd_user_session = get_random_string(length=12)
+    email = f'guestuser_{group.id}_{guest_access.id}_{group.portal.slug}_{rnd_user_session}@wechange.de'
+    # validate
+    if get_user_model().objects.filter(email__iexact=email):
+        logger.error('User guest signup: Could not create a user because the email was already in use!', extra={'guest_access_id': guest_access.id, 'email': email})
+        return False
+    username = username.strip()
+    if not username or len(username) < 2:
+        logger.error('User guest signup: Could not create a user because the username was too short!',
+                     extra={'guest_access_id': guest_access.id, 'username': username})
         return False
     
-    # add guest nature to user
+    # add fake username first before we know the user id
+    user = get_user_model().objects.create(
+        username=str(random.randint(100000000000, 999999999999)),
+        email=email,
+        first_name=username,
+        last_name=''
+    )
+    # patch `user.is_guest=True` onto the new user object before it is saved to prevent
+    # hooks from happening that are blocked for guest users
+    setattr(user, 'is_guest', True)
+    user.set_password(get_random_string(length=12))
+    user.save()
+    from cosinnus.forms.user import UserSignupFinalizeMixin
+    finalize_mixin = UserSignupFinalizeMixin()
+    finalize_mixin.finalize_user_object_after_signup(user, {})
+    
+    # add guest nature to userprofile
     user.cosinnus_profile.is_guest = True
     user.cosinnus_profile.guest_access_object = guest_access
     user.cosinnus_profile.save()

@@ -224,16 +224,11 @@ class UserCreationForm(UserSignupFinalizeMixin, UserCreationFormDynamicFieldsMix
             raise forms.ValidationError(_('This email address already has a registered user!'))
         return email.lower()
     
-    def save(self, commit=True, additional_attr_map=dict):
+    def save(self, commit=True):
         """ Set the username equal to the userid """
         try:
-            user = super().save(commit=False)
-            # save additional user attrs. useful for patching in user attributes before saving for the first time
-            if additional_attr_map:
-                for key, val in additional_attr_map.items():
-                    setattr(user, key, val)
-            user.save()
-            user.save_m2m()
+            user = None
+            user = super(UserCreationForm, self).save(commit=True)
         except Exception as e:
             if user is None or not user.id:
                 # bubble up exception if user wasn't saved
@@ -353,4 +348,7 @@ class UserGroupGuestAccessForm(forms.Form):
     
     username = forms.CharField(max_length=50, required=True, validators=[MinLengthValidator(2), MaxLengthValidator(50)])
     tos_check = forms.BooleanField(label='tos_check', required=True)
+    
+    if settings.COSINNUS_SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK:
+        privacy_policy_check = forms.BooleanField(label='privacy_policy_check', required=True)
     

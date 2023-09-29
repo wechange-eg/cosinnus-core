@@ -1228,7 +1228,7 @@ change_email_pending_view = UserChangeEmailPendingView.as_view()
 class GuestUserSignupView(FormView):
     """ Guest access for a given `UserGroupGuestAccess` token. """
     
-    form = UserGroupGuestAccessForm
+    form_class = UserGroupGuestAccessForm
     template_name = 'cosinnus/user/guest_user_signup.html'
     guest_access = None
     group = None
@@ -1269,8 +1269,9 @@ class GuestUserSignupView(FormView):
         return super().post(request, *args, **kwargs)
     
     def form_valid(self, form):
-        print(f'>>>>> doing user signup with {form.username}')
-        success = create_guest_user_and_login(self.guest_access, form.username, self.request)
+        username = form.cleaned_data['username']
+        print(f'>>>>> doing user signup with {username}')
+        success = create_guest_user_and_login(self.guest_access, username, self.request)
         # if not successful, render to form and show error
         if not success:
             messages.error(self.request, self.msg_signup_not_possible)
@@ -1280,7 +1281,7 @@ class GuestUserSignupView(FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({
-            'group': self.group,
+            'guest_group': self.group,
         })
         # remove form if user is logged in so they only see the error message
         if self.request.user.is_authenticated and 'form' in context:
