@@ -259,32 +259,6 @@ class BBBRoomGuestAccessView(TemplateView):
         if not self.bbb_room:
             messages.warning(request, self.msg_invalid_token)
             return redirect_to_error_page(request, view=self)
-        # TODO: 
-        # ! resolve join param
-        # ! set flag for guest policy as default settings and inheritable in json
-        # ! create new guest_token for rooms that don't have it on access
-        # ! set moderatorOnlyMessage to guest token on room create
-        # ! redirect found token accessor to join url with ?guest=true
-        # ! refactor view: resolve into own function, user attribs getting into own function
-        # ! add Form class to view
-        # ! check GET params on view, redirect to form template if not all (including ?confirm=True) are set
-        # ! fill in GET params for non-anymous users
-        # ! pass guest_token through to BBB API Queue
-        # ! add template with inputs from signup and text boxes
-        # ! add recording checkbox if record==True
-        # - check that group meeting is still usable
-        # - URLS
-            # join guest http://localhost:8000/bbb/aat-880-u6c-ygp/?username=
-            # join guest nonrecorded: http://localhost:8000/bbb/aat-880-u6c-ygp/?username=
-            # forum nonrecored: http://localhost:8000/group/forum-dinainternational/meeting/
-            # fairmeeting: http://localhost:8000/group/asd/meeting/
-            # recorded: http://localhost:8000/group/boinky/meeting/
-        # - save GET params to session, retrieve them for template form
-        # ! show name in meeting above Iframe!
-        # - translations (only redesign)
-        # ! skip ?confirm=True on logged-in-users if no recording is present
-        # - show guest token/url in room/table/event/group settings
-        # ! check if resolving and iframe attrs really work in the group BBB iframe where the non queue URL is used and a resolve doesn't happen?
         
         user = self.request.user
         self.source_obj = self.bbb_room.source_object
@@ -300,7 +274,7 @@ class BBBRoomGuestAccessView(TemplateView):
             setattr(user, BBBRoom.BBB_USER_GUEST_TOKEN_ATTR, self.guest_token)
             self.all_data_filled = True
         else:
-            # if the anonymous user didn't fill out all the data required, sho
+            # if the anonymous user didn't fill out all the data required, show enter-username form
             self.username = request.GET.get('username', '').strip()
             tos_check = request.GET.get('tos_check', False) == 'true'
             if not self.username or not tos_check:

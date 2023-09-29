@@ -18,7 +18,7 @@ def get_full_name_extended(self):
 setattr(get_user_model(), 'get_full_name', get_full_name_extended)
 
 
-def get_is_guest(self):
+def is_guest(self):
     """
         Extend the user model with an `is_guest` property, that gets the state from `BaseUserProfile.is_guest`.
         This property cannot be set.
@@ -30,5 +30,5 @@ def get_is_guest(self):
     return False
 
 
-setattr(get_user_model(), 'is_guest', property(get_is_guest))
+setattr(get_user_model(), 'is_guest', property(is_guest))
 

@@ -8,7 +8,7 @@ from cosinnus.conf import settings
 from cosinnus.core.registries.widgets import widget_registry
 from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_slugs
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, login
 from django.core.exceptions import MultipleObjectsReturned
 from django.utils.crypto import get_random_string
 from django.db.models import Q
@@ -243,11 +243,13 @@ def create_base_user(email, username=None, password=None, first_name=None, last_
     return user
 
 
-def create_user(email, username=None, first_name=None, last_name=None, tos_checked=True):
+def create_user(email, username=None, first_name=None, last_name=None, tos_checked=True, additional_user_attr_map=dict):
     """ Creates a user with a random password, and adds proper PortalMemberships for this portal.
         @param email: Email is required because it's basically our pk
         @param username: Can be left blank and will then be set to the user's id after creation.
         @param tos_checked: Set to False if the user should have to check the Terms of Services upon first login.
+        @param additional_user_attr_map: if a dict is given, each key,val pair will be patched onto the newly created
+            user instance as attribute,value *before* the User instance is being saved.
         @return: A <USER_MODEL> instance if creation successful, False if failed to create (was the username taken?)
     """
     from cosinnus.forms.user import UserCreationForm
@@ -266,7 +268,7 @@ def create_user(email, username=None, first_name=None, last_name=None, tos_check
     # use Cosinnus' UserCreationForm to apply all usual user-creation-related effects
     form = UserCreationForm(data)
     if form.is_valid():
-        user = form.save()
+        user = form.save(additional_attr_map=additional_user_attr_map)
     else:
         logger.warning('Manual user creation failed because of form errors!', extra={'data': data, 'form-errors': form.errors})
         return False
@@ -447,4 +449,48 @@ def get_user_id_hash(user):
     hasher = hashlib.sha1(salted_id.encode('utf-8'))
     short_digest = hasher.hexdigest()[:12]
     return short_digest
+
+
+def create_guest_user_and_login(guest_access: 'UserGroupGuestAccess', username, request=None) -> bool:
+    """
+        Creates a guest-type user account based on a UserGroupGuestAccess token with the given username
+        and if a request is given, logs the current session in as that guest user.
+        If a request is given, the current user may not already be logged in or this method will fail!
+        
+        @return: True if successful, False if not
+    """
+    if request and request.user.is_authenticated:
+        return False
+    if not guest_access or not guest_access.group:
+        return False
+    group = guest_access.group
+    
+    # TODO: probably inject special user property already so that hooks dont create RC profiles!
+    
+    email = f'guestuser_{group.id}_{guest_access.id}_{group.portal.slug}@wechange.de'
+    # patch `user.is_guest=True` onto the new user object before it is saved to prevent
+    # hooks from happening that are blocked for guest users
+    user = create_user(
+        email,
+        first_name=username,
+        last_name=None,
+        tos_checked=True,
+        additional_user_attr_map={
+            'is_guest': True,
+        }
+    )
+    if not user:
+        return False
+    
+    # add guest nature to user
+    user.cosinnus_profile.is_guest = True
+    user.cosinnus_profile.guest_access_object = guest_access
+    user.cosinnus_profile.save()
+    
+    print(f'>> created user {user.email} with guest {user.is_guest}, key {user.cosinnus_profile.guest_access_object.token}')
+    
+    # log the user in
+    if request:
+        login(request, user)
+    return True
 

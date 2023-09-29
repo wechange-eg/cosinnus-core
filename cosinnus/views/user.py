@@ -16,11 +16,11 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.http import Http404
 from django.views.generic.edit import FormView
-from cosinnus.core.decorators.views import staff_required, superuser_required,\
-    redirect_to_not_logged_in, redirect_to_403
-from cosinnus.forms.user import UserCreationForm, UserChangeForm,\
+from cosinnus.core.decorators.views import staff_required, superuser_required, \
+    redirect_to_not_logged_in, redirect_to_403, redirect_to_error_page
+from cosinnus.forms.user import UserCreationForm, UserChangeForm, \
     TermsOfServiceFormFields, ValidatedPasswordChangeForm, \
-    UserChangeEmailFormWithPasswordValidation
+    UserChangeEmailFormWithPasswordValidation, UserGroupGuestAccessForm
 from cosinnus.views.mixins.ajax import patch_body_json_data
 from cosinnus.utils.http import JSONResponse
 from django.contrib import messages
@@ -30,9 +30,9 @@ from cosinnus.models.profile import get_user_profile_model,\
     GlobalUserNotificationSetting, PROFILE_SETTING_PASSWORD_NOT_SET,\
     PROFILE_SETTING_LOGIN_TOKEN_SENT
 from cosinnus.models.tagged import BaseTagObject
-from cosinnus.models.group import CosinnusPortal,\
+from cosinnus.models.group import CosinnusPortal, \
     CosinnusUnregisterdUserGroupInvite, CosinnusGroupMembership, \
-    CosinnusGroupInviteToken
+    CosinnusGroupInviteToken, UserGroupGuestAccess
 from cosinnus.models import MEMBERSHIP_INVITED_PENDING, MEMBER_STATUS
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.core.mail import MailThread, get_common_mail_context,\
@@ -49,10 +49,10 @@ from django.template.response import TemplateResponse
 from django.core.paginator import Paginator
 from cosinnus.views.mixins.group import EndlessPaginationMixin,\
     RequireLoggedInMixin
-from cosinnus.utils.user import filter_active_users,\
-    get_newly_registered_user_email, accept_user_tos_for_portal,\
-    get_user_query_filter_for_search_terms, get_user_select2_pills,\
-    get_group_select2_pills, get_user_from_set_password_token
+from cosinnus.utils.user import filter_active_users, \
+    get_newly_registered_user_email, accept_user_tos_for_portal, \
+    get_user_query_filter_for_search_terms, get_user_select2_pills, \
+    get_group_select2_pills, get_user_from_set_password_token, create_guest_user_and_login
 from uuid import uuid1, uuid4
 from django.utils.encoding import force_text
 from cosinnus.core import signals
@@ -1223,6 +1223,66 @@ class UserChangeEmailPendingView(RequireLoggedInMixin, TemplateView):
         return context
 
 change_email_pending_view = UserChangeEmailPendingView.as_view()
+
+
+class GuestUserSignupView(FormView):
+    """ Guest access for a given `UserGroupGuestAccess` token. """
+    
+    form = UserGroupGuestAccessForm
+    template_name = 'cosinnus/user/guest_user_signup.html'
+    guest_access = None
+    group = None
+    
+    msg_invalid_token = _('Invalid guest token.')
+    msg_already_logged_in = _('You are currently logged in. The guest access can only be used if you are not logged in.')
+    msg_signup_not_possible = _('We could not sign you in as a guest at this time. Please try again later!')
+    
+    def dispatch(self, request, *args, **kwargs):
+        # check if guest token and its access object and group exists
+        guest_token_str = kwargs.pop('guest_token', '').strip().lower()
+        if guest_token_str:
+            self.guest_access = get_object_or_None(UserGroupGuestAccess, token=guest_token_str)
+        if self.guest_access:
+            self.group = self.guest_access.group
+        if not self.group:
+            messages.warning(request, self.msg_invalid_token)
+            return redirect_to_error_page(request, view=self)
+        return super().dispatch(request, *args, **kwargs)
+    
+    def get(self, request, *args, **kwargs):
+        # show warning for logged in users
+        if request.user.is_authenticated:
+            messages.warning(request, self.msg_already_logged_in)
+        return super().get(request, *args, **kwargs)
+    
+    def post(self, request, *args, **kwargs):
+        # disallow for logged in users
+        if request.user.is_authenticated:
+            messages.warning(request, self.msg_already_logged_in)
+            return redirect_to_error_page(request, view=self)
+        return super().post(request, *args, **kwargs)
+    
+    def form_valid(self, form):
+        print(f'>>>>> doing user signup with {form.username}')
+        success = create_guest_user_and_login(self.guest_access, form.username, self.request)
+        # if not successful, render to form and show error
+        if not success:
+            messages.error(self.request, self.msg_signup_not_possible)
+            return self.render_to_response(self.get_context_data(form=form))
+        return redirect('cosinnus:user-dashboard')
+        
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'group': self.group,
+        })
+        # remove form if user is logged in so they only see the error message
+        if self.request.user.is_authenticated and 'form' in context:
+            del context['form']
+        return context
+    
+    
+guest_user_signup_view = GuestUserSignupView.as_view()
 
 
 @receiver(userprofile_created)

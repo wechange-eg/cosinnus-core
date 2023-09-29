@@ -1,0 +1,68 @@
+{% extends "cosinnus_event/base.html" %}
+{% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
+
+{% block html_attributes %}class="mobile-noscroll"{% endblock html_attributes %}
+
+{% block page_title %}{% trans "Guest User Signup" %}: {{ group.name }} {{ block.super }}{% endblock page_title %}
+
+{% block leftnav %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+{% endblock %}
+
+{% block main_page %}
+    {{ block.super }}
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12"> 
+            {% captureas meeting_header %}
+                <h2>
+                    <p class="navi-explanation">
+                        {% trans "Guest User Signup" %}:
+                        <a href="{{ group.get_absolute_url }}" target="_blank" >{{ group.name }}</a>
+	                </p>
+                </h2>
+            {% endcaptureas %}   
+
+            {% if form %}
+                <form class="cosinnus-form form-horizontal" role="form">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2">
+                        </div>
+                        <div class="col-lg-8 col-md-8">
+                            <div class="content-box"> <!-- a box with semi transparent background -->
+                                <h3>{% trans "You are joining as a guest and will get read-only access to the group." %}</h3>
+
+                                <h3>TODO: more explanation</h3>
+
+                                <p>
+                                    TODO: explanation text
+                                </p>
+
+                                {% trans "Your name" as your_name_trans %}
+                                {% trans "Please enter your name" as enter_your_name %}
+                                {% include 'cosinnus/fields/default_field.html' with field=form.username label=enter_your_name placeholder=your_name_trans field_value=name_val %}
+
+                                {% include 'cosinnus/registration/extra_signup_fields.html' %}
+                            </div>
+                            <button type="submit" class="btn btn-emphasized btn-autosize">
+                                <ul class="media-list">
+                                    <li class="media">
+                                        <span class="pull-left" href="#" tabindex="-1">
+                                            <i class="fa fa-check"></i>
+                                        </span>
+                                        <div class="media-body">
+                                            {% trans "Join as a Guest" %}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

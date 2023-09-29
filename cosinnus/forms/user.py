@@ -12,7 +12,7 @@ from django import forms
 from django.contrib.auth import get_user_model, password_validation
 from django.contrib.auth.forms import UserCreationForm as DjUserCreationForm, \
     AuthenticationForm, PasswordChangeForm
-from django.core.validators import MaxLengthValidator
+from django.core.validators import MaxLengthValidator, MinLengthValidator
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
@@ -224,11 +224,16 @@ class UserCreationForm(UserSignupFinalizeMixin, UserCreationFormDynamicFieldsMix
             raise forms.ValidationError(_('This email address already has a registered user!'))
         return email.lower()
     
-    def save(self, commit=True):
+    def save(self, commit=True, additional_attr_map=dict):
         """ Set the username equal to the userid """
         try:
-            user = None
-            user = super(UserCreationForm, self).save(commit=True)
+            user = super().save(commit=False)
+            # save additional user attrs. useful for patching in user attributes before saving for the first time
+            if additional_attr_map:
+                for key, val in additional_attr_map.items():
+                    setattr(user, key, val)
+            user.save()
+            user.save_m2m()
         except Exception as e:
             if user is None or not user.id:
                 # bubble up exception if user wasn't saved
@@ -342,3 +347,10 @@ class UserChangeEmailFormWithPasswordValidation(PasswordValidationFormMixin, Use
     """ The user email change form, with added password validation logic """
     pass
 
+
+class UserGroupGuestAccessForm(forms.Form):
+    """ Used for having guests enter their username and ToS accept """
+    
+    username = forms.CharField(max_length=50, required=True, validators=[MinLengthValidator(2), MaxLengthValidator(50)])
+    tos_check = forms.BooleanField(label='tos_check', required=True)
+    

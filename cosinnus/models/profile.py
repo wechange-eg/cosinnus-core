@@ -169,7 +169,8 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
                                                help_text=_('The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)'))
     deletion_triggered_by_self = models.BooleanField(_('Deletion triggered by self'), default=False, editable=False)
     
-    # guest user account relations, should be in auth.User but since we're not extending that, it's here
+    # Note: access this property only through `user.is_guest`, and not through `user.cosinnus_profile.is_guest`!
+    # Guest user account relations, should be in auth.User but since we're not extending that, it's here.
     # a user with `is_guest=True` has very restricted site access, has no email and their account is destroyed
     # when they end the session by logging out, or their guest_access_object relation has been set to null
     # (no matter whether the relation has been set to null manually or the object was deleted)
@@ -205,6 +206,14 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
         
     def __str__(self):
         return six.text_type(self.user)
+    
+    def __getattribute__(self, name):
+        """ Block access to `is_guest` as it should only be called on the related user instance.
+            This is so that during user/profile creation, the is_guest property can already be patched
+            so that model creation hooks properly see the guest status of a user from the start on. """
+        if name == 'is_guest':
+            raise Exception('Access `user.is_guest` instead of `user.cosinnus_profile.is_guest` when getting the property!')
+        return super().__getattribute__(name)
     
     def get_icon(self):
         """ Returns the font-awesome icon specific to this object type """
