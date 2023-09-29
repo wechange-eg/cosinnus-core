@@ -1034,7 +1034,7 @@ admin.site.register(QueuedMassMail, QueuedMassMailAdmin)
 
 if settings.COSINNUS_ENABLE_USER_GUEST_ACCOUNTS_FOR_GROUP_TYPE:
     class UserGroupGuestAccessAdmin(admin.ModelAdmin):
-        list_display = ('group', 'creator__email', 'token', 'active_accounts',)
+        list_display = ('group', 'creator', 'token', 'active_accounts',)
         search_fields = ('creator__first_name', 'creator__last_name', 'creator__email', 'group__name', 'token')
         
         def active_accounts(self, obj):

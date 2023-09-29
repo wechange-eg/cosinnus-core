@@ -1960,11 +1960,10 @@ class UserGroupGuestAccess(models.Model):
         A token for this object is generated automatically when saving the object,
         if it hasn't been supplied. """
     
-    group = models.ForeignKey(
+    group = models.OneToOneField(
         settings.COSINNUS_GROUP_OBJECT_MODEL,
         related_name='user_group_guest_access',
-        on_delete=models.CASCADE,
-        unique=True
+        on_delete=models.CASCADE
     )
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,

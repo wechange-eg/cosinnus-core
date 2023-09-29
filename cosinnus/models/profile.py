@@ -172,12 +172,13 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     # Note: access this property only through `user.is_guest`, and not through `user.cosinnus_profile.is_guest`!
     # Guest user account relations, should be in auth.User but since we're not extending that, it's here.
     # a user with `is_guest=True` has very restricted site access, has no email and their account is destroyed
-    # when they end the session by logging out, or their guest_access_object relation has been set to null
+    # when they end the session by logging out, or their `guest_access_object` relation has been set to null
     # (no matter whether the relation has been set to null manually or the object was deleted)
     is_guest = models.BooleanField(_('May be contacted'), default=False, editable=False)
     guest_access_object = models.ForeignKey(
-        'cosinnus.group.UserGroupGuestAccess',
+        'cosinnus.UserGroupGuestAccess',
         related_name='guest_users',
+        null=True,
         on_delete=models.SET_NULL
     )
     
@@ -186,7 +187,8 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     objects = BaseUserProfileManager()
 
     SKIP_FIELDS = ['id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings', 
-                   'managed_tag_assignments', 'likes', 'deletion_triggered_by_self']\
+                   'managed_tag_assignments', 'likes', 'deletion_triggered_by_self',
+                   'is_guest', 'guest_access_object']\
                     + getattr(cosinnus_settings, 'COSINNUS_USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS', [])
     
     # this indicates that objects of this model are in some way always visible by registered users
