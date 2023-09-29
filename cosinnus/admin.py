@@ -25,7 +25,8 @@ from cosinnus.models.feedback import CosinnusReportedObject, \
     CosinnusSentEmailLog, CosinnusFailedLoginRateLimitLog
 from cosinnus.models.group import CosinnusGroupMembership, \
     CosinnusPortal, CosinnusPortalMembership, \
-    CosinnusGroup, CosinnusPermanentRedirect, CosinnusUnregisterdUserGroupInvite, RelatedGroups, CosinnusGroupInviteToken
+    CosinnusGroup, CosinnusPermanentRedirect, CosinnusUnregisterdUserGroupInvite, RelatedGroups, \
+    CosinnusGroupInviteToken, UserGroupGuestAccess
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety, \
     CosinnusConference
 from cosinnus.models.idea import CosinnusIdea
@@ -1029,3 +1030,14 @@ class QueuedMassMailAdmin(admin.ModelAdmin):
     recipients_sent_count.short_description = _('Recipients Send Count')
 
 admin.site.register(QueuedMassMail, QueuedMassMailAdmin)
+
+
+if settings.COSINNUS_ENABLE_USER_GUEST_ACCOUNTS_FOR_GROUP_TYPE:
+    class UserGroupGuestAccessAdmin(admin.ModelAdmin):
+        list_display = ('group', 'creator__email', 'token', 'active_accounts',)
+        search_fields = ('creator__first_name', 'creator__last_name', 'creator__email', 'group__name', 'token')
+        
+        def active_accounts(self, obj):
+            return get_user_profile_model().objects.filter(guest_access_object=obj).count()
+
+    admin.site.register(UserGroupGuestAccess, UserGroupGuestAccessAdmin)

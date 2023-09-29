@@ -1238,6 +1238,9 @@ class GuestUserSignupView(FormView):
     msg_signup_not_possible = _('We could not sign you in as a guest at this time. Please try again later!')
     
     def dispatch(self, request, *args, **kwargs):
+        # check if feature is disabled on this portal
+        if not settings.COSINNUS_ENABLE_USER_GUEST_ACCOUNTS_FOR_GROUP_TYPE:
+            raise Http404
         # check if guest token and its access object and group exists
         guest_token_str = kwargs.pop('guest_token', '').strip().lower()
         if guest_token_str:
@@ -1247,6 +1250,9 @@ class GuestUserSignupView(FormView):
         if not self.group:
             messages.warning(request, self.msg_invalid_token)
             return redirect_to_error_page(request, view=self)
+        # check if feature is disabled on this portal for this group type
+        if self.group.type not in settings.COSINNUS_ENABLE_USER_GUEST_ACCOUNTS_FOR_GROUP_TYPE:
+            raise Http404
         return super().dispatch(request, *args, **kwargs)
     
     def get(self, request, *args, **kwargs):

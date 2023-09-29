@@ -1354,10 +1354,17 @@ class CosinnusConf(AppConf):
     MATCHING_FIELDS = ()
     MATCHING_DYNAMIC_FIELDS = ()
 
-    # types of CosinnusBaseGroup which are allowed to use direct join tokens:
+    # Types of CosinnusBaseGroup which are allowed to use direct join tokens:
     # 0 for projects; 1 for groups; 2 for conferences
     ENABLE_USER_JOIN_TOKENS_FOR_GROUP_TYPE = [2]
-
+    
+    # Types of CosinnusBaseGroup in which group admins are allowed to create user guest
+    # access tokens, which enables user guest account access for this portal.
+    # Set this to `[]` to disable user guest account access for this portal.
+    # Will not work for closed portals!
+    # 0 for projects; 1 for groups; 2 for conferences
+    ENABLE_USER_GUEST_ACCOUNTS_FOR_GROUP_TYPE = []
+    
     # should the LIKE, BOOKMARK, FOLLOW buttons be shown on the entire portal (microsite, groups/projects, events, etc.)?
     SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS = True
 

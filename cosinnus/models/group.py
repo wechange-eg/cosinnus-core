@@ -1984,6 +1984,9 @@ class UserGroupGuestAccess(models.Model):
     
     class Meta(object):
         ordering = ('-created',)
+    
+    def __str__(self):
+        return f'<UserGroupGuestAccess: "{self.token}", Group: {self.group.id}>'
         
     def save(self, *args, **kwargs):
         if not self.token:
