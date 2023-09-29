@@ -14,6 +14,7 @@ from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.utils.encoding import force_text
 from django.utils.translation import gettext, ugettext_lazy as _
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from cosinnus.conf import settings
 from cosinnus.core import signals as cosinnus_signals
@@ -71,6 +72,7 @@ NEVER_REDIRECT_URLS = [
     '/api/v2/header/',
     '/api/v2/footer/',
     '/api/v2/statistics/',
+    '/api/v2/token/',
     
     '/api/v3/login',
     '/api/v3/logout',
@@ -415,6 +417,13 @@ class RedirectAnonymousUserToLoginAllowSignupMiddleware(GroupResolvingMiddleware
         if not request.user.is_authenticated:
             if not any([request.path.startswith(prefix) for prefix in LOGIN_URLS + ['/signup/', '/captcha/']]) \
                     and not self.is_anonymous_block_exempted_group_url(request):
+                if request.path.startswith('/api/') and 'Authorization' in request.headers:
+                    # attempt to login with header token to accept token-authenticated API requests
+                    try:
+                        if JWTAuthentication().authenticate(request):
+                            return
+                    except:
+                        pass
                 return redirect_to_not_logged_in(request)
 
 
