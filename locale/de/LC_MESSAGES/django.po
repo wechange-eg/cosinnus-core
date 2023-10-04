@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-21 14:54+0200\n"
+"POT-Creation-Date: 2023-10-04 11:53+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -202,6 +202,27 @@ msgstr "Persönlich"
 msgid "Personal Dashboard"
 msgstr "Persönliches Dashboard"
 
+msgid "My Personal Space"
+msgstr "Mein persönlicher Space"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Groups and Projects"
+msgstr "Meine Gruppen und Projekte"
+
+msgid "My Conferences"
+msgstr "Meine Tagungen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups and Projects"
+msgstr "Gruppen und Projekte"
+
+msgid "Users"
+msgstr "Benutzer_innen"
+
+msgctxt "navigation bookmarks header"
+msgid "Content"
+msgstr "Inhalte"
+
 msgid "Change Language"
 msgstr "Sprache ändern"
 
@@ -258,6 +279,9 @@ msgstr "Anmelden"
 
 msgid "Register"
 msgstr "Registrieren"
+
+msgid "Show all"
+msgstr "Alle anzeigen"
 
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
@@ -856,9 +880,6 @@ msgstr "Dies scheint keine gültige Widget-ID oder HTML-Code von Twitter zu sein
 
 msgid "This doesn't seem to be a valid Flickr Gallery link! It should be in the form of \"https://www.flickr.com/photos/username/sets/1234567890\"!"
 msgstr "Dies scheint keine gültige Flickr-Galerie oder Slideshow URL zu sein! Es sollte in der Form von \"https://www.flickr.com/photos/username/sets/1234567890\" sein!"
-
-msgid "Users"
-msgstr "Benutzer_innen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
@@ -6246,10 +6267,6 @@ msgid "Membership Requests"
 msgstr "Mitgliedschaftsanträge"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "My Groups and Projects"
-msgstr "Meine Gruppen und Projekte"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Show more Projects of this Group"
 msgstr "Weitere Projekte dieser Gruppe anzeigen"
 
@@ -6574,11 +6591,6 @@ msgstr "Objekte, denen ich folge"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Nothing here yet."
 msgstr "Keine Einträge bisher."
-
-#
-#. Translators: __INCLUDE_JS_PO__
-msgid "Groups and Projects"
-msgstr "Gruppen und Projekte"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Here you can find an overview of your Groups and Projects once you become active in one or more of them."
@@ -7514,6 +7526,9 @@ msgstr "Schnellsuche"
 msgid "Create content"
 msgstr "Inhalt erstellen"
 
+msgid "What's New"
+msgstr ""
+
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
 
@@ -7835,9 +7850,6 @@ msgstr "Nur Mitglieder dieser Gruppe können diesen Inhalt sehen. Stelle jetzt e
 msgid "Note: New recordings can only be made if you have booked premium features for this group."
 msgstr "Achtung: Neue Aufzeichnungen können nur gemacht werden, wenn der Premium-Status für diese Gruppe gebucht wurde."
 
-msgid "My Conferences"
-msgstr "Meine Tagungen"
-
 msgid "You are not currently attending any Conferences"
 msgstr "Du nimmst aktuell noch noch an keinen Tagungen teil"
 
@@ -7994,6 +8006,20 @@ msgstr "Bitte gib auch ein Enddatum an"
 
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr "Stelle dich sicher, dass dein Name keine ungültigen Zeichen enthält."
+
+msgid "Version 1.9.1 released"
+msgstr ""
+
+msgid "Includes dynamic registration form and dynamic option for participation for conferences."
+msgstr ""
+
+msgid ""
+"The update includes:\n"
+"- Dynamic registration form for conferences\n"
+"- Dynamize option for participation for conferences\n"
+"- Library Update of Moment.js\n"
+"- Update Matomo tracking to include better options\n"
+msgstr ""
 
 msgid "Test email sent!"
 msgstr "Test email wurde gesendet!"
@@ -9950,9 +9976,6 @@ msgstr "Du hast eine Veranstaltung angelegt"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created an event"
 msgstr "hat eine Veranstaltung angelegt"
-
-msgid "Show all"
-msgstr "Alle anzeigen"
 
 msgid "Upcoming events"
 msgstr "Aktuelle Veranstaltungen"

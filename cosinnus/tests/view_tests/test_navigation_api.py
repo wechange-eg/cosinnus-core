@@ -46,6 +46,7 @@ class SpacesViewTest(APITestCase):
         self.assertDictEqual(
             response.data['personal'],
             {
+                'header': 'My Personal Space',
                 'items': [
                     MenuItem('Personal Dashboard', '/dashboard/', 'fa-user', id='PersonalDashboard')
                 ],
@@ -67,6 +68,7 @@ class SpacesViewTest(APITestCase):
         self.assertDictEqual(
             response.data['groups'],
             {
+                'header': 'My Groups and Projects',
                 'items': [
                     MenuItem('Test Group', '/group/test-group/', 'fa-sitemap', id=f'CosinnusSociety{group.pk}')
                 ],
@@ -85,6 +87,7 @@ class SpacesViewTest(APITestCase):
         self.assertDictEqual(
             response.data['groups'],
             {
+                'header': 'My Groups and Projects',
                 'items': [],
                 'actions': [
                     MenuItem('Create new Group', '/groups/add/', id='CreateGroup'),
@@ -100,6 +103,7 @@ class SpacesViewTest(APITestCase):
         self.assertDictEqual(
             response.data['community'],
             {
+                'header': settings.COSINNUS_PORTAL_NAME.upper() + ' Community',
                 'items': [
                     MenuItem(settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL, forum.get_absolute_url(), 'fa-sitemap', id='Forum'),
                     MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, '/map/', 'fa-group', id='Map'),
@@ -147,9 +151,12 @@ class BookmarksViewTest(APITestCase):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
-        self.assertListEqual(
+        self.assertEqual(
             response.data['groups'],
-            [MenuItem('Test Group', '/group/test-group/', 'fa-sitemap', id=f'CosinnusGroup{group.pk}')]
+            {
+                'header': 'Groups and Projects',
+                'items': [MenuItem('Test Group', '/group/test-group/', 'fa-sitemap', id=f'CosinnusGroup{group.pk}')]
+            }
         )
 
     def test_user_bookmarks(self):
@@ -159,9 +166,12 @@ class BookmarksViewTest(APITestCase):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
-        self.assertListEqual(
+        self.assertEqual(
             response.data['users'],
-            [MenuItem('Test User2', '/user/2/', 'fa-user', id=f'UserProfile{user2.cosinnus_profile.pk}')]
+            {
+                'header': 'Users',
+                'items': [MenuItem('Test User2', '/user/2/', 'fa-user', id=f'UserProfile{user2.cosinnus_profile.pk}')]
+            }
         )
 
     def test_content_bookmarks(self):
@@ -170,9 +180,15 @@ class BookmarksViewTest(APITestCase):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
-        self.assertListEqual(
+        self.assertEqual(
             response.data['content'],
-            [MenuItem('Test Idea', '/map/?item=1.ideas.test-idea', 'fa-lightbulb-o', id=f'CosinnusIdea{idea.pk}')]
+            {
+                'header': 'Content',
+                'items': [
+                    MenuItem('Test Idea', '/map/?item=1.ideas.test-idea', 'fa-lightbulb-o', id=f'CosinnusIdea{idea.pk}')
+                ]
+
+            }
         )
 
     def test_bookmarks_anonymous(self):

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-21 14:54+0200\n"
+"POT-Creation-Date: 2023-10-04 11:53+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -208,6 +208,31 @@ msgstr "Project Type"
 msgid "Personal Dashboard"
 msgstr "Project Type"
 
+#, fuzzy
+msgid "My Personal Space"
+msgstr "Project Type"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "My Groups and Projects"
+msgstr "My Projects"
+
+msgid "My Conferences"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Groups and Projects"
+msgstr "My Projects"
+
+msgid "Users"
+msgstr ""
+
+#, fuzzy
+msgctxt "navigation bookmarks header"
+msgid "Content"
+msgstr "All Projects"
+
 msgid "Change Language"
 msgstr ""
 
@@ -267,6 +292,9 @@ msgid "Login"
 msgstr ""
 
 msgid "Register"
+msgstr ""
+
+msgid "Show all"
 msgstr ""
 
 #, python-format
@@ -913,9 +941,6 @@ msgid "This doesn't seem to be a valid widget ID or embed HTML code from Twitter
 msgstr ""
 
 msgid "This doesn't seem to be a valid Flickr Gallery link! It should be in the form of \"https://www.flickr.com/photos/username/sets/1234567890\"!"
-msgstr ""
-
-msgid "Users"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -6308,11 +6333,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-msgid "My Groups and Projects"
-msgstr "My Projects"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
 msgid "Show more Projects of this Group"
 msgstr "Other Projects"
 
@@ -6657,11 +6677,6 @@ msgstr ""
 #. Translators: __INCLUDE_JS_PO__
 msgid "Nothing here yet."
 msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-msgid "Groups and Projects"
-msgstr "My Projects"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Here you can find an overview of your Groups and Projects once you become active in one or more of them."
@@ -7619,6 +7634,9 @@ msgstr ""
 msgid "Create content"
 msgstr "Create Project"
 
+msgid "What's New"
+msgstr ""
+
 msgid "Rocket.Chat"
 msgstr ""
 
@@ -7964,9 +7982,6 @@ msgstr ""
 msgid "Note: New recordings can only be made if you have booked premium features for this group."
 msgstr ""
 
-msgid "My Conferences"
-msgstr ""
-
 msgid "You are not currently attending any Conferences"
 msgstr ""
 
@@ -8134,6 +8149,20 @@ msgid "Please also provide an end date"
 msgstr ""
 
 msgid "Ensure that your name does not contain any invalid characters."
+msgstr ""
+
+msgid "Version 1.9.1 released"
+msgstr ""
+
+msgid "Includes dynamic registration form and dynamic option for participation for conferences."
+msgstr ""
+
+msgid ""
+"The update includes:\n"
+"- Dynamic registration form for conferences\n"
+"- Dynamize option for participation for conferences\n"
+"- Library Update of Moment.js\n"
+"- Update Matomo tracking to include better options\n"
 msgstr ""
 
 msgid "Test email sent!"
@@ -10008,9 +10037,6 @@ msgstr "%s - Events"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created an event"
 msgstr "%s - Events"
-
-msgid "Show all"
-msgstr ""
 
 msgid "Upcoming events"
 msgstr ""
