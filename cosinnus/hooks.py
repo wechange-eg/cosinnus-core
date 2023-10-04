@@ -1,4 +1,7 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, user_logged_out
+from django.dispatch import receiver
+
+from cosinnus.views.profile import delete_guest_user
 
 
 def get_full_name_extended(self):
@@ -36,3 +39,10 @@ def is_guest(self):
 
 setattr(get_user_model(), 'is_guest', property(is_guest))
 
+
+@receiver(user_logged_out)
+def handle_user_group_guest_access_deleted(sender, user, **kwargs):
+    """ We permanently delete a guest user account as soon as they log out from their session,
+        because only one session per guest account may ever exist. """
+    if user.is_guest:
+        delete_guest_user(user)

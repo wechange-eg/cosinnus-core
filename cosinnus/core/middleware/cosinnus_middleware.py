@@ -305,6 +305,13 @@ class ForceInactiveUserLogoutMiddleware(MiddlewareMixin):
             if not request.user.is_active:
                 messages.error(request, _('This account is no longer active. You have been logged out.'))
                 do_logout = True
+            if request.user.is_guest and (not request.user.cosinnus_profile.guest_access_object
+                    or not request.user.cosinnus_profile.guest_access_object.group
+                    or not request.user.cosinnus_profile.guest_access_object.group.is_active):
+                # if a guest account's access token has been deleted or the group for that token is deactivated
+                # or doesn't exist any more, log the user out
+                messages.error(request, _('Your guest access has expired. You have been logged out.'))
+                do_logout = True
             elif settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN \
                     and CosinnusPortal().get_current().email_needs_verification and not request.user.cosinnus_profile.email_verified:
                 send_user_email_to_verify(request.user, request.user.email, request)

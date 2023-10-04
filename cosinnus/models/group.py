@@ -6,6 +6,8 @@ from collections import OrderedDict
 import datetime
 import os
 import re
+from threading import Thread
+
 import six
 
 from django.db.models.fields.json import KeyTextTransform
@@ -17,6 +19,8 @@ from django.core.validators import RegexValidator, MaxLengthValidator
 from django.db import models
 from django.db.models import Q, Max, Min, F
 from django.db.models.functions import Cast
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
@@ -1991,6 +1995,29 @@ class UserGroupGuestAccess(models.Model):
         if not self.token:
             self.token = get_random_string(8).lower().strip()
         super().save(*args, **kwargs)
+
+
+@receiver(pre_delete, sender=UserGroupGuestAccess)
+def handle_user_group_guest_access_deleted(sender, instance, **kwargs):
+    """ Instantaneously and completely destroy all guest user accounts that had this token
+        as guest access, when the token is being deleted. """
+    # do a threaded call but save the user ids so that the filter still works
+    from cosinnus.models import get_user_profile_model
+    user_ids = list(get_user_profile_model().objects.filter(guest_access_object=instance).values_list('user_id', flat=True))
+    if not user_ids:
+        return
+    class UserGroupGuestAccessDeleteThread(Thread):
+        def run(self):
+            from cosinnus.views.profile import delete_guest_user
+            for user in get_user_model().objects.filter(id__in=user_ids):
+                try:
+                    delete_guest_user(user)
+                except Exception as e:
+                    logger.error(
+                        'An error occured during user deletion after group guest access token deletion. Exception in extra',
+                        extra={'exc': e}
+                    )
+    UserGroupGuestAccessDeleteThread().start()
 
 
 def replace_swapped_group_model():

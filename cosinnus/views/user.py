@@ -1247,7 +1247,8 @@ class GuestUserSignupView(FormView):
             self.guest_access = get_object_or_None(UserGroupGuestAccess, token=guest_token_str)
         if self.guest_access:
             self.group = self.guest_access.group
-        if not self.group:
+        if not self.group or not self.group.is_active:
+            # do not allow to tokens without a group or an inactive group
             messages.warning(request, self.msg_invalid_token)
             return redirect_to_error_page(request, view=self)
         # check if feature is disabled on this portal for this group type
@@ -1270,7 +1271,6 @@ class GuestUserSignupView(FormView):
     
     def form_valid(self, form):
         username = form.cleaned_data['username']
-        print(f'>>>>> doing user signup with {username}')
         success = create_guest_user_and_login(self.guest_access, username, self.request)
         # if not successful, render to form and show error
         if not success:

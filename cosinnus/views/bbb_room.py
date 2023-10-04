@@ -274,7 +274,7 @@ class BBBRoomGuestAccessView(TemplateView):
             setattr(user, BBBRoom.BBB_USER_GUEST_TOKEN_ATTR, self.guest_token)
             self.all_data_filled = True
         else:
-            # if the anonymous user didn't fill out all the data required, show enter-username form
+            # if the anonymous user didn't fill out all the data required, show the enter-username form
             self.username = request.GET.get('username', '').strip()
             tos_check = request.GET.get('tos_check', False) == 'true'
             if not self.username or not tos_check:

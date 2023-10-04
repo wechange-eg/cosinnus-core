@@ -563,7 +563,7 @@ admin.site.register(USER_PROFILE_MODEL, CosinnusUserProfileAdmin)
 class UserProfileInline(admin.StackedInline):
     model = USER_PROFILE_MODEL
     can_delete = False
-    readonly_fields = ('deletion_triggered_by_self',)
+    readonly_fields = ('deletion_triggered_by_self', 'guest_access_object')
     show_change_link = True
     view_on_site = False
 

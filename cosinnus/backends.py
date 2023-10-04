@@ -35,6 +35,7 @@ class EmailAuthBackend(ModelBackend):
     
     Allows a user to sign in using an email/password pair rather than
     a username/password pair.
+    Disallows guest user accounts from logging in via password.
     """
     
     def authenticate(self, request, username=None, password=None):
@@ -56,7 +57,7 @@ class EmailAuthBackend(ModelBackend):
                 else:
                     message_parts += ' ' + force_text(_('If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!') % {'portal_name': CosinnusPortal.get_current().name})
                 messages.error(request, message_parts)
-        elif user and user.check_password(password) and self.user_can_authenticate(user):
+        elif user and not user.is_guest and user.check_password(password) and self.user_can_authenticate(user):
             return user
 
     def get_user(self, user_id):
@@ -67,12 +68,6 @@ class EmailAuthBackend(ModelBackend):
             return None
         return user if self.user_can_authenticate(user) else None
     
-    def user_can_authenticate(self, user):
-        """ Additionally to the base logic, do not allow guest accounts to log in """
-        if user.is_guest:
-            return False
-        return super().user_can_authenticate(user)
-
 
 class DKIMEmailBackend(EmailBackend):
     

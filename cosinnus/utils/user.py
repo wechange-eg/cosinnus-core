@@ -5,7 +5,6 @@ import logging
 import random
 
 from django.db import transaction
-from django.http import QueryDict
 
 from cosinnus.conf import settings
 from cosinnus.core.registries.widgets import widget_registry
@@ -261,7 +260,7 @@ def create_user(email, username=None, first_name=None, last_name=None, tos_check
     from cosinnus.models.profile import get_user_profile_model # leave here because of cyclic imports
     
     pwd = get_random_string(length=12)
-    data_dict = {
+    data = {
         'username': username or get_random_string(length=12),
         'email': email,
         'password1': pwd,
@@ -270,15 +269,12 @@ def create_user(email, username=None, first_name=None, last_name=None, tos_check
         'last_name': last_name,
         'tos_check': True, # needs to be True for form validation, may be reset later
     }
-    data = QueryDict('', mutable=True)
-    data.update(data_dict)
     # use Cosinnus' UserCreationForm to apply all usual user-creation-related effects
     form = UserCreationForm(data)
     if form.is_valid():
         user = form.save()
     else:
         logger.warning('Manual user creation failed because of form errors!', extra={'data': data, 'form-errors': form.errors})
-        print(form.errors)
         return False
     # always retrieve this to make sure the profile was created, we had a Heisenbug here
     profile = get_user_profile_model()._default_manager.get_for_user(user)
