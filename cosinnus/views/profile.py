@@ -53,7 +53,7 @@ def deactivate_user(user):
  
 def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False):
     """ Deacitvates a user account and marks them for deletion in 30 days """
-    if user.cosinnus_profile:
+    if hasattr(user, 'cosinnus_profile') and user.cosinnus_profile:
         # add a marked-for-deletion flag and a cronjob, deleting the profile using this
         deletion_schedule_time = now() + timedelta(
             days=settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS

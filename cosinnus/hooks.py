@@ -25,8 +25,12 @@ def is_guest(self):
         
         A user without a cosinnus_profile defaults to is_guest=False.
     """
+    # if the initial flag was patched onto the user during account creation, use that
+    if hasattr(self, '_initial_is_guest'):
+        return self._initial_is_guest
+    # otherwise retrieve the flag from the user's cosinnus_profile
     if hasattr(self, 'cosinnus_profile') and self.cosinnus_profile:
-        self.cosinnus_profile.is_guest
+        return self.cosinnus_profile._is_guest
     return False
 
 

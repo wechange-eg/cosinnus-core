@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import logging
 import random
 
+from django.db import transaction
 from django.http import QueryDict
 
 from cosinnus.conf import settings
@@ -137,13 +138,13 @@ def filter_active_users(user_model_qs, filter_on_user_profile_model=False):
             exclude(user__last_login__exact=None).\
             exclude(user__email__icontains='__unverified__').\
             filter(settings__has_key='tos_accepted').\
-            exclude(is_guest=True)
+            exclude(_is_guest=True)
     else:
         return user_model_qs.exclude(is_active=False).\
             exclude(last_login__exact=None).\
             exclude(email__icontains='__unverified__').\
             filter(cosinnus_profile__settings__has_key='tos_accepted').\
-            exclude(cosinnus_profile__is_guest=True)
+            exclude(cosinnus_profile___is_guest=True)
             
 def filter_portal_users(user_model_qs, portal=None):
     """ Filters a QS of ``get_user_model()`` so that only users of this portal remain. """
@@ -472,11 +473,9 @@ def create_guest_user_and_login(guest_access: 'UserGroupGuestAccess', username, 
         return False
     group = guest_access.group
     
-    # TODO: probably inject special user property already so that hooks dont create RC profiles!
-    
+    # create and validate a random email for the guest user
     rnd_user_session = get_random_string(length=12)
     email = f'guestuser_{group.id}_{guest_access.id}_{group.portal.slug}_{rnd_user_session}@wechange.de'
-    # validate
     if get_user_model().objects.filter(email__iexact=email):
         logger.error('User guest signup: Could not create a user because the email was already in use!', extra={'guest_access_id': guest_access.id, 'email': email})
         return False
@@ -486,31 +485,37 @@ def create_guest_user_and_login(guest_access: 'UserGroupGuestAccess', username, 
                      extra={'guest_access_id': guest_access.id, 'username': username})
         return False
     
-    # add fake username first before we know the user id
-    user = get_user_model().objects.create(
-        username=str(random.randint(100000000000, 999999999999)),
-        email=email,
-        first_name=username,
-        last_name=''
-    )
-    # patch `user.is_guest=True` onto the new user object before it is saved to prevent
-    # hooks from happening that are blocked for guest users
-    setattr(user, 'is_guest', True)
-    user.set_password(get_random_string(length=12))
-    user.save()
-    from cosinnus.forms.user import UserSignupFinalizeMixin
-    finalize_mixin = UserSignupFinalizeMixin()
-    finalize_mixin.finalize_user_object_after_signup(user, {})
-    
-    # add guest nature to userprofile
-    user.cosinnus_profile.is_guest = True
-    user.cosinnus_profile.guest_access_object = guest_access
-    user.cosinnus_profile.save()
-    
-    print(f'>> created user {user.email} with guest {user.is_guest}, key {user.cosinnus_profile.guest_access_object.token}')
+    # create user instance and cosinnus_profile
+    with transaction.atomic():
+        # add fake username first before we know the user id
+        user = get_user_model().objects.create(
+            username=str(random.randint(100000000000, 999999999999)),
+            email=email,
+            first_name=username,
+            last_name=''
+        )
+        # patch `user.initial_is_guest=True` onto the new user object before it is saved to
+        # make sure the user objects knows it is a guest before a cosinnus_profile is created.
+        # this is to prevent hooks from happening that are blocked for guest users.
+        setattr(user, '_initial_is_guest', True)
+        user.set_password(get_random_string(length=12))
+        user.save()
+        
+        # add guest nature to userprofile
+        user.cosinnus_profile.is_guest = True
+        user.cosinnus_profile.guest_access_object = guest_access
+        user.cosinnus_profile.save()
+
+        # add user to portal and forum groups
+        from cosinnus.forms.user import UserSignupFinalizeMixin
+        finalize_mixin = UserSignupFinalizeMixin()
+        finalize_mixin.finalize_user_object_after_signup(user, {})
+        # make user a member of the guest access' group
+        group.add_member_to_group(user)
     
     # log the user in
     if request:
+        user.backend = 'cosinnus.backends.EmailAuthBackend'
         login(request, user)
     return True
 
