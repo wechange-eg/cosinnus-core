@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.db.models import Case, Count, When
 from django.urls.base import reverse
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import pgettext
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.exceptions import ValidationError
@@ -54,6 +55,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                 "application/json": {
                     "data": {
                         "personal": {
+                            "header": "My Personal Space",
                             "items": [
                                 MenuItem("Personal Dashboard", "/dashboard/", "fa-user", "/media/image.png",
                                          id="PersonalDashboard"),
@@ -61,6 +63,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                             "actions": []
                         },
                         "groups": {
+                            "header": "My Groups and Projects",
                             "items": [
                                 MenuItem("Test Group", "/group/test-group/", "fa-sitemap", "/media/image.png",
                                          id="CosinnusSociety70")
@@ -71,6 +74,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                             ]
                         },
                         "community": {
+                            "header": "WECHANGE Community",
                             "items": [
                                 MenuItem("Forum", "/group/forum/", "fa-sitemap", id="Forum"),
                                 MenuItem("Map", "/map/", "fa-group", id="Map"),
@@ -78,6 +82,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                             "actions": []
                         },
                         "conference": {
+                            "header": "My Conferences",
                             "items": [
                                 MenuItem("Test Conference", "/conference/test-conference/", "fa-television", id="CosinnusSociety70"),
                             ],
@@ -105,6 +110,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                 )
             ]
             personal_space = {
+                'header': _('My Personal Space'),
                 'items': personal_space_items,
                 'actions': [],
             }
@@ -127,6 +133,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
             ]
         if group_space_items or group_space_actions:
             group_space = {
+                'header': _('My Groups and Projects'),
                 'items': group_space_items,
                 'actions': group_space_actions,
             }
@@ -167,6 +174,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
             ])
         if community_space_items:
             community_space = {
+                'header': f'{settings.COSINNUS_PORTAL_NAME.upper()} {_("Community")}',
                 'items': community_space_items,
                 'actions': [],
             }
@@ -188,6 +196,7 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                 ]
             if conference_space_items or conference_space_actions:
                 conference_space = {
+                    'header': _('My Conferences'),
                     'items': conference_space_items,
                     'actions': conference_space_actions,
                 }
@@ -218,16 +227,20 @@ class BookmarksView(APIView):
             examples={
                 "application/json": {
                     "data": {
-                        "groups": [
-                            MenuItem("Test Group", "/group/test-group/", "fa-sitemap", "/media/image.png",
-                                     id="CosinnusGroup70"),
-                        ],
-                        "users": [
-                            MenuItem("Test User", "/user/2/", "fa-user", id="UserProfile4"),
-                        ],
-                        "content": [
-                            MenuItem("Test Idea", "/map/?item=1.ideas.test-idea", "fa-lightbulb-o", id="CosinnusIdea2"),
-                        ]
+                        "groups": {
+                            "header": "Groups and Projects",
+                            "items": MenuItem("Test Group", "/group/test-group/", "fa-sitemap", "/media/image.png",
+                                              id="CosinnusGroup70"),
+                        },
+                        "users": {
+                            "header": "Users",
+                            "items": MenuItem("Test User", "/user/2/", "fa-user", id="UserProfile4"),
+                        },
+                        "content": {
+                            "header": "Content",
+                            "items": MenuItem("Test Idea", "/map/?item=1.ideas.test-idea", "fa-lightbulb-o",
+                                              id="CosinnusIdea2"),
+                        }
                     },
                     "version": COSINNUS_VERSION,
                     "timestamp": 1658414865.057476
@@ -250,9 +263,18 @@ class BookmarksView(APIView):
                     content_items.append(DashboardItem(liked_object).as_menu_item())
             if group_items or user_items or content_items:
                 bookmarks = {
-                    'groups': group_items,
-                    'users': user_items,
-                    'content': content_items,
+                    'groups': {
+                        'header': _('Groups and Projects'),
+                        'items': group_items,
+                    },
+                    'users': {
+                        'header': _('Users'),
+                        'items': user_items,
+                    },
+                    'content': {
+                        'header': pgettext('navigation bookmarks header', 'Content'),
+                        'items': content_items,
+                    }
                 }
         return Response(bookmarks)
 
