@@ -914,7 +914,7 @@ def password_reset_proxy(request, *args, **kwargs):
         if user and not check_user_verified(user) and GlobalBlacklistedEmail.is_email_blacklisted(email):
             return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_reset_blacklisted_page.html')
         # disallow integrated users to reset their password
-        if user and check_user_integrated_portal_member(user):
+        if user and (user.is_guest or check_user_integrated_portal_member(user)):
             return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_reset_page.html')
         # silently disallow imported/created users without a password to reset their password
         # if the user import functionality is enabled, because then imported users are not active

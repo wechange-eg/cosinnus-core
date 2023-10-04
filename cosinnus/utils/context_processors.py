@@ -164,9 +164,10 @@ def email_verified(request):
     user = request.user
 
     if (user.is_authenticated and
-            portal.email_needs_verification and not
-            GlobalBlacklistedEmail.is_email_blacklisted(request.user.email) and not
-            check_user_verified(request.user)):
+            not user.is_guest and
+            portal.email_needs_verification and
+            not GlobalBlacklistedEmail.is_email_blacklisted(request.user.email) and
+            not check_user_verified(request.user)):
         url = reverse('cosinnus:resend-email-validation')
         url = '{}?next={}'.format(url, request.path)
         msg = _('Please verify your email address.')

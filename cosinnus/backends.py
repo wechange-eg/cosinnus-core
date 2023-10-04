@@ -66,6 +66,12 @@ class EmailAuthBackend(ModelBackend):
         except USER_MODEL.DoesNotExist:
             return None
         return user if self.user_can_authenticate(user) else None
+    
+    def user_can_authenticate(self, user):
+        """ Additionally to the base logic, do not allow guest accounts to log in """
+        if user.is_guest:
+            return False
+        return super().user_can_authenticate(user)
 
 
 class DKIMEmailBackend(EmailBackend):
