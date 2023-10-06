@@ -135,6 +135,9 @@ def check_object_write_access(obj, user, fields=None):
             write access to only select fields.
         
     """
+    # guests never have write access to anything
+    if user.is_guest:
+        return False
     # check what kind of object was supplied (CosinnusGroup or BaseTaggableObject)
     if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
         is_admin = check_ug_admin(user, obj)
@@ -191,8 +194,14 @@ def check_user_can_see_user(user, target_user):
         their profile, and can send him messages, etc. 
         This depends on the privacy settings of ``target_user`` and on whether they are members 
         of a same group/project. """
-    visibility = target_user.cosinnus_profile.media_tag.visibility
+    # you can always see yourself
+    if user.id == target_user.id:
+        return True
+    # guests are invisible
+    if target_user.is_guest:
+        return False
     
+    visibility = target_user.cosinnus_profile.media_tag.visibility
     if visibility == BaseTagObject.VISIBILITY_ALL:
         return True
     if visibility == BaseTagObject.VISIBILITY_GROUP and user.is_authenticated:

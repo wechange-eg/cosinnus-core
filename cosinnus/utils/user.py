@@ -99,11 +99,14 @@ def assign_user_to_default_auth_group(sender, **kwargs):
         group.user_set.add(user)
         
 def ensure_user_to_default_portal_groups(sender, created, **kwargs):
-    """ Whenever a portal membership changes, make sure the user is in the default groups for this Portal """
+    """ Whenever a portal membership changes, make sure the user is in the default groups for this Portal,
+        unless they are a guest account. """
     try:
         from cosinnus.models.group import CosinnusGroupMembership
         from cosinnus.models.membership import MEMBERSHIP_MEMBER
         membership = kwargs.get('instance')
+        if membership.user.is_guest:
+            return
         CosinnusGroup = get_cosinnus_group_model()
         for group_slug in get_default_user_group_slugs():
             try:
@@ -484,7 +487,7 @@ def create_guest_user_and_login(guest_access: 'UserGroupGuestAccess', username, 
     # create user instance and cosinnus_profile
     with transaction.atomic():
         # add fake username first before we know the user id
-        user = get_user_model().objects.create(
+        user = get_user_model()(
             username=str(random.randint(100000000000, 999999999999)),
             email=email,
             first_name=username,
@@ -496,16 +499,28 @@ def create_guest_user_and_login(guest_access: 'UserGroupGuestAccess', username, 
         setattr(user, '_initial_is_guest', True)
         user.set_password(get_random_string(length=12))
         user.save()
+        # set user id
+        user.username = str(user.id)
+        user.save()
         
         # add guest nature to userprofile
         user.cosinnus_profile.is_guest = True
         user.cosinnus_profile.guest_access_object = guest_access
         user.cosinnus_profile.save()
+        
+        # do NOT add a portal membership for this user!
+        # TODO: check this!
+        
+        # set user visibility to least viisble
+        from cosinnus.models.tagged import BaseTagObject
+        media_tag = user.cosinnus_profile.media_tag
+        if not media_tag.visibility == BaseTagObject.VISIBILITY_USER:
+            media_tag.visibility = BaseTagObject.VISIBILITY_USER
+            media_tag.save()
 
-        # add user to portal and forum groups
-        from cosinnus.forms.user import UserSignupFinalizeMixin
-        finalize_mixin = UserSignupFinalizeMixin()
-        finalize_mixin.finalize_user_object_after_signup(user, {})
+        # set the user's tos_accepted flag to true and date to now
+        accept_user_tos_for_portal(user, save=False)
+        
         # make user a member of the guest access' group
         group.add_member_to_group(user)
     

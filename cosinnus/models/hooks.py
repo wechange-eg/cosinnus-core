@@ -37,6 +37,8 @@ from cosinnus.models.managed_tags import CosinnusManagedTagAssignment,\
     CosinnusManagedTag
 from cosinnus.models.group_extra import ensure_group_type
 from cosinnus_conference.utils import update_conference_premium_status
+from cosinnus.views.profile import delete_guest_user
+
 
 logger = logging.getLogger('cosinnus')
 
@@ -377,6 +379,16 @@ def update_newsletter_on_queued_mail_delete(sender, instance, **kwargs):
                 newsletter.is_sending = False
                 newsletter.sent = timezone.now()
                 newsletter.save()
+
+
+
+
+@receiver(user_logged_out)
+def handle_user_group_guest_access_deleted(sender, user, **kwargs):
+    """ We permanently delete a guest user account as soon as they log out from their session,
+        because only one session per guest account may ever exist. """
+    if user.is_guest:
+        delete_guest_user(user)
 
 
 from cosinnus.apis.cleverreach import * # noqa
