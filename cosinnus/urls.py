@@ -80,6 +80,7 @@ urlpatterns = [
     url(r'^welcome/$', user.welcome_settings, name='welcome-settings'),
     url(r'^join/$', user.group_invite_token_enter_view, name='group-invite-token-enter'),
     url(r'^join/(?P<token>[^/]+)/$', user.group_invite_token_view, name='group-invite-token'),
+    url(r'^guest/restricted/$', user.guest_user_not_allowed_view, name='guest-user-not-allowed'),
     url(r'^guest/(?P<guest_token>[^/]+)/$', user.guest_user_signup_view, name='guest-user-signup'),
 
     url(r'^whats_new/$', version_history.version_history, name='version-history'),

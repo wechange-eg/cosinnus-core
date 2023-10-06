@@ -48,6 +48,7 @@ class FrontendMiddleware(MiddlewareMixin):
             for url_pattern in settings.COSINNUS_V3_FRONTEND_URL_PATTERNS:
                 if re.match(url_pattern, request.path):
                     matched = True
+                    break
             if matched:
                 params = dict(parse_qsl(request.META["QUERY_STRING"]))
                 if params.get(self.param_key) != self.param_value:

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import re
 from builtins import object
 from functools import partial as curry
 import logging
@@ -120,6 +121,16 @@ LOGIN_URLS = NEVER_REDIRECT_URLS + [
 ]
 
 EXEMPTED_URLS_FOR_2FA = [url for url in LOGIN_URLS if url != '/admin/']
+
+GUEST_ACCOUNT_LOCKED_URL_PATTERNS = [
+    r"^/login/$",
+    r"^/signup/$",
+    r"^/profile/(?!$)", # anything below the profile-detail page
+    r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/cloud/", # group cloud direct link
+    r"^/messages/", # any type of messages, rocketchat etc
+    r".*/add/.*", # any type of create view
+    r"^/account/", # PAYL and other account views
+]
 
 # if any of these URLs was requested, auto-redirects in the user's profile settings won't trigger
 NO_AUTO_REDIRECTS = (
@@ -460,11 +471,12 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
         if any([request.path.startswith(never_path) for never_path in NEVER_REDIRECT_URLS]):
             return
         
-        if request.user.is_authenticated:
+        user = request.user
+        if user.is_authenticated:
             # hiding login and signup pages for logged in users
             if request.path in ['/login/', '/signup/']:
                 # catch redirect loop for superusers trying to access the admin area but someone forgot to make them staff as well
-                if request.GET.get('next', '').startswith('/admin/') and request.user.is_superuser and not request.user.is_staff:
+                if request.GET.get('next', '').startswith('/admin/') and user.is_superuser and not user.is_staff:
                     messages.warning(request, _('You cannot access the admin area because you are missing the "Staff" permission even though you are a superuser. Please ask another admin to grant it to you.'))
                     return redirect('cosinnus:profile-detail')
                 redirect_url = redirect_next_or(request, getattr(settings, 'COSINNUS_LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET', None))
@@ -476,14 +488,32 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
                     del request.session['next_redirect_pending']
                 # redirect if it is set as a next redirect in user-settings
                 elif request.method == 'GET' and request.path not in NO_AUTO_REDIRECTS:
-                    settings_redirect = request.user.cosinnus_profile.pop_next_redirect()
+                    settings_redirect = user.cosinnus_profile.pop_next_redirect()
                     if settings_redirect:
                         # set flag so multiple redirects aren't consumed instantly
                         request.session['next_redirect_pending'] = True
                         if settings_redirect[1]:
                             messages.success(request, _(settings_redirect[1]))
                         return HttpResponseRedirect(settings_redirect[0])
-                
+            
+            # guest account site-lockoff logic
+            if user.is_guest:
+                # check if the URL matches any of the guest-account-locked URLs
+                locked = False
+                # disable any POST requests
+                if request.method == 'POST':
+                    locked = True
+                if not locked:
+                    for url_pattern in GUEST_ACCOUNT_LOCKED_URL_PATTERNS:
+                        print(f'match: {request.path}, {url_pattern}')
+                        print(re.match(url_pattern, request.path))
+                        if re.match(url_pattern, request.path):
+                            locked = True
+                            break
+                if locked:
+                    return redirect('cosinnus:guest-user-not-allowed')
+            
+            
                 
 class MovedTemporarilyRedirectFallbackMiddleware(RedirectFallbackMiddleware):
     """ The default django redirect middleware, but using 302 Temporary instead

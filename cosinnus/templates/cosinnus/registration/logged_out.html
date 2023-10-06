@@ -43,6 +43,10 @@
                     } else {
                         $('.frame-logout-error').show();
                     }
+                    const urlParams = new URLSearchParams(window.location.search);
+                    if (urlParams.get('next')) {
+                        window.location = urlParams.get('next');
+                    }
                 }
                 
                 function _callFrontendLogout(csrfToken, logout_url) {

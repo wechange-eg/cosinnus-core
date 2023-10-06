@@ -1292,6 +1292,18 @@ class GuestUserSignupView(FormView):
 guest_user_signup_view = GuestUserSignupView.as_view()
 
 
+class GuestUserNotAllowedView(TemplateView):
+    
+    template_name = 'cosinnus/user/guest_user_not_allowed.html'
+    
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated or not request.user.is_guest:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
+
+guest_user_not_allowed_view = GuestUserNotAllowedView.as_view()
+
+
 @receiver(userprofile_created)
 def convert_email_group_invites(sender, profile, **kwargs):
     """ Converts all `CosinnusUnregisterdUserGroupInvite` to `CosinnusGroupMembership` pending invites
