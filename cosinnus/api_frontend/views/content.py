@@ -376,12 +376,16 @@ class MainContentView(APIView):
         soup = BeautifulSoup(html, 'html.parser')
         css_links = soup.find_all('link', rel='stylesheet')
         css_urls = [link.get('href') for link in css_links]
+        domain = CosinnusPortal.get_current().get_domain()
+        css_urls = [(domain if not link.startswith('http') else '') + link for link in css_urls]
         return css_urls
     
     def _parse_js_urls(self, html):
         soup = BeautifulSoup(html, 'html.parser')
         js_links = soup.find_all('script', src=True)
         js_urls = [link.get('src') for link in js_links]
+        domain = CosinnusPortal.get_current().get_domain()
+        js_urls = [(domain if not link.startswith('http') else '') + link for link in js_urls]
         return js_urls
     
     def _parse_tags(self, html, tag_name):
