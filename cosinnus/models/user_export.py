@@ -1,3 +1,4 @@
+import datetime
 import logging
 import pickle
 import zlib
@@ -12,13 +13,14 @@ from django.utils.translation import ugettext_lazy as _
 from cosinnus.conf import settings
 from cosinnus.dynamic_fields import dynamic_fields
 from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.storage import TemporaryData
 from cosinnus.utils.functions import resolve_class
 
 
 class CosinnusUserExportProcessorBase(object):
     """
     A threaded and extendable user export processor. Exports the data specified in CSV_EXPORT_COLUMNS_TO_FIELD_MAP as
-    CSV. Keeping the export state and data in the cache.
+    CSV. Keeping the export state in the cache. The exported CSV data is stored in a TemporaryData object.
     """
 
     # Export processor states
@@ -49,8 +51,8 @@ class CosinnusUserExportProcessorBase(object):
     # Current export state
     EXPORT_STATE_CACHE_KEY = 'cosinnus/core/portal/%d/export/state'
 
-    # Latest finished csv export data
-    EXPORT_CSV_CACHE_KEY = 'cosinnus/core/portal/%d/export/csv'
+    # TemporaryData instance id containing the latest finished csv export data.
+    EXPORT_DATA_ID_CACHE_KEY = 'cosinnus/core/portal/%d/export/data_id'
 
     # Timestamp of the latest finished csv export
     EXPORT_TIMESTAMP_CACHE_KEY = 'cosinnus/core/portal/%d/export/timestamp'
@@ -63,19 +65,28 @@ class CosinnusUserExportProcessorBase(object):
 
     def set_current_export_csv(self, csv):
         """
-        Compress and store the export CSV data in the cache.
-        Compression is needed as the data size might exceed the memcache limit (1MB default).
+        Compress and store the export CSV data. The data is stored in a TemporaryData instance. The instnace id is
+        stored in the cache.
         """
         picked_csv = pickle.dumps(csv)
-        compressed_csv = zlib.compress(picked_csv, level=9)
-        cache.set(self.EXPORT_CSV_CACHE_KEY % CosinnusPortal.get_current().id, compressed_csv, self.EXPORT_CACHE_TIMEOUT)
+        compressed_csv = zlib.compress(picked_csv)
+        delete_csv_data_after = now() + datetime.timedelta(seconds=self.EXPORT_CACHE_TIMEOUT)
+        temporary_data = TemporaryData.objects.create(
+            deletion_after=delete_csv_data_after,
+            description='User Export Data',
+            data=compressed_csv
+        )
+        cache.set(self.EXPORT_DATA_ID_CACHE_KEY % CosinnusPortal.get_current().id, temporary_data.id,
+                  self.EXPORT_CACHE_TIMEOUT)
 
     def get_current_export_csv(self):
-        """ Get and decompress the exporeted CSV data. """
-        compressed_csv = cache.get(self.EXPORT_CSV_CACHE_KEY % CosinnusPortal.get_current().id)
-        pickled_csv = zlib.decompress(compressed_csv)
-        csv = pickle.loads(pickled_csv)
-        return csv
+        """ Get and decompress the exported CSV data. """
+        temporary_data_id = cache.get(self.EXPORT_DATA_ID_CACHE_KEY % CosinnusPortal.get_current().id)
+        if temporary_data_id and TemporaryData.objects.filter(id=temporary_data_id).exists():
+            temporary_data = TemporaryData.objects.get(id=temporary_data_id)
+            pickled_csv = zlib.decompress(temporary_data.data)
+            csv = pickle.loads(pickled_csv)
+            return csv
 
     def set_current_export_timestamp(self, timestamp):
         cache.set(self.EXPORT_TIMESTAMP_CACHE_KEY % CosinnusPortal.get_current().id, timestamp, self.EXPORT_CACHE_TIMEOUT)

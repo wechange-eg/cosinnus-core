@@ -12,6 +12,7 @@ from cosinnus.conf import settings
 from cosinnus.core.middleware.cosinnus_middleware import initialize_cosinnus_after_startup
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.profile import get_user_profile_model
+from cosinnus.models.storage import TemporaryData
 from cosinnus.views.profile import delete_userprofile
 from cosinnus_conference.utils import update_conference_premium_status
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -118,3 +119,20 @@ class SwitchGroupPremiumFeatures(CosinnusCronJobBase):
                 count += 1
             return f'Expired {count} premium groups.'
         return 'Never ran, premium features are not enabled.'
+
+
+class DeleteTemporaryData(CosinnusCronJobBase):
+    """ Deletes TemporaryData instances with passed deletion_after datetime. """
+
+    RUN_EVERY_MINS = 60*24  # every day
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+
+    cosinnus_code = 'cosinnus.delete_temporary_data'
+
+    def do(self):
+        temporary_data_to_delete = TemporaryData.objects.filter(deletion_after__lt=now())
+        if temporary_data_to_delete.exists():
+            count = temporary_data_to_delete.count()
+            temporary_data_to_delete.delete()
+            return f'Deleted {count} temporary data objects.'
+        return 'No temporary data to delete.'
