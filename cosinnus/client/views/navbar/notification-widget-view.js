@@ -308,25 +308,22 @@ module.exports = DelegatedWidgetView.extend({
     /** Fired when the navbar "what's new" button is clicked */
     onWhatsNewButtonClicked: function (event) {
         var self = this;
-        if (this.$whatsNewButtonEl.hasClass('collapsed')) {
-            // Fired only when the menu is opened
 
-            // Post to server and mark version history as read
-            var url = '/version_history/api/markread/';
-            $.ajax(url, {
-                type: 'POST',
-                timeout: 15000,
-                success: function (response, textStatus, xhr) {
-                    util.log('Successfully marked version history as seen!');
-                },
-                error: function (xhr, textStatus) {
-                    util.log('Error during marking version history as seen!');
-                }
-            });
+        // Post to server and mark version history as read
+        var url = '/version_history/api/markread/';
+        $.ajax(url, {
+            type: 'POST',
+            timeout: 15000,
+            success: function (response, textStatus, xhr) {
+                util.log('Successfully marked version history as seen!');
+            },
+            error: function (xhr, textStatus) {
+                util.log('Error during marking version history as seen!');
+            }
+        });
 
-            // Remove the message counter
-            self.$whatsNewButtonEl.find('.message-counter').hide();
-        }
+        // Remove the message counter
+        self.$whatsNewButtonEl.find('.badge').hide();
     },
 
 });

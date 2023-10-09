@@ -91,17 +91,6 @@
 	    		<i class="fas fa-fw fa-home"></i>
 			</a>
 			{% endblock %}
-            {% block whats_new_button %}
-                <a class="nav-button nav-button-with-message-counter nav-collapse-button collapsed" rel="toggle"
-                   role="button" title="{% trans "What's New" %}" aria-expanded="false"
-                   aria-controls="whats-new-widget-collapse" data-toggle="collapse"
-                   data-target="#whats-new-widget-collapse" id="navbar-whats-new-button" >
-                    <i class="fas fa-fw fa-newspaper"></i>
-                    {% if COSINNUS_VERSION_HISTORY_UNREAD_COUNT > 0 %}
-                        <span class="message-counter"> {{ COSINNUS_VERSION_HISTORY_UNREAD_COUNT }}</span>
-                    {% endif %}
-                </a>
-            {% endblock %}
 			{% block cloud_icon_button %}
 				{% if SETTINGS.COSINNUS_CLOUD_ENABLED and request.user.is_authenticated %}
 			        <a class="nav-button" href="{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}" role="button"
@@ -430,6 +419,20 @@
 					</a>
 				</li>
 				{% endif %}
+                <li>
+                    <a rel="toggle" class="list-item" role="button" titledby=".item-text" title="{% trans "What's New" %}"
+							aria-expanded="false" aria-controls="whats-new-menu-collapse"
+                            data-toggle="collapse" data-target="#whats-new-menu-collapse"
+                            onclick="$('#user-menu-collapse').removeClass('in').addClass('collapse');"
+                            id="navbar-whats-new-button">
+                        <div class="item-text">
+                            {% trans "What's New" %}
+                            {% if COSINNUS_VERSION_HISTORY_UNREAD_COUNT > 0 %}
+                                <span class="badge">{{ COSINNUS_VERSION_HISTORY_UNREAD_COUNT }}</span>
+                            {% endif %}
+                        </div>
+                    </a>
+                </li>
 			</ul>
 		</div>
 
@@ -462,8 +465,8 @@
 		<div class="nav-flyout-backdrop"></div>
 	</div>
 
-    <div class="collapse nav-flyout nav-flyout-half-side nav-flyout-right nav-flyout-part-height notification-widget"
-         id="whats-new-widget-collapse" data-simplebar>
+    <div class="collapse nav-flyout nav-flyout-half-side nav-flyout-right nav-flyout-part-height"
+         id="whats-new-menu-collapse" data-simplebar>
         <div class="nav-flyout-section flex-row mobile-flex-column" id="whats-new-items">
             <div class="nav-column nav-column-fullwidth">
                 <h2 class="headline headline-condensed">{% trans "What's New" %}</h2>
