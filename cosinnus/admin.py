@@ -40,6 +40,7 @@ from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory
 from cosinnus.models.tagged import TagObject
 from cosinnus.models.user_import import CosinnusUserImport
 from cosinnus.models.widget import WidgetConfig
+from cosinnus.models.storage import TemporaryData
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.forms.widgets import PrettyJSONWidget
@@ -990,3 +991,17 @@ if settings.COSINNUS_ENABLE_USER_MATCH:
             return False
 
     admin.site.register(UserMatchObject, UserMatchAdmin)
+
+
+class TemporaryDataAdmin(admin.ModelAdmin):
+    fields = ['created', 'deletion_after', 'description']
+    list_display = fields
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request):
+        return False
+
+admin.site.register(TemporaryData, TemporaryDataAdmin)
+
