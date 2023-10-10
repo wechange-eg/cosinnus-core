@@ -51,7 +51,8 @@ class MainContentView(APIView):
       * `content_html`: html from the `<div class="container">` frame to be inserted
       * `footer_html`: html from the footer, to be inserted after the content html
       * `head`: object with sub-entries for all content belonging in the head:
-        * `js_urls`: list of JS file URLs to be loaded in, basically all `<script src="..."` from the `<head>` tag of that page
+        * `js_vendor_urls`: list of vendor JS file URLs to be loaded in, basically all vendor `<script src="..."` from the `<head>` tag of that page
+        * `js_urls`: list of JS file URLs to be loaded in, basically all non-vendor `<script src="..."` from the `<head>` tag of that page. these should be loaded third, after first the `js_vendor_urls``, and then the `scripts` JS have been loaded
         * `css_urls`: list of CSS file URLs to be loaded in, basically all stylesheets from the `<head>` tag of that page
         * `meta`: add all meta tags from the head
         * `styles`: a list of strings of literal inline styles to be inserted before the HTML content is inserted
@@ -111,15 +112,19 @@ class MainContentView(APIView):
                         "status_code": 200,
                         "content_html": "<div class=\"x-v3-container container\"> <div class=\"row app-main\"> ... </div></div>",
                         "footer_html": "<div class=\"footer\"> ... </div>",
-                        "js_urls": [
+                        "js_vendor_urls": [
                             "/static/js/vendor/less.min.js",
                             "/static/js/vendor/jquery-2.1.0.min.js",
+                        ],
+                        "js_urls": [
+                            "http://localhost:8000/static/js/cosinnus.js?v=1.9.3",
+                            "http://localhost:8000/static/js/client.js?v=1.9.3",
                         ],
                         "css_urls": [
                             "/static/css/select2.css",
                             "/static/css/extra.css",
                         ],
-                        "scripts": "var cosinnus_base_url = \"http://localhost:8000/\"; var cosinnus_active_group = \"a-mein-bbb-projekt\";  ...",
+                        "scripts": "var cosinnus_base_url = \"http://localhost:8000/\";\nvar cosinnus_active_group = \"a-mein-bbb-projekt\";\n ...",
                         "meta": "<meta charset=\"utf-8\"/><meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\"/><meta content=\"width=device-width, initial-scale=1\" name=\"viewport\"/> ...",
                         "styles": ".my-contribution-badge {min-width: 50px;border-radius: 20px;color: #FFF;font-size: 12px;padding: 2px 6px; margin-left: 5px;}.my-contribution-badge.red {background-color: rgb(245, 85, 0);} ...",
                         "sub_navigation": {
@@ -200,12 +205,16 @@ class MainContentView(APIView):
         
         # TODO compress html? or do server-side request compression?
         
+        parsed_js_urls = self._parse_js_urls(html)
+        js_vendor_urls = [js_url for js_url in parsed_js_urls if '/vendor/' in js_url]
+        js_urls = [js_url for js_url in parsed_js_urls if '/vendor/' not in js_url]
         data = {
             "resolved_url": resolved_url,
             "status_code": response.status_code,
             "content_html": self.content_html,
             "footer_html": self.footer_html,
-            "js_urls": self._parse_js_urls(html),
+            "js_vendor_urls": js_vendor_urls,
+            "js_urls": js_urls,
             "css_urls": self._parse_css_urls(html),
             "scripts": self._parse_inline_tag_contents(html, 'script'),
             "meta": self._parse_tags(html, 'meta'),
@@ -259,8 +268,8 @@ class MainContentView(APIView):
         return request
     
     def _clean_response_html(self, html):
-        html = html.replace('\t', '').replace('\n', '')
-        html = re.sub(r'\s+', ' ', html)
+        html = html.replace('\t', '')
+        html = re.sub(r'[ \t]+', ' ', html)
         return html
     
     def _resolve_request_group(self, url, request):
@@ -393,14 +402,15 @@ class MainContentView(APIView):
             as a concatenated string """
         soup = BeautifulSoup(html, 'html.parser')
         tags = soup.find_all(tag_name)
-        tag_str = ''.join([str(tag).strip() for tag in tags])
+        tag_str = '\n'.join([str(tag).strip() for tag in tags])
         return tag_str
     
     def _parse_inline_tag_contents(self, html, tag_name):
         """ Parses all contents of tags of a given tag name and returns it as a concatenated string """
         soup = BeautifulSoup(html, 'html.parser')
         tags = soup.find_all(tag_name, src=False, rel=False)
-        tag_contents = ''.join([tag.decode_contents().strip() for tag in tags])
+        liss = [tag.decode_contents().strip() for tag in tags]
+        tag_contents = '\n'.join(liss)
         return tag_contents
         
     def _get_announcements(self):
