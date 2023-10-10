@@ -85,9 +85,9 @@ setup(
     data_files=data_files,
     install_requires=[
         # please mirror all changes in the requirements.txt for local installs!
-        'Django>=3.2.18,<3.3',
+        'Django>=3.2.22,<3.3',
         'MarkupSafe==1.1',
-        'Pillow==9.4.0',
+        'Pillow==10.0.1',
         'celery==5.2.7',
         'dataclasses',
         
@@ -129,7 +129,7 @@ setup(
         'dnspython==1.15.0',
         'drf-extra-fields==3.4.0',
         'drf-yasg==1.20.0',
-        'easy-thumbnails==2.8',
+        'easy-thumbnails==2.8.5',
         'elasticsearch==7.17.9',
         'ecdsa==0.14',
         'geopy==1.11.0',
@@ -161,7 +161,6 @@ setup(
         'django-cors-headers<3.11.0',
 
         # wagtail
-        'wagtail==2.15.2',
         'django-compressor==3.1',
         
         # virus file scan validator
@@ -183,6 +182,7 @@ setup(
         'pydkim @ git+https://github.com/wechange-eg/pydkim.git@master#egg=pydkim',
         'django-suit @ git+https://github.com/wechange-eg/django-suit.git@main#egg=django-suit',
         'django-bootstrap3-datetimepicker-3 @ git+https://github.com/wechange-eg/django-bootstrap3-datetimepicker-3.git@master#egg=django-bootstrap3-datetimepicker-3',
+        'wagtail @ git+https://github.com/wechange-eg/wagtail.git@main-wechange#egg=wagtail',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
