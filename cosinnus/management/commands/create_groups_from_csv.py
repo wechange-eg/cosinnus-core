@@ -35,7 +35,7 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument('csv', type=str, help='CSV file with groups definitions.')
-        parser.add_argument('--delimiter', type=str, help='CSV delimiter (default ",").')
+        parser.add_argument('--delimiter', type=str, default=',', help='CSV delimiter (default ",").')
 
         # parameter for 3rd party tool link
         parser.add_argument(
@@ -82,7 +82,7 @@ class Command(BaseCommand):
                     return
 
                 # Skip existing groups
-                if group_cls.objects.filter(name=group_name).exists():
+                if group_cls.objects.filter(name__iexact=group_name).exists():
                     self.stdout.write(self.style.WARNING(f'Skipping existing group "{group_name}".'))
                     continue
 
