@@ -102,10 +102,10 @@ class Command(BaseCommand):
                 if not admin_emails_string:
                     self.stderr.write(f'Line {reader.line_num}: Missing admins.')
                     return
-                admin_emails = [name.strip() for name in admin_emails_string.split(',')]
+                admin_emails = [name.strip() for name in admin_emails_string.lower().split(',')]
                 admins = []
                 for admin_email in admin_emails:
-                    admin = User.objects.filter(email=admin_email).first()
+                    admin = User.objects.filter(email__iexact=admin_email).first()
                     if not admin:
                         self.stderr.write(f'Line {reader.line_num}: User "{admin_email}" does not exist.')
                         return
