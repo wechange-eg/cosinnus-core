@@ -1,10 +1,11 @@
+import logging
 import re
 from copy import copy
-from urllib.parse import urlparse, urlunparse
+from urllib.parse import urlparse
 
 import requests
 from bs4 import BeautifulSoup
-from django.http import QueryDict, Http404
+from django.http import QueryDict
 from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 from drf_yasg import openapi
@@ -17,11 +18,13 @@ from rest_framework.views import APIView
 from announcements.models import Announcement
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
-from cosinnus.conf import settings
 from cosinnus.core.decorators.views import get_group_for_request
 from cosinnus.models import CosinnusPortal
 from cosinnus.models.user_dashboard import MenuItem, FONT_AWESOME_CLASS_FILTER
 from cosinnus.utils.http import remove_url_param
+
+logger = logging.getLogger('cosinnus')
+
 
 # url prefixes that make the requested url be considered to belong in the "community" space
 V3_CONTENT_COMMUNITY_URL_PREFIXES = [
@@ -373,7 +376,21 @@ class MainContentView(APIView):
             elif any(menu_item['url'].endswith(suffix) for suffix in V3_CONTENT_TOP_SIDEBAR_URL_SUFFIXES):
                 target_subnav = top
             target_subnav.append(menu_item)
-            
+        
+        # add sidebar third party tools if it exists in group data
+        if self.group and self.group.third_party_tools:
+            for third_party_tool in self.group.third_party_tools:
+                try:
+                    middle.append(MenuItem(
+                        third_party_tool['label'],
+                        third_party_tool['url'],
+                        icon='fa-external-link',
+                        id='Sidebar-Thirdparty-' + get_random_string(8),
+                        is_external=True
+                    ))
+                except Exception as e:
+                    logger.warning('Error converting a thirdparty group menu item to MenuItem', extra={'exc': e})
+        
         sub_nav = {
             "top": top,
             "middle": middle,
