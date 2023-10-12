@@ -151,7 +151,8 @@ setup(
         'django-bigbluebutton==0.1.0',
     ],
     dependency_links=[
-        'git+https://github.com/wechange-eg/django-awesome-avatar.git@django2#egg=django-awesome-avatar',
+        'git+https://github.com/wechange-eg/django-awesome-avatar.git@main-wechange#egg=django-awesome-avatar',
+        'git+https://github.com/wechange-eg/wagtail.git@main-wechange#egg=wagtail',
         'git+https://github.com/wechange-eg/django-filer.git@django2#egg=django-filer',
         'git+https://github.com/wechange-eg/django-multiform.git@master#egg=django-multiform',
         'git+https://github.com/saschan/django-djajax.git@django2#egg=django-djajax',
