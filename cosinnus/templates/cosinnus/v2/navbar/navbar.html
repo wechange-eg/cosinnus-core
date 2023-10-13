@@ -372,29 +372,31 @@
 				    		</div>
 						</a>
 					</li>
-					{% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED %}
-					   <li>
-	                        <a href="{% url 'cosinnus:v3-frontend-setup-profile' %}" class="list-item" role="button" titledby=".item-text">
-	                            <div class="item-text">
-	                                <b>({% trans "New!" %})</b> {% trans "Set up your Profile" %}
-	                            </div>
-	                        </a>
-	                    </li>
-					{% endif %}
-					<li>
-						<a href="{% url 'cosinnus:profile-edit' %}" class="list-item" role="button" titledby=".item-text">
-				    		<div class="item-text">
-				    			{% trans "Edit My Profile" %}
-				    		</div>
-						</a>
-					</li>
-					<li>
-						<a href="{% url 'cosinnus:notifications' %}" class="list-item" role="button" titledby=".item-text">
-				    		<div class="item-text">
-				    			{% trans "Notification Preferences" %}
-				    		</div>
-						</a>
-					</li>
+                    {% if not request.user.is_guest %}
+                        {% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED %}
+                           <li>
+                                <a href="{% url 'cosinnus:v3-frontend-setup-profile' %}" class="list-item" role="button" titledby=".item-text">
+                                    <div class="item-text">
+                                        <b>({% trans "New!" %})</b> {% trans "Set up your Profile" %}
+                                    </div>
+                                </a>
+                            </li>
+                        {% endif %}
+                        <li>
+                            <a href="{% url 'cosinnus:profile-edit' %}" class="list-item" role="button" titledby=".item-text">
+                                <div class="item-text">
+                                    {% trans "Edit My Profile" %}
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'cosinnus:notifications' %}" class="list-item" role="button" titledby=".item-text">
+                                <div class="item-text">
+                                    {% trans "Notification Preferences" %}
+                                </div>
+                            </a>
+                        </li>
+                    {% endif %}
 				{% endblock %}
 				{% if not SETTINGS.COSINNUS_LANGUAGE_SELECT_DISABLED %}
 				<li>
@@ -456,7 +458,11 @@
 				<li>
 					<a href="{% url 'logout' %}" class="list-item" role="button" titledby=".item-text">
 			    		<div class="item-text">
-			    			{% trans "Logout" %}
+                            {% if request.user.is_guest %}
+                                {% trans "Leave guest access" %}
+                            {% else %}
+			    			    {% trans "Logout" %}
+                            {% endif %}
 			    		</div>
 					</a>
 				</li>
