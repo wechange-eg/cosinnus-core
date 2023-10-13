@@ -182,4 +182,12 @@ def email_verified(request):
             'level': 'warning',
             'text': f'{msg} <a href="{url}">{link_label}</a>'
         }
+    elif user.is_authenticated and user.is_guest and request.path != reverse('cosinnus:guest-user-not-allowed'):
+        msg = _('You are currently using the site with a guest account provided to you via a link.')
+        url = reverse('cosinnus:guest-user-not-allowed')
+        link_label = _('More infos...')
+        context['user_guest_announcement'] = {
+            'level': 'info',
+            'text': f'{msg} <a href="{url}">{link_label}</a>',
+        }
     return context

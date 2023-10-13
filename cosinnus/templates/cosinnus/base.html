@@ -163,8 +163,11 @@
 
 
 		{% include 'announcements/announcements.html' %}
+
         {% if email_not_verified_announcement %}
-        {% include 'announcements/announcement.html' with announcement=email_not_verified_announcement %}
+            {% include 'announcements/announcement.html' with announcement=email_not_verified_announcement %}
+        {% elif user_guest_announcement %}
+            {% include 'announcements/announcement.html' with announcement=user_guest_announcement %}
         {% endif %}
 
         <div class="x-v3-container {% block container_classes %}container {{ cosinnus_css_class }}{% endblock container_classes %}" {% block container_attributes %}{% endblock container_attributes %}>
