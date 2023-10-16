@@ -14,11 +14,11 @@ UPDATES = {
     '1.9.1': {
         'datetime': datetime(2023, 9, 13, tzinfo=pytz.utc),
         'title': _('Version 1.9.1 released'),
-        'short_text': _('Includes dynamic registration form and dynamic option for participation for conferences.'),
+        'short_text': _('Includes dynamic registration form and dynamic options for participation for conferences.'),
         'full_text': _(
             'The update includes:\n'
             '- Dynamic registration form for conferences\n'
-            '- Dynamize option for participation for conferences\n'
+            '- Dynamize options for participation for conferences\n'
             '- Library Update of Moment.js\n'
             '- Update Matomo tracking to include better options\n'
         ),

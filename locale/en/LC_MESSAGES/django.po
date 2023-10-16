@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-04 11:53+0200\n"
+"POT-Creation-Date: 2023-10-16 14:55+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1994,6 +1994,18 @@ msgstr ""
 
 msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr ""
+
+#, fuzzy
+#| msgid "Delete Etherpad"
+msgid "Deletion after"
+msgstr "Delete Pad"
+
+msgid "Data"
+msgstr ""
+
+#, fuzzy
+msgid "Temporary Data"
+msgstr "Create Project"
 
 msgid "Name (EN)"
 msgstr ""
@@ -7634,9 +7646,6 @@ msgstr ""
 msgid "Create content"
 msgstr "Create Project"
 
-msgid "What's New"
-msgstr ""
-
 msgid "Rocket.Chat"
 msgstr ""
 
@@ -7667,6 +7676,9 @@ msgstr "Edit Project"
 #, fuzzy
 msgid "Edit My Profile"
 msgstr "Edit Project"
+
+msgid "What's New"
+msgstr ""
 
 msgid "What's happening where and when? What's to discover? Where to meet?"
 msgstr ""
@@ -8154,13 +8166,13 @@ msgstr ""
 msgid "Version 1.9.1 released"
 msgstr ""
 
-msgid "Includes dynamic registration form and dynamic option for participation for conferences."
+msgid "Includes dynamic registration form and dynamic options for participation for conferences."
 msgstr ""
 
 msgid ""
 "The update includes:\n"
 "- Dynamic registration form for conferences\n"
-"- Dynamize option for participation for conferences\n"
+"- Dynamize options for participation for conferences\n"
 "- Library Update of Moment.js\n"
 "- Update Matomo tracking to include better options\n"
 msgstr ""

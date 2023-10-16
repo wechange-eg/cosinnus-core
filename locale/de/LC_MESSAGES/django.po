@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-04 11:53+0200\n"
+"POT-Creation-Date: 2023-10-16 14:55+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1898,6 +1898,15 @@ msgstr "Ihr wurdet gematcht!"
 
 msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr "Ihr beide habt ähnliche Interessen und wurdet gematcht, sehr schön! Was hat dich an dem Profil der anderen Person angesprochen? Woran arbeitet ihr gerade? Welche Themen beschäftigen euch aktuell?"
+
+msgid "Deletion after"
+msgstr "Wird gelöscht nach"
+
+msgid "Data"
+msgstr "Daten"
+
+msgid "Temporary Data"
+msgstr "Temporäre Daten"
 
 msgid "Name (EN)"
 msgstr "Name (EN)"
@@ -7526,9 +7535,6 @@ msgstr "Schnellsuche"
 msgid "Create content"
 msgstr "Inhalt erstellen"
 
-msgid "What's New"
-msgstr ""
-
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
 
@@ -7555,6 +7561,9 @@ msgstr "Richte dein Profil ein"
 
 msgid "Edit My Profile"
 msgstr "Profil-Einstellungen"
+
+msgid "What's New"
+msgstr "Was ist neu"
 
 msgid "What's happening where and when? What's to discover? Where to meet?"
 msgstr "Was ist wann wo los? Was gibt's zu erleben? Wo trifft man sich?"
@@ -8008,18 +8017,23 @@ msgid "Ensure that your name does not contain any invalid characters."
 msgstr "Stelle dich sicher, dass dein Name keine ungültigen Zeichen enthält."
 
 msgid "Version 1.9.1 released"
-msgstr ""
+msgstr "Version 1.9.1 veröffentlicht"
 
-msgid "Includes dynamic registration form and dynamic option for participation for conferences."
-msgstr ""
+msgid "Includes dynamic registration form and dynamic options for participation for conferences."
+msgstr "Enthält ein dynamisches Anmeldeformular und dynamische Optionen zur Teilnahme an Tagungen."
 
 msgid ""
 "The update includes:\n"
 "- Dynamic registration form for conferences\n"
-"- Dynamize option for participation for conferences\n"
+"- Dynamize options for participation for conferences\n"
 "- Library Update of Moment.js\n"
 "- Update Matomo tracking to include better options\n"
 msgstr ""
+"Das Update enthält:\n"
+"- Dynamisches Anmeldeformular für Tagungen\n"
+"- Dynamische Optionen zur Teilnahme an Tagungen\n"
+"- Update der Moment.js Bibliothek\n"
+"- Update des Matomo-Trackings für bessere Optionen\n"
 
 msgid "Test email sent!"
 msgstr "Test email wurde gesendet!"
