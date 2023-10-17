@@ -3659,7 +3659,7 @@ body div .select2-dropdown-open.select2-drop-above .select2-choices {
 }
 .select2-input,
 .select2-with-searchbox input {
-  font-family: 'Brandon Text', sans-serif !important;
+  font-family: 'IBM Plex Sans', sans-serif !important;
   font-size: 14px !important;
 }
 .error a.select2-choice {
@@ -5577,28 +5577,22 @@ a.anchor {
     6: overlays that reach beyond even tile-detail frame
 */
 @font-face {
-  font-family: 'Brandon Grotesque';
-  font-style: normal;
-  font-weight: normal;
-  src: url('../css/fonts/brandon/brandongrotesque.otf');
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: normal;
+    src: url('./../css/fonts/ibm-plex-sans/IBMPlexSans-Regular.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'Brandon Text';
-  font-style: normal;
-  font-weight: normal;
-  src: url('../css/fonts/brandon/brandon-text-regular.ttf') format('truetype');
+    font-family: 'IBM Plex Sans';
+    font-style: italic;
+    font-weight: normal;
+    src: url('./../css/fonts/ibm-plex-sans/IBMPlexSans-Italic.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'Brandon Text';
-  font-style: italic;
-  font-weight: normal;
-  src: url('../css/fonts/brandon/brandon-text-italic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Brandon Text';
-  font-style: normal;
-  font-weight: bold;
-  src: url('../css/fonts/brandon/brandon-text-bold.ttf') format('truetype');
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: bold;
+    src: url('./../css/fonts/ibm-plex-sans/IBMPlexSans-Bold.ttf') format('truetype');
 }
 /** Global Map/TileView styles */
 .app-root,
@@ -5612,7 +5606,7 @@ a.anchor {
   height: calc(100% - 55px);
   /** Navbar compensation */
   width: 100%;
-  font-family: 'Brandon Text', sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 14px;
   /* For fullscreen mode, don't move the controls to compensate for the navbar */
   /** Layer-switch buttons and map attribution */
@@ -7589,7 +7583,7 @@ a.anchor {
 }
 .v2-navbar,
 .v2-dashboard {
-  font-family: 'Brandon Text', sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 14px;
   color: #4a4a4a;
   text-align: left;
@@ -8524,7 +8518,7 @@ a.anchor {
 .v2-dashboard .dashboard-news-create-frame .modal .cosinnus-media-field input,
 .v2-dashboard .dashboard-news-create-frame .modal .cosinnus-field label,
 .v2-dashboard .dashboard-news-create-frame .modal .cosinnus-media-field label {
-  font-family: 'Brandon Text', sans-serif !important;
+  font-family: 'IBM Plex Sans', sans-serif !important;
   font-size: 14px;
 }
 .v2-dashboard .dashboard-news-create-frame .modal .cosinnus-field-input input {
@@ -9106,7 +9100,7 @@ a.anchor {
   /** Colors and font */
   background-color: #fff;
   color: #9b9b9b;
-  font-family: 'Brandon Text', sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 12px;
   /** The left-side flyout containing a user's items of interest */
 }
@@ -9524,7 +9518,7 @@ a.anchor {
 .v2-content {
   background-color: #fff;
   padding: 40px;
-  font-family: 'Brandon Text', sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 14px;
   color: #4a4a4a;
 }

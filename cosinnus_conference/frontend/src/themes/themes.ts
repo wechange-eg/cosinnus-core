@@ -1,37 +1,37 @@
 import { createMuiTheme, lighten } from "@material-ui/core"
 var tinycolor = require("tinycolor2");
 
-import BrandonTextRegular from "./fonts/brandon-text-regular.ttf"
-import BrandonTextItalic from "./fonts/brandon-text-italic.ttf"
-import BrandonTextBold from "./fonts/brandon-text-bold.ttf"
+import IBMPlexSansRegular from "./fonts/IBMPlexSans-Regular.ttf"
+import IBMPlexSansItalic from "./fonts/IBMPlexSans-Italic.ttf"
+import IBMPlexSansBold from "./fonts/IBMPlexSans-Bold.ttf"
 
-const brandonTextRegular = {
-  fontFamily: "Brandon Text",
+const iBMPlexSansRegular = {
+  fontFamily: "IBM Plex Sans",
   fontStyle: "normal",
   fontDisplay: "swap",
   fontWeight: 400,
   src: `
-    url(${BrandonTextRegular}) format("ttf")
+    url(${IBMPlexSansRegular}) format("ttf")
   `
 }
 
-const brandonTextItalic = {
-  fontFamily: "Brandon Text",
+const iBMPlexSansItalic = {
+  fontFamily: "IBM Plex Sans",
   fontStyle: "italic",
   fontDisplay: "swap",
   fontWeight: 400,
   src: `
-    url(${BrandonTextItalic}) format("ttf")
+    url(${IBMPlexSansItalic}) format("ttf")
   `
 }
 
-const brandonTextBold = {
-  fontFamily: "Brandon Text",
+const iBMPlexSansBold = {
+  fontFamily: "IBM Plex Sans",
   fontStyle: "normal",
   fontDisplay: "swap",
   fontWeight: 700,
   src: `
-    url(${BrandonTextBold}) format("ttf")
+    url(${IBMPlexSansBold}) format("ttf")
   `
 }
 
@@ -42,9 +42,9 @@ export const miniSidebarWidth = "5vw"
 const muiCssBaseline = {
   "@global": {
     "@font-face": [
-      brandonTextRegular,
-      brandonTextItalic,
-      brandonTextBold
+      iBMPlexSansRegular,
+      iBMPlexSansItalic,
+      iBMPlexSansBold
     ],
     "html": {
       "font-size": "14px",
@@ -113,7 +113,7 @@ export const getTheme = (primaryColor= "#7062b3") => {
       }
     },
     typography: {
-      fontFamily: '"Brandon Text",sans-serif',
+      fontFamily: '"IBM Plex Sans",sans-serif',
       fontWeight: 400,
       fontSize: 14,
       htmlFontSize: 14
