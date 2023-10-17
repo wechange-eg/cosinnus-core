@@ -281,9 +281,22 @@ class MembersManagerMixin(object):
         return self.membership_class.objects.get_members(self.pk)
 
     @property
+    def members_uncached(self):
+        """ Returns a list of user ids that are members of this group. The membership if fetched from the db. """
+        query = self.membership_class.objects.filter(group_id=self.pk).filter_membership_status(MEMBER_STATUS)
+        return list(query.values_list('user_id', flat=True).all())
+
+    @property
     def actual_members(self):
         """ Returns a QS of users that are members of this group (admins and members) and are actually active and visible on the site """
         qs = get_user_model().objects.filter(id__in=self.members)
+        qs = filter_active_users(qs)
+        return qs
+
+    @property
+    def actual_members_uncached(self):
+        """ Returns a QS of active users that are members of this group. The membership is fetched from the db. """
+        qs = get_user_model().objects.filter(id__in=self.members_uncached)
         qs = filter_active_users(qs)
         return qs
 

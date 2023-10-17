@@ -134,7 +134,11 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     
     def prepare_group_members(self, obj):
         if not hasattr(obj, '_group_members'):
-            obj._group_members = obj.members
+            # during threaded indexing we should not use cached properties and should not write to the cache.
+            if getattr(settings, 'COSINNUS_ELASTIC_BACKEND_RUN_THREADED', True):
+                obj._group_members = obj.members_uncached
+            else:
+                obj._group_members = obj.members
         return obj._group_members
     
     def prepare_member_count(self, obj):
@@ -181,7 +185,11 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
             return qs
         
         mean, stddev = self.get_mean_and_stddev(qs_func, 'memberships')
-        group_member_count = group.actual_members.count()
+        # during threaded indexing we should not use cached properties and should not write to the cache.
+        if getattr(settings, 'COSINNUS_ELASTIC_BACKEND_RUN_THREADED', True):
+            group_member_count = group.actual_members_uncached.count()
+        else:
+            group_member_count = group.actual_members.count()
         members_rank = normalize_within_stddev(group_member_count, mean, stddev, stddev_factor=1.0)
         
         age_timedelta = now() - obj.created
