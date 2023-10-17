@@ -55,8 +55,13 @@ class CosinnusGroupMembershipQS(models.query.QuerySet):
 
     def update(self, **kwargs):
         ret = super(CosinnusGroupMembershipQS, self).update(**kwargs)
+        groups = set()
         for membership in self:
-            membership._clear_cache()
+            if membership.group.id in groups:
+                continue
+            membership._refresh_cache()
+            membership.group.update_index()
+            groups.add(membership.group.id)
         return ret
 
 
@@ -74,10 +79,10 @@ class BaseMembershipManager(models.Manager):
     def filter_membership_status(self, status):
         return self.get_queryset().filter_membership_status(status)
 
-    def _get_users_for_single_group(self, group_id, cache_key, status):
+    def _get_users_for_single_group(self, group_id, cache_key, status, clear_cache=False):
         key = cache_key % (self.model.CACHE_KEY_MODEL, group_id)
         uids = cache.get(key)
-        if uids is None:
+        if uids is None or clear_cache:
             query = self.filter(group_id=group_id).filter_membership_status(status)
             uids = list(query.values_list('user_id', flat=True).all())
             cache.set(key, uids, settings.COSINNUS_GROUP_MEMBERSHIP_CACHE_TIMEOUT)
@@ -222,6 +227,14 @@ class BaseMembership(models.Model):
 
     def _clear_cache(self):
         self.clear_member_cache_for_group(self.group)
+
+    def _refresh_cache(self):
+        self.clear_member_cache_for_group(self.group)
+        type(self).objects._get_users_for_single_group(self.group.id, _MEMBERSHIP_MEMBERS_KEY, MEMBER_STATUS, clear_cache=True)
+        type(self).objects._get_users_for_single_group(self.group.id, _MEMBERSHIP_ADMINS_KEY, MEMBERSHIP_ADMIN, clear_cache=True)
+        type(self).objects._get_users_for_single_group(self.group.id, _MEMBERSHIP_PENDINGS_KEY, MEMBERSHIP_PENDING, clear_cache=True)
+        type(self).objects._get_users_for_single_group(self.group.id, _MEMBERSHIP_INVITED_PENDINGS_KEY, MEMBERSHIP_INVITED_PENDING, clear_cache=True)
+        type(self).objects._get_users_for_single_group(self.group.id, _MEMBERSHIP_MANAGERS_KEY, MEMBERSHIP_MANAGER, clear_cache=True)
 
     @classmethod
     def clear_member_cache_for_group(cls, group):

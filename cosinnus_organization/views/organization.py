@@ -99,9 +99,8 @@ class OrganizationCreateView(RequireLoggedInMixin, CosinnusOrganizationFormMixin
                                                                    group=self.object, status=MEMBERSHIP_ADMIN)
 
         # clear cache and manually refill because race conditions can make the group memberships be cached as empty
-        membership._clear_cache()
-        self.object.members  # this refills the group's member cache immediately
-        self.object.admins  # this refills the group's member cache immediately
+        membership._refresh_cache()
+        membership.group.update_index()
 
         cosinnus_notifications.organization_created.send(sender=self, user=self.request.user, obj=self.object,
                                                          audience=[])
