@@ -1080,9 +1080,7 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         membership = CosinnusGroupMembership.objects.create(user=user,
             group=group, status=MEMBERSHIP_ADMIN)
         # clear cache and manually refill because race conditions can make the group memberships be cached as empty
-        membership._clear_cache() 
-        group.members # this refills the group's member cache immediately
-        group.admins # this refills the group's member cache immediately
+        membership._refresh_cache()
         group.update_index()
         return group
     
