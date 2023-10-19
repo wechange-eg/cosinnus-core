@@ -34,7 +34,7 @@
 				                        <li class="w100 font11px no-vertical-padding no-horizontal-padding">
 				                            <i class="fa fa-fw fa-tags"></i>
 					                        {% for tag in tags %}
-					                            <a href="#">{{ tag }}</a>
+					                            <a href="{% url 'cosinnus:map' %}?q={{ tag }}">{{ tag }}</a>
 					                        {% endfor %}
 				                       </li>
 				                    </ol>
