@@ -47,6 +47,11 @@
 
         {% if form.instance.sent %}
         <p class="transparent"><i class="fas fa-info-circle"></i> {% trans 'This newsletter has already been sent. If you want to send it again, please copy it and send the copy.' %}</p>
+        {% elif form.instance.is_sending %}
+        <p class="transparent">
+            <i class="fas fa-info-circle"></i>
+            {% blocktrans %}This newsletter is being sent in the background: {{ queued_mails_sent }}/{{ queued_mails }} mails sent. Reload page to update.{% endblocktrans %}
+        </p>
         {% endif %}
 
         {% trans "Subject" context "subject of an E-Mail" as newsletter_subject_label %}
@@ -114,7 +119,7 @@
     </div>
 
     {% if form.instance.id %}
-        {% if not form.instance.sent %}
+        {% if not form.instance.sent and not form.instance.is_sending %}
         
 	        {% captureas modal_send_newsletter %}send_newsletter_{{ form.instance.id }}{% endcaptureas %}
 	        <button type="button" class="btn btn-emphasized btn-autosize btn-send-newsletter" data-toggle="modal" data-target="#{{ modal_send_newsletter }}">
@@ -158,7 +163,7 @@
         {% endif  %}
     {% endif  %}
 
-    {% if not form.instance.sent %}
+    {% if not form.instance.sent and not form.instance.is_sending %}
 	    <button type="submit" name="save_draft" class="btn btn-emphasized btn-autosize">
 	        <ul class="media-list">
 	            <li class="media">

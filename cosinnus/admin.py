@@ -29,6 +29,7 @@ from cosinnus.models.group import CosinnusGroupMembership, \
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety, \
     CosinnusConference
 from cosinnus.models.idea import CosinnusIdea
+from cosinnus.models.mail import QueuedMassMail
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagType,\
     CosinnusManagedTagAssignment
 from cosinnus.models.membership import MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN, \
@@ -1005,3 +1006,26 @@ class TemporaryDataAdmin(admin.ModelAdmin):
 
 admin.site.register(TemporaryData, TemporaryDataAdmin)
 
+
+class QueuedMassMailAdmin(admin.ModelAdmin):
+    fields = [
+        'subject', 'content', 'recipients_count', 'recipients_sent_count', 'created', 'send_mail_kwargs',
+        'sending_in_progress',
+    ]
+    readonly_fields = [
+        'subject', 'content', 'recipients_count', 'recipients_sent_count',  'created', 'send_mail_kwargs'
+    ]
+    list_display = ['created', 'subject']
+
+    def has_add_permission(self, request):
+        return False
+
+    def recipients_count(self, obj):
+        return obj.recipients.count()
+    recipients_count.short_description = _('Recipients Count')
+
+    def recipients_sent_count(self, obj):
+        return obj.recipients_sent.count()
+    recipients_sent_count.short_description = _('Recipients Send Count')
+
+admin.site.register(QueuedMassMail, QueuedMassMailAdmin)

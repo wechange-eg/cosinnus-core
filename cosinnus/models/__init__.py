@@ -11,4 +11,5 @@ from cosinnus.models.widget import *  # noqa
 from cosinnus.models.idea import *  # noqa
 from cosinnus.models.newsletter import *  # noqa
 from cosinnus.models.storage import *  #noqa
+from cosinnus.models.mail import *  #noqa
 

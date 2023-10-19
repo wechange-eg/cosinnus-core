@@ -9,10 +9,14 @@ from django.utils.timezone import now
 from django_cron import CronJobBase, Schedule
 
 from cosinnus.conf import settings
+from cosinnus.core.mail import send_html_mail
 from cosinnus.core.middleware.cosinnus_middleware import initialize_cosinnus_after_startup
 from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.mail import QueuedMassMail
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.storage import TemporaryData
+from cosinnus.templatetags.cosinnus_tags import textfield
+from cosinnus.utils.html import render_html_with_variables
 from cosinnus.views.profile import delete_userprofile
 from cosinnus_conference.utils import update_conference_premium_status
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -136,3 +140,46 @@ class DeleteTemporaryData(CosinnusCronJobBase):
             temporary_data_to_delete.delete()
             return f'Deleted {count} temporary data objects.'
         return 'No temporary data to delete.'
+
+
+class SendQueuedMassMails(CosinnusCronJobBase):
+    """
+    Sends mails to each recipient of queued mass mails.
+    Making sure only one cron process is responsible to a queued mass mail.
+    """
+
+    RUN_EVERY_MINS = 1  # every minute
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+
+    cosinnus_code = 'cosinnus.send_queued_mass_mails'
+
+    def do(self):
+        queued_mails = QueuedMassMail.objects.filter(sending_in_progress=False).order_by('created')
+        queued_mails_count = 0
+        send_mail_count = 0
+        for queued_mail in queued_mails:
+            # update queued mail from db to make sure another cron process did not start processing it.
+            queued_mail.refresh_from_db()
+            if queued_mail.sending_in_progress:
+                continue
+            try:
+                # mark queued mail as being processed
+                queued_mail.sending_in_progress = True
+                queued_mail.save()
+                # get the remaining recipients in case the send process was terminated.
+                recipients = set(queued_mail.recipients.all()) - set(queued_mail.recipients_sent.all())
+                for recipient in recipients:
+                    # send html email to recipient
+                    html_content = textfield(render_html_with_variables(recipient, queued_mail.content))
+                    send_html_mail(recipient, queued_mail.subject, html_content, **queued_mail.send_mail_kwargs)
+                    queued_mail.recipients_sent.add(recipient)
+                    send_mail_count += 1
+                queued_mail.delete()
+                queued_mails_count += 1
+            except Exception as e:
+                queued_mail.sending_in_progress = False
+                queued_mail.save()
+                raise e
+        if queued_mails_count > 0:
+            return f'Send {queued_mails_count} mass mails with {send_mail_count} mails.'
+        return 'No mass mails to send.'

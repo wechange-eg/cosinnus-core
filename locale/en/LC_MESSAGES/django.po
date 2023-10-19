@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-16 14:55+0200\n"
+"POT-Creation-Date: 2023-10-19 11:34+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -195,6 +195,12 @@ msgid "Rocket: Repair/create missing users' rocketchat accounts"
 msgstr ""
 
 msgid "Rocket: Fix missing RocketChat room memberships for users"
+msgstr ""
+
+msgid "Recipients Count"
+msgstr ""
+
+msgid "Recipients Send Count"
 msgstr ""
 
 msgid "Community"
@@ -1837,6 +1843,30 @@ msgstr "Project"
 msgid "Cosinnus Ideas"
 msgstr "Projects"
 
+msgid "Subject"
+msgstr ""
+
+msgid "Content"
+msgstr ""
+
+msgid "Recipients"
+msgstr ""
+
+msgid "Mails sent to Recipients"
+msgstr ""
+
+msgid "Mail function kwargs"
+msgstr ""
+
+msgid "Sending in Progress"
+msgstr ""
+
+msgid "Queued Mass Mail"
+msgstr ""
+
+msgid "Queued Mass Mails"
+msgstr ""
+
 msgid "Managed Tag"
 msgstr ""
 
@@ -2250,9 +2280,6 @@ msgid "4 Random Projects Widget"
 msgstr ""
 
 msgid "8 Random Projects Widget"
-msgstr ""
-
-msgid "Content"
 msgstr ""
 
 msgid "Portal Root Page"
@@ -2741,9 +2768,6 @@ msgstr "Create Project"
 msgid "Create Newsletter"
 msgstr "Create Project"
 
-msgid "Recipients"
-msgstr ""
-
 #, python-format
 msgid "With the current selection the newsletter will be sent to %(counter)s recipients."
 msgid_plural "With the current selection the newsletter will be sent to %(counter)s recipients."
@@ -2803,6 +2827,10 @@ msgstr ""
 msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
 msgstr ""
 
+#, python-format
+msgid "This newsletter is being sent in the background: %(queued_mails_sent)s/%(queued_mails)s mails sent. Reload page to update."
+msgstr ""
+
 msgctxt "subject of an E-Mail"
 msgid "Subject"
 msgstr ""
@@ -2833,6 +2861,9 @@ msgid "Newsletter"
 msgstr ""
 
 msgid "Sent at:"
+msgstr ""
+
+msgid "Newsletter is being sent in the background."
 msgstr ""
 
 msgid "This newsletter has not been sent"
@@ -8178,9 +8209,6 @@ msgid ""
 msgstr ""
 
 msgid "Test email sent!"
-msgstr ""
-
-msgid "Newsletter sent."
 msgstr ""
 
 msgid "Test email sent."
