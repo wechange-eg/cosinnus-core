@@ -12,6 +12,7 @@
 {% block content %}
 
     <div class="content-box white-content">
+        <span class="pull-right"><i>{{ SETTINGS.COSINNUS_VERSION }}</i></span>
         <h2 class="color-primary">{% trans "What's New" %}</h2>
         {% for version in version_history %}
             <div>
