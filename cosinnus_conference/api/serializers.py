@@ -127,7 +127,7 @@ class ConferenceRoomSerializer(TranslateableModelSerializer):
 class ConferenceSerializer(TranslateableHyperlinkedModelSerializer):
     rooms = serializers.SerializerMethodField()
     management_urls = serializers.SerializerMethodField()
-    theme_color = serializers.CharField(source='conference_theme_color')
+    theme_color = serializers.SerializerMethodField()
     dates = serializers.SerializerMethodField()
     avatar = serializers.SerializerMethodField()
     wallpaper = serializers.SerializerMethodField()
@@ -228,6 +228,9 @@ class ConferenceSerializer(TranslateableHyperlinkedModelSerializer):
     
     def get_url(self, obj):
         return obj.get_absolute_url()
+    
+    def get_theme_color(self, obj):
+        return obj.conference_theme_color or settings.COSINNUS_CONFERENCES_DEFAULT_THEME_COLOR
     
 
 class ConferenceParticipant(TranslateableModelSerializer):

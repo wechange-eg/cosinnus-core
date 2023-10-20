@@ -817,6 +817,12 @@ class CosinnusConf(AppConf):
     # default if None: `full_name`
     CONFERENCES_USER_DISPLAY_NAME_FUNC = None
     
+    # default theme color. if not given, the react-defined default is used
+    # if given, all conferences that do not have a color defined in their settings
+    # will be colored with this color.
+    # Note: this is a hex color code without the leading '#'!
+    CONFERENCES_DEFAULT_THEME_COLOR = None
+    
     # can be set to a function receiving `user` as only argument, 
     # to modify the user display name that external services like
     # nextcloud and rocketchat receive for that user
