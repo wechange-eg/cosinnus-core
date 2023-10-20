@@ -8194,7 +8194,7 @@ msgstr ""
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr ""
 
-msgid "Version 1.9.1 released"
+msgid "Version 1.17.1 released"
 msgstr ""
 
 msgid "Includes dynamic registration form and dynamic options for participation for conferences."

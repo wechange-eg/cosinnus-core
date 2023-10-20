@@ -408,17 +408,6 @@
 					</a>
 				</li>
 				{% endif %}
-				{% if SETTINGS.COSINNUS_PAYMENTS_ENABLED or SETTINGS.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY and user.is_superuser %}
-				<li>
-					<a href="{% url 'wechange-payments:overview' %}" class="list-item" role="button" titledby=".item-text-title">
-		    			{% trans "Your Contribution" as payments_label %}
-			    		<div class="item-text">
-			    			{{ payments_label }}
-			    			{% include 'wechange_payments/partials/my_contribution_badge.html' %}
-			    		</div>
-					</a>
-				</li>
-				{% endif %}
                 <li>
                     <a rel="toggle" class="list-item" role="button" titledby=".item-text" title="{% trans "What's New" %}"
 							aria-expanded="false" aria-controls="whats-new-menu-collapse"
@@ -433,6 +422,17 @@
                         </div>
                     </a>
                 </li>
+				{% if SETTINGS.COSINNUS_PAYMENTS_ENABLED or SETTINGS.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY and user.is_superuser %}
+				<li>
+					<a href="{% url 'wechange-payments:overview' %}" class="list-item" role="button" titledby=".item-text-title">
+		    			{% trans "Your Contribution" as payments_label %}
+			    		<div class="item-text">
+			    			{{ payments_label }}
+			    			{% include 'wechange_payments/partials/my_contribution_badge.html' %}
+			    		</div>
+					</a>
+				</li>
+				{% endif %}
 			</ul>
 		</div>
 

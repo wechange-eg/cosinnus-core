@@ -8047,8 +8047,8 @@ msgstr "Bitte gib auch ein Enddatum an"
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr "Stelle dich sicher, dass dein Name keine ungültigen Zeichen enthält."
 
-msgid "Version 1.9.1 released"
-msgstr "Version 1.9.1 veröffentlicht"
+msgid "Version 1.17.1 released"
+msgstr "Version 1.17.1 veröffentlicht"
 
 msgid "Includes dynamic registration form and dynamic options for participation for conferences."
 msgstr "Enthält ein dynamisches Anmeldeformular und dynamische Optionen zur Teilnahme an Tagungen."
@@ -13285,7 +13285,6 @@ msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte
 #~ msgid "Newsletter sent."
 #~ msgstr "Der Newsletter wurde abgeschickt."
 
-#, python-format
 #~ msgid "Your match with %(sender_name)s has just been established!"
 #~ msgstr "Deine Übereinstimmung mit %(sender_name)s wurde soeben festgestellt!"
 

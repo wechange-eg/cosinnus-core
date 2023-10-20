@@ -11,9 +11,9 @@ UPDATES includes release notes for each version shown to the users with:
 """
 
 UPDATES = {
-    '1.9.1': {
+    '1.17.1': {
         'datetime': datetime(2023, 9, 13, tzinfo=pytz.utc),
-        'title': _('Version 1.9.1 released'),
+        'title': _('Version 1.17.1 released'),
         'short_text': _('Includes dynamic registration form and dynamic options for participation for conferences.'),
         'full_text': _(
             'The update includes:\n'
