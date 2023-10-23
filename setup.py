@@ -57,7 +57,7 @@ setup(
         # please mirror all changes in the requirements.txt for local installs!
         'Django>=3.2.22,<3.3',
         'MarkupSafe==1.1',
-        'Pillow==8.4.0',
+        'Pillow==10.0.1',
         'Celery==4.2.0',
         'dataclasses',
         
@@ -100,7 +100,7 @@ setup(
         'djangorestframework-jwt==1.11.0',
         'dnspython==1.15.0',
         'drf-yasg==1.20.0',
-        'easy-thumbnails==2.8',
+        'easy-thumbnails==2.8.5',
         'ecdsa==0.13.3',
         'geopy==1.11.0',
         'jsonfield==3.1.0',
@@ -129,7 +129,6 @@ setup(
         'XlsxWriter==1.3.7',
 
         # wagtail
-        'wagtail==2.15.1',
         'django-compressor==3.1',
         
         # virus file scan validator
