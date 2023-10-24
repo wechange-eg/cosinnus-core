@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-13 13:31+0200\n"
+"POT-Creation-Date: 2023-10-24 10:30+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -210,9 +210,59 @@ msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "Rocket: Zařiďte chybějící členství v RocketChat místnosti pro uživatele"
 
 #, fuzzy
+#| msgid "Recipients"
+msgid "Recipients Count"
+msgstr "Příjemci"
+
+#, fuzzy
+#| msgid "Recipients"
+msgid "Recipients Send Count"
+msgstr "Příjemci"
+
+#, fuzzy
+#| msgid "Comment"
+msgid "Community"
+msgstr "Komentář"
+
+#, fuzzy
+#| msgid "Persons"
+msgid "Personal"
+msgstr "Osoby"
+
+#, fuzzy
 #| msgid "Project Dashboard"
 msgid "Personal Dashboard"
 msgstr "Panel projektu"
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "My Personal Space"
+msgstr "Kontaktní informace"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Groups and Projects"
+msgstr "Moje skupiny a projekty"
+
+msgid "My Conferences"
+msgstr "Mé konference"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups and Projects"
+msgstr "Skupiny a projekty"
+
+msgid "Users"
+msgstr "Uživatelé"
+
+#, fuzzy
+#| msgid "Content"
+msgctxt "navigation bookmarks header"
+msgid "Content"
+msgstr "Obsah"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "Změnit jazyk"
 
 msgid "My Profile"
 msgstr "Můj profil"
@@ -230,11 +280,6 @@ msgstr "Upravit můj profil"
 msgid "Notification Preferences"
 msgstr "Předvolby oznámení"
 
-#, fuzzy
-#| msgid "Change language"
-msgid "Change Language"
-msgstr "Změnit jazyk"
-
 msgid "Your Contribution"
 msgstr "Váš příspěvek"
 
@@ -243,6 +288,45 @@ msgstr "Správa"
 
 msgid "Logout"
 msgstr "Odhlásit se"
+
+msgid "Home"
+msgstr "Domů"
+
+msgid "Dashboard"
+msgstr "Panel"
+
+msgid "Search"
+msgstr "Vyhledávat"
+
+#, fuzzy
+#| msgid "Bookmark"
+msgid "Bookmarks"
+msgstr "Záložka"
+
+msgid "Cloud"
+msgstr "Cloud"
+
+msgid "Messages"
+msgstr "Zprávy"
+
+msgid "Help"
+msgstr "Nápověda"
+
+msgid "Alerts"
+msgstr ""
+
+#, fuzzy
+msgid "Profile"
+msgstr "Můj profil"
+
+msgid "Login"
+msgstr "Přihlásit se"
+
+msgid "Register"
+msgstr "Registrovat"
+
+msgid "Show all"
+msgstr "Zobrazit vše"
 
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
@@ -676,7 +760,7 @@ msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_na
 msgstr "%(sender_name)s právě vytvořil/a projekt \"%(team_name)s\" na %(portal_name)s z nápadu, který sledujete! <br/><br/> Chcete-li si ho prohlédnout, klikněte na odkaz níže. Zde uvidíte, zda se chcete k projektu připojit."
 
 #, python-format
-msgid "Your match with %(sender_name)s has just been established!"
+msgid "You have a match with %(sender_name)s. Get to know your match in Rocket.Chat"
 msgstr ""
 
 msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
@@ -874,9 +958,6 @@ msgstr "Zdá se, že to není platné ID widgetu nebo vložený HTML kód z Twit
 msgid "This doesn't seem to be a valid Flickr Gallery link! It should be in the form of \"https://www.flickr.com/photos/username/sets/1234567890\"!"
 msgstr "Zdá se, že to není platný odkaz na Flickr galerii! Měl by mít formu: \"https://www.flickr.com/photos/username/sets/1234567890\"!"
 
-msgid "Users"
-msgstr "Uživatelé"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "Skupiny"
@@ -1048,6 +1129,21 @@ msgstr "pin pro vstup pro účastníky přes telefon"
 msgid "Last create-call parameters"
 msgstr ""
 
+#, python-format
+msgid "Join \"%(name)s\"!"
+msgstr ""
+
+#, python-format
+msgid "To join the conference in the browser visit %(url)s."
+msgstr ""
+
+#, python-format
+msgid "To join the conference by phone dial \"%(number)s\" and enter the following PIN: \"%(pin)s#\". Use the 0-key on your phone to toggle mute on/off."
+msgstr ""
+
+msgid "Invitation copied to clipboard."
+msgstr ""
+
 msgid "BBB ROOM"
 msgstr "BBB ROOM"
 
@@ -1191,8 +1287,10 @@ msgstr "Řízení účasti"
 msgid "Request user information"
 msgstr "Vyžádejte si informace o uživateli"
 
-msgid "Pre-filled content for the information field"
-msgstr "Předvyplněný obsah pro informační pole"
+#, fuzzy
+#| msgid "Cooperation requests"
+msgid "User motivation questions"
+msgstr "Žádosti o spolupráci"
 
 #, fuzzy
 #| msgid "Request organization"
@@ -1261,8 +1359,8 @@ msgstr "Žádost o účast v konferenci"
 msgid "Priorities"
 msgstr "Priority"
 
-msgid "Motivation for applying"
-msgstr "Motivace pro podání žádosti"
+msgid "User motivation answers"
+msgstr ""
 
 msgid "Contact E-Mail Address"
 msgstr "Kontaktní e-mailová adresa"
@@ -1749,6 +1847,37 @@ msgstr "Cosinnus nápad"
 msgid "Cosinnus Ideas"
 msgstr "Cosinnus nápady"
 
+#, fuzzy
+#| msgctxt "subject of an E-Mail"
+#| msgid "Subject"
+msgid "Subject"
+msgstr "Předmět"
+
+msgid "Content"
+msgstr "Obsah"
+
+msgid "Recipients"
+msgstr "Příjemci"
+
+#, fuzzy
+#| msgid "Additional Recipients"
+msgid "Mails sent to Recipients"
+msgstr "Další příjemci"
+
+msgid "Mail function kwargs"
+msgstr ""
+
+#, fuzzy
+#| msgid "Dry run in progress"
+msgid "Sending in Progress"
+msgstr "Režim dry run pokračuje"
+
+msgid "Queued Mass Mail"
+msgstr ""
+
+msgid "Queued Mass Mails"
+msgstr ""
+
 msgid "Managed Tag"
 msgstr "Řízený tag"
 
@@ -1886,10 +2015,10 @@ msgstr "Přiložený objekt"
 msgid "Match type"
 msgstr ""
 
-msgid "Match"
+msgid "User-Match"
 msgstr ""
 
-msgid "Matches"
+msgid "User-Matches"
 msgstr ""
 
 #, python-brace-format
@@ -1899,11 +2028,24 @@ msgstr ""
 msgid "You and {self.from_user.get_full_name()} matched!"
 msgstr ""
 
-msgid "TODO: Youve matched!"
+msgid "You've matched!"
 msgstr ""
 
-msgid "TODO: Matched chat room greeting message"
+msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr ""
+
+#, fuzzy
+#| msgid "Delete offer"
+msgid "Deletion after"
+msgstr "Smazat nabídku"
+
+msgid "Data"
+msgstr ""
+
+#, fuzzy
+#| msgid "Import Data"
+msgid "Temporary Data"
+msgstr "Importujte data"
 
 msgid "Name (EN)"
 msgstr "Jméno (EN)"
@@ -2146,9 +2288,6 @@ msgstr "Widget s 4 náhodnými projekty"
 msgid "8 Random Projects Widget"
 msgstr "Widget s 8 náhodnými projekty"
 
-msgid "Content"
-msgstr "Obsah"
-
 msgid "Portal Root Page"
 msgstr "Kořenová stránka portálu"
 
@@ -2247,9 +2386,6 @@ msgstr "Widgety na stránce"
 
 msgid "Bottom content (gray background)"
 msgstr "Spodní obsah (šedé pozadí)"
-
-msgid "Dashboard"
-msgstr "Panel"
 
 msgid "Microsite"
 msgstr "Mikrostránka"
@@ -2638,9 +2774,6 @@ msgstr "Aktualizujte bulletin"
 msgid "Create Newsletter"
 msgstr "Vytvořit bulletin"
 
-msgid "Recipients"
-msgstr "Příjemci"
-
 #, python-format
 msgid "With the current selection the newsletter will be sent to %(counter)s recipients."
 msgid_plural "With the current selection the newsletter will be sent to %(counter)s recipients."
@@ -2683,6 +2816,11 @@ msgstr "Řízení uživatele"
 msgid "User Import"
 msgstr "Uživatelský import"
 
+#, fuzzy
+#| msgid "User Import"
+msgid "User Export"
+msgstr "Uživatelský import"
+
 msgid "User Profile Field Choices"
 msgstr "Volby polí uživatelského profilu"
 
@@ -2710,6 +2848,10 @@ msgstr "Upravit"
 
 msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
 msgstr "Tento bulletin již byl poslán. Pokud je chcete poslat znovu, zkopírujte jej, prosím, a pošlete tuto kopii."
+
+#, python-format
+msgid "This newsletter is being sent in the background: %(queued_mails_sent)s/%(queued_mails)s mails sent. Reload page to update."
+msgstr ""
 
 msgctxt "subject of an E-Mail"
 msgid "Subject"
@@ -2743,6 +2885,11 @@ msgstr "Bulletin"
 msgid "Sent at:"
 msgstr "Posláno na:"
 
+#, fuzzy
+#| msgid "Newsletter has been copied."
+msgid "Newsletter is being sent in the background."
+msgstr "Bulletin byl zkopírován."
+
 msgid "This newsletter has not been sent"
 msgstr "Tento bulletin nebyl poslán"
 
@@ -2766,9 +2913,6 @@ msgstr "Administrace uživatele"
 
 msgid "send login token to all inactive users"
 msgstr "pošlete přihlašovací token všem neaktivním uživatelům"
-
-msgid "Search"
-msgstr "Vyhledávat"
 
 msgid "Search for email, firstname or lastname"
 msgstr "Hledejte e-mail, jméno nebo příjmení"
@@ -2993,9 +3137,6 @@ msgstr "Při vkládání videa došlo k chybě"
 msgid "Help and Assistance for this page"
 msgstr "Nápověda a pomoc pro tuto stránku"
 
-msgid "Help"
-msgstr "Nápověda"
-
 msgid "Help for this page"
 msgstr "Nápověda pro tuto stránku"
 
@@ -3159,6 +3300,9 @@ msgstr "Zobrazit v mých projektech..."
 msgid "Disable editor"
 msgstr "Zakázat editor"
 
+msgid "Option"
+msgstr "Možnosti"
+
 msgid "Current File"
 msgstr "Stávající soubor"
 
@@ -3182,9 +3326,6 @@ msgstr "Dostanete e-mail s upozorněním a on-site upozornění, když organizá
 
 msgid "Please provide your motivation for applying"
 msgstr "Popište, prosím, motivaci, která vás vedla k žádosti"
-
-msgid "Describe why you wish to participate"
-msgstr "Popište, proč se chcete zúčastnit"
 
 msgid "Optional contact information"
 msgstr "Volitelné kontaktní informace"
@@ -3288,14 +3429,21 @@ msgstr "Důvod odmítnutí"
 msgid "optional"
 msgstr "volitelné"
 
+msgid "Application submitted"
+msgstr "Žádost o účast byla odeslána"
+
 msgid "First Choice"
 msgstr "První volba"
 
 msgid "Second Choice"
 msgstr "Druhá volba"
 
-msgid "Application submitted"
-msgstr "Žádost o účast byla odeslána"
+msgid "Motivation for applying"
+msgstr "Motivace pro podání žádosti"
+
+#, fuzzy
+msgid "Options"
+msgstr "Poměry"
 
 msgid "Workshop Assignments"
 msgstr "Přidělení workshopu"
@@ -3370,6 +3518,16 @@ msgstr[3] ""
 msgid "No, do not send"
 msgstr ""
 
+#, fuzzy
+#| msgid "Accept invitation"
+msgid "Copy invitation"
+msgstr "Přijmout pozvánku"
+
+#, fuzzy
+#| msgid "Accept invitation"
+msgid "Copy guest invitation"
+msgstr "Přijmout pozvánku"
+
 msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
 msgstr ""
 
@@ -3422,24 +3580,48 @@ msgstr "Toto není vynucený limit a slouží pouze k zobrazení pro hosty."
 msgid "(no limit selected)"
 msgstr "(žádný limit nevybrán)"
 
-msgid "Require applicants to submit a text about their motivation for applying"
+#, fuzzy
+#| msgid "Require applicants to submit a text about their motivation for applying"
+msgid "Require applicants to answer questions about their motivation for applying"
 msgstr "Vyžádejte si od žadatelů text o jejich motivaci pro podání žádosti"
 
-msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
-msgstr "Motivační textbox bude předvyplněn jakýmkoli textem, který zde vložíte. Můžete to použít, abyste poskytli vodítko nebo seznam otázek, které žadatelé mají zodpovědět."
+msgid "Provide a list of questions that the applicants should answer."
+msgstr ""
 
 #, python-format
 msgid "Only applicable if \"%(other_option)s\" is enabled."
 msgstr "Použitelné pouze pokud je povoleno \"%(other_option)s\"."
 
-msgid "Enter text to pre-fill or leave empty"
-msgstr "Vložte text, abyste box předvyplnili nebo jej nechte prázdný"
+#, fuzzy
+#| msgid "Remove button"
+msgid "Remove question"
+msgstr "Tlačítko Odebrat"
+
+#, fuzzy
+#| msgid "Add button"
+msgid "Add question"
+msgstr "Tlačítko Přidat"
 
 msgid "Options for participation"
 msgstr "Možnosti pro účastníky"
 
 msgid "Choose one or more options that will be displayed on the application form. Applicants can select any of these options along with their application."
 msgstr "Vyberte jednu nebo více možností, které budou zobrazeny na formuláři žádosti. Žadatelé mohou vybrat kteroukoli z těchto možností spolu s jejich žádostí."
+
+#, fuzzy
+#| msgid "Additional options"
+msgid "Define additional custom options."
+msgstr "Další možnosti"
+
+#, fuzzy
+#| msgid "Remove location"
+msgid "Remove option"
+msgstr "Odebrat umístění"
+
+#, fuzzy
+#| msgid "Add location"
+msgid "Add option"
+msgstr "Přidat umístění"
 
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
 msgstr "Výběr workshopu: Umožněte účastníkům, aby si vybrali preferované workshopy, které chtějí navštěvovat"
@@ -3658,6 +3840,64 @@ msgid "Allow recording"
 msgstr ""
 
 #, fuzzy
+#| msgid "Conference Settings"
+msgid "Conference Statistics"
+msgstr "Nastavení konference"
+
+#, fuzzy
+#| msgid "Conference name"
+msgid "Conference Name"
+msgstr "Název konference"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Num. Invitations"
+msgstr "Pozvánky"
+
+#, fuzzy
+#| msgid "Administration"
+msgid "Num. Registrations"
+msgstr "Správa"
+
+msgid "Num. Attendees"
+msgstr ""
+
+msgid "Avg. Time per Attendee"
+msgstr ""
+
+msgid "Download"
+msgstr "Stáhnout"
+
+#, fuzzy
+#| msgid "Conference Events"
+msgid "Conference Event Statistics"
+msgstr "Konferenční eventy"
+
+#, fuzzy
+#| msgid "Event date"
+msgid "Event Name"
+msgstr "Datum události"
+
+msgid "Room Type"
+msgstr "Typ místnosti"
+
+#, fuzzy
+#| msgid "Description"
+msgid "Duration"
+msgstr "Popis"
+
+msgid "In order to better assess how long participants actually attended an event, we calculate here the relation between the configured event duration and the average time per attendee."
+msgstr ""
+
+msgid "Attendance Percentage"
+msgstr ""
+
+#, fuzzy
+#| msgid "Download Statistics"
+msgid "Attendee Data Statistics"
+msgstr "Stáhnout statistiku"
+
+#, fuzzy
 msgid "Temporary Users"
 msgstr "Dočasné uživatelské účty"
 
@@ -3801,6 +4041,14 @@ msgstr "Stáhnout statistiku"
 msgid "New password"
 msgstr "Nové heslo"
 
+msgid "Answer"
+msgstr "Odpověď"
+
+#, fuzzy
+#| msgid "Suggestion"
+msgid "Question"
+msgstr "Návrh"
+
 msgid "Accept"
 msgstr "Přijmout"
 
@@ -3872,9 +4120,6 @@ msgstr "Aktivovat cloud"
 #| msgid "Members"
 msgid "Members-Map"
 msgstr "Členové"
-
-msgid "Cloud"
-msgstr "Cloud"
 
 msgid "File"
 msgstr "Soubor"
@@ -4895,9 +5140,6 @@ msgstr "Výzva k akci"
 msgid "Register and join!"
 msgstr "Zaregistrujte se a připojte se!"
 
-msgid "Register"
-msgstr "Registrovat"
-
 msgid "Log in"
 msgstr "Přihlásit se"
 
@@ -4972,6 +5214,11 @@ msgstr "Všechny skupiny"
 #. Translators: __INCLUDE_JS_PO__
 msgid "All Projects"
 msgstr "Všechny projekty"
+
+#, fuzzy
+#| msgid "Simple Statistics"
+msgid "Statistics"
+msgstr "Jednoduchá statistika"
 
 msgid "Temporary User Accounts"
 msgstr "Dočasné uživatelské účty"
@@ -5133,9 +5380,6 @@ msgstr "Název složky"
 
 msgid "Delete folder"
 msgstr "Smazat složku"
-
-msgid "Download"
-msgstr "Stáhnout"
 
 msgid "Do you really want to delete this folder and ALL folders and items it contains? This actions CANNOT be reversed!"
 msgstr "Opravdu chcete smazat tuto složku a VŠECHNY složky a položky, které obsahuje? Tuto akci NELZE vrátit zpět!"
@@ -5804,9 +6048,6 @@ msgstr "Všechny organizace"
 msgid "Search..."
 msgstr "Vyhledávat..."
 
-msgid "Messages"
-msgstr "Zprávy"
-
 msgid "My Stream"
 msgstr "Můj stream"
 
@@ -5929,9 +6170,6 @@ msgstr "Obnovit heslo"
 
 msgid "Your password has been set.  You may go ahead and log in now."
 msgstr "Vaše heslo bylo nastaveno. Můžete pokračovat a přihlásit se hned teď."
-
-msgid "Login"
-msgstr "Přihlásit se"
 
 msgid "Enter new password"
 msgstr "Zadejte nové heslo"
@@ -6351,10 +6589,6 @@ msgid "Membership Requests"
 msgstr "Žádosti o členství"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "My Groups and Projects"
-msgstr "Moje skupiny a projekty"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Show more Projects of this Group"
 msgstr "Zobrazit více projektů této skupiny"
 
@@ -6679,10 +6913,6 @@ msgid "Nothing here yet."
 msgstr "Zatím zde nic není."
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Groups and Projects"
-msgstr "Skupiny a projekty"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Here you can find an overview of your Groups and Projects once you become active in one or more of them."
 msgstr "Zde najdete přehled vašich skupin a projektů, jakmile se v jedné nebo více z nich stanete aktivními."
 
@@ -6858,12 +7088,10 @@ msgstr ""
 msgid "If the validation email does not arrive, please check your spam folder and re-check the spelling of your email address. If everything seems ok but you still have not received an email from us, please repeat the email change again to receive a new validation email:"
 msgstr ""
 
-#, fuzzy
-#| msgid "Contact"
-msgid "Direct Contact"
-msgstr "Kontakt"
+msgid "Find a Match"
+msgstr ""
 
-msgid "**User-Matching** is your tool for communicating and sharing experiences with like-minded people from all over the world. If you have much to discuss and your chosen person considers it the same, your dialogue will start automatically."
+msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
 msgstr ""
 
 msgid "Wonderful, we definitely have so much to discuss!"
@@ -6920,10 +7148,6 @@ msgstr "Smazat uživatelský účet"
 #, python-format
 msgid "User profile: %(username)s"
 msgstr "Uživatelský profil: %(username)s"
-
-#, fuzzy
-msgid "Profile"
-msgstr "Můj profil"
 
 msgid "Cooperation requests"
 msgstr "Žádosti o spolupráci"
@@ -7265,6 +7489,64 @@ msgstr "Uživatel může oznámení zrušit, v takovém případě zmizí a už 
 
 msgid "There are no announcements yet."
 msgstr "Zatím nejsou k dispozici žádná oznámení."
+
+#, fuzzy
+#| msgid "Start the Import?"
+msgid "Start user export"
+msgstr "Zahájit import?"
+
+msgid "You can start a user export. As soon as the export is finished it will be available here."
+msgstr ""
+
+#, fuzzy
+#| msgid "The import is currently running..."
+msgid "The export is currently running..."
+msgstr "Právě probíhá import..."
+
+msgid "A user export is in progress. As soon as the export is finished it will be available here."
+msgstr ""
+
+#, fuzzy
+#| msgid "Import finished"
+msgid "User export finished"
+msgstr "Import dokončen"
+
+msgid "You can download the latest user export data."
+msgstr ""
+
+#, fuzzy
+msgid "Download user exports from"
+msgstr "Stáhněte si podmínky"
+
+#, fuzzy
+msgid "Download user export as"
+msgstr "Stáhněte si podmínky"
+
+msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
+msgstr ""
+
+#, fuzzy
+#| msgid "An internal error occured."
+msgid "An error has occurred"
+msgstr "Došlo k interní chybě."
+
+#, fuzzy
+#| msgid "There was an error while trying to submit your report. Please try again in a moment."
+msgid "Sorry, an error occurred during the user export. Please try again later."
+msgstr "Při pokusu o odeslání hlášení došlo k chybě. Zkuste to prosím znovu za chvíli."
+
+#, fuzzy
+#| msgid "Delete uploaded data and upload a new CSV file"
+msgid "Delete export data and start new user export"
+msgstr "Smažte nahraná data a nahrajte nový CSV soubor"
+
+msgid "Retry user export"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete reported item..."
+msgid "Delete exported data"
+msgstr "Smazat nahlášenou položku..."
 
 msgid "User Import Archive"
 msgstr "Archiv uživatelských importů"
@@ -7609,9 +7891,6 @@ msgstr "Rychlé hledání"
 msgid "Create content"
 msgstr "Vytvořit obsah"
 
-msgid "Home"
-msgstr "Domů"
-
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
 
@@ -7644,6 +7923,9 @@ msgstr "Upravit váš profil"
 
 msgid "Edit My Profile"
 msgstr "Upravit můj profil"
+
+msgid "What's New"
+msgstr ""
 
 msgid "What's happening where and when? What's to discover? Where to meet?"
 msgstr "Co se kde a kdy děje? Co objevovat? Kde se setkat?"
@@ -7936,9 +8218,6 @@ msgstr "Vámi vybraný obsah mohou zobrazit pouze členové skupiny. Podejte si 
 msgid "Note: New recordings can only be made if you have booked premium features for this group."
 msgstr ""
 
-msgid "My Conferences"
-msgstr "Mé konference"
-
 msgid "You are not currently attending any Conferences"
 msgstr "V současnosti se neúčastníte žádné konference"
 
@@ -8095,11 +8374,41 @@ msgstr ""
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr ""
 
+msgid "Version 1.18.0 released"
+msgstr ""
+
+msgid "Includes the \"What's New\" feature, a quick way to copy conference invitations, a security update, and more."
+msgstr ""
+
+msgid ""
+"The update includes:\n"
+"- A \"What's new\" page, showing the release notes for the platform.\n"
+"- Copy a conference invitation to the clipboard from the conference interface.\n"
+"- Some font changes and improvements.\n"
+"- Fix bug in group and project membership handling.\n"
+"- Tags accross the site now link to the search page.\n"
+"- Fix assigning Todos via the user avatar.\n"
+"- Improve reliability of newsletter sending.\n"
+"- Security updates.\n"
+"- Further minor bugfixes.\n"
+msgstr ""
+
+msgid "Version 1.17.1 released"
+msgstr ""
+
+msgid "Includes dynamic registration form and dynamic options for participation for conferences."
+msgstr ""
+
+msgid ""
+"The update includes:\n"
+"- Dynamic registration form for conferences\n"
+"- Dynamize options for participation for conferences\n"
+"- Library Update of Moment.js\n"
+"- Update Matomo tracking to include better options\n"
+msgstr ""
+
 msgid "Test email sent!"
 msgstr "Testovací e-mail odeslán!"
-
-msgid "Newsletter sent."
-msgstr "Bulletin byl poslán."
 
 msgid "Test email sent."
 msgstr "Testovací e-mail odeslán."
@@ -8632,6 +8941,11 @@ msgstr "Vaše oznámení bylo úspěšně aktivováno."
 msgid "Your Announcement was deactivated successfully."
 msgstr "Vaše oznámení bylo úspěšně deaktivováno."
 
+#, fuzzy
+#| msgid "Another import is currently running!"
+msgid "Another export is currently running!"
+msgstr "V současnosti probíhá další import!"
+
 msgid "The Archived User Import Entry was deleted successfully."
 msgstr "Vložení archivovaného uživatelského importu bylo úspěšně smazáno."
 
@@ -8864,11 +9178,13 @@ msgstr "Následující uživatelé byli zamítnuti: %s"
 msgid "Your changes were saved."
 msgstr "Vaše změny byly uloženy."
 
-msgid "Option"
-msgstr "Možnosti"
-
 msgid "Status"
 msgstr "Status"
+
+#, fuzzy
+#| msgid "This function is not enabled for this conference."
+msgid "Attendance data is not available for this conference."
+msgstr "Tato funkce není pro tuto konferenci povolena."
 
 msgid "The following Pads were re-initialized:"
 msgstr "Následující Pady byly reinicializovány:"
@@ -9451,6 +9767,25 @@ msgstr "Konferenční eventy"
 #, python-format
 msgid "%(event)s %(type)s"
 msgstr "%(event)s %(type)s"
+
+#, fuzzy
+msgid "Start-Time"
+msgstr "Označené hvězdičkou"
+
+#, fuzzy
+#| msgid "Time"
+msgid "End-Time"
+msgstr "Čas"
+
+#, fuzzy
+#| msgid "Conference Event Management"
+msgid "Conference Event Attendance Tracking"
+msgstr "Řízení konferenčního eventu"
+
+#, fuzzy
+#| msgid "Conference Event Management"
+msgid "Conference Event Attendance Trackings"
+msgstr "Řízení konferenčního eventu"
 
 msgid "Would you like to create an event"
 msgstr "Chtěli byste vytvořit událost"
@@ -10084,9 +10419,6 @@ msgstr "Vytvořili jste událost"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created an event"
 msgstr "vytvořil/a událost"
-
-msgid "Show all"
-msgstr "Zobrazit vše"
 
 msgid "Upcoming events"
 msgstr "Nadcházející události"
@@ -10993,9 +11325,6 @@ msgstr "Zobrazit všech/ny %(count)s účastníků/y"
 
 msgid "Me"
 msgstr "Já"
-
-msgid "Answer"
-msgstr "Odpověď"
 
 msgid "Reply..."
 msgstr "Odpovědět..."
@@ -13535,6 +13864,26 @@ msgstr "Seznam úkolů \"%(title)s\" nelze přidat."
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Tuto složku nemůžete smazat, protože nemáte oprávnění smazat jednu nebo více položek, které obsahuje!"
 
+#~ msgid "Pre-filled content for the information field"
+#~ msgstr "Předvyplněný obsah pro informační pole"
+
+#~ msgid "Describe why you wish to participate"
+#~ msgstr "Popište, proč se chcete zúčastnit"
+
+#~ msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
+#~ msgstr "Motivační textbox bude předvyplněn jakýmkoli textem, který zde vložíte. Můžete to použít, abyste poskytli vodítko nebo seznam otázek, které žadatelé mají zodpovědět."
+
+#~ msgid "Enter text to pre-fill or leave empty"
+#~ msgstr "Vložte text, abyste box předvyplnili nebo jej nechte prázdný"
+
+#, fuzzy
+#~| msgid "Contact"
+#~ msgid "Direct Contact"
+#~ msgstr "Kontakt"
+
+#~ msgid "Newsletter sent."
+#~ msgstr "Bulletin byl poslán."
+
 #, fuzzy
 #~ msgid "Premium Bookings"
 #~ msgstr "Premium"
@@ -13593,10 +13942,6 @@ msgstr "Tuto složku nemůžete smazat, protože nemáte oprávnění smazat jed
 #, fuzzy
 #~ msgid "User CSV File"
 #~ msgstr "Nahrát CSV soubor"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Poměry"
 
 #, fuzzy
 #~| msgid "Delete file"
@@ -13702,9 +14047,6 @@ msgstr "Tuto složku nemůžete smazat, protože nemáte oprávnění smazat jed
 
 #~ msgid "Restricted"
 #~ msgstr "S omezením"
-
-#~ msgid "Room Type"
-#~ msgstr "Typ místnosti"
 
 #~ msgid "the rooms welcome message"
 #~ msgstr "uvítací zpráva do místností"

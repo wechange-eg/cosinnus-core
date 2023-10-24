@@ -902,7 +902,9 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
     dynamic_fields = models.JSONField(default=dict, blank=True, verbose_name=_('Dynamic extra fields'),
             help_text='Extra group fields for each portal, as defined in `settings.COSINNUS_GROUP_EXTRA_FIELDS`', encoder=DjangoJSONEncoder)
     sdgs = models.JSONField(default=list, blank=True, null=True, encoder=DjangoJSONEncoder)
-    
+    third_party_tools = models.JSONField(default=list, blank=True, null=True, encoder=DjangoJSONEncoder,
+            help_text='List of {"label": "Tool-Name", "url": "https://tool.url" } elements.')
+
     show_contact_form = models.BooleanField(default=False, help_text=_('If set to true, a contact form will be displayed on the micropage.'))
 
     use_invite_token = models.BooleanField(_('Use invite token'),
@@ -1078,9 +1080,7 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         membership = CosinnusGroupMembership.objects.create(user=user,
             group=group, status=MEMBERSHIP_ADMIN)
         # clear cache and manually refill because race conditions can make the group memberships be cached as empty
-        membership._clear_cache() 
-        group.members # this refills the group's member cache immediately
-        group.admins # this refills the group's member cache immediately
+        membership._refresh_cache()
         group.update_index()
         return group
     

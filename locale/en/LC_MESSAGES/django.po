@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-07 14:11+0200\n"
+"POT-Creation-Date: 2023-10-24 10:30+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -197,9 +197,50 @@ msgstr ""
 msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
+msgid "Recipients Count"
+msgstr ""
+
+msgid "Recipients Send Count"
+msgstr ""
+
+msgid "Community"
+msgstr ""
+
+#, fuzzy
+msgid "Personal"
+msgstr "Project Type"
+
 #, fuzzy
 msgid "Personal Dashboard"
 msgstr "Project Type"
+
+#, fuzzy
+msgid "My Personal Space"
+msgstr "Project Type"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "My Groups and Projects"
+msgstr "My Projects"
+
+msgid "My Conferences"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Groups and Projects"
+msgstr "My Projects"
+
+msgid "Users"
+msgstr ""
+
+#, fuzzy
+msgctxt "navigation bookmarks header"
+msgid "Content"
+msgstr "All Projects"
+
+msgid "Change Language"
+msgstr ""
 
 msgid "My Profile"
 msgstr ""
@@ -215,9 +256,6 @@ msgstr "Edit Project"
 msgid "Notification Preferences"
 msgstr ""
 
-msgid "Change Language"
-msgstr ""
-
 msgid "Your Contribution"
 msgstr ""
 
@@ -226,6 +264,43 @@ msgid "Administration"
 msgstr "There are no groups."
 
 msgid "Logout"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Bookmarks"
+msgstr ""
+
+msgid "Cloud"
+msgstr ""
+
+msgid "Messages"
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
+msgid "Alerts"
+msgstr ""
+
+#, fuzzy
+msgid "Profile"
+msgstr "Edit Project"
+
+msgid "Login"
+msgstr ""
+
+msgid "Register"
+msgstr ""
+
+msgid "Show all"
 msgstr ""
 
 #, python-format
@@ -874,9 +949,6 @@ msgstr ""
 msgid "This doesn't seem to be a valid Flickr Gallery link! It should be in the form of \"https://www.flickr.com/photos/username/sets/1234567890\"!"
 msgstr ""
 
-msgid "Users"
-msgstr ""
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "Groups"
@@ -1042,6 +1114,21 @@ msgid "pin to enter for telephone participants"
 msgstr ""
 
 msgid "Last create-call parameters"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Join \"%(name)s\"!"
+msgstr "Edit project “%(team_name)s”"
+
+#, python-format
+msgid "To join the conference in the browser visit %(url)s."
+msgstr ""
+
+#, python-format
+msgid "To join the conference by phone dial \"%(number)s\" and enter the following PIN: \"%(pin)s#\". Use the 0-key on your phone to toggle mute on/off."
+msgstr ""
+
+msgid "Invitation copied to clipboard."
 msgstr ""
 
 msgid "BBB ROOM"
@@ -1756,6 +1843,30 @@ msgstr "Project"
 msgid "Cosinnus Ideas"
 msgstr "Projects"
 
+msgid "Subject"
+msgstr ""
+
+msgid "Content"
+msgstr ""
+
+msgid "Recipients"
+msgstr ""
+
+msgid "Mails sent to Recipients"
+msgstr ""
+
+msgid "Mail function kwargs"
+msgstr ""
+
+msgid "Sending in Progress"
+msgstr ""
+
+msgid "Queued Mass Mail"
+msgstr ""
+
+msgid "Queued Mass Mails"
+msgstr ""
+
 msgid "Managed Tag"
 msgstr ""
 
@@ -1913,6 +2024,18 @@ msgstr ""
 
 msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr ""
+
+#, fuzzy
+#| msgid "Delete Etherpad"
+msgid "Deletion after"
+msgstr "Delete Pad"
+
+msgid "Data"
+msgstr ""
+
+#, fuzzy
+msgid "Temporary Data"
+msgstr "Create Project"
 
 msgid "Name (EN)"
 msgstr ""
@@ -2159,9 +2282,6 @@ msgstr ""
 msgid "8 Random Projects Widget"
 msgstr ""
 
-msgid "Content"
-msgstr ""
-
 msgid "Portal Root Page"
 msgstr ""
 
@@ -2259,9 +2379,6 @@ msgid "Site Widgets"
 msgstr ""
 
 msgid "Bottom content (gray background)"
-msgstr ""
-
-msgid "Dashboard"
 msgstr ""
 
 msgid "Microsite"
@@ -2651,9 +2768,6 @@ msgstr "Create Project"
 msgid "Create Newsletter"
 msgstr "Create Project"
 
-msgid "Recipients"
-msgstr ""
-
 #, python-format
 msgid "With the current selection the newsletter will be sent to %(counter)s recipients."
 msgid_plural "With the current selection the newsletter will be sent to %(counter)s recipients."
@@ -2713,6 +2827,10 @@ msgstr ""
 msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
 msgstr ""
 
+#, python-format
+msgid "This newsletter is being sent in the background: %(queued_mails_sent)s/%(queued_mails)s mails sent. Reload page to update."
+msgstr ""
+
 msgctxt "subject of an E-Mail"
 msgid "Subject"
 msgstr ""
@@ -2745,6 +2863,9 @@ msgstr ""
 msgid "Sent at:"
 msgstr ""
 
+msgid "Newsletter is being sent in the background."
+msgstr ""
+
 msgid "This newsletter has not been sent"
 msgstr ""
 
@@ -2770,9 +2891,6 @@ msgid "User Administration"
 msgstr "There are no groups."
 
 msgid "send login token to all inactive users"
-msgstr ""
-
-msgid "Search"
 msgstr ""
 
 msgid "Search for email, firstname or lastname"
@@ -2977,9 +3095,6 @@ msgid "Error embedding a video"
 msgstr ""
 
 msgid "Help and Assistance for this page"
-msgstr ""
-
-msgid "Help"
 msgstr ""
 
 msgid "Help for this page"
@@ -3284,13 +3399,13 @@ msgstr ""
 msgid "optional"
 msgstr ""
 
+msgid "Application submitted"
+msgstr ""
+
 msgid "First Choice"
 msgstr ""
 
 msgid "Second Choice"
-msgstr ""
-
-msgid "Application submitted"
 msgstr ""
 
 msgid "Motivation for applying"
@@ -3363,6 +3478,14 @@ msgstr[1] ""
 
 msgid "No, do not send"
 msgstr ""
+
+#, fuzzy
+msgid "Copy invitation"
+msgstr "There are no groups."
+
+#, fuzzy
+msgid "Copy guest invitation"
+msgstr "There are no groups."
 
 msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
 msgstr ""
@@ -3929,9 +4052,6 @@ msgid "Activate Cloud"
 msgstr "Create Project"
 
 msgid "Members-Map"
-msgstr ""
-
-msgid "Cloud"
 msgstr ""
 
 msgid "File"
@@ -4942,9 +5062,6 @@ msgstr ""
 msgid "Register and join!"
 msgstr ""
 
-msgid "Register"
-msgstr ""
-
 msgid "Log in"
 msgstr ""
 
@@ -5712,9 +5829,6 @@ msgstr ""
 msgid "Search..."
 msgstr ""
 
-msgid "Messages"
-msgstr ""
-
 msgid "My Stream"
 msgstr "Activities"
 
@@ -5835,9 +5949,6 @@ msgid "Reset password"
 msgstr ""
 
 msgid "Your password has been set.  You may go ahead and log in now."
-msgstr ""
-
-msgid "Login"
 msgstr ""
 
 msgid "Enter new password"
@@ -6265,11 +6376,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-msgid "My Groups and Projects"
-msgstr "My Projects"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
 msgid "Show more Projects of this Group"
 msgstr "Other Projects"
 
@@ -6616,11 +6722,6 @@ msgid "Nothing here yet."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-msgid "Groups and Projects"
-msgstr "My Projects"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Here you can find an overview of your Groups and Projects once you become active in one or more of them."
 msgstr ""
 
@@ -6856,10 +6957,6 @@ msgstr ""
 #, python-format
 msgid "User profile: %(username)s"
 msgstr ""
-
-#, fuzzy
-msgid "Profile"
-msgstr "Edit Project"
 
 msgid "Cooperation requests"
 msgstr ""
@@ -7580,9 +7677,6 @@ msgstr ""
 msgid "Create content"
 msgstr "Create Project"
 
-msgid "Home"
-msgstr ""
-
 msgid "Rocket.Chat"
 msgstr ""
 
@@ -7613,6 +7707,9 @@ msgstr "Edit Project"
 #, fuzzy
 msgid "Edit My Profile"
 msgstr "Edit Project"
+
+msgid "What's New"
+msgstr ""
 
 msgid "What's happening where and when? What's to discover? Where to meet?"
 msgstr ""
@@ -7928,9 +8025,6 @@ msgstr ""
 msgid "Note: New recordings can only be made if you have booked premium features for this group."
 msgstr ""
 
-msgid "My Conferences"
-msgstr ""
-
 msgid "You are not currently attending any Conferences"
 msgstr ""
 
@@ -8100,10 +8194,40 @@ msgstr ""
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr ""
 
-msgid "Test email sent!"
+msgid "Version 1.18.0 released"
 msgstr ""
 
-msgid "Newsletter sent."
+msgid "Includes the \"What's New\" feature, a quick way to copy conference invitations, a security update, and more."
+msgstr ""
+
+msgid ""
+"The update includes:\n"
+"- A \"What's new\" page, showing the release notes for the platform.\n"
+"- Copy a conference invitation to the clipboard from the conference interface.\n"
+"- Some font changes and improvements.\n"
+"- Fix bug in group and project membership handling.\n"
+"- Tags accross the site now link to the search page.\n"
+"- Fix assigning Todos via the user avatar.\n"
+"- Improve reliability of newsletter sending.\n"
+"- Security updates.\n"
+"- Further minor bugfixes.\n"
+msgstr ""
+
+msgid "Version 1.17.1 released"
+msgstr ""
+
+msgid "Includes dynamic registration form and dynamic options for participation for conferences."
+msgstr ""
+
+msgid ""
+"The update includes:\n"
+"- Dynamic registration form for conferences\n"
+"- Dynamize options for participation for conferences\n"
+"- Library Update of Moment.js\n"
+"- Update Matomo tracking to include better options\n"
+msgstr ""
+
+msgid "Test email sent!"
 msgstr ""
 
 msgid "Test email sent."
@@ -9972,9 +10096,6 @@ msgstr "%s - Events"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created an event"
 msgstr "%s - Events"
-
-msgid "Show all"
-msgstr ""
 
 msgid "Upcoming events"
 msgstr ""

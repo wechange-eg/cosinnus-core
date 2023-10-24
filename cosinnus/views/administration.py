@@ -4,9 +4,9 @@ from __future__ import unicode_literals
 from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db import transaction
 from django.db.models import Q
 from django.http import HttpResponseRedirect
-from django.utils import timezone
 from django.views.generic.edit import CreateView, FormView, UpdateView
 from django.views.generic.list import ListView
 from cosinnus.utils.permissions import check_user_superuser
@@ -31,6 +31,7 @@ from cosinnus.utils.permissions import check_user_can_receive_emails
 from cosinnus.utils.html import render_html_with_variables
 from cosinnus.core.mail import send_html_mail
 from cosinnus.models.profile import get_user_profile_model
+from cosinnus.models.mail import QueuedMassMail
 from cosinnus.models.managed_tags import (CosinnusManagedTag,
                                           CosinnusManagedTagAssignment)
 from cosinnus.views.user import email_first_login_token_to_user
@@ -124,6 +125,11 @@ class BaseNewsletterUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['receipients'] = self._filter_valid_recipients(self._get_recipients_from_choices())
+        if self.object.queued_mail:
+            context.update({
+                'queued_mails': self.object.queued_mail.recipients.count(),
+                'queued_mails_sent': self.object.queued_mail.recipients_sent.count(),
+            })
         return context
 
     def _get_recipients_from_choices(self):
@@ -146,31 +152,31 @@ class BaseNewsletterUpdateView(UpdateView):
                 filtered_users.append(user)
         return filtered_users
     
-    def _send_newsletter(self, recipients, threaded=True):
+    def _send_test_newsletter(self, recipients):
+        """ Send test newsletter to request user with not threading or queue. """
         subject = self.object.subject
         text = self.object.body
         for recipient in recipients:
             user_text = textfield(render_html_with_variables(recipient, text))
             # omitt the topic line after "Hello user," by passing topic_instead_of_subject=' '
-            send_html_mail(recipient, subject, user_text, topic_instead_of_subject=' ', threaded=threaded)
+            send_html_mail(recipient, subject, user_text, topic_instead_of_subject=' ')
 
     def form_valid(self, form):
         self.object = form.save()
         if 'send_newsletter' in self.request.POST:
             recipients = self._get_recipients_from_choices()
             recipients = self._filter_valid_recipients(recipients)
-            # send mails threaded
-            my_self = self
-            class CosinnusSendNewsletterThread(Thread):
-                def run(self):
-                    my_self._send_newsletter(recipients, threaded=False)
-            CosinnusSendNewsletterThread().start()
-            
-            self.object.sent = timezone.now()
-            self.object.save()
-            messages.add_message(self.request, messages.SUCCESS, _('Newsletter sent.'))
+            # queue this email
+            with transaction.atomic():
+                queued_mail = QueuedMassMail.objects.create(subject=self.object.subject, content=self.object.body,
+                                                            send_mail_kwargs={'topic_instead_of_subject': ' '})
+                queued_mail.recipients.set(recipients)
+                self.object.queued_mail = queued_mail
+                self.object.is_sending = True
+                self.object.save()
+            messages.add_message(self.request, messages.SUCCESS, _('Newsletter is being sent in the background.'))
         elif 'send_test_mail' in self.request.POST:
-            self._send_newsletter([self.request.user])
+            self._send_test_newsletter([self.request.user])
             messages.add_message(self.request, messages.SUCCESS, _('Test email sent.'))
         elif 'copy_newsletter' in self.request.POST:
             self.object = self._copy_newsletter()

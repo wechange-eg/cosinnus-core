@@ -1,6 +1,6 @@
 @charset "UTF-8";
 body {
-  font-family: Verdana, Geneva, sans-serif;
+  font-family: "IBM Plex Sans", Verdana, Geneva, sans-serif;
   background: #43757e;
   /* Old browsers */
   background: -moz-linear-gradient(top, #43757e 0%, #a6bab7 100%) fixed;
@@ -346,7 +346,7 @@ html {
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "IBM Plex Sans", Helvetica, Arial, sans-serif;
   font-size: 12px;
   line-height: 1.42857;
   color: #333333;

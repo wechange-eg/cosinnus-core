@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-13 13:31+0200\n"
+"POT-Creation-Date: 2023-10-24 10:30+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -207,9 +207,59 @@ msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr "רוקט צ'אט: תקן חברויות משתמשי רוקט-צ'אט"
 
 #, fuzzy
+#| msgid "Recipients"
+msgid "Recipients Count"
+msgstr "נמענים"
+
+#, fuzzy
+#| msgid "Recipients"
+msgid "Recipients Send Count"
+msgstr "נמענים"
+
+#, fuzzy
+#| msgid "Comment"
+msgid "Community"
+msgstr "תגובה"
+
+#, fuzzy
+#| msgid "Persons"
+msgid "Personal"
+msgstr "אנשים"
+
+#, fuzzy
 #| msgid "Project Dashboard"
 msgid "Personal Dashboard"
 msgstr "לוח כלים של הפרויקט"
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "My Personal Space"
+msgstr "פרטי יצירת קשר"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Groups and Projects"
+msgstr "הקבוצות והפרויקטים שלי"
+
+msgid "My Conferences"
+msgstr "שיחות הועידה שלי"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups and Projects"
+msgstr "קבוצות ופרוייקטים"
+
+msgid "Users"
+msgstr "משתמשים"
+
+#, fuzzy
+#| msgid "Content"
+msgctxt "navigation bookmarks header"
+msgid "Content"
+msgstr "תוכן"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "שנה שפה"
 
 msgid "My Profile"
 msgstr "הפרופיל שלי"
@@ -227,11 +277,6 @@ msgstr "ערוך את הפרופיל שלי"
 msgid "Notification Preferences"
 msgstr "העדפות התראה"
 
-#, fuzzy
-#| msgid "Change language"
-msgid "Change Language"
-msgstr "שנה שפה"
-
 msgid "Your Contribution"
 msgstr "התרומה שלך"
 
@@ -240,6 +285,45 @@ msgstr "ניהול מערכת"
 
 msgid "Logout"
 msgstr "התנתק"
+
+msgid "Home"
+msgstr "דף הבית"
+
+msgid "Dashboard"
+msgstr "לוח כלים"
+
+msgid "Search"
+msgstr "חיפוש"
+
+#, fuzzy
+#| msgid "Bookmark"
+msgid "Bookmarks"
+msgstr "סמן"
+
+msgid "Cloud"
+msgstr "ענן"
+
+msgid "Messages"
+msgstr "הודעות"
+
+msgid "Help"
+msgstr "עזרה"
+
+msgid "Alerts"
+msgstr ""
+
+#, fuzzy
+msgid "Profile"
+msgstr "הפרופיל שלי"
+
+msgid "Login"
+msgstr "התחבר"
+
+msgid "Register"
+msgstr "הירשם"
+
+msgid "Show all"
+msgstr "הצג הכל"
 
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
@@ -666,7 +750,7 @@ msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_na
 msgstr "%(sender_name)s יצר כרגע את הפרויקט \"%(team_name)s\" ב-%(portal_name)s מרעיון שאתה עוקב אחריו! <br/><br/> על מנת לבדוק אותו לחץ על הלינק שלהלן. שם תוכל להחליט האם אתה מעוניין להצטרך לפרויקט."
 
 #, python-format
-msgid "Your match with %(sender_name)s has just been established!"
+msgid "You have a match with %(sender_name)s. Get to know your match in Rocket.Chat"
 msgstr ""
 
 msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
@@ -864,9 +948,6 @@ msgstr "זה לא נראה כמו מזהה יישומון חוקי או הטבע
 msgid "This doesn't seem to be a valid Flickr Gallery link! It should be in the form of \"https://www.flickr.com/photos/username/sets/1234567890\"!"
 msgstr "זה לא נראה כמו קישור חוקי של גלריית Flickr! כך נראה קישור תקף \"https://www.flickr.com/photos/username/sets/1234567890\"!"
 
-msgid "Users"
-msgstr "משתמשים"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "קבוצות"
@@ -1038,6 +1119,21 @@ msgstr "מספר פין לכניסה עבור משתתפי טלפון"
 msgid "Last create-call parameters"
 msgstr ""
 
+#, python-format
+msgid "Join \"%(name)s\"!"
+msgstr ""
+
+#, python-format
+msgid "To join the conference in the browser visit %(url)s."
+msgstr ""
+
+#, python-format
+msgid "To join the conference by phone dial \"%(number)s\" and enter the following PIN: \"%(pin)s#\". Use the 0-key on your phone to toggle mute on/off."
+msgstr ""
+
+msgid "Invitation copied to clipboard."
+msgstr ""
+
 msgid "BBB ROOM"
 msgstr "חדר BBB"
 
@@ -1181,8 +1277,10 @@ msgstr "ניהול השתתפות"
 msgid "Request user information"
 msgstr "בקש פרטי משתמש"
 
-msgid "Pre-filled content for the information field"
-msgstr "מלא מראש תוכן עבור שדה המידע"
+#, fuzzy
+#| msgid "Cooperation requests"
+msgid "User motivation questions"
+msgstr "בקשות לשיתוף פעולה"
 
 #, fuzzy
 #| msgid "Request organization"
@@ -1251,8 +1349,8 @@ msgstr "בקשות ועידה"
 msgid "Priorities"
 msgstr "עדיפויות"
 
-msgid "Motivation for applying"
-msgstr "מוטיבצייה להגשת מועמדות"
+msgid "User motivation answers"
+msgstr ""
 
 msgid "Contact E-Mail Address"
 msgstr "כתובות דואר אלקטרוני ליצירת קשר"
@@ -1739,6 +1837,37 @@ msgstr "רעיון קוסינוס"
 msgid "Cosinnus Ideas"
 msgstr "רעיונות קוסינוס"
 
+#, fuzzy
+#| msgctxt "subject of an E-Mail"
+#| msgid "Subject"
+msgid "Subject"
+msgstr "נושא"
+
+msgid "Content"
+msgstr "תוכן"
+
+msgid "Recipients"
+msgstr "נמענים"
+
+#, fuzzy
+#| msgid "Additional Recipients"
+msgid "Mails sent to Recipients"
+msgstr "נמענים נוספים"
+
+msgid "Mail function kwargs"
+msgstr ""
+
+#, fuzzy
+#| msgid "Dry run in progress"
+msgid "Sending in Progress"
+msgstr "הרצה יבשה בתהליך"
+
+msgid "Queued Mass Mail"
+msgstr ""
+
+msgid "Queued Mass Mails"
+msgstr ""
+
 msgid "Managed Tag"
 msgstr "תג מנוהל"
 
@@ -1876,10 +2005,10 @@ msgstr "פריט מצורף"
 msgid "Match type"
 msgstr ""
 
-msgid "Match"
+msgid "User-Match"
 msgstr ""
 
-msgid "Matches"
+msgid "User-Matches"
 msgstr ""
 
 #, python-brace-format
@@ -1889,11 +2018,24 @@ msgstr ""
 msgid "You and {self.from_user.get_full_name()} matched!"
 msgstr ""
 
-msgid "TODO: Youve matched!"
+msgid "You've matched!"
 msgstr ""
 
-msgid "TODO: Matched chat room greeting message"
+msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr ""
+
+#, fuzzy
+#| msgid "Delete offer"
+msgid "Deletion after"
+msgstr "מחק הצעה"
+
+msgid "Data"
+msgstr ""
+
+#, fuzzy
+#| msgid "Import Data"
+msgid "Temporary Data"
+msgstr "ייבא נתונים"
 
 msgid "Name (EN)"
 msgstr "שם (EN)"
@@ -2136,9 +2278,6 @@ msgstr "יישומון 4 פרוייקטים אקראיים"
 msgid "8 Random Projects Widget"
 msgstr "יישומון 8 פרוייקטים אקראיים"
 
-msgid "Content"
-msgstr "תוכן"
-
 msgid "Portal Root Page"
 msgstr "דף בסיס של פורטל"
 
@@ -2239,9 +2378,6 @@ msgstr "יישומונים לאתר"
 
 msgid "Bottom content (gray background)"
 msgstr "תוכן תחתון (רקע אפור)"
-
-msgid "Dashboard"
-msgstr "לוח כלים"
 
 msgid "Microsite"
 msgstr "מיקרו-אתר"
@@ -2630,9 +2766,6 @@ msgstr "העלה ידיעון"
 msgid "Create Newsletter"
 msgstr "צור ידיעון חדש"
 
-msgid "Recipients"
-msgstr "נמענים"
-
 #, python-format
 msgid "With the current selection the newsletter will be sent to %(counter)s recipients."
 msgid_plural "With the current selection the newsletter will be sent to %(counter)s recipients."
@@ -2655,6 +2788,11 @@ msgid "User Management"
 msgstr "ניהול משתמשים"
 
 msgid "User Import"
+msgstr "ייבוא משתמש"
+
+#, fuzzy
+#| msgid "User Import"
+msgid "User Export"
 msgstr "ייבוא משתמש"
 
 msgid "User Profile Field Choices"
@@ -2684,6 +2822,10 @@ msgstr "ערוך"
 
 msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
 msgstr "ידיעון זה כבר נשלח. אם ברצונך לשלוח אותו שוב, נא העתק אותו ושלח את העותק."
+
+#, python-format
+msgid "This newsletter is being sent in the background: %(queued_mails_sent)s/%(queued_mails)s mails sent. Reload page to update."
+msgstr ""
 
 msgctxt "subject of an E-Mail"
 msgid "Subject"
@@ -2717,6 +2859,11 @@ msgstr "ידיעון"
 msgid "Sent at:"
 msgstr "נשלח ב:"
 
+#, fuzzy
+#| msgid "Newsletter has been copied."
+msgid "Newsletter is being sent in the background."
+msgstr "הידיעון הועתק."
+
 msgid "This newsletter has not been sent"
 msgstr "ידיעון זה לא נשלח"
 
@@ -2740,9 +2887,6 @@ msgstr "ניהול משתמש"
 
 msgid "send login token to all inactive users"
 msgstr "שלח אסימון כניסה לכל המשתמשים הלא פעילים"
-
-msgid "Search"
-msgstr "חיפוש"
 
 msgid "Search for email, firstname or lastname"
 msgstr "חיפוש דואר אלקטרוני, שם פרטי או שם משפחה"
@@ -2949,9 +3093,6 @@ msgstr "שגיאה בהטבעת וידאו"
 msgid "Help and Assistance for this page"
 msgstr "עזרה וסיוע עבור דף זה"
 
-msgid "Help"
-msgstr "עזרה"
-
 msgid "Help for this page"
 msgstr "עזרה עבור דף זה"
 
@@ -3115,6 +3256,9 @@ msgstr "הצג בפרויקטים שלי..."
 msgid "Disable editor"
 msgstr "הפוך את העורך ללא זמין"
 
+msgid "Option"
+msgstr "אפשרות"
+
 msgid "Current File"
 msgstr "קובץ נוכחי"
 
@@ -3138,9 +3282,6 @@ msgstr "תקבל הודעת דואר אלקטרוני והודעה באתר כא
 
 msgid "Please provide your motivation for applying"
 msgstr "אנא ספק את המוטיבציה שלך להגשת מועמדות"
-
-msgid "Describe why you wish to participate"
-msgstr "תאר מדוע ברצונך להשתתף"
 
 msgid "Optional contact information"
 msgstr "פרטי קשר אופציונליים"
@@ -3234,14 +3375,21 @@ msgstr "סיבת הדחיה"
 msgid "optional"
 msgstr "אופציונאלי"
 
+msgid "Application submitted"
+msgstr "הבקשה נשלחה"
+
 msgid "First Choice"
 msgstr "בחירה ראשונה"
 
 msgid "Second Choice"
 msgstr "בחירה שנייה"
 
-msgid "Application submitted"
-msgstr "הבקשה נשלחה"
+msgid "Motivation for applying"
+msgstr "מוטיבצייה להגשת מועמדות"
+
+#, fuzzy
+msgid "Options"
+msgstr "פרופורציות"
 
 msgid "Workshop Assignments"
 msgstr "מטלות סדנה"
@@ -3312,6 +3460,16 @@ msgstr[1] ""
 msgid "No, do not send"
 msgstr ""
 
+#, fuzzy
+#| msgid "Accept invitation"
+msgid "Copy invitation"
+msgstr "אשר הזמנה"
+
+#, fuzzy
+#| msgid "Accept invitation"
+msgid "Copy guest invitation"
+msgstr "אשר הזמנה"
+
 msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
 msgstr ""
 
@@ -3364,24 +3522,48 @@ msgstr "זו אינה מגבלה כפויה ומשמשת רק כתצוגה לא�
 msgid "(no limit selected)"
 msgstr "(לא נבחרה מגבלה)"
 
-msgid "Require applicants to submit a text about their motivation for applying"
+#, fuzzy
+#| msgid "Require applicants to submit a text about their motivation for applying"
+msgid "Require applicants to answer questions about their motivation for applying"
 msgstr "דרוש מהמועמדים להגיש טקסט על המוטיבציה שלהם להגיש מועמדות"
 
-msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
-msgstr "תיבת הטקסט למוטיבציה תמולא מראש עם כל טקסט שתזין כאן. אתה יכול להשתמש בזה כדי לספק הנחיה או רשימת שאלות שעליהם על המועמדים לענות."
+msgid "Provide a list of questions that the applicants should answer."
+msgstr ""
 
 #, python-format
 msgid "Only applicable if \"%(other_option)s\" is enabled."
 msgstr "תקף רק אם \"%(other_option)s\" מופעל."
 
-msgid "Enter text to pre-fill or leave empty"
-msgstr "הזן טקסט למילוי מראש או השאר ריק"
+#, fuzzy
+#| msgid "Remove button"
+msgid "Remove question"
+msgstr "הסר לחצן"
+
+#, fuzzy
+#| msgid "Add button"
+msgid "Add question"
+msgstr "הוסף לחצן"
 
 msgid "Options for participation"
 msgstr "אפשרויות השתתפות"
 
 msgid "Choose one or more options that will be displayed on the application form. Applicants can select any of these options along with their application."
 msgstr "בחר אפשרות אחת או יותר שיוצגו בטופס הבקשה. מועמדים יכולים לבחור אחת מהאפשרויות הללו יחד עם הבקשה שלהם."
+
+#, fuzzy
+#| msgid "Additional options"
+msgid "Define additional custom options."
+msgstr "אפשרויות נוספות"
+
+#, fuzzy
+#| msgid "Remove location"
+msgid "Remove option"
+msgstr "הסר מיקום"
+
+#, fuzzy
+#| msgid "Add location"
+msgid "Add option"
+msgstr "הוסף מיקום"
 
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
 msgstr "בחירת סדנאות: אפשר למועמדים לבחור סדנאות מועדפות להשתתפות בהן"
@@ -3600,6 +3782,64 @@ msgid "Allow recording"
 msgstr ""
 
 #, fuzzy
+#| msgid "Conference Settings"
+msgid "Conference Statistics"
+msgstr "הגדרות ועידה"
+
+#, fuzzy
+#| msgid "Conference name"
+msgid "Conference Name"
+msgstr "שם ועידה"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Num. Invitations"
+msgstr "הזמנות"
+
+#, fuzzy
+#| msgid "Administration"
+msgid "Num. Registrations"
+msgstr "ניהול מערכת"
+
+msgid "Num. Attendees"
+msgstr ""
+
+msgid "Avg. Time per Attendee"
+msgstr ""
+
+msgid "Download"
+msgstr "הורד"
+
+#, fuzzy
+#| msgid "Conference Events"
+msgid "Conference Event Statistics"
+msgstr "אירועי ועידה"
+
+#, fuzzy
+#| msgid "Event date"
+msgid "Event Name"
+msgstr "תאריך אירוע"
+
+msgid "Room Type"
+msgstr "סוג חדר"
+
+#, fuzzy
+#| msgid "Description"
+msgid "Duration"
+msgstr "תיאור"
+
+msgid "In order to better assess how long participants actually attended an event, we calculate here the relation between the configured event duration and the average time per attendee."
+msgstr ""
+
+msgid "Attendance Percentage"
+msgstr ""
+
+#, fuzzy
+#| msgid "Download Statistics"
+msgid "Attendee Data Statistics"
+msgstr "הורד סטטיסטיקה"
+
+#, fuzzy
 msgid "Temporary Users"
 msgstr "חשבונות משתמשים זמניים"
 
@@ -3747,6 +3987,14 @@ msgstr "הורד סטטיסטיקה"
 msgid "New password"
 msgstr "סיסמה חדשה"
 
+msgid "Answer"
+msgstr "תשובה"
+
+#, fuzzy
+#| msgid "Suggestion"
+msgid "Question"
+msgstr "הצעה"
+
 msgid "Accept"
 msgstr "אשר משתמש"
 
@@ -3818,9 +4066,6 @@ msgstr "הפעל ענן"
 #| msgid "Members"
 msgid "Members-Map"
 msgstr "חברים"
-
-msgid "Cloud"
-msgstr "ענן"
 
 msgid "File"
 msgstr "קובץ"
@@ -4842,9 +5087,6 @@ msgstr "פקודת הפעלה"
 msgid "Register and join!"
 msgstr "הרשמו והצטרפו!"
 
-msgid "Register"
-msgstr "הירשם"
-
 msgid "Log in"
 msgstr "התחבר"
 
@@ -4919,6 +5161,11 @@ msgstr "כל הקבוצות"
 #. Translators: __INCLUDE_JS_PO__
 msgid "All Projects"
 msgstr "כל הפרויקטים"
+
+#, fuzzy
+#| msgid "Simple Statistics"
+msgid "Statistics"
+msgstr "סטטיסטיקה פשוטה"
 
 msgid "Temporary User Accounts"
 msgstr "חשבונות משתמשים זמניים"
@@ -5080,9 +5327,6 @@ msgstr "שם התיקייה"
 
 msgid "Delete folder"
 msgstr "מחק תיקייה"
-
-msgid "Download"
-msgstr "הורד"
 
 msgid "Do you really want to delete this folder and ALL folders and items it contains? This actions CANNOT be reversed!"
 msgstr "האם אתה בטוח שברצונך למחוק תיקיה זו ואת כל התיקיות והפריטים שהיא מכילה? אין אפשרות לבטל פעולות אלה!"
@@ -5750,9 +5994,6 @@ msgstr "כל הארגונים"
 msgid "Search..."
 msgstr "חיפוש..."
 
-msgid "Messages"
-msgstr "הודעות"
-
 msgid "My Stream"
 msgstr "השידור שלי"
 
@@ -5875,9 +6116,6 @@ msgstr "איפוס סיסמה"
 
 msgid "Your password has been set.  You may go ahead and log in now."
 msgstr "סיסמתך הוגדרה. אתה רשאי להמשיך ולהתחבר כעת."
-
-msgid "Login"
-msgstr "התחבר"
 
 msgid "Enter new password"
 msgstr "הכנס סיסמה חדשה"
@@ -6297,10 +6535,6 @@ msgid "Membership Requests"
 msgstr "בקשות חברות"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "My Groups and Projects"
-msgstr "הקבוצות והפרויקטים שלי"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Show more Projects of this Group"
 msgstr "הצג פרויקטים נוספים של קבוצה זו"
 
@@ -6625,10 +6859,6 @@ msgid "Nothing here yet."
 msgstr "אין עדיין קבצים."
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Groups and Projects"
-msgstr "קבוצות ופרוייקטים"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Here you can find an overview of your Groups and Projects once you become active in one or more of them."
 msgstr "כאן תוכל למצוא מבט כולל על הקבוצות והפרוייקטים שלך כשתהפוך לפעיל באחד או יותר מהם."
 
@@ -6804,12 +7034,10 @@ msgstr ""
 msgid "If the validation email does not arrive, please check your spam folder and re-check the spelling of your email address. If everything seems ok but you still have not received an email from us, please repeat the email change again to receive a new validation email:"
 msgstr ""
 
-#, fuzzy
-#| msgid "Contact"
-msgid "Direct Contact"
-msgstr "פרטי יצירת קשר"
+msgid "Find a Match"
+msgstr ""
 
-msgid "**User-Matching** is your tool for communicating and sharing experiences with like-minded people from all over the world. If you have much to discuss and your chosen person considers it the same, your dialogue will start automatically."
+msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
 msgstr ""
 
 msgid "Wonderful, we definitely have so much to discuss!"
@@ -6866,10 +7094,6 @@ msgstr "מחק חשבון משתמש"
 #, python-format
 msgid "User profile: %(username)s"
 msgstr "פרופיל משתמש: %(username)s"
-
-#, fuzzy
-msgid "Profile"
-msgstr "הפרופיל שלי"
 
 msgid "Cooperation requests"
 msgstr "בקשות לשיתוף פעולה"
@@ -7207,6 +7431,64 @@ msgstr "משתמש יכול להסתיר הודעה, במקרה זה היא תי
 
 msgid "There are no announcements yet."
 msgstr "אין הודעות עדיין."
+
+#, fuzzy
+#| msgid "Start the Import?"
+msgid "Start user export"
+msgstr "האם להתחיל את הייבוא?"
+
+msgid "You can start a user export. As soon as the export is finished it will be available here."
+msgstr ""
+
+#, fuzzy
+#| msgid "The import is currently running..."
+msgid "The export is currently running..."
+msgstr "הייבוא פועל כעת..."
+
+msgid "A user export is in progress. As soon as the export is finished it will be available here."
+msgstr ""
+
+#, fuzzy
+#| msgid "Import finished"
+msgid "User export finished"
+msgstr "הייבוא הסתיים"
+
+msgid "You can download the latest user export data."
+msgstr ""
+
+#, fuzzy
+msgid "Download user exports from"
+msgstr "הורד את התנאים"
+
+#, fuzzy
+msgid "Download user export as"
+msgstr "הורד את התנאים"
+
+msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
+msgstr ""
+
+#, fuzzy
+#| msgid "An internal error occured."
+msgid "An error has occurred"
+msgstr "אירעה שגיאה פנימית."
+
+#, fuzzy
+#| msgid "There was an error while trying to submit your report. Please try again in a moment."
+msgid "Sorry, an error occurred during the user export. Please try again later."
+msgstr "אירעה שגיאה בעת ניסיון להגיש את הדו\"ח. נא נסה שוב בעוד רגע."
+
+#, fuzzy
+#| msgid "Delete uploaded data and upload a new CSV file"
+msgid "Delete export data and start new user export"
+msgstr "מחק נתונים שהועלו והעלה קובץ CSV חדש"
+
+msgid "Retry user export"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete reported item..."
+msgid "Delete exported data"
+msgstr "מחיקת פריט שדווח..."
 
 msgid "User Import Archive"
 msgstr "ארכיון ייבוא משתמשים"
@@ -7551,9 +7833,6 @@ msgstr "חיפוש מהיר"
 msgid "Create content"
 msgstr "יצירת תוכן"
 
-msgid "Home"
-msgstr "דף הבית"
-
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
 
@@ -7586,6 +7865,9 @@ msgstr "ערוך את הפרופיל שלך"
 
 msgid "Edit My Profile"
 msgstr "ערוך את הפרופיל שלי"
+
+msgid "What's New"
+msgstr ""
 
 msgid "What's happening where and when? What's to discover? Where to meet?"
 msgstr "מה קורה איפה ומתי? מה יש לגלות? איפה להיפגש?"
@@ -7878,9 +8160,6 @@ msgstr "רק חברי קבוצה יכולים לראות את התוכן שבי�
 msgid "Note: New recordings can only be made if you have booked premium features for this group."
 msgstr ""
 
-msgid "My Conferences"
-msgstr "שיחות הועידה שלי"
-
 msgid "You are not currently attending any Conferences"
 msgstr "אינך משתתף כעת בשיחות ועידה כלשהן"
 
@@ -8037,11 +8316,41 @@ msgstr ""
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr ""
 
+msgid "Version 1.18.0 released"
+msgstr ""
+
+msgid "Includes the \"What's New\" feature, a quick way to copy conference invitations, a security update, and more."
+msgstr ""
+
+msgid ""
+"The update includes:\n"
+"- A \"What's new\" page, showing the release notes for the platform.\n"
+"- Copy a conference invitation to the clipboard from the conference interface.\n"
+"- Some font changes and improvements.\n"
+"- Fix bug in group and project membership handling.\n"
+"- Tags accross the site now link to the search page.\n"
+"- Fix assigning Todos via the user avatar.\n"
+"- Improve reliability of newsletter sending.\n"
+"- Security updates.\n"
+"- Further minor bugfixes.\n"
+msgstr ""
+
+msgid "Version 1.17.1 released"
+msgstr ""
+
+msgid "Includes dynamic registration form and dynamic options for participation for conferences."
+msgstr ""
+
+msgid ""
+"The update includes:\n"
+"- Dynamic registration form for conferences\n"
+"- Dynamize options for participation for conferences\n"
+"- Library Update of Moment.js\n"
+"- Update Matomo tracking to include better options\n"
+msgstr ""
+
 msgid "Test email sent!"
 msgstr "בדיקת אימות נשלחה לדוא\"ל!"
-
-msgid "Newsletter sent."
-msgstr "הידיעון נשלח."
 
 msgid "Test email sent."
 msgstr "בדיקת אימות נשלחה לדוא\"ל."
@@ -8574,6 +8883,11 @@ msgstr "ההודעה שלך הופעלה בהצלחה."
 msgid "Your Announcement was deactivated successfully."
 msgstr "ההודעה שלך הושבתה בהצלחה."
 
+#, fuzzy
+#| msgid "Another import is currently running!"
+msgid "Another export is currently running!"
+msgstr "ייבוא אחר פועל כעת!"
+
 msgid "The Archived User Import Entry was deleted successfully."
 msgstr "ערך ייבוא המשתמש המאוחסן בארכיון נמחק בהצלחה."
 
@@ -8804,11 +9118,13 @@ msgstr "המשתמשים הבאים נדחו: %s"
 msgid "Your changes were saved."
 msgstr "השינויים שביצעת נשמרו."
 
-msgid "Option"
-msgstr "אפשרות"
-
 msgid "Status"
 msgstr "מצב"
+
+#, fuzzy
+#| msgid "This function is not enabled for this conference."
+msgid "Attendance data is not available for this conference."
+msgstr "פונקציה זו אינה זמינה עבור ועידה זו."
 
 msgid "The following Pads were re-initialized:"
 msgstr "הפנקסים הבאים אותחלו מחדש:"
@@ -9389,6 +9705,25 @@ msgstr "אירועי ועידה"
 #, python-format
 msgid "%(event)s %(type)s"
 msgstr "%(event)s %(type)s"
+
+#, fuzzy
+msgid "Start-Time"
+msgstr "מסומן בכוכב"
+
+#, fuzzy
+#| msgid "Time"
+msgid "End-Time"
+msgstr "זמן"
+
+#, fuzzy
+#| msgid "Conference Event Management"
+msgid "Conference Event Attendance Tracking"
+msgstr "ניהול אירוע ועידה"
+
+#, fuzzy
+#| msgid "Conference Event Management"
+msgid "Conference Event Attendance Trackings"
+msgstr "ניהול אירוע ועידה"
 
 msgid "Would you like to create an event"
 msgstr "האם תרצו ליצור אירוע חדש"
@@ -10018,9 +10353,6 @@ msgstr "יצרת אירוע חדש"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created an event"
 msgstr "יצר/ה אירוע חדש"
-
-msgid "Show all"
-msgstr "הצג הכל"
 
 msgid "Upcoming events"
 msgstr "אירועים קרובים"
@@ -10921,9 +11253,6 @@ msgstr "הצג את כל %(count)s המשתתפים"
 
 msgid "Me"
 msgstr "אני"
-
-msgid "Answer"
-msgstr "תשובה"
 
 msgid "Reply..."
 msgstr "השב..."
@@ -13439,6 +13768,26 @@ msgstr "לא ניתן להוסיף את רשימת המשימות \"%(title)s\".
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "אינך יכול למחוק תיקיה זו מכיוון שאין לך הרשאה למחוק פריט אחד או יותר שהיא מכילה!"
 
+#~ msgid "Pre-filled content for the information field"
+#~ msgstr "מלא מראש תוכן עבור שדה המידע"
+
+#~ msgid "Describe why you wish to participate"
+#~ msgstr "תאר מדוע ברצונך להשתתף"
+
+#~ msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
+#~ msgstr "תיבת הטקסט למוטיבציה תמולא מראש עם כל טקסט שתזין כאן. אתה יכול להשתמש בזה כדי לספק הנחיה או רשימת שאלות שעליהם על המועמדים לענות."
+
+#~ msgid "Enter text to pre-fill or leave empty"
+#~ msgstr "הזן טקסט למילוי מראש או השאר ריק"
+
+#, fuzzy
+#~| msgid "Contact"
+#~ msgid "Direct Contact"
+#~ msgstr "פרטי יצירת קשר"
+
+#~ msgid "Newsletter sent."
+#~ msgstr "הידיעון נשלח."
+
 #, fuzzy
 #~ msgid "Premium Bookings"
 #~ msgstr "פרמיום"
@@ -13497,10 +13846,6 @@ msgstr "אינך יכול למחוק תיקיה זו מכיוון שאין לך 
 #, fuzzy
 #~ msgid "User CSV File"
 #~ msgstr "העלאת קובץ CSV"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "פרופורציות"
 
 #, fuzzy
 #~| msgid "Delete file"
@@ -13606,9 +13951,6 @@ msgstr "אינך יכול למחוק תיקיה זו מכיוון שאין לך 
 
 #~ msgid "Restricted"
 #~ msgstr "מוגבל"
-
-#~ msgid "Room Type"
-#~ msgstr "סוג חדר"
 
 #~ msgid "the rooms welcome message"
 #~ msgstr "הודעת ברוכים הבאים של החדרים"

@@ -408,6 +408,20 @@
 					</a>
 				</li>
 				{% endif %}
+                <li>
+                    <a rel="toggle" class="list-item" role="button" titledby=".item-text" title="{% trans "What's New" %}"
+							aria-expanded="false" aria-controls="whats-new-menu-collapse"
+                            data-toggle="collapse" data-target="#whats-new-menu-collapse"
+                            onclick="$('#user-menu-collapse').removeClass('in').addClass('collapse');"
+                            id="navbar-whats-new-button">
+                        <div class="item-text">
+                            {% trans "What's New" %}
+                            {% if COSINNUS_VERSION_HISTORY_UNREAD_COUNT > 0 %}
+                                <span class="badge">{{ COSINNUS_VERSION_HISTORY_UNREAD_COUNT }}</span>
+                            {% endif %}
+                        </div>
+                    </a>
+                </li>
 				{% if SETTINGS.COSINNUS_PAYMENTS_ENABLED or SETTINGS.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY and user.is_superuser %}
 				<li>
 					<a href="{% url 'wechange-payments:overview' %}" class="list-item" role="button" titledby=".item-text-title">
@@ -450,6 +464,47 @@
 		</div>
 		<div class="nav-flyout-backdrop"></div>
 	</div>
+
+    <div class="collapse nav-flyout nav-flyout-half-side nav-flyout-right nav-flyout-part-height"
+         id="whats-new-menu-collapse" data-simplebar>
+        <div class="nav-flyout-section flex-row mobile-flex-column" id="whats-new-items">
+            <div class="nav-column nav-column-fullwidth">
+                <h2 class="headline headline-condensed">{% trans "What's New" %}</h2>
+                <ul class="item-list item-list-divided bordered">
+                    {% for version in COSINNUS_VERSION_HISTORY %}
+                        <li class="list-item-group">
+                            <div class="main-item">
+                                <a class="list-item list-item-extended {% if not version.read %}list-item-emphasized{% endif %}"
+                                   role="button" titledby=".item-text-primary" href="{{ version.url }}"
+                                >
+                                    <div class="item-text item-text-dual">
+                                        <div class="item-text-primary title">
+                                            <strong>{{ version.title }}</strong>
+                                        </div>
+                                        <div class="item-text-secondary">
+                                            {{ version.short_text|textfield:"simple" }}
+                                        </div>
+                                    </div>
+                                    <div class="right-side-annotation">
+                                        <i>{{ version.version }}</i>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    <li>
+                        <a href="{% url 'cosinnus:version-history' %}" class="list-item list-item-link show-more"
+                           role="button" titledby=".item-text">
+                            <div class="item-text">
+                                {% trans "Show all" %}
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="nav-flyout-backdrop"></div>
+    </div>
 </nav>
 
 {% comment %} Hide navbar if we're in an iframe for a conference project {% endcomment %}

@@ -1,0 +1,56 @@
+{% load i18n static cosinnus_tags %}
+
+<button type="button" class="btn btn-emphasized btn-autosize copy-invitation mobile-hidden">
+    <ul class="media-list">
+        <li class="media">
+                        <span class="pull-left">
+                            <i class="fa fa-clipboard"></i>
+                        </span>
+            <div class="media-body">
+                {% trans "Copy invitation" %}
+            </div>
+        </li>
+    </ul>
+</button>
+
+{% if user|has_write_access:object %}
+    <button type="button" class="btn btn-emphasized btn-autosize copy-guest-invitation mobile-hidden">
+        <ul class="media-list">
+            <li class="media">
+                        <span class="pull-left">
+                            <i class="fa fa-clipboard"></i>
+                        </span>
+                <div class="media-body">
+                    {% trans "Copy guest invitation" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+{% endif %}
+
+<script type="text/javascript">
+    function copyInvitation(guest=false) {
+        const objectId = "{{ object.id }}";
+        const objectType = "{{ object_type }}"
+        const alert_message = '{% trans "Invitation copied to clipboard." %}';
+        fetch(`/api/v2/conferences/invitation/?object_type=${objectType}&object_id=${objectId}&guest=${guest === true}`, {
+            method: "GET"
+        }).then(response => {
+            if (response.status === 200) {
+                response.json().then((data) => {
+                    if (data.invitation) {
+                        navigator.clipboard.writeText(data.invitation).then(() => {
+                            window.alert(data.alert_text)
+                        })
+                    }
+                })
+            }
+        })
+    }
+    $('.copy-invitation').click(function(){
+        copyInvitation(false)
+    });
+    $('.copy-guest-invitation').click(function(){
+        copyInvitation(true)
+    });
+</script>

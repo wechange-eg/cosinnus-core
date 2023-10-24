@@ -359,11 +359,14 @@ class GroupCreateView(CosinnusGroupFormMixin, RequireVerifiedUserMixin, Attachab
             group=self.object, status=MEMBERSHIP_ADMIN)
         
         # clear cache and manually refill because race conditions can make the group memberships be cached as empty
-        membership._clear_cache() 
-        self.object.members # this refills the group's member cache immediately
-        self.object.admins # this refills the group's member cache immediately
+        membership._refresh_cache()
+        membership.group.update_index()
 
-        
+        # During the initial indexing of the admins property of the user the newly created group is not always included
+        # in the threaded query. Forcing a reindex to make sure the user is listed as the admin of the created group.
+        if hasattr(self.request.user, 'cosinnus_profile'):
+            self.request.user.cosinnus_profile.update_index()
+
         # send group creation signal, 
         # from here, because in group.save() we don't know the group's creator
         # the audience is empty because this is a moderator-only notification

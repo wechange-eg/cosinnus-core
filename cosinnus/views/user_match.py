@@ -2,7 +2,6 @@ import logging
 import random
 
 from django.contrib.auth import get_user_model
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.db.models.query_utils import Q
 from django.http.response import HttpResponseNotAllowed, HttpResponseForbidden
@@ -21,11 +20,12 @@ from cosinnus.utils.user import filter_active_users
 from datetime import timedelta
 from django.utils.timezone import now
 
+from cosinnus.views.mixins.group import RequireLoggedInMixin
 
 logger = logging.getLogger('cosinnus')
 
 
-class UserMatchListView(LoginRequiredMixin, ListView):
+class UserMatchListView(RequireLoggedInMixin, ListView):
     model = get_user_profile_model()
     template_name = 'cosinnus/user/user_match_list.html'
     login_url = LOGIN_URL

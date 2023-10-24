@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Link} from "@material-ui/core"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faPen, faTrashAlt} from "@fortawesome/free-solid-svg-icons"
+import {faPen, faTrashAlt, faClipboard} from "@fortawesome/free-solid-svg-icons"
 import {FormattedMessage} from "react-intl"
 import Cookies from "js-cookie"
 import axios from "axios"
@@ -17,6 +17,8 @@ export function EventButtons(props: EventButtonsProps) {
   const {event} = props
   const classes = useStyles()
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const [invitationDialogOpen, setInvitationDialogOpen] = useState(false);
+  const [invitationDialogText, setInvitationDialogText] = useState("");
   if (!event.props.managementUrls) {
     return null
   }
@@ -29,6 +31,22 @@ export function EventButtons(props: EventButtonsProps) {
       withCredentials: true
     }).then(res => {
       window.location.href = "../"
+    })
+  }
+  function copyInvitationToClipboard(e, guest: boolean) {
+    fetch(`/api/v2/conferences/invitation/?object_type=event&object_id=${event.props.id}&guest=${guest === true}`, {
+      method: "GET"
+    }).then(response => {
+      if (response.status === 200) {
+        response.json().then((data: JSON) => {
+          if (data.invitation) {
+            navigator.clipboard.writeText(data.invitation).then(() => {
+              setInvitationDialogText(data.alert_text);
+              setInvitationDialogOpen(true)
+            })
+          }
+        })
+      }
     })
   }
   return (
@@ -67,7 +85,7 @@ export function EventButtons(props: EventButtonsProps) {
               <FormattedMessage id="Delete event" />
             </DialogTitle>
             <DialogContent>
-              <DialogContentText>
+              <DialogContentText classes={{root: classes.dialogText}}>
                 <FormattedMessage id="Are you sure you want to delete this event?" />
               </DialogContentText>
             </DialogContent>
@@ -88,6 +106,40 @@ export function EventButtons(props: EventButtonsProps) {
           </Dialog>
         </span>
       )}
+
+      <Button
+          variant="contained"
+          href="#"
+          onClick={(e) => {copyInvitationToClipboard(e, false);}}
+      >
+        <FontAwesomeIcon icon={faClipboard} />&nbsp;
+        <FormattedMessage id="Copy invitation" />
+      </Button>
+      {event.props.userIsAdmin && (
+        <Button
+            variant="contained"
+            href="#"
+            onClick={(e) => {copyInvitationToClipboard(e, true); }}
+        >
+          <FontAwesomeIcon icon={faClipboard} />&nbsp;
+          <FormattedMessage id="Copy guest invitation" />
+        </Button>
+      )}
+      <Dialog
+          open={invitationDialogOpen}
+          onClose={() => setInvitationDialogOpen(false)}
+      >
+        <DialogContent>
+          <DialogContentText classes={{root: classes.dialogText}}>
+            <FormattedMessage id={invitationDialogText} />
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={(e) => {setInvitationDialogOpen(false)}} color="secondary">
+            <FormattedMessage id="OK" />
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   )
 }

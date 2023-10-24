@@ -8,9 +8,10 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.contrib.contenttypes.models import ContentType
 from django.db import transaction
-from django.db.models.signals import post_delete, pre_save
+from django.db.models.signals import post_delete, pre_save, pre_delete
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils import timezone
 
 from cosinnus.conf import settings
 from cosinnus.core import signals
@@ -21,6 +22,7 @@ from cosinnus.models.conference import CosinnusConferenceRoom,\
 from cosinnus.models.feedback import CosinnusFailedLoginRateLimitLog
 from cosinnus.models.group import CosinnusGroup, CosinnusPortalMembership, \
     CosinnusGroupMembership
+from cosinnus.models.mail import QueuedMassMail
 from cosinnus.models.membership import MEMBERSHIP_MEMBER, MEMBER_STATUS, \
     MEMBERSHIP_ADMIN, MEMBERSHIP_MANAGER
 from cosinnus.models.profile import GlobalBlacklistedEmail, \
@@ -361,7 +363,21 @@ def group_membership_cache_clear_triggers(sender, instance, created=False, **kwa
 def update_conference_premium_status_on_block_save(sender, instance, created=False, **kwargs):
     """ Clears the cache for tags when saved/deleted """
     update_conference_premium_status(conferences=[instance.conference])
-        
+
+
+@receiver(pre_delete, sender=QueuedMassMail)
+def update_newsletter_on_queued_mail_delete(sender, instance, **kwargs):
+    """ QueuedMassMails are deleted when the mails have bein sent. Update the respective newsletters. """
+    if instance.recipients.count() == instance.recipients_sent.count():
+        # all mails were sent.
+        newsletter_reverse_names = ['newsletter', 'groupsnewsletter']
+        for newsletter_reverse in newsletter_reverse_names:
+            if hasattr(instance, newsletter_reverse):
+                newsletter = getattr(instance, newsletter_reverse)
+                newsletter.is_sending = False
+                newsletter.sent = timezone.now()
+                newsletter.save()
+
 
 from cosinnus.apis.cleverreach import * # noqa
 from cosinnus.models.wagtail_models import *  # noqa

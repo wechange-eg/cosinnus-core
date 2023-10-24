@@ -20,6 +20,7 @@ from cosinnus.utils.user import get_user_tos_accepted_date,\
 from cosinnus.models.managed_tags import CosinnusManagedTag
 from cosinnus.trans.group import get_group_trans_by_type
 from cosinnus.utils.permissions import check_user_verified
+from cosinnus.utils.version_history import get_version_history_for_user
 from datetime import timedelta
 from django.utils import timezone
 from django.template.defaultfilters import date
@@ -101,7 +102,10 @@ def cosinnus(request):
         pass  # current_app is not a cosinnus app
     except Resolver404:
         pass
-    
+
+    # version history
+    version_history, version_history_unread_count = get_version_history_for_user(request.user)
+
     return {
         'COSINNUS_BASE_URL': base_url,
         'COSINNUS_CURRENT_APP': current_app_name,
@@ -123,6 +127,8 @@ def cosinnus(request):
         'COSINNUS_SOCIETY_TRANS': get_group_trans_by_type(1),
         'COSINNUS_CONFERENCE_TRANS': get_group_trans_by_type(2),
         'COSINNUS_USER_TIMEZONE': user.is_authenticated and user.cosinnus_profile.timezone.zone or None,
+        'COSINNUS_VERSION_HISTORY': version_history,
+        'COSINNUS_VERSION_HISTORY_UNREAD_COUNT': version_history_unread_count,
     }
 
 

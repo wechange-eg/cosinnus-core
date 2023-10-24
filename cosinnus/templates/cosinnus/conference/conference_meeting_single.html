@@ -67,6 +67,10 @@
             {% trans "Sorry! Something went wrong..." %}
         </div>
         <iframe style="display: none;" src="" allow="{% comment %} Src and allow will be set in JS! {% endcomment %}" width="100%" height="100%"></iframe>
+
+        {% if has_bbb_video %}
+            {% include "cosinnus/conference/conference_invitation_text_buttons.html" with object_type="group" %}
+        {% endif %}
     </div>
     
 
