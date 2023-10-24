@@ -14,17 +14,17 @@ UPDATES = {
     '1.18.0': {
         'datetime': datetime(2023, 10, 23, tzinfo=pytz.utc),
         'title': _('Version 1.18.0 released'),
-        'short_text': _('Includes the "What\'s New" feature, conference invitation for the clipboard a security update and more.'),
+        'short_text': _('Includes the "What\'s New" feature, a quick way to copy conference invitations, a security update, and more.'),
         'full_text': _(
             'The update includes:\n'
-            '- "What\'s new" showing the release notes for the platform.\n'
-            '- Copy a conference invitation to clipboard from the conference interface.\n'
-            '- Switch font of portals using the "Brandon Text" font to "IBM Plex".\n'
+            '- A "What\'s new" page, showing the release notes for the platform.\n'
+            '- Copy a conference invitation to the clipboard from the conference interface.\n'
+            '- Some font changes and improvements.\n'
             '- Fix bug in group and project membership handling.\n'
-            '- Tags of news posts link to a search for the tag.\n'
+            '- Tags accross the site now link to the search page.\n'
             '- Fix assigning Todos via the user avatar.\n'
             '- Improve reliability of newsletter sending.\n'
-            '- Security update fixing CVE-2023-4863.\n'
+            '- Security updates.\n'
             '- Further minor bugfixes.\n'
         ),
     },

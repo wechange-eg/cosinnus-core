@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-13 13:31+0200\n"
+"POT-Creation-Date: 2023-10-24 10:30+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -206,8 +206,59 @@ msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
 #, fuzzy
+#| msgid "Recipients"
+msgid "Recipients Count"
+msgstr "Ստացողներ"
+
+#, fuzzy
+#| msgid "Recipients"
+msgid "Recipients Send Count"
+msgstr "Ստացողներ"
+
+#, fuzzy
+#| msgid "Comment"
+msgid "Community"
+msgstr "Մեկնաբանություն"
+
+#, fuzzy
+#| msgid "Persons"
+msgid "Personal"
+msgstr "Անձինք"
+
+#, fuzzy
 msgid "Personal Dashboard"
 msgstr "Կառավարման վահանակ"
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "My Personal Space"
+msgstr "Կոնտակտային տվյալներ"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Groups and Projects"
+msgstr "Իմ Խմբերը և Նախագծերը"
+
+#, fuzzy
+msgid "My Conferences"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups and Projects"
+msgstr "Խմբեր և նախագծեր"
+
+msgid "Users"
+msgstr "Օգտատերեր"
+
+#, fuzzy
+#| msgid "Content"
+msgctxt "navigation bookmarks header"
+msgid "Content"
+msgstr "Բովանդակություն"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "Փոխել լեզուն"
 
 msgid "My Profile"
 msgstr "Իմ էջը"
@@ -225,11 +276,6 @@ msgstr "Խմբագրել Իմ Անձնական Էջը"
 msgid "Notification Preferences"
 msgstr "Ծանուցման նախապատվություններ"
 
-#, fuzzy
-#| msgid "Change language"
-msgid "Change Language"
-msgstr "Փոխել լեզուն"
-
 msgid "Your Contribution"
 msgstr "Ձեր ներդրումը"
 
@@ -238,6 +284,43 @@ msgstr "Ադմինիստրացիա"
 
 msgid "Logout"
 msgstr "Ելք"
+
+msgid "Home"
+msgstr "Գլխավոր էջ"
+
+msgid "Dashboard"
+msgstr "Կառավարման վահանակ"
+
+msgid "Search"
+msgstr "Որոնում"
+
+msgid "Bookmarks"
+msgstr ""
+
+msgid "Cloud"
+msgstr ""
+
+msgid "Messages"
+msgstr "Նամակներ"
+
+msgid "Help"
+msgstr "Օգնություն"
+
+msgid "Alerts"
+msgstr ""
+
+#, fuzzy
+msgid "Profile"
+msgstr "Իմ էջը"
+
+msgid "Login"
+msgstr "Մուտք"
+
+msgid "Register"
+msgstr "Գրանցվել"
+
+msgid "Show all"
+msgstr "Ցուցադրել բոլորը"
 
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
@@ -657,7 +740,7 @@ msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_na
 msgstr "%(sender_name)s -ը ստեղծել է \"%(team_name)s\" նախագիծը %(portal_name)s -ում այն գաղափարի հիման վրա, որին դուք հետևում եք: <br/><br/> Դա ստուգելու համար սեղմեք ստորև նշված հղմանը: Այնտեղ կարող եք տեսնել, ցանկանում եք արդյոք միանալ նախագծին."
 
 #, python-format
-msgid "Your match with %(sender_name)s has just been established!"
+msgid "You have a match with %(sender_name)s. Get to know your match in Rocket.Chat"
 msgstr ""
 
 msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
@@ -856,9 +939,6 @@ msgstr "Սա կարծես թե վավեր վիդջետ ID կամ կոդ Twitter-
 msgid "This doesn't seem to be a valid Flickr Gallery link! It should be in the form of \"https://www.flickr.com/photos/username/sets/1234567890\"!"
 msgstr "Սա կարծես թե Flickr Gallery- ի վավեր հղում չէ: Այն պետք է ունենա հետևյալ տեսքը - \"https://www.flickr.com/photos/username/sets/1234567890\"!"
 
-msgid "Users"
-msgstr "Օգտատերեր"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "Խմբեր"
@@ -1029,6 +1109,21 @@ msgstr ""
 msgid "Last create-call parameters"
 msgstr ""
 
+#, python-format
+msgid "Join \"%(name)s\"!"
+msgstr ""
+
+#, python-format
+msgid "To join the conference in the browser visit %(url)s."
+msgstr ""
+
+#, python-format
+msgid "To join the conference by phone dial \"%(number)s\" and enter the following PIN: \"%(pin)s#\". Use the 0-key on your phone to toggle mute on/off."
+msgstr ""
+
+msgid "Invitation copied to clipboard."
+msgstr ""
+
 msgid "BBB ROOM"
 msgstr ""
 
@@ -1182,8 +1277,10 @@ msgstr "Մասնակիցներ"
 msgid "Request user information"
 msgstr "Ջնջել հրավերը"
 
-msgid "Pre-filled content for the information field"
-msgstr ""
+#, fuzzy
+#| msgid "Cooperation requests"
+msgid "User motivation questions"
+msgstr "Համագործակցության հայցեր"
 
 #, fuzzy
 msgid "Request contact option"
@@ -1259,7 +1356,7 @@ msgstr "Վիդեո-կոնֆերանսի սերվեր"
 msgid "Priorities"
 msgstr ""
 
-msgid "Motivation for applying"
+msgid "User motivation answers"
 msgstr ""
 
 #, fuzzy
@@ -1763,6 +1860,33 @@ msgstr "Cosinnus Գաղափար"
 msgid "Cosinnus Ideas"
 msgstr "Cosinnus Գաղափարներ"
 
+#, fuzzy
+msgid "Subject"
+msgstr "Հրավերներ"
+
+msgid "Content"
+msgstr "Բովանդակություն"
+
+msgid "Recipients"
+msgstr "Ստացողներ"
+
+#, fuzzy
+#| msgid "Additional Recipients"
+msgid "Mails sent to Recipients"
+msgstr "Լրացուցիչ ստացողներ"
+
+msgid "Mail function kwargs"
+msgstr ""
+
+msgid "Sending in Progress"
+msgstr ""
+
+msgid "Queued Mass Mail"
+msgstr ""
+
+msgid "Queued Mass Mails"
+msgstr ""
+
 msgid "Managed Tag"
 msgstr ""
 
@@ -1909,11 +2033,13 @@ msgstr "Կցված օբյեկտ"
 msgid "Match type"
 msgstr ""
 
-msgid "Match"
+msgid "User-Match"
 msgstr ""
 
-msgid "Matches"
-msgstr ""
+#, fuzzy
+#| msgid "User"
+msgid "User-Matches"
+msgstr "Օգտատեր"
 
 #, python-brace-format
 msgid "Match between {self.from_user} and {self.to_user} has been successfully established."
@@ -1922,11 +2048,23 @@ msgstr ""
 msgid "You and {self.from_user.get_full_name()} matched!"
 msgstr ""
 
-msgid "TODO: Youve matched!"
+msgid "You've matched!"
 msgstr ""
 
-msgid "TODO: Matched chat room greeting message"
+msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr ""
+
+#, fuzzy
+#| msgid "Delete offer"
+msgid "Deletion after"
+msgstr "Ջնջել առաջարկը"
+
+msgid "Data"
+msgstr ""
+
+#, fuzzy
+msgid "Temporary Data"
+msgstr "Նամակներ"
 
 msgid "Name (EN)"
 msgstr "Անուն (EN)"
@@ -2177,9 +2315,6 @@ msgstr "4 պատահական նախագծերի վիդջեթ"
 msgid "8 Random Projects Widget"
 msgstr "8 պատահական նախագծերի վիդջեթ"
 
-msgid "Content"
-msgstr "Բովանդակություն"
-
 msgid "Portal Root Page"
 msgstr "Պորտալի Արմատային էջը"
 
@@ -2278,9 +2413,6 @@ msgstr "Կայքի Վիդջեթներ"
 
 msgid "Bottom content (gray background)"
 msgstr "Ստորին պարունակություն (մոխրագույն ֆոն)"
-
-msgid "Dashboard"
-msgstr "Կառավարման վահանակ"
 
 msgid "Microsite"
 msgstr "Միկրոկայք"
@@ -2680,9 +2812,6 @@ msgstr "Ստեղծել Օգտատեր"
 msgid "Create Newsletter"
 msgstr "Ստեղծել Օգտատեր"
 
-msgid "Recipients"
-msgstr "Ստացողներ"
-
 #, python-format
 msgid "With the current selection the newsletter will be sent to %(counter)s recipients."
 msgid_plural "With the current selection the newsletter will be sent to %(counter)s recipients."
@@ -2708,6 +2837,12 @@ msgstr ""
 
 msgid "User Import"
 msgstr ""
+
+#, fuzzy
+#| msgctxt "the verb"
+#| msgid "Export"
+msgid "User Export"
+msgstr "Արտահանել"
 
 msgid "User Profile Field Choices"
 msgstr ""
@@ -2737,6 +2872,10 @@ msgid "Edit"
 msgstr "Խմբագրել"
 
 msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
+msgstr ""
+
+#, python-format
+msgid "This newsletter is being sent in the background: %(queued_mails_sent)s/%(queued_mails)s mails sent. Reload page to update."
 msgstr ""
 
 msgctxt "subject of an E-Mail"
@@ -2772,6 +2911,10 @@ msgstr ""
 msgid "Sent at:"
 msgstr ""
 
+#, fuzzy
+msgid "Newsletter is being sent in the background."
+msgstr "(Հաղորդված տարրը ջնջվել է․)"
+
 msgid "This newsletter has not been sent"
 msgstr ""
 
@@ -2801,9 +2944,6 @@ msgstr "Ադմինիստրացիա"
 
 msgid "send login token to all inactive users"
 msgstr ""
-
-msgid "Search"
-msgstr "Որոնում"
 
 msgid "Search for email, firstname or lastname"
 msgstr ""
@@ -3014,9 +3154,6 @@ msgstr "Տեսանյութի տեղադրման սխալ"
 msgid "Help and Assistance for this page"
 msgstr "Օգնություն և Աջակցություն այս էջի համար"
 
-msgid "Help"
-msgstr "Օգնություն"
-
 msgid "Help for this page"
 msgstr "Օգնություն այս էջում"
 
@@ -3181,6 +3318,9 @@ msgstr "Ցուցադրել իմ նախագծերում ..."
 msgid "Disable editor"
 msgstr "անջատել խմբագրիչը"
 
+msgid "Option"
+msgstr "Տարբերակ"
+
 #, fuzzy
 msgid "Current File"
 msgstr "Ներկայիս անդամները"
@@ -3207,9 +3347,6 @@ msgid "You will receive a notification e-mail and on-site notification when the 
 msgstr ""
 
 msgid "Please provide your motivation for applying"
-msgstr ""
-
-msgid "Describe why you wish to participate"
 msgstr ""
 
 #, fuzzy
@@ -3313,15 +3450,22 @@ msgid "optional"
 msgstr "ըստ ցանկության"
 
 #, fuzzy
+msgid "Application submitted"
+msgstr "Հավելվածի անվանումը"
+
+#, fuzzy
 msgid "First Choice"
 msgstr "Անուն"
 
 msgid "Second Choice"
 msgstr ""
 
+msgid "Motivation for applying"
+msgstr ""
+
 #, fuzzy
-msgid "Application submitted"
-msgstr "Հավելվածի անվանումը"
+msgid "Options"
+msgstr "Համամասնություններ"
 
 msgid "Workshop Assignments"
 msgstr ""
@@ -3391,6 +3535,16 @@ msgstr[1] ""
 msgid "No, do not send"
 msgstr ""
 
+#, fuzzy
+#| msgid "Accept invitation"
+msgid "Copy invitation"
+msgstr "Ընդունել հրավերը"
+
+#, fuzzy
+#| msgid "Accept invitation"
+msgid "Copy guest invitation"
+msgstr "Ընդունել հրավերը"
+
 msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
 msgstr ""
 
@@ -3444,24 +3598,46 @@ msgstr ""
 msgid "(no limit selected)"
 msgstr ""
 
-msgid "Require applicants to submit a text about their motivation for applying"
+msgid "Require applicants to answer questions about their motivation for applying"
 msgstr ""
 
-msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
+msgid "Provide a list of questions that the applicants should answer."
 msgstr ""
 
 #, python-format
 msgid "Only applicable if \"%(other_option)s\" is enabled."
 msgstr ""
 
-msgid "Enter text to pre-fill or leave empty"
-msgstr ""
+#, fuzzy
+#| msgid "Remove button"
+msgid "Remove question"
+msgstr "Հեռացնել կոճակը"
+
+#, fuzzy
+#| msgid "Add button"
+msgid "Add question"
+msgstr "Ավելացնել կոճակ"
 
 msgid "Options for participation"
 msgstr ""
 
 msgid "Choose one or more options that will be displayed on the application form. Applicants can select any of these options along with their application."
 msgstr ""
+
+#, fuzzy
+#| msgid "Additional options"
+msgid "Define additional custom options."
+msgstr "Լրացուցիչ տարբերակներ"
+
+#, fuzzy
+#| msgid "Remove location"
+msgid "Remove option"
+msgstr "Հեռացնել գտնվելու վայրը"
+
+#, fuzzy
+#| msgid "Add location"
+msgid "Add option"
+msgstr "Ավելացնել գտնվելու վայրը"
 
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
 msgstr ""
@@ -3689,6 +3865,61 @@ msgid "Allow recording"
 msgstr ""
 
 #, fuzzy
+msgid "Conference Statistics"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+msgid "Conference Name"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Num. Invitations"
+msgstr "Հրավերներ"
+
+#, fuzzy
+#| msgid "Administration"
+msgid "Num. Registrations"
+msgstr "Ադմինիստրացիա"
+
+msgid "Num. Attendees"
+msgstr ""
+
+msgid "Avg. Time per Attendee"
+msgstr ""
+
+msgid "Download"
+msgstr "Ներբեռնել"
+
+#, fuzzy
+msgid "Conference Event Statistics"
+msgstr "Ստեղծել Իրադարձություն"
+
+#, fuzzy
+#| msgid "Event date"
+msgid "Event Name"
+msgstr "Իրադարձության ամսաթիվը"
+
+#, fuzzy
+msgid "Room Type"
+msgstr "Թիմի տեսակից"
+
+#, fuzzy
+#| msgid "Description"
+msgid "Duration"
+msgstr "Նկարագրություն"
+
+msgid "In order to better assess how long participants actually attended an event, we calculate here the relation between the configured event duration and the average time per attendee."
+msgstr ""
+
+msgid "Attendance Percentage"
+msgstr ""
+
+#, fuzzy
+msgid "Attendee Data Statistics"
+msgstr "Պարզ վիճակագրություն"
+
+#, fuzzy
 msgid "Temporary Users"
 msgstr "Թիմի նկարագրություն"
 
@@ -3840,6 +4071,14 @@ msgstr "Պարզ վիճակագրություն"
 msgid "New password"
 msgstr "Նոր գաղտնաբառ"
 
+msgid "Answer"
+msgstr "Պատասխան"
+
+#, fuzzy
+#| msgid "Suggestion"
+msgid "Question"
+msgstr "Առաջարկություն"
+
 #, fuzzy
 msgid "Accept"
 msgstr "Ընդունել օգտատիրոջը"
@@ -3913,9 +4152,6 @@ msgstr "Ակտիվացնել"
 #| msgid "Members"
 msgid "Members-Map"
 msgstr "Անդամներ"
-
-msgid "Cloud"
-msgstr ""
 
 msgid "File"
 msgstr "Ֆայլ"
@@ -4959,9 +5195,6 @@ msgstr "Գործողության կոչ"
 msgid "Register and join!"
 msgstr "Գրանցվեք և միացեք!"
 
-msgid "Register"
-msgstr "Գրանցվել"
-
 msgid "Log in"
 msgstr "Մուտք գործել"
 
@@ -5041,6 +5274,11 @@ msgstr "Բոլոր Խմբերը"
 #. Translators: __INCLUDE_JS_PO__
 msgid "All Projects"
 msgstr "Բոլոր Նախագծերը"
+
+#, fuzzy
+#| msgid "Simple Statistics"
+msgid "Statistics"
+msgstr "Պարզ վիճակագրություն"
 
 msgid "Temporary User Accounts"
 msgstr ""
@@ -5219,9 +5457,6 @@ msgstr "Թղթապանակի անունը"
 
 msgid "Delete folder"
 msgstr "Ջնջել թղթապանակը"
-
-msgid "Download"
-msgstr "Ներբեռնել"
 
 msgid "Do you really want to delete this folder and ALL folders and items it contains? This actions CANNOT be reversed!"
 msgstr "Ցանկանու՞մ եք ջնջել այս թղթապանակը և իր մեջ պարունակվող բոլոր պանակներն ու նյութերը: Այս գործողությունները հնարավոր ՉԷ հակադարձել!"
@@ -5848,9 +6083,6 @@ msgstr ""
 msgid "Search..."
 msgstr "Որոնել."
 
-msgid "Messages"
-msgstr "Նամակներ"
-
 msgid "My Stream"
 msgstr "Իմ հոսքը"
 
@@ -5973,9 +6205,6 @@ msgstr "Վերականգնել գաղտնաբառը"
 
 msgid "Your password has been set.  You may go ahead and log in now."
 msgstr "Ձեր գաղտնաբառը պահպանվել է: Հիմա կարող եք մուտք գործել."
-
-msgid "Login"
-msgstr "Մուտք"
 
 msgid "Enter new password"
 msgstr "Մուտքագրել նոր գաղտնաբառ"
@@ -6408,10 +6637,6 @@ msgid "Membership Requests"
 msgstr "Անդամակցության Հայտեր"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "My Groups and Projects"
-msgstr "Իմ Խմբերը և Նախագծերը"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Show more Projects of this Group"
 msgstr "Ցուցադրել այս խմբի ավելի շատ նախագծեր"
 
@@ -6750,10 +6975,6 @@ msgid "Nothing here yet."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Groups and Projects"
-msgstr "Խմբեր և նախագծեր"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Here you can find an overview of your Groups and Projects once you become active in one or more of them."
 msgstr "Այստեղ կարող եք գտնել ձեր Խմբերի և նախագծերի ակնարկները ՝ դրանցից մեկի կամ մի քանիսի մեջ ակտիվ լինելու դեպքում."
 
@@ -6929,12 +7150,10 @@ msgstr ""
 msgid "If the validation email does not arrive, please check your spam folder and re-check the spelling of your email address. If everything seems ok but you still have not received an email from us, please repeat the email change again to receive a new validation email:"
 msgstr ""
 
-#, fuzzy
-#| msgid "Contact"
-msgid "Direct Contact"
-msgstr "Կապ"
+msgid "Find a Match"
+msgstr ""
 
-msgid "**User-Matching** is your tool for communicating and sharing experiences with like-minded people from all over the world. If you have much to discuss and your chosen person considers it the same, your dialogue will start automatically."
+msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
 msgstr ""
 
 msgid "Wonderful, we definitely have so much to discuss!"
@@ -6991,10 +7210,6 @@ msgstr "Ջնջել օգտատիրոջ անձնական էջը"
 #, python-format
 msgid "User profile: %(username)s"
 msgstr "Օգտատիրոջ անձնական էջ։ %(username)s"
-
-#, fuzzy
-msgid "Profile"
-msgstr "Իմ էջը"
 
 msgid "Cooperation requests"
 msgstr "Համագործակցության հայցեր"
@@ -7331,6 +7546,57 @@ msgstr "Օգտատերը կարող է մերժել հայտարարությու
 
 msgid "There are no announcements yet."
 msgstr "Առայժմ հայտարարություններ չկան."
+
+msgid "Start user export"
+msgstr ""
+
+msgid "You can start a user export. As soon as the export is finished it will be available here."
+msgstr ""
+
+msgid "The export is currently running..."
+msgstr ""
+
+msgid "A user export is in progress. As soon as the export is finished it will be available here."
+msgstr ""
+
+#, fuzzy
+msgid "User export finished"
+msgstr "Տեսակավորել դաշտը"
+
+msgid "You can download the latest user export data."
+msgstr ""
+
+#, fuzzy
+msgid "Download user exports from"
+msgstr "Պարզ վիճակագրություն"
+
+#, fuzzy
+msgid "Download user export as"
+msgstr "Պարզ վիճակագրություն"
+
+msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
+msgstr ""
+
+#, fuzzy
+#| msgid "An internal error occured."
+msgid "An error has occurred"
+msgstr "Տեղի ունեցավ ներքին սխալ."
+
+#, fuzzy
+#| msgid "There was an error while trying to submit your report. Please try again in a moment."
+msgid "Sorry, an error occurred during the user export. Please try again later."
+msgstr "Ձեր զեկույցը ներկայացնելիս սխալ տեղի ունեցավ: Խնդրում ենք փորձել մի փոքր ուշ."
+
+msgid "Delete export data and start new user export"
+msgstr ""
+
+msgid "Retry user export"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete reported item..."
+msgid "Delete exported data"
+msgstr "Ջնջել հաղորդված նյութը ..."
 
 msgid "User Import Archive"
 msgstr ""
@@ -7683,9 +7949,6 @@ msgstr "Արագ Որոնում"
 msgid "Create content"
 msgstr "Ստեղծել բովանդակություն"
 
-msgid "Home"
-msgstr "Գլխավոր էջ"
-
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
 
@@ -7718,6 +7981,9 @@ msgstr "Խմբագրել ձեր էջը"
 
 msgid "Edit My Profile"
 msgstr "Խմբագրել Իմ Անձնական Էջը"
+
+msgid "What's New"
+msgstr ""
 
 msgid "What's happening where and when? What's to discover? Where to meet?"
 msgstr "Ի՞նչ է տեղի ունենում, որտե՞ղ և ե՞րբ: Ի՞նչ հայտնաբերել: Որտե՞ղ հանդիպել?"
@@ -8038,10 +8304,6 @@ msgid "Note: New recordings can only be made if you have booked premium features
 msgstr ""
 
 #, fuzzy
-msgid "My Conferences"
-msgstr "Վիդեո-կոնֆերանսի սերվեր"
-
-#, fuzzy
 msgid "You are not currently attending any Conferences"
 msgstr "Դուք չեք ուղարկել RSVP որևէ Իրադարձության."
 
@@ -8222,10 +8484,40 @@ msgstr ""
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr ""
 
-msgid "Test email sent!"
+msgid "Version 1.18.0 released"
 msgstr ""
 
-msgid "Newsletter sent."
+msgid "Includes the \"What's New\" feature, a quick way to copy conference invitations, a security update, and more."
+msgstr ""
+
+msgid ""
+"The update includes:\n"
+"- A \"What's new\" page, showing the release notes for the platform.\n"
+"- Copy a conference invitation to the clipboard from the conference interface.\n"
+"- Some font changes and improvements.\n"
+"- Fix bug in group and project membership handling.\n"
+"- Tags accross the site now link to the search page.\n"
+"- Fix assigning Todos via the user avatar.\n"
+"- Improve reliability of newsletter sending.\n"
+"- Security updates.\n"
+"- Further minor bugfixes.\n"
+msgstr ""
+
+msgid "Version 1.17.1 released"
+msgstr ""
+
+msgid "Includes dynamic registration form and dynamic options for participation for conferences."
+msgstr ""
+
+msgid ""
+"The update includes:\n"
+"- Dynamic registration form for conferences\n"
+"- Dynamize options for participation for conferences\n"
+"- Library Update of Moment.js\n"
+"- Update Matomo tracking to include better options\n"
+msgstr ""
+
+msgid "Test email sent!"
 msgstr ""
 
 msgid "Test email sent."
@@ -8760,6 +9052,9 @@ msgstr "Ձեր հայտարարությունը հաջողությամբ ակտ�
 msgid "Your Announcement was deactivated successfully."
 msgstr "Ձեր հայտարարությունը հաջողությամբ ապաակտիվացվել է."
 
+msgid "Another export is currently running!"
+msgstr ""
+
 #, fuzzy
 msgid "The Archived User Import Entry was deleted successfully."
 msgstr "Ձեր հայտարարությունը հաջողությամբ ջնջվել է."
@@ -9012,11 +9307,12 @@ msgstr "Հետևյալ Օգտատերերն ավելացվեցին այս պոր
 msgid "Your changes were saved."
 msgstr "Ձեր փոփոխությունները պահպանվել են."
 
-msgid "Option"
-msgstr "Տարբերակ"
-
 msgid "Status"
 msgstr "Ստատուս"
+
+#, fuzzy
+msgid "Attendance data is not available for this conference."
+msgstr "Մուտքագրեք անուն նախագծի համար."
 
 msgid "The following Pads were re-initialized:"
 msgstr "Վերահաստատվել են հետևյալ Պահոցները:"
@@ -9597,6 +9893,23 @@ msgstr "Ստեղծել Իրադարձություն"
 #, fuzzy, python-format
 msgid "%(event)s %(type)s"
 msgstr "%(event)s (սպասվող)"
+
+#, fuzzy
+msgid "Start-Time"
+msgstr "Մեկնարկի ամսաթիվ."
+
+#, fuzzy
+#| msgid "Time"
+msgid "End-Time"
+msgstr "Ժամանակ"
+
+#, fuzzy
+msgid "Conference Event Attendance Tracking"
+msgstr "Ստեղծել Իրադարձություն"
+
+#, fuzzy
+msgid "Conference Event Attendance Trackings"
+msgstr "Վիդեո-կոնֆերանսի սերվեր"
 
 msgid "Would you like to create an event"
 msgstr "Ցանկանում՞մ եք ստեղծել իրադարձություն"
@@ -10229,9 +10542,6 @@ msgstr "Դուք ստեղծել եք իրադարձություն"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created an event"
 msgstr "ստեղծել է իրադարձություն"
-
-msgid "Show all"
-msgstr "Ցուցադրել բոլորը"
 
 msgid "Upcoming events"
 msgstr "Սպասվող իրադարձությունները"
@@ -11129,9 +11439,6 @@ msgstr "Ցույց տալ բոլոր %(count)s մասնակիցներին"
 
 msgid "Me"
 msgstr "Ես"
-
-msgid "Answer"
-msgstr "Պատասխան"
 
 msgid "Reply..."
 msgstr "Պատասխանել."
@@ -13610,6 +13917,11 @@ msgid "You cannot delete this folder because you do not have permission to delet
 msgstr "Դուք չեք կարող ջնջել այս թղթապանակը, քանի որ թույլտվություն չունեք ջնջել նրա միջի մեկ կամ մի քանի նյութերը!"
 
 #, fuzzy
+#~| msgid "Contact"
+#~ msgid "Direct Contact"
+#~ msgstr "Կապ"
+
+#, fuzzy
 #~ msgid "Premium Bookings"
 #~ msgstr "Ստեղծել Իրադարձություն"
 
@@ -13665,10 +13977,6 @@ msgstr "Դուք չեք կարող ջնջել այս թղթապանակը, քա�
 #, fuzzy
 #~ msgid "User CSV File"
 #~ msgstr "Նախագծեր / Խմբեր"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Համամասնություններ"
 
 #, fuzzy
 #~| msgid "Delete file"
@@ -13768,10 +14076,6 @@ msgstr "Դուք չեք կարող ջնջել այս թղթապանակը, քա�
 #, fuzzy
 #~ msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
 #~ msgstr "Արդյո՞ք ցանկանում եք ջնջել \"%(title)s\" հայտարարությունը?"
-
-#, fuzzy
-#~ msgid "Room Type"
-#~ msgstr "Թիմի տեսակից"
 
 #~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 #~ msgstr "%(sender_name)s -ը ստեղծեց \"%(team_name)s\" նախագիծը / խումբը %(portal_name)s - ում!"
