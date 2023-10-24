@@ -127,7 +127,7 @@ class ConferenceRoomSerializer(TranslateableModelSerializer):
 class ConferenceSerializer(TranslateableHyperlinkedModelSerializer):
     rooms = serializers.SerializerMethodField()
     management_urls = serializers.SerializerMethodField()
-    theme_color = serializers.CharField(source='conference_theme_color')
+    theme_color = serializers.SerializerMethodField()
     dates = serializers.SerializerMethodField()
     avatar = serializers.SerializerMethodField()
     wallpaper = serializers.SerializerMethodField()
@@ -229,6 +229,9 @@ class ConferenceSerializer(TranslateableHyperlinkedModelSerializer):
     def get_url(self, obj):
         return obj.get_absolute_url()
     
+    def get_theme_color(self, obj):
+        return obj.conference_theme_color or settings.COSINNUS_CONFERENCES_DEFAULT_THEME_COLOR
+    
 
 class ConferenceParticipant(TranslateableModelSerializer):
     organization = serializers.SerializerMethodField()
@@ -326,11 +329,13 @@ class ConferenceEventSerializer(TranslateableModelSerializer):
     feed_url = serializers.SerializerMethodField()
     show_chat = serializers.SerializerMethodField()
     chat_url = serializers.SerializerMethodField()
-    
+    user_is_admin = serializers.SerializerMethodField()
+
     class Meta(object):
         model = ConferenceEvent
         fields = ('id', 'title', 'note_html', 'from_date', 'to_date', 'room', 'url', 'is_queue_url', 'raw_html', 'is_break',
-                  'image_url', 'presenters', 'participants_limit', 'feed_url', 'management_urls', 'show_chat', 'chat_url')
+                  'image_url', 'presenters', 'participants_limit', 'feed_url', 'management_urls', 'show_chat', 'chat_url',
+                  'user_is_admin')
 
     def get_url(self, obj):
         # FIXME: Maybe smarter filtering for URL
@@ -376,6 +381,11 @@ class ConferenceEventSerializer(TranslateableModelSerializer):
         """ Returns the event room's URL if the show chat checkboxes on the event and its room are set
             and the room as a rocketchat url """
         return obj.show_chat and obj.room.show_chat and obj.room.get_rocketchat_room_url()
+
+    def get_user_is_admin(self, obj):
+        """ Returns if user is event admin or superuser. """
+        user = self.context['request'].user
+        return check_ug_admin(user, obj.group) or check_user_superuser(user)
 
 
 class ConferenceEventParticipantsSerializer(TranslateableModelSerializer):

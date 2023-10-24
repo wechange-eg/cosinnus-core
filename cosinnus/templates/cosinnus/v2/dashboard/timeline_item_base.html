@@ -156,7 +156,7 @@
 								<span>
 									<i class="fas fa-fw fa-tag"></i>
 									{% for tag in tags %}
-										{{ tag }}{% if not forloop.last %}, {% endif %}
+                                        <a href="{% url 'cosinnus:search' %}?q={{ tag }}">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
 									{% endfor %}
 								</span>
 							{% endif %}

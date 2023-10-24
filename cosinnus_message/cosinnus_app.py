@@ -18,7 +18,7 @@ def register():
         cosinnus_root_patterns)
     
     if settings.COSINNUS_ROCKET_ENABLED:
-        active_by_default = "cosinnus_event" in settings.COSINNUS_DEFAULT_ACTIVE_GROUP_APPS
+        active_by_default = "cosinnus_message" in settings.COSINNUS_DEFAULT_ACTIVE_GROUP_APPS
         app_registry.register('cosinnus_message', 'message', pgettext_lazy("the_app", "Chat"), deactivatable=True, active_by_default=active_by_default)
         widget_registry.register('message', 'cosinnus_message.dashboard.EmbeddedRocketchatDashboardWidget')
         # makemessages replacement protection

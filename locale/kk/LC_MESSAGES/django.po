@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-13 13:31+0200\n"
+"POT-Creation-Date: 2023-10-24 10:30+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -206,8 +206,59 @@ msgid "Rocket: Fix missing RocketChat room memberships for users"
 msgstr ""
 
 #, fuzzy
+#| msgid "Recipients"
+msgid "Recipients Count"
+msgstr "Алушылар"
+
+#, fuzzy
+#| msgid "Recipients"
+msgid "Recipients Send Count"
+msgstr "Алушылар"
+
+#, fuzzy
+#| msgid "Comment"
+msgid "Community"
+msgstr "Комментарий"
+
+#, fuzzy
+#| msgid "Persons"
+msgid "Personal"
+msgstr "Адамдар"
+
+#, fuzzy
 msgid "Personal Dashboard"
 msgstr "Прибор панелі"
+
+#, fuzzy
+#| msgid "Contact info"
+msgid "My Personal Space"
+msgstr "Байланыс ақпараты"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Groups and Projects"
+msgstr "Менің Жобаларым мен Топтарым"
+
+#, fuzzy
+msgid "My Conferences"
+msgstr "Бейне конференциялар сервері"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups and Projects"
+msgstr "Жобалар мен Топтар"
+
+msgid "Users"
+msgstr "Пайдаланушылар"
+
+#, fuzzy
+#| msgid "Content"
+msgctxt "navigation bookmarks header"
+msgid "Content"
+msgstr "Мазмұны"
+
+#, fuzzy
+#| msgid "Change language"
+msgid "Change Language"
+msgstr "Тілді өзгерту"
 
 msgid "My Profile"
 msgstr "Менің профилім"
@@ -225,11 +276,6 @@ msgstr "Профилімді редакциялау"
 msgid "Notification Preferences"
 msgstr "Хабарландыру теңшелімдері"
 
-#, fuzzy
-#| msgid "Change language"
-msgid "Change Language"
-msgstr "Тілді өзгерту"
-
 msgid "Your Contribution"
 msgstr "Сіздің үлесіңіз"
 
@@ -238,6 +284,43 @@ msgstr "Әкімшілік"
 
 msgid "Logout"
 msgstr "Шығу"
+
+msgid "Home"
+msgstr "Бастапқы бет"
+
+msgid "Dashboard"
+msgstr "Прибор панелі"
+
+msgid "Search"
+msgstr "Іздеу"
+
+msgid "Bookmarks"
+msgstr ""
+
+msgid "Cloud"
+msgstr ""
+
+msgid "Messages"
+msgstr "Хабарламалар"
+
+msgid "Help"
+msgstr "Көмек"
+
+msgid "Alerts"
+msgstr ""
+
+#, fuzzy
+msgid "Profile"
+msgstr "Менің профилім"
+
+msgid "Login"
+msgstr "Кіру"
+
+msgid "Register"
+msgstr "Тіркелу"
+
+msgid "Show all"
+msgstr "Барлығын көрсету"
 
 #, python-format
 msgid "Hello \"%(user)s\"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at \"%(email)s\"."
@@ -657,7 +740,7 @@ msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_na
 msgstr "%(sender_name)s сіз жазылған идеядан %(portal_name)s „%(team_name)s“ жобасынжаңа ғана жасады! <br/> <br/> Қарау үшін төмендегі сілтемені нұқыңыз. Онда сіз жобаға қосылғыңыз келе мекенін көре аласыз."
 
 #, python-format
-msgid "Your match with %(sender_name)s has just been established!"
+msgid "You have a match with %(sender_name)s. Get to know your match in Rocket.Chat"
 msgstr ""
 
 msgid "Deutsch--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
@@ -856,9 +939,6 @@ msgstr "Бұл жарамды виджет идентификаторы неме
 msgid "This doesn't seem to be a valid Flickr Gallery link! It should be in the form of \"https://www.flickr.com/photos/username/sets/1234567890\"!"
 msgstr "Бұл Flickr галереясының жарамды сілтемесіне ұқсамайды! Ол “https://www.flickr.com/photos/username/sets/1234567890” түрінде болуы тиіс!"
 
-msgid "Users"
-msgstr "Пайдаланушылар"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "Топтар"
@@ -1029,6 +1109,21 @@ msgstr ""
 msgid "Last create-call parameters"
 msgstr ""
 
+#, python-format
+msgid "Join \"%(name)s\"!"
+msgstr ""
+
+#, python-format
+msgid "To join the conference in the browser visit %(url)s."
+msgstr ""
+
+#, python-format
+msgid "To join the conference by phone dial \"%(number)s\" and enter the following PIN: \"%(pin)s#\". Use the 0-key on your phone to toggle mute on/off."
+msgstr ""
+
+msgid "Invitation copied to clipboard."
+msgstr ""
+
 msgid "BBB ROOM"
 msgstr ""
 
@@ -1182,8 +1277,10 @@ msgstr "Мүшелер"
 msgid "Request user information"
 msgstr "Шақыруды жою"
 
-msgid "Pre-filled content for the information field"
-msgstr ""
+#, fuzzy
+#| msgid "Cooperation requests"
+msgid "User motivation questions"
+msgstr "Ынтымақтастық туралы өтініштер"
 
 #, fuzzy
 msgid "Request contact option"
@@ -1259,7 +1356,7 @@ msgstr "Бейне конференциялар сервері"
 msgid "Priorities"
 msgstr ""
 
-msgid "Motivation for applying"
+msgid "User motivation answers"
 msgstr ""
 
 #, fuzzy
@@ -1763,6 +1860,33 @@ msgstr "Cosinnus Идея"
 msgid "Cosinnus Ideas"
 msgstr "Cosinnus Идеялар"
 
+#, fuzzy
+msgid "Subject"
+msgstr "Шақырулар"
+
+msgid "Content"
+msgstr "Мазмұны"
+
+msgid "Recipients"
+msgstr "Алушылар"
+
+#, fuzzy
+#| msgid "Additional Recipients"
+msgid "Mails sent to Recipients"
+msgstr "Қосымша алушылар"
+
+msgid "Mail function kwargs"
+msgstr ""
+
+msgid "Sending in Progress"
+msgstr ""
+
+msgid "Queued Mass Mail"
+msgstr ""
+
+msgid "Queued Mass Mails"
+msgstr ""
+
 msgid "Managed Tag"
 msgstr ""
 
@@ -1909,11 +2033,13 @@ msgstr "Бекітілген нысан"
 msgid "Match type"
 msgstr ""
 
-msgid "Match"
+msgid "User-Match"
 msgstr ""
 
-msgid "Matches"
-msgstr ""
+#, fuzzy
+#| msgid "User"
+msgid "User-Matches"
+msgstr "Пайдаланушы"
 
 #, python-brace-format
 msgid "Match between {self.from_user} and {self.to_user} has been successfully established."
@@ -1922,11 +2048,23 @@ msgstr ""
 msgid "You and {self.from_user.get_full_name()} matched!"
 msgstr ""
 
-msgid "TODO: Youve matched!"
+msgid "You've matched!"
 msgstr ""
 
-msgid "TODO: Matched chat room greeting message"
+msgid "You both have similar interests and were matched, very nice! What appealed to you about the other person's profile? What are you working on right now? What are your current topics of interest?"
 msgstr ""
+
+#, fuzzy
+#| msgid "Delete offer"
+msgid "Deletion after"
+msgstr "Ұсынысты жою"
+
+msgid "Data"
+msgstr ""
+
+#, fuzzy
+msgid "Temporary Data"
+msgstr "Хабарламалар"
 
 msgid "Name (EN)"
 msgstr "Аты (EN)"
@@ -2177,9 +2315,6 @@ msgstr "4 Кездейсоқ жобалар виджеті"
 msgid "8 Random Projects Widget"
 msgstr "8 Кездейсоқ жобалар виджеті"
 
-msgid "Content"
-msgstr "Мазмұны"
-
 msgid "Portal Root Page"
 msgstr "Порталдың негізгі беті"
 
@@ -2278,9 +2413,6 @@ msgstr "Сайттың виджеттері"
 
 msgid "Bottom content (gray background)"
 msgstr "Астыңғы мазмұны (сұр фон)"
-
-msgid "Dashboard"
-msgstr "Прибор панелі"
 
 msgid "Microsite"
 msgstr "Микросайт"
@@ -2680,9 +2812,6 @@ msgstr "Қолданушыны құру"
 msgid "Create Newsletter"
 msgstr "Қолданушыны құру"
 
-msgid "Recipients"
-msgstr "Алушылар"
-
 #, python-format
 msgid "With the current selection the newsletter will be sent to %(counter)s recipients."
 msgid_plural "With the current selection the newsletter will be sent to %(counter)s recipients."
@@ -2708,6 +2837,12 @@ msgstr ""
 
 msgid "User Import"
 msgstr ""
+
+#, fuzzy
+#| msgctxt "the verb"
+#| msgid "Export"
+msgid "User Export"
+msgstr "Экспорт"
 
 msgid "User Profile Field Choices"
 msgstr ""
@@ -2737,6 +2872,10 @@ msgid "Edit"
 msgstr "Өңдеу"
 
 msgid "This newsletter has already been sent. If you want to send it again, please copy it and send the copy."
+msgstr ""
+
+#, python-format
+msgid "This newsletter is being sent in the background: %(queued_mails_sent)s/%(queued_mails)s mails sent. Reload page to update."
 msgstr ""
 
 msgctxt "subject of an E-Mail"
@@ -2772,6 +2911,10 @@ msgstr ""
 msgid "Sent at:"
 msgstr ""
 
+#, fuzzy
+msgid "Newsletter is being sent in the background."
+msgstr "(Хабарланған элемент жойылды.)"
+
 msgid "This newsletter has not been sent"
 msgstr ""
 
@@ -2801,9 +2944,6 @@ msgstr "Әкімшілік"
 
 msgid "send login token to all inactive users"
 msgstr ""
-
-msgid "Search"
-msgstr "Іздеу"
 
 msgid "Search for email, firstname or lastname"
 msgstr ""
@@ -3014,9 +3154,6 @@ msgstr "Бейнені кірістіру кезінде қате пайда б�
 msgid "Help and Assistance for this page"
 msgstr "Осы параққа көмек және қолдау"
 
-msgid "Help"
-msgstr "Көмек"
-
 msgid "Help for this page"
 msgstr "Осы параққа арналған көмек"
 
@@ -3181,6 +3318,9 @@ msgstr "Менің жобаларымда көрсету …."
 msgid "Disable editor"
 msgstr "редакторды өшіріңіз"
 
+msgid "Option"
+msgstr "Вариант"
+
 #, fuzzy
 msgid "Current File"
 msgstr "Қазіргі мүшелер"
@@ -3207,9 +3347,6 @@ msgid "You will receive a notification e-mail and on-site notification when the 
 msgstr ""
 
 msgid "Please provide your motivation for applying"
-msgstr ""
-
-msgid "Describe why you wish to participate"
 msgstr ""
 
 #, fuzzy
@@ -3313,15 +3450,22 @@ msgid "optional"
 msgstr "міндетті емес"
 
 #, fuzzy
+msgid "Application submitted"
+msgstr "Өтінімнің атауы"
+
+#, fuzzy
 msgid "First Choice"
 msgstr "Аты"
 
 msgid "Second Choice"
 msgstr ""
 
+msgid "Motivation for applying"
+msgstr ""
+
 #, fuzzy
-msgid "Application submitted"
-msgstr "Өтінімнің атауы"
+msgid "Options"
+msgstr "Пропорциялар"
 
 msgid "Workshop Assignments"
 msgstr ""
@@ -3391,6 +3535,16 @@ msgstr[1] ""
 msgid "No, do not send"
 msgstr ""
 
+#, fuzzy
+#| msgid "Accept invitation"
+msgid "Copy invitation"
+msgstr "Шақыруды қабылдау"
+
+#, fuzzy
+#| msgid "Accept invitation"
+msgid "Copy guest invitation"
+msgstr "Шақыруды қабылдау"
+
 msgid "This session may be recorded by the organizers. By continuing, you consent to be recorded. This includes audio, video, chat, shared notes and whiteboard activities. The recording may be shared according to the organizers."
 msgstr ""
 
@@ -3444,24 +3598,46 @@ msgstr ""
 msgid "(no limit selected)"
 msgstr ""
 
-msgid "Require applicants to submit a text about their motivation for applying"
+msgid "Require applicants to answer questions about their motivation for applying"
 msgstr ""
 
-msgid "The motivation textbox will be pre-filled with any text you enter here. You can use this to provide a guideline or list of questions that the applicants should answer."
+msgid "Provide a list of questions that the applicants should answer."
 msgstr ""
 
 #, python-format
 msgid "Only applicable if \"%(other_option)s\" is enabled."
 msgstr ""
 
-msgid "Enter text to pre-fill or leave empty"
-msgstr ""
+#, fuzzy
+#| msgid "Remove button"
+msgid "Remove question"
+msgstr "Жою түймесі"
+
+#, fuzzy
+#| msgid "Add button"
+msgid "Add question"
+msgstr "Қосу"
 
 msgid "Options for participation"
 msgstr ""
 
 msgid "Choose one or more options that will be displayed on the application form. Applicants can select any of these options along with their application."
 msgstr ""
+
+#, fuzzy
+#| msgid "Additional options"
+msgid "Define additional custom options."
+msgstr "Қосымша опциялар"
+
+#, fuzzy
+#| msgid "Remove location"
+msgid "Remove option"
+msgstr "Орынды жою"
+
+#, fuzzy
+#| msgid "Add location"
+msgid "Add option"
+msgstr "Орынды қосыңыз"
 
 msgid "Workshop selection: Enable applicants to choose preferred workshops to attend"
 msgstr ""
@@ -3689,6 +3865,61 @@ msgid "Allow recording"
 msgstr ""
 
 #, fuzzy
+msgid "Conference Statistics"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+msgid "Conference Name"
+msgstr "Бейне конференциялар сервері"
+
+#, fuzzy
+#| msgid "Invitations"
+msgid "Num. Invitations"
+msgstr "Шақырулар"
+
+#, fuzzy
+#| msgid "Administration"
+msgid "Num. Registrations"
+msgstr "Әкімшілік"
+
+msgid "Num. Attendees"
+msgstr ""
+
+msgid "Avg. Time per Attendee"
+msgstr ""
+
+msgid "Download"
+msgstr "Жүктеу"
+
+#, fuzzy
+msgid "Conference Event Statistics"
+msgstr "Шара құру"
+
+#, fuzzy
+#| msgid "Event date"
+msgid "Event Name"
+msgstr "Шара күні"
+
+#, fuzzy
+msgid "Room Type"
+msgstr "Команда түрінен"
+
+#, fuzzy
+#| msgid "Description"
+msgid "Duration"
+msgstr "Сипаттамасы"
+
+msgid "In order to better assess how long participants actually attended an event, we calculate here the relation between the configured event duration and the average time per attendee."
+msgstr ""
+
+msgid "Attendance Percentage"
+msgstr ""
+
+#, fuzzy
+msgid "Attendee Data Statistics"
+msgstr "Қарапайым статистика"
+
+#, fuzzy
 msgid "Temporary Users"
 msgstr "Топ сипаттамасы"
 
@@ -3840,6 +4071,14 @@ msgstr "Қарапайым статистика"
 msgid "New password"
 msgstr "Жаңа пароль"
 
+msgid "Answer"
+msgstr "Жауап"
+
+#, fuzzy
+#| msgid "Suggestion"
+msgid "Question"
+msgstr "Ұсыныс"
+
 #, fuzzy
 msgid "Accept"
 msgstr "Пайдаланушыны қабылдау"
@@ -3913,9 +4152,6 @@ msgstr "Іске қосыңыз"
 #| msgid "Members"
 msgid "Members-Map"
 msgstr "Мүшелері"
-
-msgid "Cloud"
-msgstr ""
 
 msgid "File"
 msgstr "Файл"
@@ -4959,9 +5195,6 @@ msgstr "Іс-әрекетке шақыру"
 msgid "Register and join!"
 msgstr "Тіркеліңіз және қосылыңыз!"
 
-msgid "Register"
-msgstr "Тіркелу"
-
 msgid "Log in"
 msgstr "Жүйеге кіру"
 
@@ -5041,6 +5274,11 @@ msgstr "Барлық топтар"
 #. Translators: __INCLUDE_JS_PO__
 msgid "All Projects"
 msgstr "Барлық жобалар"
+
+#, fuzzy
+#| msgid "Simple Statistics"
+msgid "Statistics"
+msgstr "Қарапайым статистика"
 
 msgid "Temporary User Accounts"
 msgstr ""
@@ -5219,9 +5457,6 @@ msgstr "Қалта атауы"
 
 msgid "Delete folder"
 msgstr "Қалтаны жою"
-
-msgid "Download"
-msgstr "Жүктеу"
 
 msgid "Do you really want to delete this folder and ALL folders and items it contains? This actions CANNOT be reversed!"
 msgstr "Бұл қалтаны және оның құрамындағы БАРЛЫҚ қалталарды және элементтерді өшіргіңіз келе ме? Бұл әрекеттерді болдырмауға болмайды!"
@@ -5848,9 +6083,6 @@ msgstr ""
 msgid "Search..."
 msgstr "Іздеу."
 
-msgid "Messages"
-msgstr "Хабарламалар"
-
 msgid "My Stream"
 msgstr "Менің ағыным"
 
@@ -5973,9 +6205,6 @@ msgstr "Парольді қалпына келтіру"
 
 msgid "Your password has been set.  You may go ahead and log in now."
 msgstr "Сіздің парольіңіз орнатылды. Сіз қазір кіре аласыз."
-
-msgid "Login"
-msgstr "Кіру"
 
 msgid "Enter new password"
 msgstr "Жаңа парольді енгізіңіз"
@@ -6408,10 +6637,6 @@ msgid "Membership Requests"
 msgstr "Мүшелікке Сұраныстар"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "My Groups and Projects"
-msgstr "Менің Жобаларым мен Топтарым"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Show more Projects of this Group"
 msgstr "Басқа Жобалар мен Топтарды көрсету"
 
@@ -6750,10 +6975,6 @@ msgid "Nothing here yet."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Groups and Projects"
-msgstr "Жобалар мен Топтар"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Here you can find an overview of your Groups and Projects once you become active in one or more of them."
 msgstr "Мұнда сіз бір немесе бірнеше топқа енгеннен кейін топтарыңыз бен жобаларыңызға шолу таба аласыз."
 
@@ -6929,12 +7150,10 @@ msgstr ""
 msgid "If the validation email does not arrive, please check your spam folder and re-check the spelling of your email address. If everything seems ok but you still have not received an email from us, please repeat the email change again to receive a new validation email:"
 msgstr ""
 
-#, fuzzy
-#| msgid "Contact"
-msgid "Direct Contact"
-msgstr "Байланыс"
+msgid "Find a Match"
+msgstr ""
 
-msgid "**User-Matching** is your tool for communicating and sharing experiences with like-minded people from all over the world. If you have much to discuss and your chosen person considers it the same, your dialogue will start automatically."
+msgid "The **matching feature** offers you the opportunity to exchange with like-minded users of the platform. Based on the profile information you entered, we make suggestions who could be interesting exchange partners for you. If you are interested in the exchange with users and they are too, then you will be matched and a Rocket.Chat channel will open automatically an exchange."
 msgstr ""
 
 msgid "Wonderful, we definitely have so much to discuss!"
@@ -6991,10 +7210,6 @@ msgstr "Пайдаланушы тіркелгісін жою"
 #, python-format
 msgid "User profile: %(username)s"
 msgstr "Қолданушы профилі: %(username)s"
-
-#, fuzzy
-msgid "Profile"
-msgstr "Менің профилім"
 
 msgid "Cooperation requests"
 msgstr "Ынтымақтастық туралы өтініштер"
@@ -7331,6 +7546,57 @@ msgstr "Пайдаланушы хабарландырудан бас тарта 
 
 msgid "There are no announcements yet."
 msgstr "Әзірге хабарландырулар жоқ."
+
+msgid "Start user export"
+msgstr ""
+
+msgid "You can start a user export. As soon as the export is finished it will be available here."
+msgstr ""
+
+msgid "The export is currently running..."
+msgstr ""
+
+msgid "A user export is in progress. As soon as the export is finished it will be available here."
+msgstr ""
+
+#, fuzzy
+msgid "User export finished"
+msgstr "Cұрыптау өрісі"
+
+msgid "You can download the latest user export data."
+msgstr ""
+
+#, fuzzy
+msgid "Download user exports from"
+msgstr "Қарапайым статистика"
+
+#, fuzzy
+msgid "Download user export as"
+msgstr "Қарапайым статистика"
+
+msgid "Please note that for security reasons the export data will be only available temporarily and will be automatically deleted after some time."
+msgstr ""
+
+#, fuzzy
+#| msgid "An internal error occured."
+msgid "An error has occurred"
+msgstr "Ішкі қате пайда болды."
+
+#, fuzzy
+#| msgid "There was an error while trying to submit your report. Please try again in a moment."
+msgid "Sorry, an error occurred during the user export. Please try again later."
+msgstr "Есеп жіберу кезінде қате пайда болды. Бір минуттан кейін қайталап көріңіз."
+
+msgid "Delete export data and start new user export"
+msgstr ""
+
+msgid "Retry user export"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete reported item..."
+msgid "Delete exported data"
+msgstr "Хабарланған бұйымды өшіру."
 
 msgid "User Import Archive"
 msgstr ""
@@ -7683,9 +7949,6 @@ msgstr "Тез іздеу"
 msgid "Create content"
 msgstr "Контент жасау"
 
-msgid "Home"
-msgstr "Бастапқы бет"
-
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
 
@@ -7718,6 +7981,9 @@ msgstr "Профильді редакциялаңыз"
 
 msgid "Edit My Profile"
 msgstr "Профилімді редакциялау"
+
+msgid "What's New"
+msgstr ""
 
 msgid "What's happening where and when? What's to discover? Where to meet?"
 msgstr "Қайда және қашан не болып жатыр? Нені қарау керек? Қайда кездесуге болады?"
@@ -8038,10 +8304,6 @@ msgid "Note: New recordings can only be made if you have booked premium features
 msgstr ""
 
 #, fuzzy
-msgid "My Conferences"
-msgstr "Бейне конференциялар сервері"
-
-#, fuzzy
 msgid "You are not currently attending any Conferences"
 msgstr "Сіз ешқандай шараға шақыруды қабылдамадыңыз."
 
@@ -8222,10 +8484,40 @@ msgstr ""
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr ""
 
-msgid "Test email sent!"
+msgid "Version 1.18.0 released"
 msgstr ""
 
-msgid "Newsletter sent."
+msgid "Includes the \"What's New\" feature, a quick way to copy conference invitations, a security update, and more."
+msgstr ""
+
+msgid ""
+"The update includes:\n"
+"- A \"What's new\" page, showing the release notes for the platform.\n"
+"- Copy a conference invitation to the clipboard from the conference interface.\n"
+"- Some font changes and improvements.\n"
+"- Fix bug in group and project membership handling.\n"
+"- Tags accross the site now link to the search page.\n"
+"- Fix assigning Todos via the user avatar.\n"
+"- Improve reliability of newsletter sending.\n"
+"- Security updates.\n"
+"- Further minor bugfixes.\n"
+msgstr ""
+
+msgid "Version 1.17.1 released"
+msgstr ""
+
+msgid "Includes dynamic registration form and dynamic options for participation for conferences."
+msgstr ""
+
+msgid ""
+"The update includes:\n"
+"- Dynamic registration form for conferences\n"
+"- Dynamize options for participation for conferences\n"
+"- Library Update of Moment.js\n"
+"- Update Matomo tracking to include better options\n"
+msgstr ""
+
+msgid "Test email sent!"
 msgstr ""
 
 msgid "Test email sent."
@@ -8760,6 +9052,9 @@ msgstr "Хабарландыру сәтті белсендірілді."
 msgid "Your Announcement was deactivated successfully."
 msgstr "Хабарландыру сәтті ажыратылды."
 
+msgid "Another export is currently running!"
+msgstr ""
+
 #, fuzzy
 msgid "The Archived User Import Entry was deleted successfully."
 msgstr "Хабарландыру сәтті жойылды."
@@ -9012,11 +9307,12 @@ msgstr "Бұл порталға келесі Пайдаланушылар қос
 msgid "Your changes were saved."
 msgstr "Сіздің өзгертулеріңіз сақталды."
 
-msgid "Option"
-msgstr "Вариант"
-
 msgid "Status"
 msgstr "Күй"
+
+#, fuzzy
+msgid "Attendance data is not available for this conference."
+msgstr "Жобаның атын енгізіңіз."
 
 msgid "The following Pads were re-initialized:"
 msgstr "Келесі мәтіндік бөлімдер қайта жасалды:"
@@ -9602,6 +9898,23 @@ msgstr "Шара құру"
 #, fuzzy, python-format
 msgid "%(event)s %(type)s"
 msgstr "%(event)s (күтілуде)"
+
+#, fuzzy
+msgid "Start-Time"
+msgstr "Басталу күні."
+
+#, fuzzy
+#| msgid "Time"
+msgid "End-Time"
+msgstr "Уақыт"
+
+#, fuzzy
+msgid "Conference Event Attendance Tracking"
+msgstr "Шара құру"
+
+#, fuzzy
+msgid "Conference Event Attendance Trackings"
+msgstr "Бейне конференциялар сервері"
 
 msgid "Would you like to create an event"
 msgstr "Шара құрғыңыз келеді ме"
@@ -10237,9 +10550,6 @@ msgstr "Сіз шара жасадыңыз"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
 msgid "created an event"
 msgstr "сіз шара жасадыңыз"
-
-msgid "Show all"
-msgstr "Барлығын көрсету"
 
 msgid "Upcoming events"
 msgstr "Алдағы шаралар"
@@ -11150,9 +11460,6 @@ msgstr "Барлық қатысушыларды %(count)s түрінде көр�
 
 msgid "Me"
 msgstr "Мен"
-
-msgid "Answer"
-msgstr "Жауап"
 
 msgid "Reply..."
 msgstr "Жауап беру."
@@ -13669,6 +13976,11 @@ msgid "You cannot delete this folder because you do not have permission to delet
 msgstr "Сіз бұл қалтаны жоя алмайсыз, өйткені онда бір немесе бірнеше элементті жоюға рұқсатыңыз жоқ!"
 
 #, fuzzy
+#~| msgid "Contact"
+#~ msgid "Direct Contact"
+#~ msgstr "Байланыс"
+
+#, fuzzy
 #~ msgid "Premium Bookings"
 #~ msgstr "Шара құру"
 
@@ -13724,10 +14036,6 @@ msgstr "Сіз бұл қалтаны жоя алмайсыз, өйткені о�
 #, fuzzy
 #~ msgid "User CSV File"
 #~ msgstr "Жобалар/Топтар"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "Пропорциялар"
 
 #, fuzzy
 #~| msgid "Delete file"
@@ -13827,10 +14135,6 @@ msgstr "Сіз бұл қалтаны жоя алмайсыз, өйткені о�
 #, fuzzy
 #~ msgid "Do you really want to delete recorded meeting \"%(object.name)s\"?"
 #~ msgstr "„%(title)s“ шақыруын шынымен жойғыңыз келе ме?"
-
-#, fuzzy
-#~ msgid "Room Type"
-#~ msgstr "Команда түрінен"
 
 #~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 #~ msgstr "%(sender_name)s %(portal_name)s - де „%(team_name)s“ жоба / тобын жасады!"

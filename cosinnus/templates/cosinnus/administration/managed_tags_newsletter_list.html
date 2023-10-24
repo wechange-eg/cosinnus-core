@@ -40,7 +40,15 @@
 		        {% for newsletter in object_list %}
 			        <tr>
 			            <th><a href="{% block update_url %}{% url 'cosinnus:administration-managed-tags-newsletter-update' newsletter_id=newsletter.id %}{% endblock %}">{{ newsletter.subject }}</a></th>
-			            <th>{% if newsletter.sent %}{{ newsletter.sent }}{% else %}{% trans 'This newsletter has not been sent' %}{% endif %}</th>
+			            <th>
+                            {% if newsletter.sent %}
+                                {{ newsletter.sent }}
+                            {% elif newsletter.is_sending %}
+                                {% trans 'Newsletter is being sent in the background.' %}
+                            {% else %}
+                                {% trans 'This newsletter has not been sent' %}
+                            {% endif %}
+                        </th>
 			        </tr>
 		        {% endfor %}
 		    </table>

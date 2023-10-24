@@ -15,7 +15,10 @@ module.exports = DelegatedWidgetView.extend({
     
     // the messages-show button in the navbar
     $messagesButtonEl: null,
-    
+
+    // the "what's new" button
+    $whatsNewButtonEl: null,
+
     // the setTimeout object
 	pollIntervalObj: null,
 	
@@ -53,10 +56,12 @@ module.exports = DelegatedWidgetView.extend({
         
         self.$notificationButtonEl = $('#navbar-notifications-button');
         self.$messagesButtonEl = $('#navbar-messages-button');
-        
+        self.$whatsNewButtonEl = $('#navbar-whats-new-button');
+
         // events that have to be defined here because they happen in the notification button:
         self.$notificationButtonEl.on('click', self.thisContext(self.onNotificationButtonClicked));
-        
+        self.$whatsNewButtonEl.on('click', self.thisContext(self.onWhatsNewButtonClicked));
+
         self.state.originalPageTitle = document.title;
     },
     
@@ -297,6 +302,28 @@ module.exports = DelegatedWidgetView.extend({
             unseenPrefix = '(' + totalCount + ') ';
         }
         document.title = unseenPrefix + self.state.originalPageTitle;  
+    },
+
+
+    /** Fired when the navbar "what's new" button is clicked */
+    onWhatsNewButtonClicked: function (event) {
+        var self = this;
+
+        // Post to server and mark version history as read
+        var url = '/version_history/api/markread/';
+        $.ajax(url, {
+            type: 'POST',
+            timeout: 15000,
+            success: function (response, textStatus, xhr) {
+                util.log('Successfully marked version history as seen!');
+            },
+            error: function (xhr, textStatus) {
+                util.log('Error during marking version history as seen!');
+            }
+        });
+
+        // Remove the message counter
+        self.$whatsNewButtonEl.find('.badge').hide();
     },
 
 });

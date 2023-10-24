@@ -1,0 +1,30 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block page_title %}{% trans "What's New" %}{% endblock %}
+
+{% block leftnav %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="content-box white-content">
+        <span class="pull-right"><i>{{ SETTINGS.COSINNUS_VERSION }}</i></span>
+        <h2 class="color-primary">{% trans "What's New" %}</h2>
+        {% for version in version_history %}
+            <div>
+                <a class="anchor" id="{{ version.anchor }}"></a>
+                <hr>
+                <span class="pull-right"><i>Version: {{ version.version }}</i></span>
+                <h3>{{ version.title }}</h3>
+                {{ version.short_text|textfield }}
+                {{ version.full_text|textfield }}
+            </div>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

@@ -608,6 +608,32 @@ class BBBRoom(models.Model):
         
         return self.get_join_url(user)
 
+    def get_invitation_text(self, platform_join_url=None):
+        """ Returns an invitation text to the BBB room containing join URL and dial-in information.
+        @param platform_join_url: Can contain the absolute URL of the object wth the conference (i.e. group, event).
+            If passed this URL is used in the invitation text, otherwise the BBB guest access URL is used.
+        """
+        invitation = _('Join "%(name)s"!') % {'name': self.name}
+
+        if platform_join_url:
+            join_url = platform_join_url
+        else:
+            guest_token = self.get_guest_token()
+            join_url = group_aware_reverse('cosinnus:bbb-room-guest-access', kwargs={'guest_token': guest_token})
+        invitation += '\n\n' + _('To join the conference in the browser visit %(url)s.') % {'url': join_url}
+
+        if self.dial_number and self.voice_bridge:
+            invitation += '\n\n' + _(
+                'To join the conference by phone dial "%(number)s" and enter the following PIN: "%(pin)s#". '
+                'Use the 0-key on your phone to toggle mute on/off.'
+            ) % {'number': self.dial_number, 'pin': self.voice_bridge}
+
+        return invitation
+
+    def get_invitation_alert_text(self):
+        """ Returns the text shown in the invitation alert. """
+        return _('Invitation copied to clipboard.')
+
 
 class BBBRoomVisitStatistics(models.Model):
     """ This model represents a video/audio conference call with participants and/or presenters """

@@ -29,6 +29,7 @@ from cosinnus.models.group import CosinnusGroupMembership, \
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety, \
     CosinnusConference
 from cosinnus.models.idea import CosinnusIdea
+from cosinnus.models.mail import QueuedMassMail
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagType,\
     CosinnusManagedTagAssignment
 from cosinnus.models.membership import MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN, \
@@ -40,6 +41,7 @@ from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory
 from cosinnus.models.tagged import TagObject
 from cosinnus.models.user_import import CosinnusUserImport
 from cosinnus.models.widget import WidgetConfig
+from cosinnus.models.storage import TemporaryData
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.forms.widgets import PrettyJSONWidget
@@ -224,6 +226,8 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     actions = ['convert_to_society', 'convert_to_conference', 'add_members_to_current_portal', 'move_members_to_current_portal',
                 'move_groups_to_current_portal', 'move_groups_to_current_portal_and_message_users',
                 'activate_groups', 'deactivate_groups']
+    if settings.COSINNUS_CLOUD_ENABLED:
+        actions += ['force_redo_cloud_user_room_memberships',]
     list_display = ('name', 'slug', 'portal', 'public', 'is_active',)
     list_filter = ('portal', 'public', 'is_active',)
     search_fields = ('name', 'slug', 'id',)
@@ -429,7 +433,22 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
         message = _('In addition, the members were removed from all other Portals.')
         self.message_user(request, message)
     move_members_to_current_portal.short_description = _("Move all members to current Portal (removes all other memberships!)")
-    
+
+    if settings.COSINNUS_CLOUD_ENABLED:
+        def force_redo_cloud_user_room_memberships(self, request, queryset):
+            count = 0
+            from cosinnus_cloud.hooks import user_joined_group_receiver_sub # noqa
+            for group in queryset:
+                group_memberships = CosinnusGroupMembership.objects.filter(
+                    group__portal=CosinnusPortal.get_current(), group=group, status__in=MEMBER_STATUS,
+                )
+                for membership in group_memberships:
+                    user_joined_group_receiver_sub(None, membership.user, membership.group)
+                    count += 1
+            message = _('%d Users\' nextcloud folder memberships were re-done.') % count
+            self.message_user(request, message)
+        force_redo_cloud_user_room_memberships.short_description = _('Nextcloud: Fix missing Nextcloud folder membership for users')
+
 admin.site.register(CosinnusProject, CosinnusProjectAdmin)
 
 
@@ -663,7 +682,9 @@ class UserAdmin(DjangoUserAdmin):
     if settings.COSINNUS_ROCKET_ENABLED:
         actions += ['force_sync_rocket_user', 'make_user_rocket_admin', 'force_redo_user_room_memberships',
                     'ensure_user_account_sanity']
-    list_display = ('email', 'is_active', 'date_joined', 'has_logged_in', 'tos_accepted', 
+    if settings.COSINNUS_CLOUD_ENABLED:
+        actions += ['force_redo_cloud_user_room_memberships',]
+    list_display = ('email', 'is_active', 'date_joined', 'has_logged_in', 'tos_accepted',
                     'email_verified', 'username', 'first_name', 'last_name', 
                     'is_staff', 'scheduled_for_deletion_at')
     list_filter = list(DjangoUserAdmin.list_filter) + [UserHasLoggedInFilter, UserToSAcceptedFilter,
@@ -785,7 +806,22 @@ class UserAdmin(DjangoUserAdmin):
             message = _('%d Users\' rocketchat room memberships were re-done.') % count
             self.message_user(request, message)
         force_redo_user_room_memberships.short_description = _('Rocket: Fix missing RocketChat room memberships for users')
-        
+
+    if settings.COSINNUS_CLOUD_ENABLED:
+        def force_redo_cloud_user_room_memberships(self, request, queryset):
+            count = 0
+            from cosinnus_cloud.hooks import user_joined_group_receiver_sub # noqa
+            for user in queryset:
+                user_memberships = CosinnusGroupMembership.objects.filter(
+                    group__portal=CosinnusPortal.get_current(), user=user, status__in=MEMBER_STATUS,
+                )
+                for membership in user_memberships:
+                    user_joined_group_receiver_sub(None, membership.user, membership.group)
+                    count += 1
+            message = _('%d Users\' nextcloud folder memberships were re-done.') % count
+            self.message_user(request, message)
+        force_redo_cloud_user_room_memberships.short_description = _('Nextcloud: Fix missing Nextcloud folder membership for users')
+
 
 admin.site.unregister(USER_MODEL)
 admin.site.register(USER_MODEL, UserAdmin)
@@ -956,3 +992,40 @@ if settings.COSINNUS_ENABLE_USER_MATCH:
             return False
 
     admin.site.register(UserMatchObject, UserMatchAdmin)
+
+
+class TemporaryDataAdmin(admin.ModelAdmin):
+    fields = ['created', 'deletion_after', 'description']
+    list_display = fields
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request):
+        return False
+
+admin.site.register(TemporaryData, TemporaryDataAdmin)
+
+
+class QueuedMassMailAdmin(admin.ModelAdmin):
+    fields = [
+        'subject', 'content', 'recipients_count', 'recipients_sent_count', 'created', 'send_mail_kwargs',
+        'sending_in_progress',
+    ]
+    readonly_fields = [
+        'subject', 'content', 'recipients_count', 'recipients_sent_count',  'created', 'send_mail_kwargs'
+    ]
+    list_display = ['created', 'subject']
+
+    def has_add_permission(self, request):
+        return False
+
+    def recipients_count(self, obj):
+        return obj.recipients.count()
+    recipients_count.short_description = _('Recipients Count')
+
+    def recipients_sent_count(self, obj):
+        return obj.recipients_sent.count()
+    recipients_sent_count.short_description = _('Recipients Send Count')
+
+admin.site.register(QueuedMassMail, QueuedMassMailAdmin)

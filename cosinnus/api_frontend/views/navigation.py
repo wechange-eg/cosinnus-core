@@ -3,10 +3,10 @@ from django.contrib.auth import get_user_model
 from django.db.models import Case, Count, When
 from django.urls.base import reverse
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import pgettext
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.exceptions import ValidationError
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -23,6 +23,7 @@ from cosinnus.utils.dates import datetime_from_timestamp, timestamp_from_datetim
 from cosinnus.utils.permissions import check_user_can_create_conferences, check_user_can_create_groups, \
     check_user_portal_manager
 from cosinnus.utils.user import get_unread_message_count_for_user
+from cosinnus.utils.version_history import get_version_history_for_user, mark_version_history_as_read
 from cosinnus.views.user_dashboard import MyGroupsClusteredMixin
 from cosinnus_notifications.models import NotificationAlert, SerializedNotificationAlert
 
@@ -35,11 +36,10 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
     - Projects and Groups: users projects and groups
     - Community: Forum and Map
     - Conferences: users conferences
-    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional), image url (optional) and
-    badge (optional).
+    Each menu item contains: id, label (HTML), url, is_external, icon (Font Awesome class, optional),
+    image url (optional), badge (optional), selected.
     """
 
-    permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
@@ -55,84 +55,112 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                 "application/json": {
                     "data": {
                         "personal": {
-                            "items": [
-                                {
-                                    "id": "PersonalDashboard",
-                                    "icon": "fa-user",
-                                    "label": "Personal Dashboard",
-                                    "url": "/dashboard/",
-                                    "image": "/media/cosinnus_portals/portal_default/avatars/user/0e9e945efe3d60bf807d56e336b677f193675fd8.png",
-                                }
-                            ],
-                            "actions": []
+                          "header": "My Personal Space",
+                          "items": [
+                            {
+                              "id": "PersonalDashboard",
+                              "label": "Personal Dashboard",
+                              "url": "/dashboard/",
+                              "is_external": False,
+                              "icon": None,
+                              "image": "http://localhost:8000/media/image.png",
+                              "badge": None,
+                              "selected": False
+                            }
+                          ],
+                          "actions": []
                         },
                         "groups": {
-                            "items": [
-                                {
-                                    "id": "CosinnusSociety70",
-                                    "icon": "fa-sitemap",
-                                    "label": "Test Group",
-                                    "url": "/group/test-group/",
-                                    "image": "/media/cosinnus_portals/portal_default/avatars/group/be5636c7955c1fd370514c26ffd4b0902dd5232a.png",
-                                }
-                            ],
-                            "actions": [
-                                {
-                                    "id": "CreateGroup",
-                                    "icon": None,
-                                    "label": "Create a Group",
-                                    "url": "/groups/add/",
-                                    "image": None,
-                                },
-                                {
-                                    "id": "CreateProject",
-                                    "icon": None,
-                                    "label": "Create a Project",
-                                    "url": "/projects/add/",
-                                    "image": None,
-                                }
-                            ]
+                          "header": "My Groups and Projects",
+                          "items": [
+                            {
+                              "id": "CosinnusSociety70",
+                              "label": "Test Group",
+                              "url": "/group/test-group/",
+                              "is_external": False,
+                              "icon": None,
+                              "image": "http://localhost:8000/media/image.png",
+                              "badge": None,
+                              "selected": False
+                            }
+                          ],
+                          "actions": [
+                            {
+                              "id": "CreateGroup",
+                              "label": "Create a Group",
+                              "url": "/groups/add/",
+                              "is_external": False,
+                              "icon": None,
+                              "image": None,
+                              "badge": None,
+                              "selected": False
+                            },
+                            {
+                              "id": "CreateProject",
+                              "label": "Create a Project",
+                              "url": "/projects/add/",
+                              "is_external": False,
+                              "icon": None,
+                              "image": None,
+                              "badge": None,
+                              "selected": False
+                            }
+                          ]
                         },
                         "community": {
-                            "items": [
-                                {
-                                    "id": "Forum",
-                                    "icon": "fa-sitemap",
-                                    "label": "Forum",
-                                    "url": "/group/forum/",
-                                    "image": None,
-                                },
-                                {
-                                    "id": "Map",
-                                    "icon": "fa-group",
-                                    "label": "Map",
-                                    "url": "/map/",
-                                    "image": None,
-                                }
-                            ],
-                            "actions": []
+                          "header": "WECHANGE Community",
+                          "items": [
+                            {
+                              "id": "Forum",
+                              "label": "Forum",
+                              "url": "/group/forum/",
+                              "is_external": False,
+                              "icon": "fa-sitemap",
+                              "image": None,
+                              "badge": None,
+                              "selected": False
+                            },
+                            {
+                              "id": "Map",
+                              "label": "Map",
+                              "url": "/map/",
+                              "is_external": False,
+                              "icon": "fa-group",
+                              "image": None,
+                              "badge": None,
+                              "selected": False
+                            }
+                          ],
+                          "actions": []
                         },
                         "conference": {
-                            "items": [
-                                {
-                                    "id": "CosinnusSociety70",
-                                    "icon": "fa-television",
-                                    "label": "Test Conference",
-                                    "url": "/conference/test-conference/",
-                                    "image": None,
-                                }
-                            ],
-                            "actions": [
-                                {
-                                    "id": "CreateConference",
-                                    "icon": None,
-                                    "label": "Create a Conference",
-                                    "url": "/conferences/add/",
-                                    "image": None,
-                                }
-                            ]
+                          "header": "My Conferences",
+                          "items": [
+                            {
+                              "id": "CosinnusSociety70",
+                              "label": "Test Conference",
+                              "url": "/conference/test-conference/",
+                              "is_external": False,
+                              "icon": "fa-television",
+                              "image": None,
+                              "badge": None,
+                              "selected": False
+                            }
+                          ],
+                          "actions": [
+                            {
+                              "id": "CreateConference",
+                              "label": "Create a Conference",
+                              "url": "/conferences/add/",
+                              "is_external": False,
+                              "icon": None,
+                              "image": None,
+                              "badge": None,
+                              "selected": False
+                            }
+                          ]
                         }
-                    },
+                      },
                     "version": COSINNUS_VERSION,
                     "timestamp": 1658414865.057476
                 }
@@ -143,41 +171,54 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
         spaces = {}
 
         # personal space
-        dashboard_item = MenuItem(
-            _('Personal Dashboard'), reverse('cosinnus:user-dashboard'), 'fa-user',
-            request.user.cosinnus_profile.avatar_url, id='PersonalDashboard',
-        )
-        personal_space = {
-            'items': [dashboard_item],
-            'actions': [],
-        }
+        personal_space = None
+        if request.user.is_authenticated:
+            personal_space_items = [
+                MenuItem(
+                    _('Personal Dashboard'), reverse('cosinnus:user-dashboard'), 'fa-user',
+                    request.user.cosinnus_profile.avatar_url, id='PersonalDashboard',
+                )
+            ]
+            personal_space = {
+                'header': _('My Personal Space'),
+                'items': personal_space_items,
+                'actions': [],
+            }
         spaces['personal'] = personal_space
 
         # projects and groups
-        group_space_items = [
-            dashboard_item.as_menu_item()
-            for cluster in self.get_group_clusters(request.user) for dashboard_item in cluster
-        ]
+        group_space = None
+        group_space_items = []
         group_space_actions = []
+        if request.user.is_authenticated:
+            group_space_items = [
+                dashboard_item.as_menu_item()
+                for cluster in self.get_group_clusters(request.user) for dashboard_item in cluster
+            ]
         if not settings.COSINNUS_SHOW_MAIN_MENU_GROUP_CREATE_BUTTON_ONLY_FOR_PERMITTED \
                 or check_user_can_create_groups(request.user):
             group_space_actions = [
                 MenuItem(CosinnusSocietyTrans.CREATE_NEW, reverse('cosinnus:group__group-add'), id="CreateGroup"),
                 MenuItem(CosinnusProjectTrans.CREATE_NEW, reverse('cosinnus:group-add'), id="CreateProject"),
             ]
-        groups_space = {
-            'items': group_space_items,
-            'actions': group_space_actions,
-        }
-        spaces['groups'] = groups_space
+        if group_space_items or group_space_actions:
+            group_space = {
+                'header': _('My Groups and Projects'),
+                'items': group_space_items,
+                'actions': group_space_actions,
+            }
+        spaces['groups'] = group_space
 
         # community
+        community_space = None
         community_space_items = []
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
         if forum_slug:
-            forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
+            forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug,
+                                             portal=CosinnusPortal.get_current())
             if forum_group:
-                if settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS:
+                if (settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS
+                        and request.user.is_authenticated):
                     # Add paired_groups of managed tags to community space.
                     managed_tags = self.request.user.cosinnus_profile.get_managed_tags()
                     if managed_tags:
@@ -201,26 +242,34 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                 MenuItem(label, url, icon, id=id)
                 for id, label, url, icon in settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS
             ])
-        community_space = {
-            'items': community_space_items,
-            'actions': [],
-        }
+        if community_space_items:
+            community_space = {
+                'header': f'{settings.COSINNUS_PORTAL_NAME.upper()} {_("Community")}',
+                'items': community_space_items,
+                'actions': [],
+            }
         spaces['community'] = community_space
 
         # conferences
         if settings.COSINNUS_CONFERENCES_ENABLED:
-            conferences = CosinnusConference.objects.get_for_user(request.user)
+            conference_space = None
+            conference_space_items = []
             conference_space_actions = []
+            if request.user.is_authenticated:
+                conferences = CosinnusConference.objects.get_for_user(request.user)
+                conference_space_items = [DashboardItem(conference).as_menu_item() for conference in conferences]
             if not settings.COSINNUS_SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON_ONLY_FOR_PERMITTED \
                     or check_user_can_create_conferences(request.user):
                 conference_space_actions = [
                     MenuItem(CosinnusConferenceTrans.CREATE_NEW, reverse('cosinnus:conference__group-add'),
                              id='CreateConference'),
                 ]
-            conference_space = {
-                'items': [DashboardItem(conference).as_menu_item() for conference in conferences],
-                'actions': conference_space_actions,
-            }
+            if conference_space_items or conference_space_actions:
+                conference_space = {
+                    'header': _('My Conferences'),
+                    'items': conference_space_items,
+                    'actions': conference_space_actions,
+                }
             spaces['conference'] = conference_space
 
         return Response(spaces)
@@ -230,11 +279,10 @@ class BookmarksView(APIView):
     """
     An endpoint that provides the user bookmarks for the main navigation.
     Returns menu items for liked groups and projects, liked users and liked content (e.g. ideas).
-    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional), image url (optional) and
-    badge (optional).
+    Each menu item contains: id, label (HTML), url, is_external, icon (Font Awesome class, optional),
+    image url (optional), badge (optional), selected.
     """
 
-    permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
@@ -249,33 +297,45 @@ class BookmarksView(APIView):
             examples={
                 "application/json": {
                     "data": {
-                        "groups": [
-                            {
+                        "groups": {
+                            "header": "Groups and Projects",
+                            "items": {
                                 "id": "CosinnusGroup70",
-                                "icon": "fa-sitemap",
                                 "label": "Test Group",
                                 "url": "/group/test-group/",
-                                "image": "/media/cosinnus_portals/portal_default/avatars/group/be5636c7955c1fd370514c26ffd4b0902dd5232a.png",
+                                "is_external": False,
+                                "icon": None,
+                                "image": "http://localhost:8000/media/image.png",
+                                "badge": None,
+                                "selected": False
                             }
-                        ],
-                        "users": [
-                            {
+                        },
+                        "users": {
+                            "header": "Users",
+                            "items": {
                                 "id": "UserProfile4",
-                                "icon": "fa-user",
                                 "label": "Test User",
                                 "url": "/user/2/",
+                                "is_external": False,
+                                "icon": "fa-user",
                                 "image": None,
+                                "badge": None,
+                                "selected": False
                             }
-                        ],
-                        "content": [
-                            {
+                        },
+                        "content": {
+                            "header": "Content",
+                            "items": {
                                 "id": "CosinnusIdea2",
-                                "icon": "fa-lightbulb-o",
                                 "label": "Test Idea",
                                 "url": "/map/?item=1.ideas.test-idea",
+                                "is_external": False,
+                                "icon": "fa-lightbulb-o",
                                 "image": None,
+                                "badge": None,
+                                "selected": False
                             }
-                        ]
+                        }
                     },
                     "version": COSINNUS_VERSION,
                     "timestamp": 1658414865.057476
@@ -284,28 +344,39 @@ class BookmarksView(APIView):
         )}
     )
     def get(self, request):
-        liked_users = self.request.user.cosinnus_profile.get_user_starred_users()
-        user_items = [DashboardItem(user).as_menu_item() for user in liked_users]
-        liked_objects = self.request.user.cosinnus_profile.get_user_starred_objects()
+        bookmarks = None
         group_items = []
         content_items = []
-        for liked_object in liked_objects:
-            if isinstance(liked_object, get_cosinnus_group_model()):
-                group_items.append(DashboardItem(liked_object).as_menu_item())
-            else:
-                content_items.append(DashboardItem(liked_object).as_menu_item())
-        bookmarks = {
-            'groups': group_items,
-            'users': user_items,
-            'content': content_items,
-        }
+        if request.user.is_authenticated:
+            liked_users = request.user.cosinnus_profile.get_user_starred_users()
+            user_items = [DashboardItem(user).as_menu_item() for user in liked_users]
+            liked_objects = request.user.cosinnus_profile.get_user_starred_objects()
+            for liked_object in liked_objects:
+                if isinstance(liked_object, get_cosinnus_group_model()):
+                    group_items.append(DashboardItem(liked_object).as_menu_item())
+                else:
+                    content_items.append(DashboardItem(liked_object).as_menu_item())
+            if group_items or user_items or content_items:
+                bookmarks = {
+                    'groups': {
+                        'header': _('Groups and Projects'),
+                        'items': group_items,
+                    },
+                    'users': {
+                        'header': _('Users'),
+                        'items': user_items,
+                    },
+                    'content': {
+                        'header': pgettext('navigation bookmarks header', 'Content'),
+                        'items': content_items,
+                    }
+                }
         return Response(bookmarks)
 
 
 class UnreadMessagesView(APIView):
     """ An endpoint that returns the user unread message count for the main navigation. """
 
-    permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
@@ -329,7 +400,9 @@ class UnreadMessagesView(APIView):
         )}
     )
     def get(self, request):
-        unread_message_count = get_unread_message_count_for_user(request.user)
+        unread_message_count = 0
+        if request.user.is_authenticated:
+            unread_message_count = get_unread_message_count_for_user(request.user)
         unread_messages = {
             'count': unread_message_count,
         }
@@ -339,7 +412,6 @@ class UnreadMessagesView(APIView):
 class UnreadAlertsView(APIView):
     """ An endpoint that returns the user unseen alerts count for the main navigation. """
 
-    permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
@@ -363,10 +435,13 @@ class UnreadAlertsView(APIView):
         )}
     )
     def get(self, request):
-        alerts_qs = NotificationAlert.objects.filter(portal=CosinnusPortal.get_current(), user=self.request.user)
-        unseen_aggr = alerts_qs.aggregate(seen_count=Count(Case(When(seen=False, then=1))))
+        alerts_count = 0
+        if request.user.is_authenticated:
+            alerts_qs = NotificationAlert.objects.filter(portal=CosinnusPortal.get_current(), user=self.request.user)
+            unseen_aggr = alerts_qs.aggregate(seen_count=Count(Case(When(seen=False, then=1))))
+            alerts_count = unseen_aggr.get('seen_count', 0)
         unread_alerts = {
-            'count': unseen_aggr.get('seen_count', 0)
+            'count': alerts_count
         }
         return Response(unread_alerts)
 
@@ -389,7 +464,6 @@ class AlertsView(APIView):
     Additionally, the retrieved alerts can be marked as read/seen using the "mark_as_read=true" query parameter.
     """
 
-    permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
@@ -515,60 +589,61 @@ class AlertsView(APIView):
         )},
     )
     def get(self, request):
-        self.read_query_params(request)
         response = {
-            'items': None,
+            'items': [],
             'has_more': False,
             'offset_timestamp': None,
             'newest_timestamp': None,
         }
-        queryset = self.get_queryset()
+        if request.user.is_authenticated:
+            self.read_query_params(request)
+            queryset = self.get_queryset()
 
-        # has_more
-        response['has_more'] = queryset.count() > self.page_size
+            # has_more
+            response['has_more'] = queryset.count() > self.page_size
 
-        # paginate
-        queryset = queryset[:self.page_size]
-        alerts = list(queryset)
+            # paginate
+            queryset = queryset[:self.page_size]
+            alerts = list(queryset)
 
-        # mark as read
-        if self.mark_as_read:
+            # mark as read
+            if self.mark_as_read:
+                for alert in alerts:
+                    alert.seen = True
+                NotificationAlert.objects.bulk_update(alerts, ['seen'])
+
+            # alert items
+            user_cache = self.get_user_cache(alerts)
+            items = []
             for alert in alerts:
-                alert.seen = True
-            NotificationAlert.objects.bulk_update(alerts, ['seen'])
+                serialized_alert = SerializedNotificationAlert(
+                    alert,
+                    action_user=user_cache[alert.action_user_id][0],
+                    action_user_profile=user_cache[alert.action_user_id][1],
+                )
+                # split "icon_or_image_url"
+                self._split_icon_or_image_url(serialized_alert, 'item_')
+                self._split_icon_or_image_url(serialized_alert, 'user_')
+                for sub_item in serialized_alert.get('sub_items', []):
+                    self._split_icon_or_image_url(sub_item)
+                # use relative urls
+                self._use_relative_url(serialized_alert)
+                for sub_item in serialized_alert.get('sub_items', []):
+                    self._use_relative_url(sub_item)
+                # Use string identifier
+                serialized_alert['id'] = f'Alert{serialized_alert["id"]}'
+                items.append(serialized_alert)
+            response['items'] = items
 
-        # alert items
-        user_cache = self.get_user_cache(alerts)
-        items = []
-        for alert in alerts:
-            serialized_alert = SerializedNotificationAlert(
-                alert,
-                action_user=user_cache[alert.action_user_id][0],
-                action_user_profile=user_cache[alert.action_user_id][1],
-            )
-            # split "icon_or_image_url"
-            self._split_icon_or_image_url(serialized_alert, 'item_')
-            self._split_icon_or_image_url(serialized_alert, 'user_')
-            for sub_item in serialized_alert.get('sub_items', []):
-                self._split_icon_or_image_url(sub_item)
-            # use relative urls
-            self._use_relative_url(serialized_alert)
-            for sub_item in serialized_alert.get('sub_items', []):
-                self._use_relative_url(sub_item)
-            # Use string identifier
-            serialized_alert['id'] = f'Alert{serialized_alert["id"]}'
-            items.append(serialized_alert)
-        response['items'] = items
+            # newest timestamp
+            if not self.offset_timestamp and len(alerts) > 0:
+                newest_timestamp = timestamp_from_datetime(alerts[0].last_event_at)
+                response['newest_timestamp'] = newest_timestamp
 
-        # newest timestamp
-        if not self.offset_timestamp and len(alerts) > 0:
-            newest_timestamp = timestamp_from_datetime(alerts[0].last_event_at)
-            response['newest_timestamp'] = newest_timestamp
-
-        # offset timestamp
-        if len(alerts) > 0:
-            offset_timestamp = timestamp_from_datetime(alerts[-1].last_event_at)
-            response['offset_timestamp'] = offset_timestamp
+            # offset timestamp
+            if len(alerts) > 0:
+                offset_timestamp = timestamp_from_datetime(alerts[-1].last_event_at)
+                response['offset_timestamp'] = offset_timestamp
 
         return Response(response)
 
@@ -612,7 +687,7 @@ class AlertsView(APIView):
                 serialized_alert['url'] = url.replace(domain, '')
 
     def _split_icon_or_image_url(self, serialized_alert, key_prefix=''):
-        """ Replace icon_or_image_url items with separate icon and image items. """
+        """ Replace icon_or_image_url items with separate icon and image items. Use absolute url for images. """
         icon_or_image_url = serialized_alert.pop(key_prefix + 'icon_or_image_url')
         if not icon_or_image_url:
             serialized_alert[key_prefix + 'icon'] = None
@@ -621,6 +696,9 @@ class AlertsView(APIView):
             serialized_alert[key_prefix + 'icon'] = icon_or_image_url
             serialized_alert[key_prefix + 'image'] = None
         else:
+            domain = get_domain_for_portal(CosinnusPortal.get_current())
+            if icon_or_image_url.startswith('/'):
+                icon_or_image_url = domain + icon_or_image_url
             serialized_alert[key_prefix + 'image'] = icon_or_image_url
             serialized_alert[key_prefix + 'icon'] = None
 
@@ -628,8 +706,8 @@ class AlertsView(APIView):
 class HelpView(APIView):
     """
     An endpoint that returns a list of help menu items for the main navigation.
-    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional), image url (optional) and
-    badge (optional).
+    Each menu item contains: id, label (HTML), url, is_external, icon (Font Awesome class, optional),
+    image url (optional), badge (optional), selected.
     """
 
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
@@ -648,19 +726,23 @@ class HelpView(APIView):
                     "data": [
                         {
                             "id": "FAQ",
-                            "icon": "fa-question-circle",
                             "label": "<b>FAQ</b> (Frequently asked questions)",
-                            "url": "https://localhost:8000/cms/faq/",
+                            "url": "https://localhost/cms/faq/",
                             "is_external": True,
-                            "image": None
+                            "icon": "fa-question-circle",
+                            "image": None,
+                            "badge": None,
+                            "selected": False
                         },
                         {
                             "id": "Support",
-                            "icon": "fa-life-ring",
                             "label": "<b>Support-Channel</b> (Chat)",
-                            "url": "https://localhost:8000/cms/support/",
+                            "url": "https://localhost/cms/support/",
                             "is_external": True,
-                            "image": None
+                            "icon": "fa-life-ring",
+                            "image": None,
+                            "badge": None,
+                            "selected": False
                         }
                     ],
                     "version": COSINNUS_VERSION,
@@ -677,16 +759,33 @@ class HelpView(APIView):
         return Response(help_items)
 
 
-class ProfileView(APIView):
+class LanguageMenuItemMixin:
+
+    def get_language_menu_item(self, request, current_language_as_label=False):
+        language_item_label = request.LANGUAGE_CODE.upper() if current_language_as_label else _('Change Language')
+        language_item_icon = None if current_language_as_label else 'fa-language'
+        language_item = MenuItem(language_item_label, icon=language_item_icon, id='ChangeLanguage')
+        language_selection = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES,
+                                    settings.LANGUAGES)
+        language_subitems = []
+        for code, language in language_selection:
+            selected = code == request.LANGUAGE_CODE
+            language_subitem = MenuItem(language, reverse('cosinnus:switch-language', kwargs={'language': code}),
+                                        id=f'ChangeLanguageItem{code.upper()}', selected=selected)
+            language_subitems.append(language_subitem)
+        language_item['sub_items'] = language_subitems
+        return language_item
+
+
+class ProfileView(LanguageMenuItemMixin, APIView):
     """
     An endpoint that provides user profile menu items for the main navigation.
     Returns a list of menu items for user profile and notification settings, contribution, administration, logout and a
     language switcher item. The language switcher item contains a list of menu items for the available languages.
-    Each menu item consists of a label (HTML), url, icon (Font Awesome class, optional), image url (optional) and
-    badge (optional).
+    Each menu item contains: id, label (HTML), url, is_external, icon (Font Awesome class, optional),
+    image url (optional), badge (optional), selected.
     """
 
-    permission_classes = (IsAuthenticated,)
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
 
@@ -703,10 +802,43 @@ class ProfileView(APIView):
                     "data": [
                         {
                             "id": "Profile",
-                            "icon": "fa-circle-user",
                             "label": "My Profile",
                             "url": "/profile/",
-                            "image": None
+                            "is_external": False,
+                            "icon": "fa-circle-user",
+                            "image": None,
+                            "badge": None,
+                            "selected": False
+                        },
+                        {
+                            "id": "SetupProfile",
+                            "label": "Set up my Profile",
+                            "url": "/profile/edit/",
+                            "is_external": False,
+                            "icon": "fa-pen",
+                            "image": None,
+                            "badge": None,
+                            "selected": False
+                        },
+                        {
+                            "id": "EditProfile",
+                            "label": "Edit my Profile",
+                            "url": "/profile/edit/",
+                            "is_external": False,
+                            "icon": "fa-gear",
+                            "image": None,
+                            "badge": None,
+                            "selected": False
+                        },
+                        {
+                            "id": "NotificationPreferences",
+                            "label": "Notification Preferences",
+                            "url": "/profile/notifications/",
+                            "is_external": False,
+                            "icon": "fa-envelope",
+                            "image": None,
+                            "badge": None,
+                            "selected": False
                         },
                         {
                             "id": "ChangeLanguage",
@@ -714,22 +846,50 @@ class ProfileView(APIView):
                             "label": "Change Language",
                             "url": None,
                             "image": None,
+                            "is_external": False,
+                            "badge": None,
                             "sub_items": [
                                 {
                                     "id": "ChangeLanguageItemDE",
-                                    "icon": None,
                                     "label": "Deutsch",
                                     "url": "/language/de/",
-                                    "image": None
+                                    "is_external": False,
+                                    "icon": None,
+                                    "image": None,
+                                    "badge": None,
+                                    "selected": False
                                 },
                                 {
                                     "id": "ChangeLanguageItemEN",
-                                    "icon": None,
                                     "label": "English",
                                     "url": "/language/en/",
-                                    "image": None
+                                    "is_external": False,
+                                    "icon": None,
+                                    "image": None,
+                                    "badge": None,
+                                    "selected": True
                                 }
                             ]
+                        },
+                        {
+                            "id": "Contribution",
+                            "label": "Your Contribution",
+                            "url": "/account/contribution/",
+                            "is_external": False,
+                            "icon": "fa-hand-holding-hart",
+                            "image": None,
+                            "badge": None,
+                            "selected": False
+                        },
+                        {
+                            "id": "Logout",
+                            "label": "Logout",
+                            "url": "/logout/",
+                            "is_external": False,
+                            "icon": "fa-right-from-bracket",
+                            "image": None,
+                            "badge": None,
+                            "selected": False
                         }
                     ],
                     "version": COSINNUS_VERSION,
@@ -739,68 +899,63 @@ class ProfileView(APIView):
         )}
     )
     def get(self, request):
-        profile_menu = []
+        profile_menu = None
 
-        # profile page
-        profile_menu_items = [
-            MenuItem(_('My Profile'), reverse('cosinnus:profile-detail'), 'fa-circle-user', id='Profile'),
-        ]
-        if settings.COSINNUS_V3_FRONTEND_ENABLED:
-            profile_menu_items.append(
-                MenuItem(_('Set up my Profile'), reverse('cosinnus:v3-frontend-setup-profile'), 'fa-pen',
-                         id='SetupProfile'),
-            )
-        profile_menu_items.extend([
-            MenuItem(_('Edit my Profile'), reverse('cosinnus:profile-edit'), 'fa-gear', id='EditProfile'),
-            MenuItem(_('Notification Preferences'), reverse('cosinnus:notifications'), 'fa-envelope',
-                     id='NotificationPreferences'),
+        if request.user.is_authenticated:
+            profile_menu = []
 
-        ])
-        profile_menu.extend(profile_menu_items)
-
-        # language
-        if not settings.COSINNUS_LANGUAGE_SELECT_DISABLED:
-            language_item = MenuItem(_('Change Language'), None, 'fa-language', id='ChangeLanguage')
-            language_subitems = [
-                MenuItem(language, reverse('cosinnus:switch-language', kwargs={'language': code}),
-                         id=f'ChangeLanguageItem{code.upper()}')
-                for code, language in settings.LANGUAGES
+            # profile pages
+            profile_menu_items = [
+                MenuItem(_('My Profile'), reverse('cosinnus:profile-detail'), 'fa-circle-user', id='Profile'),
             ]
-            language_item['sub_items'] = language_subitems
-            profile_menu.append(language_item)
+            if settings.COSINNUS_V3_FRONTEND_ENABLED:
+                profile_menu_items.append(
+                    MenuItem(_('Set up my Profile'), reverse('cosinnus:v3-frontend-setup-profile'), 'fa-pen',
+                             id='SetupProfile'),
+                )
+            profile_menu_items.extend([
+                MenuItem(_('Edit my Profile'), reverse('cosinnus:profile-edit'), 'fa-gear', id='EditProfile'),
+                MenuItem(_('Notification Preferences'), reverse('cosinnus:notifications'), 'fa-envelope',
+                         id='NotificationPreferences'),
 
-        # payments
-        if settings.COSINNUS_PAYMENTS_ENABLED or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY \
-                and request.user.is_superuser:
-            from wechange_payments.models import Subscription
-            current_subscription = Subscription.get_current_for_user(request.user)
-            contribution = int(current_subscription.amount) if current_subscription else 0
-            contribution_badge = f'{contribution} €'
-            payments_item = MenuItem(_('Your Contribution'), reverse('wechange-payments:overview'),
-                                     'fa-hand-holding-hart', badge=contribution_badge, id='Contribution')
-            profile_menu.append(payments_item)
+            ])
+            profile_menu.extend(profile_menu_items)
 
-        # administration
-        if request.user.is_superuser or check_user_portal_manager(request.user):
-            administration_item = MenuItem(_('Administration'), reverse('cosinnus:administration'),
-                                           'fa-screwdriver-wrench', id='Administration')
-            profile_menu.append(administration_item)
+            # language
+            if not settings.COSINNUS_LANGUAGE_SELECT_DISABLED:
+                language_item = self.get_language_menu_item(request)
+                profile_menu.append(language_item)
 
-        # logout
-        logout_item = MenuItem(_('Logout'), reverse('logout'), 'fa-right-from-bracket', id='Logout')
-        profile_menu.append(logout_item)
+            # payments
+            if settings.COSINNUS_PAYMENTS_ENABLED or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY \
+                    and request.user.is_superuser:
+                from wechange_payments.models import Subscription
+                current_subscription = Subscription.get_current_for_user(request.user)
+                contribution = int(current_subscription.amount) if current_subscription else 0
+                contribution_badge = f'{contribution} €'
+                payments_item = MenuItem(_('Your Contribution'), reverse('wechange-payments:overview'),
+                                         'fa-hand-holding-hart', badge=contribution_badge, id='Contribution')
+                profile_menu.append(payments_item)
+
+            # administration
+            if request.user.is_superuser or check_user_portal_manager(request.user):
+                administration_item = MenuItem(_('Administration'), reverse('cosinnus:administration'),
+                                               'fa-screwdriver-wrench', id='Administration')
+                profile_menu.append(administration_item)
+
+            # logout
+            logout_item = MenuItem(_('Logout'), reverse('logout'), 'fa-right-from-bracket', id='Logout')
+            profile_menu.append(logout_item)
 
         return Response(profile_menu)
 
 
-class ServicesView(APIView):
+class MainNavigationView(LanguageMenuItemMixin, APIView):
     """
-    An endpoint that provides menu items for services.
-    Returns the following items for an authenticated user depending on the configuration:
-
-    -  Cloud if NextCloud is enabled
-    - Rocket.Chat if RocketChat is enabled
-    - Messages (postman) if Rocket.Chat is disabled
+    An endpoint that provides menu items for main navigation.
+    It contains pseudo menu items just to indicate the availability of a menu-item (e.g. for spaces and search) or
+    actual menu items (e.g. cloud, login). The content of the main navigation differs for authenticated and
+    non-authenticated users.
     """
 
     renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
@@ -816,26 +971,106 @@ class ServicesView(APIView):
             description='WIP: Response info missing. Short example included',
             examples={
                 "application/json": {
-                    "data": [
-                        {
-                            "id": "Cloud",
-                            "icon": "cloud",
-                            "label": "Cloud",
-                            "url": "https://cloud.localhost/",
-                            "is_external": True,
-                            "image": None,
-                            "badge": None
-                        },
-                        {
-                            "id": "Chat",
-                            "icon": "chat",
-                            "label": "Rocket.Chat",
-                            "url": "/messages/",
-                            "is_external": False,
-                            "image": None,
-                            "badge": None
-                        }
-                    ],
+                    "data": {
+                        "left": [
+                            {
+                                "id": "Home",
+                                "label": "Home",
+                                "url": "/cms/?noredir=1",
+                                "is_external": False,
+                                "icon": None,
+                                "image": "http://localhost:8000/static/img/logo-icon.png",
+                                "badge": None,
+                                "selected": False
+                            },
+                            {
+                                "id": "Spaces",
+                                "label": "Spaces",
+                                "url": None,
+                                "is_external": False,
+                                "icon": None,
+                                "image": None,
+                                "badge": None,
+                                "selected": False
+                            }
+                        ],
+                        "middle": [
+                            {
+                                "id": "Search",
+                                "label": "Search",
+                                "url": "/search/",
+                                "is_external": False,
+                                "icon": "fa-magnifying-glass",
+                                "image": None,
+                                "badge": None,
+                                "selected": False
+                            },
+                            {
+                                "id": "Bookmarks",
+                                "label": "Bookmarks",
+                                "url": None,
+                                "is_external": False,
+                                "icon": "fa-bookmark",
+                                "image": None,
+                                "badge": None,
+                                "selected": False
+                            }
+                        ],
+                        "services": [
+                            {
+                                "id": "Cloud",
+                                "label": "Cloud",
+                                "url": "https://cloud.localhost/",
+                                "is_external": True,
+                                "icon": "fa-cloud",
+                                "image": None,
+                                "badge": None,
+                                "selected": False
+                            },
+                            {
+                                "id": "Chat",
+                                "label": "Rocket.Chat",
+                                "url": "/messages/",
+                                "is_external": False,
+                                "icon": "fa-envelope",
+                                "image": None,
+                                "badge": None,
+                                "selected": False
+                            }
+                        ],
+                        "right": [
+                            {
+                                "id": "Help",
+                                "label": "Help",
+                                "url": None,
+                                "is_external": False,
+                                "icon": "fa-question",
+                                "image": None,
+                                "badge": None,
+                                "selected": False
+                            },
+                            {
+                                "id": "Alerts",
+                                "label": "Alerts",
+                                "url": None,
+                                "is_external": False,
+                                "icon": "fa-bell",
+                                "image": None,
+                                "badge": None,
+                                "selected": False
+                            },
+                            {
+                                "id": "Profile",
+                                "label": "Profile",
+                                "url": None,
+                                "is_external": False,
+                                "icon": None,
+                                "image": "http://localhost:8000/media/image.png",
+                                "badge": None,
+                                "selected": False
+                            }
+                        ]
+                    },
                     "version": COSINNUS_VERSION,
                     "timestamp": 1658414865.057476
                 }
@@ -843,22 +1078,226 @@ class ServicesView(APIView):
         )}
     )
     def get(self, request):
-        service_items = []
+        main_navigation_items = {
+            'left': None,
+            'middle': None,
+            'services': None,
+            'right': None,
+        }
+
+        # left part
+        left_navigation_items = []
+
+        # home
+        current_portal = CosinnusPortal.get_current()
+        home_image = current_portal.get_logo_image_url()
+        if settings.COSINNUS_V3_MENU_HOME_LINK:
+            home_item = MenuItem(_('Home'), settings.COSINNUS_V3_MENU_HOME_LINK, icon='fa-home', image=home_image,
+                                 id='Home')
+        else:
+            home_item = MenuItem(_('Dashboard'), reverse('cosinnus:user-dashboard'), icon='fa-home', image=home_image,
+                                 id='HomeDashboard')
+        left_navigation_items.append(home_item)
+
+        # spaces
+        left_navigation_items.append(MenuItem('Spaces', id='Spaces'))
+
+        main_navigation_items['left'] = left_navigation_items
+
+        # middle part
+        middle_navigation_items = []
+
+        # search
         if request.user.is_authenticated:
+            search_item = MenuItem(_('Search'), reverse('cosinnus:search'), 'fa-magnifying-glass', id='Search')
+        else:
+            search_item = MenuItem(_('Search'), reverse('cosinnus:map'), 'fa-magnifying-glass', id='MapSearch')
+        middle_navigation_items.append(search_item)
+
+        if request.user.is_authenticated:
+            # bookmarks
+            middle_navigation_items.append(MenuItem(_('Bookmarks'), icon='fa-bookmark', id='Bookmarks'))
+
+        main_navigation_items['middle'] = middle_navigation_items
+
+        # services part
+        services_navigation_items = []
+
+        if request.user.is_authenticated:
+            # cloud
             if settings.COSINNUS_CLOUD_ENABLED:
-                service_items.append(
-                    MenuItem('Cloud', settings.COSINNUS_CLOUD_NEXTCLOUD_URL, icon='cloud',
+                services_navigation_items.append(
+                    MenuItem(_('Cloud'), settings.COSINNUS_CLOUD_NEXTCLOUD_URL, icon='fa-cloud',
                              is_external=settings.COSINNUS_CLOUD_OPEN_IN_NEW_TAB, id='Cloud')
                 )
 
+            # messages
             if 'cosinnus_message' not in settings.COSINNUS_DISABLED_COSINNUS_APPS:
                 if settings.COSINNUS_ROCKET_ENABLED:
-                    service_items.append(
-                        MenuItem('Rocket.Chat', reverse('cosinnus:message-global'), icon='chat',
+                    services_navigation_items.append(
+                        MenuItem('Rocket.Chat', reverse('cosinnus:message-global'), icon='fa-envelope',
                                  is_external=settings.COSINNUS_ROCKET_OPEN_IN_NEW_TAB, id='Chat')
                     )
                 else:
-                    service_items.append(
-                        MenuItem( 'Messages', reverse('postman:inbox'), icon='messages', id='Messages')
+                    services_navigation_items.append(
+                        MenuItem( _('Messages'), reverse('postman:inbox'), icon='fa-envelope', id='Messages')
                     )
-        return Response(service_items)
+        main_navigation_items['services'] = services_navigation_items
+
+        # right part
+        right_navigation_items = []
+
+        # help
+        right_navigation_items.append(MenuItem(_('Help'), icon='fa-question', id='Help'))
+
+        if request.user.is_authenticated:
+
+            # alerts
+            right_navigation_items.append(MenuItem(_('Alerts'), icon='fa-bell', id='Alerts'))
+
+            # profile
+            right_navigation_items.append(
+                MenuItem(_('Profile'), icon='fa-user', image=request.user.cosinnus_profile.avatar_url, id='Profile')
+            )
+        else:
+
+            # language
+            if not settings.COSINNUS_LANGUAGE_SELECT_DISABLED:
+                language_item = self.get_language_menu_item(request, current_language_as_label=True)
+                right_navigation_items.append(language_item)
+
+            # login
+            right_navigation_items.append(MenuItem(_('Login'), reverse('login'), id='Login'))
+
+            # register
+            if settings.COSINNUS_USER_SIGNUP_ENABLED:
+                right_navigation_items.append(
+                    MenuItem(_('Register'), reverse('cosinnus:user-add'),  id='Register')
+                )
+
+        main_navigation_items['right'] = right_navigation_items
+
+        return Response(main_navigation_items)
+
+
+class VersionHistoryView(APIView):
+    """
+    An endpoint that provides version history for the user.
+    It returns a list of information for the latest version, each containing the following fields: id, version title,
+    text, url and read. It also returns a menu item for the "show all" link.
+    The parameter "mark_as_read=true" can be passed to mark the unread version notes as read.
+    """
+
+    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+
+    # todo: generate proper response, by either putting the entire response into a
+    #       Serializer, or defining it by hand
+    #       Note: Also needs docs on our custom data/timestamp/version wrapper!
+    # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
+    # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter(
+                'mark_as_read', openapi.IN_QUERY, required=False,
+                description='Mark unread versions as read.', type=openapi.TYPE_BOOLEAN
+            ),
+        ],
+        responses={'200': openapi.Response(
+            description='WIP: Response info missing. Short example included',
+            examples={
+                "application/json": {
+                    "data": {
+                        "versions": [
+                            {
+                                "id": "Version123",
+                                "version": "1.2.3",
+                                "title": "Version 1.2.3 released",
+                                "text": "Adds some nice features.",
+                                "url": "/whats_new/#123",
+                                "read": False
+                            }
+                        ],
+                        "show_all": {
+                            "id": "ShowAll",
+                            "label": "Show all",
+                            "url": "/whats_new/",
+                            "is_external": False,
+                            "icon": None,
+                            "image": None,
+                            "badge": None,
+                            "selected": False
+                        }
+                    },
+                    "version": COSINNUS_VERSION,
+                    "timestamp": 1658414865.057476
+                }
+            }
+        )}
+    )
+
+    def get(self, request):
+        version_history = None
+        if request.user.is_authenticated:
+            version_history = {}
+
+            # get versions
+            versions = []
+            user_versions, unread_count = get_version_history_for_user(request.user)
+            for version in user_versions:
+                # serialize version data for the navigation dropdown.
+                version_for_api = {
+                    'id': 'Version' + version['anchor'].replace('-', ''),
+                    'version': version['version'],
+                    'title': version['title'],
+                    'text': version['short_text'],
+                    'url': version['url'],
+                    'read': version['read'],
+                }
+                versions.append(version_for_api)
+            version_history['versions'] = versions
+
+            # mark as read
+            mark_as_read = request.query_params.get('mark_as_read') == 'true'
+            if mark_as_read:
+                mark_version_history_as_read(request.user)
+
+            # add show all link
+            version_history['show_all'] = MenuItem(_('Show all'), reverse('cosinnus:version-history'), id='ShowAll')
+
+        return Response(version_history)
+
+
+class VersionHistoryUnreadCountView(APIView):
+    """ An endpoint that returns the user unseen version history elements count for the main navigation. """
+
+    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+
+    # todo: generate proper response, by either putting the entire response into a
+    #       Serializer, or defining it by hand
+    #       Note: Also needs docs on our custom data/timestamp/version wrapper!
+    # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
+    # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
+    @swagger_auto_schema(
+        responses={'200': openapi.Response(
+            description='WIP: Response info missing. Short example included',
+            examples={
+                "application/json": {
+                    "data": {
+                        "count": 2
+                    },
+                    "version": COSINNUS_VERSION,
+                    "timestamp": 1658414865.057476
+                }
+            }
+        )}
+    )
+    def get(self, request):
+        unread_versions_count = 0
+        if request.user.is_authenticated:
+            versions, unread_versions_count = get_version_history_for_user(request.user)
+        unread_versions = {
+            'count': unread_versions_count,
+        }
+        return Response(unread_versions)

@@ -26,7 +26,7 @@ from cosinnus.views import bbb_room, user_export, user_import, user_match
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group, \
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication, \
     user_dashboard, ui_prefs, administration, user_dashboard_announcement, dynamic_fields, \
-    conference_administration
+    conference_administration, version_history
 from cosinnus_conference.api.views import ConferenceViewSet, \
     PublicConferenceViewSet
 from cosinnus_organization.api.views import OrganizationViewSet
@@ -80,6 +80,8 @@ urlpatterns = [
     url(r'^welcome/$', user.welcome_settings, name='welcome-settings'),
     url(r'^join/$', user.group_invite_token_enter_view, name='group-invite-token-enter'),
     url(r'^join/(?P<token>[^/]+)/$', user.group_invite_token_view, name='group-invite-token'),
+
+    url(r'^whats_new/$', version_history.version_history, name='version-history'),
     
     url(r'^account/report/$', feedback.report_object, name='report-object'),
     url(r'^account/accept_tos/$', user.accept_tos, name='accept-tos'),
@@ -221,6 +223,7 @@ if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(settings, 'C
 if getattr(settings, 'COSINNUS_USE_V2_NAVBAR', False) or getattr(settings, 'COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY', False):
     urlpatterns += [
         url(r'^search/api/quicksearch/$', search.api_quicksearch, name='quicksearch-api'),
+        url(r'^version_history/api/markread/$', version_history.version_history_mark_read, name='version-history-api-mark-read'),
     ]
 
 if getattr(settings, 'COSINNUS_ENABLE_USER_MATCH', True):

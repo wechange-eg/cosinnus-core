@@ -1,30 +1,24 @@
 @font-face {
-    font-family: 'Brandon Grotesque';
+    font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: normal;
-    src: url('./../css/fonts/brandon/brandongrotesque.otf');
+    src: url('./../css/fonts/ibm-plex-sans/IBMPlexSans-Regular.ttf') format('truetype');
 }
 @font-face {
-    font-family: 'Brandon Text';
-    font-style: normal;
-    font-weight: normal;
-    src: url('./../css/fonts/brandon/brandon-text-regular.ttf') format('truetype');
-}
-@font-face {
-    font-family: 'Brandon Text';
+    font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: normal;
-    src: url('./../css/fonts/brandon/brandon-text-italic.ttf') format('truetype');
+    src: url('./../css/fonts/ibm-plex-sans/IBMPlexSans-Italic.ttf') format('truetype');
 }
 @font-face {
-    font-family: 'Brandon Text';
+    font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: bold;
-    src: url('./../css/fonts/brandon/brandon-text-bold.ttf') format('truetype');
+    src: url('./../css/fonts/ibm-plex-sans/IBMPlexSans-Bold.ttf') format('truetype');
 }
 
 body {
-    font-family: 'Brandon Text', -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;;
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;;
 }
 
 #contactsmenu,

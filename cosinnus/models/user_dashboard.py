@@ -21,6 +21,11 @@ from cosinnus_organization.models import CosinnusOrganization
 logger = logging.getLogger('cosinnus')
 
 
+# a list of font-awesome class names that are not actual icons,
+# useful for filtering them out of a class string
+FONT_AWESOME_CLASS_FILTER = ['fa', 'fas', 'fa-fw', 'fa-2x', 'fa-3x', 'fa--spin', 'fa-cog']
+
+
 class DashboardItem(dict):
     """
     Dictionary representation and API serializer of various cosinnus objects containing at least an icon, text and url.
@@ -108,21 +113,21 @@ class DashboardItem(dict):
 
 
 class MenuItem(dict):
-    """
-    Dictionary used as a representation and API serializer of menu links consisting of a label, url, icon (optional),
-    image-url (optional) and badge (optional). Used in the v3 navigation API.
-    """
+    """ Dictionary used as a representation and API serializer of menu links. Used in the v3 navigation API. """
 
-    def __init__(self, label, url, icon=None, image=None, badge=None, is_external=False, id=None):
+    def __init__(self, label, url=None, icon=None, image=None, badge=None, is_external=False, id=None, selected=False):
         domain = get_domain_for_portal(CosinnusPortal.get_current())
         if not is_external and url and url.startswith(domain):
             url = url.replace(domain, '')
+        if image and image.startswith('/'):
+            image = domain + image
+        if image and icon:
+            icon=None
         self['id'] = id
-        self['icon'] = icon
         self['label'] = label
         self['url'] = url
         self['is_external'] = is_external
-        if image and image.startswith(domain):
-            image = image.replace(domain, '')
+        self['icon'] = icon
         self['image'] = image
         self['badge'] = badge
+        self['selected'] = selected

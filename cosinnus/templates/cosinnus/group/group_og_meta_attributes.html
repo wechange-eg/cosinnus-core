@@ -7,10 +7,10 @@
 <meta name="title" content="{{ page_title }}">
 <meta name="description" content="{{ page_description }}">
 
-<meta property="og:url"           content="{% block og_url %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ request.path }}{% endblock og_url %}" />
-<meta property="og:title"         content="{% block og_title %}{{ page_title }}{% endblock og_title %}" />
-<meta property="og:image"         content="{% block og_image %}{% include 'cosinnus/group/group_avatar_image_url.html' %}{% endblock og_image %}" />
-<meta property="og:image:width"   content="1200" />
-<meta property="og:image:height"  content="630" />
-<meta property="og:site_name"     content="{% block og_site_name %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% else %}{{ COSINNUS_CURRENT_PORTAL.name }}{% endif %}{% endblock og_site_name %}" />
-<meta property="og:description"   content="{% block og_description %}{{ page_description }}{% endblock og_description %}" />
+<meta property="og:url"           content="{% block og_url %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ request.path }}{% endblock og_url %}">
+<meta property="og:title"         content="{% block og_title %}{{ page_title }}{% endblock og_title %}">
+<meta property="og:image"         content="{% block og_image %}{% include 'cosinnus/group/group_avatar_image_url.html' %}{% endblock og_image %}">
+<meta property="og:image:width"   content="1200">
+<meta property="og:image:height"  content="630">
+<meta property="og:site_name"     content="{% block og_site_name %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% else %}{{ COSINNUS_CURRENT_PORTAL.name }}{% endif %}{% endblock og_site_name %}">
+<meta property="og:description"   content="{% block og_description %}{{ page_description }}{% endblock og_description %}">

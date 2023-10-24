@@ -1,3 +1,5 @@
+import pytz
+from datetime import datetime
 from unittest.mock import patch
 from django.contrib.auth import get_user_model
 from django.template.defaultfilters import date
@@ -37,10 +39,6 @@ class SpacesViewTest(APITestCase):
         cls.api_url = reverse("cosinnus:frontend-api:api-navigation-spaces")
         cls.test_user = User.objects.create(**TEST_USER_DATA)
 
-    def test_login_required(self):
-        response = self.client.get(self.api_url)
-        self.assertEqual(response.status_code, 403)
-
     def test_personal_space(self):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
@@ -48,12 +46,18 @@ class SpacesViewTest(APITestCase):
         self.assertDictEqual(
             response.data['personal'],
             {
+                'header': 'My Personal Space',
                 'items': [
                     MenuItem('Personal Dashboard', '/dashboard/', 'fa-user', id='PersonalDashboard')
                 ],
                 'actions': []
             }
         )
+
+    def test_personal_space_anonymous(self):
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNone(response.data['personal'])
 
     def test_group_space(self):
         group = CosinnusSociety.objects.create(name='Test Group')
@@ -64,6 +68,7 @@ class SpacesViewTest(APITestCase):
         self.assertDictEqual(
             response.data['groups'],
             {
+                'header': 'My Groups and Projects',
                 'items': [
                     MenuItem('Test Group', '/group/test-group/', 'fa-sitemap', id=f'CosinnusSociety{group.pk}')
                 ],
@@ -74,14 +79,31 @@ class SpacesViewTest(APITestCase):
             }
         )
 
+    def test_group_space_anonymous(self):
+        group = CosinnusSociety.objects.create(name='Test Group')
+        group.memberships.create(user=self.test_user, status=MEMBERSHIP_MEMBER)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertDictEqual(
+            response.data['groups'],
+            {
+                'header': 'My Groups and Projects',
+                'items': [],
+                'actions': [
+                    MenuItem('Create new Group', '/groups/add/', id='CreateGroup'),
+                    MenuItem('Create new Project', '/projects/add/', id='CreateProject')
+                ]
+            }
+        )
+
     def test_community_space(self):
         forum = CosinnusSociety.objects.create(slug=settings.NEWW_FORUM_GROUP_SLUG, name=settings.NEWW_FORUM_GROUP_SLUG)
-        self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
         self.assertDictEqual(
             response.data['community'],
             {
+                'header': settings.COSINNUS_PORTAL_NAME.upper() + ' Community',
                 'items': [
                     MenuItem(settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL, forum.get_absolute_url(), 'fa-sitemap', id='Forum'),
                     MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, '/map/', 'fa-group', id='Map'),
@@ -92,7 +114,6 @@ class SpacesViewTest(APITestCase):
 
     @override_settings(COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS=[('ExternalID', 'External', 'https://example.com/', 'fa-group')])
     def test_community_space_additional_links(self):
-        self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
@@ -124,19 +145,18 @@ class BookmarksViewTest(APITestCase):
         cls.api_url = reverse("cosinnus:frontend-api:api-navigation-bookmarks")
         cls.test_user = User.objects.create(**TEST_USER_DATA)
 
-    def test_login_required(self):
-        response = self.client.get(self.api_url)
-        self.assertEqual(response.status_code, 403)
-
     def test_group_bookmarks(self):
         group = CosinnusSociety.objects.create(name='Test Group')
         LikeObject.objects.create(target_object=group, user=self.test_user, starred=True)
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
-        self.assertListEqual(
+        self.assertEqual(
             response.data['groups'],
-            [MenuItem('Test Group', '/group/test-group/', 'fa-sitemap', id=f'CosinnusGroup{group.pk}')]
+            {
+                'header': 'Groups and Projects',
+                'items': [MenuItem('Test Group', '/group/test-group/', 'fa-sitemap', id=f'CosinnusGroup{group.pk}')]
+            }
         )
 
     def test_user_bookmarks(self):
@@ -146,9 +166,12 @@ class BookmarksViewTest(APITestCase):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
-        self.assertListEqual(
+        self.assertEqual(
             response.data['users'],
-            [MenuItem('Test User2', '/user/2/', 'fa-user', id=f'UserProfile{user2.cosinnus_profile.pk}')]
+            {
+                'header': 'Users',
+                'items': [MenuItem('Test User2', '/user/2/', 'fa-user', id=f'UserProfile{user2.cosinnus_profile.pk}')]
+            }
         )
 
     def test_content_bookmarks(self):
@@ -157,10 +180,21 @@ class BookmarksViewTest(APITestCase):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
-        self.assertListEqual(
+        self.assertEqual(
             response.data['content'],
-            [MenuItem('Test Idea', '/map/?item=1.ideas.test-idea', 'fa-lightbulb-o', id=f'CosinnusIdea{idea.pk}')]
+            {
+                'header': 'Content',
+                'items': [
+                    MenuItem('Test Idea', '/map/?item=1.ideas.test-idea', 'fa-lightbulb-o', id=f'CosinnusIdea{idea.pk}')
+                ]
+
+            }
         )
+
+    def test_bookmarks_anonymous(self):
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNone(response.data)
 
 
 class UnreadMessagesViewTest(APITestCase):
@@ -171,16 +205,17 @@ class UnreadMessagesViewTest(APITestCase):
         cls.api_url = reverse("cosinnus:frontend-api:api-navigation-unread-messages")
         cls.test_user = User.objects.create(**TEST_USER_DATA)
 
-    def test_login_required(self):
-        response = self.client.get(self.api_url)
-        self.assertEqual(response.status_code, 403)
-
     @patch('cosinnus.api_frontend.views.navigation.get_unread_message_count_for_user', return_value=10)
     def test_unread_messages_count(self, get_unread_message_count_for_user_patch):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
         self.assertDictEqual(response.data, {'count': 10})
+
+    def test_unread_messages_count_anonymous(self):
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, {'count': 0})
 
 
 class TestAlertsMixin:
@@ -205,10 +240,6 @@ class UnreadAlertsViewTest(TestAlertsMixin, APITestCase):
         cls.test_user = User.objects.create(**TEST_USER_DATA)
         cls.portal = CosinnusPortal.get_current()
 
-    def test_login_required(self):
-        response = self.client.get(self.api_url)
-        self.assertEqual(response.status_code, 403)
-
     def test_unread_alerts_count(self):
         self.create_test_alert(seen=True)
         self.create_test_alert(seen=False)
@@ -216,6 +247,11 @@ class UnreadAlertsViewTest(TestAlertsMixin, APITestCase):
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
         self.assertDictEqual(response.data, {'count': 1})
+
+    def test_unread_alerts_count_anonymous(self):
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertDictEqual(response.data, {'count': 0})
 
     def test_mark_as_read(self):
         self.create_test_alert(seen=False)
@@ -241,10 +277,6 @@ class AlertsViewTest(TestAlertsMixin, APITestCase):
         cls.test_user = User.objects.create(**TEST_USER_DATA)
         cls.portal = CosinnusPortal.get_current()
 
-    def test_login_required(self):
-        response = self.client.get(self.api_url)
-        self.assertEqual(response.status_code, 403)
-
     def test_alerts(self):
         self.client.force_login(self.test_user)
         alert = self.create_test_alert()
@@ -263,7 +295,7 @@ class AlertsViewTest(TestAlertsMixin, APITestCase):
                         'item_icon': None,
                         'item_image': None,
                         'user_icon': None,
-                        'user_image': '/static/images/jane-doe-small.png',
+                        'user_image': self.portal.get_domain() + '/static/images/jane-doe-small.png',
                         'group': None,
                         'group_icon': None,
                         'action_datetime': alert_action_datetime,
@@ -332,6 +364,19 @@ class AlertsViewTest(TestAlertsMixin, APITestCase):
         response = self.client.get(self.api_url + '?mark_as_read=true')
         self.assertFalse(response.data['items'][0]['is_emphasized'])
 
+    def test_alerts_anonymous(self):
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertDictEqual(
+            response.data,
+            {
+                'items': [],
+                'has_more': False,
+                'offset_timestamp': None,
+                'newest_timestamp': None,
+            }
+        )
+
 
 class HelpViewTest(APITestCase):
 
@@ -352,10 +397,22 @@ class HelpViewTest(APITestCase):
         )
 
 
-class ProfileViewTest(APITestCase):
-    
-    maxDiff = None
+class LanguageMenuTestMixin:
 
+    def expected_language_menu_item(self, expected_label='Change Language', expected_icon='fa-language'):
+        languages = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES, settings.LANGUAGES)
+        expected_language_sub_items = []
+        for code, language in languages:
+            language_sub_item = MenuItem(language, f'/language/{code}/', id=f'ChangeLanguageItem{code.upper()}',
+                                         selected=(code == 'en'))
+            expected_language_sub_items.append(language_sub_item)
+        expected_language_menu_item = MenuItem(expected_label, icon=expected_icon, id='ChangeLanguage')
+        expected_language_menu_item['sub_items'] = expected_language_sub_items
+        return expected_language_menu_item
+
+
+class ProfileViewTest(LanguageMenuTestMixin, APITestCase):
+    
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -363,20 +420,10 @@ class ProfileViewTest(APITestCase):
         cls.test_user = User.objects.create(**TEST_USER_DATA)
         cls.portal = CosinnusPortal.get_current()
 
-    def test_login_required(self):
-        response = self.client.get(self.api_url)
-        self.assertEqual(response.status_code, 403)
-
     def test_profile(self):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
-        expected_language_items = [
-            MenuItem(language, f'/language/{code}/', id=f'ChangeLanguageItem{code.upper()}')
-            for code, language in settings.LANGUAGES
-        ]
-        expected_language_menu_item = MenuItem('Change Language', None, 'fa-language', id='ChangeLanguage')
-        expected_language_menu_item['sub_items'] = expected_language_items
         self.assertListEqual(
             response.data,
             [
@@ -384,7 +431,7 @@ class ProfileViewTest(APITestCase):
                 MenuItem('Set up my Profile', '/setup/profile/', 'fa-pen', id='SetupProfile'),
                 MenuItem('Edit my Profile', '/profile/edit/', 'fa-gear', id='EditProfile'),
                 MenuItem('Notification Preferences', '/profile/notifications/', 'fa-envelope', id='NotificationPreferences'),
-                expected_language_menu_item,
+                self.expected_language_menu_item(),
                 MenuItem('Logout', '/logout/', 'fa-right-from-bracket', id='Logout')
             ]
         )
@@ -415,8 +462,13 @@ class ProfileViewTest(APITestCase):
             MenuItem('Your Contribution', '/account/contribution/', 'fa-hand-holding-hart', badge='100 €', id='Contribution')
         )
 
+    def test_profile_anoymous(self):
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNone(response.data)
 
-class ServicesViewTest(APITestCase):
+
+class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
     """
     Note: Were not able to test with override_settings(COSINNUS_ROCKET_ENABLED=True). The util function reload_urlconf
     seems not to work as expected there. Will need to look into it in more detail.
@@ -425,21 +477,177 @@ class ServicesViewTest(APITestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.api_url = reverse("cosinnus:frontend-api:api-navigation-services")
+        cls.api_url = reverse("cosinnus:frontend-api:api-navigation-main")
         cls.test_user = User.objects.create(**TEST_USER_DATA)
         cls.portal = CosinnusPortal.get_current()
 
     @override_settings(COSINNUS_CLOUD_ENABLED=True)
     @override_settings(COSINNUS_CLOUD_NEXTCLOUD_URL='http://cloud.example.com')
-    def test_services(self):
-
+    def test_main_navigation_authenticated(self):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
-        self.assertListEqual(
+        self.assertEqual(
             response.data,
-            [
-                MenuItem('Cloud', 'http://cloud.example.com', 'cloud', is_external=True, id='Cloud'),
-                MenuItem('Messages', reverse('postman:inbox'), 'messages', id='Messages'),
-            ]
+            {
+                'left': [
+                    MenuItem('Home', settings.COSINNUS_V3_MENU_HOME_LINK, image='/static/img/logo-icon.png', id='Home'),
+                    MenuItem('Spaces', id='Spaces'),
+                ],
+                'middle': [
+                    MenuItem('Search', '/search/', 'fa-magnifying-glass', id='Search'),
+                    MenuItem('Bookmarks', icon='fa-bookmark', id='Bookmarks'),
+                ],
+                'services': [
+                    MenuItem('Cloud', 'http://cloud.example.com', 'fa-cloud', is_external=True, id='Cloud'),
+                    MenuItem('Messages', reverse('postman:inbox'), 'fa-envelope', id='Messages'),
+                ],
+                'right': [
+                    MenuItem('Help', icon='fa-question', id='Help'),
+                    MenuItem('Alerts', icon='fa-bell', id='Alerts'),
+                    MenuItem('Profile', icon='fa-user', id='Profile'),
+                ]
+            }
         )
+
+    @override_settings(COSINNUS_CLOUD_ENABLED=True)
+    @override_settings(COSINNUS_CLOUD_NEXTCLOUD_URL='http://cloud.example.com')
+    def test_main_navigation_anonymous(self):
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.data,
+            {
+                'left': [
+                    MenuItem('Home', settings.COSINNUS_V3_MENU_HOME_LINK, image='/static/img/logo-icon.png', id='Home'),
+                    MenuItem('Spaces', id='Spaces'),
+                ],
+                'middle': [
+                    MenuItem('Search', '/map/', 'fa-magnifying-glass', id='MapSearch'),
+                ],
+                'services': [],
+                'right': [
+                    MenuItem('Help', icon='fa-question', id='Help'),
+                    self.expected_language_menu_item(expected_label='EN', expected_icon=None),
+                    MenuItem('Login', '/login/', id='Login'),
+                    MenuItem('Register', '/signup/', id='Register'),
+                ]
+            }
+        )
+
+
+class VersionHistoryPatchMixin:
+
+    PATCHED_CORE_UPDATES = {
+        '1': {
+            'datetime': datetime(2000, 1, 1, tzinfo=pytz.utc),
+            'title': 'Test Title',
+            'short_text': 'Test Short Description',
+            'full_text': 'Test Full Description',
+        },
+    }
+
+    PATCHED_PORTAL_UPDATES = {
+        '1 (portal)': {
+            'datetime': datetime(2000, 1, 2, tzinfo=pytz.utc),
+            'title': 'Test Portal Title',
+            'short_text': 'Test Portal Short Description',
+            'full_text': 'Test Portal Full Description',
+        },
+    }
+
+    @classmethod
+    def patch_version_history(cls):
+        from importlib import import_module
+        from cosinnus.utils import version_history
+        version_history.version_history.UPDATES = cls.PATCHED_CORE_UPDATES
+        portal_version_history = import_module('apps.core.version_history')
+        portal_version_history.UPDATES = cls.PATCHED_PORTAL_UPDATES
+
+
+class VersionHistoryViewTest(VersionHistoryPatchMixin, APITestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.api_url = reverse("cosinnus:frontend-api:api-navigation-version-history")
+        cls.test_user = User.objects.create(**TEST_USER_DATA)
+        cls.portal = CosinnusPortal.get_current()
+        cls.patch_version_history()
+
+    def test_version_history(self):
+        self.client.force_login(self.test_user)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        version_history_page_url = reverse('cosinnus:version-history')
+        self.assertEqual(
+            response.data,
+            {
+                'versions': [
+                    {
+                        'id': 'Version1portal',
+                        'version': '1 (portal)',
+                        'url': f'{version_history_page_url}#1-portal',
+                        'title': 'Test Portal Title',
+                        'text': 'Test Portal Short Description',
+                        'read': False,
+                    },
+                    {
+                        'id': 'Version1',
+                        'version': '1',
+                        'url': f'{version_history_page_url}#1',
+                        'title': 'Test Title',
+                        'text': 'Test Short Description',
+                        'read': False,
+                    },
+                ],
+                'show_all': MenuItem('Show all', version_history_page_url, id='ShowAll'),
+            }
+        )
+
+    def test_version_history_anonymous(self):
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNone(response.data)
+
+    def test_version_history_mark_read(self):
+        self.client.force_login(self.test_user)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.data['versions'][0]['read'])
+        self.assertFalse(response.data['versions'][1]['read'])
+        mark_read_url = self.api_url + '?mark_as_read=true'
+        response = self.client.get(mark_read_url)
+        self.assertEqual(response.status_code, 200)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.data['versions'][0]['read'])
+        self.assertTrue(response.data['versions'][1]['read'])
+
+
+class VersionHistoryUnreadCountViewTest(VersionHistoryPatchMixin, APITestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.api_url = reverse("cosinnus:frontend-api:api-navigation-unread-version-history")
+        cls.test_user = User.objects.create(**TEST_USER_DATA)
+        cls.portal = CosinnusPortal.get_current()
+        cls.patch_version_history()
+
+    def test_version_history_unread_count(self):
+        self.client.force_login(self.test_user)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, {'count': 2})
+        mark_read_url = reverse('cosinnus:frontend-api:api-navigation-version-history') + '?mark_as_read=true'
+        response = self.client.get(mark_read_url)
+        self.assertEqual(response.status_code, 200)
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.data, {'count': 0})
+
+    def test_version_history_unread_count_anonymous(self):
+        response = self.client.get(self.api_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, {'count': 0})
+
