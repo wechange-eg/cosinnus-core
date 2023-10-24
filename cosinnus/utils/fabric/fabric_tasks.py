@@ -152,7 +152,6 @@ def fulldeploy(_ctx):
     
     check_confirmation()
     maintenanceon(_ctx)
-    stop(_ctx)
     # move the old poetry.lock and virtualenv, forcing poetry to create them from scratch on install
     foldername = f'_DELETEME_moved_old_env_{get_random_string(length=6).lower()}'
     with c.cd(env.path):
