@@ -905,8 +905,10 @@ class UserMatchObject(models.Model):
                 )
                 try:
                     rocket = RocketChatConnection()
-                    internal_room_id = rocket.create_private_room(room_name, self.from_user,
-                          additional_admin_users=[self.to_user], room_topic=room_topic, greeting_message=greeting_message)
+                    internal_room_id = rocket.create_private_room(
+                        room_name, self.from_user, member_users=[self.from_user, self.to_user],
+                        additional_admin_users=[self.to_user], room_topic=room_topic, greeting_message=greeting_message
+                    )
                 except RocketChatDownException:
                     logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
                     internal_room_id = None
