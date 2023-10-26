@@ -168,21 +168,6 @@ def check_for_user_match(from_user, to_user):
         match_case_from = UserMatchObject.objects.get(from_user=from_user, to_user=to_user, type=UserMatchObject.LIKE)
         match_case_to = UserMatchObject.objects.get(from_user=to_user, to_user=from_user, type=UserMatchObject.LIKE)
         
-        # Create email notifications
-        cosinnus_notifications.user_match_established.send(
-                    sender=from_user,
-                    obj=match_case_from,
-                    user=from_user,
-                    audience=[to_user,]
-                )
-
-        cosinnus_notifications.user_match_established.send(
-                    sender=to_user,
-                    obj=match_case_to,
-                    user=to_user,
-                    audience=[from_user,]
-                )
-        
         # open rocketchat
         if settings.COSINNUS_ROCKET_ENABLED:
             room_url = match_case_from.get_rocketchat_room_url()
@@ -190,6 +175,22 @@ def check_for_user_match(from_user, to_user):
                 match_case_to.rocket_chat_room_id = match_case_from.rocket_chat_room_id
                 match_case_to.rocket_chat_room_name = match_case_from.rocket_chat_room_name
                 match_case_to.save()
+
+                # Create notifications
+                cosinnus_notifications.user_match_established.send(
+                    sender=from_user,
+                    obj=match_case_from,
+                    user=from_user,
+                    audience=[to_user,]
+                )
+
+                cosinnus_notifications.user_match_established.send(
+                    sender=to_user,
+                    obj=match_case_to,
+                    user=to_user,
+                    audience=[from_user,]
+                )
+
         else:
             logger.info('RocketChat is not enabled on this portal!')
     except UserMatchObject.DoesNotExist:
