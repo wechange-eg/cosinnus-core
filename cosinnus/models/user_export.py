@@ -97,7 +97,7 @@ class CosinnusUserExportProcessorBase(object):
     def delete_export_cache(self):
         portal = CosinnusPortal.get_current().id
         cache.delete(self.EXPORT_STATE_CACHE_KEY % portal)
-        cache.delete(self.EXPORT_CSV_CACHE_KEY % portal)
+        cache.delete(self.EXPORT_DATA_ID_CACHE_KEY % portal)
         cache.delete(self.EXPORT_TIMESTAMP_CACHE_KEY % portal)
 
     def get_state(self):
