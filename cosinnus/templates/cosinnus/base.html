@@ -106,7 +106,7 @@
         {% endblock jshead %}
 
         {% block cosinnus_jshead %}
-            <script type="text/javascript">
+            <script type="text/javascript" class="v3-constants">
                 var cosinnus_base_url = "{{ COSINNUS_BASE_URL|default:'/' }}";
                 var cosinnus_active_group = {% if group %}"{{ group.slug }}"{% else %}false{% endif %};
                 var cosinnus_active_user = JSON.parse("{{ COSINNUS_USER|escapejs }}");

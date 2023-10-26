@@ -45,7 +45,8 @@ V3_CONTENT_BOTTOM_SIDEBAR_URL_SUFFIXES = [
 
 
 class MainContentView(APIView):
-    """
+    """ v3_content_main
+    
     An endpoint that returns HTML content for any legacy view on the portal.
     
     Return values:
@@ -59,6 +60,7 @@ class MainContentView(APIView):
         * `css_urls`: list of CSS file URLs to be loaded in, basically all stylesheets from the `<head>` tag of that page
         * `meta`: add all meta tags from the head
         * `styles`: a list of strings of literal inline styles to be inserted before the HTML content is inserted
+      * `script_constants`: a list of literal inline JS code that has JS global definitions that need to be loaded before the `js_urls` are inserted (but can be loaded after `js_vendor_urls` are inserted)
       * `scripts`: a list of strings of literal inline JS script code to be executed before (after?) the HTML content is inserted
       * `sub_navigation`: sidebar content, includes 3 lists: `"sub_navigation" {"top": [...], "middle": [...], "bottom": [...]}`
         * middle is list of the apps that are enabled for the current space
@@ -127,7 +129,8 @@ class MainContentView(APIView):
                             "/static/css/select2.css",
                             "/static/css/extra.css",
                         ],
-                        "scripts": "var cosinnus_base_url = \"http://localhost:8000/\";\nvar cosinnus_active_group = \"a-mein-bbb-projekt\";\n ...",
+                        "script_constants": "var cosinnus_base_url = \"http://localhost:8000/\";\nvar cosinnus_active_group = \"a-mein-bbb-projekt\";\n ...",
+                        "scripts": "Backbone.mediator.publish('init:module-full-routed', ...",
                         "meta": "<meta charset=\"utf-8\"/><meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\"/><meta content=\"width=device-width, initial-scale=1\" name=\"viewport\"/> ...",
                         "styles": ".my-contribution-badge {min-width: 50px;border-radius: 20px;color: #FFF;font-size: 12px;padding: 2px 6px; margin-left: 5px;}.my-contribution-badge.red {background-color: rgb(245, 85, 0);} ...",
                         "sub_navigation": {
@@ -219,7 +222,8 @@ class MainContentView(APIView):
             "js_vendor_urls": js_vendor_urls,
             "js_urls": js_urls,
             "css_urls": self._parse_css_urls(html),
-            "scripts": self._parse_inline_tag_contents(html, 'script'),
+            "script_constants": self._parse_inline_tag_contents(html, 'script', class_="v3-constants"),
+            "scripts": self._parse_inline_tag_contents(html, 'script', class_=False),
             "meta": self._parse_tags(html, 'meta'),
             "styles": self._parse_inline_tag_contents(html, 'style'),
             "sub_navigation": self._parse_leftnav_menu(html),  # can be None if no left navigation should be shown
@@ -422,10 +426,10 @@ class MainContentView(APIView):
         tag_str = '\n'.join([str(tag).strip() for tag in tags])
         return tag_str
     
-    def _parse_inline_tag_contents(self, html, tag_name):
+    def _parse_inline_tag_contents(self, html, tag_name, class_=False):
         """ Parses all contents of tags of a given tag name and returns it as a concatenated string """
         soup = BeautifulSoup(html, 'html.parser')
-        tags = soup.find_all(tag_name, src=False, rel=False)
+        tags = soup.find_all(tag_name, src=False, rel=False, class_=class_)
         liss = [tag.decode_contents().strip() for tag in tags]
         tag_contents = '\n'.join(liss)
         return tag_contents
