@@ -118,7 +118,7 @@ setup(
         'django-polymorphic==0.7.2',
         'django-reverse-admin==2.9.4',
         'django-sekizai==2.0.0',
-        'django-simple-captcha==0.5.14',
+        'django-simple-captcha==0.5.20',
         'django-taggit==1.5.1',
         'django-timezone-field==4.2.1',
         'django-two-factor-auth==1.14.0',
