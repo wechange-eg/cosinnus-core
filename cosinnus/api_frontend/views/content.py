@@ -21,6 +21,7 @@ from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResp
 from cosinnus.core.decorators.views import get_group_for_request
 from cosinnus.models import CosinnusPortal
 from cosinnus.models.user_dashboard import MenuItem, FONT_AWESOME_CLASS_FILTER
+from cosinnus.utils.functions import uniquify_list
 from cosinnus.utils.http import remove_url_param
 
 logger = logging.getLogger('cosinnus')
@@ -408,6 +409,7 @@ class MainContentView(APIView):
         css_urls = [link.get('href') for link in css_links]
         domain = CosinnusPortal.get_current().get_domain()
         css_urls = [(domain if not link.startswith('http') else '') + link for link in css_urls]
+        css_urls = uniquify_list(css_urls)
         return css_urls
     
     def _parse_js_urls(self, html):
@@ -416,6 +418,7 @@ class MainContentView(APIView):
         js_urls = [link.get('src') for link in js_links]
         domain = CosinnusPortal.get_current().get_domain()
         js_urls = [(domain if not link.startswith('http') else '') + link for link in js_urls]
+        js_urls = uniquify_list(js_urls)
         return js_urls
     
     def _parse_tags(self, html, tag_name):

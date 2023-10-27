@@ -13,11 +13,11 @@
 {% block og_meta_attributes %}
     {{ block.super }}
     {% if item.background_image_small_url %}
-        <meta property="og:image:width"           content="500" />
-        <meta property="og:image:height"          content="275" />
+        <meta property="og:image:width"           content="500">
+        <meta property="og:image:height"          content="275">
     {% elif item.icon_image_url %}
-        <meta property="og:image:width"           content="144" />
-        <meta property="og:image:height"          content="144" />
+        <meta property="og:image:width"           content="144">
+        <meta property="og:image:height"          content="144">
     {% endif %}
 {% endblock %}
 
