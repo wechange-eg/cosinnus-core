@@ -437,8 +437,13 @@ def _print_testdigest(request, digest_setting=None):
     if not digest_setting:
         digest_setting = UserNotificationPreference.SETTING_DAILY
     template = '/cosinnus/html_mail/digest.html'
-    digest_html = send_digest_for_current_portal(digest_setting, debug_run_for_user=request.user)
-    context = _get_digest_email_context(request.user, mark_safe(digest_html), now(), digest_setting)
+    user_id = request.GET.get('user')
+    if user_id:
+        user = get_user_model().objects.filter(id=user_id).first()
+    else:
+        user = request.user
+    digest_html = send_digest_for_current_portal(digest_setting, debug_run_for_user=user)
+    context = _get_digest_email_context(user, mark_safe(digest_html), now(), digest_setting)
     html = render_to_string(template, context=context)
     return HttpResponse(html)
 
