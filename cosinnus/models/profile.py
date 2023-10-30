@@ -455,35 +455,12 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
             username = '.'.join(filter(None, [slugify(user.first_name), slugify(user.last_name)]))
         else:
             username = str(user.id)
-
-        def is_username_free(username):
-            filter_query = {f'settings__{PROFILE_SETTING_ROCKET_CHAT_USERNAME}': username}
-            queryset = get_user_profile_model().objects.filter(**filter_query)
-            return queryset.count() == 0
-
-        i = 1
-        while True:
-            if i == 1 and is_username_free(username):
-                break
-            else:
-                new_username = f'{username}{i}'
-                if is_username_free(new_username):
-                    username = new_username
-                    break
-            i += 1
-            if i > 1000:
-                raise Exception('Name is very popular')
         return username
 
     @property
     def rocket_username(self):
-        """ Retrieves or creates rocket username """
-        username = self.settings.get(PROFILE_SETTING_ROCKET_CHAT_USERNAME, '')
-        if not username:
-            username = self.get_new_rocket_username()
-            self.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME] = username
-            get_user_profile_model().objects.filter(id=self.id).update(settings=self.settings)
-        return username
+        """ Retrieves rocket username from profile settings. """
+        return self.settings.get(PROFILE_SETTING_ROCKET_CHAT_USERNAME, '')
 
     @rocket_username.setter
     def rocket_username(self, username):
