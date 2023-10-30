@@ -273,6 +273,24 @@ class RocketChatConnection:
             result = self.ensure_user_account_sanity(user, force_group_membership_sync=force_group_membership_sync)
             self.stdout.write('User %i/%i. Success: %s \t %s' % (i, count, str(result), user.email),)
 
+    def _get_rocket_users_list(self):
+        """ Get complete Rocket.Chat user list. """
+        rocket_users = []
+        size = 100
+        offset = 0
+        while True:
+            response = self.rocket.users_list(size=size, offset=offset).json()
+            if not response.get('success'):
+                self.stderr.write(':_get_rocket_users_list:' + str(response), response)
+                # setting the users list to None to avoid working with incomplete user lists
+                rocket_users = None
+                break
+            if response['count'] == 0:
+                break
+            rocket_users.extend(response['users'])
+            offset += response['count']
+        return rocket_users
+
     def users_sync(self, skip_update=False):
         """
         Sync active users that have already been created in rocketchat.
@@ -281,27 +299,20 @@ class RocketChatConnection:
         :return:
         """
         # Get existing rocket users
+        rocket_users_list = self._get_rocket_users_list()
+        if not rocket_users_list:
+            # An error occured fetching the user list.
+            return
         rocket_users = {}
         rocket_emails_usernames = {}
-        size = 100
-        offset = 0
-        while True:
-            response = self.rocket.users_list(size=size, offset=offset).json()
-            if not response.get('success'):
-                self.stderr.write('users_sync: ' + str(response), response)
-                break
-            if response['count'] == 0:
-                break
-
-            for rocket_user in response['users']:
-                if "username" not in rocket_user:
+        for rocket_user in rocket_users_list:
+            if "username" not in rocket_user:
+                continue
+            rocket_users[rocket_user['username']] = rocket_user
+            for email in rocket_user.get('emails', []):
+                if not email.get('address'):
                     continue
-                rocket_users[rocket_user['username']] = rocket_user
-                for email in rocket_user.get('emails', []):
-                    if not email.get('address'):
-                        continue
-                    rocket_emails_usernames[email['address']] = rocket_user['username']
-            offset += response['count']
+                rocket_emails_usernames[email['address']] = rocket_user['username']
 
         # Check active users in DB
         users = filter_active_users(filter_portal_users(get_user_model().objects.all()))
