@@ -359,6 +359,7 @@ class RocketChatAPITest(APITestCase):
         group_members_count = len(group_members['members'])
         response = self.client.post(self.signup_url, self.test_user_signup_data, format="json")
         self.assertEqual(response.status_code, 200)
+        self.test_user = get_user_model().objects.last()
         expected_members_count = group_members_count + 1
         group_members = self.rocket_connection.rocket.groups_members(room_id=room_id).json()
         self.assertEqual(len(group_members['members']), expected_members_count)
