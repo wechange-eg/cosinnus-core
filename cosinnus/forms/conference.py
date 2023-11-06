@@ -53,12 +53,17 @@ class ConferenceSettingsFormMixin(object):
         
         # add each field with it's value derived from the current settings
         for field_name in settings.BBB_PRESET_USER_FORM_FIELDS:
-            self.fields[field_name] = forms.ChoiceField(
-                choices=CosinnusConferenceSettings.PRESET_FIELD_CHOICES,
-                initial=initial.get(field_name, CosinnusConferenceSettings.SETTING_INHERIT),
-                required=False
-            )
-            
+            if field_name in settings.BBB_PRESET_FORM_FIELD_PARAMS:
+                self.fields[field_name] = forms.ChoiceField(
+                    choices=CosinnusConferenceSettings.PRESET_FIELD_CHOICES,
+                    initial=initial.get(field_name, CosinnusConferenceSettings.SETTING_INHERIT),
+                    required=False
+                )
+            elif field_name in settings.BBB_PRESET_FORM_FIELD_TEXT_PARAMS:
+                self.fields[field_name] = forms.CharField(
+                    widget=forms.Textarea, initial=initial.get(field_name), required=False
+                )
+
         # gather the inherited values for each field inherited from the parent/portal
         # note: the values are retrieved for the *parent*-object, not the current object, so we get only the inherited values!
         choice_dict = dict(CosinnusConferenceSettings.PRESET_FIELD_CHOICES)
@@ -71,7 +76,10 @@ class ConferenceSettingsFormMixin(object):
         if inherited_conf is not None:
             inherited_conf.bbb_nature = self.bbb_nature
             inherited_choice_values_dict = inherited_conf.get_bbb_preset_form_field_values()
-        
+
+        # set the inherited values to be to show defaults for free text values.
+        setattr(self, 'inherited_field_values', inherited_choice_values_dict)
+
         inherited_field_value_labels = dict([
             (
                 field_name, 
@@ -91,13 +99,20 @@ class ConferenceSettingsFormMixin(object):
         preset_choices = {}
         possible_choices = dict(CosinnusConferenceSettings.PRESET_FIELD_CHOICES).keys()
         for field_name in settings.BBB_PRESET_USER_FORM_FIELDS:
-            try:
-                value = int(self.data.get(f'{formfield_prefix}{field_name}'))
-            except:
-                value = None
-            if value is not None and value in possible_choices and value != CosinnusConferenceSettings.SETTING_INHERIT:
-                preset_choices[field_name] = value
-        
+            value = self.data.get(f'{formfield_prefix}{field_name}')
+            if field_name in settings.BBB_PRESET_FORM_FIELD_PARAMS:
+                # Add presets for choice parameters.
+                try:
+                    value = int(value)
+                except:
+                    value = None
+                if value is not None and value in possible_choices and value != CosinnusConferenceSettings.SETTING_INHERIT:
+                    preset_choices[field_name] = value
+            elif field_name in settings.BBB_PRESET_FORM_FIELD_TEXT_PARAMS:
+                # Add presets for free text parameters.
+                if value:
+                    preset_choices[field_name] = value
+
         # generate the new `bbb_params` JSON from cleaned_data
         if instance is None:
             instance = CosinnusConferenceSettings()
