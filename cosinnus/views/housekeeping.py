@@ -442,6 +442,8 @@ def _print_testdigest(request, digest_setting=None):
         user = get_user_model().objects.filter(id=user_id).first()
     else:
         user = request.user
+    if not user:
+        return HttpResponse('No user supplied or user not found.')
     digest_html = send_digest_for_current_portal(digest_setting, debug_run_for_user=user)
     context = _get_digest_email_context(user, mark_safe(digest_html), now(), digest_setting)
     html = render_to_string(template, context=context)
