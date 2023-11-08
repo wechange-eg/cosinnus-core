@@ -3112,7 +3112,7 @@ msgid "helptext_52_profilelastname"
 msgstr "Wir respektieren deinen Wunsch, anonym zu bleiben – du musst deinen Nachnamen nicht angeben. Aber bedenke dass es so auch für Nutzer die dich kennen schwer ist dich zu finden, wenn sie dich z.B. zur Zusammenarbeit in einem Projekt einladen möchten"
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
-msgstr "Gib die E-Mail Adressen von den Leuten ein, die du einladen möchtest der Platform beizutreten."
+msgstr "Gib die E-Mail Adressen von den Leuten ein, die du einladen möchtest, der Plattform beizutreten."
 
 #, python-format
 msgid "We will send them an email asking them to sign up and join %(group_name)s."
@@ -4293,7 +4293,7 @@ msgid "Do you really want to decline member „%(name)s“?"
 msgstr "Möchtest du „%(name)s“'s Mitglieder-Antrag wirklich ablehnen?"
 
 msgid "Decline Member"
-msgstr "Mitglied ablehen"
+msgstr "Mitglied ablehnen"
 
 msgid "There are no new membership requests."
 msgstr "Es gibt aktuell keine neuen Mitglieder-Anträge."
