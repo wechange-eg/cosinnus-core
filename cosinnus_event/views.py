@@ -655,7 +655,7 @@ class DoodleCompleteView(RequireWriteMixin, FilterGroupMixin, UpdateView):
         event.slug = None # set slug to None so we can re-unique slugify 
         event.media_tag = new_media_tag
         event.from_date = suggestion.from_date
-        event.to_date = suggestion.to_date
+        event.to_date = suggestion.from_date + timedelta(hours=1)
         event.state = Event.STATE_SCHEDULED
         event.save(created_from_doodle=True)
         
