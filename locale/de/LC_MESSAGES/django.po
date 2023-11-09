@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-24 10:30+0200\n"
+"POT-Creation-Date: 2023-11-09 16:21+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3647,6 +3647,13 @@ msgstr "Kamera beim Betreten aktivieren"
 
 msgid "Allow recording"
 msgstr "Aufnahme erlauben"
+
+msgid "Welcome Message"
+msgstr "Begrüßungsnachricht"
+
+msgid "Define a custom welcome message."
+msgstr "Benutzerdefinierte Begrüßungsnachricht."
+
 
 msgid "Conference Statistics"
 msgstr "Tagungs-Statistiken"
@@ -13554,9 +13561,6 @@ msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte
 
 #~ msgid "Restricted"
 #~ msgstr "Eingeschränkt"
-
-#~ msgid "the rooms welcome message"
-#~ msgstr "Die Begrüßungsnachricht der Räume"
 
 #~ msgid "Whether the microphone is active when entering the BBB room"
 #~ msgstr "Ob das Mikrofon aktiviert ist, wenn man den BBB-Raum betritt"
