@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from builtins import str
 import logging
 import datetime
+import sentry_sdk
 from cosinnus.utils.context_processors import cosinnus
 
 from django.core.exceptions import ImproperlyConfigured
@@ -402,6 +403,16 @@ class NotificationsThread(Thread):
     # list of user ids that have already gotten alerts for this session. not cleared during sessions
     already_alerted_user_ids = []
 
+    def _debug_threading(self, state):
+        """ Log thread state in sentry. """
+        with sentry_sdk.push_scope() as scope:
+            scope.set_tag('notification-object', f'{self.obj._meta.model_name}-{self.obj.id}')
+            scope.set_extra('sender', self.sender)
+            scope.set_extra('object', self.obj)
+            scope.set_extra('notification_id', self.notification_id)
+            scope.set_extra('audience_len', len(self.audience))
+            logger.error(f'NotificationThread {state}')
+
     def __init__(self, sender, user, obj, audience, notification_id, options, first_init=True):
         if first_init:
             super(NotificationsThread, self).__init__()
@@ -430,6 +441,8 @@ class NotificationsThread(Thread):
         if len(self.next_session_args) > 0:
             session_frame = self.next_session_args.pop(0)
             self.__init__(*session_frame)
+            # log current thread for debugging
+            self._debug_threading('added session frame')
             self.inner_run()
         
     def is_notification_active(self, notification_id, user, group, alternate_settings_compare=[]):
@@ -718,6 +731,8 @@ class NotificationsThread(Thread):
                           reason_key=reason_key)
         
     def run(self):
+        # log current thread for debugging
+        self._debug_threading('started')
         self.inner_run()
         
     def inner_run(self):
@@ -787,7 +802,9 @@ class NotificationsThread(Thread):
         
         if len(self.next_session_args) > 0:
             self._apply_next_session_frame_and_run()
-          
+        else:
+            # log current thread for debugging
+            self._debug_threading('ended')
         return
 
 
