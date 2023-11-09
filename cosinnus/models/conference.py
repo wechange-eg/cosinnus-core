@@ -273,6 +273,7 @@ class CosinnusConferenceSettings(models.Model):
         
         self.is_premium_ever = self.is_premium_ever or inherit_target.is_premium_ever
         self.is_premium = self.is_premium or inherit_target.is_premium
+        self.bbb_presentation_file = self.bbb_presentation_file or inherit_target.bbb_presentation_file
         return self
     
     def get_raw_bbb_params(self, no_defaults=False):
