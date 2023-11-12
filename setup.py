@@ -109,7 +109,7 @@ setup(
         'html2text==2016.9.19',
         'numpy==1.24.2',
         'oauthlib==3.0.1',
-        'paramiko==2.4.2',
+        'paramiko==2.10.1',
         'pycountry==20.7.3',
         'redis==2.10.6',
         'requests==2.28.2',
