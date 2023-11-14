@@ -1,79 +1,89 @@
 {% load i18n  cosinnus_tags  %}
 
-<p class="transparent">
-	{% trans "BBB-Meetings can be joined directly by guests, both registered and unregistered users. The guest link will be shown to all moderators in the greeting message of the BBB meeting." %}<br>
-	<br>
-    {% trans "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!" %}
-</p>
+<div class="cosinnus-field-group-inset">
 
-{% for field_name in SETTINGS.BBB_PRESET_USER_FORM_FIELDS %}
-    {% comment %} 
-        If the field is premium only:
-        - show it as active if the event belongs to a premium group/conference
-        - show it greyed out if the portal has premium conferences enabled (as teaser)
-        - hide it completely if the group isn't premium and the portal does not have premium conferences enabled
-     {% endcomment %}
-    {% if field_name not in SETTINGS.BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY or SETTINGS.COSINNUS_PREMIUM_CONFERENCES_ENABLED or form.event_is_premium %}
-        
-        {% if field_name in SETTINGS.BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY %}
-            {% captureas premium_label %}<i>({% trans "Premium only" %})</i>{% endcaptureas %}
-        {% endif %}
-        
-        {% comment %} Add greyout-disabler for unchangeable premium fields (even if fudged, the value wouldn't be changed by the form) {% endcomment %}
-        <div {% if field_name in SETTINGS.BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY and SETTINGS.COSINNUS_PREMIUM_CONFERENCES_ENABLED and not form.event_is_premium %}class="disabled-field-area"{% endif %}>
-        
-		    {% if field_name == 'mic_starts_on' and form.mic_starts_on %}
-		        {% captureas mic_starts_on_label %}
-		            {% trans "Turn on microphone on entering" %}
-		            {% if premium_label %}{{ premium_label }}{% endif %}
-		            ({% trans "Default" %}: <b>{{ form.inherited_field_value_labels.mic_starts_on }})</b>
-		        {% endcaptureas %}
-		        {% include 'cosinnus/fields/condensed_radio_field.html' with field=form.mic_starts_on label=mic_starts_on_label %}
-		    {% endif %}
-		    
-		    {% if field_name == 'cam_starts_on' and form.cam_starts_on %}
-		        {% captureas cam_starts_on_label %}
-		            {% trans "Turn on camera on entering" %}
-                    {% if premium_label %}{{ premium_label }}{% endif %}
-		            ({% trans "Default" %}: <b>{{ form.inherited_field_value_labels.cam_starts_on }})</b>
-		        {% endcaptureas %}
-		        {% include 'cosinnus/fields/condensed_radio_field.html' with field=form.cam_starts_on label=cam_starts_on_label %}
-		    {% endif %}
-		    
-		    {% if field_name == 'record_meeting' and form.record_meeting %}
-		        {% captureas record_meeting_label %}
-		            {% trans "Allow recording" %}
-                    {% if premium_label %}{{ premium_label }}{% endif %}
-		            ({% trans "Default" %}: <b>{{ form.inherited_field_value_labels.record_meeting }})</b>
-					<br/>
-					{% if 'record_meeting' in SETTINGS.BBB_PRESET_USER_FORM_FIELDS and 'record_meeting' in SETTINGS.BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY %}
-						{{ group_model_class.get_trans.MESSAGE_RECORDINGS_ONLY_FOR_PREMIUM }}
-					{% endif %}
-		        {% endcaptureas %}
-		        {% include 'cosinnus/fields/condensed_radio_field.html' with field=form.record_meeting label=record_meeting_label %}
-		        
-		        {% comment %} 
-			        This <hr> is a workaround-fix because this field with a longer
-			        label with breaklines will simply not let itself be clearfixed 
-			        and always overlaps the next area.
-		        {% endcomment %}
-		        <hr class="invisible"></hr>
-		    {% endif %}
+    <p class="transparent">
+        {% trans "BBB-Meetings can be joined directly by guests, both registered and unregistered users. The guest link will be shown to all moderators in the greeting message of the BBB meeting." %}<br>
+        <br>
+        {% trans "Note: Changing some of these settings may require to restart a meeting that is already running before the changes takes effect!" %}
+    </p>
 
-            {% if field_name == 'welcome_message' and form.welcome_message %}
-                {% trans "Welcome Message" as welcome_message_label %}
-                {% trans "Define a custom welcome message." as welcome_message_placeholder %}
-                {% captureas welcome_message_legend %}
-                    {% trans "Default" %}:
-                    {% if form.inherited_field_values.welcome_message %}
-                        <br>"{{ form.inherited_field_values.welcome_message|linebreaksbr }}"
-                    {% else %}
-                        "Welcome to <i>Event-Name</i>!"
-                    {% endif %}
-                {% endcaptureas %}
-                {% include 'cosinnus/fields/default_field.html' with field=form.welcome_message label=welcome_message_label placeholder=welcome_message_placeholder legend=welcome_message_legend large_field=True %}
+    {% for field_name in SETTINGS.BBB_PRESET_USER_FORM_FIELDS %}
+        {% comment %}
+            If the field is premium only:
+            - show it as active if the event belongs to a premium group/conference
+            - show it greyed out if the portal has premium conferences enabled (as teaser)
+            - hide it completely if the group isn't premium and the portal does not have premium conferences enabled
+         {% endcomment %}
+        {% if field_name not in SETTINGS.BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY or SETTINGS.COSINNUS_PREMIUM_CONFERENCES_ENABLED or form.event_is_premium %}
+
+            {% if field_name in SETTINGS.BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY %}
+                {% captureas premium_label %}<i>({% trans "Premium only" %})</i>{% endcaptureas %}
             {% endif %}
 
-        </div>
-	{% endif %}
-{% endfor %}
+            {% comment %} Add greyout-disabler for unchangeable premium fields (even if fudged, the value wouldn't be changed by the form) {% endcomment %}
+            <div {% if field_name in SETTINGS.BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY and SETTINGS.COSINNUS_PREMIUM_CONFERENCES_ENABLED and not form.event_is_premium %}class="disabled-field-area"{% endif %}>
+
+                {% if field_name == 'mic_starts_on' and form.mic_starts_on %}
+                    {% captureas mic_starts_on_label %}
+                        {% trans "Turn on microphone on entering" %}
+                        {% if premium_label %}{{ premium_label }}{% endif %}
+                        ({% trans "Default" %}: <b>{{ form.inherited_field_value_labels.mic_starts_on }})</b>
+                    {% endcaptureas %}
+                    {% include 'cosinnus/fields/condensed_radio_field.html' with field=form.mic_starts_on label=mic_starts_on_label %}
+                {% endif %}
+
+                {% if field_name == 'cam_starts_on' and form.cam_starts_on %}
+                    {% captureas cam_starts_on_label %}
+                        {% trans "Turn on camera on entering" %}
+                        {% if premium_label %}{{ premium_label }}{% endif %}
+                        ({% trans "Default" %}: <b>{{ form.inherited_field_value_labels.cam_starts_on }})</b>
+                    {% endcaptureas %}
+                    {% include 'cosinnus/fields/condensed_radio_field.html' with field=form.cam_starts_on label=cam_starts_on_label %}
+                {% endif %}
+
+                {% if field_name == 'record_meeting' and form.record_meeting %}
+                    {% captureas record_meeting_label %}
+                        {% trans "Allow recording" %}
+                        {% if premium_label %}{{ premium_label }}{% endif %}
+                        ({% trans "Default" %}: <b>{{ form.inherited_field_value_labels.record_meeting }})</b>
+                        <br/>
+                        {% if 'record_meeting' in SETTINGS.BBB_PRESET_USER_FORM_FIELDS and 'record_meeting' in SETTINGS.BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY %}
+                            {% if group_model_class %}
+                                {{ group_model_class.get_trans.MESSAGE_RECORDINGS_ONLY_FOR_PREMIUM }}
+                            {% elif group %}
+                                {{ group.get_trans.MESSAGE_RECORDINGS_ONLY_FOR_PREMIUM }}
+                            {% endif %}
+                        {% endif %}
+                    {% endcaptureas %}
+                    {% include 'cosinnus/fields/condensed_radio_field.html' with field=form.record_meeting label=record_meeting_label %}
+
+                    {% comment %}
+                        This <hr> is a workaround-fix for the premium-only message because this field with a longer
+                        label with breaklines will simply not let itself be clearfixed
+                        and always overlaps the next area.
+                    {% endcomment %}
+                    {% if 'record_meeting' in SETTINGS.BBB_PRESET_USER_FORM_FIELDS and 'record_meeting' in SETTINGS.BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY %}
+                        <hr class="invisible" />
+                    {% endif %}
+                {% endif %}
+
+                {% if field_name == 'welcome_message' and form.welcome_message %}
+                    {% trans "Welcome Message" as welcome_message_label %}
+                    {% trans "Define a custom welcome message." as welcome_message_placeholder %}
+                    {% captureas welcome_message_legend %}
+                        {% trans "Default" %}:
+                        {% if form.inherited_field_values.welcome_message %}
+                            <br>"{{ form.inherited_field_values.welcome_message|linebreaksbr }}"
+                        {% else %}
+                            "Welcome to <i>Event-Name</i>!"
+                        {% endif %}
+                    {% endcaptureas %}
+                    {% include 'cosinnus/fields/default_field.html' with field=form.welcome_message label=welcome_message_label placeholder=welcome_message_placeholder legend=welcome_message_legend large_field=True %}
+                {% endif %}
+
+            </div>
+        {% endif %}
+    {% endfor %}
+
+</div>
