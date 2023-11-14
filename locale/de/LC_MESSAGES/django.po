@@ -3654,7 +3654,6 @@ msgstr "Begrüßungsnachricht"
 msgid "Define a custom welcome message."
 msgstr "Benutzerdefinierte Begrüßungsnachricht."
 
-
 msgid "Conference Statistics"
 msgstr "Tagungs-Statistiken"
 
@@ -7656,7 +7655,7 @@ msgid "(This widget has no additional options)"
 msgstr "(Dieses Widget hat keine weiteren Konfigurationsoptionen)"
 
 msgid "All members"
-msgstr "Alle anzeigen"
+msgstr "Alle Mitglieder"
 
 msgid "There are no projects in this group yet."
 msgstr "Es gibt keine Projekte in dieser Gruppe."
