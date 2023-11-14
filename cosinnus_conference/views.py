@@ -474,6 +474,7 @@ class CosinnusConferenceRoomFormMixin(object):
         kwargs = super(CosinnusConferenceRoomFormMixin, self).get_form_kwargs()
         kwargs['request'] = self.request
         kwargs['group'] = self.group
+        kwargs['bbb_settings_parent'] = self.group
         return kwargs
     
     def get_context_data(self, **kwargs):

@@ -59,7 +59,21 @@
 		        {% endcomment %}
 		        <hr class="invisible"></hr>
 		    {% endif %}
-	    
-	    </div>
+
+            {% if field_name == 'welcome_message' and form.welcome_message %}
+                {% trans "Welcome Message" as welcome_message_label %}
+                {% trans "Define a custom welcome message." as welcome_message_placeholder %}
+                {% captureas welcome_message_legend %}
+                    {% trans "Default" %}:
+                    {% if form.inherited_field_values.welcome_message %}
+                        <br>"{{ form.inherited_field_values.welcome_message|linebreaksbr }}"
+                    {% else %}
+                        "Welcome to <i>Event-Name</i>!"
+                    {% endif %}
+                {% endcaptureas %}
+                {% include 'cosinnus/fields/default_field.html' with field=form.welcome_message label=welcome_message_label placeholder=welcome_message_placeholder legend=welcome_message_legend large_field=True %}
+            {% endif %}
+
+        </div>
 	{% endif %}
 {% endfor %}

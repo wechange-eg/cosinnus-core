@@ -1488,7 +1488,13 @@ class CosinnusDefaultSettings(AppConf):
             },
         },
     }
-    
+
+    # The configuration of BBB join/create text params for the field presets in `CosinnusConferenceSettings`.
+    # Format: <form-parameter-name>: ('create'/'join', <bbb-param>)
+    BBB_PRESET_FORM_FIELD_TEXT_PARAMS = {
+        'welcome_message': ('create', 'welcome'),
+    }
+
     # the default baseline portal values for the BBB call params
     # these are also used to generate the portal preset defaults for inheritance
     # Define nature-specific params by adding a '<call>__<nature>' key to the dict!
@@ -1524,6 +1530,7 @@ class CosinnusDefaultSettings(AppConf):
     BBB_PRESET_USER_FORM_FIELDS = [
         'mic_starts_on',
         'cam_starts_on',
+        'welcome_message',
     ]
     # a complete list of all choices that could be made for BBB_PRESET_USER_FORM_FIELDS
     #__all_choices__BBB_PRESET_USER_FORM_FIELDS = [
