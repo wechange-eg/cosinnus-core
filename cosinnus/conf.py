@@ -1073,8 +1073,8 @@ class CosinnusConf(AppConf):
         'ALLOW_PUBLIC_UPLOADS': 'no', # "yes" or "no"
         'ALLOW_AUTOCOMPLETE_USERS': 'no', # "yes" or "no"
         'SEND_EMAIL_TO_NEW_USERS': 'no', # "yes" or "no"
-        'ENABLE_APP_IDS': ["groupfolders", "onlyoffice", "sociallogin", "wechangecsp"], # list of string app ids
-        'DISABLE_APP_IDS': ["theming", "photos", "activity", "systemtags", "dashboard"], # list of string app ids
+        'ENABLE_APP_IDS': ["groupfolders", "onlyoffice", "sociallogin", "wechangecsp", "cspworkaround", "firstrunwizard", "fulltextsearch_admin-api"], # list of string app ids
+        'DISABLE_APP_IDS': ["photos", "activity", "systemtags", "dashboard"], # list of string app ids
     }
     
     # if set to a hex color string,
