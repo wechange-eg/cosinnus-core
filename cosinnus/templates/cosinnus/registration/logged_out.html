@@ -16,13 +16,13 @@
     <div class="content-box white-content">
         
         
-        <div class="frame-logged-out" {% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED %}style="display: none;"{% endif %}>
+        <div class="frame-logged-out" {% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED or SETTINGS.COSINNUS_CLOUD_ENABLED %}style="display: none;"{% endif %}>
             <h2>{% trans "Logged out" %}</h2>
             <p>{% trans "You have been logged out. See you again soon!" %}</p>
         </div>
         
         {% comment %} Additional logout logic via JS for services. {% endcomment %}
-        {% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED %}
+        {% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED or SETTINGS.COSINNUS_CLOUD_ENABLED %}
             <div class="frame-logout-error" style="display: none;">
 	            <h2>{% trans "Error while logging out" %}</h2>
 	            <p>{% trans "Your logout may be incomplete in parts of the site due to a server error. If this is not a device you trust, please delete your cookies for this site!" %}</p>
@@ -34,10 +34,8 @@
             
             <script type="text/javascript">
                 {% comment %}Logs user out of the v3 frontend by calling the NextAuth.js API signout endpoint (see https://next-auth.js.org/getting-started/rest-api#post-apiauthsignout){% endcomment %}
-                
-                var url_csrf = '/api/frontend/auth/csrf?v=3';
-                var url_logout = '/api/frontend/auth/signout?v=3';
-                
+
+                var global_logout_success = true; {% comment %} starts out true, if any non-successes happen, turns false {% endcomment %}
                 function logoutSuccess(success) {
                     $('.frame-logout-progress').hide();
                     if (success) {
@@ -47,9 +45,9 @@
                     }
                 }
                 
-                function _callFrontendLogout(csrfToken) {
+                function _callFrontendLogout(csrfToken, logout_url) {
                     /* Does the logout using the csrftoken. */
-                    $.ajax(url_logout, {
+                    $.ajax(logout_url, {
                         type: 'POST',
                         data: {
                             'csrfToken': csrfToken
@@ -57,35 +55,46 @@
                         success: function (response, textStatus, xhr) {
                             console.log('# # Did logout');
                             console.log(response);
-                            logoutSuccess(true);
+                            logoutSuccess(global_logout_success);
                         },
                         error: function (xhr, textStatus) {
                             console.log('# # Error while logging out');
                             console.log(xhr);
                             console.log(textStatus);
-                            logoutSuccess(false);
+                            global_logout_success = false;
+                            logoutSuccess(global_logout_success);
                         }
                     });
                 }
-                function doFrontendLogout() {
+                function doFrontendLogout(csrf_url, logout_url) {
                     /* Get CSRFtoken and POST to logout endpoint. */
-                    $.ajax(url_csrf, {
+                    $.ajax(csrf_url, {
                         type: 'GET',
                         success: function (response, textStatus, xhr) {
                             console.log('# # Fetched csrf');
                             console.log(response);
-                            _callFrontendLogout(response['csrfToken']);
+                            _callFrontendLogout(response['csrfToken'], logout_url);
                         },
                         error: function (xhr, textStatus) {
                             console.log('# # Error while fetching csrf');
                             console.log(xhr);
                             console.log(textStatus);
-                            logoutSuccess(false);
+                            global_logout_success = false;
+                            logoutSuccess(global_logout_success);
                         }
                     });
                 }
-	            
-                doFrontendLogout();
+
+                {% if SETTINGS.COSINNUS_CLOUD_ENABLED %}
+                    var url_csrf_nextcloud = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}/apps/cspworkaround/csrftoken';
+                    var url_logout_nextcloud = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}/logout';
+                    doFrontendLogout(url_csrf_nextcloud, url_logout_nextcloud);
+                {% endif %}
+                {% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED %}
+                    var url_csrf_v3_frontend = '/api/frontend/auth/csrf?v=3';
+                    var url_logout_v3_frontend = '/api/frontend/auth/signout?v=3';
+                    doFrontendLogout(url_csrf_v3_frontend, url_logout_v3_frontend);
+                {% endif %}
             </script>
 		{% endif %}
         
