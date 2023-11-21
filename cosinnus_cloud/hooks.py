@@ -369,7 +369,7 @@ if settings.COSINNUS_CLOUD_ENABLED:
                     if result is True:
                         # Save the new group folder name. Not calling save() as it would re-trigger signals and also
                         # overwrite possible changes to group type during group type conversion.
-                        type(group).objects.filter(pk=group.pk).update(nextcloud_groupfolder_name=new_nextcloud_groupfolder_name)
+                        get_cosinnus_group_model().objects.filter(pk=group.pk).update(nextcloud_groupfolder_name=new_nextcloud_groupfolder_name)
                         return
                 group.refresh_from_db()
             
