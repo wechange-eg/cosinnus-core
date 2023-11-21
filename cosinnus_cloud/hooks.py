@@ -364,11 +364,13 @@ if settings.COSINNUS_CLOUD_ENABLED:
                 # rename the folder if the name would be a different one
                 if new_nextcloud_groupfolder_name != old_nextcloud_groupfolder_name:
                     result = rename_group_and_group_folder(group.nextcloud_groupfolder_id, new_nextcloud_groupfolder_name)
-                    # if the rename was successful, save the group. 
+                    # if the rename was successful, save the new group folder name.
                     # otherwise, reload it to discard the newly generated folder name on the object
                     if result is True:
-                        group.save()
-                        return 
+                        # Save the new group folder name. Not calling save() as it would re-trigger signals and also
+                        # overwrite possible changes to group type during group type conversion.
+                        type(group).objects.filter(pk=group.pk).update(nextcloud_groupfolder_name=new_nextcloud_groupfolder_name)
+                        return
                 group.refresh_from_db()
             
     post_save.connect(rename_nextcloud_groupfolder_on_group_rename, sender=get_cosinnus_group_model())
