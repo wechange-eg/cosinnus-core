@@ -1,3 +1,4 @@
+import json
 import logging
 import mimetypes
 import os
@@ -274,7 +275,10 @@ class RocketChatConnection:
             self.stdout.write('User %i/%i. Success: %s \t %s' % (i, count, str(result), user.email),)
 
     def _get_rocket_users_list(self):
-        """ Get complete Rocket.Chat user list. """
+        """
+        Get complete Rocket.Chat user list.
+        Note: Do not use in blocking calls as this paginated call is slow for many users.
+        """
         rocket_users = []
         size = 100
         offset = 0
@@ -445,10 +449,15 @@ class RocketChatConnection:
 
     def _get_unique_username(self, profile):
         """ Generates a unique username considering existing Rocket.Chat users. """
-        rocket_users = self._get_rocket_users_list()
-        if rocket_users is None:
-            # an error occurred when fetching the users.
-            return None
+        username = profile.get_new_rocket_username()
+
+        # get existing rocket users matching the username.
+        filter_query = json.dumps({"username": {"$regex": username}})
+        response = self.rocket.users_list(query=filter_query).json()
+        if not response.get('success'):
+            logger.error('RocketChat: _get_unique_username' + response.get('errorType', '<No Error Type>'), extra={'response': response})
+            return
+        rocket_users = response['users']
 
         # ignoring users own username if already set.
         if profile.settings.get(PROFILE_SETTING_ROCKET_CHAT_ID):
@@ -458,7 +467,6 @@ class RocketChatConnection:
         rocket_usernames = [user.get('username') for user in rocket_users if 'username' in user]
 
         # generate unique username
-        username = profile.get_new_rocket_username()
         unique_username = username
         i = 1
         while True:
