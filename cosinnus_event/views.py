@@ -253,6 +253,11 @@ class EntryFormMixin(RequireWriteMixin, FilterGroupMixin, GroupFormKwargsMixin,
                     self.success_url_list = 'cosinnus:event:doodle-list-archived'
         return super(EntryFormMixin, self).dispatch(request, *args, **kwargs)
 
+    def get_form_kwargs(self):
+        kwargs = super(EntryFormMixin, self).get_form_kwargs()
+        kwargs['bbb_settings_parent'] = self.group
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super(EntryFormMixin, self).get_context_data(**kwargs)
         tags = Event.objects.tags()
@@ -655,7 +660,7 @@ class DoodleCompleteView(RequireWriteMixin, FilterGroupMixin, UpdateView):
         event.slug = None # set slug to None so we can re-unique slugify 
         event.media_tag = new_media_tag
         event.from_date = suggestion.from_date
-        event.to_date = suggestion.to_date
+        event.to_date = suggestion.from_date + timedelta(hours=1)
         event.state = Event.STATE_SCHEDULED
         event.save(created_from_doodle=True)
         
@@ -1213,14 +1218,13 @@ class ConferenceEventFormMixin(RequireWriteMixin, FilterGroupMixin, FilterConfer
             raise ImproperlyConfigured('ConferenceEvent Form type not found for conference room type "%s"' % self.room.type)
         return klass
     
-    """
-    Disabled until we can figure out how to keep the kwargs getting passed to the MultiModelForm first
     def get_form_kwargs(self):
         form_kwargs = super(ConferenceEventFormMixin, self).get_form_kwargs()
-        form_kwargs['room'] = self.room
+        # Disabled until we can figure out how to keep the kwargs getting passed to the MultiModelForm first
+        #form_kwargs['room'] = self.room
+        form_kwargs['bbb_settings_parent'] = self.room
         return form_kwargs
-    """
-    
+
     def get_context_data(self, **kwargs):
         context = super(ConferenceEventFormMixin, self).get_context_data(**kwargs)
         tags = ConferenceEvent.objects.tags()

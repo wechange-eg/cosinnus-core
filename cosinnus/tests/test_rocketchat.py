@@ -168,9 +168,9 @@ class RocketChatUserTest(RocketChatTestUserMixin, RocketChatBaseTest):
 
     def test_create_user_with_same_name(self):
         """ Test that if a new user is created with the same name as an existing user a new RC user is created. """
-        original_test_data = self.test_user_data
-        self.test_user_data.update({'username': 2, 'email': 'rockettest2@example.com'})
-        test_user2 = User.objects.create(**self.test_user_data)
+        test_user2_data = self.test_user_data.copy()
+        test_user2_data.update({'username': 2, 'email': 'rockettest2@example.com'})
+        test_user2 = User.objects.create(**test_user2_data)
         profile1 = self.test_user.cosinnus_profile
         profile2 = test_user2.cosinnus_profile
         rocket_connection_user = self.rocket_connection._get_user_connection(test_user2)
@@ -179,8 +179,20 @@ class RocketChatUserTest(RocketChatTestUserMixin, RocketChatBaseTest):
         self.assertEqual(user_info['username'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME])
         self.assertNotEqual(user_info['_id'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
         self.assertNotEqual(user_info['username'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
+        expected_unique_username = f'{self.test_user_data["first_name"]}.{self.test_user_data["last_name"]}1'.lower()
+        self.assertEqual(user_info['username'], expected_unique_username)
         self.rocket_connection.users_delete(test_user2)
-        self.test_user_data = original_test_data
+
+    def test_user_update_with_same_name(self):
+        """ Test that updating a user does not change the RC username if a user with the same name also exists. """
+        original_username = self.test_user.cosinnus_profile.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME]
+        test_user2_data = self.test_user_data.copy()
+        test_user2_data.update({'username': 2, 'email': 'rockettest2@example.com'})
+        test_user2 = User.objects.create(**test_user2_data)
+        self.test_user.email = 'changed@exmaple.com'
+        self.test_user.save()
+        self.assertEqual(self.test_user.cosinnus_profile.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME], original_username)
+        self.rocket_connection.users_delete(test_user2)
 
 
 class RocketChatGroupTest(RocketChatTestUserMixin, RocketChatBaseTest):
@@ -359,6 +371,7 @@ class RocketChatAPITest(APITestCase):
         group_members_count = len(group_members['members'])
         response = self.client.post(self.signup_url, self.test_user_signup_data, format="json")
         self.assertEqual(response.status_code, 200)
+        self.test_user = get_user_model().objects.last()
         expected_members_count = group_members_count + 1
         group_members = self.rocket_connection.rocket.groups_members(room_id=room_id).json()
         self.assertEqual(len(group_members['members']), expected_members_count)

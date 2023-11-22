@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-24 10:30+0200\n"
+"POT-Creation-Date: 2023-11-09 16:21+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3112,7 +3112,7 @@ msgid "helptext_52_profilelastname"
 msgstr "Wir respektieren deinen Wunsch, anonym zu bleiben – du musst deinen Nachnamen nicht angeben. Aber bedenke dass es so auch für Nutzer die dich kennen schwer ist dich zu finden, wenn sie dich z.B. zur Zusammenarbeit in einem Projekt einladen möchten"
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
-msgstr "Gib die E-Mail Adressen von den Leuten ein, die du einladen möchtest der Platform beizutreten."
+msgstr "Gib die E-Mail Adressen von den Leuten ein, die du einladen möchtest, der Plattform beizutreten."
 
 #, python-format
 msgid "We will send them an email asking them to sign up and join %(group_name)s."
@@ -3647,6 +3647,12 @@ msgstr "Kamera beim Betreten aktivieren"
 
 msgid "Allow recording"
 msgstr "Aufnahme erlauben"
+
+msgid "Welcome Message"
+msgstr "Begrüßungsnachricht"
+
+msgid "Define a custom welcome message."
+msgstr "Benutzerdefinierte Begrüßungsnachricht."
 
 msgid "Conference Statistics"
 msgstr "Tagungs-Statistiken"
@@ -4293,7 +4299,7 @@ msgid "Do you really want to decline member „%(name)s“?"
 msgstr "Möchtest du „%(name)s“'s Mitglieder-Antrag wirklich ablehnen?"
 
 msgid "Decline Member"
-msgstr "Mitglied ablehen"
+msgstr "Mitglied ablehnen"
 
 msgid "There are no new membership requests."
 msgstr "Es gibt aktuell keine neuen Mitglieder-Anträge."
@@ -7649,7 +7655,7 @@ msgid "(This widget has no additional options)"
 msgstr "(Dieses Widget hat keine weiteren Konfigurationsoptionen)"
 
 msgid "All members"
-msgstr "Alle anzeigen"
+msgstr "Alle Mitglieder"
 
 msgid "There are no projects in this group yet."
 msgstr "Es gibt keine Projekte in dieser Gruppe."
@@ -13554,9 +13560,6 @@ msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte
 
 #~ msgid "Restricted"
 #~ msgstr "Eingeschränkt"
-
-#~ msgid "the rooms welcome message"
-#~ msgstr "Die Begrüßungsnachricht der Räume"
 
 #~ msgid "Whether the microphone is active when entering the BBB room"
 #~ msgstr "Ob das Mikrofon aktiviert ist, wenn man den BBB-Raum betritt"

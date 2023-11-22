@@ -273,6 +273,7 @@ class CosinnusConferenceSettings(models.Model):
         
         self.is_premium_ever = self.is_premium_ever or inherit_target.is_premium_ever
         self.is_premium = self.is_premium or inherit_target.is_premium
+        self.bbb_presentation_file = self.bbb_presentation_file or inherit_target.bbb_presentation_file
         return self
     
     def get_raw_bbb_params(self, no_defaults=False):
@@ -324,33 +325,38 @@ class CosinnusConferenceSettings(models.Model):
             @return: a dict of {<field_name>: <choice_value>, ...} """
         value_choices_dict = {}  
         bbb_params = self.get_finalized_bbb_params(no_defaults=no_defaults)
-        
+
         for field_name in settings.BBB_PRESET_USER_FORM_FIELDS:
-            field_choice_dict = settings.BBB_PRESET_FORM_FIELD_PARAMS.get(field_name)
-            # match the first preset_value that exists and isn't empty 
-            # and fulfills all conditions in the current settings object
-            matched_value = self.SETTING_INHERIT
-            for preset_value, preset_call_config in field_choice_dict.items():
-                # match first occurence in this loop and break if found
-                if preset_call_config:
-                    matching = True
-                    for api_call_name, api_call_params in preset_call_config.items():
-                        # check if all params that occur in `BBB_PRESET_FORM_FIELD_PARAMS`
-                        # occur in each corresponding value -> call -> param-list in the current settings object
-                        if not api_call_params or not all([
-                                    bbb_params.get(api_call_name, {}).get(param_key, None) == param_val 
-                                    for param_key, param_val in api_call_params.items()
-                                ]):
-                            matching = False
+            if field_name in settings.BBB_PRESET_FORM_FIELD_PARAMS:
+                field_choice_dict = settings.BBB_PRESET_FORM_FIELD_PARAMS.get(field_name)
+                # match the first preset_value that exists and isn't empty
+                # and fulfills all conditions in the current settings object
+                matched_value = self.SETTING_INHERIT
+                for preset_value, preset_call_config in field_choice_dict.items():
+                    # match first occurence in this loop and break if found
+                    if preset_call_config:
+                        matching = True
+                        for api_call_name, api_call_params in preset_call_config.items():
+                            # check if all params that occur in `BBB_PRESET_FORM_FIELD_PARAMS`
+                            # occur in each corresponding value -> call -> param-list in the current settings object
+                            if not api_call_params or not all([
+                                        bbb_params.get(api_call_name, {}).get(param_key, None) == param_val
+                                        for param_key, param_val in api_call_params.items()
+                                    ]):
+                                matching = False
+                                break
+                        if matching:
+                            matched_value = preset_value
                             break
-                    if matching:
-                        matched_value = preset_value
-                        break
-            # if the settings object has no set value, the portal default value is used
-            if matched_value == self.SETTING_INHERIT and not no_defaults:
-                logger.warning(f'BBB option parameter building: A portal default value for "{field_name}" was not set in `BBB_PARAM_PORTAL_DEFAULTS`! Assuming "no" for this value.')
-                matched_value = self.SETTING_NO
-            value_choices_dict[field_name] = matched_value
+                # if the settings object has no set value, the portal default value is used
+                if matched_value == self.SETTING_INHERIT and not no_defaults:
+                    logger.warning(f'BBB option parameter building: A portal default value for "{field_name}" was not set in `BBB_PARAM_PORTAL_DEFAULTS`! Assuming "no" for this value.')
+                    matched_value = self.SETTING_NO
+                value_choices_dict[field_name] = matched_value
+            elif field_name in settings.BBB_PRESET_FORM_FIELD_TEXT_PARAMS:
+                # get the value of text parameters.
+                api_call_name, param_key = settings.BBB_PRESET_FORM_FIELD_TEXT_PARAMS[field_name]
+                value_choices_dict[field_name] = bbb_params.get(api_call_name, {}).get(param_key)
         return value_choices_dict
     
     def set_bbb_preset_form_field_values(self, preset_choices_dict):
@@ -375,7 +381,15 @@ class CosinnusConferenceSettings(models.Model):
                         call_key = f'{call_key}__{self.bbb_nature}'
                     update_dict[call_key] = call_param_dict
                 bbb_params.update(update_dict)
-        
+            elif field_name in settings.BBB_PRESET_FORM_FIELD_TEXT_PARAMS and choice_value is not None:
+                # Add text parameter.
+                call_key, call_param = settings.BBB_PRESET_FORM_FIELD_TEXT_PARAMS[field_name]
+                if self.bbb_nature:
+                    call_key = f'{call_key}__{self.bbb_nature}'
+                if call_key not in bbb_params:
+                    bbb_params[call_key] = {}
+                bbb_params[call_key].update({call_param: choice_value})
+
         # Step 2: we carry over any "unknown" values, that aren't defined in presets,
         #     so we don't clear the field when no preset is set, but an admin has
         #     manually entered new parameters
@@ -386,14 +400,20 @@ class CosinnusConferenceSettings(models.Model):
             # if the config-object chain isn't premium, so don't collect them for the known names
             if preset_field_name in settings.BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY and not self.is_premium_ever:
                 continue
-            call_dict = settings.BBB_PRESET_FORM_FIELD_PARAMS[preset_field_name]
-            for _choice, api_call_param_dict in call_dict.items():
-                for api_name, param_dict in api_call_param_dict.items():
-                    # prefix the known keys with the nature if the target has one
-                    if self.bbb_nature:
-                        api_name = f'{api_name}__{self.bbb_nature}'
-                    call_keys[api_name].update(param_dict.keys())
-        
+            if preset_field_name in settings.BBB_PRESET_FORM_FIELD_PARAMS:
+                call_dict = settings.BBB_PRESET_FORM_FIELD_PARAMS[preset_field_name]
+                for _choice, api_call_param_dict in call_dict.items():
+                    for api_name, param_dict in api_call_param_dict.items():
+                        # prefix the known keys with the nature if the target has one
+                        if self.bbb_nature:
+                            api_name = f'{api_name}__{self.bbb_nature}'
+                        call_keys[api_name].update(param_dict.keys())
+            elif preset_field_name in settings.BBB_PRESET_FORM_FIELD_TEXT_PARAMS:
+                call_key, call_param = settings.BBB_PRESET_FORM_FIELD_TEXT_PARAMS[preset_field_name]
+                if self.bbb_nature:
+                    call_key = f'{call_key}__{self.bbb_nature}'
+                call_keys[call_key].add(call_param)
+
         # find any keys from our old about-to-be-overwritten params, that aren't in the known list for carrying over
         for api_name_key, api_name_val in self.bbb_params.items():
             # if the call key isn't even known, doesnt make sense, but we still keep the value
