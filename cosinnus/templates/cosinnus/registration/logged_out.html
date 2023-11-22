@@ -87,8 +87,25 @@
 
                 {% if SETTINGS.COSINNUS_CLOUD_ENABLED %}
                     var url_csrf_nextcloud = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}/apps/cspworkaround/csrftoken';
+                    var url_direct_logout = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}/apps/cspworkaround/logout';
                     var url_logout_nextcloud = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}/logout';
-                    doFrontendLogout(url_csrf_nextcloud, url_logout_nextcloud);
+
+                    $.ajax(url_direct_logout, {
+                        type: 'GET',
+                        success: function (response, textStatus, xhr) {
+                            console.log('# # Logout complete');
+                            console.log(response);
+                            logoutSuccess(global_logout_success);
+                        },
+                        error: function (xhr, textStatus) {
+                            console.log('# # Error while fetching csrf');
+                            console.log(xhr);
+                            console.log(textStatus);
+                            global_logout_success = false;
+                            logoutSuccess(global_logout_success);
+                        }
+                    });
+
                 {% endif %}
                 {% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED %}
                     var url_csrf_v3_frontend = '/api/frontend/auth/csrf?v=3';
