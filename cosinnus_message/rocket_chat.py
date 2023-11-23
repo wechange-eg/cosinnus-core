@@ -494,6 +494,14 @@ class RocketChatConnection:
         rocket_username = self._get_unique_username(profile)
         if not rocket_username:
             return
+
+        # make sure a rocketchat user with that username does not exist.
+        response = self.rocket.users_info(username=rocket_username).json()
+        if response.get('success'):
+            # user with such a username exists. Log an error and return.
+            logger.error('RocketChat: users_create: username already used.', extra={'response': response})
+            return
+
         data = {
             "email": profile.rocket_user_email,
             "name": profile.get_external_full_name() or str(user.id),
