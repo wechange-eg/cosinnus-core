@@ -1387,7 +1387,7 @@ class RocketChatConnection:
         @raise Exception: on a general error 
         """
         if not hasattr(user, 'cosinnus_profile'):
-            return
+            return 0
         profile = user.cosinnus_profile
         
         try:
@@ -1420,6 +1420,7 @@ class RocketChatConnection:
             logger.error('RocketChat: unread message count: unexpected exception',
                      extra={'exception': e})
             logger.exception(e)
+        return 0
     
     def get_user_preferences(self, user):
         """ Gets the given user's rocketchat preferences.

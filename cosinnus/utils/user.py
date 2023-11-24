@@ -398,7 +398,7 @@ def get_user_tos_accepted_date(user):
 def get_unread_message_count_for_user(user):
     """ Returns the unread message count for a user, independent of which internal
         messaging system is being used (Postman, Rocketchat, etc) """
-    if not user.is_authenticated:
+    if not user.is_authenticated or user.is_guest:
         return 0
     if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
         unread_count = 0

@@ -128,7 +128,7 @@ GUEST_ACCOUNT_FORBIDDEN_URL_PATTERNS = [
     r"^/profile/(?!$)", # anything below the profile-detail page
     r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/cloud/", # group cloud direct link
     r"^/messages/", # any type of messages, rocketchat etc
-    r"^/posteingang/",  # any type of postman messages
+    r"^/nachrichten/",  # any type of postman messages
     r".*/add/.*", # any type of create view
     r"^/account/", # PAYL and other account views
 ]
@@ -501,6 +501,10 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
             if user.is_guest:
                 # check if the URL matches any of the guest-account-locked URLs
                 locked = False
+                # sanity check: if this guest user still has a session, but guest access was disabled, lock everything
+                if not settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLED:
+                    if request.path != reverse('cosinnus:guest-user-not-allowed') and request.path not in LOGIN_URLS:
+                        locked = True
                 # disable any POST requests
                 if request.method == 'POST':
                     locked = True
@@ -513,6 +517,10 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
                             locked = True
                             break
                 if locked:
+                    if request.method == 'POST':
+                        messages.warning(request, _('The action you tried to perform is not allowed for guest accounts.'))
+                    else:
+                        messages.warning(request, _('The page you tried to visit is not available for guest accounts.'))
                     return redirect('cosinnus:guest-user-not-allowed')
             
             
