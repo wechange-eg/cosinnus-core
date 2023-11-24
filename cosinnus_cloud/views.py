@@ -72,7 +72,7 @@ class OAuthView(APIView):
     """
 
     def get(self, request, **kwargs):
-        if request.user.is_authenticated:
+        if request.user.is_authenticated and not request.user.is_guest:
             user = request.user
             avatar_url = user.cosinnus_profile.avatar.url if user.cosinnus_profile.avatar else ""
             if avatar_url:

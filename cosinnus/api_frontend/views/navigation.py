@@ -903,10 +903,13 @@ class ProfileView(LanguageMenuItemMixin, APIView):
 
         if request.user.is_authenticated:
             profile_menu = []
-
+            
+            profile_label = _('My Profile')
+            if request.user.is_guest:
+                profile_label = _('My Guest Account')
             # profile pages
             profile_menu_items = [
-                MenuItem(_('My Profile'), reverse('cosinnus:profile-detail'), 'fa-circle-user', id='Profile'),
+                MenuItem(profile_label, reverse('cosinnus:profile-detail'), 'fa-circle-user', id='Profile'),
             ]
             if not request.user.is_guest:
                 if settings.COSINNUS_V3_FRONTEND_ENABLED:
@@ -1127,7 +1130,7 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
         # services part
         services_navigation_items = []
 
-        if request.user.is_authenticated:
+        if request.user.is_authenticated and not request.user.is_guest:
             # cloud
             if settings.COSINNUS_CLOUD_ENABLED:
                 services_navigation_items.append(
@@ -1157,7 +1160,8 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
         if request.user.is_authenticated:
 
             # alerts
-            right_navigation_items.append(MenuItem(_('Alerts'), icon='fa-bell', id='Alerts'))
+            if not request.user.is_guest:
+                right_navigation_items.append(MenuItem(_('Alerts'), icon='fa-bell', id='Alerts'))
 
             # profile
             right_navigation_items.append(

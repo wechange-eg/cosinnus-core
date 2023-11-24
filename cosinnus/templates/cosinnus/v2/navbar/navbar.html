@@ -92,7 +92,7 @@
 			</a>
 			{% endblock %}
 			{% block cloud_icon_button %}
-				{% if SETTINGS.COSINNUS_CLOUD_ENABLED and request.user.is_authenticated %}
+				{% if SETTINGS.COSINNUS_CLOUD_ENABLED and request.user.is_authenticated and not request.user.is_guest %}
 			        <a class="nav-button" href="{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}" role="button"
 			               title="{% trans "Cloud" %}" {% if SETTINGS.COSINNUS_CLOUD_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}>
 			            <i class="fas fa-fw fa-cloud"></i>
@@ -109,7 +109,7 @@
 
 			{% if request.user.is_authenticated %}
 				{% block envelope_icon_button %}
-					{% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
+					{% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS and not request.user.is_guest %}
 					<a class="nav-button nav-button-with-message-counter" href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-global' %}{% else %}{% url 'postman:inbox' %}{% endif %}"
 							{% if SETTINGS.COSINNUS_ROCKET_ENABLED and SETTINGS.COSINNUS_ROCKET_OPEN_IN_NEW_TAB %}target="_blank"{% endif %}
 							role="button" title="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% trans "Rocket.Chat" %}{% else %}{% trans "Messages" %}{% endif %}"
@@ -120,7 +120,7 @@
 					{% endif %}
 				{% endblock %}
 				{% block bell_icon_button %}
-					{% if SETTINGS.COSINNUS_NOTIFICATION_ALERTS_ENABLED %}
+					{% if SETTINGS.COSINNUS_NOTIFICATION_ALERTS_ENABLED and not request.user.is_guest %}
 					<a class="nav-button nav-button-with-message-counter nav-collapse-button collapsed" id="navbar-notifications-button" rel="toggle" role="button"
 								title="{% trans "Notifications" %}"
 								aria-expanded="false" aria-controls="notification-widget-collapse"
@@ -312,7 +312,7 @@
 		<div class="nav-flyout-backdrop"></div>
 	</div>
 
-	{% if request.user.is_authenticated and SETTINGS.COSINNUS_NOTIFICATION_ALERTS_ENABLED %}
+	{% if request.user.is_authenticated and SETTINGS.COSINNUS_NOTIFICATION_ALERTS_ENABLED and not request.user.is_guest %}
 	<div class="collapse nav-flyout nav-flyout-half-side nav-flyout-right nav-flyout-part-height notification-widget"
 	       id="notification-widget-collapse" data-simplebar>
         <div class="nav-flyout-section flex-row mobile-flex-column" id="nav-notification-items">
@@ -368,7 +368,11 @@
 					<li>
 						<a href="{% url 'cosinnus:profile-detail' %}" class="list-item" role="button" titledby=".item-text">
 				    		<div class="item-text">
-				    			{% trans "My Profile" %}
+                                {% if request.user.is_guest %}
+                                    {% trans "My Guest Account" %}
+                                {% else %}
+                                    {% trans "My Profile" %}
+                                {% endif %}
 				    		</div>
 						</a>
 					</li>
