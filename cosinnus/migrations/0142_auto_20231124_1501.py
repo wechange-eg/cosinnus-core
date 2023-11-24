@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('cosinnus', '0140_auto_20231010_1729'),
+        ('cosinnus', '0141_auto_20231018_1454'),
     ]
 
     operations = [

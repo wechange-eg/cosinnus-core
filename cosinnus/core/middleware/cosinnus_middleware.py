@@ -122,12 +122,13 @@ LOGIN_URLS = NEVER_REDIRECT_URLS + [
 
 EXEMPTED_URLS_FOR_2FA = [url for url in LOGIN_URLS if url != '/admin/']
 
-GUEST_ACCOUNT_LOCKED_URL_PATTERNS = [
+GUEST_ACCOUNT_FORBIDDEN_URL_PATTERNS = [
     r"^/login/$",
     r"^/signup/$",
     r"^/profile/(?!$)", # anything below the profile-detail page
     r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/cloud/", # group cloud direct link
     r"^/messages/", # any type of messages, rocketchat etc
+    r"^/posteingang/",  # any type of postman messages
     r".*/add/.*", # any type of create view
     r"^/account/", # PAYL and other account views
 ]
@@ -504,7 +505,8 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
                 if request.method == 'POST':
                     locked = True
                 if not locked:
-                    for url_pattern in GUEST_ACCOUNT_LOCKED_URL_PATTERNS:
+                    for url_pattern in GUEST_ACCOUNT_FORBIDDEN_URL_PATTERNS:
+                        # TOOD remove prints
                         print(f'match: {request.path}, {url_pattern}')
                         print(re.match(url_pattern, request.path))
                         if re.match(url_pattern, request.path):
