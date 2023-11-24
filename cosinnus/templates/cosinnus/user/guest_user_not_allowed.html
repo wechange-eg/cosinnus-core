@@ -15,13 +15,14 @@
 
                 <h2>{% trans "Access restricted for guest accounts" %}</h2>
                 <p class="textfield transparent">
-                    {% trans "You are currently using the site with a guest account provided to you via a link." %}
-                    {{ request.user.cosinnus_profile.guest_access_object.group.trans.GUEST_BROWSE_ONLY }}
-                    <b>TODO: ok so?</b>
+                    {% with guest_group=request.user.cosinnus_profile.guest_access_object.group %}
+                        {% trans "You are currently using the site with a guest account provided to you via a link." %}
+                        {{ guest_group.trans.GUEST_BROWSE_ONLY }}:
+                        <a class="transparent" href="{{ guest_group.get_absolute_url }}">{{ guest_group.name }}</a>
+                    {% endwith %}
                 </p>
                 <p class="textfield transparent">
                     {% trans "However you cannot use most of the site's features, you do not have a user profile and you cannot create any content." %}
-                    <b>TODO: ok so?</b>
                 </p>
 
                 <hr class="invisible"/>

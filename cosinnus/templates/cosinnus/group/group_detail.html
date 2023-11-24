@@ -709,23 +709,25 @@
                                                     </li>
                                                 </ul>
                                             </button>
-                                            
-                                            <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_promote_id}}">
-                                                <ul class="media-list">
-                                                    <li class="media">
-                                                        <span class="pull-left">
-                                                            <i class="fa fa-group"></i>
-                                                        </span>
-                                                        <div class="media-body">
-                                                            {% if member in admins %}
-                                                                {% trans "Make Member" %}
-                                                            {% else %}
-                                                                {% trans "Make Admin" %}
-                                                            {% endif %}
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </button>
+
+                                            {% if not member.is_guest %}
+                                                <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_promote_id}}">
+                                                    <ul class="media-list">
+                                                        <li class="media">
+                                                            <span class="pull-left">
+                                                                <i class="fa fa-group"></i>
+                                                            </span>
+                                                            <div class="media-body">
+                                                                {% if member in admins %}
+                                                                    {% trans "Make Member" %}
+                                                                {% else %}
+                                                                    {% trans "Make Admin" %}
+                                                                {% endif %}
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </button>
+                                            {% endif %}
                                         {% endif %}
                                         
                                         {% include 'cosinnus/feedback/report_button_btn.html' with object=member %}
