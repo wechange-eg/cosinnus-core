@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-24 10:30+0200\n"
+"POT-Creation-Date: 2023-11-27 15:06+0100\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3945,6 +3945,16 @@ msgstr ""
 
 msgid "Allow recording"
 msgstr ""
+
+#, fuzzy
+#| msgid "Send Message"
+msgid "Welcome Message"
+msgstr "أرسل رسالة"
+
+#, fuzzy
+#| msgid "the rooms welcome message"
+msgid "Define a custom welcome message."
+msgstr "رسالة الغرف الترحيبية"
 
 #, fuzzy
 #| msgid "Conference Settings"
@@ -8541,6 +8551,23 @@ msgid "Please also provide an end date"
 msgstr ""
 
 msgid "Ensure that your name does not contain any invalid characters."
+msgstr ""
+
+msgid "Version 1.19.0 released"
+msgstr ""
+
+msgid "Includes further settings for conferences, RocketChat integration improvements and more."
+msgstr ""
+
+msgid ""
+"The update includes:\n"
+"- (BigBlueButton) Added a setting to change the conference room welcome message.\n"
+"- (BigBlueButton) Fixed the presentation file setting inheritance.\n"
+"- (RocketChat) Added an opt-in overlay to the RocketChat widget in the project/group dashboard to optimize page load speeds.\n"
+"- (RocketChat) Security and platform-integration improvements.\n"
+"- Events from event polls are created with a default duration of one hour.\n"
+"- (Admin) Fixed an error that could occur when converting projects to groups or vice versa.\n"
+"- Minor bugfixes and text improvements.\n"
 msgstr ""
 
 msgid "Version 1.18.0 released"
@@ -14321,9 +14348,6 @@ msgstr "لا يمكنك حذف هذا المجلد لأنه ليس لديك إذ
 
 #~ msgid "Restricted"
 #~ msgstr "محدد/مُقيد"
-
-#~ msgid "the rooms welcome message"
-#~ msgstr "رسالة الغرف الترحيبية"
 
 #~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 #~ msgstr "%(sender_name)s أنشأ للتو المشروع/المجموعة \"%(team_name)s\" على %(portal_name)s!"
