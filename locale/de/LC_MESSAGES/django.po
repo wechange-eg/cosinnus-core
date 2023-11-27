@@ -412,7 +412,7 @@ msgstr "Bitte melde dich an, um auf diese Seite zugreifen zu können."
 
 #, python-format
 msgid "The page you tried to access belongs to an app that has been deactivated for this %(team_type)s. If you feel this is in error, ask the %(team_type)s's administrator to reactivate the app."
-msgstr "Die Seite die du versucht hast aufzurufen gehört zu einer %(team_type)s-App, die deaktiviert wurde. Um sie wieder zu aktivieren kannst du dich an die/den %(team_type)s-Administrator_in wenden."
+msgstr "Die zu dieser Seite zugehörige App wurde in den %(team_type)s-Einstellungen deaktiviert. Bitte den/die zuständige*n %(team_type)s-Admin, die App wieder zu aktivieren, um die Seite aufrufen zu können."
 
 msgid "No team provided"
 msgstr "Kein Projekt angegeben"
