@@ -1,11 +1,29 @@
-{% load i18n cosinnus_tags %}
+{% load i18n cosinnus_tags static %}
 
 {% if rocketchat_room_embed_url %}
-	<iframe src="{{ rocketchat_room_embed_url }}" 
-		allow="display-capture *; geolocation *; microphone *; camera *; fullscreen *;" 
-		width="100%" height="500px" 
-		style="display: block;">
-	</iframe>
+    {% captureas yt_id %}{{ ""|add_uuid }}{% endcaptureas %}
+    {% captureas rc_iframe_src %}<iframe src="{{ rocketchat_room_embed_url }}" allow="display-capture *; geolocation *; microphone *; camera *; fullscreen *;" width="100%" height="500px" style="display: block;"></iframe>{% endcaptureas %}
+
+    {% if show_roadblock %}
+        <div class="embed-video-frame inverse embed-video-id-{{ yt_id }}" style="margin: 0;">
+            <img class="image embed-video-placeholder" src="{% static 'images/video-placeholder-inverse.png' %}" />
+            <div class="embed-video-overlay no-select">
+                <span>
+                    <i class="fa fa-3x fa-commenting-o"></i>
+                    <br/>
+                    {% trans "Show chat" %}
+                </span>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var embed_video_html_{{ yt_id }} = '{{ rc_iframe_src }}';
+            $('.embed-video-id-{{ yt_id }}').click(function(){
+                $('.embed-video-id-{{ yt_id }}').html(embed_video_html_{{ yt_id }});
+            });
+        </script>
+    {% else %}
+        {{ rc_iframe_src }}
+    {% endif %}
 {% else %}
     <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline">
         <ul class="media-list">
