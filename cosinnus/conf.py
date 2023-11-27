@@ -271,7 +271,6 @@ class CosinnusConf(AppConf):
         'cosinnus_exchange',
         'cosinnus_etherpad',
         'cosinnus_event',
-        'cosinnus_message',
     ]
     
     # If set, will enable a download under / of an empty text file with the given name.
