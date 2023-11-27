@@ -11,6 +11,21 @@ UPDATES includes release notes for each version shown to the users with:
 """
 
 UPDATES = {
+    '1.19.0': {
+        'datetime': datetime(2023, 11, 27, tzinfo=pytz.utc),
+        'title': _('Version 1.19.0 released'),
+        'short_text': _('Includes a settings for the conference welcome message, RocketChat integration improvements and more.'),
+        'full_text': _(
+            'The update includes:\n'
+            '- (BigBlueButton) Added a setting for the conference welcome message.\n'
+            '- (BigBlueButton) Fixed the presentation file setting inheritance.\n'
+            '- (RocketChat) Added an opt-in overlay to the RocketChat widget in the project/group dashboard to optimize page load speeds.\n'
+            '- (RocketChat) Improved the user creation ensuring that new accounts are created for duplicate usernames.\n'
+            '- Events from Doodles are created with a default duration of one hour.\n'
+            '- (Admin) Fixed converting projects to groups.\n'
+            '- Minor bugfixes and text improvements.\n'
+        ),
+    },
     '1.18.0': {
         'datetime': datetime(2023, 10, 23, tzinfo=pytz.utc),
         'title': _('Version 1.18.0 released'),
