@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-24 10:30+0200\n"
+"POT-Creation-Date: 2023-11-28 13:08+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -412,7 +412,7 @@ msgstr "Bitte melde dich an, um auf diese Seite zugreifen zu können."
 
 #, python-format
 msgid "The page you tried to access belongs to an app that has been deactivated for this %(team_type)s. If you feel this is in error, ask the %(team_type)s's administrator to reactivate the app."
-msgstr "Die Seite die du versucht hast aufzurufen gehört zu einer %(team_type)s-App, die deaktiviert wurde. Um sie wieder zu aktivieren kannst du dich an die/den %(team_type)s-Administrator_in wenden."
+msgstr "Die zu dieser Seite zugehörige App wurde in den %(team_type)s-Einstellungen deaktiviert. Bitte den/die zuständige*n %(team_type)s-Admin, die App wieder zu aktivieren, um die Seite aufrufen zu können."
 
 msgid "No team provided"
 msgstr "Kein Projekt angegeben"
@@ -3112,7 +3112,7 @@ msgid "helptext_52_profilelastname"
 msgstr "Wir respektieren deinen Wunsch, anonym zu bleiben – du musst deinen Nachnamen nicht angeben. Aber bedenke dass es so auch für Nutzer die dich kennen schwer ist dich zu finden, wenn sie dich z.B. zur Zusammenarbeit in einem Projekt einladen möchten"
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
-msgstr "Gib die E-Mail Adressen von den Leuten ein, die du einladen möchtest der Platform beizutreten."
+msgstr "Gib die E-Mail Adressen von den Leuten ein, die du einladen möchtest, der Plattform beizutreten."
 
 #, python-format
 msgid "We will send them an email asking them to sign up and join %(group_name)s."
@@ -3647,6 +3647,12 @@ msgstr "Kamera beim Betreten aktivieren"
 
 msgid "Allow recording"
 msgstr "Aufnahme erlauben"
+
+msgid "Welcome Message"
+msgstr "Begrüßungsnachricht"
+
+msgid "Define a custom welcome message."
+msgstr "Benutzerdefinierte Begrüßungsnachricht."
 
 msgid "Conference Statistics"
 msgstr "Tagungs-Statistiken"
@@ -4293,7 +4299,7 @@ msgid "Do you really want to decline member „%(name)s“?"
 msgstr "Möchtest du „%(name)s“'s Mitglieder-Antrag wirklich ablehnen?"
 
 msgid "Decline Member"
-msgstr "Mitglied ablehen"
+msgstr "Mitglied ablehnen"
 
 msgid "There are no new membership requests."
 msgstr "Es gibt aktuell keine neuen Mitglieder-Anträge."
@@ -7649,7 +7655,7 @@ msgid "(This widget has no additional options)"
 msgstr "(Dieses Widget hat keine weiteren Konfigurationsoptionen)"
 
 msgid "All members"
-msgstr "Alle anzeigen"
+msgstr "Alle Mitglieder"
 
 msgid "There are no projects in this group yet."
 msgstr "Es gibt keine Projekte in dieser Gruppe."
@@ -8046,6 +8052,31 @@ msgstr "Bitte gib auch ein Enddatum an"
 
 msgid "Ensure that your name does not contain any invalid characters."
 msgstr "Stelle dich sicher, dass dein Name keine ungültigen Zeichen enthält."
+
+msgid "Version 1.19.0 released"
+msgstr "Version 1.19.0 veröffentlicht"
+
+msgid "Includes further settings for conferences, RocketChat integration improvements and more."
+msgstr "Enthält erweiterte Einstellungen für das Tagungshaus, Verbesserungen an der RocketChat-Integration und mehr."
+
+msgid ""
+"The update includes:\n"
+"- (BigBlueButton) Added a setting to change the conference room welcome message.\n"
+"- (BigBlueButton) Fixed the presentation file setting of conferences not being inherited by their conference rooms.\n"
+"- (RocketChat) The chat element in the group and project dashboards is now only loaded after it has been actively clicked. This optimizes page loading times and saves resources.\n"
+"- (RocketChat) Security and platform-integration improvements.\n"
+"- Events from event polls are created with a default duration of one hour.\n"
+"- (Admin) Fixed an error that could occur when converting projects to groups or vice versa.\n"
+"- Minor bugfixes and text improvements.\n"
+msgstr ""
+"Das Update enthält:\n"
+"- (BigBlueButton) Eine Einstellung zum Ändern der Tagungshaus-Begrüßungsnachricht wurde hinzugefügt.\n"
+"- (BigBlueButton) Die Einstellung für die Präsentations-Datei von Tagungen wird jetzt auch in deren Tagungsräumen übernommen.\n"
+"- (RocketChat) Das Chat-Element in den Gruppen- und Projekt-Dashboards wird jetzt erst nach einem aktiven Klick geladen. Dadurch werden Seiten-Ladezeiten optimiert und Ressourcen gespart.\n"
+"- (RocketChat) Updates zur Verbesserung der Sicherheit und Plattform-Integration wurden hinzugefügt.\n"
+"- Veranstaltungen aus Terminabstimmungen werden jetzt mit einer Standarddauer von einer Stunde angelegt.\n"
+"- (Admin) Ein Fehler bei der Konvertierung von Projekten in Gruppen und umgekehrt wurde behoben.\n"
+"- Weitere kleine Fehlerbehebungen und Textverbesserungen.\n"
 
 msgid "Version 1.18.0 released"
 msgstr "Version 1.18.0 veröffentlicht"
@@ -13554,9 +13585,6 @@ msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte
 
 #~ msgid "Restricted"
 #~ msgstr "Eingeschränkt"
-
-#~ msgid "the rooms welcome message"
-#~ msgstr "Die Begrüßungsnachricht der Räume"
 
 #~ msgid "Whether the microphone is active when entering the BBB room"
 #~ msgstr "Ob das Mikrofon aktiviert ist, wenn man den BBB-Raum betritt"

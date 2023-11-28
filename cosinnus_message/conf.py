@@ -68,6 +68,9 @@ class CosinnusMessageDefaultSettings(AppConf):
     # the introductory explanation message for the users in a "Contact Group" room
     COSINNUS_ROCKET_GROUP_CONTACT_ROOM_INFO_MESSAGE = _('Please post your request or question here. You can see the channel members by clicking the group icon at the top of the channel.')
     
+    # whether to show a "Click here to show chat" message over the rocketchat group dashboard widget
+    COSINNUS_ROCKET_GROUP_WIDGET_SHOW_ROADBLOCK = True
+    
     # whether all rocketchat links should open with target="_blank"
     COSINNUS_ROCKET_OPEN_IN_NEW_TAB = False
     

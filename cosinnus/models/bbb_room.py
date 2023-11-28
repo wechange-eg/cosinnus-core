@@ -12,6 +12,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import Q
 from django.test import RequestFactory
+from django.template.defaultfilters import linebreaksbr
 from django.urls.base import reverse
 from django.utils import translation
 from django.utils.translation import ugettext as _
@@ -349,7 +350,7 @@ class BBBRoom(models.Model):
         
         from cosinnus.models.group import CosinnusPortal
         current_portal = CosinnusPortal.get_current()
-        
+
         # Do not create a meeting if one already exists
         existing_meeting = get_object_or_None(BBBRoom, meeting_id=meeting_id, portal=current_portal)
         if existing_meeting:
@@ -492,6 +493,10 @@ class BBBRoom(models.Model):
                 for blocked_param_name in preset_call_param_dict.keys():
                     portal_default_value = settings.BBB_PARAM_PORTAL_DEFAULTS.get(api_call_method, {}).get(blocked_param_name)
                     call_params[blocked_param_name] = portal_default_value
+        # Convert newlines in text parameters to html
+        for __, text_param in settings.BBB_PRESET_FORM_FIELD_TEXT_PARAMS.values():
+            if text_param in call_params:
+                call_params[text_param] = linebreaksbr(call_params[text_param].strip())
         return call_params
     
     @classmethod

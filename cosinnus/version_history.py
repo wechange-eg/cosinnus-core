@@ -11,6 +11,21 @@ UPDATES includes release notes for each version shown to the users with:
 """
 
 UPDATES = {
+    '1.19.0': {
+        'datetime': datetime(2023, 11, 27, tzinfo=pytz.utc),
+        'title': _('Version 1.19.0 released'),
+        'short_text': _('Includes further settings for conferences, RocketChat integration improvements and more.'),
+        'full_text': _(
+            'The update includes:\n'
+            '- (BigBlueButton) Added a setting to change the conference room welcome message.\n'
+            '- (BigBlueButton) Fixed the presentation file setting of conferences not being inherited by their conference rooms.\n'
+            '- (RocketChat) The chat element in the group and project dashboards is now only loaded after it has been actively clicked. This optimizes page loading times and saves resources.\n'
+            '- (RocketChat) Security and platform-integration improvements.\n'
+            '- Events from event polls are created with a default duration of one hour.\n'
+            '- (Admin) Fixed an error that could occur when converting projects to groups or vice versa.\n'
+            '- Minor bugfixes and text improvements.\n'
+        ),
+    },
     '1.18.0': {
         'datetime': datetime(2023, 10, 23, tzinfo=pytz.utc),
         'title': _('Version 1.18.0 released'),

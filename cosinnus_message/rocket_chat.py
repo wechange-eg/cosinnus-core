@@ -1,3 +1,4 @@
+import json
 import logging
 import mimetypes
 import os
@@ -273,6 +274,27 @@ class RocketChatConnection:
             result = self.ensure_user_account_sanity(user, force_group_membership_sync=force_group_membership_sync)
             self.stdout.write('User %i/%i. Success: %s \t %s' % (i, count, str(result), user.email),)
 
+    def _get_rocket_users_list(self):
+        """
+        Get complete Rocket.Chat user list.
+        Note: Do not use in blocking calls as this paginated call is slow for many users.
+        """
+        rocket_users = []
+        size = 100
+        offset = 0
+        while True:
+            response = self.rocket.users_list(size=size, offset=offset).json()
+            if not response.get('success'):
+                self.stderr.write(':_get_rocket_users_list:' + str(response), response)
+                # setting the users list to None to avoid working with incomplete user lists
+                rocket_users = None
+                break
+            if response['count'] == 0:
+                break
+            rocket_users.extend(response['users'])
+            offset += response['count']
+        return rocket_users
+
     def users_sync(self, skip_update=False):
         """
         Sync active users that have already been created in rocketchat.
@@ -281,27 +303,20 @@ class RocketChatConnection:
         :return:
         """
         # Get existing rocket users
+        rocket_users_list = self._get_rocket_users_list()
+        if not rocket_users_list:
+            # An error occured fetching the user list.
+            return
         rocket_users = {}
         rocket_emails_usernames = {}
-        size = 100
-        offset = 0
-        while True:
-            response = self.rocket.users_list(size=size, offset=offset).json()
-            if not response.get('success'):
-                self.stderr.write('users_sync: ' + str(response), response)
-                break
-            if response['count'] == 0:
-                break
-
-            for rocket_user in response['users']:
-                if "username" not in rocket_user:
+        for rocket_user in rocket_users_list:
+            if "username" not in rocket_user:
+                continue
+            rocket_users[rocket_user['username']] = rocket_user
+            for email in rocket_user.get('emails', []):
+                if not email.get('address'):
                     continue
-                rocket_users[rocket_user['username']] = rocket_user
-                for email in rocket_user.get('emails', []):
-                    if not email.get('address'):
-                        continue
-                    rocket_emails_usernames[email['address']] = rocket_user['username']
-            offset += response['count']
+                rocket_emails_usernames[email['address']] = rocket_user['username']
 
         # Check active users in DB
         users = filter_active_users(filter_portal_users(get_user_model().objects.all()))
@@ -432,6 +447,38 @@ class RocketChatConnection:
         else:
             return self.users_create(user, request)
 
+    def _get_unique_username(self, profile):
+        """ Generates a unique username considering existing Rocket.Chat users. """
+        username = profile.get_new_rocket_username()
+
+        # get existing rocket users matching the username.
+        filter_query = json.dumps({"username": {"$regex": username}})
+        response = self.rocket.users_list(query=filter_query).json()
+        if not response.get('success'):
+            logger.error('RocketChat: _get_unique_username' + response.get('errorType', '<No Error Type>'), extra={'response': response})
+            return
+        rocket_users = response['users']
+
+        # ignoring users own username if already set.
+        if profile.settings.get(PROFILE_SETTING_ROCKET_CHAT_ID):
+            users_rocket_chat_id = profile.settings.get(PROFILE_SETTING_ROCKET_CHAT_ID)
+            rocket_users = filter(lambda user: user['_id'] != users_rocket_chat_id, rocket_users)
+
+        rocket_usernames = [user.get('username') for user in rocket_users if 'username' in user]
+
+        # generate unique username
+        unique_username = username
+        i = 1
+        while True:
+            if unique_username not in rocket_usernames:
+                break
+            unique_username = f'{username}{i}'
+            i += 1
+            if i > 1000:
+                raise Exception('Name is very popular')
+
+        return unique_username
+
     def users_create(self, user, request=None):
         """
         Create user with name, email address and avatar
@@ -444,11 +491,22 @@ class RocketChatConnection:
         profile = user.cosinnus_profile
         original_password = user.password
         rocket_user_password = user.password or get_random_string(length=16)
+        rocket_username = self._get_unique_username(profile)
+        if not rocket_username:
+            return
+
+        # make sure a rocketchat user with that username does not exist.
+        response = self.rocket.users_info(username=rocket_username).json()
+        if response.get('success'):
+            # user with such a username exists. Log an error and return.
+            logger.error('RocketChat: users_create: username already used.', extra={'response': response})
+            return
+
         data = {
             "email": profile.rocket_user_email,
             "name": profile.get_external_full_name() or str(user.id),
             "password": rocket_user_password,
-            "username": profile.rocket_username,
+            "username": rocket_username,
             "bio": profile.get_absolute_url(),
             "active": user.is_active,
             "verified": True, # we keep verified at True always and provide a fake email for unverified accounts, since rocket is broken and still sends emails to unverified accounts
@@ -457,10 +515,12 @@ class RocketChatConnection:
         response = self.rocket.users_create(**data).json()
         if not response.get('success'):
             logger.error('RocketChat: users_create: ' + response.get('errorType', '<No Error Type>'), extra={'response': response})
+            return
 
-        # Save Rocket.Chat User ID to user instance
-        user_id = response.get('user', {}).get('_id')
+        # Save Rocket.Chat username and User ID to user instance
         profile = user.cosinnus_profile
+        profile.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME] = rocket_username
+        user_id = response.get('user', {}).get('_id')
         profile.settings[PROFILE_SETTING_ROCKET_CHAT_ID] = user_id
         # Update profile settings without triggering signals to prevent cycles
         type(profile).objects.filter(pk=profile.pk).update(settings=profile.settings)
@@ -500,10 +560,16 @@ class RocketChatConnection:
             return
 
         # Update username
-        response = self.rocket.users_update(user_id=user_id, username=profile.rocket_username).json()
-        if not response.get('success'):
-            logger.error('RocketChat: users_update_username: ' + response.get('errorType', '<No Error Type>'), extra={'response': response})
-    
+        username = self._get_unique_username(profile)
+        if username:
+            response = self.rocket.users_update(user_id=user_id, username=username).json()
+            if not response.get('success'):
+                logger.error('RocketChat: users_update_username: ' + response.get('errorType', '<No Error Type>'), extra={'response': response})
+                return
+            # Update profile
+            profile.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME] = rocket_username
+            type(profile).objects.filter(pk=profile.pk).update(settings=profile.settings)
+
     def check_user_account_status(self, user):
         """ Read-only check whether or not the user exists in rocket chat.
             @return:   True if the user account exists.
@@ -600,9 +666,12 @@ class RocketChatConnection:
         profile = user.cosinnus_profile
         rocket_email = user_data.get('emails', [{}])[0].get('address', None)
         #rocket_mail_verified = user_data.get('emails', [{}])[0].get('verified', None)
-        if force_user_update or user_data.get('name') != profile.get_external_full_name() or rocket_email != profile.rocket_user_email:
+        rocket_username = self._get_unique_username(profile)
+        if not rocket_username:
+            return
+        if force_user_update or user_data.get('name') != rocket_username or rocket_email != profile.rocket_user_email:
             data = {
-                "username": profile.rocket_username,
+                "username": rocket_username,
                 "name": profile.get_external_full_name(),
                 "email": profile.rocket_user_email,
                 "bio": profile.get_absolute_url(),
@@ -617,7 +686,12 @@ class RocketChatConnection:
                     "password": user.password,
                 })
             response = self.rocket.users_update(user_id=user_id, **data).json()
-            if not response.get('success'):
+            if response.get('success'):
+                if profile.settings.get(PROFILE_SETTING_ROCKET_CHAT_USERNAME) != rocket_username:
+                    # save changed username in profile
+                    profile.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME] = rocket_username
+                    type(profile).objects.filter(pk=profile.pk).update(settings=profile.settings)
+            else:
                 logger.error(f'users_update (force={force_user_update}) base user: ' + response.get('errorType', '<No Error Type>'), extra={'response': response})
 
         # Update Avatar URL

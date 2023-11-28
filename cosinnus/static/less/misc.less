@@ -438,6 +438,12 @@ a.anchor {
     background-color: #000;
     text-align: center;
     margin-bottom: 10px;
+    border: 0;
+    padding: 0;
+    width: 100%;
+    &.inverse {
+        background-color: #FFF;
+    }
 }
 .embed-video-placeholder {
     opacity: 0.5;
@@ -448,7 +454,7 @@ a.anchor {
     top: 50%;
     transform: translate(-50%,-50%);
 }
-.embed-video-overlay span{
+.embed-video-overlay span {
     font-size: 24px;
     line-height: 26px;
     white-space: normal;
@@ -459,6 +465,15 @@ a.anchor {
         -2px 2px 0 #000,
         2px 2px 0 #000;
 }
+.embed-video-frame.inverse .embed-video-overlay span {
+    color: #4A4A4A;
+    text-shadow:
+        -2px -2px 0 #FFF,
+        2px -2px 0 #FFF,
+        -2px 2px 0 #FFF,
+        2px 2px 0 #FFF;
+}
+
 
 ul.blank-list, ul.blank-list li,
 ol.blank-list, ol.blank-list li {

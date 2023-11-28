@@ -48,6 +48,7 @@ class EmbeddedRocketchatDashboardWidget(DashboardWidget):
             'rocketchat_room_embed_url': rocketchat_room_embed_url,
             'rocket_down_msg': rocketchat_down_msg,
             'group': self.config.group,
+            'show_roadblock': settings.COSINNUS_ROCKET_GROUP_WIDGET_SHOW_ROADBLOCK,
         }
         return (render_to_string(self.template_name, data), 0, 0)
     

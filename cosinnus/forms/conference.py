@@ -21,7 +21,7 @@ from django.core.exceptions import ImproperlyConfigured
 
 class DispatchConferenceSettingsMultiformMixin(object):
     """ Common dispatch functions for the CosinnusConferenceSettingsMultiForm extra form """
-    
+
     def dispatch_init_group(self, name, group):
         if name in ['obj', 'media_tag']:
             return group
@@ -31,6 +31,12 @@ class DispatchConferenceSettingsMultiformMixin(object):
         if name in ['obj', 'media_tag']:
             return user
         return InvalidArgument
+
+    def dispatch_init_bbb_settings_parent(self, name, value):
+        if name == 'conference_settings_assignments':
+            return value
+        return InvalidArgument
+
 
 
 class ConferenceSettingsFormMixin(object):
@@ -43,7 +49,14 @@ class ConferenceSettingsFormMixin(object):
         """ Stub, implement this to return the group of the object that this 
             conference settings object is be attached to """
         return ImproperlyConfigured('ConferenceSettingsFormMixin.get_group_object() must be implemented for using this mixin!')
-    
+
+    def get_bbb_settings_parent(self):
+        """
+        Returns the parent object in the BBB settings chain.
+        Uses explicitly set bbb_settings_parent form attribute or falls back to portal if attribute is not set.
+        """
+        return getattr(self, 'bbb_settings_parent', None) or CosinnusPortal.get_current()
+
     def add_preset_fields_to_form(self, conference_settings_instance=None):
         # initial values are the ones set directly on this config object, if it exists
         initial = {}
@@ -53,16 +66,21 @@ class ConferenceSettingsFormMixin(object):
         
         # add each field with it's value derived from the current settings
         for field_name in settings.BBB_PRESET_USER_FORM_FIELDS:
-            self.fields[field_name] = forms.ChoiceField(
-                choices=CosinnusConferenceSettings.PRESET_FIELD_CHOICES,
-                initial=initial.get(field_name, CosinnusConferenceSettings.SETTING_INHERIT),
-                required=False
-            )
-            
+            if field_name in settings.BBB_PRESET_FORM_FIELD_PARAMS:
+                self.fields[field_name] = forms.ChoiceField(
+                    choices=CosinnusConferenceSettings.PRESET_FIELD_CHOICES,
+                    initial=initial.get(field_name, CosinnusConferenceSettings.SETTING_INHERIT),
+                    required=False
+                )
+            elif field_name in settings.BBB_PRESET_FORM_FIELD_TEXT_PARAMS:
+                self.fields[field_name] = forms.CharField(
+                    widget=forms.Textarea, initial=initial.get(field_name), required=False
+                )
+
         # gather the inherited values for each field inherited from the parent/portal
         # note: the values are retrieved for the *parent*-object, not the current object, so we get only the inherited values!
         choice_dict = dict(CosinnusConferenceSettings.PRESET_FIELD_CHOICES)
-        parent_object = self.get_group_object() or CosinnusPortal.get_current()
+        parent_object = self.get_bbb_settings_parent()
         inherited_conf = CosinnusConferenceSettings.get_for_object(parent_object)
         # we add the bbb nature *to the parent* object, to get the params that would be applied to our
         # current object, because we don't always have a current object yet. this nature is set 
@@ -71,7 +89,10 @@ class ConferenceSettingsFormMixin(object):
         if inherited_conf is not None:
             inherited_conf.bbb_nature = self.bbb_nature
             inherited_choice_values_dict = inherited_conf.get_bbb_preset_form_field_values()
-        
+
+        # set the inherited values to be to show defaults for free text values.
+        setattr(self, 'inherited_field_values', inherited_choice_values_dict)
+
         inherited_field_value_labels = dict([
             (
                 field_name, 
@@ -91,13 +112,20 @@ class ConferenceSettingsFormMixin(object):
         preset_choices = {}
         possible_choices = dict(CosinnusConferenceSettings.PRESET_FIELD_CHOICES).keys()
         for field_name in settings.BBB_PRESET_USER_FORM_FIELDS:
-            try:
-                value = int(self.data.get(f'{formfield_prefix}{field_name}'))
-            except:
-                value = None
-            if value is not None and value in possible_choices and value != CosinnusConferenceSettings.SETTING_INHERIT:
-                preset_choices[field_name] = value
-        
+            value = self.data.get(f'{formfield_prefix}{field_name}')
+            if field_name in settings.BBB_PRESET_FORM_FIELD_PARAMS:
+                # Add presets for choice parameters.
+                try:
+                    value = int(value)
+                except:
+                    value = None
+                if value is not None and value in possible_choices and value != CosinnusConferenceSettings.SETTING_INHERIT:
+                    preset_choices[field_name] = value
+            elif field_name in settings.BBB_PRESET_FORM_FIELD_TEXT_PARAMS:
+                # Add presets for free text parameters.
+                if value:
+                    preset_choices[field_name] = value
+
         # generate the new `bbb_params` JSON from cleaned_data
         if instance is None:
             instance = CosinnusConferenceSettings()
@@ -138,6 +166,7 @@ class CosinnusConferenceSettingsMultiForm(ConferenceSettingsFormMixin, forms.Mod
         # we don't need it here, so discard it
         kwargs.pop('request', None)
         self.bbb_nature = kwargs.pop('bbb_nature', None)
+        self.bbb_settings_parent = kwargs.pop('bbb_settings_parent', None)
         # instance here is GenericRelatedObjectManager, so resolve the reference
         if instance is not None:
             instance = instance.first()
@@ -178,6 +207,7 @@ class CosinnusConferenceRoomForm(ConferenceSettingsFormMixin,
     def __init__(self, instance, *args, **kwargs):
         if 'request' in kwargs:
             self.request = kwargs.pop('request')
+        self.bbb_settings_parent = kwargs.pop('bbb_settings_parent')
         super(CosinnusConferenceRoomForm, self).__init__(instance=instance, *args, **kwargs)
         # choosable groups are only projects inside this group
         qs = get_cosinnus_group_model().objects.filter(parent_id=kwargs['group'].id)

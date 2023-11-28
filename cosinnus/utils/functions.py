@@ -319,3 +319,10 @@ def update_dict_recursive(d, u):
         else:
             d[k] = v
     return d
+
+
+def uniquify_list(arr):
+    """ Fast uniquify for any given list, preserving order """
+    seen = set()
+    seen_add = seen.add
+    return [x for x in arr if not (x in seen or seen_add(x))]
