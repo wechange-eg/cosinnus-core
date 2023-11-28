@@ -1366,6 +1366,8 @@ class CosinnusConf(AppConf):
     # Will not work for closed portals!
     # 0 for projects; 1 for groups; 2 for conferences
     USER_GUEST_ACCOUNTS_FOR_GROUP_TYPE = [0, 1, 2]
+    # how long in days guest accounts will be kept, no matter if active or inactive
+    USER_GUEST_ACCOUNTS_DELETE_AFTER_DAYS = 7
     
     # should the LIKE, BOOKMARK, FOLLOW buttons be shown on the entire portal (microsite, groups/projects, events, etc.)?
     SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS = True

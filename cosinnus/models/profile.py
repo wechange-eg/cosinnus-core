@@ -175,7 +175,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     # a user with `is_guest=True` has very restricted site access, has no email and their account is destroyed
     # when they end the session by logging out, or their `guest_access_object` relation has been set to null
     # (no matter whether the relation has been set to null manually or the object was deleted)
-    _is_guest = models.BooleanField(_('May be contacted'), default=False, editable=False,
+    _is_guest = models.BooleanField(_('Is guest user'), default=False, editable=False,
                                     help_text='If this is True and "guest_access_object" is set to None, the user will be deleted!')
     guest_access_object = models.ForeignKey(
         'cosinnus.UserGroupGuestAccess',

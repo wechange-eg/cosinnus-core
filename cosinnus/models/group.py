@@ -1999,7 +1999,7 @@ class UserGroupGuestAccess(models.Model):
 
 @receiver(pre_delete, sender=UserGroupGuestAccess)
 def handle_user_group_guest_access_deleted(sender, instance, **kwargs):
-    """ Instantaneously and completely destroy all guest user accounts that had this token
+    """ Instantaneously deactivate all guest user accounts that had this token
         as guest access, when the token is being deleted. """
     # do a threaded call but save the user ids so that the filter still works
     from cosinnus.models import get_user_profile_model
@@ -2011,7 +2011,7 @@ def handle_user_group_guest_access_deleted(sender, instance, **kwargs):
             from cosinnus.views.profile import delete_guest_user
             for user in get_user_model().objects.filter(id__in=user_ids):
                 try:
-                    delete_guest_user(user)
+                    delete_guest_user(user, deactivate_only=True)
                 except Exception as e:
                     logger.error(
                         'An error occured during user deletion after group guest access token deletion. Exception in extra',

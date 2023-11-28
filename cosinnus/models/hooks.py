@@ -388,7 +388,7 @@ def handle_user_group_guest_access_deleted(sender, user, **kwargs):
     """ We permanently delete a guest user account as soon as they log out from their session,
         because only one session per guest account may ever exist. """
     if user.is_guest:
-        delete_guest_user(user)
+        delete_guest_user(user, deactivate_only=True)
 
 
 from cosinnus.apis.cleverreach import * # noqa

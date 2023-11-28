@@ -67,12 +67,19 @@ def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False):
     signals.user_deactivated_and_marked_for_deletion.send(sender=None, profile=user.cosinnus_profile)
 
 
-def delete_guest_user(user):
-    """ Deletes a user account (permanently) if they are a guest user.
+def delete_guest_user(user, deactivate_only=True):
+    """ Deletes a user account (permanently or deactivate only) if they are a guest user.
         Used when a guest user account is no longer needed (after logout) or when it has become
-        invalid (when the token or group it belongs to have been deleted). """
+        invalid (when the token or group it belongs to have been deleted).
+        
+        @param deactivate_only: if True, the guest account will only be disabled, which will still lead to
+            the session becoming unusable. if False, the account will be irrevocably deleted. """
     if user.is_guest:
-        user.delete()
+        if deactivate_only:
+            user.is_active = False
+            user.save()
+        else:
+            user.delete()
 
 
 def reactivate_user(user):
