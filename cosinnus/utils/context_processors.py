@@ -164,9 +164,10 @@ def email_verified(request):
     user = request.user
 
     if (user.is_authenticated and
-            portal.email_needs_verification and not
-            GlobalBlacklistedEmail.is_email_blacklisted(request.user.email) and not
-            check_user_verified(request.user)):
+            not user.is_guest and
+            portal.email_needs_verification and
+            not GlobalBlacklistedEmail.is_email_blacklisted(request.user.email) and
+            not check_user_verified(request.user)):
         url = reverse('cosinnus:resend-email-validation')
         url = '{}?next={}'.format(url, request.path)
         msg = _('Please verify your email address.')
@@ -180,5 +181,13 @@ def email_verified(request):
         context['email_not_verified_announcement'] = {
             'level': 'warning',
             'text': f'{msg} <a href="{url}">{link_label}</a>'
+        }
+    elif user.is_authenticated and user.is_guest and request.path != reverse('cosinnus:guest-user-not-allowed'):
+        msg = _('You are currently using the site with a guest account provided to you via a link.')
+        url = reverse('cosinnus:guest-user-not-allowed')
+        link_label = _('More infos...')
+        context['user_guest_announcement'] = {
+            'level': 'info',
+            'text': f'{msg} <a href="{url}">{link_label}</a>',
         }
     return context

@@ -903,22 +903,26 @@ class ProfileView(LanguageMenuItemMixin, APIView):
 
         if request.user.is_authenticated:
             profile_menu = []
-
+            
+            profile_label = _('My Profile')
+            if request.user.is_guest:
+                profile_label = _('My Guest Account')
             # profile pages
             profile_menu_items = [
-                MenuItem(_('My Profile'), reverse('cosinnus:profile-detail'), 'fa-circle-user', id='Profile'),
+                MenuItem(profile_label, reverse('cosinnus:profile-detail'), 'fa-circle-user', id='Profile'),
             ]
-            if settings.COSINNUS_V3_FRONTEND_ENABLED:
-                profile_menu_items.append(
-                    MenuItem(_('Set up my Profile'), reverse('cosinnus:v3-frontend-setup-profile'), 'fa-pen',
-                             id='SetupProfile'),
-                )
-            profile_menu_items.extend([
-                MenuItem(_('Edit my Profile'), reverse('cosinnus:profile-edit'), 'fa-gear', id='EditProfile'),
-                MenuItem(_('Notification Preferences'), reverse('cosinnus:notifications'), 'fa-envelope',
-                         id='NotificationPreferences'),
-
-            ])
+            if not request.user.is_guest:
+                if settings.COSINNUS_V3_FRONTEND_ENABLED:
+                    profile_menu_items.append(
+                        MenuItem(_('Set up my Profile'), reverse('cosinnus:v3-frontend-setup-profile'), 'fa-pen',
+                                 id='SetupProfile'),
+                    )
+                profile_menu_items.extend([
+                    MenuItem(_('Edit my Profile'), reverse('cosinnus:profile-edit'), 'fa-gear', id='EditProfile'),
+                    MenuItem(_('Notification Preferences'), reverse('cosinnus:notifications'), 'fa-envelope',
+                             id='NotificationPreferences'),
+    
+                ])
             profile_menu.extend(profile_menu_items)
 
             # language
@@ -927,7 +931,7 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                 profile_menu.append(language_item)
 
             # payments
-            if settings.COSINNUS_PAYMENTS_ENABLED or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY \
+            if not request.user.is_guest and settings.COSINNUS_PAYMENTS_ENABLED or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY \
                     and request.user.is_superuser:
                 from wechange_payments.models import Subscription
                 current_subscription = Subscription.get_current_for_user(request.user)
@@ -944,7 +948,10 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                 profile_menu.append(administration_item)
 
             # logout
-            logout_item = MenuItem(_('Logout'), reverse('logout'), 'fa-right-from-bracket', id='Logout')
+            logout_label = _('Logout')
+            if request.user.is_guest:
+                logout_label = _('Leave guest access')
+            logout_item = MenuItem(logout_label, reverse('logout'), 'fa-right-from-bracket', id='Logout')
             profile_menu.append(logout_item)
 
         return Response(profile_menu)
@@ -1123,7 +1130,7 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
         # services part
         services_navigation_items = []
 
-        if request.user.is_authenticated:
+        if request.user.is_authenticated and not request.user.is_guest:
             # cloud
             if settings.COSINNUS_CLOUD_ENABLED:
                 services_navigation_items.append(
@@ -1153,7 +1160,8 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
         if request.user.is_authenticated:
 
             # alerts
-            right_navigation_items.append(MenuItem(_('Alerts'), icon='fa-bell', id='Alerts'))
+            if not request.user.is_guest:
+                right_navigation_items.append(MenuItem(_('Alerts'), icon='fa-bell', id='Alerts'))
 
             # profile
             right_navigation_items.append(

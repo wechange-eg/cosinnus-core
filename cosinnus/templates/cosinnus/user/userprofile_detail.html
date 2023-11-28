@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block leftnav %}
-    {% if request.user.is_authenticated and request.user == this_user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+    {% if request.user.is_authenticated and request.user == this_user and not request.user.is_guest and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
 	    {% include 'cosinnus/user/leftnav.html' with view="my_profile" %}
 	    
 	    {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_4_profile" %}

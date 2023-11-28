@@ -449,11 +449,11 @@
 							{% trans "Create invite token" as use_invite_token_label %}
 							{% captureas use_invite_token_legend %}
 								{% if group_model == "CosinnusSociety" %}
-								    {% trans "Check this to generate an invite token which allows a user to join the group directly." %}
+								    {% trans "Check this to generate an invite token which allows a registered user to become a member of the group directly." %}
 							    {% elif group_model == "CosinnusProject" %}
-							        {% trans "Check this to generate an invite token which allows a user to join the project directly." %}
+							        {% trans "Check this to generate an invite token which allows a registered user to become a member of the project directly." %}
 						        {% else %}
-						            {% trans "Check this to generate an invite token which allows a user to join the conference directly." %}
+						            {% trans "Check this to generate an invite token which allows a registered user to become a member of the conference directly." %}
 						        {% endif %}
 						        <br>
 								{% if group.use_invite_token %}

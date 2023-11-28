@@ -91,10 +91,12 @@ def get_non_cms_root_url(request=None):
             return reverse('cosinnus:group-list')
 
 
-def safe_redirect(url, request):
+def safe_redirect(url, request, return_none_if_unsafe=False):
     """ Will return the supplied URL if it is safe or a safe wechange root URL """
     # Ensure the user-originating redirection url is safe.
     if not is_safe_url(url=url, allowed_hosts=[request.get_host()]):
+        if return_none_if_unsafe:
+            return None
         url = get_non_cms_root_url(request)
     return url
 

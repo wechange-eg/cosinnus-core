@@ -53,7 +53,7 @@ def deactivate_user(user):
  
 def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False):
     """ Deacitvates a user account and marks them for deletion in 30 days """
-    if user.cosinnus_profile:
+    if hasattr(user, 'cosinnus_profile') and user.cosinnus_profile:
         # add a marked-for-deletion flag and a cronjob, deleting the profile using this
         deletion_schedule_time = now() + timedelta(
             days=settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS
@@ -65,6 +65,21 @@ def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False):
     
     # send extended deactivation signal
     signals.user_deactivated_and_marked_for_deletion.send(sender=None, profile=user.cosinnus_profile)
+
+
+def delete_guest_user(user, deactivate_only=True):
+    """ Deletes a user account (permanently or deactivate only) if they are a guest user.
+        Used when a guest user account is no longer needed (after logout) or when it has become
+        invalid (when the token or group it belongs to have been deleted).
+        
+        @param deactivate_only: if True, the guest account will only be disabled, which will still lead to
+            the session becoming unusable. if False, the account will be irrevocably deleted. """
+    if user.is_guest:
+        if deactivate_only:
+            user.is_active = False
+            user.save()
+        else:
+            user.delete()
 
 
 def reactivate_user(user):

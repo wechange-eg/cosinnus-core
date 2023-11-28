@@ -6,6 +6,8 @@ from collections import OrderedDict
 import datetime
 import os
 import re
+from threading import Thread
+
 import six
 
 from django.db.models.fields.json import KeyTextTransform
@@ -17,6 +19,8 @@ from django.core.validators import RegexValidator, MaxLengthValidator
 from django.db import models
 from django.db.models import Q, Max, Min, F
 from django.db.models.functions import Cast
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
@@ -1143,7 +1147,7 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
     def has_premium_rights(self):
         return self.has_premium_blocks or self.is_premium_permanently
     
-    def add_member_to_group(self, user, membership_status):
+    def add_member_to_group(self, user, membership_status=MEMBERSHIP_MEMBER):
         """ "Makes the user a group member". 
             Safely adds a membership for the given user with the given status for this group.
             If the membership existed, does nothing. If it existed with a different status, will
@@ -1950,6 +1954,70 @@ class CosinnusGroupCallToActionButton(models.Model):
     class Meta(object):
         verbose_name = _('CosinnusGroup CallToAction Button')
         verbose_name_plural = _('CosinnusGroup CallToAction Buttons')
+
+
+class UserGroupGuestAccess(models.Model):
+    """ A model that signifies that guest users can enter the portal using the token
+        of this object and gain read access to the related group, without signup up.
+        Deleting this for a group will mean all users will lose their guest access.
+        
+        A token for this object is generated automatically when saving the object,
+        if it hasn't been supplied. """
+    
+    group = models.OneToOneField(
+        settings.COSINNUS_GROUP_OBJECT_MODEL,
+        related_name='user_group_guest_access',
+        on_delete=models.CASCADE
+    )
+    creator = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name=_('Creator'),
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='+'
+    )
+    token = models.SlugField(
+        _('Token'),
+        help_text=_('The token string. It will be displayed as it is, but when users enter it, upper/lower-case do not matter. Can contain letters and numbers, but no spaces, and can be as long or short as you want.'),
+        max_length=50,
+        null=False, blank=False,
+        unique=True
+    )
+    created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
+    
+    class Meta(object):
+        ordering = ('-created',)
+    
+    def __str__(self):
+        return f'<UserGroupGuestAccess: "{self.token}", Group: {self.group.id}>'
+        
+    def save(self, *args, **kwargs):
+        if not self.token:
+            self.token = get_random_string(8).lower().strip()
+        super().save(*args, **kwargs)
+
+
+@receiver(pre_delete, sender=UserGroupGuestAccess)
+def handle_user_group_guest_access_deleted(sender, instance, **kwargs):
+    """ Instantaneously deactivate all guest user accounts that had this token
+        as guest access, when the token is being deleted. """
+    # do a threaded call but save the user ids so that the filter still works
+    from cosinnus.models import get_user_profile_model
+    user_ids = list(get_user_profile_model().objects.filter(guest_access_object=instance).values_list('user_id', flat=True))
+    if not user_ids:
+        return
+    class UserGroupGuestAccessDeleteThread(Thread):
+        def run(self):
+            from cosinnus.views.profile import delete_guest_user
+            for user in get_user_model().objects.filter(id__in=user_ids):
+                try:
+                    delete_guest_user(user, deactivate_only=True)
+                except Exception as e:
+                    logger.error(
+                        'An error occured during user deletion after group guest access token deletion. Exception in extra',
+                        extra={'exc': e}
+                    )
+    UserGroupGuestAccessDeleteThread().start()
 
 
 def replace_swapped_group_model():

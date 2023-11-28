@@ -37,6 +37,7 @@ from cosinnus.utils.group import get_cosinnus_group_model,\
 from cosinnus.utils.pagination import QuerysetLazyCombiner
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user,\
     check_user_superuser
+from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.views.mixins.group import RequireLoggedInMixin
 from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
 from django.shortcuts import redirect
@@ -57,6 +58,9 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         if not(getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or (getattr(settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False) and request.user.is_superuser)):
             return redirect('cosinnus:map')
+        # disable dashboard for user but instead redirect them to their linked group
+        if request.user.is_authenticated and request.user.is_guest:
+            return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': request.user.cosinnus_profile.guest_access_object.group}))
         return super(UserDashboardView, self).get(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):

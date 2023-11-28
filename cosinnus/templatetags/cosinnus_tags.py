@@ -192,7 +192,9 @@ def is_member_in_forum(user):
 
 @register.filter
 def full_name(value):
-    """Template filter to get a readable name for the given user
+    """ Template filter to get a readable name for the given user.
+        Note: since the auth.User model's get_full_name function is overridden, this templatetag
+            is not strictly neccessary and using `user.get_full_name` is equivalent to `user|full_name`.
 
     .. code-block:: django
 
@@ -203,14 +205,9 @@ def full_name(value):
     """
     from django.contrib.auth.models import AbstractBaseUser
     if isinstance(value, AbstractBaseUser):
-        if not value.is_active:
-            return str(_("(Deleted User)"))
-        # adding support for overriden cosinnus profile models
-        if hasattr(value, 'cosinnus_profile'):
-            profile_full_name = value.cosinnus_profile.get_full_name()
-        else:
-            profile_full_name = None
-        return profile_full_name or value.get_full_name() or value.get_username()
+        if hasattr(value, 'cosinnus_profile') and value.cosinnus_profile:
+            return value.cosinnus_profile.get_full_name()
+        return value.get_full_name()
     return ""
 
 @register.filter

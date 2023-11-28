@@ -135,6 +135,9 @@ def check_object_write_access(obj, user, fields=None):
             write access to only select fields.
         
     """
+    # guests never have write access to anything
+    if user.is_guest:
+        return False
     # check what kind of object was supplied (CosinnusGroup or BaseTaggableObject)
     if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
         is_admin = check_ug_admin(user, obj)
@@ -191,8 +194,14 @@ def check_user_can_see_user(user, target_user):
         their profile, and can send him messages, etc. 
         This depends on the privacy settings of ``target_user`` and on whether they are members 
         of a same group/project. """
-    visibility = target_user.cosinnus_profile.media_tag.visibility
+    # you can always see yourself
+    if user.id == target_user.id:
+        return True
+    # guests are invisible
+    if target_user.is_guest:
+        return False
     
+    visibility = target_user.cosinnus_profile.media_tag.visibility
     if visibility == BaseTagObject.VISIBILITY_ALL:
         return True
     if visibility == BaseTagObject.VISIBILITY_GROUP and user.is_authenticated:
@@ -256,7 +265,7 @@ def check_user_integrated_portal_member(user):
 def check_user_can_receive_emails(user, ignore_user_notification_settings=False):
     """ Checks if a user can receive emails *at all*, ignoring any frequency settings.
         This checks the global notification setting for authenticated users,
-        and the email blacklist for anonymous users. 
+        and the email blacklist for anonymous users and whether a user is a guest account.
 
         @param: user: an User object to check on
         @param: ignore_user_notification_settings: an optional parameter which serves to bring more
@@ -273,7 +282,7 @@ def check_user_can_receive_emails(user, ignore_user_notification_settings=False)
                 return False
             
         verified_check = (CosinnusPortal.get_current().email_needs_verification == False) or check_user_verified(user)
-        return user.is_active and verified_check
+        return user.is_active and verified_check and not user.is_guest
 
 
 def check_user_verified(user):

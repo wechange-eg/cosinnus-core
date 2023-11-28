@@ -375,11 +375,17 @@ class ConferenceEventSerializer(TranslateableModelSerializer):
     def get_show_chat(self, obj):
         """ Returns true if the show chat checkboxes on the event and its room are set
             and the room as a rocketchat url """
+        user = self.context['request'].user
+        if not user.is_authenticated or user.is_guest:
+            return False
         return bool(obj.show_chat and obj.room.show_chat and obj.room.get_rocketchat_room_url())
     
     def get_chat_url(self, obj):
         """ Returns the event room's URL if the show chat checkboxes on the event and its room are set
             and the room as a rocketchat url """
+        user = self.context['request'].user
+        if not user.is_authenticated or user.is_guest:
+            return None
         return obj.show_chat and obj.room.show_chat and obj.room.get_rocketchat_room_url()
 
     def get_user_is_admin(self, obj):

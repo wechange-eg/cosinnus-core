@@ -77,7 +77,7 @@
             {% comment %}  leave this here, the jump is what we want always  {% endcomment %} 
             <a class="anchor" id="invite"></a>
             
-            
+            {# Conference application management info box #}
             {% if user|has_write_access:object and group.group_is_conference and group.use_conference_applications %}
                 <div class="panel panel-default large-space">
                     <div class="panel-heading">
@@ -113,7 +113,7 @@
                     </div>
                 </div>
             {% endif %}
-            
+
             {% if not object.slug == SETTINGS.NEWW_FORUM_GROUP_SLUG and not object.slug in SETTINGS.NEWW_DEFAULT_USER_GROUPS %}
     
                 {% if user|has_write_access:object and group.group_is_conference and group.use_conference_applications %}
@@ -606,7 +606,55 @@
                     {% endif %}
                 {% endif %}
             {% endif %} {% comment %} End "if group isn't the forum" condition {% endcomment %}
-    
+
+
+            {# Guest user access info box #}
+            {# TODO: collapse this if there is no current token and change text! #}
+            {% if user|has_write_access:object and SETTINGS.COSINNUS_USER_GUEST_ACCOUNTS_ENABLED and group.user_group_guest_access %}
+                <div class="panel panel-default large-space">
+                    <div class="panel-heading">
+                        <h4 class="panel-title" data-toggle="collapse" data-target="#collapseSix">
+                            <i class="fa fa-chevron-down panel-collapsed"></i>
+                            <i class="fa fa-chevron-up panel-open"></i>
+                            {% trans "Guest user access" %}
+                        </h4>
+                    </div>
+                    <div id="collapseSix" class="panel-collapse in">
+                        <div class="panel-body">
+                            <div class="textfield transparent">
+                                <p>
+                                    {% trans "Guest user access has been enabled." %}
+                                    {{ group.trans.INFO_GUEST_USER_INVITE_LINK }}
+                                    {% captureas guest_link %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{% url 'cosinnus:guest-user-signup' guest_token=group.user_group_guest_access.token %}{% endcaptureas %}
+                                    <a class="transparent" href="{{ guest_link }}" target="_blank">
+                                        {{ guest_link }}
+                                    </a>
+                                    <br/>
+                                    {{ group.trans.INFO_ONLY_VISIBLE_TO_ADMINS }}
+                                </p>
+                            </div>
+
+                            <button type="button" href=""
+                                     class="btn btn-emphasized btn-autosize no-margin pull-left" title="{% trans "Manage applications" %}">
+                                <ul class="media-list">
+                                    <li class="media">
+                                        <span class="pull-left">
+                                            <i class="fas fa-user-friends"></i>
+                                        </span>
+                                        <div class="media-body">
+                                            (TODO: Link!)
+                                            {% trans "Change guest user access settings" %}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+
             <div class="panel panel-default large-space">
                 <div class="panel-heading">
                     <h4 class="panel-title {% if request.GET.invite %}collapsed{% endif %}" data-toggle="collapse" data-target="#collapseThree">
@@ -679,7 +727,9 @@
                                                         {% endif %}
                                                     </span>
                                                     <a class="username-name" href="{% url 'cosinnus:profile-detail' username=member.username %}">
-                                                        {% if not member_active %}
+                                                        {% if member.is_guest %}
+                                                            <i>({% trans "Guest" %})</i>
+                                                        {% elif not member_active %}
                                                             <i>({% trans "User account inactive" %})</i>
                                                         {% endif %}
                                                         {{ member|full_name }}
@@ -707,23 +757,25 @@
                                                     </li>
                                                 </ul>
                                             </button>
-                                            
-                                            <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_promote_id}}">
-                                                <ul class="media-list">
-                                                    <li class="media">
-                                                        <span class="pull-left">
-                                                            <i class="fa fa-group"></i>
-                                                        </span>
-                                                        <div class="media-body">
-                                                            {% if member in admins %}
-                                                                {% trans "Make Member" %}
-                                                            {% else %}
-                                                                {% trans "Make Admin" %}
-                                                            {% endif %}
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </button>
+
+                                            {% if not member.is_guest %}
+                                                <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_promote_id}}">
+                                                    <ul class="media-list">
+                                                        <li class="media">
+                                                            <span class="pull-left">
+                                                                <i class="fa fa-group"></i>
+                                                            </span>
+                                                            <div class="media-body">
+                                                                {% if member in admins %}
+                                                                    {% trans "Make Member" %}
+                                                                {% else %}
+                                                                    {% trans "Make Admin" %}
+                                                                {% endif %}
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </button>
+                                            {% endif %}
                                         {% endif %}
                                         
                                         {% include 'cosinnus/feedback/report_button_btn.html' with object=member %}

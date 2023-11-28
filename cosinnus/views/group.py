@@ -1316,7 +1316,9 @@ class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
         current_status = self.object.status
         new_status = form.cleaned_data.get('status')
         
-        if current_status == MEMBERSHIP_ADMIN and new_status != MEMBERSHIP_ADMIN and len(self.group.admins) <= 1:
+        if user.is_guest:
+            messages.error(self.request, _('You cannot promote a guest user account!'))
+        elif current_status == MEMBERSHIP_ADMIN and new_status != MEMBERSHIP_ADMIN and len(self.group.admins) <= 1:
             messages.error(self.request, _('You cannot remove “%(username)s” form '
                 'this team. Only one admin left.') % {'username': full_name(user)})
         else:

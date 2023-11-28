@@ -4,11 +4,13 @@ from __future__ import unicode_literals
 import logging
 import random
 
+from django.db import transaction
+
 from cosinnus.conf import settings
 from cosinnus.core.registries.widgets import widget_registry
 from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_slugs
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, login
 from django.core.exceptions import MultipleObjectsReturned
 from django.utils.crypto import get_random_string
 from django.db.models import Q
@@ -97,11 +99,14 @@ def assign_user_to_default_auth_group(sender, **kwargs):
         group.user_set.add(user)
         
 def ensure_user_to_default_portal_groups(sender, created, **kwargs):
-    """ Whenever a portal membership changes, make sure the user is in the default groups for this Portal """
+    """ Whenever a portal membership changes, make sure the user is in the default groups for this Portal,
+        unless they are a guest account. """
     try:
         from cosinnus.models.group import CosinnusGroupMembership
         from cosinnus.models.membership import MEMBERSHIP_MEMBER
         membership = kwargs.get('instance')
+        if membership.user.is_guest:
+            return
         CosinnusGroup = get_cosinnus_group_model()
         for group_slug in get_default_user_group_slugs():
             try:
@@ -116,28 +121,32 @@ def ensure_user_to_default_portal_groups(sender, created, **kwargs):
 
 def is_user_active(user):
     """ Similar to `filter_active_users`, returns True if 
-        the user account is considered active in the portal """
+        the user account is considered active in the portal and not a guest. """
     return user.is_active and user.last_login and \
             user.cosinnus_profile.settings.get('tos_accepted', False) and \
             user.email and not user.email.startswith('__unverified__') and \
-            not user.email.startswith('__deleted_user__')
+            not user.email.startswith('__deleted_user__') and \
+            not user.is_guest
 
 def filter_active_users(user_model_qs, filter_on_user_profile_model=False):
     """ Filters a QS of ``get_user_model()`` so that all users are removed that are either of
             - inactive
             - have never logged in
-            - have not accepted the ToS 
+            - have not accepted the ToS
+            - are a guest account
         @param filter_on_user_profile_model: Filter not on User, but on CosinnusUserProfile instead """
     if filter_on_user_profile_model:
         return user_model_qs.exclude(user__is_active=False).\
             exclude(user__last_login__exact=None).\
             exclude(user__email__icontains='__unverified__').\
-            filter(settings__has_key='tos_accepted')
+            filter(settings__has_key='tos_accepted').\
+            exclude(_is_guest=True)
     else:
         return user_model_qs.exclude(is_active=False).\
             exclude(last_login__exact=None).\
             exclude(email__icontains='__unverified__').\
-            filter(cosinnus_profile__settings__has_key='tos_accepted')
+            filter(cosinnus_profile__settings__has_key='tos_accepted').\
+            exclude(cosinnus_profile___is_guest=True)
             
 def filter_portal_users(user_model_qs, portal=None):
     """ Filters a QS of ``get_user_model()`` so that only users of this portal remain. """
@@ -389,7 +398,7 @@ def get_user_tos_accepted_date(user):
 def get_unread_message_count_for_user(user):
     """ Returns the unread message count for a user, independent of which internal
         messaging system is being used (Postman, Rocketchat, etc) """
-    if not user.is_authenticated:
+    if not user.is_authenticated or user.is_guest:
         return 0
     if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
         unread_count = 0
@@ -447,4 +456,77 @@ def get_user_id_hash(user):
     hasher = hashlib.sha1(salted_id.encode('utf-8'))
     short_digest = hasher.hexdigest()[:12]
     return short_digest
+
+
+def create_guest_user_and_login(guest_access: 'UserGroupGuestAccess', username, request=None) -> bool:
+    """
+        Creates a guest-type user account based on a UserGroupGuestAccess token with the given username
+        and if a request is given, logs the current session in as that guest user.
+        If a request is given, the current user may not already be logged in or this method will fail!
+        
+        @return: True if successful, False if not
+    """
+    if request and request.user.is_authenticated:
+        return False
+    if not guest_access or not guest_access.group:
+        return False
+    group = guest_access.group
+    
+    # create and validate a random email for the guest user
+    rnd_user_session = get_random_string(length=12)
+    email = f'guestuser_{group.id}_{guest_access.id}_{group.portal.slug}_{rnd_user_session}@wechange.de'
+    if get_user_model().objects.filter(email__iexact=email):
+        logger.error('User guest signup: Could not create a user because the email was already in use!', extra={'guest_access_id': guest_access.id, 'email': email})
+        return False
+    username = username.strip()
+    if not username or len(username) < 2:
+        logger.error('User guest signup: Could not create a user because the username was too short!',
+                     extra={'guest_access_id': guest_access.id, 'username': username})
+        return False
+    
+    # create user instance and cosinnus_profile
+    with transaction.atomic():
+        # add fake username first before we know the user id
+        user = get_user_model()(
+            username=str(random.randint(100000000000, 999999999999)),
+            email=email,
+            first_name=username,
+            last_name=''
+        )
+        # patch `user.initial_is_guest=True` onto the new user object before it is saved to
+        # make sure the user objects knows it is a guest before a cosinnus_profile is created.
+        # this is to prevent hooks from happening that are blocked for guest users.
+        setattr(user, '_initial_is_guest', True)
+        user.set_password(get_random_string(length=12))
+        user.save()
+        # set user id
+        user.username = str(user.id)
+        user.save()
+        
+        # add guest nature to userprofile
+        user.cosinnus_profile.is_guest = True
+        user.cosinnus_profile.guest_access_object = guest_access
+        user.cosinnus_profile.save()
+        
+        # do NOT add a portal membership for this user!
+        # TODO: check this!
+        
+        # set user visibility to least viisble
+        from cosinnus.models.tagged import BaseTagObject
+        media_tag = user.cosinnus_profile.media_tag
+        if not media_tag.visibility == BaseTagObject.VISIBILITY_USER:
+            media_tag.visibility = BaseTagObject.VISIBILITY_USER
+            media_tag.save()
+
+        # set the user's tos_accepted flag to true and date to now
+        accept_user_tos_for_portal(user, save=False)
+        
+        # make user a member of the guest access' group
+        group.add_member_to_group(user)
+    
+    # log the user in
+    if request:
+        user.backend = 'cosinnus.backends.EmailAuthBackend'
+        login(request, user)
+    return True
 

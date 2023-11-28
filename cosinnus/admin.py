@@ -25,7 +25,8 @@ from cosinnus.models.feedback import CosinnusReportedObject, \
     CosinnusSentEmailLog, CosinnusFailedLoginRateLimitLog
 from cosinnus.models.group import CosinnusGroupMembership, \
     CosinnusPortal, CosinnusPortalMembership, \
-    CosinnusGroup, CosinnusPermanentRedirect, CosinnusUnregisterdUserGroupInvite, RelatedGroups, CosinnusGroupInviteToken
+    CosinnusGroup, CosinnusPermanentRedirect, CosinnusUnregisterdUserGroupInvite, RelatedGroups, \
+    CosinnusGroupInviteToken, UserGroupGuestAccess
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety, \
     CosinnusConference
 from cosinnus.models.idea import CosinnusIdea
@@ -562,7 +563,7 @@ admin.site.register(USER_PROFILE_MODEL, CosinnusUserProfileAdmin)
 class UserProfileInline(admin.StackedInline):
     model = USER_PROFILE_MODEL
     can_delete = False
-    readonly_fields = ('deletion_triggered_by_self',)
+    readonly_fields = ('deletion_triggered_by_self', '_is_guest', 'guest_access_object',)
     show_change_link = True
     view_on_site = False
 
@@ -603,27 +604,48 @@ class UserToSAcceptedFilter(admin.SimpleListFilter):
             return queryset.filter(cosinnus_profile__settings__has_key='tos_accepted')
         if self.value() == 'no':
             return queryset.exclude(cosinnus_profile__settings__has_key='tos_accepted')
-        
-        
+
+
 class EmailVerifiedFilter(admin.SimpleListFilter):
     """ Will show users that have their email verified (or not) """
     
     title = _('Email verified')
-
+    
     # Parameter for the filter that will be used in the URL query.
     parameter_name = 'emailverified'
-
+    
     def lookups(self, request, model_admin):
         return (
             ('yes', _('Email verified')),
             ('no', _('Email not verified')),
         )
-
+    
     def queryset(self, request, queryset):
         if self.value() == 'yes':
             return queryset.filter(cosinnus_profile__email_verified=True)
         if self.value() == 'no':
             return queryset.exclude(cosinnus_profile__email_verified=True)
+
+
+class IsGuestFilter(admin.SimpleListFilter):
+    """ Will show users that have their email verified (or not) """
+    
+    title = _('Is Guest')
+    
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'isguest'
+    
+    def lookups(self, request, model_admin):
+        return (
+            ('yes', _('Is Guest')),
+            ('no', _('Is not a Guest')),
+        )
+    
+    def queryset(self, request, queryset):
+        if self.value() == 'yes':
+            return queryset.filter(cosinnus_profile___is_guest=True)
+        if self.value() == 'no':
+            return queryset.exclude(cosinnus_profile___is_guest=True)
 
 
 class UserHasLoggedInFilter(admin.SimpleListFilter):
@@ -685,10 +707,10 @@ class UserAdmin(DjangoUserAdmin):
     if settings.COSINNUS_CLOUD_ENABLED:
         actions += ['force_redo_cloud_user_room_memberships',]
     list_display = ('email', 'is_active', 'date_joined', 'has_logged_in', 'tos_accepted',
-                    'email_verified', 'username', 'first_name', 'last_name', 
+                    'email_verified', 'is_guest', 'username', 'first_name', 'last_name',
                     'is_staff', 'scheduled_for_deletion_at')
     list_filter = list(DjangoUserAdmin.list_filter) + [UserHasLoggedInFilter, UserToSAcceptedFilter,
-                       UserScheduledForDeletionAtFilter, EmailVerifiedFilter]
+                       UserScheduledForDeletionAtFilter, EmailVerifiedFilter, IsGuestFilter]
     
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -709,6 +731,11 @@ class UserAdmin(DjangoUserAdmin):
         return obj.cosinnus_profile.email_verified
     email_verified.short_description = _('Email verified')
     email_verified.boolean = True
+    
+    def is_guest(self, obj):
+        return obj.is_guest
+    is_guest.short_description = _('Is Guest')
+    is_guest.boolean = True
     
     def scheduled_for_deletion_at(self, obj):
         return obj.cosinnus_profile.scheduled_for_deletion_at
@@ -1029,3 +1056,14 @@ class QueuedMassMailAdmin(admin.ModelAdmin):
     recipients_sent_count.short_description = _('Recipients Send Count')
 
 admin.site.register(QueuedMassMail, QueuedMassMailAdmin)
+
+
+if settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLED:
+    class UserGroupGuestAccessAdmin(admin.ModelAdmin):
+        list_display = ('group', 'creator', 'token', 'active_accounts',)
+        search_fields = ('creator__first_name', 'creator__last_name', 'creator__email', 'group__name', 'token')
+        
+        def active_accounts(self, obj):
+            return get_user_profile_model().objects.filter(guest_access_object=obj).count()
+
+    admin.site.register(UserGroupGuestAccess, UserGroupGuestAccessAdmin)

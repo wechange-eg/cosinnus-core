@@ -54,6 +54,11 @@ class CosinnusProjectTransBase(object):
     CALL_TO_JOIN = _('Collaborate!')
     CALL_TO_REGISTER_AND_JOIN = _('Join now and collaborate!')
     INVITED_TO_JOIN = _('You have been invited to collaborate!')
+    GUEST_BROWSE_ONLY = _('You can access and browse the project that invited you')
+    INFO_ONLY_VISIBLE_TO_ADMINS = _('This is only visible to admins of this project.')
+    
+    INFO_GUEST_USER_INVITE_LINK = _('You can invite an unregistered user to instantly join the platform without registering and gain read-only access to this project using the following link')
+    INFO_GUEST_USER_SIGNUP_INTRO = _('You are joining as a guest and will get read-only access to the project')
     
     MESSAGE_ONLY_ADMINS_MAY_CREATE = _('Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators.')
     MESSAGE_ONLY_ADMINS_MAY_DEACTIVATE = _('Sorry, only portal administrators can deactivate Projects! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.')
@@ -109,6 +114,11 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     CALL_TO_JOIN = _('Collaborate!')
     CALL_TO_REGISTER_AND_JOIN = _('Join now and collaborate!')
     INVITED_TO_JOIN = _('You have been invited to collaborate!')
+    GUEST_BROWSE_ONLY = _('You can access and browse the group that invited you')
+    INFO_ONLY_VISIBLE_TO_ADMINS = _('This is only visible to admins of this group.')
+    
+    INFO_GUEST_USER_INVITE_LINK = _('You can invite an unregistered user to instantly join the platform without registering and gain read-only access to this group using the following link')
+    INFO_GUEST_USER_SIGNUP_INTRO = _('You are joining as a guest and will get read-only access to the group')
     
     MESSAGE_ONLY_ADMINS_MAY_CREATE = _('Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators.')
     MESSAGE_ONLY_ADMINS_MAY_DEACTIVATE = _('Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.')
@@ -163,6 +173,11 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     CALL_TO_JOIN = _('Participate!')
     CALL_TO_REGISTER_AND_JOIN = _('Join now and participate!')
     INVITED_TO_JOIN = _('You have been invited to participate!')
+    GUEST_BROWSE_ONLY = _('You can access and participate in the conference that invited you')
+    INFO_ONLY_VISIBLE_TO_ADMINS = _('This is only visible to admins of this conference.')
+    
+    INFO_GUEST_USER_INVITE_LINK = _('You can invite an unregistered user to instantly join the platform without registering and gain read-only access to this conference using the following link')
+    INFO_GUEST_USER_SIGNUP_INTRO = _('You are joining as a guest and will get read-only access to the conference')
     
     MESSAGE_ONLY_ADMINS_MAY_CREATE = _('Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators.')
     MESSAGE_ONLY_ADMINS_MAY_DEACTIVATE = _('Sorry, only portal administrators can deactivate Conferences! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.')

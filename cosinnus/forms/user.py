@@ -12,7 +12,7 @@ from django import forms
 from django.contrib.auth import get_user_model, password_validation
 from django.contrib.auth.forms import UserCreationForm as DjUserCreationForm, \
     AuthenticationForm, PasswordChangeForm
-from django.core.validators import MaxLengthValidator
+from django.core.validators import MaxLengthValidator, MinLengthValidator
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
@@ -342,3 +342,13 @@ class UserChangeEmailFormWithPasswordValidation(PasswordValidationFormMixin, Use
     """ The user email change form, with added password validation logic """
     pass
 
+
+class UserGroupGuestAccessForm(forms.Form):
+    """ Used for having guests enter their username and ToS accept """
+    
+    username = forms.CharField(max_length=50, required=True, validators=[MinLengthValidator(2), MaxLengthValidator(50)])
+    tos_check = forms.BooleanField(label='tos_check', required=True)
+    
+    if settings.COSINNUS_SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK:
+        privacy_policy_check = forms.BooleanField(label='privacy_policy_check', required=True)
+    

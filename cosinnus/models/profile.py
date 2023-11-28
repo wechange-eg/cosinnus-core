@@ -169,12 +169,28 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
                                                help_text=_('The date this profile is scheduled for deletion. Will be deleted after this date (ONLY IF the user account is set to inactive!)'))
     deletion_triggered_by_self = models.BooleanField(_('Deletion triggered by self'), default=False, editable=False)
     
+    # Note: - get-access this property only through `user.is_guest`, and not through `user.cosinnus_profile.is_guest`!
+    #       - to set, use user.cosinnus_profile.is_guest = ...
+    # Guest user account relations, should be in auth.User but since we're not extending that, it's here.
+    # a user with `is_guest=True` has very restricted site access, has no email and their account is destroyed
+    # when they end the session by logging out, or their `guest_access_object` relation has been set to null
+    # (no matter whether the relation has been set to null manually or the object was deleted)
+    _is_guest = models.BooleanField(_('Is guest user'), default=False, editable=False,
+                                    help_text='If this is True and "guest_access_object" is set to None, the user will be deleted!')
+    guest_access_object = models.ForeignKey(
+        'cosinnus.UserGroupGuestAccess',
+        related_name='guest_users',
+        null=True,
+        on_delete=models.SET_NULL
+    )
+    
     managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
     
     objects = BaseUserProfileManager()
 
     SKIP_FIELDS = ['id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings', 
-                   'managed_tag_assignments', 'likes', 'deletion_triggered_by_self']\
+                   'managed_tag_assignments', 'likes', 'deletion_triggered_by_self',
+                   '_is_guest', 'guest_access_object']\
                     + getattr(cosinnus_settings, 'COSINNUS_USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS', [])
     
     # this indicates that objects of this model are in some way always visible by registered users
@@ -195,12 +211,30 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     def __str__(self):
         return six.text_type(self.user)
     
+    @property
+    def is_guest(self):
+        """ Block access to `is_guest` as it should only be called on the related user instance.
+            This is so that during user/profile creation, the is_guest property can already be patched
+            so that model creation hooks properly see the guest status of a user from the start on. """
+        raise Exception('Access `user.is_guest` instead of `user.cosinnus_profile.is_guest` when getting the property!')
+    
+    @is_guest.setter
+    def is_guest(self, value):
+        self._is_guest = value
+    
     def get_icon(self):
         """ Returns the font-awesome icon specific to this object type """
         return 'fa-user'
     
     def get_full_name(self):
-        return self.user.get_full_name()
+        user = self.user
+        if not user.is_active:
+            return str(_("(Deleted User)"))
+        full_name = '%s %s' % (user.first_name, user.last_name)
+        full_name = full_name.strip()
+        if user.is_guest:
+            full_name += f' ({_("Guest")})'
+        return full_name
     
     def get_extended_full_name(self):
         """ Stub extended username, including possible titles, middle names, etc """
@@ -460,6 +494,8 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     @property
     def rocket_username(self):
         """ Retrieves rocket username from profile settings. """
+        if self.user.is_guest:
+            return ''
         return self.settings.get(PROFILE_SETTING_ROCKET_CHAT_USERNAME, '')
 
     @rocket_username.setter
