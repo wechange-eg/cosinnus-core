@@ -20,26 +20,27 @@
                 <div class="col-lg-2 col-md-2">
                 </div>
                 <div class="col-lg-8 col-md-8">
-                    <h2>
-                        <p class="navi-explanation">
-                            {% trans "Guest User Signup" %}:
-                            <a href="{{ guest_group.get_absolute_url }}" target="_blank" >{{ guest_group.name }}</a>
-                        </p>
-                    </h2>
-
                     {% include 'cosinnus/messages.html' %}
 
                     {% if form %}
                         <form action="" method="post" class="cosinnus-form form-horizontal"  role="form">
                             {% csrf_token %}
                             <div class="content-box"> <!-- a box with semi transparent background -->
-                                <h3>{% trans "You are joining as a guest and will get read-only access to the group." %}</h3>
-
-                                <h3>TODO: more explanation</h3>
-
-                                <p class="textfield transparent">
-                                    TODO: explanation text
-                                </p>
+                                <h2>
+                                    <p class="navi-explanation">
+                                        {% trans "Guest User Signup" %}
+                                    </p>
+                                </h2>
+                                <div class="textfield transparent">
+                                    <p>
+                                        {{ guest_group.trans.INFO_GUEST_USER_SIGNUP_INTRO }}:
+                                        <a class="transparent" href="{{ guest_group.get_absolute_url }}" target="_blank" >{{ guest_group.name }}</a>
+                                    </p>
+                                </div>
+                                <h4>
+                                    TODO add explanation text: "fragment1 signup"
+                                </h4>
+                                <hr class="invisible" />
 
                                 {% trans "Your name" as your_name_trans %}
                                 {% trans "Please enter your name" as enter_your_name %}
