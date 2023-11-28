@@ -1,7 +1,7 @@
 {% load cosinnus_tags i18n static %}
 {% captureas yt_id %}{{ ""|add_uuid }}{% endcaptureas %}
 
-<div class="embed-video-frame embed-video-id-{{ yt_id }}">
+<button class="embed-video-frame embed-video-id-{{ yt_id }}">
     <img class="image embed-video-placeholder" src="{% static 'images/video-placeholder.png' %}" />
         {% comment %}  
         Use this if you do want to use the youtube thumbnail
@@ -15,10 +15,10 @@
             {% trans "Click to activate video" %}
         </span>
     </div>
-</div>
+</button>
 <script type="text/javascript">
     var embed_video_html_{{ yt_id }} = "<div class='embed-container'><iframe src='{% if video_base_url %}{{ video_base_url }}{% else %}https://www.youtube.com/embed/{% endif %}{{ video_id }}' frameborder='0' mozallowfullscreen allowFullScreen></iframe></div>";
     $('.embed-video-id-{{ yt_id }}').click(function(){
-        $('.embed-video-id-{{ yt_id }}').html(embed_video_html_{{ yt_id }});
+        $('.embed-video-id-{{ yt_id }}').replaceWith(embed_video_html_{{ yt_id }});
     });
 </script>    
