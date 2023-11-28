@@ -510,9 +510,6 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
                     locked = True
                 if not locked:
                     for url_pattern in GUEST_ACCOUNT_FORBIDDEN_URL_PATTERNS:
-                        # TOOD remove prints
-                        print(f'match: {request.path}, {url_pattern}')
-                        print(re.match(url_pattern, request.path))
                         if re.match(url_pattern, request.path):
                             locked = True
                             break

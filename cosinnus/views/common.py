@@ -10,7 +10,7 @@ from django.contrib.auth import get_user_model, logout
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import ImproperlyConfigured
+from django.core.exceptions import ImproperlyConfigured, PermissionDenied
 from django.http.response import  HttpResponseNotFound, \
     HttpResponseForbidden, HttpResponseServerError, HttpResponseNotAllowed, \
     HttpResponseBadRequest, JsonResponse, HttpResponse
@@ -182,6 +182,20 @@ def cosinnus_logout(request, **kwargs):
         (this seems to only clear the value of the cookie and not completely delete it!).
         Will redirect to a "you have been logged out" page, that may perform additional 
         JS queries or redirects to log out from other services. """
+    
+    if not request.user.is_authenticated:
+        raise PermissionDenied()
+    
+    context = {}
+    next_redirect_url = safe_redirect(request.GET.get('next'), request, return_none_if_unsafe=True)
+    was_guest = request.user.is_authenticated and request.user.is_guest
+    context.update({
+        'user_was_guest': was_guest,
+        'run_logout_scripts': was_guest == False and (
+                settings.COSINNUS_V3_FRONTEND_ENABLED or settings.COSINNUS_CLOUD_ENABLED),
+        'next_redirect_url': next_redirect_url,
+    })
+    
     if settings.COSINNUS_ROCKET_ENABLED:
         user_rc_uid = request.COOKIES.get('rc_session_uid')
         user_rc_token = request.COOKIES.get('rc_session_token')
@@ -203,10 +217,13 @@ def cosinnus_logout(request, **kwargs):
                     'service is available again.'
                 )
                 messages.warning(request, msg)
+                
     response = LogoutView.as_view(**kwargs)(request) # logout(request, **kwargs)
+    
     if not request.user.is_authenticated:
         response.delete_cookie('wp_user_logged_in')
-    return render(request, 'cosinnus/registration/logged_out.html')
+        
+    return render(request, 'cosinnus/registration/logged_out.html', context)
 
 
 UNSPECIFIED = object()

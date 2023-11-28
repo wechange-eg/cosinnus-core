@@ -381,13 +381,11 @@ def update_newsletter_on_queued_mail_delete(sender, instance, **kwargs):
                 newsletter.save()
 
 
-
-
 @receiver(user_logged_out)
-def handle_user_group_guest_access_deleted(sender, user, **kwargs):
+def handle_user_group_guest_access_logged_out(sender, user, **kwargs):
     """ We permanently delete a guest user account as soon as they log out from their session,
         because only one session per guest account may ever exist. """
-    if user.is_guest:
+    if user and getattr(user, 'cosinnus_profile') and user.is_guest:
         delete_guest_user(user, deactivate_only=True)
 
 

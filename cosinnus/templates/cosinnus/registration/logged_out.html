@@ -14,15 +14,23 @@
     
     <!-- a box with semi transparent background -->
     <div class="content-box white-content">
-        
-        
-        <div class="frame-logged-out" {% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED or SETTINGS.COSINNUS_CLOUD_ENABLED %}style="display: none;"{% endif %}>
+
+        <div class="frame-logged-out" {% if run_logout_scripts %}style="display: none;"{% endif %}>
             <h2>{% trans "Logged out" %}</h2>
             <p>{% trans "You have been logged out. See you again soon!" %}</p>
+
+            {% if next_redirect_url %}
+                <p>{% trans "Redirecting you in 3 seconds..." %}</p>
+                <script type="text/javascript">
+                    window.setTimeout(function(){
+                        window.location.replace("{{ next_redirect_url }}");
+                    }, 3000);
+                </script>
+            {% endif %}
         </div>
         
         {% comment %} Additional logout logic via JS for services. {% endcomment %}
-        {% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED or SETTINGS.COSINNUS_CLOUD_ENABLED %}
+        {% if run_logout_scripts %}
             <div class="frame-logout-error" style="display: none;">
 	            <h2>{% trans "Error while logging out" %}</h2>
 	            <p>{% trans "Your logout may be incomplete in parts of the site due to a server error. If this is not a device you trust, please delete your cookies for this site!" %}</p>
