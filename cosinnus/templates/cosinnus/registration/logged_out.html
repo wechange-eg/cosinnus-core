@@ -104,6 +104,9 @@
 
                     $.ajax(url_direct_logout, {
                         type: 'GET',
+                        xhrFields: {
+                            withCredentials: true
+                        },
                         success: function (response, textStatus, xhr) {
                             console.log('# # Logout complete');
                             console.log(response);
