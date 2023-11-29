@@ -81,7 +81,10 @@ class _DoodleForm(_EventForm):
     class Meta(_EventForm.Meta):
         exclude = ('video_conference_type',)
 
-DoodleForm = get_form(_DoodleForm)
+
+class DoodleForm(DispatchConferenceSettingsMultiformMixin,
+                get_form(_DoodleForm, extra_forms={'conference_settings_assignments': CosinnusConferenceSettingsMultiForm})):
+    pass
 
 
 class SuggestionForm(forms.ModelForm):
@@ -226,11 +229,15 @@ class _ConferenceEventStageForm(_ConferenceEventBaseForm):
         else: 
             return data
 
-ConferenceEventStageForm = get_form(_ConferenceEventStageForm)
+
+class ConferenceEventStageForm(DispatchConferenceSettingsMultiformMixin,
+        get_form(_ConferenceEventStageForm, extra_forms={'conference_settings_assignments': CosinnusConferenceSettingsMultiForm})):
+    pass
 
 
 class _ConferenceEventLobbyForm(_ConferenceEventStageForm):
     pass
 
-ConferenceEventLobbyForm = get_form(_ConferenceEventLobbyForm)
-
+class ConferenceEventLobbyForm(DispatchConferenceSettingsMultiformMixin,
+        get_form(_ConferenceEventLobbyForm, extra_forms={'conference_settings_assignments': CosinnusConferenceSettingsMultiForm})):
+    pass
