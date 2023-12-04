@@ -6,7 +6,7 @@ from django.db.models import Q
 from django.http import HttpResponseForbidden
 
 from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
-from cosinnus.models import MEMBERSHIP_ADMIN
+from cosinnus.models import MEMBERSHIP_ADMIN, MEMBER_STATUS, MEMBERSHIP_PENDING
 from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject,\
     BaseHierarchicalTaggableObjectModel
 from cosinnus.models.profile import BaseUserProfile, GlobalBlacklistedEmail,\
@@ -215,7 +215,13 @@ def check_user_can_see_user(user, target_user):
     # but filter the default groups for this!
     exclude_pks = get_default_user_group_ids()
     user_groups = [ug_pk for ug_pk in get_cosinnus_group_model().objects.get_for_user_pks(user) if not ug_pk in exclude_pks]
-    target_user_groups = [tug_pk for tug_pk in get_cosinnus_group_model().objects.get_for_user_pks(target_user) if not tug_pk in exclude_pks]
+    # Include users that have requested group membership.
+    target_user_member_status = MEMBER_STATUS + (MEMBERSHIP_PENDING,)
+    target_user_groups = [
+        tug_pk for tug_pk in
+        get_cosinnus_group_model().objects.get_for_user_pks(target_user, member_status_in=target_user_member_status)
+        if not tug_pk in exclude_pks
+    ]
     if any([(user_group_pk in target_user_groups) for user_group_pk in user_groups]):
         return True
     return False
