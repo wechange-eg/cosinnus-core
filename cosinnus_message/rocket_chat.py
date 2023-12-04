@@ -280,10 +280,10 @@ class RocketChatConnection:
         Note: Do not use in blocking calls as this paginated call is slow for many users.
         """
         rocket_users = []
-        size = 100
+        count = 100
         offset = 0
         while True:
-            response = self.rocket.users_list(size=size, offset=offset).json()
+            response = self.rocket.users_list(count=count, offset=offset, query=filter_query).json()
             if not response.get('success'):
                 self.stderr.write(':_get_rocket_users_list:' + str(response), response)
                 # setting the users list to None to avoid working with incomplete user lists
