@@ -274,16 +274,17 @@ class RocketChatConnection:
             result = self.ensure_user_account_sanity(user, force_group_membership_sync=force_group_membership_sync)
             self.stdout.write('User %i/%i. Success: %s \t %s' % (i, count, str(result), user.email),)
 
-    def _get_rocket_users_list(self):
+    def _get_rocket_users_list(self, filter_query=''):
         """
         Get complete Rocket.Chat user list.
-        Note: Do not use in blocking calls as this paginated call is slow for many users.
+        Note: Do not use without filter_query parameter in blocking calls as this paginated call is slow for many users.
+        @param filter_query: query passed to the users_list api call (See https://developer.rocket.chat/reference/api/rest-api#query-parameters)
         """
         rocket_users = []
-        size = 100
+        count = 100
         offset = 0
         while True:
-            response = self.rocket.users_list(size=size, offset=offset).json()
+            response = self.rocket.users_list(count=count, offset=offset, query=filter_query).json()
             if not response.get('success'):
                 self.stderr.write(':_get_rocket_users_list:' + str(response), response)
                 # setting the users list to None to avoid working with incomplete user lists
@@ -453,11 +454,9 @@ class RocketChatConnection:
 
         # get existing rocket users matching the username.
         filter_query = json.dumps({"username": {"$regex": username}})
-        response = self.rocket.users_list(query=filter_query).json()
-        if not response.get('success'):
-            logger.error('RocketChat: _get_unique_username' + response.get('errorType', '<No Error Type>'), extra={'response': response})
+        rocket_users = self._get_rocket_users_list(filter_query=filter_query)
+        if not rocket_users:
             return
-        rocket_users = response['users']
 
         # ignoring users own username if already set.
         if profile.settings.get(PROFILE_SETTING_ROCKET_CHAT_ID):
