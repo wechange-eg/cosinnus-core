@@ -274,10 +274,9 @@ class RocketChatConnection:
             result = self.ensure_user_account_sanity(user, force_group_membership_sync=force_group_membership_sync)
             self.stdout.write('User %i/%i. Success: %s \t %s' % (i, count, str(result), user.email),)
 
-    def _get_rocket_users_list(self, filter_query=''):
+    def _get_rocket_users_list(self, filter_query):
         """
         Get complete Rocket.Chat user list.
-        Note: Do not use without filter_query parameter in blocking calls as this paginated call is slow for many users.
         @param filter_query: query passed to the users_list api call (See https://developer.rocket.chat/reference/api/rest-api#query-parameters)
         """
         rocket_users = []
@@ -304,7 +303,7 @@ class RocketChatConnection:
         :return:
         """
         # Get existing rocket users
-        rocket_users_list = self._get_rocket_users_list()
+        rocket_users_list = self._get_rocket_users_list(filter_query='')
         if not rocket_users_list:
             # An error occured fetching the user list.
             return
