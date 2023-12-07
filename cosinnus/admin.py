@@ -13,6 +13,7 @@ from django.core.exceptions import ValidationError
 from django.db.models import Q
 from django.db.models import JSONField
 from django.db.models.signals import post_save
+from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 from django_reverse_admin import ReverseModelAdmin
 
@@ -1062,8 +1063,12 @@ if settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLED:
     class UserGroupGuestAccessAdmin(admin.ModelAdmin):
         list_display = ('group', 'creator', 'token', 'active_accounts',)
         search_fields = ('creator__first_name', 'creator__last_name', 'creator__email', 'group__name', 'token')
+        raw_id_fields = ('creator',)
         
         def active_accounts(self, obj):
             return get_user_profile_model().objects.filter(guest_access_object=obj).count()
+        
+        def get_changeform_initial_data(self, request):
+            return {'token': get_random_string(8, allowed_chars='abcdefghijklmnopqrstuvwxyz').lower()}
 
     admin.site.register(UserGroupGuestAccess, UserGroupGuestAccessAdmin)
