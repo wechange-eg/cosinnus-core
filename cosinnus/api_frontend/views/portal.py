@@ -338,3 +338,33 @@ class PortalUserprofileDynamicFieldsSignupView(PortalUserprofileDynamicFieldsVie
     # if set on the view, show only dynamic fields that appear in the signup form
     field_option_filter = 'in_signup'
     description = PortalUserprofileDynamicFieldsView.description + ' This view shows only dynamic fields that appear in the signup form.'
+
+
+class PortalSettingsView(APIView):
+    """ An endpoint that returns configured settings for this portal.
+        Currently simply returns the contents of conf setting `COSINNUS_V3_PORTAL_SETTINGS` """
+    
+    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    
+    # todo: generate proper response, by either putting the entire response into a
+    #       Serializer, or defining it by hand
+    #       Note: Also needs docs on our custom data/timestamp/version wrapper!
+    # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
+    # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
+    @swagger_auto_schema(
+        responses={'200': openapi.Response(
+            description='A list of objects containing the id for a topic as "value" and its label as "title".',
+            examples={
+                "application/json": {
+                    "data": {
+                        'example_setting': 'example_value',
+                    },
+                    "version": COSINNUS_VERSION,
+                    "timestamp": 1658414865.057476
+                }
+            }
+        )}
+    )
+    def get(self, request):
+        return Response(settings.COSINNUS_V3_PORTAL_SETTINGS)
