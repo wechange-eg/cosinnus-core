@@ -68,6 +68,7 @@ class ConferenceRoomSerializer(TranslateableModelSerializer):
     type = serializers.SerializerMethodField()
     count = serializers.SerializerMethodField()
     url = serializers.SerializerMethodField()
+    show_chat = serializers.SerializerMethodField()
     description_html = serializers.SerializerMethodField()
     management_urls = serializers.SerializerMethodField()
 
@@ -103,8 +104,19 @@ class ConferenceRoomSerializer(TranslateableModelSerializer):
             return result_group.get_absolute_url() + result_group.settings.get('conference_result_group_iframe_url', '')
         else:
             # we need to use the untranslated instance, because this function might save the instance
+            user = self.context['request'].user
+            if not user.is_authenticated or user.is_guest:
+                return None
             return self.untranslated_instance.get_rocketchat_room_url()
-
+    
+    def get_show_chat(self, obj):
+        """ Returns true if the show chat checkboxes on the room are set
+            and the room has a rocketchat url """
+        user = self.context['request'].user
+        if not user.is_authenticated or user.is_guest:
+            return False
+        return bool(obj.show_chat and self.untranslated_instance.get_rocketchat_room_url())
+    
     def get_management_urls(self, obj):
         user = self.context['request'].user
         if check_ug_admin(user, obj.group) or check_user_superuser(user):
