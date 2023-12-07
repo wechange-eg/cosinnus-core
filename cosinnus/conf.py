@@ -1386,6 +1386,11 @@ class CosinnusConf(AppConf):
     # the URL at which to verify the hcaptcha response
     HCAPTCHA_VERIFY_URL = 'https://hcaptcha.com/siteverify'
     
+    # a storage for portal settings that are exposed publicy
+    # via v3 API endpoint 'api/v3/portal/settings/'
+    # and are used to configure the frontend server
+    V3_PORTAL_SETTINGS = {}
+    
     
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.

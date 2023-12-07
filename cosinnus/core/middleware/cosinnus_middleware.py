@@ -82,6 +82,7 @@ NEVER_REDIRECT_URLS = [
     '/api/v3/portal/tags',
     '/api/v3/portal/managed_tags',
     '/api/v3/portal/userprofile_dynamicfields',
+    '/api/v3/portal/settings',
     '/api/v3/user/profile',
     '/api/v3/signup',
     
