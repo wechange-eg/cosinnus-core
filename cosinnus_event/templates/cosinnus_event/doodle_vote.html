@@ -137,7 +137,7 @@
 			            </div>
 		            {% endif %}
 		            
-		            {% if user.is_authenticated and event.state == 2 %}
+		            {% if user.is_authenticated and not user.is_guest and event.state == 2 %}
 			            <h2>{% trans "When do you have time?" %}</h2>
 			            
 			            <!-- width = n*54-4 -->
@@ -201,7 +201,7 @@
 	
 	    </div><!-- content-box -->
 	
-	    {% if user.is_authenticated and user|has_read_access:event and suggestions_grouped and event.state == 2 %}
+	    {% if user.is_authenticated and not user.is_guest and user|has_read_access:event and suggestions_grouped and event.state == 2 %}
 	      <button type="submit" class="btn btn-emphasized" onclick="$('#cosinnus_vote_form').submit(); return false;">
 	        <ul class="media-list">
 	          <li class="media">

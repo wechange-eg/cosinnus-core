@@ -2,7 +2,7 @@
 
 {# this template expects an {{ event }} object to be passed to it. Also accepts hide_control_buttons to hide edit/delete buttons #}
 {% addtoblock "js" %}
-	{% if event.state == 1 and user.is_authenticated and user|has_read_access:event %}
+	{% if event.state == 1 and user.is_authenticated and user|has_read_access:event and not user.is_guest %}
 		<script src="{% static 'js/cosinnus_event/event_attendance.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
 	{% endif %}
 {% endaddtoblock %}
@@ -171,7 +171,7 @@
 
 
 
-{% if event.state == 1 and user.is_authenticated and user|has_read_access:event %}
+{% if event.state == 1 and user.is_authenticated and user|has_read_access:event and not user.is_guest %}
     
     {#  #########  Event attendance  ########## #}   
     {% if not event.conferenceevent %}
@@ -382,7 +382,7 @@
 	                </div>
 	                <div class="media-body media-body-form-control large-space">
 	                    <input id="feedInputBox" class="form-control" onclick="this.focus();this.select()" readonly="readonly" 
-	                       value="{{ event.get_feed_url }}{% if user.is_authenticated %}?{% cosinnus_user_token SETTINGS.COSINNUS_EVENT_TOKEN_EVENT_FEED %}{% endif %}">
+	                       value="{{ event.get_feed_url }}{% if user.is_authenticated and not user.is_guest %}?{% cosinnus_user_token SETTINGS.COSINNUS_EVENT_TOKEN_EVENT_FEED %}{% endif %}">
 	                </div>
 	            </li>
 	        </ul>
