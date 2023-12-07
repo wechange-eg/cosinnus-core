@@ -1332,6 +1332,7 @@ class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
                 cosinnus_notifications.user_group_admin_demoted.send(sender=self, obj=self.object.group, user=self.request.user, audience=[user])
             ret = super(GroupUserUpdateView, self).form_valid(form)
             # update index for the group
+            self.object._refresh_cache()
             self.object.group.update_index()
             return ret
         return HttpResponseRedirect(self.get_success_url())
