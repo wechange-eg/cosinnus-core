@@ -141,7 +141,7 @@
                     <i>{% trans "Last updated on: " %}</i>{{ group.last_modified|date:"SHORT_DATE_FORMAT" }}
                 </p>
                 
-                {% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+                {% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS and request.user.is_authenticated and not request.user.is_guest %}
                     <div>
                         {% trans "You will now receive notifications for content posted in this conference." as follow_success_message %}
                         {% include 'cosinnus/common/likefollowstar/like_button.html' with object=group %}

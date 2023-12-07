@@ -257,7 +257,7 @@
 	</div> <!-- buttons and content box -->
 	
 	
-	{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+	{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS and request.user.is_authenticated and not request.user.is_guest %}
 		<div class="white-content">
 			{% trans "You will now receive notifications for comments or when this event poll is changed and whenever somebody casts their vote." as follow_success_message %}
 			{% include 'cosinnus/common/likefollowstar/star_button.html' with object=event %}

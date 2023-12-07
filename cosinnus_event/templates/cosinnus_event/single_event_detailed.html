@@ -597,7 +597,7 @@
 
 {# ***********  Like/follow buttons *************** #}
 
-{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS and request.user.is_authenticated and not request.user.is_guest %}
 	{% if not hide_follow_button %}
 		<div class="white-content">
 			{% trans "You will now receive notifications for comments or when this event is updated or its details change." as follow_success_message %}
