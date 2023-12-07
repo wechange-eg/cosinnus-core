@@ -529,7 +529,8 @@ class BBBRoom(models.Model):
             extra_join_parameters = self.build_extra_join_parameters(user)
             # if the user is joining via a guest link, set the password to empty string and add `guest=true` to params
             user_bbb_guest_token = getattr(user, self.BBB_USER_GUEST_TOKEN_ATTR, None)
-            if user_bbb_guest_token and user_bbb_guest_token == self.guest_token:
+            user_is_portal_guest = bool(user.is_authenticated and user.is_guest)
+            if (user_bbb_guest_token and user_bbb_guest_token == self.guest_token) or user_is_portal_guest:
                 extra_join_parameters.update({
                     'guest': 'true',
                 })
