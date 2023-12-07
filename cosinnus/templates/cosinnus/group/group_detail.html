@@ -711,12 +711,12 @@
                                                     <i class="fa fa-chevron-down"></i>
                                                 </a>
                                                 {% endif %}
-                                                {% if not member == user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
-                                                {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
-                                                <a class="pull-right" href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=member.username %}" title="{% trans "Send Message" %}{% else %}{% url 'postman:write' recipients=member.username %}{% endif %}" title="{% trans "Send Message" %}">
-                                                    <i class="fa fa-envelope"></i>
-                                                </a>
-                                                {% endif %}
+                                                {% if not member == user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL and not member.is_guest %}
+                                                    {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
+                                                        <a class="pull-right" href="{% if SETTINGS.COSINNUS_ROCKET_ENABLED %}{% url 'cosinnus:message-write' username=member.username %}" title="{% trans "Send Message" %}{% else %}{% url 'postman:write' recipients=member.username %}{% endif %}" title="{% trans "Send Message" %}">
+                                                            <i class="fa fa-envelope"></i>
+                                                        </a>
+                                                    {% endif %}
                                                 {% endif %}
                                                 <div class="media-body username-body">
                                                     <span class="annotation">

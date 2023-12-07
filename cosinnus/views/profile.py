@@ -22,7 +22,7 @@ from django.views.generic.edit import DeleteView, FormView
 from oauth2_provider import models as oauth2_provider_models
 
 from cosinnus.core import signals
-from cosinnus.core.decorators.views import redirect_to_not_logged_in
+from cosinnus.core.decorators.views import redirect_to_not_logged_in, redirect_to_error_page
 from cosinnus.core.mail import send_html_mail
 from cosinnus.forms.profile import UserProfileForm
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, \
@@ -212,9 +212,23 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
     
     def dispatch(self, request, *args, **kwargs):
         self.request = request
+        target_user_is_guest = False
         
         """ Check if the user can access the targeted user profile. """
-        target_user_profile = self.get_object(self.get_queryset())
+        try:
+            target_user_profile = self.get_object(self.get_queryset())
+        except Http404:
+            # check on an unfiltered queryset if we attempt to view a guest user
+            qs = super().get_queryset()
+            slug=self.kwargs.get(self.slug_url_kwarg, None)
+            slug_field = self.get_slug_field()
+            qs = qs.filter(**{'user__' + slug_field: slug})
+            target_user_profile = qs.count() == 1 and qs[0] or None
+            if target_user_profile and target_user_profile.user.is_guest:
+                target_user_is_guest = True
+            else:
+                raise
+        
         if not target_user_profile:
             return redirect_to_not_logged_in(request)
         target_user_visibility = target_user_profile.media_tag.visibility
@@ -224,8 +238,12 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
             # all other views require at least to be logged in
             if not user.is_authenticated:
                 return redirect_to_not_logged_in(request)
-            if not check_user_can_see_user(user, target_user_profile.user):
+            if not check_user_can_see_user(user, target_user_profile.user) and not target_user_is_guest:
                 raise PermissionDenied
+            
+        if target_user_is_guest:
+            messages.warning(request, _('User "%s" is a guest account has no profile to show.') % target_user_profile.get_full_name())
+            return redirect_to_error_page(request, view=self)
             
         return super(UserProfileDetailView, self).dispatch(
             request, *args, **kwargs)
