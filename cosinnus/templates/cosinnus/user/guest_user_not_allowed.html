@@ -34,6 +34,19 @@
                 </p>
             </div>
 
+            <button href="javascript:window.history.back();" class="btn btn-emphasized btn-autosize pull-left no-margin">
+                <ul class="media-list">
+                    <li class="media">
+                        <span class="pull-left">
+                            <i class="fa fa-arrow-left"></i>
+                        </span>
+                        <div class="media-body">
+                            {% trans "Back" %}
+                        </div>
+                    </li>
+                </ul>
+            </button>
+
             <button href="{% url "logout" %}?next={% url "cosinnus:user-add" %}?next={{ request.user.cosinnus_profile.guest_access_object.group.get_absolute_url }}" class="btn btn-emphasized btn-autosize">
                 <ul class="media-list">
                     <li class="media">

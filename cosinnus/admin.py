@@ -13,6 +13,8 @@ from django.core.exceptions import ValidationError
 from django.db.models import Q
 from django.db.models import JSONField
 from django.db.models.signals import post_save
+from django.utils.crypto import get_random_string
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django_reverse_admin import ReverseModelAdmin
 
@@ -47,6 +49,8 @@ from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.forms.widgets import PrettyJSONWidget
 from annoying.functions import get_object_or_None
+
+from cosinnus.utils.urls import group_aware_reverse
 
 
 class SingleDeleteActionMixin(object):
@@ -1060,10 +1064,28 @@ admin.site.register(QueuedMassMail, QueuedMassMailAdmin)
 
 if settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLED:
     class UserGroupGuestAccessAdmin(admin.ModelAdmin):
-        list_display = ('group', 'creator', 'token', 'active_accounts',)
+        list_display = ('group', 'url', 'creator', 'token', 'active_accounts',)
         search_fields = ('creator__first_name', 'creator__last_name', 'creator__email', 'group__name', 'token')
+        raw_id_fields = ('creator',)
         
         def active_accounts(self, obj):
             return get_user_profile_model().objects.filter(guest_access_object=obj).count()
+        
+        def url(self, obj):
+            url = group_aware_reverse('cosinnus:guest-user-signup', kwargs={'guest_token': obj.token})
+            url_str = f'<a href="{url}" target="_blank">{url}</a>'
+            return mark_safe(url_str)
+        
+        def get_changeform_initial_data(self, request):
+            return {'token': get_random_string(8, allowed_chars='abcdefghijklmnopqrstuvwxyz').lower()}
+        
+        def get_form(self, request, obj=None, **kwargs):
+            form = super().get_form(request, obj, **kwargs)
+            if obj and obj.pk and obj.token:
+                url = group_aware_reverse('cosinnus:guest-user-signup', kwargs={'guest_token': obj.token})
+                url_str = f'<a href="{url}" target="_blank">{url}</a>'
+                link_text = mark_safe('<br>' + _('Guest access URL') + ': ' + url_str)
+                form.base_fields['token'].help_text += link_text
+            return form
 
     admin.site.register(UserGroupGuestAccess, UserGroupGuestAccessAdmin)

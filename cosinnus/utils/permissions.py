@@ -136,7 +136,7 @@ def check_object_write_access(obj, user, fields=None):
         
     """
     # guests never have write access to anything
-    if user.is_guest:
+    if user.is_authenticated and user.is_guest:
         return False
     # check what kind of object was supplied (CosinnusGroup or BaseTaggableObject)
     if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
@@ -173,6 +173,8 @@ def check_group_create_objects_access(group, user):
     """ Checks permissions of a user to create objects in a CosinnusGroup.
             returns ``True`` if the user is either admin, staff member or group member
     """
+    if user.is_authenticated and user.is_guest:
+        return False
     #  check if we can create objects in the group
     is_member = check_ug_membership(user, group)
     is_admin = check_ug_admin(user, group)
@@ -183,7 +185,7 @@ def check_object_likefollowstar_access(obj, user):
         This permission may behave differently depending on the object model.
     """
     # liking this object must be enabled and user logged in
-    if not (getattr(obj, 'IS_LIKEABLE_OBJECT', False) or user.is_authenticated):
+    if not getattr(obj, 'IS_LIKEABLE_OBJECT', False) or not user.is_authenticated or user.is_guest:
         return False
     # groups can always be followed, and all other visible objects
     is_group = type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model())
@@ -233,6 +235,8 @@ def check_user_superuser(user, portal=None):
         For this it checks permissions if a user is a portal admin or a superuser
             returns ``True`` if the user is a superuser or portal admin
     """
+    if not user.is_authenticated or user.is_guest:
+        return False
     return user.is_superuser or check_user_portal_admin(user, portal)
 
 
@@ -240,6 +244,8 @@ def check_user_portal_admin(user, portal=None):
     """ Checks permissions if a user is a portal admin in the given or current portal.
             returns ``True`` if the user is a portal admin
     """
+    if not user.is_authenticated or user.is_guest:
+        return False
     portal = portal or CosinnusPortal.get_current()
     return user.id in portal.admins
 
@@ -248,6 +254,8 @@ def check_user_portal_manager(user, portal=None):
     """ Checks permissions if a user is a portal manager in the given or current portal.
             returns ``True`` if the user is a portal manager
     """
+    if not user.is_authenticated or user.is_guest:
+        return False
     portal = portal or CosinnusPortal.get_current()
     return user.id in portal.managers
 
@@ -256,6 +264,8 @@ def check_user_portal_moderator(user, portal=None):
     """ Checks if a user is a portal moderator (must also be portal admin) in the given or current portal.
             returns ``True`` if the user is a portal moderator
     """
+    if not user.is_authenticated or user.is_guest:
+        return False
     portal = portal or CosinnusPortal.get_current()
     # TODO: this is currently not cached since it is queried very seldomly 
     membership = get_object_or_None(CosinnusPortalMembership, status=MEMBERSHIP_ADMIN, group=portal, user=user)
@@ -280,6 +290,8 @@ def check_user_can_receive_emails(user, ignore_user_notification_settings=False)
     """
     if not user.is_authenticated:
         return not GlobalBlacklistedEmail.is_email_blacklisted(user.email)
+    if user.is_guest:
+        return False
     else:
         # check if notification settings forbid 
         if not ignore_user_notification_settings:
@@ -293,7 +305,7 @@ def check_user_can_receive_emails(user, ignore_user_notification_settings=False)
 
 def check_user_verified(user):
     """ Checks if the user is logged in and has a verified email address """
-    return user.is_authenticated and user.is_active and user.cosinnus_profile.email_verified
+    return user.is_authenticated and user.is_active and user.cosinnus_profile.email_verified and not user.is_guest
 
 
 def filter_tagged_object_queryset_for_user(qs, user):
@@ -355,7 +367,7 @@ def get_inherited_visibility_from_group(group):
 
 def check_user_can_create_groups(user):    
     """ Checks if a user has the necessary permissions to create a CosinnusGroup """
-    if not user.is_authenticated:
+    if not user.is_authenticated or user.is_guest:
         return False
     if check_user_superuser(user):
         return True
@@ -365,7 +377,7 @@ def check_user_can_create_groups(user):
 
 def check_user_can_create_conferences(user):    
     """ Checks if a user has the necessary permissions to create a CosinnusConference """
-    if not user.is_authenticated:
+    if not user.is_authenticated or user.is_guest:
         return False
     if check_user_superuser(user):
         return True

@@ -98,7 +98,7 @@
         
         {% include 'cosinnus/media_tags_readonly.html' with object=note %}
         
-        {% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+        {% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS and request.user.is_authenticated and not request.user.is_guest %}
             <div class="btn btn-default dashboard-appwidget-contentline-indented">
                 <ul class="media-list fine-space">
                     <li class="media">

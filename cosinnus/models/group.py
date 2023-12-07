@@ -15,7 +15,7 @@ from django.contrib.sites.models import Site
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.core.serializers.json import DjangoJSONEncoder
-from django.core.validators import RegexValidator, MaxLengthValidator
+from django.core.validators import RegexValidator, MaxLengthValidator, MinLengthValidator
 from django.db import models
 from django.db.models import Q, Max, Min, F
 from django.db.models.functions import Cast
@@ -1979,9 +1979,10 @@ class UserGroupGuestAccess(models.Model):
     token = models.SlugField(
         _('Token'),
         help_text=_('The token string. It will be displayed as it is, but when users enter it, upper/lower-case do not matter. Can contain letters and numbers, but no spaces, and can be as long or short as you want.'),
+        validators=[MinLengthValidator(6), MaxLengthValidator(50)],
         max_length=50,
         null=False, blank=False,
-        unique=True
+        unique=True,
     )
     created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
     

@@ -63,9 +63,9 @@
 
         if (typeof window.simplemdesIds == 'undefined') {
           window.simplemdesIds = []
-          window.simplemdesIds.push({{ element_id }})
+          window.simplemdesIds.push('{{ element_id }}')
         } else {
-          window.simplemdesIds.push({{ element_id }})
+          window.simplemdesIds.push('{{ element_id }}')
         }
 
   {% if lazy %}

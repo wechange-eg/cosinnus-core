@@ -1244,7 +1244,7 @@ class GuestUserSignupView(FormView):
         # check if guest token and its access object and group exists
         guest_token_str = kwargs.pop('guest_token', '').strip().lower()
         if guest_token_str:
-            self.guest_access = get_object_or_None(UserGroupGuestAccess, token=guest_token_str)
+            self.guest_access = get_object_or_None(UserGroupGuestAccess, token__iexact=guest_token_str)
         if self.guest_access:
             self.group = self.guest_access.group
         if not self.group or not self.group.is_active:
