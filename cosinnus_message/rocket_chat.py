@@ -304,8 +304,8 @@ class RocketChatConnection:
         """
         # Get existing rocket users
         rocket_users_list = self._get_rocket_users_list(filter_query='')
-        if not rocket_users_list:
-            # An error occured fetching the user list.
+        if rocket_users_list is None:
+            # An error occurred fetching the user list.
             return
         rocket_users = {}
         rocket_emails_usernames = {}
@@ -454,7 +454,8 @@ class RocketChatConnection:
         # get existing rocket users matching the username.
         filter_query = json.dumps({"username": {"$regex": username}})
         rocket_users = self._get_rocket_users_list(filter_query=filter_query)
-        if not rocket_users:
+        if rocket_users is None:
+            # An error occurred fetching the user list.
             return
 
         # ignoring users own username if already set.
