@@ -102,3 +102,21 @@ class TranslateableFieldsModelMixin(models.Model):
         setattr(readonly_copy, 'save', _protected_func)
         setattr(readonly_copy, 'delete', _protected_func)
         return readonly_copy
+
+
+class TranslatableFormsetJsonFieldMixin:
+    """ Model mixin that adds a helper function to receive a translated version of a formset json field. """
+
+    def get_translated_json_field(self, field_name):
+        translated_value_list = []
+        current_language = get_language()
+        json_field = getattr(self, field_name)
+        for json_field_element in json_field:
+            translated_element = {}
+            untranslated_values = {k: v for k, v in json_field_element.items() if '_translation_' not in k}
+            for key, value in untranslated_values.items():
+                translation_key = f'{key}_translation_{current_language}'
+                translated_value = json_field_element.get(translation_key)
+                translated_element[key] = translated_value if translated_value else value
+            translated_value_list.append(translated_element)
+        return translated_value_list
