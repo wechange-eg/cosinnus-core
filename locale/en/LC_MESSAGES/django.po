@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-28 13:08+0100\n"
+"POT-Creation-Date: 2023-12-07 11:10+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4207,6 +4207,12 @@ msgid "The content of the field above will be searchable in the plattform-wide s
 msgstr ""
 
 msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr ""
+
+msgid "The content of the field above will will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings."
 msgstr ""
 
 msgid "If you would like to change your email address, you can do it here:"
