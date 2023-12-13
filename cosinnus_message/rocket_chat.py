@@ -278,6 +278,10 @@ class RocketChatConnection:
         """
         Get complete Rocket.Chat user list.
         @param filter_query: query passed to the users_list api call (See https://developer.rocket.chat/reference/api/rest-api#query-parameters)
+        @return:
+            - A list of rocketchat user respones if users were found for the query.
+            - An empty list of no users were found for the query.
+            - `None` if an error retrieving the users occured.
         """
         rocket_users = []
         count = 100
@@ -287,8 +291,7 @@ class RocketChatConnection:
             if not response.get('success'):
                 self.stderr.write(':_get_rocket_users_list:' + str(response), response)
                 # setting the users list to None to avoid working with incomplete user lists
-                rocket_users = None
-                break
+                return None
             if response['count'] == 0:
                 break
             rocket_users.extend(response['users'])
@@ -304,8 +307,8 @@ class RocketChatConnection:
         """
         # Get existing rocket users
         rocket_users_list = self._get_rocket_users_list(filter_query='')
-        if not rocket_users_list:
-            # An error occured fetching the user list.
+        if rocket_users_list is None:
+            # An error occurred fetching the user list.
             return
         rocket_users = {}
         rocket_emails_usernames = {}
@@ -454,7 +457,8 @@ class RocketChatConnection:
         # get existing rocket users matching the username.
         filter_query = json.dumps({"username": {"$regex": username}})
         rocket_users = self._get_rocket_users_list(filter_query=filter_query)
-        if not rocket_users:
+        if rocket_users is None:
+            # An error occurred fetching the user list.
             return
 
         # ignoring users own username if already set.
