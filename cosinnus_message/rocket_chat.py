@@ -278,6 +278,10 @@ class RocketChatConnection:
         """
         Get complete Rocket.Chat user list.
         @param filter_query: query passed to the users_list api call (See https://developer.rocket.chat/reference/api/rest-api#query-parameters)
+        @return:
+            - A list of rocketchat user respones if users were found for the query.
+            - An empty list of no users were found for the query.
+            - `None` if an error retrieving the users occured.
         """
         rocket_users = []
         count = 100
@@ -287,8 +291,7 @@ class RocketChatConnection:
             if not response.get('success'):
                 self.stderr.write(':_get_rocket_users_list:' + str(response), response)
                 # setting the users list to None to avoid working with incomplete user lists
-                rocket_users = None
-                break
+                return None
             if response['count'] == 0:
                 break
             rocket_users.extend(response['users'])
