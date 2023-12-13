@@ -82,12 +82,21 @@
 {% if SETTINGS.COSINNUS_TRANSLATED_FIELDS_ENABLED and translation_form and field.name in translation_form|get_attr:'translatable_base_fields' %}
 	<div id="{{ field.html_name }}_translations" class="field-translations" style="display: none;">
 	    <div class="cosinnus-field">
-	        <div class="field-description no-select">
-	            {% trans "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)." %}
-	        </div>
-            <div class="field-description no-select">
-	            {% trans "If present, the translations below will be shown according to the users' local language settings. They are not searchable." %}
-	        </div>
+            {% if not translated_field_not_searchable %}
+                <div class="field-description no-select">
+                    {% trans "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)." %}
+                </div>
+                <div class="field-description no-select">
+                    {% trans "If present, the translations below will be shown according to the users' local language settings. They are not searchable." %}
+                </div>
+            {% else %}
+                <div class="field-description no-select">
+                    {% trans "The content of the field above will will be shown, unless overriden by a specific translation (below)." %}
+                </div>
+                <div class="field-description no-select">
+                    {% trans "If present, the translations below will be shown according to the users' local language settings." %}
+                </div>
+            {% endif %}
 	    </div>
 	    
 	    {% comment %} Since we do not always have a placeholder set (it's in the default field's attributed, we generate one {% endcomment %}
