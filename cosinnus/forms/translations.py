@@ -1,5 +1,6 @@
 from django import forms
 
+from cosinnus.conf import settings
 from cosinnus.dynamic_fields.dynamic_formfields import (
     EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS as field_generators)
 
@@ -160,3 +161,29 @@ class TranslatedFieldsFormMixin(object):
                             df_translations[lang[0]][field] = form_data.get(
                                 form_field_name)
             object_translations['dynamic_fields'] = df_translations
+
+
+class TranslatableFormsetInlineFormMixin:
+    """
+    Mixin that adds translation fields to a json formset inline form.
+    The translations are stored as is in the formset json field and are not using the translations model field.
+    When using translatable_base_fields needs to be set to the translatable json field.
+    translatable_field_items is populated automatically.
+    """
+    translatable_base_fields = None
+    translatable_field_items = None
+
+    def __init__(self, **kwargs):
+        super(TranslatableFormsetInlineFormMixin, self).__init__(**kwargs)
+        field_map = {}
+        translated_fields = []
+        for field_name, field in self.fields.items():
+            for language in settings.LANGUAGES:
+                if isinstance(field, forms.CharField):
+                    translated_fields.append(field_name)
+                    translation_field = forms.CharField(label=language[1], required=False, widget=field.widget)
+                    translation_field_name = '{}_translation_{}'.format(field_name, language[0])
+                    field_map[translation_field_name] = translation_field
+        for translation_field_name, translation_field in field_map.items():
+            self.fields[translation_field_name] = translation_field
+        self.translatable_field_items = field_map.items()
