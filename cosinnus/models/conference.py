@@ -26,7 +26,7 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.utils.validators import validate_file_infection
 from cosinnus_event.mixins import BBBRoomMixin # noqa
-from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
+from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin, TranslatableFormsetJsonFieldMixin
 from cosinnus.utils.files import get_conference_conditions_filename, get_presentation_filename
 from cosinnus.utils.functions import clean_single_line_text, \
     unique_aware_slugify, update_dict_recursive
@@ -723,7 +723,7 @@ class CosinnusConferenceRoom(TranslateableFieldsModelMixin, BBBRoomMixin,
         return self.type in self.ROOM_TYPES_WITH_EVENT_FORM
 
 
-class ParticipationManagement(models.Model):
+class ParticipationManagement(TranslatableFormsetJsonFieldMixin, models.Model):
     """ A settings object for a CosinnusConference that determines how and when 
         CosinnusConferenceApplications may be submitted, as well as other meta options
         for the application options for that conference. """

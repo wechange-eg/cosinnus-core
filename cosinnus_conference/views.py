@@ -949,7 +949,7 @@ class ConferenceApplicationView(SamePortalGroupMixin,
         return formsets
 
     def json_field_formset_initial(self):
-        return {'motivation_answers': self.participation_management.motivation_questions}
+        return {'motivation_answers': self.participation_management.get_translated_json_field('motivation_questions')}
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
