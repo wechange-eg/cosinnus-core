@@ -17,7 +17,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.crypto import get_random_string
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy
+from django.utils.translation import ugettext_lazy as _, pgettext_lazy, get_language
 from phonenumber_field.modelfields import PhoneNumberField
 import six
 
@@ -976,6 +976,29 @@ class CosinnusConferenceApplication(models.Model):
         print(options)
         return options
 
+    def get_translated_motivation_answers(self):
+        """ Returns the motivation questions where the question is translated to the current language. """
+        translated_motivation_answers = []
+        current_language = get_language()
+        participation_management = self.conference.participation_management.first()
+        for motivation_answer in self.motivation_answers:
+            # the motivation question is stored in the user language
+            user_translated_motivation_question = motivation_answer.get('question')
+            # using the user translated question per default
+            translated_motivation_question = user_translated_motivation_question
+            for motivation_question in participation_management.motivation_questions:
+                if user_translated_motivation_question in motivation_question.values():
+                    # translate the question back to the current user language
+                    translation_key = f'question_translation_{current_language}'
+                    translated_motivation_question = motivation_question.get(translation_key)
+                    if not translated_motivation_question:
+                        # no translation for the current user language, using the untranslated question
+                        translated_motivation_question = motivation_question.get('question')
+                    break
+            translated_motivation_answers.append(
+                {'question': translated_motivation_question, 'answer': motivation_answer.get('answer')}
+            )
+        return translated_motivation_answers
 
 
 class CosinnusConferencePremiumBlock(models.Model):

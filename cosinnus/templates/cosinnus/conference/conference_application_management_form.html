@@ -174,8 +174,8 @@
                                             <p>
                                                 <b>{% trans 'Motivation for applying' %}:</b>
                                             </p>
-                                            {%  for answer in application.instance.motivation_answers %}
-                                                <strong></y><em>{{ answer.question|linebreaks }}</em></strong>
+                                            {%  for answer in application.instance.get_translated_motivation_answers %}
+                                                <strong><em>{{ answer.question|linebreaks }}</em></strong>
                                                 {{ answer.answer|linebreaks }}
                                             {% endfor %}
                                         {% endif %}
