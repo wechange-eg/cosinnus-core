@@ -47,9 +47,9 @@
 	    <div class="field-description {% if not legend_selectable %}no-select {% endif %}{{ legend_class }}">{{ legend|safe }}</div>
 	{% endif %}
 	
-    {% if SETTINGS.COSINNUS_TRANSLATED_FIELDS_ENABLED and translation_form and translation_form|get_attr:'translatable_base_fields' and field.html_name in translation_form|get_attr:'translatable_base_fields' %}
+    {% if SETTINGS.COSINNUS_TRANSLATED_FIELDS_ENABLED and translation_form and translation_form|get_attr:'translatable_base_fields' and field.name in translation_form|get_attr:'translatable_base_fields' %}
         <div class="translations-link">
-			<a href="#" onclick="$('#{{ field.name }}_translations').slideToggle(); $(window.simplemdes).each(function(index){window.simplemdes[index].codemirror.refresh();})">
+			<a href="#" onclick="$('#{{ field.html_name }}_translations').slideToggle(); $(window.simplemdes).each(function(index){window.simplemdes[index].codemirror.refresh();})">
 	            <i class="fas fa-fw fa-language"></i>
 	            {% trans 'Add/Edit translations' %}
 	        </a>
@@ -79,8 +79,8 @@
 </div>
 
 {% comment %} translation_fields=form.forms.obj|get_attr:'translatable_field_items'  {% endcomment %}
-{% if SETTINGS.COSINNUS_TRANSLATED_FIELDS_ENABLED and translation_form and field.html_name in translation_form|get_attr:'translatable_base_fields' %}
-	<div id="{{ field.name }}_translations" class="field-translations" style="display: none;">
+{% if SETTINGS.COSINNUS_TRANSLATED_FIELDS_ENABLED and translation_form and field.name in translation_form|get_attr:'translatable_base_fields' %}
+	<div id="{{ field.html_name }}_translations" class="field-translations" style="display: none;">
 	    <div class="cosinnus-field">
 	        <div class="field-description no-select">
 	            {% trans "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)." %}
