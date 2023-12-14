@@ -126,7 +126,7 @@ class JsonFieldFormsetMixin:
     def form_invalid(self, form):
         """ Overwrites form_invalid to re-initialize formsets with submitted data. """
         self._init_formsets_on_post()
-        self._reinit_formsets_from_post_data()
+        self._validate_formsets()
         return super(JsonFieldFormsetMixin, self).form_invalid(form)
 
     def _init_formsets_on_get(self):
@@ -157,19 +157,6 @@ class JsonFieldFormsetMixin:
         for json_field_name, formset in self.get_json_field_formsets().items():
             formset_instance = formset(self.request.POST, self.request.FILES, prefix=json_field_name)
             self._json_field_formset_instances[json_field_name] = formset_instance
-
-    def _reinit_formsets_from_post_data(self):
-        """
-        Re-initializes the formset from submitted data. Needed as the inlineform_field template shows initial forms and
-        hides all extra forms.
-        """
-        for json_field_name, formset in self.get_json_field_formsets().items():
-            if formset.extra:
-                formset_instance = self._json_field_formset_instances[json_field_name]
-                initial = self._formset_as_json(formset_instance)
-                formset_instance = formset(prefix=json_field_name)
-                formset_instance.initial = initial
-                self._json_field_formset_instances[json_field_name] = formset_instance
 
     def _validate_formsets(self):
         """ Validates all formsets. """

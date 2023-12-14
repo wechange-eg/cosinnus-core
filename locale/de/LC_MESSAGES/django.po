@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-28 13:08+0100\n"
+"POT-Creation-Date: 2023-12-07 11:10+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3824,7 +3824,7 @@ msgid "New password"
 msgstr "Neues Passwort"
 
 msgid "Answer"
-msgstr "Antworten"
+msgstr "Antwort"
 
 msgid "Question"
 msgstr "Frage"
@@ -4042,6 +4042,12 @@ msgstr "Der Inhalt des obigen Feldes wird im Rahmen der Plattform-Suche auffindb
 
 msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
 msgstr "Falls vorhanden, werden die unten angegebenen Übersetzungen entsprechend der lokalen Spracheinstellungen des Benutzers angezeigt. Sie sind nicht in der Suche auffindbar."
+
+msgid "The content of the field above will will be shown, unless overriden by a specific translation (below)."
+msgstr "Der Inhalt des obigen Feldes wird angezeigt wenn er nicht anhand von einer bestimmten Übersetzung (unten) überschrieben wird."
+
+msgid "If present, the translations below will be shown according to the users' local language settings."
+msgstr "Falls vorhanden, werden die unten angegebenen Übersetzungen entsprechend der lokalen Spracheinstellungen des Benutzers angezeigt."
 
 msgid "If you would like to change your email address, you can do it here:"
 msgstr "Falls du deine E-Mail Adresse ändern möchtest, kannst du es hier tun:"

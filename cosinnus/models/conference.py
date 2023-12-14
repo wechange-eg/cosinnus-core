@@ -17,7 +17,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.crypto import get_random_string
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy
+from django.utils.translation import ugettext_lazy as _, pgettext_lazy, get_language
 from phonenumber_field.modelfields import PhoneNumberField
 import six
 
@@ -26,7 +26,7 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.utils.validators import validate_file_infection
 from cosinnus_event.mixins import BBBRoomMixin # noqa
-from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
+from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin, TranslatableFormsetJsonFieldMixin
 from cosinnus.utils.files import get_conference_conditions_filename, get_presentation_filename
 from cosinnus.utils.functions import clean_single_line_text, \
     unique_aware_slugify, update_dict_recursive
@@ -723,7 +723,7 @@ class CosinnusConferenceRoom(TranslateableFieldsModelMixin, BBBRoomMixin,
         return self.type in self.ROOM_TYPES_WITH_EVENT_FORM
 
 
-class ParticipationManagement(models.Model):
+class ParticipationManagement(TranslatableFormsetJsonFieldMixin, models.Model):
     """ A settings object for a CosinnusConference that determines how and when 
         CosinnusConferenceApplications may be submitted, as well as other meta options
         for the application options for that conference. """
@@ -976,6 +976,29 @@ class CosinnusConferenceApplication(models.Model):
         print(options)
         return options
 
+    def get_translated_motivation_answers(self):
+        """ Returns the motivation questions where the question is translated to the current language. """
+        translated_motivation_answers = []
+        current_language = get_language()
+        participation_management = self.conference.participation_management.first()
+        for motivation_answer in self.motivation_answers:
+            # the motivation question is stored in the user language
+            user_translated_motivation_question = motivation_answer.get('question')
+            # using the user translated question per default
+            translated_motivation_question = user_translated_motivation_question
+            for motivation_question in participation_management.motivation_questions:
+                if user_translated_motivation_question in motivation_question.values():
+                    # translate the question back to the current user language
+                    translation_key = f'question_translation_{current_language}'
+                    translated_motivation_question = motivation_question.get(translation_key)
+                    if not translated_motivation_question:
+                        # no translation for the current user language, using the untranslated question
+                        translated_motivation_question = motivation_question.get('question')
+                    break
+            translated_motivation_answers.append(
+                {'question': translated_motivation_question, 'answer': motivation_answer.get('answer')}
+            )
+        return translated_motivation_answers
 
 
 class CosinnusConferencePremiumBlock(models.Model):
