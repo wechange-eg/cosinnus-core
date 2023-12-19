@@ -99,7 +99,11 @@ class UserMatchListView(RequireLoggedInMixin, ListView):
                         user_value = self.request.user.cosinnus_profile.dynamic_fields.get(field)
                         if user_value:
                             if isinstance(value, list):
-                                score += len(set(user_value).intersection(set(value)))
+                                try:
+                                    score += len(set(user_value).intersection(set(value)))
+                                except TypeError:
+                                    # Could not convert list to set. Just ignore the field.
+                                    pass
                             elif user_value == value:
                                 score += 1
 
