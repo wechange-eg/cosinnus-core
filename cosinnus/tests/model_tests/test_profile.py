@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import datetime
+import pytz
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase
@@ -9,7 +10,7 @@ from django.utils.encoding import force_text
 
 from cosinnus.models.profile import get_user_profile_model
 
-from tests.utils import skipIfCustomUserProfile, skipUnlessCustomUserProfile
+from cosinnus.tests.utils import skipIfCustomUserProfile, skipUnlessCustomUserProfile
 
 
 User = get_user_model()
@@ -58,16 +59,24 @@ class DefaultUserProfileTest(TestCase):
     def test_get_absolute_url(self):
         user = User.objects.create_user('somebody')
         url = user.cosinnus_profile.get_absolute_url()
-        self.assertEqual(url, '/profile/')
+        self.assertEqual(url, 'http://default domain/user/somebody/')
 
     def test_get_optional_fieldnames(self):
         optional = UserProfile.get_optional_fieldnames()
-        self.assertEqual(optional, ['avatar'])
+        expected_optional_fieldnames = {
+            'language', 'translations', 'timezone', 'avatar', 'website', 'may_be_contacted', 'dynamic_fields',
+            'scheduled_for_deletion_at', 'email_verified', 'description'
+        }
+        self.assertEqual(set(optional), expected_optional_fieldnames)
 
     def test_get_optional_fields(self):
         user = User.objects.create_user('somebody')
         optional = user.cosinnus_profile.get_optional_fields()
-        self.assertEqual(optional, [])
+        expected_optional_fields = [
+            {'name': 'Language', 'value': 'de'},
+            {'name': 'timezone', 'value': pytz.timezone('Europe/Berlin')},
+        ]
+        self.assertEqual(optional, expected_optional_fields)
 
 
 @skipUnlessCustomUserProfile

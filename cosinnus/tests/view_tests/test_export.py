@@ -11,7 +11,7 @@ from django.utils.encoding import force_text
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.views.export import JSONExportView, CSVExportView
 
-from tests.models import ChoicesTestModel
+from cosinnus.tests.models import ChoicesTestModel
 
 
 class JSONExportViewTest(TestCase):
@@ -36,7 +36,7 @@ class JSONExportViewTest(TestCase):
         """
         Should retrieve a certain JSON string even if no fields specified
         """
-        ChoicesTestModel.objects.create(group=self.group, title='title')
+        choices_test = ChoicesTestModel.objects.create(group=self.group, title='title')
 
         class ExportView(JSONExportView):
             model = ChoicesTestModel
@@ -47,7 +47,7 @@ class JSONExportViewTest(TestCase):
         data = json.loads(content)
         self.assertIn('id', data['fields'])
         self.assertIn('title', data['fields'])
-        self.assertIn(['1', 'title'], data['rows'])
+        self.assertIn([str(choices_test.id), 'title'], data['rows'])
         self.assertIn(self.group.name, data['group'])
 
     def test_get_data(self):
