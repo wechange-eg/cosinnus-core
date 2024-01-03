@@ -6,7 +6,7 @@ from django.utils.encoding import force_text
 from django.utils.timezone import now
 
 from cosinnus_event.models import Event
-from tests.view_tests.base import ViewTestCase
+from cosinnus_event.tests.view_tests.base import ViewTestCase
 
 
 class DetailTest(ViewTestCase):
@@ -18,13 +18,14 @@ class DetailTest(ViewTestCase):
         event = Event.objects.create(
             group=self.group,
             creator=self.admin,
-            public=True,
             title='testevent',
             from_date=now(),
             to_date=now(),
             state=Event.STATE_SCHEDULED)
+        event.media_tag.visibility = 2
+        event.media_tag.save()
         kwargs = {'group': self.group.slug, 'slug': event.slug}
-        url = reverse('cosinnus:event:entry-detail', kwargs=kwargs)
+        url = reverse('cosinnus:event:event-detail', kwargs=kwargs)
         response = self.client.get(url)
 
         # should return 200
