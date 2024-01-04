@@ -155,7 +155,7 @@ setup(
         'urllib3==1.26.15',
         'pytz==2022.6',
         'rdflib==5.0.0',
-        'python-memcached==1.59',
+        'pymemcache==4.0.0',
         'qrcode==6.1',
         'Unidecode==0.4.21',
         'XlsxWriter==1.3.7',

@@ -429,8 +429,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # memcached
     CACHES = {
         'default': {
-            # todo: Switch to PyMemcache
-            'BACKEND': "django.core.cache.backends.memcached.MemcachedCache",
+            'BACKEND': "django.core.cache.backends.memcached.PyMemcacheCache",
             'LOCATION':  env("WECHANGE_MEMCACHED_LOCATION", default=f"unix:/srv/http/{project_settings['COSINNUS_PORTAL_URL']}/run/memcached.socket"),
         }
     }
