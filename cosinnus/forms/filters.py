@@ -17,7 +17,7 @@ from django.utils.timezone import now
 from datetime import timedelta
 from django import forms
 from django.db.models.fields import BLANK_CHOICE_DASH
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -56,7 +56,7 @@ class BaseChoiceWidget(forms.Widget):
         return render_to_string(self.template_name, render_context)
 
     def compile_options(self, choices, selected_choices, name):
-        selected_choices = set(force_text(v) for v in selected_choices)
+        selected_choices = set(force_str(v) for v in selected_choices)
         render_options = []
         for option_value, option_label in chain(self.choices, choices):
             if not option_value and self.skip_empty_options:
@@ -73,7 +73,7 @@ class BaseChoiceWidget(forms.Widget):
 
     def compile_option(self, name, selected_choices,
                       option_value, option_label):
-        option_value = force_text(option_value)
+        option_value = force_str(option_value)
         if option_label == BLANK_CHOICE_DASH[0][1]:
             option_label = _("All")
         else:
@@ -91,7 +91,7 @@ class BaseChoiceWidget(forms.Widget):
         }
     
     def format_label_value(self, value):
-        return force_text(value)
+        return force_str(value)
 
 
 class DropdownChoiceWidget(BaseChoiceWidget):

@@ -16,7 +16,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.http.response import HttpResponseNotAllowed, Http404,\
     HttpResponseBadRequest
 from django.shortcuts import redirect
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
@@ -188,8 +188,8 @@ def create_user_integrated(request):
             if form.is_valid():
                 user = form.save()
             else:
-                logger.warn('User form invalid.', extra={'errors': force_text(form.errors)})
-                return JSONResponse(data={'status': 'fail', 'reason': force_text(form.errors)})
+                logger.warn('User form invalid.', extra={'errors': force_str(form.errors)})
+                return JSONResponse(data={'status': 'fail', 'reason': force_str(form.errors)})
             get_user_profile_model()._default_manager.get_for_user(user)
             
             # set the new user's password's hash to that of the connected user.

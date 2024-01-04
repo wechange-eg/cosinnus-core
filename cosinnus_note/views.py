@@ -26,7 +26,7 @@ from cosinnus_note import cosinnus_notifications
 from cosinnus.utils.urls import group_aware_reverse, safe_redirect
 from cosinnus.utils.pagination import PaginationTemplateMixin
 from cosinnus.views.facebook_integration import FacebookIntegrationViewMixin
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin,\

@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from builtins import str
 from django.contrib.auth.models import User
 from django.test import TestCase
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.timezone import now
 
 from cosinnus.models import CosinnusGroup
@@ -26,7 +26,7 @@ class TodoEntryTest(TestCase):
         """
         String representation should be the title
         """
-        self.assertEqual(self.todo_title, force_text(self.todo))
+        self.assertEqual(self.todo_title, force_str(self.todo))
 
     def test_save(self):
         """

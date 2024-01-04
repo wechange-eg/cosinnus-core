@@ -9,7 +9,7 @@ from textwrap import TextWrapper
 
 from django.conf import settings
 from django.template.loader import render_to_string
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.translation import ugettext, ugettext_lazy as _
 
 # make use of a favourite notifier app such as django-notification
@@ -48,7 +48,7 @@ def format_body(sender, body, indent=_("> "), width=WRAP_WIDTH):
     Used for quoting messages in replies.
 
     """
-    indent = force_text(indent)  # join() doesn't work on lists with lazy translation objects ; nor startswith()
+    indent = force_str(indent)  # join() doesn't work on lists with lazy translation objects ; nor startswith()
     wrapper = TextWrapper(width=width, initial_indent=indent, subsequent_indent=indent)
     # rem: TextWrapper doesn't add the indent on an empty text
     quote = '\n'.join([line.startswith(indent) and indent+line or wrapper.fill(line) or indent for line in body.splitlines()])
@@ -79,7 +79,7 @@ def email(subject_template, message_template, recipient_list, object, action, si
     # check if we have a connected mailbox for direct replies, and if so, set the sender to a specified email, so that users
     # can directly reply to them
     hash_vars = {
-        'portal_name': force_text(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS)),
+        'portal_name': force_str(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS)),
         'default_from': settings.DEFAULT_FROM_EMAIL,
     }
     if CosinnusPortal.get_current().mailboxes.filter(active=True).count() > 0:

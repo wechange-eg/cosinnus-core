@@ -10,7 +10,7 @@ from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.http.response import HttpResponseBadRequest, HttpResponseNotFound, HttpResponseForbidden
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from haystack.query import SearchQuerySet
 from haystack.inputs import AutoQuery
 from haystack.backends import SQ
@@ -131,7 +131,7 @@ class SearchQuerySetMixin:
         self.params = self._collect_parameters(request.GET, self.search_parameters)
         self.skip_score_sorting = False
         if 'q' in self.params:
-            self.params['q'] = force_text(self.params['q'])
+            self.params['q'] = force_str(self.params['q'])
         # An argument can be passed to the view when calling it internally to bypass the server side search limit.
         skip_limit_backend = kwargs.pop('skip_limit_backend', False)
         if 'limit' in self.params:
@@ -284,7 +284,7 @@ class SearchQuerySetMixin:
         return sqs
 
     def search(self, sqs):
-        query = force_text(self.params['q'])
+        query = force_str(self.params['q'])
         limit = self.params['limit']
         page = self.params['page']
         item_id = self.params['item']
@@ -434,7 +434,7 @@ class MapCloudfilesView(SearchQuerySetMixin, APIView):
     def get(self, request):
         from cosinnus_cloud.utils.nextcloud import perform_fulltext_search
         from cosinnus_cloud.hooks import get_nc_user_id
-        query = force_text(self.params['q'])
+        query = force_str(self.params['q'])
         limit = self.params['limit']
         page = self.params['page']
 
@@ -487,7 +487,7 @@ class MapDetailView(SearchQuerySetMixin, APIView):
             return HttpResponseBadRequest('``portal`` param must be a positive number!')
         if not slug:
             return HttpResponseBadRequest('``slug`` param must be supplied!')
-        slug = force_text(slug) # stringify is necessary for number-only slugs
+        slug = force_str(slug) # stringify is necessary for number-only slugs
         if not model_type or not isinstance(model_type, six.string_types):
             return HttpResponseBadRequest('``type`` param must be supplied and be a string!')
 
@@ -511,7 +511,7 @@ class MapDetailView(SearchQuerySetMixin, APIView):
             else:
                 obj = get_object_or_None(model, portal__id=portal, slug=slug)
             if obj is None:
-                return HttpResponseNotFound('No item found that matches the requested type and slug (obj: %s, %s, %s).' % (escape(force_text(model)), portal, slug))
+                return HttpResponseNotFound('No item found that matches the requested type and slug (obj: %s, %s, %s).' % (escape(force_str(model)), portal, slug))
 
             # check read permission
             if not model_type in SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS and not check_object_read_access(obj, request.user):

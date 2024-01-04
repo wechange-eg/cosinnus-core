@@ -15,7 +15,7 @@ import time
 
 from cosinnus.conf import settings
 from django.core.exceptions import ImproperlyConfigured, PermissionDenied
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 import urllib.parse
 import requests
 import urllib.request, urllib.parse, urllib.error
@@ -134,7 +134,7 @@ class FacebookIntegrationViewMixin(object):
             
         except Exception as e:
             logger.warning('Unexpected exception when posting to facebook timeline!', extra={
-                           'user-email': userprofile.user.email, 'user_fbID': user_id, 'exception': force_text(e), 'alternate-post-target': fb_post_target_id})
+                           'user-email': userprofile.user.email, 'user_fbID': user_id, 'exception': force_str(e), 'alternate-post-target': fb_post_target_id})
         return None
     
     
@@ -150,7 +150,7 @@ class FacebookIntegrationViewMixin(object):
                     # save facebook id if not empty to mark this note as shared to facebook
                     self.object.facebook_post_id = facebook_success
                     self.object.save()
-                message_success_addition += ' ' + force_text(_('Your news post was also posted on your Facebook timeline.'))
+                message_success_addition += ' ' + force_str(_('Your news post was also posted on your Facebook timeline.'))
             else:
                 messages.warning(self.request, _('We could not post this news post on your Facebook timeline. If this problem persists, please make sure you have granted us all required Facebook permissions, or try disconnecting and re-connecting your Facebook account!'))
         
@@ -178,15 +178,15 @@ class FacebookIntegrationViewMixin(object):
                     #self.object.facebook_post_id = facebook_success
                     #self.object.save()
                 if group.facebook_page_id and access_token:
-                    message_success_addition += ' ' + force_text(_('Your news post was also posted to the Facebook Fan-Page.'))
+                    message_success_addition += ' ' + force_str(_('Your news post was also posted to the Facebook Fan-Page.'))
                 elif group.facebook_page_id:
-                    message_success_addition += ' ' + force_text(_('Your news post was also posted on the Facebook Fan-Page as a visitor\'s post.'))
+                    message_success_addition += ' ' + force_str(_('Your news post was also posted on the Facebook Fan-Page as a visitor\'s post.'))
                 else:
-                    message_success_addition += ' ' + force_text(_('Your news post was also posted in the Facebook Group.'))
+                    message_success_addition += ' ' + force_str(_('Your news post was also posted in the Facebook Group.'))
             else:
                 messages.warning(self.request, _('We could not post this news post on the Facebook Group/Fan-Page. If this problem persists, please try disconnecting and re-connecting your Facebook account and make sure you allow us to post with a visibility of at least "Friends". If you are trying to post as a Fan-Page, make sure you accept the necessary permissions for us to post there, and make sure you are an Editor of the Fan-Page! If this doesn\'t work, contact this project/group\'s administrator!'))
         
-        messages.success(self.request, force_text(self.message_success) + message_success_addition)
+        messages.success(self.request, force_str(self.message_success) + message_success_addition)
         return ret
     
     
@@ -240,10 +240,10 @@ class FacebookIntegrationGroupFormMixin(object):
                        }
                 response_info = urllib.request.urlopen(location_url)
             except Exception as e:
-                logger.warn('Error when trying to retrieve FB group info from Facebook:', extra={'exception': force_text(e), 'url': location_url, 'group_id': facebook_id})
+                logger.warn('Error when trying to retrieve FB group info from Facebook:', extra={'exception': force_str(e), 'url': location_url, 'group_id': facebook_id})
                 had_error = True
             if not had_error and not response_info.code == 200:
-                logger.warn('Error when trying to retrieve FB group info from Facebook (non-200 response):', extra={'response_info': force_text(response_info.__dict__), 'group_id': facebook_id})
+                logger.warn('Error when trying to retrieve FB group info from Facebook (non-200 response):', extra={'response_info': force_str(response_info.__dict__), 'group_id': facebook_id})
                 had_error = True
             if not had_error:
                 content_info = json.loads(response_info.read()) # this graph returns a JSON string, not a query response
@@ -300,10 +300,10 @@ def obtain_facebook_page_access_token_for_user(group, page_id, user):
             }
         response_info = urllib.request.urlopen(location_url)
     except Exception as e:
-        logger.warn('Error when trying to retrieve FB page access-token from Facebook:', extra={'exception': force_text(e), 'url': location_url, 'page_id': page_id})
+        logger.warn('Error when trying to retrieve FB page access-token from Facebook:', extra={'exception': force_str(e), 'url': location_url, 'page_id': page_id})
         had_error = True
     if not had_error and not response_info.code == 200:
-        logger.warn('Error when trying to retrieve FB page access-token from Facebook (non-200 response):', extra={'response_info': force_text(response_info.__dict__), 'page_id': page_id})
+        logger.warn('Error when trying to retrieve FB page access-token from Facebook (non-200 response):', extra={'response_info': force_str(response_info.__dict__), 'page_id': page_id})
         had_error = True
     if not had_error:
         accounts_info = json.loads(response_info.read()) # this graph returns a JSON string, not a query response
@@ -353,11 +353,11 @@ def save_auth_tokens(request):
                }
         response = urllib.request.urlopen(location_url)
     except Exception as e:
-        logger.error('Error when trying to retrieve long-lived-access-token from Facebook:', extra={'exception': force_text(e), 'url': location_url})
+        logger.error('Error when trying to retrieve long-lived-access-token from Facebook:', extra={'exception': force_str(e), 'url': location_url})
         return HttpResponseServerError('Facebook request could not be completed (1).')
     
     if not response.code == 200:
-        logger.error('Error when trying to retrieve long-lived-access-token from Facebook (non-200 response):', extra={'response': force_text(response.__dict__)})
+        logger.error('Error when trying to retrieve long-lived-access-token from Facebook (non-200 response):', extra={'response': force_str(response.__dict__)})
         return HttpResponseServerError('Facebook request could not be completed (2).')
     
     # this node finally returns JSON
@@ -382,11 +382,11 @@ def save_auth_tokens(request):
                }
         response_info = urllib.request.urlopen(location_url)
     except Exception as e:
-        logger.warn('Error when trying to retrieve user info from Facebook:', extra={'exception': force_text(e), 'url': location_url})
+        logger.warn('Error when trying to retrieve user info from Facebook:', extra={'exception': force_str(e), 'url': location_url})
         fb_username = 'error'
         
     if not fb_username and not response_info.code == 200:
-        logger.warn('Error when trying to retrieveuser info from Facebook (non-200 response):', extra={'response_info': force_text(response_info.__dict__)})
+        logger.warn('Error when trying to retrieveuser info from Facebook (non-200 response):', extra={'response_info': force_str(response_info.__dict__)})
         fb_username = 'error'
         
     if not fb_username:

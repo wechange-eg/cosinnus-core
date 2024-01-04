@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 from cosinnus_event.models import Suggestion, Vote, localize
 from cosinnus_event.tests.model_tests.base import ModelTestCase
@@ -26,7 +26,7 @@ class VoteTest(ModelTestCase):
             'from': localize(self.suggestion.from_date, 'd. F Y h:i'),
             'to': localize(self.suggestion.to_date, 'd. F Y h:i'),
         }
-        self.assertEqual(expected, force_text(self.vote))
+        self.assertEqual(expected, force_str(self.vote))
 
     def test_post_vote_delete(self):
         """

@@ -14,7 +14,7 @@ from urllib.error import HTTPError, URLError
 from django.shortcuts import redirect
 from django.http.response import HttpResponse, Http404
 from cosinnus.views.attached_object import AttachableViewMixin
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.timezone import now
 from cosinnus.views.common import DeleteElementView
 from django.core.exceptions import ImproperlyConfigured
@@ -160,7 +160,7 @@ class EtherpadWriteView(RequireLoggedInMixin, EtherpadDetailView):
             self.object.last_accessed = now()
             self.object.save(update_fields=['last_accessed'])
         except Exception as e:
-            extra = {'exception': force_text(e), 'user': self.request.user}
+            extra = {'exception': force_str(e), 'user': self.request.user}
             logger.error('Error when trying to set last_accessed', extra=extra)
         return response
 
@@ -237,7 +237,7 @@ class EtherpadHybridListView(RequireReadWriteHybridMixin, HierarchyPathMixin, Hi
             return ret
         except (EtherpadException, URLError) as exc:
             transaction.savepoint_rollback(sid)
-            if 'padName does already exist' in force_text(exc):
+            if 'padName does already exist' in force_str(exc):
                 msg = _('Etherpad with name "%(name)s" already exists on pad server. Please use another name.')
                 messages.error(self.request, msg % {'name': form.data.get('title', '')})
                 return self.form_invalid(form)

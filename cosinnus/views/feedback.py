@@ -10,7 +10,7 @@ from django.contrib.contenttypes.models import ContentType
 from cosinnus.utils.context_processors import cosinnus as cosinnus_context
 from cosinnus.core.mail import get_common_mail_context, send_mail_or_fail
 from cosinnus.templatetags.cosinnus_tags import full_name
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from cosinnus.models.tagged import BaseTaggableObjectModel
 from django.template.loader import render_to_string
 from django.contrib.auth import get_user_model
@@ -28,7 +28,7 @@ def _notify_users_for_reported_objects(report_obj, request=None):
         context = {} 
     
     target_obj = report_obj.target_object
-    title = getattr(target_obj, 'title', getattr(target_obj, 'name', force_text(target_obj)))
+    title = getattr(target_obj, 'title', getattr(target_obj, 'name', force_str(target_obj)))
     report_url = reverse('admin:cosinnus_cosinnusreportedobject_change', args=(report_obj.id,))
     
     portal = None   

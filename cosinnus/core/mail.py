@@ -5,7 +5,7 @@ from __future__ import print_function
 from django.core.mail import get_connection, EmailMessage
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
@@ -35,7 +35,7 @@ def send_mail(to, subject, template, data, from_email=None, bcc=None, is_html=Fa
         Note: ``template`` can be None, if so we are looking for a ``content`` key in ``data`` to fill the email message."""
     
     if from_email is None:
-        portal_name =  force_text(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS))
+        portal_name =  force_str(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS))
         # add from-email readable name (yes, this is how this works)
         from_email = '%(portal_name)s <%(from_email)s>' % {'portal_name': portal_name, 'from_email': settings.COSINNUS_DEFAULT_FROM_EMAIL}
         
@@ -74,7 +74,7 @@ def send_mail(to, subject, template, data, from_email=None, bcc=None, is_html=Fa
                 subject = '[CELERY-DELEGATED] %s' % subject 
             CosinnusSentEmailLog.objects.create(email=to, title=subject, portal=CosinnusPortal.get_current())
         except Exception as e:
-            logger.error('Error while trying to log a sent email!', extra={'exception': force_text(e)})
+            logger.error('Error while trying to log a sent email!', extra={'exception': force_str(e)})
         
 
     return ret
@@ -125,7 +125,7 @@ def _mail_print(to, subject, template, data, from_email=None, bcc=None, is_html=
         if is_html:
             print(">> (HTML)")
         print((">> To: ", to))
-        print((">> Subject: ", force_text(subject)))
+        print((">> Subject: ", force_str(subject)))
         print(">> Body:")
         print(render_to_string(template, data))
     
@@ -140,7 +140,7 @@ def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None, is
         logger.info('Cosinnus.core.mail: Successfully sent mail on site "%d".' % settings.SITE_ID, extra=extra)
     except Exception as e:
         # fail silently. log this, though
-        extra = {'to_user': to, 'subject': subject, 'exception': force_text(e), 'exc_reason': e}
+        extra = {'to_user': to, 'subject': subject, 'exception': force_str(e), 'exc_reason': e}
         try: 
             extra.update({'sys_except': sys.exc_info()[0]})
         except:

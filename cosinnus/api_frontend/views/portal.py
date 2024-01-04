@@ -1,4 +1,4 @@
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.permissions import IsAuthenticated
@@ -55,8 +55,8 @@ class PortalTopicsView(APIView):
         topic_data = []
         for topic_id, topic_label in settings.COSINNUS_TOPIC_CHOICES:
             topic_data.append({
-                'value': force_text(topic_id),
-                'title': force_text(topic_label)
+                'value': force_str(topic_id),
+                'title': force_str(topic_label)
             })
         return Response(topic_data)
 

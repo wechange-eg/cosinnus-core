@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from datetime import timedelta
 from django.utils import dateformat
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.formats import date_format
 from django.utils.timezone import now, localtime
 
@@ -22,7 +22,7 @@ class EventTest(ModelTestCase):
             'date': localize(self.event.from_date, 'd. F Y h:i'),
             'end': localize(self.event.to_date, 'h:i'),
         }
-        self.assertEqual(expected, force_text(self.event))
+        self.assertEqual(expected, force_str(self.event))
 
     def test_string_repr_scheduled_multi_day(self):
         """
@@ -35,7 +35,7 @@ class EventTest(ModelTestCase):
             'from': localize(self.event.from_date, 'd. F Y h:i'),
             'to': localize(self.event.to_date, 'd. F Y h:i'),
         }
-        self.assertEqual(expected, force_text(self.event))
+        self.assertEqual(expected, force_str(self.event))
 
     def test_string_repr_pending(self):
         """
@@ -44,7 +44,7 @@ class EventTest(ModelTestCase):
         self.event.state = Event.STATE_VOTING_OPEN
         self.event.save()
         expected = '%(event)s (pending)' % {'event': self.event.title}
-        self.assertEqual(expected, force_text(self.event))
+        self.assertEqual(expected, force_str(self.event))
 
     def test_set_suggestion_none(self):
         """

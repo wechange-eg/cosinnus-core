@@ -6,7 +6,7 @@ import pytz
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 from cosinnus.models.profile import get_user_profile_model
 
@@ -54,7 +54,7 @@ class DefaultUserProfileTest(TestCase):
 
     def test_attributes(self):
         user = User.objects.create_user('somebody')
-        self.assertEqual(force_text(user.cosinnus_profile), 'somebody')
+        self.assertEqual(force_str(user.cosinnus_profile), 'somebody')
 
     def test_get_absolute_url(self):
         user = User.objects.create_user('somebody')
@@ -86,7 +86,7 @@ class CustomUserProfileTest(TestCase):
         user = User.objects.create_user('somebody')
         user.cosinnus_profile.dob = datetime.date(2014, 3, 21)
         user.cosinnus_profile.save()
-        self.assertEqual(force_text(user.cosinnus_profile), 'somebody (2014-03-21)')
+        self.assertEqual(force_str(user.cosinnus_profile), 'somebody (2014-03-21)')
 
     def test_get_absolute_url(self):
         user = User.objects.create_user('somebody')

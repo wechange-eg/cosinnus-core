@@ -13,7 +13,7 @@ from django.core.exceptions import ValidationError
 from django.urls import reverse
 from django.db import models
 from django.db.models.query import QuerySet
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 try:
     from django.utils.text import Truncator  # Django 1.4
 except ImportError:
@@ -96,7 +96,7 @@ def get_user_representation(user):
         if '.' in show_user_as:
             mod_path, _, attr_name = show_user_as.rpartition('.')
             try:
-                return force_text(getattr(import_module(mod_path), attr_name)(user))
+                return force_str(getattr(import_module(mod_path), attr_name)(user))
             except:  # ImportError, AttributeError, TypeError (not callable)
                 pass
         else:
@@ -104,13 +104,13 @@ def get_user_representation(user):
             if callable(attr):
                 attr = attr()
             if attr:
-                return force_text(attr)
+                return force_str(attr)
     elif callable(show_user_as):
         try:
-            return force_text(show_user_as(user))
+            return force_str(show_user_as(user))
         except:
             pass
-    return force_text(user)  # default value, or in case of empty attribute or exception
+    return force_str(user)  # default value, or in case of empty attribute or exception
 
 
 def get_user_name(user):

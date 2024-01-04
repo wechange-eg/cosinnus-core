@@ -55,7 +55,7 @@ from cosinnus.views.mixins.reflected_objects import ReflectedObjectSelectMixin,\
 from cosinnus.utils.permissions import check_object_write_access
 
 import logging
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.core.exceptions import ValidationError, ImproperlyConfigured
 from django.contrib.auth.models import AnonymousUser
 from datetime import timedelta

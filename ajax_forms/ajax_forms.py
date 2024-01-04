@@ -4,7 +4,7 @@ from django.contrib.messages.api import get_messages
 from django.http.response import JsonResponse
 from django.template.context import make_context
 from django.template.loader import render_to_string
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 import copy
 
 logger = logging.getLogger('cosinnus')
@@ -72,7 +72,7 @@ class AjaxFormsCreateViewMixin(AjaxEnabledFormViewBaseMixin):
             'result_html': render_to_string(self.ajax_result_partial, context, request=self.request),
             'new_form_html': self.render_new_form(self.ajax_form_partial, form_id),
             'ajax_form_id': form_id,
-            'messages': [force_text(msg) for msg in get_messages(self.request)], # this consumes the messages
+            'messages': [force_str(msg) for msg in get_messages(self.request)], # this consumes the messages
         }
         return JsonResponse(data)
     
@@ -142,7 +142,7 @@ class AjaxFormsDeleteViewMixin(object):
             form_id = self.request.POST.get('ajax_form_id')
             data = {
                 'ajax_form_id': form_id,
-                'messages': [force_text(msg) for msg in get_messages(self.request)], # this consumes the messages
+                'messages': [force_str(msg) for msg in get_messages(self.request)], # this consumes the messages
             }
             return JsonResponse(data)
         except:

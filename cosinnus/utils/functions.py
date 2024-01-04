@@ -12,7 +12,7 @@ from uuid import uuid1
 from django.core.exceptions import ImproperlyConfigured
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.html import strip_tags
 from django.utils.text import normalize_newlines, unescape_entities
 import six
@@ -179,7 +179,7 @@ def clean_single_line_text(text):
 
 def convert_html_to_string(text):
     """ Returns text containing html tags as text without its tags """
-    return unescape_entities(strip_tags(force_text(text)))
+    return unescape_entities(strip_tags(force_str(text)))
 
 
 def is_number(s):

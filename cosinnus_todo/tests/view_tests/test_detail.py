@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.urls import reverse
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 from cosinnus_todo.models import TodoEntry, TodoList
 from cosinnus_todo.tests.view_tests.base import ViewTestCase
@@ -25,4 +25,4 @@ class DetailTest(ViewTestCase):
         self.assertEqual(response.status_code, 200)
 
         # content should contain pad title
-        self.assertIn(todo.title, force_text(response.content))
+        self.assertIn(todo.title, force_str(response.content))

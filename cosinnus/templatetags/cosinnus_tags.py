@@ -43,7 +43,7 @@ from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal,\
 import logging
 import markdown2
 import json as _json
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.templatetags.static import static
@@ -878,7 +878,7 @@ def cosinnus_report_object_action(context, obj=None, instantly_trigger=False):
     else:
         title = getattr(obj, 'title', getattr(obj, 'name', None))
     if not title:
-        title = force_text(obj)
+        title = force_str(obj)
     
     # mark_safe doesn't really seem to work here
     title = escape(title.replace('"', "'"))
@@ -925,7 +925,7 @@ def textfield(text, arg=''):
         
     if not text:
         return ''
-    text = force_text(text)
+    text = force_str(text)
     
     
     # shorten and wrap un-linked email addresses in markdown links
@@ -1098,7 +1098,7 @@ def truncatenumber(value, max=99):
         return value
     if intval > max:
         return '%d+' % max
-    return force_text(intval)
+    return force_str(intval)
 
 @register.simple_tag(takes_context=True)
 def debug_context(context, obj=None):
@@ -1171,13 +1171,13 @@ def render_cosinnus_topics_field(escape_html=None):
 @register.simple_tag()
 def render_cosinnus_topics_json():
     """ Returns a JSON dict of {<topic-id>: <topic-label-translated>, ...} """
-    topic_choices = dict([(top_id, force_text(val)) for top_id, val in TAG_OBJECT.TOPIC_CHOICES])
+    topic_choices = dict([(top_id, force_str(val)) for top_id, val in TAG_OBJECT.TOPIC_CHOICES])
     return mark_safe(_json.dumps(topic_choices))
 
 @register.simple_tag()
 def render_cosinnus_text_topics_json():
     """ Returns a JSON dict of {<topic-id>: <topic-label-translated>, ...} """
-    text_topic_choices = dict([(top.id, force_text(top.name)) for top in CosinnusTopicCategory.objects.all()])
+    text_topic_choices = dict([(top.id, force_str(top.name)) for top in CosinnusTopicCategory.objects.all()])
     return mark_safe(_json.dumps(text_topic_choices))
 
 @register.simple_tag()

@@ -13,7 +13,7 @@ from django.db.models import Q
 from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
 from django.utils import dateformat
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.formats import date_format
 from django.utils.functional import cached_property
 from django.utils.timezone import localtime, now
@@ -268,7 +268,7 @@ class Vote(models.Model):
         return self.option.poll.get_absolute_url()
     
     def get_label(self):
-        return force_text(dict(self.VOTE_CHOICES)[self.choice])
+        return force_str(dict(self.VOTE_CHOICES)[self.choice])
 
 
 @six.python_2_unicode_compatible

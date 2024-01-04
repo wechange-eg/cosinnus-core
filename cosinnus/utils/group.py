@@ -8,7 +8,7 @@ from django.apps import apps
 from django.db.models import Q, Count
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 
 from cosinnus.conf import settings
@@ -77,7 +77,7 @@ def message_group_admins_url(group, group_admins=None):
     group_admins = group_admins or group.actual_admins
     if not group_admins:
         return None
-    message_subject = force_text(_('Question about')) + ' ' + force_text(_('Group') if group.type == group.TYPE_SOCIETY else _('Project')) + ': ' + group.name
+    message_subject = force_str(_('Question about')) + ' ' + force_str(_('Group') if group.type == group.TYPE_SOCIETY else _('Project')) + ': ' + group.name
     return reverse('postman:write', kwargs={'recipients':','.join([user.username for user in group_admins])}) + '?subject=' + urlquote(message_subject)
 
 

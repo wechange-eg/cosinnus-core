@@ -8,7 +8,7 @@ import six
 from collections import defaultdict
 
 from django.db import models
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
@@ -245,12 +245,12 @@ def get_categories_grouped(category_qs):
     
     misc_label = 'zzz_misc'
     def cat_group_key_or_misc(cat, key):
-        return cat.category_group and cat.category_group[key] or force_text(misc_label)
+        return cat.category_group and cat.category_group[key] or force_str(misc_label)
     
     grouped_dict = defaultdict(list)
     for category in category_qs:
         if not category.category_group:
-            order_key = force_text(misc_label)
+            order_key = force_str(misc_label)
         elif category.category_group.order_key:
             order_key = category.category_group.order_key
         else:

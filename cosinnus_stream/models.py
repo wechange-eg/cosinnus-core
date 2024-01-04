@@ -15,7 +15,7 @@ from cosinnus_stream.mixins import StreamManagerMixin
 from django.core.cache import cache
 from cosinnus.models.group import CosinnusPortal
 from django.db.models.signals import post_save
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.core.validators import validate_comma_separated_integer_list
 
 import logging
@@ -31,7 +31,7 @@ class StreamManager(django_models.Manager):
         try:
             stream = self.get_my_stream_for_user(user, portals=str(CosinnusPortal.get_current().id))
         except Exception as e:
-            extra = {'exception': force_text(e), 'user': user}
+            extra = {'exception': force_str(e), 'user': user}
             logger.error('Error when trying to get MyStream for stream unread count. Exception in extra.', extra=extra)
             return 0
         return stream.unread_count()
@@ -101,7 +101,7 @@ class Stream(StreamManagerMixin, BaseTaggableObjectModel):
                       self, settings.COSINNUS_STREAM_SHORT_CACHE_TIMEOUT)
         except Exception as e:
             # sometimes we cannot pickle the deep cache and it throws errors, we don't want to let this bubble up
-            logger.warning('Could not save the user stream into the cache because of an exception! (in extra)', extra={'exception': force_text(e)})
+            logger.warning('Could not save the user stream into the cache because of an exception! (in extra)', extra={'exception': force_str(e)})
             
     
     # def unread_count() is in the StreamManagerMixin!
@@ -125,7 +125,7 @@ def create_special_streams_profile(sender, instance, created, **kwargs):
             Stream.objects.get_or_create(
                  creator=user, 
                  is_special=True, 
-                 special_groups=','.join([force_text(gid) for gid in special_stream['group_ids']]),
+                 special_groups=','.join([force_str(gid) for gid in special_stream['group_ids']]),
                  defaults={
                     'models': special_stream['app_models'],
                     'title': special_stream['title'],

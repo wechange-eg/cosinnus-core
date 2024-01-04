@@ -35,7 +35,7 @@ from django.urls import reverse, reverse_lazy, NoReverseMatch
 from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.timezone import now
@@ -895,7 +895,7 @@ class GroupConfirmMixin(object):
         """
         if self.success_url:
             # Forcing possible reverse_lazy evaluation
-            url = force_text(self.success_url)
+            url = force_str(self.success_url)
         else:
             raise ImproperlyConfigured(
                 "No URL to redirect to. Provide a success_url.")
@@ -1775,7 +1775,7 @@ def group_assign_reflected_object(request, group):
     success_message = _('Your selection for showing this item in projects/groups was updated.')
     if added_groups:
         group_names = ', '.join([show_group.name for show_group in added_groups])
-        success_message = force_text(success_message) + ' ' + force_text(_('This item is now being shown in these projects/groups: %(group_names)s') % {'group_names': group_names})
+        success_message = force_str(success_message) + ' ' + force_str(_('This item is now being shown in these projects/groups: %(group_names)s') % {'group_names': group_names})
     messages.success(request, success_message)
     
     redirect_url = obj.get_absolute_url()

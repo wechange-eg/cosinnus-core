@@ -21,7 +21,6 @@ from cosinnus_etherpad.utils.etherpad_client import EtherpadLiteClient, Etherpad
 from cosinnus_etherpad.utils.ethercalc_client import EtherCalc as EtherCalcClient
 from cosinnus_etherpad.conf import settings
 from cosinnus_etherpad.managers import EtherpadManager
-from django.utils.encoding import smart_text
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user,\
     check_ug_membership
 from cosinnus.utils.urls import group_aware_reverse
@@ -31,7 +30,7 @@ from django.contrib.auth import get_user_model
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.models.group import CosinnusPortal
 from requests.exceptions import HTTPError
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 import logging
 from uuid import uuid1
@@ -288,7 +287,7 @@ class Ethercalc(Etherpad):
             else:
                 raise
         except Exception as e:
-            logger.error('Could not display an Ethercalc because of exception "%s"' % force_text(e))
+            logger.error('Could not display an Ethercalc because of exception "%s"' % force_str(e))
             raise
         return ret
     

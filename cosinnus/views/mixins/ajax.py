@@ -8,7 +8,7 @@ import six
 from django.contrib.messages.api import get_messages
 from django.core.exceptions import ImproperlyConfigured
 from django.http import HttpResponseBadRequest, QueryDict
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 from cosinnus.utils.http import JSONResponse
 
@@ -19,7 +19,7 @@ def patch_body_json_data(request):
     """
     body = request.body
     encoding = request.encoding or 'utf-8'
-    body = force_text(body, encoding=encoding)
+    body = force_str(body, encoding=encoding)
     json_data = json.loads(body, encoding=request.encoding)
 
     querydict = QueryDict('', mutable=True)
@@ -32,10 +32,10 @@ def patch_body_json_data(request):
             # Every nested object must have an id.
             pk = v.get('id', None)
             if pk is not None:
-                querydict[k] = force_text(pk)
+                querydict[k] = force_str(pk)
             continue
         else:
-            querydict[k] = force_text(v)
+            querydict[k] = force_str(v)
 
     request._post = querydict
     return request
@@ -162,7 +162,7 @@ class AjaxableFormMixin(object):
                 data = {
                     'pk': self.object.pk,
                     'id': self.object.id,
-                    'messages': [force_text(msg) for msg in get_messages(self.request)],
+                    'messages': [force_str(msg) for msg in get_messages(self.request)],
                 }
                 return self.render_to_json_response(data)
             else:

@@ -10,7 +10,7 @@ from django.shortcuts import get_object_or_404, render,\
     redirect
 from django.template import RequestContext
 from django.utils.decorators import method_decorator
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import TemplateView
 
@@ -118,15 +118,15 @@ def widget_detail(request, id, offset=0):
     
     data = {
         'X-Cosinnus-Widget-Content': widget_content,
-        'X-Cosinnus-Widget-Title': force_text(widget.title),
-        'X-Cosinnus-Widget-App-Name': force_text(wc.app_name),
-        'X-Cosinnus-Widget-Widget-Name': force_text(wc.widget_name),
+        'X-Cosinnus-Widget-Title': force_str(widget.title),
+        'X-Cosinnus-Widget-App-Name': force_str(wc.app_name),
+        'X-Cosinnus-Widget-Widget-Name': force_str(wc.widget_name),
         'X-Cosinnus-Widget-Num-Rows-Returned': rows_returned,
         'X-Cosinnus-Widget-Has-More-Data': 'true' if has_more else 'false',
     }
     title_url = widget.title_url
     if title_url is not None:
-        data['X-Cosinnus-Widget-Title-URL'] = force_text(title_url)
+        data['X-Cosinnus-Widget-Title-URL'] = force_str(title_url)
     
     return JSONResponse(data)
 

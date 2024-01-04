@@ -10,7 +10,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django_mailbox.models import Message
 from django.utils.datastructures import MultiValueDict
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.translation import ugettext_lazy as _
 
 from postman.models import Message as PostmanMessage
@@ -46,7 +46,7 @@ def update_mailboxes():
             messages = mailbox.get_new_mail()
         except Exception as e:
             logger.error('Error trying to collect directreply mails for portal %s' % CosinnusPortal.get_current().slug,
-                         extra={'exception': force_text(e)})
+                         extra={'exception': force_str(e)})
             
         logger.info('Successfully gathered directreply messages for portal %s' % CosinnusPortal.get_current().slug,
                     extra={'number_messages': len(messages)})
@@ -232,7 +232,7 @@ def reply_to_postman_message(message, user, text):
         form.save(parent=message)
         return True
     else:
-        logger.warning('Could not direct-reply to a postman message, because the form was invalid!', extra={'form-errors': force_text(form.errors), 'wechange-user-email': user.email, 'text': text})
+        logger.warning('Could not direct-reply to a postman message, because the form was invalid!', extra={'form-errors': force_str(form.errors), 'wechange-user-email': user.email, 'text': text})
         return False
 
 
@@ -262,7 +262,7 @@ def write_postman_message(user, sender, subject, text):
         form.save()
         return True
     else:
-        logger.warning('Could not direct-write a postman message, because the form was invalid!', extra={'form-errors': force_text(form.errors), 'sender-user-email': user.email, 'text': text})
+        logger.warning('Could not direct-write a postman message, because the form was invalid!', extra={'form-errors': force_str(form.errors), 'sender-user-email': user.email, 'text': text})
         return False
     
     

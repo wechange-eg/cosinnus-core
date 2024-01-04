@@ -5,7 +5,7 @@ from builtins import object
 from django import forms
 from django.forms.widgets import HiddenInput, RadioSelect,\
     SplitHiddenDateTimeWidget
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.forms.group import GroupKwargModelFormMixin
@@ -77,7 +77,7 @@ class VoteForm(forms.Form):
     def get_label(self):
         pk = self.initial.get('option', None)
         if pk:
-            return force_text(Option.objects.get(pk=pk))
+            return force_str(Option.objects.get(pk=pk))
         return ''
     
     

@@ -13,7 +13,7 @@ from django.db.models import signals
 from django.apps import apps
 from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.translation import gettext, ugettext_lazy as _
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
@@ -305,7 +305,7 @@ class GroupPermanentRedirectMiddleware(MiddlewareMixin, object):
         except Exception as e:
             if settings.DEBUG:
                 raise
-            logger.error('cosinnus.GroupPermanentRedirectMiddleware: Error while processing possible group redirect!', extra={'exception', force_text(e)})
+            logger.error('cosinnus.GroupPermanentRedirectMiddleware: Error while processing possible group redirect!', extra={'exception', force_str(e)})
 
 
 class ForceInactiveUserLogoutMiddleware(MiddlewareMixin):

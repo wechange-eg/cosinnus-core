@@ -23,7 +23,7 @@ from cosinnus.utils.permissions import check_ug_membership
 from django.core.exceptions import PermissionDenied
 from django_select2.views import Select2View, NO_ERR_RESP
 from django.template.loader import render_to_string
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 logger = logging.getLogger("cosinnus")
 
@@ -128,7 +128,7 @@ class CloudFilesContentWidgetView(BasePagedOffsetWidgetView):
         try:
             dataset = nextcloud.find_newest_files(userid=get_nc_user_id(self.request.user), page=page, page_size=self.page_size)
         except Exception as e:
-            logger.error('An error occured during Nextcloud widget data retrieval! Exception in extra.', extra={'exc_str': force_text(e), 'exception': e})
+            logger.error('An error occured during Nextcloud widget data retrieval! Exception in extra.', extra={'exc_str': force_str(e), 'exception': e})
             had_error = True
             
         if had_error:

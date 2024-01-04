@@ -13,7 +13,7 @@ from django.urls import reverse
 from django.db import models
 from django.db.models.signals import post_delete
 from django.dispatch.dispatcher import receiver
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _, pgettext
 
@@ -39,9 +39,9 @@ from cosinnus.views.mixins.media import VideoEmbedFieldMixin
 def get_hashed_filename(instance, filename):
     instance._sourcefilename = filename
     time = now()
-    path = join(get_cosinnus_media_file_folder(), 'files', force_text(instance.group_id),
-        force_text(time.year), force_text(time.month))
-    name = '%s%d%s' % (force_text(uuid.uuid4()), instance.group_id, filename)
+    path = join(get_cosinnus_media_file_folder(), 'files', force_str(instance.group_id),
+        force_str(time.year), force_str(time.month))
+    name = '%s%d%s' % (force_str(uuid.uuid4()), instance.group_id, filename)
     newfilename = hashlib.sha1(name.encode('utf-8')).hexdigest()
     return join(path, newfilename)
 

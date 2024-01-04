@@ -33,7 +33,7 @@ from cosinnus.utils.permissions import check_object_read_access,\
     check_user_can_receive_emails, check_user_portal_admin,\
     check_user_portal_moderator
 from django.templatetags.static import static
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from cosinnus.utils.group import get_cosinnus_group_model,\
     get_default_user_group_slugs
 from annoying.functions import get_object_or_None
@@ -709,7 +709,7 @@ class NotificationsThread(Thread):
             
             from_email = None
             # strip anything unusual from the sender's name and any formatting interfering with the header
-            portal_name =  force_text(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS))
+            portal_name =  force_str(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS))
             username = strip_tags(full_name(notification_event.user))\
                 .replace(',', '').replace('.', '').replace('<', '').replace('>', '')
             username = username.encode("ascii", errors="ignore").decode().strip()
@@ -769,7 +769,7 @@ class NotificationsThread(Thread):
                         self.create_new_user_alert(notification_event, receiver, reason_key=alert_reason)
                         self.already_alerted_user_ids.append(receiver.id)
                 except Exception as e:
-                    logger.exception('An unknown error occured during NotificationAlert check/creation! Exception in extra.', extra={'exception': force_text(e)})
+                    logger.exception('An unknown error occured during NotificationAlert check/creation! Exception in extra.', extra={'exception': force_str(e)})
                     if settings.DEBUG:
                         raise
 
@@ -1046,7 +1046,7 @@ def render_digest_item_for_notification_event(notification_event, return_data=Fa
             return item_html
     
     except Exception as e:
-        logger.exception('Error while rendering a digest item for a digest email. Exception in extra.', extra={'exception': force_text(e)})
+        logger.exception('Error while rendering a digest item for a digest email. Exception in extra.', extra={'exception': force_str(e)})
     return ''
 
 
