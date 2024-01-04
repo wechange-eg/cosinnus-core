@@ -23,11 +23,6 @@ import environ
 from cosinnus import VERSION as COSINNUS_VERSION
 
 from django.conf.global_settings import *
-# `django.core.exceptions.ImproperlyConfigured: PASSWORD_RESET_TIMEOUT_DAYS/PASSWORD_RESET_TIMEOUT are mutually exclusive.`
-# because django.conf.global_settings is being imported directly to be able to modify pre-existing default values.
-# PASSWORD_RESET_TIMEOUT_DAYS is deprecated however and will be deleted in a future django version
-if 'PASSWORD_RESET_TIMEOUT_DAYS' in globals():
-    del globals()['PASSWORD_RESET_TIMEOUT_DAYS']
 
 
 # WARNING: do not add any settings on this level! 
