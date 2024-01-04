@@ -7,7 +7,7 @@ from django.apps import apps
 
 from cosinnus.conf import settings
 from django.core.cache import cache
-from django.utils.http import is_safe_url
+from django.utils.http import url_has_allowed_host_and_scheme
 
 from cosinnus.utils.group import get_cosinnus_group_model
 import re
@@ -94,7 +94,7 @@ def get_non_cms_root_url(request=None):
 def safe_redirect(url, request, return_none_if_unsafe=False):
     """ Will return the supplied URL if it is safe or a safe wechange root URL """
     # Ensure the user-originating redirection url is safe.
-    if not is_safe_url(url=url, allowed_hosts=[request.get_host()]):
+    if not url_has_allowed_host_and_scheme(url=url, allowed_hosts=[request.get_host()]):
         if return_none_if_unsafe:
             return None
         url = get_non_cms_root_url(request)
@@ -116,7 +116,7 @@ def redirect_next_or(request_with_next, alternate_url):
     """ Checks the given request if it contains a ?next= param, and if that is a safe url returns it.
         Otherwise, returns `alternate_url` """
     next_param = request_with_next.GET.get('next', None)
-    if not next_param or not is_safe_url(next_param, allowed_hosts=[request_with_next.get_host()]):
+    if not next_param or not url_has_allowed_host_and_scheme(next_param, allowed_hosts=[request_with_next.get_host()]):
         return alternate_url
     return next_param
 
@@ -127,7 +127,7 @@ def redirect_with_next(url, request_with_next, additional_param_str=None):
         @param additional_param_str: if given, this string will be appended as a param as well,
             either with ? or &, depending if params are already present """
     next_param = request_with_next.GET.get('next', None)
-    if not next_param or not is_safe_url(next_param, allowed_hosts=[request_with_next.get_host()]):
+    if not next_param or not url_has_allowed_host_and_scheme(next_param, allowed_hosts=[request_with_next.get_host()]):
         if additional_param_str:
             return f"{url}?{additional_param_str}"
         return url

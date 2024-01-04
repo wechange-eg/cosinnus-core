@@ -3,7 +3,7 @@ from urllib.parse import unquote
 from django.contrib.auth import login, logout
 from django.urls.base import reverse
 from django.utils.encoding import force_str
-from django.utils.http import is_safe_url
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import gettext_lazy as _
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
@@ -138,7 +138,7 @@ class LoginView(LoginViewAdditionalLogicMixin, APIView):
         next_token = request.data.get('next', None)
         if next_token:
             next_token = unquote(next_token)
-            if is_safe_url(next_token, allowed_hosts=[request.get_host()]):
+            if url_has_allowed_host_and_scheme(next_token, allowed_hosts=[request.get_host()]):
                 next_url = next_token
         
         user_tokens = get_tokens_for_user(user)

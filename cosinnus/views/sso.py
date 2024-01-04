@@ -23,7 +23,7 @@ from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.files import get_avatar_filename
 from cosinnus.utils.oauth import do_oauth1_request, do_oauth1_receive
 from cosinnus.utils.user import create_user
-from django.utils.http import is_safe_url
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.db.models import Q
 from django.utils.encoding import force_str
 
@@ -147,9 +147,9 @@ error = ErrorView.as_view()
 def _get_redirect_url(request):
     """ Gets the redirect URL (1) from request's next param, (2) from session (3) fallbacks to
         settings.COSINNUS_SSO_ALREADY_LOGGED_IN_REDIRECT_URL """
-    if request.GET.get('next', None) and is_safe_url(url=request.GET.get('next'), allowed_hosts=[request.get_host()]):
+    if request.GET.get('next', None) and url_has_allowed_host_and_scheme(url=request.GET.get('next'), allowed_hosts=[request.get_host()]):
         return request.GET.get('next')
-    if request.session.get('sso-next', None) and is_safe_url(url=request.session.get('sso-next'), allowed_hosts=[request.get_host()]):
+    if request.session.get('sso-next', None) and url_has_allowed_host_and_scheme(url=request.session.get('sso-next'), allowed_hosts=[request.get_host()]):
         url = request.session.get('sso-next')
         request.session['sso-next'] = None
         return url
