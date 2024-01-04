@@ -10,16 +10,16 @@ from django.utils.translation import gettext_lazy as _, ngettext_lazy
 
 
 """ Signal definitions """
-assigned_todo_to_user = dispatch.Signal(providing_args=["user", "obj", "audience"])
-user_completed_my_todo = dispatch.Signal(providing_args=["user", "obj", "audience"])
-todo_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
-todo_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
-tagged_todo_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
-assigned_todo_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
-following_todo_changed = dispatch.Signal(providing_args=["user", "obj", "audience"])
-following_todo_assignee_changed = dispatch.Signal(providing_args=["user", "obj", "audience"])
-following_todo_completed = dispatch.Signal(providing_args=["user", "obj", "audience"])
-following_todo_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
+assigned_todo_to_user = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+user_completed_my_todo = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+todo_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+todo_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+tagged_todo_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+assigned_todo_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+following_todo_changed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+following_todo_assignee_changed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+following_todo_completed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+following_todo_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 
 
 """ Notification definitions.

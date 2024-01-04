@@ -10,15 +10,15 @@ from django.utils.translation import gettext_lazy as _, ngettext_lazy
 
 
 """ Signal definitions """
-poll_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
-poll_completed = dispatch.Signal(providing_args=["user", "obj", "audience"])
-poll_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
-tagged_poll_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
-voted_poll_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
-followed_group_poll_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
-following_poll_changed = dispatch.Signal(providing_args=["user", "obj", "audience"])
-following_poll_completed = dispatch.Signal(providing_args=["user", "obj", "audience"])
-following_poll_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
+poll_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+poll_completed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+poll_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+tagged_poll_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+voted_poll_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+followed_group_poll_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+following_poll_changed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+following_poll_completed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+following_poll_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 
 
 """ Notification definitions.

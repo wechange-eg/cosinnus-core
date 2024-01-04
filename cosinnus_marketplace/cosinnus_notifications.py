@@ -10,13 +10,13 @@ from django.utils.translation import gettext_lazy as _, ngettext_lazy
 
 
 """ Signal definitions """
-offer_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
-offer_expired = dispatch.Signal(providing_args=["user", "obj", "audience"])
-offer_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
-tagged_offer_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
-followed_group_offer_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
-following_offer_changed = dispatch.Signal(providing_args=["user", "obj", "audience"])
-following_offer_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
+offer_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+offer_expired = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+offer_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+tagged_offer_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+followed_group_offer_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+following_offer_changed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+following_offer_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 
 """ Notification definitions.
     These will be picked up by cosinnus_notfications automatically, as long as the 

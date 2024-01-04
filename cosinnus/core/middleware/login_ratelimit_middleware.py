@@ -61,7 +61,7 @@ logger = logging.getLogger(_get_setting('LOGIN_RATELIMIT_LOGGER_NAME'))
 
 
 """ Signal sent after reaching the rate limit after `LOGIN_RATELIMIT_TRIGGER_ON_ATTEMPT` attempts for a username. """
-login_ratelimit_triggered = dispatch.Signal(providing_args=['username', 'ip'])
+login_ratelimit_triggered = dispatch.Signal()  # providing_args=['username', 'ip']
 
 
 

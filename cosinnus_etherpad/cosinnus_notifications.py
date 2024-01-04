@@ -10,8 +10,8 @@ from django.utils.translation import gettext_lazy as _, ngettext_lazy
 
 
 """ Signal definitions """
-etherpad_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
-followed_group_etherpad_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
+etherpad_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+followed_group_etherpad_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 
 
 """ Notification definitions.
