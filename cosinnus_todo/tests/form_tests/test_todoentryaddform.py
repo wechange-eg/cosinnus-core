@@ -5,7 +5,7 @@ from cosinnus.utils.test import get_fieldnames_from_multiform
 
 from cosinnus_todo.forms import TodoEntryAddForm
 
-from tests.form_tests.base import FormTestCase
+from cosinnus_todo.tests.form_tests.base import FormTestCase
 
 
 class TodoEntryAddFormTest(FormTestCase):
@@ -17,12 +17,12 @@ class TodoEntryAddFormTest(FormTestCase):
         fields = {
             # "normal" fields
             'obj': [
-                'title', 'due_date', 'new_list', 'todolist', 'assigned_to',
-                'priority', 'note', 'tags',
+                'title', 'note', 'due_date', 'new_list', 'todolist', 'assigned_to', 'priority', 'attached_objects'
             ],
             # media_tag fields
             'media_tag': [
-                'location_place', 'people_name', 'public',
+                'persons', 'tags', 'visibility', 'public', 'location', 'location_lat', 'location_lon', 'place',
+                'valid_start', 'valid_end', 'approach', 'topics', 'text_topics', 'bbb_room', 'like'
             ]
         }
         form = TodoEntryAddForm(group=self.group)

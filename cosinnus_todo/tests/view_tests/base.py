@@ -3,11 +3,13 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.utils.timezone import now
 from django.test import TestCase, Client
 
 from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership)
 from cosinnus.models.membership import MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN
-from cosinnus_todo.models import TodoEntry
+from cosinnus.models.tagged import BaseTagObject
+from cosinnus_todo.models import TodoEntry, TodoList
 
 
 class ViewTestCase(TestCase):
@@ -16,18 +18,24 @@ class ViewTestCase(TestCase):
         super(ViewTestCase, self).setUp(*args, **kwargs)
         self.client = Client()
         self.group = CosinnusGroup.objects.create(name='testgroup', public=True)
+        self.group.media_tag.visibility = BaseTagObject.VISIBILITY_ALL
+        self.group.media_tag.save()
         self.credential = 'admin'
         self.admin = User.objects.create_superuser(
-            username=self.credential, email=None, password=self.credential)
+            username=self.credential, email='admin@example.com', password=self.credential, last_login=now())
+        self.admin.cosinnus_profile.settings['tos_accepted'] = True
+        self.admin.cosinnus_profile.save()
         CosinnusGroupMembership.objects.create(user=self.admin,
             group=self.group, status=MEMBERSHIP_ADMIN)
+        todo_list = TodoList.objects.first()
         self.todo = TodoEntry.objects.create(
-            group=self.group, title='testtodo', creator=self.admin)
+            group=self.group, title='testtodo', creator=self.admin, todolist=todo_list)
         self.kwargs = {'group': self.group.slug, 'slug': self.todo.slug}
 
     def add_user(self, credential):
         self.user = User.objects.create_user(
-            username=credential, password=credential)
+            username=credential, password=credential, email=f'{credential}@example.com', last_login=now()
+        )
         CosinnusGroupMembership.objects.create(
             user=self.user,
             group=self.group,
