@@ -31,7 +31,7 @@ from cosinnus.views.mixins.ajax import ListAjaxableResponseMixin, AjaxableFormMi
     DetailAjaxableResponseMixin
 from django.views.decorators.csrf import csrf_protect
 from cosinnus.utils.permissions import check_object_write_access
-from cosinnus.utils.http import JSONResponse
+from cosinnus.utils.http import JSONResponse, is_ajax
 from django.contrib.auth import get_user_model
 from cosinnus.views.mixins.filters import CosinnusFilterMixin
 from cosinnus_todo.filters import TodoFilter
@@ -82,7 +82,7 @@ class TodoEntryListView(ListAjaxableResponseMixin, RequireReadMixin,
         
     def dispatch(self, request, *args, **kwargs):
         list_filter = None
-        if self.is_ajax_request_url and request.is_ajax():
+        if self.is_ajax_request_url and is_ajax(request):
             list_pk = request.GET.get('list', None)
             if list_pk:
                 list_filter = {'pk': list_pk}
@@ -527,7 +527,7 @@ class TodoListDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
     serializer_class = TodoListSerializer
 
     def dispatch(self, request, *args, **kwargs):
-        if not self.is_ajax_request_url or not request.is_ajax():
+        if not self.is_ajax_request_url or not is_ajax(request):
             return HttpResponseBadRequest()
         else:
             return super(TodoListDetailView, self).dispatch(request, *args, **kwargs)

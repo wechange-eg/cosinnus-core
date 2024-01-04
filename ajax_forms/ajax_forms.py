@@ -7,6 +7,8 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_str
 import copy
 
+from cosinnus.utils.http import is_ajax
+
 logger = logging.getLogger('cosinnus')
 
 
@@ -54,7 +56,7 @@ class AjaxFormsCreateViewMixin(AjaxEnabledFormViewBaseMixin):
     """
     
     def form_valid(self, form):
-        if not self.request.is_ajax():
+        if not is_ajax(self.request):
             return super(AjaxFormsCreateViewMixin, self).form_valid(form)
         
         super(AjaxFormsCreateViewMixin, self).form_valid(form)
@@ -77,7 +79,7 @@ class AjaxFormsCreateViewMixin(AjaxEnabledFormViewBaseMixin):
         return JsonResponse(data)
     
     def form_invalid(self, form):
-        if not self.request.is_ajax():
+        if not is_ajax(self.request):
             return super(AjaxFormsCreateViewMixin, self).form_invalid(form)
         data = {
             'form_errors': form.errors
@@ -134,7 +136,7 @@ class AjaxFormsDeleteViewMixin(object):
     """
     
     def delete(self, *args, **kwargs):
-        if not self.request.is_ajax():
+        if not is_ajax(self.request):
             return super(AjaxFormsDeleteViewMixin, self).delete(*args, **kwargs)
         
         try:

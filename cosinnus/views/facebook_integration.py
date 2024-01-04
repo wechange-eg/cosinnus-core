@@ -25,6 +25,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django import forms
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.http import is_ajax
 
 logger = logging.getLogger('cosinnus')
 
@@ -329,7 +330,7 @@ def obtain_facebook_page_access_token_for_user(group, page_id, user):
 def save_auth_tokens(request):
     """ Saves the given facebook auth tokens for the current user """
     
-    if not request.is_ajax() or not request.method=='POST':
+    if not is_ajax(request) or not request.method=='POST':
         return HttpResponseNotAllowed(['POST'])
     if not request.user.is_authenticated:
         return HttpResponseForbidden('Must be logged in!')

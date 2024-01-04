@@ -28,6 +28,7 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import LikeObject
 from cosinnus.utils.context_processors import cosinnus as cosinnus_context
 from cosinnus.utils.context_processors import settings as cosinnus_context_settings
+from cosinnus.utils.http import is_ajax
 from cosinnus.utils.permissions import check_object_write_access, \
     check_object_likefollowstar_access
 from cosinnus.utils.urls import safe_redirect
@@ -307,7 +308,7 @@ def do_likefollowstar(request, **kwargs):
             If the LikeObject results in being liked=False, no matter the follow state, it will be deleted immediately
     """
     
-    if not request.is_ajax() and not request.method=='POST':
+    if not is_ajax(request) and not request.method=='POST':
         return HttpResponseNotAllowed('POST', content='This endpoint is for POST only.')
     if not request.user.is_authenticated:
         return HttpResponseForbidden('Not authenticated.')

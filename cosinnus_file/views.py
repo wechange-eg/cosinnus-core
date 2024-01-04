@@ -39,6 +39,7 @@ from cosinnus.core.decorators.views import get_group_for_request
 from cosinnus.utils.permissions import check_group_create_objects_access,\
     check_object_read_access
 from cosinnus.utils.functions import clean_single_line_text
+from cosinnus.utils.http import is_ajax
 from cosinnus.views.attached_object import build_attachment_field_result
 
 
@@ -513,7 +514,7 @@ def file_upload_inline(request, group):
             - 'add_to_select2' (default): Will render a select2 pill and in JS, append it to the attach-file select2 field.
             - 'refresh_page' will add a message to the request and in JS refresh the browser page
             - 'render_object' will render the single file template(s) and in JS append them to the file list """
-    if not request.is_ajax() or not request.method=='POST':
+    if not is_ajax(request) or not request.method=='POST':
         return HttpResponseNotAllowed(['POST'])
     
     on_success = request.POST.get('on_success', 'add_to_select2')

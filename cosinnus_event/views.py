@@ -47,6 +47,7 @@ from cosinnus.core.decorators.views import require_user_token_access, dispatch_g
 from django.contrib.sites.shortcuts import get_current_site
 from cosinnus.utils.functions import ensure_list_of_ints, unique_aware_slugify, is_number
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.http import is_ajax
 from django.views.decorators.csrf import csrf_protect
 from django.http.response import HttpResponseBadRequest
 from annoying.functions import get_object_or_None
@@ -1115,7 +1116,7 @@ def assign_attendance_view(request, group, slug):
         POST param: ``target_state``: Numerical for EventAttendance::ATTENDANCE_STATES.
             Pass '-1' to remove the attending object, i.e. the 'no choice selected' state.  """
     
-    if not request.is_ajax():
+    if not is_ajax(request):
         return HttpResponseBadRequest("This can only be called via Ajax.")
     user = request.user
     if not user.is_authenticated:

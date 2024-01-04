@@ -18,7 +18,7 @@ from cosinnus.core.decorators.views import require_admin_access_decorator,\
     redirect_to_not_logged_in
 from cosinnus.core.registries import widget_registry
 from cosinnus.models.widget import WidgetConfig
-from cosinnus.utils.http import JSONResponse
+from cosinnus.utils.http import JSONResponse, is_ajax
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership,\
     check_user_superuser, check_object_write_access
 from cosinnus.views.mixins.group import RequireReadOrRedirectMixin,\
@@ -322,7 +322,7 @@ def save_widget_config(request):
     if not user.is_authenticated:
         return HttpResponseForbidden()
     
-    if not request.is_ajax() or not request.method=='POST':
+    if not is_ajax(request) or not request.method=='POST':
         return HttpResponseNotAllowed(['POST'])
     
     import json

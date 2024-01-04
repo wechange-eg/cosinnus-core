@@ -10,7 +10,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.http import HttpResponseBadRequest, QueryDict
 from django.utils.encoding import force_str
 
-from cosinnus.utils.http import JSONResponse
+from cosinnus.utils.http import JSONResponse, is_ajax
 
 
 def patch_body_json_data(request):
@@ -61,7 +61,7 @@ class BaseAjaxableResponseMixin(object):
     def get(self, request, *args, **kwargs):
         if self.is_ajax_request_url:
             # Prevent access to ajaxible paths from non-ajax requests
-            if not request.is_ajax():
+            if not is_ajax(request):
                 return HttpResponseBadRequest("API calls do not supported direct access.")
 
             response = super(BaseAjaxableResponseMixin, self).get(request, *args, **kwargs)
@@ -120,7 +120,7 @@ class AjaxableFormMixin(object):
 
     def delete(self, request, *args, **kwargs):
         if self.is_ajax_request_url:
-            if not request.is_ajax():
+            if not is_ajax(request):
                 return HttpResponseBadRequest()
 
             # from django.views.generic.DeleteView
@@ -133,7 +133,7 @@ class AjaxableFormMixin(object):
 
     def post(self, request, *args, **kwargs):
         if self.is_ajax_request_url:
-            if not request.is_ajax():
+            if not is_ajax(request):
                 return HttpResponseBadRequest()
 
             request = self._patch_body_data_to_post(request)
@@ -143,7 +143,7 @@ class AjaxableFormMixin(object):
     def form_invalid(self, form):
         if self.is_ajax_request_url:
             response = super(AjaxableFormMixin, self).form_invalid(form)
-            if self.is_ajax_request_url and self.request.is_ajax():
+            if self.is_ajax_request_url and is_ajax(self.request):
                 # TODO: get the messages (as in form_valid()
                 # and add them to the response, if that is wished)
                 return self.render_to_json_response(form.errors, status=400)
@@ -158,7 +158,7 @@ class AjaxableFormMixin(object):
             # it might do some processing (in the case of CreateView, it will
             # call form.save() for example).
             response = super(AjaxableFormMixin, self).form_valid(form)
-            if self.is_ajax_request_url and self.request.is_ajax():
+            if self.is_ajax_request_url and is_ajax(self.request):
                 data = {
                     'pk': self.object.pk,
                     'id': self.object.id,

@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_protect
 from cosinnus.models.feedback import CosinnusReportedObject
 from django.contrib.contenttypes.models import ContentType
 from cosinnus.utils.context_processors import cosinnus as cosinnus_context
+from cosinnus.utils.http import is_ajax
 from cosinnus.core.mail import get_common_mail_context, send_mail_or_fail
 from cosinnus.templatetags.cosinnus_tags import full_name
 from django.utils.encoding import force_str
@@ -59,7 +60,7 @@ def _notify_users_for_reported_objects(report_obj, request=None):
 
 @csrf_protect
 def report_object(request):
-    if not request.is_ajax() or not request.method=='POST':
+    if not is_ajax(request) or not request.method=='POST':
         return HttpResponseNotAllowed(['POST'])
     if not request.user.is_authenticated:
         return HttpResponseForbidden('Not authenticated.')
