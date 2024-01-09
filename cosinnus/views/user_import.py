@@ -180,7 +180,7 @@ class CosinnusUserImportView(RequireSuperuserMixin, TemplateView):
             'object': self.import_object,
             'progress_string': self.import_object.get_import_progress_cache() if self.import_object else None,
             'form_view': self.form_view,
-            'required_columns': 'TODO: required_columns',
+            'required_columns': ','.join(CosinnusUserImportProcessor.KNOWN_CSV_IMPORT_COLUMNS_HEADERS),
             'form': getattr(self, 'form', CosinusUserImportCSVForm())
         })
         return context
