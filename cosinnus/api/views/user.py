@@ -99,7 +99,7 @@ class OAuthUserView(APIView):
         # prevent access for guest users
         if request.user.is_authenticated and not request.user.is_guest:
             user = request.user
-            avatar_url = user.cosinnus_profile.avatar.url if user.cosinnus_profile.avatar else ""
+            avatar_url = user.cosinnus_profile.get_avatar_thumbnail_url(size=(200, 200)) if user.cosinnus_profile.avatar else ""
             if avatar_url:
                 avatar_url = request.build_absolute_uri(avatar_url)
             # collect user groups
