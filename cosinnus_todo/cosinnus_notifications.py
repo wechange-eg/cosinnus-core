@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 import django.dispatch as dispatch
-from django.utils.translation import ugettext_lazy as _, ngettext_lazy
+from django.utils.translation import gettext_lazy as _, ngettext_lazy
 
 """ Cosinnus:Notifications configuration file. 
     See http://git.sinnwerkstatt.com/cosinnus/cosinnus-core/wikis/cosinnus-notifications-guidelines.

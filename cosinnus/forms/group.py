@@ -11,7 +11,7 @@ import chardet
 from django import forms
 from django.forms.widgets import SelectMultiple
 from django_select2.widgets import Select2MultipleWidget
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from awesome_avatar import forms as avatar_forms
 

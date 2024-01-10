@@ -11,7 +11,7 @@ from django.http.response import HttpResponseRedirect, HttpResponseNotAllowed, \
     HttpResponseForbidden, HttpResponseBadRequest, HttpResponse
 from django.urls import reverse_lazy
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic.list import ListView
 import six

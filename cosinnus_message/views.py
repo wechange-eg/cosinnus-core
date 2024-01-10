@@ -31,7 +31,7 @@ try:
 except ImportError:
     from datetime import datetime
     now = datetime.now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from cosinnus.conf import settings
 
 

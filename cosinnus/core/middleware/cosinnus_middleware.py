@@ -14,7 +14,7 @@ from django.apps import apps
 from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.utils.encoding import force_str
-from django.utils.translation import gettext, ugettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from cosinnus.conf import settings

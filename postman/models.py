@@ -23,7 +23,7 @@ try:
 except ImportError:
     from datetime import datetime
     now = datetime.now
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 
 from . import OPTION_MESSAGES
 from .query import PostmanQuery
@@ -475,7 +475,7 @@ class Message(AttachableObjectModel, LastVisitedMixin, MultiConversationModel):
     def clean(self):
         """Check some validity constraints."""
         if not (self.sender_id is not None or self.email):
-            raise ValidationError(ugettext("Undefined sender."))
+            raise ValidationError(gettext("Undefined sender."))
 
     def clean_moderation(self, initial_status, user=None):
         """Adjust automatically some fields, according to status workflow."""

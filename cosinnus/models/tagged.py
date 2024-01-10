@@ -11,7 +11,7 @@ from django.db.models import Q
 from django.utils.encoding import force_str
 from django.utils.timezone import now
 from django.apps import apps
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from taggit.managers import TaggableManager
 

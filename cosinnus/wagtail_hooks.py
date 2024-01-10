@@ -32,7 +32,7 @@ logger = logging.getLogger('cosinnus')
 
 # swap this to re-enable translating these internal strings
 # (we didn't do this to save translator work for admin pages)
-#from django.utils.translation import ugettext_lazy as _
+#from django.utils.translation import gettext_lazy as _
 dotrans_ = str
 
 

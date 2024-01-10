@@ -10,7 +10,7 @@ from os.path import basename
 from django.contrib import messages
 from django.http import (Http404, HttpResponse, HttpResponseNotFound,
     HttpResponseRedirect, StreamingHttpResponse)
-from django.utils.translation import ungettext, ugettext_lazy as _
+from django.utils.translation import ngettext, gettext_lazy as _
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
     RedirectView, UpdateView)
 from django.views.generic.edit import FormMixin
@@ -198,7 +198,7 @@ class FileListView(RequireReadMixin, FilterGroupMixin,
             download_fn = '_'.join([basename(f.file.name) for f in files])[:50]
             if missing:
                 messages.warning(self.request,
-                    ungettext(
+                    ngettext(
                         'A problem occurred during export. The following file is missing: %(filename)s.',
                         'A problem occurred during export. The following files are missing: %(filename)s.',
                         len(missing)
@@ -615,7 +615,7 @@ def file_upload_inline(request, group):
             
     if result_list:
         if on_success == 'refresh_page':
-            messages.success(request, ungettext('%(count)d File was added successfully.', '%(count)d Files were added successfully.', len(result_list)) % {'count': len(result_list)})
+            messages.success(request, ngettext('%(count)d File was added successfully.', '%(count)d Files were added successfully.', len(result_list)) % {'count': len(result_list)})
         
         
         return JSONResponse({'status': 'ok', 'on_success': on_success, 'data': result_list})

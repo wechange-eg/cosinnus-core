@@ -28,7 +28,7 @@ from cosinnus.core.registries.apps import app_registry
 from cosinnus.utils.functions import resolve_class
 from cosinnus.utils.urls import group_aware_reverse
 from django.contrib import messages
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy, reverse
 from cosinnus.utils.user import ensure_user_widget
 from django.http.response import HttpResponseNotAllowed, JsonResponse

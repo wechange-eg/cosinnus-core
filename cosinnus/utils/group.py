@@ -7,7 +7,7 @@ from urllib.parse import quote as urlquote
 from django.apps import apps
 from django.db.models import Q, Count
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.utils.encoding import force_str
 
 

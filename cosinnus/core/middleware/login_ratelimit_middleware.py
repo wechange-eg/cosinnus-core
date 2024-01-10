@@ -21,7 +21,7 @@ from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.core.cache import cache
 from django.http.response import HttpResponseRedirect
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 import django.dispatch as dispatch
 from django.utils.text import get_valid_filename

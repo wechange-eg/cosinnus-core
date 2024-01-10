@@ -13,7 +13,7 @@ from django.template import TemplateSyntaxError
 from django.template import Library
 from django.template.defaultfilters import date
 from django.utils.encoding import force_str
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from postman.models import ORDER_BY_KEY, ORDER_BY_MAPPER, Message,\
     get_user_representation

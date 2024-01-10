@@ -39,7 +39,7 @@ from django.utils.encoding import force_str
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy
+from django.utils.translation import gettext_lazy as _, pgettext_lazy
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.generic import (CreateView, DeleteView, DetailView,
                                   ListView, UpdateView, TemplateView)

@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.core.exceptions import ImproperlyConfigured
 from django.urls import reverse
 from django.views.generic import CreateView
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.forms.hierarchy import AddContainerForm
 from cosinnus.views.mixins.group import (RequireWriteMixin, FilterGroupMixin,

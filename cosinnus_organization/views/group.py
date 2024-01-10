@@ -12,7 +12,7 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, FormView
 from django_select2 import Select2View, NO_ERR_RESP
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.core import signals
 from cosinnus.forms.group import MultiGroupSelectForm

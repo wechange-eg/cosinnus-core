@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 
 from cosinnus.utils.user import get_user_by_email_safe
 from cosinnus.conf import settings
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 import dkim
 import smtplib

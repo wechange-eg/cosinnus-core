@@ -18,7 +18,7 @@ from datetime import timedelta
 from django import forms
 from django.db.models.fields import BLANK_CHOICE_DASH
 from django.utils.encoding import force_str
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 

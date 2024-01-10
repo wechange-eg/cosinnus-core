@@ -10,7 +10,7 @@ from collections import defaultdict
 from django.db import models
 from django.utils.encoding import force_str
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus_marketplace.conf import settings
 from cosinnus.models import BaseTaggableObjectModel

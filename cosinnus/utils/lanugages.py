@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from builtins import object
-from django.utils.translation import ugettext_lazy as _, get_language
+from django.utils.translation import gettext_lazy as _, get_language
 from django.core.exceptions import FieldDoesNotExist
 
 from cosinnus.conf import settings

@@ -17,7 +17,7 @@ from django.utils.encoding import force_str
 from django.utils.formats import date_format
 from django.utils.functional import cached_property
 from django.utils.timezone import localtime, now
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy
+from django.utils.translation import gettext_lazy as _, pgettext_lazy
 
 
 from cosinnus_poll.conf import settings

@@ -8,7 +8,7 @@ def register():
         return
     
     # Import here to prevent import side effects
-    from django.utils.translation import ugettext_lazy as _
+    from django.utils.translation import gettext_lazy as _
     from django.utils.translation import pgettext_lazy
     
     from cosinnus.core.registries import (app_registry,

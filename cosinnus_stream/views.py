@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from builtins import str
 from builtins import object
 from django.core.exceptions import PermissionDenied
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy
+from django.utils.translation import gettext_lazy as _, pgettext_lazy
 from django.views.generic.detail import DetailView
 
 from cosinnus.core.registries import attached_object_registry as aor

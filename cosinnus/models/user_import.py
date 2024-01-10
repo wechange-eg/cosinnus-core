@@ -9,7 +9,7 @@ from threading import Thread
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models, transaction
 from django.urls.base import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.utils.functions import resolve_class

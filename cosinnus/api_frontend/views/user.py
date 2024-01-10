@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout
 from django.urls.base import reverse
 from django.utils.encoding import force_str
 from django.utils.http import is_safe_url
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import serializers, authentication

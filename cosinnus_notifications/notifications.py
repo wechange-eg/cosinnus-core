@@ -12,7 +12,7 @@ from django.urls import reverse
 from django.utils import translation, formats, timezone
 from importlib import import_module
 from django.utils.timezone import localtime
-from django.utils.translation import gettext, ugettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 from django.template.loader import render_to_string
 
 from cosinnus.conf import settings

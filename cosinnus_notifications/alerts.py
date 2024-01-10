@@ -6,7 +6,7 @@ from datetime import timedelta
 import logging
 
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal

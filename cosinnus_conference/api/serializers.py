@@ -16,7 +16,7 @@ from cosinnus.models.conference import CosinnusConferenceRoom
 from cosinnus.models.group import CosinnusGroup
 from django.templatetags.static import static
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _, get_language
+from django.utils.translation import gettext_lazy as _, get_language
 from django.template.loader import render_to_string
 from django.template.context import Context
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment

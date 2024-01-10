@@ -6,7 +6,7 @@ import json
 from django.http.response import Http404
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy
+from django.utils.translation import gettext_lazy as _, pgettext_lazy
 
 from cosinnus.views.mixins.tagged import HierarchyTreeMixin
 from django.utils.encoding import force_str

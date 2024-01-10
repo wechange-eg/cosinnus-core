@@ -6,7 +6,7 @@ from django.template import Template, Context
 from django.template.loader import get_template
 from django.utils import translation, timezone
 from django.utils.encoding import force_str
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.core.mail import get_common_mail_context
 from cosinnus.utils.files import get_image_url_for_icon

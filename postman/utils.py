@@ -10,7 +10,7 @@ from textwrap import TextWrapper
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils.encoding import force_str
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 
 # make use of a favourite notifier app such as django-notification
 # but if not installed or not desired, fallback will be to do basic emailing
@@ -52,7 +52,7 @@ def format_body(sender, body, indent=_("> "), width=WRAP_WIDTH):
     wrapper = TextWrapper(width=width, initial_indent=indent, subsequent_indent=indent)
     # rem: TextWrapper doesn't add the indent on an empty text
     quote = '\n'.join([line.startswith(indent) and indent+line or wrapper.fill(line) or indent for line in body.splitlines()])
-    return ugettext("\n\n{sender} wrote:\n{body}\n").format(sender=sender, body=quote)
+    return gettext("\n\n{sender} wrote:\n{body}\n").format(sender=sender, body=quote)
 
 
 def format_subject(subject, old_style=False):
@@ -64,7 +64,7 @@ def format_subject(subject, old_style=False):
     """
     
     if old_style:
-        str = ugettext("Re: {subject}")
+        str = gettext("Re: {subject}")
         pattern = '^' + str.replace('{subject}', '.*') + '$'
         return subject if re.match(pattern, subject, re.IGNORECASE) else str.format(subject=subject)
     else:

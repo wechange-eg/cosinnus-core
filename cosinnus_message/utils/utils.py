@@ -11,7 +11,7 @@ from django.contrib.auth import get_user_model
 from django_mailbox.models import Message
 from django.utils.datastructures import MultiValueDict
 from django.utils.encoding import force_str
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from postman.models import Message as PostmanMessage
 from postman.utils import format_subject

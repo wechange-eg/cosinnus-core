@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import logging
 
 from django.http.response import JsonResponse, HttpResponseBadRequest
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView, RedirectView
 from rest_framework.views import APIView
 

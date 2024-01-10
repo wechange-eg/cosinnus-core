@@ -6,7 +6,7 @@ import functools
 
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseForbidden, HttpResponseNotFound
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from cosinnus.utils.group import get_cosinnus_group_model
 
 from cosinnus_organization.models import CosinnusOrganization

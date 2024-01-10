@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.conf import settings  # noqa
 from appconf import AppConf
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy as p_
+from django.utils.translation import gettext_lazy as _, pgettext_lazy as p_
 
 
 class CosinnusTodoConf(AppConf):

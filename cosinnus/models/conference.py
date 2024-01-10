@@ -17,7 +17,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.crypto import get_random_string
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy, get_language
+from django.utils.translation import gettext_lazy as _, pgettext_lazy, get_language
 from phonenumber_field.modelfields import PhoneNumberField
 import six
 

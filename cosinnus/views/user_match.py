@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.db.models.query_utils import Q
 from django.http.response import HttpResponseNotAllowed, HttpResponseForbidden
 from django.shortcuts import redirect
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic.list import ListView
 from cosinnus import cosinnus_notifications
 

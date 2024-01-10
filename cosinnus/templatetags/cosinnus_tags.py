@@ -18,7 +18,7 @@ from django.http import HttpRequest
 from django.template.defaulttags import URLNode, url as url_tag, url
 from django.template.loader import render_to_string
 from django.utils.http import urlencode
-from django.utils.translation import ugettext_lazy as _, get_language
+from django.utils.translation import gettext_lazy as _, get_language
 
 from cosinnus.conf import settings
 from cosinnus.core.registries import app_registry, attached_object_registry

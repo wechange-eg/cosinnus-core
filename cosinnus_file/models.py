@@ -15,7 +15,7 @@ from django.db.models.signals import post_delete
 from django.dispatch.dispatcher import receiver
 from django.utils.encoding import force_str
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _, pgettext
+from django.utils.translation import gettext_lazy as _, pgettext
 
 from cosinnus.conf import settings
 from cosinnus.models import BaseTaggableObjectModel

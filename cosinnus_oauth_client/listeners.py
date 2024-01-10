@@ -3,7 +3,7 @@ from allauth.socialaccount.signals import social_account_added
 
 from django.contrib import messages
 from django.dispatch import receiver
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.template.loader import render_to_string
 
 from cosinnus.templatetags.cosinnus_tags import textfield

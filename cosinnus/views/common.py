@@ -16,7 +16,7 @@ from django.http.response import  HttpResponseNotFound, \
     HttpResponseBadRequest, JsonResponse, HttpResponse
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
-from django.utils.translation import ugettext_lazy as _, LANGUAGE_SESSION_KEY
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import RedirectView
 from django.views.generic.base import View, TemplateView

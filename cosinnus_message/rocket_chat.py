@@ -13,7 +13,7 @@ from django.core.cache import cache
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.utils.crypto import get_random_string
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from oauth2_provider.models import Application
 
 from requests.exceptions import ConnectionError, Timeout

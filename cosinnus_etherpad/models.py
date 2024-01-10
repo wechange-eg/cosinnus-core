@@ -12,7 +12,7 @@ from django.db import models
 from django.db.models.signals import pre_save, post_save, post_delete
 from django.dispatch import receiver
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.models import BaseHierarchicalTaggableObjectModel
 from cosinnus.models.tagged import LikeableObjectMixin

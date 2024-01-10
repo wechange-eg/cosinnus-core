@@ -23,7 +23,7 @@ from django.urls import reverse
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy
+from django.utils.translation import gettext_lazy as _, pgettext_lazy
 from django_countries.fields import CountryField
 from timezone_field import TimeZoneField
 import six

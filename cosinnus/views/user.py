@@ -9,7 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, Set
 from django.urls import reverse, reverse_lazy
 from django.db import transaction
 from django.utils.decorators import method_decorator
-from django.utils.translation import ugettext_lazy as _, get_language
+from django.utils.translation import gettext_lazy as _, get_language
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect

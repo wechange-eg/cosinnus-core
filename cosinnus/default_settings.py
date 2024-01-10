@@ -17,7 +17,7 @@ import random
 import string
 import sys
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 import environ
 
 from cosinnus import VERSION as COSINNUS_VERSION
