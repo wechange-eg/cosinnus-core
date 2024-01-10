@@ -2,8 +2,7 @@
 
 from builtins import str
 from builtins import object
-from django.conf.urls import url
-from django.urls import reverse
+from django.urls import reverse, path
 from django.utils.html import format_html
 
 from wagtail.core import hooks
@@ -187,7 +186,7 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
     @hooks.register('register_admin_urls')
     def urlconf_time():
         return [
-            url(r'^import_projects/$', import_project_view, name='import-projects' ),
+            path('import_projects/', import_project_view, name='import-projects' ),
         ]
     
     class ImportProjectsMenutItem(MenuItem): 

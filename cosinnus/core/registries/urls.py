@@ -7,7 +7,7 @@ try:
 except ImportError:
     from django.utils import importlib  # noqa
 
-from django.conf.urls import include, url
+from django.urls import include, re_path, path
 from django.core.exceptions import ImproperlyConfigured
 
 from cosinnus.core.registries.base import BaseRegistry
@@ -31,7 +31,7 @@ class URLRegistry(BaseRegistry):
         with self.lock:
             if not self.is_ready:
                 self._api_urlpatterns = [
-                    url(r'', include('cosinnus.urls_api'))
+                    path('', include('cosinnus.urls_api'))
                 ]
                 self.is_ready = True
 
@@ -56,18 +56,18 @@ class URLRegistry(BaseRegistry):
                 for url_key in group_model_registry:
                     url_base = r'^%s/(?P<group>[^/]+)/%s/' % (url_key, url_app_name)
                     for patt in group_patterns:
-                        patterns_copy.append(url(url_base+patt.pattern._regex[1:], patt.callback, patt.default_args, name=group_model_registry.get_url_name_prefix(url_key, '') + patt.name))
+                        patterns_copy.append(re_path(url_base+patt.pattern._regex[1:], patt.callback, patt.default_args, name=group_model_registry.get_url_name_prefix(url_key, '') + patt.name))
                 
                 self._urlpatterns += [
-                    url('', include((patterns_copy, app_name), namespace=app_name)),
+                    path('', include((patterns_copy, app_name), namespace=app_name)),
                 ]
             if root_patterns:
                 self._urlpatterns += [
-                    url(r'', include(root_patterns))
+                    path('', include(root_patterns))
                 ]
             if api_patterns:
                 self._api_urlpatterns += [
-                    url(r'^', include((api_patterns, app_name), namespace=app_name)),
+                    path('', include((api_patterns, app_name), namespace=app_name)),
                 ]
 
     def register_urlconf(self, app, urlconf, url_app_name_override=None):

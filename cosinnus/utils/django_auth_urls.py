@@ -3,8 +3,7 @@
 # It is also provided as a convenience to those who want to deploy these URLs
 # elsewhere.
 
-from django.conf.urls import url, include
-from django.urls import path
+from django.urls import include, re_path, path
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal,\
     is_sso_portal
 from cosinnus.forms.user import UserEmailLoginForm
@@ -20,10 +19,10 @@ if not is_integrated_portal():
     # app_name = "cosinnus-auth"
 
     urlpatterns = [
-        url(r'^login/$',
+        path('login/',
             common.cosinnus_login,
             name='login'),
-        url(r'^logout/$',
+        path('logout/',
             common.cosinnus_logout,
             {'next_page': '/'},
             name='logout'),
@@ -32,17 +31,17 @@ if not is_integrated_portal():
     # password change URLs are disabled for SSO-Portals
     if not is_sso_portal():
         urlpatterns += [
-            url(r'^password_change/$',
+            path('password_change/',
                 user.password_change_proxy,
                 {'template_name': 'cosinnus/registration/password_change_form.html'},
                 name='password_change'),
-            url(r'^password_change/done/$',
+            path('password_change/done/',
                 PasswordChangeDoneView.as_view(template_name='cosinnus/registration/password_change_done.html'),
                 name='password_change_done'),
         ]
         
         urlpatterns += [
-            url(r'^password_reset/$',
+            path('password_reset/',
                 user.password_reset_proxy,
                 {
                     'template_name': 'cosinnus/registration/password_reset_form.html',
@@ -52,7 +51,7 @@ if not is_integrated_portal():
         ]
         
         urlpatterns += [
-            url(r'^password_reset/done/$',
+            path('password_reset/done/',
                 PasswordResetDoneView.as_view(template_name='cosinnus/registration/password_reset_done.html'),
                 name='password_reset_done')
         ]
@@ -64,19 +63,19 @@ if not is_integrated_portal():
         ]
         
         urlpatterns += [
-            url(r'^reset/done/$',
+            path('reset/done/',
                 PasswordResetCompleteView.as_view(template_name='cosinnus/registration/password_reset_complete.html'),
                 name='password_reset_complete'),
         ]
 
         # set initial password
         urlpatterns += [
-            url(r'password_set_initial/', include([
-                url(r'^$',
+            path('password_set_initial/', include([
+                path('',
                     SetInitialPasswordView.as_view(
                         template_name='cosinnus/registration/password_set_initial_form.html'),
                     name='password_set_initial'),
-                url('(?P<token>[0-9A-Za-z_\-]+)$',
+                re_path('(?P<token>[0-9A-Za-z_\-]+)$',
                     SetInitialPasswordView.as_view(
                         template_name='cosinnus/registration/password_set_initial_form.html'),
                     name='password_set_initial'),
@@ -86,16 +85,16 @@ if not is_integrated_portal():
 # integrated portal auth patterns
 if is_integrated_portal():
     urlpatterns = [
-        url(r'^integrated/login/$', integrated.login_integrated, name='login-integrated'),
-        url(r'^integrated/logout/$', integrated.logout_integrated, name='logout-integrated'),
-        url(r'^integrated/create_user/$', integrated.create_user_integrated, name='create-user-integrated'),
+        path('integrated/login/', integrated.login_integrated, name='login-integrated'),
+        path('integrated/logout/', integrated.logout_integrated, name='logout-integrated'),
+        path('integrated/create_user/', integrated.create_user_integrated, name='create-user-integrated'),
     ]
     
 # sso-only auth URLs
 if is_sso_portal():
     urlpatterns += [
-        url(r'^sso/login/$', sso.login, name='sso-login'),
-        url(r'^sso/callback/$', sso.callback, name='sso-callback'),
-        url(r'^sso/error/$', sso.error, name='sso-error'),
+        path('sso/login/', sso.login, name='sso-login'),
+        path('sso/callback/', sso.callback, name='sso-callback'),
+        path('sso/error/', sso.error, name='sso-error'),
     ]
     
