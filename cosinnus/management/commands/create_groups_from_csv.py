@@ -47,6 +47,8 @@ class Command(BaseCommand):
         csv_file_name = options.get('csv')
         delimiter = options.get('delimiter')
         third_party_tool_name = options.get('third_party_tool_name')
+        if third_party_tool_name:
+            third_party_tool_name = third_party_tool_name.replace('\\n', '\n')
 
         count = 0
         with open(csv_file_name, newline='') as csv_file:
@@ -80,6 +82,7 @@ class Command(BaseCommand):
                 if not group_name:
                     self.stderr.write(f'Line {reader.line_num}: Missing group name.')
                     return
+                group_name = group_name.strip()
 
                 # Skip existing groups
                 if group_cls.objects.filter(name__iexact=group_name).exists():
@@ -91,6 +94,7 @@ class Command(BaseCommand):
                 parent_group_name = self._get_optional_value(row[self.COL_PARENT])
                 parent_group = None
                 if parent_group_name:
+                    parent_group_name = parent_group_name.strip()
                     if not CosinnusGroup.objects.filter(name=parent_group_name).exists():
                         self.stderr.write(f'Line {reader.line_num}: Parent group does not exist.')
                         return
