@@ -168,10 +168,6 @@ setup(
         'clamd==1.0.2',
         'django-clamd==0.4.0',
 
-        # requirements for BigBlueButton integration
-        'django-jalali==4.0.0',
-        'django-bigbluebutton==0.1.0',
-
         # requirements loaded in from github
         'django-awesome-avatar @ git+https://github.com/wechange-eg/django-awesome-avatar.git@main-wechange#egg=django-awesome-avatar',
         'django-filer @ git+https://github.com/wechange-eg/django-filer.git@django-update-3-2#egg=django-filer',

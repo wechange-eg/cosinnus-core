@@ -368,7 +368,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'rest_framework',
         'drf_yasg',
         'taggit',
-        'django_bigbluebutton',
         'django_clamd',
         'rest_framework_simplejwt.token_blacklist',
     ]    
