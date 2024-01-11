@@ -29,6 +29,12 @@ from django.conf.global_settings import *
 if 'PASSWORD_RESET_TIMEOUT_DAYS' in globals():
     del globals()['PASSWORD_RESET_TIMEOUT_DAYS']
 
+# DEFAULT_FILE_STORAGE/STATICFILES_STORAGE are deprecated and mutually exclusive with STORAGES.
+if 'DEFAULT_FILE_STORAGE' in globals():
+    del globals()['DEFAULT_FILE_STORAGE']
+if 'STATICFILES_STORAGE' in globals():
+    del globals()['STATICFILES_STORAGE']
+
 
 # WARNING: do not add any settings on this level! 
 # all settings added should go within `define_cosinnus_base_settings` 
