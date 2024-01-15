@@ -4,23 +4,23 @@ from __future__ import unicode_literals
 from django.urls import reverse
 
 from cosinnus_todo.models import TodoEntry, PRIORITY_LOW
-from tests.view_tests.base import ViewTestCase
+from cosinnus_todo.tests.view_tests.base import ViewTestCase
 
 
 class AddTest(ViewTestCase):
 
     def setUp(self, *args, **kwargs):
         super(AddTest, self).setUp(*args, **kwargs)
-        self.kwargs = {'group': self.group.slug}
+        self.kwargs = {'group': self.group.slug, 'listslug': 'general'}
         self.url = reverse('cosinnus:todo:entry-add', kwargs=self.kwargs)
 
     def test_get_not_logged_in(self):
         """
-        Should return 403 on GET if not logged in
+        Should return a redirect on GET if not logged in
         """
         self.client.logout()
         response = self.client.get(self.url)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
 
     def test_get_logged_in(self):
         """
@@ -32,11 +32,12 @@ class AddTest(ViewTestCase):
 
     def test_post_not_logged_in(self):
         """
-        Should return 403 on POST if not logged in
+        Should return a redirect on POST if not logged in
         """
         self.client.logout()
         response = self.client.post(self.url)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
+        self.assertIn('next=' + self.url, response['Location'])
 
     def test_post_logged_in(self):
         """
@@ -51,15 +52,16 @@ class AddTest(ViewTestCase):
         params = {
             'title': title,
             'priority': PRIORITY_LOW,
+            'assigned_to': self.admin.pk,
         }
         response = self.client.post(self.url, params)
         self.assertEqual(response.status_code, 302)
 
         # do not catch exception here
         todo = TodoEntry.objects.get(title=title)
-        kwargs = {'group': self.group.slug, 'slug': todo.slug}
+        kwargs = {'group': self.group.slug, 'listslug': 'general', 'todoslug': todo.slug}
         self.assertIn(
-            reverse('cosinnus:todo:entry-detail', kwargs=kwargs),
+            reverse('cosinnus:todo:todo-in-list-list', kwargs=kwargs),
             response.get('location'))
         self.assertEqual(todo.priority, PRIORITY_LOW)
         self.assertEqual(todo.creator, self.admin)

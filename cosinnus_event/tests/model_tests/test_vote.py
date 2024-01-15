@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.utils.encoding import force_text
 
 from cosinnus_event.models import Suggestion, Vote, localize
-from tests.model_tests.base import ModelTestCase
+from cosinnus_event.tests.model_tests.base import ModelTestCase
 
 
 class VoteTest(ModelTestCase):

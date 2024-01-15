@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-
+from unittest.mock import MagicMock
 from django.contrib.auth.models import User, AnonymousUser
-from django.http import HttpResponse
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponse, Http404
 from django.test import TestCase
 from django.test.client import RequestFactory
 from django.utils.encoding import force_text
@@ -115,62 +116,61 @@ class TestRequireAdminAccessDecorator(TestCase):
         self.admin = User.objects.create_user('admin', 'admin@localhost', 'pw')
         self.superuser = User.objects.create_superuser('superuser', 'super@localhost', 'pw')
 
-        self.public = Group.objects.create(name='Public group', public=True)
+        self.public = Group.objects.create(name='Public group', public=True, type=Group.TYPE_SOCIETY)
         Membership.objects.create(group_id=self.public.pk, user_id=self.pending.pk, status=MEMBERSHIP_PENDING)
         Membership.objects.create(group_id=self.public.pk, user_id=self.member.pk, status=MEMBERSHIP_MEMBER)
         Membership.objects.create(group_id=self.public.pk, user_id=self.admin.pk, status=MEMBERSHIP_ADMIN)
 
-        self.private = Group.objects.create(name='Private group')
+        self.private = Group.objects.create(name='Private group', type=Group.TYPE_SOCIETY)
         Membership.objects.create(group_id=self.private.pk, user_id=self.pending.pk, status=MEMBERSHIP_PENDING)
         Membership.objects.create(group_id=self.private.pk, user_id=self.member.pk, status=MEMBERSHIP_MEMBER)
         Membership.objects.create(group_id=self.private.pk, user_id=self.admin.pk, status=MEMBERSHIP_ADMIN)
 
+        # mock messages
+        from cosinnus.core.decorators import views
+        views.messages = MagicMock()
+
     def test_anonymous(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.anon
         response = self.view.as_view()(request, group=self.private.slug)
-        self.assertEqual(force_text(response.content), 'Access denied')
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
 
         response = self.view.as_view()(request, group=self.public.slug)
-        self.assertEqual(force_text(response.content), 'Access denied')
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
 
     def test_user(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.user
+
         response = self.view.as_view()(request, group=self.private.slug)
-        self.assertEqual(force_text(response.content), 'Access denied')
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
 
         response = self.view.as_view()(request, group=self.public.slug)
-        self.assertEqual(force_text(response.content), 'Access denied')
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
 
     def test_pending(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.pending
+
         response = self.view.as_view()(request, group=self.private.slug)
-        self.assertEqual(force_text(response.content), 'Access denied')
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
 
         response = self.view.as_view()(request, group=self.public.slug)
-        self.assertEqual(force_text(response.content), 'Access denied')
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
 
     def test_member(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.member
-        response = self.view.as_view()(request, group=self.private.slug)
-        self.assertEqual(force_text(response.content), 'Access denied')
-        self.assertEqual(response.status_code, 403)
 
-        response = self.view.as_view()(request, group=self.public.slug)
-        self.assertEqual(force_text(response.content), 'Access denied')
-        self.assertEqual(response.status_code, 403)
+        with self.assertRaises(PermissionDenied):
+            self.view.as_view()(request, group=self.private.slug)
+
+        with self.assertRaises(PermissionDenied):
+            self.view.as_view()(request, group=self.public.slug)
 
     def test_admin(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.admin
         response = self.view.as_view()(request, group=self.private.slug)
         self.assertEqual(force_text(response.content), 'Private group')
@@ -181,7 +181,7 @@ class TestRequireAdminAccessDecorator(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_superuser(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.superuser
         response = self.view.as_view()(request, group=self.private.slug)
         self.assertEqual(force_text(response.content), 'Private group')
@@ -192,67 +192,62 @@ class TestRequireAdminAccessDecorator(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_not_existing_group(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.anon
-        response = self.view.as_view()(request, group='other-group')
-        self.assertEqual(force_text(response.content), 'No group found with this name')
-        self.assertEqual(response.status_code, 404)
+
+        with self.assertRaises(Http404):
+            self.view.as_view()(request, group='other-group')
 
         request.user = self.user
-        response = self.view.as_view()(request, group='other-group')
-        self.assertEqual(force_text(response.content), 'No group found with this name')
-        self.assertEqual(response.status_code, 404)
+        with self.assertRaises(Http404):
+            self.view.as_view()(request, group='other-group')
 
         request.user = self.pending
-        response = self.view.as_view()(request, group='other-group')
-        self.assertEqual(force_text(response.content), 'No group found with this name')
-        self.assertEqual(response.status_code, 404)
+        with self.assertRaises(Http404):
+            self.view.as_view()(request, group='other-group')
 
         request.user = self.member
-        response = self.view.as_view()(request, group='other-group')
-        self.assertEqual(force_text(response.content), 'No group found with this name')
-        self.assertEqual(response.status_code, 404)
+        with self.assertRaises(Http404):
+            self.view.as_view()(request, group='other-group')
 
         request.user = self.admin
-        response = self.view.as_view()(request, group='other-group')
-        self.assertEqual(force_text(response.content), 'No group found with this name')
-        self.assertEqual(response.status_code, 404)
+        with self.assertRaises(Http404):
+            self.view.as_view()(request, group='other-group')
 
         request.user = self.superuser
-        response = self.view.as_view()(request, group='other-group')
-        self.assertEqual(force_text(response.content), 'No group found with this name')
-        self.assertEqual(response.status_code, 404)
+        with self.assertRaises(Http404):
+            self.view.as_view()(request, group='other-group')
 
     def test_no_group(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.anon
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No team provided')
+        self.assertEqual(force_text(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.user
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No team provided')
+        self.assertEqual(force_text(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.pending
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No team provided')
+        self.assertEqual(force_text(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.member
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No team provided')
+        self.assertEqual(force_text(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.admin
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No team provided')
+        self.assertEqual(force_text(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.superuser
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No team provided')
+        self.assertEqual(force_text(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
 
@@ -269,52 +264,56 @@ class TestRequireReadAccessDecorator(TestCase):
         self.admin = User.objects.create_user('admin', 'admin@localhost', 'pw')
         self.superuser = User.objects.create_superuser('superuser', 'super@localhost', 'pw')
 
-        self.public = Group.objects.create(name='Public group', public=True)
+        self.public = Group.objects.create(name='Public group', public=True, type=Group.TYPE_SOCIETY)
         Membership.objects.create(group_id=self.public.pk, user_id=self.pending.pk, status=MEMBERSHIP_PENDING)
         Membership.objects.create(group_id=self.public.pk, user_id=self.member.pk, status=MEMBERSHIP_MEMBER)
         Membership.objects.create(group_id=self.public.pk, user_id=self.admin.pk, status=MEMBERSHIP_ADMIN)
 
-        self.private = Group.objects.create(name='Private group')
+        self.private = Group.objects.create(name='Private group', type=Group.TYPE_SOCIETY)
         Membership.objects.create(group_id=self.private.pk, user_id=self.pending.pk, status=MEMBERSHIP_PENDING)
         Membership.objects.create(group_id=self.private.pk, user_id=self.member.pk, status=MEMBERSHIP_MEMBER)
         Membership.objects.create(group_id=self.private.pk, user_id=self.admin.pk, status=MEMBERSHIP_ADMIN)
 
+        # mock messages
+        from cosinnus.core.decorators import views
+        views.messages = MagicMock()
+
     def test_anonymous(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.anon
+
         response = self.view.as_view()(request, group=self.private.slug)
-        self.assertEqual(force_text(response.content), 'Access denied')
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
 
         response = self.view.as_view()(request, group=self.public.slug)
-        self.assertEqual(force_text(response.content), 'Public group')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
     def test_user(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.user
+
         response = self.view.as_view()(request, group=self.private.slug)
-        self.assertEqual(force_text(response.content), 'Access denied')
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
 
         response = self.view.as_view()(request, group=self.public.slug)
         self.assertEqual(force_text(response.content), 'Public group')
         self.assertEqual(response.status_code, 200)
 
     def test_pending(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.pending
+
         response = self.view.as_view()(request, group=self.private.slug)
-        self.assertEqual(force_text(response.content), 'Access denied')
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
 
         response = self.view.as_view()(request, group=self.public.slug)
         self.assertEqual(force_text(response.content), 'Public group')
         self.assertEqual(response.status_code, 200)
 
     def test_member(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.member
+
         response = self.view.as_view()(request, group=self.private.slug)
         self.assertEqual(force_text(response.content), 'Private group')
         self.assertEqual(response.status_code, 200)
@@ -324,8 +323,9 @@ class TestRequireReadAccessDecorator(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_admin(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.admin
+
         response = self.view.as_view()(request, group=self.private.slug)
         self.assertEqual(force_text(response.content), 'Private group')
         self.assertEqual(response.status_code, 200)
@@ -335,8 +335,9 @@ class TestRequireReadAccessDecorator(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_superuser(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.superuser
+
         response = self.view.as_view()(request, group=self.private.slug)
         self.assertEqual(force_text(response.content), 'Private group')
         self.assertEqual(response.status_code, 200)
@@ -346,67 +347,62 @@ class TestRequireReadAccessDecorator(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_not_existing_group(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.anon
-        response = self.view.as_view()(request, group='other-group')
-        self.assertEqual(force_text(response.content), 'No group found with this name')
-        self.assertEqual(response.status_code, 404)
+
+        with self.assertRaises(Http404):
+            self.view.as_view()(request, group='other-group')
 
         request.user = self.user
-        response = self.view.as_view()(request, group='other-group')
-        self.assertEqual(force_text(response.content), 'No group found with this name')
-        self.assertEqual(response.status_code, 404)
+        with self.assertRaises(Http404):
+            response = self.view.as_view()(request, group='other-group')
 
         request.user = self.pending
-        response = self.view.as_view()(request, group='other-group')
-        self.assertEqual(force_text(response.content), 'No group found with this name')
-        self.assertEqual(response.status_code, 404)
+        with self.assertRaises(Http404):
+            self.view.as_view()(request, group='other-group')
 
         request.user = self.member
-        response = self.view.as_view()(request, group='other-group')
-        self.assertEqual(force_text(response.content), 'No group found with this name')
-        self.assertEqual(response.status_code, 404)
+        with self.assertRaises(Http404):
+            self.view.as_view()(request, group='other-group')
 
         request.user = self.admin
-        response = self.view.as_view()(request, group='other-group')
-        self.assertEqual(force_text(response.content), 'No group found with this name')
-        self.assertEqual(response.status_code, 404)
+        with self.assertRaises(Http404):
+            self.view.as_view()(request, group='other-group')
 
         request.user = self.superuser
-        response = self.view.as_view()(request, group='other-group')
-        self.assertEqual(force_text(response.content), 'No group found with this name')
-        self.assertEqual(response.status_code, 404)
+        with self.assertRaises(Http404):
+            self.view.as_view()(request, group='other-group')
 
     def test_no_group(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.anon
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No team provided')
+        self.assertEqual(force_text(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.user
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No team provided')
+        self.assertEqual(force_text(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.pending
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No team provided')
+        self.assertEqual(force_text(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.member
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No team provided')
+        self.assertEqual(force_text(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.admin
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No team provided')
+        self.assertEqual(force_text(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.superuser
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No team provided')
+        self.assertEqual(force_text(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
 
@@ -423,51 +419,52 @@ class TestRequireWriteAccessDecorator(TestCase):
         self.admin = User.objects.create_user('admin', 'admin@localhost', 'pw')
         self.superuser = User.objects.create_superuser('superuser', 'super@localhost', 'pw')
 
-        self.public = Group.objects.create(name='Public group', public=True)
+        self.public = Group.objects.create(name='Public group', public=True, type=Group.TYPE_SOCIETY)
         Membership.objects.create(group_id=self.public.pk, user_id=self.pending.pk, status=MEMBERSHIP_PENDING)
         Membership.objects.create(group_id=self.public.pk, user_id=self.member.pk, status=MEMBERSHIP_MEMBER)
         Membership.objects.create(group_id=self.public.pk, user_id=self.admin.pk, status=MEMBERSHIP_ADMIN)
 
-        self.private = Group.objects.create(name='Private group')
+        self.private = Group.objects.create(name='Private group', type=Group.TYPE_SOCIETY)
         Membership.objects.create(group_id=self.private.pk, user_id=self.pending.pk, status=MEMBERSHIP_PENDING)
         Membership.objects.create(group_id=self.private.pk, user_id=self.member.pk, status=MEMBERSHIP_MEMBER)
         Membership.objects.create(group_id=self.private.pk, user_id=self.admin.pk, status=MEMBERSHIP_ADMIN)
 
+        # mock messages
+        from cosinnus.core.decorators import views
+        views.messages = MagicMock()
+
     def test_anonymous(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.anon
+
         response = self.view.as_view()(request, group=self.private.slug)
-        self.assertEqual(force_text(response.content), 'Access denied')
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
 
         response = self.view.as_view()(request, group=self.public.slug)
-        self.assertEqual(force_text(response.content), 'Access denied')
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
 
     def test_user(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.user
+
         response = self.view.as_view()(request, group=self.private.slug)
-        self.assertEqual(force_text(response.content), 'Access denied')
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
 
         response = self.view.as_view()(request, group=self.public.slug)
-        self.assertEqual(force_text(response.content), 'Public group')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
     def test_pending(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.pending
+
         response = self.view.as_view()(request, group=self.private.slug)
-        self.assertEqual(force_text(response.content), 'Access denied')
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
 
         response = self.view.as_view()(request, group=self.public.slug)
-        self.assertEqual(force_text(response.content), 'Public group')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
     def test_member(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.member
         response = self.view.as_view()(request, group=self.private.slug)
         self.assertEqual(force_text(response.content), 'Private group')
@@ -478,7 +475,7 @@ class TestRequireWriteAccessDecorator(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_admin(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.admin
         response = self.view.as_view()(request, group=self.private.slug)
         self.assertEqual(force_text(response.content), 'Private group')
@@ -489,7 +486,7 @@ class TestRequireWriteAccessDecorator(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_superuser(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.superuser
         response = self.view.as_view()(request, group=self.private.slug)
         self.assertEqual(force_text(response.content), 'Private group')
@@ -500,65 +497,60 @@ class TestRequireWriteAccessDecorator(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_not_existing_group(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.anon
-        response = self.view.as_view()(request, group='other-group')
-        self.assertEqual(force_text(response.content), 'No group found with this name')
-        self.assertEqual(response.status_code, 404)
+
+        with self.assertRaises(Http404):
+            self.view.as_view()(request, group='other-group')
 
         request.user = self.user
-        response = self.view.as_view()(request, group='other-group')
-        self.assertEqual(force_text(response.content), 'No group found with this name')
-        self.assertEqual(response.status_code, 404)
+        with self.assertRaises(Http404):
+            self.view.as_view()(request, group='other-group')
 
         request.user = self.pending
-        response = self.view.as_view()(request, group='other-group')
-        self.assertEqual(force_text(response.content), 'No group found with this name')
-        self.assertEqual(response.status_code, 404)
+        with self.assertRaises(Http404):
+            self.view.as_view()(request, group='other-group')
 
         request.user = self.member
-        response = self.view.as_view()(request, group='other-group')
-        self.assertEqual(force_text(response.content), 'No group found with this name')
-        self.assertEqual(response.status_code, 404)
+        with self.assertRaises(Http404):
+            self.view.as_view()(request, group='other-group')
 
         request.user = self.admin
-        response = self.view.as_view()(request, group='other-group')
-        self.assertEqual(force_text(response.content), 'No group found with this name')
-        self.assertEqual(response.status_code, 404)
+        with self.assertRaises(Http404):
+            self.view.as_view()(request, group='other-group')
 
         request.user = self.superuser
-        response = self.view.as_view()(request, group='other-group')
-        self.assertEqual(force_text(response.content), 'No group found with this name')
-        self.assertEqual(response.status_code, 404)
+        with self.assertRaises(Http404):
+            self.view.as_view()(request, group='other-group')
 
     def test_no_group(self):
-        request = self.rf.get('/')
+        request = self.rf.get('/group/')
         request.user = self.anon
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No team provided')
+        self.assertEqual(force_text(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.user
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No team provided')
+        self.assertEqual(force_text(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.pending
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No team provided')
+        self.assertEqual(force_text(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.member
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No team provided')
+        self.assertEqual(force_text(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.admin
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No team provided')
+        self.assertEqual(force_text(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.superuser
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No team provided')
+        self.assertEqual(force_text(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)

@@ -6,7 +6,8 @@ from django.utils.encoding import force_text
 from django.utils.timezone import now
 
 from cosinnus_event.models import Event, Suggestion, Vote
-from tests.view_tests.base import ViewTestCase
+from cosinnus_event.tests.view_tests.base import ViewTestCase
+from cosinnus.models.tagged import BaseTagObject
 
 
 class VoteTest(ViewTestCase):
@@ -22,13 +23,15 @@ class VoteTest(ViewTestCase):
             title='testevent',
             from_date=now(),
             to_date=now(),
-            state=Event.STATE_SCHEDULED)
+            state=Event.STATE_VOTING_OPEN)
+        event.media_tag.visibility = BaseTagObject.VISIBILITY_ALL
+        event.media_tag.save()
         suggestion = Suggestion.objects.create(
             from_date=event.from_date,
             to_date=event.to_date,
             event=event)
         kwargs = {'group': self.group.slug, 'slug': event.slug}
-        url = reverse('cosinnus:event:entry-vote', kwargs=kwargs)
+        url = reverse('cosinnus:event:doodle-vote', kwargs=kwargs)
 
         self.client.login(username=self.credential, password=self.credential)
         response = self.client.get(url)
@@ -44,12 +47,12 @@ class VoteTest(ViewTestCase):
             'form-INITIAL_FORMS': '0',
             'form-MAX_NUM_FORMS': '1000',
             'form-0-suggestion': force_text(suggestion.pk),
-            'form-0-vote': '1',
+            'form-0-choice': '1',
         }
         response = self.client.post(url, params)
         self.assertEqual(response.status_code, 302)
         self.assertIn(
-            reverse('cosinnus:event:entry-detail', kwargs=kwargs),
+            reverse('cosinnus:event:doodle-vote', kwargs=kwargs),
             response.get('location'))
 
         vote = Vote.objects.all()[0]

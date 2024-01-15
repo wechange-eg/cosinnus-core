@@ -3,9 +3,9 @@ from __future__ import unicode_literals
 
 from django.test import TestCase
 
-from cosinnus.models.tagged import CosinnusGroup
+from cosinnus.models.group import CosinnusGroup
 
-from tests.models import SlugTestModel
+from cosinnus.tests.models import SlugTestModel
 
 
 class SlugTest(TestCase):
@@ -33,9 +33,9 @@ class SlugTest(TestCase):
         self.assertEqual(m.slug, 'some-title')
 
     def test_long_title(self):
-        key = 'abcdefghij'
-        title = key * 25 + 'abcde'
+        key = 'abcde'
+        title = key * 50 + 'abcde'
         m1 = SlugTestModel.objects.create(group=self.group, title=title)
-        self.assertEqual(m1.slug, key * 5)
+        self.assertEqual(m1.slug, key * 9)
         m2 = SlugTestModel.objects.create(group=self.group, title=title)
-        self.assertEqual(m2.slug, key * 5 + '-2')
+        self.assertEqual(m2.slug, key * 9 + '-2')

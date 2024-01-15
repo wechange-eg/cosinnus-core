@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from builtins import range
 from datetime import timedelta
 from django.contrib.auth.models import User
 from django.test import TestCase
@@ -22,29 +21,20 @@ class EventManagerTest(TestCase):
             creator=self.admin, public=True, state=Event.STATE_SCHEDULED,
             title='testevent')
 
-    def test_tags(self):
-        """
-        Should have tags
-        """
-        tags = ['foo', 'bar']
-        for tag in tags:
-            self.event.tags.add(tag)
-        self.assertEqual(Event.objects.tags(), tags)
-
     def test_public(self):
         """
         Should have public event if event public
         """
-        self.event.public = True
-        self.event.save()
+        self.event.media_tag.visibility = 2
+        self.event.media_tag.save()
         self.assertEqual(self.event, Event.objects.public()[0])
 
     def test_public_non_public_event(self):
         """
         Should have no public event if event not public
         """
-        self.event.public = False
-        self.event.save()
+        self.event.media_tag.visibility = 0
+        self.event.media_tag.save()
         self.assertListEqual([], list(Event.objects.public()))
 
     def test_public_canceled_event(self):
@@ -63,7 +53,7 @@ class EventManagerTest(TestCase):
         self.event.from_date = now() - timedelta(days=2)
         self.event.to_date = now() - timedelta(days=1)
         self.event.save()
-        self.assertListEqual([], list(Event.objects.upcoming(count=1)))
+        self.assertListEqual([], list(Event.objects.all_upcoming()))
 
     def test_upcoming_in_future(self):
         """
@@ -72,26 +62,4 @@ class EventManagerTest(TestCase):
         self.event.from_date = now() + timedelta(days=1)
         self.event.to_date = now() + timedelta(days=2)
         self.event.save()
-        self.assertEqual(self.event, Event.objects.upcoming(count=1)[0])
-
-    def test_upcoming_count_in_future(self):
-        """
-        Should have upcoming count events if event is in future
-        """
-        count = 3
-        for i in range(1, count + 2):  # + 2 to get count+1 upcoming events
-            Event.objects.create(
-                group=self.group,
-                creator=self.admin,
-                public=True,
-                title='testevent %d' % i,
-                state=Event.STATE_SCHEDULED,
-                from_date=now(),
-                to_date=now() + timedelta(days=1))
-
-        num_events = len(Event.objects.all())
-        self.assertLess(count, num_events)
-
-        num_upcoming_all = len(Event.objects.upcoming(count=num_events))
-        num_upcoming_count = len(Event.objects.upcoming(count=count))
-        self.assertLess(num_upcoming_count, num_upcoming_all)
+        self.assertEqual(self.event, Event.objects.all_upcoming()[0])

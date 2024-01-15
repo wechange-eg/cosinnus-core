@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.utils.timezone import now
 
 from cosinnus_event.models import Event
-from tests.view_tests.base import ViewTestCase
+from cosinnus_event.tests.view_tests.base import ViewTestCase
 
 
 class DeleteTest(ViewTestCase):
@@ -21,45 +21,23 @@ class DeleteTest(ViewTestCase):
             to_date=now(),
             state=Event.STATE_SCHEDULED)
         self.kwargs = {'group': self.group.slug, 'slug': self.event.slug}
-        self.url = reverse('cosinnus:event:entry-delete', kwargs=self.kwargs)
-
-    def test_get_not_logged_in(self):
-        """
-        Should return 403 on GET if not logged in
-        """
-        self.client.logout()
-        response = self.client.get(self.url)
-        self.assertEqual(response.status_code, 403)
-
-    def test_get_logged_in(self):
-        """
-        Should return 200 on GET and have event title set to readonly in form
-        when logged in
-        """
-        self.client.login(username=self.credential, password=self.credential)
-        response = self.client.get(self.url)
-        self.assertEqual(response.status_code, 200)
+        self.url = reverse('cosinnus:event:event-delete', kwargs=self.kwargs)
 
     def test_post_not_logged_in(self):
         """
-        Should return 403 on POST if not logged in
+        Should return redirect on POST if not logged in
         """
         self.client.logout()
         response = self.client.post(self.url)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
+        self.assertIn('?next=', response.get('location'))
 
     def test_post_logged_in(self):
         """
         Should return 302 to list page on successful POST and have event deleted
         """
         self.client.login(username=self.credential, password=self.credential)
-        response = self.client.get(self.url)
-        self.assertEqual(response.status_code, 200)
-
-        params = {
-            'csrfmiddlewaretoken': response.cookies['csrftoken'].value,
-        }
-        response = self.client.post(self.url, params)
+        response = self.client.post(self.url)
         self.assertEqual(response.status_code, 302)
         kwargs = {'group': self.group.slug}
         self.assertIn(

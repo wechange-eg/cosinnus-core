@@ -8,7 +8,7 @@ from django.utils.formats import date_format
 from django.utils.timezone import now, localtime
 
 from cosinnus_event.models import Event, Suggestion, localize
-from tests.model_tests.base import ModelTestCase
+from cosinnus_event.tests.model_tests.base import ModelTestCase
 
 
 class EventTest(ModelTestCase):

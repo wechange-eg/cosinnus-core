@@ -11,9 +11,9 @@ from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
                                    CosinnusGroupManager)
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
 
-_GROUP_CACHE_KEY = CosinnusGroupManager._GROUP_CACHE_KEY % ('group', '%s')
-_GROUPS_PK_CACHE_KEY = CosinnusGroupManager._GROUPS_PK_CACHE_KEY % 'group'
-_GROUPS_SLUG_CACHE_KEY = CosinnusGroupManager._GROUPS_SLUG_CACHE_KEY % 'group'
+_GROUP_CACHE_KEY = CosinnusGroupManager._GROUP_CACHE_KEY % (1, 'CosinnusGroupManager', '%s')
+_GROUPS_PK_CACHE_KEY = CosinnusGroupManager._GROUPS_PK_CACHE_KEY % (1, 'CosinnusGroupManager')
+_GROUPS_SLUG_CACHE_KEY = CosinnusGroupManager._GROUPS_SLUG_CACHE_KEY % (1, 'CosinnusGroupManager')
 
 User = get_user_model()
 
@@ -27,6 +27,7 @@ def create_multiple_groups():
         groups.append(g)
         pks.append(g.pk)
         slugs.append(g.slug)
+    cache.clear()
     return groups, pks, slugs
 
 
@@ -99,8 +100,7 @@ class CosinnusGroupSlugPKCacheTest(TestCase):
         new_slug_1 = 'fancy-slug-1'
         new_slug_2 = 'awesome-slug-1'
         CosinnusGroup.objects.filter(pk=groups[-1].pk).update(slug=new_slug_1)
-        groups[-2].slug = new_slug_2
-        groups[-2].save()
+        CosinnusGroup.objects.filter(pk=groups[-2].pk).update(slug=new_slug_2)
         slugs.extend([new_slug_2, new_slug_1])  # add in reverse order
 
         cached_slugs_dict = CosinnusGroup.objects.get_slugs()
@@ -179,8 +179,7 @@ class CosinnusGroupSlugPKCacheTest(TestCase):
         new_slug_1 = 'fancy-slug-1'
         new_slug_2 = 'awesome-slug-1'
         CosinnusGroup.objects.filter(pk=groups[-1].pk).update(slug=new_slug_1)
-        groups[-2].slug = new_slug_2
-        groups[-2].save()
+        CosinnusGroup.objects.filter(pk=groups[-2].pk).update(slug=new_slug_2)
         slugs.extend([new_slug_2, new_slug_1])  # add in reverse order
 
         cached_pks_dict = CosinnusGroup.objects.get_pks()
@@ -283,41 +282,16 @@ class MembershipCacheTest(TestCase):
         group = CosinnusGroup.objects.create(name='testgroup1')
         user = User.objects.create(username='test1')
 
-        self.assertIsNone(group._admins)
         self.assertEqual(group.admins, [])
-        self.assertEqual(group._admins, [])
-
-        self.assertIsNone(group._members)
         self.assertEqual(group.members, [])
-        self.assertEqual(group._members, [])
-
-        self.assertIsNone(group._pendings)
         self.assertEqual(group.pendings, [])
-        self.assertEqual(group._pendings, [])
 
-        membership = CosinnusGroupMembership.objects.create(
-            user=user, group=group, status=MEMBERSHIP_MEMBER)
-        self.assertIsNone(group._admins)
+        membership = CosinnusGroupMembership.objects.create(user=user, group=group, status=MEMBERSHIP_MEMBER)
         self.assertEqual(group.admins, [])
-        self.assertEqual(group._admins, [])
-
-        self.assertIsNone(group._members)
         self.assertEqual(group.members, [user.pk])
-        self.assertEqual(group._members, [user.pk])
-
-        self.assertIsNone(group._pendings)
         self.assertEqual(group.pendings, [])
-        self.assertEqual(group._pendings, [])
 
         membership.delete()
-        self.assertIsNone(group._admins)
         self.assertEqual(group.admins, [])
-        self.assertEqual(group._admins, [])
-
-        self.assertIsNone(group._members)
         self.assertEqual(group.members, [])
-        self.assertEqual(group._members, [])
-
-        self.assertIsNone(group._pendings)
         self.assertEqual(group.pendings, [])
-        self.assertEqual(group._pendings, [])

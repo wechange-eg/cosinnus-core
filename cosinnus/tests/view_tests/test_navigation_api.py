@@ -538,7 +538,7 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
 
 class VersionHistoryPatchMixin:
 
-    PATCHED_CORE_UPDATES = {
+    PATCHED_UPDATES = {
         '1': {
             'datetime': datetime(2000, 1, 1, tzinfo=pytz.utc),
             'title': 'Test Title',
@@ -547,22 +547,10 @@ class VersionHistoryPatchMixin:
         },
     }
 
-    PATCHED_PORTAL_UPDATES = {
-        '1 (portal)': {
-            'datetime': datetime(2000, 1, 2, tzinfo=pytz.utc),
-            'title': 'Test Portal Title',
-            'short_text': 'Test Portal Short Description',
-            'full_text': 'Test Portal Full Description',
-        },
-    }
-
     @classmethod
     def patch_version_history(cls):
-        from importlib import import_module
         from cosinnus.utils import version_history
-        version_history.version_history.UPDATES = cls.PATCHED_CORE_UPDATES
-        portal_version_history = import_module('apps.core.version_history')
-        portal_version_history.UPDATES = cls.PATCHED_PORTAL_UPDATES
+        version_history.version_history.UPDATES = cls.PATCHED_UPDATES
 
 
 class VersionHistoryViewTest(VersionHistoryPatchMixin, APITestCase):
@@ -584,14 +572,6 @@ class VersionHistoryViewTest(VersionHistoryPatchMixin, APITestCase):
             response.data,
             {
                 'versions': [
-                    {
-                        'id': 'Version1portal',
-                        'version': '1 (portal)',
-                        'url': f'{version_history_page_url}#1-portal',
-                        'title': 'Test Portal Title',
-                        'text': 'Test Portal Short Description',
-                        'read': False,
-                    },
                     {
                         'id': 'Version1',
                         'version': '1',
@@ -615,14 +595,12 @@ class VersionHistoryViewTest(VersionHistoryPatchMixin, APITestCase):
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
         self.assertFalse(response.data['versions'][0]['read'])
-        self.assertFalse(response.data['versions'][1]['read'])
         mark_read_url = self.api_url + '?mark_as_read=true'
         response = self.client.get(mark_read_url)
         self.assertEqual(response.status_code, 200)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.data['versions'][0]['read'])
-        self.assertTrue(response.data['versions'][1]['read'])
 
 
 class VersionHistoryUnreadCountViewTest(VersionHistoryPatchMixin, APITestCase):
@@ -639,7 +617,7 @@ class VersionHistoryUnreadCountViewTest(VersionHistoryPatchMixin, APITestCase):
         self.client.force_login(self.test_user)
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data, {'count': 2})
+        self.assertEqual(response.data, {'count': 1})
         mark_read_url = reverse('cosinnus:frontend-api:api-navigation-version-history') + '?mark_as_read=true'
         response = self.client.get(mark_read_url)
         self.assertEqual(response.status_code, 200)

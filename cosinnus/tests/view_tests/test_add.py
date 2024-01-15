@@ -13,7 +13,10 @@ class AddGroupTest(TestCase):
     def setUp(self, *args, **kwargs):
         self.credential = 'admin'
         self.admin = User.objects.create_superuser(
-            username=self.credential, email=None, password=self.credential)
+            username=self.credential, email='admin@example.com', password=self.credential
+        )
+        self.admin.cosinnus_profile.email_verified = True
+        self.admin.cosinnus_profile.save()
         self.client.login(username=self.credential, password=self.credential)
         self.url = reverse('cosinnus:group-add')
 
@@ -35,7 +38,7 @@ class AddGroupTest(TestCase):
 
     def test_post_not_logged_in(self):
         """
-        Should return 403 on POST if not logged in
+        Should redirect to login on POST if not logged in
         """
         self.client.logout()
         data = {
@@ -53,11 +56,16 @@ class AddGroupTest(TestCase):
         """
         data = {
             'name': 'Fäñæü ñáµé',
-            'slug': 'fancy-name',
+            'slug': 'faenue-nae',
             'public': True,
-            'media_tag-location_place': 'Some Location',
-            'media_tag-people_name': 'Somebody',
-            'media_tag-public': True,
+            'video_conference_type': CosinnusGroup.NO_VIDEO_CONFERENCE,
+            'media_tag-location': 'Location',
+            'locations-TOTAL_FORMS': 0,
+            'locations-INITIAL_FORMS': 0,
+            'gallery_images-TOTAL_FORMS': 0,
+            'gallery_images-INITIAL_FORMS': 0,
+            'call_to_action_buttons-TOTAL_FORMS': 0,
+            'call_to_action_buttons-INITIAL_FORMS': 0,
         }
         response = self.client.post(self.url, data=data)
         self.assertEqual(response.status_code, 302)
@@ -66,6 +74,4 @@ class AddGroupTest(TestCase):
         self.assertEqual(group.name, data['name'])
         self.assertEqual(group.slug, data['slug'])
         self.assertEqual(group.public, data['public'])
-        self.assertEqual(group.media_tag.location_place, data['media_tag-location_place'])
-        self.assertEqual(group.media_tag.people_name, data['media_tag-people_name'])
-        self.assertEqual(group.media_tag.public, data['media_tag-public'])
+        self.assertEqual(group.media_tag.location, data['media_tag-location'])

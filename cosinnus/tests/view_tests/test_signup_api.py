@@ -158,7 +158,7 @@ class SignupTestView(APITestCase):
         redirect_url = response_json.get('data', {}).get('next')
         do_login = response_json.get('data', {}).get('do_login')
         message = response_json.get('data', {}).get('message')
-        message_fragment = 'account will need to be approved before you can log in'
+        message_fragment = 'Within the next few days you will be activated by our administrators'
         self.portal.users_need_activation = False
         self.portal.save()
         self.assertIsNone(redirect_url)

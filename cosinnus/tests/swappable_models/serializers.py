@@ -3,15 +3,15 @@ from __future__ import unicode_literals
 
 from rest_framework import serializers
 
-from cosinnus.api.serializers.user import BaseUserProfileSerializer
+from cosinnus.api.serializers.user import UserProfileSerializer
 
-from tests.swappable_models.models import CustomUserProfile
+from cosinnus.tests.swappable_models.models import CustomUserProfile
 
 
-class CustomUserProfileSerializer(BaseUserProfileSerializer):
+class CustomUserProfileSerializer(UserProfileSerializer):
 
     dob = serializers.DateField(source="dob")
 
-    class Meta(BaseUserProfileSerializer.Meta):
+    class Meta(UserProfileSerializer.Meta):
         model = CustomUserProfile
-        fields = BaseUserProfileSerializer.Meta.fields + ('dob', )
+        fields = UserProfileSerializer.Meta.fields + ('dob', )
