@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 import unittest
-from django.conf.urls import url
+from django.urls import path, re_path
 from django.test import SimpleTestCase
 
 from cosinnus.core.registries import (apps, attached_objects, base, urls,
@@ -117,10 +117,10 @@ class TestURLRegistry(SimpleTestCase):
 
         cls.view_func = _view
         cls.root_patterns = [
-            url(r'^root/view/$', cls.view_func, name='root-view'),
+            path('root/view/', cls.view_func, name='root-view'),
         ]
         cls.group_patterns = [
-            url(r'^group/view/$', cls.view_func, name='group-view'),
+            re_path(r'^group/view/$', cls.view_func, name='group-view'),
         ]
 
     def setUp(self):
@@ -136,7 +136,7 @@ class TestURLRegistry(SimpleTestCase):
 
         self.assertEqual(root_url.url_patterns[0].callback, TestURLRegistry.view_func)
         self.assertEqual(root_url.url_patterns[0].name, 'root-view')
-        self.assertEqual(str(root_url.url_patterns[0].pattern), r'^root/view/$')
+        self.assertEqual(str(root_url.url_patterns[0].pattern), 'root/view/')
 
         self.assertEqual(group_url.app_name, 'some_name')
         self.assertEqual(group_url.namespace, 'some_name')

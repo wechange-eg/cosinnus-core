@@ -5,7 +5,7 @@ from builtins import str
 from builtins import range
 from django.contrib.auth.models import User
 from django.urls import reverse
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.timezone import now
 
 from cosinnus.models import CosinnusGroupMembership
@@ -40,4 +40,4 @@ class ListTest(ViewTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(
             reverse('cosinnus:todo:entry-add', kwargs=kwargs),
-            force_text(response.content))
+            force_str(response.content))

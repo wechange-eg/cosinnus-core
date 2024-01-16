@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.urls import reverse
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.timezone import now
 
 from cosinnus_event.models import Event, Suggestion, Vote
@@ -46,7 +46,7 @@ class VoteTest(ViewTestCase):
             'form-TOTAL_FORMS': '1',
             'form-INITIAL_FORMS': '0',
             'form-MAX_NUM_FORMS': '1000',
-            'form-0-suggestion': force_text(suggestion.pk),
+            'form-0-suggestion': force_str(suggestion.pk),
             'form-0-choice': '1',
         }
         response = self.client.post(url, params)
