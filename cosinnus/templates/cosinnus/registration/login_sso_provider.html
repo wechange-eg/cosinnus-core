@@ -58,7 +58,7 @@
 			        <hr class="invisible" />
 			        
 			        <div class="button-section clearfix centered">
-                        <a href="{% url "cosinnus:user-add" %}?next={{request.GET.next}}" class="">
+                        <a href="{% url "cosinnus:user-add" %}?next={{ request.GET.next|urlencode }}" class="">
                             <span class="rounded-button-inner">
                                 {% blocktrans with portal_name=SETTINGS.COSINNUS_PORTAL_NAME %}You don't have a {{ portal_name }} account yet?{% endblocktrans %}
                             </span>

@@ -152,9 +152,8 @@ class CosinnusLoginView(LoginViewAdditionalLogicMixin, LoginView):
     template_name = 'cosinnus/registration/login.html'
     
     def get_template_names(self):
-        """ Use the sso login form on SSO redirect-logins """
-        if getattr(settings, 'COSINNUS_IS_OAUTH_PROVIDER', False) \
-                and self.request.GET.get('next', '').startswith('/o/authorize/'):
+        """ Use the sso login form on SSO and OAuth redirect-logins """
+        if self.request.GET.get('next', '').startswith('/o/authorize/'):
             return ['cosinnus/registration/login_sso_provider.html']
         return super().get_template_names()
         
