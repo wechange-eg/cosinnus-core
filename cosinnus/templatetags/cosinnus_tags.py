@@ -814,7 +814,11 @@ class GroupURLNode(URLNode):
             
             self.view_name.var = view_name
             self.view_name.token = "'%s'" % view_name
-            
+
+            # view_name is resolved here to a string. Mark accordingly, to avoid an error during resolution by the
+            # super().render() call.
+            self.view_name.is_var = False
+
             # to retain django core code for rendering, we patch this node to look like a proper url node, 
             # with a slug argument.
             # and then restore it later, so that the node object can be reused for other group arguments 
