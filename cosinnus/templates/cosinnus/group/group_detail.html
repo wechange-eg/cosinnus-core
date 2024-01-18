@@ -609,7 +609,6 @@
 
 
             {# Guest user access info box #}
-            {# TODO: collapse this if there is no current token and change text! #}
             {% if user|has_write_access:object and SETTINGS.COSINNUS_USER_GUEST_ACCOUNTS_ENABLED and group.user_group_guest_access %}
                 <div class="panel panel-default large-space">
                     <div class="panel-heading">
@@ -623,31 +622,32 @@
                         <div class="panel-body">
                             <div class="textfield transparent">
                                 <p>
-                                    {% trans "Guest user access has been enabled." %}
-                                    {{ group.trans.INFO_GUEST_USER_INVITE_LINK }}
+                                    {{ group.trans.INFO_GUEST_USER_INVITE_LINK }}:
                                     {% captureas guest_link %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{% url 'cosinnus:guest-user-signup' guest_token=group.user_group_guest_access.token %}{% endcaptureas %}
                                     <a class="transparent" href="{{ guest_link }}" target="_blank">
                                         {{ guest_link }}
                                     </a>
-                                    <br/>
                                     {{ group.trans.INFO_ONLY_VISIBLE_TO_ADMINS }}
                                 </p>
                             </div>
 
-                            <button type="button" href=""
-                                     class="btn btn-emphasized btn-autosize no-margin pull-left" title="{% trans "Manage applications" %}">
-                                <ul class="media-list">
-                                    <li class="media">
-                                        <span class="pull-left">
-                                            <i class="fas fa-user-friends"></i>
-                                        </span>
-                                        <div class="media-body">
-                                            (TODO: Link!)
-                                            {% trans "Change guest user access settings" %}
-                                        </div>
-                                    </li>
-                                </ul>
-                            </button>
+                            {% comment %}
+                                {# TODO: share button disabled until the UI settings for guests for admins are implemented #}
+                                <button type="button" href=""
+                                         class="btn btn-emphasized btn-autosize no-margin pull-left" title="{% trans "Manage applications" %}">
+                                    <ul class="media-list">
+                                        <li class="media">
+                                            <span class="pull-left">
+                                                <i class="fas fa-user-friends"></i>
+                                            </span>
+                                            <div class="media-body">
+                                                (TODO: Link!)
+                                                {% trans "Change guest user access settings" %}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </button>
+                            {% endcomment %}
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -668,7 +668,14 @@
                 </div>
                 <div id="collapseThree" class="panel-collapse {% if request.GET.invite %}collapse{% else %}in{% endif %}">
                     <div class="panel-body">
-                        
+                        {% if SETTINGS.COSINNUS_USER_GUEST_ACCOUNTS_ENABLED and group.user_group_guest_access %}
+                            <div class="textfield transparent">
+                                <p>
+                                    {{ group.trans.INFO_GUEST_USERS_ENABLED }}
+                                </p>
+                            </div>
+                        {% endif %}
+
                         {% if not 'cosinnus_message' in SETTINGS.COSINNUS_DISABLED_COSINNUS_APPS %}
                         <div class="large-space">
                             {% if not group.slug == SETTINGS.NEWW_FORUM_GROUP_SLUG and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
