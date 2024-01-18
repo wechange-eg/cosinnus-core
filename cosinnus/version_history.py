@@ -11,6 +11,19 @@ UPDATES includes release notes for each version shown to the users with:
 """
 
 UPDATES = {
+    '1.19.6': {
+        'datetime': datetime(2024, 1, 18, tzinfo=pytz.utc),
+        'title': _('Version 1.19.6 released'),
+        'short_text': _('This update includes several bugfixes:'),
+        'full_text': _(
+            '- Users whose profile visibility is set to "group/project members only" are now also visible to members of groups/projects they are applying to, instead of being hidden until their membership has been accepted\n'
+            '- Fixed a caching issue where accepting a group/project membership request did not immediately make the user a member of that group/project\n'
+            '- (OAuth) Changed the login form during OAuth login flows to differentiate from regular logins\n'
+            '- (OAuth) Fixed an issue for user account signups when they were initiated from an OAuth flow\n'
+            '- (OAuth) Fixed an issue with OAuth logins when the user avatar was too large\n'
+            '- (Nextcloud) Removed the group/project dashboard counter for files in the group/project cloud folder as it was often incorrect\n'
+        ),
+    },
     '1.19.0': {
         'datetime': datetime(2023, 11, 27, tzinfo=pytz.utc),
         'title': _('Version 1.19.0 released'),
