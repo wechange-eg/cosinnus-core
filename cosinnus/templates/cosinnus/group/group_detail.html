@@ -727,9 +727,7 @@
                                                         {% endif %}
                                                     </span>
                                                     <a class="username-name" href="{% url 'cosinnus:profile-detail' username=member.username %}">
-                                                        {% if member.is_guest %}
-                                                            <i>({% trans "Guest" %})</i>
-                                                        {% elif not member_active %}
+                                                        {% if not member_active and not member.is_guest %}
                                                             <i>({% trans "User account inactive" %})</i>
                                                         {% endif %}
                                                         {{ member|full_name }}
