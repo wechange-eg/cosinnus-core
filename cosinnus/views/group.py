@@ -483,7 +483,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             _q = get_user_model().objects.all()
             _q = _q.select_related('cosinnus_profile')
             if not user_is_superuser:
-                _q = filter_active_users(_q)
+                _q = filter_active_users(_q, filter_guests=False)
             _q = _q.order_by('first_name', 'last_name')
 
             admins = _q.filter(id__in=admin_ids)
@@ -493,7 +493,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
 
             hidden_member_count = 0
             if user_is_superuser:
-                user_count = filter_active_users(members).count()
+                user_count = filter_active_users(members, filter_guests=False).count()
             else:
                 user_count = members.count() # do not filter again as we did it before higher up
             # for admins: count the inactive users
