@@ -232,7 +232,8 @@ class PollEditView(EditViewWatchChangesMixin, PollFormMixin, AttachableViewMixin
 poll_edit_view = PollEditView.as_view()
 
 
-class PollDeleteView(PollFormMixin, DeleteView):
+class PollDeleteView(RequireWriteMixin, FilterGroupMixin, DeleteView):
+    model = Poll
     message_success = _('Poll "%(title)s" was deleted successfully.')
     message_error = _('Poll "%(title)s" could not be deleted.')
 

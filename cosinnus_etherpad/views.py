@@ -309,8 +309,8 @@ class EtherpadEditView(RequireWriteMixin, EtherpadFormMixin, AttachableViewMixin
 pad_edit_view = EtherpadEditView.as_view()
 
 
-class EtherpadDeleteView(RequireWriteMixin, EtherpadFormMixin, HierarchyDeleteMixin, DeleteView):
-    form_view = 'delete'
+class EtherpadDeleteView(RequireWriteMixin, FilterGroupMixin, HierarchyDeleteMixin, DeleteView):
+    model = Etherpad
     message_success = None
     message_error = None
 

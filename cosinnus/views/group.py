@@ -1341,11 +1341,13 @@ class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
         return self.group.users
 
 
-class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
-                          UserSelectMixin, DeleteView):
-
+class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin, DeleteView):
+    model = CosinnusGroupMembership
+    slug_field = 'user__username'
+    slug_url_kwarg = 'username'
     membership_status = MEMBERSHIP_MEMBER
 
+    @atomic
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         group = self.object.group
@@ -1371,6 +1373,12 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
         if current_status == self.membership_status:
             messages.success(self.request, _('User "%(username)s" is no longer a member.') % {'username': user.get_full_name()})
         return HttpResponseRedirect(self.get_success_url())
+
+    def get_queryset(self):
+        return self.model.objects.filter(group=self.group)
+
+    def get_success_url(self):
+        return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.group})
 
 
 class GroupExportView(SamePortalGroupMixin, RequireAdminMixin, TemplateView):

@@ -229,8 +229,7 @@ stream_update = StreamUpdateView.as_view()
 
 
 
-class StreamDeleteView(UserFormKwargsMixin, StreamFilterForUserMixin, DeleteView):
-
+class StreamDeleteView(StreamFilterForUserMixin, DeleteView):
     model = Stream
     message_success = _('Your stream was deleted successfully.')
     

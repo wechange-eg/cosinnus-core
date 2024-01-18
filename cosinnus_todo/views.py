@@ -360,9 +360,8 @@ entry_edit_view = TodoEntryEditView.as_view()
 entry_edit_view_api = TodoEntryEditView.as_view(is_ajax_request_url=True)
 
 
-class TodoEntryDeleteView(AjaxableFormMixin, TodoEntryFormMixin, DeleteView):
-    form_class = TodoEntryNoFieldForm
-    form_view = 'delete'
+class TodoEntryDeleteView(RequireWriteMixin, FilterGroupMixin, AjaxableFormMixin, DeleteView):
+    model = TodoEntry
     message_success = _('Todo "%(title)s" was deleted successfully.')
     message_error = _('Todo "%(title)s" could not be deleted.')
 

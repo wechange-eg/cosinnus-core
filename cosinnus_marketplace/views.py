@@ -182,7 +182,8 @@ class OfferEditView(EditViewWatchChangesMixin, OfferFormMixin, AttachableViewMix
 offer_edit_view = OfferEditView.as_view()
 
 
-class OfferDeleteView(OfferFormMixin, AjaxFormsDeleteViewMixin, DeleteView):
+class OfferDeleteView(RequireWriteMixin, FilterGroupMixin, AjaxFormsDeleteViewMixin, DeleteView):
+    model = Offer
     message_success = _('Offer "%(title)s" was deleted successfully.')
     message_error = _('Offer "%(title)s" could not be deleted.')
 

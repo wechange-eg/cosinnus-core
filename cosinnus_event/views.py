@@ -244,14 +244,9 @@ class EntryFormMixin(RequireWriteMixin, FilterGroupMixin, GroupFormKwargsMixin,
         self.form_view = kwargs.get('form_view', None)
         if self.form_view != 'add':
             obj = self.get_object()
-            if obj.state == Event.STATE_ARCHIVED_DOODLE and not self.form_view == 'delete':
+            if obj.state == Event.STATE_ARCHIVED_DOODLE:
                 messages.warning(request, _('The page you requested is not available for this event at this time.'))
                 return HttpResponseRedirect(obj.get_absolute_url())
-            if self.form_view == 'delete':
-                if obj.state == Event.STATE_VOTING_OPEN:
-                    self.success_url_list = 'cosinnus:event:doodle-list'
-                elif obj.state == Event.STATE_ARCHIVED_DOODLE:
-                    self.success_url_list = 'cosinnus:event:doodle-list-archived'
         return super(EntryFormMixin, self).dispatch(request, *args, **kwargs)
 
     def get_form_kwargs(self):
@@ -421,21 +416,25 @@ class DoodleEditView(EditViewWatchChangesMixin, DoodleFormMixin, AttachableViewM
         return super(DoodleEditView, self).forms_valid(form, inlines)
 
 
-class EntryDeleteView(EntryFormMixin, DeleteView):
+class EntryDeleteView(RequireWriteMixin, FilterGroupMixin, DeleteView):
+    model = Event
     message_success = _('Event "%(title)s" was deleted successfully.')
     message_error = _('Event "%(title)s" could not be deleted.')
 
     def get_success_url(self):
-        urlname = getattr(self, 'success_url_list', 'cosinnus:event:list')
+        urlname = 'cosinnus:event:list'
         return redirect_next_or(self.request, group_aware_reverse(urlname, kwargs={'group': self.group}))
 
 
-class DoodleDeleteView(EntryFormMixin, DeleteView):
+class DoodleDeleteView(RequireWriteMixin, FilterGroupMixin, DeleteView):
+    model = Event
     message_success = _('Unscheduled event "%(title)s" was deleted successfully.')
     message_error = _('Unscheduled event "%(title)s" could not be deleted.')
 
     def get_success_url(self):
-        urlname = getattr(self, 'success_url_list', 'cosinnus:event:doodle-list')
+        urlname = 'cosinnus:event:doodle-list'
+        if self.object.state == Event.STATE_ARCHIVED_DOODLE:
+            urlname = 'cosinnus:event:doodle-list-archived'
         return group_aware_reverse(urlname, kwargs={'group': self.group})
 
 
@@ -1292,9 +1291,18 @@ class ConferenceEventEditView(ConferenceEventFormMixin, AttachableViewMixin, Upd
     form_view = 'edit'
 
 
-class ConferenceEventDeleteView(ConferenceEventFormMixin, DeleteView):
+class ConferenceEventDeleteView(RequireWriteMixin, FilterGroupMixin, FilterConferenceRoomMixin, DeleteView):
+    model = ConferenceEvent
     message_success = _('Event "%(title)s" was deleted successfully.')
     message_error = _('Event "%(title)s" could not be deleted.')
+
+    def get_success_url(self):
+        # redirect to room, except in compact mode where we redirect to the conference event list
+        if settings.COSINNUS_CONFERENCES_USE_COMPACT_MODE:
+            url = group_aware_reverse('cosinnus:event:conference-event-list', kwargs={'group': self.group})
+        else:
+            url = self.room.get_absolute_url()
+        return redirect_next_or(self.request, url)
 
 
 def event_api_update(request, pk):
