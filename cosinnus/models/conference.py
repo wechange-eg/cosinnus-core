@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 from builtins import object
 import locale
 import logging
+from threading import Thread
+
 import six
 
 from annoying.functions import get_object_or_None
@@ -22,7 +24,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 import six
 
 from cosinnus.conf import settings
-from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.group import CosinnusPortal, CosinnusGroupMembership
 from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.utils.validators import validate_file_infection
 from cosinnus_event.mixins import BBBRoomMixin # noqa
@@ -627,6 +629,8 @@ class CosinnusConferenceRoom(TranslateableFieldsModelMixin, BBBRoomMixin,
 
     def __init__(self, *args, **kwargs):
         super(CosinnusConferenceRoom, self).__init__(*args, **kwargs)
+        # save for post-save checks
+        self._target_result_group = self.target_result_group
 
     def __str__(self):
         return 'Conference Room %s (Group %s)' % (self.title, self.group.slug)
@@ -646,6 +650,11 @@ class CosinnusConferenceRoom(TranslateableFieldsModelMixin, BBBRoomMixin,
         
         # initialize/sync room-type-specific extras
         self.ensure_room_type_dependencies()
+        
+        # refresh memberships for a result project if it was newly added
+        if self.type == CosinnusConferenceRoom.TYPE_RESULTS:
+            if self.target_result_group and self.target_result_group != self._target_result_group:
+                self.refresh_memberships_for_result_group()
     
     def get_admin_change_url(self):
         """ Returns the django admin edit page for this object. """
@@ -711,6 +720,29 @@ class CosinnusConferenceRoom(TranslateableFieldsModelMixin, BBBRoomMixin,
                 else:
                     logger.error('Could not create a conferenceroom rocketchat room!', 
                                  extra={'conference-room-id': self.id, 'conference-room-slug': self.slug})
+    
+    def refresh_memberships_for_result_group(self):
+        """ After a result project has been reassigned to this room,
+            check all memberships of the room's conference and create mirror memberships
+            for the result project. """
+        room_self = self
+        # we're Threading this entire hook as it might take a while
+        class MembershipUpdateHookThread(Thread):
+            def run(self):
+                for conference_membership in CosinnusGroupMembership.objects.filter(group=room_self.group):
+                    result_group_membership = get_object_or_None(CosinnusGroupMembership, group=room_self.target_result_group,
+                                                                 user=conference_membership.user)
+                    if result_group_membership and result_group_membership.status != conference_membership.status:
+                        result_group_membership.status = conference_membership.status
+                        result_group_membership.save()
+                    if not result_group_membership:
+                        CosinnusGroupMembership.objects.create(
+                            group=room_self.target_result_group,
+                            user=conference_membership.user,
+                            status=conference_membership.status
+                        )
+        MembershipUpdateHookThread().start()
+        
     @property
     def non_table_events_qs(self):
         from cosinnus_event.models import ConferenceEvent # noqa
