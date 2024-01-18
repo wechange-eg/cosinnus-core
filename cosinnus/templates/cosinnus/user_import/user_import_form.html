@@ -49,7 +49,7 @@
 		        <h2>{% trans "Upload a user CSV file to import user profiles" %}</h2>
 			    <p class="textfield transparent">
 			        {% trans "Please upload a CSV with the following columns (in any order)" %}:
-			        {{ required_columns }}
+			        <code>{{ required_columns }}</code>
 		        </p>
 		        {% for field in form %}
 			        <div class="cosinnus-field">
