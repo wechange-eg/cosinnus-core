@@ -978,6 +978,9 @@ class CosinnusConferenceApplication(models.Model):
 
     def get_translated_motivation_answers(self):
         """ Returns the motivation questions where the question is translated to the current language. """
+        if not settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
+            # translation is / has been disabled. Return the json field as is.
+            return self.motivation_answers
         translated_motivation_answers = []
         current_language = get_language()
         participation_management = self.conference.participation_management.first()

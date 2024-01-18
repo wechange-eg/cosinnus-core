@@ -108,9 +108,12 @@ class TranslatableFormsetJsonFieldMixin:
     """ Model mixin that adds a helper function to receive a translated version of a formset json field. """
 
     def get_translated_json_field(self, field_name):
+        json_field = getattr(self, field_name)
+        if not settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
+            # translation is / has been disabled. Return the json field as is.
+            return json_field
         translated_value_list = []
         current_language = get_language()
-        json_field = getattr(self, field_name)
         for json_field_element in json_field:
             translated_element = {}
             untranslated_values = {k: v for k, v in json_field_element.items() if '_translation_' not in k}
