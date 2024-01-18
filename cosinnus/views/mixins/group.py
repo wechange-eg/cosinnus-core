@@ -357,6 +357,7 @@ class GroupObjectCountMixin(object):
                 # only for counting the objects, we use a fake superuser, so we get the actual 
                 # counts of the contents, and not the visible ones for current user
                 fake_admin = AnonymousUser()
+                setattr(fake_admin, 'is_internal_superuser', True)
                 fake_admin.is_superuser = True
                 object_counts[app_name] = model.get_current(self.group, fake_admin).count()
         context.update({

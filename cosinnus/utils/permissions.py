@@ -235,6 +235,9 @@ def check_user_superuser(user, portal=None):
         For this it checks permissions if a user is a portal admin or a superuser
             returns ``True`` if the user is a superuser or portal admin
     """
+    # permit special internal users
+    if getattr(user, 'is_internal_superuser', False):
+        return True
     if not user.is_authenticated or user.is_guest:
         return False
     return user.is_superuser or check_user_portal_admin(user, portal)
