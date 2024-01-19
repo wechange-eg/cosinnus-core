@@ -444,8 +444,6 @@ class DetailedUserMapResult(DetailedMapResult):
     """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
          into a proper MapResult """
          
-    # todo: show portals?
-    
     fields = copy(DetailedMapResult.fields)
     fields.update({
         'projects': [],

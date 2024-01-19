@@ -162,5 +162,4 @@ def get_hidden_user_dashboard_announcements_for_user(user):
     if not user.is_authenticated:
         return []
     ui_prefs = get_ui_prefs_for_user(user)
-    # TODO: need to convert to actual int?
     return ui_prefs[UI_PREF_DASHBOARD_HIDDEN_ANNOUNCEMENTS]

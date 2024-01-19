@@ -515,9 +515,6 @@ def create_guest_user_and_login(guest_access: 'UserGroupGuestAccess', username, 
         user.cosinnus_profile.guest_access_object = guest_access
         user.cosinnus_profile.save()
         
-        # do NOT add a portal membership for this user!
-        # TODO: check this!
-        
         # set user visibility to least viisble
         from cosinnus.models.tagged import BaseTagObject
         media_tag = user.cosinnus_profile.media_tag
