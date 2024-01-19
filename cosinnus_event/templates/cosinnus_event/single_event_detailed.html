@@ -2,8 +2,10 @@
 
 {# this template expects an {{ event }} object to be passed to it. Also accepts hide_control_buttons to hide edit/delete buttons #}
 {% addtoblock "js" %}
-	{% if event.state == 1 and user.is_authenticated and user|has_read_access:event and not user.is_guest %}
-		<script src="{% static 'js/cosinnus_event/event_attendance.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
+	{% if event.state == 1 and user.is_authenticated and user|has_read_access:event %}
+        {% if not user.is_guest or SETTINGS.COSINNUS_USER_GUEST_ACCOUNTS_ENABLE_SOFT_EDITS %}
+		    <script src="{% static 'js/cosinnus_event/event_attendance.js' %}?v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
+        {% endif %}
 	{% endif %}
 {% endaddtoblock %}
 
@@ -171,183 +173,185 @@
 
 
 
-{% if event.state == 1 and user.is_authenticated and user|has_read_access:event and not user.is_guest %}
+{% if event.state == 1 and user.is_authenticated and user|has_read_access:event %}
+
     
     {#  #########  Event attendance  ########## #}   
     {% if not event.conferenceevent %}
-	
-		<div class="btn btn-white w100">
-		    <ul class="media-list">
-		        <li class="media">
-		            <span class="pull-left">
-		                <i class="fa fa-group"></i>
-		            </span>
-		            <div class="media-body">
-		            	{% captureas i18n_going %}{% trans "Going" context "someone else is going" %}{% endcaptureas %}
-		            	{% captureas i18n_maybe_going %}{% trans "Maybe going" context "someone else is maybe going" %}{% endcaptureas %}
-		            	{% captureas i18n_not_going %}{% trans "Can't go" context "someone else can't go" %}{% endcaptureas %}
-		            	
-		                <div class="attendance-avatar-list">
-		                	{% if attendants_going %}
-			             		{% for attendance in attendants_going %}
-			             			{% include 'cosinnus_event/common/event_attendance_avatar.html' with attendance=attendance extra_title=i18n_going %}
-			             		{% endfor %}
-		             		{% endif %}
-		             		{% if attendants_maybe %}
-			             		{% for attendance in attendants_maybe %}
-			             			{% include 'cosinnus_event/common/event_attendance_avatar.html' with attendance=attendance maybe_going=True extra_title=i18n_maybe_going %}
-			             		{% endfor %}
-		             		{% endif %}
-		             		{% if attendants_going or attendants_maybe %}
-		             			<br/>	
-		             		{% endif %}
-		             		<div>
-			                	<b>{{ attendants_going|length }}</b> 
-			                	{% blocktrans context "one or many people are going" count counter=attendants_going|length %}Going{% plural %}Going{% endblocktrans %}
-			                	{% if attendants_maybe %}
-			                		(
-			                		<b>{{ attendants_maybe|length }}</b> 
-		                			{% blocktrans context "one or many people are maybe going" count counter=attendants_maybe|length %}Maybe going{% plural %}Maybe going{% endblocktrans %}
-		                			)
-			                	{% endif %}
-		                	</div>
-		                </div>
-		                {% if attendants_not_going %}
-			                <div class="fadedown">
-			                	<div class="btn" style="float:none; width: auto; margin: 0 0 6px 0;" >
-					                <a class="fadedown-clickarea">
-					                	<em>
-						                	<b>{{ attendants_not_going|length }}</b> 
-						                	{% blocktrans context "one or many people are not going" count counter=attendants_not_going|length %}Can't go{% plural %}Can't go{% endblocktrans %}
-						                    <i class="fa fa-chevron-down"></i>
-					                    </em>
-					                </a>
-			                	</div>
-			                	<div>
-			                		{% for attendance in attendants_not_going %}
-				             			{% include 'cosinnus_event/common/event_attendance_avatar.html' with attendance=attendance extra_title=i18n_not_going %}
-				             		{% endfor %}
-			                	</div>
-			                </div>
-			            {% endif %}
-			            
-		            </div>
-		        </li>
-		    </ul>
-		</div>
-		
-		{#  #########  Event attendance button  ########## #}	            
-	
-	
-		<div class="white-content">
-			<div class="btn-group regular-space event-attendance 
-			{% if user_attendance and user_attendance.state == 0 %}event-attendance-not-going app-etherpad
-			{% elif user_attendance and user_attendance.state == 1 %}event-attendance-maybe app-todos
-			{% elif user_attendance and user_attendance.state == 2 %}event-attendance-going app-calendar
-			{% else %}event-attendance-no-choice app-calendar{% endif %}">
-				{# This hacky invisible button fixes all kinds of CSS incongruencies because the first button has different style rules #}
-				<button style="display: none;" class="btn btn-emphasized w100 dropdown-toggle"></button>
-			    <button type="button" class="btn btn-small btn-emphasized w100 dropdown-toggle event-attendance-choice-going" data-toggle="dropdown">
-			        <ul class="media-list">
-			            <li class="media">
-			                <span class="pull-left">
-			                    <i class="fa fa-fw  fa-check"></i>
-			                </span>
-			                <span class="pull-right">
-			                    <i class="fa fa-caret-down"></i>
-			                </span>
-			                <div class="media-body">
-			                    {% trans "Going" %}
-			                </div>
-			            </li>
-			        </ul>
-			    </button>
-			    <button type="button" class="btn btn-small btn-emphasized w100 dropdown-toggle event-attendance-choice-maybe" data-toggle="dropdown">
-			        <ul class="media-list">
-			            <li class="media">
-			                <span class="pull-left">
-			                    <i class="fa fa-fw  fa-question"></i>
-			                </span>
-			                <span class="pull-right">
-			                    <i class="fa fa-caret-down"></i>
-			                </span>
-			                <div class="media-body">
-			                    {% trans "Maybe going" %}
-			                </div>
-			            </li>
-			        </ul>
-			    </button>
-			    <button type="button" class="btn btn-small btn-emphasized w100 dropdown-toggle event-attendance-choice-not-going" data-toggle="dropdown">
-			        <ul class="media-list">
-			            <li class="media">
-			                <span class="pull-left">
-			                    <i class="fa fa-fw  fa-close"></i>
-			                </span>
-			                <span class="pull-right">
-			                    <i class="fa fa-caret-down"></i>
-			                </span>
-			                <div class="media-body">
-			                    {% trans "Can't go" %}
-			                </div>
-			            </li>
-			        </ul>
-			    </button>
-			    <button type="button" class="btn btn-small btn-emphasized w100 dropdown-toggle event-attendance-choice-no-choice" data-toggle="dropdown">
-			        <ul class="media-list">
-			            <li class="media">
-			                <span class="pull-left">
-			                    <i class="fa fa-fw fa-calendar"></i>
-			                </span>
-			                <span class="pull-right">
-			                    <i class="fa fa-caret-down"></i>
-			                </span>
-			                <div class="media-body">
-			                    {% trans "Are you going?" %}
-			                </div>
-			            </li>
-			        </ul>
-			    </button>
-			    
-			    <ul class="dropdown-menu appnavi-dropdown-menu w100" role="menu">
-			        <li class="app-calendar appnavi-listelement fine-space event-attendance-button" data-event-attendance-toggle="event-attendance-going">
-			            <a>
-			                <i class="fa fa-fw  fa-check"></i>
-			                {% trans "Going" %}
-			            </a>
-			        </li>
-			        <li class="app-todos appnavi-listelement fine-space event-attendance-button" data-event-attendance-toggle="event-attendance-maybe">
-			            <a>
-			                <i class="fa fa-fw  fa-question"></i>
-			                {% trans "Maybe going" %}
-			            </a>
-			        </li>
-			        <li class="app-etherpad appnavi-listelement fine-space event-attendance-button" data-event-attendance-toggle="event-attendance-not-going">
-			            <a>
-			                <i class="fa fa-fw  fa-close"></i>
-			                {% trans "Can't go" %}
-			            </a>
-			        </li>
-			        <li class="app-main appnavi-listelement fine-space event-attendance-button" data-event-attendance-toggle="event-attendance-no-choice">
-			            <a>
-			                <i class="fa fa-fw  fa-trash-o"></i>
-			                {% trans "No Choice" %}
-			            </a>
-			        </li>
-			    </ul>
-			</div><!-- btn-group -->
-			<div class="attendance-status-frame">
-				<span class="attendance-status attendance-status-working" style="display: none;">
-					<i class="fa fa-fw fa-2x fa-spin fa-cog"></i>
-				</span>
-				<span class="attendance-status attendance-status-success" style="display: none;">
-					<i class="fa fa-fw  fa-2x fa-check"></i>
-				</span>
-				<span class="attendance-status attendance-status-error" style="display: none;">
-					<i class="fa fa-fw  fa-2x fa-close"></i>
-				</span>
-			</div>
-		</div>
-		
+        {% if not user.is_guest or SETTINGS.COSINNUS_USER_GUEST_ACCOUNTS_ENABLE_SOFT_EDITS %}
+
+            <div class="btn btn-white w100">
+                <ul class="media-list">
+                    <li class="media">
+                        <span class="pull-left">
+                            <i class="fa fa-group"></i>
+                        </span>
+                        <div class="media-body">
+                            {% captureas i18n_going %}{% trans "Going" context "someone else is going" %}{% endcaptureas %}
+                            {% captureas i18n_maybe_going %}{% trans "Maybe going" context "someone else is maybe going" %}{% endcaptureas %}
+                            {% captureas i18n_not_going %}{% trans "Can't go" context "someone else can't go" %}{% endcaptureas %}
+
+                            <div class="attendance-avatar-list">
+                                {% if attendants_going %}
+                                    {% for attendance in attendants_going %}
+                                        {% include 'cosinnus_event/common/event_attendance_avatar.html' with attendance=attendance extra_title=i18n_going %}
+                                    {% endfor %}
+                                {% endif %}
+                                {% if attendants_maybe %}
+                                    {% for attendance in attendants_maybe %}
+                                        {% include 'cosinnus_event/common/event_attendance_avatar.html' with attendance=attendance maybe_going=True extra_title=i18n_maybe_going %}
+                                    {% endfor %}
+                                {% endif %}
+                                {% if attendants_going or attendants_maybe %}
+                                    <br/>
+                                {% endif %}
+                                <div>
+                                    <b>{{ attendants_going|length }}</b>
+                                    {% blocktrans context "one or many people are going" count counter=attendants_going|length %}Going{% plural %}Going{% endblocktrans %}
+                                    {% if attendants_maybe %}
+                                        (
+                                        <b>{{ attendants_maybe|length }}</b>
+                                        {% blocktrans context "one or many people are maybe going" count counter=attendants_maybe|length %}Maybe going{% plural %}Maybe going{% endblocktrans %}
+                                        )
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% if attendants_not_going %}
+                                <div class="fadedown">
+                                    <div class="btn" style="float:none; width: auto; margin: 0 0 6px 0;" >
+                                        <a class="fadedown-clickarea">
+                                            <em>
+                                                <b>{{ attendants_not_going|length }}</b>
+                                                {% blocktrans context "one or many people are not going" count counter=attendants_not_going|length %}Can't go{% plural %}Can't go{% endblocktrans %}
+                                                <i class="fa fa-chevron-down"></i>
+                                            </em>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        {% for attendance in attendants_not_going %}
+                                            {% include 'cosinnus_event/common/event_attendance_avatar.html' with attendance=attendance extra_title=i18n_not_going %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            {#  #########  Event attendance button  ########## #}
+
+
+            <div class="white-content">
+                <div class="btn-group regular-space event-attendance
+                {% if user_attendance and user_attendance.state == 0 %}event-attendance-not-going app-etherpad
+                {% elif user_attendance and user_attendance.state == 1 %}event-attendance-maybe app-todos
+                {% elif user_attendance and user_attendance.state == 2 %}event-attendance-going app-calendar
+                {% else %}event-attendance-no-choice app-calendar{% endif %}">
+                    {# This hacky invisible button fixes all kinds of CSS incongruencies because the first button has different style rules #}
+                    <button style="display: none;" class="btn btn-emphasized w100 dropdown-toggle"></button>
+                    <button type="button" class="btn btn-small btn-emphasized w100 dropdown-toggle event-attendance-choice-going" data-toggle="dropdown">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left">
+                                    <i class="fa fa-fw  fa-check"></i>
+                                </span>
+                                <span class="pull-right">
+                                    <i class="fa fa-caret-down"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans "Going" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                    <button type="button" class="btn btn-small btn-emphasized w100 dropdown-toggle event-attendance-choice-maybe" data-toggle="dropdown">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left">
+                                    <i class="fa fa-fw  fa-question"></i>
+                                </span>
+                                <span class="pull-right">
+                                    <i class="fa fa-caret-down"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans "Maybe going" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                    <button type="button" class="btn btn-small btn-emphasized w100 dropdown-toggle event-attendance-choice-not-going" data-toggle="dropdown">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left">
+                                    <i class="fa fa-fw  fa-close"></i>
+                                </span>
+                                <span class="pull-right">
+                                    <i class="fa fa-caret-down"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans "Can't go" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                    <button type="button" class="btn btn-small btn-emphasized w100 dropdown-toggle event-attendance-choice-no-choice" data-toggle="dropdown">
+                        <ul class="media-list">
+                            <li class="media">
+                                <span class="pull-left">
+                                    <i class="fa fa-fw fa-calendar"></i>
+                                </span>
+                                <span class="pull-right">
+                                    <i class="fa fa-caret-down"></i>
+                                </span>
+                                <div class="media-body">
+                                    {% trans "Are you going?" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+
+                    <ul class="dropdown-menu appnavi-dropdown-menu w100" role="menu">
+                        <li class="app-calendar appnavi-listelement fine-space event-attendance-button" data-event-attendance-toggle="event-attendance-going">
+                            <a>
+                                <i class="fa fa-fw  fa-check"></i>
+                                {% trans "Going" %}
+                            </a>
+                        </li>
+                        <li class="app-todos appnavi-listelement fine-space event-attendance-button" data-event-attendance-toggle="event-attendance-maybe">
+                            <a>
+                                <i class="fa fa-fw  fa-question"></i>
+                                {% trans "Maybe going" %}
+                            </a>
+                        </li>
+                        <li class="app-etherpad appnavi-listelement fine-space event-attendance-button" data-event-attendance-toggle="event-attendance-not-going">
+                            <a>
+                                <i class="fa fa-fw  fa-close"></i>
+                                {% trans "Can't go" %}
+                            </a>
+                        </li>
+                        <li class="app-main appnavi-listelement fine-space event-attendance-button" data-event-attendance-toggle="event-attendance-no-choice">
+                            <a>
+                                <i class="fa fa-fw  fa-trash-o"></i>
+                                {% trans "No Choice" %}
+                            </a>
+                        </li>
+                    </ul>
+                </div><!-- btn-group -->
+                <div class="attendance-status-frame">
+                    <span class="attendance-status attendance-status-working" style="display: none;">
+                        <i class="fa fa-fw fa-2x fa-spin fa-cog"></i>
+                    </span>
+                    <span class="attendance-status attendance-status-success" style="display: none;">
+                        <i class="fa fa-fw  fa-2x fa-check"></i>
+                    </span>
+                    <span class="attendance-status attendance-status-error" style="display: none;">
+                        <i class="fa fa-fw  fa-2x fa-close"></i>
+                    </span>
+                </div>
+            </div>
+		{% endif %}
 	{% endif %}
 	{% comment %} End Event attendance {% endcomment %}
 	

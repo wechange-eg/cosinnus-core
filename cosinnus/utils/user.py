@@ -128,25 +128,32 @@ def is_user_active(user):
             not user.email.startswith('__deleted_user__') and \
             not user.is_guest
 
-def filter_active_users(user_model_qs, filter_on_user_profile_model=False):
+def filter_active_users(user_model_qs, filter_on_user_profile_model=False, filter_guests=True):
     """ Filters a QS of ``get_user_model()`` so that all users are removed that are either of
             - inactive
             - have never logged in
             - have not accepted the ToS
             - are a guest account
-        @param filter_on_user_profile_model: Filter not on User, but on CosinnusUserProfile instead """
+        @param filter_on_user_profile_model: Filter not on User, but on CosinnusUserProfile instead.
+        @param filter_guests: switch to disable the standard mode of considering guest accounts inactive,
+            which is done so that many permission checks do not apply to guests.
+    """
     if filter_on_user_profile_model:
-        return user_model_qs.exclude(user__is_active=False).\
+        filtered_qs = user_model_qs.exclude(user__is_active=False).\
             exclude(user__last_login__exact=None).\
             exclude(user__email__icontains='__unverified__').\
-            filter(settings__has_key='tos_accepted').\
-            exclude(_is_guest=True)
+            filter(settings__has_key='tos_accepted')
+        if filter_guests:
+            filtered_qs = filtered_qs.exclude(_is_guest=True)
+        return filtered_qs
     else:
-        return user_model_qs.exclude(is_active=False).\
-            exclude(last_login__exact=None).\
-            exclude(email__icontains='__unverified__').\
-            filter(cosinnus_profile__settings__has_key='tos_accepted').\
-            exclude(cosinnus_profile___is_guest=True)
+        filtered_qs = user_model_qs.exclude(is_active=False). \
+            exclude(last_login__exact=None). \
+            exclude(email__icontains='__unverified__'). \
+            filter(cosinnus_profile__settings__has_key='tos_accepted')
+        if filter_guests:
+            filtered_qs = filtered_qs.exclude(cosinnus_profile___is_guest=True)
+        return filtered_qs
             
 def filter_portal_users(user_model_qs, portal=None):
     """ Filters a QS of ``get_user_model()`` so that only users of this portal remain. """
@@ -507,9 +514,6 @@ def create_guest_user_and_login(guest_access: 'UserGroupGuestAccess', username, 
         user.cosinnus_profile.is_guest = True
         user.cosinnus_profile.guest_access_object = guest_access
         user.cosinnus_profile.save()
-        
-        # do NOT add a portal membership for this user!
-        # TODO: check this!
         
         # set user visibility to least viisble
         from cosinnus.models.tagged import BaseTagObject

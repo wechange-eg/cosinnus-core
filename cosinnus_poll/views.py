@@ -262,7 +262,8 @@ class PollVoteView(RequireReadMixin, RecordLastVisitedMixin, FilterGroupMixin, S
         self.mode = 'view'
         if poll.state == Poll.STATE_VOTING_OPEN and request.user.is_authenticated:
             if check_object_read_access(poll, request.user) and (poll.anyone_can_vote or check_ug_membership(request.user, self.group)):
-                self.mode = 'vote'
+                if not request.user.is_guest or settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLE_SOFT_EDITS:
+                    self.mode = 'vote'
         try:
             return super(PollVoteView, self).dispatch(request, *args, **kwargs)
         except Redirect:

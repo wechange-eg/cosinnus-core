@@ -1368,6 +1368,12 @@ class CosinnusConf(AppConf):
     USER_GUEST_ACCOUNTS_FOR_GROUP_TYPE = [0, 1, 2]
     # how long in days guest accounts will be kept, no matter if active or inactive
     USER_GUEST_ACCOUNTS_DELETE_AFTER_DAYS = 7
+    # enable extended "soft edit" permissions for guests
+    # - writing in etherpads/ethercalcs
+    # - voting in event polls
+    # - assigning their event attendace choice
+    # - voting in polls
+    USER_GUEST_ACCOUNTS_ENABLE_SOFT_EDITS = False
     
     # should the LIKE, BOOKMARK, FOLLOW buttons be shown on the entire portal (microsite, groups/projects, events, etc.)?
     SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS = True

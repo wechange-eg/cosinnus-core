@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-17 14:29+0100\n"
+"POT-Creation-Date: 2024-01-19 14:35+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -124,6 +124,12 @@ msgstr ""
 msgid "Email not verified"
 msgstr "не визначено"
 
+msgid "Is Guest"
+msgstr ""
+
+msgid "Is not a Guest"
+msgstr ""
+
 msgid "User Logged In"
 msgstr "Користувач увійшов"
 
@@ -213,6 +219,11 @@ msgid "Recipients Send Count"
 msgstr "Адресати"
 
 #, fuzzy
+#| msgid "Last accessed"
+msgid "Guest access URL"
+msgstr "Останні відкриті"
+
+#, fuzzy
 #| msgid "Comment"
 msgid "Community"
 msgstr "Коментар"
@@ -261,6 +272,11 @@ msgid "My Profile"
 msgstr "Мій профіль"
 
 #, fuzzy
+#| msgid "Delete Account"
+msgid "My Guest Account"
+msgstr "Видалити обліковий запис"
+
+#, fuzzy
 #| msgid "Edit Your Profile"
 msgid "Set up my Profile"
 msgstr "Редагувати Ваш Профіль"
@@ -281,6 +297,11 @@ msgstr "Адміністрація"
 
 msgid "Logout"
 msgstr "Вихід"
+
+#, fuzzy
+#| msgid "Last accessed"
+msgid "Leave guest access"
+msgstr "Останні відкриті"
 
 msgid "Home"
 msgstr "Домашня сторінка"
@@ -471,6 +492,11 @@ msgstr "Ця команда більше не існує за вказаною �
 msgid "This account is no longer active. You have been logged out."
 msgstr "Цей обліковий запис більше не активний. Ви вийшли з системи"
 
+#, fuzzy
+#| msgid "This account is no longer active. You have been logged out."
+msgid "Your guest access has expired. You have been logged out."
+msgstr "Цей обліковий запис більше не активний. Ви вийшли з системи"
+
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr "Вас було перенаправлено сюди, тому що Ви натиснули посилання в одному з наших листів. З міркувань безпеки ми не посилаємось безпосередньо на зовнішні веб-сайти зі своєї пошти. Будь ласка, перейдіть за посиланням нижче, якщо хочете його відвідати."
 
@@ -479,6 +505,14 @@ msgstr ""
 
 msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
 msgstr ""
+
+msgid "The action you tried to perform is not allowed for guest accounts."
+msgstr ""
+
+#, fuzzy
+#| msgid "The page you requested is not available for this event at this time."
+msgid "The page you tried to visit is not available for guest accounts."
+msgstr "Сторінка, яку Ви запитуєте, на даний момент не доступна для цієї події."
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Ви автоматично вийшли з системи після певного часу неактивності."
@@ -1937,6 +1971,12 @@ msgstr "Дата запланованого видалення цього про
 
 msgid "Deletion triggered by self"
 msgstr "Видалення викликається самостійно"
+
+msgid "Is guest user"
+msgstr ""
+
+msgid "(Deleted User)"
+msgstr "(Видалений Користувач)"
 
 msgid "Terms of Service"
 msgstr "Умови надання послуг"
@@ -4183,6 +4223,11 @@ msgstr "Закрити"
 msgid "Report offensive content"
 msgstr "Повідомити про недозволений зміст"
 
+#, fuzzy
+#| msgid "Your phone number is only visible for registered users"
+msgid "Sorry, this feature is only available for registered members."
+msgstr "Ваш номер телефону відображається тільки для зареєстрованих користувачів"
+
 msgid "Please enter a description of why you are reporting this content!"
 msgstr "Будь ласка, опишіть, чому ви повідомляєте про цей контент!"
 
@@ -4212,6 +4257,16 @@ msgid "The content of the field above will be searchable in the plattform-wide s
 msgstr "За вмістом поля вище можна буде здійснювати пошук у пошуковій системі на всій платформі. Він буде показаний, якщо його не замінить конкретний переклад (нижче)."
 
 msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr "Якщо вони є, переклади нижче будуть показані відповідно до налаштувань локальної мови користувачів. Можливість пошуку відсутня."
+
+#, fuzzy
+#| msgid "The content of the field above will be searchable in the plattform-wide search. It will be shown, unless overriden by a specific translation (below)."
+msgid "The content of the field above will will be shown, unless overriden by a specific translation (below)."
+msgstr "За вмістом поля вище можна буде здійснювати пошук у пошуковій системі на всій платформі. Він буде показаний, якщо його не замінить конкретний переклад (нижче)."
+
+#, fuzzy
+#| msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgid "If present, the translations below will be shown according to the users' local language settings."
 msgstr "Якщо вони є, переклади нижче будуть показані відповідно до налаштувань локальної мови користувачів. Можливість пошуку відсутня."
 
 #, fuzzy
@@ -4482,6 +4537,11 @@ msgstr "Відхилити члена"
 msgid "There are no new membership requests."
 msgstr "Немає нових запитів на членство."
 
+#, fuzzy
+#| msgid "Delete user account"
+msgid "Guest user access"
+msgstr "Видалити обліковий запис користувача"
+
 msgid "Current Members"
 msgstr "Поточні члени"
 
@@ -4725,13 +4785,13 @@ msgstr ""
 msgid "Create invite token"
 msgstr "Видалити запрошення"
 
-msgid "Check this to generate an invite token which allows a user to join the group directly."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the group directly."
 msgstr ""
 
-msgid "Check this to generate an invite token which allows a user to join the project directly."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the project directly."
 msgstr ""
 
-msgid "Check this to generate an invite token which allows a user to join the conference directly."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the conference directly."
 msgstr ""
 
 msgid "The current token is: "
@@ -6021,6 +6081,11 @@ msgstr "Здійснено вихід із системи"
 msgid "You have been logged out. See you again soon!"
 msgstr ""
 
+#, fuzzy
+#| msgid "Redirect Logged in Users"
+msgid "Redirecting you in 3 seconds..."
+msgstr "Перенаправити зареєстрованих користувачів"
+
 msgid "Error while logging out"
 msgstr ""
 
@@ -6922,6 +6987,50 @@ msgstr "Введіть токен:"
 
 msgid "For example"
 msgstr "Наприклад"
+
+#, fuzzy
+#| msgid "Restricted"
+msgid "Restricted Guest Access"
+msgstr "Обмежений"
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Access restricted for guest accounts"
+msgstr "Профіль користувача успішно деактивований "
+
+msgid "You are currently using the site with a guest account provided to you via a link."
+msgstr ""
+
+msgid "As a guest, many features on this site are not available to you, like creating content, uploading files, or messaging other users."
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to perform the import of the shown data?"
+msgid "You also cannot customize your user profile."
+msgstr "Ви дійсно хочете імпортувати представлені дані?"
+
+msgid "Sign up now to create a full account!"
+msgstr ""
+
+msgid "If you sign up to become a member, you can collaborate with others, customize your profile, and use all of the site's features."
+msgstr ""
+
+msgid "Note that after signup, you will have to apply or be invited to become a full member of any projects, groups, or conferences. Your guest account's memberships will not carry over."
+msgstr ""
+
+#, fuzzy
+#| msgid "Create and create another"
+msgid "Leave guest access and create an account"
+msgstr "Створити та створити інший"
+
+msgid "Guest User Signup"
+msgstr ""
+
+msgid "You may create a full account at any time by logging out of your guest account via the user menu on the top right and signup up."
+msgstr ""
+
+msgid "Join as a Guest"
+msgstr ""
 
 msgid "Edit Profile"
 msgstr "Редагувати Профіль"
@@ -7964,9 +8073,6 @@ msgstr ""
 msgid "Nutzungsbedingungen"
 msgstr "Умови користування"
 
-msgid "(Deleted User)"
-msgstr "(Видалений Користувач)"
-
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>Візуалізатора для %(model_name)s не знайдено</i>!"
@@ -8052,6 +8158,25 @@ msgstr "Увійдіть і почніть співпрацю!"
 msgid "You have been invited to collaborate!"
 msgstr "Вас запросили до співпраці!"
 
+msgid "You can access and browse the project that invited you"
+msgstr ""
+
+#, fuzzy
+#| msgid "There is no description for this project yet."
+msgid "This is only visible to admins of this project."
+msgstr "Для цього проєкту ще немає опису."
+
+msgid "Guest user access has been enabled for this project. The project admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this when sharing sensitive information within this project."
+msgstr ""
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this project"
+msgstr ""
+
+#, fuzzy
+#| msgid "You are now in a private channel with the admins of this project."
+msgid "You are joining as a guest and will get read-only access to the project"
+msgstr "Тепер Ви перебуваєте в приватному каналі з адміністраторами цього проекту."
+
 msgid "Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators."
 msgstr "Вибачте, лише адміністратори порталу можуть створювати Проєкти! Ви можете написати повідомлення до одного/однієї з адміністраторів, щоб створили для вас Проєкт. Нижче наведений перелік усіх адміністраторів."
 
@@ -8135,6 +8260,25 @@ msgstr "Користувачі можуть приєднатися, надісл
 
 msgid "Type the names of files, events or pads from this group to attach..."
 msgstr "Введіть назви файлів, подій або педів із цієї групи, щоб додати ..."
+
+msgid "You can access and browse the group that invited you"
+msgstr ""
+
+#, fuzzy
+#| msgid "There is no description for this group yet."
+msgid "This is only visible to admins of this group."
+msgstr "Для цієї групи ще немає опису."
+
+msgid "Guest user access has been enabled for this group. The group admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this when sharing sensitive information within this group."
+msgstr ""
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this group"
+msgstr ""
+
+#, fuzzy
+#| msgid "You are now in a private channel with the admins of this group."
+msgid "You are joining as a guest and will get read-only access to the group"
+msgstr "Тепер Ви перебуваєте в приватному каналі з адміністраторами цієї групи."
 
 msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
 msgstr "Вибачте, лише адміністратори порталу можуть створювати групи! Ви можете написати повідомлення до одного/однієї з адміністраторів, щоб створити для вас групу. Нижче наведений перелік усіх адміністраторів."
@@ -8238,6 +8382,25 @@ msgstr "Приєднуйтесь зараз і беріть участь!"
 
 msgid "You have been invited to participate!"
 msgstr "Вас запросили до участі!"
+
+msgid "You can access and participate in the conference that invited you"
+msgstr ""
+
+#, fuzzy
+#| msgid "This function is not enabled for this conference."
+msgid "This is only visible to admins of this conference."
+msgstr "Ця функція недоступна для цієї конференції"
+
+msgid "Guest user access has been enabled for this conference. The group admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this conference. Be aware of this when sharing sensitive information within this conference."
+msgstr ""
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this conference"
+msgstr ""
+
+#, fuzzy
+#| msgid "You are now in a private channel with the organizers of this conference."
+msgid "You are joining as a guest and will get read-only access to the conference"
+msgstr "Зараз ви перебуваєте в приватному каналі разом з організаторами цієї конференції."
 
 msgid "Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators."
 msgstr "Вибачте, лише адміністратори порталу можуть створювати Конференції! Ви можете написати повідомлення одному з адміністраторів, щоб створити для вас конференцію. Нижче наведений перелік усіх адміністраторів.."
@@ -8570,6 +8733,9 @@ msgstr "Наступним користувачам було запропоно�
 msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
 msgstr "Усі члени вибрані вами груп/проєктів вже були запрошені або вже подали заявку. Нові запрошення не надсилалися."
 
+msgid "You cannot promote a guest user account!"
+msgstr ""
+
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
 msgstr "Ви не можете видалити %(username)s з цієї команди. Лишився лише один адміністратор."
@@ -8726,6 +8892,10 @@ msgstr "%(numobjects)d інших об'єктів було видалено."
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Не знайдено жодного відповідного для запиту %(verbose_name)s"
+
+#, python-format
+msgid "User \"%s\" is a guest user and has no profile."
+msgstr ""
 
 msgid "Your profile was edited successfully."
 msgstr "Ваш профіль успішно відредаговано."
@@ -8888,6 +9058,12 @@ msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You 
 msgstr "Ми вилучили вашу електронну адресу \"%(email)s\" з нашої розсилки. Ви більше не будете отримувати листів від нас!"
 
 msgid "A new verification email has been sent."
+msgstr ""
+
+msgid "You are currently logged in. The guest access can only be used if you are not logged in."
+msgstr ""
+
+msgid "We could not sign you in as a guest at this time. Please try again later!"
 msgstr ""
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
@@ -9297,6 +9473,11 @@ msgstr "створено Pad"
 
 msgid "There are no etherpads yet"
 msgstr "Ще немає жодних etherpadів"
+
+#, fuzzy
+#| msgid "This action is not permitted for this poll at this stage!"
+msgid "Editing is not permitted for guest accounts."
+msgstr "Дія на цьому етапі опитування не дозволена!"
 
 #, python-format
 msgid "Etherpad \"%(title)s\" was edited successfully."
@@ -14018,9 +14199,6 @@ msgstr "Ви не можете видалити цю папку, оскільк�
 
 #~ msgid "Premium"
 #~ msgstr "Преміум"
-
-#~ msgid "Restricted"
-#~ msgstr "Обмежений"
 
 #~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 #~ msgstr "%(sender_name)s тільки що створив проєкт/групу „%(team_name)s“ на %(portal_name)s!"

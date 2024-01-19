@@ -242,7 +242,7 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
                 raise PermissionDenied
             
         if target_user_is_guest:
-            messages.warning(request, _('User "%s" is a guest account has no profile to show.') % target_user_profile.get_full_name())
+            messages.warning(request, _('User "%s" is a guest user and has no profile.') % target_user_profile.get_full_name())
             return redirect_to_error_page(request, view=self)
             
         return super(UserProfileDetailView, self).dispatch(

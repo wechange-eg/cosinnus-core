@@ -147,6 +147,13 @@ pad_detail_view = EtherpadDetailView.as_view()
 class EtherpadWriteView(RequireLoggedInMixin, EtherpadDetailView):
     template_name = 'cosinnus_etherpad/etherpad_write.html'
     
+    def dispatch(self, request, *args, **kwargs):
+        # redirect guest users to read-only view unless soft edits are enabled
+        if request.user.is_guest and not settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLE_SOFT_EDITS:
+            messages.info(request, _('Editing is not permitted for guest accounts.'))
+            return redirect(group_aware_reverse('cosinnus:etherpad:pad-detail', kwargs=kwargs))
+        return super().dispatch(request, *args, **kwargs)
+    
     def render_to_response(self, context, **response_kwargs):   
         """ Do not allow write access to pads owned by deactivated users.
             Also save last accessed on access """

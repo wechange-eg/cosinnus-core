@@ -233,7 +233,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
         full_name = '%s %s' % (user.first_name, user.last_name)
         full_name = full_name.strip()
         if user.is_guest:
-            full_name += f' ({_("Guest")})'
+            full_name = f'({_("Guest")}) {full_name}'
         return full_name
     
     def get_extended_full_name(self):

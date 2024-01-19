@@ -81,7 +81,7 @@ def report_object(request):
     content_type = ContentType.objects.get_for_model(model_cls)
     report_obj = CosinnusReportedObject.objects.create(content_type=content_type, object_id=obj_id, text=text, creator=request.user)
     
-    # TODO: notification to portal admins
+    # notification to portal admins
     _notify_users_for_reported_objects(report_obj, request)
     
     """
