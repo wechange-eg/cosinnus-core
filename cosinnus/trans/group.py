@@ -58,7 +58,7 @@ class CosinnusProjectTransBase(object):
     INFO_ONLY_VISIBLE_TO_ADMINS = _('This is only visible to admins of this project.')
     
     INFO_GUEST_USERS_ENABLED = _('Guest user access has been enabled for this project. The project admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this when sharing sensitive information within this project.')
-    INFO_GUEST_USER_INVITE_LINK = _('You can invite an unregistered user to instantly join the platform and gain read-only access to this project using the following link')
+    INFO_GUEST_USER_INVITE_LINK = _('You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this project')
     INFO_GUEST_USER_SIGNUP_INTRO = _('You are joining as a guest and will get read-only access to the project')
     
     MESSAGE_ONLY_ADMINS_MAY_CREATE = _('Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators.')
@@ -119,7 +119,7 @@ class CosinnusSocietyTransBase(CosinnusProjectTransBase):
     INFO_ONLY_VISIBLE_TO_ADMINS = _('This is only visible to admins of this group.')
     
     INFO_GUEST_USERS_ENABLED = _('Guest user access has been enabled for this group. The group admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this when sharing sensitive information within this group.')
-    INFO_GUEST_USER_INVITE_LINK = _('You can invite an unregistered user to instantly join the platform without registering and gain read-only access to this group using the following link')
+    INFO_GUEST_USER_INVITE_LINK = _('You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this group')
     INFO_GUEST_USER_SIGNUP_INTRO = _('You are joining as a guest and will get read-only access to the group')
     
     MESSAGE_ONLY_ADMINS_MAY_CREATE = _('Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators.')
@@ -180,7 +180,7 @@ class CosinnusConferenceTransBase(CosinnusProjectTransBase):
     
     INFO_GUEST_USERS_ENABLED = _(
         'Guest user access has been enabled for this conference. The group admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this conference. Be aware of this when sharing sensitive information within this conference.')
-    INFO_GUEST_USER_INVITE_LINK = _('You can invite an unregistered user to instantly join the platform without registering and gain read-only access to this conference using the following link')
+    INFO_GUEST_USER_INVITE_LINK = _('You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this conference')
     INFO_GUEST_USER_SIGNUP_INTRO = _('You are joining as a guest and will get read-only access to the conference')
     
     MESSAGE_ONLY_ADMINS_MAY_CREATE = _('Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators.')

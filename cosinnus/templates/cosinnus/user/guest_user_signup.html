@@ -37,10 +37,16 @@
                                         <a class="transparent" href="{{ guest_group.get_absolute_url }}" target="_blank" >{{ guest_group.name }}</a>
                                     </p>
                                 </div>
-                                <h4>
-                                    TODO add explanation text: "fragment1 signup"
-                                </h4>
-                                <hr class="invisible" />
+                                <div class="large-space clearfix">
+                                </div>
+                                <div class="textfield transparent">
+                                    <p>
+                                        {% trans "As a guest, many features on this site are not available to you, like creating content, uploading files, or messaging other users." %}
+                                        {% if SETTINGS.COSINNUS_USER_SIGNUP_ENABLED %}
+                                            {% trans "You may create a full account at any time by logging out of your guest account via the user menu on the top right and signup up." %}
+                                        {% endif %}
+                                    </p>
+                                </div>
 
                                 {% trans "Your name" as your_name_trans %}
                                 {% trans "Please enter your name" as enter_your_name %}
