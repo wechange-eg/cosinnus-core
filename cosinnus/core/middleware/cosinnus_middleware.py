@@ -133,6 +133,9 @@ GUEST_ACCOUNT_FORBIDDEN_URL_PATTERNS = [
     r".*/add/.*", # any type of create view
     r"^/account/", # PAYL and other account views
 ]
+GUEST_ACCOUNT_WHITELISTED_POST_URL_PATTERNS = [
+    r"^/dashboard/api/save_ui_prefs/", # save ui prefs
+]
 GUEST_ACCOUNT_WHITELISTED_SOFT_EDIT_URL_PATTERNS = [
     r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/event/doodle/(?P<doodle_slug>[^/]+)/", # event poll votes
     r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/event/(?P<event_slug>[^/]+)/assign_attendance/",  # event attendance
@@ -511,10 +514,14 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
                 if not settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLED:
                     if request.path != reverse('cosinnus:guest-user-not-allowed') and request.path not in LOGIN_URLS:
                         locked = True
-                # disable any POST requests, except "soft edits" if enabled
+                # disable any POST requests, except whitelested and "soft edits" if enabled
                 if request.method == 'POST':
                     locked = True
-                    if settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLE_SOFT_EDITS:
+                    for whitelist_pattern in GUEST_ACCOUNT_WHITELISTED_POST_URL_PATTERNS:
+                        if re.match(whitelist_pattern, request.path):
+                            locked = False
+                            break
+                    if locked and settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLE_SOFT_EDITS:
                         for whitelist_pattern in GUEST_ACCOUNT_WHITELISTED_SOFT_EDIT_URL_PATTERNS:
                             if re.match(whitelist_pattern, request.path):
                                 locked = False
