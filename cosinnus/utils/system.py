@@ -6,7 +6,7 @@ from django.core.management import execute_from_command_line
 
 # test parameters
 TEST_ROCKET_CHAT_ARG = "--test-rocketchat"
-TEST_BBB_CHAT_ARG = "--test-bbb"
+TEST_BBB_ARG = "--test-bbb"
 TEST_PRINT_TIME_ARG = "--print-time"
 
 # test apps
@@ -63,7 +63,7 @@ def cosinnus_manage(base_path):
             if not custom_test:
                 args.extend(TEST_APPS_ROCKET_CHAT)
             args.remove(TEST_ROCKET_CHAT_ARG)
-        elif TEST_BBB_CHAT_ARG in args:
+        elif TEST_BBB_ARG in args:
             settings_module = "cosinnus.tests.settings.test_bbb"
             custom_test = any('.tests.' in arg for arg in args)
             if not custom_test:
