@@ -11,7 +11,7 @@ from cosinnus.views.user import email_first_login_token_to_user
 
 
 
-@modify_settings(MIDDLEWARE={"append": "cosinnus.core.middleware.set_password.SetPasswordMiddleware"})  # does not work
+@modify_settings(MIDDLEWARE={"append": "cosinnus.core.middleware.set_password.SetPasswordMiddleware"})
 class EmailTestCase(TestCase):
     def setUp(self):
         self.user = create_base_user("mail1@example.com", no_generated_password=True)
