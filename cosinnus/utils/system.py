@@ -21,6 +21,9 @@ def cosinnus_manage(base_path):
     Loads the variables in .env (.env.test when running tests) into the environment.
     Sets the settings module to the one set in WECHANGE_DJANGO_SETTINGS_MODULE during normal runs.
     During test runs custom settings are used from cosinnus.tests.settings depending on the test arguments.
+    The .env.test file needed for testing can be created by copying the .env file used for local development, with
+    WECHANGE_HAYSTACK_INDEX_NAME adjusted to a dedicated test index. The service settings such as
+    WECHANGE_COSINNUS_CHAT_* settings should be set to a service that can be used for testing.
     Arguments:
     --test-rocketchat:  Run RocketChat service tests.
     --test-bbb:         Run BBB service tests.
