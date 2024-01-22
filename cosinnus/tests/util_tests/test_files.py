@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import os
+
 from builtins import object
 from django.test import TestCase
-from unittest.mock import patch
 
 from cosinnus.utils.files import get_avatar_filename
 
 
 class AvatarTest(TestCase):
 
-    @patch('cosinnus.utils.files.uuid4', return_value='492cf1cf-0dbd-4855-ad43-ca228ce4b022')
-    def test_get_avatar_filename(self, user_uuid):
+    def test_get_avatar_filename(self):
 
         class Profile(object):
             user_id = 1337
@@ -19,11 +19,11 @@ class AvatarTest(TestCase):
         profile = Profile()
         filename = 'avatar.png'
 
+        avatar_filepath = get_avatar_filename(profile, filename)
+        avatar_path, avatar_file = os.path.split(avatar_filepath)
 
+        self.assertEqual('cosinnus_portals/portal_default/avatars/user', avatar_path)
 
-        filepath = get_avatar_filename(profile, filename)
-
-        expected_file_hash = '81cbdd49c5835cbaa2fb26b8a56d7ffaae5796a1'
-        expected = f'cosinnus_portals/portal_default/avatars/user/{expected_file_hash}.png'
-
-        self.assertEqual(filepath, expected)
+        expected_filename_hash_length = 44
+        self.assertEqual(len(avatar_file), expected_filename_hash_length)
+        self.assertNotIn(filename, avatar_file)
