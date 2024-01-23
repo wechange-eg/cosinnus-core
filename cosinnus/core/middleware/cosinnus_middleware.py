@@ -128,6 +128,7 @@ GUEST_ACCOUNT_FORBIDDEN_URL_PATTERNS = [
     r"^/signup/$",
     r"^/profile/(?!$)", # anything below the profile-detail page
     r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/cloud/", # group cloud direct link
+    r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/conference/apply/",
     r"^/messages/", # any type of messages, rocketchat etc
     r"^/nachrichten/",  # any type of postman messages
     r".*/add/.*", # any type of create view
