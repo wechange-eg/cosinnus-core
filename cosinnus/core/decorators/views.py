@@ -47,7 +47,7 @@ def redirect_to_error_page(request, view=None, group=None):
         if not request.user.is_authenticated or not request.user.id in group.members:
             messages.warning(request, group.trans.MESSAGE_MEMBERS_ONLY)
             return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': group}))
-    return render(request, template_name='cosinnus/common/error.html', context={})
+    return render(request, template_name='cosinnus/common/error.html', context={}, status=403)
 
 
 def redirect_to_403(request, view=None, group=None):
