@@ -5,7 +5,7 @@ from django.core.cache import cache
 from django.core.exceptions import ImproperlyConfigured
 from django.db import models
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy as p_
+from django.utils.translation import gettext_lazy as _, pgettext_lazy as p_
 
 #: Role defining a user has requested to be added to a group
 from cosinnus.utils.user import filter_active_users

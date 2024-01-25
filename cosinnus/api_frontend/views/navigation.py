@@ -2,7 +2,7 @@ from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 from django.db.models import Case, Count, When
 from django.urls.base import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.utils.translation import pgettext
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema

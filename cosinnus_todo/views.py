@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import RedirectView, View
 from django.views.generic.detail import DetailView, SingleObjectMixin
 from django.views.generic.edit import (CreateView, DeleteView, UpdateView)
@@ -31,7 +31,7 @@ from cosinnus.views.mixins.ajax import ListAjaxableResponseMixin, AjaxableFormMi
     DetailAjaxableResponseMixin
 from django.views.decorators.csrf import csrf_protect
 from cosinnus.utils.permissions import check_object_write_access
-from cosinnus.utils.http import JSONResponse
+from cosinnus.utils.http import JSONResponse, is_ajax
 from django.contrib.auth import get_user_model
 from cosinnus.views.mixins.filters import CosinnusFilterMixin
 from cosinnus_todo.filters import TodoFilter
@@ -82,7 +82,7 @@ class TodoEntryListView(ListAjaxableResponseMixin, RequireReadMixin,
         
     def dispatch(self, request, *args, **kwargs):
         list_filter = None
-        if self.is_ajax_request_url and request.is_ajax():
+        if self.is_ajax_request_url and is_ajax(request):
             list_pk = request.GET.get('list', None)
             if list_pk:
                 list_filter = {'pk': list_pk}
@@ -360,9 +360,8 @@ entry_edit_view = TodoEntryEditView.as_view()
 entry_edit_view_api = TodoEntryEditView.as_view(is_ajax_request_url=True)
 
 
-class TodoEntryDeleteView(AjaxableFormMixin, TodoEntryFormMixin, DeleteView):
-    form_class = TodoEntryNoFieldForm
-    form_view = 'delete'
+class TodoEntryDeleteView(RequireWriteMixin, FilterGroupMixin, AjaxableFormMixin, DeleteView):
+    model = TodoEntry
     message_success = _('Todo "%(title)s" was deleted successfully.')
     message_error = _('Todo "%(title)s" could not be deleted.')
 
@@ -527,7 +526,7 @@ class TodoListDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
     serializer_class = TodoListSerializer
 
     def dispatch(self, request, *args, **kwargs):
-        if not self.is_ajax_request_url or not request.is_ajax():
+        if not self.is_ajax_request_url or not is_ajax(request):
             return HttpResponseBadRequest()
         else:
             return super(TodoListDetailView, self).dispatch(request, *args, **kwargs)

@@ -15,7 +15,7 @@ from django.urls import reverse
 from django.shortcuts import redirect
 from django.utils import translation
 from django.utils.crypto import get_random_string
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView
 
 from cosinnus.conf import settings
@@ -23,9 +23,9 @@ from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.files import get_avatar_filename
 from cosinnus.utils.oauth import do_oauth1_request, do_oauth1_receive
 from cosinnus.utils.user import create_user
-from django.utils.http import is_safe_url
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.db.models import Q
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 
 logger = logging.getLogger('cosinnus')
@@ -45,7 +45,7 @@ def login(request):
         auth_url = do_oauth1_request(request) 
     except Exception as e:
         logger.error('Exception during SSO login, exception was "%s"' % str(e), extra={'trace': traceback.format_exc()})
-        messages.error(request, force_text(_('Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!')) + ' (sso:1)')
+        messages.error(request, force_str(_('Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!')) + ' (sso:1)')
         if settings.DEBUG:
             raise
         return redirect(reverse('sso-error'))
@@ -62,7 +62,7 @@ def callback(request):
         user_info = do_oauth1_receive(request)
     except Exception as e:
         logger.error('Exception during SSO callback, exception was "%s"' % str(e), extra={'trace': traceback.format_exc()})
-        messages.error(request, force_text(_('Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!')) + ' (sso:2)')
+        messages.error(request, force_str(_('Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!')) + ' (sso:2)')
         if settings.DEBUG:
             raise
         return redirect(reverse('sso-error'))
@@ -70,7 +70,7 @@ def callback(request):
     # these properties are required and thus guarenteed to be in the user_info dict in the following code
     if not all([bool(prop in user_info) for prop in ['username', 'email', 'id']]):
         logger.error('Exception during SSO login, not all expected properties in returned user info JSON!', extra={'user_info': user_info})
-        messages.error(request, force_text(_('Sorry, we could not connect your user account, because we could not retrieve important user account infos. Please contact a system administrator!')) + ' (sso:3)')
+        messages.error(request, force_str(_('Sorry, we could not connect your user account, because we could not retrieve important user account infos. Please contact a system administrator!')) + ' (sso:3)')
         return redirect('sso-error')
     
     # match user over ID, never email! this could be used to take over other user accounts if the SSO server does not enforce email validation
@@ -82,7 +82,7 @@ def callback(request):
         
         user = profile.user
         if not user.is_active:
-            messages.error(request, force_text(_('Sorry, you cannot log in because your account is suspended. Please contact a system administrator!')) + ' (sso:4)')
+            messages.error(request, force_str(_('Sorry, you cannot log in because your account is suspended. Please contact a system administrator!')) + ' (sso:4)')
             return redirect('sso-error')
         
     except get_user_profile_model().DoesNotExist:
@@ -96,7 +96,7 @@ def callback(request):
         )
         if not user:
             logger.error('Exception during SSO login, User could not be created!', extra={'user_info': user_info})
-            messages.error(request, force_text(_('Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!')) + ' (sso:5)')
+            messages.error(request, force_str(_('Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!')) + ' (sso:5)')
             return redirect('sso-error')
         
         profile = user.cosinnus_profile
@@ -147,9 +147,9 @@ error = ErrorView.as_view()
 def _get_redirect_url(request):
     """ Gets the redirect URL (1) from request's next param, (2) from session (3) fallbacks to
         settings.COSINNUS_SSO_ALREADY_LOGGED_IN_REDIRECT_URL """
-    if request.GET.get('next', None) and is_safe_url(url=request.GET.get('next'), allowed_hosts=[request.get_host()]):
+    if request.GET.get('next', None) and url_has_allowed_host_and_scheme(url=request.GET.get('next'), allowed_hosts=[request.get_host()]):
         return request.GET.get('next')
-    if request.session.get('sso-next', None) and is_safe_url(url=request.session.get('sso-next'), allowed_hosts=[request.get_host()]):
+    if request.session.get('sso-next', None) and url_has_allowed_host_and_scheme(url=request.session.get('sso-next'), allowed_hosts=[request.get_host()]):
         url = request.session.get('sso-next')
         request.session['sso-next'] = None
         return url

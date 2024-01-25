@@ -2,9 +2,9 @@ from urllib.parse import unquote
 
 from django.contrib.auth import login, logout
 from django.urls.base import reverse
-from django.utils.encoding import force_text
-from django.utils.http import is_safe_url
-from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import force_str
+from django.utils.http import url_has_allowed_host_and_scheme
+from django.utils.translation import gettext_lazy as _
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import serializers, authentication
@@ -138,7 +138,7 @@ class LoginView(LoginViewAdditionalLogicMixin, APIView):
         next_token = request.data.get('next', None)
         if next_token:
             next_token = unquote(next_token)
-            if is_safe_url(next_token, allowed_hosts=[request.get_host()]):
+            if url_has_allowed_host_and_scheme(next_token, allowed_hosts=[request.get_host()]):
                 next_url = next_token
         
         user_tokens = get_tokens_for_user(user)
@@ -345,11 +345,11 @@ class SignupView(UserSignupTriggerEventsMixin, APIView):
                 'user': user.get_full_name(),
                 'email': user.email,
             }
-            message = force_text(_('Hello "%(user)s"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at "%(email)s".')) % str_dict
+            message = force_str(_('Hello "%(user)s"! Your registration was successful. Within the next few days you will be activated by our administrators. When your account is activated, you will receive an e-mail at "%(email)s".')) % str_dict
             message += ' '
             do_login = False
         if settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN:
-            message = (message or '') + force_text(_('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.'))
+            message = (message or '') + force_str(_('You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven\'t received an email, please check your spam folder.'))
             do_login = False
         
         if do_login:

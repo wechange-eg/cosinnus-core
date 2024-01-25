@@ -10,7 +10,7 @@ from django.forms.widgets import CheckboxSelectMultiple
 from django.forms.models import ModelMultipleChoiceField
 from django.contrib.auth import get_user_model
 from django.utils.translation import ngettext
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django_select2.widgets import Select2MultipleWidget
 
 from cosinnus.models.managed_tags import CosinnusManagedTag

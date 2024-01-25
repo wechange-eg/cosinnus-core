@@ -35,11 +35,11 @@ from django.urls import reverse, reverse_lazy, NoReverseMatch
 from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy
+from django.utils.translation import gettext_lazy as _, pgettext_lazy
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.generic import (CreateView, DeleteView, DetailView,
                                   ListView, UpdateView, TemplateView)
@@ -895,7 +895,7 @@ class GroupConfirmMixin(object):
         """
         if self.success_url:
             # Forcing possible reverse_lazy evaluation
-            url = force_text(self.success_url)
+            url = force_str(self.success_url)
         else:
             raise ImproperlyConfigured(
                 "No URL to redirect to. Provide a success_url.")
@@ -1341,11 +1341,13 @@ class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
         return self.group.users
 
 
-class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
-                          UserSelectMixin, DeleteView):
-
+class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin, DeleteView):
+    model = CosinnusGroupMembership
+    slug_field = 'user__username'
+    slug_url_kwarg = 'username'
     membership_status = MEMBERSHIP_MEMBER
 
+    @atomic
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         group = self.object.group
@@ -1371,6 +1373,12 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
         if current_status == self.membership_status:
             messages.success(self.request, _('User "%(username)s" is no longer a member.') % {'username': user.get_full_name()})
         return HttpResponseRedirect(self.get_success_url())
+
+    def get_queryset(self):
+        return self.model.objects.filter(group=self.group)
+
+    def get_success_url(self):
+        return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.group})
 
 
 class GroupExportView(SamePortalGroupMixin, RequireAdminMixin, TemplateView):
@@ -1775,7 +1783,7 @@ def group_assign_reflected_object(request, group):
     success_message = _('Your selection for showing this item in projects/groups was updated.')
     if added_groups:
         group_names = ', '.join([show_group.name for show_group in added_groups])
-        success_message = force_text(success_message) + ' ' + force_text(_('This item is now being shown in these projects/groups: %(group_names)s') % {'group_names': group_names})
+        success_message = force_str(success_message) + ' ' + force_str(_('This item is now being shown in these projects/groups: %(group_names)s') % {'group_names': group_names})
     messages.success(request, success_message)
     
     redirect_url = obj.get_absolute_url()

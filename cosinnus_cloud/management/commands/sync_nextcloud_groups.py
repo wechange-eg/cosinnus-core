@@ -5,7 +5,7 @@ import logging
 import traceback
 
 from django.core.management.base import BaseCommand
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 from cosinnus.conf import settings
 from cosinnus.core.middleware.cosinnus_middleware import (

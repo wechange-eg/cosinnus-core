@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.urls import reverse
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.timezone import now
 
 from cosinnus_event.models import Event
@@ -32,4 +32,4 @@ class DetailTest(ViewTestCase):
         self.assertEqual(response.status_code, 200)
 
         # content should contain event title
-        self.assertIn(event.title, force_text(response.content))
+        self.assertIn(event.title, force_str(response.content))

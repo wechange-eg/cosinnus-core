@@ -16,7 +16,7 @@ import io
 import logging
 from django.conf import settings
 from django.core.cache import cache
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 import traceback
 logger = logging.getLogger('cosinnus')
 
@@ -68,7 +68,7 @@ class UnicodeReader(object):
                 row = next(self.reader)
                 error = False
             except Exception as e:
-                if not 'line contains NULL byte' in force_text(e):
+                if not 'line contains NULL byte' in force_str(e):
                     raise
             
         # utf-8 must be used here because we use a UTF8Reader
@@ -216,8 +216,8 @@ class GroupCSVImporter(Thread):
         except Exception as e:
             if getattr(settings, 'DEBUG_LOCAL', False):
                 raise
-            logger.error('An unexpected error in outer import happened! Exception was: %s' % force_text(e), extra={'exception': e, 'trace': traceback.format_exc()})
-            self.import_failed(data={'msg': 'An unexpected error in outer import happened! Exception was: %s' % force_text(e)})
+            logger.error('An unexpected error in outer import happened! Exception was: %s' % force_str(e), extra={'exception': e, 'trace': traceback.format_exc()})
+            self.import_failed(data={'msg': 'An unexpected error in outer import happened! Exception was: %s' % force_str(e)})
         finally:
             self.set_is_running(False)
             logger.info('Import Utils: Import has stopped.')

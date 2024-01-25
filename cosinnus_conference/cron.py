@@ -1,7 +1,3 @@
-from django.contrib.postgres.fields import JSONField
-from django.contrib.postgres.fields.jsonb import KeyTextTransform
-from django.db.models import F, Max
-from django.db.models.functions import Cast
 from django_cron import Schedule
 
 from cosinnus.cron import CosinnusCronJobBase

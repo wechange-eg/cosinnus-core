@@ -16,7 +16,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.utils.text import slugify
 from django.utils.crypto import get_random_string
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy, ngettext
+from django.utils.translation import gettext_lazy as _, pgettext_lazy, ngettext
 from django.views.generic import (DetailView,
     ListView, TemplateView)
 from django.views.generic.base import View

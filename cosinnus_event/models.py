@@ -18,7 +18,7 @@ from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.timezone import localtime, now
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy, pgettext_lazy as p_
+from django.utils.translation import gettext_lazy as _, pgettext_lazy, pgettext_lazy as p_
 import six
 
 from cosinnus.models import BaseTaggableObjectModel

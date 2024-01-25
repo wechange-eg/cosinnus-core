@@ -6,7 +6,7 @@ for various reasons cannot be picked up by the makemessages parser.
 They are included here to be seen by the parser anyways (this file is loaded from __init__.py).
 """
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 _('My Dashboard')

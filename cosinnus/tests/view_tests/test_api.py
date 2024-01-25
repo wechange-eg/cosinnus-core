@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.http import QueryDict
 from django.test import Client, SimpleTestCase, TestCase, RequestFactory
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 from cosinnus.views.mixins.ajax import patch_body_json_data
 
@@ -19,7 +19,7 @@ class BaseApiTest(TestCase):
         self.admin = User.objects.create_superuser('admin', 'admin@localhost', 'admin')
 
     def assertJsonEqual(self, response, obj):
-        self.assertEqual(json.loads(force_text(response.content)), obj)
+        self.assertEqual(json.loads(force_str(response.content)), obj)
 
     def delete(self, name, *args, **kwargs):
         reverse_args = kwargs.pop('reverse_args', ())

@@ -7,7 +7,7 @@ from cosinnus_message.conf import settings # we need this import here!
 from django_mailbox.models import Mailbox
 from cosinnus.models.group import CosinnusPortal
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 class CosinnusMailbox(Mailbox):

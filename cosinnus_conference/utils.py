@@ -5,8 +5,8 @@ from django.conf import settings
 from django.template import Template, Context
 from django.template.loader import get_template
 from django.utils import translation, timezone
-from django.utils.encoding import force_text
-from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import force_str
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.core.mail import get_common_mail_context
 from cosinnus.utils.files import get_image_url_for_icon
@@ -106,7 +106,7 @@ def send_conference_reminder(group, recipients=None, field_name="week_before", u
     if update_setting:
         if not group.settings:
             group.settings = {}
-        group.settings[f'reminder_{field_name}_sent'] = force_text(datetime.now())
+        group.settings[f'reminder_{field_name}_sent'] = force_str(datetime.now())
         group.save(update_fields=['settings', ])
         
 

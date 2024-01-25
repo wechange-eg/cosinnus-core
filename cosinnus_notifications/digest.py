@@ -11,10 +11,10 @@ from django.db.models import Q
 from django.template.loader import render_to_string
 from django.utils import translation, timezone
 from django.utils.html import strip_tags
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.safestring import mark_safe
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
@@ -299,7 +299,7 @@ def send_digest_for_current_portal(digest_setting, debug_run_for_user=None, debu
         except Exception as e:
             # we never want this subroutine to just die, we need the final saves at the end to ensure
             # the same items do not get into digests twice
-            logger.error('An error occured while doing a digest for a user! Exception was: %s' % force_text(e), 
+            logger.error('An error occured while doing a digest for a user! Exception was: %s' % force_str(e), 
                          extra={'exception': e, 'trace': traceback.format_exc(), 'user_mail': user.email, 'digest_setting': digest_setting})
             if settings.DEBUG:
                 raise

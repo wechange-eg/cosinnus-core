@@ -15,7 +15,7 @@ from django.db.models import JSONField
 from django.db.models.signals import post_save
 from django.utils.crypto import get_random_string
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django_reverse_admin import ReverseModelAdmin
 
 from cosinnus.conf import settings

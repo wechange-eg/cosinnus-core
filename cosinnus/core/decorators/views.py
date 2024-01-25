@@ -6,7 +6,7 @@ import functools
 
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseForbidden, HttpResponseNotFound
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from cosinnus.utils.group import get_cosinnus_group_model
 
 from cosinnus_organization.models import CosinnusOrganization
@@ -21,6 +21,7 @@ from cosinnus.core.registries.group_models import group_model_registry
 from django.contrib.auth.models import User
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.utils.exceptions import CosinnusPermissionDeniedException
+from cosinnus.utils.http import is_ajax
 
 import logging
 from cosinnus.models.group import CosinnusPortal
@@ -71,7 +72,7 @@ def redirect_to_not_logged_in(request, view=None, group=None):
     # support for the ajaxable view mixin
     if view and getattr(view, 'is_ajax_request_url', False):
         return HttpResponseForbidden('Not authenticated')
-    if request.is_ajax() or request.path.startswith('/api/'):
+    if is_ajax(request) or request.path.startswith('/api/'):
         return HttpResponseForbidden('Not authenticated')
     # redirect to group's micropage and give login required error message
     next_arg = urlencode(request.get_full_path())

@@ -17,7 +17,7 @@ import random
 import string
 import sys
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 import environ
 
 from cosinnus import VERSION as COSINNUS_VERSION
@@ -28,6 +28,12 @@ from django.conf.global_settings import *
 # PASSWORD_RESET_TIMEOUT_DAYS is deprecated however and will be deleted in a future django version
 if 'PASSWORD_RESET_TIMEOUT_DAYS' in globals():
     del globals()['PASSWORD_RESET_TIMEOUT_DAYS']
+
+# DEFAULT_FILE_STORAGE/STATICFILES_STORAGE are deprecated and mutually exclusive with STORAGES.
+if 'DEFAULT_FILE_STORAGE' in globals():
+    del globals()['DEFAULT_FILE_STORAGE']
+if 'STATICFILES_STORAGE' in globals():
+    del globals()['STATICFILES_STORAGE']
 
 
 # WARNING: do not add any settings on this level! 
@@ -163,6 +169,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
         'wagtail.contrib.redirects.middleware.RedirectMiddleware',
+        "allauth.account.middleware.AccountMiddleware",
         
         'cosinnus.core.middleware.cosinnus_middleware.StartupMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.ForceInactiveUserLogoutMiddleware',
@@ -364,7 +371,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'rest_framework',
         'drf_yasg',
         'taggit',
-        'django_bigbluebutton',
         'django_clamd',
         'rest_framework_simplejwt.token_blacklist',
     ]    
@@ -431,8 +437,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # memcached
     CACHES = {
         'default': {
-            # todo: Switch to PyMemcache
-            'BACKEND': "django.core.cache.backends.memcached.MemcachedCache",
+            'BACKEND': "django.core.cache.backends.memcached.PyMemcacheCache",
             'LOCATION':  env("WECHANGE_MEMCACHED_LOCATION", default=f"unix:/srv/http/{project_settings['COSINNUS_PORTAL_URL']}/run/memcached.socket"),
         }
     }

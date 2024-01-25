@@ -15,9 +15,9 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
 from django.db import models
 from django.urls.base import reverse
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.text import slugify
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 import six
 
 from cosinnus.conf import settings
@@ -67,7 +67,7 @@ class CosinnusManagedTagLabels(object):
     def get_labels_dict(cls):
         """ Returns a dict of all labels.
             Note: lazy translation objects will be resolved here! """
-        return dict([(key, force_text(val)) for (key, val) in cls.__dict__.items() if not key.startswith('_')])
+        return dict([(key, force_str(val)) for (key, val) in cls.__dict__.items() if not key.startswith('_')])
     
 
 # allow dropin of labels class

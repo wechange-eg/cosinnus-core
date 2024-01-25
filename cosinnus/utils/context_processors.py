@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.urls import resolve, Resolver404, reverse
 from django.utils.formats import get_format
 from django.utils.translation import get_language
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings as SETTINGS
 from cosinnus.core.registries import app_registry

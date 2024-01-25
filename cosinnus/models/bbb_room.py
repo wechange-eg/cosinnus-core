@@ -15,7 +15,7 @@ from django.test import RequestFactory
 from django.template.defaultfilters import linebreaksbr
 from django.urls.base import reverse
 from django.utils import translation
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from cosinnus.apis.bigbluebutton import BigBlueButtonAPI
 from cosinnus.templatetags.cosinnus_tags import full_name

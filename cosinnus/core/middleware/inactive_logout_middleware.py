@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.shortcuts import reverse, redirect
 from django.contrib import messages
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import logout
 
 from cosinnus.conf import settings

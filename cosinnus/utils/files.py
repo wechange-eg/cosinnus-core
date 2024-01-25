@@ -11,7 +11,7 @@ from os import path
 
 from cosinnus.conf import settings
 from uuid import uuid4
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.apps import apps
 
 from easy_thumbnails.files import get_thumbnailer
@@ -86,7 +86,7 @@ def get_user_dashboard_announcement_image_filename(instance, filename):
 def _get_avatar_filename(instance, filename, folder_type, base_folder='avatars'):
     _, ext = path.splitext(filename)
     filedir = path.join(get_cosinnus_media_file_folder(), base_folder, folder_type)
-    my_uuid = force_text(uuid4())
+    my_uuid = force_str(uuid4())
     name = '%s%s%s' % (settings.SECRET_KEY, my_uuid , filename)
     newfilename = hashlib.sha1(name.encode('utf-8')).hexdigest() + ext
     return path.join(filedir, newfilename)
@@ -99,7 +99,7 @@ def get_portal_background_image_filename(instance, filename):
 def _get_all_portals_filename(instance, filename, sub_folder='images'):
     _, ext = path.splitext(filename)
     filedir = path.join(get_cosinnus_all_portals_folder(), sub_folder)
-    my_uuid = force_text(uuid4())
+    my_uuid = force_str(uuid4())
     name = '%s%s%s' % (settings.SECRET_KEY, my_uuid , filename)
     newfilename = hashlib.sha1(name.encode('utf-8')).hexdigest() + ext
     return path.join(filedir, newfilename)

@@ -8,7 +8,7 @@ import logging
 import json
 import requests
 from urllib.parse import quote as urlquote
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from cosinnus.utils.user import get_newly_registered_user_email
 
 from threading import Thread
@@ -58,7 +58,7 @@ def signup_user_to_cleverreach_group(user):
         req = requests.get(get_url)
     except Exception as e:
         logger.error('Error when trying to signup a newly registered user to CleverReach (Exception)', 
-                     extra={'exception': force_text(e), 'language': language, 'cleverreach_form_id': cleverreach_form_id, 'cleverreach_group_id': cleverreach_group_id, 'user_email': user_email, 'base_url': cleverreach_base_url})
+                     extra={'exception': force_str(e), 'language': language, 'cleverreach_form_id': cleverreach_form_id, 'cleverreach_group_id': cleverreach_group_id, 'user_email': user_email, 'base_url': cleverreach_base_url})
         return
     # if this returns a 200-code, the user has already signed up for the newsletter!
     if req.status_code == 200:
@@ -96,7 +96,7 @@ def signup_user_to_cleverreach_group(user):
         
     except Exception as e:
         logger.error('Error when trying to signup a newly registered user to CleverReach (Exception)', 
-                     extra={'exception': force_text(e), 'language': language, 'cleverreach_form_id': cleverreach_form_id, 'cleverreach_group_id': cleverreach_group_id, 'user_email': user_email, 'base_url': cleverreach_base_url})
+                     extra={'exception': force_str(e), 'language': language, 'cleverreach_form_id': cleverreach_form_id, 'cleverreach_group_id': cleverreach_group_id, 'user_email': user_email, 'base_url': cleverreach_base_url})
         return
     if not req.status_code == 200:
         logger.error('Error when trying to signup a newly registered user to CleverReach (non-200 response):', 
@@ -117,7 +117,7 @@ def signup_user_to_cleverreach_group(user):
                    }
             req = requests.put(put_url)
         except Exception as e:
-            extra = {'exception': force_text(e), 'language': language, 'cleverreach_form_id': cleverreach_form_id, 'cleverreach_group_id': cleverreach_group_id, 'user_email': user_email, 'base_url': cleverreach_base_url}
+            extra = {'exception': force_str(e), 'language': language, 'cleverreach_form_id': cleverreach_form_id, 'cleverreach_group_id': cleverreach_group_id, 'user_email': user_email, 'base_url': cleverreach_base_url}
             logger.error('Error when trying to signup a newly registered user to CleverReach (Exception during set-inactive)', extra=extra)
             # we do not return here, as cleverreach may change their set-deactive endpoint to throw an error on already inactive users
         if not req.status_code == 200:
@@ -146,7 +146,7 @@ def signup_user_to_cleverreach_group(user):
             req = requests.post(post_url, data)
         
         except Exception as e:
-            extra = {'exception': force_text(e), 'language': language, 'cleverreach_form_id': cleverreach_form_id, 'cleverreach_group_id': cleverreach_group_id, 'user_email': user_email, 'base_url': cleverreach_base_url}
+            extra = {'exception': force_str(e), 'language': language, 'cleverreach_form_id': cleverreach_form_id, 'cleverreach_group_id': cleverreach_group_id, 'user_email': user_email, 'base_url': cleverreach_base_url}
             logger.error('Error when trying to signup a newly registered user to CleverReach (Exception during Form)', extra=extra)
             return
         if not req.status_code == 200:

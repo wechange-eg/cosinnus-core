@@ -2,8 +2,7 @@
 
 from builtins import str
 from builtins import object
-from django.conf.urls import url
-from django.urls import reverse
+from django.urls import reverse, path
 from django.utils.html import format_html
 
 from wagtail.core import hooks
@@ -32,7 +31,7 @@ logger = logging.getLogger('cosinnus')
 
 # swap this to re-enable translating these internal strings
 # (we didn't do this to save translator work for admin pages)
-#from django.utils.translation import ugettext_lazy as _
+#from django.utils.translation import gettext_lazy as _
 dotrans_ = str
 
 
@@ -187,7 +186,7 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
     @hooks.register('register_admin_urls')
     def urlconf_time():
         return [
-            url(r'^import_projects/$', import_project_view, name='import-projects' ),
+            path('import_projects/', import_project_view, name='import-projects' ),
         ]
     
     class ImportProjectsMenutItem(MenuItem): 

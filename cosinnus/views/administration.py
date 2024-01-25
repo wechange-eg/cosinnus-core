@@ -22,13 +22,14 @@ from cosinnus.views.user import _send_user_welcome_email_if_enabled
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 
 from cosinnus.views.profile import UserProfileUpdateView
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.permissions import check_user_can_receive_emails
 from cosinnus.utils.html import render_html_with_variables
+from cosinnus.utils.http import is_ajax
 from cosinnus.core.mail import send_html_mail
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.mail import QueuedMassMail
@@ -392,7 +393,7 @@ class UserListView(ListView):
                 user_id = self.request.POST.get('send_login_token')
                 user = get_user_model().objects.get(id=user_id)
                 self.send_login_token(user)
-                if self.request.is_ajax():
+                if is_ajax(self.request):
                     data = {
                         'ajax_form_id': self.request.POST.get('ajax_form_id'),
                     }

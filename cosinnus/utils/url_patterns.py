@@ -6,7 +6,7 @@ import re
 
 from cosinnus.core.registries.group_models import group_model_registry
 from django.core.exceptions import ImproperlyConfigured
-from django.conf.urls import url
+from django.urls import re_path
 
 
 class APIRegexURLResolver(object):
@@ -56,7 +56,7 @@ def simple_api_pattern_generator(version, pattern_list, app=None, add_groups=Fal
     generated_api_patterns = []
     for url_pattern in pattern_list:
         path = url_pattern.pattern._regex[1:] # take the url regex pattern without the leading '^'
-        generated_api_patterns.append(url(api_regex % path, url_pattern.callback, name=url_pattern.name))
+        generated_api_patterns.append(re_path(api_regex % path, url_pattern.callback, name=url_pattern.name))
     return generated_api_patterns
 
 

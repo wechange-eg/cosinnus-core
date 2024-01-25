@@ -6,7 +6,7 @@ from datetime import timedelta
 
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ImproperlyConfigured
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.timezone import now
 from django_cron import CronJobBase, Schedule
 
@@ -67,7 +67,7 @@ class DeleteScheduledUserProfiles(CosinnusCronJobBase):
                 delete_userprofile(profile.user)
                 logger.info('delete_userprofile() cronjob: profile was deleted completely after 30 days', extra={'user_id': user_id})
             except Exception as e:
-                logger.error('delete_userprofile() cronjob: threw an exception during the DeleteScheduledUserProfiles cronjob! (in extra)', extra={'exception': force_text(e)})
+                logger.error('delete_userprofile() cronjob: threw an exception during the DeleteScheduledUserProfiles cronjob! (in extra)', extra={'exception': force_str(e)})
             
 
 class UpdateConferencePremiumStatus(CosinnusCronJobBase):

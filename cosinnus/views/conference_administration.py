@@ -10,7 +10,7 @@ from django.db.models.aggregates import Sum
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView, RedirectView
 from django.views.generic.edit import UpdateView
 from django.views.generic import FormView

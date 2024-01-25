@@ -172,3 +172,13 @@ def remove_url_param(url, param_key, param_value=None):
         parsed.fragment
     ))
     return url
+
+
+def is_ajax(request):
+    """
+    Checks if the request is an ajax request.
+    Copy of the deprecated Django request attribute.
+    Deprecation note: method is deprecated as it relied on a jQuery-specific way of signifying AJAX calls, while current
+    usage tends to use the JavaScript Fetch API.
+    """
+    return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'

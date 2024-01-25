@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from builtins import object
 from awesome_avatar.fields import AvatarField
 from django.contrib import messages
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 class AvatarFormMixin(object):
     """

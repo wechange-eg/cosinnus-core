@@ -13,8 +13,8 @@ from django.db.models import signals
 from django.apps import apps
 from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
-from django.utils.encoding import force_text
-from django.utils.translation import gettext, ugettext_lazy as _
+from django.utils.encoding import force_str
+from django.utils.translation import gettext, gettext_lazy as _
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from cosinnus.conf import settings
@@ -23,7 +23,7 @@ from django.contrib.auth import logout
 from django_otp import user_has_device
 from django.shortcuts import redirect
 from django.utils.deprecation import MiddlewareMixin
-from django.utils.http import is_safe_url
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.contrib.redirects.middleware import RedirectFallbackMiddleware
 from cosinnus.utils.urls import redirect_next_or, group_aware_reverse
 from django.contrib.sessions.middleware import SessionMiddleware
@@ -201,7 +201,7 @@ class AdminOTPMiddleware(MiddlewareMixin):
             # check if the user is not yet 2fa verified, if so send them to the verification view
             if not user.is_verified():
                 next_url = urlencode(request.get_full_path())
-                return redirect(reverse('cosinnus:login-2fa') + (('?next=%s' % next_url) if is_safe_url(next_url, allowed_hosts=[request.get_host()]) else ''))
+                return redirect(reverse('cosinnus:login-2fa') + (('?next=%s' % next_url) if url_has_allowed_host_and_scheme(next_url, allowed_hosts=[request.get_host()]) else ''))
         elif user and user.is_authenticated and not check_user_superuser(user) and request.path.startswith('/admin/') and not request.path in EXEMPTED_URLS_FOR_2FA:
             # normal users will never be redirected to the admin area
             return redirect('cosinnus:user-dashboard')
@@ -229,7 +229,7 @@ class UserOTPMiddleware(MiddlewareMixin):
             # check if the user is not yet 2fa verified, if so send them to the verification view
             if user_has_device(user) and not user.is_verified():
                 next_url = urlencode(request.get_full_path())
-                return redirect(reverse('cosinnus:two-factor-auth-token') + (('?next=%s' % next_url) if is_safe_url(next_url, allowed_hosts=[request.get_host()]) else ''))
+                return redirect(reverse('cosinnus:two-factor-auth-token') + (('?next=%s' % next_url) if url_has_allowed_host_and_scheme(next_url, allowed_hosts=[request.get_host()]) else ''))
 
         return None
 
@@ -314,7 +314,7 @@ class GroupPermanentRedirectMiddleware(MiddlewareMixin, object):
         except Exception as e:
             if settings.DEBUG:
                 raise
-            logger.error('cosinnus.GroupPermanentRedirectMiddleware: Error while processing possible group redirect!', extra={'exception', force_text(e)})
+            logger.error('cosinnus.GroupPermanentRedirectMiddleware: Error while processing possible group redirect!', extra={'exception', force_str(e)})
 
 
 class ForceInactiveUserLogoutMiddleware(MiddlewareMixin):

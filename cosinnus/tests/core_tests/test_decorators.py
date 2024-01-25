@@ -7,7 +7,7 @@ from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse, Http404
 from django.test import TestCase
 from django.test.client import RequestFactory
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.views.generic import View
 
 from cosinnus.core.decorators.views import (require_admin_access,
@@ -173,22 +173,22 @@ class TestRequireAdminAccessDecorator(TestCase):
         request = self.rf.get('/group/')
         request.user = self.admin
         response = self.view.as_view()(request, group=self.private.slug)
-        self.assertEqual(force_text(response.content), 'Private group')
+        self.assertEqual(force_str(response.content), 'Private group')
         self.assertEqual(response.status_code, 200)
 
         response = self.view.as_view()(request, group=self.public.slug)
-        self.assertEqual(force_text(response.content), 'Public group')
+        self.assertEqual(force_str(response.content), 'Public group')
         self.assertEqual(response.status_code, 200)
 
     def test_superuser(self):
         request = self.rf.get('/group/')
         request.user = self.superuser
         response = self.view.as_view()(request, group=self.private.slug)
-        self.assertEqual(force_text(response.content), 'Private group')
+        self.assertEqual(force_str(response.content), 'Private group')
         self.assertEqual(response.status_code, 200)
 
         response = self.view.as_view()(request, group=self.public.slug)
-        self.assertEqual(force_text(response.content), 'Public group')
+        self.assertEqual(force_str(response.content), 'Public group')
         self.assertEqual(response.status_code, 200)
 
     def test_not_existing_group(self):
@@ -222,32 +222,32 @@ class TestRequireAdminAccessDecorator(TestCase):
         request = self.rf.get('/group/')
         request.user = self.anon
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No project provided')
+        self.assertEqual(force_str(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.user
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No project provided')
+        self.assertEqual(force_str(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.pending
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No project provided')
+        self.assertEqual(force_str(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.member
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No project provided')
+        self.assertEqual(force_str(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.admin
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No project provided')
+        self.assertEqual(force_str(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.superuser
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No project provided')
+        self.assertEqual(force_str(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
 
@@ -296,7 +296,7 @@ class TestRequireReadAccessDecorator(TestCase):
         self.assertEqual(response.status_code, 302)
 
         response = self.view.as_view()(request, group=self.public.slug)
-        self.assertEqual(force_text(response.content), 'Public group')
+        self.assertEqual(force_str(response.content), 'Public group')
         self.assertEqual(response.status_code, 200)
 
     def test_pending(self):
@@ -307,7 +307,7 @@ class TestRequireReadAccessDecorator(TestCase):
         self.assertEqual(response.status_code, 302)
 
         response = self.view.as_view()(request, group=self.public.slug)
-        self.assertEqual(force_text(response.content), 'Public group')
+        self.assertEqual(force_str(response.content), 'Public group')
         self.assertEqual(response.status_code, 200)
 
     def test_member(self):
@@ -315,11 +315,11 @@ class TestRequireReadAccessDecorator(TestCase):
         request.user = self.member
 
         response = self.view.as_view()(request, group=self.private.slug)
-        self.assertEqual(force_text(response.content), 'Private group')
+        self.assertEqual(force_str(response.content), 'Private group')
         self.assertEqual(response.status_code, 200)
 
         response = self.view.as_view()(request, group=self.public.slug)
-        self.assertEqual(force_text(response.content), 'Public group')
+        self.assertEqual(force_str(response.content), 'Public group')
         self.assertEqual(response.status_code, 200)
 
     def test_admin(self):
@@ -327,11 +327,11 @@ class TestRequireReadAccessDecorator(TestCase):
         request.user = self.admin
 
         response = self.view.as_view()(request, group=self.private.slug)
-        self.assertEqual(force_text(response.content), 'Private group')
+        self.assertEqual(force_str(response.content), 'Private group')
         self.assertEqual(response.status_code, 200)
 
         response = self.view.as_view()(request, group=self.public.slug)
-        self.assertEqual(force_text(response.content), 'Public group')
+        self.assertEqual(force_str(response.content), 'Public group')
         self.assertEqual(response.status_code, 200)
 
     def test_superuser(self):
@@ -339,11 +339,11 @@ class TestRequireReadAccessDecorator(TestCase):
         request.user = self.superuser
 
         response = self.view.as_view()(request, group=self.private.slug)
-        self.assertEqual(force_text(response.content), 'Private group')
+        self.assertEqual(force_str(response.content), 'Private group')
         self.assertEqual(response.status_code, 200)
 
         response = self.view.as_view()(request, group=self.public.slug)
-        self.assertEqual(force_text(response.content), 'Public group')
+        self.assertEqual(force_str(response.content), 'Public group')
         self.assertEqual(response.status_code, 200)
 
     def test_not_existing_group(self):
@@ -377,32 +377,32 @@ class TestRequireReadAccessDecorator(TestCase):
         request = self.rf.get('/group/')
         request.user = self.anon
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No project provided')
+        self.assertEqual(force_str(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.user
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No project provided')
+        self.assertEqual(force_str(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.pending
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No project provided')
+        self.assertEqual(force_str(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.member
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No project provided')
+        self.assertEqual(force_str(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.admin
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No project provided')
+        self.assertEqual(force_str(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.superuser
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No project provided')
+        self.assertEqual(force_str(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
 
@@ -467,33 +467,33 @@ class TestRequireWriteAccessDecorator(TestCase):
         request = self.rf.get('/group/')
         request.user = self.member
         response = self.view.as_view()(request, group=self.private.slug)
-        self.assertEqual(force_text(response.content), 'Private group')
+        self.assertEqual(force_str(response.content), 'Private group')
         self.assertEqual(response.status_code, 200)
 
         response = self.view.as_view()(request, group=self.public.slug)
-        self.assertEqual(force_text(response.content), 'Public group')
+        self.assertEqual(force_str(response.content), 'Public group')
         self.assertEqual(response.status_code, 200)
 
     def test_admin(self):
         request = self.rf.get('/group/')
         request.user = self.admin
         response = self.view.as_view()(request, group=self.private.slug)
-        self.assertEqual(force_text(response.content), 'Private group')
+        self.assertEqual(force_str(response.content), 'Private group')
         self.assertEqual(response.status_code, 200)
 
         response = self.view.as_view()(request, group=self.public.slug)
-        self.assertEqual(force_text(response.content), 'Public group')
+        self.assertEqual(force_str(response.content), 'Public group')
         self.assertEqual(response.status_code, 200)
 
     def test_superuser(self):
         request = self.rf.get('/group/')
         request.user = self.superuser
         response = self.view.as_view()(request, group=self.private.slug)
-        self.assertEqual(force_text(response.content), 'Private group')
+        self.assertEqual(force_str(response.content), 'Private group')
         self.assertEqual(response.status_code, 200)
 
         response = self.view.as_view()(request, group=self.public.slug)
-        self.assertEqual(force_text(response.content), 'Public group')
+        self.assertEqual(force_str(response.content), 'Public group')
         self.assertEqual(response.status_code, 200)
 
     def test_not_existing_group(self):
@@ -527,30 +527,30 @@ class TestRequireWriteAccessDecorator(TestCase):
         request = self.rf.get('/group/')
         request.user = self.anon
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No project provided')
+        self.assertEqual(force_str(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.user
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No project provided')
+        self.assertEqual(force_str(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.pending
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No project provided')
+        self.assertEqual(force_str(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.member
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No project provided')
+        self.assertEqual(force_str(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.admin
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No project provided')
+        self.assertEqual(force_str(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.superuser
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No project provided')
+        self.assertEqual(force_str(response.content), 'No project provided')
         self.assertEqual(response.status_code, 404)

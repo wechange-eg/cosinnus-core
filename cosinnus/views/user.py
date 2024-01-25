@@ -9,7 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, Set
 from django.urls import reverse, reverse_lazy
 from django.db import transaction
 from django.utils.decorators import method_decorator
-from django.utils.translation import ugettext_lazy as _, get_language
+from django.utils.translation import gettext_lazy as _, get_language
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
@@ -54,7 +54,7 @@ from cosinnus.utils.user import filter_active_users, \
     get_user_query_filter_for_search_terms, get_user_select2_pills, \
     get_group_select2_pills, get_user_from_set_password_token, create_guest_user_and_login
 from uuid import uuid1, uuid4
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from cosinnus.core import signals
 from django.dispatch.dispatcher import receiver
 from cosinnus.core.signals import userprofile_created, user_logged_in_first_time
@@ -558,7 +558,7 @@ def apply_group_invite_token_for_user(group_invite_token, user):
                 # else the user is already in the group
             except Exception as e:
                 logger.error('Error when trying to apply a token group invite', 
-                         extra={'exception': force_text(e), 'user': user, 'group': group, 'token': group_invite_token.token})
+                         extra={'exception': force_str(e), 'user': user, 'group': group, 'token': group_invite_token.token})
                 success = False
         
     return success
@@ -1355,7 +1355,7 @@ def detect_first_user_login(sender, user, request, **kwargs):
     profile = user.cosinnus_profile
     first_login = profile.settings.get(PROFILE_SETTING_FIRST_LOGIN, None)
     if not first_login:
-        profile.settings[PROFILE_SETTING_FIRST_LOGIN] = force_text(user.last_login)
+        profile.settings[PROFILE_SETTING_FIRST_LOGIN] = force_str(user.last_login)
         profile.save(update_fields=['settings'])
         user_logged_in_first_time.send(sender=sender, user=user, request=request)
     

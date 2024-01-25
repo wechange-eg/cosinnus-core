@@ -10,7 +10,7 @@ from django.shortcuts import get_object_or_404, render,\
     redirect
 from django.template import RequestContext
 from django.utils.decorators import method_decorator
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import TemplateView
 
@@ -18,7 +18,7 @@ from cosinnus.core.decorators.views import require_admin_access_decorator,\
     redirect_to_not_logged_in
 from cosinnus.core.registries import widget_registry
 from cosinnus.models.widget import WidgetConfig
-from cosinnus.utils.http import JSONResponse
+from cosinnus.utils.http import JSONResponse, is_ajax
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership,\
     check_user_superuser, check_object_write_access
 from cosinnus.views.mixins.group import RequireReadOrRedirectMixin,\
@@ -28,7 +28,7 @@ from cosinnus.core.registries.apps import app_registry
 from cosinnus.utils.functions import resolve_class
 from cosinnus.utils.urls import group_aware_reverse
 from django.contrib import messages
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy, reverse
 from cosinnus.utils.user import ensure_user_widget
 from django.http.response import HttpResponseNotAllowed, JsonResponse
@@ -118,15 +118,15 @@ def widget_detail(request, id, offset=0):
     
     data = {
         'X-Cosinnus-Widget-Content': widget_content,
-        'X-Cosinnus-Widget-Title': force_text(widget.title),
-        'X-Cosinnus-Widget-App-Name': force_text(wc.app_name),
-        'X-Cosinnus-Widget-Widget-Name': force_text(wc.widget_name),
+        'X-Cosinnus-Widget-Title': force_str(widget.title),
+        'X-Cosinnus-Widget-App-Name': force_str(wc.app_name),
+        'X-Cosinnus-Widget-Widget-Name': force_str(wc.widget_name),
         'X-Cosinnus-Widget-Num-Rows-Returned': rows_returned,
         'X-Cosinnus-Widget-Has-More-Data': 'true' if has_more else 'false',
     }
     title_url = widget.title_url
     if title_url is not None:
-        data['X-Cosinnus-Widget-Title-URL'] = force_text(title_url)
+        data['X-Cosinnus-Widget-Title-URL'] = force_str(title_url)
     
     return JSONResponse(data)
 
@@ -322,7 +322,7 @@ def save_widget_config(request):
     if not user.is_authenticated:
         return HttpResponseForbidden()
     
-    if not request.is_ajax() or not request.method=='POST':
+    if not is_ajax(request) or not request.method=='POST':
         return HttpResponseNotAllowed(['POST'])
     
     import json

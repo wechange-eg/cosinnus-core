@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.urls import reverse
-from django.utils.encoding import smart_text
+from django.utils.encoding import smart_str
 
 from cosinnus_document.models import Document
 from cosinnus_file.models import FileEntry
@@ -99,7 +99,7 @@ class ArchiveTest(ViewTestCase):
         # using entry.file.read() fails due to binary content
         # using `with entry.file.open('r')` fails with AttributeError: __exit__
         with open(entry.file.file.name, 'r') as f:
-            file_content = smart_text(f.read())
+            file_content = smart_str(f.read())
         self.assertEqual(file_content, self.pad.content)
 
         # ProtectedError otherwise when deleting CosinnusGroup

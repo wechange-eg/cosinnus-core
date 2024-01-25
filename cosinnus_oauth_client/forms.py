@@ -14,7 +14,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django import forms
 from django.template.loader import render_to_string
-from django.utils.translation import ugettext_lazy as _, get_language
+from django.utils.translation import gettext_lazy as _, get_language
 
 from cosinnus.core.mail import send_html_mail_threaded, get_common_mail_context
 from cosinnus.templatetags.cosinnus_tags import textfield

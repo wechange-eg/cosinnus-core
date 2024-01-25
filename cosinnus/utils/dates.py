@@ -9,7 +9,7 @@ from django.utils import dateformat
 from django.utils.formats import date_format
 from django.utils.safestring import mark_safe
 from django.utils.timezone import localtime, now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 import pytz
 
 
