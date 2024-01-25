@@ -119,7 +119,7 @@ function NavConnector(props: NavProps) {
                   <FormattedMessage id="hidden" />
                 )}
               />
-              <Badge badgeContent={navRoom.props.count} className={classes.badge} />
+              <Badge badgeContent={navRoom.props.count} className={classes.badge} max={999} />
             </ListItem>
         ))}
         {(conference.props.managementUrls.manageConference || conference.props.managementUrls.manageRooms
