@@ -851,7 +851,12 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     SOCIALACCOUNT_AUTO_SIGNUP = False
     SOCIALACCOUNT_FORMS = {'signup': 'cosinnus_oauth_client.forms.SocialSignupProfileSettingsForm'}
     SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
-    
+
+    # django-oauth-toolkit settings
+    OAUTH2_PROVIDER = {
+        'PKCE_REQUIRED': False,
+    }
+
     # Organizations
     COSINNUS_ORGANIZATIONS_ENABLED = False
     
