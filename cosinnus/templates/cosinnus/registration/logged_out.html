@@ -33,7 +33,10 @@
         {% if run_logout_scripts %}
             <div class="frame-logout-error" style="display: none;">
 	            <h2>{% trans "Error while logging out" %}</h2>
-	            <p>{% trans "Your logout may be incomplete in parts of the site due to a server error. If this is not a device you trust, please delete your cookies for this site!" %}</p>
+	            <p>
+                    {% trans "Your logout may be incomplete in parts of the site due to a server error. If this is not a device you trust, please delete your cookies for this site!" %}
+                    <span class="text-logout-error-reason"></span>
+                </p>
 	        </div>
             
             <div class="frame-logout-progress">
@@ -44,12 +47,17 @@
                 {% comment %}Logs user out of the v3 frontend by calling the NextAuth.js API signout endpoint (see https://next-auth.js.org/getting-started/rest-api#post-apiauthsignout){% endcomment %}
 
                 var global_logout_success = true; {% comment %} starts out true, if any non-successes happen, turns false {% endcomment %}
+                var global_logout_errors_reasons = [];
+
                 function logoutSuccess(success) {
                     $('.frame-logout-progress').hide();
                     if (success) {
                         $('.frame-logged-out').show();
                     } else {
                         $('.frame-logout-error').show();
+                        if (global_logout_errors_reasons.length > 0) {
+                            $('.text-logout-error-reason').text('(' + global_logout_errors_reasons.join(', ') + ')');
+                        }
                     }
                     const urlParams = new URLSearchParams(window.location.search);
                     if (urlParams.get('next')) {
@@ -65,8 +73,6 @@
                             'csrfToken': csrfToken
                         },
                         success: function (response, textStatus, xhr) {
-                            console.log('# # Did logout');
-                            console.log(response);
                             logoutSuccess(global_logout_success);
                         },
                         error: function (xhr, textStatus) {
@@ -74,6 +80,7 @@
                             console.log(xhr);
                             console.log(textStatus);
                             global_logout_success = false;
+                            global_logout_errors_reasons.push('Frontend');
                             logoutSuccess(global_logout_success);
                         }
                     });
@@ -83,8 +90,6 @@
                     $.ajax(csrf_url, {
                         type: 'GET',
                         success: function (response, textStatus, xhr) {
-                            console.log('# # Fetched csrf');
-                            console.log(response);
                             _callFrontendLogout(response['csrfToken'], logout_url);
                         },
                         error: function (xhr, textStatus) {
@@ -92,36 +97,33 @@
                             console.log(xhr);
                             console.log(textStatus);
                             global_logout_success = false;
+                            global_logout_errors_reasons.push('Frontend');
                             logoutSuccess(global_logout_success);
                         }
                     });
                 }
 
                 {% if SETTINGS.COSINNUS_CLOUD_ENABLED %}
-                    var url_csrf_nextcloud = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}/apps/cspworkaround/csrftoken';
-                    var url_direct_logout = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}/apps/cspworkaround/logout';
-                    var url_logout_nextcloud = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}/logout';
-
+                    var url_direct_logout = '{{ SETTINGS.COSINNUS_CLOUD_NEXTCLOUD_URL }}/apps/cspworkaround/user-session';
                     $.ajax(url_direct_logout, {
-                        type: 'GET',
+                        type: 'DELETE',
                         xhrFields: {
                             withCredentials: true
                         },
                         success: function (response, textStatus, xhr) {
-                            console.log('# # Logout complete');
-                            console.log(response);
                             logoutSuccess(global_logout_success);
                         },
                         error: function (xhr, textStatus) {
-                            console.log('# # Error while fetching csrf');
+                            console.log('# # Error while logging out of nextcloud');
                             console.log(xhr);
                             console.log(textStatus);
                             global_logout_success = false;
+                            global_logout_errors_reasons.push('Nextcloud');
                             logoutSuccess(global_logout_success);
                         }
                     });
-
                 {% endif %}
+
                 {% if SETTINGS.COSINNUS_V3_FRONTEND_ENABLED %}
                     var url_csrf_v3_frontend = '/api/frontend/auth/csrf?v=3';
                     var url_logout_v3_frontend = '/api/frontend/auth/signout?v=3';
