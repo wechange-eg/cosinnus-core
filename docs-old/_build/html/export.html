@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Export Cosinnus App Data &#8212; Cosinnus 1.19.6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=89b800e6" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=436d026a"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Hierarchical Object Organisation" href="hierarchy.html" />
+    <link rel="prev" title="Authentication" href="authentication.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="hierarchy.html" title="Hierarchical Object Organisation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="authentication.html" title="Authentication"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Cosinnus 1.19.6 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Export Cosinnus App Data</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="export-cosinnus-app-data">
+<h1>Export Cosinnus App Data<a class="headerlink" href="#export-cosinnus-app-data" title="Permalink to this heading">¶</a></h1>
+<p>A guide to implement text data export for a cosinnus app. The exported data
+will be offered by the application server as a downloadable file.</p>
+<section id="add-a-new-url">
+<h2>Add a new URL<a class="headerlink" href="#add-a-new-url" title="Permalink to this heading">¶</a></h2>
+<p>In your app’s <code class="docutils literal notranslate"><span class="pre">urls.py</span></code> add a URL with name <code class="docutils literal notranslate"><span class="pre">export</span></code>, e.g.:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cosinnus_group_patterns</span> <span class="o">+=</span> <span class="n">patterns</span><span class="p">(</span>
+   <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^export/$&#39;</span><span class="p">,</span> <span class="s1">&#39;export_view&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;export&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Now cosinnus core’s group export view will pick up your app automatically.
+Although the actual export will still fail, because you haven’t defined an
+<code class="docutils literal notranslate"><span class="pre">export_view</span></code> yet.</p>
+</section>
+<section id="add-an-export-view">
+<h2>Add an export view<a class="headerlink" href="#add-an-export-view" title="Permalink to this heading">¶</a></h2>
+<p>In the app’s <code class="docutils literal notranslate"><span class="pre">views.py</span></code> import <code class="docutils literal notranslate"><span class="pre">JSONExportView</span></code> from core and define the
+view:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cosinnus.views.export</span> <span class="kn">import</span> <span class="n">JSONExportView</span>
+<span class="k">class</span> <span class="nc">AppExportView</span><span class="p">(</span><span class="n">JSONExportView</span><span class="p">):</span>
+    <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;model_field0&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;model_field1&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">AppModel</span>
+    <span class="n">file_prefix</span> <span class="o">=</span> <span class="s1">&#39;cosinnus_appname&#39;</span>
+<span class="n">export_view</span> <span class="o">=</span> <span class="n">AppExportView</span><span class="o">.</span><span class="n">as_view</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fields</span></code> defines the model fields you want in your exported data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model</span></code> defines the model where to lookup the fields</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">file_prefix</span></code> defines the prefix for the JSON file to be downloaded,
+probably should be the same as your app’s name.</p></li>
+</ul>
+</section>
+<section id="add-an-export-button">
+<h2>Add an export button<a class="headerlink" href="#add-an-export-button" title="Permalink to this heading">¶</a></h2>
+<p>You might want to have an export button next to the add button on your list
+page.You could add it like this in <code class="docutils literal notranslate"><span class="pre">templates/&lt;appname&gt;/&lt;appmodel&gt;_list.html</span></code></p>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">cosinnus_tags</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">user.is_superuser</span> <span class="k">or</span> <span class="nv">user</span><span class="o">|</span><span class="nf">is_group_admin</span><span class="o">:</span><span class="nv">object</span> <span class="cp">%}</span>
+  <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;active&quot;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;cosinnus:app:export&#39;</span> <span class="nv">group</span><span class="o">=</span><span class="nv">group.slug</span> <span class="cp">%}</span><span class="s">&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn&quot;</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;glyphicon glyphicon-export&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> <span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Export&quot;</span> <span class="nv">context</span> <span class="s2">&quot;the verb&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>You’re done, the app will neatly export its data in JSON format now!</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Export Cosinnus App Data</a><ul>
+<li><a class="reference internal" href="#add-a-new-url">Add a new URL</a></li>
+<li><a class="reference internal" href="#add-an-export-view">Add an export view</a></li>
+<li><a class="reference internal" href="#add-an-export-button">Add an export button</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="authentication.html"
+                          title="previous chapter">Authentication</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="hierarchy.html"
+                          title="next chapter">Hierarchical Object Organisation</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/export.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="hierarchy.html" title="Hierarchical Object Organisation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="authentication.html" title="Authentication"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Cosinnus 1.19.6 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Export Cosinnus App Data</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2013 - 2014, Sinnwerkstatt Medienagentur GmbH.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    </div>
+  </body>
+</html>

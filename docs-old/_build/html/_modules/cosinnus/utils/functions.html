@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cosinnus.utils.functions &#8212; Cosinnus 1.19.6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/classic.css?v=89b800e6" />
+    
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=436d026a"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Cosinnus 1.19.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cosinnus.utils.functions</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for cosinnus.utils.functions</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="kn">import</span> <span class="nb">str</span>
+<span class="kn">import</span> <span class="nn">collections.abc</span>
+<span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">import_module</span>
+<span class="kn">import</span> <span class="nn">locale</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">uuid1</span>
+
+<span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">ImproperlyConfigured</span>
+<span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">ValidationError</span>
+<span class="kn">from</span> <span class="nn">django.core.validators</span> <span class="kn">import</span> <span class="n">validate_email</span>
+<span class="kn">from</span> <span class="nn">django.utils.encoding</span> <span class="kn">import</span> <span class="n">force_text</span>
+<span class="kn">from</span> <span class="nn">django.utils.html</span> <span class="kn">import</span> <span class="n">strip_tags</span>
+<span class="kn">from</span> <span class="nn">django.utils.text</span> <span class="kn">import</span> <span class="n">normalize_newlines</span><span class="p">,</span> <span class="n">unescape_entities</span>
+<span class="kn">import</span> <span class="nn">six</span>
+
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;cosinnus&#39;</span><span class="p">)</span>
+
+
+
+<div class="viewcode-block" id="unique_aware_slugify"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.functions.unique_aware_slugify">[docs]</a><span class="k">def</span> <span class="nf">unique_aware_slugify</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">slug_source</span><span class="p">,</span> <span class="n">slug_field</span><span class="p">,</span> 
+        <span class="n">extra_conflict_check</span><span class="o">=</span><span class="k">lambda</span> <span class="n">slug</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="n">force_redo</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Ensures a unique slug field by appending an integer counter to duplicate</span>
+<span class="sd">    slugs.</span>
+
+<span class="sd">    The item&#39;s slug field is first prepopulated by slugify-ing the source</span>
+<span class="sd">    field up to the maximum length of the slug field - 5. If that value already</span>
+<span class="sd">    exists, a counter is appended to the slug, and the counter incremented</span>
+<span class="sd">    upward until the value is unique. The maximum counter is therefor 9999.</span>
+
+<span class="sd">    For instance, if you save an object titled &quot;Daily Roundup&quot;, and the slug</span>
+<span class="sd">    &quot;daily-roundup&quot; is already taken, this function will try &quot;daily-roundup-2&quot;,</span>
+<span class="sd">    &quot;daily-roundup-3&quot;, &quot;daily-roundup-4&quot;, etc, until a unique value is found.</span>
+
+<span class="sd">    Call from within a model&#39;s custom save() method like::</span>
+
+<span class="sd">        unique_aware_slugify(self, slug_source=&#39;title&#39;, slug_field=&#39;slug&#39;)</span>
+
+<span class="sd">    where the value of field `slug_source` will be used to prepopulate the</span>
+<span class="sd">    value of `slug_field`.</span>
+
+<span class="sd">    Any additional arguments passed to this function are used during lookup</span>
+<span class="sd">    existing slugs and can be used to filter them.</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">        If `slug_field` is already set this function won&#39;t do anything!</span>
+
+<span class="sd">    :param Model item: A Django model instance</span>
+<span class="sd">    :param str slug_source: The name of the field to construct a slug from</span>
+<span class="sd">    :param str slug_field: The name of the field to write the slug to</span>
+<span class="sd">    :param lambda/func extra_conflict_check: A function that takes</span>
+<span class="sd">        a candidate slug as argument, and returns True if a clash exists</span>
+<span class="sd">        for that slug. Used as an additional constraining check on whether a </span>
+<span class="sd">        slug should not be used.</span>
+<span class="sd">        Default: lambda slug: False</span>
+<span class="sd">    :param bool force_redo: If False, will do nothing if a slug is already set</span>
+<span class="sd">        on the item. If True, will redo the slugification, but exclude the </span>
+<span class="sd">        currently set slug from the list, meaning that if all other constraints</span>
+<span class="sd">        are clean, an item will keep its slug, but if the current slug clashes,</span>
+<span class="sd">        it will be redone.</span>
+<span class="sd">    :param kwargs: Additional filter attributes on applied to the model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">re</span>
+    <span class="kn">from</span> <span class="nn">django.template.defaultfilters</span> <span class="kn">import</span> <span class="n">slugify</span>
+    
+    <span class="c1"># We always re-do slugific if the force_switch is on, but then exclude the current slug</span>
+    <span class="c1"># from the clash list</span>
+    <span class="n">own_slug</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">slug_field</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">own_slug</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">force_redo</span><span class="p">:</span>
+        <span class="c1"># if a slug is already set, do nothing but return</span>
+        <span class="k">return</span>
+    
+    <span class="n">max_length</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="n">slug_field</span><span class="p">)</span><span class="o">.</span><span class="n">max_length</span>
+    <span class="n">slug_len</span> <span class="o">=</span> <span class="n">max_length</span> <span class="o">-</span> <span class="mi">10</span>  <span class="c1"># 1 for &#39;-&#39;and 4 (+5 for etherpad-id compatibility) for the counter</span>
+    <span class="n">slug_name</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">slug_source</span><span class="p">)</span>
+    <span class="n">slug_name</span> <span class="o">=</span> <span class="n">slug_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;ö&#39;</span><span class="p">,</span> <span class="s1">&#39;oe&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;ä&#39;</span><span class="p">,</span> <span class="s1">&#39;ae&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;ü&#39;</span><span class="p">,</span> <span class="s1">&#39;ue&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;ß&#39;</span><span class="p">,</span> <span class="s1">&#39;ss&#39;</span><span class="p">)</span>
+    <span class="n">slug</span> <span class="o">=</span> <span class="n">slugify</span><span class="p">(</span><span class="n">slug_name</span><span class="p">[:</span><span class="n">slug_len</span><span class="p">])</span>
+    
+    <span class="c1"># sanity check, we can never ever have an empty slug!</span>
+    <span class="c1"># note: cyrillic-only names will slugify to empty, so generate a uuid</span>
+    <span class="c1"># (unless the slug field has already been filled before)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">slug</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">slug_field</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">slug</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">slug_field</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">slug</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid1</span><span class="p">()</span><span class="o">.</span><span class="n">int</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+    
+    <span class="c1"># resolve proxy classes to their lowest common database model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="vm">__class__</span>
+    <span class="k">while</span> <span class="n">model</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">proxy</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span>  <span class="n">model</span><span class="o">.</span><span class="vm">__bases__</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        
+    <span class="c1"># the following gets all existing slug values</span>
+    <span class="k">if</span> <span class="n">slug_field</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">__startswith&#39;</span> <span class="o">%</span> <span class="n">slug_field</span><span class="p">]</span> <span class="o">=</span> <span class="n">slug</span>
+    <span class="c1"># be unique_together aware:</span>
+    <span class="k">for</span> <span class="n">unique_list</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">unique_together</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">slug_field</span> <span class="ow">in</span> <span class="n">unique_list</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">unique_field</span> <span class="ow">in</span> <span class="n">unique_list</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">unique_field</span> <span class="o">==</span> <span class="n">slug_field</span><span class="p">:</span>
+                    <span class="n">kwargs</span><span class="p">[</span><span class="n">unique_field</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">unique_field</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    
+    <span class="n">all_slugs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="n">slug_field</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">force_redo</span><span class="p">:</span>
+        <span class="c1"># remove own slug from clash list</span>
+        <span class="n">all_slugs</span> <span class="o">=</span> <span class="p">[</span><span class="n">clash_slug</span> <span class="k">for</span> <span class="n">clash_slug</span> <span class="ow">in</span> <span class="n">all_slugs</span> <span class="k">if</span> <span class="n">clash_slug</span> <span class="o">!=</span> <span class="n">own_slug</span><span class="p">]</span>
+    
+    <span class="k">if</span> <span class="n">slug</span> <span class="ow">in</span> <span class="n">all_slugs</span> <span class="ow">or</span> <span class="n">extra_conflict_check</span><span class="p">(</span><span class="n">slug</span><span class="p">):</span>
+        <span class="n">finder</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;-\d+$&#39;</span><span class="p">)</span>
+        <span class="n">counter</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="n">slug</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">slug</span><span class="p">,</span> <span class="n">counter</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">slug</span> <span class="ow">in</span> <span class="n">all_slugs</span> <span class="ow">or</span> <span class="n">extra_conflict_check</span><span class="p">(</span><span class="n">slug</span><span class="p">):</span>
+            <span class="n">slug</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">finder</span><span class="p">,</span> <span class="s1">&#39;-</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">counter</span><span class="p">,</span> <span class="n">slug</span><span class="p">)</span>
+            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="c1"># set the slug</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">slug_field</span><span class="p">,</span> <span class="n">slug</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="select_related_chain"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.functions.select_related_chain">[docs]</a><span class="k">def</span> <span class="nf">select_related_chain</span><span class="p">(</span><span class="n">qs</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Monkey-patch for django &lt; 1.7  to be able to chain multiple calls</span>
+<span class="sd">    to qs.select_related() without losing the args of the first calls. &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">_flatten</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="n">strin</span><span class="p">,</span> <span class="n">chain</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">dic</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">val</span><span class="p">:</span>
+                <span class="n">chain</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">strin</span> <span class="ow">and</span> <span class="n">strin</span> <span class="o">+</span> <span class="s1">&#39;__&#39;</span> <span class="o">+</span> <span class="n">key</span> <span class="ow">or</span> <span class="n">key</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">_flatten</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">strin</span> <span class="ow">and</span> <span class="n">strin</span> <span class="o">+</span> <span class="s1">&#39;__&#39;</span> <span class="o">+</span> <span class="n">key</span> <span class="ow">or</span> <span class="n">key</span><span class="p">,</span> <span class="n">chain</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">chain</span>
+    
+    <span class="n">prev_args</span> <span class="o">=</span> <span class="n">_flatten</span><span class="p">(</span><span class="n">qs</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">select_related</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">sels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">+</span> <span class="n">prev_args</span>
+    <span class="k">return</span> <span class="n">qs</span><span class="o">.</span><span class="n">select_related</span><span class="p">(</span><span class="o">*</span><span class="n">sels</span><span class="p">)</span></div>
+    
+    
+<div class="viewcode-block" id="get_cosinnus_app_from_class"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.functions.get_cosinnus_app_from_class">[docs]</a><span class="k">def</span> <span class="nf">get_cosinnus_app_from_class</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Tries to parse the cosinnus app name from any class in a cosinnus app &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__module__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;cosinnus_&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;&lt;not-a-cosinnus-module&gt;&#39;</span></div>
+    
+    
+<div class="viewcode-block" id="resolve_class"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.functions.resolve_class">[docs]</a><span class="k">def</span> <span class="nf">resolve_class</span><span class="p">(</span><span class="n">path_to_class</span><span class="p">):</span>
+    <span class="n">modulename</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">klass</span> <span class="o">=</span> <span class="n">path_to_class</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="n">modulename</span><span class="p">)</span>
+    <span class="bp">cls</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">klass</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="bp">cls</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;Cannot import class </span><span class="si">%s</span><span class="s2"> from </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="n">klass</span><span class="p">,</span> <span class="n">path_to_class</span><span class="p">))</span>
+    <span class="k">return</span> <span class="bp">cls</span></div>
+
+
+<div class="viewcode-block" id="ensure_dict_keys"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.functions.ensure_dict_keys">[docs]</a><span class="k">def</span> <span class="nf">ensure_dict_keys</span><span class="p">(</span><span class="n">mydict</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[],</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Raises an ImproperlyConfigured if not all supplied key strings</span>
+<span class="sd">        are contained in the given dictionary. &quot;&quot;&quot;</span>
+    <span class="n">missing_keys</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">mydict</span><span class="p">:</span>
+            <span class="n">missing_keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">missing_keys</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">message</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;The given dictionary is missing the following keys: &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="ow">in</span> <span class="n">message</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39;: </span><span class="si">%s</span><span class="s1">&#39;</span>
+        <span class="k">raise</span> <span class="n">ImproperlyConfigured</span><span class="p">(</span><span class="n">message</span> <span class="o">%</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing_keys</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="clean_single_line_text"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.functions.clean_single_line_text">[docs]</a><span class="k">def</span> <span class="nf">clean_single_line_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Removes linebreaks, tabs and leading/traling spaces.</span>
+<span class="sd">        Used for all object titles and group names. &quot;&quot;&quot;</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">normalize_newlines</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">text</span></div>
+
+
+<div class="viewcode-block" id="convert_html_to_string"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.functions.convert_html_to_string">[docs]</a><span class="k">def</span> <span class="nf">convert_html_to_string</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Returns text containing html tags as text without its tags &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">unescape_entities</span><span class="p">(</span><span class="n">strip_tags</span><span class="p">(</span><span class="n">force_text</span><span class="p">(</span><span class="n">text</span><span class="p">)))</span></div>
+
+
+<div class="viewcode-block" id="is_number"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.functions.is_number">[docs]</a><span class="k">def</span> <span class="nf">is_number</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Check if value is a number &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+    
+<div class="viewcode-block" id="get_float_or_None"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.functions.get_float_or_None">[docs]</a><span class="k">def</span> <span class="nf">get_float_or_None</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Attempts to return the value coerced to a float, or returns None &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+    
+<div class="viewcode-block" id="get_int_or_None"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.functions.get_int_or_None">[docs]</a><span class="k">def</span> <span class="nf">get_int_or_None</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Attempts to return the value coerced to a float, or returns None &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="resolve_attributes"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.functions.resolve_attributes">[docs]</a><span class="k">def</span> <span class="nf">resolve_attributes</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr_or_function</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">func_args</span><span class="o">=</span><span class="p">[]):</span>    
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Returns the given string attribute of an object, or its return value if it&#39;s a function.</span>
+<span class="sd">        If None given, or the object had no such attribute or function, try to find</span>
+<span class="sd">        the given default attribute. If no default given, return None. </span>
+<span class="sd">        Supplying a string argument &#39;None&#39; to attr_or_function will override the default and return None.</span>
+<span class="sd">        This function takes stacked attributes, much like a django template would.</span>
+<span class="sd">        @param func_args: If given, and the resolved attribute is a function, supply these args</span>
+<span class="sd">        </span>
+<span class="sd">        ``resolve_attributes(user, &#39;cosinnus_profile.language.get_absolute_url&#39;)``</span>
+<span class="sd">             would return the value of ``user.cosinnus_profile.get_absolute_url()`` &quot;&quot;&quot;</span>
+        
+    <span class="n">attribute</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">attr_or_function</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">attr_or_function</span> <span class="o">==</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span>
+            <span class="c1"># string &#39;None&#39;s will make us return None</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="c1"># pick and resolve first attribute in string</span>
+        <span class="n">attributes</span> <span class="o">=</span> <span class="n">attr_or_function</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">attribute</span> <span class="o">=</span> <span class="n">attributes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">rest_attributes</span> <span class="o">=</span> <span class="n">attributes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="kc">None</span>
+    
+    <span class="c1"># if no attribute was given or the given object does not contain that attribute, try to resolve</span>
+    <span class="c1"># the default attribute on the object, or return the default</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">attribute</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attribute</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">resolve_attributes</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">default</span><span class="p">,</span> <span class="n">func_args</span><span class="o">=</span><span class="n">func_args</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">default</span> <span class="ow">and</span> <span class="n">default</span> <span class="o">!=</span> <span class="n">attr_or_function</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+    
+    <span class="n">resolved_attr</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attribute</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">resolved_attr</span><span class="p">(</span><span class="o">*</span><span class="n">func_args</span><span class="p">)</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">resolved_attr</span><span class="p">,</span> <span class="s1">&#39;__call__&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">resolved_attr</span>
+    
+    <span class="c1"># recurse as long as there are stacked attributed in the string</span>
+    <span class="k">if</span> <span class="n">rest_attributes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">resolve_attributes</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">rest_attributes</span><span class="p">,</span> <span class="n">default</span><span class="p">,</span> <span class="n">func_args</span><span class="o">=</span><span class="n">func_args</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="is_email_valid"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.functions.is_email_valid">[docs]</a><span class="k">def</span> <span class="nf">is_email_valid</span><span class="p">(</span><span class="n">email</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Returns True if the given email is a valid email address, False else &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">validate_email</span><span class="p">(</span> <span class="n">email</span> <span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="n">ValidationError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+    
+<div class="viewcode-block" id="ensure_list_of_ints"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.functions.ensure_list_of_ints">[docs]</a><span class="k">def</span> <span class="nf">ensure_list_of_ints</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Will accept a single int/str number or list or comma-seperated list of int/str numbers</span>
+<span class="sd">        and always return a list of integers, or an empty list &quot;&quot;&quot;</span>
+    <span class="c1"># guarantee list of ints</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">==</span> <span class="p">[]:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;,&#39;</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)]</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">value</span> <span class="k">if</span> <span class="n">val</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">value</span></div>
+    
+    
+<div class="viewcode-block" id="normalize_within_stddev"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.functions.normalize_within_stddev">[docs]</a><span class="k">def</span> <span class="nf">normalize_within_stddev</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">stddev</span><span class="p">,</span> <span class="n">stddev_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Normalizes the given member (number) for a given mean and stddev of the member&#39;s population,</span>
+<span class="sd">        so that members inside -1..+1 bands of standard deviation fall within [0..1.0].</span>
+<span class="sd">        Members outside are min/maxed to 0/1.0 respective.</span>
+<span class="sd">        @param stddev_factor: Default: 1.0. To increase /decrease number of bands of stddev.</span>
+<span class="sd">        @return: 0 for members &lt; (mean-stddev), 1.0 for members &gt; (mean+stddev), and 0..1.0 for members within that range. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">local_max</span> <span class="o">=</span> <span class="n">mean</span> <span class="o">+</span> <span class="p">(</span><span class="n">stddev</span><span class="o">*</span><span class="n">stddev_factor</span><span class="p">)</span>
+    <span class="n">local_min</span> <span class="o">=</span> <span class="n">mean</span> <span class="o">-</span> <span class="p">(</span><span class="n">stddev</span><span class="o">*</span><span class="n">stddev_factor</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">local_max</span> <span class="o">!=</span> <span class="n">local_min</span><span class="p">:</span>
+        <span class="n">place</span> <span class="o">=</span> <span class="p">(</span><span class="n">member</span><span class="o">-</span><span class="n">local_min</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">local_max</span><span class="o">-</span><span class="n">local_min</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">place</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">place</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)))</span></div>
+
+
+<div class="viewcode-block" id="sort_key_strcoll_attr"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.functions.sort_key_strcoll_attr">[docs]</a><span class="k">def</span> <span class="nf">sort_key_strcoll_attr</span><span class="p">(</span><span class="n">attr_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Returns a function usable as key for the py3 sorted() function,</span>
+<span class="sd">        that will sort objects using strcoll() on their given attributes. &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">strcoll_cmp_attr</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="n">obj2</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">locale</span><span class="o">.</span><span class="n">strcoll</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj2</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">cmp_to_key</span><span class="p">(</span><span class="n">strcoll_cmp_attr</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="sort_key_strcoll_lambda"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.functions.sort_key_strcoll_lambda">[docs]</a><span class="k">def</span> <span class="nf">sort_key_strcoll_lambda</span><span class="p">(</span><span class="n">lambda_func</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Returns a function usable as key for the py3 sorted() function,</span>
+<span class="sd">        that will sort objects using strcoll() the attribute accessed by a given lambda function. &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">strcoll_cmp_attr</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="n">obj2</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">locale</span><span class="o">.</span><span class="n">strcoll</span><span class="p">(</span><span class="n">lambda_func</span><span class="p">(</span><span class="n">obj1</span><span class="p">),</span> <span class="n">lambda_func</span><span class="p">(</span><span class="n">obj2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">cmp_to_key</span><span class="p">(</span><span class="n">strcoll_cmp_attr</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="catch_all_and_log"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.functions.catch_all_and_log">[docs]</a><span class="k">def</span> <span class="nf">catch_all_and_log</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Decorator that catches any exception in the function and logs it, then continues execution.</span>
+<span class="sd">        Very useful for hook functions that should never bubble up into execution.</span>
+<span class="sd">     &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">inner_function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Catch_all_and_log caught exception in </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__module__</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">().&#39;</span><span class="p">,</span>
+                             <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;exception&#39;</span><span class="p">:</span> <span class="n">e</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">inner_function</span></div>
+
+
+<div class="viewcode-block" id="update_dict_recursive"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.functions.update_dict_recursive">[docs]</a><span class="k">def</span> <span class="nf">update_dict_recursive</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Recursively update a dict so that all nested dicts are also updated instead of replaced &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Mapping</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">update_dict_recursive</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">v</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="k">return</span> <span class="n">d</span></div>
+
+
+<div class="viewcode-block" id="uniquify_list"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.functions.uniquify_list">[docs]</a><span class="k">def</span> <span class="nf">uniquify_list</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Fast uniquify for any given list, preserving order &quot;&quot;&quot;</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">seen_add</span> <span class="o">=</span> <span class="n">seen</span><span class="o">.</span><span class="n">add</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">arr</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">x</span> <span class="ow">in</span> <span class="n">seen</span> <span class="ow">or</span> <span class="n">seen_add</span><span class="p">(</span><span class="n">x</span><span class="p">))]</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Cosinnus 1.19.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cosinnus.utils.functions</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2013 - 2014, Sinnwerkstatt Medienagentur GmbH.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    </div>
+  </body>
+</html>

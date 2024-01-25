@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus.utils package &#8212; Cosinnus 1.19.6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=89b800e6" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=436d026a"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus.views package" href="cosinnus.views.html" />
+    <link rel="prev" title="cosinnus.templatetags package" href="cosinnus.templatetags.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cosinnus.views.html" title="cosinnus.views package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cosinnus.templatetags.html" title="cosinnus.templatetags package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cosinnus 1.19.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="cosinnus.html" accesskey="U">cosinnus package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cosinnus.utils package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="cosinnus-utils-package">
+<h1>cosinnus.utils package<a class="headerlink" href="#cosinnus-utils-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus.utils.compat">
+<span id="cosinnus-utils-compat-module"></span><h2>cosinnus.utils.compat module<a class="headerlink" href="#module-cosinnus.utils.compat" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.utils.compat.OrderedDict">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.utils.compat.</span></span><span class="sig-name descname"><span class="pre">OrderedDict</span></span><a class="reference internal" href="../_modules/collections.html#OrderedDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.compat.OrderedDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
+<p>Dictionary that remembers insertion order</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.compat.OrderedDict.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None.</span>&#160; <span class="pre">Remove</span> <span class="pre">all</span> <span class="pre">items</span> <span class="pre">from</span> <span class="pre">od.</span></span></span><a class="headerlink" href="#cosinnus.utils.compat.OrderedDict.clear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.compat.OrderedDict.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">a</span> <span class="pre">shallow</span> <span class="pre">copy</span> <span class="pre">of</span> <span class="pre">od</span></span></span><a class="headerlink" href="#cosinnus.utils.compat.OrderedDict.copy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.compat.OrderedDict.fromkeys">
+<span class="sig-name descname"><span class="pre">fromkeys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.compat.OrderedDict.fromkeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new ordered dictionary with keys from iterable and values set to value.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.compat.OrderedDict.items">
+<span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">a</span> <span class="pre">set-like</span> <span class="pre">object</span> <span class="pre">providing</span> <span class="pre">a</span> <span class="pre">view</span> <span class="pre">on</span> <span class="pre">D's</span> <span class="pre">items</span></span></span><a class="headerlink" href="#cosinnus.utils.compat.OrderedDict.items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.compat.OrderedDict.keys">
+<span class="sig-name descname"><span class="pre">keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">a</span> <span class="pre">set-like</span> <span class="pre">object</span> <span class="pre">providing</span> <span class="pre">a</span> <span class="pre">view</span> <span class="pre">on</span> <span class="pre">D's</span> <span class="pre">keys</span></span></span><a class="headerlink" href="#cosinnus.utils.compat.OrderedDict.keys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.compat.OrderedDict.move_to_end">
+<span class="sig-name descname"><span class="pre">move_to_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.compat.OrderedDict.move_to_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move an existing element to the end (or beginning if last is false).</p>
+<p>Raise KeyError if the element does not exist.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.compat.OrderedDict.pop">
+<span class="sig-name descname"><span class="pre">pop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="optional">]</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">v,</span> <span class="pre">remove</span> <span class="pre">specified</span> <span class="pre">key</span> <span class="pre">and</span> <span class="pre">return</span> <span class="pre">the</span> <span class="pre">corresponding</span></span></span><a class="headerlink" href="#cosinnus.utils.compat.OrderedDict.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>value.  If key is not found, d is returned if given, otherwise KeyError
+is raised.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.compat.OrderedDict.popitem">
+<span class="sig-name descname"><span class="pre">popitem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">last</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.compat.OrderedDict.popitem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove and return a (key, value) pair from the dictionary.</p>
+<p>Pairs are returned in LIFO order if last is true or FIFO order if false.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.compat.OrderedDict.setdefault">
+<span class="sig-name descname"><span class="pre">setdefault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.utils.compat.OrderedDict.setdefault" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert key with a value of default if key is not in the dictionary.</p>
+<p>Return the value for key if key is in the dictionary, else default.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.compat.OrderedDict.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">E</span></span></em>, <span class="optional">]</span><em class="sig-param"><span class="n"><span class="pre">**F</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None.</span>&#160; <span class="pre">Update</span> <span class="pre">D</span> <span class="pre">from</span> <span class="pre">dict/iterable</span> <span class="pre">E</span> <span class="pre">and</span> <span class="pre">F.</span></span></span><a class="headerlink" href="#cosinnus.utils.compat.OrderedDict.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>If E is present and has a .keys() method, then does:  for k in E: D[k] = E[k]
+If E is present and lacks a .keys() method, then does:  for k, v in E: D[k] = v
+In either case, this is followed by: for k in F:  D[k] = F[k]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.compat.OrderedDict.values">
+<span class="sig-name descname"><span class="pre">values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">an</span> <span class="pre">object</span> <span class="pre">providing</span> <span class="pre">a</span> <span class="pre">view</span> <span class="pre">on</span> <span class="pre">D's</span> <span class="pre">values</span></span></span><a class="headerlink" href="#cosinnus.utils.compat.OrderedDict.values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.compat.atomic">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.compat.</span></span><span class="sig-name descname"><span class="pre">atomic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">using</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savepoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">durable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/django/db/transaction.html#atomic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.compat.atomic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="cosinnus-utils-context-processors-module">
+<h2>cosinnus.utils.context_processors module<a class="headerlink" href="#cosinnus-utils-context-processors-module" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="cosinnus-utils-dashboard-module">
+<h2>cosinnus.utils.dashboard module<a class="headerlink" href="#cosinnus-utils-dashboard-module" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus.utils.dates">
+<span id="cosinnus-utils-dates-module"></span><h2>cosinnus.utils.dates module<a class="headerlink" href="#module-cosinnus.utils.dates" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.utils.dates.HumanizedEventTimeMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.utils.dates.</span></span><span class="sig-name descname"><span class="pre">HumanizedEventTimeMixin</span></span><a class="reference internal" href="../_modules/cosinnus/utils/dates.html#HumanizedEventTimeMixin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.dates.HumanizedEventTimeMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Utility function mixin for any model containing a <cite>from_date</cite> and <cite>to_date</cite> datetime field.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.dates.HumanizedEventTimeMixin.get_date_or_now_starting_time">
+<span class="sig-name descname"><span class="pre">get_date_or_now_starting_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/dates.html#HumanizedEventTimeMixin.get_date_or_now_starting_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.get_date_or_now_starting_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dict like {‘is_date’: True, ‘date’: &lt;date&gt;}
+with is_date=False date as string “Now” if the event is running, 
+else is_date=True and date as the moment-usable datetime of the from_date.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.dates.HumanizedEventTimeMixin.get_humanized_event_time_html">
+<span class="sig-name descname"><span class="pre">get_humanized_event_time_html</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/dates.html#HumanizedEventTimeMixin.get_humanized_event_time_html"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.get_humanized_event_time_html" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.dates.HumanizedEventTimeMixin.get_period">
+<span class="sig-name descname"><span class="pre">get_period</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/dates.html#HumanizedEventTimeMixin.get_period"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.get_period" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.utils.dates.HumanizedEventTimeMixin.get_period_with_time">
+<span class="sig-name descname"><span class="pre">get_period_with_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/dates.html#HumanizedEventTimeMixin.get_period_with_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.get_period_with_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus.utils.dates.HumanizedEventTimeMixin.has_ended">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">has_ended</span></span><a class="headerlink" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.has_ended" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus.utils.dates.HumanizedEventTimeMixin.is_all_day">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_all_day</span></span><a class="headerlink" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.is_all_day" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus.utils.dates.HumanizedEventTimeMixin.is_running">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_running</span></span><a class="headerlink" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.is_running" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus.utils.dates.HumanizedEventTimeMixin.is_same_day">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_same_day</span></span><a class="headerlink" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.is_same_day" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus.utils.dates.HumanizedEventTimeMixin.is_same_time">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_same_time</span></span><a class="headerlink" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.is_same_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cosinnus.utils.dates.HumanizedEventTimeMixin.single_day">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">single_day</span></span><a class="headerlink" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.single_day" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.utils.dates.HumanizedEventTimeObject">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.utils.dates.</span></span><span class="sig-name descname"><span class="pre">HumanizedEventTimeObject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_date</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/dates.html#HumanizedEventTimeObject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.dates.HumanizedEventTimeObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.utils.dates.HumanizedEventTimeMixin" title="cosinnus.utils.dates.HumanizedEventTimeMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">HumanizedEventTimeMixin</span></code></a></p>
+<p>Convenience object wrapping <cite>HumanizedEventTimeMixin</cite> to give easy
+access to the mixin’s functions when you only have two datetimes.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.utils.dates.HumanizedEventTimeObject.from_date">
+<span class="sig-name descname"><span class="pre">from_date</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.utils.dates.HumanizedEventTimeObject.from_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.utils.dates.HumanizedEventTimeObject.to_date">
+<span class="sig-name descname"><span class="pre">to_date</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.utils.dates.HumanizedEventTimeObject.to_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.dates.datetime_format_js2py">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.dates.</span></span><span class="sig-name descname"><span class="pre">datetime_format_js2py</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">format</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/dates.html#datetime_format_js2py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.dates.datetime_format_js2py" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a JavaScript datetime notation to Python’s <a class="reference external" href="https://docs.python.org/3/library/time.html#time.strftime" title="(in Python v3.12)"><code class="xref py py-func docutils literal notranslate"><span class="pre">strftime()</span></code></a>
+format, eg. <code class="docutils literal notranslate"><span class="pre">&quot;DD&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;%d&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;YYYY&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;%Y&quot;</span></code> .</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.dates.datetime_format_py2js">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.dates.</span></span><span class="sig-name descname"><span class="pre">datetime_format_py2js</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">format</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/dates.html#datetime_format_py2js"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.dates.datetime_format_py2js" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts Python’s <a class="reference external" href="https://docs.python.org/3/library/time.html#time.strftime" title="(in Python v3.12)"><code class="xref py py-func docutils literal notranslate"><span class="pre">strftime()</span></code></a> format to a JavaScript notation,
+eg. <code class="docutils literal notranslate"><span class="pre">&quot;%d&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;DD&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;%Y&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;YYYY&quot;</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.dates.datetime_from_timestamp">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.dates.</span></span><span class="sig-name descname"><span class="pre">datetime_from_timestamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/dates.html#datetime_from_timestamp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.dates.datetime_from_timestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a datetime from a float timestamp</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.dates.localize">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.dates.</span></span><span class="sig-name descname"><span class="pre">localize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/dates.html#localize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.dates.localize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.dates.timestamp_from_datetime">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.dates.</span></span><span class="sig-name descname"><span class="pre">timestamp_from_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datetime_obj</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/dates.html#timestamp_from_datetime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.dates.timestamp_from_datetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a float timestamp from a datetime.
+&#64;param datetime_obj: A datetime. If none is given, uses the current time instead.</p>
+</dd></dl>
+
+</section>
+<section id="cosinnus-utils-django-auth-urls-module">
+<h2>cosinnus.utils.django_auth_urls module<a class="headerlink" href="#cosinnus-utils-django-auth-urls-module" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="cosinnus-utils-files-module">
+<h2>cosinnus.utils.files module<a class="headerlink" href="#cosinnus-utils-files-module" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus.utils.functions">
+<span id="cosinnus-utils-functions-module"></span><h2>cosinnus.utils.functions module<a class="headerlink" href="#module-cosinnus.utils.functions" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.functions.catch_all_and_log">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">catch_all_and_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/functions.html#catch_all_and_log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.functions.catch_all_and_log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator that catches any exception in the function and logs it, then continues execution.
+Very useful for hook functions that should never bubble up into execution.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.functions.clean_single_line_text">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">clean_single_line_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/functions.html#clean_single_line_text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.functions.clean_single_line_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes linebreaks, tabs and leading/traling spaces.
+Used for all object titles and group names.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.functions.convert_html_to_string">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">convert_html_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/functions.html#convert_html_to_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.functions.convert_html_to_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns text containing html tags as text without its tags</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.functions.ensure_dict_keys">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">ensure_dict_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mydict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/functions.html#ensure_dict_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.functions.ensure_dict_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raises an ImproperlyConfigured if not all supplied key strings
+are contained in the given dictionary.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.functions.ensure_list_of_ints">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">ensure_list_of_ints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/functions.html#ensure_list_of_ints"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.functions.ensure_list_of_ints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will accept a single int/str number or list or comma-seperated list of int/str numbers
+and always return a list of integers, or an empty list</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.functions.get_cosinnus_app_from_class">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">get_cosinnus_app_from_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/functions.html#get_cosinnus_app_from_class"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.functions.get_cosinnus_app_from_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tries to parse the cosinnus app name from any class in a cosinnus app</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.functions.get_float_or_None">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">get_float_or_None</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/functions.html#get_float_or_None"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.functions.get_float_or_None" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempts to return the value coerced to a float, or returns None</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.functions.get_int_or_None">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">get_int_or_None</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/functions.html#get_int_or_None"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.functions.get_int_or_None" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempts to return the value coerced to a float, or returns None</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.functions.is_email_valid">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">is_email_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/functions.html#is_email_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.functions.is_email_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the given email is a valid email address, False else</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.functions.is_number">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">is_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/functions.html#is_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.functions.is_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if value is a number</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.functions.normalize_within_stddev">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">normalize_within_stddev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">member</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stddev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stddev_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/functions.html#normalize_within_stddev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.functions.normalize_within_stddev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalizes the given member (number) for a given mean and stddev of the member’s population,
+so that members inside -1..+1 bands of standard deviation fall within [0..1.0].
+Members outside are min/maxed to 0/1.0 respective.
+&#64;param stddev_factor: Default: 1.0. To increase /decrease number of bands of stddev.
+&#64;return: 0 for members &lt; (mean-stddev), 1.0 for members &gt; (mean+stddev), and 0..1.0 for members within that range.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.functions.resolve_attributes">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">resolve_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr_or_function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/functions.html#resolve_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.functions.resolve_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the given string attribute of an object, or its return value if it’s a function.
+If None given, or the object had no such attribute or function, try to find
+the given default attribute. If no default given, return None. 
+Supplying a string argument ‘None’ to attr_or_function will override the default and return None.
+This function takes stacked attributes, much like a django template would.
+&#64;param func_args: If given, and the resolved attribute is a function, supply these args</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">resolve_attributes(user,</span> <span class="pre">'cosinnus_profile.language.get_absolute_url')</span></code></dt><dd><p>would return the value of <code class="docutils literal notranslate"><span class="pre">user.cosinnus_profile.get_absolute_url()</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.functions.resolve_class">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">resolve_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_to_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/functions.html#resolve_class"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.functions.resolve_class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.functions.select_related_chain">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">select_related_chain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qs</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/functions.html#select_related_chain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.functions.select_related_chain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Monkey-patch for django &lt; 1.7  to be able to chain multiple calls
+to qs.select_related() without losing the args of the first calls.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.functions.sort_key_strcoll_attr">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">sort_key_strcoll_attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attr_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/functions.html#sort_key_strcoll_attr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.functions.sort_key_strcoll_attr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a function usable as key for the py3 sorted() function,
+that will sort objects using strcoll() on their given attributes.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.functions.sort_key_strcoll_lambda">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">sort_key_strcoll_lambda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lambda_func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/functions.html#sort_key_strcoll_lambda"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.functions.sort_key_strcoll_lambda" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a function usable as key for the py3 sorted() function,
+that will sort objects using strcoll() the attribute accessed by a given lambda function.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.functions.unique_aware_slugify">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">unique_aware_slugify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slug_source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slug_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_conflict_check=&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_redo=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/functions.html#unique_aware_slugify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.functions.unique_aware_slugify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensures a unique slug field by appending an integer counter to duplicate
+slugs.</p>
+<p>The item’s slug field is first prepopulated by slugify-ing the source
+field up to the maximum length of the slug field - 5. If that value already
+exists, a counter is appended to the slug, and the counter incremented
+upward until the value is unique. The maximum counter is therefor 9999.</p>
+<p>For instance, if you save an object titled “Daily Roundup”, and the slug
+“daily-roundup” is already taken, this function will try “daily-roundup-2”,
+“daily-roundup-3”, “daily-roundup-4”, etc, until a unique value is found.</p>
+<p>Call from within a model’s custom save() method like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">unique_aware_slugify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slug_source</span><span class="o">=</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="n">slug_field</span><span class="o">=</span><span class="s1">&#39;slug&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where the value of field <cite>slug_source</cite> will be used to prepopulate the
+value of <cite>slug_field</cite>.</p>
+<p>Any additional arguments passed to this function are used during lookup
+existing slugs and can be used to filter them.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <cite>slug_field</cite> is already set this function won’t do anything!</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>item</strong> (<em>Model</em>) – A Django model instance</p></li>
+<li><p><strong>slug_source</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The name of the field to construct a slug from</p></li>
+<li><p><strong>slug_field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The name of the field to write the slug to</p></li>
+<li><p><strong>extra_conflict_check</strong> (<em>lambda/func</em>) – A function that takes
+a candidate slug as argument, and returns True if a clash exists
+for that slug. Used as an additional constraining check on whether a 
+slug should not be used.
+Default: lambda slug: False</p></li>
+<li><p><strong>force_redo</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – If False, will do nothing if a slug is already set
+on the item. If True, will redo the slugification, but exclude the 
+currently set slug from the list, meaning that if all other constraints
+are clean, an item will keep its slug, but if the current slug clashes,
+it will be redone.</p></li>
+<li><p><strong>kwargs</strong> – Additional filter attributes on applied to the model</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.functions.uniquify_list">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">uniquify_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/functions.html#uniquify_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.functions.uniquify_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fast uniquify for any given list, preserving order</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.functions.update_dict_recursive">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.functions.</span></span><span class="sig-name descname"><span class="pre">update_dict_recursive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/functions.html#update_dict_recursive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.functions.update_dict_recursive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively update a dict so that all nested dicts are also updated instead of replaced</p>
+</dd></dl>
+
+</section>
+<section id="cosinnus-utils-http-module">
+<h2>cosinnus.utils.http module<a class="headerlink" href="#cosinnus-utils-http-module" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="cosinnus-utils-permissions-module">
+<h2>cosinnus.utils.permissions module<a class="headerlink" href="#cosinnus-utils-permissions-module" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="cosinnus-utils-renderer-module">
+<h2>cosinnus.utils.renderer module<a class="headerlink" href="#cosinnus-utils-renderer-module" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus.utils.test">
+<span id="cosinnus-utils-test-module"></span><h2>cosinnus.utils.test module<a class="headerlink" href="#module-cosinnus.utils.test" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.test.get_fieldnames_from_multiform">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.test.</span></span><span class="sig-name descname"><span class="pre">get_fieldnames_from_multiform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">multiform</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/test.html#get_fieldnames_from_multiform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.test.get_fieldnames_from_multiform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all field names for all forms grouped by their form</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.utils.test.get_fields_from_multiform">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.utils.test.</span></span><span class="sig-name descname"><span class="pre">get_fields_from_multiform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">multiform</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/utils/test.html#get_fields_from_multiform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.utils.test.get_fields_from_multiform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all fields from all forms grouped by their form</p>
+</dd></dl>
+
+</section>
+<section id="cosinnus-utils-urls-module">
+<h2>cosinnus.utils.urls module<a class="headerlink" href="#cosinnus-utils-urls-module" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cosinnus.utils" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">cosinnus.utils package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-cosinnus.utils.compat">cosinnus.utils.compat module</a><ul>
+<li><a class="reference internal" href="#cosinnus.utils.compat.OrderedDict"><code class="docutils literal notranslate"><span class="pre">OrderedDict</span></code></a><ul>
+<li><a class="reference internal" href="#cosinnus.utils.compat.OrderedDict.clear"><code class="docutils literal notranslate"><span class="pre">OrderedDict.clear()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.compat.OrderedDict.copy"><code class="docutils literal notranslate"><span class="pre">OrderedDict.copy()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.compat.OrderedDict.fromkeys"><code class="docutils literal notranslate"><span class="pre">OrderedDict.fromkeys()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.compat.OrderedDict.items"><code class="docutils literal notranslate"><span class="pre">OrderedDict.items()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.compat.OrderedDict.keys"><code class="docutils literal notranslate"><span class="pre">OrderedDict.keys()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.compat.OrderedDict.move_to_end"><code class="docutils literal notranslate"><span class="pre">OrderedDict.move_to_end()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.compat.OrderedDict.pop"><code class="docutils literal notranslate"><span class="pre">OrderedDict.pop()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.compat.OrderedDict.popitem"><code class="docutils literal notranslate"><span class="pre">OrderedDict.popitem()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.compat.OrderedDict.setdefault"><code class="docutils literal notranslate"><span class="pre">OrderedDict.setdefault()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.compat.OrderedDict.update"><code class="docutils literal notranslate"><span class="pre">OrderedDict.update()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.compat.OrderedDict.values"><code class="docutils literal notranslate"><span class="pre">OrderedDict.values()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cosinnus.utils.compat.atomic"><code class="docutils literal notranslate"><span class="pre">atomic()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cosinnus-utils-context-processors-module">cosinnus.utils.context_processors module</a></li>
+<li><a class="reference internal" href="#cosinnus-utils-dashboard-module">cosinnus.utils.dashboard module</a></li>
+<li><a class="reference internal" href="#module-cosinnus.utils.dates">cosinnus.utils.dates module</a><ul>
+<li><a class="reference internal" href="#cosinnus.utils.dates.HumanizedEventTimeMixin"><code class="docutils literal notranslate"><span class="pre">HumanizedEventTimeMixin</span></code></a><ul>
+<li><a class="reference internal" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.get_date_or_now_starting_time"><code class="docutils literal notranslate"><span class="pre">HumanizedEventTimeMixin.get_date_or_now_starting_time()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.get_humanized_event_time_html"><code class="docutils literal notranslate"><span class="pre">HumanizedEventTimeMixin.get_humanized_event_time_html()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.get_period"><code class="docutils literal notranslate"><span class="pre">HumanizedEventTimeMixin.get_period()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.get_period_with_time"><code class="docutils literal notranslate"><span class="pre">HumanizedEventTimeMixin.get_period_with_time()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.has_ended"><code class="docutils literal notranslate"><span class="pre">HumanizedEventTimeMixin.has_ended</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.is_all_day"><code class="docutils literal notranslate"><span class="pre">HumanizedEventTimeMixin.is_all_day</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.is_running"><code class="docutils literal notranslate"><span class="pre">HumanizedEventTimeMixin.is_running</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.is_same_day"><code class="docutils literal notranslate"><span class="pre">HumanizedEventTimeMixin.is_same_day</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.is_same_time"><code class="docutils literal notranslate"><span class="pre">HumanizedEventTimeMixin.is_same_time</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.dates.HumanizedEventTimeMixin.single_day"><code class="docutils literal notranslate"><span class="pre">HumanizedEventTimeMixin.single_day</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cosinnus.utils.dates.HumanizedEventTimeObject"><code class="docutils literal notranslate"><span class="pre">HumanizedEventTimeObject</span></code></a><ul>
+<li><a class="reference internal" href="#cosinnus.utils.dates.HumanizedEventTimeObject.from_date"><code class="docutils literal notranslate"><span class="pre">HumanizedEventTimeObject.from_date</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.dates.HumanizedEventTimeObject.to_date"><code class="docutils literal notranslate"><span class="pre">HumanizedEventTimeObject.to_date</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cosinnus.utils.dates.datetime_format_js2py"><code class="docutils literal notranslate"><span class="pre">datetime_format_js2py()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.dates.datetime_format_py2js"><code class="docutils literal notranslate"><span class="pre">datetime_format_py2js()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.dates.datetime_from_timestamp"><code class="docutils literal notranslate"><span class="pre">datetime_from_timestamp()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.dates.localize"><code class="docutils literal notranslate"><span class="pre">localize()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.dates.timestamp_from_datetime"><code class="docutils literal notranslate"><span class="pre">timestamp_from_datetime()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cosinnus-utils-django-auth-urls-module">cosinnus.utils.django_auth_urls module</a></li>
+<li><a class="reference internal" href="#cosinnus-utils-files-module">cosinnus.utils.files module</a></li>
+<li><a class="reference internal" href="#module-cosinnus.utils.functions">cosinnus.utils.functions module</a><ul>
+<li><a class="reference internal" href="#cosinnus.utils.functions.catch_all_and_log"><code class="docutils literal notranslate"><span class="pre">catch_all_and_log()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.functions.clean_single_line_text"><code class="docutils literal notranslate"><span class="pre">clean_single_line_text()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.functions.convert_html_to_string"><code class="docutils literal notranslate"><span class="pre">convert_html_to_string()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.functions.ensure_dict_keys"><code class="docutils literal notranslate"><span class="pre">ensure_dict_keys()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.functions.ensure_list_of_ints"><code class="docutils literal notranslate"><span class="pre">ensure_list_of_ints()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.functions.get_cosinnus_app_from_class"><code class="docutils literal notranslate"><span class="pre">get_cosinnus_app_from_class()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.functions.get_float_or_None"><code class="docutils literal notranslate"><span class="pre">get_float_or_None()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.functions.get_int_or_None"><code class="docutils literal notranslate"><span class="pre">get_int_or_None()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.functions.is_email_valid"><code class="docutils literal notranslate"><span class="pre">is_email_valid()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.functions.is_number"><code class="docutils literal notranslate"><span class="pre">is_number()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.functions.normalize_within_stddev"><code class="docutils literal notranslate"><span class="pre">normalize_within_stddev()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.functions.resolve_attributes"><code class="docutils literal notranslate"><span class="pre">resolve_attributes()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.functions.resolve_class"><code class="docutils literal notranslate"><span class="pre">resolve_class()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.functions.select_related_chain"><code class="docutils literal notranslate"><span class="pre">select_related_chain()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.functions.sort_key_strcoll_attr"><code class="docutils literal notranslate"><span class="pre">sort_key_strcoll_attr()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.functions.sort_key_strcoll_lambda"><code class="docutils literal notranslate"><span class="pre">sort_key_strcoll_lambda()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.functions.unique_aware_slugify"><code class="docutils literal notranslate"><span class="pre">unique_aware_slugify()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.functions.uniquify_list"><code class="docutils literal notranslate"><span class="pre">uniquify_list()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.functions.update_dict_recursive"><code class="docutils literal notranslate"><span class="pre">update_dict_recursive()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cosinnus-utils-http-module">cosinnus.utils.http module</a></li>
+<li><a class="reference internal" href="#cosinnus-utils-permissions-module">cosinnus.utils.permissions module</a></li>
+<li><a class="reference internal" href="#cosinnus-utils-renderer-module">cosinnus.utils.renderer module</a></li>
+<li><a class="reference internal" href="#module-cosinnus.utils.test">cosinnus.utils.test module</a><ul>
+<li><a class="reference internal" href="#cosinnus.utils.test.get_fieldnames_from_multiform"><code class="docutils literal notranslate"><span class="pre">get_fieldnames_from_multiform()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.utils.test.get_fields_from_multiform"><code class="docutils literal notranslate"><span class="pre">get_fields_from_multiform()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cosinnus-utils-urls-module">cosinnus.utils.urls module</a></li>
+<li><a class="reference internal" href="#module-cosinnus.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="cosinnus.templatetags.html"
+                          title="previous chapter">cosinnus.templatetags package</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="cosinnus.views.html"
+                          title="next chapter">cosinnus.views package</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/ref/cosinnus.utils.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cosinnus.views.html" title="cosinnus.views package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cosinnus.templatetags.html" title="cosinnus.templatetags package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cosinnus 1.19.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="cosinnus.html" >cosinnus package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cosinnus.utils package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2013 - 2014, Sinnwerkstatt Medienagentur GmbH.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    </div>
+  </body>
+</html>

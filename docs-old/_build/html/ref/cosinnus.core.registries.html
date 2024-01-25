@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cosinnus.core.registries package &#8212; Cosinnus 1.19.6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=89b800e6" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=436d026a"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cosinnus.formats package" href="cosinnus.formats.html" />
+    <link rel="prev" title="cosinnus.core.decorators package" href="cosinnus.core.decorators.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cosinnus.formats.html" title="cosinnus.formats package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cosinnus.core.decorators.html" title="cosinnus.core.decorators package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cosinnus 1.19.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="cosinnus.html" >cosinnus package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="cosinnus.core.html" accesskey="U">cosinnus.core package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cosinnus.core.registries package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="cosinnus-core-registries-package">
+<h1>cosinnus.core.registries package<a class="headerlink" href="#cosinnus-core-registries-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="cosinnus-core-registries-apps-module">
+<h2>cosinnus.core.registries.apps module<a class="headerlink" href="#cosinnus-core-registries-apps-module" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="cosinnus-core-registries-attached-objects-module">
+<h2>cosinnus.core.registries.attached_objects module<a class="headerlink" href="#cosinnus-core-registries-attached-objects-module" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-cosinnus.core.registries.base">
+<span id="cosinnus-core-registries-base-module"></span><h2>cosinnus.core.registries.base module<a class="headerlink" href="#module-cosinnus.core.registries.base" title="Permalink to this heading">¶</a></h2>
+<p>The cosinnus app ecosystem allows apps to provide certain functionality that
+can be used from cosinnus core as well as other (cosinnus) apps.</p>
+<p>The initial implementation adapts the <code class="docutils literal notranslate"><span class="pre">ActionRegistry</span></code> or
+<code class="docutils literal notranslate"><span class="pre">DynamicFormFieldRegistry</span></code> from <code class="docutils literal notranslate"><span class="pre">django-dynamic-forms</span></code>
+<a class="reference external" href="https://github.com/Markush2010/django-dynamic-forms/tree/f306619e12">https://github.com/Markush2010/django-dynamic-forms/tree/f306619e12</a></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.core.registries.base.BaseRegistry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.core.registries.base.</span></span><span class="sig-name descname"><span class="pre">BaseRegistry</span></span><a class="reference internal" href="../_modules/cosinnus/core/registries/base.html#BaseRegistry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.core.registries.base.BaseRegistry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The <a class="reference internal" href="#cosinnus.core.registries.base.BaseRegistry" title="cosinnus.core.registries.base.BaseRegistry"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRegistry</span></code></a> provides a basic layout each registry should use.
+The main idea is to provide locking while registering new objects.</p>
+<p>Subclasses <strong>must</strong> implement a <a class="reference internal" href="#cosinnus.core.registries.base.BaseRegistry.register" title="cosinnus.core.registries.base.BaseRegistry.register"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register()</span></code></a> function.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.core.registries.base.BaseRegistry.register">
+<span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/core/registries/base.html#BaseRegistry.register"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.core.registries.base.BaseRegistry.register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers a new item in the registry.</p>
+<p>Implement something like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="p">:</span>
+        <span class="c1"># Here comes my fancy registration logic</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.core.registries.base.DictBaseRegistry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.core.registries.base.</span></span><span class="sig-name descname"><span class="pre">DictBaseRegistry</span></span><a class="reference internal" href="../_modules/cosinnus/core/registries/base.html#DictBaseRegistry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.core.registries.base.DictBaseRegistry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.core.registries.base.BaseRegistry" title="cosinnus.core.registries.base.BaseRegistry"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRegistry</span></code></a></p>
+<p>The <a class="reference internal" href="#cosinnus.core.registries.base.DictBaseRegistry" title="cosinnus.core.registries.base.DictBaseRegistry"><code class="xref py py-class docutils literal notranslate"><span class="pre">DictBaseRegistry</span></code></a> provides an key-value storage for registered
+objects. These objects will be stored in the order they are being
+registered.</p>
+<p>Furthermore an instance of a <a class="reference internal" href="#cosinnus.core.registries.base.DictBaseRegistry" title="cosinnus.core.registries.base.DictBaseRegistry"><code class="xref py py-class docutils literal notranslate"><span class="pre">DictBaseRegistry</span></code></a> provides container
+features like</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">some_item</span> <span class="o">=</span> <span class="n">my_dict_registry</span><span class="p">[</span><span class="s1">&#39;some-item&#39;</span><span class="p">]</span>
+
+<span class="n">other_item</span> <span class="o">=</span> <span class="n">my_dict_registry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;other-item&#39;</span><span class="p">)</span>  <span class="c1"># None</span>
+<span class="n">other_item</span> <span class="o">=</span> <span class="n">my_dict_registry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;other-item&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">)</span>  <span class="c1"># &#39;default&#39;</span>
+
+<span class="n">my_dict_registry</span><span class="p">[</span><span class="s1">&#39;some-item&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;something else&#39;</span>
+
+<span class="k">del</span> <span class="n">my_dict_registry</span><span class="p">[</span><span class="s1">&#39;some-item&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>as well as</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;some-item&#39;</span> <span class="ow">in</span> <span class="n">my_dict_registry</span><span class="p">:</span>
+    <span class="c1"># Do something</span>
+
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">my_dict_registry</span><span class="p">:</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">my_dict_registry</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.core.registries.base.DictBaseRegistry.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/core/registries/base.html#DictBaseRegistry.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.core.registries.base.DictBaseRegistry.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.core.registries.base.DictBaseRegistry.unregister">
+<span class="sig-name descname"><span class="pre">unregister</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cosinnus/core/registries/base.html#DictBaseRegistry.unregister"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cosinnus.core.registries.base.DictBaseRegistry.unregister" title="Permalink to this definition">¶</a></dt>
+<dd><p>Locks the internal storage and removes the object described by the
+given key from the storage if it exists.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="cosinnus-core-registries-urls-module">
+<h2>cosinnus.core.registries.urls module<a class="headerlink" href="#cosinnus-core-registries-urls-module" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="cosinnus-core-registries-widgets-module">
+<h2>cosinnus.core.registries.widgets module<a class="headerlink" href="#cosinnus-core-registries-widgets-module" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">cosinnus.core.registries package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#cosinnus-core-registries-apps-module">cosinnus.core.registries.apps module</a></li>
+<li><a class="reference internal" href="#cosinnus-core-registries-attached-objects-module">cosinnus.core.registries.attached_objects module</a></li>
+<li><a class="reference internal" href="#module-cosinnus.core.registries.base">cosinnus.core.registries.base module</a><ul>
+<li><a class="reference internal" href="#cosinnus.core.registries.base.BaseRegistry"><code class="docutils literal notranslate"><span class="pre">BaseRegistry</span></code></a><ul>
+<li><a class="reference internal" href="#cosinnus.core.registries.base.BaseRegistry.register"><code class="docutils literal notranslate"><span class="pre">BaseRegistry.register()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cosinnus.core.registries.base.DictBaseRegistry"><code class="docutils literal notranslate"><span class="pre">DictBaseRegistry</span></code></a><ul>
+<li><a class="reference internal" href="#cosinnus.core.registries.base.DictBaseRegistry.get"><code class="docutils literal notranslate"><span class="pre">DictBaseRegistry.get()</span></code></a></li>
+<li><a class="reference internal" href="#cosinnus.core.registries.base.DictBaseRegistry.unregister"><code class="docutils literal notranslate"><span class="pre">DictBaseRegistry.unregister()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cosinnus-core-registries-urls-module">cosinnus.core.registries.urls module</a></li>
+<li><a class="reference internal" href="#cosinnus-core-registries-widgets-module">cosinnus.core.registries.widgets module</a></li>
+<li><a class="reference internal" href="#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="cosinnus.core.decorators.html"
+                          title="previous chapter">cosinnus.core.decorators package</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="cosinnus.formats.html"
+                          title="next chapter">cosinnus.formats package</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/ref/cosinnus.core.registries.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cosinnus.formats.html" title="cosinnus.formats package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cosinnus.core.decorators.html" title="cosinnus.core.decorators package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cosinnus 1.19.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="cosinnus.html" >cosinnus package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="cosinnus.core.html" >cosinnus.core package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cosinnus.core.registries package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2013 - 2014, Sinnwerkstatt Medienagentur GmbH.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    </div>
+  </body>
+</html>
