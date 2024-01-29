@@ -243,6 +243,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     SESSION_COOKIE_NAME = f"{project_settings['COSINNUS_PORTAL_NAME']}-sessionid"
     # session expiry in seconds
     SESSION_COOKIE_AGE = 60*60*24*90 # 90 days
+    CSRF_TRUSTED_ORIGINS = [f'https://*.{project_settings["COSINNUS_PORTAL_URL"]}']
     
     
     """ --------------- DATE AND TIME ---------------- """
