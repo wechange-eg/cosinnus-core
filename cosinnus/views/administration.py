@@ -51,11 +51,14 @@ class AdministrationView(RequirePortalManagerMixin, TemplateView):
 administration = AdministrationView.as_view()
 
 
-class UserWelcomeEmailEditView(FormView):
-    
+class UserWelcomeEmailEditView(UpdateView):
+    model = CosinnusPortal
     form_class = UserWelcomeEmailForm
     template_name = 'cosinnus/administration/welcome_email.html'
-    
+
+    def get_object(self, queryset=None):
+        return CosinnusPortal.get_current()
+
     def dispatch(self, request, *args, **kwargs):
         if not check_user_superuser(request.user):
             raise PermissionDenied('You do not have permission to access this page.')
@@ -65,29 +68,15 @@ class UserWelcomeEmailEditView(FormView):
             messages.success(self.request, _('Test email sent!'))
             return redirect(self.get_success_url())
         return super(UserWelcomeEmailEditView, self).dispatch(request, *args, **kwargs)
-    
-    def get_initial(self, *args, **kwargs):
-        initial = super(UserWelcomeEmailEditView, self).get_initial(*args, **kwargs)
-        initial.update({
-            'is_active': self.portal.welcome_email_active,
-            'email_text': self.portal.welcome_email_text,
-        })
-        return initial
-    
+
     def get_context_data(self, *args, **kwargs):
         context = super(UserWelcomeEmailEditView, self).get_context_data(*args, **kwargs)
+        translated_welcome_email_text = self.portal['welcome_email_text']
         context.update({
-            'email_text': render_html_with_variables(self.request.user, self.portal.welcome_email_text),
+            'email_text': render_html_with_variables(self.request.user, translated_welcome_email_text),
         })
         return context
-    
-    def form_valid(self, form):
-        self.form = form
-        self.portal.welcome_email_active = form.cleaned_data.get('is_active', False)
-        self.portal.welcome_email_text = form.cleaned_data.get('email_text', '')
-        self.portal.save(update_fields=['welcome_email_active', 'welcome_email_text'])
-        return super(UserWelcomeEmailEditView, self).form_valid(form)
-    
+
     def get_success_url(self):
         return reverse('cosinnus:administration-welcome-email')
     

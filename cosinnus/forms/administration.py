@@ -13,14 +13,19 @@ from django.utils.translation import ngettext
 from django.utils.translation import gettext_lazy as _
 from django_select2.widgets import Select2MultipleWidget
 
+from cosinnus.forms.translations import TranslatedFieldsFormMixin
+from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.managed_tags import CosinnusManagedTag
 from cosinnus.models.newsletter import Newsletter, GroupsNewsletter
 from cosinnus.utils.user import create_base_user
 from cosinnus.utils.group import get_cosinnus_group_model
 
-class UserWelcomeEmailForm(forms.Form):
-    is_active = forms.BooleanField(required=False)
-    email_text = forms.CharField(required=False, strip=False, widget=forms.Textarea)
+
+class UserWelcomeEmailForm(TranslatedFieldsFormMixin, forms.ModelForm):
+
+    class Meta:
+        model = CosinnusPortal
+        fields = ['welcome_email_active', 'welcome_email_text']
 
 
 class CustomSelectMultiple(ModelMultipleChoiceField):

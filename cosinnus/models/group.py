@@ -516,7 +516,7 @@ class CosinnusPortalMembership(BaseMembership):
 
 
 @six.python_2_unicode_compatible
-class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
+class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, TranslateableFieldsModelMixin, models.Model):
     _CURRENT_PORTAL_CACHE_KEY = 'cosinnus/core/portal/current'
     _ALL_PORTAL_CACHE_KEY = 'cosinnus/core/portal/all'
 
@@ -616,7 +616,10 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, models.Model):
     # exact time when last digest was sent out for each of the period settings
     SAVED_INFO_LAST_DIGEST_SENT = 'last_digest_sent_for_period_%d'
     membership_class = CosinnusPortalMembership
-    
+
+    if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
+        translateable_fields = ['welcome_email_text']
+
     @classmethod
     def get_current(cls):
         """ Cached, returns the current Portal (always the same since dependent on configured Site) """
