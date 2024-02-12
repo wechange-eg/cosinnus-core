@@ -39,6 +39,7 @@ PRIORITY_CHOICES = (
 
 @six.python_2_unicode_compatible
 class TodoEntry(LikeableObjectMixin, BaseTaggableObjectModel):
+    """ Model for TODOs. """
 
     SORT_FIELDS_ALIASES = [
         ('title', 'title'),

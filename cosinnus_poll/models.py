@@ -40,6 +40,7 @@ def get_poll_image_filename(instance, filename):
 
 @six.python_2_unicode_compatible
 class Poll(LikeableObjectMixin, BaseTaggableObjectModel):
+    """ Model for polls. """
 
     SORT_FIELDS_ALIASES = [
         ('title', 'title'),

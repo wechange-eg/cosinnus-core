@@ -449,6 +449,10 @@ class RelatedGroups(models.Model):
 
 
 class CosinnusGroupMembership(BaseMembership):
+    """
+    Membership relation between a user and a group giving the user permission in that group
+    depending on the group settings and the membership type.
+    """
     group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, related_name='memberships',
         on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -705,6 +709,7 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
                           LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin,
                           CosinnusManagedTagAssignmentModelMixin, VideoEmbedFieldMixin, MembersManagerMixin, BBBRoomMixin,
                           AttachableObjectModel):
+    """ Abstract base group model implementation. Provides common functionality for all groups. """
     
     TYPE_PROJECT = 0
     TYPE_SOCIETY = 1
@@ -717,13 +722,13 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         (TYPE_CONFERENCE, _('Conference')),
     )
     
-    # the "normal" group join method - users request to be members, admin approve/decline them
+    #: the "normal" group join method - users request to be members, admin approve/decline them
     MEMBERSHIP_MODE_REQUEST = 0
-    # the "conference" method - users create an application, admins sort through them and
-    # accept/decline them with an optional reason
-    # Note: this replaces the old bool modelfield `use_conference_applications`
+    #: the "conference" method - users create an application, admins sort through them and
+    #: accept/decline them with an optional reason.
+    #: Note: this replaces the old bool modelfield `use_conference_applications`
     MEMBERSHIP_MODE_APPLICATION = 1
-    # the "everyone can join" method - users can become a member instantly without any approval system
+    #: the "everyone can join" method - users can become a member instantly without any approval system
     MEMBERSHIP_MODE_AUTOJOIN = 2
     
     # this can and will be overridden by the specific group models!
@@ -1657,6 +1662,8 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
 
 
 class CosinnusGroup(CosinnusBaseGroup):
+    """ Swappable group model implementation. """
+
     class Meta(CosinnusBaseGroup.Meta):
         swappable = 'COSINNUS_GROUP_OBJECT_MODEL'
 
