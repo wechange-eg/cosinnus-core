@@ -34,7 +34,7 @@ export function EventButtons(props: EventButtonsProps) {
     })
   }
   function copyInvitationToClipboard(e, guest: boolean) {
-    fetch(`/api/v2/conferences/invitation/?object_type=event&object_id=${event.props.id}&guest=${guest === true}`, {
+    fetch(`/api/v2/conferences/invitation/?object_type=conference_event&object_id=${event.props.id}&guest=${guest === true}`, {
       method: "GET"
     }).then(response => {
       if (response.status === 200) {
