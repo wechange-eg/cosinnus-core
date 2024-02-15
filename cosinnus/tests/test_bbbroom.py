@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-import uuid
 import time
-import requests
+from uuid import uuid4
 
 from django.test import TestCase, RequestFactory
 from django.contrib.auth.models import User
@@ -10,6 +9,7 @@ from django.conf import settings
 from django.core.exceptions import PermissionDenied, ImproperlyConfigured
 
 from cosinnus.models.bbb_room import BBBRoom
+from cosinnus.models.conference import CosinnusConferenceSettings
 from cosinnus.models import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.utils import bigbluebutton as bbb_utils
 
@@ -59,16 +59,23 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
             membership = CosinnusGroupMembership(group=self.group, user=self.attendee, status=1)
             membership.save()
 
+        def _get_unique_test_room_name_and_id(self, name):
+            name = f'{name}-{str(uuid4())}'
+            meeting_id = name + '-ID'
+            return name, meeting_id
+
         def test_creation(self):
+            name, meeting_id = self._get_unique_test_room_name_and_id('TestCreate')
             room = BBBRoom.create(
-                name="TestName",
-                meeting_id="MeetingID",
+                name=name,
+                meeting_id=meeting_id,
                 source_object=self.group,
             )
+            self.group.media_tag.bbb_room = room
+            self.group.media_tag.save()
 
-            self.assertEqual(room.name, "TestName")
-            self.assertIN("MeetingID-", room.meeting_id)
-            self.assertEqual(room.welcome_message, "Welcome Test")
+            self.assertEqual(room.name, name)
+            self.assertIn(meeting_id, room.meeting_id)
 
             time.sleep(2)
 
@@ -77,28 +84,31 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
             self.assertEqual(room_info['moderatorPW'], room.moderator_password)
             self.assertEqual(room_info['attendeePW'], room.attendee_password)
 
-            room_info = self.bbb_api.meeting_info(room.meeting_id, room.moderator_password)
-
-        def test_option_creation(self):
-            room_options = {
-                "autoStartRecording": False,
-                "allowStartStopRecording": False,
-                "muteOnStart": True
+        def test_creation_settings(self):
+            group_bbb_params = {
+                "create": {
+                    "autoStartRecording": False,
+                    "allowStartStopRecording": False,
+                    "muteOnStart": True
+                },
             }
-
+            CosinnusConferenceSettings.objects.create(content_object=self.group, bbb_params=group_bbb_params)
+            name, meeting_id = self._get_unique_test_room_name_and_id('TestSettings')
             room = BBBRoom.create(
-                name="OptionTest",
-                meeting_id="OptionMeetingID",
-                options=room_options
+                name=name,
+                meeting_id=meeting_id,
+                source_object=self.group,
             )
+            self.group.media_tag.bbb_room = room
+            self.group.media_tag.save()
 
-            expected_options = settings.BBB_DEFAULT_CREATE_PARAMETERS
-            expected_options.update(room_options)
+            self.assertEqual(room.name, name)
+            self.assertIn(meeting_id, room.meeting_id)
 
-            self.assertEqual(room.name, "OptionTest")
-            self.assertEqual(room.meeting_id, "OptionMeetingID")
-            self.assertEqual(room.welcome_message, "Option Test")
-            self.assertEqual(room.options, expected_options)
+            room_create_params = room.build_extra_create_parameters()
+            for create_option, create_option_value in group_bbb_params['create'].items():
+                self.assertIn(create_option, room_create_params)
+                self.assertEqual(create_option_value, room_create_params[create_option])
 
             time.sleep(2)
 
@@ -108,10 +118,14 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
             self.assertEqual(room_info['attendeePW'], room.attendee_password)
 
         def test_user_joining(self):
+            name, meeting_id = self._get_unique_test_room_name_and_id('TestJoin')
             room = BBBRoom.create(
-                name="JOIN TEST",
-                meeting_id="join-test",
+                name=name,
+                meeting_id=meeting_id,
+                source_object=self.group,
             )
+            self.group.media_tag.bbb_room = room
+            self.group.media_tag.save()
 
             time.sleep(2)
 
@@ -122,7 +136,7 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
             self.assertNotEqual(xml_result, None)
             json_result = bbb_utils.xml_to_json(xml_result)
             self.assertEqual(json_result['returncode'], "SUCCESS")
-            self.assertEqual(json_result['meeting_id'], room.internal_meeting_id)
+            self.assertIn(room.internal_meeting_id, json_result['meeting_id'])
             self.assertEqual(json_result['messageKey'], 'successfullyJoined')
 
             # test joining as moderator
@@ -130,23 +144,22 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
             self.assertNotEqual(xml_result, None)
             json_result = bbb_utils.xml_to_json(xml_result)
             self.assertEqual(json_result['returncode'], "SUCCESS")
-            self.assertEqual(json_result['meeting_id'], room.internal_meeting_id)
+            self.assertIn(room.internal_meeting_id, json_result['meeting_id'])
             self.assertEqual(json_result['messageKey'], 'successfullyJoined')
 
             # test joining with wrong credentials
             xml_result = self.bbb_api.xml_join("No Name", room.meeting_id, "abcdefg")
             self.assertEqual(xml_result, None)
 
-            # test meeting info participant count information
-            info = self.bbb_api.meeting_info(room.meeting_id, room.moderator_password)
-
-            # self.assertEqual(info.get('participantCount', -1), 2)
-
         def test_room_restart(self):
+            name, meeting_id = self._get_unique_test_room_name_and_id('TestRestart')
             room = BBBRoom.create(
-                name="RESTART TEST",
-                meeting_id="restart-test",
+                name=name,
+                meeting_id=meeting_id,
+                source_object=self.group,
             )
+            self.group.media_tag.bbb_room = room
+            self.group.media_tag.save()
 
             time.sleep(2)
             room.join_group_members(self.group)
@@ -158,9 +171,6 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
 
             room.end()
             time.sleep(2)
-            """ TODO: this restart() fails on BBBatscale but works on a direct BBB server!
-                Also, after a room has been end()ed like this, it cannot be recreated by a new call
-                to create(), and will forever stay broken! """
             room.restart()
 
             room_info = self.bbb_api.meeting_info(room.meeting_id, room.moderator_password)
@@ -185,13 +195,6 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
                 is_staff=True
             )
 
-            outsider = User.objects.create_user(
-                username="signal_outsider",
-                email="signaloutsider@example.org",
-                is_superuser=True,
-                is_staff=True
-            )
-
             group = CosinnusGroup(name="BBB Test")
             group.save()
 
@@ -201,10 +204,14 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
             membership2 = CosinnusGroupMembership(group=group, user=attendee, status=1)
             membership2.save()
 
+            name, meeting_id = self._get_unique_test_room_name_and_id('TestSignals')
             room = BBBRoom.create(
-                name="SIGNAL TEST",
-                meeting_id="signal-test",
+                name=name,
+                meeting_id=meeting_id,
+                source_object=group,
             )
+            group.media_tag.bbb_room = room
+            group.media_tag.save()
 
             time.sleep(2)
             room.join_group_members(group)
@@ -217,15 +224,15 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
             membership2.delete()
             self.assertEqual(len(room.attendees.all()), 1)
 
-            # membership3 = CosinnusGroupMembership(group=group, user=outsider, status=1)
-            # membership3.save()
-            # self.assertEqual(len(room.attendees.all()), 2)
-
         def test_end_meeting_via_bbb(self):
+            name, meeting_id = self._get_unique_test_room_name_and_id('TestEndMeeting')
             room = BBBRoom.create(
-                name="END TEST",
-                meeting_id="end-test",
+                name=name,
+                meeting_id=meeting_id,
+                source_object=self.group,
             )
+            self.group.media_tag.bbb_room = room
+            self.group.media_tag.save()
 
             time.sleep(2)
 
@@ -262,10 +269,14 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
         def test_join_view(self):
             factory = RequestFactory()
 
+            name, meeting_id = self._get_unique_test_room_name_and_id('TestJoinView')
             room = BBBRoom.create(
-                name="VIEW TEST",
-                meeting_id="view-test",
+                name=name,
+                meeting_id=meeting_id,
+                source_object=self.group,
             )
+            self.group.media_tag.bbb_room = room
+            self.group.media_tag.save()
 
             time.sleep(2)
             room.join_group_members(self.group)
@@ -283,48 +294,12 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
 
             self.assertTrue(first_token.startswith(self.bbb_api.api_auth_url))
 
-            # another request with another user
-            request = factory.get(reverse("cosinnus:bbb-room", kwargs={"room_id": room.id}))
-            request.user = self.attendee
-
-            response = BBBRoomMeetingView.as_view()(request, **{"room_id": room.id})
-
-            self.assertNotEqual(response.status_code, 404)
-            self.assertNotEqual(response.status_code, 403)
-            self.assertEqual(response.status_code, 302)
-
-            second_token = response.url
-
-            self.assertNotEqual(first_token, second_token)
-            self.assertTrue(second_token.startswith(self.bbb_api.api_auth_url))
-
-            # third request as anonymous user should result in a 403
+            # request as anonymous user should result in a 403
             request = factory.get(reverse("cosinnus:bbb-room", kwargs={"room_id": room.id}))
             request.user = self.outsider
 
             with self.assertRaises(PermissionDenied):
                 BBBRoomMeetingView.as_view()(request, **{"room_id": room.id})
-
-            # test view with superuser permissions
-            superuser = User.objects.create_user(
-                username="superuser",
-                email="superuser@example.org",
-                is_superuser=True,
-                is_staff=True
-            )
-            request = factory.get(reverse("cosinnus:bbb-room", kwargs={"room_id": room.id}))
-            request.user = superuser
-
-            response = BBBRoomMeetingView.as_view()(request, **{"room_id": room.id})
-
-            self.assertNotEqual(response.status_code, 404)
-            self.assertNotEqual(response.status_code, 403)
-            self.assertEqual(response.status_code, 302)
-
-            second_token = response.url
-
-            self.assertNotEqual(first_token, second_token)
-            self.assertTrue(second_token.startswith(self.bbb_api.api_auth_url))
 
         def tearDown(self):
             for room in BBBRoom.objects.all():

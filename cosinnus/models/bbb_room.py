@@ -29,7 +29,7 @@ from cosinnus.models.group import CosinnusPortal
 from django.core.exceptions import ImproperlyConfigured
 from cosinnus.utils.functions import clean_single_line_text
 from django.template.defaultfilters import truncatechars
-from cosinnus.models.membership import MEMBERSHIP_MEMBER, MANAGER_STATUS
+from cosinnus.models.membership import MANAGER_STATUS, MEMBER_STATUS
 from cosinnus.models.conference import CosinnusConferenceSettings
 from copy import copy
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -229,7 +229,7 @@ class BBBRoom(models.Model):
         """ Automatically joins all members of the given group into the room,
             with priviledges depending on their membership status """
         for membership in group.memberships.all():
-            if membership.status in MEMBERSHIP_MEMBER:
+            if membership.status in MEMBER_STATUS:
                 self.join_user(membership.user, as_moderator=bool(membership.status in MANAGER_STATUS))
 
     @property
