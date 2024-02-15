@@ -583,7 +583,8 @@ def _send_user_welcome_email_if_enabled(user, force=False):
     portal = CosinnusPortal.get_current()
     if not portal.welcome_email_active and not force:
         return
-    text = portal.welcome_email_text.strip() if portal.welcome_email_text else ''
+    # Using __getitem__ as it handles model field translations.
+    text = portal['welcome_email_text'].strip() if portal['welcome_email_text'] else ''
     if not force and (not text or not user): 
         return
     
