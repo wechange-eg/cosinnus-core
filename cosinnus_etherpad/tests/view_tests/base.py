@@ -7,6 +7,7 @@ from django.test import TestCase, Client
 from uuid import uuid4
 
 from cosinnus.models import CosinnusGroup
+from cosinnus.models.tagged import BaseTagObject
 
 
 class ViewTestCase(TestCase):
@@ -14,11 +15,12 @@ class ViewTestCase(TestCase):
     def setUp(self, *args, **kwargs):
         super(ViewTestCase, self).setUp(*args, **kwargs)
         self.client = Client()
-        self.group = CosinnusGroup.objects.create(
-            name='testgroup-' + str(uuid4()), public=True)
+        self.group = CosinnusGroup.objects.create(name='testgroup-' + str(uuid4()))
+        self.group.media_tag.visibility = BaseTagObject.VISIBILITY_ALL
+        self.group.media_tag.save()
         self.credential = 'admin'
-        self.admin = User.objects.create_superuser(
-            username=self.credential, email=None, password=self.credential)
+        self.admin = User.objects.create_superuser(username=self.credential, email='admin@example.com',
+                                                   password=self.credential)
 
     def tearDown(self, *args, **kwargs):
         # explicitly need to delete object, otherwise signals won't be fired

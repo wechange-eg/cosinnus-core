@@ -7,12 +7,14 @@ from django.core.management import execute_from_command_line
 # test parameters
 TEST_ROCKET_CHAT_ARG = "--test-rocketchat"
 TEST_BBB_ARG = "--test-bbb"
+TEST_ETHERPAD_ARG = "--test-etherpad"
 TEST_PRINT_TIME_ARG = "--print-time"
 
 # test apps
 TEST_APPS_BASE = ['cosinnus', 'cosinnus_event', 'cosinnus_todo']
 TEST_APPS_ROCKET_CHAT = ['cosinnus.tests.test_rocketchat']
-TEST_APPS_BBB = ['cosinnus.tests.test_bbb']
+TEST_APPS_BBB = ['cosinnus.tests.test_bbbroom']
+TEST_APPS_ETHERPAD = ['cosinnus_etherpad']
 
 
 def cosinnus_manage(base_path):
@@ -68,7 +70,13 @@ def cosinnus_manage(base_path):
             custom_test = any('.tests.' in arg for arg in args)
             if not custom_test:
                 args.extend(TEST_APPS_BBB)
-            args.remove(TEST_ROCKET_CHAT_ARG)
+            args.remove(TEST_BBB_ARG)
+        elif TEST_ETHERPAD_ARG in args:
+            settings_module = "cosinnus.tests.settings.test_etherpad"
+            custom_test = any('.tests.' in arg for arg in args)
+            if not custom_test:
+                args.extend(TEST_APPS_ETHERPAD)
+            args.remove(TEST_ETHERPAD_ARG)
         elif not custom_test:
             args.extend(TEST_APPS_BASE)
         os.environ["DJANGO_SETTINGS_MODULE"] = settings_module

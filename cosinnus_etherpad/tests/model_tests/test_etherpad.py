@@ -16,10 +16,9 @@ class EtherpadTest(TestCase):
 
     def setUp(self):
         super(EtherpadTest, self).setUp()
-        self.group = CosinnusGroup.objects.create(
-            name='testgroup-' + str(uuid4()))
-        self.pad = Etherpad.objects.create(
-            group=self.group, title=self.pad_title)
+        self.group = CosinnusGroup.objects.create(name='testgroup-' + str(uuid4()))
+        self.admin = User.objects.create_superuser(username='admin', email='admin@example.com', password='admin')
+        self.pad = Etherpad.objects.create(group=self.group, title=self.pad_title, creator=self.admin)
 
     def tearDown(self):
         # explicitly need to delete object, otherwise signals won't be fired
