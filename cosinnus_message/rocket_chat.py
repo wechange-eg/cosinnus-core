@@ -102,7 +102,7 @@ def get_cached_rocket_connection(rocket_username, password, server_url, reset=Fa
         except Timeout as e:
             # When a timeout error occurred disable rocketchat connections for 5 minutes to avoid overloading our
             # webserver with pending requests.
-            set_rocket_down()
+            #set_rocket_down()
             close_rocket_chat_session()
             logger.exception(e)
             raise RocketChatDownException()
@@ -122,7 +122,7 @@ def get_cached_rocket_connection(rocket_username, password, server_url, reset=Fa
         except Timeout as e:
             # When a timeout error occurred disable rocketchat connections for 5 minutes to avoid overloading our
             # webserver with pending requests.
-            set_rocket_down()
+            #set_rocket_down()
             close_rocket_chat_session()
             logger.exception(e)
             raise RocketChatDownException()
@@ -1132,19 +1132,19 @@ class RocketChatConnection:
             else:
                 self.groups_remove_moderator(membership)
     
-    def groups_invite(self, membership):
+    def groups_invite(self, user, group):
         """
         Create membership for default channels
         :param group:
         :return:
         """
-        user_id = self.get_user_id(membership.user)
+        user_id = self.get_user_id(user)
         if not user_id:
             return
         
         # Create role in general and news group
         for room in settings.COSINNUS_ROCKET_GROUP_ROOM_KEYS:
-            room_id = self.get_group_id(membership.group, room_key=room)
+            room_id = self.get_group_id(group, room_key=room)
             if room_id:
                 response = self.rocket.groups_invite(room_id=room_id, user_id=user_id).json()
                 if not response.get('success'):

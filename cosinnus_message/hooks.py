@@ -308,6 +308,11 @@ if settings.COSINNUS_ROCKET_ENABLED:
                         logger.exception(e)
             CosinnusRocketMembershipUpdateThread().start()
         elif not is_pending:
+            print('#### DELEGATING TO CELERY ####')
+            from cosinnus_message.tasks import rocket_group_membership_invite
+            rocket_group_membership_invite.delay(instance.user.pk, instance.group.pk)
+            return
+
             # prefetch related objects and do a threaded call
             prefetch_related_objects([instance], 'group')
             prefetch_related_objects([instance], 'user__cosinnus_profile')
