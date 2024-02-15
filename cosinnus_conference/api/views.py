@@ -124,6 +124,9 @@ class ConferenceViewSet(RequireGroupReadMixin, BaseConferenceViewSet):
             object_class = CosinnusGroup
         elif object_type == 'event':
             object_class = Event
+        elif object_type == 'conference_event':
+            object_class = ConferenceEvent
+
         if object_class and object_id:
             obj = object_class.objects.filter(id=object_id).first()
         if not obj:
