@@ -5,6 +5,7 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.fields import get_error_detail, empty as drf_empty
 
+from cosinnus.dynamic_fields import dynamic_fields
 from cosinnus.dynamic_fields.dynamic_formfields import EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS
 
 
@@ -33,8 +34,9 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
         for field_name, field_options in self.DYNAMIC_FIELD_SETTINGS.items():
             if self.filter_included_fields_by_option_name and not getattr(field_options, self.filter_included_fields_by_option_name, False):
                 continue
-            # all dynamic fields are of type (drf serializer) CharField, validation will take place manually
+            # dynamic fields are of type (drf serializer) CharField, BooleanField or IntergerField, validation will take place manually
             if field_options.multiple:
+                # All lists are serialized as CharField lists.
                 field = serializers.ListField(
                     child=serializers.CharField(
                         required=field_options.required if not self.all_fields_optional else False,
@@ -49,14 +51,25 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
                     help_text=f'This is a dynamic field of data type: <List>({field_options.type})'
                 )
             else:
-                field = serializers.CharField(
-                    required=field_options.required if not self.all_fields_optional else False,
-                    allow_blank=not field_options.required if self.all_fields_optional else True,
-                    allow_null=not field_options.required if self.all_fields_optional else True,
-                    default=drf_empty if field_options.required else field_options.default,
-                    source=f'cosinnus_profile.dynamic_fields.{field_name}',
-                    help_text=f'This is a dynamic field of data type: {field_options.type}'
-                )
+                # Serialize as CharField, BooleanField or IntegerField depending on the field type.
+                default_serializer = serializers.CharField
+                field_serializer_map = {
+                    dynamic_fields.DYNAMIC_FIELD_TYPE_BOOLEAN: serializers.BooleanField,
+                    dynamic_fields.DYNAMIC_FIELD_TYPE_INT: serializers.IntegerField,
+                }
+                field_serializer = field_serializer_map.get(field_options.type, default_serializer)
+                serializer_params = {
+                    'required': field_options.required if not self.all_fields_optional else False,
+                    'allow_null': not field_options.required if self.all_fields_optional else True,
+                    'default': drf_empty if field_options.required else field_options.default,
+                    'source': f'cosinnus_profile.dynamic_fields.{field_name}',
+                    'help_text': f'This is a dynamic field of data type: {field_options.type}'
+                }
+                if field_serializer == serializers.CharField:
+                    serializer_params.update({
+                        'allow_blank': not field_options.required if self.all_fields_optional else True,
+                    })
+                field = field_serializer(**serializer_params)
             setattr(self, field_name, field)
             self._declared_fields[field_name] = field
         super().__init__(*args, **kwargs)
