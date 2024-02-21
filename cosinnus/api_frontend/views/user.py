@@ -1,6 +1,7 @@
 from urllib.parse import unquote
 
 from django.contrib.auth import login, logout
+from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.urls.base import reverse
 from django.utils.encoding import force_str
 from django.utils.http import url_has_allowed_host_and_scheme
@@ -26,6 +27,7 @@ from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResp
 from cosinnus.api_frontend.serializers.user import CosinnusUserLoginSerializer, \
     CosinnusUserSignupSerializer, CosinnusHybridUserSerializer
 from cosinnus.conf import settings
+from cosinnus.core.middleware.login_ratelimit_middleware import check_user_login_ratelimit
 from cosinnus.models import CosinnusPortal
 from cosinnus.utils.jwt import get_tokens_for_user
 from cosinnus.utils.permissions import IsNotAuthenticated, AllowNone
@@ -121,6 +123,16 @@ class LoginView(LoginViewAdditionalLogicMixin, APIView):
         )}
     )
     def post(self, request):
+        # deny login if the attempted username for login has been rate limited after too many attempts
+        # (the failed login registering itself is set up in `LoginRateLimitMiddleware.__init__()`
+        username = request.data.get('username', None)
+        if username:
+            limit_expires = check_user_login_ratelimit(username)
+            if limit_expires:
+                ratelimit_msg = ('You have tried to log in too many times. You may try to log in again in: %(duration)s.') % {
+                             'duration': naturaltime(limit_expires)}
+                raise serializers.ValidationError({'non_field_errors': [ratelimit_msg]})
+        
         serializer = CosinnusUserLoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
