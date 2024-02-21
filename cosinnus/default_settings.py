@@ -670,7 +670,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus_exchange.cron.PullData',
         'cosinnus_marketplace.cron.DeactivateExpiredOffers',
         'cosinnus_message.cron.ProcessDirectReplyMails',
-        #'cosinnus_notifications.cron.DeleteOldNotificationAlerts', # disabled until manual cleanup of old Alerts
+        'cosinnus_notifications.cron.DeleteOldNotificationAlerts',
     ]
     # delete cronjob logs older than 30 days
     DJANGO_CRON_DELETE_LOGS_OLDER_THAN = 30
