@@ -11,6 +11,7 @@ from cosinnus_event.models import ConferenceEvent, ConferenceEventAttendanceTrac
 # FIXME: Make this pagination class default in REST_FRAMEWORK setting
 from rest_framework.decorators import action
 from cosinnus.utils.permissions import check_user_superuser, check_object_write_access, check_object_read_access
+from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.models.group_extra import CosinnusConference, CosinnusGroup
 from cosinnus.api.views.mixins import CosinnusFilterQuerySetMixin,\
     PublicCosinnusGroupFilterMixin, CosinnusPaginateMixin
@@ -144,7 +145,11 @@ class ConferenceViewSet(RequireGroupReadMixin, BaseConferenceViewSet):
                 invitation = bbb_room.get_invitation_text()
             else:
                 # Use platform-user invitation text.
-                invitation = bbb_room.get_invitation_text(obj.get_absolute_url())
+                if object_type == 'group':
+                    join_url = group_aware_reverse('cosinnus:group-meeting', kwargs={'group': obj})
+                else:
+                    join_url = obj.get_absolute_url()
+                invitation = bbb_room.get_invitation_text(join_url)
             response['invitation'] = invitation
 
             # Get the alert message.
