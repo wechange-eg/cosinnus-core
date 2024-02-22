@@ -5,6 +5,8 @@ from builtins import object
 
 from django import forms
 from django.contrib import admin, messages
+from django.contrib.admin.models import LogEntry, CHANGE
+from django.contrib.admin.options import get_content_type_for_model
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login as django_login
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
@@ -15,6 +17,7 @@ from django.db.models import JSONField
 from django.db.models.signals import post_save
 from django.utils.crypto import get_random_string
 from django.utils.safestring import mark_safe
+from django.utils import translation
 from django.utils.translation import gettext_lazy as _
 from django_reverse_admin import ReverseModelAdmin
 
@@ -29,8 +32,7 @@ from cosinnus.models.group import CosinnusGroupMembership, \
     CosinnusPortal, CosinnusPortalMembership, \
     CosinnusGroup, CosinnusPermanentRedirect, CosinnusUnregisterdUserGroupInvite, RelatedGroups, \
     CosinnusGroupInviteToken, UserGroupGuestAccess
-from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety, \
-    CosinnusConference
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety, CosinnusConference, ensure_group_type
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.mail import QueuedMassMail
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagType,\
@@ -51,6 +53,27 @@ from cosinnus.forms.widgets import PrettyJSONWidget
 from annoying.functions import get_object_or_None
 
 from cosinnus.utils.urls import group_aware_reverse
+
+
+def admin_log_action(user, instance, message):
+    """
+    Creates an admin history entry for an instance that can be seen in the instances django admin history  view.
+    The message is translated into the default platform language set in the LANGUAGE_CODE setting.
+    """
+    model = type(instance)
+    if model == CosinnusGroup:
+        # use the proxy group model
+        model = ensure_group_type(instance)
+    content_type = get_content_type_for_model(model)
+    with translation.override(settings.LANGUAGE_CODE):
+        LogEntry.objects.log_action(
+            user_id=user.id,
+            content_type_id=content_type.pk,
+            object_id=instance.id,
+            object_repr=str(instance),
+            action_flag=CHANGE,
+            change_message=message
+        )
 
 
 class SingleDeleteActionMixin(object):
