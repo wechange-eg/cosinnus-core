@@ -17,7 +17,8 @@ class FrontendMiddleware(MiddlewareMixin):
     """
     param_key = "v"
     param_value = "3"
-    param_value_exempt = "2"
+    param_key_exempt = "v2"
+    param_value_exempt = "true"
 
     def process_request(self, request):
         if settings.COSINNUS_V3_FRONTEND_ENABLED:
@@ -31,7 +32,7 @@ class FrontendMiddleware(MiddlewareMixin):
                     return redirect(redirect_unprefixed)
             
             # do not redirect if the redirect exempt value v=2 is specifically set
-            if request.GET.get(self.param_key, None) == self.param_value_exempt:
+            if request.GET.get(self.param_key_exempt, None) == self.param_value_exempt:
                 return
             
             # currently do not affect login requests within the oauth flow
