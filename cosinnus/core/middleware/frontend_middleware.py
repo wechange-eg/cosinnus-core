@@ -17,6 +17,7 @@ class FrontendMiddleware(MiddlewareMixin):
     """
     param_key = "v"
     param_value = "3"
+    param_value_exempt = "2"
 
     def process_request(self, request):
         if settings.COSINNUS_V3_FRONTEND_ENABLED:
@@ -28,6 +29,10 @@ class FrontendMiddleware(MiddlewareMixin):
                     del request_tokens[3]
                     redirect_unprefixed = '/'.join(request_tokens)
                     return redirect(redirect_unprefixed)
+            
+            # do not redirect if the redirect exempt value v=2 is specifically set
+            if request.GET.get(self.param_key, None) == self.param_value_exempt:
+                return
             
             # currently do not affect login requests within the oauth flow
             if ('/o/authorize' in request.build_absolute_uri() or any(['/o/authorize' in unquote(request_token) for request_token in request_tokens])) \
@@ -44,12 +49,22 @@ class FrontendMiddleware(MiddlewareMixin):
             if request_tokens[3] == 'login' and request.user.is_authenticated:
                 return
             
-            # check if the URL matches any of the v3 redirectable URLs
+            # check if we should redirect this request to the v3 frontend
             matched = False
-            for url_pattern in settings.COSINNUS_V3_FRONTEND_URL_PATTERNS:
-                if re.match(url_pattern, request.path):
-                    matched = True
-                    break
+            if settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
+                # in everywhere-enabled blacklist mode, we check if we *shouldn't* redirect to the v3 frontend
+                matched = True
+                for url_pattern in settings.COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS:
+                    if re.match(url_pattern, request.path):
+                        matched = False
+                        break
+            else:
+                # in the whitelist mode, check only if the URL matches any of the v3 redirectable URLs
+                for url_pattern in settings.COSINNUS_V3_FRONTEND_URL_PATTERNS:
+                    if re.match(url_pattern, request.path):
+                        matched = True
+                        break
+            
             if matched:
                 params = dict(parse_qsl(request.META["QUERY_STRING"]))
                 if params.get(self.param_key) != self.param_value:

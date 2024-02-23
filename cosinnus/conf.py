@@ -26,6 +26,56 @@ class CosinnusConf(AppConf):
     
     class Meta(object):
         prefix = 'COSINNUS'
+    
+    # a list of "startswith" URLs that will never be redirected by any middleware logic
+    # these URLs are allowed to be accessed for anonymous accounts, even when everything else
+    # is locked down. all integrated-API related URLs and all login/logout URLs should be in here!
+    NEVER_REDIRECT_URLS = [
+        '/admin/',
+        '/admin/login/',
+        '/admin/logout/',
+        '/administration/login-2fa/',
+        '/media/',
+        '/static/',
+        '/language',
+        '/api/v1/user/me/',
+        '/api/v1/login/',
+        '/api/v2/navbar/',
+        '/api/v2/header/',
+        '/api/v2/footer/',
+        '/api/v2/statistics/',
+        '/api/v2/token/',
+        
+        '/api/v3/login',
+        '/api/v3/logout',
+        '/api/v3/authinfo',
+        '/api/v3/portal/topics',
+        '/api/v3/portal/tags',
+        '/api/v3/portal/managed_tags',
+        '/api/v3/portal/userprofile_dynamicfields',
+        '/api/v3/portal/settings',
+        '/api/v3/user/profile',
+        '/api/v3/signup',
+        
+        '/api/v3/content/main',
+        
+        '/o/',
+        '/group/forum/cloud/oauth2/',
+        f'/group/{settings.NEWW_FORUM_GROUP_SLUG}/cloud/oauth2/',
+        '/account/verify_email/',
+        
+        # all bbb API endpoints and guest-access views are unlocked (sensitive endpoints have their own logged-in checks)
+        '/bbb/',
+        
+        # these deprecated URLs can be removed from the filter list once the URLs are removed
+        # and their /account/ URL-path equivalents are the only remaining version of the view URL
+        '/administration/list-unsubscribe/',
+        '/administration/list-unsubscribe-result/',
+        '/administration/deactivated/',
+        '/administration/activate/',
+        '/administration/deactivate/',
+        '/administration/verify_email/',
+    ]
 
     #: A mapping of ``{'app1.Model1': ['app2.Model2', 'app3.Model3']}`` that
     #: defines the tells, that given an instance of ``app1.Model1``, objects
@@ -879,8 +929,15 @@ class CosinnusConf(AppConf):
     
     # whether or not to use redirects to the v3 frontend
     # by appending a '?v=3' GET param for certain URL paths
-    # paths are defined in 
+    # paths are defined in V3_FRONTEND_URL_PATTERNS
     V3_FRONTEND_ENABLED = False
+    
+    # if this is enabled while V3_FRONTEND_ENABLED==True,
+    # ALL page access are redirected to the v3 frontend
+    # by appending a '?v=3' GET param,
+    # with the exception of paths defined in V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS
+    # this can also be prevented by setting the ?v=2 GET param!
+    V3_FRONTEND_EVERYWHERE_ENABLED = False
     
     # a workaround for the frontend using languages as URL prefix
     # instead of as cookie setting, any request with a language in this list
@@ -901,6 +958,14 @@ class CosinnusConf(AppConf):
         "^/setup/",
         "^api/auth/",
     ]
+    
+    # URL paths that get are exempted from being redirected to the new frontend
+    # if V3_FRONTEND_EVERYWHERE_ENABLED==True and V3_FRONTEND_ENABLED==True
+    V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS = [
+        "^/logout/$",
+        "^/api", # any paths with api prefixes
+        "^/o/", # any oauth paths
+    ] + NEVER_REDIRECT_URLS # any other defined never-to-redirect-urls
 
     # Languages supported by the v3 frontend. The portal language selection from LANGUAGES is restricted to these.
     V3_FRONTEND_SUPPORTED_LANGUAGES = ['en', 'de']

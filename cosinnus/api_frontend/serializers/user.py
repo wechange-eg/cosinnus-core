@@ -173,7 +173,7 @@ def validate_contact_info_pairs(pairs_array):
         Used in field `UserProfile.dynamic_fields[PROFILE_DYNAMIC_FIELDS_CONTACTS]`
         example: [{type: "email|phone_number|url", value: "mail@mail.com"}, ...]
     """
-    ACCEPTABLE_TYPES = ['email', 'phone_number', 'url']
+    ACCEPTABLE_TYPES = ['email', 'phone_number', 'url', 'social_media_url']
     if pairs_array:
         for pair_dict in pairs_array:
             if 'type' not in pair_dict or 'value' not in pair_dict:
@@ -187,7 +187,7 @@ def validate_contact_info_pairs(pairs_array):
                     EmailValidator()(pair_dict['value'])
                 except DjangoValidationError:
                     raise ValidationError(f'Contact_infos: A pair ({str(pair_dict)}) had an invalid email!')
-            elif pair_dict['type'] == 'url':
+            elif pair_dict['type'] in ['url', 'social_media_url']:
                 try:
                     URLValidator()(pair_dict['value'])
                 except DjangoValidationError:

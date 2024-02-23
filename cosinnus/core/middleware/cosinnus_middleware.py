@@ -57,56 +57,9 @@ def CosinnusPermanentRedirect():
     return _CosinnusPermanentRedirect
 
 
-# these URLs are allowed to be accessed for anonymous accounts, even when everything else
-# is locked down. all integrated-API related URLs and all login/logout URLs should be in here!
-NEVER_REDIRECT_URLS = [
-    '/admin/',
-    '/admin/login/',
-    '/admin/logout/',
-    '/administration/login-2fa/',
-    '/media/',
-    '/static/',
-    '/language',
-    '/api/v1/user/me/',
-    '/api/v1/login/',
-    '/api/v2/navbar/',
-    '/api/v2/header/',
-    '/api/v2/footer/',
-    '/api/v2/statistics/',
-    '/api/v2/token/',
-    
-    '/api/v3/login',
-    '/api/v3/logout',
-    '/api/v3/authinfo',
-    '/api/v3/portal/topics',
-    '/api/v3/portal/tags',
-    '/api/v3/portal/managed_tags',
-    '/api/v3/portal/userprofile_dynamicfields',
-    '/api/v3/portal/settings',
-    '/api/v3/user/profile',
-    '/api/v3/signup',
-    
-    '/api/v3/content/main',
-    
-    '/o/',
-    '/group/forum/cloud/oauth2/',
-    f'/group/{settings.NEWW_FORUM_GROUP_SLUG}/cloud/oauth2/',
-    '/account/verify_email/',
-    
-    # all bbb API endpoints and guest-access views are unlocked (sensitive endpoints have their own logged-in checks)
-    '/bbb/',
-    
-    # these deprecated URLs can be removed from the filter list once the URLs are removed
-    # and their /account/ URL-path equivalents are the only remaining version of the view URL
-    '/administration/list-unsubscribe/',
-    '/administration/list-unsubscribe-result/',
-    '/administration/deactivated/',
-    '/administration/activate/',
-    '/administration/deactivate/',
-    '/administration/verify_email/',
-]
 
-LOGIN_URLS = NEVER_REDIRECT_URLS + [
+
+LOGIN_URLS = settings.COSINNUS_NEVER_REDIRECT_URLS + [
     '/login/',
     '/logout/',
     '/integrated/login/',
@@ -479,7 +432,7 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
         usually to force some routing behaviour, like logged-in users being redirected off /login """
     
     def process_request(self, request):
-        if any([request.path.startswith(never_path) for never_path in NEVER_REDIRECT_URLS]):
+        if any([request.path.startswith(never_path) for never_path in settings.COSINNUS_NEVER_REDIRECT_URLS]):
             return
         
         user = request.user
