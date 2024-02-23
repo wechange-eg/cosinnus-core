@@ -1035,7 +1035,7 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                                 "label": "Cloud",
                                 "url": "https://cloud.localhost/",
                                 "is_external": True,
-                                "icon": "fa-cloud",
+                                "icon": "cloud",
                                 "image": None,
                                 "badge": None,
                                 "selected": False
@@ -1045,7 +1045,7 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                                 "label": "Rocket.Chat",
                                 "url": "/messages/",
                                 "is_external": False,
-                                "icon": "fa-envelope",
+                                "icon": "messages",
                                 "image": None,
                                 "badge": None,
                                 "selected": False
@@ -1140,7 +1140,7 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
             # cloud
             if settings.COSINNUS_CLOUD_ENABLED:
                 services_navigation_items.append(
-                    MenuItem(_('Cloud'), settings.COSINNUS_CLOUD_NEXTCLOUD_URL, icon='fa-cloud',
+                    MenuItem(_('Cloud'), settings.COSINNUS_CLOUD_NEXTCLOUD_URL, icon='cloud',
                              is_external=settings.COSINNUS_CLOUD_OPEN_IN_NEW_TAB, id='Cloud')
                 )
 
@@ -1148,12 +1148,12 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
             if 'cosinnus_message' not in settings.COSINNUS_DISABLED_COSINNUS_APPS:
                 if settings.COSINNUS_ROCKET_ENABLED:
                     services_navigation_items.append(
-                        MenuItem('Rocket.Chat', reverse('cosinnus:message-global'), icon='fa-envelope',
+                        MenuItem('Rocket.Chat', reverse('cosinnus:message-global'), icon='messages',
                                  is_external=settings.COSINNUS_ROCKET_OPEN_IN_NEW_TAB, id='Chat')
                     )
                 else:
                     services_navigation_items.append(
-                        MenuItem( _('Messages'), reverse('postman:inbox'), icon='fa-envelope', id='Messages')
+                        MenuItem( _('Messages'), reverse('postman:inbox'), icon='messages', id='Messages')
                     )
         main_navigation_items['services'] = services_navigation_items
 
