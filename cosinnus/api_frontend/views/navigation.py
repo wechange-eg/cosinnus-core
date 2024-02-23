@@ -243,10 +243,14 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                 for id, label, url, icon in settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS
             ])
         if community_space_items:
+            community_space_actions = [
+                MenuItem(CosinnusSocietyTrans.BROWSE_ALL, reverse('cosinnus:group__group-list'), id="BrowseGroups"),
+                MenuItem(CosinnusProjectTrans.BROWSE_ALL, reverse('cosinnus:group-list'), id="BrowseProjects"),
+            ]
             community_space = {
                 'header': f'{settings.COSINNUS_PORTAL_NAME.upper()} {_("Community")}',
                 'items': community_space_items,
-                'actions': [],
+                'actions': community_space_actions,
             }
         spaces['community'] = community_space
 
@@ -263,6 +267,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                 conference_space_actions = [
                     MenuItem(CosinnusConferenceTrans.CREATE_NEW, reverse('cosinnus:conference__group-add'),
                              id='CreateConference'),
+                    MenuItem(CosinnusConferenceTrans.BROWSE_ALL, reverse('cosinnus:conference__group-list'),
+                             id="BrowseConferenes"),
                 ]
             if conference_space_items or conference_space_actions:
                 conference_space = {
