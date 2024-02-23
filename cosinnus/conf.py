@@ -935,7 +935,7 @@ class CosinnusConf(AppConf):
     # if this is enabled while V3_FRONTEND_ENABLED==True,
     # ALL page access are redirected to the v3 frontend
     # by appending a '?v=3' GET param,
-    # with the exception of paths defined in V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXCEPTIONS
+    # with the exception of paths defined in V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS
     # this can also be prevented by setting the ?v=2 GET param!
     V3_FRONTEND_EVERYWHERE_ENABLED = False
     
@@ -961,7 +961,7 @@ class CosinnusConf(AppConf):
     
     # URL paths that get are exempted from being redirected to the new frontend
     # if V3_FRONTEND_EVERYWHERE_ENABLED==True and V3_FRONTEND_ENABLED==True
-    V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXCEPTIONS = [
+    V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS = [
         "^/logout/$",
         "^/api", # any paths with api prefixes
         "^/o/", # any oauth paths

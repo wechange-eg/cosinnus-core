@@ -5,7 +5,7 @@ from urllib.parse import urlparse
 
 import requests
 from bs4 import BeautifulSoup
-from django.http import QueryDict
+from django.http import QueryDict, HttpResponseRedirect
 from django.utils.crypto import get_random_string
 from django.utils.translation import gettext_lazy as _
 from drf_yasg import openapi
@@ -23,6 +23,7 @@ from cosinnus.models import CosinnusPortal
 from cosinnus.models.user_dashboard import MenuItem, FONT_AWESOME_CLASS_FILTER
 from cosinnus.utils.functions import uniquify_list
 from cosinnus.utils.http import remove_url_param
+from cosinnus.conf import settings
 
 logger = logging.getLogger('cosinnus')
 
@@ -49,6 +50,7 @@ class MainContentView(APIView):
     """ v3_content_main
     
     An endpoint that returns HTML content for any legacy view on the portal.
+    Will not work on URL targets that match exemptions defined in `COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS`
     
     Return values:
       * `resolved_url`: the resolved URL after following all redirects the queried `url` parameter might have caused, and the actual URL from which the content HTML is delivered
@@ -195,6 +197,19 @@ class MainContentView(APIView):
             if not self.url.startswith('/'):
                 self.url = '/' + self.url
             self.url = CosinnusPortal.get_current().get_domain() + self.url
+        
+        # check if the target URL is one exempted for v3 frontend resolution - we do not accept those
+        matched_exemption = False
+        target_url_path = urlparse(self.url).path
+        # append slash since with a missing resolver it wouldn't be auto appended and might miss matches
+        if not target_url_path.endswith('/'):
+            target_url_path += '/'
+        for url_pattern in settings.COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS:
+            if re.match(url_pattern, target_url_path):
+                matched_exemption = True
+                break
+        if matched_exemption:
+            return HttpResponseRedirect(self.url)
         
         # resolve the response, including redirects
         response = self._resolve_url_via_query(self.url, django_request)

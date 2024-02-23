@@ -54,7 +54,7 @@ class FrontendMiddleware(MiddlewareMixin):
             if settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
                 # in everywhere-enabled blacklist mode, we check if we *shouldn't* redirect to the v3 frontend
                 matched = True
-                for url_pattern in settings.COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXCEPTIONS:
+                for url_pattern in settings.COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS:
                     if re.match(url_pattern, request.path):
                         matched = False
                         break
