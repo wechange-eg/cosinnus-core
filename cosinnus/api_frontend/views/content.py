@@ -19,10 +19,11 @@ from announcements.models import Announcement
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.core.decorators.views import get_group_for_request
+from cosinnus.core.middleware.frontend_middleware import FrontendMiddleware
 from cosinnus.models import CosinnusPortal
 from cosinnus.models.user_dashboard import MenuItem, FONT_AWESOME_CLASS_FILTER
 from cosinnus.utils.functions import uniquify_list
-from cosinnus.utils.http import remove_url_param
+from cosinnus.utils.http import remove_url_param, add_url_param
 from cosinnus.conf import settings
 
 logger = logging.getLogger('cosinnus')
@@ -212,13 +213,19 @@ class MainContentView(APIView):
             return HttpResponseRedirect(self.url)
         
         # resolve the response, including redirects
-        response = self._resolve_url_via_query(self.url, django_request)
+        # add the v3-exempt parameter to the URL so we do not actually parse the v3-served response
+        v3_exempted_url = add_url_param(self.url, FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt)
+        response = self._resolve_url_via_query(v3_exempted_url, django_request)
+        
         # fake our django request to act as if the resolved url was the original one
         django_request = self._transform_request_to_resolved(django_request, response.url)
         # get the relative resolved url from the target url (following all redirects)
         resolved_url = django_request.path
         if django_request.GET:
             resolved_url += '?' + django_request.GET.urlencode()
+            # remove the v3-exempt parameter from the resolved URL again
+            resolved_url = remove_url_param(self.url, FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt)
+        
         # determine group for request
         self._resolve_request_group(resolved_url, django_request)
         # parse the response's html
