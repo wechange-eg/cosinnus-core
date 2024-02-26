@@ -22,6 +22,11 @@ class FrontendMiddleware(MiddlewareMixin):
 
     def process_request(self, request):
         if settings.COSINNUS_V3_FRONTEND_ENABLED:
+            # only ever redirect GET methods
+            print(request.method)
+            if request.method != 'GET':
+                return
+            
             request_tokens = request.build_absolute_uri().split('/')
             if not request.GET.get(self.param_key, None) == self.param_value:
                 # if the workaround language-prefix request from the frontend has arrived at the server, 

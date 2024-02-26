@@ -75,6 +75,11 @@ class CosinnusConf(AppConf):
         '/administration/activate/',
         '/administration/deactivate/',
         '/administration/verify_email/',
+        
+        # included services
+        '/swagger/',
+        '/redoc/',
+        '/cms-admin/', # wagtail admin
     ]
 
     #: A mapping of ``{'app1.Model1': ['app2.Model2', 'app3.Model3']}`` that
@@ -963,8 +968,23 @@ class CosinnusConf(AppConf):
     # if V3_FRONTEND_EVERYWHERE_ENABLED==True and V3_FRONTEND_ENABLED==True
     V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS = [
         "^/logout/$",
-        "^/api", # any paths with api prefixes
+        "^/language/",
+        ".*/api/.*", # any paths with api calls
         "^/o/", # any oauth paths
+        "^/administration/", # the entire administration area
+        "^/conference_administration/",
+        "^/statistics/simple/",
+        "^/housekeeping/",
+        "^/account/", # user account service functions
+        "^/fb-integration/",
+        # API URLs that are not route-namespaced under "/api/":
+        "^/select2/",
+        "^/likefollowstar/",
+        "^/map/search/",
+        "^/map/detail/",
+        "^/widgets/",
+        "^/widget/",
+        "^/user_match_assign/",
     ] + NEVER_REDIRECT_URLS # any other defined never-to-redirect-urls
 
     # Languages supported by the v3 frontend. The portal language selection from LANGUAGES is restricted to these.
