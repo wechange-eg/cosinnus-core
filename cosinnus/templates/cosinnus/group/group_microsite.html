@@ -80,15 +80,21 @@
 			
 			{% block microsite_main_content %}
 				<h2>{{ group.name }}</h2>
-				
+
 				
 				<div class="group-microsite-details">
-					
+
 					{% block microsite_header_details %}
+                        {% if group.group_is_conference and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+                            <p class="transparent">
+                                {{ group.subtitle }}
+                            </p>
+                        {% endif %}
+
 						<p class="transparent">
 			            	{{ group.trans.VERBOSE_NAME }}
 			            </p>
-			            
+
 			            {% with parent=group.get_parent_typed %}
 			                {% if parent %}
 			                    <p class="transparent">
@@ -430,6 +436,7 @@
 													{% trans "Contact Group Admins" %}
 												{% else %}
 													{% trans "Contact Conference Admins" %}
+
 												{% endif %}
 			                                </div>
 			                            </li>

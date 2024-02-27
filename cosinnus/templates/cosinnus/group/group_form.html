@@ -236,9 +236,20 @@
                             {% endif %}
                         {% endif %}
 				        
-				        {% comment %} Show long description and contact infos here for compact conferences {% endcomment %}
+				        {% comment %} Show subtitle, long description and contact infos here for compact conferences {% endcomment %}
 				        {% if group_model == "CosinnusConference" %}
-                            {# SimpleMDE Description Long Field (gets initialized in extrahead) #}                                   
+
+                            {# Conference subtitle field #}
+                            {% if not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+                                {% trans "Conference subtitle" as subtitle_label %}
+                                {% trans "The subtitle is shown in the conference and on the conference micro site." as subtitle_legend %}
+                                {% trans "Add a subtitle for the conference." as subtitle_placeholder %}
+                                {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.subtitle label=subtitle_label legend=subtitle_legend placeholder=subtitle_placeholder large_field=True translation_form=form.forms.obj %}
+                            {% else %}
+                                <input type="hidden" name="{{ form.forms.obj.subtitle.name }}" value="{{ form.forms.obj.subtitle.value }}">
+                            {% endif %}
+
+                            {# SimpleMDE Description Long Field (gets initialized in extrahead) #}
                             {% trans "Description and Infos" as description_long_label %}
                             {% captureas description_long_legend %}
                                 {{ group_model_class.get_trans.FORMFIELD_DESCRIPTION_LEGEND }}

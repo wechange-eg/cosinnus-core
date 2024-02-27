@@ -18,6 +18,7 @@ from django.templatetags.static import static
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _, get_language
 from django.template.loader import render_to_string
+from django.template.defaultfilters import linebreaksbr
 from django.template.context import Context
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 from django.template.defaultfilters import date as date_format
@@ -151,7 +152,8 @@ class ConferenceSerializer(TranslateableHyperlinkedModelSerializer):
     class Meta(object):
         model = CosinnusGroup
         fields = ('id', 'name', 'description', 'rooms', 'management_urls', 'theme_color', 'dates', 'avatar',
-                  'wallpaper', 'images', 'header_notification', 'managed_tags', 'url', 'from_date', 'to_date')
+                  'wallpaper', 'images', 'header_notification', 'managed_tags', 'url', 'from_date', 'to_date',
+                  'subtitle')
     
     def get_rooms(self, obj):
         rooms = obj.rooms.all()
@@ -243,7 +245,7 @@ class ConferenceSerializer(TranslateableHyperlinkedModelSerializer):
     
     def get_theme_color(self, obj):
         return obj.conference_theme_color or settings.COSINNUS_CONFERENCES_DEFAULT_THEME_COLOR
-    
+
 
 class ConferenceParticipant(TranslateableModelSerializer):
     organization = serializers.SerializerMethodField()

@@ -91,7 +91,7 @@ function NavConnector(props: NavProps) {
           </Hidden>
         )}
         <Typography component="h3">{conference.props.name}</Typography>
-        <Typography component="h4">{conference.props.description}</Typography>
+        <Typography component="subtitle">{conference.props.subtitle}</Typography>
         <Link
           className={classes.toggleMenuButton}
           href="#"
