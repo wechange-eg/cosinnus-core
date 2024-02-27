@@ -769,6 +769,8 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
     created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
     last_modified = models.DateTimeField(verbose_name=_('Last modified'), editable=False, auto_now=True)
 
+    subtitle = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Subtitle'),
+                                help_text=_('Subtitle used for conferences.'))
     description = models.TextField(verbose_name=_('Short Description'),
                                    help_text=_('Short Description. Internal, will not be shown publicly.'), blank=True)
     description_long = models.TextField(verbose_name=_('Detailed Description'),
@@ -1054,7 +1056,7 @@ class CosinnusBaseGroup(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, 
         if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
             # translatable fields are only enabled for conferences for now
             if self.__class__.__name__ == 'CosinnusConference':
-                return ['name', 'description_long']
+                return ['name', 'description_long', 'subtitle']
             else:
                 return []
         return []
