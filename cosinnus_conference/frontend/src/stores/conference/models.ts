@@ -3,6 +3,7 @@ import {Room, RoomJson} from "../room/models"
 export interface ConferenceJson {
   id: number
   name: string
+  subtitle: string
   description: string
   rooms: RoomJson[]
   management_urls: {
@@ -27,6 +28,7 @@ export interface ConferenceJson {
 export interface ConferenceProps {
   id: number
   name: string
+  subtitle: string
   description: string
   rooms: Room[]
   managementUrls: {
@@ -65,6 +67,7 @@ export class Conference {
     const props: ConferenceProps = {
       id: json.id,
       name: json.name,
+      subtitle: json.subtitle,
       description: json.description,
       rooms: [],
       managementUrls: {
@@ -110,6 +113,7 @@ export class Conference {
     return {
       id: props.id,
       name: props.name,
+      subtitle: props.subtitle,
       description: props.description,
       rooms: rooms,
       management_urls: {

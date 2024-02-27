@@ -39,6 +39,9 @@ export const useStyles = makeStyles((theme) => ({
       fontWeight: "normal",
       fontSize: "1.2rem",
     },
+    "& subtitle": {
+      color: theme.palette.text.secondary,
+    },
   },
   listItem: {
     borderRadius: ".3rem",
