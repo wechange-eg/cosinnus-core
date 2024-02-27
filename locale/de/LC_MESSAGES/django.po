@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-19 14:35+0100\n"
+"POT-Creation-Date: 2024-02-27 10:40+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1554,6 +1554,12 @@ msgstr "Jeder kann beitreten"
 
 msgid "Project Type"
 msgstr "Gruppentyp"
+
+msgid "Subtitle"
+msgstr "Untertitel"
+
+msgid "Subtitle used for conferences."
+msgstr "Untertitel für Tagungen"
 
 msgid "Short Description. Internal, will not be shown publicly."
 msgstr "Kurze Beschreibung. Intern - wird nur Gruppen/projektmitgliedern angezeigt."
@@ -4472,11 +4478,20 @@ msgstr "In welchen Projekt- oder Gruppenkalendern soll die Tagung angezeigt werd
 msgid "Select Projects/Groups"
 msgstr "Projekte/Gruppen auswählen"
 
+msgid "Conference subtitle"
+msgstr "Untertitel der Tagung"
+
+msgid "The subtitle is shown in the conference and on the conference micro site."
+msgstr "Die Untertitel werden in der Tagung und der Microseite angezeigt."
+
+msgid "Add a subtitle for the conference."
+msgstr "Gib einen Untertitel für die Tagung ein."
+
 msgid "Description and Infos"
 msgstr "Beschreibung und Infos"
 
 msgid "This is a platform-wide description that can be seen by any portal member and will be shown on the microsite."
-msgstr "Dies ist eine portalweite Beschreibung die auf der Microseite angezeigt wird und von jedem/r Portalbenutzer*in gesehen werden kann."
+msgstr "Dies ist eine portalweite Beschreibung die auf der  angezeigt wird und von jedem/r Portalbenutzer*in gesehen werden kann."
 
 msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
 msgstr "Dies ist eine öffentliche Beschreibung die auf der Microseite angezeigt wird und von jedem im Internet gesehen werden kann."

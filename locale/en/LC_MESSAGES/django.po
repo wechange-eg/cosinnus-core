@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-19 14:35+0100\n"
+"POT-Creation-Date: 2024-02-27 10:40+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1628,6 +1628,13 @@ msgstr ""
 
 msgid "Project Type"
 msgstr "Project Type"
+
+msgid "Subtitle"
+msgstr ""
+
+#, fuzzy
+msgid "Subtitle used for conferences."
+msgstr "Enter a name for the project."
 
 msgid "Short Description. Internal, will not be shown publicly."
 msgstr ""
@@ -4655,6 +4662,17 @@ msgstr ""
 #, fuzzy
 msgid "Select Projects/Groups"
 msgstr "Convert selected Projects to Groups"
+
+#, fuzzy
+msgid "Conference subtitle"
+msgstr "Create Project"
+
+msgid "The subtitle is shown in the conference and on the conference micro site."
+msgstr ""
+
+#, fuzzy
+msgid "Add a subtitle for the conference."
+msgstr "Enter a name for the project."
 
 msgid "Description and Infos"
 msgstr ""
