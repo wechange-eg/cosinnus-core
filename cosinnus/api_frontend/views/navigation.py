@@ -771,8 +771,11 @@ class LanguageMenuItemMixin:
         language_item_label = request.LANGUAGE_CODE.upper() if current_language_as_label else _('Change Language')
         language_item_icon = None if current_language_as_label else 'fa-language'
         language_item = MenuItem(language_item_label, icon=language_item_icon, id='ChangeLanguage')
-        language_selection = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES,
+        if settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES:
+            language_selection = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES,
                                     settings.LANGUAGES)
+        else:
+            language_selection = settings.LANGUAGES
         language_subitems = []
         for code, language in language_selection:
             selected = code == request.LANGUAGE_CODE

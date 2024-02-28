@@ -16,6 +16,7 @@ from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagA
 from cosinnus.models.tagged import LikeObject
 from cosinnus.models.user_dashboard import MenuItem
 from cosinnus.tests.utils import reload_urlconf
+from cosinnus.trans.group import CosinnusSocietyTrans, CosinnusProjectTrans
 from cosinnus.utils.dates import timestamp_from_datetime
 from cosinnus_notifications.models import NotificationAlert
 
@@ -108,7 +109,10 @@ class SpacesViewTest(APITestCase):
                     MenuItem(settings.COSINNUS_V3_MENU_SPACES_FORUM_LABEL, forum.get_absolute_url(), 'fa-sitemap', id='Forum'),
                     MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, '/map/', 'fa-group', id='Map'),
                 ],
-                'actions': []
+                'actions': [
+                    MenuItem(CosinnusSocietyTrans.BROWSE_ALL, reverse('cosinnus:group__group-list'), id="BrowseGroups"),
+                    MenuItem(CosinnusProjectTrans.BROWSE_ALL, reverse('cosinnus:group-list'), id="BrowseProjects"),
+                ]
             }
         )
 
@@ -400,7 +404,10 @@ class HelpViewTest(APITestCase):
 class LanguageMenuTestMixin:
 
     def expected_language_menu_item(self, expected_label='Change Language', expected_icon='fa-language'):
-        languages = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES, settings.LANGUAGES)
+        if settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES:
+            languages = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES, settings.LANGUAGES)
+        else:
+            languages = settings.LANGUAGES
         expected_language_sub_items = []
         for code, language in languages:
             language_sub_item = MenuItem(language, f'/language/{code}/', id=f'ChangeLanguageItem{code.upper()}',
@@ -499,8 +506,8 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
                     MenuItem('Bookmarks', icon='fa-bookmark', id='Bookmarks'),
                 ],
                 'services': [
-                    MenuItem('Cloud', 'http://cloud.example.com', 'fa-cloud', is_external=True, id='Cloud'),
-                    MenuItem('Messages', reverse('postman:inbox'), 'fa-envelope', id='Messages'),
+                    MenuItem('Cloud', 'http://cloud.example.com', 'cloud', is_external=True, id='Cloud'),
+                    MenuItem('Messages', reverse('postman:inbox'), 'messages', id='Messages'),
                 ],
                 'right': [
                     MenuItem('Help', icon='fa-question', id='Help'),

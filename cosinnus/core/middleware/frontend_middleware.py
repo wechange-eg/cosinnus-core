@@ -23,7 +23,6 @@ class FrontendMiddleware(MiddlewareMixin):
     def process_request(self, request):
         if settings.COSINNUS_V3_FRONTEND_ENABLED:
             # only ever redirect GET methods
-            print(request.method)
             if request.method != 'GET':
                 return
             

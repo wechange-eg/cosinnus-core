@@ -987,8 +987,9 @@ class CosinnusConf(AppConf):
         "^/user_match_assign/",
     ] + NEVER_REDIRECT_URLS # any other defined never-to-redirect-urls
 
-    # Languages supported by the v3 frontend. The portal language selection from LANGUAGES is restricted to these.
-    V3_FRONTEND_SUPPORTED_LANGUAGES = ['en', 'de']
+    # List of language codes supported by the v3 frontend. The portal language selection from LANGUAGES is restricted to these.
+    # if None or empty list, defaults to using the `LANGUAGES` dict keys
+    V3_FRONTEND_SUPPORTED_LANGUAGES = []
 
     # Link of the brand / home button in the main navigation. If set to None personal-dashboard is used.
     V3_MENU_HOME_LINK = '/cms/?noredir=1'
