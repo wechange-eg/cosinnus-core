@@ -25,6 +25,7 @@ from cosinnus.models.user_dashboard import MenuItem, FONT_AWESOME_CLASS_FILTER
 from cosinnus.utils.functions import uniquify_list
 from cosinnus.utils.http import remove_url_param, add_url_param
 from cosinnus.conf import settings
+from cosinnus.utils.context_processors import email_verified as email_verified_context_processor
 
 logger = logging.getLogger('cosinnus')
 
@@ -273,7 +274,7 @@ class MainContentView(APIView):
                 "icon": self.main_menu_icon,  # exclusive with `main_menu_image`, only one can be non-None!
                 "image": self.main_menu_image,  # exclusive with `main_menu_icon`, only one can be non-None!
             },
-            "announcements": self._get_announcements(),
+            "announcements": self._get_announcements(django_request),
         }
         
         # set cookies on rest response from the requests response
@@ -499,12 +500,18 @@ class MainContentView(APIView):
                 js_list.append(inline_script_content)
         return js_list
         
-    def _get_announcements(self):
+    def _get_announcements(self, request):
         announcements = []
         for announcement in Announcement.objects.active():
             announcements.append({
                 "text": announcement.translated_text or announcement.text,
                 "level": announcement.level,
             })
+        # check extra email-verified and guest user announcements
+        context = email_verified_context_processor(request)
+        if 'email_not_verified_announcement' in context:
+            announcements.append(context['email_not_verified_announcement'])
+        if 'user_guest_announcement' in context:
+            announcements.append(context['user_guest_announcement'])
         return announcements
     

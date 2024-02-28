@@ -150,7 +150,6 @@
         {% endif %}>
     <!-- class="{{ COSINNUS_CURRENT_APP }}" -->
 
-        {% include 'cosinnus/extra_body_header.html' %}
         {% block body_header %}{% endblock body_header %}
 
         {% block cosinnus_navbar %}
@@ -205,6 +204,7 @@
 
                         <div class="row">
                             <div class="x-v3-content col-xs-12">
+                                {% include 'cosinnus/extra_body_header.html' %}
                                 {% include 'cosinnus/messages.html' %}
                                 {% block content %}{% endblock content %}
                             </div><!-- col -->

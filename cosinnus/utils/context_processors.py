@@ -159,6 +159,7 @@ def tos_check(request):
 
 
 def email_verified(request):
+    """ Add additional announcements to the context which are checked for in base.html. """
     context = dict()
     portal = CosinnusPortal.get_current()
     user = request.user
