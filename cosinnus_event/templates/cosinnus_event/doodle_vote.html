@@ -162,7 +162,7 @@
                                 {% endfor %}
                             </div>
 
-                            <form id="cosinnus_vote_form" action="" method="post" class="form-horizontal">
+                            <form id="cosinnus_vote_form" action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" method="post" class="form-horizontal">
                             {% csrf_token %}
                             {{ formset.management_form }}
 

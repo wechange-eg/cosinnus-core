@@ -44,7 +44,7 @@
     {{ form.forms.obj.non_field_errors }}
     {{ form.forms.media_tag.non_field_errors }}
 
-    <form method="POST" action="" id="form-event" class="cosinnus-form form-horizontal">{% csrf_token %}
+    <form method="POST" action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" id="form-event" class="cosinnus-form form-horizontal">{% csrf_token %}
 	    <div class="content-box">
 	        {% for formset in inlines %}
 	            {{ formset.management_form }}

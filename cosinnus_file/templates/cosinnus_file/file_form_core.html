@@ -1,6 +1,6 @@
 {% load i18n cosinnus_tags widget_tweaks %}
 
-<form id="file_url_upload_form" method="POST" action="" 
+<form id="file_url_upload_form" method="POST" action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}"
         class="cosinnus-form form-horizontal" enctype="multipart/form-data"  
         {% if not form_edit %}
             data-target="ajax-form" 

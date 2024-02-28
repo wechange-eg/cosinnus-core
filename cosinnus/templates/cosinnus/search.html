@@ -7,7 +7,7 @@
 
 {% block main_page %}
     <div class="row">
-        <form method="get" action="" role="form">
+        <form method="get" action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" role="form">
         
           {% if request.GET.models %}
               <input type="hidden" name="models" value="{{ request.GET.models }}" />
