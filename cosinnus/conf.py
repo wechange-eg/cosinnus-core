@@ -979,6 +979,10 @@ class CosinnusConf(AppConf):
         "^/widgets/",
         "^/widget/",
         "^/user_match_assign/",
+        # extra exemptions for views that do not work well with v3
+        "^/map/embed/",
+        "^/two_factor_auth/token_login/",
+        
     ] + NEVER_REDIRECT_URLS # any other defined never-to-redirect-urls
 
     # List of language codes supported by the v3 frontend. The portal language selection from LANGUAGES is restricted to these.
