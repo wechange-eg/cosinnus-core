@@ -6,6 +6,7 @@ from django.utils import translation
 from django.utils.deprecation import MiddlewareMixin
 
 from cosinnus.conf import settings
+from cosinnus.views.common import SwitchLanguageView
 
 USERPROFILE_SETTING_FRONTEND_DISABLED = "frontend_disabled"
 
@@ -19,21 +20,25 @@ class FrontendMiddleware(MiddlewareMixin):
     param_value = "3"
     param_key_exempt = "v2"
     param_value_exempt = "true"
+    
+    switch_language_to = None
 
     def process_request(self, request):
+        self.switch_language_to = None
         if settings.COSINNUS_V3_FRONTEND_ENABLED:
+            request_tokens = request.build_absolute_uri().split('/')
+            # if the workaround language-prefix request from the frontend has arrived at the server,
+            # strip the prefixed language AND switch to that language
+            redirect_language_prefixes = settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES or dict(settings.LANGUAGES).keys()
+            if request_tokens[3] in redirect_language_prefixes:
+                self.switch_language_to = request_tokens[3]
+                del request_tokens[3]
+                redirect_unprefixed = '/'.join(request_tokens)
+                return redirect(redirect_unprefixed)
+                
             # only ever redirect GET methods
             if request.method != 'GET':
                 return
-            
-            request_tokens = request.build_absolute_uri().split('/')
-            if not request.GET.get(self.param_key, None) == self.param_value:
-                # if the workaround language-prefix request from the frontend has arrived at the server, 
-                # strip the prefixed language
-                if settings.COSINNUS_V3_LANGUAGE_REDIRECT_PREFIXES and request_tokens[3] in settings.COSINNUS_V3_LANGUAGE_REDIRECT_PREFIXES:
-                    del request_tokens[3]
-                    redirect_unprefixed = '/'.join(request_tokens)
-                    return redirect(redirect_unprefixed)
             
             # do not redirect if the redirect exempt value v=2 is specifically set
             if request.GET.get(self.param_key_exempt, None) == self.param_value_exempt:
@@ -77,7 +82,9 @@ class FrontendMiddleware(MiddlewareMixin):
                     request.META["QUERY_STRING"] = urlencode(params)
                     cur_lang = translation.get_language()
                     redirect_to = request.get_full_path()
-                    # redirect to a prefixed language version of the v3 frontend if workaround is active
-                    if settings.COSINNUS_V3_LANGUAGE_REDIRECT_PREFIXES and cur_lang in settings.COSINNUS_V3_LANGUAGE_REDIRECT_PREFIXES:
-                        redirect_to = f'/{cur_lang}{redirect_to}'
                     return redirect(redirect_to)
+
+    def process_response(self, request, response):
+        if self.switch_language_to:
+            SwitchLanguageView().switch_language(self.switch_language_to, request, response)
+        return response

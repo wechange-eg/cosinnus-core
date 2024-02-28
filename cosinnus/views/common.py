@@ -98,7 +98,10 @@ class SwitchLanguageView(RedirectView):
     def get(self, request, *args, **kwargs):
         language = kwargs.pop('language', None)
         response = super(SwitchLanguageView, self).get(request, *args, **kwargs)
-        
+        self.switch_langauge(language, request, response)
+        return response
+    
+    def switch_language(self, language, request, response):
         if not language or language not in list(dict(settings.LANGUAGES).keys()):
             messages.error(request, _('The language "%s" is not supported' % language))
         else:
@@ -112,7 +115,6 @@ class SwitchLanguageView(RedirectView):
                 httponly=settings.LANGUAGE_COOKIE_HTTPONLY,
                 samesite=settings.LANGUAGE_COOKIE_SAMESITE,
             )
-        return response
 
     def get_redirect_url(self, **kwargs):
         return safe_redirect(self.request.GET.get('next', self.request.META.get('HTTP_REFERER', '/')), self.request)
