@@ -138,6 +138,14 @@ class MainContentView(APIView):
                         ],
                         "script_constants": "var cosinnus_base_url = \"http://localhost:8000/\";\nvar cosinnus_active_group = \"a-mein-bbb-projekt\";\n ...",
                         "scripts": "Backbone.mediator.publish('init:module-full-routed', ...",
+                        "head_scripts": [
+                            "/static/js/vendor/less.min.js",
+                            "var cosinnus_base_url = \"http://localhost:8000/\";\nvar cosinnus_active_group = \"a-mein-bbb-projekt\";\n ..."
+                        ],
+                        "body_scripts": [
+                            "http://localhost:8000/static/js/cosinnus.js?v=1.9.3",
+                            "Backbone.mediator.publish('init:module-full-routed', ...",
+                        ],
                         "meta": "<meta charset=\"utf-8\"/><meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\"/><meta content=\"width=device-width, initial-scale=1\" name=\"viewport\"/> ...",
                         "styles": ".my-contribution-badge {min-width: 50px;border-radius: 20px;color: #FFF;font-size: 12px;padding: 2px 6px; margin-left: 5px;}.my-contribution-badge.red {background-color: rgb(245, 85, 0);} ...",
                         "sub_navigation": {

@@ -20,6 +20,7 @@ from cosinnus.models.group_extra import CosinnusConference
 from cosinnus.models.user_dashboard import DashboardItem, MenuItem
 from cosinnus.trans.group import CosinnusConferenceTrans, CosinnusProjectTrans, CosinnusSocietyTrans
 from cosinnus.utils.dates import datetime_from_timestamp, timestamp_from_datetime
+from cosinnus.utils.functions import resolve_class
 from cosinnus.utils.permissions import check_user_can_create_conferences, check_user_can_create_groups, \
     check_user_portal_manager
 from cosinnus.utils.user import get_unread_message_count_for_user
@@ -1193,7 +1194,10 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                 )
 
         main_navigation_items['right'] = right_navigation_items
-
+        
+        # allow portals to add links via a dropin defined in `COSINNUS_V3_MENU_PORTAL_LINKS_DROPIN`
+        main_navigation_items = CosinnusNavigationPortalLinks().modifiy_main_navigation(main_navigation_items)
+        
         return Response(main_navigation_items)
 
 
@@ -1318,3 +1322,22 @@ class VersionHistoryUnreadCountView(APIView):
             'count': unread_versions_count,
         }
         return Response(unread_versions)
+
+
+class CosinnusNavigationPortalLinksBase(object):
+    """ A class that modifies or provides additional navbar links returned in
+        various navigation API endpoints.
+        Used by defining an extending class in a portal and specifying that class for
+        `COSINNUS_V3_MENU_PORTAL_LINKS_DROPIN`. The class can then modify the
+        links returned by the API endpoints. """
+    
+    def modifiy_main_navigation(self, main_navigation_items):
+        # noop, override this function in your portal's dropin
+        return main_navigation_items
+        
+
+# allow dropin of extending class
+CosinnusNavigationPortalLinks = CosinnusNavigationPortalLinksBase
+if getattr(settings, 'COSINNUS_V3_MENU_PORTAL_LINKS_DROPIN', None):
+    CosinnusNavigationPortalLinks = resolve_class(settings.COSINNUS_V3_MENU_PORTAL_LINKS_DROPIN)
+    

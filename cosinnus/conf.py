@@ -1009,6 +1009,11 @@ class CosinnusConf(AppConf):
     # Format: (<label>, <url>, <icon>), e.g.: (_('FAQ'), 'https://wechange.de/cms/help/', 'fa-question-circle'),
     V3_MENU_HELP_LINKS = []
     
+    # a class dropin to replace CosinnusNavigationPortalLinksBase as class that modifies or provides additional
+    # navbar links returned in various v3 navigation API endpoints
+    # (str classpath)
+    V3_MENU_PORTAL_LINKS_DROPIN = None
+    
     # whether the regular user signup method is enabled for this portal
     USER_SIGNUP_ENABLED = True
     
