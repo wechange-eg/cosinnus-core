@@ -66,6 +66,8 @@ class MainContentView(APIView):
         * `styles`: a list of strings of literal inline styles to be inserted before the HTML content is inserted
       * `script_constants`: a list of literal inline JS code that has JS global definitions that need to be loaded before the `js_urls` are inserted (but can be loaded after `js_vendor_urls` are inserted)
       * `scripts`: a list of strings of literal inline JS script code to be executed before (after?) the HTML content is inserted
+      * `head_scripts` a list of strings of mixed content of either a single URL of a src JS file (starting with "http") or inline JS code (from within the <head>)
+      * `body_scripts` a list of strings of mixed content of either a single URL of a src JS file (starting with "http") or inline JS code (from within the <body>)
       * `sub_navigation`: sidebar content, includes 3 lists: `"sub_navigation" {"top": [...], "middle": [...], "bottom": [...]}`
         * middle is list of the apps that are enabled for the current space
         * each list contains the usual menu items
@@ -198,7 +200,7 @@ class MainContentView(APIView):
             if not self.url.startswith('/'):
                 self.url = '/' + self.url
             self.url = CosinnusPortal.get_current().get_domain() + self.url
-        
+
         # check if the target URL is one exempted for v3 frontend resolution - we do not accept those
         matched_exemption = False
         target_url_path = urlparse(self.url).path
@@ -211,12 +213,12 @@ class MainContentView(APIView):
                 break
         if matched_exemption:
             return HttpResponseRedirect(self.url)
-        
+
         # resolve the response, including redirects
         # add the v3-exempt parameter to the URL so we do not actually parse the v3-served response
         v3_exempted_url = add_url_param(self.url, FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt)
         response = self._resolve_url_via_query(v3_exempted_url, django_request)
-        
+
         # fake our django request to act as if the resolved url was the original one
         django_request = self._transform_request_to_resolved(django_request, response.url)
         # get the relative resolved url from the target url (following all redirects)
@@ -225,31 +227,47 @@ class MainContentView(APIView):
             resolved_url += '?' + django_request.GET.urlencode()
             # remove the v3-exempt parameter from the resolved URL again
             resolved_url = remove_url_param(self.url, FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt)
-        
+
         # determine group for request
         self._resolve_request_group(resolved_url, django_request)
         # parse the response's html
         html = self._clean_response_html(str(response.text))
-        self._parse_html_content(html)
-        
+
         # TODO compress html? or do server-side request compression?
         
-        parsed_js_urls = self._parse_js_urls(html)
+        html_soup = BeautifulSoup(html, 'html.parser')
+        parsed_js_urls = self._parse_js_urls(html_soup)
         js_vendor_urls = [js_url for js_url in parsed_js_urls if '/vendor/' in js_url]
         js_urls = [js_url for js_url in parsed_js_urls if '/vendor/' not in js_url]
+        css_urls = self._parse_css_urls(html_soup)
+        script_constants = self._parse_inline_tag_contents(html_soup, 'script', class_="v3-constants")
+        scripts = self._parse_inline_tag_contents(html_soup, 'script', class_=False)
+        meta = self._parse_tags(html_soup, 'meta')
+        styles = self._parse_inline_tag_contents(html_soup, 'style')
+        sub_navigation = self._parse_leftnav_menu(html_soup)
+        
+        head_scripts = self.parse_js_scripts_and_inlines(html_soup, 'head')
+        body_scripts = self.parse_js_scripts_and_inlines(html_soup, 'body')
+        
+        self._parse_html_content(html_soup) # this will destroy the soup, so use it last or on a new soup!
+        
         data = {
             "resolved_url": resolved_url,
             "status_code": response.status_code,
             "content_html": self.content_html,
             "footer_html": self.footer_html,
+            # TODO: decide to keep the following 4 params to deliver JS content or ...
             "js_vendor_urls": js_vendor_urls,
             "js_urls": js_urls,
-            "css_urls": self._parse_css_urls(html),
-            "script_constants": self._parse_inline_tag_contents(html, 'script', class_="v3-constants"),
-            "scripts": self._parse_inline_tag_contents(html, 'script', class_=False),
-            "meta": self._parse_tags(html, 'meta'),
-            "styles": self._parse_inline_tag_contents(html, 'style'),
-            "sub_navigation": self._parse_leftnav_menu(html),  # can be None if no left navigation should be shown
+            "script_constants": script_constants,
+            "scripts": scripts,
+            # ... or the following 2 params
+            "head_scripts": head_scripts,
+            "body_scripts": body_scripts,
+            "css_urls": css_urls,
+            "meta": meta,
+            "styles": styles,
+            "sub_navigation": sub_navigation,  # can be None if no left navigation should be shown
             "main_menu": {
                 "label": self.main_menu_label,  # either <name of group>, "personal space", or "community"
                 "icon": self.main_menu_icon,  # exclusive with `main_menu_image`, only one can be non-None!
@@ -264,9 +282,6 @@ class MainContentView(APIView):
         rest_response = Response(data)
         for k, v in response.cookies.items():
             rest_response.set_cookie(k, v)
-        
-        # TODO: set headers as well?
-        
         return rest_response
     
     def _resolve_url_via_query(self, url, request):
@@ -335,11 +350,16 @@ class MainContentView(APIView):
             self.main_menu_label = _('Personal')
             self.main_menu_icon = 'fa-user'  # TODO: icon for Personal space? use user avatar if they have one instead?
         
-    def _parse_html_content(self, html):
+    def _parse_html_content(self, destructible_html_soup):
         """ Parses the content frame of the full html that can be put into any other part of the site.
             May do some reformatting for full-page views to transform the body tag into a div.
-            Also parses the footer html content. """
-        soup = BeautifulSoup(html, 'html.parser')
+            Also parses the footer html content.
+            Sets:
+                - self.has_leftnav
+                - self.content_html
+                - self.footer_html
+            Note: this will permanently alter the soup given! """
+        soup = destructible_html_soup
         # remove all tags we never want to see in the content, like inline scripts and styles
         for bad_tag_literal in ['nav', 'script', 'style']:
             for bad_tag in soup.find_all(bad_tag_literal):
@@ -367,13 +387,12 @@ class MainContentView(APIView):
             fa_class = ' '.join([subclass for subclass in fa_i.get('class') if not subclass.lower() in FONT_AWESOME_CLASS_FILTER])
         return fa_class
         
-    def _parse_leftnav_menu(self, html):
+    def _parse_leftnav_menu(self, html_soup):
         """ Tries to parse from the leftnav all links to show in the left sub navigation.
             Can return None"""
         if not self.has_leftnav:
             return None
-        soup = BeautifulSoup(html, 'html.parser')
-        leftnav = soup.find('div', class_='x-v3-leftnav')
+        leftnav = html_soup.find('div', class_='x-v3-leftnav')
         if not leftnav:
             self.has_leftnav = False
             return None
@@ -425,39 +444,60 @@ class MainContentView(APIView):
         }
         return sub_nav
     
-    def _parse_css_urls(self, html):
-        soup = BeautifulSoup(html, 'html.parser')
-        css_links = soup.find_all('link', rel='stylesheet')
+    def _parse_css_urls(self, html_soup):
+        css_links = html_soup.find_all('link', rel='stylesheet')
         css_urls = [link.get('href') for link in css_links]
         domain = CosinnusPortal.get_current().get_domain()
         css_urls = [(domain if not link.startswith('http') else '') + link for link in css_urls]
         css_urls = uniquify_list(css_urls)
         return css_urls
     
-    def _parse_js_urls(self, html):
-        soup = BeautifulSoup(html, 'html.parser')
-        js_links = soup.find_all('script', src=True)
+    def _parse_js_urls(self, html_soup):
+        # this
+        js_links = html_soup.find_all('script', src=True)
         js_urls = [link.get('src') for link in js_links]
         domain = CosinnusPortal.get_current().get_domain()
         js_urls = [(domain if not link.startswith('http') else '') + link for link in js_urls]
         js_urls = uniquify_list(js_urls)
         return js_urls
     
-    def _parse_tags(self, html, tag_name):
+    def _parse_tags(self, html_soup, tag_name):
         """ Parses all tags of a given tag name and returns them, including their tag definition,
             as a concatenated string """
-        soup = BeautifulSoup(html, 'html.parser')
-        tags = soup.find_all(tag_name)
+        tags = html_soup.find_all(tag_name)
         tag_str = '\n'.join([str(tag).strip() for tag in tags])
         return tag_str
     
-    def _parse_inline_tag_contents(self, html, tag_name, class_=False):
+    def _parse_inline_tag_contents(self, html_soup, tag_name, class_=False):
         """ Parses all contents of tags of a given tag name and returns it as a concatenated string """
-        soup = BeautifulSoup(html, 'html.parser')
-        tags = soup.find_all(tag_name, src=False, rel=False, class_=class_)
+        # and this
+        tags = html_soup.find_all(tag_name, src=False, rel=False, class_=class_)
         liss = [tag.decode_contents().strip() for tag in tags]
         tag_contents = '\n'.join(liss)
         return tag_contents
+    
+    def parse_js_scripts_and_inlines(self, html_soup, container_tag_name=None):
+        """ Parses from the given soup both script sources and inline scripts.
+            @param container_tag_name: if given, searches for scripts only within this tag name (e.g. "body")
+            @return a list of strings, mixed content of either:
+                - a single URL of a src JS file (starting with "http") or
+                - inline JS code
+        """
+        js_list = []
+        domain = CosinnusPortal.get_current().get_domain()
+        container_tag = html_soup.find(container_tag_name) if container_tag_name else html_soup
+        script_elements = container_tag.find_all('script')
+        for tag in script_elements:
+            js_link = tag.get('src')
+            if js_link:
+                # we have a JS file link by src
+                js_link = (domain if not js_link.startswith('http') else '') + js_link
+                js_list.append(js_link)
+            else:
+                # we have an inline script
+                inline_script_content = tag.decode_contents().strip()
+                js_list.append(inline_script_content)
+        return js_list
         
     def _get_announcements(self):
         announcements = []
