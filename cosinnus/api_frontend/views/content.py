@@ -6,6 +6,7 @@ from urllib.parse import urlparse
 import requests
 from bs4 import BeautifulSoup
 from django.http import QueryDict, HttpResponseRedirect
+from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django.utils.translation import gettext_lazy as _
 from drf_yasg import openapi
@@ -227,7 +228,10 @@ class MainContentView(APIView):
         # add the v3-exempt parameter to the URL so we do not actually parse the v3-served response
         v3_exempted_url = add_url_param(self.url, FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt)
         response = self._resolve_url_via_query(v3_exempted_url, django_request)
-
+        # if we have been redirected, instead redirect the entire endpoint to the new url instantly!
+        if response.status_code == 302:
+            return HttpResponseRedirect(reverse('cosinnus:frontend-api:api-content-main') + f'?url={response.headers["Location"]}')
+        
         # fake our django request to act as if the resolved url was the original one
         django_request = self._transform_request_to_resolved(django_request, response.url)
         # get the relative resolved url from the target url (following all redirects)
@@ -305,7 +309,7 @@ class MainContentView(APIView):
         session = requests.Session()
         session.headers.update(dict(request.headers))
         session.cookies.update(request.COOKIES)
-        response = session.get(url)
+        response = session.get(url, allow_redirects=False)
         for history_response in response.history:
             response.cookies.update(history_response.cookies)
         return response
