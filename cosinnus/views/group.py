@@ -1393,8 +1393,12 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin, DeleteView):
             messages.success(self.request, _('Your invitation to user "%(username)s" was withdrawn successfully.') % {
                 'username': user.get_full_name()})
         if current_status == self.membership_status:
-            messages.success(self.request,
-                             _('User "%(username)s" is no longer a member.') % {'username': user.get_full_name()})
+            messages.success(self.request, _('User "%(username)s" is no longer a member.') % {'username': user.get_full_name()})
+
+        # create admin logentry.
+        message = _('Removed membership of user "%(user)s".') % {'user': user.get_full_name()}
+        admin_log_action(self.request.user, self.object.group, message)
+
         return HttpResponseRedirect(self.get_success_url())
 
     def get_queryset(self):
