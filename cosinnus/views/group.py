@@ -1348,7 +1348,7 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin, DeleteView):
     membership_status = MEMBERSHIP_MEMBER
 
     @atomic
-    def delete(self, request, *args, **kwargs):
+    def form_valid(self, form):
         self.object = self.get_object()
         group = self.object.group
         user = self.object.user
@@ -1356,22 +1356,27 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin, DeleteView):
         if (len(group.admins) > 1 or not group.is_admin(user)):
             if user != self.request.user or check_user_superuser(self.request.user):
                 self.object.delete()
-                
+
             else:
-                messages.error(self.request, _('You cannot remove yourself from a %(team_type)s.') % {'team_type':self.object._meta.verbose_name})
+                messages.error(self.request, _('You cannot remove yourself from a %(team_type)s.') % {
+                    'team_type': self.object._meta.verbose_name})
                 return HttpResponseRedirect(self.get_success_url())
         else:
             messages.error(self.request, _('You cannot remove "%(username)s" form '
-                'this team. Only one admin left.') % {'username': user.get_full_name()})
+                                           'this team. Only one admin left.') % {'username': user.get_full_name()})
             return HttpResponseRedirect(self.get_success_url())
-        
+
         if current_status == MEMBERSHIP_PENDING:
             signals.user_group_join_declined.send(sender=self, obj=group, user=user, audience=[user])
-            messages.success(self.request, _('Your join request was withdrawn from %(team_type)s "%(team_name)s" successfully.') % {'team_type':self.object._meta.verbose_name, 'team_name': group.name})
+            messages.success(self.request,
+                             _('Your join request was withdrawn from %(team_type)s "%(team_name)s" successfully.') % {
+                                 'team_type': self.object._meta.verbose_name, 'team_name': group.name})
         if current_status == MEMBERSHIP_INVITED_PENDING:
-            messages.success(self.request, _('Your invitation to user "%(username)s" was withdrawn successfully.') % {'username': user.get_full_name()})
+            messages.success(self.request, _('Your invitation to user "%(username)s" was withdrawn successfully.') % {
+                'username': user.get_full_name()})
         if current_status == self.membership_status:
-            messages.success(self.request, _('User "%(username)s" is no longer a member.') % {'username': user.get_full_name()})
+            messages.success(self.request,
+                             _('User "%(username)s" is no longer a member.') % {'username': user.get_full_name()})
         return HttpResponseRedirect(self.get_success_url())
 
     def get_queryset(self):
