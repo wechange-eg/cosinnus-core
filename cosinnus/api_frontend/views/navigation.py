@@ -1039,7 +1039,7 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                                 "label": "Cloud",
                                 "url": "https://cloud.localhost/",
                                 "is_external": True,
-                                "icon": "cloud",
+                                "icon": "fa-cloud",
                                 "image": None,
                                 "badge": None,
                                 "selected": False
@@ -1144,7 +1144,7 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
             # cloud
             if settings.COSINNUS_CLOUD_ENABLED:
                 services_navigation_items.append(
-                    MenuItem(_('Cloud'), settings.COSINNUS_CLOUD_NEXTCLOUD_URL, icon='cloud',
+                    MenuItem(_('Cloud'), settings.COSINNUS_CLOUD_NEXTCLOUD_URL, icon='fa-cloud',
                              is_external=settings.COSINNUS_CLOUD_OPEN_IN_NEW_TAB, id='Cloud')
                 )
 

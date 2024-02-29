@@ -506,7 +506,7 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
                     MenuItem('Bookmarks', icon='fa-bookmark', id='Bookmarks'),
                 ],
                 'services': [
-                    MenuItem('Cloud', 'http://cloud.example.com', 'cloud', is_external=True, id='Cloud'),
+                    MenuItem('Cloud', 'http://cloud.example.com', 'fa-cloud', is_external=True, id='Cloud'),
                     MenuItem('Messages', reverse('postman:inbox'), 'messages', id='Messages'),
                 ],
                 'right': [
