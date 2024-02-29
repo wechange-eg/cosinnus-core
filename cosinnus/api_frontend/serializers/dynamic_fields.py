@@ -78,7 +78,7 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
             if (settings.COSINNUS_TRANSLATED_FIELDS_ENABLED
                     and field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS_TRANSLATED_FIELDS):
                 for language_code, __ in settings.LANGUAGES:
-                    translated_field_name = f'{field_name}_{language_code}'
+                    translated_field_name = f'{field_name}__{language_code}'
                     # Using a profile function added by the TranslateableFieldsModelMixin as source.
                     source = f'cosinnus_profile.get_{translated_field_name}'
                     field = serializers.CharField(
@@ -156,7 +156,7 @@ class CosinnusUserDynamicFieldsSerializerMixin(object):
                 if self.filter_included_fields_by_option_name and not getattr(field_options, self.filter_included_fields_by_option_name, False):
                     continue
                 for language_code, __ in settings.LANGUAGES:
-                    translated_field_name = f'get_{field_name}_{language_code}'
+                    translated_field_name = f'get_{field_name}__{language_code}'
                     if translated_field_name in profile_attr_dict:
                         translated_field_value = profile_attr_dict.get(translated_field_name)
                         if language_code not in dynamic_field_translations:
