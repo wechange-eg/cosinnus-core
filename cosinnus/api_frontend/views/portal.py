@@ -238,7 +238,7 @@ class PortalUserprofileDynamicFieldsView(APIView):
         - "choices": list or null, the choice tuples of (value, label) for choice fields
     """
     DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
-    
+
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
     #       Note: Also needs docs on our custom data/timestamp/version wrapper!
@@ -252,6 +252,8 @@ class PortalUserprofileDynamicFieldsView(APIView):
                     "data": [
                         {
                             "name": "institution",
+                            "is_multi_language": False,
+                            "is_multi_language_sub_field": False,
                             "in_signup": "true",
                             "required": "true",
                             "multiple": "false",
@@ -262,6 +264,8 @@ class PortalUserprofileDynamicFieldsView(APIView):
                         },
                         {
                             "name": "languages",
+                            "is_multi_language": False,
+                            "is_multi_language_sub_field": False,
                             "in_signup": "false",
                             "required": "false",
                             "multiple": "true",
@@ -283,7 +287,6 @@ class PortalUserprofileDynamicFieldsView(APIView):
                                 ],
                             ]
                         },
-                        
                     ],
                     "version": COSINNUS_VERSION,
                     "timestamp": 1658414865.057476
@@ -312,8 +315,17 @@ class PortalUserprofileDynamicFieldsView(APIView):
             # remove the empty choice from choices for multiple fields, as our frontend doesn't need it
             if choices and field_options.multiple == True:
                 choices = [(k, v) for (k, v) in choices if k]
-            field_data.append({
+
+            # check if multilanguage is enabled
+            is_multi_language_field = (
+                    settings.COSINNUS_TRANSLATED_FIELDS_ENABLED
+                    and field_name in settings.COSINNUS_USERPROFILE_EXTRA_FIELDS_TRANSLATED_FIELDS
+            )
+
+            current_field_data = {
                 'name': field_name,
+                'is_multi_language': is_multi_language_field,
+                'is_multi_language_sub_field': False,
                 'in_signup': field_options.in_signup,
                 'required': field_options.required,
                 'multiple': field_options.multiple,
@@ -326,7 +338,19 @@ class PortalUserprofileDynamicFieldsView(APIView):
                 'parent_group_field_name': field_options.parent_group_field_name,
                 'display_required_field_names': field_options.display_required_field_names,
                 'choices': choices,
-            })
+            }
+            field_data.append(current_field_data)
+
+            # add multilanguage sub fields
+            if is_multi_language_field:
+                for language_code, __ in settings.LANGUAGES:
+                    multilanguage_field_data = current_field_data.copy()
+                    multilanguage_field_data.update(**{
+                        'name': f'{field_name}_{language_code}',
+                        'is_multi_language_sub_field': True,
+                    })
+                    field_data.append(multilanguage_field_data)
+
         return Response(field_data)
 
 
