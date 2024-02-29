@@ -51,6 +51,7 @@ from extra_views import (CreateWithInlinesView, InlineFormSetFactory,
 from multiform.forms import InvalidArgument
 
 from cosinnus import cosinnus_notifications
+from cosinnus.admin import admin_log_action
 from cosinnus.api.serializers.group import GroupSimpleSerializer
 from cosinnus.api.serializers.user import UserSerializer
 from cosinnus.core import signals
@@ -1451,9 +1452,11 @@ class ActivateOrDeactivateGroupView(TemplateView):
             typed_group.update_index()
             typed_group.update_index_for_all_group_objects()
             messages.success(request, self.message_success_activate % {'team_name': self.group.name})
+            admin_log_action(request.user, self.group, _('Activated.'))
             return redirect(self.group.get_absolute_url())
         else:
             messages.success(request, self.message_success_deactivate % {'team_name': self.group.name})
+            admin_log_action(request.user, self.group, _('Deactivated.'))
             return redirect(reverse('cosinnus:profile-detail'))
     
     def get_context_data(self, **kwargs):
