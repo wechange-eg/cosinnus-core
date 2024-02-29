@@ -453,9 +453,13 @@ class MainContentView(APIView):
             href = leftnav_link.get('href')
             if not href or href == '#':
                 continue
+            link_label = '(Link)'
+            text_source = leftnav_link.find('div', class_='media-body') or leftnav_link
+            if text_source:
+                link_label = text_source.text.strip().replace('/n', '')
             # create menu item for the link
             menu_item = MenuItem(
-                leftnav_link.text.strip(),
+                link_label,
                 href,
                 icon=self._extract_fa_icon(leftnav_link),  # TODO. filter/map-convert these icons to frontend icons?
                 id='Sidebar-' + get_random_string(8),
