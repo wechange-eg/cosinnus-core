@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-27 10:40+0100\n"
+"POT-Creation-Date: 2024-02-29 15:14+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -8427,6 +8427,9 @@ msgstr "Dieses Team hast keine konfigurierte Videokonferenz."
 msgid "The %(team_type)s was changed successfully."
 msgstr "%(team_type)s wurde erfolgreich geändert."
 
+msgid "Edited."
+msgstr "Bearbeitet."
+
 msgid "This action is not available directly!"
 msgstr "Diese Aktion ist nicht direkt verfügbar!"
 
@@ -8477,12 +8480,25 @@ msgstr "Die folgenden Benutzer/innen wurden eingeladen, Teilnahme zu beantragen:
 msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
 msgstr "Alle Mitglieder/innen der ausgewählten Gruppen/Projekte wurden bereits eingeladen oder haben sich bereits angemeldet. Es wurden keine neuen Einladungen verschickt."
 
+msgid "Invited user \"%(user)s\"."
+msgstr "Benutzer \"%(user)s\" eingeladen."
+
 msgid "You cannot promote a guest user account!"
 msgstr "Du kannst einen Gast nicht befördern!"
 
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
 msgstr "Sie können “%(username)s” nicht von diesem Projekt entfernen. Er/sie ist der einzig übrige Administrator."
+
+msgid "Accepted user \"%(user)s\" as  member."
+msgstr "Benutzer \"%(username)s\" als Mitglied akzeptiert."
+
+#, python-format
+msgid "Made user \"%(user)s\" admin."
+msgstr ""
+
+msgid "Made user \"%(user)s\" member."
+msgstr "Benutzer \"%(username)s\" zum Mitglied gemacht."
 
 #, python-format
 msgid "You cannot remove yourself from a %(team_type)s."
@@ -8505,6 +8521,10 @@ msgid "User \"%(username)s\" is no longer a member."
 msgstr "Benutzer \"%(username)s\" ist jetzt kein Mitglied mehr."
 
 #, python-format
+msgid "Removed membership of user \"%(user)s\"."
+msgstr ""
+
+#, python-format
 msgid "%(team_name)s was re-activated successfully!"
 msgstr "%(team_name)s wurde erfolgreich reaktiviert!"
 
@@ -8523,6 +8543,12 @@ msgstr "Dieses Projekt/Gruppe ist bereits aktiv!"
 
 msgid "This project/group is already inactive!"
 msgstr "Dieses Projekt/Gruppe ist bereits inaktiv!"
+
+msgid "Activated."
+msgstr "Aktiviert."
+
+msgid "Deactivated."
+msgstr "Deaktiviert."
 
 msgid "You are not a member, but have access because you are an Administrator."
 msgstr "Du bist kein Mitglied, aber hast Zugriff, weil du Administratorenrechte besitzt."
@@ -8557,6 +8583,9 @@ msgstr "Die Leute mit diesem E-Mail Adressen haben schon ein Benutzerkonto und w
 #, python-format
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr "Super! Wir schicken jetzt die Einladungen an folgende E-Mail Adressen: %s"
+
+msgid "Invited \"%(emails)s\"."
+msgstr "\"%(emails)s\" eingeladen."
 
 msgid "There was an error when trying to delete the invitation."
 msgstr "Es gab einen Fehler beim Löschen der Einladung."
