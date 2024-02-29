@@ -1332,12 +1332,22 @@ class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
         else:
             if current_status == MEMBERSHIP_PENDING and new_status == self.membership_status:
                 signals.user_group_join_accepted.send(sender=self, obj=self.group, user=user, audience=[user])
+                # create admin logentry.
+                message = _('Accepted user "%(user)s" as  member.') % {'user': user.get_full_name()}
+                admin_log_action(self.request.user, self.object.group, message)
             if current_status in [MEMBERSHIP_PENDING, self.membership_status] and new_status == MEMBERSHIP_ADMIN \
                     and not user.id == self.request.user.id:
                 cosinnus_notifications.user_group_made_admin.send(sender=self, obj=self.object.group, user=self.request.user, audience=[user])
+                # create admin logentry.
+                message = _('Made user "%(user)s" admin.') % {'user': user.get_full_name()}
+                admin_log_action(self.request.user, self.object.group, message)
             elif current_status == MEMBERSHIP_ADMIN and new_status in [MEMBERSHIP_PENDING, self.membership_status] \
                     and not user.id == self.request.user.id:
                 cosinnus_notifications.user_group_admin_demoted.send(sender=self, obj=self.object.group, user=self.request.user, audience=[user])
+                # create admin logentry.
+                message = _('Made user "%(user)s" member.') % {'user': user.get_full_name()}
+                admin_log_action(self.request.user, self.object.group, message)
+
             ret = super(GroupUserUpdateView, self).form_valid(form)
             # update index for the group
             self.object._refresh_cache()
