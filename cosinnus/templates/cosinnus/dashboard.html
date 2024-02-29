@@ -392,7 +392,7 @@
                                         {{ COSINNUS_MANAGED_TAG_LABELS.MANAGED_TAG_NAME }}:
 	                                    {% for tag in managed_tags %}
 	                                        <a target="_blank" href="{{ tag.get_absolute_url }}" {% if not tag.get_absolute_url %}disabled{% endif %}>
-	                                            {{ tag.name }}</b>{% if not forloop.last %}, {% endif %}
+	                                            <b>{{ tag.name }}</b>{% if not forloop.last %}, {% endif %}
 	                                        </a>
 	                                    {% endfor %}
                                     </p>
