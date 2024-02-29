@@ -173,9 +173,10 @@ def add_url_param(url, param_key, param_value):
     return url
 
 
-def remove_url_param(url, param_key, param_value=None):
+def remove_url_param(url, param_key=None, param_value=None):
     """ Given a full URL, this returns the same url without the given GET parameter, if present.
-        If a `param_value` is given, will only remove the param if `param_value` matches its value. """
+        If a `param_value` is given, will only remove the param if `param_value` matches its value.
+        If no `param_key` is given, will remove *all* params. """
     parsed = urlparse(url)
     query = parsed.query
     dic = QueryDict(query)
@@ -188,7 +189,7 @@ def remove_url_param(url, param_key, param_value=None):
         parsed.netloc,
         parsed.path,
         parsed.params,
-        query,
+        query if param_key else "",
         parsed.fragment
     ))
     return url

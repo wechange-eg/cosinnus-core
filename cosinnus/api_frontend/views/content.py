@@ -236,6 +236,8 @@ class MainContentView(APIView):
             resolved_url += '?' + django_request.GET.urlencode()
             # remove the v3-exempt parameter from the resolved URL again
             resolved_url = remove_url_param(self.url, FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt)
+        # remove domain from resolved url
+        resolved_url = '/' + '/'.join(resolved_url.split('/')[3:])
 
         # determine group for request
         self._resolve_request_group(resolved_url, django_request)
@@ -261,6 +263,7 @@ class MainContentView(APIView):
         # instead find *all* scripts and subtract the ones found in the header
         body_scripts = [body_script for body_script in body_scripts if not body_script in head_scripts]
         
+        html_soup = self._filter_html_view_specific(html_soup, resolved_url)
         self._parse_html_content(html_soup) # this will destroy the soup, so use it last or on a new soup!
         
         data = {
@@ -361,7 +364,33 @@ class MainContentView(APIView):
         else:
             self.main_menu_label = _('Personal')
             self.main_menu_icon = 'fa-user'  # TODO: icon for Personal space? use user avatar if they have one instead?
-        
+    
+    def _filter_html_view_specific(self, html_soup, resolved_url):
+        """ Will alter the given html soup by specific, hardcoded view/url/page rules,
+            for fine-grained control on hiding/modifying elements when displayed in the main content view """
+        # remove params from url for matching
+        url = remove_url_param(self.url, None, None)
+        if self.group:
+            # hide appsmenu on specific group pages
+            hide_appsmenu_patterns = [
+                r"^/(?P<group_type>[^/]+)/(?P<group_slug>[^/]+)/$", # group dashboard page
+                r"^/(?P<group_type>[^/]+)/(?P<group_slug>[^/]+)/microsite/$", # group  microsite
+            ]
+            if any([re.match(pattern, resolved_url) for pattern in hide_appsmenu_patterns]):
+                appsmenu_tag = html_soup.find('div', class_='x-v3-leftnav')
+                if appsmenu_tag:
+                    appsmenu_tag.decompose()
+            # do not display group dashboard tiles
+            hide_dashboard_tiles_patterns = [
+                r"^/(?P<group_type>[^/]+)/(?P<group_slug>[^/]+)/$",  # group dashboard page
+            ]
+            if any([re.match(pattern, resolved_url) for pattern in hide_dashboard_tiles_patterns]):
+                tile_tags = html_soup.find_all('div', class_='dashboard-header-link')
+                for tile_tag in tile_tags:
+                    tile_tag.decompose()
+            
+        return html_soup
+    
     def _parse_html_content(self, destructible_html_soup):
         """ Parses the content frame of the full html that can be put into any other part of the site.
             May do some reformatting for full-page views to transform the body tag into a div.
