@@ -856,6 +856,9 @@ class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin,
                     audience=get_user_model().objects.filter(
                         id__in=self.group.members)
                 )
+        # create admin logentry.
+        admin_log_action(self.request.user, self.object, _('Edited.'))
+
         messages.success(self.request, self.message_success % {'team_type':self.object._meta.verbose_name})
         return super(GroupUpdateView, self).forms_valid(form, inlines)
 
