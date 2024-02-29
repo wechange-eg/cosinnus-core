@@ -1,5 +1,3 @@
-from functools import partial
-
 from django.core.exceptions import ImproperlyConfigured
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
@@ -33,17 +31,6 @@ class TranslateableFieldsModelMixin(models.Model):
         abstract = True
 
     translations = models.JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder)
-
-    def __init__(self, *args, **kwargs):
-        super(TranslateableFieldsModelMixin, self).__init__(*args, **kwargs)
-
-        if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED and self.has_dynamic_field_translations:
-            # add function without parameters to get a translated dynamic fields value as used in the v3 API profile
-            # serializer.
-            for dynamic_field in self.translatable_dynamic_fields:
-                for language_code, __ in settings.LANGUAGES:
-                    setattr(self, f'get_{dynamic_field}_{language_code}',
-                            partial(self.get_translated_dynamic_field, dynamic_field, language_code))
 
     @property
     def languages(self):
@@ -97,16 +84,6 @@ class TranslateableFieldsModelMixin(models.Model):
                     clean_translation = {k:v for k,v in translation.items() if v != ''}
                     dynamic_fields.update(clean_translation)
                     return dynamic_fields
-
-    def get_translated_dynamic_field(self, dynamic_field, language):
-        """ Return the translated value of a dynamic field. """
-        if self.has_dynamic_field_translations:
-            dynamic_fields_translations = self.translations.get('dynamic_fields')
-            if dynamic_fields_translations:
-                translation = dynamic_fields_translations.get(language)
-                if translation:
-                    return translation.get(dynamic_field, None)
-        return None
 
     def get_translateable_fields(self):
         return self.translateable_fields
