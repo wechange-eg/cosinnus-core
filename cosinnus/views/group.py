@@ -1268,6 +1268,10 @@ class GroupUserInviteMultipleView(RequireAdminMixin, GroupMembershipMixin, FormV
         users = form.cleaned_data.get('users')
         for user in users:
             self.do_invite_valid_user(user, form)
+
+            # create admin logentry.
+            message = _('Invited user "%(user)s".') % {'user': user.get_full_name()}
+            admin_log_action(self.request.user, self.group, message)
         return HttpResponseRedirect(self.get_success_url())
     
     #TODONEXT: error handling!
@@ -1698,6 +1702,10 @@ def group_user_recruit(request, group,
         messages.success(request, _("The people with these addresses already have a registered user account and have been invited directly: %s") % ', '.join(existing_newly_invited))
     if success:
         messages.success(request, _("Success! We are now sending out invitations to these email addresses: %s") % ', '.join(success))
+
+        # create admin logentry.
+        message = _('Invited "%(emails)s".') % {'emails': ', '.join(success)}
+        admin_log_action(user, group, message)
         
     return redirect(redirect_url)
 
