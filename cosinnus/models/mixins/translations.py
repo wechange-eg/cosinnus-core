@@ -42,7 +42,7 @@ class TranslateableFieldsModelMixin(models.Model):
             # serializer.
             for dynamic_field in self.translatable_dynamic_fields:
                 for language_code, __ in settings.LANGUAGES:
-                    setattr(self, f'get_{dynamic_field}_{language_code}',
+                    setattr(self, f'get_{dynamic_field}__{language_code}',
                             partial(self.get_translated_dynamic_field, dynamic_field, language_code))
 
     @property

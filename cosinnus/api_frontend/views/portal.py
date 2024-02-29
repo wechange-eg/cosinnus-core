@@ -346,7 +346,7 @@ class PortalUserprofileDynamicFieldsView(APIView):
                 for language_code, __ in settings.LANGUAGES:
                     multilanguage_field_data = current_field_data.copy()
                     multilanguage_field_data.update(**{
-                        'name': f'{field_name}_{language_code}',
+                        'name': f'{field_name}__{language_code}',
                         'is_multi_language_sub_field': True,
                     })
                     field_data.append(multilanguage_field_data)
