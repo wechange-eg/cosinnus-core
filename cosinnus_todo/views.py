@@ -595,14 +595,14 @@ todolist_edit_view_api = TodoListEditView.as_view(is_ajax_request_url=True)
 class TodoListDeleteView(AjaxableFormMixin, RequireWriteMixin, FilterGroupMixin, DeleteView):
 
     model = TodoList
-    
-    def delete(self, request, *args, **kwargs):
+
+    def form_valid(self, form):
         todolist = self.get_object()
         list_todos = todolist.todos.all()
-        if not all([check_object_write_access(todo, request.user) for todo in list_todos]):
-            messages.error(request, _('You cannot delete this folder because you do not have permission to delete one or more items it contains!'))
+        if not all([check_object_write_access(todo, self.request.user) for todo in list_todos]):
+            messages.error(self.request, _('You cannot delete this folder because you do not have permission to delete one or more items it contains!'))
             return HttpResponseRedirect(todolist.get_absolute_url())
-        return super(TodoListDeleteView, self).delete(request, *args, **kwargs)
+        return super(TodoListDeleteView, self).form_valid(form)
 
     def get_success_url(self):
         return group_aware_reverse('cosinnus:todo:list', kwargs={'group': self.group})
