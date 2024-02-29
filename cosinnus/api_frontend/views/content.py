@@ -255,8 +255,11 @@ class MainContentView(APIView):
         styles = self._parse_inline_tag_contents(html_soup, 'style')
         sub_navigation = self._parse_leftnav_menu(html_soup)
         
-        head_scripts = self.parse_js_scripts_and_inlines(html_soup, 'head')
-        body_scripts = self.parse_js_scripts_and_inlines(html_soup, 'body')
+        head_scripts = self._parse_js_scripts_and_inlines(html_soup, 'head')
+        body_scripts = self._parse_js_scripts_and_inlines(html_soup)
+        # filtering the body scripts by the 'body' tag seems to not find all scripts, so we
+        # instead find *all* scripts and subtract the ones found in the header
+        body_scripts = [body_script for body_script in body_scripts if not body_script in head_scripts]
         
         self._parse_html_content(html_soup) # this will destroy the soup, so use it last or on a new soup!
         
@@ -456,8 +459,7 @@ class MainContentView(APIView):
     def _parse_css_urls(self, html_soup):
         css_links = html_soup.find_all('link', rel='stylesheet')
         css_urls = [link.get('href') for link in css_links]
-        domain = CosinnusPortal.get_current().get_domain()
-        css_urls = [(domain if not link.startswith('http') else '') + link for link in css_urls]
+        css_urls = [self._format_static_link(link) for link in css_urls]
         css_urls = uniquify_list(css_urls)
         return css_urls
     
@@ -465,8 +467,7 @@ class MainContentView(APIView):
         # this
         js_links = html_soup.find_all('script', src=True)
         js_urls = [link.get('src') for link in js_links]
-        domain = CosinnusPortal.get_current().get_domain()
-        js_urls = [(domain if not link.startswith('http') else '') + link for link in js_urls]
+        js_urls = [self._format_static_link(link) for link in js_urls]
         js_urls = uniquify_list(js_urls)
         return js_urls
     
@@ -485,7 +486,7 @@ class MainContentView(APIView):
         tag_contents = '\n'.join(liss)
         return tag_contents
     
-    def parse_js_scripts_and_inlines(self, html_soup, container_tag_name=None):
+    def _parse_js_scripts_and_inlines(self, html_soup, container_tag_name=None):
         """ Parses from the given soup both script sources and inline scripts.
             @param container_tag_name: if given, searches for scripts only within this tag name (e.g. "body")
             @return a list of strings, mixed content of either:
@@ -493,20 +494,25 @@ class MainContentView(APIView):
                 - inline JS code
         """
         js_list = []
-        domain = CosinnusPortal.get_current().get_domain()
         container_tag = html_soup.find(container_tag_name) if container_tag_name else html_soup
         script_elements = container_tag.find_all('script')
         for tag in script_elements:
             js_link = tag.get('src')
             if js_link:
                 # we have a JS file link by src
-                js_link = (domain if not js_link.startswith('http') else '') + js_link
-                js_list.append(js_link)
+                js_list.append(self._format_static_link(js_link))
             else:
                 # we have an inline script
                 inline_script_content = tag.decode_contents().strip()
                 js_list.append(inline_script_content)
         return js_list
+    
+    def _format_static_link(self, link):
+        domain = CosinnusPortal.get_current().get_domain()
+        link = (domain if not link.startswith('http') else '') + link
+        if '?v=' in link:
+            link = link[:link.find('?v=')]
+        return link
         
     def _get_announcements(self, request):
         announcements = []
