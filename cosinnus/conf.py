@@ -1671,7 +1671,7 @@ def get_obfuscated_settings_strings():
         # obfuscate passwords. for long ones, show the first few chars
         if 'password' in key.lower() or 'password' in val.lower() or \
                 'secret' in key.lower() or 'secret' in val.lower() or \
-                'key' in key.lower() or key in KEY_BLACKLIST:
+                'key' in key.lower() or 'key' in val.lower() or key in KEY_BLACKLIST:
             if val.strip() and val.strip() not in ('None', 'null', '0', '[]', '{}'):
                 val = str(val)
                 val = (len(val) > 3 and val[:3] or '') + '***'
