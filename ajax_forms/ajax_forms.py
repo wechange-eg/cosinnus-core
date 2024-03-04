@@ -12,6 +12,9 @@ from cosinnus.utils.http import is_ajax
 logger = logging.getLogger('cosinnus')
 
 
+# FIXME: the AJAX mixins are deprecated as part of the v1 API and should be deleted once we are sure they are not used.
+
+
 class AjaxEnabledFormViewBaseMixin(object):
     
     ajax_form_partial = None # '/path/to/template.html'
