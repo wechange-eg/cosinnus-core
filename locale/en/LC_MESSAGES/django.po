@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-27 10:40+0100\n"
+"POT-Creation-Date: 2024-02-29 15:14+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -8548,6 +8548,9 @@ msgstr ""
 msgid "The %(team_type)s was changed successfully."
 msgstr ""
 
+msgid "Edited."
+msgstr ""
+
 msgid "This action is not available directly!"
 msgstr ""
 
@@ -8598,12 +8601,28 @@ msgstr "The following Projects were converted to Groups:"
 msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
 msgstr ""
 
+#, fuzzy, python-format
+msgid "Invited user \"%(user)s\"."
+msgstr "Edit Project"
+
 msgid "You cannot promote a guest user account!"
 msgstr ""
 
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
 msgstr "You cannot remove “%(username)s” form this project. Only one admin left."
+
+#, python-format
+msgid "Accepted user \"%(user)s\" as  member."
+msgstr ""
+
+#, python-format
+msgid "Made user \"%(user)s\" admin."
+msgstr ""
+
+#, python-format
+msgid "Made user \"%(user)s\" member."
+msgstr ""
 
 #, python-format
 msgid "You cannot remove yourself from a %(team_type)s."
@@ -8626,6 +8645,10 @@ msgid "User \"%(username)s\" is no longer a member."
 msgstr ""
 
 #, python-format
+msgid "Removed membership of user \"%(user)s\"."
+msgstr ""
+
+#, python-format
 msgid "%(team_name)s was re-activated successfully!"
 msgstr ""
 
@@ -8641,6 +8664,14 @@ msgstr ""
 
 msgid "This project/group is already inactive!"
 msgstr ""
+
+#, fuzzy
+msgid "Activated."
+msgstr "Create Project"
+
+#, fuzzy
+msgid "Deactivated."
+msgstr "Create Project"
 
 #, fuzzy
 msgid "You are not a member, but have access because you are an Administrator."
@@ -8676,6 +8707,10 @@ msgstr ""
 #, python-format
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr ""
+
+#, fuzzy, python-format
+msgid "Invited \"%(emails)s\"."
+msgstr "Edit Project"
 
 #, fuzzy
 msgid "There was an error when trying to delete the invitation."
