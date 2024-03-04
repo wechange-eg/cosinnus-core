@@ -13,6 +13,9 @@ from django.utils.encoding import force_str
 from cosinnus.utils.http import JSONResponse, is_ajax
 
 
+# FIXME: the AJAX mixins are deprecated as part of the v1 API and should be deleted once we are sure they are not used.
+
+
 def patch_body_json_data(request):
     """
     Patch the ajax-post body data into the POST field
