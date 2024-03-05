@@ -103,6 +103,13 @@ class MainContentView(APIView):
     main_menu_icon = None
     main_menu_image = None
     
+    # after we resolve a target URL and receive a redirect response,
+    # if the redirect location matches any of these patterns, we return the redirect
+    # response itself instead of a redirec to the main content endpoint with the new URL as target
+    FULL_REDIRECT_URL_PATTERNS = [
+        "^/login/",
+    ]
+    
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
     #       Note: Also needs docs on our custom data/timestamp/version wrapper!
@@ -229,8 +236,11 @@ class MainContentView(APIView):
         v3_exempted_url = add_url_param(self.url, FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt)
         response = self._resolve_url_via_query(v3_exempted_url, django_request)
         # if we have been redirected, instead redirect the entire endpoint to the new url instantly!
-        if response.status_code == 302:
-            return HttpResponseRedirect(reverse('cosinnus:frontend-api:api-content-main') + f'?url={response.headers["Location"]}')
+        if response.status_code in [301, 302]:
+            redirect_target_url = remove_url_param(response.headers["Location"], FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt)
+            if any([re.match(pattern, redirect_target_url) for pattern in self.FULL_REDIRECT_URL_PATTERNS]):
+                return HttpResponseRedirect(redirect_target_url)
+            return HttpResponseRedirect(reverse('cosinnus:frontend-api:api-content-main') + f'?url={redirect_target_url}')
         
         # fake our django request to act as if the resolved url was the original one
         django_request = self._transform_request_to_resolved(django_request, response.url)

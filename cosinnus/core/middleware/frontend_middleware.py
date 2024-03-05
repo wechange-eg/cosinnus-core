@@ -40,8 +40,15 @@ class FrontendMiddleware(MiddlewareMixin):
             if request.method != 'GET':
                 return
             
-            # do not redirect if the redirect exempt value v=2 is specifically set
+            # do not redirect if the redirect exempt value v2=true is specifically set
             if request.GET.get(self.param_key_exempt, None) == self.param_value_exempt:
+                # but strip the exemption param from the request
+                request.GET._mutable = True
+                del request.GET[self.param_key_exempt]
+                request.META['QUERY_STRING'] = request.META['QUERY_STRING'].replace(
+                    f'{self.param_key_exempt}={self.param_value_exempt}', '')
+                request.environ['QUERY_STRING'] = request.environ['QUERY_STRING'].replace(
+                    f'{self.param_key_exempt}={self.param_value_exempt}', '')
                 return
             
             # currently do not affect login requests within the oauth flow

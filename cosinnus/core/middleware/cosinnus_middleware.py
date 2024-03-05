@@ -56,9 +56,7 @@ def CosinnusPermanentRedirect():
         _CosinnusPermanentRedirect = apps.get_model('cosinnus', 'CosinnusPermanentRedirect')
     return _CosinnusPermanentRedirect
 
-
-
-
+# a list of urls that should always be openly accessible as they are required for user logins
 LOGIN_URLS = settings.COSINNUS_NEVER_REDIRECT_URLS + [
     '/login/',
     '/logout/',
@@ -74,8 +72,17 @@ LOGIN_URLS = settings.COSINNUS_NEVER_REDIRECT_URLS + [
     '/two_factor_auth/settings/setup/',
 ]
 
-EXEMPTED_URLS_FOR_2FA = [url for url in LOGIN_URLS if url != '/admin/']
+# list of url patterns that can still be accessed while in the in-between state
+# of having logged in successfully, but still being required to enter your 2fa token
+# to complete the login
+EXEMPTED_URLS_FOR_2FA = [
+    '/two_factor_auth/token_login/',
+    '/administration/login-2fa/'
+    '/logout/',
+    '/admin/logout/'
+]
 
+# list of url patterns that are not permitted to be accessed during guest login
 GUEST_ACCOUNT_FORBIDDEN_URL_PATTERNS = [
     r"^/login/$",
     r"^/signup/$",
@@ -148,17 +155,18 @@ class AdminOTPMiddleware(MiddlewareMixin):
             filter_path = '/'
         
         user = getattr(request, 'user', None)
-
+        
         # check if the user is a superuser and they attempted to access a covered url
-        if user and check_user_superuser(user) and request.path.startswith(filter_path) and not request.path in EXEMPTED_URLS_FOR_2FA:
+        if user and check_user_superuser(user) and request.path.startswith(filter_path) and \
+                not any([request.path.startswith(prefix) for prefix in EXEMPTED_URLS_FOR_2FA]):
             # check if the user is not yet 2fa verified, if so send them to the verification view
             if not user.is_verified():
                 next_url = urlencode(request.get_full_path())
-                return redirect(reverse('cosinnus:login-2fa') + (('?next=%s' % next_url) if url_has_allowed_host_and_scheme(next_url, allowed_hosts=[request.get_host()]) else ''))
-        elif user and user.is_authenticated and not check_user_superuser(user) and request.path.startswith('/admin/') and not request.path in EXEMPTED_URLS_FOR_2FA:
+                return redirect(reverse('cosinnus:two-factor-auth-token') + (('?next=%s' % next_url) if url_has_allowed_host_and_scheme(next_url, allowed_hosts=[request.get_host()]) else ''))
+        elif user and user.is_authenticated and not check_user_superuser(user) and request.path.startswith('/admin/') and not any([request.path.startswith(prefix) for prefix in EXEMPTED_URLS_FOR_2FA]):
             # normal users will never be redirected to the admin area
             return redirect('cosinnus:user-dashboard')
-
+        
         return None
 
     
@@ -176,9 +184,10 @@ class UserOTPMiddleware(MiddlewareMixin):
         
         filter_path = '/'
         user = getattr(request, 'user', None)
-
+        
         # check if the user is authenticated and they attempted to access a covered url
-        if user and user.is_authenticated and request.path.startswith(filter_path) and not request.path in EXEMPTED_URLS_FOR_2FA:
+        if user and user.is_authenticated and request.path.startswith(filter_path) and \
+                not any([request.path.startswith(prefix) for prefix in EXEMPTED_URLS_FOR_2FA]):
             # check if the user is not yet 2fa verified, if so send them to the verification view
             if user_has_device(user) and not user.is_verified():
                 next_url = urlencode(request.get_full_path())
