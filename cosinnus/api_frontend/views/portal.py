@@ -1,3 +1,5 @@
+from copy import copy
+
 from django.utils.encoding import force_str
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
@@ -393,7 +395,12 @@ class PortalSettingsView(APIView):
         )}
     )
     def get(self, request):
-        return Response(settings.COSINNUS_V3_PORTAL_SETTINGS)
+        settings_dict = copy(settings.COSINNUS_V3_PORTAL_SETTINGS)
+        settings_dict.update({
+            'COSINNUS_CLOUD_ENABLED': settings.COSINNUS_CLOUD_ENABLED,
+            'COSINNUS_CLOUD_NEXTCLOUD_URL': settings.COSINNUS_CLOUD_NEXTCLOUD_URL,
+        })
+        return Response(settings_dict)
 
 
 class PortalConfigurationView(APIView):
