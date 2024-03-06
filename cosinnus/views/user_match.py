@@ -2,8 +2,8 @@ import logging
 import random
 
 from django.contrib.auth import get_user_model
+from django.core.cache import cache
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
-from django.db.models.query_utils import Q
 from django.http.response import HttpResponseNotAllowed, HttpResponseForbidden
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
@@ -11,6 +11,7 @@ from django.views.generic.list import ListView
 from cosinnus import cosinnus_notifications
 
 from cosinnus.conf import settings
+from cosinnus.models.group import CosinnusPortal
 from cosinnus.default_settings import LOGIN_URL
 from cosinnus.models.profile import get_user_profile_model, UserMatchObject
 from cosinnus.models.tagged import LikeObject
@@ -25,24 +26,28 @@ from cosinnus.views.mixins.group import RequireLoggedInMixin
 logger = logging.getLogger('cosinnus')
 
 
+USER_MATCH_LIKES_CACHE_KEY = 'cosinnus/core/portal/%d/user_match/likes/'
+USER_MATCH_LIKES_CACHE_TIMEOUT = 60 * 5  # 5 minutes
+
+
 class UserMatchListView(RequireLoggedInMixin, ListView):
     model = get_user_profile_model()
     template_name = 'cosinnus/user/user_match_list.html'
     login_url = LOGIN_URL
 
-    def get_hashset_likes_for_user(self, user):
-        """
-        Get all the objects liked by a certain user.
-
-        Args:
-            user: UserObject.
-
-        Returns:
-            set(): Set of objects liked by the given user in form {content_type: object_id}
-        """
-        values_liked = LikeObject.objects.filter(user=user, liked=True).values_list('content_type', 'object_id')
-        user_liked_set = set(f'{liketuple[0]}::{liketuple[1]}' for liketuple in values_liked)
-        return user_liked_set
+    def get_hashed_likes(self):
+        """ Returns a dict with all likes by all users. The likes are stored in a hashed string format. """
+        cache_key = USER_MATCH_LIKES_CACHE_KEY % (CosinnusPortal.get_current().id)
+        likes_by_user = cache.get(cache_key)
+        if not likes_by_user:
+            likes_by_user = {}
+            values_liked = LikeObject.objects.filter(liked=True).values_list('user', 'content_type', 'object_id')
+            for user, content_type, object_id in values_liked:
+                if user not in likes_by_user:
+                    likes_by_user[user] = set()
+                likes_by_user[user].add(f'{content_type}::{object_id}')
+            cache.set(cache_key, likes_by_user, USER_MATCH_LIKES_CACHE_TIMEOUT)
+        return likes_by_user
 
     # TODO: cache after!
     def get_context_data(self, **kwargs):
@@ -58,6 +63,9 @@ class UserMatchListView(RequireLoggedInMixin, ListView):
         ).values_list('to_user_id', flat=True)
         user_profiles = user_profiles.exclude(user_id__in=already_liked_users)
 
+        # prefetch related
+        user_profiles = user_profiles.prefetch_related('user', 'media_tag', 'media_tag__tags')
+
         # filter out users that did not like me
         disliked_by_users = UserMatchObject.objects.filter(
             to_user=self.request.user, type=UserMatchObject.DISLIKE
@@ -67,16 +75,23 @@ class UserMatchListView(RequireLoggedInMixin, ListView):
         # filter active users
         user_profiles = filter_active_users(user_profiles, filter_on_user_profile_model=True)
 
-        # filter users for their profile visibility
-        users = get_user_model().objects.filter(cosinnus_profile__in=user_profiles)
-        checked_for_visibility_users = [user for user in users if check_user_can_see_user(self.request.user, user)]
-        user_profiles = get_user_profile_model().objects.filter(user_id__in=checked_for_visibility_users)
-
         # filter user to be active within the last year
         last_year = now() - timedelta(days=365) # timedelta to pass users who have logged in at least once within the last year;
         user_profiles = user_profiles.filter(user__last_login__gte=last_year)
 
-        request_user_liked_set = self.get_hashset_likes_for_user(self.request.user)
+        # filter users for their profile visibility
+        users = get_user_model().objects.filter(cosinnus_profile__in=user_profiles)
+        users = users.prefetch_related('cosinnus_profile', 'cosinnus_profile__media_tag')
+        checked_for_visibility_users = [user for user in users if check_user_can_see_user(self.request.user, user)]
+        user_profiles = user_profiles.filter(user_id__in=checked_for_visibility_users)
+
+        # get likes for all users to avoid queries per user.
+        user_likes = self.get_hashed_likes()
+
+        # get request user likes and tags
+        request_user_likes = user_likes.get(self.request.user.id, set())
+        request_user_tags = list(self.request.user.cosinnus_profile.media_tag.tags.all())
+
         score_dict = {}
         
         for profile in user_profiles:
@@ -116,8 +131,7 @@ class UserMatchListView(RequireLoggedInMixin, ListView):
             # Score tags
             if profile.media_tag.tags.exists():
                 score += 1
-                user_tags = self.request.user.cosinnus_profile.media_tag.tags.names()
-                score += len(set(profile.media_tag.tags.names()).intersection(set(user_tags)))
+                score += len(set(profile.media_tag.tags.all()).intersection(set(request_user_tags)))
 
             # score users active in the last month
             last_month = now() - timedelta(days=31)
@@ -125,10 +139,11 @@ class UserMatchListView(RequireLoggedInMixin, ListView):
                 score += 1
 
             # mutual likes score
-            this_user_liked_set = self.get_hashset_likes_for_user(profile.user)
-            set_intersection = this_user_liked_set.intersection(request_user_liked_set)
-            shared_like_count = len(set_intersection)
-            score += shared_like_count
+            if request_user_likes:
+                this_user_liked_set = user_likes.get(profile.user_id, set())
+                set_intersection = this_user_liked_set.intersection(request_user_likes)
+                shared_like_count = len(set_intersection)
+                score += shared_like_count
             
             score_dict[profile.id] = score
 
