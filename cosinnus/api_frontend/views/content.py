@@ -56,7 +56,8 @@ class MainContentView(APIView):
     Will not work on URL targets that match exemptions defined in `COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS`
     
     Return values:
-      * `resolved_url`: the resolved URL after following all redirects the queried `url` parameter might have caused, and the actual URL from which the content HTML is delivered
+      * `resolved_url`: the resolved URL of the queried `url` parameter where the content HTML is delivered from, or if `redirect==True`, the target URL to redirect to
+      * `redirect": (bool) whether the target URL was resolved and HTML content is returned in this data package, or, if True, the data package is empty and a redirect should be performed to `resolved_url`
       * `status_code`: (int), HTTP status code of the response for the request sent to the `resolved_url`
       * `content_html`: html from the `<div class="container">` frame to be inserted
       * `footer_html`: html from the footer, to be inserted after the content html
@@ -103,12 +104,31 @@ class MainContentView(APIView):
     main_menu_icon = None
     main_menu_image = None
     
-    # after we resolve a target URL and receive a redirect response,
-    # if the redirect location matches any of these patterns, we return the redirect
-    # response itself instead of a redirec to the main content endpoint with the new URL as target
-    FULL_REDIRECT_URL_PATTERNS = [
-        "^/login/",
-    ]
+    _data_proto = {
+        "resolved_url": None,
+        "redirect": False,
+        "status_code": 0,
+        "content_html": None,
+        "footer_html": None,
+        # TODO: decide to keep the following 4 params to deliver JS content or ...
+        "js_vendor_urls": [],
+        "js_urls": [],
+        "script_constants": [],
+        "scripts": [],
+        # ... or the following 2 params
+        "head_scripts": [],
+        "body_scripts": [],
+        "css_urls": [],
+        "meta": None,
+        "styles": None,
+        "sub_navigation": {},  # can be None if no left navigation should be shown
+        "main_menu": {
+            "label": None,  # either <name of group>, "personal space", or "community"
+            "icon": None,  # exclusive with `main_menu_image`, only one can be non-None!
+            "image": None,  # exclusive with `main_menu_icon`, only one can be non-None!
+        },
+        "announcements": [],
+    }
     
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -129,6 +149,7 @@ class MainContentView(APIView):
                 "application/json": {
                     "data": {
                         "resolved_url": "/project/a-mein-bbb-projekt/?force_payment_popup=1",
+                        "redirect": False,
                         "status_code": 200,
                         "content_html": "<div class=\"x-v3-container container\"> <div class=\"row app-main\"> ... </div></div>",
                         "footer_html": "<div class=\"footer\"> ... </div>",
@@ -229,18 +250,16 @@ class MainContentView(APIView):
                 matched_exemption = True
                 break
         if matched_exemption:
-            return HttpResponseRedirect(self.url)
+            return self.build_redirect_response(self.url, response=None)
 
         # resolve the response, including redirects
         # add the v3-exempt parameter to the URL so we do not actually parse the v3-served response
         v3_exempted_url = add_url_param(self.url, FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt)
-        response = self._resolve_url_via_query(v3_exempted_url, django_request)
-        # if we have been redirected, instead redirect the entire endpoint to the new url instantly!
+        response = self._resolve_url_via_query(v3_exempted_url, django_request, allow_redirects=False)
+        # if we have been redirected, return an empty data package with a redirect target url!
         if response.status_code in [301, 302]:
             redirect_target_url = remove_url_param(response.headers["Location"], FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt)
-            if any([re.match(pattern, redirect_target_url) for pattern in self.FULL_REDIRECT_URL_PATTERNS]):
-                return HttpResponseRedirect(redirect_target_url)
-            return HttpResponseRedirect(reverse('cosinnus:frontend-api:api-content-main') + f'?url={redirect_target_url}')
+            return self.build_redirect_response(redirect_target_url, response)
         
         # fake our django request to act as if the resolved url was the original one
         django_request = self._transform_request_to_resolved(django_request, response.url)
@@ -280,46 +299,60 @@ class MainContentView(APIView):
         html_soup = self._filter_html_view_specific(html_soup, resolved_url)
         self._parse_html_content(html_soup) # this will destroy the soup, so use it last or on a new soup!
         
-        data = {
-            "resolved_url": resolved_url,
-            "status_code": response.status_code,
-            "content_html": self.content_html,
-            "footer_html": self.footer_html,
-            # TODO: decide to keep the following 4 params to deliver JS content or ...
-            "js_vendor_urls": js_vendor_urls,
-            "js_urls": js_urls,
-            "script_constants": script_constants,
-            "scripts": scripts,
-            # ... or the following 2 params
-            "head_scripts": head_scripts,
-            "body_scripts": body_scripts,
-            "css_urls": css_urls,
-            "meta": meta,
-            "styles": styles,
-            "sub_navigation": sub_navigation,  # can be None if no left navigation should be shown
-            "main_menu": {
-                "label": self.main_menu_label,  # either <name of group>, "personal space", or "community"
-                "icon": self.main_menu_icon,  # exclusive with `main_menu_image`, only one can be non-None!
-                "image": self.main_menu_image,  # exclusive with `main_menu_icon`, only one can be non-None!
-            },
-            "announcements": self._get_announcements(django_request),
+        data = copy(self._data_proto)
+        data["resolved_url"] = resolved_url
+        data["redirect"] = False
+        data["status_code"] = response.status_code
+        data["content_html"] = self.content_html
+        data["footer_html"] = self.footer_html
+        # TODO: decide to keep the following 4 params to deliver JS content or ...
+        data["js_vendor_urls"] = js_vendor_urls
+        data["js_urls"] = js_urls
+        data["script_constants"] = script_constants
+        data["scripts"] = scripts
+        # ... or the following 2 params
+        data["head_scripts"] = head_scripts
+        data["body_scripts"] = body_scripts
+        data["css_urls"] = css_urls
+        data["meta"] = meta
+        data["styles"] = styles
+        data["sub_navigation"] = sub_navigation  # can be None if no left navigation should be shown
+        data["main_menu"] = {
+            "label": self.main_menu_label,  # either <name of group>, "personal space", or "community"
+            "icon": self.main_menu_icon,  # exclusive with `main_menu_image`, only one can be non-None!
+            "image": self.main_menu_image,  # exclusive with `main_menu_icon`, only one can be non-None!
         }
+        data["announcements"] = self._get_announcements(django_request)
         
         # set cookies on rest response from the requests response
         # note: we seem to be losing all meta-infos like max-age here,
         #   but none of the cookies returned through this endpoint should be relevant for this.
+        return self.build_data_response(data, response)
+    
+    def build_data_response(self, data, resolved_response=None):
+        """ Build a response from the given data package and set the cookies from the resolved target URL query. """
         rest_response = Response(data)
-        for k, v in response.cookies.items():
-            rest_response.set_cookie(k, v)
+        if resolved_response is not None:
+            for k, v in resolved_response.cookies.items():
+                rest_response.set_cookie(k, v)
         return rest_response
     
-    def _resolve_url_via_query(self, url, request):
+    def build_redirect_response(self, target_url, resolved_response=None):
+        """ Builds an empty data package with the `redirect` flag set to True and
+            `resolved_url` set to the target redirect URL. """
+        data = copy(self._data_proto)
+        data["resolved_url"] = target_url
+        data["redirect"] = True
+        data["status_code"] = resolved_response.status_code
+        return self.build_data_response(data, resolved_response)
+    
+    def _resolve_url_via_query(self, url, request, allow_redirects=True):
         """ Resolves the URL via a requests get().
             Cookies from all redirect steps are passed along collectively. """
         session = requests.Session()
         session.headers.update(dict(request.headers))
         session.cookies.update(request.COOKIES)
-        response = session.get(url, allow_redirects=False)
+        response = session.get(url, allow_redirects=allow_redirects)
         for history_response in response.history:
             response.cookies.update(history_response.cookies)
         return response
