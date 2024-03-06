@@ -961,7 +961,6 @@ class CosinnusConf(AppConf):
     # URL paths that get are exempted from being redirected to the new frontend
     # if V3_FRONTEND_EVERYWHERE_ENABLED==True and V3_FRONTEND_ENABLED==True
     V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS = [
-        "^/logout/$",
         "^/language/",
         ".*/api/.*", # any paths with api calls
         "^/o/", # any oauth paths
