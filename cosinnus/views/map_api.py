@@ -29,8 +29,7 @@ from cosinnus.models.map import CloudfileMapCard, HaystackMapResult, \
     SEARCH_RESULT_DETAIL_TYPE_MAP, \
     SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS, \
     filter_event_searchqueryset_by_upcoming, \
-    filter_event_or_conference_starts_after, \
-    filter_event_or_conference_starts_before, EXCHANGE_SEARCH_MODEL_NAMES
+    filter_event_or_conference_happening_during, EXCHANGE_SEARCH_MODEL_NAMES, build_date_time
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.functions import is_number, ensure_list_of_ints
 from cosinnus.utils.permissions import check_object_read_access
@@ -246,10 +245,12 @@ class SearchQuerySetMixin:
                 # filter by datetime range
                 from_date_string = self.params.get('fromDate')
                 from_time_string = self.params.get('fromTime')
+                from_datetime = build_date_time(from_date_string, from_time_string)
                 to_date_string = self.params.get('toDate')
                 to_time_string = self.params.get('toTime')
-                sqs = filter_event_or_conference_starts_after(from_date_string, from_time_string, sqs)
-                sqs = filter_event_or_conference_starts_before(to_date_string, to_time_string, sqs)
+                to_datetime = build_date_time(to_date_string, to_time_string)
+                if from_datetime and to_datetime:
+                    sqs = filter_event_or_conference_happening_during(from_datetime, to_datetime, sqs)
             else:
                 # filter events by upcoming status and exclude hidden proxies
                 sqs = filter_event_searchqueryset_by_upcoming(sqs)
