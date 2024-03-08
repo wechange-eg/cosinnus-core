@@ -84,8 +84,7 @@ setup(
     packages=find_packages(exclude=["tests"]),
     data_files=data_files,
     install_requires=[
-        # please mirror all changes in the requirements.txt for local installs!
-        'Django>=4.2,<4.3',
+        'Django>=4.2.11,<4.3',
         'MarkupSafe==1.1',
         'Pillow==10.2.0',
         'celery==5.2.7',
