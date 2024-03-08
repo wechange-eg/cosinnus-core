@@ -98,7 +98,7 @@ class SwitchLanguageView(RedirectView):
     def get(self, request, *args, **kwargs):
         language = kwargs.pop('language', None)
         response = super(SwitchLanguageView, self).get(request, *args, **kwargs)
-        self.switch_langauge(language, request, response)
+        self.switch_language(language, request, response)
         return response
     
     def switch_language(self, language, request, response):
