@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Hierarchical Object Organisation &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="hierarchical-object-organisation">
+<h1>Hierarchical Object Organisation<a class="headerlink" href="#hierarchical-object-organisation" title="Permalink to this heading">¶</a></h1>
+<p>A guide to add hierarchical object organisation to a cosinnus app.
+The system is currently rather simple:</p>
+<ul class="simple">
+<li><p>Containers can be created and objects can be put into them.</p></li>
+<li><p>Containers can be nested infinitely within containers.</p></li>
+<li><p>Containers can be edited, although only their name can be changed.</p></li>
+<li><p>Containers are essentially the same as objects with the attribute is_container set to True.</p></li>
+<li><p>Objects or containers can not yet be moved between each other.</p></li>
+</ul>
+<p>For an example implementation, have a look at the app <cite>cosinnus_document</cite>.</p>
+<section id="extend-model">
+<h2>Extend Model<a class="headerlink" href="#extend-model" title="Permalink to this heading">¶</a></h2>
+<p>Import <cite>BaseHierarchicalTaggableObjectModel</cite> and extend it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cosinnus.models</span> <span class="kn">import</span> <span class="n">BaseHierarchicalTaggableObjectModel</span>
+
+<span class="k">class</span> <span class="nc">Model</span><span class="p">(</span><span class="n">BaseHierarchicalTaggableObjectModel</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Since <cite>BaseHierarchicalTaggableObjectModel</cite> is an abstract model, a migration
+for the app model needs to be created and run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./manage.py<span class="w"> </span>schemamigration<span class="w"> </span>cosinnus_app<span class="w"> </span>--auto
+$<span class="w"> </span>./manage.py<span class="w"> </span>migrate<span class="w"> </span>cosinnus_app
+</pre></div>
+</div>
+</section>
+<section id="add-urls">
+<h2>Add URLs<a class="headerlink" href="#add-urls" title="Permalink to this heading">¶</a></h2>
+<p>In the app’s <code class="docutils literal notranslate"><span class="pre">urls.py</span></code> add the following URLs like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cosinnus_group_patterns</span> <span class="o">+=</span> <span class="n">patterns</span><span class="p">(</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^add-container/$&#39;</span><span class="p">,</span> <span class="s1">&#39;container_add_view&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;container-add&#39;</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(?P&lt;slug&gt;[^/]+)/add/$&#39;</span><span class="p">,</span> <span class="s1">&#39;object_add_view&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;object-add&#39;</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(?P&lt;slug&gt;[^/]+)/add-container/$&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;container_add_view&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;container-add&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The first URL will hook the view to add a container to the object root into
+the URLconfig. The other URLs hook the views to add containers and objects to
+other containers into the config.</p>
+</section>
+<section id="view-to-add-a-container">
+<h2>View to add a container<a class="headerlink" href="#view-to-add-a-container" title="Permalink to this heading">¶</a></h2>
+<p>In the app’s <code class="docutils literal notranslate"><span class="pre">views.py</span></code> import <code class="docutils literal notranslate"><span class="pre">AddContainerView</span></code> from core:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cosinnus.views.hierarchy</span> <span class="kn">import</span> <span class="n">AddContainerView</span>
+</pre></div>
+</div>
+<p>Implement the model-specific container view:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="k">class</span> <span class="nc">ModelAddContainerView</span><span class="p">(</span><span class="n">AddContainerView</span><span class="p">):</span>
+     <span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+     <span class="n">appname</span> <span class="o">=</span> <span class="s1">&#39;appname&#39;</span>
+
+     <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
+<span class="w">         </span><span class="sd">&quot;&quot;&quot;Add model-specific attributes to form.instance&quot;&quot;&quot;</span>
+         <span class="n">form</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">created_by</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span>
+         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">ModelAddContainerView</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">form_valid</span><span class="p">(</span><span class="n">form</span><span class="p">)</span>
+
+<span class="n">container_add_view</span> <span class="o">=</span> <span class="n">ModelAddContainerView</span><span class="o">.</span><span class="n">as_view</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">model</span></code> defines the model to add container objects for</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">appname</span></code> defines the name of the app to be used for reversing URLs.</p></li>
+</ul>
+</section>
+<section id="mixin-the-hierarchy-tree">
+<h2>Mixin the hierarchy tree<a class="headerlink" href="#mixin-the-hierarchy-tree" title="Permalink to this heading">¶</a></h2>
+<p>The list view should add the <cite>HierarchyTreeMixin</cite> to its base classes. This
+would give you a method <cite>get_tree</cite> to get a hierarchical tree of the
+objects given as its argument:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cosinnus.views.mixins.tagged</span> <span class="kn">import</span> <span class="n">HierarchyTreeMixin</span>
+
+<span class="k">class</span> <span class="nc">ModelListView</span><span class="p">(</span><span class="n">RequireReadMixin</span><span class="p">,</span> <span class="n">FilterGroupMixin</span><span class="p">,</span> <span class="n">TaggedListMixin</span><span class="p">,</span>
+                   <span class="n">SortableListMixin</span><span class="p">,</span> <span class="n">HierarchyTreeMixin</span><span class="p">,</span> <span class="n">ListView</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+
+    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">ModelListView</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">object_list</span><span class="p">)</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;tree&#39;</span><span class="p">:</span> <span class="n">tree</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">context</span>
+</pre></div>
+</div>
+<p>The <cite>tree</cite> in the context can be used in a list view template like this:</p>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-list&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media&quot;</span><span class="p">&gt;</span>
+  <span class="cp">{%</span> <span class="k">with</span> <span class="nv">node</span><span class="o">=</span><span class="nv">tree</span> <span class="nv">tree_template</span><span class="o">=</span><span class="s2">&quot;cosinnus_app/tree.html&quot;</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">include</span> <span class="nv">tree_template</span> <span class="cp">%}</span>
+  <span class="cp">{%</span> <span class="k">endwith</span> <span class="cp">%}</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>With the template <cite>tree.html</cite> looking like that:</p>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">i18n</span> <span class="nv">cosinnus_tags</span> <span class="cp">%}</span>
+
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;pull-left&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>
+    <span class="cm">&lt;!-- enter js to collapse containers here. --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;glyphicon glyphicon-folder-open&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">container.container_object</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-body&quot;</span><span class="p">&gt;</span>
+  <span class="cm">&lt;!-- regular container --&gt;</span>
+  <span class="cp">{%</span> <span class="k">if</span> <span class="nv">user.is_superuser</span> <span class="k">or</span> <span class="nv">user</span><span class="o">|</span><span class="nf">is_group_admin</span><span class="o">:</span><span class="nv">object</span> <span class="cp">%}</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn-group pull-right&quot;</span> <span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary btn-mini&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;cosinnus:app:object-add&#39;</span> <span class="nv">group</span><span class="o">=</span><span class="nv">group.slug</span> <span class="nv">slug</span><span class="o">=</span><span class="nv">container.container_object.slug</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;glyphicon glyphicon-plus&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Add object&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary btn-mini&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;cosinnus:app:container-add&#39;</span> <span class="nv">group</span><span class="o">=</span><span class="nv">group.slug</span> <span class="nv">slug</span><span class="o">=</span><span class="nv">container.container_object.slug</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;glyphicon glyphicon-plus&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> <span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Create container&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary btn-mini dropdown-toggle&quot;</span> <span class="na">data-toggle</span><span class="o">=</span><span class="s">&quot;dropdown&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;caret&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;dropdown-menu&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;cosinnus:app:object-edit&#39;</span> <span class="nv">group</span><span class="o">=</span><span class="nv">group.slug</span> <span class="nv">slug</span><span class="o">=</span><span class="nv">container.container_object.slug</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;glyphicon glyphicon-pencil&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> <span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Edit&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;cosinnus:app:object-delete&#39;</span> <span class="nv">group</span><span class="o">=</span><span class="nv">group.slug</span> <span class="nv">slug</span><span class="o">=</span><span class="nv">container.container_object.slug</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;glyphicon glyphicon-trash&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> <span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Delete&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="cp">{{</span> <span class="nv">container.container_object.title</span> <span class="cp">}}</span>
+  <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+  <span class="cm">&lt;!-- root container --&gt;</span>
+  <span class="cp">{%</span> <span class="k">if</span> <span class="nv">user.is_superuser</span> <span class="k">or</span> <span class="nv">user</span><span class="o">|</span><span class="nf">is_group_admin</span><span class="o">:</span><span class="nv">object</span> <span class="cp">%}</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn-group pull-right&quot;</span> <span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary btn-mini&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;cosinnus:app:object-add&#39;</span> <span class="nv">group</span><span class="o">=</span><span class="nv">group.slug</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;glyphicon glyphicon-plus&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> <span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Add object&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary btn-mini&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;cosinnus:app:container-add&#39;</span> <span class="nv">group</span><span class="o">=</span><span class="nv">group.slug</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;glyphicon glyphicon-plus&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> <span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Create container&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+      // <span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;ROOT&quot;</span> <span class="cp">%}</span> //
+  <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+
+
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">node.containers</span> <span class="cp">%}</span>
+  <span class="cp">{%</span> <span class="k">for</span> <span class="nv">container</span> <span class="k">in</span> <span class="nv">node.containers</span> <span class="cp">%}</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media&quot;</span><span class="p">&gt;</span>
+    <span class="cp">{%</span> <span class="k">with</span> <span class="nv">node</span><span class="o">=</span><span class="nv">container</span> <span class="cp">%}</span>
+      <span class="cp">{%</span> <span class="k">include</span> <span class="nv">tree_template</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">endwith</span> <span class="cp">%}</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">node.objects</span> <span class="cp">%}</span>
+  <span class="cp">{%</span> <span class="k">for</span> <span class="nv">object</span> <span class="k">in</span> <span class="nv">node.objects</span> <span class="cp">%}</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;pull-left&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">object.get_absolute_url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;glyphicon glyphicon-file&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">object.get_absolute_url</span> <span class="cp">}}</span><span class="s">&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">object.title</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">object.title</span> <span class="cp">}}{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn-group pull-right&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary btn-mini&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">object.get_absolute_url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;glyphicon glyphicon-eye-open&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> <span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Show&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="cp">{%</span> <span class="k">if</span> <span class="nv">user.is_superuser</span> <span class="k">or</span> <span class="nv">user</span><span class="o">|</span><span class="nf">is_group_member</span><span class="o">:</span><span class="nv">object</span> <span class="cp">%}</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary btn-mini dropdown-toggle&quot;</span> <span class="na">data-toggle</span><span class="o">=</span><span class="s">&quot;dropdown&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;caret&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;dropdown-menu&quot;</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;menu&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;cosinnus:app:object-edit&#39;</span> <span class="nv">group</span><span class="o">=</span><span class="nv">group.slug</span> <span class="nv">slug</span><span class="o">=</span><span class="nv">object.slug</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;glyphicon glyphicon-pencil&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> <span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Edit&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;cosinnus:app:object-delete&#39;</span> <span class="nv">group</span><span class="o">=</span><span class="nv">group.slug</span> <span class="nv">slug</span><span class="o">=</span><span class="nv">object.slug</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;glyphicon glyphicon-trash&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> <span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Delete&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+        <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>If a list template shown as above is used, it is advisable to link a CSS file,
+e.g. <cite>static/css/cosinnus_app.css</cite> which defines a few rules which will prevent
+the dropdown menu from being clipped:</p>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span></span>.media, .media-body {
+        overflow: visible;
+}
+.media .media-body {
+        display: table-cell;
+        width: 10000px;
+        *width: auto;
+        *zoom: 1;
+}
+.media:before, .media:after {
+        content: &quot;&quot;;
+        display: table;
+}
+.media:after {
+        clear: both;
+}
+</pre></div>
+</div>
+</section>
+<section id="mixin-the-hierarchy-path">
+<h2>Mixin the hierarchy path<a class="headerlink" href="#mixin-the-hierarchy-path" title="Permalink to this heading">¶</a></h2>
+<p>The add/edit views should add the <cite>HierarchyPathMixin</cite> to its base classes.
+This will set up the object’s path in the hierarchy appropriately.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cosinnus.views.mixins.tagged</span> <span class="kn">import</span> <span class="n">HierarchyPathMixin</span>
+
+<span class="k">class</span> <span class="nc">ModelFormMixin</span><span class="p">(</span><span class="n">RequireWriteMixin</span><span class="p">,</span> <span class="n">FilterGroupMixin</span><span class="p">,</span>
+    <span class="n">GroupFormKwargsMixin</span><span class="p">,</span> <span class="n">HierarchyPathMixin</span><span class="p">):</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="mixin-the-hierarchy-deletion">
+<h2>Mixin the hierarchy deletion<a class="headerlink" href="#mixin-the-hierarchy-deletion" title="Permalink to this heading">¶</a></h2>
+<p>The delete view should add the <cite>HierarchyDeleteMixin</cite> to its base classes.
+This will delete containers and all objects contained within them.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cosinnus.views.mixins.tagged</span> <span class="kn">import</span> <span class="n">HierarchyDeleteMixin</span>
+
+<span class="k">class</span> <span class="nc">ModelDeleteView</span><span class="p">(</span><span class="n">ModelFormMixin</span><span class="p">,</span> <span class="n">HierarchyDeleteMixin</span><span class="p">,</span> <span class="n">DeleteView</span><span class="p">):</span>
+    <span class="n">message_success</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">message_error</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The app’s <cite>ModelFormMixin</cite> might define a mechanism to emit error or
+success messages. Since the <cite>HierarchyDeleteMixin</cite> will also emit these kind
+of messages, it might be advisable to suppress the messages emitted via the
+<cite>ModelFormMixin</cite>, hence setting <cite>message_success</cite> and <cite>message_error</cite> to
+<cite>None</cite> in the example above.</p>
+<p>The template for the delete view might then look like this:</p>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-horizontal&quot;</span><span class="p">&gt;</span>
+  <span class="cp">{%</span> <span class="k">csrf_token</span> <span class="cp">%}</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;control-group&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;control-label&quot;</span><span class="p">&gt;</span>
+      <span class="cp">{%</span> <span class="k">if</span> <span class="nv">object.is_container</span> <span class="cp">%}</span>
+        <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Are you sure you want to delete this container and all objects in it?&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+      <span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+        <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Are you sure you want to delete this object?&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+      <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+    <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;objects_to_delete&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">objects_to_delete</span> <span class="cp">}}</span><span class="s">&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+         <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;well well-sm&quot;</span><span class="p">&gt;</span>
+          <span class="cp">{%</span> <span class="k">for</span> <span class="nv">obj</span> <span class="k">in</span> <span class="nv">objects_to_delete</span> <span class="cp">%}</span>
+            <span class="cp">{%</span> <span class="k">if</span> <span class="nv">obj.is_container</span> <span class="cp">%}</span>
+              <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;glyphicon glyphicon-folder-open&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+            <span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+              <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;glyphicon glyphicon-file&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+            <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+            <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;cosinnus:app:object-detail&#39;</span> <span class="nv">group</span><span class="o">=</span><span class="nv">group.slug</span> <span class="nv">slug</span><span class="o">=</span><span class="nv">obj.slug</span> <span class="cp">%}</span><span class="s">&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">obj.title</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">obj.title</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">obj.path</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+            <span class="cp">{%</span> <span class="k">if</span> <span class="k">not</span> <span class="nb">forloop</span><span class="nv">.last</span> <span class="cp">%}</span><span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+          <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;controls&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-danger&quot;</span><span class="p">&gt;</span>
+        <span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Delete&quot;</span> <span class="cp">%}</span>
+      <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;cosinnus:app:list&#39;</span> <span class="nv">group</span><span class="o">=</span><span class="nv">group.slug</span> <span class="cp">%}</span><span class="s">&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn&quot;</span><span class="p">&gt;</span>
+        <span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Cancel&quot;</span> <span class="cp">%}</span>
+      <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>The app is good to go now, have fun organising your app objects!</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/legacy/hierarchy.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
