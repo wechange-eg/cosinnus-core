@@ -978,6 +978,9 @@ class CosinnusConf(AppConf):
         "^/widgets/",
         "^/widget/",
         "^/user_match_assign/",
+        "/.*/.*/attachmentselect/",
+        "/.*/.*/users/member-invite-select2/",
+        "/.*/.*/group-invite-select2/",
         # extra exemptions for views that do not work well with v3
         "^/map/embed/",
         "^/two_factor_auth/token_login/",
