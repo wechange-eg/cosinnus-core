@@ -79,11 +79,11 @@ This will create two separate folders::
 -  Change to your local development folder: e. g. `cd -/Sites` or similar
 -  Clone wechange::
 
-        git clone -b redesign git@git.wechange.de:code/portals/wechange.git wechange
+        git clone git@git.wechange.de:code/portals/wechange.git wechange
 
 -  Clone cosinnus::
 
-    git clone -b redesign git@github.com:wechange-eg/cosinnus-core.git cosinnus-core
+    git clone git@github.com:wechange-eg/cosinnus-core.git cosinnus-core
 
 -  Change your cosinnus branch to `main-redesign`::
 
@@ -151,17 +151,6 @@ Configure settings
     WECHANGE_DJANGO_SETTINGS_MODULE=config.settings.dev
     WECHANGE_DATABASE_URL=postgres://<DB-USER>:<DB-PASSWORD>@localhost/<DB-NAME>
 
-One-time staticfiles installation
----------------------------------
-
-::
-
-    cd cosinnus-core/
-    npm install
-    cd cosinnus-core/cosinnus_conference/frontend/
-    npm install`
-
-You will only need to do this once, unless you change any npm packages.
 
 One-time Django setup
 ---------------------
