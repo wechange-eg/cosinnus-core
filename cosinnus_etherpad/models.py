@@ -64,6 +64,7 @@ TYPE_CHOICES = (
 
 
 class Etherpad(BaseHierarchicalTaggableObjectModel, LikeableObjectMixin):
+    """ Model representing an Etherpad pad. """
 
     SORT_FIELDS_ALIASES = [('title', 'title')]
     

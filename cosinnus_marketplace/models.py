@@ -48,6 +48,7 @@ class OfferCategory(MultiLanguageFieldMagicMixin, CosinnusBaseCategory):
 
 @six.python_2_unicode_compatible
 class Offer(LikeableObjectMixin, BaseTaggableObjectModel):
+    """ Model for buying and selling offers. """
 
     SORT_FIELDS_ALIASES = [
         ('title', 'title'),

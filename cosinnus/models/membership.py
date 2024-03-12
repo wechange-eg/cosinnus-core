@@ -10,6 +10,7 @@ from django.utils.translation import gettext_lazy as _, pgettext_lazy as p_
 #: Role defining a user has requested to be added to a group
 from cosinnus.utils.user import filter_active_users
 
+#: Role defining a user requesting membership of a group that needs to be approved by an admin / manager.
 MEMBERSHIP_PENDING = 0
 
 #: Role defining a user is a member but not an admin of a group

@@ -51,6 +51,7 @@ def get_event_image_filename(instance, filename):
 @six.python_2_unicode_compatible
 class Event(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, LikeableObjectMixin, 
             BBBRoomMixin, RelayMessageMixin, BaseTaggableObjectModel):
+    """ Model for events. """
 
     SORT_FIELDS_ALIASES = [
         ('title', 'title'),

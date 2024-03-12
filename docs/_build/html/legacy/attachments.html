@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Attached Cosinnus Objects &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=524b4683"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="attached-cosinnus-objects">
+<h1>Attached Cosinnus Objects<a class="headerlink" href="#attached-cosinnus-objects" title="Permalink to this heading">¶</a></h1>
+<p>A guide to enabling attached objects for a cosinnus app. Use this to let users
+link Cosinnus objects to other Cosinnus objects. Want to show related News post
+and a Flyer on your event page? Attach Cosinnus-Note and Cosinnus-File to
+Cosinnus-Events! Want to attach a discussion etherpad to a Wiki page? You got
+it!</p>
+<section id="enable-attaching-objects-to-a-cosinnus-app-s-model">
+<h2>Enable attaching objects to a cosinnus app’s Model<a class="headerlink" href="#enable-attaching-objects-to-a-cosinnus-app-s-model" title="Permalink to this heading">¶</a></h2>
+<p>In your app <code class="docutils literal notranslate"><span class="pre">settings.COSINNUS_ATTACHABLE_OBJECTS</span></code> add an entry for your
+cosinnus model, with a list of the cosinnus models you want to be able to be
+attached.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Example: We want to be able to attach Files and Notes to Wiki pages:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">COSINNUS_ATTACHABLE_OBJECTS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;cosinnus_wiki.Page&#39;</span> <span class="p">:</span> <span class="p">[</span>
+        <span class="s1">&#39;cosinnus_file.FileEntry&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;cosinnus_note.Note&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="show-attached-objects-in-a-template">
+<h2>Show attached objects in a template<a class="headerlink" href="#show-attached-objects-in-a-template" title="Permalink to this heading">¶</a></h2>
+<p>In a template use the <code class="docutils literal notranslate"><span class="pre">cosinnus_render_attached_objects</span></code> template tag show
+attached objects in for the given object. This will automatically render all
+objects attached to the object.</p>
+<p>At the top of the template load the <code class="docutils literal notranslate"><span class="pre">cosinnus_tags</span></code>:</p>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">cosinnus_tags</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>Then, at the position where you want to render the objects, add:</p>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">cosinnus_render_attached_objects</span> <span class="nv">object</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">object</span></code> is the instance of the object whos attachments to show.</p>
+<p>If you want to check beforehand if there are attached objects that will be
+rendered, do it like this:</p>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">object.attached_objects.all</span> <span class="cp">%}</span>
+  <span class="cp">{%</span> <span class="k">cosinnus_render_attached_objects</span> <span class="nv">object</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</section>
+<section id="add-attached-objects">
+<h2>Add attached objects<a class="headerlink" href="#add-attached-objects" title="Permalink to this heading">¶</a></h2>
+<p>To be able to attach other cosinnus objects, you need to modifiy your object’s
+form views (<code class="docutils literal notranslate"><span class="pre">MyModelCreateView</span></code>, <code class="docutils literal notranslate"><span class="pre">MyModelUpdateView</span></code>, etc.), so that objects
+can actually be attached</p>
+<p>Let your create views inherit from <code class="xref py py-class docutils literal notranslate"><span class="pre">CreateViewAttachable</span></code> and your
+update views inherit from <code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateViewAttachable</span></code>.</p>
+<p>To add the appropriate functionality to the underlying forms, make your model
+form inherit from <code class="xref py py-class docutils literal notranslate"><span class="pre">FormAttachable</span></code>.</p>
+</section>
+<section id="create-a-model-that-can-be-attached-to-other-objects">
+<h2>Create a Model that can be attached to other objects<a class="headerlink" href="#create-a-model-that-can-be-attached-to-other-objects" title="Permalink to this heading">¶</a></h2>
+<p>To offer your objects as attachable object inside the cosinnus apps, you need
+to follow these steps:</p>
+<ol class="arabic simple">
+<li><p>Create a renderer (and probably a template) for displaying your object when
+it is attached to some other cosinnus object. You only need to implement and
+declare the renderer. Cosinnus-core handles calling and using it to render
+your object at runtime, from any other cosinnus app.</p></li>
+<li><p>Declare your objects as attachable_objects in your cosinnus_app.py file.</p></li>
+</ol>
+<section id="create-a-renderer-for-the-model-you-want-to-provide">
+<h3>Create a renderer for the Model you want to provide<a class="headerlink" href="#create-a-renderer-for-the-model-you-want-to-provide" title="Permalink to this heading">¶</a></h3>
+<ul>
+<li><p>This renderer is being passed the full list of attached cosinnus objects of
+your model’s type at request time. It is expected to return rendered html
+code of your file type to be displayed at the view of a cosinnus object (if
+this object has any objects of your type attached).</p>
+<ul>
+<li><p>An example for cosinnus_file’s FileEntry: (in cosinnus_file.renderer.py):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FileEntryRenderer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">render_attached_objects</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">files</span><span class="p">):</span>
+        <span class="n">template</span><span class="o">=</span><span class="s2">&quot;cosinnus_file/attached_files.html&quot;</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;files&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">files</span>
+        <span class="k">return</span> <span class="n">render_to_string</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>The respective template could be like this:</p>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;media-body&quot;</span><span class="p">&gt;</span>
+  <span class="cp">{%</span> <span class="k">for</span> <span class="nv">file</span> <span class="k">in</span> <span class="nv">files</span> <span class="cp">%}</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      Behold an attached file! with the slug <span class="p">&lt;</span><span class="nt">b</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">file.slug</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">b</span><span class="p">&gt;</span>: <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;cosinnus:file:download&#39;</span> <span class="nv">group</span><span class="o">=</span><span class="nv">group.slug</span> <span class="nv">slug</span><span class="o">=</span><span class="nv">file.slug</span> <span class="cp">%}</span><span class="s">&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">file.sourcefilename</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="declare-your-cosinnus-object-as-attachable-object">
+<h3>Declare your cosinnus object as attachable object<a class="headerlink" href="#declare-your-cosinnus-object-as-attachable-object" title="Permalink to this heading">¶</a></h3>
+<ul>
+<li><p>In your cosinnus_app.py, define the two following properties (substitute your
+model name and the renderer you have created:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ATTACHABLE_OBJECT_MODELS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;FileEntry&#39;</span><span class="p">]</span>
+<span class="n">ATTACHABLE_OBJECT_RENDERERS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;FileEntry&#39;</span><span class="p">:</span><span class="n">renderer</span><span class="o">.</span><span class="n">FileEntryRenderer</span><span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>In your django.po localization file, add a label for the Form field for your
+attached files in the syntax: <code class="docutils literal notranslate"><span class="pre">attached:&lt;app_name&gt;.&lt;model_name&gt;</span></code>. Example:</p>
+<div class="highlight-po notranslate"><div class="highlight"><pre><span></span><span class="nv">msgid</span> <span class="s">&quot;attached:cosinnus_file.FileEntry&quot;</span>
+<span class="nv">msgstr</span> <span class="s">&quot;Angehängte Dateien&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>You’re done! Cosinnus-Core should now pick up your attachable object and use
+your renderer to display objects of your model’s type!</p>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Configuration Settings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/legacy/attachments.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

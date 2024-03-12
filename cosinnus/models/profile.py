@@ -608,6 +608,8 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
 
 
 class UserProfile(BaseUserProfile):
+    """ Default implementation of the `BaseUserProfile`. """
+
     timezone = TimeZoneField(default='Europe/Berlin')
     
     class Meta(object):

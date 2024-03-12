@@ -34,6 +34,7 @@ FACEBOOK_POST_URL = 'https://www.facebook.com/%s/posts/%s' # %s, %s :  user_id, 
 
 
 class Note(LikeableObjectMixin, TranslateableFieldsModelMixin, RelayMessageMixin, BaseTaggableObjectModel):
+    """ Model for a news post. """
     
     if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
         translateable_fields = ['title', 'text']

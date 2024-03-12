@@ -86,10 +86,18 @@ class CosinnusTopicCategory(MultiLanguageFieldMagicMixin, CosinnusBaseCategory):
 
 @six.python_2_unicode_compatible
 class BaseTagObject(models.Model):
+    """ Basic tags that are linked to a model via BaseTaggableObjectModel. """
 
-    VISIBILITY_USER = 0 # for Users, this setting means: "Only Group Members can see me"
-    VISIBILITY_GROUP = 1 # for Users, this setting means: "Only Logged in Users can see me"
-    VISIBILITY_ALL = 2 # for Users, this setting means: "Everyone can see me"
+    #: Only the user can see this model instance.
+    #: For Users, this setting means: "Only Group Members can see me".
+    VISIBILITY_USER = 0
+    #: Only team members can see this model instance.
+    #: For Users, this setting means: "Only Logged in Users can see me".
+    VISIBILITY_GROUP = 1
+    #: All platform users can see this model instance, or even unauthenticated users depending on the
+    #: COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN setting.
+    #: For Users, this setting means: "Everyone can see me"
+    VISIBILITY_ALL = 2
 
     #: Choices for :attr:`visibility`: ``(int, str)``
     _VISIBILITY_CHOICES = (

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cosinnus.utils.dates &#8212; Cosinnus 1.19.6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/classic.css?v=89b800e6" />
+    
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=436d026a"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Cosinnus 1.19.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cosinnus.utils.dates</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for cosinnus.utils.dates</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="kn">from</span> <span class="nn">django.template.defaultfilters</span> <span class="kn">import</span> <span class="n">date</span> <span class="k">as</span> <span class="n">django_date_filter</span>
+<span class="kn">from</span> <span class="nn">django.template.loader</span> <span class="kn">import</span> <span class="n">render_to_string</span>
+<span class="kn">from</span> <span class="nn">django.utils</span> <span class="kn">import</span> <span class="n">dateformat</span>
+<span class="kn">from</span> <span class="nn">django.utils.formats</span> <span class="kn">import</span> <span class="n">date_format</span>
+<span class="kn">from</span> <span class="nn">django.utils.safestring</span> <span class="kn">import</span> <span class="n">mark_safe</span>
+<span class="kn">from</span> <span class="nn">django.utils.timezone</span> <span class="kn">import</span> <span class="n">localtime</span><span class="p">,</span> <span class="n">now</span>
+<span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="kn">import</span> <span class="n">ugettext_lazy</span> <span class="k">as</span> <span class="n">_</span>
+<span class="kn">import</span> <span class="nn">pytz</span>
+
+
+<span class="c1"># http://momentjs.com/docs/#/parsing/string-format/</span>
+<span class="c1"># http://docs.python.org/2/library/datetime.html#strftime-strptime-behavior</span>
+<span class="n">FORMAT_MAP</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="s1">&#39;DDD&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;%j&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;DD&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;MMMM&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;%B&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;MMM&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;%b&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;MM&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;%m&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;YYYY&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;%Y&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;YY&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;%y&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;HH&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;%H&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;hh&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;%I&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;mm&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;%M&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;ss&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;%S&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;%p&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;ZZ&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;%z&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="datetime_format_py2js"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.dates.datetime_format_py2js">[docs]</a><span class="k">def</span> <span class="nf">datetime_format_py2js</span><span class="p">(</span><span class="nb">format</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts Python&#39;s :func:`~time.strftime` format to a JavaScript notation,</span>
+<span class="sd">    eg. ``&quot;%d&quot;`` to ``&quot;DD&quot;`` or ``&quot;%Y&quot;`` to ``&quot;YYYY&quot;``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">js</span><span class="p">,</span> <span class="n">py</span> <span class="ow">in</span> <span class="n">FORMAT_MAP</span><span class="p">:</span>
+        <span class="nb">format</span> <span class="o">=</span> <span class="nb">format</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">py</span><span class="p">,</span> <span class="n">js</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">format</span></div>
+
+
+<div class="viewcode-block" id="datetime_format_js2py"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.dates.datetime_format_js2py">[docs]</a><span class="k">def</span> <span class="nf">datetime_format_js2py</span><span class="p">(</span><span class="nb">format</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts a JavaScript datetime notation to Python&#39;s :func:`~time.strftime`</span>
+<span class="sd">    format, eg. ``&quot;DD&quot;`` to ``&quot;%d&quot;`` or ``&quot;YYYY&quot;`` to ``&quot;%Y&quot;`` .</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">js</span><span class="p">,</span> <span class="n">py</span> <span class="ow">in</span> <span class="n">FORMAT_MAP</span><span class="p">:</span>
+        <span class="nb">format</span> <span class="o">=</span> <span class="nb">format</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">js</span><span class="p">,</span> <span class="n">py</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">format</span></div>
+
+
+<div class="viewcode-block" id="timestamp_from_datetime"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.dates.timestamp_from_datetime">[docs]</a><span class="k">def</span> <span class="nf">timestamp_from_datetime</span><span class="p">(</span><span class="n">datetime_obj</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Creates a float timestamp from a datetime.</span>
+<span class="sd">        @param datetime_obj: A datetime. If none is given, uses the current time instead. &quot;&quot;&quot;</span>
+    <span class="n">datetime_obj</span> <span class="o">=</span> <span class="n">datetime_obj</span> <span class="ow">or</span> <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">datetime_obj</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span></div>
+    
+    
+<div class="viewcode-block" id="datetime_from_timestamp"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.dates.datetime_from_timestamp">[docs]</a><span class="k">def</span> <span class="nf">datetime_from_timestamp</span><span class="p">(</span><span class="n">timestamp</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Creates a datetime from a float timestamp &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">pytz</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="localize"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.dates.localize">[docs]</a><span class="k">def</span> <span class="nf">localize</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">format</span><span class="p">):</span>
+    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">format</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="s2">&quot;FORMAT&quot;</span> <span class="ow">in</span> <span class="nb">format</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">date_format</span><span class="p">(</span><span class="n">localtime</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="nb">format</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">dateformat</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">localtime</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="nb">format</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="HumanizedEventTimeMixin"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.dates.HumanizedEventTimeMixin">[docs]</a><span class="k">class</span> <span class="nc">HumanizedEventTimeMixin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Utility function mixin for any model containing a `from_date` and `to_date` datetime field. &quot;&quot;&quot;</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">single_day</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_date</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_date</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">localtime</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">from_date</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span> <span class="o">==</span> <span class="n">localtime</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_date</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_same_day</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_date</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_date</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">localtime</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">from_date</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span> <span class="o">==</span> <span class="n">localtime</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_date</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_same_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_date</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_date</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_date</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_date</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_all_day</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_date</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_date</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">localize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">from_date</span><span class="p">,</span> <span class="s2">&quot;H:i&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;00:00&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">localize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_date</span><span class="p">,</span> <span class="s2">&quot;H:i&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;23:59&#39;</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_running</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">has_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_date</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_date</span>
+        <span class="n">running</span> <span class="o">=</span> <span class="n">has_time</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_date</span> <span class="o">&lt;=</span> <span class="n">now</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_date</span>
+        <span class="k">return</span> <span class="n">has_time</span> <span class="ow">and</span> <span class="n">running</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">has_ended</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_date</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_date</span> <span class="o">&lt;=</span> <span class="n">now</span><span class="p">()</span>
+    
+<div class="viewcode-block" id="HumanizedEventTimeMixin.get_date_or_now_starting_time"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.dates.HumanizedEventTimeMixin.get_date_or_now_starting_time">[docs]</a>    <span class="k">def</span> <span class="nf">get_date_or_now_starting_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Returns a dict like {&#39;is_date&#39;: True, &#39;date&#39;: &lt;date&gt;}</span>
+<span class="sd">            with is_date=False date as string &quot;Now&quot; if the event is running, </span>
+<span class="sd">            else is_date=True and date as the moment-usable datetime of the from_date. &quot;&quot;&quot;</span>
+        <span class="n">_now</span> <span class="o">=</span> <span class="n">now</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_date</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_date</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_date</span> <span class="o">&lt;</span> <span class="n">_now</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_date</span> <span class="o">&gt;</span> <span class="n">_now</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;is_date&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Now&quot;</span><span class="p">))}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;is_date&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">django_date_filter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">from_date</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)}</span></div>
+    
+<div class="viewcode-block" id="HumanizedEventTimeMixin.get_period"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.dates.HumanizedEventTimeMixin.get_period">[docs]</a>    <span class="k">def</span> <span class="nf">get_period</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">single_day</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">localize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">from_date</span><span class="p">,</span> <span class="s2">&quot;d.m.Y&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> - </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">localize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">from_date</span><span class="p">,</span> <span class="s2">&quot;d.m.&quot;</span><span class="p">),</span> <span class="n">localize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_date</span><span class="p">,</span> <span class="s2">&quot;d.m.Y&quot;</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="HumanizedEventTimeMixin.get_period_with_time"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.dates.HumanizedEventTimeMixin.get_period_with_time">[docs]</a>    <span class="k">def</span> <span class="nf">get_period_with_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_all_day</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_period</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">single_day</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">localize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">from_date</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;d.m.Y H:i&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1"> - </span><span class="si">{</span><span class="n">localize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_date</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;H:i&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">localize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">from_date</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;d.m.Y H:i&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1"> - </span><span class="si">{</span><span class="n">localize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_date</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;d.m.Y H:i&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span></div>
+
+<div class="viewcode-block" id="HumanizedEventTimeMixin.get_humanized_event_time_html"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.dates.HumanizedEventTimeMixin.get_humanized_event_time_html">[docs]</a>    <span class="k">def</span> <span class="nf">get_humanized_event_time_html</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_date</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">mark_safe</span><span class="p">(</span><span class="n">render_to_string</span><span class="p">(</span><span class="s1">&#39;cosinnus_event/common/humanized_event_time.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;event&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="p">}))</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></div></div>
+    
+    
+<div class="viewcode-block" id="HumanizedEventTimeObject"><a class="viewcode-back" href="../../../ref/cosinnus.utils.html#cosinnus.utils.dates.HumanizedEventTimeObject">[docs]</a><span class="k">class</span> <span class="nc">HumanizedEventTimeObject</span><span class="p">(</span><span class="n">HumanizedEventTimeMixin</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Convenience object wrapping `HumanizedEventTimeMixin` to give easy</span>
+<span class="sd">        access to the mixin&#39;s functions when you only have two datetimes. &quot;&quot;&quot;</span>
+    
+    <span class="n">from_date</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">to_date</span> <span class="o">=</span> <span class="kc">None</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">from_date</span><span class="p">,</span> <span class="n">to_date</span><span class="p">):</span>
+        <span class="c1"># localize naive datetimes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">from_date</span> <span class="o">=</span> <span class="n">from_date</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">to_date</span> <span class="o">=</span> <span class="n">to_date</span></div>
+    
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Cosinnus 1.19.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cosinnus.utils.dates</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2013 - 2014, Sinnwerkstatt Medienagentur GmbH.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    </div>
+  </body>
+</html>
