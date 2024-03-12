@@ -9,6 +9,7 @@ from cosinnus.conf import settings
 from cosinnus.views.common import SwitchLanguageView
 
 USERPROFILE_SETTING_FRONTEND_DISABLED = "frontend_disabled"
+REQUEST_KEY_V3_API_CONTENT_CONTEXT_ACTIVE = "v3_api_content_active"
 
 
 class FrontendMiddleware(MiddlewareMixin):
@@ -18,14 +19,20 @@ class FrontendMiddleware(MiddlewareMixin):
     """
     param_key = "v"
     param_value = "3"
-    param_key_exempt = "v2"
+    param_key_exempt = "apicontent" # this key/value pair means the request wants to retrieve html content via api
     param_value_exempt = "true"
+    force_disable_key = "forcev2" # use this to disable any v3-related redirects
     
     switch_language_to = None
 
     def process_request(self, request):
         self.switch_language_to = None
+        
         if settings.COSINNUS_V3_FRONTEND_ENABLED:
+            # completely skip any redirects with the force-disable GET key (debug purposes)
+            if request.GET.get(self.force_disable_key, None) is not None:
+                return
+            
             request_tokens = request.build_absolute_uri().split('/')
             # if the workaround language-prefix request from the frontend has arrived at the server,
             # strip the prefixed language AND switch to that language
@@ -40,7 +47,8 @@ class FrontendMiddleware(MiddlewareMixin):
             if request.method != 'GET':
                 return
             
-            # do not redirect if the redirect exempt value v2=true is specifically set
+            # do not redirect if the redirect exempt api call value is specifically set,
+            # meaning we are trying to parse html content for the v3 main content endppint
             if request.GET.get(self.param_key_exempt, None) == self.param_value_exempt:
                 # but strip the exemption param from the request
                 request.GET._mutable = True
@@ -49,6 +57,9 @@ class FrontendMiddleware(MiddlewareMixin):
                     f'{self.param_key_exempt}={self.param_value_exempt}', '')
                 request.environ['QUERY_STRING'] = request.environ['QUERY_STRING'].replace(
                     f'{self.param_key_exempt}={self.param_value_exempt}', '')
+                # set session flag in request, so we know this is a v3 content context and can change
+                # HTML content and save some DB queries accordingly
+                setattr(request, REQUEST_KEY_V3_API_CONTENT_CONTEXT_ACTIVE, True)
                 return
             
             # currently do not affect login requests within the oauth flow
@@ -94,4 +105,6 @@ class FrontendMiddleware(MiddlewareMixin):
     def process_response(self, request, response):
         if self.switch_language_to:
             SwitchLanguageView().switch_language(self.switch_language_to, request, response)
+        if hasattr(request, REQUEST_KEY_V3_API_CONTENT_CONTEXT_ACTIVE):
+            delattr(request, REQUEST_KEY_V3_API_CONTENT_CONTEXT_ACTIVE)
         return response

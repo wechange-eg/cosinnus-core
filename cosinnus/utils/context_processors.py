@@ -102,10 +102,15 @@ def cosinnus(request):
         pass  # current_app is not a cosinnus app
     except Resolver404:
         pass
+    
+    v3_api_content_active = bool(getattr(request, 'v3_api_content_active', None) == True)
 
     # version history
-    version_history, version_history_unread_count = get_version_history_for_user(request.user)
-
+    if v3_api_content_active:
+        version_history, version_history_unread_count = {}, 0
+    else:
+        version_history, version_history_unread_count = get_version_history_for_user(request.user)
+    
     return {
         'COSINNUS_BASE_URL': base_url,
         'COSINNUS_CURRENT_APP': current_app_name,
@@ -129,6 +134,7 @@ def cosinnus(request):
         'COSINNUS_USER_TIMEZONE': user.is_authenticated and user.cosinnus_profile.timezone.zone or None,
         'COSINNUS_VERSION_HISTORY': version_history,
         'COSINNUS_VERSION_HISTORY_UNREAD_COUNT': version_history_unread_count,
+        'COSINNUS_V3_API_CONTENT_ACTIVE': v3_api_content_active,
     }
 
 

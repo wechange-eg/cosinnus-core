@@ -258,6 +258,7 @@ class MainContentView(APIView):
         response = self._resolve_url_via_query(v3_exempted_url, django_request, allow_redirects=False)
         # if we have been redirected, return an empty data package with a redirect target url!
         if response.status_code in [301, 302]:
+            # remove the v3-exempt parameter from the resolved URL again
             redirect_target_url = remove_url_param(response.headers["Location"], FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt)
             return self.build_redirect_response(redirect_target_url, response)
         

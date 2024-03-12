@@ -28,7 +28,7 @@
 		{% comment %} Combobox dropdown and breadcrumb {% endcomment %}
 	    <div class="row">
 	        <!-- start with left navigation -->
-	        <div class="x-v3-leftnav col-lg-3 col-md-3"><!-- left column -->
+	        <div class="{% if COSINNUS_V3_API_CONTENT_ACTIVE %}x-v3-leftnav {% endif %}col-lg-3 col-md-3"><!-- left column -->
 	            {% if group %}
 	                {% cosinnus_menu "cosinnus/appsmenu.html" %}
 	            {% endif %}
