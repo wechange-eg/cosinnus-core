@@ -2868,7 +2868,7 @@ msgid "next"
 msgstr "Weiter"
 
 msgid "Update User"
-msgstr "Benutzer aktualisieren"
+msgstr "Benutzer/in aktualisieren"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "In einem der eingegebenen Felder trat ein Fehler auf. Bitte korrigiere ihn vor dem Speichern!"
@@ -4259,7 +4259,7 @@ msgid "Enter a user name or email to find users to invite..."
 msgstr "Gib einen Benutzernamen oder E-Mail zum Einladen ein..."
 
 msgid "Invite users"
-msgstr "Benutzer einladen"
+msgstr "Benutzer/in einladen"
 
 msgid "Invited Members"
 msgstr "Eingeladene Mitglieder"
@@ -5412,7 +5412,7 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
-"Benutzer \"%(sender_name)s\" hat die Einladung zu %(team_name)s akzeptiert.\n"
+"Benutzer/in \"%(sender_name)s\" hat die Einladung zu %(team_name)s akzeptiert.\n"
 "\n"
 "Du hast diese E-Mail bekommen, weil du ein Gruppen-/Projektadministrator bist.\n"
 "\n"
@@ -5436,7 +5436,7 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
-"Benutzer \"%(sender_name)s\" hat die Einladung zu %(team_name)s abgelehnt.\n"
+"Benutzer/in \"%(sender_name)s\" hat die Einladung zu %(team_name)s abgelehnt.\n"
 "\n"
 "Du hast diese E-Mail bekommen, weil du ein Gruppen-/Projektadministrator bist.\n"
 "\n"
@@ -5505,7 +5505,7 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
-"Benutzer \"%(sender_name)s\" möchte %(team_name)s beitreten.\n"
+"Benutzer/in \"%(sender_name)s\" möchte %(team_name)s beitreten.\n"
 "\n"
 "Bitte besuche die folgende Seite um die Anfrage anzunehmen oder abzulehnen:\n"
 "%(domain_url)s%(group_page_url)s\n"
@@ -7280,7 +7280,7 @@ msgid "If the user still has not hidden their introduction-message on the dashbo
 msgstr "Wenn ein Benutzer die \"Willkommen!\"-Einleitungstext auf dem Dashboard noch nicht weggeklickt hat, wird er keine Ankündigung sehen."
 
 msgid "A user can dismiss an announcement, in which case it will disappear and never be shown again. On the next visit to their Dashboard, another valid announcement they have not yet hidden may be shown."
-msgstr "Benutzer kann eine Ankündigungen wegklicken, woraufhin sie verschwindet und dem Benutzer nie wieder angezeigt wird. Beim nächsten Besuch des Dashboards wird die nächste Ankündigung angezeigt, falls es noch welche gibt, die der Benutzer nicht weggeklickt hat."
+msgstr "Benutzer/in kann eine Ankündigungen wegklicken, woraufhin sie verschwindet und dem Benutzer nie wieder angezeigt wird. Beim nächsten Besuch des Dashboards wird die nächste Ankündigung angezeigt, falls es noch welche gibt, die der Benutzer nicht weggeklickt hat."
 
 msgid "There are no announcements yet."
 msgstr "Noch keine Ankündigungen vorhanden."
@@ -7881,7 +7881,7 @@ msgid "Project members only"
 msgstr "Nur Projektmitglieder"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the project's administrators."
-msgstr "Benutzer können beitreten, indem sie einen Antrag auf Mitgliedschaft einreichen, der von einem der Administratoren des Projekts angenommen oder abgelehnt werden kann."
+msgstr "Benutzer/in können beitreten, indem sie einen Antrag auf Mitgliedschaft einreichen, der von einem der Administratoren des Projekts angenommen oder abgelehnt werden kann."
 
 msgid "Type the names of files, events or pads from this project to attach..."
 msgstr "Tippe die Namen von Dateien, Veranstaltungen oder Pads aus diesem Projekt, um sie anzuhängen..."
@@ -7989,7 +7989,7 @@ msgid "Group members only"
 msgstr "Nur Gruppen-Mitglieder"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the groups's administrators."
-msgstr "Benutzer können beitreten, indem sie einen Antrag auf Mitgliedschaft einreichen, der von einem der Administratoren der Gruppe angenommen oder abgelehnt werden kann."
+msgstr "Benutzer/in können beitreten, indem sie einen Antrag auf Mitgliedschaft einreichen, der von einem der Administratoren der Gruppe angenommen oder abgelehnt werden kann."
 
 msgid "Type the names of files, events or pads from this group to attach..."
 msgstr "Tippe die Namen von Dateien, Veranstaltungen oder Pads aus dieser Gruppe, um sie anzuhängen..."
@@ -8098,7 +8098,7 @@ msgid "Conference members only"
 msgstr "Nur Tagungsmitglieder"
 
 msgid "Users may join by submitting a membership request that can be accepted or declined by any of the conference's organizers."
-msgstr "Benutzer können beitreten, indem sie einen Antrag auf Mitgliedschaft einreichen, der von einem der Veranstalter der Tagung angenommen oder abgelehnt werden kann."
+msgstr "Benutzer/in können beitreten, indem sie einen Antrag auf Mitgliedschaft einreichen, der von einem der Veranstalter der Tagung angenommen oder abgelehnt werden kann."
 
 msgid "Type the names of files, events or pads from this conference to attach..."
 msgstr "Tippe die Namen von Dateien, Veranstaltungen oder Pads aus dieser Tagung um sie anzuhängen..."
@@ -8467,11 +8467,11 @@ msgstr "Ich habe dich eingeladen, %(team_name)s beizutreten!"
 
 #, python-format
 msgid "User %(username)s had already requested membership and has now been made a member immediately!"
-msgstr "Benutzer \"%(username)s\" hatte bereits einen Antrag auf Mitgliedschaft gestellt und wurde deshalb sofort zum Mitglied gemacht!"
+msgstr "Benutzer/in \"%(username)s\" hatte bereits einen Antrag auf Mitgliedschaft gestellt und wurde deshalb sofort zum Mitglied gemacht!"
 
 #, python-format
 msgid "User %(username)s was successfully invited!"
-msgstr "Benutzer %(username)s wurde erfolgreich eingeladen!"
+msgstr "Benutzer/in %(username)s wurde erfolgreich eingeladen!"
 
 #, python-format
 msgid "The following users were invited to apply: %s"
@@ -8481,7 +8481,7 @@ msgid "All members of groups/projects you selected had already been invited or h
 msgstr "Alle Mitglieder/innen der ausgewählten Gruppen/Projekte wurden bereits eingeladen oder haben sich bereits angemeldet. Es wurden keine neuen Einladungen verschickt."
 
 msgid "Invited user \"%(user)s\"."
-msgstr "Benutzer \"%(user)s\" eingeladen."
+msgstr "Benutzer/in \"%(user)s\" eingeladen."
 
 msgid "You cannot promote a guest user account!"
 msgstr "Du kannst einen Gast nicht befördern!"
@@ -8491,14 +8491,14 @@ msgid "You cannot remove “%(username)s” form this team. Only one admin left.
 msgstr "Sie können “%(username)s” nicht von diesem Projekt entfernen. Er/sie ist der einzig übrige Administrator."
 
 msgid "Accepted user \"%(user)s\" as  member."
-msgstr "Benutzer \"%(username)s\" als Mitglied akzeptiert."
+msgstr "Benutzer/in \"%(user)s\" als Mitglied akzeptiert."
 
 #, python-format
 msgid "Made user \"%(user)s\" admin."
-msgstr ""
+msgstr "Benutzer/in \"%(user)s\" zum Admin gemacht."
 
 msgid "Made user \"%(user)s\" member."
-msgstr "Benutzer \"%(username)s\" zum Mitglied gemacht."
+msgstr "Benutzer/in \"%(user)s\" zum Mitglied gemacht."
 
 #, python-format
 msgid "You cannot remove yourself from a %(team_type)s."
@@ -8518,11 +8518,11 @@ msgstr "Deine Einladung an Benutzer \"%(username)s\" wurde erfolgreich zurückge
 
 #, python-format
 msgid "User \"%(username)s\" is no longer a member."
-msgstr "Benutzer \"%(username)s\" ist jetzt kein Mitglied mehr."
+msgstr "Benutzer/in \"%(username)s\" ist jetzt kein Mitglied mehr."
 
 #, python-format
 msgid "Removed membership of user \"%(user)s\"."
-msgstr ""
+msgstr "Mitgliedschaft für Benutzer/in \"%(user)s\" entfernt."
 
 #, python-format
 msgid "%(team_name)s was re-activated successfully!"
@@ -8720,7 +8720,7 @@ msgstr "Dein Benutzerkonto \"%(user)s\" wurde erfolgreich registriert. Willkomme
 
 #, python-format
 msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
-msgstr "Benutzer \"%(user)s\" wurde erfolgreich registriert. Das Benutzerkonto muss noch überprüft und freigeschaltet werden bevor du dich einloggen kannst. Wir senden dir eine E-Mail an \"%(email)s\" wenn es soweit ist."
+msgstr "Benutzer/in \"%(user)s\" wurde erfolgreich registriert. Das Benutzerkonto muss noch überprüft und freigeschaltet werden bevor du dich einloggen kannst. Wir senden dir eine E-Mail an \"%(email)s\" wenn es soweit ist."
 
 #, python-format
 msgid "Thank you for signing up and welcome to the platform! We sent an email to your address \"%(email)s\" - please click the link contained in it to verify your email address!"
@@ -8785,7 +8785,7 @@ msgid "The link you supplied for the email confirmation is no longer valid!"
 msgstr "Dieser Bestätigungslink ist nicht länger gültig!"
 
 msgid "The email you are trying to confirm has already been confirmed or belongs to another user!"
-msgstr "Die E-Mail-Adresse die du bestätigen wolltest wurde bereits bestätigt oder ist inzwischen von einem andern Benutzer registriert worden!"
+msgstr "Die E-Mail-Adresse die du bestätigen wolltest wurde bereits bestätigt oder ist inzwischen von einem anderen Benutzer registriert worden!"
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed!"
@@ -8992,7 +8992,7 @@ msgid "Successfully updated accounts."
 msgstr "Nutzerkonten erfolgreich aktualisiert."
 
 msgid "User was not created"
-msgstr "Benutzer wurde nicht erstellt"
+msgstr "Benutzer/in wurde nicht erstellt"
 
 msgid "The room was created successfully."
 msgstr "Raum erfolgreich erstellt."
@@ -11598,7 +11598,7 @@ msgid "Multi Notification Preferences"
 msgstr "Multi Notification Preferences"
 
 msgid "User who caused this notification event"
-msgstr "Benutzer der das Event ausgelöst hat"
+msgstr "Benutzer/in der das Event ausgelöst hat"
 
 msgid "Audience"
 msgstr "Publikum"
@@ -13651,7 +13651,7 @@ msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte
 #~ msgstr "Projekte/Gruppen CSV-Datei"
 
 #~ msgid "User CSV File"
-#~ msgstr "Benutzer CSV-Datei"
+#~ msgstr "Benutzer/in CSV-Datei"
 
 #~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
 #~ msgstr "Die Standardeinstellungen der CSV-Datei. Bitte nur in dem Fall ändern, wenn Sie sich absolut sicher sind, was Sie tun!"
@@ -13969,7 +13969,7 @@ msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte
 #~ msgstr "Das Benutzerkonto wurde erfolgreich registriert. Du wirst innerhalb weniger Minuten einen Bestätigungslink von uns erhalten. Diesen musst du klicken, bevor du dich einloggen kannst."
 
 #~ msgid "User \"%(email)s\" was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
-#~ msgstr "Benutzer \"%(email)s\" wurde erfolgreich registriert. Du wirst innerhalb weniger Minuten einen Bestätigungslink von uns erhalten. Diesen musst du klicken, bevor du dich einloggen kannst."
+#~ msgstr "Benutzer/in \"%(email)s\" wurde erfolgreich registriert. Du wirst innerhalb weniger Minuten einen Bestätigungslink von uns erhalten. Diesen musst du klicken, bevor du dich einloggen kannst."
 
 #~ msgid "Is premium"
 #~ msgstr "Ist Premium"
