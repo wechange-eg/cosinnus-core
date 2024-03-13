@@ -91,7 +91,9 @@ function NavConnector(props: NavProps) {
           </Hidden>
         )}
         <Typography component="h3">{conference.props.name}</Typography>
-        <Typography component="subtitle">{conference.props.subtitle}</Typography>
+        {conference.props.subtitle && (
+          <Typography component="subtitle">{conference.props.subtitle}</Typography>
+        )}
         <Link
           className={classes.toggleMenuButton}
           href="#"

@@ -4491,7 +4491,7 @@ msgid "Description and Infos"
 msgstr "Beschreibung und Infos"
 
 msgid "This is a platform-wide description that can be seen by any portal member and will be shown on the microsite."
-msgstr "Dies ist eine portalweite Beschreibung die auf der  angezeigt wird und von jedem/r Portalbenutzer*in gesehen werden kann."
+msgstr "Dies ist eine portalweite Beschreibung die auf der Microsite angezeigt wird und von jedem/r Portalbenutzer*in gesehen werden kann."
 
 msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
 msgstr "Dies ist eine öffentliche Beschreibung die auf der Microseite angezeigt wird und von jedem im Internet gesehen werden kann."

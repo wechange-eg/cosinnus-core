@@ -85,7 +85,7 @@
 				<div class="group-microsite-details">
 
 					{% block microsite_header_details %}
-                        {% if group.group_is_conference and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE %}
+                        {% if group.group_is_conference and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE and group.subtitle %}
                             <p class="transparent">
                                 {{ group.subtitle }}
                             </p>
