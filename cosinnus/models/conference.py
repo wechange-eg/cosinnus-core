@@ -748,7 +748,7 @@ class CosinnusConferenceRoom(TranslateableFieldsModelMixin, BBBRoomMixin,
         from cosinnus_event.models import ConferenceEvent # noqa
         return self.events.filter(is_break=False)\
                 .exclude(type=ConferenceEvent.TYPE_COFFEE_TABLE)\
-                .order_by('from_date')
+                .order_by('from_date', 'title')
 
     @property
     def has_event_form(self):
