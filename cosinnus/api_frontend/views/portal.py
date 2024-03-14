@@ -3,17 +3,16 @@ from copy import copy
 from django.utils.encoding import force_str
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.serializers.portal import CosinnusManagedTagSerializer
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
-from cosinnus.conf import settings, get_obfuscated_settings_strings
+from cosinnus.conf import settings
 from cosinnus.models.managed_tags import MANAGED_TAG_LABELS, CosinnusManagedTag
 from django.db.models.query_utils import Q
 from taggit.models import Tag, TaggedItem
@@ -401,50 +400,3 @@ class PortalSettingsView(APIView):
             'COSINNUS_CLOUD_NEXTCLOUD_URL': settings.COSINNUS_CLOUD_NEXTCLOUD_URL,
         })
         return Response(settings_dict)
-
-
-class PortalConfigurationView(APIView):
-    """ An endpoint that returns the portal configuration. """
-
-    permission_classes = (IsAdminUser,)
-    renderer_classes = (CosinnusAPIFrontendJSONResponseRenderer, BrowsableAPIRenderer,)
-    authentication_classes = (CsrfExemptSessionAuthentication, JWTAuthentication)
-
-    # todo: generate proper response, by either putting the entire response into a
-    #       Serializer, or defining it by hand
-    #       Note: Also needs docs on our custom data/timestamp/version wrapper!
-    # see:  https://drf-yasg.readthedocs.io/en/stable/custom_spec.html
-    # see:  https://drf-yasg.readthedocs.io/en/stable/drf_yasg.html?highlight=Response#drf_yasg.openapi.Schema
-    @swagger_auto_schema(
-        manual_parameters=[
-            openapi.Parameter(
-                'setting', openapi.IN_QUERY, required=False,
-                description='Return just the value of this setting variable.',
-                type=openapi.TYPE_STRING
-            ),
-        ],
-        responses={'200': openapi.Response(
-            description='List all portal settings as sttings with sensible values (e.g. passwords) obfuscated.',
-            examples={
-                "application/json": {
-                    "data": {
-                        "ABSOLUTE_URL_OVERRIDES": "{}",
-                        "ACCOUNT_ADAPTER": "cosinnus_oauth_client.views.CosinusAccountAdapter",
-                        "ADMINS": "()",
-                        "ADMIN_URL": "admin/",
-                    },
-                    "version": COSINNUS_VERSION,
-                    "timestamp": 1658414865.057476
-                }
-            }
-        )}
-    )
-    def get(self, request):
-        setting = request.query_params.get('setting')
-        obfuscated_settings = get_obfuscated_settings_strings()
-        if setting:
-            if setting in obfuscated_settings:
-                obfuscated_settings = {setting: obfuscated_settings.get(setting)}
-            else:
-                obfuscated_settings = {}
-        return Response(obfuscated_settings)

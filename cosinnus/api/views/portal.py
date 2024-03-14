@@ -11,13 +11,14 @@ from django.utils.timezone import now
 
 from cosinnus.api.serializers.portal import PortalSettingsSerializer
 from cosinnus.conf import settings as cosinnus_settings
+from cosinnus.conf import get_obfuscated_settings_strings
 from cosinnus.models import CosinnusPortal, MEMBERSHIP_ADMIN
 from cosinnus.models.bbb_room import BBBRoomVisitStatistics
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject, CosinnusConference
 from cosinnus.templatetags.cosinnus_tags import cosinnus_menu_v2,\
     cosinnus_footer_v2
-from cosinnus.utils.permissions import IsCosinnusAdminUser
+from cosinnus.utils.permissions import IsCosinnusAdminUser, IsAdminUser
 from cosinnus.utils.user import filter_active_users, get_user_id_hash, get_user_tos_accepted_date
 from cosinnus.views.housekeeping import _get_group_storage_space_mb
 
@@ -595,7 +596,23 @@ class SimpleStatisticsBBBRoomVisitsView(APIView):
         """
         if request.GET.get('format') == 'csv':
             response['Content-Disposition'] = 'attachment; filename=bbb-room-visits.csv'
-        return super().finalize_response(request, response, *args, **kwargs) 
+        return super().finalize_response(request, response, *args, **kwargs)
+
+
+class ConfigurationView(APIView):
+    """ An endpoint that returns all portal configuration settings. Sensitive data is obfuscated."""
+
+    permission_classes = (IsAdminUser,)
+
+    def get(self, request, *args, **kwargs):
+        setting = request.query_params.get('setting')
+        obfuscated_settings = get_obfuscated_settings_strings()
+        if setting:
+            if setting in obfuscated_settings:
+                obfuscated_settings = {setting: obfuscated_settings.get(setting)}
+            else:
+                obfuscated_settings = {}
+        return Response(obfuscated_settings)
 
 
 statistics = StatisticsView.as_view()
@@ -607,3 +624,4 @@ statictics_bbb_room_visits = SimpleStatisticsBBBRoomVisitsView.as_view()
 header = HeaderView.as_view()
 footer = FooterView.as_view()
 settings = SettingsView.as_view()
+config = ConfigurationView.as_view()
