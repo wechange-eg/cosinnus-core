@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import requests
+
 from builtins import str
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -35,7 +37,7 @@ class EtherpadTest(TestCase):
 
     def test_get_pad_url(self):
         """
-        Pad URL should contain base URL and pad title
+        Pad URL should contain base URL and pad title. The pad url should return 200.
         """
         pad_url = self.pad.get_pad_url()
         # pad URL should contain base URL and pad title
@@ -43,6 +45,8 @@ class EtherpadTest(TestCase):
         base_url = base_url[:base_url.rfind('/api')]
         self.assertIn(base_url, pad_url)
         self.assertIn(self.pad_title, pad_url)
+        response = requests.get(pad_url)
+        self.assertEqual(response.status_code, 200)
 
     def test_get_user_session_id(self):
         """
