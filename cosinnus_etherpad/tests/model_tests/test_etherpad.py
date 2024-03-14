@@ -29,6 +29,11 @@ class EtherpadTest(TestCase):
         self.group.delete()
         super(EtherpadTest, self).tearDown()
 
+    def test_pad_created(self):
+        """ Check via the Etherpad API that the pad has been created. """
+        all_pads = self.pad.client.listAllPads()
+        self.assertIn(self.pad.pad_id, all_pads['padIDs'])
+
     def test_new_pad(self):
         """
         Should have set title in new pad
@@ -37,7 +42,7 @@ class EtherpadTest(TestCase):
 
     def test_get_pad_url(self):
         """
-        Pad URL should contain base URL and pad title. The pad url should return 200.
+        Pad URL should contain base URL and pad title.
         """
         pad_url = self.pad.get_pad_url()
         # pad URL should contain base URL and pad title
@@ -45,8 +50,6 @@ class EtherpadTest(TestCase):
         base_url = base_url[:base_url.rfind('/api')]
         self.assertIn(base_url, pad_url)
         self.assertIn(self.pad_title, pad_url)
-        response = requests.get(pad_url)
-        self.assertEqual(response.status_code, 200)
 
     def test_get_user_session_id(self):
         """
