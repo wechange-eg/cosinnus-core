@@ -8,6 +8,7 @@ from django.shortcuts import reverse
 from django.conf import settings
 from django.core.exceptions import PermissionDenied, ImproperlyConfigured
 
+import cosinnus_event
 from cosinnus.models.bbb_room import BBBRoom
 from cosinnus.models.conference import CosinnusConferenceSettings
 from cosinnus.models import CosinnusGroup, CosinnusGroupMembership
@@ -18,6 +19,11 @@ from cosinnus.apis.bigbluebutton import BigBlueButtonAPI
 
 
 if settings.COSINNUS_CONFERENCES_ENABLED:
+
+    class TestableThreadPatch(Thread):
+        def start(self):
+            self.run()
+    cosinnus_event.hooks.Thread = TestableThreadPatch
 
     class BBBRoomTest(TestCase):
 
