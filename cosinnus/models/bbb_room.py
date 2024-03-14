@@ -717,8 +717,8 @@ class BBBRoomVisitStatistics(models.Model):
             user_managed_tags = user.cosinnus_profile.get_managed_tags()
             if user_managed_tags:
                 data.update({
-                    cls.DATA_DATA_SETTING_USER_MANAGED_TAG_IDS: [tag.id for tag in user_managed_tags],
-                    cls.DATA_DATA_SETTING_USER_MANAGED_TAG_SLUGS: [tag.slug for tag in user_managed_tags],
+                    cls.DATA_DATA_SETTING_USER_MANAGED_TAG_IDS: [tag.id for tag in user_managed_tags if tag],
+                    cls.DATA_DATA_SETTING_USER_MANAGED_TAG_SLUGS: [tag.slug for tag in user_managed_tags if tag],
                 })
         if group:
             data.update({
