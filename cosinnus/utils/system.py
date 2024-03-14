@@ -16,6 +16,36 @@ TEST_APPS_ROCKET_CHAT = ['cosinnus.tests.test_rocketchat']
 TEST_APPS_BBB = ['cosinnus.tests.test_bbbroom']
 TEST_APPS_ETHERPAD = ['cosinnus_etherpad']
 
+TEST_REQUIRED_ENV_SETTINGS = {
+    'RocketChat': [
+        'WECHANGE_COSINNUS_CHAT_BASE_URL',
+        'WECHANGE_COSINNUS_CHAT_USER',
+        'WECHANGE_COSINNUS_CHAT_PASSWORD',
+    ],
+    'BBB': [
+        'WECHANGE_COSINNUS_BBB_SERVER_CHOICES',
+        'WECHANGE_COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS',
+    ],
+    'Etherpad': [
+        'WECHANGE_COSINNUS_ETHERPAD_BASE_URL',
+        'WECHANGE_COSINNUS_ETHERPAD_ETHERCALC_BASE_URL',
+        'WECHANGE_COSINNUS_ETHERPAD_API_KEY',
+    ]
+}
+
+
+def _check_test_env_settings(env, service):
+    """ Checks that all required settings are set in .env.test for service tests. """
+    service_settings_valid = True
+    for setting in TEST_REQUIRED_ENV_SETTINGS[service]:
+        try:
+            env(setting)
+        except environ.ImproperlyConfigured:
+            print(f'{service} tests require "{setting}" to be set in ".env.test".')
+            service_settings_valid = False
+    if not service_settings_valid:
+        exit()
+
 
 def cosinnus_manage(base_path):
     """
@@ -61,17 +91,20 @@ def cosinnus_manage(base_path):
         custom_test = any('.tests.' in arg for arg in args)
         settings_module = "cosinnus.tests.settings.test"
         if TEST_ROCKET_CHAT_ARG in args:
+            _check_test_env_settings(env, 'RocketChat')
             settings_module = "cosinnus.tests.settings.test_rocketchat"
             if not custom_test:
                 args.extend(TEST_APPS_ROCKET_CHAT)
             args.remove(TEST_ROCKET_CHAT_ARG)
         elif TEST_BBB_ARG in args:
+            _check_test_env_settings(env, 'BBB')
             settings_module = "cosinnus.tests.settings.test_bbb"
             custom_test = any('.tests.' in arg for arg in args)
             if not custom_test:
                 args.extend(TEST_APPS_BBB)
             args.remove(TEST_BBB_ARG)
         elif TEST_ETHERPAD_ARG in args:
+            _check_test_env_settings(env, 'Etherpad')
             settings_module = "cosinnus.tests.settings.test_etherpad"
             custom_test = any('.tests.' in arg for arg in args)
             if not custom_test:
