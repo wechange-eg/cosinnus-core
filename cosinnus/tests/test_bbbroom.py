@@ -27,6 +27,10 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
     cosinnus_event.hooks.Thread = TestableThreadPatch
 
     class BBBRoomTest(TestCase):
+        """
+        Test basic BBB room integration.
+        TODO: These tests are incomplete and do not provide full coverage of the BBB integration. Need to be extended.
+        """
 
         bbb_api = None # initialized in setUp
 
