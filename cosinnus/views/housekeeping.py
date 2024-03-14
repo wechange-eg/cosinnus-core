@@ -8,7 +8,6 @@ from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.models import MEMBERSHIP_PENDING, MEMBERSHIP_ADMIN
 from cosinnus.utils.dashboard import create_initial_group_widgets
-from cosinnus.utils.settings import get_obfuscated_settings_strings
 from django.http.response import HttpResponse, HttpResponseForbidden,\
     HttpResponseBadRequest
 from django.contrib.auth import get_user_model
@@ -19,6 +18,7 @@ from cosinnus.utils.group import move_group_content as move_group_content_utils,
 from cosinnus.models.widget import WidgetConfig
 from django.core.cache import cache
 from django.conf import settings
+from cosinnus.conf import get_obfuscated_settings_strings
 import json
 import urllib.request, urllib.error, urllib.parse
 from django.utils.encoding import force_str

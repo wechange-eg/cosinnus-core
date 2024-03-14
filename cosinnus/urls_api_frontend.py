@@ -11,7 +11,7 @@ from cosinnus.api_frontend.views.navigation import BookmarksView, SpacesView, Un
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.api_frontend.views.portal import PortalTopicsView,\
     PortalManagedTagsView, PortalTagsView, PortalUserprofileDynamicFieldsView,\
-    PortalUserprofileDynamicFieldsSignupView, PortalSettingsView
+    PortalUserprofileDynamicFieldsSignupView, PortalSettingsView, PortalConfigurationView
 
 
 urlpatterns = []
@@ -36,6 +36,7 @@ urlpatterns += [
     path('api/v3/portal/userprofile_dynamicfields/signup/', PortalUserprofileDynamicFieldsSignupView.as_view(), name='api-portal-userprofile-dynamicfields-signup'),
     path('api/v3/portal/userprofile_dynamicfields/', PortalUserprofileDynamicFieldsView.as_view(), name='api-portal-userprofile-dynamicfields'),
     path('api/v3/portal/settings/', PortalSettingsView.as_view(), name='api-portal-settings'),
+    path('api/v3/portal/config/', PortalConfigurationView.as_view(), name='api-portal-config'),
 
     path('api/v3/content/main/', MainContentView.as_view(), name='api-content-main'),
     
