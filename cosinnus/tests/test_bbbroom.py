@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import time
 from uuid import uuid4
+from threading import Thread
 
 from django.test import TestCase, RequestFactory
 from django.contrib.auth.models import User
@@ -222,13 +223,18 @@ if settings.COSINNUS_CONFERENCES_ENABLED:
             time.sleep(2)
             room.join_group_members(group)
 
-            membership1.status = 1
-
-            membership1.save()
             self.assertEqual(len(room.moderators.all()), 1)
-
-            membership2.delete()
             self.assertEqual(len(room.attendees.all()), 1)
+
+            membership1.status = 1
+            membership1.save()
+
+            self.assertEqual(len(room.moderators.all()), 0)
+            self.assertEqual(len(room.attendees.all()), 2)
+
+            membership1.delete()
+            membership2.delete()
+            self.assertEqual(len(room.attendees.all()), 0)
 
         def test_end_meeting_via_bbb(self):
             name, meeting_id = self._get_unique_test_room_name_and_id('TestEndMeeting')
