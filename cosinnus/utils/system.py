@@ -59,6 +59,7 @@ def cosinnus_manage(base_path):
     Arguments:
     --test-rocketchat:  Run RocketChat service tests.
     --test-bbb:         Run BBB service tests.
+    --test-etherpad:    Run Etherpad/Ethercalc service tests.
     --print-time:       Prints execution time for slow test (>0.5s).
     """
 
