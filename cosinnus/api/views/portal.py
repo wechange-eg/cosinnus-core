@@ -11,7 +11,6 @@ from django.utils.timezone import now
 
 from cosinnus.api.serializers.portal import PortalSettingsSerializer
 from cosinnus.conf import settings as cosinnus_settings
-from cosinnus.conf import get_obfuscated_settings_strings
 from cosinnus.models import CosinnusPortal, MEMBERSHIP_ADMIN
 from cosinnus.models.bbb_room import BBBRoomVisitStatistics
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
@@ -19,6 +18,7 @@ from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject, Cosinn
 from cosinnus.templatetags.cosinnus_tags import cosinnus_menu_v2,\
     cosinnus_footer_v2
 from cosinnus.utils.permissions import IsCosinnusAdminUser, IsAdminUser
+from cosinnus.utils.settings import get_obfuscated_settings_strings
 from cosinnus.utils.user import filter_active_users, get_user_id_hash, get_user_tos_accepted_date
 from cosinnus.views.housekeeping import _get_group_storage_space_mb
 
