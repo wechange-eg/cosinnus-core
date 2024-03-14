@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-19 14:35+0100\n"
+"POT-Creation-Date: 2024-03-14 12:40+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1637,6 +1637,15 @@ msgstr "Tout le monde peut se joindre"
 
 msgid "Project Type"
 msgstr "Type de projet"
+
+#, fuzzy
+#| msgid "Untitled"
+msgid "Subtitle"
+msgstr "Sans titre"
+
+#, fuzzy
+msgid "Subtitle used for conferences."
+msgstr "Espace HD utilisé par les projets"
 
 msgid "Short Description. Internal, will not be shown publicly."
 msgstr "Description courte interne, ne sera pas affichée publiquement."
@@ -4671,6 +4680,21 @@ msgstr "Dans quels calendriers de projets ou de groupes la conférence doit-elle
 msgid "Select Projects/Groups"
 msgstr "Sélectionner des projets/groupes"
 
+#, fuzzy
+#| msgid "Conferences"
+msgid "Conference subtitle"
+msgstr "Conférences"
+
+#, fuzzy
+#| msgid "Will be shown as a header in the conference lobby and on the conference microsite."
+msgid "The subtitle is shown in the conference and on the conference micro site."
+msgstr "Sera affiché comme un en-tête dans le hall de la conférence et sur le microsite de la conférence."
+
+#, fuzzy
+#| msgid "Enter a title for the conference event."
+msgid "Add a subtitle for the conference."
+msgstr "Entre un titre pour l’événement de la conférence."
+
 msgid "Description and Infos"
 msgstr "Description et informations"
 
@@ -7016,24 +7040,24 @@ msgstr "Restreint"
 msgid "Access restricted for guest accounts"
 msgstr "Le compte utilisateur a été déactivé. "
 
-msgid "You are currently using the site with a guest account provided to you via a link."
+msgid "You are currently using the platform with a guest account provided to you by a link."
 msgstr ""
 
-msgid "As a guest, many features on this site are not available to you, like creating content, uploading files, or messaging other users."
+msgid "As a guest, many features on this site are not available to you, such as creating content, uploading files, or sending messages to other users."
 msgstr ""
 
 #, fuzzy
 #| msgid "Do you really want to perform the import of the shown data?"
-msgid "You also cannot customize your user profile."
+msgid "You cannot customize your user profile either."
 msgstr "Veux-tu vraiment effectuer l’importation des données affichées ?"
 
-msgid "Sign up now to create a full account!"
+msgid "Sign up now to create a fully featured account!"
 msgstr ""
 
-msgid "If you sign up to become a member, you can collaborate with others, customize your profile, and use all of the site's features."
+msgid "If you sign up as a platform member, you can collaborate with others, customize your profile and use all of the site's features."
 msgstr ""
 
-msgid "Note that after signup, you will have to apply or be invited to become a full member of any projects, groups, or conferences. Your guest account's memberships will not carry over."
+msgid "Note: After signup you will have to apply or be invited to become a full member of any projects, groups or conferences again. Your guest account's memberships can't be transferred to the new account."
 msgstr ""
 
 #, fuzzy
@@ -8691,6 +8715,11 @@ msgstr ""
 msgid "The %(team_type)s was changed successfully."
 msgstr "%(team_type)s a été changé avec succès."
 
+#, fuzzy
+#| msgid "Edit"
+msgid "Edited."
+msgstr "Editer"
+
 msgid "This action is not available directly!"
 msgstr "Cette action n'est pas disponible directement !"
 
@@ -8741,12 +8770,31 @@ msgstr "Les utilisateurs suivants ont été invités à présenter une demande :
 msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
 msgstr "Tous les membres des groupes/projets que tu as sélectionnés avaient déjà été invités ou ont déjà présenté une demande. Aucune nouvelle invitation n’a été envoyée."
 
+#, fuzzy, python-format
+#| msgid "Invite unregistered users..."
+msgid "Invited user \"%(user)s\"."
+msgstr "Inviter les utilisateurs non inscrits..."
+
 msgid "You cannot promote a guest user account!"
 msgstr ""
 
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
 msgstr "Tu ne peux pas enlever “%(username)s” de cette équipe. Il reste seulement un admin."
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Accepted user \"%(user)s\" as  member."
+msgstr "L'utilisateur %(username)s n'est plus membre."
+
+#, python-format
+msgid "Made user \"%(user)s\" admin."
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Made user \"%(user)s\" member."
+msgstr "L'utilisateur %(username)s n'est plus membre."
 
 #, python-format
 msgid "You cannot remove yourself from a %(team_type)s."
@@ -8769,6 +8817,10 @@ msgid "User \"%(username)s\" is no longer a member."
 msgstr "L'utilisateur %(username)s n'est plus membre."
 
 #, python-format
+msgid "Removed membership of user \"%(user)s\"."
+msgstr ""
+
+#, python-format
 msgid "%(team_name)s was re-activated successfully!"
 msgstr "%(team_name)s a été réactivée avec succès !"
 
@@ -8784,6 +8836,16 @@ msgstr "Ce projet / groupe est déjà actif !"
 
 msgid "This project/group is already inactive!"
 msgstr "Ce projet / groupe est déjà inactif !"
+
+#, fuzzy
+#| msgid "Activate"
+msgid "Activated."
+msgstr "Activer"
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "Deactivated."
+msgstr "Désactiver"
 
 msgid "You are not a member, but have access because you are an Administrator."
 msgstr "Tu n’es pas membre, mais tu y as accès parce que tu es administrateur."
@@ -8818,6 +8880,11 @@ msgstr "Les personnes possédant ces adresses ont déjà un compte utilisateur e
 #, python-format
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr "Réussite ! Nous envoyons à présent les invitations à ces adresses e-mail : %s"
+
+#, fuzzy, python-format
+#| msgid "Invited Members"
+msgid "Invited \"%(emails)s\"."
+msgstr "Membres invités"
 
 msgid "There was an error when trying to delete the invitation."
 msgstr "Une erreur est survenue lors de la suppression de l'invitation."
@@ -13976,6 +14043,34 @@ msgstr "La liste de tâches \"%(title)s\" n'a pas pu être ajoutée."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Tu ne peux supprimer ce dossier car tu n'as pas la permission de supprimer un ou plusieurs items qu'il contient !"
+
+#, fuzzy
+#| msgid "Add project"
+msgid "Add object"
+msgstr "Ajouter projet"
+
+#, fuzzy
+#| msgid "Create content"
+msgid "Create container"
+msgstr "Créer du contenu"
+
+msgid "ROOT"
+msgstr ""
+
+#, fuzzy
+#| msgid "Show all"
+msgid "Show"
+msgstr "Afficher tout"
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete this container and all objects in it?"
+msgstr "Veux-tu vraiment supprimer cette équipe ?"
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete this object?"
+msgstr "Veux-tu vraiment supprimer cette équipe ?"
 
 #~ msgid "Pre-filled content for the information field"
 #~ msgstr "Contenu pré-rempli pour le domaine de l’information"

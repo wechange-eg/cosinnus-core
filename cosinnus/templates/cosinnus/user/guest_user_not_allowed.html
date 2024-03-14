@@ -16,24 +16,24 @@
                 <h2>{% trans "Access restricted for guest accounts" %}</h2>
                 <p class="textfield transparent">
                     {% with guest_group=request.user.cosinnus_profile.guest_access_object.group %}
-                        {% trans "You are currently using the site with a guest account provided to you via a link." %}
+                        {% trans "You are currently using the platform with a guest account provided to you by a link." %}
                         {{ guest_group.trans.GUEST_BROWSE_ONLY }}:
                         <a class="transparent" href="{{ guest_group.get_absolute_url }}">{{ guest_group.name }}</a>
                     {% endwith %}
                 </p>
                 <p class="textfield transparent">
-                    {% trans "As a guest, many features on this site are not available to you, like creating content, uploading files, or messaging other users." %}
-                    {% trans "You also cannot customize your user profile." %}
+                    {% trans "As a guest, many features on this site are not available to you, such as creating content, uploading files, or sending messages to other users." %}
+                    {% trans "You cannot customize your user profile either." %}
                 </p>
 
                 <hr class="invisible"/>
 
-                <h2>{% trans "Sign up now to create a full account!" %}</h2>
+                <h2>{% trans "Sign up now to create a fully featured account!" %}</h2>
                 <p class="textfield transparent">
-                    {% trans "If you sign up to become a member, you can collaborate with others, customize your profile, and use all of the site's features." %}
+                    {% trans "If you sign up as a platform member, you can collaborate with others, customize your profile and use all of the site's features." %}
                 </p>
                 <p class="textfield transparent">
-                    {% trans "Note that after signup, you will have to apply or be invited to become a full member of any projects, groups, or conferences. Your guest account's memberships will not carry over." %}
+                    {% trans "Note: After signup you will have to apply or be invited to become a full member of any projects, groups or conferences again. Your guest account's memberships can't be transferred to the new account." %}
                 </p>
             </div>
 

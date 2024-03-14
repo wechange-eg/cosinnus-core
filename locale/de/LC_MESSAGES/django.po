@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-29 15:14+0100\n"
+"POT-Creation-Date: 2024-03-14 12:40+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -6783,23 +6783,23 @@ msgstr "Eingeschränkter Gastzugriff"
 msgid "Access restricted for guest accounts"
 msgstr "Zugang für Gastkonten eingeschränkt"
 
-msgid "You are currently using the site with a guest account provided to you via a link."
+msgid "You are currently using the platform with a guest account provided to you by a link."
 msgstr "Du nutzt die Website derzeit mit einem Gastkonto, das du über einen Link erhalten hast."
 
-msgid "As a guest, many features on this site are not available to you, like creating content, uploading files, or messaging other users."
+msgid "As a guest, many features on this site are not available to you, such as creating content, uploading files, or sending messages to other users."
 msgstr "Als Gast stehen dir viele Funktionen dieser Website nicht zur Verfügung, z. B. das Erstellen von Inhalten, das Hochladen von Dateien oder das Versenden von Nachrichten an andere Benutzer/innen."
 
-msgid "You also cannot customize your user profile."
+msgid "You cannot customize your user profile either."
 msgstr "Du kannst dein Benutzerprofil auch nicht anpassen."
 
-msgid "Sign up now to create a full account!"
+msgid "Sign up now to create a fully featured account!"
 msgstr "Registriere dich jetzt um ein vollwertiges Benutzerkonto zu erstellen!"
 
-msgid "If you sign up to become a member, you can collaborate with others, customize your profile, and use all of the site's features."
-msgstr "Wenn du sich als Mitglied anmeldest, kannst du mit anderen zusammenarbeiten, dein Profil individuell gestalten und alle Funktionen der Website nutzen."
+msgid "If you sign up as a platform member, you can collaborate with others, customize your profile and use all of the site's features."
+msgstr "Wenn du dich als Mitglied anmeldest, kannst du mit anderen zusammenarbeiten, dein Profil individuell gestalten und alle Funktionen der Website nutzen."
 
-msgid "Note that after signup, you will have to apply or be invited to become a full member of any projects, groups, or conferences. Your guest account's memberships will not carry over."
-msgstr "Beachte, dass du dich nach der Anmeldung Antrag auf Mitgliedschaft in Projekten, Gruppen oder Tagungen stellen oder eingeladen werden musst. Die Mitgliedschaften deines Gastkontos werden nicht übernommen."
+msgid "Note: After signup you will have to apply or be invited to become a full member of any projects, groups or conferences again. Your guest account's memberships can't be transferred to the new account."
+msgstr "Beachte, dass du nach der Anmeldung Antrag auf Mitgliedschaft in Projekten, Gruppen oder Tagungen stellen oder eingeladen werden musst. Die Mitgliedschaften deines Gastkontos werden nicht übernommen."
 
 msgid "Leave guest access and create an account"
 msgstr "Gastzugriff beenden und Konto registrieren"
@@ -8480,6 +8480,7 @@ msgstr "Die folgenden Benutzer/innen wurden eingeladen, Teilnahme zu beantragen:
 msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
 msgstr "Alle Mitglieder/innen der ausgewählten Gruppen/Projekte wurden bereits eingeladen oder haben sich bereits angemeldet. Es wurden keine neuen Einladungen verschickt."
 
+#, python-format
 msgid "Invited user \"%(user)s\"."
 msgstr "Benutzer/in \"%(user)s\" eingeladen."
 
@@ -8490,6 +8491,7 @@ msgstr "Du kannst einen Gast nicht befördern!"
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
 msgstr "Sie können “%(username)s” nicht von diesem Projekt entfernen. Er/sie ist der einzig übrige Administrator."
 
+#, python-format
 msgid "Accepted user \"%(user)s\" as  member."
 msgstr "Benutzer/in \"%(user)s\" als Mitglied akzeptiert."
 
@@ -8497,6 +8499,7 @@ msgstr "Benutzer/in \"%(user)s\" als Mitglied akzeptiert."
 msgid "Made user \"%(user)s\" admin."
 msgstr "Benutzer/in \"%(user)s\" zum Admin gemacht."
 
+#, python-format
 msgid "Made user \"%(user)s\" member."
 msgstr "Benutzer/in \"%(user)s\" zum Mitglied gemacht."
 
@@ -8584,6 +8587,7 @@ msgstr "Die Leute mit diesem E-Mail Adressen haben schon ein Benutzerkonto und w
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr "Super! Wir schicken jetzt die Einladungen an folgende E-Mail Adressen: %s"
 
+#, python-format
 msgid "Invited \"%(emails)s\"."
 msgstr "\"%(emails)s\" eingeladen."
 
@@ -13548,6 +13552,24 @@ msgstr "Aufgabenliste „%(title)s“ konnte nicht hinzugefügt werden."
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte hast eins oder mehrere der noch enthaltenen Objekte zu löschen!"
 
+msgid "Add object"
+msgstr "Objekt hinzufügen"
+
+msgid "Create container"
+msgstr "Erzeuge Zusammenstellung"
+
+msgid "ROOT"
+msgstr "WURZEL"
+
+msgid "Show"
+msgstr "Anzeigen"
+
+msgid "Are you sure you want to delete this container and all objects in it?"
+msgstr "Bist du sicher, dass du diesen Container und alle Objekte darin löschen willst?"
+
+msgid "Are you sure you want to delete this object?"
+msgstr "Bist du sicher dass du dieses Objekt löschen willst?"
+
 #~ msgid "Newsletter sent."
 #~ msgstr "Der Newsletter wurde abgeschickt."
 
@@ -14254,9 +14276,6 @@ msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte
 #~ msgid "Export (PDF)"
 #~ msgstr "Exportieren (PDF)"
 
-#~ msgid "Are you sure you want to delete this container and all etherpads in it?"
-#~ msgstr "Sind Sie sicher, dass Sie diese Zusammenstellung und alle Dokumente darin löschen wollen?"
-
 #~ msgid "Are you sure you want to delete this etherpad?"
 #~ msgstr "Sind Sie sicher, dass Sie dieses Dokument löschen wollen?"
 
@@ -14280,15 +14299,6 @@ msgstr "Du kannst diesen Ordner nicht löschen weil du nicht die nötigen Rechte
 
 #~ msgid "Add etherpad"
 #~ msgstr "Dokument hinzufügen"
-
-#~ msgid "Create container"
-#~ msgstr "Erzeuge Zusammenstellung"
-
-#~ msgid "ROOT"
-#~ msgstr "WURZEL"
-
-#~ msgid "Show"
-#~ msgstr "Anzeigen"
 
 #~ msgid "Etherpad \"%(title)s\" was deleted successfully."
 #~ msgstr "Dokument „%(title)s“ wurde erfolgreich gelöscht."

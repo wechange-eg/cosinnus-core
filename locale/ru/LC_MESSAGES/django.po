@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-19 14:35+0100\n"
+"POT-Creation-Date: 2024-03-14 12:40+0100\n"
 "PO-Revision-Date: 2023-04-18 18:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1592,6 +1592,16 @@ msgstr "Каждый может присоединиться"
 
 msgid "Project Type"
 msgstr "Тип проекта"
+
+#, fuzzy
+#| msgid "Untitled"
+msgid "Subtitle"
+msgstr "Без названия"
+
+#, fuzzy
+#| msgid "HD space used by conferences"
+msgid "Subtitle used for conferences."
+msgstr "Хранилище, используемое конференциями"
 
 msgid "Short Description. Internal, will not be shown publicly."
 msgstr "Краткое описание для внутреннего использования, не отображается публично."
@@ -4572,6 +4582,21 @@ msgstr "В календарях каких проектов или групп д
 msgid "Select Projects/Groups"
 msgstr "Выбрать родственный проект или группу"
 
+#, fuzzy
+#| msgid "Conferences"
+msgid "Conference subtitle"
+msgstr "Конференция"
+
+#, fuzzy
+#| msgid "Will be shown as a header in the conference lobby and on the conference microsite."
+msgid "The subtitle is shown in the conference and on the conference micro site."
+msgstr "Будет отображаться как верхний колонтитул в фойе конференции и на микросайте конференции."
+
+#, fuzzy
+#| msgid "Enter a title for the conference event."
+msgid "Add a subtitle for the conference."
+msgstr "Введите название события конференции."
+
 msgid "Description and Infos"
 msgstr "Описание и информация"
 
@@ -6884,24 +6909,24 @@ msgstr "Ограниченный"
 msgid "Access restricted for guest accounts"
 msgstr "Все учётные записи успешно деактивированы."
 
-msgid "You are currently using the site with a guest account provided to you via a link."
+msgid "You are currently using the platform with a guest account provided to you by a link."
 msgstr ""
 
-msgid "As a guest, many features on this site are not available to you, like creating content, uploading files, or messaging other users."
+msgid "As a guest, many features on this site are not available to you, such as creating content, uploading files, or sending messages to other users."
 msgstr ""
 
 #, fuzzy
 #| msgid "Do you also want to copy your profile data?"
-msgid "You also cannot customize your user profile."
+msgid "You cannot customize your user profile either."
 msgstr "Скопировать данные профиля?"
 
-msgid "Sign up now to create a full account!"
+msgid "Sign up now to create a fully featured account!"
 msgstr ""
 
-msgid "If you sign up to become a member, you can collaborate with others, customize your profile, and use all of the site's features."
+msgid "If you sign up as a platform member, you can collaborate with others, customize your profile and use all of the site's features."
 msgstr ""
 
-msgid "Note that after signup, you will have to apply or be invited to become a full member of any projects, groups, or conferences. Your guest account's memberships will not carry over."
+msgid "Note: After signup you will have to apply or be invited to become a full member of any projects, groups or conferences again. Your guest account's memberships can't be transferred to the new account."
 msgstr ""
 
 #, fuzzy
@@ -8547,6 +8572,11 @@ msgstr "Команда не имеет сконфигурированной ви
 msgid "The %(team_type)s was changed successfully."
 msgstr "Изменения в %(team_type)s приняты."
 
+#, fuzzy
+#| msgid "Edit"
+msgid "Edited."
+msgstr "Редактировать"
+
 msgid "This action is not available directly!"
 msgstr "Это действие не доступно!"
 
@@ -8597,12 +8627,31 @@ msgstr "Следующие пользователи были приглашен�
 msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
 msgstr "Все выбранные члены групп/проектов уже были приглашены или уже подали заявку. Новые приглашения не отправлялись."
 
+#, fuzzy, python-format
+#| msgid "Invite unregistered users..."
+msgid "Invited user \"%(user)s\"."
+msgstr "Пригласить незарегистрированных пользователей..."
+
 msgid "You cannot promote a guest user account!"
 msgstr ""
 
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
 msgstr "Вы не можете удалить “%(username)s” из этого проекта. Остался только один администратор."
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Accepted user \"%(user)s\" as  member."
+msgstr "Пользователь \"%(username)s\" больше не является членом."
+
+#, python-format
+msgid "Made user \"%(user)s\" admin."
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Made user \"%(user)s\" member."
+msgstr "Пользователь \"%(username)s\" больше не является членом."
 
 #, python-format
 msgid "You cannot remove yourself from a %(team_type)s."
@@ -8625,6 +8674,10 @@ msgid "User \"%(username)s\" is no longer a member."
 msgstr "Пользователь \"%(username)s\" больше не является членом."
 
 #, python-format
+msgid "Removed membership of user \"%(user)s\"."
+msgstr ""
+
+#, python-format
 msgid "%(team_name)s was re-activated successfully!"
 msgstr "Активизация %(team_name)s прошла успешно!"
 
@@ -8643,6 +8696,16 @@ msgstr "Проект/группа уже активированы!"
 
 msgid "This project/group is already inactive!"
 msgstr "Проект/группа уже неактивны!"
+
+#, fuzzy
+#| msgid "Activate"
+msgid "Activated."
+msgstr "Активировать"
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "Deactivated."
+msgstr "Деактивировать"
 
 msgid "You are not a member, but have access because you are an Administrator."
 msgstr "Вы не являетесь членом, однако у Вас есть доступ, потому что Вы — администратор."
@@ -8677,6 +8740,11 @@ msgstr "Люди с такими адресами уже зарегистрир�
 #, python-format
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr "Получилось! Сейчас мы отправляем приглашение на следующие электронные адреса: %s"
+
+#, fuzzy, python-format
+#| msgid "Invited Admins"
+msgid "Invited \"%(emails)s\"."
+msgstr "Приглашенные администраторы"
 
 msgid "There was an error when trying to delete the invitation."
 msgstr "При попытке удалить приглашение произошла ошибка."
@@ -13664,6 +13732,34 @@ msgstr "Невозможно добавить список задач \"%(title)
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Вы не можете удалить эту папку, так как у Вас нет полномочий для удаления одного или более элементов, которые в ней содержатся!"
+
+#, fuzzy
+#| msgid "Add project"
+msgid "Add object"
+msgstr "Добавить проект"
+
+#, fuzzy
+#| msgid "Create content"
+msgid "Create container"
+msgstr "Создать контент"
+
+msgid "ROOT"
+msgstr ""
+
+#, fuzzy
+#| msgid "Show all"
+msgid "Show"
+msgstr "Показать все"
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete this container and all objects in it?"
+msgstr "Вы уверены, что хотите удалить этот проект?"
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete this object?"
+msgstr "Вы уверены, что хотите удалить этот проект?"
 
 #~ msgid "Your match with %(sender_name)s has just been established!"
 #~ msgstr "Твоё совпадение с %(sender_name)s было установлено!"

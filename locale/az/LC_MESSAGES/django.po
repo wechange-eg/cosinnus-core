@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-19 14:35+0100\n"
+"POT-Creation-Date: 2024-03-14 12:40+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1657,6 +1657,15 @@ msgstr ""
 
 msgid "Project Type"
 msgstr "Layihənin növü"
+
+#, fuzzy
+#| msgid "Untitled"
+msgid "Subtitle"
+msgstr "Başlıqsız"
+
+#, fuzzy
+msgid "Subtitle used for conferences."
+msgstr "Layihə üçün bir ad daxil edin."
 
 msgid "Short Description. Internal, will not be shown publicly."
 msgstr "Qısa Təsvir. Daxili, açıq şəkildə göstərilməyəcək."
@@ -4779,6 +4788,19 @@ msgstr ""
 msgid "Select Projects/Groups"
 msgstr "Müvafiq Layihələr/Qruplar seçin"
 
+#, fuzzy
+msgid "Conference subtitle"
+msgstr "Video konfrans Serveri"
+
+#, fuzzy
+#| msgid "Enter a title for the new event."
+msgid "The subtitle is shown in the conference and on the conference micro site."
+msgstr "Yeni tədbir üçün başlıq daxil edin."
+
+#, fuzzy
+msgid "Add a subtitle for the conference."
+msgstr "Yeni tədbir üçün başlıq daxil edin."
+
 msgid "Description and Infos"
 msgstr "Təsvir və Məlumatlar"
 
@@ -7132,23 +7154,23 @@ msgstr ""
 msgid "Access restricted for guest accounts"
 msgstr "İstifadəçi hesabını silin"
 
-msgid "You are currently using the site with a guest account provided to you via a link."
+msgid "You are currently using the platform with a guest account provided to you by a link."
 msgstr ""
 
-msgid "As a guest, many features on this site are not available to you, like creating content, uploading files, or messaging other users."
+msgid "As a guest, many features on this site are not available to you, such as creating content, uploading files, or sending messages to other users."
 msgstr ""
 
 #, fuzzy
-msgid "You also cannot customize your user profile."
+msgid "You cannot customize your user profile either."
 msgstr "Siz həqiqətən \"%(title)s\"-u tərk etmək istəyirsiniz?"
 
-msgid "Sign up now to create a full account!"
+msgid "Sign up now to create a fully featured account!"
 msgstr ""
 
-msgid "If you sign up to become a member, you can collaborate with others, customize your profile, and use all of the site's features."
+msgid "If you sign up as a platform member, you can collaborate with others, customize your profile and use all of the site's features."
 msgstr ""
 
-msgid "Note that after signup, you will have to apply or be invited to become a full member of any projects, groups, or conferences. Your guest account's memberships will not carry over."
+msgid "Note: After signup you will have to apply or be invited to become a full member of any projects, groups or conferences again. Your guest account's memberships can't be transferred to the new account."
 msgstr ""
 
 #, fuzzy
@@ -8855,6 +8877,11 @@ msgstr ""
 msgid "The %(team_type)s was changed successfully."
 msgstr "%(team_type)s komandası uğurla dəyişdirildi."
 
+#, fuzzy
+#| msgid "Edit"
+msgid "Edited."
+msgstr "Redaktə edin"
+
 msgid "This action is not available directly!"
 msgstr "Bu fəaliyyət birbaşa mümkün deyil!"
 
@@ -8905,12 +8932,31 @@ msgstr "Aşağdakı İstifadəçilər bu portala əlavə edilmişdir:"
 msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
 msgstr ""
 
+#, fuzzy, python-format
+#| msgid "Invite unregistered users..."
+msgid "Invited user \"%(user)s\"."
+msgstr "Qeydiyyatsız İstifadəçiləri dəvət edin..."
+
 msgid "You cannot promote a guest user account!"
 msgstr ""
 
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
 msgstr "Bu komandanın “%(username)s”  formasını silə bilməzsiniz. Yalnız bir admin qalıb."
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Accepted user \"%(user)s\" as  member."
+msgstr "İstifadəçi \"%(username)s\" artıq üzv deyil."
+
+#, python-format
+msgid "Made user \"%(user)s\" admin."
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Made user \"%(user)s\" member."
+msgstr "İstifadəçi \"%(username)s\" artıq üzv deyil."
 
 #, python-format
 msgid "You cannot remove yourself from a %(team_type)s."
@@ -8933,6 +8979,10 @@ msgid "User \"%(username)s\" is no longer a member."
 msgstr "İstifadəçi \"%(username)s\" artıq üzv deyil."
 
 #, python-format
+msgid "Removed membership of user \"%(user)s\"."
+msgstr ""
+
+#, python-format
 msgid "%(team_name)s was re-activated successfully!"
 msgstr "%(team_name)s komandası yenidən uğurla aktivləşdirildi!"
 
@@ -8948,6 +8998,16 @@ msgstr "Bu layihə/qrup artıq aktivdir!"
 
 msgid "This project/group is already inactive!"
 msgstr "Bu layihə/qrup artıq fəaliyyətsizdir!"
+
+#, fuzzy
+#| msgid "Activate"
+msgid "Activated."
+msgstr "Aktivləşdirin"
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "Deactivated."
+msgstr "Deaktiv edin"
 
 msgid "You are not a member, but have access because you are an Administrator."
 msgstr ""
@@ -8982,6 +9042,11 @@ msgstr "Bu ünvanları olan insanlar artıq qeydiyyatdan keçmiş istifadəçi h
 #, python-format
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr "Uğur! İndi bu e-poçt ünvanlarına dəvətnamələr göndəririk: %s"
+
+#, fuzzy, python-format
+#| msgid "Invited Members"
+msgid "Invited \"%(emails)s\"."
+msgstr "Dəvət olunmuş Üzvlər"
 
 msgid "There was an error when trying to delete the invitation."
 msgstr "Dəvəti silmək istəyərkən səhv oldu."
@@ -14128,6 +14193,34 @@ msgstr "\"%(title)s\" görüləsi işi əlavə edilə bilmədi."
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Bu qovluğu silə bilməzsiniz, çünki tərkibindəki bir və ya daha çox elementi silmək icazəniz yoxdur!"
+
+#, fuzzy
+#| msgid "Add project"
+msgid "Add object"
+msgstr "Layihə əlavə edin"
+
+#, fuzzy
+#| msgid "Create content"
+msgid "Create container"
+msgstr "Məzmun yaradın"
+
+msgid "ROOT"
+msgstr ""
+
+#, fuzzy
+#| msgid "Show all"
+msgid "Show"
+msgstr "Hamısını göstər"
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete this container and all objects in it?"
+msgstr "Bu komandanı silmək istədiyinizə əminsiniz?"
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete this object?"
+msgstr "Bu komandanı silmək istədiyinizə əminsiniz?"
 
 #, fuzzy
 #~| msgid "Contact"
