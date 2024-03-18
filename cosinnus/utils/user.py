@@ -124,7 +124,7 @@ def is_user_active(user):
         the user account is considered active in the portal and not a guest. """
     return user.is_active and user.last_login and \
             user.cosinnus_profile.settings.get('tos_accepted', False) and \
-            user.email and not user.email.startswith('__unverified__') and \
+            user.email and user.cosinnus_profile.email_verified and \
             not user.email.startswith('__deleted_user__') and \
             not user.is_guest
 
@@ -141,7 +141,7 @@ def filter_active_users(user_model_qs, filter_on_user_profile_model=False, filte
     if filter_on_user_profile_model:
         filtered_qs = user_model_qs.exclude(user__is_active=False).\
             exclude(user__last_login__exact=None).\
-            exclude(user__email__icontains='__unverified__').\
+            exclude(email_verified=False).\
             filter(settings__has_key='tos_accepted')
         if filter_guests:
             filtered_qs = filtered_qs.exclude(_is_guest=True)
@@ -149,7 +149,7 @@ def filter_active_users(user_model_qs, filter_on_user_profile_model=False, filte
     else:
         filtered_qs = user_model_qs.exclude(is_active=False). \
             exclude(last_login__exact=None). \
-            exclude(email__icontains='__unverified__'). \
+            exclude(cosinnus_profile__email_verified=False). \
             filter(cosinnus_profile__settings__has_key='tos_accepted')
         if filter_guests:
             filtered_qs = filtered_qs.exclude(cosinnus_profile___is_guest=True)
