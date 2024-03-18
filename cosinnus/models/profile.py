@@ -148,7 +148,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
     user = models.OneToOneField(settings.AUTH_USER_MODEL, editable=False,
         related_name='cosinnus_profile', on_delete=models.CASCADE)
     # whether this user's email address has been verified. non-verified users do not receive emails
-    email_verified = models.BooleanField(_('Email verified'), default=False)
+    email_verified = models.BooleanField(_('Email verified'), default=False, db_index=True)
     
     avatar = models.ImageField(_("Avatar"), null=True, blank=True,
         upload_to=get_avatar_filename)
