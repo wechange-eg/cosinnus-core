@@ -31,6 +31,8 @@ class EtherpadTest(TestCase):
 
     def test_pad_created(self):
         """ Check via the Etherpad API that the pad has been created. """
+        # an alternate test to listing all pad ids would be requesting the text for the created pad:
+        # self.pad.client.getText(padID=self.pad.pad_id)
         all_pads = self.pad.client.listAllPads()
         self.assertIn(self.pad.pad_id, all_pads['padIDs'])
 
