@@ -149,7 +149,8 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
         related_name='cosinnus_profile', on_delete=models.CASCADE)
     # whether this user's email address has been verified. non-verified users do not receive emails
     email_verified = models.BooleanField(_('Email verified'), default=False, db_index=True)
-    
+    tos_accepted = models.BooleanField(verbose_name=_('ToS accepted'), default=False, db_index=True)
+
     avatar = models.ImageField(_("Avatar"), null=True, blank=True,
         upload_to=get_avatar_filename)
     description = models.TextField(verbose_name=_('Description'), blank=True, null=True)
@@ -255,7 +256,8 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
             from cosinnus.models.tagged import get_tag_object_model
             media_tag = get_tag_object_model()._default_manager.create()
             self.media_tag = media_tag
-            
+
+        existing = None
         try:
             existing = self._meta.model._default_manager.get(user=self.user)
             # workaround for http://goo.gl/4I8Ok
@@ -274,7 +276,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
         
         # send a copy of the ToS to the User via email?
         if settings.COSINNUS_SEND_TOS_AFTER_USER_REGISTRATION and self.user and self.user.email:
-            if self.settings.get('tos_accepted', False) and not self._settings.get('tos_accepted', False):
+            if self.tos_accepted and (not existing or not existing.tos_accepted):
                 tos_content = mark_safe(strip_tags(render_to_string('nutzungsbedingungen_content.html')))
                 data = {
                     'user': self.user,
