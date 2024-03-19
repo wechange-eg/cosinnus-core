@@ -12,6 +12,11 @@ from django.utils.encoding import force_str
 from cosinnus.views.mixins.ajax import patch_body_json_data
 
 
+"""
+Note: These are tests for the legacy v1 API.
+"""
+
+
 class BaseApiTest(TestCase):
 
     def setUp(self):

@@ -462,12 +462,12 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         EMAIL_USE_TLS = env("WECHANGE_EMAIL_USE_TLS", cast=bool, default=False)
 
     # Etherpad config.
-    COSINNUS_ETHERPAD_BASE_URL = f"https://pad.{project_settings['COSINNUS_PORTAL_URL']}/api"
+    COSINNUS_ETHERPAD_BASE_URL = env("WECHANGE_COSINNUS_ETHERPAD_BASE_URL", default=f"https://pad.{project_settings['COSINNUS_PORTAL_URL']}/api")
     COSINNUS_ETHERPAD_API_KEY = env("WECHANGE_COSINNUS_ETHERPAD_API_KEY", default="")
     
     # Ethercalc config
     COSINNUS_ETHERPAD_ENABLE_ETHERCALC = True
-    COSINNUS_ETHERPAD_ETHERCALC_BASE_URL = f"https://calc.{project_settings['COSINNUS_PORTAL_URL']}"
+    COSINNUS_ETHERPAD_ETHERCALC_BASE_URL = env("WECHANGE_COSINNUS_ETHERPAD_ETHERCALC_BASE_URL", default=f"https://calc.{project_settings['COSINNUS_PORTAL_URL']}")
     
     # Rocketchat
     COSINNUS_ROCKET_ENABLED = False

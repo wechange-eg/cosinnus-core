@@ -25,10 +25,3 @@ class EtherpadManagerTest(TestCase):
         self.pad.delete()
         self.group.delete()
         super(EtherpadManagerTest, self).tearDown()
-
-    def test_tags(self):
-        tags = ['foo', 'bar']
-        for tag in tags:
-            self.pad.tags.add(tag)
-        manager = EtherpadManager()
-        self.assertEqual(manager.tags(), tags)

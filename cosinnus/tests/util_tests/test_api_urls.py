@@ -5,6 +5,11 @@ from django.urls import reverse, clear_url_caches
 from django.test import TestCase, override_settings
 
 
+"""
+Note: These are tests for the legacy v1 API.
+"""
+
+
 class URLTestCaseBase(TestCase):
     # from Django's tests/i18n/patterns/tests.py
 

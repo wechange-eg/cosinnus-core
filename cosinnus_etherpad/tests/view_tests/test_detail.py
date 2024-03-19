@@ -6,7 +6,7 @@ from django.conf import settings
 from django.urls import reverse
 
 from cosinnus_etherpad.models import Etherpad
-from tests.view_tests.base import ViewTestCase
+from cosinnus_etherpad.tests.view_tests.base import ViewTestCase
 
 
 class DetailTest(ViewTestCase):
@@ -16,11 +16,11 @@ class DetailTest(ViewTestCase):
         Should return 200, contain pad title and cookie for etherpad server
         session
         """
-        pad = Etherpad.objects.create(group=self.group, title='testpad')
+        pad = Etherpad.objects.create(group=self.group, title='testpad', creator=self.admin)
         kwargs = {'group': self.group.slug, 'slug': pad.slug}
         url = reverse('cosinnus:etherpad:pad-detail', kwargs=kwargs)
-        client_kwargs = {'SERVER_NAME': 'localhost.sinnwerkstatt.com'}
-        response = self.client.get(url, **client_kwargs)
+        self.client.login(username=self.credential, password=self.credential)
+        response = self.client.get(url)
 
         # should return 200
         self.assertEqual(response.status_code, 200)
