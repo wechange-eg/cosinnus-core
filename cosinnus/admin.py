@@ -628,9 +628,9 @@ class UserToSAcceptedFilter(admin.SimpleListFilter):
 
     def queryset(self, request, queryset):
         if self.value() == 'yes':
-            return queryset.filter(cosinnus_profile__settings__has_key='tos_accepted')
+            return queryset.filter(cosinnus_profile__tos_accepted=True)
         if self.value() == 'no':
-            return queryset.exclude(cosinnus_profile__settings__has_key='tos_accepted')
+            return queryset.filter(cosinnus_profile__tos_accepted=False)
 
 
 class EmailVerifiedFilter(admin.SimpleListFilter):
@@ -750,7 +750,7 @@ class UserAdmin(DjangoUserAdmin):
     has_logged_in.boolean = True
     
     def tos_accepted(self, obj):
-        return bool(obj.cosinnus_profile.settings and obj.cosinnus_profile.settings.get('tos_accepted', False))
+        return obj.cosinnus_profile.tos_accepted
     tos_accepted.short_description = _('ToS accepted?')
     tos_accepted.boolean = True
     

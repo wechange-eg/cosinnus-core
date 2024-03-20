@@ -123,8 +123,8 @@ def is_user_active(user):
     """ Similar to `filter_active_users`, returns True if 
         the user account is considered active in the portal and not a guest. """
     return user.is_active and user.last_login and \
-            user.cosinnus_profile.settings.get('tos_accepted', False) and \
-            user.email and not user.email.startswith('__unverified__') and \
+            user.cosinnus_profile.tos_accepted and \
+            user.email and user.cosinnus_profile.email_verified and \
             not user.email.startswith('__deleted_user__') and \
             not user.is_guest
 
@@ -141,16 +141,16 @@ def filter_active_users(user_model_qs, filter_on_user_profile_model=False, filte
     if filter_on_user_profile_model:
         filtered_qs = user_model_qs.exclude(user__is_active=False).\
             exclude(user__last_login__exact=None).\
-            exclude(user__email__icontains='__unverified__').\
-            filter(settings__has_key='tos_accepted')
+            exclude(email_verified=False).\
+            filter(tos_accepted=True)
         if filter_guests:
             filtered_qs = filtered_qs.exclude(_is_guest=True)
         return filtered_qs
     else:
         filtered_qs = user_model_qs.exclude(is_active=False). \
             exclude(last_login__exact=None). \
-            exclude(email__icontains='__unverified__'). \
-            filter(cosinnus_profile__settings__has_key='tos_accepted')
+            exclude(cosinnus_profile__email_verified=False). \
+            filter(cosinnus_profile__tos_accepted=True)
         if filter_guests:
             filtered_qs = filtered_qs.exclude(cosinnus_profile___is_guest=True)
         return filtered_qs
@@ -252,18 +252,13 @@ def create_base_user(email, username=None, password=None, first_name=None, last_
     CosinnusPortalMembership.objects.get_or_create(group=CosinnusPortal.get_current(),
                                                    user=user, defaults={'status': MEMBERSHIP_MEMBER})
 
-    profile = get_user_profile_model()._default_manager.get_for_user(user)
-    profile.settings['tos_accepted'] = False
-    profile.save()
-
     return user
 
 
-def create_user(email, username=None, first_name=None, last_name=None, tos_checked=True):
+def create_user(email, username=None, first_name=None, last_name=None):
     """ Creates a user with a random password, and adds proper PortalMemberships for this portal.
         @param email: Email is required because it's basically our pk
         @param username: Can be left blank and will then be set to the user's id after creation.
-        @param tos_checked: Set to False if the user should have to check the Terms of Services upon first login.
         @return: A <USER_MODEL> instance if creation successful, False if failed to create (was the username taken?)
     """
     from cosinnus.forms.user import UserCreationForm
@@ -287,12 +282,8 @@ def create_user(email, username=None, first_name=None, last_name=None, tos_check
         logger.warning('Manual user creation failed because of form errors!', extra={'data': data, 'form-errors': form.errors})
         return False
     # always retrieve this to make sure the profile was created, we had a Heisenbug here
-    profile = get_user_profile_model()._default_manager.get_for_user(user)
-    
-    if not tos_checked:
-        profile.settings['tos_accepted'] = False
-        profile.save()
-    
+    get_user_profile_model()._default_manager.get_for_user(user)
+
     # username is always its id
     user.username = user.id
     
@@ -344,7 +335,7 @@ def accept_user_tos_for_portal(user, profile=None, portal=None, save=True):
     # set the user's tos_accepted flag to true and date for this portal to now
     if profile is None:
         profile = user.cosinnus_profile
-    profile.settings['tos_accepted'] = True
+    profile.tos_accepted = True
     
     # save the accepted date for this portal in a new dict, or update the dict for this portal
     # (the old style setting for this only had a datetime saved, now we use a dict)
@@ -361,7 +352,7 @@ def accept_user_tos_for_portal(user, profile=None, portal=None, save=True):
 
 def check_user_has_accepted_any_tos(user):
     """ Checks if the user has accepted any ToS ever, of any portal """
-    return user.cosinnus_profile.settings.get('tos_accepted', False)
+    return user.cosinnus_profile.tos_accepted
 
 
 def check_user_has_accepted_portal_tos(user):

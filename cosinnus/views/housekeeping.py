@@ -358,8 +358,8 @@ def reset_user_tos_flags(request=None):
         count = 0
         active_users = filter_active_users(get_user_model().objects.all())
         for profile in get_user_profile_model().objects.all().filter(user__in=active_users):
-            del profile.settings['tos_accepted']
-            profile.save(update_fields=['settings'])
+            profile.tos_accepted = False
+            profile.save(update_fields=['tos_accepted'])
             count += 1
         ret = 'Successfully reset the ToS flag for %d users.' % count
         
