@@ -840,6 +840,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     SIMPLE_JWT = {
         'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
         'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+        'TOKEN_OBTAIN_SERIALIZER': 'cosinnus.utils.jwt.TwoFactorTokenObtainPairSerializer',
     }
     
     # enables the read-only mode for the legacy postman messages system if True
