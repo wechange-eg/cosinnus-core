@@ -1,10 +1,14 @@
 from django.conf import settings
-from django.contrib.auth import get_user_model
+from django.core.exceptions import ImproperlyConfigured
 from django.db import migrations, models
 
 
 def migrate_tos_accepted_settings(apps, schema_editor):
-    UserProfile = apps.get_model('cosinnus', 'UserProfile')
+    try:
+        app_label, model_name = settings.COSINNUS_USER_PROFILE_MODEL.split('.')
+    except ValueError:
+        raise ImproperlyConfigured("COSINNUS_USER_PROFILE_MODEL must be defined for this migration'")
+    UserProfile = apps.get_model(app_label, model_name)
     profiles_tos_accepted = UserProfile.objects.filter(settings__has_key='tos_accepted')
     for profile in profiles_tos_accepted:
         if profile.settings['tos_accepted']:
@@ -14,7 +18,11 @@ def migrate_tos_accepted_settings(apps, schema_editor):
 
 
 def revert_migrate_tos_accepted_settings(apps, schema_editor):
-    UserProfile = apps.get_model('cosinnus', 'UserProfile')
+    try:
+        app_label, model_name = settings.COSINNUS_USER_PROFILE_MODEL.split('.')
+    except ValueError:
+        raise ImproperlyConfigured("COSINNUS_USER_PROFILE_MODEL must be defined for this migration'")
+    UserProfile = apps.get_model(app_label, model_name)
     profiles_tos_accepted = UserProfile.objects.filter(tos_accepted=True)
     for profile in profiles_tos_accepted:
         profile.settings['tos_accepted'] = True
@@ -27,7 +35,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('cosinnus', '0147_cosinnusprofile_add_tos_accepted'),
+        ('cosinnus', '0148_remove_extra_fields'),
     ]
 
     operations = [
