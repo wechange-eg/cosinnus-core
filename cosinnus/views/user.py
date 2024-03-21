@@ -795,37 +795,6 @@ class UserUpdateView(UpdateView):
 user_update = UserUpdateView.as_view()
 
 
-@sensitive_post_parameters()
-@csrf_protect
-@never_cache
-def login_api(request, authentication_form=AuthenticationForm):
-    """
-    Logs the user specified by the `authentication_form` in.
-    """
-    if request.method == "POST":
-        request = patch_body_json_data(request)
-
-        # TODO: Django<=1.5: Django 1.6 removed the cookie check in favor of CSRF
-        request.session.set_test_cookie()
-
-        form = authentication_form(request, data=request.POST)
-        if form.is_valid():
-            auth_login(request, form.get_user())
-            return JSONResponse({})
-        else:
-            return JSONResponse(form.errors, status=401)
-    else:
-        return JSONResponse({}, status=405)  # Method not allowed
-
-
-def logout_api(request):
-    """
-    Logs the user out.
-    """
-    auth_logout(request)
-    return JSONResponse({})
-
-
 class CosinnusPasswordChangeView(PasswordChangeView):
     """ Overridden view that sends a password changed signal """
     form_class = ValidatedPasswordChangeForm

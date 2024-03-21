@@ -11,8 +11,6 @@ from cosinnus.api.views.portal import SimpleStatisticsGroupStorageReportView, Si
 import cosinnus.api.views.portal as portal_views
 
 urlpatterns = api_patterns(1, None, False,
-    re_path(r'^logout/$', user.logout_api, name='logout'),
-    
     re_path(r'^statistics/general/$', StatisticsView.as_view(),  name='statistics-general'),
     re_path(r'^statistics/general/group_storage_info/', SimpleStatisticsGroupStorageReportView.as_view(),  name='statistics-group-storage-info'),
     re_path(r'^statistics/general/conference_storage_info/', SimpleStatisticsConferenceStorageReportView.as_view(),  name='statistics-conference-storage-info'),
