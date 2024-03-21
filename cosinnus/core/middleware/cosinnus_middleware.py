@@ -444,9 +444,11 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
         if any([request.path.startswith(never_path) for never_path in settings.COSINNUS_NEVER_REDIRECT_URLS]):
             return
         
-        # close off the rest-framework login as it would circumvent our login restrictions
+        # close off the rest-framework login/logout as it would circumvent our login restrictions
         if request.path.startswith('/api-auth/login'):
             return redirect('login')
+        if request.path.startswith('/api-auth/logout'):
+            return redirect('logout')
         
         user = request.user
         if user.is_authenticated:
