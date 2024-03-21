@@ -18,7 +18,6 @@ from cosinnus.utils.group import move_group_content as move_group_content_utils,
 from cosinnus.models.widget import WidgetConfig
 from django.core.cache import cache
 from django.conf import settings
-from cosinnus.conf import get_obfuscated_settings_strings
 import json
 import urllib.request, urllib.error, urllib.parse
 from django.utils.encoding import force_str
@@ -467,8 +466,16 @@ def print_settings(request):
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
     setts = ''
-    obfuscated_settings = get_obfuscated_settings_strings()
-    for key, val in obfuscated_settings.items():
+    KEY_BLACKLIST = ['COSINNUS_CLOUD_NEXTCLOUD_AUTH',]
+    for key in dir(settings):
+        val = force_str(getattr(settings, key))
+        # obfuscate passwords. for long ones, show the first few chars
+        if 'password' in key.lower() or 'password' in val.lower() or  \
+                'secret' in key.lower() or 'secret' in val.lower() or \
+                'key' in key.lower() or key in KEY_BLACKLIST:
+            if val.strip() and val.strip() not in ('None', 'null', '0', '[]', '{}'):
+                val = str(val)
+                val = (len(val) > 3 and val[:3] or '') + '***'
         setts += '%s = %s<br/>' % (key, val)
     if not request:
         return setts
