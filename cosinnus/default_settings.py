@@ -238,12 +238,22 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     CSRF_USE_SESSIONS = False
     # use session based CSRF cookies
     CSRF_COOKIE_AGE = None
+    CSRF_TRUSTED_ORIGINS = [f'https://*.{project_settings["COSINNUS_PORTAL_URL"]}']
+    
+    # Cookie settings. We will let cookies expire browser-session-based for anonymous users, and keep them
+    # for 90 days for logged in users
+    SESSION_EXPIRE_AT_BROWSER_CLOSE = True
     # session cookie name
     SESSION_COOKIE_DOMAIN = project_settings["COSINNUS_PORTAL_URL"]
     SESSION_COOKIE_NAME = f"{project_settings['COSINNUS_PORTAL_NAME']}-sessionid"
     # session expiry in seconds
-    SESSION_COOKIE_AGE = 60*60*24*90 # 90 days
-    CSRF_TRUSTED_ORIGINS = [f'https://*.{project_settings["COSINNUS_PORTAL_URL"]}']
+    SESSION_COOKIE_AGE = 60 * 60 * 24 * 90  # 90 days
+    LANGUAGE_COOKIE_AGE = SESSION_COOKIE_AGE
+    COSINNUS_SESSION_EXPIRY_AUTHENTICATED_IN_USERS = SESSION_COOKIE_AGE
+    
+    # leave this on for production, but may want to disable for dev
+    #SESSION_COOKIE_SECURE = True
+
     
     
     """ --------------- DATE AND TIME ---------------- """
@@ -614,10 +624,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # detect testing mode
     TESTING = 'test' in sys.argv
     
-    
-    # leave this on for production, but may want to disable for dev
-    #SESSION_COOKIE_SECURE = True
-    
     # wagtail
     WAGTAIL_SITE_NAME = 'Wechange'
     WAGTAIL_ENABLE_UPDATE_CHECK = False
@@ -787,11 +793,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # PIWIK settings. set individually for each portal. won't load if PIWIK_SITE_ID is not set
     PIWIK_SERVER_URL = '//stats.wechange.de/'
     PIWIK_SITE_ID = None
-
-    # Cookie settings. We will let cookies expire browser-session-based for anonymous users, and keep them
-    # for 30 days for logged in users
-    SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-    COSINNUS_SESSION_EXPIRY_AUTHENTICATED_IN_USERS = 30 * 60 * 24 * 60 # 30 days
     
     # honeypot field name shouldn't be too obvious, but also not trigger browsers' autofill
     HONEYPOT_FIELD_NAME = 'phnoenumber_8493'
