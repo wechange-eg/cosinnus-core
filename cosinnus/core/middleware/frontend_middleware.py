@@ -20,19 +20,21 @@ class FrontendMiddleware(MiddlewareMixin):
     
     def process_request(self, request):
         if settings.COSINNUS_V3_FRONTEND_ENABLED:
+            # only ever redirect GET methods
+            if request.method != 'GET':
+                return
+            
             request_tokens = request.build_absolute_uri().split('/')
             if not request.GET.get(self.param_key, None) == self.param_value:
                 # if the workaround language-prefix request from the frontend has arrived at the server,
                 # strip the prefixed language
-                if settings.COSINNUS_V3_LANGUAGE_REDIRECT_PREFIXES and request_tokens[
-                    3] in settings.COSINNUS_V3_LANGUAGE_REDIRECT_PREFIXES:
+                if settings.COSINNUS_V3_LANGUAGE_REDIRECT_PREFIXES and request_tokens[3] in settings.COSINNUS_V3_LANGUAGE_REDIRECT_PREFIXES:
                     del request_tokens[3]
                     redirect_unprefixed = '/'.join(request_tokens)
                     return redirect(redirect_unprefixed)
             
             # currently do not affect login requests within the oauth flow
-            if ('/o/authorize' in request.build_absolute_uri() or any(
-                    ['/o/authorize' in unquote(request_token) for request_token in request_tokens])) \
+            if ('/o/authorize' in request.build_absolute_uri() or any(['/o/authorize' in unquote(request_token) for request_token in request_tokens])) \
                     and not request_tokens[3] == 'signup':
                 return
             

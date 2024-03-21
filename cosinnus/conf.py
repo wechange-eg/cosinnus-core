@@ -944,6 +944,12 @@ class CosinnusConf(AppConf):
     # this can also be prevented by setting the ?v=2 GET param!
     V3_FRONTEND_EVERYWHERE_ENABLED = False
     
+    # a workaround for the frontend using languages as URL prefix
+    # instead of as cookie setting, any request with a language in this list
+    # will be redirected to a prefixed url with the language slug,
+    # in addition to the ?v=3 param
+    V3_LANGUAGE_REDIRECT_PREFIXES = ['de',]
+    
     V3_FRONTEND_SIGNUP_VERIFICATION_WELCOME_PAGE = '/signup/verified'
     
     # URL paths that get redirected to the new frontend
