@@ -15,6 +15,7 @@ from cosinnus.api.serializers.user import UserSerializer
 from cosinnus.conf import settings
 from cosinnus.core.middleware.login_ratelimit_middleware import register_and_limit_failed_login_attempt, \
     check_user_login_ratelimit, reset_user_ratelimit_on_login_success
+from cosinnus.utils.permissions import check_user_superuser
 
 
 def jwt_response_handler(token, user=None, request=None):
@@ -66,8 +67,10 @@ class TwoFactorTokenObtainSerializer(TokenObtainSerializer):
             raise
         
         # check if user has 2fa enabled and validate 2fa code
+        # for admin users, always enforce 2fa, even if they don't have a device
+        #     (if admin COSINNUS_ADMIN_2_FACTOR_AUTH_ENABLED is enabled, which it really should never not be)
         if settings.COSINNUS_ADMIN_2_FACTOR_AUTH_ENABLED or settings.COSINNUS_USER_2_FACTOR_AUTH_ENABLED:
-            if user_has_device(self.user):
+            if user_has_device(self.user) or (settings.COSINNUS_ADMIN_2_FACTOR_AUTH_ENABLED and check_user_superuser(self.user)):
                 # check provided 2fa code
                 token = attrs.get(self.otp_token_field, '').strip()
                 if not token:
