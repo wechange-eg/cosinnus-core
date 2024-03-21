@@ -2,7 +2,12 @@
 from __future__ import unicode_literals
 
 from django.urls import reverse, clear_url_caches
-from django.test import TestCase
+from django.test import TestCase, override_settings
+
+
+"""
+Note: These are tests for the legacy v1 API.
+"""
 
 
 class URLTestCaseBase(TestCase):
@@ -17,31 +22,31 @@ class URLTestCaseBase(TestCase):
         clear_url_caches()
 
 
+@override_settings(ROOT_URLCONF='cosinnus.tests.util_tests.urls.no_app_no_group')
 class NoAppNoGroupTests(URLTestCaseBase):
-    urls = 'tests.util_tests.urls.no_app_no_group'
 
     def test_reverse(self):
         self.assertEqual(reverse('view'), '/api/v1/some/view/')
 
 
+@override_settings(ROOT_URLCONF='cosinnus.tests.util_tests.urls.no_group')
 class NoGroupTests(URLTestCaseBase):
-    urls = 'tests.util_tests.urls.no_group'
 
     def test_reverse(self):
         self.assertEqual(reverse('view'), '/api/v1/myapp/some/view/')
 
 
+@override_settings(ROOT_URLCONF='cosinnus.tests.util_tests.urls.no_app')
 class NoAppTests(URLTestCaseBase):
-    urls = 'tests.util_tests.urls.no_app'
 
     def test_reverse(self):
         self.assertEqual(reverse('view', kwargs={'group': 'XYZ'}),
-                         '/api/v1/project/XYZ/some/view/')
+                         '/api/v1/group/XYZ/some/view/')
 
 
+@override_settings(ROOT_URLCONF='cosinnus.tests.util_tests.urls.all')
 class AllTests(URLTestCaseBase):
-    urls = 'tests.util_tests.urls.all'
 
     def test_reverse(self):
         self.assertEqual(reverse('view', kwargs={'group': 'XYZ'}),
-                         '/api/v1/project/XYZ/myapp/some/view/')
+                         '/api/v1/group/XYZ/myapp/some/view/')

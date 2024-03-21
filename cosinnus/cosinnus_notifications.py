@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 import django.dispatch as dispatch
-from django.utils.translation import ugettext_lazy as _, ngettext_lazy, pgettext_lazy
+from django.utils.translation import gettext_lazy as _, ngettext_lazy, pgettext_lazy
 from cosinnus.conf import settings
 
 
@@ -18,23 +18,23 @@ from cosinnus.core.signals import user_group_join_requested,\
     user_group_recruited, user_group_join_accepted, user_group_join_declined,\
     user_group_invited, group_moved_to_portal
 
-user_tagged_in_object = dispatch.Signal(providing_args=["user", "obj", "audience"])
-user_group_made_admin = dispatch.Signal(providing_args=["user", "obj", "audience"])
-user_group_admin_demoted = dispatch.Signal(providing_args=["user", "obj", "audience"])
-project_created_from_idea = dispatch.Signal(providing_args=["user", "obj", "audience"])
-idea_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
-group_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
-organization_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
-user_account_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
-user_conference_application_accepted = dispatch.Signal(providing_args=["user", "obj", "audience"])
-user_conference_application_declined = dispatch.Signal(providing_args=["user", "obj", "audience"])
-user_conference_application_waitlisted = dispatch.Signal(providing_args=["user", "obj", "audience"])
-conference_created_in_group = dispatch.Signal(providing_args=["user", "obj", "audience"])
-conference_created_in_group_alert = dispatch.Signal(providing_args=["user", "obj", "audience"])
-attending_conference_changed = dispatch.Signal(providing_args=["user", "obj", "audience"])
-attending_conference_time_changed = dispatch.Signal(providing_args=["user", "obj", "audience"])
-user_conference_invited_to_apply = dispatch.Signal(providing_args=["user", "obj", "audience"])
-user_match_established = dispatch.Signal(providing_args=["from_user", "to_user", "audience"])
+user_tagged_in_object = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+user_group_made_admin = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+user_group_admin_demoted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+project_created_from_idea = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+idea_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+group_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+organization_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+user_account_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+user_conference_application_accepted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+user_conference_application_declined = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+user_conference_application_waitlisted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+conference_created_in_group = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+conference_created_in_group_alert = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+attending_conference_changed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+attending_conference_time_changed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+user_conference_invited_to_apply = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+user_match_established = dispatch.Signal()  # providing_args=["from_user", "to_user", "audience"]
 
 
 """ Notification definitions.

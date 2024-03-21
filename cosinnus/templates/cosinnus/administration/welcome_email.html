@@ -27,7 +27,7 @@
         </div>
     {% endif %}
     
-    <form method="POST" action="" class="cosinnus-form form-horizontal">{% csrf_token %}
+    <form method="POST" action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" class="cosinnus-form form-horizontal">{% csrf_token %}
         {{ form.non_field_errors }}
         
         <!-- a box with semi transparent background -->
@@ -39,11 +39,11 @@
 	        
 	        {% captureas is_active_label %}{% trans "Is active" %}?{% endcaptureas %}
             {% trans "Welcome-Email sending enabled" as checkbox_label %}
-            {% include 'cosinnus/fields/checkbox_field.html' with field=form.is_active label=is_active_label checkbox_label=checkbox_label %}
+            {% include 'cosinnus/fields/checkbox_field.html' with field=form.welcome_email_active label=is_active_label checkbox_label=checkbox_label %}
             
 			{% trans "Welcome-Email Text" as email_text_label %}
 			{% trans "Welcome-Email Text" as email_text_placeholder %}
-			{% include 'cosinnus/fields/default_field.html' with field=form.email_text label=email_text_label placeholder=email_text_placeholder large_field=True %}
+			{% include 'cosinnus/fields/default_field.html' with field=form.welcome_email_text translation_form=form label=email_text_label placeholder=email_text_placeholder large_field=True %}
 			<p>
                 {% trans "You may use the following variables:" %}
                 [[user_first_name]]

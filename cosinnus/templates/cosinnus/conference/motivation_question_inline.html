@@ -1,4 +1,6 @@
 {% load i18n %}
 
-{% trans "Question" as question_placeholder %}
-{% include 'cosinnus/fields/default_field.html' with field=inlineform.question legend=None large_field=True placeholder=question_placeholder %}
+<div class="content-box">
+    {% trans "Question" as question_label %}
+    {% include 'cosinnus/fields/default_field.html' with field=inlineform.question legend=None large_field=True label=question_label placeholder=question_label translation_form=inlineform translated_field_not_searchable=True %}
+</div>

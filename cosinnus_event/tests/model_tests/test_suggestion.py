@@ -2,11 +2,11 @@
 from __future__ import unicode_literals
 
 from datetime import timedelta
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.timezone import now
 
 from cosinnus_event.models import Suggestion, Vote, localize
-from tests.model_tests.base import ModelTestCase
+from cosinnus_event.tests.model_tests.base import ModelTestCase
 
 
 class SuggestionTest(ModelTestCase):
@@ -20,12 +20,8 @@ class SuggestionTest(ModelTestCase):
         """
         Should have certain string representation if single day suggestion
         """
-        expected = '%(date)s - %(end)s (%(count)d)' % {
-            'date': localize(self.suggestion.from_date, 'd. F Y H:i'),
-            'end': localize(self.suggestion.to_date, 'H:i'),
-            'count': self.suggestion.count,
-        }
-        self.assertEqual(expected, force_text(self.suggestion))
+        expected = localize(self.suggestion.from_date, 'd. F Y H:i')
+        self.assertEqual(expected, force_str(self.suggestion))
 
     def test_string_repr_scheduled_multi_day(self):
         """
@@ -33,12 +29,11 @@ class SuggestionTest(ModelTestCase):
         """
         self.suggestion.to_date += timedelta(days=1)
         self.suggestion.save()
-        expected = '%(from)s - %(to)s (%(count)d)' % {
+        expected = '%(from)s - %(to)s' % {
             'from': localize(self.suggestion.from_date, 'd. F Y H:i'),
             'to': localize(self.suggestion.to_date, 'd. F Y H:i'),
-            'count': self.suggestion.count,
         }
-        self.assertEqual(expected, force_text(self.suggestion))
+        self.assertEqual(expected, force_str(self.suggestion))
 
     def test_single_day_same_day(self):
         """

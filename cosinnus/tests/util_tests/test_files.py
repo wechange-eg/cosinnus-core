@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import os
+
 from builtins import object
-from django.test import SimpleTestCase
+from django.test import TestCase
 
 from cosinnus.utils.files import get_avatar_filename
 
 
-class AvatarTest(SimpleTestCase):
+class AvatarTest(TestCase):
 
     def test_get_avatar_filename(self):
 
@@ -17,7 +19,11 @@ class AvatarTest(SimpleTestCase):
         profile = Profile()
         filename = 'avatar.png'
 
-        filepath = get_avatar_filename(profile, filename)
-        expected = 'cosinnus/avatars/users/37d49d9d9ed8afa7d555512c4bf59bc92c8b3c41.png'
+        avatar_filepath = get_avatar_filename(profile, filename)
+        avatar_path, avatar_file = os.path.split(avatar_filepath)
 
-        self.assertEqual(filepath, expected)
+        self.assertEqual('cosinnus_portals/portal_default/avatars/user', avatar_path)
+
+        expected_filename_hash_length = 44
+        self.assertEqual(len(avatar_file), expected_filename_hash_length)
+        self.assertNotIn(filename, avatar_file)

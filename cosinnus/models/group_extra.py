@@ -6,7 +6,7 @@ import logging
 import six
 
 from annoying.functions import get_object_or_None
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusGroupManager, CosinnusGroup, \
@@ -40,6 +40,7 @@ class CosinnusConferenceManager(CosinnusGroupManager):
 
 @six.python_2_unicode_compatible
 class CosinnusProject(get_cosinnus_group_model()):
+    """ The base group type allowing to organize your projects or initiatives. """
     
     class Meta(object):
         """ For some reason, the Meta isn't inherited automatically from CosinnusGroup here """
@@ -72,7 +73,11 @@ class CosinnusProject(get_cosinnus_group_model()):
 
 @six.python_2_unicode_compatible
 class CosinnusSociety(get_cosinnus_group_model()):
-    
+    """
+    Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring
+    together several smaller projects.
+    """
+
     class Meta(object):
         """ For some reason, the Meta isn't inherited automatically from CosinnusGroup here """
         proxy = True        
@@ -103,7 +108,8 @@ class CosinnusSociety(get_cosinnus_group_model()):
     
 
 class CosinnusConference(get_cosinnus_group_model()):
-    
+    """ A special group providing BigBlueButton conferences. """
+
     class Meta(object):
         """ For some reason, the Meta isn't inherited automatically from CosinnusGroup here """
         proxy = True        

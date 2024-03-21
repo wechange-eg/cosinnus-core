@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Services Integration &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=524b4683"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Configuration Settings" href="settings.html" />
+    <link rel="prev" title="Key Components" href="components.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="services-integration">
+<h1>Services Integration<a class="headerlink" href="#services-integration" title="Permalink to this heading">¶</a></h1>
+<p>Cosinnus includes integration with various callaboration services.</p>
+<section id="nextcloud">
+<h2>NextCloud<a class="headerlink" href="#nextcloud" title="Permalink to this heading">¶</a></h2>
+<p>An admin user needs to be created in NextCloud that is used by Cosinnus to access the API.</p>
+<p>To enable NextCloud add the following settings to the portal settings:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">COSINNUS_CLOUD_ENABLED</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>Optionally you can adjust the cloud URL and admin user name:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">COSINNUS_CLOUD_NEXTCLOUD_URL</span> <span class="o">=</span> <span class="s2">&quot;&lt;url&gt;&quot;</span>  <span class="c1"># default: https://cloud.&lt;portal-url&gt;</span>
+<span class="n">COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME</span> <span class="o">=</span> <span class="s2">&quot;&lt;username&gt;&quot;</span>  <span class="c1"># default: admin</span>
+</pre></div>
+</div>
+<p>Finally provide the password of the admin in the portal <cite>.env</cite> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WECHANGE_COSINNUS_CLOUD_PASSWORD</span><span class="o">=&lt;</span><span class="n">password</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>NextCloud can be accessed via the navbar. It can be also enabled for a group in the group settings and will be
+integrated on the group dashboard.</p>
+</section>
+<section id="rocketchat">
+<h2>RocketChat<a class="headerlink" href="#rocketchat" title="Permalink to this heading">¶</a></h2>
+<p>An admin user needs to be created in RocketChat that is used by Cosinnus to access the API.</p>
+<p>To enable RocketChat add the following settings to the portal settings:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">COSINNUS_ROCKET_ENABLED</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>Optionally you can adjust the cloud URL and admin user name:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">COSINNUS_CHAT_BASE_URL</span> <span class="o">=</span> <span class="s2">&quot;&lt;url&gt;&quot;</span>  <span class="c1"># default: https://chat.&lt;portal-url&gt;</span>
+<span class="n">COSINNUS_CHAT_USER</span> <span class="o">=</span> <span class="s2">&quot;&lt;user&gt;&quot;</span>  <span class="c1"># default: &lt;portal-name&gt;-bot</span>
+</pre></div>
+</div>
+<p>Finally provide the password of the admin in the portal <cite>.env</cite> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WECHANGE_COSINNUS_CHAT_PASSWORD</span><span class="o">=&lt;</span><span class="n">password</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>RocketChat can be accessed via the navbar. It can be also enabled for a group in the group settings and will be
+integrated on the group dashboard.</p>
+</section>
+<section id="bigbluebutton">
+<h2>BigBlueButton<a class="headerlink" href="#bigbluebutton" title="Permalink to this heading">¶</a></h2>
+<p>BigBlueButton integration can be enabled in the portal settings via:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">COSINNUS_CONFERENCES_ENABLED</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>This will allow you to create conferences.</p>
+<p>To allow non admin users to create conferences add:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">COSINNUS_USERS_CAN_CREATE_CONFERENCES</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>Additionally BBB can be added to groups and events via:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>After this you well be able to add a BBB conference to a group or event in the settings form. For groups this will add a
+conference link to the group dashboard. For events it will add a conference link to the event detail page.</p>
+</section>
+<section id="fairmeeting">
+<h2>Fairmeeting<a class="headerlink" href="#fairmeeting" title="Permalink to this heading">¶</a></h2>
+<p>As an alternative to BBB, groups and events can also have a Fairmeeting conference. It can be enabled by setting the
+server URL in the portal settings in the Django Admin.</p>
+</section>
+<section id="etherpad-ethercalc">
+<h2>Etherpad / Ethercalc<a class="headerlink" href="#etherpad-ethercalc" title="Permalink to this heading">¶</a></h2>
+<p>Etherpad and Ethercalc integration is enabled per default. The server urls can be adjusted in the portal settings:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">COSINNUS_ETHERPAD_BASE_URL</span> <span class="o">=</span> <span class="s2">&quot;&lt;url&gt;&quot;</span>  <span class="c1"># default: &quot;https://pad.&lt;poral-url&gt;/api&quot;</span>
+<span class="n">COSINNUS_ETHERPAD_ETHERCALC_BASE_URL</span> <span class="o">=</span> <span class="s2">&quot;&lt;url&quot;</span>  <span class="c1"># default: &quot;https://calc.&lt;portal-url&gt;&quot;</span>
+</pre></div>
+</div>
+<p>In addition you need to set the API key in the portal <cite>.env</cite> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WECHANGE_COSINNUS_ETHERPAD_API_KEY</span><span class="o">=&lt;</span><span class="n">key</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>When configured the etherpad app can be enabled for a group in the group settings.</p>
+</section>
+<section id="inter-portal-exchange">
+<h2>Inter-Portal-Exchange<a class="headerlink" href="#inter-portal-exchange" title="Permalink to this heading">¶</a></h2>
+<p>The inter-portal-exchange feature makes groups, projects and events of a portal available in the map view of other portals.
+This is done by adding the groups to the ElasticSearch search index of a portal.</p>
+<p>The inter-portal-exchange can be configured in the portal settings:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">COSINNUS_EXCHANGE_ENABLED</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">COSINNUS_EXCHANGE_RUN_EVERY_MINS</span> <span class="o">=</span> <span class="mi">60</span><span class="o">*</span><span class="mi">24</span> <span class="c1"># once a day</span>
+<span class="n">COSINNUS_EXCHANGE_BACKENDS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;backend&#39;</span><span class="p">:</span> <span class="s1">&#39;cosinnus_exchange.backends.ExchangeBackend&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://&lt;other-portal-url&gt;/api/v2/events/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;other-portal-name&gt;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="s1">&#39;cosinnus_exchange.ExchangeEvent&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;serializer&#39;</span><span class="p">:</span> <span class="s1">&#39;cosinnus_exchange.serializers.ExchangeEventSerializer&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;backend&#39;</span><span class="p">:</span> <span class="s1">&#39;cosinnus_exchange.backends.ExchangeBackend&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://&lt;other-portal-url&gt;/api/v2/projects/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;other-portal-name&gt;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="s1">&#39;cosinnus_exchange.ExchangeProject&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;serializer&#39;</span><span class="p">:</span> <span class="s1">&#39;cosinnus_exchange.serializers.ExchangeGroupSerializer&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;backend&#39;</span><span class="p">:</span> <span class="s1">&#39;cosinnus_exchange.backends.ExchangeBackend&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://&lt;other-portal-url&gt;/api/v2/groups/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;other-portal-name&gt;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="s1">&#39;cosinnus_exchange.ExchangeSociety&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;serializer&#39;</span><span class="p">:</span> <span class="s1">&#39;cosinnus_exchange.serializers.ExchangeGroupSerializer&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>The import is done with a cron job task. To sync locally run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runcrons</span> <span class="o">--</span><span class="n">force</span>
+</pre></div>
+</div>
+<p>After the sync the other portals content is searchable in the map / discover view.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Key Components</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Services Integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#nextcloud">NextCloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rocketchat">RocketChat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bigbluebutton">BigBlueButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fairmeeting">Fairmeeting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#etherpad-ethercalc">Etherpad / Ethercalc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inter-portal-exchange">Inter-Portal-Exchange</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Configuration Settings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="components.html" title="previous chapter">Key Components</a></li>
+      <li>Next: <a href="settings.html" title="next chapter">Configuration Settings</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/services.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

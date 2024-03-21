@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-17 14:29+0100\n"
+"POT-Creation-Date: 2024-03-14 12:40+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -127,6 +127,12 @@ msgstr ""
 msgid "Email not verified"
 msgstr "לא צוין"
 
+msgid "Is Guest"
+msgstr ""
+
+msgid "Is not a Guest"
+msgstr ""
+
 msgid "User Logged In"
 msgstr "משתמש מחובר"
 
@@ -217,6 +223,11 @@ msgid "Recipients Send Count"
 msgstr "נמענים"
 
 #, fuzzy
+#| msgid "Last accessed"
+msgid "Guest access URL"
+msgstr "גישה אחרונה"
+
+#, fuzzy
 #| msgid "Comment"
 msgid "Community"
 msgstr "תגובה"
@@ -265,6 +276,11 @@ msgid "My Profile"
 msgstr "הפרופיל שלי"
 
 #, fuzzy
+#| msgid "Delete Account"
+msgid "My Guest Account"
+msgstr "מחיקת חשבון"
+
+#, fuzzy
 #| msgid "Edit Your Profile"
 msgid "Set up my Profile"
 msgstr "ערוך את הפרופיל שלך"
@@ -285,6 +301,11 @@ msgstr "ניהול מערכת"
 
 msgid "Logout"
 msgstr "התנתק"
+
+#, fuzzy
+#| msgid "Last accessed"
+msgid "Leave guest access"
+msgstr "גישה אחרונה"
 
 msgid "Home"
 msgstr "דף הבית"
@@ -475,6 +496,11 @@ msgstr "צוות זה אינו פועל יותר תחת כתובת ה-URL שהז
 msgid "This account is no longer active. You have been logged out."
 msgstr "חשבון זה אינו פעיל יותר. נותקת מהמערכת."
 
+#, fuzzy
+#| msgid "This account is no longer active. You have been logged out."
+msgid "Your guest access has expired. You have been logged out."
+msgstr "חשבון זה אינו פעיל יותר. נותקת מהמערכת."
+
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
 
@@ -483,6 +509,14 @@ msgstr ""
 
 msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
 msgstr ""
+
+msgid "The action you tried to perform is not allowed for guest accounts."
+msgstr ""
+
+#, fuzzy
+#| msgid "The page you requested is not available for this event at this time."
+msgid "The page you tried to visit is not available for guest accounts."
+msgstr "הדף שביקשת אינו זמין עבור אירוע זה כעת."
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "נותקת באופן אוטומטי לאחר שלא היית פעיל במשך זמן מה."
@@ -1607,6 +1641,15 @@ msgstr "כל אחד יכול להצטרף"
 msgid "Project Type"
 msgstr "סוג פרויקט"
 
+#, fuzzy
+#| msgid "Untitled"
+msgid "Subtitle"
+msgstr "ללא כותרת"
+
+#, fuzzy
+msgid "Subtitle used for conferences."
+msgstr "שטח HD המשמש פרוייקטים"
+
 msgid "Short Description. Internal, will not be shown publicly."
 msgstr "תיאור קצר. פנימי, לא יוצג בפומבי."
 
@@ -1943,6 +1986,12 @@ msgstr ""
 
 msgid "Deletion triggered by self"
 msgstr ""
+
+msgid "Is guest user"
+msgstr ""
+
+msgid "(Deleted User)"
+msgstr "(משתמש שנמחק)"
 
 msgid "Terms of Service"
 msgstr "תנאי שימוש"
@@ -4199,6 +4248,11 @@ msgstr "סגור"
 msgid "Report offensive content"
 msgstr "דווח על תוכן פוגעני"
 
+#, fuzzy
+#| msgid "Your phone number is only visible for registered users"
+msgid "Sorry, this feature is only available for registered members."
+msgstr "מספר הטלפון שלך גלוי רק עבור משתמשים רשומים"
+
 msgid "Please enter a description of why you are reporting this content!"
 msgstr "נא הזן תיאור של הסיבה לדיווח על תוכן זה!"
 
@@ -4229,6 +4283,12 @@ msgid "The content of the field above will be searchable in the plattform-wide s
 msgstr ""
 
 msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr ""
+
+msgid "The content of the field above will will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings."
 msgstr ""
 
 #, fuzzy
@@ -4499,6 +4559,11 @@ msgstr "בטל חברות"
 msgid "There are no new membership requests."
 msgstr "אין בקשות חברות חדשות."
 
+#, fuzzy
+#| msgid "Delete user account"
+msgid "Guest user access"
+msgstr "מחק חשבון משתמש"
+
 msgid "Current Members"
 msgstr "חברים פעילים כעת"
 
@@ -4623,6 +4688,21 @@ msgstr "באילו לוחות שנה של פרויקטים או קבוצות י�
 msgid "Select Projects/Groups"
 msgstr "בחר פרויקטים / קבוצות"
 
+#, fuzzy
+#| msgid "Conferences"
+msgid "Conference subtitle"
+msgstr "שיחות ועידה"
+
+#, fuzzy
+#| msgid "Will be shown as a header in the conference lobby and on the conference microsite."
+msgid "The subtitle is shown in the conference and on the conference micro site."
+msgstr "יוצג ככותרת בלובי הוועידה ובמיקרו-אתר הוועידה."
+
+#, fuzzy
+#| msgid "Enter a title for the conference event."
+msgid "Add a subtitle for the conference."
+msgstr "הזן כותרת עבור אירוע הוועידה."
+
 msgid "Description and Infos"
 msgstr "תיאור ומידע"
 
@@ -4743,13 +4823,13 @@ msgstr ""
 msgid "Create invite token"
 msgstr "מחק הזמנה"
 
-msgid "Check this to generate an invite token which allows a user to join the group directly."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the group directly."
 msgstr ""
 
-msgid "Check this to generate an invite token which allows a user to join the project directly."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the project directly."
 msgstr ""
 
-msgid "Check this to generate an invite token which allows a user to join the conference directly."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the conference directly."
 msgstr ""
 
 msgid "The current token is: "
@@ -6041,6 +6121,11 @@ msgstr "מנותק"
 msgid "You have been logged out. See you again soon!"
 msgstr ""
 
+#, fuzzy
+#| msgid "Redirect Logged in Users"
+msgid "Redirecting you in 3 seconds..."
+msgstr "ניתוב מחדש של משתמשים מחוברים"
+
 msgid "Error while logging out"
 msgstr ""
 
@@ -6947,6 +7032,49 @@ msgstr "הזן אסימון:"
 
 msgid "For example"
 msgstr "לדוגמה"
+
+#, fuzzy
+#| msgid "Restricted"
+msgid "Restricted Guest Access"
+msgstr "מוגבל"
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Access restricted for guest accounts"
+msgstr "חשבון משתמש הושבת בהצלחה"
+
+msgid "You are currently using the platform with a guest account provided to you by a link."
+msgstr ""
+
+msgid "As a guest, many features on this site are not available to you, such as creating content, uploading files, or sending messages to other users."
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to perform the import of the shown data?"
+msgid "You cannot customize your user profile either."
+msgstr "האם אתה בטוח שברצונך לבצע את ייבוא הנתונים המוצגים?"
+
+msgid "Sign up now to create a fully featured account!"
+msgstr ""
+
+msgid "If you sign up as a platform member, you can collaborate with others, customize your profile and use all of the site's features."
+msgstr ""
+
+msgid "Note: After signup you will have to apply or be invited to become a full member of any projects, groups or conferences again. Your guest account's memberships can't be transferred to the new account."
+msgstr ""
+
+#, fuzzy
+msgid "Leave guest access and create an account"
+msgstr "יצר/ה אירוע חדש"
+
+msgid "Guest User Signup"
+msgstr ""
+
+msgid "You may create a full account at any time by logging out of your guest account via the user menu on the top right and signup up."
+msgstr ""
+
+msgid "Join as a Guest"
+msgstr ""
 
 msgid "Edit Profile"
 msgstr "ערוך פרופיל"
@@ -7989,9 +8117,6 @@ msgstr ""
 msgid "Nutzungsbedingungen"
 msgstr "תנאי השימוש"
 
-msgid "(Deleted User)"
-msgstr "(משתמש שנמחק)"
-
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "</i>לא נמצא מעבד עבור for %(model_name)s <i>"
@@ -8075,6 +8200,23 @@ msgstr "הצטרף עכשיו ושתף פעולה!"
 msgid "You have been invited to collaborate!"
 msgstr "הוזמנת לשתף פעולה!"
 
+msgid "You can access and browse the project that invited you"
+msgstr ""
+
+#, fuzzy
+#| msgid "There is no description for this project yet."
+msgid "This is only visible to admins of this project."
+msgstr "אין עדיין תיאור עבור פרויקט זה."
+
+msgid "Guest user access has been enabled for this project. The project admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this when sharing sensitive information within this project."
+msgstr ""
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this project"
+msgstr ""
+
+msgid "You are joining as a guest and will get read-only access to the project"
+msgstr ""
+
 msgid "Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators."
 msgstr "מצטערים, רק מנהלי פורטל יכולים ליצור פרוייקטים! באפשרותך לכתוב הודעה לאחד ממנהלי המערכת כדי ליצור עבורך פרוייקט. להלן תוכל למצוא רשימה של כל המנהלים."
 
@@ -8156,6 +8298,23 @@ msgid "Users may join by submitting a membership request that can be accepted or
 msgstr "משתמשים יכולים להצטרף על-ידי שליחת בקשת חברות שניתן לקבל או לדחות על-ידי כל אחד ממנהלי הקבוצות."
 
 msgid "Type the names of files, events or pads from this group to attach..."
+msgstr ""
+
+msgid "You can access and browse the group that invited you"
+msgstr ""
+
+#, fuzzy
+#| msgid "There is no description for this group yet."
+msgid "This is only visible to admins of this group."
+msgstr "אין עדיין תיאור עבור קבוצה זו."
+
+msgid "Guest user access has been enabled for this group. The group admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this when sharing sensitive information within this group."
+msgstr ""
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this group"
+msgstr ""
+
+msgid "You are joining as a guest and will get read-only access to the group"
 msgstr ""
 
 msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
@@ -8257,6 +8416,23 @@ msgstr "הצטרפו עכשיו והשתתפו!"
 
 msgid "You have been invited to participate!"
 msgstr "הוזמנת להשתתף!"
+
+msgid "You can access and participate in the conference that invited you"
+msgstr ""
+
+#, fuzzy
+#| msgid "This function is not enabled for this conference."
+msgid "This is only visible to admins of this conference."
+msgstr "פונקציה זו אינה זמינה עבור ועידה זו."
+
+msgid "Guest user access has been enabled for this conference. The group admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this conference. Be aware of this when sharing sensitive information within this conference."
+msgstr ""
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this conference"
+msgstr ""
+
+msgid "You are joining as a guest and will get read-only access to the conference"
+msgstr ""
 
 msgid "Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators."
 msgstr "מצטערים, רק מנהלי פורטל יכולים ליצור ועידות! באפשרותך לכתוב הודעה לאחד ממנהלי המערכת כדי ליצור ועידה עבורך. להלן תוכל למצוא רשימה של כל המנהלים."
@@ -8540,6 +8716,11 @@ msgstr ""
 msgid "The %(team_type)s was changed successfully."
 msgstr "ה-%(team_type)s השתנה בהצלחה."
 
+#, fuzzy
+#| msgid "Edit"
+msgid "Edited."
+msgstr "ערוך"
+
 msgid "This action is not available directly!"
 msgstr "פעולה זו אינה זמינה ישירות!"
 
@@ -8590,9 +8771,31 @@ msgstr "המשתמשים הבאים הוזמנו להגיש בקשה: %s"
 msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
 msgstr "כל החברים בקבוצות/פרוייקטים שבחרת כבר הוזמנו או שכבר הוחלו. לא נשלחו הזמנות חדשות."
 
+#, fuzzy, python-format
+#| msgid "Invite unregistered users..."
+msgid "Invited user \"%(user)s\"."
+msgstr "הזמנת משתמשים לא רשומים..."
+
+msgid "You cannot promote a guest user account!"
+msgstr ""
+
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
 msgstr "אין באפשרותך להסיר את המשתמש “%(username)s” מצוות זה. נותר רק מנהל אחד."
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Accepted user \"%(user)s\" as  member."
+msgstr "המשתמש \"%(username)s\" אינו חבר יותר."
+
+#, python-format
+msgid "Made user \"%(user)s\" admin."
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Made user \"%(user)s\" member."
+msgstr "המשתמש \"%(username)s\" אינו חבר יותר."
 
 #, python-format
 msgid "You cannot remove yourself from a %(team_type)s."
@@ -8615,6 +8818,10 @@ msgid "User \"%(username)s\" is no longer a member."
 msgstr "המשתמש \"%(username)s\" אינו חבר יותר."
 
 #, python-format
+msgid "Removed membership of user \"%(user)s\"."
+msgstr ""
+
+#, python-format
 msgid "%(team_name)s was re-activated successfully!"
 msgstr "%(team_name)s הופעל מחדש בהצלחה!"
 
@@ -8630,6 +8837,16 @@ msgstr "פרויקט/קבוצה זו כבר פעילים!"
 
 msgid "This project/group is already inactive!"
 msgstr "פרויקט/קבוצה זו כבר לא פעילים!"
+
+#, fuzzy
+#| msgid "Activate"
+msgid "Activated."
+msgstr "הפעל"
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "Deactivated."
+msgstr "השבת"
 
 msgid "You are not a member, but have access because you are an Administrator."
 msgstr "אינך חבר, אך יש לך גישה מכיוון שאתה מנהל מערכת."
@@ -8664,6 +8881,11 @@ msgstr "לאנשים תחת כתובות אלו יש כבר חשבון משתמ�
 #, python-format
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr "הצלחה! אנו שולחים כעת הזמנות לכתובות דוא\"ל הבאות: %s"
+
+#, fuzzy, python-format
+#| msgid "Invited Members"
+msgid "Invited \"%(emails)s\"."
+msgstr "חברים מוזמנים"
 
 msgid "There was an error when trying to delete the invitation."
 msgstr "אירעה שגיאה בעת ניסיון למחוק את ההזמנה."
@@ -8743,6 +8965,10 @@ msgstr "%(numobjects)d פריטים אחרים נמחקו."
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "לא נמצאו %(verbose_name)s התואמים לשאלה"
+
+#, python-format
+msgid "User \"%s\" is a guest user and has no profile."
+msgstr ""
 
 msgid "Your profile was edited successfully."
 msgstr "הפרופיל שלך נערך בהצלחה."
@@ -8905,6 +9131,12 @@ msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You 
 msgstr "כתובת הדוא\"ל שלך \"%(email)s\" הוסרה מרשימת התפוצה שלנו. לא תקבל עוד מיילים מאיתנו!"
 
 msgid "A new verification email has been sent."
+msgstr ""
+
+msgid "You are currently logged in. The guest access can only be used if you are not logged in."
+msgstr ""
+
+msgid "We could not sign you in as a guest at this time. Please try again later!"
 msgstr ""
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
@@ -9320,6 +9552,11 @@ msgstr "יצר/ה פנקס חדש"
 
 msgid "There are no etherpads yet"
 msgstr "טרם נוצרו פנקסי עריכה שיתופית Etherpads"
+
+#, fuzzy
+#| msgid "This action is not permitted for this poll at this stage!"
+msgid "Editing is not permitted for guest accounts."
+msgstr "פעולה זו אינה מותרת לסקר בשלב זה!"
 
 #, python-format
 msgid "Etherpad \"%(title)s\" was edited successfully."
@@ -13810,6 +14047,34 @@ msgstr "לא ניתן להוסיף את רשימת המשימות \"%(title)s\".
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "אינך יכול למחוק תיקיה זו מכיוון שאין לך הרשאה למחוק פריט אחד או יותר שהיא מכילה!"
 
+#, fuzzy
+#| msgid "Add project"
+msgid "Add object"
+msgstr "הוספת פרויקט"
+
+#, fuzzy
+#| msgid "Create content"
+msgid "Create container"
+msgstr "יצירת תוכן"
+
+msgid "ROOT"
+msgstr ""
+
+#, fuzzy
+#| msgid "Show all"
+msgid "Show"
+msgstr "הצג הכל"
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete this container and all objects in it?"
+msgstr "האם אתה בטוח שברצונך למחוק צוות זה?"
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete this object?"
+msgstr "האם אתה בטוח שברצונך למחוק צוות זה?"
+
 #~ msgid "Pre-filled content for the information field"
 #~ msgstr "מלא מראש תוכן עבור שדה המידע"
 
@@ -13990,9 +14255,6 @@ msgstr "אינך יכול למחוק תיקיה זו מכיוון שאין לך 
 
 #~ msgid "Premium"
 #~ msgstr "פרמיום"
-
-#~ msgid "Restricted"
-#~ msgstr "מוגבל"
 
 #~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 #~ msgstr "%(sender_name)s יצר כרגע את הפרויקט/קבוצה \"%(team_name)s\" ב-%(portal_name)s!"

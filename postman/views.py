@@ -20,7 +20,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.decorators import method_decorator
 from django.utils.timezone import now
-from django.utils.translation import ugettext as _, ugettext_lazy
+from django.utils.translation import gettext as _, gettext_lazy
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import FormView, TemplateView, View
 
@@ -471,18 +471,18 @@ class UpdateMessageMixin(object):
 class ArchiveView(UpdateMessageMixin, View):
     """Mark messages/conversations as archived."""
     field_bit = 'archived'
-    success_msg = ugettext_lazy("Messages or conversations successfully archived.")
+    success_msg = gettext_lazy("Messages or conversations successfully archived.")
     field_value = True
 
 
 class DeleteView(UpdateMessageMixin, View):
     """Mark messages/conversations as deleted."""
     field_bit = 'deleted_at'
-    success_msg = ugettext_lazy("Messages or conversations successfully deleted.")
+    success_msg = gettext_lazy("Messages or conversations successfully deleted.")
     field_value = now()
 
 
 class UndeleteView(UpdateMessageMixin, View):
     """Revert messages/conversations from marked as deleted."""
     field_bit = 'deleted_at'
-    success_msg = ugettext_lazy("Messages or conversations successfully recovered.")
+    success_msg = gettext_lazy("Messages or conversations successfully recovered.")

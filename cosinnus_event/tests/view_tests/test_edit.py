@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.utils.timezone import now
 
 from cosinnus_event.models import Event
-from tests.view_tests.base import ViewTestCase
+from cosinnus_event.tests.view_tests.base import ViewTestCase
 
 
 class EditTest(ViewTestCase):
@@ -21,7 +21,7 @@ class EditTest(ViewTestCase):
             to_date=now(),
             state=Event.STATE_SCHEDULED)
         self.kwargs = {'group': self.group.slug, 'slug': self.event.slug}
-        self.url = reverse('cosinnus:event:entry-edit', kwargs=self.kwargs)
+        self.url = reverse('cosinnus:event:event-edit', kwargs=self.kwargs)
 
     def test_get_not_logged_in(self):
         """
@@ -29,7 +29,7 @@ class EditTest(ViewTestCase):
         """
         self.client.logout()
         response = self.client.get(self.url)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
 
     def test_get_logged_in(self):
         """
@@ -42,11 +42,12 @@ class EditTest(ViewTestCase):
 
     def test_post_not_logged_in(self):
         """
-        Should return 403 on POST if not logged in
+        Should redirect to login on POST if not logged in
         """
         self.client.logout()
         response = self.client.post(self.url)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 302)
+        self.assertIn('next=' + self.url, response['Location'])
 
     def test_post_logged_in(self):
         """
@@ -61,24 +62,23 @@ class EditTest(ViewTestCase):
         tag = 'foo'
         params = {
             'title': self.event.title,
-            'tags': tag,
-            'suggestions-TOTAL_FORMS': '1',
-            'suggestions-INITIAL_FORMS': '0',
-            'suggestions-MAX_NUM_FORMS': '1000',
-            'suggestions-0-from_date': '2014-01-01',
-            'suggestions-0-to_date': '2014-01-02',
+            'media_tag-tags': [tag],
+            'from_date_0': '2014-01-01',
+            'from_date_1': '00:00',
+            'to_date_0': '2014-01-01',
+            'to_date_1': '23:00',
+            'video_conference_type': Event.NO_VIDEO_CONFERENCE,
         }
         response = self.client.post(self.url, params)
         self.assertEqual(response.status_code, 302)
         self.assertIn(
-            reverse('cosinnus:event:entry-detail', kwargs=self.kwargs),
+            reverse('cosinnus:event:event-detail', kwargs=self.kwargs),
             response.get('location'))
 
         # re-get edited event from database
         self.event = Event.objects.get(pk=self.event.pk)
-        num_tags = len(self.event.tags.filter(name=tag))
+        num_tags = len(self.event.media_tag.tags.filter(name=tag))
         self.assertEqual(num_tags, 1)
-        self.assertEqual(len(self.event.suggestions.all()), 1)
 
     def test_other_user(self):
         """
@@ -88,8 +88,4 @@ class EditTest(ViewTestCase):
         self.add_user(credential)
         self.client.login(username=credential, password=credential)
         response = self.client.get(self.url, follow=True)
-        self.assertEqual(response.status_code, 200)
-
-        kwargs = {'group': self.group.slug}
-        list_url = reverse('cosinnus:event:list', kwargs=kwargs)
-        self.assertRedirects(response, list_url)
+        self.assertEqual(response.status_code, 403)

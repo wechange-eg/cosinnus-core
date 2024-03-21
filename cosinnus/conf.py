@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from builtins import object
 from django.conf import settings  # noqa
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from appconf import AppConf
 
@@ -25,6 +25,61 @@ class CosinnusConf(AppConf):
     
     class Meta(object):
         prefix = 'COSINNUS'
+    
+    # a list of "startswith" URLs that will never be redirected by any middleware logic
+    # these URLs are allowed to be accessed for anonymous accounts, even when everything else
+    # is locked down. all integrated-API related URLs and all login/logout URLs should be in here!
+    NEVER_REDIRECT_URLS = [
+        '/admin/',
+        '/admin/login/',
+        '/admin/logout/',
+        '/administration/login-2fa/',
+        '/media/',
+        '/static/',
+        '/language',
+        '/api/v1/user/me/',
+        '/api/v1/login/',
+        '/api/v2/navbar/',
+        '/api/v2/header/',
+        '/api/v2/footer/',
+        '/api/v2/statistics/',
+        '/api/v2/token/',
+        
+        '/api/v3/login',
+        '/api/v3/logout',
+        '/api/v3/authinfo',
+        '/api/v3/portal/topics',
+        '/api/v3/portal/tags',
+        '/api/v3/portal/managed_tags',
+        '/api/v3/portal/userprofile_dynamicfields',
+        '/api/v3/portal/settings',
+        '/api/v3/user/profile',
+        '/api/v3/signup',
+        
+        '/api/v3/content/main',
+        
+        '/o/',
+        '/group/forum/cloud/oauth2/',
+        f'/group/{settings.NEWW_FORUM_GROUP_SLUG}/cloud/oauth2/',
+        '/account/verify_email/',
+        
+        # all bbb API endpoints and guest-access views are unlocked (sensitive endpoints have their own logged-in checks)
+        '/bbb/',
+        
+        # these deprecated URLs can be removed from the filter list once the URLs are removed
+        # and their /account/ URL-path equivalents are the only remaining version of the view URL
+        '/administration/list-unsubscribe/',
+        '/administration/list-unsubscribe-result/',
+        '/administration/deactivated/',
+        '/administration/activate/',
+        '/administration/deactivate/',
+        '/administration/verify_email/',
+        
+        # included services
+        '/swagger/',
+        '/redoc/',
+        '/cms-admin/', # wagtail admin
+    ]
 
     #: A mapping of ``{'app1.Model1': ['app2.Model2', 'app3.Model3']}`` that
     #: defines the tells, that given an instance of ``app1.Model1``, objects
@@ -878,14 +933,15 @@ class CosinnusConf(AppConf):
     
     # whether or not to use redirects to the v3 frontend
     # by appending a '?v=3' GET param for certain URL paths
-    # paths are defined in 
+    # paths are defined in V3_FRONTEND_URL_PATTERNS
     V3_FRONTEND_ENABLED = False
     
-    # a workaround for the frontend using languages as URL prefix
-    # instead of as cookie setting, any request with a language in this list
-    # will be redirected to a prefixed url with the language slug,
-    # in addition to the ?v=3 param
-    V3_LANGUAGE_REDIRECT_PREFIXES = ['de',]
+    # if this is enabled while V3_FRONTEND_ENABLED==True,
+    # ALL page access are redirected to the v3 frontend
+    # by appending a '?v=3' GET param,
+    # with the exception of paths defined in V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS
+    # this can also be prevented by setting the ?v=2 GET param!
+    V3_FRONTEND_EVERYWHERE_ENABLED = False
     
     V3_FRONTEND_SIGNUP_VERIFICATION_WELCOME_PAGE = '/signup/verified'
     
@@ -900,9 +956,39 @@ class CosinnusConf(AppConf):
         "^/setup/",
         "^api/auth/",
     ]
+    
+    # URL paths that get are exempted from being redirected to the new frontend
+    # if V3_FRONTEND_EVERYWHERE_ENABLED==True and V3_FRONTEND_ENABLED==True
+    V3_FRONTEND_EVERYWHERE_URL_PATTERN_EXEMPTIONS = [
+        "^/language/",
+        ".*/api/.*", # any paths with api calls
+        "^/o/", # any oauth paths
+        "^/administration/", # the entire administration area
+        "^/conference_administration/",
+        "^/statistics/simple/",
+        "^/housekeeping/",
+        "^/account/", # user account service functions
+        "^/fb-integration/",
+        # API URLs that are not route-namespaced under "/api/":
+        "^/select2/",
+        "^/likefollowstar/",
+        "^/map/search/",
+        "^/map/detail/",
+        "^/widgets/",
+        "^/widget/",
+        "^/user_match_assign/",
+        "/.*/.*/attachmentselect/",
+        "/.*/.*/users/member-invite-select2/",
+        "/.*/.*/group-invite-select2/",
+        # extra exemptions for views that do not work well with v3
+        "^/map/embed/",
+        "^/two_factor_auth/token_login/",
+        
+    ] + NEVER_REDIRECT_URLS # any other defined never-to-redirect-urls
 
-    # Languages supported by the v3 frontend. The portal language selection from LANGUAGES is restricted to these.
-    V3_FRONTEND_SUPPORTED_LANGUAGES = ['en', 'de']
+    # List of language codes supported by the v3 frontend. The portal language selection from LANGUAGES is restricted to these.
+    # if None or empty list, defaults to using the `LANGUAGES` dict keys
+    V3_FRONTEND_SUPPORTED_LANGUAGES = []
 
     # Link of the brand / home button in the main navigation. If set to None personal-dashboard is used.
     V3_MENU_HOME_LINK = '/cms/?noredir=1'
@@ -923,6 +1009,11 @@ class CosinnusConf(AppConf):
     # List of help items to be included in the v3 main navigation.
     # Format: (<label>, <url>, <icon>), e.g.: (_('FAQ'), 'https://wechange.de/cms/help/', 'fa-question-circle'),
     V3_MENU_HELP_LINKS = []
+    
+    # a class dropin to replace CosinnusNavigationPortalLinksBase as class that modifies or provides additional
+    # navbar links returned in various v3 navigation API endpoints
+    # (str classpath)
+    V3_MENU_PORTAL_LINKS_DROPIN = None
     
     # whether the regular user signup method is enabled for this portal
     USER_SIGNUP_ENABLED = True
@@ -1072,8 +1163,8 @@ class CosinnusConf(AppConf):
         'ALLOW_PUBLIC_UPLOADS': 'no', # "yes" or "no"
         'ALLOW_AUTOCOMPLETE_USERS': 'no', # "yes" or "no"
         'SEND_EMAIL_TO_NEW_USERS': 'no', # "yes" or "no"
-        'ENABLE_APP_IDS': ["groupfolders", "onlyoffice", "sociallogin", "wechangecsp"], # list of string app ids
-        'DISABLE_APP_IDS': ["theming", "photos", "activity", "systemtags", "dashboard"], # list of string app ids
+        'ENABLE_APP_IDS': ["groupfolders", "onlyoffice", "sociallogin", "cspworkaround", "firstrunwizard", "fulltextsearch_admin-api"], # list of string app ids
+        'DISABLE_APP_IDS': ["photos", "activity", "systemtags", "dashboard"], # list of string app ids
     }
     
     # if set to a hex color string,
@@ -1354,10 +1445,27 @@ class CosinnusConf(AppConf):
     MATCHING_FIELDS = ()
     MATCHING_DYNAMIC_FIELDS = ()
 
-    # types of CosinnusBaseGroup which are allowed to use direct join tokens:
+    # Types of CosinnusBaseGroup which are allowed to use direct join tokens:
     # 0 for projects; 1 for groups; 2 for conferences
     ENABLE_USER_JOIN_TOKENS_FOR_GROUP_TYPE = [2]
-
+    
+    # Set to True to enable user group guest account access for this portal.
+    USER_GUEST_ACCOUNTS_ENABLED = False
+    # Types of CosinnusBaseGroup in which group admins are allowed to create user guest
+    # access tokens, which enables user guest account access for this portal.
+    # Only used when `USER_GUEST_ACCOUNTS_ENABED == True`
+    # Will not work for closed portals!
+    # 0 for projects; 1 for groups; 2 for conferences
+    USER_GUEST_ACCOUNTS_FOR_GROUP_TYPE = [0, 1, 2]
+    # how long in days guest accounts will be kept, no matter if active or inactive
+    USER_GUEST_ACCOUNTS_DELETE_AFTER_DAYS = 7
+    # enable extended "soft edit" permissions for guests
+    # - writing in etherpads/ethercalcs
+    # - voting in event polls
+    # - assigning their event attendace choice
+    # - voting in polls
+    USER_GUEST_ACCOUNTS_ENABLE_SOFT_EDITS = False
+    
     # should the LIKE, BOOKMARK, FOLLOW buttons be shown on the entire portal (microsite, groups/projects, events, etc.)?
     SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS = True
 
@@ -1553,6 +1661,3 @@ class CosinnusDefaultSettings(AppConf):
     
     # limit visit creation for (user, bbb_room) pairs to a time window
     BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60*60
-    
-    
-    

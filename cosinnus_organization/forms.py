@@ -5,7 +5,7 @@ from builtins import object
 
 from awesome_avatar import forms as avatar_forms
 from django import forms
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from extra_views import InlineFormSetFactory
 from multiform import InvalidArgument
 

@@ -18,7 +18,7 @@ from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.timezone import localtime, now
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy, pgettext_lazy as p_
+from django.utils.translation import gettext_lazy as _, pgettext_lazy, pgettext_lazy as p_
 import six
 
 from cosinnus.models import BaseTaggableObjectModel
@@ -51,6 +51,7 @@ def get_event_image_filename(instance, filename):
 @six.python_2_unicode_compatible
 class Event(HumanizedEventTimeMixin, TranslateableFieldsModelMixin, LikeableObjectMixin, 
             BBBRoomMixin, RelayMessageMixin, BaseTaggableObjectModel):
+    """ Model for events. """
 
     SORT_FIELDS_ALIASES = [
         ('title', 'title'),

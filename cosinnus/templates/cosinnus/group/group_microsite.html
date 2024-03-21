@@ -28,7 +28,7 @@
 		{% comment %} Combobox dropdown and breadcrumb {% endcomment %}
 	    <div class="row">
 	        <!-- start with left navigation -->
-	        <div class="x-v3-leftnav col-lg-3 col-md-3"><!-- left column -->
+	        <div class="{% if COSINNUS_V3_API_CONTENT_ACTIVE %}x-v3-leftnav {% endif %}col-lg-3 col-md-3"><!-- left column -->
 	            {% if group %}
 	                {% cosinnus_menu "cosinnus/appsmenu.html" %}
 	            {% endif %}
@@ -80,15 +80,21 @@
 			
 			{% block microsite_main_content %}
 				<h2>{{ group.name }}</h2>
-				
+
 				
 				<div class="group-microsite-details">
-					
+
 					{% block microsite_header_details %}
+                        {% if group.group_is_conference and not SETTINGS.COSINNUS_CONFERENCES_USE_COMPACT_MODE and group.subtitle %}
+                            <p class="transparent">
+                                {{ group.subtitle }}
+                            </p>
+                        {% endif %}
+
 						<p class="transparent">
 			            	{{ group.trans.VERBOSE_NAME }}
 			            </p>
-			            
+
 			            {% with parent=group.get_parent_typed %}
 			                {% if parent %}
 			                    <p class="transparent">
@@ -284,7 +290,7 @@
                     {% endblock %}
 		        	
 	        	    <br/>
-					{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+					{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS and request.user.is_authenticated and not request.user.is_guest %}
 						<div>
 							{% if group.type == 0 %}
 								{% trans "You will now receive notifications for content posted in this project." as follow_success_message %}
@@ -430,6 +436,7 @@
 													{% trans "Contact Group Admins" %}
 												{% else %}
 													{% trans "Contact Conference Admins" %}
+
 												{% endif %}
 			                                </div>
 			                            </li>

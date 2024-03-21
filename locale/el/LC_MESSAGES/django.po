@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-17 14:29+0100\n"
+"POT-Creation-Date: 2024-03-14 12:40+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -127,6 +127,12 @@ msgstr ""
 msgid "Email not verified"
 msgstr "δεν καθορίζεται"
 
+msgid "Is Guest"
+msgstr ""
+
+msgid "Is not a Guest"
+msgstr ""
+
 msgid "User Logged In"
 msgstr "Συνδεδεμένος Χρήστης"
 
@@ -217,6 +223,11 @@ msgid "Recipients Send Count"
 msgstr "Παραλήπτες"
 
 #, fuzzy
+#| msgid "Last accessed"
+msgid "Guest access URL"
+msgstr "Τελευταία πρόσβαση"
+
+#, fuzzy
 #| msgid "Comment"
 msgid "Community"
 msgstr "Σχόλιο"
@@ -265,6 +276,11 @@ msgid "My Profile"
 msgstr "Το Προφίλ Μου"
 
 #, fuzzy
+#| msgid "Delete Account"
+msgid "My Guest Account"
+msgstr "Διαγραφή Λογαριασμού"
+
+#, fuzzy
 #| msgid "Edit Your Profile"
 msgid "Set up my Profile"
 msgstr "Επεξεργασία του Προφίλ Σας"
@@ -285,6 +301,11 @@ msgstr "Διαχείριση"
 
 msgid "Logout"
 msgstr "Αποσύνδεση"
+
+#, fuzzy
+#| msgid "Last accessed"
+msgid "Leave guest access"
+msgstr "Τελευταία πρόσβαση"
 
 msgid "Home"
 msgstr "Αρχική"
@@ -471,6 +492,11 @@ msgstr "Αυτή η ομάδα δεν υπάρχει πλέον στο URL πο�
 msgid "This account is no longer active. You have been logged out."
 msgstr "Αυτός ο λογαριασμός δεν είναι πλέον ενεργός. Έχετε αποσυνδεθεί."
 
+#, fuzzy
+#| msgid "This account is no longer active. You have been logged out."
+msgid "Your guest access has expired. You have been logged out."
+msgstr "Αυτός ο λογαριασμός δεν είναι πλέον ενεργός. Έχετε αποσυνδεθεί."
+
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
 
@@ -479,6 +505,14 @@ msgstr ""
 
 msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
 msgstr ""
+
+msgid "The action you tried to perform is not allowed for guest accounts."
+msgstr ""
+
+#, fuzzy
+#| msgid "The page you requested is not available for this event at this time."
+msgid "The page you tried to visit is not available for guest accounts."
+msgstr "Η σελίδα που ζητήσατε δεν είναι διαθέσιμη για αυτή την εκδήλωση τη συγκεκριμένη ώρα."
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Έχετε αυτόματα αποσυνδεθεί εφόσον ήσασταν ανενεργός για κάποιο διάστημα."
@@ -1601,6 +1635,15 @@ msgstr "Μπορεί να συμμετάσχει οποιοσδήποτε"
 msgid "Project Type"
 msgstr "Είδος Έργου"
 
+#, fuzzy
+#| msgid "Untitled"
+msgid "Subtitle"
+msgstr "Χωρίς τίτλο"
+
+#, fuzzy
+msgid "Subtitle used for conferences."
+msgstr "Χώρος HD που χρησιμοποιείται από έργα"
+
 msgid "Short Description. Internal, will not be shown publicly."
 msgstr "Σύντομη Περιγραφή. Εσωτερική, δε θα εμφανιστεί δημόσια."
 
@@ -1937,6 +1980,12 @@ msgstr ""
 
 msgid "Deletion triggered by self"
 msgstr ""
+
+msgid "Is guest user"
+msgstr ""
+
+msgid "(Deleted User)"
+msgstr "(Διαγραμμένος Χρήστης)"
 
 msgid "Terms of Service"
 msgstr "Όροι Εξυπηρέτησης"
@@ -4188,6 +4237,11 @@ msgstr "Κλείσιμο"
 msgid "Report offensive content"
 msgstr "Αναφορά προσβλητικού περιεχομένου"
 
+#, fuzzy
+#| msgid "Your phone number is only visible for registered users"
+msgid "Sorry, this feature is only available for registered members."
+msgstr "Ο αριθμός τηλεφώνου σας εμφανίζεται μόνο στους εγγεγραμμένους χρήστες"
+
 msgid "Please enter a description of why you are reporting this content!"
 msgstr "Εισάγετε περιγραφή για τον λόγο που αναφέρετε αυτό το περιεχόμενο!"
 
@@ -4218,6 +4272,12 @@ msgid "The content of the field above will be searchable in the plattform-wide s
 msgstr ""
 
 msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr ""
+
+msgid "The content of the field above will will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings."
 msgstr ""
 
 #, fuzzy
@@ -4487,6 +4547,11 @@ msgstr "Απόρριψη Μέλους"
 msgid "There are no new membership requests."
 msgstr "Δεν υπάρχουν νέα αιτήματα συνδρομών."
 
+#, fuzzy
+#| msgid "Delete user account"
+msgid "Guest user access"
+msgstr "Διαγραφή λογαριασμού χρήστη"
+
 msgid "Current Members"
 msgstr "Τρέχοντα Μέλη"
 
@@ -4611,6 +4676,21 @@ msgstr "Σε ποια ημερολόγια έργων ή ομάδων θα πρ�
 msgid "Select Projects/Groups"
 msgstr "Επιλογή Έργων/Ομάδων"
 
+#, fuzzy
+#| msgid "Conferences"
+msgid "Conference subtitle"
+msgstr "Συσκέψεις"
+
+#, fuzzy
+#| msgid "Will be shown as a header in the conference lobby and on the conference microsite."
+msgid "The subtitle is shown in the conference and on the conference micro site."
+msgstr "Θα εμφανίζεται ως επικεφαλίδα στο λόμπι της σύσκεψης και στον μικρότοπο της σύσκεψης."
+
+#, fuzzy
+#| msgid "Enter a title for the conference event."
+msgid "Add a subtitle for the conference."
+msgstr "Εισάγετε τίτλο για την εκδήλωση σύσκεψης."
+
 msgid "Description and Infos"
 msgstr "Περιγραφή και Πληροφορίες"
 
@@ -4731,13 +4811,13 @@ msgstr ""
 msgid "Create invite token"
 msgstr "Διαγραφή πρόσκλησης"
 
-msgid "Check this to generate an invite token which allows a user to join the group directly."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the group directly."
 msgstr ""
 
-msgid "Check this to generate an invite token which allows a user to join the project directly."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the project directly."
 msgstr ""
 
-msgid "Check this to generate an invite token which allows a user to join the conference directly."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the conference directly."
 msgstr ""
 
 msgid "The current token is: "
@@ -6029,6 +6109,11 @@ msgstr "Αποσυνδεδεμένος"
 msgid "You have been logged out. See you again soon!"
 msgstr ""
 
+#, fuzzy
+#| msgid "Redirect Logged in Users"
+msgid "Redirecting you in 3 seconds..."
+msgstr "Ανακατεύθυνση Συνδεδεμένων Χρηστών"
+
 msgid "Error while logging out"
 msgstr ""
 
@@ -6935,6 +7020,49 @@ msgstr "Εισάγετε διακριτικό:"
 
 msgid "For example"
 msgstr "Για παράδειγμα"
+
+#, fuzzy
+#| msgid "Restricted"
+msgid "Restricted Guest Access"
+msgstr "Περιορισμένος"
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Access restricted for guest accounts"
+msgstr "Ο λογαριασμός χρήστη απενεργοποιήθηκε με επιτυχία"
+
+msgid "You are currently using the platform with a guest account provided to you by a link."
+msgstr ""
+
+msgid "As a guest, many features on this site are not available to you, such as creating content, uploading files, or sending messages to other users."
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to perform the import of the shown data?"
+msgid "You cannot customize your user profile either."
+msgstr "Είστε βέβαιοι ότι θέλετε να πραγματοποιήσετε την εισαγωγή των δεδομένων που εμφανίζονται;"
+
+msgid "Sign up now to create a fully featured account!"
+msgstr ""
+
+msgid "If you sign up as a platform member, you can collaborate with others, customize your profile and use all of the site's features."
+msgstr ""
+
+msgid "Note: After signup you will have to apply or be invited to become a full member of any projects, groups or conferences again. Your guest account's memberships can't be transferred to the new account."
+msgstr ""
+
+#, fuzzy
+msgid "Leave guest access and create an account"
+msgstr "δημιούργησε μια εκδήλωση"
+
+msgid "Guest User Signup"
+msgstr ""
+
+msgid "You may create a full account at any time by logging out of your guest account via the user menu on the top right and signup up."
+msgstr ""
+
+msgid "Join as a Guest"
+msgstr ""
 
 msgid "Edit Profile"
 msgstr "Επεξεργασία Προφίλ"
@@ -7976,9 +8104,6 @@ msgstr ""
 msgid "Nutzungsbedingungen"
 msgstr ""
 
-msgid "(Deleted User)"
-msgstr "(Διαγραμμένος Χρήστης)"
-
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>Δεν βρέθηκε απόδοση %(model_name)s!</i>"
@@ -8062,6 +8187,23 @@ msgstr "Δηλώστε συμμετοχή τώρα και συνεργαστεί
 msgid "You have been invited to collaborate!"
 msgstr "Έχει προσκληθεί για να συνεργαστείτε!"
 
+msgid "You can access and browse the project that invited you"
+msgstr ""
+
+#, fuzzy
+#| msgid "There is no description for this project yet."
+msgid "This is only visible to admins of this project."
+msgstr "Δεν υπάρχει περιγραφή για αυτό το έργο ακόμη."
+
+msgid "Guest user access has been enabled for this project. The project admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this when sharing sensitive information within this project."
+msgstr ""
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this project"
+msgstr ""
+
+msgid "You are joining as a guest and will get read-only access to the project"
+msgstr ""
+
 msgid "Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators."
 msgstr "Λυπούμαστε, μόνο οι διαχειριστές πύλης μπορούν να δημιουργούν Έργα! Μπορείτε να γράψετε ένα μήνυμα σε κάποιο από τους διαχειριστές για να δημιουργήσουν ένα Έργο για εσάς. Παρακάτω μπορείτε να βρείτε μια λίστα με όλους τους διαχειριστές."
 
@@ -8142,6 +8284,23 @@ msgid "Users may join by submitting a membership request that can be accepted or
 msgstr "Οι χρήστες μπορούν να συμμετάσχουν υποβάλλοντας ένα αίτημα συνδρομής το οποίο μπορεί να γίνει αποδεκτό ή να απορριφθεί από κάποιο από τους διαχειριστές της ομάδας."
 
 msgid "Type the names of files, events or pads from this group to attach..."
+msgstr ""
+
+msgid "You can access and browse the group that invited you"
+msgstr ""
+
+#, fuzzy
+#| msgid "There is no description for this group yet."
+msgid "This is only visible to admins of this group."
+msgstr "Δεν υπάρχει περιγραφή για αυτή την ομάδα ακόμη."
+
+msgid "Guest user access has been enabled for this group. The group admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this when sharing sensitive information within this group."
+msgstr ""
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this group"
+msgstr ""
+
+msgid "You are joining as a guest and will get read-only access to the group"
 msgstr ""
 
 msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
@@ -8243,6 +8402,23 @@ msgstr "Εγγραφείτε τώρα και λάβετε μέρος!"
 
 msgid "You have been invited to participate!"
 msgstr "Έχει προσκληθεί για να λάβετε μέρος!"
+
+msgid "You can access and participate in the conference that invited you"
+msgstr ""
+
+#, fuzzy
+#| msgid "This function is not enabled for this conference."
+msgid "This is only visible to admins of this conference."
+msgstr "Η συγκεκριμένη λειτουργία δεν έχει ενεργοποιηθεί για αυτή τη σύσκεψη."
+
+msgid "Guest user access has been enabled for this conference. The group admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this conference. Be aware of this when sharing sensitive information within this conference."
+msgstr ""
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this conference"
+msgstr ""
+
+msgid "You are joining as a guest and will get read-only access to the conference"
+msgstr ""
 
 msgid "Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators."
 msgstr "Λυπούμαστε, μόνο οι διαχειριστές πύλης μπορούν να δημιουργούν Συσκέψεις! Μπορείτε να γράψετε ένα μήνυμα σε κάποιο από τους διαχειριστές για να δημιουργήσουν μια Σύσκεψη για εσάς. Παρακάτω μπορείτε να βρείτε μια λίστα με όλους τους διαχειριστές."
@@ -8526,6 +8702,11 @@ msgstr ""
 msgid "The %(team_type)s was changed successfully."
 msgstr "Η %(team_type)s άλλαξε με επιτυχία."
 
+#, fuzzy
+#| msgid "Edit"
+msgid "Edited."
+msgstr "Επεξεργασία"
+
 msgid "This action is not available directly!"
 msgstr "Αυτή η ενέργεια δεν είναι άμεσα διαθέσιμη!"
 
@@ -8576,9 +8757,31 @@ msgstr "Οι παρακάτω χρήστες προσκλήθηκαν να υπ�
 msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
 msgstr "Όλα τα μέλη των ομάδων/έργων που επιλέξατε έχουν ήδη προσκληθεί ή έχουν ήδη απαντήσει. Δεν έχουν σταλεί νέες προσκλήσεις."
 
+#, fuzzy, python-format
+#| msgid "Invite unregistered users..."
+msgid "Invited user \"%(user)s\"."
+msgstr "Πρόσκληση μη εγγεγραμμένων χρηστών..."
+
+msgid "You cannot promote a guest user account!"
+msgstr ""
+
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
 msgstr "Δεν μπορείτε να αφαιρέσετε τον/την“%(username)s” από αυτή την ομάδα. Έχει μείνει μόνο ένας διαχειριστής."
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Accepted user \"%(user)s\" as  member."
+msgstr "Ο χρήστης \"%(username)s\" δεν είναι πλέον μέλος."
+
+#, python-format
+msgid "Made user \"%(user)s\" admin."
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Made user \"%(user)s\" member."
+msgstr "Ο χρήστης \"%(username)s\" δεν είναι πλέον μέλος."
 
 #, python-format
 msgid "You cannot remove yourself from a %(team_type)s."
@@ -8601,6 +8804,10 @@ msgid "User \"%(username)s\" is no longer a member."
 msgstr "Ο χρήστης \"%(username)s\" δεν είναι πλέον μέλος."
 
 #, python-format
+msgid "Removed membership of user \"%(user)s\"."
+msgstr ""
+
+#, python-format
 msgid "%(team_name)s was re-activated successfully!"
 msgstr "Ο/η %(team_name)s ενεργοποιήθηκε εκ νέου με επιτυχία!"
 
@@ -8616,6 +8823,16 @@ msgstr "Αυτό το έργο/αυτή η ομάδα είναι ήδη ενερ
 
 msgid "This project/group is already inactive!"
 msgstr "Αυτό το έργο/αυτή η ομάδα είναι ήδη ανενεργό/-ή!"
+
+#, fuzzy
+#| msgid "Activate"
+msgid "Activated."
+msgstr "Ενεργοποίηση"
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "Deactivated."
+msgstr "Απενεργοποίηση"
 
 msgid "You are not a member, but have access because you are an Administrator."
 msgstr "Δεν είστε μέλος, αλλά έχετε πρόσβαση επειδή είστε Διαχειριστής."
@@ -8650,6 +8867,11 @@ msgstr "Τα άτομα με αυτές τις διευθύνσεις έχουν
 #, python-format
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr "Επιτυχία! Στέλνουμε τώρα προσκλήσεις σε αυτές τις διευθύνσεις email: %s"
+
+#, fuzzy, python-format
+#| msgid "Invited Members"
+msgid "Invited \"%(emails)s\"."
+msgstr "Προσκεκλημένα Μέλη"
 
 msgid "There was an error when trying to delete the invitation."
 msgstr "Υπήρξε σφάλμα κατά την προσπάθεια διαγραφής της πρόσκλησης."
@@ -8729,6 +8951,10 @@ msgstr "%(numobjects)d άλλα αντικείμενα διαγράφηκαν."
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Δεν βρέθηκε %(verbose_name)s που να ταιριάζει με την αναζήτηση"
+
+#, python-format
+msgid "User \"%s\" is a guest user and has no profile."
+msgstr ""
 
 msgid "Your profile was edited successfully."
 msgstr "Το προφίλ σας υποβλήθηκε σε επεξεργασία με επιτυχία."
@@ -8891,6 +9117,12 @@ msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You 
 msgstr "Έχουμε διαγράψει το email \"%(email)s\" από τον κατάλογο αλληλογραφίας μας. Δε θα λαμβάνετε πλέον email από εμάς!"
 
 msgid "A new verification email has been sent."
+msgstr ""
+
+msgid "You are currently logged in. The guest access can only be used if you are not logged in."
+msgstr ""
+
+msgid "We could not sign you in as a guest at this time. Please try again later!"
 msgstr ""
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
@@ -9303,6 +9535,11 @@ msgstr "δημιούργησε ένα Pad"
 
 msgid "There are no etherpads yet"
 msgstr "Δεν υπάρχουν ακόμη etherpad"
+
+#, fuzzy
+#| msgid "This action is not permitted for this poll at this stage!"
+msgid "Editing is not permitted for guest accounts."
+msgstr "Αυτή η ενέργεια δεν επιτρέπεται για αυτή τη δημοσκόπηση σε αυτό το στάδιο!"
 
 #, python-format
 msgid "Etherpad \"%(title)s\" was edited successfully."
@@ -13797,6 +14034,34 @@ msgstr "Δεν ήταν δυνατή η προσθήκη της λίστας κ�
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Δεν μπορείτε να διαγράψετε αυτόν τον φάκελο διότι δεν έχετε άδεια να διαγράψετε ένα ή περισσότερα στοιχεία που περιέχει!"
 
+#, fuzzy
+#| msgid "Add project"
+msgid "Add object"
+msgstr "Προσθήκη έργου"
+
+#, fuzzy
+#| msgid "Create content"
+msgid "Create container"
+msgstr "Δημιουργία περιεχομένου"
+
+msgid "ROOT"
+msgstr ""
+
+#, fuzzy
+#| msgid "Show all"
+msgid "Show"
+msgstr "Εμφάνιση όλων"
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete this container and all objects in it?"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την ομάδα;"
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete this object?"
+msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την ομάδα;"
+
 #~ msgid "Pre-filled content for the information field"
 #~ msgstr "Περιεχόμενο εκ των προτέρων συμπληρωμένο για το πεδίο πληροφοριών"
 
@@ -13953,9 +14218,6 @@ msgstr "Δεν μπορείτε να διαγράψετε αυτόν τον φά
 
 #~ msgid "Premium"
 #~ msgstr "Premium"
-
-#~ msgid "Restricted"
-#~ msgstr "Περιορισμένος"
 
 #~ msgid "%(team_name)s was deactivated successfully!"
 #~ msgstr "Ο/η %(team_name)s απενεργοποιήθηκε με επιτυχία!"

@@ -4,7 +4,7 @@ Created on 05.08.2014
 @author: Sascha
 '''
 from builtins import object
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.views.mixins.filters import CosinnusFilterSet,\
     CosinnusOrderingFilter

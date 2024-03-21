@@ -1,3 +1,5 @@
+from functools import partial
+
 from django.core.exceptions import ImproperlyConfigured
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
@@ -31,6 +33,17 @@ class TranslateableFieldsModelMixin(models.Model):
         abstract = True
 
     translations = models.JSONField(default=dict, blank=True, encoder=DjangoJSONEncoder)
+
+    def __init__(self, *args, **kwargs):
+        super(TranslateableFieldsModelMixin, self).__init__(*args, **kwargs)
+
+        if settings.COSINNUS_TRANSLATED_FIELDS_ENABLED and self.has_dynamic_field_translations:
+            # add function without parameters to get a translated dynamic fields value as used in the v3 API profile
+            # serializer.
+            for dynamic_field in self.translatable_dynamic_fields:
+                for language_code, __ in settings.LANGUAGES:
+                    setattr(self, f'get_{dynamic_field}__{language_code}',
+                            partial(self.get_translated_dynamic_field, dynamic_field, language_code))
 
     @property
     def languages(self):
@@ -85,6 +98,16 @@ class TranslateableFieldsModelMixin(models.Model):
                     dynamic_fields.update(clean_translation)
                     return dynamic_fields
 
+    def get_translated_dynamic_field(self, dynamic_field, language):
+        """ Return the translated value of a dynamic field. """
+        if self.has_dynamic_field_translations:
+            dynamic_fields_translations = self.translations.get('dynamic_fields')
+            if dynamic_fields_translations:
+                translation = dynamic_fields_translations.get(language)
+                if translation:
+                    return translation.get(dynamic_field, None)
+        return None
+
     def get_translateable_fields(self):
         return self.translateable_fields
 
@@ -102,3 +125,24 @@ class TranslateableFieldsModelMixin(models.Model):
         setattr(readonly_copy, 'save', _protected_func)
         setattr(readonly_copy, 'delete', _protected_func)
         return readonly_copy
+
+
+class TranslatableFormsetJsonFieldMixin:
+    """ Model mixin that adds a helper function to receive a translated version of a formset json field. """
+
+    def get_translated_json_field(self, field_name):
+        json_field = getattr(self, field_name)
+        if not settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
+            # translation is / has been disabled. Return the json field as is.
+            return json_field
+        translated_value_list = []
+        current_language = get_language()
+        for json_field_element in json_field:
+            translated_element = {}
+            untranslated_values = {k: v for k, v in json_field_element.items() if '_translation_' not in k}
+            for key, value in untranslated_values.items():
+                translation_key = f'{key}_translation_{current_language}'
+                translated_value = json_field_element.get(translation_key)
+                translated_element[key] = translated_value if translated_value else value
+            translated_value_list.append(translated_element)
+        return translated_value_list

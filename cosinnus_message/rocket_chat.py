@@ -13,7 +13,7 @@ from django.core.cache import cache
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.utils.crypto import get_random_string
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from oauth2_provider.models import Application
 
 from requests.exceptions import ConnectionError, Timeout
@@ -957,7 +957,7 @@ class RocketChatConnection:
         admin_ids = [self.get_user_id(m.user) for m in admin_qs]
         members_qs = memberships.filter_membership_status(MEMBER_STATUS)
         member_usernames = [str(m.user.cosinnus_profile.rocket_username)
-                            for m in members_qs if hasattr(m.user, 'cosinnus_profile') and m.user.cosinnus_profile]
+                            for m in members_qs if hasattr(m.user, 'cosinnus_profile') and m.user.cosinnus_profile and not m.user.is_guest]
         member_usernames.append(settings.COSINNUS_CHAT_USER)
 
         # Createconfigured channels
@@ -1389,7 +1389,7 @@ class RocketChatConnection:
         @raise Exception: on a general error 
         """
         if not hasattr(user, 'cosinnus_profile'):
-            return
+            return 0
         profile = user.cosinnus_profile
         
         try:
@@ -1422,6 +1422,7 @@ class RocketChatConnection:
             logger.error('RocketChat: unread message count: unexpected exception',
                      extra={'exception': e})
             logger.exception(e)
+        return 0
     
     def get_user_preferences(self, user):
         """ Gets the given user's rocketchat preferences.

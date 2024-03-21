@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-17 14:29+0100\n"
+"POT-Creation-Date: 2024-03-14 12:40+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -125,6 +125,12 @@ msgstr ""
 msgid "Email not verified"
 msgstr "(Неактыўная)"
 
+msgid "Is Guest"
+msgstr ""
+
+msgid "Is not a Guest"
+msgstr ""
+
 msgid "User Logged In"
 msgstr "Карыстальнік(-ца) увайшоў(-ла)"
 
@@ -215,6 +221,11 @@ msgid "Recipients Send Count"
 msgstr "Атрымальнікі(-цы)"
 
 #, fuzzy
+#| msgid "Last accessed"
+msgid "Guest access URL"
+msgstr "Нядаўна адкрываныя"
+
+#, fuzzy
 #| msgid "Comment"
 msgid "Community"
 msgstr "Каментар"
@@ -263,6 +274,11 @@ msgid "My Profile"
 msgstr "Мой профіль"
 
 #, fuzzy
+#| msgid "Delete Account"
+msgid "My Guest Account"
+msgstr "Выдаліць акаўнт"
+
+#, fuzzy
 #| msgid "Edit Your Profile"
 msgid "Set up my Profile"
 msgstr "Рэдагаваць Ваш профіль"
@@ -283,6 +299,11 @@ msgstr "Адміністратар"
 
 msgid "Logout"
 msgstr "Выйсці"
+
+#, fuzzy
+#| msgid "Last accessed"
+msgid "Leave guest access"
+msgstr "Нядаўна адкрываныя"
 
 msgid "Home"
 msgstr ""
@@ -467,6 +488,11 @@ msgstr "Гэта каманда больш не знаходзіцца па ўв
 msgid "This account is no longer active. You have been logged out."
 msgstr "Гэта акаўнт ужо не актыўны. Вы выйшлі з акаўнту."
 
+#, fuzzy
+#| msgid "This account is no longer active. You have been logged out."
+msgid "Your guest access has expired. You have been logged out."
+msgstr "Гэта акаўнт ужо не актыўны. Вы выйшлі з акаўнту."
+
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
 
@@ -475,6 +501,14 @@ msgstr ""
 
 msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
 msgstr ""
+
+msgid "The action you tried to perform is not allowed for guest accounts."
+msgstr ""
+
+#, fuzzy
+#| msgid "The page you requested is not available for this event at this time."
+msgid "The page you tried to visit is not available for guest accounts."
+msgstr "Запытаная Вамі старонка на дадзены момант недасяжная для гэтай падзеі."
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr ""
@@ -1622,6 +1656,15 @@ msgstr ""
 msgid "Project Type"
 msgstr "Тып праекта"
 
+#, fuzzy
+#| msgid "Untitled"
+msgid "Subtitle"
+msgstr "Без назвы"
+
+#, fuzzy
+msgid "Subtitle used for conferences."
+msgstr "Увядзіце назву праекта."
+
 msgid "Short Description. Internal, will not be shown publicly."
 msgstr "Кароткае апісанне. Для унутранага карыстання, не паказваецца публічна."
 
@@ -1967,6 +2010,12 @@ msgstr ""
 
 msgid "Deletion triggered by self"
 msgstr ""
+
+msgid "Is guest user"
+msgstr ""
+
+msgid "(Deleted User)"
+msgstr "(Выдалены(-ая) карыстальнік(-ца))"
 
 msgid "Terms of Service"
 msgstr "Умовы карыстання"
@@ -4289,6 +4338,11 @@ msgstr "Закрыць"
 msgid "Report offensive content"
 msgstr "Паскардзіцца на абразлівае змесціва"
 
+#, fuzzy
+#| msgid "Your phone number is only visible for registered users"
+msgid "Sorry, this feature is only available for registered members."
+msgstr "Ваш нумар тэлефона бачны толькі зарэгістраваным карыстальнікам(-цам)"
+
 msgid "Please enter a description of why you are reporting this content!"
 msgstr "Калі ласка, дадайце апісанне, чаму Вы скардзіцеся на гэтае змесціва!"
 
@@ -4319,6 +4373,12 @@ msgid "The content of the field above will be searchable in the plattform-wide s
 msgstr ""
 
 msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr ""
+
+msgid "The content of the field above will will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings."
 msgstr ""
 
 #, fuzzy
@@ -4607,6 +4667,11 @@ msgid "There are no new membership requests."
 msgstr "Больш няма запытаў на членства."
 
 #, fuzzy
+#| msgid "Delete user account"
+msgid "Guest user access"
+msgstr "Выдаліць уліковы запіс карыстальніка(-цы)"
+
+#, fuzzy
 msgid "Current Members"
 msgstr "Запрошаныя чальцы"
 
@@ -4734,6 +4799,19 @@ msgstr ""
 msgid "Select Projects/Groups"
 msgstr "Выбраць звязаныя праекты/групы"
 
+#, fuzzy
+msgid "Conference subtitle"
+msgstr "Сканфігураваць"
+
+#, fuzzy
+#| msgid "Enter a title for the new event."
+msgid "The subtitle is shown in the conference and on the conference micro site."
+msgstr "Увядзіце назву новай падзеі."
+
+#, fuzzy
+msgid "Add a subtitle for the conference."
+msgstr "Увядзіце назву новай падзеі."
+
 msgid "Description and Infos"
 msgstr "Апісанне і інфармацыя"
 
@@ -4855,13 +4933,13 @@ msgstr ""
 msgid "Create invite token"
 msgstr "Выдаліць запрашэнне"
 
-msgid "Check this to generate an invite token which allows a user to join the group directly."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the group directly."
 msgstr ""
 
-msgid "Check this to generate an invite token which allows a user to join the project directly."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the project directly."
 msgstr ""
 
-msgid "Check this to generate an invite token which allows a user to join the conference directly."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the conference directly."
 msgstr ""
 
 msgid "The current token is: "
@@ -6143,6 +6221,11 @@ msgstr "Вы выйшлі"
 msgid "You have been logged out. See you again soon!"
 msgstr ""
 
+#, fuzzy
+#| msgid "Redirect Logged in Users"
+msgid "Redirecting you in 3 seconds..."
+msgstr "Перанакіроўваць увайшоўшых карыстальнікаў(-ц)"
+
 msgid "Error while logging out"
 msgstr ""
 
@@ -7094,6 +7177,45 @@ msgstr "Увядзіце маркер:"
 
 msgid "For example"
 msgstr "Напрыклад"
+
+msgid "Restricted Guest Access"
+msgstr ""
+
+#, fuzzy
+msgid "Access restricted for guest accounts"
+msgstr "Выдаліць уліковы запіс карыстальніка(-цы)"
+
+msgid "You are currently using the platform with a guest account provided to you by a link."
+msgstr ""
+
+msgid "As a guest, many features on this site are not available to you, such as creating content, uploading files, or sending messages to other users."
+msgstr ""
+
+#, fuzzy
+msgid "You cannot customize your user profile either."
+msgstr "Вы сапраўды хочаце выйсці з „%(title)s“?"
+
+msgid "Sign up now to create a fully featured account!"
+msgstr ""
+
+msgid "If you sign up as a platform member, you can collaborate with others, customize your profile and use all of the site's features."
+msgstr ""
+
+msgid "Note: After signup you will have to apply or be invited to become a full member of any projects, groups or conferences again. Your guest account's memberships can't be transferred to the new account."
+msgstr ""
+
+#, fuzzy
+msgid "Leave guest access and create an account"
+msgstr "Карыстальнік(-ца) стварыў(-ла) новую падзею"
+
+msgid "Guest User Signup"
+msgstr ""
+
+msgid "You may create a full account at any time by logging out of your guest account via the user menu on the top right and signup up."
+msgstr ""
+
+msgid "Join as a Guest"
+msgstr ""
 
 msgid "Edit Profile"
 msgstr "Рэдагаваць профіль"
@@ -8157,9 +8279,6 @@ msgstr ""
 msgid "Nutzungsbedingungen"
 msgstr "Умовы карыстання сайтам"
 
-msgid "(Deleted User)"
-msgstr "(Выдалены(-ая) карыстальнік(-ца))"
-
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>Сродак візуалізацыі для %(model_name)s не знойдзены!</i>"
@@ -8253,6 +8372,23 @@ msgstr "Далучыцеся зараз і супрацоўнічайце!"
 
 msgid "You have been invited to collaborate!"
 msgstr "Вас запрасілі да супрацоўніцтва!"
+
+msgid "You can access and browse the project that invited you"
+msgstr ""
+
+#, fuzzy
+#| msgid "There is no description for this project yet."
+msgid "This is only visible to admins of this project."
+msgstr "У гэтага праекта яшчэ няма апісання."
+
+msgid "Guest user access has been enabled for this project. The project admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this when sharing sensitive information within this project."
+msgstr ""
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this project"
+msgstr ""
+
+msgid "You are joining as a guest and will get read-only access to the project"
+msgstr ""
 
 #, fuzzy
 msgid "Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators."
@@ -8348,6 +8484,23 @@ msgid "Users may join by submitting a membership request that can be accepted or
 msgstr ""
 
 msgid "Type the names of files, events or pads from this group to attach..."
+msgstr ""
+
+msgid "You can access and browse the group that invited you"
+msgstr ""
+
+#, fuzzy
+#| msgid "There is no description for this group yet."
+msgid "This is only visible to admins of this group."
+msgstr "У гэтай групы яшчэ няма апісання."
+
+msgid "Guest user access has been enabled for this group. The group admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this when sharing sensitive information within this group."
+msgstr ""
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this group"
+msgstr ""
+
+msgid "You are joining as a guest and will get read-only access to the group"
 msgstr ""
 
 #, fuzzy
@@ -8472,6 +8625,22 @@ msgstr "Далучыцеся зараз і супрацоўнічайце!"
 #, fuzzy
 msgid "You have been invited to participate!"
 msgstr "Вас запрасілі да супрацоўніцтва!"
+
+msgid "You can access and participate in the conference that invited you"
+msgstr ""
+
+#, fuzzy
+msgid "This is only visible to admins of this conference."
+msgstr "Увядзіце назву праекта."
+
+msgid "Guest user access has been enabled for this conference. The group admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this conference. Be aware of this when sharing sensitive information within this conference."
+msgstr ""
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this conference"
+msgstr ""
+
+msgid "You are joining as a guest and will get read-only access to the conference"
+msgstr ""
 
 #, fuzzy
 msgid "Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators."
@@ -8759,6 +8928,11 @@ msgstr ""
 msgid "The %(team_type)s was changed successfully."
 msgstr "%(team_type)s паспяхова змененая."
 
+#, fuzzy
+#| msgid "Edit"
+msgid "Edited."
+msgstr "Рэдагаваць"
+
 msgid "This action is not available directly!"
 msgstr "Гэта дзеянне наўпрост недаступна!"
 
@@ -8809,9 +8983,30 @@ msgstr "Наступныя карыстальнікі(-цы) былі дадад
 msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
 msgstr ""
 
+#, fuzzy, python-format
+msgid "Invited user \"%(user)s\"."
+msgstr "Запрашэнні ў каманду для незарэгістраваных карыстальнікаў(-ц)"
+
+msgid "You cannot promote a guest user account!"
+msgstr ""
+
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
 msgstr "Вы не можаце выдаліць \"%(username)s\" з гэтай каманды. Застаўся толькі адзін адміністратар."
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Accepted user \"%(user)s\" as  member."
+msgstr "Карыстальнік(-ца) \"%(username)s\" больш не з'яўляецца чальцом."
+
+#, python-format
+msgid "Made user \"%(user)s\" admin."
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Made user \"%(user)s\" member."
+msgstr "Карыстальнік(-ца) \"%(username)s\" больш не з'яўляецца чальцом."
 
 #, python-format
 msgid "You cannot remove yourself from a %(team_type)s."
@@ -8834,6 +9029,10 @@ msgid "User \"%(username)s\" is no longer a member."
 msgstr "Карыстальнік(-ца) \"%(username)s\" больш не з'яўляецца чальцом."
 
 #, python-format
+msgid "Removed membership of user \"%(user)s\"."
+msgstr ""
+
+#, python-format
 msgid "%(team_name)s was re-activated successfully!"
 msgstr "%(team_name)s паспяхова ўзноўленая!"
 
@@ -8849,6 +9048,16 @@ msgstr "Гэты праект/група ўжо актыўны!"
 
 msgid "This project/group is already inactive!"
 msgstr "Гэты праект/група ўжо неактыўны!"
+
+#, fuzzy
+#| msgid "Activate"
+msgid "Activated."
+msgstr "Актываваць"
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "Deactivated."
+msgstr "Пазначыць як неактыўны"
 
 msgid "You are not a member, but have access because you are an Administrator."
 msgstr ""
@@ -8883,6 +9092,11 @@ msgstr "Людзі, якім належаць гэтыя адрасы, ужо м
 #, python-format
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr "Поспех! Мы зараз дашлем запрашэнні на гэтыя адрасы электроннай пошты: %s"
+
+#, fuzzy, python-format
+#| msgid "Invited Members"
+msgid "Invited \"%(emails)s\"."
+msgstr "Запрошаныя чальцы"
 
 msgid "There was an error when trying to delete the invitation."
 msgstr "Падчас спробы выдаліць гэта запрашэнне здарылася памылка."
@@ -8962,6 +9176,10 @@ msgstr "%(numobjects)d іншых(-я) аб'ектаў(-ы) выдалена(-ы
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "%(verbose_name)s, адпавядаючых гэтаму запыту, не знойдзена"
+
+#, python-format
+msgid "User \"%s\" is a guest user and has no profile."
+msgstr ""
 
 msgid "Your profile was edited successfully."
 msgstr "Ваш профіль паспяхова адрэдагаваны."
@@ -9124,6 +9342,12 @@ msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You 
 msgstr "Мы скасавалі падпіску Вашага адраса электроннай пошты \"%(email)s\" на спіс рассылкі. Вы больш не будзеце атрымліваць ад нас лістоў!"
 
 msgid "A new verification email has been sent."
+msgstr ""
+
+msgid "You are currently logged in. The guest access can only be used if you are not logged in."
+msgstr ""
+
+msgid "We could not sign you in as a guest at this time. Please try again later!"
 msgstr ""
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
@@ -9571,6 +9795,11 @@ msgstr "Створаны карыстальнікам(-цай)"
 
 msgid "There are no etherpads yet"
 msgstr "Нататнікаў Etherpad пакуль няма"
+
+#, fuzzy
+#| msgid "This action is not permitted for this poll at this stage!"
+msgid "Editing is not permitted for guest accounts."
+msgstr "Гэтае дзеянне не дазволена ў гэтым апытанні на дадзеным этапе!"
 
 #, python-format
 msgid "Etherpad \"%(title)s\" was edited successfully."
@@ -14166,6 +14395,33 @@ msgstr "Спіс задач \"%(title)s\" не атрымалася дадаць
 
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Вы не можаце выдаліць гэтую папку, таму что ў Вас няма дазволу выдаляць адзін або некалькі матэрыялаў, якія ў ёй змяшчаюцца!"
+
+#, fuzzy
+#| msgid "Add project"
+msgid "Add object"
+msgstr "Дадаць праект"
+
+#, fuzzy
+msgid "Create container"
+msgstr "Стварыць акаўнт"
+
+msgid "ROOT"
+msgstr ""
+
+#, fuzzy
+#| msgid "Show all"
+msgid "Show"
+msgstr "Паказаць усе"
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete this container and all objects in it?"
+msgstr "Вы сапраўды хочаце выдаліць гэту каманду?"
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete this object?"
+msgstr "Вы сапраўды хочаце выдаліць гэту каманду?"
 
 #, fuzzy
 #~| msgid "Contact"

@@ -9,18 +9,18 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, Set
 from django.urls import reverse, reverse_lazy
 from django.db import transaction
 from django.utils.decorators import method_decorator
-from django.utils.translation import ugettext_lazy as _, get_language
+from django.utils.translation import gettext_lazy as _, get_language
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.http import Http404
 from django.views.generic.edit import FormView
-from cosinnus.core.decorators.views import staff_required, superuser_required,\
-    redirect_to_not_logged_in, redirect_to_403
-from cosinnus.forms.user import UserCreationForm, UserChangeForm,\
+from cosinnus.core.decorators.views import staff_required, superuser_required, \
+    redirect_to_not_logged_in, redirect_to_403, redirect_to_error_page
+from cosinnus.forms.user import UserCreationForm, UserChangeForm, \
     TermsOfServiceFormFields, ValidatedPasswordChangeForm, \
-    UserChangeEmailFormWithPasswordValidation
+    UserChangeEmailFormWithPasswordValidation, UserGroupGuestAccessForm
 from cosinnus.views.mixins.ajax import patch_body_json_data
 from cosinnus.utils.http import JSONResponse
 from django.contrib import messages
@@ -30,9 +30,9 @@ from cosinnus.models.profile import get_user_profile_model,\
     GlobalUserNotificationSetting, PROFILE_SETTING_PASSWORD_NOT_SET,\
     PROFILE_SETTING_LOGIN_TOKEN_SENT
 from cosinnus.models.tagged import BaseTagObject
-from cosinnus.models.group import CosinnusPortal,\
+from cosinnus.models.group import CosinnusPortal, \
     CosinnusUnregisterdUserGroupInvite, CosinnusGroupMembership, \
-    CosinnusGroupInviteToken
+    CosinnusGroupInviteToken, UserGroupGuestAccess
 from cosinnus.models import MEMBERSHIP_INVITED_PENDING, MEMBER_STATUS
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.core.mail import MailThread, get_common_mail_context,\
@@ -49,12 +49,12 @@ from django.template.response import TemplateResponse
 from django.core.paginator import Paginator
 from cosinnus.views.mixins.group import EndlessPaginationMixin,\
     RequireLoggedInMixin
-from cosinnus.utils.user import filter_active_users,\
-    get_newly_registered_user_email, accept_user_tos_for_portal,\
-    get_user_query_filter_for_search_terms, get_user_select2_pills,\
-    get_group_select2_pills, get_user_from_set_password_token
+from cosinnus.utils.user import filter_active_users, \
+    get_newly_registered_user_email, accept_user_tos_for_portal, \
+    get_user_query_filter_for_search_terms, get_user_select2_pills, \
+    get_group_select2_pills, get_user_from_set_password_token, create_guest_user_and_login
 from uuid import uuid1, uuid4
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from cosinnus.core import signals
 from django.dispatch.dispatcher import receiver
 from cosinnus.core.signals import userprofile_created, user_logged_in_first_time
@@ -558,7 +558,7 @@ def apply_group_invite_token_for_user(group_invite_token, user):
                 # else the user is already in the group
             except Exception as e:
                 logger.error('Error when trying to apply a token group invite', 
-                         extra={'exception': force_text(e), 'user': user, 'group': group, 'token': group_invite_token.token})
+                         extra={'exception': force_str(e), 'user': user, 'group': group, 'token': group_invite_token.token})
                 success = False
         
     return success
@@ -583,7 +583,8 @@ def _send_user_welcome_email_if_enabled(user, force=False):
     portal = CosinnusPortal.get_current()
     if not portal.welcome_email_active and not force:
         return
-    text = portal.welcome_email_text.strip() if portal.welcome_email_text else ''
+    # Using __getitem__ as it handles model field translations.
+    text = portal['welcome_email_text'].strip() if portal['welcome_email_text'] else ''
     if not force and (not text or not user): 
         return
     
@@ -794,37 +795,6 @@ class UserUpdateView(UpdateView):
 user_update = UserUpdateView.as_view()
 
 
-@sensitive_post_parameters()
-@csrf_protect
-@never_cache
-def login_api(request, authentication_form=AuthenticationForm):
-    """
-    Logs the user specified by the `authentication_form` in.
-    """
-    if request.method == "POST":
-        request = patch_body_json_data(request)
-
-        # TODO: Django<=1.5: Django 1.6 removed the cookie check in favor of CSRF
-        request.session.set_test_cookie()
-
-        form = authentication_form(request, data=request.POST)
-        if form.is_valid():
-            auth_login(request, form.get_user())
-            return JSONResponse({})
-        else:
-            return JSONResponse(form.errors, status=401)
-    else:
-        return JSONResponse({}, status=405)  # Method not allowed
-
-
-def logout_api(request):
-    """
-    Logs the user out.
-    """
-    auth_logout(request)
-    return JSONResponse({})
-
-
 class CosinnusPasswordChangeView(PasswordChangeView):
     """ Overridden view that sends a password changed signal """
     form_class = ValidatedPasswordChangeForm
@@ -914,7 +884,7 @@ def password_reset_proxy(request, *args, **kwargs):
         if user and not check_user_verified(user) and GlobalBlacklistedEmail.is_email_blacklisted(email):
             return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_reset_blacklisted_page.html')
         # disallow integrated users to reset their password
-        if user and check_user_integrated_portal_member(user):
+        if user and (user.is_guest or check_user_integrated_portal_member(user)):
             return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_reset_page.html')
         # silently disallow imported/created users without a password to reset their password
         # if the user import functionality is enabled, because then imported users are not active
@@ -1225,6 +1195,85 @@ class UserChangeEmailPendingView(RequireLoggedInMixin, TemplateView):
 change_email_pending_view = UserChangeEmailPendingView.as_view()
 
 
+class GuestUserSignupView(FormView):
+    """ Guest access for a given `UserGroupGuestAccess` token. """
+    
+    form_class = UserGroupGuestAccessForm
+    template_name = 'cosinnus/user/guest_user_signup.html'
+    guest_access = None
+    group = None
+    
+    msg_invalid_token = _('Invalid guest token.')
+    msg_already_logged_in = _('You are currently logged in. The guest access can only be used if you are not logged in.')
+    msg_signup_not_possible = _('We could not sign you in as a guest at this time. Please try again later!')
+    
+    def dispatch(self, request, *args, **kwargs):
+        # check if feature is disabled on this portal
+        if not settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLED:
+            raise Http404
+        # check if guest token and its access object and group exists
+        guest_token_str = kwargs.pop('guest_token', '').strip().lower()
+        if guest_token_str:
+            self.guest_access = get_object_or_None(UserGroupGuestAccess, token__iexact=guest_token_str)
+        if self.guest_access:
+            self.group = self.guest_access.group
+        if not self.group or not self.group.is_active:
+            # do not allow to tokens without a group or an inactive group
+            messages.warning(request, self.msg_invalid_token)
+            return redirect_to_error_page(request, view=self)
+        # check if feature is disabled on this portal for this group type
+        if self.group.type not in settings.COSINNUS_USER_GUEST_ACCOUNTS_FOR_GROUP_TYPE:
+            raise Http404
+        return super().dispatch(request, *args, **kwargs)
+    
+    def get(self, request, *args, **kwargs):
+        # show warning for logged in users
+        if request.user.is_authenticated:
+            messages.warning(request, self.msg_already_logged_in)
+        return super().get(request, *args, **kwargs)
+    
+    def post(self, request, *args, **kwargs):
+        # disallow for logged in users
+        if request.user.is_authenticated:
+            messages.warning(request, self.msg_already_logged_in)
+            return redirect_to_error_page(request, view=self)
+        return super().post(request, *args, **kwargs)
+    
+    def form_valid(self, form):
+        username = form.cleaned_data['username']
+        success = create_guest_user_and_login(self.guest_access, username, self.request)
+        # if not successful, render to form and show error
+        if not success:
+            messages.error(self.request, self.msg_signup_not_possible)
+            return self.render_to_response(self.get_context_data(form=form))
+        return redirect('cosinnus:user-dashboard')
+        
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'guest_group': self.group,
+        })
+        # remove form if user is logged in so they only see the error message
+        if self.request.user.is_authenticated and 'form' in context:
+            del context['form']
+        return context
+    
+    
+guest_user_signup_view = GuestUserSignupView.as_view()
+
+
+class GuestUserNotAllowedView(TemplateView):
+    
+    template_name = 'cosinnus/user/guest_user_not_allowed.html'
+    
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated or not request.user.is_guest:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
+
+guest_user_not_allowed_view = GuestUserNotAllowedView.as_view()
+
+
 @receiver(userprofile_created)
 def convert_email_group_invites(sender, profile, **kwargs):
     """ Converts all `CosinnusUnregisterdUserGroupInvite` to `CosinnusGroupMembership` pending invites
@@ -1276,7 +1325,7 @@ def detect_first_user_login(sender, user, request, **kwargs):
     profile = user.cosinnus_profile
     first_login = profile.settings.get(PROFILE_SETTING_FIRST_LOGIN, None)
     if not first_login:
-        profile.settings[PROFILE_SETTING_FIRST_LOGIN] = force_text(user.last_login)
+        profile.settings[PROFILE_SETTING_FIRST_LOGIN] = force_str(user.last_login)
         profile.save(update_fields=['settings'])
         user_logged_in_first_time.send(sender=sender, user=user, request=request)
     

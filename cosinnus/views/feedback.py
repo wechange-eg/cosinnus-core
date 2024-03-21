@@ -8,9 +8,10 @@ from django.views.decorators.csrf import csrf_protect
 from cosinnus.models.feedback import CosinnusReportedObject
 from django.contrib.contenttypes.models import ContentType
 from cosinnus.utils.context_processors import cosinnus as cosinnus_context
+from cosinnus.utils.http import is_ajax
 from cosinnus.core.mail import get_common_mail_context, send_mail_or_fail
 from cosinnus.templatetags.cosinnus_tags import full_name
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from cosinnus.models.tagged import BaseTaggableObjectModel
 from django.template.loader import render_to_string
 from django.contrib.auth import get_user_model
@@ -28,7 +29,7 @@ def _notify_users_for_reported_objects(report_obj, request=None):
         context = {} 
     
     target_obj = report_obj.target_object
-    title = getattr(target_obj, 'title', getattr(target_obj, 'name', force_text(target_obj)))
+    title = getattr(target_obj, 'title', getattr(target_obj, 'name', force_str(target_obj)))
     report_url = reverse('admin:cosinnus_cosinnusreportedobject_change', args=(report_obj.id,))
     
     portal = None   
@@ -59,7 +60,7 @@ def _notify_users_for_reported_objects(report_obj, request=None):
 
 @csrf_protect
 def report_object(request):
-    if not request.is_ajax() or not request.method=='POST':
+    if not is_ajax(request) or not request.method=='POST':
         return HttpResponseNotAllowed(['POST'])
     if not request.user.is_authenticated:
         return HttpResponseForbidden('Not authenticated.')
@@ -81,7 +82,7 @@ def report_object(request):
     content_type = ContentType.objects.get_for_model(model_cls)
     report_obj = CosinnusReportedObject.objects.create(content_type=content_type, object_id=obj_id, text=text, creator=request.user)
     
-    # TODO: notification to portal admins
+    # notification to portal admins
     _notify_users_for_reported_objects(report_obj, request)
     
     """

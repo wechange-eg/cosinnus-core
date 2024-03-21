@@ -8,6 +8,9 @@
 #body-user #header,
 #body-settings #header,
 #body-public #header {
-    background-image:linear-gradient(to right, #34b4b5 0%, #7bd1d2 50%);
+    background-image:linear-gradient(to right, #34b4b5 0%, #7bd1d2 51%);
 }
-
+body {
+    background-color: #34b4b5 !important;
+    background-image:linear-gradient(to right, #34b4b5 0%, #7bd1d2 51%) !important;
+}

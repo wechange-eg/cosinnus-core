@@ -1,0 +1,75 @@
+{% extends "cosinnus_event/base.html" %}
+{% load i18n cosinnus_tags static thumbnail cosinnus_tags %}
+
+{% block html_attributes %}class="mobile-noscroll"{% endblock html_attributes %}
+
+{% block page_title %}{% trans "Guest User Signup" %}: {{ guest_group.name }} {{ block.super }}{% endblock page_title %}
+
+{% block leftnav %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+{% endblock %}
+
+{% block main_page %}
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12"> 
+
+            <div class="row">
+                <div class="col-lg-2 col-md-2">
+                </div>
+                <div class="col-lg-8 col-md-8">
+                    {% include 'cosinnus/messages.html' %}
+
+                    {% if form %}
+                        <form action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" method="post" class="cosinnus-form form-horizontal"  role="form">
+                            {% csrf_token %}
+                            <div class="content-box"> <!-- a box with semi transparent background -->
+                                <h2>
+                                    <p class="navi-explanation">
+                                        {% trans "Guest User Signup" %}
+                                    </p>
+                                </h2>
+                                <div class="textfield transparent">
+                                    <p>
+                                        {{ guest_group.trans.INFO_GUEST_USER_SIGNUP_INTRO }}:
+                                        <a class="transparent" href="{{ guest_group.get_absolute_url }}" target="_blank" >{{ guest_group.name }}</a>
+                                    </p>
+                                </div>
+                                <div class="large-space clearfix">
+                                </div>
+                                <div class="textfield transparent">
+                                    <p>
+                                        {% trans "As a guest, many features on this site are not available to you, such as creating content, uploading files, or sending messages to other users." %}
+                                        {% if SETTINGS.COSINNUS_USER_SIGNUP_ENABLED %}
+                                            {% trans "You may create a full account at any time by logging out of your guest account via the user menu on the top right and signup up." %}
+                                        {% endif %}
+                                    </p>
+                                </div>
+
+                                {% trans "Your name" as your_name_trans %}
+                                {% trans "Please enter your name" as enter_your_name %}
+                                {% include 'cosinnus/fields/default_field.html' with field=form.username label=enter_your_name placeholder=your_name_trans field_value=name_val %}
+
+                                {% include 'cosinnus/registration/extra_signup_fields.html' %}
+                            </div>
+                            <button type="submit" class="btn btn-emphasized btn-autosize">
+                                <ul class="media-list">
+                                    <li class="media">
+                                        <span class="pull-left" href="#" tabindex="-1">
+                                            <i class="fa fa-check"></i>
+                                        </span>
+                                        <div class="media-body">
+                                            {% trans "Join as a Guest" %}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

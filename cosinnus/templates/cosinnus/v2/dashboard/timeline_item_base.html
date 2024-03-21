@@ -162,7 +162,7 @@
 							{% endif %}
 						{% endblock %}
 					</div>
-					{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+					{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS and request.user.is_authenticated and not request.user.is_guest %}
 						<div class="action-buttons">
 							{% block action_buttons %}{% endblock %}
 						</div>

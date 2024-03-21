@@ -138,53 +138,55 @@
 		            {% endif %}
 		            
 		            {% if user.is_authenticated and event.state == 2 %}
-			            <h2>{% trans "When do you have time?" %}</h2>
-			            
-			            <!-- width = n*54-4 -->
-			            <div>
-			                <div></div>
-			                {% for suggestions in suggestions_grouped %}
-			                    <div class="doodle-vote-date" style="min-width: {{suggestions|length|multiply:54|subtract:4}}px;" title="{{ suggestions.0.from_date|date:COSINNUS_DJANGO_DATETIME_FORMAT }}">
-			                        &nbsp;{{ suggestions.0.from_date|date:"D" }}<br/>&nbsp;{{ suggestions.0.from_date|date:COSINNUS_DJANGO_DATE_SHORT_CLEAR_FORMAT }}
-			                    </div>
-			                {% endfor %}
-			            </div>
-			
-			            <div>
-			                <div></div>
-			                {% for suggestions in suggestions_grouped %}
-			                    {% for suggestion in suggestions %} 
-			                        <div class="doodle-vote-time">
-			                            &nbsp;{{ suggestion.from_date|date:COSINNUS_DJANGO_TIME_FORMAT }}
-			                        </div>
-			                    {% endfor %}
-			                {% endfor %}
-			            </div>
-			            
-					    <form id="cosinnus_vote_form" action="" method="post" class="form-horizontal">
-					    {% csrf_token %}
-					    {{ formset.management_form }}
-		            
-				            <div class="doodle-vote-inputarea">
-				                
-				                <div>
-				                    {% include "cosinnus/user/user_avatar_image.html" with user=request.user %}
-				                </div>
-				                {% for forms in formset_forms_grouped %}
-				                    {% for form in forms %}
-				                        {% captureas choice_word %}{% if form.choice.value == 2 %}yes{% elif form.choice.value == 1 %}maybe{% else %}no{% endif %}{% endcaptureas %}
-				                        {{ form.suggestion.as_widget }}
-				                        <div class="doodle-vote-{{choice_word}}">
-							                <a href="#" data-doodle-option="yes">{% if form.choice.value == 2 %}<strong>{% endif %}{% trans "Yes" %}{% if form.choice.value == 2 %}</strong>{% endif %}</a>
-							                <a href="#" data-doodle-option="maybe">{% if form.choice.value == 1 %}<strong>{% endif %}{% trans "Maybe" %}{% if form.choice.value == 1 %}</strong>{% endif %}</a>
-							                <a href="#" data-doodle-option="no">{% if form.choice.value == 0 %}<strong>{% endif %}{% trans "No" %}{% if form.choice.value == 0 %}</strong>{% endif %}</a>
-							                <input type="hidden" id="id_{{ form.choice.html_name }}" name="{{ form.choice.html_name }}" value="{{ form.choice.value }}" />
-							            </div>
-			                            
-				                    {% endfor %}
-				                {% endfor %}
-				            </div>
-		                </form>
+                        {% if not user.is_guest or SETTINGS.COSINNUS_USER_GUEST_ACCOUNTS_ENABLE_SOFT_EDITS %}
+                            <h2>{% trans "When do you have time?" %}</h2>
+
+                            <!-- width = n*54-4 -->
+                            <div>
+                                <div></div>
+                                {% for suggestions in suggestions_grouped %}
+                                    <div class="doodle-vote-date" style="min-width: {{suggestions|length|multiply:54|subtract:4}}px;" title="{{ suggestions.0.from_date|date:COSINNUS_DJANGO_DATETIME_FORMAT }}">
+                                        &nbsp;{{ suggestions.0.from_date|date:"D" }}<br/>&nbsp;{{ suggestions.0.from_date|date:COSINNUS_DJANGO_DATE_SHORT_CLEAR_FORMAT }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <div>
+                                <div></div>
+                                {% for suggestions in suggestions_grouped %}
+                                    {% for suggestion in suggestions %}
+                                        <div class="doodle-vote-time">
+                                            &nbsp;{{ suggestion.from_date|date:COSINNUS_DJANGO_TIME_FORMAT }}
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                            </div>
+
+                            <form id="cosinnus_vote_form" action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" method="post" class="form-horizontal">
+                            {% csrf_token %}
+                            {{ formset.management_form }}
+
+                                <div class="doodle-vote-inputarea">
+
+                                    <div>
+                                        {% include "cosinnus/user/user_avatar_image.html" with user=request.user %}
+                                    </div>
+                                    {% for forms in formset_forms_grouped %}
+                                        {% for form in forms %}
+                                            {% captureas choice_word %}{% if form.choice.value == 2 %}yes{% elif form.choice.value == 1 %}maybe{% else %}no{% endif %}{% endcaptureas %}
+                                            {{ form.suggestion.as_widget }}
+                                            <div class="doodle-vote-{{choice_word}}">
+                                                <a href="#" data-doodle-option="yes">{% if form.choice.value == 2 %}<strong>{% endif %}{% trans "Yes" %}{% if form.choice.value == 2 %}</strong>{% endif %}</a>
+                                                <a href="#" data-doodle-option="maybe">{% if form.choice.value == 1 %}<strong>{% endif %}{% trans "Maybe" %}{% if form.choice.value == 1 %}</strong>{% endif %}</a>
+                                                <a href="#" data-doodle-option="no">{% if form.choice.value == 0 %}<strong>{% endif %}{% trans "No" %}{% if form.choice.value == 0 %}</strong>{% endif %}</a>
+                                                <input type="hidden" id="id_{{ form.choice.html_name }}" name="{{ form.choice.html_name }}" value="{{ form.choice.value }}" />
+                                            </div>
+
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            </form>
+                        {% endif %}
 	                {% endif %}
 		            
 		        </div><!-- table -->
@@ -202,18 +204,20 @@
 	    </div><!-- content-box -->
 	
 	    {% if user.is_authenticated and user|has_read_access:event and suggestions_grouped and event.state == 2 %}
-	      <button type="submit" class="btn btn-emphasized" onclick="$('#cosinnus_vote_form').submit(); return false;">
-	        <ul class="media-list">
-	          <li class="media">
-	            <span class="pull-left">
-	              <i class="fa fa-floppy-o"></i>
-	            </span>
-	            <div class="media-body">
-	              {% trans "Vote" %}
-	            </div>
-	          </li>
-	        </ul>
-	      </button>
+            {% if not user.is_guest or SETTINGS.COSINNUS_USER_GUEST_ACCOUNTS_ENABLE_SOFT_EDITS %}
+              <button type="submit" class="btn btn-emphasized" onclick="$('#cosinnus_vote_form').submit(); return false;">
+                <ul class="media-list">
+                  <li class="media">
+                    <span class="pull-left">
+                      <i class="fa fa-floppy-o"></i>
+                    </span>
+                    <div class="media-body">
+                      {% trans "Vote" %}
+                    </div>
+                  </li>
+                </ul>
+              </button>
+            {% endif %}
 	    {% endif %}
 	    
 			
@@ -257,7 +261,7 @@
 	</div> <!-- buttons and content box -->
 	
 	
-	{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+	{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS and request.user.is_authenticated and not request.user.is_guest %}
 		<div class="white-content">
 			{% trans "You will now receive notifications for comments or when this event poll is changed and whenever somebody casts their vote." as follow_success_message %}
 			{% include 'cosinnus/common/likefollowstar/star_button.html' with object=event %}

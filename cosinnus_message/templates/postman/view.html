@@ -183,7 +183,7 @@
 
 {% with pm_messages.all|first as message %}
 
-	<form action="" method="post">{% csrf_token %}
+	<form action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" method="post">{% csrf_token %}
 		<input type="hidden" {% if pm_messages|length > 1 and message.thread_id %}name="delete_tpk__{{message.thread_id}}" value="true"{% else %}name="delete_pk__{{ message.pk }}" value="true"{% endif %} />
 		
 		<button type="submit"  onclick="this.form.action='{% url 'postman:delete' %}?next={{ next_url|urlencode }}'" class="btn btn-emphasized pull-left">

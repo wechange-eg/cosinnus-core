@@ -1,5 +1,5 @@
 {% load i18n bootstrap3 %}
-<form action="" method="POST" class="form-horizontal" role="form">
+<form action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" method="POST" class="form-horizontal" role="form">
   {% csrf_token %}
   {% bootstrap_form form layout="horizontal" label_class="col-md-3" field_class="col-md-9" %}
   <div class="form-group">

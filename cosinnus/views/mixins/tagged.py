@@ -13,7 +13,7 @@ from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic.list import MultipleObjectMixin
 
 from cosinnus.core.registries import attached_object_registry as aor
@@ -325,7 +325,7 @@ class HierarchyDeleteMixin(object):
         except self.model.DoesNotExist:
             return 1
 
-    def delete(self, request, *args, **kwargs):
+    def form_valid(self, form):
         self.object = self.get_object()
         if self.object.is_container and self.object.path == "/":
             raise PermissionDenied("The root file object cannot be deleted!")
@@ -342,24 +342,24 @@ class HierarchyDeleteMixin(object):
         total_objects = len(del_list)
         deleted_count = 0
         for obj in del_list:
-            deleted_count += self._delete_object(obj, request)
+            deleted_count += self._delete_object(obj, self.request)
 
         if deleted_count > 0:
             if deleted_count > 1 and deleted_count == total_objects:
                 msg = _('%(numobjects)d objects were deleted successfully.') % {
                     'numobjects': deleted_count,
                 }
-                messages.success(request, msg)
+                messages.success(self.request, msg)
             elif deleted_count == 1 and total_objects == 1:
                 msg = _('Object "%(title)s" was deleted successfully.') % {
                     'title': obj.title,
                 }
-                messages.success(request, msg)
+                messages.success(self.request, msg)
             else:
                 msg = _('%(numobjects)d other objects were deleted.') % {
                     'numobjects': deleted_count,
                 }
-                messages.success(request, msg)
+                messages.success(self.request, msg)
 
         return HttpResponseRedirect(self.get_success_url())
 

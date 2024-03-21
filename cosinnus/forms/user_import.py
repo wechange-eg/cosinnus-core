@@ -5,7 +5,7 @@ import csv
 import io
 
 from django import forms
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from cosinnus.models.user_import import CosinnusUserImportProcessor
 from cosinnus.utils.validators import validate_file_infection
 import chardet

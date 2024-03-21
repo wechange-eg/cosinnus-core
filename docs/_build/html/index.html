@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Welcome to Cosinnus’ documentation! &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=524b4683"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Development Setup" href="dev_setup.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="welcome-to-cosinnus-documentation">
+<h1>Welcome to Cosinnus’ documentation!<a class="headerlink" href="#welcome-to-cosinnus-documentation" title="Permalink to this heading">¶</a></h1>
+<p>Cosinnus provides features for an online platform, to empower people, initiatives and organizations to collaborate,
+network and organize effectively without relying on commercial software with questionable data protection.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dev_setup.html">Development Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dev_setup.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev_setup.html#create-postgresql-database">Create PostgreSQL database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev_setup.html#install-python-pip-and-poetry">Install Python, pip and poetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev_setup.html#get-wechange-and-cosinnus-source-code">Get wechange and cosinnus source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev_setup.html#install-all-dependencies">Install all dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev_setup.html#troubleshooting-tips">Troubleshooting Tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev_setup.html#configure-settings">Configure settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev_setup.html#one-time-django-setup">One-time Django setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev_setup.html#first-time-wechange-setup">First-Time wechange Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev_setup.html#check-if-youre-up-and-running">Check if you’re up-and-running</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev_setup.html#optional-build-the-pre-built-staticfile-bundles-js">(optional) Build the pre-built staticfile bundles (JS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev_setup.html#optional-install-elasticsearch">(optional) Install ElasticSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev_setup.html#optional-install-memcached">(optional) Install Memcached</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Key Components</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="components.html#portal">Portal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#groups">Groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#membership">Membership</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#user-profile-and-dynamic-fields">User Profile and Dynamic Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#basetaggableobject">BaseTaggableObject</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#cosinnus-apps">Cosinnus Apps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">Services Integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="services.html#nextcloud">NextCloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services.html#rocketchat">RocketChat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services.html#bigbluebutton">BigBlueButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services.html#fairmeeting">Fairmeeting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services.html#etherpad-ethercalc">Etherpad / Ethercalc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services.html#inter-portal-exchange">Inter-Portal-Exchange</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Configuration Settings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#settings-files">Settings Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#available-settings">Available Settings</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">Services Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Configuration Settings</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="dev_setup.html" title="next chapter">Development Setup</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

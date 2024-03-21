@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-17 14:29+0100\n"
+"POT-Creation-Date: 2024-03-14 12:40+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -127,6 +127,12 @@ msgstr ""
 msgid "Email not verified"
 msgstr "nespecifikováno"
 
+msgid "Is Guest"
+msgstr ""
+
+msgid "Is not a Guest"
+msgstr ""
+
 msgid "User Logged In"
 msgstr ""
 "Uživatel přihlášen\n"
@@ -220,6 +226,11 @@ msgid "Recipients Send Count"
 msgstr "Příjemci"
 
 #, fuzzy
+#| msgid "Last accessed"
+msgid "Guest access URL"
+msgstr "Naposledy navštívené"
+
+#, fuzzy
 #| msgid "Comment"
 msgid "Community"
 msgstr "Komentář"
@@ -268,6 +279,11 @@ msgid "My Profile"
 msgstr "Můj profil"
 
 #, fuzzy
+#| msgid "Delete Account"
+msgid "My Guest Account"
+msgstr "Smazat účet"
+
+#, fuzzy
 #| msgid "Edit Your Profile"
 msgid "Set up my Profile"
 msgstr "Upravit váš profil"
@@ -288,6 +304,11 @@ msgstr "Správa"
 
 msgid "Logout"
 msgstr "Odhlásit se"
+
+#, fuzzy
+#| msgid "Last accessed"
+msgid "Leave guest access"
+msgstr "Naposledy navštívené"
 
 msgid "Home"
 msgstr "Domů"
@@ -478,6 +499,11 @@ msgstr "Tento tým již nemá zadanou URL adresu. Byli jste automaticky přesmě
 msgid "This account is no longer active. You have been logged out."
 msgstr "Tento účet již není aktivní. Byli jste odhlášeni."
 
+#, fuzzy
+#| msgid "This account is no longer active. You have been logged out."
+msgid "Your guest access has expired. You have been logged out."
+msgstr "Tento účet již není aktivní. Byli jste odhlášeni."
+
 msgid "You have been redirected here because you clicked a link in one of our mails. We do not link directly to external websites from our mails as a safety precaution. Please find the link below if you wish to visit it."
 msgstr ""
 
@@ -486,6 +512,14 @@ msgstr ""
 
 msgid "You cannot access the admin area because you are missing the \"Staff\" permission even though you are a superuser. Please ask another admin to grant it to you."
 msgstr ""
+
+msgid "The action you tried to perform is not allowed for guest accounts."
+msgstr ""
+
+#, fuzzy
+#| msgid "The page you requested is not available for this event at this time."
+msgid "The page you tried to visit is not available for guest accounts."
+msgstr "Požadovaná stránka není pro tuto událost v tuto chvíli k dispozici."
 
 msgid "You have been automatically logged out after being inactive for some time."
 msgstr "Byli jste automaticky odhlášeni poté, co jste nějaký čas nebyli aktivní."
@@ -1617,6 +1651,15 @@ msgstr "Účastnit se může kdokoliv"
 msgid "Project Type"
 msgstr "Typ projektu"
 
+#, fuzzy
+#| msgid "Untitled"
+msgid "Subtitle"
+msgstr "Nepojmenované"
+
+#, fuzzy
+msgid "Subtitle used for conferences."
+msgstr "HD prostor využívaný projekty"
+
 msgid "Short Description. Internal, will not be shown publicly."
 msgstr "Krátký popis. Interní, nebude veřejně zobrazeno."
 
@@ -1953,6 +1996,12 @@ msgstr ""
 
 msgid "Deletion triggered by self"
 msgstr ""
+
+msgid "Is guest user"
+msgstr ""
+
+msgid "(Deleted User)"
+msgstr "(Vymazaný uživatel)"
 
 msgid "Terms of Service"
 msgstr "Podmínky služby"
@@ -4253,6 +4302,11 @@ msgstr "Zavřít"
 msgid "Report offensive content"
 msgstr "Nahlásit nevhodný obsah"
 
+#, fuzzy
+#| msgid "Your phone number is only visible for registered users"
+msgid "Sorry, this feature is only available for registered members."
+msgstr "Vaše telefonní číslo je viditelné pouze pro registrované uživatele"
+
 msgid "Please enter a description of why you are reporting this content!"
 msgstr "Zadejte prosím popis, proč hlásíte tento obsah!"
 
@@ -4283,6 +4337,12 @@ msgid "The content of the field above will be searchable in the plattform-wide s
 msgstr ""
 
 msgid "If present, the translations below will be shown according to the users' local language settings. They are not searchable."
+msgstr ""
+
+msgid "The content of the field above will will be shown, unless overriden by a specific translation (below)."
+msgstr ""
+
+msgid "If present, the translations below will be shown according to the users' local language settings."
 msgstr ""
 
 #, fuzzy
@@ -4552,6 +4612,11 @@ msgstr "Odmítnout člena"
 msgid "There are no new membership requests."
 msgstr "Žádné nové žádosti o členství."
 
+#, fuzzy
+#| msgid "Delete user account"
+msgid "Guest user access"
+msgstr "Smazat uživatelský účet"
+
 msgid "Current Members"
 msgstr "Stávající členové"
 
@@ -4676,6 +4741,21 @@ msgstr "Ve kterých kalendářích projektu nebo skupin by měla být konference
 msgid "Select Projects/Groups"
 msgstr "Vybrat projekty/skupiny"
 
+#, fuzzy
+#| msgid "Conferences"
+msgid "Conference subtitle"
+msgstr "Konference"
+
+#, fuzzy
+#| msgid "Will be shown as a header in the conference lobby and on the conference microsite."
+msgid "The subtitle is shown in the conference and on the conference micro site."
+msgstr "Zobrazí se jako záhlaví v lobby konference a na microsite konference."
+
+#, fuzzy
+#| msgid "Enter a title for the conference event."
+msgid "Add a subtitle for the conference."
+msgstr "Zadejte název konferenční události."
+
 msgid "Description and Infos"
 msgstr "Popis a informace"
 
@@ -4796,13 +4876,13 @@ msgstr ""
 msgid "Create invite token"
 msgstr "Smazat pozvánku"
 
-msgid "Check this to generate an invite token which allows a user to join the group directly."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the group directly."
 msgstr ""
 
-msgid "Check this to generate an invite token which allows a user to join the project directly."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the project directly."
 msgstr ""
 
-msgid "Check this to generate an invite token which allows a user to join the conference directly."
+msgid "Check this to generate an invite token which allows a registered user to become a member of the conference directly."
 msgstr ""
 
 msgid "The current token is: "
@@ -6095,6 +6175,11 @@ msgstr "Odhlášeno"
 msgid "You have been logged out. See you again soon!"
 msgstr ""
 
+#, fuzzy
+#| msgid "Redirect Logged in Users"
+msgid "Redirecting you in 3 seconds..."
+msgstr "Přesměrovat přihlášené uživatele"
+
 msgid "Error while logging out"
 msgstr ""
 
@@ -7001,6 +7086,49 @@ msgstr "Zadejte token:"
 
 msgid "For example"
 msgstr "Například"
+
+#, fuzzy
+#| msgid "Restricted"
+msgid "Restricted Guest Access"
+msgstr "S omezením"
+
+#, fuzzy
+#| msgid "Successfully deactivated user account"
+msgid "Access restricted for guest accounts"
+msgstr "Uživatelský účet byl úspěšně deaktivován"
+
+msgid "You are currently using the platform with a guest account provided to you by a link."
+msgstr ""
+
+msgid "As a guest, many features on this site are not available to you, such as creating content, uploading files, or sending messages to other users."
+msgstr ""
+
+#, fuzzy
+#| msgid "Do you really want to perform the import of the shown data?"
+msgid "You cannot customize your user profile either."
+msgstr "Opravdu chcete provést import zobrazených dat?"
+
+msgid "Sign up now to create a fully featured account!"
+msgstr ""
+
+msgid "If you sign up as a platform member, you can collaborate with others, customize your profile and use all of the site's features."
+msgstr ""
+
+msgid "Note: After signup you will have to apply or be invited to become a full member of any projects, groups or conferences again. Your guest account's memberships can't be transferred to the new account."
+msgstr ""
+
+#, fuzzy
+msgid "Leave guest access and create an account"
+msgstr "vytvořil/a událost"
+
+msgid "Guest User Signup"
+msgstr ""
+
+msgid "You may create a full account at any time by logging out of your guest account via the user menu on the top right and signup up."
+msgstr ""
+
+msgid "Join as a Guest"
+msgstr ""
 
 msgid "Edit Profile"
 msgstr "Upravit profil"
@@ -8047,9 +8175,6 @@ msgstr ""
 msgid "Nutzungsbedingungen"
 msgstr "Podmínky použití"
 
-msgid "(Deleted User)"
-msgstr "(Vymazaný uživatel)"
-
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>Prohlížeč pro %(model_name)s nebyl nalezen!</i>"
@@ -8133,6 +8258,23 @@ msgstr "Připojte se teď a spolupracujte!"
 msgid "You have been invited to collaborate!"
 msgstr "Byli jste pozváni ke spolupráci!"
 
+msgid "You can access and browse the project that invited you"
+msgstr ""
+
+#, fuzzy
+#| msgid "There is no description for this project yet."
+msgid "This is only visible to admins of this project."
+msgstr "Tento projekt zatím nemá žádný popis."
+
+msgid "Guest user access has been enabled for this project. The project admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this when sharing sensitive information within this project."
+msgstr ""
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this project"
+msgstr ""
+
+msgid "You are joining as a guest and will get read-only access to the project"
+msgstr ""
+
 msgid "Sorry, only portal administrators can create Projects! You can write a message to one of the administrators to create a Project for you. Below you can find a listing of all administrators."
 msgstr "Litujeme, pouze administrátoři portálu mohou vytvořit projekty! Můžete napsat zprávu jednomu z nich, aby pro vás projekt vytvořil. Níže naleznete seznam všech administrátorů."
 
@@ -8214,6 +8356,23 @@ msgid "Users may join by submitting a membership request that can be accepted or
 msgstr "Uživatelé se mohou přidat podáním žádosti o členství, kterou některý ze správců projektu přijme, nebo odmítne."
 
 msgid "Type the names of files, events or pads from this group to attach..."
+msgstr ""
+
+msgid "You can access and browse the group that invited you"
+msgstr ""
+
+#, fuzzy
+#| msgid "There is no description for this group yet."
+msgid "This is only visible to admins of this group."
+msgstr "Tato skupina zatím nemá žádný popis."
+
+msgid "Guest user access has been enabled for this group. The group admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this project. Be aware of this when sharing sensitive information within this group."
+msgstr ""
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this group"
+msgstr ""
+
+msgid "You are joining as a guest and will get read-only access to the group"
 msgstr ""
 
 msgid "Sorry, only portal administrators can create Groups! You can write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
@@ -8315,6 +8474,23 @@ msgstr "Připojte se teď a spolupracujte!"
 
 msgid "You have been invited to participate!"
 msgstr "Byli jste pozváni ke spolupráci!"
+
+msgid "You can access and participate in the conference that invited you"
+msgstr ""
+
+#, fuzzy
+#| msgid "This function is not enabled for this conference."
+msgid "This is only visible to admins of this conference."
+msgstr "Tato funkce není pro tuto konferenci povolena."
+
+msgid "Guest user access has been enabled for this conference. The group admins can share a special link which allows unregistered users to instantly join the platform and gain read-only access to this conference. Be aware of this when sharing sensitive information within this conference."
+msgstr ""
+
+msgid "You can invite an unregistered user to instantly join the platform by sharing the following link. They will join as a guest and do not need to register an account. All they need to do is to enter their name and they will gain read-only access to this conference"
+msgstr ""
+
+msgid "You are joining as a guest and will get read-only access to the conference"
+msgstr ""
 
 msgid "Sorry, only portal administrators can create Conferences! You can write a message to one of the administrators to create a Conference for you. Below you can find a listing of all administrators."
 msgstr "Litujeme, pouze administrátoři portálu mohou vytvořit konference! Můžete napsat zprávu jednomu z administrátorů, aby ji pro vás vytvořil. Níže naleznete seznam všech administrátorů."
@@ -8598,6 +8774,11 @@ msgstr ""
 msgid "The %(team_type)s was changed successfully."
 msgstr "%(team_type)s byl úspěšně změněn."
 
+#, fuzzy
+#| msgid "Edit"
+msgid "Edited."
+msgstr "Upravit"
+
 msgid "This action is not available directly!"
 msgstr "Tato akce není k dispozici přímo!"
 
@@ -8648,9 +8829,31 @@ msgstr "Následující uživatelé byli pozváni, aby si podali žádost o úča
 msgid "All members of groups/projects you selected had already been invited or have already applied. No new invitations have been sent."
 msgstr "Všichni členové skupin/projektů, které jste vybrali, už byli pozváni nebo si už podali žádost. Nebyly poslány žádné nové pozvánky."
 
+#, fuzzy, python-format
+#| msgid "Invite unregistered users..."
+msgid "Invited user \"%(user)s\"."
+msgstr "Pozvat neregistrované uživatele..."
+
+msgid "You cannot promote a guest user account!"
+msgstr ""
+
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
 msgstr "Z tohoto týmu nemůžete odstranit uživatele “%(username)s”. Zbývá pouze jeden správce."
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Accepted user \"%(user)s\" as  member."
+msgstr "Uživatel \"%(username)s\" již není členem."
+
+#, python-format
+msgid "Made user \"%(user)s\" admin."
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "User \"%(username)s\" is no longer a member."
+msgid "Made user \"%(user)s\" member."
+msgstr "Uživatel \"%(username)s\" již není členem."
 
 #, python-format
 msgid "You cannot remove yourself from a %(team_type)s."
@@ -8673,6 +8876,10 @@ msgid "User \"%(username)s\" is no longer a member."
 msgstr "Uživatel \"%(username)s\" již není členem."
 
 #, python-format
+msgid "Removed membership of user \"%(user)s\"."
+msgstr ""
+
+#, python-format
 msgid "%(team_name)s was re-activated successfully!"
 msgstr "%(team_name)s byl úspěšně znovu aktivován!"
 
@@ -8688,6 +8895,16 @@ msgstr "Tento projekt/skupina je již aktivní!"
 
 msgid "This project/group is already inactive!"
 msgstr "Tento projekt/skupina je již neaktivní!"
+
+#, fuzzy
+#| msgid "Activate"
+msgid "Activated."
+msgstr "Aktivovat"
+
+#, fuzzy
+#| msgid "Deactivate"
+msgid "Deactivated."
+msgstr "Deaktivovat"
 
 msgid "You are not a member, but have access because you are an Administrator."
 msgstr "Nejste člen, máte ale přístup, protože jste administrátor."
@@ -8722,6 +8939,11 @@ msgstr "Lidé s těmito adresami již mají zaregistrovaný uživatelský účet
 #, python-format
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr "Úspěch! Nyní rozesíláme pozvánky na tyto e-mailové adresy: %s"
+
+#, fuzzy, python-format
+#| msgid "Invited Members"
+msgid "Invited \"%(emails)s\"."
+msgstr "Pozvaní členové"
 
 msgid "There was an error when trying to delete the invitation."
 msgstr "Při pokusu o odstranění pozvánky došlo k chybě."
@@ -8801,6 +9023,10 @@ msgstr "%(numobjects)d dalších objektů bylo úspěšně smazáno."
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Nebyly nalezeny žádné %(verbose_name)s odpovídající dotazu"
+
+#, python-format
+msgid "User \"%s\" is a guest user and has no profile."
+msgstr ""
 
 msgid "Your profile was edited successfully."
 msgstr "Váš profil byl úspěšně upraven."
@@ -8963,6 +9189,12 @@ msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You 
 msgstr "Z vašeho e-mailového seznamu jsme odhlásili váš e-mail \"%(email)s\". Už od nás nebudete dostávat žádné e-maily!"
 
 msgid "A new verification email has been sent."
+msgstr ""
+
+msgid "You are currently logged in. The guest access can only be used if you are not logged in."
+msgstr ""
+
+msgid "We could not sign you in as a guest at this time. Please try again later!"
 msgstr ""
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
@@ -9377,6 +9609,11 @@ msgstr "vytvořil/a Pad"
 
 msgid "There are no etherpads yet"
 msgstr "Zatím neexistují žádné etherpady"
+
+#, fuzzy
+#| msgid "This action is not permitted for this poll at this stage!"
+msgid "Editing is not permitted for guest accounts."
+msgstr "V této fázi není tato akce pro toto hlasování povolena!"
 
 #, python-format
 msgid "Etherpad \"%(title)s\" was edited successfully."
@@ -13906,6 +14143,34 @@ msgstr "Seznam úkolů \"%(title)s\" nelze přidat."
 msgid "You cannot delete this folder because you do not have permission to delete one or more items it contains!"
 msgstr "Tuto složku nemůžete smazat, protože nemáte oprávnění smazat jednu nebo více položek, které obsahuje!"
 
+#, fuzzy
+#| msgid "Add project"
+msgid "Add object"
+msgstr "Přidat projekt"
+
+#, fuzzy
+#| msgid "Create content"
+msgid "Create container"
+msgstr "Vytvořit obsah"
+
+msgid "ROOT"
+msgstr ""
+
+#, fuzzy
+#| msgid "Show all"
+msgid "Show"
+msgstr "Zobrazit vše"
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete this container and all objects in it?"
+msgstr "Opravdu chcete tento tým smazat?"
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete this object?"
+msgstr "Opravdu chcete tento tým smazat?"
+
 #~ msgid "Pre-filled content for the information field"
 #~ msgstr "Předvyplněný obsah pro informační pole"
 
@@ -14086,9 +14351,6 @@ msgstr "Tuto složku nemůžete smazat, protože nemáte oprávnění smazat jed
 
 #~ msgid "Premium"
 #~ msgstr "Premium"
-
-#~ msgid "Restricted"
-#~ msgstr "S omezením"
 
 #~ msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
 #~ msgstr "%(sender_name)s právě vytvořil/a projekt/skupinu \"%(team_name)s\" na %(portal_name)s!"

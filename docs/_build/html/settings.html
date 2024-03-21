@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Configuration Settings &#8212; Cosinnus 1.20.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=524b4683"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Services Integration" href="services.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="configuration-settings">
+<h1>Configuration Settings<a class="headerlink" href="#configuration-settings" title="Permalink to this heading">¶</a></h1>
+<p>To adjust a portal configuration Cosinnus provides a wide range of settings.</p>
+<section id="settings-files">
+<h2>Settings Files<a class="headerlink" href="#settings-files" title="Permalink to this heading">¶</a></h2>
+<p>The default Django settings for a Cosinnus portal are defined in <cite>cosinnus.default_settings.py</cite>. Cosinnus own settings
+are defined in <cite>cosinnus.conf.py</cite>. These settings can be adjusted in the portal settings via the <cite>config.settings</cite>
+files. Finally each profile reads its <cite>.env</cite> file, which mostly contains sensible settings such as keys and passwords.</p>
+<p>These settings implement a hierarchy. E.g. dev settings for a portal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">.</span><span class="n">env</span> <span class="n">file</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="n">config</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">py</span> <span class="o">--&gt;</span> <span class="n">config</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">py</span> <span class="o">--&gt;</span> <span class="n">cosinnus</span><span class="o">.</span><span class="n">default_settings</span><span class="o">.</span><span class="n">py</span> <span class="p">(</span><span class="ow">in</span> <span class="n">cosinnus</span><span class="o">-</span><span class="n">core</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="available-settings">
+<h2>Available Settings<a class="headerlink" href="#available-settings" title="Permalink to this heading">¶</a></h2>
+<p>This is a alphabetical list of the portal settings with the default value and description:</p>
+<section id="cosinnus-attachable-objects">
+<h3>COSINNUS_ATTACHABLE_OBJECTS<a class="headerlink" href="#cosinnus-attachable-objects" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>A mapping of <code class="docutils literal notranslate"><span class="pre">{'app1.Model1':</span> <span class="pre">['app2.Model2',</span> <span class="pre">'app3.Model3']}</span></code> that : defines the tells, that given an instance of <code class="docutils literal notranslate"><span class="pre">app1.Model1</span></code>, objects : of type <code class="docutils literal notranslate"><span class="pre">app2.Model2</span></code> or <code class="docutils literal notranslate"><span class="pre">app3.Model3</span></code> can be attached.</p>
+</section>
+<section id="cosinnus-attachable-objects-suggest-aliases">
+<h3>COSINNUS_ATTACHABLE_OBJECTS_SUGGEST_ALIASES<a class="headerlink" href="#cosinnus-attachable-objects-suggest-aliases" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>Configures by which search terms each Attachable Model can be match-restricted in the select 2 box Each term will act as an additional restriction on search objects. Subterms of these terms will be matched! Note: this should be configured for all of the ~TARGET~ objects from COSINNUS_ATTACHABLE_OBJECTS</p>
+</section>
+<section id="cosinnus-reflectable-objects">
+<h3>COSINNUS_REFLECTABLE_OBJECTS<a class="headerlink" href="#cosinnus-reflectable-objects" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>list of BaseTaggableObjectModels that can be reflected from groups into projects</p>
+</section>
+<section id="cosinnus-base-page-title-trans">
+<h3>COSINNUS_BASE_PAGE_TITLE_TRANS<a class="headerlink" href="#cosinnus-base-page-title-trans" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘Cosinnus’</em></p>
+<p>The default title for all pages unless the title block is overwritten. This is translated through a {% trans %} tag.</p>
+</section>
+<section id="cosinnus-apps-menu-order">
+<h3>COSINNUS_APPS_MENU_ORDER<a class="headerlink" href="#cosinnus-apps-menu-order" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>the order the apps will be displayed in the cosinnus_menu tag appsmenu.html</p>
+</section>
+<section id="cosinnus-auto-accept-membership-group-slugs">
+<h3>COSINNUS_AUTO_ACCEPT_MEMBERSHIP_GROUP_SLUGS<a class="headerlink" href="#cosinnus-auto-accept-membership-group-slugs" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[]</em></p>
+<p>a list of groups slugs for a portal, that do not require the group admins to accept join requests, instead the user will become a member immediately upon requesting membership</p>
+</section>
+<section id="cosinnus-admin-2-factor-auth-enabled">
+<h3>COSINNUS_ADMIN_2_FACTOR_AUTH_ENABLED<a class="headerlink" href="#cosinnus-admin-2-factor-auth-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>if True, the entire /admin/ area is protected by 2-factor-authentication and no user that hasn’t got a device set up can gain access. Set up at least one device at &lt;host&gt;/admin/otp_totp/totpdevice/ before activating this setting!</p>
+</section>
+<section id="cosinnus-admin-2-factor-auth-include-administration-area">
+<h3>COSINNUS_ADMIN_2_FACTOR_AUTH_INCLUDE_ADMINISTRATION_AREA<a class="headerlink" href="#cosinnus-admin-2-factor-auth-include-administration-area" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>if True while <cite>ADMIN_2_FACTOR_AUTH_ENABLED</cite> is enabled, the 2fa-check will extend to the /administration/ area, which it doesn’t usually</p>
+</section>
+<section id="cosinnus-admin-2-factor-auth-strict-mode">
+<h3>COSINNUS_ADMIN_2_FACTOR_AUTH_STRICT_MODE<a class="headerlink" href="#cosinnus-admin-2-factor-auth-strict-mode" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if True while <cite>ADMIN_2_FACTOR_AUTH_ENABLED</cite> is enabled, will force 2-factor-authentication for superusers and portal on the ENTIRE site, and not only on the /admin/ backend</p>
+</section>
+<section id="cosinnus-user-2-factor-auth-enabled">
+<h3>COSINNUS_USER_2_FACTOR_AUTH_ENABLED<a class="headerlink" href="#cosinnus-user-2-factor-auth-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>if True, users may activate the 2-factor-authentication for their user profiles within the portal</p>
+</section>
+<section id="cosinnus-cleverreach-auto-signup-enabled">
+<h3>COSINNUS_CLEVERREACH_AUTO_SIGNUP_ENABLED<a class="headerlink" href="#cosinnus-cleverreach-auto-signup-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>enable this to sign up new members to a cleverreach newsletter group</p>
+</section>
+<section id="cosinnus-cleverreach-group-ids">
+<h3>COSINNUS_CLEVERREACH_GROUP_IDS<a class="headerlink" href="#cosinnus-cleverreach-group-ids" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>{}</em></p>
+<p>dict of language –&gt; int group-id of the cleverreach groups to sign up</p>
+</section>
+<section id="cosinnus-cleverreach-form-ids">
+<h3>COSINNUS_CLEVERREACH_FORM_IDS<a class="headerlink" href="#cosinnus-cleverreach-form-ids" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>{}</em></p>
+<p>dict of int group-id –&gt; int formid of the cleverreach groups to sign up if you add this for each group-id in <cite>CLEVERREACH_GROUP_IDS</cite>, users will be subscribed to the group via the form, instead of directly (allows double-opt in confirmation etc)</p>
+</section>
+<section id="cosinnus-cleverreach-access-token">
+<h3>COSINNUS_CLEVERREACH_ACCESS_TOKEN<a class="headerlink" href="#cosinnus-cleverreach-access-token" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>access token, as given after a login to /v2/login.json</p>
+</section>
+<section id="cosinnus-cleverreach-base-url">
+<h3>COSINNUS_CLEVERREACH_BASE_URL<a class="headerlink" href="#cosinnus-cleverreach-base-url" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘https://rest.cleverreach.com/v2’</em></p>
+<p>cleverreach API endpoint base URL (no trailing slash)</p>
+</section>
+<section id="cosinnus-csv-import-default-encoding">
+<h3>COSINNUS_CSV_IMPORT_DEFAULT_ENCODING<a class="headerlink" href="#cosinnus-csv-import-default-encoding" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘utf-8’</em></p>
+<p>CSV Import settings</p>
+</section>
+<section id="cosinnus-csv-import-default-delimiter">
+<h3>COSINNUS_CSV_IMPORT_DEFAULT_DELIMITER<a class="headerlink" href="#cosinnus-csv-import-default-delimiter" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘,’</em></p>
+</section>
+<section id="cosinnus-csv-import-default-expected-columns">
+<h3>COSINNUS_CSV_IMPORT_DEFAULT_EXPECTED_COLUMNS<a class="headerlink" href="#cosinnus-csv-import-default-expected-columns" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+</section>
+<section id="cosinnus-csv-import-group-importer">
+<h3>COSINNUS_CSV_IMPORT_GROUP_IMPORTER<a class="headerlink" href="#cosinnus-csv-import-group-importer" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘cosinnus.utils.import_utils.GroupCSVImporter’</em></p>
+<p>the class with the implementation for importing CosinnusGroups used for the CSV import</p>
+</section>
+<section id="cosinnus-temp-user-email-domain">
+<h3>COSINNUS_TEMP_USER_EMAIL_DOMAIN<a class="headerlink" href="#cosinnus-temp-user-email-domain" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>the email domain for “fake” addresses for temporary CSV users for conferences</p>
+</section>
+<section id="cosinnus-custom-premium-page-enabled">
+<h3>COSINNUS_CUSTOM_PREMIUM_PAGE_ENABLED<a class="headerlink" href="#cosinnus-custom-premium-page-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>should a custom premoum page be shown for actions that require a paid subscription, like creating groups. template for this is <cite>premium_info_page.html</cite></p>
+</section>
+<section id="cosinnus-datetimepicker-date-format">
+<h3>COSINNUS_DATETIMEPICKER_DATE_FORMAT<a class="headerlink" href="#cosinnus-datetimepicker-date-format" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘YYYY-MM-DD’</em></p>
+<p>These are the default values for the bootstrap3-datetime-picker and are translated in <cite>cosinnus/formats/LOCALE/formats.py</cite> : Default date format used by e.g. the “bootstrap3-datetime-picker”</p>
+</section>
+<section id="cosinnus-datetimepicker-datetime-format">
+<h3>COSINNUS_DATETIMEPICKER_DATETIME_FORMAT<a class="headerlink" href="#cosinnus-datetimepicker-datetime-format" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘YYYY-MM-DD HH:mm’</em></p>
+<p>: Default datetime format used by e.g. the “bootstrap3-datetime-picker”</p>
+</section>
+<section id="cosinnus-datetimepicker-time-format">
+<h3>COSINNUS_DATETIMEPICKER_TIME_FORMAT<a class="headerlink" href="#cosinnus-datetimepicker-time-format" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘HH:mm’</em></p>
+<p>: Default time format used by e.g. the “bootstrap3-datetime-picker”</p>
+</section>
+<section id="cosinnus-default-from-email">
+<h3>COSINNUS_DEFAULT_FROM_EMAIL<a class="headerlink" href="#cosinnus-default-from-email" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘noreply&#64;example.com’</em></p>
+<p>the default send_mail sender email</p>
+</section>
+<section id="cosinnus-default-group-notification-setting">
+<h3>COSINNUS_DEFAULT_GROUP_NOTIFICATION_SETTING<a class="headerlink" href="#cosinnus-default-group-notification-setting" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>3</em></p>
+<p>the notification setting for groups when user newly join them (3: weekly)</p>
+</section>
+<section id="cosinnus-default-global-notification-setting">
+<h3>COSINNUS_DEFAULT_GLOBAL_NOTIFICATION_SETTING<a class="headerlink" href="#cosinnus-default-global-notification-setting" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>3</em></p>
+<p>the global notification setting for users on the plattform (3: weekly)</p>
+</section>
+<section id="cosinnus-default-rocketchat-notification-setting">
+<h3>COSINNUS_DEFAULT_ROCKETCHAT_NOTIFICATION_SETTING<a class="headerlink" href="#cosinnus-default-rocketchat-notification-setting" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>0</em></p>
+<p>default rocketchat notification mails are on (see <cite>GlobalUserNotificationSetting.ROCKETCHAT_SETTING_CHOICES</cite>)</p>
+</section>
+<section id="cosinnus-default-followed-object-notification-setting">
+<h3>COSINNUS_DEFAULT_FOLLOWED_OBJECT_NOTIFICATION_SETTING<a class="headerlink" href="#cosinnus-default-followed-object-notification-setting" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>2 # SETTING_DAILY = 2</em></p>
+<p>default setting for notifications for followed objects</p>
+</section>
+<section id="cosinnus-delete-etherpads-on-server-on-delete">
+<h3>COSINNUS_DELETE_ETHERPADS_ON_SERVER_ON_DELETE<a class="headerlink" href="#cosinnus-delete-etherpads-on-server-on-delete" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>when etherpad objects are deleted, should the etherpads on the server be deleted as well?</p>
+</section>
+<section id="cosinnus-lock-etherpad-write-mode-on-creator-delete">
+<h3>COSINNUS_LOCK_ETHERPAD_WRITE_MODE_ON_CREATOR_DELETE<a class="headerlink" href="#cosinnus-lock-etherpad-write-mode-on-creator-delete" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if True, will forbid anyone to edit an etherpad created by a user whose account is inactive or deleted. view-only is still possible.</p>
+</section>
+<section id="cosinnus-disabled-cosinnus-apps">
+<h3>COSINNUS_DISABLED_COSINNUS_APPS<a class="headerlink" href="#cosinnus-disabled-cosinnus-apps" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[]</em></p>
+<p>a list of cosinnus apps that are installed but are disabled for the users, e.g. [‘cosinnus_marketplace’, ] (they are still admin accessible)</p>
+</section>
+<section id="cosinnus-default-active-group-apps">
+<h3>COSINNUS_DEFAULT_ACTIVE_GROUP_APPS<a class="headerlink" href="#cosinnus-default-active-group-apps" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>a list of which app checkboxes should be default-active on the create group form Deactivating several group apps by default</p>
+</section>
+<section id="cosinnus-empty-file-download-name">
+<h3>COSINNUS_EMPTY_FILE_DOWNLOAD_NAME<a class="headerlink" href="#cosinnus-empty-file-download-name" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>If set, will enable a download under / of an empty text file with the given name. Can be used to quickly make a file available for a DNS server check, e.g. for Mailjet.</p>
+</section>
+<section id="cosinnus-facebook-integration-enabled">
+<h3>COSINNUS_FACEBOOK_INTEGRATION_ENABLED<a class="headerlink" href="#cosinnus-facebook-integration-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>should the facebook integration scripts and templates be loaded?</p>
+</section>
+<section id="cosinnus-facebook-integration-app-id">
+<h3>COSINNUS_FACEBOOK_INTEGRATION_APP_ID<a class="headerlink" href="#cosinnus-facebook-integration-app-id" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>Facebook app id to use</p>
+</section>
+<section id="cosinnus-facebook-integration-app-secret">
+<h3>COSINNUS_FACEBOOK_INTEGRATION_APP_SECRET<a class="headerlink" href="#cosinnus-facebook-integration-app-secret" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>facebook app secret</p>
+</section>
+<section id="cosinnus-file-non-download-mimetypes">
+<h3>COSINNUS_FILE_NON_DOWNLOAD_MIMETYPES<a class="headerlink" href="#cosinnus-file-non-download-mimetypes" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[‘application/pdf’,]</em></p>
+<p>files of these mime types will always open within the browser when download is clicked</p>
+</section>
+<section id="cosinnus-default-object-cache-timeout">
+<h3>COSINNUS_DEFAULT_OBJECT_CACHE_TIMEOUT<a class="headerlink" href="#cosinnus-default-object-cache-timeout" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>60 * 30 # 30 minutes</em></p>
+<p>Default timeout for objects. We keep this relatively low, because otherwise inter-portal contents can become stale</p>
+</section>
+<section id="cosinnus-idea-cache-timeout">
+<h3>COSINNUS_IDEA_CACHE_TIMEOUT<a class="headerlink" href="#cosinnus-idea-cache-timeout" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>DEFAULT_OBJECT_CACHE_TIMEOUT</em></p>
+<p>: How long an idea should at most stay in cache until it will be removed</p>
+</section>
+<section id="cosinnus-managed-tag-cache-timeout">
+<h3>COSINNUS_MANAGED_TAG_CACHE_TIMEOUT<a class="headerlink" href="#cosinnus-managed-tag-cache-timeout" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>DEFAULT_OBJECT_CACHE_TIMEOUT</em></p>
+<p>how long managed tags by portal should stay in cache until they will be removed</p>
+</section>
+<section id="cosinnus-conference-setting-micro-cache-timeout">
+<h3>COSINNUS_CONFERENCE_SETTING_MICRO_CACHE_TIMEOUT<a class="headerlink" href="#cosinnus-conference-setting-micro-cache-timeout" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>2 # 2 seconds</em></p>
+<p>very very small timeout for cached BBB server configs! this should be in the seconds region</p>
+</section>
+<section id="cosinnus-ideas-enabled">
+<h3>COSINNUS_IDEAS_ENABLED<a class="headerlink" href="#cosinnus-ideas-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>should CosinnusIdeas be enabled for this Portal?</p>
+</section>
+<section id="cosinnus-organization-cache-timeout">
+<h3>COSINNUS_ORGANIZATION_CACHE_TIMEOUT<a class="headerlink" href="#cosinnus-organization-cache-timeout" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>DEFAULT_OBJECT_CACHE_TIMEOUT</em></p>
+<p>: How long an idea should at most stay in cache until it will be removed</p>
+</section>
+<section id="cosinnus-organization-default-values">
+<h3>COSINNUS_ORGANIZATION_DEFAULT_VALUES<a class="headerlink" href="#cosinnus-organization-default-values" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>TODO: add here all values for new instances of organizations that should be set as default for each new organization instance on create</p>
+</section>
+<section id="cosinnus-organizations-enabled">
+<h3>COSINNUS_ORGANIZATIONS_ENABLED<a class="headerlink" href="#cosinnus-organizations-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>Should CosinnusOrganizations be enabled for this Portal?</p>
+</section>
+<section id="cosinnus-language-select-disabled">
+<h3>COSINNUS_LANGUAGE_SELECT_DISABLED<a class="headerlink" href="#cosinnus-language-select-disabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>Disables the navbar language select menus</p>
+</section>
+<section id="cosinnus-exchange-enabled">
+<h3>COSINNUS_EXCHANGE_ENABLED<a class="headerlink" href="#cosinnus-exchange-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>Is external content from other platforms enabled?</p>
+</section>
+<section id="cosinnus-exchange-portal-id">
+<h3>COSINNUS_EXCHANGE_PORTAL_ID<a class="headerlink" href="#cosinnus-exchange-portal-id" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>99999</em></p>
+<p>Internal portal ID for external content. does not usually need to be changed</p>
+</section>
+<section id="cosinnus-exchange-backends">
+<h3>COSINNUS_EXCHANGE_BACKENDS<a class="headerlink" href="#cosinnus-exchange-backends" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[]</em></p>
+<p>Exchange Backends Defaults: backend: ‘cosinnus_exchange.backends.ExchangeBackend’ url: None (required) token_url: (url + ../token/) username: None (if no login required) password: None (if no login required) source: (domain from URL) model: None (required, e.g. ‘cosinnus_exchange.Event’) serializer: None (required, e.g. ‘cosinnus_exchange.serializers.ExchangeEventSerializer’)</p>
+</section>
+<section id="cosinnus-exchange-run-every-mins">
+<h3>COSINNUS_EXCHANGE_RUN_EVERY_MINS<a class="headerlink" href="#cosinnus-exchange-run-every-mins" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>60 * 24 # once a day</em></p>
+<p>default cron run frequency for exchange data pulls</p>
+</section>
+<section id="cosinnus-group-cache-timeout">
+<h3>COSINNUS_GROUP_CACHE_TIMEOUT<a class="headerlink" href="#cosinnus-group-cache-timeout" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>DEFAULT_OBJECT_CACHE_TIMEOUT</em></p>
+<p>: How long a group should at most stay in cache until it will be removed</p>
+</section>
+<section id="cosinnus-group-membership-cache-timeout">
+<h3>COSINNUS_GROUP_MEMBERSHIP_CACHE_TIMEOUT<a class="headerlink" href="#cosinnus-group-membership-cache-timeout" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>DEFAULT_OBJECT_CACHE_TIMEOUT</em></p>
+<p>: How long a group membership should at most stay in cache until it will be removed</p>
+</section>
+<section id="cosinnus-group-children-cache-timeout">
+<h3>COSINNUS_GROUP_CHILDREN_CACHE_TIMEOUT<a class="headerlink" href="#cosinnus-group-children-cache-timeout" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>GROUP_CACHE_TIMEOUT</em></p>
+<p>How long a groups list of children should be cached</p>
+</section>
+<section id="cosinnus-group-locations-cache-timeout">
+<h3>COSINNUS_GROUP_LOCATIONS_CACHE_TIMEOUT<a class="headerlink" href="#cosinnus-group-locations-cache-timeout" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>GROUP_CACHE_TIMEOUT</em></p>
+<p>How long a groups list of locations should be cached</p>
+</section>
+<section id="cosinnus-global-user-notification-setting-cache-timeout">
+<h3>COSINNUS_GLOBAL_USER_NOTIFICATION_SETTING_CACHE_TIMEOUT<a class="headerlink" href="#cosinnus-global-user-notification-setting-cache-timeout" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>GROUP_CACHE_TIMEOUT</em></p>
+<p>how long should user notification settings be retained in cache</p>
+</section>
+<section id="cosinnus-notification-alerts-enabled">
+<h3>COSINNUS_NOTIFICATION_ALERTS_ENABLED<a class="headerlink" href="#cosinnus-notification-alerts-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>sets if live notification alerts are enabled</p>
+</section>
+<section id="cosinnus-notification-alerts-cache-timeout">
+<h3>COSINNUS_NOTIFICATION_ALERTS_CACHE_TIMEOUT<a class="headerlink" href="#cosinnus-notification-alerts-cache-timeout" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>30 # 30 seconds</em></p>
+<p>sets how often actual data should be retrieved for user alerts, independent of how often it is polled, in seconds (affects how fresh data is on reloads and multiple tabs)</p>
+</section>
+<section id="cosinnus-likefollow-count-cache-timeout">
+<h3>COSINNUS_LIKEFOLLOW_COUNT_CACHE_TIMEOUT<a class="headerlink" href="#cosinnus-likefollow-count-cache-timeout" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>DEFAULT_OBJECT_CACHE_TIMEOUT</em></p>
+<p>how long like and follow counts should be retained in cache</p>
+</section>
+<section id="cosinnus-group-plural-url-path">
+<h3>COSINNUS_GROUP_PLURAL_URL_PATH<a class="headerlink" href="#cosinnus-group-plural-url-path" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘projects’</em></p>
+<p>the url pattern for group overview URLs</p>
+</section>
+<section id="cosinnus-group-member-widget-user-count">
+<h3>COSINNUS_GROUP_MEMBER_WIDGET_USER_COUNT<a class="headerlink" href="#cosinnus-group-member-widget-user-count" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>19</em></p>
+<p>number of members displayed in the group widet</p>
+</section>
+<section id="cosinnus-group-membership-mode-choices">
+<h3>COSINNUS_GROUP_MEMBERSHIP_MODE_CHOICES<a class="headerlink" href="#cosinnus-group-membership-mode-choices" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>a dict by group type for the allowed membership modes for each group type. Note: mode 1 (applications) should stay reserved for type 2 (conferences)</p>
+</section>
+<section id="cosinnus-initial-group-widgets">
+<h3>COSINNUS_INITIAL_GROUP_WIDGETS<a class="headerlink" href="#cosinnus-initial-group-widgets" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>projects groups conferences widgets listed here will be created for the group dashboard upon CosinnusGroup creation. this. will check if the cosinnus app is installed and if the widget is registered, so invalid entries do not produce errors</p>
+</section>
+<section id="cosinnus-type-dependent-group-widgets">
+<h3>COSINNUS_TYPE_DEPENDENT_GROUP_WIDGETS<a class="headerlink" href="#cosinnus-type-dependent-group-widgets" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>(app_name, widget_name, options), widgets listed under a TYPE ID here will only be added to a group if it is of the type listed in TYPE 0: CosinnusProject TYPE 1: CosinnusSociety (“Group” in the frontend)</p>
+</section>
+<section id="cosinnus-initial-group-microsite-widgets">
+<h3>COSINNUS_INITIAL_GROUP_MICROSITE_WIDGETS<a class="headerlink" href="#cosinnus-initial-group-microsite-widgets" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>widgets listed here will be created for the group microsite upon CosinnusGroup creation. this will check if the cosinnus app is installed and if the widget is registered, so invalid entries do not produce errors</p>
+</section>
+<section id="cosinnus-group-apps-widget-setting-only">
+<h3>COSINNUS_GROUP_APPS_WIDGET_SETTING_ONLY<a class="headerlink" href="#cosinnus-group-apps-widget-setting-only" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>(app_name, widget_name, options), these apps only deactivate a group widget and not the app itself</p>
+</section>
+<section id="cosinnus-group-apps-widgets-microsite-disabled">
+<h3>COSINNUS_GROUP_APPS_WIDGETS_MICROSITE_DISABLED<a class="headerlink" href="#cosinnus-group-apps-widgets-microsite-disabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>these apps’ widgets are not displayable on the microsite</p>
+</section>
+<section id="cosinnus-group-trans-typed-classes-dropins">
+<h3>COSINNUS_GROUP_TRANS_TYPED_CLASSES_DROPINS<a class="headerlink" href="#cosinnus-group-trans-typed-classes-dropins" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>a map of class dropins for the typed group trans classes status (int) –&gt; class (str classpath)</p>
+</section>
+<section id="cosinnus-image-maximum-size-scale">
+<h3>COSINNUS_IMAGE_MAXIMUM_SIZE_SCALE<a class="headerlink" href="#cosinnus-image-maximum-size-scale" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(800, 800)</em></p>
+<p>all uploaded cosinnus images are scaled down on the website  (except direct downloads) this is the maximum scale (at least one dimension fits) for any image</p>
+</section>
+<section id="cosinnus-group-wallpaper-maximum-size-scale">
+<h3>COSINNUS_GROUP_WALLPAPER_MAXIMUM_SIZE_SCALE<a class="headerlink" href="#cosinnus-group-wallpaper-maximum-size-scale" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(1140, 240)</em></p>
+<p>group wallpaper max size</p>
+</section>
+<section id="cosinnus-group-additional-form-fields">
+<h3>COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS<a class="headerlink" href="#cosinnus-group-additional-form-fields" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[]</em></p>
+<p>additional fields for a possibly extended group form</p>
+</section>
+<section id="cosinnus-group-additional-inline-formsets">
+<h3>COSINNUS_GROUP_ADDITIONAL_INLINE_FORMSETS<a class="headerlink" href="#cosinnus-group-additional-inline-formsets" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[]</em></p>
+<p>additional inline formsets (as string python path to Class) for the CosinnusGroupForm</p>
+</section>
+<section id="cosinnus-group-avatar-required">
+<h3>COSINNUS_GROUP_AVATAR_REQUIRED<a class="headerlink" href="#cosinnus-group-avatar-required" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>should the group avatar image be a required field?</p>
+</section>
+<section id="cosinnus-group-publicy-visible-option-shown">
+<h3>COSINNUS_GROUP_PUBLICY_VISIBLE_OPTION_SHOWN<a class="headerlink" href="#cosinnus-group-publicy-visible-option-shown" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>whether to show the “publicly_visible” field in the group form options</p>
+</section>
+<section id="cosinnus-group-publicly-visible-default-value">
+<h3>COSINNUS_GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE<a class="headerlink" href="#cosinnus-group-publicly-visible-default-value" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>sets the “publicly_visible” field value per portal Note! this is reflected in migration 0113! If the setting is changed afte the migration has been run, previous values of all existing groups will remain unchanged!</p>
+</section>
+<section id="cosinnus-related-groups-projects-enabled">
+<h3>COSINNUS_RELATED_GROUPS_PROJECTS_ENABLED<a class="headerlink" href="#cosinnus-related-groups-projects-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>if True, enables an option to choose related groups/projects in the groups/projects settings showing the chosen ones on microsite and dashboard</p>
+</section>
+<section id="cosinnus-image-thumbnail-size-scale">
+<h3>COSINNUS_IMAGE_THUMBNAIL_SIZE_SCALE<a class="headerlink" href="#cosinnus-image-thumbnail-size-scale" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(80, 80)</em></p>
+<p>this is the thumbnail size for small image previews</p>
+</section>
+<section id="cosinnus-navbar-group-menu-visible">
+<h3>COSINNUS_NAVBAR_GROUP_MENU_VISIBLE<a class="headerlink" href="#cosinnus-navbar-group-menu-visible" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>is the “Groups” menu visible in the navbar menu?</p>
+</section>
+<section id="cosinnus-event-mark-creator-as-going">
+<h3>COSINNUS_EVENT_MARK_CREATOR_AS_GOING<a class="headerlink" href="#cosinnus-event-mark-creator-as-going" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>should the creator of an Event automatically be marked as “Going” in EventAttendance?</p>
+</section>
+<section id="cosinnus-haystack-global-model-boost-multipliers">
+<h3>COSINNUS_HAYSTACK_GLOBAL_MODEL_BOOST_MULTIPLIERS<a class="headerlink" href="#cosinnus-haystack-global-model-boost-multipliers" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>global, multiplicative boost multipliers multiplied to <em>every</em> instance of the given models (as django contenttypes strs). if a model is not listed here, 1.0 is assumend this exists so we can blanket boost specific models for visibility without diving into the SearchIndexes and boost logic.</p>
+</section>
+<section id="cosinnus-haystack-global-model-boost-offset">
+<h3>COSINNUS_HAYSTACK_GLOBAL_MODEL_BOOST_OFFSET<a class="headerlink" href="#cosinnus-haystack-global-model-boost-offset" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>‘cosinnus.cosinnusproject’: 1.0, ‘cosinnus.cosinnussociety’: 1.0, global, additive boost offset. same as <cite>HAYSTACK_GLOBAL_MODEL_BOOST_MULTIPLIERS</cite>, but additive.</p>
+</section>
+<section id="cosinnus-initial-user-widgets">
+<h3>COSINNUS_INITIAL_USER_WIDGETS<a class="headerlink" href="#cosinnus-initial-user-widgets" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>‘cosinnus.userprofile’: 0, widgets listed here will be created for the user dashboard upon user creation. this will check if the cosinnus app is installed and if the widget is registered, so invalid entries do not produce errors</p>
+</section>
+<section id="cosinnus-integrated-create-user-cache-timeout">
+<h3>COSINNUS_INTEGRATED_CREATE_USER_CACHE_TIMEOUT<a class="headerlink" href="#cosinnus-integrated-create-user-cache-timeout" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>60 * 5</em></p>
+<p>(app_name, widget_name, options), every how often max can you create a new user in your session in an integrated Portal</p>
+</section>
+<section id="cosinnus-integrated-portal-ids">
+<h3>COSINNUS_INTEGRATED_PORTAL_IDS<a class="headerlink" href="#cosinnus-integrated-portal-ids" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[]</em></p>
+<p>yes, it’s dumb, but we need the ids of all integrated Portals in this list, and this needs to be set in the default_settings.py so that ALL portals know that</p>
+</section>
+<section id="cosinnus-integrated-portal-handshake-url">
+<h3>COSINNUS_INTEGRATED_PORTAL_HANDSHAKE_URL<a class="headerlink" href="#cosinnus-integrated-portal-handshake-url" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>has to be supplied if this portal is an integrated portal, used for handshake format without trailing slash: ‘<a class="reference external" href="http://mydomain.com">http://mydomain.com</a>’</p>
+</section>
+<section id="cosinnus-is-integrated-portal">
+<h3>COSINNUS_IS_INTEGRATED_PORTAL<a class="headerlink" href="#cosinnus-is-integrated-portal" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>setting to be overriden by each portal if True, Integrated mode is active: * manual login/logout/register is disabled * user accounts cannot be disabled * special views are active on /integrated/ URLs, enabling cross-site login/logout/user-creation</p>
+</section>
+<section id="cosinnus-is-sso-portal">
+<h3>COSINNUS_IS_SSO_PORTAL<a class="headerlink" href="#cosinnus-is-sso-portal" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>setting to be overriden by each portal if True, single-sign-on only mode is active: * manual login/register is disabled. logout is enabled * user accounts ???? * special views are active on /sso/ URLs, enabling OAuth flows</p>
+</section>
+<section id="cosinnus-sso-oauth-client-key">
+<h3>COSINNUS_SSO_OAUTH_CLIENT_KEY<a class="headerlink" href="#cosinnus-sso-oauth-client-key" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>these 3 settings MUST MATCH the data in your OAuth1 server application exactly, otherwise the OAuth signature won’t match</p>
+</section>
+<section id="cosinnus-sso-oauth-client-secret">
+<h3>COSINNUS_SSO_OAUTH_CLIENT_SECRET<a class="headerlink" href="#cosinnus-sso-oauth-client-secret" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+</section>
+<section id="cosinnus-sso-oauth-callback-url">
+<h3>COSINNUS_SSO_OAUTH_CALLBACK_URL<a class="headerlink" href="#cosinnus-sso-oauth-callback-url" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+</section>
+<section id="cosinnus-sso-oauth-request-url">
+<h3>COSINNUS_SSO_OAUTH_REQUEST_URL<a class="headerlink" href="#cosinnus-sso-oauth-request-url" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>OAuth1 target URLs</p>
+</section>
+<section id="cosinnus-sso-oauth-authorization-url">
+<h3>COSINNUS_SSO_OAUTH_AUTHORIZATION_URL<a class="headerlink" href="#cosinnus-sso-oauth-authorization-url" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+</section>
+<section id="cosinnus-sso-oauth-access-url">
+<h3>COSINNUS_SSO_OAUTH_ACCESS_URL<a class="headerlink" href="#cosinnus-sso-oauth-access-url" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+</section>
+<section id="cosinnus-sso-oauth-current-user-endpoint-url">
+<h3>COSINNUS_SSO_OAUTH_CURRENT_USER_ENDPOINT_URL<a class="headerlink" href="#cosinnus-sso-oauth-current-user-endpoint-url" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+</section>
+<section id="cosinnus-sso-already-logged-in-redirect-url">
+<h3>COSINNUS_SSO_ALREADY_LOGGED_IN_REDIRECT_URL<a class="headerlink" href="#cosinnus-sso-already-logged-in-redirect-url" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘/’</em></p>
+<p>where to redirect when a user is already logged in when initiation the Oauth flow</p>
+</section>
+<section id="cosinnus-import-projects-permitted">
+<h3>COSINNUS_IMPORT_PROJECTS_PERMITTED<a class="headerlink" href="#cosinnus-import-projects-permitted" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>can a staff user import CosinnusGroups via a CSV upload in the wagtail admin? and is the button shown?</p>
+</section>
+<section id="cosinnus-log-sent-emails">
+<h3>COSINNUS_LOG_SENT_EMAILS<a class="headerlink" href="#cosinnus-log-sent-emails" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>shall each individual email be logged as a <cite>CosinnusSentEmailLog</cite>?</p>
+</section>
+<section id="cosinnus-logged-in-users-login-page-redirect-target">
+<h3>COSINNUS_LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET<a class="headerlink" href="#cosinnus-logged-in-users-login-page-redirect-target" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘/dashboard/’</em></p>
+<p>if set to anything but None, logged-in users will be redirected to this URL if they try to visit the register or login pages</p>
+</section>
+<section id="cosinnus-fields-show-required-instead-optional">
+<h3>COSINNUS_FIELDS_SHOW_REQUIRED_INSTEAD_OPTIONAL<a class="headerlink" href="#cosinnus-fields-show-required-instead-optional" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if True, form fields will show a Required label for required fields instead of showing an Optional label for optional fields</p>
+</section>
+<section id="cosinnus-fields-required-label">
+<h3>COSINNUS_FIELDS_REQUIRED_LABEL<a class="headerlink" href="#cosinnus-fields-required-label" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘</em>’*</p>
+<p>label for required fields</p>
+</section>
+<section id="cosinnus-cosinnus-map-options">
+<h3>COSINNUS_COSINNUS_MAP_OPTIONS<a class="headerlink" href="#cosinnus-cosinnus-map-options" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>Default starting map coordinates if no coordinates have been specified currently: central europe with germany centered GeoJSON can be generated using <a class="reference external" href="http://opendatalab.de/projects/geojson-utilities/">http://opendatalab.de/projects/geojson-utilities/</a></p>
+</section>
+<section id="cosinnus-map-default-results-per-page">
+<h3>COSINNUS_MAP_DEFAULT_RESULTS_PER_PAGE<a class="headerlink" href="#cosinnus-map-default-results-per-page" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>50</em></p>
+<p>how many results per map results page are shown, if not modified by the get request</p>
+</section>
+<section id="cosinnus-dashboard-widget-map-defaults">
+<h3>COSINNUS_DASHBOARD_WIDGET_MAP_DEFAULTS<a class="headerlink" href="#cosinnus-dashboard-widget-map-defaults" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>{}</em></p>
+<p>Only for the dashboard map widget view if the user has no custom location set If not set, will attempt to use what is given in COSINNUS_MAP_OPTIONS Example: DASHBOARD_WIDGET_MAP_DEFAULTS = { “location”: [ 52.51, 13.39 ], “zoom”: 10 }</p>
+</section>
+<section id="cosinnus-map-image-size">
+<h3>COSINNUS_MAP_IMAGE_SIZE<a class="headerlink" href="#cosinnus-map-image-size" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(500, 500)</em></p>
+<p>dimensions of the images for map images</p>
+</section>
+<section id="cosinnus-userdashboard-use-live-map-widget">
+<h3>COSINNUS_USERDASHBOARD_USE_LIVE_MAP_WIDGET<a class="headerlink" href="#cosinnus-userdashboard-use-live-map-widget" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>display map in iframe in user dashboard</p>
+</section>
+<section id="cosinnus-map-use-modern-tileset">
+<h3>COSINNUS_MAP_USE_MODERN_TILESET<a class="headerlink" href="#cosinnus-map-use-modern-tileset" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>switch to the German version of OpenStreetMap tileset</p>
+</section>
+<section id="cosinnus-microsites-enabled">
+<h3>COSINNUS_MICROSITES_ENABLED<a class="headerlink" href="#cosinnus-microsites-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>switch to set if Microsites should be enabled. this can be override for each portal to either activate or deactivate them</p>
+</section>
+<section id="cosinnus-microsites-disable-anonymous-access">
+<h3>COSINNUS_MICROSITES_DISABLE_ANONYMOUS_ACCESS<a class="headerlink" href="#cosinnus-microsites-disable-anonymous-access" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>switch whether non-logged in users may access microsites</p>
+</section>
+<section id="cosinnus-microsites-disable-needs-love-nag-screen">
+<h3>COSINNUS_MICROSITES_DISABLE_NEEDS_LOVE_NAG_SCREEN<a class="headerlink" href="#cosinnus-microsites-disable-needs-love-nag-screen" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>switch the “your microsite needs some love” message off for group admins</p>
+</section>
+<section id="cosinnus-microsite-default-public-apps">
+<h3>COSINNUS_MICROSITE_DEFAULT_PUBLIC_APPS<a class="headerlink" href="#cosinnus-microsite-default-public-apps" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>the default setting used when a group has no microsite_public_apps setting set determines which apps public objects are shown on a microsite e.g: [‘cosinnus_file’, ‘cosinnus_event’, ]</p>
+</section>
+<section id="cosinnus-microsite-displayed-app-objects">
+<h3>COSINNUS_MICROSITE_DISPLAYED_APP_OBJECTS<a class="headerlink" href="#cosinnus-microsite-displayed-app-objects" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[‘cosinnus_note.Note’, ‘cosinnus_etherpad.Etherpad’,</em></p>
+<p>— for the old microsites — which apps objects as object lists will be listed on the microsite? must be model names of BaseTaggableObjects that can be resolved via a render_list_for_user() function in the app’s registered Renderer. example: [‘cosinnus_note.Note’, ‘cosinnus_etherpad.Etherpad’]</p>
+</section>
+<section id="cosinnus-microsite-render-empty-apps">
+<h3>COSINNUS_MICROSITE_RENDER_EMPTY_APPS<a class="headerlink" href="#cosinnus-microsite-render-empty-apps" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>— for the old microsites — should empty apps list be displayed at all, or omitted?</p>
+</section>
+<section id="cosinnus-microsite-public-apps-number-of-items">
+<h3>COSINNUS_MICROSITE_PUBLIC_APPS_NUMBER_OF_ITEMS<a class="headerlink" href="#cosinnus-microsite-public-apps-number-of-items" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>10</em></p>
+<p>how many public items per type should be shown on the microsite?</p>
+</section>
+<section id="cosinnus-microsite-social-media-fields-active">
+<h3>COSINNUS_MICROSITE_SOCIAL_MEDIA_FIELDS_ACTIVE<a class="headerlink" href="#cosinnus-microsite-social-media-fields-active" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>should twitter and flickr embed fields and display be active for microsites?</p>
+</section>
+<section id="cosinnus-microsite-show-social-media-buttons">
+<h3>COSINNUS_MICROSITE_SHOW_SOCIAL_MEDIA_BUTTONS<a class="headerlink" href="#cosinnus-microsite-show-social-media-buttons" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>should the social media share buttons (Facebook, Twitter) be shown on group / project microsites?</p>
+</section>
+<section id="cosinnus-hide-apps">
+<h3>COSINNUS_HIDE_APPS<a class="headerlink" href="#cosinnus-hide-apps" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>set([‘cosinnus_organization’, ‘cosinnus_conference’, ‘cosinnus_message’, ‘cosinnus_notifications’,</em></p>
+<p>: A list of app_names (<code class="docutils literal notranslate"><span class="pre">'cosinnus_note'</span></code> rather than <code class="docutils literal notranslate"><span class="pre">note</span></code>) that will : e.g. not be displayed in the cosinnus menu</p>
+</section>
+<section id="cosinnus-permanent-redirect-cache-timeout">
+<h3>COSINNUS_PERMANENT_REDIRECT_CACHE_TIMEOUT<a class="headerlink" href="#cosinnus-permanent-redirect-cache-timeout" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>60 * 60 * 24 * 7</em></p>
+<p>: How long the perm redirect cache should last (1 week, because it organizes itself)</p>
+</section>
+<section id="cosinnus-permanent-redirect-hide-user-message">
+<h3>COSINNUS_PERMANENT_REDIRECT_HIDE_USER_MESSAGE<a class="headerlink" href="#cosinnus-permanent-redirect-hide-user-message" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if True, no notification message will be shown to the user when they get redirected with a CosinnusPermanentRedirect</p>
+</section>
+<section id="cosinnus-recruit-email-body-text">
+<h3>COSINNUS_RECRUIT_EMAIL_BODY_TEXT<a class="headerlink" href="#cosinnus-recruit-email-body-text" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>_(‘%(sender_name)s would like you to come join the project “%(team_name)s” ‘</em></p>
+<p>the body text for the non-signed-up user invitation mail, of notification <cite>user_group_recruited</cite></p>
+</section>
+<section id="cosinnus-root-url">
+<h3>COSINNUS_ROOT_URL<a class="headerlink" href="#cosinnus-root-url" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘/’</em></p>
+<p>default URL used for this portal, used for example in the navbar “home” link</p>
+</section>
+<section id="cosinnus-show-private-groups-for-anonymous-users">
+<h3>COSINNUS_SHOW_PRIVATE_GROUPS_FOR_ANONYMOUS_USERS<a class="headerlink" href="#cosinnus-show-private-groups-for-anonymous-users" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>if set to True, private groups will be shown in group lists, even for non-logged in users</p>
+</section>
+<section id="cosinnus-show-translated-context-ids">
+<h3>COSINNUS_SHOW_TRANSLATED_CONTEXT_IDS<a class="headerlink" href="#cosinnus-show-translated-context-ids" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>shows any (MS1)-like context IDs in trans texts when rendered into templates</p>
+</section>
+<section id="cosinnus-swappable-migration-dependency-target">
+<h3>COSINNUS_SWAPPABLE_MIGRATION_DEPENDENCY_TARGET<a class="headerlink" href="#cosinnus-swappable-migration-dependency-target" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>if the app that includes has swappable models, it needs to either have all swappable definitions in its initial migration or define a migration from within its app where all swappable models are loaded ex.: <code class="docutils literal notranslate"><span class="pre">COSINNUS_SWAPPABLE_MIGRATION_DEPENDENCY_TARGET</span> <span class="pre">=</span> <span class="pre">'0007_auto_add_userprofile_fields'</span></code></p>
+</section>
+<section id="cosinnus-tag-object-form">
+<h3>COSINNUS_TAG_OBJECT_FORM<a class="headerlink" href="#cosinnus-tag-object-form" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘cosinnus.forms.tagged.TagObjectForm’</em></p>
+<p>: The ModelForm that will be used to modify the <code class="xref py py-attr docutils literal notranslate"><span class="pre">TAG_OBJECT_MODEL</span></code></p>
+</section>
+<section id="cosinnus-tag-object-model">
+<h3>COSINNUS_TAG_OBJECT_MODEL<a class="headerlink" href="#cosinnus-tag-object-model" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘cosinnus.TagObject’</em></p>
+<p>: A pointer to the swappable cosinnus tag object model</p>
+</section>
+<section id="cosinnus-tag-object-search-index">
+<h3>COSINNUS_TAG_OBJECT_SEARCH_INDEX<a class="headerlink" href="#cosinnus-tag-object-search-index" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘cosinnus.utils.search.DefaultTagObjectIndex’</em></p>
+<p>: The default search index for the <code class="xref py py-attr docutils literal notranslate"><span class="pre">TAG_OBJECT_MODEL</span></code></p>
+</section>
+<section id="cosinnus-topic-choices">
+<h3>COSINNUS_TOPIC_CHOICES<a class="headerlink" href="#cosinnus-topic-choices" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>the default choices for topics for tagged objects WARNING: do NOT change remove/change these without a data migration! pure adding is ok.</p>
+</section>
+<section id="cosinnus-topics-show-as-map-filters">
+<h3>COSINNUS_TOPICS_SHOW_AS_MAP_FILTERS<a class="headerlink" href="#cosinnus-topics-show-as-map-filters" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>whether or not to show the topics as filter-buttons on the map</p>
+</section>
+<section id="cosinnus-search-display-foreign-portals">
+<h3>COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS<a class="headerlink" href="#cosinnus-search-display-foreign-portals" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[]</em></p>
+<p>a list of portal-ids of foreign portals to display search data from</p>
+</section>
+<section id="cosinnus-send-tos-after-user-registration">
+<h3>COSINNUS_SEND_TOS_AFTER_USER_REGISTRATION<a class="headerlink" href="#cosinnus-send-tos-after-user-registration" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>should the nutzungsbedingungen_content.html be sent to the user as an email after successful registration?</p>
+</section>
+<section id="cosinnus-site-protocol">
+<h3>COSINNUS_SITE_PROTOCOL<a class="headerlink" href="#cosinnus-site-protocol" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘http’</em></p>
+<p>can be overriden to let cosinnus know that the server uses HTTPS. this is important to set!</p>
+</section>
+<section id="cosinnus-show-welcome-settings-page">
+<h3>COSINNUS_SHOW_WELCOME_SETTINGS_PAGE<a class="headerlink" href="#cosinnus-show-welcome-settings-page" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>whether or not to redirect to the welcome settings page after a user registers</p>
+</section>
+<section id="cosinnus-stream-short-cache-timeout">
+<h3>COSINNUS_STREAM_SHORT_CACHE_TIMEOUT<a class="headerlink" href="#cosinnus-stream-short-cache-timeout" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>30</em></p>
+<p>the duration of the user stream (must be very short, otherwise notifications will not appear)</p>
+</section>
+<section id="cosinnus-stream-special-streams">
+<h3>COSINNUS_STREAM_SPECIAL_STREAMS<a class="headerlink" href="#cosinnus-stream-special-streams" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[]</em></p>
+<p>special streams which are created for each user and can be pointed at hardcoded groups</p>
+</section>
+<section id="cosinnus-user-profile-additional-form-skip-fields">
+<h3>COSINNUS_USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS<a class="headerlink" href="#cosinnus-user-profile-additional-form-skip-fields" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[]</em></p>
+<p>additional skip fields for a possibly extended cosinnus user profile</p>
+</section>
+<section id="cosinnus-user-profile-model">
+<h3>COSINNUS_USER_PROFILE_MODEL<a class="headerlink" href="#cosinnus-user-profile-model" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘cosinnus.UserProfile’</em></p>
+<p>: A pointer to the swappable cosinnus user profile model</p>
+</section>
+<section id="cosinnus-user-profile-avatar-thumbnail-sizes">
+<h3>COSINNUS_USER_PROFILE_AVATAR_THUMBNAIL_SIZES<a class="headerlink" href="#cosinnus-user-profile-avatar-thumbnail-sizes" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>: Ths avatar sizes that will be exposed through the API</p>
+</section>
+<section id="cosinnus-user-profile-serializer">
+<h3>COSINNUS_USER_PROFILE_SERIALIZER<a class="headerlink" href="#cosinnus-user-profile-serializer" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘cosinnus.api.serializers.user.UserProfileSerializer’</em></p>
+<p>: The serializer used for the user profile</p>
+</section>
+<section id="cosinnus-user-profile-deletion-schedule-days">
+<h3>COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS<a class="headerlink" href="#cosinnus-user-profile-deletion-schedule-days" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>30</em></p>
+<p>the duration in days from which a user deletes their user account until its actual deletion is triggererd see <cite>UserProfile.scheduled_for_deletion_at</cite></p>
+</section>
+<section id="cosinnus-user-default-visible-when-created">
+<h3>COSINNUS_USER_DEFAULT_VISIBLE_WHEN_CREATED<a class="headerlink" href="#cosinnus-user-default-visible-when-created" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>when users newly register, are their profiles marked as visible rather than private on the site?</p>
+</section>
+<section id="cosinnus-user-show-email-verified-popup-after-days">
+<h3>COSINNUS_USER_SHOW_EMAIL_VERIFIED_POPUP_AFTER_DAYS<a class="headerlink" href="#cosinnus-user-show-email-verified-popup-after-days" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>0</em></p>
+<p>for portals with <cite>email_needs_verification</cite> active, how many days after registration should the user get a full-screen popup to “please verify your email now” on every page access? value: days in int, 0 for popup will never show</p>
+</section>
+<section id="cosinnus-users-can-create-groups">
+<h3>COSINNUS_USERS_CAN_CREATE_GROUPS<a class="headerlink" href="#cosinnus-users-can-create-groups" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>should regular, non-admin users be allowed to create Groups (Societies) as well? if False, users can only create Projects</p>
+</section>
+<section id="cosinnus-show-main-menu-group-create-button-only-for-permitted">
+<h3>COSINNUS_SHOW_MAIN_MENU_GROUP_CREATE_BUTTON_ONLY_FOR_PERMITTED<a class="headerlink" href="#cosinnus-show-main-menu-group-create-button-only-for-permitted" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>setting this to True will only show the create group button in the navbar “+”-menu if the current user actually has permission to create a group</p>
+</section>
+<section id="cosinnus-users-can-create-conferences">
+<h3>COSINNUS_USERS_CAN_CREATE_CONFERENCES<a class="headerlink" href="#cosinnus-users-can-create-conferences" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>should regular, non-admin users be allowed to create CosinnusConferences as well? if False, users can only create Projects</p>
+</section>
+<section id="cosinnus-show-main-menu-conference-create-button-only-for-permitted">
+<h3>COSINNUS_SHOW_MAIN_MENU_CONFERENCE_CREATE_BUTTON_ONLY_FOR_PERMITTED<a class="headerlink" href="#cosinnus-show-main-menu-conference-create-button-only-for-permitted" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>if <cite>CONFERENCES_ENABLED</cite> is True, setting this to True will only show the conference button if the current user actually has permission to create a conference</p>
+</section>
+<section id="cosinnus-users-with-managed-tag-slugs-can-create-conferences">
+<h3>COSINNUS_USERS_WITH_MANAGED_TAG_SLUGS_CAN_CREATE_CONFERENCES<a class="headerlink" href="#cosinnus-users-with-managed-tag-slugs-can-create-conferences" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[]</em></p>
+<p>any users with any of these managed_tag_slugs supersedes <cite>USERS_CAN_CREATE_CONFERENCES</cite></p>
+</section>
+<section id="cosinnus-conferences-enabled">
+<h3>COSINNUS_CONFERENCES_ENABLED<a class="headerlink" href="#cosinnus-conferences-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>whether to show conferences on the site</p>
+</section>
+<section id="cosinnus-premium-conferences-enabled">
+<h3>COSINNUS_PREMIUM_CONFERENCES_ENABLED<a class="headerlink" href="#cosinnus-premium-conferences-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>whether to use the premium difference for conferences</p>
+</section>
+<section id="cosinnus-conferences-use-compact-mode">
+<h3>COSINNUS_CONFERENCES_USE_COMPACT_MODE<a class="headerlink" href="#cosinnus-conferences-use-compact-mode" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>For conferences, disables the react conference interface, locks non-admin members to the microsite, removes most group-like elements like apps andremoves room management</p>
+</section>
+<section id="cosinnus-conferences-use-applications-choice-default">
+<h3>COSINNUS_CONFERENCES_USE_APPLICATIONS_CHOICE_DEFAULT<a class="headerlink" href="#cosinnus-conferences-use-applications-choice-default" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+</section>
+<section id="cosinnus-conferences-streaming-enabled">
+<h3>COSINNUS_CONFERENCES_STREAMING_ENABLED<a class="headerlink" href="#cosinnus-conferences-streaming-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>whether or not BBB-streaming is enabled for this portal</p>
+</section>
+<section id="cosinnus-conferences-streaming-api-url">
+<h3>COSINNUS_CONFERENCES_STREAMING_API_URL<a class="headerlink" href="#cosinnus-conferences-streaming-api-url" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>BBB Streaming base api url</p>
+</section>
+<section id="cosinnus-conferences-streaming-api-auth-user">
+<h3>COSINNUS_CONFERENCES_STREAMING_API_AUTH_USER<a class="headerlink" href="#cosinnus-conferences-streaming-api-auth-user" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>BBB Streaming credentials username</p>
+</section>
+<section id="cosinnus-conferences-streaming-api-auth-password">
+<h3>COSINNUS_CONFERENCES_STREAMING_API_AUTH_PASSWORD<a class="headerlink" href="#cosinnus-conferences-streaming-api-auth-password" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>BBB Streaming credentials password</p>
+</section>
+<section id="cosinnus-conferences-streaming-api-create-streamer-before-minutes">
+<h3>COSINNUS_CONFERENCES_STREAMING_API_CREATE_STREAMER_BEFORE_MINUTES<a class="headerlink" href="#cosinnus-conferences-streaming-api-create-streamer-before-minutes" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>120</em></p>
+<p>how many minutes before the streamed event start time the streamer is created via API</p>
+</section>
+<section id="cosinnus-conferences-streaming-api-start-streamer-before-minutes">
+<h3>COSINNUS_CONFERENCES_STREAMING_API_START_STREAMER_BEFORE_MINUTES<a class="headerlink" href="#cosinnus-conferences-streaming-api-start-streamer-before-minutes" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>10</em></p>
+<p>how many minutes before the streamed event start time the streamer is called to start streaming via API</p>
+</section>
+<section id="cosinnus-conferences-streaming-api-stop-delete-streamer-after-minutes">
+<h3>COSINNUS_CONFERENCES_STREAMING_API_STOP_DELETE_STREAMER_AFTER_MINUTES<a class="headerlink" href="#cosinnus-conferences-streaming-api-stop-delete-streamer-after-minutes" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>30</em></p>
+<p>how many minutes after the streamed event start time the streamer is stopped and deleted via API</p>
+</section>
+<section id="cosinnus-conferences-public-setting-locked">
+<h3>COSINNUS_CONFERENCES_PUBLIC_SETTING_LOCKED<a class="headerlink" href="#cosinnus-conferences-public-setting-locked" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>if set to any value other than None, the conference public field will be disabled and locked to the value set here</p>
+</section>
+<section id="cosinnus-conferences-user-display-name-func">
+<h3>COSINNUS_CONFERENCES_USER_DISPLAY_NAME_FUNC<a class="headerlink" href="#cosinnus-conferences-user-display-name-func" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>can be set to a function receiving <cite>user</cite> as only argument, to modify the user display name that BBB will use for a joining user default if None: <cite>full_name</cite></p>
+</section>
+<section id="cosinnus-conferences-default-theme-color">
+<h3>COSINNUS_CONFERENCES_DEFAULT_THEME_COLOR<a class="headerlink" href="#cosinnus-conferences-default-theme-color" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>default theme color. if not given, the react-defined default is used if given, all conferences that do not have a color defined in their settings will be colored with this color. Note: this is a hex color code without the leading ‘#’!</p>
+</section>
+<section id="cosinnus-external-user-display-name-func">
+<h3>COSINNUS_EXTERNAL_USER_DISPLAY_NAME_FUNC<a class="headerlink" href="#cosinnus-external-user-display-name-func" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>can be set to a function receiving <cite>user</cite> as only argument, to modify the user display name that external services like nextcloud and rocketchat receive for that user</p>
+</section>
+<section id="cosinnus-limit-project-and-group-creation-to-admins">
+<h3>COSINNUS_LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS<a class="headerlink" href="#cosinnus-limit-project-and-group-creation-to-admins" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if set to True, regular non-portal admin users can not create projects and groups by themselves and some elements like the “+” button in the navbar is hidden</p>
+</section>
+<section id="cosinnus-user-show-may-be-contacted-field">
+<h3>COSINNUS_USER_SHOW_MAY_BE_CONTACTED_FIELD<a class="headerlink" href="#cosinnus-user-show-may-be-contacted-field" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>will the <cite>profile.may_be_contacted</cite> be shown in forms and detail views?</p>
+</section>
+<section id="cosinnus-user-follows-group-when-joining">
+<h3>COSINNUS_USER_FOLLOWS_GROUP_WHEN_JOINING<a class="headerlink" href="#cosinnus-user-follows-group-when-joining" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>if True, any user joining a group will also automatically follow it</p>
+</section>
+<section id="cosinnus-digest-only-for-admins">
+<h3>COSINNUS_DIGEST_ONLY_FOR_ADMINS<a class="headerlink" href="#cosinnus-digest-only-for-admins" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>Temporary setting for the digest test phase. set to <code class="docutils literal notranslate"><span class="pre">False</span></code> once testing is over</p>
+</section>
+<section id="cosinnus-use-celery">
+<h3>COSINNUS_USE_CELERY<a class="headerlink" href="#cosinnus-use-celery" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>whether to use celery on this instance</p>
+</section>
+<section id="cosinnus-use-v2-navbar">
+<h3>COSINNUS_USE_V2_NAVBAR<a class="headerlink" href="#cosinnus-use-v2-navbar" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>whether to use the new style navbar</p>
+</section>
+<section id="cosinnus-use-v2-navbar-admin-only">
+<h3>COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY<a class="headerlink" href="#cosinnus-use-v2-navbar-admin-only" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>whether to use the new style navbar ONLY for admins does not need <cite>USE_V2_NAVBAR</cite> to be enabled</p>
+</section>
+<section id="cosinnus-use-v2-dashboard">
+<h3>COSINNUS_USE_V2_DASHBOARD<a class="headerlink" href="#cosinnus-use-v2-dashboard" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>whether to use the new style user-dashboard</p>
+</section>
+<section id="cosinnus-v2-dashboard-url-fragment">
+<h3>COSINNUS_V2_DASHBOARD_URL_FRAGMENT<a class="headerlink" href="#cosinnus-v2-dashboard-url-fragment" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘dashboard’</em></p>
+<p>the URL fragment for the user-dashboard on this portal</p>
+</section>
+<section id="cosinnus-use-v2-dashboard-admin-only">
+<h3>COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY<a class="headerlink" href="#cosinnus-use-v2-dashboard-admin-only" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>whether to use the new style user-dashboard ONLY for admins does not need <cite>USE_V2_DASHBOARD</cite> to be enabled</p>
+</section>
+<section id="cosinnus-v2-dashboard-use-naive-fetching">
+<h3>COSINNUS_V2_DASHBOARD_USE_NAIVE_FETCHING<a class="headerlink" href="#cosinnus-v2-dashboard-use-naive-fetching" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>Debug: enable naive queryset picking for dashboard timeline</p>
+</section>
+<section id="cosinnus-v2-dashboard-show-marketplace">
+<h3>COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE<a class="headerlink" href="#cosinnus-v2-dashboard-show-marketplace" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>should the dashboard show marketplace offers, both as widgets and in the timeline?</p>
+</section>
+<section id="cosinnus-v2-dashboard-welcome-screen-enabled">
+<h3>COSINNUS_V2_DASHBOARD_WELCOME_SCREEN_ENABLED<a class="headerlink" href="#cosinnus-v2-dashboard-welcome-screen-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>should the user dashboard welcome screen be shown?</p>
+</section>
+<section id="cosinnus-v2-dashboard-welcome-screen-expiry-days">
+<h3>COSINNUS_V2_DASHBOARD_WELCOME_SCREEN_EXPIRY_DAYS<a class="headerlink" href="#cosinnus-v2-dashboard-welcome-screen-expiry-days" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>7</em></p>
+<p>default duration for which the welcome screen should be shown on the user dashboard, unless clicked aways</p>
+</section>
+<section id="cosinnus-v2-force-site-footer">
+<h3>COSINNUS_V2_FORCE_SITE_FOOTER<a class="headerlink" href="#cosinnus-v2-force-site-footer" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>in v2, the footer is disabled by default. set this to True to enable it!</p>
+</section>
+<section id="cosinnus-v3-frontend-enabled">
+<h3>COSINNUS_V3_FRONTEND_ENABLED<a class="headerlink" href="#cosinnus-v3-frontend-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>whether or not to use redirects to the v3 frontend by appending a ‘?v=3’ GET param for certain URL paths paths are defined in</p>
+</section>
+<section id="cosinnus-v3-language-redirect-prefixes">
+<h3>COSINNUS_V3_LANGUAGE_REDIRECT_PREFIXES<a class="headerlink" href="#cosinnus-v3-language-redirect-prefixes" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[‘de’,]</em></p>
+<p>a workaround for the frontend using languages as URL prefix instead of as cookie setting, any request with a language in this list will be redirected to a prefixed url with the language slug, in addition to the ?v=3 param</p>
+</section>
+<section id="cosinnus-v3-frontend-signup-verification-welcome-page">
+<h3>COSINNUS_V3_FRONTEND_SIGNUP_VERIFICATION_WELCOME_PAGE<a class="headerlink" href="#cosinnus-v3-frontend-signup-verification-welcome-page" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘/signup/verified’</em></p>
+</section>
+<section id="cosinnus-v3-frontend-url-patterns">
+<h3>COSINNUS_V3_FRONTEND_URL_PATTERNS<a class="headerlink" href="#cosinnus-v3-frontend-url-patterns" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>URL paths that get redirected to the new frontend if V3_FRONTEND_ENABLED==True</p>
+</section>
+<section id="cosinnus-v3-frontend-supported-languages">
+<h3>COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES<a class="headerlink" href="#cosinnus-v3-frontend-supported-languages" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[‘en’, ‘de’]</em></p>
+<p>Languages supported by the v3 frontend. The portal language selection from LANGUAGES is restricted to these.</p>
+</section>
+<section id="cosinnus-v3-menu-home-link">
+<h3>COSINNUS_V3_MENU_HOME_LINK<a class="headerlink" href="#cosinnus-v3-menu-home-link" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘/cms/?noredir=1’</em></p>
+<p>Link of the brand / home button in the main navigation. If set to None personal-dashboard is used.</p>
+</section>
+<section id="cosinnus-v3-menu-spaces-forum-label">
+<h3>COSINNUS_V3_MENU_SPACES_FORUM_LABEL<a class="headerlink" href="#cosinnus-v3-menu-spaces-forum-label" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>_(‘Forum’)</em></p>
+<p>Forum space label in the v3 main navigation. Set to None to exclude forum from the community space.</p>
+</section>
+<section id="cosinnus-v3-menu-spaces-map-label">
+<h3>COSINNUS_V3_MENU_SPACES_MAP_LABEL<a class="headerlink" href="#cosinnus-v3-menu-spaces-map-label" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>_(‘Map’)</em></p>
+<p>Map space label in the v3 main navigation. Set to None to exclude the map from the community space.</p>
+</section>
+<section id="cosinnus-v3-menu-spaces-community-links-from-managed-tag-groups">
+<h3>COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS<a class="headerlink" href="#cosinnus-v3-menu-spaces-community-links-from-managed-tag-groups" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>Enable to add links to paired groups of managed tags of the user cosinnus_profile as community links.</p>
+</section>
+<section id="cosinnus-v3-menu-spaces-community-additional-links">
+<h3>COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS<a class="headerlink" href="#cosinnus-v3-menu-spaces-community-additional-links" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[]</em></p>
+<p>Additional menu items for the community space in the v3 main navigation. Format: List of (&lt;id-string&gt;, &lt;label&gt;, &lt;url&gt;, &lt;icon&gt;), e.g.: [(‘ExternalLink’, ‘External Link’, ‘<a class="reference external" href="https://external-link.com">https://external-link.com</a>’, ‘fa-group’)]</p>
+</section>
+<section id="cosinnus-v3-menu-help-links">
+<h3>COSINNUS_V3_MENU_HELP_LINKS<a class="headerlink" href="#cosinnus-v3-menu-help-links" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[]</em></p>
+<p>List of help items to be included in the v3 main navigation. Format: (&lt;label&gt;, &lt;url&gt;, &lt;icon&gt;), e.g.: (_(‘FAQ’), ‘<a class="reference external" href="https://wechange.de/cms/help/">https://wechange.de/cms/help/</a>’, ‘fa-question-circle’),</p>
+</section>
+<section id="cosinnus-user-signup-enabled">
+<h3>COSINNUS_USER_SIGNUP_ENABLED<a class="headerlink" href="#cosinnus-user-signup-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>whether the regular user signup method is enabled for this portal</p>
+</section>
+<section id="cosinnus-user-signup-force-email-verified-before-login">
+<h3>COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN<a class="headerlink" href="#cosinnus-user-signup-force-email-verified-before-login" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if True, won’t let any user log in before verifying their e-mail</p>
+</section>
+<section id="cosinnus-user-signup-send-verification-mail-instantly">
+<h3>COSINNUS_USER_SIGNUP_SEND_VERIFICATION_MAIL_INSTANTLY<a class="headerlink" href="#cosinnus-user-signup-send-verification-mail-instantly" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if True, sends a “please verify your e-mail” mail to the user instantly after they signed up. if False, the user has to click the “your email has not been verified - send now” banner on top the page to trigger the mail (does not affect mails if USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN is True)</p>
+</section>
+<section id="cosinnus-user-external-users-forbidden">
+<h3>COSINNUS_USER_EXTERNAL_USERS_FORBIDDEN<a class="headerlink" href="#cosinnus-user-external-users-forbidden" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if True, hides the portal completey from external visitors. “logged in only” mode for the portal</p>
+</section>
+<section id="cosinnus-user-form-last-name-required">
+<h3>COSINNUS_USER_FORM_LAST_NAME_REQUIRED<a class="headerlink" href="#cosinnus-user-form-last-name-required" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>whether the “last name” user form field is also required, just like “first name”</p>
+</section>
+<section id="cosinnus-signup-requires-privacy-policy-check">
+<h3>COSINNUS_SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK<a class="headerlink" href="#cosinnus-signup-requires-privacy-policy-check" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if true, an additional signup form field will be present</p>
+</section>
+<section id="cosinnus-user-signup-includes-location-field">
+<h3>COSINNUS_USER_SIGNUP_INCLUDES_LOCATION_FIELD<a class="headerlink" href="#cosinnus-user-signup-includes-location-field" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>whether the user signup form has the media-tag location field with a map</p>
+</section>
+<section id="cosinnus-user-signup-location-field-is-required">
+<h3>COSINNUS_USER_SIGNUP_LOCATION_FIELD_IS_REQUIRED<a class="headerlink" href="#cosinnus-user-signup-location-field-is-required" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if USER_SIGNUP_INCLUDES_LOCATION_FIELD==True, whether the field is required</p>
+</section>
+<section id="cosinnus-user-signup-includes-topic-field">
+<h3>COSINNUS_USER_SIGNUP_INCLUDES_TOPIC_FIELD<a class="headerlink" href="#cosinnus-user-signup-includes-topic-field" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>whether the user signup form has the media-tag topic field</p>
+</section>
+<section id="cosinnus-user-import-administration-views-enabled">
+<h3>COSINNUS_USER_IMPORT_ADMINISTRATION_VIEWS_ENABLED<a class="headerlink" href="#cosinnus-user-import-administration-views-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if True, the modern user import views will be shown they require a per-portal implementation of the importer class</p>
+</section>
+<section id="cosinnus-user-import-processor-class-dropin">
+<h3>COSINNUS_USER_IMPORT_PROCESSOR_CLASS_DROPIN<a class="headerlink" href="#cosinnus-user-import-processor-class-dropin" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>a class dropin to replace CosinnusUserImportProcessorBase as user import processor (str classpath)</p>
+</section>
+<section id="cosinnus-user-export-administration-views-enabled">
+<h3>COSINNUS_USER_EXPORT_ADMINISTRATION_VIEWS_ENABLED<a class="headerlink" href="#cosinnus-user-export-administration-views-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if True, the user export views will be shown they require a per-portal implementation of the importer class</p>
+</section>
+<section id="cosinnus-user-export-processor-class-dropin">
+<h3>COSINNUS_USER_EXPORT_PROCESSOR_CLASS_DROPIN<a class="headerlink" href="#cosinnus-user-export-processor-class-dropin" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>a class dropin to replace CosinnusUserExportProcessorBase as user export processor (str classpath)</p>
+</section>
+<section id="cosinnus-userprofile-enable-newsletter-opt-in">
+<h3>COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN<a class="headerlink" href="#cosinnus-userprofile-enable-newsletter-opt-in" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if true, during signup and in the user profile, an additional opt-in checkbox will be shown to let the user choose if they wish to receive a newsletter</p>
+</section>
+<section id="cosinnus-userprofile-hidden-fields">
+<h3>COSINNUS_USERPROFILE_HIDDEN_FIELDS<a class="headerlink" href="#cosinnus-userprofile-hidden-fields" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[]</em></p>
+<p>base fields of the user profile form to hide in form and detail view</p>
+</section>
+<section id="cosinnus-userprofile-visibility-settings-locked">
+<h3>COSINNUS_USERPROFILE_VISIBILITY_SETTINGS_LOCKED<a class="headerlink" href="#cosinnus-userprofile-visibility-settings-locked" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>if set to any value other than None, the userprofile visibility field will be disabled and locked to the value set here</p>
+</section>
+<section id="cosinnus-userprofile-extra-fields-show-on-map">
+<h3>COSINNUS_USERPROFILE_EXTRA_FIELDS_SHOW_ON_MAP<a class="headerlink" href="#cosinnus-userprofile-extra-fields-show-on-map" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>should the ‘user_profile_dynamic_fields.html’ be shown as extra_html in the profile map detail page? meaning, should the full profile of the user be visible on their map detail page warning: handle this with care if the profile extra fields contain fields with sensitive data</p>
+</section>
+<section id="cosinnus-dynamic-field-administration-views-enabled">
+<h3>COSINNUS_DYNAMIC_FIELD_ADMINISTRATION_VIEWS_ENABLED<a class="headerlink" href="#cosinnus-dynamic-field-administration-views-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>should the form view for admin-defined dynamic fields be shown in the admin</p>
+</section>
+<section id="cosinnus-group-extra-fields">
+<h3>COSINNUS_GROUP_EXTRA_FIELDS<a class="headerlink" href="#cosinnus-group-extra-fields" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>{}</em></p>
+<p>extra fields for CosinnusBaseGroup derived models. usage: see <cite>USERPROFILE_EXTRA_FIELDS</cite></p>
+</section>
+<section id="cosinnus-user-password-field-additional-hint-trans">
+<h3>COSINNUS_USER_PASSWORD_FIELD_ADDITIONAL_HINT_TRANS<a class="headerlink" href="#cosinnus-user-password-field-additional-hint-trans" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>a i18n str that explains the special password rules to the user, can be markdown. will display default field legend if None</p>
+</section>
+<section id="cosinnus-payments-enabled">
+<h3>COSINNUS_PAYMENTS_ENABLED<a class="headerlink" href="#cosinnus-payments-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if True, payment urls and views will be enabled</p>
+</section>
+<section id="cosinnus-payments-enabled-admin-only">
+<h3>COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY<a class="headerlink" href="#cosinnus-payments-enabled-admin-only" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if True, and PAYMENTS_ENABLED == False, payments are only shown to superusers or portal admins</p>
+</section>
+<section id="cosinnus-cloud-enabled">
+<h3>COSINNUS_CLOUD_ENABLED<a class="headerlink" href="#cosinnus-cloud-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>whether to enable the cosinnus cloud app</p>
+</section>
+<section id="cosinnus-cloud-dashboard-widget-enabled">
+<h3>COSINNUS_CLOUD_DASHBOARD_WIDGET_ENABLED<a class="headerlink" href="#cosinnus-cloud-dashboard-widget-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>whether to show the cosinnus cloud dashboard widget</p>
+</section>
+<section id="cosinnus-cloud-quicksearch-enabled">
+<h3>COSINNUS_CLOUD_QUICKSEARCH_ENABLED<a class="headerlink" href="#cosinnus-cloud-quicksearch-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>whether the quicksearch includes cloud results. comes with a large reduction in search speed as nextcloud is slow</p>
+</section>
+<section id="cosinnus-cloud-nextcloud-url">
+<h3>COSINNUS_CLOUD_NEXTCLOUD_URL<a class="headerlink" href="#cosinnus-cloud-nextcloud-url" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>base url of the nextcloud service, without trailing slash</p>
+</section>
+<section id="cosinnus-cloud-nextcloud-admin-username">
+<h3>COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME<a class="headerlink" href="#cosinnus-cloud-nextcloud-admin-username" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>admin user for the nextcloud api</p>
+</section>
+<section id="cosinnus-cloud-nextcloud-auth">
+<h3>COSINNUS_CLOUD_NEXTCLOUD_AUTH<a class="headerlink" href="#cosinnus-cloud-nextcloud-auth" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(None, None)</em></p>
+<p>admin authorization (name, password)</p>
+</section>
+<section id="cosinnus-cloud-nextcloud-groupfolder-base">
+<h3>COSINNUS_CLOUD_NEXTCLOUD_GROUPFOLDER_BASE<a class="headerlink" href="#cosinnus-cloud-nextcloud-groupfolder-base" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>base for the groupfolders app</p>
+</section>
+<section id="cosinnus-cloud-group-folder-iframe-url">
+<h3>COSINNUS_CLOUD_GROUP_FOLDER_IFRAME_URL<a class="headerlink" href="#cosinnus-cloud-group-folder-iframe-url" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘/apps/files/?dir=/%(group_folder_name)s’</em></p>
+<p>URL for the iframe/tab leading to a specific group folder (with leading slash)</p>
+</section>
+<section id="cosinnus-cloud-open-in-new-tab">
+<h3>COSINNUS_CLOUD_OPEN_IN_NEW_TAB<a class="headerlink" href="#cosinnus-cloud-open-in-new-tab" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>whether all cloud links should open with target=”_blank”</p>
+</section>
+<section id="cosinnus-cloud-prefix-group-folders">
+<h3>COSINNUS_CLOUD_PREFIX_GROUP_FOLDERS<a class="headerlink" href="#cosinnus-cloud-prefix-group-folders" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>whether to prefix all nextcloud group folders with “Projekt” or “Gruppe”</p>
+</section>
+<section id="cosinnus-cloud-nextcloud-groupfolder-quota">
+<h3>COSINNUS_CLOUD_NEXTCLOUD_GROUPFOLDER_QUOTA<a class="headerlink" href="#cosinnus-cloud-nextcloud-groupfolder-quota" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>1024 * 1024 * 1024</em></p>
+<p>the quota for groupfolders, in bytes. -3 is the default for “unlimited” currently set to 1GB</p>
+</section>
+<section id="cosinnus-cloud-nextcloud-request-timeout">
+<h3>COSINNUS_CLOUD_NEXTCLOUD_REQUEST_TIMEOUT<a class="headerlink" href="#cosinnus-cloud-nextcloud-request-timeout" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>15</em></p>
+<p>timeout for nextcloud webdav requests in seconds</p>
+</section>
+<section id="cosinnus-cloud-nextcloud-settings">
+<h3>COSINNUS_CLOUD_NEXTCLOUD_SETTINGS<a class="headerlink" href="#cosinnus-cloud-nextcloud-settings" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>disable: [“spreed”, “calendar”, “mail”], these seem not necessary as they are disabled by default</p>
+</section>
+<section id="cosinnus-forum-group-custom-background">
+<h3>COSINNUS_FORUM_GROUP_CUSTOM_BACKGROUND<a class="headerlink" href="#cosinnus-forum-group-custom-background" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>if set to a hex color string, the group with <cite>NEWW_FORUM_GROUP_SLUG</cite> will receive a custom background color on all pages</p>
+</section>
+<section id="cosinnus-forum-disabled">
+<h3>COSINNUS_FORUM_DISABLED<a class="headerlink" href="#cosinnus-forum-disabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if set to True, will hide some UI elements in navbar and dashboard and change some redirects</p>
+</section>
+<section id="cosinnus-forum-hide-member-list-for-non-admins">
+<h3>COSINNUS_FORUM_HIDE_MEMBER_LIST_FOR_NON_ADMINS<a class="headerlink" href="#cosinnus-forum-hide-member-list-for-non-admins" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>if set to True, only admins/superusers of a Forum group will be allowed to see the member list. all other users will see blocker message that the list is hidden</p>
+</section>
+<section id="cosinnus-inactive-logout-time-seconds">
+<h3>COSINNUS_INACTIVE_LOGOUT_TIME_SECONDS<a class="headerlink" href="#cosinnus-inactive-logout-time-seconds" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>60 * 60</em></p>
+<p>if`InactiveLogoutMiddleware` is active, this is the time after which a user is logged out</p>
+</section>
+<section id="cosinnus-post-to-forum-from-dashboard-disabled">
+<h3>COSINNUS_POST_TO_FORUM_FROM_DASHBOARD_DISABLED<a class="headerlink" href="#cosinnus-post-to-forum-from-dashboard-disabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if set to True, will hide some UI elements in navbar and dashboard and change some redirects</p>
+</section>
+<section id="cosinnus-userdashboard-force-only-mine">
+<h3>COSINNUS_USERDASHBOARD_FORCE_ONLY_MINE<a class="headerlink" href="#cosinnus-userdashboard-force-only-mine" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if set to True, will hide the userdashboard timeline controls and force the “only show content from my projects and groups” option</p>
+</section>
+<section id="cosinnus-group-dashboard-embed-html-field-enabled">
+<h3>COSINNUS_GROUP_DASHBOARD_EMBED_HTML_FIELD_ENABLED<a class="headerlink" href="#cosinnus-group-dashboard-embed-html-field-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+</section>
+<section id="cosinnus-enable-admin-email-csv-downloads">
+<h3>COSINNUS_ENABLE_ADMIN_EMAIL_CSV_DOWNLOADS<a class="headerlink" href="#cosinnus-enable-admin-email-csv-downloads" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>enable e-mail downloads of newsletter-enabled users in the administration area if enabled, this allows all portal-admins to download user emails, this might be <em>VERY</em> risky, so use cautiously</p>
+</section>
+<section id="cosinnus-enable-admin-user-domain-info-csv-downloads">
+<h3>COSINNUS_ENABLE_ADMIN_USER_DOMAIN_INFO_CSV_DOWNLOADS<a class="headerlink" href="#cosinnus-enable-admin-user-domain-info-csv-downloads" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>enables a CSV/API endpoint for downloading user’s anonymized email domain infos</p>
+</section>
+<section id="cosinnus-administration-groups-newsletter-enabled">
+<h3>COSINNUS_ADMINISTRATION_GROUPS_NEWSLETTER_ENABLED<a class="headerlink" href="#cosinnus-administration-groups-newsletter-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>should the “send newsletter to groups” admin view be enabled?</p>
+</section>
+<section id="cosinnus-administration-managed-tags-newsletter-enabled">
+<h3>COSINNUS_ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_ENABLED<a class="headerlink" href="#cosinnus-administration-managed-tags-newsletter-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>should the “send newsletter to managed tags” admin view be enabled?</p>
+</section>
+<section id="cosinnus-administration-managed-tags-newsletter-include-tagged-group-members">
+<h3>COSINNUS_ADMINISTRATION_MANAGED_TAGS_NEWSLETTER_INCLUDE_TAGGED_GROUP_MEMBERS<a class="headerlink" href="#cosinnus-administration-managed-tags-newsletter-include-tagged-group-members" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if True, managed tag newsletters will also be sent to users who are member of a group that has the managed tag assigned if False, newsletters will only be sent to users who are tagged with the managed tag themselves.</p>
+</section>
+<section id="cosinnus-newsletter-sending-ignores-notification-settings">
+<h3>COSINNUS_NEWSLETTER_SENDING_IGNORES_NOTIFICATION_SETTINGS<a class="headerlink" href="#cosinnus-newsletter-sending-ignores-notification-settings" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if True administration newsletters ignore check_user_can_receive_emails` (will ignore any blacklisting, but will still not send to inactive accounts)</p>
+</section>
+<section id="cosinnus-is-oauth-provider">
+<h3>COSINNUS_IS_OAUTH_PROVIDER<a class="headerlink" href="#cosinnus-is-oauth-provider" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>set to True if you want to use this instance as oauth provider for other platforms</p>
+</section>
+<section id="cosinnus-is-oauth-client">
+<h3>COSINNUS_IS_OAUTH_CLIENT<a class="headerlink" href="#cosinnus-is-oauth-client" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>set to True if you want to enable oauth2 social login with another instance (this other instance then has to have IS_OAUTH_PROVIDER to True). Add the url of the other instane as OAUTH_SERVER_BASEURL</p>
+</section>
+<section id="cosinnus-oauth-server-baseurl">
+<h3>COSINNUS_OAUTH_SERVER_BASEURL<a class="headerlink" href="#cosinnus-oauth-server-baseurl" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+</section>
+<section id="cosinnus-oauth-server-provider-name">
+<h3>COSINNUS_OAUTH_SERVER_PROVIDER_NAME<a class="headerlink" href="#cosinnus-oauth-server-provider-name" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘wechange’</em></p>
+</section>
+<section id="cosinnus-enable-sdgs">
+<h3>COSINNUS_ENABLE_SDGS<a class="headerlink" href="#cosinnus-enable-sdgs" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>whether SDGs should be shown in group/project forms and detail templates</p>
+</section>
+<section id="cosinnus-conference-coffeetables-max-participants-default">
+<h3>COSINNUS_CONFERENCE_COFFEETABLES_MAX_PARTICIPANTS_DEFAULT<a class="headerlink" href="#cosinnus-conference-coffeetables-max-participants-default" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>500</em></p>
+<p>default value for form field for how many coffee table participants should be allowed</p>
+</section>
+<section id="cosinnus-conference-coffeetables-allow-user-creation-default">
+<h3>COSINNUS_CONFERENCE_COFFEETABLES_ALLOW_USER_CREATION_DEFAULT<a class="headerlink" href="#cosinnus-conference-coffeetables-allow-user-creation-default" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>default value for form field for if to allow user creation of coffee tables</p>
+</section>
+<section id="cosinnus-conference-application-form-hidden-fields">
+<h3>COSINNUS_CONFERENCE_APPLICATION_FORM_HIDDEN_FIELDS<a class="headerlink" href="#cosinnus-conference-application-form-hidden-fields" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[]</em></p>
+<p>a list of formfield names of <cite>ConferenceApplicationForm</cite> to be hidden for this portal</p>
+</section>
+<section id="cosinnus-conference-priority-choice-default">
+<h3>COSINNUS_CONFERENCE_PRIORITY_CHOICE_DEFAULT<a class="headerlink" href="#cosinnus-conference-priority-choice-default" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>default for checkbox “Priority choice enabled” in participation management</p>
+</section>
+<section id="cosinnus-conference-participation-options">
+<h3>COSINNUS_CONFERENCE_PARTICIPATION_OPTIONS<a class="headerlink" href="#cosinnus-conference-participation-options" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+</section>
+<section id="cosinnus-conference-use-participation-field-hidden">
+<h3>COSINNUS_CONFERENCE_USE_PARTICIPATION_FIELD_HIDDEN<a class="headerlink" href="#cosinnus-conference-use-participation-field-hidden" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+</section>
+<section id="cosinnus-conference-statistics-enabled">
+<h3>COSINNUS_CONFERENCE_STATISTICS_ENABLED<a class="headerlink" href="#cosinnus-conference-statistics-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>Enable conference statistics view and user tracking via ConferenceEventAttendanceTracking.</p>
+</section>
+<section id="cosinnus-conference-statistics-tracking-interval">
+<h3>COSINNUS_CONFERENCE_STATISTICS_TRACKING_INTERVAL<a class="headerlink" href="#cosinnus-conference-statistics-tracking-interval" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>1</em></p>
+<p>Interval used for the conference attendance tracking in minutes.</p>
+</section>
+<section id="cosinnus-conference-statistics-user-data-fields">
+<h3>COSINNUS_CONFERENCE_STATISTICS_USER_DATA_FIELDS<a class="headerlink" href="#cosinnus-conference-statistics-user-data-fields" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[]</em></p>
+<p>Settings for portal specific user data used for the conference statistics. Contains a list of dynamic_fields field names and optional a name for the cosinnus_profile managed tags value.</p>
+</section>
+<section id="cosinnus-conference-statistics-user-data-managed-tags-field">
+<h3>COSINNUS_CONFERENCE_STATISTICS_USER_DATA_MANAGED_TAGS_FIELD<a class="headerlink" href="#cosinnus-conference-statistics-user-data-managed-tags-field" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>Optionally define which field of the CONFERENCE_STATISTICS_USER_DATA_FIELDS is populated from the cosinnus_profile managed tags value.</p>
+</section>
+<section id="cosinnus-managed-tags-enabled">
+<h3>COSINNUS_MANAGED_TAGS_ENABLED<a class="headerlink" href="#cosinnus-managed-tags-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>enable display and forms for managed tags</p>
+</section>
+<section id="cosinnus-managed-tags-assign-multiple-enabled">
+<h3>COSINNUS_MANAGED_TAGS_ASSIGN_MULTIPLE_ENABLED<a class="headerlink" href="#cosinnus-managed-tags-assign-multiple-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>allows assigning multiple managed tags to objects</p>
+</section>
+<section id="cosinnus-managed-tags-label-class-dropin">
+<h3>COSINNUS_MANAGED_TAGS_LABEL_CLASS_DROPIN<a class="headerlink" href="#cosinnus-managed-tags-label-class-dropin" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>str path to a drop-in class for managed tags containing strings</p>
+</section>
+<section id="cosinnus-managed-tags-users-may-assign-self">
+<h3>COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF<a class="headerlink" href="#cosinnus-managed-tags-users-may-assign-self" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>will the managed tag show up in the user profile form for the users to assign themselves?</p>
+</section>
+<section id="cosinnus-managed-tags-assignable-in-user-admin-form">
+<h3>COSINNUS_MANAGED_TAGS_ASSIGNABLE_IN_USER_ADMIN_FORM<a class="headerlink" href="#cosinnus-managed-tags-assignable-in-user-admin-form" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>users cannot assign the managed tags in their profiles, but admins can assign them in the userprofile admin update view</p>
+</section>
+<section id="cosinnus-managed-tags-users-may-assign-groups">
+<h3>COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS<a class="headerlink" href="#cosinnus-managed-tags-users-may-assign-groups" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>will the managed tag show up in the group form for the users to assign their groups?</p>
+</section>
+<section id="cosinnus-managed-tags-in-signup-form">
+<h3>COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM<a class="headerlink" href="#cosinnus-managed-tags-in-signup-form" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+</section>
+<section id="cosinnus-managed-tags-show-description-in-forms-only">
+<h3>COSINNUS_MANAGED_TAGS_SHOW_DESCRIPTION_IN_FORMS_ONLY<a class="headerlink" href="#cosinnus-managed-tags-show-description-in-forms-only" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if set to True, managed tag descriptions will only be shown in form fields</p>
+</section>
+<section id="cosinnus-managed-tags-user-tags-require-approval">
+<h3>COSINNUS_MANAGED_TAGS_USER_TAGS_REQUIRE_APPROVAL<a class="headerlink" href="#cosinnus-managed-tags-user-tags-require-approval" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>is approval by an admin needed on user created tags? (setting this to true makes managed tags get created with approved=False)</p>
+</section>
+<section id="cosinnus-managed-tags-show-formfield-selected-tag-details">
+<h3>COSINNUS_MANAGED_TAGS_SHOW_FORMFIELD_SELECTED_TAG_DETAILS<a class="headerlink" href="#cosinnus-managed-tags-show-formfield-selected-tag-details" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>makes a popout info panel appear on tags in formfields</p>
+</section>
+<section id="cosinnus-managed-tags-userprofile-formfield-required">
+<h3>COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED<a class="headerlink" href="#cosinnus-managed-tags-userprofile-formfield-required" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>whether formfields are required=True</p>
+</section>
+<section id="cosinnus-managed-tags-group-formfield-required">
+<h3>COSINNUS_MANAGED_TAGS_GROUP_FORMFIELD_REQUIRED<a class="headerlink" href="#cosinnus-managed-tags-group-formfield-required" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+</section>
+<section id="cosinnus-managed-tags-default-initial-slug">
+<h3>COSINNUS_MANAGED_TAGS_DEFAULT_INITIAL_SLUG<a class="headerlink" href="#cosinnus-managed-tags-default-initial-slug" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>the default slug for pre-filled managed tags</p>
+</section>
+<section id="cosinnus-managed-tags-paired-groups-prefix">
+<h3>COSINNUS_MANAGED_TAGS_PAIRED_GROUPS_PREFIX<a class="headerlink" href="#cosinnus-managed-tags-paired-groups-prefix" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘’</em></p>
+<p>the prefix for any automatically created paired groups</p>
+</section>
+<section id="cosinnus-managed-tags-show-filter-on-map">
+<h3>COSINNUS_MANAGED_TAGS_SHOW_FILTER_ON_MAP<a class="headerlink" href="#cosinnus-managed-tags-show-filter-on-map" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>whether to show the managed tags as a filter on the map</p>
+</section>
+<section id="cosinnus-managed-tag-dynamic-user-field-filter-on-tag-slug">
+<h3>COSINNUS_MANAGED_TAG_DYNAMIC_USER_FIELD_FILTER_ON_TAG_SLUG<a class="headerlink" href="#cosinnus-managed-tag-dynamic-user-field-filter-on-tag-slug" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>if set to a str managed tag slugs, the user choices for DYNAMIC_FIELD_TYPE_MANAGED_TAG_USER_CHOICE_FIELD fields will be filtered on users tagged with this tag</p>
+</section>
+<section id="cosinnus-managed-tags-map-filter-show-only-tags-from-type-ids">
+<h3>COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_FROM_TYPE_IDS<a class="headerlink" href="#cosinnus-managed-tags-map-filter-show-only-tags-from-type-ids" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[]</em></p>
+<p>if set to a list of ids, in the map filter only managed tags will be shown that have an assigneg CosinnusManagedTagType of a matchind id</p>
+</section>
+<section id="cosinnus-managed-tags-map-filter-show-only-tags-with-slugs">
+<h3>COSINNUS_MANAGED_TAGS_MAP_FILTER_SHOW_ONLY_TAGS_WITH_SLUGS<a class="headerlink" href="#cosinnus-managed-tags-map-filter-show-only-tags-with-slugs" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[]</em></p>
+<p>if set to a list of ids, in the map filter only managed tags will be shown that have a matching id</p>
+</section>
+<section id="cosinnus-managed-tags-show-filter-on-map-when-content-type-selected">
+<h3>COSINNUS_MANAGED_TAGS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED<a class="headerlink" href="#cosinnus-managed-tags-show-filter-on-map-when-content-type-selected" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[]</em></p>
+<p>managed tag filters will only be shown on the map for these map content types</p>
+</section>
+<section id="cosinnus-tags-enabled">
+<h3>COSINNUS_TAGS_ENABLED<a class="headerlink" href="#cosinnus-tags-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>if True, enables <cite>tag</cite> function in the group/project settins, files, todos, events, etc.</p>
+</section>
+<section id="cosinnus-text-topics-show-filter-on-map-when-content-type-selected">
+<h3>COSINNUS_TEXT_TOPICS_SHOW_FILTER_ON_MAP_WHEN_CONTENT_TYPE_SELECTED<a class="headerlink" href="#cosinnus-text-topics-show-filter-on-map-when-content-type-selected" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[]</em></p>
+<p>text topic filters will only be shown on the map for these map content types (and if any text topics even exist)</p>
+</section>
+<section id="cosinnus-timezone-show-in-userprofile">
+<h3>COSINNUS_TIMEZONE_SHOW_IN_USERPROFILE<a class="headerlink" href="#cosinnus-timezone-show-in-userprofile" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if True, will show the user’s selected timezone on the userprofile detail page</p>
+</section>
+<section id="cosinnus-virus-scan-uploaded-files">
+<h3>COSINNUS_VIRUS_SCAN_UPLOADED_FILES<a class="headerlink" href="#cosinnus-virus-scan-uploaded-files" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>set to True to enable virusscan. the clamd daeomon needs to be running! see <a class="reference external" href="https://pypi.org/project/django-clamd/">https://pypi.org/project/django-clamd/</a></p>
+</section>
+<section id="cosinnus-trigger-bbb-room-creation-in-queue">
+<h3>COSINNUS_TRIGGER_BBB_ROOM_CREATION_IN_QUEUE<a class="headerlink" href="#cosinnus-trigger-bbb-room-creation-in-queue" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>if this is True, then the bbb-room create call will be triggered every time the queue request hits if False, it will be triggered on requesting of the queue-URL (should happen less often)</p>
+</section>
+<section id="cosinnus-bbb-server-choices">
+<h3>COSINNUS_BBB_SERVER_CHOICES<a class="headerlink" href="#cosinnus-bbb-server-choices" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>The BBB Server choice list for select fields, indices correspond to an auth pair in <cite>BBB_SERVER_AUTH_AND_SECRET_PAIRS</cite></p>
+</section>
+<section id="cosinnus-bbb-server-auth-and-secret-pairs">
+<h3>COSINNUS_BBB_SERVER_AUTH_AND_SECRET_PAIRS<a class="headerlink" href="#cosinnus-bbb-server-auth-and-secret-pairs" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>map of the authentication data for the server choices in <cite>COSINNUS_BBB_SERVER_CHOICES</cite> { &lt;int&gt;: (BBB_API_URL, BBB_SECRET_KEY), … }</p>
+</section>
+<section id="cosinnus-bbb-resolve-cluster-redirects-if-url-matches">
+<h3>COSINNUS_BBB_RESOLVE_CLUSTER_REDIRECTS_IF_URL_MATCHES<a class="headerlink" href="#cosinnus-bbb-resolve-cluster-redirects-if-url-matches" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>lambda url: True</em></p>
+</section>
+<section id="cosinnus-bbb-enable-group-and-event-bbb-rooms">
+<h3>COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS<a class="headerlink" href="#cosinnus-bbb-enable-group-and-event-bbb-rooms" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>whether to enable BBB conferences in legacy groups/projects and events itself, independent of a conference</p>
+</section>
+<section id="cosinnus-bbb-enable-group-and-event-bbb-rooms-admin-restricted">
+<h3>COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED<a class="headerlink" href="#cosinnus-bbb-enable-group-and-event-bbb-rooms-admin-restricted" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if <cite>BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS</cite> is set to True, and this is set to True, admins need to enable groups/projects using field <cite>???</cite> before the group admins can enable the BBB option</p>
+</section>
+<section id="cosinnus-starred-star-label">
+<h3>COSINNUS_STARRED_STAR_LABEL<a class="headerlink" href="#cosinnus-starred-star-label" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>_(‘Bookmark’)</em></p>
+</section>
+<section id="cosinnus-starred-starring-label">
+<h3>COSINNUS_STARRED_STARRING_LABEL<a class="headerlink" href="#cosinnus-starred-starring-label" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>_(‘Bookmarked’)</em></p>
+</section>
+<section id="cosinnus-starred-objects-list">
+<h3>COSINNUS_STARRED_OBJECTS_LIST<a class="headerlink" href="#cosinnus-starred-objects-list" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>_(‘Bookmark list’)</em></p>
+</section>
+<section id="cosinnus-starred-users-list">
+<h3>COSINNUS_STARRED_USERS_LIST<a class="headerlink" href="#cosinnus-starred-users-list" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>_(‘Bookmarked Users list’)</em></p>
+</section>
+<section id="cosinnus-platform-admin-can-edit-profiles">
+<h3>COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES<a class="headerlink" href="#cosinnus-platform-admin-can-edit-profiles" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>should the editable user-list be shown in the administration area?</p>
+</section>
+<section id="cosinnus-calendar-widget-display-as-list">
+<h3>COSINNUS_CALENDAR_WIDGET_DISPLAY_AS_LIST<a class="headerlink" href="#cosinnus-calendar-widget-display-as-list" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>should the group dashboard widget be displayed in the week-list view instead of as a grid calendar?</p>
+</section>
+<section id="cosinnus-calendar-widget-allow-edit-in-group-dashboard">
+<h3>COSINNUS_CALENDAR_WIDGET_ALLOW_EDIT_IN_GROUP_DASHBOARD<a class="headerlink" href="#cosinnus-calendar-widget-allow-edit-in-group-dashboard" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>should the group dashboard widget grid calendar allow drag &amp; drop of events (only while CALENDAR_WIDGET_DISPLAY_AS_LIST == False)</p>
+</section>
+<section id="cosinnus-translated-fields-enabled">
+<h3>COSINNUS_TRANSLATED_FIELDS_ENABLED<a class="headerlink" href="#cosinnus-translated-fields-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>enables the translated fields on groups/events/conference rooms and more that show additional formfields and use model mixins to in-place replace translated field values see <cite>TranslateableFieldsModelMixin</cite></p>
+</section>
+<section id="cosinnus-notifications-group-invitations-ignore-user-setting">
+<h3>COSINNUS_NOTIFICATIONS_GROUP_INVITATIONS_IGNORE_USER_SETTING<a class="headerlink" href="#cosinnus-notifications-group-invitations-ignore-user-setting" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>user gets notification if s/he was invited to a group even if his/er notification preferences are tunrned on ‘daily’, ‘weekly’, or even on ‘never’</p>
+</section>
+<section id="cosinnus-notifications-digest-categories">
+<h3>COSINNUS_NOTIFICATIONS_DIGEST_CATEGORIES<a class="headerlink" href="#cosinnus-notifications-digest-categories" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>determines which cosinnus_notification IDs should be pulled up from the main digest body into its own category with a header format: ( ( &lt;str:category_header&gt;, &lt;list&lt;str:notification_id&gt;&gt;, &lt;str:header_fa_icon&gt;, &lt;str:header_url_reverse&gt;, &lt;func:group_condition_function&gt;, ), …)</p>
+</section>
+<section id="cosinnus-allow-contact-form-on-micropage">
+<h3>COSINNUS_ALLOW_CONTACT_FORM_ON_MICROPAGE<a class="headerlink" href="#cosinnus-allow-contact-form-on-micropage" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if set to True group admins can decide if a contact form should be displayed on the groups micropage</p>
+</section>
+<section id="cosinnus-elastic-backend-run-threaded">
+<h3>COSINNUS_ELASTIC_BACKEND_RUN_THREADED<a class="headerlink" href="#cosinnus-elastic-backend-run-threaded" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>determines if the elasticsearch backend should use threading on update/remove/clear writing actions</p>
+</section>
+<section id="cosinnus-alphabetical-order-for-search-models-when-single">
+<h3>COSINNUS_ALPHABETICAL_ORDER_FOR_SEARCH_MODELS_WHEN_SINGLE<a class="headerlink" href="#cosinnus-alphabetical-order-for-search-models-when-single" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[]</em></p>
+<p>all groups, projects or / and conferences will be shown alphabetically by names e.g.: [‘projects’, ‘groups’, ‘conferences’]</p>
+</section>
+<section id="cosinnus-matching-enabled">
+<h3>COSINNUS_MATCHING_ENABLED<a class="headerlink" href="#cosinnus-matching-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>Matching</p>
+</section>
+<section id="cosinnus-matching-fields">
+<h3>COSINNUS_MATCHING_FIELDS<a class="headerlink" href="#cosinnus-matching-fields" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>()</em></p>
+<p>Fields that will be used for matching ranking, should be present in projects, groups and organizations</p>
+</section>
+<section id="cosinnus-matching-dynamic-fields">
+<h3>COSINNUS_MATCHING_DYNAMIC_FIELDS<a class="headerlink" href="#cosinnus-matching-dynamic-fields" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>()</em></p>
+</section>
+<section id="cosinnus-enable-user-join-tokens-for-group-type">
+<h3>COSINNUS_ENABLE_USER_JOIN_TOKENS_FOR_GROUP_TYPE<a class="headerlink" href="#cosinnus-enable-user-join-tokens-for-group-type" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[2]</em></p>
+<p>Types of CosinnusBaseGroup which are allowed to use direct join tokens: 0 for projects; 1 for groups; 2 for conferences</p>
+</section>
+<section id="cosinnus-user-guest-accounts-enabled">
+<h3>COSINNUS_USER_GUEST_ACCOUNTS_ENABLED<a class="headerlink" href="#cosinnus-user-guest-accounts-enabled" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>Set to True to enable user group guest account access for this portal.</p>
+</section>
+<section id="cosinnus-user-guest-accounts-for-group-type">
+<h3>COSINNUS_USER_GUEST_ACCOUNTS_FOR_GROUP_TYPE<a class="headerlink" href="#cosinnus-user-guest-accounts-for-group-type" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>[0, 1, 2]</em></p>
+<p>Types of CosinnusBaseGroup in which group admins are allowed to create user guest access tokens, which enables user guest account access for this portal. Only used when <cite>USER_GUEST_ACCOUNTS_ENABED == True</cite> Will not work for closed portals! 0 for projects; 1 for groups; 2 for conferences</p>
+</section>
+<section id="cosinnus-user-guest-accounts-delete-after-days">
+<h3>COSINNUS_USER_GUEST_ACCOUNTS_DELETE_AFTER_DAYS<a class="headerlink" href="#cosinnus-user-guest-accounts-delete-after-days" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>7</em></p>
+<p>how long in days guest accounts will be kept, no matter if active or inactive</p>
+</section>
+<section id="cosinnus-user-guest-accounts-enable-soft-edits">
+<h3>COSINNUS_USER_GUEST_ACCOUNTS_ENABLE_SOFT_EDITS<a class="headerlink" href="#cosinnus-user-guest-accounts-enable-soft-edits" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>enable extended “soft edit” permissions for guests - writing in etherpads/ethercalcs - voting in event polls - assigning their event attendace choice - voting in polls</p>
+</section>
+<section id="cosinnus-show-likes-bookmarks-follows-buttons">
+<h3>COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS<a class="headerlink" href="#cosinnus-show-likes-bookmarks-follows-buttons" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>should the LIKE, BOOKMARK, FOLLOW buttons be shown on the entire portal (microsite, groups/projects, events, etc.)?</p>
+</section>
+<section id="cosinnus-enable-user-match">
+<h3>COSINNUS_ENABLE_USER_MATCH<a class="headerlink" href="#cosinnus-enable-user-match" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>if True, the User Match feature will be enabled</p>
+</section>
+<section id="cosinnus-use-hcaptcha">
+<h3>COSINNUS_USE_HCAPTCHA<a class="headerlink" href="#cosinnus-use-hcaptcha" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>True</em></p>
+<p>whether to require a valid hcaptcha on the signup API endpoint</p>
+</section>
+<section id="cosinnus-hcaptcha-secret-key">
+<h3>COSINNUS_HCAPTCHA_SECRET_KEY<a class="headerlink" href="#cosinnus-hcaptcha-secret-key" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+<p>the secret key for the hcaptcha. set in .env</p>
+</section>
+<section id="cosinnus-hcaptcha-verify-url">
+<h3>COSINNUS_HCAPTCHA_VERIFY_URL<a class="headerlink" href="#cosinnus-hcaptcha-verify-url" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘https://hcaptcha.com/siteverify’</em></p>
+<p>the URL at which to verify the hcaptcha response</p>
+</section>
+<section id="cosinnus-v3-portal-settings">
+<h3>COSINNUS_V3_PORTAL_SETTINGS<a class="headerlink" href="#cosinnus-v3-portal-settings" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>{}</em></p>
+<p>a storage for portal settings that are exposed publicy via v3 API endpoint ‘api/v3/portal/settings/’ and are used to configure the frontend server</p>
+</section>
+<section id="djajax-view-class">
+<h3>DJAJAX_VIEW_CLASS<a class="headerlink" href="#djajax-view-class" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>‘cosinnus.views.djajax_endpoints.DjajaxCosinnusEndpoint’</em></p>
+</section>
+<section id="djajax-allowed-accesses">
+<h3>DJAJAX_ALLOWED_ACCESSES<a class="headerlink" href="#djajax-allowed-accesses" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+</section>
+<section id="bbb-secret-key">
+<h3>BBB_SECRET_KEY<a class="headerlink" href="#bbb-secret-key" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+</section>
+<section id="bbb-api-url">
+<h3>BBB_API_URL<a class="headerlink" href="#bbb-api-url" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>None</em></p>
+</section>
+<section id="bbb-hash-algorithm">
+<h3>BBB_HASH_ALGORITHM<a class="headerlink" href="#bbb-hash-algorithm" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>“SHA1”</em></p>
+</section>
+<section id="bbb-room-participants-cache-timeout-seconds">
+<h3>BBB_ROOM_PARTICIPANTS_CACHE_TIMEOUT_SECONDS<a class="headerlink" href="#bbb-room-participants-cache-timeout-seconds" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>20</em></p>
+<p>cache timeout for retrieval of participants</p>
+</section>
+<section id="bbb-room-fix-participant-count-plus-one">
+<h3>BBB_ROOM_FIX_PARTICIPANT_COUNT_PLUS_ONE<a class="headerlink" href="#bbb-room-fix-participant-count-plus-one" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>False</em></p>
+<p>should we monkeypatch for BBB appearently allowing one less persons to enter a room than provided in max_participants during room creation</p>
+</section>
+<section id="bbb-moderator-message-guest-link-text">
+<h3>BBB_MODERATOR_MESSAGE_GUEST_LINK_TEXT<a class="headerlink" href="#bbb-moderator-message-guest-link-text" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>_(‘To invite external guests, share this link:’)</em></p>
+<p>text that gets appended to the create <cite>moderatorOnlyMessage</cite> along with the guest invite url appended to its end</p>
+</section>
+<section id="bbb-default-create-parameters">
+<h3>BBB_DEFAULT_CREATE_PARAMETERS<a class="headerlink" href="#bbb-default-create-parameters" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>the default BBB create-call parameters for all room types</p>
+</section>
+<section id="bbb-preset-form-field-params">
+<h3>BBB_PRESET_FORM_FIELD_PARAMS<a class="headerlink" href="#bbb-preset-form-field-params" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+</section>
+<section id="bbb-preset-form-field-text-params">
+<h3>BBB_PRESET_FORM_FIELD_TEXT_PARAMS<a class="headerlink" href="#bbb-preset-form-field-text-params" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>The configuration of BBB join/create text params for the field presets in <cite>CosinnusConferenceSettings</cite>. Format: &lt;form-parameter-name&gt;: (‘create’/’join’, &lt;bbb-param&gt;)</p>
+</section>
+<section id="bbb-param-portal-defaults">
+<h3>BBB_PARAM_PORTAL_DEFAULTS<a class="headerlink" href="#bbb-param-portal-defaults" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>the default baseline portal values for the BBB call params these are also used to generate the portal preset defaults for inheritance Define nature-specific params by adding a ‘&lt;call&gt;__&lt;nature&gt;’ key to the dict! see <a class="reference external" href="https://docs.bigbluebutton.org/2.2/customize.html#passing-custom-parameters-to-the-client-on-join">https://docs.bigbluebutton.org/2.2/customize.html#passing-custom-parameters-to-the-client-on-join</a></p>
+</section>
+<section id="bbb-preset-user-form-fields">
+<h3>BBB_PRESET_USER_FORM_FIELDS<a class="headerlink" href="#bbb-preset-user-form-fields" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>a list of field names from fields in fields in <cite>CosinnusConferenceSettings</cite> that will be shown to the users in the frontend Event forms as choices for presets for BBB rooms note that ‘record_meeting’ is disabled by default, as it requires setting up the BBB servers correctly for it, and should only be enabled for a portal specifically after that has been done</p>
+</section>
+<section id="bbb-preset-user-form-fields-premium-only">
+<h3>BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY<a class="headerlink" href="#bbb-preset-user-form-fields-premium-only" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>(object)</em></p>
+<p>a complete list of all choices that could be made for BBB_PRESET_USER_FORM_FIELDS __all_choices__BBB_PRESET_USER_FORM_FIELDS = [ ‘mic_starts_on’, ‘cam_starts_on’, ‘record_meeting’, ] a list of field names from <cite>BBB_PRESET_USER_FORM_FIELDS</cite> that can only be changed by users if a conference is premium at some point. NOTE: the field names appearing here must also appear in <cite>BBB_PRESET_USER_FORM_FIELDS</cite>!</p>
+</section>
+<section id="bbb-room-statistic-visit-cooldown-seconds">
+<h3>BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS<a class="headerlink" href="#bbb-room-statistic-visit-cooldown-seconds" title="Permalink to this heading">¶</a></h3>
+<p>Default: <em>60*60</em></p>
+<p>limit visit creation for (user, bbb_room) pairs to a time window</p>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Cosinnus</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dev_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Key Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">Services Integration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration Settings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#settings-files">Settings Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#available-settings">Available Settings</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="services.html" title="previous chapter">Services Integration</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, wechange eG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/settings.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

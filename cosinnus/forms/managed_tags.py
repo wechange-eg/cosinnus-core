@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from annoying.functions import get_object_or_None
 from django import forms
 from django.core.exceptions import ImproperlyConfigured
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal

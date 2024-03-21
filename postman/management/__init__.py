@@ -4,7 +4,7 @@ import sys
 
 from django.conf import settings
 from django.db.models import signals
-from django.utils.translation import ugettext_noop as _
+from django.utils.translation import gettext_noop as _
 
 name = getattr(settings, 'POSTMAN_NOTIFIER_APP', 'notification')
 if name and name in settings.INSTALLED_APPS:

@@ -6,7 +6,7 @@ from builtins import object
 from django.apps import apps
 
 from django.contrib.contenttypes.models import ContentType
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django_select2 import (HeavyModelSelect2MultipleChoiceField)
 from django.core.exceptions import ValidationError
 

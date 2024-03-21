@@ -444,8 +444,6 @@ class DetailedUserMapResult(DetailedMapResult):
     """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
          into a proper MapResult """
          
-    # todo: show portals?
-    
     fields = copy(DetailedMapResult.fields)
     fields.update({
         'projects': [],
@@ -908,14 +906,8 @@ def build_date_time(date_string, time_string):
         date_time = time_zone.localize(date_time)
         return date_time
 
-def filter_event_or_conference_starts_after(date_string, time_string, sqs):
-    date_time = build_date_time(date_string, time_string)
-    if date_time:
-        return sqs.filter(from_date__gt=date_time)
-    return sqs
-
-def filter_event_or_conference_starts_before(date_string, time_string, sqs):
-    date_time = build_date_time(date_string, time_string)
-    if date_time:
-        return sqs.filter(from_date__lt=date_time)
+def filter_event_or_conference_happening_during(from_datetime, to_datetime, sqs):
+    """ Filters all events or conferences to retain those happening during the provided
+        datetime range, either fully or in part. """
+    sqs = sqs.exclude(to_date__lt=from_datetime).exclude(from_date__gt=to_datetime)
     return sqs

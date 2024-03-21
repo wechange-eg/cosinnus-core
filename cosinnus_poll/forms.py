@@ -5,8 +5,8 @@ from builtins import object
 from django import forms
 from django.forms.widgets import HiddenInput, RadioSelect,\
     SplitHiddenDateTimeWidget
-from django.utils.encoding import force_text
-from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import force_str
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.forms.group import GroupKwargModelFormMixin
 from cosinnus.forms.tagged import get_form, BaseTaggableObjectForm
@@ -30,11 +30,12 @@ class _PollForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
     
     def __init__(self, *args, **kwargs):
         super(_PollForm, self).__init__(*args, **kwargs)
-        # if a Poll has been voted on, no more options can be edited. remove their fields to avoid data injection
-        has_active_votes = self.instance.options.filter(votes__isnull=False).count() > 0
-        if has_active_votes or self.instance and self.instance.state != Poll.STATE_VOTING_OPEN:
-            for remove_field in self.LOCKED_FIELDS_WHILE_ACTIVE_VOTES:
-                del self.fields[remove_field]
+        if self.instance.pk:
+            # if a Poll has been voted on, no more options can be edited. remove their fields to avoid data injection
+            has_active_votes = self.instance.options.filter(votes__isnull=False).count() > 0
+            if has_active_votes or self.instance and self.instance.state != Poll.STATE_VOTING_OPEN:
+                for remove_field in self.LOCKED_FIELDS_WHILE_ACTIVE_VOTES:
+                    del self.fields[remove_field]
                 
     def clean(self, *args, **kwargs):
         cleaned_data = super(_PollForm, self).clean(*args, **kwargs)
@@ -77,7 +78,7 @@ class VoteForm(forms.Form):
     def get_label(self):
         pk = self.initial.get('option', None)
         if pk:
-            return force_text(Option.objects.get(pk=pk))
+            return force_str(Option.objects.get(pk=pk))
         return ''
     
     

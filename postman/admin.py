@@ -4,7 +4,7 @@ from builtins import object
 from django import forms
 from django.contrib import admin
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 
 from postman.models import Message, PendingMessage
 
@@ -25,35 +25,35 @@ class MessageAdminForm(forms.ModelForm):
         email = cleaned_data.get('email')
         errors = []
         if not sender and not recipient:
-            errors.append(ugettext("Sender and Recipient cannot be both undefined."))
+            errors.append(gettext("Sender and Recipient cannot be both undefined."))
             if 'sender' in cleaned_data:
                 del cleaned_data['sender']
             if 'recipient' in cleaned_data:
                 del cleaned_data['recipient']
         elif sender and recipient:
             if email:
-                errors.append(ugettext("Visitor's email is in excess."))
+                errors.append(gettext("Visitor's email is in excess."))
                 if 'email' in cleaned_data:
                     del cleaned_data['email']
         else:
             if not email:
-                errors.append(ugettext("Visitor's email is missing."))
+                errors.append(gettext("Visitor's email is missing."))
                 if 'email' in cleaned_data:
                     del cleaned_data['email']
         sent_at = cleaned_data.get('sent_at')
         read_at = cleaned_data.get('read_at')
         if read_at and read_at < sent_at:
-            errors.append(ugettext("Reading date must be later than sending date."))
+            errors.append(gettext("Reading date must be later than sending date."))
             if 'read_at' in cleaned_data:
                 del cleaned_data['read_at']
         sender_deleted_at = cleaned_data.get('sender_deleted_at')
         if sender_deleted_at and sender_deleted_at < sent_at:
-            errors.append(ugettext("Deletion date by sender must be later than sending date."))
+            errors.append(gettext("Deletion date by sender must be later than sending date."))
             if 'sender_deleted_at' in cleaned_data:
                 del cleaned_data['sender_deleted_at']
         recipient_deleted_at = cleaned_data.get('recipient_deleted_at')
         if recipient_deleted_at and recipient_deleted_at < sent_at:
-            errors.append(ugettext("Deletion date by recipient must be later than sending date."))
+            errors.append(gettext("Deletion date by recipient must be later than sending date."))
             if 'recipient_deleted_at' in cleaned_data:
                 del cleaned_data['recipient_deleted_at']
         replied_at = cleaned_data.get('replied_at')
@@ -61,15 +61,15 @@ class MessageAdminForm(forms.ModelForm):
         if replied_at:
             len_begin = len(errors)
             if replied_at < sent_at:
-                errors.append(ugettext("Response date must be later than sending date."))
+                errors.append(gettext("Response date must be later than sending date."))
             if not read_at:
-                errors.append(ugettext("The message cannot be replied without having been read."))
+                errors.append(gettext("The message cannot be replied without having been read."))
             elif replied_at < read_at:
-                errors.append(ugettext("Response date must be later than reading date."))
+                errors.append(gettext("Response date must be later than reading date."))
             if not obj.get_replies_count():
-                errors.append(ugettext("Response date cannot be set without at least one reply."))
+                errors.append(gettext("Response date cannot be set without at least one reply."))
             if not obj.thread_id:
-                errors.append(ugettext("The message cannot be replied without being in a conversation."))
+                errors.append(gettext("The message cannot be replied without being in a conversation."))
             if len(errors) > len_begin:
                 if 'replied_at' in cleaned_data:
                     del cleaned_data['replied_at']

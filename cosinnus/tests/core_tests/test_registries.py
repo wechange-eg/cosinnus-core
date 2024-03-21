@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-
-from django.conf.urls import url
+import unittest
+from django.urls import path, re_path
 from django.test import SimpleTestCase
-from django.utils import unittest
 
 from cosinnus.core.registries import (apps, attached_objects, base, urls,
     widgets)
 from cosinnus.utils.compat import OrderedDict
-from cosinnus.conf import settings
 
 
 class TestBaseRegistry(SimpleTestCase):
@@ -112,15 +110,17 @@ class TestURLRegistry(SimpleTestCase):
 
     @classmethod
     def setUpClass(cls):
+        super().setUpClass()
+
         def _view(request, *args, **kwargs):
             return request, args, kwargs
 
         cls.view_func = _view
         cls.root_patterns = [
-            url(r'^root/view/$', cls.view_func, name='root-view'),
+            path('root/view/', cls.view_func, name='root-view'),
         ]
         cls.group_patterns = [
-            url(r'^%s/view/$' % settings.COSINNUS_GROUP_URL_PATH, cls.view_func, name='group-view'),
+            re_path(r'^group/view/$', cls.view_func, name='group-view'),
         ]
 
     def setUp(self):
@@ -132,21 +132,17 @@ class TestURLRegistry(SimpleTestCase):
 
     def test_register(self):
         self.reg.register('some_app', self.root_patterns, self.group_patterns)
-        root_url, group_url = self.reg.urlpatterns
+        group_url, root_url = self.reg.urlpatterns
 
-        self.assertEqual(root_url.app_name, 'some_app')
-        self.assertEqual(root_url.namespace, 'some_name')
-        self.assertEqual(root_url.regex.pattern, '')
         self.assertEqual(root_url.url_patterns[0].callback, TestURLRegistry.view_func)
         self.assertEqual(root_url.url_patterns[0].name, 'root-view')
-        self.assertEqual(root_url.url_patterns[0].regex.pattern, '^root/view/$')
+        self.assertEqual(str(root_url.url_patterns[0].pattern), 'root/view/')
 
-        self.assertEqual(group_url.app_name, 'some_app')
+        self.assertEqual(group_url.app_name, 'some_name')
         self.assertEqual(group_url.namespace, 'some_name')
-        self.assertEqual(group_url.regex.pattern, '^%s/(?P<group>[^/]+)/some_name/' % settings.COSINNUS_GROUP_URL_PATH)
         self.assertEqual(group_url.url_patterns[0].callback, TestURLRegistry.view_func)
         self.assertEqual(group_url.url_patterns[0].name, 'group-view')
-        self.assertEqual(group_url.url_patterns[0].regex.pattern, '^%s/view/$' % settings.COSINNUS_GROUP_URL_PATH)
+        self.assertEqual(str(group_url.url_patterns[0].pattern), '^project/(?P<group>[^/]+)/some_name/group/view/$')
 
 
 class TestWidgetRegistry(SimpleTestCase):

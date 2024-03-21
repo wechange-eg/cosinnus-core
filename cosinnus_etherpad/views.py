@@ -14,7 +14,7 @@ from urllib.error import HTTPError, URLError
 from django.shortcuts import redirect
 from django.http.response import HttpResponse, Http404
 from cosinnus.views.attached_object import AttachableViewMixin
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.timezone import now
 from cosinnus.views.common import DeleteElementView
 from django.core.exceptions import ImproperlyConfigured
@@ -27,7 +27,7 @@ import logging
 
 from django.contrib import messages
 from django.db import transaction
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, RedirectView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -147,6 +147,13 @@ pad_detail_view = EtherpadDetailView.as_view()
 class EtherpadWriteView(RequireLoggedInMixin, EtherpadDetailView):
     template_name = 'cosinnus_etherpad/etherpad_write.html'
     
+    def dispatch(self, request, *args, **kwargs):
+        # redirect guest users to read-only view unless soft edits are enabled
+        if request.user.is_guest and not settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLE_SOFT_EDITS:
+            messages.info(request, _('Editing is not permitted for guest accounts.'))
+            return redirect(group_aware_reverse('cosinnus:etherpad:pad-detail', kwargs=kwargs))
+        return super().dispatch(request, *args, **kwargs)
+    
     def render_to_response(self, context, **response_kwargs):   
         """ Do not allow write access to pads owned by deactivated users.
             Also save last accessed on access """
@@ -160,7 +167,7 @@ class EtherpadWriteView(RequireLoggedInMixin, EtherpadDetailView):
             self.object.last_accessed = now()
             self.object.save(update_fields=['last_accessed'])
         except Exception as e:
-            extra = {'exception': force_text(e), 'user': self.request.user}
+            extra = {'exception': force_str(e), 'user': self.request.user}
             logger.error('Error when trying to set last_accessed', extra=extra)
         return response
 
@@ -237,7 +244,7 @@ class EtherpadHybridListView(RequireReadWriteHybridMixin, HierarchyPathMixin, Hi
             return ret
         except (EtherpadException, URLError) as exc:
             transaction.savepoint_rollback(sid)
-            if 'padName does already exist' in force_text(exc):
+            if 'padName does already exist' in force_str(exc):
                 msg = _('Etherpad with name "%(name)s" already exists on pad server. Please use another name.')
                 messages.error(self.request, msg % {'name': form.data.get('title', '')})
                 return self.form_invalid(form)
@@ -309,8 +316,8 @@ class EtherpadEditView(RequireWriteMixin, EtherpadFormMixin, AttachableViewMixin
 pad_edit_view = EtherpadEditView.as_view()
 
 
-class EtherpadDeleteView(RequireWriteMixin, EtherpadFormMixin, HierarchyDeleteMixin, DeleteView):
-    form_view = 'delete'
+class EtherpadDeleteView(RequireWriteMixin, FilterGroupMixin, HierarchyDeleteMixin, DeleteView):
+    model = Etherpad
     message_success = None
     message_error = None
 

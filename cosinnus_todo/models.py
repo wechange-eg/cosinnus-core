@@ -5,7 +5,7 @@ import six
 
 from builtins import object
 from django.db import models, transaction
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.core.cache import cache
 
 from cosinnus.models import BaseTaggableObjectModel
@@ -39,6 +39,7 @@ PRIORITY_CHOICES = (
 
 @six.python_2_unicode_compatible
 class TodoEntry(LikeableObjectMixin, BaseTaggableObjectModel):
+    """ Model for TODOs. """
 
     SORT_FIELDS_ALIASES = [
         ('title', 'title'),

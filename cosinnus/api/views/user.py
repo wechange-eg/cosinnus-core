@@ -3,7 +3,7 @@ import json
 import random
 
 from django.contrib.auth import get_user_model, authenticate, login
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from oauth2_provider.decorators import protected_resource
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import api_view
@@ -96,7 +96,8 @@ class OAuthUserView(APIView):
     """
 
     def get(self, request):
-        if request.user.is_authenticated:
+        # prevent access for guest users
+        if request.user.is_authenticated and not request.user.is_guest:
             user = request.user
             avatar_url = user.cosinnus_profile.get_avatar_thumbnail_url(size=(200, 200)) if user.cosinnus_profile.avatar else ""
             if avatar_url:
@@ -140,6 +141,9 @@ class OAuthUserView(APIView):
 
 @protected_resource(scopes=['read'])
 def oauth_user(request):
+    # prevent access for guest users
+    if not request.resource_owner.is_authenticated or request.resource_owner.is_guest:
+        return HttpResponseForbidden()
     return HttpResponse(json.dumps(
         {
             'id': request.resource_owner.id,
@@ -153,6 +157,9 @@ def oauth_user(request):
 
 @protected_resource(scopes=['read'])
 def oauth_profile(request):
+    # prevent access for guest users
+    if not request.resource_owner.is_authenticated or request.user.is_guest:
+        return HttpResponseForbidden()
     profile = request.resource_owner.cosinnus_profile
     media_tag_fields = ['visibility', 'location',
                         'location_lat', 'location_lon',

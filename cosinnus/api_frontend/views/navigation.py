@@ -2,7 +2,7 @@ from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 from django.db.models import Case, Count, When
 from django.urls.base import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.utils.translation import pgettext
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
@@ -20,6 +20,7 @@ from cosinnus.models.group_extra import CosinnusConference
 from cosinnus.models.user_dashboard import DashboardItem, MenuItem
 from cosinnus.trans.group import CosinnusConferenceTrans, CosinnusProjectTrans, CosinnusSocietyTrans
 from cosinnus.utils.dates import datetime_from_timestamp, timestamp_from_datetime
+from cosinnus.utils.functions import resolve_class
 from cosinnus.utils.permissions import check_user_can_create_conferences, check_user_can_create_groups, \
     check_user_portal_manager
 from cosinnus.utils.user import get_unread_message_count_for_user
@@ -243,10 +244,14 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                 for id, label, url, icon in settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS
             ])
         if community_space_items:
+            community_space_actions = [
+                MenuItem(CosinnusSocietyTrans.BROWSE_ALL, reverse('cosinnus:group__group-list'), id="BrowseGroups"),
+                MenuItem(CosinnusProjectTrans.BROWSE_ALL, reverse('cosinnus:group-list'), id="BrowseProjects"),
+            ]
             community_space = {
                 'header': f'{settings.COSINNUS_PORTAL_NAME.upper()} {_("Community")}',
                 'items': community_space_items,
-                'actions': [],
+                'actions': community_space_actions,
             }
         spaces['community'] = community_space
 
@@ -263,6 +268,8 @@ class SpacesView(MyGroupsClusteredMixin, APIView):
                 conference_space_actions = [
                     MenuItem(CosinnusConferenceTrans.CREATE_NEW, reverse('cosinnus:conference__group-add'),
                              id='CreateConference'),
+                    MenuItem(CosinnusConferenceTrans.BROWSE_ALL, reverse('cosinnus:conference__group-list'),
+                             id="BrowseConferenes"),
                 ]
             if conference_space_items or conference_space_actions:
                 conference_space = {
@@ -765,8 +772,11 @@ class LanguageMenuItemMixin:
         language_item_label = request.LANGUAGE_CODE.upper() if current_language_as_label else _('Change Language')
         language_item_icon = None if current_language_as_label else 'fa-language'
         language_item = MenuItem(language_item_label, icon=language_item_icon, id='ChangeLanguage')
-        language_selection = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES,
+        if settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES:
+            language_selection = filter(lambda l: l[0] in settings.COSINNUS_V3_FRONTEND_SUPPORTED_LANGUAGES,
                                     settings.LANGUAGES)
+        else:
+            language_selection = settings.LANGUAGES
         language_subitems = []
         for code, language in language_selection:
             selected = code == request.LANGUAGE_CODE
@@ -903,22 +913,26 @@ class ProfileView(LanguageMenuItemMixin, APIView):
 
         if request.user.is_authenticated:
             profile_menu = []
-
+            
+            profile_label = _('My Profile')
+            if request.user.is_guest:
+                profile_label = _('My Guest Account')
             # profile pages
             profile_menu_items = [
-                MenuItem(_('My Profile'), reverse('cosinnus:profile-detail'), 'fa-circle-user', id='Profile'),
+                MenuItem(profile_label, reverse('cosinnus:profile-detail'), 'fa-circle-user', id='Profile'),
             ]
-            if settings.COSINNUS_V3_FRONTEND_ENABLED:
-                profile_menu_items.append(
-                    MenuItem(_('Set up my Profile'), reverse('cosinnus:v3-frontend-setup-profile'), 'fa-pen',
-                             id='SetupProfile'),
-                )
-            profile_menu_items.extend([
-                MenuItem(_('Edit my Profile'), reverse('cosinnus:profile-edit'), 'fa-gear', id='EditProfile'),
-                MenuItem(_('Notification Preferences'), reverse('cosinnus:notifications'), 'fa-envelope',
-                         id='NotificationPreferences'),
-
-            ])
+            if not request.user.is_guest:
+                if settings.COSINNUS_V3_FRONTEND_ENABLED:
+                    profile_menu_items.append(
+                        MenuItem(_('Set up my Profile'), reverse('cosinnus:v3-frontend-setup-profile'), 'fa-pen',
+                                 id='SetupProfile'),
+                    )
+                profile_menu_items.extend([
+                    MenuItem(_('Edit my Profile'), reverse('cosinnus:profile-edit'), 'fa-gear', id='EditProfile'),
+                    MenuItem(_('Notification Preferences'), reverse('cosinnus:notifications'), 'fa-envelope',
+                             id='NotificationPreferences'),
+    
+                ])
             profile_menu.extend(profile_menu_items)
 
             # language
@@ -927,7 +941,7 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                 profile_menu.append(language_item)
 
             # payments
-            if settings.COSINNUS_PAYMENTS_ENABLED or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY \
+            if not request.user.is_guest and settings.COSINNUS_PAYMENTS_ENABLED or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY \
                     and request.user.is_superuser:
                 from wechange_payments.models import Subscription
                 current_subscription = Subscription.get_current_for_user(request.user)
@@ -944,7 +958,10 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                 profile_menu.append(administration_item)
 
             # logout
-            logout_item = MenuItem(_('Logout'), reverse('logout'), 'fa-right-from-bracket', id='Logout')
+            logout_label = _('Logout')
+            if request.user.is_guest:
+                logout_label = _('Leave guest access')
+            logout_item = MenuItem(logout_label, reverse('logout'), 'fa-right-from-bracket', id='Logout')
             profile_menu.append(logout_item)
 
         return Response(profile_menu)
@@ -1032,7 +1049,7 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                                 "label": "Rocket.Chat",
                                 "url": "/messages/",
                                 "is_external": False,
-                                "icon": "fa-envelope",
+                                "icon": "messages",
                                 "image": None,
                                 "badge": None,
                                 "selected": False
@@ -1123,7 +1140,7 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
         # services part
         services_navigation_items = []
 
-        if request.user.is_authenticated:
+        if request.user.is_authenticated and not request.user.is_guest:
             # cloud
             if settings.COSINNUS_CLOUD_ENABLED:
                 services_navigation_items.append(
@@ -1135,12 +1152,12 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
             if 'cosinnus_message' not in settings.COSINNUS_DISABLED_COSINNUS_APPS:
                 if settings.COSINNUS_ROCKET_ENABLED:
                     services_navigation_items.append(
-                        MenuItem('Rocket.Chat', reverse('cosinnus:message-global'), icon='fa-envelope',
+                        MenuItem('Rocket.Chat', reverse('cosinnus:message-global'), icon='messages',
                                  is_external=settings.COSINNUS_ROCKET_OPEN_IN_NEW_TAB, id='Chat')
                     )
                 else:
                     services_navigation_items.append(
-                        MenuItem( _('Messages'), reverse('postman:inbox'), icon='fa-envelope', id='Messages')
+                        MenuItem( _('Messages'), reverse('postman:inbox'), icon='messages', id='Messages')
                     )
         main_navigation_items['services'] = services_navigation_items
 
@@ -1153,7 +1170,8 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
         if request.user.is_authenticated:
 
             # alerts
-            right_navigation_items.append(MenuItem(_('Alerts'), icon='fa-bell', id='Alerts'))
+            if not request.user.is_guest:
+                right_navigation_items.append(MenuItem(_('Alerts'), icon='fa-bell', id='Alerts'))
 
             # profile
             right_navigation_items.append(
@@ -1176,7 +1194,10 @@ class MainNavigationView(LanguageMenuItemMixin, APIView):
                 )
 
         main_navigation_items['right'] = right_navigation_items
-
+        
+        # allow portals to add links via a dropin defined in `COSINNUS_V3_MENU_PORTAL_LINKS_DROPIN`
+        main_navigation_items = CosinnusNavigationPortalLinks().modifiy_main_navigation(main_navigation_items)
+        
         return Response(main_navigation_items)
 
 
@@ -1301,3 +1322,22 @@ class VersionHistoryUnreadCountView(APIView):
             'count': unread_versions_count,
         }
         return Response(unread_versions)
+
+
+class CosinnusNavigationPortalLinksBase(object):
+    """ A class that modifies or provides additional navbar links returned in
+        various navigation API endpoints.
+        Used by defining an extending class in a portal and specifying that class for
+        `COSINNUS_V3_MENU_PORTAL_LINKS_DROPIN`. The class can then modify the
+        links returned by the API endpoints. """
+    
+    def modifiy_main_navigation(self, main_navigation_items):
+        # noop, override this function in your portal's dropin
+        return main_navigation_items
+        
+
+# allow dropin of extending class
+CosinnusNavigationPortalLinks = CosinnusNavigationPortalLinksBase
+if getattr(settings, 'COSINNUS_V3_MENU_PORTAL_LINKS_DROPIN', None):
+    CosinnusNavigationPortalLinks = resolve_class(settings.COSINNUS_V3_MENU_PORTAL_LINKS_DROPIN)
+    

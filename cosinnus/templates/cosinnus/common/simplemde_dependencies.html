@@ -14,16 +14,18 @@
   {% else %}
 	  $(function(){
   {% endif %}
-  	      var simplemde = new EasyMDE({
-	          element: {% if lazy %}input{% else %}$('#{{ element_id }}')[0]{% endif %},
-	          indentWithTabs: false,
-	          shortcuts: {},
-	          spellChecker: false,
-	          status: false,
-	          styleSelectedText: false,
-	          autoDownloadFontAwesome: false,
-	          forceSync: true,
-	          toolbar: [
+      var tarEl = {% if lazy %}input{% else %}$('#{{ element_id }}')[0]{% endif %};
+      if (typeof tarEl != 'undefined' && tarEl) {
+          var simplemde = new EasyMDE({
+              element: tarEl,
+              indentWithTabs: false,
+              shortcuts: {},
+              spellChecker: false,
+              status: false,
+              styleSelectedText: false,
+              autoDownloadFontAwesome: false,
+              forceSync: true,
+              toolbar: [
                   "bold",
                   "italic",
                   "strikethrough",
@@ -47,26 +49,27 @@
                       title: {% trans "Disable editor" as title_i18n %}{{ title_i18n|json|safe }},
                   }
               ],
-	      });
+          });
 
-	      {% if value %}
-	          simplemde.value($('<textarea />').html(decodeURIComponent("{{ value|urlencode }}")).text());
-	      {% endif %}
-	      inited_simplemde = simplemde;
+          {% if value %}
+              simplemde.value($('<textarea />').html(decodeURIComponent("{{ value|urlencode }}")).text());
+          {% endif %}
+          inited_simplemde = simplemde;
 
-        if (typeof window.simplemdes == 'undefined') {
-          window.simplemdes = []
-          window.simplemdes.push(inited_simplemde)
-        } else {
-          window.simplemdes.push(inited_simplemde)
-        }
+          if (typeof window.simplemdes == 'undefined') {
+              window.simplemdes = []
+              window.simplemdes.push(inited_simplemde)
+          } else {
+            window.simplemdes.push(inited_simplemde)
+          }
 
-        if (typeof window.simplemdesIds == 'undefined') {
-          window.simplemdesIds = []
-          window.simplemdesIds.push({{ element_id }})
-        } else {
-          window.simplemdesIds.push({{ element_id }})
-        }
+          if (typeof window.simplemdesIds == 'undefined') {
+            window.simplemdesIds = []
+            window.simplemdesIds.push('{{ element_id }}')
+          } else {
+            window.simplemdesIds.push('{{ element_id }}')
+          }
+      }
 
   {% if lazy %}
     };
@@ -89,54 +92,56 @@
 
    $(fields_with_language).each(function(index){
     var element_id = fields_with_language[index]
-    console.log(element_id)
     if(jQuery.inArray(element_id, window.simplemdesIds) == -1 || typeof window.simplemdesIds == 'undefined') {
-        var new_simplemde = new EasyMDE({
-          element: $('#' + element_id)[0],
-          indentWithTabs: false,
-          shortcuts: {},
-          spellChecker: false,
-          status: false,
-          styleSelectedText: false,
-          autoDownloadFontAwesome: false,
-          forceSync: true,
-          toolbar: [
-            "bold",
-            "italic",
-            "strikethrough",
-            "heading",
-            "|",
-            "image",
-            "link",
-            "|",
-            "unordered-list",
-            "ordered-list",
-            "|",
-            "preview",
-            {
-              name: "disableBtn",
-              action: (editor) => {
-                editor.toolbar = false;
-                editor.toTextArea();
-                editor = null;
-              },
-              className: "btn fa fa-window-close",
-              title: {% trans "Disable editor" as title_i18n %}{{ title_i18n|json|safe }},
+        var tarEl = $('#' + element_id)[0];
+        if (typeof tarEl != 'undefined' && tarEl) {
+            var new_simplemde = new EasyMDE({
+              element: tarEl,
+              indentWithTabs: false,
+              shortcuts: {},
+              spellChecker: false,
+              status: false,
+              styleSelectedText: false,
+              autoDownloadFontAwesome: false,
+              forceSync: true,
+              toolbar: [
+                "bold",
+                "italic",
+                "strikethrough",
+                "heading",
+                "|",
+                "image",
+                "link",
+                "|",
+                "unordered-list",
+                "ordered-list",
+                "|",
+                "preview",
+                {
+                  name: "disableBtn",
+                  action: (editor) => {
+                    editor.toolbar = false;
+                    editor.toTextArea();
+                    editor = null;
+                  },
+                  className: "btn fa fa-window-close",
+                  title: {% trans "Disable editor" as title_i18n %}{{ title_i18n|json|safe }},
+                }
+              ],
+            });
+            if (typeof window.simplemdes == 'undefined') {
+              window.simplemdes = []
+              window.simplemdes.push(new_simplemde)
+            } else {
+              window.simplemdes.push(new_simplemde)
             }
-          ],
-        });
-        if (typeof window.simplemdes == 'undefined') {
-          window.simplemdes = []
-          window.simplemdes.push(new_simplemde)
-        } else {
-          window.simplemdes.push(new_simplemde)
-        }
 
-        if (typeof window.simplemdesIds == 'undefined') {
-          window.simplemdesIds = []
-          window.simplemdesIds.push(element_id)
-        } else {
-          window.simplemdesIds.push(element_id)
+            if (typeof window.simplemdesIds == 'undefined') {
+              window.simplemdesIds = []
+              window.simplemdesIds.push(element_id)
+            } else {
+              window.simplemdesIds.push(element_id)
+            }
         }
       }
     })

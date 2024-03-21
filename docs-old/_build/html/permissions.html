@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Permissions &#8212; Cosinnus 1.19.6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=89b800e6" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=436d026a"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Template Tags Bundled With Cosinnus" href="templatetags.html" />
+    <link rel="prev" title="Hierarchical Object Organisation" href="hierarchy.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="templatetags.html" title="Template Tags Bundled With Cosinnus"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="hierarchy.html" title="Hierarchical Object Organisation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Cosinnus 1.19.6 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Permissions</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="permissions">
+<h1>Permissions<a class="headerlink" href="#permissions" title="Permalink to this heading">¶</a></h1>
+<p>The access to all objects that are part of the Cosinnus environment are based on
+the following permission model:</p>
+<ul class="simple">
+<li><p>A user can be <em>authenticated</em></p></li>
+<li><p>A user that is <em>authenticated</em> can be a <em>superuser</em></p></li>
+<li><p>A user that is <em>authenticated</em> can be a <em>group member</em></p></li>
+<li><p>A user that is a <em>group member</em> can be a <em>group admin</em> (This implies that a
+<em>group admin</em> always is a <em>group member</em> of that group)</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Due to a <a class="reference external" href="https://code.djangoproject.com/ticket/6707">bug in Django</a> <strong>DO
+NOT</strong> remove a <em>group member</em> that is still a <em>group admin</em>!</p>
+</div>
+<p>Further more:</p>
+<ul class="simple">
+<li><p>A group can be <em>public</em></p></li>
+</ul>
+<p>Additionally the access to objects is differentiated between <em>read</em> access,
+<em>write</em> access and <em>admin</em> access. Read access is e.g.:</p>
+<ul class="simple">
+<li><p>List all objects of a certain type</p></li>
+<li><p>Show the details for a certain object</p></li>
+</ul>
+<p>Write access is e.g.:</p>
+<ul class="simple">
+<li><p>Create an object of a certain type</p></li>
+<li><p>Update a certain object</p></li>
+<li><p>Delete a certain object</p></li>
+</ul>
+<p>Admin access is e.g.:</p>
+<ul class="simple">
+<li><p>Modify group name</p></li>
+<li><p>Add / remove group members</p></li>
+</ul>
+<p>Taking all those restrictions into account results in the following permission
+schema:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>authenticated</p></th>
+<th class="head"><p>group member</p></th>
+<th class="head"><p>group admin</p></th>
+<th class="head"><p>superuser</p></th>
+<th class="head"><p>public</p></th>
+<th class="head"><p>read</p></th>
+<th class="head"><p>write</p></th>
+<th class="head"><p>admin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NO</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>YES</p></td>
+<td><p>YES</p></td>
+<td><p>NO</p></td>
+<td><p>NO</p></td>
+</tr>
+<tr class="row-odd"><td><p>NO</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>NO</p></td>
+<td><p>NO</p></td>
+<td><p>NO</p></td>
+<td><p>NO</p></td>
+</tr>
+<tr class="row-even"><td><p>YES</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>YES</p></td>
+<td><p>x</p></td>
+<td><p>YES</p></td>
+<td><p>YES</p></td>
+<td><p>YES</p></td>
+</tr>
+<tr class="row-odd"><td><p>YES</p></td>
+<td><p>x</p></td>
+<td><p>YES</p></td>
+<td><p>NO</p></td>
+<td><p>x</p></td>
+<td><p>YES</p></td>
+<td><p>YES</p></td>
+<td><p>YES</p></td>
+</tr>
+<tr class="row-even"><td><p>YES</p></td>
+<td><p>YES</p></td>
+<td><p>NO</p></td>
+<td><p>NO</p></td>
+<td><p>x</p></td>
+<td><p>YES</p></td>
+<td><p>YES</p></td>
+<td><p>NO</p></td>
+</tr>
+<tr class="row-odd"><td><p>YES</p></td>
+<td><p>NO</p></td>
+<td><p>NO</p></td>
+<td><p>NO</p></td>
+<td><p>YES</p></td>
+<td><p>YES</p></td>
+<td><p>YES</p></td>
+<td><p>NO</p></td>
+</tr>
+<tr class="row-even"><td><p>YES</p></td>
+<td><p>NO</p></td>
+<td><p>NO</p></td>
+<td><p>NO</p></td>
+<td><p>NO</p></td>
+<td><p>NO</p></td>
+<td><p>NO</p></td>
+<td><p>NO</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="hierarchy.html"
+                          title="previous chapter">Hierarchical Object Organisation</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="templatetags.html"
+                          title="next chapter">Template Tags Bundled With Cosinnus</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/permissions.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="templatetags.html" title="Template Tags Bundled With Cosinnus"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="hierarchy.html" title="Hierarchical Object Organisation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Cosinnus 1.19.6 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Permissions</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2013 - 2014, Sinnwerkstatt Medienagentur GmbH.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    </div>
+  </body>
+</html>

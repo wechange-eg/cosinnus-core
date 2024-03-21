@@ -53,7 +53,7 @@ from django.db.models import Q
 from django.http import QueryDict
 from django.template import Template, Context, TemplateSyntaxError, TemplateDoesNotExist
 from django.test import TestCase, TransactionTestCase
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.formats import localize
 from django.utils import six
 from django.utils.six.moves import reload_module
@@ -1647,7 +1647,7 @@ class FiltersTest(BaseTest):
         # (1.2) template/__init__.py/_render_value_in_context()
         # (1.3) template/base.py/_render_value_in_context()
         # (1.6) template/base.py/render_value_in_context()
-        default = force_text(localize(dt))
+        default = force_str(localize(dt))
 
         self.check_compact_date(dt, default, format='')
         self.check_compact_date(dt, default, format='one')

@@ -15,14 +15,14 @@ from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, UpdateView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import DeleteView, FormView
 from oauth2_provider import models as oauth2_provider_models
 
 from cosinnus.core import signals
-from cosinnus.core.decorators.views import redirect_to_not_logged_in
+from cosinnus.core.decorators.views import redirect_to_not_logged_in, redirect_to_error_page
 from cosinnus.core.mail import send_html_mail
 from cosinnus.forms.profile import UserProfileForm
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, \
@@ -53,7 +53,7 @@ def deactivate_user(user):
  
 def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False):
     """ Deacitvates a user account and marks them for deletion in 30 days """
-    if user.cosinnus_profile:
+    if hasattr(user, 'cosinnus_profile') and user.cosinnus_profile:
         # add a marked-for-deletion flag and a cronjob, deleting the profile using this
         deletion_schedule_time = now() + timedelta(
             days=settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS
@@ -65,6 +65,21 @@ def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False):
     
     # send extended deactivation signal
     signals.user_deactivated_and_marked_for_deletion.send(sender=None, profile=user.cosinnus_profile)
+
+
+def delete_guest_user(user, deactivate_only=True):
+    """ Deletes a user account (permanently or deactivate only) if they are a guest user.
+        Used when a guest user account is no longer needed (after logout) or when it has become
+        invalid (when the token or group it belongs to have been deleted).
+        
+        @param deactivate_only: if True, the guest account will only be disabled, which will still lead to
+            the session becoming unusable. if False, the account will be irrevocably deleted. """
+    if user.is_guest:
+        if deactivate_only:
+            user.is_active = False
+            user.save()
+        else:
+            user.delete()
 
 
 def reactivate_user(user):
@@ -197,9 +212,23 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
     
     def dispatch(self, request, *args, **kwargs):
         self.request = request
+        target_user_is_guest = False
         
         """ Check if the user can access the targeted user profile. """
-        target_user_profile = self.get_object(self.get_queryset())
+        try:
+            target_user_profile = self.get_object(self.get_queryset())
+        except Http404:
+            # check on an unfiltered queryset if we attempt to view a guest user
+            qs = super().get_queryset()
+            slug=self.kwargs.get(self.slug_url_kwarg, None)
+            slug_field = self.get_slug_field()
+            qs = qs.filter(**{'user__' + slug_field: slug})
+            target_user_profile = qs.count() == 1 and qs[0] or None
+            if target_user_profile and target_user_profile.user.is_guest:
+                target_user_is_guest = True
+            else:
+                raise
+        
         if not target_user_profile:
             return redirect_to_not_logged_in(request)
         target_user_visibility = target_user_profile.media_tag.visibility
@@ -209,8 +238,12 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
             # all other views require at least to be logged in
             if not user.is_authenticated:
                 return redirect_to_not_logged_in(request)
-            if not check_user_can_see_user(user, target_user_profile.user):
+            if not check_user_can_see_user(user, target_user_profile.user) and not target_user_is_guest:
                 raise PermissionDenied
+            
+        if target_user_is_guest:
+            messages.warning(request, _('User "%s" is a guest user and has no profile.') % target_user_profile.get_full_name())
+            return redirect_to_error_page(request, view=self)
             
         return super(UserProfileDetailView, self).dispatch(
             request, *args, **kwargs)

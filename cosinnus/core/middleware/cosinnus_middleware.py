@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import re
 from builtins import object
 from functools import partial as curry
 import logging
@@ -12,8 +13,8 @@ from django.db.models import signals
 from django.apps import apps
 from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
-from django.utils.encoding import force_text
-from django.utils.translation import gettext, ugettext_lazy as _
+from django.utils.encoding import force_str
+from django.utils.translation import gettext, gettext_lazy as _
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from cosinnus.conf import settings
@@ -22,7 +23,7 @@ from django.contrib.auth import logout
 from django_otp import user_has_device
 from django.shortcuts import redirect
 from django.utils.deprecation import MiddlewareMixin
-from django.utils.http import is_safe_url
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.contrib.redirects.middleware import RedirectFallbackMiddleware
 from cosinnus.utils.urls import redirect_next_or, group_aware_reverse
 from django.contrib.sessions.middleware import SessionMiddleware
@@ -55,57 +56,8 @@ def CosinnusPermanentRedirect():
         _CosinnusPermanentRedirect = apps.get_model('cosinnus', 'CosinnusPermanentRedirect')
     return _CosinnusPermanentRedirect
 
-
-# these URLs are allowed to be accessed for anonymous accounts, even when everything else
-# is locked down. all integrated-API related URLs and all login/logout URLs should be in here!
-NEVER_REDIRECT_URLS = [
-    '/admin/',
-    '/admin/login/',
-    '/admin/logout/',
-    '/administration/login-2fa/',
-    '/media/',
-    '/static/',
-    '/language',
-    '/api/v1/user/me/',
-    '/api/v1/login/',
-    '/api/v2/navbar/',
-    '/api/v2/header/',
-    '/api/v2/footer/',
-    '/api/v2/statistics/',
-    '/api/v2/token/',
-    
-    '/api/v3/login',
-    '/api/v3/logout',
-    '/api/v3/authinfo',
-    '/api/v3/portal/topics',
-    '/api/v3/portal/tags',
-    '/api/v3/portal/managed_tags',
-    '/api/v3/portal/userprofile_dynamicfields',
-    '/api/v3/portal/settings',
-    '/api/v3/user/profile',
-    '/api/v3/signup',
-    
-    '/api/v3/content/main',
-    
-    '/o/',
-    '/group/forum/cloud/oauth2/',
-    f'/group/{settings.NEWW_FORUM_GROUP_SLUG}/cloud/oauth2/',
-    '/account/verify_email/',
-    
-    # all bbb API endpoints and guest-access views are unlocked (sensitive endpoints have their own logged-in checks)
-    '/bbb/',
-    
-    # these deprecated URLs can be removed from the filter list once the URLs are removed
-    # and their /account/ URL-path equivalents are the only remaining version of the view URL
-    '/administration/list-unsubscribe/',
-    '/administration/list-unsubscribe-result/',
-    '/administration/deactivated/',
-    '/administration/activate/',
-    '/administration/deactivate/',
-    '/administration/verify_email/',
-]
-
-LOGIN_URLS = NEVER_REDIRECT_URLS + [
+# a list of urls that should always be openly accessible as they are required for user logins
+LOGIN_URLS = settings.COSINNUS_NEVER_REDIRECT_URLS + [
     '/login/',
     '/logout/',
     '/integrated/login/',
@@ -120,7 +72,36 @@ LOGIN_URLS = NEVER_REDIRECT_URLS + [
     '/two_factor_auth/settings/setup/',
 ]
 
-EXEMPTED_URLS_FOR_2FA = [url for url in LOGIN_URLS if url != '/admin/']
+# list of url patterns that can still be accessed while in the in-between state
+# of having logged in successfully, but still being required to enter your 2fa token
+# to complete the login
+EXEMPTED_URLS_FOR_2FA = [
+    '/two_factor_auth/token_login/',
+    '/administration/login-2fa/'
+    '/logout/',
+    '/admin/logout/'
+]
+
+# list of url patterns that are not permitted to be accessed during guest login
+GUEST_ACCOUNT_FORBIDDEN_URL_PATTERNS = [
+    r"^/login/$",
+    r"^/signup/$",
+    r"^/profile/(?!$)", # anything below the profile-detail page
+    r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/cloud/", # group cloud direct link
+    r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/conference/apply/",
+    r"^/messages/", # any type of messages, rocketchat etc
+    r"^/nachrichten/",  # any type of postman messages
+    r".*/add/.*", # any type of create view
+    r"^/account/", # PAYL and other account views
+]
+GUEST_ACCOUNT_WHITELISTED_POST_URL_PATTERNS = [
+    r"^/dashboard/api/save_ui_prefs/", # save ui prefs
+]
+GUEST_ACCOUNT_WHITELISTED_SOFT_EDIT_URL_PATTERNS = [
+    r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/event/doodle/(?P<doodle_slug>[^/]+)/", # event poll votes
+    r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/event/(?P<event_slug>[^/]+)/assign_attendance/",  # event attendance
+    r"^/(?P<group_type>[^/]+)/(?P<group>[^/]+)/poll/(?P<poll_slug>[^/]+)/",  # poll votes
+]
 
 # if any of these URLs was requested, auto-redirects in the user's profile settings won't trigger
 NO_AUTO_REDIRECTS = (
@@ -174,17 +155,18 @@ class AdminOTPMiddleware(MiddlewareMixin):
             filter_path = '/'
         
         user = getattr(request, 'user', None)
-
+        
         # check if the user is a superuser and they attempted to access a covered url
-        if user and check_user_superuser(user) and request.path.startswith(filter_path) and not request.path in EXEMPTED_URLS_FOR_2FA:
+        if user and check_user_superuser(user) and request.path.startswith(filter_path) and \
+                not any([request.path.startswith(prefix) for prefix in EXEMPTED_URLS_FOR_2FA]):
             # check if the user is not yet 2fa verified, if so send them to the verification view
             if not user.is_verified():
                 next_url = urlencode(request.get_full_path())
-                return redirect(reverse('cosinnus:login-2fa') + (('?next=%s' % next_url) if is_safe_url(next_url, allowed_hosts=[request.get_host()]) else ''))
-        elif user and user.is_authenticated and not check_user_superuser(user) and request.path.startswith('/admin/') and not request.path in EXEMPTED_URLS_FOR_2FA:
+                return redirect(reverse('cosinnus:two-factor-auth-token') + (('?next=%s' % next_url) if url_has_allowed_host_and_scheme(next_url, allowed_hosts=[request.get_host()]) else ''))
+        elif user and user.is_authenticated and not check_user_superuser(user) and request.path.startswith('/admin/') and not any([request.path.startswith(prefix) for prefix in EXEMPTED_URLS_FOR_2FA]):
             # normal users will never be redirected to the admin area
             return redirect('cosinnus:user-dashboard')
-
+        
         return None
 
     
@@ -202,13 +184,14 @@ class UserOTPMiddleware(MiddlewareMixin):
         
         filter_path = '/'
         user = getattr(request, 'user', None)
-
+        
         # check if the user is authenticated and they attempted to access a covered url
-        if user and user.is_authenticated and request.path.startswith(filter_path) and not request.path in EXEMPTED_URLS_FOR_2FA:
+        if user and user.is_authenticated and request.path.startswith(filter_path) and \
+                not any([request.path.startswith(prefix) for prefix in EXEMPTED_URLS_FOR_2FA]):
             # check if the user is not yet 2fa verified, if so send them to the verification view
             if user_has_device(user) and not user.is_verified():
                 next_url = urlencode(request.get_full_path())
-                return redirect(reverse('cosinnus:two-factor-auth-token') + (('?next=%s' % next_url) if is_safe_url(next_url, allowed_hosts=[request.get_host()]) else ''))
+                return redirect(reverse('cosinnus:two-factor-auth-token') + (('?next=%s' % next_url) if url_has_allowed_host_and_scheme(next_url, allowed_hosts=[request.get_host()]) else ''))
 
         return None
 
@@ -293,7 +276,7 @@ class GroupPermanentRedirectMiddleware(MiddlewareMixin, object):
         except Exception as e:
             if settings.DEBUG:
                 raise
-            logger.error('cosinnus.GroupPermanentRedirectMiddleware: Error while processing possible group redirect!', extra={'exception', force_text(e)})
+            logger.error('cosinnus.GroupPermanentRedirectMiddleware: Error while processing possible group redirect!', extra={'exception', force_str(e)})
 
 
 class ForceInactiveUserLogoutMiddleware(MiddlewareMixin):
@@ -305,6 +288,13 @@ class ForceInactiveUserLogoutMiddleware(MiddlewareMixin):
             do_logout = False
             if not request.user.is_active:
                 messages.error(request, _('This account is no longer active. You have been logged out.'))
+                do_logout = True
+            if request.user.is_guest and (not request.user.cosinnus_profile.guest_access_object
+                    or not request.user.cosinnus_profile.guest_access_object.group
+                    or not request.user.cosinnus_profile.guest_access_object.group.is_active):
+                # if a guest account's access token has been deleted or the group for that token is deactivated
+                # or doesn't exist any more, log the user out
+                messages.error(request, _('Your guest access has expired. You have been logged out.'))
                 do_logout = True
             elif settings.COSINNUS_USER_SIGNUP_FORCE_EMAIL_VERIFIED_BEFORE_LOGIN \
                     and CosinnusPortal().get_current().email_needs_verification and not request.user.cosinnus_profile.email_verified:
@@ -451,14 +441,21 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
         usually to force some routing behaviour, like logged-in users being redirected off /login """
     
     def process_request(self, request):
-        if any([request.path.startswith(never_path) for never_path in NEVER_REDIRECT_URLS]):
+        if any([request.path.startswith(never_path) for never_path in settings.COSINNUS_NEVER_REDIRECT_URLS]):
             return
         
-        if request.user.is_authenticated:
+        # close off the rest-framework login/logout as it would circumvent our login restrictions
+        if request.path.startswith('/api-auth/login'):
+            return redirect('login')
+        if request.path.startswith('/api-auth/logout'):
+            return redirect('logout')
+        
+        user = request.user
+        if user.is_authenticated:
             # hiding login and signup pages for logged in users
             if request.path in ['/login/', '/signup/']:
                 # catch redirect loop for superusers trying to access the admin area but someone forgot to make them staff as well
-                if request.GET.get('next', '').startswith('/admin/') and request.user.is_superuser and not request.user.is_staff:
+                if request.GET.get('next', '').startswith('/admin/') and user.is_superuser and not user.is_staff:
                     messages.warning(request, _('You cannot access the admin area because you are missing the "Staff" permission even though you are a superuser. Please ask another admin to grant it to you.'))
                     return redirect('cosinnus:profile-detail')
                 redirect_url = redirect_next_or(request, getattr(settings, 'COSINNUS_LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET', None))
@@ -470,14 +467,47 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
                     del request.session['next_redirect_pending']
                 # redirect if it is set as a next redirect in user-settings
                 elif request.method == 'GET' and request.path not in NO_AUTO_REDIRECTS:
-                    settings_redirect = request.user.cosinnus_profile.pop_next_redirect()
+                    settings_redirect = user.cosinnus_profile.pop_next_redirect()
                     if settings_redirect:
                         # set flag so multiple redirects aren't consumed instantly
                         request.session['next_redirect_pending'] = True
                         if settings_redirect[1]:
                             messages.success(request, _(settings_redirect[1]))
                         return HttpResponseRedirect(settings_redirect[0])
-                
+            
+            # guest account site-lockoff logic
+            if user.is_guest:
+                # check if the URL matches any of the guest-account-locked URLs
+                locked = False
+                # sanity check: if this guest user still has a session, but guest access was disabled, lock everything
+                if not settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLED:
+                    if request.path != reverse('cosinnus:guest-user-not-allowed') and request.path not in LOGIN_URLS:
+                        locked = True
+                # disable any POST requests, except whitelested and "soft edits" if enabled
+                if request.method == 'POST':
+                    locked = True
+                    for whitelist_pattern in GUEST_ACCOUNT_WHITELISTED_POST_URL_PATTERNS:
+                        if re.match(whitelist_pattern, request.path):
+                            locked = False
+                            break
+                    if locked and settings.COSINNUS_USER_GUEST_ACCOUNTS_ENABLE_SOFT_EDITS:
+                        for whitelist_pattern in GUEST_ACCOUNT_WHITELISTED_SOFT_EDIT_URL_PATTERNS:
+                            if re.match(whitelist_pattern, request.path):
+                                locked = False
+                                break
+                if not locked:
+                    for url_pattern in GUEST_ACCOUNT_FORBIDDEN_URL_PATTERNS:
+                        if re.match(url_pattern, request.path):
+                            locked = True
+                            break
+                if locked:
+                    if request.method == 'POST':
+                        messages.warning(request, _('The action you tried to perform is not allowed for guest accounts.'))
+                    else:
+                        messages.warning(request, _('The page you tried to visit is not available for guest accounts.'))
+                    return redirect('cosinnus:guest-user-not-allowed')
+            
+            
                 
 class MovedTemporarilyRedirectFallbackMiddleware(RedirectFallbackMiddleware):
     """ The default django redirect middleware, but using 302 Temporary instead

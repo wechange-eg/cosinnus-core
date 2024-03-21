@@ -8,6 +8,7 @@ from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.models import MEMBERSHIP_PENDING, MEMBERSHIP_ADMIN
 from cosinnus.utils.dashboard import create_initial_group_widgets
+from cosinnus.utils.settings import get_obfuscated_settings_strings
 from django.http.response import HttpResponse, HttpResponseForbidden,\
     HttpResponseBadRequest
 from django.contrib.auth import get_user_model
@@ -20,7 +21,7 @@ from django.core.cache import cache
 from django.conf import settings
 import json
 import urllib.request, urllib.error, urllib.parse
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 import pickle
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 import datetime
@@ -150,7 +151,7 @@ def setcache(request, content):
     if not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
     
-    content = force_text(content)
+    content = force_str(content)
     cache.set(HOUSEKEEPING_CACHE_KEY, content)
     return HttpResponse("Set '%s' as debug cache entry." % content)
         
@@ -357,8 +358,8 @@ def reset_user_tos_flags(request=None):
         count = 0
         active_users = filter_active_users(get_user_model().objects.all())
         for profile in get_user_profile_model().objects.all().filter(user__in=active_users):
-            del profile.settings['tos_accepted']
-            profile.save(update_fields=['settings'])
+            profile.tos_accepted = False
+            profile.save(update_fields=['tos_accepted'])
             count += 1
         ret = 'Successfully reset the ToS flag for %d users.' % count
         
@@ -377,20 +378,20 @@ def send_testmail(request):
     retmsg = '\n\n<br><br> Use ?mode=[html, direct, direct_html, threaded, override]\n\nThe Answer was: '
     
     if mode == 'html':
-        retmsg += force_text(send_html_mail_threaded(request.user, subject, textfield('This is a test mail from housekeeping.')))
+        retmsg += force_str(send_html_mail_threaded(request.user, subject, textfield('This is a test mail from housekeeping.')))
         return HttpResponse('Sent mail using html mode. ' + retmsg)
     if mode == 'direct':
-        retmsg += force_text(send_mail(request.user.email, subject, template, {}))
+        retmsg += force_str(send_mail(request.user.email, subject, template, {}))
         return HttpResponse('Sent mail using direct mode. ' + retmsg)
     if mode == 'direct_html':
         template = 'cosinnus/housekeeping/test_html_mail.html'
-        retmsg += force_text(send_mail(request.user.email, subject, template, {}, is_html=True))
+        retmsg += force_str(send_mail(request.user.email, subject, template, {}, is_html=True))
         return HttpResponse('Sent mail using direct HTML mode. ' + retmsg)
     if mode == 'threaded':
-        retmsg += force_text(send_mail_or_fail_threaded(request.user.email, subject, template, {}))
+        retmsg += force_str(send_mail_or_fail_threaded(request.user.email, subject, template, {}))
         return HttpResponse('Sent mail using threaded mode. ' + retmsg)
     if mode == 'override':
-        retmsg += force_text(EmailMessage(subject, 'No content', 'Testing <%s>' % settings.COSINNUS_DEFAULT_FROM_EMAIL, [request.user.email]).send())
+        retmsg += force_str(EmailMessage(subject, 'No content', 'Testing <%s>' % settings.COSINNUS_DEFAULT_FROM_EMAIL, [request.user.email]).send())
         return HttpResponse('Sent mail using override mode. ' + retmsg)
         
     return HttpResponse('Did not send any mail. ' + retmsg)
@@ -466,16 +467,8 @@ def print_settings(request):
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
     setts = ''
-    KEY_BLACKLIST = ['COSINNUS_CLOUD_NEXTCLOUD_AUTH',]
-    for key in dir(settings):
-        val = force_text(getattr(settings, key))
-        # obfuscate passwords. for long ones, show the first few chars
-        if 'password' in key.lower() or 'password' in val.lower() or  \
-                'secret' in key.lower() or 'secret' in val.lower() or \
-                'key' in key.lower() or key in KEY_BLACKLIST:
-            if val.strip() and val.strip() not in ('None', 'null', '0', '[]', '{}'):
-                val = str(val)
-                val = (len(val) > 3 and val[:3] or '') + '***'
+    obfuscated_settings = get_obfuscated_settings_strings()
+    for key, val in obfuscated_settings.items():
         setts += '%s = %s<br/>' % (key, val)
     if not request:
         return setts

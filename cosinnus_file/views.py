@@ -10,7 +10,7 @@ from os.path import basename
 from django.contrib import messages
 from django.http import (Http404, HttpResponse, HttpResponseNotFound,
     HttpResponseRedirect, StreamingHttpResponse)
-from django.utils.translation import ungettext, ugettext_lazy as _
+from django.utils.translation import ngettext, gettext_lazy as _
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
     RedirectView, UpdateView)
 from django.views.generic.edit import FormMixin
@@ -39,6 +39,7 @@ from cosinnus.core.decorators.views import get_group_for_request
 from cosinnus.utils.permissions import check_group_create_objects_access,\
     check_object_read_access
 from cosinnus.utils.functions import clean_single_line_text
+from cosinnus.utils.http import is_ajax
 from cosinnus.views.attached_object import build_attachment_field_result
 
 
@@ -198,7 +199,7 @@ class FileListView(RequireReadMixin, FilterGroupMixin,
             download_fn = '_'.join([basename(f.file.name) for f in files])[:50]
             if missing:
                 messages.warning(self.request,
-                    ungettext(
+                    ngettext(
                         'A problem occurred during export. The following file is missing: %(filename)s.',
                         'A problem occurred during export. The following files are missing: %(filename)s.',
                         len(missing)
@@ -513,7 +514,7 @@ def file_upload_inline(request, group):
             - 'add_to_select2' (default): Will render a select2 pill and in JS, append it to the attach-file select2 field.
             - 'refresh_page' will add a message to the request and in JS refresh the browser page
             - 'render_object' will render the single file template(s) and in JS append them to the file list """
-    if not request.is_ajax() or not request.method=='POST':
+    if not is_ajax(request) or not request.method=='POST':
         return HttpResponseNotAllowed(['POST'])
     
     on_success = request.POST.get('on_success', 'add_to_select2')
@@ -615,7 +616,7 @@ def file_upload_inline(request, group):
             
     if result_list:
         if on_success == 'refresh_page':
-            messages.success(request, ungettext('%(count)d File was added successfully.', '%(count)d Files were added successfully.', len(result_list)) % {'count': len(result_list)})
+            messages.success(request, ngettext('%(count)d File was added successfully.', '%(count)d Files were added successfully.', len(result_list)) % {'count': len(result_list)})
         
         
         return JSONResponse({'status': 'ok', 'on_success': on_success, 'data': result_list})

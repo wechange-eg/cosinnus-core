@@ -109,13 +109,13 @@
                 {% endblock %}
 				
 				{% block starred_objects_widget %}
-					{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}					
+					{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS and request.user.is_authenticated and not request.user.is_guest %}
 						<div class="starred-objects-widget-root"></div>
 				    {% endif %}
 				{% endblock %}
 					
 				{% block starred_users_widget %}
-	                {% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}         
+	                {% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS and request.user.is_authenticated and not request.user.is_guest %}
     					<div class="starred-users-widget-root"></div>
 					{% endif %}
 				{% endblock %}
@@ -129,7 +129,7 @@
                 {% endblock %}
 				
 				{% block followed_objects_widget %}
-					{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS %}
+					{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS and request.user.is_authenticated and not request.user.is_guest %}
 					    <div class="followed-objects-widget-root"></div>
 					{% endif %}
 				{% endblock %}

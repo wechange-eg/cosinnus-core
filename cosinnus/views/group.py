@@ -35,11 +35,11 @@ from django.urls import reverse, reverse_lazy, NoReverseMatch
 from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy
+from django.utils.translation import gettext_lazy as _, pgettext_lazy
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.generic import (CreateView, DeleteView, DetailView,
                                   ListView, UpdateView, TemplateView)
@@ -51,6 +51,7 @@ from extra_views import (CreateWithInlinesView, InlineFormSetFactory,
 from multiform.forms import InvalidArgument
 
 from cosinnus import cosinnus_notifications
+from cosinnus.admin import admin_log_action
 from cosinnus.api.serializers.group import GroupSimpleSerializer
 from cosinnus.api.serializers.user import UserSerializer
 from cosinnus.core import signals
@@ -483,7 +484,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             _q = get_user_model().objects.all()
             _q = _q.select_related('cosinnus_profile')
             if not user_is_superuser:
-                _q = filter_active_users(_q)
+                _q = filter_active_users(_q, filter_guests=False)
             _q = _q.order_by('first_name', 'last_name')
 
             admins = _q.filter(id__in=admin_ids)
@@ -493,7 +494,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
 
             hidden_member_count = 0
             if user_is_superuser:
-                user_count = filter_active_users(members).count()
+                user_count = filter_active_users(members, filter_guests=False).count()
             else:
                 user_count = members.count() # do not filter again as we did it before higher up
             # for admins: count the inactive users
@@ -855,6 +856,9 @@ class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin,
                     audience=get_user_model().objects.filter(
                         id__in=self.group.members)
                 )
+        # create admin logentry.
+        admin_log_action(self.request.user, self.object, _('Edited.'))
+
         messages.success(self.request, self.message_success % {'team_type':self.object._meta.verbose_name})
         return super(GroupUpdateView, self).forms_valid(form, inlines)
 
@@ -895,7 +899,7 @@ class GroupConfirmMixin(object):
         """
         if self.success_url:
             # Forcing possible reverse_lazy evaluation
-            url = force_text(self.success_url)
+            url = force_str(self.success_url)
         else:
             raise ImproperlyConfigured(
                 "No URL to redirect to. Provide a success_url.")
@@ -1264,6 +1268,10 @@ class GroupUserInviteMultipleView(RequireAdminMixin, GroupMembershipMixin, FormV
         users = form.cleaned_data.get('users')
         for user in users:
             self.do_invite_valid_user(user, form)
+
+            # create admin logentry.
+            message = _('Invited user "%(user)s".') % {'user': user.get_full_name()}
+            admin_log_action(self.request.user, self.group, message)
         return HttpResponseRedirect(self.get_success_url())
     
     #TODONEXT: error handling!
@@ -1316,18 +1324,30 @@ class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
         current_status = self.object.status
         new_status = form.cleaned_data.get('status')
         
-        if current_status == MEMBERSHIP_ADMIN and new_status != MEMBERSHIP_ADMIN and len(self.group.admins) <= 1:
+        if user.is_guest:
+            messages.error(self.request, _('You cannot promote a guest user account!'))
+        elif current_status == MEMBERSHIP_ADMIN and new_status != MEMBERSHIP_ADMIN and len(self.group.admins) <= 1:
             messages.error(self.request, _('You cannot remove “%(username)s” form '
                 'this team. Only one admin left.') % {'username': full_name(user)})
         else:
             if current_status == MEMBERSHIP_PENDING and new_status == self.membership_status:
                 signals.user_group_join_accepted.send(sender=self, obj=self.group, user=user, audience=[user])
+                # create admin logentry.
+                message = _('Accepted user "%(user)s" as  member.') % {'user': user.get_full_name()}
+                admin_log_action(self.request.user, self.object.group, message)
             if current_status in [MEMBERSHIP_PENDING, self.membership_status] and new_status == MEMBERSHIP_ADMIN \
                     and not user.id == self.request.user.id:
                 cosinnus_notifications.user_group_made_admin.send(sender=self, obj=self.object.group, user=self.request.user, audience=[user])
+                # create admin logentry.
+                message = _('Made user "%(user)s" admin.') % {'user': user.get_full_name()}
+                admin_log_action(self.request.user, self.object.group, message)
             elif current_status == MEMBERSHIP_ADMIN and new_status in [MEMBERSHIP_PENDING, self.membership_status] \
                     and not user.id == self.request.user.id:
                 cosinnus_notifications.user_group_admin_demoted.send(sender=self, obj=self.object.group, user=self.request.user, audience=[user])
+                # create admin logentry.
+                message = _('Made user "%(user)s" member.') % {'user': user.get_full_name()}
+                admin_log_action(self.request.user, self.object.group, message)
+
             ret = super(GroupUserUpdateView, self).form_valid(form)
             # update index for the group
             self.object._refresh_cache()
@@ -1339,12 +1359,14 @@ class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
         return self.group.users
 
 
-class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
-                          UserSelectMixin, DeleteView):
-
+class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin, DeleteView):
+    model = CosinnusGroupMembership
+    slug_field = 'user__username'
+    slug_url_kwarg = 'username'
     membership_status = MEMBERSHIP_MEMBER
 
-    def delete(self, request, *args, **kwargs):
+    @atomic
+    def form_valid(self, form):
         self.object = self.get_object()
         group = self.object.group
         user = self.object.user
@@ -1352,23 +1374,38 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
         if (len(group.admins) > 1 or not group.is_admin(user)):
             if user != self.request.user or check_user_superuser(self.request.user):
                 self.object.delete()
-                
+
             else:
-                messages.error(self.request, _('You cannot remove yourself from a %(team_type)s.') % {'team_type':self.object._meta.verbose_name})
+                messages.error(self.request, _('You cannot remove yourself from a %(team_type)s.') % {
+                    'team_type': self.object._meta.verbose_name})
                 return HttpResponseRedirect(self.get_success_url())
         else:
             messages.error(self.request, _('You cannot remove "%(username)s" form '
-                'this team. Only one admin left.') % {'username': user.get_full_name()})
+                                           'this team. Only one admin left.') % {'username': user.get_full_name()})
             return HttpResponseRedirect(self.get_success_url())
-        
+
         if current_status == MEMBERSHIP_PENDING:
             signals.user_group_join_declined.send(sender=self, obj=group, user=user, audience=[user])
-            messages.success(self.request, _('Your join request was withdrawn from %(team_type)s "%(team_name)s" successfully.') % {'team_type':self.object._meta.verbose_name, 'team_name': group.name})
+            messages.success(self.request,
+                             _('Your join request was withdrawn from %(team_type)s "%(team_name)s" successfully.') % {
+                                 'team_type': self.object._meta.verbose_name, 'team_name': group.name})
         if current_status == MEMBERSHIP_INVITED_PENDING:
-            messages.success(self.request, _('Your invitation to user "%(username)s" was withdrawn successfully.') % {'username': user.get_full_name()})
+            messages.success(self.request, _('Your invitation to user "%(username)s" was withdrawn successfully.') % {
+                'username': user.get_full_name()})
         if current_status == self.membership_status:
             messages.success(self.request, _('User "%(username)s" is no longer a member.') % {'username': user.get_full_name()})
+
+        # create admin logentry.
+        message = _('Removed membership of user "%(user)s".') % {'user': user.get_full_name()}
+        admin_log_action(self.request.user, self.object.group, message)
+
         return HttpResponseRedirect(self.get_success_url())
+
+    def get_queryset(self):
+        return self.model.objects.filter(group=self.group)
+
+    def get_success_url(self):
+        return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.group})
 
 
 class GroupExportView(SamePortalGroupMixin, RequireAdminMixin, TemplateView):
@@ -1436,9 +1473,11 @@ class ActivateOrDeactivateGroupView(TemplateView):
             typed_group.update_index()
             typed_group.update_index_for_all_group_objects()
             messages.success(request, self.message_success_activate % {'team_name': self.group.name})
+            admin_log_action(request.user, self.group, _('Activated.'))
             return redirect(self.group.get_absolute_url())
         else:
             messages.success(request, self.message_success_deactivate % {'team_name': self.group.name})
+            admin_log_action(request.user, self.group, _('Deactivated.'))
             return redirect(reverse('cosinnus:profile-detail'))
     
     def get_context_data(self, **kwargs):
@@ -1677,6 +1716,10 @@ def group_user_recruit(request, group,
         messages.success(request, _("The people with these addresses already have a registered user account and have been invited directly: %s") % ', '.join(existing_newly_invited))
     if success:
         messages.success(request, _("Success! We are now sending out invitations to these email addresses: %s") % ', '.join(success))
+
+        # create admin logentry.
+        message = _('Invited "%(emails)s".') % {'emails': ', '.join(success)}
+        admin_log_action(user, group, message)
         
     return redirect(redirect_url)
 
@@ -1773,7 +1816,7 @@ def group_assign_reflected_object(request, group):
     success_message = _('Your selection for showing this item in projects/groups was updated.')
     if added_groups:
         group_names = ', '.join([show_group.name for show_group in added_groups])
-        success_message = force_text(success_message) + ' ' + force_text(_('This item is now being shown in these projects/groups: %(group_names)s') % {'group_names': group_names})
+        success_message = force_str(success_message) + ' ' + force_str(_('This item is now being shown in these projects/groups: %(group_names)s') % {'group_names': group_names})
     messages.success(request, success_message)
     
     redirect_url = obj.get_absolute_url()

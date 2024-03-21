@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 from builtins import object
 import locale
 import logging
+from threading import Thread
+
 import six
 
 from annoying.functions import get_object_or_None
@@ -17,16 +19,16 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.crypto import get_random_string
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy
+from django.utils.translation import gettext_lazy as _, pgettext_lazy, get_language
 from phonenumber_field.modelfields import PhoneNumberField
 import six
 
 from cosinnus.conf import settings
-from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.group import CosinnusPortal, CosinnusGroupMembership
 from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.utils.validators import validate_file_infection
 from cosinnus_event.mixins import BBBRoomMixin # noqa
-from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
+from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin, TranslatableFormsetJsonFieldMixin
 from cosinnus.utils.files import get_conference_conditions_filename, get_presentation_filename
 from cosinnus.utils.functions import clean_single_line_text, \
     unique_aware_slugify, update_dict_recursive
@@ -627,6 +629,8 @@ class CosinnusConferenceRoom(TranslateableFieldsModelMixin, BBBRoomMixin,
 
     def __init__(self, *args, **kwargs):
         super(CosinnusConferenceRoom, self).__init__(*args, **kwargs)
+        # save for post-save checks
+        self._target_result_group = self.target_result_group
 
     def __str__(self):
         return 'Conference Room %s (Group %s)' % (self.title, self.group.slug)
@@ -646,6 +650,11 @@ class CosinnusConferenceRoom(TranslateableFieldsModelMixin, BBBRoomMixin,
         
         # initialize/sync room-type-specific extras
         self.ensure_room_type_dependencies()
+        
+        # refresh memberships for a result project if it was newly added
+        if self.type == CosinnusConferenceRoom.TYPE_RESULTS:
+            if self.target_result_group and self.target_result_group != self._target_result_group:
+                self.refresh_memberships_for_result_group()
     
     def get_admin_change_url(self):
         """ Returns the django admin edit page for this object. """
@@ -711,19 +720,42 @@ class CosinnusConferenceRoom(TranslateableFieldsModelMixin, BBBRoomMixin,
                 else:
                     logger.error('Could not create a conferenceroom rocketchat room!', 
                                  extra={'conference-room-id': self.id, 'conference-room-slug': self.slug})
+    
+    def refresh_memberships_for_result_group(self):
+        """ After a result project has been reassigned to this room,
+            check all memberships of the room's conference and create mirror memberships
+            for the result project. """
+        room_self = self
+        # we're Threading this entire hook as it might take a while
+        class MembershipUpdateHookThread(Thread):
+            def run(self):
+                for conference_membership in CosinnusGroupMembership.objects.filter(group=room_self.group):
+                    result_group_membership = get_object_or_None(CosinnusGroupMembership, group=room_self.target_result_group,
+                                                                 user=conference_membership.user)
+                    if result_group_membership and result_group_membership.status != conference_membership.status:
+                        result_group_membership.status = conference_membership.status
+                        result_group_membership.save()
+                    if not result_group_membership:
+                        CosinnusGroupMembership.objects.create(
+                            group=room_self.target_result_group,
+                            user=conference_membership.user,
+                            status=conference_membership.status
+                        )
+        MembershipUpdateHookThread().start()
+        
     @property
     def non_table_events_qs(self):
         from cosinnus_event.models import ConferenceEvent # noqa
         return self.events.filter(is_break=False)\
                 .exclude(type=ConferenceEvent.TYPE_COFFEE_TABLE)\
-                .order_by('from_date')
+                .order_by('from_date', 'title')
 
     @property
     def has_event_form(self):
         return self.type in self.ROOM_TYPES_WITH_EVENT_FORM
 
 
-class ParticipationManagement(models.Model):
+class ParticipationManagement(TranslatableFormsetJsonFieldMixin, models.Model):
     """ A settings object for a CosinnusConference that determines how and when 
         CosinnusConferenceApplications may be submitted, as well as other meta options
         for the application options for that conference. """
@@ -976,6 +1008,32 @@ class CosinnusConferenceApplication(models.Model):
         print(options)
         return options
 
+    def get_translated_motivation_answers(self):
+        """ Returns the motivation questions where the question is translated to the current language. """
+        if not settings.COSINNUS_TRANSLATED_FIELDS_ENABLED:
+            # translation is / has been disabled. Return the json field as is.
+            return self.motivation_answers
+        translated_motivation_answers = []
+        current_language = get_language()
+        participation_management = self.conference.participation_management.first()
+        for motivation_answer in self.motivation_answers:
+            # the motivation question is stored in the user language
+            user_translated_motivation_question = motivation_answer.get('question')
+            # using the user translated question per default
+            translated_motivation_question = user_translated_motivation_question
+            for motivation_question in participation_management.motivation_questions:
+                if user_translated_motivation_question in motivation_question.values():
+                    # translate the question back to the current user language
+                    translation_key = f'question_translation_{current_language}'
+                    translated_motivation_question = motivation_question.get(translation_key)
+                    if not translated_motivation_question:
+                        # no translation for the current user language, using the untranslated question
+                        translated_motivation_question = motivation_question.get('question')
+                    break
+            translated_motivation_answers.append(
+                {'question': translated_motivation_question, 'answer': motivation_answer.get('answer')}
+            )
+        return translated_motivation_answers
 
 
 class CosinnusConferencePremiumBlock(models.Model):

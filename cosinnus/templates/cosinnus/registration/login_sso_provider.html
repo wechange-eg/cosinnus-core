@@ -1,7 +1,7 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n cosinnus_tags widget_tweaks %}
 
-{% block page_title %}{% blocktrans with portal_name=SETTINGS.COSINNUS_PORTAL_NAME %}Log in with {{ portal_name }}{% endblocktrans %}{% endblock %}
+{% block page_title %}{% blocktrans with portal_name=SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}Log in with {{ portal_name }}{% endblocktrans %}{% endblock %}
 
 {% block jshead %}
     {% comment %} This page deals with authentication data and loads only the most necessary vendor scripts! {% endcomment %}
@@ -17,15 +17,15 @@
         <!-- now the content -->
         <div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3">
             
-            <form action="" method="post" class="cosinnus-form form-horizontal " role="form" style="border: 1px solid #cfcfcf;">
+            <form action=".{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" method="post" class="cosinnus-form form-horizontal " role="form" style="border: 1px solid #cfcfcf;">
                 {% csrf_token %}
                     
 	            <!-- a box with semi transparent background -->
 			    <div class="v2-content">
-			        <h1>{{ SETTINGS.COSINNUS_PORTAL_NAME }}</h1>
+			        <h1>{{ SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS }}</h1>
 			        
 			        <p class="large-space">
-			            {% blocktrans with portal_name=SETTINGS.COSINNUS_PORTAL_NAME %}Sign in now using your {{ portal_name }} account.{% endblocktrans %}
+			            {% blocktrans with portal_name=SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}Sign in now using your {{ portal_name }} account.{% endblocktrans %}
 			        </p>
 			        
 	                
@@ -60,7 +60,7 @@
 			        <div class="button-section clearfix centered">
                         <a href="{% url "cosinnus:user-add" %}?next={{ request.GET.next|urlencode }}" class="">
                             <span class="rounded-button-inner">
-                                {% blocktrans with portal_name=SETTINGS.COSINNUS_PORTAL_NAME %}You don't have a {{ portal_name }} account yet?{% endblocktrans %}
+                                {% blocktrans with portal_name=SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}You don't have a {{ portal_name }} account yet?{% endblocktrans %}
                             </span>
                         </a>
                     </div>

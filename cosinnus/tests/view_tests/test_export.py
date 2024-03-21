@@ -6,12 +6,12 @@ import csv
 
 from django.core.exceptions import ImproperlyConfigured
 from django.test import TestCase
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.views.export import JSONExportView, CSVExportView
 
-from tests.models import ChoicesTestModel
+from cosinnus.tests.models import ChoicesTestModel
 
 
 class JSONExportViewTest(TestCase):
@@ -36,18 +36,18 @@ class JSONExportViewTest(TestCase):
         """
         Should retrieve a certain JSON string even if no fields specified
         """
-        ChoicesTestModel.objects.create(group=self.group, title='title')
+        choices_test = ChoicesTestModel.objects.create(group=self.group, title='title')
 
         class ExportView(JSONExportView):
             model = ChoicesTestModel
             group = self.group
 
         view = ExportView()
-        content = force_text(view.get_response().content)
+        content = force_str(view.get_response().content)
         data = json.loads(content)
         self.assertIn('id', data['fields'])
         self.assertIn('title', data['fields'])
-        self.assertIn(['1', 'title'], data['rows'])
+        self.assertIn([str(choices_test.id), 'title'], data['rows'])
         self.assertIn(self.group.name, data['group'])
 
     def test_get_data(self):
@@ -65,7 +65,7 @@ class JSONExportViewTest(TestCase):
             group = self.group
             fields = ['slug', 'state']
         view = ExportView()
-        content = force_text(view.get_response().content)
+        content = force_str(view.get_response().content)
         data = json.loads(content)
         self.assertIn('slug', data['fields'])
         self.assertEqual(obj.get_state_display(), data['rows'][0][3])
@@ -83,7 +83,7 @@ class JSONExportViewTest(TestCase):
             model = ChoicesTestModel
             group = self.group
         view = ExportView()
-        content = force_text(view.get_response().content)
+        content = force_str(view.get_response().content)
         data = json.loads(content)
         self.assertEqual(len(ChoicesTestModel.objects.all()), 3)
         self.assertEqual(len(data['rows']), 2)
@@ -130,7 +130,7 @@ class CSVExportViewTest(TestCase):
             group = self.group
             fields = ['slug', 'state']
         view = ExportView()
-        content = force_text(view.get_response().content)
+        content = force_str(view.get_response().content)
         reader = csv.reader(content.split('\n'))
         is_header = True
         for row in reader:

@@ -26,6 +26,10 @@ body.conference-body .announcement {
         height: ~"calc(100% - 35px)";
         margin-top: 35px;
     }
+
+    div#app {
+        margin-top: 50px;
+    }
 }
 
 .announcement {
@@ -66,7 +70,9 @@ body.conference-body .announcement {
         background-color: @app-main-color-yes;
     }
     &.alert-info {
-        color: @app-neutral-color-dark;
+        &, & a {
+            color: @app-neutral-color-dark;
+        }
         background-color:fadeout(@app-neutral-color-light, 70);
     }
     &.alert-warning {

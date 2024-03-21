@@ -10,7 +10,7 @@ from django.urls.base import reverse
 from django.views.generic import TemplateView
 from django.template.loader import render_to_string
 from cosinnus.templatetags.cosinnus_tags import textfield
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cosinnus.forms.group import GroupContactForm
 from cosinnus.core.mail import send_html_mail_threaded

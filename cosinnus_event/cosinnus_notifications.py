@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 import django.dispatch as dispatch
-from django.utils.translation import ugettext_lazy as _, ngettext_lazy
+from django.utils.translation import gettext_lazy as _, ngettext_lazy
 
 """ Cosinnus:Notifications configuration etherpad. 
     See http://git.sinnwerkstatt.com/cosinnus/cosinnus-core/wikis/cosinnus-notifications-guidelines.
@@ -10,19 +10,19 @@ from django.utils.translation import ugettext_lazy as _, ngettext_lazy
 
 
 """ Signal definitions """
-event_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
-doodle_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
-event_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
-tagged_event_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
-voted_event_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
-attending_event_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
-followed_group_event_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
-followed_group_doodle_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
-following_event_comment_posted = dispatch.Signal(providing_args=["user", "obj", "audience"])
-following_event_changed = dispatch.Signal(providing_args=["user", "obj", "audience"])
-attending_event_changed = dispatch.Signal(providing_args=["user", "obj", "audience"])
-following_doodle_changed = dispatch.Signal(providing_args=["user", "obj", "audience"])
-following_doodle_voted = dispatch.Signal(providing_args=["user", "obj", "audience"])
+event_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+doodle_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+event_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+tagged_event_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+voted_event_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+attending_event_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+followed_group_event_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+followed_group_doodle_created = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+following_event_comment_posted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+following_event_changed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+attending_event_changed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+following_doodle_changed = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
+following_doodle_voted = dispatch.Signal()  # providing_args=["user", "obj", "audience"]
 
 
 
