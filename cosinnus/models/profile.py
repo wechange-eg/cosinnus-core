@@ -191,7 +191,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin,
 
     SKIP_FIELDS = ['id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings', 
                    'managed_tag_assignments', 'likes', 'deletion_triggered_by_self',
-                   '_is_guest', 'guest_access_object']\
+                   '_is_guest', 'guest_access_object', 'tos_accepted']\
                     + getattr(cosinnus_settings, 'COSINNUS_USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS', [])
     
     # this indicates that objects of this model are in some way always visible by registered users
