@@ -85,7 +85,7 @@ setup(
     data_files=data_files,
     install_requires=[
         'Django>=4.2.11,<4.3',
-        'MarkupSafe==1.1',
+        'MarkupSafe==2.1.5',
         'Pillow==10.2.0',
         'celery==5.2.7',
         'dataclasses',
