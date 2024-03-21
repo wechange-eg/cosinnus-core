@@ -36,7 +36,7 @@ urlpatterns += [
     path('api/v3/portal/userprofile_dynamicfields/signup/', PortalUserprofileDynamicFieldsSignupView.as_view(), name='api-portal-userprofile-dynamicfields-signup'),
     path('api/v3/portal/userprofile_dynamicfields/', PortalUserprofileDynamicFieldsView.as_view(), name='api-portal-userprofile-dynamicfields'),
     path('api/v3/portal/settings/', PortalSettingsView.as_view(), name='api-portal-settings'),
-
+    
     path('api/v3/content/main/', MainContentView.as_view(), name='api-content-main'),
     
 
