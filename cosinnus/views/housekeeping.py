@@ -8,7 +8,6 @@ from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
 from cosinnus.models import MEMBERSHIP_PENDING, MEMBERSHIP_ADMIN
 from cosinnus.utils.dashboard import create_initial_group_widgets
-from cosinnus.utils.settings import get_obfuscated_settings_strings
 from django.http.response import HttpResponse, HttpResponseForbidden,\
     HttpResponseBadRequest
 from django.contrib.auth import get_user_model
@@ -467,8 +466,16 @@ def print_settings(request):
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
     setts = ''
-    obfuscated_settings = get_obfuscated_settings_strings()
-    for key, val in obfuscated_settings.items():
+    KEY_BLACKLIST = ['COSINNUS_CLOUD_NEXTCLOUD_AUTH',]
+    for key in dir(settings):
+        val = force_str(getattr(settings, key))
+        # obfuscate passwords. for long ones, show the first few chars
+        if 'password' in key.lower() or 'password' in val.lower() or  \
+                'secret' in key.lower() or 'secret' in val.lower() or \
+                'key' in key.lower() or key in KEY_BLACKLIST:
+            if val.strip() and val.strip() not in ('None', 'null', '0', '[]', '{}'):
+                val = str(val)
+                val = (len(val) > 3 and val[:3] or '') + '***'
         setts += '%s = %s<br/>' % (key, val)
     if not request:
         return setts
