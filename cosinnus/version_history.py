@@ -11,6 +11,24 @@ UPDATES includes release notes for each version shown to the users with:
 """
 
 UPDATES = {
+    '1.20.1': {
+        'datetime': datetime(2024, 3, 25, tzinfo=pytz.utc),
+        'title': _('Version 1.20.1 released'),
+        'short_text': _('Includes Django update, conference improvements and more.'),
+        'full_text': _(
+            'The update includes:\n'
+            '- Update our backend framework Django to version 4 for security fixes and improvements.\n'
+            '- Add support for multi-language welcome-emails, sending the user the welcome email in the users selected language (if the translation feature is enabled).\n'
+            '- Make conference application questions translatable (if the translation feature is enabled).\n'
+            '- Add subtitle field to (non compact) conferences for additional information.\n'
+            '- Show exact number of conference participants for events exceeding 99 participants.\n'
+            '- (Admin) Create logs for group and group membership changes.\n'
+            '- Remove workshop visibility label and order simultaneous workshops alphabetically on the compact conferences micro site.\n'
+            '- Fix map search filter for conferences and events considering ongoing events and exact event ranges.\n'
+            '- Fix embedded map page allowing to close selected elements.\n'
+            '- Further security improvements and minor bugfixes.\n'
+        ),
+    },
     '1.19.6': {
         'datetime': datetime(2024, 1, 18, tzinfo=pytz.utc),
         'title': _('Version 1.19.6 released'),
